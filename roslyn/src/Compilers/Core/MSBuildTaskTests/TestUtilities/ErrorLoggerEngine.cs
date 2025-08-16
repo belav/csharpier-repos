@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     CallingConventions.Any,
                     new Type[] { typeof(BuildErrorEventArgs) },
                     null
-                ) ?? throw new Exception("Could not find FormatEventMessage(BuildErrorEventArgs).");
+                )
+                ?? throw new Exception("Could not find FormatEventMessage(BuildErrorEventArgs).");
             _formatWarningMethod =
                 formattingClass.GetMethod(
                     "FormatEventMessage",

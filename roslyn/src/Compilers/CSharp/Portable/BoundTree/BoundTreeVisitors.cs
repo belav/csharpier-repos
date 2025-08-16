@@ -204,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         syntax
                             .DescendantNodes(n => !(n is ExpressionSyntax))
                             .OfType<ExpressionSyntax>()
-                            .FirstOrDefault() ?? syntax;
+                            .FirstOrDefault()
+                        ?? syntax;
                 }
 
                 return syntax.GetFirstToken().GetLocation();

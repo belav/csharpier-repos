@@ -150,7 +150,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                 anonymousObject.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>(
                     (node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node),
                     syntaxFacts
-                ) ?? anonymousObject;
+                )
+                ?? anonymousObject;
 
             // Next, go and update any references to these anonymous type properties to match
             // the new PascalCased name we've picked for the new properties that will go in

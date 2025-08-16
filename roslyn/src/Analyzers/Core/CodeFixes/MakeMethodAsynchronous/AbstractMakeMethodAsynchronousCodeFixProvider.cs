@@ -125,8 +125,9 @@ namespace Microsoft.CodeAnalysis.MakeMethodAsynchronous
         {
             // GetDeclaredSymbol for methods/local-functions.  GetSymbolInfo for lambdas.
             var symbol =
-                semanticModel.GetDeclaredSymbol(node, cancellationToken)
-                ?? semanticModel.GetSymbolInfo(node, cancellationToken).GetAnySymbol();
+                semanticModel.GetDeclaredSymbol(node, cancellationToken) ?? semanticModel
+                    .GetSymbolInfo(node, cancellationToken)
+                    .GetAnySymbol();
             return symbol as IMethodSymbol;
         }
 

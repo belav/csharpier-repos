@@ -1946,7 +1946,8 @@ namespace System.Runtime.Serialization.DataContracts
                             .Where(t =>
                                 t.FullName!.StartsWith("System.Collections.Generic.IEnumerable")
                             )
-                            .FirstOrDefault() ?? Globals.TypeOfIEnumerable;
+                            .FirstOrDefault()
+                        ?? Globals.TypeOfIEnumerable;
                     getEnumeratorMethod = GetIEnumerableGetEnumeratorMethod(
                         type,
                         ienumerableInterface

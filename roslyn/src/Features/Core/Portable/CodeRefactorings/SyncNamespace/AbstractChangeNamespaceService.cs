@@ -1104,8 +1104,7 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             var result = (
                 fixedDocument,
                 containers.SelectAsArray(c =>
-                    root.GetCurrentNode(c)
-                    ?? throw new InvalidOperationException(
+                    root.GetCurrentNode(c) ?? throw new InvalidOperationException(
                         "Can't get SyntaxNode from GetCurrentNode."
                     )
                 )

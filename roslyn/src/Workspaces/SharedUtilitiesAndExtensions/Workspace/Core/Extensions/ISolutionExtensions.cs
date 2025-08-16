@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Solution solution,
             DocumentId? documentId
         ) =>
-            solution.GetDocument(documentId)
-            ?? solution.GetAdditionalDocument(documentId)
+            solution.GetDocument(documentId) ?? solution.GetAdditionalDocument(documentId)
             ?? solution.GetAnalyzerConfigDocument(documentId);
 
         public static Document GetRequiredDocument(this Solution solution, SyntaxTree syntaxTree) =>

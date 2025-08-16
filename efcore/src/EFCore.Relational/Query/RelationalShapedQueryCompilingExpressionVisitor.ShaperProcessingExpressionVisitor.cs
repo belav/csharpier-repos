@@ -3335,8 +3335,9 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             var typeMapping = property.GetTypeMapping();
 
             var jsonReaderWriterExpression = Constant(
-                property.GetJsonValueReaderWriter()
-                    ?? property.GetTypeMapping().JsonValueReaderWriter!
+                property.GetJsonValueReaderWriter() ?? property
+                        .GetTypeMapping()
+                        .JsonValueReaderWriter!
             );
 
             var fromJsonMethod = jsonReaderWriterExpression.Type.GetMethod(

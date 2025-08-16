@@ -270,8 +270,9 @@ namespace System.ServiceModel.Diagnostics
         [SecuritySafeCritical]
         static CounterSetInstance CreateCounterSetInstance(string name)
         {
-            return counterSetInstanceCache.Get(name)
-                ?? serviceCounterSet.CreateCounterSetInstance(name);
+            return counterSetInstanceCache.Get(name) ?? serviceCounterSet.CreateCounterSetInstance(
+                    name
+                );
         }
 
         internal override void MethodCalled()

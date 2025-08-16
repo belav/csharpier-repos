@@ -149,8 +149,7 @@ namespace System.Runtime.InteropServices
             var key = (type, cookie);
 
             Dictionary<(Type, string), ICustomMarshaler> cache =
-                Volatile.Read(ref MarshalerInstanceCache)
-                ?? Interlocked.CompareExchange(
+                Volatile.Read(ref MarshalerInstanceCache) ?? Interlocked.CompareExchange(
                     ref MarshalerInstanceCache,
                     new Dictionary<(Type, string), ICustomMarshaler>(
                         new MarshalerInstanceKeyComparer()

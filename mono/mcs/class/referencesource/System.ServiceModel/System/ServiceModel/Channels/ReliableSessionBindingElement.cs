@@ -235,7 +235,7 @@ namespace System.ServiceModel.Channels
                 ChannelProtectionRequirements myRequirements = this.GetProtectionRequirements();
                 myRequirements.Add(
                     context.GetInnerProperty<ChannelProtectionRequirements>()
-                        ?? new ChannelProtectionRequirements()
+                    ?? new ChannelProtectionRequirements()
                 );
                 return (T)(object)myRequirements;
             }

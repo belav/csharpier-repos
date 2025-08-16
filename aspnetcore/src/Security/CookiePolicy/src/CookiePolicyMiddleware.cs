@@ -59,8 +59,9 @@ public class CookiePolicyMiddleware
     public Task Invoke(HttpContext context)
     {
         var feature =
-            context.Features.Get<IResponseCookiesFeature>()
-            ?? new ResponseCookiesFeature(context.Features);
+            context.Features.Get<IResponseCookiesFeature>() ?? new ResponseCookiesFeature(
+                context.Features
+            );
         var wrapper = new ResponseCookiesWrapper(context, Options, feature, _logger);
         context.Features.Set<IResponseCookiesFeature>(new CookiesWrapperFeature(wrapper));
         context.Features.Set<ITrackingConsentFeature>(wrapper);

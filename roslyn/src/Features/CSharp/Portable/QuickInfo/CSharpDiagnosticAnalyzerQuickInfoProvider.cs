@@ -193,10 +193,8 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
         )
         {
             var description =
-                descriptor.Title.ToStringOrNull()
-                ?? descriptor.Description.ToStringOrNull()
-                ?? descriptor.MessageFormat.ToStringOrNull()
-                ?? descriptor.Id;
+                descriptor.Title.ToStringOrNull() ?? descriptor.Description.ToStringOrNull()
+                ?? descriptor.MessageFormat.ToStringOrNull() ?? descriptor.Id;
             var idTag = !string.IsNullOrWhiteSpace(descriptor.HelpLinkUri)
                 ? new TaggedText(
                     TextTags.Text,

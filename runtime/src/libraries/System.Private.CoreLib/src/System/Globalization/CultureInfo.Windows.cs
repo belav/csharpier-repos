@@ -63,7 +63,7 @@ namespace System.Globalization
                     Interop.Kernel32.LOCALE_NAME_USER_DEFAULT,
                     Interop.Kernel32.LOCALE_SNAME
                 )
-                    ?? CultureData.GetLocaleInfoEx(
+                ?? CultureData.GetLocaleInfoEx(
                         Interop.Kernel32.LOCALE_NAME_SYSTEM_DEFAULT,
                         Interop.Kernel32.LOCALE_SNAME
                     );

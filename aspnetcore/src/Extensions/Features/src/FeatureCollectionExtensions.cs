@@ -23,8 +23,9 @@ public static class FeatureCollectionExtensions
     {
         ArgumentNullThrowHelper.ThrowIfNull(featureCollection);
 
-        return featureCollection.Get<TFeature>()
-            ?? throw new InvalidOperationException($"Feature '{typeof(TFeature)}' is not present.");
+        return featureCollection.Get<TFeature>() ?? throw new InvalidOperationException(
+                $"Feature '{typeof(TFeature)}' is not present."
+            );
     }
 
     /// <summary>

@@ -68,8 +68,8 @@ public class PropertyChangingInterceptor : PropertyChangeInterceptorBase, IInter
             else
             {
                 var navigation =
-                    EntityType.FindNavigation(propertyName)
-                    ?? (INavigationBase?)EntityType.FindSkipNavigation(propertyName);
+                    EntityType.FindNavigation(propertyName) ?? (INavigationBase?)
+                        EntityType.FindSkipNavigation(propertyName);
 
                 if (navigation != null)
                 {

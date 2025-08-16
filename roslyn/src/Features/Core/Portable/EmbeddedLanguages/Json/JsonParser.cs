@@ -315,8 +315,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
         private static EmbeddedDiagnostic? GetFirstDiagnostic(JsonToken token) =>
             GetFirstDiagnostic(token.LeadingTrivia)
-            ?? token.Diagnostics.FirstOrNull()
-            ?? GetFirstDiagnostic(token.TrailingTrivia);
+            ?? token.Diagnostics.FirstOrNull() ?? GetFirstDiagnostic(token.TrailingTrivia);
 
         private static EmbeddedDiagnostic? GetFirstDiagnostic(ImmutableArray<JsonTrivia> list)
         {

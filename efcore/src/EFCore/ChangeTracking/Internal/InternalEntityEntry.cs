@@ -2278,8 +2278,7 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         {
             // ReSharper disable once AssignNullToNotNullAttribute
             var property =
-                entityType.FindProperty(propertyName)
-                ?? entityType.FindNavigation(propertyName)
+                entityType.FindProperty(propertyName) ?? entityType.FindNavigation(propertyName)
                 ?? (IPropertyBase?)entityType.FindSkipNavigation(propertyName);
 
             if (property != null)

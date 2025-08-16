@@ -19,7 +19,8 @@ internal static class WorkspaceConfigurationOptionsStorage
                 : globalOptions.GetOption(Database),
             EnableOpeningSourceGeneratedFiles: globalOptions.GetOption(
                 EnableOpeningSourceGeneratedFilesInWorkspace
-            ) ?? globalOptions.GetOption(EnableOpeningSourceGeneratedFilesInWorkspaceFeatureFlag),
+            )
+            ?? globalOptions.GetOption(EnableOpeningSourceGeneratedFilesInWorkspaceFeatureFlag),
             DisableRecoverableText: globalOptions.GetOption(DisableRecoverableText),
             ValidateCompilationTrackerStates: globalOptions.GetOption(
                 ValidateCompilationTrackerStates

@@ -528,7 +528,7 @@ namespace System.IdentityModel.Protocols.WSTrust
                         secondaryParameters,
                         context,
                         WSTrustConstantsAdapter.GetConstantsAdapter(reader.NamespaceURI)
-                            ?? WSTrustConstantsAdapter.TrustFeb2005
+                        ?? WSTrustConstantsAdapter.TrustFeb2005
                     );
                 }
             }

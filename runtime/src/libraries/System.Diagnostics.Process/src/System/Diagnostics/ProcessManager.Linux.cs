@@ -95,8 +95,7 @@ namespace System.Diagnostics
                 ProcessId = pid,
                 ProcessName =
                     processName
-                    ?? Process.GetUntruncatedProcessName(ref procFsStat)
-                    ?? string.Empty,
+                    ?? Process.GetUntruncatedProcessName(ref procFsStat) ?? string.Empty,
                 BasePriority = (int)procFsStat.nice,
                 SessionId = procFsStat.session,
                 PoolPagedBytes = (long)procFsStatus.VmSwap,

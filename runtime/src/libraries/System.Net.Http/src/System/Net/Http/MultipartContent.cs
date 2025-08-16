@@ -323,8 +323,7 @@ namespace System.Net.Http
                     if (async)
                     {
                         readStream =
-                            nestedContent.TryReadAsStream()
-                            ?? await nestedContent
+                            nestedContent.TryReadAsStream() ?? await nestedContent
                                 .ReadAsStreamAsync(cancellationToken)
                                 .ConfigureAwait(false);
                     }

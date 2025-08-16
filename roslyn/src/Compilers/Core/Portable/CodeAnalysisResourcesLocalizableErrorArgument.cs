@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis
                 return CodeAnalysisResources.ResourceManager.GetString(
                         _targetResourceId,
                         formatProvider as System.Globalization.CultureInfo
-                    ) ?? string.Empty;
+                    )
+                    ?? string.Empty;
             }
 
             return string.Empty;

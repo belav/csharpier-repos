@@ -159,8 +159,9 @@ namespace DbLinq.Data.Linq.Mapping
             {
                 return metaTable;
             }
-            return GetTables().FirstOrDefault(t => t.RowType.Type == tableType)
-                ?? AddTableType(tableType);
+            return GetTables().FirstOrDefault(t => t.RowType.Type == tableType) ?? AddTableType(
+                    tableType
+                );
         }
 
         /// <summary>

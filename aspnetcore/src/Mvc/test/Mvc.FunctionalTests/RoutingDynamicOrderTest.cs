@@ -16,8 +16,9 @@ public class RoutingDynamicOrderTest
     public RoutingDynamicOrderTest(MvcTestFixture<RoutingWebSite.StartupForDynamic> fixture)
     {
         Factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
+                ConfigureWebHostBuilder
+            );
     }
 
     private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>

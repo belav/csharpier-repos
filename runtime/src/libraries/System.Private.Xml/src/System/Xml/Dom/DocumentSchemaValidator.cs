@@ -242,8 +242,9 @@ namespace System.Xml
             _nsManager.LookupNamespace(prefix) ?? _startNode!.GetNamespaceOfPrefixStrict(prefix);
 
         public string? LookupPrefix(string namespaceName) =>
-            _nsManager.LookupPrefix(namespaceName)
-            ?? _startNode!.GetPrefixOfNamespaceStrict(namespaceName);
+            _nsManager.LookupPrefix(namespaceName) ?? _startNode!.GetPrefixOfNamespaceStrict(
+                namespaceName
+            );
 
         private IXmlNamespaceResolver NamespaceResolver
         {

@@ -302,7 +302,8 @@ namespace System.Web.Hosting
                         ref _backgroundWorkScheduler,
                         newlyCreatedScheduler,
                         null
-                    ) ?? newlyCreatedScheduler;
+                    )
+                    ?? newlyCreatedScheduler;
                 if (scheduler == newlyCreatedScheduler)
                 {
                     RegisterObject(scheduler); // Only call RegisterObject if we just created the "winning" one

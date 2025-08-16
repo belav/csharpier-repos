@@ -32,8 +32,9 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
         public NewInstanceExpression(Type target)
         {
             constructor =
-                target.GetConstructor(Type.EmptyTypes)
-                ?? throw new MissingMethodException("Could not find default constructor.");
+                target.GetConstructor(Type.EmptyTypes) ?? throw new MissingMethodException(
+                    "Could not find default constructor."
+                );
             arguments = null;
         }
 

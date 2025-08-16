@@ -146,8 +146,7 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
         IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject
     ) =>
-        RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
-        ?? (
+        RelationalValueGenerationConvention.GetValueGenerated(property, storeObject) ?? (
             property.GetValueGenerationStrategy(storeObject)
             != SqlServerValueGenerationStrategy.None
                 ? ValueGenerated.OnAdd
@@ -160,8 +159,7 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
         ITypeMappingSource typeMappingSource
     ) =>
         GetTemporalValueGenerated(property)
-        ?? RelationalValueGenerationConvention.GetValueGenerated(property, storeObject)
-        ?? (
+        ?? RelationalValueGenerationConvention.GetValueGenerated(property, storeObject) ?? (
             property.GetValueGenerationStrategy(storeObject, typeMappingSource)
             != SqlServerValueGenerationStrategy.None
                 ? ValueGenerated.OnAdd

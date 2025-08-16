@@ -257,8 +257,9 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
 
     private ValueConverter? FindValueConverter(IProperty property) =>
         (
-            property.FindTypeMapping()
-            ?? Dependencies.RelationalTypeMappingSource.FindMapping(property)
+            property.FindTypeMapping() ?? Dependencies.RelationalTypeMappingSource.FindMapping(
+                property
+            )
         )?.Converter;
 
     private Type GetProviderType(IAnnotatable annotatable, Type valueType) =>

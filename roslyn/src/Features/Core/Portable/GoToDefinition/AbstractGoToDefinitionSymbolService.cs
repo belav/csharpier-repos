@@ -53,8 +53,7 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             // For example, on an anonymous type member declaration.
             var symbol =
                 semanticInfo.AliasSymbol
-                ?? semanticInfo.ReferencedSymbols.FirstOrDefault()
-                ?? semanticInfo.DeclaredSymbol
+                ?? semanticInfo.ReferencedSymbols.FirstOrDefault() ?? semanticInfo.DeclaredSymbol
                 ?? semanticInfo.Type;
 
             if (symbol is null)

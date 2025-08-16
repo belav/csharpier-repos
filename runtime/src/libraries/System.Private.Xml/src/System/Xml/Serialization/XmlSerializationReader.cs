@@ -872,10 +872,11 @@ namespace System.Xml.Serialization
         protected bool GetNullAttr()
         {
             string? isNull =
-                _r.GetAttribute(_nilID, _instanceNsID)
-                ?? _r.GetAttribute(_nullID, _instanceNsID)
-                ?? _r.GetAttribute(_nullID, _instanceNs2000ID)
-                ?? _r.GetAttribute(_nullID, _instanceNs1999ID);
+                _r.GetAttribute(_nilID, _instanceNsID) ?? _r.GetAttribute(_nullID, _instanceNsID)
+                ?? _r.GetAttribute(_nullID, _instanceNs2000ID) ?? _r.GetAttribute(
+                    _nullID,
+                    _instanceNs1999ID
+                );
 
             if (isNull == null || !XmlConvert.ToBoolean(isNull))
                 return false;

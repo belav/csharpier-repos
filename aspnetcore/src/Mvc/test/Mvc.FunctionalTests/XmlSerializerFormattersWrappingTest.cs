@@ -18,8 +18,9 @@ public class XmlSerializerFormattersWrappingTest : IClassFixture<MvcTestFixture<
     public XmlSerializerFormattersWrappingTest(MvcTestFixture<Startup> fixture)
     {
         Factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(builder => builder.UseStartup<Startup>());
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(builder =>
+                builder.UseStartup<Startup>()
+            );
         Client = Factory.CreateDefaultClient();
     }
 

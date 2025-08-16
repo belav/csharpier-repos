@@ -215,8 +215,7 @@ public sealed class JsonHubProtocol : IHubProtocol
                             {
                                 newStreamIds ??= new();
                                 newStreamIds.Add(
-                                    reader.GetString()
-                                        ?? throw new InvalidDataException(
+                                    reader.GetString() ?? throw new InvalidDataException(
                                             $"Null value for '{StreamIdsPropertyName}' is not valid."
                                         )
                                 );

@@ -450,8 +450,11 @@ namespace System.Runtime.Serialization.DataContracts
             )
             {
                 DataContract dataContract =
-                    s_dataContractCache.GetItem(id)
-                    ?? CreateGetOnlyCollectionDataContract(id, typeHandle, type);
+                    s_dataContractCache.GetItem(id) ?? CreateGetOnlyCollectionDataContract(
+                        id,
+                        typeHandle,
+                        type
+                    );
                 return dataContract;
             }
 

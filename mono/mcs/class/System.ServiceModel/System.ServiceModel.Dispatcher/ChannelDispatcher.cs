@@ -464,12 +464,9 @@ namespace System.ServiceModel.Dispatcher
         {
             var l = owner.Listener;
             channel_acceptor =
-                CreateAcceptor<IReplyChannel>(l)
-                ?? CreateAcceptor<IReplySessionChannel>(l)
-                ?? CreateAcceptor<IInputChannel>(l)
-                ?? CreateAcceptor<IInputSessionChannel>(l)
-                ?? CreateAcceptor<IDuplexChannel>(l)
-                ?? CreateAcceptor<IDuplexSessionChannel>(l);
+                CreateAcceptor<IReplyChannel>(l) ?? CreateAcceptor<IReplySessionChannel>(l)
+                ?? CreateAcceptor<IInputChannel>(l) ?? CreateAcceptor<IInputSessionChannel>(l)
+                ?? CreateAcceptor<IDuplexChannel>(l) ?? CreateAcceptor<IDuplexSessionChannel>(l);
             if (channel_acceptor == null)
                 throw new InvalidOperationException(
                     String.Format("Unrecognized channel listener type: {0}", l.GetType())
@@ -791,8 +788,9 @@ namespace System.ServiceModel.Dispatcher
             if (res == null)
             {
                 var conv =
-                    ch.GetProperty<FaultConverter>()
-                    ?? FaultConverter.GetDefaultFaultConverter(owner.MessageVersion);
+                    ch.GetProperty<FaultConverter>() ?? FaultConverter.GetDefaultFaultConverter(
+                        owner.MessageVersion
+                    );
                 if (!conv.TryCreateFaultMessage(ex, out res))
                     res = Message.CreateMessage(
                         owner.MessageVersion,

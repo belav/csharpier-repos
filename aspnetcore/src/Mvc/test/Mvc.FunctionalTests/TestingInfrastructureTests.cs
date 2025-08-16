@@ -24,8 +24,9 @@ public class TestingInfrastructureTests
     )
     {
         Factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
+                ConfigureWebHostBuilder
+            );
         Client = Factory.CreateClient();
     }
 

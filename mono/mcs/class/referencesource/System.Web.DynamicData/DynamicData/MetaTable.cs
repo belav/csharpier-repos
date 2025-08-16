@@ -666,8 +666,7 @@ namespace System.Web.DynamicData
 
             return serverSideColumns.FirstOrDefault(c => c.IsString && !c.IsPrimaryKey)
                 ?? serverSideColumns.FirstOrDefault(c => c.IsString)
-                ?? serverSideColumns.FirstOrDefault(c => c.IsPrimaryKey)
-                ?? Columns.First();
+                ?? serverSideColumns.FirstOrDefault(c => c.IsPrimaryKey) ?? Columns.First();
         }
 
         private MetaColumn GetDisplayColumnFromMetadata()

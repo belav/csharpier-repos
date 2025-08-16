@@ -15,8 +15,7 @@ public class DataAnnotationTests : IClassFixture<MvcTestFixture<StartupDataAnnot
     public DataAnnotationTests(MvcTestFixture<StartupDataAnnotations> fixture)
     {
         var factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(builder =>
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(builder =>
             {
                 builder.UseStartup<StartupDataAnnotations>();
             });

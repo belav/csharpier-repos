@@ -53,8 +53,9 @@ namespace System.Reflection.TypeLoading
         }
 
         public sealed override string ToString() =>
-            Loader.GetDisposedString()
-            ?? GetRoMethodBase().GetMethodSigString(Position) + " " + Name;
+            Loader.GetDisposedString() ?? GetRoMethodBase().GetMethodSigString(Position)
+                + " "
+                + Name;
 
         internal IRoMethodBase GetRoMethodBase() => (IRoMethodBase)Member;
 

@@ -219,8 +219,7 @@ namespace System.Net.Http
                 if (async)
                 {
                     originalStream =
-                        _originalContent.TryReadAsStream()
-                        ?? await _originalContent
+                        _originalContent.TryReadAsStream() ?? await _originalContent
                             .ReadAsStreamAsync(cancellationToken)
                             .ConfigureAwait(false);
                 }

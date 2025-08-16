@@ -38,8 +38,10 @@ namespace System.Web.ModelBinding
 
             //Bug Fix # 280051 : First try to find it on dataControl as DataBoundControlHelper.FindControl only walks up starting from dataControl's NamingContainer.
             Control foundControl =
-                dataControl.FindControl(controlId)
-                ?? DataBoundControlHelper.FindControl(dataControl, controlId);
+                dataControl.FindControl(controlId) ?? DataBoundControlHelper.FindControl(
+                    dataControl,
+                    controlId
+                );
 
             if (foundControl == null)
             {

@@ -222,8 +222,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 value,
                 string.Format(
                     _defaultFormat,
-                    value.EvaluateToString(inspectionContext)
-                        ?? inspectionContext.GetTypeName(
+                    value.EvaluateToString(inspectionContext) ?? inspectionContext.GetTypeName(
                             value.Type,
                             CustomTypeInfo: null,
                             FormatSpecifiers: NoFormatSpecifiers

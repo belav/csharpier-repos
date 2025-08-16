@@ -3458,8 +3458,9 @@ namespace Microsoft.CodeAnalysis.Operations
             IOperation? filter = Create(boundCatchBlock.ExceptionFilterOpt);
             IBlockOperation handler = (IBlockOperation)Create(boundCatchBlock.Body);
             ITypeSymbol exceptionType =
-                boundCatchBlock.ExceptionTypeOpt.GetPublicSymbol()
-                ?? _semanticModel.Compilation.ObjectType;
+                boundCatchBlock.ExceptionTypeOpt.GetPublicSymbol() ?? _semanticModel
+                    .Compilation
+                    .ObjectType;
             ImmutableArray<ILocalSymbol> locals = boundCatchBlock.Locals.GetPublicSymbols();
             SyntaxNode syntax = boundCatchBlock.Syntax;
             bool isImplicit = boundCatchBlock.WasCompilerGenerated;

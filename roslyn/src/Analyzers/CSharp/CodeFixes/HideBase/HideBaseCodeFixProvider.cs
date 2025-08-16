@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.HideBase
 
             var originalNode =
                 token.GetAncestor<PropertyDeclarationSyntax>()
-                ?? token.GetAncestor<MethodDeclarationSyntax>()
-                ?? (SyntaxNode?)token.GetAncestor<FieldDeclarationSyntax>();
+                ?? token.GetAncestor<MethodDeclarationSyntax>() ?? (SyntaxNode?)
+                    token.GetAncestor<FieldDeclarationSyntax>();
 
             if (originalNode == null)
                 return;

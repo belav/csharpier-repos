@@ -16,8 +16,7 @@ public partial class Startup
         static long[] GetTimings(HttpContext ctx)
         {
             var timingFeature =
-                ctx.Features.Get<IHttpSysRequestTimingFeature>()
-                ?? throw new NotSupportedException(
+                ctx.Features.Get<IHttpSysRequestTimingFeature>() ?? throw new NotSupportedException(
                     $"Failed to get {nameof(IHttpSysRequestTimingFeature)}"
                 );
 

@@ -79,7 +79,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(ILGeneratorEmit4).GetMethod(
                     nameof(ILGeneratorEmit4.Int32Sum),
                     BindingFlags.NonPublic | BindingFlags.Static
-                ) ?? throw new InvalidOperationException("method is null");
+                )
+                ?? throw new InvalidOperationException("method is null");
             IntPtr funcPtr = method.MethodHandle.GetFunctionPointer();
 
             ILGenerator il = methodBuilder.GetILGenerator();

@@ -145,8 +145,9 @@ namespace System
             && isWow64;
 
         public static string MachineName =>
-            Interop.Kernel32.GetComputerName()
-            ?? throw new InvalidOperationException(SR.InvalidOperation_ComputerName);
+            Interop.Kernel32.GetComputerName() ?? throw new InvalidOperationException(
+                SR.InvalidOperation_ComputerName
+            );
 
         [MethodImpl(MethodImplOptions.NoInlining)] // Avoid inlining PInvoke frame into the hot path
         private static int GetProcessId() => unchecked((int)Interop.Kernel32.GetCurrentProcessId());

@@ -312,8 +312,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
                 .ConfigureAwait(false);
             Contract.ThrowIfNull(solution);
 
-            return solution.GetDocument(document.Id)
-                ?? throw new NotSupportedException(
+            return solution.GetDocument(document.Id) ?? throw new NotSupportedException(
                     FeaturesResources.Removal_of_document_not_supported
                 );
         }

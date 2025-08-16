@@ -46,7 +46,7 @@ public class WebHostBuilder : IWebHostBuilder
             UseSetting(
                 WebHostDefaults.EnvironmentKey,
                 Environment.GetEnvironmentVariable("Hosting:Environment")
-                    ?? Environment.GetEnvironmentVariable("ASPNET_ENV")
+                ?? Environment.GetEnvironmentVariable("ASPNET_ENV")
             );
         }
 

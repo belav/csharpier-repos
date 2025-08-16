@@ -201,8 +201,7 @@ namespace System.Threading.Tasks
             );
 
             Dictionary<int, Task> activeTasks =
-                Volatile.Read(ref s_currentActiveTasks)
-                ?? Interlocked.CompareExchange(
+                Volatile.Read(ref s_currentActiveTasks) ?? Interlocked.CompareExchange(
                     ref s_currentActiveTasks,
                     new Dictionary<int, Task>(),
                     null

@@ -251,8 +251,7 @@ namespace Microsoft.CodeAnalysis.FindUsages
         )
         {
             var document =
-                solution.GetDocument(DocumentId)
-                ?? await solution
+                solution.GetDocument(DocumentId) ?? await solution
                     .GetSourceGeneratedDocumentAsync(DocumentId, cancellationToken)
                     .ConfigureAwait(false);
             Contract.ThrowIfNull(document);

@@ -558,7 +558,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             : uncheckedNodeTypeVariant == ExpressionType.Coalesce
                 ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
             : _sqlExpressionFactory.MakeBinary(uncheckedNodeTypeVariant, sqlLeft!, sqlRight!, null)
-                ?? QueryCompilationContext.NotTranslatedExpression;
+            ?? QueryCompilationContext.NotTranslatedExpression;
 
         Expression ProcessGetType(
             StructuralTypeReferenceExpression typeReference,

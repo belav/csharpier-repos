@@ -15,8 +15,9 @@ public class RazorPageModelTest
     )
     {
         var factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
+                ConfigureWebHostBuilder
+            );
         Client = factory.CreateDefaultClient();
     }
 

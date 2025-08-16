@@ -908,7 +908,8 @@ namespace System.Runtime.Serialization
                         GenericDictionaryContract,
                         out DataContract? _,
                         out object[]? _
-                    ) ?? typeof(Dictionary<,>);
+                    )
+                    ?? typeof(Dictionary<,>);
 
                 // ItemContract - aka BaseContract - is never null for CollectionDataContract
                 DataContract? itemContract = collectionContract.BaseContract!.As(

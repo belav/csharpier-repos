@@ -764,8 +764,10 @@ namespace System.Xaml
                     bool isFullyInitialized;
                     // FIXME: sort out relationship between name_scope and name_resolver. (unify to name_resolver, probably)
                     var obj =
-                        name_scope.FindName(name)
-                        ?? name_resolver.Resolve(name, out isFullyInitialized);
+                        name_scope.FindName(name) ?? name_resolver.Resolve(
+                            name,
+                            out isFullyInitialized
+                        );
                     if (obj == null)
                         throw new XamlObjectWriterException(
                             String.Format("Unresolved object reference '{0}' was found", name)

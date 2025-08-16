@@ -288,8 +288,10 @@ namespace Newtonsoft.Json.Utilities
             Type initialType = t.Value1;
             Type targetType = t.Value2;
             MethodInfo? castMethodInfo =
-                targetType.GetMethod("op_Implicit", new[] { initialType })
-                ?? targetType.GetMethod("op_Explicit", new[] { initialType });
+                targetType.GetMethod("op_Implicit", new[] { initialType }) ?? targetType.GetMethod(
+                    "op_Explicit",
+                    new[] { initialType }
+                );
 
             if (castMethodInfo == null)
             {

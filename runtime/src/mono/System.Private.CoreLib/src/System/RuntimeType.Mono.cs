@@ -1995,8 +1995,11 @@ namespace System
         private TypeCache? cache;
 
         internal TypeCache Cache =>
-            Volatile.Read(ref cache)
-            ?? Interlocked.CompareExchange(ref cache, new TypeCache(), null)
+            Volatile.Read(ref cache) ?? Interlocked.CompareExchange(
+                ref cache,
+                new TypeCache(),
+                null
+            )
             ?? cache;
 
         [Flags]

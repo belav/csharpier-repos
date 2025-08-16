@@ -206,7 +206,8 @@ namespace System.Data.Linq.SqlClient
                                 call.Arguments[1],
                                 bo.NodeType,
                                 iValue
-                            ) ?? bo;
+                            )
+                            ?? bo;
                     }
                 }
                 else if (IsVbCompareStringEqualsValue(bo))
@@ -239,7 +240,8 @@ namespace System.Data.Linq.SqlClient
                                 call.Arguments[1],
                                 bo.NodeType,
                                 iValue
-                            ) ?? bo;
+                            )
+                            ?? bo;
                     }
                 }
                 return base.VisitBinaryOperator(bo);

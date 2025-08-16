@@ -80,8 +80,9 @@ namespace System.Net.Test.Common
                 var assembly = typeof(Configuration).Assembly;
                 using (
                     var stream =
-                        assembly.GetManifestResourceStream(name)
-                        ?? throw new IOException($"Resource '{name}' not found.")
+                        assembly.GetManifestResourceStream(name) ?? throw new IOException(
+                            $"Resource '{name}' not found."
+                        )
                 )
                 using (var reader = new BinaryReader(stream))
                 {

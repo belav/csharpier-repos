@@ -289,8 +289,11 @@ namespace System.Threading
             Func<T> valueFactory
         )
             where T : class =>
-            Volatile.Read(ref target!)
-            ?? EnsureInitializedCore(ref target, ref syncLock, valueFactory);
+            Volatile.Read(ref target!) ?? EnsureInitializedCore(
+                ref target,
+                ref syncLock,
+                valueFactory
+            );
 
         /// <summary>
         /// Ensure the target is initialized and return the value (slow path). This overload works only for reference type targets.

@@ -112,7 +112,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
             var compilationOptions = new CSharpCompilationOptions(
                 pdbOptions.OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind)
-                    ?? OutputKind.DynamicallyLinkedLibrary,
+                ?? OutputKind.DynamicallyLinkedLibrary,
                 reportSuppressedDiagnostics: false,
                 moduleName: assemblyFileName,
                 mainTypeName: optionsReader.GetMainTypeName(),

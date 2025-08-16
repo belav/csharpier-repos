@@ -1824,8 +1824,9 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode node,
             SyntaxRemoveOptions options
         ) =>
-            root.RemoveNode(node, options)
-            ?? throw new InvalidOperationException($"Can't remove root node.");
+            root.RemoveNode(node, options) ?? throw new InvalidOperationException(
+                $"Can't remove root node."
+            );
 
         /// <summary>
         /// Removes all the declarations from the sub tree starting at the root.

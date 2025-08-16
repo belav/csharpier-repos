@@ -1847,12 +1847,14 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                     typeTuple
                         .Value.Mutable.GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
-                        .ToArray() ?? new MethodInfo[0];
+                        .ToArray()
+                    ?? new MethodInfo[0];
                 var conventionMethods =
                     typeTuple
                         .Value.Convention.GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
-                        .ToArray() ?? new MethodInfo[0];
+                        .ToArray()
+                    ?? new MethodInfo[0];
                 var conventionBuilderMethods =
                     typeTuple
                         .Value.ConventionBuilder?.GetMethods(PublicInstance)

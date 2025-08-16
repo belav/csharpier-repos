@@ -68,8 +68,9 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var methodSymbol = (IMethodSymbol?)(
-                semanticModel.GetDeclaredSymbol(node, cancellationToken)
-                ?? semanticModel.GetSymbolInfo(node, cancellationToken).GetAnySymbol()
+                semanticModel.GetDeclaredSymbol(node, cancellationToken) ?? semanticModel
+                    .GetSymbolInfo(node, cancellationToken)
+                    .GetAnySymbol()
             );
             Contract.ThrowIfNull(methodSymbol);
 

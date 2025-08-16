@@ -404,8 +404,9 @@ namespace System.Xaml
             Type ret =
                 ass == null
                     ? null
-                    : ass.GetType(taqn)
-                        ?? ass.GetType(GetTypeName(tns, name + "Extension", genArgs));
+                    : ass.GetType(taqn) ?? ass.GetType(
+                            GetTypeName(tns, name + "Extension", genArgs)
+                        );
             if (ret == null)
                 throw new XamlParseException(
                     string.Format(

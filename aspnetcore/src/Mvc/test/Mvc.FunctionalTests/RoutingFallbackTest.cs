@@ -15,8 +15,9 @@ public class RoutingFallbackTest : IClassFixture<MvcTestFixture<RoutingWebSite.S
     public RoutingFallbackTest(MvcTestFixture<RoutingWebSite.StartupForFallback> fixture)
     {
         var factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
+                ConfigureWebHostBuilder
+            );
         Client = factory.CreateDefaultClient();
     }
 

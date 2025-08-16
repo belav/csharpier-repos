@@ -22,8 +22,7 @@ namespace Roslyn.Test.Performance.Utilities
         private readonly string _benchviewUploadName;
         private readonly string[] _scenarios;
         private static readonly string _nugetPackagesPath =
-            System.Environment.GetEnvironmentVariable("NUGET_PACKAGES")
-            ?? Path.Combine(
+            System.Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? Path.Combine(
                 System.Environment.GetEnvironmentVariable("UserProfile"),
                 ".nuget",
                 "packages"

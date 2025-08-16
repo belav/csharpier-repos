@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     DocumentationCommentXmlName,
                     conversion.GetDocumentationCommentXml(
                         cancellationToken: context.CancellationToken
-                    ) ?? ""
+                    )
+                    ?? ""
                 )
             );
             var symbols = ImmutableArray.Create<ISymbol>(

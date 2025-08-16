@@ -58,8 +58,7 @@ namespace System.Reflection.TypeLoading.Ecma
         }
 
         public RoType GetGenericTypeParameter(TypeContext genericContext, int index) =>
-            genericContext.GetGenericTypeArgumentOrNull(index)
-            ?? throw new BadImageFormatException(
+            genericContext.GetGenericTypeArgumentOrNull(index) ?? throw new BadImageFormatException(
                 SR.Format(SR.GenericTypeParamIndexOutOfRange, index)
             );
 

@@ -17,8 +17,7 @@ public class RazorRuntimeCompilationHostingStartupTest
     )
     {
         var factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(b =>
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b =>
                 b.UseStartup<RazorBuildWebSite.StartupWithHostingStartup>()
             );
         factory = factory.WithWebHostBuilder(b =>

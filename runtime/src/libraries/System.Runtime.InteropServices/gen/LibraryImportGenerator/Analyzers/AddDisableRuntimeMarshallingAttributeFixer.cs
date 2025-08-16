@@ -66,8 +66,7 @@ namespace Microsoft.Interop.Analyzers
         )
         {
             Document? assemblyInfo =
-                project.Documents.FirstOrDefault(IsPropertiesAssemblyInfo)
-                ?? project.AddDocument(
+                project.Documents.FirstOrDefault(IsPropertiesAssemblyInfo) ?? project.AddDocument(
                     AssemblyInfoFileName,
                     "",
                     folders: new[] { PropertiesFolderName }

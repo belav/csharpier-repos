@@ -2230,7 +2230,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                                         arm.Body,
                                         expression
                                     )
-                        ) ?? throw new NotImplementedException("Empty switch statement")
+                        )
+                    ?? throw new NotImplementedException("Empty switch statement")
                 );
             }
 

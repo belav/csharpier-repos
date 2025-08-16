@@ -31,8 +31,11 @@ namespace System.ServiceModel.XamlIntegration
                     return XName.Get(stringValue);
                 }
             }
-            return XNameTypeConverterHelper.ConvertFrom(context, value)
-                ?? base.ConvertFrom(context, culture, value);
+            return XNameTypeConverterHelper.ConvertFrom(context, value) ?? base.ConvertFrom(
+                    context,
+                    culture,
+                    value
+                );
         }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)

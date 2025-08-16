@@ -232,8 +232,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (mrEx != null)
             {
                 result._lazyCachedUseSiteInfo.Initialize(
-                    result.DeriveCompilerFeatureRequiredDiagnostic()
-                        ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
+                    result.DeriveCompilerFeatureRequiredDiagnostic() ?? new CSDiagnosticInfo(
+                            ErrorCode.ERR_BogusType,
+                            result
+                        )
                 );
             }
 
@@ -316,8 +318,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             if (mrEx != null || metadataArity < containerMetadataArity)
             {
                 result._lazyCachedUseSiteInfo.Initialize(
-                    result.DeriveCompilerFeatureRequiredDiagnostic()
-                        ?? new CSDiagnosticInfo(ErrorCode.ERR_BogusType, result)
+                    result.DeriveCompilerFeatureRequiredDiagnostic() ?? new CSDiagnosticInfo(
+                            ErrorCode.ERR_BogusType,
+                            result
+                        )
                 );
             }
 

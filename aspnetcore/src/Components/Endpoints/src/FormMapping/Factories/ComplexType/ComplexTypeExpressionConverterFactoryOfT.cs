@@ -31,8 +31,7 @@ internal sealed class ComplexTypeExpressionConverterFactory<T>(FormDataMetadataF
     )
     {
         var metadata =
-            factory.GetOrCreateMetadataFor(type, options)
-            ?? throw new InvalidOperationException(
+            factory.GetOrCreateMetadataFor(type, options) ?? throw new InvalidOperationException(
                 $"Could not resolve metadata for type '{type.FullName}'."
             );
 

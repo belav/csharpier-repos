@@ -294,8 +294,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             var usingDirective = contextNode.GetAncestor<TUsingOrAliasSyntax>();
 
             var node = usingDirective != null ? usingDirective.Parent! : contextNode;
-            return node.GetAncestor<TNamespaceDeclarationSyntax>()
-                ?? (SyntaxNode?)node.GetAncestorOrThis<TCompilationUnitSyntax>();
+            return node.GetAncestor<TNamespaceDeclarationSyntax>() ?? (SyntaxNode?)
+                    node.GetAncestorOrThis<TCompilationUnitSyntax>();
         }
     }
 }

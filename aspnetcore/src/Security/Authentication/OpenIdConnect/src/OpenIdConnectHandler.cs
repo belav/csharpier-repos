@@ -462,7 +462,7 @@ public class OpenIdConnectHandler
             Scope = string.Join(
                 " ",
                 properties.GetParameter<ICollection<string>>(OpenIdConnectParameterNames.Scope)
-                    ?? Options.Scope
+                ?? Options.Scope
             ),
         };
 

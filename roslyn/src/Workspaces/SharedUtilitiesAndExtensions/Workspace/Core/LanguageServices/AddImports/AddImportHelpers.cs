@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                         .FirstOrNull(
                             (trivia, syntaxFacts) => syntaxFacts.IsEndOfLineTrivia(trivia),
                             syntaxFacts
-                        ) ?? syntaxFacts.ElasticCarriageReturnLineFeed;
+                        )
+                    ?? syntaxFacts.ElasticCarriageReturnLineFeed;
 
                 // Remove the leading directives from the first token.
                 var newFirstToken = firstToken.WithLeadingTrivia(

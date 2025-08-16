@@ -223,7 +223,8 @@ namespace ILCompiler.DependencyAnalysis
                             constructor,
                             decodedValue,
                             parent
-                        ) ?? new DependencyList();
+                        )
+                        ?? new DependencyList();
 
                     caDependencies.Add(
                         factory.ReflectedMethod(

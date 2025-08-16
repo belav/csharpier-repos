@@ -16,8 +16,9 @@ public class RoutingGroupsWithMetadataTests
     public RoutingGroupsWithMetadataTests(MvcTestFixture<StartupForRouteGroupsWithMetadata> fixture)
     {
         Factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
+                ConfigureWebHostBuilder
+            );
     }
 
     private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>

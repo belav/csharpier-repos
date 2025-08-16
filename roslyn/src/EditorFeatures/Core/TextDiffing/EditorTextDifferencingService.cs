@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextDiffing
                     oldDocument
                         .Project.Services.GetService<IContentTypeLanguageService>()
                         .GetDefaultContentType()
-                ) ?? _differenceSelectorService.DefaultTextDifferencingService;
+                )
+                ?? _differenceSelectorService.DefaultTextDifferencingService;
 
             var differenceOptions = GetDifferenceOptions(preferredDifferenceType);
 

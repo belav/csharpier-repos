@@ -72,8 +72,7 @@ public static class TypeBaseExtensions
     {
         Check.NotEmpty(name, nameof(name));
 
-        return type.FindComplexProperty(name)
-            ?? throw new InvalidOperationException(
+        return type.FindComplexProperty(name) ?? throw new InvalidOperationException(
                 CoreStrings.ComplexPropertyNotFound(type.DisplayName(), name)
             );
     }

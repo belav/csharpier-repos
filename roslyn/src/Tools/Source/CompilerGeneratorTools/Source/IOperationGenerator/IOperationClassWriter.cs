@@ -836,7 +836,7 @@ namespace IOperationGenerator
                             {
                                 orderedProperties.Add(
                                     publicIOperationProps.Find(p => p.Name == childName)
-                                        ?? throw new InvalidOperationException(
+                                    ?? throw new InvalidOperationException(
                                             $"Cannot find property for {childName}"
                                         )
                                 );

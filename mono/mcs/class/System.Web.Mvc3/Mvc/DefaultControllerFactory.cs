@@ -356,8 +356,9 @@
                 try
                 {
                     return (IController)(
-                        _resolverThunk().GetService(controllerType)
-                        ?? Activator.CreateInstance(controllerType)
+                        _resolverThunk().GetService(controllerType) ?? Activator.CreateInstance(
+                            controllerType
+                        )
                     );
                 }
                 catch (Exception ex)

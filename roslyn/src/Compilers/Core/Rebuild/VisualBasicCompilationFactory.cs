@@ -127,7 +127,7 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
             var compilationOptions = new VisualBasicCompilationOptions(
                 pdbOptions.OptionToEnum<OutputKind>(CompilationOptionNames.OutputKind)
-                    ?? OutputKind.DynamicallyLinkedLibrary,
+                ?? OutputKind.DynamicallyLinkedLibrary,
                 moduleName: assemblyFileName,
                 mainTypeName: optionsReader.GetMainTypeName(),
                 scriptClassName: "Script",
@@ -135,12 +135,13 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 rootNamespace: rootNamespace,
                 optionStrict: pdbOptions.OptionToEnum<OptionStrict>(
                     CompilationOptionNames.OptionStrict
-                ) ?? OptionStrict.Off,
+                )
+                ?? OptionStrict.Off,
                 optionInfer: pdbOptions.OptionToBool(CompilationOptionNames.OptionInfer) ?? false,
                 optionExplicit: pdbOptions.OptionToBool(CompilationOptionNames.OptionExplicit)
-                    ?? false,
+                ?? false,
                 optionCompareText: pdbOptions.OptionToBool(CompilationOptionNames.OptionCompareText)
-                    ?? false,
+                ?? false,
                 parseOptions: parseOptions,
                 embedVbCoreRuntime: embedVBRuntime,
                 optimizationLevel: optimizationLevel,

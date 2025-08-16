@@ -48,8 +48,9 @@ public static class DataProtectionCommonExtensions
                 );
             }
             retVal =
-                retVal.CreateProtector(purpose)
-                ?? CryptoUtil.Fail<IDataProtector>("CreateProtector returned null.");
+                retVal.CreateProtector(purpose) ?? CryptoUtil.Fail<IDataProtector>(
+                    "CreateProtector returned null."
+                );
             collectionIsEmpty = false;
         }
 

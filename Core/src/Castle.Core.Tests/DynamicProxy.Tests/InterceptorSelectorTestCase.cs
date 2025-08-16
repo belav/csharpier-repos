@@ -642,7 +642,8 @@ namespace Castle.DynamicProxy.Tests
                         TypeUtil.GetTypeOrNull(__target),
                         token_Do,
                         __interceptors
-                    ) ?? new IInterceptor[0];
+                    )
+                    ?? new IInterceptor[0];
             }
             var objArray = new object[0];
             var @do = new ISimpleInterface_Do(__target, this, interceptors_Do, token_Do, objArray);

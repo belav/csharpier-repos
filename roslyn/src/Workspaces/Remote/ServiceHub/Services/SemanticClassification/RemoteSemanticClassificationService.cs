@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 async solution =>
                 {
                     var document =
-                        solution.GetDocument(documentId)
-                        ?? await solution
+                        solution.GetDocument(documentId) ?? await solution
                             .GetSourceGeneratedDocumentAsync(documentId, cancellationToken)
                             .ConfigureAwait(false);
                     Contract.ThrowIfNull(document);

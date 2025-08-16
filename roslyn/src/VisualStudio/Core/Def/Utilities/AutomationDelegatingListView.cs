@@ -59,7 +59,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 {
                     foreach (
                         var childPeer in peer.GetChildren()
-                            ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
+                        ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
                     )
                     {
                         peersToProcess.Enqueue(childPeer);

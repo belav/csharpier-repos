@@ -19,8 +19,7 @@ public class CustomValueProviderTest
     )
     {
         var factory =
-            fixture.Factories.FirstOrDefault()
-            ?? fixture.WithWebHostBuilder(b =>
+            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b =>
                 b.UseStartup<BasicWebSite.StartupWithCustomValueProvider>()
             );
         factory = factory.WithWebHostBuilder(b =>

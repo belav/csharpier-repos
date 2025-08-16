@@ -49,8 +49,10 @@ namespace System.IO.Enumeration
 
         public IEnumerator<TResult> GetEnumerator()
         {
-            return Interlocked.Exchange(ref _enumerator, null)
-                ?? new DelegateEnumerator(this, isNormalized: false);
+            return Interlocked.Exchange(ref _enumerator, null) ?? new DelegateEnumerator(
+                    this,
+                    isNormalized: false
+                );
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

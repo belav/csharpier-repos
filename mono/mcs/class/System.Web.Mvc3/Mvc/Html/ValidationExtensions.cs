@@ -361,7 +361,7 @@
                 ((modelErrors == null) || (modelErrors.Count == 0))
                     ? null
                     : modelErrors.FirstOrDefault(m => !String.IsNullOrEmpty(m.ErrorMessage))
-                        ?? modelErrors[0]
+                    ?? modelErrors[0]
             );
 
             if (modelError == null && formContext == null)

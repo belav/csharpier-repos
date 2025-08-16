@@ -116,8 +116,7 @@ internal sealed class TypedCollectionConverterFactory<TCollection, TElement>
     {
         // Resolve the element type converter
         var elementTypeConverter =
-            options.ResolveConverter<TElement>()
-            ?? throw new InvalidOperationException(
+            options.ResolveConverter<TElement>() ?? throw new InvalidOperationException(
                 $"Unable to create converter for '{typeof(TCollection).FullName}'."
             );
 

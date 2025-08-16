@@ -253,8 +253,7 @@ namespace System.Web.Mvc
 
             // Note that getting a service from the current cache will return the same instance for every request.
             return Resolver.GetService<IAsyncActionInvoker>()
-                ?? Resolver.GetService<IActionInvoker>()
-                ?? new AsyncControllerActionInvoker();
+                ?? Resolver.GetService<IActionInvoker>() ?? new AsyncControllerActionInvoker();
         }
 
         protected virtual ITempDataProvider CreateTempDataProvider()

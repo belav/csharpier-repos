@@ -343,8 +343,10 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 // If `expression` is a QualifiedNameSyntax then GetTypeInfo().Type won't have any CandidateSymbols, so
                 // we should then fall back to getting the actual symbol for the expression.
                 expressionType =
-                    errorType.CandidateSymbols.FirstOrDefault().GetSymbolType()
-                    ?? semanticModel.GetSymbolInfo(expression).GetAnySymbol().GetSymbolType();
+                    errorType.CandidateSymbols.FirstOrDefault().GetSymbolType() ?? semanticModel
+                        .GetSymbolInfo(expression)
+                        .GetAnySymbol()
+                        .GetSymbolType();
             }
 
             indexers = semanticModel

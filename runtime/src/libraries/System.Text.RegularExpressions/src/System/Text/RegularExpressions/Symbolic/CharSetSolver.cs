@@ -58,8 +58,7 @@ namespace System.Text.RegularExpressions.Symbolic
             {
                 // ASCII: return a cached BDD.
                 return ascii[c]
-                    ?? Interlocked.CompareExchange(ref ascii[c], CreateBdd(c), null)
-                    ?? ascii[c]!;
+                    ?? Interlocked.CompareExchange(ref ascii[c], CreateBdd(c), null) ?? ascii[c]!;
             }
 
             // Non-ascii: just create a new BDD.

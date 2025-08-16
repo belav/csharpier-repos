@@ -351,8 +351,9 @@ namespace System.Data
                                 nameTable.Get(_tableLocalName) ?? nameTable.Add(_tableLocalName);
 
                             string? tableNamespace =
-                                nameTable.Get(r.ChildTable.Namespace)
-                                ?? nameTable.Add(r.ChildTable.Namespace);
+                                nameTable.Get(r.ChildTable.Namespace) ?? nameTable.Add(
+                                    r.ChildTable.Namespace
+                                );
 
                             XmlNodeIdentety idTable = new XmlNodeIdentety(
                                 tableLocalName,
@@ -428,8 +429,9 @@ namespace System.Data
                                 nameTable.Get(_tableLocalName) ?? nameTable.Add(_tableLocalName);
 
                             string? tableNamespace =
-                                nameTable.Get(r.ChildTable.Namespace)
-                                ?? nameTable.Add(r.ChildTable.Namespace);
+                                nameTable.Get(r.ChildTable.Namespace) ?? nameTable.Add(
+                                    r.ChildTable.Namespace
+                                );
 
                             XmlNodeIdentety idTable = new XmlNodeIdentety(
                                 tableLocalName,

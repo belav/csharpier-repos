@@ -773,8 +773,7 @@ public class InternalEntityTypeBuilder : InternalTypeBaseBuilder, IConventionEnt
     /// </summary>
     public virtual IMutableNavigationBase Navigation(string navigationName) =>
         (IMutableNavigationBase?)Metadata.FindNavigation(navigationName)
-        ?? Metadata.FindSkipNavigation(navigationName)
-        ?? throw new InvalidOperationException(
+        ?? Metadata.FindSkipNavigation(navigationName) ?? throw new InvalidOperationException(
             CoreStrings.CanOnlyConfigureExistingNavigations(navigationName, Metadata.DisplayName())
         );
 

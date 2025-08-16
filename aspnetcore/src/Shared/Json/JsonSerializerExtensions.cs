@@ -30,8 +30,7 @@ internal static class JsonSerializerExtensions
     }
 
     public static JsonTypeInfo GetRequiredTypeInfo(this JsonSerializerContext context, Type type) =>
-        context.GetTypeInfo(type)
-        ?? throw new InvalidOperationException(
+        context.GetTypeInfo(type) ?? throw new InvalidOperationException(
             $"Unable to obtain the JsonTypeInfo for type '{type.FullName}' from the context '{context.GetType().FullName}'."
         );
 }

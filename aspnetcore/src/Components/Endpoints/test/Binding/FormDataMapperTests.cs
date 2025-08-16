@@ -2834,7 +2834,8 @@ public class FormDataMapperTests
             typeof(FormDataMapper).GetMethod(
                 "Map",
                 System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public
-            ) ?? throw new InvalidOperationException("Unable to find method 'Map'.");
+            )
+            ?? throw new InvalidOperationException("Unable to find method 'Map'.");
 
         return method.MakeGenericMethod(type).Invoke(null, new object[] { reader, options })!;
     }

@@ -561,8 +561,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Contract.ThrowIfNull(solution);
 
             return (TDocument)(
-                solution.GetTextDocument(document.Id)
-                ?? throw new NotSupportedException(
+                solution.GetTextDocument(document.Id) ?? throw new NotSupportedException(
                     FeaturesResources.Removal_of_document_not_supported
                 )
             );

@@ -1669,7 +1669,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         sessionId,
                         newProject.Name,
                         PathUtilities.GetFileName(oldCompilationOutputs.AssemblyDisplayPath)
-                            ?? oldProject.Name + ".dll",
+                        ?? oldProject.Name + ".dll",
                         cancellationToken
                     )
                     .ConfigureAwait(false);
@@ -1682,7 +1682,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         sessionId,
                         newProject.Name,
                         PathUtilities.GetFileName(oldCompilationOutputs.PdbDisplayPath)
-                            ?? oldProject.Name + ".pdb",
+                        ?? oldProject.Name + ".pdb",
                         cancellationToken
                     )
                     .ConfigureAwait(false);

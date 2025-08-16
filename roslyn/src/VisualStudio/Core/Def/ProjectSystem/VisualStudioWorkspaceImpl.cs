@@ -917,8 +917,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var documentTrackingService =
                 this.Services.GetRequiredService<IDocumentTrackingService>();
             var documentId =
-                documentTrackingService.TryGetActiveDocument()
-                ?? documentTrackingService.GetVisibleDocuments().FirstOrDefault();
+                documentTrackingService.TryGetActiveDocument() ?? documentTrackingService
+                    .GetVisibleDocuments()
+                    .FirstOrDefault();
             if (documentId != null)
             {
                 var composition = (IComponentModel)

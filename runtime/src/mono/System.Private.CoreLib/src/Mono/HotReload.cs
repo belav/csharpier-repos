@@ -108,8 +108,10 @@ internal sealed class FieldStore
     public static FieldStore Create(RuntimeTypeHandle type)
     {
         Type t =
-            Type.GetTypeFromHandle(type)
-            ?? throw new ArgumentException(SR.Arg_InvalidHandle, nameof(type));
+            Type.GetTypeFromHandle(type) ?? throw new ArgumentException(
+                SR.Arg_InvalidHandle,
+                nameof(type)
+            );
         object? loc;
         if (t.IsPrimitive || t.IsValueType)
             loc = RuntimeHelpers.GetUninitializedObject(t);

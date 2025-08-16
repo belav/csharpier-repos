@@ -134,7 +134,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 compilation
                     .SyntaxTrees.OfType<CSharpSyntaxTree>()
                     .Select(tree => tree.Options)
-                    .FirstOrDefault() ?? s_defaultParseOptions;
+                    .FirstOrDefault()
+                ?? s_defaultParseOptions;
 
             return
 #if ROSLYN4_0_OR_GREATER

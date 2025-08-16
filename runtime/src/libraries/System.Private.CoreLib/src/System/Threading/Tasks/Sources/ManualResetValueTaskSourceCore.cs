@@ -250,8 +250,7 @@ namespace System.Threading.Tasks.Sources
             _completed = true;
 
             Action<object?>? continuation =
-                Volatile.Read(ref _continuation)
-                ?? Interlocked.CompareExchange(
+                Volatile.Read(ref _continuation) ?? Interlocked.CompareExchange(
                     ref _continuation,
                     ManualResetValueTaskSourceCoreShared.s_sentinel,
                     null

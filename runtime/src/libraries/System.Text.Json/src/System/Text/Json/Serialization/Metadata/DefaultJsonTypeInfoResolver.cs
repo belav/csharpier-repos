@@ -149,7 +149,8 @@ namespace System.Text.Json.Serialization.Metadata
                         ref s_defaultInstance,
                         newInstance,
                         comparand: null
-                    ) ?? newInstance;
+                    )
+                    ?? newInstance;
             }
         }
 

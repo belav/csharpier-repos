@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                         IDictionaryExtensions.GetValueOrDefault(
                             s_vsDirectTypeMap,
                             classificationTypeName
-                        ) ?? classificationTypeName
+                        )
+                        ?? classificationTypeName
                 )
         );
 

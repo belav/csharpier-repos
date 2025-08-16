@@ -89,7 +89,7 @@ namespace Microsoft.Build.Tasks
                 new string[]
                 {
                     Environment.GetEnvironmentVariable("XBUILD_FRAMEWORK_FOLDERS_PATH")
-                        ?? String.Empty,
+                    ?? String.Empty,
                     MSBuildUtils.RunningOnMac ? MacOSXExternalXBuildDir : String.Empty,
                     RootPath,
                     DefaultFrameworksBasePath,
