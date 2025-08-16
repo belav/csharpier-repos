@@ -91,9 +91,7 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         internal DkmClrType GetType(Type type)
         {
             var assembly = ((AssemblyImpl)type.Assembly).Assembly;
-            var module =
-                this.Modules.FirstOrDefault(m => m.Assembly == assembly)
-                ?? _defaultModule;
+            var module = this.Modules.FirstOrDefault(m => m.Assembly == assembly) ?? _defaultModule;
             return new DkmClrType(module, _appDomain, type, GetObjectFavoritesInfo(type));
         }
 
@@ -166,8 +164,7 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         internal DkmClrModuleInstance FindClrModuleInstance(Guid mvid)
         {
-            return this.Modules.FirstOrDefault(m => m.Mvid == mvid)
-                ?? _defaultModule;
+            return this.Modules.FirstOrDefault(m => m.Mvid == mvid) ?? _defaultModule;
         }
 
         private DkmClrObjectFavoritesInfo GetObjectFavoritesInfo(Type type)

@@ -276,8 +276,7 @@ public class MatchEntryEqualityComparer : IEqualityComparer<MatchEntry>
 
     public int GetHashCode(MatchEntry obj)
     {
-        return obj.RelativePath?.GetHashCode()
-            ?? 0;
+        return obj.RelativePath?.GetHashCode() ?? 0;
     }
 }
 

@@ -47,10 +47,7 @@ namespace ILCompiler.DependencyAnalysis
 
         public override int GetHashCode()
         {
-            return (
-                    Type?.GetHashCode()
-                    ?? 0
-                )
+            return (Type?.GetHashCode() ?? 0)
                 ^ unchecked(Method.GetHashCode() * 31)
                 ^ (IsInstantiatingStub ? 0x40000000 : 0)
                 ^ (IsPrecodeImportRequired ? 0x20000000 : 0)

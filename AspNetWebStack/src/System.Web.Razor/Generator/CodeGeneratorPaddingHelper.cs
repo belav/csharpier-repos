@@ -167,9 +167,7 @@ namespace System.Web.Razor.Generator
             {
                 // When scanning previous spans we need to be break down the spans with spaces.
                 // Because the parser doesn't so for example a span looking like \n\n\t needs to be broken down, and we should just grab the \t.
-                String previousContent =
-                    firstSpanInLine.Previous.Content
-                    ?? String.Empty;
+                String previousContent = firstSpanInLine.Previous.Content ?? String.Empty;
 
                 int lastNewLineIndex = previousContent.LastIndexOfAny(_newLineChars);
 

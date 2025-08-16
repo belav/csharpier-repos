@@ -369,8 +369,7 @@ public sealed partial class QuicConnection : IAsyncDisposable
             _sslConnectionOptions = new SslConnectionOptions(
                 this,
                 isClient: true,
-                options.ClientAuthenticationOptions.TargetHost
-                    ?? string.Empty,
+                options.ClientAuthenticationOptions.TargetHost ?? string.Empty,
                 certificateRequired: true,
                 options.ClientAuthenticationOptions.CertificateRevocationCheckMode,
                 options.ClientAuthenticationOptions.RemoteCertificateValidationCallback,

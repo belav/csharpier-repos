@@ -410,9 +410,7 @@ namespace System.ServiceModel.Description
             var in_binding = new InputBinding();
             op_binding.Input = in_binding;
 
-            var message_version =
-                endpoint.Binding.MessageVersion
-                ?? MessageVersion.None;
+            var message_version = endpoint.Binding.MessageVersion ?? MessageVersion.None;
             if (message_version == MessageVersion.None)
                 return;
 
@@ -452,9 +450,7 @@ namespace System.ServiceModel.Description
             var out_binding = new OutputBinding();
             op_binding.Output = out_binding;
 
-            var message_version =
-                endpoint.Binding.MessageVersion
-                ?? MessageVersion.None;
+            var message_version = endpoint.Binding.MessageVersion ?? MessageVersion.None;
             if (message_version == MessageVersion.None)
                 return;
 

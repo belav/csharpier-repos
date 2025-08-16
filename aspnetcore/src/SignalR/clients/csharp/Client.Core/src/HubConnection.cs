@@ -251,13 +251,9 @@ public partial class HubConnection : IAsyncDisposable
 
         var options = serviceProvider.GetService<IOptions<HubConnectionOptions>>();
 
-        ServerTimeout =
-            options?.Value.ServerTimeout
-            ?? DefaultServerTimeout;
+        ServerTimeout = options?.Value.ServerTimeout ?? DefaultServerTimeout;
 
-        KeepAliveInterval =
-            options?.Value.KeepAliveInterval
-            ?? DefaultKeepAliveInterval;
+        KeepAliveInterval = options?.Value.KeepAliveInterval ?? DefaultKeepAliveInterval;
     }
 
     /// <summary>

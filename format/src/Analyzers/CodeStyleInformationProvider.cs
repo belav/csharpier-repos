@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
     internal class CodeStyleInformationProvider : IAnalyzerInformationProvider
     {
         private static readonly string s_executingPath =
-            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)
-            ?? string.Empty;
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? string.Empty;
 
         private readonly string _featuresPath = Path.Combine(
             s_executingPath,

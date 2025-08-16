@@ -1899,13 +1899,7 @@ namespace System.Collections.Generic
             }
 
 #if DEBUG
-            private int GetCount() =>
-                1
-                + (
-                    Left?.GetCount()
-                    ?? 0
-                )
-                + (Right?.GetCount() ?? 0);
+            private int GetCount() => 1 + (Left?.GetCount() ?? 0) + (Right?.GetCount() ?? 0);
 
             private bool HasChild(Node child) => child == Left || child == Right;
 

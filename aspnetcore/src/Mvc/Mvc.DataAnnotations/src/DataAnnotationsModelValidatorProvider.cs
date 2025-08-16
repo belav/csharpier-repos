@@ -51,8 +51,7 @@ internal sealed class DataAnnotationsModelValidatorProvider : IMetadataBasedMode
         )
         {
             stringLocalizer = _options.Value.DataAnnotationLocalizerProvider(
-                context.ModelMetadata.ContainerType
-                    ?? context.ModelMetadata.ModelType,
+                context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
                 _stringLocalizerFactory
             );
         }

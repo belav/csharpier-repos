@@ -64,10 +64,7 @@ namespace System.Formats.Asn1
 
             if (!wellKnownContents.IsEmpty)
             {
-                WriteTag(
-                    tag?.AsPrimitive()
-                        ?? Asn1Tag.ObjectIdentifier
-                );
+                WriteTag(tag?.AsPrimitive() ?? Asn1Tag.ObjectIdentifier);
                 WriteLength(wellKnownContents.Length);
                 wellKnownContents.CopyTo(_buffer.AsSpan(_offset));
                 _offset += wellKnownContents.Length;
@@ -75,11 +72,7 @@ namespace System.Formats.Asn1
             }
 #endif
 
-            WriteObjectIdentifierCore(
-                tag?.AsPrimitive()
-                    ?? Asn1Tag.ObjectIdentifier,
-                oidValue
-            );
+            WriteObjectIdentifierCore(tag?.AsPrimitive() ?? Asn1Tag.ObjectIdentifier, oidValue);
         }
 
         // T-REC-X.690-201508 sec 8.19

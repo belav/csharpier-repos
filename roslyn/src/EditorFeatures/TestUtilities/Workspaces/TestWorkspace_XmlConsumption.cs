@@ -351,9 +351,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             string filePath;
 
-            var projectName =
-                projectElement.Attribute(ProjectNameAttribute)?.Value
-                ?? assemblyName;
+            var projectName = projectElement.Attribute(ProjectNameAttribute)?.Value ?? assemblyName;
 
             if (projectElement.Attribute(FilePathAttributeName) != null)
             {

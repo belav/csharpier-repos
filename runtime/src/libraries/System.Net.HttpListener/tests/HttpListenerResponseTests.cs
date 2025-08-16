@@ -139,9 +139,7 @@ namespace System.Net.Tests
             int expectedNumberOfBytes
         )
         {
-            string expectedUrl =
-                url?.Trim()
-                ?? "";
+            string expectedUrl = url?.Trim() ?? "";
 
             using (HttpListenerResponse response = await GetResponse())
             {

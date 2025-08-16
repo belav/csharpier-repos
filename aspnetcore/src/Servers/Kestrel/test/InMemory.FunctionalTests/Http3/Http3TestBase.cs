@@ -157,9 +157,7 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
         {
             Assert.Contains(
                 LogMessages,
-                m =>
-                    m.Exception?.Message.Contains(expectedErrorMessage)
-                    ?? false
+                m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false
             );
         }
     }

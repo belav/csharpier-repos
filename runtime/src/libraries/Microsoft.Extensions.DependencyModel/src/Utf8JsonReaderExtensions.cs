@@ -146,14 +146,12 @@ namespace Microsoft.Extensions.DependencyModel
             long lineNumber = (long)(
                 typeof(JsonReaderState)
                     .GetField("_lineNumber", BindingFlags.Instance | BindingFlags.NonPublic)
-                    ?.GetValue(boxedState)
-                ?? -1
+                    ?.GetValue(boxedState) ?? -1
             );
             long bytePositionInLine = (long)(
                 typeof(JsonReaderState)
                     .GetField("_bytePositionInLine", BindingFlags.Instance | BindingFlags.NonPublic)
-                    ?.GetValue(boxedState)
-                ?? -1
+                    ?.GetValue(boxedState) ?? -1
             );
 
             return new FormatException(

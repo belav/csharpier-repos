@@ -260,12 +260,7 @@ internal sealed class W3CLoggingMiddleware
 
         if (options.LoggingFields.HasFlag(W3CLoggingFields.UserName))
         {
-            shouldLog |= AddToList(
-                elements,
-                _userNameIndex,
-                context.User?.Identity?.Name
-                    ?? ""
-            );
+            shouldLog |= AddToList(elements, _userNameIndex, context.User?.Identity?.Name ?? "");
         }
 
         if (options.LoggingFields.HasFlag(W3CLoggingFields.ProtocolStatus))

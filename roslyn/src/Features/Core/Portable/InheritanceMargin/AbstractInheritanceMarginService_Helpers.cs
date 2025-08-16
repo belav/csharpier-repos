@@ -284,9 +284,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             var lineNumber = text.Lines.GetLineFromPosition(spanStart).LineNumber;
 
             var projectState = document.Project.State;
-            var projectName =
-                projectState.NameAndFlavor.name
-                ?? projectState.Name;
+            var projectName = projectState.NameAndFlavor.name ?? projectState.Name;
             var languageGlyph = document.Project.Language switch
             {
                 LanguageNames.CSharp => Glyph.CSharpFile,
@@ -811,8 +809,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                 targetSymbol.GetGlyph(),
                 languageGlyph,
                 displayName,
-                projectState?.NameAndFlavor.name
-                    ?? projectState?.Name
+                projectState?.NameAndFlavor.name ?? projectState?.Name
             );
         }
 

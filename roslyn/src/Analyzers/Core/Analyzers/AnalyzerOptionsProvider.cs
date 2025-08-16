@@ -96,8 +96,7 @@ internal readonly struct AnalyzerOptionsProvider(
     public NamingStylePreferences NamingPreferences =>
         GetOption(
             NamingStyleOptions.NamingPreferences,
-            _fallbackOptions.GenerationOptions?.NamingStyle
-                ?? NamingStylePreferences.Default
+            _fallbackOptions.GenerationOptions?.NamingStyle ?? NamingStylePreferences.Default
         );
 
     // CodeStyleOptions
@@ -247,8 +246,7 @@ internal readonly struct AnalyzerOptionsProvider(
         _fallbackOptions.CodeStyleOptions ?? IdeCodeStyleOptions.CommonDefaults;
 
     private SimplifierOptions FallbackSimplifierOptions =>
-        _fallbackOptions.CleanupOptions?.SimplifierOptions
-        ?? SimplifierOptions.CommonDefaults;
+        _fallbackOptions.CleanupOptions?.SimplifierOptions ?? SimplifierOptions.CommonDefaults;
 
     internal IOptionsReader GetAnalyzerConfigOptions() => _options;
 

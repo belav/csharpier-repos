@@ -1594,9 +1594,7 @@ public class Http2TestBase
         {
             Assert.Contains(
                 LogMessages,
-                m =>
-                    m.Exception?.Message.Contains(expectedErrorMessage)
-                    ?? false
+                m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false
             );
         }
     }
@@ -1671,10 +1669,8 @@ public class Http2TestBase
             pool: memoryPool,
             readerScheduler: serviceContext.Scheduler,
             writerScheduler: writerScheduler,
-            pauseWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize
-                ?? 0,
-            resumeWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize
-                ?? 0,
+            pauseWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
+            resumeWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
             useSynchronizationContext: false,
             minimumSegmentSize: memoryPool.GetMinimumSegmentSize()
         );

@@ -1425,9 +1425,7 @@ namespace System.Configuration
             sb.Append('<');
             sb.Append(SectionTag);
             sb.Append(' ');
-            string type =
-                configSection.SectionInformation.Type
-                ?? factoryRecord.FactoryTypeName;
+            string type = configSection.SectionInformation.Type ?? factoryRecord.FactoryTypeName;
             if (TypeStringTransformerIsSet)
                 type = TypeStringTransformer(type);
 

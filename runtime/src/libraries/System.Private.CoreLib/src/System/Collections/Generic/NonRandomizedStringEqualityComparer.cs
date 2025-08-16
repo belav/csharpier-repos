@@ -63,8 +63,7 @@ namespace System.Collections.Generic
             // This instance may have been deserialized into a class that doesn't guarantee
             // these parameters are non-null. Can't short-circuit the null checks.
 
-            return obj?.GetNonRandomizedHashCode()
-                ?? 0;
+            return obj?.GetNonRandomizedHashCode() ?? 0;
         }
 
         internal virtual RandomizedStringEqualityComparer GetRandomizedEqualityComparer()

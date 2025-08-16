@@ -29,8 +29,7 @@ namespace System.Formats.Asn1
             CheckUniversalTag(tag, UniversalTagNumber.OctetString);
 
             return PushTag(
-                tag?.AsConstructed()
-                    ?? Asn1Tag.ConstructedOctetString,
+                tag?.AsConstructed() ?? Asn1Tag.ConstructedOctetString,
                 UniversalTagNumber.OctetString
             );
         }
@@ -59,8 +58,7 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.OctetString);
             PopTag(
-                tag?.AsConstructed()
-                    ?? Asn1Tag.ConstructedOctetString,
+                tag?.AsConstructed() ?? Asn1Tag.ConstructedOctetString,
                 UniversalTagNumber.OctetString
             );
         }

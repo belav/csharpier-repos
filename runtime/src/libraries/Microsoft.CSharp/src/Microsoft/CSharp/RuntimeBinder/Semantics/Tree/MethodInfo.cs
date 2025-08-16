@@ -96,9 +96,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     {
                         if (m.IsGenericMethod)
                         {
-                            int size =
-                                Method.TypeArgs?.Count
-                                ?? 0;
+                            int size = Method.TypeArgs?.Count ?? 0;
                             Type[] typeArgs = new Type[size];
                             if (size > 0)
                             {

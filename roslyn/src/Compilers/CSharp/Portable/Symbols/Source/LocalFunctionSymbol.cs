@@ -391,9 +391,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override Symbol ContainingSymbol => _containingSymbol;
 
-        public override string Name =>
-            Syntax.Identifier.ValueText
-            ?? "";
+        public override string Name => Syntax.Identifier.ValueText ?? "";
 
         public SyntaxToken NameToken => Syntax.Identifier;
 
@@ -492,9 +490,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             var result = ArrayBuilder<SourceMethodTypeParameterSymbol>.GetInstance();
-            var typeParameters =
-                Syntax.TypeParameterList?.Parameters
-                ?? default;
+            var typeParameters = Syntax.TypeParameterList?.Parameters ?? default;
             for (int ordinal = 0; ordinal < typeParameters.Count; ordinal++)
             {
                 var parameter = typeParameters[ordinal];

@@ -58,8 +58,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     {
                         var message = string.Format(
                             WorkspacesResources.Unexpected_value_0_in_DocumentKinds_array,
-                            arg0: kind?.ToString()
-                                ?? "null"
+                            arg0: kind?.ToString() ?? "null"
                         );
                         throw new ArgumentException(message);
                     }

@@ -400,9 +400,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
                 scope = scope.Parent;
 
             var parentExpressions = scope.AncestorsAndSelf().OfType<ExpressionSyntax>();
-            scope =
-                parentExpressions.LastOrDefault()?.Parent
-                ?? scope;
+            scope = parentExpressions.LastOrDefault()?.Parent ?? scope;
 
             if (scope.IsKind(SyntaxKind.GlobalStatement))
                 scope = scope.Parent;

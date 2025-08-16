@@ -185,8 +185,7 @@ namespace ILCompiler.Metadata
 
             public int GetHashCode(AssemblyName obj)
             {
-                return obj.Name?.GetHashCode()
-                    ?? 0;
+                return obj.Name?.GetHashCode() ?? 0;
             }
         }
     }

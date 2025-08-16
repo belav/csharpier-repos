@@ -418,8 +418,7 @@ namespace System.Reflection.Emit
                 {
                     AddMethodImport(
                         handle,
-                        method._dllImportData.EntryPoint
-                            ?? method.Name,
+                        method._dllImportData.EntryPoint ?? method.Name,
                         method._dllImportData.Flags,
                         GetModuleReference(method._dllImportData.ModuleName)
                     );

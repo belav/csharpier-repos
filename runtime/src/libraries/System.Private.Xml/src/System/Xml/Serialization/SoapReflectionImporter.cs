@@ -89,9 +89,7 @@ namespace System.Xml.Serialization
                 new RecursionLimiter()
             );
             element.Name = element.Mapping.DefaultElementName;
-            element.Namespace =
-                element.Mapping.Namespace
-                ?? defaultNamespace;
+            element.Namespace = element.Mapping.Namespace ?? defaultNamespace;
             element.Form = XmlSchemaForm.Qualified;
             XmlTypeMapping xmlMapping = new XmlTypeMapping(_typeScope, element);
             xmlMapping.SetKeyInternal(XmlMapping.GenerateKey(type, null, defaultNamespace));
@@ -180,9 +178,7 @@ namespace System.Xml.Serialization
                 new RecursionLimiter()
             );
             element.Mapping.TypeName = elementName;
-            element.Namespace =
-                element.Mapping.Namespace
-                ?? ns;
+            element.Namespace = element.Mapping.Namespace ?? ns;
             element.Form = XmlSchemaForm.Qualified;
             XmlMembersMapping xmlMapping = new XmlMembersMapping(_typeScope, element, access);
             xmlMapping.IsSoap = true;

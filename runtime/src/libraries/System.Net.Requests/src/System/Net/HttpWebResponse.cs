@@ -96,8 +96,7 @@ namespace System.Net
             get
             {
                 CheckDisposed();
-                return _httpResponseMessage.Content?.Headers.ContentLength
-                    ?? -1;
+                return _httpResponseMessage.Content?.Headers.ContentLength ?? -1;
             }
         }
 

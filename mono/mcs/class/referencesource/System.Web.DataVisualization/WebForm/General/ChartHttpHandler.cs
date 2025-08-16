@@ -406,8 +406,7 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             // the handler have to be executed in current cxecution path in order to get proper user identity
             String appDir = Path.GetDirectoryName(
-                    HttpContext.Current.Request.CurrentExecutionFilePath
-                        ?? ""
+                    HttpContext.Current.Request.CurrentExecutionFilePath ?? ""
                 )
                 .Replace("\\", "/");
             if (!appDir.EndsWith("/", StringComparison.Ordinal))

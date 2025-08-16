@@ -378,8 +378,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             );
             if (!res.IsOk || res.Value?["result"]?["value"]?.Type != JTokenType.Boolean) //if runtime is not ready this may be the response
                 return false;
-            return res.Value?["result"]?["value"]?.Value<bool>()
-                ?? false;
+            return res.Value?["result"]?["value"]?.Value<bool>() ?? false;
         }
 
         private static PauseOnExceptionsKind GetPauseOnExceptionsStatusFromString(string state)

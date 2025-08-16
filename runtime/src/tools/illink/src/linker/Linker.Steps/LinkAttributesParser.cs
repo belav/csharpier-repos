@@ -317,8 +317,7 @@ namespace Mono.Linker.Steps
                     args.Add(caa.Value);
             }
 
-            return args.ToArray()
-                ?? Array.Empty<CustomAttributeArgument>();
+            return args.ToArray() ?? Array.Empty<CustomAttributeArgument>();
         }
 
         CustomAttributeArgument? ReadCustomAttributeArgument(

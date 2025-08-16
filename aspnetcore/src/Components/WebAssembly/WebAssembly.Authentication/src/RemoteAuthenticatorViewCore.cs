@@ -356,9 +356,7 @@ public partial class RemoteAuthenticatorViewCore<
         AuthenticationState.ReturnUrl = returnUrl;
 
         var state = await AuthenticationProvider.GetAuthenticationStateAsync();
-        var isauthenticated =
-            state.User.Identity?.IsAuthenticated
-            ?? false;
+        var isauthenticated = state.User.Identity?.IsAuthenticated ?? false;
         if (isauthenticated)
         {
             var interactiveRequest = GetCachedNavigationState();

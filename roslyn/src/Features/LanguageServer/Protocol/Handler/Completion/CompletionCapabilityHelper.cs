@@ -36,9 +36,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             // public LSP
             _completionSetting = clientCapabilities.TextDocument?.Completion;
 
-            SupportSnippets =
-                _completionSetting?.CompletionItem?.SnippetSupport
-                ?? false;
+            SupportSnippets = _completionSetting?.CompletionItem?.SnippetSupport ?? false;
             SupportDefaultEditRange =
                 _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(
                     EditRangePropertyName

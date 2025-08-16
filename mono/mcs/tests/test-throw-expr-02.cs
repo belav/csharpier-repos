@@ -20,7 +20,6 @@ class Program
 
     static string M(object data)
     {
-        return data?.ToString()
-            ?? throw null;
+        return data?.ToString() ?? throw null;
     }
 }

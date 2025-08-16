@@ -351,12 +351,8 @@ namespace Mono.ApiTools
                 if (i > 0)
                     change.Append(", ");
 
-                string mods_tgt =
-                    tgt[i].GetAttribute("direction")
-                    ?? "";
-                string mods_src =
-                    src[i].GetAttribute("direction")
-                    ?? "";
+                string mods_tgt = tgt[i].GetAttribute("direction") ?? "";
+                string mods_src = src[i].GetAttribute("direction") ?? "";
 
                 if (mods_tgt.Length > 0)
                     mods_tgt = mods_tgt + " ";

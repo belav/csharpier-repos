@@ -1558,9 +1558,7 @@ public class OnConnectedSendToClientHub : Hub
 {
     public override async Task OnConnectedAsync()
     {
-        string id =
-            Context.GetHttpContext()?.Request.Query["client"]
-            ?? string.Empty;
+        string id = Context.GetHttpContext()?.Request.Query["client"] ?? string.Empty;
         if (!string.IsNullOrEmpty(id))
         {
             await Clients.Client(id).SendAsync("Test", 1);

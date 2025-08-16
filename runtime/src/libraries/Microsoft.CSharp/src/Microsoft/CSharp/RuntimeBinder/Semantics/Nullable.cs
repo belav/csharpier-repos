@@ -15,10 +15,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             if (
                 expr is ExprCall pCall
                 && pCall.MemberGroup.OptionalObject == null
-                && (
-                    pCall.MethWithInst?.Meth().IsNullableConstructor()
-                    ?? false
-                )
+                && (pCall.MethWithInst?.Meth().IsNullableConstructor() ?? false)
             )
             {
                 call = pCall;

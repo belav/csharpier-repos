@@ -137,11 +137,9 @@ namespace System.Security.Cryptography
             SafeEcKeyHandle key = Interop.Crypto.EcKeyCreateByKeyParameters(
                 oid,
                 parameters.Q.X,
-                parameters.Q.X?.Length
-                    ?? 0,
+                parameters.Q.X?.Length ?? 0,
                 parameters.Q.Y,
-                parameters.Q.Y?.Length
-                    ?? 0,
+                parameters.Q.Y?.Length ?? 0,
                 parameters.D,
                 parameters.D == null ? 0 : parameters.D.Length
             );
@@ -155,11 +153,9 @@ namespace System.Security.Cryptography
             SafeEcKeyHandle key = Interop.Crypto.EcKeyCreateByExplicitParameters(
                 parameters.Curve.CurveType,
                 parameters.Q.X,
-                parameters.Q.X?.Length
-                    ?? 0,
+                parameters.Q.X?.Length ?? 0,
                 parameters.Q.Y,
-                parameters.Q.Y?.Length
-                    ?? 0,
+                parameters.Q.Y?.Length ?? 0,
                 parameters.D,
                 parameters.D == null ? 0 : parameters.D.Length,
                 parameters.Curve.Prime!,
@@ -189,11 +185,9 @@ namespace System.Security.Cryptography
             SafeEcKeyHandle key = Interop.Crypto.EcKeyCreateByExplicitParameters(
                 parameters.Curve.CurveType,
                 parameters.Q.X,
-                parameters.Q.X?.Length
-                    ?? 0,
+                parameters.Q.X?.Length ?? 0,
                 parameters.Q.Y,
-                parameters.Q.Y?.Length
-                    ?? 0,
+                parameters.Q.Y?.Length ?? 0,
                 parameters.D,
                 parameters.D == null ? 0 : parameters.D.Length,
                 parameters.Curve.Polynomial!,

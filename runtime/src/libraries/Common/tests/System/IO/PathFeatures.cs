@@ -59,10 +59,7 @@ namespace System.IO
             var p = t.GetProperty(propertyName, BindingFlags.Static | BindingFlags.Public);
 
             // If the switch actually exists use it, otherwise we predate the switch and are effectively on
-            return (bool)(
-                p?.GetValue(null)
-                ?? true
-            );
+            return (bool)(p?.GetValue(null) ?? true);
         }
 
         private static bool RunningOnCoreLib

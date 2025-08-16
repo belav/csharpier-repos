@@ -251,9 +251,7 @@ namespace System.Threading.RateLimiting
                     lock (Lock)
                     {
                         // Check time again under lock to make sure no one calls Acquire or WaitAsync after checking the time and removing the limiter
-                        idleDuration =
-                            rateLimiter.Value.Value.IdleDuration
-                            ?? TimeSpan.Zero;
+                        idleDuration = rateLimiter.Value.Value.IdleDuration ?? TimeSpan.Zero;
                         if (idleDuration > s_idleTimeLimit)
                         {
                             // Remove limiter from the lookup table and mark cache as invalid

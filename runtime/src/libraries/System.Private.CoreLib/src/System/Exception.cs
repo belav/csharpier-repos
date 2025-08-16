@@ -107,10 +107,7 @@ namespace System
             )]
             get =>
                 _source ??= HasBeenThrown
-                    ? (
-                        TargetSite?.Module.Assembly.GetName().Name
-                        ?? "<unknown>"
-                    )
+                    ? (TargetSite?.Module.Assembly.GetName().Name ?? "<unknown>")
                     : null;
             set => _source = value;
         }

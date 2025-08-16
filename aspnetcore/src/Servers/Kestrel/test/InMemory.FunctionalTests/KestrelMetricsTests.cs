@@ -633,10 +633,7 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
     {
         var request = httpContext.Request;
         var response = httpContext.Response;
-        var buffer = new byte[
-            httpContext.Request.ContentLength
-                ?? 0
-        ];
+        var buffer = new byte[httpContext.Request.ContentLength ?? 0];
 
         if (buffer.Length > 0)
         {

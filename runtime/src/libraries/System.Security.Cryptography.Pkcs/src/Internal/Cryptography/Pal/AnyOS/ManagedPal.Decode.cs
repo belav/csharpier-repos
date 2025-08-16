@@ -33,8 +33,7 @@ namespace Internal.Cryptography.Pal.AnyOS
 
             contentInfo = new ContentInfo(
                 new Oid(data.EncryptedContentInfo.ContentType),
-                data.EncryptedContentInfo.EncryptedContent?.ToArray()
-                    ?? Array.Empty<byte>()
+                data.EncryptedContentInfo.EncryptedContent?.ToArray() ?? Array.Empty<byte>()
             );
 
             contentEncryptionAlgorithm =

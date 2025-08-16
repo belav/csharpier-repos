@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis
         {
             return Hash.Combine(
                 this.Diagnostics.GetHashCode(),
-                this.ResolvedPath?.GetHashCode()
-                    ?? 0
+                this.ResolvedPath?.GetHashCode() ?? 0
             );
         }
     }

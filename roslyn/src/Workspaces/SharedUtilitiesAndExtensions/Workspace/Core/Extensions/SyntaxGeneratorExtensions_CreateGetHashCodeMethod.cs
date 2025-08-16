@@ -305,10 +305,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return thisSymbol;
             }
 
-            if (
-                member.GetSymbolType()?.IsValueType
-                ?? false
-            )
+            if (member.GetSymbolType()?.IsValueType ?? false)
             {
                 // There is no reason to generate the bulkier syntax of EqualityComparer<>.Default.GetHashCode for value
                 // types. No null check is necessary, and there's no performance advantage on .NET Core for using

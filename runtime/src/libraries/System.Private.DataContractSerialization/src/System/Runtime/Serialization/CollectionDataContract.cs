@@ -1852,12 +1852,9 @@ namespace System.Runtime.Serialization.DataContracts
             Type? t = type.GetInterfaces().Where(it => it.Equals(interfaceType)).FirstOrDefault();
             if (t != null)
             {
-                addMethod =
-                    t.GetMethod(Globals.AddMethodName)
-                    ?? addMethod;
+                addMethod = t.GetMethod(Globals.AddMethodName) ?? addMethod;
                 getEnumeratorMethod =
-                    t.GetMethod(Globals.GetEnumeratorMethodName)
-                    ?? getEnumeratorMethod;
+                    t.GetMethod(Globals.GetEnumeratorMethodName) ?? getEnumeratorMethod;
             }
         }
 

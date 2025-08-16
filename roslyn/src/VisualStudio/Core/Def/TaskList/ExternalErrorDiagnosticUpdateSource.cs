@@ -170,8 +170,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         /// This API is only intended to be invoked from <see cref="ProjectExternalErrorReporter"/> while a build is in progress.
         /// </summary>
         public bool IsSupportedDiagnosticId(ProjectId projectId, string id) =>
-            GetBuildInProgressState()?.IsSupportedDiagnosticId(projectId, id)
-            ?? false;
+            GetBuildInProgressState()?.IsSupportedDiagnosticId(projectId, id) ?? false;
 
         private void OnBuildProgressChanged(InProgressState? state, BuildProgress buildProgress)
         {

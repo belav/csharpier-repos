@@ -78,8 +78,7 @@ internal readonly struct RequestContext
 
             // The workspace is available unless it has been cleared by a call to ClearSolutionContext. Explicitly throw
             // for attempts to access this property after it has been manually cleared.
-            return _lspSolution.Value.Workspace
-                ?? throw new InvalidOperationException();
+            return _lspSolution.Value.Workspace ?? throw new InvalidOperationException();
         }
     }
 
@@ -98,8 +97,7 @@ internal readonly struct RequestContext
 
             // The solution is available unless it has been cleared by a call to ClearSolutionContext. Explicitly throw
             // for attempts to access this property after it has been manually cleared.
-            return _lspSolution.Value.Solution
-                ?? throw new InvalidOperationException();
+            return _lspSolution.Value.Solution ?? throw new InvalidOperationException();
         }
     }
 

@@ -1306,8 +1306,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     GetNewId(),
                     (int)GetCommandSetForCommand(command),
                     (int)(object)command,
-                    arguments?.ToBase64().data
-                        ?? string.Empty
+                    arguments?.ToBase64().data ?? string.Empty
                 ),
                 token
             );

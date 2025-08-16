@@ -528,9 +528,7 @@ public class WebApiTemplateTest : LoggedTest
         var requiresHttps =
             string.Equals(auth, "IndividualB2C", StringComparison.OrdinalIgnoreCase)
             || string.Equals(auth, "SingleOrg", StringComparison.OrdinalIgnoreCase);
-        var noHttps =
-            args?.Contains(ArgConstants.NoHttps)
-            ?? false;
+        var noHttps = args?.Contains(ArgConstants.NoHttps) ?? false;
         var expectedLaunchProfileNames =
             requiresHttps ? new[] { "https", "IIS Express" }
             : noHttps ? new[] { "http", "IIS Express" }

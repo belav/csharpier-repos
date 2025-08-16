@@ -151,9 +151,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 foreach (var ((expr, originalSymbol), updatedSymbol) in _updatedSymbolsMap)
                 {
-                    var debugText =
-                        expr?.Syntax.ToFullString()
-                        ?? originalSymbol.ToDisplayString();
+                    var debugText = expr?.Syntax.ToFullString() ?? originalSymbol.ToDisplayString();
                     Debug.Assert(
                         (object)originalSymbol != updatedSymbol,
                         $"Recorded exact same symbol for {debugText}"

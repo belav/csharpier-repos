@@ -69,11 +69,7 @@ internal sealed class DownloadPersonalDataModel<TUser> : DownloadPersonalDataMod
             .Where(prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
         foreach (var p in personalDataProps)
         {
-            personalData.Add(
-                p.Name,
-                p.GetValue(user)?.ToString()
-                    ?? "null"
-            );
+            personalData.Add(p.Name, p.GetValue(user)?.ToString() ?? "null");
         }
 
         var logins = await _userManager.GetLoginsAsync(user);

@@ -367,9 +367,7 @@ namespace DbLinq.Data.Linq.Mapping
             public DbmlColumn(XmlReader r)
             {
                 Member = r.GetAttribute("Member");
-                Name =
-                    r.GetAttribute("Name")
-                    ?? Member;
+                Name = r.GetAttribute("Name") ?? Member;
                 Storage = r.GetAttribute("Storage");
                 DbType = r.GetAttribute("DbType");
                 IsPrimaryKey = GetBooleanAttribute(r, "IsPrimaryKey");

@@ -94,8 +94,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                             (node, syntaxFactsService) =>
                                 syntaxFactsService.IsMethodLevelMember(node),
                             syntaxFactsService
-                        )
-                        ?? node;
+                        ) ?? node;
                     break;
 
                 case SymbolKind.NamedType:
@@ -105,8 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                             (node, syntaxFactsService) =>
                                 syntaxFactsService.IsTopLevelNodeWithMembers(node),
                             syntaxFactsService
-                        )
-                        ?? node;
+                        ) ?? node;
                     break;
             }
 

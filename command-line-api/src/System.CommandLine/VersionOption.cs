@@ -48,8 +48,7 @@ namespace System.CommandLine
                 {
                     result.AddError(
                         LocalizationResources.VersionOptionCannotBeCombinedWithOtherArguments(
-                            result.IdentifierToken?.Value
-                                ?? result.Option.Name
+                            result.IdentifierToken?.Value ?? result.Option.Name
                         )
                     );
                 }

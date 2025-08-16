@@ -255,8 +255,7 @@ internal class TestSettings
         {
             case OpenIdConnectRequestType.Token:
                 expectedAuthority =
-                    _options.Configuration?.TokenEndpoint
-                    ?? _options.Authority + @"/oauth2/token";
+                    _options.Configuration?.TokenEndpoint ?? _options.Authority + @"/oauth2/token";
                 break;
             case OpenIdConnectRequestType.Logout:
                 expectedAuthority =

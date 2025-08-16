@@ -217,14 +217,8 @@ namespace JitDiffTools
         {
             get
             {
-                int b =
-                    Before?.Body?.Count
-                    ?? 0;
-                int a =
-                    (
-                        After?.Body?.Count
-                        ?? 0
-                    ) * 100;
+                int b = Before?.Body?.Count ?? 0;
+                int a = (After?.Body?.Count ?? 0) * 100;
                 if (a == 0 && b == 0)
                     return 0;
                 if (a > 0 && b == 0)

@@ -678,8 +678,7 @@ namespace System.Diagnostics.Metrics
                     {
                         labels[i] = new KeyValuePair<string, string>(
                             indexedNames[i],
-                            indexedValues[i]?.ToString()
-                                ?? ""
+                            indexedValues[i]?.ToString() ?? ""
                         );
                     }
                     IAggregationStatistics stats = kvValue.Value.Collect();

@@ -258,9 +258,7 @@ internal sealed class RedisProtocol
         for (var i = 0; i < count; i++)
         {
             var protocol = reader.ReadString()!;
-            var serialized =
-                reader.ReadBytes()?.ToArray()
-                ?? Array.Empty<byte>();
+            var serialized = reader.ReadBytes()?.ToArray() ?? Array.Empty<byte>();
 
             serializations[i] = new SerializedMessage(protocol, serialized);
         }

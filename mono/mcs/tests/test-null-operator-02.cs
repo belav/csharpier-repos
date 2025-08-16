@@ -23,21 +23,15 @@ class C
         var m2 = ci?.PropNullable;
         var m3 = ci?.PropReference;
 
-        var m4 =
-            ci?.Prop.ToString()
-            ?? "N";
+        var m4 = ci?.Prop.ToString() ?? "N";
         if (m4 != "N")
             return 1;
 
-        var m5 =
-            ci?.PropNullable.ToString()
-            ?? "N";
+        var m5 = ci?.PropNullable.ToString() ?? "N";
         if (m5 != "N")
             return 2;
 
-        var m6 =
-            ci?.PropReference.ToString()
-            ?? "N";
+        var m6 = ci?.PropReference.ToString() ?? "N";
         if (m6 != "N")
             return 3;
 
@@ -66,21 +60,15 @@ class C
         var m1 = ci?.Field;
         var m2 = ci?.FieldNullable;
         var m3 = ci?.FieldReference;
-        var m4 =
-            ci?.Field.ToString()
-            ?? "N";
+        var m4 = ci?.Field.ToString() ?? "N";
         if (m4 != "N")
             return 1;
 
-        var m5 =
-            ci?.FieldNullable.ToString()
-            ?? "N";
+        var m5 = ci?.FieldNullable.ToString() ?? "N";
         if (m5 != "N")
             return 2;
 
-        var m6 =
-            ci?.FieldReference.ToString()
-            ?? "N";
+        var m6 = ci?.FieldReference.ToString() ?? "N";
         if (m6 != "N")
             return 3;
 

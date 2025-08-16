@@ -18,9 +18,7 @@ namespace System.Reflection.TypeLoading.Ecma
             {
                 Name = ad.Name.GetString(reader),
                 Version = ad.Version,
-                CultureName =
-                    ad.Culture.GetStringOrNull(reader)
-                    ?? string.Empty,
+                CultureName = ad.Culture.GetStringOrNull(reader) ?? string.Empty,
             };
             byte[] pk = ad.PublicKey.GetBlobBytes(reader);
             data.PublicKey = pk;

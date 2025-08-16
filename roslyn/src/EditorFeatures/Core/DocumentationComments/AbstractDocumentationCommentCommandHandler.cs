@@ -241,8 +241,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
                 originalPosition =
                     selectedSpan != null
                         ? selectedSpan.Value.Start
-                        : args.TextView.GetCaretPoint(args.SubjectBuffer)
-                            ?? -1;
+                        : args.TextView.GetCaretPoint(args.SubjectBuffer) ?? -1;
             }
 
             if (originalPosition < 0)
@@ -292,9 +291,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
 
         public CommandState GetCommandState(InsertCommentCommandArgs args)
         {
-            var caretPosition =
-                args.TextView.GetCaretPoint(args.SubjectBuffer)
-                ?? -1;
+            var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer) ?? -1;
             if (caretPosition < 0)
             {
                 return CommandState.Unavailable;
@@ -367,9 +364,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             // If not, let the nextHandler run.
 
             var subjectBuffer = args.SubjectBuffer;
-            var caretPosition =
-                args.TextView.GetCaretPoint(subjectBuffer)
-                ?? -1;
+            var caretPosition = args.TextView.GetCaretPoint(subjectBuffer) ?? -1;
             if (caretPosition < 0)
             {
                 nextHandler();
@@ -424,9 +419,7 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
             // If not, let the nextHandler run.
 
             var subjectBuffer = args.SubjectBuffer;
-            var caretPosition =
-                args.TextView.GetCaretPoint(subjectBuffer)
-                ?? -1;
+            var caretPosition = args.TextView.GetCaretPoint(subjectBuffer) ?? -1;
             if (caretPosition < 0)
             {
                 nextHandler();

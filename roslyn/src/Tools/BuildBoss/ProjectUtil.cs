@@ -166,9 +166,7 @@ namespace BuildBoss
         internal PackageReference GetPackageReference(XElement element)
         {
             var name =
-                element.Attribute("Include")?.Value
-                ?? element.Attribute("Update")?.Value
-                ?? "";
+                element.Attribute("Include")?.Value ?? element.Attribute("Update")?.Value ?? "";
             var version = element.Attribute("Version");
             if (version != null)
             {

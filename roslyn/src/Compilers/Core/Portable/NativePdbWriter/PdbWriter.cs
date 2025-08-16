@@ -93,10 +93,7 @@ namespace Microsoft.Cci
                 isKickoffMethod
                 || !methodBody.SequencePoints.IsEmpty
                 || methodBody.MethodDefinition
-                    == (
-                        Context.Module.DebugEntryPoint
-                        ?? Context.Module.PEEntryPoint
-                    );
+                    == (Context.Module.DebugEntryPoint ?? Context.Module.PEEntryPoint);
 
             var compilationOptions = Context.Module.CommonCompilation.Options;
 

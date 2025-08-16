@@ -237,8 +237,7 @@ internal partial class InlineCompletionsHandler
                     formattingOptions,
                     cancellationToken: cancellationToken
                 )
-                ?.ToImmutableArray()
-            ?? ImmutableArray<TextChange>.Empty;
+                ?.ToImmutableArray() ?? ImmutableArray<TextChange>.Empty;
 
         var formattedText = documentWithSnippetText.WithChanges(formattingChanges);
 

@@ -35,11 +35,7 @@ namespace Grpc.Testing
             ServerCallContext context
         )
         {
-            await EnsureEchoMetadataAsync(
-                context,
-                request.ResponseCompressed?.Value
-                    ?? false
-            );
+            await EnsureEchoMetadataAsync(context, request.ResponseCompressed?.Value ?? false);
             EnsureEchoStatus(request.ResponseStatus, context);
             EnsureCompression(request.ExpectCompressed, context);
 
@@ -64,10 +60,7 @@ namespace Grpc.Testing
 
             foreach (var responseParam in request.ResponseParameters)
             {
-                responseStream.WriteOptions = !(
-                    responseParam.Compressed?.Value
-                    ?? false
-                )
+                responseStream.WriteOptions = !(responseParam.Compressed?.Value ?? false)
                     ? new WriteOptions(WriteFlags.NoCompress)
                     : null;
 

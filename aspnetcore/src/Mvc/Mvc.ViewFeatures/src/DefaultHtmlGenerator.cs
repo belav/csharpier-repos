@@ -417,9 +417,7 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         ArgumentNullException.ThrowIfNull(modelExplorer);
 
         var resolvedLabelText =
-            labelText
-            ?? modelExplorer.Metadata.DisplayName
-            ?? modelExplorer.Metadata.PropertyName;
+            labelText ?? modelExplorer.Metadata.DisplayName ?? modelExplorer.Metadata.PropertyName;
         if (resolvedLabelText == null && expression != null)
         {
             var index = expression.LastIndexOf('.');

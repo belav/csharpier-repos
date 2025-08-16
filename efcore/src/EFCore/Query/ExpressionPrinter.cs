@@ -626,8 +626,7 @@ public class ExpressionPrinter : ExpressionVisitor
         {
             // ReSharper disable once PossibleNullReferenceException
             _stringBuilder.Append(
-                memberExpression.Member.DeclaringType?.Name
-                    ?? "MethodWithoutDeclaringType"
+                memberExpression.Member.DeclaringType?.Name ?? "MethodWithoutDeclaringType"
             );
         }
 

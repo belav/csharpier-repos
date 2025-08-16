@@ -1067,8 +1067,7 @@ namespace IOperationGenerator
         private static bool HasMultipleValidKinds(AbstractNode type)
         {
             return (
-                    type.OperationKind?.Entries?.Where(e => e.EditorBrowsable != false).Count()
-                    ?? 0
+                    type.OperationKind?.Entries?.Where(e => e.EditorBrowsable != false).Count() ?? 0
                 ) > 1;
         }
 
@@ -1306,8 +1305,7 @@ namespace IOperationGenerator
         private static List<string> GetPropertyOrder(Node node) =>
             node.ChildrenOrder?.Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
-                .ToList()
-            ?? new List<string>();
+                .ToList() ?? new List<string>();
 
         private enum ClassType
         {

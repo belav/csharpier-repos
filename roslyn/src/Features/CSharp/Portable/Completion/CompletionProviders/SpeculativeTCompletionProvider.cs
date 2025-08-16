@@ -186,9 +186,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // and the generic won't be "partially written".
                 if (spanStart == position)
                 {
-                    spanStart =
-                        token.GetAncestor<GenericNameSyntax>()?.SpanStart
-                        ?? spanStart;
+                    spanStart = token.GetAncestor<GenericNameSyntax>()?.SpanStart ?? spanStart;
                 }
 
                 var tokenLeftOfGenericName = syntaxTree.FindTokenOnLeftOfPosition(

@@ -356,8 +356,7 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                             StringComparison.OrdinalIgnoreCase
                         ) ?? false
                     )
-                    ?.SourceDescription
-                ?? FeaturesResources.from_metadata;
+                    ?.SourceDescription ?? FeaturesResources.from_metadata;
 
             var documentName = string.Format("{0} [{1}]", navigateDocument.Name, sourceDescription);
             var documentTooltip = navigateDocument.FilePath + Environment.NewLine + dllPath;

@@ -80,9 +80,7 @@ internal sealed class CommonConfiguration
             RuntimeConfigPath = Path.GetFullPath(configs[0]);
         }
 
-        AppPath =
-            Path.GetDirectoryName(RuntimeConfigPath)
-            ?? ".";
+        AppPath = Path.GetDirectoryName(RuntimeConfigPath) ?? ".";
 
         if (string.IsNullOrEmpty(RuntimeConfigPath) || !File.Exists(RuntimeConfigPath))
             throw new CommandLineException($"Cannot find runtime config at {RuntimeConfigPath}");

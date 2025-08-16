@@ -231,8 +231,7 @@ namespace System.IO.Pipes
                 CheckPipePropertyOperations();
                 if (!CanRead)
                     throw new NotSupportedException(SR.NotSupported_UnreadableStream);
-                return InternalHandle?.PipeSocket.ReceiveBufferSize
-                    ?? _inBufferSize;
+                return InternalHandle?.PipeSocket.ReceiveBufferSize ?? _inBufferSize;
             }
         }
 
@@ -243,8 +242,7 @@ namespace System.IO.Pipes
                 CheckPipePropertyOperations();
                 if (!CanWrite)
                     throw new NotSupportedException(SR.NotSupported_UnwritableStream);
-                return InternalHandle?.PipeSocket.SendBufferSize
-                    ?? _outBufferSize;
+                return InternalHandle?.PipeSocket.SendBufferSize ?? _outBufferSize;
             }
         }
 

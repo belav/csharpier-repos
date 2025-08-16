@@ -214,10 +214,7 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                     }
                     if (
                         webSocket.Options.UseDefaultCredentials
-                        == (
-                            context.Options.UseDefaultCredentials
-                            ?? false
-                        )
+                        == (context.Options.UseDefaultCredentials ?? false)
                     )
                     {
                         webSocket.Options.UseDefaultCredentials = false;

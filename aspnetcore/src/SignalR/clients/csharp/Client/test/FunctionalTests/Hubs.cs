@@ -100,8 +100,7 @@ public class TestHub : Hub
 
     public string GetHttpProtocol()
     {
-        return Context.GetHttpContext()?.Request?.Protocol
-            ?? "unknown";
+        return Context.GetHttpContext()?.Request?.Protocol ?? "unknown";
     }
 
     public void Abort()

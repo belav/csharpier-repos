@@ -502,14 +502,7 @@ public sealed class HostMatcherPolicy
 
         public override int GetHashCode()
         {
-            return (
-                    Host?.GetHashCode()
-                    ?? 0
-                )
-                ^ (
-                    Port?.GetHashCode()
-                    ?? 0
-                );
+            return (Host?.GetHashCode() ?? 0) ^ (Port?.GetHashCode() ?? 0);
         }
 
         public override bool Equals(object? obj)

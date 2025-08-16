@@ -397,8 +397,7 @@ namespace System.ComponentModel.DataAnnotations
         )]
         public string GetShortName()
         {
-            return this._shortName.GetLocalizableValue()
-                ?? this.GetName();
+            return this._shortName.GetLocalizableValue() ?? this.GetName();
         }
 
         /// <summary>

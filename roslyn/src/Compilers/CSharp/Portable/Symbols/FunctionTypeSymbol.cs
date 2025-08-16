@@ -283,8 +283,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override int GetHashCode()
         {
-            return GetInternalDelegateType()?.GetHashCode()
-                ?? 0;
+            return GetInternalDelegateType()?.GetHashCode() ?? 0;
         }
 
         internal override string GetDebuggerDisplay()

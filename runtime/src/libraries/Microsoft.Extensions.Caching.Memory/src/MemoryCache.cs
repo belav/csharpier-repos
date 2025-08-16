@@ -67,9 +67,7 @@ namespace Microsoft.Extensions.Caching.Memory
             TrackLinkedCacheEntries = _options.TrackLinkedCacheEntries; // we store the setting now so it's consistent for entire MemoryCache lifetime
         }
 
-        private DateTime UtcNow =>
-            _options.Clock?.UtcNow.UtcDateTime
-            ?? DateTime.UtcNow;
+        private DateTime UtcNow => _options.Clock?.UtcNow.UtcDateTime ?? DateTime.UtcNow;
 
         /// <summary>
         /// Cleans up the background collection events.

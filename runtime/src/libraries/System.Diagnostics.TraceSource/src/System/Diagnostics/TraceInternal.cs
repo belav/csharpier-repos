@@ -92,9 +92,7 @@ namespace System.Diagnostics
         }
 
         internal static string AppName =>
-            s_appName ??=
-                Assembly.GetEntryAssembly()?.GetName().Name
-                ?? string.Empty;
+            s_appName ??= Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
 
         public static bool AutoFlush
         {

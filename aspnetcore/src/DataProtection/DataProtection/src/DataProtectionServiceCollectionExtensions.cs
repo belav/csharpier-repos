@@ -95,9 +95,7 @@ public static class DataProtectionServiceCollectionExtensions
         {
             var dpOptions = s.GetRequiredService<IOptions<DataProtectionOptions>>();
             var keyRingProvider = s.GetRequiredService<IKeyRingProvider>();
-            var loggerFactory =
-                s.GetService<ILoggerFactory>()
-                ?? NullLoggerFactory.Instance;
+            var loggerFactory = s.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
 
             IDataProtectionProvider dataProtectionProvider = new KeyRingBasedDataProtectionProvider(
                 keyRingProvider,

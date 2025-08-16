@@ -1291,8 +1291,7 @@ namespace System.Activities.XamlIntegration
                 {
                     Type propertyReferenceType =
                         typeof(PropertyReferenceExtension<>).MakeGenericType(
-                            targetProperty.Type.UnderlyingType
-                                ?? typeof(object)
+                            targetProperty.Type.UnderlyingType ?? typeof(object)
                         );
                     XamlType propertyReferenceXamlType = parentWriter.SchemaContext.GetXamlType(
                         propertyReferenceType

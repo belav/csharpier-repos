@@ -24,8 +24,7 @@ internal static class RequestDelegateFilterPipelineBuilder
         var serviceProvider =
             options.ServiceProvider ?? options.EndpointBuilder.ApplicationServices;
         var jsonOptions =
-            serviceProvider?.GetService<IOptions<JsonOptions>>()?.Value
-            ?? new JsonOptions();
+            serviceProvider?.GetService<IOptions<JsonOptions>>()?.Value ?? new JsonOptions();
         var jsonSerializerOptions = jsonOptions.SerializerOptions;
 
         var factoryContext = new EndpointFilterFactoryContext

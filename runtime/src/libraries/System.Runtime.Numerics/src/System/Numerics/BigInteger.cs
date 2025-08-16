@@ -1106,11 +1106,7 @@ namespace System.Numerics
             }
             else
             {
-                int size =
-                    (
-                        modulus._bits?.Length
-                        ?? 1
-                    ) << 1;
+                int size = (modulus._bits?.Length ?? 1) << 1;
                 uint[]? bitsFromPool = null;
                 Span<uint> bits = (
                     (uint)size <= BigIntegerCalculator.StackAllocThreshold
@@ -2607,11 +2603,7 @@ namespace System.Numerics
             x = x.Slice(0, left.WriteTo(x));
 
             uint[]? rightBufferFromPool = null;
-            size =
-                (
-                    right._bits?.Length
-                    ?? 1
-                ) + 1;
+            size = (right._bits?.Length ?? 1) + 1;
             Span<uint> y = (
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
@@ -2673,11 +2665,7 @@ namespace System.Numerics
             x = x.Slice(0, left.WriteTo(x));
 
             uint[]? rightBufferFromPool = null;
-            size =
-                (
-                    right._bits?.Length
-                    ?? 1
-                ) + 1;
+            size = (right._bits?.Length ?? 1) + 1;
             Span<uint> y = (
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
@@ -2734,11 +2722,7 @@ namespace System.Numerics
             x = x.Slice(0, left.WriteTo(x));
 
             uint[]? rightBufferFromPool = null;
-            size =
-                (
-                    right._bits?.Length
-                    ?? 1
-                ) + 1;
+            size = (right._bits?.Length ?? 1) + 1;
             Span<uint> y = (
                 (uint)size <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
@@ -2789,9 +2773,7 @@ namespace System.Numerics
             (int digitShift, int smallShift) = Math.DivRem(shift, kcbitUint);
 
             uint[]? xdFromPool = null;
-            int xl =
-                value._bits?.Length
-                ?? 1;
+            int xl = value._bits?.Length ?? 1;
             Span<uint> xd = (
                 xl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
@@ -2856,9 +2838,7 @@ namespace System.Numerics
             BigInteger result;
 
             uint[]? xdFromPool = null;
-            int xl =
-                value._bits?.Length
-                ?? 1;
+            int xl = value._bits?.Length ?? 1;
             Span<uint> xd = (
                 xl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]
@@ -3596,9 +3576,7 @@ namespace System.Numerics
             (int digitShift, int smallShift) = Math.DivRem(rotateAmount, kcbitUint);
 
             uint[]? xdFromPool = null;
-            int xl =
-                value._bits?.Length
-                ?? 1;
+            int xl = value._bits?.Length ?? 1;
 
             Span<uint> xd =
                 (xl <= BigIntegerCalculator.StackAllocThreshold)
@@ -3733,9 +3711,7 @@ namespace System.Numerics
             (int digitShift, int smallShift) = Math.DivRem(rotateAmount, kcbitUint);
 
             uint[]? xdFromPool = null;
-            int xl =
-                value._bits?.Length
-                ?? 1;
+            int xl = value._bits?.Length ?? 1;
 
             Span<uint> xd =
                 (xl <= BigIntegerCalculator.StackAllocThreshold)
@@ -5684,9 +5660,7 @@ namespace System.Numerics
             BigInteger result;
 
             uint[]? xdFromPool = null;
-            int xl =
-                value._bits?.Length
-                ?? 1;
+            int xl = value._bits?.Length ?? 1;
             Span<uint> xd = (
                 xl <= BigIntegerCalculator.StackAllocThreshold
                     ? stackalloc uint[BigIntegerCalculator.StackAllocThreshold]

@@ -1734,22 +1734,18 @@ namespace System.Web.Mvc.Html.Test
 
             return String.Format(
                 "Model = {0}, ModelType = {1}, RealModelType = {2}, PropertyName = {3}, FormattedModelValue = {4}, HtmlFieldPrefix = {5}, TemplateName = {6}, Mode = {7}",
-                viewData.ModelMetadata.Model
-                    ?? "(null)",
+                viewData.ModelMetadata.Model ?? "(null)",
                 viewData.ModelMetadata.ModelType == null
                     ? "(null)"
                     : viewData.ModelMetadata.ModelType.FullName,
                 viewData.ModelMetadata.RealModelType == null
                     ? "(null)"
                     : viewData.ModelMetadata.RealModelType.FullName,
-                viewData.ModelMetadata.PropertyName
-                    ?? "(null)",
-                viewData.TemplateInfo.FormattedModelValue
-                    ?? "(null)",
+                viewData.ModelMetadata.PropertyName ?? "(null)",
+                viewData.TemplateInfo.FormattedModelValue ?? "(null)",
                 viewData.TemplateInfo.HtmlFieldPrefix == ""
                     ? "(empty)"
-                    : viewData.TemplateInfo.HtmlFieldPrefix
-                        ?? "(null)",
+                    : viewData.TemplateInfo.HtmlFieldPrefix ?? "(null)",
                 templateName ?? "(null)",
                 mode
             );

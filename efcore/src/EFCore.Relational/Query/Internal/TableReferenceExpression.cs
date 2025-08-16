@@ -39,8 +39,7 @@ public sealed class TableReferenceExpression : Expression
         {
             var table = _selectExpression.Tables.SingleOrDefault(e =>
                 string.Equals(
-                    (e as JoinExpressionBase)?.Table.Alias
-                        ?? e.Alias,
+                    (e as JoinExpressionBase)?.Table.Alias ?? e.Alias,
                     Alias,
                     StringComparison.OrdinalIgnoreCase
                 )

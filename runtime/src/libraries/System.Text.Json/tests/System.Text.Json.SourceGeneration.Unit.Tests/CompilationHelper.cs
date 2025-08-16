@@ -878,8 +878,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public DiagnosticData(DiagnosticSeverity severity, Location location, string message)
             : this(
                 severity,
-                location.SourceTree?.FilePath
-                    ?? "",
+                location.SourceTree?.FilePath ?? "",
                 location.GetLineSpan().Span,
                 TrimCultureSensitiveMessage(message)
             ) { }

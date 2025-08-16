@@ -4886,9 +4886,7 @@ namespace Microsoft.CodeAnalysis.Operations
             static ITypeSymbol getInputType(
                 BoundPropertySubpatternMember member,
                 ITypeSymbol matchedType
-            ) =>
-                member.Receiver?.Type.StrippedType().GetPublicSymbol()
-                ?? matchedType;
+            ) => member.Receiver?.Type.StrippedType().GetPublicSymbol() ?? matchedType;
         }
 
         private IInstanceReferenceOperation CreateCollectionValuePlaceholderOperation(

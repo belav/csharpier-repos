@@ -245,8 +245,7 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
         var type = compilation.RelationalDatabaseFacadeExtensionsType();
         return type?.GetMembers("ExecuteSqlRaw")
                 .Where(s => s is IMethodSymbol)
-                .Cast<IMethodSymbol>()
-            ?? Array.Empty<IMethodSymbol>();
+                .Cast<IMethodSymbol>() ?? Array.Empty<IMethodSymbol>();
     }
 
     private static IEnumerable<IMethodSymbol> ExecuteSqlRawAsyncMethods(Compilation compilation)
@@ -254,8 +253,7 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
         var type = compilation.RelationalDatabaseFacadeExtensionsType();
         return type?.GetMembers("ExecuteSqlRawAsync")
                 .Where(s => s is IMethodSymbol)
-                .Cast<IMethodSymbol>()
-            ?? Array.Empty<IMethodSymbol>();
+                .Cast<IMethodSymbol>() ?? Array.Empty<IMethodSymbol>();
     }
 
     private static IMethodSymbol? SqlQueryRawMethod(Compilation compilation)

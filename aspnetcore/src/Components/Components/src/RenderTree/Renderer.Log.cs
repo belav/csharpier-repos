@@ -130,12 +130,7 @@ public abstract partial class Renderer
         {
             if (logger.IsEnabled(LogLevel.Debug)) // This is almost always false, so skip the evaluations
             {
-                HandlingEvent(
-                    logger,
-                    eventHandlerId,
-                    eventArgs?.GetType().Name
-                        ?? "null"
-                );
+                HandlingEvent(logger, eventHandlerId, eventArgs?.GetType().Name ?? "null");
             }
         }
 
@@ -166,8 +161,7 @@ public abstract partial class Renderer
                     logger,
                     componentId,
                     eventHandlerId,
-                    eventArgs?.GetType().Name
-                        ?? "null"
+                    eventArgs?.GetType().Name ?? "null"
                 );
             }
         }

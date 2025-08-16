@@ -147,8 +147,7 @@ namespace System.Web
             value switch
             {
                 null => null,
-                IHtmlString ihs => ihs.ToHtmlString()
-                    ?? string.Empty,
+                IHtmlString ihs => ihs.ToHtmlString() ?? string.Empty,
                 _ => HtmlEncode(
                     Convert.ToString(value, CultureInfo.CurrentCulture) ?? string.Empty
                 ),

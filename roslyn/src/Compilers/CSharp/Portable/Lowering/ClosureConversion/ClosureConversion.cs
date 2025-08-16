@@ -409,8 +409,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DebugId closureId = _analysis.GetClosureId(syntax, closureDebugInfo);
 
                 var containingMethod =
-                    scope.ContainingFunctionOpt?.OriginalMethodSymbol
-                    ?? _topLevelMethod;
+                    scope.ContainingFunctionOpt?.OriginalMethodSymbol ?? _topLevelMethod;
                 if ((object)_substitutedSourceMethod != null && containingMethod == _topLevelMethod)
                 {
                     containingMethod = _substitutedSourceMethod;

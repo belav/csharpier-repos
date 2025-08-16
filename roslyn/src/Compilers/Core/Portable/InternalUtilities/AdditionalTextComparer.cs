@@ -55,8 +55,7 @@ namespace Microsoft.CodeAnalysis
             return Hash.Combine(
                 PathUtilities.Comparer.GetHashCode(obj.Path),
                 ByteSequenceComparer.GetHashCode(
-                    GetTextOrNullIfBinary(obj)?.GetChecksum()
-                        ?? ImmutableArray<byte>.Empty
+                    GetTextOrNullIfBinary(obj)?.GetChecksum() ?? ImmutableArray<byte>.Empty
                 )
             );
         }

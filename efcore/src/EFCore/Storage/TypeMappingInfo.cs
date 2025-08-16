@@ -232,8 +232,7 @@ public readonly record struct TypeMappingInfo
         CoreTypeMapping? elementTypeMapping = null
     )
         : this(
-            typeMappingConfiguration.GetValueConverter()?.ProviderClrType
-                ?? type,
+            typeMappingConfiguration.GetValueConverter()?.ProviderClrType ?? type,
             elementTypeMapping,
             unicode: typeMappingConfiguration.IsUnicode(),
             size: typeMappingConfiguration.GetMaxLength(),

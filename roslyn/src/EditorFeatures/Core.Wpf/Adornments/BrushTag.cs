@@ -29,10 +29,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
         public Brush GetBrush(IWpfTextView view)
             // If we can't get the color for some reason, fall back to a hard-coded value the editor has for outlining.
             =>
-            _brush ??= new SolidColorBrush(
-                this.GetColor(view, _editorFormatMap)
-                    ?? s_lightGray
-            );
+            _brush ??= new SolidColorBrush(this.GetColor(view, _editorFormatMap) ?? s_lightGray);
 
         protected abstract Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap);
     }

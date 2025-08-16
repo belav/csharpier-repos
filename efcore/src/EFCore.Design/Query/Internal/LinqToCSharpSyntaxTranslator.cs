@@ -738,9 +738,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 var (_, _, labels, unnamedLabelNames) = stackFrame;
 
                 // Generate names for unnamed label targets and uniquify
-                identifier =
-                    label.Target.Name
-                    ?? "unnamedLabel";
+                identifier = label.Target.Name ?? "unnamedLabel";
                 var identifierBase = identifier;
                 for (var i = 0; unnamedLabelNames.Contains(identifier); i++)
                 {
@@ -1259,10 +1257,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             }
 
             // Need to lift
-            var name = UniquifyVariableName(
-                lambda.Parameters[i].Name
-                    ?? "lifted"
-            );
+            var name = UniquifyVariableName(lambda.Parameters[i].Name ?? "lifted");
             var parameter = E.Parameter(argument.Type, name);
             _liftedState.Statements.Add(
                 GenerateVarDeclaration(name, Translate<ExpressionSyntax>(argument))

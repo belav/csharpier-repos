@@ -51,9 +51,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
             // alpha-rename to get the implementation's type parameters
-            var typeMap =
-                interfaceMethod.ContainingType.TypeSubstitution
-                ?? TypeMap.Empty;
+            var typeMap = interfaceMethod.ContainingType.TypeSubstitution ?? TypeMap.Empty;
             typeMap.WithAlphaRename(interfaceMethod, this, out _typeParameters);
 
             _interfaceMethod = interfaceMethod.ConstructIfGeneric(TypeArgumentsWithAnnotations);

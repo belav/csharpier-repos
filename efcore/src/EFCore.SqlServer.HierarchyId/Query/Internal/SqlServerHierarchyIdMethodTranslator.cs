@@ -116,7 +116,8 @@ public class SqlServerHierarchyIdMethodTranslator : IMethodCallTranslator
             var typeMapping =
                 Microsoft.EntityFrameworkCore.Query.ExpressionExtensions.InferTypeMapping(
                     candidates.ToArray()
-                ) ?? _typeMappingSource.FindMapping(typeof(HierarchyId))!;
+                )
+                ?? _typeMappingSource.FindMapping(typeof(HierarchyId))!;
 
             var newArguments = new List<SqlExpression>();
             for (var i = 0; i < arguments.Count; i++)

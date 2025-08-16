@@ -1639,12 +1639,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     else
                     {
                         Debug.Assert(bothBool);
-                        Debug.Assert(
-                            !(
-                                signature.Method?.ContainingType?.IsInterface
-                                ?? false
-                            )
-                        );
+                        Debug.Assert(!(signature.Method?.ContainingType?.IsInterface ?? false));
 
                         return new BoundBinaryOperator(
                             node,

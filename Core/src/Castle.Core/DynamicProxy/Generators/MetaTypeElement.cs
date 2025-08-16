@@ -32,11 +32,7 @@ namespace Castle.DynamicProxy.Generators
 
         public bool CanBeImplementedExplicitly
         {
-            get
-            {
-                return member.DeclaringType?.IsInterface
-                    ?? false;
-            }
+            get { return member.DeclaringType?.IsInterface ?? false; }
         }
 
         public string Name

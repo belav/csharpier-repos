@@ -35,12 +35,9 @@ public class ClrPropertySetterFactory : ClrAccessorFactory<IClrPropertySetter>
     >(MemberInfo memberInfo, IPropertyBase? propertyBase)
     {
         var entityClrType =
-            propertyBase?.DeclaringType.ContainingEntityType.ClrType
-            ?? typeof(TEntity);
+            propertyBase?.DeclaringType.ContainingEntityType.ClrType ?? typeof(TEntity);
         var entityParameter = Expression.Parameter(entityClrType, "entity");
-        var propertyDeclaringType =
-            propertyBase?.DeclaringType.ClrType
-            ?? typeof(TEntity);
+        var propertyDeclaringType = propertyBase?.DeclaringType.ClrType ?? typeof(TEntity);
         var valueParameter = Expression.Parameter(typeof(TValue), "value");
         var memberType = memberInfo.GetMemberType();
         var convertedParameter =

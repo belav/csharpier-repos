@@ -146,8 +146,7 @@ namespace System.CommandLine.Parsing
                     if (optionResult is not null)
                     {
                         builder.Append(
-                            optionResult.IdentifierToken?.Value
-                                ?? optionResult.Option.Name
+                            optionResult.IdentifierToken?.Value ?? optionResult.Option.Name
                         );
                     }
                     else

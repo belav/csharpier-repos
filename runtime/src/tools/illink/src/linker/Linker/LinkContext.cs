@@ -898,9 +898,7 @@ namespace Mono.Linker
                 return _targetRuntime.Value;
 
             TypeDefinition? objectType = BCL.FindPredefinedType(WellKnownType.System_Object, this);
-            _targetRuntime =
-                objectType?.Module.Assembly.Name.Version.Major
-                ?? -1;
+            _targetRuntime = objectType?.Module.Assembly.Name.Version.Major ?? -1;
 
             return _targetRuntime.Value;
         }

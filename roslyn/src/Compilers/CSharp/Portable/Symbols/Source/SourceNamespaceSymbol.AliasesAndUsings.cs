@@ -842,15 +842,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 basesBeingResolved
                             );
                             Debug.Assert(calculated.UsingAliases.IsEmpty);
-                            Debug.Assert(
-                                calculated.UsingAliasesMap?.IsEmpty
-                                    ?? true
-                            );
+                            Debug.Assert(calculated.UsingAliasesMap?.IsEmpty ?? true);
                             Debug.Assert(calculated.UsingNamespacesOrTypes.IsEmpty);
-                            Debug.Assert(
-                                calculated.Diagnostics?.IsEmptyWithoutResolution
-                                    ?? true
-                            );
+                            Debug.Assert(calculated.Diagnostics?.IsEmptyWithoutResolution ?? true);
 #endif
                             result = UsingsAndDiagnostics.Empty;
                         }
@@ -897,10 +891,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     result.UsingNamespacesOrTypes
                                 )
                             );
-                            Debug.Assert(
-                                calculated.Diagnostics?.IsEmptyWithoutResolution
-                                    ?? true
-                            );
+                            Debug.Assert(calculated.Diagnostics?.IsEmptyWithoutResolution ?? true);
 #endif
                         }
                     }

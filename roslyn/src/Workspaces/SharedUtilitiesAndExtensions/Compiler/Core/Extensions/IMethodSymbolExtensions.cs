@@ -163,8 +163,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 || method
                     .ReturnType.GetAttributes()
                     .Any(a =>
-                        a.AttributeClass?.Equals(compilation.AsyncMethodBuilderAttribute())
-                        ?? false
+                        a.AttributeClass?.Equals(compilation.AsyncMethodBuilderAttribute()) ?? false
                     );
         }
     }

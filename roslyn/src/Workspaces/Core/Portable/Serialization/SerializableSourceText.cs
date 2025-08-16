@@ -67,8 +67,7 @@ namespace Microsoft.CodeAnalysis.Serialization
 
         public ImmutableArray<byte> GetContentHash()
         {
-            return TryGetText()?.GetContentHash()
-                ?? _storage!.GetContentHash();
+            return TryGetText()?.GetContentHash() ?? _storage!.GetContentHash();
         }
 
         public async ValueTask<SourceText> GetTextAsync(CancellationToken cancellationToken)

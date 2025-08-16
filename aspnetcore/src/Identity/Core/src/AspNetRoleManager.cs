@@ -34,9 +34,7 @@ public class AspNetRoleManager<TRole> : RoleManager<TRole>, IDisposable
     )
         : base(store, roleValidators, keyNormalizer, errors, logger)
     {
-        _cancel =
-            contextAccessor?.HttpContext?.RequestAborted
-            ?? CancellationToken.None;
+        _cancel = contextAccessor?.HttpContext?.RequestAborted ?? CancellationToken.None;
     }
 
     /// <summary>

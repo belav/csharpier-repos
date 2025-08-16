@@ -132,10 +132,7 @@ public class FakeDbDataReader : DbDataReader
     public override IEnumerator GetEnumerator() => throw new NotImplementedException();
 
     public override Type GetFieldType(int ordinal) =>
-        _results.Count > 0
-            ? _results[0][ordinal]?.GetType()
-                ?? typeof(object)
-            : typeof(object);
+        _results.Count > 0 ? _results[0][ordinal]?.GetType() ?? typeof(object) : typeof(object);
 
     public override float GetFloat(int ordinal) => (float)_currentRow[ordinal];
 

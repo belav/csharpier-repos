@@ -43,11 +43,7 @@ class Impl2 : I
     {
         if (o is not int i || i != 5)
         {
-            Console.WriteLine(
-                "FAIL: Got {0}",
-                o?.ToString()
-                    ?? "(null)"
-            );
+            Console.WriteLine("FAIL: Got {0}", o?.ToString() ?? "(null)");
             return -1;
         }
         else

@@ -79,6 +79,5 @@ public sealed class EntryCurrentValueComparer<TProperty>
     /// <param name="obj">The for which a hash code is to be returned.</param>
     /// <returns>A hash code for the specified object.</returns>
     public int GetHashCode(IUpdateEntry obj) =>
-        obj.GetCurrentValue<TProperty>(_property)?.GetHashCode()
-        ?? 0;
+        obj.GetCurrentValue<TProperty>(_property)?.GetHashCode() ?? 0;
 }

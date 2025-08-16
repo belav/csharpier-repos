@@ -46,11 +46,7 @@ namespace Microsoft.CodeAnalysis.CSharp.IntroduceUsingStatement
             SyntaxList<StatementSyntax> tryStatements,
             SyntaxList<StatementSyntax> finallyStatements
         ) GetTryFinallyStatements(TryStatementSyntax tryStatement) =>
-            (
-                tryStatement.Block.Statements,
-                tryStatement.Finally?.Block.Statements
-                    ?? default
-            );
+            (tryStatement.Block.Statements, tryStatement.Finally?.Block.Statements ?? default);
 
         protected override bool CanRefactorToContainBlockStatements(SyntaxNode parent) =>
             parent is BlockSyntax

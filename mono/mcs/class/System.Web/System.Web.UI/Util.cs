@@ -43,9 +43,7 @@ namespace System.Web.UI
     {
         internal static string GetUrlWithApplicationPath(HttpContextBase context, string url)
         {
-            string appPath =
-                context.Request.ApplicationPath
-                ?? String.Empty;
+            string appPath = context.Request.ApplicationPath ?? String.Empty;
             if (!appPath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
             {
                 appPath += "/";

@@ -371,10 +371,7 @@ namespace System.Security.Cryptography.Pkcs
             // If we had content already, use that now.
             // (The second signer doesn't inherit edits to signedCms.ContentInfo.Content)
             ReadOnlyMemory<byte> content = _heldContent ?? ContentInfo.Content;
-            string contentType =
-                _contentType
-                ?? ContentInfo.ContentType.Value
-                ?? Oids.Pkcs7Data;
+            string contentType = _contentType ?? ContentInfo.ContentType.Value ?? Oids.Pkcs7Data;
 
             X509Certificate2Collection chainCerts;
             SignerInfoAsn newSigner = signer.Sign(content, contentType, silent, out chainCerts);
@@ -601,9 +598,7 @@ namespace System.Security.Cryptography.Pkcs
                 return;
             }
 
-            int existingLength =
-                _signedData.CertificateSet?.Length
-                ?? 0;
+            int existingLength = _signedData.CertificateSet?.Length ?? 0;
 
             if (existingLength > 0 || newCerts.Count > 1)
             {
@@ -712,9 +707,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public void AddCertificate(X509Certificate2 certificate)
         {
-            int existingLength =
-                _signedData.CertificateSet?.Length
-                ?? 0;
+            int existingLength = _signedData.CertificateSet?.Length ?? 0;
 
             byte[] rawData = certificate.RawData;
 
@@ -753,9 +746,7 @@ namespace System.Security.Cryptography.Pkcs
 
         public void RemoveCertificate(X509Certificate2 certificate)
         {
-            int existingLength =
-                _signedData.CertificateSet?.Length
-                ?? 0;
+            int existingLength = _signedData.CertificateSet?.Length ?? 0;
 
             if (existingLength != 0)
             {

@@ -3062,9 +3062,7 @@ namespace ns1
             internal static string Stringize([FirstAttribute.SecondAttribute.Third] this s2.s1 s)
             {
                 Console.WriteLine("    s2.ExtensionMethods.Stringize(this s2.s1 s)");
-                var ss =
-                    s.ToString()
-                    ?? string.Empty;
+                var ss = s.ToString() ?? string.Empty;
                 return (s.ToString() == s.ToString(out ss)).ToString();
             }
         }
@@ -3086,9 +3084,7 @@ namespace ns1
             public static string ToString([FirstAttribute.SecondAttribute] this s2.s1 s)
             {
                 Console.WriteLine("    s2.ExtensionMethods.ToString(this s2.s1 s)");
-                var ss =
-                    s.ToString()
-                    ?? string.Empty;
+                var ss = s.ToString() ?? string.Empty;
                 return s.ToString(out ss);
             }
         }
@@ -3109,9 +3105,7 @@ namespace ns1
             )
             {
                 Console.WriteLine("    s2.ExtensionMethods.ToString(this s2.s1 s, string s2)");
-                ss =
-                    s.ToString()
-                    ?? string.Empty;
+                ss = s.ToString() ?? string.Empty;
                 return s.ToString();
             }
         }

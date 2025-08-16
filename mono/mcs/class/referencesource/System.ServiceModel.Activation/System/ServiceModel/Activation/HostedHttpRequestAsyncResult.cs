@@ -184,9 +184,7 @@ namespace System.ServiceModel.Activation
             }
 
             // If this is a DEBUG request, complete right away and let ASP.NET handle it.
-            string method =
-                context.Request.HttpMethod
-                ?? "";
+            string method = context.Request.HttpMethod ?? "";
             char firstMethodChar = method.Length == 5 ? method[0] : '\0';
             if (
                 (firstMethodChar == 'd' || firstMethodChar == 'D')

@@ -437,12 +437,8 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
 
             try
             {
-                var clientStreamLength =
-                    hubMethodInvocationMessage.StreamIds?.Length
-                    ?? 0;
-                var serverStreamLength =
-                    descriptor.StreamingParameters?.Count
-                    ?? 0;
+                var clientStreamLength = hubMethodInvocationMessage.StreamIds?.Length ?? 0;
+                var serverStreamLength = descriptor.StreamingParameters?.Count ?? 0;
                 if (clientStreamLength != serverStreamLength)
                 {
                     var ex = new HubException(
@@ -1091,8 +1087,7 @@ internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
             }
 
             var methodName =
-                methodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name
-                ?? methodInfo.Name;
+                methodInfo.GetCustomAttribute<HubMethodNameAttribute>()?.Name ?? methodInfo.Name;
 
             if (_methods.ContainsKey(methodName))
             {

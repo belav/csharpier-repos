@@ -118,16 +118,12 @@ internal static class ControllerActionDescriptorBuilder
             ?? false;
 
         var isVisibleSetOnActionOrController =
-            action.ApiExplorer?.IsVisible
-            ?? controller.ApiExplorer?.IsVisible
-            ?? false;
+            action.ApiExplorer?.IsVisible ?? controller.ApiExplorer?.IsVisible ?? false;
 
         // ApiExplorer isn't supported on conventional-routed actions, but we still allow you to configure
         // it at the application level when you have a mix of controller types. We'll just skip over enabling
         // ApiExplorer for conventional-routed controllers when this happens.
-        var isVisibleSetOnApplication =
-            application.ApiExplorer?.IsVisible
-            ?? false;
+        var isVisibleSetOnApplication = application.ApiExplorer?.IsVisible ?? false;
 
         if (isVisibleSetOnActionOrController && !IsAttributeRouted(actionDescriptor))
         {
@@ -146,9 +142,7 @@ internal static class ControllerActionDescriptorBuilder
 
             var apiExplorerActionData = new ApiDescriptionActionData()
             {
-                GroupName =
-                    action.ApiExplorer?.GroupName
-                    ?? controller.ApiExplorer?.GroupName,
+                GroupName = action.ApiExplorer?.GroupName ?? controller.ApiExplorer?.GroupName,
             };
 
             actionDescriptor.SetProperty(apiExplorerActionData);
@@ -227,9 +221,7 @@ internal static class ControllerActionDescriptorBuilder
             actionDescriptor.AttributeRouteInfo = new AttributeRouteInfo
             {
                 Template = selectorModel.AttributeRouteModel.Template,
-                Order =
-                    selectorModel.AttributeRouteModel.Order
-                    ?? 0,
+                Order = selectorModel.AttributeRouteModel.Order ?? 0,
                 Name = selectorModel.AttributeRouteModel.Name,
                 SuppressLinkGeneration = selectorModel.AttributeRouteModel.SuppressLinkGeneration,
                 SuppressPathMatching = selectorModel.AttributeRouteModel.SuppressPathMatching,

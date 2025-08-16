@@ -1043,10 +1043,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         FindAnnotation(CoreAnnotationNames.ProviderClrType)?.GetConfigurationSource();
 
     private Type GetEffectiveProviderClrType() =>
-        (
-            TypeMapping?.Converter?.ProviderClrType
-            ?? ClrType
-        ).UnwrapNullableType();
+        (TypeMapping?.Converter?.ProviderClrType ?? ClrType).UnwrapNullableType();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1559,8 +1556,7 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IEnumerable<Key> GetContainingKeys() =>
-        Keys?.OrderBy(k => k.Properties, PropertyListComparer.Instance)
-        ?? Enumerable.Empty<Key>();
+        Keys?.OrderBy(k => k.Properties, PropertyListComparer.Instance) ?? Enumerable.Empty<Key>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -95,9 +95,7 @@ internal sealed class DataAnnotationsMetadataProvider
             displayMetadata.DataTypeName = nameof(DataType.Html);
         }
 
-        var containerType =
-            context.Key.ContainerType
-            ?? context.Key.ModelType;
+        var containerType = context.Key.ContainerType ?? context.Key.ModelType;
         IStringLocalizer? localizer = null;
         if (
             _stringLocalizerFactory != null
@@ -207,8 +205,7 @@ internal sealed class DataAnnotationsMetadataProvider
             var enumFields = Enum.GetNames(underlyingType)
                 .Select(name => underlyingType.GetField(name)!)
                 .OrderBy(field =>
-                    field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder()
-                    ?? 1000
+                    field.GetCustomAttribute<DisplayAttribute>(inherit: false)?.GetOrder() ?? 1000
                 );
 
             foreach (var field in enumFields)

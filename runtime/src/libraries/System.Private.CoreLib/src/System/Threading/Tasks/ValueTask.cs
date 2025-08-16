@@ -147,9 +147,7 @@ namespace System.Threading.Tasks
             new ValueTask<TResult>(Task.FromException<TResult>(exception));
 
         /// <summary>Returns the hash code for this instance.</summary>
-        public override int GetHashCode() =>
-            _obj?.GetHashCode()
-            ?? 0;
+        public override int GetHashCode() => _obj?.GetHashCode() ?? 0;
 
         /// <summary>Returns a value indicating whether this value is equal to a specified <see cref="object"/>.</summary>
         public override bool Equals([NotNullWhen(true)] object? obj) =>

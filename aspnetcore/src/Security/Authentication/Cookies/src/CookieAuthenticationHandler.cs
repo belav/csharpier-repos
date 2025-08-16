@@ -102,9 +102,7 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         var currentUtc = TimeProvider.GetUtcNow();
         var issuedUtc = ticket.Properties.IssuedUtc;
         var expiresUtc = ticket.Properties.ExpiresUtc;
-        var allowRefresh =
-            ticket.Properties.AllowRefresh
-            ?? true;
+        var allowRefresh = ticket.Properties.AllowRefresh ?? true;
         if (issuedUtc != null && expiresUtc != null && Options.SlidingExpiration && allowRefresh)
         {
             var timeElapsed = currentUtc.Subtract(issuedUtc.Value);
@@ -386,8 +384,7 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         if (signInContext.Properties.IsPersistent)
         {
             var expiresUtc =
-                signInContext.Properties.ExpiresUtc
-                ?? issuedUtc.Add(Options.ExpireTimeSpan);
+                signInContext.Properties.ExpiresUtc ?? issuedUtc.Add(Options.ExpireTimeSpan);
             signInContext.CookieOptions.Expires = expiresUtc.ToUniversalTime();
         }
 

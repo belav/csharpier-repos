@@ -107,22 +107,16 @@ public class Program
             Assert.AreEqual(gen1bInt.IsGenClass1a(gen1aInt).ToString(), "True");
             Assert.AreEqual(gen1bLong.IsGenClass1a(gen1aInt).ToString(), "False");
             Assert.AreEqual(
-                gen1bInt.AsGenClass1a(gen1aInt)?.ToString()
-                    ?? "null",
+                gen1bInt.AsGenClass1a(gen1aInt)?.ToString() ?? "null",
                 gen1aInt.ToString()
             );
-            Assert.AreEqual(
-                gen1bLong.AsGenClass1a(gen1aInt)?.ToString()
-                    ?? "null",
-                "null"
-            );
+            Assert.AreEqual(gen1bLong.AsGenClass1a(gen1aInt)?.ToString() ?? "null", "null");
 
             var gen1aString = new GenClass1a<string>();
             var gen1b = new GenClass1b<string>();
             Assert.AreEqual(gen1b.IsGenClass1a(gen1aString).ToString(), "True");
             Assert.AreEqual(
-                gen1b.AsGenClass1a(gen1aString)?.ToString()
-                    ?? "null",
+                gen1b.AsGenClass1a(gen1aString)?.ToString() ?? "null",
                 gen1aString.ToString()
             );
             Assert.AreEqual(

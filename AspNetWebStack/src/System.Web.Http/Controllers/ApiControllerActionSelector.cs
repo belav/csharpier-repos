@@ -160,8 +160,7 @@ namespace System.Web.Http.Controllers
                                 && binding.WillReadUri()
                             )
                             .Select(binding =>
-                                binding.Descriptor.Prefix
-                                ?? binding.Descriptor.ParameterName
+                                binding.Descriptor.Prefix ?? binding.Descriptor.ParameterName
                             )
                             .ToArray()
                     );

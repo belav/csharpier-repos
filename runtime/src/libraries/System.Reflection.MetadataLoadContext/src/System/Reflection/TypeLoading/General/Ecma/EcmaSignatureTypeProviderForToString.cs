@@ -76,12 +76,10 @@ namespace System.Reflection.TypeLoading.Ecma
         }
 
         public string GetGenericTypeParameter(TypeContext genericContext, int index) =>
-            genericContext.GetGenericTypeArgumentOrNull(index)?.ToString()
-            ?? ("!" + index);
+            genericContext.GetGenericTypeArgumentOrNull(index)?.ToString() ?? ("!" + index);
 
         public string GetGenericMethodParameter(TypeContext genericContext, int index) =>
-            genericContext.GetGenericMethodArgumentOrNull(index)?.ToString()
-            ?? ("!!" + index);
+            genericContext.GetGenericMethodArgumentOrNull(index)?.ToString() ?? ("!!" + index);
 
         public string GetFunctionPointerType(MethodSignature<string> signature)
         {

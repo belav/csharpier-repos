@@ -303,8 +303,7 @@ namespace System.ServiceModel.Dispatcher
                             SR.GetString(
                                 SR.SFxInvalidRequestAction,
                                 this.Name,
-                                rpc.Request.Headers.Action
-                                    ?? "{NULL}",
+                                rpc.Request.Headers.Action ?? "{NULL}",
                                 this.Action
                             )
                         )

@@ -6703,8 +6703,7 @@ namespace System.Diagnostics.Tracing
 
             sb?.AppendLine("</localization>");
             sb?.AppendLine("</instrumentationManifest>");
-            return sb?.ToString()
-                ?? "";
+            return sb?.ToString() ?? "";
         }
 
         #region private

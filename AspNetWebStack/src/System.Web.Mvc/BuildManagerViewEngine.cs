@@ -150,8 +150,7 @@ namespace System.Web.Mvc
             {
                 try
                 {
-                    return _resolverThunk().GetService(type)
-                        ?? Activator.CreateInstance(type);
+                    return _resolverThunk().GetService(type) ?? Activator.CreateInstance(type);
                 }
                 catch (MissingMethodException exception)
                 {

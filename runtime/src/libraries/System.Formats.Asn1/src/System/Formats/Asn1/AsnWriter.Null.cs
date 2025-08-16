@@ -21,10 +21,7 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.Null);
 
-            WriteNullCore(
-                tag?.AsPrimitive()
-                    ?? Asn1Tag.Null
-            );
+            WriteNullCore(tag?.AsPrimitive() ?? Asn1Tag.Null);
         }
 
         // T-REC-X.690-201508 sec 8.8

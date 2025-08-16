@@ -58,8 +58,7 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
         // from the factory
         var problemDetails = _problemDetailsFactory.CreateProblemDetails(
             context.HttpContext,
-            context.ProblemDetails.Status
-                ?? context.HttpContext.Response.StatusCode,
+            context.ProblemDetails.Status ?? context.HttpContext.Response.StatusCode,
             context.ProblemDetails.Title,
             context.ProblemDetails.Type,
             context.ProblemDetails.Detail,

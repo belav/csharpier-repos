@@ -133,8 +133,7 @@ public class Sequence : ConventionAnnotatable, IMutableSequence, IConventionSequ
     public static IEnumerable<ISequence> GetSequences(IReadOnlyModel model) =>
         ((Dictionary<(string, string?), ISequence>?)model[RelationalAnnotationNames.Sequences])
             ?.OrderBy(t => t.Key)
-            .Select(t => t.Value)
-        ?? Enumerable.Empty<ISequence>();
+            .Select(t => t.Value) ?? Enumerable.Empty<ISequence>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -231,8 +231,7 @@ namespace System.IO
                             )
                             {
                                 s_clearToEol ??=
-                                    ConsolePal.TerminalFormatStringsInstance.ClrEol
-                                    ?? string.Empty;
+                                    ConsolePal.TerminalFormatStringsInstance.ClrEol ?? string.Empty;
 
                                 // Move to end of previous line
                                 ConsolePal.SetTerminalCursorPosition(

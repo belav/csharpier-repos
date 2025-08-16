@@ -60,9 +60,7 @@ namespace Moq.Matchers
         public RefMatcher(object reference)
         {
             this.reference = reference;
-            this.referenceIsValueType =
-                reference?.GetType().IsValueType
-                ?? false;
+            this.referenceIsValueType = reference?.GetType().IsValueType ?? false;
         }
 
         public bool Matches(object argument, Type parameterType)

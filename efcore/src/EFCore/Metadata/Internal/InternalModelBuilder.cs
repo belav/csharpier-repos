@@ -102,8 +102,7 @@ public class InternalModelBuilder
     ) =>
         SharedTypeEntity(
             definingEntityType.GetOwnedName(
-                type.Type?.ShortDisplayName()
-                    ?? type.Name,
+                type.Type?.ShortDisplayName() ?? type.Name,
                 definingNavigationName
             ),
             type.Type,

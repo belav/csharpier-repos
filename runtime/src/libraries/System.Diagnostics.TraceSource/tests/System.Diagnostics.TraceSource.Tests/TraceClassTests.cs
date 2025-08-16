@@ -338,8 +338,7 @@ namespace System.Diagnostics.TraceSourceTests
             Trace.WriteLine("Message end.");
             textTL.Flush();
             string testRunnerAssemblyName =
-                Assembly.GetEntryAssembly()?.GetName().Name
-                ?? string.Empty;
+                Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
             string newLine = Environment.NewLine;
             var expected = string.Format(
                 "Message start."

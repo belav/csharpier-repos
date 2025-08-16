@@ -164,9 +164,7 @@ internal class TestServer : IAsyncDisposable, IStartup
     }
 
     // Avoid NullReferenceException in the CanListenToOpenTcpSocketHandle test
-    public int Port =>
-        _listenOptions.IPEndPoint?.Port
-        ?? 0;
+    public int Port => _listenOptions.IPEndPoint?.Port ?? 0;
 
     public TestServiceContext Context { get; }
 

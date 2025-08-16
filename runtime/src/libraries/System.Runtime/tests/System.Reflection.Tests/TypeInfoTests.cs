@@ -1256,16 +1256,8 @@ namespace System.Reflection.Tests
             Assert.Equal(expected, type.GetTypeInfo().IsAssignableFrom(c));
             Assert.Equal(expected, type.GetTypeInfo().IsAssignableFrom(c?.GetTypeInfo()));
 
-            Assert.Equal(
-                expected,
-                c?.IsAssignableTo(type)
-                    ?? false
-            );
-            Assert.Equal(
-                expected,
-                c?.GetTypeInfo().IsAssignableTo(type.GetTypeInfo())
-                    ?? false
-            );
+            Assert.Equal(expected, c?.IsAssignableTo(type) ?? false);
+            Assert.Equal(expected, c?.GetTypeInfo().IsAssignableTo(type.GetTypeInfo()) ?? false);
         }
 
         class G<T, U>

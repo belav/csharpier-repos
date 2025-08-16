@@ -1008,8 +1008,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         }
 
         private static bool WithinEmbeddedStatement(SyntaxNode node, int caretPosition) =>
-            node.GetEmbeddedStatement()?.Span.Contains(caretPosition)
-            ?? false;
+            node.GetEmbeddedStatement()?.Span.Contains(caretPosition) ?? false;
 
         #endregion
 

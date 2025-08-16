@@ -35,10 +35,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             TupleExpressionSyntax,
             IEnumerable<string>
         > s_getArgumentNames = e =>
-            e.Arguments.Select(a =>
-                a.NameColon?.Name.Identifier.ValueText
-                ?? string.Empty
-            );
+            e.Arguments.Select(a => a.NameColon?.Name.Identifier.ValueText ?? string.Empty);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

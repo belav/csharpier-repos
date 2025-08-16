@@ -4673,9 +4673,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.nullc
         public static int MainMethod(string[] args)
         {
             dynamic d = new MyClass();
-            var x =
-                d.Get()
-                ?? new object();
+            var x = d.Get() ?? new object();
             return x == null ? 1 : 0;
         }
     }

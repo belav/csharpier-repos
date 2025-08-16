@@ -48,9 +48,7 @@
 
             foreach (DataSourceExpression e in Expressions)
             {
-                source =
-                    e.GetQueryable(source)
-                    ?? source;
+                source = e.GetQueryable(source) ?? source;
             }
 
             return source;

@@ -122,8 +122,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     // Otherwise, try to find the include file relative to the parent ruleset.
                     includePath = PathUtilities.CombinePathsUnchecked(
-                        Path.GetDirectoryName(parentRulesetPath)
-                            ?? "",
+                        Path.GetDirectoryName(parentRulesetPath) ?? "",
                         includePath
                     );
                     if (File.Exists(includePath))

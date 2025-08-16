@@ -285,8 +285,7 @@ namespace System.Tests
                 }
             );
             string entryAssembly =
-                Assembly.GetEntryAssembly()?.FullName
-                ?? Assembly.GetExecutingAssembly().FullName;
+                Assembly.GetEntryAssembly()?.FullName ?? Assembly.GetExecutingAssembly().FullName;
             Assert.Equal(AppDomain.CurrentDomain.ApplyPolicy(entryAssembly), entryAssembly);
         }
 

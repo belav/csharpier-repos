@@ -1792,14 +1792,7 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
         var result = async ? (await query.ToListAsync()) : query.ToList();
 
         Assert.Equal(4, result.Count);
-        Assert.True(
-            result.All(r =>
-                (
-                    r.Customer.Orders?.Count
-                    ?? 0
-                ) == r.FilteredOrders.Count()
-            )
-        );
+        Assert.True(result.All(r => (r.Customer.Orders?.Count ?? 0) == r.FilteredOrders.Count()));
         Assert.Equal(6, context.ChangeTracker.Entries().Count());
     }
 
@@ -1819,14 +1812,7 @@ public abstract class NorthwindSelectQueryTestBase<TFixture> : QueryTestBase<TFi
         var result = async ? (await query.ToListAsync()) : query.ToList();
 
         Assert.Equal(4, result.Count);
-        Assert.True(
-            result.All(r =>
-                (
-                    r.Customer.Orders?.Count
-                    ?? 0
-                ) == r.FilteredOrders.Count
-            )
-        );
+        Assert.True(result.All(r => (r.Customer.Orders?.Count ?? 0) == r.FilteredOrders.Count));
         Assert.Equal(6, context.ChangeTracker.Entries().Count());
     }
 

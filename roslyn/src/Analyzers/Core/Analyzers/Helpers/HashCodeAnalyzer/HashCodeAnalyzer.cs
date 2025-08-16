@@ -174,9 +174,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             var declarator = declaration.Declarators[0];
-            var initializerValue =
-                declaration.Initializer?.Value
-                ?? declarator.Initializer?.Value;
+            var initializerValue = declaration.Initializer?.Value ?? declarator.Initializer?.Value;
             if (initializerValue == null)
             {
                 return null;

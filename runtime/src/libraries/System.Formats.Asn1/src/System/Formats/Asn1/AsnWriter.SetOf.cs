@@ -30,10 +30,7 @@ namespace System.Formats.Asn1
             CheckUniversalTag(tag, UniversalTagNumber.SetOf);
 
             // Assert the constructed flag, in case it wasn't.
-            return PushSetOfCore(
-                tag?.AsConstructed()
-                    ?? Asn1Tag.SetOf
-            );
+            return PushSetOfCore(tag?.AsConstructed() ?? Asn1Tag.SetOf);
         }
 
         /// <summary>
@@ -60,10 +57,7 @@ namespace System.Formats.Asn1
             CheckUniversalTag(tag, UniversalTagNumber.SetOf);
 
             // Assert the constructed flag, in case it wasn't.
-            PopSetOfCore(
-                tag?.AsConstructed()
-                    ?? Asn1Tag.SetOf
-            );
+            PopSetOfCore(tag?.AsConstructed() ?? Asn1Tag.SetOf);
         }
 
         // T-REC-X.690-201508 sec 8.12

@@ -536,8 +536,7 @@ public static class RelationalPropertyExtensions
         var annotation = property.FindAnnotation(RelationalAnnotationNames.ColumnType);
         if (annotation != null)
         {
-            return property.FindRelationalTypeMapping()?.StoreType
-                ?? (string?)annotation.Value;
+            return property.FindRelationalTypeMapping()?.StoreType ?? (string?)annotation.Value;
         }
 
         return GetDefaultColumnType(property, storeObject);

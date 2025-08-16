@@ -43,8 +43,7 @@ namespace System.ComponentModel.Composition.Factories
                     if (this._exportDefinitions == null)
                     {
                         this._exportDefinitions =
-                            this._exportsCreator.Invoke()
-                            ?? Enumerable.Empty<ExportDefinition>();
+                            this._exportsCreator.Invoke() ?? Enumerable.Empty<ExportDefinition>();
                     }
                     return this._exportDefinitions;
                 }
@@ -57,8 +56,7 @@ namespace System.ComponentModel.Composition.Factories
                     if (this._importDefinitions == null)
                     {
                         this._importDefinitions =
-                            this._importsCreator.Invoke()
-                            ?? Enumerable.Empty<ImportDefinition>();
+                            this._importsCreator.Invoke() ?? Enumerable.Empty<ImportDefinition>();
                     }
                     return this._importDefinitions;
                 }

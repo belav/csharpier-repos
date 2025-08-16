@@ -160,8 +160,7 @@ namespace System.ServiceModel.Description
                     {
                         ExportAnyMessage(
                             wsdlMessage,
-                            description.Body.ReturnValue
-                                ?? description.Body.Parts[0]
+                            description.Body.ReturnValue ?? description.Body.Parts[0]
                         );
                         return;
                     }

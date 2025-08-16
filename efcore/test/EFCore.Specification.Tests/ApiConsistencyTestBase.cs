@@ -1786,16 +1786,14 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                         .Where(m =>
                             !IsObsolete(m) && m.GetParameters().First().ParameterType == type
                         )
-                        .ToArray()
-                    ?? new MethodInfo[0];
+                        .ToArray() ?? new MethodInfo[0];
                 var mutableMethods =
                     extensionTypeTuple
                         .MutableExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m =>
                             !IsObsolete(m) && m.GetParameters().First().ParameterType == mutableType
                         )
-                        .ToArray()
-                    ?? new MethodInfo[0];
+                        .ToArray() ?? new MethodInfo[0];
                 var conventionMethods =
                     extensionTypeTuple
                         .ConventionExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
@@ -1803,8 +1801,7 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                             !IsObsolete(m)
                             && m.GetParameters().First().ParameterType == conventionType
                         )
-                        .ToArray()
-                    ?? new MethodInfo[0];
+                        .ToArray() ?? new MethodInfo[0];
                 var conventionBuilderMethods =
                     extensionTypeTuple
                         .ConventionBuilderExtensions?.GetMethods(
@@ -1814,16 +1811,14 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                             !IsObsolete(m)
                             && m.GetParameters().First().ParameterType == conventionBuilderType
                         )
-                        .ToArray()
-                    ?? new MethodInfo[0];
+                        .ToArray() ?? new MethodInfo[0];
                 var runtimeMethods =
                     extensionTypeTuple
                         .RuntimeExtensions?.GetMethods(BindingFlags.Public | BindingFlags.Static)
                         .Where(m =>
                             !IsObsolete(m) && m.GetParameters().First().ParameterType == runtimeType
                         )
-                        .ToArray()
-                    ?? new MethodInfo[0];
+                        .ToArray() ?? new MethodInfo[0];
                 MetadataMethods.Add(
                     (
                         readOnlyMethods,
@@ -1864,14 +1859,12 @@ public abstract class ApiConsistencyTestBase<TFixture> : IClassFixture<TFixture>
                     typeTuple
                         .Value.ConventionBuilder?.GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
-                        .ToArray()
-                    ?? new MethodInfo[0];
+                        .ToArray() ?? new MethodInfo[0];
                 var runtimeMethods =
                     typeTuple
                         .Value.Runtime?.GetMethods(PublicInstance)
                         .Where(m => !IsObsolete(m))
-                        .ToArray()
-                    ?? new MethodInfo[0];
+                        .ToArray() ?? new MethodInfo[0];
                 MetadataMethods.Add(
                     (
                         readOnlyMethods,

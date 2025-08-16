@@ -216,8 +216,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
         public static string ObjectToStringRef(ref object o)
         {
-            return o.ToString()
-                ?? string.Empty;
+            return o.ToString() ?? string.Empty;
         }
 
         public static double GetDateValueRef(ref object dtv)

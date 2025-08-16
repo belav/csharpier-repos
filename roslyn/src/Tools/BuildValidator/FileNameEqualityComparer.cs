@@ -18,8 +18,6 @@ namespace BuildValidator
 
         public bool Equals(FileInfo? x, FileInfo? y) => StringComparer.Equals(x?.Name, y?.Name);
 
-        public int GetHashCode(FileInfo? file) =>
-            file?.Name.GetHashCode()
-            ?? 0;
+        public int GetHashCode(FileInfo? file) => file?.Name.GetHashCode() ?? 0;
     }
 }

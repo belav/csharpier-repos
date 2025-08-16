@@ -1231,8 +1231,7 @@ public class ModelValidator : IModelValidator
 
                 var typeMapping = property.GetTypeMapping();
                 var actualProviderClrType = (
-                    typeMapping.Converter?.ProviderClrType
-                    ?? typeMapping.ClrType
+                    typeMapping.Converter?.ProviderClrType ?? typeMapping.ClrType
                 ).UnwrapNullableType();
 
                 if (providerComparer.Type.UnwrapNullableType() != actualProviderClrType)

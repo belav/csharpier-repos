@@ -55,9 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // When constructing the result for the Caas API, we expose the underlying symbols that
             // may have been hidden under error type, if the error type was immediate. We will
             // expose error types that were constructed, or type parameters of constructed types.
-            this.Type =
-                type.GetNonErrorGuess()
-                ?? type;
+            this.Type = type.GetNonErrorGuess() ?? type;
             this.ConvertedType = convertedType.GetNonErrorGuess() ?? convertedType;
             this.Nullability = nullability;
             this.ConvertedNullability = convertedNullability;

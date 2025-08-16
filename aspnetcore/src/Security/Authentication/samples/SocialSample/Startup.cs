@@ -557,12 +557,7 @@ public class Startup
             response.ContentType = "text/html";
             await response.WriteAsync("<html><body>");
             await response.WriteAsync(
-                "Hello "
-                    + (
-                        context.User.Identity.Name
-                        ?? "anonymous"
-                    )
-                    + "<br>"
+                "Hello " + (context.User.Identity.Name ?? "anonymous") + "<br>"
             );
             foreach (var claim in context.User.Claims)
             {

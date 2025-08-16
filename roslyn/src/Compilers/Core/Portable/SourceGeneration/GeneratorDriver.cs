@@ -670,7 +670,11 @@ namespace Microsoft.CodeAnalysis
         internal static string GetFilePathPrefixForGenerator(ISourceGenerator generator)
         {
             var type = generator.GetGeneratorType();
-            return Path.Combine(type.Assembly.GetName().Name ?? string.Empty, type.FullName!);
+            return Path.Combine(
+                type.Assembly.GetName().Name
+                    ?? string.Empty,
+                type.FullName!
+            );
         }
 
         private static ImmutableArray<IIncrementalGenerator> GetIncrementalGenerators(

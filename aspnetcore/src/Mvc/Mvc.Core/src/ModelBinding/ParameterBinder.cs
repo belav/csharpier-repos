@@ -125,9 +125,7 @@ public partial class ParameterBinder
         );
         modelBindingContext.Model = value;
 
-        var parameterModelName =
-            parameter.BindingInfo?.BinderModelName
-            ?? metadata.BinderModelName;
+        var parameterModelName = parameter.BindingInfo?.BinderModelName ?? metadata.BinderModelName;
         if (parameterModelName != null)
         {
             // The name was set explicitly, always use that as the prefix.

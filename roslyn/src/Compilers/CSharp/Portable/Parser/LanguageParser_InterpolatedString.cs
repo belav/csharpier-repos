@@ -76,8 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 result = result.WithDiagnosticsGreen(
                     MoveDiagnostics(
                         new[] { error },
-                        originalToken.GetLeadingTrivia()?.FullWidth
-                            ?? 0
+                        originalToken.GetLeadingTrivia()?.FullWidth ?? 0
                     )
                 );
             }

@@ -1042,8 +1042,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ErrorFacts.GetStaticClassParameterCode(
                         containingSymbol?.ContainingType?.IsInterfaceType() ?? false
                     ),
-                    syntax.Type?.Location
-                        ?? syntax.GetLocation(),
+                    syntax.Type?.Location ?? syntax.GetLocation(),
                     typeWithAnnotations.Type
                 );
             }

@@ -261,8 +261,7 @@ internal readonly struct CSharpAnalyzerOptionsProvider(
         ?? CSharpSyntaxFormattingOptions.Default;
 
     private AddImportPlacementOptions FallbackAddImportPlacementOptions =>
-        _fallbackOptions.CleanupOptions?.AddImportOptions
-        ?? AddImportPlacementOptions.Default;
+        _fallbackOptions.CleanupOptions?.AddImportOptions ?? AddImportPlacementOptions.Default;
 
     private CSharpCodeGenerationOptions FallbackCodeGenerationOptions =>
         (CSharpCodeGenerationOptions?)_fallbackOptions.GenerationOptions

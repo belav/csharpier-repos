@@ -603,8 +603,7 @@ namespace ILLink.RoslynAnalyzer.Tests
                 .Select(expected =>
                     expected
                         .MessageArguments?.Select(argument => argument?.ToString() ?? string.Empty)
-                        .ToImmutableArray()
-                    ?? ImmutableArray<string>.Empty
+                        .ToImmutableArray() ?? ImmutableArray<string>.Empty
                 )
                 .ToImmutableArray();
 

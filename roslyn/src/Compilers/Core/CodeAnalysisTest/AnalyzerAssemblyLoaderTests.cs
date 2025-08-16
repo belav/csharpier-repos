@@ -486,12 +486,7 @@ Delta: Gamma: Beta: Test B
                 .Select(x =>
                 {
                     var name = AssemblyName.GetAssemblyName(x);
-                    return (
-                        name.Name!,
-                        name.Version?.ToString()
-                            ?? "",
-                        x
-                    );
+                    return (name.Name!, name.Version?.ToString() ?? "", x);
                 })
                 .ToArray();
             VerifyAssemblies(loader, assemblies, copyCount, data);

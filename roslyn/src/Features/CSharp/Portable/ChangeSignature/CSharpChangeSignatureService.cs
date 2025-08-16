@@ -251,8 +251,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                 .ChildNodes()
                 .LastOrDefault(n => n is AttributeListSyntax);
             var start =
-                lastAttributes?.GetLastToken().GetNextToken().SpanStart
-                ?? matchingNode.SpanStart;
+                lastAttributes?.GetLastToken().GetNextToken().SpanStart ?? matchingNode.SpanStart;
 
             if (position < start)
             {

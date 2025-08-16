@@ -217,11 +217,9 @@ namespace RunTests
                     $"Command line {workItemInfo.DisplayName} completed in {span.TotalSeconds} seconds: {options.DotnetFilePath} {commandLineArguments}"
                 );
                 var standardOutput =
-                    string.Join(Environment.NewLine, xunitProcessResult.OutputLines)
-                    ?? "";
+                    string.Join(Environment.NewLine, xunitProcessResult.OutputLines) ?? "";
                 var errorOutput =
-                    string.Join(Environment.NewLine, xunitProcessResult.ErrorLines)
-                    ?? "";
+                    string.Join(Environment.NewLine, xunitProcessResult.ErrorLines) ?? "";
 
                 var testResultInfo = new TestResultInfo(
                     exitCode: xunitProcessResult.ExitCode,

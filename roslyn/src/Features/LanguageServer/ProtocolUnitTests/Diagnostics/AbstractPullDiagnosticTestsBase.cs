@@ -229,8 +229,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                         Uri = r.identifier.Uri,
                         Value = r.resultId,
                     })
-                    .ToArray()
-                ?? Array.Empty<PreviousResultId>();
+                    .ToArray() ?? Array.Empty<PreviousResultId>();
             return new WorkspaceDiagnosticParams
             {
                 PreviousResultId = previousResultsLsp,

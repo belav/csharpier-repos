@@ -1030,8 +1030,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                         type.ErrorInfo
                             ?? new CSDiagnosticInfo(
                                 ErrorCode.ERR_ErrorInReferencedAssembly,
-                                type.ContainingAssembly?.Identity.GetDisplayName()
-                                    ?? string.Empty
+                                type.ContainingAssembly?.Identity.GetDisplayName() ?? string.Empty
                             ),
                         true
                     );

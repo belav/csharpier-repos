@@ -42,8 +42,7 @@ internal partial class CSharpRecommendationService
                 AnonymousMethodExpressionSyntax anonymousMethod => anonymousMethod
                     .ParameterList
                     ?.Parameters
-                    .Count
-                    ?? -1,
+                    .Count ?? -1,
                 ParenthesizedLambdaExpressionSyntax parenthesizedLambda => parenthesizedLambda
                     .ParameterList
                     .Parameters

@@ -72,9 +72,7 @@ public abstract class BlazorTemplateTest : LoggedTest
                 string.Equals(auth, "IndividualB2C", StringComparison.OrdinalIgnoreCase)
                 || string.Equals(auth, "SingleOrg", StringComparison.OrdinalIgnoreCase)
                 || (!serverProject && auth is not null);
-            var noHttps =
-                args?.Contains(ArgConstants.NoHttps)
-                ?? false;
+            var noHttps = args?.Contains(ArgConstants.NoHttps) ?? false;
             var expectedLaunchProfileNames =
                 requiresHttps ? new[] { "https", "IIS Express" }
                 : noHttps ? new[] { "http", "IIS Express" }

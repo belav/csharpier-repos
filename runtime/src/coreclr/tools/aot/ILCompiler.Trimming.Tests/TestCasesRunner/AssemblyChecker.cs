@@ -1238,10 +1238,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     src,
                     nameof(KeptSecurityAttribute)
                 )
-                .Select(attr =>
-                    attr?.ToString()
-                    ?? "<null>"
-                )
+                .Select(attr => attr?.ToString() ?? "<null>")
                 .ToList();
 
             var linkedAttrs = FilterLinkedSecurityAttributes(linked).ToList();

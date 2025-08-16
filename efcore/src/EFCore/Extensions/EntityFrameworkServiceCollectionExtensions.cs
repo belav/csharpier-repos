@@ -410,8 +410,7 @@ public static class EntityFrameworkServiceCollectionExtensions
                 optionsAction(sp, ob);
 
                 var extension = (
-                    ob.Options.FindExtension<CoreOptionsExtension>()
-                    ?? new CoreOptionsExtension()
+                    ob.Options.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension()
                 ).WithMaxPoolSize(poolSize);
 
                 ((IDbContextOptionsBuilderInfrastructure)ob).AddOrUpdateExtension(extension);

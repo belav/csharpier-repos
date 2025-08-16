@@ -37,12 +37,7 @@ namespace System.Formats.Asn1
                 throw new ArgumentNullException(nameof(value));
             }
 
-            WriteEnumeratedValue(
-                tag?.AsPrimitive()
-                    ?? Asn1Tag.Enumerated,
-                value.GetType(),
-                value
-            );
+            WriteEnumeratedValue(tag?.AsPrimitive() ?? Asn1Tag.Enumerated, value.GetType(), value);
         }
 
         /// <summary>
@@ -72,12 +67,7 @@ namespace System.Formats.Asn1
         public void WriteEnumeratedValue<TEnum>(TEnum value, Asn1Tag? tag = null)
             where TEnum : Enum
         {
-            WriteEnumeratedValue(
-                tag?.AsPrimitive()
-                    ?? Asn1Tag.Enumerated,
-                typeof(TEnum),
-                value
-            );
+            WriteEnumeratedValue(tag?.AsPrimitive() ?? Asn1Tag.Enumerated, typeof(TEnum), value);
         }
 
         // T-REC-X.690-201508 sec 8.4

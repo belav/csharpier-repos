@@ -888,8 +888,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 single.Kind,
                 left,
                 right,
-                single.MethodSymbolOpt?.ReturnType
-                    ?? boolType,
+                single.MethodSymbolOpt?.ReturnType ?? boolType,
                 single.MethodSymbolOpt,
                 single.ConstrainedToTypeOpt
             );

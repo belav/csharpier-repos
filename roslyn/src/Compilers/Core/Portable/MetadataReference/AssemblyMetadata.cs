@@ -172,11 +172,7 @@ namespace Microsoft.CodeAnalysis
                 manifestModule,
                 moduleName =>
                     ModuleMetadata.CreateFromFile(
-                        Path.Combine(
-                            Path.GetDirectoryName(path)
-                                ?? "",
-                            moduleName
-                        )
+                        Path.Combine(Path.GetDirectoryName(path) ?? "", moduleName)
                     )
             );
         }

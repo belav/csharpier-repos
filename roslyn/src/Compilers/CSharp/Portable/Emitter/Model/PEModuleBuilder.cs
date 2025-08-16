@@ -1244,15 +1244,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             {
                 ErrorTypeSymbol errorType = (ErrorTypeSymbol)namedTypeSymbol.OriginalDefinition;
                 DiagnosticInfo diagInfo =
-                    errorType.GetUseSiteInfo().DiagnosticInfo
-                    ?? errorType.ErrorInfo;
+                    errorType.GetUseSiteInfo().DiagnosticInfo ?? errorType.ErrorInfo;
 
                 if (diagInfo == null && namedTypeSymbol.Kind == SymbolKind.ErrorType)
                 {
                     errorType = (ErrorTypeSymbol)namedTypeSymbol;
-                    diagInfo =
-                        errorType.GetUseSiteInfo().DiagnosticInfo
-                        ?? errorType.ErrorInfo;
+                    diagInfo = errorType.GetUseSiteInfo().DiagnosticInfo ?? errorType.ErrorInfo;
                 }
 
                 // Try to decrease noise by not complaining about the same type over and over again.

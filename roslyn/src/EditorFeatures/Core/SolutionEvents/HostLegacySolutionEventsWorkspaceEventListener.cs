@@ -68,8 +68,7 @@ namespace Microsoft.CodeAnalysis.LegacySolutionEvents
             if (projectId != null)
             {
                 var project =
-                    e.OldSolution.GetProject(projectId)
-                    ?? e.NewSolution.GetProject(projectId);
+                    e.OldSolution.GetProject(projectId) ?? e.NewSolution.GetProject(projectId);
                 if (project != null && !RemoteSupportedLanguages.IsSupported(project.Language))
                     return;
             }

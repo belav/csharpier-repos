@@ -250,8 +250,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 case LexerMode.Syntax:
                 case LexerMode.DebuggerSyntax:
-                    return this.QuickScanSyntaxToken()
-                        ?? this.LexSyntaxToken();
+                    return this.QuickScanSyntaxToken() ?? this.LexSyntaxToken();
                 case LexerMode.Directive:
                     return this.LexDirectiveToken();
             }

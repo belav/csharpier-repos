@@ -2384,16 +2384,12 @@ namespace System.ServiceModel.Description
             if (item is WsdlNS.PortType)
             {
                 localName = "portType";
-                wsdlNs =
-                    ((WsdlNS.PortType)item).ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                wsdlNs = ((WsdlNS.PortType)item).ServiceDescription.TargetNamespace ?? String.Empty;
             }
             else if (item is WsdlNS.Binding)
             {
                 localName = "binding";
-                wsdlNs =
-                    ((WsdlNS.Binding)item).ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                wsdlNs = ((WsdlNS.Binding)item).ServiceDescription.TargetNamespace ?? String.Empty;
             }
             else if (item is WsdlNS.ServiceDescription)
             {
@@ -2403,25 +2399,19 @@ namespace System.ServiceModel.Description
             else if (item is WsdlNS.Service)
             {
                 localName = "service";
-                wsdlNs =
-                    ((WsdlNS.Service)item).ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                wsdlNs = ((WsdlNS.Service)item).ServiceDescription.TargetNamespace ?? String.Empty;
             }
             else if (item is WsdlNS.Message)
             {
                 localName = "message";
-                wsdlNs =
-                    ((WsdlNS.Message)item).ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                wsdlNs = ((WsdlNS.Message)item).ServiceDescription.TargetNamespace ?? String.Empty;
             }
             else if (item is WsdlNS.Port)
             {
                 WsdlNS.Service wsdlService = ((WsdlNS.Port)item).Service;
                 localName = "service";
                 nameValue = wsdlService.Name;
-                wsdlNs =
-                    wsdlService.ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                wsdlNs = wsdlService.ServiceDescription.TargetNamespace ?? String.Empty;
                 rest = string.Format(
                     CultureInfo.InvariantCulture,
                     xPathNamedItemSubFormatString,
@@ -2434,9 +2424,7 @@ namespace System.ServiceModel.Description
                 WsdlNS.PortType wsdlPortType = ((WsdlNS.Operation)item).PortType;
                 localName = "portType";
                 nameValue = wsdlPortType.Name;
-                wsdlNs =
-                    wsdlPortType.ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                wsdlNs = wsdlPortType.ServiceDescription.TargetNamespace ?? String.Empty;
                 rest = string.Format(
                     CultureInfo.InvariantCulture,
                     xPathNamedItemSubFormatString,
@@ -2450,8 +2438,7 @@ namespace System.ServiceModel.Description
                 localName = "binding";
                 nameValue = wsdlOperationBinding.Binding.Name;
                 wsdlNs =
-                    wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                    wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace ?? String.Empty;
                 rest = string.Format(
                     CultureInfo.InvariantCulture,
                     xPathNamedItemSubFormatString,
@@ -2466,8 +2453,7 @@ namespace System.ServiceModel.Description
                     (WsdlNS.MessageBinding)item
                 ).OperationBinding;
                 wsdlNs =
-                    wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace
-                    ?? String.Empty;
+                    wsdlOperationBinding.Binding.ServiceDescription.TargetNamespace ?? String.Empty;
                 nameValue = wsdlOperationBinding.Binding.Name;
                 string messageName = item.Name;
 

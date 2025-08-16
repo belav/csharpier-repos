@@ -12,8 +12,7 @@ namespace System.Configuration
 
         internal static string GetDirectoryOrRootName(string path)
         {
-            return Path.GetDirectoryName(path)
-                ?? Path.GetPathRoot(path);
+            return Path.GetDirectoryName(path) ?? Path.GetPathRoot(path);
         }
 
         // Determine if subdir is equal to or a subdirectory of dir.

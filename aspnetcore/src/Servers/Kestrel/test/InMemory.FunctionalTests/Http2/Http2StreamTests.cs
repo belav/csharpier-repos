@@ -1612,8 +1612,7 @@ public class Http2StreamTests : Http2TestBase
             m =>
                 m.Exception?.Message.Contains(
                     "Response Content-Length mismatch: too many bytes written (12 of 11)."
-                )
-                ?? false
+                ) ?? false
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -1701,9 +1700,7 @@ public class Http2StreamTests : Http2TestBase
 
         Assert.Contains(
             LogMessages,
-            m =>
-                m.Exception?.Message.Contains(CoreStrings.FormatTooFewBytesWritten(0, 11))
-                ?? false
+            m => m.Exception?.Message.Contains(CoreStrings.FormatTooFewBytesWritten(0, 11)) ?? false
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
@@ -3291,10 +3288,7 @@ public class Http2StreamTests : Http2TestBase
         Assert.Contains(
             LogMessages,
             m =>
-                (
-                    m.Exception?.Message.Contains("App Faulted")
-                    ?? false
-                )
+                (m.Exception?.Message.Contains("App Faulted") ?? false)
                 && m.LogLevel == LogLevel.Error
         );
 

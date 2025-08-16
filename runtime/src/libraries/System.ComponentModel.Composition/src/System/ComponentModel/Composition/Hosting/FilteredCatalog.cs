@@ -42,11 +42,7 @@ namespace System.ComponentModel.Composition.Hosting
             Requires.NotNull(filter, nameof(filter));
 
             _innerCatalog = catalog;
-            _filter = (p) =>
-                filter.Invoke(
-                    p.GetGenericPartDefinition()
-                        ?? p
-                );
+            _filter = (p) => filter.Invoke(p.GetGenericPartDefinition() ?? p);
             _complement = complement;
 
             if (_innerCatalog is INotifyComposablePartCatalogChanged notifyCatalog)

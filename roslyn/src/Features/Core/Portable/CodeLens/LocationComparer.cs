@@ -38,8 +38,7 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 );
             }
 
-            return obj?.GetHashCode()
-                ?? 0;
+            return obj?.GetHashCode() ?? 0;
         }
     }
 }

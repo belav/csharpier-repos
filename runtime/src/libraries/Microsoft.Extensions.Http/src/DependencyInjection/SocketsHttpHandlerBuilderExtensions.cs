@@ -43,8 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
                                 nameof(b.PrimaryHandler),
                                 typeof(SocketsHttpHandler).FullName,
                                 Environment.NewLine,
-                                b.PrimaryHandler?.ToString()
-                                    ?? "(null)"
+                                b.PrimaryHandler?.ToString() ?? "(null)"
                             );
                             throw new InvalidOperationException(message);
                         }

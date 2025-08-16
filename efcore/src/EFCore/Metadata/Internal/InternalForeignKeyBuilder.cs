@@ -1856,8 +1856,7 @@ public class InternalForeignKeyBuilder
                     (
                         Metadata
                             .GetPrincipalKeyConfigurationSource()
-                            ?.Overrides(configurationSource)
-                        ?? false
+                            ?.Overrides(configurationSource) ?? false
                     )
                         ? principalEntityType.Builder.GetActualProperties(
                             Metadata.PrincipalKey.Properties,
@@ -2636,8 +2635,7 @@ public class InternalForeignKeyBuilder
                 navigationToPrincipal =
                     Metadata
                         .GetPrincipalToDependentConfigurationSource()
-                        ?.Overrides(configurationSource)
-                    ?? false
+                        ?.Overrides(configurationSource) ?? false
                         ? Metadata.PrincipalToDependent.CreateMemberIdentity()
                         : navigationToPrincipal;
             }
@@ -2646,8 +2644,7 @@ public class InternalForeignKeyBuilder
                 navigationToPrincipal =
                     Metadata
                         .GetDependentToPrincipalConfigurationSource()
-                        ?.Overrides(configurationSource)
-                    ?? false
+                        ?.Overrides(configurationSource) ?? false
                         ? Metadata.DependentToPrincipal.CreateMemberIdentity()
                         : navigationToPrincipal;
             }
@@ -2660,8 +2657,7 @@ public class InternalForeignKeyBuilder
                 navigationToDependent =
                     Metadata
                         .GetDependentToPrincipalConfigurationSource()
-                        ?.Overrides(configurationSource)
-                    ?? false
+                        ?.Overrides(configurationSource) ?? false
                         ? Metadata.DependentToPrincipal.CreateMemberIdentity()
                         : navigationToDependent;
             }
@@ -2670,36 +2666,28 @@ public class InternalForeignKeyBuilder
                 navigationToDependent =
                     Metadata
                         .GetPrincipalToDependentConfigurationSource()
-                        ?.Overrides(configurationSource)
-                    ?? false
+                        ?.Overrides(configurationSource) ?? false
                         ? Metadata.PrincipalToDependent.CreateMemberIdentity()
                         : navigationToDependent;
             }
         }
 
         dependentProperties ??= (
-            (
-                Metadata.GetPropertiesConfigurationSource()?.Overrides(configurationSource)
-                ?? false
-            ) && !oldRelationshipInverted
+            (Metadata.GetPropertiesConfigurationSource()?.Overrides(configurationSource) ?? false)
+            && !oldRelationshipInverted
                 ? Metadata.Properties
                 : null
         );
 
         principalProperties ??= (
-            (
-                Metadata.GetPrincipalKeyConfigurationSource()?.Overrides(configurationSource)
-                ?? false
-            ) && !oldRelationshipInverted
+            (Metadata.GetPrincipalKeyConfigurationSource()?.Overrides(configurationSource) ?? false)
+            && !oldRelationshipInverted
                 ? Metadata.PrincipalKey.Properties
                 : null
         );
 
         isUnique ??= (
-            (
-                Metadata.GetIsUniqueConfigurationSource()?.Overrides(configurationSource)
-                ?? false
-            )
+            (Metadata.GetIsUniqueConfigurationSource()?.Overrides(configurationSource) ?? false)
                 ? Metadata.IsUnique
                 : null
         );
@@ -2717,8 +2705,7 @@ public class InternalForeignKeyBuilder
                 (
                     Metadata
                         .GetIsRequiredDependentConfigurationSource()
-                        ?.Overrides(ConfigurationSource.Explicit)
-                    ?? false
+                        ?.Overrides(ConfigurationSource.Explicit) ?? false
                 )
                     ? Metadata.IsRequiredDependent
                     : null
@@ -2729,8 +2716,7 @@ public class InternalForeignKeyBuilder
                 (
                     Metadata
                         .GetIsRequiredDependentConfigurationSource()
-                        ?.Overrides(configurationSource)
-                    ?? false
+                        ?.Overrides(configurationSource) ?? false
                 )
                     ? Metadata.IsRequiredDependent
                     : null
@@ -2739,8 +2725,7 @@ public class InternalForeignKeyBuilder
                 (
                     Metadata
                         .GetIsRequiredConfigurationSource()
-                        ?.Overrides(ConfigurationSource.Explicit)
-                    ?? false
+                        ?.Overrides(ConfigurationSource.Explicit) ?? false
                 )
                     ? Metadata.IsRequired
                     : null

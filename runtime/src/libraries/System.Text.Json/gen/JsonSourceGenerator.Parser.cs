@@ -1849,9 +1849,7 @@ namespace System.Text.Json.SourceGeneration
                 }
 
                 ParameterGenerationSpec[] constructorParameters;
-                int paramCount =
-                    constructor?.Parameters.Length
-                    ?? 0;
+                int paramCount = constructor?.Parameters.Length ?? 0;
                 constructorSetsRequiredMembers =
                     constructor?.ContainsAttribute(_knownSymbols.SetsRequiredMembersAttributeType)
                     == true;

@@ -135,9 +135,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 select (l1.OneToOne_Optional_FK1.OneToMany_Optional2 ?? new List<Level3>()).Take(
                     50
                 ),
-            elementSorter: e =>
-                e?.Count()
-                ?? 0,
+            elementSorter: e => e?.Count() ?? 0,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
 

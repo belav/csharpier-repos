@@ -23,9 +23,7 @@ internal sealed class RunConfiguration
         if (string.IsNullOrEmpty(runtimeConfigPath) || !File.Exists(runtimeConfigPath))
             throw new Exception($"Cannot find runtime config at {runtimeConfigPath}");
 
-        AppPath =
-            Path.GetDirectoryName(runtimeConfigPath)
-            ?? ".";
+        AppPath = Path.GetDirectoryName(runtimeConfigPath) ?? ".";
 
         RuntimeConfig? rconfig = JsonSerializer.Deserialize<RuntimeConfig>(
             File.ReadAllText(runtimeConfigPath),

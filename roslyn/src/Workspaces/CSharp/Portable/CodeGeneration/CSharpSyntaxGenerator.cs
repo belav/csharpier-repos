@@ -1388,8 +1388,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static bool IsReturnAttribute(AttributeListSyntax list) =>
-            list.Target?.Identifier.IsKind(SyntaxKind.ReturnKeyword)
-            ?? false;
+            list.Target?.Identifier.IsKind(SyntaxKind.ReturnKeyword) ?? false;
 
         public override SyntaxNode InsertAttributes(
             SyntaxNode declaration,
@@ -3351,11 +3350,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             switch (declaration.Kind())
             {
                 case SyntaxKind.MethodDeclaration:
-                    return ((MethodDeclarationSyntax)declaration).Body?.Statements
-                        ?? s_EmptyList;
+                    return ((MethodDeclarationSyntax)declaration).Body?.Statements ?? s_EmptyList;
                 case SyntaxKind.OperatorDeclaration:
-                    return ((OperatorDeclarationSyntax)declaration).Body?.Statements
-                        ?? s_EmptyList;
+                    return ((OperatorDeclarationSyntax)declaration).Body?.Statements ?? s_EmptyList;
                 case SyntaxKind.ConversionOperatorDeclaration:
                     return ((ConversionOperatorDeclarationSyntax)declaration).Body?.Statements
                         ?? s_EmptyList;
@@ -3384,8 +3381,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 case SyntaxKind.SetAccessorDeclaration:
                 case SyntaxKind.AddAccessorDeclaration:
                 case SyntaxKind.RemoveAccessorDeclaration:
-                    return ((AccessorDeclarationSyntax)declaration).Body?.Statements
-                        ?? s_EmptyList;
+                    return ((AccessorDeclarationSyntax)declaration).Body?.Statements ?? s_EmptyList;
                 default:
                     return s_EmptyList;
             }
@@ -3596,15 +3592,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public override IReadOnlyList<SyntaxNode> GetGetAccessorStatements(SyntaxNode declaration)
         {
             var accessor = GetAccessor(declaration, SyntaxKind.GetAccessorDeclaration);
-            return accessor?.Body?.Statements
-                ?? s_EmptyList;
+            return accessor?.Body?.Statements ?? s_EmptyList;
         }
 
         public override IReadOnlyList<SyntaxNode> GetSetAccessorStatements(SyntaxNode declaration)
         {
             var accessor = GetAccessor(declaration, SyntaxKind.SetAccessorDeclaration);
-            return accessor?.Body?.Statements
-                ?? s_EmptyList;
+            return accessor?.Body?.Statements ?? s_EmptyList;
         }
 
         public override SyntaxNode WithGetAccessorStatements(
@@ -4812,11 +4806,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             );
 
         public override SyntaxNode TupleElementExpression(SyntaxNode type, string? name = null) =>
-            SyntaxFactory.TupleElement(
-                (TypeSyntax)type,
-                name?.ToIdentifierToken()
-                    ?? default
-            );
+            SyntaxFactory.TupleElement((TypeSyntax)type, name?.ToIdentifierToken() ?? default);
 
         public override SyntaxNode Argument(string? name, RefKind refKind, SyntaxNode expression)
         {

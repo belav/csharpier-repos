@@ -73,8 +73,7 @@ internal partial class LongPollingTransport
                 PollResponseReceived(
                     logger,
                     (int)response.StatusCode,
-                    response.Content.Headers.ContentLength
-                        ?? -1
+                    response.Content.Headers.ContentLength ?? -1
                 );
             }
         }

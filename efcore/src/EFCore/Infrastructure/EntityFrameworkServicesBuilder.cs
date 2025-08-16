@@ -408,8 +408,7 @@ public class EntityFrameworkServicesBuilder
         TryAdd(p =>
             p.GetService<IDbContextOptions>()
                 ?.FindExtension<CoreOptionsExtension>()
-                ?.DbContextLogger
-            ?? new NullDbContextLogger()
+                ?.DbContextLogger ?? new NullDbContextLogger()
         );
 
         // This has to be lazy to avoid creating instances that are not disposed

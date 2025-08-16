@@ -5,9 +5,7 @@ public static class C
     static int Main()
     {
         int[] a = null;
-        var r =
-            a?.EM().EM().EM()
-            ?? "N";
+        var r = a?.EM().EM().EM() ?? "N";
         if (r != "N")
             return 1;
 

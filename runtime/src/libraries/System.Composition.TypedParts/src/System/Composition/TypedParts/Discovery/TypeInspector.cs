@@ -143,9 +143,7 @@ namespace System.Composition.TypedParts.Discovery
                 var ema = attribute as ExportMetadataAttribute;
                 if (ema != null)
                 {
-                    var valueType =
-                        ema.Value?.GetType()
-                        ?? typeof(object);
+                    var valueType = ema.Value?.GetType() ?? typeof(object);
                     AddMetadata(metadata, ema.Name, valueType, ema.Value);
                 }
                 else

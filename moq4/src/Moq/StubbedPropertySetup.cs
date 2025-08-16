@@ -201,15 +201,7 @@ namespace Moq
             public override int GetHashCode()
             {
                 return unchecked(
-                    (
-                        this.getter?.GetHashCode()
-                        ?? 0
-                    )
-                    + 103
-                        * (
-                            this.setter?.GetHashCode()
-                            ?? 0
-                        )
+                    (this.getter?.GetHashCode() ?? 0) + 103 * (this.setter?.GetHashCode() ?? 0)
                 );
             }
 

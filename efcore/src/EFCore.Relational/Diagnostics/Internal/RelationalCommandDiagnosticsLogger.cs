@@ -1879,10 +1879,8 @@ public class RelationalCommandDiagnosticsLogger
         var d = (EventDefinition<string, string>)definition;
         var p = (DataReaderClosingEventData)payload;
         return d.GenerateMessage(
-            p.Command.Connection?.Database
-                ?? "<Unknown>",
-            p.Command.Connection?.DataSource
-                ?? "<Unknown>"
+            p.Command.Connection?.Database ?? "<Unknown>",
+            p.Command.Connection?.DataSource ?? "<Unknown>"
         );
     }
 
@@ -1963,10 +1961,8 @@ public class RelationalCommandDiagnosticsLogger
         var d = (EventDefinition<string, string, int>)definition;
         var p = (DataReaderDisposingEventData)payload;
         return d.GenerateMessage(
-            p.Command.Connection?.Database
-                ?? "<Unknown>",
-            p.Command.Connection?.DataSource
-                ?? "<Unknown>",
+            p.Command.Connection?.Database ?? "<Unknown>",
+            p.Command.Connection?.DataSource ?? "<Unknown>",
             (int)p.Duration.TotalMilliseconds
         );
     }

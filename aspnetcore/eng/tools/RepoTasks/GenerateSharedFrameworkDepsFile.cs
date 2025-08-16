@@ -64,9 +64,7 @@ public class GenerateSharedFrameworkDepsFile : Microsoft.Build.Utilities.Task
         {
             var filePath = reference.ItemSpec;
             var fileName = Path.GetFileName(filePath);
-            var fileVersion =
-                FileUtilities.GetFileVersion(filePath)?.ToString()
-                ?? string.Empty;
+            var fileVersion = FileUtilities.GetFileVersion(filePath)?.ToString() ?? string.Empty;
             var assemblyVersion = FileUtilities.GetAssemblyName(filePath)?.Version;
             if (assemblyVersion == null)
             {

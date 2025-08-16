@@ -3448,9 +3448,7 @@ public sealed partial class SelectExpression : TableExpressionBase
             innerColumn1 = (SqlExpression)aliasUniquifier.Visit(innerColumn1);
 
             var alias = GenerateUniqueColumnAlias(
-                projectionMember.Last?.Name
-                    ?? (innerColumn1 as ColumnExpression)?.Name
-                    ?? "c"
+                projectionMember.Last?.Name ?? (innerColumn1 as ColumnExpression)?.Name ?? "c"
             );
 
             var innerProjection1 = new ProjectionExpression(innerColumn1, alias);

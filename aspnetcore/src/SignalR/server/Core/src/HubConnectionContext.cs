@@ -148,9 +148,7 @@ public partial class HubConnectionContext
         {
             if (_user is null)
             {
-                _user =
-                    Features.Get<IConnectionUserFeature>()?.User
-                    ?? new ClaimsPrincipal();
+                _user = Features.Get<IConnectionUserFeature>()?.User ?? new ClaimsPrincipal();
             }
             return _user;
         }

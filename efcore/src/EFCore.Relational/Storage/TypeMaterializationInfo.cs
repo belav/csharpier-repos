@@ -27,9 +27,7 @@ public class TypeMaterializationInfo
         bool? nullable = null
     )
     {
-        ProviderClrType =
-            mapping.Converter?.ProviderClrType
-            ?? modelClrType;
+        ProviderClrType = mapping.Converter?.ProviderClrType ?? modelClrType;
         ModelClrType = modelClrType;
         Mapping = mapping;
         Property = property;

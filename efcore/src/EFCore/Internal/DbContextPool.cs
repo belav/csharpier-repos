@@ -40,9 +40,7 @@ public class DbContextPool<TContext> : IDbContextPool<TContext>, IDisposable, IA
         IServiceProvider? serviceProvider = default
     )
     {
-        _maxSize =
-            options.FindExtension<CoreOptionsExtension>()?.MaxPoolSize
-            ?? DefaultPoolSize;
+        _maxSize = options.FindExtension<CoreOptionsExtension>()?.MaxPoolSize ?? DefaultPoolSize;
 
         if (_maxSize <= 0)
         {
