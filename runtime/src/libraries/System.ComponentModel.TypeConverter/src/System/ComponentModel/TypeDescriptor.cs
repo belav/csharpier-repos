@@ -3568,7 +3568,9 @@ namespace System.ComponentModel
                                 "GetExtendedTypeDescriptor"
                             )
                         );
-                    string? name = desc.GetClassName() ?? _instance.GetType().FullName;
+                    string? name =
+                        desc.GetClassName()
+                        ?? _instance.GetType().FullName;
                     return name;
                 }
 
@@ -3922,7 +3924,9 @@ namespace System.ComponentModel
                                 "GetExtendedTypeDescriptor"
                             )
                         );
-                    object owner = desc.GetPropertyOwner(pd) ?? _instance;
+                    object owner =
+                        desc.GetPropertyOwner(pd)
+                        ?? _instance;
                     return owner;
                 }
             }
@@ -4017,7 +4021,9 @@ namespace System.ComponentModel
                                 "GetTypeDescriptor"
                             )
                         );
-                    name = desc.GetClassName() ?? _objectType.FullName;
+                    name =
+                        desc.GetClassName()
+                        ?? _objectType.FullName;
                 }
 
                 return name;
@@ -4383,7 +4389,9 @@ namespace System.ComponentModel
                                 "GetTypeDescriptor"
                             )
                         );
-                    owner = desc.GetPropertyOwner(pd) ?? _instance;
+                    owner =
+                        desc.GetPropertyOwner(pd)
+                        ?? _instance;
                 }
 
                 return owner;

@@ -61,7 +61,8 @@ namespace System.Security.Cryptography
                     throw new PlatformNotSupportedException(
                         SR.Format(
                             SR.Cryptography_CurveNotSupported,
-                            curve.Oid.Value ?? curve.Oid.FriendlyName
+                            curve.Oid.Value
+                                ?? curve.Oid.FriendlyName
                         )
                     );
             }
@@ -216,7 +217,8 @@ namespace System.Security.Cryptography
                     throw new PlatformNotSupportedException(
                         SR.Format(
                             SR.Cryptography_CurveNotSupported,
-                            parameters.Curve.Oid.Value ?? parameters.Curve.Oid.FriendlyName
+                            parameters.Curve.Oid.Value
+                                ?? parameters.Curve.Oid.FriendlyName
                         )
                     );
             }

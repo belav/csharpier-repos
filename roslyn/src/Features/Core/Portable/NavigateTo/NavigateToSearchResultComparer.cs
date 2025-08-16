@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
         public int GetHashCode(INavigateToSearchResult? obj) =>
             Hash.Combine(
                 obj?.NavigableItem.Document.FilePath,
-                obj?.NavigableItem.SourceSpan.GetHashCode() ?? 0
+                obj?.NavigableItem.SourceSpan.GetHashCode()
+                    ?? 0
             );
     }
 }

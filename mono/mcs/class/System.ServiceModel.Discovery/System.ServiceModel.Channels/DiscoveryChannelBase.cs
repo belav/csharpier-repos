@@ -56,7 +56,8 @@ namespace System.ServiceModel.Channels
                     // FIXME: find scheme-matching ListenUri
                     return factory.InnerFactory.CreateChannel(
                         edm.Address,
-                        edm.ListenUris.FirstOrDefault(u => true) ?? edm.Address.Uri
+                        edm.ListenUris.FirstOrDefault(u => true)
+                            ?? edm.Address.Uri
                     );
                 }
                 catch (Exception) { }

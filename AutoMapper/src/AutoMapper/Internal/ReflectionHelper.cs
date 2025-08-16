@@ -10,7 +10,8 @@ public static class ReflectionHelper
         type.IsArray ? type.GetElementType() : GetEnumerableElementType(type);
 
     public static Type GetEnumerableElementType(Type type) =>
-        type.GetIEnumerableType()?.GenericTypeArguments[0] ?? typeof(object);
+        type.GetIEnumerableType()?.GenericTypeArguments[0]
+        ?? typeof(object);
 
     public static TypeMap[] GetIncludedTypeMaps(
         this IGlobalConfiguration configuration,

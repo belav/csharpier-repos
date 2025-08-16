@@ -400,7 +400,9 @@ public static class ScaffoldingModelExtensions
         var annotationsRoot = GenerateAnnotations(model, annotations, annotationCodeGenerator);
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         return root;
@@ -449,7 +451,9 @@ public static class ScaffoldingModelExtensions
                 IsHandledByDataAnnotations = true,
             };
 
-            root = root?.Chain(hasNoKey) ?? hasNoKey;
+            root =
+                root?.Chain(hasNoKey)
+                ?? hasNoKey;
         }
 
         var tableName = entityType.GetTableName();
@@ -525,7 +529,9 @@ public static class ScaffoldingModelExtensions
                 IsHandledByDataAnnotations = toTableHandledByDataAnnotations,
             };
 
-            root = root?.Chain(toTable) ?? toTable;
+            root =
+                root?.Chain(toTable)
+                ?? toTable;
         }
 
         var viewName = entityType.GetViewName();
@@ -546,13 +552,17 @@ public static class ScaffoldingModelExtensions
                 toView.Arguments.Add(viewSchema);
             }
 
-            root = root?.Chain(toView) ?? toView;
+            root =
+                root?.Chain(toView)
+                ?? toView;
         }
 
         var annotationsRoot = GenerateAnnotations(entityType, annotations, annotationCodeGenerator);
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         annotationsRoot = GenerateAnnotations(
@@ -563,7 +573,9 @@ public static class ScaffoldingModelExtensions
         );
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         return root;
@@ -590,7 +602,9 @@ public static class ScaffoldingModelExtensions
         var annotationsRoot = GenerateAnnotations(key, annotations, annotationCodeGenerator);
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         return root;
@@ -620,7 +634,9 @@ public static class ScaffoldingModelExtensions
         {
             var isUnique = new FluentApiCodeFragment(nameof(IndexBuilder.IsUnique));
 
-            root = root?.Chain(isUnique) ?? isUnique;
+            root =
+                root?.Chain(isUnique)
+                ?? isUnique;
         }
 
         if (index.IsDescending is not null)
@@ -630,13 +646,17 @@ public static class ScaffoldingModelExtensions
                 Arguments = index.IsDescending.Cast<object?>().ToList(),
             };
 
-            root = root?.Chain(isDescending) ?? isDescending;
+            root =
+                root?.Chain(isDescending)
+                ?? isDescending;
         }
 
         var annotationsRoot = GenerateAnnotations(index, annotations, annotationCodeGenerator);
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         return root;
@@ -684,7 +704,9 @@ public static class ScaffoldingModelExtensions
                 IsHandledByDataAnnotations = true,
             };
 
-            root = root?.Chain(isRequired) ?? isRequired;
+            root =
+                root?.Chain(isRequired)
+                ?? isRequired;
         }
 
         var maxLength = property.GetMaxLength();
@@ -696,7 +718,9 @@ public static class ScaffoldingModelExtensions
                 IsHandledByDataAnnotations = true,
             };
 
-            root = root?.Chain(hasMaxLength) ?? hasMaxLength;
+            root =
+                root?.Chain(hasMaxLength)
+                ?? hasMaxLength;
         }
 
         var precision = property.GetPrecision();
@@ -709,7 +733,9 @@ public static class ScaffoldingModelExtensions
                 IsHandledByDataAnnotations = true,
             };
 
-            root = root?.Chain(hasPrecision) ?? hasPrecision;
+            root =
+                root?.Chain(hasPrecision)
+                ?? hasPrecision;
         }
         else if (precision != null)
         {
@@ -719,7 +745,9 @@ public static class ScaffoldingModelExtensions
                 IsHandledByDataAnnotations = true,
             };
 
-            root = root?.Chain(hasPrecision) ?? hasPrecision;
+            root =
+                root?.Chain(hasPrecision)
+                ?? hasPrecision;
         }
 
         if (property.IsUnicode() != null)
@@ -734,7 +762,9 @@ public static class ScaffoldingModelExtensions
                 isUnicode.Arguments.Add(false);
             }
 
-            root = root?.Chain(isUnicode) ?? isUnicode;
+            root =
+                root?.Chain(isUnicode)
+                ?? isUnicode;
         }
 
         var valueGenerated = property.ValueGenerated;
@@ -762,7 +792,9 @@ public static class ScaffoldingModelExtensions
                 }
             );
 
-            root = root?.Chain(valueGeneratedCall) ?? valueGeneratedCall;
+            root =
+                root?.Chain(valueGeneratedCall)
+                ?? valueGeneratedCall;
         }
 
         if (property.IsConcurrencyToken)
@@ -771,13 +803,17 @@ public static class ScaffoldingModelExtensions
                 nameof(PropertyBuilder.IsConcurrencyToken)
             );
 
-            root = root?.Chain(isConcurrencyToken) ?? isConcurrencyToken;
+            root =
+                root?.Chain(isConcurrencyToken)
+                ?? isConcurrencyToken;
         }
 
         var annotationsRoot = GenerateAnnotations(property, annotations, annotationCodeGenerator);
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         annotationsRoot = GenerateAnnotations(
@@ -788,7 +824,9 @@ public static class ScaffoldingModelExtensions
         );
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         return root;
@@ -842,7 +880,9 @@ public static class ScaffoldingModelExtensions
                 );
             }
 
-            root = root?.Chain(hasPrincipalKey) ?? hasPrincipalKey;
+            root =
+                root?.Chain(hasPrincipalKey)
+                ?? hasPrincipalKey;
         }
 
         var hasForeignKey = new FluentApiCodeFragment(
@@ -880,7 +920,9 @@ public static class ScaffoldingModelExtensions
             );
         }
 
-        root = root?.Chain(hasForeignKey) ?? hasForeignKey;
+        root =
+            root?.Chain(hasForeignKey)
+            ?? hasForeignKey;
 
         var defaultOnDeleteAction = foreignKey.IsRequired
             ? DeleteBehavior.Cascade
@@ -892,13 +934,17 @@ public static class ScaffoldingModelExtensions
                 Arguments = { foreignKey.DeleteBehavior },
             };
 
-            root = root?.Chain(onDelete) ?? onDelete;
+            root =
+                root?.Chain(onDelete)
+                ?? onDelete;
         }
 
         var annotationsRoot = GenerateAnnotations(foreignKey, annotations, annotationCodeGenerator);
         if (annotationsRoot is not null)
         {
-            root = root?.Chain(annotationsRoot) ?? annotationsRoot;
+            root =
+                root?.Chain(annotationsRoot)
+                ?? annotationsRoot;
         }
 
         return root;
@@ -924,7 +970,9 @@ public static class ScaffoldingModelExtensions
                 Arguments = { sequence.StartValue },
             };
 
-            root = root?.Chain(startsAt) ?? startsAt;
+            root =
+                root?.Chain(startsAt)
+                ?? startsAt;
         }
 
         if (sequence.IncrementBy != Sequence.DefaultIncrementBy)
@@ -934,7 +982,9 @@ public static class ScaffoldingModelExtensions
                 Arguments = { sequence.IncrementBy },
             };
 
-            root = root?.Chain(incrementsBy) ?? incrementsBy;
+            root =
+                root?.Chain(incrementsBy)
+                ?? incrementsBy;
         }
 
         if (sequence.MinValue != Sequence.DefaultMinValue)
@@ -944,7 +994,9 @@ public static class ScaffoldingModelExtensions
                 Arguments = { sequence.MinValue },
             };
 
-            root = root?.Chain(hasMin) ?? hasMin;
+            root =
+                root?.Chain(hasMin)
+                ?? hasMin;
         }
 
         if (sequence.MaxValue != Sequence.DefaultMaxValue)
@@ -954,14 +1006,18 @@ public static class ScaffoldingModelExtensions
                 Arguments = { sequence.MaxValue },
             };
 
-            root = root?.Chain(hasMax) ?? hasMax;
+            root =
+                root?.Chain(hasMax)
+                ?? hasMax;
         }
 
         if (sequence.IsCyclic != Sequence.DefaultIsCyclic)
         {
             var isCyclic = new FluentApiCodeFragment(nameof(SequenceBuilder.IsCyclic));
 
-            root = root?.Chain(isCyclic) ?? isCyclic;
+            root =
+                root?.Chain(isCyclic)
+                ?? isCyclic;
         }
 
         return root;
@@ -1008,7 +1064,9 @@ public static class ScaffoldingModelExtensions
             var fluentApiCall = FluentApiCodeFragment.From(methodCall);
             fluentApiCall.IsHandledByDataAnnotations = isHandledByDataAnnotations;
 
-            root = root?.Chain(fluentApiCall) ?? fluentApiCall;
+            root =
+                root?.Chain(fluentApiCall)
+                ?? fluentApiCall;
         }
 
         foreach (var annotation in annotations.Values)
@@ -1019,7 +1077,9 @@ public static class ScaffoldingModelExtensions
                 IsHandledByDataAnnotations = isHandledByDataAnnotations,
             };
 
-            root = root?.Chain(hasAnnotation) ?? hasAnnotation;
+            root =
+                root?.Chain(hasAnnotation)
+                ?? hasAnnotation;
         }
 
         return root;

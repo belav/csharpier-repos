@@ -680,7 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             TypeSymbol awaitExpressionType =
-                disposeAwaitableInfoOpt.GetResult?.ReturnType ?? _compilation.DynamicType;
+                disposeAwaitableInfoOpt.GetResult?.ReturnType
+                ?? _compilation.DynamicType;
             var debugInfo = new BoundAwaitExpressionDebugInfo(
                 s_disposeAsyncAwaitId,
                 ReservedStateMachineCount: 0

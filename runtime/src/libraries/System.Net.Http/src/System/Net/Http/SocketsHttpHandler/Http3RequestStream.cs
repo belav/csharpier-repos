@@ -495,7 +495,9 @@ namespace System.Net.Http
                     HttpTelemetry.Log.RequestContentStart();
 
                 // If we have a Content-Length, keep track of it so we don't over-send and so we can send in a single DATA frame.
-                _requestContentLengthRemaining = content.Headers.ContentLength ?? -1;
+                _requestContentLengthRemaining =
+                    content.Headers.ContentLength
+                    ?? -1;
 
                 long bytesWritten;
                 using (var writeStream = new Http3WriteStream(this))

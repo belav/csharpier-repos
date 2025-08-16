@@ -1462,7 +1462,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         for (var i = 0; i < expected.Count; i++)
         {
             Assert.Equal(expected[i].A.Id, actual[i].A.Id);
-            Assert.True(expected[i].Orders?.SequenceEqual(actual[i].Orders) ?? true);
+            Assert.True(
+                expected[i].Orders?.SequenceEqual(actual[i].Orders)
+                    ?? true
+            );
         }
     }
 

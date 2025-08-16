@@ -43,7 +43,7 @@ internal partial class CSharpRecommendationService
                     .ParameterList
                     ?.Parameters
                     .Count
-                ?? -1,
+                    ?? -1,
                 ParenthesizedLambdaExpressionSyntax parenthesizedLambda => parenthesizedLambda
                     .ParameterList
                     .Parameters

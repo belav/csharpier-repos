@@ -521,7 +521,9 @@ public static class EndpointRouteBuilderExtensions
             var routeHandlerOptions = endpoints.ServiceProvider?.GetService<
                 IOptions<RouteHandlerOptions>
             >();
-            var throwOnBadRequest = routeHandlerOptions?.Value.ThrowOnBadRequest ?? false;
+            var throwOnBadRequest =
+                routeHandlerOptions?.Value.ThrowOnBadRequest
+                ?? false;
 
             routeEndpointDataSource = new RouteEndpointDataSource(
                 endpoints.ServiceProvider ?? EmptyServiceProvider.Instance,

@@ -252,7 +252,7 @@ class FirefoxInspectorClient : InspectorClient
                         foreach (
                             JToken? argument in res["resources"]
                                 ?[0]?["message"]?["arguments"]?.Value<JArray>()
-                            ?? new JArray()
+                                ?? new JArray()
                         )
                         {
                             if (argument is null)

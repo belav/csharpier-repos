@@ -1055,7 +1055,9 @@ namespace StaticTestGenerator
             }
 
             Type[] genericArgs = type.GetGenericArguments();
-            Type[] parentGenericArgs = type.DeclaringType?.GetGenericArguments() ?? Type.EmptyTypes;
+            Type[] parentGenericArgs =
+                type.DeclaringType?.GetGenericArguments()
+                ?? Type.EmptyTypes;
             string? name = null;
 
             if (type.IsNested)

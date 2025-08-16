@@ -76,7 +76,9 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 return $"{typeof(T)}, {ToString(p7)}, {ToString(p8)}";
             }
 
-            private static string ToString(object obj) => obj?.ToString() ?? "null";
+            private static string ToString(object obj) =>
+                obj?.ToString()
+                ?? "null";
         }
 
         public static IEnumerable<object[]> LateCall_OptionalValues_Data()

@@ -145,7 +145,9 @@ internal sealed partial class WebSocketsServerTransport : IHttpTransport
 
     private async Task StartReceiving(WebSocket socket)
     {
-        var token = _connection.Cancellation?.Token ?? default;
+        var token =
+            _connection.Cancellation?.Token
+            ?? default;
 
         try
         {

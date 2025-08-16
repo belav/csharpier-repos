@@ -224,9 +224,8 @@ namespace System.Web.Mvc
         private IModelBinder GetModelBinder(ParameterDescriptor parameterDescriptor)
         {
             // look on the parameter itself, then look in the global table
-            return parameterDescriptor.BindingInfo.Binder ?? Binders.GetBinder(
-                    parameterDescriptor.ParameterType
-                );
+            return parameterDescriptor.BindingInfo.Binder
+                ?? Binders.GetBinder(parameterDescriptor.ParameterType);
         }
 
         protected virtual object GetParameterValue(
@@ -239,7 +238,8 @@ namespace System.Web.Mvc
             IModelBinder binder = GetModelBinder(parameterDescriptor);
             IValueProvider valueProvider = controllerContext.Controller.ValueProvider;
             string parameterName =
-                parameterDescriptor.BindingInfo.Prefix ?? parameterDescriptor.ParameterName;
+                parameterDescriptor.BindingInfo.Prefix
+                ?? parameterDescriptor.ParameterName;
             Predicate<string> propertyFilter = GetPropertyFilter(parameterDescriptor);
 
             // finally, call into the binder

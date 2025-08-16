@@ -323,6 +323,7 @@ namespace System.CommandLine
         }
 
         private static string GetOptionName(OptionResult optionResult) =>
-            optionResult.IdentifierToken?.Value ?? optionResult.Option.Name;
+            optionResult.IdentifierToken?.Value
+            ?? optionResult.Option.Name;
     }
 }

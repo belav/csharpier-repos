@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
                 visitor.WriteString(symbol.Name);
                 visitor.WriteSymbolKey(symbol.Target);
                 visitor.WriteString(
-                    symbol.DeclaringSyntaxReferences.FirstOrDefault()?.SyntaxTree.FilePath ?? ""
+                    symbol.DeclaringSyntaxReferences.FirstOrDefault()?.SyntaxTree.FilePath
+                        ?? ""
                 );
             }
 

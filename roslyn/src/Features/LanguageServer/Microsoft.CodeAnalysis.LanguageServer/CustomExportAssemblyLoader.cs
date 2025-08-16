@@ -99,7 +99,8 @@ internal class CustomExportAssemblyLoader : IAssemblyLoader
 
         public int GetHashCode([DisallowNull] AssemblyName obj)
         {
-            return obj.Name?.GetHashCode(StringComparison.Ordinal) ?? 0;
+            return obj.Name?.GetHashCode(StringComparison.Ordinal)
+                ?? 0;
         }
     }
 }

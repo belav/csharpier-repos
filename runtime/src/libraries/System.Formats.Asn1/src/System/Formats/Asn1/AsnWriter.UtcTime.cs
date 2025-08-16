@@ -28,7 +28,11 @@ namespace System.Formats.Asn1
             CheckUniversalTag(tag, UniversalTagNumber.UtcTime);
 
             // Clear the constructed flag, if present.
-            WriteUtcTimeCore(tag?.AsPrimitive() ?? Asn1Tag.UtcTime, value);
+            WriteUtcTimeCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.UtcTime,
+                value
+            );
         }
 
         /// <summary>
@@ -65,7 +69,11 @@ namespace System.Formats.Asn1
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
 
-            WriteUtcTimeCore(tag?.AsPrimitive() ?? Asn1Tag.UtcTime, value);
+            WriteUtcTimeCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.UtcTime,
+                value
+            );
         }
 
         // T-REC-X.680-201508 sec 47

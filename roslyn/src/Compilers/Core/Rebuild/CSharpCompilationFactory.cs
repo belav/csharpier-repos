@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 !string.IsNullOrEmpty(unsafeString) && bool.Parse(unsafeString),
                 cryptoKeyContainer: null,
                 cryptoKeyFile: null,
-                cryptoPublicKey: optionsReader.GetPublicKey()?.ToImmutableArray() ?? default,
+                cryptoPublicKey: optionsReader.GetPublicKey()?.ToImmutableArray()
+                    ?? default,
                 delaySign: null,
                 GetPlatform(platform),
                 // presence of diagnostics is expected to not affect emit.

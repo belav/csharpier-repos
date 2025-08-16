@@ -193,7 +193,10 @@ internal sealed partial class HealthCheckPublisherHostedService : IHostedService
             // First check whether the current timer options correspond to the current registration,
             // and then check the user-defined predicate if any.
             return (GetTimerOptions(r) == timerOptions)
-                && (_healthCheckPublisherOptions?.Value.Predicate ?? (_ => true))(r);
+                && (
+                    _healthCheckPublisherOptions?.Value.Predicate
+                    ?? (_ => true)
+                )(r);
         };
 
         // The health checks service does it's own logging, and doesn't throw exceptions.

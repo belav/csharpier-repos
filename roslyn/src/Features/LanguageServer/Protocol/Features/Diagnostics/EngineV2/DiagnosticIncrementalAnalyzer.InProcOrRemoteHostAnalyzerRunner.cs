@@ -268,7 +268,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // +1 for project itself
                 var count = documentAnalysisScope != null ? 1 : project.DocumentIds.Count + 1;
-                var forSpanAnalysis = documentAnalysisScope?.Span.HasValue ?? false;
+                var forSpanAnalysis =
+                    documentAnalysisScope?.Span.HasValue
+                    ?? false;
 
                 var performanceInfo = analysisResult
                     .AnalyzerTelemetryInfo.ToAnalyzerPerformanceInfo(AnalyzerInfoCache)

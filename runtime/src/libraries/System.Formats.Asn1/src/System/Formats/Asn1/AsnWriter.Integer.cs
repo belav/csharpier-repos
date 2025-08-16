@@ -24,7 +24,11 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.Integer);
 
-            WriteIntegerCore(tag?.AsPrimitive() ?? Asn1Tag.Integer, value);
+            WriteIntegerCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.Integer,
+                value
+            );
         }
 
         /// <summary>
@@ -43,7 +47,11 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.Integer);
 
-            WriteNonNegativeIntegerCore(tag?.AsPrimitive() ?? Asn1Tag.Integer, value);
+            WriteNonNegativeIntegerCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.Integer,
+                value
+            );
         }
 
         /// <summary>
@@ -61,7 +69,11 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.Integer);
 
-            WriteIntegerCore(tag?.AsPrimitive() ?? Asn1Tag.Integer, value);
+            WriteIntegerCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.Integer,
+                value
+            );
         }
 
         /// <summary>
@@ -86,7 +98,11 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.Integer);
 
-            WriteIntegerCore(tag?.AsPrimitive() ?? Asn1Tag.Integer, value);
+            WriteIntegerCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.Integer,
+                value
+            );
         }
 
         /// <summary>
@@ -107,7 +123,11 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.Integer);
 
-            WriteIntegerUnsignedCore(tag?.AsPrimitive() ?? Asn1Tag.Integer, value);
+            WriteIntegerUnsignedCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.Integer,
+                value
+            );
         }
 
         // T-REC-X.690-201508 sec 8.3

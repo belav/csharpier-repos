@@ -1744,7 +1744,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         protected CharSet DefaultMarshallingCharSet
         {
-            get { return this.GetEffectiveDefaultMarshallingCharSet() ?? CharSet.Ansi; }
+            get
+            {
+                return this.GetEffectiveDefaultMarshallingCharSet()
+                    ?? CharSet.Ansi;
+            }
         }
 
         /// <summary>

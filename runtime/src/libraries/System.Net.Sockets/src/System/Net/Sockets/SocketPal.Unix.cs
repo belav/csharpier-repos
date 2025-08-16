@@ -2813,7 +2813,8 @@ namespace System.Net.Sockets
                     throw new ArgumentException(
                         SR.Format(
                             SR.net_sockets_select,
-                            socket?.GetType().FullName ?? "null",
+                            socket?.GetType().FullName
+                                ?? "null",
                             typeof(Socket).FullName
                         ),
                         nameof(socketList)

@@ -84,7 +84,9 @@ namespace Roslyn.Utilities
 
         public int Count => _elements?.Count ?? 0;
 
-        public bool Contains(T value) => _set?.Contains(value) ?? false;
+        public bool Contains(T value) =>
+            _set?.Contains(value)
+            ?? false;
 
         public IEnumerator<T> GetEnumerator() =>
             _elements is null

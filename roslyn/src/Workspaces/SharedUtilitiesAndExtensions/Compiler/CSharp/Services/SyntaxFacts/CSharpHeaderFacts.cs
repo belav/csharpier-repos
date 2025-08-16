@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
                 (node as TypeDeclarationSyntax)?.TypeParameterList?.GetLastToken()
                 ?? node.Identifier;
             if (fullHeader)
-                lastToken = node.BaseList?.GetLastToken() ?? lastToken;
+                lastToken =
+                    node.BaseList?.GetLastToken()
+                    ?? lastToken;
 
             return IsOnHeader(root, position, node, lastToken);
         }

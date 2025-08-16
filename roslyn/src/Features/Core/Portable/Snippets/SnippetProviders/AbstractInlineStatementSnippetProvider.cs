@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
             ConstructedFromInlineExpression = inlineExpression is not null;
 
             return new TextChange(
-                inlineExpression?.Parent?.Span ?? TextSpan.FromBounds(position, position),
+                inlineExpression?.Parent?.Span
+                    ?? TextSpan.FromBounds(position, position),
                 statement.ToFullString()
             );
         }

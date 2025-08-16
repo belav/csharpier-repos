@@ -547,7 +547,8 @@ internal sealed partial class DfaMatcher : Matcher
 
         private static string GetRoutePattern(Endpoint endpoint)
         {
-            return (endpoint as RouteEndpoint)?.RoutePattern?.RawText ?? "(none)";
+            return (endpoint as RouteEndpoint)?.RoutePattern?.RawText
+                ?? "(none)";
         }
     }
 }

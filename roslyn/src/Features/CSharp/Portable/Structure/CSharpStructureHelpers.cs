@@ -29,7 +29,8 @@ internal static class CSharpStructureHelpers
 
         var lastTrailingCommentOrWhitespaceTrivia =
             firstToken.TrailingTrivia.GetLastCommentOrWhitespace();
-        return lastTrailingCommentOrWhitespaceTrivia?.Span.End ?? firstToken.Span.End;
+        return lastTrailingCommentOrWhitespaceTrivia?.Span.End
+            ?? firstToken.Span.End;
     }
 
     private static (int spanEnd, int hintEnd) GetCollapsibleEnd(

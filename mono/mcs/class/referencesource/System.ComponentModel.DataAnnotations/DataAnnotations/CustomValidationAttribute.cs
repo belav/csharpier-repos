@@ -226,7 +226,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <returns>The error message why it is not well-formed, null if it is well-formed.</returns>
         private string CheckAttributeWellFormed()
         {
-            return this.ValidateValidatorTypeParameter() ?? this.ValidateMethodParameter();
+            return this.ValidateValidatorTypeParameter()
+                ?? this.ValidateMethodParameter();
         }
 
         /// <summary>

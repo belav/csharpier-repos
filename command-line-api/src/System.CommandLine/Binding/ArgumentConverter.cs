@@ -86,7 +86,9 @@ namespace System.CommandLine.Binding
             IReadOnlyList<CliToken> tokens
         )
         {
-            var itemType = type.GetElementTypeIfEnumerable() ?? typeof(string);
+            var itemType =
+                type.GetElementTypeIfEnumerable()
+                ?? typeof(string);
             var values = CreateEnumerable(type, itemType, tokens.Count);
             var isArray = values is Array;
 

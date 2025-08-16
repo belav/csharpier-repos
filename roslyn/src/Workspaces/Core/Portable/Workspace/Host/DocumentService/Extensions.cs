@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Host
 
         public static bool CanApplyChange(
             [NotNullWhen(returnValue: true)] this TextDocumentState? document
-        ) => document?.Services.GetService<IDocumentOperationService>()?.CanApplyChange ?? false;
+        ) =>
+            document?.Services.GetService<IDocumentOperationService>()?.CanApplyChange
+            ?? false;
 
         public static bool SupportsDiagnostics(
             [NotNullWhen(returnValue: true)] this TextDocument? document
@@ -25,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Host
         public static bool SupportsDiagnostics(
             [NotNullWhen(returnValue: true)] this TextDocumentState? document
         ) =>
-            document?.Services.GetService<IDocumentOperationService>()?.SupportDiagnostics ?? false;
+            document?.Services.GetService<IDocumentOperationService>()?.SupportDiagnostics
+            ?? false;
 
         public static bool IsRazorDocument(this TextDocument document) =>
             IsRazorDocument(document.State);

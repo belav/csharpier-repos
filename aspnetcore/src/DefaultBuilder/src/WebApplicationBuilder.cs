@@ -265,7 +265,8 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
     {
         webHostBuilder.UseSetting(
             WebHostDefaults.ApplicationKey,
-            _hostApplicationBuilder.Environment.ApplicationName ?? ""
+            _hostApplicationBuilder.Environment.ApplicationName
+                ?? ""
         );
         webHostBuilder.UseSetting(
             WebHostDefaults.PreventHostingStartupKey,

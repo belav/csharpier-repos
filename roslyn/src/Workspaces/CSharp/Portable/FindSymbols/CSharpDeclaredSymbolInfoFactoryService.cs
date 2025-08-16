@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                             inheritanceNames: ImmutableArray<string>.Empty,
                             parameterCount: localFunction.ParameterList.Parameters.Count,
                             typeParameterCount: localFunction.TypeParameterList?.Parameters.Count
-                            ?? 0
+                                ?? 0
                         )
                     );
                 }
@@ -262,7 +262,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                 typeDeclaration.Identifier.Span,
                 GetInheritanceNames(stringTable, typeDeclaration.BaseList),
                 IsNestedType(typeDeclaration),
-                typeParameterCount: typeDeclaration.TypeParameterList?.Parameters.Count ?? 0
+                typeParameterCount: typeDeclaration.TypeParameterList?.Parameters.Count
+                    ?? 0
             );
         }
 
@@ -317,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                             GetAccessibility(container, ctorDecl.Modifiers),
                             ctorDecl.Identifier.Span,
                             inheritanceNames: ImmutableArray<string>.Empty,
-                            parameterCount: ctorDecl.ParameterList?.Parameters.Count ?? 0
+                            parameterCount: ctorDecl.ParameterList?.Parameters.Count
+                                ?? 0
                         )
                     );
                     return;
@@ -411,8 +413,10 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                             GetAccessibility(container, method.Modifiers),
                             method.Identifier.Span,
                             inheritanceNames: ImmutableArray<string>.Empty,
-                            parameterCount: method.ParameterList?.Parameters.Count ?? 0,
-                            typeParameterCount: method.TypeParameterList?.Parameters.Count ?? 0
+                            parameterCount: method.ParameterList?.Parameters.Count
+                                ?? 0,
+                            typeParameterCount: method.TypeParameterList?.Parameters.Count
+                                ?? 0
                         )
                     );
                     return;

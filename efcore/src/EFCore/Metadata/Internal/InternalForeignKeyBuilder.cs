@@ -2678,21 +2678,28 @@ public class InternalForeignKeyBuilder
         }
 
         dependentProperties ??= (
-            (Metadata.GetPropertiesConfigurationSource()?.Overrides(configurationSource) ?? false)
-            && !oldRelationshipInverted
+            (
+                Metadata.GetPropertiesConfigurationSource()?.Overrides(configurationSource)
+                ?? false
+            ) && !oldRelationshipInverted
                 ? Metadata.Properties
                 : null
         );
 
         principalProperties ??= (
-            (Metadata.GetPrincipalKeyConfigurationSource()?.Overrides(configurationSource) ?? false)
-            && !oldRelationshipInverted
+            (
+                Metadata.GetPrincipalKeyConfigurationSource()?.Overrides(configurationSource)
+                ?? false
+            ) && !oldRelationshipInverted
                 ? Metadata.PrincipalKey.Properties
                 : null
         );
 
         isUnique ??= (
-            (Metadata.GetIsUniqueConfigurationSource()?.Overrides(configurationSource) ?? false)
+            (
+                Metadata.GetIsUniqueConfigurationSource()?.Overrides(configurationSource)
+                ?? false
+            )
                 ? Metadata.IsUnique
                 : null
         );

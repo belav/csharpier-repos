@@ -147,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                 checkOverflow: isChecked,
                 cryptoKeyContainer: null,
                 cryptoKeyFile: null,
-                cryptoPublicKey: optionsReader.GetPublicKey()?.ToImmutableArray() ?? default,
+                cryptoPublicKey: optionsReader.GetPublicKey()?.ToImmutableArray()
+                    ?? default,
                 delaySign: null,
                 platform: GetPlatform(platform),
                 generalDiagnosticOption: ReportDiagnostic.Default,

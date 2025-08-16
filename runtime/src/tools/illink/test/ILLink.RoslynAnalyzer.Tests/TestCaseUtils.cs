@@ -204,7 +204,9 @@ namespace ILLink.RoslynAnalyzer.Tests
                         continue;
                 }
 
-                var xmlFileName = attribute.ArgumentList?.Arguments[0].ToString().Trim('"') ?? "";
+                var xmlFileName =
+                    attribute.ArgumentList?.Arguments[0].ToString().Trim('"')
+                    ?? "";
                 var resolvedPath = resolver.ResolveReference(xmlFileName, rootSourceDir);
                 if (resolvedPath != null)
                 {

@@ -652,7 +652,8 @@ public ref struct TypeMapPlanBuilder
     }
 
     private ParameterExpression GetCustomSource(MemberMap memberMap) =>
-        memberMap.IncludedMember?.Variable ?? _source;
+        memberMap.IncludedMember?.Variable
+        ?? _source;
 }
 
 public interface IValueResolver

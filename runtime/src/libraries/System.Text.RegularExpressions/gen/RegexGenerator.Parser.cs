@@ -290,7 +290,8 @@ namespace System.Text.RegularExpressions.Generator
             {
                 var location = method.GetLocation();
                 return Location.Create(
-                    location.SourceTree?.FilePath ?? string.Empty,
+                    location.SourceTree?.FilePath
+                        ?? string.Empty,
                     location.SourceSpan,
                     location.GetLineSpan().Span
                 );

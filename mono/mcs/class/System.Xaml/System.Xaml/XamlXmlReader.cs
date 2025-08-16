@@ -493,7 +493,9 @@ namespace System.Xaml
             if (!xmlbase_done)
             {
                 xmlbase_done = true;
-                string xmlbase = r.GetAttribute("base", XamlLanguage.Xml1998Namespace) ?? r.BaseURI;
+                string xmlbase =
+                    r.GetAttribute("base", XamlLanguage.Xml1998Namespace)
+                    ?? r.BaseURI;
                 if (xmlbase != null)
                     l.Add(new Pair(XamlLanguage.Base, xmlbase));
             }

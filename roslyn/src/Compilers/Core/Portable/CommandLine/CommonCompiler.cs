@@ -391,7 +391,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 Debug.Assert(normalizedPath is object);
-                var directory = Path.GetDirectoryName(normalizedPath) ?? normalizedPath;
+                var directory =
+                    Path.GetDirectoryName(normalizedPath)
+                    ?? normalizedPath;
                 var editorConfig = AnalyzerConfig.Parse(fileContent, normalizedPath);
 
                 if (!editorConfig.IsGlobal)

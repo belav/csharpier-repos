@@ -492,7 +492,11 @@ namespace System.Collections.Generic.Tests
 
             foreach (T item in input.Items)
             {
-                result.Add(item, item?.GetHashCode() ?? 0);
+                result.Add(
+                    item,
+                    item?.GetHashCode()
+                        ?? 0
+                );
             }
 
             return result;

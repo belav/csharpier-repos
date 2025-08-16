@@ -5417,9 +5417,13 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     .Select(t => new
                     {
                         c = !(
-                            t.Gear.MaybeScalar(x => x.HasSoulPatch) ?? false
+                            t.Gear.MaybeScalar(x => x.HasSoulPatch)
+                            ?? false
                                 ? true
-                                : (t.Gear.MaybeScalar(x => x.HasSoulPatch) ?? true)
+                                : (
+                                    t.Gear.MaybeScalar(x => x.HasSoulPatch)
+                                    ?? true
+                                )
                         ),
                     }),
             elementSorter: e => e.c
@@ -6052,7 +6056,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Select(g =>
-                        g.Weapons.OrderBy(w => w.Id).Select(w => (int?)w.Id).FirstOrDefault() ?? 42
+                        g.Weapons.OrderBy(w => w.Id).Select(w => (int?)w.Id).FirstOrDefault()
+                        ?? 42
                     )
         );
 
@@ -7123,7 +7128,9 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                 from t in ss.Set<CogTag>()
                 where t.Gear is Officer
                 select ((Officer)t.Gear).Reports.Take(50),
-            elementSorter: e => e?.Count() ?? 0,
+            elementSorter: e =>
+                e?.Count()
+                ?? 0,
             elementAsserter: (e, a) => AssertCollection(e, a)
         );
 
@@ -9761,7 +9768,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     .OrderBy(g => g.Nickname)
                     .Select(g =>
                         g.Weapons.SelectMany(x =>
-                                x.Owner.AssignedCity.Maybe(x => x.BornGears) ?? new List<Gear>()
+                                x.Owner.AssignedCity.Maybe(x => x.BornGears)
+                                ?? new List<Gear>()
                             )
                             .Select(x => (bool?)x.HasSoulPatch)
                             .Distinct()

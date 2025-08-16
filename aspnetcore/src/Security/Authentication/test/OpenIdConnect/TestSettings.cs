@@ -255,17 +255,18 @@ internal class TestSettings
         {
             case OpenIdConnectRequestType.Token:
                 expectedAuthority =
-                    _options.Configuration?.TokenEndpoint ?? _options.Authority + @"/oauth2/token";
+                    _options.Configuration?.TokenEndpoint
+                    ?? _options.Authority + @"/oauth2/token";
                 break;
             case OpenIdConnectRequestType.Logout:
                 expectedAuthority =
-                    _options.Configuration?.EndSessionEndpoint ?? _options.Authority
-                        + @"/oauth2/logout";
+                    _options.Configuration?.EndSessionEndpoint
+                    ?? _options.Authority + @"/oauth2/logout";
                 break;
             default:
                 expectedAuthority =
-                    _options.Configuration?.AuthorizationEndpoint ?? _options.Authority
-                        + @"/oauth2/authorize";
+                    _options.Configuration?.AuthorizationEndpoint
+                    ?? _options.Authority + @"/oauth2/authorize";
                 break;
         }
 

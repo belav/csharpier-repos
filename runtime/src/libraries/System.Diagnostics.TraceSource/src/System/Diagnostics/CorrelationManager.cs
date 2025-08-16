@@ -66,7 +66,9 @@ namespace System.Diagnostics
 
             public override object Clone() => new AsyncLocalStackWrapper(_stack);
 
-            public override int Count => _stack.Value?.Count ?? 0;
+            public override int Count =>
+                _stack.Value?.Count
+                ?? 0;
 
             public override IEnumerator GetEnumerator() => GetEnumerator(_stack.Value);
 

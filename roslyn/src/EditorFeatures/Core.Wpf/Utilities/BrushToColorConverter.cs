@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Utilities
             {
                 SolidColorBrush solidColorBrush => solidColorBrush.Color,
                 GradientBrush gradientBrush => gradientBrush.GradientStops.FirstOrDefault()?.Color
-                ?? Colors.Transparent,
+                    ?? Colors.Transparent,
                 _ => Colors.Transparent,
             };
     }

@@ -35,7 +35,8 @@ namespace Internal.TypeSystem
 
             if (_embeddedSignatureData == null || other._embeddedSignatureData == null)
                 return (_embeddedSignatureData?.Length ?? 0).CompareTo(
-                    other._embeddedSignatureData?.Length ?? 0
+                    other._embeddedSignatureData?.Length
+                        ?? 0
                 );
 
             result = _embeddedSignatureData.Length.CompareTo(other._embeddedSignatureData.Length);

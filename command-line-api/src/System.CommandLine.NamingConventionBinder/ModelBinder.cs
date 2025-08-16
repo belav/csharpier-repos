@@ -169,7 +169,9 @@ public class ModelBinder
         ref bool nonDefaultsUsed
     )
     {
-        var values = boundValues?.Select(x => x.Value).ToArray() ?? Array.Empty<object>();
+        var values =
+            boundValues?.Select(x => x.Value).ToArray()
+            ?? Array.Empty<object>();
         object? newInstance = null;
         try
         {

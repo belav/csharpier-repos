@@ -174,7 +174,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
                     {
                         {
                             HostDefaults.ApplicationKey,
-                            typeof(TEntryPoint).Assembly.GetName()?.Name ?? string.Empty
+                            typeof(TEntryPoint).Assembly.GetName()?.Name
+                                ?? string.Empty
                         },
                     }
                 );

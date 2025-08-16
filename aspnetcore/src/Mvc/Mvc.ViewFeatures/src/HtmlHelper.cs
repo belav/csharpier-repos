@@ -882,7 +882,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         // we want to fall back to the field name rather than the ModelType.
         // This is similar to how the GenerateLabel get the text of a label.
         var resolvedDisplayName =
-            modelExplorer.Metadata.DisplayName ?? modelExplorer.Metadata.PropertyName;
+            modelExplorer.Metadata.DisplayName
+            ?? modelExplorer.Metadata.PropertyName;
         if (resolvedDisplayName == null && expression != null)
         {
             var index = expression.LastIndexOf('.');

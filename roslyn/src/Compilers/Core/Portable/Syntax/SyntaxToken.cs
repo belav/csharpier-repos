@@ -155,7 +155,9 @@ namespace Microsoft.CodeAnalysis
         /// Returns the text representation of the value of the token. For example, if the token represents an integer
         /// literal, then this property would return a string representing the integer.
         /// </summary>
-        public string ValueText => Node?.GetValueText() ?? string.Empty;
+        public string ValueText =>
+            Node?.GetValueText()
+            ?? string.Empty;
 
         public string Text => ToString();
 
@@ -208,12 +210,16 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Full width of the leading trivia of this token.
         /// </summary>
-        internal int LeadingWidth => Node?.GetLeadingTriviaWidth() ?? 0;
+        internal int LeadingWidth =>
+            Node?.GetLeadingTriviaWidth()
+            ?? 0;
 
         /// <summary>
         /// Full width of the trailing trivia of this token.
         /// </summary>
-        internal int TrailingWidth => Node?.GetTrailingTriviaWidth() ?? 0;
+        internal int TrailingWidth =>
+            Node?.GetTrailingTriviaWidth()
+            ?? 0;
 
         /// <summary>
         /// Determines whether this token or any of its descendant trivia have any diagnostics on them.
@@ -250,7 +256,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool HasAnnotations(string annotationKind)
         {
-            return Node?.HasAnnotations(annotationKind) ?? false;
+            return Node?.HasAnnotations(annotationKind)
+                ?? false;
         }
 
         /// <summary>
@@ -258,7 +265,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool HasAnnotations(params string[] annotationKinds)
         {
-            return Node?.HasAnnotations(annotationKinds) ?? false;
+            return Node?.HasAnnotations(annotationKinds)
+                ?? false;
         }
 
         /// <summary>
@@ -266,7 +274,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool HasAnnotation([NotNullWhen(true)] SyntaxAnnotation? annotation)
         {
-            return Node?.HasAnnotation(annotation) ?? false;
+            return Node?.HasAnnotation(annotation)
+                ?? false;
         }
 
         /// <summary>

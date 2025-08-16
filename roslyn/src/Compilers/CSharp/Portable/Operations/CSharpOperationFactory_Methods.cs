@@ -620,7 +620,9 @@ namespace Microsoft.CodeAnalysis.Operations
                     isImplicitAssignment = isImplicit;
                 }
 
-                var assignmentSyntax = value.Syntax?.Parent ?? syntax;
+                var assignmentSyntax =
+                    value.Syntax?.Parent
+                    ?? syntax;
                 ITypeSymbol? assignmentType = target.Type;
                 bool isRef = false;
                 var assignment = new SimpleAssignmentOperation(

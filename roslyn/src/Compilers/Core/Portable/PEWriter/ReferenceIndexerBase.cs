@@ -174,7 +174,7 @@ namespace Microsoft.Cci
 
             VisitSignature(
                 methodReference.AsSpecializedMethodReference?.UnspecializedVersion
-                ?? methodReference
+                    ?? methodReference
             );
 
             if (methodReference.AcceptsExtraArguments)

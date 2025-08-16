@@ -72,7 +72,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override int GetHashCode()
         {
-            return Hash.Combine(Input.GetHashCode(), this.Symbol?.GetHashCode() ?? 0);
+            return Hash.Combine(
+                Input.GetHashCode(),
+                this.Symbol?.GetHashCode()
+                    ?? 0
+            );
         }
 
 #if DEBUG

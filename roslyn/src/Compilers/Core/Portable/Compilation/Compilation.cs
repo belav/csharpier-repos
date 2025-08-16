@@ -3981,7 +3981,8 @@ namespace Microsoft.CodeAnalysis
                         MessageProvider.CreateDiagnostic(
                             MessageProvider.ERR_PeWritingFailure,
                             Location.None,
-                            e.InnerException?.ToString() ?? ""
+                            e.InnerException?.ToString()
+                                ?? ""
                         )
                     );
                     return false;
@@ -4218,7 +4219,8 @@ namespace Microsoft.CodeAnalysis
                         MessageProvider.CreateDiagnostic(
                             MessageProvider.ERR_PeWritingFailure,
                             Location.None,
-                            e.InnerException?.ToString() ?? ""
+                            e.InnerException?.ToString()
+                                ?? ""
                         )
                     );
                     return null;

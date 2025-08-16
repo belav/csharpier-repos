@@ -69,7 +69,10 @@ public partial class StaticHtmlRenderer : Renderer
         if (quiescenceTask.IsFaulted)
         {
             ExceptionDispatchInfo
-                .Capture(quiescenceTask.Exception.InnerException ?? quiescenceTask.Exception)
+                .Capture(
+                    quiescenceTask.Exception.InnerException
+                        ?? quiescenceTask.Exception
+                )
                 .Throw();
         }
 

@@ -71,7 +71,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 0,
                 name,
                 method.TypeArgs,
-                method.MethProp()?.getKind() ?? SYMKIND.SK_MethodSymbol,
+                method.MethProp()?.getKind()
+                    ?? SYMKIND.SK_MethodSymbol,
                 method.GetType(),
                 obj,
                 new CMemberLookupResults(TypeArray.Allocate((CType)method.GetType()), name)

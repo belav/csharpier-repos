@@ -26,7 +26,10 @@ namespace System.Formats.Asn1
             CheckUniversalTag(tag, UniversalTagNumber.Sequence);
 
             // Assert the constructed flag, in case it wasn't.
-            return PushSequenceCore(tag?.AsConstructed() ?? Asn1Tag.Sequence);
+            return PushSequenceCore(
+                tag?.AsConstructed()
+                    ?? Asn1Tag.Sequence
+            );
         }
 
         /// <summary>
@@ -50,7 +53,10 @@ namespace System.Formats.Asn1
             CheckUniversalTag(tag, UniversalTagNumber.Sequence);
 
             // Assert the constructed flag, in case it wasn't.
-            PopSequenceCore(tag?.AsConstructed() ?? Asn1Tag.Sequence);
+            PopSequenceCore(
+                tag?.AsConstructed()
+                    ?? Asn1Tag.Sequence
+            );
         }
 
         // T-REC-X.690-201508 sec 8.9, 8.10

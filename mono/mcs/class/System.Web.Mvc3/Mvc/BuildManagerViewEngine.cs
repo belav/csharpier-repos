@@ -86,7 +86,8 @@
 
             public object Create(ControllerContext controllerContext, Type type)
             {
-                return _resolverThunk().GetService(type) ?? Activator.CreateInstance(type);
+                return _resolverThunk().GetService(type)
+                    ?? Activator.CreateInstance(type);
             }
         }
     }

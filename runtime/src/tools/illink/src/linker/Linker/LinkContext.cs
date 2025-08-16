@@ -490,7 +490,8 @@ namespace Mono.Linker
                     LogWarning(
                         GetAssemblyLocation(assembly),
                         DiagnosticId.InvalidIsTrimmableValue,
-                        args[1].Value.ToString() ?? "",
+                        args[1].Value.ToString()
+                            ?? "",
                         assembly.Name.Name
                     );
                     continue;
@@ -897,7 +898,9 @@ namespace Mono.Linker
                 return _targetRuntime.Value;
 
             TypeDefinition? objectType = BCL.FindPredefinedType(WellKnownType.System_Object, this);
-            _targetRuntime = objectType?.Module.Assembly.Name.Version.Major ?? -1;
+            _targetRuntime =
+                objectType?.Module.Assembly.Name.Version.Major
+                ?? -1;
 
             return _targetRuntime.Value;
         }

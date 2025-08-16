@@ -1024,7 +1024,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             continue;
 
                         var syntax =
-                            returnOperation.ReturnedValue?.Syntax ?? returnOperation.Syntax;
+                            returnOperation.ReturnedValue?.Syntax
+                            ?? returnOperation.Syntax;
                         var returnTypeInfo = semanticModel.GetTypeInfo(syntax, cancellationToken);
                         if (returnTypeInfo.Nullability.FlowState == NullableFlowState.MaybeNull)
                         {

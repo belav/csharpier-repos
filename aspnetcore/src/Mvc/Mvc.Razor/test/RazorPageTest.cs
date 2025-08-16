@@ -1315,7 +1315,8 @@ public class RazorPageTest
             prefixOffset,
             value,
             valueOffset,
-            value?.ToString().Length ?? 0,
+            value?.ToString().Length
+                ?? 0,
             isLiteral
         );
         page.EndWriteAttribute();
@@ -1352,7 +1353,8 @@ public class RazorPageTest
                 value.Item2,
                 value.Item3,
                 value.Item4,
-                value.Item3?.ToString().Length ?? 0,
+                value.Item3?.ToString().Length
+                    ?? 0,
                 value.Item5
             );
         }

@@ -95,7 +95,9 @@ public class EmptyWebTemplateTest : LoggedTest
 
         await project.RunDotNetNewAsync("web", args: args, language: languageOverride);
 
-        var noHttps = args?.Contains(ArgConstants.NoHttps) ?? false;
+        var noHttps =
+            args?.Contains(ArgConstants.NoHttps)
+            ?? false;
         var expectedLaunchProfileNames = noHttps
             ? new[] { "http", "IIS Express" }
             : new[] { "http", "https", "IIS Express" };

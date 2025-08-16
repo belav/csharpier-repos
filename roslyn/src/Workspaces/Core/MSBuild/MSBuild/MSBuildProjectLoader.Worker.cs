@@ -368,7 +368,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 var language = projectFileInfo.Language;
                 var projectPath = projectFileInfo.FilePath;
-                var projectName = Path.GetFileNameWithoutExtension(projectPath) ?? string.Empty;
+                var projectName =
+                    Path.GetFileNameWithoutExtension(projectPath)
+                    ?? string.Empty;
                 if (
                     addDiscriminator
                     && !RoslynString.IsNullOrWhiteSpace(projectFileInfo.TargetFramework)

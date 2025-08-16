@@ -318,7 +318,8 @@ public readonly record struct RelationalTypeMappingInfo
     )
     {
         _coreTypeMappingInfo = new TypeMappingInfo(
-            typeMappingConfiguration.GetValueConverter()?.ProviderClrType ?? type,
+            typeMappingConfiguration.GetValueConverter()?.ProviderClrType
+                ?? type,
             elementTypeMapping,
             keyOrIndex: false,
             unicode ?? typeMappingConfiguration.IsUnicode(),

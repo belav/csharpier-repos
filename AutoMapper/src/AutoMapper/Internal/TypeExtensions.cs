@@ -76,7 +76,8 @@ public static class TypeExtensions
     }
 
     public static PropertyInfo GetInheritedProperty(this Type type, string name) =>
-        type.GetProperty(name, InstanceFlags) ?? type.GetBaseProperty(name);
+        type.GetProperty(name, InstanceFlags)
+        ?? type.GetBaseProperty(name);
 
     static PropertyInfo GetBaseProperty(this Type type, string name) =>
         type.BaseClassesAndInterfaces()
@@ -84,7 +85,8 @@ public static class TypeExtensions
             .FirstOrDefault(p => p != null);
 
     public static FieldInfo GetInheritedField(this Type type, string name) =>
-        type.GetField(name, InstanceFlags) ?? type.GetBaseField(name);
+        type.GetField(name, InstanceFlags)
+        ?? type.GetBaseField(name);
 
     static FieldInfo GetBaseField(this Type type, string name) =>
         type.BaseClassesAndInterfaces()
@@ -92,7 +94,8 @@ public static class TypeExtensions
             .FirstOrDefault(f => f != null);
 
     public static MethodInfo GetInheritedMethod(this Type type, string name) =>
-        type.GetInstanceMethod(name) ?? type.GetBaseMethod(name)
+        type.GetInstanceMethod(name)
+        ?? type.GetBaseMethod(name)
         ?? throw new ArgumentOutOfRangeException(
             nameof(name),
             $"Cannot find member {name} of type {type}."
@@ -104,7 +107,8 @@ public static class TypeExtensions
             .FirstOrDefault(m => m != null);
 
     public static MemberInfo GetFieldOrProperty(this Type type, string name) =>
-        type.GetInheritedProperty(name) ?? (MemberInfo)type.GetInheritedField(name)
+        type.GetInheritedProperty(name)
+        ?? (MemberInfo)type.GetInheritedField(name)
         ?? throw new ArgumentOutOfRangeException(
             nameof(name),
             $"Cannot find member {name} of type {type}."

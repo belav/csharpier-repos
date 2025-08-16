@@ -2006,7 +2006,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
 
         var code = Dependencies.CSharpHelper;
         var functionVariable = code.Identifier(
-            function.MethodInfo?.Name ?? function.Name,
+            function.MethodInfo?.Name
+                ?? function.Name,
             parameters.ScopeVariables,
             capitalize: false
         );

@@ -884,7 +884,9 @@ namespace Microsoft.CodeAnalysis.Text
                         );
                     }
 
-                    var newTextLength = change.NewText?.Length ?? 0;
+                    var newTextLength =
+                        change.NewText?.Length
+                        ?? 0;
 
                     // ignore changes that don't change anything
                     if (change.Span.Length == 0 && newTextLength == 0)

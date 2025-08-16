@@ -975,7 +975,8 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
         var property = parameters.Property!;
         var mapping = property.GetRelationalTypeMapping();
         var propertyProviderClrType = (
-            mapping.Converter?.ProviderClrType ?? property.ClrType
+            mapping.Converter?.ProviderClrType
+            ?? property.ClrType
         ).UnwrapNullableType();
         var value = parameters.Value;
 

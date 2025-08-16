@@ -977,7 +977,8 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IEnumerable<Key> GetKeys() =>
-        BaseType?.GetKeys().Concat(_keys.Values) ?? _keys.Values;
+        BaseType?.GetKeys().Concat(_keys.Values)
+        ?? _keys.Values;
 
     #endregion
 

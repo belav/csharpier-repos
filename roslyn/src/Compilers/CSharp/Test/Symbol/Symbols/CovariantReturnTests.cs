@@ -543,10 +543,8 @@ namespace System.Runtime.CompilerServices
         {
             parseOptions ??= TestOptions.WithCovariantReturns;
             references =
-                references?.Prepend(CorelibraryWithCovariantReturnSupport1).ToArray() ?? new[]
-                {
-                    CorelibraryWithCovariantReturnSupport1,
-                };
+                references?.Prepend(CorelibraryWithCovariantReturnSupport1).ToArray()
+                ?? new[] { CorelibraryWithCovariantReturnSupport1 };
 
             return CreateCompilation(
                 source,
@@ -568,10 +566,8 @@ namespace System.Runtime.CompilerServices
         {
             parseOptions ??= TestOptions.WithoutCovariantReturns;
             references =
-                references?.Prepend(CorelibraryWithoutCovariantReturnSupport1).ToArray() ?? new[]
-                {
-                    CorelibraryWithoutCovariantReturnSupport1,
-                };
+                references?.Prepend(CorelibraryWithoutCovariantReturnSupport1).ToArray()
+                ?? new[] { CorelibraryWithoutCovariantReturnSupport1 };
 
             return CreateCompilation(
                 source,

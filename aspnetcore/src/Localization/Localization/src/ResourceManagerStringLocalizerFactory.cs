@@ -41,7 +41,9 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
         ArgumentNullThrowHelper.ThrowIfNull(localizationOptions);
         ArgumentNullThrowHelper.ThrowIfNull(loggerFactory);
 
-        _resourcesRelativePath = localizationOptions.Value.ResourcesPath ?? string.Empty;
+        _resourcesRelativePath =
+            localizationOptions.Value.ResourcesPath
+            ?? string.Empty;
         _loggerFactory = loggerFactory;
 
         if (!string.IsNullOrEmpty(_resourcesRelativePath))

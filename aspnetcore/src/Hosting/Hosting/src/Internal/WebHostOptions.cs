@@ -24,7 +24,8 @@ internal sealed class WebHostOptions
         ApplicationName =
             environment?.ApplicationName
             ?? GetConfig(WebHostDefaults.ApplicationKey)
-            ?? Assembly.GetEntryAssembly()?.GetName().Name ?? string.Empty;
+            ?? Assembly.GetEntryAssembly()?.GetName().Name
+            ?? string.Empty;
         StartupAssembly = GetConfig(WebHostDefaults.StartupAssemblyKey);
         DetailedErrors = WebHostUtilities.ParseBool(GetConfig(WebHostDefaults.DetailedErrorsKey));
         CaptureStartupErrors = WebHostUtilities.ParseBool(

@@ -110,7 +110,8 @@ public class KeyPerFileConfigurationProvider : ConfigurationProvider, IDisposabl
     }
 
     private string GetDirectoryName() =>
-        Source.FileProvider?.GetFileInfo("/")?.PhysicalPath ?? "<Unknown>";
+        Source.FileProvider?.GetFileInfo("/")?.PhysicalPath
+        ?? "<Unknown>";
 
     /// <summary>
     /// Generates a string representing this provider name and relevant details.

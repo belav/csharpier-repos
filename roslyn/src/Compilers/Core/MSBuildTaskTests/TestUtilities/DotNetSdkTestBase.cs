@@ -170,7 +170,8 @@ public class TestClass
 
             DotNetPath = Path.Combine(s_dotnetInstallDir, s_dotnetExeName);
             var testBinDirectory =
-                Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location) ?? string.Empty;
+                Path.GetDirectoryName(typeof(DotNetSdkTests).Assembly.Location)
+                ?? string.Empty;
             var sdksDir = Path.Combine(s_dotnetSdkPath ?? string.Empty, "Sdks");
 
             TestOutputHelper = testOutputHelper;

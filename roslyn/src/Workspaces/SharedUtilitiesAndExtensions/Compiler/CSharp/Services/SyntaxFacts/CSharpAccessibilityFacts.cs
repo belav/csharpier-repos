@@ -343,13 +343,17 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             };
 
         public static bool ParentIsFieldDeclaration([NotNullWhen(true)] SyntaxNode? node) =>
-            node?.Parent.IsKind(SyntaxKind.FieldDeclaration) ?? false;
+            node?.Parent.IsKind(SyntaxKind.FieldDeclaration)
+            ?? false;
 
         public static bool ParentIsEventFieldDeclaration([NotNullWhen(true)] SyntaxNode? node) =>
-            node?.Parent.IsKind(SyntaxKind.EventFieldDeclaration) ?? false;
+            node?.Parent.IsKind(SyntaxKind.EventFieldDeclaration)
+            ?? false;
 
         public static bool ParentIsLocalDeclarationStatement(
             [NotNullWhen(true)] SyntaxNode? node
-        ) => node?.Parent.IsKind(SyntaxKind.LocalDeclarationStatement) ?? false;
+        ) =>
+            node?.Parent.IsKind(SyntaxKind.LocalDeclarationStatement)
+            ?? false;
     }
 }

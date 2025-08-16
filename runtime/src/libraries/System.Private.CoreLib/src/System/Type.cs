@@ -753,7 +753,8 @@ namespace System
             {
                 return GetRuntimeTypeCode((RuntimeType)type);
             }
-            return type?.GetTypeCodeImpl() ?? TypeCode.Empty;
+            return type?.GetTypeCodeImpl()
+                ?? TypeCode.Empty;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

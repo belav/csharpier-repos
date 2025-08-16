@@ -159,9 +159,8 @@ internal static class SharedTypeExtensions
     public static Type? TryGetSequenceType(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] this Type type
     ) =>
-        type.TryGetElementType(typeof(IEnumerable<>)) ?? type.TryGetElementType(
-            typeof(IAsyncEnumerable<>)
-        );
+        type.TryGetElementType(typeof(IEnumerable<>))
+        ?? type.TryGetElementType(typeof(IAsyncEnumerable<>));
 
     public static Type? TryGetElementType(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] this Type type,

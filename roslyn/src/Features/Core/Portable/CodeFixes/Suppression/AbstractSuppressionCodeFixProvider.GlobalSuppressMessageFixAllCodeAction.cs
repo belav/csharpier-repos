@@ -354,7 +354,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 foreach (var (symbol, diagnostics) in diagnosticsMapBuilder)
                     builder.Add(KeyValuePairUtil.Create(symbol, GetUniqueDiagnostics(diagnostics)));
 
-                return builder.OrderBy(kvp => kvp.Key.GetDocumentationCommentId() ?? string.Empty);
+                return builder.OrderBy(kvp =>
+                    kvp.Key.GetDocumentationCommentId()
+                    ?? string.Empty
+                );
             }
 
             private static ImmutableArray<Diagnostic> GetUniqueDiagnostics(

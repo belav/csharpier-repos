@@ -1825,7 +1825,8 @@ namespace System.Data.Services.Client
                     .FirstOrDefault();
                 if (codegenAttr == null || codegenAttr.Tool != Util.CodeGeneratorToolName)
                 {
-                    return this.resolveName(entityType) ?? descriptor.ServerTypeName;
+                    return this.resolveName(entityType)
+                        ?? descriptor.ServerTypeName;
                 }
                 else
                 {

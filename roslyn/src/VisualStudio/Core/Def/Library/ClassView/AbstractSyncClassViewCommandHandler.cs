@@ -44,7 +44,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
         {
             this.AssertIsForeground();
 
-            var caretPosition = args.TextView.GetCaretPoint(args.SubjectBuffer) ?? -1;
+            var caretPosition =
+                args.TextView.GetCaretPoint(args.SubjectBuffer)
+                ?? -1;
             if (caretPosition < 0)
             {
                 return false;

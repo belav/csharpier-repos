@@ -418,8 +418,10 @@ internal class Http3InMemory
             pool: memoryPool,
             readerScheduler: serviceContext.Scheduler,
             writerScheduler: writerScheduler,
-            pauseWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
-            resumeWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize ?? 0,
+            pauseWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize
+                ?? 0,
+            resumeWriterThreshold: serviceContext.ServerOptions.Limits.MaxRequestBufferSize
+                ?? 0,
             useSynchronizationContext: false,
             minimumSegmentSize: memoryPool.GetMinimumSegmentSize()
         );

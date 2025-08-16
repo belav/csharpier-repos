@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
 
             var tree = SyntaxFactory.ParseSyntaxTree(
                 script.SourceText,
-                script.Options.ParseOptions ?? DefaultParseOptions,
+                script.Options.ParseOptions
+                    ?? DefaultParseOptions,
                 script.Options.FilePath
             );
 

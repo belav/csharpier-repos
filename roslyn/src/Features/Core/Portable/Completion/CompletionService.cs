@@ -106,12 +106,15 @@ namespace Microsoft.CodeAnalysis.Completion
         {
             var document = text.GetOpenDocumentInCurrentContextWithChanges();
             var languageServices =
-                document?.Project.Services ?? _services.GetLanguageServices(Language);
+                document?.Project.Services
+                ?? _services.GetLanguageServices(Language);
 
             // Publicly available options do not affect this API.
             var completionOptions = CompletionOptions.Default;
             var passThroughOptions =
-                options ?? document?.Project.Solution.Options ?? OptionSet.Empty;
+                options
+                ?? document?.Project.Solution.Options
+                ?? OptionSet.Empty;
 
             return ShouldTriggerCompletion(
                 document?.Project,

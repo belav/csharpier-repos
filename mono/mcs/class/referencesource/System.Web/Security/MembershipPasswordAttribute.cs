@@ -314,9 +314,8 @@
         )]
         private string GetMinPasswordLengthError()
         {
-            return this._minPasswordLengthError.GetLocalizableValue() ?? SR.GetString(
-                    SR.MembershipPasswordAttribute_InvalidPasswordLength
-                );
+            return this._minPasswordLengthError.GetLocalizableValue()
+                ?? SR.GetString(SR.MembershipPasswordAttribute_InvalidPasswordLength);
         }
 
         /// <summary>
@@ -351,7 +350,8 @@
         )]
         private string GetMinNonAlphanumericCharactersError()
         {
-            return this._minNonAlphanumericCharactersError.GetLocalizableValue() ?? SR.GetString(
+            return this._minNonAlphanumericCharactersError.GetLocalizableValue()
+                ?? SR.GetString(
                     SR.MembershipPasswordAttribute_InvalidPasswordNonAlphanumericCharacters
                 );
         }
@@ -387,9 +387,8 @@
         )]
         private string GetPasswordStrengthError()
         {
-            return this._passwordStrengthError.GetLocalizableValue() ?? SR.GetString(
-                    SR.MembershipPasswordAttribute_InvalidPasswordStrength
-                );
+            return this._passwordStrengthError.GetLocalizableValue()
+                ?? SR.GetString(SR.MembershipPasswordAttribute_InvalidPasswordStrength);
         }
 
         private string FormatErrorMessage(

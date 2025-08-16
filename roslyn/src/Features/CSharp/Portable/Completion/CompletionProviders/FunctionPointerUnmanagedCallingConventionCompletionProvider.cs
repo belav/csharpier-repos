@@ -180,7 +180,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 
             public int GetHashCode(CompletionItem obj)
             {
-                return obj?.DisplayText.GetHashCode() ?? 0;
+                return obj?.DisplayText.GetHashCode()
+                    ?? 0;
             }
         }
     }

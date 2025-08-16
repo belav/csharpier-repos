@@ -125,7 +125,8 @@ public class TicketSerializer : IDataSerializer<AuthenticationTicket>
         WriteWithDefault(
             writer,
             claim.Type,
-            claim.Subject?.NameClaimType ?? ClaimsIdentity.DefaultNameClaimType
+            claim.Subject?.NameClaimType
+                ?? ClaimsIdentity.DefaultNameClaimType
         );
         writer.Write(claim.Value);
         WriteWithDefault(writer, claim.ValueType, ClaimValueTypes.String);

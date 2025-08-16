@@ -775,7 +775,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // from base types that were expected to have been initialized by the consumer at the construction site.
 
                         var chainedConstructorEnforcesRequiredMembers =
-                            GetBaseOrThisInitializer()?.ShouldCheckRequiredMembers() ?? false;
+                            GetBaseOrThisInitializer()?.ShouldCheckRequiredMembers()
+                            ?? false;
 
                         if (
                             chainedConstructorEnforcesRequiredMembers
@@ -7272,7 +7273,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var operandType = ResultType;
                 TypeWithAnnotations explicitType =
-                    boundConversion.ConversionGroupOpt?.ExplicitType ?? default;
+                    boundConversion.ConversionGroupOpt?.ExplicitType
+                    ?? default;
                 bool fromExplicitCast = explicitType.HasType;
                 TypeWithAnnotations targetType = fromExplicitCast
                     ? explicitType

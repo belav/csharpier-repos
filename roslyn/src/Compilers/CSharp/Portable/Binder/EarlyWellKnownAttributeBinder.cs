@@ -85,7 +85,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var objectCreation = (BaseObjectCreationExpressionSyntax)node;
                     return objectCreation.Initializer == null
-                        && (objectCreation.ArgumentList?.Arguments.Count ?? 0) == 0;
+                        && (
+                            objectCreation.ArgumentList?.Arguments.Count
+                            ?? 0
+                        ) == 0;
                 }
 
                 // sizeof(int)

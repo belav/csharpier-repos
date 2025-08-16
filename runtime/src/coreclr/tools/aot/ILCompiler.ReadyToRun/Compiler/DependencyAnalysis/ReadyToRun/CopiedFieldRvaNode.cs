@@ -90,7 +90,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 int currentSize = field.FieldType.GetElementSize().AsInt;
                 requiredAlignment = Math.Max(
                     requiredAlignment,
-                    (field.FieldType as MetadataType)?.GetClassLayout().PackingSize ?? 1
+                    (field.FieldType as MetadataType)?.GetClassLayout().PackingSize
+                        ?? 1
                 );
                 if (currentSize > size)
                 {

@@ -90,9 +90,8 @@ internal sealed class TerminalFormatStrings
         Foreground = db.GetString(TermInfo.WellKnownStrings.SetAnsiForeground);
         Background = db.GetString(TermInfo.WellKnownStrings.SetAnsiBackground);
         Reset =
-            db.GetString(TermInfo.WellKnownStrings.OrigPairs) ?? db.GetString(
-                TermInfo.WellKnownStrings.OrigColors
-            );
+            db.GetString(TermInfo.WellKnownStrings.OrigPairs)
+            ?? db.GetString(TermInfo.WellKnownStrings.OrigColors);
         Bell = db.GetString(TermInfo.WellKnownStrings.Bell);
         Clear = db.GetString(TermInfo.WellKnownStrings.Clear);
         if (db.GetExtendedString("E3") is string clearScrollbackBuffer)

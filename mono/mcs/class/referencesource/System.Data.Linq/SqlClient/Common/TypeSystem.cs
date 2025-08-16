@@ -155,7 +155,9 @@ namespace System.Data.Linq.SqlClient
 
         private static bool IsPrivate(PropertyInfo pi)
         {
-            MethodInfo mi = pi.GetGetMethod() ?? pi.GetSetMethod();
+            MethodInfo mi =
+                pi.GetGetMethod()
+                ?? pi.GetSetMethod();
             if (mi != null)
             {
                 return mi.IsPrivate;

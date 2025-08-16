@@ -30,7 +30,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return x.OriginalDefinition.Equals(y.OriginalDefinition);
             }
 
-            public int GetHashCode(ISymbol obj) => obj?.OriginalDefinition.GetHashCode() ?? 0;
+            public int GetHashCode(ISymbol obj) =>
+                obj?.OriginalDefinition.GetHashCode()
+                ?? 0;
         }
     }
 }

@@ -665,7 +665,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
         public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
         {
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.UseMemoryCache)] = (
-                Extension.GetMemoryCache()?.GetHashCode() ?? 0L
+                Extension.GetMemoryCache()?.GetHashCode()
+                ?? 0L
             ).ToString(CultureInfo.InvariantCulture);
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableSensitiveDataLogging)] =
                 Extension

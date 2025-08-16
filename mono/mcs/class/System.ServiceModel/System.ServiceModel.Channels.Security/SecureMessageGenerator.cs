@@ -246,7 +246,9 @@ namespace System.ServiceModel.Channels.Security
 
         public Message SecureMessage()
         {
-            secprop = Message.Properties.Security ?? new SecurityMessageProperty();
+            secprop =
+                Message.Properties.Security
+                ?? new SecurityMessageProperty();
 
             SecurityToken encToken =
                 secprop.InitiatorToken != null

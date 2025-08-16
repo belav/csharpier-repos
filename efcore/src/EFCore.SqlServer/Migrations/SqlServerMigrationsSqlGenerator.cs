@@ -354,7 +354,8 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
             }
 
             var oldType =
-                operation.OldColumn.ColumnType ?? GetColumnType(
+                operation.OldColumn.ColumnType
+                ?? GetColumnType(
                     operation.Schema,
                     operation.Table,
                     operation.Name,
@@ -2995,9 +2996,8 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
                         alterTableOperation.OldTable[
                             SqlServerAnnotationNames.TemporalHistoryTableSchema
                         ] as string
-                        ?? alterTableOperation.OldTable.Schema ?? model?[
-                            RelationalAnnotationNames.DefaultSchema
-                        ] as string;
+                        ?? alterTableOperation.OldTable.Schema
+                        ?? model?[RelationalAnnotationNames.DefaultSchema] as string;
 
                     if (isTemporalTable)
                     {

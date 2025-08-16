@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     ? ""
                     : string.Format(
                         MessageFormat,
-                        Args?.Select(a => a.GetDebuggerDisplay()).ToArray() ?? Array.Empty<object>()
+                        Args?.Select(a => a.GetDebuggerDisplay()).ToArray()
+                            ?? Array.Empty<object>()
                     );
         }
 

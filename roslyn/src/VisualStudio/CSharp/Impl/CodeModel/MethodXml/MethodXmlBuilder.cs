@@ -41,7 +41,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel.MethodXml
                 {
                     // In order to be valid, the comment must appear on its own line.
                     var line = Text.Lines.GetLineFromPosition(trivia.SpanStart);
-                    var firstNonWhitespacePosition = line.GetFirstNonWhitespacePosition() ?? -1;
+                    var firstNonWhitespacePosition =
+                        line.GetFirstNonWhitespacePosition()
+                        ?? -1;
                     if (firstNonWhitespacePosition == trivia.SpanStart)
                     {
                         using var tag = CommentTag();

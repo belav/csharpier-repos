@@ -200,7 +200,8 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
             if (factory != null && provider != null)
             {
                 _stringLocalizer = provider(
-                    context.ModelMetadata.ContainerType ?? context.ModelMetadata.ModelType,
+                    context.ModelMetadata.ContainerType
+                        ?? context.ModelMetadata.ModelType,
                     factory
                 );
             }

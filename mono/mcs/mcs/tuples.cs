@@ -440,7 +440,9 @@ namespace Mono.CSharp
                 return null;
 
             var t = new TupleTypeExpr(ta, names, loc);
-            type = t.ResolveAsType(rc) ?? InternalType.ErrorType;
+            type =
+                t.ResolveAsType(rc)
+                ?? InternalType.ErrorType;
 
             return this;
         }

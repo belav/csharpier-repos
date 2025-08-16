@@ -30,7 +30,9 @@ public class MicrosoftAccountOptions : OAuthOptions
         ClaimActions.MapJsonKey(ClaimTypes.Surname, "surname");
         ClaimActions.MapCustomJson(
             ClaimTypes.Email,
-            user => user.GetString("mail") ?? user.GetString("userPrincipalName")
+            user =>
+                user.GetString("mail")
+                ?? user.GetString("userPrincipalName")
         );
     }
 }

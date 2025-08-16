@@ -27,9 +27,8 @@ namespace Roslyn.Utilities
             try
             {
                 var type =
-                    Type.GetType(cultureInfoTypeNameGlobalization) ?? typeof(object)
-                        .GetTypeInfo()
-                        .Assembly.GetType(cultureInfoTypeName);
+                    Type.GetType(cultureInfoTypeNameGlobalization)
+                    ?? typeof(object).GetTypeInfo().Assembly.GetType(cultureInfoTypeName);
                 if ((object?)type == null)
                 {
                     setter = null;

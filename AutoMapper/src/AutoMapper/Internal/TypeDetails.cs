@@ -238,7 +238,10 @@ public class TypeDetails
         // Multiple types may define the same property (e.g. the class and multiple interfaces) - filter this to one of those properties
         IEnumerable<MemberInfo> members = GetProperties(PropertyWritable)
             .GroupBy(x => x.Name) // group properties of the same name together
-            .Select(x => x.FirstOrDefault(y => y.CanWrite && y.CanRead) ?? x.First()); // favor the first property that can both read & write - otherwise pick the first one
+            .Select(x =>
+                x.FirstOrDefault(y => y.CanWrite && y.CanRead)
+                ?? x.First()
+            ); // favor the first property that can both read & write - otherwise pick the first one
         if (Config.FieldMappingEnabled)
         {
             members = members.Concat(GetFields(FieldWritable));

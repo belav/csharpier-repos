@@ -132,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Emit
         internal EntityHandle GetInitialMetadataHandle(Cci.IDefinition def) =>
             MetadataTokens.EntityHandle(
                 SourceToMetadataSymbolMatcher.MapDefinition(def)?.GetInternalSymbol()?.MetadataToken
-                ?? 0
+                    ?? 0
             );
 
         public abstract SymbolMatcher SourceToMetadataSymbolMatcher { get; }

@@ -2394,7 +2394,8 @@ public static class BindConverter
                 var builder = new StringBuilder("[\"");
                 builder.Append(
                     JsonEncodedText.Encode(
-                        elementFormatter(value[0], culture)?.ToString() ?? string.Empty
+                        elementFormatter(value[0], culture)?.ToString()
+                            ?? string.Empty
                     )
                 );
                 builder.Append('\"');
@@ -2404,7 +2405,8 @@ public static class BindConverter
                     builder.Append(", \"");
                     builder.Append(
                         JsonEncodedText.Encode(
-                            elementFormatter(value[i], culture)?.ToString() ?? string.Empty
+                            elementFormatter(value[i], culture)?.ToString()
+                                ?? string.Empty
                         )
                     );
                     builder.Append('\"');

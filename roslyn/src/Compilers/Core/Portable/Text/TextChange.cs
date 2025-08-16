@@ -67,7 +67,11 @@ namespace Microsoft.CodeAnalysis.Text
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.Span.GetHashCode(), this.NewText?.GetHashCode() ?? 0);
+            return Hash.Combine(
+                this.Span.GetHashCode(),
+                this.NewText?.GetHashCode()
+                    ?? 0
+            );
         }
 
         public static bool operator ==(TextChange left, TextChange right)

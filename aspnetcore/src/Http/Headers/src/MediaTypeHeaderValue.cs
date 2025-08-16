@@ -71,7 +71,11 @@ public class MediaTypeHeaderValue
     /// </summary>
     public StringSegment Charset
     {
-        get { return NameValueHeaderValue.Find(_parameters, CharsetString)?.Value ?? default; }
+        get
+        {
+            return NameValueHeaderValue.Find(_parameters, CharsetString)?.Value
+                ?? default;
+        }
         set
         {
             HeaderUtilities.ThrowIfReadOnly(IsReadOnly);

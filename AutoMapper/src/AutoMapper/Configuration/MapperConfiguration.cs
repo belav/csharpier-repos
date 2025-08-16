@@ -270,7 +270,9 @@ public class MapperConfiguration : IGlobalConfiguration
                     Catch(ExceptionParameter, Throw(newException, destinationType))
                 );
             }
-            var profileMap = mapRequest.MemberMap?.Profile ?? Configuration;
+            var profileMap =
+                mapRequest.MemberMap?.Profile
+                ?? Configuration;
             fullExpression = this.NullCheckSource(
                 profileMap,
                 source,

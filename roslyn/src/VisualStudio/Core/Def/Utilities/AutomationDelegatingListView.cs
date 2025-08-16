@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         {
             List<AutomationPeer>? results = null;
             var peersToProcess = new Queue<AutomationPeer>(
-                base.GetChildrenCore() ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
+                base.GetChildrenCore()
+                    ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
             );
             while (peersToProcess.Count > 0)
             {
@@ -59,7 +60,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 {
                     foreach (
                         var childPeer in peer.GetChildren()
-                        ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
+                            ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
                     )
                     {
                         peersToProcess.Enqueue(childPeer);
@@ -172,7 +173,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 : base.GetPattern(patternInterface);
         }
 
-        protected override string GetNameCore() => GetAutomationPeer()?.GetName() ?? string.Empty;
+        protected override string GetNameCore() =>
+            GetAutomationPeer()?.GetName()
+            ?? string.Empty;
 
         private AutomationPeer? GetAutomationPeer() =>
             checkBoxItem ?? radioButtonItem ?? (AutomationPeer?)textBlockItem;

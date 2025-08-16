@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
         ) =>
             arguments.SelectAsArray(a => new Argument(
                 refKind: RefKind.None,
-                a.NameEquals?.Name.Identifier.ValueText ?? a.NameColon?.Name.Identifier.ValueText,
+                a.NameEquals?.Name.Identifier.ValueText
+                    ?? a.NameColon?.Name.Identifier.ValueText,
                 a.Expression
             ));
 

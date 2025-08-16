@@ -874,7 +874,8 @@ namespace System.ServiceModel.Dispatcher
                                 SR.GetString(
                                     SR.SFxInvalidReplyAction,
                                     this.Name,
-                                    reply.Headers.Action ?? "{NULL}",
+                                    reply.Headers.Action
+                                        ?? "{NULL}",
                                     this.ReplyAction
                                 )
                             )

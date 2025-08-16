@@ -319,7 +319,8 @@ namespace System.Net.Http
             MediaTypeFormatter formatter = null;
             // Default to "application/octet-stream" if there is no content-type in accordance with section 7.2.1 of the HTTP spec
             MediaTypeHeaderValue mediaType =
-                content.Headers.ContentType ?? MediaTypeConstants.ApplicationOctetStreamMediaType;
+                content.Headers.ContentType
+                ?? MediaTypeConstants.ApplicationOctetStreamMediaType;
 
             formatter = new MediaTypeFormatterCollection(formatters).FindReader(type, mediaType);
 

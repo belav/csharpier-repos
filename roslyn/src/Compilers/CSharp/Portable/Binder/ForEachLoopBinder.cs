@@ -333,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ReportBadAwaitDiagnostics(_syntax.AwaitKeyword, diagnostics, ref hasErrors);
                 var placeholder = new BoundAwaitableValuePlaceholder(
                     expr,
-                    builder.MoveNextInfo?.Method.ReturnType ?? CreateErrorType()
+                    builder.MoveNextInfo?.Method.ReturnType
+                        ?? CreateErrorType()
                 );
                 awaitInfo = BindAwaitInfo(placeholder, expr, diagnostics, ref hasErrors);
 

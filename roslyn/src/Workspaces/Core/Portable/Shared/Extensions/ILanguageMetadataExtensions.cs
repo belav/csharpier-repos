@@ -50,7 +50,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             foreach (var service in services)
             {
-                var language = service.Metadata?.Language ?? string.Empty;
+                var language =
+                    service.Metadata?.Language
+                    ?? string.Empty;
                 var list = builder.GetOrAdd(
                     language,
                     _ => ArrayBuilder<Lazy<TInterface, TMetadata>>.GetInstance()

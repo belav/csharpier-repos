@@ -108,7 +108,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.UnitTests
             var compiler = new CSharpInteractiveCompiler(
                 responseFile,
                 buildPaths,
-                args?.Where(a => a != null).ToArray() ?? s_defaultArgs,
+                args?.Where(a => a != null).ToArray()
+                    ?? s_defaultArgs,
                 new NotImplementedAnalyzerLoader()
             );
 

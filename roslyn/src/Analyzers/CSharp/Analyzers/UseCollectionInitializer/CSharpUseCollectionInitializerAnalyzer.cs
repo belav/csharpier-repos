@@ -84,7 +84,9 @@ internal sealed class CSharpUseCollectionInitializerAnalyzer
 
         // The original collection could have been passed elements explicitly in its initializer.  Ensure we account for
         // that as well.
-        var individualElementCount = _objectCreationExpression.Initializer?.Expressions.Count ?? 0;
+        var individualElementCount =
+            _objectCreationExpression.Initializer?.Expressions.Count
+            ?? 0;
 
         // Walk the matches, determining what individual elements are added as-is, as well as what values are going to
         // be spread into the final collection.  We'll then ensure a correspondance between both and the expression the

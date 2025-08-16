@@ -414,7 +414,8 @@ namespace System.Text
                         SR.Format(
                             SR.Argument_EncoderFallbackNotEmpty,
                             this.EncodingName,
-                            encoder.Fallback?.GetType().ToString() ?? string.Empty
+                            encoder.Fallback?.GetType().ToString()
+                                ?? string.Empty
                         )
                     );
             }

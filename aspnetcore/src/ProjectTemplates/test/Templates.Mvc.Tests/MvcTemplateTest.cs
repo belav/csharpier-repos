@@ -88,7 +88,9 @@ public class MvcTemplateTest : LoggedTest
 
         await project.RunDotNetNewAsync("mvc", language: languageOverride, args: args);
 
-        var noHttps = args?.Contains(ArgConstants.NoHttps) ?? false;
+        var noHttps =
+            args?.Contains(ArgConstants.NoHttps)
+            ?? false;
         var expectedLaunchProfileNames = noHttps
             ? new[] { "http", "IIS Express" }
             : new[] { "http", "https", "IIS Express" };

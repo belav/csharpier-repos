@@ -45,7 +45,11 @@ namespace System.ComponentModel.Composition.Hosting
             Requires.NotNull(filter, "filter");
 
             this._innerCatalog = catalog;
-            this._filter = (p) => filter.Invoke(p.GetGenericPartDefinition() ?? p);
+            this._filter = (p) =>
+                filter.Invoke(
+                    p.GetGenericPartDefinition()
+                        ?? p
+                );
             this._complement = complement;
 
             INotifyComposablePartCatalogChanged notifyCatalog =

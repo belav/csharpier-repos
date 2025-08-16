@@ -35,7 +35,8 @@ namespace System.Formats.Asn1
 
             // Clear the constructed flag, if present.
             WriteGeneralizedTimeCore(
-                tag?.AsPrimitive() ?? Asn1Tag.GeneralizedTime,
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.GeneralizedTime,
                 value,
                 omitFractionalSeconds
             );

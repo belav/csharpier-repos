@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 return null;
 
             var impl =
-                type.FindImplementationForInterfaceMember(methodToLookFor) ?? methodToLookFor;
+                type.FindImplementationForInterfaceMember(methodToLookFor)
+                ?? methodToLookFor;
             return impl as IMethodSymbol;
 
             IMethodSymbol? GetDisposeMethod(string typeName, string methodName)

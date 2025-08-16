@@ -221,8 +221,8 @@ namespace System.Net.Http
                 // Since the underlying byte[] will never be exposed, we use an ArrayPool-backed
                 // stream to which we copy all of the data from the response.
                 using Stream responseStream =
-                    c.TryReadAsStream() ?? await c.ReadAsStreamAsync(cts.Token)
-                        .ConfigureAwait(false);
+                    c.TryReadAsStream()
+                    ?? await c.ReadAsStreamAsync(cts.Token).ConfigureAwait(false);
                 using var buffer = new HttpContent.LimitArrayPoolWriteStream(
                     _maxResponseContentBufferSize,
                     (int)c.Headers.ContentLength.GetValueOrDefault()
@@ -337,8 +337,8 @@ namespace System.Net.Http
                     : new HttpContent.LimitArrayPoolWriteStream(_maxResponseContentBufferSize);
 
                 using Stream responseStream =
-                    c.TryReadAsStream() ?? await c.ReadAsStreamAsync(cts.Token)
-                        .ConfigureAwait(false);
+                    c.TryReadAsStream()
+                    ?? await c.ReadAsStreamAsync(cts.Token).ConfigureAwait(false);
                 try
                 {
                     await responseStream.CopyToAsync(buffer, cts.Token).ConfigureAwait(false);
@@ -419,8 +419,8 @@ namespace System.Net.Http
                 response.EnsureSuccessStatusCode();
 
                 HttpContent c = response.Content;
-                return c.TryReadAsStream() ?? await c.ReadAsStreamAsync(cancellationToken)
-                        .ConfigureAwait(false);
+                return c.TryReadAsStream()
+                    ?? await c.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {

@@ -51,7 +51,8 @@ namespace Mono.Linker
                         {
                             int genericParametersCount = type.GenericParameters.Count;
                             int declaringTypeGenericParametersCount =
-                                type.DeclaringType?.GenericParameters?.Count ?? 0;
+                                type.DeclaringType?.GenericParameters?.Count
+                                ?? 0;
 
                             string simpleName;
                             if (genericParametersCount > declaringTypeGenericParametersCount)

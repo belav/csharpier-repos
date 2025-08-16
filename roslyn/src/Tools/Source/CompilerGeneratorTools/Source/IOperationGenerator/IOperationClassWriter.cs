@@ -1067,7 +1067,8 @@ namespace IOperationGenerator
         private static bool HasMultipleValidKinds(AbstractNode type)
         {
             return (
-                    type.OperationKind?.Entries?.Where(e => e.EditorBrowsable != false).Count() ?? 0
+                    type.OperationKind?.Entries?.Where(e => e.EditorBrowsable != false).Count()
+                    ?? 0
                 ) > 1;
         }
 

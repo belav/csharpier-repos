@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             _compilation = compilation;
 
-            var typeMap = underlyingMethod.ContainingType.TypeSubstitution ?? TypeMap.Empty;
+            var typeMap =
+                underlyingMethod.ContainingType.TypeSubstitution
+                ?? TypeMap.Empty;
             typeMap.WithAlphaRename(underlyingMethod, this, out _typeParameters);
 
             _underlyingMethod = underlyingMethod.ConstructIfGeneric(TypeArgumentsWithAnnotations);

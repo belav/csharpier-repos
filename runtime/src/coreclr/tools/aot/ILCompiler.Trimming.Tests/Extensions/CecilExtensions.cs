@@ -129,7 +129,8 @@ namespace Mono.Linker.Tests.Extensions
             if (type.BaseType.Name == baseTypeName)
                 return true;
 
-            return type.BaseType.Resolve()?.DerivesFrom(baseTypeName) ?? false;
+            return type.BaseType.Resolve()?.DerivesFrom(baseTypeName)
+                ?? false;
         }
 
         public static PropertyDefinition GetPropertyDefinition(this MethodDefinition method)
@@ -354,7 +355,8 @@ namespace Mono.Linker.Tests.Extensions
                         {
                             int genericParametersCount = type.GenericParameters.Count;
                             int declaringTypeGenericParametersCount =
-                                type.DeclaringType?.GenericParameters?.Count ?? 0;
+                                type.DeclaringType?.GenericParameters?.Count
+                                ?? 0;
 
                             string simpleName;
                             if (genericParametersCount > declaringTypeGenericParametersCount)

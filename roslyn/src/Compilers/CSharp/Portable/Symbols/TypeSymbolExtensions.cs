@@ -205,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static TypeSymbol EnumUnderlyingTypeOrSelf(this TypeSymbol type)
         {
-            return type.GetEnumUnderlyingType() ?? type;
+            return type.GetEnumUnderlyingType()
+                ?? type;
         }
 
         public static bool IsNativeIntegerOrNullableThereof(this TypeSymbol? type)

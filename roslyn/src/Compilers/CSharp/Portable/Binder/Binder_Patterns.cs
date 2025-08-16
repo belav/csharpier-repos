@@ -2464,7 +2464,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             } memberSymbol
                     )
                     {
-                        TypeSymbol receiverType = member.Receiver?.Type ?? inputType;
+                        TypeSymbol receiverType =
+                            member.Receiver?.Type
+                            ?? inputType;
                         if (!receiverType.IsErrorType())
                         {
                             isLengthOrCount =

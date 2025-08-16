@@ -767,18 +767,24 @@ namespace Microsoft.Extensions.Primitives
             {
                 if (Count == 1)
                 {
-                    return Unsafe.As<string>(this[0])?.GetHashCode() ?? Count.GetHashCode();
+                    return Unsafe.As<string>(this[0])?.GetHashCode()
+                        ?? Count.GetHashCode();
                 }
                 int hashCode = 0;
                 for (int i = 0; i < values.Length; i++)
                 {
-                    hashCode = HashHelpers.Combine(hashCode, values[i]?.GetHashCode() ?? 0);
+                    hashCode = HashHelpers.Combine(
+                        hashCode,
+                        values[i]?.GetHashCode()
+                            ?? 0
+                    );
                 }
                 return hashCode;
             }
             else
             {
-                return Unsafe.As<string>(value)?.GetHashCode() ?? Count.GetHashCode();
+                return Unsafe.As<string>(value)?.GetHashCode()
+                    ?? Count.GetHashCode();
             }
         }
 

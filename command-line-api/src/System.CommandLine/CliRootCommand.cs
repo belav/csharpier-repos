@@ -69,7 +69,8 @@ namespace System.CommandLine
 
             if (assemblyVersionAttribute is null)
             {
-                return assembly.GetName().Version?.ToString() ?? "";
+                return assembly.GetName().Version?.ToString()
+                    ?? "";
             }
             else
             {

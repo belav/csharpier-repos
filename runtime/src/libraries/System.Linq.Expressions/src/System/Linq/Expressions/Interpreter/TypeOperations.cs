@@ -229,7 +229,10 @@ namespace System.Linq.Expressions.Interpreter
             public override int Run(InterpretedFrame frame)
             {
                 object? obj = frame.Pop();
-                frame.Push(obj?.GetHashCode() ?? 0);
+                frame.Push(
+                    obj?.GetHashCode()
+                        ?? 0
+                );
                 return 1;
             }
         }

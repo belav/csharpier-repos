@@ -52,7 +52,9 @@ namespace System
             );
         }
 
-        public static string Concat(object? arg0) => arg0?.ToString() ?? Empty;
+        public static string Concat(object? arg0) =>
+            arg0?.ToString()
+            ?? Empty;
 
         public static string Concat(object? arg0, object? arg1) =>
             Concat(arg0?.ToString(), arg1?.ToString());
@@ -66,7 +68,10 @@ namespace System
 
             if (args.Length <= 1)
             {
-                return args.Length == 0 ? Empty : args[0]?.ToString() ?? Empty;
+                return args.Length == 0
+                    ? Empty
+                    : args[0]?.ToString()
+                        ?? Empty;
             }
 
             // We need to get an intermediary string array

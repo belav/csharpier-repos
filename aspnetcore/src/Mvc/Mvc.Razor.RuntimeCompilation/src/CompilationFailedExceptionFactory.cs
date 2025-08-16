@@ -27,7 +27,9 @@ internal static class CompilationFailedExceptionFactory
     {
         // If a SourceLocation does not specify a file path, assume it is produced from parsing the current file.
         var messageGroups = diagnostics.GroupBy(
-            razorError => razorError.Span.FilePath ?? codeDocument.Source.FilePath,
+            razorError =>
+                razorError.Span.FilePath
+                ?? codeDocument.Source.FilePath,
             StringComparer.Ordinal
         );
 

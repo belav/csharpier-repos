@@ -28,7 +28,9 @@ class C
         if (v2 != null)
             return 2;
 
-        var v3 = arr?[0].GetHashCode() ?? 724;
+        var v3 =
+            arr?[0].GetHashCode()
+            ?? 724;
         if (v3 != 724)
             return 3;
 
@@ -53,7 +55,9 @@ class C
         if (v2 != null)
             return 2;
 
-        var v3 = ci?[0].GetHashCode() ?? 724;
+        var v3 =
+            ci?[0].GetHashCode()
+            ?? 724;
         if (v3 != 724)
             return 3;
 

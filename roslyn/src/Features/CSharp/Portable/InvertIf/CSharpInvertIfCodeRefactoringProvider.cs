@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
         protected override StatementSyntax GetEmptyEmbeddedStatement() => SyntaxFactory.Block();
 
         protected override StatementSyntax GetElseBody(IfStatementSyntax ifNode) =>
-            ifNode.Else?.Statement ?? throw new InvalidOperationException();
+            ifNode.Else?.Statement
+            ?? throw new InvalidOperationException();
 
         protected override bool CanControlFlowOut(SyntaxNode node)
         {

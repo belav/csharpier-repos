@@ -791,9 +791,8 @@ namespace System.ServiceModel.Dispatcher
             if (res == null)
             {
                 var conv =
-                    ch.GetProperty<FaultConverter>() ?? FaultConverter.GetDefaultFaultConverter(
-                        owner.MessageVersion
-                    );
+                    ch.GetProperty<FaultConverter>()
+                    ?? FaultConverter.GetDefaultFaultConverter(owner.MessageVersion);
                 if (!conv.TryCreateFaultMessage(ex, out res))
                     res = Message.CreateMessage(
                         owner.MessageVersion,

@@ -121,7 +121,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var token1 = root.FindToken(textSpan.Start);
             var token2 = root.FindTokenFromEnd(textSpan.End);
 
-            var commonRoot = token1.GetCommonRoot(token2).GetAncestorOrThis<T>() ?? root;
+            var commonRoot =
+                token1.GetCommonRoot(token2).GetAncestorOrThis<T>()
+                ?? root;
 
             var firstStatement = (T)null;
             var lastStatement = (T)null;
@@ -193,7 +195,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var token1 = root.FindToken(textSpan.Start);
             var token2 = root.FindTokenFromEnd(textSpan.End);
 
-            var commonRoot = token1.GetCommonRoot(token2).GetAncestorOrThis<T>() ?? root;
+            var commonRoot =
+                token1.GetCommonRoot(token2).GetAncestorOrThis<T>()
+                ?? root;
 
             T firstStatement = null;
             T lastStatement = null;

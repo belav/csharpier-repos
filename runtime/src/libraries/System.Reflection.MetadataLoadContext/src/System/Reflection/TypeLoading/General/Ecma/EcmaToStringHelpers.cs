@@ -46,7 +46,9 @@ namespace System.Reflection.TypeLoading.Ecma
         public static string ToTypeString(this TypeDefinitionHandle handle, MetadataReader reader)
         {
             TypeDefinition td = handle.GetTypeDefinition(reader);
-            string ns = td.Namespace.GetStringOrNull(reader) ?? string.Empty;
+            string ns =
+                td.Namespace.GetStringOrNull(reader)
+                ?? string.Empty;
             string name = td.Name.GetString(reader);
             if (td.IsNested)
             {
@@ -59,7 +61,9 @@ namespace System.Reflection.TypeLoading.Ecma
         public static string ToTypeString(this TypeReferenceHandle handle, MetadataReader reader)
         {
             TypeReference tr = handle.GetTypeReference(reader);
-            string ns = tr.Namespace.GetStringOrNull(reader) ?? string.Empty;
+            string ns =
+                tr.Namespace.GetStringOrNull(reader)
+                ?? string.Empty;
             string name = tr.Name.GetString(reader);
             if (
                 tr.ResolutionScope.Kind == HandleKind.TypeDefinition

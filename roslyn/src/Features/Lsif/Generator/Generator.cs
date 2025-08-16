@@ -656,7 +656,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     static (t, syntaxFacts) => !syntaxFacts.IsWhitespaceOrEndOfLineTrivia(t),
                     syntaxFacts
                 );
-            var fullRangeEnd = lastNonWhitespaceTrivia?.Span.End ?? syntaxNode.Span.End;
+            var fullRangeEnd =
+                lastNonWhitespaceTrivia?.Span.End
+                ?? syntaxNode.Span.End;
 
             var fullRangeSpan = TextSpan.FromBounds(fullRangeStart, fullRangeEnd);
             var fullRange = ProtocolConversions.TextSpanToRange(

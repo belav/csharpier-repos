@@ -14,7 +14,9 @@ namespace ILCompiler
     {
         public override bool GenerateDirectCall(MethodDesc method, out string externName)
         {
-            externName = method.GetPInvokeMethodMetadata().Name ?? method.Name;
+            externName =
+                method.GetPInvokeMethodMetadata().Name
+                ?? method.Name;
             return true;
         }
     }

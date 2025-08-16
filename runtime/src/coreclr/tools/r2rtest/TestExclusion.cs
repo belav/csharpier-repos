@@ -169,7 +169,9 @@ namespace R2RTest
                         )
                     )
                     {
-                        string condition = itemGroupElement.Attribute("Condition")?.Value ?? "";
+                        string condition =
+                            itemGroupElement.Attribute("Condition")?.Value
+                            ?? "";
                         List<TestExclusion> exclusions;
                         if (!exclusionsByCondition.TryGetValue(condition, out exclusions))
                         {
@@ -182,7 +184,9 @@ namespace R2RTest
                             )
                         )
                         {
-                            string testPath = excludeListElement.Attribute("Include")?.Value ?? "";
+                            string testPath =
+                                excludeListElement.Attribute("Include")?.Value
+                                ?? "";
                             string issueID =
                                 excludeListElement.Element(s_xmlNamespace + "Issue")?.Value
                                 ?? "N/A";

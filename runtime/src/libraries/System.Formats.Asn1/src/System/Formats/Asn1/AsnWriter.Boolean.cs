@@ -22,7 +22,11 @@ namespace System.Formats.Asn1
         {
             CheckUniversalTag(tag, UniversalTagNumber.Boolean);
 
-            WriteBooleanCore(tag?.AsPrimitive() ?? Asn1Tag.Boolean, value);
+            WriteBooleanCore(
+                tag?.AsPrimitive()
+                    ?? Asn1Tag.Boolean,
+                value
+            );
         }
 
         // T-REC-X.690-201508 sec 11.1, 8.2

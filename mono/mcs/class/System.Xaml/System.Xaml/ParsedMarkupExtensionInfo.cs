@@ -88,7 +88,9 @@ namespace System.Xaml
                 {
                     var key = vpair.Substring(0, idx).Trim();
                     // FIXME: is unknown member always isAttacheable = false?
-                    var xm = xt.GetMember(key) ?? new XamlMember(key, xt, false);
+                    var xm =
+                        xt.GetMember(key)
+                        ?? new XamlMember(key, xt, false);
                     ret.Arguments.Add(xm, UnescapeValue(vpair.Substring(idx + 1).Trim()));
                 }
             }

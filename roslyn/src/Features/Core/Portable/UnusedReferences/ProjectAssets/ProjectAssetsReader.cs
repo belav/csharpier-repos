@@ -124,7 +124,9 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             var referenceType = ReferenceType.Unknown;
             var itemSpecification = referenceName;
 
-            var packagesPath = projectAssets.Project?.Restore?.PackagesPath ?? string.Empty;
+            var packagesPath =
+                projectAssets.Project?.Restore?.PackagesPath
+                ?? string.Empty;
 
             RoslynDebug.AssertNotNull(projectAssets.Targets);
             RoslynDebug.AssertNotNull(projectAssets.Libraries);

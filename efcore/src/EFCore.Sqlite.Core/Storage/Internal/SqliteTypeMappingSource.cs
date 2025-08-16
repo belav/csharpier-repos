@@ -123,7 +123,9 @@ public class SqliteTypeMappingSource : RelationalTypeMappingSource
     /// </summary>
     protected override RelationalTypeMapping? FindMapping(in RelationalTypeMappingInfo mappingInfo)
     {
-        var mapping = base.FindMapping(mappingInfo) ?? FindRawMapping(mappingInfo);
+        var mapping =
+            base.FindMapping(mappingInfo)
+            ?? FindRawMapping(mappingInfo);
 
         return mapping != null && mappingInfo.StoreTypeName != null
             ? mapping.WithStoreTypeAndSize(mappingInfo.StoreTypeName, null)

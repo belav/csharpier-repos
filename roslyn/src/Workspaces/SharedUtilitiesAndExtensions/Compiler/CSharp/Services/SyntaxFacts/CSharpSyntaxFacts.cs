@@ -600,7 +600,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
 
         public SeparatedSyntaxList<SyntaxNode> GetTypeArgumentsOfGenericName(
             SyntaxNode? genericName
-        ) => (genericName as GenericNameSyntax)?.TypeArgumentList.Arguments ?? default;
+        ) =>
+            (genericName as GenericNameSyntax)?.TypeArgumentList.Arguments
+            ?? default;
 
         public SyntaxNode? GetTargetOfMemberBinding(SyntaxNode? node) =>
             (node as MemberBindingExpressionSyntax)
@@ -842,7 +844,9 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
 
             var names = ArrayBuilder<string?>.GetInstance();
             // containing type(s)
-            var parent = node.GetAncestor<TypeDeclarationSyntax>() ?? node.Parent;
+            var parent =
+                node.GetAncestor<TypeDeclarationSyntax>()
+                ?? node.Parent;
             while (parent is TypeDeclarationSyntax)
             {
                 names.Push(GetName(parent, options));
@@ -1250,7 +1254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
         }
 
         public string GetNameForArgument(SyntaxNode? argument) =>
-            (argument as ArgumentSyntax)?.NameColon?.Name.Identifier.ValueText ?? string.Empty;
+            (argument as ArgumentSyntax)?.NameColon?.Name.Identifier.ValueText
+            ?? string.Empty;
 
         public string GetNameForAttributeArgument(SyntaxNode? argument) =>
             (argument as AttributeArgumentSyntax)?.NameEquals?.Name.Identifier.ValueText

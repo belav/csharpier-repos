@@ -244,7 +244,9 @@ namespace System.Data.Services.Client
 
         internal static bool IsPrivate(PropertyInfo pi)
         {
-            MethodInfo mi = pi.GetGetMethod() ?? pi.GetSetMethod();
+            MethodInfo mi =
+                pi.GetGetMethod()
+                ?? pi.GetSetMethod();
             if (mi != null)
             {
                 return mi.IsPrivate;

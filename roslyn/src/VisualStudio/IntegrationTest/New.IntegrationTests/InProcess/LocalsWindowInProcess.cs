@@ -32,7 +32,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             var debugger = await GetDebuggerAsync(cancellationToken);
-            return debugger.CurrentStackFrame?.Locals.Count ?? 0;
+            return debugger.CurrentStackFrame?.Locals.Count
+                ?? 0;
         }
 
         public async Task<(string type, string value)> GetEntryAsync(

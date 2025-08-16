@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GoToDefinition
                         return foundReturnableConstruct.GetFirstToken().Span.Start;
                     }
 
-                    return symbol.Locations.FirstOrDefault()?.SourceSpan.Start ?? 0;
+                    return symbol.Locations.FirstOrDefault()?.SourceSpan.Start
+                        ?? 0;
                 }
 
                 case SyntaxKind.GotoKeyword:

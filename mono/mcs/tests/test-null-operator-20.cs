@@ -8,6 +8,10 @@ class M
         string s1 = "abcd";
         string s2 = null;
 
-        var idx = s1.Substring(1)[s2?.GetHashCode() ?? 0].GetHashCode();
+        var idx = s1.Substring(1)[
+                s2?.GetHashCode()
+                    ?? 0
+            ]
+            .GetHashCode();
     }
 }

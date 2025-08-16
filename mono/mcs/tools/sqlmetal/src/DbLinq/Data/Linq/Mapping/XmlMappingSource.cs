@@ -367,7 +367,9 @@ namespace DbLinq.Data.Linq.Mapping
             public DbmlColumn(XmlReader r)
             {
                 Member = r.GetAttribute("Member");
-                Name = r.GetAttribute("Name") ?? Member;
+                Name =
+                    r.GetAttribute("Name")
+                    ?? Member;
                 Storage = r.GetAttribute("Storage");
                 DbType = r.GetAttribute("DbType");
                 IsPrimaryKey = GetBooleanAttribute(r, "IsPrimaryKey");
@@ -575,7 +577,9 @@ namespace DbLinq.Data.Linq.Mapping
                     !name.Contains('.') && !String.IsNullOrEmpty(ns)
                         ? String.Concat(ns, ".", name)
                         : name;
-                var t = this.context_type.Assembly.GetType(full) ?? System.Type.GetType(full);
+                var t =
+                    this.context_type.Assembly.GetType(full)
+                    ?? System.Type.GetType(full);
                 if (t == null)
                     throw new ArgumentException(String.Format("Type '{0}' was not found", full));
                 return t;

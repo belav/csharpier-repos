@@ -654,7 +654,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor
     }
 
     private static Type GetProviderType(SqlExpression expression) =>
-        expression.TypeMapping?.Converter?.ProviderClrType ?? expression.TypeMapping?.ClrType
+        expression.TypeMapping?.Converter?.ProviderClrType
+        ?? expression.TypeMapping?.ClrType
         ?? expression.Type;
 
     /// <summary>

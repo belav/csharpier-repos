@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0]
                         .Equals(
                             Expression.Type?.TryGetInlineArrayElementField()?.TypeWithAnnotations
-                            ?? default,
+                                ?? default,
                             TypeCompareKind.ConsiderEverything
                         )
                 );

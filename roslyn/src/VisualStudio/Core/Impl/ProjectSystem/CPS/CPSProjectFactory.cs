@@ -191,7 +191,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
                     ImmutableInterlocked.Update(
                         ref _solutionsWithMissingChecksumAlgorithm,
                         static (set, solutionPath) => set.Add(solutionPath),
-                        _workspace.CurrentSolution.FilePath ?? ""
+                        _workspace.CurrentSolution.FilePath
+                            ?? ""
                     );
                 }
             }

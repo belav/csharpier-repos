@@ -223,7 +223,8 @@ namespace ILCompiler
                             LogWarning(
                                 assemblyNav,
                                 DiagnosticId.AssemblyWithEmbeddedXmlApplyToAnotherAssembly,
-                                _owningModule.Assembly.GetName().Name ?? "",
+                                _owningModule.Assembly.GetName().Name
+                                    ?? "",
                                 name.ToString()
                             );
 #endif

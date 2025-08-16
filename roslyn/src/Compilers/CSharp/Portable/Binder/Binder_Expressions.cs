@@ -2214,7 +2214,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static ConstantValue GetConstantSizeOf(TypeSymbol type)
         {
-            return ConstantValue.CreateSizeOf((type.GetEnumUnderlyingType() ?? type).SpecialType);
+            return ConstantValue.CreateSizeOf(
+                (
+                    type.GetEnumUnderlyingType()
+                    ?? type
+                ).SpecialType
+            );
         }
 
         private BoundExpression BindDefaultExpression(
@@ -9159,7 +9164,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 CheckRequiredMembersInObjectInitializer(
                     creation.Constructor,
-                    creation.InitializerExpressionOpt?.Initializers ?? default,
+                    creation.InitializerExpressionOpt?.Initializers
+                        ?? default,
                     creation.Syntax,
                     diagnostics
                 );

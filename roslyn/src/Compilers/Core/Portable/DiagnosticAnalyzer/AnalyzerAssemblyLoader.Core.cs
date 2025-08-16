@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis
             DirectoryLoadContext? loadContext;
 
             var fullDirectoryPath =
-                Path.GetDirectoryName(assemblyOriginalPath) ?? throw new ArgumentException(
+                Path.GetDirectoryName(assemblyOriginalPath)
+                ?? throw new ArgumentException(
                     message: null,
                     paramName: nameof(assemblyOriginalPath)
                 );

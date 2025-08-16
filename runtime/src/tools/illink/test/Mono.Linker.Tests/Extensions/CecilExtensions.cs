@@ -128,7 +128,8 @@ namespace Mono.Linker.Tests.Extensions
             if (type.BaseType.Name == baseTypeName)
                 return true;
 
-            return type.BaseType.Resolve()?.DerivesFrom(baseTypeName) ?? false;
+            return type.BaseType.Resolve()?.DerivesFrom(baseTypeName)
+                ?? false;
         }
 
         public static PropertyDefinition GetPropertyDefinition(this MethodDefinition method)

@@ -210,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             {
                 // recurse downwards so we visit inner namespaces first.
                 var rewritten = (CompilationUnitSyntax)(
-                    base.VisitCompilationUnit(node) ?? throw ExceptionUtilities.Unreachable()
+                    base.VisitCompilationUnit(node)
+                    ?? throw ExceptionUtilities.Unreachable()
                 );
 
                 if (!node.CanAddUsingDirectives(_options.AllowInHiddenRegions, _cancellationToken))

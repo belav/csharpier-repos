@@ -361,9 +361,8 @@ namespace System.Activities.Runtime
             else if (updatedActivity.MapEntry.IsRuntimeUpdateBlocked)
             {
                 error =
-                    updatedActivity.MapEntry.BlockReasonMessage ?? UpdateBlockedReasonMessages.Get(
-                        updatedActivity.MapEntry.BlockReason
-                    );
+                    updatedActivity.MapEntry.BlockReasonMessage
+                    ?? UpdateBlockedReasonMessages.Get(updatedActivity.MapEntry.BlockReason);
             }
             else if (updatedActivity.MapEntry.IsUpdateBlockedByUpdateAuthor)
             {

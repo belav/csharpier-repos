@@ -174,7 +174,13 @@ namespace System.Runtime.Serialization.Formatters.Tests
             {
                 if (collection?.Count > 0)
                 {
-                    return string.Join("; ", collection.Select(o => o?.ToString() ?? "<null>"));
+                    return string.Join(
+                        "; ",
+                        collection.Select(o =>
+                            o?.ToString()
+                            ?? "<null>"
+                        )
+                    );
                 }
                 else
                 {

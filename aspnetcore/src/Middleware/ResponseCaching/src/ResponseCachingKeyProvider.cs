@@ -103,7 +103,9 @@ internal sealed class ResponseCachingKeyProvider : IResponseCachingKeyProvider
             builder.Append(varyByRules.VaryByKeyPrefix);
 
             // Vary by headers
-            var headersCount = varyByRules?.Headers.Count ?? 0;
+            var headersCount =
+                varyByRules?.Headers.Count
+                ?? 0;
             if (headersCount > 0)
             {
                 // Append a group separator for the header segment of the cache key

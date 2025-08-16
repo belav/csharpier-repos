@@ -635,7 +635,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             return !symbol.IsSealed
                 && (symbol.IsAbstract || symbol.IsVirtual)
-                && (symbol.ContainingType?.IsInterface ?? false);
+                && (
+                    symbol.ContainingType?.IsInterface
+                    ?? false
+                );
         }
 
         internal static bool RequiresInstanceReceiver(this Symbol symbol)

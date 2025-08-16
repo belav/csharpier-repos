@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (project.AnalyzerConfigDocuments.Any())
             {
                 var diagnosticFilePath = PathUtilities.GetDirectoryName(
-                    diagnostic?.Location.SourceTree?.FilePath ?? project.FilePath
+                    diagnostic?.Location.SourceTree?.FilePath
+                        ?? project.FilePath
                 );
                 if (!PathUtilities.IsAbsolute(diagnosticFilePath))
                 {
@@ -104,7 +105,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             // Did not find any existing .editorconfig, so create one at root of the solution, if one exists.
             // If project is not part of a solution, then use project path.
-            var solutionOrProjectFilePath = project.Solution?.FilePath ?? project.FilePath;
+            var solutionOrProjectFilePath =
+                project.Solution?.FilePath
+                ?? project.FilePath;
             if (!PathUtilities.IsAbsolute(solutionOrProjectFilePath))
             {
                 return null;

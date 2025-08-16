@@ -66,7 +66,8 @@ namespace SslStress.Utils
                         (
                             e.GetType(),
                             e.Message ?? "",
-                            new StackTrace(e, true).GetFrame(0)?.ToString() ?? ""
+                            new StackTrace(e, true).GetFrame(0)?.ToString()
+                                ?? ""
                         )
                     );
                     e = e.InnerException;

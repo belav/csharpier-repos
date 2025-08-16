@@ -611,7 +611,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 recordDeclaration.Identifier,
                 LastNotMissing(
                     recordDeclaration.Identifier,
-                    recordDeclaration.TypeParameterList?.GreaterThanToken ?? default
+                    recordDeclaration.TypeParameterList?.GreaterThanToken
+                        ?? default
                 )
             );
 

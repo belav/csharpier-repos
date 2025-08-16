@@ -9,7 +9,8 @@ public class AppendCorrelatedCollectionExpressionMutator : ExpressionMutator
         : base(context) { }
 
     private bool ContainsCollectionNavigation(Type type) =>
-        Context.Model.FindEntityType(type)?.GetNavigations().Any(n => n.IsCollection) ?? false;
+        Context.Model.FindEntityType(type)?.GetNavigations().Any(n => n.IsCollection)
+        ?? false;
 
     public override bool IsValid(Expression expression) =>
         IsQueryableResult(expression)

@@ -17,9 +17,8 @@ namespace Microsoft.CodeAnalysis.Host
 
         public string DatabaseFile { get; }
         public string DatabaseDirectory =>
-            Path.GetDirectoryName(DatabaseFile) ?? throw ExceptionUtilities.UnexpectedValue(
-                DatabaseFile
-            );
+            Path.GetDirectoryName(DatabaseFile)
+            ?? throw ExceptionUtilities.UnexpectedValue(DatabaseFile);
 
         private bool _isDisabled;
 

@@ -392,7 +392,8 @@ namespace System.Data.Services.Client
             }
             else
             {
-                return this.context.ResolveNameFromType(type) ?? type.FullName;
+                return this.context.ResolveNameFromType(type)
+                    ?? type.FullName;
             }
         }
 

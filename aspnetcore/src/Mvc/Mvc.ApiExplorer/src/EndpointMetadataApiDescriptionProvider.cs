@@ -252,7 +252,9 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
     )
     {
         var parameterName = parameter.Name ?? string.Empty;
-        var name = pattern.GetParameter(parameterName)?.Name ?? parameterName;
+        var name =
+            pattern.GetParameter(parameterName)?.Name
+            ?? parameterName;
         return new EndpointParameterDescriptor
         {
             Name = name,
@@ -320,7 +322,9 @@ internal sealed class EndpointMetadataApiDescriptionProvider : IApiDescriptionPr
         if (attributes.OfType<IFromRouteMetadata>().FirstOrDefault() is { } routeAttribute)
         {
             var parameterName = parameter.Name ?? string.Empty;
-            var name = pattern.GetParameter(parameterName)?.Name ?? parameterName;
+            var name =
+                pattern.GetParameter(parameterName)?.Name
+                ?? parameterName;
             return (
                 BindingSource.Path,
                 routeAttribute.Name ?? name,

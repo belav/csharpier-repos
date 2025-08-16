@@ -126,7 +126,9 @@ namespace System.Security.Cryptography.X509Certificates
                         }
                         else
                         {
-                            newPal = pal.MoveToKeychain(_keychain, safeSecKeyRefHandle) ?? pal;
+                            newPal =
+                                pal.MoveToKeychain(_keychain, safeSecKeyRefHandle)
+                                ?? pal;
                         }
 
                         X509Certificate2 cert = new X509Certificate2(newPal);

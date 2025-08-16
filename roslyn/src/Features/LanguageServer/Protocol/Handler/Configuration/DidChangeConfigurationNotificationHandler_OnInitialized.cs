@@ -39,7 +39,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Configuration
                     .ConfigureAwait(false);
             }
 
-            _supportWorkspaceConfiguration = clientCapabilities?.Workspace?.Configuration ?? false;
+            _supportWorkspaceConfiguration =
+                clientCapabilities?.Workspace?.Configuration
+                ?? false;
             await RefreshOptionsAsync(cancellationToken).ConfigureAwait(false);
         }
     }

@@ -167,7 +167,9 @@ namespace Microsoft.CodeAnalysis
                 .Equals(UserGlobalConfigName, StringComparison.OrdinalIgnoreCase);
 
             // Find the containing directory and normalize the path separators
-            string directory = Path.GetDirectoryName(pathToFile) ?? pathToFile;
+            string directory =
+                Path.GetDirectoryName(pathToFile)
+                ?? pathToFile;
             NormalizedDirectory = PathUtilities.NormalizeWithForwardSlash(directory);
         }
 

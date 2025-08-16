@@ -91,7 +91,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                                     cancellationToken
                                 )
                                 .Type
-                            ?? semanticModel.Compilation.GetSpecialType(SpecialType.System_Object),
+                                ?? semanticModel.Compilation.GetSpecialType(
+                                    SpecialType.System_Object
+                                ),
                             name: name
                         )
                 );

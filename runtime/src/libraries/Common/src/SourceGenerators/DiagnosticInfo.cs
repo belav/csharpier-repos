@@ -36,7 +36,8 @@ internal readonly struct DiagnosticInfo : IEquatable<DiagnosticInfo>
         // Creates a copy of the Location instance that does not capture a reference to Compilation.
         static Location GetTrimmedLocation(Location location) =>
             Location.Create(
-                location.SourceTree?.FilePath ?? "",
+                location.SourceTree?.FilePath
+                    ?? "",
                 location.SourceSpan,
                 location.GetLineSpan().Span
             );

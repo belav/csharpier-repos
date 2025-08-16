@@ -49,7 +49,9 @@ public class WorkerTemplateTest : LoggedTest
 
     private async Task WorkerTemplateCoreAsync(string language, string[] args)
     {
-        var nativeAot = args?.Contains(ArgConstants.PublishNativeAot) ?? false;
+        var nativeAot =
+            args?.Contains(ArgConstants.PublishNativeAot)
+            ?? false;
 
         var project = await ProjectFactory.CreateProject(Output);
         if (nativeAot)

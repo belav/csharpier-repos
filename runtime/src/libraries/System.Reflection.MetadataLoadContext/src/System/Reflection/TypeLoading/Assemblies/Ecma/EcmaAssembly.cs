@@ -68,7 +68,9 @@ namespace System.Reflection.TypeLoading.Ecma
                 data.Flags = flags;
                 data.Name = ar.Name.GetString(reader);
                 data.Version = ar.Version.AdjustForUnspecifiedVersionComponents()!;
-                data.CultureName = ar.Culture.GetStringOrNull(reader) ?? string.Empty;
+                data.CultureName =
+                    ar.Culture.GetStringOrNull(reader)
+                    ?? string.Empty;
                 if ((flags & AssemblyNameFlags.PublicKey) != 0)
                 {
                     byte[] pk = ar.PublicKeyOrToken.GetBlobBytes(reader);

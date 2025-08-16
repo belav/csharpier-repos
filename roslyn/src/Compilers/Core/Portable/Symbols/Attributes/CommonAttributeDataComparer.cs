@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis
         {
             Debug.Assert(attr != null);
 
-            int hash = attr.AttributeClass?.GetHashCode() ?? 0;
+            int hash =
+                attr.AttributeClass?.GetHashCode()
+                ?? 0;
             hash =
                 attr.AttributeConstructor != null
                     ? Hash.Combine(attr.AttributeConstructor.GetHashCode(), hash)

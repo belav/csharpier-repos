@@ -109,7 +109,11 @@ namespace Roslyn.Utilities
 
         public static TextChangeRange ToTextChangeRange(this TextChange textChange)
         {
-            return new TextChangeRange(textChange.Span, textChange.NewText?.Length ?? 0);
+            return new TextChangeRange(
+                textChange.Span,
+                textChange.NewText?.Length
+                    ?? 0
+            );
         }
 
         /// <summary>

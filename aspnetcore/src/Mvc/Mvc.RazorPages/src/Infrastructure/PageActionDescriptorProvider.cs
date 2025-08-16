@@ -93,7 +93,9 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
                 AttributeRouteInfo = new AttributeRouteInfo
                 {
                     Name = selector.AttributeRouteModel!.Name,
-                    Order = selector.AttributeRouteModel.Order ?? 0,
+                    Order =
+                        selector.AttributeRouteModel.Order
+                        ?? 0,
                     Template = TransformPageRoute(model, selector),
                     SuppressLinkGeneration = selector.AttributeRouteModel.SuppressLinkGeneration,
                     SuppressPathMatching = selector.AttributeRouteModel.SuppressPathMatching,

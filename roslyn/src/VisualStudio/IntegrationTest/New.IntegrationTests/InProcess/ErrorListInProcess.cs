@@ -158,11 +158,22 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         {
             var source = item.GetBuildTool();
             var document =
-                Path.GetFileName(item.GetPath() ?? item.GetDocumentName()) ?? "<unknown>";
-            var line = item.GetLine() ?? -1;
-            var column = item.GetColumn() ?? -1;
-            var errorCode = item.GetErrorCode() ?? "<unknown>";
-            var text = item.GetText() ?? "<unknown>";
+                Path.GetFileName(
+                    item.GetPath()
+                        ?? item.GetDocumentName()
+                ) ?? "<unknown>";
+            var line =
+                item.GetLine()
+                ?? -1;
+            var column =
+                item.GetColumn()
+                ?? -1;
+            var errorCode =
+                item.GetErrorCode()
+                ?? "<unknown>";
+            var text =
+                item.GetText()
+                ?? "<unknown>";
             var severity = item.GetCategory() switch
             {
                 __VSERRORCATEGORY.EC_ERROR => "error",

@@ -217,9 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 var data =
                     symbol.ObsoleteAttributeData
-                    ?? symbol.ContainingModule.ObsoleteAttributeData ?? symbol
-                        .ContainingAssembly
-                        .ObsoleteAttributeData;
+                    ?? symbol.ContainingModule.ObsoleteAttributeData
+                    ?? symbol.ContainingAssembly.ObsoleteAttributeData;
                 Debug.Assert(data != null);
 
                 if (data == null)

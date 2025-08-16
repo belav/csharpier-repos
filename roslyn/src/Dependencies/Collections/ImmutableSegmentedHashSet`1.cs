@@ -268,7 +268,9 @@ namespace Microsoft.CodeAnalysis.Collections
             );
         }
 
-        public override int GetHashCode() => _set?.GetHashCode() ?? 0;
+        public override int GetHashCode() =>
+            _set?.GetHashCode()
+            ?? 0;
 
         public override bool Equals(object? obj) =>
             obj is ImmutableSegmentedHashSet<T> other && Equals(other);

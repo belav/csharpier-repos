@@ -255,7 +255,8 @@ internal static class Program
                 HangMitigatingCancellationToken
             );
             var referenceInGeneratedFile = results.Single(r =>
-                r.GetText()?.Contains("<summary>") ?? false
+                r.GetText()?.Contains("<summary>")
+                ?? false
             );
             await TestServices.FindReferencesWindow.NavigateToAsync(
                 referenceInGeneratedFile,

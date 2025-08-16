@@ -84,7 +84,9 @@ public class GrpcTemplateTest : LoggedTest
 
     private async Task GrpcTemplateCore(string[] args = null)
     {
-        var nativeAot = args?.Contains(ArgConstants.PublishNativeAot) ?? false;
+        var nativeAot =
+            args?.Contains(ArgConstants.PublishNativeAot)
+            ?? false;
 
         var project = await ProjectFactory.CreateProject(Output);
         if (nativeAot)

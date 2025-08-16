@@ -1076,7 +1076,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             }
 
             var firstField =
-                _state._method?.Parameters.FirstOrDefault()?.Name ?? PlaceholderSnippetField;
+                _state._method?.Parameters.FirstOrDefault()?.Name
+                ?? PlaceholderSnippetField;
             if (ExpansionSession.GetFieldSpan(firstField, textSpan) != VSConstants.S_OK)
             {
                 return;
@@ -1087,7 +1088,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             adjustedTextSpan.iStartIndex = textSpan[0].iStartIndex;
 
             var lastField =
-                _state._method?.Parameters.LastOrDefault()?.Name ?? PlaceholderSnippetField;
+                _state._method?.Parameters.LastOrDefault()?.Name
+                ?? PlaceholderSnippetField;
             if (ExpansionSession.GetFieldSpan(lastField, textSpan) != VSConstants.S_OK)
             {
                 return;

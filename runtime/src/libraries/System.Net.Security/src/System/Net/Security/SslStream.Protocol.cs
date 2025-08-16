@@ -786,7 +786,8 @@ namespace System.Net.Security
             //
             byte[] guessedThumbPrint = selectedCert.GetCertHash();
             bool sendTrustedList =
-                _sslAuthenticationOptions.CertificateContext!.Trust?._sendTrustInHandshake ?? false;
+                _sslAuthenticationOptions.CertificateContext!.Trust?._sendTrustInHandshake
+                ?? false;
             SafeFreeCredentials? cachedCredentialHandle = SslSessionsCache.TryCachedCredential(
                 guessedThumbPrint,
                 _sslAuthenticationOptions.EnabledSslProtocols,

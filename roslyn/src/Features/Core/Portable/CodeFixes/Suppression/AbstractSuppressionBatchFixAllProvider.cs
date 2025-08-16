@@ -460,7 +460,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             // action for it and applying it right then.
             var codeActionToDiagnosticLocation = diagnosticsAndCodeActions.ToDictionary(
                 tuple => tuple.action,
-                tuple => tuple.diagnostic?.Location.SourceSpan.Start ?? 0
+                tuple =>
+                    tuple.diagnostic?.Location.SourceSpan.Start
+                    ?? 0
             );
 
             var documentIdToFinalText = new ConcurrentDictionary<DocumentId, SourceText>();

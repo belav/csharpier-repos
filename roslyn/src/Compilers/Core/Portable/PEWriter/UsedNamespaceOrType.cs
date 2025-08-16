@@ -134,7 +134,8 @@ namespace Microsoft.Cci
                 return objSymbol.GetHashCode();
             }
 
-            return obj?.GetHashCode() ?? 0;
+            return obj?.GetHashCode()
+                ?? 0;
         }
 
         private static bool Equals(INamespace? x, INamespace? y)
@@ -173,7 +174,8 @@ namespace Microsoft.Cci
                 return objSymbol.GetHashCode();
             }
 
-            return obj?.GetHashCode() ?? 0;
+            return obj?.GetHashCode()
+                ?? 0;
         }
     }
 }

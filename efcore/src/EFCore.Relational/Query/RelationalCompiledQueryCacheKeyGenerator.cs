@@ -46,7 +46,7 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
             relationalOptions.UseRelationalNulls,
             relationalOptions.QuerySplittingBehavior,
             shouldBuffer: ExecutionStrategy.Current?.RetriesOnFailure
-            ?? Dependencies.IsRetryingExecutionStrategy
+                ?? Dependencies.IsRetryingExecutionStrategy
         );
     }
 

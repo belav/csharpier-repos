@@ -182,7 +182,9 @@ public sealed class WebAssemblyHost : IAsyncDisposable
                         // Here, we add each root component but don't await the returned tasks so that the
                         // components can be processed in parallel.
                         var count = rootComponents.Count;
-                        var initialOperationCount = initialOperationBatch?.Operations.Length ?? 0;
+                        var initialOperationCount =
+                            initialOperationBatch?.Operations.Length
+                            ?? 0;
                         var pendingRenders = new List<Task>(count + initialOperationCount);
                         for (var i = 0; i < count; i++)
                         {

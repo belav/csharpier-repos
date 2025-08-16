@@ -178,7 +178,8 @@ public class RuntimeEntityType : RuntimeTypeBase, IRuntimeEntityType
     private IEnumerable<RuntimeKey> GetDeclaredKeys() => _keys.Values;
 
     private IEnumerable<RuntimeKey> GetKeys() =>
-        BaseType?.GetKeys().Concat(_keys.Values) ?? _keys.Values;
+        BaseType?.GetKeys().Concat(_keys.Values)
+        ?? _keys.Values;
 
     /// <summary>
     ///     Adds a new relationship to this entity type.

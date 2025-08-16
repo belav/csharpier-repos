@@ -271,10 +271,8 @@ namespace Moq.Tests
 
             protected override object GetFallbackDefaultValue(Type type, Mock mock)
             {
-                return this.fallback?.Invoke(type, mock) ?? base.GetFallbackDefaultValue(
-                        type,
-                        mock
-                    );
+                return this.fallback?.Invoke(type, mock)
+                    ?? base.GetFallbackDefaultValue(type, mock);
             }
         }
     }

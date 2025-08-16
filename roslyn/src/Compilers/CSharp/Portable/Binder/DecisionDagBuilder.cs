@@ -700,7 +700,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || recursive.InputType.IsErrorType()
                     || input.Type.Equals(recursive.InputType, TypeCompareKind.AllIgnoreOptions)
             );
-            var inputType = recursive.DeclaredType?.Type ?? input.Type.StrippedType();
+            var inputType =
+                recursive.DeclaredType?.Type
+                ?? input.Type.StrippedType();
             var tests = ArrayBuilder<Tests>.GetInstance(5);
             output = input = MakeConvertToType(
                 input,

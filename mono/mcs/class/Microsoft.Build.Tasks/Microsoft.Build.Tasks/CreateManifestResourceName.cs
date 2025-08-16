@@ -135,7 +135,9 @@ namespace Microsoft.Build.Tasks
             }
 
             // spaces in folder name are changed to _, those in filename remain
-            string dirname = Path.GetDirectoryName(fileName) ?? String.Empty;
+            string dirname =
+                Path.GetDirectoryName(fileName)
+                ?? String.Empty;
             dirname = dirname.Replace(' ', '_');
             fileName = Path.Combine(dirname, Path.GetFileName(fileName));
             string rname = fileName.Replace('/', '.').Replace('\\', '.');

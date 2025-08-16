@@ -199,7 +199,8 @@ internal static class MsQuicConfiguration
 
         settings.IsSet.ConnFlowControlWindow = 1;
         settings.ConnFlowControlWindow = (uint)(
-            options._initialRecieveWindowSizes?.Connection ?? QuicDefaults.DefaultConnectionMaxData
+            options._initialRecieveWindowSizes?.Connection
+            ?? QuicDefaults.DefaultConnectionMaxData
         );
 
         settings.IsSet.StreamRecvWindowBidiLocalDefault = 1;

@@ -54,8 +54,12 @@ internal partial class QuicStreamContext : TransportConnection, IPooledStream, I
         RemoteEndPoint = connection.RemoteEndPoint;
         LocalEndPoint = connection.LocalEndPoint;
 
-        var maxReadBufferSize = context.Options.MaxReadBufferSize ?? 0;
-        var maxWriteBufferSize = context.Options.MaxWriteBufferSize ?? 0;
+        var maxReadBufferSize =
+            context.Options.MaxReadBufferSize
+            ?? 0;
+        var maxWriteBufferSize =
+            context.Options.MaxWriteBufferSize
+            ?? 0;
 
         // TODO should we allow these PipeScheduler to be configurable here?
         var inputOptions = new PipeOptions(

@@ -87,7 +87,9 @@ namespace System.Runtime.CompilerServices
         internal QCallTypeHandle(ref RuntimeType type)
         {
             _ptr = Unsafe.AsPointer(ref type);
-            _handle = type?.GetUnderlyingNativeHandle() ?? IntPtr.Zero;
+            _handle =
+                type?.GetUnderlyingNativeHandle()
+                ?? IntPtr.Zero;
         }
 
         internal QCallTypeHandle(ref RuntimeTypeHandle rth)

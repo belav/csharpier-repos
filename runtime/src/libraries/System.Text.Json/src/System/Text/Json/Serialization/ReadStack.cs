@@ -135,10 +135,8 @@ namespace System.Text.Json
                 else
                 {
                     JsonTypeInfo jsonTypeInfo =
-                        Current.JsonPropertyInfo?.JsonTypeInfo ?? Current
-                            .CtorArgumentState!
-                            .JsonParameterInfo!
-                            .JsonTypeInfo;
+                        Current.JsonPropertyInfo?.JsonTypeInfo
+                        ?? Current.CtorArgumentState!.JsonParameterInfo!.JsonTypeInfo;
                     JsonNumberHandling? numberHandling = Current.NumberHandling;
 
                     EnsurePushCapacity();
@@ -393,10 +391,8 @@ namespace System.Text.Json
                     {
                         // Attempt to get the JSON property name from the JsonPropertyInfo or JsonParameterInfo.
                         utf8PropertyName =
-                            frame.JsonPropertyInfo?.NameAsUtf8Bytes ?? frame
-                                .CtorArgumentState
-                                ?.JsonParameterInfo
-                                ?.NameAsUtf8Bytes;
+                            frame.JsonPropertyInfo?.NameAsUtf8Bytes
+                            ?? frame.CtorArgumentState?.JsonParameterInfo?.NameAsUtf8Bytes;
                     }
                 }
 

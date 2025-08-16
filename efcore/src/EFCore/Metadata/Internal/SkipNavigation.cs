@@ -52,7 +52,8 @@ public class SkipNavigation
         IsOnDependent = onDependent;
         _type =
             navigationType
-            ?? this.GetIdentifyingMemberInfo()?.GetMemberType() ?? (
+            ?? this.GetIdentifyingMemberInfo()?.GetMemberType()
+            ?? (
                 IsCollection
                     ? typeof(IEnumerable<>).MakeGenericType(TargetEntityType.ClrType)
                     : TargetEntityType.ClrType

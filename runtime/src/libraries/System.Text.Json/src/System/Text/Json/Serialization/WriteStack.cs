@@ -446,7 +446,8 @@ namespace System.Text.Json
             {
                 // Append the property name. Or attempt to get the JSON property name from the property name specified in re-entry.
                 string? propertyName =
-                    frame.JsonPropertyInfo?.MemberName ?? frame.JsonPropertyNameAsString;
+                    frame.JsonPropertyInfo?.MemberName
+                    ?? frame.JsonPropertyNameAsString;
 
                 AppendPropertyName(sb, propertyName);
             }

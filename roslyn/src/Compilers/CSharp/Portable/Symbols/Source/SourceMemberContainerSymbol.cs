@@ -5075,7 +5075,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 foreach (FieldOrPropertyInitializer initializer in initializers)
                 {
                     hasInitializers = true;
-                    var symbol = initializer.FieldOpt.AssociatedSymbol ?? initializer.FieldOpt;
+                    var symbol =
+                        initializer.FieldOpt.AssociatedSymbol
+                        ?? initializer.FieldOpt;
                     MessageID.IDS_FeatureStructFieldInitializers.CheckFeatureAvailability(
                         diagnostics,
                         symbol.DeclaringCompilation,

@@ -5361,9 +5361,8 @@ public class InternalEntityTypeBuilder : InternalTypeBaseBuilder, IConventionEnt
                 && foreignKey
                     .GetIsRequiredConfigurationSource()
                     .Overrides(ConfigurationSource.Convention),
-            foreignKey.DependentToPrincipal?.Name ?? foreignKey
-                    .ReferencingSkipNavigations?.FirstOrDefault()
-                    ?.Inverse?.Name
+            foreignKey.DependentToPrincipal?.Name
+                ?? foreignKey.ReferencingSkipNavigations?.FirstOrDefault()?.Inverse?.Name
                 ?? foreignKey.PrincipalEntityType.ShortName()
         ).Item1;
 

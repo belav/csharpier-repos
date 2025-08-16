@@ -229,7 +229,8 @@ namespace Microsoft.CodeAnalysis
                 return symbol.ToDisplayString(SymbolDisplayFormat.TestFormat);
             }
 
-            return o.ToString() ?? "";
+            return o.ToString()
+                ?? "";
         }
     }
 

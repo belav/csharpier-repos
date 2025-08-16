@@ -46,7 +46,8 @@ namespace System.ServiceModel.Activities.Presentation
                     new BindingDescriptor
                     {
                         BindingName = (string)(
-                            this.TryFindResource("bindingEditorEmptyBindingLabel") ?? "none"
+                            this.TryFindResource("bindingEditorEmptyBindingLabel")
+                            ?? "none"
                         ),
                         Value = null,
                     }

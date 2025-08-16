@@ -177,7 +177,9 @@ public abstract class OutputFormatter : IOutputFormatter, IApiResponseTypeMetada
         ArgumentNullException.ThrowIfNull(context);
 
         var response = context.HttpContext.Response;
-        response.ContentType = context.ContentType.Value ?? string.Empty;
+        response.ContentType =
+            context.ContentType.Value
+            ?? string.Empty;
     }
 
     /// <summary>

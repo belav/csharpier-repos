@@ -1336,7 +1336,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             syntaxMap = null;
             var activeStatementIndices =
-                oldMemberBody?.GetOverlappingActiveStatements(oldActiveStatements)?.ToArray() ?? [];
+                oldMemberBody?.GetOverlappingActiveStatements(oldActiveStatements)?.ToArray()
+                ?? [];
 
             if (isMemberReplaced && !activeStatementIndices.IsEmpty())
             {
@@ -3078,7 +3079,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 return Equals(x?.Identity, y?.Identity);
             }
 
-            public int GetHashCode(IAssemblySymbol? obj) => obj?.Identity.GetHashCode() ?? 0;
+            public int GetHashCode(IAssemblySymbol? obj) =>
+                obj?.Identity.GetHashCode()
+                ?? 0;
         }
 
         // Ignore tuple element changes, nullability, dynamic and parameter refkinds. These type changes do not affect runtime type.
@@ -8969,9 +8972,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         GetSymbolDeclarationSyntax(symbol.ContainingSymbol, cancellationToken),
                         EditKind.Update
                     )
-                : symbol.Locations.FirstOrDefault()?.SourceSpan ?? symbol
-                        .ContainingSymbol.Locations.First()
-                        .SourceSpan;
+                : symbol.Locations.FirstOrDefault()?.SourceSpan
+                    ?? symbol.ContainingSymbol.Locations.First().SourceSpan;
         }
 
         private CapturedParameterKey GetParameterKey(

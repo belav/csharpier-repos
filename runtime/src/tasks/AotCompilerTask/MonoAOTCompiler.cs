@@ -703,7 +703,8 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     )
     {
         string firstAsmDir =
-            Path.GetDirectoryName(assemblies.First().GetMetadata("FullPath")) ?? string.Empty;
+            Path.GetDirectoryName(assemblies.First().GetMetadata("FullPath"))
+            ?? string.Empty;
         bool allInSameDir = assemblies.All(asm =>
             Path.GetDirectoryName(asm.GetMetadata("FullPath")) == firstAsmDir
         );

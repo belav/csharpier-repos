@@ -453,7 +453,12 @@ namespace Roslyn.Utilities
             var exception = task.Exception!;
             var methodInfo = ((Delegate)continuationFunction!).GetMethodInfo();
             exception.Data["ContinuationFunction"] =
-                (methodInfo?.DeclaringType?.FullName ?? "?") + "::" + (methodInfo?.Name ?? "?");
+                (
+                    methodInfo?.DeclaringType?.FullName
+                    ?? "?"
+                )
+                + "::"
+                + (methodInfo?.Name ?? "?");
 
             // In case of a crash with ExecutionEngineException w/o call stack it might be possible to get the stack trace using WinDbg:
             // > !threads // find thread with System.ExecutionEngineException

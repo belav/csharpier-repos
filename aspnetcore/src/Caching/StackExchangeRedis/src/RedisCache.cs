@@ -187,7 +187,8 @@ public partial class RedisCache : IDistributedCache, IDisposable
                 new RedisValue[]
                 {
                     absoluteExpiration?.Ticks ?? NotPresent,
-                    options.SlidingExpiration?.Ticks ?? NotPresent,
+                    options.SlidingExpiration?.Ticks
+                        ?? NotPresent,
                     GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
                     value,
                 }
@@ -230,7 +231,8 @@ public partial class RedisCache : IDistributedCache, IDisposable
                     new RedisValue[]
                     {
                         absoluteExpiration?.Ticks ?? NotPresent,
-                        options.SlidingExpiration?.Ticks ?? NotPresent,
+                        options.SlidingExpiration?.Ticks
+                            ?? NotPresent,
                         GetExpirationInSeconds(creationTime, absoluteExpiration, options)
                             ?? NotPresent,
                         value,

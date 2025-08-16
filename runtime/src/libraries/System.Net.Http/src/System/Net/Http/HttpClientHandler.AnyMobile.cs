@@ -497,7 +497,8 @@ namespace System.Net.Http
                         );
                     }
 
-                    return _socketHandler!.SslOptions.ClientCertificates ?? (
+                    return _socketHandler!.SslOptions.ClientCertificates
+                        ?? (
                             _socketHandler!.SslOptions.ClientCertificates =
                                 new X509CertificateCollection()
                         );
