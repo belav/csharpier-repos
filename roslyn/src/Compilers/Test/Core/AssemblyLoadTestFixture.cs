@@ -560,7 +560,7 @@ public class Class1
                     .Assembly.GetName()
                     .GetPublicKey()
                     ?.ToImmutableArray()
-                    ?? default,
+                ?? default,
                 csSource: @"
 using System;
 using System.Reflection;
@@ -604,7 +604,7 @@ public class Analyzer : DiagnosticAnalyzer
                     .Assembly.GetName()
                     .GetPublicKey()
                     ?.ToImmutableArray()
-                    ?? default,
+                ?? default,
                 csSource: @"
 using System;
 using System.Reflection;

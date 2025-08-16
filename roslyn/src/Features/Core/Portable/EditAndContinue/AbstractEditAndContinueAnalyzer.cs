@@ -8969,8 +8969,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         GetSymbolDeclarationSyntax(symbol.ContainingSymbol, cancellationToken),
                         EditKind.Update
                     )
-                : symbol.Locations.FirstOrDefault()?.SourceSpan
-                    ?? symbol.ContainingSymbol.Locations.First().SourceSpan;
+                : symbol.Locations.FirstOrDefault()?.SourceSpan ?? symbol
+                        .ContainingSymbol.Locations.First()
+                        .SourceSpan;
         }
 
         private CapturedParameterKey GetParameterKey(

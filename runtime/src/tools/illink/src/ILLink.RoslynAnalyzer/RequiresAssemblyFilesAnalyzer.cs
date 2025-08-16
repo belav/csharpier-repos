@@ -244,9 +244,7 @@ namespace ILLink.RoslynAnalyzer
             string message = "";
             if (requiresAttribute.ConstructorArguments.Length >= 1)
             {
-                message =
-                    requiresAttribute.ConstructorArguments[0].Value?.ToString()
-                    ?? "";
+                message = requiresAttribute.ConstructorArguments[0].Value?.ToString() ?? "";
                 if (!string.IsNullOrEmpty(message))
                     message = $" {message}{(message!.TrimEnd().EndsWith(".") ? "" : ".")}";
             }

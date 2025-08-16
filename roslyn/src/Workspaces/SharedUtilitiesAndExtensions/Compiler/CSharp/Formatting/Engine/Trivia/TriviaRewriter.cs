@@ -103,9 +103,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             // whitespace trivia case such as spaces/tabs/new lines
             // these will always have a single text change
-            var text =
-                pair.Value.GetTextChanges(GetTextSpan(pair.Key)).Single().NewText
-                ?? "";
+            var text = pair.Value.GetTextChanges(GetTextSpan(pair.Key)).Single().NewText ?? "";
             var trailingTrivia = SyntaxFactory.ParseTrailingTrivia(text);
 
             var width = trailingTrivia.GetFullWidth();
@@ -162,9 +160,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
             // whitespace trivia case such as spaces/tabs/new lines
             // these will always have single text changes
-            var text =
-                triviaData.GetTextChanges(GetTextSpan(pair)).Single().NewText
-                ?? "";
+            var text = triviaData.GetTextChanges(GetTextSpan(pair)).Single().NewText ?? "";
             return SyntaxFactory.ParseLeadingTrivia(text);
         }
 

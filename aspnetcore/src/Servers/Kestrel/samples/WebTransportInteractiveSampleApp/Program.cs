@@ -55,10 +55,7 @@ app.Use(
     async (context, next) =>
     {
         // configure /certificate.js to inject the certificate hash
-        if (
-            context.Request.Path.Value?.Equals("/certificate.js")
-            ?? false
-        )
+        if (context.Request.Path.Value?.Equals("/certificate.js") ?? false)
         {
             context.Response.ContentType = "application/javascript";
             await context.Response.WriteAsync($"var CERTIFICATE = '{certStr}';");

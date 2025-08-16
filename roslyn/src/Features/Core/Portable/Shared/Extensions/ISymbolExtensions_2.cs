@@ -234,7 +234,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         cancellationToken: cancellationToken
                     )
                     ?.GetTypeParameter(typeParam.Name)
-                    ?? DocumentationComment.Empty,
+                ?? DocumentationComment.Empty,
                 IMethodSymbol method => GetMethodDocumentation(
                     method,
                     compilation,

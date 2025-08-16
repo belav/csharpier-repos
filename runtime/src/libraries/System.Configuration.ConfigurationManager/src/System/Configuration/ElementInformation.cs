@@ -53,8 +53,7 @@ namespace System.Configuration
         /// The line number or 0 if no source.
         /// </summary>
         public int LineNumber =>
-            _thisElement.Values.GetSourceInfo(_thisElement.ElementTagName)?.LineNumber
-            ?? 0;
+            _thisElement.Values.GetSourceInfo(_thisElement.ElementTagName)?.LineNumber ?? 0;
 
         public Type Type => _thisElement.GetType();
 

@@ -6052,8 +6052,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
             ss =>
                 ss.Set<Gear>()
                     .Select(g =>
-                        g.Weapons.OrderBy(w => w.Id).Select(w => (int?)w.Id).FirstOrDefault()
-                        ?? 42
+                        g.Weapons.OrderBy(w => w.Id).Select(w => (int?)w.Id).FirstOrDefault() ?? 42
                     )
         );
 
@@ -9762,8 +9761,7 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
                     .OrderBy(g => g.Nickname)
                     .Select(g =>
                         g.Weapons.SelectMany(x =>
-                                x.Owner.AssignedCity.Maybe(x => x.BornGears)
-                                ?? new List<Gear>()
+                                x.Owner.AssignedCity.Maybe(x => x.BornGears) ?? new List<Gear>()
                             )
                             .Select(x => (bool?)x.HasSoulPatch)
                             .Distinct()

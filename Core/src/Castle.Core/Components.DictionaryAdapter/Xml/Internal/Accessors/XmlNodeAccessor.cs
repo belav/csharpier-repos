@@ -156,8 +156,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     var xsiType = Context.GetDefaultXsiType(clrType);
 
                     var name = new XmlName(
-                        semantics.GetLocalName(attribute).NonEmpty()
-                            ?? xsiType.LocalName,
+                        semantics.GetLocalName(attribute).NonEmpty() ?? xsiType.LocalName,
                         semantics.GetNamespaceUri(attribute) ?? namespaceUri
                     );
 

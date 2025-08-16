@@ -359,11 +359,7 @@ namespace System.Diagnostics.Tests
             using (EventLog eventlog = new EventLog("Security"))
             {
                 eventlog.Source = "Security";
-                Assert.Contains(
-                    "",
-                    eventlog.Entries.LastOrDefault()?.Message
-                        ?? ""
-                );
+                Assert.Contains("", eventlog.Entries.LastOrDefault()?.Message ?? "");
             }
         }
 

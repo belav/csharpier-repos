@@ -503,8 +503,7 @@ public partial class TwitterHandler : RemoteAuthenticationHandler<TwitterOptions
     private async Task EnsureTwitterRequestSuccess(HttpResponseMessage response)
     {
         var contentTypeIsJson = string.Equals(
-            response.Content.Headers.ContentType?.MediaType
-                ?? "",
+            response.Content.Headers.ContentType?.MediaType ?? "",
             "application/json",
             StringComparison.OrdinalIgnoreCase
         );

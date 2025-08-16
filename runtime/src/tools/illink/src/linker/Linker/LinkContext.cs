@@ -490,8 +490,7 @@ namespace Mono.Linker
                     LogWarning(
                         GetAssemblyLocation(assembly),
                         DiagnosticId.InvalidIsTrimmableValue,
-                        args[1].Value.ToString()
-                            ?? "",
+                        args[1].Value.ToString() ?? "",
                         assembly.Name.Name
                     );
                     continue;

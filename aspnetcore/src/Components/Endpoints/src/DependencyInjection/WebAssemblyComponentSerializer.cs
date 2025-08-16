@@ -15,8 +15,7 @@ internal sealed class WebAssemblyComponentSerializer
     )
     {
         var assembly =
-            type.Assembly.GetName().Name
-            ?? throw new InvalidOperationException(
+            type.Assembly.GetName().Name ?? throw new InvalidOperationException(
                 "Cannot prerender components from assemblies with a null name"
             );
         var typeFullName =

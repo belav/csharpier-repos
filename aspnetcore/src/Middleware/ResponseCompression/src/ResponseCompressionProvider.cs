@@ -187,8 +187,7 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
     public virtual bool ShouldCompressResponse(HttpContext context)
     {
         var httpsMode =
-            context.Features.Get<IHttpsCompressionFeature>()?.Mode
-            ?? HttpsCompressionMode.Default;
+            context.Features.Get<IHttpsCompressionFeature>()?.Mode ?? HttpsCompressionMode.Default;
 
         // Check if the app has opted into or out of compression over HTTPS
         if (

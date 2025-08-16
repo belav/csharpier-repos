@@ -6294,8 +6294,7 @@ INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
                                 {
                                     y.Contract.Season.Id,
                                     IsPastTradeDeadline = (
-                                        y.Contract.Season.Games.Max(z => (int?)z.GameNumber)
-                                        ?? 0
+                                        y.Contract.Season.Games.Max(z => (int?)z.GameNumber) ?? 0
                                     ) > 10,
                                 },
                             },

@@ -2863,7 +2863,7 @@ class C { int Y => 2; }
                                         t.FilePath.EndsWith("X.cs")
                                     )
                                     ?.ToString()
-                                    ?? "none"
+                                ?? "none"
                             );
                             break;
 
@@ -2871,7 +2871,7 @@ class C { int Y => 2; }
                             context.AddSource(
                                 "Generated.cs",
                                 context.AdditionalFiles.FirstOrDefault()?.GetText().ToString()
-                                    ?? "none"
+                                ?? "none"
                             );
                             break;
 

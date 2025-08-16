@@ -86,8 +86,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     {
                         aliasMap.Add(
                             comp.GetAssemblyOrModuleSymbol(reference)!.MetadataName,
-                            reference.Properties.Aliases.FirstOrDefault()
-                                ?? "global"
+                            reference.Properties.Aliases.FirstOrDefault() ?? "global"
                         );
                     }
 

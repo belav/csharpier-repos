@@ -368,8 +368,7 @@ public class CosmosModelValidator : ModelValidator
                     }
 
                     var etagType =
-                        property.GetTypeMapping().Converter?.ProviderClrType
-                        ?? property.ClrType;
+                        property.GetTypeMapping().Converter?.ProviderClrType ?? property.ClrType;
                     if (etagType != typeof(string))
                     {
                         throw new InvalidOperationException(
@@ -417,8 +416,7 @@ public class CosmosModelValidator : ModelValidator
             }
 
             var idType =
-                idProperty.GetTypeMapping().Converter?.ProviderClrType
-                ?? idProperty.ClrType;
+                idProperty.GetTypeMapping().Converter?.ProviderClrType ?? idProperty.ClrType;
             if (idType != typeof(string))
             {
                 throw new InvalidOperationException(

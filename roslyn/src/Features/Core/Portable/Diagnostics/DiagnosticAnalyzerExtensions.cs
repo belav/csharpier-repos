@@ -62,8 +62,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         public static string GetAnalyzerAssemblyName(this DiagnosticAnalyzer analyzer) =>
-            analyzer.GetType().Assembly.GetName().Name
-            ?? throw ExceptionUtilities.Unreachable();
+            analyzer.GetType().Assembly.GetName().Name ?? throw ExceptionUtilities.Unreachable();
 
         public static void AppendAnalyzerMap(
             this Dictionary<string, DiagnosticAnalyzer> analyzerMap,

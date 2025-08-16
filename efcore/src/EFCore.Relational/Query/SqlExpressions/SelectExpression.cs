@@ -838,8 +838,10 @@ public sealed partial class SelectExpression : TableExpressionBase
         }
 
         var table =
-            entityType.GetViewOrTableMappings().SingleOrDefault()?.Table
-            ?? entityType.GetDefaultMappings().Single().Table;
+            entityType.GetViewOrTableMappings().SingleOrDefault()?.Table ?? entityType
+                .GetDefaultMappings()
+                .Single()
+                .Table;
 
         // TODO: We'll need to make sure this is correct when we add support for JSON complex types.
         var tableMap = new Dictionary<ITableBase, TableReferenceExpression>
@@ -951,8 +953,10 @@ public sealed partial class SelectExpression : TableExpressionBase
             var targetEntityType = ownedJsonNavigation.TargetEntityType;
             var containerColumnName = targetEntityType.GetContainerColumnName()!;
             var containerColumn = (
-                entityType.GetViewOrTableMappings().SingleOrDefault()?.Table
-                ?? entityType.GetDefaultMappings().Single().Table
+                entityType.GetViewOrTableMappings().SingleOrDefault()?.Table ?? entityType
+                    .GetDefaultMappings()
+                    .Single()
+                    .Table
             ).FindColumn(containerColumnName)!;
             var containerColumnTypeMapping = containerColumn.StoreTypeMapping;
             var isNullable =

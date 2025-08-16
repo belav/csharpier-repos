@@ -53,15 +53,13 @@ public abstract class AuthenticationHandler<TOptions> : IAuthenticationHandler
     /// Gets the path as seen by the authentication middleware.
     /// </summary>
     protected PathString OriginalPath =>
-        Context.Features.Get<IAuthenticationFeature>()?.OriginalPath
-        ?? Request.Path;
+        Context.Features.Get<IAuthenticationFeature>()?.OriginalPath ?? Request.Path;
 
     /// <summary>
     /// Gets the path base as seen by the authentication middleware.
     /// </summary>
     protected PathString OriginalPathBase =>
-        Context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase
-        ?? Request.PathBase;
+        Context.Features.Get<IAuthenticationFeature>()?.OriginalPathBase ?? Request.PathBase;
 
     /// <summary>
     /// Gets the <see cref="ILogger"/>.

@@ -2414,7 +2414,7 @@ public partial class HubConnection : IAsyncDisposable
                     _hubConnection
                         ._serviceProvider.GetService<IOptions<HubConnectionOptions>>()
                         ?.Value.StatefulReconnectBufferSize
-                        ?? DefaultStatefulReconnectBufferSize,
+                    ?? DefaultStatefulReconnectBufferSize,
                     _logger
                 );
 

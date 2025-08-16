@@ -202,7 +202,7 @@ internal sealed class InternalUsageAnalyzer
                         .DeclaringSyntaxReferences.FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation()
-                        ?? Location.None,
+                    ?? Location.None,
                     symbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
                 )
             );
@@ -219,7 +219,7 @@ internal sealed class InternalUsageAnalyzer
                         .DeclaringSyntaxReferences.FirstOrDefault()
                         ?.GetSyntax()
                         .GetLocation()
-                        ?? Location.None,
+                    ?? Location.None,
                     containingType.ToDisplayString(
                         SymbolDisplayFormat.CSharpShortErrorMessageFormat
                     )

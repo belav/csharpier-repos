@@ -878,8 +878,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         MessageProvider.Instance,
                         (int)ErrorCode.ERR_BadCompilationOptionValue,
                         nameof(Usings),
-                        Usings.Where(u => !u.IsValidClrNamespaceName()).First()
-                            ?? "null"
+                        Usings.Where(u => !u.IsValidClrNamespaceName()).First() ?? "null"
                     )
                 );
             }

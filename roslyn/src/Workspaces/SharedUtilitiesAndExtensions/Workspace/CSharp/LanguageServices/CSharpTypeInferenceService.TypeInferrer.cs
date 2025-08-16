@@ -3234,7 +3234,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                         elementTypesBuilder.Add(
                             GetTypes(expr).FirstOrDefault().InferredType
-                                ?? this.Compilation.ObjectType
+                            ?? this.Compilation.ObjectType
                         );
                     }
                     else

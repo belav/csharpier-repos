@@ -1142,7 +1142,7 @@ public partial class Startup
         ctx.Response.WriteAsync(
             ctx.Features.Get<IHttpMaxRequestBodySizeFeature>()
                 ?.MaxRequestBodySize?.ToString(CultureInfo.InvariantCulture)
-                ?? "null"
+            ?? "null"
         );
 
     public Task Anonymous(HttpContext context) =>

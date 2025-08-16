@@ -8,9 +8,6 @@ namespace System
     public static partial class Environment
     {
         public static long WorkingSet =>
-            (long)(
-                Interop.libproc.GetProcessInfoById(ProcessId)?.ptinfo.pti_resident_size
-                ?? 0
-            );
+            (long)(Interop.libproc.GetProcessInfoById(ProcessId)?.ptinfo.pti_resident_size ?? 0);
     }
 }

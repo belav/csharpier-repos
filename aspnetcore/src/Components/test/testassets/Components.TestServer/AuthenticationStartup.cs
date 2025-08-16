@@ -34,10 +34,7 @@ public class AuthenticationStartupBase
             options.AddPolicy(
                 "NameMustStartWithB",
                 policy =>
-                    policy.RequireAssertion(ctx =>
-                        ctx.User.Identity.Name?.StartsWith('B')
-                        ?? false
-                    )
+                    policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false)
             );
         });
     }
