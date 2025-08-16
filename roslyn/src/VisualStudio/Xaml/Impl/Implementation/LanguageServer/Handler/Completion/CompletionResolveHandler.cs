@@ -73,9 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 data.DocumentGuid
             );
             var document =
-                context.Solution.GetDocument(documentId) ?? context.Solution.GetAdditionalDocument(
-                    documentId
-                );
+                context.Solution.GetDocument(documentId)
+                ?? context.Solution.GetAdditionalDocument(documentId);
             if (document == null)
             {
                 return completionItem;

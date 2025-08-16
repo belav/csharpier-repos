@@ -99,9 +99,8 @@ public class ResolutionContext : IInternalRuntimeMapper
     ) => _mapper.Map(source, destination, context, sourceType, destinationType, memberMap);
 
     internal object CreateInstance(Type type) =>
-        ServiceCtor()(type) ?? throw new AutoMapperMappingException(
-            "Cannot create an instance of type " + type
-        );
+        ServiceCtor()(type)
+        ?? throw new AutoMapperMappingException("Cannot create an instance of type " + type);
 
     private Func<Type, object> ServiceCtor() => _options?.ServiceCtor ?? _mapper.ServiceCtor;
 

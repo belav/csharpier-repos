@@ -685,8 +685,7 @@ public class ElementType
     public virtual JsonValueReaderWriter? GetJsonValueReaderWriter() =>
         JsonValueReaderWriter.CreateFromType(
             (Type?)this[CoreAnnotationNames.JsonValueReaderWriterType]
-        )
-        ?? TypeMapping?.JsonValueReaderWriter;
+        ) ?? TypeMapping?.JsonValueReaderWriter;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

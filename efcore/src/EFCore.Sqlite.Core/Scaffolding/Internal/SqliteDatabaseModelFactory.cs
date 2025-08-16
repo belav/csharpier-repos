@@ -1000,8 +1000,9 @@ WHERE "pk" = 1
 
         var columnName = reader.GetString(0);
         var column =
-            table.Columns.FirstOrDefault(c => c.Name == columnName) ?? table.Columns.FirstOrDefault(
-                c => c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+            table.Columns.FirstOrDefault(c => c.Name == columnName)
+            ?? table.Columns.FirstOrDefault(c =>
+                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
             );
         Check.DebugAssert(column != null, "column is null.");
 
@@ -1162,8 +1163,9 @@ ORDER BY "id"
             var principalTableName = reader1.GetString(1);
             var onDelete = reader1.GetString(2);
             var principalTable =
-                tables.FirstOrDefault(t => t.Name == principalTableName) ?? tables.FirstOrDefault(
-                    t => t.Name.Equals(principalTableName, StringComparison.OrdinalIgnoreCase)
+                tables.FirstOrDefault(t => t.Name == principalTableName)
+                ?? tables.FirstOrDefault(t =>
+                    t.Name.Equals(principalTableName, StringComparison.OrdinalIgnoreCase)
                 );
 
             _logger.ForeignKeyFound(table.Name, id, principalTableName, onDelete);

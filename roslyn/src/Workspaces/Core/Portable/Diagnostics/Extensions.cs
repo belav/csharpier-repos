@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return Location.None;
 
             var textDocument =
-                project.GetTextDocument(dataLocation.DocumentId) ?? await project
+                project.GetTextDocument(dataLocation.DocumentId)
+                ?? await project
                     .GetSourceGeneratedDocumentAsync(dataLocation.DocumentId, cancellationToken)
                     .ConfigureAwait(false);
             if (textDocument == null)

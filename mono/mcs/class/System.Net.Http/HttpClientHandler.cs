@@ -112,8 +112,7 @@ namespace System.Net.Http
                     );
                 }
 
-                return _delegatingHandler.SslOptions.ClientCertificates
-                    ?? (
+                return _delegatingHandler.SslOptions.ClientCertificates ?? (
                         _delegatingHandler.SslOptions.ClientCertificates =
                             new X509CertificateCollection()
                     );

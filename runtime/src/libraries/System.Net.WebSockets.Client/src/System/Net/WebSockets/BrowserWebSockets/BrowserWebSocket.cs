@@ -727,8 +727,7 @@ namespace System.Net.WebSockets
                     (int)closeStatus,
                     statusDescription,
                     waitForCloseReceived
-                )
-                ?? Task.CompletedTask;
+                ) ?? Task.CompletedTask;
             await CancelationHelper(closeTask, cancellationToken, FastState).ConfigureAwait(true);
 
 #if FEATURE_WASM_THREADS

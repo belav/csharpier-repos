@@ -35,7 +35,8 @@ namespace System.Globalization
 
             // For CoreCLR we only want the region names that are full culture names
             _cultureData =
-                CultureData.GetCultureDataForRegion(name, true) ?? throw new ArgumentException(
+                CultureData.GetCultureDataForRegion(name, true)
+                ?? throw new ArgumentException(
                     SR.Format(SR.Argument_InvalidCultureName, name),
                     nameof(name)
                 );

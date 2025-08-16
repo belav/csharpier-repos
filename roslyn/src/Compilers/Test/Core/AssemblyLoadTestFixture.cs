@@ -559,7 +559,8 @@ public class Class1
                 publicKeyOpt: typeof(SyntaxNode)
                     .Assembly.GetName()
                     .GetPublicKey()
-                    ?.ToImmutableArray() ?? default,
+                    ?.ToImmutableArray()
+                ?? default,
                 csSource: @"
 using System;
 using System.Reflection;
@@ -602,7 +603,8 @@ public class Analyzer : DiagnosticAnalyzer
                 publicKeyOpt: typeof(SyntaxNode)
                     .Assembly.GetName()
                     .GetPublicKey()
-                    ?.ToImmutableArray() ?? default,
+                    ?.ToImmutableArray()
+                ?? default,
                 csSource: @"
 using System;
 using System.Reflection;

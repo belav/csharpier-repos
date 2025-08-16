@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.LanguageServices
             // new project. Then they call this function again, and fetch the real ID.
             return workspace
                     .CurrentSolution.Projects.FirstOrDefault(p => p.FilePath == filePath)
-                    ?.Id ?? ProjectId.CreateNewId("ProjectNotFound");
+                    ?.Id
+                ?? ProjectId.CreateNewId("ProjectNotFound");
         }
 
         [Obsolete("When Roslyn/ProjectSystem integration is finished, don't use this.")]

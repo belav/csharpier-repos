@@ -166,8 +166,9 @@ namespace System.Text.Json
 #endif
 
                 Func<object>? createObjectForExtensionDataProp =
-                    jsonPropertyInfo.JsonTypeInfo.CreateObject
-                    ?? jsonPropertyInfo.JsonTypeInfo.CreateObjectForExtensionDataProperty;
+                    jsonPropertyInfo.JsonTypeInfo.CreateObject ?? jsonPropertyInfo
+                        .JsonTypeInfo
+                        .CreateObjectForExtensionDataProperty;
 
                 if (createObjectForExtensionDataProp == null)
                 {

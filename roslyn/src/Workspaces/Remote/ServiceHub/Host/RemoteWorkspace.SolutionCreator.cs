@@ -721,7 +721,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     );
 
                     var document =
-                        project.GetDocument(documentId) ?? project.GetAdditionalDocument(documentId)
+                        project.GetDocument(documentId)
+                        ?? project.GetAdditionalDocument(documentId)
                         ?? project.GetAnalyzerConfigDocument(documentId);
                     Contract.ThrowIfNull(document);
 

@@ -111,7 +111,8 @@ class Program : CommandLineApplication
             : Path.Combine(Directory.GetCurrentDirectory(), "Baseline.Designer.props");
 
         var packageCache =
-            Environment.GetEnvironmentVariable("NUGET_PACKAGES") ?? Path.Combine(
+            Environment.GetEnvironmentVariable("NUGET_PACKAGES")
+            ?? Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                 ".nuget",
                 "packages"

@@ -17,9 +17,8 @@ public class RoutingGroupsTests : IClassFixture<MvcTestFixture<StartupForGroups>
     public RoutingGroupsTests(MvcTestFixture<StartupForGroups> fixture)
     {
         Factory =
-            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
-                ConfigureWebHostBuilder
-            );
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 
     private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>

@@ -22,7 +22,7 @@ internal sealed class IISServerVariableSegment : PatternSegment
         BackReferenceCollection? conditionBackReferences
     )
     {
-        return context.HttpContext.GetServerVariable(_variableName) ?? _fallbackThunk()
-                .Evaluate(context, ruleBackReferences, conditionBackReferences);
+        return context.HttpContext.GetServerVariable(_variableName)
+            ?? _fallbackThunk().Evaluate(context, ruleBackReferences, conditionBackReferences);
     }
 }

@@ -187,8 +187,7 @@ namespace System.Web.Mvc.Routing
             return GetRouteDataValue<IEnumerable<RouteData>>(
                     routeData,
                     RouteDataTokenKeys.DirectRouteMatches
-                )
-                ?? Enumerable.Empty<RouteData>();
+                ) ?? Enumerable.Empty<RouteData>();
         }
 
         public static void SetDirectRouteMatches(

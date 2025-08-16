@@ -86,8 +86,11 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IEnumerable<string?>
         > s_getAttributeArgumentListNames = list =>
             list.Arguments.Select(argument =>
-                argument.NameColon?.Name.Identifier.ValueText
-                ?? argument.NameEquals?.Name.Identifier.ValueText
+                argument.NameColon?.Name.Identifier.ValueText ?? argument
+                    .NameEquals
+                    ?.Name
+                    .Identifier
+                    .ValueText
             );
 
         public static SignatureHelpState? GetSignatureHelpState(

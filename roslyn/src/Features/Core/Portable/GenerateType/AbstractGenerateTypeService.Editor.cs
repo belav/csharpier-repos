@@ -870,8 +870,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
                     var symbol =
                         membersArray.FirstOrDefault(m =>
                             m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
-                        )
-                        ?? membersArray.FirstOrDefault();
+                        ) ?? membersArray.FirstOrDefault();
                     if (symbol != null)
                     {
                         parameterToFieldMap[parameterName.BestNameForParameter] = symbol;

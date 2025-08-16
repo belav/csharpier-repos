@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     var projectIds =
                         projects
                             ?.Where(p => RemoteSupportedLanguages.IsSupported(p.Language))
-                            .SelectAsArray(p => p.Id) ?? default;
+                            .SelectAsArray(p => p.Id)
+                        ?? default;
 
                     var result = await client
                         .TryInvokeAsync<

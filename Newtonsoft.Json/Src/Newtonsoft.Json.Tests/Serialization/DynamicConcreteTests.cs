@@ -157,9 +157,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             lock (DynamicAssembly)
             {
                 var constructedType =
-                    DynamicAssembly.GetType(ProxyName(targetType)) ?? GetConstructedType(
-                        targetType
-                    );
+                    DynamicAssembly.GetType(ProxyName(targetType))
+                    ?? GetConstructedType(targetType);
                 var instance = Activator.CreateInstance(constructedType);
                 return instance;
             }

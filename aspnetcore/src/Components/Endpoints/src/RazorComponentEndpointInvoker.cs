@@ -47,7 +47,8 @@ internal partial class RazorComponentEndpointInvoker : IRazorComponentEndpointIn
         EndpointHtmlRenderer.MarkAsAllowingEnhancedNavigation(context);
 
         var endpoint =
-            context.GetEndpoint() ?? throw new InvalidOperationException(
+            context.GetEndpoint()
+            ?? throw new InvalidOperationException(
                 $"An endpoint must be set on the '{nameof(HttpContext)}'."
             );
 

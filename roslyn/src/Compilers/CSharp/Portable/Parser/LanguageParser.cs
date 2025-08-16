@@ -9122,9 +9122,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         {
             return ParseWithStackGuard(
                 static @this =>
-                    @this.ParsePossiblyAttributedStatement() ?? @this.ParseExpressionStatement(
-                        attributes: default
-                    ),
+                    @this.ParsePossiblyAttributedStatement()
+                    ?? @this.ParseExpressionStatement(attributes: default),
                 static @this =>
                     SyntaxFactory.EmptyStatement(
                         attributeLists: default,

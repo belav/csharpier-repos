@@ -176,7 +176,8 @@ internal sealed class ActionSelectionTable<TItem>
             values.TryGetValue(routeKeys[i], out var value);
             routeValues[i] =
                 value as string
-                ?? Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty;
+                ?? Convert.ToString(value, CultureInfo.InvariantCulture)
+                ?? string.Empty;
         }
 
         // Now look up, first case-sensitive, then case-insensitive.

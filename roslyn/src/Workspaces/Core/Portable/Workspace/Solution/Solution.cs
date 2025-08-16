@@ -1433,7 +1433,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         private ProjectState GetRequiredProjectState(ProjectId projectId) =>
-            _state.GetProjectState(projectId) ?? throw new InvalidOperationException(
+            _state.GetProjectState(projectId)
+            ?? throw new InvalidOperationException(
                 string.Format(WorkspacesResources._0_is_not_part_of_the_workspace, projectId)
             );
 

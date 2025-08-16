@@ -1986,7 +1986,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
                     .SelectMany(l4 =>
                         l4.OneToOne_Required_FK_Inverse4
                             .OneToOne_Optional_FK_Inverse3
-                            .OneToMany_Required_Self2 ?? new List<Level2>()
+                            .OneToMany_Required_Self2
+                        ?? new List<Level2>()
                     )
                     on l1.Id equals l2.Level1_Optional_Id
                 select new { l1, l2 },

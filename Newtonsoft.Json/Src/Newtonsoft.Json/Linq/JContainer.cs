@@ -1067,8 +1067,7 @@ namespace Newtonsoft.Json.Linq
         {
             ICustomTypeDescriptor? d = First as ICustomTypeDescriptor;
 
-            return d?.GetProperties()
-                ?? new PropertyDescriptorCollection(
+            return d?.GetProperties() ?? new PropertyDescriptorCollection(
                     CollectionUtils.ArrayEmpty<PropertyDescriptor>()
                 );
         }

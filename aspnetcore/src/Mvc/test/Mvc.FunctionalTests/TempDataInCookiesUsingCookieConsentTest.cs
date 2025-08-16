@@ -18,9 +18,8 @@ public class TempDataInCookiesUsingCookieConsentTest
     )
     {
         var factory =
-            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
-                ConfigureWebHostBuilder
-            );
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         _client = factory.CreateDefaultClient();
     }
 

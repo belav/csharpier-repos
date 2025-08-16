@@ -41,9 +41,8 @@ public static class Program
             {
                 if (
                     string.Equals(
-                        builder.GetSetting("environment") ?? Environment.GetEnvironmentVariable(
-                                "ASPNETCORE_ENVIRONMENT"
-                            ),
+                        builder.GetSetting("environment")
+                            ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
                         "NtlmAuthentication",
                         StringComparison.OrdinalIgnoreCase
                     )

@@ -224,8 +224,9 @@ namespace System.Web.Mvc
         private IModelBinder GetModelBinder(ParameterDescriptor parameterDescriptor)
         {
             // look on the parameter itself, then look in the global table
-            return parameterDescriptor.BindingInfo.Binder
-                ?? Binders.GetBinder(parameterDescriptor.ParameterType);
+            return parameterDescriptor.BindingInfo.Binder ?? Binders.GetBinder(
+                    parameterDescriptor.ParameterType
+                );
         }
 
         protected virtual object GetParameterValue(

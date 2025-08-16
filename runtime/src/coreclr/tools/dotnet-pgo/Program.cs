@@ -1127,7 +1127,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                         .GroupBy(d => d.GetHashCode())
                         .OrderByDescending(d => d.Count())
                         .FirstOrDefault(d => d.FirstOrDefault().AsType != null)
-                        ?.Count() ?? 0;
+                        ?.Count()
+                    ?? 0;
                 return count * 100.0 / se.DataObject.Length;
             }
         }

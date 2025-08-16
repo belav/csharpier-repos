@@ -531,7 +531,8 @@ public static class SqlServerPropertyBuilderExtensions
                 SqlServerAnnotationNames.IdentitySeed,
                 seed,
                 fromDataAnnotation
-            ) ?? true;
+            )
+        ?? true;
 
     /// <summary>
     ///     Configures the increment for SQL Server IDENTITY.
@@ -654,7 +655,8 @@ public static class SqlServerPropertyBuilderExtensions
                 SqlServerAnnotationNames.IdentityIncrement,
                 increment,
                 fromDataAnnotation
-            ) ?? true;
+            )
+        ?? true;
 
     /// <summary>
     ///     Configures the value generation strategy for the key property, when targeting SQL Server.
@@ -820,7 +822,8 @@ public static class SqlServerPropertyBuilderExtensions
                     SqlServerAnnotationNames.ValueGenerationStrategy,
                     valueGenerationStrategy,
                     fromDataAnnotation
-                ) ?? true
+                )
+            ?? true
         );
 
     /// <summary>

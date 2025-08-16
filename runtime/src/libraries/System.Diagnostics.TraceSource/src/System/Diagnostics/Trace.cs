@@ -19,11 +19,8 @@ namespace System.Diagnostics
         private static CorrelationManager? s_correlationManager;
 
         public static CorrelationManager CorrelationManager =>
-            Volatile.Read(ref s_correlationManager) ?? Interlocked.CompareExchange(
-                ref s_correlationManager,
-                new CorrelationManager(),
-                null
-            )
+            Volatile.Read(ref s_correlationManager)
+            ?? Interlocked.CompareExchange(ref s_correlationManager, new CorrelationManager(), null)
             ?? s_correlationManager;
 
         /// <devdoc>

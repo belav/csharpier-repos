@@ -297,7 +297,8 @@ public class ForeignKeyPropertyDiscoveryConvention
                             || (
                                 foreignKey
                                     .DeclaringEntityType.FindPrimaryKey()
-                                    ?.Properties.All(p => !p.IsShadowProperty()) ?? false
+                                    ?.Properties.All(p => !p.IsShadowProperty())
+                                ?? false
                             )
                         )
                     )
@@ -1165,8 +1166,10 @@ public class ForeignKeyPropertyDiscoveryConvention
     /// <param name="foreignKey">The foreign key.</param>
     /// <returns>The string that should be used as part of the shadow properties created for the given foreign key.</returns>
     public static string GetPropertyBaseName(IReadOnlyForeignKey foreignKey) =>
-        foreignKey.DependentToPrincipal?.Name
-        ?? foreignKey.GetReferencingSkipNavigations().FirstOrDefault()?.Inverse?.Name
+        foreignKey.DependentToPrincipal?.Name ?? foreignKey
+            .GetReferencingSkipNavigations()
+            .FirstOrDefault()
+            ?.Inverse?.Name
         ?? foreignKey.PrincipalEntityType.ShortName();
 
     private static bool HasUniquifiedProperties(IConventionForeignKey foreignKey)

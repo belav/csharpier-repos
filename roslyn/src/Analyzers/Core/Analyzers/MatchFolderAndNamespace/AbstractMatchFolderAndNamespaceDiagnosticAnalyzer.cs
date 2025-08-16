@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
                 GetSyntaxFacts()
                     .GetNameOfBaseNamespaceDeclaration(namespaceDeclaration)
                     ?.GetDiagnostics()
-                    .Any(d => d.Severity == DiagnosticSeverity.Error) ?? false;
+                    .Any(d => d.Severity == DiagnosticSeverity.Error)
+                ?? false;
 
             if (isCurrentNamespaceInvalid)
             {

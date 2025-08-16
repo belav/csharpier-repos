@@ -149,8 +149,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                     _globalOptions.GetOption(
                         InheritanceMarginOptionsStorage.ShowInheritanceMargin,
                         _languageName
-                    )
-                    ?? true
+                    ) ?? true
                 )
                 && !_globalOptions.GetOption(
                     InheritanceMarginOptionsStorage.InheritanceMarginCombinedWithIndicatorMargin

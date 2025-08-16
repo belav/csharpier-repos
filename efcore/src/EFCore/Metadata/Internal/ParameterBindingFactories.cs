@@ -43,7 +43,8 @@ public class ParameterBindingFactories : IParameterBindingFactories
         Type parameterType,
         string parameterName
     ) =>
-        _parameterBindingFactories.FirstOrDefault(f => f.CanBind(parameterType, parameterName)) ?? (
+        _parameterBindingFactories.FirstOrDefault(f => f.CanBind(parameterType, parameterName))
+        ?? (
             _registeredServices.Services.Contains(parameterType)
                 ? new ServiceParameterBindingFactory(parameterType)
                 : null

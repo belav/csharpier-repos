@@ -106,7 +106,8 @@ internal sealed class ExportProviderBuilder
             configuration
                 .CompositionErrors.FirstOrDefault()
                 ?.SelectMany(error => error.Parts)
-                .Select(part => part.Definition.Type.Name) ?? Enumerable.Empty<string>();
+                .Select(part => part.Definition.Type.Name)
+            ?? Enumerable.Empty<string>();
         var expectedErroredParts = new string[] { "PythiaSignatureHelpProvider" };
         if (
             erroredParts.Count() != expectedErroredParts.Length

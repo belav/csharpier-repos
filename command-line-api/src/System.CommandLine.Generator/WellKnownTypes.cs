@@ -17,7 +17,8 @@ namespace System.CommandLine.Generator
             ParseResult = GetType("System.CommandLine.ParseResult");
 
             INamedTypeSymbol GetType(string typeName) =>
-                compilation.GetTypeByMetadataName(typeName) ?? throw new InvalidOperationException(
+                compilation.GetTypeByMetadataName(typeName)
+                ?? throw new InvalidOperationException(
                     $"Could not find well known type '{typeName}'"
                 );
 

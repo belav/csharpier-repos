@@ -791,8 +791,9 @@ public class EntityFinder<TEntity> : IEntityFinder<TEntity>
         InternalEntityEntry entry,
         CancellationToken cancellationToken = default
     ) =>
-        GetDatabaseValuesQuery(entry)?.FirstOrDefaultAsync(cancellationToken)
-        ?? Task.FromResult((object[]?)null);
+        GetDatabaseValuesQuery(entry)?.FirstOrDefaultAsync(cancellationToken) ?? Task.FromResult(
+            (object[]?)null
+        );
 
     private IQueryable<object[]>? GetDatabaseValuesQuery(InternalEntityEntry entry)
     {

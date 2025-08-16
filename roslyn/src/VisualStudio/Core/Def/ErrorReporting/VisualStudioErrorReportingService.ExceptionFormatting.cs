@@ -187,7 +187,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                     method
                         ?.GetParameters()
                         .Select(t => (t.ParameterType?.Name ?? "<UnknownType>") + " " + t.Name)
-                        ?? Array.Empty<string>()
+                    ?? Array.Empty<string>()
                 )
             );
     }

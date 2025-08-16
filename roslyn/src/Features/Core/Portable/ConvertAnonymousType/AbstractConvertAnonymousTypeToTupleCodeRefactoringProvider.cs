@@ -146,8 +146,7 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
                 anonymousNode.FirstAncestorOrSelf<SyntaxNode, ISyntaxFactsService>(
                     (node, syntaxFacts) => syntaxFacts.IsMethodLevelMember(node),
                     syntaxFacts
-                )
-                ?? anonymousNode;
+                ) ?? anonymousNode;
 
             var childCreationNodes = containingMember
                 .DescendantNodesAndSelf()

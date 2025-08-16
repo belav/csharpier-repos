@@ -213,8 +213,9 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
 
             bool IsWhereLinqMethod(IInvocationOperation invocation) =>
                 whereMethod.Equals(
-                    invocation.TargetMethod.ReducedFrom
-                        ?? invocation.TargetMethod.OriginalDefinition,
+                    invocation.TargetMethod.ReducedFrom ?? invocation
+                            .TargetMethod
+                            .OriginalDefinition,
                     SymbolEqualityComparer.Default
                 );
 
@@ -222,8 +223,9 @@ namespace Microsoft.CodeAnalysis.SimplifyLinqExpression
                 linqMethods.Any(
                     static (m, invocation) =>
                         m.Equals(
-                            invocation.TargetMethod.ReducedFrom
-                                ?? invocation.TargetMethod.OriginalDefinition,
+                            invocation.TargetMethod.ReducedFrom ?? invocation
+                                    .TargetMethod
+                                    .OriginalDefinition,
                             SymbolEqualityComparer.Default
                         ),
                     invocation

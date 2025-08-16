@@ -42,12 +42,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 .FirstOrDefault(id => id.ProjectId == project.Id);
 
         public static Document GetRequiredDocument(this Project project, DocumentId documentId) =>
-            project.GetDocument(documentId) ?? throw new InvalidOperationException(
+            project.GetDocument(documentId)
+            ?? throw new InvalidOperationException(
                 WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
             );
 
         public static Document GetRequiredDocument(this Project project, SyntaxTree tree) =>
-            project.GetDocument(tree) ?? throw new InvalidOperationException(
+            project.GetDocument(tree)
+            ?? throw new InvalidOperationException(
                 WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
             );
 
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Project project,
             DocumentId documentId
         ) =>
-            project.GetAdditionalDocument(documentId) ?? throw new InvalidOperationException(
+            project.GetAdditionalDocument(documentId)
+            ?? throw new InvalidOperationException(
                 WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
             );
 
@@ -63,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Project project,
             DocumentId documentId
         ) =>
-            project.GetAnalyzerConfigDocument(documentId) ?? throw new InvalidOperationException(
+            project.GetAnalyzerConfigDocument(documentId)
+            ?? throw new InvalidOperationException(
                 WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
             );
 
@@ -71,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this Project project,
             DocumentId documentId
         ) =>
-            project.GetTextDocument(documentId) ?? throw new InvalidOperationException(
+            project.GetTextDocument(documentId)
+            ?? throw new InvalidOperationException(
                 WorkspaceExtensionsResources.The_solution_does_not_contain_the_specified_document
             );
 

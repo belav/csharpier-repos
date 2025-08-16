@@ -80,7 +80,8 @@ public class StoreKeyConvention
         if (entityType.BaseType == null && entityType.IsDocumentRoot() && !entityType.IsKeyless)
         {
             idProperty =
-                entityType.FindDeclaredProperty(DefaultIdPropertyName) ?? entityType
+                entityType.FindDeclaredProperty(DefaultIdPropertyName)
+                ?? entityType
                     .GetDeclaredProperties()
                     .FirstOrDefault(p => p.GetJsonPropertyName() == IdPropertyJsonName)
                 ?? entityTypeBuilder

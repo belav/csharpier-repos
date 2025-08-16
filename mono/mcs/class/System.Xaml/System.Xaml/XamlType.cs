@@ -76,7 +76,8 @@ namespace System.Xaml
             {
                 Name = GetXamlName(type);
                 PreferredXamlNamespace =
-                    schemaContext.GetXamlNamespace(type.Namespace) ?? String.Format(
+                    schemaContext.GetXamlNamespace(type.Namespace)
+                    ?? String.Format(
                         "clr-namespace:{0};assembly={1}",
                         type.Namespace,
                         type.Assembly.GetName().Name

@@ -262,7 +262,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                         {
                             return (
                                 methodSymbol.ReduceExtensionMethod(receiverTypeSymbol)
-                                ?? methodSymbol,
+                                    ?? methodSymbol,
                                 overloadCount
                             );
                         }

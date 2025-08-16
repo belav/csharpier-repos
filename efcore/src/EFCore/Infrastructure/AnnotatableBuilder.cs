@@ -224,8 +224,7 @@ public abstract class AnnotatableBuilder<TMetadata, TModelBuilder> : IConvention
                         annotation.Value,
                         configurationSource,
                         canOverrideSameSource: true
-                    )
-                    ?? builder;
+                    ) ?? builder;
             }
         }
 

@@ -1465,8 +1465,9 @@ namespace System
             {
                 T lookUp = Unsafe.Add(ref second, i);
                 int result = (
-                    Unsafe.Add(ref first, i)?.CompareTo(lookUp)
-                    ?? (((object?)lookUp is null) ? 0 : -1)
+                    Unsafe.Add(ref first, i)?.CompareTo(lookUp) ?? (
+                        ((object?)lookUp is null) ? 0 : -1
+                    )
                 );
                 if (result != 0)
                     return result;

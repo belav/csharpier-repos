@@ -303,40 +303,40 @@ internal static class CSharpStructureHelpers
             {
                 ConstructorDeclarationSyntax constructorDeclaration =>
                     constructorDeclaration.Modifiers.FirstOrNull()
-                    ?? constructorDeclaration.Identifier,
+                        ?? constructorDeclaration.Identifier,
                 ConversionOperatorDeclarationSyntax conversionOperatorDeclaration =>
                     conversionOperatorDeclaration.Modifiers.FirstOrNull()
-                    ?? conversionOperatorDeclaration.ImplicitOrExplicitKeyword,
+                        ?? conversionOperatorDeclaration.ImplicitOrExplicitKeyword,
                 DelegateDeclarationSyntax delegateDeclaration =>
                     delegateDeclaration.Modifiers.FirstOrNull()
-                    ?? delegateDeclaration.DelegateKeyword,
+                        ?? delegateDeclaration.DelegateKeyword,
                 DestructorDeclarationSyntax destructorDeclaration =>
                     destructorDeclaration.TildeToken,
                 EnumDeclarationSyntax enumDeclaration => enumDeclaration.Modifiers.FirstOrNull()
-                ?? enumDeclaration.EnumKeyword,
+                    ?? enumDeclaration.EnumKeyword,
                 EnumMemberDeclarationSyntax enumMemberDeclaration =>
                     enumMemberDeclaration.Identifier,
                 EventDeclarationSyntax eventDeclaration => eventDeclaration.Modifiers.FirstOrNull()
-                ?? eventDeclaration.EventKeyword,
+                    ?? eventDeclaration.EventKeyword,
                 EventFieldDeclarationSyntax eventFieldDeclaration =>
                     eventFieldDeclaration.Modifiers.FirstOrNull()
-                    ?? eventFieldDeclaration.EventKeyword,
+                        ?? eventFieldDeclaration.EventKeyword,
                 FieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Modifiers.FirstOrNull()
-                ?? fieldDeclaration.Declaration.GetFirstToken(),
+                    ?? fieldDeclaration.Declaration.GetFirstToken(),
                 IndexerDeclarationSyntax indexerDeclaration =>
                     indexerDeclaration.Modifiers.FirstOrNull()
-                    ?? indexerDeclaration.Type.GetFirstToken(),
+                        ?? indexerDeclaration.Type.GetFirstToken(),
                 MethodDeclarationSyntax methodDeclaration =>
                     methodDeclaration.Modifiers.FirstOrNull()
-                    ?? methodDeclaration.ReturnType.GetFirstToken(),
+                        ?? methodDeclaration.ReturnType.GetFirstToken(),
                 OperatorDeclarationSyntax operatorDeclaration =>
                     operatorDeclaration.Modifiers.FirstOrNull()
-                    ?? operatorDeclaration.ReturnType.GetFirstToken(),
+                        ?? operatorDeclaration.ReturnType.GetFirstToken(),
                 PropertyDeclarationSyntax propertyDeclaration =>
                     propertyDeclaration.Modifiers.FirstOrNull()
-                    ?? propertyDeclaration.Type.GetFirstToken(),
+                        ?? propertyDeclaration.Type.GetFirstToken(),
                 TypeDeclarationSyntax typeDeclaration => typeDeclaration.Modifiers.FirstOrNull()
-                ?? typeDeclaration.Keyword,
+                    ?? typeDeclaration.Keyword,
                 _ => default,
             };
 

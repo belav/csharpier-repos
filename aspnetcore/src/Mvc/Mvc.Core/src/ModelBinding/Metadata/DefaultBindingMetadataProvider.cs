@@ -170,7 +170,8 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
                 // attributes on the Property Type.
                 var matchingAttributes =
                     context.PropertyAttributes!.OfType<BindingBehaviorAttribute>();
-                return matchingAttributes.FirstOrDefault() ?? context
+                return matchingAttributes.FirstOrDefault()
+                    ?? context
                         .Key.ContainerType!.GetCustomAttributes(
                             typeof(BindingBehaviorAttribute),
                             inherit: true

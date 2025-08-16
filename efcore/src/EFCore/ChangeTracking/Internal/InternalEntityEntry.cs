@@ -2278,7 +2278,8 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         {
             // ReSharper disable once AssignNullToNotNullAttribute
             var property =
-                entityType.FindProperty(propertyName) ?? entityType.FindNavigation(propertyName)
+                entityType.FindProperty(propertyName)
+                ?? entityType.FindNavigation(propertyName)
                 ?? (IPropertyBase?)entityType.FindSkipNavigation(propertyName);
 
             if (property != null)
@@ -2379,8 +2380,10 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public bool IsLoaded(INavigationBase navigation) =>
-        GetLazyLoader()?.IsLoaded(Entity, navigation.Name)
-        ?? _stateData.IsPropertyFlagged(navigation.GetIndex(), PropertyFlag.IsLoaded);
+        GetLazyLoader()?.IsLoaded(Entity, navigation.Name) ?? _stateData.IsPropertyFlagged(
+            navigation.GetIndex(),
+            PropertyFlag.IsLoaded
+        );
 
     private ILazyLoader? GetLazyLoader()
     {

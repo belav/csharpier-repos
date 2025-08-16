@@ -122,9 +122,8 @@ namespace System.Drawing
                     else if (ColorTable.IsKnownNamedColor(c.Name))
                     {
                         member =
-                            typeof(Color).GetProperty(c.Name) ?? typeof(SystemColors).GetProperty(
-                                c.Name
-                            );
+                            typeof(Color).GetProperty(c.Name)
+                            ?? typeof(SystemColors).GetProperty(c.Name);
                     }
                     else if (c.A != 255)
                     {

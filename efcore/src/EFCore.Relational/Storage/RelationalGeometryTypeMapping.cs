@@ -48,12 +48,11 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
                 parameters.CoreParameters with
                 {
                     ProviderValueComparer =
-                        parameters.CoreParameters.ProviderValueComparer
-                        ?? (
+                        parameters.CoreParameters.ProviderValueComparer ?? (
                             RuntimeFeature.IsDynamicCodeSupported
                                 ? CreateProviderValueComparer(
                                     parameters.CoreParameters.Converter?.ProviderClrType
-                                        ?? parameters.CoreParameters.ClrType
+                                    ?? parameters.CoreParameters.ClrType
                                 )
                                 : throw new InvalidOperationException(
                                     CoreStrings.NativeAotNoCompiledModel

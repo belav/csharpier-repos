@@ -316,8 +316,7 @@ namespace System.Net.Http
                     );
                 }
 
-                return _underlyingHandler.SslOptions.ClientCertificates
-                    ?? (
+                return _underlyingHandler.SslOptions.ClientCertificates ?? (
                         _underlyingHandler.SslOptions.ClientCertificates =
                             new X509CertificateCollection()
                     );

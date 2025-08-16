@@ -3989,8 +3989,7 @@ namespace Mono.CSharp
                             left,
                             Convert.UserConversionRestriction.ImplicitOnly,
                             b.loc
-                        )
-                        ?? EmptyCast.Create(b.left, left);
+                        ) ?? EmptyCast.Create(b.left, left);
                 }
                 else if (right != null)
                 {
@@ -4001,8 +4000,7 @@ namespace Mono.CSharp
                             right,
                             Convert.UserConversionRestriction.ImplicitOnly,
                             b.loc
-                        )
-                        ?? EmptyCast.Create(b.right, right);
+                        ) ?? EmptyCast.Create(b.right, right);
                 }
 
                 TypeSpec r_type = ReturnType;

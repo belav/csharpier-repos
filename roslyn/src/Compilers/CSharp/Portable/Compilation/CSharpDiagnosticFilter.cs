@@ -300,8 +300,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             // If location.SourceTree is available, check out pragmas
             var pragmaWarningState =
-                tree?.GetPragmaDirectiveWarningState(id, position)
-                ?? Syntax.PragmaWarningState.Default;
+                tree?.GetPragmaDirectiveWarningState(id, position) ?? Syntax
+                    .PragmaWarningState
+                    .Default;
             if (pragmaWarningState == Syntax.PragmaWarningState.Disabled)
             {
                 hasPragmaSuppression = true;

@@ -370,11 +370,10 @@ public class RuntimeModelConvention : IModelFinalizedConvention
             parameterBinding
                 .ConsumedProperties.Select(property =>
                     (
-                        entityType.FindProperty(property.Name) ?? entityType.FindServiceProperty(
-                            property.Name
-                        )
-                        ?? entityType.FindNavigation(property.Name) ?? (IPropertyBase?)
-                            entityType.FindSkipNavigation(property.Name)
+                        entityType.FindProperty(property.Name)
+                        ?? entityType.FindServiceProperty(property.Name)
+                        ?? entityType.FindNavigation(property.Name)
+                        ?? (IPropertyBase?)entityType.FindSkipNavigation(property.Name)
                     )!
                 )
                 .ToArray()

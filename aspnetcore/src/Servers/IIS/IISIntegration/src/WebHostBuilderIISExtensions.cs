@@ -39,25 +39,20 @@ public static class WebHostBuilderIISExtensions
         }
 
         var port =
-            hostBuilder.GetSetting(ServerPort) ?? Environment.GetEnvironmentVariable(
-                $"ASPNETCORE_{ServerPort}"
-            );
+            hostBuilder.GetSetting(ServerPort)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPort}");
         var path =
-            hostBuilder.GetSetting(ServerPath) ?? Environment.GetEnvironmentVariable(
-                $"ASPNETCORE_{ServerPath}"
-            );
+            hostBuilder.GetSetting(ServerPath)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{ServerPath}");
         var pairingToken =
-            hostBuilder.GetSetting(PairingToken) ?? Environment.GetEnvironmentVariable(
-                $"ASPNETCORE_{PairingToken}"
-            );
+            hostBuilder.GetSetting(PairingToken)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{PairingToken}");
         var iisAuth =
-            hostBuilder.GetSetting(IISAuth) ?? Environment.GetEnvironmentVariable(
-                $"ASPNETCORE_{IISAuth}"
-            );
+            hostBuilder.GetSetting(IISAuth)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISAuth}");
         var websocketsSupported =
-            hostBuilder.GetSetting(IISWebSockets) ?? Environment.GetEnvironmentVariable(
-                $"ASPNETCORE_{IISWebSockets}"
-            );
+            hostBuilder.GetSetting(IISWebSockets)
+            ?? Environment.GetEnvironmentVariable($"ASPNETCORE_{IISWebSockets}");
 
         bool isWebSocketsSupported;
         if (!bool.TryParse(websocketsSupported, out isWebSocketsSupported))

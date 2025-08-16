@@ -123,7 +123,8 @@ public static class SpatialiteLoader
             var rids =
                 DependencyContext
                     .Default!.RuntimeGraph.FirstOrDefault(g => g.Runtime == rid)
-                    ?.Fallbacks.ToList() ?? new List<string?>();
+                    ?.Fallbacks.ToList()
+                ?? new List<string?>();
             rids.Insert(0, rid);
 
             foreach (var library in DependencyContext.Default.RuntimeLibraries)

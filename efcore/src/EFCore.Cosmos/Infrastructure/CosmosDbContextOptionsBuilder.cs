@@ -252,7 +252,7 @@ public class CosmosDbContextOptionsBuilder : ICosmosDbContextOptionsBuilderInfra
         ((IDbContextOptionsBuilderInfrastructure)_optionsBuilder).AddOrUpdateExtension(
             setAction(
                 _optionsBuilder.Options.FindExtension<CosmosOptionsExtension>()
-                ?? new CosmosOptionsExtension()
+                    ?? new CosmosOptionsExtension()
             )
         );
 

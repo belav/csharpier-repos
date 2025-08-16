@@ -1074,9 +1074,8 @@ public class ModificationCommand : IModificationCommand, INonTrackedModification
             if (value is not null)
             {
                 (
-                    property.GetJsonValueReaderWriter() ?? property
-                        .GetTypeMapping()
-                        .JsonValueReaderWriter
+                    property.GetJsonValueReaderWriter()
+                    ?? property.GetTypeMapping().JsonValueReaderWriter
                 )!.ToJson(writer, value);
             }
             else

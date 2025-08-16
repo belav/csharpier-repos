@@ -20,8 +20,9 @@ public static class RelationalElementTypeExtensions
     /// </returns>
     public static string? GetStoreType(this IReadOnlyElementType elementType) =>
         (string?)(
-            elementType.FindAnnotation(RelationalAnnotationNames.StoreType)?.Value
-            ?? elementType.FindRelationalTypeMapping()?.StoreType
+            elementType.FindAnnotation(RelationalAnnotationNames.StoreType)?.Value ?? elementType
+                .FindRelationalTypeMapping()
+                ?.StoreType
         );
 
     /// <summary>

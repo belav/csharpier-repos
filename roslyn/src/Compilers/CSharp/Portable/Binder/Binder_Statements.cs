@@ -4663,8 +4663,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         anonymousMethodSyntax.SyntaxTree,
                         Text.TextSpan.FromBounds(
                             anonymousMethodSyntax.SpanStart,
-                            anonymousMethodSyntax.ParameterList?.Span.End
-                                ?? anonymousMethodSyntax.DelegateKeyword.Span.End
+                            anonymousMethodSyntax.ParameterList?.Span.End ?? anonymousMethodSyntax
+                                    .DelegateKeyword
+                                    .Span
+                                    .End
                         )
                     );
             }

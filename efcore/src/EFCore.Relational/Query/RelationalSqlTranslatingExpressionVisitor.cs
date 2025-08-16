@@ -558,7 +558,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             : uncheckedNodeTypeVariant == ExpressionType.Coalesce
                 ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
             : _sqlExpressionFactory.MakeBinary(uncheckedNodeTypeVariant, sqlLeft!, sqlRight!, null)
-            ?? QueryCompilationContext.NotTranslatedExpression;
+                ?? QueryCompilationContext.NotTranslatedExpression;
 
         Expression ProcessGetType(
             StructuralTypeReferenceExpression typeReference,
@@ -1680,7 +1680,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     entityType
                         .GetViewOrTableMappings()
                         .SingleOrDefault(e => e.IsSplitEntityTypePrincipal ?? true)
-                        ?.Table ?? entityType.GetDefaultMappings().Single().Table;
+                        ?.Table
+                    ?? entityType.GetDefaultMappings().Single().Table;
                 if (!table.IsOptional(entityType))
                 {
                     return propertyAccess;

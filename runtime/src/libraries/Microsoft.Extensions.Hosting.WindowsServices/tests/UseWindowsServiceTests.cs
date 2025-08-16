@@ -134,8 +134,7 @@ namespace Microsoft.Extensions.Hosting
                         typeof(Action<WindowsServiceLifetimeOptions>),
                     },
                     null
-                )
-                ?? throw new MissingMethodException();
+                ) ?? throw new MissingMethodException();
 
             configure ??= _ => { };
             _addWindowsServiceLifetimeMethod.Invoke(null, new object[] { services, configure });

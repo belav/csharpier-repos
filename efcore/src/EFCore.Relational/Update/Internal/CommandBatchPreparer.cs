@@ -34,7 +34,8 @@ public class CommandBatchPreparer : ICommandBatchPreparer
             dependencies
                 .Options.Extensions.OfType<RelationalOptionsExtension>()
                 .FirstOrDefault()
-                ?.MinBatchSize ?? 1;
+                ?.MinBatchSize
+            ?? 1;
 
         _modificationCommandGraph = new Multigraph<IReadOnlyModificationCommand, CommandDependency>(
             dependencies.ModificationCommandComparer

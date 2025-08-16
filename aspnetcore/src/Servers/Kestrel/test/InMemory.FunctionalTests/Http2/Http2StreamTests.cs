@@ -1612,7 +1612,8 @@ public class Http2StreamTests : Http2TestBase
             m =>
                 m.Exception?.Message.Contains(
                     "Response Content-Length mismatch: too many bytes written (12 of 11)."
-                ) ?? false
+                )
+                ?? false
         );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);

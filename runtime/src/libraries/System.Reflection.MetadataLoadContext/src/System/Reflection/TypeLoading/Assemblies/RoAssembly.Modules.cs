@@ -100,8 +100,7 @@ namespace System.Reflection.TypeLoading
                     ref _loadedModules[loadedModulesIndex],
                     newModule,
                     null
-                )
-                ?? newModule;
+                ) ?? newModule;
         }
 
         internal RoModule[] ComputeRoModules(bool getResourceModules)

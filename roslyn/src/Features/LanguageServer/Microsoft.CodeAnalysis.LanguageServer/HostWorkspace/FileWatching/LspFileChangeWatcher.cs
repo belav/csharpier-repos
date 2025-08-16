@@ -46,7 +46,8 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             languageServerHost.GetRequiredLspService<IInitializeManager>();
         return clientCapabilitiesProvider
                 .GetClientCapabilities()
-                .Workspace?.DidChangeWatchedFiles?.DynamicRegistration ?? false;
+                .Workspace?.DidChangeWatchedFiles?.DynamicRegistration
+            ?? false;
     }
 
     public IFileChangeContext CreateContext(params WatchedDirectory[] watchedDirectories)

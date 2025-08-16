@@ -934,7 +934,8 @@ namespace System.Net.Security
                             _sslAuthenticationOptions
                                 .CertificateContext
                                 ?.Trust
-                                ?._sendTrustInHandshake ?? false;
+                                ?._sendTrustInHandshake
+                            ?? false;
 
                         status = SslStreamPal.AcceptSecurityContext(
                             ref _credentialsHandle!,

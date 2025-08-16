@@ -506,8 +506,9 @@ public static class RelationalPropertyExtensions
         // be an incomplete type name like `varchar` which will become `varchar(64)` after the max length facet is required.
         =>
         (string?)(
-            property.FindRelationalTypeMapping()?.StoreType
-            ?? property.FindAnnotation(RelationalAnnotationNames.ColumnType)?.Value
+            property.FindRelationalTypeMapping()?.StoreType ?? property
+                .FindAnnotation(RelationalAnnotationNames.ColumnType)
+                ?.Value
         );
 
     /// <summary>

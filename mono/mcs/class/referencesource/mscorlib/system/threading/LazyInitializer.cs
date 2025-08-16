@@ -168,11 +168,8 @@ namespace System.Threading
             System.Func<T> valueFactory
         )
             where T : class =>
-            Volatile.Read(ref target) ?? EnsureInitializedCore(
-                ref target,
-                ref syncLock,
-                valueFactory
-            );
+            Volatile.Read(ref target)
+            ?? EnsureInitializedCore(ref target, ref syncLock, valueFactory);
 
         private static T EnsureInitializedCore<T>(
             ref T target,

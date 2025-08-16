@@ -836,7 +836,7 @@ namespace IOperationGenerator
                             {
                                 orderedProperties.Add(
                                     publicIOperationProps.Find(p => p.Name == childName)
-                                    ?? throw new InvalidOperationException(
+                                        ?? throw new InvalidOperationException(
                                             $"Cannot find property for {childName}"
                                         )
                                 );
@@ -1305,7 +1305,8 @@ namespace IOperationGenerator
         private static List<string> GetPropertyOrder(Node node) =>
             node.ChildrenOrder?.Split(",", StringSplitOptions.RemoveEmptyEntries)
                 .Select(s => s.Trim())
-                .ToList() ?? new List<string>();
+                .ToList()
+            ?? new List<string>();
 
         private enum ClassType
         {

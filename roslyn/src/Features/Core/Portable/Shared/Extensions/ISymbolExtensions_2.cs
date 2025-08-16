@@ -233,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         expandInheritdoc: true,
                         cancellationToken: cancellationToken
                     )
-                    ?.GetTypeParameter(typeParam.Name) ?? DocumentationComment.Empty,
+                    ?.GetTypeParameter(typeParam.Name)
+                ?? DocumentationComment.Empty,
                 IMethodSymbol method => GetMethodDocumentation(
                     method,
                     compilation,

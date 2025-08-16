@@ -147,9 +147,8 @@ namespace System.Data.Services.Client
             string namespaceUri
         )
         {
-            return reader.GetAttribute(attributeName, namespaceUri) ?? reader.GetAttribute(
-                    attributeName
-                );
+            return reader.GetAttribute(attributeName, namespaceUri)
+                ?? reader.GetAttribute(attributeName);
         }
 
         internal static void RemoveDuplicateNamespaceAttributes(System.Xml.Linq.XElement element)

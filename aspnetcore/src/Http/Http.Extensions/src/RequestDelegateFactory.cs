@@ -603,8 +603,7 @@ public static partial class RequestDelegateFactory
 
         var serviceProvider =
             options?.ServiceProvider
-            ?? options?.EndpointBuilder?.ApplicationServices
-            ?? EmptyServiceProvider.Instance;
+            ?? options?.EndpointBuilder?.ApplicationServices ?? EmptyServiceProvider.Instance;
         var endpointBuilder = options?.EndpointBuilder ?? new RdfEndpointBuilder(serviceProvider);
         var jsonSerializerOptions =
             serviceProvider.GetService<IOptions<JsonOptions>>()?.Value.SerializerOptions

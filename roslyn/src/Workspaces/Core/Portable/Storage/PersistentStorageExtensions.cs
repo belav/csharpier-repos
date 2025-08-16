@@ -24,10 +24,10 @@ namespace Microsoft.CodeAnalysis.Storage
             {
 #if !DOTNET_BUILD_FROM_SOURCE
                 StorageDatabase.SQLite => services.GetService<SQLitePersistentStorageService>()
-                ?? NoOpPersistentStorageService.GetOrThrow(configuration),
+                    ?? NoOpPersistentStorageService.GetOrThrow(configuration),
 #endif
                 StorageDatabase.CloudCache => services.GetService<ICloudCacheStorageService>()
-                ?? NoOpPersistentStorageService.GetOrThrow(configuration),
+                    ?? NoOpPersistentStorageService.GetOrThrow(configuration),
                 _ => NoOpPersistentStorageService.GetOrThrow(configuration),
             };
         }

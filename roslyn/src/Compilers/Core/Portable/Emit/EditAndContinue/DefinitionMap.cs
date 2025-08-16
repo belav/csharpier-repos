@@ -105,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         internal Cci.IDefinition? MapDefinition(Cci.IDefinition definition)
         {
-            return SourceToPreviousSymbolMatcher.MapDefinition(definition) ?? (
+            return SourceToPreviousSymbolMatcher.MapDefinition(definition)
+                ?? (
                     SourceToMetadataSymbolMatcher != SourceToPreviousSymbolMatcher
                         ? SourceToMetadataSymbolMatcher.MapDefinition(definition)
                         : null
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Emit
 
         internal Cci.INamespace? MapNamespace(Cci.INamespace @namespace)
         {
-            return SourceToPreviousSymbolMatcher.MapNamespace(@namespace) ?? (
+            return SourceToPreviousSymbolMatcher.MapNamespace(@namespace)
+                ?? (
                     SourceToMetadataSymbolMatcher != SourceToPreviousSymbolMatcher
                         ? SourceToMetadataSymbolMatcher.MapNamespace(@namespace)
                         : null
@@ -130,7 +132,7 @@ namespace Microsoft.CodeAnalysis.Emit
         internal EntityHandle GetInitialMetadataHandle(Cci.IDefinition def) =>
             MetadataTokens.EntityHandle(
                 SourceToMetadataSymbolMatcher.MapDefinition(def)?.GetInternalSymbol()?.MetadataToken
-                    ?? 0
+                ?? 0
             );
 
         public abstract SymbolMatcher SourceToMetadataSymbolMatcher { get; }

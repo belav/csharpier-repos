@@ -412,7 +412,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
             {
                 AnonymousMethodExpressionSyntax anonymousMethod => anonymousMethod
                     .ParameterList
-                    ?.Parameters ?? default,
+                    ?.Parameters
+                ?? default,
                 SimpleLambdaExpressionSyntax simpleLambda => SyntaxFactory.SingletonSeparatedList(
                     simpleLambda.Parameter
                 ),

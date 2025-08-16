@@ -2777,8 +2777,10 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
         {
             var jsonColumnName = entityType.GetContainerColumnName()!;
             var jsonColumnTypeMapping = (
-                entityType.GetViewOrTableMappings().SingleOrDefault()?.Table
-                ?? entityType.GetDefaultMappings().Single().Table
+                entityType.GetViewOrTableMappings().SingleOrDefault()?.Table ?? entityType
+                    .GetDefaultMappings()
+                    .Single()
+                    .Table
             )
                 .FindColumn(jsonColumnName)!
                 .StoreTypeMapping;
@@ -3335,9 +3337,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             var typeMapping = property.GetTypeMapping();
 
             var jsonReaderWriterExpression = Constant(
-                property.GetJsonValueReaderWriter() ?? property
-                        .GetTypeMapping()
-                        .JsonValueReaderWriter!
+                property.GetJsonValueReaderWriter()
+                    ?? property.GetTypeMapping().JsonValueReaderWriter!
             );
 
             var fromJsonMethod = jsonReaderWriterExpression.Type.GetMethod(

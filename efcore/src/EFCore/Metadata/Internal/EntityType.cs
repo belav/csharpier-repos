@@ -5203,8 +5203,8 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
                             entityType.FindProperty(property.Name)
                             ?? entityType.FindServiceProperty(property.Name)
                             ?? entityType.FindComplexProperty(property.Name)
-                            ?? entityType.FindNavigation(property.Name) ?? (IPropertyBase?)
-                                entityType.FindSkipNavigation(property.Name)
+                            ?? entityType.FindNavigation(property.Name)
+                            ?? (IPropertyBase?)entityType.FindSkipNavigation(property.Name)
                         )!
                     )
                     .ToArray()

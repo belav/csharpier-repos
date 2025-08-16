@@ -50,8 +50,7 @@ public class Navigation : PropertyBase, IMutableNavigation, IConventionNavigatio
     /// </summary>
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
     public override Type ClrType =>
-        this.GetIdentifyingMemberInfo()?.GetMemberType()
-        ?? (
+        this.GetIdentifyingMemberInfo()?.GetMemberType() ?? (
             ((IReadOnlyNavigation)this).IsCollection
                 ? typeof(IEnumerable<>).MakeGenericType(TargetEntityType.ClrType)
                 : TargetEntityType.ClrType

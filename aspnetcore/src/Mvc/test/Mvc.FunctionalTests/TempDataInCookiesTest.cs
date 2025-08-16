@@ -23,7 +23,8 @@ public class TempDataInCookiesTest
     public TempDataInCookiesTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
     {
         var factory =
-            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b =>
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(b =>
                 b.UseStartup<BasicWebSite.StartupWithoutEndpointRouting>()
             );
         factory = factory.WithWebHostBuilder(b =>

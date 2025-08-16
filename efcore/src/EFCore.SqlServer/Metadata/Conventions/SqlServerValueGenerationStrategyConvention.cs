@@ -110,12 +110,11 @@ public class SqlServerValueGenerationStrategyConvention
                     {
                         var sequence = modelBuilder
                             .HasSequence(
-                                property.GetSequenceName(declaringTable) ?? entityType
-                                        .GetRootType()
-                                        .ShortName()
+                                property.GetSequenceName(declaringTable)
+                                    ?? entityType.GetRootType().ShortName()
                                         + modelBuilder.Metadata.GetSequenceNameSuffix(),
                                 property.GetSequenceSchema(declaringTable)
-                                ?? modelBuilder.Metadata.GetSequenceSchema()
+                                    ?? modelBuilder.Metadata.GetSequenceSchema()
                             )
                             .Metadata;
 
@@ -142,7 +141,8 @@ public class SqlServerValueGenerationStrategyConvention
             )
             {
                 var providerClrType = (
-                    property.GetValueConverter() ?? (
+                    property.GetValueConverter()
+                    ?? (
                         property.FindRelationalTypeMapping(storeObject)
                         ?? Dependencies.TypeMappingSource.FindMapping((IProperty)property)
                     )?.Converter

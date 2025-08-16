@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return token.GetAncestor<EventFieldDeclarationSyntax>()
                 ?? token.GetAncestor<EventDeclarationSyntax>()
                 ?? token.GetAncestor<PropertyDeclarationSyntax>()
-                ?? token.GetAncestor<IndexerDeclarationSyntax>() ?? (SyntaxNode?)
-                    token.GetAncestor<MethodDeclarationSyntax>()
+                ?? token.GetAncestor<IndexerDeclarationSyntax>()
+                ?? (SyntaxNode?)token.GetAncestor<MethodDeclarationSyntax>()
                 ?? throw ExceptionUtilities.UnexpectedValue(token);
         }
 

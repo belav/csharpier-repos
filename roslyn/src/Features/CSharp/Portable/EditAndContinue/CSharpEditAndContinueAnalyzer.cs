@@ -239,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     && (
                         model
                             .GetSymbolInfo(nameSyntax, cancellationToken)
-                            .Symbol?.Equals(localOrParameter) ?? false
+                            .Symbol?.Equals(localOrParameter)
+                        ?? false
                     )
                 select node;
         }

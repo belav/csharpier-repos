@@ -967,11 +967,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var nonOutConstructorHasArityError =
                         nonOutConstructorDiagnostics
                             .DiagnosticBag?.AsEnumerableWithoutResolution()
-                            .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount) ?? false;
+                            .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
+                        ?? false;
                     var outConstructorHasArityError =
                         outConstructorDiagnostics
                             .DiagnosticBag?.AsEnumerableWithoutResolution()
-                            .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount) ?? false;
+                            .Any(d => (ErrorCode)d.Code == ErrorCode.ERR_BadCtorArgCount)
+                        ?? false;
 
                     switch ((nonOutConstructorHasArityError, outConstructorHasArityError))
                     {

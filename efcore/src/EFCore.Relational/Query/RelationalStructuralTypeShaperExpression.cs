@@ -130,7 +130,8 @@ public class RelationalStructuralTypeShaperExpression : StructuralTypeShaperExpr
             entityType
                 .GetViewOrTableMappings()
                 .SingleOrDefault(e => e.IsSplitEntityTypePrincipal ?? true)
-                ?.Table ?? entityType.GetDefaultMappings().Single().Table;
+                ?.Table
+            ?? entityType.GetDefaultMappings().Single().Table;
         if (table.IsOptional(entityType))
         {
             // Optional dependent

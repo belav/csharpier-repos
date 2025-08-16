@@ -773,7 +773,8 @@ public class InternalEntityTypeBuilder : InternalTypeBaseBuilder, IConventionEnt
     /// </summary>
     public virtual IMutableNavigationBase Navigation(string navigationName) =>
         (IMutableNavigationBase?)Metadata.FindNavigation(navigationName)
-        ?? Metadata.FindSkipNavigation(navigationName) ?? throw new InvalidOperationException(
+        ?? Metadata.FindSkipNavigation(navigationName)
+        ?? throw new InvalidOperationException(
             CoreStrings.CanOnlyConfigureExistingNavigations(navigationName, Metadata.DisplayName())
         );
 
@@ -5360,8 +5361,9 @@ public class InternalEntityTypeBuilder : InternalTypeBaseBuilder, IConventionEnt
                 && foreignKey
                     .GetIsRequiredConfigurationSource()
                     .Overrides(ConfigurationSource.Convention),
-            foreignKey.DependentToPrincipal?.Name
-                ?? foreignKey.ReferencingSkipNavigations?.FirstOrDefault()?.Inverse?.Name
+            foreignKey.DependentToPrincipal?.Name ?? foreignKey
+                    .ReferencingSkipNavigations?.FirstOrDefault()
+                    ?.Inverse?.Name
                 ?? foreignKey.PrincipalEntityType.ShortName()
         ).Item1;
 

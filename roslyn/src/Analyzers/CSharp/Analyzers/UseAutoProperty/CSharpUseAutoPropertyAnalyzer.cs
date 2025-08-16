@@ -210,7 +210,7 @@ internal sealed class CSharpUseAutoPropertyAnalyzer
             AccessorDeclarationSyntax accessorDeclaration => accessorDeclaration
                 .ExpressionBody
                 ?.Expression
-                ?? GetSingleStatementFromAccessor<ReturnStatementSyntax>(
+            ?? GetSingleStatementFromAccessor<ReturnStatementSyntax>(
                     accessorDeclaration
                 )?.Expression,
             ArrowExpressionClauseSyntax arrowExpression => arrowExpression.Expression,

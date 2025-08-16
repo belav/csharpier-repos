@@ -93,8 +93,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ref _implementationForInterfaceMemberMap,
                             map,
                             null
-                        )
-                        ?? map;
+                        ) ?? map;
                 }
             }
 

@@ -367,7 +367,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 expectedBaseName =
                     GetCustomAttributeCtorValues<object>(src, nameof(KeptBaseTypeAttribute))
                         .FirstOrDefault()
-                        ?.ToString() ?? defaultBaseType;
+                        ?.ToString()
+                    ?? defaultBaseType;
             }
             Assert.AreEqual(
                 expectedBaseName,

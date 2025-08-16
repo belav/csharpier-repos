@@ -96,8 +96,7 @@ namespace ILLink.RoslynAnalyzer.Tests
         internal static string MakeSourceModuleName(this Compilation compilation)
         {
             var UnspecifiedModuleAssemblyName = "?";
-            return compilation.Options.ModuleName
-                ?? (
+            return compilation.Options.ModuleName ?? (
                     compilation.AssemblyName != null
                         ? compilation.AssemblyName
                             + compilation.Options.OutputKind.GetDefaultExtension()

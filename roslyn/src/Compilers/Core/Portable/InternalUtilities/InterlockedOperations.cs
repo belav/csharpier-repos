@@ -94,10 +94,8 @@ namespace Roslyn.Utilities
         public static T? Initialize<T>([NotNull] ref StrongBox<T?>? target, Func<T?> valueFactory)
         {
             var box =
-                Volatile.Read(ref target!) ?? GetOrStore(
-                    ref target,
-                    new StrongBox<T?>(valueFactory())
-                );
+                Volatile.Read(ref target!)
+                ?? GetOrStore(ref target, new StrongBox<T?>(valueFactory()));
             return box.Value;
         }
 
@@ -120,10 +118,8 @@ namespace Roslyn.Utilities
         )
         {
             var box =
-                Volatile.Read(ref target!) ?? GetOrStore(
-                    ref target,
-                    new StrongBox<T?>(valueFactory(arg))
-                );
+                Volatile.Read(ref target!)
+                ?? GetOrStore(ref target, new StrongBox<T?>(valueFactory(arg)));
             return box.Value;
         }
 

@@ -240,8 +240,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                             ref _scope.ExpectedProviderForCatalog,
                             expected,
                             null
-                        )
-                        ?? expected;
+                        ) ?? expected;
                     Interlocked.CompareExchange(ref _scope.CurrentExportProvider, expected, null);
                 }
 

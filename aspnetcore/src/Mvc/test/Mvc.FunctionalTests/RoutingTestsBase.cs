@@ -14,9 +14,8 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
     protected RoutingTestsBase(MvcTestFixture<TStartup> fixture)
     {
         var factory =
-            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
-                ConfigureWebHostBuilder
-            );
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 

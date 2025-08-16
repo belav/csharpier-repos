@@ -656,9 +656,8 @@ namespace System.Web.DynamicData
                 );
 
                 var displayFormatAttribute =
-                    Attributes.FirstOrDefault<DisplayFormatAttribute>() ?? (
-                        DataTypeAttribute != null ? DataTypeAttribute.DisplayFormat : null
-                    );
+                    Attributes.FirstOrDefault<DisplayFormatAttribute>()
+                    ?? (DataTypeAttribute != null ? DataTypeAttribute.DisplayFormat : null);
 
                 ApplyFormatInEditMode = displayFormatAttribute.GetPropertyValue(
                     a => a.ApplyFormatInEditMode,
@@ -781,8 +780,7 @@ namespace System.Web.DynamicData
                             == "webforms"
                         || presentationLayerPropertyAccessor(a)
                             .ToLower(CultureInfo.InvariantCulture) == "mvc"
-                    )
-                    ?? presentationLayerNotSpecified.FirstOrDefault();
+                    ) ?? presentationLayerNotSpecified.FirstOrDefault();
 
                 return uiHintAttribute.GetPropertyValue(hintPropertyAccessor);
             }

@@ -705,8 +705,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
                 var symbol =
                     membersArray.FirstOrDefault(m =>
                         m.Name.Equals(expectedFieldName, StringComparison.Ordinal)
-                    )
-                    ?? membersArray.FirstOrDefault();
+                    ) ?? membersArray.FirstOrDefault();
                 if (symbol != null)
                 {
                     if (IsViableFieldOrProperty(parameterType, symbol))

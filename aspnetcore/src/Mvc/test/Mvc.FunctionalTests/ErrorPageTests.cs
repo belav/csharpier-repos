@@ -38,9 +38,8 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
         var loggerProvider = _assemblyTestLog.CreateLoggerFactory(testOutputHelper, GetType().Name);
 
         var factory =
-            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b =>
-                b.UseStartup<ErrorPageMiddlewareWebSite.Startup>()
-            );
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
         Client = factory
             .WithWebHostBuilder(builder =>
                 builder.ConfigureLogging(l =>
@@ -61,9 +60,8 @@ public class ErrorPageTests : IClassFixture<MvcTestFixture<ErrorPageMiddlewareWe
     {
         // Arrange
         var factory =
-            _fixture.Factories.FirstOrDefault() ?? _fixture.WithWebHostBuilder(b =>
-                b.UseStartup<ErrorPageMiddlewareWebSite.Startup>()
-            );
+            _fixture.Factories.FirstOrDefault()
+            ?? _fixture.WithWebHostBuilder(b => b.UseStartup<ErrorPageMiddlewareWebSite.Startup>());
         factory = factory.WithWebHostBuilder(b =>
             b.ConfigureTestServices(serviceCollection =>
                 serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(

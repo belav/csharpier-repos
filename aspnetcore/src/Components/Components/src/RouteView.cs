@@ -89,8 +89,7 @@ public class RouteView : IComponent
             _layoutAttributeCache.GetOrAdd(
                 RouteData.PageType,
                 static type => type.GetCustomAttribute<LayoutAttribute>()?.LayoutType
-            )
-            ?? DefaultLayout;
+            ) ?? DefaultLayout;
 
         builder.OpenComponent<LayoutView>(0);
         builder.AddComponentParameter(1, nameof(LayoutView.Layout), pageLayoutType);

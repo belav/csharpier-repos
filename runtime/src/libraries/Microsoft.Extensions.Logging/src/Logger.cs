@@ -207,9 +207,8 @@ namespace Microsoft.Extensions.Logging
                     {
                         LoggerInformation loggerInfo = logger.Loggers[i];
                         string providerName =
-                            ProviderAliasUtilities.GetAlias(loggerInfo.ProviderType) ?? loggerInfo
-                                .ProviderType
-                                .Name;
+                            ProviderAliasUtilities.GetAlias(loggerInfo.ProviderType)
+                            ?? loggerInfo.ProviderType.Name;
                         MessageLogger? messageLogger = logger.MessageLoggers?.FirstOrDefault(
                             messageLogger => messageLogger.Logger == loggerInfo.Logger
                         );

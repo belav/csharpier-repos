@@ -49,12 +49,14 @@ public class HubConnectionBuilder : IHubConnectionBuilder
         var serviceProvider = Services.BuildServiceProvider();
 
         var connectionFactory =
-            serviceProvider.GetService<IConnectionFactory>() ?? throw new InvalidOperationException(
+            serviceProvider.GetService<IConnectionFactory>()
+            ?? throw new InvalidOperationException(
                 $"Cannot create {nameof(HubConnection)} instance. An {nameof(IConnectionFactory)} was not configured."
             );
 
         var endPoint =
-            serviceProvider.GetService<EndPoint>() ?? throw new InvalidOperationException(
+            serviceProvider.GetService<EndPoint>()
+            ?? throw new InvalidOperationException(
                 $"Cannot create {nameof(HubConnection)} instance. An {nameof(EndPoint)} was not configured."
             );
 

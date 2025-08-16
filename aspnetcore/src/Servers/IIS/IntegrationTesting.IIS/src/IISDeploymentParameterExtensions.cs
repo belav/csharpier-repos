@@ -284,7 +284,8 @@ public static class IISDeploymentParameterExtensions
                     .SetAttributeValue("image", modulePath);
 
                 (
-                    webServerElement.Element("modules") ?? element
+                    webServerElement.Element("modules")
+                    ?? element
                         .Element("location")
                         .RequiredElement("system.webServer")
                         .RequiredElement("modules")

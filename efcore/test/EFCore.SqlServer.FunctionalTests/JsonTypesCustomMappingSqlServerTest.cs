@@ -46,8 +46,9 @@ public class JsonTypesCustomMappingSqlServerTest : JsonTypesSqlServerTestBase
                     mappingInfo,
                     mappingInfo.ClrType,
                     null,
-                    mappingInfo.CoreTypeMappingInfo.ElementTypeMapping
-                        ?? FindMapping(elementClrType)
+                    mappingInfo.CoreTypeMappingInfo.ElementTypeMapping ?? FindMapping(
+                            elementClrType
+                        )
                 );
             }
 

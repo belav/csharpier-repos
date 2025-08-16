@@ -43,7 +43,8 @@ public class ChangeTracker : IResettableService
                 .GetService<IDbContextOptions>()
                 .Extensions.OfType<CoreOptionsExtension>()
                 .FirstOrDefault()
-                ?.QueryTrackingBehavior ?? QueryTrackingBehavior.TrackAll;
+                ?.QueryTrackingBehavior
+            ?? QueryTrackingBehavior.TrackAll;
 
         _queryTrackingBehavior = _defaultQueryTrackingBehavior;
 

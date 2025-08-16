@@ -936,9 +936,8 @@ namespace System.Threading.Tasks
                 : base(taskBody, needsLock: true, dop, scheduler, cancellationToken, body)
             {
                 Enumerator =
-                    source.GetEnumerator() ?? throw new InvalidOperationException(
-                        SR.Parallel_ForEach_NullEnumerator
-                    );
+                    source.GetEnumerator()
+                    ?? throw new InvalidOperationException(SR.Parallel_ForEach_NullEnumerator);
             }
 
             public void Dispose()

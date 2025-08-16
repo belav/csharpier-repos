@@ -520,10 +520,8 @@ public class SqlExpressionFactory : ISqlExpressionFactory
         var resultType = right.Type;
         var inferredTypeMapping =
             typeMapping
-            ?? ExpressionExtensions.InferTypeMapping(left, right) ?? _typeMappingSource.FindMapping(
-                resultType,
-                Dependencies.Model
-            );
+            ?? ExpressionExtensions.InferTypeMapping(left, right)
+            ?? _typeMappingSource.FindMapping(resultType, Dependencies.Model);
 
         var typeMappedArguments = new List<SqlExpression>
         {

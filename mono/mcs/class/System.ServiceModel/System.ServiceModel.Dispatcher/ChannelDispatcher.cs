@@ -464,9 +464,12 @@ namespace System.ServiceModel.Dispatcher
         {
             var l = owner.Listener;
             channel_acceptor =
-                CreateAcceptor<IReplyChannel>(l) ?? CreateAcceptor<IReplySessionChannel>(l)
-                ?? CreateAcceptor<IInputChannel>(l) ?? CreateAcceptor<IInputSessionChannel>(l)
-                ?? CreateAcceptor<IDuplexChannel>(l) ?? CreateAcceptor<IDuplexSessionChannel>(l);
+                CreateAcceptor<IReplyChannel>(l)
+                ?? CreateAcceptor<IReplySessionChannel>(l)
+                ?? CreateAcceptor<IInputChannel>(l)
+                ?? CreateAcceptor<IInputSessionChannel>(l)
+                ?? CreateAcceptor<IDuplexChannel>(l)
+                ?? CreateAcceptor<IDuplexSessionChannel>(l);
             if (channel_acceptor == null)
                 throw new InvalidOperationException(
                     String.Format("Unrecognized channel listener type: {0}", l.GetType())

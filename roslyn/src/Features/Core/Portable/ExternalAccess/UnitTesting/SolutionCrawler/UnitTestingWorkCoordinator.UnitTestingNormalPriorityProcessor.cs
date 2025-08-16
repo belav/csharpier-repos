@@ -377,7 +377,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             )
                             {
                                 var textDocument =
-                                    solution.GetTextDocument(documentId) ?? await solution
+                                    solution.GetTextDocument(documentId)
+                                    ?? await solution
                                         .GetSourceGeneratedDocumentAsync(
                                             documentId,
                                             cancellationToken

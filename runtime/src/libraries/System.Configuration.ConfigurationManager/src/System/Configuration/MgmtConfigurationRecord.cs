@@ -818,8 +818,9 @@ namespace System.Configuration
 
             // Get the type name.
             string typeName =
-                configSection.SectionInformation.Type
-                ?? Host.GetConfigTypeName(configSection.GetType());
+                configSection.SectionInformation.Type ?? Host.GetConfigTypeName(
+                    configSection.GetType()
+                );
 
             // Add a factory record for the section.
             factoryRecord = new FactoryRecord(

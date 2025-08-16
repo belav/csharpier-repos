@@ -2206,11 +2206,12 @@ public class RelationalModelValidator : ModelValidator
                 ValidateMappingStrategy(entityType, mappingStrategy);
                 var storeObject =
                     entityType.GetSchemaQualifiedTableName()
-                    ?? entityType.GetSchemaQualifiedViewName() ?? entityType.GetFunctionName()
-                    ?? entityType.GetSqlQuery() ?? entityType
-                        .GetInsertStoredProcedure()
+                    ?? entityType.GetSchemaQualifiedViewName()
+                    ?? entityType.GetFunctionName()
+                    ?? entityType.GetSqlQuery()
+                    ?? entityType.GetInsertStoredProcedure()?.GetSchemaQualifiedName() ?? entityType
+                        .GetDeleteStoredProcedure()
                         ?.GetSchemaQualifiedName()
-                    ?? entityType.GetDeleteStoredProcedure()?.GetSchemaQualifiedName()
                     ?? entityType.GetUpdateStoredProcedure()?.GetSchemaQualifiedName();
                 if (
                     mappingStrategy == RelationalAnnotationNames.TpcMappingStrategy

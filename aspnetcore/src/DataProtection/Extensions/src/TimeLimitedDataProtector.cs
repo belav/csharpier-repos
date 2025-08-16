@@ -46,8 +46,7 @@ internal sealed class TimeLimitedDataProtector : ITimeLimitedDataProtector
                     ref _innerProtectorWithTimeLimitedPurpose,
                     newValue,
                     null
-                )
-                ?? newValue;
+                ) ?? newValue;
         }
         return retVal;
     }

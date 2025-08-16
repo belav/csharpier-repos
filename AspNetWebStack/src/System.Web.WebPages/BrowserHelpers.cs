@@ -103,9 +103,8 @@ namespace System.Web.WebPages
         public static string GetOverriddenUserAgent(this HttpContextBase httpContext)
         {
             return (string)httpContext.Items[_userAgentKey]
-                ?? BrowserOverrideStores.Current.GetOverriddenUserAgent(httpContext) ?? httpContext
-                    .Request
-                    .UserAgent;
+                ?? BrowserOverrideStores.Current.GetOverriddenUserAgent(httpContext)
+                ?? httpContext.Request.UserAgent;
         }
 
         /// <summary>

@@ -33,6 +33,5 @@ public class ModelCodeGeneratorSelector
     public virtual IModelCodeGenerator Select(ModelCodeGenerationOptions options) =>
         _templatedModelGenerators.LastOrDefault(g =>
             options.ProjectDir != null && g.HasTemplates(options.ProjectDir)
-        )
-        ?? Select(options.Language);
+        ) ?? Select(options.Language);
 }

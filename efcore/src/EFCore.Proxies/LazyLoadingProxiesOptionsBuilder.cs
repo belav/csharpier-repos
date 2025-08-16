@@ -53,7 +53,7 @@ public class LazyLoadingProxiesOptionsBuilder
         ((IDbContextOptionsBuilderInfrastructure)OptionsBuilder).AddOrUpdateExtension(
             setAction(
                 OptionsBuilder.Options.FindExtension<ProxiesOptionsExtension>()
-                ?? new ProxiesOptionsExtension()
+                    ?? new ProxiesOptionsExtension()
             )
         );
 

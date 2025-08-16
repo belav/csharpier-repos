@@ -1551,7 +1551,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     _builder.EmitBranch(
                         ILOpCode.Brfalse,
                         lengthBasedSwitchInfo.LengthBasedJumpTable.NullCaseLabel
-                            ?? fallThroughLabel,
+                        ?? fallThroughLabel,
                         ILOpCode.Brtrue
                     );
                 }

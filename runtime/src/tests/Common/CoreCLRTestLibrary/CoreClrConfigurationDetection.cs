@@ -63,9 +63,8 @@ public static class CoreClrConfigurationDetection
         || IsJitMinOpts;
 
     private static string GetEnvironmentVariableValue(string name) =>
-        Environment.GetEnvironmentVariable("DOTNET_" + name) ?? Environment.GetEnvironmentVariable(
-            "COMPlus_" + name
-        )
+        Environment.GetEnvironmentVariable("DOTNET_" + name)
+        ?? Environment.GetEnvironmentVariable("COMPlus_" + name)
         ?? "0";
 
     private static bool AssemblyConfigurationEquals(string configuration)

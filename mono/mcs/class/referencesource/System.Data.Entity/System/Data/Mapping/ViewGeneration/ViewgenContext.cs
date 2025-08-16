@@ -391,8 +391,7 @@ namespace System.Data.Mapping.ViewGeneration
                     leftFragmentQuery =
                         m_leftFragmentQP.CreateDerivedViewBySelectingConstantAttributes(
                             leftFragmentQuery
-                        )
-                        ?? leftFragmentQuery;
+                        ) ?? leftFragmentQuery;
                 }
 
                 LeftCellWrapper leftWrapper = new LeftCellWrapper(

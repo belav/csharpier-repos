@@ -315,12 +315,10 @@ internal sealed class StartupLoader
 
         // Check the most likely places first
         var type =
-            assembly.GetType(startupNameWithEnv) ?? assembly.GetType(
-                startupAssemblyName + "." + startupNameWithEnv
-            )
-            ?? assembly.GetType(startupNameWithoutEnv) ?? assembly.GetType(
-                startupAssemblyName + "." + startupNameWithoutEnv
-            );
+            assembly.GetType(startupNameWithEnv)
+            ?? assembly.GetType(startupAssemblyName + "." + startupNameWithEnv)
+            ?? assembly.GetType(startupNameWithoutEnv)
+            ?? assembly.GetType(startupAssemblyName + "." + startupNameWithoutEnv);
 
         if (type == null)
         {

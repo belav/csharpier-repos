@@ -610,11 +610,8 @@ namespace System.Threading.Tasks
         /// the default constructor on the factory type.
         /// </remarks>
         public static new TaskFactory<TResult> Factory =>
-            Volatile.Read(ref s_Factory) ?? Interlocked.CompareExchange(
-                ref s_Factory,
-                new TaskFactory<TResult>(),
-                null
-            )
+            Volatile.Read(ref s_Factory)
+            ?? Interlocked.CompareExchange(ref s_Factory, new TaskFactory<TResult>(), null)
             ?? s_Factory;
 
         /// <summary>

@@ -122,8 +122,7 @@ namespace RunTests
                 JsonConvert.DeserializeAnonymousType(
                     File.ReadAllText(getGlobalJsonPath()),
                     new { sdk = new { version = "" } }
-                )
-                ?? throw new InvalidOperationException("Failed to deserialize global.json.");
+                ) ?? throw new InvalidOperationException("Failed to deserialize global.json.");
 
             var project =
                 @"

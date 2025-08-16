@@ -112,9 +112,9 @@ internal static class ControllerActionDescriptorBuilder
     )
     {
         var isVisible =
-            action.ApiExplorer?.IsVisible
-            ?? controller.ApiExplorer?.IsVisible
-            ?? application.ApiExplorer?.IsVisible
+            action.ApiExplorer?.IsVisible ?? controller.ApiExplorer?.IsVisible ?? application
+                .ApiExplorer
+                ?.IsVisible
             ?? false;
 
         var isVisibleSetOnActionOrController =

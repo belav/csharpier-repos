@@ -321,8 +321,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 DebuggerAttributes.GetFieldValue(
                     ImmutableSegmentedDictionary.Create<string, string>(),
                     "_root"
-                )
-                ?? throw new InvalidOperationException();
+                ) ?? throw new InvalidOperationException();
             DebuggerAttributes.ValidateDebuggerDisplayReferences(rootNode);
             PropertyInfo itemProperty = info.Properties.Single(pr =>
                 pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State

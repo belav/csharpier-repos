@@ -32,7 +32,7 @@ public class SqlServerModificationCommandBatchFactory : IModificationCommandBatc
 
         _maxBatchSize = Math.Min(
             options.Extensions.OfType<SqlServerOptionsExtension>().FirstOrDefault()?.MaxBatchSize
-                ?? DefaultMaxBatchSize,
+            ?? DefaultMaxBatchSize,
             MaxMaxBatchSize
         );
 

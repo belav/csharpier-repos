@@ -202,7 +202,8 @@ namespace System.Security.Cryptography.X509Certificates
                             OidGroup.Template,
                             fallBackToAllGroups: true
                         )
-                        .OID ?? templateName;
+                        .OID
+                    ?? templateName;
 
                 return expectedOidValue.Equals(actual, StringComparison.OrdinalIgnoreCase);
             }

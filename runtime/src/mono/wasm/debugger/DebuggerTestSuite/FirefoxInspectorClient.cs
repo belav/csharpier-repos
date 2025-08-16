@@ -251,7 +251,8 @@ class FirefoxInspectorClient : InspectorClient
                         // FIXME: unnecessary alloc
                         foreach (
                             JToken? argument in res["resources"]
-                                ?[0]?["message"]?["arguments"]?.Value<JArray>() ?? new JArray()
+                                ?[0]?["message"]?["arguments"]?.Value<JArray>()
+                            ?? new JArray()
                         )
                         {
                             if (argument is null)

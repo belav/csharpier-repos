@@ -694,8 +694,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
                     EditorOptionsService.GlobalOptions.GetOption(
                         CompletionViewOptionsStorage.EnableArgumentCompletionSnippets,
                         document.Project.Language
-                    )
-                    ?? false
+                    ) ?? false
                 )
             )
             {

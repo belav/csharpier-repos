@@ -94,8 +94,9 @@ namespace Microsoft.Build.Execution
                 var engine = new BuildEngine4(this);
                 string toolsVersion =
                     request.ExplicitlySpecifiedToolsVersion
-                    ?? request.ProjectInstance.ToolsVersion
-                    ?? BuildManager.OngoingBuildParameters.DefaultToolsVersion;
+                    ?? request.ProjectInstance.ToolsVersion ?? BuildManager
+                        .OngoingBuildParameters
+                        .DefaultToolsVersion;
                 var outputs = new Dictionary<string, string>();
                 engine.BuildProject(
                     () => is_canceled,

@@ -140,7 +140,8 @@ namespace System.Text.Json
                             state.Current.JsonPropertyName =
                                 jsonTypeInfo
                                     .PolymorphicTypeResolver
-                                    ?.TypeDiscriminatorPropertyNameUtf8 ?? s_typePropertyName;
+                                    ?.TypeDiscriminatorPropertyNameUtf8
+                                ?? s_typePropertyName;
 
                             if (jsonTypeInfo.PolymorphicTypeResolver is null)
                             {

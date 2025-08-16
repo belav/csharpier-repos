@@ -390,9 +390,8 @@ namespace Microsoft.CodeAnalysis.Editing
             var sourceTree = location.SourceTree;
 
             var doc =
-                _currentSolution.GetDocument(sourceTree) ?? _originalSolution.GetDocument(
-                    sourceTree
-                );
+                _currentSolution.GetDocument(sourceTree)
+                ?? _originalSolution.GetDocument(sourceTree);
             if (doc != null)
             {
                 return EditOneDeclarationAsync(

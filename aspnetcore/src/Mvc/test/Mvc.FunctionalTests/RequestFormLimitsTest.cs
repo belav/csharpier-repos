@@ -13,9 +13,8 @@ public class RequestFormLimitsTest
     public RequestFormLimitsTest(MvcTestFixture<BasicWebSite.StartupRequestLimitSize> fixture)
     {
         var factory =
-            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
-                ConfigureWebHostBuilder
-            );
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 

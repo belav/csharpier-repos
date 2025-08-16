@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.FindSymbols
                             inheritanceNames: ImmutableArray<string>.Empty,
                             parameterCount: localFunction.ParameterList.Parameters.Count,
                             typeParameterCount: localFunction.TypeParameterList?.Parameters.Count
-                                ?? 0
+                            ?? 0
                         )
                     );
                 }

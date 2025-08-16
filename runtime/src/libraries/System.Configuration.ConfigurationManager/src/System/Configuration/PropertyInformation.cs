@@ -73,9 +73,8 @@ namespace System.Configuration
             get
             {
                 PropertySourceInfo psi =
-                    _thisElement.Values.GetSourceInfo(Name) ?? _thisElement.Values.GetSourceInfo(
-                        string.Empty
-                    );
+                    _thisElement.Values.GetSourceInfo(Name)
+                    ?? _thisElement.Values.GetSourceInfo(string.Empty);
                 return psi == null ? string.Empty : psi.FileName;
             }
         }
@@ -88,9 +87,8 @@ namespace System.Configuration
             get
             {
                 PropertySourceInfo psi =
-                    _thisElement.Values.GetSourceInfo(Name) ?? _thisElement.Values.GetSourceInfo(
-                        string.Empty
-                    );
+                    _thisElement.Values.GetSourceInfo(Name)
+                    ?? _thisElement.Values.GetSourceInfo(string.Empty);
                 return psi?.LineNumber ?? 0;
             }
         }

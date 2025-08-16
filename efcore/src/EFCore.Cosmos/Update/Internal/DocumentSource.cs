@@ -278,8 +278,7 @@ public class DocumentSource
                                 embeddedDocument,
                                 embeddedEntry,
                                 embeddedOrdinal
-                            )
-                            ?? embeddedDocument
+                            ) ?? embeddedDocument
                             : embeddedDocumentSource.CreateDocument(embeddedEntry, embeddedOrdinal);
 
                     array.Add(embeddedDocument);

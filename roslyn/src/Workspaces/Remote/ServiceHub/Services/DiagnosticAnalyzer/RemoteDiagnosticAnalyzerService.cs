@@ -93,7 +93,7 @@ namespace Microsoft.CodeAnalysis.Remote
                             var document =
                                 arguments.DocumentId != null
                                     ? solution.GetTextDocument(arguments.DocumentId)
-                                    ?? await solution
+                                        ?? await solution
                                             .GetSourceGeneratedDocumentAsync(
                                                 arguments.DocumentId,
                                                 cancellationToken

@@ -33,7 +33,8 @@ public static class InfrastructureExtensions
         var internalServiceProvider = accessor.Instance;
 
         var service =
-            internalServiceProvider.GetService(serviceType) ?? internalServiceProvider
+            internalServiceProvider.GetService(serviceType)
+            ?? internalServiceProvider
                 .GetService<IDbContextOptions>()
                 ?.Extensions.OfType<CoreOptionsExtension>()
                 .FirstOrDefault()

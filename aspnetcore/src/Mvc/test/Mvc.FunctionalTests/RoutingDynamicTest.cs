@@ -14,9 +14,8 @@ public class RoutingDynamicTest : IClassFixture<MvcTestFixture<RoutingWebSite.St
     public RoutingDynamicTest(MvcTestFixture<RoutingWebSite.StartupForDynamic> fixture)
     {
         Factory =
-            fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(
-                ConfigureWebHostBuilder
-            );
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = Factory.CreateDefaultClient();
     }
 

@@ -133,7 +133,8 @@ internal sealed class TryParseModelBinder : IModelBinder
     {
         modelType = Nullable.GetUnderlyingType(modelType) ?? modelType;
         var tryParseMethodExpession =
-            ModelMetadata.FindTryParseMethod(modelType) ?? throw new InvalidOperationException(
+            ModelMetadata.FindTryParseMethod(modelType)
+            ?? throw new InvalidOperationException(
                 Resources.FormatTryParseModelBinder_InvalidType(
                     modelType,
                     nameof(TryParseModelBinder)
