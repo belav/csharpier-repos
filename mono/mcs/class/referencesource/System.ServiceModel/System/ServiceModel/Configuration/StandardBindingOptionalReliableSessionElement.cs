@@ -5,18 +5,20 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.Xml;
 
-    public sealed partial class StandardBindingOptionalReliableSessionElement : StandardBindingReliableSessionElement
+    public sealed partial class StandardBindingOptionalReliableSessionElement
+        : StandardBindingReliableSessionElement
     {
-        public StandardBindingOptionalReliableSessionElement()
-        {
-        }
+        public StandardBindingOptionalReliableSessionElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.Enabled, DefaultValue = ReliableSessionDefaults.Enabled)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Enabled,
+            DefaultValue = ReliableSessionDefaults.Enabled
+        )]
         public bool Enabled
         {
             get { return (bool)base[ConfigurationStrings.Enabled]; }
@@ -27,21 +29,27 @@ namespace System.ServiceModel.Configuration
         {
             if (null == optionalReliableSession)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("optionalReliableSession");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "optionalReliableSession"
+                );
             }
             base.InitializeFrom(optionalReliableSession);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.Enabled, optionalReliableSession.Enabled);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.Enabled,
+                optionalReliableSession.Enabled
+            );
         }
 
         public void ApplyConfiguration(OptionalReliableSession optionalReliableSession)
         {
             if (null == optionalReliableSession)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("optionalReliableSession");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "optionalReliableSession"
+                );
             }
             base.ApplyConfiguration(optionalReliableSession);
             optionalReliableSession.Enabled = this.Enabled;
         }
     }
 }
-

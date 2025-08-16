@@ -26,7 +26,10 @@ namespace System.Web.Http.Tracing.Tracers
             _traceWriter = traceWriter;
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             return _traceWriter.TraceBeginEndAsync<HttpResponseMessage>(
                 request,
@@ -36,40 +39,41 @@ namespace System.Web.Http.Tracing.Tracers
                 String.Empty,
                 beginTrace: (tr) =>
                 {
-                    tr.Message = request.RequestUri == null ? SRResources.TraceNoneObjectMessage : request.RequestUri.ToString();
+                    tr.Message =
+                        request.RequestUri == null
+                            ? SRResources.TraceNoneObjectMessage
+                            : request.RequestUri.ToString();
                 },
-
                 execute: () => base.SendAsync(request, cancellationToken),
-
                 endTrace: (tr, response) =>
                 {
-                    MediaTypeHeaderValue contentType = response == null
-                                                            ? null
-                                                            : response.Content == null
-                                                                    ? null
-                                                                    : response.Content.Headers.ContentType;
+                    MediaTypeHeaderValue contentType =
+                        response == null ? null
+                        : response.Content == null ? null
+                        : response.Content.Headers.ContentType;
 
-                    long? contentLength = response == null
-                                                ? null
-                                                : response.Content == null
-                                                    ? null
-                                                    : response.Content.Headers.ContentLength;
+                    long? contentLength =
+                        response == null ? null
+                        : response.Content == null ? null
+                        : response.Content.Headers.ContentLength;
 
                     if (response != null)
                     {
                         tr.Status = response.StatusCode;
                     }
 
-                    tr.Message =
-                        Error.Format(SRResources.TraceRequestCompleteMessage,
-                                     contentType == null
-                                        ? SRResources.TraceNoneObjectMessage
-                                        : contentType.ToString(),
-                                     contentLength.HasValue
-                                        ? contentLength.Value.ToString(CultureInfo.CurrentCulture)
-                                        : SRResources.TraceUnknownMessage);
+                    tr.Message = Error.Format(
+                        SRResources.TraceRequestCompleteMessage,
+                        contentType == null
+                            ? SRResources.TraceNoneObjectMessage
+                            : contentType.ToString(),
+                        contentLength.HasValue
+                            ? contentLength.Value.ToString(CultureInfo.CurrentCulture)
+                            : SRResources.TraceUnknownMessage
+                    );
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

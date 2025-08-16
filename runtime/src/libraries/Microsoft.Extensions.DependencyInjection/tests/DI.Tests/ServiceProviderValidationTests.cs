@@ -22,8 +22,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             // Act + Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => serviceProvider.GetService(typeof(IFoo)));
-            Assert.Equal($"Cannot consume scoped service '{typeof(IBar)}' from singleton '{typeof(IFoo)}'.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetService(typeof(IFoo))
+            );
+            Assert.Equal(
+                $"Cannot consume scoped service '{typeof(IBar)}' from singleton '{typeof(IFoo)}'.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -37,8 +42,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             // Act + Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => serviceProvider.GetService(typeof(IFoo)));
-            Assert.Equal($"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IFoo)}'.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetService(typeof(IFoo))
+            );
+            Assert.Equal(
+                $"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IFoo)}'.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -52,8 +62,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             // Act + Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => serviceProvider.GetService(typeof(IFoo)));
-            Assert.Equal($"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IBar)}'.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetService(typeof(IFoo))
+            );
+            Assert.Equal(
+                $"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IBar)}'.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -69,8 +84,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var scope = serviceProvider.CreateScope();
 
             // Act + Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => scope.ServiceProvider.GetService(typeof(IFoo)));
-            Assert.Equal($"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IBar)}'.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                scope.ServiceProvider.GetService(typeof(IFoo))
+            );
+            Assert.Equal(
+                $"Cannot consume scoped service '{typeof(IBaz)}' from singleton '{typeof(IBar)}'.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -82,8 +102,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             // Act + Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => serviceProvider.GetService(typeof(IBar)));
-            Assert.Equal($"Cannot resolve scoped service '{typeof(IBar)}' from root provider.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetService(typeof(IBar))
+            );
+            Assert.Equal(
+                $"Cannot resolve scoped service '{typeof(IBar)}' from root provider.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -105,8 +130,13 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 await Task.Delay(100);
 
                 // Ensure the emit-based version has the correct scope checks.
-                var exception = Assert.Throws<InvalidOperationException>(serviceProvider.GetRequiredService<IBar>);
-                Assert.Equal($"Cannot resolve scoped service '{typeof(IBar)}' from root provider.", exception.Message);
+                var exception = Assert.Throws<InvalidOperationException>(
+                    serviceProvider.GetRequiredService<IBar>
+                );
+                Assert.Equal(
+                    $"Cannot resolve scoped service '{typeof(IBar)}' from root provider.",
+                    exception.Message
+                );
             }
         }
 
@@ -120,24 +150,33 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
 
             // Act + Assert
-            var exception = Assert.Throws<InvalidOperationException>(() => serviceProvider.GetService(typeof(IFoo)));
-            Assert.Equal($"Cannot resolve '{typeof(IFoo)}' from root provider because it requires scoped service '{typeof(IBar)}'.", exception.Message);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetService(typeof(IFoo))
+            );
+            Assert.Equal(
+                $"Cannot resolve '{typeof(IFoo)}' from root provider because it requires scoped service '{typeof(IBar)}'.",
+                exception.Message
+            );
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void GetService_DoesNotThrow_WhenGetServiceForPolymorphicServiceIsCalledOnRoot_AndTheLastOneIsNotScoped(bool validateOnBuild)
+        public void GetService_DoesNotThrow_WhenGetServiceForPolymorphicServiceIsCalledOnRoot_AndTheLastOneIsNotScoped(
+            bool validateOnBuild
+        )
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IBar, Bar>();
             serviceCollection.AddTransient<IBar, Bar3>();
-            using var serviceProvider = serviceCollection.BuildServiceProvider(new ServiceProviderOptions
-            {
-                ValidateScopes = true,
-                ValidateOnBuild = validateOnBuild
-            });
+            using var serviceProvider = serviceCollection.BuildServiceProvider(
+                new ServiceProviderOptions
+                {
+                    ValidateScopes = true,
+                    ValidateOnBuild = validateOnBuild,
+                }
+            );
 
             // Act
             var actual = serviceProvider.GetService<IBar>();
@@ -158,8 +197,12 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddTransient<IBaz, Baz2>();
 
             // Act
-            using var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
-            Assert.Throws<InvalidOperationException>(() => serviceProvider.GetService<IEnumerable<IBar>>());
+            using var serviceProvider = serviceCollection.BuildServiceProvider(
+                validateScopes: true
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                serviceProvider.GetService<IEnumerable<IBar>>()
+            );
             var actual = serviceProvider.GetService<IEnumerable<IBaz>>();
 
             // Assert
@@ -189,19 +232,31 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddTransient<IBaz, BazRecursive>();
 
             // Act + Assert
-            var aggregateException = Assert.Throws<AggregateException>(() => serviceCollection.BuildServiceProvider(new ServiceProviderOptions() { ValidateOnBuild = true }));
-            Assert.StartsWith("Some services are not able to be constructed", aggregateException.Message);
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                serviceCollection.BuildServiceProvider(
+                    new ServiceProviderOptions() { ValidateOnBuild = true }
+                )
+            );
+            Assert.StartsWith(
+                "Some services are not able to be constructed",
+                aggregateException.Message
+            );
             Assert.Equal(2, aggregateException.InnerExceptions.Count);
-            Assert.Equal("Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IFoo Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Foo': " +
-                         "Unable to resolve service for type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBar' while attempting to activate" +
-                         " 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Foo'.",
-                aggregateException.InnerExceptions[0].Message);
+            Assert.Equal(
+                "Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IFoo Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Foo': "
+                    + "Unable to resolve service for type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBar' while attempting to activate"
+                    + " 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Foo'.",
+                aggregateException.InnerExceptions[0].Message
+            );
 
-            Assert.Equal("Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive': " +
-                         "A circular dependency was detected for the service of type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz'." + Environment.NewLine +
-                         "Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz(Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive) ->" +
-                         " Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz",
-                aggregateException.InnerExceptions[1].Message);
+            Assert.Equal(
+                "Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive': "
+                    + "A circular dependency was detected for the service of type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz'."
+                    + Environment.NewLine
+                    + "Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz(Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive) ->"
+                    + " Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz",
+                aggregateException.InnerExceptions[1].Message
+            );
         }
 
         [Fact]
@@ -209,10 +264,15 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddTransient(typeof(IFakeOpenGenericService<>), typeof(FakeOpenGenericService<>));
+            serviceCollection.AddTransient(
+                typeof(IFakeOpenGenericService<>),
+                typeof(FakeOpenGenericService<>)
+            );
 
             // Act + Assert
-            serviceCollection.BuildServiceProvider(new ServiceProviderOptions() { ValidateOnBuild = true });
+            serviceCollection.BuildServiceProvider(
+                new ServiceProviderOptions() { ValidateOnBuild = true }
+            );
         }
 
         [Fact]
@@ -224,15 +284,25 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddTransient<IBaz, Baz>();
 
             // Act + Assert
-            var aggregateException = Assert.Throws<AggregateException>(() => serviceCollection.BuildServiceProvider(new ServiceProviderOptions() { ValidateOnBuild = true }));
-            Assert.StartsWith("Some services are not able to be constructed", aggregateException.Message);
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                serviceCollection.BuildServiceProvider(
+                    new ServiceProviderOptions() { ValidateOnBuild = true }
+                )
+            );
+            Assert.StartsWith(
+                "Some services are not able to be constructed",
+                aggregateException.Message
+            );
             Assert.Single(aggregateException.InnerExceptions);
 
-            Assert.Equal("Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive': " +
-                         "A circular dependency was detected for the service of type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz'." + Environment.NewLine +
-                         "Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz(Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive) ->" +
-                         " Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz",
-                aggregateException.InnerExceptions[0].Message);
+            Assert.Equal(
+                "Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive': "
+                    + "A circular dependency was detected for the service of type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz'."
+                    + Environment.NewLine
+                    + "Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz(Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+BazRecursive) ->"
+                    + " Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz",
+                aggregateException.InnerExceptions[0].Message
+            );
         }
 
         [Fact]
@@ -244,78 +314,64 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             serviceCollection.AddSingleton(typeof(IFoo), new object());
 
             // Act + Assert
-            var aggregateException = Assert.Throws<AggregateException>(() => serviceCollection.BuildServiceProvider(new ServiceProviderOptions() { ValidateOnBuild = true }));
-            Assert.StartsWith("Some services are not able to be constructed", aggregateException.Message);
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                serviceCollection.BuildServiceProvider(
+                    new ServiceProviderOptions() { ValidateOnBuild = true }
+                )
+            );
+            Assert.StartsWith(
+                "Some services are not able to be constructed",
+                aggregateException.Message
+            );
             Assert.Equal(2, aggregateException.InnerExceptions.Count);
 
-            Assert.Equal("Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Boo': " +
-                         "Implementation type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Boo' can't be converted to service type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz'",
-                         aggregateException.InnerExceptions[0].Message);
+            Assert.Equal(
+                "Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz Lifetime: Transient ImplementationType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Boo': "
+                    + "Implementation type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+Boo' can't be converted to service type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IBaz'",
+                aggregateException.InnerExceptions[0].Message
+            );
 
-            Assert.Equal("Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IFoo Lifetime: Singleton ImplementationInstance: System.Object': " +
-                         "Constant value of type 'System.Object' can't be converted to service type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IFoo'",
-                         aggregateException.InnerExceptions[1].Message);
+            Assert.Equal(
+                "Error while validating the service descriptor 'ServiceType: Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IFoo Lifetime: Singleton ImplementationInstance: System.Object': "
+                    + "Constant value of type 'System.Object' can't be converted to service type 'Microsoft.Extensions.DependencyInjection.Tests.ServiceProviderValidationTests+IFoo'",
+                aggregateException.InnerExceptions[1].Message
+            );
         }
 
-        private interface IFoo
-        {
-        }
+        private interface IFoo { }
 
         private class Foo : IFoo
         {
-            public Foo(IBar bar)
-            {
-            }
+            public Foo(IBar bar) { }
         }
 
-        private interface IBar
-        {
-        }
+        private interface IBar { }
 
-        private class Bar : IBar
-        {
-        }
-
+        private class Bar : IBar { }
 
         private class Bar2 : IBar
         {
-            public Bar2(IBaz baz)
-            {
-            }
+            public Bar2(IBaz baz) { }
         }
 
-        private class Bar3 : IBar
-        {
-        }
+        private class Bar3 : IBar { }
 
-        private interface IBaz
-        {
-        }
+        private interface IBaz { }
 
-        private class Baz : IBaz
-        {
-        }
+        private class Baz : IBaz { }
 
-        private class Baz2 : IBaz
-        {
-        }
+        private class Baz2 : IBaz { }
 
         private class BazRecursive : IBaz
         {
-            public BazRecursive(IBaz baz)
-            {
-            }
+            public BazRecursive(IBaz baz) { }
         }
 
-        private interface IBoo
-        {
-        }
+        private interface IBoo { }
 
         private class Boo : IBoo
         {
-            public Boo(IServiceScopeFactory scopeFactory)
-            {
-            }
+            public Boo(IServiceScopeFactory scopeFactory) { }
         }
     }
 }

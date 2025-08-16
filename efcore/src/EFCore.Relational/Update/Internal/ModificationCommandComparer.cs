@@ -54,8 +54,7 @@ public class ModificationCommandComparer : IComparer<IReadOnlyModificationComman
             return result;
         }
 
-        if (x.Entries.Count > 0
-            && y.Entries.Count > 0)
+        if (x.Entries.Count > 0 && y.Entries.Count > 0)
         {
             var xEntry = x.Entries[0];
             var yEntry = y.Entries[0];
@@ -93,8 +92,12 @@ public class ModificationCommandComparer : IComparer<IReadOnlyModificationComman
                 {
                     var xKeyColumn = xKey.Columns[i];
 
-                    if (x.ColumnModifications.First(m => m.ColumnName == xKeyColumn.Name).Value is not IComparable xModification
-                        || y.ColumnModifications.First(m => m.ColumnName == xKeyColumn.Name).Value is not IComparable yModification)
+                    if (
+                        x.ColumnModifications.First(m => m.ColumnName == xKeyColumn.Name).Value
+                            is not IComparable xModification
+                        || y.ColumnModifications.First(m => m.ColumnName == xKeyColumn.Name).Value
+                            is not IComparable yModification
+                    )
                     {
                         continue;
                     }

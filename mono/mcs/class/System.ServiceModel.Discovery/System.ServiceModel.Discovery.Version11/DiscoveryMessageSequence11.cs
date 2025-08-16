@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,63 +35,67 @@ using System.Xml.Serialization;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	[XmlSchemaProvider ("GetSchema")]
-	public class DiscoveryMessageSequence11 : IXmlSerializable
-	{
-		public static DiscoveryMessageSequence11 FromDiscoveryMessageSequence (DiscoveryMessageSequence discoveryMessageSequence)
-		{
-			return new DiscoveryMessageSequence11 (discoveryMessageSequence);
-		}
+    [XmlSchemaProvider("GetSchema")]
+    public class DiscoveryMessageSequence11 : IXmlSerializable
+    {
+        public static DiscoveryMessageSequence11 FromDiscoveryMessageSequence(
+            DiscoveryMessageSequence discoveryMessageSequence
+        )
+        {
+            return new DiscoveryMessageSequence11(discoveryMessageSequence);
+        }
 
-		static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
-		static XmlSchema schema;
-		
-		static XmlSchema Schema {
-			get {
-				if (schema == null)
-					schema = DiscoveryMessageSequence.BuildSchema (version);
-				return schema;
-			}
-		}
+        static readonly DiscoveryVersion version = DiscoveryVersion.WSDiscovery11;
+        static XmlSchema schema;
 
-		public static XmlQualifiedName GetSchema (XmlSchemaSet schemaSet)
-		{
-			schemaSet.Add (Schema);
-			return new XmlQualifiedName ("AppSequenceType", version.Namespace);
-		}
+        static XmlSchema Schema
+        {
+            get
+            {
+                if (schema == null)
+                    schema = DiscoveryMessageSequence.BuildSchema(version);
+                return schema;
+            }
+        }
 
-		// for deserialization
-		DiscoveryMessageSequence11 ()
-		{
-		}
+        public static XmlQualifiedName GetSchema(XmlSchemaSet schemaSet)
+        {
+            schemaSet.Add(Schema);
+            return new XmlQualifiedName("AppSequenceType", version.Namespace);
+        }
 
-		internal DiscoveryMessageSequence11 (DiscoveryMessageSequence source)
-		{
-			this.source = source;
-		}
+        // for deserialization
+        DiscoveryMessageSequence11() { }
 
-		DiscoveryMessageSequence source;
+        internal DiscoveryMessageSequence11(DiscoveryMessageSequence source)
+        {
+            this.source = source;
+        }
 
-		public XmlSchema GetSchema ()
-		{
-			return Schema;
-		}
+        DiscoveryMessageSequence source;
 
-		public void ReadXml (XmlReader reader)
-		{
-			source = DiscoveryMessageSequence.ReadXml (reader, version);
-		}
+        public XmlSchema GetSchema()
+        {
+            return Schema;
+        }
 
-		public DiscoveryMessageSequence ToDiscoveryMessageSequence ()
-		{
-			if (source == null)
-				throw new InvalidOperationException ("Call ReadXml method first to fill its contents");
-			return source;
-		}
+        public void ReadXml(XmlReader reader)
+        {
+            source = DiscoveryMessageSequence.ReadXml(reader, version);
+        }
 
-		public void WriteXml (XmlWriter writer)
-		{
-			source.WriteXml (writer);
-		}
-	}
+        public DiscoveryMessageSequence ToDiscoveryMessageSequence()
+        {
+            if (source == null)
+                throw new InvalidOperationException(
+                    "Call ReadXml method first to fill its contents"
+                );
+            return source;
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            source.WriteXml(writer);
+        }
+    }
 }

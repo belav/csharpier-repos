@@ -89,14 +89,13 @@ public class ServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixtu
     public void ErrorsStopTheRenderingProcess()
     {
         Browser.Exists(By.Id("cause-error")).Click();
-        Browser.True(
-            () =>
-                Browser
-                    .Manage()
-                    .Logs.GetLog(LogType.Browser)
-                    .Any(l =>
-                        l.Level == LogLevel.Info && l.Message.Contains("Connection disconnected.")
-                    )
+        Browser.True(() =>
+            Browser
+                .Manage()
+                .Logs.GetLog(LogType.Browser)
+                .Any(l =>
+                    l.Level == LogLevel.Info && l.Message.Contains("Connection disconnected.")
+                )
         );
     }
 }

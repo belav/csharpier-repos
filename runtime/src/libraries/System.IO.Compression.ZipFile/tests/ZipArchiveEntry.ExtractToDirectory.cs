@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.IO.Compression.Tests
 {
@@ -47,7 +47,11 @@ namespace System.IO.Compression.Tests
             yield return new string[] { "InvalidChar2.zip", @"sample.:xt" };
             yield return new string[] { "InvalidChar3.zip", "System.ArgumentException" };
             yield return new string[] { "EncodedDotDots.zip", "lib/%2E%2E/%2E%2E/%2E%2E/bad.exe" };
-            yield return new string[] { "SpacedRelative.zip", "System.IO.DirectoryNotFoundException" };
+            yield return new string[]
+            {
+                "SpacedRelative.zip",
+                "System.IO.DirectoryNotFoundException",
+            };
         }
 
         [Theory]
@@ -63,7 +67,11 @@ namespace System.IO.Compression.Tests
                         foreach (ZipArchiveEntry entry in archive.Entries)
                         {
                             entry.ExtractRelativeToDirectory(destinationDirectory.Path, false);
-                            Assert.True(File.Exists(Path.Combine(destinationDirectory.Path, expectedOutPath)));
+                            Assert.True(
+                                File.Exists(
+                                    Path.Combine(destinationDirectory.Path, expectedOutPath)
+                                )
+                            );
                         }
                     }
                 }
@@ -83,7 +91,9 @@ namespace System.IO.Compression.Tests
                 try
                 {
                     ZipFile.ExtractToDirectory(zipFile, destinationDirectory.Path);
-                    Assert.True(File.Exists(Path.Combine(destinationDirectory.Path, expectedOutPath)));
+                    Assert.True(
+                        File.Exists(Path.Combine(destinationDirectory.Path, expectedOutPath))
+                    );
                 }
                 catch (Exception e)
                 {
@@ -103,8 +113,14 @@ namespace System.IO.Compression.Tests
                 using (ZipArchive archive = ZipFile.Open(zipFileName, ZipArchiveMode.Read))
                 {
                     archive.ExtractToDirectory(tempFolder.Path);
-                    Assert.Throws<IOException>(() => archive.ExtractToDirectory(tempFolder.Path /* default false */));
-                    Assert.Throws<IOException>(() => archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: false));
+                    Assert.Throws<IOException>(() =>
+                        archive.ExtractToDirectory(
+                            tempFolder.Path /* default false */
+                        )
+                    );
+                    Assert.Throws<IOException>(() =>
+                        archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: false)
+                    );
                     archive.ExtractToDirectory(tempFolder.Path, overwriteFiles: true);
 
                     DirsEqual(tempFolder.Path, folderName);

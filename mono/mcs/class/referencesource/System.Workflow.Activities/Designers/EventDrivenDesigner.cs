@@ -1,17 +1,17 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Text;
+    using System.Workflow.Activities.Common;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Workflow.Activities.Common;
 
     #region EventDrivenDesigner
     [ActivityDesignerTheme(typeof(EventDrivenDesignerTheme))]
@@ -23,9 +23,23 @@ namespace System.Workflow.Activities
             if (parentActivityDesigner == null)
                 throw new ArgumentNullException("parentActivity");
 
-            if (!(Type.GetType("System.Workflow.Activities.ListenActivity," + AssemblyRef.ActivitiesAssemblyRef).IsAssignableFrom(parentActivityDesigner.Activity.GetType())) &&
-                !(parentActivityDesigner.Activity is EventHandlersActivity) &&
-                !(Type.GetType("System.Workflow.Activities.StateActivity," + AssemblyRef.ActivitiesAssemblyRef).IsAssignableFrom(parentActivityDesigner.Activity.GetType())))
+            if (
+                !(
+                    Type.GetType(
+                            "System.Workflow.Activities.ListenActivity,"
+                                + AssemblyRef.ActivitiesAssemblyRef
+                        )
+                        .IsAssignableFrom(parentActivityDesigner.Activity.GetType())
+                )
+                && !(parentActivityDesigner.Activity is EventHandlersActivity)
+                && !(
+                    Type.GetType(
+                            "System.Workflow.Activities.StateActivity,"
+                                + AssemblyRef.ActivitiesAssemblyRef
+                        )
+                        .IsAssignableFrom(parentActivityDesigner.Activity.GetType())
+                )
+            )
                 return false;
 
             return base.CanBeParentedTo(parentActivityDesigner);

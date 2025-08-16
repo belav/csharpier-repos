@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private readonly ReadOnlyCollection<int> _lowerBounds;
         private readonly int _count;
 
-        internal static ArrayExpansion CreateExpansion(TypeAndCustomInfo elementTypeAndInfo, ReadOnlyCollection<int> sizes, ReadOnlyCollection<int> lowerBounds)
+        internal static ArrayExpansion CreateExpansion(
+            TypeAndCustomInfo elementTypeAndInfo,
+            ReadOnlyCollection<int> sizes,
+            ReadOnlyCollection<int> lowerBounds
+        )
         {
             Debug.Assert(elementTypeAndInfo.Type != null);
             Debug.Assert(sizes != null);
@@ -34,10 +38,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             {
                 count *= size;
             }
-            return (count > 0) ? new ArrayExpansion(elementTypeAndInfo, sizes, lowerBounds, count) : null;
+            return (count > 0)
+                ? new ArrayExpansion(elementTypeAndInfo, sizes, lowerBounds, count)
+                : null;
         }
 
-        private ArrayExpansion(TypeAndCustomInfo elementTypeAndInfo, ReadOnlyCollection<int> sizes, ReadOnlyCollection<int> lowerBounds, int count)
+        private ArrayExpansion(
+            TypeAndCustomInfo elementTypeAndInfo,
+            ReadOnlyCollection<int> sizes,
+            ReadOnlyCollection<int> lowerBounds,
+            int count
+        )
         {
             Debug.Assert(count > 0);
             _elementTypeAndInfo = elementTypeAndInfo;
@@ -55,7 +66,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             int startIndex,
             int count,
             bool visitAll,
-            ref int index)
+            ref int index
+        )
         {
             int startIndex2;
             int count2;
@@ -75,11 +87,15 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmClrValue value,
             int index,
-            EvalResultDataItem parent)
+            EvalResultDataItem parent
+        )
         {
             var indices = GetIndices(index);
             var fullNameProvider = resultProvider.FullNameProvider;
-            var name = fullNameProvider.GetClrArrayIndexExpression(inspectionContext, GetIndicesAsStrings(indices));
+            var name = fullNameProvider.GetClrArrayIndexExpression(
+                inspectionContext,
+                GetIndicesAsStrings(indices)
+            );
             var element = value.GetArrayElement(indices, inspectionContext);
             var fullName = GetFullName(inspectionContext, parent, name, fullNameProvider);
             return resultProvider.CreateDataItem(
@@ -98,7 +114,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 evalFlags: inspectionContext.EvaluationFlags,
                 canFavorite: false,
                 isFavorite: false,
-                supportsFavorites: true);
+                supportsFavorites: true
+            );
         }
 
         private int[] GetIndices(int index)
@@ -108,7 +125,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 // _divisors is null if dimension is 1, but
                 // _lowerBounds need not necessarily be so.
                 Debug.Assert(_lowerBounds == null || _lowerBounds.Count == 1);
-                int lowerBound = _lowerBounds != null && _lowerBounds.Count == 1 ? _lowerBounds[0] : 0;
+                int lowerBound =
+                    _lowerBounds != null && _lowerBounds.Count == 1 ? _lowerBounds[0] : 0;
                 return [lowerBound + index];
             }
 
@@ -151,7 +169,12 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return new ReadOnlyCollection<int>(divisors);
         }
 
-        private static string GetFullName(DkmInspectionContext inspectionContext, EvalResultDataItem parent, string name, IDkmClrFullNameProvider fullNameProvider)
+        private static string GetFullName(
+            DkmInspectionContext inspectionContext,
+            EvalResultDataItem parent,
+            string name,
+            IDkmClrFullNameProvider fullNameProvider
+        )
         {
             var parentFullName = parent.ChildFullNamePrefix;
             if (parentFullName == null)
@@ -171,7 +194,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     parentFullName,
                     parentRuntimeType,
                     customTypeInfo: null,
-                    castExpressionOptions: DkmClrCastExpressionOptions.ParenthesizeEntireExpression);
+                    castExpressionOptions: DkmClrCastExpressionOptions.ParenthesizeEntireExpression
+                );
                 if (parentFullName == null)
                 {
                     return null; // Contains invalid identifier.

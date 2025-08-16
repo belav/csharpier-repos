@@ -6,9 +6,9 @@ using System.Security;
 
 [assembly: SecurityCritical]
 
-[assembly: AssemblyTitle ("System.Data.Services.dll")]
-[assembly: AssemblyDescription ("System.Data.Services.dll")]
-[assembly: AssemblyDefaultAlias ("System.Data.Services.dll")]
+[assembly: AssemblyTitle("System.Data.Services.dll")]
+[assembly: AssemblyDescription("System.Data.Services.dll")]
+[assembly: AssemblyDefaultAlias("System.Data.Services.dll")]
 
 [assembly: AssemblyCompany(Consts.MonoCompany)]
 [assembly: AssemblyProduct(Consts.MonoProduct)]
@@ -18,9 +18,9 @@ using System.Security;
 [assembly: AssemblyInformationalVersion(Consts.FxFileVersion)]
 [assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
-[assembly: NeutralResourcesLanguage ("en-US")]
+[assembly: NeutralResourcesLanguage("en-US")]
 
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]
 
-[assembly: ComVisible (false)]
-[assembly: CLSCompliant (true)]
+[assembly: ComVisible(false)]
+[assembly: CLSCompliant(true)]

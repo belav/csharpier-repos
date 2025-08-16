@@ -21,18 +21,30 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             BaseObjectCreationExpressionSyntax objectCreationExpression,
             SemanticModel semanticModel,
             IStructuralTypeDisplayService structuralTypeDisplayService,
-            IDocumentationCommentFormattingService documentationCommentFormattingService)
+            IDocumentationCommentFormattingService documentationCommentFormattingService
+        )
         {
             var position = objectCreationExpression.SpanStart;
             var item = CreateItem(
-                constructor, semanticModel, position,
+                constructor,
+                semanticModel,
+                position,
                 structuralTypeDisplayService,
                 constructor.IsParams(),
-                constructor.GetDocumentationPartsFactory(semanticModel, position, documentationCommentFormattingService),
+                constructor.GetDocumentationPartsFactory(
+                    semanticModel,
+                    position,
+                    documentationCommentFormattingService
+                ),
                 GetNormalTypePreambleParts(constructor, semanticModel, position),
                 GetSeparatorParts(),
                 GetNormalTypePostambleParts(),
-                constructor.Parameters.Select(p => Convert(p, semanticModel, position, documentationCommentFormattingService)).ToList());
+                constructor
+                    .Parameters.Select(p =>
+                        Convert(p, semanticModel, position, documentationCommentFormattingService)
+                    )
+                    .ToList()
+            );
 
             return item;
         }
@@ -40,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         private static IList<SymbolDisplayPart> GetNormalTypePreambleParts(
             IMethodSymbol method,
             SemanticModel semanticModel,
-            int position)
+            int position
+        )
         {
             var result = new List<SymbolDisplayPart>();
 
@@ -52,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 
         private static IList<SymbolDisplayPart> GetNormalTypePostambleParts()
         {
-            return SpecializedCollections.SingletonList(
-                Punctuation(SyntaxKind.CloseParenToken));
+            return SpecializedCollections.SingletonList(Punctuation(SyntaxKind.CloseParenToken));
         }
     }
 }

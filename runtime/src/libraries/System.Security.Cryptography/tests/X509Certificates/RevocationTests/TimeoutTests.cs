@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates.Tests.Common;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates.Tests.Common;
 using Xunit;
 
 namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
@@ -18,14 +18,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.Linux)]
         public static void RevocationCheckingDelayed(PkiOptions pkiOptions)
         {
-            RetryHelper.Execute(() => {
+            RetryHelper.Execute(() =>
+            {
                 CertificateAuthority.BuildPrivatePki(
                     pkiOptions,
                     out RevocationResponder responder,
                     out CertificateAuthority rootAuthority,
                     out CertificateAuthority intermediateAuthority,
                     out X509Certificate2 endEntityCert,
-                    nameof(RevocationCheckingDelayed));
+                    nameof(RevocationCheckingDelayed)
+                );
 
                 using (responder)
                 using (rootAuthority)
@@ -53,7 +55,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     chain.ChainPolicy.DisableCertificateDownloads = true;
 
                     Stopwatch watch = Stopwatch.StartNew();
-                    Assert.True(chain.Build(endEntityCert),  $"chain.Build; Chain status: {chain.AllStatusFlags()}");
+                    Assert.True(
+                        chain.Build(endEntityCert),
+                        $"chain.Build; Chain status: {chain.AllStatusFlags()}"
+                    );
                     watch.Stop();
 
                     // There should be two network fetches, OCSP/CRL to intermediate to get leaf status,
@@ -64,7 +69,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     // should take `delay` number of seconds, and there are two fetchs that need to be
                     // performed. We allow a small amount of leeway to account for differences between
                     // how long the delay is performed and the stopwatch.
-                    Assert.True(watch.Elapsed >= delay * 2 - TimeSpan.FromSeconds(1), $"watch.Elapsed: {watch.Elapsed}");
+                    Assert.True(
+                        watch.Elapsed >= delay * 2 - TimeSpan.FromSeconds(1),
+                        $"watch.Elapsed: {watch.Elapsed}"
+                    );
                 }
             });
         }
@@ -81,7 +89,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 out CertificateAuthority rootAuthority,
                 out CertificateAuthority intermediateAuthority,
                 out X509Certificate2 endEntityCert,
-                nameof(RevocationCheckingTimeout));
+                nameof(RevocationCheckingTimeout)
+            );
 
             using (responder)
             using (rootAuthority)
@@ -109,11 +118,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 Assert.False(chain.Build(endEntityCert), "chain.Build");
 
                 const X509ChainStatusFlags ExpectedFlags =
-                    X509ChainStatusFlags.RevocationStatusUnknown |
-                    X509ChainStatusFlags.OfflineRevocation;
+                    X509ChainStatusFlags.RevocationStatusUnknown
+                    | X509ChainStatusFlags.OfflineRevocation;
 
                 X509ChainStatusFlags eeFlags = GetFlags(chain, endEntityCert.Thumbprint);
-                X509ChainStatusFlags intermediateFlags = GetFlags(chain, intermediateCert.Thumbprint);
+                X509ChainStatusFlags intermediateFlags = GetFlags(
+                    chain,
+                    intermediateCert.Thumbprint
+                );
                 Assert.Equal(ExpectedFlags, eeFlags);
                 Assert.Equal(ExpectedFlags, intermediateFlags);
             }
@@ -139,7 +151,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 out CertificateAuthority rootAuthority,
                 out CertificateAuthority intermediateAuthority,
                 out X509Certificate2 endEntityCert,
-                nameof(RevocationCheckingMaximum));
+                nameof(RevocationCheckingMaximum)
+            );
 
             using (responder)
             using (rootAuthority)
@@ -169,8 +182,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 Assert.False(chain.Build(endEntityCert), "chain.Build");
 
                 const X509ChainStatusFlags ExpectedFlags =
-                    X509ChainStatusFlags.RevocationStatusUnknown |
-                    X509ChainStatusFlags.OfflineRevocation;
+                    X509ChainStatusFlags.RevocationStatusUnknown
+                    | X509ChainStatusFlags.OfflineRevocation;
 
                 X509ChainStatusFlags eeFlags = GetFlags(chain, endEntityCert.Thumbprint);
                 Assert.Equal(ExpectedFlags, eeFlags);
@@ -183,14 +196,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.Linux)]
         public static void RevocationCheckingNegativeTimeout(PkiOptions pkiOptions)
         {
-            RetryHelper.Execute(() => {
+            RetryHelper.Execute(() =>
+            {
                 CertificateAuthority.BuildPrivatePki(
                     pkiOptions,
                     out RevocationResponder responder,
                     out CertificateAuthority rootAuthority,
                     out CertificateAuthority intermediateAuthority,
                     out X509Certificate2 endEntityCert,
-                    nameof(RevocationCheckingNegativeTimeout));
+                    nameof(RevocationCheckingNegativeTimeout)
+                );
 
                 using (responder)
                 using (rootAuthority)
@@ -216,7 +231,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
 
                     chain.ChainPolicy.DisableCertificateDownloads = true;
 
-                    Assert.True(chain.Build(endEntityCert), $"chain.Build; Chain status: {chain.AllStatusFlags()}");
+                    Assert.True(
+                        chain.Build(endEntityCert),
+                        $"chain.Build; Chain status: {chain.AllStatusFlags()}"
+                    );
                 }
             });
         }
@@ -227,14 +245,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.Linux)]
         public static void RevocationCheckingTimeoutFallbackToOther(DelayedActionsFlag delayFlags)
         {
-            RetryHelper.Execute(() => {
+            RetryHelper.Execute(() =>
+            {
                 CertificateAuthority.BuildPrivatePki(
                     PkiOptions.AllRevocation,
                     out RevocationResponder responder,
                     out CertificateAuthority rootAuthority,
                     out CertificateAuthority intermediateAuthority,
                     out X509Certificate2 endEntityCert,
-                    nameof(RevocationCheckingTimeoutFallbackToOther));
+                    nameof(RevocationCheckingTimeoutFallbackToOther)
+                );
 
                 using (responder)
                 using (rootAuthority)
@@ -257,7 +277,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
 
                     chain.ChainPolicy.DisableCertificateDownloads = true;
 
-                    Assert.True(chain.Build(endEntityCert), $"chain.Build; Chain status: {chain.AllStatusFlags()}");
+                    Assert.True(
+                        chain.Build(endEntityCert),
+                        $"chain.Build; Chain status: {chain.AllStatusFlags()}"
+                    );
                 }
             });
         }
@@ -266,14 +289,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         [PlatformSpecific(TestPlatforms.Linux)]
         public static void AiaFetchDelayed()
         {
-            RetryHelper.Execute(() => {
+            RetryHelper.Execute(() =>
+            {
                 CertificateAuthority.BuildPrivatePki(
                     PkiOptions.OcspEverywhere,
                     out RevocationResponder responder,
                     out CertificateAuthority rootAuthority,
                     out CertificateAuthority intermediateAuthority,
                     out X509Certificate2 endEntityCert,
-                    nameof(AiaFetchDelayed));
+                    nameof(AiaFetchDelayed)
+                );
 
                 using (responder)
                 using (rootAuthority)
@@ -295,7 +320,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
 
                     Stopwatch watch = Stopwatch.StartNew();
-                    Assert.True(chain.Build(endEntityCert), GetFlags(chain, endEntityCert.Thumbprint).ToString());
+                    Assert.True(
+                        chain.Build(endEntityCert),
+                        GetFlags(chain, endEntityCert.Thumbprint).ToString()
+                    );
                     watch.Stop();
 
                     Assert.True(watch.Elapsed >= delay, $"watch.Elapsed: {watch.Elapsed}");
@@ -313,7 +341,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                 out CertificateAuthority rootAuthority,
                 out CertificateAuthority intermediateAuthority,
                 out X509Certificate2 endEntityCert,
-                nameof(AiaFetchTimeout));
+                nameof(AiaFetchTimeout)
+            );
 
             using (responder)
             using (rootAuthority)
@@ -336,8 +365,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
 
                 Assert.False(chain.Build(endEntityCert), "chain.Build");
 
-                const X509ChainStatusFlags ExpectedFlags =
-                    X509ChainStatusFlags.PartialChain;
+                const X509ChainStatusFlags ExpectedFlags = X509ChainStatusFlags.PartialChain;
 
                 X509ChainStatusFlags eeFlags = GetFlags(chain, endEntityCert.Thumbprint);
                 Assert.Equal(ExpectedFlags, eeFlags);
@@ -345,8 +373,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
         }
 
         private static X509ChainStatusFlags GetFlags(X509Chain chain, string thumbprint) =>
-            chain.ChainElements.
-                Single(e => e.Certificate.Thumbprint == thumbprint).
-                ChainElementStatus.Aggregate((X509ChainStatusFlags)0, (a, e) => a | e.Status);
+            chain
+                .ChainElements.Single(e => e.Certificate.Thumbprint == thumbprint)
+                .ChainElementStatus.Aggregate((X509ChainStatusFlags)0, (a, e) => a | e.Status);
     }
 }

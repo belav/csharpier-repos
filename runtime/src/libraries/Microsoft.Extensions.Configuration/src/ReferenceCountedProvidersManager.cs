@@ -12,11 +12,14 @@ namespace Microsoft.Extensions.Configuration
     internal sealed class ReferenceCountedProviderManager : IDisposable
     {
         private readonly object _replaceProvidersLock = new object();
-        private ReferenceCountedProviders _refCountedProviders = ReferenceCountedProviders.Create(new List<IConfigurationProvider>());
+        private ReferenceCountedProviders _refCountedProviders = ReferenceCountedProviders.Create(
+            new List<IConfigurationProvider>()
+        );
         private bool _disposed;
 
         // This is only used to support IConfigurationRoot.Providers because we cannot track the lifetime of that reference.
-        public IEnumerable<IConfigurationProvider> NonReferenceCountedProviders => _refCountedProviders.NonReferenceCountedProviders;
+        public IEnumerable<IConfigurationProvider> NonReferenceCountedProviders =>
+            _refCountedProviders.NonReferenceCountedProviders;
 
         public ReferenceCountedProviders GetReference()
         {
@@ -29,7 +32,9 @@ namespace Microsoft.Extensions.Configuration
                     // Return a non-reference-counting ReferenceCountedProviders instance now that the ConfigurationManager is disposed.
                     // We could preemptively throw an ODE instead, but this might break existing apps that were previously able to
                     // continue to read configuration after disposing an ConfigurationManager.
-                    return ReferenceCountedProviders.CreateDisposed(_refCountedProviders.NonReferenceCountedProviders);
+                    return ReferenceCountedProviders.CreateDisposed(
+                        _refCountedProviders.NonReferenceCountedProviders
+                    );
                 }
 
                 _refCountedProviders.AddReference();
@@ -68,9 +73,11 @@ namespace Microsoft.Extensions.Configuration
                 }
 
                 // Maintain existing references, but replace list with copy containing new item.
-                _refCountedProviders.Providers = new List<IConfigurationProvider>(_refCountedProviders.Providers)
+                _refCountedProviders.Providers = new List<IConfigurationProvider>(
+                    _refCountedProviders.Providers
+                )
                 {
-                    provider
+                    provider,
                 };
             }
         }

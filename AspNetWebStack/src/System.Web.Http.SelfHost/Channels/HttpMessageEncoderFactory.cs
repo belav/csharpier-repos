@@ -35,15 +35,20 @@ namespace System.Web.Http.SelfHost.Channels
 
         public override MessageEncoder CreateSessionEncoder()
         {
-            throw Error.NotSupported(SRResources.HttpMessageEncoderFactoryDoesNotSupportSessionEncoder, typeof(HttpMessageEncoderFactory).Name);
+            throw Error.NotSupported(
+                SRResources.HttpMessageEncoderFactoryDoesNotSupportSessionEncoder,
+                typeof(HttpMessageEncoderFactory).Name
+            );
         }
 
         private class HttpMessageEncoder : MessageEncoder
         {
             private const string ContentTypeHeaderName = "Content-Type";
-            private const string MaxSentMessageSizeExceededResourceStringName = "MaxSentMessageSizeExceeded";
+            private const string MaxSentMessageSizeExceededResourceStringName =
+                "MaxSentMessageSizeExceeded";
             private static readonly string _httpBindingClassName = typeof(HttpBinding).FullName;
-            private static readonly string _httpResponseMessageClassName = typeof(HttpResponseMessage).FullName;
+            private static readonly string _httpResponseMessageClassName =
+                typeof(HttpResponseMessage).FullName;
 
             public override string ContentType
             {
@@ -70,8 +75,16 @@ namespace System.Web.Http.SelfHost.Channels
                 return true;
             }
 
-            [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "disposed later.")]
-            public override Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager, string contentType)
+            [SuppressMessage(
+                "Microsoft.Reliability",
+                "CA2000:Dispose objects before losing scope",
+                Justification = "disposed later."
+            )]
+            public override Message ReadMessage(
+                ArraySegment<byte> buffer,
+                BufferManager bufferManager,
+                string contentType
+            )
             {
                 if (bufferManager == null)
                 {
@@ -79,10 +92,18 @@ namespace System.Web.Http.SelfHost.Channels
                 }
 
                 HttpRequestMessage request = new HttpRequestMessage();
-                request.Content = new ByteArrayBufferManagerContent(bufferManager, buffer.Array, buffer.Offset, buffer.Count);
+                request.Content = new ByteArrayBufferManagerContent(
+                    bufferManager,
+                    buffer.Array,
+                    buffer.Offset,
+                    buffer.Count
+                );
                 if (!String.IsNullOrEmpty(contentType))
                 {
-                    request.Content.Headers.TryAddWithoutValidation(ContentTypeHeaderName, contentType);
+                    request.Content.Headers.TryAddWithoutValidation(
+                        ContentTypeHeaderName,
+                        contentType
+                    );
                 }
 
                 Message message = request.ToMessage();
@@ -91,8 +112,16 @@ namespace System.Web.Http.SelfHost.Channels
                 return message;
             }
 
-            [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "disposed later.")]
-            public override Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType)
+            [SuppressMessage(
+                "Microsoft.Reliability",
+                "CA2000:Dispose objects before losing scope",
+                Justification = "disposed later."
+            )]
+            public override Message ReadMessage(
+                Stream stream,
+                int maxSizeOfHeaders,
+                string contentType
+            )
             {
                 if (stream == null)
                 {
@@ -103,7 +132,10 @@ namespace System.Web.Http.SelfHost.Channels
                 request.Content = new StreamContent(stream);
                 if (!String.IsNullOrEmpty(contentType))
                 {
-                    request.Content.Headers.TryAddWithoutValidation(ContentTypeHeaderName, contentType);
+                    request.Content.Headers.TryAddWithoutValidation(
+                        ContentTypeHeaderName,
+                        contentType
+                    );
                 }
 
                 Message message = request.ToMessage();
@@ -112,7 +144,12 @@ namespace System.Web.Http.SelfHost.Channels
                 return message;
             }
 
-            public override ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager, int messageOffset)
+            public override ArraySegment<byte> WriteMessage(
+                Message message,
+                int maxMessageSize,
+                BufferManager bufferManager,
+                int messageOffset
+            )
             {
                 if (message == null)
                 {
@@ -126,32 +163,57 @@ namespace System.Web.Http.SelfHost.Channels
 
                 if (maxMessageSize < 0)
                 {
-                    throw Error.ArgumentOutOfRange("maxMessageSize", maxMessageSize, SRResources.NonnegativeNumberRequired);
+                    throw Error.ArgumentOutOfRange(
+                        "maxMessageSize",
+                        maxMessageSize,
+                        SRResources.NonnegativeNumberRequired
+                    );
                 }
 
                 if (messageOffset < 0)
                 {
-                    throw Error.ArgumentOutOfRange("messageOffset", messageOffset, SRResources.NonnegativeNumberRequired);
+                    throw Error.ArgumentOutOfRange(
+                        "messageOffset",
+                        messageOffset,
+                        SRResources.NonnegativeNumberRequired
+                    );
                 }
 
                 if (messageOffset > maxMessageSize)
                 {
-                    throw Error.Argument(String.Empty, SRResources.ParameterMustBeLessThanOrEqualSecondParameter, "messageOffset", "maxMessageSize");
+                    throw Error.Argument(
+                        String.Empty,
+                        SRResources.ParameterMustBeLessThanOrEqualSecondParameter,
+                        "messageOffset",
+                        "maxMessageSize"
+                    );
                 }
 
                 // TODO: DevDiv2 bug #378887 -- find out how to eliminate this middle buffer
-                using (BufferManagerOutputStream stream = new BufferManagerOutputStream(MaxSentMessageSizeExceededResourceStringName, 0, maxMessageSize, bufferManager))
+                using (
+                    BufferManagerOutputStream stream = new BufferManagerOutputStream(
+                        MaxSentMessageSizeExceededResourceStringName,
+                        0,
+                        maxMessageSize,
+                        bufferManager
+                    )
+                )
                 {
                     int num;
                     stream.Skip(messageOffset);
                     WriteMessage(message, stream);
 
                     byte[] buffer = stream.ToArray(out num);
-                    ArraySegment<byte> messageData = new ArraySegment<byte>(buffer, 0, num - messageOffset);
+                    ArraySegment<byte> messageData = new ArraySegment<byte>(
+                        buffer,
+                        0,
+                        num - messageOffset
+                    );
 
                     // ToArray transfers full ownership of buffer to us, meaning we are responsible for returning it to BufferManager.
                     // But we must delay that release until WCF has finished with the buffer we are returning from this method.
-                    HttpMessageEncodingRequestContext requestContext = HttpMessageEncodingRequestContext.GetContextFromMessage(message);
+                    HttpMessageEncodingRequestContext requestContext =
+                        HttpMessageEncodingRequestContext.GetContextFromMessage(message);
                     Contract.Assert(requestContext != null);
                     requestContext.BufferManager = bufferManager;
                     requestContext.BufferToReturn = buffer;
@@ -160,7 +222,11 @@ namespace System.Web.Http.SelfHost.Channels
                 }
             }
 
-            [SuppressMessage("Microsoft.Web.FxCop", "MW1201:DoNotCallProblematicMethodsOnTask", Justification = "The WriteMessage() API is synchronous, and Wait() won't deadlock in self-host.")]
+            [SuppressMessage(
+                "Microsoft.Web.FxCop",
+                "MW1201:DoNotCallProblematicMethodsOnTask",
+                Justification = "The WriteMessage() API is synchronous, and Wait() won't deadlock in self-host."
+            )]
             public override void WriteMessage(Message message, Stream stream)
             {
                 if (message == null)
@@ -191,7 +257,8 @@ namespace System.Web.Http.SelfHost.Channels
             private static async Task WriteMessageCore(
                 HttpResponseMessage response,
                 Stream stream,
-                HttpMessageEncodingRequestContext requestContext)
+                HttpMessageEncodingRequestContext requestContext
+            )
             {
                 try
                 {
@@ -212,7 +279,13 @@ namespace System.Web.Http.SelfHost.Channels
             {
                 if (message.Version != MessageVersion)
                 {
-                    throw new ProtocolException(Error.Format(SRResources.EncoderMessageVersionMismatch, message.Version, MessageVersion));
+                    throw new ProtocolException(
+                        Error.Format(
+                            SRResources.EncoderMessageVersionMismatch,
+                            message.Version,
+                            MessageVersion
+                        )
+                    );
                 }
             }
 
@@ -225,7 +298,8 @@ namespace System.Web.Http.SelfHost.Channels
                         SRResources.MessageInvalidForHttpMessageEncoder,
                         _httpBindingClassName,
                         HttpMessageExtensions.ToMessageMethodName,
-                        _httpResponseMessageClassName);
+                        _httpResponseMessageClassName
+                    );
                 }
 
                 return response;
@@ -236,10 +310,18 @@ namespace System.Web.Http.SelfHost.Channels
                 private BufferManager _bufferManager;
                 private byte[] _content;
 
-                public ByteArrayBufferManagerContent(BufferManager bufferManager, byte[] content, int offset, int count)
+                public ByteArrayBufferManagerContent(
+                    BufferManager bufferManager,
+                    byte[] content,
+                    int offset,
+                    int count
+                )
                     : base(content, offset, count)
                 {
-                    Contract.Assert(bufferManager != null, "The 'bufferManager' parameter should never be null.");
+                    Contract.Assert(
+                        bufferManager != null,
+                        "The 'bufferManager' parameter should never be null."
+                    );
 
                     _bufferManager = bufferManager;
                     _content = content;
@@ -251,7 +333,10 @@ namespace System.Web.Http.SelfHost.Channels
                     {
                         if (disposing)
                         {
-                            BufferManager oldBufferManager = Interlocked.Exchange(ref _bufferManager, null);
+                            BufferManager oldBufferManager = Interlocked.Exchange(
+                                ref _bufferManager,
+                                null
+                            );
                             if (oldBufferManager != null)
                             {
                                 oldBufferManager.ReturnBuffer(_content);

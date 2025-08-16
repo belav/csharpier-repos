@@ -10,10 +10,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeEcKeyHandle : SafeHandle
     {
-        public SafeEcKeyHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeEcKeyHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

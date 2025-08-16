@@ -1,11 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-  	<Reference Include="Microsoft.AspNetCore.DeveloperCertificates.XPlat" />
+    <Reference Include="Microsoft.AspNetCore.DeveloperCertificates.XPlat" />
   </ItemGroup>
-
 </Project>

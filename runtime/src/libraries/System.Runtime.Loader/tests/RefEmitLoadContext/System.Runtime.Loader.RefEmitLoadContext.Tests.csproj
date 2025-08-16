@@ -7,9 +7,11 @@
     <Compile Include="RefEmitLoadContextTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../System.Runtime.Loader.Noop.Assembly/System.Runtime.Loader.Noop.Assembly.csproj"
-                      ReferenceOutputAssembly="false"
-                      OutputItemType="content"
-                      CopyToOutputDirectory="PreserveNewest" />
+    <ProjectReference
+      Include="../System.Runtime.Loader.Noop.Assembly/System.Runtime.Loader.Noop.Assembly.csproj"
+      ReferenceOutputAssembly="false"
+      OutputItemType="content"
+      CopyToOutputDirectory="PreserveNewest"
+    />
   </ItemGroup>
 </Project>

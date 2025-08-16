@@ -25,23 +25,48 @@ namespace System.ServiceModel.Channels
         void Close(TimeSpan timeout);
         void Close(TimeSpan timeout, MaskingMode maskingMode);
         IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state);
-        IAsyncResult BeginClose(TimeSpan timeout, MaskingMode maskingMode, AsyncCallback callback, object state);
+        IAsyncResult BeginClose(
+            TimeSpan timeout,
+            MaskingMode maskingMode,
+            AsyncCallback callback,
+            object state
+        );
         void EndClose(IAsyncResult result);
 
         void Open(TimeSpan timeout);
         IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state);
         void EndOpen(IAsyncResult result);
 
-        IAsyncResult BeginSend(Message message, TimeSpan timeout, MaskingMode maskingMode, AsyncCallback callback, object state);
-        IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            MaskingMode maskingMode,
+            AsyncCallback callback,
+            object state
+        );
+        IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         void EndSend(IAsyncResult result);
         void Send(Message message, TimeSpan timeout);
         void Send(Message message, TimeSpan timeout, MaskingMode maskingMode);
 
         bool TryReceive(TimeSpan timeout, out RequestContext requestContext);
-        bool TryReceive(TimeSpan timeout, out RequestContext requestContext, MaskingMode maskingMode);
+        bool TryReceive(
+            TimeSpan timeout,
+            out RequestContext requestContext,
+            MaskingMode maskingMode
+        );
         IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state);
-        IAsyncResult BeginTryReceive(TimeSpan timeout, MaskingMode maskingMode, AsyncCallback callback, object state);
+        IAsyncResult BeginTryReceive(
+            TimeSpan timeout,
+            MaskingMode maskingMode,
+            AsyncCallback callback,
+            object state
+        );
         bool EndTryReceive(IAsyncResult result, out RequestContext requestContext);
 
         ISession GetInnerSession();
@@ -58,12 +83,22 @@ namespace System.ServiceModel.Channels
 
         bool EnsureChannelForRequest();
 
-        IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state);
-        IAsyncResult BeginRequest(Message message, TimeSpan timeout, MaskingMode maskingMode, AsyncCallback callback, object state);
+        IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
+        IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            MaskingMode maskingMode,
+            AsyncCallback callback,
+            object state
+        );
         Message EndRequest(IAsyncResult result);
         Message Request(Message message, TimeSpan timeout);
         Message Request(Message message, TimeSpan timeout, MaskingMode maskingMode);
-
     }
 
     interface IServerReliableChannelBinder : IReliableChannelBinder

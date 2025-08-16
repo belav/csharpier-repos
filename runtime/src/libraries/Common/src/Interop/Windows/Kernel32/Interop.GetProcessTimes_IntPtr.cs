@@ -10,6 +10,12 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetProcessTimes(IntPtr handleProcess, out long creation, out long exit, out long kernel, out long user);
+        internal static partial bool GetProcessTimes(
+            IntPtr handleProcess,
+            out long creation,
+            out long exit,
+            out long kernel,
+            out long user
+        );
     }
 }

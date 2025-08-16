@@ -1,39 +1,93 @@
 using System;
-using System.Xml;
-using System.ComponentModel;
-using System.ComponentModel.Design;
-using System.ComponentModel.Design.Serialization;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
 using System.Workflow.ComponentModel.Serialization;
 using System.Workflow.Runtime;
-using System.Globalization;
+using System.Xml;
 
 namespace System.Workflow.Runtime
 {
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class CorrelationToken : DependencyObject, IPropertyValueProvider
     {
-        internal static readonly DependencyProperty NameProperty = DependencyProperty.Register("Name", typeof(string), typeof(CorrelationToken), new PropertyMetadata(DependencyPropertyOptions.Metadata, new Attribute[] { new BrowsableAttribute(false) }));
-        internal static readonly DependencyProperty OwnerActivityNameProperty = DependencyProperty.Register("OwnerActivityName", typeof(string), typeof(CorrelationToken), new PropertyMetadata(DependencyPropertyOptions.Metadata, new Attribute[] { new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)) }));
+        internal static readonly DependencyProperty NameProperty = DependencyProperty.Register(
+            "Name",
+            typeof(string),
+            typeof(CorrelationToken),
+            new PropertyMetadata(
+                DependencyPropertyOptions.Metadata,
+                new Attribute[] { new BrowsableAttribute(false) }
+            )
+        );
+        internal static readonly DependencyProperty OwnerActivityNameProperty =
+            DependencyProperty.Register(
+                "OwnerActivityName",
+                typeof(string),
+                typeof(CorrelationToken),
+                new PropertyMetadata(
+                    DependencyPropertyOptions.Metadata,
+                    new Attribute[]
+                    {
+                        new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)),
+                    }
+                )
+            );
 
         // instance properties
-        internal static readonly DependencyProperty PropertiesProperty = DependencyProperty.Register("Properties", typeof(ICollection<CorrelationProperty>), typeof(CorrelationToken), new PropertyMetadata(new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
-        internal static readonly DependencyProperty SubscriptionsProperty = DependencyProperty.Register("Subscriptions", typeof(IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>), typeof(CorrelationToken));
-        internal static readonly DependencyProperty InitializedProperty = DependencyProperty.Register("Initialized", typeof(bool), typeof(CorrelationToken), new PropertyMetadata(false, new Attribute[] { new BrowsableAttribute(false), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden) }));
+        internal static readonly DependencyProperty PropertiesProperty =
+            DependencyProperty.Register(
+                "Properties",
+                typeof(ICollection<CorrelationProperty>),
+                typeof(CorrelationToken),
+                new PropertyMetadata(
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Hidden
+                        ),
+                    }
+                )
+            );
+        internal static readonly DependencyProperty SubscriptionsProperty =
+            DependencyProperty.Register(
+                "Subscriptions",
+                typeof(IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>),
+                typeof(CorrelationToken)
+            );
+        internal static readonly DependencyProperty InitializedProperty =
+            DependencyProperty.Register(
+                "Initialized",
+                typeof(bool),
+                typeof(CorrelationToken),
+                new PropertyMetadata(
+                    false,
+                    new Attribute[]
+                    {
+                        new BrowsableAttribute(false),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Hidden
+                        ),
+                    }
+                )
+            );
 
-        public CorrelationToken()
-        {
-        }
+        public CorrelationToken() { }
 
         public CorrelationToken(string name)
         {
@@ -43,57 +97,49 @@ namespace System.Workflow.Runtime
         [Browsable(false)]
         public string Name
         {
-            get
-            {
-                return (string)GetValue(NameProperty);
-            }
-            set
-            {
-                SetValue(NameProperty, value);
-            }
+            get { return (string)GetValue(NameProperty); }
+            set { SetValue(NameProperty, value); }
         }
 
         [TypeConverter(typeof(PropertyValueProviderTypeConverter))]
         public string OwnerActivityName
         {
-            get
-            {
-                return (string)GetValue(OwnerActivityNameProperty);
-            }
-
-            set
-            {
-                SetValue(OwnerActivityNameProperty, value);
-            }
+            get { return (string)GetValue(OwnerActivityNameProperty); }
+            set { SetValue(OwnerActivityNameProperty, value); }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ICollection<CorrelationProperty> Properties
         {
-            get
-            {
-                return GetValue(PropertiesProperty) as ICollection<CorrelationProperty>;
-            }
+            get { return GetValue(PropertiesProperty) as ICollection<CorrelationProperty>; }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Initialized
         {
-            get
-            {
-                return (bool)GetValue(InitializedProperty);
-            }
+            get { return (bool)GetValue(InitializedProperty); }
         }
 
         ICollection IPropertyValueProvider.GetPropertyValues(ITypeDescriptorContext context)
         {
             StringCollection names = new StringCollection();
-            if (string.Equals(context.PropertyDescriptor.Name, "OwnerActivityName", StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    context.PropertyDescriptor.Name,
+                    "OwnerActivityName",
+                    StringComparison.Ordinal
+                )
+            )
             {
-                ISelectionService selectionService = context.GetService(typeof(ISelectionService)) as ISelectionService;
-                if (selectionService != null && selectionService.SelectionCount == 1 && selectionService.PrimarySelection is Activity)
+                ISelectionService selectionService =
+                    context.GetService(typeof(ISelectionService)) as ISelectionService;
+                if (
+                    selectionService != null
+                    && selectionService.SelectionCount == 1
+                    && selectionService.PrimarySelection is Activity
+                )
                 {
                     Activity currentActivity = selectionService.PrimarySelection as Activity;
                     foreach (Activity activity in GetEnclosingCompositeActivities(currentActivity))
@@ -110,22 +156,43 @@ namespace System.Workflow.Runtime
         public void Initialize(Activity activity, ICollection<CorrelationProperty> propertyValues)
         {
             if (this.Initialized)
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, ExecutionStringManager.CorrelationAlreadyInitialized, this.Name));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.CorrelationAlreadyInitialized,
+                        this.Name
+                    )
+                );
 
             SetValue(PropertiesProperty, propertyValues);
 
             // fire correlation initialized events
             CorrelationTokenEventArgs eventArgs = new CorrelationTokenEventArgs(this, true);
-            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscribers = GetValue(SubscriptionsProperty) as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
+            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscribers =
+                GetValue(SubscriptionsProperty)
+                as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
             if (subscribers != null)
             {
-                foreach (ActivityExecutorDelegateInfo<CorrelationTokenEventArgs> subscriber in subscribers)
+                foreach (
+                    ActivityExecutorDelegateInfo<CorrelationTokenEventArgs> subscriber in subscribers
+                )
                 {
-                    subscriber.InvokeDelegate(ContextActivityUtils.ContextActivity(activity), eventArgs, true, false);
+                    subscriber.InvokeDelegate(
+                        ContextActivityUtils.ContextActivity(activity),
+                        eventArgs,
+                        true,
+                        false
+                    );
                 }
             }
             SetValue(InitializedProperty, true);
-            WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "CorrelationToken initialized for {0} owner activity {1} ", this.Name, this.OwnerActivityName);
+            WorkflowTrace.Runtime.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "CorrelationToken initialized for {0} owner activity {1} ",
+                this.Name,
+                this.OwnerActivityName
+            );
         }
 
         internal void Uninitialize(Activity activity)
@@ -134,21 +201,40 @@ namespace System.Workflow.Runtime
 
             // fire correlation uninitialized events
             CorrelationTokenEventArgs eventArgs = new CorrelationTokenEventArgs(this, false);
-            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscribers = GetValue(SubscriptionsProperty) as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
+            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscribers =
+                GetValue(SubscriptionsProperty)
+                as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
             if (subscribers != null)
             {
-                ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>[] clonedSubscribers = new ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>[subscribers.Count];
+                ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>[] clonedSubscribers =
+                    new ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>[subscribers.Count];
                 subscribers.CopyTo(clonedSubscribers, 0);
-                foreach (ActivityExecutorDelegateInfo<CorrelationTokenEventArgs> subscriber in clonedSubscribers)
+                foreach (
+                    ActivityExecutorDelegateInfo<CorrelationTokenEventArgs> subscriber in clonedSubscribers
+                )
                 {
-                    subscriber.InvokeDelegate(ContextActivityUtils.ContextActivity(activity), eventArgs, true, false);
+                    subscriber.InvokeDelegate(
+                        ContextActivityUtils.ContextActivity(activity),
+                        eventArgs,
+                        true,
+                        false
+                    );
                 }
             }
             //SetValue(InitializedProperty, false);
-            WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "CorrelationToken Uninitialized for {0} owner activity {1}", this.Name, this.OwnerActivityName);
+            WorkflowTrace.Runtime.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "CorrelationToken Uninitialized for {0} owner activity {1}",
+                this.Name,
+                this.OwnerActivityName
+            );
         }
 
-        public void SubscribeForCorrelationTokenInitializedEvent(Activity activity, IActivityEventListener<CorrelationTokenEventArgs> dataChangeListener)
+        public void SubscribeForCorrelationTokenInitializedEvent(
+            Activity activity,
+            IActivityEventListener<CorrelationTokenEventArgs> dataChangeListener
+        )
         {
             if (dataChangeListener == null)
                 throw new ArgumentNullException("dataChangeListener");
@@ -156,10 +242,15 @@ namespace System.Workflow.Runtime
                 throw new ArgumentNullException("activity");
 
             ActivityExecutorDelegateInfo<CorrelationTokenEventArgs> subscriber =
-                new ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>(dataChangeListener,
-                ContextActivityUtils.ContextActivity(activity), true);
+                new ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>(
+                    dataChangeListener,
+                    ContextActivityUtils.ContextActivity(activity),
+                    true
+                );
 
-            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscriptions = GetValue(SubscriptionsProperty) as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
+            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscriptions =
+                GetValue(SubscriptionsProperty)
+                as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
             if (subscriptions == null)
             {
                 subscriptions = new List<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>();
@@ -169,7 +260,10 @@ namespace System.Workflow.Runtime
             subscriptions.Add(subscriber);
         }
 
-        public void UnsubscribeFromCorrelationTokenInitializedEvent(Activity activity, IActivityEventListener<CorrelationTokenEventArgs> dataChangeListener)
+        public void UnsubscribeFromCorrelationTokenInitializedEvent(
+            Activity activity,
+            IActivityEventListener<CorrelationTokenEventArgs> dataChangeListener
+        )
         {
             if (dataChangeListener == null)
                 throw new ArgumentNullException("dataChangeListener");
@@ -177,10 +271,15 @@ namespace System.Workflow.Runtime
                 throw new ArgumentNullException("activity");
 
             ActivityExecutorDelegateInfo<CorrelationTokenEventArgs> subscriber =
-                new ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>(dataChangeListener,
-                ContextActivityUtils.ContextActivity(activity), true);
+                new ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>(
+                    dataChangeListener,
+                    ContextActivityUtils.ContextActivity(activity),
+                    true
+                );
 
-            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscriptions = GetValue(SubscriptionsProperty) as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
+            IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>> subscriptions =
+                GetValue(SubscriptionsProperty)
+                as IList<ActivityExecutorDelegateInfo<CorrelationTokenEventArgs>>;
             if (subscriptions != null)
             {
                 subscriptions.Remove(subscriber);
@@ -195,7 +294,10 @@ namespace System.Workflow.Runtime
 
             while ((currentActivity = activityStack.Pop()) != null)
             {
-                if ((typeof(CompositeActivity).IsAssignableFrom(currentActivity.GetType())) && currentActivity.Enabled)
+                if (
+                    (typeof(CompositeActivity).IsAssignableFrom(currentActivity.GetType()))
+                    && currentActivity.Enabled
+                )
                 {
                     yield return currentActivity;
                 }
@@ -206,16 +308,24 @@ namespace System.Workflow.Runtime
     }
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class CorrelationTokenCollection : KeyedCollection<string, CorrelationToken>
     {
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
-            Justification = "Design has been approved.  This is a false positive. DependencyProperty is an immutable type.")]
-        public static readonly DependencyProperty CorrelationTokenCollectionProperty = DependencyProperty.RegisterAttached("CorrelationTokenCollection", typeof(CorrelationTokenCollection), typeof(CorrelationTokenCollection));
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "Design has been approved.  This is a false positive. DependencyProperty is an immutable type."
+        )]
+        public static readonly DependencyProperty CorrelationTokenCollectionProperty =
+            DependencyProperty.RegisterAttached(
+                "CorrelationTokenCollection",
+                typeof(CorrelationTokenCollection),
+                typeof(CorrelationTokenCollection)
+            );
 
-        public CorrelationTokenCollection()
-        {
-        }
+        public CorrelationTokenCollection() { }
 
         public CorrelationToken GetItem(string key)
         {
@@ -226,10 +336,12 @@ namespace System.Workflow.Runtime
         {
             return item.Name;
         }
+
         protected override void ClearItems()
         {
             base.ClearItems();
         }
+
         protected override void InsertItem(int index, CorrelationToken item)
         {
             if (item == null)
@@ -237,10 +349,12 @@ namespace System.Workflow.Runtime
 
             base.InsertItem(index, item);
         }
+
         protected override void RemoveItem(int index)
         {
             base.RemoveItem(index);
         }
+
         protected override void SetItem(int index, CorrelationToken item)
         {
             if (item == null)
@@ -251,7 +365,8 @@ namespace System.Workflow.Runtime
 
         internal static void UninitializeCorrelationTokens(Activity activity)
         {
-            CorrelationTokenCollection collection = activity.GetValue(CorrelationTokenCollectionProperty) as CorrelationTokenCollection;
+            CorrelationTokenCollection collection =
+                activity.GetValue(CorrelationTokenCollectionProperty) as CorrelationTokenCollection;
             if (collection != null)
             {
                 foreach (CorrelationToken correlator in collection)
@@ -261,7 +376,11 @@ namespace System.Workflow.Runtime
             }
         }
 
-        public static CorrelationToken GetCorrelationToken(Activity activity, string correlationTokenName, string ownerActivityName)
+        public static CorrelationToken GetCorrelationToken(
+            Activity activity,
+            string correlationTokenName,
+            string ownerActivityName
+        )
         {
             if (null == correlationTokenName)
                 throw new ArgumentNullException("correlationTokenName");
@@ -290,11 +409,15 @@ namespace System.Workflow.Runtime
             if (owner == null)
                 throw new InvalidOperationException(ExecutionStringManager.OwnerActivityMissing);
 
-            CorrelationTokenCollection collection = owner.GetValue(CorrelationTokenCollectionProperty) as CorrelationTokenCollection;
+            CorrelationTokenCollection collection =
+                owner.GetValue(CorrelationTokenCollectionProperty) as CorrelationTokenCollection;
             if (collection == null)
             {
                 collection = new CorrelationTokenCollection();
-                owner.SetValue(CorrelationTokenCollection.CorrelationTokenCollectionProperty, collection);
+                owner.SetValue(
+                    CorrelationTokenCollection.CorrelationTokenCollectionProperty,
+                    collection
+                );
             }
 
             if (!collection.Contains(correlationTokenName))
@@ -306,7 +429,9 @@ namespace System.Workflow.Runtime
     }
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class CorrelationProperty
     {
         private object value = null;
@@ -325,22 +450,18 @@ namespace System.Workflow.Runtime
 
         public object Value
         {
-            get
-            {
-                return this.value;
-            }
+            get { return this.value; }
         }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class CorrelationTokenEventArgs : EventArgs
     {
         CorrelationToken correlator;
@@ -354,18 +475,12 @@ namespace System.Workflow.Runtime
 
         public bool IsInitializing
         {
-            get
-            {
-                return this.initialized;
-            }
+            get { return this.initialized; }
         }
 
         public CorrelationToken CorrelationToken
         {
-            get
-            {
-                return this.correlator;
-            }
+            get { return this.correlator; }
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -32,9 +31,27 @@ namespace System.Net.Http.Tests
             // tells the caller (HttpHeaders) that parsing multiple strings is allowed.
             CheckValidParsedValue("X NTLM ", 1, new AuthenticationHeaderValue("NTLM"), 7, true);
             CheckValidParsedValue("X NTLM ", 1, new AuthenticationHeaderValue("NTLM"), 7, false);
-            CheckValidParsedValue("custom x=y", 0, new AuthenticationHeaderValue("Custom", "x=y"), 10, true);
-            CheckValidParsedValue("custom x=y", 0, new AuthenticationHeaderValue("Custom", "x=y"), 10, false);
-            CheckValidParsedValue("C x=y, other", 0, new AuthenticationHeaderValue("C", "x=y"), 7, true);
+            CheckValidParsedValue(
+                "custom x=y",
+                0,
+                new AuthenticationHeaderValue("Custom", "x=y"),
+                10,
+                true
+            );
+            CheckValidParsedValue(
+                "custom x=y",
+                0,
+                new AuthenticationHeaderValue("Custom", "x=y"),
+                10,
+                false
+            );
+            CheckValidParsedValue(
+                "C x=y, other",
+                0,
+                new AuthenticationHeaderValue("C", "x=y"),
+                7,
+                true
+            );
 
             CheckValidParsedValue("  ", 0, null, 2, true);
             CheckValidParsedValue(null, 0, null, 0, true);
@@ -57,8 +74,13 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, AuthenticationHeaderValue expectedResult,
-            int expectedIndex, bool supportMultipleValues)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            AuthenticationHeaderValue expectedResult,
+            int expectedIndex,
+            bool supportMultipleValues
+        )
         {
             HttpHeaderParser parser = null;
             if (supportMultipleValues)
@@ -71,13 +93,19 @@ namespace System.Net.Http.Tests
             }
 
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false. Input: '{0}'", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false. Input: '{0}'", input)
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(result, expectedResult);
         }
 
-        private void CheckInvalidParsedValue(string input, int startIndex, bool supportMultipleValues)
+        private void CheckInvalidParsedValue(
+            string input,
+            int startIndex,
+            bool supportMultipleValues
+        )
         {
             HttpHeaderParser parser = null;
             if (supportMultipleValues)
@@ -91,8 +119,10 @@ namespace System.Net.Http.Tests
 
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}'", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true. Input: '{0}'", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

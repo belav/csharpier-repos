@@ -18,32 +18,30 @@ public interface IProperty : IReadOnlyProperty, IPropertyBase
     ///     Gets the entity type that this property belongs to.
     /// </summary>
     [Obsolete("Use DeclaringType and cast to IEntityType or IComplexType")]
-    new IEntityType DeclaringEntityType
-        => (IEntityType)DeclaringType;
+    new IEntityType DeclaringEntityType => (IEntityType)DeclaringType;
 
     /// <summary>
     ///     Creates an <see cref="IEqualityComparer{T}" /> for values of the given property type.
     /// </summary>
     /// <typeparam name="TProperty">The property type.</typeparam>
     /// <returns>A new equality comparer.</returns>
-    IEqualityComparer<TProperty> CreateKeyEqualityComparer<TProperty>()
-        => NullableComparerAdapter<TProperty>.Wrap(GetKeyValueComparer());
+    IEqualityComparer<TProperty> CreateKeyEqualityComparer<TProperty>() =>
+        NullableComparerAdapter<TProperty>.Wrap(GetKeyValueComparer());
 
     /// <summary>
     ///     Finds the first principal property that the given property is constrained by
     ///     if the given property is part of a foreign key.
     /// </summary>
     /// <returns>The first associated principal property, or <see langword="null" /> if none exists.</returns>
-    new IProperty? FindFirstPrincipal()
-        => (IProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
+    new IProperty? FindFirstPrincipal() =>
+        (IProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
     /// <summary>
     ///     Finds the list of principal properties including the given property that the given property is constrained by
     ///     if the given property is part of a foreign key.
     /// </summary>
     /// <returns>The list of all associated principal properties including the given property.</returns>
-    new IReadOnlyList<IProperty> GetPrincipals()
-        => GetPrincipals<IProperty>();
+    new IReadOnlyList<IProperty> GetPrincipals() => GetPrincipals<IProperty>();
 
     /// <summary>
     ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
@@ -70,8 +68,8 @@ public interface IProperty : IReadOnlyProperty, IPropertyBase
     /// <returns>
     ///     The primary that use this property, or <see langword="null" /> if it is not part of the primary key.
     /// </returns>
-    new IKey? FindContainingPrimaryKey()
-        => (IKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
+    new IKey? FindContainingPrimaryKey() =>
+        (IKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
 
     /// <summary>
     ///     Gets all primary or alternate keys that use this property (including composite keys in which this property

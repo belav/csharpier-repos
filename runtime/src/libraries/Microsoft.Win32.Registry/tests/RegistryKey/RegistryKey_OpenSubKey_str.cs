@@ -16,7 +16,11 @@ namespace Microsoft.Win32.RegistryTests
             Assert.Throws<ArgumentNullException>(() => TestRegistryKey.OpenSubKey(name: null));
 
             // Should throw if subkey name greater than 255 chars
-            AssertExtensions.Throws<ArgumentException>("name", null, () => TestRegistryKey.OpenSubKey(new string('a', 256)));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => TestRegistryKey.OpenSubKey(new string('a', 256))
+            );
 
             // OpenSubKey should be read only by default
             const string name = "FooBar";
@@ -55,7 +59,10 @@ namespace Microsoft.Win32.RegistryTests
         [Fact]
         public void OpenSubKeyTest2()
         {
-            string[] subKeyNames = Enumerable.Range(1, 9).Select(x => "BLAH_" + x.ToString()).ToArray();
+            string[] subKeyNames = Enumerable
+                .Range(1, 9)
+                .Select(x => "BLAH_" + x.ToString())
+                .ToArray();
             foreach (var subKeyName in subKeyNames)
             {
                 TestRegistryKey.CreateSubKey(subKeyName).Dispose();
@@ -68,11 +75,17 @@ namespace Microsoft.Win32.RegistryTests
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
         public void OpenSubKey_KeyExists_OpensWithFixedUpName(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () => TestRegistryKey.OpenSubKey(subKeyName));
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName)
+            );
 
         [Theory]
         [MemberData(nameof(TestRegistrySubKeyNames))]
         public void OpenSubKey_KeyDoesNotExist_ReturnsNull(string expected, string subKeyName) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () => TestRegistryKey.OpenSubKey(subKeyName));
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
+                expected,
+                () => TestRegistryKey.OpenSubKey(subKeyName)
+            );
     }
 }

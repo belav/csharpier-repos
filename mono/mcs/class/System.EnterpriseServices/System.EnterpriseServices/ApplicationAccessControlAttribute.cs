@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ApplicationAccessControlAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,75 +32,81 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Assembly)]
-	[ComVisible(false)]
-	public sealed class ApplicationAccessControlAttribute : Attribute, IConfigurationAttribute {
-		#region Fields
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Assembly)]
+    [ComVisible(false)]
+    public sealed class ApplicationAccessControlAttribute : Attribute, IConfigurationAttribute
+    {
+        #region Fields
 
-		AccessChecksLevelOption accessChecksLevel;
-		AuthenticationOption authentication;
-		ImpersonationLevelOption impersonation;
-		bool val;
+        AccessChecksLevelOption accessChecksLevel;
+        AuthenticationOption authentication;
+        ImpersonationLevelOption impersonation;
+        bool val;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public ApplicationAccessControlAttribute ()
-		{
-			this.val = false;
-		}
+        public ApplicationAccessControlAttribute()
+        {
+            this.val = false;
+        }
 
-		public ApplicationAccessControlAttribute (bool val)
-		{
-			this.val = val;
-		}
+        public ApplicationAccessControlAttribute(bool val)
+        {
+            this.val = val;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Implementation of IConfigurationAttribute
+        #region Implementation of IConfigurationAttribute
 
-		bool IConfigurationAttribute.AfterSaveChanges (Hashtable info)
-		{
-			return false;
-		}
+        bool IConfigurationAttribute.AfterSaveChanges(Hashtable info)
+        {
+            return false;
+        }
 
-		[MonoTODO]
-		bool IConfigurationAttribute.Apply (Hashtable cache)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        bool IConfigurationAttribute.Apply(Hashtable cache)
+        {
+            throw new NotImplementedException();
+        }
 
-		bool IConfigurationAttribute.IsValidTarget (string s)
-		{
-			return (s == "Application");
-		}
+        bool IConfigurationAttribute.IsValidTarget(string s)
+        {
+            return (s == "Application");
+        }
 
-		#endregion Implementation of IConfigurationAttribute
+        #endregion Implementation of IConfigurationAttribute
 
-		#region Properties
+        #region Properties
 
-		public AccessChecksLevelOption AccessChecksLevel {
-			get { return accessChecksLevel; }
-			set { accessChecksLevel = value; }
-		}
+        public AccessChecksLevelOption AccessChecksLevel
+        {
+            get { return accessChecksLevel; }
+            set { accessChecksLevel = value; }
+        }
 
-		public AuthenticationOption Authentication {
-			get { return authentication; }
-			set { authentication = value; }
-		}
+        public AuthenticationOption Authentication
+        {
+            get { return authentication; }
+            set { authentication = value; }
+        }
 
-		public ImpersonationLevelOption ImpersonationLevel {
-			get { return impersonation; }
-			set { impersonation = value; }
-		}
+        public ImpersonationLevelOption ImpersonationLevel
+        {
+            get { return impersonation; }
+            set { impersonation = value; }
+        }
 
-		public bool Value {
-			get { return val; }
-			set { val = value; }
-		}
+        public bool Value
+        {
+            get { return val; }
+            set { val = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

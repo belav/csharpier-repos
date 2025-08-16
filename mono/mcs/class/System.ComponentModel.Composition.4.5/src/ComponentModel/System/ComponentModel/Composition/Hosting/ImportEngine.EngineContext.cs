@@ -12,7 +12,7 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class ImportEngine 
+    public partial class ImportEngine
     {
         /// <summary>
         ///     Used to wrap the start and stop of enforcing export changes don't
@@ -53,7 +53,9 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._parentEngineContext != null)
                 {
-                    return this._addedPartManagers.ConcatAllowingNull(this._parentEngineContext.GetAddedPartManagers());
+                    return this._addedPartManagers.ConcatAllowingNull(
+                        this._parentEngineContext.GetAddedPartManagers()
+                    );
                 }
                 return this._addedPartManagers;
             }
@@ -62,7 +64,9 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (this._parentEngineContext != null)
                 {
-                    return this._removedPartManagers.ConcatAllowingNull(this._parentEngineContext.GetRemovedPartManagers());
+                    return this._removedPartManagers.ConcatAllowingNull(
+                        this._parentEngineContext.GetRemovedPartManagers()
+                    );
                 }
                 return this._removedPartManagers;
             }

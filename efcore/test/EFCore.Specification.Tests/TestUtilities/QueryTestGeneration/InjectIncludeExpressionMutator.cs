@@ -8,9 +8,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 public class InjectIncludeExpressionMutator : ExpressionMutator
 {
     public InjectIncludeExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     private ExpressionFinder _expressionFinder;
 
@@ -36,8 +34,7 @@ public class InjectIncludeExpressionMutator : ExpressionMutator
 
         var prm = Expression.Parameter(entityType, "prm");
 
-        if (navigations != null
-            && navigations.Any())
+        if (navigations != null && navigations.Any())
         {
             var j = random.Next(navigations.Count);
             var navigation = navigations[j];
@@ -46,10 +43,13 @@ public class InjectIncludeExpressionMutator : ExpressionMutator
 
             var injector = new ExpressionInjector(
                 _expressionFinder.FoundExpressions[i],
-                e => Expression.Call(
-                    includeMethod,
-                    e,
-                    Expression.Lambda(Expression.Property(prm, navigation.Name), prm)));
+                e =>
+                    Expression.Call(
+                        includeMethod,
+                        e,
+                        Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
+                    )
+            );
 
             return injector.Visit(expression);
         }
@@ -76,8 +76,7 @@ public class InjectIncludeExpressionMutator : ExpressionMutator
 
         public void TryAddType(Type type)
         {
-            if (!type.IsValueType
-                && _depth < MaxDepth)
+            if (!type.IsValueType && _depth < MaxDepth)
             {
                 var entityType = _mutator.Context.Model.FindEntityType(type);
                 if (entityType != null)
@@ -99,8 +98,10 @@ public class InjectIncludeExpressionMutator : ExpressionMutator
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
-            if (node.Type.IsGenericType
-                && node.Type.GetGenericTypeDefinition() == typeof(EntityQueryable<>))
+            if (
+                node.Type.IsGenericType
+                && node.Type.GetGenericTypeDefinition() == typeof(EntityQueryable<>)
+            )
             {
                 FoundExpressions.Add(node);
             }

@@ -28,7 +28,8 @@ namespace System.ServiceModel.PeerResolvers
         PeerNodeAddress nodeAddress;
         ChannelFactory<IPeerResolverClient> channelFactory;
         PeerReferralPolicy referralPolicy;
-        string bindingName, bindingConfigurationName;
+        string bindingName,
+            bindingConfigurationName;
         bool? shareReferrals;
         int updateSuccessful = 1;
 
@@ -70,7 +71,12 @@ namespace System.ServiceModel.PeerResolvers
             }
         }
 
-        public override void Initialize(EndpointAddress address, Binding binding, ClientCredentials credentials, PeerReferralPolicy referralPolicy)
+        public override void Initialize(
+            EndpointAddress address,
+            Binding binding,
+            ClientCredentials credentials,
+            PeerReferralPolicy referralPolicy
+        )
         {
             this.address = address;
             this.binding = binding;
@@ -90,26 +96,29 @@ namespace System.ServiceModel.PeerResolvers
             return (IPeerResolverClient)channelFactory.CreateChannel();
         }
 
-
         void Validate()
         {
             if (address == null || binding == null)
                 PeerExceptionHelper.ThrowArgument_InsufficientResolverSettings();
-
         }
 
         // Register address for a node participating in a mesh identified by meshId with the resolver service
-        public override object Register(string meshId, PeerNodeAddress nodeAddress, TimeSpan timeout)
+        public override object Register(
+            string meshId,
+            PeerNodeAddress nodeAddress,
+            TimeSpan timeout
+        )
         {
             if (opened)
             {
-
                 long scopeId = -1;
                 bool multipleScopes = false;
 
                 if (nodeAddress.IPAddresses.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MustRegisterMoreThanZeroAddresses)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.MustRegisterMoreThanZeroAddresses))
+                    );
                 }
 
                 foreach (IPAddress address in nodeAddress.IPAddresses)
@@ -137,10 +146,14 @@ namespace System.ServiceModel.PeerResolvers
 
                 if (addresslist.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.AmbiguousConnectivitySpec)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(SR.GetString(SR.AmbiguousConnectivitySpec))
+                    );
                 }
 
-                ReadOnlyCollection<IPAddress> addresses = new ReadOnlyCollection<IPAddress>(addresslist);
+                ReadOnlyCollection<IPAddress> addresses = new ReadOnlyCollection<IPAddress>(
+                    addresslist
+                );
                 this.meshId = meshId;
                 this.nodeAddress = new PeerNodeAddress(nodeAddress.EndpointAddress, addresses);
                 RegisterInfo info = new RegisterInfo(clientId, meshId, this.nodeAddress);
@@ -176,7 +189,15 @@ namespace System.ServiceModel.PeerResolvers
                     int oldValue = Interlocked.Exchange(ref this.updateSuccessful, 1);
                     if (oldValue == 0)
                     {
-                        SendUpdate(new UpdateInfo(this.registrationId, this.clientId, this.meshId, this.nodeAddress), ServiceDefaults.SendTimeout);
+                        SendUpdate(
+                            new UpdateInfo(
+                                this.registrationId,
+                                this.clientId,
+                                this.meshId,
+                                this.nodeAddress
+                            ),
+                            ServiceDefaults.SendTimeout
+                        );
                         return;
                     }
 
@@ -208,7 +229,8 @@ namespace System.ServiceModel.PeerResolvers
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
             }
         }
@@ -246,11 +268,20 @@ namespace System.ServiceModel.PeerResolvers
         }
 
         // Updates a node's registration with the resolver service.
-        public override void Update(object registrationId, PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
+        public override void Update(
+            object registrationId,
+            PeerNodeAddress updatedNodeAddress,
+            TimeSpan timeout
+        )
         {
             if (opened)
             {
-                UpdateInfo info = new UpdateInfo(this.registrationId, clientId, meshId, updatedNodeAddress);
+                UpdateInfo info = new UpdateInfo(
+                    this.registrationId,
+                    clientId,
+                    meshId,
+                    updatedNodeAddress
+                );
                 this.nodeAddress = updatedNodeAddress;
                 SendUpdate(info, timeout);
             }
@@ -281,18 +312,22 @@ namespace System.ServiceModel.PeerResolvers
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 Interlocked.Exchange(ref this.updateSuccessful, 0);
-
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 Interlocked.Exchange(ref this.updateSuccessful, 0);
                 throw;
             }
         }
 
         // Query the resolver service for addresses associated with a mesh ID
-        public override ReadOnlyCollection<PeerNodeAddress> Resolve(string meshId, int maxAddresses, TimeSpan timeout)
+        public override ReadOnlyCollection<PeerNodeAddress> Resolve(
+            string meshId,
+            int maxAddresses,
+            TimeSpan timeout
+        )
         {
             ResolveResponseInfo result = null;
             IList<PeerNodeAddress> addresses = null;
@@ -325,7 +360,8 @@ namespace System.ServiceModel.PeerResolvers
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     opened = false;
                     throw;
                 }
@@ -338,7 +374,8 @@ namespace System.ServiceModel.PeerResolvers
                     bool valid = true;
                     long scopeId = -1;
 
-                    if (nodeaddr == null) continue;
+                    if (nodeaddr == null)
+                        continue;
 
                     foreach (IPAddress addr in nodeaddr.IPAddresses)
                     {
@@ -365,6 +402,7 @@ namespace System.ServiceModel.PeerResolvers
 
             return new ReadOnlyCollection<PeerNodeAddress>(output_addresses);
         }
+
         internal string BindingName
         {
             get { return bindingName; }
@@ -380,11 +418,17 @@ namespace System.ServiceModel.PeerResolvers
         public override bool Equals(object other)
         {
             PeerDefaultCustomResolverClient that = other as PeerDefaultCustomResolverClient;
-            if ((that == null) ||
-                    (this.referralPolicy != that.referralPolicy) || !this.address.Equals(that.address))
+            if (
+                (that == null)
+                || (this.referralPolicy != that.referralPolicy)
+                || !this.address.Equals(that.address)
+            )
                 return false;
             if (this.BindingName != null || this.BindingConfigurationName != null)
-                return ((this.BindingName == that.BindingName) && (this.BindingConfigurationName == that.BindingConfigurationName));
+                return (
+                    (this.BindingName == that.BindingName)
+                    && (this.BindingConfigurationName == that.BindingConfigurationName)
+                );
             else
                 return this.binding.Equals(that.binding);
         }
@@ -395,4 +439,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

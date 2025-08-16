@@ -10,17 +10,17 @@ namespace System.ServiceModel
         MD5,
         Sha1,
         Sha256,
-        Sha512
+        Sha512,
     }
 
     static class MsmqSecureHashAlgorithmHelper
     {
         public static bool IsDefined(MsmqSecureHashAlgorithm algorithm)
         {
-            return algorithm == MsmqSecureHashAlgorithm.MD5 ||
-                algorithm == MsmqSecureHashAlgorithm.Sha1 ||
-                algorithm == MsmqSecureHashAlgorithm.Sha256 ||
-                algorithm == MsmqSecureHashAlgorithm.Sha512;
+            return algorithm == MsmqSecureHashAlgorithm.MD5
+                || algorithm == MsmqSecureHashAlgorithm.Sha1
+                || algorithm == MsmqSecureHashAlgorithm.Sha256
+                || algorithm == MsmqSecureHashAlgorithm.Sha512;
         }
 
         public static int ToInt32(MsmqSecureHashAlgorithm algorithm)

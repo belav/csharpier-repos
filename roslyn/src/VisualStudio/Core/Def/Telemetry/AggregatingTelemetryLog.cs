@@ -29,16 +29,24 @@ namespace Microsoft.CodeAnalysis.Telemetry
         private readonly string _eventName;
         private readonly AggregatingTelemetryLogManager _aggregatingTelemetryLogManager;
 
-        private ImmutableDictionary<string, IHistogram<int>> _histograms = ImmutableDictionary<string, IHistogram<int>>.Empty;
+        private ImmutableDictionary<string, IHistogram<int>> _histograms = ImmutableDictionary<
+            string,
+            IHistogram<int>
+        >.Empty;
 
         /// <summary>
         /// Creates a new aggregating telemetry log
         /// </summary>
         /// <param name="session">Telemetry session used to post events</param>
         /// <param name="functionId">Used to derive meter name</param>
-        /// <param name="bucketBoundaries">Optional values indicating bucket boundaries in milliseconds. If not specified, 
+        /// <param name="bucketBoundaries">Optional values indicating bucket boundaries in milliseconds. If not specified,
         /// all histograms created will use the default histogram configuration</param>
-        public AggregatingTelemetryLog(TelemetrySession session, FunctionId functionId, double[]? bucketBoundaries, AggregatingTelemetryLogManager aggregatingTelemetryLogManager)
+        public AggregatingTelemetryLog(
+            TelemetrySession session,
+            FunctionId functionId,
+            double[]? bucketBoundaries,
+            AggregatingTelemetryLogManager aggregatingTelemetryLogManager
+        )
         {
             var meterName = TelemetryLogger.GetPropertyName(functionId, "meter");
             var meterProvider = new VSTelemetryMeterProvider();
@@ -64,13 +72,23 @@ namespace Microsoft.CodeAnalysis.Telemetry
             if (!IsEnabled)
                 return;
 
-            if (!logMessage.Properties.TryGetValue(TelemetryLogging.KeyName, out var nameValue) || nameValue is not string metricName)
+            if (
+                !logMessage.Properties.TryGetValue(TelemetryLogging.KeyName, out var nameValue)
+                || nameValue is not string metricName
+            )
                 throw ExceptionUtilities.Unreachable();
 
-            if (!logMessage.Properties.TryGetValue(TelemetryLogging.KeyValue, out var valueValue) || valueValue is not int value)
+            if (
+                !logMessage.Properties.TryGetValue(TelemetryLogging.KeyValue, out var valueValue)
+                || valueValue is not int value
+            )
                 throw ExceptionUtilities.Unreachable();
 
-            var histogram = ImmutableInterlocked.GetOrAdd(ref _histograms, metricName, metricName => _meter.CreateHistogram<int>(metricName, _histogramConfiguration));
+            var histogram = ImmutableInterlocked.GetOrAdd(
+                ref _histograms,
+                metricName,
+                metricName => _meter.CreateHistogram<int>(metricName, _histogramConfiguration)
+            );
 
             histogram.Record(value);
 
@@ -82,7 +100,10 @@ namespace Microsoft.CodeAnalysis.Telemetry
             if (!IsEnabled)
                 return null;
 
-            if (!logMessage.Properties.TryGetValue(TelemetryLogging.KeyName, out var nameValue) || nameValue is not string)
+            if (
+                !logMessage.Properties.TryGetValue(TelemetryLogging.KeyName, out var nameValue)
+                || nameValue is not string
+            )
                 throw ExceptionUtilities.Unreachable();
 
             return new TimedTelemetryLogBlock(logMessage, minThresholdMs, telemetryLog: this);

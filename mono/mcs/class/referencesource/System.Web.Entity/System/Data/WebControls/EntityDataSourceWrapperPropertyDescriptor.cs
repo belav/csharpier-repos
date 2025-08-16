@@ -7,18 +7,18 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System;
-using System.Data;
-using System.Configuration;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
-using System.Reflection;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Text;
 
 namespace System.Web.UI.WebControls
@@ -29,7 +29,7 @@ namespace System.Web.UI.WebControls
     /// </summary>
     /// <remarks>
     /// This class essentially glues together a wrapper collection (roughly speaking
-    /// the 'data' exposed by the control) and the column (which defines the metadata 
+    /// the 'data' exposed by the control) and the column (which defines the metadata
     /// and behaviors for the current property).
     /// </remarks>
     internal sealed class EntityDataSourceWrapperPropertyDescriptor : PropertyDescriptor
@@ -37,8 +37,14 @@ namespace System.Web.UI.WebControls
         private readonly EntityDataSourceWrapperCollection _collection;
         private readonly EntityDataSourceColumn _column;
 
-        internal EntityDataSourceWrapperPropertyDescriptor(EntityDataSourceWrapperCollection collection, EntityDataSourceColumn column)
-            : base(EntityDataSourceUtil.CheckArgumentNull(column, "column").DisplayName, new Attribute[] { })
+        internal EntityDataSourceWrapperPropertyDescriptor(
+            EntityDataSourceWrapperCollection collection,
+            EntityDataSourceColumn column
+        )
+            : base(
+                EntityDataSourceUtil.CheckArgumentNull(column, "column").DisplayName,
+                new Attribute[] { }
+            )
         {
             EntityDataSourceUtil.CheckArgumentNull(collection, "collection");
 
@@ -73,7 +79,9 @@ namespace System.Web.UI.WebControls
 
         public override void ResetValue(object component)
         {
-            throw new InvalidOperationException(Strings.ValueNotResettable(this.ComponentType.Name));
+            throw new InvalidOperationException(
+                Strings.ValueNotResettable(this.ComponentType.Name)
+            );
         }
 
         public override object GetValue(object component)
@@ -98,7 +106,7 @@ namespace System.Web.UI.WebControls
         private EntityDataSourceWrapper GetWrapper(object component)
         {
             // Validate that the component comes from the collection to which
-            // this descriptor is bound. Elements of the collection are 
+            // this descriptor is bound. Elements of the collection are
             // non-null wrappers instances.
             EntityDataSourceUtil.CheckArgumentNull(component, "component");
 

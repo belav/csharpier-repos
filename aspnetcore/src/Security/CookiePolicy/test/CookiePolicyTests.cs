@@ -387,17 +387,17 @@ public class CookiePolicyTests
                         );
                         app.Run(context =>
                         {
-                            Assert.Throws<NotImplementedException>(
-                                () => context.Response.Cookies.Delete("A")
+                            Assert.Throws<NotImplementedException>(() =>
+                                context.Response.Cookies.Delete("A")
                             );
-                            Assert.Throws<NotImplementedException>(
-                                () => context.Response.Cookies.Delete("A", new CookieOptions())
+                            Assert.Throws<NotImplementedException>(() =>
+                                context.Response.Cookies.Delete("A", new CookieOptions())
                             );
-                            Assert.Throws<NotImplementedException>(
-                                () => context.Response.Cookies.Append("A", "A")
+                            Assert.Throws<NotImplementedException>(() =>
+                                context.Response.Cookies.Append("A", "A")
                             );
-                            Assert.Throws<NotImplementedException>(
-                                () => context.Response.Cookies.Append("A", "A", new CookieOptions())
+                            Assert.Throws<NotImplementedException>(() =>
+                                context.Response.Cookies.Append("A", "A", new CookieOptions())
                             );
                             return context.Response.WriteAsync("Done");
                         });

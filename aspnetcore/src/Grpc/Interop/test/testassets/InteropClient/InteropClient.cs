@@ -759,8 +759,8 @@ public class InteropClient : IDisposable
             ResponseSize = 314159,
             Payload = CreateZerosPayload(271828),
         };
-        var e = Assert.Throws<RpcException>(
-            () => client.UnaryCall(probeRequest, CreateClientCompressionMetadata(false))
+        var e = Assert.Throws<RpcException>(() =>
+            client.UnaryCall(probeRequest, CreateClientCompressionMetadata(false))
         );
         Assert.AreEqual(StatusCode.InvalidArgument, e.Status.StatusCode);
 

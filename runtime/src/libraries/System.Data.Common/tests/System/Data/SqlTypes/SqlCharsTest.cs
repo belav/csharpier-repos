@@ -21,12 +21,12 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
-using System.IO;
-using System.Xml;
 using System.Data.SqlTypes;
 using System.Globalization;
+using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {
@@ -147,9 +147,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal("string", qualifiedName.Name);
         }
 
-        internal void ReadWriteXmlTestInternal(string xml,
-                            string testval,
-                            string unit_test_id)
+        internal void ReadWriteXmlTestInternal(string xml, string testval, string unit_test_id)
         {
             SqlString test;
             SqlString test1;
@@ -178,7 +176,8 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void ReadWriteXmlTest()
         {
-            string xml1 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><string>This is a test string</string>";
+            string xml1 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><string>This is a test string</string>";
             string xml2 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><string>a</string>";
             string strtest1 = "This is a test string";
             char strtest2 = 'a';
@@ -347,7 +346,9 @@ namespace System.Data.Tests.SqlTypes
             char[] c2 = new char[10];
             SqlChars chars = new SqlChars(c2);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => chars.Write(0, c1, c1.Length + 5, c1.Length));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                chars.Write(0, c1, c1.Length + 5, c1.Length)
+            );
         }
 
         [Fact]

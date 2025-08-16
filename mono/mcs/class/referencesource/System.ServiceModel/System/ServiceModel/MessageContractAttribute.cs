@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel
 {
+    using System.Net.Security;
     using System.Reflection;
     using System.ServiceModel.Channels;
-    using System.Net.Security;
-    using System.ServiceModel.Security;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
     [AttributeUsage(ServiceModelAttributeTargets.MessageContract, AllowMultiple = false)]
     public sealed class MessageContractAttribute : Attribute
@@ -22,14 +22,13 @@ namespace System.ServiceModel
         internal const string ProtectionLevelPropertyName = "ProtectionLevel";
         public ProtectionLevel ProtectionLevel
         {
-            get
-            {
-                return this.protectionLevel;
-            }
+            get { return this.protectionLevel; }
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -48,27 +47,25 @@ namespace System.ServiceModel
 
         public string WrapperName
         {
-            get
-            {
-                return wrappedName;
-            }
+            get { return wrappedName; }
             set
             {
                 if (value == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 if (value == string.Empty)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.SFxWrapperNameCannotBeEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.SFxWrapperNameCannotBeEmpty)
+                        )
+                    );
                 wrappedName = value;
             }
         }
 
         public string WrapperNamespace
         {
-            get
-            {
-                return wrappedNs;
-            }
+            get { return wrappedNs; }
             set
             {
                 if (!string.IsNullOrEmpty(value))

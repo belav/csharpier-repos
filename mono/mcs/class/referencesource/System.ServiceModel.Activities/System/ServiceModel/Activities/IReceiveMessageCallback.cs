@@ -8,6 +8,9 @@ namespace System.ServiceModel.Activities
 
     public interface IReceiveMessageCallback
     {
-        void OnReceiveMessage(OperationContext operationContext, ExecutionProperties activityExecutionProperties);
+        void OnReceiveMessage(
+            OperationContext operationContext,
+            ExecutionProperties activityExecutionProperties
+        );
     }
 }

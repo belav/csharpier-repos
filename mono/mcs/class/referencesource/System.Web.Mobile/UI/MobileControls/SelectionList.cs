@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="SelectionList.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -11,12 +11,12 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -31,15 +31,28 @@ namespace System.Web.UI.MobileControls
         DefaultEvent("SelectedIndexChanged"),
         DefaultProperty("DataSource"),
         Designer(typeof(System.Web.UI.Design.MobileControls.SelectionListDesigner)),
-        DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerSelectionListAdapter)),
-        Editor(typeof(System.Web.UI.Design.MobileControls.SelectionListComponentEditor), typeof(ComponentEditor)),
+        DesignerAdapter(
+            typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerSelectionListAdapter)
+        ),
+        Editor(
+            typeof(System.Web.UI.Design.MobileControls.SelectionListComponentEditor),
+            typeof(ComponentEditor)
+        ),
         ToolboxData("<{0}:SelectionList runat=\"server\"></{0}:SelectionList>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign),
         ValidationProperty("Selection")
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class SelectionList : MobileControl, IPostBackDataHandler, IListControl
     {
         private static readonly Object EventItemDataBind = new Object();
@@ -47,10 +60,13 @@ namespace System.Web.UI.MobileControls
 
         private ListDataHelper _dataHelper;
         private int _cachedSelectedIndex = -1;
-        
-        private ListDataHelper DataHelper {
-            get {
-                if (_dataHelper == null) {
+
+        private ListDataHelper DataHelper
+        {
+            get
+            {
+                if (_dataHelper == null)
+                {
                     _dataHelper = new ListDataHelper(this, ViewState);
                 }
 
@@ -64,7 +80,7 @@ namespace System.Web.UI.MobileControls
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.IListControl.OnItemDataBind"]/*' />
         /// <internalonly/>
-        void IListControl.OnItemDataBind(ListDataBindEventArgs e) 
+        void IListControl.OnItemDataBind(ListDataBindEventArgs e)
         {
             OnItemDataBind(e);
         }
@@ -73,10 +89,7 @@ namespace System.Web.UI.MobileControls
         /// <internalonly/>
         bool IListControl.TrackingViewState
         {
-            get
-            {
-                return IsTrackingViewState;
-            }
+            get { return IsTrackingViewState; }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.DataSource"]/*' />
@@ -93,25 +106,15 @@ namespace System.Web.UI.MobileControls
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.List_DataSource)
         ]
-        public virtual Object DataSource 
+        public virtual Object DataSource
         {
-            get 
-            {
-                return DataHelper.DataSource;
-            }
-
-            set 
-            {
-                DataHelper.DataSource = value;
-            }
+            get { return DataHelper.DataSource; }
+            set { DataHelper.DataSource = value; }
         }
 
         private IEnumerable ResolvedDataSource
         {
-            get
-            {
-                return DataHelper.ResolvedDataSource;
-            }
+            get { return DataHelper.ResolvedDataSource; }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.DataMember"]/*' />
@@ -120,19 +123,14 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Data),
             MobileSysDescription(SR.List_DataMember),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataMemberConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.DataMemberConverter)
+            )
         ]
         public virtual String DataMember
         {
-            get 
-            {
-                return DataHelper.DataMember;
-            }
-
-            set 
-            {
-                DataHelper.DataMember = value;
-            }
+            get { return DataHelper.DataMember; }
+            set { DataHelper.DataMember = value; }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.DataTextField"]/*' />
@@ -142,16 +140,10 @@ namespace System.Web.UI.MobileControls
             MobileSysDescription(SR.List_DataTextField),
             TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataFieldConverter))
         ]
-        public String DataTextField 
+        public String DataTextField
         {
-            get 
-            {
-                return DataHelper.DataTextField;
-            }
-            set 
-            {
-                DataHelper.DataTextField = value;
-            }
+            get { return DataHelper.DataTextField; }
+            set { DataHelper.DataTextField = value; }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.DataValueField"]/*' />
@@ -161,18 +153,12 @@ namespace System.Web.UI.MobileControls
             MobileSysDescription(SR.List_DataValueField),
             TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.DataFieldConverter))
         ]
-        public String DataValueField 
+        public String DataValueField
         {
-            get 
-            {
-                return DataHelper.DataValueField;
-            }
-            set 
-            {
-                DataHelper.DataValueField = value;
-            }
+            get { return DataHelper.DataValueField; }
+            set { DataHelper.DataValueField = value; }
         }
-        
+
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.IsMultiSelect"]/*' />
         [
             Bindable(false),
@@ -183,8 +169,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                return (SelectType == ListSelectType.MultiSelectListBox  || 
-                        SelectType == ListSelectType.CheckBox);
+                return (
+                    SelectType == ListSelectType.MultiSelectListBox
+                    || SelectType == ListSelectType.CheckBox
+                );
             }
         }
 
@@ -219,11 +207,11 @@ namespace System.Web.UI.MobileControls
             Browsable(false),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int SelectedIndex 
+        public int SelectedIndex
         {
-            get 
+            get
             {
-                for (int i = 0; i < Items.Count; i++) 
+                for (int i = 0; i < Items.Count; i++)
                 {
                     if (Items[i].Selected)
                     {
@@ -232,21 +220,22 @@ namespace System.Web.UI.MobileControls
                 }
                 return -1;
             }
-            set 
+            set
             {
                 // if we have no items, save the selectedindex
                 // for later databinding
-                if (Items.Count == 0) 
+                if (Items.Count == 0)
                 {
                     _cachedSelectedIndex = value;
                 }
-                else 
+                else
                 {
                     if (value < -1 || value >= Items.Count)
                     {
                         throw new ArgumentOutOfRangeException(
                             "SelectedIndex",
-                            SR.GetString(SR.SelectionList_OutOfRange,value));
+                            SR.GetString(SR.SelectionList_OutOfRange, value)
+                        );
                     }
                     ClearSelection();
                     if (value >= 0)
@@ -283,17 +272,17 @@ namespace System.Web.UI.MobileControls
         [
             Bindable(false),
             DefaultValue(null),
-            Editor(typeof(System.Web.UI.Design.MobileControls.ItemCollectionEditor), typeof(UITypeEditor)),
+            Editor(
+                typeof(System.Web.UI.Design.MobileControls.ItemCollectionEditor),
+                typeof(UITypeEditor)
+            ),
             MergableProperty(false),
             MobileSysDescription(SR.List_Items),
             PersistenceMode(PersistenceMode.InnerDefaultProperty)
         ]
         public MobileListItemCollection Items
         {
-            get
-            {
-                return DataHelper.Items;
-            }
+            get { return DataHelper.Items; }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.AddParsedSubObject"]/*' />
@@ -304,13 +293,12 @@ namespace System.Web.UI.MobileControls
                 if (obj is MobileListItem)
                 {
                     DataHelper.AddItem((MobileListItem)obj);
-                    if(_cachedSelectedIndex != -1 &&
-                       DataHelper.Items.Count > _cachedSelectedIndex)
+                    if (_cachedSelectedIndex != -1 && DataHelper.Items.Count > _cachedSelectedIndex)
                     {
                         SelectedIndex = _cachedSelectedIndex;
                         _cachedSelectedIndex = -1;
                     }
-                } 
+                }
                 else
                 {
                     base.AddParsedSubObject(obj);
@@ -319,10 +307,10 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.OnPreRender"]/*' />
-        protected override void OnPreRender(EventArgs e) 
+        protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            if (Page != null && IsMultiSelect) 
+            if (Page != null && IsMultiSelect)
             {
                 // ensure postback when no item is selected
                 Page.RegisterRequiresPostBack(this);
@@ -330,7 +318,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.OnDataBinding"]/*' />
-        protected override void OnDataBinding(EventArgs e) 
+        protected override void OnDataBinding(EventArgs e)
         {
             base.OnDataBinding(e);
 
@@ -339,7 +327,7 @@ namespace System.Web.UI.MobileControls
                 CreateItems(ResolvedDataSource);
             }
 
-            if (_cachedSelectedIndex != -1) 
+            if (_cachedSelectedIndex != -1)
             {
                 SelectedIndex = _cachedSelectedIndex;
                 _cachedSelectedIndex = -1;
@@ -347,7 +335,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.CreateItems"]/*' />
-        protected virtual void CreateItems(IEnumerable dataSource) 
+        protected virtual void CreateItems(IEnumerable dataSource)
         {
             DataHelper.CreateItems(dataSource);
         }
@@ -359,20 +347,15 @@ namespace System.Web.UI.MobileControls
         ]
         public event EventHandler SelectedIndexChanged
         {
-            add 
-            {
-                Events.AddHandler(EventSelectedIndexChanged, value);
-            }
-            remove 
-            {
-                Events.RemoveHandler(EventSelectedIndexChanged, value);
-            }
+            add { Events.AddHandler(EventSelectedIndexChanged, value); }
+            remove { Events.RemoveHandler(EventSelectedIndexChanged, value); }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.OnSelectedIndexChanged"]/*' />
-        protected virtual void OnSelectedIndexChanged(EventArgs e) 
+        protected virtual void OnSelectedIndexChanged(EventArgs e)
         {
-            EventHandler onSelectedIndexChangedHandler = (EventHandler)Events[EventSelectedIndexChanged];
+            EventHandler onSelectedIndexChangedHandler = (EventHandler)
+                Events[EventSelectedIndexChanged];
             if (onSelectedIndexChangedHandler != null)
             {
                 onSelectedIndexChangedHandler(this, e);
@@ -380,26 +363,18 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.ItemDataBind"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.List_OnItemDataBind)
-        ]
-        public event ListDataBindEventHandler ItemDataBind 
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.List_OnItemDataBind)]
+        public event ListDataBindEventHandler ItemDataBind
         {
-            add 
-            {
-                Events.AddHandler(EventItemDataBind, value);
-            }
-            remove 
-            {
-                Events.RemoveHandler(EventItemDataBind, value);
-            }
+            add { Events.AddHandler(EventItemDataBind, value); }
+            remove { Events.RemoveHandler(EventItemDataBind, value); }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.OnItemDataBind"]/*' />
-        protected virtual void OnItemDataBind(ListDataBindEventArgs e) 
+        protected virtual void OnItemDataBind(ListDataBindEventArgs e)
         {
-            ListDataBindEventHandler onItemDataBindHandler = (ListDataBindEventHandler)Events[EventItemDataBind];
+            ListDataBindEventHandler onItemDataBindHandler = (ListDataBindEventHandler)
+                Events[EventItemDataBind];
             if (onItemDataBindHandler != null)
             {
                 onItemDataBindHandler(this, e);
@@ -407,26 +382,26 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <internalonly/>
-        protected bool LoadPostData(String postDataKey, NameValueCollection postCollection) 
+        protected bool LoadPostData(String postDataKey, NameValueCollection postCollection)
         {
             bool dataChanged;
-            bool handledByAdapter =
-                Adapter.LoadPostData(postDataKey,
-                                     postCollection,
-                                     SelectedIndicesInternal.ToArray(typeof(int)),
-                                     out dataChanged);
+            bool handledByAdapter = Adapter.LoadPostData(
+                postDataKey,
+                postCollection,
+                SelectedIndicesInternal.ToArray(typeof(int)),
+                out dataChanged
+            );
 
             if (!handledByAdapter)
             {
-                throw new
-                    Exception(SR.GetString(SR.SelectionList_AdapterNotHandlingLoadPostData));
+                throw new Exception(SR.GetString(SR.SelectionList_AdapterNotHandlingLoadPostData));
             }
 
             return dataChanged;
         }
 
         /// <internalonly/>
-        protected void RaisePostDataChangedEvent() 
+        protected void RaisePostDataChangedEvent()
         {
             OnSelectedIndexChanged(EventArgs.Empty);
         }
@@ -445,10 +420,7 @@ namespace System.Web.UI.MobileControls
                 Object o = ViewState["SelectType"];
                 return (o != null) ? (ListSelectType)o : ListSelectType.DropDown;
             }
-            set
-            {
-                ViewState["SelectType"] = value;
-            }
+            set { ViewState["SelectType"] = value; }
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.Title"]/*' />
@@ -460,14 +432,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String Title
         {
-            get
-            {
-                return ToString(ViewState["Title"]);
-            }
-            set
-            {
-                ViewState["Title"] = value;
-            }
+            get { return ToString(ViewState["Title"]); }
+            set { ViewState["Title"] = value; }
         }
 
         /////////////////////////////////////////////////////////////////////////
@@ -475,7 +441,7 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.TrackViewState"]/*' />
-        protected override void TrackViewState() 
+        protected override void TrackViewState()
         {
             base.TrackViewState();
             if (DataHelper.HasItems())
@@ -485,7 +451,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.SaveViewState"]/*' />
-        protected override Object SaveViewState() 
+        protected override Object SaveViewState()
         {
             Object baseState = base.SaveViewState();
             Items.SaveSelection = true;
@@ -495,36 +461,36 @@ namespace System.Web.UI.MobileControls
             {
                 return new Object[] { baseState, items };
             }
-            
+
             return null;
         }
 
         /// <include file='doc\SelectionList.uex' path='docs/doc[@for="SelectionList.LoadViewState"]/*' />
-        protected override void LoadViewState(Object savedState) 
+        protected override void LoadViewState(Object savedState)
         {
-            if (savedState != null) 
+            if (savedState != null)
             {
                 Object[] state = (Object[])savedState;
                 if (state[0] != null)
                 {
                     base.LoadViewState(state[0]);
                 }
-                
+
                 // restore state of items
                 Items.SaveSelection = true;
                 ((IStateManager)Items).LoadViewState(state[1]);
             }
         }
 
-        private ArrayList SelectedIndicesInternal 
+        private ArrayList SelectedIndicesInternal
         {
-            get 
+            get
             {
                 int count = Items.Count;
-                ArrayList selectedIndices = new ArrayList(count); 
-                for (int i = 0; i < count; i++) 
+                ArrayList selectedIndices = new ArrayList(count);
+                for (int i = 0; i < count; i++)
                 {
-                    if (Items[i].Selected)  
+                    if (Items[i].Selected)
                     {
                         selectedIndices.Add(i);
                     }
@@ -533,7 +499,7 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        internal void ClearSelection() 
+        internal void ClearSelection()
         {
             for (int i = 0; i < Items.Count; i++)
             {
@@ -542,11 +508,13 @@ namespace System.Web.UI.MobileControls
         }
 
         #region IPostBackDataHandler implementation
-        bool IPostBackDataHandler.LoadPostData(String key, NameValueCollection data) {
+        bool IPostBackDataHandler.LoadPostData(String key, NameValueCollection data)
+        {
             return LoadPostData(key, data);
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
         #endregion

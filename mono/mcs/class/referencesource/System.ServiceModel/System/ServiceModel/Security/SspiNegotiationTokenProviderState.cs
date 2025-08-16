@@ -3,16 +3,16 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IdentityModel.Claims;
-    using System.ServiceModel;
     using System.IdentityModel.Policy;
-    using System.Security.Principal;
+    using System.Net;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-    using System.Collections.Generic;
+    using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.Net;
-    using System.Diagnostics;
 
     class SspiNegotiationTokenProviderState : IssuanceTokenProviderState
     {
@@ -32,18 +32,12 @@ namespace System.ServiceModel.Security
 
         public ISspiNegotiation SspiNegotiation
         {
-            get
-            {
-                return this.sspiNegotiation;
-            }
+            get { return this.sspiNegotiation; }
         }
 
         internal HashAlgorithm NegotiationDigest
         {
-            get
-            {
-                return this.negotiationDigest;
-            }
+            get { return this.negotiationDigest; }
         }
 
         public override void Dispose()

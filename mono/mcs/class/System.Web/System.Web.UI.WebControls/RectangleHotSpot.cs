@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,65 +28,64 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public sealed class RectangleHotSpot: HotSpot
-	{
-		public override string GetCoordinates ()
-		{
-			return Left + "," + Top + "," + Right + "," + Bottom;
-		}
-		
-		protected internal override string MarkupName {
-			get { return "rect"; }
-		}
-		
-	    [DefaultValueAttribute (0)]
-		public int Left {
-			get {
-				object o = ViewState ["Left"];
-				return o != null ? (int) o : 0;
-			}
-			set {
-				ViewState ["Left"] = value;
-			}
-		}
+    public sealed class RectangleHotSpot : HotSpot
+    {
+        public override string GetCoordinates()
+        {
+            return Left + "," + Top + "," + Right + "," + Bottom;
+        }
 
-	    [DefaultValueAttribute (0)]
-		public int Top {
-			get {
-				object o = ViewState ["Top"];
-				return o != null ? (int) o : 0;
-			}
-			set {
-				ViewState ["Top"] = value;
-			}
-		}
+        protected internal override string MarkupName
+        {
+            get { return "rect"; }
+        }
 
-	    [DefaultValueAttribute (0)]
-		public int Right {
-			get {
-				object o = ViewState ["Right"];
-				return o != null ? (int) o : 0;
-			}
-			set {
-				ViewState ["Right"] = value;
-			}
-		}
+        [DefaultValueAttribute(0)]
+        public int Left
+        {
+            get
+            {
+                object o = ViewState["Left"];
+                return o != null ? (int)o : 0;
+            }
+            set { ViewState["Left"] = value; }
+        }
 
-	    [DefaultValueAttribute (0)]
-		public int Bottom {
-			get {
-				object o = ViewState ["Bottom"];
-				return o != null ? (int) o : 0;
-			}
-			set {
-				ViewState ["Bottom"] = value;
-			}
-		}
-	}
+        [DefaultValueAttribute(0)]
+        public int Top
+        {
+            get
+            {
+                object o = ViewState["Top"];
+                return o != null ? (int)o : 0;
+            }
+            set { ViewState["Top"] = value; }
+        }
+
+        [DefaultValueAttribute(0)]
+        public int Right
+        {
+            get
+            {
+                object o = ViewState["Right"];
+                return o != null ? (int)o : 0;
+            }
+            set { ViewState["Right"] = value; }
+        }
+
+        [DefaultValueAttribute(0)]
+        public int Bottom
+        {
+            get
+            {
+                object o = ViewState["Bottom"];
+                return o != null ? (int)o : 0;
+            }
+            set { ViewState["Bottom"] = value; }
+        }
+    }
 }
-

@@ -18,24 +18,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class FunctionPointerTypeSymbolTests : CSharpTestBase
     {
-        private static CSharpCompilation CreateFunctionPointerCompilation(string source, TargetFramework targetFramework = TargetFramework.Standard)
+        private static CSharpCompilation CreateFunctionPointerCompilation(
+            string source,
+            TargetFramework targetFramework = TargetFramework.Standard
+        )
         {
-            return CreateCompilation(source, parseOptions: TestOptions.Regular9, options: TestOptions.UnsafeReleaseDll, targetFramework: targetFramework);
+            return CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.UnsafeReleaseDll,
+                targetFramework: targetFramework
+            );
         }
 
         [InlineData("", RefKind.None, "delegate*<System.Object>")]
         [InlineData("ref", RefKind.Ref, "delegate*<ref System.Object>")]
-        [InlineData("ref readonly", RefKind.RefReadOnly,
-                    "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.Object>")]
+        [InlineData(
+            "ref readonly",
+            RefKind.RefReadOnly,
+            "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.Object>"
+        )]
         [Theory]
-        public void ValidReturnModifiers(string modifier, RefKind expectedKind, string expectedPublicType)
+        public void ValidReturnModifiers(
+            string modifier,
+            RefKind expectedKind,
+            string expectedPublicType
+        )
         {
-            var comp = CreateFunctionPointerCompilation($@"
+            var comp = CreateFunctionPointerCompilation(
+                $@"
 class C
 {{
     unsafe void M(delegate*<{modifier} object> p) {{}}
 
-}}");
+}}"
+            );
             comp.VerifyDiagnostics();
 
             var c = comp.GetTypeByMetadataName("C");
@@ -48,22 +65,28 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var paramType = syntaxTree.GetRoot()
+            var paramType = syntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
-                .Single().ParameterList.Parameters
-                .Single().Type;
+                .Single()
+                .ParameterList.Parameters.Single()
+                .Type;
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, paramType!,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                paramType!,
                 expectedSyntax: $"delegate*<{modifier} object>",
                 expectedType: expectedPublicType,
-                expectedSymbol: expectedPublicType);
+                expectedSymbol: expectedPublicType
+            );
         }
 
         [Fact]
         public void InvalidReturnModifiers()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(
@@ -77,35 +100,55 @@ class C
         delegate*<out string> p8)
     {}
 }
-");
+"
+            );
             comp.VerifyDiagnostics(
-                    // (5,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                    //         delegate*<readonly string> p1,
-                    Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly").WithArguments("readonly").WithLocation(5, 19),
-                    // (6,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                    //         delegate*<readonly ref string> p2,
-                    Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly").WithArguments("readonly").WithLocation(6, 19),
-                    // (7,23): error CS8809: A return type can only have one 'ref' modifier.
-                    //         delegate*<ref ref readonly string> p3,
-                    Diagnostic(ErrorCode.ERR_DupReturnTypeMod, "ref").WithArguments("ref").WithLocation(7, 23),
-                    // (7,27): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                    //         delegate*<ref ref readonly string> p3,
-                    Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly").WithArguments("readonly").WithLocation(7, 27),
-                    // (8,32): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                    //         delegate*<ref readonly readonly string> p4,
-                    Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly").WithArguments("readonly").WithLocation(8, 32),
-                    // (9,19): error CS8808: 'this' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                    //         delegate*<this string> p5,
-                    Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "this").WithArguments("this").WithLocation(9, 19),
-                    // (10,19): error CS8808: 'params' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                    //         delegate*<params string> p6,
-                    Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "params").WithArguments("params").WithLocation(10, 19),
-                    // (11,23): error CS8809: A return type can only have one 'ref' modifier.
-                    //         delegate*<ref ref string> p7)
-                    Diagnostic(ErrorCode.ERR_DupReturnTypeMod, "ref").WithArguments("ref").WithLocation(11, 23),
-                    // (12,19): error CS8808: 'out' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                    //         delegate*<out string> p8)
-                    Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "out").WithArguments("out").WithLocation(12, 19));
+                // (5,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                //         delegate*<readonly string> p1,
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(5, 19),
+                // (6,19): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                //         delegate*<readonly ref string> p2,
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(6, 19),
+                // (7,23): error CS8809: A return type can only have one 'ref' modifier.
+                //         delegate*<ref ref readonly string> p3,
+                Diagnostic(ErrorCode.ERR_DupReturnTypeMod, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(7, 23),
+                // (7,27): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                //         delegate*<ref ref readonly string> p3,
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(7, 27),
+                // (8,32): error CS8808: 'readonly' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                //         delegate*<ref readonly readonly string> p4,
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "readonly")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 32),
+                // (9,19): error CS8808: 'this' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                //         delegate*<this string> p5,
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "this")
+                    .WithArguments("this")
+                    .WithLocation(9, 19),
+                // (10,19): error CS8808: 'params' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                //         delegate*<params string> p6,
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "params")
+                    .WithArguments("params")
+                    .WithLocation(10, 19),
+                // (11,23): error CS8809: A return type can only have one 'ref' modifier.
+                //         delegate*<ref ref string> p7)
+                Diagnostic(ErrorCode.ERR_DupReturnTypeMod, "ref")
+                    .WithArguments("ref")
+                    .WithLocation(11, 23),
+                // (12,19): error CS8808: 'out' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                //         delegate*<out string> p8)
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "out")
+                    .WithArguments("out")
+                    .WithLocation(12, 19)
+            );
 
             var mParams = comp.GetTypeByMetadataName("C").GetMethod("M").Parameters;
             Assert.Equal(8, mParams.Length);
@@ -121,7 +164,9 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var parameterDecls = syntaxTree.GetRoot().DescendantNodes()
+            var parameterDecls = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .SelectMany(m => m.ParameterList.Parameters)
                 .Select(p => p.Type!)
@@ -129,67 +174,94 @@ class C
 
             Assert.Equal(8, parameterDecls.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[0],
                 expectedSyntax: "delegate*<readonly string>",
                 expectedType: "delegate*<System.String>",
-                expectedSymbol: "delegate*<System.String>");
+                expectedSymbol: "delegate*<System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[1],
                 expectedSyntax: "delegate*<readonly ref string>",
                 expectedType: "delegate*<ref System.String>",
-                expectedSymbol: "delegate*<ref System.String>");
+                expectedSymbol: "delegate*<ref System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[2],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[2],
                 expectedSyntax: "delegate*<ref ref readonly string>",
                 expectedType: "delegate*<ref System.String>",
-                expectedSymbol: "delegate*<ref System.String>");
+                expectedSymbol: "delegate*<ref System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[3],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[3],
                 expectedSyntax: "delegate*<ref readonly readonly string>",
                 expectedType: "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.String>",
-                expectedSymbol: "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.String>");
+                expectedSymbol: "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[4],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[4],
                 expectedSyntax: "delegate*<this string>",
                 expectedType: "delegate*<System.String>",
-                expectedSymbol: "delegate*<System.String>");
+                expectedSymbol: "delegate*<System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[5],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[5],
                 expectedSyntax: "delegate*<params string>",
                 expectedType: "delegate*<System.String>",
-                expectedSymbol: "delegate*<System.String>");
+                expectedSymbol: "delegate*<System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[6],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[6],
                 expectedSyntax: "delegate*<ref ref string>",
                 expectedType: "delegate*<ref System.String>",
-                expectedSymbol: "delegate*<ref System.String>");
+                expectedSymbol: "delegate*<ref System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[7],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[7],
                 expectedSyntax: "delegate*<out string>",
                 expectedType: "delegate*<System.String>",
-                expectedSymbol: "delegate*<System.String>");
+                expectedSymbol: "delegate*<System.String>"
+            );
 
-            static void verifyRefKind(RefKind expected, ParameterSymbol actual)
-                => Assert.Equal(expected, ((FunctionPointerTypeSymbol)actual.Type).Signature.RefKind);
+            static void verifyRefKind(RefKind expected, ParameterSymbol actual) =>
+                Assert.Equal(expected, ((FunctionPointerTypeSymbol)actual.Type).Signature.RefKind);
         }
 
         [Fact]
         public void InvalidModifiersOnVoidReturnType()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(
         delegate*<ref void> p1,
         delegate*<ref readonly void> p2) {}
-}");
+}"
+            );
             comp.VerifyDiagnostics(
-                    // (5,19): error CS1547: Keyword 'void' cannot be used in this context
-                    //         delegate*<ref void> p1,
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "ref void").WithLocation(5, 19),
-                    // (6,19): error CS1547: Keyword 'void' cannot be used in this context
-                    //         delegate*<ref readonly void> p2) {}
-                    Diagnostic(ErrorCode.ERR_NoVoidHere, "ref readonly void").WithLocation(6, 19));
+                // (5,19): error CS1547: Keyword 'void' cannot be used in this context
+                //         delegate*<ref void> p1,
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "ref void").WithLocation(5, 19),
+                // (6,19): error CS1547: Keyword 'void' cannot be used in this context
+                //         delegate*<ref readonly void> p2) {}
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "ref readonly void").WithLocation(6, 19)
+            );
 
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
@@ -201,7 +273,9 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var parameterDecls = syntaxTree.GetRoot().DescendantNodes()
+            var parameterDecls = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .SelectMany(m => m.ParameterList.Parameters)
                 .Select(p => p.Type!)
@@ -209,15 +283,21 @@ class C
 
             Assert.Equal(2, parameterDecls.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[0],
                 expectedSyntax: "delegate*<ref void>",
                 expectedType: "delegate*<ref System.Void>",
-                expectedSymbol: "delegate*<ref System.Void>");
+                expectedSymbol: "delegate*<ref System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[1],
                 expectedSyntax: "delegate*<ref readonly void>",
                 expectedType: "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.Void>",
-                expectedSymbol: "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.Void>");
+                expectedSymbol: "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.Void>"
+            );
         }
 
         [InlineData("", CallingConvention.Default)]
@@ -228,9 +308,13 @@ class C
         [InlineData("unmanaged[Fastcall]", CallingConvention.FastCall)]
         [InlineData("unmanaged", CallingConvention.Unmanaged)]
         [Theory]
-        internal void ValidCallingConventions(string convention, CallingConvention expectedConvention)
+        internal void ValidCallingConventions(
+            string convention,
+            CallingConvention expectedConvention
+        )
         {
-            string source = $@"
+            string source =
+                $@"
 class C
 {{
     public unsafe void M(delegate* {convention}<string> p) {{}}
@@ -238,11 +322,30 @@ class C
 
             verify(CreateFunctionPointerCompilation(source));
 
-            var compWithMissingMembers = CreateFunctionPointerCompilation(source, targetFramework: TargetFramework.Minimal);
-            Assert.Null(compWithMissingMembers.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvCdecl"));
-            Assert.Null(compWithMissingMembers.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvThiscall"));
-            Assert.Null(compWithMissingMembers.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvFastcall"));
-            Assert.Null(compWithMissingMembers.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall"));
+            var compWithMissingMembers = CreateFunctionPointerCompilation(
+                source,
+                targetFramework: TargetFramework.Minimal
+            );
+            Assert.Null(
+                compWithMissingMembers.GetTypeByMetadataName(
+                    "System.Runtime.CompilerServices.CallConvCdecl"
+                )
+            );
+            Assert.Null(
+                compWithMissingMembers.GetTypeByMetadataName(
+                    "System.Runtime.CompilerServices.CallConvThiscall"
+                )
+            );
+            Assert.Null(
+                compWithMissingMembers.GetTypeByMetadataName(
+                    "System.Runtime.CompilerServices.CallConvFastcall"
+                )
+            );
+            Assert.Null(
+                compWithMissingMembers.GetTypeByMetadataName(
+                    "System.Runtime.CompilerServices.CallConvStdcall"
+                )
+            );
             verify(compWithMissingMembers);
 
             void verify(CSharpCompilation comp)
@@ -252,7 +355,11 @@ class C
                     comp.VerifyDiagnostics(
                         // (4,36): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
                         //     public unsafe void M(delegate* unmanaged<string> p) {}
-                        Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "unmanaged").WithLocation(4, 36)
+                        Diagnostic(
+                                ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv,
+                                "unmanaged"
+                            )
+                            .WithLocation(4, 36)
                     );
                 }
                 else
@@ -264,7 +371,10 @@ class C
                 var pointerType = (FunctionPointerTypeSymbol)m.Parameters.Single().Type;
                 FunctionPointerUtilities.CommonVerifyFunctionPointer(pointerType);
                 Assert.Equal(expectedConvention, pointerType.Signature.CallingConvention);
-                Assert.Equal(SpecialType.System_String, pointerType.Signature.ReturnType.SpecialType);
+                Assert.Equal(
+                    SpecialType.System_String,
+                    pointerType.Signature.ReturnType.SpecialType
+                );
 
                 var syntaxTree = comp.SyntaxTrees[0];
                 var model = comp.GetSemanticModel(syntaxTree);
@@ -281,44 +391,59 @@ class C
                         break;
                 }
 
-                FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model,
-                    syntaxTree.GetRoot().DescendantNodes().OfType<FunctionPointerTypeSyntax>().Single(),
+                FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                    model,
+                    syntaxTree
+                        .GetRoot()
+                        .DescendantNodes()
+                        .OfType<FunctionPointerTypeSyntax>()
+                        .Single(),
                     expectedSyntax: $"delegate* {convention}<string>",
                     expectedType: expectedType,
-                    expectedSymbol: expectedType);
+                    expectedSymbol: expectedType
+                );
             }
         }
 
         [Fact]
         public void InvalidCallingConventions()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     public unsafe void M1(delegate* unmanaged[invalid]<void> p) {}
     public unsafe void M2(delegate* unmanaged[invalid, Stdcall]<void> p) {}
     public unsafe void M3(delegate* unmanaged[]<void> p) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
                 // (4,47): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
                 //     public unsafe void M1(delegate* unmanaged[invalid]<void> p) {}
-                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "invalid").WithLocation(4, 47),
+                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "invalid")
+                    .WithLocation(4, 47),
                 // (4,47): error CS8890: Type 'CallConvinvalid' is not defined.
                 //     public unsafe void M1(delegate* unmanaged[invalid]<void> p) {}
-                Diagnostic(ErrorCode.ERR_TypeNotFound, "invalid").WithArguments("CallConvinvalid").WithLocation(4, 47),
+                Diagnostic(ErrorCode.ERR_TypeNotFound, "invalid")
+                    .WithArguments("CallConvinvalid")
+                    .WithLocation(4, 47),
                 // (5,37): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
                 //     public unsafe void M2(delegate* unmanaged[invalid, Stdcall]<void> p) {}
-                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "unmanaged").WithLocation(5, 37),
+                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "unmanaged")
+                    .WithLocation(5, 37),
                 // (5,47): error CS8890: Type 'CallConvinvalid' is not defined.
                 //     public unsafe void M2(delegate* unmanaged[invalid, Stdcall]<void> p) {}
-                Diagnostic(ErrorCode.ERR_TypeNotFound, "invalid").WithArguments("CallConvinvalid").WithLocation(5, 47),
+                Diagnostic(ErrorCode.ERR_TypeNotFound, "invalid")
+                    .WithArguments("CallConvinvalid")
+                    .WithLocation(5, 47),
                 // (6,47): error CS1001: Identifier expected
                 //     public unsafe void M3(delegate* unmanaged[]<void> p) {}
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "]").WithLocation(6, 47),
                 // (6,47): error CS8889: The target runtime doesn't support extensible or runtime-environment default calling conventions.
                 //     public unsafe void M3(delegate* unmanaged[]<void> p) {}
-                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "").WithLocation(6, 47)
+                Diagnostic(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, "")
+                    .WithLocation(6, 47)
             );
 
             var c = comp.GetTypeByMetadataName("C");
@@ -336,29 +461,43 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var functionPointers = syntaxTree.GetRoot().DescendantNodes().OfType<FunctionPointerTypeSyntax>().ToArray();
+            var functionPointers = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<FunctionPointerTypeSyntax>()
+                .ToArray();
             Assert.Equal(3, functionPointers.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, functionPointers[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                functionPointers[0],
                 expectedSyntax: "delegate* unmanaged[invalid]<void>",
                 expectedType: "delegate* unmanaged[invalid]<System.Void modopt(System.Runtime.CompilerServices.CallConvinvalid[missing])>",
-                expectedSymbol: "delegate* unmanaged[invalid]<System.Void modopt(System.Runtime.CompilerServices.CallConvinvalid[missing])>");
+                expectedSymbol: "delegate* unmanaged[invalid]<System.Void modopt(System.Runtime.CompilerServices.CallConvinvalid[missing])>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, functionPointers[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                functionPointers[1],
                 expectedSyntax: "delegate* unmanaged[invalid, Stdcall]<void>",
                 expectedType: "delegate* unmanaged[invalid, Stdcall]<System.Void modopt(System.Runtime.CompilerServices.CallConvinvalid[missing]) modopt(System.Runtime.CompilerServices.CallConvStdcall)>",
-                expectedSymbol: "delegate* unmanaged[invalid, Stdcall]<System.Void modopt(System.Runtime.CompilerServices.CallConvinvalid[missing]) modopt(System.Runtime.CompilerServices.CallConvStdcall)>");
+                expectedSymbol: "delegate* unmanaged[invalid, Stdcall]<System.Void modopt(System.Runtime.CompilerServices.CallConvinvalid[missing]) modopt(System.Runtime.CompilerServices.CallConvStdcall)>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, functionPointers[2],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                functionPointers[2],
                 expectedSyntax: "delegate* unmanaged[]<void>",
                 expectedType: "delegate* unmanaged<System.Void>",
-                expectedSymbol: "delegate* unmanaged<System.Void>");
+                expectedSymbol: "delegate* unmanaged<System.Void>"
+            );
         }
 
         [Fact]
         public void Parameters()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     public unsafe void M<T>(
@@ -368,7 +507,8 @@ class C
         delegate*<object, object, void> p4,
         delegate*<T, object, void> p5,
         delegate*<delegate*<T>, void> p6) {}
-}");
+}"
+            );
             comp.VerifyDiagnostics();
 
             var c = comp.GetTypeByMetadataName("C");
@@ -380,7 +520,10 @@ class C
             Assert.Equal(SpecialType.System_Int32, firstParam.Parameters.Single().Type.SpecialType);
 
             var secondParam = getParam(1);
-            Assert.Equal(SpecialType.System_Object, secondParam.Parameters.Single().Type.SpecialType);
+            Assert.Equal(
+                SpecialType.System_Object,
+                secondParam.Parameters.Single().Type.SpecialType
+            );
 
             var thirdParam = getParam(2);
             Assert.Equal(c, thirdParam.Parameters.Single().Type);
@@ -396,13 +539,17 @@ class C
             Assert.Equal(SpecialType.System_Object, fifthParam.Parameters[1].Type.SpecialType);
 
             var sixthParam = getParam(5);
-            var sixthParamParam = ((FunctionPointerTypeSymbol)sixthParam.Parameters.Single().Type).Signature;
+            var sixthParamParam = (
+                (FunctionPointerTypeSymbol)sixthParam.Parameters.Single().Type
+            ).Signature;
             Assert.Equal(t, sixthParamParam.ReturnType);
             Assert.Empty(sixthParamParam.Parameters);
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var parameterDecls = syntaxTree.GetRoot().DescendantNodes()
+            var parameterDecls = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .SelectMany(m => m.ParameterList.Parameters)
                 .Select(p => p.Type!)
@@ -410,35 +557,53 @@ class C
 
             Assert.Equal(6, parameterDecls.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[0],
                 expectedSyntax: "delegate*<int, void>",
                 expectedType: "delegate*<System.Int32, System.Void>",
-                expectedSymbol: "delegate*<System.Int32, System.Void>");
+                expectedSymbol: "delegate*<System.Int32, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[1],
                 expectedSyntax: "delegate*<object, void>",
                 expectedType: "delegate*<System.Object, System.Void>",
-                expectedSymbol: "delegate*<System.Object, System.Void>");
+                expectedSymbol: "delegate*<System.Object, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[2],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[2],
                 expectedSyntax: "delegate*<C, void>",
                 expectedType: "delegate*<C, System.Void>",
-                expectedSymbol: "delegate*<C, System.Void>");
+                expectedSymbol: "delegate*<C, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[3],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[3],
                 expectedSyntax: "delegate*<object, object, void>",
                 expectedType: "delegate*<System.Object, System.Object, System.Void>",
-                expectedSymbol: "delegate*<System.Object, System.Object, System.Void>");
+                expectedSymbol: "delegate*<System.Object, System.Object, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[4],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[4],
                 expectedSyntax: "delegate*<T, object, void>",
                 expectedType: "delegate*<T, System.Object, System.Void>",
-                expectedSymbol: "delegate*<T, System.Object, System.Void>");
+                expectedSymbol: "delegate*<T, System.Object, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[5],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[5],
                 expectedSyntax: "delegate*<delegate*<T>, void>",
                 expectedType: "delegate*<delegate*<T>, System.Void>",
-                expectedSymbol: "delegate*<delegate*<T>, System.Void>");
+                expectedSymbol: "delegate*<delegate*<T>, System.Void>"
+            );
 
             MethodSymbol getParam(int index)
             {
@@ -452,7 +617,8 @@ class C
         [Fact]
         public void ValidParameterModifiers()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     public unsafe void M(
@@ -460,7 +626,8 @@ class C
         delegate*<in string, void> p2,
         delegate*<out string, void> p3,
         delegate*<string, void> p4) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
 
@@ -482,7 +649,9 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var parameterDecls = syntaxTree.GetRoot().DescendantNodes()
+            var parameterDecls = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .SelectMany(m => m.ParameterList.Parameters)
                 .Select(p => p.Type!)
@@ -490,25 +659,37 @@ class C
 
             Assert.Equal(4, parameterDecls.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[0],
                 expectedSyntax: "delegate*<ref string, void>",
                 expectedType: "delegate*<ref System.String, System.Void>",
-                expectedSymbol: "delegate*<ref System.String, System.Void>");
+                expectedSymbol: "delegate*<ref System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[1],
                 expectedSyntax: "delegate*<in string, void>",
                 expectedType: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>",
-                expectedSymbol: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>");
+                expectedSymbol: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[2],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[2],
                 expectedSyntax: "delegate*<out string, void>",
                 expectedType: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>",
-                expectedSymbol: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>");
+                expectedSymbol: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[3],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[3],
                 expectedSyntax: "delegate*<string, void>",
                 expectedType: "delegate*<System.String, System.Void>",
-                expectedSymbol: "delegate*<System.String, System.Void>");
+                expectedSymbol: "delegate*<System.String, System.Void>"
+            );
 
             MethodSymbol getParam(int index)
             {
@@ -521,7 +702,8 @@ class C
         [Fact]
         public void InvalidParameterModifiers()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     public unsafe void M(
@@ -535,36 +717,53 @@ class C
         delegate*<out ref string, void> p8,
         delegate*<ref out string, void> p9) {}
         
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
                 // (5,19): error CS8755: 'params' cannot be used as a modifier on a function pointer parameter.
                 //         delegate*<params string[], void> p1,
-                Diagnostic(ErrorCode.ERR_BadFuncPointerParamModifier, "params").WithArguments("params").WithLocation(5, 19),
+                Diagnostic(ErrorCode.ERR_BadFuncPointerParamModifier, "params")
+                    .WithArguments("params")
+                    .WithLocation(5, 19),
                 // (6,19): error CS0027: Keyword 'this' is not available in the current context
                 //         delegate*<this string, void> p2,
                 Diagnostic(ErrorCode.ERR_ThisInBadContext, "this").WithLocation(6, 19),
                 // (7,19): error CS9190: 'readonly' modifier must be specified after 'ref'.
                 //         delegate*<readonly ref string, void> p3,
-                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly").WithLocation(7, 19),
+                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
+                    .WithLocation(7, 19),
                 // (8,22): error CS8328:  The parameter modifier 'out' cannot be used with 'in'
                 //         delegate*<in out string, void> p4,
-                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out").WithArguments("out", "in").WithLocation(8, 22),
+                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
+                    .WithArguments("out", "in")
+                    .WithLocation(8, 22),
                 // (9,23): error CS8328:  The parameter modifier 'in' cannot be used with 'out'
                 //         delegate*<out in string, void> p5,
-                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "in").WithArguments("in", "out").WithLocation(9, 23),
+                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "in")
+                    .WithArguments("in", "out")
+                    .WithLocation(9, 23),
                 // (10,22): error CS8328:  The parameter modifier 'ref' cannot be used with 'in'
                 //         delegate*<in ref string, void> p6,
-                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "ref").WithArguments("ref", "in").WithLocation(10, 22),
+                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "ref")
+                    .WithArguments("ref", "in")
+                    .WithLocation(10, 22),
                 // (11,23): error CS8328:  The parameter modifier 'in' cannot be used with 'ref'
                 //         delegate*<ref in string, void> p7,
-                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "in").WithArguments("in", "ref").WithLocation(11, 23),
+                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "in")
+                    .WithArguments("in", "ref")
+                    .WithLocation(11, 23),
                 // (12,23): error CS8328:  The parameter modifier 'ref' cannot be used with 'out'
                 //         delegate*<out ref string, void> p8,
-                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "ref").WithArguments("ref", "out").WithLocation(12, 23),
+                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "ref")
+                    .WithArguments("ref", "out")
+                    .WithLocation(12, 23),
                 // (13,23): error CS8328:  The parameter modifier 'out' cannot be used with 'ref'
                 //         delegate*<ref out string, void> p9) {}
-                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out").WithArguments("out", "ref").WithLocation(13, 23));
+                Diagnostic(ErrorCode.ERR_BadParameterModifiers, "out")
+                    .WithArguments("out", "ref")
+                    .WithLocation(13, 23)
+            );
 
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
@@ -599,7 +798,9 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var parameterDecls = syntaxTree.GetRoot().DescendantNodes()
+            var parameterDecls = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
                 .SelectMany(m => m.ParameterList.Parameters)
                 .Select(p => p.Type!)
@@ -607,50 +808,77 @@ class C
 
             Assert.Equal(9, parameterDecls.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[0],
                 expectedSyntax: "delegate*<params string[], void>",
                 expectedType: "delegate*<System.String[], System.Void>",
-                expectedSymbol: "delegate*<System.String[], System.Void>");
+                expectedSymbol: "delegate*<System.String[], System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[1],
                 expectedSyntax: "delegate*<this string, void>",
                 expectedType: "delegate*<System.String, System.Void>",
-                expectedSymbol: "delegate*<System.String, System.Void>");
+                expectedSymbol: "delegate*<System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[2],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[2],
                 expectedSyntax: "delegate*<readonly ref string, void>",
                 expectedType: "delegate*<ref System.String, System.Void>",
-                expectedSymbol: "delegate*<ref System.String, System.Void>");
+                expectedSymbol: "delegate*<ref System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[3],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[3],
                 expectedSyntax: "delegate*<in out string, void>",
                 expectedType: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>",
-                expectedSymbol: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>");
+                expectedSymbol: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[4],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[4],
                 expectedSyntax: "delegate*<out in string, void>",
                 expectedType: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>",
-                expectedSymbol: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>");
+                expectedSymbol: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[5],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[5],
                 expectedSyntax: "delegate*<in ref string, void>",
                 expectedType: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>",
-                expectedSymbol: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>");
+                expectedSymbol: "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[6],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[6],
                 expectedSyntax: "delegate*<ref in string, void>",
                 expectedType: "delegate*<ref System.String, System.Void>",
-                expectedSymbol: "delegate*<ref System.String, System.Void>");
+                expectedSymbol: "delegate*<ref System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[7],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[7],
                 expectedSyntax: "delegate*<out ref string, void>",
                 expectedType: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>",
-                expectedSymbol: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>");
+                expectedSymbol: "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, parameterDecls[8],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                parameterDecls[8],
                 expectedSyntax: "delegate*<ref out string, void>",
                 expectedType: "delegate*<ref System.String, System.Void>",
-                expectedSymbol: "delegate*<ref System.String, System.Void>");
+                expectedSymbol: "delegate*<ref System.String, System.Void>"
+            );
 
             MethodSymbol getParam(int index)
             {
@@ -663,16 +891,19 @@ class C
         [Fact]
         public void VoidAsParameterType()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<void, void> p1) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
-                    // (4,29): error CS1536: Invalid parameter type 'void'
-                    //     void M(delegate*<void, void> p1) {}
-                    Diagnostic(ErrorCode.ERR_NoVoidParameter, "void").WithLocation(4, 29));
+                // (4,29): error CS1536: Invalid parameter type 'void'
+                //     void M(delegate*<void, void> p1) {}
+                Diagnostic(ErrorCode.ERR_NoVoidParameter, "void").WithLocation(4, 29)
+            );
 
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
@@ -681,227 +912,330 @@ class C
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var paramType = syntaxTree.GetRoot()
+            var paramType = syntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<MethodDeclarationSyntax>()
-                .Single().ParameterList.Parameters
-                .Single().Type;
+                .Single()
+                .ParameterList.Parameters.Single()
+                .Type;
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, paramType!,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                paramType!,
                 expectedSyntax: "delegate*<void, void>",
                 expectedType: "delegate*<System.Void, System.Void>",
-                expectedSymbol: "delegate*<System.Void, System.Void>");
+                expectedSymbol: "delegate*<System.Void, System.Void>"
+            );
         }
 
         [Fact]
         public void Equality_ReturnVoid()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<void> p1,
            delegate*<void> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type, returnEquality: Equality.Equal, callingConventionEquality: Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.Equal,
+                callingConventionEquality: Equality.Equal
+            );
         }
 
         [Fact]
         public void EqualityDifferingNullability()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 #nullable enable
 class C
 {
     unsafe void M(delegate*<string, string, string?> p1,
                   delegate*<string, string?, string> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.DifferingNullability, callingConventionEquality: Equality.Equal,
-                Equality.Equal, Equality.DifferingNullability);
-
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.DifferingNullability,
+                callingConventionEquality: Equality.Equal,
+                Equality.Equal,
+                Equality.DifferingNullability
+            );
         }
 
         [Fact]
         public void EqualityMultipleParameters()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<string, object, C, int, void> p1,
                   delegate*<string, object, C, int, void> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.Equal, callingConventionEquality: Equality.Equal,
-                Equality.Equal, Equality.Equal, Equality.Equal, Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.Equal,
+                callingConventionEquality: Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal
+            );
         }
 
         [Fact]
         public void EqualityNestedFunctionPointers()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<delegate*<string, object>, delegate*<C, int>> p1,
                   delegate*<delegate*<string, object>, delegate*<C, int>> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.Equal, callingConventionEquality: Equality.Equal,
-                Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.Equal,
+                callingConventionEquality: Equality.Equal,
+                Equality.Equal
+            );
         }
 
         [Fact]
         public void EqualityNestedFunctionPointersDifferingNullability()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 #nullable enable
 class C
 {
     unsafe void M(delegate*<delegate*<string, object?>, delegate*<C?, int>> p1,
                   delegate*<delegate*<string?, object>, delegate*<C, int>> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.DifferingNullability, callingConventionEquality: Equality.Equal,
-                Equality.DifferingNullability);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.DifferingNullability,
+                callingConventionEquality: Equality.Equal,
+                Equality.DifferingNullability
+            );
         }
 
         [Fact]
         public void Equality_ReturnNotEqual()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<string, object, C, int, string> p1,
                   delegate*<string, object, C, int, void> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.NotEqual, callingConventionEquality: Equality.Equal,
-                Equality.Equal, Equality.Equal, Equality.Equal, Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.NotEqual,
+                callingConventionEquality: Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal
+            );
         }
 
         [Fact]
         public void Equality_ParameterTypeNotEqual()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<string, object, C, object, void> p1,
                   delegate*<string, object, C, int, void> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.Equal, callingConventionEquality: Equality.Equal,
-                Equality.Equal, Equality.Equal, Equality.Equal, Equality.NotEqual);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.Equal,
+                callingConventionEquality: Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.NotEqual
+            );
         }
 
         [Fact]
         public void Equality_CallingConventionNotEqual()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate* unmanaged[Cdecl]<string, object, C, object, void> p1,
                   delegate* unmanaged[Thiscall]<string, object, C, object, void> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.Equal, callingConventionEquality: Equality.NotEqual,
-                Equality.Equal, Equality.Equal, Equality.Equal, Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.Equal,
+                callingConventionEquality: Equality.NotEqual,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal
+            );
         }
 
         [Fact]
         public void Equality_ParameterModifiersDifferent()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<ref string, object, C, object, void> p1,
            delegate*<string, in object, out C, object, void> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.Equal, callingConventionEquality: Equality.Equal,
-                Equality.NotEqual, Equality.NotEqual, Equality.NotEqual, Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.Equal,
+                callingConventionEquality: Equality.Equal,
+                Equality.NotEqual,
+                Equality.NotEqual,
+                Equality.NotEqual,
+                Equality.Equal
+            );
         }
 
         [Fact]
         public void Equality_ReturnTypeDifferent()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<string, object, C, object, ref string> p1,
                   delegate*<string, object, C, object, ref readonly string> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.NotEqual, callingConventionEquality: Equality.Equal,
-                Equality.Equal, Equality.Equal, Equality.Equal, Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.NotEqual,
+                callingConventionEquality: Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal,
+                Equality.Equal
+            );
         }
 
         [Fact]
         public void Equality_InParameter()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<in string, void> p1,
                   delegate*<in string, void> p2) {}
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
             var c = comp.GetTypeByMetadataName("C");
             var m = c.GetMethod("M");
-            AssertEqualityAndHashCode((FunctionPointerTypeSymbol)m.Parameters[0].Type, (FunctionPointerTypeSymbol)m.Parameters[1].Type,
-                returnEquality: Equality.Equal, callingConventionEquality: Equality.Equal,
-                Equality.Equal);
+            AssertEqualityAndHashCode(
+                (FunctionPointerTypeSymbol)m.Parameters[0].Type,
+                (FunctionPointerTypeSymbol)m.Parameters[1].Type,
+                returnEquality: Equality.Equal,
+                callingConventionEquality: Equality.Equal,
+                Equality.Equal
+            );
         }
 
         enum Equality
         {
             Equal = 0,
             DifferingNullability = 0b01,
-            NotEqual = 0b10
+            NotEqual = 0b10,
         }
 
-        private void AssertEqualityAndHashCode(FunctionPointerTypeSymbol p1, FunctionPointerTypeSymbol p2, Equality returnEquality, Equality callingConventionEquality, params Equality[] parameterEqualities)
+        private void AssertEqualityAndHashCode(
+            FunctionPointerTypeSymbol p1,
+            FunctionPointerTypeSymbol p2,
+            Equality returnEquality,
+            Equality callingConventionEquality,
+            params Equality[] parameterEqualities
+        )
         {
-            var overallEquality = returnEquality | callingConventionEquality | (parameterEqualities.Length > 0 ? parameterEqualities.Aggregate((acc, cur) => acc | cur) : 0);
+            var overallEquality =
+                returnEquality
+                | callingConventionEquality
+                | (
+                    parameterEqualities.Length > 0
+                        ? parameterEqualities.Aggregate((acc, cur) => acc | cur)
+                        : 0
+                );
 
             assertSymbolEquality(p1, p2, overallEquality);
             assertSymbolEquality(p1.Signature, p2.Signature, overallEquality);
@@ -921,7 +1255,10 @@ class C
                 Assert.Equal(p1.Signature.RefKind, p2.Signature.RefKind);
                 Assert.True(ret1.Equals(ret2, TypeCompareKind.AllNullableIgnoreOptions));
                 Assert.Equal(ret1.GetHashCode(), ret2.GetHashCode());
-                Assert.Equal(returnEquality == Equality.Equal, ret1.Equals(ret2, TypeCompareKind.ConsiderEverything));
+                Assert.Equal(
+                    returnEquality == Equality.Equal,
+                    ret1.Equals(ret2, TypeCompareKind.ConsiderEverything)
+                );
             }
 
             for (int i = 0; i < p1.Signature.ParameterCount; i++)
@@ -931,13 +1268,18 @@ class C
                 assertSymbolEquality(param1, param2, overallEquality);
                 if (parameterEqualities[i] == Equality.Equal)
                 {
-                    Assert.True(((FunctionPointerParameterSymbol)param1).MethodEqualityChecks((FunctionPointerParameterSymbol)param2,
-                                                                                              TypeCompareKind.ConsiderEverything));
+                    Assert.True(
+                        ((FunctionPointerParameterSymbol)param1).MethodEqualityChecks(
+                            (FunctionPointerParameterSymbol)param2,
+                            TypeCompareKind.ConsiderEverything
+                        )
+                    );
                 }
 
                 for (int j = 0; j < p1.Signature.ParameterCount; j++)
                 {
-                    if (j == i) continue;
+                    if (j == i)
+                        continue;
 
                     assertSymbolEquality(param1, p2.Signature.Parameters[j], Equality.NotEqual);
                     assertSymbolEquality(param2, p1.Signature.Parameters[j], Equality.NotEqual);
@@ -956,7 +1298,10 @@ class C
                 {
                     Assert.True(s1.Equals(s2, TypeCompareKind.AllNullableIgnoreOptions));
                     Assert.Equal(s1.GetHashCode(), s2.GetHashCode());
-                    Assert.Equal(eq == Equality.Equal, s1.Equals(s2, TypeCompareKind.ConsiderEverything));
+                    Assert.Equal(
+                        eq == Equality.Equal,
+                        s1.Equals(s2, TypeCompareKind.ConsiderEverything)
+                    );
                 }
             }
         }
@@ -964,7 +1309,8 @@ class C
         [Fact]
         public void Equality_DifferingRefKinds()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 unsafe class C
 {
     delegate*<ref object> ptr1Ref;
@@ -972,7 +1318,8 @@ unsafe class C
     delegate*<ref object, void> ptr2Ref;
     delegate*<in object, void> ptr2In;
     delegate*<out object, void> ptr2Out;
-}");
+}"
+            );
 
             var ptr1Ref = comp.GetMember<FieldSymbol>("C.ptr1Ref").Type;
             var ptr1RefReadonly = comp.GetMember<FieldSymbol>("C.ptr1RefReadonly").Type;
@@ -981,28 +1328,58 @@ unsafe class C
             var ptr2Out = comp.GetMember<FieldSymbol>("C.ptr2Out").Type;
 
             var symbolEqualityComparer = new SymbolEqualityComparer(
-                TypeCompareKind.ConsiderEverything | TypeCompareKind.FunctionPointerRefMatchesOutInRefReadonly | TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds);
-            Assert.Equal(ptr1Ref.GetPublicSymbol(), ptr1RefReadonly.GetPublicSymbol(), symbolEqualityComparer);
-            Assert.Equal(ptr2Ref.GetPublicSymbol(), ptr2In.GetPublicSymbol(), symbolEqualityComparer);
-            Assert.Equal(ptr2Ref.GetPublicSymbol(), ptr2Out.GetPublicSymbol(), symbolEqualityComparer);
-            Assert.Equal(ptr2In.GetPublicSymbol(), ptr2Out.GetPublicSymbol(), symbolEqualityComparer);
+                TypeCompareKind.ConsiderEverything
+                    | TypeCompareKind.FunctionPointerRefMatchesOutInRefReadonly
+                    | TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+            );
+            Assert.Equal(
+                ptr1Ref.GetPublicSymbol(),
+                ptr1RefReadonly.GetPublicSymbol(),
+                symbolEqualityComparer
+            );
+            Assert.Equal(
+                ptr2Ref.GetPublicSymbol(),
+                ptr2In.GetPublicSymbol(),
+                symbolEqualityComparer
+            );
+            Assert.Equal(
+                ptr2Ref.GetPublicSymbol(),
+                ptr2Out.GetPublicSymbol(),
+                symbolEqualityComparer
+            );
+            Assert.Equal(
+                ptr2In.GetPublicSymbol(),
+                ptr2Out.GetPublicSymbol(),
+                symbolEqualityComparer
+            );
 
             Assert.Equal(ptr1Ref.GetHashCode(), ptr1RefReadonly.GetHashCode());
             Assert.Equal(ptr2Ref.GetHashCode(), ptr2In.GetHashCode());
             Assert.Equal(ptr2Ref.GetHashCode(), ptr2Out.GetHashCode());
-            Assert.Equal(symbolEqualityComparer.GetHashCode(ptr1Ref.GetPublicSymbol()), symbolEqualityComparer.GetHashCode(ptr1RefReadonly.GetPublicSymbol()));
-            Assert.Equal(symbolEqualityComparer.GetHashCode(ptr2Ref.GetPublicSymbol()), symbolEqualityComparer.GetHashCode(ptr2In.GetPublicSymbol()));
-            Assert.Equal(symbolEqualityComparer.GetHashCode(ptr2Ref.GetPublicSymbol()), symbolEqualityComparer.GetHashCode(ptr2Out.GetPublicSymbol()));
+            Assert.Equal(
+                symbolEqualityComparer.GetHashCode(ptr1Ref.GetPublicSymbol()),
+                symbolEqualityComparer.GetHashCode(ptr1RefReadonly.GetPublicSymbol())
+            );
+            Assert.Equal(
+                symbolEqualityComparer.GetHashCode(ptr2Ref.GetPublicSymbol()),
+                symbolEqualityComparer.GetHashCode(ptr2In.GetPublicSymbol())
+            );
+            Assert.Equal(
+                symbolEqualityComparer.GetHashCode(ptr2Ref.GetPublicSymbol()),
+                symbolEqualityComparer.GetHashCode(ptr2Out.GetPublicSymbol())
+            );
         }
 
         [Fact]
         public void NoInOutAttribute_NoInOutParameter()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<string, void> p1) {}
-}");
+}"
+            );
 
             comp.MakeTypeMissing(WellKnownType.System_Runtime_InteropServices_InAttribute);
             comp.MakeTypeMissing(WellKnownType.System_Runtime_InteropServices_OutAttribute);
@@ -1012,27 +1389,35 @@ class C
         [Fact]
         public void NoInOutAttribute_InOutParameter()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M(delegate*<in string, out string, void> p1) {}
-}");
+}"
+            );
 
             comp.MakeTypeMissing(WellKnownType.System_Runtime_InteropServices_InAttribute);
             comp.MakeTypeMissing(WellKnownType.System_Runtime_InteropServices_OutAttribute);
             comp.VerifyDiagnostics(
                 // (4,29): error CS0518: Predefined type 'System.Runtime.InteropServices.InAttribute' is not defined or imported
                 //     unsafe void M(delegate*<in string, out string, void> p1) {}
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in string").WithArguments("System.Runtime.InteropServices.InAttribute").WithLocation(4, 29),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "in string")
+                    .WithArguments("System.Runtime.InteropServices.InAttribute")
+                    .WithLocation(4, 29),
                 // (4,40): error CS0518: Predefined type 'System.Runtime.InteropServices.OutAttribute' is not defined or imported
                 //     unsafe void M(delegate*<in string, out string, void> p1) {}
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "out string").WithArguments("System.Runtime.InteropServices.OutAttribute").WithLocation(4, 40));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "out string")
+                    .WithArguments("System.Runtime.InteropServices.OutAttribute")
+                    .WithLocation(4, 40)
+            );
         }
 
         [Fact]
         public void DifferingModOpts()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit Test1
        extends[mscorlib] System.Object
 {
@@ -1060,14 +1445,23 @@ class C
                 {
                     if (!ReferenceEquals(param1, param2))
                     {
-                        Assert.False(param1.Type.Equals(param2.Type, TypeCompareKind.ConsiderEverything));
+                        Assert.False(
+                            param1.Type.Equals(param2.Type, TypeCompareKind.ConsiderEverything)
+                        );
                     }
                     else
                     {
-                        Assert.True(param1.Type.Equals(param2.Type, TypeCompareKind.ConsiderEverything));
+                        Assert.True(
+                            param1.Type.Equals(param2.Type, TypeCompareKind.ConsiderEverything)
+                        );
                     }
 
-                    Assert.True(param1.Type.Equals(param2.Type, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                    Assert.True(
+                        param1.Type.Equals(
+                            param2.Type,
+                            TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                        )
+                    );
                 }
             }
         }
@@ -1075,7 +1469,8 @@ class C
         [Fact]
         public void RequiresUnsafeInSignature()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     delegate*<void> _field;
@@ -1086,42 +1481,51 @@ class C
         /**/delegate/**/*/**/<void> local2;
         throw null;
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
-                    // (4,5): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //     delegate*<void> _field;
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(4, 5),
-                    // (4,21): warning CS0169: The field 'C._field' is never used
-                    //     delegate*<void> _field;
-                    Diagnostic(ErrorCode.WRN_UnreferencedField, "_field").WithArguments("C._field").WithLocation(4, 21),
-                    // (5,5): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //     delegate*<void> Property { get; set; }
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(5, 5),
-                    // (6,5): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //     delegate*<void> M(delegate*<void> param)
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(6, 5),
-                    // (6,23): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //     delegate*<void> M(delegate*<void> param)
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(6, 23),
-                    // (8,9): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //         delegate*<void> local1;
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(8, 9),
-                    // (8,25): warning CS0168: The variable 'local1' is declared but never used
-                    //         delegate*<void> local1;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "local1").WithArguments("local1").WithLocation(8, 25),
-                    // (9,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                    //         /**/delegate/**/*/**/<void> local2;
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate/**/*").WithLocation(9, 13),
-                    // (9,37): warning CS0168: The variable 'local1' is declared but never used
-                    //         /**/delegate/**/*/**/<void> local2;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "local2").WithArguments("local2").WithLocation(9, 37));
+                // (4,5): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //     delegate*<void> _field;
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(4, 5),
+                // (4,21): warning CS0169: The field 'C._field' is never used
+                //     delegate*<void> _field;
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "_field")
+                    .WithArguments("C._field")
+                    .WithLocation(4, 21),
+                // (5,5): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //     delegate*<void> Property { get; set; }
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(5, 5),
+                // (6,5): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //     delegate*<void> M(delegate*<void> param)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(6, 5),
+                // (6,23): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //     delegate*<void> M(delegate*<void> param)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(6, 23),
+                // (8,9): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //         delegate*<void> local1;
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(8, 9),
+                // (8,25): warning CS0168: The variable 'local1' is declared but never used
+                //         delegate*<void> local1;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "local1")
+                    .WithArguments("local1")
+                    .WithLocation(8, 25),
+                // (9,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                //         /**/delegate/**/*/**/<void> local2;
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate/**/*").WithLocation(9, 13),
+                // (9,37): warning CS0168: The variable 'local1' is declared but never used
+                //         /**/delegate/**/*/**/<void> local2;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "local2")
+                    .WithArguments("local2")
+                    .WithLocation(9, 37)
+            );
         }
 
         [Fact]
         public void MisdeclaredArraysWithLocalDeclarationsAreHandled()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     unsafe void M()
@@ -1129,43 +1533,57 @@ class C
         int a = 1;
         delegate*<int[a]> local;
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
-                    // (6,13): warning CS0219: The variable 'a' is assigned but its value is never used
-                    //         int a = 1;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a").WithArguments("a").WithLocation(6, 13),
-                    // (7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                    //         delegate*<int[a]> local;
-                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[a]").WithLocation(7, 22),
-                    // (7,27): warning CS0168: The variable 'local' is declared but never used
-                    //         delegate*<int[a]> local;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "local").WithArguments("local").WithLocation(7, 27));
+                // (6,13): warning CS0219: The variable 'a' is assigned but its value is never used
+                //         int a = 1;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
+                    .WithArguments("a")
+                    .WithLocation(6, 13),
+                // (7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                //         delegate*<int[a]> local;
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[a]").WithLocation(7, 22),
+                // (7,27): warning CS0168: The variable 'local' is declared but never used
+                //         delegate*<int[a]> local;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "local")
+                    .WithArguments("local")
+                    .WithLocation(7, 27)
+            );
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var functionPointerTypeSyntax = syntaxTree.GetRoot()
+            var functionPointerTypeSyntax = syntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<FunctionPointerTypeSyntax>()
                 .Single();
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, functionPointerTypeSyntax,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                functionPointerTypeSyntax,
                 expectedSyntax: "delegate*<int[a]>",
                 expectedType: "delegate*<System.Int32[]>",
-                expectedSymbol: "delegate*<System.Int32[]>");
+                expectedSymbol: "delegate*<System.Int32[]>"
+            );
 
-            var misplacedDeclaration =
-                ((ArrayTypeSyntax)functionPointerTypeSyntax
-                    .ParameterList.Parameters.Single().Type!)
-                    .RankSpecifiers.Single()
-                    .Sizes.Single();
+            var misplacedDeclaration = (
+                (ArrayTypeSyntax)functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!
+            )
+                .RankSpecifiers.Single()
+                .Sizes.Single();
 
             var a = (ILocalSymbol)model.GetSymbolInfo(misplacedDeclaration).Symbol!;
             Assert.NotNull(a);
             Assert.Equal("System.Int32 a", a.ToTestDisplayString());
 
-            VerifyOperationTreeForNode(comp, model, functionPointerTypeSyntax.Parent, expectedOperationTree: @"
+            VerifyOperationTreeForNode(
+                comp,
+                model,
+                functionPointerTypeSyntax.Parent,
+                expectedOperationTree: @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'delegate*<int[a]> local')
   Ignored Dimensions(1):
       ILocalReferenceOperation: a (OperationKind.LocalReference, Type: System.Int32, IsInvalid) (Syntax: 'a')
@@ -1175,13 +1593,15 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
           null
   Initializer: 
     null
-");
+"
+            );
         }
 
         [Fact]
         public void IncorrectArguments()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 unsafe class C
 {
     void M(delegate*<void> p1,
@@ -1200,39 +1620,59 @@ unsafe class C
         p4(in s);
         p5(ref s);
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
                 // (10,9): error CS8756: Function pointer 'delegate*<void>' does not take 1 arguments
                 //         p1("No arguments allowed");
-                Diagnostic(ErrorCode.ERR_BadFuncPointerArgCount, @"p1(""No arguments allowed"")").WithArguments("delegate*<void>", "1").WithLocation(10, 9),
+                Diagnostic(ErrorCode.ERR_BadFuncPointerArgCount, @"p1(""No arguments allowed"")")
+                    .WithArguments("delegate*<void>", "1")
+                    .WithLocation(10, 9),
                 // (11,9): error CS8756: Function pointer 'delegate*<string, void>' does not take 3 arguments
                 //         p2("Too", "many", "arguments");
-                Diagnostic(ErrorCode.ERR_BadFuncPointerArgCount, @"p2(""Too"", ""many"", ""arguments"")").WithArguments("delegate*<string, void>", "3").WithLocation(11, 9),
+                Diagnostic(
+                        ErrorCode.ERR_BadFuncPointerArgCount,
+                        @"p2(""Too"", ""many"", ""arguments"")"
+                    )
+                    .WithArguments("delegate*<string, void>", "3")
+                    .WithLocation(11, 9),
                 // (12,9): error CS8756: Function pointer 'delegate*<string, void>' does not take 0 arguments
                 //         p2(); // Not enough arguments
-                Diagnostic(ErrorCode.ERR_BadFuncPointerArgCount, "p2()").WithArguments("delegate*<string, void>", "0").WithLocation(12, 9),
+                Diagnostic(ErrorCode.ERR_BadFuncPointerArgCount, "p2()")
+                    .WithArguments("delegate*<string, void>", "0")
+                    .WithLocation(12, 9),
                 // (13,12): error CS1503: Argument 1: cannot convert from 'int' to 'string'
                 //         p2(1); // Invalid argument type
-                Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string").WithLocation(13, 12),
+                Diagnostic(ErrorCode.ERR_BadArgType, "1")
+                    .WithArguments("1", "int", "string")
+                    .WithLocation(13, 12),
                 // (14,30): error CS1510: A ref or out value must be an assignable variable
                 //         ref string foo = ref p3();
                 Diagnostic(ErrorCode.ERR_RefLvalueExpected, "p3()").WithLocation(14, 30),
                 // (16,12): error CS1620: Argument 1 must be passed with the 'ref' keyword
                 //         p4(s);
-                Diagnostic(ErrorCode.ERR_BadArgRef, "s").WithArguments("1", "ref").WithLocation(16, 12),
+                Diagnostic(ErrorCode.ERR_BadArgRef, "s")
+                    .WithArguments("1", "ref")
+                    .WithLocation(16, 12),
                 // (17,15): error CS1620: Argument 1 must be passed with the 'ref' keyword
                 //         p4(in s);
-                Diagnostic(ErrorCode.ERR_BadArgRef, "s").WithArguments("1", "ref").WithLocation(17, 15),
+                Diagnostic(ErrorCode.ERR_BadArgRef, "s")
+                    .WithArguments("1", "ref")
+                    .WithLocation(17, 15),
                 // (18,16): error CS9194: Argument 1 may not be passed with the 'ref' keyword in language version 9.0. To pass 'ref' arguments to 'in' parameters, upgrade to language version 12.0 or greater.
                 //         p5(ref s);
-                Diagnostic(ErrorCode.ERR_BadArgExtraRefLangVersion, "s").WithArguments("1", "9.0", "12.0").WithLocation(18, 16));
+                Diagnostic(ErrorCode.ERR_BadArgExtraRefLangVersion, "s")
+                    .WithArguments("1", "9.0", "12.0")
+                    .WithLocation(18, 16)
+            );
         }
 
         [Fact]
         public void InaccessibleNestedTypes()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     private class D {}
@@ -1243,20 +1683,27 @@ class E
     {
         delegate*<C.D> d;
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
-                    // (10,21): error CS0122: 'C.D' is inaccessible due to its protection level
-                    //         delegate*<C.D> d;
-                    Diagnostic(ErrorCode.ERR_BadAccess, "D").WithArguments("C.D").WithLocation(10, 21),
-                    // (10,24): warning CS0168: The variable 'd' is declared but never used
-                    //         delegate*<C.D> d;
-                    Diagnostic(ErrorCode.WRN_UnreferencedVar, "d").WithArguments("d").WithLocation(10, 24));
+                // (10,21): error CS0122: 'C.D' is inaccessible due to its protection level
+                //         delegate*<C.D> d;
+                Diagnostic(ErrorCode.ERR_BadAccess, "D")
+                    .WithArguments("C.D")
+                    .WithLocation(10, 21),
+                // (10,24): warning CS0168: The variable 'd' is declared but never used
+                //         delegate*<C.D> d;
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "d")
+                    .WithArguments("d")
+                    .WithLocation(10, 24)
+            );
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var functionPointerTypeSyntax = syntaxTree.GetRoot()
+            var functionPointerTypeSyntax = syntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<FunctionPointerTypeSyntax>()
                 .Single();
@@ -1265,13 +1712,21 @@ class E
 
             var typeInfo = model.GetTypeInfo(functionPointerTypeSyntax);
             Assert.Equal("delegate*<C.D>", typeInfo.Type.ToTestDisplayString());
-            Assert.True(((IFunctionPointerTypeSymbol)typeInfo.Type!).Signature.ReturnType.IsErrorType());
+            Assert.True(
+                ((IFunctionPointerTypeSymbol)typeInfo.Type!).Signature.ReturnType.IsErrorType()
+            );
 
-            var nestedTypeInfo = model.GetTypeInfo(functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!);
+            var nestedTypeInfo = model.GetTypeInfo(
+                functionPointerTypeSyntax.ParameterList.Parameters.Single().Type!
+            );
             Assert.Equal("C.D", nestedTypeInfo.Type!.ToTestDisplayString());
             Assert.False(nestedTypeInfo.Type!.IsErrorType());
 
-            VerifyOperationTreeForNode(comp, model, functionPointerTypeSyntax.Parent, expectedOperationTree: @"
+            VerifyOperationTreeForNode(
+                comp,
+                model,
+                functionPointerTypeSyntax.Parent,
+                expectedOperationTree: @"
 IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: 'delegate*<C.D> d')
   Declarators:
       IVariableDeclaratorOperation (Symbol: delegate*<C.D> d) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'd')
@@ -1279,13 +1734,15 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
           null
   Initializer: 
     null
-");
+"
+            );
         }
 
         [Fact]
         public void FunctionPointerConstraintIntroducedBySubstitution()
         {
-            string source = @"
+            string source =
+                @"
 class R1<T1>
 {
     public virtual void f<T2>() where T2 : T1 { }
@@ -1307,28 +1764,35 @@ class Program
             compilation.VerifyDiagnostics(
                 // (6,7): error CS0306: The type 'delegate*<void>' may not be used as a type argument
                 // class R2 : R1<delegate*<void>>
-                Diagnostic(ErrorCode.ERR_BadTypeArgument, "R2").WithArguments("delegate*<void>").WithLocation(6, 7)
+                Diagnostic(ErrorCode.ERR_BadTypeArgument, "R2")
+                    .WithArguments("delegate*<void>")
+                    .WithLocation(6, 7)
             );
 
             var syntaxTree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(syntaxTree);
 
-            var baseNameSyntax = syntaxTree.GetRoot()
+            var baseNameSyntax = syntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<SimpleBaseTypeSyntax>()
                 .Single()
                 .Type;
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, baseNameSyntax,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                baseNameSyntax,
                 expectedSyntax: "R1<delegate*<void>>",
                 expectedType: "R1<delegate*<System.Void>>",
-                expectedSymbol: "R1<delegate*<System.Void>>");
+                expectedSymbol: "R1<delegate*<System.Void>>"
+            );
         }
 
         [Fact]
         public void FunctionPointerTypeAsThisOfExtensionMethod()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 unsafe static class C
 {
     static void M1(this delegate*<void> ptr) {}
@@ -1336,19 +1800,23 @@ unsafe static class C
     {
         ptr.M1();
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
                 // (4,25): error CS1103: The first parameter of an extension method cannot be of type 'delegate*<void>'
                 //     static void M1(this delegate*<void> ptr) {}
-                Diagnostic(ErrorCode.ERR_BadTypeforThis, "delegate*<void>").WithArguments("delegate*<void>").WithLocation(4, 25)
+                Diagnostic(ErrorCode.ERR_BadTypeforThis, "delegate*<void>")
+                    .WithArguments("delegate*<void>")
+                    .WithLocation(4, 25)
             );
         }
 
         [Fact]
         public void FunctionPointerTypeAsThisOfExtensionMethod_DefinedInIl()
         {
-            const string ilSource = @"
+            const string ilSource =
+                @"
 .class public auto ansi abstract sealed beforefieldinit CHelper
     extends [mscorlib]System.Object
 {
@@ -1375,7 +1843,8 @@ unsafe static class C
 
 } // end of class CHelper
 ";
-            const string source = @"
+            const string source =
+                @"
 static class C
 {
     static unsafe void Main()
@@ -1384,10 +1853,21 @@ static class C
         ptr.M();
     }
 }";
-            var comp = CreateCompilationWithIL(source, ilSource, options: TestOptions.UnsafeReleaseExe, parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilationWithIL(
+                source,
+                ilSource,
+                options: TestOptions.UnsafeReleaseExe,
+                parseOptions: TestOptions.Regular9
+            );
 
-            var verifier = CompileAndVerify(comp, expectedOutput: "1", verify: Verification.Skipped);
-            verifier.VerifyIL("C.Main", expectedIL: @"
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "1",
+                verify: Verification.Skipped
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                expectedIL: @"
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -1399,13 +1879,15 @@ static class C
   IL_0004:  call       ""void CHelper.M(delegate*<void>)""
   IL_0009:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void FunctionPointerTypeInAnonymousType()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 unsafe static class C
 {
     static void M(delegate*<void> ptr)
@@ -1413,35 +1895,49 @@ unsafe static class C
         var a = new { Ptr = ptr };
         var b = new { Ptrs = new[] { ptr } };
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
                 // (6,23): error CS0828: Cannot assign 'delegate*<void>' to anonymous type property
                 //         var a = new { Ptr = ptr };
-                Diagnostic(ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue, "Ptr = ptr").WithArguments("delegate*<void>").WithLocation(6, 23)
-                );
+                Diagnostic(ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue, "Ptr = ptr")
+                    .WithArguments("delegate*<void>")
+                    .WithLocation(6, 23)
+            );
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var anonymousObjectCreations = syntaxTree.GetRoot()
+            var anonymousObjectCreations = syntaxTree
+                .GetRoot()
                 .DescendantNodes()
                 .OfType<AnonymousObjectCreationExpressionSyntax>()
                 .ToArray();
 
             Assert.Equal(2, anonymousObjectCreations.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, anonymousObjectCreations[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                anonymousObjectCreations[0],
                 expectedSyntax: "new { Ptr = ptr }",
                 expectedType: "<anonymous type: delegate*<System.Void> Ptr>",
-                expectedSymbol: "<anonymous type: delegate*<System.Void> Ptr>..ctor(delegate*<System.Void> Ptr)");
+                expectedSymbol: "<anonymous type: delegate*<System.Void> Ptr>..ctor(delegate*<System.Void> Ptr)"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, anonymousObjectCreations[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                anonymousObjectCreations[1],
                 expectedSyntax: "new { Ptrs = new[] { ptr } }",
                 expectedType: "<anonymous type: delegate*<System.Void>[] Ptrs>",
-                expectedSymbol: "<anonymous type: delegate*<System.Void>[] Ptrs>..ctor(delegate*<System.Void>[] Ptrs)");
+                expectedSymbol: "<anonymous type: delegate*<System.Void>[] Ptrs>..ctor(delegate*<System.Void>[] Ptrs)"
+            );
 
-            VerifyOperationTreeForNode(comp, model, anonymousObjectCreations[0], expectedOperationTree: @"
+            VerifyOperationTreeForNode(
+                comp,
+                model,
+                anonymousObjectCreations[0],
+                expectedOperationTree: @"
 IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: <anonymous type: delegate*<System.Void> Ptr>, IsInvalid) (Syntax: 'new { Ptr = ptr }')
   Initializers(1):
       ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: delegate*<System.Void>, IsInvalid) (Syntax: 'Ptr = ptr')
@@ -1451,9 +1947,14 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
               IInstanceReferenceOperation (ReferenceKind: ImplicitReceiver) (OperationKind.InstanceReference, Type: <anonymous type: delegate*<System.Void> Ptr>, IsInvalid, IsImplicit) (Syntax: 'new { Ptr = ptr }')
         Right: 
           IParameterReferenceOperation: ptr (OperationKind.ParameterReference, Type: delegate*<System.Void>, IsInvalid) (Syntax: 'ptr')
-");
+"
+            );
 
-            VerifyOperationTreeForNode(comp, model, anonymousObjectCreations[1], expectedOperationTree: @"
+            VerifyOperationTreeForNode(
+                comp,
+                model,
+                anonymousObjectCreations[1],
+                expectedOperationTree: @"
 IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: <anonymous type: delegate*<System.Void>[] Ptrs>) (Syntax: 'new { Ptrs  ... ] { ptr } }')
   Initializers(1):
       ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: delegate*<System.Void>[]) (Syntax: 'Ptrs = new[] { ptr }')
@@ -1469,13 +1970,15 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
               IArrayInitializerOperation (1 elements) (OperationKind.ArrayInitializer, Type: null) (Syntax: '{ ptr }')
                 Element Values(1):
                     IParameterReferenceOperation: ptr (OperationKind.ParameterReference, Type: delegate*<System.Void>) (Syntax: 'ptr')
-");
+"
+            );
         }
 
         [Fact]
         public void FunctionPointerTypeAsArgToIterator()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 using System.Collections.Generic;
 unsafe class C
 {
@@ -1488,19 +1991,21 @@ unsafe class C
     {
         yield return 1;
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics(
                 // (5,48): error CS1637: Iterators cannot have pointer type parameters
                 //     IEnumerable<int> Iterator1(delegate*<void> i)
                 Diagnostic(ErrorCode.ERR_UnsafeIteratorArgType, "i").WithLocation(5, 48)
-                );
+            );
         }
 
         [Fact]
         public void FormattingReturnTypeOptions()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -1516,9 +2021,15 @@ unsafe class C
             var f1 = c.GetField("Field1").Type;
             var f2 = c.GetField("Field2").Type;
 
-            Assert.Equal("delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.Int32>", f1.ToTestDisplayString());
+            Assert.Equal(
+                "delegate*<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.Int32>",
+                f1.ToTestDisplayString()
+            );
             Assert.Equal("delegate*<ref readonly int>", f1.ToDisplayString());
-            Assert.Equal("delegate*<ref System.Int32 modopt(System.Object)>", f2.ToTestDisplayString());
+            Assert.Equal(
+                "delegate*<ref System.Int32 modopt(System.Object)>",
+                f2.ToTestDisplayString()
+            );
             Assert.Equal("delegate*<ref int>", f2.ToDisplayString());
         }
 
@@ -1527,22 +2038,147 @@ unsafe class C
         {
             var comp = (Compilation)CreateCompilation("");
             var @string = comp.GetSpecialType(SpecialType.System_String);
-            var cdeclType = comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvCdecl");
+            var cdeclType = comp.GetTypeByMetadataName(
+                "System.Runtime.CompilerServices.CallConvCdecl"
+            );
             Assert.NotNull(cdeclType);
-            Assert.Throws<ArgumentNullException>("returnType", () => comp.CreateFunctionPointerTypeSymbol(returnType: null!, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty));
-            Assert.Throws<ArgumentNullException>("parameterTypes", () => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: default, parameterRefKinds: ImmutableArray<RefKind>.Empty));
-            Assert.Throws<ArgumentNullException>("parameterTypes[0]", () => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray.Create((ITypeSymbol?)null)!, parameterRefKinds: ImmutableArray.Create(RefKind.None)));
-            Assert.Throws<ArgumentNullException>("parameterRefKinds", () => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: default));
-            Assert.Throws<ArgumentNullException>("callingConventionTypes[0]", () => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.Unmanaged, ImmutableArray.Create((INamedTypeSymbol)null!)));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray.Create(RefKind.None)));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.Out, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty));
-            Assert.Throws<ArgumentOutOfRangeException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: (SignatureCallingConvention)10));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.Default, callingConventionTypes: ImmutableArray.Create(cdeclType)!));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.StdCall, callingConventionTypes: ImmutableArray.Create(cdeclType)!));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.FastCall, callingConventionTypes: ImmutableArray.Create(cdeclType)!));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.CDecl, callingConventionTypes: ImmutableArray.Create(cdeclType)!));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.ThisCall, callingConventionTypes: ImmutableArray.Create(cdeclType)!));
-            Assert.Throws<ArgumentException>(() => comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.Unmanaged, callingConventionTypes: ImmutableArray.Create(@string)!));
+            Assert.Throws<ArgumentNullException>(
+                "returnType",
+                () =>
+                    comp.CreateFunctionPointerTypeSymbol(
+                        returnType: null!,
+                        returnRefKind: RefKind.None,
+                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                        parameterRefKinds: ImmutableArray<RefKind>.Empty
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "parameterTypes",
+                () =>
+                    comp.CreateFunctionPointerTypeSymbol(
+                        returnType: @string,
+                        returnRefKind: RefKind.None,
+                        parameterTypes: default,
+                        parameterRefKinds: ImmutableArray<RefKind>.Empty
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "parameterTypes[0]",
+                () =>
+                    comp.CreateFunctionPointerTypeSymbol(
+                        returnType: @string,
+                        returnRefKind: RefKind.None,
+                        parameterTypes: ImmutableArray.Create((ITypeSymbol?)null)!,
+                        parameterRefKinds: ImmutableArray.Create(RefKind.None)
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "parameterRefKinds",
+                () =>
+                    comp.CreateFunctionPointerTypeSymbol(
+                        returnType: @string,
+                        returnRefKind: RefKind.None,
+                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                        parameterRefKinds: default
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "callingConventionTypes[0]",
+                () =>
+                    comp.CreateFunctionPointerTypeSymbol(
+                        returnType: @string,
+                        returnRefKind: RefKind.None,
+                        parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                        parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                        callingConvention: SignatureCallingConvention.Unmanaged,
+                        ImmutableArray.Create((INamedTypeSymbol)null!)
+                    )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray.Create(RefKind.None)
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.Out,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty
+                )
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: (SignatureCallingConvention)10
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.Default,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.StdCall,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.FastCall,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.CDecl,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.ThisCall,
+                    callingConventionTypes: ImmutableArray.Create(cdeclType)!
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                comp.CreateFunctionPointerTypeSymbol(
+                    returnType: @string,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.Unmanaged,
+                    callingConventionTypes: ImmutableArray.Create(@string)!
+                )
+            );
         }
 
         [Fact]
@@ -1550,11 +2186,25 @@ unsafe class C
         {
             var comp = (Compilation)CreateCompilation("");
             var @string = comp.GetSpecialType(SpecialType.System_String);
-            var ptr = comp.CreateFunctionPointerTypeSymbol(returnType: @string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, callingConvention: SignatureCallingConvention.VarArgs);
+            var ptr = comp.CreateFunctionPointerTypeSymbol(
+                returnType: @string,
+                returnRefKind: RefKind.None,
+                parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                callingConvention: SignatureCallingConvention.VarArgs
+            );
 
             Assert.Equal(SignatureCallingConvention.VarArgs, ptr.Signature.CallingConvention);
-            var expectedMessage = "error CS8806: " + string.Format(CSharpResources.ERR_UnsupportedCallingConvention, "delegate* unmanaged[]<string>");
-            AssertEx.Equal(expectedMessage, ptr.EnsureCSharpSymbolOrNull(nameof(ptr)).GetUseSiteDiagnostic().ToString());
+            var expectedMessage =
+                "error CS8806: "
+                + string.Format(
+                    CSharpResources.ERR_UnsupportedCallingConvention,
+                    "delegate* unmanaged[]<string>"
+                );
+            AssertEx.Equal(
+                expectedMessage,
+                ptr.EnsureCSharpSymbolOrNull(nameof(ptr)).GetUseSiteDiagnostic().ToString()
+            );
         }
 
         [Fact]
@@ -1567,8 +2217,12 @@ unsafe class C
             var ptr = comp.CreateFunctionPointerTypeSymbol(
                 c.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
                 RefKind.None,
-                ImmutableArray.Create(c.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.NotAnnotated), c.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.Annotated)),
-                ImmutableArray.Create(RefKind.None, RefKind.None));
+                ImmutableArray.Create(
+                    c.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.NotAnnotated),
+                    c.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.Annotated)
+                ),
+                ImmutableArray.Create(RefKind.None, RefKind.None)
+            );
 
             Assert.Equal("delegate*<C!, C?, C>", ptr.ToTestDisplayString(includeNonNullable: true));
         }
@@ -1583,10 +2237,13 @@ unsafe class C
                 @string,
                 RefKind.RefReadOnly,
                 ImmutableArray.Create((ITypeSymbol)@string),
-                ImmutableArray.Create(RefKind.In));
+                ImmutableArray.Create(RefKind.In)
+            );
 
-            Assert.Equal("delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.String>",
-                         ptr.ToTestDisplayString());
+            Assert.Equal(
+                "delegate*<in modreq(System.Runtime.InteropServices.InAttribute) System.String, ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.String>",
+                ptr.ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -1600,10 +2257,13 @@ unsafe class C
                 @void,
                 RefKind.None,
                 ImmutableArray.Create((ITypeSymbol)@string),
-                ImmutableArray.Create(RefKind.Out));
+                ImmutableArray.Create(RefKind.Out)
+            );
 
-            Assert.Equal("delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>",
-                         ptr.ToTestDisplayString());
+            Assert.Equal(
+                "delegate*<out modreq(System.Runtime.InteropServices.OutAttribute) System.String, System.Void>",
+                ptr.ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -1618,10 +2278,19 @@ unsafe class C
                 @string,
                 RefKind.RefReadOnly,
                 ImmutableArray.Create((ITypeSymbol)@string),
-                ImmutableArray.Create(RefKind.Out));
+                ImmutableArray.Create(RefKind.Out)
+            );
 
-            Assert.Equal("System.Runtime.InteropServices.InAttribute[missing]", ptr.Signature.RefCustomModifiers.Single().Modifier.ToTestDisplayString());
-            Assert.Equal("System.Runtime.InteropServices.OutAttribute[missing]", ptr.Signature.Parameters.Single().RefCustomModifiers.Single().Modifier.ToTestDisplayString());
+            Assert.Equal(
+                "System.Runtime.InteropServices.InAttribute[missing]",
+                ptr.Signature.RefCustomModifiers.Single().Modifier.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.Runtime.InteropServices.OutAttribute[missing]",
+                ptr.Signature.Parameters.Single()
+                    .RefCustomModifiers.Single()
+                    .Modifier.ToTestDisplayString()
+            );
         }
 
         [Theory]
@@ -1630,15 +2299,36 @@ unsafe class C
         [InlineData("[Stdcall]", SignatureCallingConvention.StdCall)]
         [InlineData("[Fastcall]", SignatureCallingConvention.FastCall)]
         [InlineData("", SignatureCallingConvention.Unmanaged)]
-        public void PublicApi_CallingConventions_NoModopts(string expectedText, SignatureCallingConvention convention)
+        public void PublicApi_CallingConventions_NoModopts(
+            string expectedText,
+            SignatureCallingConvention convention
+        )
         {
             var comp = (Compilation)CreateCompilation("");
             var @string = comp.GetSpecialType(SpecialType.System_String);
 
-            var ptr = comp.CreateFunctionPointerTypeSymbol(@string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, convention);
-            AssertEx.Equal($"delegate* unmanaged{expectedText}<System.String>", ptr.ToTestDisplayString());
-            ptr = comp.CreateFunctionPointerTypeSymbol(@string, returnRefKind: RefKind.RefReadOnly, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, convention);
-            AssertEx.Equal($"delegate* unmanaged{expectedText}<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.String>", ptr.ToTestDisplayString());
+            var ptr = comp.CreateFunctionPointerTypeSymbol(
+                @string,
+                returnRefKind: RefKind.None,
+                parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                convention
+            );
+            AssertEx.Equal(
+                $"delegate* unmanaged{expectedText}<System.String>",
+                ptr.ToTestDisplayString()
+            );
+            ptr = comp.CreateFunctionPointerTypeSymbol(
+                @string,
+                returnRefKind: RefKind.RefReadOnly,
+                parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                convention
+            );
+            AssertEx.Equal(
+                $"delegate* unmanaged{expectedText}<ref readonly modreq(System.Runtime.InteropServices.InAttribute) System.String>",
+                ptr.ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -1646,24 +2336,59 @@ unsafe class C
         {
             var comp = (Compilation)CreateCompilation("");
             var @string = comp.GetSpecialType(SpecialType.System_String);
-            var cdeclType = comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvCdecl");
-            var stdcallType = comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall");
+            var cdeclType = comp.GetTypeByMetadataName(
+                "System.Runtime.CompilerServices.CallConvCdecl"
+            );
+            var stdcallType = comp.GetTypeByMetadataName(
+                "System.Runtime.CompilerServices.CallConvStdcall"
+            );
             Assert.NotNull(cdeclType);
 
-            var ptr = comp.CreateFunctionPointerTypeSymbol(@string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, SignatureCallingConvention.Unmanaged, ImmutableArray.Create(cdeclType, stdcallType)!);
-            AssertEx.Equal("delegate* unmanaged[Cdecl, Stdcall]<System.String modopt(System.Runtime.CompilerServices.CallConvCdecl) modopt(System.Runtime.CompilerServices.CallConvStdcall)>", ptr.ToTestDisplayString());
-            ptr = comp.CreateFunctionPointerTypeSymbol(@string, returnRefKind: RefKind.RefReadOnly, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, SignatureCallingConvention.Unmanaged, ImmutableArray.Create(cdeclType, stdcallType)!);
-            AssertEx.Equal("delegate* unmanaged[Cdecl, Stdcall]<ref readonly modopt(System.Runtime.CompilerServices.CallConvCdecl) modopt(System.Runtime.CompilerServices.CallConvStdcall) modreq(System.Runtime.InteropServices.InAttribute) System.String>", ptr.ToTestDisplayString());
+            var ptr = comp.CreateFunctionPointerTypeSymbol(
+                @string,
+                returnRefKind: RefKind.None,
+                parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                SignatureCallingConvention.Unmanaged,
+                ImmutableArray.Create(cdeclType, stdcallType)!
+            );
+            AssertEx.Equal(
+                "delegate* unmanaged[Cdecl, Stdcall]<System.String modopt(System.Runtime.CompilerServices.CallConvCdecl) modopt(System.Runtime.CompilerServices.CallConvStdcall)>",
+                ptr.ToTestDisplayString()
+            );
+            ptr = comp.CreateFunctionPointerTypeSymbol(
+                @string,
+                returnRefKind: RefKind.RefReadOnly,
+                parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                SignatureCallingConvention.Unmanaged,
+                ImmutableArray.Create(cdeclType, stdcallType)!
+            );
+            AssertEx.Equal(
+                "delegate* unmanaged[Cdecl, Stdcall]<ref readonly modopt(System.Runtime.CompilerServices.CallConvCdecl) modopt(System.Runtime.CompilerServices.CallConvStdcall) modreq(System.Runtime.InteropServices.InAttribute) System.String>",
+                ptr.ToTestDisplayString()
+            );
 
-            ptr = comp.CreateFunctionPointerTypeSymbol(@string, returnRefKind: RefKind.None, parameterTypes: ImmutableArray<ITypeSymbol>.Empty, parameterRefKinds: ImmutableArray<RefKind>.Empty, SignatureCallingConvention.Unmanaged, ImmutableArray.Create(cdeclType)!);
-            AssertEx.Equal("delegate* unmanaged[Cdecl]<System.String modopt(System.Runtime.CompilerServices.CallConvCdecl)>", ptr.ToTestDisplayString());
+            ptr = comp.CreateFunctionPointerTypeSymbol(
+                @string,
+                returnRefKind: RefKind.None,
+                parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                SignatureCallingConvention.Unmanaged,
+                ImmutableArray.Create(cdeclType)!
+            );
+            AssertEx.Equal(
+                "delegate* unmanaged[Cdecl]<System.String modopt(System.Runtime.CompilerServices.CallConvCdecl)>",
+                ptr.ToTestDisplayString()
+            );
             Assert.Equal(SignatureCallingConvention.Unmanaged, ptr.Signature.CallingConvention);
         }
 
         [Fact]
         public void PublicApi_SemanticInfo01()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 unsafe class C
 {
     public static string M1(C c) => null;
@@ -1675,87 +2400,136 @@ unsafe class C
         ptr(null);
         return &M2;
     }
-}");
+}"
+            );
 
             comp.VerifyDiagnostics();
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var mDeclSyntax = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Skip(2).Single();
+            var mDeclSyntax = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Skip(2)
+                .Single();
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, mDeclSyntax.ReturnType,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                mDeclSyntax.ReturnType,
                 expectedSyntax: "delegate*<string, int, void>",
                 expectedType: "delegate*<System.String, System.Int32, System.Void>",
-                expectedSymbol: "delegate*<System.String, System.Int32, System.Void>");
+                expectedSymbol: "delegate*<System.String, System.Int32, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, mDeclSyntax.ParameterList.Parameters[0].Type!,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                mDeclSyntax.ParameterList.Parameters[0].Type!,
                 expectedSyntax: "delegate*<C, string>",
                 expectedType: "delegate*<C, System.String>",
-                expectedSymbol: "delegate*<C, System.String>");
+                expectedSymbol: "delegate*<C, System.String>"
+            );
 
-            var varDecl = mDeclSyntax.DescendantNodes().OfType<VariableDeclarationSyntax>().Single();
+            var varDecl = mDeclSyntax
+                .DescendantNodes()
+                .OfType<VariableDeclarationSyntax>()
+                .Single();
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, varDecl.Type,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                varDecl.Type,
                 expectedSyntax: "delegate*<string, int, void>",
                 expectedType: "delegate*<System.String, System.Int32, System.Void>",
-                expectedSymbol: "delegate*<System.String, System.Int32, System.Void>");
+                expectedSymbol: "delegate*<System.String, System.Int32, System.Void>"
+            );
 
             var varInitializer = varDecl.Variables.Single().Initializer!.Value;
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, varInitializer,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                varInitializer,
                 expectedSyntax: "&M2",
                 expectedType: null,
                 expectedConvertedType: "delegate*<System.String, System.Int32, System.Void>",
-                expectedSymbol: "void C.M2(System.String s, System.Int32 i)");
+                expectedSymbol: "void C.M2(System.String s, System.Int32 i)"
+            );
 
-            var assignment = mDeclSyntax.DescendantNodes().OfType<AssignmentExpressionSyntax>().Single();
+            var assignment = mDeclSyntax
+                .DescendantNodes()
+                .OfType<AssignmentExpressionSyntax>()
+                .Single();
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, assignment,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                assignment,
                 expectedSyntax: "ptr = &M1",
                 expectedType: "delegate*<C, System.String>",
                 expectedSymbol: null,
-                expectedSymbolCandidates: null);
+                expectedSymbolCandidates: null
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, assignment.Left,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                assignment.Left,
                 expectedSyntax: "ptr",
                 expectedType: "delegate*<C, System.String>",
-                expectedSymbol: "delegate*<C, System.String> ptr");
+                expectedSymbol: "delegate*<C, System.String> ptr"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, assignment.Right,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                assignment.Right,
                 expectedSyntax: "&M1",
                 expectedType: null,
                 expectedConvertedType: "delegate*<C, System.String>",
-                expectedSymbol: "System.String C.M1(C c)");
+                expectedSymbol: "System.String C.M1(C c)"
+            );
 
-            InvocationExpressionSyntax invocationExpressionSyntax = mDeclSyntax.DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            InvocationExpressionSyntax invocationExpressionSyntax = mDeclSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, invocationExpressionSyntax,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                invocationExpressionSyntax,
                 expectedSyntax: "ptr(null)",
                 expectedType: "System.String",
-                expectedSymbol: "delegate*<C, System.String>");
+                expectedSymbol: "delegate*<C, System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, invocationExpressionSyntax.Expression,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                invocationExpressionSyntax.Expression,
                 expectedSyntax: "ptr",
                 expectedType: "delegate*<C, System.String>",
-                expectedSymbol: "delegate*<C, System.String> ptr");
+                expectedSymbol: "delegate*<C, System.String> ptr"
+            );
 
             var typeInfo = model.GetTypeInfo(invocationExpressionSyntax);
             Assert.Equal("System.String", typeInfo.Type.ToTestDisplayString());
             Assert.Equal("System.String", typeInfo.ConvertedType.ToTestDisplayString());
 
-            var returnExpression = mDeclSyntax.DescendantNodes().OfType<ReturnStatementSyntax>().Single().Expression!;
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model,
+            var returnExpression = mDeclSyntax
+                .DescendantNodes()
+                .OfType<ReturnStatementSyntax>()
+                .Single()
+                .Expression!;
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
                 returnExpression,
                 expectedSyntax: "&M2",
                 expectedType: null,
                 expectedConvertedType: "delegate*<System.String, System.Int32, System.Void>",
-                expectedSymbol: "void C.M2(System.String s, System.Int32 i)");
+                expectedSymbol: "void C.M2(System.String s, System.Int32 i)"
+            );
         }
 
         [Fact]
         public void PublicApi_SemanticInfo02()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 class C
 {
     public static string M1(int i) => null;
@@ -1773,15 +2547,20 @@ class C
         _ = ptr(1);
     }
 }
-");
+"
+            );
 
             comp.VerifyDiagnostics(
                 // (8,38): error CS0407: 'string C.M1(int)' has the wrong return type
                 //         delegate*<int, void> ptr2 = &M1;
-                Diagnostic(ErrorCode.ERR_BadRetType, "M1").WithArguments("C.M1(int)", "string").WithLocation(8, 38),
+                Diagnostic(ErrorCode.ERR_BadRetType, "M1")
+                    .WithArguments("C.M1(int)", "string")
+                    .WithLocation(8, 38),
                 // (10,13): error CS8756: Function pointer 'delegate*<int, string>' does not take 0 arguments
                 //         _ = ptr();
-                Diagnostic(ErrorCode.ERR_BadFuncPointerArgCount, "ptr()").WithArguments("delegate*<int, string>", "0").WithLocation(10, 13),
+                Diagnostic(ErrorCode.ERR_BadFuncPointerArgCount, "ptr()")
+                    .WithArguments("delegate*<int, string>", "0")
+                    .WithLocation(10, 13),
                 // (15,9): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         delegate*<int, string> ptr = &M1;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(15, 9),
@@ -1793,7 +2572,11 @@ class C
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var methodDecls = syntaxTree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().ToArray();
+            var methodDecls = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .ToArray();
 
             var ptrTypes = methodDecls
                 .SelectMany(m => m.DescendantNodes().OfType<FunctionPointerTypeSyntax>())
@@ -1801,20 +2584,29 @@ class C
 
             Assert.Equal(3, ptrTypes.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, ptrTypes[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                ptrTypes[0],
                 expectedSyntax: "delegate*<int, string>",
                 expectedType: "delegate*<System.Int32, System.String>",
-                expectedSymbol: "delegate*<System.Int32, System.String>");
+                expectedSymbol: "delegate*<System.Int32, System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, ptrTypes[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                ptrTypes[1],
                 expectedSyntax: "delegate*<int, void>",
                 expectedType: "delegate*<System.Int32, System.Void>",
-                expectedSymbol: "delegate*<System.Int32, System.Void>");
+                expectedSymbol: "delegate*<System.Int32, System.Void>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, ptrTypes[2],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                ptrTypes[2],
                 expectedSyntax: "delegate*<int, string>",
                 expectedType: "delegate*<System.Int32, System.String>",
-                expectedSymbol: "delegate*<System.Int32, System.String>");
+                expectedSymbol: "delegate*<System.Int32, System.String>"
+            );
 
             var m2DeclSyntax = methodDecls[1];
             var decls = m2DeclSyntax.DescendantNodes().OfType<VariableDeclaratorSyntax>().ToArray();
@@ -1822,70 +2614,104 @@ class C
             Assert.Equal("ptr = &M1", decls[0].ToString());
             var addressOfSyntax = (PrefixUnaryExpressionSyntax)decls[0].Initializer!.Value;
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, addressOfSyntax,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                addressOfSyntax,
                 expectedSyntax: "&M1",
                 expectedType: null,
                 expectedConvertedType: "delegate*<System.Int32, System.String>",
-                expectedSymbol: "System.String C.M1(System.Int32 i)");
+                expectedSymbol: "System.String C.M1(System.Int32 i)"
+            );
 
             Assert.Equal("ptr2 = &M1", decls[1].ToString());
             addressOfSyntax = (PrefixUnaryExpressionSyntax)decls[1].Initializer!.Value;
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, addressOfSyntax,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                addressOfSyntax,
                 expectedSyntax: "&M1",
                 expectedType: null,
                 expectedConvertedType: "delegate*<System.Int32, System.Void>",
                 expectedCandidateReason: CandidateReason.OverloadResolutionFailure,
-                expectedSymbolCandidates: new[] { "System.String C.M1(System.Int32 i)" });
+                expectedSymbolCandidates: new[] { "System.String C.M1(System.Int32 i)" }
+            );
 
-            var invocations = m2DeclSyntax.DescendantNodes().OfType<InvocationExpressionSyntax>().ToArray();
+            var invocations = m2DeclSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .ToArray();
             Assert.Equal(2, invocations.Length);
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, invocations[0],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                invocations[0],
                 expectedSyntax: "ptr(1)",
                 expectedType: "System.String",
-                expectedSymbol: "delegate*<System.Int32, System.String>");
+                expectedSymbol: "delegate*<System.Int32, System.String>"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, invocations[0].Expression,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                invocations[0].Expression,
                 expectedSyntax: "ptr",
                 expectedType: "delegate*<System.Int32, System.String>",
-                expectedSymbol: "delegate*<System.Int32, System.String> ptr");
+                expectedSymbol: "delegate*<System.Int32, System.String> ptr"
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, invocations[1],
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                invocations[1],
                 expectedSyntax: "ptr()",
                 expectedType: "System.String",
                 expectedCandidateReason: CandidateReason.OverloadResolutionFailure,
-                expectedSymbolCandidates: new[] { "delegate*<System.Int32, System.String>" });
+                expectedSymbolCandidates: new[] { "delegate*<System.Int32, System.String>" }
+            );
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, invocations[1].Expression,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                invocations[1].Expression,
                 expectedSyntax: "ptr",
                 expectedType: "delegate*<System.Int32, System.String>",
-                expectedSymbol: "delegate*<System.Int32, System.String> ptr");
+                expectedSymbol: "delegate*<System.Int32, System.String> ptr"
+            );
 
             var m3DeclSyntax = methodDecls[2];
 
-            var variableDeclaratorSyntax = m3DeclSyntax.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single();
+            var variableDeclaratorSyntax = m3DeclSyntax
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single();
             Assert.Equal("ptr = &M1", variableDeclaratorSyntax.ToString());
 
             var initializerValue = variableDeclaratorSyntax.Initializer!.Value;
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, initializerValue,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                initializerValue,
                 expectedSyntax: "&M1",
                 expectedType: null,
                 expectedConvertedType: "delegate*<System.Int32, System.String>",
-                expectedSymbol: "System.String C.M1(System.Int32 i)");
+                expectedSymbol: "System.String C.M1(System.Int32 i)"
+            );
 
-            var invocationExpr = m3DeclSyntax.DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var invocationExpr = m3DeclSyntax
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
 
-            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(model, invocationExpr,
+            FunctionPointerUtilities.VerifyFunctionPointerSemanticInfo(
+                model,
+                invocationExpr,
                 expectedSyntax: "ptr(1)",
                 expectedType: "System.String",
-                expectedSymbol: "delegate*<System.Int32, System.String>");
+                expectedSymbol: "delegate*<System.Int32, System.String>"
+            );
         }
 
         [Fact]
         public void PublicApi_DeclaredSymbol_BadSymbols()
         {
-            var comp = CreateFunctionPointerCompilation(@"
+            var comp = CreateFunctionPointerCompilation(
+                @"
 #pragma warning disable CS0168 // Unused local
 unsafe class C
 {
@@ -1898,46 +2724,76 @@ unsafe class C
         delegate*<ref void> ptr5;
     }
 }
-");
+"
+            );
 
             comp.VerifyDiagnostics(
                 // (7,19): error CS8808: 'out' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<out int> ptr1;
-                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "out").WithArguments("out").WithLocation(7, 19),
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "out")
+                    .WithArguments("out")
+                    .WithLocation(7, 19),
                 // (8,19): error CS8808: 'in' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
                 //         delegate*<in int> ptr2;
-                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "in").WithArguments("in").WithLocation(8, 19),
+                Diagnostic(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, "in")
+                    .WithArguments("in")
+                    .WithLocation(8, 19),
                 // (9,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.RequiresLocationAttribute' is not defined or imported
                 //         delegate*<ref readonly int, void> ptr3;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly int").WithArguments("System.Runtime.CompilerServices.RequiresLocationAttribute").WithLocation(9, 19),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "ref readonly int")
+                    .WithArguments("System.Runtime.CompilerServices.RequiresLocationAttribute")
+                    .WithLocation(9, 19),
                 // (9,23): error CS8773: Feature 'ref readonly parameters' is not available in C# 9.0. Please use language version 12.0 or greater.
                 //         delegate*<ref readonly int, void> ptr3;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "readonly").WithArguments("ref readonly parameters", "12.0").WithLocation(9, 23),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "readonly")
+                    .WithArguments("ref readonly parameters", "12.0")
+                    .WithLocation(9, 23),
                 // (10,19): error CS1536: Invalid parameter type 'void'
                 //         delegate*<void, void> ptr4;
                 Diagnostic(ErrorCode.ERR_NoVoidParameter, "void").WithLocation(10, 19),
                 // (11,19): error CS1547: Keyword 'void' cannot be used in this context
                 //         delegate*<ref void> ptr5;
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "ref void").WithLocation(11, 19));
+                Diagnostic(ErrorCode.ERR_NoVoidHere, "ref void").WithLocation(11, 19)
+            );
 
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var decls = syntaxTree.GetRoot().DescendantNodes().OfType<VariableDeclaratorSyntax>().ToArray();
+            var decls = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .ToArray();
 
             Assert.Equal(5, decls.Length);
 
-            Assert.Equal("delegate*<System.Int32> ptr1", model.GetDeclaredSymbol(decls[0]).ToTestDisplayString());
-            Assert.Equal("delegate*<System.Int32> ptr2", model.GetDeclaredSymbol(decls[1]).ToTestDisplayString());
-            Assert.Equal("delegate*<ref readonly modopt(System.Runtime.CompilerServices.RequiresLocationAttribute[missing]) System.Int32, System.Void> ptr3", model.GetDeclaredSymbol(decls[2]).ToTestDisplayString());
-            Assert.Equal("delegate*<System.Void, System.Void> ptr4", model.GetDeclaredSymbol(decls[3]).ToTestDisplayString());
-            Assert.Equal("delegate*<ref System.Void> ptr5", model.GetDeclaredSymbol(decls[4]).ToTestDisplayString());
+            Assert.Equal(
+                "delegate*<System.Int32> ptr1",
+                model.GetDeclaredSymbol(decls[0]).ToTestDisplayString()
+            );
+            Assert.Equal(
+                "delegate*<System.Int32> ptr2",
+                model.GetDeclaredSymbol(decls[1]).ToTestDisplayString()
+            );
+            Assert.Equal(
+                "delegate*<ref readonly modopt(System.Runtime.CompilerServices.RequiresLocationAttribute[missing]) System.Int32, System.Void> ptr3",
+                model.GetDeclaredSymbol(decls[2]).ToTestDisplayString()
+            );
+            Assert.Equal(
+                "delegate*<System.Void, System.Void> ptr4",
+                model.GetDeclaredSymbol(decls[3]).ToTestDisplayString()
+            );
+            Assert.Equal(
+                "delegate*<ref System.Void> ptr5",
+                model.GetDeclaredSymbol(decls[4]).ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void PublicApi_NonApplicationCorLibrary()
         {
-            var otherCorLib = CreateEmptyCompilation(@"
+            var otherCorLib = CreateEmptyCompilation(
+                @"
 namespace System
 {
     public class Object { }
@@ -1953,22 +2809,33 @@ namespace System
         }
     }
 }
-", options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular9);
+",
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: TestOptions.Regular9
+            );
 
             var mainComp = CreateCompilation("");
             var returnType = mainComp.GetSpecialType(SpecialType.System_String).GetPublicSymbol();
-            var testConvention = otherCorLib.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvTest");
+            var testConvention = otherCorLib.GetTypeByMetadataName(
+                "System.Runtime.CompilerServices.CallConvTest"
+            );
             Assert.NotNull(testConvention);
-            Assert.NotSame(testConvention!.ContainingAssembly.CorLibrary, mainComp.Assembly.CorLibrary);
+            Assert.NotSame(
+                testConvention!.ContainingAssembly.CorLibrary,
+                mainComp.Assembly.CorLibrary
+            );
             Assert.True(FunctionPointerTypeSymbol.IsCallingConventionModifier(testConvention));
 
-            Assert.Throws<ArgumentException>(() => mainComp.CreateFunctionPointerTypeSymbol(
-                returnType!,
-                returnRefKind: RefKind.None,
-                parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
-                parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                callingConvention: SignatureCallingConvention.Unmanaged,
-                callingConventionTypes: ImmutableArray.Create(testConvention.GetPublicSymbol()!)));
+            Assert.Throws<ArgumentException>(() =>
+                mainComp.CreateFunctionPointerTypeSymbol(
+                    returnType!,
+                    returnRefKind: RefKind.None,
+                    parameterTypes: ImmutableArray<ITypeSymbol>.Empty,
+                    parameterRefKinds: ImmutableArray<RefKind>.Empty,
+                    callingConvention: SignatureCallingConvention.Unmanaged,
+                    callingConventionTypes: ImmutableArray.Create(testConvention.GetPublicSymbol()!)
+                )
+            );
         }
 
         [Fact]
@@ -1978,69 +2845,220 @@ namespace System
 
             var returnType = comp.GetSpecialType(SpecialType.System_String);
 
-            var objectMod = CSharpCustomModifier.CreateOptional(comp.GetSpecialType(SpecialType.System_Object));
-            var thiscallMod = CSharpCustomModifier.CreateOptional(comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvThiscall"));
-            var stdcallMod = CSharpCustomModifier.CreateOptional(comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall"));
+            var objectMod = CSharpCustomModifier.CreateOptional(
+                comp.GetSpecialType(SpecialType.System_Object)
+            );
+            var thiscallMod = CSharpCustomModifier.CreateOptional(
+                comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvThiscall")
+            );
+            var stdcallMod = CSharpCustomModifier.CreateOptional(
+                comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall")
+            );
 
             var funcPtrPlatformDefault = createTypeSymbol(customModifiers: default);
-            var funcPtrConventionThisCall = createTypeSymbol(customModifiers: default, CallingConvention.ThisCall);
-            var funcPtrConventionThisCallWithThiscallMod = createTypeSymbol(customModifiers: ImmutableArray.Create(thiscallMod), CallingConvention.ThisCall);
+            var funcPtrConventionThisCall = createTypeSymbol(
+                customModifiers: default,
+                CallingConvention.ThisCall
+            );
+            var funcPtrConventionThisCallWithThiscallMod = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(thiscallMod),
+                CallingConvention.ThisCall
+            );
 
-            var funcPtrThiscall = createTypeSymbol(customModifiers: ImmutableArray.Create(thiscallMod));
-            var funcPtrThiscallObject = createTypeSymbol(customModifiers: ImmutableArray.Create(thiscallMod, objectMod));
-            var funcPtrObjectThiscall = createTypeSymbol(customModifiers: ImmutableArray.Create(objectMod, thiscallMod));
-            var funcPtrObjectThiscallObject = createTypeSymbol(customModifiers: ImmutableArray.Create(objectMod, thiscallMod, objectMod));
+            var funcPtrThiscall = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(thiscallMod)
+            );
+            var funcPtrThiscallObject = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(thiscallMod, objectMod)
+            );
+            var funcPtrObjectThiscall = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(objectMod, thiscallMod)
+            );
+            var funcPtrObjectThiscallObject = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(objectMod, thiscallMod, objectMod)
+            );
 
-            var funcPtrThiscallStdcall = createTypeSymbol(customModifiers: ImmutableArray.Create(thiscallMod, stdcallMod));
-            var funcPtrStdcallThiscall = createTypeSymbol(customModifiers: ImmutableArray.Create(stdcallMod, thiscallMod));
-            var funcPtrThiscallThiscallStdcall = createTypeSymbol(customModifiers: ImmutableArray.Create(thiscallMod, thiscallMod, stdcallMod));
-            var funcPtrThiscallObjectStdcall = createTypeSymbol(customModifiers: ImmutableArray.Create(thiscallMod, objectMod, stdcallMod));
+            var funcPtrThiscallStdcall = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(thiscallMod, stdcallMod)
+            );
+            var funcPtrStdcallThiscall = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(stdcallMod, thiscallMod)
+            );
+            var funcPtrThiscallThiscallStdcall = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(thiscallMod, thiscallMod, stdcallMod)
+            );
+            var funcPtrThiscallObjectStdcall = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(thiscallMod, objectMod, stdcallMod)
+            );
 
-            verifyEquality(funcPtrPlatformDefault, funcPtrThiscall, expectedConventionEquality: false, expectedFullEquality: false);
-            verifyEquality(funcPtrPlatformDefault, funcPtrConventionThisCall, expectedConventionEquality: false, expectedFullEquality: false, skipGetCallingConventionModifiersCheck: true);
-            verifyEquality(funcPtrConventionThisCallWithThiscallMod, funcPtrConventionThisCall, expectedConventionEquality: true, expectedFullEquality: false, skipGetCallingConventionModifiersCheck: true);
+            verifyEquality(
+                funcPtrPlatformDefault,
+                funcPtrThiscall,
+                expectedConventionEquality: false,
+                expectedFullEquality: false
+            );
+            verifyEquality(
+                funcPtrPlatformDefault,
+                funcPtrConventionThisCall,
+                expectedConventionEquality: false,
+                expectedFullEquality: false,
+                skipGetCallingConventionModifiersCheck: true
+            );
+            verifyEquality(
+                funcPtrConventionThisCallWithThiscallMod,
+                funcPtrConventionThisCall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false,
+                skipGetCallingConventionModifiersCheck: true
+            );
 
             // Single calling convention modopt
-            verifyEquality(funcPtrThiscall, funcPtrThiscallObject, expectedConventionEquality: true, expectedFullEquality: false);
-            verifyEquality(funcPtrThiscall, funcPtrObjectThiscall, expectedConventionEquality: true, expectedFullEquality: false);
-            verifyEquality(funcPtrThiscall, funcPtrObjectThiscallObject, expectedConventionEquality: true, expectedFullEquality: false);
+            verifyEquality(
+                funcPtrThiscall,
+                funcPtrThiscallObject,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
+            verifyEquality(
+                funcPtrThiscall,
+                funcPtrObjectThiscall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
+            verifyEquality(
+                funcPtrThiscall,
+                funcPtrObjectThiscallObject,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
 
-            verifyEquality(funcPtrThiscallObject, funcPtrObjectThiscall, expectedConventionEquality: true, expectedFullEquality: false);
-            verifyEquality(funcPtrThiscallObject, funcPtrObjectThiscallObject, expectedConventionEquality: true, expectedFullEquality: false);
+            verifyEquality(
+                funcPtrThiscallObject,
+                funcPtrObjectThiscall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
+            verifyEquality(
+                funcPtrThiscallObject,
+                funcPtrObjectThiscallObject,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
 
-            verifyEquality(funcPtrObjectThiscall, funcPtrObjectThiscallObject, expectedConventionEquality: true, expectedFullEquality: false);
+            verifyEquality(
+                funcPtrObjectThiscall,
+                funcPtrObjectThiscallObject,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
 
             // Multiple calling convention modopts
-            verifyEquality(funcPtrThiscallStdcall, funcPtrStdcallThiscall, expectedConventionEquality: true, expectedFullEquality: false);
-            verifyEquality(funcPtrThiscallStdcall, funcPtrThiscallThiscallStdcall, expectedConventionEquality: true, expectedFullEquality: false);
-            verifyEquality(funcPtrThiscallStdcall, funcPtrThiscallObjectStdcall, expectedConventionEquality: true, expectedFullEquality: false);
+            verifyEquality(
+                funcPtrThiscallStdcall,
+                funcPtrStdcallThiscall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
+            verifyEquality(
+                funcPtrThiscallStdcall,
+                funcPtrThiscallThiscallStdcall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
+            verifyEquality(
+                funcPtrThiscallStdcall,
+                funcPtrThiscallObjectStdcall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
 
-            verifyEquality(funcPtrStdcallThiscall, funcPtrThiscallThiscallStdcall, expectedConventionEquality: true, expectedFullEquality: false);
-            verifyEquality(funcPtrStdcallThiscall, funcPtrThiscallObjectStdcall, expectedConventionEquality: true, expectedFullEquality: false);
+            verifyEquality(
+                funcPtrStdcallThiscall,
+                funcPtrThiscallThiscallStdcall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
+            verifyEquality(
+                funcPtrStdcallThiscall,
+                funcPtrThiscallObjectStdcall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
 
-            verifyEquality(funcPtrThiscallThiscallStdcall, funcPtrThiscallObjectStdcall, expectedConventionEquality: true, expectedFullEquality: false);
+            verifyEquality(
+                funcPtrThiscallThiscallStdcall,
+                funcPtrThiscallObjectStdcall,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
 
-            static void verifyEquality((FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr1, (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2, bool expectedConventionEquality, bool expectedFullEquality, bool skipGetCallingConventionModifiersCheck = false)
+            static void verifyEquality(
+                (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr1,
+                (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2,
+                bool expectedConventionEquality,
+                bool expectedFullEquality,
+                bool skipGetCallingConventionModifiersCheck = false
+            )
             {
                 // No equality between pointers with differing refkinds
-                Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                Assert.False(
+                    ptr1.NoRef.Equals(
+                        ptr2.ByRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
-                Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                Assert.False(
+                    ptr1.ByRef.Equals(
+                        ptr2.NoRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
                 if (!skipGetCallingConventionModifiersCheck)
                 {
-                    Assert.Equal(expectedConventionEquality, ptr1.NoRef.Signature.GetCallingConventionModifiers().SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers()));
-                    Assert.Equal(expectedConventionEquality, ptr1.ByRef.Signature.GetCallingConventionModifiers().SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers()));
+                    Assert.Equal(
+                        expectedConventionEquality,
+                        ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                            .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
+                    );
+                    Assert.Equal(
+                        expectedConventionEquality,
+                        ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                            .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
+                    );
                 }
-                Assert.Equal(expectedConventionEquality, ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
-                Assert.Equal(expectedConventionEquality, ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
-                Assert.Equal(expectedFullEquality, ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
-                Assert.Equal(expectedFullEquality, ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
+                Assert.Equal(
+                    expectedConventionEquality,
+                    ptr1.NoRef.Equals(
+                        ptr2.NoRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
+                Assert.Equal(
+                    expectedConventionEquality,
+                    ptr1.ByRef.Equals(
+                        ptr2.ByRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
+                Assert.Equal(
+                    expectedFullEquality,
+                    ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything)
+                );
+                Assert.Equal(
+                    expectedFullEquality,
+                    ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything)
+                );
             }
 
-            (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) createTypeSymbol(ImmutableArray<CustomModifier> customModifiers, CallingConvention callingConvention = CallingConvention.Unmanaged)
-                => (FunctionPointerTypeSymbol.CreateFromPartsForTests(
+            (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) createTypeSymbol(
+                ImmutableArray<CustomModifier> customModifiers,
+                CallingConvention callingConvention = CallingConvention.Unmanaged
+            ) =>
+                (
+                    FunctionPointerTypeSymbol.CreateFromPartsForTests(
                         callingConvention,
                         TypeWithAnnotations.Create(returnType, customModifiers: customModifiers),
                         refCustomModifiers: default,
@@ -2048,7 +3066,8 @@ namespace System
                         parameterTypes: ImmutableArray<TypeWithAnnotations>.Empty,
                         parameterRefCustomModifiers: default,
                         parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        compilation: comp),
+                        compilation: comp
+                    ),
                     FunctionPointerTypeSymbol.CreateFromPartsForTests(
                         callingConvention,
                         TypeWithAnnotations.Create(returnType),
@@ -2057,13 +3076,16 @@ namespace System
                         parameterTypes: ImmutableArray<TypeWithAnnotations>.Empty,
                         parameterRefCustomModifiers: default,
                         parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        compilation: comp));
+                        compilation: comp
+                    )
+                );
         }
 
         [Fact]
         public void CallingConventionNamedCallConv()
         {
-            var comp = CreateEmptyCompilation(@"
+            var comp = CreateEmptyCompilation(
+                @"
 namespace System
 {
     public class Object { }
@@ -2079,35 +3101,92 @@ namespace System
         }
     }
 }
-", options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular9);
+",
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: TestOptions.Regular9
+            );
 
             var returnType = comp.GetSpecialType(SpecialType.System_String);
 
-            var callConvMod = CSharpCustomModifier.CreateOptional(comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConv"));
+            var callConvMod = CSharpCustomModifier.CreateOptional(
+                comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConv")
+            );
 
             var funcPtr = createTypeSymbol(customModifiers: default);
-            var funcPtrCallConv = createTypeSymbol(customModifiers: ImmutableArray.Create(callConvMod));
+            var funcPtrCallConv = createTypeSymbol(
+                customModifiers: ImmutableArray.Create(callConvMod)
+            );
 
-            verifyEquality(funcPtr, funcPtrCallConv, expectedConventionEquality: true, expectedFullEquality: false);
+            verifyEquality(
+                funcPtr,
+                funcPtrCallConv,
+                expectedConventionEquality: true,
+                expectedFullEquality: false
+            );
 
-            static void verifyEquality((FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr1, (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2, bool expectedConventionEquality, bool expectedFullEquality)
+            static void verifyEquality(
+                (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr1,
+                (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2,
+                bool expectedConventionEquality,
+                bool expectedFullEquality
+            )
             {
                 // No equality between pointers with differing refkinds
-                Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                Assert.False(
+                    ptr1.NoRef.Equals(
+                        ptr2.ByRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
-                Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                Assert.False(
+                    ptr1.ByRef.Equals(
+                        ptr2.NoRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
-                Assert.Equal(expectedConventionEquality, ptr1.NoRef.Signature.GetCallingConventionModifiers().SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers()));
-                Assert.Equal(expectedConventionEquality, ptr1.ByRef.Signature.GetCallingConventionModifiers().SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers()));
-                Assert.Equal(expectedConventionEquality, ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
-                Assert.Equal(expectedConventionEquality, ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
-                Assert.Equal(expectedFullEquality, ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
-                Assert.Equal(expectedFullEquality, ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
+                Assert.Equal(
+                    expectedConventionEquality,
+                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                        .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
+                );
+                Assert.Equal(
+                    expectedConventionEquality,
+                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                        .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
+                );
+                Assert.Equal(
+                    expectedConventionEquality,
+                    ptr1.NoRef.Equals(
+                        ptr2.NoRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
+                Assert.Equal(
+                    expectedConventionEquality,
+                    ptr1.ByRef.Equals(
+                        ptr2.ByRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
+                Assert.Equal(
+                    expectedFullEquality,
+                    ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything)
+                );
+                Assert.Equal(
+                    expectedFullEquality,
+                    ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything)
+                );
             }
 
-            (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) createTypeSymbol(ImmutableArray<CustomModifier> customModifiers, CallingConvention callingConvention = CallingConvention.Unmanaged)
-                => (FunctionPointerTypeSymbol.CreateFromPartsForTests(
+            (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) createTypeSymbol(
+                ImmutableArray<CustomModifier> customModifiers,
+                CallingConvention callingConvention = CallingConvention.Unmanaged
+            ) =>
+                (
+                    FunctionPointerTypeSymbol.CreateFromPartsForTests(
                         callingConvention,
                         TypeWithAnnotations.Create(returnType, customModifiers: customModifiers),
                         refCustomModifiers: default,
@@ -2115,7 +3194,8 @@ namespace System
                         parameterTypes: ImmutableArray<TypeWithAnnotations>.Empty,
                         parameterRefCustomModifiers: default,
                         parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        compilation: comp),
+                        compilation: comp
+                    ),
                     FunctionPointerTypeSymbol.CreateFromPartsForTests(
                         callingConvention,
                         TypeWithAnnotations.Create(returnType),
@@ -2124,7 +3204,9 @@ namespace System
                         parameterTypes: ImmutableArray<TypeWithAnnotations>.Empty,
                         parameterRefCustomModifiers: default,
                         parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        compilation: comp));
+                        compilation: comp
+                    )
+                );
         }
 
         [Fact]
@@ -2134,56 +3216,138 @@ namespace System
 
             var returnType = comp.GetSpecialType(SpecialType.System_String);
 
-            var objectMod = CSharpCustomModifier.CreateOptional(comp.GetSpecialType(SpecialType.System_Object));
-            var thiscallMod = CSharpCustomModifier.CreateOptional(comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvThiscall"));
-            var stdcallMod = CSharpCustomModifier.CreateOptional(comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall"));
+            var objectMod = CSharpCustomModifier.CreateOptional(
+                comp.GetSpecialType(SpecialType.System_Object)
+            );
+            var thiscallMod = CSharpCustomModifier.CreateOptional(
+                comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvThiscall")
+            );
+            var stdcallMod = CSharpCustomModifier.CreateOptional(
+                comp.GetTypeByMetadataName("System.Runtime.CompilerServices.CallConvStdcall")
+            );
 
-            var funcPtrThiscallOnTypeThiscallOnRef = createTypeSymbol(typeCustomModifiers: ImmutableArray.Create(thiscallMod), refCustomModifiers: ImmutableArray.Create(thiscallMod));
-            var funcPtrThiscallOnTypeStdcallOnRef = createTypeSymbol(typeCustomModifiers: ImmutableArray.Create(thiscallMod), refCustomModifiers: ImmutableArray.Create(stdcallMod));
-            var funcPtrStdcallOnTypeThiscallOnRef = createTypeSymbol(typeCustomModifiers: ImmutableArray.Create(stdcallMod), refCustomModifiers: ImmutableArray.Create(thiscallMod));
+            var funcPtrThiscallOnTypeThiscallOnRef = createTypeSymbol(
+                typeCustomModifiers: ImmutableArray.Create(thiscallMod),
+                refCustomModifiers: ImmutableArray.Create(thiscallMod)
+            );
+            var funcPtrThiscallOnTypeStdcallOnRef = createTypeSymbol(
+                typeCustomModifiers: ImmutableArray.Create(thiscallMod),
+                refCustomModifiers: ImmutableArray.Create(stdcallMod)
+            );
+            var funcPtrStdcallOnTypeThiscallOnRef = createTypeSymbol(
+                typeCustomModifiers: ImmutableArray.Create(stdcallMod),
+                refCustomModifiers: ImmutableArray.Create(thiscallMod)
+            );
 
-            verifyEquality(funcPtrThiscallOnTypeThiscallOnRef, funcPtrThiscallOnTypeStdcallOnRef, expectedTypeConventionEquality: true, expectedRefConventionEquality: false);
-            verifyEquality(funcPtrThiscallOnTypeThiscallOnRef, funcPtrStdcallOnTypeThiscallOnRef, expectedTypeConventionEquality: false, expectedRefConventionEquality: true);
-            verifyEquality(funcPtrThiscallOnTypeStdcallOnRef, funcPtrStdcallOnTypeThiscallOnRef, expectedTypeConventionEquality: false, expectedRefConventionEquality: false);
+            verifyEquality(
+                funcPtrThiscallOnTypeThiscallOnRef,
+                funcPtrThiscallOnTypeStdcallOnRef,
+                expectedTypeConventionEquality: true,
+                expectedRefConventionEquality: false
+            );
+            verifyEquality(
+                funcPtrThiscallOnTypeThiscallOnRef,
+                funcPtrStdcallOnTypeThiscallOnRef,
+                expectedTypeConventionEquality: false,
+                expectedRefConventionEquality: true
+            );
+            verifyEquality(
+                funcPtrThiscallOnTypeStdcallOnRef,
+                funcPtrStdcallOnTypeThiscallOnRef,
+                expectedTypeConventionEquality: false,
+                expectedRefConventionEquality: false
+            );
 
-            static void verifyEquality((FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr1, (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2, bool expectedTypeConventionEquality, bool expectedRefConventionEquality)
+            static void verifyEquality(
+                (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr1,
+                (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) ptr2,
+                bool expectedTypeConventionEquality,
+                bool expectedRefConventionEquality
+            )
             {
                 // No equality between pointers with differing refkinds
-                Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                Assert.False(
+                    ptr1.NoRef.Equals(
+                        ptr2.ByRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
                 Assert.False(ptr1.NoRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
-                Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                Assert.False(
+                    ptr1.ByRef.Equals(
+                        ptr2.NoRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
                 Assert.False(ptr1.ByRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
 
-                Assert.Equal(expectedTypeConventionEquality, ptr1.NoRef.Signature.GetCallingConventionModifiers().SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers()));
-                Assert.Equal(expectedRefConventionEquality, ptr1.ByRef.Signature.GetCallingConventionModifiers().SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers()));
+                Assert.Equal(
+                    expectedTypeConventionEquality,
+                    ptr1.NoRef.Signature.GetCallingConventionModifiers()
+                        .SetEquals(ptr2.NoRef.Signature.GetCallingConventionModifiers())
+                );
+                Assert.Equal(
+                    expectedRefConventionEquality,
+                    ptr1.ByRef.Signature.GetCallingConventionModifiers()
+                        .SetEquals(ptr2.ByRef.Signature.GetCallingConventionModifiers())
+                );
 
-                Assert.Equal(expectedTypeConventionEquality, ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
-                Assert.Equal(expectedRefConventionEquality, ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds));
+                Assert.Equal(
+                    expectedTypeConventionEquality,
+                    ptr1.NoRef.Equals(
+                        ptr2.NoRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
+                Assert.Equal(
+                    expectedRefConventionEquality,
+                    ptr1.ByRef.Equals(
+                        ptr2.ByRef,
+                        TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds
+                    )
+                );
                 // If we weren't expected the ref version to be equal, but we were expecting the type version to be equal, then that means
                 // the type version will be identical because it will have no ref modifiers
-                Assert.Equal(expectedTypeConventionEquality && !expectedRefConventionEquality, ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything));
+                Assert.Equal(
+                    expectedTypeConventionEquality && !expectedRefConventionEquality,
+                    ptr1.NoRef.Equals(ptr2.NoRef, TypeCompareKind.ConsiderEverything)
+                );
                 Assert.False(ptr1.ByRef.Equals(ptr2.ByRef, TypeCompareKind.ConsiderEverything));
             }
 
-            (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) createTypeSymbol(ImmutableArray<CustomModifier> typeCustomModifiers, ImmutableArray<CustomModifier> refCustomModifiers, CallingConvention callingConvention = CallingConvention.Unmanaged)
-                => (FunctionPointerTypeSymbol.CreateFromPartsForTests(
+            (FunctionPointerTypeSymbol NoRef, FunctionPointerTypeSymbol ByRef) createTypeSymbol(
+                ImmutableArray<CustomModifier> typeCustomModifiers,
+                ImmutableArray<CustomModifier> refCustomModifiers,
+                CallingConvention callingConvention = CallingConvention.Unmanaged
+            ) =>
+                (
+                    FunctionPointerTypeSymbol.CreateFromPartsForTests(
                         callingConvention,
-                        TypeWithAnnotations.Create(returnType, customModifiers: typeCustomModifiers),
+                        TypeWithAnnotations.Create(
+                            returnType,
+                            customModifiers: typeCustomModifiers
+                        ),
                         refCustomModifiers: default,
                         returnRefKind: RefKind.None,
                         parameterTypes: ImmutableArray<TypeWithAnnotations>.Empty,
                         parameterRefCustomModifiers: default,
                         parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        compilation: comp),
+                        compilation: comp
+                    ),
                     FunctionPointerTypeSymbol.CreateFromPartsForTests(
                         callingConvention,
-                        TypeWithAnnotations.Create(returnType, customModifiers: typeCustomModifiers),
+                        TypeWithAnnotations.Create(
+                            returnType,
+                            customModifiers: typeCustomModifiers
+                        ),
                         refCustomModifiers,
                         RefKind.Ref,
                         parameterTypes: ImmutableArray<TypeWithAnnotations>.Empty,
                         parameterRefCustomModifiers: default,
                         parameterRefKinds: ImmutableArray<RefKind>.Empty,
-                        compilation: comp));
+                        compilation: comp
+                    )
+                );
         }
     }
 }

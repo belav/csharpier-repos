@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,51 +28,60 @@
 
 namespace System.Windows.Forms
 {
-	public class PreviewKeyDownEventArgs : EventArgs
-	{
-		private Keys key_data;
-		private bool is_input_key;
-		
-		#region Public Constructors
-		public PreviewKeyDownEventArgs (Keys keyData) : base ()
-		{
-			this.key_data = keyData;
-		}
-		#endregion	// Public Constructors
+    public class PreviewKeyDownEventArgs : EventArgs
+    {
+        private Keys key_data;
+        private bool is_input_key;
 
-		#region Public Instance Properties
-		public bool Alt	{
-			get { return (this.key_data & Keys.Alt) != 0; }
-		}
+        #region Public Constructors
+        public PreviewKeyDownEventArgs(Keys keyData)
+            : base()
+        {
+            this.key_data = keyData;
+        }
+        #endregion	// Public Constructors
 
-		public bool Control {
-			get { return (this.key_data & Keys.Control) != 0; }
-		}
+        #region Public Instance Properties
+        public bool Alt
+        {
+            get { return (this.key_data & Keys.Alt) != 0; }
+        }
 
-		public bool IsInputKey {
-			get { return this.is_input_key; }
-			set { this.is_input_key = value; }
-		}
+        public bool Control
+        {
+            get { return (this.key_data & Keys.Control) != 0; }
+        }
 
-		public Keys KeyCode {
-			get { return (this.key_data & Keys.KeyCode); }
-		}
+        public bool IsInputKey
+        {
+            get { return this.is_input_key; }
+            set { this.is_input_key = value; }
+        }
 
-		public Keys KeyData {
-			get { return this.key_data; }
-		}
+        public Keys KeyCode
+        {
+            get { return (this.key_data & Keys.KeyCode); }
+        }
 
-		public int KeyValue {
-			get { return (int) (this.key_data & Keys.KeyCode); }
-		}
+        public Keys KeyData
+        {
+            get { return this.key_data; }
+        }
 
-		public Keys Modifiers {
-			get { return (this.key_data & Keys.Modifiers); }
-		}
+        public int KeyValue
+        {
+            get { return (int)(this.key_data & Keys.KeyCode); }
+        }
 
-		public bool Shift {
-			get { return (this.key_data & Keys.Shift) != 0; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        public Keys Modifiers
+        {
+            get { return (this.key_data & Keys.Modifiers); }
+        }
+
+        public bool Shift
+        {
+            get { return (this.key_data & Keys.Shift) != 0; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

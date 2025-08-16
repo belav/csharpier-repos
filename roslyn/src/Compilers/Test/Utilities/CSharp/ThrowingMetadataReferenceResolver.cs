@@ -28,7 +28,11 @@ public sealed class ThrowingMetadataReferenceResolver : MetadataReferenceResolve
 
     public override int GetHashCode() => throw new NotImplementedException();
 
-    public override ImmutableArray<PortableExecutableReference> ResolveReference(string reference, string? baseFilePath, MetadataReferenceProperties properties)
+    public override ImmutableArray<PortableExecutableReference> ResolveReference(
+        string reference,
+        string? baseFilePath,
+        MetadataReferenceProperties properties
+    )
     {
         if (Resolver is null)
         {
@@ -37,5 +41,4 @@ public sealed class ThrowingMetadataReferenceResolver : MetadataReferenceResolve
 
         return Resolver.ResolveReference(reference, baseFilePath, properties);
     }
-
 }

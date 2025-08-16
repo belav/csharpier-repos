@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="ChoiceConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
 {
-    using System.Diagnostics;
     using System.Collections;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
     using System.Web.UI.Design.MobileControls.Util;
@@ -21,21 +21,27 @@ namespace System.Web.UI.Design.MobileControls.Converters
     ///       Can filter and retrieve several types of values from controls.
     ///    </para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class ChoiceConverter: StringConverter
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class ChoiceConverter : StringConverter
     {
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) 
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (context != null && context.Instance is Array)
             {
                 return value;
             }
 
-            if (value is String) 
+            if (value is String)
             {
                 return MatchFilterName((string)value, context);
             }
@@ -45,23 +51,24 @@ namespace System.Web.UI.Design.MobileControls.Converters
 
         /// <summary>
         /// </summary>
-        protected virtual Object [] GetChoices(Object instance)
+        protected virtual Object[] GetChoices(Object instance)
         {
             bool defaultAdded = false;
             DeviceSpecific deviceSpecific;
 
             if (instance is System.Web.UI.MobileControls.StyleSheet)
             {
-                StyleSheet ss = (StyleSheet) instance;
+                StyleSheet ss = (StyleSheet)instance;
                 ISite componentSite = ss.Site;
                 Debug.Assert(componentSite != null, "Expected the component to be sited.");
-                IDesignerHost designerHost = (IDesignerHost) componentSite.GetService(typeof(IDesignerHost));
+                IDesignerHost designerHost = (IDesignerHost)
+                    componentSite.GetService(typeof(IDesignerHost));
                 Debug.Assert(designerHost != null, "Expected a designer host.");
                 Object designer = designerHost.GetDesigner(ss);
                 Debug.Assert(designer != null, "Expected a designer for the stylesheet.");
                 Debug.Assert(designer is StyleSheetDesigner, "Expected a StyleSheet designer.");
-                StyleSheetDesigner ssd = (StyleSheetDesigner) designer;
-                Style style = (Style) ssd.CurrentStyle;
+                StyleSheetDesigner ssd = (StyleSheetDesigner)designer;
+                Style style = (Style)ssd.CurrentStyle;
                 if (null != style)
                 {
                     deviceSpecific = style.DeviceSpecific;
@@ -73,11 +80,11 @@ namespace System.Web.UI.Design.MobileControls.Converters
             }
             else if (instance is System.Web.UI.MobileControls.DeviceSpecific)
             {
-                deviceSpecific = (DeviceSpecific) instance;
+                deviceSpecific = (DeviceSpecific)instance;
             }
             else if (instance is MobileControl)
             {
-                MobileControl mc = (MobileControl) instance;
+                MobileControl mc = (MobileControl)instance;
                 deviceSpecific = mc.DeviceSpecific;
             }
             else
@@ -97,7 +104,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             }
 
             Debug.Assert(deviceSpecific.Choices != null);
-            foreach(DeviceSpecificChoice choice in deviceSpecific.Choices)
+            foreach (DeviceSpecificChoice choice in deviceSpecific.Choices)
             {
                 // Choice must have a Name
                 if (choice.Filter != null && choice.Filter.Length == 0)
@@ -142,7 +149,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 return null;
             }
 
-            Object [] objValues = GetChoices(context.Instance);
+            Object[] objValues = GetChoices(context.Instance);
             if (objValues != null)
             {
                 return new StandardValuesCollection(objValues);
@@ -150,7 +157,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             else
             {
                 return null;
-            }            
+            }
         }
 
         /// <summary>
@@ -164,7 +171,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context contains exclusive standard 
+        ///    <see langword='true'/> if the specified context contains exclusive standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
@@ -184,7 +191,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </param>
         /// <returns>
         ///    <para>
-        ///    <see langword='true'/> if the specified context conatins supported standard 
+        ///    <see langword='true'/> if the specified context conatins supported standard
         ///       values, otherwise <see langword='false'/>.
         ///    </para>
         /// </returns>
@@ -193,7 +200,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
             return true;
         }
 
-        private String MatchFilterName(String name, ITypeDescriptorContext context) 
+        private String MatchFilterName(String name, ITypeDescriptorContext context)
         {
             Debug.Assert(name != null, "Expected an actual device filter name to match.");
 
@@ -208,29 +215,30 @@ namespace System.Web.UI.Design.MobileControls.Converters
             }
 
             IEnumerator e = standardValues.GetEnumerator();
-            while (e.MoveNext()) 
+            while (e.MoveNext())
             {
                 string filterName = e.Current.ToString();
-                if (String.Equals(filterName, name, StringComparison.OrdinalIgnoreCase)) {
+                if (String.Equals(filterName, name, StringComparison.OrdinalIgnoreCase))
+                {
                     // For an exact match, return immediately
                     //
                     return filterName;
                 }
-                else if (e.Current.ToString().StartsWith(name, StringComparison.OrdinalIgnoreCase)) 
+                else if (e.Current.ToString().StartsWith(name, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (bestMatch == null || filterName.Length <= bestMatch.Length) 
+                    if (bestMatch == null || filterName.Length <= bestMatch.Length)
                     {
                         bestMatch = filterName;
                     }
                 }
             }
-                
-            if (bestMatch == null) 
+
+            if (bestMatch == null)
             {
                 // no match... use NoChoice
                 bestMatch = SR.GetString(SR.DeviceFilter_NoChoice);
             }
             return bestMatch;
         }
-    }    
+    }
 }

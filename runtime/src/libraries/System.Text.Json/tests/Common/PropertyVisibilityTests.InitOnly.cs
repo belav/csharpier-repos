@@ -74,7 +74,8 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Equal("""{"MyInt":42}""", json);
 
-            StructWithInitOnlyProperty? deserializedValue = await Serializer.DeserializeWrapper<StructWithInitOnlyProperty?>(json);
+            StructWithInitOnlyProperty? deserializedValue =
+                await Serializer.DeserializeWrapper<StructWithInitOnlyProperty?>(json);
             Assert.Equal(deserializedValue, value);
         }
 

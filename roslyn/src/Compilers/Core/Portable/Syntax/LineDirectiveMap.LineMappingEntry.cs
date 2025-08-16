@@ -47,10 +47,10 @@ namespace Microsoft.CodeAnalysis
             RemappedAfterHidden,
 
             /// <summary>
-            /// Used in C# and VB for spans that are inside of <c>#line hidden</c> (C#) or outside of <c>#ExternalSource</c> (VB) 
+            /// Used in C# and VB for spans that are inside of <c>#line hidden</c> (C#) or outside of <c>#ExternalSource</c> (VB)
             /// directives
             /// </summary>
-            Hidden
+            Hidden,
         }
 
         // Struct that represents an entry in the line mapping table. Entries sort by the unmapped
@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis
                 int unmappedLine,
                 int mappedLine,
                 string? mappedPathOpt,
-                PositionState state)
+                PositionState state
+            )
             {
                 Debug.Assert(state != PositionState.RemappedSpan);
 
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis
                 int unmappedLine,
                 LinePositionSpan mappedSpan,
                 int? unmappedCharacterOffset,
-                string? mappedPathOpt)
+                string? mappedPathOpt
+            )
             {
                 this.UnmappedLine = unmappedLine;
                 this.MappedLine = -1;
@@ -115,11 +117,10 @@ namespace Microsoft.CodeAnalysis
                 this.State = PositionState.RemappedSpan;
             }
 
-            public int CompareTo(LineMappingEntry other)
-                => UnmappedLine.CompareTo(other.UnmappedLine);
+            public int CompareTo(LineMappingEntry other) =>
+                UnmappedLine.CompareTo(other.UnmappedLine);
 
-            public bool IsHidden
-                => State == PositionState.Hidden;
+            public bool IsHidden => State == PositionState.Hidden;
         }
     }
 }

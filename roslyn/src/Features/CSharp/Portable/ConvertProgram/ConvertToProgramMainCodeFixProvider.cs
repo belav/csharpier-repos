@@ -19,37 +19,63 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
 {
     using static ConvertProgramTransform;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertToProgramMain), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertToProgramMain
+        ),
+        Shared
+    ]
     internal class ConvertToProgramMainCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertToProgramMainCodeFixProvider()
-        {
-        }
+        public ConvertToProgramMainCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseProgramMainId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseProgramMainId);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var document = context.Document;
             var cancellationToken = context.CancellationToken;
 
-            var options = await document.GetCSharpCodeFixOptionsProviderAsync(context.Options, cancellationToken).ConfigureAwait(false);
-            var priority = options.PreferTopLevelStatements.Notification.Severity == ReportDiagnostic.Hidden
-                ? CodeActionPriority.Low
-                : CodeActionPriority.Default;
+            var options = await document
+                .GetCSharpCodeFixOptionsProviderAsync(context.Options, cancellationToken)
+                .ConfigureAwait(false);
+            var priority =
+                options.PreferTopLevelStatements.Notification.Severity == ReportDiagnostic.Hidden
+                    ? CodeActionPriority.Low
+                    : CodeActionPriority.Default;
 
-            RegisterCodeFix(context, CSharpAnalyzersResources.Convert_to_Program_Main_style_program, nameof(ConvertToProgramMainCodeFixProvider), priority);
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Convert_to_Program_Main_style_program,
+                nameof(ConvertToProgramMainCodeFixProvider),
+                priority
+            );
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var options = await document.GetCodeFixOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
-            var fixedDocument = await ConvertToProgramMainAsync(document, options.AccessibilityModifiersRequired, cancellationToken).ConfigureAwait(false);
-            var fixedRoot = await fixedDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetCodeFixOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
+            var fixedDocument = await ConvertToProgramMainAsync(
+                    document,
+                    options.AccessibilityModifiersRequired,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var fixedRoot = await fixedDocument
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             editor.ReplaceNode(editor.OriginalRoot, fixedRoot);
         }

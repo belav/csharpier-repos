@@ -15,7 +15,13 @@ namespace System.Threading.Tests
         [Fact]
         public void Mutex_Create_NullSecurity()
         {
-            CreateAndVerifyMutex(initiallyOwned: true, GetRandomName(), expectedSecurity: null, expectedCreatedNew: true).Dispose();
+            CreateAndVerifyMutex(
+                    initiallyOwned: true,
+                    GetRandomName(),
+                    expectedSecurity: null,
+                    expectedCreatedNew: true
+                )
+                .Dispose();
         }
 
         [Theory]
@@ -25,8 +31,18 @@ namespace System.Threading.Tests
         {
             MutexSecurity security = GetBasicMutexSecurity();
 
-            using Mutex mutex1 = CreateAndVerifyMutex(initiallyOwned: true, name, security, expectedCreatedNew: true);
-            using Mutex mutex2 = CreateAndVerifyMutex(initiallyOwned: true, name, security, expectedCreatedNew: true);
+            using Mutex mutex1 = CreateAndVerifyMutex(
+                initiallyOwned: true,
+                name,
+                security,
+                expectedCreatedNew: true
+            );
+            using Mutex mutex2 = CreateAndVerifyMutex(
+                initiallyOwned: true,
+                name,
+                security,
+                expectedCreatedNew: true
+            );
         }
 
         [Fact]
@@ -35,8 +51,18 @@ namespace System.Threading.Tests
             string name = GetRandomName();
             MutexSecurity security = GetBasicMutexSecurity();
 
-            using Mutex mutexNew      = CreateAndVerifyMutex(initiallyOwned: true, name, security, expectedCreatedNew: true);
-            using Mutex mutexExisting = CreateAndVerifyMutex(initiallyOwned: true, name, security, expectedCreatedNew: false);
+            using Mutex mutexNew = CreateAndVerifyMutex(
+                initiallyOwned: true,
+                name,
+                security,
+                expectedCreatedNew: true
+            );
+            using Mutex mutexExisting = CreateAndVerifyMutex(
+                initiallyOwned: true,
+                name,
+                security,
+                expectedCreatedNew: false
+            );
         }
 
         [Fact]
@@ -49,12 +75,23 @@ namespace System.Threading.Tests
             {
                 Assert.Throws<ArgumentException>(() =>
                 {
-                    CreateAndVerifyMutex(initiallyOwned: true, name, GetBasicMutexSecurity(), expectedCreatedNew: true).Dispose();
+                    CreateAndVerifyMutex(
+                            initiallyOwned: true,
+                            name,
+                            GetBasicMutexSecurity(),
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
                 });
             }
             else
             {
-                using Mutex created = CreateAndVerifyMutex(initiallyOwned: true, name, GetBasicMutexSecurity(), expectedCreatedNew: true);
+                using Mutex created = CreateAndVerifyMutex(
+                    initiallyOwned: true,
+                    name,
+                    GetBasicMutexSecurity(),
+                    expectedCreatedNew: true
+                );
                 using Mutex openedByName = Mutex.OpenExisting(name);
                 Assert.NotNull(openedByName);
             }
@@ -62,24 +99,53 @@ namespace System.Threading.Tests
 
         public static IEnumerable<object[]> GetMutexSpecificParameters() =>
             from initiallyOwned in new[] { false, true }
-            from rights in new[] { MutexRights.FullControl, MutexRights.Synchronize, MutexRights.Modify, MutexRights.Modify | MutexRights.Synchronize }
+            from rights in new[]
+            {
+                MutexRights.FullControl,
+                MutexRights.Synchronize,
+                MutexRights.Modify,
+                MutexRights.Modify | MutexRights.Synchronize,
+            }
             from accessControl in new[] { AccessControlType.Allow, AccessControlType.Deny }
             select new object[] { initiallyOwned, rights, accessControl };
 
         [Theory]
         [MemberData(nameof(GetMutexSpecificParameters))]
-        public void Mutex_Create_SpecificParameters(bool initiallyOwned, MutexRights rights, AccessControlType accessControl)
+        public void Mutex_Create_SpecificParameters(
+            bool initiallyOwned,
+            MutexRights rights,
+            AccessControlType accessControl
+        )
         {
-            MutexSecurity security = GetMutexSecurity(WellKnownSidType.BuiltinUsersSid, rights, accessControl);
-            CreateAndVerifyMutex(initiallyOwned, GetRandomName(), security, expectedCreatedNew: true).Dispose();
+            MutexSecurity security = GetMutexSecurity(
+                WellKnownSidType.BuiltinUsersSid,
+                rights,
+                accessControl
+            );
+            CreateAndVerifyMutex(
+                    initiallyOwned,
+                    GetRandomName(),
+                    security,
+                    expectedCreatedNew: true
+                )
+                .Dispose();
         }
 
         [Fact]
         public void Mutex_OpenExisting()
         {
             string name = GetRandomName();
-            MutexSecurity expectedSecurity = GetMutexSecurity(WellKnownSidType.BuiltinUsersSid, MutexRights.FullControl, AccessControlType.Allow);
-            using Mutex mutexNew = CreateAndVerifyMutex(initiallyOwned: true, name, expectedSecurity, expectedCreatedNew: true);
+            MutexSecurity expectedSecurity = GetMutexSecurity(
+                WellKnownSidType.BuiltinUsersSid,
+                MutexRights.FullControl,
+                AccessControlType.Allow
+            );
+            using Mutex mutexNew = CreateAndVerifyMutex(
+                initiallyOwned: true,
+                name,
+                expectedSecurity,
+                expectedCreatedNew: true
+            );
 
             using Mutex mutexExisting = MutexAcl.OpenExisting(name, MutexRights.FullControl);
 
@@ -92,10 +158,21 @@ namespace System.Threading.Tests
         public void Mutex_TryOpenExisting()
         {
             string name = GetRandomName();
-            MutexSecurity expectedSecurity = GetMutexSecurity(WellKnownSidType.BuiltinUsersSid, MutexRights.FullControl, AccessControlType.Allow);
-            using Mutex mutexNew = CreateAndVerifyMutex(initiallyOwned: true, name, expectedSecurity, expectedCreatedNew: true);
+            MutexSecurity expectedSecurity = GetMutexSecurity(
+                WellKnownSidType.BuiltinUsersSid,
+                MutexRights.FullControl,
+                AccessControlType.Allow
+            );
+            using Mutex mutexNew = CreateAndVerifyMutex(
+                initiallyOwned: true,
+                name,
+                expectedSecurity,
+                expectedCreatedNew: true
+            );
 
-            Assert.True(MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out Mutex mutexExisting));
+            Assert.True(
+                MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out Mutex mutexExisting)
+            );
             Assert.NotNull(mutexExisting);
 
             VerifyHandles(mutexNew, mutexExisting);
@@ -128,7 +205,6 @@ namespace System.Threading.Tests
 
             Assert.False(MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out _));
         }
-
 
         [Fact]
         public void Mutex_OpenExisting_PathNotFound()
@@ -189,10 +265,15 @@ namespace System.Threading.Tests
             return GetMutexSecurity(
                 WellKnownSidType.BuiltinUsersSid,
                 MutexRights.FullControl,
-                AccessControlType.Allow);
+                AccessControlType.Allow
+            );
         }
 
-        private MutexSecurity GetMutexSecurity(WellKnownSidType sid, MutexRights rights, AccessControlType accessControl)
+        private MutexSecurity GetMutexSecurity(
+            WellKnownSidType sid,
+            MutexRights rights,
+            AccessControlType accessControl
+        )
         {
             MutexSecurity security = new MutexSecurity();
             SecurityIdentifier identity = new SecurityIdentifier(sid, null);
@@ -201,9 +282,19 @@ namespace System.Threading.Tests
             return security;
         }
 
-        private Mutex CreateAndVerifyMutex(bool initiallyOwned, string name, MutexSecurity expectedSecurity, bool expectedCreatedNew)
+        private Mutex CreateAndVerifyMutex(
+            bool initiallyOwned,
+            string name,
+            MutexSecurity expectedSecurity,
+            bool expectedCreatedNew
+        )
         {
-            Mutex mutex = MutexAcl.Create(initiallyOwned, name, out bool createdNew, expectedSecurity);
+            Mutex mutex = MutexAcl.Create(
+                initiallyOwned,
+                name,
+                out bool createdNew,
+                expectedSecurity
+            );
             Assert.NotNull(mutex);
             Assert.Equal(createdNew, expectedCreatedNew);
 
@@ -228,35 +319,54 @@ namespace System.Threading.Tests
             Assert.False(actual.SafeWaitHandle.IsInvalid);
         }
 
-        private void VerifyMutexSecurity(MutexSecurity expectedSecurity, MutexSecurity actualSecurity)
+        private void VerifyMutexSecurity(
+            MutexSecurity expectedSecurity,
+            MutexSecurity actualSecurity
+        )
         {
             Assert.Equal(typeof(MutexRights), expectedSecurity.AccessRightType);
             Assert.Equal(typeof(MutexRights), actualSecurity.AccessRightType);
 
-            List<MutexAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(includeExplicit: true, includeInherited: false, typeof(SecurityIdentifier))
-                .Cast<MutexAccessRule>().ToList();
+            List<MutexAccessRule> expectedAccessRules = expectedSecurity
+                .GetAccessRules(
+                    includeExplicit: true,
+                    includeInherited: false,
+                    typeof(SecurityIdentifier)
+                )
+                .Cast<MutexAccessRule>()
+                .ToList();
 
-            List<MutexAccessRule> actualAccessRules = actualSecurity.GetAccessRules(includeExplicit: true, includeInherited: false, typeof(SecurityIdentifier))
-                .Cast<MutexAccessRule>().ToList();
+            List<MutexAccessRule> actualAccessRules = actualSecurity
+                .GetAccessRules(
+                    includeExplicit: true,
+                    includeInherited: false,
+                    typeof(SecurityIdentifier)
+                )
+                .Cast<MutexAccessRule>()
+                .ToList();
 
             Assert.Equal(expectedAccessRules.Count, actualAccessRules.Count);
             if (expectedAccessRules.Count > 0)
             {
-                Assert.All(expectedAccessRules, actualAccessRule =>
-                {
-                    int count = expectedAccessRules.Count(expectedAccessRule => AreAccessRulesEqual(expectedAccessRule, actualAccessRule));
-                    Assert.True(count > 0);
-                });
+                Assert.All(
+                    expectedAccessRules,
+                    actualAccessRule =>
+                    {
+                        int count = expectedAccessRules.Count(expectedAccessRule =>
+                            AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
+                        );
+                        Assert.True(count > 0);
+                    }
+                );
             }
         }
 
         private bool AreAccessRulesEqual(MutexAccessRule expectedRule, MutexAccessRule actualRule)
         {
-            return
-                expectedRule.AccessControlType == actualRule.AccessControlType &&
-                expectedRule.MutexRights       == actualRule.MutexRights &&
-                expectedRule.InheritanceFlags  == actualRule.InheritanceFlags &&
-                expectedRule.PropagationFlags  == actualRule.PropagationFlags;
+            return expectedRule.AccessControlType == actualRule.AccessControlType
+                && expectedRule.MutexRights == actualRule.MutexRights
+                && expectedRule.InheritanceFlags == actualRule.InheritanceFlags
+                && expectedRule.PropagationFlags == actualRule.PropagationFlags;
         }
     }
 }

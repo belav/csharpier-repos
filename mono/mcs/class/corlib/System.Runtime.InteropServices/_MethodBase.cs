@@ -11,84 +11,104 @@ using System.Reflection;
 
 namespace System.Runtime.InteropServices
 {
-	[CLSCompliant (false)]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[Guid ("6240837A-707F-3181-8E98-A36AE086766B")]
+    [CLSCompliant(false)]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("6240837A-707F-3181-8E98-A36AE086766B")]
 #if !FULL_AOT_RUNTIME
-	[TypeLibImportClass (typeof (MethodBase))]
+    [TypeLibImportClass(typeof(MethodBase))]
 #endif
-	[ComVisible (true)]
-	public interface _MethodBase
-	{
-		bool Equals (object other);
-		
-		object[] GetCustomAttributes (bool inherit);
-		
-		object[] GetCustomAttributes (Type attributeType, bool inherit);
-		
-		int GetHashCode ();
+    [ComVisible(true)]
+    public interface _MethodBase
+    {
+        bool Equals(object other);
 
-		MethodImplAttributes GetMethodImplementationFlags ();
-		
-		ParameterInfo[] GetParameters ();
+        object[] GetCustomAttributes(bool inherit);
 
-		void GetIDsOfNames ([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId);
+        object[] GetCustomAttributes(Type attributeType, bool inherit);
 
-		void GetTypeInfo (uint iTInfo, uint lcid, IntPtr ppTInfo);
+        int GetHashCode();
 
-		void GetTypeInfoCount (out uint pcTInfo);
+        MethodImplAttributes GetMethodImplementationFlags();
 
-		void Invoke (uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams,
-			IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr);
-		
-		Type GetType ();
+        ParameterInfo[] GetParameters();
 
-		object Invoke (object obj, object[] parameters);
-		
-		object Invoke (object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture);
-		
-		bool IsDefined(Type attributeType, bool inherit);
-		
-		string ToString ();
+        void GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        );
 
-		MethodAttributes Attributes {get;}
+        void GetTypeInfo(uint iTInfo, uint lcid, IntPtr ppTInfo);
 
-		CallingConventions CallingConvention {get;}
+        void GetTypeInfoCount(out uint pcTInfo);
 
-		Type DeclaringType {get;}
+        void Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        );
 
-		bool IsAbstract {get;}
+        Type GetType();
 
-		bool IsAssembly {get;}
+        object Invoke(object obj, object[] parameters);
 
-		bool IsConstructor {get;}
+        object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        );
 
-		bool IsFamily {get;}
+        bool IsDefined(Type attributeType, bool inherit);
 
-		bool IsFamilyAndAssembly {get;}
+        string ToString();
 
-		bool IsFamilyOrAssembly {get;}
+        MethodAttributes Attributes { get; }
 
-		bool IsFinal {get;}
+        CallingConventions CallingConvention { get; }
 
-		bool IsHideBySig {get;}
+        Type DeclaringType { get; }
 
-		bool IsPrivate {get;}
+        bool IsAbstract { get; }
 
-		bool IsPublic {get;}
+        bool IsAssembly { get; }
 
-		bool IsSpecialName {get;}
+        bool IsConstructor { get; }
 
-		bool IsStatic {get;}
+        bool IsFamily { get; }
 
-		bool IsVirtual {get;}
+        bool IsFamilyAndAssembly { get; }
 
-		MemberTypes MemberType {get;}
+        bool IsFamilyOrAssembly { get; }
 
-		RuntimeMethodHandle MethodHandle {get;}
+        bool IsFinal { get; }
 
-		string Name {get;}
+        bool IsHideBySig { get; }
 
-		Type ReflectedType {get;}
-	}
+        bool IsPrivate { get; }
+
+        bool IsPublic { get; }
+
+        bool IsSpecialName { get; }
+
+        bool IsStatic { get; }
+
+        bool IsVirtual { get; }
+
+        MemberTypes MemberType { get; }
+
+        RuntimeMethodHandle MethodHandle { get; }
+
+        string Name { get; }
+
+        Type ReflectedType { get; }
+    }
 }

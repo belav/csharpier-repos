@@ -47,9 +47,7 @@ namespace System.IO
         /// Creates a closed stream.
         /// </summary>
         // Needed for subclasses that need to map a file, etc.
-        protected UnmanagedMemoryStream()
-        {
-        }
+        protected UnmanagedMemoryStream() { }
 
         /// <summary>
         /// Creates a stream over a SafeBuffer.
@@ -106,7 +104,9 @@ namespace System.IO
                     buffer.AcquirePointer(ref pointer);
                     if ((pointer + offset + length) < pointer)
                     {
-                        throw new ArgumentException(SR.ArgumentOutOfRange_UnmanagedMemStreamWrapAround);
+                        throw new ArgumentException(
+                            SR.ArgumentOutOfRange_UnmanagedMemStreamWrapAround
+                        );
                     }
                 }
                 finally
@@ -139,7 +139,12 @@ namespace System.IO
         /// Creates a stream over a byte*.
         /// </summary>
         [CLSCompliant(false)]
-        public unsafe UnmanagedMemoryStream(byte* pointer, long length, long capacity, FileAccess access)
+        public unsafe UnmanagedMemoryStream(
+            byte* pointer,
+            long length,
+            long capacity,
+            FileAccess access
+        )
         {
             Initialize(pointer, length, capacity, access);
         }
@@ -148,17 +153,28 @@ namespace System.IO
         /// Subclasses must call this method (or the other overload) to properly initialize all instance fields.
         /// </summary>
         [CLSCompliant(false)]
-        protected unsafe void Initialize(byte* pointer, long length, long capacity, FileAccess access)
+        protected unsafe void Initialize(
+            byte* pointer,
+            long length,
+            long capacity,
+            FileAccess access
+        )
         {
             ArgumentNullException.ThrowIfNull(pointer);
 
             ArgumentOutOfRangeException.ThrowIfNegative(length);
             ArgumentOutOfRangeException.ThrowIfNegative(capacity);
             if (length > capacity)
-                throw new ArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_LengthGreaterThanCapacity);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    SR.ArgumentOutOfRange_LengthGreaterThanCapacity
+                );
             // Check for wraparound.
             if (((byte*)((long)pointer + capacity)) < pointer)
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_UnmanagedMemStreamWrapAround);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_UnmanagedMemStreamWrapAround
+                );
             if (access < FileAccess.Read || access > FileAccess.ReadWrite)
                 throw new ArgumentOutOfRangeException(nameof(access), SR.ArgumentOutOfRange_Enum);
             if (_isOpen)
@@ -194,7 +210,10 @@ namespace System.IO
         protected override void Dispose(bool disposing)
         {
             _isOpen = false;
-            unsafe { _mem = null; }
+            unsafe
+            {
+                _mem = null;
+            }
 
             base.Dispose(disposing);
         }
@@ -277,13 +296,15 @@ namespace System.IO
         {
             get
             {
-                if (!CanSeek) ThrowHelper.ThrowObjectDisposedException_StreamClosed(null);
+                if (!CanSeek)
+                    ThrowHelper.ThrowObjectDisposedException_StreamClosed(null);
                 return _position;
             }
             set
             {
                 ArgumentOutOfRangeException.ThrowIfNegative(value);
-                if (!CanSeek) ThrowHelper.ThrowObjectDisposedException_StreamClosed(null);
+                if (!CanSeek)
+                    ThrowHelper.ThrowObjectDisposedException_StreamClosed(null);
 
                 _position = value;
             }
@@ -319,7 +340,10 @@ namespace System.IO
                     throw new IOException(SR.IO_SeekBeforeBegin);
                 long newPosition = (long)value - (long)_mem;
                 if (newPosition < 0)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_UnmanagedMemStreamLength);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_UnmanagedMemStreamLength
+                    );
 
                 _position = newPosition;
             }
@@ -377,9 +401,9 @@ namespace System.IO
             int nInt = (int)n; // Safe because n <= count, which is an Int32
             if (nInt < 0)
             {
-                return 0;  // _position could be beyond EOF
+                return 0; // _position could be beyond EOF
             }
-            Debug.Assert(pos + nInt >= 0, "_position + n >= 0");  // len is less than 2^63 -1.
+            Debug.Assert(pos + nInt >= 0, "_position + n >= 0"); // len is less than 2^63 -1.
 
             unsafe
             {
@@ -390,7 +414,11 @@ namespace System.IO
                     try
                     {
                         _buffer.AcquirePointer(ref pointer);
-                        Buffer.Memmove(ref MemoryMarshal.GetReference(buffer), ref *(pointer + pos + _offset), (nuint)nInt);
+                        Buffer.Memmove(
+                            ref MemoryMarshal.GetReference(buffer),
+                            ref *(pointer + pos + _offset),
+                            (nuint)nInt
+                        );
                     }
                     finally
                     {
@@ -402,7 +430,11 @@ namespace System.IO
                 }
                 else
                 {
-                    Buffer.Memmove(ref MemoryMarshal.GetReference(buffer), ref *(_mem + pos), (nuint)nInt);
+                    Buffer.Memmove(
+                        ref MemoryMarshal.GetReference(buffer),
+                        ref *(_mem + pos),
+                        (nuint)nInt
+                    );
                 }
             }
 
@@ -418,7 +450,12 @@ namespace System.IO
         /// <param name="count">Maximum number of bytes to read.</param>
         /// <param name="cancellationToken">Token that can be used to cancel this operation.</param>
         /// <returns>Task that can be used to access the number of bytes actually read.</returns>
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -442,7 +479,10 @@ namespace System.IO
         /// </summary>
         /// <param name="buffer">Buffer to read the bytes to.</param>
         /// <param name="cancellationToken">Token that can be used to cancel this operation.</param>
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -464,9 +504,14 @@ namespace System.IO
                 // something other than an array and this is an UnmanagedMemoryStream-derived type that doesn't override Read(Span<byte>) will
                 // it then fall back to doing the ArrayPool/copy behavior.
                 return new ValueTask<int>(
-                    MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> destinationArray) ?
-                        Read(destinationArray.Array!, destinationArray.Offset, destinationArray.Count) :
-                        Read(buffer.Span));
+                    MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> destinationArray)
+                        ? Read(
+                            destinationArray.Array!,
+                            destinationArray.Offset,
+                            destinationArray.Count
+                        )
+                        : Read(buffer.Span)
+                );
             }
             catch (Exception ex)
             {
@@ -483,7 +528,7 @@ namespace System.IO
             EnsureNotClosed();
             EnsureReadable();
 
-            long pos = _position;  // Use a local to avoid a race condition
+            long pos = _position; // Use a local to avoid a race condition
 
             // Use a volatile read to prevent reading of the uninitialized memory. This volatile read
             // and matching volatile write that set _length avoids reordering of NativeMemory.Clear
@@ -550,7 +595,7 @@ namespace System.IO
 
                 case SeekOrigin.End:
                     newPosition = (long)_length + offset;
-                    if (newPosition  < 0)
+                    if (newPosition < 0)
                         throw new IOException(SR.IO_SeekBeforeBegin);
                     break;
 
@@ -627,7 +672,7 @@ namespace System.IO
             EnsureNotClosed();
             EnsureWriteable();
 
-            long pos = _position;  // Use a local to avoid a race condition
+            long pos = _position; // Use a local to avoid a race condition
             long len = (long)_length;
             long n = pos + buffer.Length;
             // Check for overflow
@@ -669,7 +714,11 @@ namespace System.IO
                 try
                 {
                     _buffer.AcquirePointer(ref pointer);
-                    Buffer.Memmove(ref *(pointer + pos + _offset), ref MemoryMarshal.GetReference(buffer), (nuint)buffer.Length);
+                    Buffer.Memmove(
+                        ref *(pointer + pos + _offset),
+                        ref MemoryMarshal.GetReference(buffer),
+                        (nuint)buffer.Length
+                    );
                 }
                 finally
                 {
@@ -681,7 +730,11 @@ namespace System.IO
             }
             else
             {
-                Buffer.Memmove(ref *(_mem + pos), ref MemoryMarshal.GetReference(buffer), (nuint)buffer.Length);
+                Buffer.Memmove(
+                    ref *(_mem + pos),
+                    ref MemoryMarshal.GetReference(buffer),
+                    (nuint)buffer.Length
+                );
             }
 
             _position = n;
@@ -695,7 +748,12 @@ namespace System.IO
         /// <param name="count">Number of bytes to write.</param>
         /// <param name="cancellationToken">Token that can be used to cancel the operation.</param>
         /// <returns>Task that can be awaited </returns>
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -719,7 +777,10 @@ namespace System.IO
         /// </summary>
         /// <param name="buffer">Buffer that will be written.</param>
         /// <param name="cancellationToken">Token that can be used to cancel the operation.</param>
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -755,7 +816,7 @@ namespace System.IO
             EnsureNotClosed();
             EnsureWriteable();
 
-            long pos = _position;  // Use a local to avoid a race condition
+            long pos = _position; // Use a local to avoid a race condition
             long len = (long)_length;
             long n = pos + 1;
             if (pos >= len)

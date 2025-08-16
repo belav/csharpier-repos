@@ -7,17 +7,18 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.CommandTrees;
-using System.Data.Metadata.Edm;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
+using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.Internal;
 using System.Data.Common.Utils;
-using System.Diagnostics;
-using System.Data.Common;
+using System.Data.Metadata.Edm;
 using System.Data.Objects;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
@@ -26,7 +27,7 @@ namespace System.Data.Mapping.Update.Internal
     /// </summary>
     internal class ViewLoader
     {
-        #region Constructors 
+        #region Constructors
         /// <summary>
         /// Constructor specifying a metadata workspace to use for mapping views.
         /// </summary>
@@ -39,12 +40,21 @@ namespace System.Data.Mapping.Update.Internal
 
         #region Fields
         private readonly StorageMappingItemCollection m_mappingCollection;
-        private readonly Dictionary<AssociationSet, AssociationSetMetadata> m_associationSetMetadata = new Dictionary<AssociationSet, AssociationSetMetadata>();
-        private readonly Dictionary<EntitySetBase, Set<EntitySet>> m_affectedTables = new Dictionary<EntitySetBase, Set<EntitySet>>();
+        private readonly Dictionary<
+            AssociationSet,
+            AssociationSetMetadata
+        > m_associationSetMetadata = new Dictionary<AssociationSet, AssociationSetMetadata>();
+        private readonly Dictionary<EntitySetBase, Set<EntitySet>> m_affectedTables =
+            new Dictionary<EntitySetBase, Set<EntitySet>>();
         private readonly Set<EdmMember> m_serverGenProperties = new Set<EdmMember>();
         private readonly Set<EdmMember> m_isNullConditionProperties = new Set<EdmMember>();
-        private readonly Dictionary<EntitySetBase, ModificationFunctionMappingTranslator> m_functionMappingTranslators = new Dictionary<EntitySetBase, ModificationFunctionMappingTranslator>(
-            EqualityComparer<EntitySetBase>.Default);
+        private readonly Dictionary<
+            EntitySetBase,
+            ModificationFunctionMappingTranslator
+        > m_functionMappingTranslators = new Dictionary<
+            EntitySetBase,
+            ModificationFunctionMappingTranslator
+        >(EqualityComparer<EntitySetBase>.Default);
 
         private readonly ReaderWriterLockSlim m_readerWriterLock = new ReaderWriterLockSlim();
         #endregion
@@ -55,14 +65,17 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         /// <param name="extent">Association set or entity set for which to retrieve a translator</param>
         /// <returns>Function translator or null if none exists for this extent</returns>
-        internal ModificationFunctionMappingTranslator GetFunctionMappingTranslator(EntitySetBase extent, MetadataWorkspace workspace)
+        internal ModificationFunctionMappingTranslator GetFunctionMappingTranslator(
+            EntitySetBase extent,
+            MetadataWorkspace workspace
+        )
         {
             return SyncGetValue(extent, workspace, m_functionMappingTranslators, extent);
         }
 
         /// <summary>
         /// Returns store tables affected by modifications to a particular C-layer extent. Although this
-        /// information can be inferred from the update view, we want to avoid compiling or loading 
+        /// information can be inferred from the update view, we want to avoid compiling or loading
         /// views when not required. This information can be directly determined from mapping metadata.
         /// </summary>
         /// <param name="extent">C-layer extent.</param>
@@ -76,9 +89,17 @@ namespace System.Data.Mapping.Update.Internal
         /// Gets information relevant to the processing of an AssociationSet in the update pipeline.
         /// Caches information on first retrieval.
         /// </summary>
-        internal AssociationSetMetadata GetAssociationSetMetadata(AssociationSet associationSet, MetadataWorkspace workspace)
+        internal AssociationSetMetadata GetAssociationSetMetadata(
+            AssociationSet associationSet,
+            MetadataWorkspace workspace
+        )
         {
-            return SyncGetValue(associationSet, workspace, m_associationSetMetadata, associationSet);
+            return SyncGetValue(
+                associationSet,
+                workspace,
+                m_associationSetMetadata,
+                associationSet
+            );
         }
 
         /// <summary>
@@ -88,7 +109,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <param name="entitySetBase">Entity set containing member.</param>
         /// <param name="member">Member to lookup</param>
         /// <returns>Whether the member is server generated in some context</returns>
-        internal bool IsServerGen(EntitySetBase entitySetBase, MetadataWorkspace workspace, EdmMember member)
+        internal bool IsServerGen(
+            EntitySetBase entitySetBase,
+            MetadataWorkspace workspace,
+            EdmMember member
+        )
         {
             return SyncContains(entitySetBase, workspace, m_serverGenProperties, member);
         }
@@ -99,7 +124,11 @@ namespace System.Data.Mapping.Update.Internal
         /// cause roundtripping problems (e.g. if type is based on nullability of a 'non-nullable'
         /// property of a derived entity type)
         /// </summary>
-        internal bool IsNullConditionMember(EntitySetBase entitySetBase, MetadataWorkspace workspace, EdmMember member)
+        internal bool IsNullConditionMember(
+            EntitySetBase entitySetBase,
+            MetadataWorkspace workspace,
+            EdmMember member
+        )
         {
             return SyncContains(entitySetBase, workspace, m_isNullConditionProperties, member);
         }
@@ -107,7 +136,12 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Utility method reading value from dictionary within read lock.
         /// </summary>
-        private T_Value SyncGetValue<T_Key, T_Value>(EntitySetBase entitySetBase, MetadataWorkspace workspace, Dictionary<T_Key, T_Value> dictionary, T_Key key)
+        private T_Value SyncGetValue<T_Key, T_Value>(
+            EntitySetBase entitySetBase,
+            MetadataWorkspace workspace,
+            Dictionary<T_Key, T_Value> dictionary,
+            T_Key key
+        )
         {
             return SyncInitializeEntitySet(entitySetBase, workspace, k => dictionary[k], key);
         }
@@ -115,7 +149,12 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Utility method checking for membership of element in set within read lock.
         /// </summary>
-        private bool SyncContains<T_Element>(EntitySetBase entitySetBase, MetadataWorkspace workspace, Set<T_Element> set, T_Element element)
+        private bool SyncContains<T_Element>(
+            EntitySetBase entitySetBase,
+            MetadataWorkspace workspace,
+            Set<T_Element> set,
+            T_Element element
+        )
         {
             return SyncInitializeEntitySet(entitySetBase, workspace, set.Contains, element);
         }
@@ -125,7 +164,12 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         /// <param name="entitySetBase">Association set or entity set to load.</param>
         /// <param name="evaluate">Function to evaluate to produce a result.</param>
-        private TResult SyncInitializeEntitySet<TArg, TResult>(EntitySetBase entitySetBase, MetadataWorkspace workspace, Func<TArg, TResult> evaluate, TArg arg)
+        private TResult SyncInitializeEntitySet<TArg, TResult>(
+            EntitySetBase entitySetBase,
+            MetadataWorkspace workspace,
+            Func<TArg, TResult> evaluate,
+            TArg arg
+        )
         {
             m_readerWriterLock.EnterReadLock();
             try
@@ -162,7 +206,8 @@ namespace System.Data.Mapping.Update.Internal
 
         private void InitializeEntitySet(EntitySetBase entitySetBase, MetadataWorkspace workspace)
         {
-            StorageEntityContainerMapping mapping = (StorageEntityContainerMapping)m_mappingCollection.GetMap(entitySetBase.EntityContainer);
+            StorageEntityContainerMapping mapping = (StorageEntityContainerMapping)
+                m_mappingCollection.GetMap(entitySetBase.EntityContainer);
 
             // make sure views have been generated for this sub-graph (trigger generation of the sub-graph
             // by retrieving a view for one of its components; not actually using the view here)
@@ -172,7 +217,6 @@ namespace System.Data.Mapping.Update.Internal
             }
 
             Set<EntitySet> affectedTables = new Set<EntitySet>();
-
 
             if (null != mapping)
             {
@@ -184,9 +228,11 @@ namespace System.Data.Mapping.Update.Internal
                 {
                     setMapping = mapping.GetEntitySetMapping(entitySetBase.Name);
 
-                    // Check for members that have result bindings in a function mapping. If a 
+                    // Check for members that have result bindings in a function mapping. If a
                     // function returns the member values, it indicates they are server-generated
-                    m_serverGenProperties.Unite(GetMembersWithResultBinding((StorageEntitySetMapping)setMapping));
+                    m_serverGenProperties.Unite(
+                        GetMembersWithResultBinding((StorageEntitySetMapping)setMapping)
+                    );
                 }
                 else if (entitySetBase.BuiltInTypeKind == BuiltInTypeKind.AssociationSet)
                 {
@@ -213,9 +259,13 @@ namespace System.Data.Mapping.Update.Internal
                 if (0 < isNullConditionColumns.Count)
                 {
                     // gather is null condition properties based on is null condition columns
-                    foreach (StorageMappingFragment mappingFragment in GetMappingFragments(setMapping))
+                    foreach (
+                        StorageMappingFragment mappingFragment in GetMappingFragments(setMapping)
+                    )
                     {
-                        m_isNullConditionProperties.AddRange(FindPropertiesMappedToColumns(isNullConditionColumns, mappingFragment));
+                        m_isNullConditionProperties.AddRange(
+                            FindPropertiesMappedToColumns(isNullConditionColumns, mappingFragment)
+                        );
                     }
                 }
             }
@@ -231,8 +281,14 @@ namespace System.Data.Mapping.Update.Internal
                 AssociationSet associationSet = (AssociationSet)entitySetBase;
                 if (!m_associationSetMetadata.ContainsKey(associationSet))
                 {
-                    m_associationSetMetadata.Add(associationSet, new AssociationSetMetadata(
-                        m_affectedTables[associationSet], associationSet, workspace));
+                    m_associationSetMetadata.Add(
+                        associationSet,
+                        new AssociationSetMetadata(
+                            m_affectedTables[associationSet],
+                            associationSet,
+                            workspace
+                        )
+                    );
                 }
             }
         }
@@ -242,21 +298,39 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         /// <param name="entitySetMapping">Set mapping to examine</param>
         /// <returns>All result bindings</returns>
-        private IEnumerable<EdmMember> GetMembersWithResultBinding(StorageEntitySetMapping entitySetMapping)
+        private IEnumerable<EdmMember> GetMembersWithResultBinding(
+            StorageEntitySetMapping entitySetMapping
+        )
         {
-            foreach (StorageEntityTypeModificationFunctionMapping typeFunctionMapping in entitySetMapping.ModificationFunctionMappings)
+            foreach (
+                StorageEntityTypeModificationFunctionMapping typeFunctionMapping in entitySetMapping.ModificationFunctionMappings
+            )
             {
                 // look at all result bindings for insert and update commands
-                if (null != typeFunctionMapping.InsertFunctionMapping && null != typeFunctionMapping.InsertFunctionMapping.ResultBindings)
+                if (
+                    null != typeFunctionMapping.InsertFunctionMapping
+                    && null != typeFunctionMapping.InsertFunctionMapping.ResultBindings
+                )
                 {
-                    foreach (StorageModificationFunctionResultBinding binding in typeFunctionMapping.InsertFunctionMapping.ResultBindings)
+                    foreach (
+                        StorageModificationFunctionResultBinding binding in typeFunctionMapping
+                            .InsertFunctionMapping
+                            .ResultBindings
+                    )
                     {
                         yield return binding.Property;
                     }
                 }
-                if (null != typeFunctionMapping.UpdateFunctionMapping && null != typeFunctionMapping.UpdateFunctionMapping.ResultBindings)
+                if (
+                    null != typeFunctionMapping.UpdateFunctionMapping
+                    && null != typeFunctionMapping.UpdateFunctionMapping.ResultBindings
+                )
                 {
-                    foreach (StorageModificationFunctionResultBinding binding in typeFunctionMapping.UpdateFunctionMapping.ResultBindings)
+                    foreach (
+                        StorageModificationFunctionResultBinding binding in typeFunctionMapping
+                            .UpdateFunctionMapping
+                            .ResultBindings
+                    )
                     {
                         yield return binding.Property;
                     }
@@ -265,10 +339,15 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         // Loads and registers any function mapping translators for the given extent (and related container)
-        private void InitializeFunctionMappingTranslators(EntitySetBase entitySetBase, StorageEntityContainerMapping mapping)
+        private void InitializeFunctionMappingTranslators(
+            EntitySetBase entitySetBase,
+            StorageEntityContainerMapping mapping
+        )
         {
-            KeyToListMap<AssociationSet, AssociationEndMember> requiredEnds = new KeyToListMap<AssociationSet, AssociationEndMember>(
-                EqualityComparer<AssociationSet>.Default);
+            KeyToListMap<AssociationSet, AssociationEndMember> requiredEnds = new KeyToListMap<
+                AssociationSet,
+                AssociationEndMember
+            >(EqualityComparer<AssociationSet>.Default);
 
             // see if function mapping metadata needs to be processed
             if (!m_functionMappingTranslators.ContainsKey(entitySetBase))
@@ -279,21 +358,36 @@ namespace System.Data.Mapping.Update.Internal
                     if (0 < entitySetMapping.ModificationFunctionMappings.Count)
                     {
                         // register the function mapping
-                        m_functionMappingTranslators.Add(entitySetMapping.Set, ModificationFunctionMappingTranslator.CreateEntitySetTranslator(entitySetMapping));
+                        m_functionMappingTranslators.Add(
+                            entitySetMapping.Set,
+                            ModificationFunctionMappingTranslator.CreateEntitySetTranslator(
+                                entitySetMapping
+                            )
+                        );
 
                         // register "null" function translators for all implicitly mapped association sets
-                        foreach (AssociationSetEnd end in entitySetMapping.ImplicitlyMappedAssociationSetEnds)
+                        foreach (
+                            AssociationSetEnd end in entitySetMapping.ImplicitlyMappedAssociationSetEnds
+                        )
                         {
                             AssociationSet associationSet = end.ParentAssociationSet;
                             if (!m_functionMappingTranslators.ContainsKey(associationSet))
                             {
-                                m_functionMappingTranslators.Add(associationSet, ModificationFunctionMappingTranslator.CreateAssociationSetTranslator(null));
+                                m_functionMappingTranslators.Add(
+                                    associationSet,
+                                    ModificationFunctionMappingTranslator.CreateAssociationSetTranslator(
+                                        null
+                                    )
+                                );
                             }
 
                             // Remember that the current entity set is required for all updates to the collocated
                             // relationship set. This entity set's end is opposite the target end for the mapping.
                             AssociationSetEnd oppositeEnd = MetadataHelper.GetOppositeEnd(end);
-                            requiredEnds.Add(associationSet, oppositeEnd.CorrespondingAssociationEndMember);
+                            requiredEnds.Add(
+                                associationSet,
+                                oppositeEnd.CorrespondingAssociationEndMember
+                            );
                         }
                     }
                     else
@@ -303,7 +397,9 @@ namespace System.Data.Mapping.Update.Internal
                     }
                 }
 
-                foreach (StorageAssociationSetMapping associationSetMapping in mapping.RelationshipSetMaps)
+                foreach (
+                    StorageAssociationSetMapping associationSetMapping in mapping.RelationshipSetMaps
+                )
                 {
                     if (null != associationSetMapping.ModificationFunctionMapping)
                     {
@@ -311,8 +407,12 @@ namespace System.Data.Mapping.Update.Internal
 
                         // use indexer rather than Add since the association set may already have an implicit function
                         // mapping -- this explicit function mapping takes precedence in such cases
-                        m_functionMappingTranslators.Add(set, 
-                            ModificationFunctionMappingTranslator.CreateAssociationSetTranslator(associationSetMapping));
+                        m_functionMappingTranslators.Add(
+                            set,
+                            ModificationFunctionMappingTranslator.CreateAssociationSetTranslator(
+                                associationSetMapping
+                            )
+                        );
 
                         // remember that we've seen a function mapping for this association set, which overrides
                         // any other behaviors for determining required/optional ends
@@ -332,36 +432,53 @@ namespace System.Data.Mapping.Update.Internal
             // register association metadata for all association sets encountered
             foreach (AssociationSet associationSet in requiredEnds.Keys)
             {
-                m_associationSetMetadata.Add(associationSet, new AssociationSetMetadata(
-                    requiredEnds.EnumerateValues(associationSet)));
+                m_associationSetMetadata.Add(
+                    associationSet,
+                    new AssociationSetMetadata(requiredEnds.EnumerateValues(associationSet))
+                );
             }
         }
 
         /// <summary>
         /// Gets all model properties mapped to server generated columns.
         /// </summary>
-        private static IEnumerable<EdmMember> FindServerGenMembers(StorageMappingFragment mappingFragment)
+        private static IEnumerable<EdmMember> FindServerGenMembers(
+            StorageMappingFragment mappingFragment
+        )
         {
-            foreach (var scalarPropertyMapping in FlattenPropertyMappings(mappingFragment.AllProperties)
-                .OfType<StorageScalarPropertyMapping>())
+            foreach (
+                var scalarPropertyMapping in FlattenPropertyMappings(mappingFragment.AllProperties)
+                    .OfType<StorageScalarPropertyMapping>()
+            )
             {
-                if (StoreGeneratedPattern.None != MetadataHelper.GetStoreGeneratedPattern(scalarPropertyMapping.ColumnProperty))
+                if (
+                    StoreGeneratedPattern.None
+                    != MetadataHelper.GetStoreGeneratedPattern(scalarPropertyMapping.ColumnProperty)
+                )
                 {
                     yield return scalarPropertyMapping.EdmProperty;
                 }
             }
         }
-        
+
         /// <summary>
         /// Gets all store columns participating in is null conditions.
         /// </summary>
-        private static IEnumerable<EdmMember> FindIsNullConditionColumns(StorageMappingFragment mappingFragment)
+        private static IEnumerable<EdmMember> FindIsNullConditionColumns(
+            StorageMappingFragment mappingFragment
+        )
         {
-            foreach (var conditionPropertyMapping in FlattenPropertyMappings(mappingFragment.AllProperties)
-                .OfType<StorageConditionPropertyMapping>())
+            foreach (
+                var conditionPropertyMapping in FlattenPropertyMappings(
+                        mappingFragment.AllProperties
+                    )
+                    .OfType<StorageConditionPropertyMapping>()
+            )
             {
-                if (conditionPropertyMapping.ColumnProperty != null &&
-                    conditionPropertyMapping.IsNull.HasValue)
+                if (
+                    conditionPropertyMapping.ColumnProperty != null
+                    && conditionPropertyMapping.IsNull.HasValue
+                )
                 {
                     yield return conditionPropertyMapping.ColumnProperty;
                 }
@@ -371,10 +488,15 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Gets all model properties mapped to given columns.
         /// </summary>
-        private static IEnumerable<EdmMember> FindPropertiesMappedToColumns(Set<EdmMember> columns, StorageMappingFragment mappingFragment)
+        private static IEnumerable<EdmMember> FindPropertiesMappedToColumns(
+            Set<EdmMember> columns,
+            StorageMappingFragment mappingFragment
+        )
         {
-            foreach (var scalarPropertyMapping in FlattenPropertyMappings(mappingFragment.AllProperties)
-                .OfType<StorageScalarPropertyMapping>())
+            foreach (
+                var scalarPropertyMapping in FlattenPropertyMappings(mappingFragment.AllProperties)
+                    .OfType<StorageScalarPropertyMapping>()
+            )
             {
                 if (columns.Contains(scalarPropertyMapping.ColumnProperty))
                 {
@@ -386,7 +508,9 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Enumerates all mapping fragments in given set mapping.
         /// </summary>
-        private static IEnumerable<StorageMappingFragment> GetMappingFragments(StorageSetMapping setMapping)
+        private static IEnumerable<StorageMappingFragment> GetMappingFragments(
+            StorageSetMapping setMapping
+        )
         {
             // get all type mappings for the extent
             foreach (StorageTypeMapping typeMapping in setMapping.TypeMappings)
@@ -403,17 +527,26 @@ namespace System.Data.Mapping.Update.Internal
         /// Returns all bottom-level mappings (e.g. conditions and scalar property mappings but not complex property mappings
         /// whose components are returned)
         /// </summary>
-        private static IEnumerable<StoragePropertyMapping> FlattenPropertyMappings(System.Collections.ObjectModel.ReadOnlyCollection<StoragePropertyMapping> propertyMappings)
+        private static IEnumerable<StoragePropertyMapping> FlattenPropertyMappings(
+            System.Collections.ObjectModel.ReadOnlyCollection<StoragePropertyMapping> propertyMappings
+        )
         {
             foreach (StoragePropertyMapping propertyMapping in propertyMappings)
             {
-                StorageComplexPropertyMapping complexPropertyMapping = propertyMapping as StorageComplexPropertyMapping;
+                StorageComplexPropertyMapping complexPropertyMapping =
+                    propertyMapping as StorageComplexPropertyMapping;
                 if (null != complexPropertyMapping)
                 {
-                    foreach (StorageComplexTypeMapping complexTypeMapping in complexPropertyMapping.TypeMappings)
+                    foreach (
+                        StorageComplexTypeMapping complexTypeMapping in complexPropertyMapping.TypeMappings
+                    )
                     {
                         // recursively call self with nested type
-                        foreach (StoragePropertyMapping nestedPropertyMapping in FlattenPropertyMappings(complexTypeMapping.AllProperties))
+                        foreach (
+                            StoragePropertyMapping nestedPropertyMapping in FlattenPropertyMappings(
+                                complexTypeMapping.AllProperties
+                            )
+                        )
                         {
                             yield return nestedPropertyMapping;
                         }

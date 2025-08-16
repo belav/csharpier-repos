@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,187 +14,245 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.IO;
-	using System.Linq;
-	using System.Reflection;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using Castle.DynamicProxy.Tests.Classes;
+    using NUnit.Framework;
 
-	using Castle.DynamicProxy.Tests.Classes;
+    [TestFixture]
+    public class ClassWithAttributesTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void EnsureProxyHasAttributesOnClassAndMethods()
+        {
+            HasNonInheritableAttribute instance = (HasNonInheritableAttribute)
+                generator.CreateClassProxy(
+                    typeof(HasNonInheritableAttribute),
+                    new StandardInterceptor()
+                );
 
-	using NUnit.Framework;
+            object[] attributes = instance
+                .GetType()
+                .GetCustomAttributes(typeof(NonInheritableAttribute), false)
+                .ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.IsInstanceOf(typeof(NonInheritableAttribute), attributes[0]);
 
-	[TestFixture]
-	public class ClassWithAttributesTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void EnsureProxyHasAttributesOnClassAndMethods()
-		{
-			HasNonInheritableAttribute instance = (HasNonInheritableAttribute)
-										generator.CreateClassProxy(typeof (HasNonInheritableAttribute), new StandardInterceptor());
+            attributes = instance
+                .GetType()
+                .GetMethod("OnMethod")
+                .GetCustomAttributes(typeof(NonInheritableAttribute), false)
+                .ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.IsInstanceOf(typeof(NonInheritableAttribute), attributes[0]);
+        }
 
-			object[] attributes = instance.GetType().GetCustomAttributes(typeof (NonInheritableAttribute), false).ToArray();
-			Assert.AreEqual(1, attributes.Length);
-			Assert.IsInstanceOf(typeof (NonInheritableAttribute), attributes[0]);
+        [Test]
+        public void EnsureProxyHasAttributesOnClassAndMethods_ComplexAttributes()
+        {
+            AttributedClass2 instance = (AttributedClass2)
+                generator.CreateClassProxy(typeof(AttributedClass2), new StandardInterceptor());
 
-			attributes = instance.GetType().GetMethod("OnMethod").GetCustomAttributes(typeof (NonInheritableAttribute), false).ToArray();
-			Assert.AreEqual(1, attributes.Length);
-			Assert.IsInstanceOf(typeof (NonInheritableAttribute), attributes[0]);
-		}
+            object[] attributes = instance
+                .GetType()
+                .GetCustomAttributes(typeof(ComplexNonInheritableAttribute), false)
+                .ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.IsInstanceOf(typeof(ComplexNonInheritableAttribute), attributes[0]);
+            ComplexNonInheritableAttribute att = (ComplexNonInheritableAttribute)attributes[0];
+            // (1, 2, true, "class", FileAccess.Write)
+            Assert.AreEqual(1, att.Id);
+            Assert.AreEqual(2, att.Num);
+            Assert.AreEqual(true, att.IsSomething);
+            Assert.AreEqual("class", att.Name);
+            Assert.AreEqual(FileAccess.Write, att.Access);
 
-		[Test]
-		public void EnsureProxyHasAttributesOnClassAndMethods_ComplexAttributes()
-		{
-			AttributedClass2 instance = (AttributedClass2)
-										generator.CreateClassProxy(typeof (AttributedClass2), new StandardInterceptor());
+            attributes = instance
+                .GetType()
+                .GetMethod("Do1")
+                .GetCustomAttributes(typeof(ComplexNonInheritableAttribute), false)
+                .ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.IsInstanceOf(typeof(ComplexNonInheritableAttribute), attributes[0]);
+            att = (ComplexNonInheritableAttribute)attributes[0];
+            // (2, 3, "Do1", Access = FileAccess.ReadWrite)
+            Assert.AreEqual(2, att.Id);
+            Assert.AreEqual(3, att.Num);
+            Assert.AreEqual(false, att.IsSomething);
+            Assert.AreEqual("Do1", att.Name);
+            Assert.AreEqual(FileAccess.ReadWrite, att.Access);
 
-			object[] attributes = instance.GetType().GetCustomAttributes(typeof (ComplexNonInheritableAttribute), false).ToArray();
-			Assert.AreEqual(1, attributes.Length);
-			Assert.IsInstanceOf(typeof (ComplexNonInheritableAttribute), attributes[0]);
-			ComplexNonInheritableAttribute att = (ComplexNonInheritableAttribute) attributes[0];
-			// (1, 2, true, "class", FileAccess.Write)
-			Assert.AreEqual(1, att.Id);
-			Assert.AreEqual(2, att.Num);
-			Assert.AreEqual(true, att.IsSomething);
-			Assert.AreEqual("class", att.Name);
-			Assert.AreEqual(FileAccess.Write, att.Access);
+            attributes = instance
+                .GetType()
+                .GetMethod("Do2")
+                .GetCustomAttributes(typeof(ComplexNonInheritableAttribute), false)
+                .ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.IsInstanceOf(typeof(ComplexNonInheritableAttribute), attributes[0]);
+            att = (ComplexNonInheritableAttribute)attributes[0];
+            // (3, 4, "Do2", IsSomething=true)
+            Assert.AreEqual(3, att.Id);
+            Assert.AreEqual(4, att.Num);
+            Assert.AreEqual(true, att.IsSomething);
+            Assert.AreEqual("Do2", att.Name);
+        }
 
-			attributes = instance.GetType().GetMethod("Do1").GetCustomAttributes(typeof (ComplexNonInheritableAttribute), false).ToArray();
-			Assert.AreEqual(1, attributes.Length);
-			Assert.IsInstanceOf(typeof (ComplexNonInheritableAttribute), attributes[0]);
-			att = (ComplexNonInheritableAttribute) attributes[0];
-			// (2, 3, "Do1", Access = FileAccess.ReadWrite)
-			Assert.AreEqual(2, att.Id);
-			Assert.AreEqual(3, att.Num);
-			Assert.AreEqual(false, att.IsSomething);
-			Assert.AreEqual("Do1", att.Name);
-			Assert.AreEqual(FileAccess.ReadWrite, att.Access);
+        [Test]
+        public void EnsureProxyHasAttributesOnProperties()
+        {
+            var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
+            var nameProperty = proxy.GetType().GetProperty("OnProperty");
+            Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
+        }
 
-			attributes = instance.GetType().GetMethod("Do2").GetCustomAttributes(typeof (ComplexNonInheritableAttribute), false).ToArray();
-			Assert.AreEqual(1, attributes.Length);
-			Assert.IsInstanceOf(typeof (ComplexNonInheritableAttribute), attributes[0]);
-			att = (ComplexNonInheritableAttribute) attributes[0];
-			// (3, 4, "Do2", IsSomething=true)
-			Assert.AreEqual(3, att.Id);
-			Assert.AreEqual(4, att.Num);
-			Assert.AreEqual(true, att.IsSomething);
-			Assert.AreEqual("Do2", att.Name);
-		}
+        [Test, Ignore("Not supported. Is it possible? There seems to be no API to allow that.")]
+        public void EnsureProxyHasAttributesOnOnReturn()
+        {
+            var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
+            var nameProperty = proxy.GetType().GetMethod("OnReturn").ReturnParameter;
+            Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
+        }
 
-		[Test]
-		public void EnsureProxyHasAttributesOnProperties()
-		{
-			var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
-			var nameProperty = proxy.GetType().GetProperty("OnProperty");
-			Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
-		}
+        [Test]
+        public void EnsureProxyHasAttributesOnParameter()
+        {
+            var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
+            ParameterInfo nameProperty = proxy
+                .GetType()
+                .GetMethod("OnParameter")
+                .GetParameters()
+                .Single();
+            Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
+        }
 
-		[Test, Ignore("Not supported. Is it possible? There seems to be no API to allow that.")]
-		public void EnsureProxyHasAttributesOnOnReturn()
-		{
-			var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
-			var nameProperty = proxy.GetType().GetMethod("OnReturn").ReturnParameter;
-			Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
-		}
+        [Test]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "Mono does not currently emit custom attributes on generic type parameters of methods. See https://github.com/mono/mono/issues/8512."
+        )]
+        public void EnsureProxyHasAttributesOnGenericArgument()
+        {
+            var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
+            var nameProperty = proxy
+                .GetType()
+                .GetMethod("OnGenericArgument")
+                .GetGenericArguments()
+                .Single();
+            Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
+        }
 
-		[Test]
-		public void EnsureProxyHasAttributesOnParameter()
-		{
-			var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
-			ParameterInfo nameProperty = proxy.GetType().GetMethod("OnParameter").GetParameters().Single();
-			Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
-		}
+        [Test]
+        public void EnsureProxyHasNestedAttributesOnClassAndMethods()
+        {
+            var instance = (HasNestedNonInheritableAttribute)
+                generator.CreateClassProxy(
+                    typeof(HasNestedNonInheritableAttribute),
+                    new StandardInterceptor()
+                );
 
-		[Test]
-		[Platform(Exclude = "Mono", Reason = "Mono does not currently emit custom attributes on generic type parameters of methods. See https://github.com/mono/mono/issues/8512.")]
-		public void EnsureProxyHasAttributesOnGenericArgument()
-		{
-			var proxy = generator.CreateClassProxy<HasNonInheritableAttribute>();
-			var nameProperty = proxy.GetType().GetMethod("OnGenericArgument").GetGenericArguments().Single();
-			Assert.IsTrue(nameProperty.IsDefined(typeof(NonInheritableAttribute), false));
-		}
+            object[] attributes = instance
+                .GetType()
+                .GetCustomAttributes(typeof(Nested.NonInheritableAttribute), false)
+                .ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.IsInstanceOf(typeof(Nested.NonInheritableAttribute), attributes[0]);
 
-		[Test]
-		public void EnsureProxyHasNestedAttributesOnClassAndMethods()
-		{
-			var instance = (HasNestedNonInheritableAttribute)generator.CreateClassProxy(typeof(HasNestedNonInheritableAttribute), new StandardInterceptor());
+            attributes = instance
+                .GetType()
+                .GetMethod("OnMethod")
+                .GetCustomAttributes(typeof(Nested.NonInheritableAttribute), false)
+                .ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.IsInstanceOf(typeof(Nested.NonInheritableAttribute), attributes[0]);
+        }
 
-			object[] attributes = instance.GetType().GetCustomAttributes(typeof(Nested.NonInheritableAttribute), false).ToArray();
-			Assert.AreEqual(1, attributes.Length);
-			Assert.IsInstanceOf(typeof(Nested.NonInheritableAttribute), attributes[0]);
+        [Test]
+        public void EnsureProxyHasNestedAttributesOnProperties()
+        {
+            var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
+            var nameProperty = proxy.GetType().GetProperty("OnProperty");
+            Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
+        }
 
-			attributes = instance.GetType().GetMethod("OnMethod").GetCustomAttributes(typeof(Nested.NonInheritableAttribute), false).ToArray();
-			Assert.AreEqual(1, attributes.Length);
-			Assert.IsInstanceOf(typeof(Nested.NonInheritableAttribute), attributes[0]);
-		}
+        [Test, Ignore("Not supported. Is it possible? There seems to be no API to allow that.")]
+        public void EnsureProxyHasNestedAttributesOnOnReturn()
+        {
+            var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
+            var nameProperty = proxy.GetType().GetMethod("OnReturn").ReturnParameter;
+            Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
+        }
 
-		[Test]
-		public void EnsureProxyHasNestedAttributesOnProperties()
-		{
-			var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
-			var nameProperty = proxy.GetType().GetProperty("OnProperty");
-			Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
-		}
+        [Test]
+        public void EnsureProxyHasNestedAttributesOnParameter()
+        {
+            var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
+            ParameterInfo nameProperty = proxy
+                .GetType()
+                .GetMethod("OnParameter")
+                .GetParameters()
+                .Single();
+            Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
+        }
 
-		[Test, Ignore("Not supported. Is it possible? There seems to be no API to allow that.")]
-		public void EnsureProxyHasNestedAttributesOnOnReturn()
-		{
-			var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
-			var nameProperty = proxy.GetType().GetMethod("OnReturn").ReturnParameter;
-			Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
-		}
+        [Test]
+        [Platform(
+            Exclude = "Mono",
+            Reason = "Mono does not currently emit custom attributes on generic type parameters of methods. See https://github.com/mono/mono/issues/8512."
+        )]
+        public void EnsureProxyHasNestedAttributesOnGenericArgument()
+        {
+            var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
+            var nameProperty = proxy
+                .GetType()
+                .GetMethod("OnGenericArgument")
+                .GetGenericArguments()
+                .Single();
+            Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
+        }
 
-		[Test]
-		public void EnsureProxyHasNestedAttributesOnParameter()
-		{
-			var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
-			ParameterInfo nameProperty = proxy.GetType().GetMethod("OnParameter").GetParameters().Single();
-			Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
-		}
+        [Test]
+        public void Can_proxy_type_with_non_inheritable_attribute_depending_on_array_of_something_via_property()
+        {
+            var proxy =
+                generator.CreateInterfaceProxyWithoutTarget<IHasNonInheritableAttributeWithArray>();
+            var attribute = proxy
+                .GetType()
+                .GetCustomAttributes(typeof(NonInheritableWithArrayAttribute), false)
+                .Cast<NonInheritableWithArrayAttribute>()
+                .Single();
+            CollectionAssert.AreEqual(attribute.Values, new[] { "1", "2", "3" });
+        }
 
-		[Test]
-		[Platform(Exclude = "Mono", Reason = "Mono does not currently emit custom attributes on generic type parameters of methods. See https://github.com/mono/mono/issues/8512.")]
-		public void EnsureProxyHasNestedAttributesOnGenericArgument()
-		{
-			var proxy = generator.CreateClassProxy<HasNestedNonInheritableAttribute>();
-			var nameProperty = proxy.GetType().GetMethod("OnGenericArgument").GetGenericArguments().Single();
-			Assert.IsTrue(nameProperty.IsDefined(typeof(Nested.NonInheritableAttribute), false));
-		}
+        [Test]
+        public void Can_proxy_type_with_non_inheritable_attribute_depending_on_array_of_something_via_field()
+        {
+            var proxy =
+                generator.CreateInterfaceProxyWithoutTarget<IHasNonInheritableAttributeWithArray2>();
+            var attribute = proxy
+                .GetType()
+                .GetCustomAttributes(typeof(NonInheritableWithArray2Attribute), false)
+                .Cast<NonInheritableWithArray2Attribute>()
+                .Single();
+            CollectionAssert.AreEqual(attribute.Values, new[] { "1", "2", "3" });
+        }
 
-		[Test]
-		public void Can_proxy_type_with_non_inheritable_attribute_depending_on_array_of_something_via_property()
-		{
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IHasNonInheritableAttributeWithArray>();
-			var attribute = proxy.GetType()
-				.GetCustomAttributes(typeof(NonInheritableWithArrayAttribute), false)
-				.Cast<NonInheritableWithArrayAttribute>().Single();
-			CollectionAssert.AreEqual(attribute.Values, new[] {"1", "2", "3"});
-		}
+        [TestCase(typeof(HasAttributeWithNullAsPositionalArgument))]
+        [TestCase(typeof(HasAttributeWithEmptyArrayAsPositionalArgument))]
+        [TestCase(typeof(HasAttributeWithNullInArrayAsPositionalArgument))]
+        public void Can_proxy_type_with_attribute_with_positional_array_parameter(Type classType)
+        {
+            _ = generator.CreateClassProxy(classType);
+        }
 
-		[Test]
-		public void Can_proxy_type_with_non_inheritable_attribute_depending_on_array_of_something_via_field()
-		{
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IHasNonInheritableAttributeWithArray2>();
-			var attribute = proxy.GetType()
-				.GetCustomAttributes(typeof(NonInheritableWithArray2Attribute), false)
-				.Cast<NonInheritableWithArray2Attribute>().Single();
-			CollectionAssert.AreEqual(attribute.Values, new[] { "1", "2", "3" });
-		}
+        [NonInheritableAttributeWithPositionalArrayParameter(null)]
+        public class HasAttributeWithNullAsPositionalArgument { }
 
-		[TestCase(typeof(HasAttributeWithNullAsPositionalArgument))]
-		[TestCase(typeof(HasAttributeWithEmptyArrayAsPositionalArgument))]
-		[TestCase(typeof(HasAttributeWithNullInArrayAsPositionalArgument))]
-		public void Can_proxy_type_with_attribute_with_positional_array_parameter(Type classType)
-		{
-			_ = generator.CreateClassProxy(classType);
-		}
+        [NonInheritableAttributeWithPositionalArrayParameter(new object[0])]
+        public class HasAttributeWithEmptyArrayAsPositionalArgument { }
 
-		[NonInheritableAttributeWithPositionalArrayParameter(null)]
-		public class HasAttributeWithNullAsPositionalArgument{ }
-
-		[NonInheritableAttributeWithPositionalArrayParameter(new object[0])]
-		public class HasAttributeWithEmptyArrayAsPositionalArgument { }
-
-		[NonInheritableAttributeWithPositionalArrayParameter(new object[1] { null })]
-		public class HasAttributeWithNullInArrayAsPositionalArgument { }
-	}
+        [NonInheritableAttributeWithPositionalArrayParameter(new object[1] { null })]
+        public class HasAttributeWithNullInArrayAsPositionalArgument { }
+    }
 }

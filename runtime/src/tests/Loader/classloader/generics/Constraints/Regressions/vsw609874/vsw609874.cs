@@ -17,11 +17,11 @@ namespace ConsoleApplication3
         }
 
         static void Repro<T>(B<T> b)
-            where T : Program
-        {
-        }
+            where T : Program { }
     }
 
     class A<T> { }
-    class B<T> where T : class { }
+
+    class B<T>
+        where T : class { }
 }

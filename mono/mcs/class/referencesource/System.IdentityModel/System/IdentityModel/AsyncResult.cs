@@ -6,8 +6,8 @@ namespace System.IdentityModel
 {
     using System;
     using System.Diagnostics;
-    using System.Threading;
     using System.Runtime;
+    using System.Threading;
 
     /// <summary>
     /// Base class for common AsyncResult programming scenarios.
@@ -27,10 +27,14 @@ namespace System.IdentityModel
             AsyncResult asyncResult = result as AsyncResult;
 
             if (asyncResult == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ID4001), "result"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.ID4001), "result")
+                );
 
             if (asyncResult.endCalled)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4002)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID4002))
+                );
 
             asyncResult.endCalled = true;
 
@@ -59,18 +63,14 @@ namespace System.IdentityModel
         /// Constructor for async results that do not need a callback or state.
         /// </summary>
         protected AsyncResult()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Constructor for async results that do not need a callback.
         /// </summary>
         /// <param name="state">A user-defined object that qualifies or contains information about an asynchronous operation.</param>
         protected AsyncResult(object state)
-            : this(null, state)
-        {
-        }
+            : this(null, state) { }
 
         /// <summary>
         /// Constructor for async results that need a callback and a state.
@@ -113,7 +113,9 @@ namespace System.IdentityModel
             if (completed == true)
             {
                 // it is a bug to call complete twice
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AsynchronousOperationException(SR.GetString(SR.ID4005)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new AsynchronousOperationException(SR.GetString(SR.ID4005))
+                );
             }
 
             completedSync = completedSynchronously;
@@ -169,7 +171,9 @@ namespace System.IdentityModel
                 // Because the stack trace gets lost on a rethrow, we're wrapping it in a generic exception
                 // so the stack trace is preserved.
                 //
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AsynchronousOperationException(SR.GetString(SR.ID4003), unhandledException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new AsynchronousOperationException(SR.GetString(SR.ID4003), unhandledException)
+                );
             }
         }
 
@@ -216,10 +220,7 @@ namespace System.IdentityModel
         /// </summary>
         public object AsyncState
         {
-            get
-            {
-                return state;
-            }
+            get { return state; }
         }
 
         /// <summary>
@@ -252,10 +253,7 @@ namespace System.IdentityModel
         /// </summary>
         public bool CompletedSynchronously
         {
-            get
-            {
-                return completedSync;
-            }
+            get { return completedSync; }
         }
 
         /// <summary>
@@ -263,10 +261,7 @@ namespace System.IdentityModel
         /// </summary>
         public bool IsCompleted
         {
-            get
-            {
-                return completed;
-            }
+            get { return completed; }
         }
 
         #endregion
@@ -286,4 +281,3 @@ namespace System.IdentityModel
         #endregion
     }
 }
-

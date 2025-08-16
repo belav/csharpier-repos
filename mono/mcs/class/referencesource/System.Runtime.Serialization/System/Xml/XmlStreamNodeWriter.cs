@@ -47,38 +47,23 @@ namespace System.Xml
         // Getting/Setting the Stream exists for fragmenting
         public Stream Stream
         {
-            get
-            {
-                return stream;
-            }
-            set
-            {
-                stream = value;
-            }
+            get { return stream; }
+            set { stream = value; }
         }
 
         // StreamBuffer/BufferOffset exists only for the BinaryWriter to fix up nodes
         public byte[] StreamBuffer
         {
-            get
-            {
-                return buffer;
-            }
+            get { return buffer; }
         }
         public int BufferOffset
         {
-            get
-            {
-                return offset;
-            }
+            get { return offset; }
         }
 
         public int Position
         {
-            get
-            {
-                return (int)stream.Position + offset;
-            }
+            get { return (int)stream.Position + offset; }
         }
 
         protected byte[] GetBuffer(int count, out int offset)
@@ -155,7 +140,8 @@ namespace System.Xml
         static void GetBufferFlushComplete(IAsyncEventArgs completionState)
         {
             XmlStreamNodeWriter thisPtr = (XmlStreamNodeWriter)completionState.AsyncState;
-            GetBufferAsyncEventArgs getBufferState = (GetBufferAsyncEventArgs)thisPtr.flushBufferState.Arguments;
+            GetBufferAsyncEventArgs getBufferState = (GetBufferAsyncEventArgs)
+                thisPtr.flushBufferState.Arguments;
             getBufferState.Result = getBufferState.Result ?? new GetBufferEventResult();
             getBufferState.Result.Buffer = thisPtr.buffer;
             getBufferState.Result.Offset = 0;
@@ -166,7 +152,9 @@ namespace System.Xml
         {
             if (Interlocked.CompareExchange(ref this.hasPendingWrite, 1, 0) != 0)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.GetString(SR.FlushBufferAlreadyInUse))
+                );
             }
 
             if (this.offset != 0)
@@ -176,7 +164,13 @@ namespace System.Xml
                     onFlushBufferComplete = new AsyncCallback(OnFlushBufferCompete);
                 }
 
-                IAsyncResult result = stream.BeginWrite(buffer, 0, this.offset, onFlushBufferComplete, this);
+                IAsyncResult result = stream.BeginWrite(
+                    buffer,
+                    0,
+                    this.offset,
+                    onFlushBufferComplete,
+                    this
+                );
                 if (!result.CompletedSynchronously)
                 {
                     return AsyncCompletionResult.Queued;
@@ -188,7 +182,9 @@ namespace System.Xml
 
             if (Interlocked.CompareExchange(ref this.hasPendingWrite, 0, 1) != 1)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
+                );
             }
 
             return AsyncCompletionResult.Completed;
@@ -209,7 +205,9 @@ namespace System.Xml
                 thisPtr.offset = 0;
                 if (Interlocked.CompareExchange(ref thisPtr.hasPendingWrite, 0, 1) != 1)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.GetString(SR.NoAsyncWritePending))
+                    );
                 }
             }
             catch (Exception ex)
@@ -243,7 +241,12 @@ namespace System.Xml
             int count;
             static AsyncCompletion onComplete = new AsyncCompletion(OnComplete);
 
-            public GetBufferAsyncResult(int count, XmlStreamNodeWriter writer, AsyncCallback callback, object state)
+            public GetBufferAsyncResult(
+                int count,
+                XmlStreamNodeWriter writer,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.count = count;
@@ -259,7 +262,10 @@ namespace System.Xml
                 }
                 else
                 {
-                    IAsyncResult result = writer.BeginFlushBuffer(PrepareAsyncCompletion(onComplete), this);
+                    IAsyncResult result = writer.BeginFlushBuffer(
+                        PrepareAsyncCompletion(onComplete),
+                        this
+                    );
                     completeSelf = SyncContinue(result);
                 }
 
@@ -361,9 +367,22 @@ namespace System.Xml
             }
         }
 
-        public IAsyncResult BeginWriteBytes(byte[] byteBuffer, int byteOffset, int byteCount, AsyncCallback callback, object state)
+        public IAsyncResult BeginWriteBytes(
+            byte[] byteBuffer,
+            int byteOffset,
+            int byteCount,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new WriteBytesAsyncResult(byteBuffer, byteOffset, byteCount, this, callback, state);
+            return new WriteBytesAsyncResult(
+                byteBuffer,
+                byteOffset,
+                byteCount,
+                this,
+                callback,
+                state
+            );
         }
 
         public void EndWriteBytes(IAsyncResult result)
@@ -373,8 +392,12 @@ namespace System.Xml
 
         class WriteBytesAsyncResult : AsyncResult
         {
-            static AsyncCompletion onHandleGetBufferComplete = new AsyncCompletion(OnHandleGetBufferComplete);
-            static AsyncCompletion onHandleFlushBufferComplete = new AsyncCompletion(OnHandleFlushBufferComplete);
+            static AsyncCompletion onHandleGetBufferComplete = new AsyncCompletion(
+                OnHandleGetBufferComplete
+            );
+            static AsyncCompletion onHandleFlushBufferComplete = new AsyncCompletion(
+                OnHandleFlushBufferComplete
+            );
             static AsyncCompletion onHandleWrite = new AsyncCompletion(OnHandleWrite);
 
             byte[] byteBuffer;
@@ -382,7 +405,14 @@ namespace System.Xml
             int byteCount;
             XmlStreamNodeWriter writer;
 
-            public WriteBytesAsyncResult(byte[] byteBuffer, int byteOffset, int byteCount, XmlStreamNodeWriter writer, AsyncCallback callback, object state)
+            public WriteBytesAsyncResult(
+                byte[] byteBuffer,
+                int byteOffset,
+                int byteCount,
+                XmlStreamNodeWriter writer,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.byteBuffer = byteBuffer;
@@ -429,7 +459,11 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = writer.BeginGetBuffer(this.byteCount, PrepareAsyncCompletion(onHandleGetBufferComplete), this);
+                    result = writer.BeginGetBuffer(
+                        this.byteCount,
+                        PrepareAsyncCompletion(onHandleGetBufferComplete),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -449,7 +483,10 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = writer.BeginFlushBuffer(PrepareAsyncCompletion(onHandleFlushBufferComplete), this);
+                    result = writer.BeginFlushBuffer(
+                        PrepareAsyncCompletion(onHandleFlushBufferComplete),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -464,7 +501,13 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = writer.stream.BeginWrite(this.byteBuffer, this.byteOffset, this.byteCount, PrepareAsyncCompletion(onHandleWrite), this);
+                    result = writer.stream.BeginWrite(
+                        this.byteBuffer,
+                        this.byteOffset,
+                        this.byteCount,
+                        PrepareAsyncCompletion(onHandleWrite),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -481,9 +524,11 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
-        unsafe protected void UnsafeWriteBytes(byte* bytes, int byteCount)
+        protected unsafe void UnsafeWriteBytes(byte* bytes, int byteCount)
         {
             FlushBuffer();
             byte[] buffer = this.buffer;
@@ -504,10 +549,12 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe protected void WriteUTF8Char(int ch)
+        protected unsafe void WriteUTF8Char(int ch)
         {
             if (ch < 0x80)
             {
@@ -545,10 +592,12 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe protected void WriteUTF8Chars(string value)
+        protected unsafe void WriteUTF8Chars(string value)
         {
             int count = value.Length;
             if (count > 0)
@@ -560,9 +609,11 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
-        unsafe protected void UnsafeWriteUTF8Chars(char* chars, int charCount)
+        protected unsafe void UnsafeWriteUTF8Chars(char* chars, int charCount)
         {
             const int charChunkSize = bufferLength / maxBytesPerChar;
             while (charCount > charChunkSize)
@@ -584,9 +635,11 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
-        unsafe protected void UnsafeWriteUnicodeChars(char* chars, int charCount)
+        protected unsafe void UnsafeWriteUnicodeChars(char* chars, int charCount)
         {
             const int charChunkSize = bufferLength / 2;
             while (charCount > charChunkSize)
@@ -608,9 +661,16 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
-        unsafe protected int UnsafeGetUnicodeChars(char* chars, int charCount, byte[] buffer, int offset)
+        protected unsafe int UnsafeGetUnicodeChars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             char* charsMax = chars + charCount;
             while (chars < charsMax)
@@ -623,9 +683,11 @@ namespace System.Xml
             return charCount * 2;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
-        unsafe protected int UnsafeGetUTF8Length(char* chars, int charCount)
+        protected unsafe int UnsafeGetUTF8Length(char* chars, int charCount)
         {
             char* charsMax = chars + charCount;
             while (chars < charsMax)
@@ -639,12 +701,20 @@ namespace System.Xml
             if (chars == charsMax)
                 return charCount;
 
-            return (int)(chars - (charsMax - charCount)) + encoding.GetByteCount(chars, (int)(charsMax - chars));
+            return (int)(chars - (charsMax - charCount))
+                + encoding.GetByteCount(chars, (int)(charsMax - chars));
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
-        unsafe protected int UnsafeGetUTF8Chars(char* chars, int charCount, byte[] buffer, int offset)
+        protected unsafe int UnsafeGetUTF8Chars(
+            char* chars,
+            int charCount,
+            byte[] buffer,
+            int offset
+        )
         {
             if (charCount > 0)
             {
@@ -676,7 +746,12 @@ namespace System.Xml
                             chars++;
                         }
 
-                        bytes += encoding.GetBytes(charsStart, (int)(chars - charsStart), bytes, (int)(bytesMax - bytes));
+                        bytes += encoding.GetBytes(
+                            charsStart,
+                            (int)(chars - charsStart),
+                            bytes,
+                            (int)(bytesMax - bytes)
+                        );
 
                         if (chars >= charsMax)
                             break;
@@ -712,7 +787,11 @@ namespace System.Xml
             static AsyncCompletion onComplete = new AsyncCompletion(OnComplete);
             XmlStreamNodeWriter writer;
 
-            public FlushBufferAsyncResult(XmlStreamNodeWriter writer, AsyncCallback callback, object state)
+            public FlushBufferAsyncResult(
+                XmlStreamNodeWriter writer,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.writer = writer;
@@ -739,7 +818,13 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = this.writer.stream.BeginWrite(writer.buffer, 0, writer.offset, PrepareAsyncCompletion(onComplete), this);
+                    result = this.writer.stream.BeginWrite(
+                        writer.buffer,
+                        0,
+                        writer.offset,
+                        PrepareAsyncCompletion(onComplete),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -787,8 +872,7 @@ namespace System.Xml
             internal int Offset { get; set; }
         }
 
-        internal class GetBufferAsyncEventArgs : AsyncEventArgs<GetBufferArgs, GetBufferEventResult>
-        {
-        }
+        internal class GetBufferAsyncEventArgs
+            : AsyncEventArgs<GetBufferArgs, GetBufferEventResult> { }
     }
 }

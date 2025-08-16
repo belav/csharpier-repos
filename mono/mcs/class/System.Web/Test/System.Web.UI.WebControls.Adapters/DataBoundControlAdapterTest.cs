@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,59 +40,58 @@ using System.Web.UI.WebControls.Adapters;
 using System.Web.Configuration;
 using MonoTests.SystemWeb.Framework;
 
-
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
-	[TestFixture]
-	public class DataBoundControlAdapterTest
-	{
-		MyDataBoundControl c;
-		MyDataBoundControlAdapter a;
+    [TestFixture]
+    public class DataBoundControlAdapterTest
+    {
+        MyDataBoundControl c;
+        MyDataBoundControlAdapter a;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			c = new MyDataBoundControl ();
-			a = new MyDataBoundControlAdapter (c);
-		}
-		
-		[Test]
-		public void PerformDataBinding ()
-		{
-			ArrayList data = new ArrayList ();
-			a.PerformDataBinding (data);
-			Assert.AreEqual (data, c.data, "PerformDataBinding #1");
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            c = new MyDataBoundControl();
+            a = new MyDataBoundControlAdapter(c);
+        }
 
-		[Test]
-		public void Control ()
-		{
-			Assert.AreEqual (c, a.Control, "Control #1");
-		}
-				
-#region Support classes
-		
-		class MyDataBoundControl : DataBoundControl
-		{
-			internal IEnumerable data;
-			
-			protected internal override void PerformDataBinding (IEnumerable data)
-			{
-				this.data = data;
-			}
-		}
+        [Test]
+        public void PerformDataBinding()
+        {
+            ArrayList data = new ArrayList();
+            a.PerformDataBinding(data);
+            Assert.AreEqual(data, c.data, "PerformDataBinding #1");
+        }
 
-		class MyDataBoundControlAdapter : SystemWebTestShim.DataBoundControlAdapter
-		{
-			internal MyDataBoundControlAdapter (DataBoundControl c) : base (c)
-			{
-			}
-			
-			new internal DataBoundControl Control {
-				get { return base.Control; }
-			}
-		}
-#endregion
-	}
+        [Test]
+        public void Control()
+        {
+            Assert.AreEqual(c, a.Control, "Control #1");
+        }
+
+        #region Support classes
+
+        class MyDataBoundControl : DataBoundControl
+        {
+            internal IEnumerable data;
+
+            protected internal override void PerformDataBinding(IEnumerable data)
+            {
+                this.data = data;
+            }
+        }
+
+        class MyDataBoundControlAdapter : SystemWebTestShim.DataBoundControlAdapter
+        {
+            internal MyDataBoundControlAdapter(DataBoundControl c)
+                : base(c) { }
+
+            internal new DataBoundControl Control
+            {
+                get { return base.Control; }
+            }
+        }
+        #endregion
+    }
 }
 #endif

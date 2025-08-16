@@ -8,7 +8,10 @@ namespace Microsoft.Extensions.Internal
 {
     internal static partial class ParameterDefaultValue
     {
-        public static bool CheckHasDefaultValue(ParameterInfo parameter, out bool tryToGetDefaultValue)
+        public static bool CheckHasDefaultValue(
+            ParameterInfo parameter,
+            out bool tryToGetDefaultValue
+        )
         {
             tryToGetDefaultValue = true;
             try

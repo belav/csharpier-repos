@@ -11,9 +11,8 @@ namespace System.Xml.Xsl.XPath
 {
     internal class XPathQilFactory : QilPatternFactory
     {
-        public XPathQilFactory(QilFactory f, bool debug) : base(f, debug)
-        {
-        }
+        public XPathQilFactory(QilFactory f, bool debug)
+            : base(f, debug) { }
 
         // Helper methods used in addition to QilPatternFactory's ones
 
@@ -38,14 +37,23 @@ namespace System.Xml.Xsl.XPath
         {
             XmlQueryType? xt = n.XmlType;
             bool result = !(xt!.IsStrict || xt.IsNode);
-            Debug.Assert(result == (xt.TypeCode == XmlTypeCode.Item || xt.TypeCode == XmlTypeCode.AnyAtomicType), "What else can it be?");
+            Debug.Assert(
+                result
+                    == (
+                        xt.TypeCode == XmlTypeCode.Item || xt.TypeCode == XmlTypeCode.AnyAtomicType
+                    ),
+                "What else can it be?"
+            );
             return result;
         }
 
         [Conditional("DEBUG")]
         public static void CheckNode(QilNode n)
         {
-            Debug.Assert(n != null && n.XmlType!.IsSingleton && n.XmlType.IsNode, "Must be a singleton node");
+            Debug.Assert(
+                n != null && n.XmlType!.IsSingleton && n.XmlType.IsNode,
+                "Must be a singleton node"
+            );
         }
 
         [Conditional("DEBUG")]
@@ -57,31 +65,46 @@ namespace System.Xml.Xsl.XPath
         [Conditional("DEBUG")]
         public static void CheckNodeNotRtf(QilNode n)
         {
-            Debug.Assert(n != null && n.XmlType!.IsSingleton && n.XmlType.IsNode && n.XmlType.IsNotRtf, "Must be a singleton node and not an Rtf");
+            Debug.Assert(
+                n != null && n.XmlType!.IsSingleton && n.XmlType.IsNode && n.XmlType.IsNotRtf,
+                "Must be a singleton node and not an Rtf"
+            );
         }
 
         [Conditional("DEBUG")]
         public static void CheckString(QilNode n)
         {
-            Debug.Assert(n != null && n.XmlType!.IsSubtypeOf(T.StringX), "Must be a singleton string");
+            Debug.Assert(
+                n != null && n.XmlType!.IsSubtypeOf(T.StringX),
+                "Must be a singleton string"
+            );
         }
 
         [Conditional("DEBUG")]
         public static void CheckStringS(QilNode n)
         {
-            Debug.Assert(n != null && n.XmlType!.IsSubtypeOf(T.StringXS), "Must be a sequence of strings");
+            Debug.Assert(
+                n != null && n.XmlType!.IsSubtypeOf(T.StringXS),
+                "Must be a sequence of strings"
+            );
         }
 
         [Conditional("DEBUG")]
         public static void CheckDouble(QilNode n)
         {
-            Debug.Assert(n != null && n.XmlType!.IsSubtypeOf(T.DoubleX), "Must be a singleton Double");
+            Debug.Assert(
+                n != null && n.XmlType!.IsSubtypeOf(T.DoubleX),
+                "Must be a singleton Double"
+            );
         }
 
         [Conditional("DEBUG")]
         public static void CheckBool(QilNode n)
         {
-            Debug.Assert(n != null && n.XmlType!.IsSubtypeOf(T.BooleanX), "Must be a singleton Bool");
+            Debug.Assert(
+                n != null && n.XmlType!.IsSubtypeOf(T.BooleanX),
+                "Must be a singleton Bool"
+            );
         }
 
         // Return true if inferred type of the given expression is never a subtype of T.NodeS
@@ -106,8 +129,10 @@ namespace System.Xml.Xsl.XPath
                 else if (!xt.IsAtomicValue)
                 {
                     QilIterator i;
-                    return Loop(i = Let(n),
-                        Conditional(Gt(Length(i), Int32(1)),
+                    return Loop(
+                        i = Let(n),
+                        Conditional(
+                            Gt(Length(i), Int32(1)),
                             DocOrderDistinct(TypeAssert(i, T.NodeNotRtfS)),
                             i
                         )
@@ -122,8 +147,11 @@ namespace System.Xml.Xsl.XPath
         {
             CheckString(res);
             CheckStringS(args);
-            return XsltInvokeEarlyBound(QName("format-message"),
-                XsltMethods.FormatMessage, T.StringX, new QilNode[] { res, args }
+            return XsltInvokeEarlyBound(
+                QName("format-message"),
+                XsltMethods.FormatMessage,
+                T.StringX,
+                new QilNode[] { res, args }
             );
         }
 
@@ -139,14 +167,22 @@ namespace System.Xml.Xsl.XPath
                 QilNodeType.Eq => (double)XsltLibrary.ComparisonOperator.Eq,
                 _ => (double)XsltLibrary.ComparisonOperator.Ne,
             };
-            return XsltInvokeEarlyBound(QName("EqualityOperator"),
-                XsltMethods.EqualityOperator, T.BooleanX, new QilNode[] { Double(opCode), left, right }
+            return XsltInvokeEarlyBound(
+                QName("EqualityOperator"),
+                XsltMethods.EqualityOperator,
+                T.BooleanX,
+                new QilNode[] { Double(opCode), left, right }
             );
         }
 
         public QilNode InvokeRelationalOperator(QilNodeType op, QilNode left, QilNode right)
         {
-            Debug.Assert(op == QilNodeType.Lt || op == QilNodeType.Le || op == QilNodeType.Gt || op == QilNodeType.Ge);
+            Debug.Assert(
+                op == QilNodeType.Lt
+                    || op == QilNodeType.Le
+                    || op == QilNodeType.Gt
+                    || op == QilNodeType.Ge
+            );
             left = TypeAssert(left, T.ItemS);
             right = TypeAssert(right, T.ItemS);
 
@@ -157,8 +193,11 @@ namespace System.Xml.Xsl.XPath
                 QilNodeType.Gt => (double)XsltLibrary.ComparisonOperator.Gt,
                 _ => (double)XsltLibrary.ComparisonOperator.Ge,
             };
-            return XsltInvokeEarlyBound(QName("RelationalOperator"),
-                XsltMethods.RelationalOperator, T.BooleanX, new QilNode[] { Double(opCode), left, right }
+            return XsltInvokeEarlyBound(
+                QName("RelationalOperator"),
+                XsltMethods.RelationalOperator,
+                T.BooleanX,
+                new QilNode[] { Double(opCode), left, right }
             );
         }
         #endregion
@@ -174,12 +213,19 @@ namespace System.Xml.Xsl.XPath
         {
             switch (requiredType)
             {
-                case XmlTypeCode.String: return ConvertToString(n);
-                case XmlTypeCode.Double: return ConvertToNumber(n);
-                case XmlTypeCode.Boolean: return ConvertToBoolean(n);
-                case XmlTypeCode.Node: return EnsureNodeSet(n);
-                case XmlTypeCode.Item: return n;
-                default: Debug.Fail($"Unexpected XmlTypeCode: {requiredType}"); return null;
+                case XmlTypeCode.String:
+                    return ConvertToString(n);
+                case XmlTypeCode.Double:
+                    return ConvertToNumber(n);
+                case XmlTypeCode.Boolean:
+                    return ConvertToBoolean(n);
+                case XmlTypeCode.Node:
+                    return EnsureNodeSet(n);
+                case XmlTypeCode.Item:
+                    return n;
+                default:
+                    Debug.Fail($"Unexpected XmlTypeCode: {requiredType}");
+                    return null;
             }
         }
 
@@ -190,14 +236,16 @@ namespace System.Xml.Xsl.XPath
             {
                 case XmlTypeCode.Boolean:
                     return (
-                        n.NodeType == QilNodeType.True ? (QilNode)String("true") :
-                        n.NodeType == QilNodeType.False ? (QilNode)String("false") :
-                        /*default: */                     (QilNode)Conditional(n, String("true"), String("false"))
+                        n.NodeType == QilNodeType.True ? (QilNode)String("true")
+                        : n.NodeType == QilNodeType.False ? (QilNode)String("false")
+                        :
+                        /*default: */(QilNode)Conditional(n, String("true"), String("false"))
                     );
                 case XmlTypeCode.Double:
-                    return (n.NodeType == QilNodeType.LiteralDouble
-                        ? (QilNode)String(XPathConvert.DoubleToString((double)(QilLiteral)n))
-                        : (QilNode)XsltConvert(n, T.StringX)
+                    return (
+                        n.NodeType == QilNodeType.LiteralDouble
+                            ? (QilNode)String(XPathConvert.DoubleToString((double)(QilLiteral)n))
+                            : (QilNode)XsltConvert(n, T.StringX)
                     );
                 case XmlTypeCode.String:
                     return n;
@@ -222,14 +270,16 @@ namespace System.Xml.Xsl.XPath
                 case XmlTypeCode.Double:
                     // (x < 0 || 0 < x)  ==  (x != 0) && !Double.IsNaN(x)
                     QilIterator i;
-                    return (n.NodeType == QilNodeType.LiteralDouble
-                        ? Boolean((double)(QilLiteral)n < 0 || 0 < (double)(QilLiteral)n)
-                        : Loop(i = Let(n), Or(Lt(i, Double(0)), Lt(Double(0), i)))
+                    return (
+                        n.NodeType == QilNodeType.LiteralDouble
+                            ? Boolean((double)(QilLiteral)n < 0 || 0 < (double)(QilLiteral)n)
+                            : Loop(i = Let(n), Or(Lt(i, Double(0)), Lt(Double(0), i)))
                     );
                 case XmlTypeCode.String:
-                    return (n.NodeType == QilNodeType.LiteralString
-                        ? Boolean(((string)(QilLiteral)n).Length != 0)
-                        : Ne(StrLength(n), Int32(0))
+                    return (
+                        n.NodeType == QilNodeType.LiteralString
+                            ? Boolean(((string)(QilLiteral)n).Length != 0)
+                            : Ne(StrLength(n), Int32(0))
                     );
                 default:
                     if (n.XmlType.IsNode)
@@ -249,9 +299,10 @@ namespace System.Xml.Xsl.XPath
             {
                 case XmlTypeCode.Boolean:
                     return (
-                        n.NodeType == QilNodeType.True ? (QilNode)Double(1) :
-                        n.NodeType == QilNodeType.False ? (QilNode)Double(0) :
-                        /*default: */                 (QilNode)Conditional(n, Double(1), Double(0))
+                        n.NodeType == QilNodeType.True ? (QilNode)Double(1)
+                        : n.NodeType == QilNodeType.False ? (QilNode)Double(0)
+                        :
+                        /*default: */(QilNode)Conditional(n, Double(1), Double(0))
                     );
                 case XmlTypeCode.Double:
                     return n;
@@ -316,8 +367,11 @@ namespace System.Xml.Xsl.XPath
 
         public QilNode InvokeEnsureNodeSet(QilNode n)
         {
-            return XsltInvokeEarlyBound(QName("ensure-node-set"),
-                XsltMethods.EnsureNodeSet, T.NodeSDod, new QilNode[] { n }
+            return XsltInvokeEarlyBound(
+                QName("ensure-node-set"),
+                XsltMethods.EnsureNodeSet,
+                T.NodeSDod,
+                new QilNode[] { n }
             );
         }
         #endregion
@@ -340,8 +394,11 @@ namespace System.Xml.Xsl.XPath
         {
             CheckString(str1);
             CheckString(str2);
-            return XsltInvokeEarlyBound(QName("starts-with"),
-                XsltMethods.StartsWith, T.BooleanX, new QilNode[] { str1, str2 }
+            return XsltInvokeEarlyBound(
+                QName("starts-with"),
+                XsltMethods.StartsWith,
+                T.BooleanX,
+                new QilNode[] { str1, str2 }
             );
         }
 
@@ -349,8 +406,11 @@ namespace System.Xml.Xsl.XPath
         {
             CheckString(str1);
             CheckString(str2);
-            return XsltInvokeEarlyBound(QName("contains"),
-                XsltMethods.Contains, T.BooleanX, new QilNode[] { str1, str2 }
+            return XsltInvokeEarlyBound(
+                QName("contains"),
+                XsltMethods.Contains,
+                T.BooleanX,
+                new QilNode[] { str1, str2 }
             );
         }
 
@@ -358,8 +418,11 @@ namespace System.Xml.Xsl.XPath
         {
             CheckString(str1);
             CheckString(str2);
-            return XsltInvokeEarlyBound(QName("substring-before"),
-                XsltMethods.SubstringBefore, T.StringX, new QilNode[] { str1, str2 }
+            return XsltInvokeEarlyBound(
+                QName("substring-before"),
+                XsltMethods.SubstringBefore,
+                T.StringX,
+                new QilNode[] { str1, str2 }
             );
         }
 
@@ -367,8 +430,11 @@ namespace System.Xml.Xsl.XPath
         {
             CheckString(str1);
             CheckString(str2);
-            return XsltInvokeEarlyBound(QName("substring-after"),
-                XsltMethods.SubstringAfter, T.StringX, new QilNode[] { str1, str2 }
+            return XsltInvokeEarlyBound(
+                QName("substring-after"),
+                XsltMethods.SubstringAfter,
+                T.StringX,
+                new QilNode[] { str1, str2 }
             );
         }
 
@@ -376,8 +442,11 @@ namespace System.Xml.Xsl.XPath
         {
             CheckString(str);
             CheckDouble(start);
-            return XsltInvokeEarlyBound(QName("substring"),
-                XsltMethods.Substring2, T.StringX, new QilNode[] { str, start }
+            return XsltInvokeEarlyBound(
+                QName("substring"),
+                XsltMethods.Substring2,
+                T.StringX,
+                new QilNode[] { str, start }
             );
         }
 
@@ -386,16 +455,22 @@ namespace System.Xml.Xsl.XPath
             CheckString(str);
             CheckDouble(start);
             CheckDouble(length);
-            return XsltInvokeEarlyBound(QName("substring"),
-                XsltMethods.Substring3, T.StringX, new QilNode[] { str, start, length }
+            return XsltInvokeEarlyBound(
+                QName("substring"),
+                XsltMethods.Substring3,
+                T.StringX,
+                new QilNode[] { str, start, length }
             );
         }
 
         public QilNode InvokeNormalizeSpace(QilNode str)
         {
             CheckString(str);
-            return XsltInvokeEarlyBound(QName("normalize-space"),
-                XsltMethods.NormalizeSpace, T.StringX, new QilNode[] { str }
+            return XsltInvokeEarlyBound(
+                QName("normalize-space"),
+                XsltMethods.NormalizeSpace,
+                T.StringX,
+                new QilNode[] { str }
             );
         }
 
@@ -404,8 +479,11 @@ namespace System.Xml.Xsl.XPath
             CheckString(str1);
             CheckString(str2);
             CheckString(str3);
-            return XsltInvokeEarlyBound(QName("translate"),
-                XsltMethods.Translate, T.StringX, new QilNode[] { str1, str2, str3 }
+            return XsltInvokeEarlyBound(
+                QName("translate"),
+                XsltMethods.Translate,
+                T.StringX,
+                new QilNode[] { str1, str2, str3 }
             );
         }
 
@@ -413,32 +491,44 @@ namespace System.Xml.Xsl.XPath
         {
             CheckString(lang);
             CheckNodeNotRtf(context);
-            return XsltInvokeEarlyBound(QName(nameof(lang)),
-                XsltMethods.Lang, T.BooleanX, new QilNode[] { lang, context }
+            return XsltInvokeEarlyBound(
+                QName(nameof(lang)),
+                XsltMethods.Lang,
+                T.BooleanX,
+                new QilNode[] { lang, context }
             );
         }
 
         public QilNode InvokeFloor(QilNode value)
         {
             CheckDouble(value);
-            return XsltInvokeEarlyBound(QName("floor"),
-                XsltMethods.Floor, T.DoubleX, new QilNode[] { value }
+            return XsltInvokeEarlyBound(
+                QName("floor"),
+                XsltMethods.Floor,
+                T.DoubleX,
+                new QilNode[] { value }
             );
         }
 
         public QilNode InvokeCeiling(QilNode value)
         {
             CheckDouble(value);
-            return XsltInvokeEarlyBound(QName("ceiling"),
-                XsltMethods.Ceiling, T.DoubleX, new QilNode[] { value }
+            return XsltInvokeEarlyBound(
+                QName("ceiling"),
+                XsltMethods.Ceiling,
+                T.DoubleX,
+                new QilNode[] { value }
             );
         }
 
         public QilNode InvokeRound(QilNode value)
         {
             CheckDouble(value);
-            return XsltInvokeEarlyBound(QName("round"),
-                XsltMethods.Round, T.DoubleX, new QilNode[] { value }
+            return XsltInvokeEarlyBound(
+                QName("round"),
+                XsltMethods.Round,
+                T.DoubleX,
+                new QilNode[] { value }
             );
         }
         #endregion

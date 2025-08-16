@@ -11,9 +11,10 @@ namespace System.Reflection.Runtime.Dispensers
     //
     internal sealed class DispenserAlgorithm
     {
-        public static readonly DispenserAlgorithm CreateAlways = new DispenserAlgorithm();   // Always create a new object (i.e. no caching at all.)
-        public static readonly DispenserAlgorithm ReuseAlways = new DispenserAlgorithm();   // Every object is saved permanently (i.e. complete unification.)
-        public static readonly DispenserAlgorithm ReuseAsLongAsValueIsAlive = new DispenserAlgorithm();   // Every object is saved using weak references.
+        public static readonly DispenserAlgorithm CreateAlways = new DispenserAlgorithm(); // Always create a new object (i.e. no caching at all.)
+        public static readonly DispenserAlgorithm ReuseAlways = new DispenserAlgorithm(); // Every object is saved permanently (i.e. complete unification.)
+        public static readonly DispenserAlgorithm ReuseAsLongAsValueIsAlive =
+            new DispenserAlgorithm(); // Every object is saved using weak references.
 
         //
         // Associates the value with key using a hash table but does not prevent key from gc'd.
@@ -21,6 +22,7 @@ namespace System.Reflection.Runtime.Dispensers
         //   The key cannot be a value type.
         //   Keys are compared using Object.ReferenceEquals.
         //
-        public static readonly DispenserAlgorithm ReuseAsLongAsKeyIsAlive = new DispenserAlgorithm();
+        public static readonly DispenserAlgorithm ReuseAsLongAsKeyIsAlive =
+            new DispenserAlgorithm();
     }
 }

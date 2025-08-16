@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         internal static CliCommand GetCommand()
         {
-            var command = new CliCommand("analyzers", Resources.Run_3rd_party_analyzers__and_apply_fixes)
+            var command = new CliCommand(
+                "analyzers",
+                Resources.Run_3rd_party_analyzers__and_apply_fixes
+            )
             {
                 DiagnosticsOption,
                 ExcludeDiagnosticsOption,
@@ -30,34 +33,59 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         private class FormatAnalyzersHandler : AsynchronousCliAction
         {
-            public override async Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken)
+            public override async Task<int> InvokeAsync(
+                ParseResult parseResult,
+                CancellationToken cancellationToken
+            )
             {
                 var formatOptions = parseResult.ParseVerbosityOption(FormatOptions.Instance);
-                var logger = new SystemConsole().SetupLogging(minimalLogLevel: formatOptions.LogLevel, minimalErrorLevel: LogLevel.Warning);
+                var logger = new SystemConsole().SetupLogging(
+                    minimalLogLevel: formatOptions.LogLevel,
+                    minimalErrorLevel: LogLevel.Warning
+                );
                 formatOptions = parseResult.ParseCommonOptions(formatOptions, logger);
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
-                if (parseResult.GetResult(SeverityOption) is not null &&
-                    parseResult.GetValue(SeverityOption) is string { Length: > 0 } analyzerSeverity)
+                if (
+                    parseResult.GetResult(SeverityOption) is not null
+                    && parseResult.GetValue(SeverityOption)
+                        is string { Length: > 0 } analyzerSeverity
+                )
                 {
-                    formatOptions = formatOptions with { AnalyzerSeverity = GetSeverity(analyzerSeverity) };
+                    formatOptions = formatOptions with
+                    {
+                        AnalyzerSeverity = GetSeverity(analyzerSeverity),
+                    };
                 }
 
-                if (parseResult.GetResult(DiagnosticsOption) is not null &&
-                    parseResult.GetValue(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
+                if (
+                    parseResult.GetResult(DiagnosticsOption) is not null
+                    && parseResult.GetValue(DiagnosticsOption)
+                        is string[] { Length: > 0 } diagnostics
+                )
                 {
-                    formatOptions = formatOptions with { Diagnostics = diagnostics.ToImmutableHashSet() };
+                    formatOptions = formatOptions with
+                    {
+                        Diagnostics = diagnostics.ToImmutableHashSet(),
+                    };
                 }
 
-                if (parseResult.GetResult(ExcludeDiagnosticsOption) is not null &&
-                    parseResult.GetValue(ExcludeDiagnosticsOption) is string[] { Length: > 0 } excludeDiagnostics)
+                if (
+                    parseResult.GetResult(ExcludeDiagnosticsOption) is not null
+                    && parseResult.GetValue(ExcludeDiagnosticsOption)
+                        is string[] { Length: > 0 } excludeDiagnostics
+                )
                 {
-                    formatOptions = formatOptions with { ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet() };
+                    formatOptions = formatOptions with
+                    {
+                        ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet(),
+                    };
                 }
 
                 formatOptions = formatOptions with { FixCategory = FixCategory.Analyzers };
 
-                return await FormatAsync(formatOptions, logger, cancellationToken).ConfigureAwait(false);
+                return await FormatAsync(formatOptions, logger, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
     }

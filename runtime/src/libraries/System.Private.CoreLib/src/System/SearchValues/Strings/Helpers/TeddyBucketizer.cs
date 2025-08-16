@@ -12,7 +12,10 @@ namespace System.Buffers
     internal static class TeddyBucketizer
     {
         // This method is the same as GenerateBucketizedFingerprint below, but each bucket only contains 1 value.
-        public static (Vector512<byte> Low, Vector512<byte> High) GenerateNonBucketizedFingerprint(ReadOnlySpan<string> values, int offset)
+        public static (Vector512<byte> Low, Vector512<byte> High) GenerateNonBucketizedFingerprint(
+            ReadOnlySpan<string> values,
+            int offset
+        )
         {
             Debug.Assert(values.Length <= 8);
 
@@ -45,7 +48,10 @@ namespace System.Buffers
         // 'o' is 0x6F, 'a' is 0x61, so n1Low has the bit set at index 1 and 15, n1High has it set at index 6.
         // 'o' is 0x6F, 'r' is 0x72, so n2Low has the bit set at index 2 and 15, n2High has it set at index 6 and 7.
         // We repeat this for each bucket and then OR together the bitmaps (fingerprints) of each bucket to generate a single bitmap for each nibble.
-        public static (Vector512<byte> Low, Vector512<byte> High) GenerateBucketizedFingerprint(string[][] valueBuckets, int offset)
+        public static (Vector512<byte> Low, Vector512<byte> High) GenerateBucketizedFingerprint(
+            string[][] valueBuckets,
+            int offset
+        )
         {
             Debug.Assert(valueBuckets.Length <= 8);
 
@@ -65,7 +71,10 @@ namespace System.Buffers
                     int highNibble = c >> 4;
 
                     low.SetElementUnsafe(lowNibble, (byte)(low.GetElementUnsafe(lowNibble) | bit));
-                    high.SetElementUnsafe(highNibble, (byte)(high.GetElementUnsafe(highNibble) | bit));
+                    high.SetElementUnsafe(
+                        highNibble,
+                        (byte)(high.GetElementUnsafe(highNibble) | bit)
+                    );
                 }
             }
 
@@ -81,8 +90,14 @@ namespace System.Buffers
 
         public static string[][] Bucketize(ReadOnlySpan<string> values, int bucketCount, int n)
         {
-            Debug.Assert(bucketCount == 8, "This may change if we end up supporting the 'fat Teddy' variant.");
-            Debug.Assert(values.Length > bucketCount, "Should be using a non-bucketized implementation.");
+            Debug.Assert(
+                bucketCount == 8,
+                "This may change if we end up supporting the 'fat Teddy' variant."
+            );
+            Debug.Assert(
+                values.Length > bucketCount,
+                "Should be using a non-bucketized implementation."
+            );
             Debug.Assert(values.Length <= RabinKarp.MaxValues);
 
             // Stores the offset of the bucket each value should be assigned to.
@@ -123,7 +138,9 @@ namespace System.Buffers
 
             for (int bucketIndex = 0; bucketIndex < buckets.Length; bucketIndex++)
             {
-                string[] strings = buckets[bucketIndex] = new string[bucketIndexes.Count(bucketIndex)];
+                string[] strings = buckets[bucketIndex] = new string[
+                    bucketIndexes.Count(bucketIndex)
+                ];
 
                 int count = 0;
                 for (int i = 0; i < bucketIndexes.Length; i++)

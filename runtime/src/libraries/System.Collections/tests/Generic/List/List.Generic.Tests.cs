@@ -14,7 +14,8 @@ namespace System.Collections.Tests
         #region IList<T> Helper Methods
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Empty_Current_UndefinedOperation_Throws => true;
-        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
+        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
 
         protected override IList<T> GenericIListFactory()
         {
@@ -49,7 +50,9 @@ namespace System.Collections.Tests
             //do not have to verify consistency with any other method.
             for (int i = 0; i < list.Count; ++i)
             {
-                Assert.True(list[i] == null ? expectedItems[i] == null : list[i].Equals(expectedItems[i]));
+                Assert.True(
+                    list[i] == null ? expectedItems[i] == null : list[i].Equals(expectedItems[i])
+                );
             }
         }
 
@@ -60,8 +63,14 @@ namespace System.Collections.Tests
         public void CopyTo_ArgumentValidity(int count)
         {
             List<T> list = GenericListFactory(count);
-            AssertExtensions.Throws<ArgumentException>(null, () => list.CopyTo(0, new T[0], 0, count + 1));
-            AssertExtensions.Throws<ArgumentException>(null, () => list.CopyTo(count, new T[0], 0, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => list.CopyTo(0, new T[0], 0, count + 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => list.CopyTo(count, new T[0], 0, 1)
+            );
         }
     }
 }

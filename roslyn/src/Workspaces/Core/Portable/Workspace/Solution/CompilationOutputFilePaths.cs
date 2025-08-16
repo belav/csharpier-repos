@@ -32,20 +32,22 @@ namespace Microsoft.CodeAnalysis
 #pragma warning restore CA1822 // Mark members as static
             => new(assemblyPath: path);
 
-        public override bool Equals(object? obj)
-            => obj is CompilationOutputInfo info && Equals(info);
+        public override bool Equals(object? obj) =>
+            obj is CompilationOutputInfo info && Equals(info);
 
-        public bool Equals(CompilationOutputInfo other)
-            => AssemblyPath == other.AssemblyPath;
+        public bool Equals(CompilationOutputInfo other) => AssemblyPath == other.AssemblyPath;
 
-        public override int GetHashCode()
-            => AssemblyPath?.GetHashCode() ?? 0;
+        public override int GetHashCode() => AssemblyPath?.GetHashCode() ?? 0;
 
-        public static bool operator ==(in CompilationOutputInfo left, in CompilationOutputInfo right)
-            => left.Equals(right);
+        public static bool operator ==(
+            in CompilationOutputInfo left,
+            in CompilationOutputInfo right
+        ) => left.Equals(right);
 
-        public static bool operator !=(in CompilationOutputInfo left, in CompilationOutputInfo right)
-            => !left.Equals(right);
+        public static bool operator !=(
+            in CompilationOutputInfo left,
+            in CompilationOutputInfo right
+        ) => !left.Equals(right);
 
         internal void WriteTo(ObjectWriter writer)
         {

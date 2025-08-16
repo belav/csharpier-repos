@@ -41,43 +41,63 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// One such default(s), is that the feature is turned on, so that codegen consumes it,
         /// but with silent enforcement, so that the user is not prompted about their usage.
         /// </remarks>
-        public static readonly CodeStyleOption2<bool> TrueWithSilentEnforcement = new(value: true, notification: NotificationOption2.Silent);
-        public static readonly CodeStyleOption2<bool> FalseWithSilentEnforcement = new(value: false, notification: NotificationOption2.Silent);
-        public static readonly CodeStyleOption2<bool> TrueWithSuggestionEnforcement = new(value: true, notification: NotificationOption2.Suggestion);
-        public static readonly CodeStyleOption2<bool> FalseWithSuggestionEnforcement = new(value: false, notification: NotificationOption2.Suggestion);
+        public static readonly CodeStyleOption2<bool> TrueWithSilentEnforcement = new(
+            value: true,
+            notification: NotificationOption2.Silent
+        );
+        public static readonly CodeStyleOption2<bool> FalseWithSilentEnforcement = new(
+            value: false,
+            notification: NotificationOption2.Silent
+        );
+        public static readonly CodeStyleOption2<bool> TrueWithSuggestionEnforcement = new(
+            value: true,
+            notification: NotificationOption2.Suggestion
+        );
+        public static readonly CodeStyleOption2<bool> FalseWithSuggestionEnforcement = new(
+            value: false,
+            notification: NotificationOption2.Suggestion
+        );
 
         /// <summary>
         /// Use singletons for most common values.
         /// </summary>
-        public static CodeStyleOption2<bool> GetCodeStyle(bool value, NotificationOption2 notification)
-            => (value, notification.Severity) switch
+        public static CodeStyleOption2<bool> GetCodeStyle(
+            bool value,
+            NotificationOption2 notification
+        ) =>
+            (value, notification.Severity) switch
             {
                 (true, ReportDiagnostic.Hidden) => TrueWithSilentEnforcement,
                 (true, ReportDiagnostic.Info) => TrueWithSuggestionEnforcement,
                 (false, ReportDiagnostic.Hidden) => FalseWithSilentEnforcement,
                 (false, ReportDiagnostic.Info) => FalseWithSuggestionEnforcement,
-                _ => new(value, notification)
+                _ => new(value, notification),
             };
     }
 
     /// <summary>
     /// Represents a code style option and an associated notification option.  Supports
     /// being instantiated with T as a <see cref="bool"/> or an <c>enum type</c>.
-    /// 
+    ///
     /// CodeStyleOption also has some basic support for migration a <see cref="bool"/> option
     /// forward to an <c>enum type</c> option.  Specifically, if a previously serialized
-    /// bool-CodeStyleOption is then deserialized into an enum-CodeStyleOption then 'false' 
+    /// bool-CodeStyleOption is then deserialized into an enum-CodeStyleOption then 'false'
     /// values will be migrated to have the 0-value of the enum, and 'true' values will be
     /// migrated to have the 1-value of the enum.
-    /// 
-    /// Similarly, enum-type code options will serialize out in a way that is compatible with 
+    ///
+    /// Similarly, enum-type code options will serialize out in a way that is compatible with
     /// hosts that expect the value to be a boolean.  Specifically, if the enum value is 0 or 1
     /// then those values will write back as false/true.
     /// </summary>
     [DataContract]
-    internal sealed partial class CodeStyleOption2<T>(T value, NotificationOption2 notification) : ICodeStyleOption2, IEquatable<CodeStyleOption2<T>?>
+    internal sealed partial class CodeStyleOption2<T>(T value, NotificationOption2 notification)
+        : ICodeStyleOption2,
+            IEquatable<CodeStyleOption2<T>?>
     {
-        public static readonly CodeStyleOption2<T> Default = new(default!, NotificationOption2.Silent);
+        public static readonly CodeStyleOption2<T> Default = new(
+            default!,
+            NotificationOption2.Silent
+        );
 
         private const int SerializationVersion = 1;
 
@@ -94,12 +114,16 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         public NotificationOption2 Notification { get; } = notification;
 
         object? ICodeStyleOption.Value => this.Value;
+
         ICodeStyleOption ICodeStyleOption.WithValue(object value) => WithValue((T)value);
-        ICodeStyleOption ICodeStyleOption.WithNotification(NotificationOption2 notification) => new CodeStyleOption2<T>(Value, notification);
+
+        ICodeStyleOption ICodeStyleOption.WithNotification(NotificationOption2 notification) =>
+            new CodeStyleOption2<T>(Value, notification);
 
 #pragma warning disable RS0030 // Do not used banned APIs: CodeStyleOption<T>
 #if !CODE_STYLE
         ICodeStyleOption ICodeStyleOption.AsPublicCodeStyleOption() => new CodeStyleOption<T>(this);
+
         ICodeStyleOption ICodeStyleOption.AsInternalCodeStyleOption() => this;
 #endif
 #pragma warning restore
@@ -114,20 +138,28 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     return this;
                 }
 
-                return (CodeStyleOption2<T>)(object)CodeStyleOption2.GetCodeStyle(boolValue, Notification);
+                return (CodeStyleOption2<T>)
+                    (object)CodeStyleOption2.GetCodeStyle(boolValue, Notification);
             }
 
-            return EqualityComparer<T>.Default.Equals(value, Value) ? this : new CodeStyleOption2<T>(value, Notification);
+            return EqualityComparer<T>.Default.Equals(value, Value)
+                ? this
+                : new CodeStyleOption2<T>(value, Notification);
         }
 
         private int EnumValueAsInt32 => (int)(object)Value!;
 
-        public XElement ToXElement()
-            => new(XmlElement_CodeStyleOption, // Ensure that we use "CodeStyleOption" as the name for back compat.
+        public XElement ToXElement() =>
+            new(
+                XmlElement_CodeStyleOption, // Ensure that we use "CodeStyleOption" as the name for back compat.
                 new XAttribute(XmlAttribute_SerializationVersion, SerializationVersion),
                 new XAttribute(XmlAttribute_Type, GetTypeNameForSerialization()),
                 new XAttribute(XmlAttribute_Value, GetValueForSerialization()),
-                new XAttribute(XmlAttribute_DiagnosticSeverity, Notification.Severity.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden));
+                new XAttribute(
+                    XmlAttribute_DiagnosticSeverity,
+                    Notification.Severity.ToDiagnosticSeverity() ?? DiagnosticSeverity.Hidden
+                )
+            );
 
         private object GetValueForSerialization()
         {
@@ -172,8 +204,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             return intVal is 0 or 1;
         }
 
-        ICodeStyleOption2 ICodeStyleOption2.FromXElement(XElement element)
-            => FromXElement(element);
+        ICodeStyleOption2 ICodeStyleOption2.FromXElement(XElement element) => FromXElement(element);
 
         public static CodeStyleOption2<T> FromXElement(XElement element)
         {
@@ -195,26 +226,30 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
             var parser = GetParser(typeAttribute.Value);
             var value = parser(valueAttribute.Value);
-            var severity = (DiagnosticSeverity)Enum.Parse(typeof(DiagnosticSeverity), severityAttribute.Value);
+            var severity = (DiagnosticSeverity)
+                Enum.Parse(typeof(DiagnosticSeverity), severityAttribute.Value);
 
-            return new CodeStyleOption2<T>(value, severity switch
-            {
-                DiagnosticSeverity.Hidden => NotificationOption2.Silent,
-                DiagnosticSeverity.Info => NotificationOption2.Suggestion,
-                DiagnosticSeverity.Warning => NotificationOption2.Warning,
-                DiagnosticSeverity.Error => NotificationOption2.Error,
-                _ => throw new ArgumentException(nameof(element)),
-            });
+            return new CodeStyleOption2<T>(
+                value,
+                severity switch
+                {
+                    DiagnosticSeverity.Hidden => NotificationOption2.Silent,
+                    DiagnosticSeverity.Info => NotificationOption2.Suggestion,
+                    DiagnosticSeverity.Warning => NotificationOption2.Warning,
+                    DiagnosticSeverity.Error => NotificationOption2.Error,
+                    _ => throw new ArgumentException(nameof(element)),
+                }
+            );
         }
 
-        private static Func<string, T> GetParser(string type)
-            => type switch
+        private static Func<string, T> GetParser(string type) =>
+            type switch
             {
                 nameof(Boolean) =>
-                    // Try to map a boolean value.  Either map it to true/false if we're a 
-                    // CodeStyleOption<bool> or map it to the 0 or 1 value for an enum if we're
-                    // a CodeStyleOption<SomeEnumType>.
-                    v => Convert(bool.Parse(v)),
+                // Try to map a boolean value.  Either map it to true/false if we're a
+                // CodeStyleOption<bool> or map it to the 0 or 1 value for an enum if we're
+                // a CodeStyleOption<SomeEnumType>.
+                v => Convert(bool.Parse(v)),
                 nameof(Int32) => v => Convert(int.Parse(v)),
                 nameof(String) => v => (T)(object)v,
                 _ => throw new ArgumentException(nameof(type)),
@@ -251,11 +286,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 && Notification == other.Notification;
         }
 
-        public override bool Equals(object? obj)
-            => obj is CodeStyleOption2<T> option &&
-               Equals(option);
+        public override bool Equals(object? obj) =>
+            obj is CodeStyleOption2<T> option && Equals(option);
 
-        public override int GetHashCode()
-            => unchecked((Notification.GetHashCode() * (int)0xA5555529) + EqualityComparer<T>.Default.GetHashCode(Value!));
+        public override int GetHashCode() =>
+            unchecked(
+                (Notification.GetHashCode() * (int)0xA5555529)
+                + EqualityComparer<T>.Default.GetHashCode(Value!)
+            );
     }
 }

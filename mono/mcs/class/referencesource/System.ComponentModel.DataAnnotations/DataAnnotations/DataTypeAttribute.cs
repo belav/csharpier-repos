@@ -2,15 +2,27 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Allows for clarification of the <see cref="DataType"/> represented by a given
     /// property (such as <see cref="System.ComponentModel.DataAnnotations.DataType.PhoneNumber"/>
     /// or <see cref="System.ComponentModel.DataAnnotations.DataType.Url"/>)
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Method | AttributeTargets.Parameter, AllowMultiple = false)]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "We want users to be able to extend this class")]
-    public class DataTypeAttribute : ValidationAttribute {
+    [AttributeUsage(
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Method
+            | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "We want users to be able to extend this class"
+    )]
+    public class DataTypeAttribute : ValidationAttribute
+    {
         /// <summary>
         /// Gets the DataType. If it equals DataType.Custom, <see cref="CustomDataType"/> should also be retrieved.
         /// </summary>
@@ -26,14 +38,22 @@ namespace System.ComponentModel.DataAnnotations {
         /// </summary>
         /// <returns>The name of the data type enum</returns>
         /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method throws an exception if the properties have not been configured correctly")]
-        public virtual string GetDataTypeName() {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method throws an exception if the properties have not been configured correctly"
+        )]
+        public virtual string GetDataTypeName()
+        {
             this.EnsureValidDataType();
 
-            if (DataType == DataType.Custom) {
+            if (DataType == DataType.Custom)
+            {
                 // If it's a custom type string, use it as the template name
                 return this.CustomDataType;
-            } else {
+            }
+            else
+            {
                 // If it's an enum, turn it into a string
                 // Use the cached array with enum string values instead of ToString() as the latter is too slow
                 return _dataTypeStrings[(int)DataType];
@@ -49,11 +69,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// Constructor that accepts a data type enumeration
         /// </summary>
         /// <param name="dataType">The <see cref="DataType"/> enum value indicating the type to apply.</param>
-        public DataTypeAttribute(DataType dataType) {
+        public DataTypeAttribute(DataType dataType)
+        {
             DataType = dataType;
 
             // Set some DisplayFormat for a few specific data types
-            switch (dataType) {
+            switch (dataType)
+            {
                 case DataType.Date:
                     this.DisplayFormat = new DisplayFormatAttribute();
                     this.DisplayFormat.DataFormatString = "{0:d}";
@@ -79,7 +101,8 @@ namespace System.ComponentModel.DataAnnotations {
         /// </summary>
         /// <param name="customDataType">The string name of the custom data type.</param>
         public DataTypeAttribute(string customDataType)
-            : this(DataType.Custom) {
+            : this(DataType.Custom)
+        {
             this.CustomDataType = customDataType;
         }
 
@@ -95,7 +118,8 @@ namespace System.ComponentModel.DataAnnotations {
 #else
         internal
 #endif
-        override bool IsValid(object value) {
+        override bool IsValid(object value)
+        {
             this.EnsureValidDataType();
 
             return true;
@@ -105,9 +129,16 @@ namespace System.ComponentModel.DataAnnotations {
         /// Throws an exception if this attribute is not correctly formed
         /// </summary>
         /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
-        private void EnsureValidDataType() {
-            if (this.DataType == DataType.Custom && String.IsNullOrEmpty(this.CustomDataType)) {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DataAnnotationsResources.DataTypeAttribute_EmptyDataTypeString));
+        private void EnsureValidDataType()
+        {
+            if (this.DataType == DataType.Custom && String.IsNullOrEmpty(this.CustomDataType))
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        DataAnnotationsResources.DataTypeAttribute_EmptyDataTypeString
+                    )
+                );
             }
         }
 

@@ -29,29 +29,27 @@
 
 using System;
 
-namespace Cairo {
+namespace Cairo
+{
+    public class SurfacePattern : Pattern
+    {
+        internal SurfacePattern(IntPtr handle, bool owned)
+            : base(handle, owned) { }
 
-	public class SurfacePattern : Pattern
-	{
-		internal SurfacePattern (IntPtr handle, bool owned) : base (handle, owned)
-		{
-		}
+        public SurfacePattern(Surface surface)
+            : base(NativeMethods.cairo_pattern_create_for_surface(surface.Handle), true) { }
 
-		public SurfacePattern (Surface surface)
-			: base (NativeMethods.cairo_pattern_create_for_surface (surface.Handle), true)
-		{
-		}
+        //no idea why this is here, the base one is identical, but we can't remove it now
+        public new Extend Extend
+        {
+            set { NativeMethods.cairo_pattern_set_extend(Handle, value); }
+            get { return NativeMethods.cairo_pattern_get_extend(Handle); }
+        }
 
-		//no idea why this is here, the base one is identical, but we can't remove it now
-		public new Extend Extend {
-			set { NativeMethods.cairo_pattern_set_extend (Handle, value); }
-			get { return NativeMethods.cairo_pattern_get_extend (Handle); }
-		}
-
-		public Filter Filter {
-			set { NativeMethods.cairo_pattern_set_filter (Handle, value); }
-			get { return NativeMethods.cairo_pattern_get_filter (Handle); }
-		}
-	}
+        public Filter Filter
+        {
+            set { NativeMethods.cairo_pattern_set_filter(Handle, value); }
+            get { return NativeMethods.cairo_pattern_get_filter(Handle); }
+        }
+    }
 }
-

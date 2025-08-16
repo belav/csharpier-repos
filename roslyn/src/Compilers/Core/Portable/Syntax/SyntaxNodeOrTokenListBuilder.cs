@@ -50,11 +50,7 @@ namespace Microsoft.CodeAnalysis.Syntax
                     return innerNode.CreateRed();
                 }
             }
-
-            set
-            {
-                _nodes[index] = value.UnderlyingNode;
-            }
+            set { _nodes[index] = value.UnderlyingNode; }
         }
 
         internal void Add(GreenNode item)
@@ -132,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Syntax
                         {
                             return new SyntaxNodeOrTokenList(
                                 InternalSyntax.SyntaxList.List(new[] { _nodes[0]! }).CreateRed(),
-                                index: 0);
+                                index: 0
+                            );
                         }
                         else
                         {
@@ -141,11 +138,15 @@ namespace Microsoft.CodeAnalysis.Syntax
                     case 2:
                         return new SyntaxNodeOrTokenList(
                             InternalSyntax.SyntaxList.List(_nodes[0]!, _nodes[1]!).CreateRed(),
-                            index: 0);
+                            index: 0
+                        );
                     case 3:
                         return new SyntaxNodeOrTokenList(
-                            InternalSyntax.SyntaxList.List(_nodes[0]!, _nodes[1]!, _nodes[2]!).CreateRed(),
-                            index: 0);
+                            InternalSyntax
+                                .SyntaxList.List(_nodes[0]!, _nodes[1]!, _nodes[2]!)
+                                .CreateRed(),
+                            index: 0
+                        );
                     default:
                         var tmp = new ArrayElement<GreenNode>[_count];
                         for (int i = 0; i < _count; i++)
@@ -153,7 +154,10 @@ namespace Microsoft.CodeAnalysis.Syntax
                             tmp[i].Value = _nodes[i]!;
                         }
 
-                        return new SyntaxNodeOrTokenList(InternalSyntax.SyntaxList.List(tmp).CreateRed(), index: 0);
+                        return new SyntaxNodeOrTokenList(
+                            InternalSyntax.SyntaxList.List(tmp).CreateRed(),
+                            index: 0
+                        );
                 }
             }
             else

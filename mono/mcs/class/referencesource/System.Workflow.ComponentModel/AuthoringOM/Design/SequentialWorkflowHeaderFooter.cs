@@ -2,28 +2,28 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
 
@@ -31,7 +31,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Base class for Header and Footer to be associated with SequentialWorkflowRootDesigner
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class SequentialWorkflowHeaderFooter
     {
         private SequentialWorkflowRootDesigner rootDesigner;
@@ -56,11 +58,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual Image Image
         {
-            get
-            {
-                return this.image;
-            }
-
+            get { return this.image; }
             set
             {
                 if (this.image == value)
@@ -77,11 +75,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public virtual string Text
         {
-            get
-            {
-                return this.text;
-            }
-
+            get { return this.text; }
             set
             {
                 if (this.text == value)
@@ -117,7 +111,10 @@ namespace System.Workflow.ComponentModel.Design
                     //Before returning we adjust the bounds based on the header / footer setting
                     Rectangle designerBounds = this.rootDesigner.Bounds;
                     bounds.X = designerBounds.Left + designerBounds.Width / 2 - bounds.Width / 2;
-                    bounds.Y = (this.isHeader) ? designerBounds.Top : designerBounds.Bottom - bounds.Height;
+                    bounds.Y =
+                        (this.isHeader)
+                            ? designerBounds.Top
+                            : designerBounds.Bottom - bounds.Height;
                 }
 
                 return bounds;
@@ -137,8 +134,12 @@ namespace System.Workflow.ComponentModel.Design
                     Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
                     Rectangle designerBounds = this.rootDesigner.Bounds;
                     bounds.Size = this.textSize;
-                    bounds.X = designerBounds.Left + designerBounds.Width / 2 - this.textSize.Width / 2;
-                    bounds.Y = (this.isHeader) ? designerBounds.Top + margin.Height : designerBounds.Bottom - margin.Height - this.textSize.Height;
+                    bounds.X =
+                        designerBounds.Left + designerBounds.Width / 2 - this.textSize.Width / 2;
+                    bounds.Y =
+                        (this.isHeader)
+                            ? designerBounds.Top + margin.Height
+                            : designerBounds.Bottom - margin.Height - this.textSize.Height;
                 }
 
                 return bounds;
@@ -190,10 +191,26 @@ namespace System.Workflow.ComponentModel.Design
             if (e == null)
                 throw new ArgumentNullException("e");
 
-            if (!String.IsNullOrEmpty(Text) && e.DesignerTheme != null && e.DesignerTheme.Font != null)
+            if (
+                !String.IsNullOrEmpty(Text)
+                && e.DesignerTheme != null
+                && e.DesignerTheme.Font != null
+            )
             {
-                using (Font font = new Font(e.DesignerTheme.Font.FontFamily, e.DesignerTheme.Font.SizeInPoints + 1.0f, FontStyle.Bold))
-                    this.textSize = ActivityDesignerPaint.MeasureString(e.Graphics, font, Text, StringAlignment.Center, Size.Empty);
+                using (
+                    Font font = new Font(
+                        e.DesignerTheme.Font.FontFamily,
+                        e.DesignerTheme.Font.SizeInPoints + 1.0f,
+                        FontStyle.Bold
+                    )
+                )
+                    this.textSize = ActivityDesignerPaint.MeasureString(
+                        e.Graphics,
+                        font,
+                        Text,
+                        StringAlignment.Center,
+                        Size.Empty
+                    );
             }
         }
 
@@ -206,15 +223,41 @@ namespace System.Workflow.ComponentModel.Design
             if (e == null)
                 throw new ArgumentNullException("e");
 
-            if (!String.IsNullOrEmpty(Text) && !TextRectangle.Size.IsEmpty && e.DesignerTheme != null && e.DesignerTheme.Font != null)
+            if (
+                !String.IsNullOrEmpty(Text)
+                && !TextRectangle.Size.IsEmpty
+                && e.DesignerTheme != null
+                && e.DesignerTheme.Font != null
+            )
             {
                 //use bold or regular font based on mouse over status
-                using (Font font = new Font(e.DesignerTheme.Font.FontFamily, e.DesignerTheme.Font.SizeInPoints + 1.0f, (this.AssociatedDesigner.SmartTagVisible) ? FontStyle.Bold : FontStyle.Regular))
-                    ActivityDesignerPaint.DrawText(e.Graphics, font, Text, TextRectangle, StringAlignment.Center, TextQuality.AntiAliased, e.DesignerTheme.ForegroundBrush);
+                using (
+                    Font font = new Font(
+                        e.DesignerTheme.Font.FontFamily,
+                        e.DesignerTheme.Font.SizeInPoints + 1.0f,
+                        (this.AssociatedDesigner.SmartTagVisible)
+                            ? FontStyle.Bold
+                            : FontStyle.Regular
+                    )
+                )
+                    ActivityDesignerPaint.DrawText(
+                        e.Graphics,
+                        font,
+                        Text,
+                        TextRectangle,
+                        StringAlignment.Center,
+                        TextQuality.AntiAliased,
+                        e.DesignerTheme.ForegroundBrush
+                    );
             }
 
             if (Image != null && !ImageRectangle.Size.IsEmpty)
-                ActivityDesignerPaint.DrawImage(e.Graphics, Image, ImageRectangle, DesignerContentAlignment.Fill);
+                ActivityDesignerPaint.DrawImage(
+                    e.Graphics,
+                    Image,
+                    ImageRectangle,
+                    DesignerContentAlignment.Fill
+                );
         }
 
         /// <summary>
@@ -222,12 +265,8 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         protected SequentialWorkflowRootDesigner AssociatedDesigner
         {
-            get
-            {
-                return this.rootDesigner;
-            }
+            get { return this.rootDesigner; }
         }
     }
     #endregion
-
 }

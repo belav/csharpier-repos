@@ -20,7 +20,7 @@ namespace System.Linq.Expressions
             Space,
             NewLine,
 
-            Break = 0x8000      // newline if column > MaxColumn
+            Break = 0x8000, // newline if column > MaxColumn
         };
 
         private const int Tab = 4;
@@ -73,7 +73,8 @@ namespace System.Linq.Expressions
             _flow = Flow.NewLine;
         }
 
-        private static int GetId<T>(T e, ref Dictionary<T, int>? ids) where T : notnull
+        private static int GetId<T>(T e, ref Dictionary<T, int>? ids)
+            where T : notnull
         {
             if (ids == null)
             {
@@ -223,31 +224,43 @@ namespace System.Linq.Expressions
 
         #region The AST Output
 
-        private void VisitExpressions<T>(char open, IReadOnlyList<T> expressions) where T : Expression
+        private void VisitExpressions<T>(char open, IReadOnlyList<T> expressions)
+            where T : Expression
         {
             VisitExpressions<T>(open, ',', expressions);
         }
 
-        private void VisitExpressions<T>(char open, char separator, IReadOnlyList<T> expressions) where T : Expression
+        private void VisitExpressions<T>(char open, char separator, IReadOnlyList<T> expressions)
+            where T : Expression
         {
             VisitExpressions(open, separator, expressions, e => Visit(e));
         }
 
         private void VisitDeclarations(IReadOnlyList<ParameterExpression> expressions)
         {
-            VisitExpressions('(', ',', expressions, variable =>
-            {
-                Out(variable.Type.ToString());
-                if (variable.IsByRef)
+            VisitExpressions(
+                '(',
+                ',',
+                expressions,
+                variable =>
                 {
-                    Out("&");
+                    Out(variable.Type.ToString());
+                    if (variable.IsByRef)
+                    {
+                        Out("&");
+                    }
+                    Out(" ");
+                    VisitParameter(variable);
                 }
-                Out(" ");
-                VisitParameter(variable);
-            });
+            );
         }
 
-        private void VisitExpressions<T>(char open, char separator, IReadOnlyList<T> expressions, Action<T> visit)
+        private void VisitExpressions<T>(
+            char open,
+            char separator,
+            IReadOnlyList<T> expressions,
+            Action<T> visit
+        )
         {
             Out(open.ToString());
 
@@ -307,44 +320,122 @@ namespace System.Linq.Expressions
                 Flow beforeOp = Flow.Space;
                 switch (node.NodeType)
                 {
-                    case ExpressionType.Assign: op = "="; break;
-                    case ExpressionType.Equal: op = "=="; break;
-                    case ExpressionType.NotEqual: op = "!="; break;
-                    case ExpressionType.AndAlso: op = "&&"; beforeOp = Flow.Break | Flow.Space; break;
-                    case ExpressionType.OrElse: op = "||"; beforeOp = Flow.Break | Flow.Space; break;
-                    case ExpressionType.GreaterThan: op = ">"; break;
-                    case ExpressionType.LessThan: op = "<"; break;
-                    case ExpressionType.GreaterThanOrEqual: op = ">="; break;
-                    case ExpressionType.LessThanOrEqual: op = "<="; break;
-                    case ExpressionType.Add: op = "+"; break;
-                    case ExpressionType.AddAssign: op = "+="; break;
-                    case ExpressionType.AddAssignChecked: op = "#+="; break;
-                    case ExpressionType.AddChecked: op = "#+"; break;
-                    case ExpressionType.Subtract: op = "-"; break;
-                    case ExpressionType.SubtractAssign: op = "-="; break;
-                    case ExpressionType.SubtractAssignChecked: op = "#-="; break;
-                    case ExpressionType.SubtractChecked: op = "#-"; break;
-                    case ExpressionType.Divide: op = "/"; break;
-                    case ExpressionType.DivideAssign: op = "/="; break;
-                    case ExpressionType.Modulo: op = "%"; break;
-                    case ExpressionType.ModuloAssign: op = "%="; break;
-                    case ExpressionType.Multiply: op = "*"; break;
-                    case ExpressionType.MultiplyAssign: op = "*="; break;
-                    case ExpressionType.MultiplyAssignChecked: op = "#*="; break;
-                    case ExpressionType.MultiplyChecked: op = "#*"; break;
-                    case ExpressionType.LeftShift: op = "<<"; break;
-                    case ExpressionType.LeftShiftAssign: op = "<<="; break;
-                    case ExpressionType.RightShift: op = ">>"; break;
-                    case ExpressionType.RightShiftAssign: op = ">>="; break;
-                    case ExpressionType.And: op = "&"; break;
-                    case ExpressionType.AndAssign: op = "&="; break;
-                    case ExpressionType.Or: op = "|"; break;
-                    case ExpressionType.OrAssign: op = "|="; break;
-                    case ExpressionType.ExclusiveOr: op = "^"; break;
-                    case ExpressionType.ExclusiveOrAssign: op = "^="; break;
-                    case ExpressionType.Power: op = "**"; break;
-                    case ExpressionType.PowerAssign: op = "**="; break;
-                    case ExpressionType.Coalesce: op = "??"; break;
+                    case ExpressionType.Assign:
+                        op = "=";
+                        break;
+                    case ExpressionType.Equal:
+                        op = "==";
+                        break;
+                    case ExpressionType.NotEqual:
+                        op = "!=";
+                        break;
+                    case ExpressionType.AndAlso:
+                        op = "&&";
+                        beforeOp = Flow.Break | Flow.Space;
+                        break;
+                    case ExpressionType.OrElse:
+                        op = "||";
+                        beforeOp = Flow.Break | Flow.Space;
+                        break;
+                    case ExpressionType.GreaterThan:
+                        op = ">";
+                        break;
+                    case ExpressionType.LessThan:
+                        op = "<";
+                        break;
+                    case ExpressionType.GreaterThanOrEqual:
+                        op = ">=";
+                        break;
+                    case ExpressionType.LessThanOrEqual:
+                        op = "<=";
+                        break;
+                    case ExpressionType.Add:
+                        op = "+";
+                        break;
+                    case ExpressionType.AddAssign:
+                        op = "+=";
+                        break;
+                    case ExpressionType.AddAssignChecked:
+                        op = "#+=";
+                        break;
+                    case ExpressionType.AddChecked:
+                        op = "#+";
+                        break;
+                    case ExpressionType.Subtract:
+                        op = "-";
+                        break;
+                    case ExpressionType.SubtractAssign:
+                        op = "-=";
+                        break;
+                    case ExpressionType.SubtractAssignChecked:
+                        op = "#-=";
+                        break;
+                    case ExpressionType.SubtractChecked:
+                        op = "#-";
+                        break;
+                    case ExpressionType.Divide:
+                        op = "/";
+                        break;
+                    case ExpressionType.DivideAssign:
+                        op = "/=";
+                        break;
+                    case ExpressionType.Modulo:
+                        op = "%";
+                        break;
+                    case ExpressionType.ModuloAssign:
+                        op = "%=";
+                        break;
+                    case ExpressionType.Multiply:
+                        op = "*";
+                        break;
+                    case ExpressionType.MultiplyAssign:
+                        op = "*=";
+                        break;
+                    case ExpressionType.MultiplyAssignChecked:
+                        op = "#*=";
+                        break;
+                    case ExpressionType.MultiplyChecked:
+                        op = "#*";
+                        break;
+                    case ExpressionType.LeftShift:
+                        op = "<<";
+                        break;
+                    case ExpressionType.LeftShiftAssign:
+                        op = "<<=";
+                        break;
+                    case ExpressionType.RightShift:
+                        op = ">>";
+                        break;
+                    case ExpressionType.RightShiftAssign:
+                        op = ">>=";
+                        break;
+                    case ExpressionType.And:
+                        op = "&";
+                        break;
+                    case ExpressionType.AndAssign:
+                        op = "&=";
+                        break;
+                    case ExpressionType.Or:
+                        op = "|";
+                        break;
+                    case ExpressionType.OrAssign:
+                        op = "|=";
+                        break;
+                    case ExpressionType.ExclusiveOr:
+                        op = "^";
+                        break;
+                    case ExpressionType.ExclusiveOrAssign:
+                        op = "^=";
+                        break;
+                    case ExpressionType.Power:
+                        op = "**";
+                        break;
+                    case ExpressionType.PowerAssign:
+                        op = "**=";
+                        break;
+                    case ExpressionType.Coalesce:
+                        op = "??";
+                        break;
 
                     default:
                         throw new InvalidOperationException();
@@ -464,8 +555,10 @@ namespace System.Linq.Expressions
             {
                 Out($"'{value}'");
             }
-            else if ((value is int) && node.Type == typeof(int)
-              || (value is bool) && node.Type == typeof(bool))
+            else if (
+                (value is int) && node.Type == typeof(int)
+                || (value is bool) && node.Type == typeof(bool)
+            )
             {
                 Out(value.ToString()!);
             }
@@ -514,7 +607,9 @@ namespace System.Linq.Expressions
             return null;
         }
 
-        protected internal override Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
+        protected internal override Expression VisitRuntimeVariables(
+            RuntimeVariablesExpression node
+        )
         {
             Out(".RuntimeVariables");
             VisitExpressions('(', node.Variables);
@@ -617,8 +712,14 @@ namespace System.Linq.Expressions
 
             // Special case: negate of a constant needs parentheses, to
             // disambiguate it from a negative constant.
-            if (child != null && child.NodeType == ExpressionType.Constant &&
-                (parent.NodeType == ExpressionType.Negate || parent.NodeType == ExpressionType.NegateChecked))
+            if (
+                child != null
+                && child.NodeType == ExpressionType.Constant
+                && (
+                    parent.NodeType == ExpressionType.Negate
+                    || parent.NodeType == ExpressionType.NegateChecked
+                )
+            )
             {
                 return true;
             }
@@ -1037,9 +1138,11 @@ namespace System.Linq.Expressions
                 Visit(test);
                 Out("):", Flow.NewLine);
             }
-            Indent(); Indent();
+            Indent();
+            Indent();
             Visit(node.Body);
-            Dedent(); Dedent();
+            Dedent();
+            Dedent();
             NewLine();
             return node;
         }
@@ -1054,9 +1157,11 @@ namespace System.Linq.Expressions
             if (node.DefaultBody != null)
             {
                 Out(".Default:", Flow.NewLine);
-                Indent(); Indent();
+                Indent();
+                Indent();
                 Visit(node.DefaultBody);
-                Dedent(); Dedent();
+                Dedent();
+                Dedent();
                 NewLine();
             }
             Out("}");
@@ -1142,10 +1247,11 @@ namespace System.Linq.Expressions
 
         protected internal override Expression VisitDebugInfo(DebugInfoExpression node)
         {
-            Out($".DebugInfo({node.Document.FileName}: {node.StartLine}, {node.StartColumn} - {node.EndLine}, {node.EndColumn})");
+            Out(
+                $".DebugInfo({node.Document.FileName}: {node.StartLine}, {node.StartColumn} - {node.EndLine}, {node.EndColumn})"
+            );
             return node;
         }
-
 
         private void DumpLabel(LabelTarget target)
         {

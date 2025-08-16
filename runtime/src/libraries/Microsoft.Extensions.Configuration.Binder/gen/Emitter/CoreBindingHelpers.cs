@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             private bool _emitBlankLineBeforeNextStatement;
             private static readonly Regex s_arrayBracketsRegex = new(Regex.Escape("[]"));
 
-            private bool ShouldEmitMethods(MethodsToGen_CoreBindingHelper methods) => (_bindingHelperInfo.MethodsToGen & methods) != 0;
+            private bool ShouldEmitMethods(MethodsToGen_CoreBindingHelper methods) =>
+                (_bindingHelperInfo.MethodsToGen & methods) != 0;
 
             private void EmitCoreBindingHelpers()
             {
@@ -54,14 +55,21 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     Debug.Assert(_typeIndex.HasBindableMembers(objectType));
 
                     HashSet<string>? keys = null;
-                    static string GetCacheElement(MemberSpec member) => $@"""{member.ConfigurationKeyName}""";
+                    static string GetCacheElement(MemberSpec member) =>
+                        $@"""{member.ConfigurationKeyName}""";
 
-                    if (objectType.ConstructorParameters?.Select(m => GetCacheElement(m)) is IEnumerable<string> paramNames)
+                    if (
+                        objectType.ConstructorParameters?.Select(m => GetCacheElement(m))
+                        is IEnumerable<string> paramNames
+                    )
                     {
                         keys = new(paramNames);
                     }
 
-                    if (objectType.Properties?.Select(m => GetCacheElement(m)) is IEnumerable<string> propNames)
+                    if (
+                        objectType.Properties?.Select(m => GetCacheElement(m))
+                        is IEnumerable<string> propNames
+                    )
                     {
                         if (keys is null)
                         {
@@ -78,7 +86,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                     string configKeysSource = string.Join(", ", keys);
                     string fieldName = TypeIndex.GetConfigKeyCacheFieldName(objectType);
-                    _writer.WriteLine($@"private readonly static Lazy<{TypeDisplayString.HashSetOfString}> {fieldName} = new(() => new {TypeDisplayString.HashSetOfString}(StringComparer.OrdinalIgnoreCase) {{ {configKeysSource} }});");
+                    _writer.WriteLine(
+                        $@"private readonly static Lazy<{TypeDisplayString.HashSetOfString}> {fieldName} = new(() => new {TypeDisplayString.HashSetOfString}(StringComparer.OrdinalIgnoreCase) {{ {configKeysSource} }});"
+                    );
                 }
             }
 
@@ -90,11 +100,18 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 }
 
                 EmitBlankLineIfRequired();
-                EmitStartBlock($"public static object? {nameof(MethodsToGen_CoreBindingHelper.GetCore)}(this {Identifier.IConfiguration} {Identifier.configuration}, Type {Identifier.type}, Action<{Identifier.BinderOptions}>? {Identifier.configureOptions})");
+                EmitStartBlock(
+                    $"public static object? {nameof(MethodsToGen_CoreBindingHelper.GetCore)}(this {Identifier.IConfiguration} {Identifier.configuration}, Type {Identifier.type}, Action<{Identifier.BinderOptions}>? {Identifier.configureOptions})"
+                );
 
-                EmitCheckForNullArgument_WithBlankLine(Identifier.configuration, _emitThrowIfNullMethod);
+                EmitCheckForNullArgument_WithBlankLine(
+                    Identifier.configuration,
+                    _emitThrowIfNullMethod
+                );
 
-                _writer.WriteLine($"{Identifier.BinderOptions}? {Identifier.binderOptions} = {Identifier.GetBinderOptions}({Identifier.configureOptions});");
+                _writer.WriteLine(
+                    $"{Identifier.BinderOptions}? {Identifier.binderOptions} = {Identifier.GetBinderOptions}({Identifier.configureOptions});"
+                );
                 _writer.WriteLine();
 
                 EmitIConfigurationHasValueOrChildrenCheck(voidReturn: false);
@@ -104,11 +121,15 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 {
                     TypeSpec effectiveType = _typeIndex.GetEffectiveTypeSpec(type);
 
-                    Debug.Assert(effectiveType is UnsupportedTypeSpec || _typeIndex.CanBindTo(type.TypeRef));
+                    Debug.Assert(
+                        effectiveType is UnsupportedTypeSpec || _typeIndex.CanBindTo(type.TypeRef)
+                    );
 
                     string conditionKindExpr = GetConditionKindExpr(ref isFirstType);
 
-                    EmitStartBlock($"{conditionKindExpr} ({Identifier.type} == typeof({type.TypeRef.FullyQualifiedName}))");
+                    EmitStartBlock(
+                        $"{conditionKindExpr} ({Identifier.type} == typeof({type.TypeRef.FullyQualifiedName}))"
+                    );
 
                     switch (effectiveType)
                     {
@@ -119,10 +140,13 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                                     stringParsableType,
                                     Expression.sectionValue,
                                     Expression.sectionPath,
-                                    writeOnSuccess: parsedValueExpr => _writer.WriteLine($"return {parsedValueExpr};"),
-                                    checkForNullSectionValue: stringParsableType.StringParsableTypeKind is not StringParsableTypeKind.AssignFromSectionValue,
+                                    writeOnSuccess: parsedValueExpr =>
+                                        _writer.WriteLine($"return {parsedValueExpr};"),
+                                    checkForNullSectionValue: stringParsableType.StringParsableTypeKind
+                                        is not StringParsableTypeKind.AssignFromSectionValue,
                                     useDefaultValueIfSectionValueIsNull: false,
-                                    useIncrementalStringValueIdentifier: false);
+                                    useIncrementalStringValueIdentifier: false
+                                );
                             }
                             break;
                         case ConfigurationSectionSpec:
@@ -135,17 +159,27 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             {
                                 if (_typeIndex.CanInstantiate(complexType))
                                 {
-                                    EmitBindingLogic(complexType, Identifier.instance, Identifier.configuration, InitializationKind.Declaration, ValueDefaulting.CallSetter);
+                                    EmitBindingLogic(
+                                        complexType,
+                                        Identifier.instance,
+                                        Identifier.configuration,
+                                        InitializationKind.Declaration,
+                                        ValueDefaulting.CallSetter
+                                    );
                                     _writer.WriteLine($"return {Identifier.instance};");
                                 }
                                 else if (type is ObjectSpec { InitExceptionMessage: string exMsg })
                                 {
-                                    _writer.WriteLine($@"throw new {Identifier.InvalidOperationException}(""{exMsg}"");");
+                                    _writer.WriteLine(
+                                        $@"throw new {Identifier.InvalidOperationException}(""{exMsg}"");"
+                                    );
                                 }
 #if DEBUG
                                 else
                                 {
-                                    Debug.Fail($"Complex should not be included for GetCore gen: {complexType.TypeRef.FullyQualifiedName}");
+                                    Debug.Fail(
+                                        $"Complex should not be included for GetCore gen: {complexType.TypeRef.FullyQualifiedName}"
+                                    );
                                 }
 #endif
                             }
@@ -161,12 +195,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 _emitBlankLineBeforeNextStatement = true;
 
                 void EmitCastToIConfigurationSection() =>
-                    _writer.WriteLine($$"""
+                    _writer.WriteLine(
+                        $$"""
                         if ({{Identifier.configuration}} is not {{Identifier.IConfigurationSection}} {{Identifier.section}})
                         {
                             throw new {{Identifier.InvalidOperationException}}();
                         }
-                        """);
+                        """
+                    );
             }
 
             private void EmitGetValueCoreMethod()
@@ -177,18 +213,27 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 }
 
                 EmitBlankLineIfRequired();
-                EmitStartBlock($"public static object? {nameof(MethodsToGen_CoreBindingHelper.GetValueCore)}(this {Identifier.IConfiguration} {Identifier.configuration}, Type {Identifier.type}, string {Identifier.key})");
+                EmitStartBlock(
+                    $"public static object? {nameof(MethodsToGen_CoreBindingHelper.GetValueCore)}(this {Identifier.IConfiguration} {Identifier.configuration}, Type {Identifier.type}, string {Identifier.key})"
+                );
 
-                EmitCheckForNullArgument_WithBlankLine(Identifier.configuration, _emitThrowIfNullMethod);
-                _writer.WriteLine($@"{Identifier.IConfigurationSection} {Identifier.section} = {GetSectionFromConfigurationExpression(Identifier.key, addQuotes: false)};");
+                EmitCheckForNullArgument_WithBlankLine(
+                    Identifier.configuration,
+                    _emitThrowIfNullMethod
+                );
+                _writer.WriteLine(
+                    $@"{Identifier.IConfigurationSection} {Identifier.section} = {GetSectionFromConfigurationExpression(Identifier.key, addQuotes: false)};"
+                );
                 _writer.WriteLine();
 
-                _writer.WriteLine($$"""
+                _writer.WriteLine(
+                    $$"""
                     if ({{Expression.sectionValue}} is not string {{Identifier.value}})
                     {
                         return null;
                     }
-                    """);
+                    """
+                );
 
                 _writer.WriteLine();
 
@@ -196,16 +241,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 foreach (TypeSpec type in targetTypes)
                 {
                     string conditionKindExpr = GetConditionKindExpr(ref isFirstType);
-                    EmitStartBlock($"{conditionKindExpr} ({Identifier.type} == typeof({type.TypeRef.FullyQualifiedName}))");
+                    EmitStartBlock(
+                        $"{conditionKindExpr} ({Identifier.type} == typeof({type.TypeRef.FullyQualifiedName}))"
+                    );
 
                     EmitBindingLogic(
                         (ParsableFromStringSpec)_typeIndex.GetEffectiveTypeSpec(type),
                         Identifier.value,
                         Expression.sectionPath,
-                        writeOnSuccess: (parsedValueExpr) => _writer.WriteLine($"return {parsedValueExpr};"),
+                        writeOnSuccess: (parsedValueExpr) =>
+                            _writer.WriteLine($"return {parsedValueExpr};"),
                         checkForNullSectionValue: false,
                         useDefaultValueIfSectionValueIsNull: false,
-                        useIncrementalStringValueIdentifier: false);
+                        useIncrementalStringValueIdentifier: false
+                    );
 
                     EmitEndBlock();
                 }
@@ -224,22 +273,41 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 }
 
                 EmitBlankLineIfRequired();
-                EmitStartBlock($"public static void {nameof(MethodsToGen_CoreBindingHelper.BindCoreMain)}({Identifier.IConfiguration} {Identifier.configuration}, object {Identifier.instance}, Type {Identifier.type}, {TypeDisplayString.NullableActionOfBinderOptions} {Identifier.configureOptions})");
-                EmitCheckForNullArgument_WithBlankLine(Identifier.instance, _emitThrowIfNullMethod, voidReturn: true);
+                EmitStartBlock(
+                    $"public static void {nameof(MethodsToGen_CoreBindingHelper.BindCoreMain)}({Identifier.IConfiguration} {Identifier.configuration}, object {Identifier.instance}, Type {Identifier.type}, {TypeDisplayString.NullableActionOfBinderOptions} {Identifier.configureOptions})"
+                );
+                EmitCheckForNullArgument_WithBlankLine(
+                    Identifier.instance,
+                    _emitThrowIfNullMethod,
+                    voidReturn: true
+                );
                 EmitIConfigurationHasValueOrChildrenCheck(voidReturn: true);
-                _writer.WriteLine($"{Identifier.BinderOptions}? {Identifier.binderOptions} = {Identifier.GetBinderOptions}({Identifier.configureOptions});");
+                _writer.WriteLine(
+                    $"{Identifier.BinderOptions}? {Identifier.binderOptions} = {Identifier.GetBinderOptions}({Identifier.configureOptions});"
+                );
                 _writer.WriteLine();
 
                 bool isFirstType = true;
                 foreach (ComplexTypeSpec type in targetTypes)
                 {
-                    ComplexTypeSpec effectiveType = (ComplexTypeSpec)_typeIndex.GetEffectiveTypeSpec(type);
+                    ComplexTypeSpec effectiveType = (ComplexTypeSpec)
+                        _typeIndex.GetEffectiveTypeSpec(type);
                     Debug.Assert(_typeIndex.HasBindableMembers(effectiveType));
                     string conditionKindExpr = GetConditionKindExpr(ref isFirstType);
 
-                    EmitStartBlock($"{conditionKindExpr} ({Identifier.type} == typeof({type.TypeRef.FullyQualifiedName}))");
-                    _writer.WriteLine($"var {Identifier.temp} = ({effectiveType.TypeRef.FullyQualifiedName}){Identifier.instance};");
-                    EmitBindingLogic(type, Identifier.temp, Identifier.configuration, InitializationKind.None, ValueDefaulting.None);
+                    EmitStartBlock(
+                        $"{conditionKindExpr} ({Identifier.type} == typeof({type.TypeRef.FullyQualifiedName}))"
+                    );
+                    _writer.WriteLine(
+                        $"var {Identifier.temp} = ({effectiveType.TypeRef.FullyQualifiedName}){Identifier.instance};"
+                    );
+                    EmitBindingLogic(
+                        type,
+                        Identifier.temp,
+                        Identifier.configuration,
+                        InitializationKind.None,
+                        ValueDefaulting.None
+                    );
                     _writer.WriteLine($"return;");
                     EmitEndBlock();
                 }
@@ -251,7 +319,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             private void EmitBindCoreMethods()
             {
-                if (_bindingHelperInfo.TypesForGen_BindCore is not ImmutableEquatableArray<ComplexTypeSpec> types)
+                if (
+                    _bindingHelperInfo.TypesForGen_BindCore
+                    is not ImmutableEquatableArray<ComplexTypeSpec> types
+                )
                 {
                     return;
                 }
@@ -266,10 +337,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             private void EmitBindCoreMethod(ComplexTypeSpec type)
             {
-                string objParameterExpression = $"ref {type.TypeRef.FullyQualifiedName} {Identifier.instance}";
-                EmitStartBlock(@$"public static void {nameof(MethodsToGen_CoreBindingHelper.BindCore)}({Identifier.IConfiguration} {Identifier.configuration}, {objParameterExpression}, bool defaultValueIfNotFound, {Identifier.BinderOptions}? {Identifier.binderOptions})");
+                string objParameterExpression =
+                    $"ref {type.TypeRef.FullyQualifiedName} {Identifier.instance}";
+                EmitStartBlock(
+                    @$"public static void {nameof(MethodsToGen_CoreBindingHelper.BindCore)}({Identifier.IConfiguration} {Identifier.configuration}, {objParameterExpression}, bool defaultValueIfNotFound, {Identifier.BinderOptions}? {Identifier.binderOptions})"
+                );
 
-                ComplexTypeSpec effectiveType = (ComplexTypeSpec)_typeIndex.GetEffectiveTypeSpec(type);
+                ComplexTypeSpec effectiveType = (ComplexTypeSpec)
+                    _typeIndex.GetEffectiveTypeSpec(type);
 
                 switch (effectiveType)
                 {
@@ -295,7 +370,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         break;
                     default:
                         {
-                            Debug.Fail($"Unsupported spec for bind core gen: {effectiveType.GetType()}");
+                            Debug.Fail(
+                                $"Unsupported spec for bind core gen: {effectiveType.GetType()}"
+                            );
                         }
                         break;
                 }
@@ -305,7 +382,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             private void EmitInitializeMethods()
             {
-                if (_bindingHelperInfo.TypesForGen_Initialize is not ImmutableEquatableArray<ObjectSpec> types)
+                if (
+                    _bindingHelperInfo.TypesForGen_Initialize
+                    is not ImmutableEquatableArray<ObjectSpec> types
+                )
                 {
                     return;
                 }
@@ -319,16 +399,24 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             private void EmitInitializeMethod(ObjectSpec type)
             {
-                Debug.Assert(type.InstantiationStrategy is ObjectInstantiationStrategy.ParameterizedConstructor);
+                Debug.Assert(
+                    type.InstantiationStrategy
+                        is ObjectInstantiationStrategy.ParameterizedConstructor
+                );
                 Debug.Assert(_typeIndex.CanInstantiate(type));
                 Debug.Assert(
                     type is { Properties: not null, ConstructorParameters: not null },
-                    $"Expecting type for init method, {type.DisplayString}, to have both properties and ctor params.");
+                    $"Expecting type for init method, {type.DisplayString}, to have both properties and ctor params."
+                );
 
-                IEnumerable<PropertySpec> initOnlyProps = type.Properties.Where(prop => prop is { SetOnInit: true });
+                IEnumerable<PropertySpec> initOnlyProps = type.Properties.Where(prop =>
+                    prop is { SetOnInit: true }
+                );
                 List<string> ctorArgList = new();
 
-                EmitStartBlock($"public static {type.TypeRef.FullyQualifiedName} {GetInitalizeMethodDisplayString(type)}({Identifier.IConfiguration} {Identifier.configuration}, {Identifier.BinderOptions}? {Identifier.binderOptions})");
+                EmitStartBlock(
+                    $"public static {type.TypeRef.FullyQualifiedName} {GetInitalizeMethodDisplayString(type)}({Identifier.IConfiguration} {Identifier.configuration}, {Identifier.BinderOptions}? {Identifier.binderOptions})"
+                );
                 _emitBlankLineBeforeNextStatement = false;
 
                 foreach (ParameterSpec parameter in type.ConstructorParameters)
@@ -340,7 +428,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         RefKind.Ref => $"ref {name}",
                         RefKind.Out => "out _",
                         RefKind.In => $"in {name}",
-                        _ => throw new InvalidOperationException()
+                        _ => throw new InvalidOperationException(),
                     };
 
                     ctorArgList.Add(argExpr);
@@ -355,7 +443,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
                 }
 
-                string returnExpression = $"return new {type.TypeRef.FullyQualifiedName}({string.Join(", ", ctorArgList)})";
+                string returnExpression =
+                    $"return new {type.TypeRef.FullyQualifiedName}({string.Join(", ", ctorArgList)})";
                 if (!initOnlyProps.Any())
                 {
                     _writer.WriteLine($"{returnExpression};");
@@ -378,16 +467,24 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 void EmitBindImplForMember(MemberSpec member)
                 {
                     TypeSpec memberType = _typeIndex.GetTypeSpec(member.TypeRef);
-                    string parsedMemberDeclarationLhs = $"{memberType.TypeRef.FullyQualifiedName} {member.Name}";
+                    string parsedMemberDeclarationLhs =
+                        $"{memberType.TypeRef.FullyQualifiedName} {member.Name}";
                     string configKeyName = member.ConfigurationKeyName;
 
                     switch (memberType)
                     {
-                        case ParsableFromStringSpec { StringParsableTypeKind: StringParsableTypeKind.AssignFromSectionValue }:
+                        case ParsableFromStringSpec
+                        {
+                            StringParsableTypeKind: StringParsableTypeKind.AssignFromSectionValue
+                        }:
                             {
-                                if (member is ParameterSpec parameter && parameter.ErrorOnFailedBinding)
+                                if (
+                                    member is ParameterSpec parameter
+                                    && parameter.ErrorOnFailedBinding
+                                )
                                 {
-                                    string condition = $@"if ({Identifier.configuration}[""{configKeyName}""] is not {parsedMemberDeclarationLhs})";
+                                    string condition =
+                                        $@"if ({Identifier.configuration}[""{configKeyName}""] is not {parsedMemberDeclarationLhs})";
                                     EmitThrowBlock(condition);
                                     _writer.WriteLine();
                                     return;
@@ -395,14 +492,18 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             }
                             break;
                         case ConfigurationSectionSpec:
-                            {
-                                _writer.WriteLine($"{parsedMemberDeclarationLhs} = {GetSectionFromConfigurationExpression(configKeyName)};");
-                                return;
-                            }
+                        {
+                            _writer.WriteLine(
+                                $"{parsedMemberDeclarationLhs} = {GetSectionFromConfigurationExpression(configKeyName)};"
+                            );
+                            return;
+                        }
                     }
 
                     string bangExpr = memberType.IsValueType ? string.Empty : "!";
-                    _writer.WriteLine($"{parsedMemberDeclarationLhs} = {member.DefaultValueExpr}{bangExpr};");
+                    _writer.WriteLine(
+                        $"{parsedMemberDeclarationLhs} = {member.DefaultValueExpr}{bangExpr};"
+                    );
                     _emitBlankLineBeforeNextStatement = false;
 
                     bool canBindToMember = this.EmitBindImplForMember(
@@ -410,7 +511,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         member.Name,
                         sectionPathExpr: GetSectionPathFromConfigurationExpression(configKeyName),
                         canSet: true,
-                        InitializationKind.None);
+                        InitializationKind.None
+                    );
 
                     if (canBindToMember)
                     {
@@ -424,19 +526,27 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
 
                     void EmitThrowBlock(string condition) =>
-                        _writer.WriteLine($$"""
+                        _writer.WriteLine(
+                            $$"""
                             {{condition}}
                             {
-                                throw new {{Identifier.InvalidOperationException}}("{{string.Format(ExceptionMessages.ParameterHasNoMatchingConfig, type.FullName, member.Name)}}");
+                                throw new {{Identifier.InvalidOperationException}}("{{string.Format(
+                                ExceptionMessages.ParameterHasNoMatchingConfig,
+                                type.FullName,
+                                member.Name
+                            )}}");
                             }
-                            """);
+                            """
+                        );
                 }
             }
 
             private void EmitHelperMethods()
             {
                 // Emitted if we are to bind objects with complex members, or if we're emitting BindCoreMain or GetCore methods.
-                bool emitAsConfigWithChildren = ShouldEmitMethods(MethodsToGen_CoreBindingHelper.AsConfigWithChildren);
+                bool emitAsConfigWithChildren = ShouldEmitMethods(
+                    MethodsToGen_CoreBindingHelper.AsConfigWithChildren
+                );
 
                 if (ShouldEmitMethods(MethodsToGen_CoreBindingHelper.BindCore))
                 {
@@ -444,7 +554,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     EmitValidateConfigurationKeysMethod();
                 }
 
-                if (ShouldEmitMethods(MethodsToGen_CoreBindingHelper.BindCoreMain | MethodsToGen_CoreBindingHelper.GetCore))
+                if (
+                    ShouldEmitMethods(
+                        MethodsToGen_CoreBindingHelper.BindCoreMain
+                            | MethodsToGen_CoreBindingHelper.GetCore
+                    )
+                )
                 {
                     // HasValueOrChildren references this method.
                     Debug.Assert(emitAsConfigWithChildren);
@@ -458,8 +573,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     EmitAsConfigWithChildrenMethod();
                 }
 
-                if (ShouldEmitMethods(MethodsToGen_CoreBindingHelper.BindCoreMain | MethodsToGen_CoreBindingHelper.GetCore) ||
-                    ShouldEmitMethods(MethodsToGen.ConfigBinder_Bind_instance_BinderOptions))
+                if (
+                    ShouldEmitMethods(
+                        MethodsToGen_CoreBindingHelper.BindCoreMain
+                            | MethodsToGen_CoreBindingHelper.GetCore
+                    ) || ShouldEmitMethods(MethodsToGen.ConfigBinder_Bind_instance_BinderOptions)
+                )
                 {
                     EmitBlankLineIfRequired();
                     EmitGetBinderOptionsHelper();
@@ -472,7 +591,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     _emitBlankLineBeforeNextStatement = true;
                 }
 
-                if (_bindingHelperInfo.TypesForGen_ParsePrimitive is { Count: not 0 } stringParsableTypes)
+                if (
+                    _bindingHelperInfo.TypesForGen_ParsePrimitive is
+                    { Count: not 0 } stringParsableTypes
+                )
                 {
                     foreach (ParsableFromStringSpec type in stringParsableTypes)
                     {
@@ -488,10 +610,17 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             private void EmitValidateConfigurationKeysMethod()
             {
                 const string keysIdentifier = "keys";
-                string exceptionMessage = string.Format(ExceptionMessages.MissingConfig, Identifier.ErrorOnUnknownConfiguration, Identifier.BinderOptions, $"{{{Identifier.type}}}", $@"{{string.Join("", "", {Identifier.temp})}}");
+                string exceptionMessage = string.Format(
+                    ExceptionMessages.MissingConfig,
+                    Identifier.ErrorOnUnknownConfiguration,
+                    Identifier.BinderOptions,
+                    $"{{{Identifier.type}}}",
+                    $@"{{string.Join("", "", {Identifier.temp})}}"
+                );
 
                 EmitBlankLineIfRequired();
-                _writer.WriteLine($$"""
+                _writer.WriteLine(
+                    $$"""
                     /// <summary>If required by the binder options, validates that there are no unknown keys in the input configuration object.</summary>
                     public static void {{Identifier.ValidateConfigurationKeys}}(Type {{Identifier.type}}, {{TypeDisplayString.LazyHashSetOfString}} {{keysIdentifier}}, {{Identifier.IConfiguration}} {{Identifier.configuration}}, {{Identifier.BinderOptions}}? {{Identifier.binderOptions}})
                     {
@@ -513,12 +642,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             }
                         }
                     }
-                    """);
+                    """
+                );
             }
 
             private void EmitHasValueOrChildrenMethod()
             {
-                _writer.WriteLine($$"""
+                _writer.WriteLine(
+                    $$"""
                     public static bool {{Identifier.HasValueOrChildren}}({{Identifier.IConfiguration}} {{Identifier.configuration}})
                     {
                         if (({{Identifier.configuration}} as {{Identifier.IConfigurationSection}})?.{{Identifier.Value}} is not null)
@@ -527,12 +658,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         }
                         return {{MethodsToGen_CoreBindingHelper.AsConfigWithChildren}}({{Identifier.configuration}}) is not null;
                     }
-                    """);
+                    """
+                );
             }
 
             private void EmitAsConfigWithChildrenMethod()
             {
-                _writer.WriteLine($$"""
+                _writer.WriteLine(
+                    $$"""
                     public static {{Identifier.IConfiguration}}? {{MethodsToGen_CoreBindingHelper.AsConfigWithChildren}}({{Identifier.IConfiguration}} {{Identifier.configuration}})
                     {
                         foreach ({{Identifier.IConfigurationSection}} _ in {{Identifier.configuration}}.{{Identifier.GetChildren}}())
@@ -541,12 +674,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         }
                         return null;
                     }
-                    """);
+                    """
+                );
             }
 
             private void EmitGetBinderOptionsHelper()
             {
-                _writer.WriteLine($$"""
+                _writer.WriteLine(
+                    $$"""
                     public static {{Identifier.BinderOptions}}? {{Identifier.GetBinderOptions}}({{TypeDisplayString.NullableActionOfBinderOptions}} {{Identifier.configureOptions}})
                     {
                         if ({{Identifier.configureOptions}} is null)
@@ -559,20 +694,30 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                         if ({{Identifier.binderOptions}}.BindNonPublicProperties)
                         {
-                            throw new NotSupportedException($"{{string.Format(ExceptionMessages.CannotSpecifyBindNonPublicProperties)}}");
+                            throw new NotSupportedException($"{{string.Format(
+                        ExceptionMessages.CannotSpecifyBindNonPublicProperties
+                    )}}");
                         }
 
                         return {{Identifier.binderOptions}};
                     }
-                    """);
+                    """
+                );
             }
 
             private void EmitEnumParseMethod()
             {
-                string exceptionArg1 = string.Format(ExceptionMessages.FailedBinding, $"{{{Identifier.getPath}()}}", $"{{typeof(T)}}");
+                string exceptionArg1 = string.Format(
+                    ExceptionMessages.FailedBinding,
+                    $"{{{Identifier.getPath}()}}",
+                    $"{{typeof(T)}}"
+                );
 
-                string parseEnumCall = _emitGenericParseEnum ? "Enum.Parse<T>(value, ignoreCase: true)" : "(T)Enum.Parse(typeof(T), value, ignoreCase: true)";
-                _writer.WriteLine($$"""
+                string parseEnumCall = _emitGenericParseEnum
+                    ? "Enum.Parse<T>(value, ignoreCase: true)"
+                    : "(T)Enum.Parse(typeof(T), value, ignoreCase: true)";
+                _writer.WriteLine(
+                    $$"""
                     public static T ParseEnum<T>(string value, Func<string?> getPath) where T : struct
                     {
                         try
@@ -584,7 +729,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             throw new {{Identifier.InvalidOperationException}}($"{{exceptionArg1}}", {{Identifier.exception}});
                         }
                     }
-                    """);
+                    """
+                );
             }
 
             private void EmitPrimitiveParseMethod(ParsableFromStringSpec type)
@@ -604,12 +750,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         break;
                     case StringParsableTypeKind.Integer:
                         {
-                            parsedValueExpr = $"{typeFQN}.{Identifier.Parse}({Identifier.value}, {Identifier.NumberStyles}.Integer, {invariantCultureExpression})";
+                            parsedValueExpr =
+                                $"{typeFQN}.{Identifier.Parse}({Identifier.value}, {Identifier.NumberStyles}.Integer, {invariantCultureExpression})";
                         }
                         break;
                     case StringParsableTypeKind.Float:
                         {
-                            parsedValueExpr = $"{typeFQN}.{Identifier.Parse}({Identifier.value}, {Identifier.NumberStyles}.Float, {invariantCultureExpression})";
+                            parsedValueExpr =
+                                $"{typeFQN}.{Identifier.Parse}({Identifier.value}, {Identifier.NumberStyles}.Float, {invariantCultureExpression})";
                         }
                         break;
                     case StringParsableTypeKind.Parse:
@@ -619,30 +767,41 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         break;
                     case StringParsableTypeKind.ParseInvariant:
                         {
-                            parsedValueExpr = $"{typeFQN}.{Identifier.Parse}({Identifier.value}, {invariantCultureExpression})"; ;
+                            parsedValueExpr =
+                                $"{typeFQN}.{Identifier.Parse}({Identifier.value}, {invariantCultureExpression})";
+                            ;
                         }
                         break;
                     case StringParsableTypeKind.CultureInfo:
                         {
-                            parsedValueExpr = $"{Identifier.CultureInfo}.GetCultureInfo({Identifier.value})";
+                            parsedValueExpr =
+                                $"{Identifier.CultureInfo}.GetCultureInfo({Identifier.value})";
                         }
                         break;
                     case StringParsableTypeKind.Uri:
                         {
-                            parsedValueExpr = $"new Uri({Identifier.value}, UriKind.RelativeOrAbsolute)";
+                            parsedValueExpr =
+                                $"new Uri({Identifier.value}, UriKind.RelativeOrAbsolute)";
                         }
                         break;
                     default:
-                        {
-                            Debug.Fail($"Invalid string parsable kind: {typeKind}");
-                            return;
-                        }
+                    {
+                        Debug.Fail($"Invalid string parsable kind: {typeKind}");
+                        return;
+                    }
                 }
 
-                string exceptionArg1 = string.Format(ExceptionMessages.FailedBinding, $"{{{Identifier.getPath}()}}", $"{{typeof({typeFQN})}}");
+                string exceptionArg1 = string.Format(
+                    ExceptionMessages.FailedBinding,
+                    $"{{{Identifier.getPath}()}}",
+                    $"{{typeof({typeFQN})}}"
+                );
 
-                EmitStartBlock($"public static {typeFQN} {TypeIndex.GetParseMethodName(type)}(string {Identifier.value}, Func<string?> {Identifier.getPath})");
-                EmitEndBlock($$"""
+                EmitStartBlock(
+                    $"public static {typeFQN} {TypeIndex.GetParseMethodName(type)}(string {Identifier.value}, Func<string?> {Identifier.getPath})"
+                );
+                EmitEndBlock(
+                    $$"""
                     try
                     {
                         return {{parsedValueExpr}};
@@ -651,7 +810,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     {
                         throw new {{Identifier.InvalidOperationException}}($"{{exceptionArg1}}", {{Identifier.exception}});
                     }
-                    """);
+                    """
+                );
             }
 
             private void EmitBindCoreImplForArray(ArraySpec type)
@@ -669,11 +829,13 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 _writer.WriteLine();
 
                 // Resize array and add binded elements.
-                _writer.WriteLine($$"""
+                _writer.WriteLine(
+                    $$"""
                     {{Identifier.Int32}} {{Identifier.originalCount}} = {{Identifier.instance}}.{{Identifier.Length}};
                     {{Identifier.Array}}.{{Identifier.Resize}}(ref {{Identifier.instance}}, {{Identifier.originalCount}} + {{tempIdentifier}}.{{Identifier.Count}});
                     {{tempIdentifier}}.{{Identifier.CopyTo}}({{Identifier.instance}}, {{Identifier.originalCount}});
-                    """);
+                    """
+                );
             }
 
             private void EmitBindCoreImplForEnumerableWithAdd(EnumerableSpec type)
@@ -682,7 +844,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 EmitBindingLogicForEnumerableWithAdd(type.ElementTypeRef, instanceIdentifier);
             }
 
-            private void EmitBindingLogicForEnumerableWithAdd(TypeRef elementTypeRef, string enumerableIdentifier)
+            private void EmitBindingLogicForEnumerableWithAdd(
+                TypeRef elementTypeRef,
+                string enumerableIdentifier
+            )
             {
                 Emit_Foreach_Section_In_ConfigChildren_StartBlock();
 
@@ -696,10 +861,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                                 stringParsableType,
                                 Expression.sectionValue,
                                 Expression.sectionPath,
-                                (parsedValueExpr) => _writer.WriteLine($"{addExpr}({parsedValueExpr});"),
+                                (parsedValueExpr) =>
+                                    _writer.WriteLine($"{addExpr}({parsedValueExpr});"),
                                 checkForNullSectionValue: true,
                                 useDefaultValueIfSectionValueIsNull: false,
-                                useIncrementalStringValueIdentifier: false);
+                                useIncrementalStringValueIdentifier: false
+                            );
                         }
                         break;
                     case ConfigurationSectionSpec:
@@ -709,7 +876,13 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         break;
                     case ComplexTypeSpec complexType when _typeIndex.CanInstantiate(complexType):
                         {
-                            EmitBindingLogic(complexType, Identifier.value, Identifier.section, InitializationKind.Declaration, ValueDefaulting.None);
+                            EmitBindingLogic(
+                                complexType,
+                                Identifier.value,
+                                Identifier.section,
+                                InitializationKind.Declaration,
+                                ValueDefaulting.None
+                            );
                             _writer.WriteLine($"{addExpr}({Identifier.value});");
                         }
                         break;
@@ -724,7 +897,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 Emit_Foreach_Section_In_ConfigChildren_StartBlock();
 
-                ParsableFromStringSpec keyType = (ParsableFromStringSpec)_typeIndex.GetEffectiveTypeSpec(type.KeyTypeRef);
+                ParsableFromStringSpec keyType = (ParsableFromStringSpec)
+                    _typeIndex.GetEffectiveTypeSpec(type.KeyTypeRef);
                 TypeSpec elementType = _typeIndex.GetTypeSpec(type.ElementTypeRef);
 
                 // Parse key
@@ -735,7 +909,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     Emit_BindAndAddLogic_ForElement,
                     checkForNullSectionValue: false,
                     useDefaultValueIfSectionValueIsNull: false,
-                    useIncrementalStringValueIdentifier: false);
+                    useIncrementalStringValueIdentifier: false
+                );
 
                 void Emit_BindAndAddLogic_ForElement(string parsedKeyExpr)
                 {
@@ -747,43 +922,64 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                                     stringParsableElementType,
                                     Expression.sectionValue,
                                     Expression.sectionPath,
-                                    writeOnSuccess: parsedValueExpr => _writer.WriteLine($"{instanceIdentifier}[{parsedKeyExpr}] = {parsedValueExpr};"),
+                                    writeOnSuccess: parsedValueExpr =>
+                                        _writer.WriteLine(
+                                            $"{instanceIdentifier}[{parsedKeyExpr}] = {parsedValueExpr};"
+                                        ),
                                     checkForNullSectionValue: true,
                                     useDefaultValueIfSectionValueIsNull: false,
-                                    useIncrementalStringValueIdentifier: false);
+                                    useIncrementalStringValueIdentifier: false
+                                );
                             }
                             break;
                         case ConfigurationSectionSpec:
                             {
-                                _writer.WriteLine($"{instanceIdentifier}[{parsedKeyExpr}] = {Identifier.section};");
+                                _writer.WriteLine(
+                                    $"{instanceIdentifier}[{parsedKeyExpr}] = {Identifier.section};"
+                                );
                             }
                             break;
                         case ComplexTypeSpec complexElementType:
                             {
-                                if (keyType.StringParsableTypeKind is not StringParsableTypeKind.AssignFromSectionValue)
+                                if (
+                                    keyType.StringParsableTypeKind
+                                    is not StringParsableTypeKind.AssignFromSectionValue
+                                )
                                 {
                                     // Save value to local to avoid parsing twice - during look-up and during add.
-                                    _writer.WriteLine($"{keyType.TypeRef.FullyQualifiedName} {Identifier.key} = {parsedKeyExpr};");
+                                    _writer.WriteLine(
+                                        $"{keyType.TypeRef.FullyQualifiedName} {Identifier.key} = {parsedKeyExpr};"
+                                    );
                                     parsedKeyExpr = Identifier.key;
                                 }
 
                                 bool isValueType = complexElementType.IsValueType;
-                                string expressionForElementIsNotNull = $"{Identifier.element} is not null";
-                                string elementTypeDisplayString = complexElementType.TypeRef.FullyQualifiedName + (complexElementType.IsValueType ? string.Empty : "?");
+                                string expressionForElementIsNotNull =
+                                    $"{Identifier.element} is not null";
+                                string elementTypeDisplayString =
+                                    complexElementType.TypeRef.FullyQualifiedName
+                                    + (complexElementType.IsValueType ? string.Empty : "?");
 
-                                string expressionForElementExists = $"{instanceIdentifier}.{Identifier.TryGetValue}({parsedKeyExpr}, out {elementTypeDisplayString} {Identifier.element})";
+                                string expressionForElementExists =
+                                    $"{instanceIdentifier}.{Identifier.TryGetValue}({parsedKeyExpr}, out {elementTypeDisplayString} {Identifier.element})";
                                 string conditionToUseExistingElement = expressionForElementExists;
 
                                 // If key already exists, bind to existing element instance if not null (for ref types).
                                 if (!isValueType)
                                 {
-                                    conditionToUseExistingElement += $" && {expressionForElementIsNotNull}";
+                                    conditionToUseExistingElement +=
+                                        $" && {expressionForElementIsNotNull}";
                                 }
 
                                 if (_typeIndex.CanInstantiate(complexElementType))
                                 {
                                     EmitStartBlock($"if (!({conditionToUseExistingElement}))");
-                                    EmitObjectInit(complexElementType, Identifier.element, InitializationKind.SimpleAssignment, Identifier.section);
+                                    EmitObjectInit(
+                                        complexElementType,
+                                        Identifier.element,
+                                        InitializationKind.SimpleAssignment,
+                                        Identifier.section
+                                    );
                                     EmitEndBlock();
 
                                     EmitBindingLogic();
@@ -802,9 +998,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                                         Identifier.element,
                                         Identifier.section,
                                         InitializationKind.None,
-                                        ValueDefaulting.None);
+                                        ValueDefaulting.None
+                                    );
 
-                                    _writer.WriteLine($"{instanceIdentifier}[{parsedKeyExpr}] = {Identifier.element};");
+                                    _writer.WriteLine(
+                                        $"{instanceIdentifier}[{parsedKeyExpr}] = {Identifier.element};"
+                                    );
                                 }
                             }
                             break;
@@ -819,20 +1018,26 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 Debug.Assert(_typeIndex.HasBindableMembers(type));
 
                 string keyCacheFieldName = TypeIndex.GetConfigKeyCacheFieldName(type);
-                string validateMethodCallExpr = $"{Identifier.ValidateConfigurationKeys}(typeof({type.TypeRef.FullyQualifiedName}), {keyCacheFieldName}, {Identifier.configuration}, {Identifier.binderOptions});";
+                string validateMethodCallExpr =
+                    $"{Identifier.ValidateConfigurationKeys}(typeof({type.TypeRef.FullyQualifiedName}), {keyCacheFieldName}, {Identifier.configuration}, {Identifier.binderOptions});";
                 _writer.WriteLine(validateMethodCallExpr);
 
                 foreach (PropertySpec property in type.Properties!)
                 {
                     if (_typeIndex.ShouldBindTo(property))
                     {
-                        string containingTypeRef = property.IsStatic ? type.TypeRef.FullyQualifiedName : Identifier.instance;
+                        string containingTypeRef = property.IsStatic
+                            ? type.TypeRef.FullyQualifiedName
+                            : Identifier.instance;
                         EmitBindImplForMember(
                             property,
                             memberAccessExpr: $"{containingTypeRef}.{property.Name}",
-                            GetSectionPathFromConfigurationExpression(property.ConfigurationKeyName),
+                            GetSectionPathFromConfigurationExpression(
+                                property.ConfigurationKeyName
+                            ),
                             canSet: property.CanSet,
-                            InitializationKind.Declaration);
+                            InitializationKind.Declaration
+                        );
                     }
                 }
             }
@@ -842,57 +1047,70 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 string memberAccessExpr,
                 string sectionPathExpr,
                 bool canSet,
-                InitializationKind initializationKind)
+                InitializationKind initializationKind
+            )
             {
-                string sectionParseExpr = GetSectionFromConfigurationExpression(member.ConfigurationKeyName);
+                string sectionParseExpr = GetSectionFromConfigurationExpression(
+                    member.ConfigurationKeyName
+                );
 
                 switch (_typeIndex.GetEffectiveTypeSpec(member.TypeRef))
                 {
                     case ParsableFromStringSpec stringParsableType:
+                    {
+                        if (canSet)
                         {
-                            if (canSet)
-                            {
-                                bool useDefaultValueIfSectionValueIsNull =
-                                    initializationKind == InitializationKind.Declaration &&
-                                    member is PropertySpec &&
-                                    member.TypeRef.IsValueType &&
-                                    _typeIndex.GetTypeSpec(member.TypeRef) is not NullableSpec;
-
-                                EmitBlankLineIfRequired();
-                                EmitBindingLogic(
-                                    stringParsableType,
-                                    $@"{Identifier.configuration}[""{member.ConfigurationKeyName}""]",
-                                    sectionPathExpr,
-                                    writeOnSuccess: parsedValueExpr => _writer.WriteLine($"{memberAccessExpr} = {parsedValueExpr};"),
-                                    checkForNullSectionValue: true,
-                                    useDefaultValueIfSectionValueIsNull,
-                                    useIncrementalStringValueIdentifier: true);
-                            }
-
-                            return true;
-                        }
-                    case ConfigurationSectionSpec:
-                        {
-                            if (canSet)
-                            {
-                                EmitBlankLineIfRequired();
-                                _writer.WriteLine($"{memberAccessExpr} = {sectionParseExpr};");
-                            }
-
-                            return true;
-                        }
-                    case ComplexTypeSpec complexType:
-                        {
-                            string sectionValidationCall = $"{MethodsToGen_CoreBindingHelper.AsConfigWithChildren}({sectionParseExpr})";
-                            string sectionIdentifier = GetIncrementalIdentifier(Identifier.section);
+                            bool useDefaultValueIfSectionValueIsNull =
+                                initializationKind == InitializationKind.Declaration
+                                && member is PropertySpec
+                                && member.TypeRef.IsValueType
+                                && _typeIndex.GetTypeSpec(member.TypeRef) is not NullableSpec;
 
                             EmitBlankLineIfRequired();
-                            EmitStartBlock($"if ({sectionValidationCall} is {Identifier.IConfigurationSection} {sectionIdentifier})");
-                            EmitBindingLogicForComplexMember(member, memberAccessExpr, sectionIdentifier, canSet);
-                            EmitEndBlock();
-
-                            return _typeIndex.CanInstantiate(complexType);
+                            EmitBindingLogic(
+                                stringParsableType,
+                                $@"{Identifier.configuration}[""{member.ConfigurationKeyName}""]",
+                                sectionPathExpr,
+                                writeOnSuccess: parsedValueExpr =>
+                                    _writer.WriteLine($"{memberAccessExpr} = {parsedValueExpr};"),
+                                checkForNullSectionValue: true,
+                                useDefaultValueIfSectionValueIsNull,
+                                useIncrementalStringValueIdentifier: true
+                            );
                         }
+
+                        return true;
+                    }
+                    case ConfigurationSectionSpec:
+                    {
+                        if (canSet)
+                        {
+                            EmitBlankLineIfRequired();
+                            _writer.WriteLine($"{memberAccessExpr} = {sectionParseExpr};");
+                        }
+
+                        return true;
+                    }
+                    case ComplexTypeSpec complexType:
+                    {
+                        string sectionValidationCall =
+                            $"{MethodsToGen_CoreBindingHelper.AsConfigWithChildren}({sectionParseExpr})";
+                        string sectionIdentifier = GetIncrementalIdentifier(Identifier.section);
+
+                        EmitBlankLineIfRequired();
+                        EmitStartBlock(
+                            $"if ({sectionValidationCall} is {Identifier.IConfigurationSection} {sectionIdentifier})"
+                        );
+                        EmitBindingLogicForComplexMember(
+                            member,
+                            memberAccessExpr,
+                            sectionIdentifier,
+                            canSet
+                        );
+                        EmitEndBlock();
+
+                        return _typeIndex.CanInstantiate(complexType);
+                    }
                     default:
                         return false;
                 }
@@ -902,11 +1120,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 MemberSpec member,
                 string memberAccessExpr,
                 string configArgExpr,
-                bool canSet)
+                bool canSet
+            )
             {
-
                 TypeSpec memberType = _typeIndex.GetTypeSpec(member.TypeRef);
-                ComplexTypeSpec effectiveMemberType = (ComplexTypeSpec)_typeIndex.GetEffectiveTypeSpec(memberType);
+                ComplexTypeSpec effectiveMemberType = (ComplexTypeSpec)
+                    _typeIndex.GetEffectiveTypeSpec(memberType);
 
                 string tempIdentifier = GetIncrementalIdentifier(Identifier.temp);
                 InitializationKind initKind;
@@ -927,14 +1146,19 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     {
                         string nullableTempIdentifier = GetIncrementalIdentifier(Identifier.temp);
 
-                        _writer.WriteLine($"{memberType.TypeRef.FullyQualifiedName} {nullableTempIdentifier} = {memberAccessExpr};");
+                        _writer.WriteLine(
+                            $"{memberType.TypeRef.FullyQualifiedName} {nullableTempIdentifier} = {memberAccessExpr};"
+                        );
 
                         _writer.WriteLine(
-                            $"{effectiveMemberTypeFQN} {tempIdentifier} = {nullableTempIdentifier}.{Identifier.HasValue} ? {nullableTempIdentifier}.{Identifier.Value} : new {effectiveMemberTypeFQN}();");
+                            $"{effectiveMemberTypeFQN} {tempIdentifier} = {nullableTempIdentifier}.{Identifier.HasValue} ? {nullableTempIdentifier}.{Identifier.Value} : new {effectiveMemberTypeFQN}();"
+                        );
                     }
                     else
                     {
-                        _writer.WriteLine($"{effectiveMemberTypeFQN} {tempIdentifier} = {memberAccessExpr};");
+                        _writer.WriteLine(
+                            $"{effectiveMemberTypeFQN} {tempIdentifier} = {memberAccessExpr};"
+                        );
                     }
 
                     targetObjAccessExpr = tempIdentifier;
@@ -951,14 +1175,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 }
 
                 Action<string>? writeOnSuccess = !canSet
-                     ? null
-                     : bindedValueIdentifier =>
-                     {
-                         if (memberAccessExpr != bindedValueIdentifier)
-                         {
-                             _writer.WriteLine($"{memberAccessExpr} = {bindedValueIdentifier};");
-                         }
-                     };
+                    ? null
+                    : bindedValueIdentifier =>
+                    {
+                        if (memberAccessExpr != bindedValueIdentifier)
+                        {
+                            _writer.WriteLine($"{memberAccessExpr} = {bindedValueIdentifier};");
+                        }
+                    };
 
                 EmitBindingLogic(
                     effectiveMemberType,
@@ -967,7 +1191,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     initKind,
                     ValueDefaulting.None,
                     writeOnSuccess
-                    );
+                );
             }
 
             private void EmitBindingLogic(
@@ -976,7 +1200,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 string configArgExpr,
                 InitializationKind initKind,
                 ValueDefaulting valueDefaulting,
-                Action<string>? writeOnSuccess = null)
+                Action<string>? writeOnSuccess = null
+            )
             {
                 if (!_typeIndex.HasBindableMembers(type))
                 {
@@ -988,7 +1213,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         }
                         else if (type is ObjectSpec { InitExceptionMessage: string exMsg })
                         {
-                            _writer.WriteLine($@"throw new {Identifier.InvalidOperationException}(""{exMsg}"");");
+                            _writer.WriteLine(
+                                $@"throw new {Identifier.InvalidOperationException}(""{exMsg}"");"
+                            );
                         }
                     }
 
@@ -999,7 +1226,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 if (initKind is InitializationKind.AssignmentWithNullCheck)
                 {
                     Debug.Assert(!type.IsValueType);
-                    _writer.WriteLine($"{type.TypeRef.FullyQualifiedName}? {tempIdentifier} = {memberAccessExpr};");
+                    _writer.WriteLine(
+                        $"{type.TypeRef.FullyQualifiedName}? {tempIdentifier} = {memberAccessExpr};"
+                    );
                     EmitBindingLogic(tempIdentifier, InitializationKind.AssignmentWithNullCheck);
                 }
                 else if (initKind is InitializationKind.None && type.IsValueType)
@@ -1014,7 +1243,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 void EmitBindingLogic(string instanceToBindExpr, InitializationKind initKind)
                 {
-                    string bindCoreCall = $@"{nameof(MethodsToGen_CoreBindingHelper.BindCore)}({configArgExpr}, ref {instanceToBindExpr}, defaultValueIfNotFound: {FormatDefaultValueIfNotFound()}, {Identifier.binderOptions});";
+                    string bindCoreCall =
+                        $@"{nameof(MethodsToGen_CoreBindingHelper.BindCore)}({configArgExpr}, ref {instanceToBindExpr}, defaultValueIfNotFound: {FormatDefaultValueIfNotFound()}, {Identifier.binderOptions});";
 
                     if (_typeIndex.CanInstantiate(type))
                     {
@@ -1034,7 +1264,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         if (type is ObjectSpec { InitExceptionMessage: string exMsg })
                         {
                             EmitStartBlock("else");
-                            _writer.WriteLine($@"throw new {Identifier.InvalidOperationException}(""{exMsg}"");");
+                            _writer.WriteLine(
+                                $@"throw new {Identifier.InvalidOperationException}(""{exMsg}"");"
+                            );
                             EmitEndBlock();
                         }
                     }
@@ -1045,7 +1277,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         writeOnSuccess?.Invoke(instanceToBindExpr);
                     }
 
-                    string FormatDefaultValueIfNotFound() => valueDefaulting == ValueDefaulting.CallSetter ? "true" : "false";
+                    string FormatDefaultValueIfNotFound() =>
+                        valueDefaulting == ValueDefaulting.CallSetter ? "true" : "false";
                 }
             }
 
@@ -1056,18 +1289,25 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 Action<string>? writeOnSuccess,
                 bool checkForNullSectionValue,
                 bool useDefaultValueIfSectionValueIsNull,
-                bool useIncrementalStringValueIdentifier)
+                bool useIncrementalStringValueIdentifier
+            )
             {
                 StringParsableTypeKind typeKind = type.StringParsableTypeKind;
                 Debug.Assert(typeKind is not StringParsableTypeKind.None);
 
-                string nonNull_StringValue_Identifier = useIncrementalStringValueIdentifier ? GetIncrementalIdentifier(Identifier.value) : Identifier.value;
-                string stringValueToParse_Expr = checkForNullSectionValue ? nonNull_StringValue_Identifier : sectionValueExpr;
+                string nonNull_StringValue_Identifier = useIncrementalStringValueIdentifier
+                    ? GetIncrementalIdentifier(Identifier.value)
+                    : Identifier.value;
+                string stringValueToParse_Expr = checkForNullSectionValue
+                    ? nonNull_StringValue_Identifier
+                    : sectionValueExpr;
                 string parsedValueExpr = typeKind switch
                 {
                     StringParsableTypeKind.AssignFromSectionValue => stringValueToParse_Expr,
-                    StringParsableTypeKind.Enum => $"ParseEnum<{type.TypeRef.FullyQualifiedName}>({stringValueToParse_Expr}, () => {sectionPathExpr})",
-                    _ => $"{TypeIndex.GetParseMethodName(type)}({stringValueToParse_Expr}, () => {sectionPathExpr})",
+                    StringParsableTypeKind.Enum =>
+                        $"ParseEnum<{type.TypeRef.FullyQualifiedName}>({stringValueToParse_Expr}, () => {sectionPathExpr})",
+                    _ =>
+                        $"{TypeIndex.GetParseMethodName(type)}({stringValueToParse_Expr}, () => {sectionPathExpr})",
                 };
 
                 if (!checkForNullSectionValue)
@@ -1076,7 +1316,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 }
                 else
                 {
-                    EmitStartBlock($"if ({sectionValueExpr} is string {nonNull_StringValue_Identifier})");
+                    EmitStartBlock(
+                        $"if ({sectionValueExpr} is string {nonNull_StringValue_Identifier})"
+                    );
                     InvokeWriteOnSuccess();
                     EmitEndBlock();
                 }
@@ -1092,7 +1334,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 void InvokeWriteOnSuccess() => writeOnSuccess?.Invoke(parsedValueExpr);
             }
 
-            private bool EmitObjectInit(ComplexTypeSpec type, string memberAccessExpr, InitializationKind initKind, string configArgExpr)
+            private bool EmitObjectInit(
+                ComplexTypeSpec type,
+                string memberAccessExpr,
+                InitializationKind initKind,
+                string configArgExpr
+            )
             {
                 CollectionSpec? collectionType = type as CollectionSpec;
                 ObjectSpec? objectType = type as ObjectSpec;
@@ -1109,14 +1356,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
                     else
                     {
-                        CollectionWithCtorInitSpec collectionWithCtorInitType = (CollectionWithCtorInitSpec)collectionType;
+                        CollectionWithCtorInitSpec collectionWithCtorInitType =
+                            (CollectionWithCtorInitSpec)collectionType;
 
-                        if (collectionWithCtorInitType.InstantiationConcreteType is not CollectionInstantiationConcreteType.Self)
+                        if (
+                            collectionWithCtorInitType.InstantiationConcreteType
+                            is not CollectionInstantiationConcreteType.Self
+                        )
                         {
                             castExpr = $"({collectionWithCtorInitType.TypeRef.FullyQualifiedName})";
                         }
 
-                        typeFQN = TypeIndex.GetInstantiationTypeDisplayString(collectionWithCtorInitType);
+                        typeFQN = TypeIndex.GetInstantiationTypeDisplayString(
+                            collectionWithCtorInitType
+                        );
                         initExpr = $"{castExpr}new {typeFQN}()";
                     }
                 }
@@ -1131,9 +1384,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     }
                     else
                     {
-                        Debug.Assert(strategy is ObjectInstantiationStrategy.ParameterizedConstructor);
-                        string initMethodIdentifier = GetInitalizeMethodDisplayString(((ObjectSpec)type));
-                        initExpr = $"{initMethodIdentifier}({configArgExpr}, {Identifier.binderOptions})";
+                        Debug.Assert(
+                            strategy is ObjectInstantiationStrategy.ParameterizedConstructor
+                        );
+                        string initMethodIdentifier = GetInitalizeMethodDisplayString(
+                            ((ObjectSpec)type)
+                        );
+                        initExpr =
+                            $"{initMethodIdentifier}({configArgExpr}, {Identifier.binderOptions})";
                     }
                 }
 
@@ -1147,20 +1405,31 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         break;
                     case InitializationKind.AssignmentWithNullCheck:
                         {
-
-                            if (collectionType is CollectionWithCtorInitSpec
+                            if (
+                                collectionType is CollectionWithCtorInitSpec
                                 {
-                                    InstantiationStrategy: CollectionInstantiationStrategy.CopyConstructor or CollectionInstantiationStrategy.LinqToDictionary
-                                } collectionWithCtorInitType)
+                                    InstantiationStrategy: CollectionInstantiationStrategy.CopyConstructor
+                                        or CollectionInstantiationStrategy.LinqToDictionary
+                                } collectionWithCtorInitType
+                            )
                             {
-                                string assignmentValueIfMemberNull = collectionWithCtorInitType.InstantiationStrategy is CollectionInstantiationStrategy.CopyConstructor
-                                    ? $"new {typeFQN}({memberAccessExpr})"
-                                    : $"{memberAccessExpr}.ToDictionary(pair => pair.Key, pair => pair.Value)";
+                                string assignmentValueIfMemberNull =
+                                    collectionWithCtorInitType.InstantiationStrategy
+                                    is CollectionInstantiationStrategy.CopyConstructor
+                                        ? $"new {typeFQN}({memberAccessExpr})"
+                                        : $"{memberAccessExpr}.ToDictionary(pair => pair.Key, pair => pair.Value)";
 
-                                Debug.Assert(castExpr is not null || collectionWithCtorInitType.InstantiationConcreteType is CollectionInstantiationConcreteType.Self);
-                                assignmentValueIfMemberNull = $"{castExpr}{assignmentValueIfMemberNull}";
+                                Debug.Assert(
+                                    castExpr is not null
+                                        || collectionWithCtorInitType.InstantiationConcreteType
+                                            is CollectionInstantiationConcreteType.Self
+                                );
+                                assignmentValueIfMemberNull =
+                                    $"{castExpr}{assignmentValueIfMemberNull}";
 
-                                _writer.WriteLine($"{memberAccessExpr} = {memberAccessExpr} is null ? {initExpr} : {assignmentValueIfMemberNull};");
+                                _writer.WriteLine(
+                                    $"{memberAccessExpr} = {memberAccessExpr} is null ? {initExpr} : {assignmentValueIfMemberNull};"
+                                );
                             }
                             else
                             {
@@ -1186,16 +1455,21 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             private void EmitIConfigurationHasValueOrChildrenCheck(bool voidReturn)
             {
                 string returnPostfix = voidReturn ? string.Empty : " null";
-                _writer.WriteLine($$"""
+                _writer.WriteLine(
+                    $$"""
                     if (!{{Identifier.HasValueOrChildren}}({{Identifier.configuration}}))
                     {
                         return{{returnPostfix}};
                     }
-                    """);
+                    """
+                );
                 _writer.WriteLine();
             }
 
-            private void EmitCollectionCastIfRequired(CollectionWithCtorInitSpec type, out string instanceIdentifier)
+            private void EmitCollectionCastIfRequired(
+                CollectionWithCtorInitSpec type,
+                out string instanceIdentifier
+            )
             {
                 if (type.PopulationCastType is CollectionPopulationCastType.NotApplicable)
                 {
@@ -1206,26 +1480,36 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 string castTypeDisplayString = TypeIndex.GetPopulationCastTypeDisplayString(type);
                 instanceIdentifier = Identifier.temp;
 
-                _writer.WriteLine($$"""
-                        if ({{Identifier.instance}} is not {{castTypeDisplayString}} {{instanceIdentifier}})
-                        {
-                            return;
-                        }
-                        """);
+                _writer.WriteLine(
+                    $$"""
+                    if ({{Identifier.instance}} is not {{castTypeDisplayString}} {{instanceIdentifier}})
+                    {
+                        return;
+                    }
+                    """
+                );
                 _writer.WriteLine();
-
             }
 
             private void Emit_Foreach_Section_In_ConfigChildren_StartBlock() =>
-                EmitStartBlock($"foreach ({Identifier.IConfigurationSection} {Identifier.section} in {Identifier.configuration}.{Identifier.GetChildren}())");
+                EmitStartBlock(
+                    $"foreach ({Identifier.IConfigurationSection} {Identifier.section} in {Identifier.configuration}.{Identifier.GetChildren}())"
+                );
 
             private void Emit_NotSupportedException_TypeNotDetectedAsInput() =>
-                _writer.WriteLine(@$"throw new NotSupportedException($""{string.Format(ExceptionMessages.TypeNotDetectedAsInput, "{type}")}"");");
+                _writer.WriteLine(
+                    @$"throw new NotSupportedException($""{string.Format(ExceptionMessages.TypeNotDetectedAsInput, "{type}")}"");"
+                );
 
-            private static string GetSectionPathFromConfigurationExpression(string configurationKeyName)
-                => $@"{GetSectionFromConfigurationExpression(configurationKeyName)}.{Identifier.Path}";
+            private static string GetSectionPathFromConfigurationExpression(
+                string configurationKeyName
+            ) =>
+                $@"{GetSectionFromConfigurationExpression(configurationKeyName)}.{Identifier.Path}";
 
-            private static string GetSectionFromConfigurationExpression(string configurationKeyName, bool addQuotes = true)
+            private static string GetSectionFromConfigurationExpression(
+                string configurationKeyName,
+                bool addQuotes = true
+            )
             {
                 string argExpr = addQuotes ? $@"""{configurationKeyName}""" : configurationKeyName;
                 return $@"{Identifier.configuration}.{Identifier.GetSection}({argExpr})";

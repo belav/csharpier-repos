@@ -22,155 +22,162 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
 using System;
-using System.Threading;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading;
 
-namespace System.Windows.Forms {
-	[DefaultProperty("Interval")]
-	[DefaultEvent("Tick")]
-	[ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
-	public class Timer : Component {
+namespace System.Windows.Forms
+{
+    [DefaultProperty("Interval")]
+    [DefaultEvent("Tick")]
+    [ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
+    public class Timer : Component
+    {
+        private bool enabled;
+        private int interval = 100;
+        private long expires;
+        internal Thread thread;
+        internal bool Busy;
+        internal IntPtr window;
+        object control_tag;
 
-		private bool enabled;
-		private int interval = 100;
-		private long expires;
-		internal Thread thread;
-		internal bool Busy;
-		internal IntPtr window;
-		object control_tag;
+        internal static readonly int Minimum = 15;
 
-		internal static readonly int Minimum = 15;
+        public Timer()
+        {
+            enabled = false;
+        }
 
-		public Timer ()
-		{
-			enabled = false;
-		}
+        public Timer(IContainer container)
+            : this()
+        {
+            container.Add(this);
+        }
 
-		public Timer (IContainer container) : this ()
-		{
-			container.Add (this);
-		}
+        [DefaultValue(false)]
+        public virtual bool Enabled
+        {
+            get { return enabled; }
+            set
+            {
+                if (value != enabled)
+                {
+                    enabled = value;
+                    if (value)
+                    {
+                        // Use AddTicks so we get some rounding
+                        expires =
+                            StopWatchNowMilliseconds + (interval > Minimum ? interval : Minimum);
 
-		[DefaultValue (false)]
-		public virtual bool Enabled {
-			get {
-				return enabled;
-			}
-			set {
-				if (value != enabled) {
-					enabled = value;
-					if (value) {
-						// Use AddTicks so we get some rounding
-						expires = StopWatchNowMilliseconds + (interval > Minimum ? interval : Minimum);
+                        thread = Thread.CurrentThread;
+                        XplatUI.SetTimer(this);
+                    }
+                    else
+                    {
+                        XplatUI.KillTimer(this);
+                        thread = null;
+                    }
+                }
+            }
+        }
 
-						thread = Thread.CurrentThread;
-						XplatUI.SetTimer (this);
-					} else {
-						XplatUI.KillTimer (this);
-						thread = null;
-					}
-				}
-			}
-		}
+        internal static long StopWatchNowMilliseconds
+        {
+            get { return Stopwatch.GetTimestamp() * 1000 / Stopwatch.Frequency; }
+        }
 
-		internal static long StopWatchNowMilliseconds
-		{
-			get { return Stopwatch.GetTimestamp() * 1000 / Stopwatch.Frequency; }
-		}
+        [DefaultValue(100)]
+        public int Interval
+        {
+            get { return interval; }
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentOutOfRangeException(
+                        "Interval",
+                        string.Format(
+                            "'{0}' is not a valid value for Interval. Interval must be greater than 0.",
+                            value
+                        )
+                    );
 
-		[DefaultValue (100)]
-		public int Interval {
-			get {
-				return interval;
-			}
-			set {
-				if (value <= 0)
-					throw new ArgumentOutOfRangeException ("Interval", string.Format ("'{0}' is not a valid value for Interval. Interval must be greater than 0.", value));
+                if (interval == value)
+                {
+                    return;
+                }
 
-				if (interval == value) {
-					return;
-				}
-				
-				interval = value;
-								
-				// Use AddTicks so we get some rounding
-				expires = StopWatchNowMilliseconds + (interval > Minimum ? interval : Minimum);
-									
-				if (enabled == true) {				
-					XplatUI.KillTimer (this);
-					XplatUI.SetTimer (this);
-				}
-			}
-		}
-		
-		[Localizable(false)]
-		[Bindable(true)]
-		[TypeConverter(typeof(StringConverter))]
-		[DefaultValue(null)]
-		[MWFCategory("Data")]
-		public object Tag {
-			get {
-				return control_tag;
-			}
+                interval = value;
 
-			set {
-				control_tag = value;
-			}
-		}
+                // Use AddTicks so we get some rounding
+                expires = StopWatchNowMilliseconds + (interval > Minimum ? interval : Minimum);
 
-		public void Start ()
-		{
-			Enabled = true;
-		}
+                if (enabled == true)
+                {
+                    XplatUI.KillTimer(this);
+                    XplatUI.SetTimer(this);
+                }
+            }
+        }
 
-		public void Stop ()
-		{
-			Enabled = false;
-		}
+        [Localizable(false)]
+        [Bindable(true)]
+        [TypeConverter(typeof(StringConverter))]
+        [DefaultValue(null)]
+        [MWFCategory("Data")]
+        public object Tag
+        {
+            get { return control_tag; }
+            set { control_tag = value; }
+        }
 
-		internal long Expires {
-			get {
-				return expires;
-			}
-		}
+        public void Start()
+        {
+            Enabled = true;
+        }
 
-		public event EventHandler Tick;
+        public void Stop()
+        {
+            Enabled = false;
+        }
 
-		public override string ToString ()
-		{
-			return base.ToString () + ", Interval: " + Interval;
-		}
+        internal long Expires
+        {
+            get { return expires; }
+        }
 
-		internal void Update (long update)
-		{
-			expires = update + (interval > Minimum ? interval : Minimum);
-		}
+        public event EventHandler Tick;
 
-		internal void FireTick ()
-		{
-			OnTick (EventArgs.Empty);
-		}
+        public override string ToString()
+        {
+            return base.ToString() + ", Interval: " + Interval;
+        }
 
+        internal void Update(long update)
+        {
+            expires = update + (interval > Minimum ? interval : Minimum);
+        }
 
-		protected virtual void OnTick (EventArgs e)
-		{
-			if (Tick != null)
-				Tick (this, e);
-		}
+        internal void FireTick()
+        {
+            OnTick(EventArgs.Empty);
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			base.Dispose (disposing);
-			Enabled = false;
-		}
+        protected virtual void OnTick(EventArgs e)
+        {
+            if (Tick != null)
+                Tick(this, e);
+        }
 
-		internal void TickHandler (object sender, EventArgs e)
-		{
-			OnTick (e);
-		}
-	}
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            Enabled = false;
+        }
+
+        internal void TickHandler(object sender, EventArgs e)
+        {
+            OnTick(e);
+        }
+    }
 }
-

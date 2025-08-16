@@ -1,7 +1,6 @@
-
 //--------------------------------------------------------------------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //--------------------------------------------------------------------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -12,12 +11,12 @@
 //
 //	Classes:	ChartHttpHandler
 //
-//  Purpose:	ChartHttpHandler is a static class which is responsible to handle with 
+//  Purpose:	ChartHttpHandler is a static class which is responsible to handle with
 //              chart images, interactive images, scripts and other resources.
-//              
-//              
+//
+//
 //	Reviewed:	DT
-//	Reviewed:	deliant on 4/14/2011 			
+//	Reviewed:	deliant on 4/14/2011
 //              MSRC#10470, VSTS#941768 http://vstfdevdiv:8080/web/wi.aspx?id=941768
 //              Please review information associated with MSRC#10470 before making any changes to this file.
 //              - Fixes:
@@ -28,45 +27,45 @@
 //                  - Added fixed string to session key to avoid direct session access.
 //
 //   Added:  deliant on 4/48/2011 fix for VSTS: 3593 - ASP.Net chart under web farm exhibit fast performace degradation
-//           Summary: Under large web farm setup ( ~16 processes and up) chart control image handler 
+//           Summary: Under large web farm setup ( ~16 processes and up) chart control image handler
 //                    soon starts to show performace degradation up to denial of service, when a file system is used as storage.
-//            Issues: 
-//                  - The image files in count over 2000 in one single folder causes exponentially growing slow response, 
-//                    especially on the remote server. The fix places the Image files  in separate subfolders for each process. 
-//                  - Private protection seeks and read several times in the image file istead reading the image at once 
+//            Issues:
+//                  - The image files in count over 2000 in one single folder causes exponentially growing slow response,
+//                    especially on the remote server. The fix places the Image files  in separate subfolders for each process.
+//                  - Private protection seeks and read several times in the image file istead reading the image at once
 //                    and then check for privacy marker.  Separate small network reads are expensive.
-//                  - Due missing lock in initialization stage the chart lock files number can grow more that process max 
+//                  - Due missing lock in initialization stage the chart lock files number can grow more that process max
 //                    number which can create abandon chart image files
 //==========================================================================================================================
 
 #region Namespaces
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.IO;
-using System.Web.Caching;
 using System.Collections;
-using System.Web.Configuration;
-using System.Resources;
-using System.Reflection;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Threading;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Web.Hosting;
-using System.Web.SessionState;
-using System.Drawing.Drawing2D;
-using System.Runtime.InteropServices;
-using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
-using System.Security.Permissions;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
+using System.Resources;
+using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
-using System.Collections.ObjectModel;
+using System.Security.Permissions;
+using System.Text;
+using System.Threading;
+using System.Web;
+using System.Web.Caching;
+using System.Web.Configuration;
+using System.Web.Hosting;
+using System.Web.SessionState;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 #endregion //Namespaces
@@ -77,31 +76,37 @@ namespace System.Web.UI.DataVisualization.Charting
     /// ChartHttpHandler processes HTTP Web requests using, handles chart images, scripts and other resources.
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class ChartHttpHandler : Page, IRequiresSessionState, IHttpHandler
     {
-
         #region Fields
 
         // flag that indicates whether this chart handler is installed
         private static bool _installed = false;
-        
+
         // flag that indicates whether this chart handler is installed
         private static bool _installChecked = false;
 
         // storage settings
         private static ChartHttpHandlerSettings _parameters = null;
-        
 
         // machine hash key which is part in chart image file name
-        private static string _machineHash = "_" + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture) + "_";
+        private static string _machineHash =
+            "_" + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture) + "_";
 
         // web gadren controller file. stays locked diring process lifetime.
-		private static FileStream _controllerFileStream = null;
-		private static string _controllerDirectory = null;
+        private static FileStream _controllerFileStream = null;
+        private static string _controllerDirectory = null;
         private static object _initHandlerLock = new object();
+
         // used for storing Guid key in context;
         internal static string ContextGuidKey = "{89FA5660-BD13-4f1b-8C7C-355CEC92CC7E}";
 
@@ -111,10 +116,11 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion //Fields
 
         #region Consts
-        
+
         internal const string ChartHttpHandlerName = "ChartImg.axd";
         internal const string ChartHttpHandlerAppSection = "ChartImageHandler";
-        internal const string DefaultConfigSettings = @"storage=file;timeout=20;dir=c:\TempImageFiles\;";
+        internal const string DefaultConfigSettings =
+            @"storage=file;timeout=20;dir=c:\TempImageFiles\;";
         internal const string WebDevServerUseConfigSettings = "WebDevServerUseConfigSettings";
         #endregion //Consts
 
@@ -142,18 +148,24 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         using (TextWriter w = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            HttpContext.Current.Server.Execute(ChartHttpHandlerName + "?" + handlerCheckQry + "=0", w);
+                            HttpContext.Current.Server.Execute(
+                                ChartHttpHandlerName + "?" + handlerCheckQry + "=0",
+                                w
+                            );
                         }
                         _installed = true;
                     }
                     catch (HttpException)
                     {
-                        if (hardCheck) throw;
+                        if (hardCheck)
+                            throw;
                     }
                     catch (SecurityException)
                     {
                         // under minimal configuration we assume that the hanlder is installed if app settings are present.
-                        _installed = !String.IsNullOrEmpty(WebConfigurationManager.AppSettings[ChartHttpHandlerAppSection]);
+                        _installed = !String.IsNullOrEmpty(
+                            WebConfigurationManager.AppSettings[ChartHttpHandlerAppSection]
+                        );
                     }
                 }
                 if (_installed || hardCheck)
@@ -163,22 +175,23 @@ namespace System.Web.UI.DataVisualization.Charting
                 _installChecked = true;
             }
         }
-        
+
         /// <summary>
         /// Initializes the storage settings
         /// </summary>
         //static ChartHttpHandler()
         private static ChartHttpHandlerSettings InitializeParameters()
         {
-
             ChartHttpHandlerSettings result = new ChartHttpHandlerSettings();
             if (HttpContext.Current != null)
             {
                 // Read settings from config; use DefaultConfigSettings in case when setting is not found
-                string configSettings = WebConfigurationManager.AppSettings[ChartHttpHandlerAppSection];
+                string configSettings = WebConfigurationManager.AppSettings[
+                    ChartHttpHandlerAppSection
+                ];
                 if (String.IsNullOrEmpty(configSettings))
                     configSettings = DefaultConfigSettings;
-                
+
                 result = new ChartHttpHandlerSettings(configSettings);
             }
             else
@@ -199,7 +212,10 @@ namespace System.Web.UI.DataVisualization.Charting
 
         private static void InitializeControllerFile()
         {
-            if (Settings.StorageType == ChartHttpHandlerStorageType.File && _controllerFileStream == null)
+            if (
+                Settings.StorageType == ChartHttpHandlerStorageType.File
+                && _controllerFileStream == null
+            )
             {
                 byte[] data = System.Text.Encoding.UTF8.GetBytes("chart io controller file");
                 // 2048 processes max.
@@ -208,9 +224,23 @@ namespace System.Web.UI.DataVisualization.Charting
                     try
                     {
                         ResetControllerStream();
-                        string controllerFileName = String.Format(CultureInfo.InvariantCulture, "{0}msc_cntr_{1}.txt", Settings.Directory, i);
-                        _controllerDirectory = String.Format(CultureInfo.InvariantCulture, "charts_{0}", i);
-                        _controllerFileStream = new System.IO.FileStream(controllerFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+                        string controllerFileName = String.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}msc_cntr_{1}.txt",
+                            Settings.Directory,
+                            i
+                        );
+                        _controllerDirectory = String.Format(
+                            CultureInfo.InvariantCulture,
+                            "charts_{0}",
+                            i
+                        );
+                        _controllerFileStream = new System.IO.FileStream(
+                            controllerFileName,
+                            FileMode.OpenOrCreate,
+                            FileAccess.ReadWrite,
+                            FileShare.ReadWrite
+                        );
                         _controllerFileStream.Lock(0, data.Length);
                         _controllerFileStream.Write(data, 0, data.Length);
                         _machineHash = "_" + i + "_";
@@ -220,7 +250,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         else
                         {
-                            TimeSpan lastWrite = DateTime.Now - Directory.GetLastWriteTime(Settings.Directory + _controllerDirectory);
+                            TimeSpan lastWrite =
+                                DateTime.Now
+                                - Directory.GetLastWriteTime(
+                                    Settings.Directory + _controllerDirectory
+                                );
                             if (lastWrite.Seconds < Settings.Timeout.Seconds)
                             {
                                 continue;
@@ -238,11 +272,13 @@ namespace System.Web.UI.DataVisualization.Charting
                         throw;
                     }
                 }
-                ResetControllerStream(); 
-                throw new UnauthorizedAccessException(SR.ExceptionHttpHandlerTempDirectoryUnaccesible(Settings.Directory));
+                ResetControllerStream();
+                throw new UnauthorizedAccessException(
+                    SR.ExceptionHttpHandlerTempDirectoryUnaccesible(Settings.Directory)
+                );
             }
         }
-        
+
         #endregion //Constructors
 
         #region Methods
@@ -269,7 +305,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     context.Response.ContentType = GetMime(key);
                     context.Response.BinaryWrite(data);
                     Diagnostics.TraceWrite(SR.DiagnosticChartImageServed(key), null);
-                    if (Settings.StorageType == ChartHttpHandlerStorageType.Session || Settings.DeleteAfterServicing)
+                    if (
+                        Settings.StorageType == ChartHttpHandlerStorageType.Session
+                        || Settings.DeleteAfterServicing
+                    )
                     {
                         handler.Delete(key);
                         Diagnostics.TraceWrite(SR.DiagnosticChartImageDeleted(key), null);
@@ -279,7 +318,13 @@ namespace System.Web.UI.DataVisualization.Charting
                 if (!(handler is DefaultImageHandler))
                 {
                     // the default handler will write more detailed message
-                    Diagnostics.TraceWrite(SR.DiagnosticChartImageServedFail(key, SR.DiagnosticChartImageServedFailNotFound), null);
+                    Diagnostics.TraceWrite(
+                        SR.DiagnosticChartImageServedFail(
+                            key,
+                            SR.DiagnosticChartImageServedFailNotFound
+                        ),
+                        null
+                    );
                 }
             }
             catch (NullReferenceException nre)
@@ -360,22 +405,27 @@ namespace System.Web.UI.DataVisualization.Charting
         private static String GetHandlerUrl()
         {
             // the handler have to be executed in current cxecution path in order to get proper user identity
-            String appDir = Path.GetDirectoryName(HttpContext.Current.Request.CurrentExecutionFilePath ?? "").Replace("\\","/");
+            String appDir = Path.GetDirectoryName(
+                    HttpContext.Current.Request.CurrentExecutionFilePath ?? ""
+                )
+                .Replace("\\", "/");
             if (!appDir.EndsWith("/", StringComparison.Ordinal))
             {
                 appDir += "/";
             }
             return appDir + ChartHttpHandlerName + "?";
-		}
-
+        }
 
         /// <summary>
         /// Gets the MIME type by resource url.
         /// </summary>
         /// <param name="resourceUrl">The resource URL.</param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Globalization", "CA1308",
-            Justification = "No security decision is being made on the ToLowerInvariant() call. It is being used to ensure the file extension is lowercase")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308",
+            Justification = "No security decision is being made on the ToLowerInvariant() call. It is being used to ensure the file extension is lowercase"
+        )]
         private static String GetMime(String resourceUrl)
         {
             String ext = Path.GetExtension(resourceUrl);
@@ -412,30 +462,33 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             String fmtKey = "chart" + _machineHash + "{0}." + ext;
             RingTimeTracker rt = RingTimeTrackerFactory.GetRingTracker(fmtKey);
-			if (!String.IsNullOrEmpty(_controllerDirectory) && String.IsNullOrEmpty(Settings.FolderName))
-			{
-				return _controllerDirectory + @"\" + rt.GetNextKey();
-			}
+            if (
+                !String.IsNullOrEmpty(_controllerDirectory)
+                && String.IsNullOrEmpty(Settings.FolderName)
+            )
+            {
+                return _controllerDirectory + @"\" + rt.GetNextKey();
+            }
             return Settings.FolderName + rt.GetNextKey();
         }
 
-		private static String KeyToUnc(String key)
-		{
-			if (!String.IsNullOrEmpty(key))
-			{
-				return key.Replace("/", @"\");
-			}
-			return key;
-		}
-		
-		private static String KeyFromUnc(String key)
-		{
-			if (!String.IsNullOrEmpty(key))
-			{
-				return key.Replace(@"\", "/");
-			}
-			return key;
-		}
+        private static String KeyToUnc(String key)
+        {
+            if (!String.IsNullOrEmpty(key))
+            {
+                return key.Replace("/", @"\");
+            }
+            return key;
+        }
+
+        private static String KeyFromUnc(String key)
+        {
+            if (!String.IsNullOrEmpty(key))
+            {
+                return key.Replace(@"\", "/");
+            }
+            return key;
+        }
 
         /// <summary>
         /// Gets a URL by specified request query, file key.
@@ -446,7 +499,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns></returns>
         private static String GetUrl(String query, String fileKey, string currentGuid)
         {
-			return GetHandlerUrl() + query + "=" + KeyFromUnc(fileKey) + "&g=" + currentGuid;
+            return GetHandlerUrl() + query + "=" + KeyFromUnc(fileKey) + "&g=" + currentGuid;
         }
 
         /// <summary>
@@ -455,8 +508,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="stream">The stream.</param>
         /// <param name="imageExt">The image extention.</param>
         /// <returns>Generated the image source URL</returns>
-        [SuppressMessage("Microsoft.Globalization", "CA1308", 
-            Justification="No security decision is being made on the ToLowerInvariant() call. It is being used to ensure the file extension is lowercase")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308",
+            Justification = "No security decision is being made on the ToLowerInvariant() call. It is being used to ensure the file extension is lowercase"
+        )]
         internal static String GetChartImageUrl(MemoryStream stream, String imageExt)
         {
             EnsureInitialized(true);
@@ -464,7 +520,7 @@ namespace System.Web.UI.DataVisualization.Charting
             string guidKey = Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
             // set new guid in context
             CurrentGuidKey = guidKey;
-            
+
             Int32 tryCounts = 10;
             while (tryCounts > 0)
             {
@@ -484,7 +540,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     return ChartHttpHandler.GetUrl("i", key, guidKey);
                 }
                 catch (IOException) { }
-                catch { throw;}
+                catch
+                {
+                    throw;
+                }
             }
             throw new IOException(SR.ExceptionHttpHandlerCanNotSave);
         }
@@ -494,18 +553,28 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         private static void EnsureSessionIsClean()
         {
-            if (!_installed) return;
+            if (!_installed)
+                return;
             if (Settings.StorageType == ChartHttpHandlerStorageType.Session)
             {
                 IChartStorageHandler handler = ChartHttpHandler.Settings.GetHandler();
                 foreach (RingTimeTracker tracker in RingTimeTrackerFactory.OpenedRingTimeTrackers())
                 {
-                        tracker.ForEach(true, delegate(RingItem item)
+                    tracker.ForEach(
+                        true,
+                        delegate(RingItem item)
                         {
-                            if (item.InUse && String.CompareOrdinal(Settings.ReadSessionKey(), item.SessionID) == 0)
+                            if (
+                                item.InUse
+                                && String.CompareOrdinal(Settings.ReadSessionKey(), item.SessionID)
+                                    == 0
+                            )
                             {
                                 handler.Delete(tracker.GetKey(item));
-                                Diagnostics.TraceWrite(SR.DiagnosticChartImageDeleted(tracker.GetKey(item)), null);
+                                Diagnostics.TraceWrite(
+                                    SR.DiagnosticChartImageDeleted(tracker.GetKey(item)),
+                                    null
+                                );
                                 item.InUse = false;
                             }
                         }
@@ -516,20 +585,23 @@ namespace System.Web.UI.DataVisualization.Charting
         #endregion //Utilities
 
         #region Diagnostics
-        
+
         private static void DiagnosticWriteAll(HttpContext context)
         {
             HtmlTextWriter writer;
             using (TextWriter w = new StringWriter(CultureInfo.CurrentCulture))
             {
-                
                 if (context.Request.Browser != null)
                     writer = context.Request.Browser.CreateHtmlTextWriter(w);
                 else
                     writer = new Html32TextWriter(w);
-                writer.Write("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n\r<html xmlns=\"http://www.w3.org/1999/xhtml\" >\n\r");
+                writer.Write(
+                    "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n\r<html xmlns=\"http://www.w3.org/1999/xhtml\" >\n\r"
+                );
                 writer.Write("<head>\r\n");
-                writer.Write("<style type=\"text/css\">\r\n body, span, table, td, th, div, caption {font-family: Tahoma, Arial, Helvetica, sans-serif;font-size: 10pt;} caption {background-color:Black; color: White; font-weight:bold; padding: 4px; text-align:left; } \r\n</style>\r\n");
+                writer.Write(
+                    "<style type=\"text/css\">\r\n body, span, table, td, th, div, caption {font-family: Tahoma, Arial, Helvetica, sans-serif;font-size: 10pt;} caption {background-color:Black; color: White; font-weight:bold; padding: 4px; text-align:left; } \r\n</style>\r\n"
+                );
                 writer.Write("</head>\r\n<body style=\"width:978px\">\r\n");
                 writer.Write("<h2>" + SR.DiagnosticHeader + "</h2>\r\n<hr/><br/>\n\r");
                 DiagnosticWriteSettings(writer);
@@ -540,7 +612,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     writer.Write(typeof(Chart).AssemblyQualifiedName);
                 }
-                catch ( SecurityException ) {}
+                catch (SecurityException) { }
                 writer.Write("</span></body>\r\n</html>\r\n");
                 context.Response.Write(w.ToString());
             }
@@ -548,8 +620,14 @@ namespace System.Web.UI.DataVisualization.Charting
 
         private static void DiagnosticWriteSettings(HtmlTextWriter writer)
         {
-            writer.Write("<h4>" + SR.DiagnosticSettingsConfig(WebConfigurationManager.AppSettings[ChartHttpHandlerAppSection]) + "</h4>");
-            GridView grid = CreateGridView( true);
+            writer.Write(
+                "<h4>"
+                    + SR.DiagnosticSettingsConfig(
+                        WebConfigurationManager.AppSettings[ChartHttpHandlerAppSection]
+                    )
+                    + "</h4>"
+            );
+            GridView grid = CreateGridView(true);
             grid.Caption = SR.DiagnosticSettingsHeader;
             BoundField field = new BoundField();
             field.DataField = "Key";
@@ -564,7 +642,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
             grid.Columns.Add(field);
             Dictionary<String, String> settings = new Dictionary<String, String>();
-            
+
             settings.Add("StorageType", Settings.StorageType.ToString());
             settings.Add("TimeOut", Settings.Timeout.ToString());
             if (Settings.StorageType == ChartHttpHandlerStorageType.File)
@@ -575,18 +653,26 @@ namespace System.Web.UI.DataVisualization.Charting
             settings.Add("PrivateImages", Settings.PrivateImages.ToString());
             settings.Add("ImageOwnerKey", Settings.ImageOwnerKey.ToString());
             settings.Add("CustomHandlerName", Settings.CustomHandlerName);
-            settings.Add(ChartHttpHandler.WebDevServerUseConfigSettings, String.Equals(Settings[ChartHttpHandler.WebDevServerUseConfigSettings], "true", StringComparison.OrdinalIgnoreCase).ToString());
+            settings.Add(
+                ChartHttpHandler.WebDevServerUseConfigSettings,
+                String
+                    .Equals(
+                        Settings[ChartHttpHandler.WebDevServerUseConfigSettings],
+                        "true",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                    .ToString()
+            );
 
             grid.DataSource = settings;
             grid.DataBind();
-            
+
             grid.RenderControl(writer);
-            
         }
 
         private static void DiagnosticWriteActivity(HtmlTextWriter writer)
         {
-            GridView grid = CreateGridView( true);
+            GridView grid = CreateGridView(true);
             grid.Caption = SR.DiagnosticActivityHeader;
             BoundField field = new BoundField();
             field.DataField = "DateStamp";
@@ -608,14 +694,14 @@ namespace System.Web.UI.DataVisualization.Charting
             grid.DataSource = Diagnostics.Messages;
             grid.DataBind();
             grid.RenderControl(writer);
-
         }
 
         static void DiagnosticActivityGrid_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Diagnostics.HandlerPageTraceInfo currentInfo = (Diagnostics.HandlerPageTraceInfo)e.Row.DataItem;
+                Diagnostics.HandlerPageTraceInfo currentInfo = (Diagnostics.HandlerPageTraceInfo)
+                    e.Row.DataItem;
                 TableCell cell = e.Row.Cells[1];
 
                 cell.Controls.Add(new Label() { Text = currentInfo.Verb + "," + currentInfo.Url });
@@ -624,7 +710,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 grid.Style[HtmlTextWriterStyle.MarginLeft] = "20px";
 
                 grid.ShowHeader = false;
-                
+
                 BoundField field = new BoundField();
                 field.DataField = "Text";
                 field.HeaderStyle.HorizontalAlign = HorizontalAlign.Left;
@@ -723,7 +809,6 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion
-
     }
 
     #region Enumerations
@@ -742,12 +827,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// File system
         /// </summary>
         File,
+
         /// <summary>
         /// Using session as storage
         /// </summary>
-        Session
-
+        Session,
     }
+
     /// <summary>
     /// Determines the image owner key for privacy protection.
     /// </summary>
@@ -757,22 +843,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// No privacy protection.
         /// </summary>
         None,
+
         /// <summary>
         /// The key will be automatically determined.
         /// </summary>
         Auto,
+
         /// <summary>
         /// The user name will be used as key.
         /// </summary>
         UserID,
+
         /// <summary>
         /// The AnonymousID will be used as key.
         /// </summary>
         AnonymousID,
+
         /// <summary>
         /// The SessionID will be used as key.
         /// </summary>
-        SessionID
+        SessionID,
     }
 
     #endregion
@@ -791,14 +881,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="data">Image data.</param>
         void Save(String key, Byte[] data);
 
-
         /// <summary>
         /// Loads the data from external medium.
         /// </summary>
         /// <param name="key">Index key.</param>
         /// <returns>A byte array with image data</returns>
         Byte[] Load(String key);
-
 
         /// <summary>
         /// Deletes the data from external medium.
@@ -822,16 +910,23 @@ namespace System.Web.UI.DataVisualization.Charting
     /// Enables access to the chart image storage settings.
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class ChartHttpHandlerSettings
     {
         #region Fields
 
         private StorageSettingsCollection _ssCollection = new StorageSettingsCollection();
-        
-        private string _sesionKey   = "chartKey-" + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
+
+        private string _sesionKey =
+            "chartKey-" + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
 
         #endregion //Fields
 
@@ -862,11 +957,15 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private String _url = "~/";
+
         /// <summary>
         /// Gets or sets the URL.
         /// </summary>
         /// <value>The URL.</value>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1056:UriPropertiesShouldNotBeStrings"
+        )]
         public String Url
         {
             get { return _url; }
@@ -874,6 +973,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private String _directory = String.Empty;
+
         /// <summary>
         /// Gets or sets the directory.
         /// </summary>
@@ -885,25 +985,34 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         private const String _folderKeyName = "{5FF3B636-70BA-4180-B7C5-FDD77D8FA525}";
+
         /// <summary>
         /// Gets or sets the folder which will be used for storing images under <see cref="Directory"/>.
         /// </summary>
         /// <value>The folder name.</value>
         public String FolderName
         {
-            get 
+            get
             {
-                if (HttpContext.Current != null && HttpContext.Current.Items.Contains(_folderKeyName))
+                if (
+                    HttpContext.Current != null
+                    && HttpContext.Current.Items.Contains(_folderKeyName)
+                )
                 {
                     return (string)HttpContext.Current.Items[_folderKeyName];
                 }
-                return String.Empty; 
+                return String.Empty;
             }
-            set 
-            { 
+            set
+            {
                 if (!String.IsNullOrEmpty(value))
                 {
-                    if (!(value.EndsWith("/", StringComparison.Ordinal) || value.EndsWith("\\", StringComparison.Ordinal)))
+                    if (
+                        !(
+                            value.EndsWith("/", StringComparison.Ordinal)
+                            || value.EndsWith("\\", StringComparison.Ordinal)
+                        )
+                    )
                     {
                         value += "\\";
                     }
@@ -922,17 +1031,18 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 FileInfo fi = new FileInfo(this.Directory + key);
                 Uri directory = new Uri(this.Directory);
-                Uri combinedDirectory = new Uri(fi.FullName); 
+                Uri combinedDirectory = new Uri(fi.FullName);
                 if (directory.IsBaseOf(combinedDirectory))
                 {
                     // it is fine.
                     return;
                 }
-                throw new UnauthorizedAccessException(SR.ExceptionHttpHandlerInvalidLocation);  
+                throw new UnauthorizedAccessException(SR.ExceptionHttpHandlerInvalidLocation);
             }
         }
 
         private String _customHandlerName = typeof(DefaultImageHandler).FullName;
+
         /// <summary>
         /// Gets or sets the name of the custom handler.
         /// </summary>
@@ -943,8 +1053,8 @@ namespace System.Web.UI.DataVisualization.Charting
             set { _customHandlerName = value; }
         }
 
-
         private Type _customHandlerType = null;
+
         /// <summary>
         /// Gets the type of the custom handler.
         /// </summary>
@@ -960,24 +1070,19 @@ namespace System.Web.UI.DataVisualization.Charting
                 return this._customHandlerType;
             }
         }
-        
+
         /// <summary>
         /// Gets a value indicating whether the handler will utilize private images.
         /// </summary>
         /// <value><c>true</c> if the handler will utilize private images; otherwise, <c>false</c>.</value>
         /// <remarks>
-        /// When PrivateImages is set the handler will not return images out of session scope and 
+        /// When PrivateImages is set the handler will not return images out of session scope and
         /// the client will not be able to download somebody else's images. This is default behavoiur.
         /// </remarks>
         public bool PrivateImages
         {
-            get
-            {
-                return ImageOwnerKey != ImageOwnerKeyType.None;
-            }
+            get { return ImageOwnerKey != ImageOwnerKeyType.None; }
         }
-
-
 
         /// <summary>
         /// Gets a settings parameter with the specified name registred in web.config file under ChartHttpHandler key.
@@ -985,12 +1090,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <value></value>
         public string this[string name]
         {
-            get
-            {
-                return this._ssCollection[name];
-            }
+            get { return this._ssCollection[name]; }
         }
-        
+
         #endregion //Properties
 
         #region Constructors
@@ -1006,7 +1108,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Initializes a new instance of the <see cref="T:ChartHttpHandlerParameters"/> class.
         /// </summary>
         /// <param name="parameters">The parameters.</param>
-        internal ChartHttpHandlerSettings(String parameters) : this()
+        internal ChartHttpHandlerSettings(String parameters)
+            : this()
         {
             this.ParseParams(parameters);
             this._ssCollection.SetReadOnly(true);
@@ -1018,6 +1121,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         private ConstructorInfo _handlerConstructor = null;
         IChartStorageHandler _storageHandler = null;
+
         /// <summary>
         /// Creates the handler instance.
         /// </summary>
@@ -1030,7 +1134,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     this.InspectHandlerLoader();
                 }
-                _storageHandler = this._handlerConstructor.Invoke(new object[0]) as IChartStorageHandler;
+                _storageHandler =
+                    this._handlerConstructor.Invoke(new object[0]) as IChartStorageHandler;
             }
             return _storageHandler;
         }
@@ -1044,14 +1149,21 @@ namespace System.Web.UI.DataVisualization.Charting
                 BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
                 null,
                 new Type[0],
-                new ParameterModifier[0]);
+                new ParameterModifier[0]
+            );
             if (this._handlerConstructor == null)
             {
-                throw new InvalidOperationException( SR.ExceptionHttpHandlerCanNotLoadType( this.HandlerType.FullName ));
+                throw new InvalidOperationException(
+                    SR.ExceptionHttpHandlerCanNotLoadType(this.HandlerType.FullName)
+                );
             }
             if (this.GetHandler() == null)
             {
-                throw new InvalidOperationException(SR.ExceptionHttpHandlerImageHandlerInterfaceUnsupported(ChartHttpHandler.Settings.HandlerType.FullName));
+                throw new InvalidOperationException(
+                    SR.ExceptionHttpHandlerImageHandlerInterfaceUnsupported(
+                        ChartHttpHandler.Settings.HandlerType.FullName
+                    )
+                );
             }
         }
 
@@ -1063,8 +1175,10 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             if (!String.IsNullOrEmpty(parameters))
             {
-
-                String[] pairs = parameters.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                String[] pairs = parameters.Split(
+                    new char[] { ';' },
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 for (int index = 0; index < pairs.Length; index++)
                 {
                     String item = pairs[index].Trim();
@@ -1076,7 +1190,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         this._ssCollection.Add(name, value);
                         if (name.StartsWith("stor", StringComparison.OrdinalIgnoreCase))
                         {
-                            if (value.StartsWith("inproc", StringComparison.OrdinalIgnoreCase) || value.StartsWith("memory", StringComparison.OrdinalIgnoreCase))
+                            if (
+                                value.StartsWith("inproc", StringComparison.OrdinalIgnoreCase)
+                                || value.StartsWith("memory", StringComparison.OrdinalIgnoreCase)
+                            )
                             {
                                 this.StorageType = ChartHttpHandlerStorageType.InProcess;
                             }
@@ -1084,13 +1201,17 @@ namespace System.Web.UI.DataVisualization.Charting
                             {
                                 this.StorageType = ChartHttpHandlerStorageType.File;
                             }
-                            else if (value.StartsWith("session", StringComparison.OrdinalIgnoreCase))
+                            else if (
+                                value.StartsWith("session", StringComparison.OrdinalIgnoreCase)
+                            )
                             {
                                 this.StorageType = ChartHttpHandlerStorageType.Session;
                             }
                             else
                             {
-                                throw new System.Configuration.SettingsPropertyWrongTypeException(SR.ExceptionHttpHandlerParameterUnknown(name, value));
+                                throw new System.Configuration.SettingsPropertyWrongTypeException(
+                                    SR.ExceptionHttpHandlerParameterUnknown(name, value)
+                                );
                             }
                         }
                         else if (name.StartsWith("url", StringComparison.OrdinalIgnoreCase))
@@ -1112,7 +1233,9 @@ namespace System.Web.UI.DataVisualization.Charting
                                 int seconds = Int32.Parse(value, CultureInfo.InvariantCulture);
                                 if (seconds < -1)
                                 {
-                                    throw new System.Configuration.SettingsPropertyWrongTypeException(SR.ExceptionHttpHandlerValueInvalid);
+                                    throw new System.Configuration.SettingsPropertyWrongTypeException(
+                                        SR.ExceptionHttpHandlerValueInvalid
+                                    );
                                 }
                                 if (seconds == -1)
                                 {
@@ -1125,14 +1248,19 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
                             catch (Exception exception)
                             {
-                                throw new System.Configuration.SettingsPropertyWrongTypeException(SR.ExceptionHttpHandlerTimeoutParameterInvalid, exception);
+                                throw new System.Configuration.SettingsPropertyWrongTypeException(
+                                    SR.ExceptionHttpHandlerTimeoutParameterInvalid,
+                                    exception
+                                );
                             }
                         }
                         else if (name.StartsWith("handler", StringComparison.OrdinalIgnoreCase))
                         {
                             this.CustomHandlerName = value;
                         }
-                        else if (name.StartsWith("privateImages", StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            name.StartsWith("privateImages", StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             bool privateImg = true;
                             if (Boolean.TryParse(value, out privateImg) && !privateImg)
@@ -1140,18 +1268,22 @@ namespace System.Web.UI.DataVisualization.Charting
                                 ImageOwnerKey = ImageOwnerKeyType.None;
                             }
                         }
-                        else if (name.StartsWith("imageOwnerKey", StringComparison.OrdinalIgnoreCase))
+                        else if (
+                            name.StartsWith("imageOwnerKey", StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             try
                             {
-                                ImageOwnerKey = (ImageOwnerKeyType)Enum.Parse(typeof(ImageOwnerKeyType), value, true);
+                                ImageOwnerKey = (ImageOwnerKeyType)
+                                    Enum.Parse(typeof(ImageOwnerKeyType), value, true);
                             }
                             catch (ArgumentException)
                             {
-                                throw new System.Configuration.SettingsPropertyWrongTypeException(SR.ExceptionHttpHandlerParameterInvalid(name, value));
+                                throw new System.Configuration.SettingsPropertyWrongTypeException(
+                                    SR.ExceptionHttpHandlerParameterInvalid(name, value)
+                                );
                             }
                         }
-
                     }
                 }
             }
@@ -1164,7 +1296,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>
         /// 	<c>true</c> if web dev server active; otherwise, <c>false</c>.
         /// </returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "GetCurrentProcess will fail if there is no access. This is by design. ")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "GetCurrentProcess will fail if there is no access. This is by design. "
+        )]
         // VSTS: 5176	Security annotation violations in System.Web.DataVisualization.dll
         [SecuritySafeCritical]
         private static bool IsWebDevActive()
@@ -1172,20 +1308,29 @@ namespace System.Web.UI.DataVisualization.Charting
             try
             {
                 Process process = Process.GetCurrentProcess();
-                if (process.ProcessName.StartsWith("WebDev.WebServer", StringComparison.OrdinalIgnoreCase))
+                if (
+                    process.ProcessName.StartsWith(
+                        "WebDev.WebServer",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
-                if (process.ProcessName.StartsWith("ii----press", StringComparison.OrdinalIgnoreCase))
+                if (
+                    process.ProcessName.StartsWith(
+                        "ii----press",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return true;
                 }
             }
-            catch (SecurityException)
-            {
-            }
+            catch (SecurityException) { }
             return false;
         }
+
         /// <summary>
         /// Inspects and validates this instance after loading params.
         /// </summary>
@@ -1199,7 +1344,16 @@ namespace System.Web.UI.DataVisualization.Charting
 
                 case ChartHttpHandlerStorageType.File:
 
-                    if (IsWebDevActive() && !( String.Compare(this[ChartHttpHandler.WebDevServerUseConfigSettings], "true", StringComparison.OrdinalIgnoreCase) == 0))
+                    if (
+                        IsWebDevActive()
+                        && !(
+                            String.Compare(
+                                this[ChartHttpHandler.WebDevServerUseConfigSettings],
+                                "true",
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
                     {
                         this.StorageType = ChartHttpHandlerStorageType.InProcess;
                         break;
@@ -1209,7 +1363,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         throw new ArgumentException(SR.ExceptionHttpHandlerUrlMissing);
                     }
-                    
+
                     String fileDirectory = this.Directory;
                     if (String.IsNullOrEmpty(fileDirectory))
                     {
@@ -1219,7 +1373,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         }
                         catch (Exception exception)
                         {
-                            throw new InvalidOperationException(SR.ExceptionHttpHandlerUrlInvalid, exception);
+                            throw new InvalidOperationException(
+                                SR.ExceptionHttpHandlerUrlInvalid,
+                                exception
+                            );
                         }
                     }
                     fileDirectory = fileDirectory.Replace("/", "\\");
@@ -1230,15 +1387,18 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     if (!System.IO.Directory.Exists(fileDirectory))
                     {
-                        throw new DirectoryNotFoundException(SR.ExceptionHttpHandlerTempDirectoryInvalid(fileDirectory));
+                        throw new DirectoryNotFoundException(
+                            SR.ExceptionHttpHandlerTempDirectoryInvalid(fileDirectory)
+                        );
                     }
                     Exception thrown = null;
                     try
                     {
-                        String testFileName = fileDirectory + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
+                        String testFileName =
+                            fileDirectory
+                            + Guid.NewGuid().ToString("N", CultureInfo.InvariantCulture);
                         using (FileStream fileStream = File.Create(testFileName)) { }
                         File.Delete(testFileName);
-
                     }
                     catch (DirectoryNotFoundException exception)
                     {
@@ -1259,13 +1419,13 @@ namespace System.Web.UI.DataVisualization.Charting
 
                     if (thrown != null)
                     {
-                        throw new UnauthorizedAccessException(SR.ExceptionHttpHandlerTempDirectoryUnaccesible(fileDirectory));
+                        throw new UnauthorizedAccessException(
+                            SR.ExceptionHttpHandlerTempDirectoryUnaccesible(fileDirectory)
+                        );
                     }
 
                     this.Directory = fileDirectory;
                     break;
-
-
             }
             if (!String.IsNullOrEmpty(this.CustomHandlerName))
             {
@@ -1279,7 +1439,8 @@ namespace System.Web.UI.DataVisualization.Charting
         internal void PrepareDesignTime()
         {
             this.StorageType = ChartHttpHandlerStorageType.File;
-            this.Timeout = TimeSpan.FromSeconds(3); ;
+            this.Timeout = TimeSpan.FromSeconds(3);
+            ;
             this.Url = Path.GetTempPath();
             this.Directory = Path.GetTempPath();
         }
@@ -1301,12 +1462,12 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             return String.Empty;
         }
-        
-        internal string GetPrivacyKey( out ImageOwnerKeyType keyType )
+
+        internal string GetPrivacyKey(out ImageOwnerKeyType keyType)
         {
             if (ImageOwnerKey == ImageOwnerKeyType.None)
             {
-                keyType = ImageOwnerKeyType.None;                
+                keyType = ImageOwnerKeyType.None;
                 return String.Empty;
             }
             if (HttpContext.Current != null)
@@ -1325,13 +1486,20 @@ namespace System.Web.UI.DataVisualization.Charting
                             return HttpContext.Current.Request.AnonymousID;
                         }
                         string sessionId = ReadSessionKey();
-                        keyType = String.IsNullOrEmpty(sessionId) ? ImageOwnerKeyType.None : ImageOwnerKeyType.SessionID;
+                        keyType = String.IsNullOrEmpty(sessionId)
+                            ? ImageOwnerKeyType.None
+                            : ImageOwnerKeyType.SessionID;
                         return sessionId;
 
                     case ImageOwnerKeyType.UserID:
                         if (!HttpContext.Current.User.Identity.IsAuthenticated)
                         {
-                            throw new InvalidOperationException(SR.ExceptionHttpHandlerPrivacyKeyInvalid("ImageOwnerKey", ImageOwnerKey.ToString()));
+                            throw new InvalidOperationException(
+                                SR.ExceptionHttpHandlerPrivacyKeyInvalid(
+                                    "ImageOwnerKey",
+                                    ImageOwnerKey.ToString()
+                                )
+                            );
                         }
                         keyType = ImageOwnerKeyType.UserID;
                         return HttpContext.Current.User.Identity.Name;
@@ -1339,7 +1507,12 @@ namespace System.Web.UI.DataVisualization.Charting
                     case ImageOwnerKeyType.AnonymousID:
                         if (String.IsNullOrEmpty(HttpContext.Current.Request.AnonymousID))
                         {
-                            throw new InvalidOperationException(SR.ExceptionHttpHandlerPrivacyKeyInvalid("ImageOwnerKey", ImageOwnerKey.ToString()));
+                            throw new InvalidOperationException(
+                                SR.ExceptionHttpHandlerPrivacyKeyInvalid(
+                                    "ImageOwnerKey",
+                                    ImageOwnerKey.ToString()
+                                )
+                            );
                         }
                         keyType = ImageOwnerKeyType.AnonymousID;
                         return HttpContext.Current.Request.AnonymousID;
@@ -1347,7 +1520,12 @@ namespace System.Web.UI.DataVisualization.Charting
                     case ImageOwnerKeyType.SessionID:
                         if (HttpContext.Current.Session == null)
                         {
-                            throw new InvalidOperationException(SR.ExceptionHttpHandlerPrivacyKeyInvalid("ImageOwnerKey", ImageOwnerKey.ToString()));
+                            throw new InvalidOperationException(
+                                SR.ExceptionHttpHandlerPrivacyKeyInvalid(
+                                    "ImageOwnerKey",
+                                    ImageOwnerKey.ToString()
+                                )
+                            );
                         }
                         keyType = ImageOwnerKeyType.SessionID;
                         return ReadSessionKey();
@@ -1375,7 +1553,13 @@ namespace System.Web.UI.DataVisualization.Charting
             get
             {
                 // default, if is missing in config,  is true.
-                return !(String.Compare(this["DeleteAfterServicing"], "false", StringComparison.OrdinalIgnoreCase) == 0); 
+                return !(
+                    String.Compare(
+                        this["DeleteAfterServicing"],
+                        "false",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                );
             }
         }
 
@@ -1392,9 +1576,8 @@ namespace System.Web.UI.DataVisualization.Charting
         private class StorageSettingsCollection : NameValueCollection
         {
             public StorageSettingsCollection()
-                : base(StringComparer.OrdinalIgnoreCase)
-            {
-            }
+                : base(StringComparer.OrdinalIgnoreCase) { }
+
             internal void SetReadOnly(bool flag)
             {
                 this.IsReadOnly = flag;
@@ -1413,12 +1596,13 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal class DefaultImageHandler : IChartStorageHandler
     {
-
         #region Fields
         // Hashtable for storage
         private static Hashtable _storageData = new Hashtable();
+
         // lock object
         private static ReaderWriterLock _rwl = new ReaderWriterLock();
+
         // max access timeout
         private const int accessTimeout = 10000;
 
@@ -1433,9 +1617,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Initializes a new instance of the <see cref="T:DefaultImageHandler"/> class.
         /// </summary>
-        internal DefaultImageHandler()
-        {
-        }
+        internal DefaultImageHandler() { }
         #endregion //Constructors
 
         #region Members
@@ -1445,7 +1627,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="settings">The settings.</param>
         private void NotSupportedStorageType(ChartHttpHandlerSettings settings)
         {
-            throw new NotSupportedException( SR.ExceptionHttpHandlerStorageTypeUnsupported( settings.StorageType.ToString() ));
+            throw new NotSupportedException(
+                SR.ExceptionHttpHandlerStorageTypeUnsupported(settings.StorageType.ToString())
+            );
         }
 
         #endregion //Members
@@ -1458,29 +1642,30 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns>A byte array of hash data</returns>
         private static byte[] GetHashData()
         {
-                string currentGuid = ChartHttpHandler.CurrentGuidKey;
-                string sessionID = ChartHttpHandler.Settings.PrivacyKey;
+            string currentGuid = ChartHttpHandler.CurrentGuidKey;
+            string sessionID = ChartHttpHandler.Settings.PrivacyKey;
 
-                if (String.IsNullOrEmpty(sessionID))
-                {
-                    return new byte[0];
-                }
+            if (String.IsNullOrEmpty(sessionID))
+            {
+                return new byte[0];
+            }
 
-                byte[] data = Encoding.UTF8.GetBytes(sessionID + "/" + currentGuid);
+            byte[] data = Encoding.UTF8.GetBytes(sessionID + "/" + currentGuid);
 
-                using (SHA1 sha = new SHA1CryptoServiceProvider())
-                {
-                    return sha.ComputeHash(data);
-                }
-
+            using (SHA1 sha = new SHA1CryptoServiceProvider())
+            {
+                return sha.ComputeHash(data);
+            }
         }
 
         private static bool CompareBytes(byte[] a, byte[] b)
         {
-            if (a.Length != b.Length)  return false;
+            if (a.Length != b.Length)
+                return false;
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i] != b[i]) return false;
+                if (a[i] != b[i])
+                    return false;
             }
             return true;
         }
@@ -1514,7 +1699,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     if (settings.PrivateImages && !String.IsNullOrEmpty(privacyKey))
                     {
                         _storageData[key + _privacyKeyName] = privacyKey;
-                        Diagnostics.TraceWrite( SR.DiagnosticChartImageSavedPrivate(key, imageOwnerKeyType.ToString()), null);
+                        Diagnostics.TraceWrite(
+                            SR.DiagnosticChartImageSavedPrivate(key, imageOwnerKeyType.ToString()),
+                            null
+                        );
                     }
                     else
                         Diagnostics.TraceWrite(SR.DiagnosticChartImageSaved(key), null);
@@ -1535,7 +1723,10 @@ namespace System.Web.UI.DataVisualization.Charting
                         stream.Write(privacyData, 0, privacyData.Length);
                         // we will put a marker at the end of the file;
                         stream.Write(_privacyMarker, 0, _privacyMarker.Length);
-                        Diagnostics.TraceWrite(SR.DiagnosticChartImageSavedPrivate(key, imageOwnerKeyType.ToString()), null);
+                        Diagnostics.TraceWrite(
+                            SR.DiagnosticChartImageSavedPrivate(key, imageOwnerKeyType.ToString()),
+                            null
+                        );
                     }
                     else
                         Diagnostics.TraceWrite(SR.DiagnosticChartImageSaved(key), null);
@@ -1546,15 +1737,15 @@ namespace System.Web.UI.DataVisualization.Charting
                 HttpContext.Current.Session[GetSessionImageKey(key)] = data;
                 Diagnostics.TraceWrite(SR.DiagnosticChartImageSaved(key), null);
             }
-            else this.NotSupportedStorageType(settings);
+            else
+                this.NotSupportedStorageType(settings);
         }
-
 
         /// <summary>
         /// Retrieves the data from external medium.
         /// </summary>
         /// <param name="key">The key.</param>
-        Byte[] IChartStorageHandler.Load( String key)
+        Byte[] IChartStorageHandler.Load(String key)
         {
             ChartHttpHandlerSettings settings = ChartHttpHandler.Settings;
             ImageOwnerKeyType imageOwnerKeyType = ImageOwnerKeyType.None;
@@ -1562,38 +1753,66 @@ namespace System.Web.UI.DataVisualization.Charting
             Byte[] data = new Byte[0];
             if (settings.StorageType == ChartHttpHandlerStorageType.InProcess)
             {
-                 _rwl.AcquireReaderLock(accessTimeout);
-                 try
-                 {
-                     if (settings.PrivateImages)
-                     {
-                         if (!String.IsNullOrEmpty(privacyKey))
-                         {
-                             if (!String.Equals((string)_storageData[key + _privacyKeyName], privacyKey, StringComparison.Ordinal))
-                             {
-                                 Diagnostics.TraceWrite(SR.DiagnosticChartImageServedFail(key, SR.DiagnosticChartImageServedFailPrivacyFail(imageOwnerKeyType.ToString())), null);
-                                 return data;
-                             }
-                         }
-                         else
-                         {
-                             if (!String.IsNullOrEmpty((string)_storageData[key + _privacyKeyName]))
-                             {
-                                 Diagnostics.TraceWrite(SR.DiagnosticChartImageServedFail(key, SR.DiagnosticChartImageServedFailPrivacyFail(imageOwnerKeyType.ToString())), null);
-                                 return data;
-                             }
-                         }
-                     }
-                     data = (Byte[])_storageData[key];
-                     if (data == null)
-                     {
-                         Diagnostics.TraceWrite(SR.DiagnosticChartImageServedFail(key, SR.DiagnosticChartImageServedFailNotFound), null);
-                     }
-                 }
-                 finally
-                 {
-                     _rwl.ReleaseReaderLock();
-                 }
+                _rwl.AcquireReaderLock(accessTimeout);
+                try
+                {
+                    if (settings.PrivateImages)
+                    {
+                        if (!String.IsNullOrEmpty(privacyKey))
+                        {
+                            if (
+                                !String.Equals(
+                                    (string)_storageData[key + _privacyKeyName],
+                                    privacyKey,
+                                    StringComparison.Ordinal
+                                )
+                            )
+                            {
+                                Diagnostics.TraceWrite(
+                                    SR.DiagnosticChartImageServedFail(
+                                        key,
+                                        SR.DiagnosticChartImageServedFailPrivacyFail(
+                                            imageOwnerKeyType.ToString()
+                                        )
+                                    ),
+                                    null
+                                );
+                                return data;
+                            }
+                        }
+                        else
+                        {
+                            if (!String.IsNullOrEmpty((string)_storageData[key + _privacyKeyName]))
+                            {
+                                Diagnostics.TraceWrite(
+                                    SR.DiagnosticChartImageServedFail(
+                                        key,
+                                        SR.DiagnosticChartImageServedFailPrivacyFail(
+                                            imageOwnerKeyType.ToString()
+                                        )
+                                    ),
+                                    null
+                                );
+                                return data;
+                            }
+                        }
+                    }
+                    data = (Byte[])_storageData[key];
+                    if (data == null)
+                    {
+                        Diagnostics.TraceWrite(
+                            SR.DiagnosticChartImageServedFail(
+                                key,
+                                SR.DiagnosticChartImageServedFailNotFound
+                            ),
+                            null
+                        );
+                    }
+                }
+                finally
+                {
+                    _rwl.ReleaseReaderLock();
+                }
             }
             else if (settings.StorageType == ChartHttpHandlerStorageType.File)
             {
@@ -1622,23 +1841,46 @@ namespace System.Web.UI.DataVisualization.Charting
                                     streamCut += privacyData.Length;
                                     byte[] privacyDataFromStream = new Byte[privacyData.Length];
                                     stream.Seek(stream.Length - streamCut, SeekOrigin.Begin);
-                                    stream.Read(privacyDataFromStream, 0, privacyDataFromStream.Length);
+                                    stream.Read(
+                                        privacyDataFromStream,
+                                        0,
+                                        privacyDataFromStream.Length
+                                    );
 
                                     if (!CompareBytes(privacyDataFromStream, privacyData))
                                     {
-                                        Diagnostics.TraceWrite(SR.DiagnosticChartImageServedFail(key, SR.DiagnosticChartImageServedFailPrivacyFail(imageOwnerKeyType.ToString())), null);
+                                        Diagnostics.TraceWrite(
+                                            SR.DiagnosticChartImageServedFail(
+                                                key,
+                                                SR.DiagnosticChartImageServedFailPrivacyFail(
+                                                    imageOwnerKeyType.ToString()
+                                                )
+                                            ),
+                                            null
+                                        );
                                         return data;
                                     }
                                 }
                                 else
                                 {
                                     // this image is marked as private - check end return null if fails
-                                    if (String.Equals(
-                                        Encoding.Unicode.GetString(privacyMarkerStream),
-                                        Encoding.Unicode.GetString(_privacyMarker),
-                                        StringComparison.Ordinal))
+                                    if (
+                                        String.Equals(
+                                            Encoding.Unicode.GetString(privacyMarkerStream),
+                                            Encoding.Unicode.GetString(_privacyMarker),
+                                            StringComparison.Ordinal
+                                        )
+                                    )
                                     {
-                                        Diagnostics.TraceWrite(SR.DiagnosticChartImageServedFail(key, SR.DiagnosticChartImageServedFailPrivacyFail(imageOwnerKeyType.ToString())), null);
+                                        Diagnostics.TraceWrite(
+                                            SR.DiagnosticChartImageServedFail(
+                                                key,
+                                                SR.DiagnosticChartImageServedFailPrivacyFail(
+                                                    imageOwnerKeyType.ToString()
+                                                )
+                                            ),
+                                            null
+                                        );
                                         return data;
                                     }
                                     // its fine ( no user is stored )
@@ -1652,17 +1894,22 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                 }
                 else
-                    Diagnostics.TraceWrite(SR.DiagnosticChartImageServedFail(key, SR.DiagnosticChartImageServedFailNotFound), null);
+                    Diagnostics.TraceWrite(
+                        SR.DiagnosticChartImageServedFail(
+                            key,
+                            SR.DiagnosticChartImageServedFailNotFound
+                        ),
+                        null
+                    );
             }
             else if (settings.StorageType == ChartHttpHandlerStorageType.Session)
             {
                 data = (Byte[])HttpContext.Current.Session[GetSessionImageKey(key)];
             }
-            else this.NotSupportedStorageType(settings);
+            else
+                this.NotSupportedStorageType(settings);
             return data;
-
         }
-
 
         /// <summary>
         /// Removes the data from external medium.
@@ -1673,7 +1920,6 @@ namespace System.Web.UI.DataVisualization.Charting
             ChartHttpHandlerSettings settings = ChartHttpHandler.Settings;
             if (settings.StorageType == ChartHttpHandlerStorageType.InProcess)
             {
-
                 _rwl.AcquireWriterLock(accessTimeout);
                 try
                 {
@@ -1693,7 +1939,8 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 HttpContext.Current.Session.Remove(GetSessionImageKey(key));
             }
-            else this.NotSupportedStorageType(settings);
+            else
+                this.NotSupportedStorageType(settings);
         }
 
         /// <summary>
@@ -1724,12 +1971,12 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 return HttpContext.Current.Session[GetSessionImageKey(key)] is Byte[];
             }
-            else this.NotSupportedStorageType(settings);
+            else
+                this.NotSupportedStorageType(settings);
             return false;
         }
 
         #endregion
-
     }
 
     #endregion //DefaultImageHandler Class
@@ -1743,19 +1990,21 @@ namespace System.Web.UI.DataVisualization.Charting
     {
         internal Int32 Index;
         internal DateTime Created = DateTime.Now;
-        internal string   SessionID = String.Empty;
+        internal string SessionID = String.Empty;
         internal bool InUse;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:RingItem"/> class.
         /// </summary>
         /// <param name="index">The index.</param>
-        internal RingItem( int index)
+        internal RingItem(int index)
         {
             this.Index = index;
         }
     }
+
     /// <summary>
-    /// RingTimeTracker is a helper class for generating keys and tracking RingItem. 
+    /// RingTimeTracker is a helper class for generating keys and tracking RingItem.
     /// Contains linked list queue and tracks exprired items.
     /// </summary>
     internal class RingTimeTracker
@@ -1763,12 +2012,16 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Fields
         // the item life span
         private TimeSpan _itemLifeTime = TimeSpan.FromSeconds(360);
+
         // last requested RingItem
         private LinkedListNode<RingItem> _current;
+
         // default key format to format names
         private String _keyFormat = String.Empty;
+
         // LinkedList with ring items
         private LinkedList<RingItem> _list = new LinkedList<RingItem>();
+
         // Record session ID
         private bool _recordSessionID = false;
 
@@ -1789,7 +2042,8 @@ namespace System.Web.UI.DataVisualization.Charting
             this._keyFormat = keyFormat;
             this._list.AddLast(new RingItem(_list.Count));
             this._current = this._list.First;
-            this._current.Value.Created = DateTime.Now - this._itemLifeTime - TimeSpan.FromSeconds(1);
+            this._current.Value.Created =
+                DateTime.Now - this._itemLifeTime - TimeSpan.FromSeconds(1);
             this._recordSessionID = recordSessionID;
         }
 
@@ -1797,7 +2051,6 @@ namespace System.Web.UI.DataVisualization.Charting
 
         #region Methods
 
-        
 
         /// <summary>
         /// Determines whether the specified item is expired.
@@ -1813,7 +2066,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return elapsed > this._itemLifeTime;
         }
 
-
         /// <summary>
         /// Gets the next key.
         /// </summary>
@@ -1823,7 +2075,7 @@ namespace System.Web.UI.DataVisualization.Charting
             DateTime now = DateTime.Now;
             lock (this)
             {
-                if ( !this.IsExpired(this._current.Value, now))
+                if (!this.IsExpired(this._current.Value, now))
                 {
                     if (this._current.Next == null)
                     {
@@ -1862,7 +2114,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <returns></returns>
         internal String GetCurrentKey()
         {
-            return String.Format( CultureInfo.InvariantCulture, this._keyFormat, this._current.Value.Index);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                this._keyFormat,
+                this._current.Value.Index
+            );
         }
 
         /// <summary>
@@ -1907,7 +2163,6 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         #endregion //Methods
-
     }
     #endregion //RingTracker class
 
@@ -1918,7 +2173,6 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     internal static class RingTimeTrackerFactory
     {
-        
         private static ListDictionary _ringTrackers = new ListDictionary();
         private static Object _lockObject = new Object();
 
@@ -1939,7 +2193,11 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     return (RingTimeTracker)_ringTrackers[keyFormat];
                 }
-                RingTimeTracker result = new RingTimeTracker(ChartHttpHandler.Settings.Timeout, keyFormat,ChartHttpHandler.Settings.StorageType == ChartHttpHandlerStorageType.Session);
+                RingTimeTracker result = new RingTimeTracker(
+                    ChartHttpHandler.Settings.Timeout,
+                    keyFormat,
+                    ChartHttpHandler.Settings.StorageType == ChartHttpHandlerStorageType.Session
+                );
                 _ringTrackers.Add(keyFormat, result);
                 return result;
             }
@@ -1952,7 +2210,6 @@ namespace System.Web.UI.DataVisualization.Charting
                 return new ArrayList(_ringTrackers.Values);
             }
         }
-        
     }
 
     #endregion  //RingTimeTrackerFactory Class
@@ -1968,18 +2225,22 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Trace category
         /// </summary>
         const string ChartCategory = "chart.handler";
+
         /// <summary>
-        /// Name of context item which contain the current trace item 
+        /// Name of context item which contain the current trace item
         /// </summary>
         const string ContextID = "Trace-{89FA5660-BD13-4f1b-8C7C-355CEC92CC7E}";
+
         /// <summary>
         /// Used for syncronizing.
         /// </summary>
         static object _lockObject = new object();
+
         /// <summary>
         /// Limit of trace messages in the history.
         /// </summary>
         const int MessageLimit = 20;
+
         /// <summary>
         /// Collection of request messages.
         /// </summary>
@@ -1994,6 +2255,7 @@ namespace System.Web.UI.DataVisualization.Charting
             /// Events collection in this request.
             /// </summary>
             private List<ChartHandlerEvents> _events = new List<ChartHandlerEvents>();
+
             /// <summary>
             /// Initializes a new instance of the <see cref="HandlerPageTraceInfo"/> class.
             /// </summary>
@@ -2009,32 +2271,34 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                 }
             }
+
             /// <summary>
             /// Gets or sets the date stamp.
             /// </summary>
             /// <value>The date stamp.</value>
             public DateTime DateStamp { get; private set; }
+
             /// <summary>
             /// Gets or sets the URL.
             /// </summary>
             /// <value>The URL.</value>
             public string Url { get; private set; }
+
             /// <summary>
             /// Gets or sets the verb.
             /// </summary>
             /// <value>The verb.</value>
             public string Verb { get; private set; }
+
             /// <summary>
             /// Gets the events.
             /// </summary>
             /// <value>The events.</value>
             public IList<ChartHandlerEvents> Events
             {
-                get
-                {
-                    return _events.AsReadOnly();
-                }
+                get { return _events.AsReadOnly(); }
             }
+
             /// <summary>
             /// Adds a trace info item.
             /// </summary>
@@ -2044,12 +2308,9 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 lock (_events)
                 {
-                    _events.Add(new ChartHandlerEvents()
-                        {
-                            Message = message,
-                            ErrorInfo = errorInfo
-                        }
-                     );
+                    _events.Add(
+                        new ChartHandlerEvents() { Message = message, ErrorInfo = errorInfo }
+                    );
                 }
             }
         }
@@ -2064,16 +2325,21 @@ namespace System.Web.UI.DataVisualization.Charting
             /// </summary>
             /// <value>The message.</value>
             public string Message { get; set; }
+
             /// <summary>
             /// Gets or sets the error info.
             /// </summary>
             /// <value>The error info.</value>
             public string ErrorInfo { get; set; }
+
             /// <summary>
             /// Gets the text.
             /// </summary>
             /// <value>The text.</value>
-            public string Text { get { return Message + ErrorInfo; } }
+            public string Text
+            {
+                get { return Message + ErrorInfo; }
+            }
         }
 
         /// <summary>
@@ -2081,14 +2347,17 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="message">The message.</param>
         /// <param name="errorInfo">The error info.</param>
-        internal static void TraceWrite( string message, Exception errorInfo)
+        internal static void TraceWrite(string message, Exception errorInfo)
         {
             if (IsTraceEnabled)
             {
                 HttpContext.Current.Trace.Write(ChartCategory, message, errorInfo);
                 if (CurrentTraceInfo != null)
                 {
-                    CurrentTraceInfo.AddTraceInfo(message, errorInfo != null ? errorInfo.ToString() : String.Empty);
+                    CurrentTraceInfo.AddTraceInfo(
+                        message,
+                        errorInfo != null ? errorInfo.ToString() : String.Empty
+                    );
                 }
             }
         }
@@ -2115,7 +2384,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
                             HttpContext.Current.Items[Diagnostics.ContextID] = pageTrace;
                         }
-                        return (HandlerPageTraceInfo)HttpContext.Current.Items[Diagnostics.ContextID];
+                        return (HandlerPageTraceInfo)
+                            HttpContext.Current.Items[Diagnostics.ContextID];
                     }
                 }
                 return null;
@@ -2130,10 +2400,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </value>
         internal static bool IsTraceEnabled
         {
-            get
-            {
-                return HttpContext.Current != null && HttpContext.Current.Trace.IsEnabled;
-            }
+            get { return HttpContext.Current != null && HttpContext.Current.Trace.IsEnabled; }
         }
 
         /// <summary>

@@ -9,7 +9,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     internal sealed class RazorDocumentPropertiesServiceWrapper : DocumentPropertiesService
     {
-        public RazorDocumentPropertiesServiceWrapper(IRazorDocumentPropertiesService razorDocumentPropertiesService)
+        public RazorDocumentPropertiesServiceWrapper(
+            IRazorDocumentPropertiesService razorDocumentPropertiesService
+        )
         {
             DiagnosticsLspClientName = razorDocumentPropertiesService.DiagnosticsLspClientName;
         }

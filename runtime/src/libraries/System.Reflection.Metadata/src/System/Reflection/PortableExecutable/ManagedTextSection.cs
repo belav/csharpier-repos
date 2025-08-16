@@ -69,7 +69,8 @@ namespace System.Reflection.PortableExecutable
             int resourceDataSize,
             int strongNameSignatureSize,
             int debugDataSize,
-            int mappedFieldDataSize)
+            int mappedFieldDataSize
+        )
         {
             MetadataSize = metadataSize;
             ResourceDataSize = resourceDataSize;
@@ -90,32 +91,42 @@ namespace System.Reflection.PortableExecutable
         /// If set, the module contains instructions that assume a 64 bit instruction set. For example it may depend on an address being 64 bits.
         /// This may be true even if the module contains only IL instructions because of PlatformInvoke and COM interop.
         /// </summary>
-        internal bool Requires64bits => Machine == Machine.Amd64 || Machine == Machine.IA64 || Machine == Machine.Arm64;
+        internal bool Requires64bits =>
+            Machine == Machine.Amd64 || Machine == Machine.IA64 || Machine == Machine.Arm64;
 
         public bool Is32Bit => !Requires64bits;
 
         public const int ManagedResourcesDataAlignment = 8;
 
         private static ReadOnlySpan<byte> CorEntryPointDll => "mscoree.dll"u8;
-        private ReadOnlySpan<byte> CorEntryPointName => (ImageCharacteristics & Characteristics.Dll) != 0 ? "_CorDllMain"u8 : "_CorExeMain"u8;
+        private ReadOnlySpan<byte> CorEntryPointName =>
+            (ImageCharacteristics & Characteristics.Dll) != 0 ? "_CorDllMain"u8 : "_CorExeMain"u8;
 
-        private int SizeOfImportAddressTable => RequiresStartupStub ? (Is32Bit ? 2 * sizeof(uint) : 2 * sizeof(ulong)) : 0;
+        private int SizeOfImportAddressTable =>
+            RequiresStartupStub ? (Is32Bit ? 2 * sizeof(uint) : 2 * sizeof(ulong)) : 0;
 
         // (_is32bit ? 66 : 70);
         private int SizeOfImportTable =>
-            sizeof(uint) + // RVA
-            sizeof(uint) + // 0
-            sizeof(uint) + // 0
-            sizeof(uint) + // name RVA
-            sizeof(uint) + // import address table RVA
-            20 +           // ?
-            (Is32Bit ? 3 * sizeof(uint) : 2 * sizeof(ulong)) + // import lookup table
-            sizeof(ushort) + // hint
-            CorEntryPointName.Length +
-            1;    // NUL
+            sizeof(uint)
+            + // RVA
+            sizeof(uint)
+            + // 0
+            sizeof(uint)
+            + // 0
+            sizeof(uint)
+            + // name RVA
+            sizeof(uint)
+            + // import address table RVA
+            20
+            + // ?
+            (Is32Bit ? 3 * sizeof(uint) : 2 * sizeof(ulong))
+            + // import lookup table
+            sizeof(ushort)
+            + // hint
+            CorEntryPointName.Length
+            + 1; // NUL
 
-        private static int SizeOfNameTable =>
-            CorEntryPointDll.Length + 1 + sizeof(ushort);
+        private static int SizeOfNameTable => CorEntryPointDll.Length + 1 + sizeof(ushort);
 
         private int SizeOfRuntimeStartupStub => Is32Bit ? 8 : 16;
 
@@ -137,12 +148,12 @@ namespace System.Reflection.PortableExecutable
 
         public int CalculateOffsetToMappedFieldDataStream()
         {
-             int result = CalculateOffsetToMappedFieldDataStreamUnaligned();
-             if (MappedFieldDataSize != 0)
-             {
-                 result = BitArithmetic.Align(result, MappedFieldDataAlignment);
-             }
-             return result;
+            int result = CalculateOffsetToMappedFieldDataStreamUnaligned();
+            if (MappedFieldDataSize != 0)
+            {
+                result = BitArithmetic.Align(result, MappedFieldDataAlignment);
+            }
+            return result;
         }
 
         internal int ComputeOffsetToDebugDirectory()
@@ -150,33 +161,41 @@ namespace System.Reflection.PortableExecutable
             Debug.Assert(MetadataSize % 4 == 0);
             Debug.Assert(ResourceDataSize % 4 == 0);
 
-            return
-                ComputeOffsetToMetadata() +
-                MetadataSize +
-                ResourceDataSize +
-                StrongNameSignatureSize;
+            return ComputeOffsetToMetadata()
+                + MetadataSize
+                + ResourceDataSize
+                + StrongNameSignatureSize;
         }
 
         private int ComputeOffsetToImportTable()
         {
-            return
-                ComputeOffsetToDebugDirectory() +
-                DebugDataSize;
+            return ComputeOffsetToDebugDirectory() + DebugDataSize;
         }
 
         private const int CorHeaderSize =
-            sizeof(int) +    // header size
-            sizeof(short) +  // major runtime version
-            sizeof(short) +  // minor runtime version
-            sizeof(long) +   // metadata directory
-            sizeof(int) +    // COR flags
-            sizeof(int) +    // entry point
-            sizeof(long) +   // resources directory
-            sizeof(long) +   // strong name signature directory
-            sizeof(long) +   // code manager table directory
-            sizeof(long) +   // vtable fixups directory
-            sizeof(long) +   // export address table jumps directory
-            sizeof(long);   // managed-native header directory
+            sizeof(int)
+            + // header size
+            sizeof(short)
+            + // major runtime version
+            sizeof(short)
+            + // minor runtime version
+            sizeof(long)
+            + // metadata directory
+            sizeof(int)
+            + // COR flags
+            sizeof(int)
+            + // entry point
+            sizeof(long)
+            + // resources directory
+            sizeof(long)
+            + // strong name signature directory
+            sizeof(long)
+            + // code manager table directory
+            sizeof(long)
+            + // vtable fixups directory
+            sizeof(long)
+            + // export address table jumps directory
+            sizeof(long); // managed-native header directory
 
         public int OffsetToILStream => SizeOfImportAddressTable + CorHeaderSize;
 
@@ -194,24 +213,24 @@ namespace System.Reflection.PortableExecutable
         public int GetEntryPointAddress(int rva)
         {
             // TODO: constants
-            return RequiresStartupStub ?
-                rva + CalculateOffsetToMappedFieldDataStreamUnaligned() - (Is32Bit ? 6 : 10) :
-                0;
+            return RequiresStartupStub
+                ? rva + CalculateOffsetToMappedFieldDataStreamUnaligned() - (Is32Bit ? 6 : 10)
+                : 0;
         }
 
         public DirectoryEntry GetImportAddressTableDirectoryEntry(int rva)
         {
-            return RequiresStartupStub ?
-                new DirectoryEntry(rva, SizeOfImportAddressTable) :
-                default(DirectoryEntry);
+            return RequiresStartupStub
+                ? new DirectoryEntry(rva, SizeOfImportAddressTable)
+                : default(DirectoryEntry);
         }
 
         public DirectoryEntry GetImportTableDirectoryEntry(int rva)
         {
             // TODO: constants
-            return RequiresStartupStub ?
-                new DirectoryEntry(rva + ComputeOffsetToImportTable(), (Is32Bit ? 66 : 70) + 13) :
-                default(DirectoryEntry);
+            return RequiresStartupStub
+                ? new DirectoryEntry(rva + ComputeOffsetToImportTable(), (Is32Bit ? 66 : 70) + 13)
+                : default(DirectoryEntry);
         }
 
         public DirectoryEntry GetCorHeaderDirectoryEntry(int rva)
@@ -246,7 +265,8 @@ namespace System.Reflection.PortableExecutable
             BlobBuilder? mappedFieldDataBuilderOpt,
             BlobBuilder? resourceBuilderOpt,
             BlobBuilder? debugDataBuilderOpt,
-            out Blob strongNameSignature)
+            out Blob strongNameSignature
+        )
         {
             Debug.Assert(builder.Count == 0);
             Debug.Assert(metadataBuilder.Count == MetadataSize);
@@ -257,15 +277,24 @@ namespace System.Reflection.PortableExecutable
             Debug.Assert((resourceBuilderOpt?.Count ?? 0) % 4 == 0);
 
             // TODO: avoid recalculation
-            int importTableRva = GetImportTableDirectoryEntry(relativeVirtualAddess).RelativeVirtualAddress;
-            int importAddressTableRva = GetImportAddressTableDirectoryEntry(relativeVirtualAddess).RelativeVirtualAddress;
+            int importTableRva = GetImportTableDirectoryEntry(
+                relativeVirtualAddess
+            ).RelativeVirtualAddress;
+            int importAddressTableRva = GetImportAddressTableDirectoryEntry(
+                relativeVirtualAddess
+            ).RelativeVirtualAddress;
 
             if (RequiresStartupStub)
             {
                 WriteImportAddressTable(builder, importTableRva);
             }
 
-            WriteCorHeader(builder, relativeVirtualAddess, entryPointTokenOrRelativeVirtualAddress, corFlags);
+            WriteCorHeader(
+                builder,
+                relativeVirtualAddess,
+                entryPointTokenOrRelativeVirtualAddress,
+                corFlags
+            );
 
             // IL:
             ilBuilder.Align(4);
@@ -333,7 +362,11 @@ namespace System.Reflection.PortableExecutable
             Debug.Assert(builder.Count - start == SizeOfImportAddressTable);
         }
 
-        private void WriteImportTable(BlobBuilder builder, int importTableRva, int importAddressTableRva)
+        private void WriteImportTable(
+            BlobBuilder builder,
+            int importTableRva,
+            int importAddressTableRva
+        )
         {
             int start = builder.Count;
 
@@ -380,7 +413,12 @@ namespace System.Reflection.PortableExecutable
             Debug.Assert(builder.Count - start == SizeOfNameTable);
         }
 
-        private void WriteCorHeader(BlobBuilder builder, int textSectionRva, int entryPointTokenOrRva, CorFlags corFlags)
+        private void WriteCorHeader(
+            BlobBuilder builder,
+            int textSectionRva,
+            int entryPointTokenOrRva,
+            CorFlags corFlags
+        )
         {
             const ushort majorRuntimeVersion = 2;
             const ushort minorRuntimeVersion = 5;
@@ -436,7 +474,11 @@ namespace System.Reflection.PortableExecutable
             Debug.Assert(builder.Count % 4 == 0);
         }
 
-        private void WriteRuntimeStartupStub(BlobBuilder sectionBuilder, int importAddressTableRva, ulong baseAddress)
+        private void WriteRuntimeStartupStub(
+            BlobBuilder sectionBuilder,
+            int importAddressTableRva,
+            ulong baseAddress
+        )
         {
             // entry point code, consisting of a jump indirect to _CorXXXMain
             if (Is32Bit)

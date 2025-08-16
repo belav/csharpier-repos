@@ -7,12 +7,18 @@ using Xunit;
 
 public class B
 {
-    public virtual int F(int x) { return x + 33; }
+    public virtual int F(int x)
+    {
+        return x + 33;
+    }
 }
 
 public class D : B
 {
-    public override int F(int x) { return x + 44; }
+    public override int F(int x)
+    {
+        return x + 44;
+    }
 }
 
 public class Q
@@ -22,7 +28,7 @@ public class Q
         return x;
     }
 
-    // calls to B will use a return spill temp since 
+    // calls to B will use a return spill temp since
     // B has multiple return sites.
     //
     // Jit will initially type this temp as 'B' but then

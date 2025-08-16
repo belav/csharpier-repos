@@ -15,10 +15,12 @@ namespace System.IO.Tests.Enumeration
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.FileName.ToString(),
-                new EnumerationOptions() { RecurseSubdirectories = true, MaxRecursionDepth = depth });
+                new EnumerationOptions() { RecurseSubdirectories = true, MaxRecursionDepth = depth }
+            );
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(0, 2),
             InlineData(1, 4),
             InlineData(2, 5),
@@ -28,11 +30,19 @@ namespace System.IO.Tests.Enumeration
         public void EnumerateDirectory_WithSpecifedRecursionDepth(int depth, int expectedCount)
         {
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
-            DirectoryInfo testSubdirectory1 = Directory.CreateDirectory(Path.Combine(testDirectory.FullName, "Subdirectory1"));
-            DirectoryInfo testSubdirectory2 = Directory.CreateDirectory(Path.Combine(testSubdirectory1.FullName, "Subdirectory2"));
+            DirectoryInfo testSubdirectory1 = Directory.CreateDirectory(
+                Path.Combine(testDirectory.FullName, "Subdirectory1")
+            );
+            DirectoryInfo testSubdirectory2 = Directory.CreateDirectory(
+                Path.Combine(testSubdirectory1.FullName, "Subdirectory2")
+            );
             FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, "fileone.htm"));
-            FileInfo fileTwo = new FileInfo(Path.Combine(testSubdirectory1.FullName, "filetwo.html"));
-            FileInfo fileThree = new FileInfo(Path.Combine(testSubdirectory2.FullName, "filethree.doc"));
+            FileInfo fileTwo = new FileInfo(
+                Path.Combine(testSubdirectory1.FullName, "filetwo.html")
+            );
+            FileInfo fileThree = new FileInfo(
+                Path.Combine(testSubdirectory2.FullName, "filethree.doc")
+            );
 
             fileOne.Create().Dispose();
             fileTwo.Create().Dispose();
@@ -45,7 +55,9 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void NegativeRecursionDepth_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new EnumerationOptions() { MaxRecursionDepth = -1 });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new EnumerationOptions() { MaxRecursionDepth = -1 }
+            );
         }
     }
 }

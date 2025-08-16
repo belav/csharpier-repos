@@ -27,10 +27,18 @@ namespace System.Reflection
             string typeName,
             bool throwOnError = false,
             bool ignoreCase = false,
-            string? defaultAssemblyName = null)
+            string? defaultAssemblyName = null
+        )
         {
-            return GetType(typeName, assemblyResolver: null, typeResolver: null,
-                throwOnError: throwOnError, ignoreCase: ignoreCase, extensibleParser: false, defaultAssemblyName: defaultAssemblyName);
+            return GetType(
+                typeName,
+                assemblyResolver: null,
+                typeResolver: null,
+                throwOnError: throwOnError,
+                ignoreCase: ignoreCase,
+                extensibleParser: false,
+                defaultAssemblyName: defaultAssemblyName
+            );
         }
 
         internal static Type? GetType(
@@ -40,7 +48,8 @@ namespace System.Reflection
             bool throwOnError = false,
             bool ignoreCase = false,
             bool extensibleParser = true,
-            string? defaultAssemblyName = null)
+            string? defaultAssemblyName = null
+        )
         {
             ArgumentNullException.ThrowIfNull(typeName);
 
@@ -60,7 +69,7 @@ namespace System.Reflection
                 _throwOnError = throwOnError,
                 _ignoreCase = ignoreCase,
                 _extensibleParser = extensibleParser,
-                _defaultAssemblyName = defaultAssemblyName
+                _defaultAssemblyName = defaultAssemblyName,
             }.Parse();
         }
 
@@ -68,7 +77,8 @@ namespace System.Reflection
             string typeName,
             bool throwOnError,
             bool ignoreCase,
-            Assembly topLevelAssembly)
+            Assembly topLevelAssembly
+        )
         {
             return new TypeNameParser(typeName)
             {
@@ -98,22 +108,36 @@ namespace System.Reflection
             }
             else
             {
-                assembly = RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(RuntimeAssemblyName.Parse(assemblyName));
+                assembly = RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(
+                    RuntimeAssemblyName.Parse(assemblyName)
+                );
             }
 
             if (assembly is null && _throwOnError)
             {
-                throw new FileNotFoundException(SR.Format(SR.FileNotFound_ResolveAssembly, assemblyName));
+                throw new FileNotFoundException(
+                    SR.Format(SR.FileNotFound_ResolveAssembly, assemblyName)
+                );
             }
 
             return assembly;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "GetType APIs are marked as RequiresUnreferencedCode.")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "GetType APIs are marked as RequiresUnreferencedCode.")]
-        private Type? GetType(string typeName, ReadOnlySpan<string> nestedTypeNames, string? assemblyNameIfAny)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "GetType APIs are marked as RequiresUnreferencedCode."
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "GetType APIs are marked as RequiresUnreferencedCode."
+        )]
+        private Type? GetType(
+            string typeName,
+            ReadOnlySpan<string> nestedTypeNames,
+            string? assemblyNameIfAny
+        )
         {
             Assembly? assembly;
 
@@ -141,9 +165,15 @@ namespace System.Reflection
                 {
                     if (_throwOnError)
                     {
-                        throw new TypeLoadException(assembly is null ?
-                            SR.Format(SR.TypeLoad_ResolveType, escapedTypeName) :
-                            SR.Format(SR.TypeLoad_ResolveTypeFromAssembly, escapedTypeName, assembly.FullName));
+                        throw new TypeLoadException(
+                            assembly is null
+                                ? SR.Format(SR.TypeLoad_ResolveType, escapedTypeName)
+                                : SR.Format(
+                                    SR.TypeLoad_ResolveTypeFromAssembly,
+                                    escapedTypeName,
+                                    assembly.FullName
+                                )
+                        );
                     }
                     return null;
                 }
@@ -154,14 +184,22 @@ namespace System.Reflection
                 {
                     if (assembly is RuntimeAssemblyInfo runtimeAssembly)
                     {
-                        type = runtimeAssembly.GetTypeCore(typeName, throwOnError: _throwOnError, ignoreCase: _ignoreCase);
+                        type = runtimeAssembly.GetTypeCore(
+                            typeName,
+                            throwOnError: _throwOnError,
+                            ignoreCase: _ignoreCase
+                        );
                     }
                     else
                     {
                         // This is a third-party Assembly object. We can emulate GetTypeCore() by calling the public GetType()
                         // method. This is wasteful because it'll probably reparse a type string that we've already parsed
                         // but it can't be helped.
-                        type = assembly.GetType(EscapeTypeName(typeName), throwOnError: _throwOnError, ignoreCase: _ignoreCase);
+                        type = assembly.GetType(
+                            EscapeTypeName(typeName),
+                            throwOnError: _throwOnError,
+                            ignoreCase: _ignoreCase
+                        );
                     }
 
                     if (type is null)
@@ -172,10 +210,16 @@ namespace System.Reflection
                     RuntimeAssemblyInfo? defaultAssembly = null;
                     if (_defaultAssemblyName != null)
                     {
-                        defaultAssembly = RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(RuntimeAssemblyName.Parse(_defaultAssemblyName));
+                        defaultAssembly = RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(
+                            RuntimeAssemblyName.Parse(_defaultAssemblyName)
+                        );
                         if (defaultAssembly != null)
                         {
-                            type = defaultAssembly.GetTypeCore(typeName, throwOnError: false, ignoreCase: _ignoreCase);
+                            type = defaultAssembly.GetTypeCore(
+                                typeName,
+                                throwOnError: false,
+                                ignoreCase: _ignoreCase
+                            );
                         }
                     }
 
@@ -185,7 +229,11 @@ namespace System.Reflection
                         coreLib = (RuntimeAssemblyInfo)typeof(object).Assembly;
                         if (coreLib != assembly)
                         {
-                            type = coreLib.GetTypeCore(typeName, throwOnError: false, ignoreCase: _ignoreCase);
+                            type = coreLib.GetTypeCore(
+                                typeName,
+                                throwOnError: false,
+                                ignoreCase: _ignoreCase
+                            );
                         }
                     }
 
@@ -193,7 +241,10 @@ namespace System.Reflection
                     {
                         if (_throwOnError)
                         {
-                            throw Helpers.CreateTypeLoadException(typeName, (defaultAssembly ?? coreLib).FullName);
+                            throw Helpers.CreateTypeLoadException(
+                                typeName,
+                                (defaultAssembly ?? coreLib).FullName
+                            );
                         }
                         return null;
                     }
@@ -215,7 +266,11 @@ namespace System.Reflection
                 {
                     // Return the first name that matches. Which one gets returned on a multiple match is an implementation detail.
                     string lowerName = nestedTypeNames[i].ToLowerInvariant();
-                    foreach (Type nt in declaringType.GetNestedTypes(BindingFlags.NonPublic | BindingFlags.Public))
+                    foreach (
+                        Type nt in declaringType.GetNestedTypes(
+                            BindingFlags.NonPublic | BindingFlags.Public
+                        )
+                    )
                     {
                         if (nt.Name.ToLowerInvariant() == lowerName)
                         {
@@ -229,8 +284,13 @@ namespace System.Reflection
                 {
                     if (_throwOnError)
                     {
-                        throw new TypeLoadException(SR.Format(SR.TypeLoad_ResolveNestedType,
-                            nestedTypeNames[i], (i > 0) ? nestedTypeNames[i - 1] : typeName));
+                        throw new TypeLoadException(
+                            SR.Format(
+                                SR.TypeLoad_ResolveNestedType,
+                                nestedTypeNames[i],
+                                (i > 0) ? nestedTypeNames[i - 1] : typeName
+                            )
+                        );
                     }
                     return null;
                 }

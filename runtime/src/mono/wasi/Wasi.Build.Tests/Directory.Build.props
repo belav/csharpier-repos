@@ -5,6 +5,5 @@
     <IsTestProject>true</IsTestProject>
     <AssemblyBeingTested>Wasi.Build.Tests</AssemblyBeingTested>
   </PropertyGroup>
-
   <Import Project="..\..\..\libraries\Directory.Build.props" />
 </Project>

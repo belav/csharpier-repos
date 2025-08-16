@@ -25,43 +25,42 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("FAD7BA7C-CA00-41e0-A5EF-2DA9A74E58E6")]
+    [ComVisible(true)]
+    public class BuildResults : IBuildResults
+    {
+        string[] component_files;
+        string key_file;
+        BuildMessage[] messages;
+        bool succeeded;
 
-	[ClassInterface (ClassInterfaceType.None)]
-	[Guid ("FAD7BA7C-CA00-41e0-A5EF-2DA9A74E58E6")]
-	[ComVisible (true)]
-	public class BuildResults : IBuildResults {
-	
-		string []	component_files;
-		string		key_file;
-		BuildMessage []	messages;
-		bool		succeeded;
+        BuildResults() { }
 
-		BuildResults ()
-		{
-		}
-		
-		public string[] ComponentFiles {
-			get { return component_files; }
-		}
-		
-		public string KeyFile {
-			get { return key_file; }
-		}
-		
-		public BuildMessage [] Messages {
-			get { return messages; }
-		}
-		
-		public bool Succeeded {
-			get { return succeeded; }
-		}
-		
-	}
+        public string[] ComponentFiles
+        {
+            get { return component_files; }
+        }
+
+        public string KeyFile
+        {
+            get { return key_file; }
+        }
+
+        public BuildMessage[] Messages
+        {
+            get { return messages; }
+        }
+
+        public bool Succeeded
+        {
+            get { return succeeded; }
+        }
+    }
 }
-

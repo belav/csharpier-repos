@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,11 +14,11 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Threading;
-	using System.Xml;
+    using System;
+    using System.Threading;
+    using System.Xml;
 
-	// DEPTH:               ROOT STATES:
+    // DEPTH:               ROOT STATES:
     // 0: <?xml>            [Start, Prolog]
     // 1: <Root>            [Element, Attribute]
     // 2:   <Foo>...</Foo>  [Content]
@@ -51,15 +51,16 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 }
             }
             finally
-			{
-				base.Dispose(managed);
-			}
+            {
+                base.Dispose(managed);
+            }
         }
 
         private void DisposeWriter(ref XmlWriter writer)
         {
             var value = Interlocked.Exchange(ref writer, null);
-            if (null != value) value.Close();
+            if (null != value)
+                value.Close();
         }
 
         private XmlWriter RootWriter
@@ -89,7 +90,10 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public override WriteState WriteState
         {
-            get { return (IsInRoot && state == WriteState.Content) ? childWriter.WriteState : state; }
+            get
+            {
+                return (IsInRoot && state == WriteState.Content) ? childWriter.WriteState : state;
+            }
         }
 
         public override void WriteStartDocument(bool standalone)
@@ -128,7 +132,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 }
                 depth++;
             }
-            catch { Reset(WriteState.Error); throw; }
+            catch
+            {
+                Reset(WriteState.Error);
+                throw;
+            }
         }
 
         private void WriteEndElement(Action<XmlWriter> action)
@@ -147,7 +155,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 }
                 depth--;
             }
-            catch { Reset(WriteState.Error); throw; }
+            catch
+            {
+                Reset(WriteState.Error);
+                throw;
+            }
         }
 
         public override void WriteEndElement()
@@ -160,7 +172,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             WriteEndElement(w => w.WriteFullEndElement());
         }
 
-        private void WriteAttribute(Action<XmlWriter> action, WriteState entryState, WriteState exitState)
+        private void WriteAttribute(
+            Action<XmlWriter> action,
+            WriteState entryState,
+            WriteState exitState
+        )
         {
             try
             {
@@ -175,21 +191,29 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     state = exitState;
                 }
             }
-            catch { Reset(WriteState.Error); throw; }
+            catch
+            {
+                Reset(WriteState.Error);
+                throw;
+            }
         }
 
         public override void WriteStartAttribute(string prefix, string localName, string ns)
         {
-            WriteAttribute(w => w.WriteStartAttribute(prefix, localName, ns),
+            WriteAttribute(
+                w => w.WriteStartAttribute(prefix, localName, ns),
                 entryState: WriteState.Element,
-                exitState:  WriteState.Attribute);
+                exitState: WriteState.Attribute
+            );
         }
 
         public override void WriteEndAttribute()
         {
-            WriteAttribute(w => w.WriteEndAttribute(),
+            WriteAttribute(
+                w => w.WriteEndAttribute(),
                 entryState: WriteState.Attribute,
-                exitState:  WriteState.Element);
+                exitState: WriteState.Element
+            );
         }
 
         private void WriteElementOrAttributeContent(Action<XmlWriter> action)
@@ -207,7 +231,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
                     state = WriteState.Content;
                 }
             }
-            catch { Reset(WriteState.Error); throw; }
+            catch
+            {
+                Reset(WriteState.Error);
+                throw;
+            }
         }
 
         public override void WriteString(string text)
@@ -258,7 +286,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 action(ChildWriter);
                 state = WriteState.Content;
             }
-            catch { Reset(WriteState.Error); throw; }
+            catch
+            {
+                Reset(WriteState.Error);
+                throw;
+            }
         }
 
         public override void WriteCData(string text)
@@ -281,16 +313,28 @@ namespace Castle.Components.DictionaryAdapter.Xml
             WriteElementContent(w => w.WriteWhitespace(ws));
         }
 
-        private void WithWriters(Action<XmlWriter> action, bool worksIfClosed = false, WriteState? resetTo = null)
+        private void WithWriters(
+            Action<XmlWriter> action,
+            bool worksIfClosed = false,
+            WriteState? resetTo = null
+        )
         {
             try
             {
-                if (! worksIfClosed    ) RequireNotClosed();
-                if (null != rootWriter ) action(rootWriter);
-                if (null != childWriter) action(childWriter);
-                if (null != resetTo     ) Reset(resetTo.Value);
+                if (!worksIfClosed)
+                    RequireNotClosed();
+                if (null != rootWriter)
+                    action(rootWriter);
+                if (null != childWriter)
+                    action(childWriter);
+                if (null != resetTo)
+                    Reset(resetTo.Value);
             }
-            catch { Reset(WriteState.Error); throw; }
+            catch
+            {
+                Reset(WriteState.Error);
+                throw;
+            }
         }
 
         public override void Flush()
@@ -314,36 +358,39 @@ namespace Castle.Components.DictionaryAdapter.Xml
             try
             {
                 string prefix;
-                return
-                    (  // Try child writer first
-                        null != childWriter &&
-                        null != (prefix = childWriter.LookupPrefix(ns))
-                    ) ? prefix :
-                    (  // Try root writer next
-                        null != rootWriter &&
-                        null != (prefix = rootWriter.LookupPrefix(ns))
-                    ) ? prefix :
-                    null;
+                return ( // Try child writer first
+                        null != childWriter && null != (prefix = childWriter.LookupPrefix(ns))
+                    )
+                        ? prefix
+                    : ( // Try root writer next
+                        null != rootWriter && null != (prefix = rootWriter.LookupPrefix(ns))
+                    )
+                        ? prefix
+                    : null;
             }
-            catch { Reset(WriteState.Error); throw; }
+            catch
+            {
+                Reset(WriteState.Error);
+                throw;
+            }
         }
 
         private void RequireNotClosed()
         {
-			if (state == WriteState.Closed || state == WriteState.Error)
-				throw Error.InvalidOperation();
+            if (state == WriteState.Closed || state == WriteState.Error)
+                throw Error.InvalidOperation();
         }
 
         private void RequireState(WriteState state)
         {
             if (this.state != state)
-				throw Error.InvalidOperation();
+                throw Error.InvalidOperation();
         }
 
         private void RequireState(WriteState state1, WriteState state2)
         {
             if (state != state1 && state != state2)
-				throw Error.InvalidOperation();
+                throw Error.InvalidOperation();
         }
 
         private void Reset(WriteState state)

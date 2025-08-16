@@ -14,15 +14,19 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwitch
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsPopulateSwitch)]
-    public partial class PopulateSwitchStatementTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class PopulateSwitchStatementTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public PopulateSwitchStatementTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpPopulateSwitchStatementDiagnosticAnalyzer(), new CSharpPopulateSwitchStatementCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpPopulateSwitchStatementDiagnosticAnalyzer(),
+                new CSharpPopulateSwitchStatementCodeFixProvider()
+            );
 
         [Fact]
         public async Task OnlyOnFirstToken()
@@ -53,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -86,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -146,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -206,7 +213,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -268,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -328,7 +338,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -388,7 +400,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -450,7 +463,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -506,7 +520,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 0);
+                """,
+                index: 0
+            );
         }
 
         [Fact]
@@ -558,7 +574,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
@@ -616,7 +634,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -653,7 +673,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -690,7 +711,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -754,7 +776,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -808,7 +831,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -870,7 +895,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -930,7 +957,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact]
@@ -957,7 +986,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1011,45 +1041,48 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """, index: 2);
+                """,
+                index: 2
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/13455")]
         public async Task AllMissingTokens()
         {
             await TestInRegularAndScriptAsync(
-            """
-            enum MyEnum
-            {
-                Fizz
-            }
-            class MyClass
-            {
-                void Method()
+                """
+                enum MyEnum
                 {
-                    var e = MyEnum.Fizz;
-                    [||]switch (e)
+                    Fizz
                 }
-            }
-            """,
-            """
-            enum MyEnum
-            {
-                Fizz
-            }
-            class MyClass
-            {
-                void Method()
+                class MyClass
                 {
-                    var e = MyEnum.Fizz;
-                    switch (e)
+                    void Method()
                     {
-                        case MyEnum.Fizz:
-                            break;
+                        var e = MyEnum.Fizz;
+                        [||]switch (e)
                     }
                 }
-            }
-            """);
+                """,
+                """
+                enum MyEnum
+                {
+                    Fizz
+                }
+                class MyClass
+                {
+                    void Method()
+                    {
+                        var e = MyEnum.Fizz;
+                        switch (e)
+                        {
+                            case MyEnum.Fizz:
+                                break;
+                        }
+                    }
+                }
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40240")]
@@ -1107,7 +1140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                     Option2, 
                     Option3,
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61594")]
@@ -1155,7 +1189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 {
                     Value1, Value2
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61594")]
@@ -1205,7 +1240,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 {
                     Value1, Value2
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61594")]
@@ -1253,7 +1289,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 {
                     Value1, Value2
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/61594")]
@@ -1303,7 +1340,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                 {
                     Value1, Value2
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/pull/61809")]
@@ -1318,7 +1356,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         switch[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/pull/61809")]
@@ -1339,7 +1378,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         var v = null switch[||]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48876")]
@@ -1358,7 +1398,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48876")]
@@ -1378,7 +1419,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48876")]
@@ -1410,7 +1452,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48876")]
@@ -1444,7 +1487,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.PopulateSwi
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

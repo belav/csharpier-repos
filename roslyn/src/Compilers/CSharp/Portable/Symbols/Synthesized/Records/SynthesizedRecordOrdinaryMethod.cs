@@ -20,13 +20,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly int _memberOffset;
 
-        protected SynthesizedRecordOrdinaryMethod(SourceMemberContainerTypeSymbol containingType, string name, int memberOffset, DeclarationModifiers declarationModifiers)
-            : base(containingType, name, containingType.GetFirstLocation(), (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
-                   isIterator: false,
-                   (declarationModifiers, MakeFlags(
-                                                    MethodKind.Ordinary, RefKind.None, declarationModifiers, returnsVoid: false, returnsVoidIsSet: false,
-                                                    isExpressionBodied: false, isExtensionMethod: false, isNullableAnalysisEnabled: false, isVarArg: false,
-                                                    isExplicitInterfaceImplementation: false)))
+        protected SynthesizedRecordOrdinaryMethod(
+            SourceMemberContainerTypeSymbol containingType,
+            string name,
+            int memberOffset,
+            DeclarationModifiers declarationModifiers
+        )
+            : base(
+                containingType,
+                name,
+                containingType.GetFirstLocation(),
+                (CSharpSyntaxNode)containingType.SyntaxReferences[0].GetSyntax(),
+                isIterator: false,
+                (
+                    declarationModifiers,
+                    MakeFlags(
+                        MethodKind.Ordinary,
+                        RefKind.None,
+                        declarationModifiers,
+                        returnsVoid: false,
+                        returnsVoidIsSet: false,
+                        isExpressionBodied: false,
+                        isExtensionMethod: false,
+                        isNullableAnalysisEnabled: false,
+                        isVarArg: false,
+                        isExplicitInterfaceImplementation: false
+                    )
+                )
+            )
         {
             _memberOffset = memberOffset;
         }
@@ -38,59 +59,91 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodChecks(returnType, parameters, diagnostics);
         }
 
-        protected abstract (TypeWithAnnotations ReturnType, ImmutableArray<ParameterSymbol> Parameters) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics);
+        protected abstract (
+            TypeWithAnnotations ReturnType,
+            ImmutableArray<ParameterSymbol> Parameters
+        ) MakeParametersAndBindReturnType(BindingDiagnosticBag diagnostics);
 
         public sealed override bool IsImplicitlyDeclared => true;
 
         protected sealed override Location ReturnTypeLocation => GetFirstLocation();
 
-        protected sealed override MethodSymbol? FindExplicitlyImplementedMethod(BindingDiagnosticBag diagnostics) => null;
+        protected sealed override MethodSymbol? FindExplicitlyImplementedMethod(
+            BindingDiagnosticBag diagnostics
+        ) => null;
 
-        internal sealed override LexicalSortKey GetLexicalSortKey() => LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
+        internal sealed override LexicalSortKey GetLexicalSortKey() =>
+            LexicalSortKey.GetSynthesizedMemberKey(_memberOffset);
 
-        public sealed override ImmutableArray<TypeParameterSymbol> TypeParameters => ImmutableArray<TypeParameterSymbol>.Empty;
+        public sealed override ImmutableArray<TypeParameterSymbol> TypeParameters =>
+            ImmutableArray<TypeParameterSymbol>.Empty;
 
-        public sealed override ImmutableArray<ImmutableArray<TypeWithAnnotations>> GetTypeParameterConstraintTypes() => ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
+        public sealed override ImmutableArray<
+            ImmutableArray<TypeWithAnnotations>
+        > GetTypeParameterConstraintTypes() =>
+            ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
 
-        public sealed override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds() => ImmutableArray<TypeParameterConstraintKind>.Empty;
+        public sealed override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds() =>
+            ImmutableArray<TypeParameterConstraintKind>.Empty;
 
-        protected sealed override void PartialMethodChecks(BindingDiagnosticBag diagnostics)
-        {
-        }
+        protected sealed override void PartialMethodChecks(BindingDiagnosticBag diagnostics) { }
 
-        protected sealed override void ExtensionMethodChecks(BindingDiagnosticBag diagnostics)
-        {
-        }
+        protected sealed override void ExtensionMethodChecks(BindingDiagnosticBag diagnostics) { }
 
-        protected sealed override void CompleteAsyncMethodChecksBetweenStartAndFinish()
-        {
-        }
+        protected sealed override void CompleteAsyncMethodChecksBetweenStartAndFinish() { }
 
         protected sealed override TypeSymbol? ExplicitInterfaceType => null;
 
-        protected sealed override void CheckConstraintsForExplicitInterfaceType(ConversionsBase conversions, BindingDiagnosticBag diagnostics)
-        {
-        }
+        protected sealed override void CheckConstraintsForExplicitInterfaceType(
+            ConversionsBase conversions,
+            BindingDiagnosticBag diagnostics
+        ) { }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
             Debug.Assert(IsImplicitlyDeclared);
             var compilation = this.DeclaringCompilation;
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
-            Debug.Assert(WellKnownMembers.IsSynthesizedAttributeOptional(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
+            Debug.Assert(
+                WellKnownMembers.IsSynthesizedAttributeOptional(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
         }
 
         protected sealed override SourceMemberMethodSymbol? BoundAttributesSource => null;
 
-        internal sealed override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations() => OneOrMany.Create(default(SyntaxList<AttributeListSyntax>));
+        internal sealed override OneOrMany<
+            SyntaxList<AttributeListSyntax>
+        > GetAttributeDeclarations() => OneOrMany.Create(default(SyntaxList<AttributeListSyntax>));
 
-        public sealed override string? GetDocumentationCommentXml(CultureInfo? preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default) => null;
+        public sealed override string? GetDocumentationCommentXml(
+            CultureInfo? preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default
+        ) => null;
 
         internal sealed override bool GenerateDebugInfo => false;
 
         internal sealed override bool SynthesizesLoweredBoundBody => true;
-        internal sealed override ExecutableCodeBinder? TryGetBodyBinder(BinderFactory? binderFactoryOpt = null, bool ignoreAccessibility = false) => throw ExceptionUtilities.Unreachable();
-        internal abstract override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics);
+
+        internal sealed override ExecutableCodeBinder? TryGetBodyBinder(
+            BinderFactory? binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        ) => throw ExceptionUtilities.Unreachable();
+
+        internal abstract override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        );
     }
 }

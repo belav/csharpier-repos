@@ -8,7 +8,9 @@ using System.Reflection;
 
 public class TempConfigurationHost : DelegatingConfigHost
 {
-    private static string s_assemblyName = PlatformDetection.IsNetFramework ? "System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" : "System.Configuration.ConfigurationManager";
+    private static string s_assemblyName = PlatformDetection.IsNetFramework
+        ? "System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        : "System.Configuration.ConfigurationManager";
     private static IInternalConfigConfigurationFactory s_configurationFactory;
 
     private ConfigurationFileMap _fileMap;
@@ -16,7 +18,7 @@ public class TempConfigurationHost : DelegatingConfigHost
     public TempConfigurationHost()
     {
         Type type = Type.GetType(InternalHostTypeName, true);
-        Host = (IInternalConfigHost) Activator.CreateInstance(type, true);
+        Host = (IInternalConfigHost)Activator.CreateInstance(type, true);
     }
 
     public override void Init(IInternalConfigRoot configRoot, params object[] hostInitParams)
@@ -24,10 +26,14 @@ public class TempConfigurationHost : DelegatingConfigHost
         Host.Init(configRoot, hostInitParams);
     }
 
-    public override void InitForConfiguration(ref string locationSubPath, out string configPath, out string locationConfigPath,
-                        IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams)
+    public override void InitForConfiguration(
+        ref string locationSubPath,
+        out string configPath,
+        out string locationConfigPath,
+        IInternalConfigRoot configRoot,
+        params object[] hostInitConfigurationParams
+    )
     {
-
         Host.Init(configRoot, hostInitConfigurationParams);
 
         _fileMap = hostInitConfigurationParams[1] as ConfigurationFileMap;
@@ -69,7 +75,11 @@ public class TempConfigurationHost : DelegatingConfigHost
 
     static string InternalConfigConfigurationFactoryTypeName
     {
-        get { return "System.Configuration.Internal.InternalConfigConfigurationFactory, " + s_assemblyName; }
+        get
+        {
+            return "System.Configuration.Internal.InternalConfigConfigurationFactory, "
+                + s_assemblyName;
+        }
     }
 
     static string InternalHostTypeName
@@ -84,7 +94,8 @@ public class TempConfigurationHost : DelegatingConfigHost
             if (s_configurationFactory == null)
             {
                 Type type = Type.GetType(InternalConfigConfigurationFactoryTypeName, true);
-                s_configurationFactory = (IInternalConfigConfigurationFactory) Activator.CreateInstance(type, true);
+                s_configurationFactory = (IInternalConfigConfigurationFactory)
+                    Activator.CreateInstance(type, true);
             }
 
             return s_configurationFactory;

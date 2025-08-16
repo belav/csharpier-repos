@@ -1310,29 +1310,26 @@ public class FormWithParentBindingContextTest
         GoTo($"forms/form-posted-while-enhanced-nav-in-progress");
 
         Browser.Exists(By.Id("not-ending")).Click();
-        Browser.True(
-            () =>
-                Browser.Url.EndsWith(
-                    "forms/endpoint-that-never-finishes-rendering",
-                    StringComparison.Ordinal
-                )
+        Browser.True(() =>
+            Browser.Url.EndsWith(
+                "forms/endpoint-that-never-finishes-rendering",
+                StringComparison.Ordinal
+            )
         );
         Browser.Exists(By.Id("send")).Click();
         Browser.Exists(By.Id("pass"));
-        Browser.True(
-            () =>
-                Browser.Url.EndsWith(
-                    "forms/form-posted-while-enhanced-nav-in-progress",
-                    StringComparison.Ordinal
-                )
+        Browser.True(() =>
+            Browser.Url.EndsWith(
+                "forms/form-posted-while-enhanced-nav-in-progress",
+                StringComparison.Ordinal
+            )
         );
         Browser.Navigate().Back();
-        Browser.True(
-            () =>
-                Browser.Url.EndsWith(
-                    "forms/endpoint-that-never-finishes-rendering",
-                    StringComparison.Ordinal
-                )
+        Browser.True(() =>
+            Browser.Url.EndsWith(
+                "forms/endpoint-that-never-finishes-rendering",
+                StringComparison.Ordinal
+            )
         );
     }
 
@@ -1396,11 +1393,10 @@ public class FormWithParentBindingContextTest
     {
         if (streaming)
         {
-            Browser.True(
-                () =>
-                    Browser
-                        .FindElement(By.TagName("html"))
-                        .Text.Contains("There was an unhandled exception on the current request")
+            Browser.True(() =>
+                Browser
+                    .FindElement(By.TagName("html"))
+                    .Text.Contains("There was an unhandled exception on the current request")
             );
         }
         else

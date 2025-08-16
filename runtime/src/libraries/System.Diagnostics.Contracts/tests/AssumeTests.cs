@@ -58,7 +58,9 @@ namespace System.Diagnostics.Contracts.Tests
             using (Utilities.WithContractFailed(handler))
             {
 #if DEBUG
-                Utilities.AssertThrowsContractException(() => Contract.Assume(false, "Some kind of user message"));
+                Utilities.AssertThrowsContractException(() =>
+                    Contract.Assume(false, "Some kind of user message")
+                );
                 Assert.True(eventRaised, "ContractFailed was not raised");
 #else
                 Contract.Assume(false, "Some kind of user message");

@@ -2,32 +2,42 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.Text;
 using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    public class ArrayOfFrozenObjectsNode : DehydratableObjectNode, ISymbolDefinitionNode, INodeWithSize
+    public class ArrayOfFrozenObjectsNode
+        : DehydratableObjectNode,
+            ISymbolDefinitionNode,
+            INodeWithSize
     {
         private int? _size;
         int INodeWithSize.Size => _size.Value;
 
-        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
-            => sb.Append(nameMangler.CompilationUnitPrefix).Append("__FrozenSegmentStart");
+        public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb) =>
+            sb.Append(nameMangler.CompilationUnitPrefix).Append("__FrozenSegmentStart");
 
         public int Offset => 0;
 
         private static void AlignNextObject(ref ObjectDataBuilder builder, NodeFactory factory)
         {
-            builder.EmitZeros(AlignmentHelper.AlignUp(builder.CountBytes, factory.Target.PointerSize) - builder.CountBytes);
+            builder.EmitZeros(
+                AlignmentHelper.AlignUp(builder.CountBytes, factory.Target.PointerSize)
+                    - builder.CountBytes
+            );
         }
 
         protected override ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly)
         {
             // This is a summary node
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, Array.Empty<ISymbolDefinitionNode>());
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    Array.Empty<ISymbolDefinitionNode>()
+                );
 
             var builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.AddSymbol(this);
@@ -58,8 +68,11 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory) => ObjectNodeSection.DataSection;
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
+
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -1771336339;
 

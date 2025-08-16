@@ -1,10 +1,15 @@
-<Type Name="LdapEntryChangeControl" FullName="Novell.Directory.Ldap.Controls.LdapEntryChangeControl">
-  <TypeSignature Language="C#" Value="public class LdapEntryChangeControl : Novell.Directory.Ldap.LdapControl, System.ICloneable" />
+<Type
+  Name="LdapEntryChangeControl"
+  FullName="Novell.Directory.Ldap.Controls.LdapEntryChangeControl"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapEntryChangeControl : Novell.Directory.Ldap.LdapControl, System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapEntryChangeControl(string oid, bool critical, sbyte[] value_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapEntryChangeControl(string oid, bool critical, sbyte[] value_Renamed)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>
@@ -66,7 +74,9 @@
       <Docs>
         <summary>To be added.</summary>
         <param name="oid">The OID of the control, as a dotted string.</param>
-        <param name="critical">True if the LDAP operation should be discarded if the control is not supported. False if the operation can be processed without the control.</param>
+        <param name="critical"
+          >True if the LDAP operation should be discarded if the control is not supported. False if the operation can be processed without the control.</param
+        >
         <param name="value_Renamed">The control-specific data.</param>
         <remarks>To be added.</remarks>
       </Docs>

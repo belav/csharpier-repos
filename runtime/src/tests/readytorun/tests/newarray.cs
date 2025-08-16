@@ -39,49 +39,49 @@ public class Program
 
     static void RunTest1()
     {
-        int [] arr = new int[ARRAY_SIZE];
+        int[] arr = new int[ARRAY_SIZE];
 
         Assert.AreEqual(arr.GetType().ToString(), "System.Int32[]");
     }
 
     static void RunTest2()
     {
-        object [] arr = new object[ARRAY_SIZE];
+        object[] arr = new object[ARRAY_SIZE];
 
         Assert.AreEqual(arr.GetType().ToString(), "System.Object[]");
     }
 
     static void RunTest3()
     {
-        int [] arr = new_array_generic<int>();
+        int[] arr = new_array_generic<int>();
 
         Assert.AreEqual(arr.GetType().ToString(), "System.Int32[]");
     }
 
     static void RunTest4()
     {
-        string [] arr = new_array_generic<string>();
+        string[] arr = new_array_generic<string>();
 
         Assert.AreEqual(arr.GetType().ToString(), "System.String[]");
     }
 
     static void RunTest5()
     {
-        object [] arr = new_array_generic<object>();
+        object[] arr = new_array_generic<object>();
 
         Assert.AreEqual(arr.GetType().ToString(), "System.Object[]");
     }
 
     static void RunTest6()
     {
-        GenericClass1<int> [] arr = new GenericClass1<int>[ARRAY_SIZE];
+        GenericClass1<int>[] arr = new GenericClass1<int>[ARRAY_SIZE];
 
         Assert.AreEqual(arr.GetType().ToString(), "GenericClass1`1[System.Int32][]");
     }
 
     static void RunTest7()
     {
-        GenericClass1<object> [] arr = new_array_generic<GenericClass1<object>>();
+        GenericClass1<object>[] arr = new_array_generic<GenericClass1<object>>();
 
         Assert.AreEqual(arr.GetType().ToString(), "GenericClass1`1[System.Object][]");
     }
@@ -90,7 +90,10 @@ public class Program
     {
         genericclass1_object_array_field = new_array_generic<GenericClass2<object>>();
 
-        Assert.AreEqual(genericclass1_object_array_field.GetType().ToString(), "GenericClass2`1[System.Object][]");
+        Assert.AreEqual(
+            genericclass1_object_array_field.GetType().ToString(),
+            "GenericClass2`1[System.Object][]"
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -99,16 +102,12 @@ public class Program
         return new T[ARRAY_SIZE];
     }
 
-    static volatile GenericClass1<object> [] genericclass1_object_array_field;
+    static volatile GenericClass1<object>[] genericclass1_object_array_field;
 }
 
-class GenericClass1<T>
-{
-}
+class GenericClass1<T> { }
 
-class GenericClass2<T> : GenericClass1<T>
-{
-}
+class GenericClass2<T> : GenericClass1<T> { }
 
 public static class Assert
 {

@@ -6,6 +6,7 @@
 namespace System.ServiceModel.Web
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Net;
     using System.Runtime;
@@ -13,16 +14,17 @@ namespace System.ServiceModel.Web
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Text;
-    using System.Collections.Generic;
 
     public class OutgoingWebResponseContext
     {
         internal static readonly string WebResponseFormatPropertyName = "WebResponseFormatProperty";
-        internal static readonly string AutomatedFormatSelectionContentTypePropertyName = "AutomatedFormatSelectionContentTypePropertyName";
+        internal static readonly string AutomatedFormatSelectionContentTypePropertyName =
+            "AutomatedFormatSelectionContentTypePropertyName";
 
         Encoding bindingWriteEncoding = null;
 
         OperationContext operationContext;
+
         internal OutgoingWebResponseContext(OperationContext operationContext)
         {
             Fx.Assert(operationContext != null, "operationContext is null");
@@ -31,8 +33,19 @@ namespace System.ServiceModel.Web
 
         public long ContentLength
         {
-            get { return long.Parse(this.MessageProperty.Headers[HttpResponseHeader.ContentLength], CultureInfo.InvariantCulture); }
-            set { this.MessageProperty.Headers[HttpResponseHeader.ContentLength] = value.ToString(CultureInfo.InvariantCulture); }
+            get
+            {
+                return long.Parse(
+                    this.MessageProperty.Headers[HttpResponseHeader.ContentLength],
+                    CultureInfo.InvariantCulture
+                );
+            }
+            set
+            {
+                this.MessageProperty.Headers[HttpResponseHeader.ContentLength] = value.ToString(
+                    CultureInfo.InvariantCulture
+                );
+            }
         }
 
         public string ContentType
@@ -60,7 +73,14 @@ namespace System.ServiceModel.Web
                 if (!string.IsNullOrEmpty(dateTime))
                 {
                     DateTime parsedDateTime;
-                    if (DateTime.TryParse(dateTime, CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDateTime))
+                    if (
+                        DateTime.TryParse(
+                            dateTime,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.None,
+                            out parsedDateTime
+                        )
+                    )
                     {
                         return parsedDateTime;
                     }
@@ -69,10 +89,11 @@ namespace System.ServiceModel.Web
             }
             set
             {
-                this.MessageProperty.Headers[HttpResponseHeader.LastModified] =
-                    (value.Kind == DateTimeKind.Utc ?
-                    value.ToString("R", CultureInfo.InvariantCulture) :
-                    value.ToUniversalTime().ToString("R", CultureInfo.InvariantCulture));
+                this.MessageProperty.Headers[HttpResponseHeader.LastModified] = (
+                    value.Kind == DateTimeKind.Utc
+                        ? value.ToString("R", CultureInfo.InvariantCulture)
+                        : value.ToUniversalTime().ToString("R", CultureInfo.InvariantCulture)
+                );
             }
         }
 
@@ -104,11 +125,16 @@ namespace System.ServiceModel.Web
         {
             get
             {
-                if (!operationContext.OutgoingMessageProperties.ContainsKey(WebResponseFormatPropertyName))
+                if (
+                    !operationContext.OutgoingMessageProperties.ContainsKey(
+                        WebResponseFormatPropertyName
+                    )
+                )
                 {
                     return null;
                 }
-                return operationContext.OutgoingMessageProperties[WebResponseFormatPropertyName] as WebMessageFormat?;
+                return operationContext.OutgoingMessageProperties[WebResponseFormatPropertyName]
+                    as WebMessageFormat?;
             }
             set
             {
@@ -116,16 +142,20 @@ namespace System.ServiceModel.Web
                 {
                     if (!WebMessageFormatHelper.IsDefined(value.Value))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value")
+                        );
                     }
                     else
                     {
-                        operationContext.OutgoingMessageProperties[WebResponseFormatPropertyName] = value.Value;
+                        operationContext.OutgoingMessageProperties[WebResponseFormatPropertyName] =
+                            value.Value;
                     }
                 }
                 else
                 {
-                    operationContext.OutgoingMessageProperties[WebResponseFormatPropertyName] = null;
+                    operationContext.OutgoingMessageProperties[WebResponseFormatPropertyName] =
+                        null;
                 }
                 this.AutomatedFormatSelectionContentType = null;
             }
@@ -133,21 +163,29 @@ namespace System.ServiceModel.Web
 
         // This is an internal property because we need to carry the content-type that was selected by the FormatSelectingMessageInspector
         // forward so that the formatter has access to it. However, we dond't want to use the ContentType property on this, because then
-        // developers would have to clear the ContentType property manually when overriding the format set by the 
+        // developers would have to clear the ContentType property manually when overriding the format set by the
         // FormatSelectingMessageInspector
         internal string AutomatedFormatSelectionContentType
         {
             get
             {
-                if (!operationContext.OutgoingMessageProperties.ContainsKey(AutomatedFormatSelectionContentTypePropertyName))
+                if (
+                    !operationContext.OutgoingMessageProperties.ContainsKey(
+                        AutomatedFormatSelectionContentTypePropertyName
+                    )
+                )
                 {
                     return null;
                 }
-                return operationContext.OutgoingMessageProperties[AutomatedFormatSelectionContentTypePropertyName] as string;
+                return operationContext.OutgoingMessageProperties[
+                        AutomatedFormatSelectionContentTypePropertyName
+                    ] as string;
             }
             set
             {
-                operationContext.OutgoingMessageProperties[AutomatedFormatSelectionContentTypePropertyName] = value;
+                operationContext.OutgoingMessageProperties[
+                    AutomatedFormatSelectionContentTypePropertyName
+                ] = value;
             }
         }
 
@@ -158,12 +196,21 @@ namespace System.ServiceModel.Web
                 if (this.bindingWriteEncoding == null)
                 {
                     string endpointId = this.operationContext.EndpointDispatcher.Id;
-                    Fx.Assert(endpointId != null, "There should always be an valid EndpointDispatcher.Id");
-                    foreach (ServiceEndpoint endpoint in this.operationContext.Host.Description.Endpoints)
+                    Fx.Assert(
+                        endpointId != null,
+                        "There should always be an valid EndpointDispatcher.Id"
+                    );
+                    foreach (
+                        ServiceEndpoint endpoint in this.operationContext.Host.Description.Endpoints
+                    )
                     {
                         if (endpoint.Id == endpointId)
                         {
-                            WebMessageEncodingBindingElement encodingElement = endpoint.Binding.CreateBindingElements().Find<WebMessageEncodingBindingElement>() as WebMessageEncodingBindingElement;
+                            WebMessageEncodingBindingElement encodingElement =
+                                endpoint
+                                    .Binding.CreateBindingElements()
+                                    .Find<WebMessageEncodingBindingElement>()
+                                as WebMessageEncodingBindingElement;
                             if (encodingElement != null)
                             {
                                 this.bindingWriteEncoding = encodingElement.WriteEncoding;
@@ -179,11 +226,19 @@ namespace System.ServiceModel.Web
         {
             get
             {
-                if (!operationContext.OutgoingMessageProperties.ContainsKey(HttpResponseMessageProperty.Name))
+                if (
+                    !operationContext.OutgoingMessageProperties.ContainsKey(
+                        HttpResponseMessageProperty.Name
+                    )
+                )
                 {
-                    operationContext.OutgoingMessageProperties.Add(HttpResponseMessageProperty.Name, new HttpResponseMessageProperty());
+                    operationContext.OutgoingMessageProperties.Add(
+                        HttpResponseMessageProperty.Name,
+                        new HttpResponseMessageProperty()
+                    );
                 }
-                return operationContext.OutgoingMessageProperties[HttpResponseMessageProperty.Name] as HttpResponseMessageProperty;
+                return operationContext.OutgoingMessageProperties[HttpResponseMessageProperty.Name]
+                    as HttpResponseMessageProperty;
             }
         }
 
@@ -233,7 +288,7 @@ namespace System.ServiceModel.Web
             // This method will generate a valid entityTag from a string by doing the following:
             //   1) Adding surrounding double quotes if the string doesn't already start and end with them
             //   2) Escaping any internal double quotes that aren't already escaped (preceded with a backslash)
-            //   3) If a string starts with a double quote but doesn't end with one, or vice-versa, then the 
+            //   3) If a string starts with a double quote but doesn't end with one, or vice-versa, then the
             //      double quote is considered internal and is escaped.
 
             if (string.IsNullOrEmpty(entityTag))
@@ -241,11 +296,16 @@ namespace System.ServiceModel.Web
                 return null;
             }
 
-            if (entityTag.StartsWith("W/\"", StringComparison.OrdinalIgnoreCase) &&
-                entityTag.EndsWith("\"", StringComparison.OrdinalIgnoreCase))
+            if (
+                entityTag.StartsWith("W/\"", StringComparison.OrdinalIgnoreCase)
+                && entityTag.EndsWith("\"", StringComparison.OrdinalIgnoreCase)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.WeakEntityTagsNotSupported, entityTag)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.WeakEntityTagsNotSupported, entityTag)
+                    )
+                );
             }
 
             List<int> escapeCharacterInsertIndices = null;
@@ -289,13 +349,19 @@ namespace System.ServiceModel.Web
                 {
                     escapeCharacterInsertIndices = new List<int>();
                 }
-                escapeCharacterInsertIndices.Add(lastEtagIndex + escapeCharacterInsertIndices.Count);
+                escapeCharacterInsertIndices.Add(
+                    lastEtagIndex + escapeCharacterInsertIndices.Count
+                );
             }
 
             if (needsSurroundingQuotes || escapeCharacterInsertIndices != null)
             {
-                int escapeCharacterInsertIndicesCount = (escapeCharacterInsertIndices == null) ? 0 : escapeCharacterInsertIndices.Count;
-                StringBuilder editedEtag = new StringBuilder(entityTag, entityTag.Length + escapeCharacterInsertIndicesCount + 2);
+                int escapeCharacterInsertIndicesCount =
+                    (escapeCharacterInsertIndices == null) ? 0 : escapeCharacterInsertIndices.Count;
+                StringBuilder editedEtag = new StringBuilder(
+                    entityTag,
+                    entityTag.Length + escapeCharacterInsertIndicesCount + 2
+                );
                 for (int x = 0; x < escapeCharacterInsertIndicesCount; x++)
                 {
                     editedEtag.Insert(escapeCharacterInsertIndices[x], '\\');
@@ -317,4 +383,3 @@ namespace System.ServiceModel.Web
         }
     }
 }
-

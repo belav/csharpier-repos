@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,48 +49,52 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class XmlElementElement
-		 : ConfigurationElement
-	{
-		public XmlElementElement () {
-		}
+    public sealed class XmlElementElement : ConfigurationElement
+    {
+        public XmlElementElement() { }
 
-		public XmlElementElement (XmlElement element) {
-			XmlElement = element;
-		}
+        public XmlElementElement(XmlElement element)
+        {
+            XmlElement = element;
+        }
 
-		// Properties
+        // Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		[ConfigurationProperty ("xmlElement",
-			 DefaultValue = null,
-			 Options = ConfigurationPropertyOptions.IsKey,
-			IsKey = true)]
-		public XmlElement XmlElement {
-			get { return (XmlElement) base ["xmlElement"]; }
-			set { base ["xmlElement"] = value; }
-		}
+        [ConfigurationProperty(
+            "xmlElement",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.IsKey,
+            IsKey = true
+        )]
+        public XmlElement XmlElement
+        {
+            get { return (XmlElement)base["xmlElement"]; }
+            set { base["xmlElement"] = value; }
+        }
 
-		protected override void DeserializeElement (XmlReader reader, bool serializeCollectionKey) {
-			base.DeserializeElement (reader, serializeCollectionKey);
-		}
+        protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
+        {
+            base.DeserializeElement(reader, serializeCollectionKey);
+        }
 
-		protected override void PostDeserialize () {
-			base.PostDeserialize ();
-		}
+        protected override void PostDeserialize()
+        {
+            base.PostDeserialize();
+        }
 
-		protected override bool SerializeToXmlElement (XmlWriter writer, string elementName) {
-			return base.SerializeToXmlElement (writer, elementName);
-		}
-	}
-
+        protected override bool SerializeToXmlElement(XmlWriter writer, string elementName)
+        {
+            return base.SerializeToXmlElement(writer, elementName);
+        }
+    }
 }

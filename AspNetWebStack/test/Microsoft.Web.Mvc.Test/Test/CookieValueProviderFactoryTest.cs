@@ -20,7 +20,7 @@ namespace Microsoft.Web.Mvc.Test
                 new HttpCookie("foo", "fooValue"),
                 new HttpCookie("bar.baz", "barBazValue"),
                 new HttpCookie("", "emptyValue"),
-                new HttpCookie(null, "nullValue")
+                new HttpCookie(null, "nullValue"),
             };
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();

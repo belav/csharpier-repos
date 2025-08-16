@@ -13,21 +13,18 @@ public class RelationalParameterBuilderTest
     [InlineData(false)]
     public void Can_add_type_mapped_parameter_by_type(bool nullable)
     {
-        var typeMapper = (IRelationalTypeMappingSource)new TestRelationalTypeMappingSource(
-            TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+        var typeMapper = (IRelationalTypeMappingSource)
+            new TestRelationalTypeMappingSource(
+                TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
+                TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+            );
         var typeMapping = typeMapper.FindMapping(nullable ? typeof(int?) : typeof(int));
 
         var parameterBuilder = new RelationalCommandBuilder(
-            new RelationalCommandBuilderDependencies(
-                typeMapper,
-                new ExceptionDetector()));
+            new RelationalCommandBuilderDependencies(typeMapper, new ExceptionDetector())
+        );
 
-        parameterBuilder.AddParameter(
-            "InvariantName",
-            "Name",
-            typeMapping,
-            nullable);
+        parameterBuilder.AddParameter("InvariantName", "Name", typeMapping, nullable);
 
         Assert.Equal(1, parameterBuilder.Parameters.Count);
 
@@ -47,7 +44,8 @@ public class RelationalParameterBuilderTest
     {
         var typeMapper = new TestRelationalTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var modelBuilder = FakeRelationalTestHelpers.Instance.CreateConventionBuilder();
 
@@ -58,13 +56,15 @@ public class RelationalParameterBuilderTest
         var property = model.GetEntityTypes().Single().FindProperty("MyProp");
 
         var parameterBuilder = new RelationalCommandBuilder(
-            new RelationalCommandBuilderDependencies(typeMapper, new ExceptionDetector()));
+            new RelationalCommandBuilderDependencies(typeMapper, new ExceptionDetector())
+        );
 
         parameterBuilder.AddParameter(
             "InvariantName",
             "Name",
             property.GetRelationalTypeMapping(),
-            property.IsNullable);
+            property.IsNullable
+        );
 
         Assert.Equal(1, parameterBuilder.Parameters.Count);
 
@@ -82,12 +82,12 @@ public class RelationalParameterBuilderTest
     {
         var typeMapper = new TestRelationalTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var parameterBuilder = new RelationalCommandBuilder(
-            new RelationalCommandBuilderDependencies(
-                typeMapper,
-                new ExceptionDetector()));
+            new RelationalCommandBuilderDependencies(typeMapper, new ExceptionDetector())
+        );
 
         parameterBuilder.AddCompositeParameter(
             "CompositeInvariant",
@@ -97,13 +97,16 @@ public class RelationalParameterBuilderTest
                     "FirstInvariant",
                     "FirstName",
                     new IntTypeMapping("int", DbType.Int32),
-                    nullable: false),
+                    nullable: false
+                ),
                 new TypeMappedRelationalParameter(
                     "SecondInvariant",
                     "SecondName",
                     new StringTypeMapping("nvarchar(max)", DbType.String),
-                    nullable: true)
-            });
+                    nullable: true
+                ),
+            }
+        );
 
         Assert.Equal(1, parameterBuilder.Parameters.Count);
 
@@ -119,22 +122,23 @@ public class RelationalParameterBuilderTest
     {
         var typeMapper = new TestRelationalTypeMappingSource(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
         var parameterBuilder = new RelationalCommandBuilder(
-            new RelationalCommandBuilderDependencies(
-                typeMapper,
-                new ExceptionDetector()));
+            new RelationalCommandBuilderDependencies(typeMapper, new ExceptionDetector())
+        );
 
         parameterBuilder.AddCompositeParameter(
             "CompositeInvariant",
-            new List<IRelationalParameter>());
+            new List<IRelationalParameter>()
+        );
 
         Assert.Equal(0, parameterBuilder.Parameters.Count);
     }
 
     public static RelationalTypeMapping GetMapping(
         IRelationalTypeMappingSource typeMappingSource,
-        IProperty property)
-        => typeMappingSource.FindMapping(property);
+        IProperty property
+    ) => typeMappingSource.FindMapping(property);
 }

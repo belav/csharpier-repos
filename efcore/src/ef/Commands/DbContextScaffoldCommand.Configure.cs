@@ -31,18 +31,30 @@ internal partial class DbContextScaffoldCommand : ProjectCommandBase
         _connection = command.Argument("<CONNECTION>", Resources.ConnectionDescription);
         _provider = command.Argument("<PROVIDER>", Resources.ProviderDescription);
 
-        _dataAnnotations = command.Option("-d|--data-annotations", Resources.DataAnnotationsDescription);
+        _dataAnnotations = command.Option(
+            "-d|--data-annotations",
+            Resources.DataAnnotationsDescription
+        );
         _context = command.Option("-c|--context <NAME>", Resources.ContextNameDescription);
         _contextDir = command.Option("--context-dir <PATH>", Resources.ContextDirDescription);
         _force = command.Option("-f|--force", Resources.DbContextScaffoldForceDescription);
         _outputDir = command.Option("-o|--output-dir <PATH>", Resources.OutputDirDescription);
         _schemas = command.Option("--schema <SCHEMA_NAME>...", Resources.SchemasDescription);
         _tables = command.Option("-t|--table <TABLE_NAME>...", Resources.TablesDescription);
-        _useDatabaseNames = command.Option("--use-database-names", Resources.UseDatabaseNamesDescription);
+        _useDatabaseNames = command.Option(
+            "--use-database-names",
+            Resources.UseDatabaseNamesDescription
+        );
         _json = Json.ConfigureOption(command);
         _namespace = command.Option("-n|--namespace <NAMESPACE>", Resources.NamespaceDescription);
-        _contextNamespace = command.Option("--context-namespace <NAMESPACE>", Resources.ContextNamespaceDescription);
-        _suppressOnConfiguring = command.Option("--no-onconfiguring", Resources.SuppressOnConfiguringDescription);
+        _contextNamespace = command.Option(
+            "--context-namespace <NAMESPACE>",
+            Resources.ContextNamespaceDescription
+        );
+        _suppressOnConfiguring = command.Option(
+            "--no-onconfiguring",
+            Resources.SuppressOnConfiguringDescription
+        );
         _noPluralize = command.Option("--no-pluralize", Resources.NoPluralizeDescription);
 
         base.Configure(command);

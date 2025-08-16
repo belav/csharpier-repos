@@ -9,5 +9,6 @@ namespace Microsoft.Extensions.Options.Generators
         string Name,
         string SimpleName,
         bool SelfValidates,
-        List<ValidatedMember> MembersToValidate);
+        List<ValidatedMember> MembersToValidate
+    );
 }

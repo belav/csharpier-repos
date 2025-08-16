@@ -5,7 +5,6 @@
 using System.Configuration;
 using System.IdentityModel.Tokens;
 
-
 namespace System.IdentityModel.Configuration
 {
     /// <summary>
@@ -25,7 +24,7 @@ namespace System.IdentityModel.Configuration
         {
             get
             {
-                return ConfigurationManager.GetSection( SectionName ) as SystemIdentityModelSection;
+                return ConfigurationManager.GetSection(SectionName) as SystemIdentityModelSection;
             }
         }
 
@@ -38,17 +37,28 @@ namespace System.IdentityModel.Configuration
             {
                 SystemIdentityModelSection section = SystemIdentityModelSection.Current;
 
-                return ( section != null ) ? section.IdentityConfigurationElements.GetElement( ConfigurationStrings.DefaultServiceName ) : null;
+                return (section != null)
+                    ? section.IdentityConfigurationElements.GetElement(
+                        ConfigurationStrings.DefaultServiceName
+                    )
+                    : null;
             }
         }
 
         /// <summary>
-        /// Returns <see cref="IdentityConfigurationElementCollection"/> collection 
+        /// Returns <see cref="IdentityConfigurationElementCollection"/> collection
         /// </summary>
-        [ConfigurationProperty( ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection )]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public IdentityConfigurationElementCollection IdentityConfigurationElements
         {
-            get { return (IdentityConfigurationElementCollection)this[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (IdentityConfigurationElementCollection)
+                    this[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
         /// <summary>
@@ -56,10 +66,7 @@ namespace System.IdentityModel.Configuration
         /// </summary>
         internal bool IsConfigured
         {
-            get
-            {
-                return IdentityConfigurationElements.IsConfigured;
-            }
+            get { return IdentityConfigurationElements.IsConfigured; }
         }
     }
 }

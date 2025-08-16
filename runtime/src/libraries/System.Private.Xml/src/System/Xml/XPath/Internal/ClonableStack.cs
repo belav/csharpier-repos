@@ -7,7 +7,8 @@ namespace MS.Internal.Xml.XPath
     {
         public ClonableStack() { }
 
-        private ClonableStack(System.Collections.Generic.IEnumerable<T> collection) : base(collection) { }
+        private ClonableStack(System.Collections.Generic.IEnumerable<T> collection)
+            : base(collection) { }
 
         public void Push(T value)
         {
@@ -27,6 +28,9 @@ namespace MS.Internal.Xml.XPath
             return base[base.Count - 1];
         }
 
-        public ClonableStack<T> Clone() { return new ClonableStack<T>(this); }
+        public ClonableStack<T> Clone()
+        {
+            return new ClonableStack<T>(this);
+        }
     }
 }

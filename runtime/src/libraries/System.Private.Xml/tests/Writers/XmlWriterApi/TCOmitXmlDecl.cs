@@ -18,7 +18,11 @@ namespace System.Xml.XmlWriterApiTests
             wSettings.ConformanceLevel = ConformanceLevel.Document;
 
             XmlWriter w = utils.CreateWriter(wSettings);
-            CError.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Mismatch in CL");
+            CError.Compare(
+                w.Settings.ConformanceLevel,
+                ConformanceLevel.Document,
+                "Mismatch in CL"
+            );
             w.WriteStartElement("root");
             w.WriteEndElement();
             w.Dispose();
@@ -28,7 +32,10 @@ namespace System.Xml.XmlWriterApiTests
             xr.Read();
             if (xr.NodeType != XmlNodeType.XmlDeclaration)
             {
-                CError.WriteLine("Did not write XmlDecl when OmitXmlDecl was FALSE. NodeType = {0}", xr.NodeType.ToString());
+                CError.WriteLine(
+                    "Did not write XmlDecl when OmitXmlDecl was FALSE. NodeType = {0}",
+                    xr.NodeType.ToString()
+                );
                 xr.Dispose();
                 Assert.Fail();
             }
@@ -53,7 +60,11 @@ namespace System.Xml.XmlWriterApiTests
             wSettings.OmitXmlDeclaration = true;
 
             XmlWriter w = utils.CreateWriter(wSettings);
-            CError.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Document, "Mismatch in CL");
+            CError.Compare(
+                w.Settings.ConformanceLevel,
+                ConformanceLevel.Document,
+                "Mismatch in CL"
+            );
             CError.Compare(w.Settings.OmitXmlDeclaration, true, "Mismatch in OmitXmlDecl");
             w.WriteStartElement("root");
             w.WriteEndElement();
@@ -89,7 +100,6 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndDocument();
             w.Dispose();
 
-
             XmlReader xr = utils.GetReader();
             // Should not read XmlDeclaration
             while (xr.Read())
@@ -113,13 +123,16 @@ namespace System.Xml.XmlWriterApiTests
             wSettings.ConformanceLevel = ConformanceLevel.Fragment;
 
             XmlWriter w = utils.CreateWriter(wSettings);
-            CError.Compare(w.Settings.ConformanceLevel, ConformanceLevel.Fragment, "Mismatch in CL");
+            CError.Compare(
+                w.Settings.ConformanceLevel,
+                ConformanceLevel.Fragment,
+                "Mismatch in CL"
+            );
             w.WriteStartElement("root");
             w.WriteEndElement();
             w.WriteStartElement("root");
             w.WriteEndElement();
             w.Dispose();
-
 
             Assert.True(utils.CompareReader("<root /><root />"));
         }
@@ -137,7 +150,6 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteStartElement("Root");
             w.WriteEndElement();
             w.Dispose();
-
 
             Assert.True(utils.CompareReader("<?xml version = \"1.0\"?><Root />"));
         }
@@ -161,7 +173,6 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             xr.Dispose();
             w.Dispose();
-
 
             Assert.True(utils.CompareReader("<root />"));
         }

@@ -14,16 +14,47 @@ namespace System.Linq.Tests
             public T[] Items;
             public int CountTouched = 0;
             public int CopyToTouched = 0;
-            public TestCollection(T[] items) { Items = items; }
 
-            public virtual int Count { get { CountTouched++; return Items.Length; } }
+            public TestCollection(T[] items)
+            {
+                Items = items;
+            }
+
+            public virtual int Count
+            {
+                get
+                {
+                    CountTouched++;
+                    return Items.Length;
+                }
+            }
             public bool IsReadOnly => false;
-            public void Add(T item) { throw new NotImplementedException(); }
-            public void Clear() { throw new NotImplementedException(); }
+
+            public void Add(T item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Clear()
+            {
+                throw new NotImplementedException();
+            }
+
             public bool Contains(T item) => Items.Contains(item);
-            public bool Remove(T item) { throw new NotImplementedException(); }
-            public void CopyTo(T[] array, int arrayIndex) { CopyToTouched++; Items.CopyTo(array, arrayIndex); }
+
+            public bool Remove(T item)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void CopyTo(T[] array, int arrayIndex)
+            {
+                CopyToTouched++;
+                Items.CopyTo(array, arrayIndex);
+            }
+
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
@@ -34,21 +65,35 @@ namespace System.Linq.Tests
 
             public TestNonGenericCollection(T[] items) => Items = items;
 
-            public virtual int Count { get { CountTouched++; return Items.Length; } }
+            public virtual int Count
+            {
+                get
+                {
+                    CountTouched++;
+                    return Items.Length;
+                }
+            }
             public bool IsSynchronized => false;
             public object SyncRoot => this;
+
             public void CopyTo(Array array, int index) => throw new NotImplementedException();
 
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
         protected class TestEnumerable<T> : IEnumerable<T>
         {
             public T[] Items;
-            public TestEnumerable(T[] items) { Items = items; }
+
+            public TestEnumerable(T[] items)
+            {
+                Items = items;
+            }
 
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
@@ -56,10 +101,23 @@ namespace System.Linq.Tests
         {
             public T[] Items;
             public int CountTouched = 0;
-            public TestReadOnlyCollection(T[] items) { Items = items; }
 
-            public int Count { get { CountTouched++; return Items.Length; } }
+            public TestReadOnlyCollection(T[] items)
+            {
+                Items = items;
+            }
+
+            public int Count
+            {
+                get
+                {
+                    CountTouched++;
+                    return Items.Length;
+                }
+            }
+
             public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>)Items).GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => Items.GetEnumerator();
         }
 
@@ -86,16 +144,20 @@ namespace System.Linq.Tests
         {
             public bool Equals(string x, string y)
             {
-                if (ReferenceEquals(x, y)) return true;
-                if (x == null | y == null) return false;
+                if (ReferenceEquals(x, y))
+                    return true;
+                if (x == null | y == null)
+                    return false;
                 int length = x.Length;
-                if (length != y.Length) return false;
+                if (length != y.Length)
+                    return false;
                 using (var en = x.OrderBy(i => i).GetEnumerator())
                 {
                     foreach (char c in y.OrderBy(i => i))
                     {
                         en.MoveNext();
-                        if (c != en.Current) return false;
+                        if (c != en.Current)
+                            return false;
                     }
                 }
                 return true;
@@ -103,7 +165,8 @@ namespace System.Linq.Tests
 
             public int GetHashCode(string obj)
             {
-                if (obj == null) return 0;
+                if (obj == null)
+                    return 0;
                 int hash = obj.Length;
                 foreach (char c in obj)
                     hash ^= c;
@@ -111,24 +174,37 @@ namespace System.Linq.Tests
             }
         }
 
-        protected static IEnumerable<int> RepeatedNumberGuaranteedNotCollectionType(int num, long count)
+        protected static IEnumerable<int> RepeatedNumberGuaranteedNotCollectionType(
+            int num,
+            long count
+        )
         {
-            for (long i = 0; i < count; i++) yield return num;
+            for (long i = 0; i < count; i++)
+                yield return num;
         }
 
         protected static IEnumerable<int> NumberRangeGuaranteedNotCollectionType(int num, int count)
         {
-            for (int i = 0; i < count; i++) yield return num + i;
+            for (int i = 0; i < count; i++)
+                yield return num + i;
         }
 
-        protected static IEnumerable<int?> NullableNumberRangeGuaranteedNotCollectionType(int num, int count)
+        protected static IEnumerable<int?> NullableNumberRangeGuaranteedNotCollectionType(
+            int num,
+            int count
+        )
         {
-            for (int i = 0; i < count; i++) yield return num + i;
+            for (int i = 0; i < count; i++)
+                yield return num + i;
         }
 
-        protected static IEnumerable<int?> RepeatedNullableNumberGuaranteedNotCollectionType(int? num, long count)
+        protected static IEnumerable<int?> RepeatedNullableNumberGuaranteedNotCollectionType(
+            int? num,
+            long count
+        )
         {
-            for (long i = 0; i < count; i++) yield return num;
+            for (long i = 0; i < count; i++)
+                yield return num;
         }
 
         protected class ThrowsOnMatchEnumerable<T> : IEnumerable<T>
@@ -146,7 +222,8 @@ namespace System.Linq.Tests
             {
                 foreach (var datum in _data)
                 {
-                    if (datum.Equals(_thrownOn)) throw new Exception();
+                    if (datum.Equals(_thrownOn))
+                        throw new Exception();
                     yield return datum;
                 }
             }
@@ -235,13 +312,15 @@ namespace System.Linq.Tests
 
         protected static IEnumerable<T> ForceNotCollection<T>(IEnumerable<T> source)
         {
-            foreach (T item in source) yield return item;
+            foreach (T item in source)
+                yield return item;
         }
 
         protected static IEnumerable<T> FlipIsCollection<T>(IEnumerable<T> source)
         {
             return source is ICollection<T> ? ForceNotCollection(source) : new List<T>(source);
         }
+
         protected static T[] Repeat<T>(Func<int, T> factory, int count)
         {
             T[] results = new T[count];
@@ -298,12 +377,19 @@ namespace System.Linq.Tests
 
             public int Count => CountWorker();
             public bool IsReadOnly => IsReadOnlyWorker();
+
             public void Add(T item) => AddWorker(item);
+
             public void Clear() => ClearWorker();
+
             public bool Contains(T item) => ContainsWorker(item);
+
             public bool Remove(T item) => RemoveWorker(item);
+
             public void CopyTo(T[] array, int arrayIndex) => CopyToWorker(array, arrayIndex);
+
             public IEnumerator<T> GetEnumerator() => GetEnumeratorWorker();
+
             IEnumerator IEnumerable.GetEnumerator() => NonGenericGetEnumeratorWorker();
         }
 
@@ -321,11 +407,13 @@ namespace System.Linq.Tests
                 e => ForceNotCollection(e),
                 e => e.Concat(ForceNotCollection(Array.Empty<T>())),
                 e => e.Where(i => true),
-                e => ForceNotCollection(e).Skip(0)
+                e => ForceNotCollection(e).Skip(0),
             };
         }
 
-        protected sealed class DelegateIterator<TSource> : IEnumerable<TSource>, IEnumerator<TSource>
+        protected sealed class DelegateIterator<TSource>
+            : IEnumerable<TSource>,
+                IEnumerator<TSource>
         {
             private readonly Func<IEnumerator<TSource>> _getEnumerator;
             private readonly Func<bool> _moveNext;
@@ -342,15 +430,58 @@ namespace System.Linq.Tests
                 Func<IEnumerator> explicitGetEnumerator = null,
                 Func<object> explicitCurrent = null,
                 Action reset = null,
-                Action dispose = null)
+                Action dispose = null
+            )
             {
                 _getEnumerator = getEnumerator ?? (() => this);
-                _moveNext = moveNext ?? (() => { throw new NotImplementedException(); });
-                _current = current ?? (() => { throw new NotImplementedException(); });
-                _explicitGetEnumerator = explicitGetEnumerator ?? (() => { throw new NotImplementedException(); });
-                _explicitCurrent = explicitCurrent ?? (() => { throw new NotImplementedException(); });
-                _reset = reset ?? (() => { throw new NotImplementedException(); });
-                _dispose = dispose ?? (() => { throw new NotImplementedException(); });
+                _moveNext =
+                    moveNext
+                    ?? (
+                        () =>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    );
+                _current =
+                    current
+                    ?? (
+                        () =>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    );
+                _explicitGetEnumerator =
+                    explicitGetEnumerator
+                    ?? (
+                        () =>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    );
+                _explicitCurrent =
+                    explicitCurrent
+                    ?? (
+                        () =>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    );
+                _reset =
+                    reset
+                    ?? (
+                        () =>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    );
+                _dispose =
+                    dispose
+                    ?? (
+                        () =>
+                        {
+                            throw new NotImplementedException();
+                        }
+                    );
             }
 
             public IEnumerator<TSource> GetEnumerator() => _getEnumerator();

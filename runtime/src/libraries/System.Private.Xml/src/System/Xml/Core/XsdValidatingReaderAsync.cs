@@ -14,7 +14,11 @@ using System.Xml.XPath;
 
 namespace System.Xml
 {
-    internal sealed partial class XsdValidatingReader : XmlReader, IXmlSchemaInfo, IXmlLineInfo, IXmlNamespaceResolver
+    internal sealed partial class XsdValidatingReader
+        : XmlReader,
+            IXmlSchemaInfo,
+            IXmlLineInfo,
+            IXmlNamespaceResolver
     {
         // Gets the text value of the current node.
         public override Task<string> GetValueAsync()
@@ -46,7 +50,8 @@ namespace System.Xml
             }
 
             object typedValue = await InternalReadContentAsObjectAsync().ConfigureAwait(false);
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
@@ -60,19 +65,37 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
-        public override async Task<object> ReadContentAsAsync(Type returnType, IXmlNamespaceResolver? namespaceResolver)
+        public override async Task<object> ReadContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver? namespaceResolver
+        )
         {
             if (!CanReadContentAs(this.NodeType))
             {
@@ -86,14 +109,18 @@ namespace System.Xml
 
             object typedValue = tuple_0.Item2;
 
-            XmlSchemaType? xmlType = NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
+            XmlSchemaType? xmlType =
+                NodeType == XmlNodeType.Attribute ? AttributeXmlType : ElementXmlType;
             try
             {
                 if (xmlType != null)
                 {
                     // special-case conversions to DateTimeOffset; typedValue is by default a DateTime
                     // which cannot preserve time zone, so we need to convert from the original string
-                    if (returnType == typeof(DateTimeOffset) && xmlType.Datatype is Datatype_dateTimeBase)
+                    if (
+                        returnType == typeof(DateTimeOffset)
+                        && xmlType.Datatype is Datatype_dateTimeBase
+                    )
                     {
                         typedValue = originalStringValue;
                     }
@@ -102,20 +129,39 @@ namespace System.Xml
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(typedValue, returnType, namespaceResolver);
+                    return XmlUntypedConverter.Untyped.ChangeType(
+                        typedValue,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -159,19 +205,37 @@ namespace System.Xml
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, "String", e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    "String",
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
-        public override async Task<object> ReadElementContentAsAsync(Type returnType, IXmlNamespaceResolver namespaceResolver)
+        public override async Task<object> ReadElementContentAsAsync(
+            Type returnType,
+            IXmlNamespaceResolver namespaceResolver
+        )
         {
             if (this.NodeType != XmlNodeType.Element)
             {
@@ -181,7 +245,8 @@ namespace System.Xml
             XmlSchemaType xmlType;
             string originalStringValue;
 
-            var content = await InternalReadElementContentAsObjectTupleAsync(false).ConfigureAwait(false);
+            var content = await InternalReadElementContentAsObjectTupleAsync(false)
+                .ConfigureAwait(false);
             xmlType = content.Item1;
             originalStringValue = content.Item2;
 
@@ -193,29 +258,55 @@ namespace System.Xml
                 {
                     // special-case conversions to DateTimeOffset; typedValue is by default a DateTime
                     // which cannot preserve time zone, so we need to convert from the original string
-                    if (returnType == typeof(DateTimeOffset) && xmlType.Datatype is Datatype_dateTimeBase)
+                    if (
+                        returnType == typeof(DateTimeOffset)
+                        && xmlType.Datatype is Datatype_dateTimeBase
+                    )
                     {
                         typedValue = originalStringValue;
                     }
 
-                    return xmlType.ValueConverter.ChangeType(typedValue, returnType, namespaceResolver);
+                    return xmlType.ValueConverter.ChangeType(
+                        typedValue,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
                 else
                 {
-                    return XmlUntypedConverter.Untyped.ChangeType(typedValue, returnType, namespaceResolver);
+                    return XmlUntypedConverter.Untyped.ChangeType(
+                        typedValue,
+                        returnType,
+                        namespaceResolver
+                    );
                 }
             }
             catch (FormatException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (InvalidCastException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
             catch (OverflowException e)
             {
-                throw new XmlException(SR.Xml_ReadContentAsFormatException, returnType.ToString(), e, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_ReadContentAsFormatException,
+                    returnType.ToString(),
+                    e,
+                    this as IXmlLineInfo
+                );
             }
         }
 
@@ -319,7 +410,9 @@ namespace System.Xml
                 case ValidatingReaderState.OnReadBinaryContent:
                     _validationState = _savedState;
                     Debug.Assert(_readBinaryHelper != null);
-                    return _readBinaryHelper.FinishAsync().CallBoolTaskFuncWhenFinishAsync(thisRef => thisRef.ReadAsync(), this);
+                    return _readBinaryHelper
+                        .FinishAsync()
+                        .CallBoolTaskFuncWhenFinishAsync(thisRef => thisRef.ReadAsync(), this);
 
                 case ValidatingReaderState.Init:
                     _validationState = ValidatingReaderState.Read;
@@ -356,7 +449,10 @@ namespace System.Xml
                     bool callSkipToEndElem = true;
                     // If union and unionValue has been parsed till EndElement, then validator.ValidateEndElement has been called
                     // Hence should not call SkipToEndElement as the current context has already been popped in the validator
-                    if ((_xmlSchemaInfo.IsUnionType || _xmlSchemaInfo.IsDefault) && _coreReader is XsdCachingReader)
+                    if (
+                        (_xmlSchemaInfo.IsUnionType || _xmlSchemaInfo.IsDefault)
+                        && _coreReader is XsdCachingReader
+                    )
                     {
                         callSkipToEndElem = false;
                     }
@@ -379,7 +475,11 @@ namespace System.Xml
             return;
         }
 
-        public override async Task<int> ReadContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -389,7 +489,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -398,7 +501,9 @@ namespace System.Xml
 
             // call to the helper
             Debug.Assert(_readBinaryHelper != null);
-            int readCount = await _readBinaryHelper.ReadContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper
+                .ReadContentAsBase64Async(buffer, index, count)
+                .ConfigureAwait(false);
 
             // set OnReadBinaryContent state again and return
             _savedState = _validationState;
@@ -406,7 +511,11 @@ namespace System.Xml
             return readCount;
         }
 
-        public override async Task<int> ReadContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -416,7 +525,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -425,7 +537,9 @@ namespace System.Xml
 
             // call to the helper
             Debug.Assert(_readBinaryHelper != null);
-            int readCount = await _readBinaryHelper.ReadContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper
+                .ReadContentAsBinHexAsync(buffer, index, count)
+                .ConfigureAwait(false);
 
             // set OnReadBinaryContent state again and return
             _savedState = _validationState;
@@ -433,7 +547,11 @@ namespace System.Xml
             return readCount;
         }
 
-        public override async Task<int> ReadElementContentAsBase64Async(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -443,7 +561,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -452,7 +573,9 @@ namespace System.Xml
 
             // call to the helper
             Debug.Assert(_readBinaryHelper != null);
-            int readCount = await _readBinaryHelper.ReadElementContentAsBase64Async(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper
+                .ReadElementContentAsBase64Async(buffer, index, count)
+                .ConfigureAwait(false);
 
             // set OnReadBinaryContent state again and return
             _savedState = _validationState;
@@ -460,7 +583,11 @@ namespace System.Xml
             return readCount;
         }
 
-        public override async Task<int> ReadElementContentAsBinHexAsync(byte[] buffer, int index, int count)
+        public override async Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
         {
             if (ReadState != ReadState.Interactive)
             {
@@ -470,7 +597,10 @@ namespace System.Xml
             // init ReadContentAsBinaryHelper when called first time
             if (_validationState != ValidatingReaderState.OnReadBinaryContent)
             {
-                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(_readBinaryHelper, this);
+                _readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
+                    _readBinaryHelper,
+                    this
+                );
                 _savedState = _validationState;
             }
 
@@ -479,7 +609,9 @@ namespace System.Xml
 
             // call to the helper
             Debug.Assert(_readBinaryHelper != null);
-            int readCount = await _readBinaryHelper.ReadElementContentAsBinHexAsync(buffer, index, count).ConfigureAwait(false);
+            int readCount = await _readBinaryHelper
+                .ReadElementContentAsBinHexAsync(buffer, index, count)
+                .ConfigureAwait(false);
 
             // set OnReadBinaryContent state again and return
             _savedState = _validationState;
@@ -508,8 +640,8 @@ namespace System.Xml
 
                     return ValidateWhitespace(GetValueAsync(), _validator);
 
-                case XmlNodeType.Text:          // text inside a node
-                case XmlNodeType.CDATA:         // <![CDATA[...]]>
+                case XmlNodeType.Text: // text inside a node
+                case XmlNodeType.CDATA: // <![CDATA[...]]>
 
                     return ValidateText(GetValueAsync(), _validator);
 
@@ -534,22 +666,35 @@ namespace System.Xml
 
             return Task.CompletedTask;
 
-            static async Task ValidateWhitespace(Task<string> t, XmlSchemaValidator validator) => validator.ValidateWhitespace(await t.ConfigureAwait(false));
+            static async Task ValidateWhitespace(Task<string> t, XmlSchemaValidator validator) =>
+                validator.ValidateWhitespace(await t.ConfigureAwait(false));
 
-            static async Task ValidateText(Task<string> t, XmlSchemaValidator validator) => validator.ValidateText(await t.ConfigureAwait(false));
+            static async Task ValidateText(Task<string> t, XmlSchemaValidator validator) =>
+                validator.ValidateText(await t.ConfigureAwait(false));
         }
 
         private async Task ProcessElementEventAsync()
         {
-            if (_processInlineSchema && IsXSDRoot(_coreReader.LocalName, _coreReader.NamespaceURI) && _coreReader.Depth > 0)
+            if (
+                _processInlineSchema
+                && IsXSDRoot(_coreReader.LocalName, _coreReader.NamespaceURI)
+                && _coreReader.Depth > 0
+            )
             {
                 _xmlSchemaInfo.Clear();
                 _attributeCount = _coreReaderAttributeCount = _coreReader.AttributeCount;
                 if (!_coreReader.IsEmptyElement)
                 {
                     // If its not empty schema, then parse else ignore
-                    _inlineSchemaParser = new Parser(SchemaType.XSD, _coreReaderNameTable, _validator.SchemaSet.GetSchemaNames(_coreReaderNameTable), _validationEvent);
-                    await _inlineSchemaParser.StartParsingAsync(_coreReader, null).ConfigureAwait(false);
+                    _inlineSchemaParser = new Parser(
+                        SchemaType.XSD,
+                        _coreReaderNameTable,
+                        _validator.SchemaSet.GetSchemaNames(_coreReaderNameTable),
+                        _validationEvent
+                    );
+                    await _inlineSchemaParser
+                        .StartParsingAsync(_coreReader, null)
+                        .ConfigureAwait(false);
                     _inlineSchemaParser.ParseReaderNode();
                     _validationState = ValidatingReaderState.ParseInlineSchema;
                 }
@@ -607,13 +752,26 @@ namespace System.Xml
                         if (_manageNamespaces && Ref.Equal(_coreReader.NamespaceURI, _nsXmlNs))
                         {
                             Debug.Assert(_nsManager != null);
-                            _nsManager.AddNamespace(_coreReader.Prefix.Length == 0 ? string.Empty : _coreReader.LocalName, _coreReader.Value);
+                            _nsManager.AddNamespace(
+                                _coreReader.Prefix.Length == 0
+                                    ? string.Empty
+                                    : _coreReader.LocalName,
+                                _coreReader.Value
+                            );
                         }
                     } while (_coreReader.MoveToNextAttribute());
                     _coreReader.MoveToElement();
                 }
 
-                _validator.ValidateElement(_coreReader.LocalName, _coreReader.NamespaceURI, _xmlSchemaInfo, xsiType, xsiNil, xsiSchemaLocation, xsiNoNamespaceSL);
+                _validator.ValidateElement(
+                    _coreReader.LocalName,
+                    _coreReader.NamespaceURI,
+                    _xmlSchemaInfo,
+                    xsiType,
+                    xsiNil,
+                    xsiSchemaLocation,
+                    xsiNoNamespaceSL
+                );
                 ValidateAttributes();
                 _validator.ValidateEndOfAttributes(_xmlSchemaInfo);
                 if (_coreReader.IsEmptyElement)
@@ -636,7 +794,13 @@ namespace System.Xml
                 int depth = _coreReader.Depth;
                 _coreReader = GetCachingReader();
                 Debug.Assert(_cachingReader != null);
-                _cachingReader.RecordTextNode(_xmlSchemaInfo.XmlType!.ValueConverter.ToString(_atomicValue), _originalAtomicValueString, depth + 1, 0, 0);
+                _cachingReader.RecordTextNode(
+                    _xmlSchemaInfo.XmlType!.ValueConverter.ToString(_atomicValue),
+                    _originalAtomicValueString,
+                    depth + 1,
+                    0,
+                    0
+                );
                 _cachingReader.RecordEndElementNode();
                 await _cachingReader.SetToReplayModeAsync().ConfigureAwait(false);
                 _replayCache = true;
@@ -681,11 +845,14 @@ namespace System.Xml
 
         private async Task<object> InternalReadContentAsObjectAsync(bool unwrapTypedValue)
         {
-            var content = await InternalReadContentAsObjectTupleAsync(unwrapTypedValue).ConfigureAwait(false);
+            var content = await InternalReadContentAsObjectTupleAsync(unwrapTypedValue)
+                .ConfigureAwait(false);
             return content.Item2;
         }
 
-        private async Task<(string, object)> InternalReadContentAsObjectTupleAsync(bool unwrapTypedValue)
+        private async Task<(string, object)> InternalReadContentAsObjectTupleAsync(
+            bool unwrapTypedValue
+        )
         {
             string originalStringValue;
 
@@ -697,11 +864,20 @@ namespace System.Xml
                 {
                     if (_validationState == ValidatingReaderState.OnDefaultAttribute)
                     {
-                        XmlSchemaAttribute schemaAttr = _attributePSVI.attributeSchemaInfo.SchemaAttribute!;
+                        XmlSchemaAttribute schemaAttr = _attributePSVI
+                            .attributeSchemaInfo
+                            .SchemaAttribute!;
                         originalStringValue = schemaAttr.DefaultValue ?? schemaAttr.FixedValue!;
                     }
 
-                    return (originalStringValue, ReturnBoxedValue(_attributePSVI.typedAttributeValue, AttributeSchemaInfo.XmlType!, unwrapTypedValue));
+                    return (
+                        originalStringValue,
+                        ReturnBoxedValue(
+                            _attributePSVI.typedAttributeValue,
+                            AttributeSchemaInfo.XmlType!,
+                            unwrapTypedValue
+                        )
+                    );
                 }
                 else
                 {
@@ -731,7 +907,11 @@ namespace System.Xml
                 if (_validator.CurrentContentType == XmlSchemaContentType.TextOnly)
                 {
                     // if current element is of simple type
-                    object? value = ReturnBoxedValue(await ReadTillEndElementAsync().ConfigureAwait(false), _xmlSchemaInfo.XmlType!, unwrapTypedValue);
+                    object? value = ReturnBoxedValue(
+                        await ReadTillEndElementAsync().ConfigureAwait(false),
+                        _xmlSchemaInfo.XmlType!,
+                        unwrapTypedValue
+                    );
                     Debug.Assert(value != null);
 
                     Debug.Assert(_originalAtomicValueString != null);
@@ -748,7 +928,8 @@ namespace System.Xml
                     }
                     else
                     {
-                        originalStringValue = await InternalReadContentAsStringAsync().ConfigureAwait(false);
+                        originalStringValue = await InternalReadContentAsStringAsync()
+                            .ConfigureAwait(false);
                     }
 
                     return (originalStringValue, originalStringValue);
@@ -761,14 +942,21 @@ namespace System.Xml
             return InternalReadElementContentAsObjectAsync(false);
         }
 
-        private async Task<(XmlSchemaType, object)> InternalReadElementContentAsObjectAsync(bool unwrapTypedValue)
+        private async Task<(XmlSchemaType, object)> InternalReadElementContentAsObjectAsync(
+            bool unwrapTypedValue
+        )
         {
-            var content = await InternalReadElementContentAsObjectTupleAsync(unwrapTypedValue).ConfigureAwait(false);
+            var content = await InternalReadElementContentAsObjectTupleAsync(unwrapTypedValue)
+                .ConfigureAwait(false);
 
             return (content.Item1, content.Item3);
         }
 
-        private async Task<(XmlSchemaType, string, object)> InternalReadElementContentAsObjectTupleAsync(bool unwrapTypedValue)
+        private async Task<(
+            XmlSchemaType,
+            string,
+            object
+        )> InternalReadElementContentAsObjectTupleAsync(bool unwrapTypedValue)
         {
             XmlSchemaType? xmlType;
             string originalString;
@@ -780,7 +968,11 @@ namespace System.Xml
             {
                 if (_xmlSchemaInfo.ContentType == XmlSchemaContentType.TextOnly)
                 {
-                    typedValue = ReturnBoxedValue(_atomicValue, _xmlSchemaInfo.XmlType!, unwrapTypedValue);
+                    typedValue = ReturnBoxedValue(
+                        _atomicValue,
+                        _xmlSchemaInfo.XmlType!,
+                        unwrapTypedValue
+                    );
                 }
                 else
                 {
@@ -805,7 +997,11 @@ namespace System.Xml
                 {
                     if (_xmlSchemaInfo.ContentType == XmlSchemaContentType.TextOnly)
                     {
-                        typedValue = ReturnBoxedValue(_atomicValue, _xmlSchemaInfo.XmlType!, unwrapTypedValue);
+                        typedValue = ReturnBoxedValue(
+                            _atomicValue,
+                            _xmlSchemaInfo.XmlType!,
+                            unwrapTypedValue
+                        );
                     }
                     else
                     {
@@ -826,11 +1022,16 @@ namespace System.Xml
             else if (this.NodeType == XmlNodeType.Element)
             {
                 // the first child is again element node
-                throw new XmlException(SR.Xml_MixedReadElementContentAs, string.Empty, this as IXmlLineInfo);
+                throw new XmlException(
+                    SR.Xml_MixedReadElementContentAs,
+                    string.Empty,
+                    this as IXmlLineInfo
+                );
             }
             else
             {
-                var content = await InternalReadContentAsObjectTupleAsync(unwrapTypedValue).ConfigureAwait(false);
+                var content = await InternalReadContentAsObjectTupleAsync(unwrapTypedValue)
+                    .ConfigureAwait(false);
                 originalString = content.Item1;
 
                 typedValue = content.Item2;
@@ -838,7 +1039,11 @@ namespace System.Xml
                 // ReadElementContentAsXXX cannot be called on mixed content, if positioned on node other than EndElement, Error
                 if (this.NodeType != XmlNodeType.EndElement)
                 {
-                    throw new XmlException(SR.Xml_MixedReadElementContentAs, string.Empty, this as IXmlLineInfo);
+                    throw new XmlException(
+                        SR.Xml_MixedReadElementContentAs,
+                        string.Empty,
+                        this as IXmlLineInfo
+                    );
                 }
             }
 
@@ -875,7 +1080,9 @@ namespace System.Xml
 
                         case XmlNodeType.Whitespace:
                         case XmlNodeType.SignificantWhitespace:
-                            _validator.ValidateWhitespace(await GetValueAsync().ConfigureAwait(false));
+                            _validator.ValidateWhitespace(
+                                await GetValueAsync().ConfigureAwait(false)
+                            );
                             break;
 
                         case XmlNodeType.Comment:
@@ -895,7 +1102,7 @@ namespace System.Xml
                     }
 
                     continue;
-                breakWhile:
+                    breakWhile:
                     break;
                 }
             }

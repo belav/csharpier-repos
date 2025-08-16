@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
         internal override string GetExpectedOutputForNoDiagnostics(MockCSharpCompiler cmd)
         {
             var expectedHeader = GetExpectedErrorLogHeader(cmd);
-            var expectedIssues = @"
+            var expectedIssues =
+                @"
       ""results"": [
       ]
     }
@@ -30,16 +31,23 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
             return expectedHeader + expectedIssues;
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void NoDiagnostics()
         {
             NoDiagnosticsImpl();
         }
 
-        internal override string GetExpectedOutputForSimpleCompilerDiagnostics(MockCSharpCompiler cmd, string sourceFile)
+        internal override string GetExpectedOutputForSimpleCompilerDiagnostics(
+            MockCSharpCompiler cmd,
+            string sourceFile
+        )
         {
             var expectedHeader = GetExpectedErrorLogHeader(cmd);
-            var expectedIssues = string.Format(@"
+            var expectedIssues = string.Format(
+                @"
       ""results"": [
         {{
           ""ruleId"": ""CS5001"",
@@ -100,21 +108,31 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
       }}
     }}
   ]
-}}", AnalyzerForErrorLogTest.GetUriForPath(sourceFile));
+}}",
+                AnalyzerForErrorLogTest.GetUriForPath(sourceFile)
+            );
 
             return expectedHeader + expectedIssues;
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void SimpleCompilerDiagnostics()
         {
             SimpleCompilerDiagnosticsImpl();
         }
 
-        internal override string GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(MockCSharpCompiler cmd, string sourceFile, params string[] suppressionKinds)
+        internal override string GetExpectedOutputForSimpleCompilerDiagnosticsSuppressed(
+            MockCSharpCompiler cmd,
+            string sourceFile,
+            params string[] suppressionKinds
+        )
         {
             var expectedHeader = GetExpectedErrorLogHeader(cmd);
-            var expectedIssues = string.Format(@"
+            var expectedIssues = string.Format(
+                @"
       ""results"": [
         {{
           ""ruleId"": ""CS5001"",
@@ -178,39 +196,64 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
       }}
     }}
   ]
-}}", AnalyzerForErrorLogTest.GetUriForPath(sourceFile));
+}}",
+                AnalyzerForErrorLogTest.GetUriForPath(sourceFile)
+            );
 
             return expectedHeader + expectedIssues;
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void SimpleCompilerDiagnosticsSuppressed()
         {
             SimpleCompilerDiagnosticsSuppressedImpl();
         }
 
-        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithAndWithoutLocation(MockCSharpCompiler cmd)
+        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithAndWithoutLocation(
+            MockCSharpCompiler cmd
+        )
         {
             var expectedHeader = GetExpectedErrorLogHeader(cmd);
-            var expectedIssues = AnalyzerForErrorLogTest.GetExpectedV1ErrorLogResultsAndRulesText(cmd.Compilation);
+            var expectedIssues = AnalyzerForErrorLogTest.GetExpectedV1ErrorLogResultsAndRulesText(
+                cmd.Compilation
+            );
             return expectedHeader + expectedIssues;
         }
 
-        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(MockCSharpCompiler cmd, string justification, string suppressionType, params string[] suppressionKinds)
+        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithSuppression(
+            MockCSharpCompiler cmd,
+            string justification,
+            string suppressionType,
+            params string[] suppressionKinds
+        )
         {
             var expectedHeader = GetExpectedErrorLogHeader(cmd);
-            var expectedIssues = AnalyzerForErrorLogTest.GetExpectedV1ErrorLogWithSuppressionResultsAndRulesText(cmd.Compilation);
+            var expectedIssues =
+                AnalyzerForErrorLogTest.GetExpectedV1ErrorLogWithSuppressionResultsAndRulesText(
+                    cmd.Compilation
+                );
             return expectedHeader + expectedIssues;
         }
 
-        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithWarnAsError(MockCSharpCompiler cmd)
+        internal override string GetExpectedOutputForAnalyzerDiagnosticsWithWarnAsError(
+            MockCSharpCompiler cmd
+        )
         {
             var expectedHeader = GetExpectedErrorLogHeader(cmd);
-            var expectedIssues = AnalyzerForErrorLogTest.GetExpectedV1ErrorLogResultsAndRulesText(cmd.Compilation, warnAsError: true);
+            var expectedIssues = AnalyzerForErrorLogTest.GetExpectedV1ErrorLogResultsAndRulesText(
+                cmd.Compilation,
+                warnAsError: true
+            );
             return expectedHeader + expectedIssues;
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void AnalyzerDiagnosticsWithAndWithoutLocation()
         {
             AnalyzerDiagnosticsWithAndWithoutLocationImpl();

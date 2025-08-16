@@ -49,11 +49,10 @@ namespace System.Management
     {
         private readonly ManagementObject parent;
 
-        private sealed class enumLock
-        {
-        } //used to lock usage of BeginMethodEnum/NextMethod
+        private sealed class enumLock { } //used to lock usage of BeginMethodEnum/NextMethod
 
-        internal MethodDataCollection(ManagementObject parent) : base()
+        internal MethodDataCollection(ManagementObject parent)
+            : base()
         {
             this.parent = parent;
         }
@@ -73,7 +72,8 @@ namespace System.Management
             get
             {
                 int i = 0;
-                IWbemClassObjectFreeThreaded inParameters = null, outParameters = null;
+                IWbemClassObjectFreeThreaded inParameters = null,
+                    outParameters = null;
                 string methodName;
                 int status = (int)ManagementStatus.Failed;
 
@@ -85,15 +85,29 @@ namespace System.Management
 
                         if (status >= 0)
                         {
-                            methodName = "";    // Condition primer to branch into the while loop.
-                            while (methodName != null && status >= 0 && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA)
+                            methodName = ""; // Condition primer to branch into the while loop.
+                            while (
+                                methodName != null
+                                && status >= 0
+                                && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA
+                            )
                             {
-                                methodName = null; inParameters = null; outParameters = null;
-                                status = parent.wbemObject.NextMethod_(0, out methodName, out inParameters, out outParameters);
-                                if (status >= 0 && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA)
+                                methodName = null;
+                                inParameters = null;
+                                outParameters = null;
+                                status = parent.wbemObject.NextMethod_(
+                                    0,
+                                    out methodName,
+                                    out inParameters,
+                                    out outParameters
+                                );
+                                if (
+                                    status >= 0
+                                    && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA
+                                )
                                     i++;
                             }
-                            parent.wbemObject.EndMethodEnumeration_();  // Ignore status.
+                            parent.wbemObject.EndMethodEnumeration_(); // Ignore status.
                         }
                     }
                     catch (COMException e)
@@ -251,7 +265,8 @@ namespace System.Management
             {
                 this.parent = parent;
                 methodNames = new ArrayList();
-                IWbemClassObjectFreeThreaded inP = null, outP = null;
+                IWbemClassObjectFreeThreaded inP = null,
+                    outP = null;
                 string tempMethodName;
                 int status = (int)ManagementStatus.Failed;
 
@@ -263,15 +278,27 @@ namespace System.Management
 
                         if (status >= 0)
                         {
-                            tempMethodName = "";    // Condition primer to branch into the while loop.
-                            while (tempMethodName != null && status >= 0 && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA)
+                            tempMethodName = ""; // Condition primer to branch into the while loop.
+                            while (
+                                tempMethodName != null
+                                && status >= 0
+                                && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA
+                            )
                             {
                                 tempMethodName = null;
-                                status = parent.wbemObject.NextMethod_(0, out tempMethodName, out inP, out outP);
-                                if (status >= 0 && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA)
+                                status = parent.wbemObject.NextMethod_(
+                                    0,
+                                    out tempMethodName,
+                                    out inP,
+                                    out outP
+                                );
+                                if (
+                                    status >= 0
+                                    && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA
+                                )
                                     methodNames.Add(tempMethodName);
                             }
-                            parent.wbemObject.EndMethodEnumeration_();  // Ignore status.
+                            parent.wbemObject.EndMethodEnumeration_(); // Ignore status.
                         }
                     }
                     catch (COMException e)
@@ -292,7 +319,10 @@ namespace System.Management
             }
 
             /// <internalonly/>
-            object IEnumerator.Current { get { return (object)this.Current; } }
+            object IEnumerator.Current
+            {
+                get { return (object)this.Current; }
+            }
 
             /// <summary>
             /// <para>Returns the current <see cref='System.Management.MethodData'/> in the <see cref='System.Management.MethodDataCollection'/>
@@ -301,10 +331,7 @@ namespace System.Management
             /// <value>The current <see cref='System.Management.MethodData'/> item in the collection.</value>
             public MethodData Current
             {
-                get
-                {
-                    return new MethodData(parent, (string)en.Current);
-                }
+                get { return new MethodData(parent, (string)en.Current); }
             }
 
             /// <summary>
@@ -323,9 +350,7 @@ namespace System.Management
             {
                 en.Reset();
             }
-
-        }//MethodDataEnumerator
-
+        } //MethodDataEnumerator
 
         //
         //Methods
@@ -346,7 +371,6 @@ namespace System.Management
                 return new MethodData(parent, methodName);
             }
         }
-
 
         /// <summary>
         /// <para>Removes a <see cref='System.Management.MethodData'/> from the <see cref='System.Management.MethodDataCollection'/>.</para>
@@ -403,8 +427,6 @@ namespace System.Management
             Add(methodName, null, null);
         }
 
-
-
         //This variant takes the full information, i.e. the method name and in & out param objects
         /// <summary>
         /// <para>Adds a <see cref='System.Management.MethodData'/> to the <see cref='System.Management.MethodDataCollection'/>. This overload will add a new method with the
@@ -418,9 +440,14 @@ namespace System.Management
         ///    done when the class has no instances. Any other case will result in an
         ///    exception.</para>
         /// </remarks>
-        public virtual void Add(string methodName, ManagementBaseObject inParameters, ManagementBaseObject outParameters)
+        public virtual void Add(
+            string methodName,
+            ManagementBaseObject inParameters,
+            ManagementBaseObject outParameters
+        )
         {
-            IWbemClassObjectFreeThreaded wbemIn = null, wbemOut = null;
+            IWbemClassObjectFreeThreaded wbemIn = null,
+                wbemOut = null;
 
             if (parent.GetType() == typeof(ManagementObject)) //can't add methods to instance
                 throw new InvalidOperationException();
@@ -450,6 +477,5 @@ namespace System.Management
                 Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
             }
         }
-
-    }//MethodDataCollection
+    } //MethodDataCollection
 }

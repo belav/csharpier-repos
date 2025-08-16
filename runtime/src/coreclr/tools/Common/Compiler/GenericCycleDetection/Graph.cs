@@ -30,10 +30,7 @@ namespace ILCompiler
 
             public IEnumerable<P> Vertices
             {
-                get
-                {
-                    return this._vertexMap.Keys.ToArray();
-                }
+                get { return this._vertexMap.Keys.ToArray(); }
             }
         }
     }

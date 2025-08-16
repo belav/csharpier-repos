@@ -28,7 +28,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using Xunit;
 
 namespace System.Data.Tests
@@ -180,7 +179,6 @@ namespace System.Data.Tests
             t.Columns[0].AutoIncrementStep = 5;
 
             t.Columns[1].DefaultValue = "testme";
-
 
             // null test & missing columns
             DataRow r = t.Rows.Add(new object[] { null, null });
@@ -640,6 +638,7 @@ namespace System.Data.Tests
             index = ds.Tables[0].Rows.IndexOf(dr5);
             Assert.Equal(-1, index);
         }
+
         [Fact]
         public void IndexOfTest()
         {

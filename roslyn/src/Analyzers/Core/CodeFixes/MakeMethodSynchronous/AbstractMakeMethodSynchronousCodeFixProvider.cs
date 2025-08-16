@@ -22,7 +22,11 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
     internal abstract class AbstractMakeMethodSynchronousCodeFixProvider : CodeFixProvider
     {
         protected abstract bool IsAsyncSupportingFunctionSyntax(SyntaxNode node);
-        protected abstract SyntaxNode RemoveAsyncTokenAndFixReturnType(IMethodSymbol methodSymbol, SyntaxNode node, KnownTypes knownTypes);
+        protected abstract SyntaxNode RemoveAsyncTokenAndFixReturnType(
+            IMethodSymbol methodSymbol,
+            SyntaxNode node,
+            KnownTypes knownTypes
+        );
 
         public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
@@ -38,9 +42,12 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
                 context.RegisterCodeFix(
                     CodeAction.Create(
                         CodeFixesResources.Make_method_synchronous,
-                        cancellationToken => FixNodeAsync(context.Document, node, cancellationToken),
-                        nameof(CodeFixesResources.Make_method_synchronous)),
-                    context.Diagnostics);
+                        cancellationToken =>
+                            FixNodeAsync(context.Document, node, cancellationToken),
+                        nameof(CodeFixesResources.Make_method_synchronous)
+                    ),
+                    context.Diagnostics
+                );
             }
 
             return Task.CompletedTask;
@@ -49,28 +56,50 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
         private const string AsyncSuffix = "Async";
 
         private async Task<Solution> FixNodeAsync(
-            Document document, SyntaxNode node, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             // See if we're on an actual method declaration (otherwise we're on a lambda declaration).
             // If we're on a method declaration, we'll get an IMethodSymbol back.  In that case, check
             // if it has the 'Async' suffix, and remove that suffix if so.
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var methodSymbol = (IMethodSymbol?)(semanticModel.GetDeclaredSymbol(node, cancellationToken) ?? semanticModel.GetSymbolInfo(node, cancellationToken).GetAnySymbol());
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var methodSymbol = (IMethodSymbol?)(
+                semanticModel.GetDeclaredSymbol(node, cancellationToken)
+                ?? semanticModel.GetSymbolInfo(node, cancellationToken).GetAnySymbol()
+            );
             Contract.ThrowIfNull(methodSymbol);
 
-            if (methodSymbol.IsOrdinaryMethodOrLocalFunction() &&
-                methodSymbol.Name.Length > AsyncSuffix.Length &&
-                methodSymbol.Name.EndsWith(AsyncSuffix))
+            if (
+                methodSymbol.IsOrdinaryMethodOrLocalFunction()
+                && methodSymbol.Name.Length > AsyncSuffix.Length
+                && methodSymbol.Name.EndsWith(AsyncSuffix)
+            )
             {
-                return await RenameThenRemoveAsyncTokenAsync(document, node, methodSymbol, cancellationToken).ConfigureAwait(false);
+                return await RenameThenRemoveAsyncTokenAsync(
+                        document,
+                        node,
+                        methodSymbol,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
-                return await RemoveAsyncTokenAsync(document, methodSymbol, node, cancellationToken).ConfigureAwait(false);
+                return await RemoveAsyncTokenAsync(document, methodSymbol, node, cancellationToken)
+                    .ConfigureAwait(false);
             }
         }
 
-        private async Task<Solution> RenameThenRemoveAsyncTokenAsync(Document document, SyntaxNode node, IMethodSymbol methodSymbol, CancellationToken cancellationToken)
+        private async Task<Solution> RenameThenRemoveAsyncTokenAsync(
+            Document document,
+            SyntaxNode node,
+            IMethodSymbol methodSymbol,
+            CancellationToken cancellationToken
+        )
         {
             var name = methodSymbol.Name;
             var newName = name[..^AsyncSuffix.Length];
@@ -80,30 +109,57 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             var syntaxPath = new SyntaxPath(node);
 
             // Rename the method to remove the 'Async' suffix, then remove the 'async' keyword.
-            var newSolution = await Renamer.RenameSymbolAsync(solution, methodSymbol, new SymbolRenameOptions(), newName, cancellationToken).ConfigureAwait(false);
+            var newSolution = await Renamer
+                .RenameSymbolAsync(
+                    solution,
+                    methodSymbol,
+                    new SymbolRenameOptions(),
+                    newName,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var newDocument = newSolution.GetRequiredDocument(document.Id);
-            var newRoot = await newDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var newRoot = await newDocument
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (syntaxPath.TryResolve(newRoot, out SyntaxNode? newNode))
             {
-                var semanticModel = await newDocument.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-                var newMethod = (IMethodSymbol)semanticModel.GetRequiredDeclaredSymbol(newNode, cancellationToken);
-                return await RemoveAsyncTokenAsync(newDocument, newMethod, newNode, cancellationToken).ConfigureAwait(false);
+                var semanticModel = await newDocument
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var newMethod = (IMethodSymbol)
+                    semanticModel.GetRequiredDeclaredSymbol(newNode, cancellationToken);
+                return await RemoveAsyncTokenAsync(
+                        newDocument,
+                        newMethod,
+                        newNode,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return newSolution;
         }
 
         private async Task<Solution> RemoveAsyncTokenAsync(
-            Document document, IMethodSymbol methodSymbol, SyntaxNode node, CancellationToken cancellationToken)
+            Document document,
+            IMethodSymbol methodSymbol,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await document
+                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
 
             var annotation = new SyntaxAnnotation();
             var newNode = RemoveAsyncTokenAndFixReturnType(methodSymbol, node, knownTypes)
                 .WithAdditionalAnnotations(Formatter.Annotation, annotation);
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var newRoot = root.ReplaceNode(node, newNode);
 
             var newDocument = document.WithSyntaxRoot(newRoot);
@@ -112,38 +168,64 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             if (!methodSymbol.IsOrdinaryMethodOrLocalFunction())
                 return newSolution;
 
-            return await RemoveAwaitFromCallersAsync(
-                newDocument, annotation, cancellationToken).ConfigureAwait(false);
+            return await RemoveAwaitFromCallersAsync(newDocument, annotation, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private static async Task<Solution> RemoveAwaitFromCallersAsync(
-            Document document, SyntaxAnnotation annotation, CancellationToken cancellationToken)
+            Document document,
+            SyntaxAnnotation annotation,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxRoot = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var methodDeclaration = syntaxRoot.GetAnnotatedNodes(annotation).FirstOrDefault();
             if (methodDeclaration != null)
             {
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                if (semanticModel.GetDeclaredSymbol(methodDeclaration, cancellationToken) is IMethodSymbol methodSymbol)
+                if (
+                    semanticModel.GetDeclaredSymbol(methodDeclaration, cancellationToken)
+                    is IMethodSymbol methodSymbol
+                )
                 {
 #if CODE_STYLE
 
-                    var references = await SymbolFinder.FindReferencesAsync(
-                        methodSymbol, document.Project.Solution, cancellationToken).ConfigureAwait(false);
+                    var references = await SymbolFinder
+                        .FindReferencesAsync(
+                            methodSymbol,
+                            document.Project.Solution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
 #else
 
-                    var references = await SymbolFinder.FindRenamableReferencesAsync(
-                        ImmutableArray.Create<ISymbol>(methodSymbol), document.Project.Solution, cancellationToken).ConfigureAwait(false);
+                    var references = await SymbolFinder
+                        .FindRenamableReferencesAsync(
+                            ImmutableArray.Create<ISymbol>(methodSymbol),
+                            document.Project.Solution,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
 #endif
 
-                    var referencedSymbol = references.FirstOrDefault(r => Equals(r.Definition, methodSymbol));
+                    var referencedSymbol = references.FirstOrDefault(r =>
+                        Equals(r.Definition, methodSymbol)
+                    );
                     if (referencedSymbol != null)
                     {
                         return await RemoveAwaitFromCallersAsync(
-                            document.Project.Solution, referencedSymbol.Locations.ToImmutableArray(), cancellationToken).ConfigureAwait(false);
+                                document.Project.Solution,
+                                referencedSymbol.Locations.ToImmutableArray(),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
             }
@@ -152,7 +234,10 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
         }
 
         private static async Task<Solution> RemoveAwaitFromCallersAsync(
-            Solution solution, ImmutableArray<ReferenceLocation> locations, CancellationToken cancellationToken)
+            Solution solution,
+            ImmutableArray<ReferenceLocation> locations,
+            CancellationToken cancellationToken
+        )
         {
             var currentSolution = solution;
 
@@ -161,24 +246,39 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             foreach (var group in groupedLocations)
             {
                 currentSolution = await RemoveAwaitFromCallersAsync(
-                    currentSolution, group, cancellationToken).ConfigureAwait(false);
+                        currentSolution,
+                        group,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return currentSolution;
         }
 
         private static async Task<Solution> RemoveAwaitFromCallersAsync(
-            Solution currentSolution, IGrouping<Document, ReferenceLocation> group, CancellationToken cancellationToken)
+            Solution currentSolution,
+            IGrouping<Document, ReferenceLocation> group,
+            CancellationToken cancellationToken
+        )
         {
             var document = group.Key;
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var editor = new SyntaxEditor(root, currentSolution.Services);
 
             foreach (var location in group)
             {
-                RemoveAwaitFromCallerIfPresent(editor, syntaxFactsService, root, location, cancellationToken);
+                RemoveAwaitFromCallerIfPresent(
+                    editor,
+                    syntaxFactsService,
+                    root,
+                    location,
+                    cancellationToken
+                );
             }
 
             var newRoot = editor.GetChangedRoot();
@@ -186,9 +286,12 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
         }
 
         private static void RemoveAwaitFromCallerIfPresent(
-            SyntaxEditor editor, ISyntaxFactsService syntaxFacts,
-            SyntaxNode root, ReferenceLocation referenceLocation,
-            CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode root,
+            ReferenceLocation referenceLocation,
+            CancellationToken cancellationToken
+        )
         {
             if (referenceLocation.IsImplicit)
             {
@@ -211,8 +314,10 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
             //  await <expr>.M(...).ConfigureAwait(...)
 
             var expressionNode = nameNode;
-            if (syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode) ||
-                syntaxFacts.IsNameOfMemberBindingExpression(nameNode))
+            if (
+                syntaxFacts.IsNameOfSimpleMemberAccessExpression(nameNode)
+                || syntaxFacts.IsNameOfMemberBindingExpression(nameNode)
+            )
             {
                 expressionNode = nameNode.Parent;
             }
@@ -229,34 +334,55 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
 
             if (syntaxFacts.IsExpressionOfAwaitExpression(invocationExpression))
             {
-                // Handle the case where we're directly awaited.  
+                // Handle the case where we're directly awaited.
                 var awaitExpression = invocationExpression.GetRequiredParent();
-                editor.ReplaceNode(awaitExpression, (currentAwaitExpression, generator) =>
-                    syntaxFacts.GetExpressionOfAwaitExpression(currentAwaitExpression)
-                               .WithTriviaFrom(currentAwaitExpression));
+                editor.ReplaceNode(
+                    awaitExpression,
+                    (currentAwaitExpression, generator) =>
+                        syntaxFacts
+                            .GetExpressionOfAwaitExpression(currentAwaitExpression)
+                            .WithTriviaFrom(currentAwaitExpression)
+                );
             }
             else if (syntaxFacts.IsExpressionOfMemberAccessExpression(invocationExpression))
             {
                 // Check for the .ConfigureAwait case.
                 var parentMemberAccessExpression = invocationExpression.GetRequiredParent();
-                var parentMemberAccessExpressionNameNode = syntaxFacts.GetNameOfMemberAccessExpression(parentMemberAccessExpression);
+                var parentMemberAccessExpressionNameNode =
+                    syntaxFacts.GetNameOfMemberAccessExpression(parentMemberAccessExpression);
 
-                var parentMemberAccessExpressionName = syntaxFacts.GetIdentifierOfSimpleName(parentMemberAccessExpressionNameNode).ValueText;
+                var parentMemberAccessExpressionName = syntaxFacts
+                    .GetIdentifierOfSimpleName(parentMemberAccessExpressionNameNode)
+                    .ValueText;
                 if (parentMemberAccessExpressionName == nameof(Task.ConfigureAwait))
                 {
                     var parentExpression = parentMemberAccessExpression.Parent;
                     if (syntaxFacts.IsExpressionOfAwaitExpression(parentExpression))
                     {
                         var awaitExpression = parentExpression.GetRequiredParent();
-                        editor.ReplaceNode(awaitExpression, (currentAwaitExpression, generator) =>
-                        {
-                            var currentConfigureAwaitInvocation = syntaxFacts.GetExpressionOfAwaitExpression(currentAwaitExpression);
-                            var currentMemberAccess = syntaxFacts.GetExpressionOfInvocationExpression(currentConfigureAwaitInvocation);
-                            var currentInvocationExpression = syntaxFacts.GetExpressionOfMemberAccessExpression(currentMemberAccess);
-                            Contract.ThrowIfNull(currentInvocationExpression);
+                        editor.ReplaceNode(
+                            awaitExpression,
+                            (currentAwaitExpression, generator) =>
+                            {
+                                var currentConfigureAwaitInvocation =
+                                    syntaxFacts.GetExpressionOfAwaitExpression(
+                                        currentAwaitExpression
+                                    );
+                                var currentMemberAccess =
+                                    syntaxFacts.GetExpressionOfInvocationExpression(
+                                        currentConfigureAwaitInvocation
+                                    );
+                                var currentInvocationExpression =
+                                    syntaxFacts.GetExpressionOfMemberAccessExpression(
+                                        currentMemberAccess
+                                    );
+                                Contract.ThrowIfNull(currentInvocationExpression);
 
-                            return currentInvocationExpression.WithTriviaFrom(currentAwaitExpression);
-                        });
+                                return currentInvocationExpression.WithTriviaFrom(
+                                    currentAwaitExpression
+                                );
+                            }
+                        );
                     }
                 }
             }

@@ -18,7 +18,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private bool _isValidLocation;
 
-        private UnprocessedDocumentationCommentFinder(DiagnosticBag diagnostics, TextSpan? filterSpanWithinTree, CancellationToken cancellationToken)
+        private UnprocessedDocumentationCommentFinder(
+            DiagnosticBag diagnostics,
+            TextSpan? filterSpanWithinTree,
+            CancellationToken cancellationToken
+        )
             : base(SyntaxWalkerDepth.Trivia)
         {
             _diagnostics = diagnostics;
@@ -26,18 +30,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             _cancellationToken = cancellationToken;
         }
 
-        public static void ReportUnprocessed(SyntaxTree tree, TextSpan? filterSpanWithinTree, DiagnosticBag diagnostics, CancellationToken cancellationToken)
+        public static void ReportUnprocessed(
+            SyntaxTree tree,
+            TextSpan? filterSpanWithinTree,
+            DiagnosticBag diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             if (tree.ReportDocumentationCommentDiagnostics())
             {
-                UnprocessedDocumentationCommentFinder finder = new UnprocessedDocumentationCommentFinder(diagnostics, filterSpanWithinTree, cancellationToken);
+                UnprocessedDocumentationCommentFinder finder =
+                    new UnprocessedDocumentationCommentFinder(
+                        diagnostics,
+                        filterSpanWithinTree,
+                        cancellationToken
+                    );
                 finder.Visit(tree.GetRoot(cancellationToken));
             }
         }
 
         private bool IsSyntacticallyFilteredOut(TextSpan fullSpan)
         {
-            return _filterSpanWithinTree.HasValue && !_filterSpanWithinTree.Value.Contains(fullSpan);
+            return _filterSpanWithinTree.HasValue
+                && !_filterSpanWithinTree.Value.Contains(fullSpan);
         }
 
         public override void DefaultVisit(SyntaxNode node)
@@ -60,12 +75,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            if (node is BaseTypeDeclarationSyntax ||
-                node is DelegateDeclarationSyntax ||
-                node is EnumMemberDeclarationSyntax ||
-                node is BaseMethodDeclarationSyntax ||
-                node is BasePropertyDeclarationSyntax || //includes EventDeclarationSyntax
-                node is BaseFieldDeclarationSyntax) //includes EventFieldDeclarationSyntax
+            if (
+                node is BaseTypeDeclarationSyntax
+                || node is DelegateDeclarationSyntax
+                || node is EnumMemberDeclarationSyntax
+                || node is BaseMethodDeclarationSyntax
+                || node is BasePropertyDeclarationSyntax
+                || //includes EventDeclarationSyntax
+                node is BaseFieldDeclarationSyntax
+            ) //includes EventFieldDeclarationSyntax
             {
                 // Will be cleared the next time we visit a token,
                 // after the leading trivia, if there is any.
@@ -101,7 +119,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 int start = trivia.Position; // FullSpan start to include /** or ///
                 const int length = 1; //Match dev11: span is just one character
-                _diagnostics.Add(ErrorCode.WRN_UnprocessedXMLComment, new SourceLocation(trivia.SyntaxTree, new TextSpan(start, length)));
+                _diagnostics.Add(
+                    ErrorCode.WRN_UnprocessedXMLComment,
+                    new SourceLocation(trivia.SyntaxTree, new TextSpan(start, length))
+                );
             }
             base.VisitTrivia(trivia);
         }

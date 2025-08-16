@@ -7,17 +7,16 @@ Module Name:
 
 --*/
 
-namespace System.Net.Security {
-
-
-    
+namespace System.Net.Security
+{
     //
     // WebRequest - specific authentication flags
     //
-    public enum AuthenticationLevel {
+    public enum AuthenticationLevel
+    {
         None = 0,
-        MutualAuthRequested = 1,    // default setting
-        MutualAuthRequired  = 2
+        MutualAuthRequested = 1, // default setting
+        MutualAuthRequired = 2,
     }
 
     // This will request security properties of a NegotiateStream
@@ -30,8 +29,6 @@ namespace System.Net.Security {
         Sign = 1,
 
         // Both data confidentiality and integrity
-        EncryptAndSign = 2
+        EncryptAndSign = 2,
     }
-
 }
-

@@ -19,6 +19,6 @@ namespace System.ServiceModel.Channels
         /// <summary>
         /// Indicates WebSocket transport will never be used.
         /// </summary>
-        Never
+        Never,
     }
 }

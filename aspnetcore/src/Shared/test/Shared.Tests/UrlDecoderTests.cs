@@ -54,8 +54,8 @@ public class UrlDecoderTests
     public void StringDestinationShorterThanSourceDecodeRequestLineThrows()
     {
         var source = new char[2];
-        Assert.Throws<ArgumentException>(
-            () => UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1))
+        Assert.Throws<ArgumentException>(() =>
+            UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1))
         );
     }
 
@@ -63,8 +63,8 @@ public class UrlDecoderTests
     public void ByteDestinationShorterThanSourceDecodeRequestLineThrows()
     {
         var source = new byte[2];
-        Assert.Throws<ArgumentException>(
-            () => UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1), false)
+        Assert.Throws<ArgumentException>(() =>
+            UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1), false)
         );
     }
 
@@ -99,8 +99,8 @@ public class UrlDecoderTests
     public void ByteInputNullCharDecodeInPlaceThrows()
     {
         var source = Encoding.UTF8.GetBytes("%00");
-        Assert.Throws<InvalidOperationException>(
-            () => UrlDecoder.DecodeInPlace(source.AsSpan(), false)
+        Assert.Throws<InvalidOperationException>(() =>
+            UrlDecoder.DecodeInPlace(source.AsSpan(), false)
         );
     }
 

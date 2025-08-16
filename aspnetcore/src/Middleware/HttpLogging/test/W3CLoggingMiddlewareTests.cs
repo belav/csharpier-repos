@@ -15,32 +15,30 @@ public class W3CLoggingMiddlewareTests
     public void Ctor_ThrowsExceptionsWhenNullArgs()
     {
         var options = CreateOptionsAccessor();
-        Assert.Throws<ArgumentNullException>(
-            () => new W3CLoggingMiddleware(null, options, Helpers.CreateTestW3CLogger(options))
+        Assert.Throws<ArgumentNullException>(() =>
+            new W3CLoggingMiddleware(null, options, Helpers.CreateTestW3CLogger(options))
         );
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new W3CLoggingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    null,
-                    Helpers.CreateTestW3CLogger(options)
-                )
+        Assert.Throws<ArgumentNullException>(() =>
+            new W3CLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                null,
+                Helpers.CreateTestW3CLogger(options)
+            )
         );
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-                new W3CLoggingMiddleware(
-                    c =>
-                    {
-                        return Task.CompletedTask;
-                    },
-                    options,
-                    null
-                )
+        Assert.Throws<ArgumentNullException>(() =>
+            new W3CLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                options,
+                null
+            )
         );
     }
 

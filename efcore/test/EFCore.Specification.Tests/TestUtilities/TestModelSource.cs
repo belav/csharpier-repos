@@ -13,7 +13,8 @@ public class TestModelSource : ModelSource
     private TestModelSource(
         Action<ModelConfigurationBuilder> configureConventions,
         Action<ModelBuilder, DbContext> onModelCreating,
-        ModelSourceDependencies dependencies)
+        ModelSourceDependencies dependencies
+    )
         : base(dependencies)
     {
         _configureConventions = configureConventions;
@@ -23,11 +24,13 @@ public class TestModelSource : ModelSource
     protected override IModel CreateModel(
         DbContext context,
         IConventionSetBuilder conventionSetBuilder,
-        ModelDependencies modelDependencies)
+        ModelDependencies modelDependencies
+    )
     {
         var modelConfigurationBuilder = new ModelConfigurationBuilder(
             conventionSetBuilder.CreateConventionSet(),
-            context.GetInfrastructure());
+            context.GetInfrastructure()
+        );
         context.ConfigureConventions(modelConfigurationBuilder);
         _configureConventions?.Invoke(modelConfigurationBuilder);
         var modelBuilder = modelConfigurationBuilder.CreateModelBuilder(modelDependencies);
@@ -41,17 +44,21 @@ public class TestModelSource : ModelSource
 
     public static Func<IServiceProvider, IModelSource> GetFactory(
         Action<ModelBuilder> onModelCreating,
-        Action<ModelConfigurationBuilder> configureConventions = null)
-        => p => new TestModelSource(
+        Action<ModelConfigurationBuilder> configureConventions = null
+    ) =>
+        p => new TestModelSource(
             configureConventions,
             (mb, c) => onModelCreating(mb),
-            p.GetRequiredService<ModelSourceDependencies>());
+            p.GetRequiredService<ModelSourceDependencies>()
+        );
 
     public static Func<IServiceProvider, IModelSource> GetFactory(
         Action<ModelBuilder, DbContext> onModelCreating,
-        Action<ModelConfigurationBuilder> configureConventions = null)
-        => p => new TestModelSource(
+        Action<ModelConfigurationBuilder> configureConventions = null
+    ) =>
+        p => new TestModelSource(
             configureConventions,
             onModelCreating,
-            p.GetRequiredService<ModelSourceDependencies>());
+            p.GetRequiredService<ModelSourceDependencies>()
+        );
 }

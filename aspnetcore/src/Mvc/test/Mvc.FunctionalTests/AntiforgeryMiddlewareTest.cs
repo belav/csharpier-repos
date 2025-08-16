@@ -161,8 +161,8 @@ public class AntiforgeryMiddlewareTest
             new("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () => await client.SendAsync(request)
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await client.SendAsync(request)
         );
         Assert.Equal("The maximum number of bytes have been read.", exception.Message);
     }

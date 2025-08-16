@@ -19,16 +19,22 @@ internal partial class TestDiscoverer
     /// Implementation of <see cref="ITestDiscoveryEventsHandler"/>
     /// Calls to implementation methods will be synchronous.
     /// </summary>
-    private class DiscoveryHandler(BufferedProgress<RunTestsPartialResult> progress) : ITestDiscoveryEventsHandler
+    private class DiscoveryHandler(BufferedProgress<RunTestsPartialResult> progress)
+        : ITestDiscoveryEventsHandler
     {
         private readonly BufferedProgress<RunTestsPartialResult> _progress = progress;
         private readonly ConcurrentBag<TestCase> _testCases = new();
         private bool _isComplete;
         private bool _isAborted;
 
-        public void HandleDiscoveredTests(IEnumerable<TestCase>? discoveredTestCases) => AddTests(discoveredTestCases);
+        public void HandleDiscoveredTests(IEnumerable<TestCase>? discoveredTestCases) =>
+            AddTests(discoveredTestCases);
 
-        public void HandleDiscoveryComplete(long totalTests, IEnumerable<TestCase>? lastChunk, bool isAborted)
+        public void HandleDiscoveryComplete(
+            long totalTests,
+            IEnumerable<TestCase>? lastChunk,
+            bool isAborted
+        )
         {
             AddTests(lastChunk);
             _isComplete = true;
@@ -39,7 +45,13 @@ internal partial class TestDiscoverer
         {
             if (message != null)
             {
-                _progress.Report(new RunTestsPartialResult(LanguageServerResources.Discovering_tests, message, Progress: null));
+                _progress.Report(
+                    new RunTestsPartialResult(
+                        LanguageServerResources.Discovering_tests,
+                        message,
+                        Progress: null
+                    )
+                );
             }
         }
 
@@ -51,7 +63,10 @@ internal partial class TestDiscoverer
 
         public ImmutableArray<TestCase> GetTestCases()
         {
-            Contract.ThrowIfFalse(_isComplete, "Tried to get test cases before discovery completed");
+            Contract.ThrowIfFalse(
+                _isComplete,
+                "Tried to get test cases before discovery completed"
+            );
             return _testCases.ToImmutableArray();
         }
 
@@ -59,7 +74,6 @@ internal partial class TestDiscoverer
         {
             Contract.ThrowIfFalse(_isComplete, "Tried to get discovery status before completion");
             return _isAborted;
-
         }
 
         private void AddTests(IEnumerable<TestCase>? testCases)

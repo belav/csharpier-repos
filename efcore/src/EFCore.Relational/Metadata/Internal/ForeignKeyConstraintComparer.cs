@@ -10,11 +10,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 // Sealed for perf
-public sealed class ForeignKeyConstraintComparer : IEqualityComparer<IForeignKeyConstraint>, IComparer<IForeignKeyConstraint>
+public sealed class ForeignKeyConstraintComparer
+    : IEqualityComparer<IForeignKeyConstraint>,
+        IComparer<IForeignKeyConstraint>
 {
-    private ForeignKeyConstraintComparer()
-    {
-    }
+    private ForeignKeyConstraintComparer() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -83,7 +83,9 @@ public sealed class ForeignKeyConstraintComparer : IEqualityComparer<IForeignKey
             return result;
         }
 
-        return result != 0 ? result : StringComparer.Ordinal.Compare(x.Table.Schema, y.Table.Schema);
+        return result != 0
+            ? result
+            : StringComparer.Ordinal.Compare(x.Table.Schema, y.Table.Schema);
     }
 
     /// <summary>
@@ -92,8 +94,7 @@ public sealed class ForeignKeyConstraintComparer : IEqualityComparer<IForeignKey
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public bool Equals(IForeignKeyConstraint? x, IForeignKeyConstraint? y)
-        => Compare(x, y) == 0;
+    public bool Equals(IForeignKeyConstraint? x, IForeignKeyConstraint? y) => Compare(x, y) == 0;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

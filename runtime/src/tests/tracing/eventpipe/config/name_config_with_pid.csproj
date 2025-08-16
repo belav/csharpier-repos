@@ -3,7 +3,6 @@
     <!-- Requires explicit Main as it supports command-line arguments for local testing -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <ReferenceXUnitWrapperGenerator>false</ReferenceXUnitWrapperGenerator>
-
     <UnloadabilityIncompatible>true</UnloadabilityIncompatible>
     <!-- Tracing tests routinely time out with jitstress and gcstress -->
     <GCStressIncompatible>true</GCStressIncompatible>

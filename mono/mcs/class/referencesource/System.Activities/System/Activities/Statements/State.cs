@@ -8,8 +8,8 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
-    using System.ComponentModel;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Runtime.Collections;
     using System.Windows.Markup;
 
@@ -26,35 +26,22 @@ namespace System.Activities.Statements
         /// <summary>
         /// Gets or sets DisplayName of the State.
         /// </summary>
-        public string DisplayName
-        {
-            get;
-            set;
-        }
+        public string DisplayName { get; set; }
 
         /// <summary>
-        /// Gets or sets entry action of the State. It is executed when the StateMachine enters the State. 
+        /// Gets or sets entry action of the State. It is executed when the StateMachine enters the State.
         /// It's optional.
         /// </summary>
         [DefaultValue(null)]
-        public Activity Entry
-        {
-            get;
-            set;
-        }
+        public Activity Entry { get; set; }
 
         /// <summary>
-        /// Gets or sets exit action of the State. It is executed when the StateMachine leaves the State. 
+        /// Gets or sets exit action of the State. It is executed when the StateMachine leaves the State.
         /// It's optional.
         /// </summary>
         [DependsOn("Entry")]
         [DefaultValue(null)]
-        public Activity Exit
-        {
-            get;
-            set;
-        }
-
+        public Activity Exit { get; set; }
 
         /// <summary>
         /// Gets Transitions collection contains all outgoing Transitions from the State.
@@ -68,7 +55,6 @@ namespace System.Activities.Statements
                 {
                     this.transitions = new ValidatingCollection<Transition>
                     {
-
                         // disallow null values
                         OnAddValidationCallback = item =>
                         {
@@ -96,7 +82,6 @@ namespace System.Activities.Statements
                 {
                     this.variables = new ValidatingCollection<Variable>
                     {
-
                         // disallow null values
                         OnAddValidationCallback = item =>
                         {
@@ -116,11 +101,7 @@ namespace System.Activities.Statements
         /// Gets or sets a value indicating whether the State is a final State.
         /// </summary>
         [DefaultValue(false)]
-        public bool IsFinal
-        {
-            get;
-            set;
-        }
+        public bool IsFinal { get; set; }
 
         /// <summary>
         /// Gets Internal activity representation of state.
@@ -138,44 +119,28 @@ namespace System.Activities.Statements
         }
 
         /// <summary>
-        /// Gets or sets PassNumber is used to detect re-visiting when traversing states in StateMachine. 
+        /// Gets or sets PassNumber is used to detect re-visiting when traversing states in StateMachine.
         /// </summary>
-        internal uint PassNumber
-        {
-            get;
-            set;
-        }
+        internal uint PassNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether state can be reached via transitions.
         /// </summary>
-        internal bool Reachable
-        {
-            get;
-            set;
-        }
+        internal bool Reachable { get; set; }
 
         /// <summary>
         /// Gets or sets StateId is unique within a StateMachine.
         /// </summary>
-        internal string StateId
-        {
-            get;
-            set;
-        }
+        internal string StateId { get; set; }
 
         /// <summary>
         /// Gets or sets the display name of the parent state machine of the state.
         /// Used for tracking purpose only.
         /// </summary>
-        internal string StateMachineName
-        {
-            get;
-            set;
-        }
+        internal string StateMachineName { get; set; }
 
         /// <summary>
-        /// Clear internal state. 
+        /// Clear internal state.
         /// </summary>
         internal void ClearInternalState()
         {
@@ -188,10 +153,7 @@ namespace System.Activities.Statements
             {
                 if (this.nullTrigger == null)
                 {
-                    this.nullTrigger = new NoOp
-                    {
-                        DisplayName = "Null Trigger"
-                    };
+                    this.nullTrigger = new NoOp { DisplayName = "Null Trigger" };
                 }
 
                 return this.nullTrigger;
@@ -200,10 +162,7 @@ namespace System.Activities.Statements
 
         internal sealed class NoOp : CodeActivity
         {
-            protected override void Execute(CodeActivityContext context)
-            {
-
-            }
+            protected override void Execute(CodeActivityContext context) { }
         }
     }
 }

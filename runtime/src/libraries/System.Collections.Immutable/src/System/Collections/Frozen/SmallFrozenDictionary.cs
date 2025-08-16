@@ -21,7 +21,8 @@ namespace System.Collections.Frozen
         private readonly TKey[] _keys;
         private readonly TValue[] _values;
 
-        internal SmallFrozenDictionary(Dictionary<TKey, TValue> source) : base(source.Comparer)
+        internal SmallFrozenDictionary(Dictionary<TKey, TValue> source)
+            : base(source.Comparer)
         {
             Debug.Assert(source.Count != 0);
 
@@ -32,7 +33,9 @@ namespace System.Collections.Frozen
         private protected override TKey[] KeysCore => _keys;
         private protected override TValue[] ValuesCore => _values;
         private protected override int CountCore => _keys.Length;
-        private protected sealed override Enumerator GetEnumeratorCore() => new Enumerator(_keys, _values);
+
+        private protected sealed override Enumerator GetEnumeratorCore() =>
+            new Enumerator(_keys, _values);
 
         private protected override ref readonly TValue GetValueRefOrNullRefCore(TKey key)
         {

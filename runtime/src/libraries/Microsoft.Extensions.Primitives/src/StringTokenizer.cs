@@ -106,9 +106,7 @@ namespace Microsoft.Extensions.Primitives
             /// <summary>
             /// Releases all resources used by the <see cref="Enumerator"/>.
             /// </summary>
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             /// <summary>
             /// Advances the enumerator to the next token in the <see cref="StringTokenizer"/>.

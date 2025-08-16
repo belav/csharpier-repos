@@ -407,8 +407,8 @@ public class RouteCollectionTest
         );
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => routeCollection.GetVirtualPath(virtualPathContext)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            routeCollection.GetVirtualPath(virtualPathContext)
         );
         Assert.Equal(
             "The supplied route name 'ambiguousRoute' is ambiguous and matched more than one route.",
@@ -432,8 +432,8 @@ public class RouteCollectionTest
         var virtualPathContext = CreateVirtualPathContext("Ambiguous");
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => routeCollection.GetVirtualPath(virtualPathContext)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            routeCollection.GetVirtualPath(virtualPathContext)
         );
         Assert.Equal(
             "The supplied route name 'Ambiguous' is ambiguous and matched more than one route.",

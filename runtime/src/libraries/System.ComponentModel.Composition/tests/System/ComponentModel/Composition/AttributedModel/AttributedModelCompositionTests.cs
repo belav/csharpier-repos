@@ -14,7 +14,9 @@ namespace System.ComponentModel.Composition.AttributedModel
         [Fact]
         public void PartContainingOnlyStaticExports_ShouldNotCauseInstanceToBeCreated()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(HasOnlyStaticExports));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(HasOnlyStaticExports)
+            );
 
             Assert.Equal("Field", container.GetExportedValue<string>("Field"));
             Assert.Equal("Property", container.GetExportedValue<string>("Property"));
@@ -25,7 +27,7 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         [Fact]
         public void ExportOnAbstractBase_DoesNotReturnNull()
-        {   // 499393 - Classes inheriting from an exported
+        { // 499393 - Classes inheriting from an exported
             // abstract class are exported as 'null'
 
             var container = ContainerFactory.Create();
@@ -47,11 +49,14 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(importer);
             batch.AddExportedValue("readonly", "new value");
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotActivate,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotActivate,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -63,11 +68,14 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(importer);
             batch.AddExportedValue("readonly", "new value");
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotActivate,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotActivate,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -79,10 +87,13 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(importer);
             container.Compose(batch);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
-            {
-                container.GetExportedValue<string>("writeonly");
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotGetExportedValue,
+                () =>
+                {
+                    container.GetExportedValue<string>("writeonly");
+                }
+            );
         }
 
         [Fact]
@@ -93,12 +104,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("DateTime", typeof(DateTime), 42);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -110,13 +124,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Int32", typeof(int), (short)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                              ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                              RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
-
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -128,12 +144,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Int16", typeof(short), (int)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -145,12 +164,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("UInt32", typeof(uint), (int)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -162,12 +184,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Int32", typeof(int), (uint)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -179,12 +204,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Int64", typeof(long), (int)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -196,12 +224,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Double", typeof(double), (float)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -213,12 +244,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Single", typeof(float), (double)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -230,12 +264,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Int32", typeof(int), (float)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -247,12 +284,15 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(new ImportValueTypes());
             batch.AddExportedValue("Single", typeof(float), (int)10);
 
-            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotSetImport,
-                                          ErrorId.ReflectionModel_ImportNotAssignableFromExport,
-                                          RetryMode.DoNotRetry, () =>
-            {
-                container.Compose(batch);
-            });
+            CompositionAssert.ThrowsError(
+                ErrorId.ImportEngine_PartCannotSetImport,
+                ErrorId.ReflectionModel_ImportNotAssignableFromExport,
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    container.Compose(batch);
+                }
+            );
         }
 
         [Fact]
@@ -274,7 +314,9 @@ namespace System.ComponentModel.Composition.AttributedModel
             var propertyExports = container.GetExports<int>("property");
             ExportsAssert.AreEqual(propertyExports, 3, 7);
 
-            var methodExports = container.GetExportedValues<Func<int, int>>("func").Select(f => f(0));
+            var methodExports = container
+                .GetExportedValues<Func<int, int>>("func")
+                .Select(f => f(0));
             EnumerableAssert.AreEqual(methodExports, 4, 8);
         }
 
@@ -334,10 +376,16 @@ namespace System.ComponentModel.Composition.AttributedModel
             public static readonly int staticReadonly = 2;
 
             [Export("property")]
-            public static int StaticProperty { get { return 3; } }
+            public static int StaticProperty
+            {
+                get { return 3; }
+            }
 
             [Export("func")]
-            public static int StaticMethod(int arg1) { return 4; }
+            public static int StaticMethod(int arg1)
+            {
+                return 4;
+            }
 
             [Export("field")]
             public int instanceField = 5;
@@ -346,10 +394,16 @@ namespace System.ComponentModel.Composition.AttributedModel
             public readonly int instanceReadonly = 6;
 
             [Export("property")]
-            public int InstanceProperty { get { return 7; } }
+            public int InstanceProperty
+            {
+                get { return 7; }
+            }
 
             [Export("func")]
-            public int InstanceMethod(int arg1) { return 8; }
+            public int InstanceMethod(int arg1)
+            {
+                return 8;
+            }
         }
 
         public class HasOnlyStaticExports
@@ -378,65 +432,33 @@ namespace System.ComponentModel.Composition.AttributedModel
         }
 
         [InheritedExport(typeof(Base))]
-        public abstract class Base
-        {
-        }
+        public abstract class Base { }
 
         [Export(typeof(Derived))]
-        public class Derived : Base
-        {
-        }
+        public class Derived : Base { }
 
         public class ImportValueTypes
         {
             [Import("Int16", AllowDefault = true)]
-            public short Int16
-            {
-                get;
-                set;
-            }
+            public short Int16 { get; set; }
 
             [Import("Int32", AllowDefault = true)]
-            public int Int32
-            {
-                get;
-                set;
-            }
+            public int Int32 { get; set; }
 
             [Import("UInt32", AllowDefault = true)]
-            public uint UInt32
-            {
-                get;
-                set;
-            }
+            public uint UInt32 { get; set; }
 
             [Import("Int64", AllowDefault = true)]
-            public long Int64
-            {
-                get;
-                set;
-            }
+            public long Int64 { get; set; }
 
             [Import("Single", AllowDefault = true)]
-            public float Single
-            {
-                get;
-                set;
-            }
+            public float Single { get; set; }
 
             [Import("Double", AllowDefault = true)]
-            public double Double
-            {
-                get;
-                set;
-            }
+            public double Double { get; set; }
 
             [Import("DateTime", AllowDefault = true)]
-            public DateTime DateTime
-            {
-                get;
-                set;
-            }
+            public DateTime DateTime { get; set; }
         }
     }
 }

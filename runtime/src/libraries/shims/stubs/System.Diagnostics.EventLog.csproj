@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ForwardedType Include="System.Diagnostics.EntryWrittenEventArgs" />
     <ForwardedType Include="System.Diagnostics.EntryWrittenEventHandler" />
@@ -46,5 +45,4 @@
     <ForwardedType Include="System.Diagnostics.Eventing.Reader.StandardEventOpcode" />
     <ForwardedType Include="System.Diagnostics.Eventing.Reader.StandardEventTask" />
   </ItemGroup>
-
 </Project>

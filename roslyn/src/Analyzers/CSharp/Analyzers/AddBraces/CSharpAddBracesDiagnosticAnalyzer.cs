@@ -17,20 +17,29 @@ using FormattingRangeHelper = Microsoft.CodeAnalysis.CSharp.Utilities.Formatting
 namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpAddBracesDiagnosticAnalyzer :
-        AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class CSharpAddBracesDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpAddBracesDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.AddBracesDiagnosticId,
-                   EnforceOnBuildValues.AddBraces,
-                   CSharpCodeStyleOptions.PreferBraces,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Add_braces), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Add_braces_to_0_statement), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.AddBracesDiagnosticId,
+                EnforceOnBuildValues.AddBraces,
+                CSharpCodeStyleOptions.PreferBraces,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Add_braces),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Add_braces_to_0_statement),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeNode,
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                AnalyzeNode,
                 SyntaxKind.IfStatement,
                 SyntaxKind.ElseClause,
                 SyntaxKind.ForStatement,
@@ -40,17 +49,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 SyntaxKind.DoStatement,
                 SyntaxKind.UsingStatement,
                 SyntaxKind.LockStatement,
-                SyntaxKind.FixedStatement);
+                SyntaxKind.FixedStatement
+            );
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         public void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var statement = context.Node;
 
             var option = context.GetCSharpAnalyzerOptions().PreferBraces;
-            if (option.Value == PreferBracesPreference.None ||
-                ShouldSkipAnalysis(context, option.Notification))
+            if (
+                option.Value == PreferBracesPreference.None
+                || ShouldSkipAnalysis(context, option.Notification)
+            )
             {
                 return;
             }
@@ -79,7 +92,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 case SyntaxKind.UsingStatement:
                 case SyntaxKind.FixedStatement:
                     // If we have something like this:
-                    //     
+                    //
                     //    using (...)
                     //    using (...)
                     //    {
@@ -94,33 +107,48 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                     break;
             }
 
-            if (option.Value == PreferBracesPreference.WhenMultiline
+            if (
+                option.Value == PreferBracesPreference.WhenMultiline
                 && !IsConsideredMultiLine(statement, embeddedStatement)
-                && !RequiresBracesToMatchContext(statement))
+                && !RequiresBracesToMatchContext(statement)
+            )
             {
                 return;
             }
 
-            if (ContainsInterleavedDirective(statement, embeddedStatement, context.CancellationToken))
+            if (
+                ContainsInterleavedDirective(
+                    statement,
+                    embeddedStatement,
+                    context.CancellationToken
+                )
+            )
             {
                 return;
             }
 
             var firstToken = statement.GetFirstToken();
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                firstToken.GetLocation(),
-                option.Notification,
-                additionalLocations: null,
-                properties: null,
-                SyntaxFacts.GetText(firstToken.Kind())));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    firstToken.GetLocation(),
+                    option.Notification,
+                    additionalLocations: null,
+                    properties: null,
+                    SyntaxFacts.GetText(firstToken.Kind())
+                )
+            );
         }
 
         /// <summary>
         /// Check if there are interleaved directives on the statement.
         /// Handles special case with if/else.
         /// </summary>
-        private static bool ContainsInterleavedDirective(SyntaxNode statement, StatementSyntax embeddedStatement, CancellationToken cancellationToken)
+        private static bool ContainsInterleavedDirective(
+            SyntaxNode statement,
+            StatementSyntax embeddedStatement,
+            CancellationToken cancellationToken
+        )
         {
             if (statement is IfStatementSyntax ifStatementNode)
             {
@@ -129,8 +157,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 {
                     // For IF/ELSE statements, only the IF part should be checked for interleaved directives when the diagnostic is triggered on the IF.
                     // A separate diagnostic will be triggered to handle the ELSE part.
-                    var ifStatementSpanWithoutElse = TextSpan.FromBounds(statement.Span.Start, embeddedStatement.Span.End);
-                    return statement.ContainsInterleavedDirective(ifStatementSpanWithoutElse, cancellationToken);
+                    var ifStatementSpanWithoutElse = TextSpan.FromBounds(
+                        statement.Span.Start,
+                        embeddedStatement.Span.End
+                    );
+                    return statement.ContainsInterleavedDirective(
+                        ifStatementSpanWithoutElse,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -148,7 +182,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
         /// <para>The third condition is not checked for <c>else</c> clauses because they are only considered multiline
         /// when their embedded statement is multiline.</para>
         /// </summary>
-        private static bool IsConsideredMultiLine(SyntaxNode statement, SyntaxNode embeddedStatement)
+        private static bool IsConsideredMultiLine(
+            SyntaxNode statement,
+            SyntaxNode embeddedStatement
+        )
         {
             // Early return if syntax errors prevent analysis
             if (embeddedStatement.IsMissing)
@@ -158,7 +195,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
             }
 
             // Early return if the entire statement fits on one line
-            if (FormattingRangeHelper.AreTwoTokensOnSameLine(statement.GetFirstToken(), statement.GetLastToken()))
+            if (
+                FormattingRangeHelper.AreTwoTokensOnSameLine(
+                    statement.GetFirstToken(),
+                    statement.GetLastToken()
+                )
+            )
             {
                 // The entire statement fits on one line. Examples:
                 //
@@ -169,8 +211,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
             }
 
             // Check the part of the statement preceding the embedded statement (bullet 1)
-            var lastTokenBeforeEmbeddedStatement = embeddedStatement.GetFirstToken().GetPreviousToken();
-            if (!FormattingRangeHelper.AreTwoTokensOnSameLine(statement.GetFirstToken(), lastTokenBeforeEmbeddedStatement))
+            var lastTokenBeforeEmbeddedStatement = embeddedStatement
+                .GetFirstToken()
+                .GetPreviousToken();
+            if (
+                !FormattingRangeHelper.AreTwoTokensOnSameLine(
+                    statement.GetFirstToken(),
+                    lastTokenBeforeEmbeddedStatement
+                )
+            )
             {
                 // The part of the statement preceding the embedded statement does not fit on one line. Examples:
                 //
@@ -182,7 +231,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
             }
 
             // Check the embedded statement itself (bullet 2)
-            if (!FormattingRangeHelper.AreTwoTokensOnSameLine(embeddedStatement.GetFirstToken(), embeddedStatement.GetLastToken()))
+            if (
+                !FormattingRangeHelper.AreTwoTokensOnSameLine(
+                    embeddedStatement.GetFirstToken(),
+                    embeddedStatement.GetLastToken()
+                )
+            )
             {
                 // The embedded statement does not fit on one line. Examples:
                 //
@@ -196,7 +250,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
             // 'else' clause (bullet 3)
             if (statement.GetLastToken() != embeddedStatement.GetLastToken())
             {
-                if (statement is IfStatementSyntax ifStatement && ifStatement.Statement == embeddedStatement)
+                if (
+                    statement is IfStatementSyntax ifStatement
+                    && ifStatement.Statement == embeddedStatement
+                )
                 {
                     // The embedded statement is followed by an 'else' clause, which may span multiple lines without
                     // triggering a braces requirement, such as this:
@@ -211,8 +268,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
                 }
                 else
                 {
-                    var firstTokenAfterEmbeddedStatement = embeddedStatement.GetLastToken().GetNextToken();
-                    if (!FormattingRangeHelper.AreTwoTokensOnSameLine(firstTokenAfterEmbeddedStatement, statement.GetLastToken()))
+                    var firstTokenAfterEmbeddedStatement = embeddedStatement
+                        .GetLastToken()
+                        .GetNextToken();
+                    if (
+                        !FormattingRangeHelper.AreTwoTokensOnSameLine(
+                            firstTokenAfterEmbeddedStatement,
+                            statement.GetLastToken()
+                        )
+                    )
                     {
                         // The part of the statement following the embedded statement does not fit on one line. Examples:
                         //
@@ -261,7 +325,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.AddBraces
         /// syntax tree. This method walks up the syntax tree to find the <c>if</c> statement that starts the
         /// sequence.</para>
         /// </remarks>
-        private static IfStatementSyntax GetOutermostIfStatementOfSequence(SyntaxNode ifStatementOrElseClause)
+        private static IfStatementSyntax GetOutermostIfStatementOfSequence(
+            SyntaxNode ifStatementOrElseClause
+        )
         {
             IfStatementSyntax result;
             if (ifStatementOrElseClause.IsKind(SyntaxKind.ElseClause))

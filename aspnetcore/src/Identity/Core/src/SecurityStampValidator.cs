@@ -206,7 +206,6 @@ public static class SecurityStampValidator
     /// <param name="context">The context containing the <see cref="System.Security.Claims.ClaimsPrincipal"/>
     /// and <see cref="AuthenticationProperties"/> to validate.</param>
     /// <returns></returns>
-
     public static Task ValidateAsync<TValidator>(CookieValidatePrincipalContext context)
         where TValidator : ISecurityStampValidator
     {

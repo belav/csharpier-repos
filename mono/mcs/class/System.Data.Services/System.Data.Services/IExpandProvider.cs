@@ -30,8 +30,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace System.Data.Services {
-	public interface IExpandProvider {
-		IEnumerable ApplyExpansions (IQueryable queryable, ICollection<ExpandSegmentCollection> expandPaths);
-	}
+namespace System.Data.Services
+{
+    public interface IExpandProvider
+    {
+        IEnumerable ApplyExpansions(
+            IQueryable queryable,
+            ICollection<ExpandSegmentCollection> expandPaths
+        );
+    }
 }

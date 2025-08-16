@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,321 +36,363 @@ using System.Text;
 
 namespace System.Net
 {
-	class MonoChunkParser
-	{
-		enum State {
-			None,
-			PartialSize,
-			Body,
-			BodyFinished,
-			Trailer
-		}
+    class MonoChunkParser
+    {
+        enum State
+        {
+            None,
+            PartialSize,
+            Body,
+            BodyFinished,
+            Trailer,
+        }
 
-		class Chunk {
-			public byte [] Bytes;
-			public int Offset;
+        class Chunk
+        {
+            public byte[] Bytes;
+            public int Offset;
 
-			public Chunk (byte [] chunk)
-			{
-				this.Bytes = chunk;
-			}
+            public Chunk(byte[] chunk)
+            {
+                this.Bytes = chunk;
+            }
 
-			public int Read (byte [] buffer, int offset, int size)
-			{
-				int nread = (size > Bytes.Length - Offset) ? Bytes.Length - Offset : size;
-				Buffer.BlockCopy (Bytes, Offset, buffer, offset, nread);
-				Offset += nread;
-				return nread;
-			}
-		}
+            public int Read(byte[] buffer, int offset, int size)
+            {
+                int nread = (size > Bytes.Length - Offset) ? Bytes.Length - Offset : size;
+                Buffer.BlockCopy(Bytes, Offset, buffer, offset, nread);
+                Offset += nread;
+                return nread;
+            }
+        }
 
-		WebHeaderCollection headers;
-		int chunkSize;
-		int chunkRead;
-		int totalWritten;
-		State state;
-		StringBuilder saved;
-		bool sawCR;
-		bool gotit;
-		int trailerState;
-		ArrayList chunks;
-		
-		public MonoChunkParser (WebHeaderCollection headers)
-		{
-			this.headers = headers;
-			saved = new StringBuilder ();
-			chunks = new ArrayList ();
-			chunkSize = -1;
-			totalWritten = 0;
-		}
+        WebHeaderCollection headers;
+        int chunkSize;
+        int chunkRead;
+        int totalWritten;
+        State state;
+        StringBuilder saved;
+        bool sawCR;
+        bool gotit;
+        int trailerState;
+        ArrayList chunks;
 
-		public void WriteAndReadBack (byte [] buffer, int offset, int size, ref int read)
-		{
-			if (offset + read > 0)
-				Write (buffer, offset, offset+read);
-			read = Read (buffer, offset, size);
-		}
+        public MonoChunkParser(WebHeaderCollection headers)
+        {
+            this.headers = headers;
+            saved = new StringBuilder();
+            chunks = new ArrayList();
+            chunkSize = -1;
+            totalWritten = 0;
+        }
 
-		public int Read (byte [] buffer, int offset, int size)
-		{
-			return ReadFromChunks (buffer, offset, size);
-		}
+        public void WriteAndReadBack(byte[] buffer, int offset, int size, ref int read)
+        {
+            if (offset + read > 0)
+                Write(buffer, offset, offset + read);
+            read = Read(buffer, offset, size);
+        }
 
-		int ReadFromChunks (byte [] buffer, int offset, int size)
-		{
-			int count = chunks.Count;
-			int nread = 0;
+        public int Read(byte[] buffer, int offset, int size)
+        {
+            return ReadFromChunks(buffer, offset, size);
+        }
 
-			var chunksForRemoving = new List<Chunk>(count);
-			for (int i = 0; i < count; i++) {
-				Chunk chunk = (Chunk) chunks [i];
+        int ReadFromChunks(byte[] buffer, int offset, int size)
+        {
+            int count = chunks.Count;
+            int nread = 0;
 
-				if (chunk.Offset == chunk.Bytes.Length) {
-					chunksForRemoving.Add(chunk);
-					continue;
-				}
-				
-				nread += chunk.Read (buffer, offset + nread, size - nread);
-				if (nread == size)
-					break;
-			}
+            var chunksForRemoving = new List<Chunk>(count);
+            for (int i = 0; i < count; i++)
+            {
+                Chunk chunk = (Chunk)chunks[i];
 
-			foreach (var chunk in chunksForRemoving)
-				chunks.Remove(chunk);
+                if (chunk.Offset == chunk.Bytes.Length)
+                {
+                    chunksForRemoving.Add(chunk);
+                    continue;
+                }
 
-			return nread;
-		}
-		
-		public void Write (byte [] buffer, int offset, int size)
-		{
-			if (offset < size)
-				InternalWrite (buffer, ref offset, size);
-		}
-		
-		void InternalWrite (byte [] buffer, ref int offset, int size)
-		{
-			if (state == State.None || state == State.PartialSize) {
-				state = GetChunkSize (buffer, ref offset, size);
-				if (state == State.PartialSize)
-					return;
-				
-				saved.Length = 0;
-				sawCR = false;
-				gotit = false;
-			}
-			
-			if (state == State.Body && offset < size) {
-				state = ReadBody (buffer, ref offset, size);
-				if (state == State.Body)
-					return;
-			}
-			
-			if (state == State.BodyFinished && offset < size) {
-				state = ReadCRLF (buffer, ref offset, size);
-				if (state == State.BodyFinished)
-					return;
+                nread += chunk.Read(buffer, offset + nread, size - nread);
+                if (nread == size)
+                    break;
+            }
 
-				sawCR = false;
-			}
-			
-			if (state == State.Trailer && offset < size) {
-				state = ReadTrailer (buffer, ref offset, size);
-				if (state == State.Trailer)
-					return;
+            foreach (var chunk in chunksForRemoving)
+                chunks.Remove(chunk);
 
-				saved.Length = 0;
-				sawCR = false;
-				gotit = false;
-			}
+            return nread;
+        }
 
-			if (offset < size)
-				InternalWrite (buffer, ref offset, size);
-		}
+        public void Write(byte[] buffer, int offset, int size)
+        {
+            if (offset < size)
+                InternalWrite(buffer, ref offset, size);
+        }
 
-		public bool WantMore {
-			get { return (chunkRead != chunkSize || chunkSize != 0 || state != State.None); }
-		}
+        void InternalWrite(byte[] buffer, ref int offset, int size)
+        {
+            if (state == State.None || state == State.PartialSize)
+            {
+                state = GetChunkSize(buffer, ref offset, size);
+                if (state == State.PartialSize)
+                    return;
 
-		public bool DataAvailable {
-			get {
-				int count = chunks.Count;
-				for (int i = 0; i < count; i++) {
-					Chunk ch = (Chunk) chunks [i];
-					if (ch == null || ch.Bytes == null)
-						continue;
-					if (ch.Bytes.Length > 0 && ch.Offset < ch.Bytes.Length)
-						return (state != State.Body);
-				}
-				return false;
-			}
-		}
+                saved.Length = 0;
+                sawCR = false;
+                gotit = false;
+            }
 
-		public int TotalDataSize {
-			get { return totalWritten; }
-		}
+            if (state == State.Body && offset < size)
+            {
+                state = ReadBody(buffer, ref offset, size);
+                if (state == State.Body)
+                    return;
+            }
 
-		public int ChunkLeft {
-			get { return chunkSize - chunkRead; }
-		}
-		
-		State ReadBody (byte [] buffer, ref int offset, int size)
-		{
-			if (chunkSize == 0)
-				return State.BodyFinished;
+            if (state == State.BodyFinished && offset < size)
+            {
+                state = ReadCRLF(buffer, ref offset, size);
+                if (state == State.BodyFinished)
+                    return;
 
-			int diff = size - offset;
-			if (diff + chunkRead > chunkSize)
-				diff = chunkSize - chunkRead;
+                sawCR = false;
+            }
 
-			byte [] chunk = new byte [diff];
-			Buffer.BlockCopy (buffer, offset, chunk, 0, diff);
-			chunks.Add (new Chunk (chunk));
-			offset += diff;
-			chunkRead += diff;
-			totalWritten += diff;
-			return (chunkRead == chunkSize) ? State.BodyFinished : State.Body;
-				
-		}
-		
-		State GetChunkSize (byte [] buffer, ref int offset, int size)
-		{
-			chunkRead = 0;
-			chunkSize = 0;
-			char c = '\0';
-			while (offset < size) {
-				c = (char) buffer [offset++];
-				if (c == '\r') {
-					if (sawCR)
-						ThrowProtocolViolation ("2 CR found");
+            if (state == State.Trailer && offset < size)
+            {
+                state = ReadTrailer(buffer, ref offset, size);
+                if (state == State.Trailer)
+                    return;
 
-					sawCR = true;
-					continue;
-				}
-				
-				if (sawCR && c == '\n')
-					break;
+                saved.Length = 0;
+                sawCR = false;
+                gotit = false;
+            }
 
-				if (c == ' ')
-					gotit = true;
+            if (offset < size)
+                InternalWrite(buffer, ref offset, size);
+        }
 
-				if (!gotit)
-					saved.Append (c);
+        public bool WantMore
+        {
+            get { return (chunkRead != chunkSize || chunkSize != 0 || state != State.None); }
+        }
 
-				if (saved.Length > 20)
-					ThrowProtocolViolation ("chunk size too long.");
-			}
+        public bool DataAvailable
+        {
+            get
+            {
+                int count = chunks.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    Chunk ch = (Chunk)chunks[i];
+                    if (ch == null || ch.Bytes == null)
+                        continue;
+                    if (ch.Bytes.Length > 0 && ch.Offset < ch.Bytes.Length)
+                        return (state != State.Body);
+                }
+                return false;
+            }
+        }
 
-			if (!sawCR || c != '\n') {
-				if (offset < size)
-					ThrowProtocolViolation ("Missing \\n");
+        public int TotalDataSize
+        {
+            get { return totalWritten; }
+        }
 
-				try {
-					if (saved.Length > 0) {
-						chunkSize = Int32.Parse (RemoveChunkExtension (saved.ToString ()), NumberStyles.HexNumber);
-					}
-				} catch (Exception) {
-					ThrowProtocolViolation ("Cannot parse chunk size.");
-				}
+        public int ChunkLeft
+        {
+            get { return chunkSize - chunkRead; }
+        }
 
-				return State.PartialSize;
-			}
+        State ReadBody(byte[] buffer, ref int offset, int size)
+        {
+            if (chunkSize == 0)
+                return State.BodyFinished;
 
-			chunkRead = 0;
-			try {
-				chunkSize = Int32.Parse (RemoveChunkExtension (saved.ToString ()), NumberStyles.HexNumber);
-			} catch (Exception) {
-				ThrowProtocolViolation ("Cannot parse chunk size.");
-			}
+            int diff = size - offset;
+            if (diff + chunkRead > chunkSize)
+                diff = chunkSize - chunkRead;
 
-			if (chunkSize == 0) {
-				trailerState = 2;
-				return State.Trailer;
-			}
+            byte[] chunk = new byte[diff];
+            Buffer.BlockCopy(buffer, offset, chunk, 0, diff);
+            chunks.Add(new Chunk(chunk));
+            offset += diff;
+            chunkRead += diff;
+            totalWritten += diff;
+            return (chunkRead == chunkSize) ? State.BodyFinished : State.Body;
+        }
 
-			return State.Body;
-		}
+        State GetChunkSize(byte[] buffer, ref int offset, int size)
+        {
+            chunkRead = 0;
+            chunkSize = 0;
+            char c = '\0';
+            while (offset < size)
+            {
+                c = (char)buffer[offset++];
+                if (c == '\r')
+                {
+                    if (sawCR)
+                        ThrowProtocolViolation("2 CR found");
 
-		static string RemoveChunkExtension (string input)
-		{
-			int idx = input.IndexOf (';');
-			if (idx == -1)
-				return input;
-			return input.Substring (0, idx);
-		}
+                    sawCR = true;
+                    continue;
+                }
 
-		State ReadCRLF (byte [] buffer, ref int offset, int size)
-		{
-			if (!sawCR) {
-				if ((char) buffer [offset++] != '\r')
-					ThrowProtocolViolation ("Expecting \\r");
+                if (sawCR && c == '\n')
+                    break;
 
-				sawCR = true;
-				if (offset == size)
-					return State.BodyFinished;
-			}
-			
-			if (sawCR && (char) buffer [offset++] != '\n')
-				ThrowProtocolViolation ("Expecting \\n");
+                if (c == ' ')
+                    gotit = true;
 
-			return State.None;
-		}
+                if (!gotit)
+                    saved.Append(c);
 
-		State ReadTrailer (byte [] buffer, ref int offset, int size)
-		{
-			char c = '\0';
+                if (saved.Length > 20)
+                    ThrowProtocolViolation("chunk size too long.");
+            }
 
-			// short path
-			if (trailerState == 2 && (char) buffer [offset] == '\r' && saved.Length == 0) {
-				offset++;
-				if (offset < size && (char) buffer [offset] == '\n') {
-					offset++;
-					return State.None;
-				}
-				offset--;
-			}
-			
-			int st = trailerState;
-			while (offset < size && st < 4) {
-				c = (char) buffer [offset++];
-				if ((st == 0 || st == 2) && c == '\r') {
-					st++;
-					continue;
-				}
+            if (!sawCR || c != '\n')
+            {
+                if (offset < size)
+                    ThrowProtocolViolation("Missing \\n");
 
-				if ((st == 1 || st == 3) && c == '\n') {
-					st++;
-					continue;
-				}
+                try
+                {
+                    if (saved.Length > 0)
+                    {
+                        chunkSize = Int32.Parse(
+                            RemoveChunkExtension(saved.ToString()),
+                            NumberStyles.HexNumber
+                        );
+                    }
+                }
+                catch (Exception)
+                {
+                    ThrowProtocolViolation("Cannot parse chunk size.");
+                }
 
-				if (st >= 0) {
-					saved.Append (c);
-					st = 0;
-					if (saved.Length > 4196)
-						ThrowProtocolViolation ("Error reading trailer (too long).");
-				}
-			}
+                return State.PartialSize;
+            }
 
-			if (st < 4) {
-				trailerState = st;
-				if (offset < size)
-					ThrowProtocolViolation ("Error reading trailer.");
+            chunkRead = 0;
+            try
+            {
+                chunkSize = Int32.Parse(
+                    RemoveChunkExtension(saved.ToString()),
+                    NumberStyles.HexNumber
+                );
+            }
+            catch (Exception)
+            {
+                ThrowProtocolViolation("Cannot parse chunk size.");
+            }
 
-				return State.Trailer;
-			}
+            if (chunkSize == 0)
+            {
+                trailerState = 2;
+                return State.Trailer;
+            }
 
-			StringReader reader = new StringReader (saved.ToString ());
-			string line;
-			while ((line = reader.ReadLine ()) != null && line != "")
-				headers.Add (line);
+            return State.Body;
+        }
 
-			return State.None;
-		}
+        static string RemoveChunkExtension(string input)
+        {
+            int idx = input.IndexOf(';');
+            if (idx == -1)
+                return input;
+            return input.Substring(0, idx);
+        }
 
-		static void ThrowProtocolViolation (string message)
-		{
-			WebException we = new WebException (message, null, WebExceptionStatus.ServerProtocolViolation, null);
-			throw we;
-		}
-	}
+        State ReadCRLF(byte[] buffer, ref int offset, int size)
+        {
+            if (!sawCR)
+            {
+                if ((char)buffer[offset++] != '\r')
+                    ThrowProtocolViolation("Expecting \\r");
+
+                sawCR = true;
+                if (offset == size)
+                    return State.BodyFinished;
+            }
+
+            if (sawCR && (char)buffer[offset++] != '\n')
+                ThrowProtocolViolation("Expecting \\n");
+
+            return State.None;
+        }
+
+        State ReadTrailer(byte[] buffer, ref int offset, int size)
+        {
+            char c = '\0';
+
+            // short path
+            if (trailerState == 2 && (char)buffer[offset] == '\r' && saved.Length == 0)
+            {
+                offset++;
+                if (offset < size && (char)buffer[offset] == '\n')
+                {
+                    offset++;
+                    return State.None;
+                }
+                offset--;
+            }
+
+            int st = trailerState;
+            while (offset < size && st < 4)
+            {
+                c = (char)buffer[offset++];
+                if ((st == 0 || st == 2) && c == '\r')
+                {
+                    st++;
+                    continue;
+                }
+
+                if ((st == 1 || st == 3) && c == '\n')
+                {
+                    st++;
+                    continue;
+                }
+
+                if (st >= 0)
+                {
+                    saved.Append(c);
+                    st = 0;
+                    if (saved.Length > 4196)
+                        ThrowProtocolViolation("Error reading trailer (too long).");
+                }
+            }
+
+            if (st < 4)
+            {
+                trailerState = st;
+                if (offset < size)
+                    ThrowProtocolViolation("Error reading trailer.");
+
+                return State.Trailer;
+            }
+
+            StringReader reader = new StringReader(saved.ToString());
+            string line;
+            while ((line = reader.ReadLine()) != null && line != "")
+                headers.Add(line);
+
+            return State.None;
+        }
+
+        static void ThrowProtocolViolation(string message)
+        {
+            WebException we = new WebException(
+                message,
+                null,
+                WebExceptionStatus.ServerProtocolViolation,
+                null
+            );
+            throw we;
+        }
+    }
 }
-

@@ -4,9 +4,9 @@
 
 #nullable disable
 
-using Xunit;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
     [CompilerTrait(CompilerFeature.StackAllocInitializer)]
     public class StackAllocInitializerParsingTests : ParsingTests
     {
-        public StackAllocInitializerParsingTests(ITestOutputHelper output) : base(output) { }
+        public StackAllocInitializerParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void StackAllocInitializer_01()
@@ -22,13 +23,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
             var test = "stackalloc int[] { 42 }";
             var testWithStatement = @$"class C {{ void M() {{ var v = {test}; }} }}";
 
-            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
-                // class C { void M() { var v = stackalloc int[] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc").WithArguments("stackalloc initializer", "7.3").WithLocation(1, 30),
-                // (1,30): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                // class C { void M() { var v = stackalloc int[] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 42 }").WithLocation(1, 30));
+            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // class C { void M() { var v = stackalloc int[] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
+                        .WithArguments("stackalloc initializer", "7.3")
+                        .WithLocation(1, 30),
+                    // (1,30): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                    // class C { void M() { var v = stackalloc int[] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 42 }")
+                        .WithLocation(1, 30)
+                );
 
             UsingExpression(test, options: TestOptions.Regular7);
             N(SyntaxKind.StackAllocArrayCreationExpression);
@@ -69,13 +75,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
             var test = "stackalloc int[1] { 42 }";
             var testWithStatement = @$"class C {{ void M() {{ var v = {test}; }} }}";
 
-            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
-                // class C { void M() { var v = stackalloc int[1] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc").WithArguments("stackalloc initializer", "7.3").WithLocation(1, 30),
-                // (1,30): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                // class C { void M() { var v = stackalloc int[1] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[1] { 42 }").WithLocation(1, 30));
+            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // class C { void M() { var v = stackalloc int[1] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
+                        .WithArguments("stackalloc initializer", "7.3")
+                        .WithLocation(1, 30),
+                    // (1,30): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                    // class C { void M() { var v = stackalloc int[1] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[1] { 42 }")
+                        .WithLocation(1, 30)
+                );
 
             UsingExpression(test, options: TestOptions.Regular7);
             N(SyntaxKind.StackAllocArrayCreationExpression);
@@ -116,13 +127,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
             var test = "stackalloc[] { 42 }";
             var testWithStatement = @$"class C {{ void M() {{ var v = {test}; }} }}";
 
-            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
-                // class C { void M() { var v = stackalloc[] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc").WithArguments("stackalloc initializer", "7.3").WithLocation(1, 30),
-                // (1,30): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
-                // class C { void M() { var v = stackalloc[] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc[] { 42 }").WithLocation(1, 30));
+            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // class C { void M() { var v = stackalloc[] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
+                        .WithArguments("stackalloc initializer", "7.3")
+                        .WithLocation(1, 30),
+                    // (1,30): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                    // class C { void M() { var v = stackalloc[] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc[] { 42 }")
+                        .WithLocation(1, 30)
+                );
 
             UsingExpression(test, options: TestOptions.Regular7);
             N(SyntaxKind.ImplicitStackAllocArrayCreationExpression);
@@ -146,22 +162,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void StackAllocInitializer_04()
         {
-
             var test = "stackalloc[1] { 42 }";
             var testWithStatement = @$"class C {{ void M() {{ var v = {test}; }} }}";
 
-            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7).VerifyDiagnostics(
-                // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
-                // class C { void M() { var v = stackalloc[1] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc").WithArguments("stackalloc initializer", "7.3").WithLocation(1, 30),
-                // (1,41): error CS8381: "Invalid rank specifier: expected ']'
-                // class C { void M() { var v = stackalloc[1] { 42 }; } }
-                Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "1").WithLocation(1, 41));
+            CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
+                .VerifyDiagnostics(
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // class C { void M() { var v = stackalloc[1] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
+                        .WithArguments("stackalloc initializer", "7.3")
+                        .WithLocation(1, 30),
+                    // (1,41): error CS8381: "Invalid rank specifier: expected ']'
+                    // class C { void M() { var v = stackalloc[1] { 42 }; } }
+                    Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "1").WithLocation(1, 41)
+                );
 
-            UsingExpression(test, options: TestOptions.Regular7,
+            UsingExpression(
+                test,
+                options: TestOptions.Regular7,
                 // (1,12): error CS8381: "Invalid rank specifier: expected ']'
                 // stackalloc[1] { 42 }
-                Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "1").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "1").WithLocation(1, 12)
+            );
             N(SyntaxKind.ImplicitStackAllocArrayCreationExpression);
             {
                 N(SyntaxKind.StackAllocKeyword);
@@ -183,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void StackAllocInitializer_05()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[3] { 1, 2, 3 };
@@ -191,17 +214,19 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,28): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 28)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_06()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[3,] { 1, 2, 3 };
@@ -209,20 +234,22 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,28): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3,] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 28),
                 // (4,29): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3,] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, ",").WithLocation(4, 29)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_07()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[,3] { 1, 2, 3 };
@@ -230,20 +257,22 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,29): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[,3] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 29),
                 // (4,28): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[,3] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, ",").WithLocation(4, 28)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_08()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[,3 { 1, 2, 3 };
@@ -251,7 +280,8 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,29): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[,3 { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 29),
@@ -261,13 +291,14 @@ class C {
                 // (4,31): error CS1003: Syntax error, ']' expected
                 //         var x = stackalloc[,3 { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments("]").WithLocation(4, 31)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_09()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[3 { 1, 2, 3 };
@@ -275,20 +306,22 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,28): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3 { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 28),
                 // (4,30): error CS1003: Syntax error, ']' expected
                 //         var x = stackalloc[3 { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments("]").WithLocation(4, 30)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_10()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[3, { 1, 2, 3 };
@@ -296,7 +329,8 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,28): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3, { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 28),
@@ -306,13 +340,14 @@ class C {
                 // (4,31): error CS1003: Syntax error, ']' expected
                 //         var x = stackalloc[3, { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments("]").WithLocation(4, 31)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_11()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[3,,] { 1, 2, 3 };
@@ -320,7 +355,8 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,28): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3,,] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 28),
@@ -330,13 +366,14 @@ class C {
                 // (4,30): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3,,] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, ",").WithLocation(4, 30)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_12()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[,3,] { 1, 2, 3 };
@@ -344,7 +381,8 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,29): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[,3,] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 29),
@@ -354,13 +392,14 @@ class C {
                 // (4,30): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[,3,] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, ",").WithLocation(4, 30)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_13()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[,,3] { 1, 2, 3 };
@@ -368,7 +407,8 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,30): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[,,3] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 30),
@@ -378,13 +418,14 @@ class C {
                 // (4,29): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[,,3] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, ",").WithLocation(4, 29)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_14()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[3,,3] { 1, 2, 3 };
@@ -392,7 +433,8 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,28): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3,,3] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, "3").WithLocation(4, 28),
@@ -405,13 +447,14 @@ class C {
                 // (4,30): error CS8381: "Invalid rank specifier: expected ']'
                 //         var x = stackalloc[3,,3] { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_InvalidStackAllocArray, ",").WithLocation(4, 30)
-                );
+            );
         }
 
         [Fact]
         public void StackAllocInitializer_15()
         {
-            var test = @"
+            var test =
+                @"
 class C {
     void Goo() {
         var x = stackalloc[ { 1, 2, 3 };
@@ -419,11 +462,12 @@ class C {
 }
 ";
 
-            ParseAndValidate(test,
+            ParseAndValidate(
+                test,
                 // (4,29): error CS1003: Syntax error, ']' expected
                 //         var x = stackalloc[ { 1, 2, 3 };
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments("]").WithLocation(4, 29)
-                );
+            );
         }
     }
 }

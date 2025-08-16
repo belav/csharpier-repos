@@ -18,7 +18,8 @@ namespace System.CommandLine.Help
             CliSymbol symbol,
             string? firstColumnText = null,
             string? secondColumnText = null,
-            string? defaultValue = null)
+            string? defaultValue = null
+        )
         {
             CustomizeSymbol(symbol, _ => firstColumnText, _ => secondColumnText, _ => defaultValue);
         }

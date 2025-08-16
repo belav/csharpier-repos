@@ -56,8 +56,8 @@ namespace System.Tests
         [Fact]
         public void FromInt16()
         {
-            short[] testValues = { 100, -100, 0, };
-            long[] expectedValues = { 100, -100, 0, };
+            short[] testValues = { 100, -100, 0 };
+            long[] expectedValues = { 100, -100, 0 };
             Verify(Convert.ToInt64, testValues, expectedValues);
         }
 
@@ -85,7 +85,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToInt64, Convert.ToInt64, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToInt64, Convert.ToInt64, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToInt64,
+                Convert.ToInt64,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -99,8 +103,8 @@ namespace System.Tests
         [Fact]
         public void FromSingle()
         {
-            float[] testValues = { 100.0f, -100.0f, 0.0f, };
-            long[] expectedValues = { 100, -100, 0, };
+            float[] testValues = { 100.0f, -100.0f, 0.0f };
+            long[] expectedValues = { 100, -100, 0 };
             Verify(Convert.ToInt64, testValues, expectedValues);
 
             float[] overflowValues = { float.MaxValue, float.MinValue };
@@ -110,36 +114,103 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            string[] testValues = { "100", "-100", "0", Int64.MinValue.ToString(), Int64.MaxValue.ToString(), null };
+            string[] testValues =
+            {
+                "100",
+                "-100",
+                "0",
+                Int64.MinValue.ToString(),
+                Int64.MaxValue.ToString(),
+                null,
+            };
             long[] expectedValues = { 100, -100, 0, long.MinValue, long.MaxValue, 0 };
             VerifyFromString(Convert.ToInt64, Convert.ToInt64, testValues, expectedValues);
 
-            string[] overflowValues = { "1" + Int64.MaxValue.ToString(), Int64.MinValue.ToString() + "1" };
-            VerifyFromStringThrows<OverflowException>(Convert.ToInt64, Convert.ToInt64, overflowValues);
+            string[] overflowValues =
+            {
+                "1" + Int64.MaxValue.ToString(),
+                Int64.MinValue.ToString() + "1",
+            };
+            VerifyFromStringThrows<OverflowException>(
+                Convert.ToInt64,
+                Convert.ToInt64,
+                overflowValues
+            );
 
             string[] formatExceptionValues = { "abba" };
-            VerifyFromStringThrows<FormatException>(Convert.ToInt64, Convert.ToInt64, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToInt64,
+                Convert.ToInt64,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromStringWithBase()
         {
-            string[] testValues = { null, null, null, null, "7FFFFFFFFFFFFFFF", "9223372036854775807", "777777777777777777777", "111111111111111111111111111111111111111111111111111111111111111", "8000000000000000", "-9223372036854775808", "1000000000000000000000", "1000000000000000000000000000000000000000000000000000000000000000" };
+            string[] testValues =
+            {
+                null,
+                null,
+                null,
+                null,
+                "7FFFFFFFFFFFFFFF",
+                "9223372036854775807",
+                "777777777777777777777",
+                "111111111111111111111111111111111111111111111111111111111111111",
+                "8000000000000000",
+                "-9223372036854775808",
+                "1000000000000000000000",
+                "1000000000000000000000000000000000000000000000000000000000000000",
+            };
             int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2 };
-            long[] expectedValues = { 0, 0, 0, 0, long.MaxValue, long.MaxValue, long.MaxValue, long.MaxValue, long.MinValue, long.MinValue, long.MinValue, long.MinValue };
+            long[] expectedValues =
+            {
+                0,
+                0,
+                0,
+                0,
+                long.MaxValue,
+                long.MaxValue,
+                long.MaxValue,
+                long.MaxValue,
+                long.MinValue,
+                long.MinValue,
+                long.MinValue,
+                long.MinValue,
+            };
             VerifyFromStringWithBase(Convert.ToInt64, testValues, testBases, expectedValues);
 
-            string[] overflowValues = { "9223372036854775808", "-9223372036854775809", "11111111111111111111111111111111111111111111111111111111111111111", "1FFFFffffFFFFffff", "7777777777777777777777777" };
+            string[] overflowValues =
+            {
+                "9223372036854775808",
+                "-9223372036854775809",
+                "11111111111111111111111111111111111111111111111111111111111111111",
+                "1FFFFffffFFFFffff",
+                "7777777777777777777777777",
+            };
             int[] overflowBases = { 10, 10, 2, 16, 8 };
-            VerifyFromStringWithBaseThrows<OverflowException>(Convert.ToInt64, overflowValues, overflowBases);
+            VerifyFromStringWithBaseThrows<OverflowException>(
+                Convert.ToInt64,
+                overflowValues,
+                overflowBases
+            );
 
             string[] formatExceptionValues = { "12", "ffffffffffffffffffff" };
             int[] formatExceptionBases = { 2, 8 };
-            VerifyFromStringWithBaseThrows<FormatException>(Convert.ToInt64, formatExceptionValues, formatExceptionBases);
+            VerifyFromStringWithBaseThrows<FormatException>(
+                Convert.ToInt64,
+                formatExceptionValues,
+                formatExceptionBases
+            );
 
             string[] argumentExceptionValues = { "10", "11", "abba", "-ab" };
             int[] argumentExceptionBases = { -1, 3, 0, 16 };
-            VerifyFromStringWithBaseThrows<ArgumentException>(Convert.ToInt64, argumentExceptionValues, argumentExceptionBases);
+            VerifyFromStringWithBaseThrows<ArgumentException>(
+                Convert.ToInt64,
+                argumentExceptionValues,
+                argumentExceptionBases
+            );
         }
 
         [Fact]

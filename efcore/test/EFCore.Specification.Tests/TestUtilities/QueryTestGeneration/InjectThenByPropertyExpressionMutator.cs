@@ -8,9 +8,7 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
     private ExpressionFinder _expressionFinder;
 
     public InjectThenByPropertyExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {
@@ -31,19 +29,30 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
 
         var isDescending = random.Next(3) == 0;
         var thenBy = isDescending
-            ? QueryableMethods.ThenByDescending.MakeGenericMethod(typeArgument, property.PropertyType)
+            ? QueryableMethods.ThenByDescending.MakeGenericMethod(
+                typeArgument,
+                property.PropertyType
+            )
             : QueryableMethods.ThenBy.MakeGenericMethod(typeArgument, property.PropertyType);
 
         var prm = Expression.Parameter(typeArgument, "prm");
         var lambdaBody = (Expression)Expression.Property(prm, property);
 
-        if (property.PropertyType.IsValueType
-            && !(property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+        if (
+            property.PropertyType.IsValueType
+            && !(
+                property.PropertyType.IsGenericType
+                && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            )
+        )
         {
             var nullablePropertyType = typeof(Nullable<>).MakeGenericType(property.PropertyType);
 
             thenBy = isDescending
-                ? QueryableMethods.ThenByDescending.MakeGenericMethod(typeArgument, nullablePropertyType)
+                ? QueryableMethods.ThenByDescending.MakeGenericMethod(
+                    typeArgument,
+                    nullablePropertyType
+                )
                 : QueryableMethods.ThenBy.MakeGenericMethod(typeArgument, nullablePropertyType);
 
             lambdaBody = Expression.Convert(lambdaBody, nullablePropertyType);
@@ -57,16 +66,23 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
         }
 
         var lambda = Expression.Lambda(lambdaBody, prm);
-        var injector = new ExpressionInjector(expressionToInject, e => Expression.Call(thenBy, e, lambda));
+        var injector = new ExpressionInjector(
+            expressionToInject,
+            e => Expression.Call(thenBy, e, lambda)
+        );
 
         return injector.Visit(expression);
     }
 
     private class ExpressionFinder : ExpressionVisitor
     {
-        private List<PropertyInfo> GetValidPropertiesForOrderBy(Expression expression)
-            => expression.Type.GetGenericArguments()[0].GetProperties().Where(p => !p.GetMethod.IsStatic)
-                .Where(p => IsOrderedableType(p.PropertyType)).ToList();
+        private List<PropertyInfo> GetValidPropertiesForOrderBy(Expression expression) =>
+            expression
+                .Type.GetGenericArguments()[0]
+                .GetProperties()
+                .Where(p => !p.GetMethod.IsStatic)
+                .Where(p => IsOrderedableType(p.PropertyType))
+                .ToList();
 
         private bool _insideThenInclude;
         private readonly InjectThenByPropertyExpressionMutator _mutator;
@@ -82,19 +98,29 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
         {
             // can't inject OrderBy inside of include - would have to rewrite the ThenInclude method to one that accepts ordered input
             var insideThenInclude = default(bool?);
-            if (expression is MethodCallExpression { Method.Name: "ThenInclude" or "ThenIncludeDescending" })
+            if (
+                expression is MethodCallExpression
+                {
+                    Method.Name: "ThenInclude" or "ThenIncludeDescending"
+                }
+            )
             {
                 insideThenInclude = _insideThenInclude;
                 _insideThenInclude = true;
             }
 
-            if (!_insideThenInclude
+            if (
+                !_insideThenInclude
                 && expression is not (null or ConstantExpression)
                 && IsOrderedQueryableResult(expression)
-                && !FoundExpressions.ContainsKey(expression))
+                && !FoundExpressions.ContainsKey(expression)
+            )
             {
                 var validProperties = GetValidPropertiesForOrderBy(expression);
-                validProperties = _mutator.FilterPropertyInfos(expression.Type.GetGenericArguments()[0], validProperties);
+                validProperties = _mutator.FilterPropertyInfos(
+                    expression.Type.GetGenericArguments()[0],
+                    validProperties
+                );
 
                 if (validProperties.Any())
                 {

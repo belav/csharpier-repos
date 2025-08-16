@@ -4,85 +4,86 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
     using System.Drawing.Design;
     using System.Web;
 
-
     /// <devdoc>
     ///     Provides a data mapping definition for a TreeView
     /// </devdoc>
     [DefaultProperty("TextField")]
-    public sealed class TreeNodeBinding : IStateManager, ICloneable, IDataSourceViewSchemaAccessor {
+    public sealed class TreeNodeBinding : IStateManager, ICloneable, IDataSourceViewSchemaAccessor
+    {
         private bool _isTrackingViewState;
         private StateBag _viewState;
-
 
         /// <devdoc>
         ///     The data member to use in the mapping
         /// </devdoc>
-        [
-        DefaultValue(""),
-        WebCategory("Data"),
-        WebSysDescription(SR.Binding_DataMember),
-        ]
-        public string DataMember {
-            get {
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.Binding_DataMember)]
+        public string DataMember
+        {
+            get
+            {
                 string s = (string)ViewState["DataMember"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["DataMember"] = value;
-            }
+            set { ViewState["DataMember"] = value; }
         }
-
 
         /// <devdoc>
         ///     The depth of the level for which this TreeNodeBinding is defining a data mapping
         /// </devdoc>
         [
-        DefaultValue(-1),
-        TypeConverter("System.Web.UI.Design.WebControls.TreeNodeBindingDepthConverter, " + AssemblyRef.SystemDesign),
-        WebCategory("Data"),
-        WebSysDescription(SR.TreeNodeBinding_Depth),
+            DefaultValue(-1),
+            TypeConverter(
+                "System.Web.UI.Design.WebControls.TreeNodeBindingDepthConverter, "
+                    + AssemblyRef.SystemDesign
+            ),
+            WebCategory("Data"),
+            WebSysDescription(SR.TreeNodeBinding_Depth),
         ]
-        public int Depth {
-            get {
+        public int Depth
+        {
+            get
+            {
                 object o = ViewState["Depth"];
-                if (o == null) {
+                if (o == null)
+                {
                     return -1;
                 }
                 return (int)o;
             }
-            set {
-                ViewState["Depth"] = value;
-            }
+            set { ViewState["Depth"] = value; }
         }
 
         [DefaultValue("")]
         [Localizable(true)]
         [WebCategory("Databindings")]
         [WebSysDescription(SR.TreeNodeBinding_FormatString)]
-        public string FormatString {
-            get {
+        public string FormatString
+        {
+            get
+            {
                 string s = (string)ViewState["FormatString"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
                 return s;
             }
-            set {
-                ViewState["FormatString"] = value;
-            }
+            set { ViewState["FormatString"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the TreeNodeBinding ImageToolTip
@@ -91,160 +92,178 @@ namespace System.Web.UI.WebControls {
         [Localizable(true)]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_ImageToolTip)]
-        public string ImageToolTip {
-            get {
+        public string ImageToolTip
+        {
+            get
+            {
                 string s = (string)ViewState["ImageToolTip"];
 
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
 
                 return s;
             }
-            set {
-                ViewState["ImageToolTip"] = value;
-            }
+            set { ViewState["ImageToolTip"] = value; }
         }
-
 
         /// <devdoc>
         ///     Get and sets the fieldname to use for the ImageToolTip property in a TreeNode
         /// </devdoc>
         [DefaultValue("")]
-        [TypeConverter("System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign), WebSysDescription(SR.TreeNodeBinding_ImageToolTipField)]
+        [
+            TypeConverter(
+                "System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign
+            ),
+            WebSysDescription(SR.TreeNodeBinding_ImageToolTipField)
+        ]
         [WebCategory("Databindings")]
-        public string ImageToolTipField {
-            get {
+        public string ImageToolTipField
+        {
+            get
+            {
                 string s = (string)ViewState["ImageToolTipField"];
 
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["ImageToolTipField"] = value;
-            }
+            set { ViewState["ImageToolTipField"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the image URl to be rendered for this node
         /// </devdoc>
         [DefaultValue("")]
-        [Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor))]
+        [Editor(
+            "System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+            typeof(UITypeEditor)
+        )]
         [UrlProperty()]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_ImageUrl)]
-        public string ImageUrl {
-            get {
+        public string ImageUrl
+        {
+            get
+            {
                 string s = (string)ViewState["ImageUrl"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
                 return s;
             }
-            set {
-                ViewState["ImageUrl"] = value;
-            }
+            set { ViewState["ImageUrl"] = value; }
         }
-
 
         /// <devdoc>
         ///     Get and sets the fieldname to use for the ImageUrl property in a TreeNode
         /// </devdoc>
         [
-        DefaultValue(""),
-        TypeConverter("System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign),
-        WebCategory("Databindings"),
-        WebSysDescription(SR.TreeNodeBinding_ImageUrlField),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign
+            ),
+            WebCategory("Databindings"),
+            WebSysDescription(SR.TreeNodeBinding_ImageUrlField),
         ]
-        public string ImageUrlField {
-            get {
+        public string ImageUrlField
+        {
+            get
+            {
                 string s = (string)ViewState["ImageUrlField"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["ImageUrlField"] = value;
-            }
+            set { ViewState["ImageUrlField"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the URL to navigate to when the node is clicked
         /// </devdoc>
         [DefaultValue("")]
-        [Editor("System.Web.UI.Design.UrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor))]
+        [Editor(
+            "System.Web.UI.Design.UrlEditor, " + AssemblyRef.SystemDesign,
+            typeof(UITypeEditor)
+        )]
         [UrlProperty()]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_NavigateUrl)]
-        public string NavigateUrl {
-            get {
+        public string NavigateUrl
+        {
+            get
+            {
                 string s = (string)ViewState["NavigateUrl"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
                 return s;
             }
-            set {
-                ViewState["NavigateUrl"] = value;
-            }
+            set { ViewState["NavigateUrl"] = value; }
         }
-
 
         /// <devdoc>
         ///     Get and sets the fieldname to use for the NavigateUrl property in a TreeNode
         /// </devdoc>
         [
-        DefaultValue(""),
-        TypeConverter("System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign),
-        WebCategory("Databindings"),
-        WebSysDescription(SR.TreeNodeBinding_NavigateUrlField),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign
+            ),
+            WebCategory("Databindings"),
+            WebSysDescription(SR.TreeNodeBinding_NavigateUrlField),
         ]
-        public string NavigateUrlField {
-            get {
+        public string NavigateUrlField
+        {
+            get
+            {
                 string s = (string)ViewState["NavigateUrlField"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["NavigateUrlField"] = value;
-            }
+            set { ViewState["NavigateUrlField"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets whether to populate this binding immediately or on the next request for population
         /// </devdoc>
         [
-        DefaultValue(false),
-        WebCategory("DefaultProperties"),
-        WebSysDescription(SR.TreeNodeBinding_PopulateOnDemand),
+            DefaultValue(false),
+            WebCategory("DefaultProperties"),
+            WebSysDescription(SR.TreeNodeBinding_PopulateOnDemand),
         ]
-        public bool PopulateOnDemand {
-            get {
+        public bool PopulateOnDemand
+        {
+            get
+            {
                 object o = ViewState["PopulateOnDemand"];
-                if (o == null) {
+                if (o == null)
+                {
                     return false;
                 }
                 return (bool)o;
             }
-            set {
-                ViewState["PopulateOnDemand"] = value;
-            }
+            set { ViewState["PopulateOnDemand"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the action which the TreeNodeBinding will perform when selected
@@ -252,19 +271,19 @@ namespace System.Web.UI.WebControls {
         [DefaultValue(TreeNodeSelectAction.Select)]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_SelectAction)]
-        public TreeNodeSelectAction SelectAction {
-            get {
+        public TreeNodeSelectAction SelectAction
+        {
+            get
+            {
                 object o = ViewState["SelectAction"];
-                if (o == null) {
+                if (o == null)
+                {
                     return TreeNodeSelectAction.Select;
                 }
                 return (TreeNodeSelectAction)o;
             }
-            set {
-                ViewState["SelectAction"] = value;
-            }
+            set { ViewState["SelectAction"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets whether the TreeNodeBinding has a CheckBox
@@ -272,19 +291,19 @@ namespace System.Web.UI.WebControls {
         [DefaultValue(typeof(Nullable<bool>), "")]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_ShowCheckBox)]
-        public bool? ShowCheckBox {
-            get {
+        public bool? ShowCheckBox
+        {
+            get
+            {
                 object o = ViewState["ShowCheckBox"];
-                if (o == null) {
+                if (o == null)
+                {
                     return null;
                 }
                 return (bool?)o;
             }
-            set {
-                ViewState["ShowCheckBox"] = value;
-            }
+            set { ViewState["ShowCheckBox"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the target window that the TreeNodeBinding will browse to if selected
@@ -292,40 +311,44 @@ namespace System.Web.UI.WebControls {
         [DefaultValue("")]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_Target)]
-        public string Target {
-            get {
+        public string Target
+        {
+            get
+            {
                 string s = (string)ViewState["Target"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
                 return s;
             }
-            set {
-                ViewState["Target"] = value;
-            }
+            set { ViewState["Target"] = value; }
         }
 
         [
-        DefaultValue(""),
-        TypeConverter("System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign),
-        WebCategory("Databindings"),
-        WebSysDescription(SR.TreeNodeBinding_TargetField),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign
+            ),
+            WebCategory("Databindings"),
+            WebSysDescription(SR.TreeNodeBinding_TargetField),
         ]
-        public string TargetField {
-            get {
+        public string TargetField
+        {
+            get
+            {
                 string s = (string)ViewState["TargetField"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["TargetField"] = value;
-            }
+            set { ViewState["TargetField"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the display text
@@ -334,47 +357,51 @@ namespace System.Web.UI.WebControls {
         [Localizable(true)]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_Text)]
-        public string Text {
-            get {
+        public string Text
+        {
+            get
+            {
                 string s = (string)ViewState["Text"];
-                if (s == null) {
+                if (s == null)
+                {
                     s = (string)ViewState["Value"];
-                    if (s == null) {
+                    if (s == null)
+                    {
                         return String.Empty;
                     }
                 }
                 return s;
             }
-            set {
-                ViewState["Text"] = value;
-            }
+            set { ViewState["Text"] = value; }
         }
-
 
         /// <devdoc>
         ///     Get and sets the fieldname to use for the Text property in a TreeNode
         /// </devdoc>
         [
-        DefaultValue(""),
-        TypeConverter("System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign),
-        WebCategory("Databindings"),
-        WebSysDescription(SR.TreeNodeBinding_TextField),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign
+            ),
+            WebCategory("Databindings"),
+            WebSysDescription(SR.TreeNodeBinding_TextField),
         ]
-        public string TextField {
-            get {
+        public string TextField
+        {
+            get
+            {
                 string s = (string)ViewState["TextField"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["TextField"] = value;
-            }
+            set { ViewState["TextField"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the TreeNodeBinding tooltip
@@ -383,44 +410,47 @@ namespace System.Web.UI.WebControls {
         [Localizable(true)]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_ToolTip)]
-        public string ToolTip {
-            get {
+        public string ToolTip
+        {
+            get
+            {
                 string s = (string)ViewState["ToolTip"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
                 return s;
             }
-            set {
-                ViewState["ToolTip"] = value;
-            }
+            set { ViewState["ToolTip"] = value; }
         }
-
 
         /// <devdoc>
         ///     Get and sets the fieldname to use for the ToolTip property in a TreeNode
         /// </devdoc>
         [
-        DefaultValue(""),
-        TypeConverter("System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign),
-        WebCategory("Databindings"),
-        WebSysDescription(SR.TreeNodeBinding_ToolTipField),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign
+            ),
+            WebCategory("Databindings"),
+            WebSysDescription(SR.TreeNodeBinding_ToolTipField),
         ]
-        public string ToolTipField {
-            get {
+        public string ToolTipField
+        {
+            get
+            {
                 string s = (string)ViewState["ToolTipField"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["ToolTipField"] = value;
-            }
+            set { ViewState["ToolTipField"] = value; }
         }
-
 
         /// <devdoc>
         ///     Gets and sets the value
@@ -429,56 +459,64 @@ namespace System.Web.UI.WebControls {
         [Localizable(true)]
         [WebCategory("DefaultProperties")]
         [WebSysDescription(SR.TreeNodeBinding_Value)]
-        public string Value {
-            get {
+        public string Value
+        {
+            get
+            {
                 string s = (string)ViewState["Value"];
-                if (s == null) {
+                if (s == null)
+                {
                     s = (string)ViewState["Text"];
-                    if (s == null) {
+                    if (s == null)
+                    {
                         return String.Empty;
                     }
                 }
                 return s;
             }
-            set {
-                ViewState["Value"] = value;
-            }
+            set { ViewState["Value"] = value; }
         }
-
 
         /// <devdoc>
         ///     Get and sets the fieldname to use for the Value property in a TreeNode
         /// </devdoc>
         [
-        DefaultValue(""),
-        TypeConverter("System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign),
-        WebCategory("Databindings"),
-        WebSysDescription(SR.TreeNodeBinding_ValueField),
+            DefaultValue(""),
+            TypeConverter(
+                "System.Web.UI.Design.DataSourceViewSchemaConverter, " + AssemblyRef.SystemDesign
+            ),
+            WebCategory("Databindings"),
+            WebSysDescription(SR.TreeNodeBinding_ValueField),
         ]
-        public string ValueField {
-            get {
+        public string ValueField
+        {
+            get
+            {
                 string s = (string)ViewState["ValueField"];
-                if (s == null) {
+                if (s == null)
+                {
                     return String.Empty;
                 }
-                else {
+                else
+                {
                     return s;
                 }
             }
-            set {
-                ViewState["ValueField"] = value;
-            }
+            set { ViewState["ValueField"] = value; }
         }
-
 
         /// <devdoc>
         ///     The state for this TreeNodeBinding
         /// </devdoc>
-        private StateBag ViewState {
-            get {
-                if (_viewState == null) {
+        private StateBag ViewState
+        {
+            get
+            {
+                if (_viewState == null)
+                {
                     _viewState = new StateBag();
-                    if (_isTrackingViewState) {
+                    if (_isTrackingViewState)
+                    {
                         ((IStateManager)_viewState).TrackViewState();
                     }
                 }
@@ -486,14 +524,18 @@ namespace System.Web.UI.WebControls {
             }
         }
 
-        internal void SetDirty() {
+        internal void SetDirty()
+        {
             ViewState.SetDirty(true);
         }
 
-        public override string ToString() {
-            return (String.IsNullOrEmpty(DataMember) ?
-                    SR.GetString(SR.TreeNodeBinding_EmptyBindingText) :
-                    DataMember);
+        public override string ToString()
+        {
+            return (
+                String.IsNullOrEmpty(DataMember)
+                    ? SR.GetString(SR.TreeNodeBinding_EmptyBindingText)
+                    : DataMember
+            );
         }
 
         #region ICloneable implemention
@@ -502,7 +544,8 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         /// Creates a clone of the TreeNodeBinding.
         /// </devdoc>
-        object ICloneable.Clone() {
+        object ICloneable.Clone()
+        {
             TreeNodeBinding clone = new TreeNodeBinding();
             clone.DataMember = DataMember;
             clone.Depth = Depth;
@@ -532,36 +575,38 @@ namespace System.Web.UI.WebControls {
         #region IStateManager implementation
 
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return _isTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return _isTrackingViewState; }
         }
 
-
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
-            if (state != null) {
+        void IStateManager.LoadViewState(object state)
+        {
+            if (state != null)
+            {
                 ((IStateManager)ViewState).LoadViewState(state);
             }
         }
 
-
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
-            if (_viewState != null) {
+        object IStateManager.SaveViewState()
+        {
+            if (_viewState != null)
+            {
                 return ((IStateManager)_viewState).SaveViewState();
             }
 
             return null;
         }
 
-
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             _isTrackingViewState = true;
 
-            if (_viewState != null) {
+            if (_viewState != null)
+            {
                 ((IStateManager)_viewState).TrackViewState();
             }
         }
@@ -570,13 +615,10 @@ namespace System.Web.UI.WebControls {
         #region IDataSourceViewSchemaAccessor implementation
 
         /// <internalonly/>
-        object IDataSourceViewSchemaAccessor.DataSourceViewSchema {
-            get {
-                return ViewState["IDataSourceViewSchemaAccessor.DataSourceViewSchema"];
-            }
-            set {
-                ViewState["IDataSourceViewSchemaAccessor.DataSourceViewSchema"] = value;
-            }
+        object IDataSourceViewSchemaAccessor.DataSourceViewSchema
+        {
+            get { return ViewState["IDataSourceViewSchemaAccessor.DataSourceViewSchema"]; }
+            set { ViewState["IDataSourceViewSchemaAccessor.DataSourceViewSchema"] = value; }
         }
         #endregion
     }

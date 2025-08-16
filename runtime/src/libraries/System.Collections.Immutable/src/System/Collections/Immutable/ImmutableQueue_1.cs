@@ -25,7 +25,10 @@ namespace System.Collections.Immutable
         /// Additional instances representing the empty queue may exist on deserialized instances.
         /// Actually since this queue is a struct, instances don't even apply and there are no singletons.
         /// </remarks>
-        private static readonly ImmutableQueue<T> s_EmptyField = new ImmutableQueue<T>(ImmutableStack<T>.Empty, ImmutableStack<T>.Empty);
+        private static readonly ImmutableQueue<T> s_EmptyField = new ImmutableQueue<T>(
+            ImmutableStack<T>.Empty,
+            ImmutableStack<T>.Empty
+        );
 
         /// <summary>
         /// The end of the queue that enqueued elements are pushed onto.
@@ -245,9 +248,9 @@ namespace System.Collections.Immutable
         /// </returns>
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            return this.IsEmpty ?
-                Enumerable.Empty<T>().GetEnumerator() :
-                new EnumeratorObject(this);
+            return this.IsEmpty
+                ? Enumerable.Empty<T>().GetEnumerator()
+                : new EnumeratorObject(this);
         }
 
         /// <summary>

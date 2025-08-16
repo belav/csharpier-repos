@@ -835,8 +835,8 @@ public class RequestTests : LoggedTest
 
                     var connectionLifetimeFeature =
                         context.Features.Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature.ConnectionClosed.Register(
-                        () => connectionClosedTcs.SetResult()
+                    connectionLifetimeFeature.ConnectionClosed.Register(() =>
+                        connectionClosedTcs.SetResult()
                     );
 
                     return Task.CompletedTask;
@@ -874,8 +874,8 @@ public class RequestTests : LoggedTest
                 {
                     var connectionLifetimeFeature =
                         context.Features.Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature.ConnectionClosed.Register(
-                        () => connectionClosedTcs.SetResult()
+                    connectionLifetimeFeature.ConnectionClosed.Register(() =>
+                        connectionClosedTcs.SetResult()
                     );
 
                     return Task.CompletedTask;
@@ -918,8 +918,8 @@ public class RequestTests : LoggedTest
                 {
                     var connectionLifetimeFeature =
                         context.Features.Get<IConnectionLifetimeFeature>();
-                    connectionLifetimeFeature.ConnectionClosed.Register(
-                        () => connectionClosedTcs.SetResult()
+                    connectionLifetimeFeature.ConnectionClosed.Register(() =>
+                        connectionClosedTcs.SetResult()
                     );
 
                     context.Abort();

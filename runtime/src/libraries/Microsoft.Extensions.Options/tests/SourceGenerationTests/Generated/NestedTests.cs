@@ -14,15 +14,9 @@ public class NestedTests
     [Fact]
     public void Invalid()
     {
-        var thirdModel = new Container1.ThirdModel
-        {
-            P6 = "1234",
-        };
+        var thirdModel = new Container1.ThirdModel { P6 = "1234" };
 
-        var secondModel = new Container1.SecondModel
-        {
-            P5 = "1234",
-        };
+        var secondModel = new Container1.SecondModel { P5 = "1234" };
 
         var firstModel = new Container1.FirstModel
         {
@@ -41,15 +35,9 @@ public class NestedTests
     [Fact]
     public void Valid()
     {
-        var thirdModel = new Container1.ThirdModel
-        {
-            P6 = "12345",
-        };
+        var thirdModel = new Container1.ThirdModel { P6 = "12345" };
 
-        var secondModel = new Container1.SecondModel
-        {
-            P5 = "12345",
-        };
+        var secondModel = new Container1.SecondModel { P5 = "12345" };
 
         var firstModel = new Container1.FirstModel
         {

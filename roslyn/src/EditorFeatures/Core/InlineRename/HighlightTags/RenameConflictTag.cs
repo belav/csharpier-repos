@@ -14,8 +14,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename.HighlightTag
         public static readonly RenameConflictTag Instance = new RenameConflictTag();
 
         private RenameConflictTag()
-            : base(TagId)
-        {
-        }
+            : base(TagId) { }
     }
 }

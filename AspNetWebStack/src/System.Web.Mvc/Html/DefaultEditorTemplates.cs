@@ -26,22 +26,31 @@ namespace System.Web.Mvc.Html
             bool? value = null;
             if (html.ViewContext.ViewData.Model != null)
             {
-                value = Convert.ToBoolean(html.ViewContext.ViewData.Model, CultureInfo.InvariantCulture);
+                value = Convert.ToBoolean(
+                    html.ViewContext.ViewData.Model,
+                    CultureInfo.InvariantCulture
+                );
             }
 
             return html.ViewContext.ViewData.ModelMetadata.IsNullableValueType
-                       ? BooleanTemplateDropDownList(html, value)
-                       : BooleanTemplateCheckbox(html, value ?? false);
+                ? BooleanTemplateDropDownList(html, value)
+                : BooleanTemplateCheckbox(html, value ?? false);
         }
 
         private static string BooleanTemplateCheckbox(HtmlHelper html, bool value)
         {
-            return html.CheckBox(String.Empty, value, CreateHtmlAttributes(html, "check-box")).ToHtmlString();
+            return html.CheckBox(String.Empty, value, CreateHtmlAttributes(html, "check-box"))
+                .ToHtmlString();
         }
 
         private static string BooleanTemplateDropDownList(HtmlHelper html, bool? value)
         {
-            return html.DropDownList(String.Empty, TriStateValues(value), CreateHtmlAttributes(html, "list-box tri-state")).ToHtmlString();
+            return html.DropDownList(
+                    String.Empty,
+                    TriStateValues(value),
+                    CreateHtmlAttributes(html, "list-box tri-state")
+                )
+                .ToHtmlString();
         }
 
         internal static string CollectionTemplate(HtmlHelper html)
@@ -49,7 +58,10 @@ namespace System.Web.Mvc.Html
             return CollectionTemplate(html, TemplateHelpers.TemplateHelper);
         }
 
-        internal static string CollectionTemplate(HtmlHelper html, TemplateHelpers.TemplateHelperDelegate templateHelper)
+        internal static string CollectionTemplate(
+            HtmlHelper html,
+            TemplateHelpers.TemplateHelperDelegate templateHelper
+        )
         {
             ViewDataDictionary viewData = html.ViewContext.ViewData;
             object model = viewData.ModelMetadata.Model;
@@ -65,16 +77,23 @@ namespace System.Web.Mvc.Html
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.Templates_TypeMustImplementIEnumerable,
-                        model.GetType().FullName));
+                        model.GetType().FullName
+                    )
+                );
             }
 
             Type typeInCollection = typeof(string);
-            Type genericEnumerableType = TypeHelpers.ExtractGenericInterface(collection.GetType(), typeof(IEnumerable<>));
+            Type genericEnumerableType = TypeHelpers.ExtractGenericInterface(
+                collection.GetType(),
+                typeof(IEnumerable<>)
+            );
             if (genericEnumerableType != null)
             {
                 typeInCollection = genericEnumerableType.GetGenericArguments()[0];
             }
-            bool typeInCollectionIsNullableValueType = TypeHelpers.IsNullableValueType(typeInCollection);
+            bool typeInCollectionIsNullableValueType = TypeHelpers.IsNullableValueType(
+                typeInCollection
+            );
 
             string oldPrefix = viewData.TemplateInfo.HtmlFieldPrefix;
 
@@ -93,9 +112,25 @@ namespace System.Web.Mvc.Html
                     {
                         itemType = item.GetType();
                     }
-                    ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => item, itemType);
-                    string fieldName = String.Format(CultureInfo.InvariantCulture, "{0}[{1}]", fieldNameBase, index++);
-                    string output = templateHelper(html, metadata, fieldName, null /* templateName */, DataBoundControlMode.Edit, null /* additionalViewData */);
+                    ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                        () => item,
+                        itemType
+                    );
+                    string fieldName = String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}[{1}]",
+                        fieldNameBase,
+                        index++
+                    );
+                    string output = templateHelper(
+                        html,
+                        metadata,
+                        fieldName,
+                        null /* templateName */
+                        ,
+                        DataBoundControlMode.Edit,
+                        null /* additionalViewData */
+                    );
                     result.Append(output);
                 }
 
@@ -109,9 +144,16 @@ namespace System.Web.Mvc.Html
 
         internal static string DecimalTemplate(HtmlHelper html)
         {
-            if (html.ViewContext.ViewData.TemplateInfo.FormattedModelValue == html.ViewContext.ViewData.ModelMetadata.Model)
+            if (
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue
+                == html.ViewContext.ViewData.ModelMetadata.Model
+            )
             {
-                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(CultureInfo.CurrentCulture, "{0:0.00}", html.ViewContext.ViewData.ModelMetadata.Model);
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0:0.00}",
+                    html.ViewContext.ViewData.ModelMetadata.Model
+                );
             }
 
             return StringTemplate(html);
@@ -147,7 +189,8 @@ namespace System.Web.Mvc.Html
             }
 
             object htmlAttributesObject = viewData[HtmlAttributeKey];
-            IDictionary<string, object> htmlAttributesDict = htmlAttributesObject as IDictionary<string, object>;
+            IDictionary<string, object> htmlAttributesDict =
+                htmlAttributesObject as IDictionary<string, object>;
 
             MvcHtmlString hiddenResult;
 
@@ -167,13 +210,23 @@ namespace System.Web.Mvc.Html
 
         internal static string MultilineTextTemplate(HtmlHelper html)
         {
-            return html.TextArea(String.Empty,
-                                 html.ViewContext.ViewData.TemplateInfo.FormattedModelValue.ToString(),
-                                 0 /* rows */, 0 /* columns */,
-                                 CreateHtmlAttributes(html, "text-box multi-line")).ToHtmlString();
+            return html.TextArea(
+                    String.Empty,
+                    html.ViewContext.ViewData.TemplateInfo.FormattedModelValue.ToString(),
+                    0 /* rows */
+                    ,
+                    0 /* columns */
+                    ,
+                    CreateHtmlAttributes(html, "text-box multi-line")
+                )
+                .ToHtmlString();
         }
 
-        private static IDictionary<string, object> CreateHtmlAttributes(HtmlHelper html, string className, string inputType = null)
+        private static IDictionary<string, object> CreateHtmlAttributes(
+            HtmlHelper html,
+            string className,
+            string inputType = null
+        )
         {
             object htmlAttributesObject = html.ViewContext.ViewData[HtmlAttributeKey];
             if (htmlAttributesObject != null)
@@ -181,10 +234,7 @@ namespace System.Web.Mvc.Html
                 return MergeHtmlAttributes(htmlAttributesObject, className, inputType);
             }
 
-            var htmlAttributes = new Dictionary<string, object>()
-            {
-                { "class", className }
-            };
+            var htmlAttributes = new Dictionary<string, object>() { { "class", className } };
             if (inputType != null)
             {
                 htmlAttributes.Add("type", inputType);
@@ -192,12 +242,19 @@ namespace System.Web.Mvc.Html
             return htmlAttributes;
         }
 
-        private static IDictionary<string, object> MergeHtmlAttributes(object htmlAttributesObject, string className, string inputType)
+        private static IDictionary<string, object> MergeHtmlAttributes(
+            object htmlAttributesObject,
+            string className,
+            string inputType
+        )
         {
-            IDictionary<string, object> htmlAttributesDict = htmlAttributesObject as IDictionary<string, object>;
+            IDictionary<string, object> htmlAttributesDict =
+                htmlAttributesObject as IDictionary<string, object>;
 
-            RouteValueDictionary htmlAttributes = (htmlAttributesDict != null) ? new RouteValueDictionary(htmlAttributesDict)
-                : HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributesObject);
+            RouteValueDictionary htmlAttributes =
+                (htmlAttributesDict != null)
+                    ? new RouteValueDictionary(htmlAttributesDict)
+                    : HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributesObject);
 
             string htmlClassName;
             if (htmlAttributes.TryGetValue("class", out htmlClassName))
@@ -224,7 +281,10 @@ namespace System.Web.Mvc.Html
             return ObjectTemplate(html, TemplateHelpers.TemplateHelper);
         }
 
-        internal static string ObjectTemplate(HtmlHelper html, TemplateHelpers.TemplateHelperDelegate templateHelper)
+        internal static string ObjectTemplate(
+            HtmlHelper html,
+            TemplateHelpers.TemplateHelperDelegate templateHelper
+        )
         {
             ViewDataDictionary viewData = html.ViewContext.ViewData;
             TemplateInfo templateInfo = viewData.TemplateInfo;
@@ -248,20 +308,40 @@ namespace System.Web.Mvc.Html
                 return text;
             }
 
-            foreach (ModelMetadata propertyMetadata in modelMetadata.Properties.Where(pm => ShouldShow(pm, templateInfo)))
+            foreach (
+                ModelMetadata propertyMetadata in modelMetadata.Properties.Where(pm =>
+                    ShouldShow(pm, templateInfo)
+                )
+            )
             {
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
-                    string label = LabelExtensions.LabelHelper(html, propertyMetadata, propertyMetadata.PropertyName).ToHtmlString();
+                    string label = LabelExtensions
+                        .LabelHelper(html, propertyMetadata, propertyMetadata.PropertyName)
+                        .ToHtmlString();
                     if (!String.IsNullOrEmpty(label))
                     {
-                        builder.AppendFormat(CultureInfo.InvariantCulture, "<div class=\"editor-label\">{0}</div>\r\n", label);
+                        builder.AppendFormat(
+                            CultureInfo.InvariantCulture,
+                            "<div class=\"editor-label\">{0}</div>\r\n",
+                            label
+                        );
                     }
 
                     builder.Append("<div class=\"editor-field\">");
                 }
 
-                builder.Append(templateHelper(html, propertyMetadata, propertyMetadata.PropertyName, null /* templateName */, DataBoundControlMode.Edit, null /* additionalViewData */));
+                builder.Append(
+                    templateHelper(
+                        html,
+                        propertyMetadata,
+                        propertyMetadata.PropertyName,
+                        null /* templateName */
+                        ,
+                        DataBoundControlMode.Edit,
+                        null /* additionalViewData */
+                    )
+                );
 
                 if (!propertyMetadata.HideSurroundingHtml)
                 {
@@ -277,26 +357,31 @@ namespace System.Web.Mvc.Html
         internal static string PasswordTemplate(HtmlHelper html)
         {
             object value = null;
-            var usePasswordStrings = WebConfigurationManager.AppSettings.GetValues(UsePasswordValue);
+            var usePasswordStrings = WebConfigurationManager.AppSettings.GetValues(
+                UsePasswordValue
+            );
             bool usePasswordValue;
-            if (usePasswordStrings != null &&
-                usePasswordStrings.Length > 0 &&
-                bool.TryParse(usePasswordStrings[0], out usePasswordValue) &&
-                usePasswordValue)
+            if (
+                usePasswordStrings != null
+                && usePasswordStrings.Length > 0
+                && bool.TryParse(usePasswordStrings[0], out usePasswordValue)
+                && usePasswordValue
+            )
             {
                 value = html.ViewContext.ViewData.TemplateInfo.FormattedModelValue;
             }
 
             return html.Password(
-                name: String.Empty,
-                value: value,
-                htmlAttributes: CreateHtmlAttributes(html, "text-box single-line password")).ToHtmlString();
+                    name: String.Empty,
+                    value: value,
+                    htmlAttributes: CreateHtmlAttributes(html, "text-box single-line password")
+                )
+                .ToHtmlString();
         }
 
         private static bool ShouldShow(ModelMetadata metadata, TemplateInfo templateInfo)
         {
-            return
-                metadata.ShowForEdit
+            return metadata.ShowForEdit
                 && metadata.ModelType != typeof(EntityState)
                 && !metadata.IsComplexType
                 && !templateInfo.Visited(metadata);
@@ -359,7 +444,13 @@ namespace System.Web.Mvc.Html
                 if (html.ViewContext.ViewData.Model is Color)
                 {
                     Color color = (Color)html.ViewContext.ViewData.Model;
-                    value = String.Format(CultureInfo.InvariantCulture, "#{0:X2}{1:X2}{2:X2}", color.R, color.G, color.B);
+                    value = String.Format(
+                        CultureInfo.InvariantCulture,
+                        "#{0:X2}{1:X2}{2:X2}",
+                        color.R,
+                        color.G,
+                        color.B
+                    );
                 }
                 else
                 {
@@ -379,28 +470,48 @@ namespace System.Web.Mvc.Html
 
             ModelMetadata metadata = html.ViewContext.ViewData.ModelMetadata;
             object value = metadata.Model;
-            if (html.ViewContext.ViewData.TemplateInfo.FormattedModelValue != value && metadata.HasNonDefaultEditFormat)
+            if (
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue != value
+                && metadata.HasNonDefaultEditFormat
+            )
             {
                 return;
             }
 
             if (value is DateTime || value is DateTimeOffset)
             {
-                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(CultureInfo.InvariantCulture, format, value);
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue = String.Format(
+                    CultureInfo.InvariantCulture,
+                    format,
+                    value
+                );
             }
         }
 
         private static string HtmlInputTemplateHelper(HtmlHelper html, string inputType = null)
         {
-            return HtmlInputTemplateHelper(html, inputType, html.ViewContext.ViewData.TemplateInfo.FormattedModelValue);
+            return HtmlInputTemplateHelper(
+                html,
+                inputType,
+                html.ViewContext.ViewData.TemplateInfo.FormattedModelValue
+            );
         }
 
-        private static string HtmlInputTemplateHelper(HtmlHelper html, string inputType, object value)
+        private static string HtmlInputTemplateHelper(
+            HtmlHelper html,
+            string inputType,
+            object value
+        )
         {
             return html.TextBox(
                     name: String.Empty,
                     value: value,
-                    htmlAttributes: CreateHtmlAttributes(html, className: "text-box single-line", inputType: inputType))
+                    htmlAttributes: CreateHtmlAttributes(
+                        html,
+                        className: "text-box single-line",
+                        inputType: inputType
+                    )
+                )
                 .ToHtmlString();
         }
 
@@ -408,9 +519,24 @@ namespace System.Web.Mvc.Html
         {
             return new List<SelectListItem>
             {
-                new SelectListItem { Text = MvcResources.Common_TriState_NotSet, Value = String.Empty, Selected = !value.HasValue },
-                new SelectListItem { Text = MvcResources.Common_TriState_True, Value = "true", Selected = value.HasValue && value.Value },
-                new SelectListItem { Text = MvcResources.Common_TriState_False, Value = "false", Selected = value.HasValue && !value.Value },
+                new SelectListItem
+                {
+                    Text = MvcResources.Common_TriState_NotSet,
+                    Value = String.Empty,
+                    Selected = !value.HasValue,
+                },
+                new SelectListItem
+                {
+                    Text = MvcResources.Common_TriState_True,
+                    Value = "true",
+                    Selected = value.HasValue && value.Value,
+                },
+                new SelectListItem
+                {
+                    Text = MvcResources.Common_TriState_False,
+                    Value = "false",
+                    Selected = value.HasValue && !value.Value,
+                },
             };
         }
     }

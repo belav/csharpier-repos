@@ -45,7 +45,5 @@ public sealed record LazyLoaderParameterBindingFactoryDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public LazyLoaderParameterBindingFactoryDependencies()
-    {
-    }
+    public LazyLoaderParameterBindingFactoryDependencies() { }
 }

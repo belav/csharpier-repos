@@ -10,9 +10,13 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class HostTimeoutsElement : ConfigurationElement
     {
-        public HostTimeoutsElement() : base() { }
+        public HostTimeoutsElement()
+            : base() { }
 
-        [ConfigurationProperty(ConfigurationStrings.CloseTimeout, DefaultValue = ServiceDefaults.ServiceHostCloseTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CloseTimeout,
+            DefaultValue = ServiceDefaults.ServiceHostCloseTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan CloseTimeout
@@ -21,7 +25,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.CloseTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.OpenTimeout, DefaultValue = ServiceDefaults.OpenTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.OpenTimeout,
+            DefaultValue = ServiceDefaults.OpenTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan OpenTimeout

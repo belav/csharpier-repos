@@ -15,8 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         private readonly AbstractEditorFactory _editorFactory;
 
-        protected AbstractCodePageEditorFactory(AbstractEditorFactory editorFactory)
-            => _editorFactory = editorFactory;
+        protected AbstractCodePageEditorFactory(AbstractEditorFactory editorFactory) =>
+            _editorFactory = editorFactory;
 
         int IVsEditorFactory.CreateEditorInstance(
             uint grfCreateDoc,
@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             out IntPtr ppunkDocData,
             out string pbstrEditorCaption,
             out Guid pguidCmdUI,
-            out int pgrfCDW)
+            out int pgrfCDW
+        )
         {
             if (punkDocDataExisting != IntPtr.Zero)
             {
@@ -46,9 +47,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             try
             {
                 return _editorFactory.CreateEditorInstance(
-                    grfCreateDoc, pszMkDocument, pszPhysicalView, vsHierarchy, itemid,
-                    punkDocDataExisting, out ppunkDocView, out ppunkDocData,
-                    out pbstrEditorCaption, out pguidCmdUI, out pgrfCDW);
+                    grfCreateDoc,
+                    pszMkDocument,
+                    pszPhysicalView,
+                    vsHierarchy,
+                    itemid,
+                    punkDocDataExisting,
+                    out ppunkDocView,
+                    out ppunkDocData,
+                    out pbstrEditorCaption,
+                    out pguidCmdUI,
+                    out pgrfCDW
+                );
             }
             finally
             {
@@ -56,13 +66,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             }
         }
 
-        int IVsEditorFactory.MapLogicalView(ref Guid rguidLogicalView, out string pbstrPhysicalView)
-            => _editorFactory.MapLogicalView(ref rguidLogicalView, out pbstrPhysicalView);
+        int IVsEditorFactory.MapLogicalView(
+            ref Guid rguidLogicalView,
+            out string pbstrPhysicalView
+        ) => _editorFactory.MapLogicalView(ref rguidLogicalView, out pbstrPhysicalView);
 
-        int IVsEditorFactory.SetSite(IOleServiceProvider psp)
-            => VSConstants.S_OK;
+        int IVsEditorFactory.SetSite(IOleServiceProvider psp) => VSConstants.S_OK;
 
-        int IVsEditorFactory.Close()
-            => VSConstants.S_OK;
+        int IVsEditorFactory.Close() => VSConstants.S_OK;
     }
 }

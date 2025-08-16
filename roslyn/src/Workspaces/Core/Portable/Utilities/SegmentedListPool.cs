@@ -10,7 +10,9 @@ namespace Microsoft.CodeAnalysis.Utilities;
 
 internal static class SegmentedListPool
 {
-    internal static PooledObject<SegmentedList<T>> GetPooledList<T>(out SegmentedList<T> classifiedSpans)
+    internal static PooledObject<SegmentedList<T>> GetPooledList<T>(
+        out SegmentedList<T> classifiedSpans
+    )
     {
         var pooledObject = new PooledObject<SegmentedList<T>>(
             SharedPools.BigDefault<SegmentedList<T>>(),
@@ -27,7 +29,8 @@ internal static class SegmentedListPool
                 // lots of **garbage.**
                 list.Clear();
                 p.Free(list);
-            });
+            }
+        );
 
         classifiedSpans = pooledObject.Object;
         return pooledObject;
@@ -36,14 +39,15 @@ internal static class SegmentedListPool
     /// <summary>
     /// Computes a list of results based on a provided <paramref name="addItems"/> callback.  The callback is passed
     /// a <see cref="SegmentedList{T}"/> to add results to, and additional args to assist the process.  If no items
-    /// are added to the list, then the <see cref="Array.Empty{T}"/> singleton will be returned.  Otherwise the 
+    /// are added to the list, then the <see cref="Array.Empty{T}"/> singleton will be returned.  Otherwise the
     /// <see cref="SegmentedList{T}"/> instance will be returned.
     /// </summary>
     internal static IList<T> ComputeList<T, TArgs>(
         Action<TArgs, SegmentedList<T>> addItems,
         TArgs args,
         // Only used to allow type inference to work at callsite
-        T? _)
+        T? _
+    )
     {
         var pooledObject = GetPooledList<T>(out var list);
 

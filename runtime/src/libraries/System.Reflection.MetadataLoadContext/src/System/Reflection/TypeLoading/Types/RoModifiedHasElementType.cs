@@ -13,7 +13,8 @@ namespace System.Reflection
     {
         private readonly RoModifiedType? _elementModifiedType;
 
-        public RoModifiedHasElementType(RoType unmodifiedType) : base(unmodifiedType)
+        public RoModifiedHasElementType(RoType unmodifiedType)
+            : base(unmodifiedType)
         {
             Debug.Assert(unmodifiedType.HasElementType);
             _elementModifiedType = Create(unmodifiedType.GetRoElementType()!);

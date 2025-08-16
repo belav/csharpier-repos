@@ -15,11 +15,12 @@ namespace System.ServiceModel.Security
         bool requireSecurityOnBothDuplexDirections = true;
 
         public DuplexSecurityProtocolFactory()
-            : base()
-        {
-        }
+            : base() { }
 
-        public DuplexSecurityProtocolFactory(SecurityProtocolFactory forwardProtocolFactory, SecurityProtocolFactory reverseProtocolFactory)
+        public DuplexSecurityProtocolFactory(
+            SecurityProtocolFactory forwardProtocolFactory,
+            SecurityProtocolFactory reverseProtocolFactory
+        )
             : this()
         {
             this.forwardProtocolFactory = forwardProtocolFactory;
@@ -28,10 +29,7 @@ namespace System.ServiceModel.Security
 
         public SecurityProtocolFactory ForwardProtocolFactory
         {
-            get
-            {
-                return this.forwardProtocolFactory;
-            }
+            get { return this.forwardProtocolFactory; }
             set
             {
                 ThrowIfImmutable();
@@ -43,7 +41,9 @@ namespace System.ServiceModel.Security
         {
             get
             {
-                return this.ActAsInitiator ? this.ReverseProtocolFactory : this.ForwardProtocolFactory;
+                return this.ActAsInitiator
+                    ? this.ReverseProtocolFactory
+                    : this.ForwardProtocolFactory;
             }
         }
 
@@ -51,7 +51,9 @@ namespace System.ServiceModel.Security
         {
             get
             {
-                return this.ActAsInitiator ? this.ForwardProtocolFactory : this.ReverseProtocolFactory;
+                return this.ActAsInitiator
+                    ? this.ForwardProtocolFactory
+                    : this.ReverseProtocolFactory;
             }
         }
 
@@ -64,10 +66,7 @@ namespace System.ServiceModel.Security
         // example.
         public bool RequireSecurityOnBothDuplexDirections
         {
-            get
-            {
-                return this.requireSecurityOnBothDuplexDirections;
-            }
+            get { return this.requireSecurityOnBothDuplexDirections; }
             set
             {
                 ThrowIfImmutable();
@@ -77,10 +76,7 @@ namespace System.ServiceModel.Security
 
         public SecurityProtocolFactory ReverseProtocolFactory
         {
-            get
-            {
-                return this.reverseProtocolFactory;
-            }
+            get { return this.reverseProtocolFactory; }
             set
             {
                 ThrowIfImmutable();
@@ -90,27 +86,23 @@ namespace System.ServiceModel.Security
 
         public override bool SupportsDuplex
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool SupportsReplayDetection
         {
             get
             {
-                return this.ForwardProtocolFactory != null && this.ForwardProtocolFactory.SupportsReplayDetection &&
-                    this.ReverseProtocolFactory != null && this.ReverseProtocolFactory.SupportsReplayDetection;
+                return this.ForwardProtocolFactory != null
+                    && this.ForwardProtocolFactory.SupportsReplayDetection
+                    && this.ReverseProtocolFactory != null
+                    && this.ReverseProtocolFactory.SupportsReplayDetection;
             }
         }
 
         public override bool SupportsRequestReply
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override EndpointIdentity GetIdentityOfSelf()
@@ -152,22 +144,50 @@ namespace System.ServiceModel.Security
             // no need to the close the base as it has no settings.
         }
 
-        protected override SecurityProtocol OnCreateSecurityProtocol(EndpointAddress target, Uri via, object listenerSecurityState, TimeSpan timeout)
+        protected override SecurityProtocol OnCreateSecurityProtocol(
+            EndpointAddress target,
+            Uri via,
+            object listenerSecurityState,
+            TimeSpan timeout
+        )
         {
             SecurityProtocolFactory outgoingFactory = this.ProtocolFactoryForOutgoingMessages;
             SecurityProtocolFactory incomingFactory = this.ProtocolFactoryForIncomingMessages;
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            SecurityProtocol outgoing = outgoingFactory == null ? null : outgoingFactory.CreateSecurityProtocol(target, via, listenerSecurityState, false, timeoutHelper.RemainingTime());
-            SecurityProtocol incoming = incomingFactory == null ? null : incomingFactory.CreateSecurityProtocol(null, null, listenerSecurityState, false, timeoutHelper.RemainingTime());
+            SecurityProtocol outgoing =
+                outgoingFactory == null
+                    ? null
+                    : outgoingFactory.CreateSecurityProtocol(
+                        target,
+                        via,
+                        listenerSecurityState,
+                        false,
+                        timeoutHelper.RemainingTime()
+                    );
+            SecurityProtocol incoming =
+                incomingFactory == null
+                    ? null
+                    : incomingFactory.CreateSecurityProtocol(
+                        null,
+                        null,
+                        listenerSecurityState,
+                        false,
+                        timeoutHelper.RemainingTime()
+                    );
             return new DuplexSecurityProtocol(outgoing, incoming);
         }
 
         public override void OnOpen(TimeSpan timeout)
         {
-            if (this.ForwardProtocolFactory != null && ReferenceEquals(this.ForwardProtocolFactory, this.ReverseProtocolFactory))
+            if (
+                this.ForwardProtocolFactory != null
+                && ReferenceEquals(this.ForwardProtocolFactory, this.ReverseProtocolFactory)
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("ReverseProtocolFactory",
-                    SR.GetString(SR.SameProtocolFactoryCannotBeSetForBothDuplexDirections));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "ReverseProtocolFactory",
+                    SR.GetString(SR.SameProtocolFactoryCannotBeSetForBothDuplexDirections)
+                );
             }
             if (this.forwardProtocolFactory != null)
             {
@@ -178,12 +198,27 @@ namespace System.ServiceModel.Security
                 this.reverseProtocolFactory.ListenUri = this.ListenUri;
             }
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            Open(this.ForwardProtocolFactory, this.ActAsInitiator, "ForwardProtocolFactory", timeoutHelper.RemainingTime());
-            Open(this.ReverseProtocolFactory, !this.ActAsInitiator, "ReverseProtocolFactory", timeoutHelper.RemainingTime());
+            Open(
+                this.ForwardProtocolFactory,
+                this.ActAsInitiator,
+                "ForwardProtocolFactory",
+                timeoutHelper.RemainingTime()
+            );
+            Open(
+                this.ReverseProtocolFactory,
+                !this.ActAsInitiator,
+                "ReverseProtocolFactory",
+                timeoutHelper.RemainingTime()
+            );
             // no need to the open the base as it has no settings.
         }
 
-        void Open(SecurityProtocolFactory factory, bool actAsInitiator, string propertyName, TimeSpan timeout)
+        void Open(
+            SecurityProtocolFactory factory,
+            bool actAsInitiator,
+            string propertyName,
+            TimeSpan timeout
+        )
         {
             if (factory != null)
             {
@@ -200,7 +235,10 @@ namespace System.ServiceModel.Security
             readonly SecurityProtocol outgoingProtocol;
             readonly SecurityProtocol incomingProtocol;
 
-            public DuplexSecurityProtocol(SecurityProtocol outgoingProtocol, SecurityProtocol incomingProtocol)
+            public DuplexSecurityProtocol(
+                SecurityProtocol outgoingProtocol,
+                SecurityProtocol incomingProtocol
+            )
                 : base(incomingProtocol.SecurityProtocolFactory, null, null)
             {
                 this.outgoingProtocol = outgoingProtocol;
@@ -227,11 +265,21 @@ namespace System.ServiceModel.Security
                 this.incomingProtocol.Close(true, TimeSpan.Zero);
             }
 
-            public override IAsyncResult BeginSecureOutgoingMessage(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public override IAsyncResult BeginSecureOutgoingMessage(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (this.outgoingProtocol != null)
                 {
-                    return this.outgoingProtocol.BeginSecureOutgoingMessage(message, timeout, callback, state);
+                    return this.outgoingProtocol.BeginSecureOutgoingMessage(
+                        message,
+                        timeout,
+                        callback,
+                        state
+                    );
                 }
                 else
                 {
@@ -239,16 +287,32 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            public override IAsyncResult BeginSecureOutgoingMessage(Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState,
-                AsyncCallback callback, object state)
+            public override IAsyncResult BeginSecureOutgoingMessage(
+                Message message,
+                TimeSpan timeout,
+                SecurityProtocolCorrelationState correlationState,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (this.outgoingProtocol != null)
                 {
-                    return this.outgoingProtocol.BeginSecureOutgoingMessage(message, timeout, correlationState, callback, state);
+                    return this.outgoingProtocol.BeginSecureOutgoingMessage(
+                        message,
+                        timeout,
+                        correlationState,
+                        callback,
+                        state
+                    );
                 }
                 else
                 {
-                    return new CompletedAsyncResult<Message, SecurityProtocolCorrelationState>(message, null, callback, state);
+                    return new CompletedAsyncResult<Message, SecurityProtocolCorrelationState>(
+                        message,
+                        null,
+                        callback,
+                        state
+                    );
                 }
             }
 
@@ -264,16 +328,26 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            public override void EndSecureOutgoingMessage(IAsyncResult result,
-                out Message message, out SecurityProtocolCorrelationState newCorrelationState)
+            public override void EndSecureOutgoingMessage(
+                IAsyncResult result,
+                out Message message,
+                out SecurityProtocolCorrelationState newCorrelationState
+            )
             {
                 if (this.outgoingProtocol != null)
                 {
-                    this.outgoingProtocol.EndSecureOutgoingMessage(result, out message, out newCorrelationState);
+                    this.outgoingProtocol.EndSecureOutgoingMessage(
+                        result,
+                        out message,
+                        out newCorrelationState
+                    );
                 }
                 else
                 {
-                    message = CompletedAsyncResult<Message, SecurityProtocolCorrelationState>.End(result, out newCorrelationState);
+                    message = CompletedAsyncResult<Message, SecurityProtocolCorrelationState>.End(
+                        result,
+                        out newCorrelationState
+                    );
                 }
             }
 
@@ -285,11 +359,19 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            public override SecurityProtocolCorrelationState SecureOutgoingMessage(ref Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState)
+            public override SecurityProtocolCorrelationState SecureOutgoingMessage(
+                ref Message message,
+                TimeSpan timeout,
+                SecurityProtocolCorrelationState correlationState
+            )
             {
                 if (this.outgoingProtocol != null)
                 {
-                    return this.outgoingProtocol.SecureOutgoingMessage(ref message, timeout, correlationState);
+                    return this.outgoingProtocol.SecureOutgoingMessage(
+                        ref message,
+                        timeout,
+                        correlationState
+                    );
                 }
                 else
                 {
@@ -305,12 +387,19 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            public override SecurityProtocolCorrelationState VerifyIncomingMessage(ref Message message, TimeSpan timeout,
-                params SecurityProtocolCorrelationState[] correlationStates)
+            public override SecurityProtocolCorrelationState VerifyIncomingMessage(
+                ref Message message,
+                TimeSpan timeout,
+                params SecurityProtocolCorrelationState[] correlationStates
+            )
             {
                 if (this.incomingProtocol != null)
                 {
-                    return this.incomingProtocol.VerifyIncomingMessage(ref message, timeout, correlationStates);
+                    return this.incomingProtocol.VerifyIncomingMessage(
+                        ref message,
+                        timeout,
+                        correlationStates
+                    );
                 }
                 else
                 {

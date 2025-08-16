@@ -2,24 +2,27 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.ServiceModel.Channels;
-using System.ServiceModel;
-using System.ServiceModel.Dispatcher;
 using System.CodeDom;
+using System.CodeDom.Compiler;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Runtime.Serialization;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Xml.Serialization;
-using System.CodeDom.Compiler;
-using System.Runtime.Serialization;
 
 namespace System.ServiceModel.Description
 {
-    class XmlSerializerOperationGenerator : IOperationBehavior, IOperationContractGenerationExtension
+    class XmlSerializerOperationGenerator
+        : IOperationBehavior,
+            IOperationContractGenerationExtension
     {
         OperationGenerator operationGenerator;
         Dictionary<MessagePartDescription, PartInfo> partInfoTable;
-        Dictionary<OperationDescription, XmlSerializerFormatAttribute> operationAttributes = new Dictionary<OperationDescription, XmlSerializerFormatAttribute>();
+        Dictionary<OperationDescription, XmlSerializerFormatAttribute> operationAttributes =
+            new Dictionary<OperationDescription, XmlSerializerFormatAttribute>();
         XmlCodeExporter xmlExporter;
         SoapCodeExporter soapExporter;
 
@@ -53,7 +56,12 @@ namespace System.ServiceModel.Description
             return targetCodeNamespace;
         }
 
-        internal void Add(MessagePartDescription part, XmlMemberMapping memberMapping, XmlMembersMapping membersMapping, bool isEncoded)
+        internal void Add(
+            MessagePartDescription part,
+            XmlMemberMapping memberMapping,
+            XmlMembersMapping membersMapping,
+            bool isEncoded
+        )
         {
             PartInfo partInfo = new PartInfo();
             partInfo.MemberMapping = memberMapping;
@@ -68,8 +76,13 @@ namespace System.ServiceModel.Description
             {
                 if (this.xmlExporter == null)
                 {
-                    this.xmlExporter = new XmlCodeExporter(this.codeNamespace, this.options.CodeCompileUnit, this.options.CodeProvider,
-                        this.options.WebReferenceOptions.CodeGenerationOptions, null);
+                    this.xmlExporter = new XmlCodeExporter(
+                        this.codeNamespace,
+                        this.options.CodeCompileUnit,
+                        this.options.CodeProvider,
+                        this.options.WebReferenceOptions.CodeGenerationOptions,
+                        null
+                    );
                 }
                 return xmlExporter;
             }
@@ -81,8 +94,13 @@ namespace System.ServiceModel.Description
             {
                 if (this.soapExporter == null)
                 {
-                    this.soapExporter = new SoapCodeExporter(this.codeNamespace, this.options.CodeCompileUnit, this.options.CodeProvider,
-                        this.options.WebReferenceOptions.CodeGenerationOptions, null);
+                    this.soapExporter = new SoapCodeExporter(
+                        this.codeNamespace,
+                        this.options.CodeCompileUnit,
+                        this.options.CodeProvider,
+                        this.options.WebReferenceOptions.CodeGenerationOptions,
+                        null
+                    );
                 }
                 return soapExporter;
             }
@@ -98,58 +116,102 @@ namespace System.ServiceModel.Description
             get { return operationAttributes; }
         }
 
+        void IOperationBehavior.Validate(OperationDescription description) { }
 
-        void IOperationBehavior.Validate(OperationDescription description)
-        {
-        }
+        void IOperationBehavior.AddBindingParameters(
+            OperationDescription description,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IOperationBehavior.AddBindingParameters(OperationDescription description, BindingParameterCollection parameters)
-        {
-        }
+        void IOperationBehavior.ApplyDispatchBehavior(
+            OperationDescription description,
+            DispatchOperation dispatch
+        ) { }
 
-        void IOperationBehavior.ApplyDispatchBehavior(OperationDescription description, DispatchOperation dispatch) { }
-
-        void IOperationBehavior.ApplyClientBehavior(OperationDescription description, ClientOperation proxy) { }
+        void IOperationBehavior.ApplyClientBehavior(
+            OperationDescription description,
+            ClientOperation proxy
+        ) { }
 
         static object contractMarker = new object();
+
         // Assumption: gets called exactly once per operation
-        void IOperationContractGenerationExtension.GenerateOperation(OperationContractGenerationContext context)
+        void IOperationContractGenerationExtension.GenerateOperation(
+            OperationContractGenerationContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             if (partInfoTable != null && partInfoTable.Count > 0)
             {
-                Dictionary<XmlMembersMapping, XmlMembersMapping> alreadyExported = new Dictionary<XmlMembersMapping, XmlMembersMapping>();
+                Dictionary<XmlMembersMapping, XmlMembersMapping> alreadyExported =
+                    new Dictionary<XmlMembersMapping, XmlMembersMapping>();
                 foreach (MessageDescription message in context.Operation.Messages)
                 {
                     foreach (MessageHeaderDescription header in message.Headers)
                         GeneratePartType(alreadyExported, header, header.Namespace);
 
-
                     MessageBodyDescription body = message.Body;
                     bool isWrapped = (body.WrapperName != null);
                     if (OperationFormatter.IsValidReturnValue(body.ReturnValue))
-                        GeneratePartType(alreadyExported, body.ReturnValue, isWrapped ? body.WrapperNamespace : body.ReturnValue.Namespace);
+                        GeneratePartType(
+                            alreadyExported,
+                            body.ReturnValue,
+                            isWrapped ? body.WrapperNamespace : body.ReturnValue.Namespace
+                        );
 
                     foreach (MessagePartDescription part in body.Parts)
-                        GeneratePartType(alreadyExported, part, isWrapped ? body.WrapperNamespace : part.Namespace);
+                        GeneratePartType(
+                            alreadyExported,
+                            part,
+                            isWrapped ? body.WrapperNamespace : part.Namespace
+                        );
                 }
             }
-            XmlSerializerOperationBehavior xmlSerializerOperationBehavior = context.Operation.Behaviors.Find<XmlSerializerOperationBehavior>() as XmlSerializerOperationBehavior;
+            XmlSerializerOperationBehavior xmlSerializerOperationBehavior =
+                context.Operation.Behaviors.Find<XmlSerializerOperationBehavior>()
+                as XmlSerializerOperationBehavior;
             if (xmlSerializerOperationBehavior == null)
                 return;
 
-            XmlSerializerFormatAttribute xmlSerializerFormatAttribute = (xmlSerializerOperationBehavior == null) ? new XmlSerializerFormatAttribute() : xmlSerializerOperationBehavior.XmlSerializerFormatAttribute;
+            XmlSerializerFormatAttribute xmlSerializerFormatAttribute =
+                (xmlSerializerOperationBehavior == null)
+                    ? new XmlSerializerFormatAttribute()
+                    : xmlSerializerOperationBehavior.XmlSerializerFormatAttribute;
             OperationFormatStyle style = xmlSerializerFormatAttribute.Style;
-            operationGenerator.GenerateOperation(context, ref style, xmlSerializerFormatAttribute.IsEncoded, new WrappedBodyTypeGenerator(context), new Dictionary<MessagePartDescription, ICollection<CodeTypeReference>>());
-            context.ServiceContractGenerator.AddReferencedAssembly(typeof(System.Xml.Serialization.XmlTypeAttribute).Assembly);
+            operationGenerator.GenerateOperation(
+                context,
+                ref style,
+                xmlSerializerFormatAttribute.IsEncoded,
+                new WrappedBodyTypeGenerator(context),
+                new Dictionary<MessagePartDescription, ICollection<CodeTypeReference>>()
+            );
+            context.ServiceContractGenerator.AddReferencedAssembly(
+                typeof(System.Xml.Serialization.XmlTypeAttribute).Assembly
+            );
             xmlSerializerFormatAttribute.Style = style;
-            context.SyncMethod.CustomAttributes.Add(OperationGenerator.GenerateAttributeDeclaration(context.Contract.ServiceContractGenerator, xmlSerializerFormatAttribute));
-            AddKnownTypes(context.SyncMethod.CustomAttributes, xmlSerializerFormatAttribute.IsEncoded ? SoapExporter.IncludeMetadata : XmlExporter.IncludeMetadata);
-            DataContractSerializerOperationGenerator.UpdateTargetCompileUnit(context, this.options.CodeCompileUnit);
+            context.SyncMethod.CustomAttributes.Add(
+                OperationGenerator.GenerateAttributeDeclaration(
+                    context.Contract.ServiceContractGenerator,
+                    xmlSerializerFormatAttribute
+                )
+            );
+            AddKnownTypes(
+                context.SyncMethod.CustomAttributes,
+                xmlSerializerFormatAttribute.IsEncoded
+                    ? SoapExporter.IncludeMetadata
+                    : XmlExporter.IncludeMetadata
+            );
+            DataContractSerializerOperationGenerator.UpdateTargetCompileUnit(
+                context,
+                this.options.CodeCompileUnit
+            );
         }
 
-        private void AddKnownTypes(CodeAttributeDeclarationCollection destination, CodeAttributeDeclarationCollection source)
+        private void AddKnownTypes(
+            CodeAttributeDeclarationCollection destination,
+            CodeAttributeDeclarationCollection source
+        )
         {
             foreach (CodeAttributeDeclaration attribute in source)
             {
@@ -164,9 +226,14 @@ namespace System.ServiceModel.Description
         // Convert [XmlInclude] or [SoapInclude] attribute to [KnownType] attribute
         private CodeAttributeDeclaration ToKnownType(CodeAttributeDeclaration include)
         {
-            if (include.Name == typeof(SoapIncludeAttribute).FullName || include.Name == typeof(XmlIncludeAttribute).FullName)
+            if (
+                include.Name == typeof(SoapIncludeAttribute).FullName
+                || include.Name == typeof(XmlIncludeAttribute).FullName
+            )
             {
-                CodeAttributeDeclaration knownType = new CodeAttributeDeclaration(new CodeTypeReference(typeof(ServiceKnownTypeAttribute)));
+                CodeAttributeDeclaration knownType = new CodeAttributeDeclaration(
+                    new CodeTypeReference(typeof(ServiceKnownTypeAttribute))
+                );
                 foreach (CodeAttributeArgument argument in include.Arguments)
                 {
                     knownType.Arguments.Add(argument);
@@ -176,7 +243,11 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        private void GeneratePartType(Dictionary<XmlMembersMapping, XmlMembersMapping> alreadyExported, MessagePartDescription part, string partNamespace)
+        private void GeneratePartType(
+            Dictionary<XmlMembersMapping, XmlMembersMapping> alreadyExported,
+            MessagePartDescription part,
+            string partNamespace
+        )
         {
             if (!partInfoTable.ContainsKey(part))
                 return;
@@ -191,11 +262,21 @@ namespace System.ServiceModel.Description
                     XmlExporter.ExportMembersMapping(membersMapping);
                 alreadyExported.Add(membersMapping, membersMapping);
             }
-            CodeAttributeDeclarationCollection additionalAttributes = new CodeAttributeDeclarationCollection();
+            CodeAttributeDeclarationCollection additionalAttributes =
+                new CodeAttributeDeclarationCollection();
             if (partInfo.IsEncoded)
-                SoapExporter.AddMappingMetadata(additionalAttributes, memberMapping, false/*forceUseMemberName*/);
+                SoapExporter.AddMappingMetadata(
+                    additionalAttributes,
+                    memberMapping,
+                    false /*forceUseMemberName*/
+                );
             else
-                XmlExporter.AddMappingMetadata(additionalAttributes, memberMapping, partNamespace, false/*forceUseMemberName*/);
+                XmlExporter.AddMappingMetadata(
+                    additionalAttributes,
+                    memberMapping,
+                    partNamespace,
+                    false /*forceUseMemberName*/
+                );
             part.BaseType = GetTypeName(memberMapping);
             operationGenerator.ParameterTypes.Add(part, new CodeTypeReference(part.BaseType));
             operationGenerator.ParameterAttributes.Add(part, additionalAttributes);
@@ -229,27 +310,44 @@ namespace System.ServiceModel.Description
         internal class WrappedBodyTypeGenerator : IWrappedBodyTypeGenerator
         {
             OperationContractGenerationContext context;
+
             public WrappedBodyTypeGenerator(OperationContractGenerationContext context)
             {
                 this.context = context;
             }
-            public void ValidateForParameterMode(OperationDescription operation)
-            {
-            }
 
-            public void AddMemberAttributes(XmlName messageName, MessagePartDescription part, CodeAttributeDeclarationCollection importedAttributes, CodeAttributeDeclarationCollection typeAttributes, CodeAttributeDeclarationCollection fieldAttributes)
+            public void ValidateForParameterMode(OperationDescription operation) { }
+
+            public void AddMemberAttributes(
+                XmlName messageName,
+                MessagePartDescription part,
+                CodeAttributeDeclarationCollection importedAttributes,
+                CodeAttributeDeclarationCollection typeAttributes,
+                CodeAttributeDeclarationCollection fieldAttributes
+            )
             {
                 if (importedAttributes != null)
                     fieldAttributes.AddRange(importedAttributes);
             }
-            public void AddTypeAttributes(string messageName, string typeNS, CodeAttributeDeclarationCollection typeAttributes, bool isEncoded)
+
+            public void AddTypeAttributes(
+                string messageName,
+                string typeNS,
+                CodeAttributeDeclarationCollection typeAttributes,
+                bool isEncoded
+            )
             {
                 // we do not need top-level attibutes for the encoded SOAP
                 if (isEncoded)
                     return;
                 XmlTypeAttribute xmlType = new XmlTypeAttribute();
                 xmlType.Namespace = typeNS;
-                typeAttributes.Add(OperationGenerator.GenerateAttributeDeclaration(context.Contract.ServiceContractGenerator, xmlType));
+                typeAttributes.Add(
+                    OperationGenerator.GenerateAttributeDeclaration(
+                        context.Contract.ServiceContractGenerator,
+                        xmlType
+                    )
+                );
             }
         }
     }

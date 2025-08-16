@@ -61,11 +61,16 @@ namespace System.Threading.Tasks.Tests
 
                 customEnumerable.MoveNextAction = moveNextUserAction;
 
-                var partitioner = Partitioner.Create<int>(customEnumerable, EnumerablePartitionerOptions.NoBuffering);
+                var partitioner = Partitioner.Create<int>(
+                    customEnumerable,
+                    EnumerablePartitionerOptions.NoBuffering
+                );
                 //get the dynamic partitions - enumerator
                 if (isOrderable)
                 {
-                    IEnumerator<KeyValuePair<long, int>> enumerator = partitioner.GetOrderableDynamicPartitions().GetEnumerator();
+                    IEnumerator<KeyValuePair<long, int>> enumerator = partitioner
+                        .GetOrderableDynamicPartitions()
+                        .GetEnumerator();
                     while (enumerator.MoveNext())
                     {
                         Assert.Equal(1, dataSourceMoveNextCalls);
@@ -75,7 +80,9 @@ namespace System.Threading.Tasks.Tests
                 }
                 else
                 {
-                    IEnumerator<int> enumerator = partitioner.GetDynamicPartitions().GetEnumerator();
+                    IEnumerator<int> enumerator = partitioner
+                        .GetDynamicPartitions()
+                        .GetEnumerator();
 
                     while (enumerator.MoveNext())
                     {
@@ -101,7 +108,11 @@ namespace System.Threading.Tasks.Tests
         /// </summary>
         /// <param name="length"></param>
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void IterationsWithDependency()
         {
             static void iterationsWithDependency(int length, int dependencyIndex)
@@ -109,11 +120,16 @@ namespace System.Threading.Tasks.Tests
                 List<int> ds = new List<int>();
                 for (int i = 0; i < length; i++)
                     ds.Add(i);
-                var partitioner = Partitioner.Create<int>(ds, EnumerablePartitionerOptions.NoBuffering);
+                var partitioner = Partitioner.Create<int>(
+                    ds,
+                    EnumerablePartitionerOptions.NoBuffering
+                );
                 ManualResetEvent mre = new ManualResetEvent(false);
                 ConcurrentQueue<int> savedDS = new ConcurrentQueue<int>();
 
-                Parallel.ForEach(partitioner, (index) =>
+                Parallel.ForEach(
+                    partitioner,
+                    (index) =>
                     {
                         if (index == dependencyIndex + 1)
                         {
@@ -127,7 +143,8 @@ namespace System.Threading.Tasks.Tests
                             mre.WaitOne();
                         }
                         savedDS.Enqueue(index);
-                    });
+                    }
+                );
                 //if the PForEach ends this means pass
                 //verify the collection
                 Assert.True(CompareCollections(savedDS, ds));
@@ -140,7 +157,6 @@ namespace System.Threading.Tasks.Tests
         /// <summary>
         /// Verify that the enumerators used while executing the ParalleForEach over the partitioner are disposed
         /// </summary>
-
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void PFEDisposeEnum()
         {
@@ -151,11 +167,17 @@ namespace System.Threading.Tasks.Tests
             //in this case we will set it to wait on MoveNext for the even indexes
             UserActionEnumerable<int> customEnumerable = new UserActionEnumerable<int>(ds);
             ConcurrentQueue<int> savedDS = new ConcurrentQueue<int>();
-            var partitioner = Partitioner.Create<int>(customEnumerable, EnumerablePartitionerOptions.NoBuffering);
-            Parallel.ForEach(partitioner, (index) =>
+            var partitioner = Partitioner.Create<int>(
+                customEnumerable,
+                EnumerablePartitionerOptions.NoBuffering
+            );
+            Parallel.ForEach(
+                partitioner,
+                (index) =>
                 {
                     savedDS.Enqueue(index);
-                });
+                }
+            );
             Assert.True(customEnumerable.AreEnumeratorsDisposed());
             Assert.True(CompareCollections(savedDS, ds));
         }
@@ -167,7 +189,11 @@ namespace System.Threading.Tasks.Tests
         /// Exception is expected and the enumerators are disposed
         /// </summary>
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91581", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91581",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void ExceptionOnMoveNext()
         {
             static void exceptionOnMoveNext(int length, int indexToThrow, bool isOrderable)
@@ -181,17 +207,22 @@ namespace System.Threading.Tasks.Tests
                 //in this case we will set it to throw on MoveNext for specified index
                 UserActionEnumerable<int> customEnumerable = new UserActionEnumerable<int>(ds);
                 Action<int> moveNextUserAction = (currentElement) =>
-                                                                {
-                                                                    if (currentElement == indexToThrow)
-                                                                    {
-                                                                        throw userEx;
-                                                                    };
-                                                                };
-
+                {
+                    if (currentElement == indexToThrow)
+                    {
+                        throw userEx;
+                    }
+                    ;
+                };
 
                 customEnumerable.MoveNextAction = moveNextUserAction;
-                var partitioner = Partitioner.Create<int>(customEnumerable, EnumerablePartitionerOptions.NoBuffering);
-                var exception = Assert.Throws<AggregateException>(() => Parallel.ForEach(partitioner, (index) => { }));
+                var partitioner = Partitioner.Create<int>(
+                    customEnumerable,
+                    EnumerablePartitionerOptions.NoBuffering
+                );
+                var exception = Assert.Throws<AggregateException>(() =>
+                    Parallel.ForEach(partitioner, (index) => { })
+                );
                 VerifyAggregateException(exception, userEx);
                 Assert.True(customEnumerable.AreEnumeratorsDisposed());
             }
@@ -210,7 +241,10 @@ namespace System.Threading.Tasks.Tests
             int[] ds = new int[length];
             for (int i = 0; i < 16; i++)
                 ds[i] = i;
-            Assert.Throws<ArgumentOutOfRangeException>(() => { var partitioner = Partitioner.Create<int>(ds, (EnumerablePartitionerOptions)0x2); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var partitioner = Partitioner.Create<int>(ds, (EnumerablePartitionerOptions)0x2);
+            });
         }
 
         /// <summary>
@@ -221,7 +255,10 @@ namespace System.Threading.Tasks.Tests
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var partitioner = Partitioner.Create<int>(null, EnumerablePartitionerOptions.NoBuffering);
+                var partitioner = Partitioner.Create<int>(
+                    null,
+                    EnumerablePartitionerOptions.NoBuffering
+                );
             });
         }
 
@@ -270,7 +307,10 @@ namespace System.Threading.Tasks.Tests
         /// </summary>
         /// <param name="aggregatEx"></param>
         /// <param name="userException"></param>
-        private static void VerifyAggregateException(AggregateException aggregatEx, Exception userException)
+        private static void VerifyAggregateException(
+            AggregateException aggregatEx,
+            Exception userException
+        )
         {
             Assert.Contains(userException, aggregatEx.InnerExceptions);
             Assert.Equal(1, aggregatEx.Flatten().InnerExceptions.Count);
@@ -291,7 +331,8 @@ namespace System.Threading.Tasks.Tests
         //keeps track of how many enumerators are created
         //in case of an exception in parallel foreach
         //the enumerators should be disposed
-        private ConcurrentBag<UserActionEnumerator<T>> _allEnumerators = new ConcurrentBag<UserActionEnumerator<T>>();
+        private ConcurrentBag<UserActionEnumerator<T>> _allEnumerators =
+            new ConcurrentBag<UserActionEnumerator<T>>();
 
         //called in the beginning of enumerator Move Next
         private Action<int> _moveNextAction = null;
@@ -312,12 +353,8 @@ namespace System.Threading.Tasks.Tests
         /// </summary>
         public Action<int> MoveNextAction
         {
-            set
-            {
-                _moveNextAction = value;
-            }
+            set { _moveNextAction = value; }
         }
-
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -331,7 +368,6 @@ namespace System.Threading.Tasks.Tests
 
             return en;
         }
-
 
         /// <summary>
         /// verifies if all the enumerators are disposed
@@ -387,7 +423,8 @@ namespace System.Threading.Tasks.Tests
                 _positionCurrent++;
                 result = _positionCurrent < _length;
             }
-            if (_moveNextAction != null && result) _moveNextAction(_positionCurrent);
+            if (_moveNextAction != null && result)
+                _moveNextAction(_positionCurrent);
 
             return result;
         }
@@ -408,10 +445,7 @@ namespace System.Threading.Tasks.Tests
 
         object System.Collections.IEnumerator.Current
         {
-            get
-            {
-                return this.Current;
-            }
+            get { return this.Current; }
         }
 
         /// <summary>
