@@ -19,12 +19,21 @@
     <PropertyGroup>
       <_Microsoft_Extensions_Configuration_Binder_Compatible_TargetFramework
         Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'netcoreapp2.0')) AND
-                           !$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))"
+                           !$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))&quot;
+        >net6.0</_Microsoft_Extensions_Configuration_Binder_Compatible_TargetFramework
+      >
+      <_Microsoft_Extensions_Configuration_Binder_Compatible_TargetFramework
+        Condition="
         >net6.0</_Microsoft_Extensions_Configuration_Binder_Compatible_TargetFramework
       >
       <_Microsoft_Extensions_Configuration_Binder_Compatible_TargetFramework
         Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net461')) AND
-                           !$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net462'))"
+                           !$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net462'))&quot;
+        >net462</_Microsoft_Extensions_Configuration_Binder_Compatible_TargetFramework
+      >
+    </PropertyGroup>
+    <Warning
+      Condition="
         >net462</_Microsoft_Extensions_Configuration_Binder_Compatible_TargetFramework
       >
     </PropertyGroup>

@@ -29,8 +29,7 @@
   <Connection assembly="DbLinq.Firebird_test"
     >server={0};user id=LinqUser; password=PLACEHOLDER; database=c:\Program Files\Firebird\Firebird_2_1\examples\nwind\NORTHWIND.FDB</Connection
   >
-</Connections>
-<!--
+</Connections><!--
 <Connection assembly="DbLinq.MySql_test">server=hasselhoff.eii.us.es;user id=LinqUser; password=PLACEHOLDER; database=Northwind</Connection>
 <Connection assembly="DbLinq.PostgreSql_test">server=hasselhoff.eii.us.es;user id=LinqUser; password=PLACEHOLDER; database=postgreNorthwind</Connection>
 

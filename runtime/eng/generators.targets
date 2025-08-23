@@ -2,7 +2,13 @@
   <PropertyGroup>
     <EnableLibraryImportGenerator
       Condition="'$(EnableLibraryImportGenerator)' == '' and
-                                             '$(MSBuildProjectName)' == 'System.Private.CoreLib'"
+                                             '$(MSBuildProjectName)' == 'System.Private.CoreLib'&quot;
+      >true</EnableLibraryImportGenerator
+    >
+  </PropertyGroup>
+  <ItemGroup>
+    <EnabledGenerators
+      Include="
       >true</EnableLibraryImportGenerator
     >
   </PropertyGroup>

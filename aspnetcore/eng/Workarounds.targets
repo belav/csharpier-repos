@@ -52,7 +52,11 @@
     Name="_RemoveDuplicateLoggingSourceGenerator"
     AfterTargets="ResolvePackageAssets"
     Condition="'$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' AND
-      ('$(IsAspNetCoreApp)' == 'true' OR '$(UseAspNetCoreSharedRuntime)' == 'true')"
+      ('$(IsAspNetCoreApp)' == 'true' OR '$(UseAspNetCoreSharedRuntime)' == 'true')&quot;
+  >
+    <ItemGroup>
+      <ResolvedAnalyzers
+        Remove="
   >
     <ItemGroup>
       <ResolvedAnalyzers

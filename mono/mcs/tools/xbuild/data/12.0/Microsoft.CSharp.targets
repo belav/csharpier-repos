@@ -56,7 +56,8 @@
   <Target
     Name="CoreCompile"
     Inputs="$(MSBuildAllProjects);@(Compile);@(ManifestResourceWithNoCulture);@(ManifestNonResxWithNoCultureOnDisk);@(CompiledLicenseFile);
-$(KeyOriginatorFile);@(ReferencePath);$(ApplicationIcon);$(Win32Resource)"
+$(KeyOriginatorFile);@(ReferencePath);$(ApplicationIcon);$(Win32Resource)&quot;
+    Outputs="
     Outputs="@(DocFileItem);@(IntermediateAssembly)"
     DependsOnTargets="$(CoreCompileDependsOn)"
   >

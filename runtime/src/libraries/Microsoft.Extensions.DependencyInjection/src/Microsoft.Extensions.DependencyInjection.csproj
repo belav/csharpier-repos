@@ -16,7 +16,12 @@
     >
     <DefineConstants
       Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework' and
-                                '$(ILEmitBackendSaveAssemblies)' == 'true'"
+                                '$(ILEmitBackendSaveAssemblies)' == 'true'&quot;
+      >$(DefineConstants);SAVE_ASSEMBLIES</DefineConstants
+    >
+  </PropertyGroup>
+  <ItemGroup>
+    <ILLinkSubstitutionsXmls Include="
       >$(DefineConstants);SAVE_ASSEMBLIES</DefineConstants
     >
   </PropertyGroup>

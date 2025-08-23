@@ -329,7 +329,11 @@
     >
     <GenerateTargetFrameworkAttribute
       Condition="'$(GenerateTargetFrameworkAttribute)' == '' and '$(TargetFrameworkMoniker)'
-!= '' and '$(TargetingClr2Framework)' != 'true'"
+!= '' and '$(TargetingClr2Framework)' != 'true'&quot;
+      >true</GenerateTargetFrameworkAttribute
+    >
+  </PropertyGroup>
+  <ItemGroup Condition="
       >true</GenerateTargetFrameworkAttribute
     >
   </PropertyGroup>

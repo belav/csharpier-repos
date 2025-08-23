@@ -92,11 +92,11 @@
           </block>
         </remarks>
         <summary>
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution license="" from="" modified="" />
           <para>Opens the file with read/write permission selected by the user.</para>
         </summary>
         <returns>
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution license="" from="" modified="" />
           <para>The read/write file selected by the user.</para>
         </returns>
       </Docs>
@@ -105,8 +105,8 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
-    <Member MemberName="OverwritePrompt">
-      <MemberSignature Language="C#" Value="public bool OverwritePrompt { set; get; }" />
+    <Member MemberName="">
+      <MemberSignature Language="" Value="" />
       <MemberType>Property</MemberType>
       <Attributes>
         <Attribute>
@@ -120,7 +120,7 @@
         <value>To be added.</value>
         <remarks>To be added.</remarks>
         <summary>
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution license="" from="" modified="" />
           <para>Gets or sets a value indicating whether the Save As dialog box displays a warning if the user specifies a file name that already exists.</para>
         </summary>
       </Docs>
@@ -129,8 +129,8 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
       </AssemblyInfo>
     </Member>
-    <Member MemberName="Reset">
-      <MemberSignature Language="C#" Value="public override void Reset ();" />
+    <Member MemberName="">
+      <MemberSignature Language="" Value="" />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -139,7 +139,7 @@
       <Docs>
         <remarks>To be added.</remarks>
         <summary>
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution license="" from="" modified="" />
           <para>Resets all dialog box options to their default values.</para>
         </summary>
       </Docs>

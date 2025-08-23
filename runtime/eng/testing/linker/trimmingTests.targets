@@ -140,7 +140,8 @@
     />
     <Copy
       SourceFiles="$(_projectSourceFile);
-                       @(_additionalProjectSourceFiles)"
+                       @(_additionalProjectSourceFiles)&quot;
+      DestinationFolder="
       DestinationFolder="$(_projectDir)"
     />
     <Message Text="Generated $(_projectFile)" />

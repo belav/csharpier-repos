@@ -3778,21 +3778,17 @@ class GetDirectoryTest {
           >
         </remarks>
         <summary>
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution license="" from="" modified="" />
           <para>Sets the date and time, in Coordinated Universal Time (UTC) format, that a directory was last written to.</para>
         </summary>
-        <param name="path">
-          <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
-          />The path of the directory. </param
+        <param name="">
+          <attribution license="" from="" modified="" />The path of the directory. </param
         >
-        <param name="lastWriteTimeUtc">
+        <param name="">
           <attribution
-            license="cc4"
-            from="Microsoft"
-            modified="false"
+            license=""
+            from=""
+            modified=""
           />The date and time the directory was last written to. This value is expressed in UTC time. </param
         >
       </Docs>

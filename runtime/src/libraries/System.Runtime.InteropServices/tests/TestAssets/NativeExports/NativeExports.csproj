@@ -69,7 +69,10 @@
   <Target
     Name="GetUnixCrossBuildArgumentsForDNNE"
     Condition="'$(CrossBuild)' == 'true' and
-            '$(OS)' == 'Unix' and '$(_TargetsAppleOS)' != 'true'"
+            '$(OS)' == 'Unix' and '$(_TargetsAppleOS)' != 'true'&quot;
+  >
+    <Exec
+      Command="
   >
     <Exec
       Command="cmake -P &quot;$(RepositoryEngineeringDir)/native/output-toolchain-info.cmake&quot;"

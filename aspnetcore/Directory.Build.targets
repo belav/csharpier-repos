@@ -16,7 +16,11 @@
     <!-- Ignore API doc requirements for test assets -->
     <NoWarn
       Condition="'$(IsTestAssetProject)' == 'true' or '$(IsSampleProject)' == 'true' or '$(IsBenchmarkProject)' == 'true' or
-      '$(IsMicrobenchmarksProject)' == 'true'"
+      '$(IsMicrobenchmarksProject)' == 'true'&quot;
+      >$(NoWarn);CS1591</NoWarn
+    >
+  </PropertyGroup>
+  <PropertyGroup Label="
       >$(NoWarn);CS1591</NoWarn
     >
   </PropertyGroup>
@@ -59,7 +63,11 @@
     <PackageId Condition=" '$(PackageId)' == '' ">$(AssemblyName)</PackageId>
     <IsPackable
       Condition="'$(IsPackable)' == '' AND ( $(IsTestProject) OR '$(IsTestAssetProject)' == 'true' OR
-         '$(IsBenchmarkProject)' == 'true' OR '$(IsSampleProject)' == 'true' OR '$(IsMicrobenchmarksProject)' == 'true') "
+         '$(IsBenchmarkProject)' == 'true' OR '$(IsSampleProject)' == 'true' OR '$(IsMicrobenchmarksProject)' == 'true') &quot;
+      >false</IsPackable
+    >
+  </PropertyGroup>
+  <Import Project="
       >false</IsPackable
     >
   </PropertyGroup>
@@ -122,7 +130,11 @@
     <!-- This determines whether a project is available as a <Reference> to other projects in this repo. -->
     <IsProjectReferenceProvider
       Condition=" '$(IsProjectReferenceProvider)' == '' AND
-        ( '$(IsImplementationProject)' == 'true' OR '$(IsSpecificationTestProject)' == 'true' ) "
+        ( '$(IsImplementationProject)' == 'true' OR '$(IsSpecificationTestProject)' == 'true' ) &quot;
+      >true</IsProjectReferenceProvider
+    >
+    <HasReferenceAssembly
+      Condition="
       >true</IsProjectReferenceProvider
     >
     <HasReferenceAssembly
@@ -171,7 +183,13 @@
     <UpdateAspNetCoreKnownFramework>false</UpdateAspNetCoreKnownFramework>
     <UpdateAspNetCoreKnownFramework
       Condition=" '$(UseAspNetCoreSharedRuntime)' == 'true' AND
-      '$(DoNotApplyWorkaroundsToMicrosoftAspNetCoreApp)' != 'true' "
+      '$(DoNotApplyWorkaroundsToMicrosoftAspNetCoreApp)' != 'true' &quot;
+      >true</UpdateAspNetCoreKnownFramework
+    >
+  </PropertyGroup>
+  <ItemGroup>
+    <KnownFrameworkReference
+      Condition="
       >true</UpdateAspNetCoreKnownFramework
     >
   </PropertyGroup>
