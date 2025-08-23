@@ -1,10 +1,12 @@
 <Type Name="Asn1Object" FullName="Novell.Directory.Ldap.Asn1.Asn1Object">
-  <TypeSignature Language="C#" Value="public abstract class Asn1Object : System.Runtime.Serialization.ISerializable" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class Asn1Object : System.Runtime.Serialization.ISerializable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -56,7 +58,10 @@
   </Attributes>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public Asn1Object(Novell.Directory.Ldap.Asn1.Asn1Identifier id)" />
+      <MemberSignature
+        Language="C#"
+        Value="public Asn1Object(Novell.Directory.Ldap.Asn1.Asn1Identifier id)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="id" Type="Novell.Directory.Ldap.Asn1.Asn1Identifier" />
@@ -68,7 +73,10 @@
       </Docs>
     </Member>
     <Member MemberName="GetObjectData">
-      <MemberSignature Language="C#" Value="public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)" />
+      <MemberSignature
+        Language="C#"
+        Value="public void GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -85,7 +93,10 @@
       </Docs>
     </Member>
     <Member MemberName="encode">
-      <MemberSignature Language="C#" Value="public virtual abstract void encode(Novell.Directory.Ldap.Asn1.Asn1Encoder enc, System.IO.Stream out_Renamed)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual abstract void encode(Novell.Directory.Ldap.Asn1.Asn1Encoder enc, System.IO.Stream out_Renamed)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -102,7 +113,10 @@
       </Docs>
     </Member>
     <Member MemberName="getIdentifier">
-      <MemberSignature Language="C#" Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Identifier getIdentifier()" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual Novell.Directory.Ldap.Asn1.Asn1Identifier getIdentifier()"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Novell.Directory.Ldap.Asn1.Asn1Identifier</ReturnType>
@@ -115,7 +129,10 @@
       </Docs>
     </Member>
     <Member MemberName="setIdentifier">
-      <MemberSignature Language="C#" Value="public virtual void setIdentifier(Novell.Directory.Ldap.Asn1.Asn1Identifier id)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void setIdentifier(Novell.Directory.Ldap.Asn1.Asn1Identifier id)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -130,7 +147,10 @@
       </Docs>
     </Member>
     <Member MemberName="getEncoding">
-      <MemberSignature Language="C#" Value="public sbyte[] getEncoding(Novell.Directory.Ldap.Asn1.Asn1Encoder enc)" />
+      <MemberSignature
+        Language="C#"
+        Value="public sbyte[] getEncoding(Novell.Directory.Ldap.Asn1.Asn1Encoder enc)"
+      />
       <MemberType>Method</MemberType>
       <Attributes>
         <Attribute>

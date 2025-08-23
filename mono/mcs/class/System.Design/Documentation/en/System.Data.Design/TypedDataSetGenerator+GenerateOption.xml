@@ -1,4 +1,7 @@
-<Type Name="TypedDataSetGenerator+GenerateOption" FullName="System.Data.Design.TypedDataSetGenerator+GenerateOption">
+<Type
+  Name="TypedDataSetGenerator+GenerateOption"
+  FullName="System.Data.Design.TypedDataSetGenerator+GenerateOption"
+>
   <TypeSignature Language="C#" Value="public enum TypedDataSetGenerator.GenerateOption" />
   <AssemblyInfo>
     <AssemblyName>System.Design</AssemblyName>

@@ -2,7 +2,7 @@
   <!-- this is here to show how to configure the trimming -->
   <assembly fullname="iOS.Device.ExportManagedSymbols.Test">
     <type fullname="Program">
-        <method name="ManagedMethod" />
+      <method name="ManagedMethod" />
     </type>
   </assembly>
 </linker>

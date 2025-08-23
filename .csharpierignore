@@ -232,3 +232,4 @@ mono/mcs/class/referencesource/System.Web/Util/ArglessEventHandlerProxy.cs
 /runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericStructs.cs
 /runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericTypesMix.cs
 /runtime/src/tests/Loader/classloader/StaticVirtualMethods/DiamondShape/svm_diamondshape.cs
+**/*.cs

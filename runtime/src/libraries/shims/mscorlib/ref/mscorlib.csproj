@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Win32.Registry\ref\Microsoft.Win32.Registry.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Collections.Concurrent\ref\System.Collections.Concurrent.csproj" />
@@ -33,8 +32,13 @@
     <ProjectReference Include="$(LibrariesProjectRoot)System.Threading.ThreadPool\ref\System.Threading.ThreadPool.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Threading.Thread\ref\System.Threading.Thread.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Threading\ref\System.Threading.csproj" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj" PrivateAssets="all" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Threading.AccessControl.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj"
+      PrivateAssets="all"
+    />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Threading.AccessControl.csproj"
+      PrivateAssets="all"
+    />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,12 @@
-<Type Name="X509CertificateEnumerator" FullName="System.Security.Cryptography.X509Certificates.X509CertificateCollection+X509CertificateEnumerator">
-  <TypeSignature Language="C#" Value="public class X509CertificateEnumerator : IEnumerator" Maintainer="auto" />
+<Type
+  Name="X509CertificateEnumerator"
+  FullName="System.Security.Cryptography.X509Certificates.X509CertificateCollection+X509CertificateEnumerator"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class X509CertificateEnumerator : IEnumerator"
+    Maintainer="auto"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -64,11 +71,17 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public X509CertificateEnumerator (X509CertificateCollection mappings);" />
+      <MemberSignature
+        Language="C#"
+        Value="public X509CertificateEnumerator (X509CertificateCollection mappings);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
-        <Parameter Name="mappings" Type="System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+        <Parameter
+          Name="mappings"
+          Type="System.Security.Cryptography.X509Certificates.X509CertificateCollection"
+        />
       </Parameters>
       <Docs>
         <summary>To be added</summary>

@@ -15,7 +15,10 @@
   </Docs>
   <Members>
     <Member MemberName="HitArea">
-      <MemberSignature Language="C#" Value="public System.Windows.Forms.MonthCalendar.HitArea HitArea { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Windows.Forms.MonthCalendar.HitArea HitArea { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.MonthCalendar+HitArea</ReturnType>

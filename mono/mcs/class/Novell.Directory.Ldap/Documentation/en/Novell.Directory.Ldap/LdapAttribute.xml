@@ -1,10 +1,12 @@
 <Type Name="LdapAttribute" FullName="Novell.Directory.Ldap.LdapAttribute">
-  <TypeSignature Language="C#" Value="public class LdapAttribute : System.ICloneable, System.IComparable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapAttribute : System.ICloneable, System.IComparable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -54,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapAttribute(Novell.Directory.Ldap.LdapAttribute attr)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapAttribute(Novell.Directory.Ldap.LdapAttribute attr)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="attr" Type="Novell.Directory.Ldap.LdapAttribute" />
@@ -78,7 +83,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapAttribute(string attrName, sbyte[] attrBytes)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapAttribute(string attrName, sbyte[] attrBytes)"
+      />
       <MemberType>Constructor</MemberType>
       <Attributes>
         <Attribute>
@@ -97,7 +105,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapAttribute(string attrName, string attrString)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapAttribute(string attrName, string attrString)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="attrName" Type="System.String" />
@@ -111,7 +122,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapAttribute(string attrName, string[] attrStrings)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapAttribute(string attrName, string[] attrStrings)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="attrName" Type="System.String" />
@@ -173,7 +187,10 @@
       </Docs>
     </Member>
     <Member MemberName="addBase64Value">
-      <MemberSignature Language="C#" Value="public virtual void addBase64Value(string attrString)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void addBase64Value(string attrString)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -188,7 +205,10 @@
       </Docs>
     </Member>
     <Member MemberName="addBase64Value">
-      <MemberSignature Language="C#" Value="public virtual void addBase64Value(System.Text.StringBuilder attrString, int start, int end)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual void addBase64Value(System.Text.StringBuilder attrString, int start, int end)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -406,7 +426,10 @@
       </Docs>
     </Member>
     <Member MemberName="ByteValues">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator ByteValues { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator ByteValues { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -418,7 +441,10 @@
       </Docs>
     </Member>
     <Member MemberName="StringValues">
-      <MemberSignature Language="C#" Value="public virtual System.Collections.IEnumerator StringValues { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Collections.IEnumerator StringValues { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>

@@ -1,9 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <asn:Sequence
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="TbsCertificateAsn"
-  namespace="System.Security.Cryptography.X509Certificates.Asn1">
-
+  namespace="System.Security.Cryptography.X509Certificates.Asn1"
+>
   <!--
     https://tools.ietf.org/html/rfc5280#section-4.1
 
@@ -25,11 +25,21 @@
   -->
   <asn:Integer name="Version" explicitTag="0" backingType="int" defaultDerInit="0x02, 0x01, 0x00" />
   <asn:Integer name="SerialNumber" backingType="ReadOnlyMemory" />
-  <asn:AsnType name="SignatureAlgorithm" typeName="System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn" />
+  <asn:AsnType
+    name="SignatureAlgorithm"
+    typeName="System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn"
+  />
   <asn:AnyValue name="Issuer" universalTagNumber="16" />
-  <asn:AsnType name="Validity" typeName="System.Security.Cryptography.X509Certificates.Asn1.ValidityAsn" rebind="false"/>
+  <asn:AsnType
+    name="Validity"
+    typeName="System.Security.Cryptography.X509Certificates.Asn1.ValidityAsn"
+    rebind="false"
+  />
   <asn:AnyValue name="Subject" universalTagNumber="16" />
-  <asn:AsnType name="SubjectPublicKeyInfo" typeName="System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn" />
+  <asn:AsnType
+    name="SubjectPublicKeyInfo"
+    typeName="System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn"
+  />
   <asn:BitString name="IssuerUniqueId" implicitTag="1" optional="true" />
   <asn:BitString name="SubjectUniqueId" implicitTag="2" optional="true" />
   <asn:SequenceOf name="Extensions" explicitTag="3" optional="true">

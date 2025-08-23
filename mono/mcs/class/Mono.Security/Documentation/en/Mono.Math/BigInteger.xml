@@ -6,7 +6,12 @@
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
   </AssemblyInfo>
-  <ThreadSafetyStatement>Gtk# is thread aware, but not thread safe; See the <link location="node:gtk-sharp/programming/threads">Gtk# Thread Programming</link> for details.</ThreadSafetyStatement>
+  <ThreadSafetyStatement
+    >Gtk# is thread aware, but not thread safe; See the <link
+      location="node:gtk-sharp/programming/threads"
+      >Gtk# Thread Programming</link
+    > for details.</ThreadSafetyStatement
+  >
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
@@ -131,7 +136,10 @@
       </Attributes>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BigInteger (Mono.Math.BigInteger bi, uint len);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BigInteger (Mono.Math.BigInteger bi, uint len);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -155,7 +163,10 @@
       </Attributes>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public BigInteger (Mono.Math.BigInteger.Sign sign, uint len);" />
+      <MemberSignature
+        Language="C#"
+        Value="public BigInteger (Mono.Math.BigInteger.Sign sign, uint len);"
+      />
       <MemberType>Constructor</MemberType>
       <ReturnValue />
       <Parameters>
@@ -179,7 +190,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Add (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Add (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -258,7 +272,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Compare">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger.Sign Compare (Mono.Math.BigInteger bi);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger.Sign Compare (Mono.Math.BigInteger bi);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger+Sign</ReturnType>
@@ -278,7 +295,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Divid">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Divid (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Divid (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -300,7 +320,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Divid">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Divid (Mono.Math.BigInteger bi, int i);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Divid (Mono.Math.BigInteger bi, int i);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -342,7 +365,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GCD">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger GCD (Mono.Math.BigInteger bi);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger GCD (Mono.Math.BigInteger bi);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -362,7 +388,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GeneratePseudoPrime">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger GeneratePseudoPrime (int bits);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger GeneratePseudoPrime (int bits);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -382,7 +411,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GenerateRandom">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger GenerateRandom (int bits);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger GenerateRandom (int bits);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -402,7 +434,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GenerateRandom">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger GenerateRandom (int bits, System.Security.Cryptography.RandomNumberGenerator rng);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger GenerateRandom (int bits, System.Security.Cryptography.RandomNumberGenerator rng);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -413,7 +448,9 @@
       </Parameters>
       <Docs>
         <param name="bits">a <see cref="T:System.Int32" /></param>
-        <param name="rng">a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /></param>
+        <param name="rng"
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+        </param>
         <summary>To be added</summary>
         <returns>a <see cref="T:Mono.Math.BigInteger" /></returns>
         <remarks>To be added</remarks>
@@ -508,7 +545,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ModInverse">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger ModInverse (Mono.Math.BigInteger modulus);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger ModInverse (Mono.Math.BigInteger modulus);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -528,7 +568,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ModPow">
-      <MemberSignature Language="C#" Value="public Mono.Math.BigInteger ModPow (Mono.Math.BigInteger exp, Mono.Math.BigInteger n);" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Math.BigInteger ModPow (Mono.Math.BigInteger exp, Mono.Math.BigInteger n);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -550,7 +593,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Modulus">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Modulus (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Modulus (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -572,7 +618,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Modulus">
-      <MemberSignature Language="C#" Value="public static int Modulus (Mono.Math.BigInteger bi, int i);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int Modulus (Mono.Math.BigInteger bi, int i);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -594,7 +643,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Modulus">
-      <MemberSignature Language="C#" Value="public static uint Modulus (Mono.Math.BigInteger bi, uint ui);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static uint Modulus (Mono.Math.BigInteger bi, uint ui);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.UInt32</ReturnType>
@@ -621,7 +673,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Multiply">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Multiply (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Multiply (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -643,7 +698,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Multiply">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Multiply (Mono.Math.BigInteger bi, int i);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Multiply (Mono.Math.BigInteger bi, int i);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -665,7 +723,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NextHighestPrime">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger NextHighestPrime (Mono.Math.BigInteger bi);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger NextHighestPrime (Mono.Math.BigInteger bi);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -685,7 +746,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="op_Addition">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Addition (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Addition (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -707,7 +771,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Division">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Division (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Division (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -729,7 +796,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Division">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Division (Mono.Math.BigInteger bi, int i);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Division (Mono.Math.BigInteger bi, int i);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -751,7 +821,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -773,7 +846,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Equality">
-      <MemberSignature Language="C#" Value="public static bool op_Equality (Mono.Math.BigInteger bi1, uint ui);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Equality (Mono.Math.BigInteger bi1, uint ui);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -800,7 +876,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThan">
-      <MemberSignature Language="C#" Value="public static bool op_GreaterThan (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_GreaterThan (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -822,7 +901,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_GreaterThanOrEqual">
-      <MemberSignature Language="C#" Value="public static bool op_GreaterThanOrEqual (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_GreaterThanOrEqual (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -844,7 +926,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Implicit (int value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Implicit (int value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -864,7 +949,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Implicit (uint value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Implicit (uint value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -889,7 +977,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Implicit">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Implicit (ulong value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Implicit (ulong value);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -914,7 +1005,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -936,7 +1030,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Inequality">
-      <MemberSignature Language="C#" Value="public static bool op_Inequality (Mono.Math.BigInteger bi1, uint ui);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_Inequality (Mono.Math.BigInteger bi1, uint ui);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -963,7 +1060,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_LeftShift">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_LeftShift (Mono.Math.BigInteger bi1, int shiftVal);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_LeftShift (Mono.Math.BigInteger bi1, int shiftVal);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -985,7 +1085,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_LessThan">
-      <MemberSignature Language="C#" Value="public static bool op_LessThan (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_LessThan (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1007,7 +1110,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_LessThanOrEqual">
-      <MemberSignature Language="C#" Value="public static bool op_LessThanOrEqual (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static bool op_LessThanOrEqual (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1029,7 +1135,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Modulus">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Modulus (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Modulus (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1051,7 +1160,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Modulus">
-      <MemberSignature Language="C#" Value="public static int op_Modulus (Mono.Math.BigInteger bi, int i);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static int op_Modulus (Mono.Math.BigInteger bi, int i);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1073,7 +1185,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Modulus">
-      <MemberSignature Language="C#" Value="public static uint op_Modulus (Mono.Math.BigInteger bi, uint ui);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static uint op_Modulus (Mono.Math.BigInteger bi, uint ui);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1100,7 +1215,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Multiply">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Multiply (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Multiply (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1122,7 +1240,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Multiply">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Multiply (Mono.Math.BigInteger bi, int i);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Multiply (Mono.Math.BigInteger bi, int i);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1144,7 +1265,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_RightShift">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_RightShift (Mono.Math.BigInteger bi1, int shiftVal);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_RightShift (Mono.Math.BigInteger bi1, int shiftVal);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1166,7 +1290,10 @@
       </Docs>
     </Member>
     <Member MemberName="op_Subtraction">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger op_Subtraction (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger op_Subtraction (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -1188,7 +1315,10 @@
       </Docs>
     </Member>
     <Member MemberName="Parse">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Parse (string number);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Parse (string number);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -1224,7 +1354,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Randomize">
-      <MemberSignature Language="C#" Value="public void Randomize (System.Security.Cryptography.RandomNumberGenerator rng);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Randomize (System.Security.Cryptography.RandomNumberGenerator rng);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -1233,7 +1366,9 @@
         <Parameter Name="rng" Type="System.Security.Cryptography.RandomNumberGenerator" />
       </Parameters>
       <Docs>
-        <param name="rng">a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" /></param>
+        <param name="rng"
+          >a <see cref="T:System.Security.Cryptography.RandomNumberGenerator" />
+        </param>
         <summary>To be added</summary>
         <remarks>To be added</remarks>
       </Docs>
@@ -1293,7 +1428,10 @@
       </Attributes>
     </Member>
     <Member MemberName="Subtract">
-      <MemberSignature Language="C#" Value="public static Mono.Math.BigInteger Subtract (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Math.BigInteger Subtract (Mono.Math.BigInteger bi1, Mono.Math.BigInteger bi2);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Math.BigInteger</ReturnType>
@@ -1402,7 +1540,10 @@
       </Attributes>
     </Member>
     <Member MemberName="ToString">
-      <MemberSignature Language="C#" Value="public string ToString (uint radix, string characterSet);" />
+      <MemberSignature
+        Language="C#"
+        Value="public string ToString (uint radix, string characterSet);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

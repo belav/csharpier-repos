@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <!--
@@ -9,7 +8,6 @@
     <GenerateResxSourceIncludeDefaultValues>true</GenerateResxSourceIncludeDefaultValues>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\ComponentModel\DataAnnotations\AllowedValuesAttribute.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\AssociatedMetadataTypeTypeDescriptor.cs" />
@@ -62,10 +60,12 @@
     <Compile Include="System\ComponentModel\DataAnnotations\ValidationException.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\ValidationResult.cs" />
     <Compile Include="System\ComponentModel\DataAnnotations\Validator.cs" />
-    <Compile Include="$(CommonPath)System\NotImplemented.cs" Link="Common\System\NotImplemented.cs" />
+    <Compile
+      Include="$(CommonPath)System\NotImplemented.cs"
+      Link="Common\System\NotImplemented.cs"
+    />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
@@ -78,5 +78,4 @@
     <Reference Include="System.Text.RegularExpressions" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>
