@@ -69,7 +69,10 @@
        This is required to show all the files corresponding to all target frameworks in VS. -->
   <ItemGroup
     Condition="'$(DefaultLanguageSourceExtension)' != '' and
-                        ('$(BuildingInsideVisualStudio)' == 'true' or '$(DesignTimeBuild)' == 'true')"
+                        ('$(BuildingInsideVisualStudio)' == 'true' or '$(DesignTimeBuild)' == 'true')&quot;
+  >
+    <None
+      Include="
   >
     <None
       Include="$(MSBuildProjectDirectory)\**\*$(DefaultLanguageSourceExtension)"
@@ -98,7 +101,11 @@
     <RuntimePackageDisclaimer>Internal implementation package not meant for direct consumption. Please do not reference directly.</RuntimePackageDisclaimer>
     <UseRuntimePackageDisclaimer
       Condition="'$(UseRuntimePackageDisclaimer)' == '' and
-                                            ($(MSBuildProjectName.StartsWith('runtime.native')) or '$(PackageTargetRuntime)' != '')"
+                                            ($(MSBuildProjectName.StartsWith('runtime.native')) or '$(PackageTargetRuntime)' != '')&quot;
+      >true</UseRuntimePackageDisclaimer
+    >
+    <PackageDescription
+      Condition="
       >true</UseRuntimePackageDisclaimer
     >
     <PackageDescription
@@ -132,7 +139,10 @@
     Name="ValidateReferenceAssemblyProjectReferencesAndTargetFramework"
     AfterTargets="ResolveReferences"
     Condition="'$(IsReferenceAssemblyProject)' == 'true' and
-                     '$(SkipValidateReferenceAssemblyProjectReferences)' != 'true'"
+                     '$(SkipValidateReferenceAssemblyProjectReferences)' != 'true'&quot;
+  >
+    <Error
+      Text="
   >
     <Error
       Text="Reference assemblies must only reference other reference assemblies and '%(ReferencePath.ProjectReferenceOriginalItemSpec)' is not a reference assembly project and does not set 'ProduceReferenceAssembly'."
@@ -187,7 +197,11 @@
     Name="FilterTransitiveProjectReferences"
     AfterTargets="IncludeTransitiveProjectReferences"
     Condition="'$(DisableTransitiveProjectReferences)' != 'true' and
-                     '@(DefaultReferenceExclusion)' != ''"
+                     '@(DefaultReferenceExclusion)' != ''&quot;
+  >
+    <ItemGroup>
+      <_transitiveProjectReferenceWithProjectName
+        Include="
   >
     <ItemGroup>
       <_transitiveProjectReferenceWithProjectName
@@ -220,7 +234,9 @@
     <!-- Filter out shims from the targeting pack references as an opt-in. -->
     <ItemGroup
       Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' and
-                          '$(SkipTargetingPackShimReferences)' == 'true'"
+                          '$(SkipTargetingPackShimReferences)' == 'true'&quot;
+    >
+      <_targetingPackReferenceExclusion Include="
     >
       <_targetingPackReferenceExclusion Include="@(NetFxReference)" />
       <_targetingPackReferenceExclusion Include="netstandard" />

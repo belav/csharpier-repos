@@ -1560,7 +1560,7 @@
           >
         </remarks>
         <summary>
-          <attribution license="cc4" from="Microsoft" modified="false" />
+          <attribution license="" from="" modified="" />
           <para>Occurs when a user is created, a password is changed, or a password is reset.</para>
         </summary>
       </Docs>

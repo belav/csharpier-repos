@@ -270,7 +270,9 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     Name="_WarnAboutUnbuiltNativeDependencies"
     BeforeTargets="Build"
     Condition=" '$(UseIisNativeAssets)' == 'true' AND !$(BuildNative) AND
-              !EXISTS('$(ArtifactsBinDir)InProcessRequestHandler\$(NativePlatform)\$(Configuration)\aspnetcorev2_inprocess.dll') "
+              !EXISTS('$(ArtifactsBinDir)InProcessRequestHandler\$(NativePlatform)\$(Configuration)\aspnetcorev2_inprocess.dll') &quot;
+  >
+    <Warning Text="
   >
     <Warning Text="This project has native dependencies which were not built. Without this, tests may not function correctly. Run `build.cmd -BuildNative -BuildManaged` to build both C# and C++." />
   </Target>

@@ -1,5 +1,5 @@
 <variations name="attValuelTemp" xml:space="preserve">
-	<variation
+  <variation
     case_id="77531"
     xmlFile="books.xml"
     xslFile="foo.xsl"
@@ -14,5 +14,4 @@
     type="Interoperability"
     versions="192"
   />
-</variations
->
+</variations>

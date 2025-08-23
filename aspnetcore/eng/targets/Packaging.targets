@@ -10,7 +10,12 @@
   >
     <Error
       Text="The package baseline ($(AspNetCoreBaselineVersion)) is out of date with the latest release of this repo ($(PreviousAspNetCoreReleaseVersion)).
-                 See $(RepoRoot)eng\tools\BaselineGenerator\README.md for instructions on updating this baseline."
+                 See $(RepoRoot)eng\tools\BaselineGenerator\README.md for instructions on updating this baseline.&quot;
+    />
+  </Target>
+  <!-- This target is used to get the package versions of projects. A variant also exists in Npm.Common.targets. -->
+  <Target
+    Name="
     />
   </Target>
   <!-- This target is used to get the package versions of projects. A variant also exists in Npm.Common.targets. -->

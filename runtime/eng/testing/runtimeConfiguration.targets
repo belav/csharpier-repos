@@ -3,7 +3,11 @@
     <!-- By default copy the test runtime config file for executable test projects (+ test support projects). -->
     <IsTestProjectOrExecutable
       Condition="'$(IsTestProject)' == 'true' or
-                                          '$(OutputType.ToLower())' == 'exe'"
+                                          '$(OutputType.ToLower())' == 'exe'&quot;
+      >true</IsTestProjectOrExecutable
+    >
+    <GenerateRuntimeConfigurationFiles
+      Condition="
       >true</IsTestProjectOrExecutable
     >
     <GenerateRuntimeConfigurationFiles
@@ -14,7 +18,10 @@
     >
     <GenerateAppConfigurationFile
       Condition="'$(IsTestProjectOrExecutable)' == 'true' and
-                                             '$(TargetFrameworkIdentifier)' == '.NETFramework'"
+                                             '$(TargetFrameworkIdentifier)' == '.NETFramework'&quot;
+      >true</GenerateAppConfigurationFile
+    >
+    <AppConfig Condition="
       >true</GenerateAppConfigurationFile
     >
     <AppConfig Condition="'$(GenerateAppConfigurationFile)' == 'true'"

@@ -127,7 +127,17 @@
     <ItemGroup>
       <ReferencePath
         Condition="'%(FileName)' == 'UIAutomationClient' OR
-                                '%(FileName)' == 'UIAutomationTypes'"
+                                '%(FileName)' == 'UIAutomationTypes'&quot;
+      >
+        <Aliases>slowautomation</Aliases>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
+  <!--
+    Chain before the .NET Core SDK GetAssemblyAttributes target to add the additional attribute.
+  -->
+  <Target
+    Name="
       >
         <Aliases>slowautomation</Aliases>
       </ReferencePath>

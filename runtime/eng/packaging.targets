@@ -45,7 +45,11 @@
     <!-- A package isn't generated if in servicing or in runtimelab. Intended to be overridden at project level. -->
     <IsRIDSpecificProject
       Condition="$(MSBuildProjectName.StartsWith('runtime.')) and
-                                     !$(MSBuildProjectName.StartsWith('runtime.native'))"
+                                     !$(MSBuildProjectName.StartsWith('runtime.native'))&quot;
+      >true</IsRIDSpecificProject
+    >
+    <GeneratePackageOnBuild
+      Condition="
       >true</IsRIDSpecificProject
     >
     <GeneratePackageOnBuild
@@ -78,7 +82,12 @@
   </PropertyGroup>
   <PropertyGroup
     Condition="'$(PreReleaseVersionLabel)' == 'servicing' and
-                            '$(PackageUseIncrementalServicingVersion)' == 'true'"
+                            '$(PackageUseIncrementalServicingVersion)' == 'true'&quot;
+  >
+    <!-- If no servicing version is set we need to default to 0 in order for dependency versions to
+    be calculated properly, if we don't set it to 0, we would get the dependency version using the
+    product Patch Version -->
+    <ServicingVersion Condition="
   >
     <!-- If no servicing version is set we need to default to 0 in order for dependency versions to
     be calculated properly, if we don't set it to 0, we would get the dependency version using the
@@ -142,13 +151,21 @@
       Include="netcoreapp2.0"
       Supported="$(NetCoreAppMinimum)"
       Condition="$(TargetFrameworks.Contains('netstandard2.')) and
-                                       ($(TargetFrameworks.Contains('$(NetCoreAppMinimum)')) or $(TargetFrameworks.Contains('$(NetCoreAppPrevious)')) or $(TargetFrameworks.Contains('$(NetCoreAppCurrent)')))"
+                                       ($(TargetFrameworks.Contains('$(NetCoreAppMinimum)')) or $(TargetFrameworks.Contains('$(NetCoreAppPrevious)')) or $(TargetFrameworks.Contains('$(NetCoreAppCurrent)')))&quot;
+    />
+    <NETStandardCompatError
+      Include="
     />
     <NETStandardCompatError
       Include="net461"
       Supported="$(NetFrameworkMinimum)"
       Condition="'$(NetFrameworkMinimum)' != '' and $(TargetFrameworks.Contains('netstandard2.0')) and
-                                       ($(TargetFrameworks.Contains('$(NetFrameworkMinimum)')) or $(TargetFrameworks.Contains('net47')) or $(TargetFrameworks.Contains('net48')))"
+                                       ($(TargetFrameworks.Contains('$(NetFrameworkMinimum)')) or $(TargetFrameworks.Contains('net47')) or $(TargetFrameworks.Contains('net48')))&quot;
+    />
+  </ItemGroup>
+  <!-- Add runtime specific file into the package if the tfm is RID specific. -->
+  <Target
+    Name="
     />
   </ItemGroup>
   <!-- Add runtime specific file into the package if the tfm is RID specific. -->
@@ -295,7 +312,9 @@
     <ItemGroup>
       <_PackageBuildFile
         Include="@(None-&gt;Metadata('PackagePath'));
-                                  @(Content-&gt;Metadata('PackagePath'))"
+                                  @(Content-&gt;Metadata('PackagePath'))&quot;
+      />
+      <_PackageBuildFile PackagePathWithoutFilename="
       />
       <_PackageBuildFile PackagePathWithoutFilename="$([System.IO.Path]::GetDirectoryName('%(Identity)'))" />
       <None
@@ -309,7 +328,12 @@
         PackagePath="$(_NETStandardCompatErrorPlaceholderFilePackagePath)\"
         Pack="true"
         Condition="'@(_PackageBuildFile)' == '' or
-                       !@(_PackageBuildFile-&gt;AnyHaveMetadataValue('PackagePathWithoutFilename', '$(_NETStandardCompatErrorPlaceholderFilePackagePath)'))"
+                       !@(_PackageBuildFile-&gt;AnyHaveMetadataValue('PackagePathWithoutFilename', '$(_NETStandardCompatErrorPlaceholderFilePackagePath)'))&quot;
+      />
+    </ItemGroup>
+  </Target>
+  <Target
+    Name="
       />
     </ItemGroup>
   </Target>
@@ -360,7 +384,10 @@
       <_BuildOutputPackageFile
         Include="$(OutputPath)**"
         Exclude="$(OutputPath)publish\**;
-                                        $(OutputPath)"
+                                        $(OutputPath)&quot;
+      />
+      <TfmSpecificPackageFile
+        Include="
       />
       <TfmSpecificPackageFile
         Include="@(_BuildOutputPackageFile)"

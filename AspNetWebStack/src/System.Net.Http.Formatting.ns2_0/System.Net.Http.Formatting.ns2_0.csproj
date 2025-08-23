@@ -27,7 +27,11 @@
     <Compile
       Include="..\System.Net.Http.Formatting\**\*.cs"
       Exclude="..\System.Net.Http.Formatting\obj\**\*.cs;
-                 ..\System.Net.Http.Formatting\Properties\Resources.Designer.cs"
+                 ..\System.Net.Http.Formatting\Properties\Resources.Designer.cs&quot;
+    >
+      <Link>%(RecursiveDir)\%(Filename).cs</Link>
+    </Compile>
+    <Compile Include="
     >
       <Link>%(RecursiveDir)\%(Filename).cs</Link>
     </Compile>

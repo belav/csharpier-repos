@@ -35,7 +35,11 @@
       <ResolvedRuntimePack
         PackageDirectory="$(_LocalMicrosoftNetCoreAppRuntimePackDir)"
         Condition="'$(_LocalMicrosoftNetCoreAppRuntimePackDir)' != '' and
-                                      '%(ResolvedRuntimePack.FrameworkName)' == 'Microsoft.NETCore.App'"
+                                      '%(ResolvedRuntimePack.FrameworkName)' == 'Microsoft.NETCore.App'&quot;
+      />
+    </ItemGroup>
+    <Message
+      Text="
       />
     </ItemGroup>
     <Message

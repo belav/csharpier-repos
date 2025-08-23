@@ -134,7 +134,14 @@
       <!-- We reference Microsoft.VisualStudio.CodeAnalysis.Sdk.UI, which requires us to reference these DLLs non-NoPIA way -->
       <ReferencePath
         Condition="'%(FileName)' == 'Microsoft.VisualStudio.Shell.Interop.10.0'
-                             or '%(FileName)' == 'Microsoft.VisualStudio.Shell.Interop.11.0'"
+                             or '%(FileName)' == 'Microsoft.VisualStudio.Shell.Interop.11.0'&quot;
+      >
+        <EmbedInteropTypes>false</EmbedInteropTypes>
+      </ReferencePath>
+    </ItemGroup>
+  </Target>
+  <!-- Add License and Third Party Notices files into each VSIX. -->
+  <ItemGroup Condition="
       >
         <EmbedInteropTypes>false</EmbedInteropTypes>
       </ReferencePath>

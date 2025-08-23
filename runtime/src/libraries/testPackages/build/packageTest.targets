@@ -188,7 +188,10 @@
     Name="VerifyNotDependsOnNetStandard"
     DependsOnTargets="ResolveReferences"
     Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' and
-                      '$(DisableVerifyNotDependsOnNetStandardTest)' != 'true'"
+                      '$(DisableVerifyNotDependsOnNetStandardTest)' != 'true'&quot;
+  >
+    <Error
+      Condition="
   >
     <Error
       Condition="'$(DependsOnNetStandard)' == 'true'"

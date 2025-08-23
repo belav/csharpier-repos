@@ -92,9 +92,7 @@
       />
     </ItemGroup>
     <ItemGroup Condition="'@(_packageReferences)' != ''">
-      <_additionalPackageReference
-        Include="&lt;PackageReference Include=&quot;%(_packageReferences.Identity)&quot; Version=&quot;%(_packageReferences.Version)&quot; &gt; &#xA;        &lt;PrivateAssets&gt;%(_packageReferences.PrivateAssets)&lt;/PrivateAssets&gt;&#xA;    &lt;/PackageReference&gt;"
-      />
+      <_additionalPackageReference Include="&lt;PackageReference Include=&quot;%(_packageReferences.Identity)&quot; Version=&quot;%(_packageReferences.Version)&quot; &gt; &#xA;        &lt;PrivateAssets&gt;%(_packageReferences.PrivateAssets)&lt;/PrivateAssets&gt;&#xA;    &lt;/PackageReference&gt;" />
     </ItemGroup>
     <PropertyGroup>
       <_additionalPackageReferencesString>@(_additionalPackageReference, '%0a    ')</_additionalPackageReferencesString>
@@ -129,7 +127,8 @@
     />
     <Copy
       SourceFiles="$(_projectSourceFile);
-                       @(_additionalProjectSourceFiles)"
+                       @(_additionalProjectSourceFiles)&quot;
+      DestinationFolder="
       DestinationFolder="$(_projectDir)"
     />
     <Message Text="Generated $(_projectFile)" />

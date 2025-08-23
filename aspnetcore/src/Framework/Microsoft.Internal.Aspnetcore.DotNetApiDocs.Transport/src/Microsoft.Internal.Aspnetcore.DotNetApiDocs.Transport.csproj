@@ -51,7 +51,10 @@
       <FullAspNetCoreReferenceAssemblyPath
         Include="@(ReferencePathWithRefAssemblies)"
         Exclude="
-          @(ReferencePathWithRefAssemblies-&gt;WithMetadataValue('ExternallyResolved', 'true'))"
+          @(ReferencePathWithRefAssemblies-&gt;WithMetadataValue('ExternallyResolved', 'true'))&quot;
+      />
+      <FullAspNetCoreReferenceDocXml
+        Include="
       />
       <FullAspNetCoreReferenceDocXml
         Include="@(_ResolvedProjectReferencePaths-&gt;'%(RootDir)%(Directory)%(FileName).xml')"

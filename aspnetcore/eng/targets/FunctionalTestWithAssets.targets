@@ -20,7 +20,11 @@
       <!-- Always Publish test assets relative to test project's output. -->
       <_ProjectsToPublish
         AdditionalProperties="%(_ProjectsToPublish.AdditionalProperties);
-          PublishDir=$(PublishDir)%(RelativeFolder)"
+          PublishDir=$(PublishDir)%(RelativeFolder)&quot;
+      />
+      <!-- Do not build when publishing if SkipBuild requested. -->
+      <_ProjectsToPublish
+        Condition="
       />
       <!-- Do not build when publishing if SkipBuild requested. -->
       <_ProjectsToPublish

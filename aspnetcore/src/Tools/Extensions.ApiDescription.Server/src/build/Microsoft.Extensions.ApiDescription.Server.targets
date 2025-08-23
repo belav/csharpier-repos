@@ -4,7 +4,11 @@
     <_IsMicrosoftNETCoreApp20OrOlder>false</_IsMicrosoftNETCoreApp20OrOlder>
     <_IsMicrosoftNETCoreApp20OrOlder
       Condition=" '$(TargetFrameworkIdentifier)' == '.NETCoreApp' AND
-      $([MSBuild]::VersionLessThanOrEquals('$(TargetFrameworkVersion)', '2.0')) "
+      $([MSBuild]::VersionLessThanOrEquals('$(TargetFrameworkVersion)', '2.0')) &quot;
+      >true</_IsMicrosoftNETCoreApp20OrOlder
+    >
+  </PropertyGroup>
+  <PropertyGroup Condition="
       >true</_IsMicrosoftNETCoreApp20OrOlder
     >
   </PropertyGroup>

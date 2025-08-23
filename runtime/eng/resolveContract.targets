@@ -138,7 +138,10 @@
   <!-- Use the apicompat task package instead of the in-built SDK functionality to consume newer features. -->
   <ItemGroup
     Condition="'$(EnablePackageValidation)' == 'true' or
-                        '$(ApiCompatValidateAssemblies)' == 'true'"
+                        '$(ApiCompatValidateAssemblies)' == 'true'&quot;
+  >
+    <PackageReference
+      Include="
   >
     <PackageReference
       Include="Microsoft.DotNet.ApiCompat.Task"

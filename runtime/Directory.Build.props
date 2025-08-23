@@ -515,7 +515,11 @@
     <!-- Treat as a generator project if either the parent or the parent parent directory is named gen. -->
     <IsGeneratorProject
       Condition="$([System.IO.Path]::GetFileName('$(MSBuildProjectDirectory)')) == 'gen' or
-                                   $([System.IO.Path]::GetFileName('$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..'))')) == 'gen'"
+                                   $([System.IO.Path]::GetFileName('$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..'))')) == 'gen'&quot;
+      >true</IsGeneratorProject
+    >
+    <IsSourceProject
+      Condition="
       >true</IsGeneratorProject
     >
     <IsSourceProject

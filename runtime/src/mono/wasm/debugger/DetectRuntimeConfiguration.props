@@ -25,7 +25,9 @@
     <Error
       Condition="'$(_OriginalRuntimeConfiguration)' == '' and '$(_ReleaseConfigDetected)' == 'true' and '$(_DebugConfigDetected)' == 'true'"
       Text="Found both Debug, and Release config dotnet.js in artifacts.
-                Using %24(RuntimeConfiguration)=$(RuntimeConfiguration). Override this property to pick a specific one."
+                Using %24(RuntimeConfiguration)=$(RuntimeConfiguration). Override this property to pick a specific one.&quot;
+    />
+    <Message Text="
     />
     <Message Text="** Using RuntimeConfiguration=$(RuntimeConfiguration) **" Importance="High" />
   </Target>

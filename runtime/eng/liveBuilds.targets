@@ -318,7 +318,8 @@
       <LibrariesRuntimeFiles
         Condition="'$(TargetOS)' == 'browser' and Exists('$(LibrariesNativeArtifactsPath)dotnet.native.worker.js')"
         Include="
-        $(LibrariesNativeArtifactsPath)dotnet.native.worker.js"
+        $(LibrariesNativeArtifactsPath)dotnet.native.worker.js&quot;
+        IsNative="
         IsNative="true"
       />
       <LibrariesRuntimeFiles
@@ -341,7 +342,8 @@
       <LibrariesRuntimeFiles
         Condition="'$(TargetOS)' == 'browser'"
         Include="
-        $(LibrariesNativeArtifactsPath)include\wasm\*.h;"
+        $(LibrariesNativeArtifactsPath)include\wasm\*.h;&quot;
+        NativeSubDirectory="
         NativeSubDirectory="include\wasm"
         IsNative="true"
       />
@@ -363,7 +365,8 @@
       />
       <LibrariesRuntimeFiles
         Include="
-        $(LibrariesNativeArtifactsPath)include\wasm\*.h;"
+        $(LibrariesNativeArtifactsPath)include\wasm\*.h;&quot;
+        NativeSubDirectory="
         NativeSubDirectory="include\wasm"
         IsNative="true"
       />

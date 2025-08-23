@@ -347,7 +347,8 @@
   <Target Name="_GetReferencesProvided" Returns="@(ProvidesReference)">
     <Error
       Condition=" '$(IsAspNetCoreApp)' == 'true' AND '$(IsImplementationProject)' == 'true' AND
-            !$(HasReferenceAssembly) AND '$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' "
+            !$(HasReferenceAssembly) AND '$(TargetFramework)' == '$(DefaultNetCoreTargetFramework)' &quot;
+      Text="
       Text="All assemblies which have set IsAspNetCoreApp=true should produce a reference assembly for default TFM."
     />
     <Error

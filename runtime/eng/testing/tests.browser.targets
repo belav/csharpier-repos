@@ -303,7 +303,10 @@
       <_CopyLocalPaths
         Include="@(PublishItemsOutputGroupOutputs)"
         Condition="'%(PublishItemsOutputGroupOutputs.BuildReference)' == 'true' and
-                         !$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.resources.dll'))"
+                         !$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.resources.dll'))&quot;
+      />
+      <_CopyLocalPaths
+        TargetPath="
       />
       <_CopyLocalPaths
         TargetPath="%(_CopyLocalPaths.RelativePath)"

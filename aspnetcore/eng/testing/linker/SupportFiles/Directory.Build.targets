@@ -18,31 +18,45 @@
       Include="@(KnownAppHostPack-&gt;WithMetadataValue('TargetFramework', 'net8.0'))"
       TargetFramework="$(TargetFramework)"
       Condition="'@(KnownAppHostPack-&gt;Count())' != '0' AND
-                                 !(@(KnownAppHostPack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))"
+                                 !(@(KnownAppHostPack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))&quot;
+    />
+    <KnownRuntimePack
+      Include="
     />
     <KnownRuntimePack
       Include="@(KnownRuntimePack-&gt;WithMetadataValue('TargetFramework', 'net8.0'))"
       TargetFramework="$(TargetFramework)"
       Condition="'@(KnownRuntimePack-&gt;Count())' != '0' AND
-                                 !(@(KnownRuntimePack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))"
+                                 !(@(KnownRuntimePack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))&quot;
+    />
+    <KnownFrameworkReference
+      Include="
     />
     <KnownFrameworkReference
       Include="@(KnownFrameworkReference-&gt;WithMetadataValue('TargetFramework', 'net8.0'))"
       TargetFramework="$(TargetFramework)"
       Condition="'@(KnownFrameworkReference-&gt;Count())' != '0' AND
-                                 !(@(KnownFrameworkReference-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))"
+                                 !(@(KnownFrameworkReference-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))&quot;
+    />
+    <KnownILLinkPack
+      Include="
     />
     <KnownILLinkPack
       Include="@(KnownILLinkPack-&gt;WithMetadataValue('TargetFramework', 'net8.0'))"
       TargetFramework="$(TargetFramework)"
       Condition="'@(KnownILLinkPack-&gt;Count())' != '0' AND
-                                 !(@(KnownILLinkPack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))"
+                                 !(@(KnownILLinkPack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))&quot;
+    />
+    <KnownILCompilerPack
+      Include="
     />
     <KnownILCompilerPack
       Include="@(KnownILCompilerPack-&gt;WithMetadataValue('TargetFramework', 'net8.0'))"
       TargetFramework="$(TargetFramework)"
       Condition="'@(KnownILCompilerPack-&gt;Count())' != '0' AND
-                                 !(@(KnownILCompilerPack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))"
+                                 !(@(KnownILCompilerPack-&gt;AnyHaveMetadataValue('TargetFramework', '$(TargetFramework)')))&quot;
+    />
+    <KnownFrameworkReference Update="
     />
     <KnownFrameworkReference Update="Microsoft.NETCore.App">
       <LatestRuntimeFrameworkVersion Condition=" '%(TargetFramework)' == '$(TargetFramework)' "
@@ -60,7 +74,10 @@
       -->
       <DefaultRuntimeFrameworkVersion
         Condition=" '$(IsServicingBuild)' != 'true' AND
-          '%(TargetFramework)' == '$(TargetFramework)'"
+          '%(TargetFramework)' == '$(TargetFramework)'&quot;
+        >$(MicrosoftNETCoreAppRuntimeVersion)</DefaultRuntimeFrameworkVersion
+      >
+      <RuntimePackRuntimeIdentifiers Condition="
         >$(MicrosoftNETCoreAppRuntimeVersion)</DefaultRuntimeFrameworkVersion
       >
       <RuntimePackRuntimeIdentifiers Condition=" '$(PortableBuild)' == 'false' "

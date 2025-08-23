@@ -61,7 +61,11 @@
     <!-- The source of truth for these IsNETCoreApp* properties is NetCoreAppLibrary.props. -->
     <IsNETCoreAppSrc
       Condition="'$(IsSourceProject)' == 'true' and
-                                $(NetCoreAppLibrary.Contains('$(AssemblyName);'))"
+                                $(NetCoreAppLibrary.Contains('$(AssemblyName);'))&quot;
+      >true</IsNETCoreAppSrc
+    >
+    <IsNETCoreAppRef
+      Condition="
       >true</IsNETCoreAppSrc
     >
     <IsNETCoreAppRef
@@ -72,7 +76,11 @@
     >
     <IsNETCoreAppAnalyzer
       Condition="'$(IsGeneratorProject)' == 'true' and
-                                     $(NetCoreAppLibraryGenerator.Contains('$(MSBuildProjectName);'))"
+                                     $(NetCoreAppLibraryGenerator.Contains('$(MSBuildProjectName);'))&quot;
+      >true</IsNETCoreAppAnalyzer
+    >
+    <!-- Inbox analyzers shouldn't use the live targeting / runtime pack. They better depend on an LKG to avoid layering concerns. -->
+    <UseLocalTargetingRuntimePack Condition="
       >true</IsNETCoreAppAnalyzer
     >
     <!-- Inbox analyzers shouldn't use the live targeting / runtime pack. They better depend on an LKG to avoid layering concerns. -->
@@ -149,7 +157,10 @@
     <BinPlaceDir
       Include="$(MicrosoftNetCoreAppRefPackDir)$(GeneratorProjectBaseTargetPath)"
       Condition="'$(IsNETCoreAppAnalyzer)' == 'true' and
-                            '$(TargetFramework)' == 'netstandard2.0'"
+                            '$(TargetFramework)' == 'netstandard2.0'&quot;
+    />
+    <!-- Setup the shared framework directory for testing -->
+    <BinPlaceTargetFrameworks Include="
     />
     <!-- Setup the shared framework directory for testing -->
     <BinPlaceTargetFrameworks Include="$(NetCoreAppCurrent)-$(TargetOS)">
@@ -236,7 +247,11 @@
     Name="RemoveTargetingPackIncrementalClean"
     Condition="'@(AdditionalCleanDirectories)' != ''"
     BeforeTargets="IncrementalCleanAdditionalDirectories;
-                         CleanAdditionalDirectories"
+                         CleanAdditionalDirectories&quot;
+  >
+    <ItemGroup>
+      <AdditionalCleanDirectories
+        Remove="
   >
     <ItemGroup>
       <AdditionalCleanDirectories

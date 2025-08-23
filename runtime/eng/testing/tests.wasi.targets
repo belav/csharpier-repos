@@ -9,7 +9,13 @@
     >
     <InstallWasmtimeForTests
       Condition="'$(InstallWasmtimeForTests)' == '' and
-                                        ('$(ContinuousIntegrationBuild)' != 'true' or Exists('/.dockerenv'))"
+                                        ('$(ContinuousIntegrationBuild)' != 'true' or Exists('/.dockerenv'))&quot;
+      >true</InstallWasmtimeForTests
+    >
+    <!--<InstallWorkloadUsingArtifactsDependsOn>_GetWorkloadsToInstall;$(InstallWorkloadUsingArtifactsDependsOn)</InstallWorkloadUsingArtifactsDependsOn>-->
+    <GetWorkloadInputsDependsOn>_GetWorkloadsToInstall;$(GetWorkloadInputsDependsOn)</GetWorkloadInputsDependsOn>
+    <GetNuGetsToBuildForWorkloadTestingDependsOn>_GetNugetsForAOT;$(GetNuGetsToBuildForWorkloadTestingDependsOn)</GetNuGetsToBuildForWorkloadTestingDependsOn>
+    <WASI_SDK_PATH Condition="
       >true</InstallWasmtimeForTests
     >
     <!--<InstallWorkloadUsingArtifactsDependsOn>_GetWorkloadsToInstall;$(InstallWorkloadUsingArtifactsDependsOn)</InstallWorkloadUsingArtifactsDependsOn>-->
@@ -151,7 +157,10 @@
       <_CopyLocalPaths
         Include="@(PublishItemsOutputGroupOutputs)"
         Condition="'%(PublishItemsOutputGroupOutputs.BuildReference)' == 'true' and
-                         !$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.resources.dll'))"
+                         !$([System.String]::new('%(PublishItemsOutputGroupOutputs.Identity)').EndsWith('.resources.dll'))&quot;
+      />
+      <_CopyLocalPaths
+        TargetPath="
       />
       <_CopyLocalPaths
         TargetPath="%(_CopyLocalPaths.RelativePath)"

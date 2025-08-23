@@ -112,7 +112,8 @@
   <Target
     Name="UseTargetingPackForAssemblySearchPaths"
     BeforeTargets="ResolveAssemblyReferences;
-                         DesignTimeResolveAssemblyReferences"
+                         DesignTimeResolveAssemblyReferences&quot;
+    Condition="
     Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' and
                      '$(TargetFrameworkVersion)' == 'v$(NetCoreAppCurrentVersion)' and
                      '$(DisableImplicitFrameworkReferences)' == 'true'"
@@ -156,7 +157,10 @@
       <ResolvedRuntimePack
         PackageDirectory="$(MicrosoftNetCoreAppRuntimePackDir)"
         Condition="'$(MicrosoftNetCoreAppRuntimePackDir)' != '' and
-                                      '%(ResolvedRuntimePack.FrameworkName)' == '$(LocalFrameworkOverrideName)'"
+                                      '%(ResolvedRuntimePack.FrameworkName)' == '$(LocalFrameworkOverrideName)'&quot;
+      />
+      <ResolvedFrameworkReference
+        TargetingPackPath="
       />
       <ResolvedFrameworkReference
         TargetingPackPath="$(MicrosoftNetCoreAppRefPackDir.TrimEnd('/\'))"

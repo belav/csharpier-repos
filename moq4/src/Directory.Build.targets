@@ -225,7 +225,11 @@
     BeforeTargets="PrepareForBuild;GenerateMSBuildEditorConfigFileShouldRun;GetAssemblyVersion;GetPackageMetadata;GenerateNuspec;Pack"
     DependsOnTargets="EnsureProjectInformation"
     Condition="'$(SourceControlInformationFeatureSupported)' == 'true' And
-                     '$(IsPackable)' == 'true'"
+                     '$(IsPackable)' == 'true'&quot;
+  >
+    <PropertyGroup>
+      <PackageProjectUrl
+        Condition="
   >
     <PropertyGroup>
       <PackageProjectUrl

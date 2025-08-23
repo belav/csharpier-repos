@@ -79,7 +79,19 @@
       -->
     <PropertyGroup
       Condition="'$(RunAnalyzers)' == 'false' or
-                              ('$(RunAnalyzers)' == '' and '$(RunAnalyzersDuringBuild)' == 'false')"
+                              ('$(RunAnalyzers)' == '' and '$(RunAnalyzersDuringBuild)' == 'false')&quot;
+    >
+      <_SkipAnalyzers>true</_SkipAnalyzers>
+    </PropertyGroup>
+    <!-- PERF: For builds which are indirectly triggered inside Visual Studio from commands 
+               such as from 'Run Tests' or 'Start Debugging', we implicitly skip analyzers and nullable analysis to speed up the build.
+               We only do so by default when 'TreatWarningsAsErrors' is not 'true'. For the scenario where
+			         'TreatWarningsAsErrors' is 'true', users can explicitly enable this functionality by setting
+			         'OptimizeImplicitlyTriggeredBuild' to 'true'.
+               NOTE: This feature is currently supported only for SDK-style projects, i.e. UsingMicrosoftNETSdk = true.
+    -->
+    <PropertyGroup
+      Condition="
     >
       <_SkipAnalyzers>true</_SkipAnalyzers>
     </PropertyGroup>

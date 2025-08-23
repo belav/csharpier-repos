@@ -259,13 +259,17 @@ Copyright (c) .NET Foundation. All rights reserved.
     />
     <Warning
       Condition="'$(SuppressILLinkExplicitPackageReferenceWarning)' != 'true' And
-                        '%(PackageReference.Identity)' == 'Microsoft.NET.ILLink.Tasks' And '%(PackageReference.IsImplicitlyDefined)' != 'true'"
+                        '%(PackageReference.Identity)' == 'Microsoft.NET.ILLink.Tasks' And '%(PackageReference.IsImplicitlyDefined)' != 'true'&quot;
+      Text="
       Text="Delete explicit 'Microsoft.NET.ILLink.Tasks' package reference in your project file to avoid versioning problems."
     />
     <PropertyGroup Condition=" '$(ILLinkWarningLevel)' == '' ">
       <ILLinkWarningLevel
         Condition=" '$(EffectiveAnalysisLevel)' != '' And
-                                       $([MSBuild]::VersionGreaterThanOrEquals($(EffectiveAnalysisLevel), '5.0')) "
+                                       $([MSBuild]::VersionGreaterThanOrEquals($(EffectiveAnalysisLevel), '5.0')) &quot;
+        >5</ILLinkWarningLevel
+      >
+      <ILLinkWarningLevel Condition="
         >5</ILLinkWarningLevel
       >
       <ILLinkWarningLevel Condition=" '$(ILLinkWarningLevel)' == '' ">0</ILLinkWarningLevel>

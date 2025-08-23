@@ -123,7 +123,9 @@ System.Diagnostics.DiagnosticSource</PackageDescription>
   </ItemGroup>
   <ItemGroup
     Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' or
-                        '$(TargetFramework)' == 'netstandard2.0'"
+                        '$(TargetFramework)' == 'netstandard2.0'&quot;
+  >
+    <Compile Include="
   >
     <Compile Include="System\Diagnostics\Activity.DateTime.corefx.cs" />
   </ItemGroup>
