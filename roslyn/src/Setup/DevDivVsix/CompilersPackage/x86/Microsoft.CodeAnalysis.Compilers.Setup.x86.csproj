@@ -5,17 +5,14 @@
     <TargetFramework>net472</TargetFramework>
     <ApplyNgenOptimization>full</ApplyNgenOptimization>
     <RoslynPackageArch>x86</RoslynPackageArch>
-
     <!-- VS Insertion -->
     <TargetVsixContainerName>Microsoft.CodeAnalysis.Compilers.x86.vsix</TargetVsixContainerName>
     <VisualStudioInsertionComponent>Microsoft.CodeAnalysis.Compilers</VisualStudioInsertionComponent>
   </PropertyGroup>
-
   <Target Name="_SetSwrFilePath">
     <PropertyGroup>
       <_SwrFilePath>$(IntermediateOutputPath)Microsoft.CodeAnalysis.Compilers.x86.swr</_SwrFilePath>
     </PropertyGroup>
   </Target>
-
   <Import Project="..\CompilersPackage.targets" Condition="'$(UsingToolVSSDK)' == 'true'" />
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AssemblyName>Microsoft.EntityFrameworkCore.Sqlite.FunctionalTests</AssemblyName>
@@ -7,15 +6,12 @@
     <ImplicitUsings>true</ImplicitUsings>
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Scaffolding\Baselines\**\*" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="Scaffolding\Baselines\**\*" />
   </ItemGroup>
-
   <ItemGroup>
     <Using Include="System.Data.Common" />
     <Using Include="System.Diagnostics" />
@@ -48,20 +44,16 @@
     <Using Include="Xunit" />
     <Using Include="Xunit.Abstractions" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="northwind.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\EFCore.Sqlite.NTS\EFCore.Sqlite.NTS.csproj" />
     <ProjectReference Include="..\EFCore.Relational.Specification.Tests\EFCore.Relational.Specification.Tests.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.6" />
   </ItemGroup>
-
 </Project>

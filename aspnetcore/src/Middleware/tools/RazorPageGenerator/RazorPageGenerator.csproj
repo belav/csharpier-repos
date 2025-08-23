@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Builds Razor pages for views in a project. For internal use only.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -12,9 +11,7 @@
     <AddPublicApiAnalyzers>false</AddPublicApiAnalyzers>
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Razor.Language" />
   </ItemGroup>
-
 </Project>

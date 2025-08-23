@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+ProgressBar" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ProgressBar">
+<Type
+  Name="VisualStyleElement+ProgressBar"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ProgressBar"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.ProgressBar" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

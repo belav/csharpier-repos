@@ -3,7 +3,9 @@
     <OutputType>Exe</OutputType>
     <CLRTestPriority>0</CLRTestPriority>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetsWindows)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
     <Win32Resource>test.res</Win32Resource>
   </PropertyGroup>
   <ItemGroup>

@@ -1,33 +1,51 @@
 <Project>
   <PropertyGroup>
-    <NativeOptimizationDataSupported Condition="'$(TargetOS)' == 'windows' And ('$(TargetArchitecture)' == 'x64' Or '$(TargetArchitecture)' == 'x86' Or '$(TargetArchitecture)' == 'arm64')">true</NativeOptimizationDataSupported>
-    <NativeOptimizationDataSupported Condition="'$(TargetOS)' == 'linux' And ('$(TargetArchitecture)' == 'x64' Or '$(TargetArchitecture)' == 'arm64')">true</NativeOptimizationDataSupported>
-    <NativeOptimizationDataSupported Condition="'$(NoPgoOptimize)' == 'true'">false</NativeOptimizationDataSupported>
-    <NativeOptimizationDataSupported Condition="'$(Configuration)' != 'Release'">false</NativeOptimizationDataSupported>
-
+    <NativeOptimizationDataSupported
+      Condition="'$(TargetOS)' == 'windows' And ('$(TargetArchitecture)' == 'x64' Or '$(TargetArchitecture)' == 'x86' Or '$(TargetArchitecture)' == 'arm64')"
+      >true</NativeOptimizationDataSupported
+    >
+    <NativeOptimizationDataSupported
+      Condition="'$(TargetOS)' == 'linux' And ('$(TargetArchitecture)' == 'x64' Or '$(TargetArchitecture)' == 'arm64')"
+      >true</NativeOptimizationDataSupported
+    >
+    <NativeOptimizationDataSupported Condition="'$(NoPgoOptimize)' == 'true'"
+      >false</NativeOptimizationDataSupported
+    >
+    <NativeOptimizationDataSupported Condition="'$(Configuration)' != 'Release'"
+      >false</NativeOptimizationDataSupported
+    >
     <_NativeOptimizationDataPackageTarget>$(TargetOS)-$(TargetArchitecture.ToLower())</_NativeOptimizationDataPackageTarget>
-    <_NativeOptimizationDataPackageTarget Condition="'$(TargetOS)' == 'windows'">windows_nt-$(TargetArchitecture.ToLower())</_NativeOptimizationDataPackageTarget>
-
+    <_NativeOptimizationDataPackageTarget Condition="'$(TargetOS)' == 'windows'"
+      >windows_nt-$(TargetArchitecture.ToLower())</_NativeOptimizationDataPackageTarget
+    >
   </PropertyGroup>
   <ItemGroup Condition="'$(optimizationPGOCoreCLRVersion)'!='' and '$(DotNetBuildFromSource)' != 'true'">
-    <PackageReference Include="optimization.windows_nt-x64.PGO.CoreCLR"
+    <PackageReference
+      Include="optimization.windows_nt-x64.PGO.CoreCLR"
       Version="$(optimizationPGOCoreCLRVersion)"
-      GeneratePathProperty="true" />
-    <PackageReference Include="optimization.windows_nt-x86.PGO.CoreCLR"
+      GeneratePathProperty="true"
+    />
+    <PackageReference
+      Include="optimization.windows_nt-x86.PGO.CoreCLR"
       Version="$(optimizationPGOCoreCLRVersion)"
-      GeneratePathProperty="true" />
-    <PackageReference Include="optimization.windows_nt-arm64.PGO.CoreCLR"
+      GeneratePathProperty="true"
+    />
+    <PackageReference
+      Include="optimization.windows_nt-arm64.PGO.CoreCLR"
       Version="$(optimizationPGOCoreCLRVersion)"
-      GeneratePathProperty="true" />
-    <PackageReference Include="optimization.linux-x64.PGO.CoreCLR"
+      GeneratePathProperty="true"
+    />
+    <PackageReference
+      Include="optimization.linux-x64.PGO.CoreCLR"
       Version="$(optimizationPGOCoreCLRVersion)"
-      GeneratePathProperty="true" />
-    <PackageReference Include="optimization.linux-arm64.PGO.CoreCLR"
+      GeneratePathProperty="true"
+    />
+    <PackageReference
+      Include="optimization.linux-arm64.PGO.CoreCLR"
       Version="$(optimizationPGOCoreCLRVersion)"
-      GeneratePathProperty="true" />
+      GeneratePathProperty="true"
+    />
   </ItemGroup>
-
-
   <!--                                                                       -->
   <!-- Task: GetPgoDataPackagePath                                           -->
   <!--                                                                       -->
@@ -37,12 +55,10 @@
   <!-- for other MSBuild projects, generally to pass to another project or   -->
   <!-- native script like build-runtime.cmd/sh.                              -->
   <!--                                                                       -->
-
   <Target Name="GetPgoDataPackagePath" Returns="$(PgoPackagePath)">
     <PropertyGroup>
       <PgoPackagePathProperty>Pkgoptimization_$(_NativeOptimizationDataPackageTarget)_PGO_CoreCLR</PgoPackagePathProperty>
     </PropertyGroup>
-
     <!--
       Use an item group for expansion of $($(PgoPackagePathProperty)) (an illegal MSBuild expression)
       i.e. the prop value's value.
@@ -53,15 +69,22 @@
         <PgoPackagePath>$(%(Identity).TrimEnd('\\'))</PgoPackagePath>
       </PgoPackagePathPropertyItemList>
     </ItemGroup>
-
     <PropertyGroup>
-      <PgoPackagePath>@(PgoPackagePathPropertyItemList->'%(PgoPackagePath)')</PgoPackagePath>
+      <PgoPackagePath>@(PgoPackagePathPropertyItemList-&gt;'%(PgoPackagePath)')</PgoPackagePath>
     </PropertyGroup>
-
-    <Error Condition="!Exists('$(PgoPackagePath)') And '$(NativeOptimizationDataSupported)' == 'true'" Text="Unable to locate restored PGO package at $(PgoPackagePath). Maybe the platform-specific package naming changed?" />
+    <Error
+      Condition="!Exists('$(PgoPackagePath)') And '$(NativeOptimizationDataSupported)' == 'true'"
+      Text="Unable to locate restored PGO package at $(PgoPackagePath). Maybe the platform-specific package naming changed?"
+    />
   </Target>
-
-  <Target Name="OutputPgoPathForCI" Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(NativeOptimizationDataSupported)' == 'true'" DependsOnTargets="GetPgoDataPackagePath">
-    <Message Text="##vso[task.setvariable variable=CoreClrPgoDataArg]-pgodatapath &quot;$(PgoPackagePath)&quot;" Importance="High" />
+  <Target
+    Name="OutputPgoPathForCI"
+    Condition="'$(ContinuousIntegrationBuild)' == 'true' and '$(NativeOptimizationDataSupported)' == 'true'"
+    DependsOnTargets="GetPgoDataPackagePath"
+  >
+    <Message
+      Text="##vso[task.setvariable variable=CoreClrPgoDataArg]-pgodatapath &quot;$(PgoPackagePath)&quot;"
+      Importance="High"
+    />
   </Target>
 </Project>

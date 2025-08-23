@@ -1,4 +1,7 @@
-<Type Name="NetscapeCertTypeExtension+CertTypes" FullName="Mono.Security.X509.Extensions.NetscapeCertTypeExtension+CertTypes">
+<Type
+  Name="NetscapeCertTypeExtension+CertTypes"
+  FullName="Mono.Security.X509.Extensions.NetscapeCertTypeExtension+CertTypes"
+>
   <TypeSignature Language="C#" Value="public enum NetscapeCertTypeExtension.CertTypes" />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>

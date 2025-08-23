@@ -1,15 +1,11 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-
   <!-- Common debug configuration for IIS OOB binaries -->
-
   <PropertyGroup Condition="'$(Configuration)'=='Debug'">
     <LinkIncremental>true</LinkIncremental>
     <UseDebugLibraries>true</UseDebugLibraries>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
-
   <!-- Default runtime is static multithreaded debug -->
-
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
     <ClCompile>
       <StringPooling>true</StringPooling>
@@ -23,5 +19,4 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-
 </Project>

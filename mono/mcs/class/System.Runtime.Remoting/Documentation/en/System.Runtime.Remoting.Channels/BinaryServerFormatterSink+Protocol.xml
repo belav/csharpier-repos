@@ -1,4 +1,7 @@
-<Type Name="BinaryServerFormatterSink+Protocol" FullName="System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol">
+<Type
+  Name="BinaryServerFormatterSink+Protocol"
+  FullName="System.Runtime.Remoting.Channels.BinaryServerFormatterSink+Protocol"
+>
   <TypeSignature Language="C#" Value="public enum BinaryServerFormatterSink.Protocol" />
   <AssemblyInfo>
     <AssemblyName>System.Runtime.Remoting</AssemblyName>

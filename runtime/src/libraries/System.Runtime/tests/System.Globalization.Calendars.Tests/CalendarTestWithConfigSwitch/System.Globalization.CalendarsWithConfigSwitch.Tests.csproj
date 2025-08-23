@@ -7,6 +7,9 @@
     <Compile Include="CalendarTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <RuntimeHostConfigurationOption Include="Switch.System.Globalization.EnforceJapaneseEraYearRanges" Value="true" />
+    <RuntimeHostConfigurationOption
+      Include="Switch.System.Globalization.EnforceJapaneseEraYearRanges"
+      Value="true"
+    />
   </ItemGroup>
 </Project>
