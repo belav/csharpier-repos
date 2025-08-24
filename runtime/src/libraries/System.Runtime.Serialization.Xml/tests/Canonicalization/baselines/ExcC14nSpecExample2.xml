@@ -4,9 +4,7 @@
   xml:lang="fr"
   xml:space="preserve"
 >
-    <n1:elem2 xmlns:n1="http://example.net" xml:lang="en">
-        <n3:stuff xmlns:n3="ftp://example.org" />
-    </n1:elem2
-  >
-</n2:pdu
->
+  <n1:elem2 xmlns:n1="http://example.net" xml:lang="en">
+    <n3:stuff xmlns:n3="ftp://example.org" />
+  </n1:elem2>
+</n2:pdu>

@@ -93,8 +93,7 @@
       <depend name="inffast.h" />
     </source>
   </library>
-</package>
-<!--
+</package><!--
 CFLAGS=-O
 #CFLAGS=-O -DMAX_WBITS=14 -DMAX_MEM_LEVEL=7
 #CFLAGS=-g -DZLIB_DEBUG
