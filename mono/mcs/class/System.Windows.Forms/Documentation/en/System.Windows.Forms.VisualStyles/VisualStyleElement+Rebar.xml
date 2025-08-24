@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+Rebar" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Rebar">
+<Type
+  Name="VisualStyleElement+Rebar"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Rebar"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.Rebar" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

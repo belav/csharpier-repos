@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  ToolsVersion="4.0"
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <Import Project="..\..\Build\NuGet.Settings.targets" />
   <PropertyGroup>
     <ProjectGuid>{793B20A9-E263-4B54-BB31-305B602087CE}</ProjectGuid>

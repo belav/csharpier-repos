@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  ToolsVersion="4.0"
+  DefaultTargets="Build"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -57,8 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\build\common\Consts.cs">
-    </Compile>
+    <Compile Include="..\build\common\Consts.cs"></Compile>
     <Compile Include="..\class\Mono.Security\Mono.Security.Cryptography\CryptoConvert.cs">
       <Link>CryptoConvert.cs</Link>
     </Compile>
@@ -73,67 +76,42 @@
     </Compile>
     <Compile Include="argument.cs" />
     <Compile Include="assembly.cs" />
-    <Compile Include="AssemblyInfo.cs">
-    </Compile>
-    <Compile Include="anonymous.cs">
-    </Compile>
-    <Compile Include="assign.cs">
-    </Compile>
+    <Compile Include="AssemblyInfo.cs"></Compile>
+    <Compile Include="anonymous.cs"></Compile>
+    <Compile Include="assign.cs"></Compile>
     <Compile Include="async.cs" />
-    <Compile Include="attribute.cs">
-    </Compile>
-    <Compile Include="cfold.cs">
-    </Compile>
-    <Compile Include="class.cs">
-    </Compile>
-    <Compile Include="codegen.cs">
-    </Compile>
+    <Compile Include="attribute.cs"></Compile>
+    <Compile Include="cfold.cs"></Compile>
+    <Compile Include="class.cs"></Compile>
+    <Compile Include="codegen.cs"></Compile>
     <Compile Include="complete.cs" />
-    <Compile Include="const.cs">
-    </Compile>
-    <Compile Include="constant.cs">
-    </Compile>
-    <Compile Include="convert.cs">
-    </Compile>
+    <Compile Include="const.cs"></Compile>
+    <Compile Include="constant.cs"></Compile>
+    <Compile Include="convert.cs"></Compile>
     <Compile Include="context.cs" />
     <Compile Include="dynamic.cs" />
     <Compile Include="eval.cs" />
     <Compile Include="ikvm.cs" />
     <Compile Include="import.cs" />
-    <Compile Include="lambda.cs">
-    </Compile>
+    <Compile Include="lambda.cs"></Compile>
     <Compile Include="cs-parser.cs" />
-    <Compile Include="cs-tokenizer.cs">
-    </Compile>
-    <Compile Include="decl.cs">
-    </Compile>
-    <Compile Include="delegate.cs">
-    </Compile>
-    <Compile Include="doc.cs">
-    </Compile>
-    <Compile Include="driver.cs">
-    </Compile>
-    <Compile Include="ecore.cs">
-    </Compile>
-    <Compile Include="enum.cs">
-    </Compile>
-    <Compile Include="expression.cs">
-    </Compile>
-    <Compile Include="flowanalysis.cs">
-    </Compile>
+    <Compile Include="cs-tokenizer.cs"></Compile>
+    <Compile Include="decl.cs"></Compile>
+    <Compile Include="delegate.cs"></Compile>
+    <Compile Include="doc.cs"></Compile>
+    <Compile Include="driver.cs"></Compile>
+    <Compile Include="ecore.cs"></Compile>
+    <Compile Include="enum.cs"></Compile>
+    <Compile Include="expression.cs"></Compile>
+    <Compile Include="flowanalysis.cs"></Compile>
     <Compile Include="generic.cs" />
-    <Compile Include="iterators.cs">
-    </Compile>
-    <Compile Include="literal.cs">
-    </Compile>
-    <Compile Include="location.cs">
-    </Compile>
+    <Compile Include="iterators.cs"></Compile>
+    <Compile Include="literal.cs"></Compile>
+    <Compile Include="location.cs"></Compile>
     <Compile Include="membercache.cs" />
     <Compile Include="method.cs" />
-    <Compile Include="modifiers.cs">
-    </Compile>
-    <Compile Include="namespace.cs">
-    </Compile>
+    <Compile Include="modifiers.cs"></Compile>
+    <Compile Include="namespace.cs"></Compile>
     <Compile Include="nullable.cs" />
     <Compile Include="..\tools\monop\outline.cs">
       <Link>outline.cs</Link>
@@ -143,16 +121,11 @@
     <Compile Include="property.cs" />
     <Compile Include="reflection.cs" />
     <Compile Include="report.cs" />
-    <Compile Include="settings.cs">
-    </Compile>
-    <Compile Include="module.cs">
-    </Compile>
-    <Compile Include="statement.cs">
-    </Compile>
-    <Compile Include="support.cs">
-    </Compile>
-    <Compile Include="typemanager.cs">
-    </Compile>
+    <Compile Include="settings.cs"></Compile>
+    <Compile Include="module.cs"></Compile>
+    <Compile Include="statement.cs"></Compile>
+    <Compile Include="support.cs"></Compile>
+    <Compile Include="typemanager.cs"></Compile>
     <Compile Include="linq.cs" />
     <Compile Include="field.cs" />
     <Compile Include="typespec.cs" />

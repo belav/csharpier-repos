@@ -1,4 +1,7 @@
-<Type Name="TrackBar+TicksVertical" FullName="System.Windows.Forms.VisualStyles.TrackBar+TicksVertical">
+<Type
+  Name="TrackBar+TicksVertical"
+  FullName="System.Windows.Forms.VisualStyles.TrackBar+TicksVertical"
+>
   <TypeSignature Language="C#" Value="public static class TrackBar.TicksVertical" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -15,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName="Normal">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>

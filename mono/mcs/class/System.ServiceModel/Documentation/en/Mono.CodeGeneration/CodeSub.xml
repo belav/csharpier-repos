@@ -1,6 +1,12 @@
 <Type Name="CodeSub" FullName="Mono.CodeGeneration.CodeSub">
-  <TypeSignature Language="C#" Value="public class CodeSub : Mono.CodeGeneration.CodeArithmeticOperation" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit CodeSub extends Mono.CodeGeneration.CodeArithmeticOperation" />
+  <TypeSignature
+    Language="C#"
+    Value="public class CodeSub : Mono.CodeGeneration.CodeArithmeticOperation"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit CodeSub extends Mono.CodeGeneration.CodeArithmeticOperation"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -15,8 +21,14 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CodeSub (Mono.CodeGeneration.CodeExpression exp1, Mono.CodeGeneration.CodeExpression exp2);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.CodeGeneration.CodeExpression exp1, class Mono.CodeGeneration.CodeExpression exp2) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public CodeSub (Mono.CodeGeneration.CodeExpression exp1, Mono.CodeGeneration.CodeExpression exp2);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.CodeGeneration.CodeExpression exp1, class Mono.CodeGeneration.CodeExpression exp2) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -33,8 +45,14 @@
       </Docs>
     </Member>
     <Member MemberName="Generate">
-      <MemberSignature Language="C#" Value="public override void Generate (System.Reflection.Emit.ILGenerator gen);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Generate(class System.Reflection.Emit.ILGenerator gen) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Generate (System.Reflection.Emit.ILGenerator gen);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Generate(class System.Reflection.Emit.ILGenerator gen) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

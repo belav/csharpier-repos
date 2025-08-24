@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <ForwardedType Include="Microsoft.CSharp.CSharpCodeProvider" />
     <ForwardedType Include="Microsoft.VisualBasic.VBCodeProvider" />
@@ -107,5 +106,4 @@
     <ForwardedType Include="System.CodeDom.FieldDirection" />
     <ForwardedType Include="System.CodeDom.MemberAttributes" />
   </ItemGroup>
-
 </Project>

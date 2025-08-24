@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+Button" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Button">
+<Type
+  Name="VisualStyleElement+Button"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+Button"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.Button" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

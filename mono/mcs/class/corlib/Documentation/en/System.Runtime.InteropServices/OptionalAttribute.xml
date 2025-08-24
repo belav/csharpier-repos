@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="OptionalAttribute" FullName="System.Runtime.InteropServices.OptionalAttribute">
-  <TypeSignature Maintainer="auto" Language="C#" Value="public sealed class OptionalAttribute : Attribute" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit OptionalAttribute extends System.Attribute" />
+  <TypeSignature
+    Maintainer="auto"
+    Language="C#"
+    Value="public sealed class OptionalAttribute : Attribute"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit OptionalAttribute extends System.Attribute"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyPublicKey>[00 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00]</AssemblyPublicKey>
@@ -36,7 +43,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public OptionalAttribute ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>

@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.ServiceProcess.PowerBroadcastStatus" />
     <ForwardedType Include="System.ServiceProcess.ServiceBase" />
@@ -16,5 +14,4 @@
     <ForwardedType Include="System.ServiceProcess.SessionChangeReason" />
     <ForwardedType Include="System.ServiceProcess.TimeoutException" />
   </ItemGroup>
-
 </Project>

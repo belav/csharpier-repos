@@ -6,7 +6,6 @@
     <RootNamespace>Microsoft.CodeAnalysis.CompilerServer.UnitTests</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TargetFrameworks>net8.0;net472</TargetFrameworks>
-
     <!--
       Currently fails on CI against old versions of mono
       See https://github.com/dotnet/roslyn/pull/30166#issuecomment-425571629

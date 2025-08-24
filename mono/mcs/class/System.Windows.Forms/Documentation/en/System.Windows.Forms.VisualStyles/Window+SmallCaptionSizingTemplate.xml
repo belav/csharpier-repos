@@ -1,4 +1,7 @@
-<Type Name="Window+SmallCaptionSizingTemplate" FullName="System.Windows.Forms.VisualStyles.Window+SmallCaptionSizingTemplate">
+<Type
+  Name="Window+SmallCaptionSizingTemplate"
+  FullName="System.Windows.Forms.VisualStyles.Window+SmallCaptionSizingTemplate"
+>
   <TypeSignature Language="C#" Value="public static class Window.SmallCaptionSizingTemplate" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
@@ -15,7 +18,10 @@
   </Docs>
   <Members>
     <Member MemberName="Normal">
-      <MemberSignature Language="C#" Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Windows.Forms.VisualStyles.VisualStyleElement Normal { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.VisualStyles.VisualStyleElement</ReturnType>
