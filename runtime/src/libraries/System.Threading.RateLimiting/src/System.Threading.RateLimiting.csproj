@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <IsPackable>true</IsPackable>
@@ -11,7 +10,6 @@ System.Threading.RateLimiting.ConcurrencyLimiter
 System.Threading.RateLimiting.TokenBucketRateLimiter
 System.Threading.RateLimiting.RateLimitLease</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="System\Threading\RateLimiting\ChainedPartitionedRateLimiter.cs" />
     <Compile Include="System\Threading\RateLimiting\ConcurrencyLimiter.cs" />
@@ -37,18 +35,24 @@ System.Threading.RateLimiting.RateLimitLease</PackageDescription>
     <Compile Include="System\Threading\RateLimiting\TimerAwaitable.cs" />
     <Compile Include="System\Threading\RateLimiting\TokenBucketRateLimiter.cs" />
     <Compile Include="System\Threading\RateLimiting\TokenBucketRateLimiterOptions.cs" />
-    <Compile Include="$(CommonPath)System\Collections\Generic\Deque.cs" Link="Common\System\Collections\Generic\Deque.cs" />
+    <Compile
+      Include="$(CommonPath)System\Collections\Generic\Deque.cs"
+      Link="Common\System\Collections\Generic\Deque.cs"
+    />
     <Compile Include="System\Threading\RateLimiting\TranslatingLimiter.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Remove="System\Threading\RateLimiting\System.Threading.RateLimiting.Typeforwards.netcoreapp.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs" Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs"
+      Link="Common\System\Runtime\CompilerServices\IsExternalInit.cs"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="$(SystemThreadingTasksExtensionsVersion)" />
+    <PackageReference
+      Include="System.Threading.Tasks.Extensions"
+      Version="$(SystemThreadingTasksExtensionsVersion)"
+    />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Bcl.AsyncInterfaces\src\Microsoft.Bcl.AsyncInterfaces.csproj" />
   </ItemGroup>
-
 </Project>

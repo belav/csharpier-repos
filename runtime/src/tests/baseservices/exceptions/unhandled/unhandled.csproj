@@ -4,7 +4,6 @@
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <ReferenceXUnitWrapperGenerator>false</ReferenceXUnitWrapperGenerator>
     <CLRTestKind>BuildOnly</CLRTestKind>
-
     <Optimize>false</Optimize>
   </PropertyGroup>
   <ItemGroup>

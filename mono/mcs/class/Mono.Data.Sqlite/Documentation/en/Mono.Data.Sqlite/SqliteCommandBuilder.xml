@@ -1,6 +1,12 @@
 <Type Name="SqliteCommandBuilder" FullName="Mono.Data.Sqlite.SqliteCommandBuilder">
-  <TypeSignature Language="C#" Value="public sealed class SqliteCommandBuilder : System.Data.Common.DbCommandBuilder" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteCommandBuilder extends System.Data.Common.DbCommandBuilder" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteCommandBuilder : System.Data.Common.DbCommandBuilder"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteCommandBuilder extends System.Data.Common.DbCommandBuilder"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -18,7 +24,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteCommandBuilder ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -32,8 +41,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteCommandBuilder (Mono.Data.Sqlite.SqliteDataAdapter adp);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Data.Sqlite.SqliteDataAdapter adp) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteCommandBuilder (Mono.Data.Sqlite.SqliteDataAdapter adp);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Data.Sqlite.SqliteDataAdapter adp) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -42,8 +57,7 @@
         <Parameter Name="adp" Type="Mono.Data.Sqlite.SqliteDataAdapter" />
       </Parameters>
       <Docs>
-        <param name="adp">
-        </param>
+        <param name="adp"></param>
         <summary>
             Initializes the command builder and associates it with the specified data adapter.
             </summary>
@@ -51,8 +65,14 @@
       </Docs>
     </Member>
     <Member MemberName="ApplyParameterInfo">
-      <MemberSignature Language="C#" Value="protected override void ApplyParameterInfo (System.Data.Common.DbParameter parameter, System.Data.DataRow row, System.Data.StatementType statementType, bool whereClause);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void ApplyParameterInfo(class System.Data.Common.DbParameter parameter, class System.Data.DataRow row, valuetype System.Data.StatementType statementType, bool whereClause) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void ApplyParameterInfo (System.Data.Common.DbParameter parameter, System.Data.DataRow row, System.Data.StatementType statementType, bool whereClause);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void ApplyParameterInfo(class System.Data.Common.DbParameter parameter, class System.Data.DataRow row, valuetype System.Data.StatementType statementType, bool whereClause) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -70,7 +90,9 @@
         <param name="parameter">The parameter to use in applying custom behaviors to a row</param>
         <param name="row">The row to apply the parameter to</param>
         <param name="statementType">The type of statement</param>
-        <param name="whereClause">Whether the application of the parameter is part of a WHERE clause</param>
+        <param name="whereClause"
+          >Whether the application of the parameter is part of a WHERE clause</param
+        >
         <summary>
             Minimal amount of parameter processing.  Primarily sets the DbType for the parameter equal to the provider type in the schema
             </summary>
@@ -78,8 +100,14 @@
       </Docs>
     </Member>
     <Member MemberName="CatalogLocation">
-      <MemberSignature Language="C#" Value="public override System.Data.Common.CatalogLocation CatalogLocation { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.Common.CatalogLocation CatalogLocation" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.Common.CatalogLocation CatalogLocation { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.Common.CatalogLocation CatalogLocation"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -101,7 +129,10 @@
       </Docs>
     </Member>
     <Member MemberName="CatalogSeparator">
-      <MemberSignature Language="C#" Value="public override string CatalogSeparator { get; set; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string CatalogSeparator { get; set; }"
+      />
       <MemberSignature Language="ILAsm" Value=".property instance string CatalogSeparator" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
@@ -124,8 +155,14 @@
       </Docs>
     </Member>
     <Member MemberName="DataAdapter">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteDataAdapter DataAdapter { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteDataAdapter DataAdapter" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteDataAdapter DataAdapter { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteDataAdapter DataAdapter"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -142,8 +179,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetDeleteCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand GetDeleteCommand ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetDeleteCommand() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand GetDeleteCommand ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetDeleteCommand() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -161,8 +204,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetDeleteCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand GetDeleteCommand (bool useColumnsForParameterNames);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetDeleteCommand(bool useColumnsForParameterNames) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand GetDeleteCommand (bool useColumnsForParameterNames);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetDeleteCommand(bool useColumnsForParameterNames) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -174,8 +223,7 @@
         <Parameter Name="useColumnsForParameterNames" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="useColumnsForParameterNames">
-        </param>
+        <param name="useColumnsForParameterNames"></param>
         <summary>
             Returns the automatically-generated SQLite command to delete rows from the database
             </summary>
@@ -184,8 +232,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetInsertCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand GetInsertCommand ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetInsertCommand() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand GetInsertCommand ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetInsertCommand() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -203,8 +257,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetInsertCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand GetInsertCommand (bool useColumnsForParameterNames);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetInsertCommand(bool useColumnsForParameterNames) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand GetInsertCommand (bool useColumnsForParameterNames);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetInsertCommand(bool useColumnsForParameterNames) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -216,8 +276,7 @@
         <Parameter Name="useColumnsForParameterNames" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="useColumnsForParameterNames">
-        </param>
+        <param name="useColumnsForParameterNames"></param>
         <summary>
             Returns the automatically-generated SQLite command to insert rows into the database
             </summary>
@@ -226,8 +285,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetParameterName">
-      <MemberSignature Language="C#" Value="protected override string GetParameterName (int parameterOrdinal);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance string GetParameterName(int32 parameterOrdinal) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override string GetParameterName (int parameterOrdinal);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance string GetParameterName(int32 parameterOrdinal) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -248,8 +313,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetParameterName">
-      <MemberSignature Language="C#" Value="protected override string GetParameterName (string parameterName);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance string GetParameterName(string parameterName) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override string GetParameterName (string parameterName);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance string GetParameterName(string parameterName) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -270,8 +341,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetParameterPlaceholder">
-      <MemberSignature Language="C#" Value="protected override string GetParameterPlaceholder (int parameterOrdinal);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance string GetParameterPlaceholder(int32 parameterOrdinal) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override string GetParameterPlaceholder (int parameterOrdinal);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance string GetParameterPlaceholder(int32 parameterOrdinal) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -283,7 +360,9 @@
         <Parameter Name="parameterOrdinal" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="parameterOrdinal">The index of the parameter to provide a placeholder for</param>
+        <param name="parameterOrdinal"
+          >The index of the parameter to provide a placeholder for</param
+        >
         <summary>
             Returns a placeholder character for the specified parameter i.
             </summary>
@@ -292,8 +371,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetSchemaTable">
-      <MemberSignature Language="C#" Value="protected override System.Data.DataTable GetSchemaTable (System.Data.Common.DbCommand sourceCommand);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.DataTable GetSchemaTable(class System.Data.Common.DbCommand sourceCommand) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.DataTable GetSchemaTable (System.Data.Common.DbCommand sourceCommand);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Data.DataTable GetSchemaTable(class System.Data.Common.DbCommand sourceCommand) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -305,8 +390,7 @@
         <Parameter Name="sourceCommand" Type="System.Data.Common.DbCommand" />
       </Parameters>
       <Docs>
-        <param name="sourceCommand">
-        </param>
+        <param name="sourceCommand"></param>
         <summary>
             Override helper, which can help the base command builder choose the right keys for the given query
             </summary>
@@ -315,8 +399,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetUpdateCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand GetUpdateCommand ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetUpdateCommand() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand GetUpdateCommand ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetUpdateCommand() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -334,8 +424,14 @@
       </Docs>
     </Member>
     <Member MemberName="GetUpdateCommand">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteCommand GetUpdateCommand (bool useColumnsForParameterNames);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetUpdateCommand(bool useColumnsForParameterNames) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteCommand GetUpdateCommand (bool useColumnsForParameterNames);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteCommand GetUpdateCommand(bool useColumnsForParameterNames) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -347,8 +443,7 @@
         <Parameter Name="useColumnsForParameterNames" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="useColumnsForParameterNames">
-        </param>
+        <param name="useColumnsForParameterNames"></param>
         <summary>
             Returns the automatically-generated SQLite command to update rows in the database
             </summary>
@@ -357,8 +452,14 @@
       </Docs>
     </Member>
     <Member MemberName="QuoteIdentifier">
-      <MemberSignature Language="C#" Value="public override string QuoteIdentifier (string unquotedIdentifier);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string QuoteIdentifier(string unquotedIdentifier) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string QuoteIdentifier (string unquotedIdentifier);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string QuoteIdentifier(string unquotedIdentifier) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -451,8 +552,14 @@
       </Docs>
     </Member>
     <Member MemberName="SetRowUpdatingHandler">
-      <MemberSignature Language="C#" Value="protected override void SetRowUpdatingHandler (System.Data.Common.DbDataAdapter adapter);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetRowUpdatingHandler(class System.Data.Common.DbDataAdapter adapter) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override void SetRowUpdatingHandler (System.Data.Common.DbDataAdapter adapter);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void SetRowUpdatingHandler(class System.Data.Common.DbDataAdapter adapter) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -473,8 +580,14 @@
       </Docs>
     </Member>
     <Member MemberName="UnquoteIdentifier">
-      <MemberSignature Language="C#" Value="public override string UnquoteIdentifier (string quotedIdentifier);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string UnquoteIdentifier(string quotedIdentifier) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public override string UnquoteIdentifier (string quotedIdentifier);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance string UnquoteIdentifier(string quotedIdentifier) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

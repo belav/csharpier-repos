@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="AceQualifier" FullName="System.Security.AccessControl.AceQualifier">
   <TypeSignature Language="C#" Value="public enum AceQualifier" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed AceQualifier extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed AceQualifier extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>mscorlib</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -21,7 +24,10 @@
   <Members>
     <Member MemberName="AccessAllowed">
       <MemberSignature Language="C#" Value="AccessAllowed" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier AccessAllowed = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier AccessAllowed = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -40,7 +46,10 @@
     </Member>
     <Member MemberName="AccessDenied">
       <MemberSignature Language="C#" Value="AccessDenied" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier AccessDenied = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier AccessDenied = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -59,7 +68,10 @@
     </Member>
     <Member MemberName="SystemAlarm">
       <MemberSignature Language="C#" Value="SystemAlarm" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier SystemAlarm = int32(3)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier SystemAlarm = int32(3)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -78,7 +90,10 @@
     </Member>
     <Member MemberName="SystemAudit">
       <MemberSignature Language="C#" Value="SystemAudit" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier SystemAudit = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.Security.AccessControl.AceQualifier SystemAudit = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

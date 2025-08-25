@@ -16,7 +16,8 @@
     <Compile Include="main.cs" />
   </ItemGroup>
   <PropertyGroup>
-    <CLRTestBatchPreCommands><![CDATA[
+    <CLRTestBatchPreCommands>
+      <![CDATA[
 $(CLRTestBatchPreCommands)
 
 REM Suppress some DOTNET and COMPlus variables for the duration of Crossgen2 execution
@@ -82,8 +83,10 @@ if not exist mainv2.map (
 )
 
 endlocal
-]]></CLRTestBatchPreCommands>
-    <CLRTestBashPreCommands><![CDATA[
+]]>
+    </CLRTestBatchPreCommands>
+    <CLRTestBashPreCommands>
+      <![CDATA[
 $(CLRTestBashPreCommands)
 
 # Suppress some DOTNET variables for the duration of Crossgen2 execution
@@ -155,9 +158,9 @@ then
 fi
 
 export DOTNET_GCName DOTNET_GCStress DOTNET_HeapVerify DOTNET_ReadyToRun
-]]></CLRTestBashPreCommands>
+]]>
+    </CLRTestBashPreCommands>
   </PropertyGroup>
-
   <Target Name="CopyTestAssemblyToOutputs" AfterTargets="Build">
     <PropertyGroup>
       <TestAssemblyName>test.dll</TestAssemblyName>
@@ -166,9 +169,14 @@ export DOTNET_GCName DOTNET_GCStress DOTNET_HeapVerify DOTNET_ReadyToRun
       <TestV2AssemblySourcePath>$(OutputPath)/../testv2/test/</TestV2AssemblySourcePath>
       <TestV2AssemblyTargetPath>$(OutputPath)/testv2</TestV2AssemblyTargetPath>
     </PropertyGroup>
-    
     <MakeDir Directories="$(TestV1AssemblyTargetPath);$(TestV2AssemblyTargetPath)" />
-    <Copy SourceFiles="$(TestV1AssemblySourcePath)$(TestAssemblyName)" DestinationFolder="$(TestV1AssemblyTargetPath)" />
-    <Copy SourceFiles="$(TestV2AssemblySourcePath)$(TestAssemblyName)" DestinationFolder="$(TestV2AssemblyTargetPath)" />
+    <Copy
+      SourceFiles="$(TestV1AssemblySourcePath)$(TestAssemblyName)"
+      DestinationFolder="$(TestV1AssemblyTargetPath)"
+    />
+    <Copy
+      SourceFiles="$(TestV2AssemblySourcePath)$(TestAssemblyName)"
+      DestinationFolder="$(TestV2AssemblyTargetPath)"
+    />
   </Target>
 </Project>

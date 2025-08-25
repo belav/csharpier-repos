@@ -24,7 +24,7 @@
     <Compile Include="TrustManagerContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="XamlLoadPermissionTests.cs"/>
+    <Compile Include="XamlLoadPermissionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\System.Security.Permissions.csproj" />

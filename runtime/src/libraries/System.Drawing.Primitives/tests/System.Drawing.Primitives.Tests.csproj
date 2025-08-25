@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
-    <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'">true</DebuggerSupport>
+    <DebuggerSupport Condition="'$(DebuggerSupport)' == '' and '$(TargetOS)' == 'browser'"
+      >true</DebuggerSupport
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ColorTranslatorTests.cs" />
@@ -13,11 +15,17 @@
     <Compile Include="SizeFTests.cs" />
     <Compile Include="SizeTests.cs" />
     <Compile Include="ColorTests.cs" />
-    <Compile Include="$(CommonTestPath)System\Diagnostics\DebuggerAttributes.cs"
-             Link="Common\System\Diagnostics\DebuggerAttributes.cs" />
-    <Compile Include="$(CommonTestPath)System\Runtime\Serialization\DataContractSerializerHelper.cs"
-             Link="Common\System\Runtime\Serialization\DataContractSerializerHelper.cs" />
-    <Compile Include="$(CommonTestPath)System\Runtime\Serialization\Utils.cs"
-             Link="Common\System\Runtime\Serialization\Utils.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Diagnostics\DebuggerAttributes.cs"
+      Link="Common\System\Diagnostics\DebuggerAttributes.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Runtime\Serialization\DataContractSerializerHelper.cs"
+      Link="Common\System\Runtime\Serialization\DataContractSerializerHelper.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Runtime\Serialization\Utils.cs"
+      Link="Common\System\Runtime\Serialization\Utils.cs"
+    />
   </ItemGroup>
 </Project>

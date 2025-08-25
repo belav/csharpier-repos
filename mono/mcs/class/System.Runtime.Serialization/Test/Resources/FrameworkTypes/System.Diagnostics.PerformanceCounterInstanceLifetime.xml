@@ -1,1 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><PerformanceCounterInstanceLifetime xmlns="http://schemas.datacontract.org/2004/07/System.Diagnostics">Global</PerformanceCounterInstanceLifetime>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PerformanceCounterInstanceLifetime
+  xmlns="http://schemas.datacontract.org/2004/07/System.Diagnostics"
+  >Global</PerformanceCounterInstanceLifetime
+>

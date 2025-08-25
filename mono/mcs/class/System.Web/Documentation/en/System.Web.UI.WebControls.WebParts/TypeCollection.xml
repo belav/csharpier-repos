@@ -1,5 +1,8 @@
 <Type Name="TypeCollection" FullName="System.Web.UI.WebControls.WebParts.TypeCollection">
-  <TypeSignature Language="C#" Value="public class TypeCollection : System.Collections.ReadOnlyCollectionBase" />
+  <TypeSignature
+    Language="C#"
+    Value="public class TypeCollection : System.Collections.ReadOnlyCollectionBase"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Web</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -28,7 +31,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TypeCollection (System.Collections.ICollection types);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TypeCollection (System.Collections.ICollection types);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="types" Type="System.Collections.ICollection" />
@@ -44,7 +50,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TypeCollection (System.Web.UI.WebControls.WebParts.TypeCollection existingTypes, System.Collections.ICollection types);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TypeCollection (System.Web.UI.WebControls.WebParts.TypeCollection existingTypes, System.Collections.ICollection types);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="existingTypes" Type="System.Web.UI.WebControls.WebParts.TypeCollection" />
@@ -103,7 +112,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Empty">
-      <MemberSignature Language="C#" Value="public static readonly System.Web.UI.WebControls.WebParts.TypeCollection Empty;" />
+      <MemberSignature
+        Language="C#"
+        Value="public static readonly System.Web.UI.WebControls.WebParts.TypeCollection Empty;"
+      />
       <MemberType>Field</MemberType>
       <ReturnValue>
         <ReturnType>System.Web.UI.WebControls.WebParts.TypeCollection</ReturnType>

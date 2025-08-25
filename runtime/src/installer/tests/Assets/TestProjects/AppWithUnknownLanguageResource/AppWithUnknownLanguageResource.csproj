@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -9,5 +8,4 @@
     <!-- Current .NET SDK can't run CreateAppHost so disable creating AppHost on build -->
     <UseAppHost>false</UseAppHost>
   </PropertyGroup>
-
 </Project>

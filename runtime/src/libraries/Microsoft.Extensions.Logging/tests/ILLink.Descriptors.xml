@@ -1,6 +1,6 @@
 <linker>
   <assembly fullname="System.Diagnostics.TraceSource">
-      <!--
+    <!--
       fail: [FAIL] Microsoft.Extensions.Logging.Test.TraceSourceLoggerTest.Log_Should_Add_Exception_To_Message_Whether_Formatter_Is_Null_Or_Not(shouldFormatterBeNull: True)
         info: Castle.DynamicProxy.InvalidProxyConstructorArgumentsException : Can not instantiate proxy of class: System.Diagnostics.TraceListener.
         info: Could not find a parameterless constructor.
@@ -18,7 +18,7 @@
         info:    at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
       -->
     <type fullname="System.Diagnostics.TraceListener">
-        <method signature="System.Void .ctor()" />
+      <method signature="System.Void .ctor()" />
     </type>
   </assembly>
 </linker>

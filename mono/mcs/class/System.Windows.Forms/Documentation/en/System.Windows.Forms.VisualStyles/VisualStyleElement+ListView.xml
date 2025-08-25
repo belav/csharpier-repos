@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+ListView" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ListView">
+<Type
+  Name="VisualStyleElement+ListView"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ListView"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.ListView" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

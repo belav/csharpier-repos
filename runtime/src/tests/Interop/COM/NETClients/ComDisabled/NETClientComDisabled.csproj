@@ -15,6 +15,9 @@
     <ProjectReference Include="$(TestLibraryProjectPath)" />
   </ItemGroup>
   <ItemGroup>
-    <RuntimeHostConfigurationOption Include="System.Runtime.InteropServices.BuiltInComInterop.IsSupported" Value="false" />
+    <RuntimeHostConfigurationOption
+      Include="System.Runtime.InteropServices.BuiltInComInterop.IsSupported"
+      Value="false"
+    />
   </ItemGroup>
 </Project>
