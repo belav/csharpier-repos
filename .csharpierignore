@@ -232,3 +232,14 @@ mono/mcs/class/referencesource/System.Web/Util/ArglessEventHandlerProxy.cs
 /runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericStructs.cs
 /runtime/src/tests/Loader/classloader/generics/Instantiation/Nesting/NestedGenericTypesMix.cs
 /runtime/src/tests/Loader/classloader/StaticVirtualMethods/DiamondShape/svm_diamondshape.cs
+
+/mono/mcs/class/System.Web/Test/mainsoft/MainsoftWebApp20/do_not_delete.csproj
+/aspnetcore/eng/sdl-tsa-vars.config
+/efcore/eng/sdl-tsa-vars.config
+/runtime/eng/sdl-tsa-vars.config
+/moq4/.github/workflows/changelog.config
+/mono/mcs/class/System.DirectoryServices/Test/java.login.ibm.config
+/mono/mcs/class/System.DirectoryServices/Test/java.login.sun.config
+/mono/mcs/class/System.Web/Test/mainsoft/MainsoftWebApp20/do_not_delete.csproj
+/mono/mcs/class/System.Web/Test/standalone/adrotator/ads-error.xml
+/runtime/src/libraries/System.Runtime.Serialization.Xml/tests/Canonicalization/baselines/ReaderWriter_C14N_BaselineXML_Binary.xml
