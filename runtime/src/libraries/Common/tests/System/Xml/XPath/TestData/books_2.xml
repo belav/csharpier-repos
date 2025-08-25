@@ -135,9 +135,9 @@
     <title>Trenton Today, Trenton Tomorrow</title>
     <author>
       <first-name>Toni</first-name>
-      <last-name>Bob</last-name><![CDATA[CDATA Section in Author]]><degree from="Trenton U"
-        >B.A.</degree
-      >
+      <last-name>Bob</last-name>
+      <![CDATA[CDATA Section in Author]]>
+      <degree from="Trenton U">B.A.</degree>
       <degree from="Harvard">Ph.D.</degree>
       <award>Pulizer</award>
       <publication>Still in Trenton</publication>
@@ -166,7 +166,8 @@
   <my:book style="hard back" price="99.95">
     <![CDATA[
 			Here is some CDATA
-		]]><my:title>Where is Trenton?</my:title>
+		]]>
+    <my:title>Where is Trenton?</my:title>
   </my:book>
   <my:book dt:style="string" style="hard back" price="19.99">
     <my:title>Where in the world is Trenton?</my:title>

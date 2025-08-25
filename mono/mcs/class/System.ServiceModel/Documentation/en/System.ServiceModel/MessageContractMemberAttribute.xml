@@ -176,14 +176,14 @@ public class PatientRecord
           <para>
             <see cref="P:System.ServiceModel.ServiceContractAttribute.ProtectionLevel" />
           </para>
-          <para
-            >    <see cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
+          <para>
+            <see cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
           </para>
-          <para
-            >        <see cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" />
+          <para>
+            <see cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" />
           </para>
-          <para
-            >        <see cref="P:System.ServiceModel.MessageContractAttribute.ProtectionLevel" />
+          <para>
+            <see cref="P:System.ServiceModel.MessageContractAttribute.ProtectionLevel" />
           </para>
           <para
             >            The <see cref="P:System.ServiceModel.MessageContractMemberAttribute.ProtectionLevel" /> property on <see cref="T:System.ServiceModel.MessageHeaderAttribute" />.</para
