@@ -895,8 +895,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>Setting this property to false enables you to redirect input, output, and error streams.</para>
           <block subset="none" type="note">
-            <para
-              >   <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" /> must be false if the <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" /> property is not null or an empty string, or an <see cref="T:System.InvalidOperationException" /> will be thrown when the <see cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" /> method is called.</para
+            <para>
+              <see cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" /> must be false if the <see cref="P:System.Diagnostics.ProcessStartInfo.UserName" /> property is not null or an empty string, or an <see cref="T:System.InvalidOperationException" /> will be thrown when the <see cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" /> method is called.</para
             >
           </block>
           <para
