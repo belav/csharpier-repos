@@ -23,11 +23,19 @@ namespace System.Text.Unicode
         /// comes first) is ASCII.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int GetIndexOfFirstInvalidUtf8Sequence(ReadOnlySpan<byte> utf8Data, out bool isAscii)
+        public static unsafe int GetIndexOfFirstInvalidUtf8Sequence(
+            ReadOnlySpan<byte> utf8Data,
+            out bool isAscii
+        )
         {
             fixed (byte* pUtf8Data = &MemoryMarshal.GetReference(utf8Data))
             {
-                byte* pFirstInvalidByte = GetPointerToFirstInvalidByte(pUtf8Data, utf8Data.Length, out int utf16CodeUnitCountAdjustment, out _);
+                byte* pFirstInvalidByte = GetPointerToFirstInvalidByte(
+                    pUtf8Data,
+                    utf8Data.Length,
+                    out int utf16CodeUnitCountAdjustment,
+                    out _
+                );
                 int index = (int)(void*)Unsafe.ByteOffset(ref *pUtf8Data, ref *pFirstInvalidByte);
 
                 isAscii = (utf16CodeUnitCountAdjustment == 0); // If UTF-16 char count == UTF-8 byte count, it's ASCII.
@@ -45,7 +53,8 @@ namespace System.Text.Unicode
         /// Returns true iff the UInt64 represents eighty ASCII UTF-8 characters in machine endianness.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool AllBytesInUInt64AreAscii(ulong value) => (value & ~0x7F7F_7F7F_7F7F_7F7Ful) == 0;
+        internal static bool AllBytesInUInt64AreAscii(ulong value) =>
+            (value & ~0x7F7F_7F7F_7F7F_7F7Ful) == 0;
 
         /// <summary>
         /// Given a UInt32 that represents four ASCII UTF-8 characters, returns the invariant
@@ -245,8 +254,16 @@ namespace System.Text.Unicode
             // Duplicate of logic in UInt32OrdinalIgnoreCaseAscii, but using 64-bit consts.
             // See comments in that method for more info.
 
-            ulong letterMaskA = (((valueA + 0x3F3F3F3F3F3F3F3F) ^ (valueA + 0x2525252525252525)) & 0x8080808080808080) >> 2;
-            ulong letterMaskB = (((valueB + 0x3F3F3F3F3F3F3F3F) ^ (valueB + 0x2525252525252525)) & 0x8080808080808080) >> 2;
+            ulong letterMaskA =
+                (
+                    ((valueA + 0x3F3F3F3F3F3F3F3F) ^ (valueA + 0x2525252525252525))
+                    & 0x8080808080808080
+                ) >> 2;
+            ulong letterMaskB =
+                (
+                    ((valueB + 0x3F3F3F3F3F3F3F3F) ^ (valueB + 0x2525252525252525))
+                    & 0x8080808080808080
+                ) >> 2;
 
             return (valueA | letterMaskA) == (valueB | letterMaskB);
         }
@@ -265,7 +282,10 @@ namespace System.Text.Unicode
         /// the two inputs are equal using an ordinal case-insensitive comparison.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool Vector128OrdinalIgnoreCaseAscii(Vector128<byte> vec1, Vector128<byte> vec2)
+        internal static bool Vector128OrdinalIgnoreCaseAscii(
+            Vector128<byte> vec1,
+            Vector128<byte> vec2
+        )
         {
             // ASSUMPTION: Caller has validated that input values are ASCII.
 
@@ -274,10 +294,14 @@ namespace System.Text.Unicode
             Vector128<sbyte> lowIndicator2 = Vector128.Create((sbyte)(0x80 - 'A')) + vec2.AsSByte();
 
             // the 0x80 bit of each word of 'combinedIndicator' will be set iff the word has value >= 'A' and <= 'Z'
-            Vector128<sbyte> combIndicator1 =
-                Vector128.LessThan(Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))), lowIndicator1);
-            Vector128<sbyte> combIndicator2 =
-                Vector128.LessThan(Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))), lowIndicator2);
+            Vector128<sbyte> combIndicator1 = Vector128.LessThan(
+                Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))),
+                lowIndicator1
+            );
+            Vector128<sbyte> combIndicator2 = Vector128.LessThan(
+                Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))),
+                lowIndicator2
+            );
 
             // Convert both vectors to lower case by adding 0x20 bit for all [A-Z][a-z] characters
             Vector128<sbyte> lcVec1 =

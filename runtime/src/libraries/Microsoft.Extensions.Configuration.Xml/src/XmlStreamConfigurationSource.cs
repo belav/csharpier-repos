@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.Configuration.Xml
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/>.</param>
         /// <returns>An <see cref="XmlStreamConfigurationProvider"/></returns>
-        public override IConfigurationProvider Build(IConfigurationBuilder builder)
-            => new XmlStreamConfigurationProvider(this);
+        public override IConfigurationProvider Build(IConfigurationBuilder builder) =>
+            new XmlStreamConfigurationProvider(this);
     }
 }

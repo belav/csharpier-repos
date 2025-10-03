@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,46 +30,48 @@
 
 using System;
 
-namespace Mono.Math.Prime.Generator {
-
+namespace Mono.Math.Prime.Generator
+{
 #if INSIDE_CORLIB
-	internal
+    internal
 #else
-	public
+    public
 #endif
-	abstract class PrimeGeneratorBase {
-
-		public virtual ConfidenceFactor Confidence {
-			get {
+    abstract class PrimeGeneratorBase
+    {
+        public virtual ConfidenceFactor Confidence
+        {
+            get
+            {
 #if DEBUG
-				return ConfidenceFactor.ExtraLow;
+                return ConfidenceFactor.ExtraLow;
 #else
-				return ConfidenceFactor.Medium;
+                return ConfidenceFactor.Medium;
 #endif
-			}
-		}
+            }
+        }
 
-		public virtual Prime.PrimalityTest PrimalityTest {
-			get {
-				return new Prime.PrimalityTest (PrimalityTests.RabinMillerTest);
-			}
-		}
+        public virtual Prime.PrimalityTest PrimalityTest
+        {
+            get { return new Prime.PrimalityTest(PrimalityTests.RabinMillerTest); }
+        }
 
-		public virtual int TrialDivisionBounds {
-			get { return 4000; }
-		}
+        public virtual int TrialDivisionBounds
+        {
+            get { return 4000; }
+        }
 
-		/// <summary>
-		/// Performs primality tests on bi, assumes trial division has been done.
-		/// </summary>
-		/// <param name="bi">A BigInteger that has been subjected to and passed trial division</param>
-		/// <returns>False if bi is composite, true if it may be prime.</returns>
-		/// <remarks>The speed of this method is dependent on Confidence</remarks>
-		protected bool PostTrialDivisionTests (BigInteger bi)
-		{
-			return PrimalityTest (bi, this.Confidence);
-		}
+        /// <summary>
+        /// Performs primality tests on bi, assumes trial division has been done.
+        /// </summary>
+        /// <param name="bi">A BigInteger that has been subjected to and passed trial division</param>
+        /// <returns>False if bi is composite, true if it may be prime.</returns>
+        /// <remarks>The speed of this method is dependent on Confidence</remarks>
+        protected bool PostTrialDivisionTests(BigInteger bi)
+        {
+            return PrimalityTest(bi, this.Confidence);
+        }
 
-		public abstract BigInteger GenerateNewPrime (int bits);
-	}
+        public abstract BigInteger GenerateNewPrime(int bits);
+    }
 }

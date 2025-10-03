@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections;
+using System.Data.Metadata.Edm;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
 using System.Reflection;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Objects.Internal
 {
@@ -38,12 +38,29 @@ namespace System.Data.Objects.Internal
         /// <param name="propertyStrategy">A delegate to create the property accesor strategy object</param>
         /// <param name="changeTrackingStrategy">A delegate to create the change tracking strategy object</param>
         /// <param name="keyStrategy">A delegate to create the entity key strategy object</param>
-        internal EntityWrapperWithoutRelationships(TEntity entity, EntityKey key, EntitySet entitySet, ObjectContext context, MergeOption mergeOption, Type identityType,
-                                                   Func<object, IPropertyAccessorStrategy> propertyStrategy, Func<object, IChangeTrackingStrategy> changeTrackingStrategy, Func<object, IEntityKeyStrategy> keyStrategy)
-            : base(entity, RelationshipManager.Create(), key, entitySet, context, mergeOption, identityType,
-                   propertyStrategy, changeTrackingStrategy, keyStrategy)
-        {
-        }
+        internal EntityWrapperWithoutRelationships(
+            TEntity entity,
+            EntityKey key,
+            EntitySet entitySet,
+            ObjectContext context,
+            MergeOption mergeOption,
+            Type identityType,
+            Func<object, IPropertyAccessorStrategy> propertyStrategy,
+            Func<object, IChangeTrackingStrategy> changeTrackingStrategy,
+            Func<object, IEntityKeyStrategy> keyStrategy
+        )
+            : base(
+                entity,
+                RelationshipManager.Create(),
+                key,
+                entitySet,
+                context,
+                mergeOption,
+                identityType,
+                propertyStrategy,
+                changeTrackingStrategy,
+                keyStrategy
+            ) { }
 
         /// <summary>
         /// Constructs a wrapper for the given entity.
@@ -53,10 +70,19 @@ namespace System.Data.Objects.Internal
         /// <param name="propertyStrategy">A delegate to create the property accesor strategy object</param>
         /// <param name="changeTrackingStrategy">A delegate to create the change tracking strategy object</param>
         /// <param name="keyStrategy">A delegate to create the entity key strategy object</param>
-        internal EntityWrapperWithoutRelationships(TEntity entity, Func<object, IPropertyAccessorStrategy> propertyStrategy, Func<object, IChangeTrackingStrategy> changeTrackingStrategy, Func<object, IEntityKeyStrategy> keyStrategy)
-            : base(entity, RelationshipManager.Create(), propertyStrategy, changeTrackingStrategy, keyStrategy)
-        {
-        }
+        internal EntityWrapperWithoutRelationships(
+            TEntity entity,
+            Func<object, IPropertyAccessorStrategy> propertyStrategy,
+            Func<object, IChangeTrackingStrategy> changeTrackingStrategy,
+            Func<object, IEntityKeyStrategy> keyStrategy
+        )
+            : base(
+                entity,
+                RelationshipManager.Create(),
+                propertyStrategy,
+                changeTrackingStrategy,
+                keyStrategy
+            ) { }
 
         public override bool OwnsRelationshipManager
         {
@@ -99,12 +125,29 @@ namespace System.Data.Objects.Internal
         /// <param name="propertyStrategy">A delegate to create the property accesor strategy object</param>
         /// <param name="changeTrackingStrategy">A delegate to create the change tracking strategy object</param>
         /// <param name="keyStrategy">A delegate to create the entity key strategy object</param>
-        internal EntityWrapperWithRelationships(TEntity entity, EntityKey key, EntitySet entitySet, ObjectContext context, MergeOption mergeOption, Type identityType,
-                                                Func<object, IPropertyAccessorStrategy> propertyStrategy, Func<object, IChangeTrackingStrategy> changeTrackingStrategy, Func<object, IEntityKeyStrategy> keyStrategy)
-            : base(entity, entity.RelationshipManager, key, entitySet, context, mergeOption, identityType,
-                   propertyStrategy, changeTrackingStrategy, keyStrategy)
-        {
-        }
+        internal EntityWrapperWithRelationships(
+            TEntity entity,
+            EntityKey key,
+            EntitySet entitySet,
+            ObjectContext context,
+            MergeOption mergeOption,
+            Type identityType,
+            Func<object, IPropertyAccessorStrategy> propertyStrategy,
+            Func<object, IChangeTrackingStrategy> changeTrackingStrategy,
+            Func<object, IEntityKeyStrategy> keyStrategy
+        )
+            : base(
+                entity,
+                entity.RelationshipManager,
+                key,
+                entitySet,
+                context,
+                mergeOption,
+                identityType,
+                propertyStrategy,
+                changeTrackingStrategy,
+                keyStrategy
+            ) { }
 
         /// <summary>
         /// Constructs a wrapper for the given entity.
@@ -114,19 +157,26 @@ namespace System.Data.Objects.Internal
         /// <param name="propertyStrategy">A delegate to create the property accesor strategy object</param>
         /// <param name="changeTrackingStrategy">A delegate to create the change tracking strategy object</param>
         /// <param name="keyStrategy">A delegate to create the entity key strategy object</param>
-        internal EntityWrapperWithRelationships(TEntity entity, Func<object, IPropertyAccessorStrategy> propertyStrategy, Func<object, IChangeTrackingStrategy> changeTrackingStrategy, Func<object, IEntityKeyStrategy> keyStrategy)
-            : base(entity, entity.RelationshipManager, propertyStrategy, changeTrackingStrategy, keyStrategy)
-        {
-        }
+        internal EntityWrapperWithRelationships(
+            TEntity entity,
+            Func<object, IPropertyAccessorStrategy> propertyStrategy,
+            Func<object, IChangeTrackingStrategy> changeTrackingStrategy,
+            Func<object, IEntityKeyStrategy> keyStrategy
+        )
+            : base(
+                entity,
+                entity.RelationshipManager,
+                propertyStrategy,
+                changeTrackingStrategy,
+                keyStrategy
+            ) { }
 
         public override bool OwnsRelationshipManager
         {
             get { return true; }
         }
 
-        public override void TakeSnapshotOfRelationships(EntityEntry entry)
-        {
-        }
+        public override void TakeSnapshotOfRelationships(EntityEntry entry) { }
 
         // See IEntityWrapper documentation
         public override bool RequiresRelationshipChangeTracking
@@ -158,8 +208,13 @@ namespace System.Data.Objects.Internal
         /// <param name="propertyStrategy">A delegate to create the property accesor strategy object</param>
         /// <param name="changeTrackingStrategy">A delegate to create the change tracking strategy object</param>
         /// <param name="keyStrategy">A delegate to create the entity key strategy object</param>
-        protected EntityWrapper(TEntity entity, RelationshipManager relationshipManager,
-                               Func<object, IPropertyAccessorStrategy> propertyStrategy, Func<object, IChangeTrackingStrategy> changeTrackingStrategy, Func<object, IEntityKeyStrategy> keyStrategy)
+        protected EntityWrapper(
+            TEntity entity,
+            RelationshipManager relationshipManager,
+            Func<object, IPropertyAccessorStrategy> propertyStrategy,
+            Func<object, IChangeTrackingStrategy> changeTrackingStrategy,
+            Func<object, IEntityKeyStrategy> keyStrategy
+        )
             : base(entity, relationshipManager)
         {
             if (relationshipManager == null)
@@ -170,7 +225,10 @@ namespace System.Data.Objects.Internal
             _propertyStrategy = propertyStrategy(entity);
             _changeTrackingStrategy = changeTrackingStrategy(entity);
             _keyStrategy = keyStrategy(entity);
-            Debug.Assert(_changeTrackingStrategy != null, "Change tracking strategy cannot be null.");
+            Debug.Assert(
+                _changeTrackingStrategy != null,
+                "Change tracking strategy cannot be null."
+            );
             Debug.Assert(_keyStrategy != null, "Key strategy cannot be null.");
         }
 
@@ -191,8 +249,18 @@ namespace System.Data.Objects.Internal
         /// <param name="propertyStrategy">A delegate to create the property accesor strategy object</param>
         /// <param name="changeTrackingStrategy">A delegate to create the change tracking strategy object</param>
         /// <param name="keyStrategy">A delegate to create the entity key strategy object</param>
-        protected EntityWrapper(TEntity entity, RelationshipManager relationshipManager, EntityKey key, EntitySet set, ObjectContext context, MergeOption mergeOption, Type identityType,
-                               Func<object, IPropertyAccessorStrategy> propertyStrategy, Func<object, IChangeTrackingStrategy> changeTrackingStrategy, Func<object, IEntityKeyStrategy> keyStrategy)
+        protected EntityWrapper(
+            TEntity entity,
+            RelationshipManager relationshipManager,
+            EntityKey key,
+            EntitySet set,
+            ObjectContext context,
+            MergeOption mergeOption,
+            Type identityType,
+            Func<object, IPropertyAccessorStrategy> propertyStrategy,
+            Func<object, IChangeTrackingStrategy> changeTrackingStrategy,
+            Func<object, IEntityKeyStrategy> keyStrategy
+        )
             : base(entity, relationshipManager, set, context, mergeOption, identityType)
         {
             if (relationshipManager == null)
@@ -203,7 +271,10 @@ namespace System.Data.Objects.Internal
             _propertyStrategy = propertyStrategy(entity);
             _changeTrackingStrategy = changeTrackingStrategy(entity);
             _keyStrategy = keyStrategy(entity);
-            Debug.Assert(_changeTrackingStrategy != null, "Change tracking strategy cannot be null.");
+            Debug.Assert(
+                _changeTrackingStrategy != null,
+                "Change tracking strategy cannot be null."
+            );
             Debug.Assert(_keyStrategy != null, "Key strategy cannot be null.");
             _keyStrategy.SetEntityKey(key);
         }
@@ -225,14 +296,8 @@ namespace System.Data.Objects.Internal
         {
             // If no strategy is set, then the key maintained by the wrapper is used,
             // otherwise the request is passed to the strategy.
-            get
-            {
-                return _keyStrategy.GetEntityKey();
-            }
-            set
-            {
-                _keyStrategy.SetEntityKey(value);
-            }
+            get { return _keyStrategy.GetEntityKey(); }
+            set { _keyStrategy.SetEntityKey(value); }
         }
 
         public override EntityKey GetEntityKeyFromEntity()
@@ -250,7 +315,9 @@ namespace System.Data.Objects.Internal
 
         public override bool CollectionRemove(RelatedEnd relatedEnd, object value)
         {
-            return _propertyStrategy != null ? _propertyStrategy.CollectionRemove(relatedEnd, value) : false;
+            return _propertyStrategy != null
+                ? _propertyStrategy.CollectionRemove(relatedEnd, value)
+                : false;
         }
 
         // See IEntityWrapper documentation
@@ -270,7 +337,9 @@ namespace System.Data.Objects.Internal
         // See IEntityWrapper documentation
         public override object GetNavigationPropertyValue(RelatedEnd relatedEnd)
         {
-            return _propertyStrategy != null ? _propertyStrategy.GetNavigationPropertyValue(relatedEnd) : null;
+            return _propertyStrategy != null
+                ? _propertyStrategy.GetNavigationPropertyValue(relatedEnd)
+                : null;
         }
 
         // See IEntityWrapper documentation
@@ -309,7 +378,13 @@ namespace System.Data.Objects.Internal
         }
 
         // See IEntityWrapper documentation
-        public override void SetCurrentValue(EntityEntry entry, StateManagerMemberMetadata member, int ordinal, object target, object value)
+        public override void SetCurrentValue(
+            EntityEntry entry,
+            StateManagerMemberMetadata member,
+            int ordinal,
+            object target,
+            object value
+        )
         {
             _changeTrackingStrategy.SetCurrentValue(entry, member, ordinal, target, value);
         }

@@ -7,14 +7,32 @@ using System.Security.Permissions;
 namespace System.Data.SqlClient
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class SqlClientPermission : DBDataPermission
     {
-        public SqlClientPermission() : base(default(PermissionState)) { }
-        public SqlClientPermission(PermissionState state) : base(default(PermissionState)) { }
-        public SqlClientPermission(PermissionState state, bool allowBlankPassword) : base(default(PermissionState)) { }
-        public override void Add(string connectionString, string restrictions, KeyRestrictionBehavior behavior) { }
-        public override System.Security.IPermission Copy() { return null; }
+        public SqlClientPermission()
+            : base(default(PermissionState)) { }
+
+        public SqlClientPermission(PermissionState state)
+            : base(default(PermissionState)) { }
+
+        public SqlClientPermission(PermissionState state, bool allowBlankPassword)
+            : base(default(PermissionState)) { }
+
+        public override void Add(
+            string connectionString,
+            string restrictions,
+            KeyRestrictionBehavior behavior
+        ) { }
+
+        public override System.Security.IPermission Copy()
+        {
+            return null;
+        }
     }
 }

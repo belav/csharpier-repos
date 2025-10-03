@@ -13,13 +13,20 @@ namespace System.Text.RegularExpressions.Symbolic
         internal readonly SymbolicRegexMatcher _matcher;
 
         /// <summary>Initializes the factory.</summary>
-        public SymbolicRegexRunnerFactory(RegexTree regexTree, RegexOptions options, TimeSpan matchTimeout)
+        public SymbolicRegexRunnerFactory(
+            RegexTree regexTree,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        )
         {
             Debug.Assert((options & (RegexOptions.RightToLeft | RegexOptions.ECMAScript)) == 0);
 
             var charSetSolver = new CharSetSolver();
             var bddBuilder = new SymbolicRegexBuilder<BDD>(charSetSolver, charSetSolver);
-            var converter = new RegexNodeConverter(bddBuilder, regexTree.CaptureNumberSparseMapping);
+            var converter = new RegexNodeConverter(
+                bddBuilder,
+                regexTree.CaptureNumberSparseMapping
+            );
 
             SymbolicRegexNode<BDD> rootNode = converter.ConvertToSymbolicRegexNode(regexTree.Root);
 
@@ -33,22 +40,40 @@ namespace System.Text.RegularExpressions.Symbolic
                 int size = rootNode.EstimateNfaSize();
                 if (size > threshold)
                 {
-                    throw new NotSupportedException(SR.Format(SR.NotSupported_NonBacktrackingUnsafeSize, size, threshold));
+                    throw new NotSupportedException(
+                        SR.Format(SR.NotSupported_NonBacktrackingUnsafeSize, size, threshold)
+                    );
                 }
             }
 
             rootNode = rootNode.AddFixedLengthMarkers(bddBuilder);
             BDD[] minterms = rootNode.ComputeMinterms(bddBuilder);
 
-            _matcher = minterms.Length > 64 ?
-                SymbolicRegexMatcher<BitVector>.Create(regexTree.CaptureCount, regexTree.FindOptimizations, bddBuilder, rootNode, new BitVectorSolver(minterms, charSetSolver), matchTimeout) :
-                SymbolicRegexMatcher<ulong>.Create(regexTree.CaptureCount, regexTree.FindOptimizations, bddBuilder, rootNode, new UInt64Solver(minterms, charSetSolver), matchTimeout);
+            _matcher =
+                minterms.Length > 64
+                    ? SymbolicRegexMatcher<BitVector>.Create(
+                        regexTree.CaptureCount,
+                        regexTree.FindOptimizations,
+                        bddBuilder,
+                        rootNode,
+                        new BitVectorSolver(minterms, charSetSolver),
+                        matchTimeout
+                    )
+                    : SymbolicRegexMatcher<ulong>.Create(
+                        regexTree.CaptureCount,
+                        regexTree.FindOptimizations,
+                        bddBuilder,
+                        rootNode,
+                        new UInt64Solver(minterms, charSetSolver),
+                        matchTimeout
+                    );
         }
 
         /// <summary>Creates a <see cref="RegexRunner"/> object.</summary>
-        protected internal override RegexRunner CreateInstance() => _matcher is SymbolicRegexMatcher<ulong> srmUInt64 ?
-            new Runner<ulong>(srmUInt64) :
-            new Runner<BitVector>((SymbolicRegexMatcher<BitVector>)_matcher);
+        protected internal override RegexRunner CreateInstance() =>
+            _matcher is SymbolicRegexMatcher<ulong> srmUInt64
+                ? new Runner<ulong>(srmUInt64)
+                : new Runner<BitVector>((SymbolicRegexMatcher<BitVector>)_matcher);
 
         /// <summary>Runner type produced by this factory.</summary>
         /// <remarks>
@@ -56,11 +81,13 @@ namespace System.Text.RegularExpressions.Symbolic
         /// all runner instances, but the runner itself has state (e.g. for captures, positions, etc.)
         /// and must not be shared between concurrent uses.
         /// </remarks>
-        private sealed class Runner<TSet> : RegexRunner where TSet : IComparable<TSet>, IEquatable<TSet>
+        private sealed class Runner<TSet> : RegexRunner
+            where TSet : IComparable<TSet>, IEquatable<TSet>
         {
             /// <summary>The matching engine.</summary>
             /// <remarks>The matcher is stateless and may be shared by any number of threads executing concurrently.</remarks>
             private readonly SymbolicRegexMatcher<TSet> _matcher;
+
             /// <summary>Runner-specific data to pass to the matching engine.</summary>
             /// <remarks>This state is per runner and is thus only used by one thread at a time.</remarks>
             private readonly SymbolicRegexMatcher<TSet>.PerThreadData _perThreadData;

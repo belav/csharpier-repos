@@ -19,7 +19,8 @@ public readonly struct QueryableJsonProjectionInfo
     /// </summary>
     public QueryableJsonProjectionInfo(
         Dictionary<IProperty, int> propertyIndexMap,
-        List<(JsonProjectionInfo, INavigation)> childrenProjectionInfo)
+        List<(JsonProjectionInfo, INavigation)> childrenProjectionInfo
+    )
     {
         PropertyIndexMap = propertyIndexMap;
         ChildrenProjectionInfo = childrenProjectionInfo;
@@ -47,5 +48,8 @@ public readonly struct QueryableJsonProjectionInfo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </remarks>
-    public IList<(JsonProjectionInfo JsonProjectionInfo, INavigation Navigation)> ChildrenProjectionInfo { get; }
+    public IList<(
+        JsonProjectionInfo JsonProjectionInfo,
+        INavigation Navigation
+    )> ChildrenProjectionInfo { get; }
 }

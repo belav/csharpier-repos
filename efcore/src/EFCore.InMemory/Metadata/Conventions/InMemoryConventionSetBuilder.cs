@@ -25,11 +25,8 @@ public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
     ///     Creates a new <see cref="InMemoryConventionSetBuilder" /> instance.
     /// </summary>
     /// <param name="dependencies">The core dependencies for this service.</param>
-    public InMemoryConventionSetBuilder(
-        ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public InMemoryConventionSetBuilder(ProviderConventionSetBuilderDependencies dependencies)
+        : base(dependencies) { }
 
     /// <inheritdoc />
     public override ConventionSet CreateConventionSet()
@@ -68,7 +65,10 @@ public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
     {
         using var serviceScope = CreateServiceScope();
         using var context = serviceScope.ServiceProvider.GetRequiredService<DbContext>();
-        return new ModelBuilder(ConventionSet.CreateConventionSet(context), context.GetService<ModelDependencies>());
+        return new ModelBuilder(
+            ConventionSet.CreateConventionSet(context),
+            context.GetService<ModelDependencies>()
+        );
     }
 
     private static IServiceScope CreateServiceScope()
@@ -77,8 +77,8 @@ public class InMemoryConventionSetBuilder : ProviderConventionSetBuilder
             .AddEntityFrameworkInMemoryDatabase()
             .AddDbContext<DbContext>(
                 (p, o) =>
-                    o.UseInMemoryDatabase(Guid.NewGuid().ToString())
-                        .UseInternalServiceProvider(p))
+                    o.UseInMemoryDatabase(Guid.NewGuid().ToString()).UseInternalServiceProvider(p)
+            )
             .BuildServiceProvider();
 
         return serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();

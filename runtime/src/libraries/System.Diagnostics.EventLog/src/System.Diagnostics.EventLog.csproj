@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent);$(NetCoreAppMinimum)-windows;$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
-    <TargetFrameworks Condition="'$(NetCoreAppPrevious)' != ''">$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks>
+    <TargetFrameworks Condition="'$(NetCoreAppPrevious)' != ''"
+      >$(TargetFrameworks);$(NetCoreAppPrevious)-windows;$(NetCoreAppPrevious)</TargetFrameworks
+    >
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
     <IsPackable>true</IsPackable>
@@ -10,19 +11,22 @@
 
 Commonly Used Types:
 System.Diagnostics.EventLog</PackageDescription>
-
     <!-- TODO https://github.com/dotnet/runtime/issues/90400: Annotate for nullable reference types -->
     <Nullable>disable</Nullable>
     <NoWarn>$(NoWarn);nullable</NoWarn>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <TargetPlatformIdentifier>$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)'))</TargetPlatformIdentifier>
-    <IsPartialFacadeAssembly Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'">true</IsPartialFacadeAssembly>
-    <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetPlatformIdentifier)' != 'windows'">SR.PlatformNotSupported_EventLog</GeneratePlatformNotSupportedAssemblyMessage>
+    <IsPartialFacadeAssembly
+      Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) == '.NETFramework'"
+      >true</IsPartialFacadeAssembly
+    >
+    <GeneratePlatformNotSupportedAssemblyMessage
+      Condition="'$(IsPartialFacadeAssembly)' != 'true' and '$(TargetPlatformIdentifier)' != 'windows'"
+      >SR.PlatformNotSupported_EventLog</GeneratePlatformNotSupportedAssemblyMessage
+    >
   </PropertyGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="System\Diagnostics\EntryWrittenEventArgs.cs" />
     <Compile Include="System\Diagnostics\EntryWrittenEventHandler.cs" />
@@ -69,74 +73,119 @@ System.Diagnostics.EventLog</PackageDescription>
     <Compile Include="System\Diagnostics\OverflowAction.cs" />
     <Compile Include="System\Diagnostics\SafeEventLogReadHandle.cs" />
     <Compile Include="System\Diagnostics\SafeEventLogWriteHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CloseHandle.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.CloseHandle.cs" />
-    <Compile Include="$(CommonPath)Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs"
-             Link="Common\Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.ClearEventLog.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.ClearEventLog.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.CloseEventLog.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.CloseEventLog.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.DeregisterEventSource.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.DeregisterEventSource.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.GetNumberOfEventLogRecords.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.GetNumberOfEventLogRecords.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.GetOldestEventLogRecord.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.GetOldestEventLogRecord.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.LookupAccountSid.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.LookupAccountSid.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.NotifyChangeEventLog.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.NotifyChangeEventLog.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.OpenEventLog.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.OpenEventLog.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.ReadEventLog.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.ReadEventLog.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.RegisterEventSource.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.RegisterEventSource.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Advapi32\Interop.ReportEvent.cs"
-             Link="Common\Interop\Windows\Advapi32\Interop.ReportEvent.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.Constants.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.Constants.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FormatMessage_SafeLibraryHandle.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.FormatMessage_SafeLibraryHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FreeLibrary.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.FreeLibrary.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.WaitForSingleObject.cs"
-             Link="Common\Interop\Windows\Kernel32\Interop.WaitForSingleObject.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Errors.cs"
-             Link="Common\Interop\Windows\Interop.Errors.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
-             Link="Common\Interop\Windows\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)System\Diagnostics\NetFrameworkUtils.cs"
-             Link="Common\System\Diagnostics\NetFrameworkUtils.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.HRESULT_FROM_WIN32.cs"
-             Link="Common\Interop\Windows\Interop.HRESULT_FROM_WIN32.cs" />
-    <Compile Include="$(CommonPath)System\Obsoletions.cs"
-             Link="Common\System\Obsoletions.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CloseHandle.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.CloseHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs"
+      Link="Common\Microsoft\Win32\SafeHandles\SafeLibraryHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.ClearEventLog.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.ClearEventLog.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.CloseEventLog.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.CloseEventLog.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.DeregisterEventSource.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.DeregisterEventSource.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.GetNumberOfEventLogRecords.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.GetNumberOfEventLogRecords.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.GetOldestEventLogRecord.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.GetOldestEventLogRecord.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.LookupAccountSid.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.LookupAccountSid.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.NotifyChangeEventLog.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.NotifyChangeEventLog.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.OpenEventLog.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.OpenEventLog.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.ReadEventLog.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.ReadEventLog.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.RegisterEventSource.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.RegisterEventSource.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Advapi32\Interop.ReportEvent.cs"
+      Link="Common\Interop\Windows\Advapi32\Interop.ReportEvent.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.Constants.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.Constants.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FormatMessage_SafeLibraryHandle.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.FormatMessage_SafeLibraryHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FreeLibrary.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.FreeLibrary.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.LoadLibraryEx.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.WaitForSingleObject.cs"
+      Link="Common\Interop\Windows\Kernel32\Interop.WaitForSingleObject.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Errors.cs"
+      Link="Common\Interop\Windows\Interop.Errors.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Diagnostics\NetFrameworkUtils.cs"
+      Link="Common\System\Diagnostics\NetFrameworkUtils.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.HRESULT_FROM_WIN32.cs"
+      Link="Common\Interop\Windows\Interop.HRESULT_FROM_WIN32.cs"
+    />
+    <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
-    <Compile Include="$(CommonPath)DisableRuntimeMarshalling.cs"
-             Link="Common\DisableRuntimeMarshalling.cs" />
+    <Compile
+      Include="$(CommonPath)DisableRuntimeMarshalling.cs"
+      Link="Common\DisableRuntimeMarshalling.cs"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\DynamicallyAccessedMembersAttribute.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\DynamicallyAccessedMemberTypes.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\UnconditionalSuppressMessageAttribute.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
-    <PackageReference Include="System.Security.Principal.Windows" Version="$(SystemSecurityPrincipalWindowsVersion)" />
+    <PackageReference
+      Include="System.Security.Principal.Windows"
+      Version="$(SystemSecurityPrincipalWindowsVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
-    <ProjectReference Include="Messages\System.Diagnostics.EventLog.Messages.csproj"
-                      ReferenceOutputAssembly="false"
-                      OutputItemType="TfmRuntimeSpecificPackageFile"
-                      PrivateAssets="true" />
+    <ProjectReference
+      Include="Messages\System.Diagnostics.EventLog.Messages.csproj"
+      ReferenceOutputAssembly="false"
+      OutputItemType="TfmRuntimeSpecificPackageFile"
+      PrivateAssets="true"
+    />
   </ItemGroup>
-
 </Project>

@@ -17,8 +17,21 @@ using System.Web.WebPages;
 
 namespace System.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "Class complexity dictated by public surface area")]
-    public abstract class Controller : ControllerBase, IActionFilter, IAuthenticationFilter, IAuthorizationFilter, IDisposable, IExceptionFilter, IResultFilter, IAsyncController, IAsyncManagerContainer
+    [SuppressMessage(
+        "Microsoft.Maintainability",
+        "CA1506:AvoidExcessiveClassCoupling",
+        Justification = "Class complexity dictated by public surface area"
+    )]
+    public abstract class Controller
+        : ControllerBase,
+            IActionFilter,
+            IAuthenticationFilter,
+            IAuthorizationFilter,
+            IDisposable,
+            IExceptionFilter,
+            IResultFilter,
+            IAsyncController,
+            IAsyncManagerContainer
     {
         private static readonly object _executeTag = new object();
         private static readonly object _executeCoreTag = new object();
@@ -34,7 +47,7 @@ namespace System.Web.Mvc
 
         /// <summary>
         /// Represents a replaceable dependency resolver providing services.
-        /// By default, it uses the <see cref="DependencyResolver.CurrentCache"/>. 
+        /// By default, it uses the <see cref="DependencyResolver.CurrentCache"/>.
         /// </summary>
         public IDependencyResolver Resolver
         {
@@ -70,7 +83,11 @@ namespace System.Web.Mvc
             set { _actionInvoker = value; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "Property is settable so that the dictionary can be provided for unit testing purposes.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Property is settable so that the dictionary can be provided for unit testing purposes."
+        )]
         protected internal ModelBinderDictionary Binders
         {
             get
@@ -157,61 +174,94 @@ namespace System.Web.Mvc
             get { return HttpContext == null ? null : HttpContext.User; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This entire type is meant to be mutable.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This entire type is meant to be mutable."
+        )]
         public ViewEngineCollection ViewEngineCollection
         {
             get { return _viewEngineCollection ?? ViewEngines.Engines; }
             set { _viewEngineCollection = value; }
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#", Justification = "'Content' refers to ContentResult type; 'content' refers to ContentResult.Content property.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            MessageId = "0#",
+            Justification = "'Content' refers to ContentResult type; 'content' refers to ContentResult.Content property."
+        )]
         protected internal ContentResult Content(string content)
         {
-            return Content(content, null /* contentType */);
+            return Content(
+                content,
+                null /* contentType */
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#", Justification = "'Content' refers to ContentResult type; 'content' refers to ContentResult.Content property.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            MessageId = "0#",
+            Justification = "'Content' refers to ContentResult type; 'content' refers to ContentResult.Content property."
+        )]
         protected internal ContentResult Content(string content, string contentType)
         {
-            return Content(content, contentType, null /* contentEncoding */);
+            return Content(
+                content,
+                contentType,
+                null /* contentEncoding */
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#", Justification = "'Content' refers to ContentResult type; 'content' refers to ContentResult.Content property.")]
-        protected internal virtual ContentResult Content(string content, string contentType, Encoding contentEncoding)
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            MessageId = "0#",
+            Justification = "'Content' refers to ContentResult type; 'content' refers to ContentResult.Content property."
+        )]
+        protected internal virtual ContentResult Content(
+            string content,
+            string contentType,
+            Encoding contentEncoding
+        )
         {
             return new ContentResult
             {
                 Content = content,
                 ContentType = contentType,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
         }
 
         protected virtual IActionInvoker CreateActionInvoker()
         {
-            // Controller supports asynchronous operations by default. 
+            // Controller supports asynchronous operations by default.
             // Those factories can be customized in order to create an action invoker for each request.
-            IAsyncActionInvokerFactory asyncActionInvokerFactory = Resolver.GetService<IAsyncActionInvokerFactory>();
+            IAsyncActionInvokerFactory asyncActionInvokerFactory =
+                Resolver.GetService<IAsyncActionInvokerFactory>();
             if (asyncActionInvokerFactory != null)
             {
                 return asyncActionInvokerFactory.CreateInstance();
             }
-            IActionInvokerFactory actionInvokerFactory = Resolver.GetService<IActionInvokerFactory>();
+            IActionInvokerFactory actionInvokerFactory =
+                Resolver.GetService<IActionInvokerFactory>();
             if (actionInvokerFactory != null)
             {
                 return actionInvokerFactory.CreateInstance();
             }
 
             // Note that getting a service from the current cache will return the same instance for every request.
-            return Resolver.GetService<IAsyncActionInvoker>() ??
-                Resolver.GetService<IActionInvoker>() ??
-                new AsyncControllerActionInvoker();
+            return Resolver.GetService<IAsyncActionInvoker>()
+                ?? Resolver.GetService<IActionInvoker>()
+                ?? new AsyncControllerActionInvoker();
         }
 
         protected virtual ITempDataProvider CreateTempDataProvider()
         {
             // The factory can be customized in order to create an ITempDataProvider for the controller.
-            ITempDataProviderFactory tempDataProviderFactory = Resolver.GetService<ITempDataProviderFactory>();
+            ITempDataProviderFactory tempDataProviderFactory =
+                Resolver.GetService<ITempDataProviderFactory>();
             if (tempDataProviderFactory != null)
             {
                 return tempDataProviderFactory.CreateInstance();
@@ -227,13 +277,13 @@ namespace System.Web.Mvc
         // [NonAction].
         public void Dispose()
         {
-            Dispose(true /* disposing */);
+            Dispose(
+                true /* disposing */
+            );
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         protected override void ExecuteCore()
         {
@@ -257,32 +307,65 @@ namespace System.Web.Mvc
 
         protected internal FileContentResult File(byte[] fileContents, string contentType)
         {
-            return File(fileContents, contentType, null /* fileDownloadName */);
+            return File(
+                fileContents,
+                contentType,
+                null /* fileDownloadName */
+            );
         }
 
-        protected internal virtual FileContentResult File(byte[] fileContents, string contentType, string fileDownloadName)
+        protected internal virtual FileContentResult File(
+            byte[] fileContents,
+            string contentType,
+            string fileDownloadName
+        )
         {
-            return new FileContentResult(fileContents, contentType) { FileDownloadName = fileDownloadName };
+            return new FileContentResult(fileContents, contentType)
+            {
+                FileDownloadName = fileDownloadName,
+            };
         }
 
         protected internal FileStreamResult File(Stream fileStream, string contentType)
         {
-            return File(fileStream, contentType, null /* fileDownloadName */);
+            return File(
+                fileStream,
+                contentType,
+                null /* fileDownloadName */
+            );
         }
 
-        protected internal virtual FileStreamResult File(Stream fileStream, string contentType, string fileDownloadName)
+        protected internal virtual FileStreamResult File(
+            Stream fileStream,
+            string contentType,
+            string fileDownloadName
+        )
         {
-            return new FileStreamResult(fileStream, contentType) { FileDownloadName = fileDownloadName };
+            return new FileStreamResult(fileStream, contentType)
+            {
+                FileDownloadName = fileDownloadName,
+            };
         }
 
         protected internal FilePathResult File(string fileName, string contentType)
         {
-            return File(fileName, contentType, null /* fileDownloadName */);
+            return File(
+                fileName,
+                contentType,
+                null /* fileDownloadName */
+            );
         }
 
-        protected internal virtual FilePathResult File(string fileName, string contentType, string fileDownloadName)
+        protected internal virtual FilePathResult File(
+            string fileName,
+            string contentType,
+            string fileDownloadName
+        )
         {
-            return new FilePathResult(fileName, contentType) { FileDownloadName = fileDownloadName };
+            return new FilePathResult(fileName, contentType)
+            {
+                FileDownloadName = fileDownloadName,
+            };
         }
 
         private static string GetActionName(RouteData routeData)
@@ -307,13 +390,26 @@ namespace System.Web.Mvc
             // If this is a direct route we might not yet have an action name
             if (String.IsNullOrEmpty(actionName))
             {
-                throw new HttpException(404, String.Format(CultureInfo.CurrentCulture,
-                                           MvcResources.Controller_UnknownAction_NoActionName, GetType().FullName));
+                throw new HttpException(
+                    404,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.Controller_UnknownAction_NoActionName,
+                        GetType().FullName
+                    )
+                );
             }
             else
             {
-                throw new HttpException(404, String.Format(CultureInfo.CurrentCulture,
-                                                           MvcResources.Controller_UnknownAction, actionName, GetType().FullName));
+                throw new HttpException(
+                    404,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.Controller_UnknownAction,
+                        actionName,
+                        GetType().FullName
+                    )
+                );
             }
         }
 
@@ -334,37 +430,76 @@ namespace System.Web.Mvc
 
         protected internal JsonResult Json(object data)
         {
-            return Json(data, null /* contentType */, null /* contentEncoding */, JsonRequestBehavior.DenyGet);
+            return Json(
+                data,
+                null /* contentType */
+                ,
+                null /* contentEncoding */
+                ,
+                JsonRequestBehavior.DenyGet
+            );
         }
 
         protected internal JsonResult Json(object data, string contentType)
         {
-            return Json(data, contentType, null /* contentEncoding */, JsonRequestBehavior.DenyGet);
+            return Json(
+                data,
+                contentType,
+                null /* contentEncoding */
+                ,
+                JsonRequestBehavior.DenyGet
+            );
         }
 
-        protected internal virtual JsonResult Json(object data, string contentType, Encoding contentEncoding)
+        protected internal virtual JsonResult Json(
+            object data,
+            string contentType,
+            Encoding contentEncoding
+        )
         {
             return Json(data, contentType, contentEncoding, JsonRequestBehavior.DenyGet);
         }
 
         protected internal JsonResult Json(object data, JsonRequestBehavior behavior)
         {
-            return Json(data, null /* contentType */, null /* contentEncoding */, behavior);
+            return Json(
+                data,
+                null /* contentType */
+                ,
+                null /* contentEncoding */
+                ,
+                behavior
+            );
         }
 
-        protected internal JsonResult Json(object data, string contentType, JsonRequestBehavior behavior)
+        protected internal JsonResult Json(
+            object data,
+            string contentType,
+            JsonRequestBehavior behavior
+        )
         {
-            return Json(data, contentType, null /* contentEncoding */, behavior);
+            return Json(
+                data,
+                contentType,
+                null /* contentEncoding */
+                ,
+                behavior
+            );
         }
 
-        protected internal virtual JsonResult Json(object data, string contentType, Encoding contentEncoding, JsonRequestBehavior behavior)
+        protected internal virtual JsonResult Json(
+            object data,
+            string contentType,
+            Encoding contentEncoding,
+            JsonRequestBehavior behavior
+        )
         {
             return new JsonResult
             {
                 Data = data,
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
-                JsonRequestBehavior = behavior
+                JsonRequestBehavior = behavior,
             };
         }
 
@@ -374,51 +509,48 @@ namespace System.Web.Mvc
             Url = new UrlHelper(requestContext);
         }
 
-        protected virtual void OnActionExecuting(ActionExecutingContext filterContext)
-        {
-        }
+        protected virtual void OnActionExecuting(ActionExecutingContext filterContext) { }
 
-        protected virtual void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-        }
+        protected virtual void OnActionExecuted(ActionExecutedContext filterContext) { }
 
-        protected virtual void OnAuthentication(AuthenticationContext filterContext)
-        {
-        }
+        protected virtual void OnAuthentication(AuthenticationContext filterContext) { }
 
-        protected virtual void OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
-        {
-        }
+        protected virtual void OnAuthenticationChallenge(
+            AuthenticationChallengeContext filterContext
+        ) { }
 
-        protected virtual void OnAuthorization(AuthorizationContext filterContext)
-        {
-        }
+        protected virtual void OnAuthorization(AuthorizationContext filterContext) { }
 
-        protected virtual void OnException(ExceptionContext filterContext)
-        {
-        }
+        protected virtual void OnException(ExceptionContext filterContext) { }
 
-        protected virtual void OnResultExecuted(ResultExecutedContext filterContext)
-        {
-        }
+        protected virtual void OnResultExecuted(ResultExecutedContext filterContext) { }
 
-        protected virtual void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-        }
+        protected virtual void OnResultExecuting(ResultExecutingContext filterContext) { }
 
         protected internal PartialViewResult PartialView()
         {
-            return PartialView(null /* viewName */, null /* model */);
+            return PartialView(
+                null /* viewName */
+                ,
+                null /* model */
+            );
         }
 
         protected internal PartialViewResult PartialView(object model)
         {
-            return PartialView(null /* viewName */, model);
+            return PartialView(
+                null /* viewName */
+                ,
+                model
+            );
         }
 
         protected internal PartialViewResult PartialView(string viewName)
         {
-            return PartialView(viewName, null /* model */);
+            return PartialView(
+                viewName,
+                null /* model */
+            );
         }
 
         protected internal virtual PartialViewResult PartialView(string viewName, object model)
@@ -433,7 +565,7 @@ namespace System.Web.Mvc
                 ViewName = viewName,
                 ViewData = ViewData,
                 TempData = TempData,
-                ViewEngineCollection = ViewEngineCollection
+                ViewEngineCollection = ViewEngineCollection,
             };
         }
 
@@ -453,7 +585,12 @@ namespace System.Web.Mvc
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Response.Redirect() takes its URI as a string parameter.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#",
+            Justification = "Response.Redirect() takes its URI as a string parameter."
+        )]
         protected internal virtual RedirectResult Redirect(string url)
         {
             if (String.IsNullOrEmpty(url))
@@ -464,7 +601,12 @@ namespace System.Web.Mvc
             return new RedirectResult(url);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#", Justification = "Response.RedirectPermanent() takes its URI as a string parameter.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#",
+            Justification = "Response.RedirectPermanent() takes its URI as a string parameter."
+        )]
         protected internal virtual RedirectResult RedirectPermanent(string url)
         {
             if (String.IsNullOrEmpty(url))
@@ -480,37 +622,75 @@ namespace System.Web.Mvc
             return RedirectToAction(actionName, (RouteValueDictionary)null);
         }
 
-        protected internal RedirectToRouteResult RedirectToAction(string actionName, object routeValues)
+        protected internal RedirectToRouteResult RedirectToAction(
+            string actionName,
+            object routeValues
+        )
         {
             return RedirectToAction(actionName, TypeHelper.ObjectToDictionary(routeValues));
         }
 
-        protected internal RedirectToRouteResult RedirectToAction(string actionName, RouteValueDictionary routeValues)
+        protected internal RedirectToRouteResult RedirectToAction(
+            string actionName,
+            RouteValueDictionary routeValues
+        )
         {
-            return RedirectToAction(actionName, null /* controllerName */, routeValues);
+            return RedirectToAction(
+                actionName,
+                null /* controllerName */
+                ,
+                routeValues
+            );
         }
 
-        protected internal RedirectToRouteResult RedirectToAction(string actionName, string controllerName)
+        protected internal RedirectToRouteResult RedirectToAction(
+            string actionName,
+            string controllerName
+        )
         {
             return RedirectToAction(actionName, controllerName, (RouteValueDictionary)null);
         }
 
-        protected internal RedirectToRouteResult RedirectToAction(string actionName, string controllerName, object routeValues)
+        protected internal RedirectToRouteResult RedirectToAction(
+            string actionName,
+            string controllerName,
+            object routeValues
+        )
         {
-            return RedirectToAction(actionName, controllerName, TypeHelper.ObjectToDictionary(routeValues));
+            return RedirectToAction(
+                actionName,
+                controllerName,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        protected internal virtual RedirectToRouteResult RedirectToAction(string actionName, string controllerName, RouteValueDictionary routeValues)
+        protected internal virtual RedirectToRouteResult RedirectToAction(
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues
+        )
         {
             RouteValueDictionary mergedRouteValues;
 
             if (RouteData == null)
             {
-                mergedRouteValues = RouteValuesHelpers.MergeRouteValues(actionName, controllerName, null, routeValues, includeImplicitMvcValues: true);
+                mergedRouteValues = RouteValuesHelpers.MergeRouteValues(
+                    actionName,
+                    controllerName,
+                    null,
+                    routeValues,
+                    includeImplicitMvcValues: true
+                );
             }
             else
             {
-                mergedRouteValues = RouteValuesHelpers.MergeRouteValues(actionName, controllerName, RouteData.Values, routeValues, includeImplicitMvcValues: true);
+                mergedRouteValues = RouteValuesHelpers.MergeRouteValues(
+                    actionName,
+                    controllerName,
+                    RouteData.Values,
+                    routeValues,
+                    includeImplicitMvcValues: true
+                );
             }
 
             return new RedirectToRouteResult(mergedRouteValues);
@@ -521,32 +701,71 @@ namespace System.Web.Mvc
             return RedirectToActionPermanent(actionName, (RouteValueDictionary)null);
         }
 
-        protected internal RedirectToRouteResult RedirectToActionPermanent(string actionName, object routeValues)
+        protected internal RedirectToRouteResult RedirectToActionPermanent(
+            string actionName,
+            object routeValues
+        )
         {
-            return RedirectToActionPermanent(actionName, TypeHelper.ObjectToDictionary(routeValues));
+            return RedirectToActionPermanent(
+                actionName,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        protected internal RedirectToRouteResult RedirectToActionPermanent(string actionName, RouteValueDictionary routeValues)
+        protected internal RedirectToRouteResult RedirectToActionPermanent(
+            string actionName,
+            RouteValueDictionary routeValues
+        )
         {
-            return RedirectToActionPermanent(actionName, null /* controllerName */, routeValues);
+            return RedirectToActionPermanent(
+                actionName,
+                null /* controllerName */
+                ,
+                routeValues
+            );
         }
 
-        protected internal RedirectToRouteResult RedirectToActionPermanent(string actionName, string controllerName)
+        protected internal RedirectToRouteResult RedirectToActionPermanent(
+            string actionName,
+            string controllerName
+        )
         {
-            return RedirectToActionPermanent(actionName, controllerName, (RouteValueDictionary)null);
+            return RedirectToActionPermanent(
+                actionName,
+                controllerName,
+                (RouteValueDictionary)null
+            );
         }
 
-        protected internal RedirectToRouteResult RedirectToActionPermanent(string actionName, string controllerName, object routeValues)
+        protected internal RedirectToRouteResult RedirectToActionPermanent(
+            string actionName,
+            string controllerName,
+            object routeValues
+        )
         {
-            return RedirectToActionPermanent(actionName, controllerName, TypeHelper.ObjectToDictionary(routeValues));
+            return RedirectToActionPermanent(
+                actionName,
+                controllerName,
+                TypeHelper.ObjectToDictionary(routeValues)
+            );
         }
 
-        protected internal virtual RedirectToRouteResult RedirectToActionPermanent(string actionName, string controllerName, RouteValueDictionary routeValues)
+        protected internal virtual RedirectToRouteResult RedirectToActionPermanent(
+            string actionName,
+            string controllerName,
+            RouteValueDictionary routeValues
+        )
         {
-            RouteValueDictionary implicitRouteValues = (RouteData != null) ? RouteData.Values : null;
+            RouteValueDictionary implicitRouteValues =
+                (RouteData != null) ? RouteData.Values : null;
 
-            RouteValueDictionary mergedRouteValues =
-                RouteValuesHelpers.MergeRouteValues(actionName, controllerName, implicitRouteValues, routeValues, includeImplicitMvcValues: true);
+            RouteValueDictionary mergedRouteValues = RouteValuesHelpers.MergeRouteValues(
+                actionName,
+                controllerName,
+                implicitRouteValues,
+                routeValues,
+                includeImplicitMvcValues: true
+            );
 
             return new RedirectToRouteResult(null, mergedRouteValues, permanent: true);
         }
@@ -558,7 +777,11 @@ namespace System.Web.Mvc
 
         protected internal RedirectToRouteResult RedirectToRoute(RouteValueDictionary routeValues)
         {
-            return RedirectToRoute(null /* routeName */, routeValues);
+            return RedirectToRoute(
+                null /* routeName */
+                ,
+                routeValues
+            );
         }
 
         protected internal RedirectToRouteResult RedirectToRoute(string routeName)
@@ -566,14 +789,23 @@ namespace System.Web.Mvc
             return RedirectToRoute(routeName, (RouteValueDictionary)null);
         }
 
-        protected internal RedirectToRouteResult RedirectToRoute(string routeName, object routeValues)
+        protected internal RedirectToRouteResult RedirectToRoute(
+            string routeName,
+            object routeValues
+        )
         {
             return RedirectToRoute(routeName, TypeHelper.ObjectToDictionary(routeValues));
         }
 
-        protected internal virtual RedirectToRouteResult RedirectToRoute(string routeName, RouteValueDictionary routeValues)
+        protected internal virtual RedirectToRouteResult RedirectToRoute(
+            string routeName,
+            RouteValueDictionary routeValues
+        )
         {
-            return new RedirectToRouteResult(routeName, RouteValuesHelpers.GetRouteValues(routeValues));
+            return new RedirectToRouteResult(
+                routeName,
+                RouteValuesHelpers.GetRouteValues(routeValues)
+            );
         }
 
         protected internal RedirectToRouteResult RedirectToRoutePermanent(object routeValues)
@@ -581,9 +813,15 @@ namespace System.Web.Mvc
             return RedirectToRoutePermanent(TypeHelper.ObjectToDictionary(routeValues));
         }
 
-        protected internal RedirectToRouteResult RedirectToRoutePermanent(RouteValueDictionary routeValues)
+        protected internal RedirectToRouteResult RedirectToRoutePermanent(
+            RouteValueDictionary routeValues
+        )
         {
-            return RedirectToRoutePermanent(null /* routeName */, routeValues);
+            return RedirectToRoutePermanent(
+                null /* routeName */
+                ,
+                routeValues
+            );
         }
 
         protected internal RedirectToRouteResult RedirectToRoutePermanent(string routeName)
@@ -591,62 +829,116 @@ namespace System.Web.Mvc
             return RedirectToRoutePermanent(routeName, (RouteValueDictionary)null);
         }
 
-        protected internal RedirectToRouteResult RedirectToRoutePermanent(string routeName, object routeValues)
+        protected internal RedirectToRouteResult RedirectToRoutePermanent(
+            string routeName,
+            object routeValues
+        )
         {
             return RedirectToRoutePermanent(routeName, TypeHelper.ObjectToDictionary(routeValues));
         }
 
-        protected internal virtual RedirectToRouteResult RedirectToRoutePermanent(string routeName, RouteValueDictionary routeValues)
+        protected internal virtual RedirectToRouteResult RedirectToRoutePermanent(
+            string routeName,
+            RouteValueDictionary routeValues
+        )
         {
-            return new RedirectToRouteResult(routeName, RouteValuesHelpers.GetRouteValues(routeValues), permanent: true);
+            return new RedirectToRouteResult(
+                routeName,
+                RouteValuesHelpers.GetRouteValues(routeValues),
+                permanent: true
+            );
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(TModel model)
+            where TModel : class
         {
             return TryUpdateModel(model, null, null, null, ValueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string prefix) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(TModel model, string prefix)
+            where TModel : class
         {
             return TryUpdateModel(model, prefix, null, null, ValueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string[] includeProperties) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(TModel model, string[] includeProperties)
+            where TModel : class
         {
             return TryUpdateModel(model, null, includeProperties, null, ValueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, prefix, includeProperties, null, ValueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties,
+            string[] excludeProperties
+        )
+            where TModel : class
         {
-            return TryUpdateModel(model, prefix, includeProperties, excludeProperties, ValueProvider);
+            return TryUpdateModel(
+                model,
+                prefix,
+                includeProperties,
+                excludeProperties,
+                ValueProvider
+            );
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, IValueProvider valueProvider) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(TModel model, IValueProvider valueProvider)
+            where TModel : class
         {
             return TryUpdateModel(model, null, null, null, valueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string prefix, IValueProvider valueProvider) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, prefix, null, null, valueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string[] includeProperties, IValueProvider valueProvider) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(
+            TModel model,
+            string[] includeProperties,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, null, includeProperties, null, valueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, IValueProvider valueProvider) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, prefix, includeProperties, null, valueProvider);
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties, IValueProvider valueProvider) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties,
+            string[] excludeProperties,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
             if (model == null)
             {
@@ -657,16 +949,20 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("valueProvider");
             }
 
-            Predicate<string> propertyFilter = propertyName => BindAttribute.IsPropertyAllowed(propertyName, includeProperties, excludeProperties);
+            Predicate<string> propertyFilter = propertyName =>
+                BindAttribute.IsPropertyAllowed(propertyName, includeProperties, excludeProperties);
             IModelBinder binder = Binders.GetBinder(typeof(TModel));
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, typeof(TModel)),
+                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => model,
+                    typeof(TModel)
+                ),
                 ModelName = prefix,
                 ModelState = ModelState,
                 PropertyFilter = propertyFilter,
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
             binder.BindModel(ControllerContext, bindingContext);
             return ModelState.IsValid;
@@ -674,7 +970,10 @@ namespace System.Web.Mvc
 
         protected internal bool TryValidateModel(object model)
         {
-            return TryValidateModel(model, null /* prefix */);
+            return TryValidateModel(
+                model,
+                null /* prefix */
+            );
         }
 
         protected internal bool TryValidateModel(object model, string prefix)
@@ -684,75 +983,135 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("model");
             }
 
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, model.GetType());
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                model.GetType()
+            );
 
-            foreach (ModelValidationResult validationResult in ModelValidator.GetModelValidator(metadata, ControllerContext).Validate(null))
+            foreach (
+                ModelValidationResult validationResult in ModelValidator
+                    .GetModelValidator(metadata, ControllerContext)
+                    .Validate(null)
+            )
             {
-                ModelState.AddModelError(DefaultModelBinder.CreateSubPropertyName(prefix, validationResult.MemberName), validationResult.Message);
+                ModelState.AddModelError(
+                    DefaultModelBinder.CreateSubPropertyName(prefix, validationResult.MemberName),
+                    validationResult.Message
+                );
             }
 
             return ModelState.IsValid;
         }
 
-        protected internal void UpdateModel<TModel>(TModel model) where TModel : class
+        protected internal void UpdateModel<TModel>(TModel model)
+            where TModel : class
         {
             UpdateModel(model, null, null, null, ValueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string prefix) where TModel : class
+        protected internal void UpdateModel<TModel>(TModel model, string prefix)
+            where TModel : class
         {
             UpdateModel(model, prefix, null, null, ValueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string[] includeProperties) where TModel : class
+        protected internal void UpdateModel<TModel>(TModel model, string[] includeProperties)
+            where TModel : class
         {
             UpdateModel(model, null, includeProperties, null, ValueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string prefix, string[] includeProperties) where TModel : class
+        protected internal void UpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, includeProperties, null, ValueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) where TModel : class
+        protected internal void UpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties,
+            string[] excludeProperties
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, includeProperties, excludeProperties, ValueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, IValueProvider valueProvider) where TModel : class
+        protected internal void UpdateModel<TModel>(TModel model, IValueProvider valueProvider)
+            where TModel : class
         {
             UpdateModel(model, null, null, null, valueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string prefix, IValueProvider valueProvider) where TModel : class
+        protected internal void UpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, null, null, valueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string[] includeProperties, IValueProvider valueProvider) where TModel : class
+        protected internal void UpdateModel<TModel>(
+            TModel model,
+            string[] includeProperties,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
             UpdateModel(model, null, includeProperties, null, valueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, IValueProvider valueProvider) where TModel : class
+        protected internal void UpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, includeProperties, null, valueProvider);
         }
 
-        protected internal void UpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties, IValueProvider valueProvider) where TModel : class
+        protected internal void UpdateModel<TModel>(
+            TModel model,
+            string prefix,
+            string[] includeProperties,
+            string[] excludeProperties,
+            IValueProvider valueProvider
+        )
+            where TModel : class
         {
-            bool success = TryUpdateModel(model, prefix, includeProperties, excludeProperties, valueProvider);
+            bool success = TryUpdateModel(
+                model,
+                prefix,
+                includeProperties,
+                excludeProperties,
+                valueProvider
+            );
             if (!success)
             {
-                string message = String.Format(CultureInfo.CurrentCulture, MvcResources.Controller_UpdateModel_UpdateUnsuccessful,
-                                               typeof(TModel).FullName);
+                string message = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.Controller_UpdateModel_UpdateUnsuccessful,
+                    typeof(TModel).FullName
+                );
                 throw new InvalidOperationException(message);
             }
         }
 
         protected internal void ValidateModel(object model)
         {
-            ValidateModel(model, null /* prefix */);
+            ValidateModel(
+                model,
+                null /* prefix */
+            );
         }
 
         protected internal void ValidateModel(object model, string prefix)
@@ -763,7 +1122,9 @@ namespace System.Web.Mvc
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.Controller_Validate_ValidationFailed,
-                        model.GetType().FullName));
+                        model.GetType().FullName
+                    )
+                );
             }
         }
 
@@ -774,7 +1135,13 @@ namespace System.Web.Mvc
 
         protected internal ViewResult View(object model)
         {
-            return View(null /* viewName */, null /* masterName */, model);
+            return View(
+                null /* viewName */
+                ,
+                null /* masterName */
+                ,
+                model
+            );
         }
 
         protected internal ViewResult View(string viewName)
@@ -784,12 +1151,21 @@ namespace System.Web.Mvc
 
         protected internal ViewResult View(string viewName, string masterName)
         {
-            return View(viewName, masterName, null /* model */);
+            return View(
+                viewName,
+                masterName,
+                null /* model */
+            );
         }
 
         protected internal ViewResult View(string viewName, object model)
         {
-            return View(viewName, null /* masterName */, model);
+            return View(
+                viewName,
+                null /* masterName */
+                ,
+                model
+            );
         }
 
         protected internal virtual ViewResult View(string viewName, string masterName, object model)
@@ -805,17 +1181,30 @@ namespace System.Web.Mvc
                 MasterName = masterName,
                 ViewData = ViewData,
                 TempData = TempData,
-                ViewEngineCollection = ViewEngineCollection
+                ViewEngineCollection = ViewEngineCollection,
             };
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#", Justification = "The method name 'View' is a convenient shorthand for 'CreateViewResult'.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            MessageId = "0#",
+            Justification = "The method name 'View' is a convenient shorthand for 'CreateViewResult'."
+        )]
         protected internal ViewResult View(IView view)
         {
-            return View(view, null /* model */);
+            return View(
+                view,
+                null /* model */
+            );
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#", Justification = "The method name 'View' is a convenient shorthand for 'CreateViewResult'.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1719:ParameterNamesShouldNotMatchMemberNames",
+            MessageId = "0#",
+            Justification = "The method name 'View' is a convenient shorthand for 'CreateViewResult'."
+        )]
         protected internal virtual ViewResult View(IView view, object model)
         {
             if (model != null)
@@ -827,11 +1216,15 @@ namespace System.Web.Mvc
             {
                 View = view,
                 ViewData = ViewData,
-                TempData = TempData
+                TempData = TempData,
             };
         }
 
-        IAsyncResult IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        IAsyncResult IAsyncController.BeginExecute(
+            RequestContext requestContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             return BeginExecute(requestContext, callback, state);
         }
@@ -841,7 +1234,11 @@ namespace System.Web.Mvc
             EndExecute(asyncResult);
         }
 
-        protected virtual IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginExecute(
+            RequestContext requestContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (DisableAsyncSupport)
             {
@@ -860,22 +1257,36 @@ namespace System.Web.Mvc
                     throw new ArgumentNullException("requestContext");
                 }
 
-                // Support Asynchronous behavior. 
+                // Support Asynchronous behavior.
                 // Execute/ExecuteCore are no longer called.
 
                 VerifyExecuteCalledOnce();
                 Initialize(requestContext);
 
                 // Ensure delegates continue to use the C# Compiler static delegate caching optimization.
-                BeginInvokeDelegate<Controller> beginDelegate = (AsyncCallback asyncCallback, object callbackState, Controller controller) =>
-                    {
-                        return controller.BeginExecuteCore(asyncCallback, callbackState);
-                    };
-                EndInvokeVoidDelegate<Controller> endDelegate = (IAsyncResult asyncResult, Controller controller) =>
-                    {
-                        controller.EndExecuteCore(asyncResult);
-                    };
-                return AsyncResultWrapper.Begin(callback, state, beginDelegate, endDelegate, this, _executeTag);
+                BeginInvokeDelegate<Controller> beginDelegate = (
+                    AsyncCallback asyncCallback,
+                    object callbackState,
+                    Controller controller
+                ) =>
+                {
+                    return controller.BeginExecuteCore(asyncCallback, callbackState);
+                };
+                EndInvokeVoidDelegate<Controller> endDelegate = (
+                    IAsyncResult asyncResult,
+                    Controller controller
+                ) =>
+                {
+                    controller.EndExecuteCore(asyncResult);
+                };
+                return AsyncResultWrapper.Begin(
+                    callback,
+                    state,
+                    beginDelegate,
+                    endDelegate,
+                    this,
+                    _executeTag
+                );
             }
         }
 
@@ -893,21 +1304,45 @@ namespace System.Web.Mvc
                 {
                     // asynchronous invocation
                     // Ensure delegates continue to use the C# Compiler static delegate caching optimization.
-                    BeginInvokeDelegate<ExecuteCoreState> beginDelegate = delegate(AsyncCallback asyncCallback, object asyncState, ExecuteCoreState innerState)
+                    BeginInvokeDelegate<ExecuteCoreState> beginDelegate = delegate(
+                        AsyncCallback asyncCallback,
+                        object asyncState,
+                        ExecuteCoreState innerState
+                    )
                     {
-                        return innerState.AsyncInvoker.BeginInvokeAction(innerState.Controller.ControllerContext, innerState.ActionName, asyncCallback, asyncState);
+                        return innerState.AsyncInvoker.BeginInvokeAction(
+                            innerState.Controller.ControllerContext,
+                            innerState.ActionName,
+                            asyncCallback,
+                            asyncState
+                        );
                     };
 
-                    EndInvokeVoidDelegate<ExecuteCoreState> endDelegate = delegate(IAsyncResult asyncResult, ExecuteCoreState innerState)
+                    EndInvokeVoidDelegate<ExecuteCoreState> endDelegate = delegate(
+                        IAsyncResult asyncResult,
+                        ExecuteCoreState innerState
+                    )
                     {
                         if (!innerState.AsyncInvoker.EndInvokeAction(asyncResult))
                         {
                             innerState.Controller.HandleUnknownAction(innerState.ActionName);
                         }
                     };
-                    ExecuteCoreState executeState = new ExecuteCoreState() { Controller = this, AsyncInvoker = asyncInvoker, ActionName = actionName };
+                    ExecuteCoreState executeState = new ExecuteCoreState()
+                    {
+                        Controller = this,
+                        AsyncInvoker = asyncInvoker,
+                        ActionName = actionName,
+                    };
 
-                    return AsyncResultWrapper.Begin(callback, state, beginDelegate, endDelegate, executeState, _executeCoreTag);
+                    return AsyncResultWrapper.Begin(
+                        callback,
+                        state,
+                        beginDelegate,
+                        endDelegate,
+                        executeState,
+                        _executeCoreTag
+                    );
                 }
                 else
                 {
@@ -919,7 +1354,12 @@ namespace System.Web.Mvc
                             HandleUnknownAction(actionName);
                         }
                     };
-                    return AsyncResultWrapper.BeginSynchronous(callback, state, action, _executeCoreTag);
+                    return AsyncResultWrapper.BeginSynchronous(
+                        callback,
+                        state,
+                        action,
+                        _executeCoreTag
+                    );
                 }
             }
             catch
@@ -970,7 +1410,9 @@ namespace System.Web.Mvc
             OnAuthentication(filterContext);
         }
 
-        void IAuthenticationFilter.OnAuthenticationChallenge(AuthenticationChallengeContext filterContext)
+        void IAuthenticationFilter.OnAuthenticationChallenge(
+            AuthenticationChallengeContext filterContext
+        )
         {
             OnAuthenticationChallenge(filterContext);
         }

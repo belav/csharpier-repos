@@ -24,13 +24,17 @@ namespace Roslyn.Compilers.Extension
     {
         public static string RoslynHive = null;
 
-        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        protected override async Task InitializeAsync(
+            CancellationToken cancellationToken,
+            IProgress<ServiceProgressData> progress
+        )
         {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
 
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var reg = (ILocalRegistry2)await GetServiceAsync(typeof(SLocalRegistry)).ConfigureAwait(true);
+            var reg = (ILocalRegistry2)
+                await GetServiceAsync(typeof(SLocalRegistry)).ConfigureAwait(true);
             cancellationToken.ThrowIfCancellationRequested();
             Assumes.Present(reg);
 
@@ -40,7 +44,7 @@ namespace Roslyn.Compilers.Extension
             reg.GetLocalRegistryRoot(out localRegistryRoot);
             var registryParts = localRegistryRoot.Split('\\');
 
-            // Is it a valid Hive looks similar to:  
+            // Is it a valid Hive looks similar to:
             //  'Software\Microsoft\VisualStudio\14.0'  'Software\Microsoft\VisualStudio\14.0Roslyn'  'Software\Microsoft\VSWinExpress\14.0'
             if (registryParts.Length >= 4)
             {
@@ -48,28 +52,51 @@ namespace Roslyn.Compilers.Extension
                 var hiveName = registryParts[3];
                 RoslynHive = string.Format(@"{0}.{1}", registryParts[2], registryParts[3]);
 
-                await WriteMSBuildFilesAsync(packagePath, RoslynHive, cancellationToken).ConfigureAwait(true);
+                await WriteMSBuildFilesAsync(packagePath, RoslynHive, cancellationToken)
+                    .ConfigureAwait(true);
 
                 try
                 {
-                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.DisableMarkDirty = true;
-                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.SetGlobalProperty("RoslynHive", RoslynHive);
+                    Microsoft
+                        .Build
+                        .Evaluation
+                        .ProjectCollection
+                        .GlobalProjectCollection
+                        .DisableMarkDirty = true;
+                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.SetGlobalProperty(
+                        "RoslynHive",
+                        RoslynHive
+                    );
                 }
                 finally
                 {
-                    Microsoft.Build.Evaluation.ProjectCollection.GlobalProjectCollection.DisableMarkDirty = false;
+                    Microsoft
+                        .Build
+                        .Evaluation
+                        .ProjectCollection
+                        .GlobalProjectCollection
+                        .DisableMarkDirty = false;
                 }
             }
         }
 
-        private async Task WriteMSBuildFilesAsync(string packagePath, string hiveName, CancellationToken cancellationToken)
+        private async Task WriteMSBuildFilesAsync(
+            string packagePath,
+            string hiveName,
+            CancellationToken cancellationToken
+        )
         {
             // A map of the file name to the content we need to ensure exists in the file
             var filesToWrite = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             // The props we want to be included as early as possible since we want our tasks to be used and
             // to ensure our setting of targets path happens early enough
-            filesToWrite.Add(await GetMSBuildRelativePathAsync($@"Imports\Microsoft.Common.props\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.props", cancellationToken).ConfigureAwait(true),
+            filesToWrite.Add(
+                await GetMSBuildRelativePathAsync(
+                        $@"Imports\Microsoft.Common.props\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.props",
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true),
                 $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <PropertyGroup Condition=""'$(RoslynHive)' == '{hiveName}'"">
@@ -79,11 +106,12 @@ namespace Roslyn.Compilers.Extension
 
   <UsingTask TaskName=""Microsoft.CodeAnalysis.BuildTasks.Csc"" AssemblyFile=""{packagePath}\Microsoft.Build.Tasks.CodeAnalysis.dll"" Condition=""'$(RoslynHive)' == '{hiveName}'"" />
   <UsingTask TaskName=""Microsoft.CodeAnalysis.BuildTasks.Vbc"" AssemblyFile=""{packagePath}\Microsoft.Build.Tasks.CodeAnalysis.dll"" Condition=""'$(RoslynHive)' == '{hiveName}'"" />
-</Project>");
+</Project>"
+            );
 
             // This targets content we want to be included later since the project file might touch UseSharedCompilation
             var targetsContent =
-                    $@"<?xml version=""1.0"" encoding=""utf-8""?>
+                $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
   <!-- If we're not using the compiler server, set ToolPath/Exe to direct to the exes in this package -->
   <PropertyGroup Condition=""'$(RoslynHive)' == '{hiveName}' and '$(UseSharedCompilation)' == 'false'"">
@@ -94,15 +122,36 @@ namespace Roslyn.Compilers.Extension
   </PropertyGroup>
 </Project>";
 
-            filesToWrite.Add(await GetMSBuildRelativePathAsync($@"Microsoft.CSharp.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets", cancellationToken).ConfigureAwait(true), targetsContent);
-            filesToWrite.Add(await GetMSBuildRelativePathAsync($@"Microsoft.VisualBasic.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets", cancellationToken).ConfigureAwait(true), targetsContent);
+            filesToWrite.Add(
+                await GetMSBuildRelativePathAsync(
+                        $@"Microsoft.CSharp.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets",
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true),
+                targetsContent
+            );
+            filesToWrite.Add(
+                await GetMSBuildRelativePathAsync(
+                        $@"Microsoft.VisualBasic.targets\ImportBefore\Roslyn.Compilers.Extension.{hiveName}.targets",
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true),
+                targetsContent
+            );
 
             // First we want to ensure any Roslyn files with our hive name that we aren't writing -- this is probably
             // leftovers from older extensions
-            var msbuildDirectory = new DirectoryInfo(await GetMSBuildPathAsync(cancellationToken).ConfigureAwait(true));
+            var msbuildDirectory = new DirectoryInfo(
+                await GetMSBuildPathAsync(cancellationToken).ConfigureAwait(true)
+            );
             if (msbuildDirectory.Exists)
             {
-                foreach (var file in msbuildDirectory.EnumerateFiles($"*Roslyn*{hiveName}*", SearchOption.AllDirectories))
+                foreach (
+                    var file in msbuildDirectory.EnumerateFiles(
+                        $"*Roslyn*{hiveName}*",
+                        SearchOption.AllDirectories
+                    )
+                )
                 {
                     if (!filesToWrite.ContainsKey(file.FullName))
                     {
@@ -115,11 +164,16 @@ namespace Roslyn.Compilers.Extension
             {
                 foreach (var fileAndContents in filesToWrite)
                 {
-                    var parentDirectory = new DirectoryInfo(Path.GetDirectoryName(fileAndContents.Key));
+                    var parentDirectory = new DirectoryInfo(
+                        Path.GetDirectoryName(fileAndContents.Key)
+                    );
                     parentDirectory.Create();
 
                     // If we already know the file has the same contents, then we can skip
-                    if (File.Exists(fileAndContents.Key) && File.ReadAllText(fileAndContents.Key) == fileAndContents.Value)
+                    if (
+                        File.Exists(fileAndContents.Key)
+                        && File.ReadAllText(fileAndContents.Key) == fileAndContents.Value
+                    )
                     {
                         continue;
                     }
@@ -130,7 +184,7 @@ namespace Roslyn.Compilers.Extension
             catch (Exception e)
             {
                 var msg =
-$@"{e.Message}
+                    $@"{e.Message}
 
 To reload the Roslyn compiler package, close Visual Studio and any MSBuild processes, then restart Visual Studio.";
 
@@ -140,7 +194,8 @@ To reload the Roslyn compiler package, close Visual Studio and any MSBuild proce
                     null,
                     OLEMSGICON.OLEMSGICON_WARNING,
                     OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+                    OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST
+                );
             }
         }
 
@@ -171,14 +226,23 @@ To reload the Roslyn compiler package, close Visual Studio and any MSBuild proce
 
         private async Task<string> GetMSBuildPathAsync(CancellationToken cancellationToken)
         {
-            var version = await GetMSBuildVersionStringAsync(cancellationToken).ConfigureAwait(true);
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var version = await GetMSBuildVersionStringAsync(cancellationToken)
+                .ConfigureAwait(true);
+            var localAppData = Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData
+            );
             return Path.Combine(localAppData, $@"Microsoft\MSBuild\{version}");
         }
 
-        private async Task<string> GetMSBuildRelativePathAsync(string relativePath, CancellationToken cancellationToken)
+        private async Task<string> GetMSBuildRelativePathAsync(
+            string relativePath,
+            CancellationToken cancellationToken
+        )
         {
-            return Path.Combine(await GetMSBuildPathAsync(cancellationToken).ConfigureAwait(true), relativePath);
+            return Path.Combine(
+                await GetMSBuildPathAsync(cancellationToken).ConfigureAwait(true),
+                relativePath
+            );
         }
     }
 }

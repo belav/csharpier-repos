@@ -2,19 +2,19 @@ using System;
 
 class Program
 {
-	public static int Main ()
-	{
-		int x = 1;
-		int y = 2;
+    public static int Main()
+    {
+        int x = 1;
+        int y = 2;
 
-		(x, y) = (y, x);
+        (x, y) = (y, x);
 
-		if (x != 2)
-			return 1;
+        if (x != 2)
+            return 1;
 
-		if (y != 1)
-			return 2;
+        if (y != 1)
+            return 2;
 
-		return 0;
-	}
+        return 0;
+    }
 }

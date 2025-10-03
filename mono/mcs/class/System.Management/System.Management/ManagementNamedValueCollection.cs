@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,59 +34,59 @@ using System.Runtime.Serialization;
 
 namespace System.Management
 {
-	public class ManagementNamedValueCollection : NameObjectCollectionBase
-	{
-		public ManagementNamedValueCollection ()
-		{
-		}
+    public class ManagementNamedValueCollection : NameObjectCollectionBase
+    {
+        public ManagementNamedValueCollection() { }
 
-		protected
-		ManagementNamedValueCollection (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected ManagementNamedValueCollection(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		public void Add (string name, object value)
-		{
-			if (BaseGet (name) != null)
-				BaseRemove (name);
+        public void Add(string name, object value)
+        {
+            if (BaseGet(name) != null)
+                BaseRemove(name);
 
-			BaseAdd (name, value);
-		}
+            BaseAdd(name, value);
+        }
 
-		public ManagementNamedValueCollection Clone ()
-		{
-			ManagementNamedValueCollection result = new ManagementNamedValueCollection ();
-			foreach (string key in Keys) {
-				object value = BaseGet (key);
-				if (value == null) {
-					result.Add (key, value);
-					continue;
-				}
+        public ManagementNamedValueCollection Clone()
+        {
+            ManagementNamedValueCollection result = new ManagementNamedValueCollection();
+            foreach (string key in Keys)
+            {
+                object value = BaseGet(key);
+                if (value == null)
+                {
+                    result.Add(key, value);
+                    continue;
+                }
 
-				if (value is ICloneable) {
-					result.Add (key, ((ICloneable) value).Clone ());
-				} else {
-					result.Add (key, value);
-				}
-			}
+                if (value is ICloneable)
+                {
+                    result.Add(key, ((ICloneable)value).Clone());
+                }
+                else
+                {
+                    result.Add(key, value);
+                }
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public void RemoveAll ()
-		{
-			BaseClear ();
-		}
+        public void RemoveAll()
+        {
+            BaseClear();
+        }
 
-		public object this [string name] {
-			get { return BaseGet (name); }
-		}
-	}
+        public object this[string name]
+        {
+            get { return BaseGet(name); }
+        }
+    }
 }
-

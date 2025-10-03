@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             AnalyzerConfigOptions analyzerConfigOptions,
             FormatOptions formatOptions,
             ILogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return Task.Run(() =>
             {
@@ -38,7 +39,10 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                 for (var lineIndex = 0; lineIndex < newSourceText.Lines.Count; lineIndex++)
                 {
                     var line = newSourceText.Lines[lineIndex];
-                    var lineEndingSpan = new TextSpan(line.End, line.EndIncludingLineBreak - line.End);
+                    var lineEndingSpan = new TextSpan(
+                        line.End,
+                        line.EndIncludingLineBreak - line.End
+                    );
 
                     // Check for end of file
                     if (lineEndingSpan.IsEmpty)
@@ -61,10 +65,15 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             });
         }
 
-        public static bool TryGetEndOfLine(AnalyzerConfigOptions analyzerConfigOptions, [NotNullWhen(true)] out string? endOfLine)
+        public static bool TryGetEndOfLine(
+            AnalyzerConfigOptions analyzerConfigOptions,
+            [NotNullWhen(true)] out string? endOfLine
+        )
         {
-            if (analyzerConfigOptions != null &&
-                analyzerConfigOptions.TryGetValue("end_of_line", out var endOfLineOption))
+            if (
+                analyzerConfigOptions != null
+                && analyzerConfigOptions.TryGetValue("end_of_line", out var endOfLineOption)
+            )
             {
                 endOfLine = GetEndOfLine(endOfLineOption);
                 return true;

@@ -86,7 +86,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return this.Field.GetCustomAttributesData().Select(a => new CustomAttributeDataImpl(a)).ToArray();
+            return this
+                .Field.GetCustomAttributesData()
+                .Select(a => new CustomAttributeDataImpl(a))
+                .ToArray();
         }
 
         public override Type[] GetOptionalCustomModifiers()
@@ -114,7 +117,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             throw new NotImplementedException();
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException();
         }

@@ -8,19 +8,13 @@ namespace System.Web.Mvc
     public class HttpStatusCodeResult : ActionResult
     {
         public HttpStatusCodeResult(int statusCode)
-            : this(statusCode, null)
-        {
-        }
+            : this(statusCode, null) { }
 
         public HttpStatusCodeResult(HttpStatusCode statusCode)
-            : this(statusCode, null)
-        {
-        }
+            : this(statusCode, null) { }
 
         public HttpStatusCodeResult(HttpStatusCode statusCode, string statusDescription)
-            : this((int)statusCode, statusDescription)
-        {
-        }
+            : this((int)statusCode, statusDescription) { }
 
         public HttpStatusCodeResult(int statusCode, string statusDescription)
         {

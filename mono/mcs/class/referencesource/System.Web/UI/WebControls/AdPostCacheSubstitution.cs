@@ -10,35 +10,43 @@
  *
  * Copyright (c) 2002 Microsoft Corporation
  */
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     using System.Globalization;
     using System.IO;
     using System.Web.Util;
 
-    internal class AdPostCacheSubstitution {
+    internal class AdPostCacheSubstitution
+    {
         private AdRotator _adRotatorHelper;
 
-        private AdPostCacheSubstitution() {}
+        private AdPostCacheSubstitution() { }
 
-        internal AdPostCacheSubstitution(AdRotator adRotator) {
+        internal AdPostCacheSubstitution(AdRotator adRotator)
+        {
             _adRotatorHelper = new AdRotator();
             _adRotatorHelper.CopyFrom(adRotator);
             _adRotatorHelper.IsPostCacheAdHelper = true;
             _adRotatorHelper.Page = new Page();
         }
 
-        internal void RegisterPostCacheCallBack(HttpContext context,
-                                                Page page,
-                                                HtmlTextWriter writer) {
+        internal void RegisterPostCacheCallBack(
+            HttpContext context,
+            Page page,
+            HtmlTextWriter writer
+        )
+        {
             // Assumption: called from AdRotator's Render phase
 
-            HttpResponseSubstitutionCallback callback = new HttpResponseSubstitutionCallback(Render);
+            HttpResponseSubstitutionCallback callback = new HttpResponseSubstitutionCallback(
+                Render
+            );
             context.Response.WriteSubstitution(callback);
         }
 
-        internal string Render(HttpContext context) {
-            // 
-
+        internal string Render(HttpContext context)
+        {
+            //
 
             Debug.Assert(_adRotatorHelper != null && _adRotatorHelper.Page != null);
 

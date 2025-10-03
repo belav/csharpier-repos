@@ -18,18 +18,126 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(JustOneNode) { Attribute = new VariationAttribute("Just one node, Comment") { Params = new object[] { "<A attr='1'><!-- commo --></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(JustOneNode) { Attribute = new VariationAttribute("Just one node, cdata") { Params = new object[] { "<A attr='1'><![CDATA[cdata]]></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(JustOneNode) { Attribute = new VariationAttribute("Just one node, element") { Params = new object[] { "<A attr='1'><B/></A>" }, Priority = 0 } });
-            AddChild(new TestVariation(JustOneNode) { Attribute = new VariationAttribute("Just one node, PI") { Params = new object[] { "<A attr='1'><?PI?></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(JustOneNode) { Attribute = new VariationAttribute("Just one node, text") { Params = new object[] { "<A attr='1'>text</A>" }, Priority = 0 } });
-            AddChild(new TestVariation(JustOneNode) { Attribute = new VariationAttribute("Just one node, whitespace") { Params = new object[] { "<A attr='1'> </A>" }, Priority = 1 } });
-            AddChild(new TestVariation(DisconnectedNode) { Attribute = new VariationAttribute("Disconnected node, element") { Params = new object[] { "<A attr='1'><B/></A>" }, Priority = 0 } });
-            AddChild(new TestVariation(DisconnectedNode) { Attribute = new VariationAttribute("Disconnected node, text") { Params = new object[] { "<A attr='1'>text</A>" }, Priority = 0 } });
-            AddChild(new TestVariation(DisconnectedNode) { Attribute = new VariationAttribute("Disconnected node, PI") { Params = new object[] { "<A attr='1'><?PI?></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(DisconnectedNode) { Attribute = new VariationAttribute("Disconnected node, cdata") { Params = new object[] { "<A attr='1'><![CDATA[cdata]]></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(DisconnectedNode) { Attribute = new VariationAttribute("Disconnected node, Comment") { Params = new object[] { "<A attr='1'><!-- commo --></A>" }, Priority = 1 } });
-            AddChild(new TestVariation(DisconnectedNode) { Attribute = new VariationAttribute("Disconnected node, whitespace") { Params = new object[] { "<A attr='1'> </A>" }, Priority = 1 } });
+            AddChild(
+                new TestVariation(JustOneNode)
+                {
+                    Attribute = new VariationAttribute("Just one node, Comment")
+                    {
+                        Params = new object[] { "<A attr='1'><!-- commo --></A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(JustOneNode)
+                {
+                    Attribute = new VariationAttribute("Just one node, cdata")
+                    {
+                        Params = new object[] { "<A attr='1'><![CDATA[cdata]]></A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(JustOneNode)
+                {
+                    Attribute = new VariationAttribute("Just one node, element")
+                    {
+                        Params = new object[] { "<A attr='1'><B/></A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(JustOneNode)
+                {
+                    Attribute = new VariationAttribute("Just one node, PI")
+                    {
+                        Params = new object[] { "<A attr='1'><?PI?></A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(JustOneNode)
+                {
+                    Attribute = new VariationAttribute("Just one node, text")
+                    {
+                        Params = new object[] { "<A attr='1'>text</A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(JustOneNode)
+                {
+                    Attribute = new VariationAttribute("Just one node, whitespace")
+                    {
+                        Params = new object[] { "<A attr='1'> </A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DisconnectedNode)
+                {
+                    Attribute = new VariationAttribute("Disconnected node, element")
+                    {
+                        Params = new object[] { "<A attr='1'><B/></A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DisconnectedNode)
+                {
+                    Attribute = new VariationAttribute("Disconnected node, text")
+                    {
+                        Params = new object[] { "<A attr='1'>text</A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DisconnectedNode)
+                {
+                    Attribute = new VariationAttribute("Disconnected node, PI")
+                    {
+                        Params = new object[] { "<A attr='1'><?PI?></A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DisconnectedNode)
+                {
+                    Attribute = new VariationAttribute("Disconnected node, cdata")
+                    {
+                        Params = new object[] { "<A attr='1'><![CDATA[cdata]]></A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DisconnectedNode)
+                {
+                    Attribute = new VariationAttribute("Disconnected node, Comment")
+                    {
+                        Params = new object[] { "<A attr='1'><!-- commo --></A>" },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(DisconnectedNode)
+                {
+                    Attribute = new VariationAttribute("Disconnected node, whitespace")
+                    {
+                        Params = new object[] { "<A attr='1'> </A>" },
+                        Priority = 1,
+                    },
+                }
+            );
         }
 
         public void DisconnectedNode()

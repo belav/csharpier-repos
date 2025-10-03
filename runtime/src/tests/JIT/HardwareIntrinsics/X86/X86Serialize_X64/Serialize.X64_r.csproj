@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <!-- Would have to translate Illegal instruction to PNSE -->
     <NativeAotIncompatible>true</NativeAotIncompatible>
   </PropertyGroup>

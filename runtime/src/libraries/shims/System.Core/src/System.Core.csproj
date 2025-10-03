@@ -1,10 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <StrongNameKeyId>ECMA</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Collections\src\System.Collections.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.IO.MemoryMappedFiles\src\System.IO.MemoryMappedFiles.csproj" />
@@ -18,8 +16,13 @@
     <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime\src\System.Runtime.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Security.Cryptography\src\System.Security.Cryptography.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Threading\src\System.Threading.csproj" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Diagnostics.EventLog.csproj" PrivateAssets="all" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Diagnostics.PerformanceCounter.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Diagnostics.EventLog.csproj"
+      PrivateAssets="all"
+    />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Diagnostics.PerformanceCounter.csproj"
+      PrivateAssets="all"
+    />
   </ItemGroup>
-
 </Project>

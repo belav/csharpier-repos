@@ -1,5 +1,11 @@
-<Type Name="DataGridViewComboBoxCell+ObjectCollection" FullName="System.Windows.Forms.DataGridViewComboBoxCell+ObjectCollection">
-  <TypeSignature Language="C#" Value="public class DataGridViewComboBoxCell.ObjectCollection : System.Collections.IList" />
+<Type
+  Name="DataGridViewComboBoxCell+ObjectCollection"
+  FullName="System.Windows.Forms.DataGridViewComboBoxCell+ObjectCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class DataGridViewComboBoxCell.ObjectCollection : System.Collections.IList"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -24,7 +30,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ObjectCollection (System.Windows.Forms.DataGridViewComboBoxCell owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ObjectCollection (System.Windows.Forms.DataGridViewComboBoxCell owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.DataGridViewComboBoxCell" />
@@ -85,13 +94,19 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange (System.Windows.Forms.DataGridViewComboBoxCell.ObjectCollection value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange (System.Windows.Forms.DataGridViewComboBoxCell.ObjectCollection value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="value" Type="System.Windows.Forms.DataGridViewComboBoxCell+ObjectCollection" />
+        <Parameter
+          Name="value"
+          Type="System.Windows.Forms.DataGridViewComboBoxCell+ObjectCollection"
+        />
       </Parameters>
       <Docs>
         <param name="value">To be added.</param>
@@ -140,7 +155,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (object[] destination, int arrayIndex);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (object[] destination, int arrayIndex);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -176,7 +194,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GetEnumerator">
-      <MemberSignature Language="C#" Value="public System.Collections.IEnumerator GetEnumerator ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.IEnumerator GetEnumerator ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.IEnumerator</ReturnType>
@@ -308,7 +329,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="System.Collections.ICollection.CopyTo">
-      <MemberSignature Language="C#" Value="void ICollection.CopyTo (Array destination, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="void ICollection.CopyTo (Array destination, int index);"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -328,7 +352,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.IsSynchronized">
-      <MemberSignature Language="C#" Value="bool System.Collections.ICollection.IsSynchronized { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="bool System.Collections.ICollection.IsSynchronized { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -343,7 +370,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.ICollection.SyncRoot">
-      <MemberSignature Language="C#" Value="object System.Collections.ICollection.SyncRoot { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.ICollection.SyncRoot { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

@@ -3,20 +3,25 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class DataAnnotationSqliteTest : DataAnnotationRelationalTestBase<DataAnnotationSqliteTest.DataAnnotationSqliteFixture>
+public class DataAnnotationSqliteTest
+    : DataAnnotationRelationalTestBase<DataAnnotationSqliteTest.DataAnnotationSqliteFixture>
 {
-    public DataAnnotationSqliteTest(DataAnnotationSqliteFixture fixture, ITestOutputHelper testOutputHelper)
+    public DataAnnotationSqliteTest(
+        DataAnnotationSqliteFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-    protected override TestHelpers TestHelpers
-        => SqliteTestHelpers.Instance;
+    protected override TestHelpers TestHelpers => SqliteTestHelpers.Instance;
 
     public override IModel Non_public_annotations_are_enabled()
     {
@@ -126,7 +131,8 @@ RETURNING 1;
 UPDATE "Sample" SET "Name" = @p0, "RowVersion" = @p1
 WHERE "Unique_No" = @p2 AND "RowVersion" = @p3
 RETURNING 1;
-""");
+"""
+        );
     }
 
     public override void DatabaseGeneratedAttribute_autogenerates_values_when_set_to_identity()
@@ -146,39 +152,49 @@ RETURNING 1;
 INSERT INTO "Sample" ("MaxLengthProperty", "Name", "RowVersion", "AdditionalDetails_Name", "AdditionalDetails_Value", "Details_Name", "Details_Value")
 VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6)
 RETURNING "Unique_No";
-""");
+"""
+        );
     }
 
     // Sqlite does not support length
     public override void MaxLengthAttribute_throws_while_inserting_value_longer_than_max_length()
     {
         using var context = CreateContext();
-        Assert.Equal(10, context.Model.FindEntityType(typeof(One)).FindProperty("MaxLengthProperty").GetMaxLength());
+        Assert.Equal(
+            10,
+            context
+                .Model.FindEntityType(typeof(One))
+                .FindProperty("MaxLengthProperty")
+                .GetMaxLength()
+        );
     }
 
     // Sqlite does not support length
     public override void StringLengthAttribute_throws_while_inserting_value_longer_than_max_length()
     {
         using var context = CreateContext();
-        Assert.Equal(16, context.Model.FindEntityType(typeof(Two)).FindProperty("Data").GetMaxLength());
+        Assert.Equal(
+            16,
+            context.Model.FindEntityType(typeof(Two)).FindProperty("Data").GetMaxLength()
+        );
     }
 
     // Sqlite does not support rowversion. See issue #2195
     public override void TimestampAttribute_throws_if_value_in_database_changed()
     {
         using var context = CreateContext();
-        Assert.True(context.Model.FindEntityType(typeof(Two)).FindProperty("Timestamp").IsConcurrencyToken);
+        Assert.True(
+            context.Model.FindEntityType(typeof(Two)).FindProperty("Timestamp").IsConcurrencyToken
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
     public class DataAnnotationSqliteFixture : DataAnnotationRelationalFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
     }
 }

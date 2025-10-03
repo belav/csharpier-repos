@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
 using System.Globalization;
 using System.Workflow.ComponentModel;
-using System.Workflow.ComponentModel.Design;
 using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Design;
 using System.Workflow.ComponentModel.Serialization;
 
 namespace System.Workflow.Activities.Rules
@@ -36,7 +36,7 @@ namespace System.Workflow.Activities.Rules
 
         protected override ValidationErrorCollection ValidateChanges(Activity activity)
         {
-            // No validations can be done since we don't know the context the policy 
+            // No validations can be done since we don't know the context the policy
             // will execute in (i.e. no idea what the "this" object will be)
             return new ValidationErrorCollection();
         }
@@ -56,9 +56,7 @@ namespace System.Workflow.Activities.Rules
             _conditionDefinition = addedConditionDefinition;
         }
 
-        public AddedConditionAction()
-        {
-        }
+        public AddedConditionAction() { }
 
         public override string ConditionName
         {
@@ -68,10 +66,7 @@ namespace System.Workflow.Activities.Rules
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public RuleCondition ConditionDefinition
         {
-            get
-            {
-                return this._conditionDefinition;
-            }
+            get { return this._conditionDefinition; }
             set
             {
                 if (null == value)
@@ -86,14 +81,15 @@ namespace System.Workflow.Activities.Rules
             if (rootActivity == null)
                 return false;
 
-            RuleDefinitions rules = rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
+            RuleDefinitions rules =
+                rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
             if (rules == null)
             {
                 rules = new RuleDefinitions();
                 ((Activity)rootActivity).SetValue(RuleDefinitions.RuleDefinitionsProperty, rules);
             }
 
-            // 
+            //
             bool setRuntimeMode = false;
             if (rules.Conditions.RuntimeMode)
             {
@@ -126,9 +122,8 @@ namespace System.Workflow.Activities.Rules
 
             _conditionDefinition = removedConditionDefinition;
         }
-        public RemovedConditionAction()
-        {
-        }
+
+        public RemovedConditionAction() { }
 
         public override string ConditionName
         {
@@ -138,10 +133,7 @@ namespace System.Workflow.Activities.Rules
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public RuleCondition ConditionDefinition
         {
-            get
-            {
-                return this._conditionDefinition;
-            }
+            get { return this._conditionDefinition; }
             set
             {
                 if (null == value)
@@ -153,15 +145,15 @@ namespace System.Workflow.Activities.Rules
 
         protected override bool ApplyTo(Activity rootActivity)
         {
-
             if (rootActivity == null)
                 return false;
 
-            RuleDefinitions rules = rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
+            RuleDefinitions rules =
+                rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
             if (rules == null || rules.Conditions == null)
                 return false;
 
-            // 
+            //
             bool setRuntimeMode = false;
             if (rules.Conditions.RuntimeMode)
             {
@@ -187,7 +179,10 @@ namespace System.Workflow.Activities.Rules
         private RuleCondition _conditionDefinition;
         private RuleCondition _newConditionDefinition;
 
-        public UpdatedConditionAction(RuleCondition conditionDefinition, RuleCondition newConditionDefinition)
+        public UpdatedConditionAction(
+            RuleCondition conditionDefinition,
+            RuleCondition newConditionDefinition
+        )
         {
             if (null == conditionDefinition)
                 throw new ArgumentNullException("conditionDefinition");
@@ -196,16 +191,20 @@ namespace System.Workflow.Activities.Rules
 
             if (newConditionDefinition.Name != conditionDefinition.Name)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ConditionNameNotIdentical, newConditionDefinition.Name, conditionDefinition.Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ConditionNameNotIdentical,
+                    newConditionDefinition.Name,
+                    conditionDefinition.Name
+                );
                 throw new ArgumentException(message);
             }
 
             _conditionDefinition = conditionDefinition;
             _newConditionDefinition = newConditionDefinition;
         }
-        public UpdatedConditionAction()
-        {
-        }
+
+        public UpdatedConditionAction() { }
 
         public override string ConditionName
         {
@@ -215,10 +214,7 @@ namespace System.Workflow.Activities.Rules
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public RuleCondition ConditionDefinition
         {
-            get
-            {
-                return this._conditionDefinition;
-            }
+            get { return this._conditionDefinition; }
             set
             {
                 if (null == value)
@@ -231,10 +227,7 @@ namespace System.Workflow.Activities.Rules
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public RuleCondition NewConditionDefinition
         {
-            get
-            {
-                return this._newConditionDefinition;
-            }
+            get { return this._newConditionDefinition; }
             set
             {
                 if (null == value)
@@ -249,14 +242,15 @@ namespace System.Workflow.Activities.Rules
             if (rootActivity == null)
                 return false;
 
-            RuleDefinitions rules = rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
+            RuleDefinitions rules =
+                rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
             if (rules == null || rules.Conditions == null)
                 return false;
 
             if (rules.Conditions[this.ConditionDefinition.Name] == null)
                 return false;
 
-            // 
+            //
             bool setRuntimeMode = false;
             if (rules.Conditions.RuntimeMode)
             {
@@ -290,9 +284,7 @@ namespace System.Workflow.Activities.Rules
             ruleset = addedRuleSetDefinition;
         }
 
-        public AddedRuleSetAction()
-        {
-        }
+        public AddedRuleSetAction() { }
 
         public override string RuleSetName
         {
@@ -316,14 +308,15 @@ namespace System.Workflow.Activities.Rules
             if (rootActivity == null)
                 return false;
 
-            RuleDefinitions rules = rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
+            RuleDefinitions rules =
+                rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
             if (rules == null)
             {
                 rules = new RuleDefinitions();
                 ((Activity)rootActivity).SetValue(RuleDefinitions.RuleDefinitionsProperty, rules);
             }
 
-            // 
+            //
             bool setRuntimeMode = false;
             if (rules.RuleSets.RuntimeMode)
             {
@@ -356,9 +349,7 @@ namespace System.Workflow.Activities.Rules
             ruleset = removedRuleSetDefinition;
         }
 
-        public RemovedRuleSetAction()
-        {
-        }
+        public RemovedRuleSetAction() { }
 
         public override string RuleSetName
         {
@@ -379,15 +370,15 @@ namespace System.Workflow.Activities.Rules
 
         protected override bool ApplyTo(Activity rootActivity)
         {
-
             if (rootActivity == null)
                 return false;
 
-            RuleDefinitions rules = rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
+            RuleDefinitions rules =
+                rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
             if (rules == null || rules.RuleSets == null)
                 return false;
 
-            // 
+            //
             bool setRuntimeMode = false;
             if (rules.RuleSets.RuntimeMode)
             {
@@ -413,7 +404,10 @@ namespace System.Workflow.Activities.Rules
         private RuleSet original;
         private RuleSet updated;
 
-        public UpdatedRuleSetAction(RuleSet originalRuleSetDefinition, RuleSet updatedRuleSetDefinition)
+        public UpdatedRuleSetAction(
+            RuleSet originalRuleSetDefinition,
+            RuleSet updatedRuleSetDefinition
+        )
         {
             if (originalRuleSetDefinition == null)
                 throw new ArgumentNullException("originalRuleSetDefinition");
@@ -422,16 +416,19 @@ namespace System.Workflow.Activities.Rules
 
             if (originalRuleSetDefinition.Name != updatedRuleSetDefinition.Name)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ConditionNameNotIdentical, originalRuleSetDefinition.Name, updatedRuleSetDefinition.Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ConditionNameNotIdentical,
+                    originalRuleSetDefinition.Name,
+                    updatedRuleSetDefinition.Name
+                );
                 throw new ArgumentException(message);
             }
             original = originalRuleSetDefinition;
             updated = updatedRuleSetDefinition;
         }
 
-        public UpdatedRuleSetAction()
-        {
-        }
+        public UpdatedRuleSetAction() { }
 
         public override string RuleSetName
         {
@@ -467,14 +464,15 @@ namespace System.Workflow.Activities.Rules
             if (rootActivity == null)
                 return false;
 
-            RuleDefinitions rules = rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
+            RuleDefinitions rules =
+                rootActivity.GetValue(RuleDefinitions.RuleDefinitionsProperty) as RuleDefinitions;
             if (rules == null || rules.RuleSets == null)
                 return false;
 
             if (rules.RuleSets[RuleSetName] == null)
                 return false;
 
-            // 
+            //
             bool setRuntimeMode = false;
             if (rules.Conditions.RuntimeMode)
             {

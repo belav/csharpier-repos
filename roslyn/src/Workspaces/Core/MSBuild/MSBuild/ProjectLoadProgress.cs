@@ -32,7 +32,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// </summary>
         public TimeSpan ElapsedTime { get; }
 
-        internal ProjectLoadProgress(string filePath, ProjectLoadOperation operation, string? targetFramework, TimeSpan elapsedTime)
+        internal ProjectLoadProgress(
+            string filePath,
+            ProjectLoadOperation operation,
+            string? targetFramework,
+            TimeSpan elapsedTime
+        )
         {
             FilePath = filePath;
             Operation = operation;

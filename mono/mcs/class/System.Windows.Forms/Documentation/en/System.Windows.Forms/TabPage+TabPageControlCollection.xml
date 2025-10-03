@@ -1,5 +1,11 @@
-<Type Name="TabPage+TabPageControlCollection" FullName="System.Windows.Forms.TabPage+TabPageControlCollection">
-  <TypeSignature Language="C#" Value="public class TabPage.TabPageControlCollection : System.Windows.Forms.Control.ControlCollection" />
+<Type
+  Name="TabPage+TabPageControlCollection"
+  FullName="System.Windows.Forms.TabPage+TabPageControlCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class TabPage.TabPageControlCollection : System.Windows.Forms.Control.ControlCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -15,7 +21,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public TabPageControlCollection (System.Windows.Forms.TabPage owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public TabPageControlCollection (System.Windows.Forms.TabPage owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.TabPage" />
@@ -31,7 +40,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public override void Add (System.Windows.Forms.Control value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public override void Add (System.Windows.Forms.Control value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>

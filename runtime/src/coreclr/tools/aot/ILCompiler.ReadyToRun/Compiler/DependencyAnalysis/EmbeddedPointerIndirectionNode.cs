@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis
@@ -12,7 +11,9 @@ namespace ILCompiler.DependencyAnalysis
     /// An <see cref="EmbeddedObjectNode"/> whose sole value is a pointer to a different <see cref="ISymbolNode"/>.
     /// <typeparamref name="TTarget"/> represents the node type this pointer points to.
     /// </summary>
-    public abstract class EmbeddedPointerIndirectionNode<TTarget> : EmbeddedObjectNode, ISortableSymbolNode
+    public abstract class EmbeddedPointerIndirectionNode<TTarget>
+        : EmbeddedObjectNode,
+            ISortableSymbolNode
         where TTarget : ISortableSymbolNode
     {
         private TTarget _targetNode;
@@ -29,14 +30,20 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             dataBuilder.RequireInitialPointerAlignment();
             dataBuilder.EmitPointerReloc(Target);
         }
 
         // At minimum, Target needs to be reported as a static dependency by inheritors.
-        public abstract override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory);
+        public abstract override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory factory
+        );
 
         int ISymbolNode.Offset => 0;
 

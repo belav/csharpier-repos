@@ -8,7 +8,8 @@ namespace Demo
 {
     internal static partial class NativeExportsNE
     {
-        public const string NativeExportsNE_Binary = "Microsoft.Interop.Tests." + nameof(NativeExportsNE);
+        public const string NativeExportsNE_Binary =
+            "Microsoft.Interop.Tests." + nameof(NativeExportsNE);
 
         [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sumi")]
         public static partial int Sum(int a, int b);

@@ -3,10 +3,8 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-
-using AllocationHelper = System.SpanTests.AllocationHelper;
-
 using Xunit;
+using AllocationHelper = System.SpanTests.AllocationHelper;
 
 namespace System.Buffers.Text.Tests
 {
@@ -49,9 +47,13 @@ namespace System.Buffers.Text.Tests
             }
         }
 
-        private static void TwoGiBOverflowHelper<T>(IEnumerable<ParserTestData<T>> testDataCollection, IntPtr pMemory)
+        private static void TwoGiBOverflowHelper<T>(
+            IEnumerable<ParserTestData<T>> testDataCollection,
+            IntPtr pMemory
+        )
         {
-            Assert.All<ParserTestData<T>>(testDataCollection,
+            Assert.All<ParserTestData<T>>(
+                testDataCollection,
                 (testData) =>
                 {
                     unsafe
@@ -70,7 +72,12 @@ namespace System.Buffers.Text.Tests
                         }
                         utf8Span.CopyTo(span.Slice(TwoGiB - utf8Span.Length));
 
-                        bool success = TryParseUtf8<T>(span, out T value, out int bytesConsumed, testData.FormatSymbol);
+                        bool success = TryParseUtf8<T>(
+                            span,
+                            out T value,
+                            out int bytesConsumed,
+                            testData.FormatSymbol
+                        );
                         if (testData.ExpectedSuccess)
                         {
                             Assert.True(success);
@@ -84,19 +91,51 @@ namespace System.Buffers.Text.Tests
                             Assert.Equal(0, bytesConsumed);
                         }
                     }
-
-                });
+                }
+            );
         }
 
         private static IEnumerable<ParserTestData<int>> TwoGiBOverflowInt32TestData
         {
             get
             {
-                yield return new ParserTestData<int>("-2", -2, 'D', expectedSuccess: true) { ExpectedBytesConsumed = TwoGiB };
-                yield return new ParserTestData<int>("2147483647", 2147483647, 'D', expectedSuccess: true) { ExpectedBytesConsumed = TwoGiB };
-                yield return new ParserTestData<int>("2147483648", default, 'D', expectedSuccess: false);
-                yield return new ParserTestData<int>("12345abcdefg1", 12345, 'D', expectedSuccess: true) { ExpectedBytesConsumed = TwoGiB - 8 };
-                yield return new ParserTestData<int>("abcdefghijklmnop1", 0, 'D', expectedSuccess: true) { ExpectedBytesConsumed = TwoGiB - 17 };
+                yield return new ParserTestData<int>("-2", -2, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = TwoGiB,
+                };
+                yield return new ParserTestData<int>(
+                    "2147483647",
+                    2147483647,
+                    'D',
+                    expectedSuccess: true
+                )
+                {
+                    ExpectedBytesConsumed = TwoGiB,
+                };
+                yield return new ParserTestData<int>(
+                    "2147483648",
+                    default,
+                    'D',
+                    expectedSuccess: false
+                );
+                yield return new ParserTestData<int>(
+                    "12345abcdefg1",
+                    12345,
+                    'D',
+                    expectedSuccess: true
+                )
+                {
+                    ExpectedBytesConsumed = TwoGiB - 8,
+                };
+                yield return new ParserTestData<int>(
+                    "abcdefghijklmnop1",
+                    0,
+                    'D',
+                    expectedSuccess: true
+                )
+                {
+                    ExpectedBytesConsumed = TwoGiB - 17,
+                };
             }
         }
     }

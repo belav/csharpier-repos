@@ -16,13 +16,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Formatting
         [Fact]
         public async Task FormatFunctionPointer()
         {
-            var content = @"
+            var content =
+                @"
 unsafe class C
 {
     delegate * < int ,  int > functionPointer;
 }";
 
-            var expected = @"
+            var expected =
+                @"
 unsafe class C
 {
     delegate*<int, int> functionPointer;
@@ -34,13 +36,15 @@ unsafe class C
         [Fact]
         public async Task FormatFunctionPointerWithManagedCallingConvention()
         {
-            var content = @"
+            var content =
+                @"
 unsafe class C
 {
     delegate *managed < int ,  int > functionPointer;
 }";
 
-            var expected = @"
+            var expected =
+                @"
 unsafe class C
 {
     delegate* managed<int, int> functionPointer;
@@ -52,13 +56,15 @@ unsafe class C
         [Fact]
         public async Task FormatFunctionPointerWithUnmanagedCallingConvention()
         {
-            var content = @"
+            var content =
+                @"
 unsafe class C
 {
     delegate *unmanaged < int ,  int > functionPointer;
 }";
 
-            var expected = @"
+            var expected =
+                @"
 unsafe class C
 {
     delegate* unmanaged<int, int> functionPointer;
@@ -70,13 +76,15 @@ unsafe class C
         [Fact]
         public async Task FormatFunctionPointerWithUnmanagedCallingConventionAndSpecifiers()
         {
-            var content = @"
+            var content =
+                @"
 unsafe class C
 {
     delegate *unmanaged [ Cdecl ,  Thiscall ] < int ,  int > functionPointer;
 }";
 
-            var expected = @"
+            var expected =
+                @"
 unsafe class C
 {
     delegate* unmanaged[Cdecl, Thiscall]<int, int> functionPointer;
@@ -88,13 +96,15 @@ unsafe class C
         [Fact]
         public async Task FormatFunctionPointerWithUnrecognizedCallingConvention()
         {
-            var content = @"
+            var content =
+                @"
 unsafe class C
 {
     delegate *invalid < int ,  int > functionPointer;
 }";
 
-            var expected = @"
+            var expected =
+                @"
 unsafe class C
 {
     delegate*invalid <int, int> functionPointer;
@@ -106,13 +116,15 @@ unsafe class C
         [Fact]
         public async Task FormatFunctionPointerWithInvalidCallingConventionAndSpecifiers()
         {
-            var content = @"
+            var content =
+                @"
 unsafe class C
 {
     delegate *invalid [ Cdecl ,  Thiscall ] < int ,  int > functionPointer;
 }";
 
-            var expected = @"
+            var expected =
+                @"
 unsafe class C
 {
     delegate*invalid [Cdecl, Thiscall]<int, int> functionPointer;

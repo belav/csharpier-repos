@@ -12,8 +12,8 @@ using Microsoft.CodeAnalysis.UseObjectInitializer;
 namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class CSharpUseObjectInitializerDiagnosticAnalyzer :
-    AbstractUseObjectInitializerDiagnosticAnalyzer<
+internal sealed class CSharpUseObjectInitializerDiagnosticAnalyzer
+    : AbstractUseObjectInitializerDiagnosticAnalyzer<
         SyntaxKind,
         ExpressionSyntax,
         StatementSyntax,
@@ -22,12 +22,13 @@ internal sealed class CSharpUseObjectInitializerDiagnosticAnalyzer :
         ExpressionStatementSyntax,
         LocalDeclarationStatementSyntax,
         VariableDeclaratorSyntax,
-        CSharpUseNamedMemberInitializerAnalyzer>
+        CSharpUseNamedMemberInitializerAnalyzer
+    >
 {
     protected override bool FadeOutOperatorToken => true;
 
-    protected override CSharpUseNamedMemberInitializerAnalyzer GetAnalyzer()
-        => CSharpUseNamedMemberInitializerAnalyzer.Allocate();
+    protected override CSharpUseNamedMemberInitializerAnalyzer GetAnalyzer() =>
+        CSharpUseNamedMemberInitializerAnalyzer.Allocate();
 
     protected override bool AreObjectInitializersSupported(Compilation compilation)
     {
@@ -42,7 +43,7 @@ internal sealed class CSharpUseObjectInitializerDiagnosticAnalyzer :
     {
         // We don't want to offer this for using declarations because the way they are lifted means all
         // initialization is done before entering try block. For example
-        // 
+        //
         // using var c = new Disposable() { Goo = 2 };
         //
         // is lowered to:
@@ -63,7 +64,7 @@ internal sealed class CSharpUseObjectInitializerDiagnosticAnalyzer :
         //
         // As can be seen, if initializing throws any kind of exception, the newly created instance will not
         // be disposed properly.
-        return node is not LocalDeclarationStatementSyntax localDecl ||
-            localDecl.UsingKeyword == default;
+        return node is not LocalDeclarationStatementSyntax localDecl
+            || localDecl.UsingKeyword == default;
     }
 }

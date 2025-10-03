@@ -315,14 +315,10 @@ public class MigrationsEndPointMiddlewareTest
                 }
             );
 
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                    await server
-                        .CreateClient()
-                        .PostAsync(
-                            "http://localhost" + MigrationsEndPointOptions.DefaultPath,
-                            formData
-                        )
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await server
+                    .CreateClient()
+                    .PostAsync("http://localhost" + MigrationsEndPointOptions.DefaultPath, formData)
             );
 
             Assert.StartsWith(

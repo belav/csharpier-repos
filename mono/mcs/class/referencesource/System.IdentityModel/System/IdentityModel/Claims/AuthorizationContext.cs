@@ -7,16 +7,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IdentityModel;
 
-
 namespace System.Security.Claims
 {
     /// <summary>
     /// This class is used to specify the context of the authorization event.
     /// </summary>
     public class AuthorizationContext
-    {   
-        Collection<System.Security.Claims.Claim> _action = new Collection<System.Security.Claims.Claim>();
-        Collection<System.Security.Claims.Claim> _resource = new Collection<System.Security.Claims.Claim>();
+    {
+        Collection<System.Security.Claims.Claim> _action =
+            new Collection<System.Security.Claims.Claim>();
+        Collection<System.Security.Claims.Claim> _resource =
+            new Collection<System.Security.Claims.Claim>();
         ClaimsPrincipal _principal;
 
         /// <summary>
@@ -28,23 +29,23 @@ namespace System.Security.Claims
         /// <exception cref="ArgumentNullException">
         /// <paramref name="principal"/> or <paramref name="resource"/> is set to null.
         /// </exception>
-        public AuthorizationContext( ClaimsPrincipal principal, string resource, string action )
+        public AuthorizationContext(ClaimsPrincipal principal, string resource, string action)
         {
-            if ( principal == null )
+            if (principal == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "principal" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("principal");
             }
 
-            if ( string.IsNullOrEmpty( resource ) )
+            if (string.IsNullOrEmpty(resource))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "resource" );
-            }            
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("resource");
+            }
 
             _principal = principal;
-            _resource.Add( new System.Security.Claims.Claim( ClaimTypes.Name, resource ) );
-            if ( action != null )
+            _resource.Add(new System.Security.Claims.Claim(ClaimTypes.Name, resource));
+            if (action != null)
             {
-                _action.Add( new System.Security.Claims.Claim( ClaimTypes.Name, action ) );
+                _action.Add(new System.Security.Claims.Claim(ClaimTypes.Name, action));
             }
         }
 
@@ -55,21 +56,25 @@ namespace System.Security.Claims
         /// <param name="resource">The resource for checking authorization to</param>
         /// <param name="action">The action to be performed on the resource</param>
         /// <exception cref="ArgumentNullException">When <paramref name="principal"/> or <paramref name="resource"/> or <paramref name="action"/> is null</exception>
-        public AuthorizationContext( ClaimsPrincipal principal, Collection<System.Security.Claims.Claim> resource, Collection<System.Security.Claims.Claim> action )
+        public AuthorizationContext(
+            ClaimsPrincipal principal,
+            Collection<System.Security.Claims.Claim> resource,
+            Collection<System.Security.Claims.Claim> action
+        )
         {
-            if ( principal == null )
+            if (principal == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "principal" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("principal");
             }
 
-            if ( resource == null )
+            if (resource == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "resource" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("resource");
             }
 
-            if ( action == null )
+            if (action == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "action" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("action");
             }
 
             _principal = principal;

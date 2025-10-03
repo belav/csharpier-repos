@@ -13,7 +13,12 @@ namespace System.Globalization
 {
     internal static partial class Ordinal
     {
-        internal static int CompareStringIgnoreCase(ref char strA, int lengthA, ref char strB, int lengthB)
+        internal static int CompareStringIgnoreCase(
+            ref char strA,
+            int lengthA,
+            ref char strB,
+            int lengthB
+        )
         {
             int length = Math.Min(lengthA, lengthB);
             int range = length;
@@ -26,8 +31,10 @@ namespace System.Globalization
             while (length != 0 && charA <= maxChar && charB <= maxChar)
             {
                 // Ordinal equals or lowercase equals if the result ends up in the a-z range
-                if (charA == charB ||
-                    ((charA | 0x20) == (charB | 0x20) && char.IsAsciiLetter(charA)))
+                if (
+                    charA == charB
+                    || ((charA | 0x20) == (charB | 0x20) && char.IsAsciiLetter(charA))
+                )
                 {
                     length--;
                     charA = ref Unsafe.Add(ref charA, 1);
@@ -60,25 +67,49 @@ namespace System.Globalization
 
             range -= length;
 
-            return CompareStringIgnoreCaseNonAscii(ref charA, lengthA - range, ref charB, lengthB - range);
+            return CompareStringIgnoreCaseNonAscii(
+                ref charA,
+                lengthA - range,
+                ref charB,
+                lengthB - range
+            );
         }
 
-        internal static int CompareStringIgnoreCaseNonAscii(ref char strA, int lengthA, ref char strB, int lengthB)
+        internal static int CompareStringIgnoreCaseNonAscii(
+            ref char strA,
+            int lengthA,
+            ref char strB,
+            int lengthB
+        )
         {
             if (GlobalizationMode.Invariant)
             {
-                return InvariantModeCasing.CompareStringIgnoreCase(ref strA, lengthA, ref strB, lengthB);
+                return InvariantModeCasing.CompareStringIgnoreCase(
+                    ref strA,
+                    lengthA,
+                    ref strB,
+                    lengthB
+                );
             }
 
             if (GlobalizationMode.UseNls)
             {
-                return CompareInfo.NlsCompareStringOrdinalIgnoreCase(ref strA, lengthA, ref strB, lengthB);
+                return CompareInfo.NlsCompareStringOrdinalIgnoreCase(
+                    ref strA,
+                    lengthA,
+                    ref strB,
+                    lengthB
+                );
             }
 
             return OrdinalCasing.CompareStringIgnoreCase(ref strA, lengthA, ref strB, lengthB);
         }
 
-        private static bool EqualsIgnoreCase_Vector<TVector>(ref char charA, ref char charB, int length)
+        private static bool EqualsIgnoreCase_Vector<TVector>(
+            ref char charA,
+            ref char charB,
+            int length
+        )
             where TVector : struct, ISimdVector<TVector, ushort>
         {
             Debug.Assert(length >= TVector.Count);
@@ -108,7 +139,10 @@ namespace System.Globalization
 
                     vec1 |= loweringMask;
                     vec2 |= loweringMask;
-                    if (TVector.GreaterThanAny((vec1 - vecA) & notEquals, vecZMinusA) || !vec1.Equals(vec2))
+                    if (
+                        TVector.GreaterThanAny((vec1 - vecA) & notEquals, vecZMinusA)
+                        || !vec1.Equals(vec2)
+                    )
                     {
                         return false; // first input isn't in [A-Za-z], and not exact match of lowered
                     }
@@ -135,7 +169,10 @@ namespace System.Globalization
 
                     vec1 |= loweringMask;
                     vec2 |= loweringMask;
-                    if (TVector.GreaterThanAny((vec1 - vecA) & notEquals, vecZMinusA) || !vec1.Equals(vec2))
+                    if (
+                        TVector.GreaterThanAny((vec1 - vecA) & notEquals, vecZMinusA)
+                        || !vec1.Equals(vec2)
+                    )
                     {
                         return false; // first input isn't in [A-Za-z], and not exact match of lowered
                     }
@@ -143,8 +180,11 @@ namespace System.Globalization
             }
             return true;
 
-        NON_ASCII:
-            if (Utf16Utility.AllCharsInVectorAreAscii(vec1) || Utf16Utility.AllCharsInVectorAreAscii(vec2))
+            NON_ASCII:
+            if (
+                Utf16Utility.AllCharsInVectorAreAscii(vec1)
+                || Utf16Utility.AllCharsInVectorAreAscii(vec2)
+            )
             {
                 // No need to use the fallback if one of the inputs is full-ASCII
                 return false;
@@ -152,8 +192,11 @@ namespace System.Globalization
 
             // Fallback for Non-ASCII inputs
             return CompareStringIgnoreCase(
-                ref Unsafe.Add(ref charA, i), (int)(lengthU - i),
-                ref Unsafe.Add(ref charB, i), (int)(lengthU - i)) == 0;
+                    ref Unsafe.Add(ref charA, i),
+                    (int)(lengthU - i),
+                    ref Unsafe.Add(ref charB, i),
+                    (int)(lengthU - i)
+                ) == 0;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -184,8 +227,12 @@ namespace System.Globalization
             // Read 4 chars (64 bits) at a time from each string
             while ((uint)length >= 4)
             {
-                valueAu64 = Unsafe.ReadUnaligned<ulong>(ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charA, byteOffset)));
-                valueBu64 = Unsafe.ReadUnaligned<ulong>(ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charB, byteOffset)));
+                valueAu64 = Unsafe.ReadUnaligned<ulong>(
+                    ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charA, byteOffset))
+                );
+                valueBu64 = Unsafe.ReadUnaligned<ulong>(
+                    ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charB, byteOffset))
+                );
 
                 // A 32-bit test - even with the bit-twiddling here - is more efficient than a 64-bit test.
                 ulong temp = valueAu64 | valueBu64;
@@ -219,8 +266,12 @@ namespace System.Globalization
             while ((uint)length >= 2)
 #endif
             {
-                valueAu32 = Unsafe.ReadUnaligned<uint>(ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charA, byteOffset)));
-                valueBu32 = Unsafe.ReadUnaligned<uint>(ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charB, byteOffset)));
+                valueAu32 = Unsafe.ReadUnaligned<uint>(
+                    ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charA, byteOffset))
+                );
+                valueBu32 = Unsafe.ReadUnaligned<uint>(
+                    ref Unsafe.As<char, byte>(ref Unsafe.AddByteOffset(ref charB, byteOffset))
+                );
 
                 if (!Utf16Utility.AllCharsInUInt32AreAscii(valueAu32 | valueBu32))
                 {
@@ -272,29 +323,46 @@ namespace System.Globalization
             Debug.Assert(length == 0);
             return true;
 
-        NonAscii32:
+            NonAscii32:
             // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
-            if (Utf16Utility.AllCharsInUInt32AreAscii(valueAu32) || Utf16Utility.AllCharsInUInt32AreAscii(valueBu32))
+            if (
+                Utf16Utility.AllCharsInUInt32AreAscii(valueAu32)
+                || Utf16Utility.AllCharsInUInt32AreAscii(valueBu32)
+            )
             {
                 return false;
             }
             goto NonAscii;
 
 #if TARGET_64BIT
-        NonAscii64:
+            NonAscii64:
             // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
-            if (Utf16Utility.AllCharsInUInt64AreAscii(valueAu64) || Utf16Utility.AllCharsInUInt64AreAscii(valueBu64))
+            if (
+                Utf16Utility.AllCharsInUInt64AreAscii(valueAu64)
+                || Utf16Utility.AllCharsInUInt64AreAscii(valueBu64)
+            )
             {
                 return false;
             }
 #endif
-        NonAscii:
+            NonAscii:
             // The non-ASCII case is factored out into its own helper method so that the JIT
             // doesn't need to emit a complex prolog for its caller (this method).
-            return CompareStringIgnoreCase(ref Unsafe.AddByteOffset(ref charA, byteOffset), length, ref Unsafe.AddByteOffset(ref charB, byteOffset), length) == 0;
+            return CompareStringIgnoreCase(
+                    ref Unsafe.AddByteOffset(ref charA, byteOffset),
+                    length,
+                    ref Unsafe.AddByteOffset(ref charB, byteOffset),
+                    length
+                ) == 0;
         }
 
-        internal static unsafe int IndexOf(string source, string value, int startIndex, int count, bool ignoreCase)
+        internal static unsafe int IndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            bool ignoreCase
+        )
         {
             if (source == null)
             {
@@ -313,20 +381,31 @@ namespace System.Globalization
 
                 if ((uint)startIndex > (uint)source.Length)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.startIndex,
+                        ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                    );
                 }
                 else
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.count,
+                        ExceptionResource.ArgumentOutOfRange_Count
+                    );
                 }
             }
 
-            int result = ignoreCase ? IndexOfOrdinalIgnoreCase(sourceSpan, value) : sourceSpan.IndexOf(value);
+            int result = ignoreCase
+                ? IndexOfOrdinalIgnoreCase(sourceSpan, value)
+                : sourceSpan.IndexOf(value);
 
             return result >= 0 ? result + startIndex : result;
         }
 
-        internal static int IndexOfOrdinalIgnoreCase(ReadOnlySpan<char> source, ReadOnlySpan<char> value)
+        internal static int IndexOfOrdinalIgnoreCase(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value
+        )
         {
             if (value.Length == 0)
             {
@@ -348,7 +427,12 @@ namespace System.Globalization
 
             if (GlobalizationMode.UseNls)
             {
-                return CompareInfo.NlsIndexOfOrdinalCore(source, value, ignoreCase: true, fromBeginning: true);
+                return CompareInfo.NlsIndexOfOrdinalCore(
+                    source,
+                    value,
+                    ignoreCase: true,
+                    fromBeginning: true
+                );
             }
 
             // If value doesn't start with ASCII, fall back to a non-vectorized non-ASCII friendly version.
@@ -370,9 +454,11 @@ namespace System.Globalization
 
             // If the input is long enough and the value ends with ASCII and is at least two characters,
             // we can take a special vectorized path that compares both the beginning and the end at the same time.
-            if (Vector128.IsHardwareAccelerated &&
-                valueTailLength != 0 &&
-                searchSpaceMinusValueTailLength >= Vector128<ushort>.Count)
+            if (
+                Vector128.IsHardwareAccelerated
+                && valueTailLength != 0
+                && searchSpaceMinusValueTailLength >= Vector128<ushort>.Count
+            )
             {
                 valueCharU = Unsafe.Add(ref valueRef, valueTailLength);
                 if (char.IsAscii(valueCharU))
@@ -395,11 +481,25 @@ namespace System.Globalization
             do
             {
                 // Do a quick search for the first element of "value".
-                int relativeIndex = isLetter ?
-                    PackedSpanHelpers.PackedIndexOfIsSupported
-                        ? PackedSpanHelpers.IndexOfAny(ref Unsafe.Add(ref searchSpace, offset), valueCharU, valueCharL, searchSpaceMinusValueTailLength)
-                        : SpanHelpers.IndexOfAnyChar(ref Unsafe.Add(ref searchSpace, offset), valueCharU, valueCharL, searchSpaceMinusValueTailLength) :
-                    SpanHelpers.IndexOfChar(ref Unsafe.Add(ref searchSpace, offset), valueChar, searchSpaceMinusValueTailLength);
+                int relativeIndex = isLetter
+                    ? PackedSpanHelpers.PackedIndexOfIsSupported
+                        ? PackedSpanHelpers.IndexOfAny(
+                            ref Unsafe.Add(ref searchSpace, offset),
+                            valueCharU,
+                            valueCharL,
+                            searchSpaceMinusValueTailLength
+                        )
+                        : SpanHelpers.IndexOfAnyChar(
+                            ref Unsafe.Add(ref searchSpace, offset),
+                            valueCharU,
+                            valueCharL,
+                            searchSpaceMinusValueTailLength
+                        )
+                    : SpanHelpers.IndexOfChar(
+                        ref Unsafe.Add(ref searchSpace, offset),
+                        valueChar,
+                        searchSpaceMinusValueTailLength
+                    );
                 if (relativeIndex < 0)
                 {
                     break;
@@ -413,25 +513,29 @@ namespace System.Globalization
                 offset += relativeIndex;
 
                 // Found the first element of "value". See if the tail matches.
-                if (valueTailLength == 0 || // for single-char values we already matched first chars
+                if (
+                    valueTailLength == 0
+                    || // for single-char values we already matched first chars
                     EqualsIgnoreCase(
                         ref Unsafe.Add(ref searchSpace, (nuint)(offset + 1)),
-                        ref Unsafe.Add(ref valueRef, 1), valueTailLength))
+                        ref Unsafe.Add(ref valueRef, 1),
+                        valueTailLength
+                    )
+                )
                 {
-                    return (int)offset;  // The tail matched. Return a successful find.
+                    return (int)offset; // The tail matched. Return a successful find.
                 }
 
                 searchSpaceMinusValueTailLength--;
                 offset++;
-            }
-            while (searchSpaceMinusValueTailLength > 0);
+            } while (searchSpaceMinusValueTailLength > 0);
 
             return -1;
 
-        // Based on SpanHelpers.IndexOf(ref char, int, ref char, int), which was in turn based on
-        // http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd. This version has additional
-        // modifications to support case-insensitive searches.
-        SearchTwoChars:
+            // Based on SpanHelpers.IndexOf(ref char, int, ref char, int), which was in turn based on
+            // http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd. This version has additional
+            // modifications to support case-insensitive searches.
+            SearchTwoChars:
             // Both the first character in value (valueChar) and the last character in value (valueCharU) are ASCII. Get their lowercase variants.
             valueChar = (char)(valueChar | 0x20);
             valueCharU = (char)(valueCharU | 0x20);
@@ -452,30 +556,48 @@ namespace System.Globalization
             }
 
             // Use Vector256 if the input is long enough.
-            if (Vector256.IsHardwareAccelerated && searchSpaceMinusValueTailLength - Vector256<ushort>.Count >= 0)
+            if (
+                Vector256.IsHardwareAccelerated
+                && searchSpaceMinusValueTailLength - Vector256<ushort>.Count >= 0
+            )
             {
                 // Create a vector for each of the lowercase ASCII characters we're searching for.
                 Vector256<ushort> ch1 = Vector256.Create((ushort)valueChar);
                 Vector256<ushort> ch2 = Vector256.Create((ushort)valueCharU);
 
-                nint searchSpaceMinusValueTailLengthAndVector = searchSpaceMinusValueTailLength - (nint)Vector256<ushort>.Count;
+                nint searchSpaceMinusValueTailLengthAndVector =
+                    searchSpaceMinusValueTailLength - (nint)Vector256<ushort>.Count;
                 do
                 {
                     // Make sure we don't go out of bounds.
-                    Debug.Assert(offset + ch1ch2Distance + Vector256<ushort>.Count <= source.Length);
+                    Debug.Assert(
+                        offset + ch1ch2Distance + Vector256<ushort>.Count <= source.Length
+                    );
 
                     // Load a vector from the current search space offset and another from the offset plus the distance between the two characters.
                     // For each, | with 0x20 so that letters are lowercased, then & those together to get a mask. If the mask is all zeros, there
                     // was no match.  If it wasn't, we have to do more work to check for a match.
-                    Vector256<ushort> cmpCh2 = Vector256.Equals(ch2, Vector256.BitwiseOr(Vector256.LoadUnsafe(ref searchSpace, (nuint)(offset + ch1ch2Distance)), Vector256.Create((ushort)0x20)));
-                    Vector256<ushort> cmpCh1 = Vector256.Equals(ch1, Vector256.BitwiseOr(Vector256.LoadUnsafe(ref searchSpace, (nuint)offset), Vector256.Create((ushort)0x20)));
+                    Vector256<ushort> cmpCh2 = Vector256.Equals(
+                        ch2,
+                        Vector256.BitwiseOr(
+                            Vector256.LoadUnsafe(ref searchSpace, (nuint)(offset + ch1ch2Distance)),
+                            Vector256.Create((ushort)0x20)
+                        )
+                    );
+                    Vector256<ushort> cmpCh1 = Vector256.Equals(
+                        ch1,
+                        Vector256.BitwiseOr(
+                            Vector256.LoadUnsafe(ref searchSpace, (nuint)offset),
+                            Vector256.Create((ushort)0x20)
+                        )
+                    );
                     Vector256<byte> cmpAnd = (cmpCh1 & cmpCh2).AsByte();
                     if (cmpAnd != Vector256<byte>.Zero)
                     {
                         goto CandidateFound;
                     }
 
-                LoopFooter:
+                    LoopFooter:
                     // No match. Advance to the next vector.
                     offset += Vector256<ushort>.Count;
 
@@ -494,7 +616,7 @@ namespace System.Globalization
 
                     continue;
 
-                CandidateFound:
+                    CandidateFound:
                     // Possible matches at the current location. Extract the bits for each element.
                     // For each set bits, we'll check if it's a match at that location.
                     uint mask = cmpAnd.ExtractMostSignificantBits();
@@ -504,7 +626,13 @@ namespace System.Globalization
                         // but we don't actually know that the two characters are equal, since we compared with | 0x20. So we just compare
                         // the full string always.
                         nint charPos = (nint)(uint.TrailingZeroCount(mask) / sizeof(ushort));
-                        if (EqualsIgnoreCase(ref Unsafe.Add(ref searchSpace, offset + charPos), ref valueRef, value.Length))
+                        if (
+                            EqualsIgnoreCase(
+                                ref Unsafe.Add(ref searchSpace, offset + charPos),
+                                ref valueRef,
+                                value.Length
+                            )
+                        )
                         {
                             // Match! Return the index.
                             return (int)(offset + charPos);
@@ -512,10 +640,11 @@ namespace System.Globalization
 
                         // Clear the two lowest set bits in the mask. If there are no more set bits, we're done.
                         // If any remain, we loop around to do the next comparison.
-                        mask = BitOperations.ResetLowestSetBit(BitOperations.ResetLowestSetBit(mask));
+                        mask = BitOperations.ResetLowestSetBit(
+                            BitOperations.ResetLowestSetBit(mask)
+                        );
                     } while (mask != 0);
                     goto LoopFooter;
-
                 } while (true);
             }
             else // 128bit vector path (SSE2 or AdvSimd)
@@ -524,24 +653,39 @@ namespace System.Globalization
                 Vector128<ushort> ch1 = Vector128.Create((ushort)valueChar);
                 Vector128<ushort> ch2 = Vector128.Create((ushort)valueCharU);
 
-                nint searchSpaceMinusValueTailLengthAndVector = searchSpaceMinusValueTailLength - (nint)Vector128<ushort>.Count;
+                nint searchSpaceMinusValueTailLengthAndVector =
+                    searchSpaceMinusValueTailLength - (nint)Vector128<ushort>.Count;
                 do
                 {
                     // Make sure we don't go out of bounds.
-                    Debug.Assert(offset + ch1ch2Distance + Vector128<ushort>.Count <= source.Length);
+                    Debug.Assert(
+                        offset + ch1ch2Distance + Vector128<ushort>.Count <= source.Length
+                    );
 
                     // Load a vector from the current search space offset and another from the offset plus the distance between the two characters.
                     // For each, | with 0x20 so that letters are lowercased, then & those together to get a mask. If the mask is all zeros, there
                     // was no match.  If it wasn't, we have to do more work to check for a match.
-                    Vector128<ushort> cmpCh2 = Vector128.Equals(ch2, Vector128.BitwiseOr(Vector128.LoadUnsafe(ref searchSpace, (nuint)(offset + ch1ch2Distance)), Vector128.Create((ushort)0x20)));
-                    Vector128<ushort> cmpCh1 = Vector128.Equals(ch1, Vector128.BitwiseOr(Vector128.LoadUnsafe(ref searchSpace, (nuint)offset), Vector128.Create((ushort)0x20)));
+                    Vector128<ushort> cmpCh2 = Vector128.Equals(
+                        ch2,
+                        Vector128.BitwiseOr(
+                            Vector128.LoadUnsafe(ref searchSpace, (nuint)(offset + ch1ch2Distance)),
+                            Vector128.Create((ushort)0x20)
+                        )
+                    );
+                    Vector128<ushort> cmpCh1 = Vector128.Equals(
+                        ch1,
+                        Vector128.BitwiseOr(
+                            Vector128.LoadUnsafe(ref searchSpace, (nuint)offset),
+                            Vector128.Create((ushort)0x20)
+                        )
+                    );
                     Vector128<byte> cmpAnd = (cmpCh1 & cmpCh2).AsByte();
                     if (cmpAnd != Vector128<byte>.Zero)
                     {
                         goto CandidateFound;
                     }
 
-                LoopFooter:
+                    LoopFooter:
                     // No match. Advance to the next vector.
                     offset += Vector128<ushort>.Count;
 
@@ -560,7 +704,7 @@ namespace System.Globalization
 
                     continue;
 
-                CandidateFound:
+                    CandidateFound:
                     // Possible matches at the current location. Extract the bits for each element.
                     // For each set bits, we'll check if it's a match at that location.
                     uint mask = cmpAnd.ExtractMostSignificantBits();
@@ -570,7 +714,13 @@ namespace System.Globalization
                         // but we don't actually know that the two characters are equal, since we compared with | 0x20. So we just compare
                         // the full string always.
                         nint charPos = (nint)(uint.TrailingZeroCount(mask) / sizeof(ushort));
-                        if (EqualsIgnoreCase(ref Unsafe.Add(ref searchSpace, offset + charPos), ref valueRef, value.Length))
+                        if (
+                            EqualsIgnoreCase(
+                                ref Unsafe.Add(ref searchSpace, offset + charPos),
+                                ref valueRef,
+                                value.Length
+                            )
+                        )
                         {
                             // Match! Return the index.
                             return (int)(offset + charPos);
@@ -578,10 +728,11 @@ namespace System.Globalization
 
                         // Clear the two lowest set bits in the mask. If there are no more set bits, we're done.
                         // If any remain, we loop around to do the next comparison.
-                        mask = BitOperations.ResetLowestSetBit(BitOperations.ResetLowestSetBit(mask));
+                        mask = BitOperations.ResetLowestSetBit(
+                            BitOperations.ResetLowestSetBit(mask)
+                        );
                     } while (mask != 0);
                     goto LoopFooter;
-
                 } while (true);
             }
         }
@@ -589,11 +740,20 @@ namespace System.Globalization
         internal static int LastIndexOf(string source, string value, int startIndex, int count)
         {
             int result = source.AsSpan(startIndex, count).LastIndexOf(value);
-            if (result >= 0) { result += startIndex; } // if match found, adjust 'result' by the actual start position
+            if (result >= 0)
+            {
+                result += startIndex;
+            } // if match found, adjust 'result' by the actual start position
             return result;
         }
 
-        internal static unsafe int LastIndexOf(string source, string value, int startIndex, int count, bool ignoreCase)
+        internal static unsafe int LastIndexOf(
+            string source,
+            string value,
+            int startIndex,
+            int count,
+            bool ignoreCase
+        )
         {
             if (source == null)
             {
@@ -617,12 +777,23 @@ namespace System.Globalization
 
             if (GlobalizationMode.Invariant)
             {
-                return ignoreCase ? InvariantModeCasing.LastIndexOfIgnoreCase(source.AsSpan(startIndex, count), value) : LastIndexOf(source, value, startIndex, count);
+                return ignoreCase
+                    ? InvariantModeCasing.LastIndexOfIgnoreCase(
+                        source.AsSpan(startIndex, count),
+                        value
+                    )
+                    : LastIndexOf(source, value, startIndex, count);
             }
 
             if (GlobalizationMode.UseNls)
             {
-                return CompareInfo.NlsLastIndexOfOrdinalCore(source, value, startIndex, count, ignoreCase);
+                return CompareInfo.NlsLastIndexOfOrdinalCore(
+                    source,
+                    value,
+                    startIndex,
+                    count,
+                    ignoreCase
+                );
             }
 
             if (!ignoreCase)
@@ -637,11 +808,17 @@ namespace System.Globalization
 
                 if ((uint)startIndex > (uint)source.Length)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startIndex, ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.startIndex,
+                        ExceptionResource.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                    );
                 }
                 else
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.ArgumentOutOfRange_Count);
+                    ThrowHelper.ThrowArgumentOutOfRangeException(
+                        ExceptionArgument.count,
+                        ExceptionResource.ArgumentOutOfRange_Count
+                    );
                 }
             }
 
@@ -654,7 +831,10 @@ namespace System.Globalization
             return result;
         }
 
-        internal static int LastIndexOfOrdinalIgnoreCase(ReadOnlySpan<char> source, ReadOnlySpan<char> value)
+        internal static int LastIndexOfOrdinalIgnoreCase(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> value
+        )
         {
             if (value.Length == 0)
             {
@@ -677,7 +857,12 @@ namespace System.Globalization
 
             if (GlobalizationMode.UseNls)
             {
-                return CompareInfo.NlsIndexOfOrdinalCore(source, value, ignoreCase: true, fromBeginning: false);
+                return CompareInfo.NlsIndexOfOrdinalCore(
+                    source,
+                    value,
+                    ignoreCase: true,
+                    fromBeginning: false
+                );
             }
 
             return OrdinalCasing.LastIndexOf(source, value);
@@ -686,7 +871,9 @@ namespace System.Globalization
         internal static int ToUpperOrdinal(ReadOnlySpan<char> source, Span<char> destination)
         {
             if (source.Overlaps(destination))
-                ThrowHelper.ThrowInvalidOperationException(ExceptionResource.InvalidOperation_SpanOverlappedOperation);
+                ThrowHelper.ThrowInvalidOperationException(
+                    ExceptionResource.InvalidOperation_SpanOverlappedOperation
+                );
 
             // Assuming that changing case does not affect length
             if (destination.Length < source.Length)

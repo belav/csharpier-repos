@@ -28,24 +28,33 @@ namespace Microsoft.CodeAnalysis.Options
         public ImmutableArray<OptionStorageLocation> StorageLocations { get; }
 
         public PerLanguageOption(string feature, string name, T defaultValue)
-            : this(feature ?? throw new ArgumentNullException(nameof(feature)),
-                   OptionGroup.Default,
-                   name ?? throw new ArgumentNullException(nameof(name)),
-                   defaultValue,
-                   storageLocations: ImmutableArray<OptionStorageLocation>.Empty,
-                   storageMapping: null,
-                   isEditorConfigOption: false)
-        {
-        }
+            : this(
+                feature ?? throw new ArgumentNullException(nameof(feature)),
+                OptionGroup.Default,
+                name ?? throw new ArgumentNullException(nameof(name)),
+                defaultValue,
+                storageLocations: ImmutableArray<OptionStorageLocation>.Empty,
+                storageMapping: null,
+                isEditorConfigOption: false
+            ) { }
 
-        public PerLanguageOption(string feature, string name, T defaultValue, params OptionStorageLocation[] storageLocations)
-            : this(feature ?? throw new ArgumentNullException(nameof(feature)),
-                   OptionGroup.Default,
-                   name ?? throw new ArgumentNullException(nameof(name)),
-                   defaultValue,
-                   PublicContract.RequireNonNullItems(storageLocations, nameof(storageLocations)).ToImmutableArray(),
-                   storageMapping: null,
-                   isEditorConfigOption: false)
+        public PerLanguageOption(
+            string feature,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation[] storageLocations
+        )
+            : this(
+                feature ?? throw new ArgumentNullException(nameof(feature)),
+                OptionGroup.Default,
+                name ?? throw new ArgumentNullException(nameof(name)),
+                defaultValue,
+                PublicContract
+                    .RequireNonNullItems(storageLocations, nameof(storageLocations))
+                    .ToImmutableArray(),
+                storageMapping: null,
+                isEditorConfigOption: false
+            )
         {
             // should not be used internally to create options
             Debug.Assert(storageLocations.All(l => l is not IEditorConfigValueSerializer));
@@ -58,12 +67,28 @@ namespace Microsoft.CodeAnalysis.Options
             T defaultValue,
             ImmutableArray<OptionStorageLocation> storageLocations,
             OptionStorageMapping? storageMapping,
-            bool isEditorConfigOption)
-            : this(new OptionDefinition<T>(defaultValue, EditorConfigValueSerializer<T>.Unsupported, group, feature + "_" + name, storageMapping, isEditorConfigOption), feature, name, storageLocations)
-        {
-        }
+            bool isEditorConfigOption
+        )
+            : this(
+                new OptionDefinition<T>(
+                    defaultValue,
+                    EditorConfigValueSerializer<T>.Unsupported,
+                    group,
+                    feature + "_" + name,
+                    storageMapping,
+                    isEditorConfigOption
+                ),
+                feature,
+                name,
+                storageLocations
+            ) { }
 
-        internal PerLanguageOption(OptionDefinition optionDefinition, string feature, string name, ImmutableArray<OptionStorageLocation> storageLocations)
+        internal PerLanguageOption(
+            OptionDefinition optionDefinition,
+            string feature,
+            string name,
+            ImmutableArray<OptionStorageLocation> storageLocations
+        )
         {
             Feature = feature;
             Name = name;

@@ -15,9 +15,7 @@ namespace System.IdentityModel.Selectors
         bool includeWindowsGroups;
 
         public WindowsSecurityTokenAuthenticator()
-            : this(WindowsClaimSet.DefaultIncludeWindowsGroups)
-        {
-        }
+            : this(WindowsClaimSet.DefaultIncludeWindowsGroups) { }
 
         public WindowsSecurityTokenAuthenticator(bool includeWindowsGroups)
         {
@@ -29,10 +27,17 @@ namespace System.IdentityModel.Selectors
             return token is WindowsSecurityToken;
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             WindowsSecurityToken windowsToken = (WindowsSecurityToken)token;
-            WindowsClaimSet claimSet = new WindowsClaimSet(windowsToken.WindowsIdentity, windowsToken.AuthenticationType, this.includeWindowsGroups, windowsToken.ValidTo);
+            WindowsClaimSet claimSet = new WindowsClaimSet(
+                windowsToken.WindowsIdentity,
+                windowsToken.AuthenticationType,
+                this.includeWindowsGroups,
+                windowsToken.ValidTo
+            );
             return SecurityUtils.CreateAuthorizationPolicies(claimSet, windowsToken.ValidTo);
         }
     }

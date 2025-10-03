@@ -68,7 +68,6 @@ namespace System.Numerics.Tests
                 VerifyMaxString(Print(tempByteArray1) + Print(tempByteArray2) + "bMax");
             }
 
-
             // Max Method - One large BigIntegers and -1
             for (int i = 0; i < s_samples; i++)
             {
@@ -92,7 +91,6 @@ namespace System.Numerics.Tests
                 tempByteArray2 = GetRandomByteArray(s_random, 2);
                 VerifyMaxString(Print(tempByteArray1) + Print(tempByteArray2) + "bMax");
             }
-
 
             // Max Method - One large BigIntegers and 1
             for (int i = 0; i < s_samples; i++)

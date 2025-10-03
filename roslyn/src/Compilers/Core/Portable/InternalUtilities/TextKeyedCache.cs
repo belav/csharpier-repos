@@ -8,15 +8,16 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.PooledObjects;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Roslyn.Utilities
 {
-    internal class TextKeyedCache<T> where T : class
+    internal class TextKeyedCache<T>
+        where T : class
     {
         // immutable tuple - text and corresponding item
         // reference type because we want atomic assignments
@@ -33,7 +34,7 @@ namespace Roslyn.Utilities
         }
 
         // TODO: Need to tweak the size with more scenarios.
-        //       for now this is what works well enough with 
+        //       for now this is what works well enough with
         //       Roslyn C# compiler project
 
         // Size of local cache.
@@ -52,15 +53,22 @@ namespace Roslyn.Utilities
         private const int SharedBucketSizeMask = SharedBucketSize - 1;
 
         // local cache
-        // simple fast and not threadsafe cache 
+        // simple fast and not threadsafe cache
         // with limited size and "last add wins" expiration policy
-        private readonly (string Text, int HashCode, T Item)[] _localTable = new (string Text, int HashCode, T Item)[LocalSize];
+        private readonly (string Text, int HashCode, T Item)[] _localTable = new (
+            string Text,
+            int HashCode,
+            T Item
+        )[LocalSize];
 
         // shared threadsafe cache
         // slightly slower than local cache
         // we read this cache when having a miss in local cache
         // writes to local cache will update shared cache as well.
-        private static readonly (int HashCode, SharedEntryValue Entry)[] s_sharedTable = new (int HashCode, SharedEntryValue Entry)[SharedSize];
+        private static readonly (int HashCode, SharedEntryValue Entry)[] s_sharedTable = new (
+            int HashCode,
+            SharedEntryValue Entry
+        )[SharedSize];
 
         // store a reference to shared cache locally
         // accessing a static field of a generic type could be nontrivial
@@ -72,10 +80,8 @@ namespace Roslyn.Utilities
         // TODO: consider whether a counter is random enough
         private Random? _random;
 
-        internal TextKeyedCache() :
-            this(null)
-        {
-        }
+        internal TextKeyedCache()
+            : this(null) { }
 
         // implement Poolable object pattern
         #region "Poolable"
@@ -93,7 +99,8 @@ namespace Roslyn.Utilities
         {
             var pool = new ObjectPool<TextKeyedCache<T>>(
                 pool => new TextKeyedCache<T>(pool),
-                Environment.ProcessorCount * 4);
+                Environment.ProcessorCount * 4
+            );
             return pool;
         }
 
@@ -159,7 +166,10 @@ namespace Roslyn.Utilities
 
                 if (e != null)
                 {
-                    if (hash == hashCode && StringTable.TextEquals(e.Text, chars.AsSpan(start, len)))
+                    if (
+                        hash == hashCode
+                        && StringTable.TextEquals(e.Text, chars.AsSpan(start, len))
+                    )
                     {
                         break;
                     }
@@ -219,7 +229,7 @@ namespace Roslyn.Utilities
             var i1 = NextRandom() & SharedBucketSizeMask;
             idx = (idx + ((i1 * i1 + i1) / 2)) & SharedSizeMask;
 
-foundIdx:
+            foundIdx:
             arr[idx].HashCode = hashCode;
             Volatile.Write(ref arr[idx].Entry, e);
         }

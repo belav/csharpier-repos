@@ -6,15 +6,15 @@
 
 namespace System.Net
 {
-    using System.Threading;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Diagnostics;
+    using System.Threading;
 
     // LazyAsyncResult - Base class for all IAsyncResult classes
     // that want to take advantage of lazy allocated event handles
     internal class LazyAsyncResult : IAsyncResult
     {
-        private const int c_HighBit = unchecked((int) 0x80000000);
+        private const int c_HighBit = unchecked((int)0x80000000);
         private const int c_ForceAsyncCount = 50;
 
 #if !NET_PERF
@@ -43,8 +43,8 @@ namespace System.Net
 #endif
 
 #if DEBUG
-        internal object _DebugAsyncChain;           // Optionally used to track chains of async calls.
-        private bool _ProtectState;                 // Used by ContextAwareResult to prevent some calls.
+        internal object _DebugAsyncChain; // Optionally used to track chains of async calls.
+        private bool _ProtectState; // Used by ContextAwareResult to prevent some calls.
 #endif
 
 #if TRACK_LAR
@@ -56,21 +56,22 @@ namespace System.Net
         //
         // class members
         //
-        private object m_AsyncObject;               // Caller's async object.
-        private object m_AsyncState;                // Caller's state object.
-        private AsyncCallback m_AsyncCallback;      // Caller's callback method.
-        private object m_Result;                    // Final IO result to be returned byt the End*() method.
-        private int m_ErrorCode;                    // Win32 error code for Win32 IO async calls (that want to throw).
-        private int m_IntCompleted;                 // Sign bit indicates synchronous completion if set.
-                                                    // Remaining bits count the number of InvokeCallbak() calls.
+        private object m_AsyncObject; // Caller's async object.
+        private object m_AsyncState; // Caller's state object.
+        private AsyncCallback m_AsyncCallback; // Caller's callback method.
+        private object m_Result; // Final IO result to be returned byt the End*() method.
+        private int m_ErrorCode; // Win32 error code for Win32 IO async calls (that want to throw).
+        private int m_IntCompleted; // Sign bit indicates synchronous completion if set.
 
-        private bool m_EndCalled;                   // true if the user called the End*() method.
-        private bool m_UserEvent;                   // true if the event has been (or is about to be) handed to the user
+        // Remaining bits count the number of InvokeCallbak() calls.
 
-        private object m_Event;                     // lazy allocated event to be returned in the IAsyncResult for the client to wait on
+        private bool m_EndCalled; // true if the user called the End*() method.
+        private bool m_UserEvent; // true if the event has been (or is about to be) handed to the user
 
+        private object m_Event; // lazy allocated event to be returned in the IAsyncResult for the client to wait on
 
-        internal LazyAsyncResult(object myObject, object myState, AsyncCallback myCallBack) {
+        internal LazyAsyncResult(object myObject, object myState, AsyncCallback myCallBack)
+        {
             m_AsyncObject = myObject;
             m_AsyncState = myState;
             m_AsyncCallback = myCallBack;
@@ -85,51 +86,63 @@ namespace System.Net
 
         // Allows creating a pre-completed result with less interlockeds.  Beware!  Constructor calls the callback.
         // if a derived class ever uses this and overloads Cleanup, this may need to change
-        internal LazyAsyncResult(object myObject, object myState, AsyncCallback myCallBack, object result)
+        internal LazyAsyncResult(
+            object myObject,
+            object myState,
+            AsyncCallback myCallBack,
+            object result
+        )
         {
-            GlobalLog.Assert(result != DBNull.Value, "LazyAsyncResult#{0}::.ctor()|Result can't be set to DBNull - it's a special internal value.", ValidationHelper.HashString(this));
+            GlobalLog.Assert(
+                result != DBNull.Value,
+                "LazyAsyncResult#{0}::.ctor()|Result can't be set to DBNull - it's a special internal value.",
+                ValidationHelper.HashString(this)
+            );
             m_AsyncObject = myObject;
             m_AsyncState = myState;
             m_AsyncCallback = myCallBack;
-            m_Result =  result;
+            m_Result = result;
             m_IntCompleted = 1;
 
-            if (m_AsyncCallback != null) {
-                GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::Complete() invoking callback");
+            if (m_AsyncCallback != null)
+            {
+                GlobalLog.Print(
+                    "LazyAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::Complete() invoking callback"
+                );
                 m_AsyncCallback(this);
             }
-            else  {
-                GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::Complete() no callback to invoke");
+            else
+            {
+                GlobalLog.Print(
+                    "LazyAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::Complete() no callback to invoke"
+                );
             }
 
-            GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::.ctor() (pre-completed)");
+            GlobalLog.Print(
+                "LazyAsyncResult#" + ValidationHelper.HashString(this) + "::.ctor() (pre-completed)"
+            );
         }
 
         // Interface method to return the original async object:
-        internal object AsyncObject {
-            get {
-                return m_AsyncObject;
-            }
+        internal object AsyncObject
+        {
+            get { return m_AsyncObject; }
         }
 
         // Interface method to return the caller's state object.
-        public object AsyncState {
-            get {
-                return m_AsyncState;
-            }
+        public object AsyncState
+        {
+            get { return m_AsyncState; }
         }
 
         protected AsyncCallback AsyncCallback
         {
-            get
-            {
-                return m_AsyncCallback;
-            }
-
-            set
-            {
-                m_AsyncCallback = value;
-            }
+            get { return m_AsyncCallback; }
+            set { m_AsyncCallback = value; }
         }
 
         // Interface property to return a WaitHandle that can be waited on for I/O completion.
@@ -143,13 +156,19 @@ namespace System.Net
         {
             get
             {
-                GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::get_AsyncWaitHandle()");
+                GlobalLog.Print(
+                    "LazyAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::get_AsyncWaitHandle()"
+                );
 
 #if DEBUG
                 // Can't be called when state is protected.
                 if (_ProtectState)
                 {
-                    throw new InvalidOperationException("get_AsyncWaitHandle called in protected state");
+                    throw new InvalidOperationException(
+                        "get_AsyncWaitHandle called in protected state"
+                    );
                 }
 #endif
 
@@ -168,13 +187,18 @@ namespace System.Net
                 // possible for m_Event to become null immediately after being set, but only if
                 // IsCompleted has become true.  Therefore it's possible for this property
                 // to give different (set) events to different callers when IsCompleted is true.
-                asyncEvent = (ManualResetEvent) m_Event;
+                asyncEvent = (ManualResetEvent)m_Event;
                 while (asyncEvent == null)
                 {
                     LazilyCreateEvent(out asyncEvent);
                 }
 
-                GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::get_AsyncWaitHandle() m_Event:" + ValidationHelper.HashString(m_Event));
+                GlobalLog.Print(
+                    "LazyAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::get_AsyncWaitHandle() m_Event:"
+                        + ValidationHelper.HashString(m_Event)
+                );
                 return asyncEvent;
             }
         }
@@ -199,7 +223,7 @@ namespace System.Net
                 else
                 {
                     waitHandle.Close();
-                    waitHandle = (ManualResetEvent) m_Event;
+                    waitHandle = (ManualResetEvent)m_Event;
                     // There's a chance here that m_Event became null.  But the only way is if another thread completed
                     // in InternalWaitForCompletion and disposed it.  If we're in InternalWaitForCompletion, we now know
                     // IsCompleted is set, so we can avoid the wait when waitHandle comes back null.  AsyncWaitHandle
@@ -227,15 +251,23 @@ namespace System.Net
         }
 
         // Interface property, returning synchronous completion status.
-        public bool CompletedSynchronously {
-            get {
-                GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::get_CompletedSynchronously()");
+        public bool CompletedSynchronously
+        {
+            get
+            {
+                GlobalLog.Print(
+                    "LazyAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::get_CompletedSynchronously()"
+                );
 
 #if DEBUG
                 // Can't be called when state is protected.
                 if (_ProtectState)
                 {
-                    throw new InvalidOperationException("get_CompletedSynchronously called in protected state");
+                    throw new InvalidOperationException(
+                        "get_CompletedSynchronously called in protected state"
+                    );
                 }
 #endif
 
@@ -245,21 +277,32 @@ namespace System.Net
                 {
                     result = Interlocked.CompareExchange(ref m_IntCompleted, c_HighBit, 0);
                 }
-                GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::get_CompletedSynchronously() returns: "+((result>0)?"true":"false"));
+                GlobalLog.Print(
+                    "LazyAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::get_CompletedSynchronously() returns: "
+                        + ((result > 0) ? "true" : "false")
+                );
                 return result > 0;
             }
         }
 
         // Interface property, returning completion status.
-        public bool IsCompleted {
-            get {
-                GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::get_IsCompleted()");
+        public bool IsCompleted
+        {
+            get
+            {
+                GlobalLog.Print(
+                    "LazyAsyncResult#" + ValidationHelper.HashString(this) + "::get_IsCompleted()"
+                );
 
 #if DEBUG
                 // Can't be called when state is protected.
                 if (_ProtectState)
                 {
-                    throw new InvalidOperationException("get_IsCompleted called in protected state");
+                    throw new InvalidOperationException(
+                        "get_IsCompleted called in protected state"
+                    );
                 }
 #endif
 
@@ -277,18 +320,15 @@ namespace System.Net
         // Use to see if something's completed without fixing CompletedSynchronously
         internal bool InternalPeekCompleted
         {
-            get
-            {
-                return (m_IntCompleted & ~c_HighBit) != 0;
-            }
+            get { return (m_IntCompleted & ~c_HighBit) != 0; }
         }
 
         // Internal property for setting the IO result.
-        internal object Result {
-            get {
-                return m_Result == DBNull.Value ? null : m_Result;
-            }
-            set {
+        internal object Result
+        {
+            get { return m_Result == DBNull.Value ? null : m_Result; }
+            set
+            {
                 // Ideally this should never be called, since setting
                 // the result object really makes sense when the IO completes.
                 //
@@ -297,29 +337,31 @@ namespace System.Net
                 //
 
                 // It's an error to call after the result has been completed or with DBNull.
-                GlobalLog.Assert(value != DBNull.Value, "LazyAsyncResult#{0}::set_Result()|Result can't be set to DBNull - it's a special internal value.", ValidationHelper.HashString(this));
-                GlobalLog.Assert(!InternalPeekCompleted, "LazyAsyncResult#{0}::set_Result()|Called on completed result.", ValidationHelper.HashString(this));
+                GlobalLog.Assert(
+                    value != DBNull.Value,
+                    "LazyAsyncResult#{0}::set_Result()|Result can't be set to DBNull - it's a special internal value.",
+                    ValidationHelper.HashString(this)
+                );
+                GlobalLog.Assert(
+                    !InternalPeekCompleted,
+                    "LazyAsyncResult#{0}::set_Result()|Called on completed result.",
+                    ValidationHelper.HashString(this)
+                );
                 m_Result = value;
             }
         }
 
-        internal bool EndCalled {
-            get {
-                return m_EndCalled;
-            }
-            set {
-                m_EndCalled = value;
-            }
+        internal bool EndCalled
+        {
+            get { return m_EndCalled; }
+            set { m_EndCalled = value; }
         }
 
         // Internal property for setting the Win32 IO async error code.
-        internal int ErrorCode {
-            get {
-                return m_ErrorCode;
-            }
-            set {
-                m_ErrorCode = value;
-            }
+        internal int ErrorCode
+        {
+            get { return m_ErrorCode; }
+            set { m_ErrorCode = value; }
         }
 
         // A method for completing the IO with a result
@@ -329,9 +371,18 @@ namespace System.Net
         // the equivalent of InvokeCallback().
         protected void ProtectedInvokeCallback(object result, IntPtr userToken)
         {
-            GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::ProtectedInvokeCallback() result = " +
-                            (result is Exception? ((Exception)result).Message:  result == null? "<null>": result.ToString()) +
-                            ", userToken:" + userToken.ToString());
+            GlobalLog.Print(
+                "LazyAsyncResult#"
+                    + ValidationHelper.HashString(this)
+                    + "::ProtectedInvokeCallback() result = "
+                    + (
+                        result is Exception ? ((Exception)result).Message
+                        : result == null ? "<null>"
+                        : result.ToString()
+                    )
+                    + ", userToken:"
+                    + userToken.ToString()
+            );
 
             // Critical to disallow DBNull here - it could result in a stuck spinlock in WaitForCompletion.
             if (result == DBNull.Value)
@@ -344,7 +395,10 @@ namespace System.Net
             _ProtectState = false;
 #endif
 
-            if ((m_IntCompleted & ~c_HighBit) == 0 && (Interlocked.Increment(ref m_IntCompleted) & ~c_HighBit) == 1)
+            if (
+                (m_IntCompleted & ~c_HighBit) == 0
+                && (Interlocked.Increment(ref m_IntCompleted) & ~c_HighBit) == 1
+            )
             {
                 // DBNull.Value is used to guarantee that the first caller wins,
                 // even if the result was set to null.
@@ -353,13 +407,15 @@ namespace System.Net
 
                 // Does this need a memory barrier to be sure this thread gets the m_Event if it's set?  I don't think so
                 // because the Interlockeds on m_IntCompleted/m_Event should serve as the barrier.
-                ManualResetEvent asyncEvent = (ManualResetEvent) m_Event;
+                ManualResetEvent asyncEvent = (ManualResetEvent)m_Event;
                 if (asyncEvent != null)
                 {
-                    try {
+                    try
+                    {
                         asyncEvent.Set();
                     }
-                    catch (ObjectDisposedException) {
+                    catch (ObjectDisposedException)
+                    {
                         // Simply ignore this exception - There is apparently a rare race condition
                         // where the event is disposed before the completion method is called.
                     }
@@ -393,19 +449,27 @@ namespace System.Net
 #if !NET_PERF
             bool offloaded = false;
             ThreadContext threadContext = CurrentThreadContext;
-            try {
+            try
+            {
                 ++threadContext.m_NestedIOCount;
 #else
             try
             {
 #endif
-                if (m_AsyncCallback != null) {
-                    GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::Complete() invoking callback");
+                if (m_AsyncCallback != null)
+                {
+                    GlobalLog.Print(
+                        "LazyAsyncResult#"
+                            + ValidationHelper.HashString(this)
+                            + "::Complete() invoking callback"
+                    );
 
 #if !NET_PERF
                     if (threadContext.m_NestedIOCount >= c_ForceAsyncCount)
                     {
-                        GlobalLog.Print("LazyAsyncResult::Complete *** OFFLOADED the user callback ***");
+                        GlobalLog.Print(
+                            "LazyAsyncResult::Complete *** OFFLOADED the user callback ***"
+                        );
                         ThreadPool.QueueUserWorkItem(new WaitCallback(WorkerThreadComplete));
                         offloaded = true;
                     }
@@ -415,11 +479,17 @@ namespace System.Net
                         m_AsyncCallback(this);
                     }
                 }
-                else  {
-                    GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::Complete() no callback to invoke");
+                else
+                {
+                    GlobalLog.Print(
+                        "LazyAsyncResult#"
+                            + ValidationHelper.HashString(this)
+                            + "::Complete() no callback to invoke"
+                    );
                 }
             }
-            finally {
+            finally
+            {
 #if !NET_PERF
                 --threadContext.m_NestedIOCount;
 
@@ -431,8 +501,6 @@ namespace System.Net
                 }
             }
         }
-
-
 
 #if !NET_PERF
         // Only called in the above method
@@ -470,7 +538,8 @@ namespace System.Net
         }
         */
 
-        private object WaitForCompletion(bool snap) {
+        private object WaitForCompletion(bool snap)
+        {
             ManualResetEvent waitHandle = null;
             bool createdByMe = false;
             bool complete = snap ? IsCompleted : InternalPeekCompleted;
@@ -478,7 +547,7 @@ namespace System.Net
             if (!complete)
             {
                 // Not done yet, so wait:
-                waitHandle = (ManualResetEvent) m_Event;
+                waitHandle = (ManualResetEvent)m_Event;
                 if (waitHandle == null)
                 {
                     createdByMe = LazilyCreateEvent(out waitHandle);
@@ -489,7 +558,12 @@ namespace System.Net
             {
                 try
                 {
-                    GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::InternalWaitForCompletion() Waiting for completion m_Event#" + ValidationHelper.HashString(waitHandle));
+                    GlobalLog.Print(
+                        "LazyAsyncResult#"
+                            + ValidationHelper.HashString(this)
+                            + "::InternalWaitForCompletion() Waiting for completion m_Event#"
+                            + ValidationHelper.HashString(waitHandle)
+                    );
                     waitHandle.WaitOne(Timeout.Infinite, false);
                 }
                 catch (ObjectDisposedException)
@@ -497,13 +571,14 @@ namespace System.Net
                     // This can occur if this method is called from two different threads.
                     // This possibility is the trade-off for not locking.
                 }
-                finally {
+                finally
+                {
                     // We also want to dispose the event although we can't unless we did wait on it here.
                     if (createdByMe && !m_UserEvent)
                     {
                         // Does m_UserEvent need to be volatile (or m_Event set via Interlocked) in order
                         // to avoid giving a user a disposed event?
-                        ManualResetEvent oldEvent = (ManualResetEvent) m_Event;
+                        ManualResetEvent oldEvent = (ManualResetEvent)m_Event;
                         m_Event = null;
                         if (!m_UserEvent)
                         {
@@ -519,8 +594,16 @@ namespace System.Net
             while (m_Result == DBNull.Value)
                 Thread.SpinWait(1);
 
-            GlobalLog.Print("LazyAsyncResult#" + ValidationHelper.HashString(this) + "::InternalWaitForCompletion() done: " +
-                            (m_Result is Exception? ((Exception)m_Result).Message:  m_Result == null? "<null>": m_Result.ToString()));
+            GlobalLog.Print(
+                "LazyAsyncResult#"
+                    + ValidationHelper.HashString(this)
+                    + "::InternalWaitForCompletion() done: "
+                    + (
+                        m_Result is Exception ? ((Exception)m_Result).Message
+                        : m_Result == null ? "<null>"
+                        : m_Result.ToString()
+                    )
+            );
 
             return m_Result;
         }
@@ -529,7 +612,10 @@ namespace System.Net
         // It completes the result but doesn't do any of the notifications.
         internal void InternalCleanup()
         {
-            if ((m_IntCompleted & ~c_HighBit) == 0 && (Interlocked.Increment(ref m_IntCompleted) & ~c_HighBit) == 1)
+            if (
+                (m_IntCompleted & ~c_HighBit) == 0
+                && (Interlocked.Increment(ref m_IntCompleted) & ~c_HighBit) == 1
+            )
             {
                 // Set no result so that just in case there are waiters, they don't hang in the spin lock.
                 m_Result = null;

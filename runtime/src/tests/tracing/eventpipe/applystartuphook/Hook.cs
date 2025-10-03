@@ -25,7 +25,8 @@ public class Hook
         {
             if (TryGetCallCountProperty(out PropertyInfo callCount))
             {
-                delegate*<int> getCallCount = (delegate*<int>)callCount.GetMethod.MethodHandle.GetFunctionPointer();
+                delegate* <int> getCallCount = (delegate* <int>)
+                    callCount.GetMethod.MethodHandle.GetFunctionPointer();
                 return getCallCount();
             }
 
@@ -37,7 +38,7 @@ public class Hook
     {
         callCount = null;
         Assembly asm = null;
-        foreach(Assembly loaded in AppDomain.CurrentDomain.GetAssemblies())
+        foreach (Assembly loaded in AppDomain.CurrentDomain.GetAssemblies())
         {
             if (loaded.GetName().Name == Name && loaded.Location == AssemblyPath)
             {
@@ -53,7 +54,10 @@ public class Hook
         if (hook == null)
             return false;
 
-        callCount = hook.GetProperty(nameof(CallCount), BindingFlags.NonPublic | BindingFlags.Static);
+        callCount = hook.GetProperty(
+            nameof(CallCount),
+            BindingFlags.NonPublic | BindingFlags.Static
+        );
         return callCount != null;
     }
 }

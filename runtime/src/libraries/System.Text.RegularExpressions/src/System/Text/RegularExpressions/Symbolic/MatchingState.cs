@@ -9,7 +9,8 @@ using System.Runtime.CompilerServices;
 namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>Captures a state explored during matching.</summary>
-    internal sealed class MatchingState<TSet> where TSet : IComparable<TSet>, IEquatable<TSet>
+    internal sealed class MatchingState<TSet>
+        where TSet : IComparable<TSet>, IEquatable<TSet>
     {
         internal MatchingState(SymbolicRegexNode<TSet> node, uint prevCharKind)
         {
@@ -71,7 +72,11 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <param name="builder">the builder that owns <see cref="Node"/></param>
         /// <param name="minterm">minterm corresponding to some input character or False corresponding to last \n</param>
         /// <param name="nextCharKind"></param>
-        internal SymbolicRegexNode<TSet> Next(SymbolicRegexBuilder<TSet> builder, TSet minterm, uint nextCharKind)
+        internal SymbolicRegexNode<TSet> Next(
+            SymbolicRegexBuilder<TSet> builder,
+            TSet minterm,
+            uint nextCharKind
+        )
         {
             // Combined character context
             uint context = CharKind.Context(PrevCharKind, nextCharKind);
@@ -87,7 +92,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <param name="minterm">minterm corresponding to some input character or False corresponding to last \n</param>
         /// <param name="nextCharKind"></param>
         /// <returns>an enumeration of the transitions as pairs of the target state and a list of effects to be applied</returns>
-        internal List<(SymbolicRegexNode<TSet> Node, DerivativeEffect[] Effects)> NfaNextWithEffects(SymbolicRegexBuilder<TSet> builder, TSet minterm, uint nextCharKind)
+        internal List<(
+            SymbolicRegexNode<TSet> Node,
+            DerivativeEffect[] Effects
+        )> NfaNextWithEffects(SymbolicRegexBuilder<TSet> builder, TSet minterm, uint nextCharKind)
         {
             // Combined character context
             uint context = CharKind.Context(PrevCharKind, nextCharKind);
@@ -148,8 +156,7 @@ namespace System.Text.RegularExpressions.Symbolic
 
 #if DEBUG
         public override string ToString() =>
-            PrevCharKind == 0 ? Node.ToString() :
-             $"({CharKind.DescribePrev(PrevCharKind)},{Node})";
+            PrevCharKind == 0 ? Node.ToString() : $"({CharKind.DescribePrev(PrevCharKind)},{Node})";
 #endif
     }
 }

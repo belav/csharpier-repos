@@ -15,6 +15,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.I
     internal interface IIntellisenseBuildTarget
     {
         // currently, reason is not being used.
-        void SetIntellisenseBuildResult(bool succeeded, [MarshalAs(UnmanagedType.LPWStr)] string reason);
+        void SetIntellisenseBuildResult(
+            bool succeeded,
+            [MarshalAs(UnmanagedType.LPWStr)] string reason
+        );
     }
 }

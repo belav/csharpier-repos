@@ -5,17 +5,16 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
-    using System.Runtime.Serialization;
-    using System.ServiceModel.Security;
-    using System.ServiceModel;
-    using System.Xml;
-    using WsdlNS = System.Web.Services.Description;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
+    using System.Xml;
+    using WsdlNS = System.Web.Services.Description;
 
-    public abstract class TransportBindingElement
-        : BindingElement
+    public abstract class TransportBindingElement : BindingElement
     {
         bool manualAddressing;
         long maxBufferPoolSize;
@@ -39,30 +38,25 @@ namespace System.ServiceModel.Channels
         [DefaultValue(TransportDefaults.ManualAddressing)]
         public virtual bool ManualAddressing
         {
-            get
-            {
-                return this.manualAddressing;
-            }
-
-            set
-            {
-                this.manualAddressing = value;
-            }
+            get { return this.manualAddressing; }
+            set { this.manualAddressing = value; }
         }
 
         [DefaultValue(TransportDefaults.MaxBufferPoolSize)]
         public virtual long MaxBufferPoolSize
         {
-            get
-            {
-                return this.maxBufferPoolSize;
-            }
+            get { return this.maxBufferPoolSize; }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maxBufferPoolSize = value;
             }
@@ -71,16 +65,18 @@ namespace System.ServiceModel.Channels
         [DefaultValue(TransportDefaults.MaxReceivedMessageSize)]
         public virtual long MaxReceivedMessageSize
         {
-            get
-            {
-                return this.maxReceivedMessageSize;
-            }
+            get { return this.maxReceivedMessageSize; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
                 this.maxReceivedMessageSize = value;
             }
@@ -88,13 +84,17 @@ namespace System.ServiceModel.Channels
 
         public abstract string Scheme { get; }
 
-        internal static IChannelFactory<TChannel> CreateChannelFactory<TChannel>(TransportBindingElement transport)
+        internal static IChannelFactory<TChannel> CreateChannelFactory<TChannel>(
+            TransportBindingElement transport
+        )
         {
             Binding binding = new CustomBinding(transport);
             return binding.BuildChannelFactory<TChannel>();
         }
 
-        internal static IChannelListener CreateChannelListener<TChannel>(TransportBindingElement transport)
+        internal static IChannelListener CreateChannelListener<TChannel>(
+            TransportBindingElement transport
+        )
             where TChannel : class, IChannel
         {
             Binding binding = new CustomBinding(transport);
@@ -110,15 +110,21 @@ namespace System.ServiceModel.Channels
 
             if (typeof(T) == typeof(ChannelProtectionRequirements))
             {
-                ChannelProtectionRequirements myRequirements = this.GetProtectionRequirements(context);
-                myRequirements.Add(context.GetInnerProperty<ChannelProtectionRequirements>() ?? new ChannelProtectionRequirements());
+                ChannelProtectionRequirements myRequirements = this.GetProtectionRequirements(
+                    context
+                );
+                myRequirements.Add(
+                    context.GetInnerProperty<ChannelProtectionRequirements>()
+                        ?? new ChannelProtectionRequirements()
+                );
                 return (T)(object)myRequirements;
             }
 
             // to cover all our bases, let's iterate through the BindingParameters to make sure
             // we haven't missed a query (since we're the Transport and we're at the bottom)
 #pragma warning suppress 56506 // Microsoft, BindingContext.BindingParameters cannot be null
-            Collection<BindingElement> bindingElements = context.BindingParameters.FindAll<BindingElement>();
+            Collection<BindingElement> bindingElements =
+                context.BindingParameters.FindAll<BindingElement>();
 
             T result = default(T);
             for (int i = 0; i < bindingElements.Count; i++)
@@ -132,7 +138,8 @@ namespace System.ServiceModel.Channels
 
             if (typeof(T) == typeof(MessageVersion))
             {
-                return (T)(object)TransportDefaults.GetDefaultMessageEncoderFactory().MessageVersion;
+                return (T)
+                    (object)TransportDefaults.GetDefaultMessageEncoderFactory().MessageVersion;
             }
 
             if (typeof(T) == typeof(XmlDictionaryReaderQuotas))
@@ -155,7 +162,8 @@ namespace System.ServiceModel.Channels
         {
             AddressingVersion addressingVersion = AddressingVersion.WSAddressing10;
 #pragma warning suppress 56506 // Microsoft, CustomBinding.Elements can never be null
-            MessageEncodingBindingElement messageEncoderBindingElement = context.Binding.Elements.Find<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement messageEncoderBindingElement =
+                context.Binding.Elements.Find<MessageEncodingBindingElement>();
             if (messageEncoderBindingElement != null)
             {
                 addressingVersion = messageEncoderBindingElement.MessageVersion.Addressing;
@@ -163,14 +171,29 @@ namespace System.ServiceModel.Channels
             return GetProtectionRequirements(addressingVersion);
         }
 
-        internal static void ExportWsdlEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext endpointContext,
-            string wsdlTransportUri, AddressingVersion addressingVersion)
+        internal static void ExportWsdlEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext endpointContext,
+            string wsdlTransportUri,
+            AddressingVersion addressingVersion
+        )
         {
-            ExportWsdlEndpoint(exporter, endpointContext, wsdlTransportUri, endpointContext.Endpoint.Address, addressingVersion);
+            ExportWsdlEndpoint(
+                exporter,
+                endpointContext,
+                wsdlTransportUri,
+                endpointContext.Endpoint.Address,
+                addressingVersion
+            );
         }
 
-        internal static void ExportWsdlEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext endpointContext,
-            string wsdlTransportUri, EndpointAddress address, AddressingVersion addressingVersion)
+        internal static void ExportWsdlEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext endpointContext,
+            string wsdlTransportUri,
+            EndpointAddress address,
+            AddressingVersion addressingVersion
+        )
         {
             if (exporter == null)
             {
@@ -184,10 +207,14 @@ namespace System.ServiceModel.Channels
 
             // Set SoapBinding Transport URI
 #pragma warning suppress 56506 // Microsoft, these properties cannot be null in this context
-            BindingElementCollection bindingElements = endpointContext.Endpoint.Binding.CreateBindingElements();
+            BindingElementCollection bindingElements =
+                endpointContext.Endpoint.Binding.CreateBindingElements();
             if (wsdlTransportUri != null)
             {
-                WsdlNS.SoapBinding soapBinding = SoapHelper.GetOrCreateSoapBinding(endpointContext, exporter);
+                WsdlNS.SoapBinding soapBinding = SoapHelper.GetOrCreateSoapBinding(
+                    endpointContext,
+                    exporter
+                );
 
                 if (soapBinding != null)
                 {
@@ -197,9 +224,14 @@ namespace System.ServiceModel.Channels
 
             if (endpointContext.WsdlPort != null)
             {
-                WsdlExporter.WSAddressingHelper.AddAddressToWsdlPort(endpointContext.WsdlPort, address, addressingVersion);
+                WsdlExporter.WSAddressingHelper.AddAddressToWsdlPort(
+                    endpointContext.WsdlPort,
+                    address,
+                    addressingVersion
+                );
             }
         }
+
         internal override bool IsMatch(BindingElement b)
         {
             if (b == null)

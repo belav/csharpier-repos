@@ -19,7 +19,12 @@ namespace System.Reflection
 
         #region Constructor
         internal MdFieldInfo(
-        int tkField, FieldAttributes fieldAttributes, RuntimeTypeHandle declaringTypeHandle, RuntimeTypeCache reflectedTypeCache, BindingFlags bindingFlags)
+            int tkField,
+            FieldAttributes fieldAttributes,
+            RuntimeTypeHandle declaringTypeHandle,
+            RuntimeTypeCache reflectedTypeCache,
+            BindingFlags bindingFlags
+        )
             : base(reflectedTypeCache, declaringTypeHandle.GetRuntimeType(), bindingFlags)
         {
             m_tkField = tkField;
@@ -31,29 +36,41 @@ namespace System.Reflection
         #region Internal Members
         internal override bool CacheEquals(object? o)
         {
-            return
-                o is MdFieldInfo m &&
-                m.m_tkField == m_tkField &&
-                ReferenceEquals(m_declaringType, m.m_declaringType);
+            return o is MdFieldInfo m
+                && m.m_tkField == m_tkField
+                && ReferenceEquals(m_declaringType, m.m_declaringType);
         }
         #endregion
 
         #region MemberInfo Overrides
-        public override string Name => m_name ??= GetRuntimeModule().MetadataImport.GetName(m_tkField).ToString();
+        public override string Name =>
+            m_name ??= GetRuntimeModule().MetadataImport.GetName(m_tkField).ToString();
 
         public override int MetadataToken => m_tkField;
-        internal override RuntimeModule GetRuntimeModule() { return m_declaringType.GetRuntimeModule(); }
+
+        internal override RuntimeModule GetRuntimeModule()
+        {
+            return m_declaringType.GetRuntimeModule();
+        }
 
         public override bool Equals(object? obj) =>
-            ReferenceEquals(this, obj) ||
-            (MetadataUpdater.IsSupported &&
-                obj is MdFieldInfo fi &&
-                fi.m_tkField == m_tkField &&
-                ReferenceEquals(fi.m_declaringType, m_declaringType) &&
-                ReferenceEquals(fi.m_reflectedTypeCache.GetRuntimeType(), m_reflectedTypeCache.GetRuntimeType()));
+            ReferenceEquals(this, obj)
+            || (
+                MetadataUpdater.IsSupported
+                && obj is MdFieldInfo fi
+                && fi.m_tkField == m_tkField
+                && ReferenceEquals(fi.m_declaringType, m_declaringType)
+                && ReferenceEquals(
+                    fi.m_reflectedTypeCache.GetRuntimeType(),
+                    m_reflectedTypeCache.GetRuntimeType()
+                )
+            );
 
         public override int GetHashCode() =>
-            HashCode.Combine(m_tkField.GetHashCode(), m_declaringType.GetUnderlyingNativeHandle().GetHashCode());
+            HashCode.Combine(
+                m_tkField.GetHashCode(),
+                m_declaringType.GetUnderlyingNativeHandle().GetHashCode()
+            );
         #endregion
 
         #region FieldInfo Overrides
@@ -85,13 +102,21 @@ namespace System.Reflection
             return GetValue(false);
         }
 
-        public override object? GetRawConstantValue() { return GetValue(true); }
+        public override object? GetRawConstantValue()
+        {
+            return GetValue(true);
+        }
 
         private object? GetValue(bool raw)
         {
             // Cannot cache these because they could be user defined non-agile enumerations
 
-            object? value = MdConstant.GetValue(GetRuntimeModule().MetadataImport, m_tkField, FieldType.TypeHandle, raw);
+            object? value = MdConstant.GetValue(
+                GetRuntimeModule().MetadataImport,
+                m_tkField,
+                FieldType.TypeHandle,
+                raw
+            );
 
             if (value == DBNull.Value)
                 throw new NotSupportedException(SR.Arg_EnumLitValueNotFound);
@@ -101,7 +126,13 @@ namespace System.Reflection
 
         [DebuggerStepThrough]
         [DebuggerHidden]
-        public override void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, CultureInfo? culture)
+        public override void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            CultureInfo? culture
+        )
         {
             throw new FieldAccessException(SR.Acc_ReadOnly);
         }
@@ -112,10 +143,14 @@ namespace System.Reflection
             {
                 if (m_fieldType == null)
                 {
-                    ConstArray fieldMarshal = GetRuntimeModule().MetadataImport.GetSigOfFieldDef(m_tkField);
+                    ConstArray fieldMarshal = GetRuntimeModule()
+                        .MetadataImport.GetSigOfFieldDef(m_tkField);
 
-                    m_fieldType = new Signature(fieldMarshal.Signature.ToPointer(),
-                        (int)fieldMarshal.Length, m_declaringType).FieldType;
+                    m_fieldType = new Signature(
+                        fieldMarshal.Signature.ToPointer(),
+                        (int)fieldMarshal.Length,
+                        m_declaringType
+                    ).FieldType;
                 }
 
                 return m_fieldType;

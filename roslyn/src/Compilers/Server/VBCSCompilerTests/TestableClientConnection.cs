@@ -19,11 +19,23 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public string LoggingIdentifier { get; set; } = "TestableClient";
         public Task DisconnectTask { get; set; } = new TaskCompletionSource<object>().Task;
         public Action DisposeFunc { get; set; } = delegate { };
-        public Func<CancellationToken, Task<BuildRequest>> ReadBuildRequestFunc = delegate { throw new Exception(); };
-        public Func<BuildResponse, CancellationToken, Task> WriteBuildResponseFunc = delegate { throw new Exception(); };
+        public Func<CancellationToken, Task<BuildRequest>> ReadBuildRequestFunc = delegate
+        {
+            throw new Exception();
+        };
+        public Func<BuildResponse, CancellationToken, Task> WriteBuildResponseFunc = delegate
+        {
+            throw new Exception();
+        };
 
         public void Dispose() => DisposeFunc();
-        public Task<BuildRequest> ReadBuildRequestAsync(CancellationToken cancellationToken) => ReadBuildRequestFunc(cancellationToken);
-        public Task WriteBuildResponseAsync(BuildResponse response, CancellationToken cancellationToken) => WriteBuildResponseFunc(response, cancellationToken);
+
+        public Task<BuildRequest> ReadBuildRequestAsync(CancellationToken cancellationToken) =>
+            ReadBuildRequestFunc(cancellationToken);
+
+        public Task WriteBuildResponseAsync(
+            BuildResponse response,
+            CancellationToken cancellationToken
+        ) => WriteBuildResponseFunc(response, cancellationToken);
     }
 }

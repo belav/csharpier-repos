@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeSnippetTypeMember.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
@@ -21,12 +21,9 @@ namespace System.CodeDom {
     ///       snippet member of a class.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeSnippetTypeMember : CodeTypeMember {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeSnippetTypeMember : CodeTypeMember
+    {
         private string text;
 
         /// <devdoc>
@@ -34,15 +31,15 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeSnippetTypeMember'/>.
         ///    </para>
         /// </devdoc>
-        public CodeSnippetTypeMember() {
-        }
+        public CodeSnippetTypeMember() { }
 
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeSnippetTypeMember'/>.
         ///    </para>
         /// </devdoc>
-        public CodeSnippetTypeMember(string text) {
+        public CodeSnippetTypeMember(string text)
+        {
             Text = text;
         }
 
@@ -51,14 +48,10 @@ namespace System.CodeDom {
         ///       Gets or sets the code for the class member.
         ///    </para>
         /// </devdoc>
-        public string Text {
-            get {
-                return (text == null) ? string.Empty : text;
-            }
-            set {
-                text = value;
-            }
+        public string Text
+        {
+            get { return (text == null) ? string.Empty : text; }
+            set { text = value; }
         }
     }
 }
-

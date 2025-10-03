@@ -31,7 +31,10 @@ public static unsafe class ComInterfaces
     public static void* CreateComObject()
     {
         var myObject = new MyObject();
-        nint ptr = ComWrappersInstance.GetOrCreateComInterfaceForObject(myObject, CreateComInterfaceFlags.None);
+        nint ptr = ComWrappersInstance.GetOrCreateComInterfaceForObject(
+            myObject,
+            CreateComInterfaceFlags.None
+        );
 
         return (void*)ptr;
     }
@@ -39,14 +42,16 @@ public static unsafe class ComInterfaces
     [UnmanagedCallersOnly(EntryPoint = "set_com_object_data")]
     public static void SetComObjectData(void* ptr, int value)
     {
-        IComInterface1 obj = (IComInterface1)ComWrappersInstance.GetOrCreateObjectForComInstance((nint)ptr, CreateObjectFlags.None);
+        IComInterface1 obj = (IComInterface1)
+            ComWrappersInstance.GetOrCreateObjectForComInstance((nint)ptr, CreateObjectFlags.None);
         obj.SetData(value);
     }
 
     [UnmanagedCallersOnly(EntryPoint = "get_com_object_data")]
     public static int GetComObjectData(void* ptr)
     {
-        IComInterface1 obj = (IComInterface1)ComWrappersInstance.GetOrCreateObjectForComInstance((nint)ptr, CreateObjectFlags.None);
+        IComInterface1 obj = (IComInterface1)
+            ComWrappersInstance.GetOrCreateObjectForComInstance((nint)ptr, CreateObjectFlags.None);
         return obj.GetData();
     }
 
@@ -61,8 +66,16 @@ public static unsafe class ComInterfaces
             {
                 if (s_comInterface1VTable != null)
                     return s_comInterface1VTable;
-                void** vtable = (void**)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ComInterfaces), sizeof(void*) * 5);
-                GetIUnknownImpl(out var fpQueryInterface, out var fpAddReference, out var fpRelease);
+                void** vtable = (void**)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(ComInterfaces),
+                        sizeof(void*) * 5
+                    );
+                GetIUnknownImpl(
+                    out var fpQueryInterface,
+                    out var fpAddReference,
+                    out var fpRelease
+                );
                 vtable[0] = (void*)fpQueryInterface;
                 vtable[1] = (void*)fpAddReference;
                 vtable[2] = (void*)fpRelease;
@@ -81,14 +94,23 @@ public static unsafe class ComInterfaces
                 if (s_myObjectComInterfaceEntries != null)
                     return s_myObjectComInterfaceEntries;
 
-                ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(MyObject), sizeof(ComInterfaceEntry));
+                ComInterfaceEntry* comInterfaceEntry = (ComInterfaceEntry*)
+                    RuntimeHelpers.AllocateTypeAssociatedMemory(
+                        typeof(MyObject),
+                        sizeof(ComInterfaceEntry)
+                    );
                 comInterfaceEntry->IID = IComInterface1.IID;
                 comInterfaceEntry->Vtable = (nint)IComInterface1VTable;
                 s_myObjectComInterfaceEntries = comInterfaceEntry;
                 return s_myObjectComInterfaceEntries;
             }
         }
-        protected override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+
+        protected override ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        )
         {
             if (obj is MyObject)
             {
@@ -98,9 +120,14 @@ public static unsafe class ComInterfaces
             count = 0;
             return null;
         }
+
         protected override object CreateObject(nint ptr, CreateObjectFlags flags)
         {
-            int hr = Marshal.QueryInterface(ptr, in IComInterface1.IID, out IntPtr IComInterfaceImpl);
+            int hr = Marshal.QueryInterface(
+                ptr,
+                in IComInterface1.IID,
+                out IntPtr IComInterfaceImpl
+            );
             if (hr != 0)
             {
                 return null;
@@ -159,6 +186,7 @@ public static unsafe class ComInterfaces
         {
             return _data;
         }
+
         void IComInterface1.SetData(int x)
         {
             _data = x;
@@ -167,13 +195,14 @@ public static unsafe class ComInterfaces
         // Provides function pointers in the COM format to use in COM VTables
         public static class ABI
         {
-
             [UnmanagedCallersOnly]
             public static int GetData(void* @this, int* value)
             {
                 try
                 {
-                    *value = ComInterfaceDispatch.GetInstance<IComInterface1>((ComInterfaceDispatch*)@this).GetData();
+                    *value = ComInterfaceDispatch
+                        .GetInstance<IComInterface1>((ComInterfaceDispatch*)@this)
+                        .GetData();
                     return 0;
                 }
                 catch (Exception e)
@@ -187,7 +216,9 @@ public static unsafe class ComInterfaces
             {
                 try
                 {
-                    ComInterfaceDispatch.GetInstance<IComInterface1>((ComInterfaceDispatch*)@this).SetData(newValue);
+                    ComInterfaceDispatch
+                        .GetInstance<IComInterface1>((ComInterfaceDispatch*)@this)
+                        .SetData(newValue);
                     return 0;
                 }
                 catch (Exception e)

@@ -12,7 +12,9 @@ namespace System.ServiceModel.Channels
     using System.Xml;
     using System.Xml.Schema;
 
-    [TypeForwardedFrom("System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class ContextBindingElementImporter : IPolicyImportExtension, IWsdlImportExtension
     {
         public ContextBindingElementImporter()
@@ -20,7 +22,11 @@ namespace System.ServiceModel.Channels
             // empty
         }
 
-        public void BeforeImport(ServiceDescriptionCollection wsdlDocuments, XmlSchemaSet xmlSchemas, ICollection<XmlElement> policy)
+        public void BeforeImport(
+            ServiceDescriptionCollection wsdlDocuments,
+            XmlSchemaSet xmlSchemas,
+            ICollection<XmlElement> policy
+        )
         {
             // empty
         }
@@ -38,14 +44,18 @@ namespace System.ServiceModel.Channels
             }
             if (context.Endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context.Endpoint");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "context.Endpoint"
+                );
             }
             if (context.Endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context.Endpoint.Binding");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "context.Endpoint.Binding"
+                );
             }
 
-            // Try to post-process the unrecognized RequireHttpCookie assertion to augment the AllowCookies value 
+            // Try to post-process the unrecognized RequireHttpCookie assertion to augment the AllowCookies value
             // of HttpTransportBindingElement
 
             CustomBinding customBinding = context.Endpoint.Binding as CustomBinding;
@@ -57,7 +67,12 @@ namespace System.ServiceModel.Channels
                 if (unrecognized != null)
                 {
                     XmlElement httpUseCookieAssertion = null;
-                    if (ContextBindingElementPolicy.TryGetHttpUseCookieAssertion(unrecognized.BindingAsserions, out httpUseCookieAssertion))
+                    if (
+                        ContextBindingElementPolicy.TryGetHttpUseCookieAssertion(
+                            unrecognized.BindingAsserions,
+                            out httpUseCookieAssertion
+                        )
+                    )
                     {
                         foreach (BindingElement element in customBinding.Elements)
                         {
@@ -74,15 +89,16 @@ namespace System.ServiceModel.Channels
                             }
                         }
                     }
-
                 }
 
                 // Try to upgrade to standard binding
 
                 BindingElementCollection bindingElements = customBinding.CreateBindingElements();
                 Binding binding;
-                if (!WSHttpContextBinding.TryCreate(bindingElements, out binding)
-                    && !NetTcpContextBinding.TryCreate(bindingElements, out binding))
+                if (
+                    !WSHttpContextBinding.TryCreate(bindingElements, out binding)
+                    && !NetTcpContextBinding.TryCreate(bindingElements, out binding)
+                )
                 {
                     // Work around BasicHttpBinding.TryCreate insensitivity to HttpTransportBindingElement.AllowCookies value
 
@@ -124,20 +140,35 @@ namespace System.ServiceModel.Channels
             }
             if (context.BindingElements == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PolicyImportContextBindingElementCollectionIsNull)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.PolicyImportContextBindingElementCollectionIsNull)
+                    )
+                );
             }
 
             ContextBindingElement contextBindingElement;
             XmlElement httpUseCookieAssertion = null;
-            if (ContextBindingElementPolicy.TryImportRequireContextAssertion(context.GetBindingAssertions(), out contextBindingElement))
+            if (
+                ContextBindingElementPolicy.TryImportRequireContextAssertion(
+                    context.GetBindingAssertions(),
+                    out contextBindingElement
+                )
+            )
             {
                 context.BindingElements.Insert(0, contextBindingElement);
             }
-            else if (ContextBindingElementPolicy.TryGetHttpUseCookieAssertion(context.GetBindingAssertions(), out httpUseCookieAssertion))
+            else if (
+                ContextBindingElementPolicy.TryGetHttpUseCookieAssertion(
+                    context.GetBindingAssertions(),
+                    out httpUseCookieAssertion
+                )
+            )
             {
                 foreach (BindingElement bindingElement in context.BindingElements)
                 {
-                    HttpTransportBindingElement http = bindingElement as HttpTransportBindingElement;
+                    HttpTransportBindingElement http =
+                        bindingElement as HttpTransportBindingElement;
                     if (http != null)
                     {
                         http.AllowCookies = true;

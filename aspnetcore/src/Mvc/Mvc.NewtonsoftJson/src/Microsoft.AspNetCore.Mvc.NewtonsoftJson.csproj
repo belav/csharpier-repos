@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>ASP.NET Core MVC features that use Newtonsoft.Json. Includes input and output formatters for JSON and JSON PATCH.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -9,25 +8,27 @@
     <DefineConstants>$(DefineConstants);JSONNET</DefineConstants>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)ClosedGenericMatcher\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" />
     <Reference Include="Microsoft.AspNetCore.JsonPatch" />
     <Reference Include="Newtonsoft.Json" />
     <Reference Include="Newtonsoft.Json.Bson" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(SharedSourceRoot)ResponseContentTypeHelper.cs" LinkBase="Shared" />
     <Compile Include="..\..\Mvc.Core\src\Infrastructure\AsyncEnumerableReader.cs" />
-    <Compile Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs" LinkBase="Shared" />
-    <Compile Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs" LinkBase="Shared" />
+    <Compile
+      Include="$(SharedSourceRoot)ThrowHelpers\ArgumentNullThrowHelper.cs"
+      LinkBase="Shared"
+    />
+    <Compile
+      Include="$(SharedSourceRoot)CallerArgument\CallerArgumentExpressionAttribute.cs"
+      LinkBase="Shared"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc.Test" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson.Test" />

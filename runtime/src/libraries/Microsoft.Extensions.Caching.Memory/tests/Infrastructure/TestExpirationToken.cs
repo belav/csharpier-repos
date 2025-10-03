@@ -18,10 +18,7 @@ namespace Microsoft.Extensions.Caching.Memory.Infrastructure
                 HasChangedWasCalled = true;
                 return _hasChanged;
             }
-            set
-            {
-                _hasChanged = value;
-            }
+            set { _hasChanged = value; }
         }
 
         public bool HasChangedWasCalled { get; set; }
@@ -33,10 +30,7 @@ namespace Microsoft.Extensions.Caching.Memory.Infrastructure
                 ActiveChangeCallbacksWasCalled = true;
                 return _activeChangeCallbacks;
             }
-            set
-            {
-                _activeChangeCallbacks = value;
-            }
+            set { _activeChangeCallbacks = value; }
         }
 
         public bool ActiveChangeCallbacksWasCalled { get; set; }

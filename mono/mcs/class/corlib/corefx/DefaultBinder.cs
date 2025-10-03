@@ -1,33 +1,41 @@
 using System.Reflection;
 
-namespace System {
-	partial class DefaultBinder {
-		internal static bool CompareMethodSig (MethodBase m1, MethodBase m2)
-		{
-			ParameterInfo[] params1 = m1.GetParametersNoCopy ();
-			ParameterInfo[] params2 = m2.GetParametersNoCopy ();
+namespace System
+{
+    partial class DefaultBinder
+    {
+        internal static bool CompareMethodSig(MethodBase m1, MethodBase m2)
+        {
+            ParameterInfo[] params1 = m1.GetParametersNoCopy();
+            ParameterInfo[] params2 = m2.GetParametersNoCopy();
 
-			if (params1.Length != params2.Length)
-				return false;
+            if (params1.Length != params2.Length)
+                return false;
 
-			int numParams = params1.Length;
-			for (int i = 0; i < numParams; i++) {
-				if (params1 [i].ParameterType != params2 [i].ParameterType)
-					return false;
-			}
+            int numParams = params1.Length;
+            for (int i = 0; i < numParams; i++)
+            {
+                if (params1[i].ParameterType != params2[i].ParameterType)
+                    return false;
+            }
 
-			return true;
-		}
+            return true;
+        }
 
         // Given a set of methods that match the base criteria, select a method based
         // upon an array of types.  This method should return null if no method matchs
         // the criteria.
-        public sealed override MethodBase SelectMethod (BindingFlags bindingAttr, MethodBase[] match, Type[] types, ParameterModifier[] modifiers)
+        public sealed override MethodBase SelectMethod(
+            BindingFlags bindingAttr,
+            MethodBase[] match,
+            Type[] types,
+            ParameterModifier[] modifiers
+        )
         {
             int i;
             int j;
 
-            Type[] realTypes = new Type [types.Length];
+            Type[] realTypes = new Type[types.Length];
             for (i = 0; i < types.Length; i++)
             {
                 realTypes[i] = types[i].UnderlyingSystemType;
@@ -42,7 +50,7 @@ namespace System {
 
             MethodBase[] candidates = (MethodBase[])match.Clone();
 
-            // Find all the methods that can be described by the types parameter. 
+            // Find all the methods that can be described by the types parameter.
             //  Remove all of them that cannot.
             int CurIdx = 0;
             for (i = 0; i < candidates.Length; i++)
@@ -70,8 +78,13 @@ namespace System {
 
                     if (pCls.IsPrimitive)
                     {
-                        if (!(type.UnderlyingSystemType.IsRuntimeImplemented()) ||
-                            !CanChangePrimitive(type.UnderlyingSystemType, pCls.UnderlyingSystemType))
+                        if (
+                            !(type.UnderlyingSystemType.IsRuntimeImplemented())
+                            || !CanChangePrimitive(
+                                type.UnderlyingSystemType,
+                                pCls.UnderlyingSystemType
+                            )
+                        )
                             break;
                     }
                     else
@@ -96,7 +109,16 @@ namespace System {
                 paramOrder[i] = i;
             for (i = 1; i < CurIdx; i++)
             {
-                int newMin = FindMostSpecificMethod(candidates[currentMin], paramOrder, null, candidates[i], paramOrder, null, types, null);
+                int newMin = FindMostSpecificMethod(
+                    candidates[currentMin],
+                    paramOrder,
+                    null,
+                    candidates[i],
+                    paramOrder,
+                    null,
+                    types,
+                    null
+                );
                 if (newMin == 0)
                     ambig = true;
                 else
@@ -157,25 +179,60 @@ namespace System {
 
         private static Primitives[] _primitiveConversions = new Primitives[]
         {
-                /* Empty    */  0, // not primitive
-                /* Object   */  0, // not primitive
-                /* DBNull   */  0, // not exposed.
-                /* Boolean  */  Primitives.Boolean,
-                /* Char     */  Primitives.Char    | Primitives.UInt16 | Primitives.UInt32 | Primitives.Int32  | Primitives.UInt64 | Primitives.Int64  | Primitives.Single |  Primitives.Double,
-                /* SByte    */  Primitives.SByte   | Primitives.Int16  | Primitives.Int32  | Primitives.Int64  | Primitives.Single | Primitives.Double,
-                /* Byte     */  Primitives.Byte    | Primitives.Char   | Primitives.UInt16 | Primitives.Int16  | Primitives.UInt32 | Primitives.Int32  | Primitives.UInt64 |  Primitives.Int64 |  Primitives.Single |  Primitives.Double,
-                /* Int16    */  Primitives.Int16   | Primitives.Int32  | Primitives.Int64  | Primitives.Single | Primitives.Double,
-                /* UInt16   */  Primitives.UInt16  | Primitives.UInt32 | Primitives.Int32  | Primitives.UInt64 | Primitives.Int64  | Primitives.Single | Primitives.Double,
-                /* Int32    */  Primitives.Int32   | Primitives.Int64  | Primitives.Single | Primitives.Double,
-                /* UInt32   */  Primitives.UInt32  | Primitives.UInt64 | Primitives.Int64  | Primitives.Single | Primitives.Double,
-                /* Int64    */  Primitives.Int64   | Primitives.Single | Primitives.Double,
-                /* UInt64   */  Primitives.UInt64  | Primitives.Single | Primitives.Double,
-                /* Single   */  Primitives.Single  | Primitives.Double,
-                /* Double   */  Primitives.Double,
-                /* Decimal  */  Primitives.Decimal,
-                /* DateTime */  Primitives.DateTime,
-                /* [Unused] */  0,
-                /* String   */  Primitives.String,
-        };        		
-	}
+            /* Empty    */0, // not primitive
+            /* Object   */0, // not primitive
+            /* DBNull   */0, // not exposed.
+            /* Boolean  */Primitives.Boolean,
+            /* Char     */Primitives.Char
+                | Primitives.UInt16
+                | Primitives.UInt32
+                | Primitives.Int32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* SByte    */Primitives.SByte
+                | Primitives.Int16
+                | Primitives.Int32
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Byte     */Primitives.Byte
+                | Primitives.Char
+                | Primitives.UInt16
+                | Primitives.Int16
+                | Primitives.UInt32
+                | Primitives.Int32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Int16    */Primitives.Int16
+                | Primitives.Int32
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* UInt16   */Primitives.UInt16
+                | Primitives.UInt32
+                | Primitives.Int32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Int32    */Primitives.Int32 | Primitives.Int64 | Primitives.Single | Primitives.Double,
+            /* UInt32   */Primitives.UInt32
+                | Primitives.UInt64
+                | Primitives.Int64
+                | Primitives.Single
+                | Primitives.Double,
+            /* Int64    */Primitives.Int64 | Primitives.Single | Primitives.Double,
+            /* UInt64   */Primitives.UInt64 | Primitives.Single | Primitives.Double,
+            /* Single   */Primitives.Single | Primitives.Double,
+            /* Double   */Primitives.Double,
+            /* Decimal  */Primitives.Decimal,
+            /* DateTime */Primitives.DateTime,
+            /* [Unused] */0,
+            /* String   */Primitives.String,
+        };
+    }
 }

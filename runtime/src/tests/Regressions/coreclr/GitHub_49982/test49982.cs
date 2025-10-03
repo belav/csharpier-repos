@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.ComponentModel;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
@@ -13,9 +13,7 @@ using Xunit;
 
 public class Program
 {
-    private class MockEndPoint : EndPoint
-    {
-    }
+    private class MockEndPoint : EndPoint { }
 
     private sealed class ExtendedSocketException : SocketException
     {
@@ -26,7 +24,7 @@ public class Program
         {
             _endPoint = endPoint;
         }
-        
+
         public bool EndPointEquals(EndPoint? endPoint)
         {
             return _endPoint == endPoint;

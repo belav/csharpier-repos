@@ -9,17 +9,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static class ILocalSymbolExtensions
     {
-        public static bool CanSafelyMoveLocalToBlock(this ILocalSymbol localSymbol, SyntaxNode currentBlock, SyntaxNode destinationBlock)
+        public static bool CanSafelyMoveLocalToBlock(
+            this ILocalSymbol localSymbol,
+            SyntaxNode currentBlock,
+            SyntaxNode destinationBlock
+        )
         {
             if (currentBlock != destinationBlock)
             {
-                var localFunctionOrMethodDeclaration = currentBlock.AncestorsAndSelf()
-                    .FirstOrDefault(node => node.Kind() is SyntaxKind.LocalFunctionStatement or SyntaxKind.MethodDeclaration);
-                var localFunctionStatement = destinationBlock.FirstAncestorOrSelf<LocalFunctionStatementSyntax>();
+                var localFunctionOrMethodDeclaration = currentBlock
+                    .AncestorsAndSelf()
+                    .FirstOrDefault(node =>
+                        node.Kind()
+                            is SyntaxKind.LocalFunctionStatement
+                                or SyntaxKind.MethodDeclaration
+                    );
+                var localFunctionStatement =
+                    destinationBlock.FirstAncestorOrSelf<LocalFunctionStatementSyntax>();
 
-                if (localFunctionOrMethodDeclaration != localFunctionStatement &&
-                    HasTypeParameterWithName(localFunctionOrMethodDeclaration, localSymbol.Type.Name) &&
-                    HasTypeParameterWithName(localFunctionStatement, localSymbol.Type.Name))
+                if (
+                    localFunctionOrMethodDeclaration != localFunctionStatement
+                    && HasTypeParameterWithName(
+                        localFunctionOrMethodDeclaration,
+                        localSymbol.Type.Name
+                    )
+                    && HasTypeParameterWithName(localFunctionStatement, localSymbol.Type.Name)
+                )
                 {
                     return false;
                 }
@@ -42,7 +57,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         return false;
                 }
 
-                return typeParameters.HasValue && typeParameters.Value.Any(typeParameter => typeParameter.Identifier.ValueText == name);
+                return typeParameters.HasValue
+                    && typeParameters.Value.Any(typeParameter =>
+                        typeParameter.Identifier.ValueText == name
+                    );
             }
         }
     }

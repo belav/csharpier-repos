@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 /// <summary>
 ///     A value converter that converts a .NET primitive collection into a JSON string.
 /// </summary>
-public class CollectionToJsonStringConverter<TElement> : ValueConverter<IEnumerable<TElement>, string>
+public class CollectionToJsonStringConverter<TElement>
+    : ValueConverter<IEnumerable<TElement>, string>
 {
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -20,7 +21,8 @@ public class CollectionToJsonStringConverter<TElement> : ValueConverter<IEnumera
     public CollectionToJsonStringConverter(JsonValueReaderWriter collectionJsonReaderWriter)
         : base(
             v => collectionJsonReaderWriter.ToJsonString(v),
-            v => (IEnumerable<TElement>)collectionJsonReaderWriter.FromJsonString(v, null))
+            v => (IEnumerable<TElement>)collectionJsonReaderWriter.FromJsonString(v, null)
+        )
     {
         JsonReaderWriter = collectionJsonReaderWriter;
     }

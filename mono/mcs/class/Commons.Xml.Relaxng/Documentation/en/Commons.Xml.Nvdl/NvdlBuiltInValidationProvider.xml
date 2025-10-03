@@ -1,5 +1,11 @@
-<Type Name="NvdlBuiltInValidationProvider" FullName="Commons.Xml.Nvdl.NvdlBuiltInValidationProvider">
-  <TypeSignature Language="C#" Value="public class NvdlBuiltInValidationProvider : Commons.Xml.Nvdl.NvdlValidationProvider" />
+<Type
+  Name="NvdlBuiltInValidationProvider"
+  FullName="Commons.Xml.Nvdl.NvdlBuiltInValidationProvider"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class NvdlBuiltInValidationProvider : Commons.Xml.Nvdl.NvdlValidationProvider"
+  />
   <AssemblyInfo>
     <AssemblyName>Commons.Xml.Relaxng</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>

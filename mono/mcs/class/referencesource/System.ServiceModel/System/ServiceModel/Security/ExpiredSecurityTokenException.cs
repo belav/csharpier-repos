@@ -12,25 +12,16 @@ namespace System.ServiceModel.Security
     [Serializable]
     public class ExpiredSecurityTokenException : MessageSecurityException
     {
-
         public ExpiredSecurityTokenException()
-            : base()
-        {
-        }
+            : base() { }
 
         public ExpiredSecurityTokenException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public ExpiredSecurityTokenException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected ExpiredSecurityTokenException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

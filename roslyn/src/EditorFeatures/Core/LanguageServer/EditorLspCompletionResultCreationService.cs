@@ -19,14 +19,16 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    [ExportWorkspaceService(typeof(ILspCompletionResultCreationService), ServiceLayer.Editor), Shared]
-    internal sealed class EditorLspCompletionResultCreationService : AbstractLspCompletionResultCreationService
+    [
+        ExportWorkspaceService(typeof(ILspCompletionResultCreationService), ServiceLayer.Editor),
+        Shared
+    ]
+    internal sealed class EditorLspCompletionResultCreationService
+        : AbstractLspCompletionResultCreationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorLspCompletionResultCreationService()
-        {
-        }
+        public EditorLspCompletionResultCreationService() { }
 
         protected override async Task<LSP.CompletionItem> CreateItemAndPopulateTextEditAsync(
             Document document,
@@ -37,12 +39,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             string typedText,
             CompletionItem item,
             CompletionService completionService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var lspItem = new LSP.VSInternalCompletionItem
             {
                 Label = item.GetEntireDisplayText(),
-                Icon = new ImageElement(item.Tags.GetFirstGlyph().GetImageId())
+                Icon = new ImageElement(item.Tags.GetFirstGlyph().GetImageId()),
             };
 
             // Complex text edits (e.g. override and partial method completions) are always populated in the
@@ -59,14 +62,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             else
             {
                 await GetChangeAndPopulateSimpleTextEditAsync(
-                    document,
-                    documentText,
-                    itemDefaultsSupported,
-                    defaultSpan,
-                    item,
-                    lspItem,
-                    completionService,
-                    cancellationToken).ConfigureAwait(false);
+                        document,
+                        documentText,
+                        itemDefaultsSupported,
+                        defaultSpan,
+                        item,
+                        lspItem,
+                        completionService,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return lspItem;
@@ -81,20 +86,37 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             CompletionService completionService,
             CompletionOptions completionOptions,
             SymbolDescriptionOptions symbolDescriptionOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var description = await completionService.GetDescriptionAsync(document, roslynItem, completionOptions, symbolDescriptionOptions, cancellationToken).ConfigureAwait(false)!;
+            var description = await completionService
+                .GetDescriptionAsync(
+                    document,
+                    roslynItem,
+                    completionOptions,
+                    symbolDescriptionOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false)!;
             if (description != null)
             {
                 if (capabilityHelper.SupportVSInternalClientCapabilities)
                 {
                     var vsCompletionItem = (LSP.VSInternalCompletionItem)lspItem;
-                    vsCompletionItem.Description = new ClassifiedTextElement(description.TaggedParts
-                        .Select(tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)));
+                    vsCompletionItem.Description = new ClassifiedTextElement(
+                        description.TaggedParts.Select(tp => new ClassifiedTextRun(
+                            tp.Tag.ToClassificationTypeName(),
+                            tp.Text
+                        ))
+                    );
                 }
                 else
                 {
-                    lspItem.Documentation = ProtocolConversions.GetDocumentationMarkupContent(description.TaggedParts, document, capabilityHelper.SupportsMarkdownDocumentation);
+                    lspItem.Documentation = ProtocolConversions.GetDocumentationMarkupContent(
+                        description.TaggedParts,
+                        document,
+                        capabilityHelper.SupportsMarkdownDocumentation
+                    );
                 }
             }
 
@@ -108,9 +130,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 Contract.ThrowIfTrue(lspItem.InsertText != null);
                 Contract.ThrowIfTrue(lspItem.TextEdit != null);
 
-                var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
+                var sourceText = await document
+                    .GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var (edit, _, _) = await GenerateComplexTextEditAsync(
-                    document, completionService, roslynItem, capabilityHelper.SupportSnippets, insertNewPositionPlaceholder: true, cancellationToken).ConfigureAwait(false);
+                        document,
+                        completionService,
+                        roslynItem,
+                        capabilityHelper.SupportSnippets,
+                        insertNewPositionPlaceholder: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 lspItem.TextEdit = edit;
             }

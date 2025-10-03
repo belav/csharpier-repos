@@ -9,6 +9,7 @@ using System.Resources;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyDefaultAlias("MissingPIAAttributes.dll")]
@@ -23,6 +24,6 @@ using System.Runtime.Versioning;
 [assembly: ComVisible(false)]
 [assembly: Debuggable(DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)]
 [assembly: NeutralResourcesLanguage("en-US")]
-[assembly: RuntimeCompatibility(WrapNonExceptionThrows=true)]
+[assembly: RuntimeCompatibility(WrapNonExceptionThrows = true)]
 [assembly: SatelliteContractVersion("1.0.0.0")]
-[assembly: TargetFramework(".NETFramework,Version=v4.0", FrameworkDisplayName="")]
+[assembly: TargetFramework(".NETFramework,Version=v4.0", FrameworkDisplayName = "")]

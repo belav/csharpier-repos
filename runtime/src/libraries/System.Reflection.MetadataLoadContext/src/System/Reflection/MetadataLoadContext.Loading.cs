@@ -15,7 +15,8 @@ namespace System.Reflection
         // This maintains the canonical list of Assembly instances for a given def name. Each defname can only appear
         // once in the list and its appearance prevents further assemblies with the same identity from loading unless the Mvids's match.
         // Null entries do *not* appear here.
-        private readonly ConcurrentDictionary<RoAssemblyName, RoAssembly> _loadedAssemblies = new ConcurrentDictionary<RoAssemblyName, RoAssembly>();
+        private readonly ConcurrentDictionary<RoAssemblyName, RoAssembly> _loadedAssemblies =
+            new ConcurrentDictionary<RoAssemblyName, RoAssembly>();
 
         private RoAssembly LoadFromStreamCore(Stream peStream)
         {
@@ -26,16 +27,27 @@ namespace System.Reflection
                 if (!peReader.HasMetadata)
                     throw new BadImageFormatException(SR.NoMetadataInPeImage);
 
-                string location = (peStream is FileStream fs) ? (fs.Name ?? string.Empty) : string.Empty;
+                string location =
+                    (peStream is FileStream fs) ? (fs.Name ?? string.Empty) : string.Empty;
                 MetadataReader reader = peReader.GetMetadataReader();
                 RoAssembly candidate = new EcmaAssembly(this, peReader, reader, location);
                 AssemblyNameData defNameData = candidate.GetAssemblyNameDataNoCopy();
                 byte[] pkt = defNameData.PublicKeyToken ?? Array.Empty<byte>();
-                if (pkt.Length == 0 && defNameData.PublicKey != null && defNameData.PublicKey.Length != 0)
+                if (
+                    pkt.Length == 0
+                    && defNameData.PublicKey != null
+                    && defNameData.PublicKey.Length != 0
+                )
                 {
                     pkt = defNameData.PublicKey.ComputePublicKeyToken()!;
                 }
-                RoAssemblyName defName = new RoAssemblyName(defNameData.Name, defNameData.Version, defNameData.CultureName, pkt, defNameData.Flags);
+                RoAssemblyName defName = new RoAssemblyName(
+                    defNameData.Name,
+                    defNameData.Version,
+                    defNameData.CultureName,
+                    pkt,
+                    defNameData.Flags
+                );
 
                 RoAssembly winner = _loadedAssemblies.GetOrAdd(defName, candidate);
                 if (winner == candidate)
@@ -53,8 +65,13 @@ namespace System.Reflection
                 else
                 {
                     // We lost the race but check for a Mvid mismatch.
-                    if (candidate.ManifestModule.ModuleVersionId != winner.ManifestModule.ModuleVersionId)
-                        throw new FileLoadException(SR.Format(SR.FileLoadDuplicateAssemblies, defName));
+                    if (
+                        candidate.ManifestModule.ModuleVersionId
+                        != winner.ManifestModule.ModuleVersionId
+                    )
+                        throw new FileLoadException(
+                            SR.Format(SR.FileLoadDuplicateAssemblies, defName)
+                        );
                 }
 
                 return winner;

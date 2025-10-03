@@ -30,7 +30,14 @@ namespace System.Security.AccessControl.Tests
             //test insert at 0
             rawAcl = new RawAcl(revision, capacity);
             rawAclVerifier = new RawAcl(revision, capacity);
-            ace = new CommonAce((AceFlags)flags, (AceQualifier)qualifier, accessMask, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), isCallback, new byte[opaqueSize]);
+            ace = new CommonAce(
+                (AceFlags)flags,
+                (AceQualifier)qualifier,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                isCallback,
+                new byte[opaqueSize]
+            );
             index = 0;
             //save current count
             count = rawAcl.Count;
@@ -42,14 +49,30 @@ namespace System.Security.AccessControl.Tests
             Assert.True(ace == aceVerifier);
 
             //verify right side aces are equal
-            Assert.True(Utils.AclPartialEqual(rawAcl, rawAclVerifier, index + 1, rawAcl.Count - 1, index, count - 1));
+            Assert.True(
+                Utils.AclPartialEqual(
+                    rawAcl,
+                    rawAclVerifier,
+                    index + 1,
+                    rawAcl.Count - 1,
+                    index,
+                    count - 1
+                )
+            );
 
             //insert the same ACE to rawAclVerifier for next test
             rawAclVerifier.InsertAce(index, ace);
 
             //test insert at Count
             sid = "BA";
-            ace = new CommonAce((AceFlags)flags, (AceQualifier)qualifier, accessMask, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), isCallback, new byte[opaqueSize]);
+            ace = new CommonAce(
+                (AceFlags)flags,
+                (AceQualifier)qualifier,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                isCallback,
+                new byte[opaqueSize]
+            );
             count = rawAcl.Count;
             index = count;
             rawAcl.InsertAce(index, ace);
@@ -60,14 +83,30 @@ namespace System.Security.AccessControl.Tests
             Assert.True(ace == aceVerifier);
 
             //verify right side aces are equal
-            Assert.True(Utils.AclPartialEqual(rawAcl, rawAclVerifier, index + 1, rawAcl.Count - 1, index, count - 1));
+            Assert.True(
+                Utils.AclPartialEqual(
+                    rawAcl,
+                    rawAclVerifier,
+                    index + 1,
+                    rawAcl.Count - 1,
+                    index,
+                    count - 1
+                )
+            );
 
             //insert the same ACE to rawAclVerifier for next test
             rawAclVerifier.InsertAce(index, ace);
 
             //test insert at Count - 1
             sid = "BG";
-            ace = new CommonAce((AceFlags)flags, (AceQualifier)qualifier, accessMask, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), isCallback, new byte[opaqueSize]);
+            ace = new CommonAce(
+                (AceFlags)flags,
+                (AceQualifier)qualifier,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                isCallback,
+                new byte[opaqueSize]
+            );
             count = rawAcl.Count;
             index = count - 1;
             rawAcl.InsertAce(index, ace);
@@ -79,20 +118,43 @@ namespace System.Security.AccessControl.Tests
             Assert.True(ace == aceVerifier);
 
             //verify right side aces are equal
-            Assert.True(Utils.AclPartialEqual(rawAcl, rawAclVerifier, index + 1, rawAcl.Count - 1, index, count - 1));
+            Assert.True(
+                Utils.AclPartialEqual(
+                    rawAcl,
+                    rawAclVerifier,
+                    index + 1,
+                    rawAcl.Count - 1,
+                    index,
+                    count - 1
+                )
+            );
 
             //insert the same ACE to rawAclVerifier for next test
             rawAclVerifier.InsertAce(index, ace);
 
             //test insert at Count /2
             sid = "BO";
-            ace = new CommonAce((AceFlags)flags, (AceQualifier)qualifier, accessMask, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), isCallback, new byte[opaqueSize]);
+            ace = new CommonAce(
+                (AceFlags)flags,
+                (AceQualifier)qualifier,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                isCallback,
+                new byte[opaqueSize]
+            );
             rawAcl.InsertAce(0, ace);
             rawAclVerifier.InsertAce(0, ace);
             count = rawAcl.Count;
             index = count / 2;
             sid = "SO";
-            ace = new CommonAce((AceFlags)flags, (AceQualifier)qualifier, accessMask, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), isCallback, new byte[opaqueSize]);
+            ace = new CommonAce(
+                (AceFlags)flags,
+                (AceQualifier)qualifier,
+                accessMask,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                isCallback,
+                new byte[opaqueSize]
+            );
             rawAcl.InsertAce(index, ace);
             //verify the count number increase one
             Assert.True(rawAcl.Count == count + 1);
@@ -101,7 +163,16 @@ namespace System.Security.AccessControl.Tests
             Assert.True(ace == aceVerifier);
 
             //verify right side aces are equal
-            Assert.True(Utils.AclPartialEqual(rawAcl, rawAclVerifier, index + 1, rawAcl.Count - 1, index, count - 1));
+            Assert.True(
+                Utils.AclPartialEqual(
+                    rawAcl,
+                    rawAclVerifier,
+                    index + 1,
+                    rawAcl.Count - 1,
+                    index,
+                    count - 1
+                )
+            );
         }
 
         [Fact]
@@ -112,7 +183,6 @@ namespace System.Security.AccessControl.Tests
             string owner = null;
             int index = 0;
 
-
             // case 1, no ACE, insert at index -1
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -120,10 +190,18 @@ namespace System.Security.AccessControl.Tests
                 rawAcl = new RawAcl(1, 1);
                 index = -1;
                 owner = "BA";
-                genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(index, genericAce);
             });
-
 
             //case 2, no ACE, insert at  index Count + 1
 
@@ -131,7 +209,16 @@ namespace System.Security.AccessControl.Tests
             {
                 rawAcl = new RawAcl(1, 1);
                 index = rawAcl.Count + 1;
-                genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(index, genericAce);
             });
 
@@ -142,7 +229,16 @@ namespace System.Security.AccessControl.Tests
                 rawAcl = new RawAcl(1, 1);
                 index = 0;
                 owner = "BA";
-                genericAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)), false, null);
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(index, genericAce);
                 genericAce = null;
                 rawAcl.InsertAce(index, genericAce);
@@ -155,7 +251,11 @@ namespace System.Security.AccessControl.Tests
             {
                 rawAcl = new RawAcl(1, 1);
                 byte[] opaque = new byte[GenericAcl.MaxBinaryLength + 1 - 8 - 4];
-                GenericAce gAce = new CustomAce(AceType.MaxDefinedAceType + 1, (AceFlags)223, opaque);
+                GenericAce gAce = new CustomAce(
+                    AceType.MaxDefinedAceType + 1,
+                    (AceFlags)223,
+                    opaque
+                );
                 rawAcl.InsertAce(0, gAce);
             });
         }

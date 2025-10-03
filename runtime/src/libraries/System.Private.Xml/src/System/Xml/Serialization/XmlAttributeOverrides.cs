@@ -16,7 +16,8 @@ namespace System.Xml.Serialization
     /// </devdoc>
     public class XmlAttributeOverrides
     {
-        private readonly Dictionary<Type, Dictionary<string, XmlAttributes?>> _types = new Dictionary<Type, Dictionary<string, XmlAttributes?>>();
+        private readonly Dictionary<Type, Dictionary<string, XmlAttributes?>> _types =
+            new Dictionary<Type, Dictionary<string, XmlAttributes?>>();
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -39,7 +40,9 @@ namespace System.Xml.Serialization
             }
             else if (members.ContainsKey(member))
             {
-                throw new InvalidOperationException(SR.Format(SR.XmlAttributeSetAgain, type.FullName, member));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlAttributeSetAgain, type.FullName, member)
+                );
             }
             members.Add(member, attributes);
         }
@@ -49,10 +52,7 @@ namespace System.Xml.Serialization
         /// </devdoc>
         public XmlAttributes? this[Type type]
         {
-            get
-            {
-                return this[type, string.Empty];
-            }
+            get { return this[type, string.Empty]; }
         }
 
         /// <devdoc>
@@ -64,7 +64,9 @@ namespace System.Xml.Serialization
             {
                 Dictionary<string, XmlAttributes?>? members;
                 XmlAttributes? attributes;
-                return _types.TryGetValue(type, out members) && members.TryGetValue(member, out attributes)
+                return
+                    _types.TryGetValue(type, out members)
+                    && members.TryGetValue(member, out attributes)
                     ? attributes
                     : null;
             }

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
     <Compile Remove="Attributes\OnlyKeepUsed\Dependencies\UnusedAttributeWithTypeForwarderIsRemoved_Forwarder.cs" />
     <Compile Remove="CppCLI\Dependencies\CallCppCLIFromManaged.cs" />
@@ -53,13 +52,13 @@
     <Folder Include="BCLFeatures\" />
     <Folder Include="BCLFeatures\ETW\" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="System.Security.Permissions" Version="$(SystemSecurityPermissionsVersion)" />
+    <PackageReference
+      Include="System.Security.Permissions"
+      Version="$(SystemSecurityPermissionsVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="TopLevelStatements/**/*" />
   </ItemGroup>
-
 </Project>

@@ -82,20 +82,36 @@ namespace System.ServiceModel.Channels
         }
 
         // special overload for security only
-        public static ServiceChannelFactory BuildChannelFactory(ChannelBuilder channelBuilder, ClientRuntime clientRuntime)
+        public static ServiceChannelFactory BuildChannelFactory(
+            ChannelBuilder channelBuilder,
+            ClientRuntime clientRuntime
+        )
         {
             if (channelBuilder.CanBuildChannelFactory<IDuplexChannel>())
             {
-                return new ServiceChannelFactoryOverDuplex(channelBuilder.BuildChannelFactory<IDuplexChannel>(), clientRuntime,
-                    channelBuilder.Binding);
+                return new ServiceChannelFactoryOverDuplex(
+                    channelBuilder.BuildChannelFactory<IDuplexChannel>(),
+                    clientRuntime,
+                    channelBuilder.Binding
+                );
             }
             else if (channelBuilder.CanBuildChannelFactory<IDuplexSessionChannel>())
             {
-                return new ServiceChannelFactoryOverDuplexSession(channelBuilder.BuildChannelFactory<IDuplexSessionChannel>(), clientRuntime, channelBuilder.Binding, false);
+                return new ServiceChannelFactoryOverDuplexSession(
+                    channelBuilder.BuildChannelFactory<IDuplexSessionChannel>(),
+                    clientRuntime,
+                    channelBuilder.Binding,
+                    false
+                );
             }
             else
             {
-                return new ServiceChannelFactoryOverRequestSession(channelBuilder.BuildChannelFactory<IRequestSessionChannel>(), clientRuntime, channelBuilder.Binding, false);
+                return new ServiceChannelFactoryOverRequestSession(
+                    channelBuilder.BuildChannelFactory<IRequestSessionChannel>(),
+                    clientRuntime,
+                    channelBuilder.Binding,
+                    false
+                );
             }
         }
 
@@ -104,7 +120,10 @@ namespace System.ServiceModel.Channels
             return BuildChannelFactory(serviceEndpoint, false);
         }
 
-        public static ServiceChannelFactory BuildChannelFactory(ServiceEndpoint serviceEndpoint, bool useActiveAutoClose)
+        public static ServiceChannelFactory BuildChannelFactory(
+            ServiceEndpoint serviceEndpoint,
+            bool useActiveAutoClose
+        )
         {
             if (serviceEndpoint == null)
             {
@@ -119,7 +138,10 @@ namespace System.ServiceModel.Channels
             ChannelRequirements.ComputeContractRequirements(contractDescription, out requirements);
 
             BindingParameterCollection parameters;
-            ClientRuntime clientRuntime = DispatcherBuilder.BuildProxyBehavior(serviceEndpoint, out parameters);
+            ClientRuntime clientRuntime = DispatcherBuilder.BuildProxyBehavior(
+                serviceEndpoint,
+                out parameters
+            );
 
             Binding binding = serviceEndpoint.Binding;
             Type[] requiredChannels = ChannelRequirements.ComputeRequiredChannels(ref requirements);
@@ -128,77 +150,164 @@ namespace System.ServiceModel.Channels
             BindingContext context = new BindingContext(customBinding, parameters);
 
             InternalDuplexBindingElement internalDuplexBindingElement = null;
-            InternalDuplexBindingElement.AddDuplexFactorySupport(context, ref internalDuplexBindingElement);
+            InternalDuplexBindingElement.AddDuplexFactorySupport(
+                context,
+                ref internalDuplexBindingElement
+            );
 
             customBinding = new CustomBinding(context.RemainingBindingElements);
             customBinding.CopyTimeouts(serviceEndpoint.Binding);
 
             foreach (Type type in requiredChannels)
             {
-                if (type == typeof(IOutputChannel) && customBinding.CanBuildChannelFactory<IOutputChannel>(parameters))
+                if (
+                    type == typeof(IOutputChannel)
+                    && customBinding.CanBuildChannelFactory<IOutputChannel>(parameters)
+                )
                 {
-                    return new ServiceChannelFactoryOverOutput(customBinding.BuildChannelFactory<IOutputChannel>(parameters), clientRuntime, binding);
+                    return new ServiceChannelFactoryOverOutput(
+                        customBinding.BuildChannelFactory<IOutputChannel>(parameters),
+                        clientRuntime,
+                        binding
+                    );
                 }
 
-                if (type == typeof(IRequestChannel) && customBinding.CanBuildChannelFactory<IRequestChannel>(parameters))
+                if (
+                    type == typeof(IRequestChannel)
+                    && customBinding.CanBuildChannelFactory<IRequestChannel>(parameters)
+                )
                 {
-                    return new ServiceChannelFactoryOverRequest(customBinding.BuildChannelFactory<IRequestChannel>(parameters), clientRuntime, binding);
+                    return new ServiceChannelFactoryOverRequest(
+                        customBinding.BuildChannelFactory<IRequestChannel>(parameters),
+                        clientRuntime,
+                        binding
+                    );
                 }
 
-                if (type == typeof(IDuplexChannel) && customBinding.CanBuildChannelFactory<IDuplexChannel>(parameters))
+                if (
+                    type == typeof(IDuplexChannel)
+                    && customBinding.CanBuildChannelFactory<IDuplexChannel>(parameters)
+                )
                 {
-                    if (requirements.usesReply &&
-                        binding.CreateBindingElements().Find<TransportBindingElement>().ManualAddressing)
+                    if (
+                        requirements.usesReply
+                        && binding
+                            .CreateBindingElements()
+                            .Find<TransportBindingElement>()
+                            .ManualAddressing
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR.GetString(SR.CantCreateChannelWithManualAddressing)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.CantCreateChannelWithManualAddressing)
+                            )
+                        );
                     }
 
-                    return new ServiceChannelFactoryOverDuplex(customBinding.BuildChannelFactory<IDuplexChannel>(parameters), clientRuntime, binding);
+                    return new ServiceChannelFactoryOverDuplex(
+                        customBinding.BuildChannelFactory<IDuplexChannel>(parameters),
+                        clientRuntime,
+                        binding
+                    );
                 }
 
-                if (type == typeof(IOutputSessionChannel) && customBinding.CanBuildChannelFactory<IOutputSessionChannel>(parameters))
+                if (
+                    type == typeof(IOutputSessionChannel)
+                    && customBinding.CanBuildChannelFactory<IOutputSessionChannel>(parameters)
+                )
                 {
-                    return new ServiceChannelFactoryOverOutputSession(customBinding.BuildChannelFactory<IOutputSessionChannel>(parameters), clientRuntime, binding, false);
+                    return new ServiceChannelFactoryOverOutputSession(
+                        customBinding.BuildChannelFactory<IOutputSessionChannel>(parameters),
+                        clientRuntime,
+                        binding,
+                        false
+                    );
                 }
 
-                if (type == typeof(IRequestSessionChannel) && customBinding.CanBuildChannelFactory<IRequestSessionChannel>(parameters))
+                if (
+                    type == typeof(IRequestSessionChannel)
+                    && customBinding.CanBuildChannelFactory<IRequestSessionChannel>(parameters)
+                )
                 {
-                    return new ServiceChannelFactoryOverRequestSession(customBinding.BuildChannelFactory<IRequestSessionChannel>(parameters), clientRuntime, binding, false);
+                    return new ServiceChannelFactoryOverRequestSession(
+                        customBinding.BuildChannelFactory<IRequestSessionChannel>(parameters),
+                        clientRuntime,
+                        binding,
+                        false
+                    );
                 }
 
-                if (type == typeof(IDuplexSessionChannel) && customBinding.CanBuildChannelFactory<IDuplexSessionChannel>(parameters))
+                if (
+                    type == typeof(IDuplexSessionChannel)
+                    && customBinding.CanBuildChannelFactory<IDuplexSessionChannel>(parameters)
+                )
                 {
-                    if (requirements.usesReply &&
-                        binding.CreateBindingElements().Find<TransportBindingElement>().ManualAddressing)
+                    if (
+                        requirements.usesReply
+                        && binding
+                            .CreateBindingElements()
+                            .Find<TransportBindingElement>()
+                            .ManualAddressing
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                            SR.GetString(SR.CantCreateChannelWithManualAddressing)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.CantCreateChannelWithManualAddressing)
+                            )
+                        );
                     }
 
-                    return new ServiceChannelFactoryOverDuplexSession(customBinding.BuildChannelFactory<IDuplexSessionChannel>(parameters), clientRuntime, binding, useActiveAutoClose);
+                    return new ServiceChannelFactoryOverDuplexSession(
+                        customBinding.BuildChannelFactory<IDuplexSessionChannel>(parameters),
+                        clientRuntime,
+                        binding,
+                        useActiveAutoClose
+                    );
                 }
             }
 
             foreach (Type type in requiredChannels)
             {
                 // For SessionMode.Allowed or SessionMode.NotAllowed we will accept session-ful variants as well
-                if (type == typeof(IOutputChannel) && customBinding.CanBuildChannelFactory<IOutputSessionChannel>(parameters))
+                if (
+                    type == typeof(IOutputChannel)
+                    && customBinding.CanBuildChannelFactory<IOutputSessionChannel>(parameters)
+                )
                 {
-                    return new ServiceChannelFactoryOverOutputSession(customBinding.BuildChannelFactory<IOutputSessionChannel>(parameters), clientRuntime, binding, true);
+                    return new ServiceChannelFactoryOverOutputSession(
+                        customBinding.BuildChannelFactory<IOutputSessionChannel>(parameters),
+                        clientRuntime,
+                        binding,
+                        true
+                    );
                 }
 
-                if (type == typeof(IRequestChannel) && customBinding.CanBuildChannelFactory<IRequestSessionChannel>(parameters))
+                if (
+                    type == typeof(IRequestChannel)
+                    && customBinding.CanBuildChannelFactory<IRequestSessionChannel>(parameters)
+                )
                 {
-                    return new ServiceChannelFactoryOverRequestSession(customBinding.BuildChannelFactory<IRequestSessionChannel>(parameters), clientRuntime, binding, true);
+                    return new ServiceChannelFactoryOverRequestSession(
+                        customBinding.BuildChannelFactory<IRequestSessionChannel>(parameters),
+                        clientRuntime,
+                        binding,
+                        true
+                    );
                 }
 
-                // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the session management, so 
+                // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the session management, so
                 // accept datagram variants if that is the case
-                if (type == typeof(IRequestSessionChannel) && customBinding.CanBuildChannelFactory<IRequestChannel>(parameters)
-                    && customBinding.GetProperty<IContextSessionProvider>(parameters) != null)
+                if (
+                    type == typeof(IRequestSessionChannel)
+                    && customBinding.CanBuildChannelFactory<IRequestChannel>(parameters)
+                    && customBinding.GetProperty<IContextSessionProvider>(parameters) != null
+                )
                 {
-                    return new ServiceChannelFactoryOverRequest(customBinding.BuildChannelFactory<IRequestChannel>(parameters), clientRuntime, binding);
+                    return new ServiceChannelFactoryOverRequest(
+                        customBinding.BuildChannelFactory<IRequestChannel>(parameters),
+                        clientRuntime,
+                        binding
+                    );
                 }
             }
 
@@ -229,8 +338,13 @@ namespace System.ServiceModel.Channels
                 supportedChannels.Add(typeof(IDuplexSessionChannel), 0);
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ChannelRequirements.CantCreateChannelException(
-                supportedChannels.Keys, requiredChannels, binding.Name));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                ChannelRequirements.CantCreateChannelException(
+                    supportedChannels.Keys,
+                    requiredChannels,
+                    binding.Name
+                )
+            );
         }
 
         protected override void OnAbort()
@@ -249,7 +363,8 @@ namespace System.ServiceModel.Channels
                 lock (ThisLock)
                 {
                     channelsList.Remove(channel);
-                    channel = (channelsList.Count > 0) ? channelsList[channelsList.Count - 1] : null;
+                    channel =
+                        (channelsList.Count > 0) ? channelsList[channelsList.Count - 1] : null;
                 }
             }
         }
@@ -272,7 +387,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             List<ICommunicationObject> objectList;
             lock (ThisLock)
@@ -299,8 +418,15 @@ namespace System.ServiceModel.Channels
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.ChannelCreated,
-                    SR.GetString(SR.TraceCodeChannelCreated, TraceUtility.CreateSourceString(channel)), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.ChannelCreated,
+                    SR.GetString(
+                        SR.TraceCodeChannelCreated,
+                        TraceUtility.CreateSourceString(channel)
+                    ),
+                    this
+                );
             }
             lock (ThisLock)
             {
@@ -313,9 +439,15 @@ namespace System.ServiceModel.Channels
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.ChannelDisposed,
-                    SR.GetString(SR.TraceCodeChannelDisposed, TraceUtility.CreateSourceString(channel)),
-                    this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.ChannelDisposed,
+                    SR.GetString(
+                        SR.TraceCodeChannelDisposed,
+                        TraceUtility.CreateSourceString(channel)
+                    ),
+                    this
+                );
             }
             lock (ThisLock)
             {
@@ -331,7 +463,11 @@ namespace System.ServiceModel.Channels
             if (binder is DuplexChannelBinder)
             {
                 DuplexChannelBinder duplexChannelBinder = binder as DuplexChannelBinder;
-                duplexChannelBinder.ChannelHandler = new ChannelHandler(this.messageVersion, binder, serviceChannel);
+                duplexChannelBinder.ChannelHandler = new ChannelHandler(
+                    this.messageVersion,
+                    binder,
+                    serviceChannel
+                );
                 duplexChannelBinder.DefaultCloseTimeout = this.DefaultCloseTimeout;
                 duplexChannelBinder.DefaultSendTimeout = this.DefaultSendTimeout;
                 duplexChannelBinder.IdentityVerifier = this.clientRuntime.IdentityVerifier;
@@ -349,8 +485,15 @@ namespace System.ServiceModel.Channels
         {
             if (!this.CanCreateChannel<TChannel>())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.CouldnTCreateChannelForChannelType2, this.bindingName, typeof(TChannel).Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.CouldnTCreateChannelForChannelType2,
+                            this.bindingName,
+                            typeof(TChannel).Name
+                        )
+                    )
+                );
             }
 
             return (TChannel)this.CreateChannel(typeof(TChannel), address, via);
@@ -377,9 +520,16 @@ namespace System.ServiceModel.Channels
 
             ServiceChannel serviceChannel = this.CreateServiceChannel(address, via);
 
-            serviceChannel.Proxy = CreateProxy(channelType, channelType, MessageDirection.Input, serviceChannel);
+            serviceChannel.Proxy = CreateProxy(
+                channelType,
+                channelType,
+                MessageDirection.Input,
+                serviceChannel
+            );
 
-            serviceChannel.ClientRuntime.GetRuntime().InitializeChannel((IClientChannel)serviceChannel.Proxy);
+            serviceChannel
+                .ClientRuntime.GetRuntime()
+                .InitializeChannel((IClientChannel)serviceChannel.Proxy);
             OperationContext current = OperationContext.Current;
             if ((current != null) && (current.InstanceContext != null))
             {
@@ -390,21 +540,39 @@ namespace System.ServiceModel.Channels
             return serviceChannel.Proxy;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Constructs a ServiceChannelProxy, which is Critical.",
-            Safe = "Returns the TP, but does not return the RealProxy -- caller can't get from TP to RP without an elevation.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Constructs a ServiceChannelProxy, which is Critical.",
+            Safe = "Returns the TP, but does not return the RealProxy -- caller can't get from TP to RP without an elevation."
+        )]
         [SecuritySafeCritical]
-        internal static object CreateProxy(Type interfaceType, Type proxiedType, MessageDirection direction, ServiceChannel serviceChannel)
+        internal static object CreateProxy(
+            Type interfaceType,
+            Type proxiedType,
+            MessageDirection direction,
+            ServiceChannel serviceChannel
+        )
         {
             if (!proxiedType.IsInterface)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString("SFxChannelFactoryTypeMustBeInterface")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString("SFxChannelFactoryTypeMustBeInterface")
+                    )
+                );
             }
-            ServiceChannelProxy proxy = new ServiceChannelProxy(interfaceType, proxiedType, direction, serviceChannel);
+            ServiceChannelProxy proxy = new ServiceChannelProxy(
+                interfaceType,
+                proxiedType,
+                direction,
+                serviceChannel
+            );
             return proxy.GetTransparentProxy();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls LinkDemand method RemotingServices.GetRealProxy and access critical class ServiceChannelProxy.",
-            Safe = "Gets the ServiceChannel (which is not critical) and discards the RealProxy.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls LinkDemand method RemotingServices.GetRealProxy and access critical class ServiceChannelProxy.",
+            Safe = "Gets the ServiceChannel (which is not critical) and discards the RealProxy."
+        )]
         [SecuritySafeCritical]
         internal static ServiceChannel GetServiceChannel(object transparentProxy)
         {
@@ -412,7 +580,8 @@ namespace System.ServiceModel.Channels
             if (cb != null)
                 return cb.GetServiceChannel();
 
-            ServiceChannelProxy proxy = RemotingServices.GetRealProxy(transparentProxy) as ServiceChannelProxy;
+            ServiceChannelProxy proxy =
+                RemotingServices.GetRealProxy(transparentProxy) as ServiceChannelProxy;
 
             if (proxy != null)
                 return proxy.GetServiceChannel();
@@ -420,15 +589,21 @@ namespace System.ServiceModel.Channels
                 return null;
         }
 
-        protected abstract IChannelBinder CreateInnerChannelBinder(EndpointAddress address, Uri via);
+        protected abstract IChannelBinder CreateInnerChannelBinder(
+            EndpointAddress address,
+            Uri via
+        );
 
         abstract class TypedServiceChannelFactory<TChannel> : ServiceChannelFactory
             where TChannel : class, IChannel
         {
             IChannelFactory<TChannel> innerChannelFactory;
 
-            protected TypedServiceChannelFactory(IChannelFactory<TChannel> innerChannelFactory,
-                ClientRuntime clientRuntime, Binding binding)
+            protected TypedServiceChannelFactory(
+                IChannelFactory<TChannel> innerChannelFactory,
+                ClientRuntime clientRuntime,
+                Binding binding
+            )
                 : base(clientRuntime, binding)
             {
                 this.innerChannelFactory = innerChannelFactory;
@@ -450,7 +625,11 @@ namespace System.ServiceModel.Channels
                 this.innerChannelFactory.Open(timeout);
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerChannelFactory.BeginOpen(timeout, callback, state);
             }
@@ -467,10 +646,21 @@ namespace System.ServiceModel.Channels
                 this.innerChannelFactory.Close(timeoutHelper.RemainingTime());
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                return new ChainedAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose,
-                    this.innerChannelFactory.BeginClose, this.innerChannelFactory.EndClose);
+                return new ChainedAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    base.OnBeginClose,
+                    base.OnEndClose,
+                    this.innerChannelFactory.BeginClose,
+                    this.innerChannelFactory.EndClose
+                );
             }
 
             protected override void OnEndClose(IAsyncResult result)
@@ -497,10 +687,12 @@ namespace System.ServiceModel.Channels
 
         class ServiceChannelFactoryOverOutput : TypedServiceChannelFactory<IOutputChannel>
         {
-            public ServiceChannelFactoryOverOutput(IChannelFactory<IOutputChannel> innerChannelFactory, ClientRuntime clientRuntime, Binding binding)
-                : base(innerChannelFactory, clientRuntime, binding)
-            {
-            }
+            public ServiceChannelFactoryOverOutput(
+                IChannelFactory<IOutputChannel> innerChannelFactory,
+                ClientRuntime clientRuntime,
+                Binding binding
+            )
+                : base(innerChannelFactory, clientRuntime, binding) { }
 
             protected override IChannelBinder CreateInnerChannelBinder(EndpointAddress to, Uri via)
             {
@@ -509,37 +701,48 @@ namespace System.ServiceModel.Channels
 
             public override bool CanCreateChannel<TChannel>()
             {
-                return (typeof(TChannel) == typeof(IOutputChannel)
-                    || typeof(TChannel) == typeof(IRequestChannel));
+                return (
+                    typeof(TChannel) == typeof(IOutputChannel)
+                    || typeof(TChannel) == typeof(IRequestChannel)
+                );
             }
         }
 
         class ServiceChannelFactoryOverDuplex : TypedServiceChannelFactory<IDuplexChannel>
         {
-            public ServiceChannelFactoryOverDuplex(IChannelFactory<IDuplexChannel> innerChannelFactory, ClientRuntime clientRuntime, Binding binding)
-                : base(innerChannelFactory, clientRuntime, binding)
-            {
-            }
+            public ServiceChannelFactoryOverDuplex(
+                IChannelFactory<IDuplexChannel> innerChannelFactory,
+                ClientRuntime clientRuntime,
+                Binding binding
+            )
+                : base(innerChannelFactory, clientRuntime, binding) { }
 
             protected override IChannelBinder CreateInnerChannelBinder(EndpointAddress to, Uri via)
             {
-                return new DuplexChannelBinder(this.InnerChannelFactory.CreateChannel(to, via), this.RequestReplyCorrelator);
+                return new DuplexChannelBinder(
+                    this.InnerChannelFactory.CreateChannel(to, via),
+                    this.RequestReplyCorrelator
+                );
             }
 
             public override bool CanCreateChannel<TChannel>()
             {
-                return (typeof(TChannel) == typeof(IOutputChannel)
+                return (
+                    typeof(TChannel) == typeof(IOutputChannel)
                     || typeof(TChannel) == typeof(IRequestChannel)
-                    || typeof(TChannel) == typeof(IDuplexChannel));
+                    || typeof(TChannel) == typeof(IDuplexChannel)
+                );
             }
         }
 
         class ServiceChannelFactoryOverRequest : TypedServiceChannelFactory<IRequestChannel>
         {
-            public ServiceChannelFactoryOverRequest(IChannelFactory<IRequestChannel> innerChannelFactory, ClientRuntime clientRuntime, Binding binding)
-                : base(innerChannelFactory, clientRuntime, binding)
-            {
-            }
+            public ServiceChannelFactoryOverRequest(
+                IChannelFactory<IRequestChannel> innerChannelFactory,
+                ClientRuntime clientRuntime,
+                Binding binding
+            )
+                : base(innerChannelFactory, clientRuntime, binding) { }
 
             protected override IChannelBinder CreateInnerChannelBinder(EndpointAddress to, Uri via)
             {
@@ -548,15 +751,24 @@ namespace System.ServiceModel.Channels
 
             public override bool CanCreateChannel<TChannel>()
             {
-                return (typeof(TChannel) == typeof(IOutputChannel)
-                    || typeof(TChannel) == typeof(IRequestChannel));
+                return (
+                    typeof(TChannel) == typeof(IOutputChannel)
+                    || typeof(TChannel) == typeof(IRequestChannel)
+                );
             }
         }
 
-        class ServiceChannelFactoryOverOutputSession : TypedServiceChannelFactory<IOutputSessionChannel>
+        class ServiceChannelFactoryOverOutputSession
+            : TypedServiceChannelFactory<IOutputSessionChannel>
         {
             bool datagramAdapter;
-            public ServiceChannelFactoryOverOutputSession(IChannelFactory<IOutputSessionChannel> innerChannelFactory, ClientRuntime clientRuntime, Binding binding, bool datagramAdapter)
+
+            public ServiceChannelFactoryOverOutputSession(
+                IChannelFactory<IOutputSessionChannel> innerChannelFactory,
+                ClientRuntime clientRuntime,
+                Binding binding,
+                bool datagramAdapter
+            )
                 : base(innerChannelFactory, clientRuntime, binding)
             {
                 this.datagramAdapter = datagramAdapter;
@@ -569,8 +781,12 @@ namespace System.ServiceModel.Channels
                 if (this.datagramAdapter)
                 {
                     channel = DatagramAdapter.GetOutputChannel(
-                        delegate() { return this.InnerChannelFactory.CreateChannel(to, via); },
-                        timeouts);
+                        delegate()
+                        {
+                            return this.InnerChannelFactory.CreateChannel(to, via);
+                        },
+                        timeouts
+                    );
                 }
                 else
                 {
@@ -582,18 +798,26 @@ namespace System.ServiceModel.Channels
 
             public override bool CanCreateChannel<TChannel>()
             {
-                return (typeof(TChannel) == typeof(IOutputChannel)
+                return (
+                    typeof(TChannel) == typeof(IOutputChannel)
                     || typeof(TChannel) == typeof(IOutputSessionChannel)
                     || typeof(TChannel) == typeof(IRequestChannel)
-                    || typeof(TChannel) == typeof(IRequestSessionChannel));
+                    || typeof(TChannel) == typeof(IRequestSessionChannel)
+                );
             }
         }
 
-        class ServiceChannelFactoryOverDuplexSession : TypedServiceChannelFactory<IDuplexSessionChannel>
+        class ServiceChannelFactoryOverDuplexSession
+            : TypedServiceChannelFactory<IDuplexSessionChannel>
         {
             bool useActiveAutoClose;
 
-            public ServiceChannelFactoryOverDuplexSession(IChannelFactory<IDuplexSessionChannel> innerChannelFactory, ClientRuntime clientRuntime, Binding binding, bool useActiveAutoClose)
+            public ServiceChannelFactoryOverDuplexSession(
+                IChannelFactory<IDuplexSessionChannel> innerChannelFactory,
+                ClientRuntime clientRuntime,
+                Binding binding,
+                bool useActiveAutoClose
+            )
                 : base(innerChannelFactory, clientRuntime, binding)
             {
                 this.useActiveAutoClose = useActiveAutoClose;
@@ -601,25 +825,37 @@ namespace System.ServiceModel.Channels
 
             protected override IChannelBinder CreateInnerChannelBinder(EndpointAddress to, Uri via)
             {
-                return new DuplexChannelBinder(this.InnerChannelFactory.CreateChannel(to, via), this.RequestReplyCorrelator, useActiveAutoClose);
+                return new DuplexChannelBinder(
+                    this.InnerChannelFactory.CreateChannel(to, via),
+                    this.RequestReplyCorrelator,
+                    useActiveAutoClose
+                );
             }
 
             public override bool CanCreateChannel<TChannel>()
             {
-                return (typeof(TChannel) == typeof(IOutputChannel)
+                return (
+                    typeof(TChannel) == typeof(IOutputChannel)
                     || typeof(TChannel) == typeof(IRequestChannel)
                     || typeof(TChannel) == typeof(IDuplexChannel)
                     || typeof(TChannel) == typeof(IOutputSessionChannel)
                     || typeof(TChannel) == typeof(IRequestSessionChannel)
-                    || typeof(TChannel) == typeof(IDuplexSessionChannel));
+                    || typeof(TChannel) == typeof(IDuplexSessionChannel)
+                );
             }
         }
 
-        class ServiceChannelFactoryOverRequestSession : TypedServiceChannelFactory<IRequestSessionChannel>
+        class ServiceChannelFactoryOverRequestSession
+            : TypedServiceChannelFactory<IRequestSessionChannel>
         {
             bool datagramAdapter = false;
 
-            public ServiceChannelFactoryOverRequestSession(IChannelFactory<IRequestSessionChannel> innerChannelFactory, ClientRuntime clientRuntime, Binding binding, bool datagramAdapter)
+            public ServiceChannelFactoryOverRequestSession(
+                IChannelFactory<IRequestSessionChannel> innerChannelFactory,
+                ClientRuntime clientRuntime,
+                Binding binding,
+                bool datagramAdapter
+            )
                 : base(innerChannelFactory, clientRuntime, binding)
             {
                 this.datagramAdapter = datagramAdapter;
@@ -632,8 +868,12 @@ namespace System.ServiceModel.Channels
                 if (this.datagramAdapter)
                 {
                     channel = DatagramAdapter.GetRequestChannel(
-                        delegate() { return this.InnerChannelFactory.CreateChannel(to, via); },
-                        this.timeouts);
+                        delegate()
+                        {
+                            return this.InnerChannelFactory.CreateChannel(to, via);
+                        },
+                        this.timeouts
+                    );
                 }
                 else
                 {
@@ -645,10 +885,12 @@ namespace System.ServiceModel.Channels
 
             public override bool CanCreateChannel<TChannel>()
             {
-                return (typeof(TChannel) == typeof(IOutputChannel)
+                return (
+                    typeof(TChannel) == typeof(IOutputChannel)
                     || typeof(TChannel) == typeof(IOutputSessionChannel)
                     || typeof(TChannel) == typeof(IRequestChannel)
-                    || typeof(TChannel) == typeof(IRequestSessionChannel));
+                    || typeof(TChannel) == typeof(IRequestSessionChannel)
+                );
             }
         }
 

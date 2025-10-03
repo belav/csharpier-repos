@@ -8,8 +8,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class CheckedStatementSyntax
     {
-        public CheckedStatementSyntax Update(SyntaxToken keyword, BlockSyntax block)
-            => Update(AttributeLists, keyword, block);
+        public CheckedStatementSyntax Update(SyntaxToken keyword, BlockSyntax block) =>
+            Update(AttributeLists, keyword, block);
     }
 }
 
@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static CheckedStatementSyntax CheckedStatement(SyntaxKind kind, SyntaxToken keyword, BlockSyntax block)
-            => CheckedStatement(kind, attributeLists: default, keyword, block);
+        public static CheckedStatementSyntax CheckedStatement(
+            SyntaxKind kind,
+            SyntaxToken keyword,
+            BlockSyntax block
+        ) => CheckedStatement(kind, attributeLists: default, keyword, block);
     }
 }

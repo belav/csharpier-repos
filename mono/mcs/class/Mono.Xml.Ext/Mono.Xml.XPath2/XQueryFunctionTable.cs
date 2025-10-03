@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,34 +31,35 @@ using System;
 using System.Collections;
 using System.Reflection;
 using System.Xml;
-using System.Xml.Schema;
 using System.Xml.Query;
+using System.Xml.Schema;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
 namespace Mono.Xml.XPath2
 {
-	public class XQueryFunctionTable : DictionaryBase
-	{
-		public XQueryFunctionTable ()
-		{
-		}
+    public class XQueryFunctionTable : DictionaryBase
+    {
+        public XQueryFunctionTable() { }
 
-		public XQueryFunction this [XmlQualifiedName name] {
-			get { return Dictionary [name] as XQueryFunction; }
-		}
+        public XQueryFunction this[XmlQualifiedName name]
+        {
+            get { return Dictionary[name] as XQueryFunction; }
+        }
 
-		internal void Add (XQueryFunction func)
-		{
-			Dictionary.Add (func.Name, func);
-		}
+        internal void Add(XQueryFunction func)
+        {
+            Dictionary.Add(func.Name, func);
+        }
 
-		public ICollection Keys {
-			get { return Dictionary.Keys; }
-		}
+        public ICollection Keys
+        {
+            get { return Dictionary.Keys; }
+        }
 
-		public ICollection Values {
-			get { return Dictionary.Values; }
-		}
-	}
+        public ICollection Values
+        {
+            get { return Dictionary.Values; }
+        }
+    }
 }

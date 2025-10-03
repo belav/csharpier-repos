@@ -23,8 +23,10 @@ namespace System.Drawing
 
         public static Color Desktop => Color.FromKnownColor(KnownColor.Desktop);
 
-        public static Color GradientActiveCaption => Color.FromKnownColor(KnownColor.GradientActiveCaption);
-        public static Color GradientInactiveCaption => Color.FromKnownColor(KnownColor.GradientInactiveCaption);
+        public static Color GradientActiveCaption =>
+            Color.FromKnownColor(KnownColor.GradientActiveCaption);
+        public static Color GradientInactiveCaption =>
+            Color.FromKnownColor(KnownColor.GradientInactiveCaption);
         public static Color GrayText => Color.FromKnownColor(KnownColor.GrayText);
 
         public static Color Highlight => Color.FromKnownColor(KnownColor.Highlight);
@@ -33,7 +35,8 @@ namespace System.Drawing
 
         public static Color InactiveBorder => Color.FromKnownColor(KnownColor.InactiveBorder);
         public static Color InactiveCaption => Color.FromKnownColor(KnownColor.InactiveCaption);
-        public static Color InactiveCaptionText => Color.FromKnownColor(KnownColor.InactiveCaptionText);
+        public static Color InactiveCaptionText =>
+            Color.FromKnownColor(KnownColor.InactiveCaptionText);
         public static Color Info => Color.FromKnownColor(KnownColor.Info);
         public static Color InfoText => Color.FromKnownColor(KnownColor.InfoText);
 

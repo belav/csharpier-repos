@@ -69,7 +69,8 @@ namespace System.Management
         internal ManagementObjectCollection(
             ManagementScope scope,
             EnumerationOptions options,
-            IEnumWbemClassObject enumWbem)
+            IEnumWbemClassObject enumWbem
+        )
         {
             if (null != options)
                 this.options = (EnumerationOptions)options.Clone();
@@ -114,7 +115,6 @@ namespace System.Management
             }
             Marshal.ReleaseComObject(enumWbem);
         }
-
 
         //
         //ICollection properties & methods
@@ -269,7 +269,6 @@ namespace System.Management
             if (isDisposed)
                 throw new ObjectDisposedException(name);
 
-
             //
             // We do not clone the enumerator if its the first enumerator.
             // If it is the first enumerator we pass the reference
@@ -294,13 +293,17 @@ namespace System.Management
 
                 try
                 {
-                    status = scope.GetSecuredIEnumWbemClassObjectHandler(enumWbem).Clone_(ref enumWbemClone);
+                    status = scope
+                        .GetSecuredIEnumWbemClassObjectHandler(enumWbem)
+                        .Clone_(ref enumWbemClone);
 
                     if ((status & 0x80000000) == 0)
                     {
                         //since the original enumerator might not be reset, we need
                         //to reset the new one.
-                        status = scope.GetSecuredIEnumWbemClassObjectHandler(enumWbemClone).Reset_();
+                        status = scope
+                            .GetSecuredIEnumWbemClassObjectHandler(enumWbemClone)
+                            .Reset_();
                     }
                 }
                 catch (COMException e)
@@ -330,7 +333,6 @@ namespace System.Management
             }
         }
 
-
         /// <internalonly/>
         /// <summary>
         ///    <para>Returns an enumerator that can iterate through a collection.</para>
@@ -343,8 +345,6 @@ namespace System.Management
         {
             return GetEnumerator();
         }
-
-
 
         //
         // ManagementObjectCollection methods
@@ -411,16 +411,18 @@ namespace System.Management
             //constructor
             internal ManagementObjectEnumerator(
                 ManagementObjectCollection collectionObject,
-                IEnumWbemClassObject enumWbem)
+                IEnumWbemClassObject enumWbem
+            )
             {
                 this.enumWbem = enumWbem;
                 this.collectionObject = collectionObject;
-                cachedObjects = new IWbemClassObjectFreeThreaded[collectionObject.options.BlockSize];
+                cachedObjects = new IWbemClassObjectFreeThreaded[
+                    collectionObject.options.BlockSize
+                ];
                 cachedCount = 0;
                 cacheIndex = -1; // Reset position
                 atEndOfCollection = false;
             }
-
 
             /// <summary>
             /// <para>Disposes of resources the object is holding. This is the destructor for the object.</para>
@@ -429,7 +431,6 @@ namespace System.Management
             {
                 Dispose();
             }
-
 
             /// <summary>
             /// Releases resources associated with this object. After this
@@ -460,7 +461,6 @@ namespace System.Management
                 }
             }
 
-
             /// <summary>
             /// <para>Gets the current <see cref='System.Management.ManagementBaseObject'/> that this enumerator points
             ///    to.</para>
@@ -478,8 +478,10 @@ namespace System.Management
                     if (cacheIndex < 0)
                         throw new InvalidOperationException();
 
-                    return ManagementBaseObject.GetBaseObject(cachedObjects[cacheIndex],
-                        collectionObject.scope);
+                    return ManagementBaseObject.GetBaseObject(
+                        cachedObjects[cacheIndex],
+                        collectionObject.scope
+                    );
                 }
             }
 
@@ -492,10 +494,7 @@ namespace System.Management
             /// </value>
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
             //****************************************
@@ -524,10 +523,11 @@ namespace System.Management
 
                 if ((cachedCount - cacheIndex) == 0) //cache is empty - need to get more objects
                 {
-
                     //If the timeout is set to infinite, need to use the WMI infinite constant
-                    int timeout = (collectionObject.options.Timeout.Ticks == long.MaxValue) ?
-                        (int)tag_WBEM_TIMEOUT_TYPE.WBEM_INFINITE : (int)collectionObject.options.Timeout.TotalMilliseconds;
+                    int timeout =
+                        (collectionObject.options.Timeout.Ticks == long.MaxValue)
+                            ? (int)tag_WBEM_TIMEOUT_TYPE.WBEM_INFINITE
+                            : (int)collectionObject.options.Timeout.TotalMilliseconds;
 
                     //Get the next [BLockSize] objects within the specified timeout
                     SecurityHandler securityHandler = collectionObject.scope.GetSecurityHandler();
@@ -535,9 +535,18 @@ namespace System.Management
                     //Because Interop doesn't support custom marshalling for arrays, we have to use
                     //the "DoNotMarshal" objects in the interop and then convert to the "FreeThreaded"
                     //counterparts afterwards.
-                    IWbemClassObject_DoNotMarshal[] tempArray = new IWbemClassObject_DoNotMarshal[collectionObject.options.BlockSize];
+                    IWbemClassObject_DoNotMarshal[] tempArray = new IWbemClassObject_DoNotMarshal[
+                        collectionObject.options.BlockSize
+                    ];
 
-                    int status = collectionObject.scope.GetSecuredIEnumWbemClassObjectHandler(enumWbem).Next_(timeout, (uint)collectionObject.options.BlockSize, tempArray, ref cachedCount);
+                    int status = collectionObject
+                        .scope.GetSecuredIEnumWbemClassObjectHandler(enumWbem)
+                        .Next_(
+                            timeout,
+                            (uint)collectionObject.options.BlockSize,
+                            tempArray,
+                            ref cachedCount
+                        );
 
                     securityHandler.Reset();
 
@@ -547,10 +556,9 @@ namespace System.Management
 
                         for (int i = 0; i < cachedCount; i++)
                         {
-                            cachedObjects[i] = new IWbemClassObjectFreeThreaded
-                                                (
-                                                    Marshal.GetIUnknownForObject(tempArray[i])
-                                                );
+                            cachedObjects[i] = new IWbemClassObjectFreeThreaded(
+                                Marshal.GetIUnknownForObject(tempArray[i])
+                            );
                         }
                     }
 
@@ -611,7 +619,9 @@ namespace System.Management
 
                     try
                     {
-                        status = collectionObject.scope.GetSecuredIEnumWbemClassObjectHandler(enumWbem).Reset_();
+                        status = collectionObject
+                            .scope.GetSecuredIEnumWbemClassObjectHandler(enumWbem)
+                            .Reset_();
                     }
                     catch (COMException e)
                     {
@@ -633,15 +643,17 @@ namespace System.Management
 
                     //Flush the current enumeration cache
                     for (int i = (cacheIndex >= 0 ? cacheIndex : 0); i < cachedCount; i++)
-                        Marshal.ReleaseComObject((IWbemClassObject_DoNotMarshal)(Marshal.GetObjectForIUnknown(cachedObjects[i])));
+                        Marshal.ReleaseComObject(
+                            (IWbemClassObject_DoNotMarshal)(
+                                Marshal.GetObjectForIUnknown(cachedObjects[i])
+                            )
+                        );
 
                     cachedCount = 0;
                     cacheIndex = -1;
                     atEndOfCollection = false;
                 }
             }
-
         } //ManagementObjectEnumerator class
-
     } //ManagementObjectCollection class
 }

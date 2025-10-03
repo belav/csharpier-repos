@@ -8,7 +8,11 @@ namespace System.Web.Http
     /// <summary>
     /// Represents a filter attribute that overrides authorization filters defined at a higher level.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Method,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public sealed class OverrideAuthorizationAttribute : Attribute, IOverrideFilter
     {
         public bool AllowMultiple

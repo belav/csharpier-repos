@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         public bool IgnoreElastic { get; } = ignoreElastic;
 
 #if DEBUG
-        public override string ToString()
-            => $"Suppress wrapping on '{TextSpan}' with IgnoreElastic={IgnoreElastic}";
+        public override string ToString() =>
+            $"Suppress wrapping on '{TextSpan}' with IgnoreElastic={IgnoreElastic}";
 #endif
     }
 }

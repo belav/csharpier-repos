@@ -41,7 +41,10 @@ namespace System.Globalization
             return new SortKey(this, source, options, keyData);
         }
 
-        private static void InvariantCreateSortKeyOrdinal(ReadOnlySpan<char> source, Span<byte> sortKey)
+        private static void InvariantCreateSortKeyOrdinal(
+            ReadOnlySpan<char> source,
+            Span<byte> sortKey
+        )
         {
             Debug.Assert(sortKey.Length >= source.Length * sizeof(char));
 
@@ -53,7 +56,10 @@ namespace System.Globalization
             }
         }
 
-        private static void InvariantCreateSortKeyOrdinalIgnoreCase(ReadOnlySpan<char> source, Span<byte> sortKey)
+        private static void InvariantCreateSortKeyOrdinalIgnoreCase(
+            ReadOnlySpan<char> source,
+            Span<byte> sortKey
+        )
         {
             Debug.Assert(sortKey.Length >= source.Length * sizeof(char));
 
@@ -75,12 +81,19 @@ namespace System.Globalization
                 }
 
                 // convert machine-endian to big-endian
-                BinaryPrimitives.WriteUInt16BigEndian(sortKey, (ushort)InvariantModeCasing.ToUpper(c));
+                BinaryPrimitives.WriteUInt16BigEndian(
+                    sortKey,
+                    (ushort)InvariantModeCasing.ToUpper(c)
+                );
                 sortKey = sortKey.Slice(sizeof(ushort));
             }
         }
 
-        private static int InvariantGetSortKey(ReadOnlySpan<char> source, Span<byte> destination, CompareOptions options)
+        private static int InvariantGetSortKey(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            CompareOptions options
+        )
         {
             Debug.Assert(GlobalizationMode.Invariant);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
@@ -106,7 +119,10 @@ namespace System.Globalization
             return source.Length * sizeof(char);
         }
 
-        private static int InvariantGetSortKeyLength(ReadOnlySpan<char> source, CompareOptions options)
+        private static int InvariantGetSortKeyLength(
+            ReadOnlySpan<char> source,
+            CompareOptions options
+        )
         {
             Debug.Assert(GlobalizationMode.Invariant);
             Debug.Assert((options & ValidCompareMaskOffFlags) == 0);
@@ -121,7 +137,8 @@ namespace System.Globalization
             {
                 throw new ArgumentException(
                     paramName: nameof(source),
-                    message: SR.ArgumentOutOfRange_GetByteCountOverflow);
+                    message: SR.ArgumentOutOfRange_GetByteCountOverflow
+                );
             }
 
             return byteLength;

@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Completion
         PatternMatch? patternMatch,
         int index,
         string? matchedAdditionalFilterText,
-        int recentItemIndex = -1)
+        int recentItemIndex = -1
+    )
     {
         /// <summary>
         /// The CompletionItem used to create this MatchResult.
@@ -26,12 +27,13 @@ namespace Microsoft.CodeAnalysis.Completion
         // In certain cases, there'd be no match but we'd still want to consider it a match (e.g. when the item is in MRU list,)
         // and this is why PatternMatch can be null. There's also cases it's a match but we want to consider it a non-match
         // (e.g. when not a prefix match in deletion scenario).
-        public readonly bool ShouldBeConsideredMatchingFilterText = shouldBeConsideredMatchingFilterText;
+        public readonly bool ShouldBeConsideredMatchingFilterText =
+            shouldBeConsideredMatchingFilterText;
 
         public string FilterTextUsed => MatchedAdditionalFilterText ?? CompletionItem.FilterText;
 
         // We want to preserve the original alphabetical order for items with same pattern match score,
-        // but `ArrayBuilder.Sort` we currently use isn't stable. So we have to add a monotonically increasing 
+        // but `ArrayBuilder.Sort` we currently use isn't stable. So we have to add a monotonically increasing
         // integer to achieve this.
         public readonly int IndexInOriginalSortedOrder = index;
         public readonly int RecentItemIndex = recentItemIndex;
@@ -63,10 +65,14 @@ namespace Microsoft.CodeAnalysis.Completion
 
                         // We'd rank match of FilterText over match of any of AdditionalFilterTexts if they has same pattern match score
                         if (ret == 0)
-                            ret = x.MatchedWithAdditionalFilterTexts.CompareTo(y.MatchedWithAdditionalFilterTexts);
+                            ret = x.MatchedWithAdditionalFilterTexts.CompareTo(
+                                y.MatchedWithAdditionalFilterTexts
+                            );
 
                         // We want to preserve the original order for items with same pattern match score.
-                        return ret == 0 ? x.IndexInOriginalSortedOrder - y.IndexInOriginalSortedOrder : ret;
+                        return ret == 0
+                            ? x.IndexInOriginalSortedOrder - y.IndexInOriginalSortedOrder
+                            : ret;
                     }
 
                     return -1;

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,18 +31,21 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-	public sealed class MutexAuditRule : AuditRule
-	{
-		public MutexAuditRule (IdentityReference identity,
-				       MutexRights eventRights,
-				       AuditFlags flags)
-			: base (identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
-		{
-		}
-		
-		public MutexRights MutexRights {
-			get { return (MutexRights)AccessMask; }
-		}
-	}
-}
+    public sealed class MutexAuditRule : AuditRule
+    {
+        public MutexAuditRule(IdentityReference identity, MutexRights eventRights, AuditFlags flags)
+            : base(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
+        public MutexRights MutexRights
+        {
+            get { return (MutexRights)AccessMask; }
+        }
+    }
+}

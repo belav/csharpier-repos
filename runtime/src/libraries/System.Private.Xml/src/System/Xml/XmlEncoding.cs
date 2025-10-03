@@ -29,12 +29,21 @@ namespace System.Xml
             int byteCount = count + ((_lastByte >= 0) ? 1 : 0);
             if (flush && (byteCount % CharSize != 0))
             {
-                throw new ArgumentException(SR.Format(SR.Enc_InvalidByteInEncoding, -1), (string?)null);
+                throw new ArgumentException(
+                    SR.Format(SR.Enc_InvalidByteInEncoding, -1),
+                    (string?)null
+                );
             }
             return byteCount / CharSize;
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             int charCount = GetCharCount(bytes, byteIndex, byteCount);
 
@@ -89,7 +98,18 @@ namespace System.Xml
             return charCount;
         }
 
-        public override void Convert(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
+        public override void Convert(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            int charCount,
+            bool flush,
+            out int bytesUsed,
+            out int charsUsed,
+            out bool completed
+        )
         {
             charsUsed = 0;
             bytesUsed = 0;
@@ -148,7 +168,13 @@ namespace System.Xml
             }
             else
             {
-                Buffer.BlockCopy(bytes, byteIndex, chars, charIndex * CharSize, (int)(byteCount & ~0x1));
+                Buffer.BlockCopy(
+                    bytes,
+                    byteIndex,
+                    chars,
+                    charIndex * CharSize,
+                    (int)(byteCount & ~0x1)
+                );
             }
 
             charsUsed += byteCount / CharSize;
@@ -163,16 +189,20 @@ namespace System.Xml
 
     internal sealed class SafeAsciiDecoder : Decoder
     {
-        public SafeAsciiDecoder()
-        {
-        }
+        public SafeAsciiDecoder() { }
 
         public override int GetCharCount(byte[] bytes, int index, int count)
         {
             return count;
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             int i = byteIndex;
             int j = charIndex;
@@ -183,7 +213,18 @@ namespace System.Xml
             return byteCount;
         }
 
-        public override void Convert(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
+        public override void Convert(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            int charCount,
+            bool flush,
+            out int bytesUsed,
+            out int charsUsed,
+            out bool completed
+        )
         {
             if (charCount < byteCount)
             {
@@ -215,10 +256,7 @@ namespace System.Xml
 
         public override string WebName
         {
-            get
-            {
-                return this.EncodingName;
-            }
+            get { return this.EncodingName; }
         }
 
         public override Decoder GetDecoder()
@@ -240,10 +278,18 @@ namespace System.Xml
         {
             return null!; //ucs4Decoder.GetByteCount(chars, index, count);
         }
-        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+
+        public override int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             return 0;
         }
+
         public override int GetMaxByteCount(int charCount)
         {
             return 0;
@@ -254,7 +300,13 @@ namespace System.Xml
             return ucs4Decoder.GetCharCount(bytes, index, count);
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             return ucs4Decoder.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }
@@ -266,10 +318,7 @@ namespace System.Xml
 
         public override int CodePage
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override int GetCharCount(byte[] bytes)
@@ -284,34 +333,22 @@ namespace System.Xml
 
         internal static Encoding UCS4_Littleendian
         {
-            get
-            {
-                return new Ucs4Encoding4321();
-            }
+            get { return new Ucs4Encoding4321(); }
         }
 
         internal static Encoding UCS4_Bigendian
         {
-            get
-            {
-                return new Ucs4Encoding1234();
-            }
+            get { return new Ucs4Encoding1234(); }
         }
 
         internal static Encoding UCS4_2143
         {
-            get
-            {
-                return new Ucs4Encoding2143();
-            }
+            get { return new Ucs4Encoding2143(); }
         }
 
         internal static Encoding UCS4_3412
         {
-            get
-            {
-                return new Ucs4Encoding3412();
-            }
+            get { return new Ucs4Encoding3412(); }
         }
     }
 
@@ -381,9 +418,21 @@ namespace System.Xml
             return (count + lastBytesCount) / 4;
         }
 
-        internal abstract int GetFullChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex);
+        internal abstract int GetFullChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        );
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             // finish a character from the bytes that were cached last time
             int i;
@@ -432,7 +481,18 @@ namespace System.Xml
             return i;
         }
 
-        public override void Convert(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex, int charCount, bool flush, out int bytesUsed, out int charsUsed, out bool completed)
+        public override void Convert(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex,
+            int charCount,
+            bool flush,
+            out int bytesUsed,
+            out int charsUsed,
+            out bool completed
+        )
         {
             bytesUsed = 0;
             charsUsed = 0;
@@ -502,26 +562,38 @@ namespace System.Xml
 
         internal static void Ucs4ToUTF16(uint code, char[] chars, int charIndex)
         {
-            chars[charIndex] = (char)(XmlCharType.SurHighStart + (char)((code >> 16) - 1) + (char)((code >> 10) & 0x3F));
+            chars[charIndex] = (char)(
+                XmlCharType.SurHighStart + (char)((code >> 16) - 1) + (char)((code >> 10) & 0x3F)
+            );
             chars[charIndex + 1] = (char)(XmlCharType.SurLowStart + (char)(code & 0x3FF));
         }
     }
 
     internal sealed class Ucs4Decoder4321 : Ucs4Decoder
     {
-        internal override int GetFullChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        internal override int GetFullChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             uint code;
-            int i, j;
+            int i,
+                j;
 
             byteCount += byteIndex;
 
-            for (i = byteIndex, j = charIndex; i + 3 < byteCount;)
+            for (i = byteIndex, j = charIndex; i + 3 < byteCount; )
             {
                 code = BinaryPrimitives.ReadUInt32LittleEndian(bytes.AsSpan(i));
                 if (code > 0x10FFFF)
                 {
-                    throw new ArgumentException(SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }), (string?)null);
+                    throw new ArgumentException(
+                        SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }),
+                        (string?)null
+                    );
                 }
                 else if (code > 0xFFFF)
                 {
@@ -550,19 +622,29 @@ namespace System.Xml
 
     internal sealed class Ucs4Decoder1234 : Ucs4Decoder
     {
-        internal override int GetFullChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        internal override int GetFullChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             uint code;
-            int i, j;
+            int i,
+                j;
 
             byteCount += byteIndex;
 
-            for (i = byteIndex, j = charIndex; i + 3 < byteCount;)
+            for (i = byteIndex, j = charIndex; i + 3 < byteCount; )
             {
                 code = BinaryPrimitives.ReadUInt32BigEndian(bytes.AsSpan(i));
                 if (code > 0x10FFFF)
                 {
-                    throw new ArgumentException(SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }), (string?)null);
+                    throw new ArgumentException(
+                        SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }),
+                        (string?)null
+                    );
                 }
                 else if (code > 0xFFFF)
                 {
@@ -588,23 +670,34 @@ namespace System.Xml
             return j - charIndex;
         }
     }
-
 
     internal sealed class Ucs4Decoder2143 : Ucs4Decoder
     {
-        internal override int GetFullChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        internal override int GetFullChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             uint code;
-            int i, j;
+            int i,
+                j;
 
             byteCount += byteIndex;
 
-            for (i = byteIndex, j = charIndex; i + 3 < byteCount;)
+            for (i = byteIndex, j = charIndex; i + 3 < byteCount; )
             {
-                code = (uint)((bytes[i + 1] << 24) | (bytes[i] << 16) | (bytes[i + 3] << 8) | bytes[i + 2]);
+                code = (uint)(
+                    (bytes[i + 1] << 24) | (bytes[i] << 16) | (bytes[i + 3] << 8) | bytes[i + 2]
+                );
                 if (code > 0x10FFFF)
                 {
-                    throw new ArgumentException(SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }), (string?)null);
+                    throw new ArgumentException(
+                        SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }),
+                        (string?)null
+                    );
                 }
                 else if (code > 0xFFFF)
                 {
@@ -631,22 +724,33 @@ namespace System.Xml
         }
     }
 
-
     internal sealed class Ucs4Decoder3412 : Ucs4Decoder
     {
-        internal override int GetFullChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        internal override int GetFullChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             uint code;
-            int i, j;
+            int i,
+                j;
 
             byteCount += byteIndex;
 
-            for (i = byteIndex, j = charIndex; i + 3 < byteCount;)
+            for (i = byteIndex, j = charIndex; i + 3 < byteCount; )
             {
-                code = (uint)((bytes[i + 2] << 24) | (bytes[i + 3] << 16) | (bytes[i] << 8) | bytes[i + 1]);
+                code = (uint)(
+                    (bytes[i + 2] << 24) | (bytes[i + 3] << 16) | (bytes[i] << 8) | bytes[i + 1]
+                );
                 if (code > 0x10FFFF)
                 {
-                    throw new ArgumentException(SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }), (string?)null);
+                    throw new ArgumentException(
+                        SR.Format(SR.Enc_InvalidByteInEncoding, new object[1] { i }),
+                        (string?)null
+                    );
                 }
                 else if (code > 0xFFFF)
                 {

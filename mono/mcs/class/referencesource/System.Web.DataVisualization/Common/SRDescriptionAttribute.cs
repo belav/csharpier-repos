@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.ComponentModel;
+using System.Text;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting
@@ -17,9 +17,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         // Methods
         public SRDescriptionAttribute(string description)
-            : base(description)
-        {
-        }
+            : base(description) { }
 
         // Properties
         public override string Description
@@ -35,7 +33,4 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
     }
-
- 
-
 }

@@ -6,19 +6,17 @@ namespace System.ServiceModel
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.IdentityModel.Claims;
+    using System.Linq;
     using System.Runtime;
     using System.ServiceModel.Activities;
+    using System.Text;
     using System.Windows.Markup;
 
     [MarkupExtensionReturnType(typeof(EndpointIdentity))]
     public class EndpointIdentityExtension : MarkupExtension
     {
-        public EndpointIdentityExtension()
-        {
-        }
+        public EndpointIdentityExtension() { }
 
         public EndpointIdentityExtension(EndpointIdentity identity)
         {
@@ -31,14 +29,11 @@ namespace System.ServiceModel
             this.ClaimResource = identity.IdentityClaim.Resource;
         }
 
-        public string ClaimType
-        { get; set; }
+        public string ClaimType { get; set; }
 
-        public string ClaimRight
-        { get; set; }
+        public string ClaimRight { get; set; }
 
-        public object ClaimResource
-        { get; set; }
+        public object ClaimResource { get; set; }
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

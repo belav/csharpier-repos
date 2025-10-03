@@ -39,7 +39,8 @@ namespace System.Security.Cryptography.X509Certificates
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
+            bool disableAia
+        )
         {
             if (OpenSslX509ChainEventSource.Log.IsEnabled())
             {
@@ -60,7 +61,8 @@ namespace System.Security.Cryptography.X509Certificates
                     trustMode,
                     verificationTime,
                     timeout,
-                    disableAia);
+                    disableAia
+                );
             }
             finally
             {
@@ -83,7 +85,8 @@ namespace System.Security.Cryptography.X509Certificates
             X509ChainTrustMode trustMode,
             DateTime verificationTime,
             TimeSpan timeout,
-            bool disableAia)
+            bool disableAia
+        )
         {
             if (timeout == TimeSpan.Zero)
             {
@@ -108,9 +111,9 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             // Until we support the Disallowed store, ensure it's empty (which is done by the ctor)
-            using (new X509Store(StoreName.Disallowed, StoreLocation.CurrentUser, OpenFlags.ReadOnly))
-            {
-            }
+            using (
+                new X509Store(StoreName.Disallowed, StoreLocation.CurrentUser, OpenFlags.ReadOnly)
+            ) { }
 
             TimeSpan downloadTimeout = timeout;
 
@@ -119,7 +122,8 @@ namespace System.Security.Cryptography.X509Certificates
                 customTrustStore,
                 trustMode,
                 verificationTime,
-                downloadTimeout);
+                downloadTimeout
+            );
 
             Interop.Crypto.X509VerifyStatusCode status = chainPal.FindFirstChain(extraStore);
 
@@ -144,7 +148,10 @@ namespace System.Security.Cryptography.X509Certificates
 
                     if (OpenSslX509ChainEventSource.Log.IsEnabled())
                     {
-                        OpenSslX509ChainEventSource.Log.FindChainViaAiaFinished(status, tmp?.Count ?? 0);
+                        OpenSslX509ChainEventSource.Log.FindChainViaAiaFinished(
+                            status,
+                            tmp?.Count ?? 0
+                        );
                     }
 
                     if (tmp != null)
@@ -171,9 +178,19 @@ namespace System.Security.Cryptography.X509Certificates
                     // Checking the validity period for the certificates in the chain is done after the
                     // check for a trusted root, so accept expired (or not yet valid) as acceptable for
                     // processing revocation.
-                    if (status != Interop.Crypto.X509VerifyStatusCode.X509_V_OK &&
-                        status != Interop.Crypto.X509VerifyStatusCodeUniversal.X509_V_ERR_CERT_NOT_YET_VALID &&
-                        status != Interop.Crypto.X509VerifyStatusCodeUniversal.X509_V_ERR_CERT_HAS_EXPIRED)
+                    if (
+                        status != Interop.Crypto.X509VerifyStatusCode.X509_V_OK
+                        && status
+                            != Interop
+                                .Crypto
+                                .X509VerifyStatusCodeUniversal
+                                .X509_V_ERR_CERT_NOT_YET_VALID
+                        && status
+                            != Interop
+                                .Crypto
+                                .X509VerifyStatusCodeUniversal
+                                .X509_V_ERR_CERT_HAS_EXPIRED
+                    )
                     {
                         if (OpenSslX509ChainEventSource.Log.IsEnabled())
                         {
@@ -194,7 +211,10 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 X509Certificate2 reportedLeaf = chainPal.ChainElements[0].Certificate;
                 Debug.Assert(reportedLeaf != null, "reportedLeaf != null");
-                Debug.Assert(!ReferenceEquals(cert, reportedLeaf.Pal), "!ReferenceEquals(cert, reportedLeaf.Pal)");
+                Debug.Assert(
+                    !ReferenceEquals(cert, reportedLeaf.Pal),
+                    "!ReferenceEquals(cert, reportedLeaf.Pal)"
+                );
             }
 #endif
             return chainPal;
@@ -202,7 +222,12 @@ namespace System.Security.Cryptography.X509Certificates
 
         private static void SaveIntermediateCertificates(List<X509Certificate2> downloadedCerts)
         {
-            using (var userIntermediate = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser))
+            using (
+                var userIntermediate = new X509Store(
+                    StoreName.CertificateAuthority,
+                    StoreLocation.CurrentUser
+                )
+            )
             {
                 try
                 {

@@ -26,7 +26,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
             private ExpressionSyntax? _assignmentTarget;
 
-            private Rewriter(SemanticModel semanticModel, bool isAllThrowStatements, CancellationToken cancellationToken)
+            private Rewriter(
+                SemanticModel semanticModel,
+                bool isAllThrowStatements,
+                CancellationToken cancellationToken
+            )
             {
                 _semanticModel = semanticModel;
                 _isAllThrowStatements = isAllThrowStatements;
@@ -40,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 SyntaxKind nodeToGenerate,
                 bool shouldMoveNextStatementToSwitchExpression,
                 bool generateDeclaration,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (switchStatement.ContainsDirectives)
                 {
@@ -48,16 +53,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     return switchStatement;
                 }
 
-                var rewriter = new Rewriter(model, isAllThrowStatements: nodeToGenerate == SyntaxKind.ThrowStatement, cancellationToken);
+                var rewriter = new Rewriter(
+                    model,
+                    isAllThrowStatements: nodeToGenerate == SyntaxKind.ThrowStatement,
+                    cancellationToken
+                );
 
                 // Rewrite the switch statement as a switch expression.
                 var switchExpression = rewriter.RewriteSwitchStatement(
-                    switchStatement, topLevel: true,
-                    allowMoveNextStatementToSwitchExpression: shouldMoveNextStatementToSwitchExpression);
+                    switchStatement,
+                    topLevel: true,
+                    allowMoveNextStatementToSwitchExpression: shouldMoveNextStatementToSwitchExpression
+                );
 
                 // Generate the final statement to wrap the switch expression, e.g. a "return" or an assignment.
                 return rewriter.GetFinalStatement(
-                    switchExpression, switchStatement.SwitchKeyword.LeadingTrivia, declaratorToRemoveType, nodeToGenerate, generateDeclaration);
+                    switchExpression,
+                    switchStatement.SwitchKeyword.LeadingTrivia,
+                    declaratorToRemoveType,
+                    nodeToGenerate,
+                    generateDeclaration
+                );
             }
 
             private StatementSyntax GetFinalStatement(
@@ -65,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 SyntaxTriviaList leadingTrivia,
                 ITypeSymbol? declaratorToRemoveType,
                 SyntaxKind nodeToGenerate,
-                bool generateDeclaration)
+                bool generateDeclaration
+            )
             {
                 switch (nodeToGenerate)
                 {
@@ -73,12 +90,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                         return ReturnStatement(
                             Token(leadingTrivia, SyntaxKind.ReturnKeyword, trailing: default),
                             switchExpression,
-                            Token(SyntaxKind.SemicolonToken));
+                            Token(SyntaxKind.SemicolonToken)
+                        );
                     case SyntaxKind.ThrowStatement:
                         return ThrowStatement(
                             Token(leadingTrivia, SyntaxKind.ThrowKeyword, trailing: default),
                             switchExpression,
-                            Token(SyntaxKind.SemicolonToken));
+                            Token(SyntaxKind.SemicolonToken)
+                        );
                 }
 
                 Debug.Assert(SyntaxFacts.IsAssignmentExpression(nodeToGenerate));
@@ -89,25 +108,42 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     : GenerateAssignment(switchExpression, nodeToGenerate, leadingTrivia);
             }
 
-            private ExpressionStatementSyntax GenerateAssignment(ExpressionSyntax switchExpression, SyntaxKind assignmentKind, SyntaxTriviaList leadingTrivia)
+            private ExpressionStatementSyntax GenerateAssignment(
+                ExpressionSyntax switchExpression,
+                SyntaxKind assignmentKind,
+                SyntaxTriviaList leadingTrivia
+            )
             {
                 Contract.ThrowIfNull(_assignmentTarget);
 
                 return ExpressionStatement(
-                    AssignmentExpression(assignmentKind,
-                        left: _assignmentTarget,
-                        right: switchExpression))
+                        AssignmentExpression(
+                            assignmentKind,
+                            left: _assignmentTarget,
+                            right: switchExpression
+                        )
+                    )
                     .WithLeadingTrivia(leadingTrivia);
             }
 
-            private StatementSyntax GenerateVariableDeclaration(ExpressionSyntax switchExpression, ITypeSymbol? declaratorToRemoveType)
+            private StatementSyntax GenerateVariableDeclaration(
+                ExpressionSyntax switchExpression,
+                ITypeSymbol? declaratorToRemoveType
+            )
             {
                 Contract.ThrowIfFalse(_assignmentTarget is IdentifierNameSyntax);
 
                 // There is a probability that we cannot use var if the declaration type is a reference type or nullable type.
                 // In these cases, we generate the explicit type for now and decide later whether or not to use var.
-                var cannotUseVar = declaratorToRemoveType != null && (declaratorToRemoveType.IsReferenceType || declaratorToRemoveType.IsNullable());
-                var type = cannotUseVar ? declaratorToRemoveType!.GenerateTypeSyntax() : IdentifierName("var");
+                var cannotUseVar =
+                    declaratorToRemoveType != null
+                    && (
+                        declaratorToRemoveType.IsReferenceType
+                        || declaratorToRemoveType.IsNullable()
+                    );
+                var type = cannotUseVar
+                    ? declaratorToRemoveType!.GenerateTypeSyntax()
+                    : IdentifierName("var");
 
                 return LocalDeclarationStatement(
                     VariableDeclaration(
@@ -116,7 +152,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                             VariableDeclarator(
                                 identifier: ((IdentifierNameSyntax)_assignmentTarget).Identifier,
                                 argumentList: null,
-                                initializer: EqualsValueClause(switchExpression)))));
+                                initializer: EqualsValueClause(switchExpression)
+                            )
+                        )
+                    )
+                );
             }
 
             private SwitchExpressionArmSyntax GetSwitchExpressionArm(SwitchSectionSyntax node)
@@ -124,10 +164,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 return SwitchExpressionArm(
                     pattern: GetPattern(node.Labels, out var whenClauseOpt),
                     whenClause: whenClauseOpt,
-                    expression: RewriteStatements(node.Statements));
+                    expression: RewriteStatements(node.Statements)
+                );
             }
 
-            private static PatternSyntax GetPattern(SyntaxList<SwitchLabelSyntax> switchLabels, out WhenClauseSyntax? whenClause)
+            private static PatternSyntax GetPattern(
+                SyntaxList<SwitchLabelSyntax> switchLabels,
+                out WhenClauseSyntax? whenClause
+            )
             {
                 if (switchLabels.Count == 1)
                     return GetPattern(switchLabels[0], out whenClause);
@@ -141,21 +185,34 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
 
                 // Multiple labels, and no catch-all merge them using an 'or' pattern.
                 var totalPattern = GetPattern(switchLabels[0], out var whenClauseUnused);
-                Debug.Assert(whenClauseUnused == null, "We should not have offered to convert multiple cases if any have a when clause");
+                Debug.Assert(
+                    whenClauseUnused == null,
+                    "We should not have offered to convert multiple cases if any have a when clause"
+                );
 
                 for (var i = 1; i < switchLabels.Count; i++)
                 {
                     var nextPatternPart = GetPattern(switchLabels[i], out whenClauseUnused);
-                    Debug.Assert(whenClauseUnused == null, "We should not have offered to convert multiple cases if any have a when clause");
+                    Debug.Assert(
+                        whenClauseUnused == null,
+                        "We should not have offered to convert multiple cases if any have a when clause"
+                    );
 
-                    totalPattern = BinaryPattern(SyntaxKind.OrPattern, totalPattern.Parenthesize(), nextPatternPart.Parenthesize());
+                    totalPattern = BinaryPattern(
+                        SyntaxKind.OrPattern,
+                        totalPattern.Parenthesize(),
+                        nextPatternPart.Parenthesize()
+                    );
                 }
 
                 whenClause = null;
                 return totalPattern;
             }
 
-            private static PatternSyntax GetPattern(SwitchLabelSyntax switchLabel, out WhenClauseSyntax? whenClause)
+            private static PatternSyntax GetPattern(
+                SwitchLabelSyntax switchLabel,
+                out WhenClauseSyntax? whenClause
+            )
             {
                 switch (switchLabel.Kind())
                 {
@@ -177,7 +234,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 }
             }
 
-            public override ExpressionSyntax VisitAssignmentExpression(AssignmentExpressionSyntax node)
+            public override ExpressionSyntax VisitAssignmentExpression(
+                AssignmentExpressionSyntax node
+            )
             {
                 _assignmentTarget ??= node.Left;
                 return CastIfChangeInRuntimeRepresentation(node.Right);
@@ -190,11 +249,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 // switch statements do not use best-common-type, but switch expressions can use it.  We don't want the
                 // original conversion to be lost because a new best-common-type conversion is added.
                 var typeInfo = _semanticModel.GetTypeInfo(node, _cancellationToken);
-                if (typeInfo.ConvertedType is not null &&
-                    typeInfo.Type is not null &&
-                    !Equals(typeInfo.ConvertedType, typeInfo.Type))
+                if (
+                    typeInfo.ConvertedType is not null
+                    && typeInfo.Type is not null
+                    && !Equals(typeInfo.ConvertedType, typeInfo.Type)
+                )
                 {
-                    var conversion = _semanticModel.Compilation.ClassifyConversion(typeInfo.Type, typeInfo.ConvertedType);
+                    var conversion = _semanticModel.Compilation.ClassifyConversion(
+                        typeInfo.Type,
+                        typeInfo.ConvertedType
+                    );
                     if (!conversion.IsIdentityOrImplicitReference())
                         return node.Cast(typeInfo.ConvertedType);
                 }
@@ -211,64 +275,120 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 return result;
             }
 
-            public override ExpressionSyntax VisitSwitchStatement(SwitchStatementSyntax node)
-                => RewriteSwitchStatement(node, topLevel: false);
+            public override ExpressionSyntax VisitSwitchStatement(SwitchStatementSyntax node) =>
+                RewriteSwitchStatement(node, topLevel: false);
 
             private ExpressionSyntax RewriteSwitchStatement(
                 SwitchStatementSyntax node,
                 bool topLevel,
-                bool allowMoveNextStatementToSwitchExpression = true)
+                bool allowMoveNextStatementToSwitchExpression = true
+            )
             {
-                var switchArms = node.Sections
+                var switchArms = node
+                    .Sections
                     // The default label must come last in the switch expression.
                     .OrderBy(section => section.Labels.Any(label => IsDefaultSwitchLabel(label)))
                     .Select(s =>
-                        (tokensForLeadingTrivia: new[] { s.Labels[0].GetFirstToken(), s.Labels[0].GetLastToken() },
-                         tokensForTrailingTrivia: new[] { s.Statements[0].GetFirstToken(), s.Statements[0].GetLastToken() },
-                         armExpression: GetSwitchExpressionArm(s)))
+                        (
+                            tokensForLeadingTrivia: new[]
+                            {
+                                s.Labels[0].GetFirstToken(),
+                                s.Labels[0].GetLastToken(),
+                            },
+                            tokensForTrailingTrivia: new[]
+                            {
+                                s.Statements[0].GetFirstToken(),
+                                s.Statements[0].GetLastToken(),
+                            },
+                            armExpression: GetSwitchExpressionArm(s)
+                        )
+                    )
                     .ToList();
 
                 if (allowMoveNextStatementToSwitchExpression)
                 {
                     var nextStatement = node.GetNextStatement();
-                    if (nextStatement is (kind: SyntaxKind.ThrowStatement or SyntaxKind.ReturnStatement))
+                    if (
+                        nextStatement is
+
+                        (kind: SyntaxKind.ThrowStatement or SyntaxKind.ReturnStatement)
+                    )
                     {
                         var armExpression = Visit(nextStatement);
                         Contract.ThrowIfNull(armExpression);
 
                         switchArms.Add(
-                            (tokensForLeadingTrivia: new[] { nextStatement.GetFirstToken() },
-                             tokensForTrailingTrivia: new[] { nextStatement.GetLastToken() },
-                             SwitchExpressionArm(DiscardPattern(), armExpression)));
+                            (
+                                tokensForLeadingTrivia: new[] { nextStatement.GetFirstToken() },
+                                tokensForTrailingTrivia: new[] { nextStatement.GetLastToken() },
+                                SwitchExpressionArm(DiscardPattern(), armExpression)
+                            )
+                        );
                     }
                 }
-                // add explicit cast if necessary 
+                // add explicit cast if necessary
                 var switchStatement = topLevel ? AddCastIfNecessary(node) : node;
 
                 return SwitchExpression(
                     switchStatement.Expression.Parenthesize(),
-                    Token(leading: default, SyntaxKind.SwitchKeyword, node.CloseParenToken.TrailingTrivia),
-                    Token(leading: default, SyntaxKind.OpenBraceToken, node.OpenBraceToken.TrailingTrivia),
+                    Token(
+                        leading: default,
+                        SyntaxKind.SwitchKeyword,
+                        node.CloseParenToken.TrailingTrivia
+                    ),
+                    Token(
+                        leading: default,
+                        SyntaxKind.OpenBraceToken,
+                        node.OpenBraceToken.TrailingTrivia
+                    ),
                     SeparatedList(
-                        switchArms.Select(t => t.armExpression.WithLeadingTrivia(t.tokensForLeadingTrivia.GetTrivia().FilterComments(addElasticMarker: false))),
-                        switchArms.Select(t => Token(SyntaxKind.CommaToken).WithTrailingTrivia(t.tokensForTrailingTrivia.GetTrivia().FilterComments(addElasticMarker: true)))),
-                    Token(SyntaxKind.CloseBraceToken));
+                        switchArms.Select(t =>
+                            t.armExpression.WithLeadingTrivia(
+                                t.tokensForLeadingTrivia.GetTrivia()
+                                    .FilterComments(addElasticMarker: false)
+                            )
+                        ),
+                        switchArms.Select(t =>
+                            Token(SyntaxKind.CommaToken)
+                                .WithTrailingTrivia(
+                                    t.tokensForTrailingTrivia.GetTrivia()
+                                        .FilterComments(addElasticMarker: true)
+                                )
+                        )
+                    ),
+                    Token(SyntaxKind.CloseBraceToken)
+                );
             }
 
             private SwitchStatementSyntax AddCastIfNecessary(SwitchStatementSyntax node)
             {
                 // If the switch statement expression is being implicitly converted then we need to explicitly cast the
                 // expression before rewriting as a switch expression
-                var expressionType = _semanticModel.GetSymbolInfo(node.Expression).Symbol.GetSymbolType();
-                var expressionConvertedType = _semanticModel.GetTypeInfo(node.Expression).ConvertedType;
+                var expressionType = _semanticModel
+                    .GetSymbolInfo(node.Expression)
+                    .Symbol.GetSymbolType();
+                var expressionConvertedType = _semanticModel
+                    .GetTypeInfo(node.Expression)
+                    .ConvertedType;
 
-                if (expressionConvertedType != null &&
-                    !SymbolEqualityComparer.Default.Equals(expressionConvertedType, expressionType))
+                if (
+                    expressionConvertedType != null
+                    && !SymbolEqualityComparer.Default.Equals(
+                        expressionConvertedType,
+                        expressionType
+                    )
+                )
                 {
-                    return node.Update(node.SwitchKeyword, node.OpenParenToken,
-                        node.Expression.Cast(expressionConvertedType).WithAdditionalAnnotations(Formatter.Annotation),
-                        node.CloseParenToken, node.OpenBraceToken,
-                        node.Sections, node.CloseBraceToken);
+                    return node.Update(
+                        node.SwitchKeyword,
+                        node.OpenParenToken,
+                        node.Expression.Cast(expressionConvertedType)
+                            .WithAdditionalAnnotations(Formatter.Annotation),
+                        node.CloseParenToken,
+                        node.OpenBraceToken,
+                        node.Sections,
+                        node.CloseBraceToken
+                    );
                 }
 
                 return node;
@@ -288,15 +408,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 return _isAllThrowStatements ? node.Expression : ThrowExpression(node.Expression);
             }
 
-            public override ExpressionSyntax VisitExpressionStatement(ExpressionStatementSyntax node)
+            public override ExpressionSyntax VisitExpressionStatement(
+                ExpressionStatementSyntax node
+            )
             {
                 var result = Visit(node.Expression);
                 Contract.ThrowIfNull(result);
                 return result;
             }
 
-            public override ExpressionSyntax DefaultVisit(SyntaxNode node)
-                => throw ExceptionUtilities.UnexpectedValue(node.Kind());
+            public override ExpressionSyntax DefaultVisit(SyntaxNode node) =>
+                throw ExceptionUtilities.UnexpectedValue(node.Kind());
         }
     }
 }

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
-
 using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.Cryptography
@@ -24,13 +23,15 @@ namespace System.Security.Cryptography
                 CngKey key = _core.GetOrGenerateKey(KeySize, _dsnCng);
                 return key;
             }
-
             private set
             {
                 CngKey key = value;
                 Debug.Assert(key != null, "key != null");
                 if (key.AlgorithmGroup != CngAlgorithmGroup.Dsa)
-                    throw new ArgumentException(SR.Cryptography_ArgDSARequiresDSAKey, nameof(value));
+                    throw new ArgumentException(
+                        SR.Cryptography_ArgDSARequiresDSAKey,
+                        nameof(value)
+                    );
                 _core.SetKey(key);
 
                 // Our LegalKeySizes value stores the values that we encoded as being the correct

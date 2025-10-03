@@ -13,9 +13,15 @@
     <PreReleaseVersionLabel>alpha</PreReleaseVersionLabel>
     <PreReleaseVersionIteration>1</PreReleaseVersionIteration>
     <!-- Enable to remove prerelease label. -->
-    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''">false</StabilizePackageVersion>
-    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'">release</DotNetFinalVersionKind>
-    <WorkloadVersionSuffix Condition="'$(DotNetFinalVersionKind)' != 'release'">-$(PreReleaseVersionLabel).$(PreReleaseVersionIteration)</WorkloadVersionSuffix>
+    <StabilizePackageVersion Condition="'$(StabilizePackageVersion)' == ''"
+      >false</StabilizePackageVersion
+    >
+    <DotNetFinalVersionKind Condition="'$(StabilizePackageVersion)' == 'true'"
+      >release</DotNetFinalVersionKind
+    >
+    <WorkloadVersionSuffix Condition="'$(DotNetFinalVersionKind)' != 'release'"
+      >-$(PreReleaseVersionLabel).$(PreReleaseVersionIteration)</WorkloadVersionSuffix
+    >
     <SdkBandVersionForWorkload_FromRuntimeVersions>$(SdkBandVersion)$(WorkloadVersionSuffix)</SdkBandVersionForWorkload_FromRuntimeVersions>
     <!-- Set assembly version to align with major and minor version,
          as for the patches and revisions should be manually updated per assembly if it is serviced. -->
@@ -24,7 +30,9 @@
     <UsingToolIbcOptimization>false</UsingToolIbcOptimization>
     <UsingToolXliff>false</UsingToolXliff>
     <!-- Use SDK compilers in full source-build. -->
-    <UsingToolMicrosoftNetCompilers Condition="'$(DotNetBuildFromSourceFlavor)' != 'Product'">true</UsingToolMicrosoftNetCompilers>
+    <UsingToolMicrosoftNetCompilers Condition="'$(DotNetBuildFromSourceFlavor)' != 'Product'"
+      >true</UsingToolMicrosoftNetCompilers
+    >
   </PropertyGroup>
   <ItemGroup>
     <WorkloadSdkBandVersions Include="$(SdkBandVersion)" SupportsMachineArch="true" />
@@ -33,8 +41,7 @@
     <!-- dotnet/roslyn-analyzers dependencies -->
     <MicrosoftCodeAnalysisAnalyzersVersion>3.11.0-beta1.23579.3</MicrosoftCodeAnalysisAnalyzersVersion>
     <MicrosoftCodeAnalysisNetAnalyzersVersion>9.0.0-preview.23579.3</MicrosoftCodeAnalysisNetAnalyzersVersion>
-    <!-- dotnet/roslyn dependencies -->
-    <!--
+    <!-- dotnet/roslyn dependencies --><!--
       These versions should not be used by any project that contributes to the design-time experience in VS, such as an analyzer, code-fix, or generator assembly.
       Any tools that contribute to the design-time experience should use the MicrosoftCodeAnalysisVersion_LatestVS property above to ensure
       they do not break the local dev experience.
@@ -52,14 +59,12 @@
     <MicrosoftCodeAnalysisVersion_3_11>3.11.0</MicrosoftCodeAnalysisVersion_3_11>
     <!-- Compatibility with VS 17.0/.NET SDK 6.0.1xx  -->
     <MicrosoftCodeAnalysisVersion_4_0>4.0.1</MicrosoftCodeAnalysisVersion_4_0>
-    <!-- Compatibility with VS 17.4/.NET SDK 7.0.1xx -->
-    <!--
+    <!-- Compatibility with VS 17.4/.NET SDK 7.0.1xx --><!--
       The exact version is a moving target until we ship.
       It should never go ahead of the Roslyn version included in the SDK version in dotnet/arcade's global.json to avoid causing breaks in product construction.
     -->
     <MicrosoftCodeAnalysisVersion_4_4>4.4.0</MicrosoftCodeAnalysisVersion_4_4>
-    <!-- Compatibility with the latest Visual Studio Preview release -->
-    <!--
+    <!-- Compatibility with the latest Visual Studio Preview release --><!--
       The exact version is always a moving target. This version should never go ahead of the version of Roslyn that is included in the most recent
       public Visual Studio preview version. If it were to go ahead, then any components depending on this version would not work in Visual Studio
       and would cause a major regression for any local development that depends on those components contributing to the build.

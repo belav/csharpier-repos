@@ -26,187 +26,183 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
-
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data;
+using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Collections;
-using System.Collections.Specialized;
 using NUnit.Framework;
-using System.Data;
-
-
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]
-	public class DataControlFieldCollectionTest
-	{
-		private bool _fieldsChanged;
-		public bool EventDone
-		{
-			get { return _fieldsChanged; }
-			set { _fieldsChanged = value; }
-		}
+    [TestFixture]
+    public class DataControlFieldCollectionTest
+    {
+        private bool _fieldsChanged;
+        public bool EventDone
+        {
+            get { return _fieldsChanged; }
+            set { _fieldsChanged = value; }
+        }
 
-		private void ResetEvent()
-		{
-			 _fieldsChanged = false;
-		}
+        private void ResetEvent()
+        {
+            _fieldsChanged = false;
+        }
 
-		[Test]
-		public void DataControlFieldCollection_DefaultProperty ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			Assert.AreEqual (0, collection.Count, "Count");
-		}
+        [Test]
+        public void DataControlFieldCollection_DefaultProperty()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            Assert.AreEqual(0, collection.Count, "Count");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_Add ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.Add (new BoundField());
-			Assert.AreEqual (1, collection.Count, "Add");
-		}
+        [Test]
+        public void DataControlFieldCollection_Add()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.Add(new BoundField());
+            Assert.AreEqual(1, collection.Count, "Add");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_Clear ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.Add (new BoundField ());
-			Assert.AreEqual (1, collection.Count, "Add");
-			collection.Clear ();
-			Assert.AreEqual (0, collection.Count, "Clear");
-		}
+        [Test]
+        public void DataControlFieldCollection_Clear()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.Add(new BoundField());
+            Assert.AreEqual(1, collection.Count, "Add");
+            collection.Clear();
+            Assert.AreEqual(0, collection.Count, "Clear");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_Clone ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.Add (new BoundField ());
-			Assert.AreEqual (1, collection.Count, "Add");
-			DataControlFieldCollection clone = collection.CloneFields ();
-			Assert.AreEqual (1, clone.Count, "Clone");
-		}
+        [Test]
+        public void DataControlFieldCollection_Clone()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.Add(new BoundField());
+            Assert.AreEqual(1, collection.Count, "Add");
+            DataControlFieldCollection clone = collection.CloneFields();
+            Assert.AreEqual(1, clone.Count, "Clone");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_Contains ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			BoundField field = new BoundField ();
-			collection.Add (field);
-			bool result = collection.Contains (field);
-			Assert.AreEqual (true, result, "Contains");
-		}
+        [Test]
+        public void DataControlFieldCollection_Contains()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            BoundField field = new BoundField();
+            collection.Add(field);
+            bool result = collection.Contains(field);
+            Assert.AreEqual(true, result, "Contains");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_CopyTo ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.Add (new BoundField ());
-			DataControlField[] fields = new DataControlField[collection.Count];
-			Array array = new DataControlField[collection.Count];
-			collection.CopyTo (fields, 0);
-			Assert.AreEqual (1, fields.Length, "CopyToDataControlField");
-			collection.CopyTo (array, 0);
-			Assert.AreEqual (1, array.Length, "CopyToArray");
-		}
+        [Test]
+        public void DataControlFieldCollection_CopyTo()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.Add(new BoundField());
+            DataControlField[] fields = new DataControlField[collection.Count];
+            Array array = new DataControlField[collection.Count];
+            collection.CopyTo(fields, 0);
+            Assert.AreEqual(1, fields.Length, "CopyToDataControlField");
+            collection.CopyTo(array, 0);
+            Assert.AreEqual(1, array.Length, "CopyToArray");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_GetEnumerator ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.Add (new BoundField ());
-			IEnumerator numerator = collection.GetEnumerator ();
-			Assert.IsNotNull (numerator, "GetEnumerator");
-			if (!(numerator is IEnumerator))
-				Assert.Fail ("IEnumerator not been created");
-		}
+        [Test]
+        public void DataControlFieldCollection_GetEnumerator()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.Add(new BoundField());
+            IEnumerator numerator = collection.GetEnumerator();
+            Assert.IsNotNull(numerator, "GetEnumerator");
+            if (!(numerator is IEnumerator))
+                Assert.Fail("IEnumerator not been created");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_IndexOf ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			BoundField field = new BoundField ();
-			int result;
-			result = collection.IndexOf (field);
-			Assert.AreEqual (-1, result, "NotExistFieldIndex");
-			collection.Add (field);
-			result = collection.IndexOf (field);
-			Assert.AreEqual (0, result, "ExistFieldIndex");
-		}
+        [Test]
+        public void DataControlFieldCollection_IndexOf()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            BoundField field = new BoundField();
+            int result;
+            result = collection.IndexOf(field);
+            Assert.AreEqual(-1, result, "NotExistFieldIndex");
+            collection.Add(field);
+            result = collection.IndexOf(field);
+            Assert.AreEqual(0, result, "ExistFieldIndex");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_Insert ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			BoundField field = new BoundField ();
-			collection.Add (new BoundField ());
-			collection.Add (new BoundField ());
-			Assert.AreEqual (2, collection.Count, "CollectionCount");
-			collection.Insert (0, field);
-			int result = collection.IndexOf (field);
-			Assert.AreEqual (0, result, "Insert");
-		}
+        [Test]
+        public void DataControlFieldCollection_Insert()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            BoundField field = new BoundField();
+            collection.Add(new BoundField());
+            collection.Add(new BoundField());
+            Assert.AreEqual(2, collection.Count, "CollectionCount");
+            collection.Insert(0, field);
+            int result = collection.IndexOf(field);
+            Assert.AreEqual(0, result, "Insert");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_Remove ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			BoundField field = new BoundField ();
-			collection.Add (field);
-			Assert.AreEqual (1, collection.Count, "CollectionCount");
- 			collection.Remove(null);
-			Assert.AreEqual (1, collection.Count, "RemoveNotExistField");
-			collection.Remove (field);
-			Assert.AreEqual (0, collection.Count, "RemoveExistField");
-		}
+        [Test]
+        public void DataControlFieldCollection_Remove()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            BoundField field = new BoundField();
+            collection.Add(field);
+            Assert.AreEqual(1, collection.Count, "CollectionCount");
+            collection.Remove(null);
+            Assert.AreEqual(1, collection.Count, "RemoveNotExistField");
+            collection.Remove(field);
+            Assert.AreEqual(0, collection.Count, "RemoveExistField");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_RemoveAt ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.Add (new BoundField ());
-			Assert.AreEqual (1, collection.Count, "CollectionCount");
-			collection.RemoveAt (0);
-			Assert.AreEqual (0, collection.Count, "RemoveAtIndex");
-		}
+        [Test]
+        public void DataControlFieldCollection_RemoveAt()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.Add(new BoundField());
+            Assert.AreEqual(1, collection.Count, "CollectionCount");
+            collection.RemoveAt(0);
+            Assert.AreEqual(0, collection.Count, "RemoveAtIndex");
+        }
 
-		[Test]
-		public void DataControlFieldCollection_FieldsChangedEvent ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.FieldsChanged += new EventHandler (collection_FieldsChanged);
-			BoundField field = new BoundField ();
-			collection.Add (field);
-			Assert.AreEqual (true, EventDone, "FieldsChangedEvenAdd");
-			ResetEvent ();
-			collection.Clear ();
-			Assert.AreEqual (true, EventDone, "FieldsChangedEvenClear");
-			ResetEvent ();
-			collection.Insert (0, field);
-			Assert.AreEqual (true, EventDone, "FieldsChangedEvenInsert");
-			ResetEvent ();
-			collection.Remove (field);
-			Assert.AreEqual (true, EventDone, "FieldsChangedEvenRemove");
-		}
+        [Test]
+        public void DataControlFieldCollection_FieldsChangedEvent()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.FieldsChanged += new EventHandler(collection_FieldsChanged);
+            BoundField field = new BoundField();
+            collection.Add(field);
+            Assert.AreEqual(true, EventDone, "FieldsChangedEvenAdd");
+            ResetEvent();
+            collection.Clear();
+            Assert.AreEqual(true, EventDone, "FieldsChangedEvenClear");
+            ResetEvent();
+            collection.Insert(0, field);
+            Assert.AreEqual(true, EventDone, "FieldsChangedEvenInsert");
+            ResetEvent();
+            collection.Remove(field);
+            Assert.AreEqual(true, EventDone, "FieldsChangedEvenRemove");
+        }
 
-		private void collection_FieldsChanged (Object sender, EventArgs e)
-		{
-			EventDone = true;
-		}
+        private void collection_FieldsChanged(Object sender, EventArgs e)
+        {
+            EventDone = true;
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void DataControlFieldCollection_RemoveAtException ()
-		{
-			DataControlFieldCollection collection = new DataControlFieldCollection ();
-			collection.RemoveAt (0);
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void DataControlFieldCollection_RemoveAtException()
+        {
+            DataControlFieldCollection collection = new DataControlFieldCollection();
+            collection.RemoveAt(0);
+        }
+    }
 }

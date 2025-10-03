@@ -21,7 +21,7 @@ namespace System.IO.Compression
         private const int WindowMask = 262143;
 
         private readonly byte[] _window = new byte[WindowSize]; // The window is 2^18 bytes
-        private int _end;       // this is the position to where we should write next byte
+        private int _end; // this is the position to where we should write next byte
         private int _bytesUsed; // The number of bytes in the output window which is not consumed.
 
         internal void ClearBytesUsed()
@@ -145,7 +145,10 @@ namespace System.IO.Compression
             }
             _window.AsSpan(copy_end - output.Length, output.Length).CopyTo(output);
             _bytesUsed -= copied;
-            Debug.Assert(_bytesUsed >= 0, "check this function and find why we copied more bytes than we have");
+            Debug.Assert(
+                _bytesUsed >= 0,
+                "check this function and find why we copied more bytes than we have"
+            );
             return copied;
         }
     }

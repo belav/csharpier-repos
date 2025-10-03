@@ -24,7 +24,10 @@
     <Compile Include="SatelliteContractVersionAttributeTests.cs" />
     <Compile Include="MissingSatelliteAssemblyException.cs" />
     <Compile Include="ResourceSetTests.cs" />
-    <Compile Include="$(CommonTestPath)System\Drawing\Helpers.cs" Link="Common\System\Drawing\Helpers.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Drawing\Helpers.cs"
+      Link="Common\System\Drawing\Helpers.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AToZResx.resx">
@@ -53,9 +56,24 @@
     <EmbeddedResource Include="Resources\TestResx.fr-FR.resx" />
     <EmbeddedResource Include="Resources\TestClassWithoutNeutralResources.fr.resx" />
     <EmbeddedResource Include="Resources\CustomReader.resx" />
-    <Content Include="Resources\TestResx.netstandard17.resources" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
-    <Content Include="Resources\bitmap.bmp" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
-    <Content Include="Resources\icon.ico" Link="%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    <Content
+      Include="Resources\TestResx.netstandard17.resources"
+      Link="%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest"
+      Visible="false"
+    />
+    <Content
+      Include="Resources\bitmap.bmp"
+      Link="%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest"
+      Visible="false"
+    />
+    <Content
+      Include="Resources\icon.ico"
+      Link="%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest"
+      Visible="false"
+    />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
@@ -72,7 +90,6 @@
       <_ResourceRelativeDir>$(_ResourceRelativeDir.TrimEnd('\'))</_ResourceRelativeDir>
       <_ResourceOutputName>$(_ResourceRelativeDir)\%(_WorkaroundCoreMSBuildResource.FileName).resources</_ResourceOutputName>
     </PropertyGroup>
-
     <Exec Command="resgen.exe %(_WorkaroundCoreMSBuildResource.Identity) $(_ResourceOutputName)" />
   </Target>
 </Project>

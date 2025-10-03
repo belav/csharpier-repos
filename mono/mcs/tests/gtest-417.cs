@@ -3,33 +3,27 @@
 using System;
 using System.Collections;
 
-class Indirect : Base
-{
-}
+class Indirect : Base { }
 
 abstract class Base : IEnumerable
 {
-	IEnumerator IEnumerable.GetEnumerator ()
-	{
-		return new int [0].GetEnumerator ();
-	}
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return new int[0].GetEnumerator();
+    }
 }
 
 public class TestCase
 {
-	public static GlobalMonitoredCharacterCollection MonitoredCharacters;
-	
-	public static int Main ()
-	{
-		MonitoredCharacters = new GlobalMonitoredCharacterCollection();
-		foreach (var character in MonitoredCharacters)
-		{
-		}
-		
-		foreach (var n in new Indirect ())
-		{
-		}
-		
-		return 0;
-	}
+    public static GlobalMonitoredCharacterCollection MonitoredCharacters;
+
+    public static int Main()
+    {
+        MonitoredCharacters = new GlobalMonitoredCharacterCollection();
+        foreach (var character in MonitoredCharacters) { }
+
+        foreach (var n in new Indirect()) { }
+
+        return 0;
+    }
 }

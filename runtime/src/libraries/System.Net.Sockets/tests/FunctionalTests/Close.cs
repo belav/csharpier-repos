@@ -10,7 +10,9 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void Close()
         {
-            using (var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            )
             {
                 s.Close();
             }
@@ -22,7 +24,9 @@ namespace System.Net.Sockets.Tests
         [InlineData(1)]
         public static void Close_Timeout(int timeout)
         {
-            using (var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            )
             {
                 s.Close(timeout);
             }
@@ -31,7 +35,9 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public static void Close_BadTimeout_Throws()
         {
-            using (var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var s = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+            )
             {
                 Assert.Throws<ArgumentOutOfRangeException>(() => s.Close(-2));
             }

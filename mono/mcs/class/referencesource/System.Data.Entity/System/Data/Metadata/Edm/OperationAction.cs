@@ -28,7 +28,7 @@ namespace System.Data.Metadata.Edm
         Cascade,
 
         /// <summary>
-        /// Do not allow if other ends are not empty 
+        /// Do not allow if other ends are not empty
         /// </summary>
         Restrict,
     }

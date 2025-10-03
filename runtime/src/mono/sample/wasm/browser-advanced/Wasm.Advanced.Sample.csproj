@@ -15,7 +15,6 @@
     <_ServeHeaders>$(_ServeHeaders) -h &quot;Content-Security-Policy: default-src 'self' 'wasm-unsafe-eval'&quot;</_ServeHeaders>
     <!-- enable reporting to profiler in browser dev tools -->
     <WasmProfilers>browser;</WasmProfilers>
-
     <!-- Put "framework" (dotnet.js, dlls, etc) files directly into the AppBundle -->
     <WasmRuntimeAssetsLocation>./</WasmRuntimeAssetsLocation>
   </PropertyGroup>
@@ -27,7 +26,5 @@
     <NativeFileReference Include="fibonacci.c" />
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
-
   <Target Name="RunSample" DependsOnTargets="RunSampleWithBrowserAndSimpleServer" />
-
 </Project>

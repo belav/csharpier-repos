@@ -10,6 +10,6 @@ namespace System.Reflection.Emit
     public enum AssemblyBuilderAccess
     {
         Run = 1,
-        RunAndCollect = 8 | Run
+        RunAndCollect = 8 | Run,
     }
 }

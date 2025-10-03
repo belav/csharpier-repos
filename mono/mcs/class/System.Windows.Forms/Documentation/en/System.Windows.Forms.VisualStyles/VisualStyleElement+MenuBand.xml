@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+MenuBand" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+MenuBand">
+<Type
+  Name="VisualStyleElement+MenuBand"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+MenuBand"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.MenuBand" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

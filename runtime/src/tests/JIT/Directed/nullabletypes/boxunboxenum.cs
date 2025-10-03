@@ -1,10 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
-
 
 internal class NullableTest1
 {
@@ -47,8 +46,6 @@ internal class NullableTest1
     }
 }
 
-
-
 internal class NullableTest2
 {
     private static bool BoxUnboxToNQ(Enum o)
@@ -89,8 +86,6 @@ internal class NullableTest2
         Assert.IsTrue(BoxUnboxToQ(u));
     }
 }
-
-
 
 internal class NullableTest3
 {
@@ -133,8 +128,6 @@ internal class NullableTest3
     }
 }
 
-
-
 public class Test_boxunboxenum
 {
     [Fact]
@@ -156,4 +149,3 @@ public class Test_boxunboxenum
         return 100;
     }
 }
-

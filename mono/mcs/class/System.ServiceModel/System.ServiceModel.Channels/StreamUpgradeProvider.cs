@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,40 +25,43 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 using System;
-using System.IO;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.ServiceModel;
 
 namespace System.ServiceModel.Channels
 {
-	public abstract class StreamUpgradeProvider : CommunicationObject
-	{
-		protected StreamUpgradeProvider ()
-			: this (DefaultCommunicationTimeouts.Instance)
-		{
-		}
+    public abstract class StreamUpgradeProvider : CommunicationObject
+    {
+        protected StreamUpgradeProvider()
+            : this(DefaultCommunicationTimeouts.Instance) { }
 
-		protected StreamUpgradeProvider (IDefaultCommunicationTimeouts timeouts)
-		{
-			if (timeouts == null)
-				throw new ArgumentNullException ("timeouts");
-			default_open_timeout = timeouts.OpenTimeout;
-			default_close_timeout = timeouts.CloseTimeout;
-		}
+        protected StreamUpgradeProvider(IDefaultCommunicationTimeouts timeouts)
+        {
+            if (timeouts == null)
+                throw new ArgumentNullException("timeouts");
+            default_open_timeout = timeouts.OpenTimeout;
+            default_close_timeout = timeouts.CloseTimeout;
+        }
 
-		TimeSpan default_open_timeout, default_close_timeout;
+        TimeSpan default_open_timeout,
+            default_close_timeout;
 
-		protected internal override TimeSpan DefaultCloseTimeout {
-			get { return default_close_timeout; }
-		}
+        protected internal override TimeSpan DefaultCloseTimeout
+        {
+            get { return default_close_timeout; }
+        }
 
-		protected internal override TimeSpan DefaultOpenTimeout {
-			get { return default_open_timeout; }
-		}
+        protected internal override TimeSpan DefaultOpenTimeout
+        {
+            get { return default_open_timeout; }
+        }
 
-		public abstract StreamUpgradeAcceptor CreateUpgradeAcceptor ();
+        public abstract StreamUpgradeAcceptor CreateUpgradeAcceptor();
 
-		public abstract StreamUpgradeInitiator CreateUpgradeInitiator (
-			EndpointAddress remoteAddress, Uri via);
-	}
+        public abstract StreamUpgradeInitiator CreateUpgradeInitiator(
+            EndpointAddress remoteAddress,
+            Uri via
+        );
+    }
 }

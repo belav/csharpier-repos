@@ -7,13 +7,10 @@ public class OverzealousInitializationInMemoryTest
     : OverzealousInitializationTestBase<OverzealousInitializationInMemoryTest.OverzealousInitializationInMemoryFixture>
 {
     public OverzealousInitializationInMemoryTest(OverzealousInitializationInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class OverzealousInitializationInMemoryFixture : OverzealousInitializationFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

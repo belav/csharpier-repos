@@ -1,13 +1,9 @@
 using System;
 using i = System.Int16;
 
-enum E : i
-{
-}
+enum E : i { }
 
 class X
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

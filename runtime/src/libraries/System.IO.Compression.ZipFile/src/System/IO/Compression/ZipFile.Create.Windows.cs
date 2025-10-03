@@ -7,9 +7,22 @@ namespace System.IO.Compression
 {
     public static partial class ZipFile
     {
-        private static FileSystemEnumerable<(string, CreateEntryType)> CreateEnumerableForCreate(string directoryFullPath)
-            => new FileSystemEnumerable<(string, CreateEntryType)>(directoryFullPath,
-                static (ref FileSystemEntry entry) => (entry.ToFullPath(), entry.IsDirectory ? CreateEntryType.Directory : CreateEntryType.File),
-                new EnumerationOptions { RecurseSubdirectories = true, AttributesToSkip = 0, IgnoreInaccessible = false });
+        private static FileSystemEnumerable<(string, CreateEntryType)> CreateEnumerableForCreate(
+            string directoryFullPath
+        ) =>
+            new FileSystemEnumerable<(string, CreateEntryType)>(
+                directoryFullPath,
+                static (ref FileSystemEntry entry) =>
+                    (
+                        entry.ToFullPath(),
+                        entry.IsDirectory ? CreateEntryType.Directory : CreateEntryType.File
+                    ),
+                new EnumerationOptions
+                {
+                    RecurseSubdirectories = true,
+                    AttributesToSkip = 0,
+                    IgnoreInaccessible = false,
+                }
+            );
     }
 }

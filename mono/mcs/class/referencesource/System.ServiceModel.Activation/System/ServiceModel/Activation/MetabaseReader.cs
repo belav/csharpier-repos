@@ -26,8 +26,10 @@ namespace System.ServiceModel.Activation
         AuthProviders = 6032,
     }
 
-    [Fx.Tag.SecurityNote(Critical = "Does a bunch of unsafe and native access." +
-        "Caller should guard MetabaseReader instance as well as any results.")]
+    [Fx.Tag.SecurityNote(
+        Critical = "Does a bunch of unsafe and native access."
+            + "Caller should guard MetabaseReader instance as well as any results."
+    )]
 #pragma warning disable 618 // have not moved to the v4 security model yet
     [SecurityCritical(SecurityCriticalScope.Everything)]
 #pragma warning restore 618
@@ -52,7 +54,10 @@ namespace System.ServiceModel.Activation
 
         uint currentBufferSize = 1024;
         bool disposed;
-        [Fx.Tag.SecurityNote(Safe = "Access Critical Private Members but does not expose critical private members to callers.")]
+
+        [Fx.Tag.SecurityNote(
+            Safe = "Access Critical Private Members but does not expose critical private members to callers."
+        )]
         [SecuritySafeCritical]
         public MetabaseReader()
         {
@@ -65,13 +70,20 @@ namespace System.ServiceModel.Activation
             }
 
             uint handle;
-            uint hResult = adminBase.OpenKey(MSAdminBase.METADATA_MASTER_ROOT_HANDLE, LMPath,
-                MSAdminBase.METADATA_PERMISSION_READ, MSAdminBase.DEFAULT_METABASE_TIMEOUT, out handle);
+            uint hResult = adminBase.OpenKey(
+                MSAdminBase.METADATA_MASTER_ROOT_HANDLE,
+                LMPath,
+                MSAdminBase.METADATA_PERMISSION_READ,
+                MSAdminBase.DEFAULT_METABASE_TIMEOUT,
+                out handle
+            );
             mdHandle = (int)handle;
 
             if (hResult != 0)
             {
-                throw FxTrace.Exception.AsError(new COMException(SR.Hosting_MetabaseAccessError, (int)hResult));
+                throw FxTrace.Exception.AsError(
+                    new COMException(SR.Hosting_MetabaseAccessError, (int)hResult)
+                );
             }
 
             bufferHandle = SafeHGlobalHandleCritical.AllocHGlobal(currentBufferSize);
@@ -81,7 +93,10 @@ namespace System.ServiceModel.Activation
         {
             Dispose(false);
         }
-        [Fx.Tag.SecurityNote(Safe = "Access Critical Private Members and returns a managed representation of the handle.")]
+
+        [Fx.Tag.SecurityNote(
+            Safe = "Access Critical Private Members and returns a managed representation of the handle."
+        )]
         [SecurityCritical]
         public object GetData(string path, MetabasePropertyType propertyType)
         {
@@ -93,7 +108,10 @@ namespace System.ServiceModel.Activation
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        [Fx.Tag.SecurityNote(Safe = "Access Critical Private Members but does not expose critical private members to callers.")]
+
+        [Fx.Tag.SecurityNote(
+            Safe = "Access Critical Private Members but does not expose critical private members to callers."
+        )]
         [SecuritySafeCritical]
         void EnsureRecordBuffer(uint bytes)
         {
@@ -109,6 +127,7 @@ namespace System.ServiceModel.Activation
             record.pbMDData = bufferHandle.DangerousGetHandle();
             record.dwMDDataLen = currentBufferSize;
         }
+
         [Fx.Tag.SecurityNote(Critical = "Accesses and Returns SecurityCritical private data.")]
         [SecurityCritical]
         object GetData(string path, uint type)
@@ -134,11 +153,14 @@ namespace System.ServiceModel.Activation
             }
             else if (hResult != 0)
             {
-                throw FxTrace.Exception.AsError(new COMException(SR.Hosting_MetabaseAccessError, (int)hResult));
+                throw FxTrace.Exception.AsError(
+                    new COMException(SR.Hosting_MetabaseAccessError, (int)hResult)
+                );
             }
 
             return ConvertData();
         }
+
         [Fx.Tag.SecurityNote(Critical = "Accesses and Returns SecurityCritical private data.")]
         [SecurityCritical]
         object ConvertData()
@@ -153,12 +175,17 @@ namespace System.ServiceModel.Activation
                 case MSAdminBase.MULTISZ_METADATA:
                     return RecordToStringArray();
                 default:
-                    throw FxTrace.Exception.AsError(new NotSupportedException(
-                        SR.Hosting_MetabaseDataTypeUnsupported(
-                        record.dwMDDataType.ToString(NumberFormatInfo.CurrentInfo),
-                        record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo))));
+                    throw FxTrace.Exception.AsError(
+                        new NotSupportedException(
+                            SR.Hosting_MetabaseDataTypeUnsupported(
+                                record.dwMDDataType.ToString(NumberFormatInfo.CurrentInfo),
+                                record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                            )
+                        )
+                    );
             }
         }
+
         [Fx.Tag.SecurityNote(Critical = "Accesses and Returns SecurityCritical private data.")]
         [SecurityCritical]
         string[] RecordToStringArray()
@@ -169,8 +196,13 @@ namespace System.ServiceModel.Activation
                 // Ensure that the data is an array of double-byte unicode chars.
                 if ((record.dwMDDataLen & 1) != 0)
                 {
-                    throw FxTrace.Exception.AsError(new DataMisalignedException(
-                        SR.Hosting_MetabaseDataStringsTerminate(record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo))));
+                    throw FxTrace.Exception.AsError(
+                        new DataMisalignedException(
+                            SR.Hosting_MetabaseDataStringsTerminate(
+                                record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                            )
+                        )
+                    );
                 }
 
                 int startPos = 0;
@@ -178,16 +210,26 @@ namespace System.ServiceModel.Activation
                 while (record.dwMDDataLen > 0)
                 {
                     // Scan for a null terminator.
-                    while (endPos < record.dwMDDataLen && Marshal.ReadInt16(record.pbMDData, endPos) != 0)
+                    while (
+                        endPos < record.dwMDDataLen
+                        && Marshal.ReadInt16(record.pbMDData, endPos) != 0
+                    )
                     {
                         endPos += 2;
                     }
 
-                    if (endPos == record.dwMDDataLen &&
-                        Marshal.ReadInt16(record.pbMDData, endPos - 2) != 0)
+                    if (
+                        endPos == record.dwMDDataLen
+                        && Marshal.ReadInt16(record.pbMDData, endPos - 2) != 0
+                    )
                     {
-                        throw FxTrace.Exception.AsError(new DataMisalignedException(
-                            SR.Hosting_MetabaseDataStringsTerminate(record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo))));
+                        throw FxTrace.Exception.AsError(
+                            new DataMisalignedException(
+                                SR.Hosting_MetabaseDataStringsTerminate(
+                                    record.dwMDIdentifier.ToString(NumberFormatInfo.CurrentInfo)
+                                )
+                            )
+                        );
                     }
 
                     // End of the string.
@@ -197,8 +239,12 @@ namespace System.ServiceModel.Activation
                     }
 
                     // Convert to string.
-                    list.Add(Marshal.PtrToStringUni(new IntPtr(record.pbMDData.ToInt64() + startPos),
-                        (endPos - startPos) / 2));
+                    list.Add(
+                        Marshal.PtrToStringUni(
+                            new IntPtr(record.pbMDData.ToInt64() + startPos),
+                            (endPos - startPos) / 2
+                        )
+                    );
 
                     // Go to next string
                     startPos = endPos += 2;
@@ -207,7 +253,10 @@ namespace System.ServiceModel.Activation
 
             return list.ToArray();
         }
-        [Fx.Tag.SecurityNote(Safe = "Access Critical Private Members but does not expose critical private members to callers.")]
+
+        [Fx.Tag.SecurityNote(
+            Safe = "Access Critical Private Members but does not expose critical private members to callers."
+        )]
         [SecuritySafeCritical]
         void Dispose(bool disposing)
         {
@@ -230,12 +279,11 @@ namespace System.ServiceModel.Activation
                     adminBase.CloseKey((uint)handleToClose);
                 }
 
-                //Notice we cannot assign adminBase to NULL in Dispose, because 
+                //Notice we cannot assign adminBase to NULL in Dispose, because
                 //it could be shared by multiple instances of MetabaseReader.
 
                 disposed = true;
             }
         }
-
     }
 }

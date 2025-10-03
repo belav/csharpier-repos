@@ -10,71 +10,84 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
-    public abstract class AbstractCSharpAutoPropertyCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public abstract class AbstractCSharpAutoPropertyCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected abstract string GetDefaultPropertyBlockText();
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task MissingInNamespace()
         {
-            await VerifyPropertyAbsenceAsync("""
+            await VerifyPropertyAbsenceAsync(
+                """
                 namespace Namespace
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task MissingInFilescopedNamespace()
         {
-            await VerifyPropertyAbsenceAsync("""
+            await VerifyPropertyAbsenceAsync(
+                """
                 namespace Namespace;
 
                 $$
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task MissingInTopLevelContext()
         {
-            await VerifyPropertyAbsenceAsync("""
+            await VerifyPropertyAbsenceAsync(
+                """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertSnippetInClass()
         {
-            await VerifyDefaultPropertyAsync("""
+            await VerifyDefaultPropertyAsync(
+                """
                 class MyClass
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertSnippetInRecord()
         {
-            await VerifyDefaultPropertyAsync("""
+            await VerifyDefaultPropertyAsync(
+                """
                 record MyRecord
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertSnippetInStruct()
         {
-            await VerifyDefaultPropertyAsync("""
+            await VerifyDefaultPropertyAsync(
+                """
                 struct MyStruct
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -88,30 +101,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task InsertSnippetNaming()
         {
-            await VerifyDefaultPropertyAsync("""
+            await VerifyDefaultPropertyAsync(
+                """
                 class MyClass
                 {
                     public int MyProperty { get; set; }
                     $$
                 }
-                """, "MyProperty1");
+                """,
+                "MyProperty1"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task MissingInEnum()
         {
-            await VerifyPropertyAbsenceAsync("""
+            await VerifyPropertyAbsenceAsync(
+                """
                 enum MyEnum
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task MissingInMethod()
         {
-            await VerifyPropertyAbsenceAsync("""
+            await VerifyPropertyAbsenceAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -119,13 +138,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task MissingInConstructor()
         {
-            await VerifyPropertyAbsenceAsync("""
+            await VerifyPropertyAbsenceAsync(
+                """
                 class Program
                 {
                     public Program()
@@ -133,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory, Trait(Traits.Feature, Traits.Features.Completion)]
@@ -144,15 +166,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("protected internal")]
         public async Task AfterAccessibilityModifier(string modifier)
         {
-            await VerifyPropertyAsync($$"""
+            await VerifyPropertyAsync(
+                $$"""
                 class Program
                 {
                     {{modifier}} $$
                 }
-                """, $"int MyProperty {GetDefaultPropertyBlockText()}");
+                """,
+                $"int MyProperty {GetDefaultPropertyBlockText()}"
+            );
         }
 
-        private Task VerifyPropertyAbsenceAsync(string markup) => VerifyItemIsAbsentAsync(markup, ItemToCommit);
+        private Task VerifyPropertyAbsenceAsync(string markup) =>
+            VerifyItemIsAbsentAsync(markup, ItemToCommit);
 
         protected async Task VerifyPropertyAsync(string markup, string propertyText)
         {
@@ -161,7 +187,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             await VerifyCustomCommitProviderAsync(markup, ItemToCommit, expectedCode);
         }
 
-        protected Task VerifyDefaultPropertyAsync(string markup, string propertyName = "MyProperty")
-            => VerifyPropertyAsync(markup, $"public int {propertyName} {GetDefaultPropertyBlockText()}");
+        protected Task VerifyDefaultPropertyAsync(
+            string markup,
+            string propertyName = "MyProperty"
+        ) =>
+            VerifyPropertyAsync(
+                markup,
+                $"public int {propertyName} {GetDefaultPropertyBlockText()}"
+            );
     }
 }

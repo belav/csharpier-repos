@@ -8,10 +8,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal abstract class ReflectionMember : ReflectionItem
     {
-        public abstract bool CanRead
-        {
-            get;
-        }
+        public abstract bool CanRead { get; }
 
         public Type DeclaringType
         {
@@ -28,10 +25,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return UnderlyingMember.GetDisplayName();
         }
 
-        public abstract bool RequiresInstance
-        {
-            get;
-        }
+        public abstract bool RequiresInstance { get; }
 
         public abstract MemberInfo UnderlyingMember { get; }
 

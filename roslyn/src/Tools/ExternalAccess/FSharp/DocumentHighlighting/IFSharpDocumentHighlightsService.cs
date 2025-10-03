@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.DocumentHighlighting
         public TextSpan TextSpan { get; }
         public FSharpHighlightSpanKind Kind { get; }
 
-        public FSharpHighlightSpan(TextSpan textSpan, FSharpHighlightSpanKind kind) : this()
+        public FSharpHighlightSpan(TextSpan textSpan, FSharpHighlightSpanKind kind)
+            : this()
         {
             this.TextSpan = textSpan;
             this.Kind = kind;
@@ -36,7 +37,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.DocumentHighlighting
         public Document Document { get; }
         public ImmutableArray<FSharpHighlightSpan> HighlightSpans { get; }
 
-        public FSharpDocumentHighlights(Document document, ImmutableArray<FSharpHighlightSpan> highlightSpans)
+        public FSharpDocumentHighlights(
+            Document document,
+            ImmutableArray<FSharpHighlightSpan> highlightSpans
+        )
         {
             this.Document = document;
             this.HighlightSpans = highlightSpans;
@@ -50,6 +54,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.DocumentHighlighting
     internal interface IFSharpDocumentHighlightsService
     {
         Task<ImmutableArray<FSharpDocumentHighlights>> GetDocumentHighlightsAsync(
-            Document document, int position, IImmutableSet<Document> documentsToSearch, CancellationToken cancellationToken);
+            Document document,
+            int position,
+            IImmutableSet<Document> documentsToSearch,
+            CancellationToken cancellationToken
+        );
     }
 }

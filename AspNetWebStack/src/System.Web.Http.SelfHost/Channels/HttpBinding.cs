@@ -9,16 +9,16 @@ using System.Web.Http.SelfHost.ServiceModel;
 using System.Web.Http.SelfHost.ServiceModel.Channels;
 
 namespace System.Web.Http.SelfHost.Channels
-{   
+{
     /// <summary>
-    /// A binding used with endpoints for web services that use strongly-type HTTP request 
+    /// A binding used with endpoints for web services that use strongly-type HTTP request
     /// and response messages.
     /// </summary>
     public class HttpBinding : Binding, IBindingRuntimePreferences
     {
         internal const string CollectionElementName = "httpBinding";
         internal const TransferMode DefaultTransferMode = System.ServiceModel.TransferMode.Buffered;
-        
+
         private HttpsTransportBindingElement _httpsTransportBindingElement;
         private HttpTransportBindingElement _httpTransportBindingElement;
         private HttpBindingSecurity _security;
@@ -34,10 +34,10 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpBinding"/> class with the 
+        /// Initializes a new instance of the <see cref="HttpBinding"/> class with the
         /// type of security used by the binding explicitly specified.
         /// </summary>
-        /// <param name="securityMode">The value of <see cref="HttpBindingSecurityMode"/> that 
+        /// <param name="securityMode">The value of <see cref="HttpBindingSecurityMode"/> that
         /// specifies the type of security that is used to configure a service endpoint using the
         /// <see cref="HttpBinding"/> binding.
         /// </param>
@@ -48,24 +48,27 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets the envelope version that is used by endpoints that are configured to use an 
+        /// Gets the envelope version that is used by endpoints that are configured to use an
         /// <see cref="HttpBinding"/> binding.  Always returns <see cref="System.ServiceModel.EnvelopeVersion.None"/>.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "This is existing public API")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This is existing public API"
+        )]
         public EnvelopeVersion EnvelopeVersion
         {
             get { return EnvelopeVersion.None; }
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the hostname is used to reach the 
+        /// Gets or sets a value that indicates whether the hostname is used to reach the
         /// service when matching the URI.
         /// </summary>
         [DefaultValue(HttpTransportDefaults.HostNameComparisonMode)]
         public HostNameComparisonMode HostNameComparisonMode
         {
             get { return _httpTransportBindingElement.HostNameComparisonMode; }
-
             set
             {
                 _httpTransportBindingElement.HostNameComparisonMode = value;
@@ -74,14 +77,13 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the maximum amount of memory allocated for the buffer manager that manages the buffers 
+        /// Gets or sets the maximum amount of memory allocated for the buffer manager that manages the buffers
         /// required by endpoints that use this binding.
         /// </summary>
         [DefaultValue(TransportDefaults.MaxBufferPoolSize)]
         public long MaxBufferPoolSize
         {
             get { return _httpTransportBindingElement.MaxBufferPoolSize; }
-
             set
             {
                 _httpTransportBindingElement.MaxBufferPoolSize = value;
@@ -90,14 +92,13 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the maximum amount of memory that is allocated for use by the manager of the message 
+        /// Gets or sets the maximum amount of memory that is allocated for use by the manager of the message
         /// buffers that receive messages from the channel.
         /// </summary>
         [DefaultValue(TransportDefaults.MaxBufferSize)]
         public int MaxBufferSize
         {
             get { return _httpTransportBindingElement.MaxBufferSize; }
-
             set
             {
                 _httpTransportBindingElement.MaxBufferSize = value;
@@ -112,7 +113,6 @@ namespace System.Web.Http.SelfHost.Channels
         public long MaxReceivedMessageSize
         {
             get { return _httpTransportBindingElement.MaxReceivedMessageSize; }
-
             set
             {
                 _httpTransportBindingElement.MaxReceivedMessageSize = value;
@@ -126,20 +126,19 @@ namespace System.Web.Http.SelfHost.Channels
         public Action<HttpTransportBindingElement> ConfigureTransportBindingElement
         {
             get { return _configureTransportBindingElement; }
-
-            set 
+            set
             {
                 if (value == null)
                 {
                     throw Error.PropertyNull();
                 }
 
-                _configureTransportBindingElement = value;              
+                _configureTransportBindingElement = value;
             }
         }
 
         /// <summary>
-        /// Gets the URI transport scheme for the channels and listeners that are configured 
+        /// Gets the URI transport scheme for the channels and listeners that are configured
         /// with this binding. (Overrides <see cref="System.ServiceModel.Channels.Binding.Scheme">
         /// Binding.Scheme</see>.)
         /// </summary>
@@ -149,12 +148,11 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets the security settings used with this binding. 
+        /// Gets or sets the security settings used with this binding.
         /// </summary>
         public HttpBindingSecurity Security
         {
             get { return _security; }
-
             set
             {
                 if (value == null)
@@ -167,14 +165,13 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether the service configured with the 
+        /// Gets or sets a value that indicates whether the service configured with the
         /// binding uses streamed or buffered (or both) modes of message transfer.
         /// </summary>
         [DefaultValue(HttpTransportDefaults.TransferMode)]
         public TransferMode TransferMode
         {
             get { return _httpTransportBindingElement.TransferMode; }
-
             set
             {
                 _httpTransportBindingElement.TransferMode = value;
@@ -185,14 +182,18 @@ namespace System.Web.Http.SelfHost.Channels
         /// <summary>
         /// Gets a value indicating whether incoming requests can be handled more efficiently synchronously or asynchronously.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes", Justification = "This is the pattern used by all standard bindings.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1033:InterfaceMethodsShouldBeCallableByChildTypes",
+            Justification = "This is the pattern used by all standard bindings."
+        )]
         bool IBindingRuntimePreferences.ReceiveSynchronously
         {
             get { return false; }
         }
 
         /// <summary>
-        /// Returns an ordered collection of binding elements contained in the current binding. 
+        /// Returns an ordered collection of binding elements contained in the current binding.
         /// (Overrides <see cref="System.ServiceModel.Channels.Binding.CreateBindingElements">
         /// Binding.CreateBindingElements</see>.)
         /// </summary>
@@ -215,7 +216,9 @@ namespace System.Web.Http.SelfHost.Channels
 
             if (_security.Mode == HttpBindingSecurityMode.Transport)
             {
-                _security.Transport.ConfigureTransportProtectionAndAuthentication(_httpsTransportBindingElement);
+                _security.Transport.ConfigureTransportProtectionAndAuthentication(
+                    _httpsTransportBindingElement
+                );
                 result = _httpsTransportBindingElement;
             }
             else if (_security.Mode == HttpBindingSecurityMode.TransportCredentialOnly)

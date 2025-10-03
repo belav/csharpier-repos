@@ -30,9 +30,9 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            return obj is LiteralPathSegment other &&
-                _comparisonType == other._comparisonType &&
-                string.Equals(other.Value, Value, _comparisonType);
+            return obj is LiteralPathSegment other
+                && _comparisonType == other._comparisonType
+                && string.Equals(other.Value, Value, _comparisonType);
         }
 
         public override int GetHashCode()

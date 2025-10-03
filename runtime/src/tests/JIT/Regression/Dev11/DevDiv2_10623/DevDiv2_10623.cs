@@ -4,12 +4,14 @@
 
 using System;
 using Xunit;
+
 public class Program
 {
     public static bool IsGuid(object item)
     {
         return item is Guid;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

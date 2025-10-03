@@ -27,7 +27,10 @@ namespace System.Activities.Core.Presentation
                 if (selection != null)
                 {
                     ModelItem primarySelection = selection.PrimarySelection;
-                    this.ExpandState = SwitchDesigner.IsDescendantOfCase(this.ModelItem, primarySelection);
+                    this.ExpandState = SwitchDesigner.IsDescendantOfCase(
+                        this.ModelItem,
+                        primarySelection
+                    );
 
                     if (this.ExpandState)
                     {
@@ -47,17 +50,17 @@ namespace System.Activities.Core.Presentation
         }
 
         // When the CaseDesigner is collapsed, its CaseKeyBox will be disabled. Thus CaseKeyBox.RegainFocus() doesn't
-        // work in such situation, we must re-focus the CaseDesigner to expand it first to re-enable the CaseKeyBox. 
-        // This situation happens when inputting and invalid case key value and clicking on another Case or Default in 
+        // work in such situation, we must re-focus the CaseDesigner to expand it first to re-enable the CaseKeyBox.
+        // This situation happens when inputting and invalid case key value and clicking on another Case or Default in
         // the same parent SwitchDesigner.
         public Action<CaseKeyBox> FocusSelf
         {
             get
             {
                 return (ckb) =>
-                    {
-                        Keyboard.Focus((IInputElement)this);
-                    };
+                {
+                    Keyboard.Focus((IInputElement)this);
+                };
             }
         }
 
@@ -66,15 +69,26 @@ namespace System.Activities.Core.Presentation
             Type type = typeof(ModelItemKeyValuePair<,>);
             builder.AddCustomAttributes(type, new DesignerAttribute(typeof(CaseDesigner)));
             builder.AddCustomAttributes(type, type.GetProperty("Value"), BrowsableAttribute.No);
-            builder.AddCustomAttributes(type, new ActivityDesignerOptionsAttribute { AllowDrillIn = false });
+            builder.AddCustomAttributes(
+                type,
+                new ActivityDesignerOptionsAttribute { AllowDrillIn = false }
+            );
         }
 
         void AttachDisplayName()
         {
-            AttachedPropertiesService attachedPropertiesService = this.Context.Services.GetService<AttachedPropertiesService>();
-            Fx.Assert(attachedPropertiesService != null, "AttachedPropertiesService is not available.");
+            AttachedPropertiesService attachedPropertiesService =
+                this.Context.Services.GetService<AttachedPropertiesService>();
+            Fx.Assert(
+                attachedPropertiesService != null,
+                "AttachedPropertiesService is not available."
+            );
             Type modelItemType = this.ModelItem.ItemType;
-            foreach (AttachedProperty property in attachedPropertiesService.GetAttachedProperties(modelItemType))
+            foreach (
+                AttachedProperty property in attachedPropertiesService.GetAttachedProperties(
+                    modelItemType
+                )
+            )
             {
                 if (property.Name == "DisplayName" && property.OwnerType == modelItemType)
                 {
@@ -85,7 +99,10 @@ namespace System.Activities.Core.Presentation
             {
                 Name = "DisplayName",
                 OwnerType = modelItemType,
-                Getter = (modelItem) => { return "Case"; }
+                Getter = (modelItem) =>
+                {
+                    return "Case";
+                },
             };
             attachedPropertiesService.AddProperty(displayNameProperty);
         }
@@ -132,7 +149,11 @@ namespace System.Activities.Core.Presentation
         {
             if (EditingContextUtilities.GetSingleSelectedModelItem(this.Context) == this.ModelItem)
             {
-                ContextMenuUtilities.OnAddAnnotationCommandCanExecute(e, this.Context, this.FindSwitch());
+                ContextMenuUtilities.OnAddAnnotationCommandCanExecute(
+                    e,
+                    this.Context,
+                    this.FindSwitch()
+                );
             }
         }
 
@@ -146,7 +167,11 @@ namespace System.Activities.Core.Presentation
             if (EditingContextUtilities.GetSingleSelectedModelItem(this.Context) == this.ModelItem)
             {
                 // call the same method as delete annotation command
-                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(e, this.Context, this.FindSwitch());
+                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(
+                    e,
+                    this.Context,
+                    this.FindSwitch()
+                );
             }
         }
 
@@ -159,7 +184,11 @@ namespace System.Activities.Core.Presentation
         {
             if (EditingContextUtilities.GetSingleSelectedModelItem(this.Context) == this.ModelItem)
             {
-                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(e, this.Context, this.FindSwitch());
+                ContextMenuUtilities.OnDeleteAnnotationCommandCanExecute(
+                    e,
+                    this.Context,
+                    this.FindSwitch()
+                );
             }
         }
 
@@ -170,10 +199,13 @@ namespace System.Activities.Core.Presentation
 
         private ModelItem FindSwitch()
         {
-            return this.ModelItem.FindParent((ModelItem item) =>
+            return this.ModelItem.FindParent(
+                (ModelItem item) =>
                 {
-                    return item.ItemType.IsGenericType && item.ItemType.GetGenericTypeDefinition() == typeof(Switch<>);
-                });
+                    return item.ItemType.IsGenericType
+                        && item.ItemType.GetGenericTypeDefinition() == typeof(Switch<>);
+                }
+            );
         }
     }
 }

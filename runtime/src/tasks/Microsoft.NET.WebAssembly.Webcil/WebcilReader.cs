@@ -2,16 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Buffers.Binary;
 using System.Collections.Immutable;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Buffers.Binary;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 
 namespace Microsoft.NET.WebAssembly.Webcil;
-
 
 public sealed partial class WebcilReader : IDisposable
 {
@@ -36,21 +35,29 @@ public sealed partial class WebcilReader : IDisposable
         {
             throw new ArgumentException("Stream must be readable and seekable", nameof(stream));
         }
-        if (TryReadWasmWrapper(out var webcilInWasmOffset)) {
+        if (TryReadWasmWrapper(out var webcilInWasmOffset))
+        {
             _webcilInWasmOffset = webcilInWasmOffset;
             _stream.Seek(_webcilInWasmOffset, SeekOrigin.Begin);
         }
         if (!ReadHeader())
         {
-            throw new BadImageFormatException("Stream does not contain a valid Webcil file", nameof(stream));
+            throw new BadImageFormatException(
+                "Stream does not contain a valid Webcil file",
+                nameof(stream)
+            );
         }
         if (!ReadCorHeader())
         {
-            throw new BadImageFormatException("Stream does not contain a valid COR header in the Webcil file", nameof(stream));
+            throw new BadImageFormatException(
+                "Stream does not contain a valid COR header in the Webcil file",
+                nameof(stream)
+            );
         }
     }
 
-    public WebcilReader (Stream stream, string inputPath) : this(stream)
+    public WebcilReader(Stream stream, string inputPath)
+        : this(stream)
     {
         InputPath = inputPath;
     }
@@ -73,14 +80,20 @@ public sealed partial class WebcilReader : IDisposable
             header.version_minor = BinaryPrimitives.ReverseEndianness(header.version_minor);
             header.coff_sections = BinaryPrimitives.ReverseEndianness(header.coff_sections);
             header.pe_cli_header_rva = BinaryPrimitives.ReverseEndianness(header.pe_cli_header_rva);
-            header.pe_cli_header_size = BinaryPrimitives.ReverseEndianness(header.pe_cli_header_size);
+            header.pe_cli_header_size = BinaryPrimitives.ReverseEndianness(
+                header.pe_cli_header_size
+            );
             header.pe_debug_rva = BinaryPrimitives.ReverseEndianness(header.pe_debug_rva);
             header.pe_debug_rva = BinaryPrimitives.ReverseEndianness(header.pe_debug_size);
         }
-        if (header.id[0] != 'W' || header.id[1] != 'b'
-            || header.id[2] != 'I' || header.id[3] != 'L'
+        if (
+            header.id[0] != 'W'
+            || header.id[1] != 'b'
+            || header.id[2] != 'I'
+            || header.id[3] != 'L'
             || header.version_major != Internal.Constants.WC_VERSION_MAJOR
-            || header.version_minor != Internal.Constants.WC_VERSION_MINOR)
+            || header.version_minor != Internal.Constants.WC_VERSION_MINOR
+        )
         {
             return false;
         }
@@ -115,7 +128,10 @@ public sealed partial class WebcilReader : IDisposable
             {
                 throw new BadImageFormatException("Could not seek to metadata in ", InputPath);
             }
-            _metadataReaderProvider = MetadataReaderProvider.FromMetadataStream(_stream, MetadataStreamOptions.LeaveOpen);
+            _metadataReaderProvider = MetadataReaderProvider.FromMetadataStream(
+                _stream,
+                MetadataStreamOptions.LeaveOpen
+            );
         }
         return _metadataReaderProvider;
     }
@@ -152,14 +168,19 @@ public sealed partial class WebcilReader : IDisposable
 
     // FIXME: copied from DebugDirectoryEntry.Size
     internal const int DebugDirectoryEntrySize =
-        sizeof(uint) +   // Characteristics
-        sizeof(uint) +   // TimeDataStamp
-        sizeof(uint) +   // Version
-        sizeof(uint) +   // Type
-        sizeof(uint) +   // SizeOfData
-        sizeof(uint) +   // AddressOfRawData
-        sizeof(uint);    // PointerToRawData
-
+        sizeof(uint)
+        + // Characteristics
+        sizeof(uint)
+        + // TimeDataStamp
+        sizeof(uint)
+        + // Version
+        sizeof(uint)
+        + // Type
+        sizeof(uint)
+        + // SizeOfData
+        sizeof(uint)
+        + // AddressOfRawData
+        sizeof(uint); // PointerToRawData
 
     // FIXME: copy-pasted from PEReader
     private static ImmutableArray<DebugDirectoryEntry> ReadDebugDirectoryEntries(BlobReader reader)
@@ -185,7 +206,17 @@ public sealed partial class WebcilReader : IDisposable
             int dataRva = reader.ReadInt32();
             int dataPointer = reader.ReadInt32();
 
-            builder.Add(new DebugDirectoryEntry(stamp, majorVersion, minorVersion, type, dataSize, dataRva, dataPointer));
+            builder.Add(
+                new DebugDirectoryEntry(
+                    stamp,
+                    majorVersion,
+                    minorVersion,
+                    type,
+                    dataSize,
+                    dataRva,
+                    dataPointer
+                )
+            );
         }
 
         return builder.MoveToImmutable();
@@ -197,11 +228,17 @@ public sealed partial class WebcilReader : IDisposable
         var buffer = new byte[entry.DataSize];
         if (_stream.Seek(pos, SeekOrigin.Begin) != pos)
         {
-            throw new BadImageFormatException("Could not seek to CodeView debug directory data", nameof(_stream));
+            throw new BadImageFormatException(
+                "Could not seek to CodeView debug directory data",
+                nameof(_stream)
+            );
         }
         if (_stream.Read(buffer, 0, buffer.Length) != buffer.Length)
         {
-            throw new BadImageFormatException("Could not read CodeView debug directory data", nameof(_stream));
+            throw new BadImageFormatException(
+                "Could not read CodeView debug directory data",
+                nameof(_stream)
+            );
         }
         unsafe
         {
@@ -216,10 +253,12 @@ public sealed partial class WebcilReader : IDisposable
     {
         // FIXME: copy-pasted from PEReader.DecodeCodeViewDebugDirectoryData
 
-        if (reader.ReadByte() != (byte)'R' ||
-            reader.ReadByte() != (byte)'S' ||
-            reader.ReadByte() != (byte)'D' ||
-            reader.ReadByte() != (byte)'S')
+        if (
+            reader.ReadByte() != (byte)'R'
+            || reader.ReadByte() != (byte)'S'
+            || reader.ReadByte() != (byte)'D'
+            || reader.ReadByte() != (byte)'S'
+        )
         {
             throw new BadImageFormatException("Unexpected CodeView data signature");
         }
@@ -231,23 +270,39 @@ public sealed partial class WebcilReader : IDisposable
         return MakeCodeViewDebugDirectoryData(guid, age, path);
     }
 
-    private static string? ReadUtf8NullTerminated(ref BlobReader reader) => Reflection.ReadUtf8NullTerminated(ref reader);
+    private static string? ReadUtf8NullTerminated(ref BlobReader reader) =>
+        Reflection.ReadUtf8NullTerminated(ref reader);
 
-    private static CodeViewDebugDirectoryData MakeCodeViewDebugDirectoryData(Guid guid, int age, string path) => Reflection.MakeCodeViewDebugDirectoryData(guid, age, path);
+    private static CodeViewDebugDirectoryData MakeCodeViewDebugDirectoryData(
+        Guid guid,
+        int age,
+        string path
+    ) => Reflection.MakeCodeViewDebugDirectoryData(guid, age, path);
 
-    private static PdbChecksumDebugDirectoryData MakePdbChecksumDebugDirectoryData(string algorithmName, ImmutableArray<byte> checksum) => Reflection.MakePdbChecksumDebugDirectoryData(algorithmName, checksum);
+    private static PdbChecksumDebugDirectoryData MakePdbChecksumDebugDirectoryData(
+        string algorithmName,
+        ImmutableArray<byte> checksum
+    ) => Reflection.MakePdbChecksumDebugDirectoryData(algorithmName, checksum);
 
-    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(DebugDirectoryEntry entry)
+    public MetadataReaderProvider ReadEmbeddedPortablePdbDebugDirectoryData(
+        DebugDirectoryEntry entry
+    )
     {
         var pos = entry.DataPointer + _webcilInWasmOffset;
         var buffer = new byte[entry.DataSize];
         if (_stream.Seek(pos, SeekOrigin.Begin) != pos)
         {
-            throw new BadImageFormatException("Could not seek to Embedded Portable PDB debug directory data", nameof(_stream));
+            throw new BadImageFormatException(
+                "Could not seek to Embedded Portable PDB debug directory data",
+                nameof(_stream)
+            );
         }
         if (_stream.Read(buffer, 0, buffer.Length) != buffer.Length)
         {
-            throw new BadImageFormatException("Could not read Embedded Portable PDB debug directory data", nameof(_stream));
+            throw new BadImageFormatException(
+                "Could not read Embedded Portable PDB debug directory data",
+                nameof(_stream)
+            );
         }
         unsafe
         {
@@ -259,6 +314,7 @@ public sealed partial class WebcilReader : IDisposable
     }
 
     private const uint PortablePdbVersions_DebugDirectoryEmbeddedSignature = 0x4244504d;
+
     private static MetadataReaderProvider DecodeEmbeddedPortablePdbDirectoryData(BlobReader reader)
     {
         // FIXME: inspired by PEReader.DecodeEmbeddedPortablePdbDebugDirectoryData
@@ -276,7 +332,13 @@ public sealed partial class WebcilReader : IDisposable
         byte[] compressedBuffer = reader.ReadBytes(reader.RemainingBytes);
 
         using (var compressedStream = new MemoryStream(compressedBuffer, writable: false))
-        using (var deflateStream = new System.IO.Compression.DeflateStream(compressedStream, System.IO.Compression.CompressionMode.Decompress, leaveOpen: true))
+        using (
+            var deflateStream = new System.IO.Compression.DeflateStream(
+                compressedStream,
+                System.IO.Compression.CompressionMode.Decompress,
+                leaveOpen: true
+            )
+        )
         {
 #if NETCOREAPP1_1_OR_GREATER
             decompressedBuffer = GC.AllocateUninitializedArray<byte>(decompressedSize);
@@ -289,27 +351,38 @@ public sealed partial class WebcilReader : IDisposable
             }
         }
 
-
-        return MetadataReaderProvider.FromPortablePdbStream(new MemoryStream(decompressedBuffer, writable: false));
-
+        return MetadataReaderProvider.FromPortablePdbStream(
+            new MemoryStream(decompressedBuffer, writable: false)
+        );
     }
 
-    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(DebugDirectoryEntry entry)
+    public PdbChecksumDebugDirectoryData ReadPdbChecksumDebugDirectoryData(
+        DebugDirectoryEntry entry
+    )
     {
         if (entry.Type != DebugDirectoryEntryType.PdbChecksum)
         {
-            throw new ArgumentException($"expected debug directory entry type {nameof(DebugDirectoryEntryType.PdbChecksum)}", nameof(entry));
+            throw new ArgumentException(
+                $"expected debug directory entry type {nameof(DebugDirectoryEntryType.PdbChecksum)}",
+                nameof(entry)
+            );
         }
 
         var pos = entry.DataPointer + _webcilInWasmOffset;
         var buffer = new byte[entry.DataSize];
         if (_stream.Seek(pos, SeekOrigin.Begin) != pos)
         {
-            throw new BadImageFormatException("Could not seek to CodeView debug directory data", nameof(_stream));
+            throw new BadImageFormatException(
+                "Could not seek to CodeView debug directory data",
+                nameof(_stream)
+            );
         }
         if (_stream.Read(buffer, 0, buffer.Length) != buffer.Length)
         {
-            throw new BadImageFormatException("Could not read CodeView debug directory data", nameof(_stream));
+            throw new BadImageFormatException(
+                "Could not read CodeView debug directory data",
+                nameof(_stream)
+            );
         }
         unsafe
         {
@@ -320,7 +393,9 @@ public sealed partial class WebcilReader : IDisposable
         }
     }
 
-    private static PdbChecksumDebugDirectoryData DecodePdbChecksumDebugDirectoryData(BlobReader reader)
+    private static PdbChecksumDebugDirectoryData DecodePdbChecksumDebugDirectoryData(
+        BlobReader reader
+    )
     {
         var algorithmName = ReadUtf8NullTerminated(ref reader);
         byte[]? checksum = reader.ReadBytes(reader.RemainingBytes);
@@ -342,7 +417,9 @@ public sealed partial class WebcilReader : IDisposable
         {
             if (rva >= section.VirtualAddress && rva < section.VirtualAddress + section.VirtualSize)
             {
-                return section.PointerToRawData + (rva - section.VirtualAddress) + _webcilInWasmOffset;
+                return section.PointerToRawData
+                    + (rva - section.VirtualAddress)
+                    + _webcilInWasmOffset;
             }
         }
         throw new BadImageFormatException("RVA not found in any section", nameof(_stream));
@@ -360,7 +437,10 @@ public sealed partial class WebcilReader : IDisposable
         {
             if (_stream.Read(buffer, 0, buffer.Length) != buffer.Length)
             {
-                throw new BadImageFormatException("Stream does not contain a valid Webcil file", nameof(_stream));
+                throw new BadImageFormatException(
+                    "Stream does not contain a valid Webcil file",
+                    nameof(_stream)
+                );
             }
             fixed (byte* p = buffer)
             {
@@ -368,14 +448,16 @@ public sealed partial class WebcilReader : IDisposable
             }
             if (!BitConverter.IsLittleEndian)
             {
-                sections.Add
-                (
-                    new WebcilSectionHeader
-                    (
+                sections.Add(
+                    new WebcilSectionHeader(
                         virtualSize: BinaryPrimitives.ReverseEndianness(secheader.VirtualSize),
-                        virtualAddress: BinaryPrimitives.ReverseEndianness(secheader.VirtualAddress),
+                        virtualAddress: BinaryPrimitives.ReverseEndianness(
+                            secheader.VirtualAddress
+                        ),
                         sizeOfRawData: BinaryPrimitives.ReverseEndianness(secheader.SizeOfRawData),
-                        pointerToRawData: BinaryPrimitives.ReverseEndianness(secheader.PointerToRawData)
+                        pointerToRawData: BinaryPrimitives.ReverseEndianness(
+                            secheader.PointerToRawData
+                        )
                     )
                 );
             }
@@ -408,13 +490,13 @@ public sealed partial class WebcilReader : IDisposable
 
     private sealed class WasmWrapperModuleReader : WasmModuleReader
     {
-        internal bool HasWebcil {get; private set;}
-        internal long WebcilPayloadOffset {get; private set; }
-        public WasmWrapperModuleReader(Stream stream) : base (stream)
-        {
-        }
+        internal bool HasWebcil { get; private set; }
+        internal long WebcilPayloadOffset { get; private set; }
 
-        protected override bool VisitSection (WasmModuleReader.Section sec, out bool shouldStop)
+        public WasmWrapperModuleReader(Stream stream)
+            : base(stream) { }
+
+        protected override bool VisitSection(WasmModuleReader.Section sec, out bool shouldStop)
         {
             shouldStop = false;
             if (sec != WasmModuleReader.Section.Data)
@@ -426,10 +508,10 @@ public sealed partial class WebcilReader : IDisposable
                 return false;
 
             // skip the first segment
-            if (!TryReadPassiveDataSegment (out long _, out long _))
+            if (!TryReadPassiveDataSegment(out long _, out long _))
                 return false;
 
-            if (!TryReadPassiveDataSegment (out long _, out long segmentStart))
+            if (!TryReadPassiveDataSegment(out long _, out long segmentStart))
                 return false;
 
             HasWebcil = true;

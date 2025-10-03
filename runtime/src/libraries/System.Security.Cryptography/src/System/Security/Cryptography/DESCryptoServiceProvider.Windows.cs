@@ -6,7 +6,11 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.DerivedCryptographicTypesMessage, DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.DerivedCryptographicTypesMessage,
+        DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class DESCryptoServiceProvider : DES
     {
@@ -17,7 +21,11 @@ namespace System.Security.Cryptography
             FeedbackSizeValue = 8;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override void GenerateKey()
         {
             var key = new byte[8];
@@ -35,32 +43,56 @@ namespace System.Security.Cryptography
             IVValue = RandomNumberGenerator.GetBytes(8);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateDecryptor()
         {
             return CreateTransform(Key, IV, encrypting: false);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV)
         {
             return CreateTransform(rgbKey, rgbIV?.CloneByteArray(), encrypting: false);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateEncryptor()
         {
             return CreateTransform(Key, IV, encrypting: true);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV)
         {
             return CreateTransform(rgbKey, rgbIV?.CloneByteArray(), encrypting: true);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DES")]
-        private UniversalCryptoTransform CreateTransform(byte[] rgbKey, byte[]? rgbIV, bool encrypting)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DES"
+        )]
+        private UniversalCryptoTransform CreateTransform(
+            byte[] rgbKey,
+            byte[]? rgbIV,
+            bool encrypting
+        )
         {
             ArgumentNullException.ThrowIfNull(rgbKey);
 
@@ -84,7 +116,6 @@ namespace System.Security.Cryptography
             }
             else
             {
-
                 // We truncate IV's that are longer than the block size to 8 bytes : this is
                 // done to maintain backward .NET Framework compatibility with the behavior shipped in V1.x.
                 // The call to set the IV in CryptoAPI will ignore any bytes after the first 8
@@ -102,7 +133,8 @@ namespace System.Security.Cryptography
                 rgbIV,
                 encrypting,
                 FeedbackSize,
-                this.GetPaddingSize(Mode, FeedbackSize));
+                this.GetPaddingSize(Mode, FeedbackSize)
+            );
             return UniversalCryptoTransform.Create(Padding, cipher, encrypting);
         }
     }

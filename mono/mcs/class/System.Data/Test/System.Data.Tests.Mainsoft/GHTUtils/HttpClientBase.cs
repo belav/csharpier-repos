@@ -3,9 +3,9 @@
 //   Erez Lotan       <erezl@mainsoft.com>
 //   Oren Gurfinkel   <oreng@mainsoft.com>
 //   Ofer Borstein
-// 
+//
 // Copyright (c) 2004 Mainsoft Co.
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,123 +32,137 @@ using System.Net;
 using GHTUtils;
 using GHTUtils.Base;
 
-
 namespace CHttpClient
 {
-	/// <summary>
-	/// Summary description for HttpClientBase.
-	/// </summary>
-	public class HttpClientBase : GHTBase
-	{
-		protected string _testingUrl = "";
-		protected string _proxyAddress = "";
-		public HttpClientBase()
-		{
-			_testingUrl = "http://localhost/httpapp/";
-			_proxyAddress = "localhost";
-		}
+    /// <summary>
+    /// Summary description for HttpClientBase.
+    /// </summary>
+    public class HttpClientBase : GHTBase
+    {
+        protected string _testingUrl = "";
+        protected string _proxyAddress = "";
 
-		protected string TCUrl(string page)
-		{
-			return _testingUrl + page;
-		}
+        public HttpClientBase()
+        {
+            _testingUrl = "http://localhost/httpapp/";
+            _proxyAddress = "localhost";
+        }
 
-		//===========================================================
-		// HTTP request/response routines
-		//===========================================================
+        protected string TCUrl(string page)
+        {
+            return _testingUrl + page;
+        }
 
-		protected HttpStatusCode HttpRequestStatusCode(string url)
-		{
-			return HttpRequestStatusCode(CreateRequest(url));
-		}
-		protected HttpStatusCode HttpRequestStatusCode(HttpWebRequest _request)
-		{
-			System.Net.HttpWebResponse _response;
-			_response = (HttpWebResponse)_request.GetResponse();
-			
-			HttpStatusCode c = _response.StatusCode;
-			_response.Close();
+        //===========================================================
+        // HTTP request/response routines
+        //===========================================================
 
-			return c;
-		}
+        protected HttpStatusCode HttpRequestStatusCode(string url)
+        {
+            return HttpRequestStatusCode(CreateRequest(url));
+        }
 
-		protected string HttpRequestString(string url)
-		{
-			return HttpRequestString(CreateRequest(url));
-		}
-		protected string HttpRequestString(HttpWebRequest _request)
-		{
-			System.Net.HttpWebResponse _response;
-			_response = (HttpWebResponse)_request.GetResponse();
+        protected HttpStatusCode HttpRequestStatusCode(HttpWebRequest _request)
+        {
+            System.Net.HttpWebResponse _response;
+            _response = (HttpWebResponse)_request.GetResponse();
 
-			Stream s = _response.GetResponseStream();
-			TextReader r = new StreamReader(s);
+            HttpStatusCode c = _response.StatusCode;
+            _response.Close();
 
-			string str = r.ReadToEnd();
-			_response.Close();
+            return c;
+        }
 
-			return str;
-		}
+        protected string HttpRequestString(string url)
+        {
+            return HttpRequestString(CreateRequest(url));
+        }
 
-		protected HttpWebRequest CreateRequest(string url)
-		{
-			return (HttpWebRequest)System.Net.WebRequest.Create(url);
-		}
+        protected string HttpRequestString(HttpWebRequest _request)
+        {
+            System.Net.HttpWebResponse _response;
+            _response = (HttpWebResponse)_request.GetResponse();
 
-		//===========================================================
-		// Upload/Download Data utilities
-		//===========================================================
+            Stream s = _response.GetResponseStream();
+            TextReader r = new StreamReader(s);
 
-		protected bool ValidateFile(string filename)
-		{
-			FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-			byte [] buffer = new byte[fs.Length];
-			fs.Read(buffer, 0, buffer.Length);
-			fs.Close();
+            string str = r.ReadToEnd();
+            _response.Close();
 
-			return ValidateData(buffer);
-		}
+            return str;
+        }
 
-		protected bool ValidateData(byte [] sdata)
-		{
-			for (int i=0; i < sdata.Length; i++)
-			{
-				if (sdata[i] != (byte)(i % 256))
-					return false;
-			}
-			return true;
-		}
+        protected HttpWebRequest CreateRequest(string url)
+        {
+            return (HttpWebRequest)System.Net.WebRequest.Create(url);
+        }
 
-		protected byte [] GenerateData(int size)
-		{
-			byte [] sdata = new byte[size];
-			for (int i=0; i < sdata.Length; i++)
-			{
-				sdata[i] = (byte)(i % 256);
-			}
+        //===========================================================
+        // Upload/Download Data utilities
+        //===========================================================
 
-			return sdata;
-		}
-		
-		//===========================================================
-		// Test case execution routines
-		//===========================================================
+        protected bool ValidateFile(string filename)
+        {
+            FileStream fs = new FileStream(
+                filename,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
+            byte[] buffer = new byte[fs.Length];
+            fs.Read(buffer, 0, buffer.Length);
+            fs.Close();
 
-		protected delegate bool TestCaseDelegate();
-		protected void ExecuteTestCase(string name, TestCaseDelegate f)
-		{
-			Exception exp = null;
+            return ValidateData(buffer);
+        }
 
-			//sub test start
-			try
-			{
-				BeginCase(name);
-				Compare( f(), true );
-			} 
-			catch(Exception ex){exp = ex;}
-			finally{EndCase(exp); exp = null;}
-			//sub test end
-		}
+        protected bool ValidateData(byte[] sdata)
+        {
+            for (int i = 0; i < sdata.Length; i++)
+            {
+                if (sdata[i] != (byte)(i % 256))
+                    return false;
+            }
+            return true;
+        }
 
-	}
+        protected byte[] GenerateData(int size)
+        {
+            byte[] sdata = new byte[size];
+            for (int i = 0; i < sdata.Length; i++)
+            {
+                sdata[i] = (byte)(i % 256);
+            }
+
+            return sdata;
+        }
+
+        //===========================================================
+        // Test case execution routines
+        //===========================================================
+
+        protected delegate bool TestCaseDelegate();
+
+        protected void ExecuteTestCase(string name, TestCaseDelegate f)
+        {
+            Exception exp = null;
+
+            //sub test start
+            try
+            {
+                BeginCase(name);
+                Compare(f(), true);
+            }
+            catch (Exception ex)
+            {
+                exp = ex;
+            }
+            finally
+            {
+                EndCase(exp);
+                exp = null;
+            }
+            //sub test end
+        }
+    }
 }

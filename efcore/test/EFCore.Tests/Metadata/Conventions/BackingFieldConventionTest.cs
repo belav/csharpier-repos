@@ -19,52 +19,52 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 public class BackingFieldConventionTest
 {
     [ConditionalFact]
-    public void Auto_property_name_matching_field_is_used_as_first_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("ComfortablyNumb", "<ComfortablyNumb>k__BackingField");
+    public void Auto_property_name_matching_field_is_used_as_first_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("ComfortablyNumb", "<ComfortablyNumb>k__BackingField");
 
     [ConditionalFact]
-    public void Property_name_matching_field_is_used_as_next_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("IsThereAnybodyOutThere", "IsThereAnybodyOutThere");
+    public void Property_name_matching_field_is_used_as_next_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("IsThereAnybodyOutThere", "IsThereAnybodyOutThere");
 
     [ConditionalFact]
-    public void Camel_case_matching_field_is_used_as_next_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("Breathe", "breathe");
+    public void Camel_case_matching_field_is_used_as_next_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("Breathe", "breathe");
 
     [ConditionalFact]
-    public void Camel_case_matching_field_is_not_used_if_type_is_not_compatible()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("OnTheRun", "_onTheRun");
+    public void Camel_case_matching_field_is_not_used_if_type_is_not_compatible() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("OnTheRun", "_onTheRun");
 
     [ConditionalFact]
-    public void Underscore_camel_case_matching_field_is_used_as_next_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("Time", "_time");
+    public void Underscore_camel_case_matching_field_is_used_as_next_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("Time", "_time");
 
     [ConditionalFact]
-    public void Underscore_suffix_camel_case_matching_field_is_used_as_next_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("Time", "_time");
+    public void Underscore_suffix_camel_case_matching_field_is_used_as_next_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("Time", "_time");
 
     [ConditionalFact]
-    public void Underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("TheGreatGigInTheSky", "_TheGreatGigInTheSky");
+    public void Underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("TheGreatGigInTheSky", "_TheGreatGigInTheSky");
 
     [ConditionalFact]
-    public void Underscore_matching_field_is_used_as_next_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("Money", "_Money");
+    public void Underscore_matching_field_is_used_as_next_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("Money", "_Money");
 
     [ConditionalFact]
-    public void Underscore_matching_field_is_not_used_if_type_is_not_compatible()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("UsAndThem", "m_usAndThem");
+    public void Underscore_matching_field_is_not_used_if_type_is_not_compatible() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("UsAndThem", "m_usAndThem");
 
     [ConditionalFact]
-    public void M_Underscore_camel_case_matching_field_is_used_as_next_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("AnyColourYouLike", "m_anyColourYouLike");
+    public void M_Underscore_camel_case_matching_field_is_used_as_next_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("AnyColourYouLike", "m_anyColourYouLike");
 
     [ConditionalFact]
-    public void M_underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("BrainDamage", "m_BrainDamage");
+    public void M_underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("BrainDamage", "m_BrainDamage");
 
     [ConditionalFact]
-    public void M_underscore_matching_field_is_used_as_next_preference()
-        => FieldMatchTest<TheDarkSideOfTheMoon>("Eclipse", "m_Eclipse");
+    public void M_underscore_matching_field_is_used_as_next_preference() =>
+        FieldMatchTest<TheDarkSideOfTheMoon>("Eclipse", "m_Eclipse");
 
     [ConditionalFact]
     public void M_underscore_matching_field_is_not_used_if_type_is_not_compatible()
@@ -79,44 +79,44 @@ public class BackingFieldConventionTest
     }
 
     [ConditionalFact]
-    public void Property_name_matching_field_is_used_as_first_preference_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("IsThereAnybodyOutThere", "IsThereAnybodyOutThere");
+    public void Property_name_matching_field_is_used_as_first_preference_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("IsThereAnybodyOutThere", "IsThereAnybodyOutThere");
 
     [ConditionalFact]
-    public void Camel_case_matching_field_is_not_used_as_next_preference_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("Breathe", null);
+    public void Camel_case_matching_field_is_not_used_as_next_preference_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("Breathe", null);
 
     [ConditionalFact]
-    public void Camel_case_matching_field_is_not_used_if_type_is_not_compatible_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("OnTheRun", null);
+    public void Camel_case_matching_field_is_not_used_if_type_is_not_compatible_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("OnTheRun", null);
 
     [ConditionalFact]
-    public void Underscore_camel_case_matching_field_is_not_used_as_next_preference_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("Time", null);
+    public void Underscore_camel_case_matching_field_is_not_used_as_next_preference_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("Time", null);
 
     [ConditionalFact]
-    public void Underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("TheGreatGigInTheSky", null);
+    public void Underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("TheGreatGigInTheSky", null);
 
     [ConditionalFact]
-    public void Underscore_matching_field_is_not_used_as_next_preference_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("Money", null);
+    public void Underscore_matching_field_is_not_used_as_next_preference_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("Money", null);
 
     [ConditionalFact]
-    public void Underscore_matching_field_is_not_used_if_type_is_not_compatible_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("UsAndThem", null);
+    public void Underscore_matching_field_is_not_used_if_type_is_not_compatible_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("UsAndThem", null);
 
     [ConditionalFact]
-    public void M_underscore_camel_case_matching_field_is_not_used_as_next_preference_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("AnyColourYouLike", null);
+    public void M_underscore_camel_case_matching_field_is_not_used_as_next_preference_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("AnyColourYouLike", null);
 
     [ConditionalFact]
-    public void M_underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("BrainDamage", null);
+    public void M_underscore_camel_case_matching_field_is_not_used_if_type_is_not_compatible_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("BrainDamage", null);
 
     [ConditionalFact]
-    public void M_underscore_matching_field_is_not_used_as_next_preference_for_field_only()
-        => FieldMatchTest<TheDarkerSideOfTheMoon>("Eclipse", null);
+    public void M_underscore_matching_field_is_not_used_as_next_preference_for_field_only() =>
+        FieldMatchTest<TheDarkerSideOfTheMoon>("Eclipse", null);
 
     [ConditionalFact]
     public void M_underscore_matching_field_is_not_used_if_type_is_not_compatible_for_field_only()
@@ -174,9 +174,13 @@ public class BackingFieldConventionTest
         RunConvention(property);
         Assert.Equal(
             CoreStrings.ConflictingBackingFields(
-                "OnTheRun", nameof(AlwaysLookOnTheBrightSideOfLife), "_onTheRun", "m_onTheRun"),
-            Assert.Throws<InvalidOperationException>(
-                () => Validate(property)).Message);
+                "OnTheRun",
+                nameof(AlwaysLookOnTheBrightSideOfLife),
+                "_onTheRun",
+                "m_onTheRun"
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(property)).Message
+        );
     }
 
     [ConditionalFact]
@@ -188,9 +192,13 @@ public class BackingFieldConventionTest
         RunConvention(property);
         Assert.Equal(
             CoreStrings.ConflictingBackingFields(
-                "OnTheRun", nameof(HesNotTheMessiah), "_onTheRun", "m_onTheRun"),
-            Assert.Throws<InvalidOperationException>(
-                () => Validate(property)).Message);
+                "OnTheRun",
+                nameof(HesNotTheMessiah),
+                "_onTheRun",
+                "m_onTheRun"
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(property)).Message
+        );
     }
 
     [ConditionalFact]
@@ -202,9 +210,13 @@ public class BackingFieldConventionTest
         RunConvention(property);
         Assert.Equal(
             CoreStrings.ConflictingBackingFields(
-                "OnTheRun", nameof(HesAVeryNaughtyBoy), "_onTheRun", "m_onTheRun"),
-            Assert.Throws<InvalidOperationException>(
-                () => Validate(property)).Message);
+                "OnTheRun",
+                nameof(HesAVeryNaughtyBoy),
+                "_onTheRun",
+                "m_onTheRun"
+            ),
+            Assert.Throws<InvalidOperationException>(() => Validate(property)).Message
+        );
     }
 
     [ConditionalFact]
@@ -225,7 +237,9 @@ public class BackingFieldConventionTest
     [ConditionalFact]
     public void FieldInfo_set_by_annotation_is_used()
     {
-        var entityType = ((IConventionModel)CreateModel()).AddEntityType(typeof(AlwaysLookOnTheBrightSideOfLife));
+        var entityType = ((IConventionModel)CreateModel()).AddEntityType(
+            typeof(AlwaysLookOnTheBrightSideOfLife)
+        );
         var property = entityType.AddProperty("OnTheRun", typeof(int));
 
         RunConvention((IMutableProperty)property);
@@ -257,26 +271,32 @@ public class BackingFieldConventionTest
 
         Assert.Equal(
             CoreStrings.BackingFieldOnIndexer("nation", entityType.DisplayName(), "Nation"),
-            Assert.Throws<InvalidOperationException>(() => property.SetField("nation")).Message);
+            Assert.Throws<InvalidOperationException>(() => property.SetField("nation")).Message
+        );
     }
 
-    private void RunConvention(IMutableProperty property)
-        => new BackingFieldConvention(CreateDependencies())
-            .ProcessPropertyAdded(
-                ((Property)property).Builder,
-                new ConventionContext<IConventionPropertyBuilder>(((Model)property.DeclaringType.Model).ConventionDispatcher));
+    private void RunConvention(IMutableProperty property) =>
+        new BackingFieldConvention(CreateDependencies()).ProcessPropertyAdded(
+            ((Property)property).Builder,
+            new ConventionContext<IConventionPropertyBuilder>(
+                ((Model)property.DeclaringType.Model).ConventionDispatcher
+            )
+        );
 
-    private void Validate(IMutableProperty property)
-        => new BackingFieldConvention(CreateDependencies())
-            .ProcessModelFinalizing(
-                ((Property)property).DeclaringType.Model.Builder,
-                new ConventionContext<IConventionModelBuilder>(((Model)property.DeclaringType.Model).ConventionDispatcher));
+    private void Validate(IMutableProperty property) =>
+        new BackingFieldConvention(CreateDependencies()).ProcessModelFinalizing(
+            ((Property)property).DeclaringType.Model.Builder,
+            new ConventionContext<IConventionModelBuilder>(
+                ((Model)property.DeclaringType.Model).ConventionDispatcher
+            )
+        );
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers
+            .Instance.CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 
 #pragma warning disable RCS1222 // Merge preprocessor directives.
 #pragma warning disable 649, 169
@@ -417,8 +437,9 @@ public class BackingFieldConventionTest
 
     private class TheDarkSide : OfTheMoon
     {
-        public static readonly PropertyInfo OnBaseProperty
-            = typeof(TheDarkSide).GetProperty(nameof(OnBase));
+        public static readonly PropertyInfo OnBaseProperty = typeof(TheDarkSide).GetProperty(
+            nameof(OnBase)
+        );
 
         public int OnBase
         {

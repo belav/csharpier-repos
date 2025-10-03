@@ -57,7 +57,11 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void Validate_Inclusive()
         {
-            TimeSpanValidator v = new TimeSpanValidator(new TimeSpan(5000), new TimeSpan(10000), false);
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                false
+            );
             v.Validate(new TimeSpan(5000));
             v.Validate(new TimeSpan(10000));
         }
@@ -65,7 +69,11 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void Validate_Exclusive()
         {
-            TimeSpanValidator v = new TimeSpanValidator(new TimeSpan(5000), new TimeSpan(10000), true);
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
             v.Validate(new TimeSpan(1000));
             v.Validate(new TimeSpan(15000));
         }
@@ -73,33 +81,50 @@ namespace MonoTests.System.Configuration
         [Fact]
         public void Validate_Exclusive_fail1()
         {
-            TimeSpanValidator v = new TimeSpanValidator(new TimeSpan(5000), new TimeSpan(10000), true);
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => v.Validate(new TimeSpan(5000)));
         }
 
         [Fact]
         public void Validate_Exclusive_fail2()
         {
-            TimeSpanValidator v = new TimeSpanValidator(new TimeSpan(5000), new TimeSpan(10000), true);
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => v.Validate(new TimeSpan(10000)));
         }
 
         [Fact]
         public void Validate_Exclusive_fail3()
         {
-            TimeSpanValidator v = new TimeSpanValidator(new TimeSpan(5000), new TimeSpan(10000), true);
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(5000),
+                new TimeSpan(10000),
+                true
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => v.Validate(new TimeSpan(7000)));
         }
 
         [Fact]
         public void Validate_Resolution()
         {
-            TimeSpanValidator v = new TimeSpanValidator(new TimeSpan(20000),
-                                     new TimeSpan(50000),
-                                     false,
-                                     2);
+            TimeSpanValidator v = new TimeSpanValidator(
+                new TimeSpan(20000),
+                new TimeSpan(50000),
+                false,
+                2
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => v.Validate(TimeSpan.FromTicks(40000)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => v.Validate(TimeSpan.FromTicks(40000))
+            );
         }
     }
 }

@@ -1,39 +1,47 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Globalization;
     using System.IO;
     using System.Web.Mvc.Resources;
 
-    public class WebFormView : BuildManagerCompiledView {
-
+    public class WebFormView : BuildManagerCompiledView
+    {
         public WebFormView(ControllerContext controllerContext, string viewPath)
-            : this(controllerContext, viewPath, null, null) {
-        }
+            : this(controllerContext, viewPath, null, null) { }
 
         public WebFormView(ControllerContext controllerContext, string viewPath, string masterPath)
-            : this(controllerContext, viewPath, masterPath, null) {
-        }
+            : this(controllerContext, viewPath, masterPath, null) { }
 
-        public WebFormView(ControllerContext controllerContext, string viewPath, string masterPath, IViewPageActivator viewPageActivator)
-            : base(controllerContext, viewPath, viewPageActivator) {
+        public WebFormView(
+            ControllerContext controllerContext,
+            string viewPath,
+            string masterPath,
+            IViewPageActivator viewPageActivator
+        )
+            : base(controllerContext, viewPath, viewPageActivator)
+        {
             MasterPath = masterPath ?? String.Empty;
         }
 
-        public string MasterPath {
-            get;
-            private set;
-        }
+        public string MasterPath { get; private set; }
 
-        protected override void RenderView(ViewContext viewContext, TextWriter writer, object instance) {
-
+        protected override void RenderView(
+            ViewContext viewContext,
+            TextWriter writer,
+            object instance
+        )
+        {
             ViewPage viewPage = instance as ViewPage;
-            if (viewPage != null) {
+            if (viewPage != null)
+            {
                 RenderViewPage(viewContext, viewPage);
                 return;
             }
 
             ViewUserControl viewUserControl = instance as ViewUserControl;
-            if (viewUserControl != null) {
+            if (viewUserControl != null)
+            {
                 RenderViewUserControl(viewContext, viewUserControl);
                 return;
             }
@@ -42,11 +50,15 @@
                 String.Format(
                     CultureInfo.CurrentCulture,
                     MvcResources.WebFormViewEngine_WrongViewBase,
-                    ViewPath));
+                    ViewPath
+                )
+            );
         }
 
-        private void RenderViewPage(ViewContext context, ViewPage page) {
-            if (!String.IsNullOrEmpty(MasterPath)) {
+        private void RenderViewPage(ViewContext context, ViewPage page)
+        {
+            if (!String.IsNullOrEmpty(MasterPath))
+            {
                 page.MasterLocation = MasterPath;
             }
 
@@ -54,9 +66,13 @@
             page.RenderView(context);
         }
 
-        private void RenderViewUserControl(ViewContext context, ViewUserControl control) {
-            if (!String.IsNullOrEmpty(MasterPath)) {
-                throw new InvalidOperationException(MvcResources.WebFormViewEngine_UserControlCannotHaveMaster);
+        private void RenderViewUserControl(ViewContext context, ViewUserControl control)
+        {
+            if (!String.IsNullOrEmpty(MasterPath))
+            {
+                throw new InvalidOperationException(
+                    MvcResources.WebFormViewEngine_UserControlCannotHaveMaster
+                );
             }
 
             control.ViewData = context.ViewData;

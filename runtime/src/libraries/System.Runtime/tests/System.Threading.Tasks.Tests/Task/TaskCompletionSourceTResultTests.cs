@@ -26,18 +26,29 @@ namespace System.Threading.Tasks.Tests.Status
             Assert.Equal(TaskStatus.WaitingForActivation, tcs.Task.Status);
             Assert.Same(stateObj, tcs.Task.AsyncState);
 
-            tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+            tcs = new TaskCompletionSource<bool>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             Assert.NotNull(tcs.Task);
             Assert.Same(tcs.Task, tcs.Task);
             Assert.Equal(TaskStatus.WaitingForActivation, tcs.Task.Status);
-            Assert.Equal(TaskCreationOptions.RunContinuationsAsynchronously, tcs.Task.CreationOptions);
+            Assert.Equal(
+                TaskCreationOptions.RunContinuationsAsynchronously,
+                tcs.Task.CreationOptions
+            );
             Assert.Null(tcs.Task.AsyncState);
 
-            tcs = new TaskCompletionSource<bool>(stateObj, TaskCreationOptions.RunContinuationsAsynchronously);
+            tcs = new TaskCompletionSource<bool>(
+                stateObj,
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             Assert.NotNull(tcs.Task);
             Assert.Same(tcs.Task, tcs.Task);
             Assert.Equal(TaskStatus.WaitingForActivation, tcs.Task.Status);
-            Assert.Equal(TaskCreationOptions.RunContinuationsAsynchronously, tcs.Task.CreationOptions);
+            Assert.Equal(
+                TaskCreationOptions.RunContinuationsAsynchronously,
+                tcs.Task.CreationOptions
+            );
             Assert.Same(stateObj, tcs.Task.AsyncState);
         }
 
@@ -47,21 +58,52 @@ namespace System.Threading.Tasks.Tests.Status
             // These shouldn't throw.
             new TaskCompletionSource<bool>(TaskCreationOptions.AttachedToParent);
             new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
-            new TaskCompletionSource<bool>(TaskCreationOptions.AttachedToParent | TaskCreationOptions.RunContinuationsAsynchronously);
+            new TaskCompletionSource<bool>(
+                TaskCreationOptions.AttachedToParent
+                    | TaskCreationOptions.RunContinuationsAsynchronously
+            );
             new TaskCompletionSource<bool>(new object(), TaskCreationOptions.AttachedToParent);
-            new TaskCompletionSource<bool>(new object(), TaskCreationOptions.RunContinuationsAsynchronously);
-            new TaskCompletionSource<bool>(new object(), TaskCreationOptions.AttachedToParent | TaskCreationOptions.RunContinuationsAsynchronously);
+            new TaskCompletionSource<bool>(
+                new object(),
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            new TaskCompletionSource<bool>(
+                new object(),
+                TaskCreationOptions.AttachedToParent
+                    | TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             // These should throw.
             foreach (TaskCreationOptions options in Enum.GetValues(typeof(TaskCreationOptions)))
             {
-                if ((options & TaskCreationOptions.AttachedToParent) != 0 &&
-                    (options & TaskCreationOptions.RunContinuationsAsynchronously) != 0)
+                if (
+                    (options & TaskCreationOptions.AttachedToParent) != 0
+                    && (options & TaskCreationOptions.RunContinuationsAsynchronously) != 0
+                )
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () => new TaskCompletionSource<bool>(options));
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () => new TaskCompletionSource<bool>(options | TaskCreationOptions.RunContinuationsAsynchronously));
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () => new TaskCompletionSource<bool>(new object(), options));
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () => new TaskCompletionSource<bool>(new object(), options | TaskCreationOptions.RunContinuationsAsynchronously));
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        "creationOptions",
+                        () => new TaskCompletionSource<bool>(options)
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        "creationOptions",
+                        () =>
+                            new TaskCompletionSource<bool>(
+                                options | TaskCreationOptions.RunContinuationsAsynchronously
+                            )
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        "creationOptions",
+                        () => new TaskCompletionSource<bool>(new object(), options)
+                    );
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        "creationOptions",
+                        () =>
+                            new TaskCompletionSource<bool>(
+                                new object(),
+                                options | TaskCreationOptions.RunContinuationsAsynchronously
+                            )
+                    );
                 }
             }
         }
@@ -107,7 +149,9 @@ namespace System.Threading.Tasks.Tests.Status
             }
             Assert.Equal(TaskStatus.Canceled, tcs.Task.Status);
             Assert.Null(tcs.Task.Exception);
-            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(() => tcs.Task.GetAwaiter().GetResult());
+            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(() =>
+                tcs.Task.GetAwaiter().GetResult()
+            );
             Assert.Equal(default, tce.CancellationToken);
 
             AssertCompletedTcsFailsToCompleteAgain(tcs);
@@ -132,7 +176,9 @@ namespace System.Threading.Tasks.Tests.Status
             }
             Assert.Equal(TaskStatus.Canceled, tcs.Task.Status);
             Assert.Null(tcs.Task.Exception);
-            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(() => tcs.Task.GetAwaiter().GetResult());
+            TaskCanceledException tce = Assert.Throws<TaskCanceledException>(() =>
+                tcs.Task.GetAwaiter().GetResult()
+            );
             Assert.Equal(cts.Token, tce.CancellationToken);
 
             AssertCompletedTcsFailsToCompleteAgain(tcs);
@@ -168,7 +214,12 @@ namespace System.Threading.Tasks.Tests.Status
         [InlineData(true)]
         public void SetException_Enumerable_CompletesSuccessfully(bool tryMethod)
         {
-            var e = new Exception[] { new FormatException(), new InvalidOperationException(), new ArgumentException() };
+            var e = new Exception[]
+            {
+                new FormatException(),
+                new InvalidOperationException(),
+                new ArgumentException(),
+            };
             var tcs = new TaskCompletionSource<object>();
             Assert.Equal(TaskStatus.WaitingForActivation, tcs.Task.Status);
 
@@ -193,7 +244,9 @@ namespace System.Threading.Tasks.Tests.Status
             Assert.False(tcs.TrySetResult(default));
 
             Assert.Throws<InvalidOperationException>(() => tcs.SetException(new Exception()));
-            Assert.Throws<InvalidOperationException>(() => tcs.SetException(Enumerable.Repeat(new Exception(), 1)));
+            Assert.Throws<InvalidOperationException>(() =>
+                tcs.SetException(Enumerable.Repeat(new Exception(), 1))
+            );
             Assert.False(tcs.TrySetException(new Exception()));
             Assert.False(tcs.TrySetException(Enumerable.Repeat(new Exception(), 1)));
 

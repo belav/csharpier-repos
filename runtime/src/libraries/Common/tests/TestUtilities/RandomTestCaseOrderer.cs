@@ -17,7 +17,10 @@ public class RandomTestCaseOrderer : ITestCaseOrderer
 {
     public const string RandomSeedEnvironmentVariableName = "XUNIT_RANDOM_ORDER_SEED";
 
-    public static readonly Lazy<int> LazySeed = new (GetSeed, LazyThreadSafetyMode.ExecutionAndPublication);
+    public static readonly Lazy<int> LazySeed = new(
+        GetSeed,
+        LazyThreadSafetyMode.ExecutionAndPublication
+    );
     private readonly IMessageSink _diagnosticMessageSink;
 
     private static int GetSeed()
@@ -33,16 +36,27 @@ public class RandomTestCaseOrderer : ITestCaseOrderer
 
     public RandomTestCaseOrderer(IMessageSink diagnosticMessageSink)
     {
-        diagnosticMessageSink.OnMessage(new DiagnosticMessage($"Using random seed for test cases: {LazySeed.Value}"));
+        diagnosticMessageSink.OnMessage(
+            new DiagnosticMessage($"Using random seed for test cases: {LazySeed.Value}")
+        );
         _diagnosticMessageSink = diagnosticMessageSink;
     }
 
-    public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
-        => TryRandomize(testCases.ToList(), _diagnosticMessageSink, out List<TTestCase>? randomizedTests)
-                    ? randomizedTests
-                    : testCases;
+    public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases)
+        where TTestCase : ITestCase =>
+        TryRandomize(
+            testCases.ToList(),
+            _diagnosticMessageSink,
+            out List<TTestCase>? randomizedTests
+        )
+            ? randomizedTests
+            : testCases;
 
-    public static bool TryRandomize<T>(List<T> tests, IMessageSink messageSink, [NotNullWhen(true)] out List<T>? randomizedTests)
+    public static bool TryRandomize<T>(
+        List<T> tests,
+        IMessageSink messageSink,
+        [NotNullWhen(true)] out List<T>? randomizedTests
+    )
     {
         randomizedTests = null;
         try

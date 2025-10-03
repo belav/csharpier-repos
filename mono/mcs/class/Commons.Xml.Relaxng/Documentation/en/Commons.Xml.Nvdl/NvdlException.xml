@@ -22,7 +22,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public NvdlException (string message, Exception inner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public NvdlException (string message, Exception inner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="message" Type="System.String" />

@@ -12,7 +12,10 @@
     <Compile Include="OptionalFieldAttributeTests.cs" />
     <Compile Include="FormatterConverterTests.cs" />
     <Compile Include="FormatterServicesTests.cs" />
-    <Compile Include="FormatterServicesTests.Windows.cs" Condition="'$(TargetPlatformIdentifier)' == 'windows'" />
+    <Compile
+      Include="FormatterServicesTests.Windows.cs"
+      Condition="'$(TargetPlatformIdentifier)' == 'windows'"
+    />
     <Compile Include="FormatterTests.cs" />
     <Compile Include="PlatformExtensions.cs" />
     <Compile Include="SerializationBinderTests.cs" />
@@ -21,16 +24,24 @@
     <Compile Include="SurrogateSelectorTests.cs" />
     <Compile Include="TargetFrameworkMoniker.cs" />
     <Compile Include="TypeSerializableValue.cs" />
-    <Compile Include="$(CommonTestPath)System\Drawing\Helpers.cs"
-             Link="Common\System\Drawing\Helpers.cs" />
-    <Compile Include="$(CommonTestPath)System\NonRuntimeType.cs"
-             Link="Common\System\NonRuntimeType.cs" />
-    <Compile Include="$(CommonTestPath)System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs"
-             Link="Common\System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Drawing\Helpers.cs"
+      Link="Common\System\Drawing\Helpers.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\NonRuntimeType.cs"
+      Link="Common\System\NonRuntimeType.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs"
+      Link="Common\System\Runtime\Serialization\Formatters\BinaryFormatterHelpers.cs"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
-    <Compile Include="$(CoreLibSharedDir)System\Collections\Generic\ReferenceEqualityComparer.cs"
-             Link="Common\System\Collections\Generic\ReferenceEqualityComparer.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Collections\Generic\ReferenceEqualityComparer.cs"
+      Link="Common\System\Collections\Generic\ReferenceEqualityComparer.cs"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Include="BinaryFormatterEventSourceTests.cs" />
@@ -62,14 +73,16 @@
     <Reference Include="System.Transactions" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
-
   <!--
       We're testing the BinaryFormatter enablement / disablement switch, so we need to suppress any inherited behavior.
       See https://github.com/dotnet/runtime/issues/87811 for more details.
       This is a temporary solution and should be reverted back to the original once the necessary changes are made in
       shared frameworks and SDK.
     -->
-  <Target Name="RemoveSerializationRuntimeOption" BeforeTargets="GenerateBuildRuntimeConfigurationFiles">
+  <Target
+    Name="RemoveSerializationRuntimeOption"
+    BeforeTargets="GenerateBuildRuntimeConfigurationFiles"
+  >
     <ItemGroup>
       <RuntimeHostConfigurationOption Remove="System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization" />
     </ItemGroup>

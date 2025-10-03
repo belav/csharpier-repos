@@ -15,7 +15,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         public override byte[] CreateSignature(byte[] rgbHash) => _impl.CreateSignature(rgbHash);
-        public override void ImportParameters(DSAParameters parameters) => _impl.ImportParameters(parameters);
+
+        public override void ImportParameters(DSAParameters parameters) =>
+            _impl.ImportParameters(parameters);
 
         public override DSAParameters ExportParameters(bool includePrivateParameters) =>
             _impl.ExportParameters(includePrivateParameters);
@@ -23,7 +25,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) =>
             _impl.VerifySignature(rgbHash, rgbSignature);
 
-        protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+        protected override byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             if (hashAlgorithm != HashAlgorithmName.SHA1)
                 throw new NotSupportedException();

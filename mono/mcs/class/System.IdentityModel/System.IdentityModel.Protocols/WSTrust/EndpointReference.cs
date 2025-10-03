@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,31 +32,41 @@ using System.Xml;
 
 namespace System.IdentityModel.Protocols.WSTrust
 {
-	public class EndpointReference
-	{
-		private Collection<XmlElement> details = new Collection<XmlElement> ();
-		private Uri uri = null;
+    public class EndpointReference
+    {
+        private Collection<XmlElement> details = new Collection<XmlElement>();
+        private Uri uri = null;
 
-		public Collection<XmlElement> Details { get { return details; } }
-		public Uri Uri { get { return uri; } }
+        public Collection<XmlElement> Details
+        {
+            get { return details; }
+        }
+        public Uri Uri
+        {
+            get { return uri; }
+        }
 
-		public EndpointReference (string uri) {
-			this.uri = new Uri (uri);
-		}
+        public EndpointReference(string uri)
+        {
+            this.uri = new Uri(uri);
+        }
 
-		[MonoTODO]
-		public static EndpointReference ReadFrom (XmlDictionaryReader reader) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static EndpointReference ReadFrom(XmlDictionaryReader reader)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public static EndpointReference ReadFrom(Xml.XmlReader reader) {
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public static EndpointReference ReadFrom(Xml.XmlReader reader)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void WriteTo (XmlWriter writer) {
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void WriteTo(XmlWriter writer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

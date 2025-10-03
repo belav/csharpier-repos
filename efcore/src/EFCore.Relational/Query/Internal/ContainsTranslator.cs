@@ -37,25 +37,31 @@ public class ContainsTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         // Note that almost all forms of Contains are queryable (e.g. over inline/parameter collections), and translated in
         // RelationalQueryableMethodTranslatingExpressionVisitor.TranslateContains.
         // This enumerable Contains translation is still needed for entity Contains (#30712)
-        SqlExpression? itemExpression = null, valuesExpression = null;
+        SqlExpression? itemExpression = null,
+            valuesExpression = null;
 
         // Identify static Enumerable.Contains and instance List.Contains
-        if (method.IsGenericMethod
+        if (
+            method.IsGenericMethod
             && method.GetGenericMethodDefinition() == EnumerableMethods.Contains
-            && ValidateValues(arguments[0]))
+            && ValidateValues(arguments[0])
+        )
         {
             (itemExpression, valuesExpression) = (RemoveObjectConvert(arguments[1]), arguments[0]);
         }
 
-        if (arguments.Count == 1
+        if (
+            arguments.Count == 1
             && method.IsContainsMethod()
             && instance != null
-            && ValidateValues(instance))
+            && ValidateValues(instance)
+        )
         {
             (itemExpression, valuesExpression) = (RemoveObjectConvert(arguments[0]), instance);
         }
@@ -82,12 +88,12 @@ public class ContainsTranslator : IMethodCallTranslator
         return null;
     }
 
-    private static bool ValidateValues(SqlExpression values)
-        => values is SqlConstantExpression or SqlParameterExpression;
+    private static bool ValidateValues(SqlExpression values) =>
+        values is SqlConstantExpression or SqlParameterExpression;
 
-    private static SqlExpression RemoveObjectConvert(SqlExpression expression)
-        => expression is SqlUnaryExpression { OperatorType: ExpressionType.Convert } sqlUnaryExpression
-            && sqlUnaryExpression.Type == typeof(object)
-                ? sqlUnaryExpression.Operand
-                : expression;
+    private static SqlExpression RemoveObjectConvert(SqlExpression expression) =>
+        expression is SqlUnaryExpression { OperatorType: ExpressionType.Convert } sqlUnaryExpression
+        && sqlUnaryExpression.Type == typeof(object)
+            ? sqlUnaryExpression.Operand
+            : expression;
 }

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Infrastructure for ASP.NET Core cryptographic packages. Applications and libraries should not reference this package directly.</Description>
     <TargetFrameworks>$(DefaultNetFxTargetFramework);netstandard2.0;$(DefaultNetCoreTargetFramework)</TargetFrameworks>
@@ -9,7 +8,6 @@
     <PackageTags>aspnetcore;dataprotection</PackageTags>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Cryptography.Internal.Tests" />
     <InternalsVisibleTo Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" />

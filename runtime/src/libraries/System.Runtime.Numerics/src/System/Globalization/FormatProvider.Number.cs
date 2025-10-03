@@ -296,42 +296,64 @@ namespace System.Globalization
             // better unify it with the code above.
             //
 
-            private static readonly string[] s_posCurrencyFormats =
-            {
-                "$#", "#$", "$ #", "# $"
-            };
+            private static readonly string[] s_posCurrencyFormats = { "$#", "#$", "$ #", "# $" };
 
             private static readonly string[] s_negCurrencyFormats =
             {
-                "($#)", "-$#", "$-#", "$#-",
-                "(#$)", "-#$", "#-$", "#$-",
-                "-# $", "-$ #", "# $-", "$ #-",
-                "$ -#", "#- $", "($ #)", "(# $)",
-                "$- #"
+                "($#)",
+                "-$#",
+                "$-#",
+                "$#-",
+                "(#$)",
+                "-#$",
+                "#-$",
+                "#$-",
+                "-# $",
+                "-$ #",
+                "# $-",
+                "$ #-",
+                "$ -#",
+                "#- $",
+                "($ #)",
+                "(# $)",
+                "$- #",
             };
 
-            private static readonly string[] s_posPercentFormats =
-            {
-                "# %", "#%", "%#", "% #"
-            };
+            private static readonly string[] s_posPercentFormats = { "# %", "#%", "%#", "% #" };
 
             private static readonly string[] s_negPercentFormats =
             {
-                "-# %", "-#%", "-%#",
-                "%-#", "%#-",
-                "#-%", "#%-",
-                "-% #", "# %-", "% #-",
-                "% -#", "#- %"
+                "-# %",
+                "-#%",
+                "-%#",
+                "%-#",
+                "%#-",
+                "#-%",
+                "#%-",
+                "-% #",
+                "# %-",
+                "% #-",
+                "% -#",
+                "#- %",
             };
 
             private static readonly string[] s_negNumberFormats =
             {
-                "(#)", "-#", "- #", "#-", "# -",
+                "(#)",
+                "-#",
+                "- #",
+                "#-",
+                "# -",
             };
 
             private const string PosNumberFormat = "#";
 
-            internal static unsafe void Int32ToDecChars(char* buffer, ref int index, uint value, int digits)
+            internal static unsafe void Int32ToDecChars(
+                char* buffer,
+                ref int index,
+                uint value,
+                int digits
+            )
             {
                 while (--digits >= 0 || value != 0)
                 {
@@ -370,7 +392,8 @@ namespace System.Globalization
                         else if (format.Length == 3)
                         {
                             // Fast path for symbol and double digit, e.g. "F12"
-                            int d1 = format[1] - '0', d2 = format[2] - '0';
+                            int d1 = format[1] - '0',
+                                d2 = format[2] - '0';
                             if ((uint)d1 < 10 && (uint)d2 < 10)
                             {
                                 digits = d1 * 10 + d2;
@@ -405,12 +428,20 @@ namespace System.Globalization
 
                 // Default empty format to be "G"; custom format is signified with '\0'.
                 digits = -1;
-                return format.Length == 0 || c == '\0' ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
-                    'G' :
-                    '\0';
+                return format.Length == 0 || c == '\0'
+                    ? // For compat, treat '\0' as the end of the specifier, even if the specifier extends beyond it.
+                    'G'
+                    : '\0';
             }
 
-            internal static unsafe void NumberToString(ref ValueStringBuilder sb, scoped ref NumberBuffer number, char format, int nMaxDigits, NumberFormatInfo info, bool isDecimal)
+            internal static unsafe void NumberToString(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                char format,
+                int nMaxDigits,
+                NumberFormatInfo info,
+                bool isDecimal
+            )
             {
                 int nMinDigits = -1;
 
@@ -418,170 +449,202 @@ namespace System.Globalization
                 {
                     case 'C':
                     case 'c':
+                    {
+                        nMinDigits = nMaxDigits >= 0 ? nMaxDigits : info.CurrencyDecimalDigits;
+                        if (nMaxDigits < 0)
                         {
-                            nMinDigits = nMaxDigits >= 0 ? nMaxDigits : info.CurrencyDecimalDigits;
-                            if (nMaxDigits < 0)
-                            {
-                                nMaxDigits = info.CurrencyDecimalDigits;
-                            }
-
-                            RoundNumber(ref number, number.scale + nMaxDigits); // Don't change this line to use digPos since digCount could have its sign changed.
-
-                            FormatCurrency(ref sb, ref number, nMinDigits, nMaxDigits, info);
-
-                            break;
+                            nMaxDigits = info.CurrencyDecimalDigits;
                         }
+
+                        RoundNumber(ref number, number.scale + nMaxDigits); // Don't change this line to use digPos since digCount could have its sign changed.
+
+                        FormatCurrency(ref sb, ref number, nMinDigits, nMaxDigits, info);
+
+                        break;
+                    }
 
                     case 'F':
                     case 'f':
+                    {
+                        if (nMaxDigits < 0)
                         {
-                            if (nMaxDigits < 0)
-                            {
-                                nMaxDigits = nMinDigits = info.NumberDecimalDigits;
-                            }
-                            else
-                            {
-                                nMinDigits = nMaxDigits;
-                            }
-
-                            RoundNumber(ref number, number.scale + nMaxDigits);
-
-                            if (number.sign)
-                            {
-                                sb.Append(info.NegativeSign);
-                            }
-
-                            FormatFixed(ref sb, ref number, nMinDigits, nMaxDigits, info, null, info.NumberDecimalSeparator, null);
-
-                            break;
+                            nMaxDigits = nMinDigits = info.NumberDecimalDigits;
                         }
+                        else
+                        {
+                            nMinDigits = nMaxDigits;
+                        }
+
+                        RoundNumber(ref number, number.scale + nMaxDigits);
+
+                        if (number.sign)
+                        {
+                            sb.Append(info.NegativeSign);
+                        }
+
+                        FormatFixed(
+                            ref sb,
+                            ref number,
+                            nMinDigits,
+                            nMaxDigits,
+                            info,
+                            null,
+                            info.NumberDecimalSeparator,
+                            null
+                        );
+
+                        break;
+                    }
 
                     case 'N':
                     case 'n':
+                    {
+                        if (nMaxDigits < 0)
                         {
-                            if (nMaxDigits < 0)
-                            {
-                                nMaxDigits = nMinDigits = info.NumberDecimalDigits; // Since we are using digits in our calculation
-                            }
-                            else
-                            {
-                                nMinDigits = nMaxDigits;
-                            }
-
-                            RoundNumber(ref number, number.scale + nMaxDigits);
-
-                            FormatNumber(ref sb, ref number, nMinDigits, nMaxDigits, info);
-
-                            break;
+                            nMaxDigits = nMinDigits = info.NumberDecimalDigits; // Since we are using digits in our calculation
                         }
+                        else
+                        {
+                            nMinDigits = nMaxDigits;
+                        }
+
+                        RoundNumber(ref number, number.scale + nMaxDigits);
+
+                        FormatNumber(ref sb, ref number, nMinDigits, nMaxDigits, info);
+
+                        break;
+                    }
 
                     case 'E':
                     case 'e':
+                    {
+                        if (nMaxDigits < 0)
                         {
-                            if (nMaxDigits < 0)
-                            {
-                                nMaxDigits = nMinDigits = 6;
-                            }
-                            else
-                            {
-                                nMinDigits = nMaxDigits;
-                            }
-                            nMaxDigits++;
-
-                            RoundNumber(ref number, nMaxDigits);
-
-                            if (number.sign)
-                            {
-                                sb.Append(info.NegativeSign);
-                            }
-
-                            FormatScientific(ref sb, ref number, nMinDigits, nMaxDigits, info, format);
-
-                            break;
+                            nMaxDigits = nMinDigits = 6;
                         }
+                        else
+                        {
+                            nMinDigits = nMaxDigits;
+                        }
+                        nMaxDigits++;
+
+                        RoundNumber(ref number, nMaxDigits);
+
+                        if (number.sign)
+                        {
+                            sb.Append(info.NegativeSign);
+                        }
+
+                        FormatScientific(ref sb, ref number, nMinDigits, nMaxDigits, info, format);
+
+                        break;
+                    }
 
                     case 'G':
                     case 'g':
+                    {
+                        bool enableRounding = true;
+                        if (nMaxDigits < 1)
                         {
-                            bool enableRounding = true;
-                            if (nMaxDigits < 1)
+                            if (isDecimal && (nMaxDigits == -1))
                             {
-                                if (isDecimal && (nMaxDigits == -1))
-                                {
-                                    // Default to 29 digits precision only for G formatting without a precision specifier
-                                    // This ensures that the PAL code pads out to the correct place even when we use the default precision
-                                    nMaxDigits = nMinDigits = DECIMAL_PRECISION;
-                                    enableRounding = false;  // Turn off rounding for ECMA compliance to output trailing 0's after decimal as significant
-                                }
-                                else
-                                {
-                                    // This ensures that the PAL code pads out to the correct place even when we use the default precision
-                                    nMaxDigits = nMinDigits = number.precision;
-                                }
-                            }
-                            else
-                                nMinDigits = nMaxDigits;
-
-                            if (enableRounding) // Don't round for G formatting without precision
-                            {
-                                RoundNumber(ref number, nMaxDigits); // This also fixes up the minus zero case
+                                // Default to 29 digits precision only for G formatting without a precision specifier
+                                // This ensures that the PAL code pads out to the correct place even when we use the default precision
+                                nMaxDigits = nMinDigits = DECIMAL_PRECISION;
+                                enableRounding = false; // Turn off rounding for ECMA compliance to output trailing 0's after decimal as significant
                             }
                             else
                             {
-                                if (isDecimal && (number.digits[0] == 0))
-                                {
-                                    // Minus zero should be formatted as 0
-                                    number.sign = false;
-                                }
+                                // This ensures that the PAL code pads out to the correct place even when we use the default precision
+                                nMaxDigits = nMinDigits = number.precision;
                             }
-
-                            if (number.sign)
-                            {
-                                sb.Append(info.NegativeSign);
-                            }
-
-                            FormatGeneral(ref sb, ref number, nMinDigits, nMaxDigits, info, (char)(format - ('G' - 'E')), !enableRounding);
-
-                            break;
                         }
+                        else
+                            nMinDigits = nMaxDigits;
+
+                        if (enableRounding) // Don't round for G formatting without precision
+                        {
+                            RoundNumber(ref number, nMaxDigits); // This also fixes up the minus zero case
+                        }
+                        else
+                        {
+                            if (isDecimal && (number.digits[0] == 0))
+                            {
+                                // Minus zero should be formatted as 0
+                                number.sign = false;
+                            }
+                        }
+
+                        if (number.sign)
+                        {
+                            sb.Append(info.NegativeSign);
+                        }
+
+                        FormatGeneral(
+                            ref sb,
+                            ref number,
+                            nMinDigits,
+                            nMaxDigits,
+                            info,
+                            (char)(format - ('G' - 'E')),
+                            !enableRounding
+                        );
+
+                        break;
+                    }
 
                     case 'P':
                     case 'p':
+                    {
+                        if (nMaxDigits < 0)
                         {
-                            if (nMaxDigits < 0)
-                            {
-                                nMaxDigits = nMinDigits = info.PercentDecimalDigits;
-                            }
-                            else
-                            {
-                                nMinDigits = nMaxDigits;
-                            }
-                            number.scale += 2;
-
-                            RoundNumber(ref number, number.scale + nMaxDigits);
-
-                            FormatPercent(ref sb, ref number, nMinDigits, nMaxDigits, info);
-
-                            break;
+                            nMaxDigits = nMinDigits = info.PercentDecimalDigits;
                         }
+                        else
+                        {
+                            nMinDigits = nMaxDigits;
+                        }
+                        number.scale += 2;
+
+                        RoundNumber(ref number, number.scale + nMaxDigits);
+
+                        FormatPercent(ref sb, ref number, nMinDigits, nMaxDigits, info);
+
+                        break;
+                    }
 
                     default:
                         throw new FormatException(SR.Argument_BadFormatSpecifier);
                 }
             }
 
-            private static void FormatCurrency(ref ValueStringBuilder sb, scoped ref NumberBuffer number, int nMinDigits, int nMaxDigits, NumberFormatInfo info)
+            private static void FormatCurrency(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                int nMinDigits,
+                int nMaxDigits,
+                NumberFormatInfo info
+            )
             {
-                string fmt = number.sign ?
-                    s_negCurrencyFormats[info.CurrencyNegativePattern] :
-                    s_posCurrencyFormats[info.CurrencyPositivePattern];
+                string fmt = number.sign
+                    ? s_negCurrencyFormats[info.CurrencyNegativePattern]
+                    : s_posCurrencyFormats[info.CurrencyPositivePattern];
 
                 foreach (char ch in fmt)
                 {
                     switch (ch)
                     {
                         case '#':
-                            FormatFixed(ref sb, ref number, nMinDigits, nMaxDigits, info, info.CurrencyGroupSizes, info.CurrencyDecimalSeparator, info.CurrencyGroupSeparator);
+                            FormatFixed(
+                                ref sb,
+                                ref number,
+                                nMinDigits,
+                                nMaxDigits,
+                                info,
+                                info.CurrencyGroupSizes,
+                                info.CurrencyDecimalSeparator,
+                                info.CurrencyGroupSeparator
+                            );
                             break;
                         case '-':
                             sb.Append(info.NegativeSign);
@@ -596,7 +659,16 @@ namespace System.Globalization
                 }
             }
 
-            private static unsafe void FormatFixed(ref ValueStringBuilder sb, scoped ref NumberBuffer number, int nMinDigits, int nMaxDigits, NumberFormatInfo info, int[]? groupDigits, string sDecimal, string? sGroup)
+            private static unsafe void FormatFixed(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                int nMinDigits,
+                int nMaxDigits,
+                NumberFormatInfo info,
+                int[]? groupDigits,
+                string sDecimal,
+                string? sGroup
+            )
             {
                 Debug.Assert(sGroup != null || groupDigits == null);
 
@@ -608,12 +680,12 @@ namespace System.Globalization
                 {
                     if (groupDigits != null)
                     {
-                        int groupSizeIndex = 0;                             // Index into the groupDigits array.
-                        int groupSizeCount = groupDigits[groupSizeIndex];   // The current total of group size.
-                        int groupSizeLen = groupDigits.Length;              // The length of groupDigits array.
-                        int bufferSize = digPos;                            // The length of the result buffer string.
-                        int groupSeparatorLen = sGroup!.Length;              // The length of the group separator string.
-                        int groupSize = 0;                                  // The current group size.
+                        int groupSizeIndex = 0; // Index into the groupDigits array.
+                        int groupSizeCount = groupDigits[groupSizeIndex]; // The current total of group size.
+                        int groupSizeLen = groupDigits.Length; // The length of groupDigits array.
+                        int bufferSize = digPos; // The length of the result buffer string.
+                        int groupSeparatorLen = sGroup!.Length; // The length of the group separator string.
+                        int groupSize = 0; // The current group size.
 
                         // Find out the size of the string buffer for the result.
                         if (groupSizeLen != 0) // You can pass in 0 length arrays
@@ -715,18 +787,33 @@ namespace System.Globalization
                 }
             }
 
-            private static void FormatNumber(ref ValueStringBuilder sb, scoped ref NumberBuffer number, int nMinDigits, int nMaxDigits, NumberFormatInfo info)
+            private static void FormatNumber(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                int nMinDigits,
+                int nMaxDigits,
+                NumberFormatInfo info
+            )
             {
-                string fmt = number.sign ?
-                    s_negNumberFormats[info.NumberNegativePattern] :
-                    PosNumberFormat;
+                string fmt = number.sign
+                    ? s_negNumberFormats[info.NumberNegativePattern]
+                    : PosNumberFormat;
 
                 foreach (char ch in fmt)
                 {
                     switch (ch)
                     {
                         case '#':
-                            FormatFixed(ref sb, ref number, nMinDigits, nMaxDigits, info, info.NumberGroupSizes, info.NumberDecimalSeparator, info.NumberGroupSeparator);
+                            FormatFixed(
+                                ref sb,
+                                ref number,
+                                nMinDigits,
+                                nMaxDigits,
+                                info,
+                                info.NumberGroupSizes,
+                                info.NumberDecimalSeparator,
+                                info.NumberGroupSeparator
+                            );
                             break;
                         case '-':
                             sb.Append(info.NegativeSign);
@@ -738,7 +825,14 @@ namespace System.Globalization
                 }
             }
 
-            private static unsafe void FormatScientific(ref ValueStringBuilder sb, scoped ref NumberBuffer number, int nMinDigits, int nMaxDigits, NumberFormatInfo info, char expChar)
+            private static unsafe void FormatScientific(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                int nMinDigits,
+                int nMaxDigits,
+                NumberFormatInfo info,
+                char expChar
+            )
             {
                 char* dig = number.digits;
 
@@ -758,7 +852,14 @@ namespace System.Globalization
                 FormatExponent(ref sb, info, e, expChar, 3, true);
             }
 
-            private static unsafe void FormatExponent(ref ValueStringBuilder sb, NumberFormatInfo info, int value, char expChar, int minDigits, bool positiveSign)
+            private static unsafe void FormatExponent(
+                ref ValueStringBuilder sb,
+                NumberFormatInfo info,
+                int value,
+                char expChar,
+                int minDigits,
+                bool positiveSign
+            )
             {
                 sb.Append(expChar);
 
@@ -785,7 +886,15 @@ namespace System.Globalization
                 }
             }
 
-            private static unsafe void FormatGeneral(ref ValueStringBuilder sb, scoped ref NumberBuffer number, int nMinDigits, int nMaxDigits, NumberFormatInfo info, char expChar, bool bSuppressScientific)
+            private static unsafe void FormatGeneral(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                int nMinDigits,
+                int nMaxDigits,
+                NumberFormatInfo info,
+                char expChar,
+                bool bSuppressScientific
+            )
             {
                 int digPos = number.scale;
                 bool scientific = false;
@@ -836,18 +945,33 @@ namespace System.Globalization
                 }
             }
 
-            private static void FormatPercent(ref ValueStringBuilder sb, scoped ref NumberBuffer number, int nMinDigits, int nMaxDigits, NumberFormatInfo info)
+            private static void FormatPercent(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                int nMinDigits,
+                int nMaxDigits,
+                NumberFormatInfo info
+            )
             {
-                string fmt = number.sign ?
-                    s_negPercentFormats[info.PercentNegativePattern] :
-                    s_posPercentFormats[info.PercentPositivePattern];
+                string fmt = number.sign
+                    ? s_negPercentFormats[info.PercentNegativePattern]
+                    : s_posPercentFormats[info.PercentPositivePattern];
 
                 foreach (char ch in fmt)
                 {
                     switch (ch)
                     {
                         case '#':
-                            FormatFixed(ref sb, ref number, nMinDigits, nMaxDigits, info, info.PercentGroupSizes, info.PercentDecimalSeparator, info.PercentGroupSeparator);
+                            FormatFixed(
+                                ref sb,
+                                ref number,
+                                nMinDigits,
+                                nMaxDigits,
+                                info,
+                                info.PercentGroupSizes,
+                                info.PercentDecimalSeparator,
+                                info.PercentGroupSeparator
+                            );
                             break;
                         case '-':
                             sb.Append(info.NegativeSign);
@@ -928,7 +1052,9 @@ namespace System.Globalization
                         {
                             case '\'':
                             case '"':
-                                while (src < format.Length && pFormat[src] != 0 && pFormat[src++] != ch)
+                                while (
+                                    src < format.Length && pFormat[src] != 0 && pFormat[src++] != ch
+                                )
                                     ;
                                 break;
                             case '\\':
@@ -956,7 +1082,12 @@ namespace System.Globalization
                 }
             }
 
-            internal static unsafe void NumberToStringFormat(ref ValueStringBuilder sb, scoped ref NumberBuffer number, ReadOnlySpan<char> format, NumberFormatInfo info)
+            internal static unsafe void NumberToStringFormat(
+                ref ValueStringBuilder sb,
+                scoped ref NumberBuffer number,
+                ReadOnlySpan<char> format,
+                NumberFormatInfo info
+            )
             {
                 int digitCount;
                 int decimalPos;
@@ -975,7 +1106,12 @@ namespace System.Globalization
                 char* dig = number.digits;
                 char ch;
 
-                section = FindSection(format, dig[0] == 0 ? 2 : number.sign ? 1 : 0);
+                section = FindSection(
+                    format,
+                    dig[0] == 0 ? 2
+                        : number.sign ? 1
+                        : 0
+                );
 
                 while (true)
                 {
@@ -1036,7 +1172,11 @@ namespace System.Globalization
                                     break;
                                 case '\'':
                                 case '"':
-                                    while (src < format.Length && pFormat[src] != 0 && pFormat[src++] != ch)
+                                    while (
+                                        src < format.Length
+                                        && pFormat[src] != 0
+                                        && pFormat[src++] != ch
+                                    )
                                         ;
                                     break;
                                 case '\\':
@@ -1047,10 +1187,17 @@ namespace System.Globalization
                                     break;
                                 case 'E':
                                 case 'e':
-                                    if ((src < format.Length && pFormat[src] == '0') ||
-                                        (src + 1 < format.Length && (pFormat[src] == '+' || pFormat[src] == '-') && pFormat[src + 1] == '0'))
+                                    if (
+                                        (src < format.Length && pFormat[src] == '0')
+                                        || (
+                                            src + 1 < format.Length
+                                            && (pFormat[src] == '+' || pFormat[src] == '-')
+                                            && pFormat[src + 1] == '0'
+                                        )
+                                    )
                                     {
-                                        while (++src < format.Length && pFormat[src] == '0');
+                                        while (++src < format.Length && pFormat[src] == '0')
+                                            ;
                                         scientific = true;
                                     }
                                     break;
@@ -1092,8 +1239,8 @@ namespace System.Globalization
                     }
                     else
                     {
-                        number.sign = false;   // We need to format -0 without the sign set.
-                        number.scale = 0;      // Decimals with scale ('0.00') should be rounded.
+                        number.sign = false; // We need to format -0 without the sign set.
+                        number.scale = 0; // Decimals with scale ('0.00') should be rounded.
                     }
 
                     break;
@@ -1133,12 +1280,12 @@ namespace System.Globalization
 
                         int[] groupDigits = info.NumberGroupSizes;
 
-                        int groupSizeIndex = 0;     // Index into the groupDigits array.
+                        int groupSizeIndex = 0; // Index into the groupDigits array.
                         int groupTotalSizeCount = 0;
-                        int groupSizeLen = groupDigits.Length;    // The length of groupDigits array.
+                        int groupSizeLen = groupDigits.Length; // The length of groupDigits array.
                         if (groupSizeLen != 0)
                         {
-                            groupTotalSizeCount = groupDigits[groupSizeIndex];   // The current running total of group size.
+                            groupTotalSizeCount = groupDigits[groupSizeIndex]; // The current running total of group size.
                         }
 
                         int groupSize = groupTotalSizeCount;
@@ -1215,47 +1362,50 @@ namespace System.Globalization
                         {
                             case '#':
                             case '0':
+                            {
+                                if (adjust < 0)
                                 {
-                                    if (adjust < 0)
+                                    adjust++;
+                                    ch = digPos <= firstDigit ? '0' : '\0';
+                                }
+                                else
+                                {
+                                    ch =
+                                        *cur != 0 ? *cur++
+                                        : digPos > lastDigit ? '0'
+                                        : '\0';
+                                }
+                                if (ch != 0)
+                                {
+                                    sb.Append(ch);
+                                    if (thousandSeps && digPos > 1 && thousandsSepCtr >= 0)
                                     {
-                                        adjust++;
-                                        ch = digPos <= firstDigit ? '0' : '\0';
-                                    }
-                                    else
-                                    {
-                                        ch = *cur != 0 ? *cur++ : digPos > lastDigit ? '0' : '\0';
-                                    }
-                                    if (ch != 0)
-                                    {
-                                        sb.Append(ch);
-                                        if (thousandSeps && digPos > 1 && thousandsSepCtr >= 0)
+                                        if (digPos == thousandsSepPos[thousandsSepCtr] + 1)
                                         {
-                                            if (digPos == thousandsSepPos[thousandsSepCtr] + 1)
-                                            {
-                                                sb.Append(info.NumberGroupSeparator);
-                                                thousandsSepCtr--;
-                                            }
+                                            sb.Append(info.NumberGroupSeparator);
+                                            thousandsSepCtr--;
                                         }
                                     }
+                                }
 
-                                    digPos--;
-                                    break;
-                                }
+                                digPos--;
+                                break;
+                            }
                             case '.':
+                            {
+                                if (digPos != 0 || decimalWritten)
                                 {
-                                    if (digPos != 0 || decimalWritten)
-                                    {
-                                        // For compatibility, don't echo repeated decimals
-                                        break;
-                                    }
-                                    // If the format has trailing zeros or the format has a decimal and digits remain
-                                    if (lastDigit < 0 || (decimalPos < digitCount && *cur != 0))
-                                    {
-                                        sb.Append(info.NumberDecimalSeparator);
-                                        decimalWritten = true;
-                                    }
+                                    // For compatibility, don't echo repeated decimals
                                     break;
                                 }
+                                // If the format has trailing zeros or the format has a decimal and digits remain
+                                if (lastDigit < 0 || (decimalPos < digitCount && *cur != 0))
+                                {
+                                    sb.Append(info.NumberDecimalSeparator);
+                                    decimalWritten = true;
+                                }
+                                break;
+                            }
                             case '\x2030':
                                 sb.Append(info.PerMilleSymbol);
                                 break;
@@ -1266,7 +1416,9 @@ namespace System.Globalization
                                 break;
                             case '\'':
                             case '"':
-                                while (src < format.Length && pFormat[src] != 0 && pFormat[src] != ch)
+                                while (
+                                    src < format.Length && pFormat[src] != 0 && pFormat[src] != ch
+                                )
                                 {
                                     sb.Append(pFormat[src++]);
                                 }
@@ -1284,62 +1436,70 @@ namespace System.Globalization
                                 break;
                             case 'E':
                             case 'e':
+                            {
+                                bool positiveSign = false;
+                                int i = 0;
+                                if (scientific)
                                 {
-                                    bool positiveSign = false;
-                                    int i = 0;
-                                    if (scientific)
+                                    if (src < format.Length && pFormat[src] == '0')
                                     {
-                                        if (src < format.Length && pFormat[src] == '0')
-                                        {
-                                            // Handles E0, which should format the same as E-0
-                                            i++;
-                                        }
-                                        else if (src + 1 < format.Length && pFormat[src] == '+' && pFormat[src + 1] == '0')
-                                        {
-                                            // Handles E+0
-                                            positiveSign = true;
-                                        }
-                                        else if (src + 1 < format.Length && pFormat[src] == '-' && pFormat[src + 1] == '0')
-                                        {
-                                            // Handles E-0
-                                            // Do nothing, this is just a place holder s.t. we don't break out of the loop.
-                                        }
-                                        else
-                                        {
-                                            sb.Append(ch);
-                                            break;
-                                        }
-
-                                        while (++src < format.Length && pFormat[src] == '0')
-                                        {
-                                            i++;
-                                        }
-                                        if (i > 10)
-                                        {
-                                            i = 10;
-                                        }
-
-                                        int exp = dig[0] == 0 ? 0 : number.scale - decimalPos;
-                                        FormatExponent(ref sb, info, exp, ch, i, positiveSign);
-                                        scientific = false;
+                                        // Handles E0, which should format the same as E-0
+                                        i++;
+                                    }
+                                    else if (
+                                        src + 1 < format.Length
+                                        && pFormat[src] == '+'
+                                        && pFormat[src + 1] == '0'
+                                    )
+                                    {
+                                        // Handles E+0
+                                        positiveSign = true;
+                                    }
+                                    else if (
+                                        src + 1 < format.Length
+                                        && pFormat[src] == '-'
+                                        && pFormat[src + 1] == '0'
+                                    )
+                                    {
+                                        // Handles E-0
+                                        // Do nothing, this is just a place holder s.t. we don't break out of the loop.
                                     }
                                     else
                                     {
-                                        sb.Append(ch); // Copy E or e to output
-                                        if (src < format.Length)
+                                        sb.Append(ch);
+                                        break;
+                                    }
+
+                                    while (++src < format.Length && pFormat[src] == '0')
+                                    {
+                                        i++;
+                                    }
+                                    if (i > 10)
+                                    {
+                                        i = 10;
+                                    }
+
+                                    int exp = dig[0] == 0 ? 0 : number.scale - decimalPos;
+                                    FormatExponent(ref sb, info, exp, ch, i, positiveSign);
+                                    scientific = false;
+                                }
+                                else
+                                {
+                                    sb.Append(ch); // Copy E or e to output
+                                    if (src < format.Length)
+                                    {
+                                        if (pFormat[src] == '+' || pFormat[src] == '-')
                                         {
-                                            if (pFormat[src] == '+' || pFormat[src] == '-')
-                                            {
-                                                sb.Append(pFormat[src++]);
-                                            }
-                                            while (src < format.Length && pFormat[src] == '0')
-                                            {
-                                                sb.Append(pFormat[src++]);
-                                            }
+                                            sb.Append(pFormat[src++]);
+                                        }
+                                        while (src < format.Length && pFormat[src] == '0')
+                                        {
+                                            sb.Append(pFormat[src++]);
                                         }
                                     }
-                                    break;
                                 }
+                                break;
+                            }
                             default:
                                 sb.Append(ch);
                                 break;

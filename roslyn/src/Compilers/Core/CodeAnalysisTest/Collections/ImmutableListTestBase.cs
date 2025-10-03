@@ -22,50 +22,124 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     public abstract class ImmutableListTestBase : SimpleElementImmutablesTestBase
     {
         protected static readonly Func<IList, object?, object> IndexOfFunc = (l, v) => l.IndexOf(v);
-        protected static readonly Func<IList, object?, object> ContainsFunc = (l, v) => l.Contains(v);
-        protected static readonly Func<IList, object?, object> RemoveFunc = (l, v) => { l.Remove(v); return l.Count; };
+        protected static readonly Func<IList, object?, object> ContainsFunc = (l, v) =>
+            l.Contains(v);
+        protected static readonly Func<IList, object?, object> RemoveFunc = (l, v) =>
+        {
+            l.Remove(v);
+            return l.Count;
+        };
 
         internal abstract IReadOnlyList<T> GetListQuery<T>(ImmutableSegmentedList<T> list);
 
-        private protected abstract ImmutableSegmentedList<TOutput> ConvertAllImpl<T, TOutput>(ImmutableSegmentedList<T> list, Converter<T, TOutput> converter);
+        private protected abstract ImmutableSegmentedList<TOutput> ConvertAllImpl<T, TOutput>(
+            ImmutableSegmentedList<T> list,
+            Converter<T, TOutput> converter
+        );
 
-        private protected abstract void ForEachImpl<T>(ImmutableSegmentedList<T> list, Action<T> action);
+        private protected abstract void ForEachImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Action<T> action
+        );
 
-        private protected abstract ImmutableSegmentedList<T> GetRangeImpl<T>(ImmutableSegmentedList<T> list, int index, int count);
+        private protected abstract ImmutableSegmentedList<T> GetRangeImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count
+        );
 
         private protected abstract void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array);
 
-        private protected abstract void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array, int arrayIndex);
+        private protected abstract void CopyToImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T[] array,
+            int arrayIndex
+        );
 
-        private protected abstract void CopyToImpl<T>(ImmutableSegmentedList<T> list, int index, T[] array, int arrayIndex, int count);
+        private protected abstract void CopyToImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            T[] array,
+            int arrayIndex,
+            int count
+        );
 
-        private protected abstract bool ExistsImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match);
+        private protected abstract bool ExistsImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        );
 
-        private protected abstract T? FindImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match);
+        private protected abstract T? FindImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        );
 
-        private protected abstract ImmutableSegmentedList<T> FindAllImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match);
+        private protected abstract ImmutableSegmentedList<T> FindAllImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        );
 
-        private protected abstract int FindIndexImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match);
+        private protected abstract int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        );
 
-        private protected abstract int FindIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, Predicate<T> match);
+        private protected abstract int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            Predicate<T> match
+        );
 
-        private protected abstract int FindIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, int count, Predicate<T> match);
+        private protected abstract int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            int count,
+            Predicate<T> match
+        );
 
-        private protected abstract T? FindLastImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match);
+        private protected abstract T? FindLastImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        );
 
-        private protected abstract int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match);
+        private protected abstract int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        );
 
-        private protected abstract int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, Predicate<T> match);
+        private protected abstract int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            Predicate<T> match
+        );
 
-        private protected abstract int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, int count, Predicate<T> match);
+        private protected abstract int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            int count,
+            Predicate<T> match
+        );
 
-        private protected abstract bool TrueForAllImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> test);
+        private protected abstract bool TrueForAllImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> test
+        );
 
         private protected abstract int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, T item);
 
-        private protected abstract int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, T item, IComparer<T>? comparer);
+        private protected abstract int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T item,
+            IComparer<T>? comparer
+        );
 
-        private protected abstract int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, int index, int count, T item, IComparer<T>? comparer);
+        private protected abstract int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count,
+            T item,
+            IComparer<T>? comparer
+        );
 
         [Fact]
         public void CopyToEmptyTest()
@@ -111,15 +185,24 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ForEachTest()
         {
-            ForEachImpl(ImmutableSegmentedList<int>.Empty, n => { throw ExceptionUtilities.Unreachable(); });
+            ForEachImpl(
+                ImmutableSegmentedList<int>.Empty,
+                n =>
+                {
+                    throw ExceptionUtilities.Unreachable();
+                }
+            );
 
             var list = ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(5, 3));
             var hitTest = new bool[list.Max() + 1];
-            ForEachImpl(list, i =>
-            {
-                Assert.False(hitTest[i]);
-                hitTest[i] = true;
-            });
+            ForEachImpl(
+                list,
+                i =>
+                {
+                    Assert.False(hitTest[i]);
+                    hitTest[i] = true;
+                }
+            );
 
             for (int i = 0; i < hitTest.Length; i++)
             {
@@ -159,7 +242,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void FindLastTest()
         {
-            Assert.Equal(0, FindLastImpl(ImmutableSegmentedList<int>.Empty, n => { throw ExceptionUtilities.Unreachable(); }));
+            Assert.Equal(
+                0,
+                FindLastImpl(
+                    ImmutableSegmentedList<int>.Empty,
+                    n =>
+                    {
+                        throw ExceptionUtilities.Unreachable();
+                    }
+                )
+            );
             var list = ImmutableSegmentedList<int>.Empty.AddRange(new[] { 2, 3, 4, 5, 6 });
             Assert.Equal(5, FindLastImpl(list, n => (n % 2) == 1));
         }
@@ -172,7 +264,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, FindIndexImpl(ImmutableSegmentedList<int>.Empty, 0, 0, n => true));
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
+            var list = ImmutableSegmentedList<int>.Empty.AddRange(
+                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
+            );
             var bclList = list.ToList();
             Assert.Equal(-1, FindIndexImpl(list, n => n == 6));
 
@@ -226,7 +320,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, FindLastIndexImpl(ImmutableSegmentedList<int>.Empty, 0, 0, n => true));
 
             // Create a list with contents: 100,101,102,103,104,100,101,102,103,104
-            var list = ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5)));
+            var list = ImmutableSegmentedList<int>.Empty.AddRange(
+                Enumerable.Range(100, 5).Concat(Enumerable.Range(100, 5))
+            );
             var bclList = list.ToList();
             Assert.Equal(-1, FindLastIndexImpl(list, n => n == 6));
 
@@ -329,7 +425,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ConvertAllTest()
         {
-            Assert.True(ConvertAllImpl<int, float>(ImmutableSegmentedList<int>.Empty, n => n).IsEmpty);
+            Assert.True(
+                ConvertAllImpl<int, float>(ImmutableSegmentedList<int>.Empty, n => n).IsEmpty
+            );
             var list = ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(5, 10));
             Converter<int, double> converter = n => 2.0 * n;
             var expected = list.ToList().Select(x => converter(x)).ToList();
@@ -393,13 +491,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Sort_NullComparison_Throws()
         {
-            Assert.Throws<ArgumentNullException>("comparison", () => this.SortTestHelper(ImmutableSegmentedList<int>.Empty, (Comparison<int>)null!));
+            Assert.Throws<ArgumentNullException>(
+                "comparison",
+                () => this.SortTestHelper(ImmutableSegmentedList<int>.Empty, (Comparison<int>)null!)
+            );
         }
 
         [Fact]
         public void SortTest()
         {
-            var scenarios = new[] {
+            var scenarios = new[]
+            {
                 ImmutableSegmentedList<int>.Empty,
                 ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(1, 50)),
                 ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(1, 50).Reverse()),
@@ -453,7 +555,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 int expected = basis.BinarySearch(value);
                 int actual = BinarySearchImpl(query, value);
-                if (expected != actual) Debugger.Break();
+                if (expected != actual)
+                    Debugger.Break();
                 Assert.Equal(expected, actual);
 
                 for (int index = 0; index < basis.Count - 1; index++)
@@ -462,7 +565,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     {
                         expected = basis.BinarySearch(index, count, value, null);
                         actual = BinarySearchImpl(query, index, count, value, null);
-                        if (expected != actual) Debugger.Break();
+                        if (expected != actual)
+                            Debugger.Break();
                         Assert.Equal(expected, actual);
                     }
                 }
@@ -472,13 +576,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void BinarySearchPartialSortedList()
         {
-            var reverseSorted = System.Collections.Immutable.ImmutableArray.CreateRange(Enumerable.Range(1, 150).Select(n => n * 2).Reverse());
+            var reverseSorted = System.Collections.Immutable.ImmutableArray.CreateRange(
+                Enumerable.Range(1, 150).Select(n => n * 2).Reverse()
+            );
             this.BinarySearchPartialSortedListHelper(reverseSorted, 0, 50);
             this.BinarySearchPartialSortedListHelper(reverseSorted, 50, 50);
             this.BinarySearchPartialSortedListHelper(reverseSorted, 100, 50);
         }
 
-        private void BinarySearchPartialSortedListHelper(System.Collections.Immutable.ImmutableArray<int> inputData, int sortedIndex, int sortedLength)
+        private void BinarySearchPartialSortedListHelper(
+            System.Collections.Immutable.ImmutableArray<int> inputData,
+            int sortedIndex,
+            int sortedLength
+        )
         {
             if (sortedIndex < 0)
                 throw new ArgumentOutOfRangeException(nameof(sortedIndex));
@@ -499,7 +609,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     {
                         int expected = basis.BinarySearch(index, count, value, null);
                         int actual = BinarySearchImpl(query, index, count, value, null);
-                        if (expected != actual) Debugger.Break();
+                        if (expected != actual)
+                            Debugger.Break();
                         Assert.Equal(expected, actual);
                     }
                 }
@@ -524,19 +635,41 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(new[] { 1 }, enumerableNonGeneric.Cast<int>().ToList()); // exercises the enumerator
         }
 
-        private protected abstract void RemoveAllTestHelper<T>(ImmutableSegmentedList<T> list, Predicate<T> test);
+        private protected abstract void RemoveAllTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> test
+        );
 
-        private protected abstract void ReverseTestHelper<T>(ImmutableSegmentedList<T> list, int index, int count);
+        private protected abstract void ReverseTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count
+        );
 
         private protected abstract List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list);
 
-        private protected abstract List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, Comparison<T> comparison);
+        private protected abstract List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            Comparison<T> comparison
+        );
 
-        private protected abstract List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, IComparer<T>? comparer);
+        private protected abstract List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            IComparer<T>? comparer
+        );
 
-        private protected abstract List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, int index, int count, IComparer<T>? comparer);
+        private protected abstract List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count,
+            IComparer<T>? comparer
+        );
 
-        protected void AssertIListBaselineBothDirections<T1, T2>(Func<IList, object?, object> operation, T1 item, T2 other)
+        protected void AssertIListBaselineBothDirections<T1, T2>(
+            Func<IList, object?, object> operation,
+            T1 item,
+            T2 other
+        )
         {
             this.AssertIListBaseline(operation, item, other);
             this.AssertIListBaseline(operation, other, item);
@@ -556,7 +689,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// </param>
         /// <param name="item">The item to add to the collection.</param>
         /// <param name="other">The item to pass to the <paramref name="operation"/> function as the second parameter.</param>
-        protected void AssertIListBaseline<T>(Func<IList, object?, object> operation, T item, object? other)
+        protected void AssertIListBaseline<T>(
+            Func<IList, object?, object> operation,
+            T item,
+            object? other
+        )
         {
             IList bclList = new List<T> { item };
             IList testedList = (IList)this.GetListQuery(ImmutableSegmentedList.Create(item));

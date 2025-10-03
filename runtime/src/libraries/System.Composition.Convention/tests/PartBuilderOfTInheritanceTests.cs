@@ -28,7 +28,8 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<DerClass>().ImportProperty(p => p.P2); // P2 is string
 
-            var importAttribute = GetAttributeFromMember(builder, typeof(DerClass), "P2") as ImportAttribute;
+            var importAttribute =
+                GetAttributeFromMember(builder, typeof(DerClass), "P2") as ImportAttribute;
 
             Assert.NotNull(importAttribute);
             Assert.Null(importAttribute.ContractName);
@@ -40,7 +41,8 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<DerClass>().ImportProperty(p => p.P3); // P3 is IEnumerable<int>
 
-            var importManyAttribute = GetAttributeFromMember(builder, typeof(DerClass), "P3") as ImportManyAttribute;
+            var importManyAttribute =
+                GetAttributeFromMember(builder, typeof(DerClass), "P3") as ImportManyAttribute;
             Assert.NotNull(importManyAttribute);
             Assert.Null(importManyAttribute.ContractName);
         }
@@ -51,7 +53,8 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<DerClass>().ImportProperty(p => p.P4); // P4 is string
 
-            var importAttribute = GetAttributeFromMember(builder, typeof(DerClass), "P4") as ImportAttribute;
+            var importAttribute =
+                GetAttributeFromMember(builder, typeof(DerClass), "P4") as ImportAttribute;
 
             Assert.NotNull(importAttribute);
             Assert.Null(importAttribute.ContractName);
@@ -63,7 +66,8 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<DerClass>().ExportProperty(p => p.P4); // P4 is string
 
-            var exportAttribute = GetAttributeFromMember(builder, typeof(DerClass), "P4") as ExportAttribute;
+            var exportAttribute =
+                GetAttributeFromMember(builder, typeof(DerClass), "P4") as ExportAttribute;
 
             Assert.NotNull(exportAttribute);
             Assert.Null(exportAttribute.ContractName);
@@ -76,14 +80,19 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder.ForType<DerClass>().ExportProperty(p => p.P2); // P2 is string
 
-            var exportAttribute = GetAttributeFromMember(builder, typeof(DerClass), "P2") as ExportAttribute;
+            var exportAttribute =
+                GetAttributeFromMember(builder, typeof(DerClass), "P2") as ExportAttribute;
 
             Assert.NotNull(exportAttribute);
             Assert.Null(exportAttribute.ContractName);
             Assert.Null(exportAttribute.ContractType);
         }
 
-        private static Attribute GetAttributeFromMember(ConventionBuilder builder, Type type, string member)
+        private static Attribute GetAttributeFromMember(
+            ConventionBuilder builder,
+            Type type,
+            string member
+        )
         {
             PropertyInfo pi = type.GetRuntimeProperty(member);
             Attribute[] list = builder.GetDeclaredAttributes(type, pi);

@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSemanticFactsServiceFactory()
-        {
-        }
+        public CSharpSemanticFactsServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-            => CSharpSemanticFactsService.Instance;
+        public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+            CSharpSemanticFactsService.Instance;
     }
 }

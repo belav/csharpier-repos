@@ -14,12 +14,18 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.NamingPreferences
 {
-    internal class NamingStyleViewModel : AbstractNotifyPropertyChanged, INamingStylesInfoDialogViewModel
+    internal class NamingStyleViewModel
+        : AbstractNotifyPropertyChanged,
+            INamingStylesInfoDialogViewModel
     {
         private readonly MutableNamingStyle _style;
         private readonly INotificationService _notificationService;
 
-        public NamingStyleViewModel(MutableNamingStyle style, bool canBeDeleted, INotificationService notificationService)
+        public NamingStyleViewModel(
+            MutableNamingStyle style,
+            bool canBeDeleted,
+            INotificationService notificationService
+        )
         {
             _notificationService = notificationService;
             _style = style;
@@ -31,15 +37,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             CanBeDeleted = canBeDeleted;
 
             CapitalizationSchemes = new List<CapitalizationDisplay>
-                {
-                    new CapitalizationDisplay(Capitalization.PascalCase, ServicesVSResources.Pascal_Case_Name),
-                    new CapitalizationDisplay(Capitalization.CamelCase, ServicesVSResources.camel_Case_Name),
-                    new CapitalizationDisplay(Capitalization.FirstUpper, ServicesVSResources.First_word_upper),
-                    new CapitalizationDisplay(Capitalization.AllUpper, ServicesVSResources.ALL_UPPER),
-                    new CapitalizationDisplay(Capitalization.AllLower, ServicesVSResources.all_lower)
-                };
+            {
+                new CapitalizationDisplay(
+                    Capitalization.PascalCase,
+                    ServicesVSResources.Pascal_Case_Name
+                ),
+                new CapitalizationDisplay(
+                    Capitalization.CamelCase,
+                    ServicesVSResources.camel_Case_Name
+                ),
+                new CapitalizationDisplay(
+                    Capitalization.FirstUpper,
+                    ServicesVSResources.First_word_upper
+                ),
+                new CapitalizationDisplay(Capitalization.AllUpper, ServicesVSResources.ALL_UPPER),
+                new CapitalizationDisplay(Capitalization.AllLower, ServicesVSResources.all_lower),
+            };
 
-            CapitalizationSchemeIndex = CapitalizationSchemes.IndexOf(CapitalizationSchemes.Single(s => s.Capitalization == style.CapitalizationScheme));
+            CapitalizationSchemeIndex = CapitalizationSchemes.IndexOf(
+                CapitalizationSchemes.Single(s => s.Capitalization == style.CapitalizationScheme)
+            );
         }
 
         public IList<CapitalizationDisplay> CapitalizationSchemes { get; set; }
@@ -47,10 +64,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private int _capitalizationSchemeIndex;
         public int CapitalizationSchemeIndex
         {
-            get
-            {
-                return _capitalizationSchemeIndex;
-            }
+            get { return _capitalizationSchemeIndex; }
             set
             {
                 _style.CapitalizationScheme = CapitalizationSchemes[value].Capitalization;
@@ -74,21 +88,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             get
             {
-                return _style.NamingStyle.CreateName(ImmutableArray.Create(ServicesVSResources.example, ServicesVSResources.identifier));
+                return _style.NamingStyle.CreateName(
+                    ImmutableArray.Create(
+                        ServicesVSResources.example,
+                        ServicesVSResources.identifier
+                    )
+                );
             }
-            set
-            {
-            }
+            set { }
         }
 
         private string _requiredPrefix;
 
         public string RequiredPrefix
         {
-            get
-            {
-                return _requiredPrefix;
-            }
+            get { return _requiredPrefix; }
             set
             {
                 _style.Prefix = value;
@@ -102,10 +116,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private string _requiredSuffix;
         public string RequiredSuffix
         {
-            get
-            {
-                return _requiredSuffix;
-            }
+            get { return _requiredSuffix; }
             set
             {
                 _style.Suffix = value;
@@ -119,10 +130,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         private string _wordSeparator;
         public string WordSeparator
         {
-            get
-            {
-                return _wordSeparator;
-            }
+            get { return _wordSeparator; }
             set
             {
                 _style.WordSeparator = value;
@@ -139,7 +147,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
         {
             if (string.IsNullOrWhiteSpace(ItemName))
             {
-                _notificationService.SendNotification(ServicesVSResources.Enter_a_title_for_this_Naming_Style);
+                _notificationService.SendNotification(
+                    ServicesVSResources.Enter_a_title_for_this_Naming_Style
+                );
                 return false;
             }
 
@@ -167,8 +177,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
             }
 
             // For screen readers
-            public override string ToString()
-                => Name;
+            public override string ToString() => Name;
         }
     }
 }

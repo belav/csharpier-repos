@@ -9,7 +9,10 @@ namespace System.DirectoryServices.Protocols
     {
         public SecurityIdentifier QuerySid
         {
-            get => _sid == null ? null : throw new System.PlatformNotSupportedException(SR.QuotaControlNotSupported);
+            get =>
+                _sid == null
+                    ? null
+                    : throw new System.PlatformNotSupportedException(SR.QuotaControlNotSupported);
             set
             {
                 if (value == null)

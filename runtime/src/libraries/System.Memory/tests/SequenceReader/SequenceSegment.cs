@@ -9,7 +9,8 @@ using System.Text;
 
 namespace System.Memory.Tests.SequenceReader
 {
-    public class SequenceSegment<T> : ReadOnlySequenceSegment<T> where T : struct
+    public class SequenceSegment<T> : ReadOnlySequenceSegment<T>
+        where T : struct
     {
         private SequenceSegment<T> _next;
 
@@ -55,7 +56,12 @@ namespace System.Memory.Tests.SequenceReader
             SetMemory(buffer, 0, 0);
         }
 
-        public void SetMemory(IMemoryOwner<T> ownedMemory, int start, int end, bool readOnly = false)
+        public void SetMemory(
+            IMemoryOwner<T> ownedMemory,
+            int start,
+            int end,
+            bool readOnly = false
+        )
         {
             _ownedMemory = ownedMemory;
 

@@ -1,5 +1,5 @@
 //
-// XmlAttributeOverrides.cs: 
+// XmlAttributeOverrides.cs:
 //
 // Author:
 //   John Donagher (john@webmeta.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,61 +34,64 @@ using System.Globalization;
 
 namespace System.Xml.Serialization
 {
-	/// <summary>
-	/// Summary description for XmlAttributeOverrides.
-	/// </summary>
-	public class XmlAttributeOverrides
-	{
-		
-		private Hashtable overrides;
+    /// <summary>
+    /// Summary description for XmlAttributeOverrides.
+    /// </summary>
+    public class XmlAttributeOverrides
+    {
+        private Hashtable overrides;
 
-		public XmlAttributeOverrides ()
-		{
-			overrides = new Hashtable();
-		}
+        public XmlAttributeOverrides()
+        {
+            overrides = new Hashtable();
+        }
 
-		public XmlAttributes this [Type type] 
-		{
-			get { return this [type, string.Empty];	}
-		}
+        public XmlAttributes this[Type type]
+        {
+            get { return this[type, string.Empty]; }
+        }
 
-		public XmlAttributes this [Type type, string member]
-		{
-			get 
-			{
-				return (XmlAttributes) overrides[GetKey(type,member)];
-			}
-		}
+        public XmlAttributes this[Type type, string member]
+        {
+            get { return (XmlAttributes)overrides[GetKey(type, member)]; }
+        }
 
-		public void Add (Type type, XmlAttributes attributes) 
-		{
-			Add(type, string.Empty, attributes);
-		}
+        public void Add(Type type, XmlAttributes attributes)
+        {
+            Add(type, string.Empty, attributes);
+        }
 
-		public void Add (Type type, string member, XmlAttributes attributes) 
-		{
-			if(overrides[GetKey(type, member)] != null)
-				throw new Exception("The attributes for the given type and Member already exist in the collection");
-			
-			overrides.Add(GetKey(type,member), attributes);
-		}
+        public void Add(Type type, string member, XmlAttributes attributes)
+        {
+            if (overrides[GetKey(type, member)] != null)
+                throw new Exception(
+                    "The attributes for the given type and Member already exist in the collection"
+                );
 
-		private TypeMember GetKey(Type type, string member)
-		{
-			return new TypeMember(type, member);
-		}
+            overrides.Add(GetKey(type, member), attributes);
+        }
 
-		internal void AddKeyHash (System.Text.StringBuilder sb)
-		{
-			sb.Append ("XAO ");
-			foreach (DictionaryEntry entry in overrides)
-			{
-				XmlAttributes val = (XmlAttributes) entry.Value;
-				IFormattable keyFormattable = entry.Key as IFormattable;
-				sb.Append (keyFormattable != null ? keyFormattable.ToString (null, CultureInfo.InvariantCulture) : entry.Key.ToString()).Append(' ');
-				val.AddKeyHash (sb);
-			}
-			sb.Append ("|");
-		}
-	}
+        private TypeMember GetKey(Type type, string member)
+        {
+            return new TypeMember(type, member);
+        }
+
+        internal void AddKeyHash(System.Text.StringBuilder sb)
+        {
+            sb.Append("XAO ");
+            foreach (DictionaryEntry entry in overrides)
+            {
+                XmlAttributes val = (XmlAttributes)entry.Value;
+                IFormattable keyFormattable = entry.Key as IFormattable;
+                sb.Append(
+                        keyFormattable != null
+                            ? keyFormattable.ToString(null, CultureInfo.InvariantCulture)
+                            : entry.Key.ToString()
+                    )
+                    .Append(' ');
+                val.AddKeyHash(sb);
+            }
+            sb.Append("|");
+        }
+    }
 }

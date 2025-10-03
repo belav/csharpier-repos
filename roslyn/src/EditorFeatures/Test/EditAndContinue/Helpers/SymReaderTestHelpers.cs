@@ -26,17 +26,30 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         private class DummySymReaderMetadataProvider : ISymReaderMetadataProvider
         {
-            public unsafe bool TryGetStandaloneSignature(int standaloneSignatureToken, out byte* signature, out int length)
-                => throw new NotImplementedException();
+            public unsafe bool TryGetStandaloneSignature(
+                int standaloneSignatureToken,
+                out byte* signature,
+                out int length
+            ) => throw new NotImplementedException();
 
-            public bool TryGetTypeDefinitionInfo(int typeDefinitionToken, out string namespaceName, out string typeName, out TypeAttributes attributes)
-                => throw new NotImplementedException();
+            public bool TryGetTypeDefinitionInfo(
+                int typeDefinitionToken,
+                out string namespaceName,
+                out string typeName,
+                out TypeAttributes attributes
+            ) => throw new NotImplementedException();
 
-            public bool TryGetTypeReferenceInfo(int typeReferenceToken, out string namespaceName, out string typeName)
-                => throw new NotImplementedException();
+            public bool TryGetTypeReferenceInfo(
+                int typeReferenceToken,
+                out string namespaceName,
+                out string typeName
+            ) => throw new NotImplementedException();
         }
 
-        public static (ImmutableArray<byte> PEImage, ImmutableArray<byte> PdbImage) EmitToArrays(this Compilation compilation, EmitOptions options)
+        public static (ImmutableArray<byte> PEImage, ImmutableArray<byte> PdbImage) EmitToArrays(
+            this Compilation compilation,
+            EmitOptions options
+        )
         {
             var pdbStream = new MemoryStream();
             var peImage = compilation.EmitToArray(options, pdbStream: pdbStream);
@@ -54,13 +67,20 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var pdbStreamCom = SymUnmanagedStreamFactory.CreateStream(pdbStream);
             if (pdbImage is [(byte)'B', (byte)'S', (byte)'J', (byte)'B', ..])
             {
-                var hr = symBinder.GetReaderFromPdbStream(metadataImportProvider, pdbStreamCom, out var symReader);
+                var hr = symBinder.GetReaderFromPdbStream(
+                    metadataImportProvider,
+                    pdbStreamCom,
+                    out var symReader
+                );
                 Assert.Equal(0, hr);
                 return (ISymUnmanagedReader5)symReader;
             }
             else
             {
-                return SymUnmanagedReaderFactory.CreateReader<ISymUnmanagedReader5>(pdbStream, new DummySymReaderMetadataProvider());
+                return SymUnmanagedReaderFactory.CreateReader<ISymUnmanagedReader5>(
+                    pdbStream,
+                    new DummySymReaderMetadataProvider()
+                );
             }
         }
     }

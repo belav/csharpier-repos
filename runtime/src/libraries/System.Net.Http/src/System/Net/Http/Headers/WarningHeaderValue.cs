@@ -82,14 +82,15 @@ namespace System.Net.Http.Headers
         }
 
         public override bool Equals([NotNullWhen(true)] object? obj) =>
-            obj is WarningHeaderValue other &&
-            _code == other._code &&
+            obj is WarningHeaderValue other
+            && _code == other._code
+            &&
             // 'agent' is a host/token, i.e. use case-insensitive comparison. Use case-sensitive comparison for 'text'
             // since it is a quoted string.
-            string.Equals(_agent, other._agent, StringComparison.OrdinalIgnoreCase) &&
-            string.Equals(_text, other._text, StringComparison.Ordinal) &&
-            _dateHasValue == other._dateHasValue &&
-            _date == other._date;
+            string.Equals(_agent, other._agent, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(_text, other._text, StringComparison.Ordinal)
+            && _dateHasValue == other._dateHasValue
+            && _date == other._date;
 
         public override int GetHashCode() =>
             HashCode.Combine(
@@ -97,20 +98,32 @@ namespace System.Net.Http.Headers
                 StringComparer.OrdinalIgnoreCase.GetHashCode(_agent),
                 _text,
                 _dateHasValue,
-                _date);
+                _date
+            );
 
         public static WarningHeaderValue Parse(string input)
         {
             int index = 0;
-            return (WarningHeaderValue)GenericHeaderParser.SingleValueWarningParser.ParseValue(input, null, ref index);
+            return (WarningHeaderValue)
+                GenericHeaderParser.SingleValueWarningParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out WarningHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out WarningHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueWarningParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueWarningParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (WarningHeaderValue)output!;
                 return true;
@@ -147,7 +160,10 @@ namespace System.Net.Http.Headers
             // Read <text> in '<code> <agent> <text> ["<date>"]'
             int textLength;
             int textStartIndex = current;
-            if (HttpRuleParser.GetQuotedStringLength(input, current, out textLength) != HttpParseResult.Parsed)
+            if (
+                HttpRuleParser.GetQuotedStringLength(input, current, out textLength)
+                != HttpParseResult.Parsed
+            )
             {
                 return 0;
             }
@@ -163,14 +179,18 @@ namespace System.Net.Http.Headers
                 return 0;
             }
 
-            parsedValue = date is null ?
-                new WarningHeaderValue(code, agent, text) :
-                new WarningHeaderValue(code, agent, text, date.Value);
+            parsedValue = date is null
+                ? new WarningHeaderValue(code, agent, text)
+                : new WarningHeaderValue(code, agent, text, date.Value);
 
             return current - startIndex;
         }
 
-        private static bool TryReadAgent(string input, ref int current, [NotNullWhen(true)] out string? agent)
+        private static bool TryReadAgent(
+            string input,
+            ref int current,
+            [NotNullWhen(true)] out string? agent
+        )
         {
             agent = null;
 
@@ -208,8 +228,14 @@ namespace System.Net.Http.Headers
 
             if (!HeaderUtilities.TryParseInt32(input, current, codeLength, out code))
             {
-                Debug.Fail("Unable to parse value even though it was parsed as <=3 digits string. Input: '" +
-                    input + "', Current: " + current + ", CodeLength: " + codeLength);
+                Debug.Fail(
+                    "Unable to parse value even though it was parsed as <=3 digits string. Input: '"
+                        + input
+                        + "', Current: "
+                        + current
+                        + ", CodeLength: "
+                        + codeLength
+                );
                 return false;
             }
 
@@ -255,7 +281,12 @@ namespace System.Net.Http.Headers
                 current += quote;
 
                 DateTimeOffset temp;
-                if (!HttpDateParser.TryParse(input.AsSpan(dateStartIndex, current - dateStartIndex), out temp))
+                if (
+                    !HttpDateParser.TryParse(
+                        input.AsSpan(dateStartIndex, current - dateStartIndex),
+                        out temp
+                    )
+                )
                 {
                     return false;
                 }

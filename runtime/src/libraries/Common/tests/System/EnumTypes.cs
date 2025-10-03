@@ -10,7 +10,7 @@ namespace System
         Green = 3,
         Green_a = 3,
         Green_b = 3,
-        B = 4
+        B = 4,
     }
 
     public enum ByteEnum : byte

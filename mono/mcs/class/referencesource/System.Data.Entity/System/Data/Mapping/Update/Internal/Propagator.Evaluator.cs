@@ -20,33 +20,33 @@ namespace System.Data.Mapping.Update.Internal
     internal partial class Propagator
     {
         /// <summary>
-        /// Helper class supporting the evaluation of highly constrained expressions of the following 
+        /// Helper class supporting the evaluation of highly constrained expressions of the following
         /// form:
-        /// 
+        ///
         /// P := P AND P | P OR P | NOT P | V is of type | V eq V | V
         /// V := P
         /// V := Property(V) | Constant | CASE WHEN P THEN V ... ELSE V | Row | new Instance | Null
-        /// 
+        ///
         /// The evaluator supports SQL style ternary logic for unknown results (bool? is used, where
         /// null --> unknown, true --> TRUE and false --> FALSE
         /// </summary>
         /// <remarks>
         /// Assumptions:
-        /// 
+        ///
         /// - The node and the row passed in must be type compatible.
-        /// 
+        ///
         /// Any var refs in the node must have the same type as the input row. This is a natural
         /// requirement given the usage of this method in the propagator, since each propagator handler
         /// produces rows of the correct type for its parent. Keep in mind that every var ref in a CQT is
         /// bound specifically to the direct child.
-        /// 
+        ///
         /// - Equality comparisons are CLR culture invariant. Practically, this introduces the following
         /// differences from SQL comparisons:
-        /// 
+        ///
         ///     - String comparisons are not collation sensitive
         ///     - The constants we compare come from a fixed repertoire of scalar types implementing IComparable
-        /// 
-        /// 
+        ///
+        ///
         /// For the purposes of update mapping view evaluation, these assumptions are safe because we
         /// only support mapping of non-null constants to fields (these constants are non-null discriminators)
         /// and key comparisons (where the key values are replicated across a reference).
@@ -90,7 +90,11 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="rows">Input rows.</param>
             /// <param name="parent">Propagator context</param>
             /// <returns>Input rows matching criteria.</returns>
-            internal static IEnumerable<PropagatorResult> Filter(DbExpression predicate, IEnumerable<PropagatorResult> rows, Propagator parent)
+            internal static IEnumerable<PropagatorResult> Filter(
+                DbExpression predicate,
+                IEnumerable<PropagatorResult> rows,
+                Propagator parent
+            )
             {
                 foreach (PropagatorResult row in rows)
                 {
@@ -111,7 +115,11 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="row">Input row.</param>
             /// <param name="parent">Propagator context</param>
             /// <returns><c>true</c> if the row matches the criteria; <c>false</c> otherwise</returns>
-            internal static bool EvaluatePredicate(DbExpression predicate, PropagatorResult row, Propagator parent)
+            internal static bool EvaluatePredicate(
+                DbExpression predicate,
+                PropagatorResult row,
+                Propagator parent
+            )
             {
                 Evaluator evaluator = new Evaluator(row, parent);
                 PropagatorResult expressionResult = predicate.Accept(evaluator);
@@ -129,7 +137,11 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="row">Row to evaluate.</param>
             /// <param name="parent">Propagator context.</param>
             /// <returns>Scalar result.</returns>
-            static internal PropagatorResult Evaluate(DbExpression node, PropagatorResult row, Propagator parent)
+            static internal PropagatorResult Evaluate(
+                DbExpression node,
+                PropagatorResult row,
+                Propagator parent
+            )
             {
                 DbExpressionVisitor<PropagatorResult> evaluator = new Evaluator(row, parent);
                 return node.Accept(evaluator);
@@ -162,12 +174,16 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="booleanValue">Result</param>
             /// <param name="inputs">Inputs contributing to the result</param>
             /// <returns>DbExpression</returns>
-            private static PropagatorResult ConvertBoolToResult(bool? booleanValue, params PropagatorResult[] inputs)
+            private static PropagatorResult ConvertBoolToResult(
+                bool? booleanValue,
+                params PropagatorResult[] inputs
+            )
             {
                 object result;
                 if (booleanValue.HasValue)
                 {
-                    result = booleanValue.Value; ;
+                    result = booleanValue.Value;
+                    ;
                 }
                 else
                 {
@@ -263,8 +279,10 @@ namespace System.Data.Mapping.Update.Internal
 
                 // Optimization: if either argument is false, preserved and known, return a
                 // result that is false, preserved and known.
-                if ((leftResult.HasValue && !leftResult.Value && PreservedAndKnown(left)) ||
-                    (rightResult.HasValue && !rightResult.Value && PreservedAndKnown(right)))
+                if (
+                    (leftResult.HasValue && !leftResult.Value && PreservedAndKnown(left))
+                    || (rightResult.HasValue && !rightResult.Value && PreservedAndKnown(right))
+                )
                 {
                     return CreatePerservedAndKnownResult(false);
                 }
@@ -291,8 +309,10 @@ namespace System.Data.Mapping.Update.Internal
 
                 // Optimization: if either argument is true, preserved and known, return a
                 // result that is true, preserved and known.
-                if ((leftResult.HasValue && leftResult.Value && PreservedAndKnown(left)) ||
-                    (rightResult.HasValue && rightResult.Value && PreservedAndKnown(right)))
+                if (
+                    (leftResult.HasValue && leftResult.Value && PreservedAndKnown(left))
+                    || (rightResult.HasValue && rightResult.Value && PreservedAndKnown(right))
+                )
                 {
                     return CreatePerservedAndKnownResult(true);
                 }
@@ -311,11 +331,15 @@ namespace System.Data.Mapping.Update.Internal
             private static bool PreservedAndKnown(PropagatorResult result)
             {
                 // Check that the preserve flag is set, and the unknown flag is not set
-                return PropagatorFlags.Preserve == (result.PropagatorFlags & (PropagatorFlags.Preserve | PropagatorFlags.Unknown));
+                return PropagatorFlags.Preserve
+                    == (
+                        result.PropagatorFlags
+                        & (PropagatorFlags.Preserve | PropagatorFlags.Unknown)
+                    );
             }
 
             /// <summary>
-            /// Evalutes a 'not' expression given results 
+            /// Evalutes a 'not' expression given results
             /// </summary>
             /// <param name="predicate">'Not' predicate</param>
             /// <returns>True of the argument to the 'not' predicate evaluator to false; false otherwise</returns>
@@ -362,7 +386,14 @@ namespace System.Data.Mapping.Update.Internal
                 }
 
                 PropagatorResult matchResult;
-                if (-1 == match) { matchResult = Visit(node.Else); } else { matchResult = Visit(node.Then[match]); }
+                if (-1 == match)
+                {
+                    matchResult = Visit(node.Else);
+                }
+                else
+                {
+                    matchResult = Visit(node.Then[match]);
+                }
                 inputs.Add(matchResult);
 
                 // Clone the result to avoid modifying expressions that may be used elsewhere
@@ -425,7 +456,10 @@ namespace System.Data.Mapping.Update.Internal
                 Debug.Assert(null != node, "node is not visited when null");
 
                 // Flag the expression as 'preserve', since constants (by definition) cannot vary
-                PropagatorResult result = PropagatorResult.CreateSimpleValue(PropagatorFlags.Preserve, node.Value);
+                PropagatorResult result = PropagatorResult.CreateSimpleValue(
+                    PropagatorFlags.Preserve,
+                    node.Value
+                );
 
                 return result;
             }
@@ -456,7 +490,10 @@ namespace System.Data.Mapping.Update.Internal
                 Debug.Assert(null != node, "node is not visited when null");
 
                 // Flag the expression as 'preserve', since nulls (by definition) cannot vary
-                PropagatorResult result = PropagatorResult.CreateSimpleValue(PropagatorFlags.Preserve, null);
+                PropagatorResult result = PropagatorResult.CreateSimpleValue(
+                    PropagatorFlags.Preserve,
+                    null
+                );
 
                 return result;
             }
@@ -480,10 +517,13 @@ namespace System.Data.Mapping.Update.Internal
                     // are appended)
                     return childResult;
                 }
-                    
+
                 // "Treat" where the result does not implement the given type results in a null
                 // result
-                PropagatorResult result = PropagatorResult.CreateSimpleValue(childResult.PropagatorFlags, null);
+                PropagatorResult result = PropagatorResult.CreateSimpleValue(
+                    childResult.PropagatorFlags,
+                    null
+                );
                 return result;
             }
 
@@ -499,9 +539,14 @@ namespace System.Data.Mapping.Update.Internal
                 PropagatorResult childResult = Visit(node.Argument);
                 TypeUsage nodeType = node.ResultType;
 
-                if (!childResult.IsSimple || BuiltInTypeKind.PrimitiveType != nodeType.EdmType.BuiltInTypeKind)
+                if (
+                    !childResult.IsSimple
+                    || BuiltInTypeKind.PrimitiveType != nodeType.EdmType.BuiltInTypeKind
+                )
                 {
-                    throw EntityUtil.NotSupported(Strings.Update_UnsupportedCastArgument(nodeType.EdmType.Name));
+                    throw EntityUtil.NotSupported(
+                        Strings.Update_UnsupportedCastArgument(nodeType.EdmType.Name)
+                    );
                 }
 
                 object resultValue;
@@ -514,7 +559,10 @@ namespace System.Data.Mapping.Update.Internal
                 {
                     try
                     {
-                        resultValue = Cast(childResult.GetSimpleValue(), ((PrimitiveType)nodeType.EdmType).ClrEquivalentType);
+                        resultValue = Cast(
+                            childResult.GetSimpleValue(),
+                            ((PrimitiveType)nodeType.EdmType).ClrEquivalentType
+                        );
                     }
                     catch
                     {
@@ -544,7 +592,7 @@ namespace System.Data.Mapping.Update.Internal
                 else
                 {
                     //Convert is not handling DateTime to DateTimeOffset conversion
-                    if ( (value is DateTime) && (clrPrimitiveType == typeof(DateTimeOffset)))
+                    if ((value is DateTime) && (clrPrimitiveType == typeof(DateTimeOffset)))
                     {
                         return new DateTimeOffset(((DateTime)value).Ticks, TimeSpan.Zero);
                     }
@@ -571,7 +619,7 @@ namespace System.Data.Mapping.Update.Internal
             }
             #endregion
             /// <summary>
-            /// Supports propagation of preserve and unknown values when evaluating expressions. If any input 
+            /// Supports propagation of preserve and unknown values when evaluating expressions. If any input
             /// to an expression is marked as unknown, the same is true of the result of evaluating
             /// that expression. If all inputs to an expression are marked 'preserve', then the result is also
             /// marked preserve.
@@ -579,7 +627,10 @@ namespace System.Data.Mapping.Update.Internal
             /// <param name="result">Result to markup</param>
             /// <param name="inputs">Expressions contributing to the result</param>
             /// <returns>Marked up result.</returns>
-            private static PropagatorFlags PropagateUnknownAndPreserveFlags(PropagatorResult result, IEnumerable<PropagatorResult> inputs)
+            private static PropagatorFlags PropagateUnknownAndPreserveFlags(
+                PropagatorResult result,
+                IEnumerable<PropagatorResult> inputs
+            )
             {
                 bool unknown = false;
                 bool preserve = true;
@@ -599,7 +650,10 @@ namespace System.Data.Mapping.Update.Internal
                         preserve = false;
                     }
                 }
-                if (noInputs) { preserve = false; }
+                if (noInputs)
+                {
+                    preserve = false;
+                }
 
                 if (null != result)
                 {

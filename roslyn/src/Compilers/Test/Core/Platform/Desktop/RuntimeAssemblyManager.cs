@@ -23,7 +23,7 @@ namespace Roslyn.Test.Utilities.Desktop
         private enum Kind
         {
             ModuleData,
-            Assembly
+            Assembly,
         }
 
         private readonly struct AssemblyData
@@ -31,7 +31,10 @@ namespace Roslyn.Test.Utilities.Desktop
             internal ModuleData ModuleData { get; }
             internal Assembly Assembly { get; }
             internal Kind Kind => Assembly != null ? Kind.Assembly : Kind.ModuleData;
-            internal ModuleDataId Id => Assembly != null ? new ModuleDataId(Assembly, Assembly.ManifestModule.ModuleVersionId) : ModuleData.Id;
+            internal ModuleDataId Id =>
+                Assembly != null
+                    ? new ModuleDataId(Assembly, Assembly.ManifestModule.ModuleVersionId)
+                    : ModuleData.Id;
 
             internal AssemblyData(ModuleData moduleData)
             {
@@ -46,7 +49,8 @@ namespace Roslyn.Test.Utilities.Desktop
             }
         }
 
-        private readonly AppDomainAssemblyCache _assemblyCache = AppDomainAssemblyCache.GetOrCreate();
+        private readonly AppDomainAssemblyCache _assemblyCache =
+            AppDomainAssemblyCache.GetOrCreate();
         private readonly Dictionary<string, AssemblyData> _fullNameToAssemblyDataMap;
         private readonly Dictionary<Guid, AssemblyData> _mvidToAssemblyDataMap;
         private readonly List<Guid> _mainMvids;
@@ -57,19 +61,24 @@ namespace Roslyn.Test.Utilities.Desktop
         /// <summary>
         /// The AppDomain we create to host the RuntimeAssemblyManager will always have the mscorlib
         /// it was compiled against.  It's possible the data we are verifying or running used a slightly
-        /// different mscorlib.  Hence we can't do exact MVID matching on them.  This tracks the set of 
-        /// modules loaded when we started the RuntimeAssemblyManager for which we can't do strict 
+        /// different mscorlib.  Hence we can't do exact MVID matching on them.  This tracks the set of
+        /// modules loaded when we started the RuntimeAssemblyManager for which we can't do strict
         /// comparisons.
         /// </summary>
         private readonly HashSet<string> _preloadedSet;
 
         private bool _containsNetModules;
 
-        internal IEnumerable<ModuleData> ModuleDatas => _fullNameToAssemblyDataMap.Values.Where(x => x.Kind == Kind.ModuleData).Select(x => x.ModuleData);
+        internal IEnumerable<ModuleData> ModuleDatas =>
+            _fullNameToAssemblyDataMap
+                .Values.Where(x => x.Kind == Kind.ModuleData)
+                .Select(x => x.ModuleData);
 
         public RuntimeAssemblyManager()
         {
-            _fullNameToAssemblyDataMap = new Dictionary<string, AssemblyData>(StringComparer.OrdinalIgnoreCase);
+            _fullNameToAssemblyDataMap = new Dictionary<string, AssemblyData>(
+                StringComparer.OrdinalIgnoreCase
+            );
             _mvidToAssemblyDataMap = new Dictionary<Guid, AssemblyData>();
             _loadedAssemblies = new HashSet<Assembly>();
             _mainMvids = new List<Guid>();
@@ -141,7 +150,10 @@ namespace Roslyn.Test.Utilities.Desktop
             }
 
             return _mainMvids.Count == 0
-                || (assembly.ManifestModule != null && _mainMvids.Contains(assembly.ManifestModule.ModuleVersionId))
+                || (
+                    assembly.ManifestModule != null
+                    && _mainMvids.Contains(assembly.ManifestModule.ModuleVersionId)
+                )
                 || _loadedAssemblies.Contains(assembly);
         }
 
@@ -156,8 +168,8 @@ namespace Roslyn.Test.Utilities.Desktop
         }
 
         /// <summary>
-        /// Add this to the set of <see cref="ModuleData"/> that is managed by this instance.  It is okay to 
-        /// return values that are already present. 
+        /// Add this to the set of <see cref="ModuleData"/> that is managed by this instance.  It is okay to
+        /// return values that are already present.
         /// </summary>
         /// <param name="modules"></param>
         public void AddModuleData(List<RuntimeModuleData> modules)
@@ -168,7 +180,9 @@ namespace Roslyn.Test.Utilities.Desktop
                 {
                     if (!fullMatch)
                     {
-                        throw new Exception($"Two modules of name {assemblyData.Id.FullName} have different MVID");
+                        throw new Exception(
+                            $"Two modules of name {assemblyData.Id.FullName} have different MVID"
+                        );
                     }
                 }
                 else
@@ -224,11 +238,16 @@ namespace Roslyn.Test.Utilities.Desktop
             return list;
         }
 
-        private bool TryGetMatchingByFullName(ModuleDataId id, out AssemblyData assemblyData, out bool fullMatch)
+        private bool TryGetMatchingByFullName(
+            ModuleDataId id,
+            out AssemblyData assemblyData,
+            out bool fullMatch
+        )
         {
             if (_fullNameToAssemblyDataMap.TryGetValue(id.FullName, out assemblyData))
             {
-                fullMatch = _preloadedSet.Contains(id.SimpleName) || id.Mvid == assemblyData.Id.Mvid;
+                fullMatch =
+                    _preloadedSet.Contains(id.SimpleName) || id.Mvid == assemblyData.Id.Mvid;
                 return true;
             }
 
@@ -237,11 +256,20 @@ namespace Roslyn.Test.Utilities.Desktop
             return false;
         }
 
-        private bool TryGetMatchingByMvid(ModuleDataId id, out AssemblyData assemblyData, out bool fullMatch)
+        private bool TryGetMatchingByMvid(
+            ModuleDataId id,
+            out AssemblyData assemblyData,
+            out bool fullMatch
+        )
         {
             if (_mvidToAssemblyDataMap.TryGetValue(id.Mvid, out assemblyData))
             {
-                fullMatch = _preloadedSet.Contains(id.SimpleName) || StringComparer.OrdinalIgnoreCase.Equals(id.FullName, assemblyData.Id.FullName);
+                fullMatch =
+                    _preloadedSet.Contains(id.SimpleName)
+                    || StringComparer.OrdinalIgnoreCase.Equals(
+                        id.FullName,
+                        assemblyData.Id.FullName
+                    );
                 return true;
             }
 
@@ -254,7 +282,9 @@ namespace Roslyn.Test.Utilities.Desktop
         {
             if (!_fullNameToAssemblyDataMap.TryGetValue(moduleName, out var data))
             {
-                throw new KeyNotFoundException(String.Format("Could not find image for module '{0}'.", moduleName));
+                throw new KeyNotFoundException(
+                    String.Format("Could not find image for module '{0}'.", moduleName)
+                );
             }
 
             if (data.Kind != Kind.ModuleData)
@@ -271,7 +301,10 @@ namespace Roslyn.Test.Utilities.Desktop
 
             // ModuleResolve needs to be hooked up for the main assembly once its loaded.
             // We won't get an AssemblyResolve event for the main assembly so we need to do it here.
-            if (_mainMvids.Contains(assembly.ManifestModule.ModuleVersionId) && _loadedAssemblies.Add(assembly))
+            if (
+                _mainMvids.Contains(assembly.ManifestModule.ModuleVersionId)
+                && _loadedAssemblies.Add(assembly)
+            )
             {
                 if (!MonoHelpers.IsRunningOnMono())
                 {
@@ -345,7 +378,11 @@ namespace Roslyn.Test.Utilities.Desktop
             return assembly.LoadModule(args.Name, rawModule.ToArray());
         }
 
-        public SortedSet<string> GetMemberSignaturesFromMetadata(string fullyQualifiedTypeName, string memberName, List<RuntimeModuleDataId> searchModules)
+        public SortedSet<string> GetMemberSignaturesFromMetadata(
+            string fullyQualifiedTypeName,
+            string memberName,
+            List<RuntimeModuleDataId> searchModules
+        )
         {
             try
             {
@@ -353,7 +390,13 @@ namespace Roslyn.Test.Utilities.Desktop
                 foreach (var id in searchModules.Select(x => x.Id)) // Check inside each assembly in the compilation
                 {
                     var assembly = GetAssembly(id.FullName, reflectionOnly: true);
-                    foreach (var signature in MetadataSignatureHelper.GetMemberSignatures(assembly, fullyQualifiedTypeName, memberName))
+                    foreach (
+                        var signature in MetadataSignatureHelper.GetMemberSignatures(
+                            assembly,
+                            fullyQualifiedTypeName,
+                            memberName
+                        )
+                    )
                     {
                         signatures.Add(signature);
                     }
@@ -363,11 +406,15 @@ namespace Roslyn.Test.Utilities.Desktop
             catch (Exception ex)
             {
                 var builder = new StringBuilder();
-                builder.AppendLine($"Error getting signatures {fullyQualifiedTypeName}.{memberName}: {ex.Message}");
+                builder.AppendLine(
+                    $"Error getting signatures {fullyQualifiedTypeName}.{memberName}: {ex.Message}"
+                );
                 builder.AppendLine($"Assemblies:");
                 foreach (var module in _fullNameToAssemblyDataMap.Values)
                 {
-                    builder.AppendLine($"\t{module.Id.SimpleName} {module.Id.Mvid} - {module.Kind} {_assemblyCache.GetOrDefault(module.Id, reflectionOnly: false) != null} {_assemblyCache.GetOrDefault(module.Id, reflectionOnly: true) != null}");
+                    builder.AppendLine(
+                        $"\t{module.Id.SimpleName} {module.Id.Mvid} - {module.Kind} {_assemblyCache.GetOrDefault(module.Id, reflectionOnly: false) != null} {_assemblyCache.GetOrDefault(module.Id, reflectionOnly: true) != null}"
+                    );
                 }
 
                 throw new Exception(builder.ToString(), ex);
@@ -383,33 +430,46 @@ namespace Roslyn.Test.Utilities.Desktop
             return typeNames;
         }
 
-        public int Execute(string moduleName, string[] mainArgs, int? expectedOutputLength, out string output)
+        public int Execute(
+            string moduleName,
+            string[] mainArgs,
+            int? expectedOutputLength,
+            out string output
+        )
         {
             ImmutableArray<byte> bytes = GetModuleBytesByName(moduleName);
             Assembly assembly = DesktopRuntimeUtil.LoadAsAssembly(moduleName, bytes);
             MethodInfo entryPoint = assembly.EntryPoint;
-            Debug.Assert(entryPoint != null, "Attempting to execute an assembly that has no entrypoint; is your test trying to execute a DLL?");
+            Debug.Assert(
+                entryPoint != null,
+                "Attempting to execute an assembly that has no entrypoint; is your test trying to execute a DLL?"
+            );
 
             object result = null;
-            DesktopRuntimeEnvironment.Capture(() =>
-            {
-                var count = entryPoint.GetParameters().Length;
-                object[] args;
-                if (count == 0)
+            DesktopRuntimeEnvironment.Capture(
+                () =>
                 {
-                    args = new object[0];
-                }
-                else if (count == 1)
-                {
-                    args = new object[] { mainArgs ?? new string[0] };
-                }
-                else
-                {
-                    throw new Exception("Unrecognized entry point");
-                }
+                    var count = entryPoint.GetParameters().Length;
+                    object[] args;
+                    if (count == 0)
+                    {
+                        args = new object[0];
+                    }
+                    else if (count == 1)
+                    {
+                        args = new object[] { mainArgs ?? new string[0] };
+                    }
+                    else
+                    {
+                        throw new Exception("Unrecognized entry point");
+                    }
 
-                result = entryPoint.Invoke(null, args);
-            }, expectedOutputLength ?? 0, out var stdOut, out var stdErr);
+                    result = entryPoint.Invoke(null, args);
+                },
+                expectedOutputLength ?? 0,
+                out var stdOut,
+                out var stdErr
+            );
 
             output = stdOut + stdErr;
             return result is int ? (int)result : 0;
@@ -417,7 +477,7 @@ namespace Roslyn.Test.Utilities.Desktop
 
         public string[] PeVerifyModules(string[] modulesToVerify, bool throwOnError = true)
         {
-            // For Windows RT (ARM) THE CLRHelper.Peverify appears to not work and will exclude this 
+            // For Windows RT (ARM) THE CLRHelper.Peverify appears to not work and will exclude this
             // for ARM testing at present.
             StringBuilder errors = new StringBuilder();
             List<string> allOutput = new List<string>();
@@ -463,4 +523,3 @@ namespace Roslyn.Test.Utilities.Desktop
     }
 }
 #endif
-

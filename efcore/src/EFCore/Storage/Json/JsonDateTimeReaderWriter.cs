@@ -15,15 +15,15 @@ public sealed class JsonDateTimeReaderWriter : JsonValueReaderWriter<DateTime>
     /// </summary>
     public static JsonDateTimeReaderWriter Instance { get; } = new();
 
-    private JsonDateTimeReaderWriter()
-    {
-    }
+    private JsonDateTimeReaderWriter() { }
 
     /// <inheritdoc />
-    public override DateTime FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetDateTime();
+    public override DateTime FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetDateTime();
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, DateTime value)
-        => writer.WriteStringValue(value);
+    public override void ToJsonTyped(Utf8JsonWriter writer, DateTime value) =>
+        writer.WriteStringValue(value);
 }

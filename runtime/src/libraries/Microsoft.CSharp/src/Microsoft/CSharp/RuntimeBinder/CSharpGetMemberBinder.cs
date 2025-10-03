@@ -21,15 +21,19 @@ namespace Microsoft.CSharp.RuntimeBinder
         public BindingFlag BindingFlags => BindingFlag.BIND_RVALUEREQUIRED;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        )
         {
             Debug.Assert(arguments.Length == 1);
             return runtimeBinder.BindProperty(this, arguments[0], locals[0], null);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
-            => SymbolTable.PopulateSymbolTableWithName(Name, null, arguments[0].Type);
+        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments) =>
+            SymbolTable.PopulateSymbolTableWithName(Name, null, arguments[0].Type);
 
         public bool IsBinderThatCanHaveRefReceiver => false;
 
@@ -54,11 +58,15 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public CSharpGetMemberBinder(
-                string name,
-                bool resultIndexed,
-                Type callingContext,
-                IEnumerable<CSharpArgumentInfo> argumentInfo) :
-            base(name, false /*caseInsensitive*/)
+            string name,
+            bool resultIndexed,
+            Type callingContext,
+            IEnumerable<CSharpArgumentInfo> argumentInfo
+        )
+            : base(
+                name,
+                false /*caseInsensitive*/
+            )
         {
             ResultIndexed = resultIndexed;
             _argumentInfo = BinderHelper.ToArray(argumentInfo);
@@ -87,10 +95,12 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (Name != otherBinder.Name ||
-                ResultIndexed != otherBinder.ResultIndexed ||
-                _callingContext != otherBinder._callingContext ||
-                _argumentInfo.Length != otherBinder._argumentInfo.Length)
+            if (
+                Name != otherBinder.Name
+                || ResultIndexed != otherBinder.ResultIndexed
+                || _callingContext != otherBinder._callingContext
+                || _argumentInfo.Length != otherBinder._argumentInfo.Length
+            )
             {
                 return false;
             }
@@ -104,9 +114,15 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="target">The target of the dynamic get member operation.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackGetMember(DynamicMetaObject target, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackGetMember(
+            DynamicMetaObject target,
+            DynamicMetaObject errorSuggestion
+        )
         {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
@@ -119,7 +135,13 @@ namespace Microsoft.CSharp.RuntimeBinder
 #endif
 
             BinderHelper.ValidateBindArgument(target, nameof(target));
-            return BinderHelper.Bind(this, _binder, new[] { target }, _argumentInfo, errorSuggestion);
+            return BinderHelper.Bind(
+                this,
+                _binder,
+                new[] { target },
+                _argumentInfo,
+                errorSuggestion
+            );
         }
     }
 }

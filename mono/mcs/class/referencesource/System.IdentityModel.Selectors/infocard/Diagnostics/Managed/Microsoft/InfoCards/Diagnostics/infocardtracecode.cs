@@ -60,10 +60,7 @@ namespace Microsoft.InfoCards.Diagnostics
         // Client enums.
         //
         ClientInformation = Client + 1,
-
     }
-
-
 
     internal enum EventCode
     {
@@ -111,7 +108,6 @@ namespace Microsoft.InfoCards.Diagnostics
         E_ICARD_MALFORMED_REQUEST = unchecked((int)0xC0050119),
         E_ICARD_UI_INITIALIZATION = unchecked((int)0xC005011A), // also defined in agent\common.h
 
-
         //
         // Trust exchange messages returned from the ip sts.
         //
@@ -128,8 +124,9 @@ namespace Microsoft.InfoCards.Diagnostics
         E_OUTOFMEMORY = unchecked((int)0x8007000E),
         SCARD_W_CANCELLED_BY_USER = unchecked((int)0x8010006E),
     }
+
     internal enum InfoCardEventCategory : short
     {
-        General = 1
+        General = 1,
     }
 }

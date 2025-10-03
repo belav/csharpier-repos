@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AsyncCompletionTracker(
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            IAsyncCompletionBroker asyncCompletionBroker)
+            IAsyncCompletionBroker asyncCompletionBroker
+        )
         {
             // Store the listener provider, but delay accessing the listener itself since tracking could still be
             // disabled during the initialization sequence for integration tests.
@@ -45,21 +46,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
         private void HandleAsyncCompletionTriggered(object sender, CompletionTriggeredEventArgs e)
         {
             var cancellationSource = new CancellationTokenSource();
-            var listener = _asynchronousOperationListenerProvider.GetListener(FeatureAttribute.CompletionSet);
-            var token = listener.BeginAsyncOperation(nameof(IAsyncCompletionBroker.CompletionTriggered));
+            var listener = _asynchronousOperationListenerProvider.GetListener(
+                FeatureAttribute.CompletionSet
+            );
+            var token = listener.BeginAsyncOperation(
+                nameof(IAsyncCompletionBroker.CompletionTriggered)
+            );
 
             e.CompletionSession.Dismissed += ReleaseTokenHandler;
             e.CompletionSession.ItemCommitted += ReleaseTokenHandler;
 
-            _ = Task.Run(async () =>
+            _ = Task.Run(
+                async () =>
                 {
                     // AsyncCompletion might fire multiple ItemsUpdated events per keystroke typed, which means
                     // we could see the first ItemsUpdated event even though items don't change (but computation finished).
-                    // If test attempts to assert state after seeing first event it would cause flakiness. 
+                    // If test attempts to assert state after seeing first event it would cause flakiness.
                     // Use SelectedItemProvider to wait for all pending work to be completed.
-                    var item = await ((ISelectedItemProvider)e.CompletionSession).GetSelectedItemAsync(GetSelectedItemOptions.WaitForContextAndComputation, cancellationSource.Token);
+                    var item = await (
+                        (ISelectedItemProvider)e.CompletionSession
+                    ).GetSelectedItemAsync(
+                        GetSelectedItemOptions.WaitForContextAndComputation,
+                        cancellationSource.Token
+                    );
                     ReleaseToken();
-                }, cancellationSource.Token);
+                },
+                cancellationSource.Token
+            );
 
             return;
 

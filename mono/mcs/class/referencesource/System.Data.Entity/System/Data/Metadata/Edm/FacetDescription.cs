@@ -10,8 +10,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Text;
 using System.Diagnostics;
+using System.Text;
 using System.Threading;
 
 namespace System.Data.Metadata.Edm
@@ -24,20 +24,21 @@ namespace System.Data.Metadata.Edm
         #region Constructors
 
 
-
-        internal FacetDescription(string facetName,
-                                  EdmType facetType,
-                                  int? minValue,
-                                  int? maxValue,
-                                  object defaultValue,
-                                  bool isConstant,
-                                  string declaringTypeName)
+        internal FacetDescription(
+            string facetName,
+            EdmType facetType,
+            int? minValue,
+            int? maxValue,
+            object defaultValue,
+            bool isConstant,
+            string declaringTypeName
+        )
         {
             _facetName = facetName;
             _facetType = facetType;
             _minValue = minValue;
             _maxValue = maxValue;
-            
+
             // this ctor doesn't allow you to set the defaultValue to null
             if (defaultValue != null)
             {
@@ -48,14 +49,20 @@ namespace System.Data.Metadata.Edm
                 _defaultValue = _notInitializedSentinel;
             }
             _isConstant = isConstant;
-            
+
             Validate(declaringTypeName);
             if (_isConstant)
             {
-                UpdateMinMaxValueForConstant(_facetName, _facetType, ref _minValue, ref _maxValue, _defaultValue);
+                UpdateMinMaxValueForConstant(
+                    _facetName,
+                    _facetType,
+                    ref _minValue,
+                    ref _maxValue,
+                    _defaultValue
+                );
             }
         }
-        
+
         /// <summary>
         /// The constructor for constructing a facet description object
         /// </summary>
@@ -65,18 +72,23 @@ namespace System.Data.Metadata.Edm
         /// <param name="maxValue">The max value for this facet</param>
         /// <param name="defaultValue">The default value for this facet</param>
         /// <exception cref="System.ArgumentNullException">Thrown if either facetName, facetType or applicableType arguments are null</exception>
-        internal FacetDescription(string facetName,
-                                  EdmType facetType,
-                                  int? minValue,
-                                  int? maxValue,
-                                  object defaultValue)
+        internal FacetDescription(
+            string facetName,
+            EdmType facetType,
+            int? minValue,
+            int? maxValue,
+            object defaultValue
+        )
         {
             EntityUtil.CheckStringArgument(facetName, "facetName");
             EntityUtil.GenericCheckArgumentNull(facetType, "facetType");
 
             if (minValue.HasValue || maxValue.HasValue)
             {
-                Debug.Assert(FacetDescription.IsNumericType(facetType), "Min and Max Values can only be specified for numeric facets");
+                Debug.Assert(
+                    FacetDescription.IsNumericType(facetType),
+                    "Min and Max Values can only be specified for numeric facets"
+                );
 
                 if (minValue.HasValue && maxValue.HasValue)
                 {
@@ -120,10 +132,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public string FacetName
         {
-            get
-            {
-                return _facetName;
-            }
+            get { return _facetName; }
         }
 
         /// <summary>
@@ -131,10 +140,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public EdmType FacetType
         {
-            get
-            {
-                return _facetType;
-            }
+            get { return _facetType; }
         }
 
         /// <summary>
@@ -142,10 +148,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public int? MinValue
         {
-            get
-            {
-                return _minValue;
-            }
+            get { return _minValue; }
         }
 
         /// <summary>
@@ -153,10 +156,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public int? MaxValue
         {
-            get
-            {
-                return _maxValue;
-            }
+            get { return _maxValue; }
         }
 
         /// <summary>
@@ -179,10 +179,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public bool IsConstant
         {
-            get
-            {
-                return _isConstant;
-            }
+            get { return _isConstant; }
         }
 
         /// <summary>
@@ -190,10 +187,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public bool IsRequired
         {
-            get
-            {
-                return _defaultValue == _notInitializedSentinel;
-            }
+            get { return _defaultValue == _notInitializedSentinel; }
         }
 
         #region Internal properties
@@ -236,7 +230,7 @@ namespace System.Data.Metadata.Edm
 
         #region Methods
         /// <summary>
-        /// Overriding System.Object.ToString to provide better String representation 
+        /// Overriding System.Object.ToString to provide better String representation
         /// for this type.
         /// </summary>
         public override string ToString()
@@ -258,11 +252,7 @@ namespace System.Data.Metadata.Edm
                 valueCache[0] = Facet.Create(this, true, true);
                 valueCache[1] = Facet.Create(this, false, true);
 
-                System.Threading.Interlocked.CompareExchange(
-                                                    ref _valueCache,
-                                                    valueCache,
-                                                    null
-                                                );
+                System.Threading.Interlocked.CompareExchange(ref _valueCache, valueCache, null);
             }
             return (value) ? _valueCache[0] : _valueCache[1];
         }
@@ -278,21 +268,29 @@ namespace System.Data.Metadata.Edm
             {
                 PrimitiveType primitiveType = (PrimitiveType)facetType;
 
-                return primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Byte ||
-                       primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.SByte ||
-                       primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Int16 ||
-                       primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Int32;
+                return primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Byte
+                    || primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.SByte
+                    || primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Int16
+                    || primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Int32;
             }
 
             return false;
         }
 
-        private static void UpdateMinMaxValueForConstant(string facetName, EdmType facetType, ref int? minValue, ref int? maxValue, object defaultValue)
+        private static void UpdateMinMaxValueForConstant(
+            string facetName,
+            EdmType facetType,
+            ref int? minValue,
+            ref int? maxValue,
+            object defaultValue
+        )
         {
             if (FacetDescription.IsNumericType(facetType))
             {
-                if (facetName == EdmProviderManifest.PrecisionFacetName ||
-                    facetName == EdmProviderManifest.ScaleFacetName)
+                if (
+                    facetName == EdmProviderManifest.PrecisionFacetName
+                    || facetName == EdmProviderManifest.ScaleFacetName
+                )
                 {
                     minValue = (int?)((byte?)defaultValue);
                     maxValue = (int?)((byte?)defaultValue);
@@ -311,7 +309,10 @@ namespace System.Data.Metadata.Edm
             {
                 if (_isConstant)
                 {
-                    throw EntityUtil.MissingDefaultValueForConstantFacet(_facetName, declaringTypeName);
+                    throw EntityUtil.MissingDefaultValueForConstantFacet(
+                        _facetName,
+                        declaringTypeName
+                    );
                 }
             }
             else if (FacetDescription.IsNumericType(_facetType))
@@ -319,21 +320,31 @@ namespace System.Data.Metadata.Edm
                 if (_isConstant)
                 {
                     // Either both of them are not specified or both of them have the same value
-                    if ((_minValue.HasValue != _maxValue.HasValue) ||
-                        (_minValue.HasValue && _minValue.Value != _maxValue.Value))
+                    if (
+                        (_minValue.HasValue != _maxValue.HasValue)
+                        || (_minValue.HasValue && _minValue.Value != _maxValue.Value)
+                    )
                     {
-                        throw EntityUtil.MinAndMaxValueMustBeSameForConstantFacet(_facetName, declaringTypeName);
+                        throw EntityUtil.MinAndMaxValueMustBeSameForConstantFacet(
+                            _facetName,
+                            declaringTypeName
+                        );
                     }
                 }
-
                 // If its not constant, then both of the minValue and maxValue must be specified
                 else if (!_minValue.HasValue || !_maxValue.HasValue)
                 {
-                    throw EntityUtil.BothMinAndMaxValueMustBeSpecifiedForNonConstantFacet(_facetName, declaringTypeName);
+                    throw EntityUtil.BothMinAndMaxValueMustBeSpecifiedForNonConstantFacet(
+                        _facetName,
+                        declaringTypeName
+                    );
                 }
                 else if (_minValue.Value == _maxValue)
                 {
-                    throw EntityUtil.MinAndMaxValueMustBeDifferentForNonConstantFacet(_facetName, declaringTypeName);
+                    throw EntityUtil.MinAndMaxValueMustBeDifferentForNonConstantFacet(
+                        _facetName,
+                        declaringTypeName
+                    );
                 }
                 else if (_minValue < 0 || _maxValue < 0)
                 {
@@ -341,7 +352,11 @@ namespace System.Data.Metadata.Edm
                 }
                 else if (_minValue > _maxValue)
                 {
-                    throw EntityUtil.MinMustBeLessThanMax(_minValue.ToString(), _facetName, declaringTypeName);
+                    throw EntityUtil.MinMustBeLessThanMax(
+                        _minValue.ToString(),
+                        _facetName,
+                        declaringTypeName
+                    );
                 }
             }
         }

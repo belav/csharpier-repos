@@ -15,7 +15,7 @@ namespace System.Net.Http
     {
         /// <summary>
         /// This <see cref="MultipartStreamProvider"/> implementation returns a <see cref="MemoryStream"/> instance.
-        /// This facilitates deserialization or other manipulation of the contents in memory. 
+        /// This facilitates deserialization or other manipulation of the contents in memory.
         /// </summary>
         public override Stream GetStream(HttpContent parent, HttpContentHeaders headers)
         {

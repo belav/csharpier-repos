@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,13 +13,13 @@
 **
 =============================================================================*/
 
-namespace System.Diagnostics {
-    
+namespace System.Diagnostics
+{
     using System;
-    
+
 #if !FEATURE_PAL
     [Serializable]
-    internal sealed class EditAndContinueHelper 
+    internal sealed class EditAndContinueHelper
     {
 #pragma warning disable 169
 #pragma warning disable 414  // Field is not used from managed.

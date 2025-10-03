@@ -2,18 +2,12 @@
 
 class Test
 {
-	static void Main ()
-	{
-	}
+    static void Main() { }
 }
 
 ///<summary>summary</summary>
 public interface Interface
 {
-	///<summary>Problem!</summary>
-	int this[int index]
-	{
-		get;
-	}
+    ///<summary>Problem!</summary>
+    int this[int index] { get; }
 }
-

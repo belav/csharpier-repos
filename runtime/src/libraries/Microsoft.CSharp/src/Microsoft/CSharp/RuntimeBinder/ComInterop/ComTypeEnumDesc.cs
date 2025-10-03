@@ -17,8 +17,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         public override string ToString() => $"<enum '{TypeName}'>";
 
-        internal ComTypeEnumDesc(ComTypes.ITypeInfo typeInfo, ComTypeLibDesc typeLibDesc) :
-            base(typeInfo, typeLibDesc)
+        internal ComTypeEnumDesc(ComTypes.ITypeInfo typeInfo, ComTypeLibDesc typeLibDesc)
+            : base(typeInfo, typeLibDesc)
         {
             ComTypes.TYPEATTR typeAttr = ComRuntimeHelpers.GetTypeAttrForTypeInfo(typeInfo);
             string[] memberNames = new string[typeAttr.cVars];
@@ -40,7 +40,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
                     if (varDesc.varkind == ComTypes.VARKIND.VAR_CONST)
                     {
-                        memberValues[i] = Marshal.GetObjectForNativeVariant(varDesc.desc.lpvarValue);
+                        memberValues[i] = Marshal.GetObjectForNativeVariant(
+                            varDesc.desc.lpvarValue
+                        );
                     }
                 }
                 finally

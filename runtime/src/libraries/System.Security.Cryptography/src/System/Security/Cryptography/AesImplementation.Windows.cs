@@ -16,11 +16,24 @@ namespace System.Security.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            SafeAlgorithmHandle algorithm = AesBCryptModes.GetSharedHandle(cipherMode, feedbackSize);
+            SafeAlgorithmHandle algorithm = AesBCryptModes.GetSharedHandle(
+                cipherMode,
+                feedbackSize
+            );
 
-            BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(algorithm, cipherMode, blockSize, paddingSize, key, false, iv, encrypting);
+            BasicSymmetricCipher cipher = new BasicSymmetricCipherBCrypt(
+                algorithm,
+                cipherMode,
+                blockSize,
+                paddingSize,
+                key,
+                false,
+                iv,
+                encrypting
+            );
             return UniversalCryptoTransform.Create(paddingMode, cipher, encrypting);
         }
 
@@ -31,9 +44,13 @@ namespace System.Security.Cryptography
             int blockSize,
             int paddingSize,
             int feedbackSize,
-            bool encrypting)
+            bool encrypting
+        )
         {
-            SafeAlgorithmHandle algorithm = AesBCryptModes.GetSharedHandle(cipherMode, feedbackSize);
+            SafeAlgorithmHandle algorithm = AesBCryptModes.GetSharedHandle(
+                cipherMode,
+                feedbackSize
+            );
 
             return new BasicSymmetricCipherLiteBCrypt(
                 algorithm,
@@ -42,7 +59,8 @@ namespace System.Security.Cryptography
                 key,
                 ownsParentHandle: false,
                 iv,
-                encrypting);
+                encrypting
+            );
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Text;
 using Xunit;
 
-
 public class A
 {
     public static void A1(ulong p1, byte[] p2, int p3, int p4)
@@ -29,7 +28,6 @@ public class A
         }
     }
 }
-
 
 public class B
 {
@@ -87,17 +85,15 @@ public class B
 
         ulong wtmp21 = (ulong)((uint)wtmp11);
 
-        ulong wtmp22 = (ulong)(wtmp11 >> 32)
-                     + (ulong)((uint)wtmp12)
-                     + (ulong)((uint)wtmp13);
+        ulong wtmp22 = (ulong)(wtmp11 >> 32) + (ulong)((uint)wtmp12) + (ulong)((uint)wtmp13);
 
-        ulong wtmp23 = (ulong)(wtmp22 >> 32)
-                     + (ulong)(wtmp12 >> 32)
-                     + (ulong)(wtmp13 >> 32)
-                     + (ulong)((uint)wtmp14);
+        ulong wtmp23 =
+            (ulong)(wtmp22 >> 32)
+            + (ulong)(wtmp12 >> 32)
+            + (ulong)(wtmp13 >> 32)
+            + (ulong)((uint)wtmp14);
 
-        ulong wtmp24 = (ulong)(wtmp23 >> 32)
-                     + (ulong)(wtmp14 >> 32);
+        ulong wtmp24 = (ulong)(wtmp23 >> 32) + (ulong)(wtmp14 >> 32);
 
         Console.Write("wtmp22: ");
         Console.WriteLine(wtmp22);
@@ -123,16 +119,14 @@ public class B
         {
             wopd1L = (~wopd1L) + 1UL;
             wopd1H = ~wopd1H;
-            if (wopd1L == 0UL) wopd1H++;
+            if (wopd1L == 0UL)
+                wopd1H++;
         }
         A.A2((ulong)wopd1L, OPD1, OPD1_OFS, OPD1_L, true);
         A.A2((ulong)wopd1H, OPD1, OPD1_OFS, OPD1_L, false);
         return 100;
     }
 }
-
-
-
 
 public class Test_b02762
 {

@@ -28,9 +28,9 @@
 
 namespace Microsoft.Build.BuildEngine
 {
-	enum TaskExecutionMode
-	{
-	   Complete = 0,
-	   SkipAndSetOutput = 1
-	}
+    enum TaskExecutionMode
+    {
+        Complete = 0,
+        SkipAndSetOutput = 1,
+    }
 }

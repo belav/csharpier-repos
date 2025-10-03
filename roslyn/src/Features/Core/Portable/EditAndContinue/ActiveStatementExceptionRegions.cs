@@ -19,7 +19,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public readonly bool IsActiveStatementCovered;
 
-        public ActiveStatementExceptionRegions(ImmutableArray<SourceFileSpan> spans, bool isActiveStatementCovered)
+        public ActiveStatementExceptionRegions(
+            ImmutableArray<SourceFileSpan> spans,
+            bool isActiveStatementCovered
+        )
         {
             Contract.ThrowIfTrue(spans.IsDefault);
 

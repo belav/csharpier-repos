@@ -12,7 +12,10 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>, IRelationalQueryingEnumerable
+public class FromSqlQueryingEnumerable<T>
+    : IEnumerable<T>,
+        IAsyncEnumerable<T>,
+        IRelationalQueryingEnumerable
 {
     private readonly RelationalQueryContext _relationalQueryContext;
     private readonly RelationalCommandCache _relationalCommandCache;
@@ -40,7 +43,8 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
         Type contextType,
         bool standAloneStateManager,
         bool detailedErrorsEnabled,
-        bool threadSafetyChecksEnabled)
+        bool threadSafetyChecksEnabled
+    )
     {
         _relationalQueryContext = relationalQueryContext;
         _relationalCommandCache = relationalCommandCache;
@@ -60,7 +64,9 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+    public virtual IAsyncEnumerator<T> GetAsyncEnumerator(
+        CancellationToken cancellationToken = default
+    )
     {
         _relationalQueryContext.CancellationToken = cancellationToken;
 
@@ -73,8 +79,7 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerator<T> GetEnumerator()
-        => new Enumerator(this);
+    public virtual IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -82,8 +87,7 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IEnumerator IEnumerable.GetEnumerator()
-        => GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -91,8 +95,8 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DbCommand CreateDbCommand()
-        => _relationalCommandCache
+    public virtual DbCommand CreateDbCommand() =>
+        _relationalCommandCache
             .GetRelationalCommandTemplate(_relationalQueryContext.ParameterValues)
             .CreateDbCommand(
                 new RelationalCommandParameterObject(
@@ -101,9 +105,12 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
                     null,
                     null,
                     null,
-                    _detailedErrorsEnabled, CommandSource.FromSqlQuery),
+                    _detailedErrorsEnabled,
+                    CommandSource.FromSqlQuery
+                ),
                 Guid.Empty,
-                (DbCommandMethod)(-1));
+                (DbCommandMethod)(-1)
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -125,7 +132,8 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
     /// </summary>
     public static int[] BuildIndexMap(IReadOnlyList<string> columnNames, DbDataReader dataReader)
     {
-        var readerColumns = Enumerable.Range(0, dataReader.FieldCount)
+        var readerColumns = Enumerable
+            .Range(0, dataReader.FieldCount)
             .ToDictionary(dataReader.GetName, i => i, StringComparer.OrdinalIgnoreCase);
 
         var indexMap = new int[columnNames.Count];
@@ -136,7 +144,9 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
             {
                 if (columnNames.Count != 1)
                 {
-                    throw new InvalidOperationException(RelationalStrings.FromSqlMissingColumn(columnName));
+                    throw new InvalidOperationException(
+                        RelationalStrings.FromSqlMissingColumn(columnName)
+                    );
                 }
 
                 ordinal = 0;
@@ -187,8 +197,7 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
 
         public T Current { get; private set; }
 
-        object IEnumerator.Current
-            => Current!;
+        object IEnumerator.Current => Current!;
 
         public bool MoveNext()
         {
@@ -200,7 +209,11 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
                 {
                     if (_dataReader == null)
                     {
-                        _relationalQueryContext.ExecutionStrategy.Execute(this, (_, enumerator) => InitializeReader(enumerator), null);
+                        _relationalQueryContext.ExecutionStrategy.Execute(
+                            this,
+                            (_, enumerator) => InitializeReader(enumerator),
+                            null
+                        );
                     }
 
                     var hasNext = _dataReader!.Read();
@@ -236,7 +249,9 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
             EntityFrameworkEventSource.Log.QueryExecuting();
 
             var relationalCommand = enumerator._relationalCommand =
-                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
+                    enumerator._relationalQueryContext
+                );
 
             enumerator._dataReader = relationalCommand.ExecuteReader(
                 new RelationalCommandParameterObject(
@@ -245,11 +260,19 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
                     enumerator._readerColumns,
                     enumerator._relationalQueryContext.Context,
                     enumerator._relationalQueryContext.CommandLogger,
-                    enumerator._detailedErrorsEnabled, CommandSource.FromSqlQuery));
+                    enumerator._detailedErrorsEnabled,
+                    CommandSource.FromSqlQuery
+                )
+            );
 
-            enumerator._indexMap = BuildIndexMap(enumerator._columnNames, enumerator._dataReader.DbDataReader);
+            enumerator._indexMap = BuildIndexMap(
+                enumerator._columnNames,
+                enumerator._dataReader.DbDataReader
+            );
 
-            enumerator._relationalQueryContext.InitializeStateManager(enumerator._standAloneStateManager);
+            enumerator._relationalQueryContext.InitializeStateManager(
+                enumerator._standAloneStateManager
+            );
 
             return false;
         }
@@ -264,8 +287,8 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
             }
         }
 
-        public void Reset()
-            => throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
+        public void Reset() =>
+            throw new NotSupportedException(CoreStrings.EnumerableResetNotSupported);
     }
 
     private sealed class AsyncEnumerator : IAsyncEnumerator<T>
@@ -317,15 +340,20 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
                 {
                     if (_dataReader == null)
                     {
-                        await _relationalQueryContext.ExecutionStrategy.ExecuteAsync(
+                        await _relationalQueryContext
+                            .ExecutionStrategy.ExecuteAsync(
                                 this,
-                                (_, enumerator, cancellationToken) => InitializeReaderAsync(enumerator, cancellationToken),
+                                (_, enumerator, cancellationToken) =>
+                                    InitializeReaderAsync(enumerator, cancellationToken),
                                 null,
-                                _relationalQueryContext.CancellationToken)
+                                _relationalQueryContext.CancellationToken
+                            )
                             .ConfigureAwait(false);
                     }
 
-                    var hasNext = await _dataReader!.ReadAsync(_relationalQueryContext.CancellationToken).ConfigureAwait(false);
+                    var hasNext = await _dataReader!
+                        .ReadAsync(_relationalQueryContext.CancellationToken)
+                        .ConfigureAwait(false);
 
                     Current = hasNext
                         ? _shaper(_relationalQueryContext, _dataReader.DbDataReader, _indexMap!)
@@ -340,7 +368,12 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
             }
             catch (Exception exception)
             {
-                if (_exceptionDetector.IsCancellation(exception, _relationalQueryContext.CancellationToken))
+                if (
+                    _exceptionDetector.IsCancellation(
+                        exception,
+                        _relationalQueryContext.CancellationToken
+                    )
+                )
                 {
                     _queryLogger.QueryCanceled(_contextType);
                 }
@@ -353,27 +386,41 @@ public class FromSqlQueryingEnumerable<T> : IEnumerable<T>, IAsyncEnumerable<T>,
             }
         }
 
-        private static async Task<bool> InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+        private static async Task<bool> InitializeReaderAsync(
+            AsyncEnumerator enumerator,
+            CancellationToken cancellationToken
+        )
         {
             EntityFrameworkEventSource.Log.QueryExecuting();
 
             var relationalCommand = enumerator._relationalCommand =
-                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(enumerator._relationalQueryContext);
+                enumerator._relationalCommandCache.RentAndPopulateRelationalCommand(
+                    enumerator._relationalQueryContext
+                );
 
-            enumerator._dataReader = await relationalCommand.ExecuteReaderAsync(
+            enumerator._dataReader = await relationalCommand
+                .ExecuteReaderAsync(
                     new RelationalCommandParameterObject(
                         enumerator._relationalQueryContext.Connection,
                         enumerator._relationalQueryContext.ParameterValues,
                         enumerator._readerColumns,
                         enumerator._relationalQueryContext.Context,
                         enumerator._relationalQueryContext.CommandLogger,
-                        enumerator._detailedErrorsEnabled, CommandSource.FromSqlQuery),
-                    cancellationToken)
+                        enumerator._detailedErrorsEnabled,
+                        CommandSource.FromSqlQuery
+                    ),
+                    cancellationToken
+                )
                 .ConfigureAwait(false);
 
-            enumerator._indexMap = BuildIndexMap(enumerator._columnNames, enumerator._dataReader.DbDataReader);
+            enumerator._indexMap = BuildIndexMap(
+                enumerator._columnNames,
+                enumerator._dataReader.DbDataReader
+            );
 
-            enumerator._relationalQueryContext.InitializeStateManager(enumerator._standAloneStateManager);
+            enumerator._relationalQueryContext.InitializeStateManager(
+                enumerator._standAloneStateManager
+            );
 
             return false;
         }

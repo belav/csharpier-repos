@@ -34,11 +34,14 @@ namespace System.Web.Http.Owin
 
                 OwinMiddleware product = CreateProductUnderTest(next, server);
 
-                IOwinRequest request = CreateStubRequest(new Uri("http://somehost/" + pathToIgnoreRoute));
+                IOwinRequest request = CreateStubRequest(
+                    new Uri("http://somehost/" + pathToIgnoreRoute)
+                );
 
                 Mock<IOwinResponse> mock = CreateStubResponseMock();
                 int statusCode = 0;
-                mock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>((s) => statusCode = s);
+                mock.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                    .Callback<int>((s) => statusCode = s);
                 IOwinResponse response = mock.Object;
 
                 IOwinContext context = CreateStubContext(request, response);
@@ -64,16 +67,23 @@ namespace System.Web.Http.Owin
 
             using (HttpServer server = new HttpServer())
             {
-                server.Configuration.Routes.IgnoreRoute("Constraints", "constraint/{id}", constraints: new { constraint = new CustomConstraint() });
+                server.Configuration.Routes.IgnoreRoute(
+                    "Constraints",
+                    "constraint/{id}",
+                    constraints: new { constraint = new CustomConstraint() }
+                );
                 server.Configuration.MapHttpAttributeRoutes(); // See IgnoreController
 
                 OwinMiddleware product = CreateProductUnderTest(null, server);
 
-                IOwinRequest request = CreateStubRequest(new Uri("http://somehost/" + pathToIgnoreRoute));
+                IOwinRequest request = CreateStubRequest(
+                    new Uri("http://somehost/" + pathToIgnoreRoute)
+                );
 
                 Mock<IOwinResponse> mock = CreateStubResponseMock();
                 int statusCode = 0;
-                mock.SetupSet(r => r.StatusCode = It.IsAny<int>()).Callback<int>((s) => statusCode = s);
+                mock.SetupSet(r => r.StatusCode = It.IsAny<int>())
+                    .Callback<int>((s) => statusCode = s);
                 IOwinResponse response = mock.Object;
 
                 IOwinContext context = CreateStubContext(request, response);
@@ -102,8 +112,7 @@ namespace System.Web.Http.Owin
         private static OwinMiddleware CreateStubMiddleware(int statusCode)
         {
             Mock<OwinMiddleware> mock = new Mock<OwinMiddleware>(MockBehavior.Strict, null);
-            mock
-                .Setup(m => m.Invoke(It.IsAny<IOwinContext>()))
+            mock.Setup(m => m.Invoke(It.IsAny<IOwinContext>()))
                 .Callback<IOwinContext>((c) => c.Response.StatusCode = statusCode)
                 .Returns(Task.FromResult(0));
             return mock.Object;
@@ -138,15 +147,21 @@ namespace System.Web.Http.Owin
             return new HeaderDictionary(new Dictionary<string, string[]>());
         }
 
-        private static HttpMessageHandlerAdapter CreateProductUnderTest(OwinMiddleware next, HttpMessageHandler messageHandler)
+        private static HttpMessageHandlerAdapter CreateProductUnderTest(
+            OwinMiddleware next,
+            HttpMessageHandler messageHandler
+        )
         {
-            return new HttpMessageHandlerAdapter(next: next, options: new HttpMessageHandlerOptions
-            {
-                MessageHandler = messageHandler,
-                BufferPolicySelector = new Mock<IHostBufferPolicySelector>().Object,
-                ExceptionLogger = new EmptyExceptionLogger(),
-                ExceptionHandler = new Mock<IExceptionHandler>().Object
-            });
+            return new HttpMessageHandlerAdapter(
+                next: next,
+                options: new HttpMessageHandlerOptions
+                {
+                    MessageHandler = messageHandler,
+                    BufferPolicySelector = new Mock<IHostBufferPolicySelector>().Object,
+                    ExceptionLogger = new EmptyExceptionLogger(),
+                    ExceptionHandler = new Mock<IExceptionHandler>().Object,
+                }
+            );
         }
 
         public class IgnoreController : ApiController
@@ -161,13 +176,20 @@ namespace System.Web.Http.Owin
 
         public class CustomConstraint : IHttpRouteConstraint
         {
-            public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName,
-                IDictionary<string, object> values, HttpRouteDirection routeDirection)
+            public bool Match(
+                HttpRequestMessage request,
+                IHttpRoute route,
+                string parameterName,
+                IDictionary<string, object> values,
+                HttpRouteDirection routeDirection
+            )
             {
                 long id;
-                if (values.ContainsKey("id")
+                if (
+                    values.ContainsKey("id")
                     && Int64.TryParse(values["id"].ToString(), out id)
-                    && (id == 10))
+                    && (id == 10)
+                )
                 {
                     return true;
                 }

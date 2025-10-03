@@ -62,7 +62,8 @@ namespace System.Runtime.InteropServices.JavaScript
             if (value.HasValue)
             {
                 slot.Type = MarshalerType.DateTimeOffset;
-                slot.DoubleValue = value.Value.ToUnixTimeMilliseconds(); ;
+                slot.DoubleValue = value.Value.ToUnixTimeMilliseconds();
+                ;
             }
             else
             {

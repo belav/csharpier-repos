@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -11,20 +10,25 @@
 
 The System.Reflection.Metadata library is built-in as part of the shared framework in .NET Runtime. The package can be installed when you need to use it in other target frameworks.</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
     <!-- Constrained Execution Regions only apply to netstandard2.0 and net4* -->
-    <DefineConstants Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'">$(DefineConstants);FEATURE_CER</DefineConstants>
+    <DefineConstants
+      Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'"
+      >$(DefineConstants);FEATURE_CER</DefineConstants
+    >
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
-             Link="Common\Interop\Windows\Interop.Libraries.cs"
-             Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.ReadFile_SafeHandle_IntPtr.cs"
-             Link="Common\Interop\Windows\kernel32\Interop.ReadFile_SafeHandle_IntPtr.cs"
-             Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.ReadFile_SafeHandle_IntPtr.cs"
+      Link="Common\Interop\Windows\kernel32\Interop.ReadFile_SafeHandle_IntPtr.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
+    />
     <Compile Include="System\Reflection\Internal\Utilities\PinnedObject.cs" />
     <Compile Include="System\Reflection\Internal\Utilities\CriticalDisposableObject.cs" />
     <Compile Include="System\Reflection\Internal\Utilities\ExceptionUtilities.cs" />
@@ -92,7 +96,6 @@ The System.Reflection.Metadata library is built-in as part of the shared framewo
     <Compile Include="System\Reflection\PortableExecutable\SectionLocation.cs" />
     <Compile Include="System\Reflection\Internal\Utilities\BlobUtilities.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="Properties\InternalsVisibleTo.cs" />
     <Compile Include="System\Reflection\Internal\MemoryBlocks\AbstractMemoryBlock.cs" />
@@ -107,10 +110,22 @@ The System.Reflection.Metadata library is built-in as part of the shared framewo
     <Compile Include="System\Reflection\Internal\MemoryBlocks\StreamMemoryBlockProvider.cs" />
     <Compile Include="System\Reflection\Internal\Utilities\BitArithmetic.cs" />
     <Compile Include="System\Reflection\Internal\Utilities\StringUtils.cs" />
-    <Compile Include="System\Reflection\Internal\Utilities\EncodingHelper.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
-    <Compile Include="System\Reflection\Internal\Utilities\EncodingHelper.netcoreapp.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
-    <Compile Include="System\Reflection\Internal\Utilities\StreamExtensions.netcoreapp.cs" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
-    <Compile Include="System\Reflection\Internal\Utilities\StreamExtensions.netstandard2.0.cs" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
+    <Compile
+      Include="System\Reflection\Internal\Utilities\EncodingHelper.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
+    />
+    <Compile
+      Include="System\Reflection\Internal\Utilities\EncodingHelper.netcoreapp.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
+    />
+    <Compile
+      Include="System\Reflection\Internal\Utilities\StreamExtensions.netcoreapp.cs"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
+    />
+    <Compile
+      Include="System\Reflection\Internal\Utilities\StreamExtensions.netstandard2.0.cs"
+      Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'"
+    />
     <Compile Include="System\Reflection\Internal\Utilities\Hash.cs" />
     <Compile Include="System\Reflection\Internal\Utilities\ImmutableMemoryStream.cs" />
     <Compile Include="System\Reflection\Internal\Utilities\MemoryBlock.cs" />
@@ -252,15 +267,12 @@ The System.Reflection.Metadata library is built-in as part of the shared framewo
     <Compile Include="System\Reflection\System.Reflection.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Collections.Immutable\src\System.Collections.Immutable.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'">
     <Reference Include="System.Collections" />
     <Reference Include="System.IO.Compression" />
@@ -271,5 +283,4 @@ The System.Reflection.Metadata library is built-in as part of the shared framewo
     <Reference Include="System.Text.Encoding.Extensions" />
     <Reference Include="System.Threading" />
   </ItemGroup>
-
 </Project>

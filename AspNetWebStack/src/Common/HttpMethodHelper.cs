@@ -6,7 +6,7 @@ using System.Net.Http;
 namespace System.Web.Http
 {
     /// <summary>
-    /// Various helper methods for the static members of <see cref="HttpMethod"/>. 
+    /// Various helper methods for the static members of <see cref="HttpMethod"/>.
     /// </summary>
     internal static class HttpMethodHelper
     {

@@ -9,7 +9,8 @@ public static class Module
     [Fact]
     public static int TestEntryPoint()
     {
-        int Var1, Temp;
+        int Var1,
+            Temp;
         try
         {
             checked

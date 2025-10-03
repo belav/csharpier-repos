@@ -18,11 +18,18 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         public bool bWarningCallback = false;
         public bool bErrorCallback = false;
 
-        private void ValidateSchemaSet(XmlSchemaSet ss, int schCount, bool isCompiled, int countGT, int countGE, int countGA, string str)
+        private void ValidateSchemaSet(
+            XmlSchemaSet ss,
+            int schCount,
+            bool isCompiled,
+            int countGT,
+            int countGE,
+            int countGA,
+            string str
+        )
         {
             _output.WriteLine(str);
             Assert.Equal(ss.Count, schCount);
@@ -80,7 +87,12 @@ namespace System.Xml.XmlSchemaTests
                 CError.Compare(sc.Contains(Schema1), true, "AddContains");
                 CError.Compare(sc.IsCompiled, false, "AddIsCompiled");
 
-                XmlSchema Schema2 = XmlSchema.Read(new StreamReader(new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)), null);
+                XmlSchema Schema2 = XmlSchema.Read(
+                    new StreamReader(
+                        new FileStream(TestData._XsdNoNs, FileMode.Open, FileAccess.Read)
+                    ),
+                    null
+                );
 
                 sc.Compile();
                 CError.Compare(sc.Count, 1, "Compile");
@@ -141,7 +153,10 @@ namespace System.Xml.XmlSchemaTests
             XmlSchemaElement elementDog = new XmlSchemaElement();
             Schema1.Items.Add(elementDog);
             elementDog.Name = "dog";
-            elementDog.SchemaTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
+            elementDog.SchemaTypeName = new XmlQualifiedName(
+                "string",
+                "http://www.w3.org/2001/XMLSchema"
+            );
 
             sc.Reprocess(Schema1);
             CError.Compare(sc.Count, 1, "ReprocessCount");
@@ -176,7 +191,10 @@ namespace System.Xml.XmlSchemaTests
 
             Schema1.Items.Add(attributeDog);
             attributeDog.Name = "dog";
-            attributeDog.SchemaTypeName = new XmlQualifiedName("string", "http://www.w3.org/2001/XMLSchema");
+            attributeDog.SchemaTypeName = new XmlQualifiedName(
+                "string",
+                "http://www.w3.org/2001/XMLSchema"
+            );
 
             sc.Reprocess(Schema1);
             CError.Compare(sc.Count, 1, "ReprocessCount");
@@ -210,7 +228,10 @@ namespace System.Xml.XmlSchemaTests
 
                 Schema1.Items.Add(elementDog);
                 elementDog.Name = "dog";
-                elementDog.SchemaTypeName = new XmlQualifiedName("sstring", "http://www.w3.org/2001/XMLSchema");
+                elementDog.SchemaTypeName = new XmlQualifiedName(
+                    "sstring",
+                    "http://www.w3.org/2001/XMLSchema"
+                );
 
                 sc.Reprocess(Schema1);
                 CError.Compare(sc.Count, 1, "Count");
@@ -248,7 +269,10 @@ namespace System.Xml.XmlSchemaTests
                 XmlSchemaAttribute attributeDog = new XmlSchemaAttribute();
                 Schema1.Items.Add(attributeDog);
                 attributeDog.Name = "dog";
-                attributeDog.SchemaTypeName = new XmlQualifiedName("blah", "http://www.w3.org/2001/XMLSchema");
+                attributeDog.SchemaTypeName = new XmlQualifiedName(
+                    "blah",
+                    "http://www.w3.org/2001/XMLSchema"
+                );
                 sc.Reprocess(Schema1);
                 CError.Compare(sc.Count, 1, "Count");
                 CError.Compare(sc.Contains(Schema1), true, "Contains");
@@ -504,7 +528,7 @@ namespace System.Xml.XmlSchemaTests
             schemaSet.Reprocess(schema);
             schemaSet.Compile();
 
-            schema.Items.Remove(schemaType);//what is the best way to remove it?
+            schema.Items.Remove(schemaType); //what is the best way to remove it?
             schema.Items.Remove(schemaElement);
             schema.Items.Remove(schemaAttribute);
             schemaSet.Reprocess(schema);
@@ -621,7 +645,15 @@ namespace System.Xml.XmlSchemaTests
             string correctUri = Path.GetFullPath(path);
             _output.WriteLine("Include uri: " + includeUri);
             _output.WriteLine("Correct uri: " + correctUri);
-            using (Stream s = new FileStream(Path.GetFullPath(path), FileMode.Open, FileAccess.Read, FileShare.Read, 1))
+            using (
+                Stream s = new FileStream(
+                    Path.GetFullPath(path),
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    1
+                )
+            )
             {
                 XmlReader r = XmlReader.Create(s, new XmlReaderSettings(), includeUri);
                 _output.WriteLine("Reader uri: " + r.BaseURI);

@@ -13,17 +13,20 @@ namespace System.Management
     /// has been changed. Identifying properties are the ones that identify the object,
     /// namely the scope, path and options.
     /// </summary>
-    internal delegate void IdentifierChangedEventHandler(object sender,
-                    IdentifierChangedEventArgs e);
+    internal delegate void IdentifierChangedEventHandler(
+        object sender,
+        IdentifierChangedEventArgs e
+    );
 
     /// <summary>
     /// Delegate definition for InternalObjectPut event. This is used so that
     /// the WmiEventSink can signal to this object that the async Put call has
     /// completed.
     /// </summary>
-    internal delegate void InternalObjectPutEventHandler(object sender,
-        InternalObjectPutEventArgs e);
-
+    internal delegate void InternalObjectPutEventHandler(
+        object sender,
+        InternalObjectPutEventArgs e
+    );
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC//
     /// <summary>
@@ -120,15 +123,12 @@ namespace System.Management
 
         internal bool PutButNotGot
         {
-            get
-            { return putButNotGot; }
-            set
-            { putButNotGot = value; }
+            get { return putButNotGot; }
+            set { putButNotGot = value; }
         }
 
         //Called when IdentifierChanged() event fires
-        private void HandleIdentifierChange(object sender,
-            IdentifierChangedEventArgs e)
+        private void HandleIdentifierChange(object sender, IdentifierChangedEventArgs e)
         {
             // Detach the object from the WMI object underneath
             //
@@ -141,14 +141,14 @@ namespace System.Management
 
         internal bool IsBound
         {
-            get
-            { return _wbemObject != null; }
+            get { return _wbemObject != null; }
         }
 
         //internal constructor
         internal static ManagementObject GetManagementObject(
             IWbemClassObjectFreeThreaded wbemObject,
-            ManagementObject mgObj)
+            ManagementObject mgObj
+        )
         {
             ManagementObject newObject = new ManagementObject();
             newObject.wbemObject = wbemObject;
@@ -177,15 +177,21 @@ namespace System.Management
 
         internal static ManagementObject GetManagementObject(
             IWbemClassObjectFreeThreaded wbemObject,
-            ManagementScope scope)
+            ManagementScope scope
+        )
         {
             ManagementObject newObject = new ManagementObject();
             newObject.wbemObject = wbemObject;
 
             newObject.path = new ManagementPath(ManagementPath.GetManagementPath(wbemObject));
-            newObject.path.IdentifierChanged += new IdentifierChangedEventHandler(newObject.HandleIdentifierChange);
+            newObject.path.IdentifierChanged += new IdentifierChangedEventHandler(
+                newObject.HandleIdentifierChange
+            );
 
-            newObject.scope = ManagementScope._Clone(scope, new IdentifierChangedEventHandler(newObject.HandleIdentifierChange));
+            newObject.scope = ManagementScope._Clone(
+                scope,
+                new IdentifierChangedEventHandler(newObject.HandleIdentifierChange)
+            );
 
             // Since we have an object, we should mark it as bound. Note
             // that we do this AFTER setting Scope and Path, since those
@@ -226,7 +232,8 @@ namespace System.Management
         /// Console.WriteLine(o("FreeSpace"))
         ///    </code>
         /// </example>
-        public ManagementObject() : this((ManagementScope)null, null, null) { }
+        public ManagementObject()
+            : this((ManagementScope)null, null, null) { }
 
         //parameterized constructors
         /// <summary>
@@ -242,7 +249,8 @@ namespace System.Management
         /// Dim o As New ManagementObject(p)
         ///    </code>
         /// </example>
-        public ManagementObject(ManagementPath path) : this(null, path, null) { }
+        public ManagementObject(ManagementPath path)
+            : this(null, path, null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObject'/> class for the specified WMI object path. The path
@@ -270,7 +278,8 @@ namespace System.Management
         /// Dim o As New ManagementObject("\\\\MyServer\\root\\MyApp:MyClass.Key=""abc""");
         ///    </code>
         /// </example>
-        public ManagementObject(string path) : this(null, new ManagementPath(path), null) { }
+        public ManagementObject(string path)
+            : this(null, new ManagementPath(path), null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObject'/> class bound to the specified
@@ -300,7 +309,8 @@ namespace System.Management
         /// Console.WriteLine(o.GetQualifierValue("Description"));
         ///    </code>
         /// </example>
-        public ManagementObject(ManagementPath path, ObjectGetOptions options) : this(null, path, options) { }
+        public ManagementObject(ManagementPath path, ObjectGetOptions options)
+            : this(null, path, options) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObject'/> class bound to the specified WMI path, including the
@@ -327,9 +337,8 @@ namespace System.Management
         /// Console.WriteLine(o.GetQualifierValue("Description"))
         ///    </code>
         /// </example>
-        public ManagementObject(string path, ObjectGetOptions options) :
-            this(new ManagementPath(path), options)
-        { }
+        public ManagementObject(string path, ObjectGetOptions options)
+            : this(new ManagementPath(path), options) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementObject'/>
@@ -369,13 +378,21 @@ namespace System.Management
         /// Dim o As New ManagementObject(s,p);
         ///    </code>
         /// </example>
-        public ManagementObject(ManagementScope scope, ManagementPath path, ObjectGetOptions options)
+        public ManagementObject(
+            ManagementScope scope,
+            ManagementPath path,
+            ObjectGetOptions options
+        )
             : base(null)
         {
             ManagementObjectCTOR(scope, path, options);
         }
 
-        private void ManagementObjectCTOR(ManagementScope scope, ManagementPath path, ObjectGetOptions options)
+        private void ManagementObjectCTOR(
+            ManagementScope scope,
+            ManagementPath path,
+            ObjectGetOptions options
+        )
         {
             // We may use this to set the scope path
             string nsPath = string.Empty;
@@ -391,37 +408,54 @@ namespace System.Management
 
                 // Save the namespace path portion of the path (if any) in case
                 // we don't have a scope
-                nsPath = path.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+                nsPath = path.GetNamespacePath(
+                    (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                );
 
                 if ((null != scope) && (scope.Path.NamespacePath.Length > 0))
                 {
                     // If the scope has a path too, the namespace portion of
                     // scope.path takes precedence over what is specified in path
                     path = new ManagementPath(path.RelativePath);
-                    path.NamespacePath = scope.Path.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+                    path.NamespacePath = scope.Path.GetNamespacePath(
+                        (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                    );
                 }
 
                 // If the supplied path is a class or instance use it, otherwise
                 // leave it empty
                 if (path.IsClass || path.IsInstance)
-                    this.path = ManagementPath._Clone(path, new IdentifierChangedEventHandler(HandleIdentifierChange));
-
+                    this.path = ManagementPath._Clone(
+                        path,
+                        new IdentifierChangedEventHandler(HandleIdentifierChange)
+                    );
                 else
-                    this.path = ManagementPath._Clone(null, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                    this.path = ManagementPath._Clone(
+                        null,
+                        new IdentifierChangedEventHandler(HandleIdentifierChange)
+                    );
             }
 
             if (null != options)
-                this.options = ObjectGetOptions._Clone(options, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                this.options = ObjectGetOptions._Clone(
+                    options,
+                    new IdentifierChangedEventHandler(HandleIdentifierChange)
+                );
 
             if (null != scope)
-                this.scope = ManagementScope._Clone(scope, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                this.scope = ManagementScope._Clone(
+                    scope,
+                    new IdentifierChangedEventHandler(HandleIdentifierChange)
+                );
             else
             {
                 // Use the path if possible, otherwise let it default
                 if (nsPath.Length > 0)
                 {
                     this.scope = new ManagementScope(nsPath);
-                    this.scope.IdentifierChanged += new IdentifierChangedEventHandler(HandleIdentifierChange);
+                    this.scope.IdentifierChanged += new IdentifierChangedEventHandler(
+                        HandleIdentifierChange
+                    );
                 }
             }
 
@@ -432,7 +466,6 @@ namespace System.Management
             // *    isBound = false;
             // ***
             putButNotGot = false;
-
         }
 
         /// <summary>
@@ -463,10 +496,15 @@ namespace System.Management
         /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate with data.</param>
         /// <param name='context'>The destination (see <see cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected ManagementObject(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ManagementObject(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             ManagementObjectCTOR(null, null, null);
         }
@@ -505,18 +543,20 @@ namespace System.Management
         /// </example>
         public ManagementScope Scope
         {
-            get
-            {
-                return scope ??= ManagementScope._Clone(null);
-            }
+            get { return scope ??= ManagementScope._Clone(null); }
             set
             {
                 if (null != value)
                 {
                     if (null != scope)
-                        scope.IdentifierChanged -= new IdentifierChangedEventHandler(HandleIdentifierChange);
+                        scope.IdentifierChanged -= new IdentifierChangedEventHandler(
+                            HandleIdentifierChange
+                        );
 
-                    scope = ManagementScope._Clone((ManagementScope)value, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                    scope = ManagementScope._Clone(
+                        (ManagementScope)value,
+                        new IdentifierChangedEventHandler(HandleIdentifierChange)
+                    );
 
                     //the scope property has changed so fire event
                     FireIdentifierChanged();
@@ -557,29 +597,35 @@ namespace System.Management
         /// </example>
         public virtual ManagementPath Path
         {
-            get
-            {
-                return path ??= ManagementPath._Clone(null);
-            }
+            get { return path ??= ManagementPath._Clone(null); }
             set
             {
                 ManagementPath newPath = value ?? new ManagementPath();
 
                 //If the new path contains a namespace path and the scope is currently defaulted,
                 //we want to set the scope to the new namespace path provided
-                string nsPath = newPath.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+                string nsPath = newPath.GetNamespacePath(
+                    (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                );
                 if ((nsPath.Length > 0) && (scope != null) && (scope.IsDefaulted))
                     Scope = new ManagementScope(nsPath);
 
                 // This must be a class for a ManagementClass object or an instance for a ManagementObject, or empty
-                if ((GetType() == typeof(ManagementObject) && newPath.IsInstance) ||
-                    (GetType() == typeof(ManagementClass) && newPath.IsClass) ||
-                    newPath.IsEmpty)
+                if (
+                    (GetType() == typeof(ManagementObject) && newPath.IsInstance)
+                    || (GetType() == typeof(ManagementClass) && newPath.IsClass)
+                    || newPath.IsEmpty
+                )
                 {
                     if (null != path)
-                        path.IdentifierChanged -= new IdentifierChangedEventHandler(HandleIdentifierChange);
+                        path.IdentifierChanged -= new IdentifierChangedEventHandler(
+                            HandleIdentifierChange
+                        );
 
-                    path = ManagementPath._Clone((ManagementPath)value, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                    path = ManagementPath._Clone(
+                        (ManagementPath)value,
+                        new IdentifierChangedEventHandler(HandleIdentifierChange)
+                    );
 
                     //the path property has changed so fire event
                     FireIdentifierChanged();
@@ -621,18 +667,20 @@ namespace System.Management
         /// </example>
         public ObjectGetOptions Options
         {
-            get
-            {
-                return options ??= ObjectGetOptions._Clone(null);
-            }
+            get { return options ??= ObjectGetOptions._Clone(null); }
             set
             {
                 if (null != value)
                 {
                     if (null != options)
-                        options.IdentifierChanged -= new IdentifierChangedEventHandler(HandleIdentifierChange);
+                        options.IdentifierChanged -= new IdentifierChangedEventHandler(
+                            HandleIdentifierChange
+                        );
 
-                    options = ObjectGetOptions._Clone((ObjectGetOptions)value, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                    options = ObjectGetOptions._Clone(
+                        (ObjectGetOptions)value,
+                        new IdentifierChangedEventHandler(HandleIdentifierChange)
+                    );
 
                     //the options property has changed so fire event
                     FireIdentifierChanged();
@@ -680,15 +728,33 @@ namespace System.Management
                     PutButNotGot = false;
                 }
 
-                int status = wbemObject.Get_("__SERVER", 0, ref serverName, ref propertyType, ref propertyFlavor);
+                int status = wbemObject.Get_(
+                    "__SERVER",
+                    0,
+                    ref serverName,
+                    ref propertyType,
+                    ref propertyFlavor
+                );
 
                 if (status >= 0)
                 {
-                    status = wbemObject.Get_("__NAMESPACE", 0, ref scopeName, ref propertyType, ref propertyFlavor);
+                    status = wbemObject.Get_(
+                        "__NAMESPACE",
+                        0,
+                        ref scopeName,
+                        ref propertyType,
+                        ref propertyFlavor
+                    );
 
                     if (status >= 0)
                     {
-                        status = wbemObject.Get_("__CLASS", 0, ref className, ref propertyType, ref propertyFlavor);
+                        status = wbemObject.Get_(
+                            "__CLASS",
+                            0,
+                            ref className,
+                            ref propertyType,
+                            ref propertyFlavor
+                        );
                     }
                 }
 
@@ -714,9 +780,7 @@ namespace System.Management
                     classPath.NamespacePath = (string)(scopeName is System.DBNull ? "" : scopeName);
                     classPath.ClassName = (string)(className is System.DBNull ? "" : className);
                 }
-                catch
-                {
-                }
+                catch { }
 
                 return classPath;
             }
@@ -782,11 +846,15 @@ namespace System.Management
                 {
                     securityHandler = scope.GetSecurityHandler();
 
-                    status = scope.GetSecuredIWbemServicesHandler(scope.GetIWbemServices()).GetObject_(path.RelativePath,
-                                                            gOptions.Flags,
-                                                            gOptions.GetContext(),
-                                                            ref tempObj,
-                                                            IntPtr.Zero);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(scope.GetIWbemServices())
+                        .GetObject_(
+                            path.RelativePath,
+                            gOptions.Flags,
+                            gOptions.GetContext(),
+                            ref tempObj,
+                            IntPtr.Zero
+                        );
 
                     if (status < 0)
                     {
@@ -899,10 +967,7 @@ namespace System.Management
 
                 ObjectGetOptions o = ObjectGetOptions._Clone(options);
 
-                WmiGetEventSink sink = watcher.GetNewGetSink(
-                    scope,
-                    o.Context,
-                    this);
+                WmiGetEventSink sink = watcher.GetNewGetSink(scope, o.Context, this);
 
                 // If someone has registered for progress, make sure we flag it
                 if (watcher.HaveListenersForProgress)
@@ -913,11 +978,9 @@ namespace System.Management
 
                 securityHandler = scope.GetSecurityHandler();
 
-                status = scope.GetSecuredIWbemServicesHandler(wbemServices).GetObjectAsync_(path.RelativePath,
-                                            o.Flags,
-                                            o.GetContext(),
-                                            sink.Stub);
-
+                status = scope
+                    .GetSecuredIWbemServicesHandler(wbemServices)
+                    .GetObjectAsync_(path.RelativePath, o.Flags, o.GetContext(), sink.Stub);
 
                 securityHandler?.Reset();
 
@@ -987,12 +1050,10 @@ namespace System.Management
         /// Next b
         ///    </code>
         /// </example>
-        public ManagementObjectCollection GetRelated(
-            string relatedClass)
+        public ManagementObjectCollection GetRelated(string relatedClass)
         {
             return GetRelated(relatedClass, null, null, null, null, null, false, null);
         }
-
 
         //******************************************************
         //GetRelated
@@ -1022,7 +1083,8 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             bool classDefinitionsOnly,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
@@ -1036,9 +1098,11 @@ namespace System.Management
                 relatedClass,
                 relationshipClass,
                 relationshipQualifier,
-                relatedQualifier, relatedRole,
-                thisRole, classDefinitionsOnly);
-
+                relatedQualifier,
+                relatedRole,
+                thisRole,
+                classDefinitionsOnly
+            );
 
             //Make sure the EnumerateDeep flag bit is turned off because it's invalid for queries
             o.EnumerateDeep = true; //note this turns the FLAG to 0 !!
@@ -1050,13 +1114,15 @@ namespace System.Management
             {
                 securityHandler = scope.GetSecurityHandler();
 
-                status = scope.GetSecuredIWbemServicesHandler(scope.GetIWbemServices()).ExecQuery_(
-                                                        q.QueryLanguage,
-                                                        q.QueryString,
-                                                        o.Flags,
-                                                        o.GetContext(),
-                                                        ref enumWbem);
-
+                status = scope
+                    .GetSecuredIWbemServicesHandler(scope.GetIWbemServices())
+                    .ExecQuery_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        ref enumWbem
+                    );
 
                 if (status < 0)
                 {
@@ -1065,7 +1131,6 @@ namespace System.Management
                     else
                         Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
                 }
-
             }
             finally
             {
@@ -1076,7 +1141,6 @@ namespace System.Management
             return new ManagementObjectCollection(scope, o, enumWbem);
         }
 
-
         //******************************************************
         //GetRelated
         //****************************************************
@@ -1086,8 +1150,7 @@ namespace System.Management
         ///       delegate is called when the results are available.</para>
         /// </summary>
         /// <param name='watcher'>The object to use to return results. </param>
-        public void GetRelated(
-            ManagementOperationObserver watcher)
+        public void GetRelated(ManagementOperationObserver watcher)
         {
             GetRelated(watcher, (string)null);
         }
@@ -1103,13 +1166,10 @@ namespace System.Management
         /// <remarks>
         ///    <para>This operation is equivalent to an ASSOCIATORS OF query where ResultClass = &lt;relatedClass&gt;.</para>
         /// </remarks>
-        public void GetRelated(
-            ManagementOperationObserver watcher,
-            string relatedClass)
+        public void GetRelated(ManagementOperationObserver watcher, string relatedClass)
         {
             GetRelated(watcher, relatedClass, null, null, null, null, null, false, null);
         }
-
 
         //******************************************************
         //GetRelated
@@ -1138,7 +1198,8 @@ namespace System.Management
             string relatedRole,
             string thisRole,
             bool classDefinitionsOnly,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
@@ -1150,23 +1211,28 @@ namespace System.Management
             else
             {
                 // Ensure we switch off ReturnImmediately as this is invalid for async calls
-                EnumerationOptions o = (null != options)
-                    ? (EnumerationOptions)options.Clone() : new EnumerationOptions();
+                EnumerationOptions o =
+                    (null != options)
+                        ? (EnumerationOptions)options.Clone()
+                        : new EnumerationOptions();
                 o.ReturnImmediately = false;
 
                 // If someone has registered for progress, make sure we flag it
                 if (watcher.HaveListenersForProgress)
                     o.SendStatus = true;
 
-                WmiEventSink sink = watcher.GetNewSink(
-                    scope,
-                    o.Context);
+                WmiEventSink sink = watcher.GetNewSink(scope, o.Context);
 
-                RelatedObjectQuery q = new RelatedObjectQuery(path.Path, relatedClass,
-                    relationshipClass, relationshipQualifier,
-                    relatedQualifier, relatedRole,
-                    thisRole, classDefinitionsOnly);
-
+                RelatedObjectQuery q = new RelatedObjectQuery(
+                    path.Path,
+                    relatedClass,
+                    relationshipClass,
+                    relationshipQualifier,
+                    relatedQualifier,
+                    relatedRole,
+                    thisRole,
+                    classDefinitionsOnly
+                );
 
                 //Make sure the EnumerateDeep flag bit is turned off because it's invalid for queries
                 o.EnumerateDeep = true; //note this turns the FLAG to 0 !!
@@ -1176,13 +1242,15 @@ namespace System.Management
 
                 securityHandler = scope.GetSecurityHandler();
 
-                status = scope.GetSecuredIWbemServicesHandler(scope.GetIWbemServices()).ExecQueryAsync_(
-                                                        q.QueryLanguage,
-                                                        q.QueryString,
-                                                        o.Flags,
-                                                        o.GetContext(),
-                                                        sink.Stub);
-
+                status = scope
+                    .GetSecuredIWbemServicesHandler(scope.GetIWbemServices())
+                    .ExecQueryAsync_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        sink.Stub
+                    );
 
                 securityHandler.Reset();
 
@@ -1230,12 +1298,10 @@ namespace System.Management
         /// <remarks>
         ///    <para>This operation is equivalent to a REFERENCES OF query where the AssocClass = &lt;relationshipClass&gt;.</para>
         /// </remarks>
-        public ManagementObjectCollection GetRelationships(
-            string relationshipClass)
+        public ManagementObjectCollection GetRelationships(string relationshipClass)
         {
             return GetRelationships(relationshipClass, null, null, false, null);
         }
-
 
         //*******************************************************************
         //GetRelationships
@@ -1259,7 +1325,8 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             bool classDefinitionsOnly,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
@@ -1268,9 +1335,13 @@ namespace System.Management
 
             IEnumWbemClassObject enumWbem = null;
             EnumerationOptions o = options ?? new EnumerationOptions();
-            RelationshipQuery q = new RelationshipQuery(path.Path, relationshipClass,
-                relationshipQualifier, thisRole, classDefinitionsOnly);
-
+            RelationshipQuery q = new RelationshipQuery(
+                path.Path,
+                relationshipClass,
+                relationshipQualifier,
+                thisRole,
+                classDefinitionsOnly
+            );
 
             //Make sure the EnumerateDeep flag bit is turned off because it's invalid for queries
             o.EnumerateDeep = true; //note this turns the FLAG to 0 !!
@@ -1282,13 +1353,15 @@ namespace System.Management
             {
                 securityHandler = scope.GetSecurityHandler();
 
-                status = scope.GetSecuredIWbemServicesHandler(scope.GetIWbemServices()).ExecQuery_(
-                                                    q.QueryLanguage,
-                                                    q.QueryString,
-                                                    o.Flags,
-                                                    o.GetContext(),
-                                                    ref enumWbem);
-
+                status = scope
+                    .GetSecuredIWbemServicesHandler(scope.GetIWbemServices())
+                    .ExecQuery_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        ref enumWbem
+                    );
 
                 if (status < 0)
                 {
@@ -1297,7 +1370,6 @@ namespace System.Management
                     else
                         Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
                 }
-
             }
             finally
             {
@@ -1307,7 +1379,6 @@ namespace System.Management
             //Create collection object
             return new ManagementObjectCollection(scope, o, enumWbem);
         }
-
 
         //*******************************************************************
         //GetRelationships
@@ -1319,8 +1390,7 @@ namespace System.Management
         /// <remarks>
         /// This operation is equivalent to a REFERENCES OF query
         /// </remarks>
-        public void GetRelationships(
-            ManagementOperationObserver watcher)
+        public void GetRelationships(ManagementOperationObserver watcher)
         {
             GetRelationships(watcher, (string)null);
         }
@@ -1336,13 +1406,10 @@ namespace System.Management
         /// <remarks>
         ///    <para>This operation is equivalent to a REFERENCES OF query where the AssocClass = &lt;relationshipClass&gt;.</para>
         /// </remarks>
-        public void GetRelationships(
-            ManagementOperationObserver watcher,
-            string relationshipClass)
+        public void GetRelationships(ManagementOperationObserver watcher, string relationshipClass)
         {
             GetRelationships(watcher, relationshipClass, null, null, false, null);
         }
-
 
         //*******************************************************************
         //GetRelationships
@@ -1365,7 +1432,8 @@ namespace System.Management
             string relationshipQualifier,
             string thisRole,
             bool classDefinitionsOnly,
-            EnumerationOptions options)
+            EnumerationOptions options
+        )
         {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
@@ -1377,8 +1445,9 @@ namespace System.Management
 
                 // Ensure we switch off ReturnImmediately as this is invalid for async calls
                 EnumerationOptions o =
-                    (null != options) ? (EnumerationOptions)options.Clone() :
-                    new EnumerationOptions();
+                    (null != options)
+                        ? (EnumerationOptions)options.Clone()
+                        : new EnumerationOptions();
                 o.ReturnImmediately = false;
 
                 // If someone has registered for progress, make sure we flag it
@@ -1387,9 +1456,13 @@ namespace System.Management
 
                 WmiEventSink sink = watcher.GetNewSink(scope, o.Context);
 
-                RelationshipQuery q = new RelationshipQuery(path.Path, relationshipClass,
-                    relationshipQualifier, thisRole, classDefinitionsOnly);
-
+                RelationshipQuery q = new RelationshipQuery(
+                    path.Path,
+                    relationshipClass,
+                    relationshipQualifier,
+                    thisRole,
+                    classDefinitionsOnly
+                );
 
                 //Make sure the EnumerateDeep flag bit is turned off because it's invalid for queries
                 o.EnumerateDeep = true; //note this turns the FLAG to 0 !!
@@ -1399,13 +1472,15 @@ namespace System.Management
 
                 securityHandler = scope.GetSecurityHandler();
 
-                status = scope.GetSecuredIWbemServicesHandler(scope.GetIWbemServices()).ExecQueryAsync_(
-                                                        q.QueryLanguage,
-                                                        q.QueryString,
-                                                        o.Flags,
-                                                        o.GetContext(),
-                                                        sink.Stub);
-
+                status = scope
+                    .GetSecuredIWbemServicesHandler(scope.GetIWbemServices())
+                    .ExecQueryAsync_(
+                        q.QueryLanguage,
+                        q.QueryString,
+                        o.Flags,
+                        o.GetContext(),
+                        sink.Stub
+                    );
 
                 securityHandler?.Reset();
 
@@ -1437,7 +1512,6 @@ namespace System.Management
         {
             return Put((PutOptions)null);
         }
-
 
         //******************************************************
         //Put
@@ -1473,23 +1547,30 @@ namespace System.Management
                 securityHandler = scope.GetSecurityHandler();
 
                 ppwbemCallResult = Marshal.AllocHGlobal(IntPtr.Size);
-                Marshal.WriteIntPtr(ppwbemCallResult, IntPtr.Zero);        // Init to NULL.
+                Marshal.WriteIntPtr(ppwbemCallResult, IntPtr.Zero); // Init to NULL.
 
                 if (IsClass)
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).PutClass_(wbemObject,
-                        o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
-                        o.GetContext(),
-                        ppwbemCallResult);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .PutClass_(
+                            wbemObject,
+                            o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+                            o.GetContext(),
+                            ppwbemCallResult
+                        );
                 }
                 else
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).PutInstance_(wbemObject,
-                        o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
-                        o.GetContext(),
-                        ppwbemCallResult);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .PutInstance_(
+                            wbemObject,
+                            o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+                            o.GetContext(),
+                            ppwbemCallResult
+                        );
                 }
-
 
                 // Keep this statement here; otherwise, there'll be a leak in error cases.
                 pwbemCallResult = Marshal.ReadIntPtr(ppwbemCallResult);
@@ -1497,7 +1578,10 @@ namespace System.Management
                 wbemCallResult = (IWbemCallResult)Marshal.GetObjectForIUnknown(pwbemCallResult);
 
                 int hr;
-                status = wbemCallResult.GetCallStatus_((int)tag_WBEM_TIMEOUT_TYPE.WBEM_INFINITE, out hr);
+                status = wbemCallResult.GetCallStatus_(
+                    (int)tag_WBEM_TIMEOUT_TYPE.WBEM_INFINITE,
+                    out hr
+                );
 
                 if (status >= 0)
                     status = hr;
@@ -1516,7 +1600,7 @@ namespace System.Management
             {
                 securityHandler?.Reset();
 
-                if (ppwbemCallResult != IntPtr.Zero)                    // Cleanup from allocations above.
+                if (ppwbemCallResult != IntPtr.Zero) // Cleanup from allocations above.
                     Marshal.FreeHGlobal(ppwbemCallResult);
 
                 if (pwbemCallResult != IntPtr.Zero)
@@ -1553,7 +1637,8 @@ namespace System.Management
 
                 status = callResult.GetResultString_(
                     (int)tag_WBEM_TIMEOUT_TYPE.WBEM_INFINITE,
-                    out resultPath);
+                    out resultPath
+                );
 
                 if (status >= 0)
                 {
@@ -1581,11 +1666,8 @@ namespace System.Management
                         }
                     }
                 }
-
             }
-            catch
-            {
-            }
+            catch { }
 
             return newPath ?? new ManagementPath();
         }
@@ -1613,20 +1695,24 @@ namespace System.Management
             {
                 Initialize(false);
 
-                PutOptions o = (null == options) ?
-                    new PutOptions() : (PutOptions)options.Clone();
+                PutOptions o = (null == options) ? new PutOptions() : (PutOptions)options.Clone();
 
                 // If someone has registered for progress, make sure we flag it
                 if (watcher.HaveListenersForProgress)
                     o.SendStatus = true;
 
                 IWbemServices wbemServices = scope.GetIWbemServices();
-                WmiEventSink sink = watcher.GetNewPutSink(scope,
-                    o.Context, scope.Path.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY), ClassName);
+                WmiEventSink sink = watcher.GetNewPutSink(
+                    scope,
+                    o.Context,
+                    scope.Path.GetNamespacePath(
+                        (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                    ),
+                    ClassName
+                );
 
                 // Add ourselves to the watcher so we can update our state
-                sink.InternalObjectPut +=
-                    new InternalObjectPutEventHandler(this.HandleObjectPut);
+                sink.InternalObjectPut += new InternalObjectPutEventHandler(this.HandleObjectPut);
 
                 SecurityHandler securityHandler = null;
                 // Assign to error initially to insure internal event handler cleanup
@@ -1637,27 +1723,24 @@ namespace System.Management
 
                 if (IsClass)
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).PutClassAsync_(
-                        wbemObject,
-                        o.Flags,
-                        o.GetContext(),
-                        sink.Stub);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .PutClassAsync_(wbemObject, o.Flags, o.GetContext(), sink.Stub);
                 }
                 else
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).PutInstanceAsync_(
-                        wbemObject,
-                        o.Flags,
-                        o.GetContext(),
-                        sink.Stub);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .PutInstanceAsync_(wbemObject, o.Flags, o.GetContext(), sink.Stub);
                 }
-
 
                 securityHandler?.Reset();
 
                 if (status < 0)
                 {
-                    sink.InternalObjectPut -= new InternalObjectPutEventHandler(this.HandleObjectPut);
+                    sink.InternalObjectPut -= new InternalObjectPutEventHandler(
+                        this.HandleObjectPut
+                    );
                     watcher.RemoveSink(sink);
                     if ((status & 0xfffff000) == 0x80041000)
                         ManagementException.ThrowWithExtendedInfo((ManagementStatus)status);
@@ -1673,14 +1756,14 @@ namespace System.Management
             {
                 if (sender is WmiEventSink)
                 {
-                    ((WmiEventSink)sender).InternalObjectPut -= new InternalObjectPutEventHandler(this.HandleObjectPut);
+                    ((WmiEventSink)sender).InternalObjectPut -= new InternalObjectPutEventHandler(
+                        this.HandleObjectPut
+                    );
                     putButNotGot = true;
                     path.SetRelativePath(e.Path.RelativePath);
                 }
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         //******************************************************
@@ -1766,26 +1849,30 @@ namespace System.Management
                 securityHandler = destinationScope.GetSecurityHandler();
 
                 ppwbemCallResult = Marshal.AllocHGlobal(IntPtr.Size);
-                Marshal.WriteIntPtr(ppwbemCallResult, IntPtr.Zero);        // Init to NULL.
+                Marshal.WriteIntPtr(ppwbemCallResult, IntPtr.Zero); // Init to NULL.
 
                 if (IsClass)
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).PutClass_(
-                        wbemObject,
-                        o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
-                        o.GetContext(),
-                        ppwbemCallResult);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .PutClass_(
+                            wbemObject,
+                            o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+                            o.GetContext(),
+                            ppwbemCallResult
+                        );
                 }
                 else
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).PutInstance_(
-                        wbemObject,
-                        o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
-                        o.GetContext(),
-                        ppwbemCallResult);
-
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .PutInstance_(
+                            wbemObject,
+                            o.Flags | (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY,
+                            o.GetContext(),
+                            ppwbemCallResult
+                        );
                 }
-
 
                 // Keep this statement here; otherwise, there'll be a leak in error cases.
                 pwbemCallResult = Marshal.ReadIntPtr(ppwbemCallResult);
@@ -1794,7 +1881,10 @@ namespace System.Management
                 wbemCallResult = (IWbemCallResult)Marshal.GetObjectForIUnknown(pwbemCallResult);
 
                 int hr;
-                status = wbemCallResult.GetCallStatus_((int)tag_WBEM_TIMEOUT_TYPE.WBEM_INFINITE, out hr);
+                status = wbemCallResult.GetCallStatus_(
+                    (int)tag_WBEM_TIMEOUT_TYPE.WBEM_INFINITE,
+                    out hr
+                );
 
                 if (status >= 0)
                     status = hr;
@@ -1808,13 +1898,15 @@ namespace System.Management
                 }
 
                 newPath = GetPath(wbemCallResult);
-                newPath.NamespacePath = path.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+                newPath.NamespacePath = path.GetNamespacePath(
+                    (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                );
             }
             finally
             {
                 securityHandler?.Reset();
 
-                if (ppwbemCallResult != IntPtr.Zero)                    // Cleanup from allocations above.
+                if (ppwbemCallResult != IntPtr.Zero) // Cleanup from allocations above.
                     Marshal.FreeHGlobal(ppwbemCallResult);
 
                 if (pwbemCallResult != IntPtr.Zero)
@@ -1864,7 +1956,11 @@ namespace System.Management
         /// <param name='watcher'>The object that will receive the results of the operation.</param>
         /// <param name='path'>The path to which the object should be copied.</param>
         /// <param name='options'>The options for how the object should be put.</param>
-        public void CopyTo(ManagementOperationObserver watcher, ManagementPath path, PutOptions options)
+        public void CopyTo(
+            ManagementOperationObserver watcher,
+            ManagementPath path,
+            PutOptions options
+        )
         {
             if (null == watcher)
                 throw new ArgumentNullException(nameof(watcher));
@@ -1882,8 +1978,14 @@ namespace System.Management
                 if (watcher.HaveListenersForProgress)
                     o.SendStatus = true;
 
-                WmiEventSink sink = watcher.GetNewPutSink(destinationScope, o.Context,
-                    path.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY), ClassName);
+                WmiEventSink sink = watcher.GetNewPutSink(
+                    destinationScope,
+                    o.Context,
+                    path.GetNamespacePath(
+                        (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                    ),
+                    ClassName
+                );
                 IWbemServices destWbemServices = destinationScope.GetIWbemServices();
 
                 SecurityHandler securityHandler = null;
@@ -1893,22 +1995,16 @@ namespace System.Management
 
                 if (IsClass)
                 {
-                    status = destinationScope.GetSecuredIWbemServicesHandler(destWbemServices).PutClassAsync_(
-                                                    wbemObject,
-                                                    o.Flags,
-                                                    o.GetContext(),
-                                                    sink.Stub);
-
+                    status = destinationScope
+                        .GetSecuredIWbemServicesHandler(destWbemServices)
+                        .PutClassAsync_(wbemObject, o.Flags, o.GetContext(), sink.Stub);
                 }
                 else
                 {
-                    status = destinationScope.GetSecuredIWbemServicesHandler(destWbemServices).PutInstanceAsync_(
-                                                    wbemObject,
-                                                    o.Flags,
-                                                    o.GetContext(),
-                                                    sink.Stub);
+                    status = destinationScope
+                        .GetSecuredIWbemServicesHandler(destWbemServices)
+                        .PutInstanceAsync_(wbemObject, o.Flags, o.GetContext(), sink.Stub);
                 }
-
 
                 securityHandler?.Reset();
 
@@ -1959,21 +2055,16 @@ namespace System.Management
 
                 if (IsClass)
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).DeleteClass_(
-                        path.RelativePath,
-                        o.Flags,
-                        o.GetContext(),
-                        IntPtr.Zero);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .DeleteClass_(path.RelativePath, o.Flags, o.GetContext(), IntPtr.Zero);
                 }
                 else
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).DeleteInstance_(
-                        path.RelativePath,
-                        o.Flags,
-                        o.GetContext(),
-                        IntPtr.Zero);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .DeleteInstance_(path.RelativePath, o.Flags, o.GetContext(), IntPtr.Zero);
                 }
-
 
                 if (status < 0)
                 {
@@ -1988,7 +2079,6 @@ namespace System.Management
                 securityHandler?.Reset();
             }
         }
-
 
         /// <summary>
         ///    <para>Deletes the object.</para>
@@ -2013,7 +2103,8 @@ namespace System.Management
             else
             {
                 Initialize(false);
-                DeleteOptions o = (null != options) ? (DeleteOptions)options.Clone() : new DeleteOptions();
+                DeleteOptions o =
+                    (null != options) ? (DeleteOptions)options.Clone() : new DeleteOptions();
 
                 // If someone has registered for progress, make sure we flag it
                 if (watcher.HaveListenersForProgress)
@@ -2029,19 +2120,21 @@ namespace System.Management
 
                 if (IsClass)
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).DeleteClassAsync_(path.RelativePath,
-                        o.Flags,
-                        o.GetContext(),
-                        sink.Stub);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .DeleteClassAsync_(path.RelativePath, o.Flags, o.GetContext(), sink.Stub);
                 }
                 else
                 {
-                    status = scope.GetSecuredIWbemServicesHandler(wbemServices).DeleteInstanceAsync_(path.RelativePath,
-                        o.Flags,
-                        o.GetContext(),
-                        sink.Stub);
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(wbemServices)
+                        .DeleteInstanceAsync_(
+                            path.RelativePath,
+                            o.Flags,
+                            o.GetContext(),
+                            sink.Stub
+                        );
                 }
-
 
                 securityHandler?.Reset();
 
@@ -2139,15 +2232,19 @@ namespace System.Management
 
                 // Map args into a inparams structure
                 ManagementBaseObject inParameters;
-                IWbemClassObjectFreeThreaded inParametersClass, outParametersClass;
-                GetMethodParameters(methodName, out inParameters,
-                    out inParametersClass, out outParametersClass);
+                IWbemClassObjectFreeThreaded inParametersClass,
+                    outParametersClass;
+                GetMethodParameters(
+                    methodName,
+                    out inParameters,
+                    out inParametersClass,
+                    out outParametersClass
+                );
 
                 MapInParameters(args, inParameters, inParametersClass);
 
                 // Call ExecMethod
-                ManagementBaseObject outParameters =
-                    InvokeMethod(methodName, inParameters, null);
+                ManagementBaseObject outParameters = InvokeMethod(methodName, inParameters, null);
 
                 // Map outparams to args
                 result = MapOutParameters(args, outParameters, outParametersClass);
@@ -2172,7 +2269,8 @@ namespace System.Management
         public void InvokeMethod(
             ManagementOperationObserver watcher,
             string methodName,
-            object[] args)
+            object[] args
+        )
         {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
@@ -2186,9 +2284,14 @@ namespace System.Management
 
                 // Map args into a inparams structure
                 ManagementBaseObject inParameters;
-                IWbemClassObjectFreeThreaded inParametersClass, outParametersClass;
-                GetMethodParameters(methodName, out inParameters,
-                    out inParametersClass, out outParametersClass);
+                IWbemClassObjectFreeThreaded inParametersClass,
+                    outParametersClass;
+                GetMethodParameters(
+                    methodName,
+                    out inParameters,
+                    out inParametersClass,
+                    out outParametersClass
+                );
 
                 MapInParameters(args, inParameters, inParametersClass);
 
@@ -2271,7 +2374,8 @@ namespace System.Management
         public ManagementBaseObject InvokeMethod(
             string methodName,
             ManagementBaseObject inParameters,
-            InvokeMethodOptions options)
+            InvokeMethodOptions options
+        )
         {
             ManagementBaseObject outParameters = null;
 
@@ -2293,15 +2397,17 @@ namespace System.Management
                     IWbemClassObjectFreeThreaded inParams = inParameters?.wbemObject;
                     IWbemClassObjectFreeThreaded outParams = null;
 
-                    status = scope.GetSecuredIWbemServicesHandler(scope.GetIWbemServices()).ExecMethod_(
-                        path.RelativePath,
-                        methodName,
-                        o.Flags,
-                        o.GetContext(),
-                        inParams,
-                        ref outParams,
-                        IntPtr.Zero);
-
+                    status = scope
+                        .GetSecuredIWbemServicesHandler(scope.GetIWbemServices())
+                        .ExecMethod_(
+                            path.RelativePath,
+                            methodName,
+                            o.Flags,
+                            o.GetContext(),
+                            inParams,
+                            ref outParams,
+                            IntPtr.Zero
+                        );
 
                     if (status < 0)
                     {
@@ -2338,7 +2444,8 @@ namespace System.Management
             ManagementOperationObserver watcher,
             string methodName,
             ManagementBaseObject inParameters,
-            InvokeMethodOptions options)
+            InvokeMethodOptions options
+        )
         {
             if ((null == path) || (path.Path.Length == 0))
                 throw new InvalidOperationException();
@@ -2349,8 +2456,10 @@ namespace System.Management
             else
             {
                 Initialize(false);
-                InvokeMethodOptions o = (null != options) ?
-                    (InvokeMethodOptions)options.Clone() : new InvokeMethodOptions();
+                InvokeMethodOptions o =
+                    (null != options)
+                        ? (InvokeMethodOptions)options.Clone()
+                        : new InvokeMethodOptions();
 
                 // If someone has registered for progress, make sure we flag it
                 if (watcher.HaveListenersForProgress)
@@ -2368,13 +2477,16 @@ namespace System.Management
                 if (null != inParameters)
                     inParams = inParameters.wbemObject;
 
-                status = scope.GetSecuredIWbemServicesHandler(scope.GetIWbemServices()).ExecMethodAsync_(
-                    path.RelativePath,
-                    methodName,
-                    o.Flags,
-                    o.GetContext(),
-                    inParams,
-                    sink.Stub);
+                status = scope
+                    .GetSecuredIWbemServicesHandler(scope.GetIWbemServices())
+                    .ExecMethodAsync_(
+                        path.RelativePath,
+                        methodName,
+                        o.Flags,
+                        o.GetContext(),
+                        inParams,
+                        sink.Stub
+                    );
 
                 securityHandler?.Reset();
 
@@ -2404,11 +2516,11 @@ namespace System.Management
         ///    <para> Gets the object containing the input parameters to a
         ///       method, and then fills in the values and passes the object to the <see cref='System.Management.ManagementObject.InvokeMethod(string, ManagementBaseObject, InvokeMethodOptions)'/> call.</para>
         /// </remarks>
-        public ManagementBaseObject GetMethodParameters(
-            string methodName)
+        public ManagementBaseObject GetMethodParameters(string methodName)
         {
             ManagementBaseObject inParameters;
-            IWbemClassObjectFreeThreaded dummy1, dummy2;
+            IWbemClassObjectFreeThreaded dummy1,
+                dummy2;
 
             GetMethodParameters(methodName, out inParameters, out dummy1, out dummy2);
 
@@ -2419,7 +2531,8 @@ namespace System.Management
             string methodName,
             out ManagementBaseObject inParameters,
             out IWbemClassObjectFreeThreaded inParametersClass,
-            out IWbemClassObjectFreeThreaded outParametersClass)
+            out IWbemClassObjectFreeThreaded outParametersClass
+        )
         {
             inParameters = null;
             inParametersClass = null;
@@ -2440,8 +2553,7 @@ namespace System.Management
                         throw new InvalidOperationException();
                     else
                     {
-                        ManagementClass classObject =
-                            new ManagementClass(scope, classPath, null);
+                        ManagementClass classObject = new ManagementClass(scope, classPath, null);
                         classObject.Get();
                         wmiClass = classObject.wbemObject;
                     }
@@ -2450,7 +2562,12 @@ namespace System.Management
                 int status = (int)ManagementStatus.NoError;
 
                 // Ask it for the method parameters
-                status = wmiClass.GetMethod_(methodName, 0, out inParametersClass, out outParametersClass);
+                status = wmiClass.GetMethod_(
+                    methodName,
+                    0,
+                    out inParametersClass,
+                    out outParametersClass
+                );
 
                 // To ensure that all forms of invoke return the same error codes when
                 // the method does not exist, we will map WBEM_E_NOT_FOUND to WBEM_E_METHOD_NOT_IMPLEMENTED.
@@ -2549,7 +2666,9 @@ namespace System.Management
                 if (null == path)
                 {
                     path = new ManagementPath();
-                    path.IdentifierChanged += new IdentifierChangedEventHandler(HandleIdentifierChange);
+                    path.IdentifierChanged += new IdentifierChangedEventHandler(
+                        HandleIdentifierChange
+                    );
                 }
 
                 //Have we already got this object
@@ -2559,7 +2678,9 @@ namespace System.Management
                 if (null == scope)
                 {
                     // If our object has a valid namespace path, use that
-                    string nsPath = path.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+                    string nsPath = path.GetNamespacePath(
+                        (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                    );
 
                     // Set the scope - note that we do not set through
                     // the Scope property since that would trigger an IdentifierChanged
@@ -2573,12 +2694,16 @@ namespace System.Management
                     }
 
                     // Hook ourselves up to this scope for future change notifications
-                    scope.IdentifierChanged += new IdentifierChangedEventHandler(HandleIdentifierChange);
+                    scope.IdentifierChanged += new IdentifierChangedEventHandler(
+                        HandleIdentifierChange
+                    );
                 }
                 else if ((null == scope.Path) || scope.Path.IsEmpty)
                 {
                     // We have a scope but an empty path - use the object's path or the default
-                    string nsPath = path.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+                    string nsPath = path.GetNamespacePath(
+                        (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+                    );
 
                     if (0 < nsPath.Length)
                         scope.Path = new ManagementPath(nsPath);
@@ -2608,7 +2733,9 @@ namespace System.Management
                         if (null == options)
                         {
                             options = new ObjectGetOptions();
-                            options.IdentifierChanged += new IdentifierChangedEventHandler(HandleIdentifierChange);
+                            options.IdentifierChanged += new IdentifierChangedEventHandler(
+                                HandleIdentifierChange
+                            );
                         }
 
                         IWbemClassObjectFreeThreaded tempObj = null;
@@ -2626,7 +2753,15 @@ namespace System.Management
 
                             if (curPath.Length > 0)
                                 objectPath = curPath;
-                            status = scope.GetSecuredIWbemServicesHandler(wbemServices).GetObject_(objectPath, options.Flags, options.GetContext(), ref tempObj, IntPtr.Zero);
+                            status = scope
+                                .GetSecuredIWbemServicesHandler(wbemServices)
+                                .GetObject_(
+                                    objectPath,
+                                    options.Flags,
+                                    options.GetContext(),
+                                    ref tempObj,
+                                    IntPtr.Zero
+                                );
 
                             if (status >= 0)
                             {
@@ -2641,23 +2776,40 @@ namespace System.Management
 
                                 // now set the path from the "real" object
                                 object val = null;
-                                int dummy1 = 0, dummy2 = 0;
+                                int dummy1 = 0,
+                                    dummy2 = 0;
 
-                                status = wbemObject.Get_("__PATH", 0, ref val, ref dummy1, ref dummy2);
+                                status = wbemObject.Get_(
+                                    "__PATH",
+                                    0,
+                                    ref val,
+                                    ref dummy1,
+                                    ref dummy2
+                                );
 
                                 if (status >= 0)
                                 {
-                                    path = (System.DBNull.Value != val) ? (new ManagementPath((string)val)) : (new ManagementPath());
-                                    path.IdentifierChanged += new IdentifierChangedEventHandler(HandleIdentifierChange);
+                                    path =
+                                        (System.DBNull.Value != val)
+                                            ? (new ManagementPath((string)val))
+                                            : (new ManagementPath());
+                                    path.IdentifierChanged += new IdentifierChangedEventHandler(
+                                        HandleIdentifierChange
+                                    );
                                 }
                             }
 
                             if (status < 0)
                             {
                                 if ((status & 0xfffff000) == 0x80041000)
-                                    ManagementException.ThrowWithExtendedInfo((ManagementStatus)status);
+                                    ManagementException.ThrowWithExtendedInfo(
+                                        (ManagementStatus)status
+                                    );
                                 else
-                                    Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
+                                    Marshal.ThrowExceptionForHR(
+                                        status,
+                                        WmiNetUtilsHelper.GetErrorInfo_f()
+                                    );
                             }
                         }
                         finally
@@ -2669,11 +2821,11 @@ namespace System.Management
             }
         }
 
-
         private static void MapInParameters(
             object[] args,
             ManagementBaseObject inParams,
-            IWbemClassObjectFreeThreaded inParamsClass)
+            IWbemClassObjectFreeThreaded inParamsClass
+        )
         {
             int status = (int)ManagementStatus.NoError;
 
@@ -2692,8 +2844,9 @@ namespace System.Management
                      * the instance.
                      */
 
-                    status = inParamsClass.BeginEnumeration_
-                            ((int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_NONSYSTEM_ONLY);
+                    status = inParamsClass.BeginEnumeration_(
+                        (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_NONSYSTEM_ONLY
+                    );
 
                     if (status >= 0)
                     {
@@ -2704,21 +2857,30 @@ namespace System.Management
                             string propertyName = null;
                             IWbemQualifierSetFreeThreaded qualifierSet = null;
 
-                            status = inParamsClass.Next_(0, ref propertyName, ref val, ref dummy, ref dummy);
+                            status = inParamsClass.Next_(
+                                0,
+                                ref propertyName,
+                                ref val,
+                                ref dummy,
+                                ref dummy
+                            );
 
                             if (status >= 0)
                             {
                                 if (null == propertyName)
                                     break;
 
-                                status = inParamsClass.GetPropertyQualifierSet_(propertyName, out qualifierSet);
+                                status = inParamsClass.GetPropertyQualifierSet_(
+                                    propertyName,
+                                    out qualifierSet
+                                );
 
                                 if (status >= 0)
                                 {
                                     try
                                     {
                                         object id = 0;
-                                        qualifierSet.Get_(ID, 0, ref id, ref dummy);    // Errors intentionally ignored.
+                                        qualifierSet.Get_(ID, 0, ref id, ref dummy); // Errors intentionally ignored.
 
                                         // If the id is in range, map the value into the args array
                                         int idIndex = (int)id;
@@ -2754,10 +2916,13 @@ namespace System.Management
         private static object MapOutParameters(
             object[] args,
             ManagementBaseObject outParams,
-            IWbemClassObjectFreeThreaded outParamsClass)
+            IWbemClassObjectFreeThreaded outParamsClass
+        )
         {
             object result = null;
-            int maxIndex = 0, minIndex = 0, topId = 0;
+            int maxIndex = 0,
+                minIndex = 0,
+                topId = 0;
 
             int status = (int)ManagementStatus.NoError;
 
@@ -2776,8 +2941,9 @@ namespace System.Management
                     * the instance.
                 */
 
-                status = outParamsClass.BeginEnumeration_
-                    ((int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_NONSYSTEM_ONLY);
+                status = outParamsClass.BeginEnumeration_(
+                    (int)tag_WBEM_CONDITION_FLAG_TYPE.WBEM_FLAG_NONSYSTEM_ONLY
+                );
 
                 if (status >= 0)
                 {
@@ -2788,7 +2954,13 @@ namespace System.Management
                         string propertyName = null;
                         IWbemQualifierSetFreeThreaded qualifierSet = null;
 
-                        status = outParamsClass.Next_(0, ref propertyName, ref val, ref dummy, ref dummy);
+                        status = outParamsClass.Next_(
+                            0,
+                            ref propertyName,
+                            ref val,
+                            ref dummy,
+                            ref dummy
+                        );
 
                         if (status >= 0)
                         {
@@ -2796,20 +2968,29 @@ namespace System.Management
                                 break;
 
                             // Handle the result parameter separately
-                            if (string.Equals(propertyName, RETURNVALUE, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                string.Equals(
+                                    propertyName,
+                                    RETURNVALUE,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 result = outParams[RETURNVALUE];
                             }
-                            else  // Shouldn't get here if no args!
+                            else // Shouldn't get here if no args!
                             {
-                                status = outParamsClass.GetPropertyQualifierSet_(propertyName, out qualifierSet);
+                                status = outParamsClass.GetPropertyQualifierSet_(
+                                    propertyName,
+                                    out qualifierSet
+                                );
 
                                 if (status >= 0)
                                 {
                                     try
                                     {
                                         object id = 0;
-                                        qualifierSet.Get_(ID, 0, ref id, ref dummy);    // Errors intentionally ignored.
+                                        qualifierSet.Get_(ID, 0, ref id, ref dummy); // Errors intentionally ignored.
 
                                         // If the id is in range, map the value into the args array
                                         int idIndex = (int)id;
@@ -2843,6 +3024,5 @@ namespace System.Management
 
             return result;
         }
-
-    }//ManagementObject
+    } //ManagementObject
 }

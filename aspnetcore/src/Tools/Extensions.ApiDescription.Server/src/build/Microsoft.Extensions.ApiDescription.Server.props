@@ -10,7 +10,6 @@
       information. Long form options require a double-dash prefix.
     -->
     <OpenApiGenerateDocumentsOptions Condition=" '$(OpenApiGenerateDocumentsOptions)' == '' " />
-
     <!--
       If 'true' (the default when targeting .NET Framework or .NET Core 2.1 and later), enable generation of OpenAPI
       documents. Otherwise, this feature is completely disabled. This controls whether the 'OpenApiGenerateDocuments'
@@ -18,18 +17,17 @@
       $(OpenApiGenerateDocumentsOnBuild) default.
     -->
     <OpenApiGenerateDocuments Condition=" '$(OpenApiGenerateDocuments)' == '' " />
-
     <!--
       If 'true' (the default if $(OpenApiGenerateDocuments) is 'true'), will generate OpenAPI documents after every
       build. Set to 'false' when targets are invoked from the command line or tied to another target.
     -->
     <OpenApiGenerateDocumentsOnBuild Condition=" '$(OpenApiGenerateDocumentsOnBuild)' == '' " />
-
     <!--
       Where to place OpenAPI documents generated from the application. Value is interpreted relative to the project
       folder, unless already an absolute path.
     -->
-    <OpenApiDocumentsDirectory
-        Condition=" '$(OpenApiDocumentsDirectory)' == '' ">$(BaseIntermediateOutputPath)</OpenApiDocumentsDirectory>
+    <OpenApiDocumentsDirectory Condition=" '$(OpenApiDocumentsDirectory)' == '' "
+      >$(BaseIntermediateOutputPath)</OpenApiDocumentsDirectory
+    >
   </PropertyGroup>
 </Project>

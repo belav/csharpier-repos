@@ -7,7 +7,8 @@ using System.Diagnostics;
 namespace System.Collections.Frozen
 {
     /// <summary>Provides a frozen set implementation where strings are grouped by their lengths.</summary>
-    internal sealed class LengthBucketsFrozenSet : FrozenSetInternalBase<string, LengthBucketsFrozenSet.GSW>
+    internal sealed class LengthBucketsFrozenSet
+        : FrozenSetInternalBase<string, LengthBucketsFrozenSet.GSW>
     {
         private readonly int[] _lengthBuckets;
         private readonly int _minLength;
@@ -15,10 +16,18 @@ namespace System.Collections.Frozen
         private readonly bool _ignoreCase;
 
         private LengthBucketsFrozenSet(
-            string[] items, int[] lengthBuckets, int minLength, IEqualityComparer<string> comparer)
+            string[] items,
+            int[] lengthBuckets,
+            int minLength,
+            IEqualityComparer<string> comparer
+        )
             : base(comparer)
         {
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             _items = items;
             _lengthBuckets = lengthBuckets;
@@ -27,11 +36,20 @@ namespace System.Collections.Frozen
         }
 
         internal static LengthBucketsFrozenSet? CreateLengthBucketsFrozenSetIfAppropriate(
-            string[] items, IEqualityComparer<string> comparer, int minLength, int maxLength)
+            string[] items,
+            IEqualityComparer<string> comparer,
+            int minLength,
+            int maxLength
+        )
         {
             Debug.Assert(items.Length != 0);
 
-            int[]? lengthBuckets = LengthBuckets.CreateLengthBucketsArrayIfAppropriate(items, comparer, minLength, maxLength);
+            int[]? lengthBuckets = LengthBuckets.CreateLengthBucketsArrayIfAppropriate(
+                items,
+                comparer,
+                minLength,
+                maxLength
+            );
             if (lengthBuckets is null)
             {
                 return null;
@@ -109,11 +127,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private LengthBucketsFrozenSet _set;
+
             public void Store(FrozenSet<string> set) => _set = (LengthBucketsFrozenSet)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<string> Comparer => _set.Comparer;
+
             public int FindItemIndex(string item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

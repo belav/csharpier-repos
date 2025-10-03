@@ -1,57 +1,57 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
 ** Class: Marshal
 **
 **
-** Purpose: This class contains methods that are mainly used to marshal 
+** Purpose: This class contains methods that are mainly used to marshal
 **          between unmanaged and managed types.
 **
 **
 =============================================================================*/
 
 namespace System.Runtime.InteropServices
-{    
+{
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
     using System.Reflection.Emit;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices.ComTypes;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Runtime.Remoting;
-    using System.Runtime.CompilerServices;
-    using System.Globalization;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-    using Win32Native = Microsoft.Win32.Win32Native;
     using Microsoft.Win32.SafeHandles;
-    using System.Diagnostics.Contracts;
-    using System.Runtime.InteropServices.ComTypes;
+    using Win32Native = Microsoft.Win32.Win32Native;
 
     [Serializable]
     public enum CustomQueryInterfaceMode
     {
-        Ignore  = 0,
-        Allow = 1
+        Ignore = 0,
+        Allow = 1,
     }
 
     //========================================================================
-    // All public methods, including PInvoke, are protected with linkchecks.  
-    // Remove the default demands for all PInvoke methods with this global 
+    // All public methods, including PInvoke, are protected with linkchecks.
+    // Remove the default demands for all PInvoke methods with this global
     // declaration on the class.
     //========================================================================
 
-    #if FEATURE_CORECLR
+#if FEATURE_CORECLR
     [System.Security.SecurityCritical] // auto-generated
-    #endif
+#endif
     public static partial class Marshal
-    { 
+    {
         //====================================================================
         // Defines used inside the Marshal class.
         //====================================================================
@@ -65,7 +65,7 @@ namespace System.Runtime.InteropServices
 #endif //FEATURE_COMINTEROP
 
         // Win32 has the concept of Atoms, where a pointer can either be a pointer
-        // or an int.  If it's less than 64K, this is guaranteed to NOT be a 
+        // or an int.  If it's less than 64K, this is guaranteed to NOT be a
         // pointer since the bottom 64K bytes are reserved in a process' page table.
         // We should be careful about deallocating this stuff.  Extracted to
         // a function to avoid C# problems with lack of support for IntPtr.
@@ -73,7 +73,7 @@ namespace System.Runtime.InteropServices
         private static bool IsWin32Atom(IntPtr ptr)
         {
 #if FEATURE_PAL
-        return false;
+            return false;
 #else
             long lPtr = (long)ptr;
             return 0 == (lPtr & HIWORDMASK);
@@ -84,7 +84,7 @@ namespace System.Runtime.InteropServices
         private static bool IsNotWin32Atom(IntPtr ptr)
         {
 #if FEATURE_PAL
-    return false;
+            return false;
 #else
             long lPtr = (long)ptr;
             return 0 != (lPtr & HIWORDMASK);
@@ -102,16 +102,15 @@ namespace System.Runtime.InteropServices
         //====================================================================
         public static readonly int SystemMaxDBCSCharSize = GetSystemMaxDBCSCharSize();
 
-
         //====================================================================
-        // The name, title and description of the assembly that will contain 
-        // the dynamically generated interop types. 
+        // The name, title and description of the assembly that will contain
+        // the dynamically generated interop types.
         //====================================================================
-        private const String s_strConvertedTypeInfoAssemblyName   = "InteropDynamicTypes";
-        private const String s_strConvertedTypeInfoAssemblyTitle  = "Interop Dynamic Types";
-        private const String s_strConvertedTypeInfoAssemblyDesc   = "Type dynamically generated from ITypeInfo's";
-        private const String s_strConvertedTypeInfoNameSpace      = "InteropDynamicTypes";
-
+        private const String s_strConvertedTypeInfoAssemblyName = "InteropDynamicTypes";
+        private const String s_strConvertedTypeInfoAssemblyTitle = "Interop Dynamic Types";
+        private const String s_strConvertedTypeInfoAssemblyDesc =
+            "Type dynamically generated from ITypeInfo's";
+        private const String s_strConvertedTypeInfoNameSpace = "InteropDynamicTypes";
 
         //====================================================================
         // Helper method to retrieve the system's maximum DBCS character size.
@@ -120,75 +119,83 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern int GetSystemMaxDBCSCharSize();
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static String PtrToStringAnsi(IntPtr ptr)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe String PtrToStringAnsi(IntPtr ptr)
         {
-            if (IntPtr.Zero == ptr) {
+            if (IntPtr.Zero == ptr)
+            {
                 return null;
             }
-            else if (IsWin32Atom(ptr)) {
+            else if (IsWin32Atom(ptr))
+            {
                 return null;
             }
-            else {
+            else
+            {
                 int nb = Win32Native.lstrlenA(ptr);
-                if( nb == 0) {
+                if (nb == 0)
+                {
                     return string.Empty;
                 }
-                else {
-                    return new String((sbyte *)ptr);
+                else
+                {
+                    return new String((sbyte*)ptr);
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static String PtrToStringAnsi(IntPtr ptr, int len)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe String PtrToStringAnsi(IntPtr ptr, int len)
         {
             if (ptr == IntPtr.Zero)
                 throw new ArgumentNullException("ptr");
             if (len < 0)
                 throw new ArgumentException("len");
 
-            return new String((sbyte *)ptr, 0, len); 
+            return new String((sbyte*)ptr, 0, len);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static String PtrToStringUni(IntPtr ptr, int len)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe String PtrToStringUni(IntPtr ptr, int len)
         {
             if (ptr == IntPtr.Zero)
                 throw new ArgumentNullException("ptr");
             if (len < 0)
                 throw new ArgumentException("len");
 
-            return new String((char *)ptr, 0, len);
+            return new String((char*)ptr, 0, len);
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static String PtrToStringAuto(IntPtr ptr, int len)
         {
             // Ansi platforms are no longer supported
             return PtrToStringUni(ptr, len);
-        }    
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static String PtrToStringUni(IntPtr ptr)
+        }
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe String PtrToStringUni(IntPtr ptr)
         {
-            if (IntPtr.Zero == ptr) {
+            if (IntPtr.Zero == ptr)
+            {
                 return null;
             }
-            else if (IsWin32Atom(ptr)) {
+            else if (IsWin32Atom(ptr))
+            {
                 return null;
-            } 
-            else {
-                return new String((char *)ptr);
+            }
+            else
+            {
+                return new String((char*)ptr);
             }
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static String PtrToStringAuto(IntPtr ptr)
         {
             // Ansi platforms are no longer supported
             return PtrToStringUni(ptr);
-        }            
+        }
 
         //====================================================================
         // SizeOf()
@@ -217,9 +224,15 @@ namespace System.Runtime.InteropServices
             if (t == null)
                 throw new ArgumentNullException("t");
             if (!(t is RuntimeType))
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeType"), "t");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeType"),
+                    "t"
+                );
             if (t.IsGenericType)
-                throw new ArgumentException(Environment.GetResourceString("Argument_NeedNonGenericType"), "t");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_NeedNonGenericType"),
+                    "t"
+                );
             Contract.EndContractBlock();
 
             return SizeOfHelper(t, true);
@@ -237,7 +250,8 @@ namespace System.Runtime.InteropServices
         /// <typeparam name="T">Provide a value type to figure out its size</typeparam>
         /// <returns>The aligned size of T in bytes.</returns>
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-        internal static uint AlignedSizeOf<T>() where T : struct
+        internal static uint AlignedSizeOf<T>()
+            where T : struct
         {
             uint size = SizeOfType(typeof(T));
             if (size == 1 || size == 2)
@@ -281,16 +295,26 @@ namespace System.Runtime.InteropServices
             if (t == null)
                 throw new ArgumentNullException("t");
             Contract.EndContractBlock();
-            
-            FieldInfo f = t.GetField(fieldName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+
+            FieldInfo f = t.GetField(
+                fieldName,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
             if (f == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_OffsetOfFieldNotFound", t.FullName), "fieldName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_OffsetOfFieldNotFound", t.FullName),
+                    "fieldName"
+                );
             RtFieldInfo rtField = f as RtFieldInfo;
             if (rtField == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeFieldInfo"), "fieldName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeFieldInfo"),
+                    "fieldName"
+                );
 
             return OffsetOfHelper(rtField);
         }
+
         public static IntPtr OffsetOf<T>(string fieldName)
         {
             return OffsetOf(typeof(T), fieldName);
@@ -304,11 +328,11 @@ namespace System.Runtime.InteropServices
         // UnsafeAddrOfPinnedArrayElement()
         //
         // IMPORTANT NOTICE: This method does not do any verification on the
-        // array. It must be used with EXTREME CAUTION since passing in 
-        // an array that is not pinned or in the fixed heap can cause 
+        // array. It must be used with EXTREME CAUTION since passing in
+        // an array that is not pinned or in the fixed heap can cause
         // unexpected results !
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern IntPtr UnsafeAddrOfPinnedArrayElement(Array arr, int index);
@@ -322,113 +346,142 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Copy blocks from CLR arrays to native memory.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(int[]     source, int startIndex, IntPtr destination, int length)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(int[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(char[]    source, int startIndex, IntPtr destination, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(char[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(short[]   source, int startIndex, IntPtr destination, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(short[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(long[]    source, int startIndex, IntPtr destination, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(long[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(float[]   source, int startIndex, IntPtr destination, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(float[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(double[]  source, int startIndex, IntPtr destination, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(double[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void Copy(byte[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void Copy(IntPtr[] source, int startIndex, IntPtr destination, int length)
         {
             CopyToNative(source, startIndex, destination, length);
         }
+
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void CopyToNative(Object source, int startIndex, IntPtr destination, int length);
+        private static extern void CopyToNative(
+            Object source,
+            int startIndex,
+            IntPtr destination,
+            int length
+        );
 
         //====================================================================
         // Copy blocks from native memory to CLR arrays
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(IntPtr source, int[]     destination, int startIndex, int length)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(IntPtr source, int[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(IntPtr source, char[]    destination, int startIndex, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(IntPtr source, char[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(IntPtr source, short[]   destination, int startIndex, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(IntPtr source, short[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(IntPtr source, long[]    destination, int startIndex, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(IntPtr source, long[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(IntPtr source, float[]   destination, int startIndex, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(IntPtr source, float[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void Copy(IntPtr source, double[]  destination, int startIndex, int length)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void Copy(IntPtr source, double[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void Copy(IntPtr source, byte[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void Copy(IntPtr source, IntPtr[] destination, int startIndex, int length)
         {
             CopyToManaged(source, destination, startIndex, length);
         }
+
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void CopyToManaged(IntPtr source, Object destination, int startIndex, int length);
+        private static extern void CopyToManaged(
+            IntPtr source,
+            Object destination,
+            int startIndex,
+            int length
+        );
 
         //====================================================================
         // Read from memory
         //====================================================================
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_RU1")]
+        [DllImport(Win32Native.SHIM, EntryPoint = "ND_RU1")]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern byte ReadByte([MarshalAs(UnmanagedType.AsAny), In] Object ptr, int ofs);    
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern byte ReadByte(
+            [MarshalAs(UnmanagedType.AsAny), In] Object ptr,
+            int ofs
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         public static unsafe byte ReadByte(IntPtr ptr, int ofs)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 return *addr;
             }
             catch (NullReferenceException)
@@ -438,35 +491,38 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static byte ReadByte(IntPtr ptr)
         {
-            return ReadByte(ptr,0);
+            return ReadByte(ptr, 0);
         }
-        
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_RI2")]
+
+        [DllImport(Win32Native.SHIM, EntryPoint = "ND_RI2")]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern short ReadInt16([MarshalAs(UnmanagedType.AsAny),In] Object ptr, int ofs);    
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern short ReadInt16(
+            [MarshalAs(UnmanagedType.AsAny), In] Object ptr,
+            int ofs
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         public static unsafe short ReadInt16(IntPtr ptr, int ofs)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 if ((unchecked((int)addr) & 0x1) == 0)
                 {
                     // aligned read
-                    return *((short *)addr);
+                    return *((short*)addr);
                 }
                 else
                 {
                     // unaligned read
                     short val;
-                    byte *valPtr = (byte *)&val;
+                    byte* valPtr = (byte*)&val;
                     valPtr[0] = addr[0];
                     valPtr[1] = addr[1];
                     return val;
@@ -479,36 +535,42 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static short ReadInt16(IntPtr ptr)
         {
             return ReadInt16(ptr, 0);
         }
-    
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_RI4"), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+
+        [
+            DllImport(Win32Native.SHIM, EntryPoint = "ND_RI4"),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern int ReadInt32([MarshalAs(UnmanagedType.AsAny),In] Object ptr, int ofs);    
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern int ReadInt32(
+            [MarshalAs(UnmanagedType.AsAny), In] Object ptr,
+            int ofs
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
         public static unsafe int ReadInt32(IntPtr ptr, int ofs)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 if ((unchecked((int)addr) & 0x3) == 0)
                 {
                     // aligned read
-                    return *((int *)addr);
+                    return *((int*)addr);
                 }
                 else
                 {
                     // unaligned read
                     int val;
-                    byte *valPtr = (byte *)&val;
+                    byte* valPtr = (byte*)&val;
                     valPtr[0] = addr[0];
                     valPtr[1] = addr[1];
                     valPtr[2] = addr[2];
@@ -522,70 +584,76 @@ namespace System.Runtime.InteropServices
                 throw new AccessViolationException();
             }
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static int ReadInt32(IntPtr ptr)
         {
-            return ReadInt32(ptr,0);
-        }
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static IntPtr ReadIntPtr([MarshalAs(UnmanagedType.AsAny),In] Object ptr, int ofs)
-        {
-            #if WIN32
-                return (IntPtr) ReadInt32(ptr, ofs);
-            #else
-                return (IntPtr) ReadInt64(ptr, ofs);
-            #endif
+            return ReadInt32(ptr, 0);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        public static IntPtr ReadIntPtr([MarshalAs(UnmanagedType.AsAny), In] Object ptr, int ofs)
+        {
+#if WIN32
+            return (IntPtr)ReadInt32(ptr, ofs);
+#else
+            return (IntPtr)ReadInt64(ptr, ofs);
+#endif
+        }
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static IntPtr ReadIntPtr(IntPtr ptr, int ofs)
         {
-            #if WIN32
-                return (IntPtr) ReadInt32(ptr, ofs);
-            #else
-                return (IntPtr) ReadInt64(ptr, ofs);
-            #endif
+#if WIN32
+            return (IntPtr)ReadInt32(ptr, ofs);
+#else
+            return (IntPtr)ReadInt64(ptr, ofs);
+#endif
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static IntPtr ReadIntPtr(IntPtr ptr)
         {
-            #if WIN32
-                return (IntPtr) ReadInt32(ptr, 0);
-            #else
-                return (IntPtr) ReadInt64(ptr, 0);
-            #endif
+#if WIN32
+            return (IntPtr)ReadInt32(ptr, 0);
+#else
+            return (IntPtr)ReadInt64(ptr, 0);
+#endif
         }
 
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_RI8"), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [
+            DllImport(Win32Native.SHIM, EntryPoint = "ND_RI8"),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern long ReadInt64([MarshalAs(UnmanagedType.AsAny),In] Object ptr, int ofs);    
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern long ReadInt64(
+            [MarshalAs(UnmanagedType.AsAny), In] Object ptr,
+            int ofs
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         public static unsafe long ReadInt64(IntPtr ptr, int ofs)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 if ((unchecked((int)addr) & 0x7) == 0)
                 {
                     // aligned read
-                    return *((long *)addr);
+                    return *((long*)addr);
                 }
                 else
                 {
                     // unaligned read
                     long val;
-                    byte *valPtr = (byte *)&val;
+                    byte* valPtr = (byte*)&val;
                     valPtr[0] = addr[0];
                     valPtr[1] = addr[1];
                     valPtr[2] = addr[2];
@@ -603,25 +671,24 @@ namespace System.Runtime.InteropServices
                 throw new AccessViolationException();
             }
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static long ReadInt64(IntPtr ptr)
         {
-            return ReadInt64(ptr,0);
+            return ReadInt64(ptr, 0);
         }
-    
-    
+
         //====================================================================
         // Write to memory
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         public static unsafe void WriteByte(IntPtr ptr, int ofs, byte val)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 *addr = val;
             }
             catch (NullReferenceException)
@@ -631,34 +698,38 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_WU1")]
+        [DllImport(Win32Native.SHIM, EntryPoint = "ND_WU1")]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern void WriteByte([MarshalAs(UnmanagedType.AsAny),In,Out] Object ptr, int ofs, byte val);    
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern void WriteByte(
+            [MarshalAs(UnmanagedType.AsAny), In, Out] Object ptr,
+            int ofs,
+            byte val
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void WriteByte(IntPtr ptr, byte val)
         {
             WriteByte(ptr, 0, val);
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         public static unsafe void WriteInt16(IntPtr ptr, int ofs, short val)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 if ((unchecked((int)addr) & 0x1) == 0)
                 {
                     // aligned write
-                    *((short *)addr) = val;
+                    *((short*)addr) = val;
                 }
                 else
                 {
                     // unaligned write
-                    byte *valPtr = (byte *)&val;
+                    byte* valPtr = (byte*)&val;
                     addr[0] = valPtr[0];
                     addr[1] = valPtr[1];
                 }
@@ -669,53 +740,57 @@ namespace System.Runtime.InteropServices
                 throw new AccessViolationException();
             }
         }
-    
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_WI2")]
+
+        [DllImport(Win32Native.SHIM, EntryPoint = "ND_WI2")]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern void WriteInt16([MarshalAs(UnmanagedType.AsAny),In,Out] Object ptr, int ofs, short val);
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern void WriteInt16(
+            [MarshalAs(UnmanagedType.AsAny), In, Out] Object ptr,
+            int ofs,
+            short val
+        );
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void WriteInt16(IntPtr ptr, short val)
         {
             WriteInt16(ptr, 0, val);
-        }    
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+        }
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void WriteInt16(IntPtr ptr, int ofs, char val)
         {
             WriteInt16(ptr, ofs, (short)val);
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void WriteInt16([In,Out]Object ptr, int ofs, char val)
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void WriteInt16([In, Out] Object ptr, int ofs, char val)
         {
             WriteInt16(ptr, ofs, (short)val);
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void WriteInt16(IntPtr ptr, char val)
         {
             WriteInt16(ptr, 0, (short)val);
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         public static unsafe void WriteInt32(IntPtr ptr, int ofs, int val)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 if ((unchecked((int)addr) & 0x3) == 0)
                 {
                     // aligned write
-                    *((int *)addr) = val;
+                    *((int*)addr) = val;
                 }
                 else
                 {
                     // unaligned write
-                    byte *valPtr = (byte *)&val;
+                    byte* valPtr = (byte*)&val;
                     addr[0] = valPtr[0];
                     addr[1] = valPtr[1];
                     addr[2] = valPtr[2];
@@ -728,65 +803,73 @@ namespace System.Runtime.InteropServices
                 throw new AccessViolationException();
             }
         }
-        
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_WI4")]
+
+        [DllImport(Win32Native.SHIM, EntryPoint = "ND_WI4")]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern void WriteInt32([MarshalAs(UnmanagedType.AsAny),In,Out] Object ptr, int ofs, int val);
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern void WriteInt32(
+            [MarshalAs(UnmanagedType.AsAny), In, Out] Object ptr,
+            int ofs,
+            int val
+        );
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void WriteInt32(IntPtr ptr, int val)
         {
-            WriteInt32(ptr,0,val);
-        }    
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void WriteIntPtr(IntPtr ptr, int ofs, IntPtr val)
-        {
-            #if WIN32
-                WriteInt32(ptr, ofs, (int)val);
-            #else
-                WriteInt64(ptr, ofs, (long)val);
-            #endif
-        }
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void WriteIntPtr([MarshalAs(UnmanagedType.AsAny),In,Out] Object ptr, int ofs, IntPtr val)
-        {
-            #if WIN32
-                WriteInt32(ptr, ofs, (int)val);
-            #else
-                WriteInt64(ptr, ofs, (long)val);
-            #endif
-        }
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void WriteIntPtr(IntPtr ptr, IntPtr val)
-        {
-            #if WIN32
-                WriteInt32(ptr, 0, (int)val);
-            #else
-                WriteInt64(ptr, 0, (long)val);
-            #endif
+            WriteInt32(ptr, 0, val);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void WriteIntPtr(IntPtr ptr, int ofs, IntPtr val)
+        {
+#if WIN32
+            WriteInt32(ptr, ofs, (int)val);
+#else
+            WriteInt64(ptr, ofs, (long)val);
+#endif
+        }
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void WriteIntPtr(
+            [MarshalAs(UnmanagedType.AsAny), In, Out] Object ptr,
+            int ofs,
+            IntPtr val
+        )
+        {
+#if WIN32
+            WriteInt32(ptr, ofs, (int)val);
+#else
+            WriteInt64(ptr, ofs, (long)val);
+#endif
+        }
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void WriteIntPtr(IntPtr ptr, IntPtr val)
+        {
+#if WIN32
+            WriteInt32(ptr, 0, (int)val);
+#else
+            WriteInt64(ptr, 0, (long)val);
+#endif
+        }
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         public static unsafe void WriteInt64(IntPtr ptr, int ofs, long val)
         {
             try
             {
-                byte *addr = (byte *)ptr + ofs;
+                byte* addr = (byte*)ptr + ofs;
                 if ((unchecked((int)addr) & 0x7) == 0)
                 {
                     // aligned write
-                    *((long *)addr) = val;
+                    *((long*)addr) = val;
                 }
                 else
                 {
                     // unaligned write
-                    byte *valPtr = (byte *)&val;
+                    byte* valPtr = (byte*)&val;
                     addr[0] = valPtr[0];
                     addr[1] = valPtr[1];
                     addr[2] = valPtr[2];
@@ -803,29 +886,31 @@ namespace System.Runtime.InteropServices
                 throw new AccessViolationException();
             }
         }
-    
-        [DllImport(Win32Native.SHIM, EntryPoint="ND_WI8")]        
+
+        [DllImport(Win32Native.SHIM, EntryPoint = "ND_WI8")]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        public static extern void WriteInt64([MarshalAs(UnmanagedType.AsAny),In,Out] Object ptr, int ofs, long val);
-    
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated
+        public static extern void WriteInt64(
+            [MarshalAs(UnmanagedType.AsAny), In, Out] Object ptr,
+            int ofs,
+            long val
+        );
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void WriteInt64(IntPtr ptr, long val)
         {
             WriteInt64(ptr, 0, val);
         }
-    
-    
+
         //====================================================================
         // GetLastWin32Error
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static extern int GetLastWin32Error();
-    
 
         //====================================================================
         // SetLastWin32Error
@@ -834,12 +919,11 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal static extern void SetLastWin32Error(int error);
-    
 
         //====================================================================
         // GetHRForLastWin32Error
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static int GetHRForLastWin32Error()
         {
@@ -850,31 +934,32 @@ namespace System.Runtime.InteropServices
                 return (dwLastError & 0x0000FFFF) | unchecked((int)0x80070000);
         }
 
-
         //====================================================================
         // Prelink
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void Prelink(MethodInfo m)
         {
-            if (m == null) 
+            if (m == null)
                 throw new ArgumentNullException("m");
             Contract.EndContractBlock();
 
             RuntimeMethodInfo rmi = m as RuntimeMethodInfo;
 
             if (rmi == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo")
+                );
 
             InternalPrelink(rmi);
         }
-    
+
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
         [SecurityCritical]
         private static extern void InternalPrelink(IRuntimeMethodInfo m);
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void PrelinkAll(Type c)
         {
             if (c == null)
@@ -882,28 +967,30 @@ namespace System.Runtime.InteropServices
             Contract.EndContractBlock();
 
             MethodInfo[] mi = c.GetMethods();
-            if (mi != null) 
+            if (mi != null)
             {
-                for (int i = 0; i < mi.Length; i++) 
+                for (int i = 0; i < mi.Length; i++)
                 {
                     Prelink(mi[i]);
                 }
             }
         }
-    
+
         //====================================================================
         // NumParamBytes
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static int NumParamBytes(MethodInfo m)
         {
-            if (m == null) 
+            if (m == null)
                 throw new ArgumentNullException("m");
             Contract.EndContractBlock();
 
             RuntimeMethodInfo rmi = m as RuntimeMethodInfo;
             if (rmi == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo")
+                );
 
             return InternalNumParamBytes(rmi);
         }
@@ -918,26 +1005,29 @@ namespace System.Runtime.InteropServices
         // These are mostly interesting for Structured exception handling,
         // but need to be exposed for all exceptions (not just SEHException).
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [System.Runtime.InteropServices.ComVisible(true)]
-        public static extern /* struct _EXCEPTION_POINTERS* */ IntPtr GetExceptionPointers();
+        public static extern /* struct _EXCEPTION_POINTERS* */
+        IntPtr GetExceptionPointers();
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetExceptionCode();
 
-
         //====================================================================
         // Marshals data from a structure class to a native memory block.
         // If the structure contains pointers to allocated blocks and
-        // "fDeleteOld" is true, this routine will call DestroyStructure() first. 
+        // "fDeleteOld" is true, this routine will call DestroyStructure() first.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)
+        ]
         [System.Runtime.InteropServices.ComVisible(true)]
         public static extern void StructureToPtr(Object structure, IntPtr ptr, bool fDeleteOld);
 
@@ -950,7 +1040,7 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Marshals data from a native memory block to a preallocated structure class.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [System.Runtime.InteropServices.ComVisible(true)]
         public static void PtrToStructure(IntPtr ptr, Object structure)
         {
@@ -962,32 +1052,47 @@ namespace System.Runtime.InteropServices
         {
             PtrToStructure(ptr, (object)structure);
         }
-        
+
         //====================================================================
         // Creates a new instance of "structuretype" and marshals data from a
         // native memory block to it.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [System.Runtime.InteropServices.ComVisible(true)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public static Object PtrToStructure(IntPtr ptr, Type structureType)
         {
-            if (ptr == IntPtr.Zero) return null;
+            if (ptr == IntPtr.Zero)
+                return null;
 
             if (structureType == null)
                 throw new ArgumentNullException("structureType");
 
             if (structureType.IsGenericType)
-                throw new ArgumentException(Environment.GetResourceString("Argument_NeedNonGenericType"), "structureType");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_NeedNonGenericType"),
+                    "structureType"
+                );
 
             RuntimeType rt = structureType.UnderlyingSystemType as RuntimeType;
 
             if (rt == null)
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeType"), "type");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeType"),
+                    "type"
+                );
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
 
-            Object structure = rt.CreateInstanceDefaultCtor(false /*publicOnly*/, false /*skipCheckThis*/, false /*fillCache*/, ref stackMark);
+            Object structure = rt.CreateInstanceDefaultCtor(
+                false /*publicOnly*/
+                ,
+                false /*skipCheckThis*/
+                ,
+                false /*fillCache*/
+                ,
+                ref stackMark
+            );
             PtrToStructureHelper(ptr, structure, true);
             return structure;
         }
@@ -1003,14 +1108,17 @@ namespace System.Runtime.InteropServices
         //====================================================================
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void PtrToStructureHelper(IntPtr ptr, Object structure, bool allowValueClasses);
-
+        private static extern void PtrToStructureHelper(
+            IntPtr ptr,
+            Object structure,
+            bool allowValueClasses
+        );
 
         //====================================================================
         // Freeds all substructures pointed to by the native memory block.
         // "structureclass" is used to provide layout information.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [System.Runtime.InteropServices.ComVisible(true)]
@@ -1023,11 +1131,11 @@ namespace System.Runtime.InteropServices
         }
 
         //====================================================================
-        // Returns the HInstance for this module.  Returns -1 if the module 
-        // doesn't have an HInstance.  In Memory (Dynamic) Modules won't have 
+        // Returns the HInstance for this module.  Returns -1 if the module
+        // doesn't have an HInstance.  In Memory (Dynamic) Modules won't have
         // an HInstance.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static IntPtr GetHINSTANCE(Module m)
@@ -1045,27 +1153,30 @@ namespace System.Runtime.InteropServices
             }
 
             if (rtModule == null)
-                throw new ArgumentNullException(Environment.GetResourceString("Argument_MustBeRuntimeModule"));
+                throw new ArgumentNullException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeModule")
+                );
 
             return GetHINSTANCE(rtModule.GetNativeHandle());
-        }    
+        }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.Machine)]
         [SuppressUnmanagedCodeSecurity]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
-        private extern static IntPtr GetHINSTANCE(RuntimeModule m);
+        private static extern IntPtr GetHINSTANCE(RuntimeModule m);
 
         //====================================================================
         // Throws a CLR exception based on the HRESULT.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void ThrowExceptionForHR(int errorCode)
         {
             if (errorCode < 0)
                 ThrowExceptionForHRInternal(errorCode, IntPtr.Zero);
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void ThrowExceptionForHR(int errorCode, IntPtr errorInfo)
         {
             if (errorCode < 0)
@@ -1076,24 +1187,24 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern void ThrowExceptionForHRInternal(int errorCode, IntPtr errorInfo);
 
-
         //====================================================================
         // Converts the HRESULT to a CLR exception.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Exception GetExceptionForHR(int errorCode)
         {
             if (errorCode < 0)
                 return GetExceptionForHRInternal(errorCode, IntPtr.Zero);
-            else 
+            else
                 return null;
         }
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Exception GetExceptionForHR(int errorCode, IntPtr errorInfo)
         {
             if (errorCode < 0)
                 return GetExceptionForHRInternal(errorCode, errorInfo);
-            else 
+            else
                 return null;
         }
 
@@ -1101,12 +1212,11 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern Exception GetExceptionForHRInternal(int errorCode, IntPtr errorInfo);
 
-
         //====================================================================
         // Converts the CLR exception to an HRESULT. This function also sets
         // up an IErrorInfo for the exception.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetHRForException(Exception e);
@@ -1117,7 +1227,7 @@ namespace System.Runtime.InteropServices
         // This function is only used in WinRT and converts ObjectDisposedException
         // to RO_E_CLOSED
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern int GetHRForException_WinRT(Exception e);
@@ -1125,25 +1235,39 @@ namespace System.Runtime.InteropServices
 #if !FEATURE_PAL
         //====================================================================
         // This method is intended for compiler code generators rather
-        // than applications. 
+        // than applications.
         //====================================================================
-        // 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [ObsoleteAttribute("The GetUnmanagedThunkForManagedMethodPtr method has been deprecated and will be removed in a future release.", false)]
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
+        [ObsoleteAttribute(
+            "The GetUnmanagedThunkForManagedMethodPtr method has been deprecated and will be removed in a future release.",
+            false
+        )]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern IntPtr GetUnmanagedThunkForManagedMethodPtr(IntPtr pfnMethodToWrap, IntPtr pbSignature, int cbSignature);
+        public static extern IntPtr GetUnmanagedThunkForManagedMethodPtr(
+            IntPtr pfnMethodToWrap,
+            IntPtr pbSignature,
+            int cbSignature
+        );
 
         //====================================================================
         // This method is intended for compiler code generators rather
-        // than applications. 
+        // than applications.
         //====================================================================
-        // 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [ObsoleteAttribute("The GetManagedThunkForUnmanagedMethodPtr method has been deprecated and will be removed in a future release.", false)]
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
+        [ObsoleteAttribute(
+            "The GetManagedThunkForUnmanagedMethodPtr method has been deprecated and will be removed in a future release.",
+            false
+        )]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern IntPtr GetManagedThunkForUnmanagedMethodPtr(IntPtr pfnMethodToWrap, IntPtr pbSignature, int cbSignature);
+        public static extern IntPtr GetManagedThunkForUnmanagedMethodPtr(
+            IntPtr pfnMethodToWrap,
+            IntPtr pbSignature,
+            int cbSignature
+        );
 
         //====================================================================
         // The hosting APIs allow a sophisticated host to schedule fibers
@@ -1151,13 +1275,19 @@ namespace System.Runtime.InteropServices
         // activity.  A fiber cookie can be redeemed for its managed Thread
         // object by calling the following service.
         //====================================================================
-        // 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [ObsoleteAttribute("The GetThreadFromFiberCookie method has been deprecated.  Use the hosting API to perform this operation.", false)]
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
+        [ObsoleteAttribute(
+            "The GetThreadFromFiberCookie method has been deprecated.  Use the hosting API to perform this operation.",
+            false
+        )]
         public static Thread GetThreadFromFiberCookie(int cookie)
         {
             if (cookie == 0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_ArgumentZero"), "cookie");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ArgumentZero"),
+                    "cookie"
+                );
             Contract.EndContractBlock();
 
             return InternalGetThreadFromFiberCookie(cookie);
@@ -1168,16 +1298,15 @@ namespace System.Runtime.InteropServices
         private static extern Thread InternalGetThreadFromFiberCookie(int cookie);
 #endif //!FEATURE_PAL
 
-
         //====================================================================
         // Memory allocation and deallocation.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static IntPtr AllocHGlobal(IntPtr cb)
         {
-            // For backwards compatibility on 32 bit platforms, ensure we pass values between 
-            // Int32.MaxValue and UInt32.MaxValue to Windows.  If the binary has had the 
+            // For backwards compatibility on 32 bit platforms, ensure we pass values between
+            // Int32.MaxValue and UInt32.MaxValue to Windows.  If the binary has had the
             // LARGEADDRESSAWARE bit set in the PE header, it may get 3 or 4 GB of user mode
             // address space.  It is remotely that those allocations could have succeeded,
             // though I couldn't reproduce that.  In either case, that means we should continue
@@ -1191,47 +1320,50 @@ namespace System.Runtime.InteropServices
 
             IntPtr pNewMem = Win32Native.LocalAlloc_NoSafeHandle(LMEM_FIXED, unchecked(numBytes));
 
-            if (pNewMem == IntPtr.Zero) {
+            if (pNewMem == IntPtr.Zero)
+            {
                 throw new OutOfMemoryException();
             }
             return pNewMem;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static IntPtr AllocHGlobal(int cb)
         {
             return AllocHGlobal((IntPtr)cb);
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static void FreeHGlobal(IntPtr hglobal)
         {
-            if (IsNotWin32Atom(hglobal)) {
-                if (IntPtr.Zero != Win32Native.LocalFree(hglobal)) {
+            if (IsNotWin32Atom(hglobal))
+            {
+                if (IntPtr.Zero != Win32Native.LocalFree(hglobal))
+                {
                     ThrowExceptionForHR(GetHRForLastWin32Error());
                 }
             }
         }
 
 #if !FEATURE_PAL
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr ReAllocHGlobal(IntPtr pv, IntPtr cb)
         {
             IntPtr pNewMem = Win32Native.LocalReAlloc(pv, cb, LMEM_MOVEABLE);
-            if (pNewMem == IntPtr.Zero) {
+            if (pNewMem == IntPtr.Zero)
+            {
                 throw new OutOfMemoryException();
             }
             return pNewMem;
         }
 
-
         //====================================================================
         // String convertions.
-        //====================================================================          
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static IntPtr StringToHGlobalAnsi(String s)
+        //====================================================================
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe IntPtr StringToHGlobalAnsi(String s)
         {
             if (s == null)
             {
@@ -1247,22 +1379,22 @@ namespace System.Runtime.InteropServices
 
                 UIntPtr len = new UIntPtr((uint)nb);
                 IntPtr hglobal = Win32Native.LocalAlloc_NoSafeHandle(LMEM_FIXED, len);
-                
+
                 if (hglobal == IntPtr.Zero)
                 {
                     throw new OutOfMemoryException();
                 }
                 else
                 {
-                    s.ConvertToAnsi((byte *)hglobal, nb, false, false);
+                    s.ConvertToAnsi((byte*)hglobal, nb, false, false);
                     return hglobal;
                 }
             }
-        }    
+        }
 #endif // !FEATURE_PAL
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static IntPtr StringToHGlobalUni(String s)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe IntPtr StringToHGlobalUni(String s)
         {
             if (s == null)
             {
@@ -1278,7 +1410,7 @@ namespace System.Runtime.InteropServices
 
                 UIntPtr len = new UIntPtr((uint)nb);
                 IntPtr hglobal = Win32Native.LocalAlloc_NoSafeHandle(LMEM_FIXED, len);
-                
+
                 if (hglobal == IntPtr.Zero)
                 {
                     throw new OutOfMemoryException();
@@ -1295,7 +1427,7 @@ namespace System.Runtime.InteropServices
         }
 
 #if !FEATURE_PAL
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr StringToHGlobalAuto(String s)
         {
             // Ansi platforms are no longer supported
@@ -1305,44 +1437,54 @@ namespace System.Runtime.InteropServices
 
 #if FEATURE_COMINTEROP
 
-		internal static readonly Guid ManagedNameGuid = new Guid("{0F21F359-AB84-41E8-9A78-36D110E6D2F9}"); 
-       
+        internal static readonly Guid ManagedNameGuid = new Guid(
+            "{0F21F359-AB84-41E8-9A78-36D110E6D2F9}"
+        );
+
         //====================================================================
         // Given a managed object that wraps a UCOMITypeLib, return its name
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("Use System.Runtime.InteropServices.Marshal.GetTypeLibName(ITypeLib pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.", false)]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "Use System.Runtime.InteropServices.Marshal.GetTypeLibName(ITypeLib pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.",
+            false
+        )]
         public static String GetTypeLibName(UCOMITypeLib pTLB)
         {
             return GetTypeLibName((ITypeLib)pTLB);
         }
 
-
         //====================================================================
         // Given a managed object that wraps an ITypeLib, return its name
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static String GetTypeLibName(ITypeLib typelib)
         {
             if (typelib == null)
                 throw new ArgumentNullException("typelib");
             Contract.EndContractBlock();
-            
+
             String strTypeLibName = null;
             String strDocString = null;
             int dwHelpContext = 0;
             String strHelpFile = null;
 
-            typelib.GetDocumentation(-1, out strTypeLibName, out strDocString, out dwHelpContext, out strHelpFile);
+            typelib.GetDocumentation(
+                -1,
+                out strTypeLibName,
+                out strDocString,
+                out dwHelpContext,
+                out strHelpFile
+            );
 
             return strTypeLibName;
-        }   
+        }
 
         //====================================================================
         // Internal version of GetTypeLibName
         // Support GUID_ManagedName which aligns with TlbImp
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         internal static String GetTypeLibNameInternal(ITypeLib typelib)
         {
             if (typelib == null)
@@ -1359,33 +1501,43 @@ namespace System.Runtime.InteropServices
                 try
                 {
                     typeLib2.GetCustData(ref guid, out val);
-                }       
-                catch(Exception)
+                }
+                catch (Exception)
                 {
                     val = null;
                 }
-                
+
                 if (val != null && val.GetType() == typeof(string))
-                {               
+                {
                     string customManagedNamespace = (string)val;
                     customManagedNamespace = customManagedNamespace.Trim();
                     if (customManagedNamespace.EndsWith(".DLL", StringComparison.OrdinalIgnoreCase))
-                        customManagedNamespace = customManagedNamespace.Substring(0, customManagedNamespace.Length - 4);
-                    else if (customManagedNamespace.EndsWith(".EXE", StringComparison.OrdinalIgnoreCase))
-                        customManagedNamespace = customManagedNamespace.Substring(0, customManagedNamespace.Length - 4);
+                        customManagedNamespace = customManagedNamespace.Substring(
+                            0,
+                            customManagedNamespace.Length - 4
+                        );
+                    else if (
+                        customManagedNamespace.EndsWith(".EXE", StringComparison.OrdinalIgnoreCase)
+                    )
+                        customManagedNamespace = customManagedNamespace.Substring(
+                            0,
+                            customManagedNamespace.Length - 4
+                        );
                     return customManagedNamespace;
                 }
             }
-			
+
             return GetTypeLibName(typelib);
         }
-        
 
         //====================================================================
         // Given an managed object that wraps an UCOMITypeLib, return its guid
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("Use System.Runtime.InteropServices.Marshal.GetTypeLibGuid(ITypeLib pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.", false)]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "Use System.Runtime.InteropServices.Marshal.GetTypeLibGuid(ITypeLib pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.",
+            false
+        )]
         public static Guid GetTypeLibGuid(UCOMITypeLib pTLB)
         {
             return GetTypeLibGuid((ITypeLib)pTLB);
@@ -1394,11 +1546,11 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Given an managed object that wraps an ITypeLib, return its guid
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Guid GetTypeLibGuid(ITypeLib typelib)
         {
-            Guid result = new Guid ();
-            FCallGetTypeLibGuid (ref result, typelib);
+            Guid result = new Guid();
+            FCallGetTypeLibGuid(ref result, typelib);
             return result;
         }
 
@@ -1409,8 +1561,11 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Given a managed object that wraps a UCOMITypeLib, return its lcid
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("Use System.Runtime.InteropServices.Marshal.GetTypeLibLcid(ITypeLib pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.", false)]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "Use System.Runtime.InteropServices.Marshal.GetTypeLibLcid(ITypeLib pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.",
+            false
+        )]
         public static int GetTypeLibLcid(UCOMITypeLib pTLB)
         {
             return GetTypeLibLcid((ITypeLib)pTLB);
@@ -1419,27 +1574,31 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Given a managed object that wraps an ITypeLib, return its lcid
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetTypeLibLcid(ITypeLib typelib);
 
         //====================================================================
-        // Given a managed object that wraps an ITypeLib, return it's 
+        // Given a managed object that wraps an ITypeLib, return it's
         // version information.
         //====================================================================
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void GetTypeLibVersion(ITypeLib typeLibrary, out int major, out int minor);
+        internal static extern void GetTypeLibVersion(
+            ITypeLib typeLibrary,
+            out int major,
+            out int minor
+        );
 
         //====================================================================
         // Given a managed object that wraps an ITypeInfo, return its guid.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Guid GetTypeInfoGuid(ITypeInfo typeInfo)
         {
-            Guid result = new Guid ();
-            FCallGetTypeInfoGuid (ref result, typeInfo);
+            Guid result = new Guid();
+            FCallGetTypeInfoGuid(ref result, typeInfo);
             return result;
         }
 
@@ -1451,7 +1610,7 @@ namespace System.Runtime.InteropServices
         // Given a assembly, return the TLBID that will be generated for the
         // typelib exported from the assembly.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Guid GetTypeLibGuidForAssembly(Assembly asm)
         {
             if (asm == null)
@@ -1460,16 +1619,22 @@ namespace System.Runtime.InteropServices
 
             RuntimeAssembly rtAssembly = asm as RuntimeAssembly;
             if (rtAssembly == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeAssembly"), "asm");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeAssembly"),
+                    "asm"
+                );
 
             Guid result = new Guid();
             FCallGetTypeLibGuidForAssembly(ref result, rtAssembly);
             return result;
         }
 
-        [ResourceExposure(ResourceScope.None)]  // Scoped to assembly
+        [ResourceExposure(ResourceScope.None)] // Scoped to assembly
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void FCallGetTypeLibGuidForAssembly(ref Guid result, RuntimeAssembly asm);
+        private static extern void FCallGetTypeLibGuidForAssembly(
+            ref Guid result,
+            RuntimeAssembly asm
+        );
 
         //====================================================================
         // Given a assembly, return the version number of the type library
@@ -1477,11 +1642,19 @@ namespace System.Runtime.InteropServices
         //====================================================================
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void _GetTypeLibVersionForAssembly(RuntimeAssembly inputAssembly, out int majorVersion, out int minorVersion);
+        private static extern void _GetTypeLibVersionForAssembly(
+            RuntimeAssembly inputAssembly,
+            out int majorVersion,
+            out int minorVersion
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
-        public static void GetTypeLibVersionForAssembly(Assembly inputAssembly, out int majorVersion, out int minorVersion) 
+        public static void GetTypeLibVersionForAssembly(
+            Assembly inputAssembly,
+            out int majorVersion,
+            out int minorVersion
+        )
         {
             if (inputAssembly == null)
                 throw new ArgumentNullException("inputAssembly");
@@ -1489,7 +1662,10 @@ namespace System.Runtime.InteropServices
 
             RuntimeAssembly rtAssembly = inputAssembly as RuntimeAssembly;
             if (rtAssembly == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeAssembly"), "inputAssembly");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeAssembly"),
+                    "inputAssembly"
+                );
 
             _GetTypeLibVersionForAssembly(rtAssembly, out majorVersion, out minorVersion);
         }
@@ -1497,8 +1673,11 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Given a managed object that wraps an UCOMITypeInfo, return its name
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("Use System.Runtime.InteropServices.Marshal.GetTypeInfoName(ITypeInfo pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.", false)]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "Use System.Runtime.InteropServices.Marshal.GetTypeInfoName(ITypeInfo pTLB) instead. http://go.microsoft.com/fwlink/?linkid=14202&ID=0000011.",
+            false
+        )]
         public static String GetTypeInfoName(UCOMITypeInfo pTI)
         {
             return GetTypeInfoName((ITypeInfo)pTI);
@@ -1507,19 +1686,25 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Given a managed object that wraps an ITypeInfo, return its name
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static String GetTypeInfoName(ITypeInfo typeInfo)
         {
             if (typeInfo == null)
                 throw new ArgumentNullException("typeInfo");
             Contract.EndContractBlock();
-            
+
             String strTypeLibName = null;
             String strDocString = null;
             int dwHelpContext = 0;
             String strHelpFile = null;
 
-            typeInfo.GetDocumentation(-1, out strTypeLibName, out strDocString, out dwHelpContext, out strHelpFile);
+            typeInfo.GetDocumentation(
+                -1,
+                out strTypeLibName,
+                out strDocString,
+                out dwHelpContext,
+                out strHelpFile
+            );
 
             return strTypeLibName;
         }
@@ -1528,13 +1713,13 @@ namespace System.Runtime.InteropServices
         // Internal version of GetTypeInfoName
         // Support GUID_ManagedName which aligns with TlbImp
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         internal static String GetTypeInfoNameInternal(ITypeInfo typeInfo, out bool hasManagedName)
         {
             if (typeInfo == null)
                 throw new ArgumentNullException("typeInfo");
             Contract.EndContractBlock();
-            
+
             // Try ManagedNameGuid first
             ITypeInfo2 typeInfo2 = typeInfo as ITypeInfo2;
             if (typeInfo2 != null)
@@ -1545,17 +1730,17 @@ namespace System.Runtime.InteropServices
                 try
                 {
                     typeInfo2.GetCustData(ref guid, out val);
-                }       
-                catch(Exception)
+                }
+                catch (Exception)
                 {
                     val = null;
                 }
-                
+
                 if (val != null && val.GetType() == typeof(string))
                 {
                     hasManagedName = true;
                     return (string)val;
-                }               
+                }
             }
 
             hasManagedName = false;
@@ -1566,7 +1751,7 @@ namespace System.Runtime.InteropServices
         // Get the corresponding managed name as converted by TlbImp
         // Used to get the type using GetType() from imported assemblies
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         internal static String GetManagedTypeInfoNameInternal(ITypeLib typeLib, ITypeInfo typeInfo)
         {
             bool hasManagedName;
@@ -1578,7 +1763,7 @@ namespace System.Runtime.InteropServices
         }
 
         //====================================================================
-        // If a type with the specified GUID is loaded, this method will 
+        // If a type with the specified GUID is loaded, this method will
         // return the reflection type that represents it. Otherwise it returns
         // NULL.
         //====================================================================
@@ -1586,12 +1771,15 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern Type GetLoadedTypeForGUID(ref Guid guid);
 
-#if !FEATURE_CORECLR // current implementation requires reflection only load 
+#if !FEATURE_CORECLR // current implementation requires reflection only load
         //====================================================================
         // map ITypeInfo* to Type
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static Type GetTypeForITypeInfo(IntPtr /* ITypeInfo* */ piTypeInfo)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static Type GetTypeForITypeInfo(
+            IntPtr /* ITypeInfo* */
+            piTypeInfo
+        )
         {
             ITypeInfo pTI = null;
             ITypeLib pTLB = null;
@@ -1619,11 +1807,11 @@ namespace System.Runtime.InteropServices
 
             // There is no type with the specified GUID in the app domain so lets
             // try and convert the containing typelib.
-            try 
+            try
             {
                 pTI.GetContainingTypeLib(out pTLB, out Index);
             }
-            catch(COMException)
+            catch (COMException)
             {
                 pTLB = null;
             }
@@ -1632,7 +1820,14 @@ namespace System.Runtime.InteropServices
             if (pTLB != null)
             {
                 // Get the assembly name from the typelib.
-                AssemblyName AsmName = TypeLibConverter.GetAssemblyNameFromTypelib(pTLB, null, null, null, null, AssemblyNameFlags.None);
+                AssemblyName AsmName = TypeLibConverter.GetAssemblyNameFromTypelib(
+                    pTLB,
+                    null,
+                    null,
+                    null,
+                    null,
+                    AssemblyNameFlags.None
+                );
                 String AsmNameString = AsmName.FullName;
 
                 // Check to see if the assembly that will contain the type already exists.
@@ -1640,8 +1835,13 @@ namespace System.Runtime.InteropServices
                 int NumAssemblies = aAssemblies.Length;
                 for (int i = 0; i < NumAssemblies; i++)
                 {
-                    if (String.Compare(aAssemblies[i].FullName, 
-                                       AsmNameString,StringComparison.Ordinal) == 0)
+                    if (
+                        String.Compare(
+                            aAssemblies[i].FullName,
+                            AsmNameString,
+                            StringComparison.Ordinal
+                        ) == 0
+                    )
                         AsmBldr = aAssemblies[i];
                 }
 
@@ -1649,26 +1849,34 @@ namespace System.Runtime.InteropServices
                 if (AsmBldr == null)
                 {
                     TlbConverter = new TypeLibConverter();
-                    AsmBldr = TlbConverter.ConvertTypeLibToAssembly(pTLB, 
-                        GetTypeLibName(pTLB) + ".dll", 0, new ImporterCallback(), null, null, null, null);
+                    AsmBldr = TlbConverter.ConvertTypeLibToAssembly(
+                        pTLB,
+                        GetTypeLibName(pTLB) + ".dll",
+                        0,
+                        new ImporterCallback(),
+                        null,
+                        null,
+                        null,
+                        null
+                    );
                 }
 
                 // Load the type object from the imported typelib.
                 // Call GetManagedTypeInfoNameInternal to align with TlbImp behavior
                 TypeObj = AsmBldr.GetType(GetManagedTypeInfoNameInternal(pTLB, pTI), true, false);
-                if (TypeObj != null && !TypeObj.IsVisible) 
+                if (TypeObj != null && !TypeObj.IsVisible)
                     TypeObj = null;
             }
             else
             {
-                // If the ITypeInfo does not have a containing typelib then simply 
+                // If the ITypeInfo does not have a containing typelib then simply
                 // return Object as the type.
                 TypeObj = typeof(Object);
             }
 
             return TypeObj;
         }
-#endif // #if !FEATURE_CORECLR 
+#endif // #if !FEATURE_CORECLR
 
         // This method is identical to Type.GetTypeFromCLSID. Since it's interop specific, we expose it
         // on Marshal for more consistent API surface.
@@ -1683,71 +1891,80 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // map Type to ITypeInfo*
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern IntPtr /* ITypeInfo* */ GetITypeInfoForType(Type t);
+        public static extern IntPtr /* ITypeInfo* */
+        GetITypeInfoForType(Type t);
 
         //====================================================================
         // return the IUnknown* for an Object if the current context
-        // is the one where the RCW was first seen. Will return null 
+        // is the one where the RCW was first seen. Will return null
         // otherwise.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr /* IUnknown* */ GetIUnknownForObject(Object o)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr /* IUnknown* */
+        GetIUnknownForObject(Object o)
         {
             return GetIUnknownForObjectNative(o, false);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr /* IUnknown* */ GetIUnknownForObjectInContext(Object o)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr /* IUnknown* */
+        GetIUnknownForObjectInContext(Object o)
         {
             return GetIUnknownForObjectNative(o, true);
         }
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr /* IUnknown* */ GetIUnknownForObjectNative(Object o, bool onlyInContext);
+        private static extern IntPtr /* IUnknown* */
+        GetIUnknownForObjectNative(Object o, bool onlyInContext);
 
         //====================================================================
-        // return the raw IUnknown* for a COM Object not related to current 
+        // return the raw IUnknown* for a COM Object not related to current
         // context
         // Does not call AddRef
         //====================================================================
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern IntPtr /* IUnknown* */ GetRawIUnknownForComObjectNoAddRef(Object o);
+        internal static extern IntPtr /* IUnknown* */
+        GetRawIUnknownForComObjectNoAddRef(Object o);
 
         //====================================================================
         // return the IDispatch* for an Object
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr /* IDispatch */ GetIDispatchForObject(Object o)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr /* IDispatch */
+        GetIDispatchForObject(Object o)
         {
             return GetIDispatchForObjectNative(o, false);
         }
 
         //====================================================================
         // return the IDispatch* for an Object if the current context
-        // is the one where the RCW was first seen. Will return null 
+        // is the one where the RCW was first seen. Will return null
         // otherwise.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr /* IUnknown* */ GetIDispatchForObjectInContext(Object o)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr /* IUnknown* */
+        GetIDispatchForObjectInContext(Object o)
         {
             return GetIDispatchForObjectNative(o, true);
         }
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr /* IUnknown* */ GetIDispatchForObjectNative(Object o, bool onlyInContext);
+        private static extern IntPtr /* IUnknown* */
+        GetIDispatchForObjectNative(Object o, bool onlyInContext);
 
         //====================================================================
         // return the IUnknown* representing the interface for the Object
         // Object o should support Type T
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr /* IUnknown* */ GetComInterfaceForObject(Object o, Type T)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr /* IUnknown* */
+        GetComInterfaceForObject(Object o, Type T)
         {
             return GetComInterfaceForObjectNative(o, T, false, true);
         }
@@ -1760,39 +1977,52 @@ namespace System.Runtime.InteropServices
 
         //====================================================================
         // return the IUnknown* representing the interface for the Object
-        // Object o should support Type T, it refer the value of mode to 
+        // Object o should support Type T, it refer the value of mode to
         // invoke customized QueryInterface or not
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr /* IUnknown* */ GetComInterfaceForObject(Object o, Type T, CustomQueryInterfaceMode mode)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr /* IUnknown* */
+        GetComInterfaceForObject(Object o, Type T, CustomQueryInterfaceMode mode)
         {
-            bool bEnableCustomizedQueryInterface = ((mode == CustomQueryInterfaceMode.Allow) ? true : false);
+            bool bEnableCustomizedQueryInterface = (
+                (mode == CustomQueryInterfaceMode.Allow) ? true : false
+            );
             return GetComInterfaceForObjectNative(o, T, false, bEnableCustomizedQueryInterface);
         }
 
         //====================================================================
         // return the IUnknown* representing the interface for the Object
         // Object o should support Type T if the current context
-        // is the one where the RCW was first seen. Will return null 
+        // is the one where the RCW was first seen. Will return null
         // otherwise.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr /* IUnknown* */ GetComInterfaceForObjectInContext(Object o, Type t)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr /* IUnknown* */
+        GetComInterfaceForObjectInContext(Object o, Type t)
         {
             return GetComInterfaceForObjectNative(o, t, true, true);
         }
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr /* IUnknown* */ GetComInterfaceForObjectNative(Object o, Type t, bool onlyInContext, bool fEnalbeCustomizedQueryInterface);
+        private static extern IntPtr /* IUnknown* */
+        GetComInterfaceForObjectNative(
+            Object o,
+            Type t,
+            bool onlyInContext,
+            bool fEnalbeCustomizedQueryInterface
+        );
 
         //====================================================================
         // return an Object for IUnknown
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern Object GetObjectForIUnknown(IntPtr /* IUnknown* */ pUnk);
+        public static extern Object GetObjectForIUnknown(
+            IntPtr /* IUnknown* */
+            pUnk
+        );
 
         //====================================================================
         // Return a unique Object given an IUnknown.  This ensures that you
@@ -1801,23 +2031,27 @@ namespace System.Runtime.InteropServices
         //  where you want to be able to call ReleaseComObject on a RCW
         //  and not worry about other active uses of said RCW.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern Object GetUniqueObjectForIUnknown(IntPtr unknown);
 
         //====================================================================
-        // return an Object for IUnknown, using the Type T, 
-        //  NOTE: 
-        //  Type T should be either a COM imported Type or a sub-type of COM 
+        // return an Object for IUnknown, using the Type T,
+        //  NOTE:
+        //  Type T should be either a COM imported Type or a sub-type of COM
         //  imported Type
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern Object GetTypedObjectForIUnknown(IntPtr /* IUnknown* */ pUnk, Type t);
+        public static extern Object GetTypedObjectForIUnknown(
+            IntPtr /* IUnknown* */
+            pUnk,
+            Type t
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern IntPtr CreateAggregatedObject(IntPtr pOuter, Object o);
@@ -1828,7 +2062,7 @@ namespace System.Runtime.InteropServices
             return CreateAggregatedObject(pOuter, (object)o);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void CleanupUnusedObjectsInCurrentContext();
@@ -1847,10 +2081,9 @@ namespace System.Runtime.InteropServices
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern bool IsComObject(Object o);
-
 #endif // FEATURE_COMINTEROP
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr AllocCoTaskMem(int cb)
         {
             IntPtr pNewMem = Win32Native.CoTaskMemAlloc(new UIntPtr((uint)cb));
@@ -1861,8 +2094,8 @@ namespace System.Runtime.InteropServices
             return pNewMem;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static IntPtr StringToCoTaskMemUni(String s)
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe IntPtr StringToCoTaskMemUni(String s)
         {
             if (s == null)
             {
@@ -1875,7 +2108,7 @@ namespace System.Runtime.InteropServices
                 // Overflow checking
                 if (nb < s.Length)
                     throw new ArgumentOutOfRangeException("s");
-                
+
                 IntPtr hglobal = Win32Native.CoTaskMemAlloc(new UIntPtr((uint)nb));
 
                 if (hglobal == IntPtr.Zero)
@@ -1886,22 +2119,22 @@ namespace System.Runtime.InteropServices
                 {
                     fixed (char* firstChar = s)
                     {
-                        String.wstrcpy((char *)hglobal, firstChar, s.Length + 1);
+                        String.wstrcpy((char*)hglobal, firstChar, s.Length + 1);
                     }
                     return hglobal;
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr StringToCoTaskMemAuto(String s)
         {
             // Ansi platforms are no longer supported
             return StringToCoTaskMemUni(s);
-        } 
-   
-        [System.Security.SecurityCritical]  // auto-generated_required
-        unsafe public static IntPtr StringToCoTaskMemAnsi(String s)
+        }
+
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static unsafe IntPtr StringToCoTaskMemAnsi(String s)
         {
             if (s == null)
             {
@@ -1923,21 +2156,22 @@ namespace System.Runtime.InteropServices
                 }
                 else
                 {
-                    s.ConvertToAnsi((byte *)hglobal, nb, false, false);
+                    s.ConvertToAnsi((byte*)hglobal, nb, false, false);
                     return hglobal;
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void FreeCoTaskMem(IntPtr ptr)
         {
-            if (IsNotWin32Atom(ptr)) {
+            if (IsNotWin32Atom(ptr))
+            {
                 Win32Native.CoTaskMemFree(ptr);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr ReAllocCoTaskMem(IntPtr pv, int cb)
         {
             IntPtr pNewMem = Win32Native.CoTaskMemRealloc(pv, new UIntPtr((uint)cb));
@@ -1948,17 +2182,16 @@ namespace System.Runtime.InteropServices
             return pNewMem;
         }
 
-
 #if FEATURE_COMINTEROP
         //====================================================================
         // release the COM component and if the reference hits 0 zombie this object
         // further usage of this Object might throw an exception
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static int ReleaseComObject(Object o)
         {
             __ComObject co = null;
-            
+
             // Make sure the obj is an __ComObject.
             try
             {
@@ -1966,22 +2199,24 @@ namespace System.Runtime.InteropServices
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjNotComObject"), "o");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjNotComObject"),
+                    "o"
+                );
             }
-            
+
             return co.ReleaseSelf();
-        }    
+        }
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern int InternalReleaseComObject(Object o);
 
-        
         //====================================================================
         // release the COM component and zombie this object
         // further usage of this Object might throw an exception
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Int32 FinalReleaseComObject(Object o)
         {
             if (o == null)
@@ -1997,13 +2232,16 @@ namespace System.Runtime.InteropServices
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjNotComObject"), "o");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjNotComObject"),
+                    "o"
+                );
             }
-            
+
             co.FinalReleaseSelf();
 
             return 0;
-        }    
+        }
 
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -2012,7 +2250,7 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // This method retrieves data from the COM object.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Object GetComObjectData(Object obj, Object key)
         {
             // Validate that the arguments aren't null.
@@ -2031,12 +2269,18 @@ namespace System.Runtime.InteropServices
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjNotComObject"), "obj");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjNotComObject"),
+                    "obj"
+                );
             }
 
             if (obj.GetType().IsWindowsRuntimeObject)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjIsWinRTObject"), "obj");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjIsWinRTObject"),
+                    "obj"
+                );
             }
 
             // Retrieve the data from the __ComObject.
@@ -2044,12 +2288,12 @@ namespace System.Runtime.InteropServices
         }
 
         //====================================================================
-        // This method sets data on the COM object. The data can only be set 
+        // This method sets data on the COM object. The data can only be set
         // once for a given key and cannot be removed. This function returns
         // true if the data has been added, false if the data could not be
         // added because there already was data for the specified key.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static bool SetComObjectData(Object obj, Object key, Object data)
         {
             // Validate that the arguments aren't null. The data can validly be null.
@@ -2068,12 +2312,18 @@ namespace System.Runtime.InteropServices
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjNotComObject"), "obj");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjNotComObject"),
+                    "obj"
+                );
             }
 
             if (obj.GetType().IsWindowsRuntimeObject)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjIsWinRTObject"), "obj");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjIsWinRTObject"),
+                    "obj"
+                );
             }
 
             // Retrieve the data from the __ComObject.
@@ -2084,20 +2334,29 @@ namespace System.Runtime.InteropServices
         // This method takes the given COM object and wraps it in an object
         // of the specified type. The type must be derived from __ComObject.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Object CreateWrapperOfType(Object o, Type t)
         {
             // Validate the arguments.
             if (t == null)
                 throw new ArgumentNullException("t");
             if (!t.IsCOMObject)
-                throw new ArgumentException(Environment.GetResourceString("Argument_TypeNotComObject"), "t");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_TypeNotComObject"),
+                    "t"
+                );
             if (t.IsGenericType)
-                throw new ArgumentException(Environment.GetResourceString("Argument_NeedNonGenericType"), "t");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_NeedNonGenericType"),
+                    "t"
+                );
             Contract.EndContractBlock();
 
             if (t.IsWindowsRuntimeObject)
-                throw new ArgumentException(Environment.GetResourceString("Argument_TypeIsWinRTType"), "t");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_TypeIsWinRTType"),
+                    "t"
+                );
 
             // Check for the null case.
             if (o == null)
@@ -2105,9 +2364,15 @@ namespace System.Runtime.InteropServices
 
             // Make sure the object is a COM object.
             if (!o.GetType().IsCOMObject)
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjNotComObject"), "o");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjNotComObject"),
+                    "o"
+                );
             if (o.GetType().IsWindowsRuntimeObject)
-                throw new ArgumentException(Environment.GetResourceString("Argument_ObjIsWinRTObject"), "o");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_ObjIsWinRTObject"),
+                    "o"
+                );
 
             // Check to see if the type of the object is the requested type.
             if (o.GetType() == t)
@@ -2140,7 +2405,7 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // Helper method called from CreateWrapperOfType.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern Object InternalCreateWrapperOfType(Object o, Type t);
@@ -2149,12 +2414,13 @@ namespace System.Runtime.InteropServices
         // There may be a thread-based cache of COM components.  This service can
         // force the aggressive release of the current thread's cache.
         //====================================================================
-        // 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("This API did not perform any operation and will be removed in future versions of the CLR.", false)]
-        public static void ReleaseThreadCache()
-        {
-        }
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "This API did not perform any operation and will be removed in future versions of the CLR.",
+            false
+        )]
+        public static void ReleaseThreadCache() { }
 
         //====================================================================
         // check if the type is visible from COM.
@@ -2167,40 +2433,56 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // IUnknown Helpers
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern int /* HRESULT */ QueryInterface(IntPtr /* IUnknown */ pUnk, ref Guid iid, out IntPtr ppv);    
+        public static extern int /* HRESULT */
+        QueryInterface(
+            IntPtr /* IUnknown */
+            pUnk,
+            ref Guid iid,
+            out IntPtr ppv
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern int /* ULONG */ AddRef(IntPtr /* IUnknown */ pUnk );
-        [System.Security.SecurityCritical]  // auto-generated_required
+        public static extern int /* ULONG */
+        AddRef(
+            IntPtr /* IUnknown */
+            pUnk
+        );
+
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        public static extern int /* ULONG */ Release(IntPtr /* IUnknown */ pUnk );
+        public static extern int /* ULONG */
+        Release(
+            IntPtr /* IUnknown */
+            pUnk
+        );
 
         //====================================================================
         // BSTR allocation and dealocation.
-        //====================================================================      
-        [System.Security.SecurityCritical]  // auto-generated_required
+        //====================================================================
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void FreeBSTR(IntPtr ptr)
         {
-            if (IsNotWin32Atom(ptr)) {
+            if (IsNotWin32Atom(ptr))
+            {
                 Win32Native.SysFreeString(ptr);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr StringToBSTR(String s)
         {
-            if (s == null) 
+            if (s == null)
                 return IntPtr.Zero;
 
             // Overflow checking
-            if (s.Length+1 < s.Length)
+            if (s.Length + 1 < s.Length)
                 throw new ArgumentOutOfRangeException("s");
 
             IntPtr bstr = Win32Native.SysAllocStringLen(s, s.Length);
@@ -2210,16 +2492,19 @@ namespace System.Runtime.InteropServices
             return bstr;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static String PtrToStringBSTR(IntPtr ptr)
         {
             return PtrToStringUni(ptr, (int)Win32Native.SysStringLen(ptr));
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void GetNativeVariantForObject(Object obj, /* VARIANT * */ IntPtr pDstNativeVariant);
+        public static extern void GetNativeVariantForObject(
+            Object obj, /* VARIANT * */
+            IntPtr pDstNativeVariant
+        );
 
         [System.Security.SecurityCritical]
         public static void GetNativeVariantForObject<T>(T obj, IntPtr pDstNativeVariant)
@@ -2227,10 +2512,12 @@ namespace System.Runtime.InteropServices
             GetNativeVariantForObject((object)obj, pDstNativeVariant);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern Object GetObjectForNativeVariant(/* VARIANT * */ IntPtr pSrcNativeVariant );
+        public static extern Object GetObjectForNativeVariant( /* VARIANT * */
+            IntPtr pSrcNativeVariant
+        );
 
         [System.Security.SecurityCritical]
         public static T GetObjectForNativeVariant<T>(IntPtr pSrcNativeVariant)
@@ -2238,17 +2525,20 @@ namespace System.Runtime.InteropServices
             return (T)GetObjectForNativeVariant(pSrcNativeVariant);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern Object[] GetObjectsForNativeVariants(/* VARIANT * */ IntPtr aSrcNativeVariant, int cVars );
+        public static extern Object[] GetObjectsForNativeVariants( /* VARIANT * */
+            IntPtr aSrcNativeVariant,
+            int cVars
+        );
 
         [System.Security.SecurityCritical]
         public static T[] GetObjectsForNativeVariants<T>(IntPtr aSrcNativeVariant, int cVars)
         {
             object[] objects = GetObjectsForNativeVariants(aSrcNativeVariant, cVars);
             T[] result = null;
-            
+
             if (objects != null)
             {
                 result = new T[objects.Length];
@@ -2262,7 +2552,7 @@ namespace System.Runtime.InteropServices
         /// <para>Returns the first valid COM slot that GetMethodInfoForSlot will work on
         /// This will be 3 for IUnknown based interfaces and 7 for IDispatch based interfaces. </para>
         /// </summary>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetStartComSlot(Type t);
@@ -2270,42 +2560,55 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// <para>Returns the last valid COM slot that GetMethodInfoForSlot will work on. </para>
         /// </summary>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern int GetEndComSlot(Type t);
 
         /// <summary>
-        /// <para>Returns the MemberInfo that COM callers calling through the exposed 
+        /// <para>Returns the MemberInfo that COM callers calling through the exposed
         /// vtable on the given slot will be calling. The slot should take into account
         /// if the exposed interface is IUnknown based or IDispatch based.
         /// For classes, the lookup is done on the default interface that will be
         /// exposed for the class. </para>
         /// </summary>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern MemberInfo GetMethodInfoForComSlot(Type t, int slot, ref ComMemberType memberType);
+        public static extern MemberInfo GetMethodInfoForComSlot(
+            Type t,
+            int slot,
+            ref ComMemberType memberType
+        );
 
         /// <summary>
-        /// <para>Returns the COM slot for a memeber info, taking into account whether 
+        /// <para>Returns the COM slot for a memeber info, taking into account whether
         /// the exposed interface is IUnknown based or IDispatch based</para>
         /// </summary>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static int GetComSlotForMethodInfo(MemberInfo m)
         {
-            if (m== null) 
+            if (m == null)
                 throw new ArgumentNullException("m");
 
             if (!(m is RuntimeMethodInfo))
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo"), "m");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeMethodInfo"),
+                    "m"
+                );
 
             if (!m.DeclaringType.IsInterface)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeInterfaceMethod"), "m");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeInterfaceMethod"),
+                    "m"
+                );
             if (m.DeclaringType.IsGenericType)
-                throw new ArgumentException(Environment.GetResourceString("Argument_NeedNonGenericType"), "m");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_NeedNonGenericType"),
+                    "m"
+                );
             Contract.EndContractBlock();
-            
+
             return InternalGetComSlotForMethodInfo((IRuntimeMethodInfo)m);
         }
 
@@ -2316,14 +2619,14 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // This method generates a GUID for the specified type. If the type
         // has a GUID in the metadata then it is returned otherwise a stable
-        // guid GUID is generated based on the fully qualified name of the 
+        // guid GUID is generated based on the fully qualified name of the
         // type.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Guid GenerateGuidForType(Type type)
         {
-            Guid result = new Guid ();
-            FCallGenerateGuidForType (ref result, type);
+            Guid result = new Guid();
+            FCallGenerateGuidForType(ref result, type);
             return result;
         }
 
@@ -2335,40 +2638,54 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // This method generates a PROGID for the specified type. If the type
         // has a PROGID in the metadata then it is returned otherwise a stable
-        // PROGID is generated based on the fully qualified name of the 
+        // PROGID is generated based on the fully qualified name of the
         // type.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static String GenerateProgIdForType(Type type)
         {
             if (type == null)
                 throw new ArgumentNullException("type");
             if (type.IsImport)
-                throw new ArgumentException(Environment.GetResourceString("Argument_TypeMustNotBeComImport"), "type");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_TypeMustNotBeComImport"),
+                    "type"
+                );
             if (type.IsGenericType)
-                throw new ArgumentException(Environment.GetResourceString("Argument_NeedNonGenericType"), "type");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_NeedNonGenericType"),
+                    "type"
+                );
             Contract.EndContractBlock();
 
             if (!RegistrationServices.TypeRequiresRegistrationHelper(type))
-                throw new ArgumentException(Environment.GetResourceString("Argument_TypeMustBeComCreatable"), "type");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_TypeMustBeComCreatable"),
+                    "type"
+                );
 
             IList<CustomAttributeData> cas = CustomAttributeData.GetCustomAttributes(type);
-            for (int i = 0; i < cas.Count; i ++)
+            for (int i = 0; i < cas.Count; i++)
             {
                 if (cas[i].Constructor.DeclaringType == typeof(ProgIdAttribute))
                 {
                     // Retrieve the PROGID string from the ProgIdAttribute.
-                    IList<CustomAttributeTypedArgument> caConstructorArgs = cas[i].ConstructorArguments;
+                    IList<CustomAttributeTypedArgument> caConstructorArgs = cas[
+                        i
+                    ].ConstructorArguments;
                     Contract.Assert(caConstructorArgs.Count == 1, "caConstructorArgs.Count == 1");
-                    
-                    CustomAttributeTypedArgument progIdConstructorArg = caConstructorArgs[0];                    
-                    Contract.Assert(progIdConstructorArg.ArgumentType == typeof(String), "progIdConstructorArg.ArgumentType == typeof(String)");
-                    
+
+                    CustomAttributeTypedArgument progIdConstructorArg = caConstructorArgs[0];
+                    Contract.Assert(
+                        progIdConstructorArg.ArgumentType == typeof(String),
+                        "progIdConstructorArg.ArgumentType == typeof(String)"
+                    );
+
                     String strProgId = (String)progIdConstructorArg.Value;
-                    
+
                     if (strProgId == null)
-                        strProgId = String.Empty;    
-                    
+                        strProgId = String.Empty;
+
                     return strProgId;
                 }
             }
@@ -2380,7 +2697,7 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // This method binds to the specified moniker.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static Object BindToMoniker(String monikerName)
@@ -2400,7 +2717,7 @@ namespace System.Runtime.InteropServices
         //====================================================================
         // This method gets the currently running object.
         //====================================================================
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Object GetActiveObject(String progID)
         {
             Object obj = null;
@@ -2408,12 +2725,12 @@ namespace System.Runtime.InteropServices
 
             // Call CLSIDFromProgIDEx first then fall back on CLSIDFromProgID if
             // CLSIDFromProgIDEx doesn't exist.
-            try 
+            try
             {
                 CLSIDFromProgIDEx(progID, out clsid);
             }
-//            catch
-            catch(Exception)
+            //            catch
+            catch (Exception)
             {
                 CLSIDFromProgID(progID, out clsid);
             }
@@ -2425,38 +2742,58 @@ namespace System.Runtime.InteropServices
         [DllImport(Microsoft.Win32.Win32Native.OLE32, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        private static extern void CLSIDFromProgIDEx([MarshalAs(UnmanagedType.LPWStr)] String progId, out Guid clsid);
+        [System.Security.SecurityCritical] // auto-generated
+        private static extern void CLSIDFromProgIDEx(
+            [MarshalAs(UnmanagedType.LPWStr)] String progId,
+            out Guid clsid
+        );
 
         [DllImport(Microsoft.Win32.Win32Native.OLE32, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        private static extern void CLSIDFromProgID([MarshalAs(UnmanagedType.LPWStr)] String progId, out Guid clsid);
+        [System.Security.SecurityCritical] // auto-generated
+        private static extern void CLSIDFromProgID(
+            [MarshalAs(UnmanagedType.LPWStr)] String progId,
+            out Guid clsid
+        );
 
         [DllImport(Microsoft.Win32.Win32Native.OLE32, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static extern void CreateBindCtx(UInt32 reserved, out IBindCtx ppbc);
 
         [DllImport(Microsoft.Win32.Win32Native.OLE32, PreserveSig = false)]
         [ResourceExposure(ResourceScope.Machine)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        private static extern void MkParseDisplayName(IBindCtx pbc, [MarshalAs(UnmanagedType.LPWStr)] String szUserName, out UInt32 pchEaten, out IMoniker ppmk);
+        [System.Security.SecurityCritical] // auto-generated
+        private static extern void MkParseDisplayName(
+            IBindCtx pbc,
+            [MarshalAs(UnmanagedType.LPWStr)] String szUserName,
+            out UInt32 pchEaten,
+            out IMoniker ppmk
+        );
 
         [DllImport(Microsoft.Win32.Win32Native.OLE32, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        private static extern void BindMoniker(IMoniker pmk, UInt32 grfOpt, ref Guid iidResult, [MarshalAs(UnmanagedType.Interface)] out Object ppvResult);
+        [System.Security.SecurityCritical] // auto-generated
+        private static extern void BindMoniker(
+            IMoniker pmk,
+            UInt32 grfOpt,
+            ref Guid iidResult,
+            [MarshalAs(UnmanagedType.Interface)] out Object ppvResult
+        );
 
         [DllImport(Microsoft.Win32.Win32Native.OLEAUT32, PreserveSig = false)]
         [ResourceExposure(ResourceScope.None)]
         [SuppressUnmanagedCodeSecurity]
-        [System.Security.SecurityCritical]  // auto-generated
-        private static extern void GetActiveObject(ref Guid rclsid, IntPtr reserved, [MarshalAs(UnmanagedType.Interface)] out Object ppunk);
+        [System.Security.SecurityCritical] // auto-generated
+        private static extern void GetActiveObject(
+            ref Guid rclsid,
+            IntPtr reserved,
+            [MarshalAs(UnmanagedType.Interface)] out Object ppunk
+        );
 
         //========================================================================
         // Private method called from remoting to support ServicedComponents.
@@ -2475,15 +2812,19 @@ namespace System.Runtime.InteropServices
         [SecurityCritical]
         private static IntPtr LoadLicenseManager()
         {
-            Assembly sys = Assembly.Load("System, Version="+ ThisAssembly.Version + 
-                ", Culture=neutral, PublicKeyToken=" + AssemblyRef.EcmaPublicKeyToken);
+            Assembly sys = Assembly.Load(
+                "System, Version="
+                    + ThisAssembly.Version
+                    + ", Culture=neutral, PublicKeyToken="
+                    + AssemblyRef.EcmaPublicKeyToken
+            );
             Type t = sys.GetType("System.ComponentModel.LicenseManager");
-            if (t == null || !t.IsVisible) 
+            if (t == null || !t.IsVisible)
                 return IntPtr.Zero;
             return t.TypeHandle.Value;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public static extern void ChangeWrapperHandleStrength(Object otp, bool fIsWeak);
@@ -2497,7 +2838,10 @@ namespace System.Runtime.InteropServices
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void InitializeManagedWinRTFactoryObject(object o, RuntimeType runtimeClassType);
+        internal static extern void InitializeManagedWinRTFactoryObject(
+            object o,
+            RuntimeType runtimeClassType
+        );
 #endif
 
         //========================================================================
@@ -2515,7 +2859,10 @@ namespace System.Runtime.InteropServices
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
-        private static extern void _GetInspectableIids(ObjectHandleOnStack obj, ObjectHandleOnStack guids);
+        private static extern void _GetInspectableIids(
+            ObjectHandleOnStack obj,
+            ObjectHandleOnStack guids
+        );
 
         [System.Security.SecurityCritical]
         internal static System.Guid[] GetInspectableIids(object obj)
@@ -2524,8 +2871,10 @@ namespace System.Runtime.InteropServices
             System.__ComObject comObj = obj as System.__ComObject;
             if (comObj != null)
             {
-                _GetInspectableIids(JitHelpers.GetObjectHandleOnStack(ref comObj), 
-                                    JitHelpers.GetObjectHandleOnStack(ref result));
+                _GetInspectableIids(
+                    JitHelpers.GetObjectHandleOnStack(ref comObj),
+                    JitHelpers.GetObjectHandleOnStack(ref result)
+                );
             }
 
             return result;
@@ -2539,23 +2888,19 @@ namespace System.Runtime.InteropServices
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
         private static extern void _GetCachedWinRTTypeByIid(
-                        ObjectHandleOnStack appDomainObj, 
-                        System.Guid iid,
-                        out IntPtr rthHandle);
+            ObjectHandleOnStack appDomainObj,
+            System.Guid iid,
+            out IntPtr rthHandle
+        );
 
         [System.Security.SecurityCritical]
-        internal static System.Type GetCachedWinRTTypeByIid(
-                        System.AppDomain ad, 
-                        System.Guid iid)
+        internal static System.Type GetCachedWinRTTypeByIid(System.AppDomain ad, System.Guid iid)
         {
             IntPtr rthHandle;
-            _GetCachedWinRTTypeByIid(JitHelpers.GetObjectHandleOnStack(ref ad),
-                        iid,
-                        out rthHandle);
+            _GetCachedWinRTTypeByIid(JitHelpers.GetObjectHandleOnStack(ref ad), iid, out rthHandle);
             System.Type res = Type.GetTypeFromHandleUnsafe(rthHandle);
             return res;
         }
-
 
         //========================================================================
         // Methods allowing retrieval of the WinRT types cached in the specified
@@ -2565,20 +2910,21 @@ namespace System.Runtime.InteropServices
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
         private static extern void _GetCachedWinRTTypes(
-                        ObjectHandleOnStack appDomainObj, 
-                        ref int epoch,
-                        ObjectHandleOnStack winrtTypes);
+            ObjectHandleOnStack appDomainObj,
+            ref int epoch,
+            ObjectHandleOnStack winrtTypes
+        );
 
         [System.Security.SecurityCritical]
-        internal static System.Type[] GetCachedWinRTTypes(
-                        System.AppDomain ad, 
-                        ref int epoch)
+        internal static System.Type[] GetCachedWinRTTypes(System.AppDomain ad, ref int epoch)
         {
             System.IntPtr[] res = null;
 
-            _GetCachedWinRTTypes(JitHelpers.GetObjectHandleOnStack(ref ad), 
-                                ref epoch,
-                                JitHelpers.GetObjectHandleOnStack(ref res));
+            _GetCachedWinRTTypes(
+                JitHelpers.GetObjectHandleOnStack(ref ad),
+                ref epoch,
+                JitHelpers.GetObjectHandleOnStack(ref res)
+            );
 
             System.Type[] result = new System.Type[res.Length];
             for (int i = 0; i < res.Length; ++i)
@@ -2590,36 +2936,42 @@ namespace System.Runtime.InteropServices
         }
 
         [System.Security.SecurityCritical]
-        internal static System.Type[] GetCachedWinRTTypes(
-                        System.AppDomain ad)
+        internal static System.Type[] GetCachedWinRTTypes(System.AppDomain ad)
         {
             int dummyEpoch = 0;
             return GetCachedWinRTTypes(ad, ref dummyEpoch);
         }
-
-
 #endif // FEATURE_COMINTEROP
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static Delegate GetDelegateForFunctionPointer(IntPtr ptr, Type t)
         {
             // Validate the parameters
             if (ptr == IntPtr.Zero)
                 throw new ArgumentNullException("ptr");
-            
+
             if (t == null)
                 throw new ArgumentNullException("t");
             Contract.EndContractBlock();
-            
+
             if ((t as RuntimeType) == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeType"), "t");           
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeType"),
+                    "t"
+                );
 
             if (t.IsGenericType)
-                throw new ArgumentException(Environment.GetResourceString("Argument_NeedNonGenericType"), "t");
-            
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_NeedNonGenericType"),
+                    "t"
+                );
+
             Type c = t.BaseType;
             if (c == null || (c != typeof(Delegate) && c != typeof(MulticastDelegate)))
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeDelegate"), "t");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeDelegate"),
+                    "t"
+                );
 
             return GetDelegateForFunctionPointerInternal(ptr, t);
         }
@@ -2634,7 +2986,7 @@ namespace System.Runtime.InteropServices
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern Delegate GetDelegateForFunctionPointerInternal(IntPtr ptr, Type t);
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr GetFunctionPointerForDelegate(Delegate d)
         {
             if (d == null)
@@ -2655,20 +3007,24 @@ namespace System.Runtime.InteropServices
         internal static extern IntPtr GetFunctionPointerForDelegateInternal(Delegate d);
 
 #if FEATURE_COMINTEROP
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr SecureStringToBSTR(SecureString s) {
-            if( s == null) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr SecureStringToBSTR(SecureString s)
+        {
+            if (s == null)
+            {
                 throw new ArgumentNullException("s");
             }
             Contract.EndContractBlock();
-            
+
             return s.ToBSTR();
         }
 #endif
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr SecureStringToCoTaskMemAnsi(SecureString s) {
-            if( s == null) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr SecureStringToCoTaskMemAnsi(SecureString s)
+        {
+            if (s == null)
+            {
                 throw new ArgumentNullException("s");
             }
             Contract.EndContractBlock();
@@ -2676,7 +3032,7 @@ namespace System.Runtime.InteropServices
             return s.ToAnsiStr(false);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static IntPtr SecureStringToCoTaskMemUnicode(SecureString s)
         {
             if (s == null)
@@ -2689,7 +3045,7 @@ namespace System.Runtime.InteropServices
         }
 
 #if FEATURE_COMINTEROP
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void ZeroFreeBSTR(IntPtr s)
         {
             Win32Native.ZeroMemory(s, (UIntPtr)(Win32Native.SysStringLen(s) * 2));
@@ -2697,23 +3053,25 @@ namespace System.Runtime.InteropServices
         }
 #endif
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void ZeroFreeCoTaskMemAnsi(IntPtr s)
         {
             Win32Native.ZeroMemory(s, (UIntPtr)(Win32Native.lstrlenA(s)));
             FreeCoTaskMem(s);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public static void ZeroFreeCoTaskMemUnicode(IntPtr s)
         {
             Win32Native.ZeroMemory(s, (UIntPtr)(Win32Native.lstrlenW(s) * 2));
             FreeCoTaskMem(s);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr SecureStringToGlobalAllocAnsi(SecureString s) {
-            if( s == null) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr SecureStringToGlobalAllocAnsi(SecureString s)
+        {
+            if (s == null)
+            {
                 throw new ArgumentNullException("s");
             }
             Contract.EndContractBlock();
@@ -2721,9 +3079,11 @@ namespace System.Runtime.InteropServices
             return s.ToAnsiStr(true);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static IntPtr SecureStringToGlobalAllocUnicode(SecureString s) {
-            if( s == null) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static IntPtr SecureStringToGlobalAllocUnicode(SecureString s)
+        {
+            if (s == null)
+            {
                 throw new ArgumentNullException("s");
             }
             Contract.EndContractBlock();
@@ -2731,29 +3091,29 @@ namespace System.Runtime.InteropServices
             return s.ToUniStr(true);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void ZeroFreeGlobalAllocAnsi(IntPtr s) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void ZeroFreeGlobalAllocAnsi(IntPtr s)
+        {
             Win32Native.ZeroMemory(s, (UIntPtr)(Win32Native.lstrlenA(s)));
             FreeHGlobal(s);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public static void ZeroFreeGlobalAllocUnicode(IntPtr s) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public static void ZeroFreeGlobalAllocUnicode(IntPtr s)
+        {
             Win32Native.ZeroMemory(s, (UIntPtr)(Win32Native.lstrlenW(s) * 2));
             FreeHGlobal(s);
         }
     }
 
-#if FEATURE_COMINTEROP && !FEATURE_CORECLR // current implementation requires reflection only load 
+#if FEATURE_COMINTEROP && !FEATURE_CORECLR // current implementation requires reflection only load
     //========================================================================
     // Typelib importer callback implementation.
     //========================================================================
     internal class ImporterCallback : ITypeLibImporterNotifySink
     {
-        public void ReportEvent(ImporterEventKind EventKind, int EventCode, String EventMsg)
-        {
-        }
-        
+        public void ReportEvent(ImporterEventKind EventKind, int EventCode, String EventMsg) { }
+
         [System.Security.SecuritySafeCritical] // overrides transparent public member
         public Assembly ResolveRef(Object TypeLib)
         {
@@ -2763,22 +3123,23 @@ namespace System.Runtime.InteropServices
                 ITypeLibConverter TLBConv = new TypeLibConverter();
 
                 // Convert the typelib.
-                return TLBConv.ConvertTypeLibToAssembly(TypeLib,
-                                                        Marshal.GetTypeLibName((ITypeLib)TypeLib) + ".dll",
-                                                        0,
-                                                        new ImporterCallback(),
-                                                        null,
-                                                        null,
-                                                        null,
-                                                        null);
+                return TLBConv.ConvertTypeLibToAssembly(
+                    TypeLib,
+                    Marshal.GetTypeLibName((ITypeLib)TypeLib) + ".dll",
+                    0,
+                    new ImporterCallback(),
+                    null,
+                    null,
+                    null,
+                    null
+                );
             }
-            catch(Exception)
-//            catch
+            catch (Exception)
+            //            catch
             {
                 return null;
-            }               
+            }
         }
     }
-#endif // FEATURE_COMINTEROP && !FEATURE_CORECLR 
+#endif // FEATURE_COMINTEROP && !FEATURE_CORECLR
 }
-

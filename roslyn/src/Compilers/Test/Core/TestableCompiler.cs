@@ -41,23 +41,30 @@ namespace Roslyn.Test.Utilities
     }
 
     /// <summary>
-    /// Provides an easy to test version of <see cref="CommonCompiler"/>. This uses <see cref="TestableFileSystem"/> 
+    /// Provides an easy to test version of <see cref="CommonCompiler"/>. This uses <see cref="TestableFileSystem"/>
     /// to abstract way all of the file system access (typically the hardest part about testing CommonCompiler).
     /// </summary>
     internal sealed class TestableCompiler
     {
-        internal static string RootDirectory => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"q:\" : "/";
-        internal static BuildPaths StandardBuildPaths => new BuildPaths(
-            clientDir: Path.Combine(RootDirectory, "compiler"),
-            workingDir: Path.Combine(RootDirectory, "source"),
-            sdkDir: Path.Combine(RootDirectory, "sdk"),
-            tempDir: null);
+        internal static string RootDirectory =>
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"q:\" : "/";
+        internal static BuildPaths StandardBuildPaths =>
+            new BuildPaths(
+                clientDir: Path.Combine(RootDirectory, "compiler"),
+                workingDir: Path.Combine(RootDirectory, "source"),
+                sdkDir: Path.Combine(RootDirectory, "sdk"),
+                tempDir: null
+            );
 
         internal CommonCompiler Compiler { get; }
         internal TestableFileSystem FileSystem { get; }
         internal BuildPaths BuildPaths { get; }
 
-        internal TestableCompiler(CommonCompiler compiler, TestableFileSystem fileSystem, BuildPaths buildPaths)
+        internal TestableCompiler(
+            CommonCompiler compiler,
+            TestableFileSystem fileSystem,
+            BuildPaths buildPaths
+        )
         {
             if (!object.ReferenceEquals(compiler.FileSystem, fileSystem))
             {
@@ -69,8 +76,8 @@ namespace Roslyn.Test.Utilities
             BuildPaths = buildPaths;
         }
 
-        internal (int Result, string Output) Run(CancellationToken cancellationToken = default)
-            => Compiler.Run(cancellationToken);
+        internal (int Result, string Output) Run(CancellationToken cancellationToken = default) =>
+            Compiler.Run(cancellationToken);
 
         internal TestableCompilerFile AddSourceFile(string filePath, string content)
         {
@@ -99,7 +106,8 @@ namespace Roslyn.Test.Utilities
         internal static TestableCompiler CreateCSharp(
             string[] commandLineArguments,
             TestableFileSystem fileSystem,
-            BuildPaths? buildPaths = null)
+            BuildPaths? buildPaths = null
+        )
         {
             var p = buildPaths ?? StandardBuildPaths;
             var compiler = new CSharpCompilerImpl(commandLineArguments, p, fileSystem);
@@ -109,7 +117,8 @@ namespace Roslyn.Test.Utilities
         internal static TestableCompiler CreateCSharpNetCoreApp(
             TestableFileSystem? fileSystem,
             BuildPaths buildPaths,
-            IEnumerable<string> commandLineArguments)
+            IEnumerable<string> commandLineArguments
+        )
         {
             if (buildPaths.SdkDirectory is null)
             {
@@ -118,7 +127,12 @@ namespace Roslyn.Test.Utilities
 
             fileSystem ??= TestableFileSystem.CreateForMap();
             var args = new List<string>();
-            AppendNetCoreApp(fileSystem, buildPaths.SdkDirectory!, args, includeVisualBasicRuntime: false);
+            AppendNetCoreApp(
+                fileSystem,
+                buildPaths.SdkDirectory!,
+                args,
+                includeVisualBasicRuntime: false
+            );
             args.AddRange(commandLineArguments);
 
             var compiler = new CSharpCompilerImpl(args.ToArray(), buildPaths, fileSystem);
@@ -128,24 +142,41 @@ namespace Roslyn.Test.Utilities
         internal static TestableCompiler CreateCSharpNetCoreApp(
             TestableFileSystem? fileSystem,
             BuildPaths buildPaths,
-            params string[] commandLineArguments)
-            => CreateCSharpNetCoreApp(fileSystem, buildPaths, (IEnumerable<string>)commandLineArguments);
+            params string[] commandLineArguments
+        ) =>
+            CreateCSharpNetCoreApp(
+                fileSystem,
+                buildPaths,
+                (IEnumerable<string>)commandLineArguments
+            );
 
-        internal static TestableCompiler CreateCSharpNetCoreApp(params string[] commandLineArguments)
-            => CreateCSharpNetCoreApp(null, StandardBuildPaths, commandLineArguments);
+        internal static TestableCompiler CreateCSharpNetCoreApp(
+            params string[] commandLineArguments
+        ) => CreateCSharpNetCoreApp(null, StandardBuildPaths, commandLineArguments);
 
         private sealed class CSharpCompilerImpl : CSharpCompiler
         {
-            internal CSharpCompilerImpl(string[] args, BuildPaths buildPaths, TestableFileSystem? fileSystem)
-                : base(CSharpCommandLineParser.Default, responseFile: null, args, buildPaths, additionalReferenceDirectories: null, new DefaultAnalyzerAssemblyLoader(), fileSystem: fileSystem)
-            {
-            }
+            internal CSharpCompilerImpl(
+                string[] args,
+                BuildPaths buildPaths,
+                TestableFileSystem? fileSystem
+            )
+                : base(
+                    CSharpCommandLineParser.Default,
+                    responseFile: null,
+                    args,
+                    buildPaths,
+                    additionalReferenceDirectories: null,
+                    new DefaultAnalyzerAssemblyLoader(),
+                    fileSystem: fileSystem
+                ) { }
         }
 
         internal static TestableCompiler CreateBasic(
             string[] commandLineArguments,
             TestableFileSystem fileSystem,
-            BuildPaths? buildPaths = null)
+            BuildPaths? buildPaths = null
+        )
         {
             var p = buildPaths ?? StandardBuildPaths;
             var compiler = new BasicCompilerImpl(commandLineArguments, p, fileSystem);
@@ -156,7 +187,8 @@ namespace Roslyn.Test.Utilities
             TestableFileSystem? fileSystem,
             BuildPaths buildPaths,
             BasicRuntimeOption basicRuntimeOption,
-            IEnumerable<string> commandLineArguments)
+            IEnumerable<string> commandLineArguments
+        )
         {
             if (buildPaths.SdkDirectory is null)
             {
@@ -171,7 +203,9 @@ namespace Roslyn.Test.Utilities
             {
                 case BasicRuntimeOption.Include:
                     // VB will just find this in the SDK path and auto-add it
-                    args.Add($@"-vbruntime:""{Path.Combine(buildPaths.SdkDirectory, "Microsoft.VisualBasic.dll")}""");
+                    args.Add(
+                        $@"-vbruntime:""{Path.Combine(buildPaths.SdkDirectory, "Microsoft.VisualBasic.dll")}"""
+                    );
                     break;
                 case BasicRuntimeOption.Exclude:
                     args.Add("-vbruntime-");
@@ -185,7 +219,12 @@ namespace Roslyn.Test.Utilities
                     throw new Exception("invalid value");
             }
 
-            AppendNetCoreApp(fileSystem, buildPaths.SdkDirectory!, args, includeVisualBasicRuntime: false);
+            AppendNetCoreApp(
+                fileSystem,
+                buildPaths.SdkDirectory!,
+                args,
+                includeVisualBasicRuntime: false
+            );
             args.AddRange(commandLineArguments);
 
             var compiler = new BasicCompilerImpl(args.ToArray(), buildPaths, fileSystem);
@@ -195,29 +234,64 @@ namespace Roslyn.Test.Utilities
         internal static TestableCompiler CreateBasicNetCoreApp(
             TestableFileSystem? fileSystem,
             BuildPaths buildPaths,
-            params string[] commandLineArguments)
-            => CreateBasicNetCoreApp(fileSystem, buildPaths, BasicRuntimeOption.Include, (IEnumerable<string>)commandLineArguments);
+            params string[] commandLineArguments
+        ) =>
+            CreateBasicNetCoreApp(
+                fileSystem,
+                buildPaths,
+                BasicRuntimeOption.Include,
+                (IEnumerable<string>)commandLineArguments
+            );
 
-        internal static TestableCompiler CreateBasicNetCoreApp(params string[] commandLineArguments)
-            => CreateBasicNetCoreApp(null, StandardBuildPaths, BasicRuntimeOption.Include, commandLineArguments);
+        internal static TestableCompiler CreateBasicNetCoreApp(
+            params string[] commandLineArguments
+        ) =>
+            CreateBasicNetCoreApp(
+                null,
+                StandardBuildPaths,
+                BasicRuntimeOption.Include,
+                commandLineArguments
+            );
 
         private sealed class BasicCompilerImpl : VisualBasicCompiler
         {
-            internal BasicCompilerImpl(string[] args, BuildPaths buildPaths, TestableFileSystem? fileSystem)
-                : base(VisualBasicCommandLineParser.Default, responseFile: null, args, buildPaths, additionalReferenceDirectories: null, new DefaultAnalyzerAssemblyLoader(), fileSystem: fileSystem)
-            {
-            }
+            internal BasicCompilerImpl(
+                string[] args,
+                BuildPaths buildPaths,
+                TestableFileSystem? fileSystem
+            )
+                : base(
+                    VisualBasicCommandLineParser.Default,
+                    responseFile: null,
+                    args,
+                    buildPaths,
+                    additionalReferenceDirectories: null,
+                    new DefaultAnalyzerAssemblyLoader(),
+                    fileSystem: fileSystem
+                ) { }
         }
 
-        private static void AppendNetCoreApp(TestableFileSystem fileSystem, string sdkPath, List<string> commandLineArgs, bool includeVisualBasicRuntime)
+        private static void AppendNetCoreApp(
+            TestableFileSystem fileSystem,
+            string sdkPath,
+            List<string> commandLineArgs,
+            bool includeVisualBasicRuntime
+        )
         {
             Debug.Assert(fileSystem.UsingMap);
             foreach (var referenceInfo in NetCoreApp.AllReferenceInfos)
             {
-                fileSystem.Map[Path.Combine(sdkPath, referenceInfo.FileName)] = new TestableFile(referenceInfo.ImageBytes);
+                fileSystem.Map[Path.Combine(sdkPath, referenceInfo.FileName)] = new TestableFile(
+                    referenceInfo.ImageBytes
+                );
 
                 // The command line needs to make a decision about how to embed the VB runtime
-                if (!(!includeVisualBasicRuntime && referenceInfo.FileName == "Microsoft.VisualBasic.dll"))
+                if (
+                    !(
+                        !includeVisualBasicRuntime
+                        && referenceInfo.FileName == "Microsoft.VisualBasic.dll"
+                    )
+                )
                 {
                     commandLineArgs.Add($@"/reference:{referenceInfo.FileName}");
                 }

@@ -23,10 +23,9 @@ public class InExpression : SqlExpression
     public InExpression(
         SqlExpression item,
         SelectExpression subquery,
-        RelationalTypeMapping typeMapping)
-        : this(item, subquery, values: null, valuesParameter: null, typeMapping)
-    {
-    }
+        RelationalTypeMapping typeMapping
+    )
+        : this(item, subquery, values: null, valuesParameter: null, typeMapping) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL <c>IN</c> expression with a given list
@@ -38,10 +37,9 @@ public class InExpression : SqlExpression
     public InExpression(
         SqlExpression item,
         IReadOnlyList<SqlExpression> values,
-        RelationalTypeMapping typeMapping)
-        : this(item, subquery: null, values, valuesParameter: null, typeMapping)
-    {
-    }
+        RelationalTypeMapping typeMapping
+    )
+        : this(item, subquery: null, values, valuesParameter: null, typeMapping) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL <c>IN</c> expression with a given
@@ -53,17 +51,17 @@ public class InExpression : SqlExpression
     public InExpression(
         SqlExpression item,
         SqlParameterExpression valuesParameter,
-        RelationalTypeMapping typeMapping)
-        : this(item, subquery: null, values: null, valuesParameter, typeMapping)
-    {
-    }
+        RelationalTypeMapping typeMapping
+    )
+        : this(item, subquery: null, values: null, valuesParameter, typeMapping) { }
 
     private InExpression(
         SqlExpression item,
         SelectExpression? subquery,
         IReadOnlyList<SqlExpression>? values,
         SqlParameterExpression? valuesParameter,
-        RelationalTypeMapping? typeMapping)
+        RelationalTypeMapping? typeMapping
+    )
         : base(typeof(bool), typeMapping)
     {
 #if DEBUG
@@ -139,8 +137,8 @@ public class InExpression : SqlExpression
     /// </summary>
     /// <param name="typeMapping">A relational type mapping to apply.</param>
     /// <returns>A new expression which has supplied type mapping.</returns>
-    public virtual InExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping)
-        => new(Item, Subquery, Values, ValuesParameter, typeMapping);
+    public virtual InExpression ApplyTypeMapping(RelationalTypeMapping? typeMapping) =>
+        new(Item, Subquery, Values, ValuesParameter, typeMapping);
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -149,8 +147,8 @@ public class InExpression : SqlExpression
     /// <param name="item">The <see cref="Item" /> property of the result.</param>
     /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual InExpression Update(SqlExpression item, SelectExpression subquery)
-        => Update(item, subquery, values: null, valuesParameter: null);
+    public virtual InExpression Update(SqlExpression item, SelectExpression subquery) =>
+        Update(item, subquery, values: null, valuesParameter: null);
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -159,8 +157,8 @@ public class InExpression : SqlExpression
     /// <param name="item">The <see cref="Item" /> property of the result.</param>
     /// <param name="values">The <see cref="Values" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual InExpression Update(SqlExpression item, IReadOnlyList<SqlExpression> values)
-        => Update(item, subquery: null, values, valuesParameter: null);
+    public virtual InExpression Update(SqlExpression item, IReadOnlyList<SqlExpression> values) =>
+        Update(item, subquery: null, values, valuesParameter: null);
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -169,8 +167,10 @@ public class InExpression : SqlExpression
     /// <param name="item">The <see cref="Item" /> property of the result.</param>
     /// <param name="valuesParameter">The <see cref="ValuesParameter" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual InExpression Update(SqlExpression item, SqlParameterExpression valuesParameter)
-        => Update(item, subquery: null, values: null, valuesParameter);
+    public virtual InExpression Update(
+        SqlExpression item,
+        SqlParameterExpression valuesParameter
+    ) => Update(item, subquery: null, values: null, valuesParameter);
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -185,15 +185,30 @@ public class InExpression : SqlExpression
         SqlExpression item,
         SelectExpression? subquery,
         IReadOnlyList<SqlExpression>? values,
-        SqlParameterExpression? valuesParameter)
+        SqlParameterExpression? valuesParameter
+    )
     {
-        if ((subquery is null ? 0 : 1) + (values is null ? 0 : 1) + (valuesParameter is null ? 0 : 1) != 1)
+        if (
+            (subquery is null ? 0 : 1)
+                + (values is null ? 0 : 1)
+                + (valuesParameter is null ? 0 : 1)
+            != 1
+        )
         {
             throw new ArgumentException(
-                RelationalStrings.OneOfThreeValuesMustBeSet(nameof(subquery), nameof(values), nameof(valuesParameter)));
+                RelationalStrings.OneOfThreeValuesMustBeSet(
+                    nameof(subquery),
+                    nameof(values),
+                    nameof(valuesParameter)
+                )
+            );
         }
 
-        return item == Item && subquery == Subquery && values == Values && valuesParameter == ValuesParameter
+        return
+            item == Item
+            && subquery == Subquery
+            && values == Values
+            && valuesParameter == ValuesParameter
             ? this
             : new InExpression(item, subquery, values, valuesParameter, TypeMapping);
     }
@@ -240,19 +255,26 @@ public class InExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is InExpression inExpression
-                && Equals(inExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (ReferenceEquals(this, obj) || obj is InExpression inExpression && Equals(inExpression));
 
-    private bool Equals(InExpression inExpression)
-        => base.Equals(inExpression)
-            && Item.Equals(inExpression.Item)
-            && (Subquery?.Equals(inExpression.Subquery) ?? inExpression.Subquery == null)
-            && (ValuesParameter?.Equals(inExpression.ValuesParameter) ?? inExpression.ValuesParameter == null)
-            && (ReferenceEquals(Values, inExpression.Values)
-                || (Values is not null && inExpression.Values is not null && Values.SequenceEqual(inExpression.Values)));
+    private bool Equals(InExpression inExpression) =>
+        base.Equals(inExpression)
+        && Item.Equals(inExpression.Item)
+        && (Subquery?.Equals(inExpression.Subquery) ?? inExpression.Subquery == null)
+        && (
+            ValuesParameter?.Equals(inExpression.ValuesParameter)
+            ?? inExpression.ValuesParameter == null
+        )
+        && (
+            ReferenceEquals(Values, inExpression.Values)
+            || (
+                Values is not null
+                && inExpression.Values is not null
+                && Values.SequenceEqual(inExpression.Values)
+            )
+        );
 
     /// <inheritdoc />
     public override int GetHashCode()

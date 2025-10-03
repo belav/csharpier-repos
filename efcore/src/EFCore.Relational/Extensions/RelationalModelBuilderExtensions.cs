@@ -27,13 +27,8 @@ public static class RelationalModelBuilderExtensions
     public static SequenceBuilder HasSequence(
         this ModelBuilder modelBuilder,
         string name,
-        string? schema = null)
-        => new(
-            HasSequence(
-                modelBuilder.Model,
-                name,
-                schema,
-                ConfigurationSource.Explicit));
+        string? schema = null
+    ) => new(HasSequence(modelBuilder.Model, name, schema, ConfigurationSource.Explicit));
 
     /// <summary>
     ///     Configures a database sequence when targeting a relational database.
@@ -48,8 +43,8 @@ public static class RelationalModelBuilderExtensions
     public static ModelBuilder HasSequence(
         this ModelBuilder modelBuilder,
         string name,
-        Action<SequenceBuilder> builderAction)
-        => modelBuilder.HasSequence(name, null, builderAction);
+        Action<SequenceBuilder> builderAction
+    ) => modelBuilder.HasSequence(name, null, builderAction);
 
     /// <summary>
     ///     Configures a database sequence when targeting a relational database.
@@ -66,7 +61,8 @@ public static class RelationalModelBuilderExtensions
         this ModelBuilder modelBuilder,
         string name,
         string? schema,
-        Action<SequenceBuilder> builderAction)
+        Action<SequenceBuilder> builderAction
+    )
     {
         Check.NotNull(builderAction, nameof(builderAction));
 
@@ -90,7 +86,8 @@ public static class RelationalModelBuilderExtensions
         this ModelBuilder modelBuilder,
         Type type,
         string name,
-        string? schema = null)
+        string? schema = null
+    )
     {
         Check.NotNull(type, nameof(type));
 
@@ -115,8 +112,8 @@ public static class RelationalModelBuilderExtensions
         this ModelBuilder modelBuilder,
         Type type,
         string name,
-        Action<SequenceBuilder> builderAction)
-        => modelBuilder.HasSequence(type, name, null, builderAction);
+        Action<SequenceBuilder> builderAction
+    ) => modelBuilder.HasSequence(type, name, null, builderAction);
 
     /// <summary>
     ///     Configures a database sequence when targeting a relational database.
@@ -135,7 +132,8 @@ public static class RelationalModelBuilderExtensions
         Type type,
         string name,
         string? schema,
-        Action<SequenceBuilder> builderAction)
+        Action<SequenceBuilder> builderAction
+    )
     {
         Check.NotNull(builderAction, nameof(builderAction));
 
@@ -158,7 +156,8 @@ public static class RelationalModelBuilderExtensions
     public static SequenceBuilder HasSequence<T>(
         this ModelBuilder modelBuilder,
         string name,
-        string? schema = null)
+        string? schema = null
+    )
     {
         var sequence = HasSequence(modelBuilder.Model, name, schema, ConfigurationSource.Explicit);
         sequence.Type = typeof(T);
@@ -180,8 +179,8 @@ public static class RelationalModelBuilderExtensions
     public static ModelBuilder HasSequence<T>(
         this ModelBuilder modelBuilder,
         string name,
-        Action<SequenceBuilder> builderAction)
-        => modelBuilder.HasSequence<T>(name, null, builderAction);
+        Action<SequenceBuilder> builderAction
+    ) => modelBuilder.HasSequence<T>(name, null, builderAction);
 
     /// <summary>
     ///     Configures a database sequence when targeting a relational database.
@@ -199,7 +198,8 @@ public static class RelationalModelBuilderExtensions
         this ModelBuilder modelBuilder,
         string name,
         string? schema,
-        Action<SequenceBuilder> builderAction)
+        Action<SequenceBuilder> builderAction
+    )
     {
         Check.NotNull(builderAction, nameof(builderAction));
 
@@ -223,18 +223,21 @@ public static class RelationalModelBuilderExtensions
         this IConventionModelBuilder modelBuilder,
         string name,
         string? schema = null,
-        bool fromDataAnnotation = false)
-        => HasSequence(
+        bool fromDataAnnotation = false
+    ) =>
+        HasSequence(
             (IMutableModel)modelBuilder.Metadata,
             name,
             schema,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention).Builder;
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        ).Builder;
 
     private static Sequence HasSequence(
         IMutableModel model,
         string name,
         string? schema,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Check.NotEmpty(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -260,7 +263,8 @@ public static class RelationalModelBuilderExtensions
     /// <returns>A builder to further configure the function.</returns>
     public static DbFunctionBuilder HasDbFunction(
         this ModelBuilder modelBuilder,
-        MethodInfo methodInfo)
+        MethodInfo methodInfo
+    )
     {
         Check.NotNull(methodInfo, nameof(methodInfo));
 
@@ -288,7 +292,8 @@ public static class RelationalModelBuilderExtensions
     /// <returns>A builder to further configure the function.</returns>
     public static DbFunctionBuilder HasDbFunction<TResult>(
         this ModelBuilder modelBuilder,
-        Expression<Func<TResult>> expression)
+        Expression<Func<TResult>> expression
+    )
     {
         Check.NotNull(expression, nameof(expression));
 
@@ -296,7 +301,9 @@ public static class RelationalModelBuilderExtensions
 
         if (methodInfo == null)
         {
-            throw new ArgumentException(RelationalStrings.DbFunctionExpressionIsNotMethodCall(expression));
+            throw new ArgumentException(
+                RelationalStrings.DbFunctionExpressionIsNotMethodCall(expression)
+            );
         }
 
         return modelBuilder.HasDbFunction(methodInfo);
@@ -315,7 +322,8 @@ public static class RelationalModelBuilderExtensions
     public static ModelBuilder HasDbFunction(
         this ModelBuilder modelBuilder,
         MethodInfo methodInfo,
-        Action<DbFunctionBuilder> builderAction)
+        Action<DbFunctionBuilder> builderAction
+    )
     {
         Check.NotNull(builderAction, nameof(builderAction));
 
@@ -337,7 +345,8 @@ public static class RelationalModelBuilderExtensions
     public static IConventionDbFunctionBuilder HasDbFunction(
         this IConventionModelBuilder modelBuilder,
         MethodInfo methodInfo,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NotNull(methodInfo, nameof(methodInfo));
 
@@ -349,7 +358,10 @@ public static class RelationalModelBuilderExtensions
         else
         {
             ((DbFunction)dbFunction).UpdateConfigurationSource(
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
         }
 
         return dbFunction.Builder;
@@ -370,7 +382,8 @@ public static class RelationalModelBuilderExtensions
         this IConventionModelBuilder modelBuilder,
         string name,
         Type returnType,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NotEmpty(name, nameof(name));
 
@@ -382,7 +395,10 @@ public static class RelationalModelBuilderExtensions
         else
         {
             ((DbFunction)dbFunction).UpdateConfigurationSource(
-                fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
         }
 
         return dbFunction.Builder;
@@ -398,9 +414,7 @@ public static class RelationalModelBuilderExtensions
     /// <param name="modelBuilder">The model builder.</param>
     /// <param name="schema">The default schema.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static ModelBuilder HasDefaultSchema(
-        this ModelBuilder modelBuilder,
-        string? schema)
+    public static ModelBuilder HasDefaultSchema(this ModelBuilder modelBuilder, string? schema)
     {
         Check.NullButNotEmpty(schema, nameof(schema));
 
@@ -426,7 +440,8 @@ public static class RelationalModelBuilderExtensions
     public static IConventionModelBuilder? HasDefaultSchema(
         this IConventionModelBuilder modelBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetDefaultSchema(schema, fromDataAnnotation))
         {
@@ -451,11 +466,16 @@ public static class RelationalModelBuilderExtensions
     public static bool CanSetDefaultSchema(
         this IConventionModelBuilder modelBuilder,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(schema, nameof(schema));
 
-        return modelBuilder.CanSetAnnotation(RelationalAnnotationNames.DefaultSchema, schema, fromDataAnnotation);
+        return modelBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.DefaultSchema,
+            schema,
+            fromDataAnnotation
+        );
     }
 
     /// <summary>
@@ -474,7 +494,8 @@ public static class RelationalModelBuilderExtensions
     public static IConventionModelBuilder? HasMaxIdentifierLength(
         this IConventionModelBuilder modelBuilder,
         int? length,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetMaxIdentifierLength(length, fromDataAnnotation))
         {
@@ -499,8 +520,13 @@ public static class RelationalModelBuilderExtensions
     public static bool CanSetMaxIdentifierLength(
         this IConventionModelBuilder modelBuilder,
         int? length,
-        bool fromDataAnnotation = false)
-        => modelBuilder.CanSetAnnotation(RelationalAnnotationNames.MaxIdentifierLength, length, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        modelBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.MaxIdentifierLength,
+            length,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the database collation, which will be used by all columns without an explicit collation.
@@ -511,9 +537,7 @@ public static class RelationalModelBuilderExtensions
     /// <param name="modelBuilder">The model builder.</param>
     /// <param name="collation">The collation.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static ModelBuilder UseCollation(
-        this ModelBuilder modelBuilder,
-        string? collation)
+    public static ModelBuilder UseCollation(this ModelBuilder modelBuilder, string? collation)
     {
         Check.NullButNotEmpty(collation, nameof(collation));
 
@@ -538,7 +562,8 @@ public static class RelationalModelBuilderExtensions
     public static IConventionModelBuilder? UseCollation(
         this IConventionModelBuilder modelBuilder,
         string? collation,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetCollation(collation, fromDataAnnotation))
         {
@@ -563,10 +588,15 @@ public static class RelationalModelBuilderExtensions
     public static bool CanSetCollation(
         this IConventionModelBuilder modelBuilder,
         string? collation,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(collation, nameof(collation));
 
-        return modelBuilder.CanSetAnnotation(RelationalAnnotationNames.Collation, collation, fromDataAnnotation);
+        return modelBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.Collation,
+            collation,
+            fromDataAnnotation
+        );
     }
 }

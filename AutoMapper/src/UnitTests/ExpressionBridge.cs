@@ -4,15 +4,28 @@ namespace AutoMapper.UnitTests
 {
     public static class ExpressionBuilderExtensions
     {
-        public static Expression<Func<TSource, TDestination>> GetMapExpression<TSource, TDestination>(this IProjectionBuilder expressionBuilder) =>
-            (Expression<Func<TSource, TDestination>>)expressionBuilder.GetProjection(typeof(TSource), typeof(TDestination), null, Array.Empty<MemberPath>()).Projection;
+        public static Expression<Func<TSource, TDestination>> GetMapExpression<
+            TSource,
+            TDestination
+        >(this IProjectionBuilder expressionBuilder) =>
+            (Expression<Func<TSource, TDestination>>)
+                expressionBuilder
+                    .GetProjection(
+                        typeof(TSource),
+                        typeof(TDestination),
+                        null,
+                        Array.Empty<MemberPath>()
+                    )
+                    .Projection;
     }
+
     public class SimpleProductDto
     {
         public string Name { set; get; }
         public string ProductSubcategoryName { set; get; }
         public string CategoryName { set; get; }
     }
+
     public class ExtendedProductDto
     {
         public string Name { set; get; }
@@ -20,20 +33,24 @@ namespace AutoMapper.UnitTests
         public string CategoryName { set; get; }
         public List<BillOfMaterialsDto> BOM { set; get; }
     }
+
     public class ComplexProductDto
     {
         public string Name { get; set; }
         public ProductSubcategoryDto ProductSubcategory { get; set; }
     }
+
     public class ProductSubcategoryDto
     {
         public string Name { get; set; }
         public ProductCategoryDto ProductCategory { get; set; }
     }
+
     public class ProductCategoryDto
     {
         public string Name { get; set; }
     }
+
     public class AbstractProductDto
     {
         public string Name { set; get; }
@@ -41,13 +58,20 @@ namespace AutoMapper.UnitTests
         public string CategoryName { set; get; }
         public List<ProductTypeDto> Types { get; set; }
     }
+
     public abstract class ProductTypeDto { }
-    public class ProdTypeA : ProductTypeDto {}
-    public class ProdTypeB : ProductTypeDto {}
+
+    public class ProdTypeA : ProductTypeDto { }
+
+    public class ProdTypeB : ProductTypeDto { }
 
     public class ProductTypeConverter : ITypeConverter<ProductType, ProductTypeDto>
     {
-        public ProductTypeDto Convert(ProductType source, ProductTypeDto destination, ResolutionContext context)
+        public ProductTypeDto Convert(
+            ProductType source,
+            ProductTypeDto destination,
+            ResolutionContext context
+        )
         {
             if (source.Name == "A")
                 return new ProdTypeA();
@@ -56,7 +80,6 @@ namespace AutoMapper.UnitTests
             throw new ArgumentException();
         }
     }
-
 
     public class ProductType
     {
@@ -91,6 +114,7 @@ namespace AutoMapper.UnitTests
     {
         public int BillOfMaterialsID { set; get; }
     }
+
     public class When_mapping_using_expressions : NonValidatingSpecBase
     {
         private List<Product> _products;
@@ -106,9 +130,15 @@ namespace AutoMapper.UnitTests
             _config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateProjection<Product, SimpleProductDto>()
-                    .ForMember(m => m.CategoryName, dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name));
+                    .ForMember(
+                        m => m.CategoryName,
+                        dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
+                    );
                 cfg.CreateProjection<Product, ExtendedProductDto>()
-                    .ForMember(m => m.CategoryName, dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name))
+                    .ForMember(
+                        m => m.CategoryName,
+                        dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
+                    )
                     .ForMember(m => m.BOM, dst => dst.MapFrom(p => p.BillOfMaterials));
                 cfg.CreateProjection<BillOfMaterials, BillOfMaterialsDto>();
                 cfg.CreateProjection<Product, ComplexProductDto>();
@@ -119,9 +149,15 @@ namespace AutoMapper.UnitTests
                     //.ConvertUsing(x => ProductTypeDto.GetProdType(x));
                     .ConvertUsing<ProductTypeConverter>();
             });
-            _simpleProductConversionLinq = _config.Internal().ProjectionBuilder.GetMapExpression<Product, SimpleProductDto>();
-            _extendedProductConversionLinq = _config.Internal().ProjectionBuilder.GetMapExpression<Product, ExtendedProductDto>();
-            _abstractProductConversionLinq = _config.Internal().ProjectionBuilder.GetMapExpression<Product, AbstractProductDto>();
+            _simpleProductConversionLinq = _config
+                .Internal()
+                .ProjectionBuilder.GetMapExpression<Product, SimpleProductDto>();
+            _extendedProductConversionLinq = _config
+                .Internal()
+                .ProjectionBuilder.GetMapExpression<Product, ExtendedProductDto>();
+            _abstractProductConversionLinq = _config
+                .Internal()
+                .ProjectionBuilder.GetMapExpression<Product, AbstractProductDto>();
 
             _products = new List<Product>()
             {
@@ -131,26 +167,19 @@ namespace AutoMapper.UnitTests
                     ProductSubcategory = new ProductSubcategory
                     {
                         Name = "Bar",
-                        ProductCategory = new ProductCategory
-                        {
-                            Name = "Baz"
-                        }
+                        ProductCategory = new ProductCategory { Name = "Baz" },
                     },
                     BillOfMaterials = new List<BillOfMaterials>
                     {
-                        new BillOfMaterials
-                        {
-                            BillOfMaterialsID = 5
-                        }
-                    }
-                    ,
+                        new BillOfMaterials { BillOfMaterialsID = 5 },
+                    },
                     Types = new List<ProductType>
-                                {
-                                    new ProductType() { Name = "A" },
-                                    new ProductType() { Name = "B" },
-                                    new ProductType() { Name = "A" }
-                                }
-                }
+                    {
+                        new ProductType() { Name = "A" },
+                        new ProductType() { Name = "B" },
+                        new ProductType() { Name = "A" },
+                    },
+                },
             };
             var queryable = _products.AsQueryable();
 
@@ -162,8 +191,6 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_map_and_flatten()
         {
-
-
             _simpleProducts.Count.ShouldBe(1);
             _simpleProducts[0].Name.ShouldBe("Foo");
             _simpleProducts[0].ProductSubcategoryName.ShouldBe("Bar");
@@ -176,12 +203,10 @@ namespace AutoMapper.UnitTests
             _extendedProducts[0].BOM.Count.ShouldBe(1);
             _extendedProducts[0].BOM[0].BillOfMaterialsID.ShouldBe(5);
         }
-           
+
         [Fact]
         public void Should_use_extension_methods()
         {
-
-                
             var queryable = _products.AsQueryable();
 
             var simpleProducts = queryable.ProjectTo<SimpleProductDto>(_config).ToList();
@@ -224,6 +249,7 @@ namespace AutoMapper.UnitTests
             {
                 BP2 = new HashSet<A>();
             }
+
             public int BP1 { get; set; }
             public virtual ICollection<A> BP2 { get; set; }
         }
@@ -234,12 +260,14 @@ namespace AutoMapper.UnitTests
             public string AP2 { get; set; }
             public virtual BEntity B { get; set; }
         }
+
         public class BEntity
         {
             public BEntity()
             {
                 BP2 = new HashSet<AEntity>();
             }
+
             public int BP1 { get; set; }
             public virtual ICollection<AEntity> BP2 { get; set; }
         }
@@ -253,18 +281,33 @@ namespace AutoMapper.UnitTests
         {
             private IQueryable<BEntity> _bei;
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateProjection<BEntity, B>().MaxDepth(3);
-                cfg.CreateProjection<AEntity, A>().MaxDepth(3);
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateProjection<BEntity, B>().MaxDepth(3);
+                    cfg.CreateProjection<AEntity, A>().MaxDepth(3);
+                });
 
             protected override void Because_of()
             {
                 var be = new BEntity();
                 be.BP1 = 3;
-                be.BP2.Add(new AEntity() { AP1 = 1, AP2 = "hello", B = be });
-                be.BP2.Add(new AEntity() { AP1 = 2, AP2 = "two", B = be });
+                be.BP2.Add(
+                    new AEntity()
+                    {
+                        AP1 = 1,
+                        AP2 = "hello",
+                        B = be,
+                    }
+                );
+                be.BP2.Add(
+                    new AEntity()
+                    {
+                        AP1 = 2,
+                        AP2 = "two",
+                        B = be,
+                    }
+                );
 
                 var belist = new List<BEntity>();
                 belist.Add(be);

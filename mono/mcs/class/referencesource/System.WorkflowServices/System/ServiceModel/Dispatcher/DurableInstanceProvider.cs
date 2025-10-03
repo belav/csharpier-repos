@@ -16,7 +16,7 @@ namespace System.ServiceModel.Dispatcher
 
         public object GetInstance(InstanceContext instanceContext)
         {
-            return ((IInstanceProvider) this).GetInstance(instanceContext, null);
+            return ((IInstanceProvider)this).GetInstance(instanceContext, null);
         }
 
         public object GetInstance(InstanceContext instanceContext, Message message)
@@ -41,12 +41,15 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("instance");
             }
 
-            DurableInstance durableInstance = (DurableInstance) instance;
+            DurableInstance durableInstance = (DurableInstance)instance;
 
             if (instanceContext.State == CommunicationState.Faulted || instanceContext.Aborted)
             {
                 durableInstance.Abort();
-                this.durableInstanceContextProvider.UnbindAbortedInstance(instanceContext, durableInstance.InstanceId);
+                this.durableInstanceContextProvider.UnbindAbortedInstance(
+                    instanceContext,
+                    durableInstance.InstanceId
+                );
             }
             else if (instanceContext.State == CommunicationState.Closed)
             {

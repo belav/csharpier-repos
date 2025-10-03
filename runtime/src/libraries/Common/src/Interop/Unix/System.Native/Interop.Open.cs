@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Open", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Open",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         internal static partial SafeFileHandle Open(string filename, OpenFlags flags, int mode);
     }
 }

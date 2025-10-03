@@ -23,7 +23,10 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlExpressionSimplifyingExpressionVisitor(ISqlExpressionFactory sqlExpressionFactory, bool useRelationalNulls)
+    public SqlExpressionSimplifyingExpressionVisitor(
+        ISqlExpressionFactory sqlExpressionFactory,
+        bool useRelationalNulls
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
         _useRelationalNulls = useRelationalNulls;
@@ -46,15 +49,20 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
         }
 
         // Only applies to 'CASE WHEN condition...' not 'CASE operand WHEN...'
-        if (extensionExpression is CaseExpression
+        if (
+            extensionExpression is CaseExpression
             {
-                Operand: null, ElseResult: CaseExpression { Operand: null } nestedCaseExpression
-            } caseExpression)
+                Operand: null,
+                ElseResult: CaseExpression { Operand: null } nestedCaseExpression
+            } caseExpression
+        )
         {
             return VisitExtension(
                 _sqlExpressionFactory.Case(
                     caseExpression.WhenClauses.Union(nestedCaseExpression.WhenClauses).ToList(),
-                    nestedCaseExpression.ElseResult));
+                    nestedCaseExpression.ElseResult
+                )
+            );
         }
 
         if (extensionExpression is SqlBinaryExpression sqlBinaryExpression)
@@ -62,8 +70,10 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
             return SimplifySqlBinary(sqlBinaryExpression);
         }
 
-        if (extensionExpression is SqlFunctionExpression sqlFunctionExpression
-            && IsCoalesce(sqlFunctionExpression))
+        if (
+            extensionExpression is SqlFunctionExpression sqlFunctionExpression
+            && IsCoalesce(sqlFunctionExpression)
+        )
         {
             var arguments = new List<SqlExpression>();
             foreach (var argument in sqlFunctionExpression.Arguments!)
@@ -88,27 +98,43 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                     sqlFunctionExpression.IsNullable,
                     argumentsPropagateNullability: distinctArguments.Select(_ => false).ToArray(),
                     sqlFunctionExpression.Type,
-                    sqlFunctionExpression.TypeMapping)
+                    sqlFunctionExpression.TypeMapping
+                )
                 : distinctArguments[0];
         }
 
         return base.VisitExtension(extensionExpression);
 
-        static bool IsCoalesce(SqlExpression sqlExpression)
-            => sqlExpression is SqlFunctionExpression { IsBuiltIn: true, Instance: null } sqlFunctionExpression
-                && string.Equals(sqlFunctionExpression.Name, "COALESCE", StringComparison.OrdinalIgnoreCase)
-                && sqlFunctionExpression.Arguments?.Count > 1;
+        static bool IsCoalesce(SqlExpression sqlExpression) =>
+            sqlExpression
+                is SqlFunctionExpression { IsBuiltIn: true, Instance: null } sqlFunctionExpression
+            && string.Equals(
+                sqlFunctionExpression.Name,
+                "COALESCE",
+                StringComparison.OrdinalIgnoreCase
+            )
+            && sqlFunctionExpression.Arguments?.Count > 1;
     }
 
     private static bool IsCompareTo([NotNullWhen(true)] CaseExpression? caseExpression)
     {
-        if (caseExpression is { Operand: null, ElseResult: null, WhenClauses.Count: 3 }
-            && caseExpression.WhenClauses.All(c => c is { Test: SqlBinaryExpression, Result: SqlConstantExpression { Value: int } }))
+        if (
+            caseExpression is { Operand: null, ElseResult: null, WhenClauses.Count: 3 }
+            && caseExpression.WhenClauses.All(c =>
+                c is { Test: SqlBinaryExpression, Result: SqlConstantExpression { Value: int } }
+            )
+        )
         {
-            var whenClauses = caseExpression.WhenClauses.Select(
-                c => new { Test = (SqlBinaryExpression)c.Test, ResultValue = (int)((SqlConstantExpression)c.Result).Value! }).ToList();
+            var whenClauses = caseExpression
+                .WhenClauses.Select(c => new
+                {
+                    Test = (SqlBinaryExpression)c.Test,
+                    ResultValue = (int)((SqlConstantExpression)c.Result).Value!,
+                })
+                .ToList();
 
-            if (whenClauses[0].Test.Left.Equals(whenClauses[1].Test.Left)
+            if (
+                whenClauses[0].Test.Left.Equals(whenClauses[1].Test.Left)
                 && whenClauses[1].Test.Left.Equals(whenClauses[2].Test.Left)
                 && whenClauses[0].Test.Right.Equals(whenClauses[1].Test.Right)
                 && whenClauses[1].Test.Right.Equals(whenClauses[2].Test.Right)
@@ -117,7 +143,8 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 && whenClauses[2].Test.OperatorType == ExpressionType.LessThan
                 && whenClauses[0].ResultValue == 0
                 && whenClauses[1].ResultValue == 1
-                && whenClauses[2].ResultValue == -1)
+                && whenClauses[2].ResultValue == -1
+            )
             {
                 return true;
             }
@@ -129,20 +156,22 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
     private SqlExpression OptimizeCompareTo(
         SqlBinaryExpression sqlBinaryExpression,
         int intValue,
-        CaseExpression caseExpression)
+        CaseExpression caseExpression
+    )
     {
         var testLeft = ((SqlBinaryExpression)caseExpression.WhenClauses[0].Test).Left;
         var testRight = ((SqlBinaryExpression)caseExpression.WhenClauses[0].Test).Right;
-        var operatorType = sqlBinaryExpression.Right is SqlConstantExpression
-            ? sqlBinaryExpression.OperatorType
-            : sqlBinaryExpression.OperatorType switch
-            {
-                ExpressionType.GreaterThan => ExpressionType.LessThan,
-                ExpressionType.GreaterThanOrEqual => ExpressionType.LessThanOrEqual,
-                ExpressionType.LessThan => ExpressionType.GreaterThan,
-                ExpressionType.LessThanOrEqual => ExpressionType.GreaterThanOrEqual,
-                _ => sqlBinaryExpression.OperatorType
-            };
+        var operatorType =
+            sqlBinaryExpression.Right is SqlConstantExpression
+                ? sqlBinaryExpression.OperatorType
+                : sqlBinaryExpression.OperatorType switch
+                {
+                    ExpressionType.GreaterThan => ExpressionType.LessThan,
+                    ExpressionType.GreaterThanOrEqual => ExpressionType.LessThanOrEqual,
+                    ExpressionType.LessThan => ExpressionType.GreaterThan,
+                    ExpressionType.LessThanOrEqual => ExpressionType.GreaterThanOrEqual,
+                    _ => sqlBinaryExpression.OperatorType,
+                };
 
         return operatorType switch
         {
@@ -154,8 +183,9 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 {
                     0 => _sqlExpressionFactory.NotEqual(testLeft, testRight),
                     1 => _sqlExpressionFactory.LessThanOrEqual(testLeft, testRight),
-                    _ => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight)
-                }),
+                    _ => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight),
+                }
+            ),
             // CompareTo(a, b) > 0 -> a > b
             // CompareTo(a, b) > 1 -> false
             // CompareTo(a, b) > -1 -> a >= b
@@ -164,8 +194,9 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 {
                     0 => _sqlExpressionFactory.GreaterThan(testLeft, testRight),
                     1 => _sqlExpressionFactory.Constant(false, sqlBinaryExpression.TypeMapping),
-                    _ => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight)
-                }),
+                    _ => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight),
+                }
+            ),
             // CompareTo(a, b) >= 0 -> a >= b
             // CompareTo(a, b) >= 1 -> a > b
             // CompareTo(a, b) >= -1 -> true
@@ -174,8 +205,9 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 {
                     0 => _sqlExpressionFactory.GreaterThanOrEqual(testLeft, testRight),
                     1 => _sqlExpressionFactory.GreaterThan(testLeft, testRight),
-                    _ => _sqlExpressionFactory.Constant(true, sqlBinaryExpression.TypeMapping)
-                }),
+                    _ => _sqlExpressionFactory.Constant(true, sqlBinaryExpression.TypeMapping),
+                }
+            ),
             // CompareTo(a, b) < 0 -> a < b
             // CompareTo(a, b) < 1 -> a <= b
             // CompareTo(a, b) < -1 -> false
@@ -184,24 +216,29 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 {
                     0 => _sqlExpressionFactory.LessThan(testLeft, testRight),
                     1 => _sqlExpressionFactory.LessThanOrEqual(testLeft, testRight),
-                    _ => _sqlExpressionFactory.Constant(false, sqlBinaryExpression.TypeMapping)
-                }),
+                    _ => _sqlExpressionFactory.Constant(false, sqlBinaryExpression.TypeMapping),
+                }
+            ),
 
             _ => (SqlExpression)Visit(
                 intValue switch
                 {
                     0 => _sqlExpressionFactory.LessThanOrEqual(testLeft, testRight),
                     1 => _sqlExpressionFactory.Constant(true, sqlBinaryExpression.TypeMapping),
-                    _ => _sqlExpressionFactory.LessThan(testLeft, testRight)
-                })
+                    _ => _sqlExpressionFactory.LessThan(testLeft, testRight),
+                }
+            ),
         };
     }
 
     private Expression SimplifySqlBinary(SqlBinaryExpression sqlBinaryExpression)
     {
         var sqlConstantComponent =
-            sqlBinaryExpression.Left as SqlConstantExpression ?? sqlBinaryExpression.Right as SqlConstantExpression;
-        var caseComponent = sqlBinaryExpression.Left as CaseExpression ?? sqlBinaryExpression.Right as CaseExpression;
+            sqlBinaryExpression.Left as SqlConstantExpression
+            ?? sqlBinaryExpression.Right as SqlConstantExpression;
+        var caseComponent =
+            sqlBinaryExpression.Left as CaseExpression
+            ?? sqlBinaryExpression.Right as CaseExpression;
 
         // generic CASE statement comparison optimization:
         // (CASE
@@ -209,11 +246,15 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
         //  WHEN condition2 THEN result2
         //  WHEN ...
         //  WHEN conditionN THEN resultN) == result1 -> condition1
-        if (sqlBinaryExpression.OperatorType == ExpressionType.Equal
+        if (
+            sqlBinaryExpression.OperatorType == ExpressionType.Equal
             && sqlConstantComponent?.Value is not null
-            && caseComponent is { Operand: null, ElseResult: null })
+            && caseComponent is { Operand: null, ElseResult: null }
+        )
         {
-            var matchingCaseBlock = caseComponent.WhenClauses.FirstOrDefault(wc => sqlConstantComponent.Equals(wc.Result));
+            var matchingCaseBlock = caseComponent.WhenClauses.FirstOrDefault(wc =>
+                sqlConstantComponent.Equals(wc.Result)
+            );
             if (matchingCaseBlock != null)
             {
                 return Visit(matchingCaseBlock.Test);
@@ -221,20 +262,19 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
         }
 
         // CompareTo specific optimizations
-        if (sqlConstantComponent != null
+        if (
+            sqlConstantComponent != null
             && IsCompareTo(caseComponent)
             && sqlConstantComponent.Value is int intValue and > -2 and < 2
             && sqlBinaryExpression.OperatorType
                 is ExpressionType.NotEqual
-                or ExpressionType.GreaterThan
-                or ExpressionType.GreaterThanOrEqual
-                or ExpressionType.LessThan
-                or ExpressionType.LessThanOrEqual)
+                    or ExpressionType.GreaterThan
+                    or ExpressionType.GreaterThanOrEqual
+                    or ExpressionType.LessThan
+                    or ExpressionType.LessThanOrEqual
+        )
         {
-            return OptimizeCompareTo(
-                sqlBinaryExpression,
-                intValue,
-                caseComponent);
+            return OptimizeCompareTo(sqlBinaryExpression, intValue, caseComponent);
         }
 
         var left = (SqlExpression)Visit(sqlBinaryExpression.Left);
@@ -242,10 +282,12 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
 
         if (sqlBinaryExpression.OperatorType is ExpressionType.AndAlso or ExpressionType.OrElse)
         {
-            if (TryGetInExpressionCandidateInfo(left, out var leftCandidateInfo)
+            if (
+                TryGetInExpressionCandidateInfo(left, out var leftCandidateInfo)
                 && TryGetInExpressionCandidateInfo(right, out var rightCandidateInfo)
                 && leftCandidateInfo.ColumnExpression == rightCandidateInfo.ColumnExpression
-                && leftCandidateInfo.OperationType == rightCandidateInfo.OperationType)
+                && leftCandidateInfo.OperationType == rightCandidateInfo.OperationType
+            )
             {
                 // for relational nulls we can't combine comparisons that contain null
                 // a != 1 && a != null would be converted to a NOT IN (1, null), which never returns any results
@@ -254,15 +296,17 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                 var leftValues = leftCandidateInfo.ValueOrValues switch
                 {
                     IReadOnlyList<SqlExpression> v => v,
-                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null => new[] { c },
-                    _ => null
+                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null =>
+                        new[] { c },
+                    _ => null,
                 };
 
                 var rightValues = rightCandidateInfo.ValueOrValues switch
                 {
                     IReadOnlyList<SqlExpression> v => v,
-                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null => new[] { c },
-                    _ => null
+                    SqlConstantExpression c when !_useRelationalNulls || c.Value is not null =>
+                        new[] { c },
+                    _ => null,
                 };
 
                 if (leftValues is not null && rightValues is not null)
@@ -276,16 +320,20 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
                     // a IN (1, 2, 3) && a IN (2, 3, 4) -> a IN (2, 3)
                     var inExpression = _sqlExpressionFactory.In(
                         leftCandidateInfo.ColumnExpression,
-                        (leftCandidateInfo.OperationType, sqlBinaryExpression.OperatorType) is
-                        (ExpressionType.Equal, ExpressionType.OrElse) or (ExpressionType.NotEqual, ExpressionType.AndAlso)
+                        (leftCandidateInfo.OperationType, sqlBinaryExpression.OperatorType)
+                            is
+                                (ExpressionType.Equal, ExpressionType.OrElse)
+                                or
+                                (ExpressionType.NotEqual, ExpressionType.AndAlso)
                             ? leftValues.Union(rightValues).ToArray()
-                            : leftValues.Intersect(rightValues).ToArray());
+                            : leftValues.Intersect(rightValues).ToArray()
+                    );
 
                     return leftCandidateInfo.OperationType switch
                     {
                         ExpressionType.Equal => inExpression,
                         ExpressionType.NotEqual => _sqlExpressionFactory.Not(inExpression),
-                        _ => throw new UnreachableException()
+                        _ => throw new UnreachableException(),
                     };
                 }
             }
@@ -296,23 +344,42 @@ public class SqlExpressionSimplifyingExpressionVisitor : ExpressionVisitor
 
     private static bool TryGetInExpressionCandidateInfo(
         SqlExpression sqlExpression,
-        out (ColumnExpression ColumnExpression, object ValueOrValues, ExpressionType OperationType) candidateInfo)
+        out (
+            ColumnExpression ColumnExpression,
+            object ValueOrValues,
+            ExpressionType OperationType
+        ) candidateInfo
+    )
     {
         switch (sqlExpression)
         {
             case SqlUnaryExpression { OperatorType: ExpressionType.Not } sqlUnaryExpression
                 when TryGetInExpressionCandidateInfo(sqlUnaryExpression.Operand, out var inner):
             {
-                candidateInfo = (inner.ColumnExpression, inner.ValueOrValues,
-                    inner.OperationType == ExpressionType.Equal ? ExpressionType.NotEqual : ExpressionType.Equal);
+                candidateInfo = (
+                    inner.ColumnExpression,
+                    inner.ValueOrValues,
+                    inner.OperationType == ExpressionType.Equal
+                        ? ExpressionType.NotEqual
+                        : ExpressionType.Equal
+                );
 
                 return true;
             }
 
-            case SqlBinaryExpression { OperatorType: ExpressionType.Equal or ExpressionType.NotEqual } sqlBinaryExpression:
+            case SqlBinaryExpression
             {
-                var column = (sqlBinaryExpression.Left as ColumnExpression ?? sqlBinaryExpression.Right as ColumnExpression);
-                var constant = (sqlBinaryExpression.Left as SqlConstantExpression ?? sqlBinaryExpression.Right as SqlConstantExpression);
+                OperatorType: ExpressionType.Equal or ExpressionType.NotEqual
+            } sqlBinaryExpression:
+            {
+                var column = (
+                    sqlBinaryExpression.Left as ColumnExpression
+                    ?? sqlBinaryExpression.Right as ColumnExpression
+                );
+                var constant = (
+                    sqlBinaryExpression.Left as SqlConstantExpression
+                    ?? sqlBinaryExpression.Right as SqlConstantExpression
+                );
 
                 if (column != null && constant != null)
                 {

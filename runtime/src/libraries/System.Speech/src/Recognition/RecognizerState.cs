@@ -10,6 +10,6 @@ namespace System.Speech.Recognition
         Stopped,
 
         // The recognizer is currently listening.
-        Listening
+        Listening,
     }
 }

@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
-using Debug = System.Diagnostics.Debug;
-using ConditionalAttribute = System.Diagnostics.ConditionalAttribute;
 using Internal.LowLevelLinq;
 using Internal.NativeFormat;
+using ConditionalAttribute = System.Diagnostics.ConditionalAttribute;
+using Debug = System.Diagnostics.Debug;
 using Graph = Internal.Metadata.NativeFormat.Writer.AdjacencyGraph;
 
 namespace Internal.Metadata.NativeFormat.Writer
@@ -17,15 +17,18 @@ namespace Internal.Metadata.NativeFormat.Writer
     {
         public MetadataRecord Source;
         public MetadataRecord Target;
+
         public Edge(MetadataRecord source, MetadataRecord target)
         {
             Source = source;
             Target = target;
         }
     };
+
     internal sealed class AdjacencyGraph
     {
         private HashSet<MetadataRecord> _vertices = new HashSet<MetadataRecord>();
+
         // private Dictionary<MetadataRecord, HashSet<Edge>> _edges = new Dictionary<MetadataRecord, HashSet<Edge>>();
 
         public void AddVertex(MetadataRecord v)
@@ -52,7 +55,9 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
 
         public IEnumerable<MetadataRecord> Vertices
-        { get { return _vertices; } }
+        {
+            get { return _vertices; }
+        }
     }
 
     internal partial interface IRecordVisitor
@@ -63,7 +68,10 @@ namespace Internal.Metadata.NativeFormat.Writer
             where DstT : MetadataRecord;
 
         // Adds grouped edges
-        Dictionary<string, DstT> Visit<SrcT, DstT>(SrcT src, IEnumerable<KeyValuePair<string, DstT>> dst)
+        Dictionary<string, DstT> Visit<SrcT, DstT>(
+            SrcT src,
+            IEnumerable<KeyValuePair<string, DstT>> dst
+        )
             where SrcT : MetadataRecord
             where DstT : MetadataRecord;
 
@@ -153,19 +161,22 @@ namespace Internal.Metadata.NativeFormat.Writer
         private Stats _stats = new Stats();
 #endif
 
-        private Dictionary<MetadataRecord, MetadataRecord> _recordPool = new Dictionary<MetadataRecord, MetadataRecord>();
+        private Dictionary<MetadataRecord, MetadataRecord> _recordPool =
+            new Dictionary<MetadataRecord, MetadataRecord>();
 
         public RecordVisitorBase()
         {
             _graph.AddVertex(MetaSourceVertex);
         }
 
-        internal T MapToPooledRecord<T>(T rec) where T : MetadataRecord
+        internal T MapToPooledRecord<T>(T rec)
+            where T : MetadataRecord
         {
             return (T)_recordPool[rec];
         }
 
-        private T GetPooledRecord<T>(T rec) where T : MetadataRecord
+        private T GetPooledRecord<T>(T rec)
+            where T : MetadataRecord
         {
             if (rec == null)
                 return rec;
@@ -202,7 +213,10 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
 
         // Adds Edges
-        public Dictionary<string, DstT> Visit<SrcT, DstT>(SrcT src, IEnumerable<KeyValuePair<string, DstT>> dst)
+        public Dictionary<string, DstT> Visit<SrcT, DstT>(
+            SrcT src,
+            IEnumerable<KeyValuePair<string, DstT>> dst
+        )
             where SrcT : MetadataRecord
             where DstT : MetadataRecord
         {
@@ -273,14 +287,14 @@ namespace Internal.Metadata.NativeFormat.Writer
         protected Queue<MetadataRecord> _queue = new Queue<MetadataRecord>();
         protected Graph _graph = new Graph();
 
-        public Graph Graph { get { return _graph; } }
+        public Graph Graph
+        {
+            get { return _graph; }
+        }
         public readonly MetadataRecord MetaSourceVertex = new SourceVertex();
     }
 
-    internal sealed class RecordVisitor : RecordVisitorBase
-    {
-    }
-
+    internal sealed class RecordVisitor : RecordVisitorBase { }
 
     internal sealed partial class MetadataHeader : MetadataRecord
     {
@@ -338,7 +352,9 @@ namespace Internal.Metadata.NativeFormat.Writer
             _visitor.Run(ScopeDefinitions.AsEnumerable());
             _visitor.Run(AdditionalRootRecords.AsEnumerable());
 
-            IEnumerable<MetadataRecord> records = _visitor.Graph.Vertices.Where(v => v != _visitor.MetaSourceVertex);
+            IEnumerable<MetadataRecord> records = _visitor.Graph.Vertices.Where(v =>
+                v != _visitor.MetaSourceVertex
+            );
 
             var writer = new NativeWriter();
 
@@ -377,7 +393,7 @@ namespace Internal.Metadata.NativeFormat.Writer
                     if (!alreadyQuoted)
                     {
                         LogWriter.Write("\"");
-                        asString = asString.Replace("\\", "\\\\").Replace("\"", "\\\"");  // Quote " and \
+                        asString = asString.Replace("\\", "\\\\").Replace("\"", "\\\""); // Quote " and \
                     }
                     // TODO we assume that a quoted string is escaped properly
                     LogWriter.Write(asString);
@@ -410,7 +426,10 @@ namespace Internal.Metadata.NativeFormat.Writer
             }
 
             // Resets the state back to what is was just after the constructor is called.
-            public void Reset() { _notFirst = false; }
+            public void Reset()
+            {
+                _notFirst = false;
+            }
 
             // All visits come to here for every child.  Here we simply print the handle as hex.
             public void Log(MetadataRecord rec)
@@ -424,26 +443,37 @@ namespace Internal.Metadata.NativeFormat.Writer
                 _logWriter.Write(rec.Handle._value.ToString("x"));
             }
 
-            public DstT Visit<SrcT, DstT>(SrcT src, DstT dst) where SrcT : MetadataRecord where DstT : MetadataRecord
+            public DstT Visit<SrcT, DstT>(SrcT src, DstT dst)
+                where SrcT : MetadataRecord
+                where DstT : MetadataRecord
             {
                 Log(dst);
                 return dst;
             }
-            public Dictionary<string, DstT> Visit<SrcT, DstT>(SrcT src, IEnumerable<KeyValuePair<string, DstT>> dst) where SrcT : MetadataRecord where DstT : MetadataRecord
+
+            public Dictionary<string, DstT> Visit<SrcT, DstT>(
+                SrcT src,
+                IEnumerable<KeyValuePair<string, DstT>> dst
+            )
+                where SrcT : MetadataRecord
+                where DstT : MetadataRecord
             {
                 foreach (var keyValue in dst)
                     Log(keyValue.Value);
                 return dst as Dictionary<string, DstT>;
             }
-            public List<DstT> Visit<SrcT, DstT>(SrcT src, List<DstT> dst) where SrcT : MetadataRecord where DstT : MetadataRecord
+
+            public List<DstT> Visit<SrcT, DstT>(SrcT src, List<DstT> dst)
+                where SrcT : MetadataRecord
+                where DstT : MetadataRecord
             {
                 foreach (var elem in dst)
                     Log(elem);
                 return dst.ToList();
             }
 
-            private bool _notFirst;           // The first child should not have a space before it.  This tracks this
-            private TextWriter _logWriter;    // Where we write output to
+            private bool _notFirst; // The first child should not have a space before it.  This tracks this
+            private TextWriter _logWriter; // Where we write output to
         }
 
         public TextWriter LogWriter;
@@ -517,18 +547,12 @@ namespace Internal.Metadata.NativeFormat.Writer
 
         internal int HandleOffset
         {
-            get
-            {
-                return _offset & 0x00FFFFFF;
-            }
+            get { return _offset & 0x00FFFFFF; }
         }
 
         internal Handle Handle
         {
-            get
-            {
-                return new Handle(HandleType, HandleOffset);
-            }
+            get { return new Handle(HandleType, HandleOffset); }
         }
 
         internal abstract void Visit(IRecordVisitor visitor);
@@ -543,7 +567,12 @@ namespace Internal.Metadata.NativeFormat.Writer
             return ToString();
         }
 
-        protected static string ToString<T>(IEnumerable<T> arr, string sep = ", ", bool includeHandleValue = false) where T : MetadataRecord
+        protected static string ToString<T>(
+            IEnumerable<T> arr,
+            string sep = ", ",
+            bool includeHandleValue = false
+        )
+            where T : MetadataRecord
         {
             return string.Join(sep, arr.Select(v => v.ToString(includeHandleValue)));
         }
@@ -554,9 +583,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         IList<CustomAttribute> GetCustomAttributes();
     }
 
-    public abstract partial class Blob : MetadataRecord
-    {
-    }
+    public abstract partial class Blob : MetadataRecord { }
 
     /// <summary>
     /// Supplements generated class with convenient coversion operators
@@ -583,9 +610,11 @@ namespace Internal.Metadata.NativeFormat.Writer
         {
             return ToString(true);
         }
+
         public override string ToString(bool includeHandleValue)
         {
-            return Name.ToString() + (includeHandleValue ? string.Format(" ({0:x})", Handle._value) : "");
+            return Name.ToString()
+                + (includeHandleValue ? string.Format(" ({0:x})", Handle._value) : "");
         }
     }
 
@@ -595,9 +624,11 @@ namespace Internal.Metadata.NativeFormat.Writer
         {
             return ToString(true);
         }
+
         public override string ToString(bool includeHandleValue)
         {
-            return Name.ToString() + (includeHandleValue ? string.Format(" ({0:x})", Handle._value) : "");
+            return Name.ToString()
+                + (includeHandleValue ? string.Format(" ({0:x})", Handle._value) : "");
         }
     }
 
@@ -643,6 +674,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         {
             return ToString(true);
         }
+
         public override string ToString(bool includeHandleValue)
         {
             string str;
@@ -682,6 +714,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         {
             return ToString(false);
         }
+
         public override string ToString(bool includeHandleValue)
         {
             string str;
@@ -712,6 +745,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         {
             return ToString(false);
         }
+
         public override string ToString(bool includeHandleValue)
         {
             string s = "";
@@ -810,7 +844,10 @@ namespace Internal.Metadata.NativeFormat.Writer
     {
         public override string ToString()
         {
-            return this.GenericType.ToString() + "<" + string.Join(", ", this.GenericTypeArguments.Select(ga => ga.ToString())) + ">";
+            return this.GenericType.ToString()
+                + "<"
+                + string.Join(", ", this.GenericTypeArguments.Select(ga => ga.ToString()))
+                + ">";
         }
     }
 
@@ -848,8 +885,11 @@ namespace Internal.Metadata.NativeFormat.Writer
         public override string ToString()
         {
             string str = Constructor.ToString();
-            str += "(" + string.Join(", ", FixedArguments.Select(fa => fa.ToString()))
-                + string.Join(", ", NamedArguments.Select(na => na.ToString())) + ")";
+            str +=
+                "("
+                + string.Join(", ", FixedArguments.Select(fa => fa.ToString()))
+                + string.Join(", ", NamedArguments.Select(na => na.ToString()))
+                + ")";
             str += "(ctor: " + Constructor.Handle.ToString();
             return str;
         }
@@ -867,7 +907,12 @@ namespace Internal.Metadata.NativeFormat.Writer
     {
         public override string ToString()
         {
-            return Parent.ToString() + "." + Name.Value + " (Signature: " + Signature.ToString() + ")";
+            return Parent.ToString()
+                + "."
+                + Name.Value
+                + " (Signature: "
+                + Signature.ToString()
+                + ")";
         }
     }
 
@@ -889,13 +934,20 @@ namespace Internal.Metadata.NativeFormat.Writer
 
         public string ToString(string name)
         {
-            return string.Join(" ", new string[] {
-                CallingConvention.FlagsToString(),
-                ReturnType.ToString(false),
-                name
-                    + (GenericParameterCount == 0 ? "" : "`" + GenericParameterCount.ToString())
-                    + "(" + string.Join(", ", Parameters.Select(p => p.ToString(false))) +
-                    string.Join(", ", VarArgParameters.Select(p => p.ToString(false))) + ")"}.Where(e => !string.IsNullOrWhiteSpace(e)));
+            return string.Join(
+                " ",
+                new string[]
+                {
+                    CallingConvention.FlagsToString(),
+                    ReturnType.ToString(false),
+                    name
+                        + (GenericParameterCount == 0 ? "" : "`" + GenericParameterCount.ToString())
+                        + "("
+                        + string.Join(", ", Parameters.Select(p => p.ToString(false)))
+                        + string.Join(", ", VarArgParameters.Select(p => p.ToString(false)))
+                        + ")",
+                }.Where(e => !string.IsNullOrWhiteSpace(e))
+            );
         }
     }
 
@@ -903,8 +955,14 @@ namespace Internal.Metadata.NativeFormat.Writer
     {
         public override string ToString()
         {
-            return string.Join(" ", Enum.GetName(typeof(CallingConventions), CallingConvention),
-                Type.ToString()) + "(" + ToString(Parameters) + ")";
+            return string.Join(
+                    " ",
+                    Enum.GetName(typeof(CallingConventions), CallingConvention),
+                    Type.ToString()
+                )
+                + "("
+                + ToString(Parameters)
+                + ")";
         }
     }
 
@@ -920,8 +978,11 @@ namespace Internal.Metadata.NativeFormat.Writer
     {
         public override string ToString()
         {
-            return "[" + (IsOptional ? "opt : " : "req : ") + ModifierType.ToString() + "] " +
-                Type.ToString();
+            return "["
+                + (IsOptional ? "opt : " : "req : ")
+                + ModifierType.ToString()
+                + "] "
+                + Type.ToString();
         }
     }
 
@@ -946,11 +1007,13 @@ namespace Internal.Metadata.NativeFormat.Writer
         public override string ToString()
         {
             string flags = Flags.FlagsToString();
-            return string.Format("{0}{1} (Seq:{2}) {3}",
+            return string.Format(
+                "{0}{1} (Seq:{2}) {3}",
                 flags,
                 Name.ToString(),
                 Sequence,
-                (DefaultValue == null ? "" : " = " + DefaultValue.ToString()));
+                (DefaultValue == null ? "" : " = " + DefaultValue.ToString())
+            );
         }
     }
 
@@ -964,10 +1027,17 @@ namespace Internal.Metadata.NativeFormat.Writer
 
     public static class EnumHelpers
     {
-        public static string FlagsToString<T>(this T value) where T : struct, Enum, IConvertible
+        public static string FlagsToString<T>(this T value)
+            where T : struct, Enum, IConvertible
         {
-            var flags = Enum.GetValues<T>().Where(
-                eVal => (((IConvertible)eVal).ToInt32(null) != 0) && ((((IConvertible)value).ToInt32(null) & ((IConvertible)eVal).ToInt32(null)) == ((IConvertible)eVal).ToInt32(null)));
+            var flags = Enum.GetValues<T>()
+                .Where(eVal =>
+                    (((IConvertible)eVal).ToInt32(null) != 0)
+                    && (
+                        (((IConvertible)value).ToInt32(null) & ((IConvertible)eVal).ToInt32(null))
+                        == ((IConvertible)eVal).ToInt32(null)
+                    )
+                );
             if (flags.Count() == 0)
                 return "";
             else
@@ -983,7 +1053,9 @@ namespace Internal.Metadata.NativeFormat.Writer
                 return list[0];
             return default(T);
         }
-        public static T First<T>(this List<T> list) where T : class
+
+        public static T First<T>(this List<T> list)
+            where T : class
         {
             if (list.Count != 0)
                 return list[0];
@@ -1000,7 +1072,9 @@ namespace Internal.Metadata.NativeFormat.Writer
                     return value;
             return default(T);
         }
-        internal static T First<T>(this Dictionary<string, T> dict) where T : class
+
+        internal static T First<T>(this Dictionary<string, T> dict)
+            where T : class
         {
             if (dict.Count != 0)
                 foreach (var value in dict.Values)
@@ -1030,7 +1104,11 @@ namespace Internal.Metadata.NativeFormat.Writer
             return first.SequenceEqual(second, null);
         }
 
-        public static bool SequenceEqual<T>(this List<T> first, List<T> second, IEqualityComparer<T> comparer)
+        public static bool SequenceEqual<T>(
+            this List<T> first,
+            List<T> second,
+            IEqualityComparer<T> comparer
+        )
         {
             if (first.Count != second.Count)
             {
@@ -1055,7 +1133,11 @@ namespace Internal.Metadata.NativeFormat.Writer
             return first.SequenceEqual(second, null);
         }
 
-        public static bool SequenceEqual<T>(this T[] first, T[] second, IEqualityComparer<T> comparer)
+        public static bool SequenceEqual<T>(
+            this T[] first,
+            T[] second,
+            IEqualityComparer<T> comparer
+        )
         {
             if (first.Length != second.Length)
             {
@@ -1095,6 +1177,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         public static readonly SingleComparer Instance = new SingleComparer();
 
         public bool Equals(float x, float y) => CustomComparer.Equals(x, y);
+
         public int GetHashCode(float obj) => obj.GetHashCode();
     }
 
@@ -1103,6 +1186,7 @@ namespace Internal.Metadata.NativeFormat.Writer
         public static readonly DoubleComparer Instance = new DoubleComparer();
 
         public bool Equals(double x, double y) => CustomComparer.Equals(x, y);
+
         public int GetHashCode(double obj) => obj.GetHashCode();
     }
 }

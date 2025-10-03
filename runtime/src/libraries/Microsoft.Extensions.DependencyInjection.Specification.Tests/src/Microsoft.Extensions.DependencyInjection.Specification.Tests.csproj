@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <Nullable>disable</Nullable>
@@ -16,17 +15,16 @@
     <!-- this assembly doesn't need to be binplaced -->
     <EnableBinPlacing>false</EnableBinPlacing>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Extensions.DependencyInjection.Abstractions\src\Microsoft.Extensions.DependencyInjection.Abstractions.csproj" />
     <PackageReference Include="xunit.assert" Version="$(XUnitVersion)" />
     <PackageReference Include="xunit.extensibility.core" Version="$(XUnitVersion)" />
-
     <!-- Upgrade the NETStandard.Library transitive xunit dependency to avoid transitive 1.x NS dependencies. -->
-    <PackageReference Include="NETStandard.Library"
-                      Version="$(NetStandardLibraryVersion)"
-                      PrivateAssets="all"
-                      Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
+    <PackageReference
+      Include="NETStandard.Library"
+      Version="$(NetStandardLibraryVersion)"
+      PrivateAssets="all"
+      Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'"
+    />
   </ItemGroup>
-
 </Project>

@@ -29,19 +29,32 @@ namespace System.ServiceModel.Dispatcher
         string id; // for ServiceMetadataBehavior, to help get EndpointIdentity of ServiceEndpoint from EndpointDispatcher
         bool isSystemEndpoint;
 
-        internal EndpointDispatcher(EndpointAddress address, string contractName, string contractNamespace, string id, bool isSystemEndpoint)
+        internal EndpointDispatcher(
+            EndpointAddress address,
+            string contractName,
+            string contractNamespace,
+            string id,
+            bool isSystemEndpoint
+        )
             : this(address, contractName, contractNamespace)
         {
             this.id = id;
             this.isSystemEndpoint = isSystemEndpoint;
         }
 
-        public EndpointDispatcher(EndpointAddress address, string contractName, string contractNamespace)
-            : this(address, contractName, contractNamespace, false)
-        {
-        }
+        public EndpointDispatcher(
+            EndpointAddress address,
+            string contractName,
+            string contractNamespace
+        )
+            : this(address, contractName, contractNamespace, false) { }
 
-        public EndpointDispatcher(EndpointAddress address, string contractName, string contractNamespace, bool isSystemEndpoint)
+        public EndpointDispatcher(
+            EndpointAddress address,
+            string contractName,
+            string contractNamespace,
+            bool isSystemEndpoint
+        )
         {
             this.originalAddress = address;
             this.contractName = contractName;
@@ -64,7 +77,9 @@ namespace System.ServiceModel.Dispatcher
 
         EndpointDispatcher(EndpointDispatcher baseEndpoint, IEnumerable<AddressHeader> headers)
         {
-            EndpointAddressBuilder builder = new EndpointAddressBuilder(baseEndpoint.EndpointAddress);
+            EndpointAddressBuilder builder = new EndpointAddressBuilder(
+                baseEndpoint.EndpointAddress
+            );
             foreach (AddressHeader h in headers)
             {
                 builder.Headers.Add(h);
@@ -248,8 +263,10 @@ namespace System.ServiceModel.Dispatcher
 
         internal int PerfCounterInstanceId { get; set; }
 
-        static internal EndpointDispatcher AddEndpointDispatcher(EndpointDispatcher baseEndpoint,
-                                                                 IEnumerable<AddressHeader> headers)
+        internal static EndpointDispatcher AddEndpointDispatcher(
+            EndpointDispatcher baseEndpoint,
+            IEnumerable<AddressHeader> headers
+        )
         {
             EndpointDispatcher endpoint = new EndpointDispatcher(baseEndpoint, headers);
             baseEndpoint.ChannelDispatcher.Endpoints.Add(endpoint);
@@ -260,12 +277,16 @@ namespace System.ServiceModel.Dispatcher
         {
             if (channelDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channelDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "channelDispatcher"
+                );
             }
 
             if (this.channelDispatcher != null)
             {
-                Exception error = new InvalidOperationException(SR.GetString(SR.SFxEndpointDispatcherMultipleChannelDispatcher0));
+                Exception error = new InvalidOperationException(
+                    SR.GetString(SR.SFxEndpointDispatcherMultipleChannelDispatcher0)
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
 
@@ -277,12 +298,16 @@ namespace System.ServiceModel.Dispatcher
         {
             if (channelDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("channelDispatcher");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "channelDispatcher"
+                );
             }
 
             if (this.channelDispatcher != channelDispatcher)
             {
-                Exception error = new InvalidOperationException(SR.GetString(SR.SFxEndpointDispatcherDifferentChannelDispatcher0));
+                Exception error = new InvalidOperationException(
+                    SR.GetString(SR.SFxEndpointDispatcherDifferentChannelDispatcher0)
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
 
@@ -294,7 +319,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (PerformanceCounters.PerformanceCountersEnabled)
             {
-                PerformanceCounters.ReleasePerformanceCountersForEndpoint(this.perfCounterId, this.perfCounterBaseId);
+                PerformanceCounters.ReleasePerformanceCountersForEndpoint(
+                    this.perfCounterId,
+                    this.perfCounterBaseId
+                );
             }
         }
 

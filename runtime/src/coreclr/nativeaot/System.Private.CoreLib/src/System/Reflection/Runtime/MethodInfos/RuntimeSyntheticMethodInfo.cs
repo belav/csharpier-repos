@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.ParameterInfos;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
@@ -17,9 +16,19 @@ namespace System.Reflection.Runtime.MethodInfos
     //
     // These methods implement the Get/Set methods on array types.
     //
-    internal sealed partial class RuntimeSyntheticMethodInfo : RuntimeMethodInfo, IRuntimeMemberInfoWithNoMetadataDefinition
+    internal sealed partial class RuntimeSyntheticMethodInfo
+        : RuntimeMethodInfo,
+            IRuntimeMemberInfoWithNoMetadataDefinition
     {
-        private RuntimeSyntheticMethodInfo(SyntheticMethodId syntheticMethodId, string name, RuntimeArrayTypeInfo declaringType, RuntimeTypeInfo[] parameterTypes, RuntimeTypeInfo returnType, InvokerOptions options, CustomMethodInvokerAction action)
+        private RuntimeSyntheticMethodInfo(
+            SyntheticMethodId syntheticMethodId,
+            string name,
+            RuntimeArrayTypeInfo declaringType,
+            RuntimeTypeInfo[] parameterTypes,
+            RuntimeTypeInfo returnType,
+            InvokerOptions options,
+            CustomMethodInvokerAction action
+        )
         {
             _syntheticMethodId = syntheticMethodId;
             _name = name;
@@ -32,26 +41,17 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override MethodAttributes Attributes
         {
-            get
-            {
-                return MethodAttributes.Public | MethodAttributes.PrivateScope;
-            }
+            get { return MethodAttributes.Public | MethodAttributes.PrivateScope; }
         }
 
         public sealed override CallingConventions CallingConvention
         {
-            get
-            {
-                return CallingConventions.Standard | CallingConventions.HasThis;
-            }
+            get { return CallingConventions.Standard | CallingConventions.HasThis; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return Array.Empty<CustomAttributeData>();
-            }
+            get { return Array.Empty<CustomAttributeData>(); }
         }
 
         public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other)
@@ -85,32 +85,27 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override bool IsConstructedGenericMethod
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsGenericMethod
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public sealed override bool IsGenericMethodDefinition
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override int GenericParameterCount => 0;
 
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public sealed override MethodInfo MakeGenericMethod(params Type[] typeArguments)
         {
             throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
@@ -118,34 +113,22 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override MethodBase MetadataDefinitionMethod
         {
-            get
-            {
-                throw new NotSupportedException();
-            }
+            get { throw new NotSupportedException(); }
         }
 
         public sealed override MethodImplAttributes MethodImplementationFlags
         {
-            get
-            {
-                return MethodImplAttributes.IL;
-            }
+            get { return MethodImplAttributes.IL; }
         }
 
         public sealed override Module Module
         {
-            get
-            {
-                return this.DeclaringType.Assembly.ManifestModule;
-            }
+            get { return this.DeclaringType.Assembly.ManifestModule; }
         }
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         public sealed override Type ReflectedType
@@ -160,52 +143,64 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override string ToString()
         {
-            return RuntimeMethodHelpers.ComputeToString(this, Array.Empty<RuntimeTypeInfo>(), RuntimeParameters, RuntimeReturnParameter);
+            return RuntimeMethodHelpers.ComputeToString(
+                this,
+                Array.Empty<RuntimeTypeInfo>(),
+                RuntimeParameters,
+                RuntimeReturnParameter
+            );
         }
 
         public sealed override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                throw new PlatformNotSupportedException();
-            }
+            get { throw new PlatformNotSupportedException(); }
         }
 
-        protected sealed override MethodBaseInvoker UncachedMethodInvoker => new CustomMethodInvoker(_declaringType.ToType(), _runtimeParameterTypes.ToTypeArray(), _options, _action);
+        protected sealed override MethodBaseInvoker UncachedMethodInvoker =>
+            new CustomMethodInvoker(
+                _declaringType.ToType(),
+                _runtimeParameterTypes.ToTypeArray(),
+                _options,
+                _action
+            );
 
         internal sealed override RuntimeTypeInfo[] RuntimeGenericArgumentsOrParameters
         {
-            get
-            {
-                return Array.Empty<RuntimeTypeInfo>();
-            }
+            get { return Array.Empty<RuntimeTypeInfo>(); }
         }
 
         internal sealed override RuntimeTypeInfo RuntimeDeclaringType
         {
-            get
-            {
-                return _declaringType;
-            }
+            get { return _declaringType; }
         }
 
         internal sealed override string RuntimeName
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
-        internal sealed override RuntimeParameterInfo[] GetRuntimeParameters(RuntimeMethodInfo contextMethod, out RuntimeParameterInfo returnParameter)
+        internal sealed override RuntimeParameterInfo[] GetRuntimeParameters(
+            RuntimeMethodInfo contextMethod,
+            out RuntimeParameterInfo returnParameter
+        )
         {
             RuntimeTypeInfo[] runtimeParameterTypes = _runtimeParameterTypes;
-            RuntimeParameterInfo[] parameters = new RuntimeParameterInfo[runtimeParameterTypes.Length];
+            RuntimeParameterInfo[] parameters = new RuntimeParameterInfo[
+                runtimeParameterTypes.Length
+            ];
             for (int i = 0; i < parameters.Length; i++)
             {
-                parameters[i] = RuntimeSyntheticParameterInfo.GetRuntimeSyntheticParameterInfo(this, i, runtimeParameterTypes[i]);
+                parameters[i] = RuntimeSyntheticParameterInfo.GetRuntimeSyntheticParameterInfo(
+                    this,
+                    i,
+                    runtimeParameterTypes[i]
+                );
             }
-            returnParameter = RuntimeSyntheticParameterInfo.GetRuntimeSyntheticParameterInfo(this, -1, _returnType);
+            returnParameter = RuntimeSyntheticParameterInfo.GetRuntimeSyntheticParameterInfo(
+                this,
+                -1,
+                _returnType
+            );
             return parameters;
         }
 

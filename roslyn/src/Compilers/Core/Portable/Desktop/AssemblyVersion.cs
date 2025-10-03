@@ -8,7 +8,9 @@ using System;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal readonly struct AssemblyVersion : IEquatable<AssemblyVersion>, IComparable<AssemblyVersion>
+    internal readonly struct AssemblyVersion
+        : IEquatable<AssemblyVersion>,
+            IComparable<AssemblyVersion>
     {
         private readonly ushort _major;
         private readonly ushort _minor;
@@ -45,14 +47,19 @@ namespace Microsoft.CodeAnalysis
 
         private ulong ToInteger()
         {
-            return ((ulong)_major << 48) | ((ulong)_minor << 32) | ((ulong)_build << 16) | _revision;
+            return ((ulong)_major << 48)
+                | ((ulong)_minor << 32)
+                | ((ulong)_build << 16)
+                | _revision;
         }
 
         public int CompareTo(AssemblyVersion other)
         {
             var left = ToInteger();
             var right = other.ToInteger();
-            return (left == right) ? 0 : (left < right) ? -1 : +1;
+            return (left == right) ? 0
+                : (left < right) ? -1
+                : +1;
         }
 
         public bool Equals(AssemblyVersion other)
@@ -67,7 +74,10 @@ namespace Microsoft.CodeAnalysis
 
         public override int GetHashCode()
         {
-            return ((_major & 0x000f) << 28) | ((_minor & 0x00ff) << 20) | ((_build & 0x00ff) << 12) | (_revision & 0x0fff);
+            return ((_major & 0x000f) << 28)
+                | ((_minor & 0x00ff) << 20)
+                | ((_build & 0x00ff) << 12)
+                | (_revision & 0x0fff);
         }
 
         public static bool operator ==(AssemblyVersion left, AssemblyVersion right)
@@ -106,7 +116,12 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="InvalidCastException">Major, minor, build or revision number are less than 0 or greater than 0xFFFF.</exception>
         public static explicit operator AssemblyVersion(Version version)
         {
-            return new AssemblyVersion((ushort)version.Major, (ushort)version.Minor, (ushort)version.Build, (ushort)version.Revision);
+            return new AssemblyVersion(
+                (ushort)version.Major,
+                (ushort)version.Minor,
+                (ushort)version.Build,
+                (ushort)version.Revision
+            );
         }
 
         public static explicit operator Version(AssemblyVersion version)

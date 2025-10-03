@@ -7,12 +7,20 @@ namespace System.Reflection
 {
     public class LocalVariableInfo
     {
-        public virtual Type LocalType { get { Debug.Fail("type must be set!"); return null!; } }
+        public virtual Type LocalType
+        {
+            get
+            {
+                Debug.Fail("type must be set!");
+                return null!;
+            }
+        }
         public virtual int LocalIndex => 0;
         public virtual bool IsPinned => false;
+
         protected LocalVariableInfo() { }
-        public override string ToString() => IsPinned ?
-            $"{LocalType} ({LocalIndex}) (pinned)" :
-            $"{LocalType} ({LocalIndex})";
+
+        public override string ToString() =>
+            IsPinned ? $"{LocalType} ({LocalIndex}) (pinned)" : $"{LocalType} ({LocalIndex})";
     }
 }

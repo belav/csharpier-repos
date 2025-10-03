@@ -33,7 +33,11 @@ namespace System.Net.Http.Formatting.Parsers
             // The minimum length which would be an empty header terminated by CRLF
             if (maxRequestLineSize < MinRequestLineSize)
             {
-                throw Error.ArgumentMustBeGreaterThanOrEqualTo("maxRequestLineSize", maxRequestLineSize, MinRequestLineSize);
+                throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                    "maxRequestLineSize",
+                    maxRequestLineSize,
+                    MinRequestLineSize
+                );
             }
 
             if (httpRequest == null)
@@ -52,7 +56,7 @@ namespace System.Net.Http.Formatting.Parsers
             BeforeVersionNumbers,
             MajorVersionNumber,
             MinorVersionNumber,
-            AfterCarriageReturn
+            AfterCarriageReturn,
         }
 
         /// <summary>
@@ -64,11 +68,12 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="bytesReady">Size of request buffer</param>
         /// <param name="bytesConsumed">Offset into request buffer</param>
         /// <returns>State of the parser.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is translated to parse state.")]
-        public ParserState ParseBuffer(
-            byte[] buffer,
-            int bytesReady,
-            ref int bytesConsumed)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is translated to parse state."
+        )]
+        public ParserState ParseBuffer(byte[] buffer, int bytesReady, ref int bytesConsumed)
         {
             if (buffer == null)
             {
@@ -93,7 +98,8 @@ namespace System.Net.Http.Formatting.Parsers
                     _maximumHeaderLength,
                     ref _totalBytesConsumed,
                     _currentToken,
-                    _httpRequest);
+                    _httpRequest
+                );
             }
             catch (Exception)
             {
@@ -103,7 +109,11 @@ namespace System.Net.Http.Formatting.Parsers
             return parseStatus;
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "This is a parser which cannot be split up for performance reasons.")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "This is a parser which cannot be split up for performance reasons."
+        )]
         private static ParserState ParseRequestLine(
             byte[] buffer,
             int bytesReady,
@@ -112,10 +122,17 @@ namespace System.Net.Http.Formatting.Parsers
             int maximumHeaderLength,
             ref int totalBytesConsumed,
             StringBuilder currentToken,
-            HttpUnsortedRequest httpRequest)
+            HttpUnsortedRequest httpRequest
+        )
         {
-            Contract.Assert((bytesReady - bytesConsumed) >= 0, "ParseRequestLine()|(bytesReady - bytesConsumed) < 0");
-            Contract.Assert(maximumHeaderLength <= 0 || totalBytesConsumed <= maximumHeaderLength, "ParseRequestLine()|Headers already read exceeds limit.");
+            Contract.Assert(
+                (bytesReady - bytesConsumed) >= 0,
+                "ParseRequestLine()|(bytesReady - bytesConsumed) < 0"
+            );
+            Contract.Assert(
+                maximumHeaderLength <= 0 || totalBytesConsumed <= maximumHeaderLength,
+                "ParseRequestLine()|Headers already read exceeds limit."
+            );
 
             // Remember where we started.
             int initialBytesParsed = bytesConsumed;
@@ -123,14 +140,20 @@ namespace System.Net.Http.Formatting.Parsers
 
             // Set up parsing status with what will happen if we exceed the buffer.
             ParserState parseStatus = ParserState.DataTooBig;
-            int effectiveMax = maximumHeaderLength <= 0 ? Int32.MaxValue : (maximumHeaderLength - totalBytesConsumed + bytesConsumed);
+            int effectiveMax =
+                maximumHeaderLength <= 0
+                    ? Int32.MaxValue
+                    : (maximumHeaderLength - totalBytesConsumed + bytesConsumed);
             if (bytesReady < effectiveMax)
             {
                 parseStatus = ParserState.NeedMoreData;
                 effectiveMax = bytesReady;
             }
 
-            Contract.Assert(bytesConsumed < effectiveMax, "We have already consumed more than the max header length.");
+            Contract.Assert(
+                bytesConsumed < effectiveMax,
+                "We have already consumed more than the max header length."
+            );
 
             switch (requestLineState)
             {
@@ -146,7 +169,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string method = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string method = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentToken.Append(method);
                             goto quit;
                         }
@@ -154,7 +181,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string method = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string method = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentToken.Append(method);
                     }
 
@@ -183,7 +214,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string addr = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string addr = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentToken.Append(addr);
                             goto quit;
                         }
@@ -191,7 +226,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string addr = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string addr = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentToken.Append(addr);
                     }
 
@@ -226,7 +265,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string token = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string token = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentToken.Append(token);
                             goto quit;
                         }
@@ -234,7 +277,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string token = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string token = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentToken.Append(token);
                     }
 
@@ -242,7 +289,13 @@ namespace System.Net.Http.Formatting.Parsers
                     string version = currentToken.ToString();
                     if (String.CompareOrdinal(FormattingUtilities.HttpVersionToken, version) != 0)
                     {
-                        throw new FormatException(Error.Format(Properties.Resources.HttpInvalidVersion, version, FormattingUtilities.HttpVersionToken));
+                        throw new FormatException(
+                            Error.Format(
+                                Properties.Resources.HttpInvalidVersion,
+                                version,
+                                FormattingUtilities.HttpVersionToken
+                            )
+                        );
                     }
 
                     currentToken.Clear();
@@ -268,7 +321,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string major = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string major = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentToken.Append(major);
                             goto quit;
                         }
@@ -276,7 +333,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string major = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string major = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentToken.Append(major);
                     }
 
@@ -302,7 +363,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string minor = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string minor = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentToken.Append(minor);
                             goto quit;
                         }
@@ -310,7 +375,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string minor = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string minor = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentToken.Append(minor);
                     }
 
@@ -339,7 +408,7 @@ namespace System.Net.Http.Formatting.Parsers
                     break;
             }
 
-        quit:
+            quit:
             totalBytesConsumed += bytesConsumed - initialBytesParsed;
             return parseStatus;
         }

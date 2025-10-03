@@ -38,6 +38,7 @@ public class Runtime_80488
 
     private struct S16
     {
-        public long F0, F1;
+        public long F0,
+            F1;
     }
 }

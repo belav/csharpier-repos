@@ -129,7 +129,9 @@ namespace System.Drawing.PrimitivesTest
             // If SizeF implements IEquatable<SizeF> (e.g in .NET Core), then classes that are implicitly
             // convertible to SizeF can potentially be equal.
             // See https://github.com/dotnet/runtime/issues/16050.
-            bool expectsImplicitCastToSizeF = typeof(IEquatable<SizeF>).IsAssignableFrom(size.GetType());
+            bool expectsImplicitCastToSizeF = typeof(IEquatable<SizeF>).IsAssignableFrom(
+                size.GetType()
+            );
             Assert.Equal(expectsImplicitCastToSizeF, size.Equals(new Size(0, 0)));
 
             Assert.False(size.Equals((object)new Size(0, 0))); // No implicit cast
@@ -164,7 +166,15 @@ namespace System.Drawing.PrimitivesTest
         public void ToStringTest()
         {
             SizeF s = new SizeF(0, 0);
-            Assert.Equal(string.Format(CultureInfo.CurrentCulture, "{{Width={0}, Height={1}}}", s.Width, s.Height), s.ToString());
+            Assert.Equal(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{{Width={0}, Height={1}}}",
+                    s.Width,
+                    s.Height
+                ),
+                s.ToString()
+            );
         }
 
         [Theory]
@@ -202,7 +212,11 @@ namespace System.Drawing.PrimitivesTest
 
         [Theory]
         [InlineData(1111.1111f, 2222.2222f, 3333.3333f)]
-        public void MultiplicationTestWidthHeightMultiplier(float width, float height, float multiplier)
+        public void MultiplicationTestWidthHeightMultiplier(
+            float width,
+            float height,
+            float multiplier
+        )
         {
             SizeF sz1 = new SizeF(width, height);
             SizeF mulExpected;

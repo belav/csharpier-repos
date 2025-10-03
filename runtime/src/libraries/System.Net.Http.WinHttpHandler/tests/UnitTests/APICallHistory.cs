@@ -16,11 +16,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
         public static ProxyInfo SessionProxySettings
         {
-            get
-            {
-                return sessionProxySettings;
-            }
-
+            get { return sessionProxySettings; }
             set
             {
                 sessionProxySettings.AccessType = value.AccessType;
@@ -31,11 +27,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
         public static ProxyInfo RequestProxySettings
         {
-            get
-            {
-                return requestProxySettings;
-            }
-
+            get { return requestProxySettings; }
             set
             {
                 requestProxySettings.AccessType = value.AccessType;
@@ -68,9 +60,16 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
         public static uint? WinHttpOptionReceiveTimeout { get; set; }
 
-        public static List<IntPtr> WinHttpOptionClientCertContext { get { return winHttpOptionClientCertContextList; } }
+        public static List<IntPtr> WinHttpOptionClientCertContext
+        {
+            get { return winHttpOptionClientCertContextList; }
+        }
 
-        public static (uint OnOff, uint KeepAliveTime, uint KeepAliveInterval)? WinHttpOptionTcpKeepAlive { get; set; }
+        public static (
+            uint OnOff,
+            uint KeepAliveTime,
+            uint KeepAliveInterval
+        )? WinHttpOptionTcpKeepAlive { get; set; }
 
         public static void Reset()
         {

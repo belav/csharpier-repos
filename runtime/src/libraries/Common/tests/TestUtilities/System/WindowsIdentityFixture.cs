@@ -6,14 +6,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-#if NET7_0_OR_GREATER
-using System.Runtime.InteropServices.Marshalling;
-#endif
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.Win32.SafeHandles;
 using Xunit;
+#if NET7_0_OR_GREATER
+using System.Runtime.InteropServices.Marshalling;
+#endif
 
 namespace System
 {
@@ -68,7 +68,7 @@ namespace System
             {
                 usri1_name = _userName,
                 usri1_password = Password,
-                usri1_priv = 1
+                usri1_priv = 1,
             };
 
             // Create user and remove/create if already exists
@@ -97,10 +97,22 @@ namespace System
             const int LOGON32_PROVIDER_DEFAULT = 0;
             const int LOGON32_LOGON_INTERACTIVE = 2;
 
-            if (!LogonUser(_userName, ".", Password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, out _accountTokenHandle))
+            if (
+                !LogonUser(
+                    _userName,
+                    ".",
+                    Password,
+                    LOGON32_LOGON_INTERACTIVE,
+                    LOGON32_PROVIDER_DEFAULT,
+                    out _accountTokenHandle
+                )
+            )
             {
                 _accountTokenHandle = null;
-                throw new Exception($"Failed to get SafeAccessTokenHandle for test account {_userName}", new Win32Exception());
+                throw new Exception(
+                    $"Failed to get SafeAccessTokenHandle for test account {_userName}",
+                    new Win32Exception()
+                );
             }
 
             bool gotRef = false;
@@ -117,15 +129,35 @@ namespace System
             }
         }
 
-        [LibraryImport("advapi32.dll", EntryPoint = "LogonUserW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            "advapi32.dll",
+            EntryPoint = "LogonUserW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool LogonUser(string userName, string domain, string password, int logonType, int logonProvider, out SafeAccessTokenHandle safeAccessTokenHandle);
+        private static partial bool LogonUser(
+            string userName,
+            string domain,
+            string password,
+            int logonType,
+            int logonProvider,
+            out SafeAccessTokenHandle safeAccessTokenHandle
+        );
 
         [LibraryImport("netapi32.dll", SetLastError = true)]
-        internal static partial uint NetUserAdd([MarshalAs(UnmanagedType.LPWStr)] string servername, uint level, ref USER_INFO_1 buf, out uint parm_err);
+        internal static partial uint NetUserAdd(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            uint level,
+            ref USER_INFO_1 buf,
+            out uint parm_err
+        );
 
         [LibraryImport("netapi32.dll")]
-        internal static partial uint NetUserDel([MarshalAs(UnmanagedType.LPWStr)] string servername, [MarshalAs(UnmanagedType.LPWStr)] string username);
+        internal static partial uint NetUserDel(
+            [MarshalAs(UnmanagedType.LPWStr)] string servername,
+            [MarshalAs(UnmanagedType.LPWStr)] string username
+        );
 
 #if NET7_0_OR_GREATER
         [NativeMarshalling(typeof(USER_INFO_1.Marshaller))]
@@ -146,8 +178,12 @@ namespace System
             [CustomMarshaller(typeof(USER_INFO_1), MarshalMode.Default, typeof(Marshaller))]
             public static class Marshaller
             {
-                public static USER_INFO_1Native ConvertToUnmanaged(USER_INFO_1 managed) => new(managed);
-                public static USER_INFO_1 ConvertToManaged(USER_INFO_1Native native) => native.ToManaged();
+                public static USER_INFO_1Native ConvertToUnmanaged(USER_INFO_1 managed) =>
+                    new(managed);
+
+                public static USER_INFO_1 ConvertToManaged(USER_INFO_1Native native) =>
+                    native.ToManaged();
+
                 public static void Free(USER_INFO_1Native native) => native.FreeNative();
 
                 [StructLayout(LayoutKind.Sequential)]
@@ -185,7 +221,7 @@ namespace System
                             usri1_home_dir = Marshal.PtrToStringUni(usri1_home_dir),
                             usri1_comment = Marshal.PtrToStringUni(usri1_comment),
                             usri1_flags = usri1_flags,
-                            usri1_script_path = Marshal.PtrToStringUni(usri1_script_path)
+                            usri1_script_path = Marshal.PtrToStringUni(usri1_script_path),
                         };
                     }
 
@@ -216,4 +252,3 @@ namespace System
         }
     }
 }
-

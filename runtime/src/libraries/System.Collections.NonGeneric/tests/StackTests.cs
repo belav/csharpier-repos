@@ -35,7 +35,10 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_Int_NegativeInitialCapacity_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () => new Stack(-1)); // InitialCapacity < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "initialCapacity",
+                () => new Stack(-1)
+            ); // InitialCapacity < 0
         }
 
         [Theory]
@@ -69,7 +72,10 @@ namespace System.Collections.Tests
             AssertExtensions.Throws<ArgumentNullException>("col", () => new Stack(null)); // Collection is null
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttribute()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(new Stack());
@@ -80,14 +86,20 @@ namespace System.Collections.Tests
             stack.Push("b");
             stack.Push(2);
 
-            DebuggerAttributeInfo debuggerAttribute = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(stack);
-            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(property => property.Name == "Items");
+            DebuggerAttributeInfo debuggerAttribute =
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(stack);
+            PropertyInfo infoProperty = debuggerAttribute.Properties.Single(property =>
+                property.Name == "Items"
+            );
             object[] items = (object[])infoProperty.GetValue(debuggerAttribute.Instance);
 
             Assert.Equal(stack.ToArray(), items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void DebuggerAttribute_NullStack_ThrowsArgumentNullException()
         {
             bool threwNull = false;
@@ -107,14 +119,17 @@ namespace System.Collections.Tests
         public static void Clear()
         {
             Stack stack1 = Helpers.CreateIntStack(100);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                stack2.Clear();
-                Assert.Equal(0, stack2.Count);
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
+                {
+                    stack2.Clear();
+                    Assert.Equal(0, stack2.Count);
 
-                stack2.Clear();
-                Assert.Equal(0, stack2.Count);
-            });
+                    stack2.Clear();
+                    Assert.Equal(0, stack2.Count);
+                }
+            );
         }
 
         [Theory]
@@ -125,18 +140,21 @@ namespace System.Collections.Tests
         public static void Clone(int count)
         {
             Stack stack1 = Helpers.CreateIntStack(count);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                Stack stackClone = (Stack)stack2.Clone();
-
-                Assert.Equal(stack2.Count, stackClone.Count);
-                Assert.Equal(stack2.IsSynchronized, stackClone.IsSynchronized);
-
-                for (int i = 0; i < stackClone.Count; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    Assert.Equal(stack2.Pop(), stackClone.Pop());
+                    Stack stackClone = (Stack)stack2.Clone();
+
+                    Assert.Equal(stack2.Count, stackClone.Count);
+                    Assert.Equal(stack2.IsSynchronized, stackClone.IsSynchronized);
+
+                    for (int i = 0; i < stackClone.Count; i++)
+                    {
+                        Assert.Equal(stack2.Pop(), stackClone.Pop());
+                    }
                 }
-            });
+            );
         }
 
         [Fact]
@@ -144,38 +162,44 @@ namespace System.Collections.Tests
         {
             var stack1 = new Stack();
             stack1.Push(new Foo(10));
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                Stack stackClone = (Stack)stack2.Clone();
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
+                {
+                    Stack stackClone = (Stack)stack2.Clone();
 
-                Foo a1 = (Foo)stack2.Pop();
-                a1.IntValue = 50;
+                    Foo a1 = (Foo)stack2.Pop();
+                    a1.IntValue = 50;
 
-                Foo a2 = (Foo)stackClone.Pop();
-                Assert.Equal(50, a1.IntValue);
-            });
+                    Foo a2 = (Foo)stackClone.Pop();
+                    Assert.Equal(50, a1.IntValue);
+                }
+            );
         }
 
         [Fact]
         public static void Contains()
         {
             Stack stack1 = Helpers.CreateIntStack(100);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                for (int i = 0; i < stack2.Count; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    Assert.True(stack2.Contains(i));
+                    for (int i = 0; i < stack2.Count; i++)
+                    {
+                        Assert.True(stack2.Contains(i));
+                    }
+
+                    Assert.False(stack2.Contains(101));
+                    Assert.False(stack2.Contains("hello"));
+                    Assert.False(stack2.Contains(null));
+
+                    stack2.Push(null);
+                    Assert.True(stack2.Contains(null));
+
+                    Assert.False(stack2.Contains(-1)); // We have a null item in the list, so the algorithm may use a different branch
                 }
-
-                Assert.False(stack2.Contains(101));
-                Assert.False(stack2.Contains("hello"));
-                Assert.False(stack2.Contains(null));
-
-                stack2.Push(null);
-                Assert.True(stack2.Contains(null));
-
-                Assert.False(stack2.Contains(-1)); // We have a null item in the list, so the algorithm may use a different branch
-            });
+            );
         }
 
         [Theory]
@@ -190,17 +214,20 @@ namespace System.Collections.Tests
         public static void CopyTo_ObjectArray(int count, int index)
         {
             Stack stack1 = Helpers.CreateIntStack(count);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                object[] oArray = new object[index + count];
-                stack2.CopyTo(oArray, index);
-
-                Assert.Equal(index + count, oArray.Length);
-                for (int i = index; i < count; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    Assert.Equal(stack2.Pop(), oArray[i]);
+                    object[] oArray = new object[index + count];
+                    stack2.CopyTo(oArray, index);
+
+                    Assert.Equal(index + count, oArray.Length);
+                    for (int i = index; i < count; i++)
+                    {
+                        Assert.Equal(stack2.Pop(), oArray[i]);
+                    }
                 }
-            });
+            );
         }
 
         [Theory]
@@ -215,32 +242,57 @@ namespace System.Collections.Tests
         public static void CopyTo_IntArray(int count, int index)
         {
             Stack stack1 = Helpers.CreateIntStack(count);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                int[] iArray = new int[index + count];
-                stack2.CopyTo(iArray, index);
-                Assert.Equal(index + count, iArray.Length);
-                for (int i = index; i < count; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    Assert.Equal(stack2.Pop(), iArray[i]);
+                    int[] iArray = new int[index + count];
+                    stack2.CopyTo(iArray, index);
+                    Assert.Equal(index + count, iArray.Length);
+                    for (int i = index; i < count; i++)
+                    {
+                        Assert.Equal(stack2.Pop(), iArray[i]);
+                    }
                 }
-            });
+            );
         }
 
         [Fact]
         public static void CopyTo_Invalid()
         {
             Stack stack1 = Helpers.CreateIntStack(100);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                AssertExtensions.Throws<ArgumentNullException>("array", () => stack2.CopyTo(null, 0)); // Array is null
-                AssertExtensions.Throws<ArgumentException>("array", null, () => stack2.CopyTo(new object[10, 10], 0)); // Array is multidimensional
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
+                {
+                    AssertExtensions.Throws<ArgumentNullException>(
+                        "array",
+                        () => stack2.CopyTo(null, 0)
+                    ); // Array is null
+                    AssertExtensions.Throws<ArgumentException>(
+                        "array",
+                        null,
+                        () => stack2.CopyTo(new object[10, 10], 0)
+                    ); // Array is multidimensional
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => stack2.CopyTo(new object[100], -1)); // Index < 0
-                AssertExtensions.Throws<ArgumentException>(null, () => stack2.CopyTo(new object[0], 0)); // Index >= array.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => stack2.CopyTo(new object[100], 1)); // Index + array.Count > stack.Count
-                AssertExtensions.Throws<ArgumentException>(null, () => stack2.CopyTo(new object[150], 51)); // Index + array.Count > stack.Count
-            });
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                        "index",
+                        () => stack2.CopyTo(new object[100], -1)
+                    ); // Index < 0
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => stack2.CopyTo(new object[0], 0)
+                    ); // Index >= array.Count
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => stack2.CopyTo(new object[100], 1)
+                    ); // Index + array.Count > stack.Count
+                    AssertExtensions.Throws<ArgumentException>(
+                        null,
+                        () => stack2.CopyTo(new object[150], 51)
+                    ); // Index + array.Count > stack.Count
+                }
+            );
         }
 
         [Theory]
@@ -251,22 +303,25 @@ namespace System.Collections.Tests
         public static void GetEnumerator(int count)
         {
             Stack stack1 = Helpers.CreateIntStack(count);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                Assert.NotSame(stack2.GetEnumerator(), stack2.GetEnumerator());
-                IEnumerator enumerator = stack2.GetEnumerator();
-                for (int i = 0; i < 2; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    int counter = 0;
-                    while (enumerator.MoveNext())
+                    Assert.NotSame(stack2.GetEnumerator(), stack2.GetEnumerator());
+                    IEnumerator enumerator = stack2.GetEnumerator();
+                    for (int i = 0; i < 2; i++)
                     {
-                        counter++;
-                        Assert.NotNull(enumerator.Current);
+                        int counter = 0;
+                        while (enumerator.MoveNext())
+                        {
+                            counter++;
+                            Assert.NotNull(enumerator.Current);
+                        }
+                        Assert.Equal(count, counter);
+                        enumerator.Reset();
                     }
-                    Assert.Equal(count, counter);
-                    enumerator.Reset();
                 }
-            });
+            );
         }
 
         [Fact]
@@ -334,40 +389,44 @@ namespace System.Collections.Tests
         public static void GetEnumerator_Invalid()
         {
             Stack stack1 = Helpers.CreateIntStack(100);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                IEnumerator enumerator = stack2.GetEnumerator();
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
+                {
+                    IEnumerator enumerator = stack2.GetEnumerator();
 
-                // Index < 0
-                Assert.Throws<InvalidOperationException>(() => enumerator.Current);
+                    // Index < 0
+                    Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-                // Index > dictionary.Count
-                while (enumerator.MoveNext()) ;
-                Assert.False(enumerator.MoveNext());
-                Assert.Throws<InvalidOperationException>(() => enumerator.Current);
+                    // Index > dictionary.Count
+                    while (enumerator.MoveNext())
+                        ;
+                    Assert.False(enumerator.MoveNext());
+                    Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-                // Current throws after resetting
-                enumerator.Reset();
-                Assert.True(enumerator.MoveNext());
+                    // Current throws after resetting
+                    enumerator.Reset();
+                    Assert.True(enumerator.MoveNext());
 
-                enumerator.Reset();
-                Assert.Throws<InvalidOperationException>(() => enumerator.Current);
+                    enumerator.Reset();
+                    Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-                // MoveNext and Reset throws after stack is modified, but current doesn't
-                enumerator = stack2.GetEnumerator();
-                enumerator.MoveNext();
-                stack2.Push("hi");
-                Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
-                Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
-                Assert.NotNull(enumerator.Current);
+                    // MoveNext and Reset throws after stack is modified, but current doesn't
+                    enumerator = stack2.GetEnumerator();
+                    enumerator.MoveNext();
+                    stack2.Push("hi");
+                    Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
+                    Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
+                    Assert.NotNull(enumerator.Current);
 
-                enumerator = stack2.GetEnumerator();
-                enumerator.MoveNext();
-                stack2.Pop();
-                Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
-                Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
-                Assert.NotNull(enumerator.Current);
-            });
+                    enumerator = stack2.GetEnumerator();
+                    enumerator.MoveNext();
+                    stack2.Pop();
+                    Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
+                    Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
+                    Assert.NotNull(enumerator.Current);
+                }
+            );
         }
 
         [Fact]
@@ -375,40 +434,46 @@ namespace System.Collections.Tests
         {
             int count = 100;
             Stack stack1 = Helpers.CreateIntStack(count);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                for (int i = 0; i < count; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    int peek1 = (int)stack2.Peek();
-                    int peek2 = (int)stack2.Peek();
+                    for (int i = 0; i < count; i++)
+                    {
+                        int peek1 = (int)stack2.Peek();
+                        int peek2 = (int)stack2.Peek();
 
-                    Assert.Equal(peek1, peek2);
-                    Assert.Equal(stack2.Pop(), peek1);
-                    Assert.Equal(count - i - 1, peek1);
+                        Assert.Equal(peek1, peek2);
+                        Assert.Equal(stack2.Pop(), peek1);
+                        Assert.Equal(count - i - 1, peek1);
+                    }
                 }
-            });
+            );
         }
 
         [Fact]
         public static void Peek_EmptyStack_ThrowsInvalidOperationException()
         {
             var stack1 = new Stack();
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                Assert.Throws<InvalidOperationException>(() => stack2.Peek()); // Empty stack
-
-                for (int i = 0; i < 1000; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    stack2.Push(i);
-                }
+                    Assert.Throws<InvalidOperationException>(() => stack2.Peek()); // Empty stack
 
-                for (int i = 0; i < 1000; i++)
-                {
-                    stack2.Pop();
-                }
+                    for (int i = 0; i < 1000; i++)
+                    {
+                        stack2.Push(i);
+                    }
 
-                Assert.Throws<InvalidOperationException>(() => stack2.Peek()); // Empty stack
-            });
+                    for (int i = 0; i < 1000; i++)
+                    {
+                        stack2.Pop();
+                    }
+
+                    Assert.Throws<InvalidOperationException>(() => stack2.Peek()); // Empty stack
+                }
+            );
         }
 
         [Theory]
@@ -422,41 +487,50 @@ namespace System.Collections.Tests
         public static void Pop(int pushCount, int popCount)
         {
             Stack stack1 = Helpers.CreateIntStack(pushCount);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                for (int i = 0; i < popCount; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    Assert.Equal(pushCount - i - 1, stack2.Pop());
-                    Assert.Equal(pushCount - i - 1, stack2.Count);
+                    for (int i = 0; i < popCount; i++)
+                    {
+                        Assert.Equal(pushCount - i - 1, stack2.Pop());
+                        Assert.Equal(pushCount - i - 1, stack2.Count);
+                    }
+                    Assert.Equal(pushCount - popCount, stack2.Count);
                 }
-                Assert.Equal(pushCount - popCount, stack2.Count);
-            });
+            );
         }
 
         [Fact]
         public static void Pop_Null()
         {
             var stack1 = new Stack();
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                stack2.Push(null);
-                stack2.Push(-1);
-                stack2.Push(null);
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
+                {
+                    stack2.Push(null);
+                    stack2.Push(-1);
+                    stack2.Push(null);
 
-                Assert.Null(stack2.Pop());
-                Assert.Equal(-1, stack2.Pop());
-                Assert.Null(stack2.Pop());
-            });
+                    Assert.Null(stack2.Pop());
+                    Assert.Equal(-1, stack2.Pop());
+                    Assert.Null(stack2.Pop());
+                }
+            );
         }
 
         [Fact]
         public static void Pop_EmptyStack_ThrowsInvalidOperationException()
         {
             var stack1 = new Stack();
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                Assert.Throws<InvalidOperationException>(() => stack2.Pop()); // Empty stack
-            });
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
+                {
+                    Assert.Throws<InvalidOperationException>(() => stack2.Pop()); // Empty stack
+                }
+            );
         }
 
         [Theory]
@@ -467,30 +541,36 @@ namespace System.Collections.Tests
         public static void Push(int count)
         {
             var stack1 = new Stack();
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                for (int i = 0; i < count; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    stack2.Push(i);
-                    Assert.Equal(i + 1, stack2.Count);
+                    for (int i = 0; i < count; i++)
+                    {
+                        stack2.Push(i);
+                        Assert.Equal(i + 1, stack2.Count);
+                    }
+                    Assert.Equal(count, stack2.Count);
                 }
-                Assert.Equal(count, stack2.Count);
-            });
+            );
         }
 
         [Fact]
         public static void Push_Null()
         {
             var stack1 = new Stack();
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                stack2.Push(null);
-                stack2.Push(-1);
-                stack2.Push(null);
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
+                {
+                    stack2.Push(null);
+                    stack2.Push(-1);
+                    stack2.Push(null);
 
-                Assert.True(stack2.Contains(null));
-                Assert.True(stack2.Contains(-1));
-            });
+                    Assert.True(stack2.Contains(null));
+                    Assert.True(stack2.Contains(-1));
+                }
+            );
         }
 
         [Fact]
@@ -514,16 +594,19 @@ namespace System.Collections.Tests
         public static void ToArray(int count)
         {
             Stack stack1 = Helpers.CreateIntStack(count);
-            Helpers.PerformActionOnAllStackWrappers(stack1, stack2 =>
-            {
-                object[] array = stack2.ToArray();
-
-                Assert.Equal(stack2.Count, array.Length);
-                for (int i = 0; i < array.Length; i++)
+            Helpers.PerformActionOnAllStackWrappers(
+                stack1,
+                stack2 =>
                 {
-                    Assert.Equal(stack2.Pop(), array[i]);
+                    object[] array = stack2.ToArray();
+
+                    Assert.Equal(stack2.Count, array.Length);
+                    for (int i = 0; i < array.Length; i++)
+                    {
+                        Assert.Equal(stack2.Pop(), array[i]);
+                    }
                 }
-            });
+            );
         }
 
         private class Foo

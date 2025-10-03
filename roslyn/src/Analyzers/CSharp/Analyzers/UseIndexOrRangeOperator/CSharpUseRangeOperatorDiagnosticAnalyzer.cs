@@ -34,23 +34,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
     /// could always limit the feature to only work on an allow list of known safe types.</para>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    [SuppressMessage("Documentation", "CA1200:Avoid using cref tags with a prefix", Justification = "Required to avoid ambiguous reference warnings.")]
-    internal sealed partial class CSharpUseRangeOperatorDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    [SuppressMessage(
+        "Documentation",
+        "CA1200:Avoid using cref tags with a prefix",
+        Justification = "Required to avoid ambiguous reference warnings."
+    )]
+    internal sealed partial class CSharpUseRangeOperatorDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         // public const string UseIndexer = nameof(UseIndexer);
         public const string ComputedRange = nameof(ComputedRange);
         public const string ConstantRange = nameof(ConstantRange);
 
         public CSharpUseRangeOperatorDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseRangeOperatorDiagnosticId,
-                   EnforceOnBuildValues.UseRangeOperator,
-                   CSharpCodeStyleOptions.PreferRangeOperator,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Use_range_operator), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources._0_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseRangeOperatorDiagnosticId,
+                EnforceOnBuildValues.UseRangeOperator,
+                CSharpCodeStyleOptions.PreferRangeOperator,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Use_range_operator),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources._0_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -69,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 
                 context.RegisterOperationAction(
                     c => AnalyzeInvocation(c, infoCache),
-                    OperationKind.Invocation);
+                    OperationKind.Invocation
+                );
             });
         }
 
@@ -88,18 +103,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             if (result == null)
                 return;
 
-            if (CSharpSemanticFacts.Instance.IsInExpressionTree(semanticModel, operation.Syntax, infoCache.ExpressionOfTType, context.CancellationToken))
+            if (
+                CSharpSemanticFacts.Instance.IsInExpressionTree(
+                    semanticModel,
+                    operation.Syntax,
+                    infoCache.ExpressionOfTType,
+                    context.CancellationToken
+                )
+            )
                 return;
 
             context.ReportDiagnostic(CreateDiagnostic(result.Value, option.Notification));
         }
 
-        public static Result? AnalyzeInvocation(IInvocationOperation invocation, InfoCache infoCache)
+        public static Result? AnalyzeInvocation(
+            IInvocationOperation invocation,
+            InfoCache infoCache
+        )
         {
             // Validate we're on a piece of syntax we expect.  While not necessary for analysis, we
             // want to make sure we're on something the fixer will know how to actually fix.
-            if (invocation.Syntax is not InvocationExpressionSyntax invocationSyntax ||
-                invocationSyntax.ArgumentList is null)
+            if (
+                invocation.Syntax is not InvocationExpressionSyntax invocationSyntax
+                || invocationSyntax.ArgumentList is null
+            )
             {
                 return null;
             }
@@ -119,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
         private static Result? AnalyzeOneArgumentInvocation(
             IInvocationOperation invocation,
             InfoCache infoCache,
-            InvocationExpressionSyntax invocationSyntax)
+            InvocationExpressionSyntax invocationSyntax
+        )
         {
             var targetMethod = invocation.TargetMethod;
 
@@ -137,13 +165,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 targetMethod,
                 memberInfo,
                 op1: startOperation,
-                op2: null); // The range will run to the end.
+                op2: null
+            ); // The range will run to the end.
         }
 
         private static Result? AnalyzeTwoArgumentInvocation(
             IInvocationOperation invocation,
             InfoCache infoCache,
-            InvocationExpressionSyntax invocationSyntax)
+            InvocationExpressionSyntax invocationSyntax
+        )
         {
             Contract.ThrowIfNull(invocation.Instance);
 
@@ -152,23 +182,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             if (targetMethod == null)
                 return null;
 
-            return AnalyzeTwoArgumentSubtractionInvocation(invocation, infoCache, invocationSyntax, targetMethod) ??
-                   AnalyzeTwoArgumentFromStartOrToEndInvocation(invocation, infoCache, invocationSyntax, targetMethod);
+            return AnalyzeTwoArgumentSubtractionInvocation(
+                    invocation,
+                    infoCache,
+                    invocationSyntax,
+                    targetMethod
+                )
+                ?? AnalyzeTwoArgumentFromStartOrToEndInvocation(
+                    invocation,
+                    infoCache,
+                    invocationSyntax,
+                    targetMethod
+                );
         }
 
         private static Result? AnalyzeTwoArgumentSubtractionInvocation(
             IInvocationOperation invocation,
             InfoCache infoCache,
             InvocationExpressionSyntax invocationSyntax,
-            IMethodSymbol targetMethod)
+            IMethodSymbol targetMethod
+        )
         {
             Contract.ThrowIfNull(invocation.Instance);
 
             // Second arg needs to be a subtraction for: `end - e2`.  Once we've seen that we have
             // that, try to see if we're calling into some sort of Slice method with a matching
             // indexer or overload
-            if (!IsSubtraction(invocation.Arguments[1].Value, out var subtraction) ||
-                !infoCache.TryGetMemberInfo(targetMethod, out var memberInfo))
+            if (
+                !IsSubtraction(invocation.Arguments[1].Value, out var subtraction)
+                || !infoCache.TryGetMemberInfo(targetMethod, out var memberInfo)
+            )
             {
                 return null;
             }
@@ -180,26 +223,45 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             // same as the right side of the subtraction.
             var startOperation = invocation.Arguments[0].Value;
 
-            if (CSharpSyntaxFacts.Instance.AreEquivalent(startOperation.Syntax, subtraction.RightOperand.Syntax))
+            if (
+                CSharpSyntaxFacts.Instance.AreEquivalent(
+                    startOperation.Syntax,
+                    subtraction.RightOperand.Syntax
+                )
+            )
             {
                 return new Result(
                     ResultKind.Computed,
-                    invocation, invocationSyntax,
-                    targetMethod, memberInfo,
-                    startOperation, subtraction.LeftOperand);
+                    invocation,
+                    invocationSyntax,
+                    targetMethod,
+                    memberInfo,
+                    startOperation,
+                    subtraction.LeftOperand
+                );
             }
 
             // See if we have: (constant1, s.Length - constant2).  The constants don't have to be
             // the same value.  This will convert over to s[constant1..(constant - constant1)]
-            if (IsConstantInt32(startOperation) &&
-                IsConstantInt32(subtraction.RightOperand) &&
-                IsInstanceLengthCheck(memberInfo.LengthLikeProperty, invocation.Instance, subtraction.LeftOperand))
+            if (
+                IsConstantInt32(startOperation)
+                && IsConstantInt32(subtraction.RightOperand)
+                && IsInstanceLengthCheck(
+                    memberInfo.LengthLikeProperty,
+                    invocation.Instance,
+                    subtraction.LeftOperand
+                )
+            )
             {
                 return new Result(
                     ResultKind.Constant,
-                    invocation, invocationSyntax,
-                    targetMethod, memberInfo,
-                    startOperation, subtraction.RightOperand);
+                    invocation,
+                    invocationSyntax,
+                    targetMethod,
+                    memberInfo,
+                    startOperation,
+                    subtraction.RightOperand
+                );
             }
 
             return null;
@@ -209,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             IInvocationOperation invocation,
             InfoCache infoCache,
             InvocationExpressionSyntax invocationSyntax,
-            IMethodSymbol targetMethod)
+            IMethodSymbol targetMethod
+        )
         {
             Contract.ThrowIfNull(invocation.Instance);
 
@@ -218,8 +281,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
             // if we have `x.Substring(0, x.Length - n)` then that is handled in AnalyzeTwoArgumentSubtractionInvocation
 
             var startOperation = invocation.Arguments[0].Value;
-            if (!IsConstantInt32(startOperation, value: 0) ||
-                !infoCache.TryGetMemberInfo(targetMethod, out var memberInfo))
+            if (
+                !IsConstantInt32(startOperation, value: 0)
+                || !infoCache.TryGetMemberInfo(targetMethod, out var memberInfo)
+            )
             {
                 return null;
             }
@@ -234,29 +299,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 targetMethod,
                 memberInfo,
                 startOperation,
-                invocation.Arguments[1].Value);
+                invocation.Arguments[1].Value
+            );
         }
 
-        private static bool IsValidIndexing(IInvocationOperation invocation, InfoCache infoCache, IMethodSymbol targetMethod)
+        private static bool IsValidIndexing(
+            IInvocationOperation invocation,
+            InfoCache infoCache,
+            IMethodSymbol targetMethod
+        )
         {
-            var indexer = GetIndexer(targetMethod.ContainingType, infoCache.RangeType, targetMethod.ContainingType);
+            var indexer = GetIndexer(
+                targetMethod.ContainingType,
+                infoCache.RangeType,
+                targetMethod.ContainingType
+            );
             // Need to make sure that if the target method is being written to, that the indexer returns a ref, is a read/write property,
             // or the syntax allows for the slice method to be run
-            return !invocation.Syntax.IsLeftSideOfAnyAssignExpression() || indexer == null || !IsWriteableIndexer(invocation, indexer);
+            return !invocation.Syntax.IsLeftSideOfAnyAssignExpression()
+                || indexer == null
+                || !IsWriteableIndexer(invocation, indexer);
         }
 
         private Diagnostic CreateDiagnostic(Result result, NotificationOption2 notificationOption)
         {
             // Keep track of the invocation node
             var invocation = result.Invocation;
-            var additionalLocations = ImmutableArray.Create(
-                invocation.GetLocation());
+            var additionalLocations = ImmutableArray.Create(invocation.GetLocation());
 
             // Mark the span under the two arguments to .Slice(..., ...) as what we will be
             // updating.
             var arguments = invocation.ArgumentList.Arguments;
-            var location = Location.Create(invocation.SyntaxTree,
-                TextSpan.FromBounds(arguments.First().SpanStart, arguments.Last().Span.End));
+            var location = Location.Create(
+                invocation.SyntaxTree,
+                TextSpan.FromBounds(arguments.First().SpanStart, arguments.Last().Span.End)
+            );
 
             return DiagnosticHelper.Create(
                 Descriptor,
@@ -264,15 +341,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                 notificationOption,
                 additionalLocations,
                 ImmutableDictionary<string, string?>.Empty,
-                result.SliceLikeMethod.Name);
+                result.SliceLikeMethod.Name
+            );
         }
 
-        private static bool IsConstantInt32(IOperation operation, int? value = null)
-            => operation.ConstantValue.HasValue &&
-               operation.ConstantValue.Value is int i &&
-               (value == null || i == value);
+        private static bool IsConstantInt32(IOperation operation, int? value = null) =>
+            operation.ConstantValue.HasValue
+            && operation.ConstantValue.Value is int i
+            && (value == null || i == value);
 
-        private static bool IsWriteableIndexer(IInvocationOperation invocation, IPropertySymbol indexer)
+        private static bool IsWriteableIndexer(
+            IInvocationOperation invocation,
+            IPropertySymbol indexer
+        )
         {
             var refReturnMismatch = indexer.ReturnsByRef != invocation.TargetMethod.ReturnsByRef;
             var indexerIsReadWrite = indexer.IsWriteableFieldOrProperty();

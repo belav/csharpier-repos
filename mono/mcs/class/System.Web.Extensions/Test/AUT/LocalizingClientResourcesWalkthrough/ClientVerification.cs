@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Resources;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Resources;
-
 
 namespace LocalizingScriptResources
 {
@@ -24,7 +23,10 @@ namespace LocalizingScriptResources
             _firstInt = random.Next(0, 20);
             _secondInt = random.Next(0, 20);
 
-            ResourceManager rm = new ResourceManager("SystemWebExtensionsAUT.LocalizingClientResourcesWalkthrough.VerificationResources", this.GetType().Assembly);
+            ResourceManager rm = new ResourceManager(
+                "SystemWebExtensionsAUT.LocalizingClientResourcesWalkthrough.VerificationResources",
+                this.GetType().Assembly
+            );
             Controls.Clear();
 
             _firstLabel = new Label();

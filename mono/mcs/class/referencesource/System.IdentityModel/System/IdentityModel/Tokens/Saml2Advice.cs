@@ -25,9 +25,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of Saml2Advice.
         /// </summary>
-        public Saml2Advice()
-        {
-        }
+        public Saml2Advice() { }
 
         /// <summary>
         /// Gets a collection of <see cref="Saml2Id"/> representating the assertions in the <see cref="Saml2Advice"/>.

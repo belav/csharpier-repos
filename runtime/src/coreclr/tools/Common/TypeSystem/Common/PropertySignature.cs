@@ -16,29 +16,25 @@ namespace Internal.TypeSystem
         [System.Runtime.CompilerServices.IndexerName("Parameter")]
         public TypeDesc this[int index]
         {
-            get
-            {
-                return _parameters[index];
-            }
+            get { return _parameters[index]; }
         }
 
         public int Length
         {
-            get
-            {
-                return _parameters.Length;
-            }
+            get { return _parameters.Length; }
         }
 
         public bool HasEmbeddedSignatureData
         {
-            get
-            {
-                return _embeddedSignatureData != null;
-            }
+            get { return _embeddedSignatureData != null; }
         }
 
-        public PropertySignature(bool isStatic, TypeDesc[] parameters, TypeDesc returnType, EmbeddedSignatureData[] embeddedSignatureData)
+        public PropertySignature(
+            bool isStatic,
+            TypeDesc[] parameters,
+            TypeDesc returnType,
+            EmbeddedSignatureData[] embeddedSignatureData
+        )
         {
             IsStatic = isStatic;
             _parameters = parameters;

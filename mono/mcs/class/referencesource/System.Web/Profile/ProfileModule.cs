@@ -10,26 +10,27 @@
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-namespace System.Web.Profile {
-    using System.Web;
-    using System.Text;
-    using System.Web.Compilation;
-    using System.Web.Configuration;
-    using System.Web.Caching;
+namespace System.Web.Profile
+{
     using System.Collections;
-    using System.Web.Util;
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Reflection;
-    using System.Web.Security;
-    using System.Globalization;
-    using System.Runtime.Serialization;
     using System.Collections.Specialized;
-    using System.Runtime.Serialization.Formatters.Binary;
-    using System.IO;
-    using System.Xml.Serialization;
     using System.ComponentModel;
     using System.Configuration;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Text;
+    using System.Web;
+    using System.Web.Caching;
+    using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.Security;
+    using System.Web.Util;
+    using System.Xml.Serialization;
 #if !FEATURE_PAL
     using System.Web.DataAccess;
 #endif // !FEATURE_PAL
@@ -39,8 +40,8 @@ namespace System.Web.Profile {
     /// </devdoc>
     public sealed class ProfileModule : IHttpModule
     {
-        private static object                   s_Lock              = new object();
-        private ProfileEventHandler             _eventHandler       = null;
+        private static object s_Lock = new object();
+        private ProfileEventHandler _eventHandler = null;
 
         private ProfileMigrateEventHandler _MigrateEventHandler;
         private ProfileAutoSaveEventHandler _AutoSaveEventHandler;
@@ -52,9 +53,7 @@ namespace System.Web.Profile {
         ///     </para>
         /// </devdoc>
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        public ProfileModule()
-        {
-        }
+        public ProfileModule() { }
 
         /// <devdoc>
         ///    This is a Global.asax event which must be
@@ -73,7 +72,8 @@ namespace System.Web.Profile {
             remove { _MigrateEventHandler -= value; }
         }
 
-        public event ProfileAutoSaveEventHandler ProfileAutoSaving {
+        public event ProfileAutoSaveEventHandler ProfileAutoSaving
+        {
             add { _AutoSaveEventHandler += value; }
             remove { _AutoSaveEventHandler -= value; }
         }
@@ -81,21 +81,21 @@ namespace System.Web.Profile {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public void Init(HttpApplication app)
         {
-            if (ProfileManager.Enabled) {
+            if (ProfileManager.Enabled)
+            {
                 app.AcquireRequestState += new EventHandler(this.OnEnter);
-                if (ProfileManager.AutomaticSaveEnabled) {
+                if (ProfileManager.AutomaticSaveEnabled)
+                {
                     app.EndRequest += new EventHandler(this.OnLeave);
                 }
-            }            
+            }
         }
 
         private void OnPersonalize(ProfileEventArgs e)
@@ -123,9 +123,16 @@ namespace System.Web.Profile {
         {
             HttpContext context = ((HttpApplication)source).Context;
             OnPersonalize(new ProfileEventArgs(context));
-            if (context.Request.IsAuthenticated && !string.IsNullOrEmpty(context.Request.AnonymousID) && _MigrateEventHandler != null)
+            if (
+                context.Request.IsAuthenticated
+                && !string.IsNullOrEmpty(context.Request.AnonymousID)
+                && _MigrateEventHandler != null
+            )
             {
-                ProfileMigrateEventArgs e = new ProfileMigrateEventArgs(context, context.Request.AnonymousID);
+                ProfileMigrateEventArgs e = new ProfileMigrateEventArgs(
+                    context,
+                    context.Request.AnonymousID
+                );
                 _MigrateEventHandler(this, e);
             }
         }
@@ -135,10 +142,14 @@ namespace System.Web.Profile {
             HttpApplication app = (HttpApplication)source;
             HttpContext context = app.Context;
 
-            if (context._Profile == null || (object)context._Profile == (object)ProfileBase.SingletonInstance)
+            if (
+                context._Profile == null
+                || (object)context._Profile == (object)ProfileBase.SingletonInstance
+            )
                 return;
 
-            if (_AutoSaveEventHandler != null) {
+            if (_AutoSaveEventHandler != null)
+            {
                 ProfileAutoSaveEventArgs args = new ProfileAutoSaveEventArgs(context);
                 _AutoSaveEventHandler(this, args);
                 if (!args.ContinueWithProfileAutoSave)
@@ -150,13 +161,23 @@ namespace System.Web.Profile {
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
-        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.SerializationFormatter)]
-        internal static void ParseDataFromDB(string[] names, string values, byte[] buf, SettingsPropertyValueCollection properties)
+        [SecurityPermission(
+            SecurityAction.Assert,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        internal static void ParseDataFromDB(
+            string[] names,
+            string values,
+            byte[] buf,
+            SettingsPropertyValueCollection properties
+        )
         {
-            if (names == null || values == null || buf == null || properties == null) 
+            if (names == null || values == null || buf == null || properties == null)
                 return;
-            try {
-                for (int iter = 0; iter < names.Length / 4; iter++) {
+            try
+            {
+                for (int iter = 0; iter < names.Length / 4; iter++)
+                {
                     string name = names[iter * 4];
                     SettingsPropertyValue pp = properties[name];
 
@@ -172,39 +193,69 @@ namespace System.Web.Profile {
                         pp.IsDirty = false;
                         pp.Deserialized = true;
                     }
-                    if (names[iter * 4 + 1] == "S" && startPos >= 0 && length > 0 && values.Length >= startPos + length) {
+                    if (
+                        names[iter * 4 + 1] == "S"
+                        && startPos >= 0
+                        && length > 0
+                        && values.Length >= startPos + length
+                    )
+                    {
                         pp.SerializedValue = values.Substring(startPos, length);
                     }
 
-                    if (names[iter * 4 + 1] == "B" && startPos >= 0 && length > 0 && buf.Length >= startPos + length) {
+                    if (
+                        names[iter * 4 + 1] == "B"
+                        && startPos >= 0
+                        && length > 0
+                        && buf.Length >= startPos + length
+                    )
+                    {
                         byte[] buf2 = new byte[length];
 
                         Buffer.BlockCopy(buf, startPos, buf2, 0, length);
                         pp.SerializedValue = buf2;
                     }
                 }
-            } catch { // Eat exceptions
+            }
+            catch
+            { // Eat exceptions
             }
         }
 
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////
-        [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.SerializationFormatter)]
-        internal static void PrepareDataForSaving(ref string allNames, ref string allValues, ref byte[] buf, bool binarySupported, SettingsPropertyValueCollection properties, bool userIsAuthenticated)
+        [SecurityPermission(
+            SecurityAction.Assert,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        internal static void PrepareDataForSaving(
+            ref string allNames,
+            ref string allValues,
+            ref byte[] buf,
+            bool binarySupported,
+            SettingsPropertyValueCollection properties,
+            bool userIsAuthenticated
+        )
         {
             StringBuilder names = new StringBuilder();
             StringBuilder values = new StringBuilder();
 
             MemoryStream ms = (binarySupported ? new System.IO.MemoryStream() : null);
-            try {
-                try {
+            try
+            {
+                try
+                {
                     bool anyItemsToSave = false;
 
-                    foreach (SettingsPropertyValue pp in properties) {
-                        if (pp.IsDirty) {
-                            if (!userIsAuthenticated) {
-                                bool allowAnonymous = (bool)pp.Property.Attributes["AllowAnonymous"];
+                    foreach (SettingsPropertyValue pp in properties)
+                    {
+                        if (pp.IsDirty)
+                        {
+                            if (!userIsAuthenticated)
+                            {
+                                bool allowAnonymous = (bool)
+                                    pp.Property.Attributes["AllowAnonymous"];
                                 if (!allowAnonymous)
                                     continue;
                             }
@@ -216,8 +267,10 @@ namespace System.Web.Profile {
                     if (!anyItemsToSave)
                         return;
 
-                    foreach (SettingsPropertyValue pp in properties) {
-                        if (!userIsAuthenticated) {
+                    foreach (SettingsPropertyValue pp in properties)
+                    {
+                        if (!userIsAuthenticated)
+                        {
                             bool allowAnonymous = (bool)pp.Property.Attributes["AllowAnonymous"];
                             if (!allowAnonymous)
                                 continue;
@@ -226,27 +279,37 @@ namespace System.Web.Profile {
                         if (!pp.IsDirty && pp.UsingDefaultValue) // Not fetched from DB and not written to
                             continue;
 
-                        int len = 0, startPos = 0;
+                        int len = 0,
+                            startPos = 0;
                         string propValue = null;
 
                         if (pp.Deserialized && pp.PropertyValue == null) // is value null?
-                            {
+                        {
                             len = -1;
-                        } else {
+                        }
+                        else
+                        {
                             object sVal = pp.SerializedValue;
 
-                            if (sVal == null) {
+                            if (sVal == null)
+                            {
                                 len = -1;
-                            } else {
-                                if (!(sVal is string) && !binarySupported) {
+                            }
+                            else
+                            {
+                                if (!(sVal is string) && !binarySupported)
+                                {
                                     sVal = Convert.ToBase64String((byte[])sVal);
                                 }
 
-                                if (sVal is string) {
+                                if (sVal is string)
+                                {
                                     propValue = (string)sVal;
                                     len = propValue.Length;
                                     startPos = values.Length;
-                                } else {
+                                }
+                                else
+                                {
                                     byte[] b2 = (byte[])sVal;
                                     startPos = (int)ms.Position;
                                     ms.Write(b2, 0, b2.Length);
@@ -256,20 +319,33 @@ namespace System.Web.Profile {
                             }
                         }
 
-                        names.Append(pp.Name + ":" + ((propValue != null) ? "S" : "B") +
-                                     ":" + startPos.ToString(CultureInfo.InvariantCulture) + ":" + len.ToString(CultureInfo.InvariantCulture) + ":");
+                        names.Append(
+                            pp.Name
+                                + ":"
+                                + ((propValue != null) ? "S" : "B")
+                                + ":"
+                                + startPos.ToString(CultureInfo.InvariantCulture)
+                                + ":"
+                                + len.ToString(CultureInfo.InvariantCulture)
+                                + ":"
+                        );
                         if (propValue != null)
                             values.Append(propValue);
                     }
 
-                    if (binarySupported) {
+                    if (binarySupported)
+                    {
                         buf = ms.ToArray();
                     }
-                } finally {
+                }
+                finally
+                {
                     if (ms != null)
                         ms.Close();
                 }
-            } catch {
+            }
+            catch
+            {
                 throw;
             }
             allNames = names.ToString();
@@ -277,17 +353,25 @@ namespace System.Web.Profile {
         }
     }
 
-    public delegate void ProfileMigrateEventHandler(Object sender,  ProfileMigrateEventArgs e);
+    public delegate void ProfileMigrateEventHandler(Object sender, ProfileMigrateEventArgs e);
 
-    public sealed class ProfileMigrateEventArgs : EventArgs {
-        private HttpContext       _Context;
-        private string            _AnonymousId;
+    public sealed class ProfileMigrateEventArgs : EventArgs
+    {
+        private HttpContext _Context;
+        private string _AnonymousId;
 
-        public  HttpContext       Context { get { return _Context;}}
+        public HttpContext Context
+        {
+            get { return _Context; }
+        }
 
-        public  string            AnonymousID { get { return _AnonymousId;}}
+        public string AnonymousID
+        {
+            get { return _AnonymousId; }
+        }
 
-        public ProfileMigrateEventArgs(HttpContext context, string anonymousId) {
+        public ProfileMigrateEventArgs(HttpContext context, string anonymousId)
+        {
             _Context = context;
             _AnonymousId = anonymousId;
         }
@@ -297,13 +381,21 @@ namespace System.Web.Profile {
 
     public sealed class ProfileAutoSaveEventArgs : EventArgs
     {
-        private     HttpContext         _Context;
-        private     bool                _ContinueSave = true;
+        private HttpContext _Context;
+        private bool _ContinueSave = true;
 
-        public      HttpContext     Context                     { get { return _Context; } }
-        public      bool            ContinueWithProfileAutoSave { get { return _ContinueSave; }  set { _ContinueSave = value; }}
+        public HttpContext Context
+        {
+            get { return _Context; }
+        }
+        public bool ContinueWithProfileAutoSave
+        {
+            get { return _ContinueSave; }
+            set { _ContinueSave = value; }
+        }
 
-        public ProfileAutoSaveEventArgs(HttpContext context) {
+        public ProfileAutoSaveEventArgs(HttpContext context)
+        {
             _Context = context;
         }
     }

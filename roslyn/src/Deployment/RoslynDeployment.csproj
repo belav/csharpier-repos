@@ -5,7 +5,6 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net472</TargetFramework>
     <IsShipping>false</IsShipping>
-
     <!-- VSIX -->
     <CreateVsixContainer>true</CreateVsixContainer>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
@@ -46,6 +45,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers" Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)" PrivateAssets="all" />
+    <PackageReference
+      Include="Microsoft.VisualStudio.SDK.Analyzers"
+      Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)"
+      PrivateAssets="all"
+    />
   </ItemGroup>
 </Project>

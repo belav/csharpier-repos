@@ -77,7 +77,10 @@ namespace System.Security.Cryptography
             if (data == null)
                 throw new ArgumentNullException(nameof(data));
             if (offset < 0)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0 || (count > data.Length))
                 throw new ArgumentOutOfRangeException(nameof(count));
             if ((data.Length - count) < offset)
@@ -154,7 +157,10 @@ namespace System.Security.Cryptography
         public static IncrementalHash CreateHash(HashAlgorithmName hashAlgorithm)
         {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             return new IncrementalHash(hashAlgorithm, GetHashAlgorithm(hashAlgorithm));
         }
@@ -186,14 +192,29 @@ namespace System.Security.Cryptography
             if (key == null)
                 throw new ArgumentNullException(nameof(key));
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                throw new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, nameof(hashAlgorithm));
+                throw new ArgumentException(
+                    SR.Cryptography_HashAlgorithmNameNullOrEmpty,
+                    nameof(hashAlgorithm)
+                );
 
             return new IncrementalHash(hashAlgorithm, GetHMAC(hashAlgorithm, key));
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "MD5 is used when the user asks for it.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is used when the user asks for it.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5354", Justification = "SHA1 is used when the user asks for it.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "MD5 is used when the user asks for it."
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "SHA1 is used when the user asks for it."
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5354",
+            Justification = "SHA1 is used when the user asks for it."
+        )]
         private static HashAlgorithm GetHashAlgorithm(HashAlgorithmName hashAlgorithm)
         {
             if (hashAlgorithm == HashAlgorithmName.MD5)
@@ -210,8 +231,16 @@ namespace System.Security.Cryptography
             throw new CryptographicException(NTE_BAD_ALGID);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "MD5 is used when the user asks for it.")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is used when the user asks for it.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "MD5 is used when the user asks for it."
+        )]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "SHA1 is used when the user asks for it."
+        )]
         private static HashAlgorithm GetHMAC(HashAlgorithmName hashAlgorithm, byte[] key)
         {
             if (hashAlgorithm == HashAlgorithmName.MD5)

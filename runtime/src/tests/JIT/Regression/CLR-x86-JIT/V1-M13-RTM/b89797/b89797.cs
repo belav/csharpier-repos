@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public unsafe class testout1
 {
     public struct VT_1
@@ -11,10 +12,12 @@ public unsafe class testout1
         public int a1_1;
         public long a4_1;
     }
+
     public class CL
     {
         public ulong a0 = 11235799373080166400UL;
     }
+
     private static int s_a3_1 = 1202448569;
     public static VT_1 vtstatic_1 = new VT_1();
 
@@ -22,7 +25,20 @@ public unsafe class testout1
     {
         ulong* a2_1 = stackalloc ulong[1];
         *a2_1 = 5565938416278830848UL;
-        ulong retval_1 = Convert.ToUInt64(Convert.ToUInt64(Convert.ToUInt64(Convert.ToInt32((Convert.ToInt32((Convert.ToInt32(vt_1.a1_1)) % (Convert.ToInt32(s_a3_1))))) + Convert.ToInt64(Convert.ToInt64(Convert.ToInt16(vt_1.a0_1) + Convert.ToInt64(vtstatic_1.a4_1)))) + (*a2_1)));
+        ulong retval_1 = Convert.ToUInt64(
+            Convert.ToUInt64(
+                Convert.ToUInt64(
+                    Convert.ToInt32(
+                        (Convert.ToInt32((Convert.ToInt32(vt_1.a1_1)) % (Convert.ToInt32(s_a3_1))))
+                    )
+                        + Convert.ToInt64(
+                            Convert.ToInt64(
+                                Convert.ToInt16(vt_1.a0_1) + Convert.ToInt64(vtstatic_1.a4_1)
+                            )
+                        )
+                ) + (*a2_1)
+            )
+        );
         return retval_1;
     }
 

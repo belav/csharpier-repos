@@ -26,7 +26,10 @@ public class DbSetSourceTest
 
         var factorySource = new DbSetSource();
 
-        Assert.NotSame(factorySource.Create(context, typeof(Random)), factorySource.Create(context, typeof(Random)));
+        Assert.NotSame(
+            factorySource.Create(context, typeof(Random)),
+            factorySource.Create(context, typeof(Random))
+        );
     }
 
     [ConditionalFact]
@@ -50,6 +53,7 @@ public class DbSetSourceTest
 
         Assert.NotSame(
             factorySource.Create(context, nameof(Random), typeof(Random)),
-            factorySource.Create(context, nameof(Random), typeof(Random)));
+            factorySource.Create(context, nameof(Random), typeof(Random))
+        );
     }
 }

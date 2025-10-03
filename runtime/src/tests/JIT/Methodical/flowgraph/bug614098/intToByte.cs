@@ -21,28 +21,36 @@ using Xunit;
 
 namespace Test_intToByte_cs
 {
-public class Program
-{
-    private struct MyStruct
+    public class Program
     {
-        public ushort value;
-        public MyStruct(ushort value)
+        private struct MyStruct
         {
-            this.value = value;
+            public ushort value;
+
+            public MyStruct(ushort value)
+            {
+                this.value = value;
+            }
+        };
+
+        private static MyStruct[] s_myObjects = { new MyStruct(0x0100) };
+
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            MyStruct obj = s_myObjects[0];
+            ushort value = obj.value;
+            byte lowByte = (byte)(value & 0xff);
+            int lowByteInt = lowByte; // here is the bug !
+            Console.WriteLine(
+                String.Format(
+                    "value : {0}, lowByte : {1}, lowByteInt : {2}",
+                    value,
+                    lowByte,
+                    lowByteInt
+                )
+            );
+            return (lowByteInt == 0) ? 100 : 101;
         }
-    };
-
-    static private MyStruct[] s_myObjects = { new MyStruct(0x0100) };
-
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        MyStruct obj = s_myObjects[0];
-        ushort value = obj.value;
-        byte lowByte = (byte)(value & 0xff);
-        int lowByteInt = lowByte; // here is the bug !
-        Console.WriteLine(String.Format("value : {0}, lowByte : {1}, lowByteInt : {2}", value, lowByte, lowByteInt));
-        return (lowByteInt == 0) ? 100 : 101;
     }
-}
 }

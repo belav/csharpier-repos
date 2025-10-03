@@ -14,9 +14,15 @@ using Microsoft.CodeAnalysis.ReplaceConditionalWithStatements;
 
 namespace Microsoft.CodeAnalysis.CSharp.ReplaceConditionalWithStatements;
 
-[ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ReplaceConditionalWithStatements), Shared]
-internal class CSharpReplaceConditionalWithStatementsCodeRefactoringProvider :
-    AbstractReplaceConditionalWithStatementsCodeRefactoringProvider<
+[
+    ExportCodeRefactoringProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeRefactoringProviderNames.ReplaceConditionalWithStatements
+    ),
+    Shared
+]
+internal class CSharpReplaceConditionalWithStatementsCodeRefactoringProvider
+    : AbstractReplaceConditionalWithStatementsCodeRefactoringProvider<
         ExpressionSyntax,
         ConditionalExpressionSyntax,
         StatementSyntax,
@@ -25,15 +31,16 @@ internal class CSharpReplaceConditionalWithStatementsCodeRefactoringProvider :
         BaseArgumentListSyntax,
         VariableDeclaratorSyntax,
         VariableDeclaratorSyntax,
-        EqualsValueClauseSyntax>
+        EqualsValueClauseSyntax
+    >
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpReplaceConditionalWithStatementsCodeRefactoringProvider()
-    {
-    }
+    public CSharpReplaceConditionalWithStatementsCodeRefactoringProvider() { }
 
-    protected override bool CanRewriteLocalDeclarationStatement(LocalDeclarationStatementSyntax localDeclarationStatement)
+    protected override bool CanRewriteLocalDeclarationStatement(
+        LocalDeclarationStatementSyntax localDeclarationStatement
+    )
     {
         // A using local decl must have an initializer, so we can't rewrite this to no longer have one.
         if (localDeclarationStatement.UsingKeyword != default)
@@ -48,7 +55,8 @@ internal class CSharpReplaceConditionalWithStatementsCodeRefactoringProvider :
 
     protected override bool HasSingleVariable(
         LocalDeclarationStatementSyntax localDeclarationStatement,
-        [NotNullWhen(true)] out VariableDeclaratorSyntax? variable)
+        [NotNullWhen(true)] out VariableDeclaratorSyntax? variable
+    )
     {
         if (localDeclarationStatement.Declaration.Variables.Count == 1)
         {
@@ -63,7 +71,8 @@ internal class CSharpReplaceConditionalWithStatementsCodeRefactoringProvider :
     protected override LocalDeclarationStatementSyntax GetUpdatedLocalDeclarationStatement(
         SyntaxGenerator generator,
         LocalDeclarationStatementSyntax localDeclarationStatement,
-        ILocalSymbol symbol)
+        ILocalSymbol symbol
+    )
     {
         // If we have `var x = a ? b : c;`
         // then we have to replace `var` with the actual type of the local when breaking this into multiple statements.
@@ -71,12 +80,15 @@ internal class CSharpReplaceConditionalWithStatementsCodeRefactoringProvider :
         if (type.IsVar)
         {
             localDeclarationStatement = localDeclarationStatement.ReplaceNode(
-                type, symbol.Type.GenerateTypeSyntax(allowVar: false).WithTriviaFrom(type));
+                type,
+                symbol.Type.GenerateTypeSyntax(allowVar: false).WithTriviaFrom(type)
+            );
         }
 
         var variable = localDeclarationStatement.Declaration.Variables[0];
         return localDeclarationStatement.ReplaceNode(
             variable,
-            variable.WithInitializer(null).WithIdentifier(variable.Identifier.WithTrailingTrivia()));
+            variable.WithInitializer(null).WithIdentifier(variable.Identifier.WithTrailingTrivia())
+        );
     }
 }

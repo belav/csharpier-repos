@@ -15,7 +15,12 @@ namespace System.Security.Cryptography.X509Certificates
             throw new PlatformNotSupportedException($"{nameof(StorePal)}.{nameof(FromHandle)}");
         }
 
-        private static ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, bool readingFromFile, X509KeyStorageFlags keyStorageFlags)
+        private static ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            bool readingFromFile,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             List<ICertificatePal>? certificateList = null;
 
@@ -24,9 +29,18 @@ namespace System.Security.Cryptography.X509Certificates
                 (derData, contentType) =>
                 {
                     certificateList ??= new List<ICertificatePal>();
-                    certificateList.Add(AppleCertificatePal.FromDerBlob(derData, contentType, password, readingFromFile, keyStorageFlags));
+                    certificateList.Add(
+                        AppleCertificatePal.FromDerBlob(
+                            derData,
+                            contentType,
+                            password,
+                            readingFromFile,
+                            keyStorageFlags
+                        )
+                    );
                     return true;
-                });
+                }
+            );
 
             if (certificateList != null)
             {
@@ -40,12 +54,17 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new CryptographicException(
                     SR.Cryptography_X509_PKCS7_Unsupported,
-                    new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported));
+                    new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported)
+                );
             }
 
             if (contentType == X509ContentType.Pkcs12)
             {
-                X509Certificate.EnforceIterationCountLimit(ref rawData, readingFromFile, password.PasswordProvided);
+                X509Certificate.EnforceIterationCountLimit(
+                    ref rawData,
+                    readingFromFile,
+                    password.PasswordProvided
+                );
                 ApplePkcs12Reader reader = new ApplePkcs12Reader(rawData);
 
                 try
@@ -63,7 +82,8 @@ namespace System.Security.Cryptography.X509Certificates
             SafeCFArrayHandle certs = Interop.AppleCrypto.X509ImportCollection(
                 rawData,
                 contentType,
-                password);
+                password
+            );
 
             using (certs)
             {
@@ -82,7 +102,10 @@ namespace System.Security.Cryptography.X509Certificates
 
                     if (handle != IntPtr.Zero)
                     {
-                        ICertificatePal? certPal = AppleCertificatePal.FromHandle(handle, throwOnFail: false);
+                        ICertificatePal? certPal = AppleCertificatePal.FromHandle(
+                            handle,
+                            throwOnFail: false
+                        );
 
                         if (certPal != null)
                         {
@@ -95,12 +118,20 @@ namespace System.Security.Cryptography.X509Certificates
             return new CertCollectionLoader(certificateList);
         }
 
-        internal static partial ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             return FromBlob(rawData, password, readingFromFile: false, keyStorageFlags);
         }
 
-        internal static partial ILoaderPal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ILoaderPal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -113,12 +144,18 @@ namespace System.Security.Cryptography.X509Certificates
             return new AppleCertificateExporter(cert);
         }
 
-        internal static partial IExportPal LinkFromCertificateCollection(X509Certificate2Collection certificates)
+        internal static partial IExportPal LinkFromCertificateCollection(
+            X509Certificate2Collection certificates
+        )
         {
             return new AppleCertificateExporter(certificates);
         }
 
-        internal static partial IStorePal FromSystemStore(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+        internal static partial IStorePal FromSystemStore(
+            string storeName,
+            StoreLocation storeLocation,
+            OpenFlags openFlags
+        )
         {
             StringComparer ordinalIgnoreCase = StringComparer.OrdinalIgnoreCase;
 
@@ -126,7 +163,8 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new CryptographicException(
                     SR.Cryptography_X509_StoreNotFound,
-                    new PlatformNotSupportedException(SR.Cryptography_X509_Store_RootUnsupported));
+                    new PlatformNotSupportedException(SR.Cryptography_X509_Store_RootUnsupported)
+                );
             }
 
             if (storeLocation == StoreLocation.CurrentUser)
@@ -143,12 +181,16 @@ namespace System.Security.Cryptography.X509Certificates
             string message = SR.Format(
                 SR.Cryptography_X509_StoreCannotCreate,
                 storeName,
-                storeLocation);
+                storeLocation
+            );
 
             throw new CryptographicException(message, new PlatformNotSupportedException(message));
         }
 
-        private static void ReadCollection(SafeCFArrayHandle matches, HashSet<X509Certificate2> collection)
+        private static void ReadCollection(
+            SafeCFArrayHandle matches,
+            HashSet<X509Certificate2> collection
+        )
         {
             if (matches.IsInvalid)
             {
@@ -164,7 +206,13 @@ namespace System.Security.Cryptography.X509Certificates
                 SafeSecCertificateHandle certHandle;
                 SafeSecIdentityHandle identityHandle;
 
-                if (Interop.AppleCrypto.X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle))
+                if (
+                    Interop.AppleCrypto.X509DemuxAndRetainHandle(
+                        handle,
+                        out certHandle,
+                        out identityHandle
+                    )
+                )
                 {
                     X509Certificate2 cert;
 

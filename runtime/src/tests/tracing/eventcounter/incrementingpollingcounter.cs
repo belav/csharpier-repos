@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using Xunit;
 
 namespace BasicEventSourceTests
 {
@@ -22,7 +22,16 @@ namespace BasicEventSourceTests
 
             public SimpleEventSource(Func<double> getMockedCount)
             {
-                _mockedCounter = new IncrementingPollingCounter("failureCount", this, getMockedCount) { DisplayName = "Failure Count", DisplayUnits = "Count", DisplayRateTimeScale = new TimeSpan(0, 0, 1) };
+                _mockedCounter = new IncrementingPollingCounter(
+                    "failureCount",
+                    this,
+                    getMockedCount
+                )
+                {
+                    DisplayName = "Failure Count",
+                    DisplayUnits = "Count",
+                    DisplayRateTimeScale = new TimeSpan(0, 0, 1),
+                };
             }
         }
 
@@ -31,7 +40,7 @@ namespace BasicEventSourceTests
             private readonly string _targetSourceName;
             private readonly EventLevel _level;
             private Dictionary<string, string> args;
-            
+
             public int FailureEventCount { get; private set; } = 0;
             public bool Failed = false;
             public bool MetadataSet = false;
@@ -47,7 +56,7 @@ namespace BasicEventSourceTests
                 args = new Dictionary<string, string>();
                 args.Add("EventCounterIntervalSec", "1");
             }
-            
+
             protected override void OnEventSourceCreated(EventSource source)
             {
                 if (source.Name.Equals(_targetSourceName))
@@ -62,9 +71,9 @@ namespace BasicEventSourceTests
                 {
                     for (int i = 0; i < eventData.Payload.Count; i++)
                     {
-
                         // Decode the payload
-                        IDictionary<string, object> eventPayload = eventData.Payload[i] as IDictionary<string, object>;
+                        IDictionary<string, object> eventPayload =
+                            eventData.Payload[i] as IDictionary<string, object>;
 
                         string name = "";
                         string increment = "";
@@ -104,7 +113,6 @@ namespace BasicEventSourceTests
             }
         }
 
-
         public static int mockedCountCalled = 0;
 
         public static double getMockedCount()
@@ -112,11 +120,17 @@ namespace BasicEventSourceTests
             mockedCountCalled++;
             return mockedCountCalled;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
             // Create an EventListener.
-            using (SimpleEventListener myListener = new SimpleEventListener("SimpleEventSource", EventLevel.Verbose))
+            using (
+                SimpleEventListener myListener = new SimpleEventListener(
+                    "SimpleEventSource",
+                    EventLevel.Verbose
+                )
+            )
             {
                 SimpleEventSource eventSource = new SimpleEventSource(getMockedCount);
 
@@ -125,28 +139,36 @@ namespace BasicEventSourceTests
 
                 if (myListener.Failed || mockedCountCalled <= 0)
                 {
-                    Console.WriteLine($"Test Failed - mockedCountCalled = {mockedCountCalled}, myListener.Failed = {myListener.Failed}");
-                    return 1;    
-                }
-                
-                if (myListener.displayRateTimeScale != "00:00:01")
-                {
-                    Console.WriteLine($"Test Failed - Incorrect DisplayRateTimeScale in payload: {myListener.displayRateTimeScale}");
+                    Console.WriteLine(
+                        $"Test Failed - mockedCountCalled = {mockedCountCalled}, myListener.Failed = {myListener.Failed}"
+                    );
                     return 1;
                 }
-                
+
+                if (myListener.displayRateTimeScale != "00:00:01")
+                {
+                    Console.WriteLine(
+                        $"Test Failed - Incorrect DisplayRateTimeScale in payload: {myListener.displayRateTimeScale}"
+                    );
+                    return 1;
+                }
+
                 if (myListener.displayName != "Failure Count")
                 {
-                    Console.WriteLine($"Test Failed - Incorrect DisplayName in payload: {myListener.displayName}");
+                    Console.WriteLine(
+                        $"Test Failed - Incorrect DisplayName in payload: {myListener.displayName}"
+                    );
                     return 1;
                 }
 
                 if (myListener.displayUnits != "Count")
                 {
-                    Console.WriteLine($"Test failed - Incorrect DisplayUnits in payload: {myListener.displayUnits}");
+                    Console.WriteLine(
+                        $"Test failed - Incorrect DisplayUnits in payload: {myListener.displayUnits}"
+                    );
                     return 1;
                 }
-                
+
                 Console.WriteLine("Test passed");
                 return 100;
             }

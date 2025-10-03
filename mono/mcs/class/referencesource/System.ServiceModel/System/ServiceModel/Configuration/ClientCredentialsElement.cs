@@ -5,20 +5,18 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
     using System.Net.Security;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Security;
-    using System.Security.Cryptography.X509Certificates;
     using System.Reflection;
     using System.Runtime.InteropServices;
+    using System.Security.Cryptography.X509Certificates;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Security;
 
     public partial class ClientCredentialsElement : BehaviorExtensionElement
     {
-        public ClientCredentialsElement()
-        {
-        }
+        public ClientCredentialsElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.Type, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
@@ -38,26 +36,28 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.UseIdentityConfiguration, DefaultValue = false)]
         public bool UseIdentityConfiguration
         {
-            get
-            {
-                return (bool)base[ConfigurationStrings.UseIdentityConfiguration];
-            }
-            set
-            {
-                base[ConfigurationStrings.UseIdentityConfiguration] = value;
-            }
+            get { return (bool)base[ConfigurationStrings.UseIdentityConfiguration]; }
+            set { base[ConfigurationStrings.UseIdentityConfiguration] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ClientCertificate)]
         public X509InitiatorCertificateClientElement ClientCertificate
         {
-            get { return (X509InitiatorCertificateClientElement)base[ConfigurationStrings.ClientCertificate]; }
+            get
+            {
+                return (X509InitiatorCertificateClientElement)
+                    base[ConfigurationStrings.ClientCertificate];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ServiceCertificate)]
         public X509RecipientCertificateClientElement ServiceCertificate
         {
-            get { return (X509RecipientCertificateClientElement)base[ConfigurationStrings.ServiceCertificate]; }
+            get
+            {
+                return (X509RecipientCertificateClientElement)
+                    base[ConfigurationStrings.ServiceCertificate];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Windows)]
@@ -84,7 +84,10 @@ namespace System.ServiceModel.Configuration
             get { return (PeerCredentialElement)base[ConfigurationStrings.Peer]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SupportInteractive, DefaultValue = ClientCredentials.SupportInteractiveDefault)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SupportInteractive,
+            DefaultValue = ClientCredentials.SupportInteractiveDefault
+        )]
         public bool SupportInteractive
         {
             get { return (bool)base[ConfigurationStrings.SupportInteractive]; }
@@ -120,17 +123,24 @@ namespace System.ServiceModel.Configuration
                 Type credentialsType = System.Type.GetType(this.Type, true);
                 if (!typeof(ClientCredentials).IsAssignableFrom(credentialsType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(SR.ConfigInvalidClientCredentialsType, this.Type, credentialsType.AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidClientCredentialsType,
+                                this.Type,
+                                credentialsType.AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
-                behavior = (ClientCredentials) Activator.CreateInstance(credentialsType);
+                behavior = (ClientCredentials)Activator.CreateInstance(credentialsType);
             }
             ApplyConfiguration(behavior);
 
             return behavior;
         }
 
-        protected internal void ApplyConfiguration( ClientCredentials behavior )
+        protected internal void ApplyConfiguration(ClientCredentials behavior)
         {
             if (null == behavior)
             {
@@ -138,23 +148,38 @@ namespace System.ServiceModel.Configuration
             }
 
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.Windows].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.Windows].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.Windows.ApplyConfiguration(behavior.Windows);
             }
-            if (propertyInfo[ConfigurationStrings.ClientCertificate].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.ClientCertificate].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.ClientCertificate.ApplyConfiguration(behavior.ClientCertificate);
             }
-            if (propertyInfo[ConfigurationStrings.ServiceCertificate].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.ServiceCertificate].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.ServiceCertificate.ApplyConfiguration(behavior.ServiceCertificate);
             }
-            if (propertyInfo[ConfigurationStrings.IssuedToken].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.IssuedToken].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.IssuedToken.ApplyConfiguration(behavior.IssuedToken);
             }
-            if (propertyInfo[ConfigurationStrings.HttpDigest].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.HttpDigest].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 this.HttpDigest.ApplyConfiguration(behavior.HttpDigest);
             }
@@ -162,7 +187,10 @@ namespace System.ServiceModel.Configuration
             {
                 this.Peer.ApplyConfiguration(behavior.Peer);
             }
-            if ( propertyInfo[ConfigurationStrings.UseIdentityConfiguration].ValueOrigin != PropertyValueOrigin.Default )
+            if (
+                propertyInfo[ConfigurationStrings.UseIdentityConfiguration].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 behavior.UseIdentityConfiguration = this.UseIdentityConfiguration;
             }
@@ -176,6 +204,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

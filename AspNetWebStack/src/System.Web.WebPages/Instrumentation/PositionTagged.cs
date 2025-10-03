@@ -27,17 +27,12 @@ namespace System.Web.WebPages.Instrumentation
         public override bool Equals(object obj)
         {
             PositionTagged<T> other = obj as PositionTagged<T>;
-            return other != null &&
-                   other.Position == Position &&
-                   Equals(other.Value, Value);
+            return other != null && other.Position == Position && Equals(other.Value, Value);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(Position)
-                .Add(Value)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(Position).Add(Value).CombinedHash;
         }
 
         public override string ToString()

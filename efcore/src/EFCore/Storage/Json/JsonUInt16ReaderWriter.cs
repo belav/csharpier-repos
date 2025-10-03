@@ -15,15 +15,15 @@ public sealed class JsonUInt16ReaderWriter : JsonValueReaderWriter<ushort>
     /// </summary>
     public static JsonUInt16ReaderWriter Instance { get; } = new();
 
-    private JsonUInt16ReaderWriter()
-    {
-    }
+    private JsonUInt16ReaderWriter() { }
 
     /// <inheritdoc />
-    public override ushort FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetUInt16();
+    public override ushort FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetUInt16();
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, ushort value)
-        => writer.WriteNumberValue(value);
+    public override void ToJsonTyped(Utf8JsonWriter writer, ushort value) =>
+        writer.WriteNumberValue(value);
 }

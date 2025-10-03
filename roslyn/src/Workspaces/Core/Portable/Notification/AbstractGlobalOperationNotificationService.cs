@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Notification
 {
-    internal abstract partial class AbstractGlobalOperationNotificationService : IGlobalOperationNotificationService
+    internal abstract partial class AbstractGlobalOperationNotificationService
+        : IGlobalOperationNotificationService
     {
         private readonly object _gate = new();
 
@@ -28,9 +29,13 @@ namespace Microsoft.CodeAnalysis.Notification
         public event EventHandler? Stopped;
 
         protected AbstractGlobalOperationNotificationService(
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
-            _eventQueue = new TaskQueue(listenerProvider.GetListener(FeatureAttribute.GlobalOperation), TaskScheduler.Default);
+            _eventQueue = new TaskQueue(
+                listenerProvider.GetListener(FeatureAttribute.GlobalOperation),
+                TaskScheduler.Default
+            );
         }
 
         ~AbstractGlobalOperationNotificationService()
@@ -38,7 +43,10 @@ namespace Microsoft.CodeAnalysis.Notification
             if (!Environment.HasShutdownStarted)
             {
                 Contract.ThrowIfFalse(_registrations.Count == 0);
-                Contract.ThrowIfFalse(_operations.Count == 0, $"Non-disposed operations: {string.Join(", ", _operations)}");
+                Contract.ThrowIfFalse(
+                    _operations.Count == 0,
+                    $"Non-disposed operations: {string.Join(", ", _operations)}"
+                );
             }
         }
 
@@ -46,14 +54,22 @@ namespace Microsoft.CodeAnalysis.Notification
         {
             var started = this.Started;
             if (started != null)
-                _eventQueue.ScheduleTask(nameof(RaiseGlobalOperationStarted), () => this.Started?.Invoke(this, EventArgs.Empty), CancellationToken.None);
+                _eventQueue.ScheduleTask(
+                    nameof(RaiseGlobalOperationStarted),
+                    () => this.Started?.Invoke(this, EventArgs.Empty),
+                    CancellationToken.None
+                );
         }
 
         private void RaiseGlobalOperationStopped()
         {
             var stopped = this.Stopped;
             if (stopped != null)
-                _eventQueue.ScheduleTask(nameof(RaiseGlobalOperationStopped), () => this.Stopped?.Invoke(this, EventArgs.Empty), CancellationToken.None);
+                _eventQueue.ScheduleTask(
+                    nameof(RaiseGlobalOperationStopped),
+                    () => this.Stopped?.Invoke(this, EventArgs.Empty),
+                    CancellationToken.None
+                );
         }
 
         public IDisposable Start(string operation)

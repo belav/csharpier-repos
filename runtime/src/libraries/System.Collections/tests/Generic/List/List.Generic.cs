@@ -49,8 +49,10 @@ namespace System.Collections.Tests
             return GenericListFactory().AsReadOnly();
         }
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
-        
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
+
         protected override bool Enumerator_Empty_Current_UndefinedOperation_Throws => true;
     }
 
@@ -74,7 +76,9 @@ namespace System.Collections.Tests
             return GenericListFactory().AsReadOnly();
         }
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
 
         protected override bool Enumerator_Empty_Current_UndefinedOperation_Throws => true;
     }

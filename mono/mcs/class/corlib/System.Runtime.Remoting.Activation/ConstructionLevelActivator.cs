@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,24 +34,25 @@ using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Activation
 {
-	[Serializable]
-	internal class ConstructionLevelActivator: IActivator
-	{
-		public ActivatorLevel Level 
-		{
-			get { return ActivatorLevel.Construction; }
-		}
+    [Serializable]
+    internal class ConstructionLevelActivator : IActivator
+    {
+        public ActivatorLevel Level
+        {
+            get { return ActivatorLevel.Construction; }
+        }
 
-		public IActivator NextActivator 
-		{
-			get { return null; }
-			set { ; }
-		}
+        public IActivator NextActivator
+        {
+            get { return null; }
+            set { ; }
+        }
 
-		public IConstructionReturnMessage Activate (IConstructionCallMessage msg)
-		{
-			// The StackBuilderSink at the end of the server context sink chain will do the job
-			return (IConstructionReturnMessage) Threading.Thread.CurrentContext.GetServerContextSinkChain().SyncProcessMessage (msg);
-		}
-	}
+        public IConstructionReturnMessage Activate(IConstructionCallMessage msg)
+        {
+            // The StackBuilderSink at the end of the server context sink chain will do the job
+            return (IConstructionReturnMessage)
+                Threading.Thread.CurrentContext.GetServerContextSinkChain().SyncProcessMessage(msg);
+        }
+    }
 }

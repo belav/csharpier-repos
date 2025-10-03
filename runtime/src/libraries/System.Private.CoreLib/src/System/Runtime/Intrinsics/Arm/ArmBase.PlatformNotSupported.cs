@@ -19,83 +19,130 @@ namespace System.Runtime.Intrinsics.Arm
     {
         internal ArmBase() { }
 
-        public static bool IsSupported { [Intrinsic] get => false; }
+        public static bool IsSupported
+        {
+            [Intrinsic]
+            get => false;
+        }
 
         public abstract class Arm64
         {
             internal Arm64() { }
 
-            public static bool IsSupported { [Intrinsic] get => false; }
+            public static bool IsSupported
+            {
+                [Intrinsic]
+                get => false;
+            }
 
             /// <summary>
             ///   A64: CLS Wd, Wn
             /// </summary>
-            public static int LeadingSignCount(int value) { throw new PlatformNotSupportedException(); }
+            public static int LeadingSignCount(int value)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             ///   A64: CLS Xd, Xn
             /// </summary>
-            public static int LeadingSignCount(long value) { throw new PlatformNotSupportedException(); }
+            public static int LeadingSignCount(long value)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             ///   A64: CLZ Xd, Xn
             /// </summary>
-            public static int LeadingZeroCount(long value) { throw new PlatformNotSupportedException(); }
+            public static int LeadingZeroCount(long value)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             ///   A64: CLZ Xd, Xn
             /// </summary>
-            public static int LeadingZeroCount(ulong value) { throw new PlatformNotSupportedException(); }
+            public static int LeadingZeroCount(ulong value)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             ///   A64: SMULH Xd, Xn, Xm
             /// </summary>
-            public static long MultiplyHigh(long left, long right) { throw new PlatformNotSupportedException(); }
+            public static long MultiplyHigh(long left, long right)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             ///   A64: UMULH Xd, Xn, Xm
             /// </summary>
-            public static ulong MultiplyHigh(ulong left, ulong right) { throw new PlatformNotSupportedException(); }
+            public static ulong MultiplyHigh(ulong left, ulong right)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             ///   A64: RBIT Xd, Xn
             /// </summary>
-            public static long ReverseElementBits(long value) { throw new PlatformNotSupportedException(); }
+            public static long ReverseElementBits(long value)
+            {
+                throw new PlatformNotSupportedException();
+            }
 
             /// <summary>
             ///   A64: RBIT Xd, Xn
             /// </summary>
-            public static ulong ReverseElementBits(ulong value) { throw new PlatformNotSupportedException(); }
+            public static ulong ReverseElementBits(ulong value)
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
         ///   A32: CLZ Rd, Rm
         ///   A64: CLZ Wd, Wn
         /// </summary>
-        public static int LeadingZeroCount(int value) { throw new PlatformNotSupportedException(); }
+        public static int LeadingZeroCount(int value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   A32: CLZ Rd, Rm
         ///   A64: CLZ Wd, Wn
         /// </summary>
-        public static int LeadingZeroCount(uint value) { throw new PlatformNotSupportedException(); }
+        public static int LeadingZeroCount(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   A32: RBIT Rd, Rm
         ///   A64: RBIT Wd, Wn
         /// </summary>
-        public static int ReverseElementBits(int value) { throw new PlatformNotSupportedException(); }
+        public static int ReverseElementBits(int value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   A32: RBIT Rd, Rm
         ///   A64: RBIT Wd, Wn
         /// </summary>
-        public static uint ReverseElementBits(uint value) { throw new PlatformNotSupportedException(); }
+        public static uint ReverseElementBits(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
 
         /// <summary>
         ///   A32: YIELD
         ///   A64: YIELD
         /// </summary>
-        public static void Yield() { throw new PlatformNotSupportedException(); }
+        public static void Yield()
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }

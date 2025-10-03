@@ -5,20 +5,25 @@
 //------------------------------------------------------------------------------
 
 using System.Diagnostics.Contracts;
+
 namespace System.Net.WebSockets
 {
     public class WebSocketReceiveResult
     {
-        public WebSocketReceiveResult(int count, WebSocketMessageType messageType, bool endOfMessage)
-            : this(count, messageType, endOfMessage, null, null)
-        {
-        }
+        public WebSocketReceiveResult(
+            int count,
+            WebSocketMessageType messageType,
+            bool endOfMessage
+        )
+            : this(count, messageType, endOfMessage, null, null) { }
 
-        public WebSocketReceiveResult(int count, 
-            WebSocketMessageType messageType, 
-            bool endOfMessage, 
-            Nullable<WebSocketCloseStatus> closeStatus, 
-            string closeStatusDescription)
+        public WebSocketReceiveResult(
+            int count,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            Nullable<WebSocketCloseStatus> closeStatus,
+            string closeStatusDescription
+        )
         {
             if (count < 0)
             {
@@ -43,11 +48,13 @@ namespace System.Net.WebSockets
             Contract.Assert(count >= 0, "'count' MUST NOT be negative.");
             Contract.Assert(count <= this.Count, "'count' MUST NOT be bigger than 'this.Count'.");
             this.Count -= count;
-            return new WebSocketReceiveResult(count, 
+            return new WebSocketReceiveResult(
+                count,
                 this.MessageType,
-                this.Count == 0 && this.EndOfMessage, 
-                this.CloseStatus, 
-                this.CloseStatusDescription);
+                this.Count == 0 && this.EndOfMessage,
+                this.CloseStatus,
+                this.CloseStatusDescription
+            );
         }
     }
 }

@@ -57,9 +57,11 @@
 using System;
 using RabbitMQ.Client.Impl;
 
-namespace RabbitMQ.Client.Framing.Impl.v0_9 {
-    public class Connection: ConnectionBase {
+namespace RabbitMQ.Client.Framing.Impl.v0_9
+{
+    public class Connection : ConnectionBase
+    {
         public Connection(ConnectionFactory factory, bool insist, IFrameHandler frameHandler)
-            : base(factory, insist, frameHandler) {}
+            : base(factory, insist, frameHandler) { }
     }
 }

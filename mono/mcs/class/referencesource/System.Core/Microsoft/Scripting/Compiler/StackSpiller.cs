@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -20,15 +20,16 @@ using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast.Compiler {
+namespace Microsoft.Scripting.Ast.Compiler
+{
 #else
-namespace System.Linq.Expressions.Compiler {
+namespace System.Linq.Expressions.Compiler
+{
 #endif
 
     /// <summary>
@@ -36,12 +37,13 @@ namespace System.Linq.Expressions.Compiler {
     /// in order to guarantee some properties of code generation, for
     /// example that we always enter try block on empty stack.
     /// </summary>
-    internal partial class StackSpiller {
-
+    internal partial class StackSpiller
+    {
         // Is the evaluation stack empty?
-        private enum Stack {
+        private enum Stack
+        {
             Empty,
-            NonEmpty
+            NonEmpty,
         };
 
         // Should the parent nodes be rewritten, and in what way?
@@ -54,18 +56,21 @@ namespace System.Linq.Expressions.Compiler {
         //   Copy -> copy into a new node
         //   SpillStack -> spill stack into temps
         [Flags]
-        private enum RewriteAction {
+        private enum RewriteAction
+        {
             None = 0,
             Copy = 1,
             SpillStack = 3,
         }
 
         // Result of a rewrite operation. Always contains an action and a node.
-        private struct Result {
+        private struct Result
+        {
             internal readonly RewriteAction Action;
             internal readonly Expression Node;
 
-            internal Result(RewriteAction action, Expression node) {
+            internal Result(RewriteAction action, Expression node)
+            {
                 Action = action;
                 Node = node;
             }
@@ -94,16 +99,19 @@ namespace System.Linq.Expressions.Compiler {
         /// places where it's invalid to have a non-empty stack (for example,
         /// entering a try statement).
         /// </summary>
-        internal static LambdaExpression AnalyzeLambda(LambdaExpression lambda) {
+        internal static LambdaExpression AnalyzeLambda(LambdaExpression lambda)
+        {
             return lambda.Accept(new StackSpiller(Stack.Empty));
         }
 
-        private StackSpiller(Stack stack) {
+        private StackSpiller(Stack stack)
+        {
             _startingStack = stack;
         }
 
         // called by Expression<T>.Accept
-        internal Expression<T> Rewrite<T>(Expression<T> lambda) {
+        internal Expression<T> Rewrite<T>(Expression<T> lambda)
+        {
             VerifyTemps();
 
             // Lambda starts with an empty stack
@@ -112,11 +120,13 @@ namespace System.Linq.Expressions.Compiler {
 
             VerifyTemps();
 
-            if (body.Action != RewriteAction.None) {
+            if (body.Action != RewriteAction.None)
+            {
                 // Create a new scope for temps
                 // (none of these will be hoisted so there is no closure impact)
                 Expression newBody = body.Node;
-                if (_tm.Temps.Count > 0) {
+                if (_tm.Temps.Count > 0)
+                {
                     newBody = Expression.Block(_tm.Temps, newBody);
                 }
 
@@ -130,18 +140,27 @@ namespace System.Linq.Expressions.Compiler {
         #region Expressions
 
         [Conditional("DEBUG")]
-        private static void VerifyRewrite(Result result, Expression node) {
+        private static void VerifyRewrite(Result result, Expression node)
+        {
             Debug.Assert(result.Node != null);
 
             // (result.Action == RewriteAction.None) if and only if (node == result.Node)
-            Debug.Assert((result.Action == RewriteAction.None) ^ (node != result.Node), "rewrite action does not match node object identity");
+            Debug.Assert(
+                (result.Action == RewriteAction.None) ^ (node != result.Node),
+                "rewrite action does not match node object identity"
+            );
 
             // if the original node is an extension node, it should have been rewritten
-            Debug.Assert(result.Node.NodeType != ExpressionType.Extension, "extension nodes must be rewritten");
+            Debug.Assert(
+                result.Node.NodeType != ExpressionType.Extension,
+                "extension nodes must be rewritten"
+            );
 
             // if we have Copy, then node type must match
             Debug.Assert(
-                result.Action != RewriteAction.Copy || node.NodeType == result.Node.NodeType || node.CanReduce,
+                result.Action != RewriteAction.Copy
+                    || node.NodeType == result.Node.NodeType
+                    || node.CanReduce,
                 "rewrite action does not match node object kind"
             );
 
@@ -154,7 +173,8 @@ namespace System.Linq.Expressions.Compiler {
             );
         }
 
-        private Result RewriteExpressionFreeTemps(Expression expression, Stack stack) {
+        private Result RewriteExpressionFreeTemps(Expression expression, Stack stack)
+        {
             int mark = Mark();
             Result result = RewriteExpression(expression, stack);
             Free(mark);
@@ -162,21 +182,28 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // DynamicExpression
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "stack")]
-        private Result RewriteDynamicExpression(Expression expr, Stack stack) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "stack"
+        )]
+        private Result RewriteDynamicExpression(Expression expr, Stack stack)
+        {
             var node = (DynamicExpression)expr;
 
             // CallSite is on the stack
             IArgumentProvider argNode = (IArgumentProvider)node;
             ChildRewriter cr = new ChildRewriter(this, Stack.NonEmpty, argNode.ArgumentCount);
             cr.AddArguments(argNode);
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNoRefArgs(node.DelegateType.GetMethod("Invoke"));
             }
             return cr.Finish(cr.Rewrite ? node.Rewrite(cr[0, -1]) : expr);
         }
 
-        private Result RewriteIndexAssignment(BinaryExpression node, Stack stack) {
+        private Result RewriteIndexAssignment(BinaryExpression node, Stack stack)
+        {
             IndexExpression index = (IndexExpression)node.Left;
 
             ChildRewriter cr = new ChildRewriter(this, stack, 2 + index.Arguments.Count);
@@ -185,18 +212,20 @@ namespace System.Linq.Expressions.Compiler {
             cr.Add(index.Arguments);
             cr.Add(node.Right);
 
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNotRefInstance(index.Object);
             }
 
-            if (cr.Rewrite) {
+            if (cr.Rewrite)
+            {
                 node = new AssignBinaryExpression(
                     new IndexExpression(
-                        cr[0],                              // Object
+                        cr[0], // Object
                         index.Indexer,
-                        cr[1, -2]                           // arguments                        
+                        cr[1, -2] // arguments
                     ),
-                    cr[-1]                                  // value
+                    cr[-1] // value
                 );
             }
 
@@ -204,22 +233,23 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // BinaryExpression: AndAlso, OrElse
-        private Result RewriteLogicalBinaryExpression(Expression expr, Stack stack) {
+        private Result RewriteLogicalBinaryExpression(Expression expr, Stack stack)
+        {
             BinaryExpression node = (BinaryExpression)expr;
 
             // Left expression runs on a stack as left by parent
             Result left = RewriteExpression(node.Left, stack);
             // ... and so does the right one
             Result right = RewriteExpression(node.Right, stack);
-            //conversion is a lambda. stack state will be ignored. 
+            //conversion is a lambda. stack state will be ignored.
             Result conversion = RewriteExpression(node.Conversion, stack);
 
             RewriteAction action = left.Action | right.Action | conversion.Action;
-            if (action != RewriteAction.None) {
-            
-	            // We don't have to worry about byref parameters here, because the
-	            // factory doesn't allow it (it requires identical parameters and
-	            // return type from the AndAlso/OrElse method)
+            if (action != RewriteAction.None)
+            {
+                // We don't have to worry about byref parameters here, because the
+                // factory doesn't allow it (it requires identical parameters and
+                // return type from the AndAlso/OrElse method)
 
                 expr = BinaryExpression.Create(
                     node.NodeType,
@@ -233,14 +263,16 @@ namespace System.Linq.Expressions.Compiler {
             return new Result(action, expr);
         }
 
-        private Result RewriteReducibleExpression(Expression expr, Stack stack) {
+        private Result RewriteReducibleExpression(Expression expr, Stack stack)
+        {
             Result result = RewriteExpression(expr.Reduce(), stack);
             // it's at least Copy because we reduced the node
             return new Result(result.Action | RewriteAction.Copy, result.Node);
         }
 
         // BinaryExpression
-        private Result RewriteBinaryExpression(Expression expr, Stack stack) {
+        private Result RewriteBinaryExpression(Expression expr, Stack stack)
+        {
             BinaryExpression node = (BinaryExpression)expr;
 
             ChildRewriter cr = new ChildRewriter(this, stack, 3);
@@ -251,35 +283,43 @@ namespace System.Linq.Expressions.Compiler {
             // conversion is a lambda, stack state will be ignored
             cr.Add(node.Conversion);
 
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNoRefArgs(node.Method);
             }
 
-            return cr.Finish(cr.Rewrite ?
-                                    BinaryExpression.Create(
-                                            node.NodeType,
-                                            cr[0],
-                                            cr[1],
-                                            node.Type,
-                                            node.Method,
-                                            (LambdaExpression)cr[2]) :
-                                    expr);
+            return cr.Finish(
+                cr.Rewrite
+                    ? BinaryExpression.Create(
+                        node.NodeType,
+                        cr[0],
+                        cr[1],
+                        node.Type,
+                        node.Method,
+                        (LambdaExpression)cr[2]
+                    )
+                    : expr
+            );
         }
 
         // variable assignment
-        private Result RewriteVariableAssignment(BinaryExpression node, Stack stack) {
+        private Result RewriteVariableAssignment(BinaryExpression node, Stack stack)
+        {
             // Expression is evaluated on a stack in current state
             Result right = RewriteExpression(node.Right, stack);
-            if (right.Action != RewriteAction.None) {
+            if (right.Action != RewriteAction.None)
+            {
                 node = Expression.Assign(node.Left, right.Node);
             }
             return new Result(right.Action, node);
         }
 
-        private Result RewriteAssignBinaryExpression(Expression expr, Stack stack) {
+        private Result RewriteAssignBinaryExpression(Expression expr, Stack stack)
+        {
             var node = (BinaryExpression)expr;
 
-            switch (node.Left.NodeType) {
+            switch (node.Left.NodeType)
+            {
                 case ExpressionType.Index:
                     return RewriteIndexAssignment(node, stack);
                 case ExpressionType.MemberAccess:
@@ -293,7 +333,8 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-        private Result RewriteExtensionAssignment(BinaryExpression node, Stack stack) {
+        private Result RewriteExtensionAssignment(BinaryExpression node, Stack stack)
+        {
             node = Expression.Assign(node.Left.ReduceExtensions(), node.Right);
             Result result = RewriteAssignBinaryExpression(node, stack);
             // it's at least Copy because we reduced the node
@@ -301,8 +342,13 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // LambdaExpression
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "stack")]
-        private static Result RewriteLambdaExpression(Expression expr, Stack stack) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "stack"
+        )]
+        private static Result RewriteLambdaExpression(Expression expr, Stack stack)
+        {
             LambdaExpression node = (LambdaExpression)expr;
 
             // Call back into the rewriter
@@ -316,7 +362,8 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // ConditionalExpression
-        private Result RewriteConditionalExpression(Expression expr, Stack stack) {
+        private Result RewriteConditionalExpression(Expression expr, Stack stack)
+        {
             ConditionalExpression node = (ConditionalExpression)expr;
             // Test executes at the stack as left by parent
             Result test = RewriteExpression(node.Test, stack);
@@ -326,7 +373,8 @@ namespace System.Linq.Expressions.Compiler {
             Result ifFalse = RewriteExpression(node.IfFalse, stack);
 
             RewriteAction action = test.Action | ifTrue.Action | ifFalse.Action;
-            if (action != RewriteAction.None) {
+            if (action != RewriteAction.None)
+            {
                 expr = Expression.Condition(test.Node, ifTrue.Node, ifFalse.Node, node.Type);
             }
 
@@ -334,7 +382,8 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // member assignment
-        private Result RewriteMemberAssignment(BinaryExpression node, Stack stack) {
+        private Result RewriteMemberAssignment(BinaryExpression node, Stack stack)
+        {
             MemberExpression lvalue = (MemberExpression)node.Left;
 
             ChildRewriter cr = new ChildRewriter(this, stack, 2);
@@ -346,30 +395,34 @@ namespace System.Linq.Expressions.Compiler {
 
             cr.Add(node.Right);
 
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNotRefInstance(lvalue.Expression);
             }
 
-            if (cr.Rewrite) {
+            if (cr.Rewrite)
+            {
                 return cr.Finish(
-                    new AssignBinaryExpression(
-                        MemberExpression.Make(cr[0], lvalue.Member),
-                        cr[1]
-                    )
+                    new AssignBinaryExpression(MemberExpression.Make(cr[0], lvalue.Member), cr[1])
                 );
             }
             return new Result(RewriteAction.None, node);
         }
 
         // MemberExpression
-        private Result RewriteMemberExpression(Expression expr, Stack stack) {
+        private Result RewriteMemberExpression(Expression expr, Stack stack)
+        {
             MemberExpression node = (MemberExpression)expr;
 
             // Expression is emitted on top of the stack in current state
             Result expression = RewriteExpression(node.Expression, stack);
-            if (expression.Action != RewriteAction.None) {
-                if (expression.Action == RewriteAction.SpillStack &&
-                    node.Member.MemberType == MemberTypes.Property) {
+            if (expression.Action != RewriteAction.None)
+            {
+                if (
+                    expression.Action == RewriteAction.SpillStack
+                    && node.Member.MemberType == MemberTypes.Property
+                )
+                {
                     // Only need to validate propreties because reading a field
                     // is always side-effect free.
                     RequireNotRefInstance(node.Expression);
@@ -380,7 +433,8 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         //RewriteIndexExpression
-        private Result RewriteIndexExpression(Expression expr, Stack stack) {
+        private Result RewriteIndexExpression(Expression expr, Stack stack)
+        {
             IndexExpression node = (IndexExpression)expr;
 
             ChildRewriter cr = new ChildRewriter(this, stack, node.Arguments.Count + 1);
@@ -390,23 +444,22 @@ namespace System.Linq.Expressions.Compiler {
             cr.Add(node.Object);
             cr.Add(node.Arguments);
 
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNotRefInstance(node.Object);
             }
 
-            if (cr.Rewrite) {
-                expr = new IndexExpression(
-                    cr[0],
-                    node.Indexer,
-                    cr[1, -1]
-                );
+            if (cr.Rewrite)
+            {
+                expr = new IndexExpression(cr[0], node.Indexer, cr[1, -1]);
             }
 
             return cr.Finish(expr);
         }
 
         // MethodCallExpression
-        private Result RewriteMethodCallExpression(Expression expr, Stack stack) {
+        private Result RewriteMethodCallExpression(Expression expr, Stack stack)
+        {
             MethodCallExpression node = (MethodCallExpression)expr;
 
             ChildRewriter cr = new ChildRewriter(this, stack, node.Arguments.Count + 1);
@@ -417,7 +470,8 @@ namespace System.Linq.Expressions.Compiler {
 
             cr.AddArguments(node);
 
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNotRefInstance(node.Object);
                 RequireNoRefArgs(node.Method);
             }
@@ -426,27 +480,35 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // NewArrayExpression
-        private Result RewriteNewArrayExpression(Expression expr, Stack stack) {
+        private Result RewriteNewArrayExpression(Expression expr, Stack stack)
+        {
             NewArrayExpression node = (NewArrayExpression)expr;
 
-            if (node.NodeType == ExpressionType.NewArrayInit) {
+            if (node.NodeType == ExpressionType.NewArrayInit)
+            {
                 // In a case of array construction with element initialization
                 // the element expressions are never emitted on an empty stack because
                 // the array reference and the index are on the stack.
                 stack = Stack.NonEmpty;
-            } else {
-                // In a case of NewArrayBounds we make no modifications to the stack 
+            }
+            else
+            {
+                // In a case of NewArrayBounds we make no modifications to the stack
                 // before emitting bounds expressions.
             }
 
             ChildRewriter cr = new ChildRewriter(this, stack, node.Expressions.Count);
             cr.Add(node.Expressions);
 
-            if (cr.Rewrite) {
+            if (cr.Rewrite)
+            {
                 Type element = node.Type.GetElementType();
-                if (node.NodeType == ExpressionType.NewArrayInit) {
+                if (node.NodeType == ExpressionType.NewArrayInit)
+                {
                     expr = Expression.NewArrayInit(element, cr[0, -1]);
-                } else {
+                }
+                else
+                {
                     expr = Expression.NewArrayBounds(element, cr[0, -1]);
                 }
             }
@@ -455,27 +517,31 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // InvocationExpression
-        private Result RewriteInvocationExpression(Expression expr, Stack stack) {
+        private Result RewriteInvocationExpression(Expression expr, Stack stack)
+        {
             InvocationExpression node = (InvocationExpression)expr;
 
             ChildRewriter cr;
 
             // See if the lambda will be inlined
             LambdaExpression lambda = node.LambdaOperand;
-            if (lambda != null) {
+            if (lambda != null)
+            {
                 // Arguments execute on current stack
                 cr = new ChildRewriter(this, stack, node.Arguments.Count);
                 cr.Add(node.Arguments);
 
-                if (cr.Action == RewriteAction.SpillStack) {
+                if (cr.Action == RewriteAction.SpillStack)
+                {
                     RequireNoRefArgs(Expression.GetInvokeMethod(node.Expression));
                 }
 
-                // Lambda body also executes on current stack 
+                // Lambda body also executes on current stack
                 var spiller = new StackSpiller(stack);
                 lambda = lambda.Accept(spiller);
 
-                if (cr.Rewrite || spiller._lambdaRewrite != RewriteAction.None) {
+                if (cr.Rewrite || spiller._lambdaRewrite != RewriteAction.None)
+                {
                     node = new InvocationExpression(lambda, cr[0, -1], node.Type);
                 }
 
@@ -491,15 +557,19 @@ namespace System.Linq.Expressions.Compiler {
             // rest of arguments have non-empty stack (delegate instance on the stack)
             cr.Add(node.Arguments);
 
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNoRefArgs(Expression.GetInvokeMethod(node.Expression));
             }
 
-            return cr.Finish(cr.Rewrite ? new InvocationExpression(cr[0], cr[1, -1], node.Type) : expr);
+            return cr.Finish(
+                cr.Rewrite ? new InvocationExpression(cr[0], cr[1, -1], node.Type) : expr
+            );
         }
 
         // NewExpression
-        private Result RewriteNewExpression(Expression expr, Stack stack) {
+        private Result RewriteNewExpression(Expression expr, Stack stack)
+        {
             NewExpression node = (NewExpression)expr;
 
             // The first expression starts on a stack as provided by parent,
@@ -507,22 +577,30 @@ namespace System.Linq.Expressions.Compiler {
             ChildRewriter cr = new ChildRewriter(this, stack, node.Arguments.Count);
             cr.AddArguments(node);
 
-            if (cr.Action == RewriteAction.SpillStack) {
+            if (cr.Action == RewriteAction.SpillStack)
+            {
                 RequireNoRefArgs(node.Constructor);
             }
 
-            return cr.Finish(cr.Rewrite ? new NewExpression(node.Constructor, cr[0, -1], node.Members) : expr);
+            return cr.Finish(
+                cr.Rewrite ? new NewExpression(node.Constructor, cr[0, -1], node.Members) : expr
+            );
         }
 
         // TypeBinaryExpression
-        private Result RewriteTypeBinaryExpression(Expression expr, Stack stack) {
+        private Result RewriteTypeBinaryExpression(Expression expr, Stack stack)
+        {
             TypeBinaryExpression node = (TypeBinaryExpression)expr;
             // The expression is emitted on top of current stack
             Result expression = RewriteExpression(node.Expression, stack);
-            if (expression.Action != RewriteAction.None) {
-                if (node.NodeType == ExpressionType.TypeIs) {
+            if (expression.Action != RewriteAction.None)
+            {
+                if (node.NodeType == ExpressionType.TypeIs)
+                {
                     expr = Expression.TypeIs(expression.Node, node.TypeOperand);
-                } else {
+                }
+                else
+                {
                     expr = Expression.TypeEqual(expression.Node, node.TypeOperand);
                 }
             }
@@ -530,7 +608,8 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // Throw
-        private Result RewriteThrowUnaryExpression(Expression expr, Stack stack) {
+        private Result RewriteThrowUnaryExpression(Expression expr, Stack stack)
+        {
             UnaryExpression node = (UnaryExpression)expr;
 
             // Throw statement itself does not care about the stack
@@ -541,11 +620,13 @@ namespace System.Linq.Expressions.Compiler {
             Result value = RewriteExpressionFreeTemps(node.Operand, Stack.Empty);
             RewriteAction action = value.Action;
 
-            if (stack != Stack.Empty) {
+            if (stack != Stack.Empty)
+            {
                 action = RewriteAction.SpillStack;
             }
 
-            if (action != RewriteAction.None) {
+            if (action != RewriteAction.None)
+            {
                 expr = Expression.Throw(value.Node, node.Type);
             }
 
@@ -553,7 +634,8 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // UnaryExpression
-        private Result RewriteUnaryExpression(Expression expr, Stack stack) {
+        private Result RewriteUnaryExpression(Expression expr, Stack stack)
+        {
             UnaryExpression node = (UnaryExpression)expr;
 
             Debug.Assert(node.NodeType != ExpressionType.Quote, "unexpected Quote");
@@ -562,18 +644,21 @@ namespace System.Linq.Expressions.Compiler {
             // Operand is emitted on top of the stack as is
             Result expression = RewriteExpression(node.Operand, stack);
 
-            if (expression.Action == RewriteAction.SpillStack) {
+            if (expression.Action == RewriteAction.SpillStack)
+            {
                 RequireNoRefArgs(node.Method);
             }
 
-            if (expression.Action != RewriteAction.None) {
+            if (expression.Action != RewriteAction.None)
+            {
                 expr = new UnaryExpression(node.NodeType, expression.Node, node.Type, node.Method);
             }
             return new Result(expression.Action, expr);
         }
 
         // RewriteListInitExpression
-        private Result RewriteListInitExpression(Expression expr, Stack stack) {
+        private Result RewriteListInitExpression(Expression expr, Stack stack)
+        {
             ListInitExpression node = (ListInitExpression)expr;
 
             //ctor runs on initial stack
@@ -585,7 +670,8 @@ namespace System.Linq.Expressions.Compiler {
 
             ChildRewriter[] cloneCrs = new ChildRewriter[inits.Count];
 
-            for (int i = 0; i < inits.Count; i++) {
+            for (int i = 0; i < inits.Count; i++)
+            {
                 ElementInit init = inits[i];
 
                 //initializers all run on nonempty stack
@@ -596,20 +682,28 @@ namespace System.Linq.Expressions.Compiler {
                 cloneCrs[i] = cr;
             }
 
-            switch (action) {
+            switch (action)
+            {
                 case RewriteAction.None:
                     break;
                 case RewriteAction.Copy:
                     ElementInit[] newInits = new ElementInit[inits.Count];
-                    for (int i = 0; i < inits.Count; i++) {
+                    for (int i = 0; i < inits.Count; i++)
+                    {
                         ChildRewriter cr = cloneCrs[i];
-                        if (cr.Action == RewriteAction.None) {
+                        if (cr.Action == RewriteAction.None)
+                        {
                             newInits[i] = inits[i];
-                        } else {
+                        }
+                        else
+                        {
                             newInits[i] = Expression.ElementInit(inits[i].AddMethod, cr[0, -1]);
                         }
                     }
-                    expr = Expression.ListInit((NewExpression)rewrittenNew, new TrueReadOnlyCollection<ElementInit>(newInits));
+                    expr = Expression.ListInit(
+                        (NewExpression)rewrittenNew,
+                        new TrueReadOnlyCollection<ElementInit>(newInits)
+                    );
                     break;
                 case RewriteAction.SpillStack:
                     RequireNotRefInstance(node.NewExpression);
@@ -618,9 +712,12 @@ namespace System.Linq.Expressions.Compiler {
                     Expression[] comma = new Expression[inits.Count + 2];
                     comma[0] = Expression.Assign(tempNew, rewrittenNew);
 
-                    for (int i = 0; i < inits.Count; i++) {
+                    for (int i = 0; i < inits.Count; i++)
+                    {
                         ChildRewriter cr = cloneCrs[i];
-                        Result add = cr.Finish(Expression.Call(tempNew, inits[i].AddMethod, cr[0, -1]));
+                        Result add = cr.Finish(
+                            Expression.Call(tempNew, inits[i].AddMethod, cr[0, -1])
+                        );
                         comma[i + 1] = add.Node;
                     }
                     comma[inits.Count + 1] = tempNew;
@@ -634,7 +731,8 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // RewriteMemberInitExpression
-        private Result RewriteMemberInitExpression(Expression expr, Stack stack) {
+        private Result RewriteMemberInitExpression(Expression expr, Stack stack)
+        {
             MemberInitExpression node = (MemberInitExpression)expr;
 
             //ctor runs on original stack
@@ -644,7 +742,8 @@ namespace System.Linq.Expressions.Compiler {
 
             ReadOnlyCollection<MemberBinding> bindings = node.Bindings;
             BindingRewriter[] bindingRewriters = new BindingRewriter[bindings.Count];
-            for (int i = 0; i < bindings.Count; i++) {
+            for (int i = 0; i < bindings.Count; i++)
+            {
                 MemberBinding binding = bindings[i];
                 //bindings run on nonempty stack
                 BindingRewriter rewriter = BindingRewriter.Create(binding, this, Stack.NonEmpty);
@@ -652,15 +751,20 @@ namespace System.Linq.Expressions.Compiler {
                 action |= rewriter.Action;
             }
 
-            switch (action) {
+            switch (action)
+            {
                 case RewriteAction.None:
                     break;
                 case RewriteAction.Copy:
                     MemberBinding[] newBindings = new MemberBinding[bindings.Count];
-                    for (int i = 0; i < bindings.Count; i++) {
+                    for (int i = 0; i < bindings.Count; i++)
+                    {
                         newBindings[i] = bindingRewriters[i].AsBinding();
                     }
-                    expr = Expression.MemberInit((NewExpression)rewrittenNew, new TrueReadOnlyCollection<MemberBinding>(newBindings));
+                    expr = Expression.MemberInit(
+                        (NewExpression)rewrittenNew,
+                        new TrueReadOnlyCollection<MemberBinding>(newBindings)
+                    );
                     break;
                 case RewriteAction.SpillStack:
                     RequireNotRefInstance(node.NewExpression);
@@ -668,7 +772,8 @@ namespace System.Linq.Expressions.Compiler {
                     ParameterExpression tempNew = MakeTemp(rewrittenNew.Type);
                     Expression[] comma = new Expression[bindings.Count + 2];
                     comma[0] = Expression.Assign(tempNew, rewrittenNew);
-                    for (int i = 0; i < bindings.Count; i++) {
+                    for (int i = 0; i < bindings.Count; i++)
+                    {
                         BindingRewriter cr = bindingRewriters[i];
                         Expression initExpr = cr.AsExpression(tempNew);
                         comma[i + 1] = initExpr;
@@ -687,29 +792,34 @@ namespace System.Linq.Expressions.Compiler {
         #region Statements
 
         // Block
-        private Result RewriteBlockExpression(Expression expr, Stack stack) {
+        private Result RewriteBlockExpression(Expression expr, Stack stack)
+        {
             BlockExpression node = (BlockExpression)expr;
 
             int count = node.ExpressionCount;
             RewriteAction action = RewriteAction.None;
             Expression[] clone = null;
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 Expression expression = node.GetExpression(i);
                 // All statements within the block execute at the
                 // same stack state.
                 Result rewritten = RewriteExpression(expression, stack);
                 action |= rewritten.Action;
 
-                if (clone == null && rewritten.Action != RewriteAction.None) {
+                if (clone == null && rewritten.Action != RewriteAction.None)
+                {
                     clone = Clone(node.Expressions, i);
                 }
 
-                if (clone != null) {
+                if (clone != null)
+                {
                     clone[i] = rewritten.Node;
                 }
             }
 
-            if (action != RewriteAction.None) {
+            if (action != RewriteAction.None)
+            {
                 // okay to wrap since we know no one can mutate the clone array
                 expr = node.Rewrite(null, clone);
             }
@@ -717,18 +827,21 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // LabelExpression
-        private Result RewriteLabelExpression(Expression expr, Stack stack) {
+        private Result RewriteLabelExpression(Expression expr, Stack stack)
+        {
             LabelExpression node = (LabelExpression)expr;
 
             Result expression = RewriteExpression(node.DefaultValue, stack);
-            if (expression.Action != RewriteAction.None) {
+            if (expression.Action != RewriteAction.None)
+            {
                 expr = Expression.Label(node.Target, expression.Node);
             }
             return new Result(expression.Action, expr);
         }
 
         // LoopStatement
-        private Result RewriteLoopExpression(Expression expr, Stack stack) {
+        private Result RewriteLoopExpression(Expression expr, Stack stack)
+        {
             LoopExpression node = (LoopExpression)expr;
 
             // The loop statement requires empty stack for itself, so it
@@ -739,11 +852,13 @@ namespace System.Linq.Expressions.Compiler {
 
             // However, the loop itself requires that it executes on an empty stack
             // so we need to rewrite if the stack is not empty.
-            if (stack != Stack.Empty) {
+            if (stack != Stack.Empty)
+            {
                 action = RewriteAction.SpillStack;
             }
 
-            if (action != RewriteAction.None) {
+            if (action != RewriteAction.None)
+            {
                 expr = new LoopExpression(body.Node, node.BreakLabel, node.ContinueLabel);
             }
             return new Result(action, expr);
@@ -754,7 +869,8 @@ namespace System.Linq.Expressions.Compiler {
         // emit it as a "leave" which would clear the stack for us. That would
         // prevent us from doing certain optimizations we might want to do,
         // however, like the switch-case-goto pattern. For now, be conservative
-        private Result RewriteGotoExpression(Expression expr, Stack stack) {
+        private Result RewriteGotoExpression(Expression expr, Stack stack)
+        {
             GotoExpression node = (GotoExpression)expr;
 
             // Goto requires empty stack to execute so the expression is
@@ -764,18 +880,21 @@ namespace System.Linq.Expressions.Compiler {
             // However, the statement itself needs an empty stack for itself
             // so if stack is not empty, rewrite to empty the stack.
             RewriteAction action = value.Action;
-            if (stack != Stack.Empty) {
+            if (stack != Stack.Empty)
+            {
                 action = RewriteAction.SpillStack;
             }
 
-            if (action != RewriteAction.None) {
+            if (action != RewriteAction.None)
+            {
                 expr = Expression.MakeGoto(node.Kind, node.Target, value.Node, node.Type);
             }
             return new Result(action, expr);
         }
 
         // SwitchStatement
-        private Result RewriteSwitchExpression(Expression expr, Stack stack) {
+        private Result RewriteSwitchExpression(Expression expr, Stack stack)
+        {
             SwitchExpression node = (SwitchExpression)expr;
 
             // The switch statement test is emitted on the stack in current state
@@ -784,22 +903,26 @@ namespace System.Linq.Expressions.Compiler {
             RewriteAction action = switchValue.Action;
             ReadOnlyCollection<SwitchCase> cases = node.Cases;
             SwitchCase[] clone = null;
-            for (int i = 0; i < cases.Count; i++) {
+            for (int i = 0; i < cases.Count; i++)
+            {
                 SwitchCase @case = cases[i];
 
                 Expression[] cloneTests = null;
                 ReadOnlyCollection<Expression> testValues = @case.TestValues;
-                for (int j = 0; j < testValues.Count; j++) {
+                for (int j = 0; j < testValues.Count; j++)
+                {
                     // All tests execute at the same stack state as the switch.
                     // This is guarenteed by the compiler (to simplify spilling)
                     Result test = RewriteExpression(testValues[j], stack);
                     action |= test.Action;
 
-                    if (cloneTests == null && test.Action != RewriteAction.None) {
+                    if (cloneTests == null && test.Action != RewriteAction.None)
+                    {
                         cloneTests = Clone(testValues, j);
                     }
 
-                    if (cloneTests != null) {
+                    if (cloneTests != null)
+                    {
                         cloneTests[j] = test.Node;
                     }
                 }
@@ -808,18 +931,22 @@ namespace System.Linq.Expressions.Compiler {
                 Result body = RewriteExpression(@case.Body, stack);
                 action |= body.Action;
 
-                if (body.Action != RewriteAction.None || cloneTests != null) {
-                    if (cloneTests != null) {
+                if (body.Action != RewriteAction.None || cloneTests != null)
+                {
+                    if (cloneTests != null)
+                    {
                         testValues = new ReadOnlyCollection<Expression>(cloneTests);
                     }
                     @case = new SwitchCase(body.Node, testValues);
 
-                    if (clone == null) {
+                    if (clone == null)
+                    {
                         clone = Clone(cases, i);
                     }
                 }
 
-                if (clone != null) {
+                if (clone != null)
+                {
                     clone[i] = @case;
                 }
             }
@@ -828,20 +955,29 @@ namespace System.Linq.Expressions.Compiler {
             Result defaultBody = RewriteExpression(node.DefaultBody, stack);
             action |= defaultBody.Action;
 
-            if (action != RewriteAction.None) {
-                if (clone != null) {
+            if (action != RewriteAction.None)
+            {
+                if (clone != null)
+                {
                     // okay to wrap because we aren't modifying the array
                     cases = new ReadOnlyCollection<SwitchCase>(clone);
                 }
 
-                expr = new SwitchExpression(node.Type, switchValue.Node, defaultBody.Node, node.Comparison, cases);
+                expr = new SwitchExpression(
+                    node.Type,
+                    switchValue.Node,
+                    defaultBody.Node,
+                    node.Comparison,
+                    cases
+                );
             }
 
             return new Result(action, expr);
         }
 
         // TryStatement
-        private Result RewriteTryExpression(Expression expr, Stack stack) {
+        private Result RewriteTryExpression(Expression expr, Stack stack)
+        {
             TryExpression node = (TryExpression)expr;
 
             // Try statement definitely needs an empty stack so its
@@ -851,14 +987,17 @@ namespace System.Linq.Expressions.Compiler {
             CatchBlock[] clone = null;
 
             RewriteAction action = body.Action;
-            if (handlers != null) {
-                for (int i = 0; i < handlers.Count; i++) {
+            if (handlers != null)
+            {
+                for (int i = 0; i < handlers.Count; i++)
+                {
                     RewriteAction curAction = body.Action;
 
                     CatchBlock handler = handlers[i];
 
                     Expression filter = handler.Filter;
-                    if (handler.Filter != null) {
+                    if (handler.Filter != null)
+                    {
                         // our code gen saves the incoming filter value and provides it as a varaible so the stack is empty
                         Result rfault = RewriteExpression(handler.Filter, Stack.Empty);
                         action |= rfault.Action;
@@ -871,15 +1010,23 @@ namespace System.Linq.Expressions.Compiler {
                     action |= rbody.Action;
                     curAction |= rbody.Action;
 
-                    if (curAction != RewriteAction.None) {
-                        handler = Expression.MakeCatchBlock(handler.Test, handler.Variable, rbody.Node, filter);
+                    if (curAction != RewriteAction.None)
+                    {
+                        handler = Expression.MakeCatchBlock(
+                            handler.Test,
+                            handler.Variable,
+                            rbody.Node,
+                            filter
+                        );
 
-                        if (clone == null) {
+                        if (clone == null)
+                        {
                             clone = Clone(handlers, i);
                         }
                     }
 
-                    if (clone != null) {
+                    if (clone != null)
+                    {
                         clone[i] = handler;
                     }
                 }
@@ -892,12 +1039,15 @@ namespace System.Linq.Expressions.Compiler {
             action |= @finally.Action;
 
             // If the stack is initially not empty, rewrite to spill the stack
-            if (stack != Stack.Empty) {
+            if (stack != Stack.Empty)
+            {
                 action = RewriteAction.SpillStack;
             }
 
-            if (action != RewriteAction.None) {
-                if (clone != null) {
+            if (action != RewriteAction.None)
+            {
+                if (clone != null)
+                {
                     // okay to wrap because we aren't modifying the array
                     handlers = new ReadOnlyCollection<CatchBlock>(clone);
                 }
@@ -907,7 +1057,8 @@ namespace System.Linq.Expressions.Compiler {
             return new Result(action, expr);
         }
 
-        private Result RewriteExtensionExpression(Expression expr, Stack stack) {
+        private Result RewriteExtensionExpression(Expression expr, Stack stack)
+        {
             Result result = RewriteExpression(expr.ReduceExtensions(), stack);
             // it's at least Copy because we reduced the node
             return new Result(result.Action | RewriteAction.Copy, result.Node);
@@ -922,12 +1073,14 @@ namespace System.Linq.Expressions.Compiler {
         /// all vaues up to (and NOT including) the max index
         /// </summary>
         /// <returns>The cloned array.</returns>
-        private static T[] Clone<T>(ReadOnlyCollection<T> original, int max) {
+        private static T[] Clone<T>(ReadOnlyCollection<T> original, int max)
+        {
             Debug.Assert(original != null);
             Debug.Assert(max < original.Count);
 
             T[] clone = new T[original.Count];
-            for (int j = 0; j < max; j++) {
+            for (int j = 0; j < max; j++)
+            {
                 clone[j] = original[j];
             }
             return clone;
@@ -938,7 +1091,7 @@ namespace System.Linq.Expressions.Compiler {
         /// <summary>
         /// If we are spilling, requires that there are no byref arguments to
         /// the method call.
-        /// 
+        ///
         /// Used for:
         ///   NewExpression,
         ///   MethodCallExpression,
@@ -952,8 +1105,10 @@ namespace System.Linq.Expressions.Compiler {
         /// Other expressions that can emit calls with arguments (such as
         /// ListInitExpression and IndexExpression) don't allow byref arguments.
         /// </remarks>
-        private static void RequireNoRefArgs(MethodBase method) {
-            if (method != null && method.GetParametersCached().Any(p => p.ParameterType.IsByRef)) {
+        private static void RequireNoRefArgs(MethodBase method)
+        {
+            if (method != null && method.GetParametersCached().Any(p => p.ParameterType.IsByRef))
+            {
                 throw Error.TryNotSupportedForMethodsWithRefArgs(method);
             }
         }
@@ -961,7 +1116,7 @@ namespace System.Linq.Expressions.Compiler {
         /// <summary>
         /// Requires that the instance is not a value type (primitive types are
         /// okay because they're immutable).
-        /// 
+        ///
         /// Used for:
         ///  MethodCallExpression,
         ///  MemberExpression (for properties),
@@ -974,11 +1129,17 @@ namespace System.Linq.Expressions.Compiler {
         /// <remarks>
         /// We could support this if spilling happened later in the compiler.
         /// </remarks>
-        private static void RequireNotRefInstance(Expression instance) {
+        private static void RequireNotRefInstance(Expression instance)
+        {
             // Primitive value types are okay because they are all readonly,
             // but we can't rely on this for non-primitive types. So we throw
             // NotSupported.
-            if (instance != null && instance.Type.IsValueType && Type.GetTypeCode(instance.Type) == TypeCode.Object) {
+            if (
+                instance != null
+                && instance.Type.IsValueType
+                && Type.GetTypeCode(instance.Type) == TypeCode.Object
+            )
+            {
                 throw Error.TryNotSupportedForValueTypeInstances(instance.Type);
             }
         }

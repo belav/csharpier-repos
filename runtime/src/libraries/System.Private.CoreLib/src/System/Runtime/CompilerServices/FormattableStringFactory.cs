@@ -14,7 +14,10 @@ namespace System.Runtime.CompilerServices
         /// Create a <see cref="FormattableString"/> from a composite format string and object
         /// array containing zero or more objects to format.
         /// </summary>
-        public static FormattableString Create([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] arguments)
+        public static FormattableString Create(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[] arguments
+        )
         {
             ArgumentNullException.ThrowIfNull(format);
             ArgumentNullException.ThrowIfNull(arguments);
@@ -34,10 +37,23 @@ namespace System.Runtime.CompilerServices
             }
 
             public override string Format => _format;
-            public override object?[] GetArguments() { return _arguments; }
+
+            public override object?[] GetArguments()
+            {
+                return _arguments;
+            }
+
             public override int ArgumentCount => _arguments.Length;
-            public override object? GetArgument(int index) { return _arguments[index]; }
-            public override string ToString(IFormatProvider? formatProvider) { return string.Format(formatProvider, _format, _arguments); }
+
+            public override object? GetArgument(int index)
+            {
+                return _arguments[index];
+            }
+
+            public override string ToString(IFormatProvider? formatProvider)
+            {
+                return string.Format(formatProvider, _format, _arguments);
+            }
         }
     }
 }

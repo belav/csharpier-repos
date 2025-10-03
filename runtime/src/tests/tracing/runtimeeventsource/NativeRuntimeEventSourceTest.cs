@@ -3,19 +3,19 @@
 
 using System;
 using System.Buffers;
+using System.Collections;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
-using System.ComponentModel;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Tracing.Tests
@@ -81,7 +81,10 @@ namespace Tracing.Tests
                         {
                             Thread.Sleep(100);
 
-                            if ((listener.EventsLeft <= 0) || (!OperatingSystem.IsWindows() && listener.EventCount > 0))
+                            if (
+                                (listener.EventsLeft <= 0)
+                                || (!OperatingSystem.IsWindows() && listener.EventCount > 0)
+                            )
                             {
                                 break;
                             }
@@ -99,7 +102,10 @@ namespace Tracing.Tests
                                 stringBuilder.Append((stringBuilder.Length > 0) ? ", " : "");
                                 stringBuilder.Append(e.Key);
                             }
-                            Assert2.True($"At least one of the EventIds ({stringBuilder}) where heard.", stringBuilder.Length < 1);
+                            Assert2.True(
+                                $"At least one of the EventIds ({stringBuilder}) where heard.",
+                                stringBuilder.Length < 1
+                            );
                         }
                     }
                 }
@@ -130,8 +136,7 @@ namespace Tracing.Tests
             {
                 if (!condition)
                 {
-                    throw new Exception(
-                        string.Format("Condition '{0}' is not true", name));
+                    throw new Exception(string.Format("Condition '{0}' is not true", name));
                 }
             }
         }
@@ -152,7 +157,8 @@ namespace Tracing.Tests
 
         public bool ThreadPoolQueue()
         {
-            return OperatingSystem.IsWindows() && ThreadPool.UnsafeQueueNativeOverlapped(nativeOverlapped);
+            return OperatingSystem.IsWindows()
+                && ThreadPool.UnsafeQueueNativeOverlapped(nativeOverlapped);
         }
 
         private void Dispose(bool disposing)
@@ -195,7 +201,10 @@ namespace Tracing.Tests
         public int EventsLeft { get; private set; } = 0;
 
         private static readonly ConcurrentBag<int> targetEventIds = new();
-        private static readonly (string, string) defaultEventSourceNameName = ("Failed to listen", "Was not heard or didn't fire");
+        private static readonly (string, string) defaultEventSourceNameName = (
+            "Failed to listen",
+            "Was not heard or didn't fire"
+        );
 
         private readonly string name = "";
         private readonly ConcurrentDictionary<int, (string, string)> eventIdSourceNameNames = new();
@@ -214,6 +223,7 @@ namespace Tracing.Tests
                 targetEventIds.Add(id);
             }
         }
+
         public IEnumerable<KeyValuePair<int, (string, string)>> GetFailedTargetEvents()
         {
             foreach (KeyValuePair<int, (string, string)> e in eventIdSourceNameNames)
@@ -224,6 +234,7 @@ namespace Tracing.Tests
                 }
             }
         }
+
         public override void Dispose()
         {
             base.Dispose();
@@ -249,15 +260,23 @@ namespace Tracing.Tests
                 EnableEvents(eventSource, Level, EnableKeywords);
             }
         }
+
         protected override void OnEventWritten(EventWrittenEventArgs eventWrittenEventArgs)
         {
             EventCount++;
 
             KeyValuePair<int, (string SourceName, string Name)> e = new(
                 eventWrittenEventArgs.EventId,
-                (eventWrittenEventArgs.EventSource.Name, eventWrittenEventArgs.EventName ?? ""));
+                (eventWrittenEventArgs.EventSource.Name, eventWrittenEventArgs.EventName ?? "")
+            );
 
-            EventsLeft -= (eventIdSourceNameNames.TryGetValue(e.Key, out (string, string) value) && value == defaultEventSourceNameName) ? 1 : 0;
+            EventsLeft -=
+                (
+                    eventIdSourceNameNames.TryGetValue(e.Key, out (string, string) value)
+                    && value == defaultEventSourceNameName
+                )
+                    ? 1
+                    : 0;
             eventIdSourceNameNames[e.Key] = e.Value;
 
             WriteLine(e);
@@ -268,20 +287,28 @@ namespace Tracing.Tests
             WriteLine($"local time: {DateTime.Now}");
             WriteLine($"Difference: {DateTime.UtcNow - eventWrittenEventArgs.TimeStamp}");
 
-            for (int i = 0; (i < eventWrittenEventArgs.PayloadNames?.Count) && (i < eventWrittenEventArgs.Payload?.Count); i++)
+            for (
+                int i = 0;
+                (i < eventWrittenEventArgs.PayloadNames?.Count)
+                    && (i < eventWrittenEventArgs.Payload?.Count);
+                i++
+            )
             {
-                WriteLine($"{eventWrittenEventArgs.PayloadNames[i]} = {eventWrittenEventArgs.Payload[i]}", ConsoleColor.Magenta);
+                WriteLine(
+                    $"{eventWrittenEventArgs.PayloadNames[i]} = {eventWrittenEventArgs.Payload[i]}",
+                    ConsoleColor.Magenta
+                );
             }
 
             WriteLine("\n");
         }
 
         private static bool ConsoleForegroundColorNotSupported =>
-            OperatingSystem.IsAndroid() ||
-            OperatingSystem.IsIOS() ||
-            OperatingSystem.IsTvOS() ||
-            OperatingSystem.IsBrowser() ||
-            OperatingSystem.IsWasi();
+            OperatingSystem.IsAndroid()
+            || OperatingSystem.IsIOS()
+            || OperatingSystem.IsTvOS()
+            || OperatingSystem.IsBrowser()
+            || OperatingSystem.IsWasi();
 
         private ConsoleColor ConsoleForegroundColor
         {
@@ -289,18 +316,18 @@ namespace Tracing.Tests
             {
                 if (ConsoleForegroundColorNotSupported)
                     return (ConsoleColor)(-1);
-                
+
                 return Console.ForegroundColor;
             }
             set
             {
                 if (ConsoleForegroundColorNotSupported)
                     return;
-                
+
                 Console.ForegroundColor = value;
             }
         }
-        
+
         private void Write(object? o = null, ConsoleColor? consoleColor = null)
         {
             ConsoleColor foregroundColor = ConsoleForegroundColor;
@@ -308,10 +335,11 @@ namespace Tracing.Tests
             if (o is KeyValuePair<int, (string, string)> e)
             {
                 ConsoleForegroundColor = ConsoleColor.Cyan;
-                
+
                 Console.Write(name);
 
-                ConsoleForegroundColor = (e.Value != defaultEventSourceNameName) ? ConsoleColor.Green : ConsoleColor.Red;
+                ConsoleForegroundColor =
+                    (e.Value != defaultEventSourceNameName) ? ConsoleColor.Green : ConsoleColor.Red;
             }
             else if (consoleColor != null)
             {
@@ -321,6 +349,7 @@ namespace Tracing.Tests
 
             ConsoleForegroundColor = foregroundColor;
         }
+
         private void WriteLine(object? o = null, ConsoleColor? consoleColor = null)
         {
             Write(o, consoleColor);

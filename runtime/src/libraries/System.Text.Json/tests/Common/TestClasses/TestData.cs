@@ -12,44 +12,180 @@ namespace System.Text.Json.Serialization.Tests
             get
             {
                 yield return new object[] { typeof(SimpleTestStruct), SimpleTestStruct.s_data };
-                yield return new object[] { typeof(SimpleTestStructWithFields), SimpleTestStructWithFields.s_data };
+                yield return new object[]
+                {
+                    typeof(SimpleTestStructWithFields),
+                    SimpleTestStructWithFields.s_data,
+                };
                 yield return new object[] { typeof(SimpleTestClass), SimpleTestClass.s_data };
-                yield return new object[] { typeof(SimpleTestClassWithFields), SimpleTestClassWithFields.s_data };
-                yield return new object[] { typeof(SimpleTestClassWithNullables), SimpleTestClassWithNullables.s_data };
-                yield return new object[] { typeof(SimpleTestClassWithNulls), SimpleTestClassWithNulls.s_data };
-                yield return new object[] { typeof(SimpleTestClassWithSimpleObject), SimpleTestClassWithSimpleObject.s_data };
-                yield return new object[] { typeof(SimpleTestClassWithObjectArrays), SimpleTestClassWithObjectArrays.s_data };
+                yield return new object[]
+                {
+                    typeof(SimpleTestClassWithFields),
+                    SimpleTestClassWithFields.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(SimpleTestClassWithNullables),
+                    SimpleTestClassWithNullables.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(SimpleTestClassWithNulls),
+                    SimpleTestClassWithNulls.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(SimpleTestClassWithSimpleObject),
+                    SimpleTestClassWithSimpleObject.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(SimpleTestClassWithObjectArrays),
+                    SimpleTestClassWithObjectArrays.s_data,
+                };
                 yield return new object[] { typeof(BasicPerson), BasicPerson.s_data };
                 yield return new object[] { typeof(BasicCompany), BasicCompany.s_data };
-                yield return new object[] { typeof(TestClassWithNestedObjectInner), TestClassWithNestedObjectInner.s_data };
-                yield return new object[] { typeof(TestClassWithNestedObjectOuter), TestClassWithNestedObjectOuter.s_data };
-                yield return new object[] { typeof(TestClassWithObjectArray), TestClassWithObjectArray.s_data };
-                yield return new object[] { typeof(TestClassWithObjectIEnumerable), TestClassWithObjectIEnumerable.s_data };
-                yield return new object[] { typeof(TestClassWithObjectIList), TestClassWithObjectIList.s_data };
-                yield return new object[] { typeof(TestClassWithObjectICollection), TestClassWithObjectICollection.s_data };
-                yield return new object[] { typeof(TestClassWithObjectIEnumerableT), TestClassWithObjectIEnumerableT.s_data };
-                yield return new object[] { typeof(TestClassWithObjectIListT), TestClassWithObjectIListT.s_data };
-                yield return new object[] { typeof(TestClassWithObjectICollectionT), TestClassWithObjectICollectionT.s_data };
-                yield return new object[] { typeof(TestClassWithObjectIReadOnlyCollectionT), TestClassWithObjectIReadOnlyCollectionT.s_data };
-                yield return new object[] { typeof(TestClassWithObjectIReadOnlyListT), TestClassWithObjectIReadOnlyListT.s_data };
-                yield return new object[] { typeof(TestClassWithObjectISetT), TestClassWithObjectISetT.s_data };
-                yield return new object[] { typeof(TestClassWithStringArray), TestClassWithStringArray.s_data };
-                yield return new object[] { typeof(TestClassWithGenericList), TestClassWithGenericList.s_data };
-                yield return new object[] { typeof(TestClassWithGenericIEnumerable), TestClassWithGenericIEnumerable.s_data };
-                yield return new object[] { typeof(TestClassWithGenericIList), TestClassWithGenericIList.s_data };
-                yield return new object[] { typeof(TestClassWithGenericICollection), TestClassWithGenericICollection.s_data };
-                yield return new object[] { typeof(TestClassWithGenericIEnumerableT), TestClassWithGenericIEnumerableT.s_data };
-                yield return new object[] { typeof(TestClassWithGenericIListT), TestClassWithGenericIListT.s_data };
-                yield return new object[] { typeof(TestClassWithGenericICollectionT), TestClassWithGenericICollectionT.s_data };
-                yield return new object[] { typeof(TestClassWithGenericIReadOnlyCollectionT), TestClassWithGenericIReadOnlyCollectionT.s_data };
-                yield return new object[] { typeof(TestClassWithGenericIReadOnlyListT), TestClassWithGenericIReadOnlyListT.s_data };
-                yield return new object[] { typeof(TestClassWithGenericISetT), TestClassWithGenericISetT.s_data };
-                yield return new object[] { typeof(TestClassWithStringToPrimitiveDictionary), TestClassWithStringToPrimitiveDictionary.s_data };
-                yield return new object[] { typeof(TestClassWithObjectIEnumerableConstructibleTypes), TestClassWithObjectIEnumerableConstructibleTypes.s_data };
-                yield return new object[] { typeof(TestClassWithObjectImmutableTypes), TestClassWithObjectImmutableTypes.s_data };
+                yield return new object[]
+                {
+                    typeof(TestClassWithNestedObjectInner),
+                    TestClassWithNestedObjectInner.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithNestedObjectOuter),
+                    TestClassWithNestedObjectOuter.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectArray),
+                    TestClassWithObjectArray.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectIEnumerable),
+                    TestClassWithObjectIEnumerable.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectIList),
+                    TestClassWithObjectIList.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectICollection),
+                    TestClassWithObjectICollection.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectIEnumerableT),
+                    TestClassWithObjectIEnumerableT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectIListT),
+                    TestClassWithObjectIListT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectICollectionT),
+                    TestClassWithObjectICollectionT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectIReadOnlyCollectionT),
+                    TestClassWithObjectIReadOnlyCollectionT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectIReadOnlyListT),
+                    TestClassWithObjectIReadOnlyListT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectISetT),
+                    TestClassWithObjectISetT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithStringArray),
+                    TestClassWithStringArray.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericList),
+                    TestClassWithGenericList.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericIEnumerable),
+                    TestClassWithGenericIEnumerable.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericIList),
+                    TestClassWithGenericIList.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericICollection),
+                    TestClassWithGenericICollection.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericIEnumerableT),
+                    TestClassWithGenericIEnumerableT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericIListT),
+                    TestClassWithGenericIListT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericICollectionT),
+                    TestClassWithGenericICollectionT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericIReadOnlyCollectionT),
+                    TestClassWithGenericIReadOnlyCollectionT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericIReadOnlyListT),
+                    TestClassWithGenericIReadOnlyListT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithGenericISetT),
+                    TestClassWithGenericISetT.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithStringToPrimitiveDictionary),
+                    TestClassWithStringToPrimitiveDictionary.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectIEnumerableConstructibleTypes),
+                    TestClassWithObjectIEnumerableConstructibleTypes.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(TestClassWithObjectImmutableTypes),
+                    TestClassWithObjectImmutableTypes.s_data,
+                };
                 yield return new object[] { typeof(JsonElementClass), JsonElementClass.s_data };
-                yield return new object[] { typeof(JsonElementArrayClass), JsonElementArrayClass.s_data };
-                yield return new object[] { typeof(ClassWithComplexObjects), ClassWithComplexObjects.s_data };
+                yield return new object[]
+                {
+                    typeof(JsonElementArrayClass),
+                    JsonElementArrayClass.s_data,
+                };
+                yield return new object[]
+                {
+                    typeof(ClassWithComplexObjects),
+                    ClassWithComplexObjects.s_data,
+                };
             }
         }
 
@@ -91,7 +227,10 @@ namespace System.Text.Json.Serialization.Tests
                 yield return new object[] { new TestClassWithGenericIReadOnlyListT() };
                 yield return new object[] { new TestClassWithGenericISetT() };
                 yield return new object[] { new TestClassWithStringToPrimitiveDictionary() };
-                yield return new object[] { new TestClassWithObjectIEnumerableConstructibleTypes() };
+                yield return new object[]
+                {
+                    new TestClassWithObjectIEnumerableConstructibleTypes(),
+                };
                 yield return new object[] { new TestClassWithObjectImmutableTypes() };
                 yield return new object[] { new JsonElementClass() };
                 yield return new object[] { new JsonElementArrayClass() };

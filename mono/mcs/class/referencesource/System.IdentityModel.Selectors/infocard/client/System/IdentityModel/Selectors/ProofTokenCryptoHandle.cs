@@ -14,10 +14,13 @@ namespace System.IdentityModel.Selectors
     //
     internal abstract class ProofTokenCryptoHandle : CryptoHandle
     {
-        protected ProofTokenCryptoHandle(InternalRefCountedHandle nativeHandle, DateTime expiration, IntPtr nativeParameters, Type paramType)
-            : base(nativeHandle, expiration, nativeParameters, paramType)
-        {
-        }
+        protected ProofTokenCryptoHandle(
+            InternalRefCountedHandle nativeHandle,
+            DateTime expiration,
+            IntPtr nativeParameters,
+            Type paramType
+        )
+            : base(nativeHandle, expiration, nativeParameters, paramType) { }
 
         protected ProofTokenCryptoHandle(InternalRefCountedHandle internalHandle)
             : base(internalHandle) { }

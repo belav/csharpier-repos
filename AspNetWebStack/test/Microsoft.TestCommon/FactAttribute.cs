@@ -19,7 +19,8 @@ namespace Microsoft.TestCommon
         public FactAttribute()
         {
             Platforms = Platform.All;
-            PlatformJustification = "Unsupported platform (test runs on {0}, current platform is {1})";
+            PlatformJustification =
+                "Unsupported platform (test runs on {0}, current platform is {1})";
         }
 
         /// <summary>

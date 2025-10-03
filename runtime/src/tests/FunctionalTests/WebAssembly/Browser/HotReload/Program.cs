@@ -12,7 +12,7 @@ namespace Sample
     {
         public static void Main()
         {
-            Console.WriteLine ("Hello, World!");
+            Console.WriteLine("Hello, World!");
         }
 
         [JSExport]
@@ -22,7 +22,11 @@ namespace Sample
             const int failure = 1;
 
             var ty = typeof(System.Reflection.Metadata.MetadataUpdater);
-            var mi = ty.GetMethod("GetCapabilities", BindingFlags.NonPublic | BindingFlags.Static, Array.Empty<Type>());
+            var mi = ty.GetMethod(
+                "GetCapabilities",
+                BindingFlags.NonPublic | BindingFlags.Static,
+                Array.Empty<Type>()
+            );
 
             if (mi == null)
                 return failure;
@@ -32,7 +36,7 @@ namespace Sample
             if (String.IsNullOrEmpty(caps))
                 return failure;
 
-            var assm = typeof (ApplyUpdateReferencedAssembly.MethodBody1).Assembly;
+            var assm = typeof(ApplyUpdateReferencedAssembly.MethodBody1).Assembly;
 
             var r = ApplyUpdateReferencedAssembly.MethodBody1.StaticMethod1();
             if ("OLD STRING" != r)
@@ -55,14 +59,14 @@ namespace Sample
 
         private static System.Collections.Generic.Dictionary<Assembly, int> assembly_count = new();
 
-        internal static void ApplyUpdate (System.Reflection.Assembly assm)
+        internal static void ApplyUpdate(System.Reflection.Assembly assm)
         {
             int count;
             if (!assembly_count.TryGetValue(assm, out count))
                 count = 1;
             else
                 count++;
-            assembly_count [assm] = count;
+            assembly_count[assm] = count;
 
             /* FIXME WASM: Location is empty on wasm. Make up a name based on Name */
             string basename = assm.Location;
@@ -76,7 +80,12 @@ namespace Sample
             byte[] dil_data = System.IO.File.ReadAllBytes(dil_name);
             byte[] dpdb_data = null; // TODO also use the dpdb data
 
-            System.Reflection.Metadata.MetadataUpdater.ApplyUpdate(assm, dmeta_data, dil_data, dpdb_data);
+            System.Reflection.Metadata.MetadataUpdater.ApplyUpdate(
+                assm,
+                dmeta_data,
+                dil_data,
+                dpdb_data
+            );
         }
     }
 }

@@ -5,10 +5,10 @@
 using System;
 using System.Composition;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Host.Mef;
-using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.CodeStyle;
+using Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles;
+using Microsoft.CodeAnalysis.Host.Mef;
+using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Options;
 
@@ -17,13 +17,15 @@ internal sealed class NamingPreferencesReadFallback : IVisualStudioStorageReadFa
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public NamingPreferencesReadFallback()
-    {
-    }
+    public NamingPreferencesReadFallback() { }
 
     public Optional<object?> TryRead(string? language, TryReadValueDelegate readValue)
     {
         Contract.ThrowIfNull(language);
-        return readValue($"TextEditor.{language}.Specific.NamingPreferences", typeof(NamingStylePreferences), NamingStyleOptions.NamingPreferences.DefaultValue);
+        return readValue(
+            $"TextEditor.{language}.Specific.NamingPreferences",
+            typeof(NamingStylePreferences),
+            NamingStyleOptions.NamingPreferences.DefaultValue
+        );
     }
 }

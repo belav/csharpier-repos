@@ -37,7 +37,9 @@ namespace Microsoft.CodeAnalysis.Host
         /// path.  For example, Base64 encoding will use <c>/</c> which is something that we definitely do not want
         /// errantly added to a path.
         /// </summary>
-        private static readonly ImmutableArray<char> s_invalidPathChars = Path.GetInvalidPathChars().Concat('/').ToImmutableArray();
+        private static readonly ImmutableArray<char> s_invalidPathChars = Path.GetInvalidPathChars()
+            .Concat('/')
+            .ToImmutableArray();
 
         private static readonly string s_cacheDirectory;
         private static readonly string s_moduleFileName;
@@ -48,8 +50,17 @@ namespace Microsoft.CodeAnalysis.Host
             // ~/.local/share/... on unix).  This will place the folder in a location we can trust
             // to be able to get back to consistently as long as we're working with the same
             // solution and the same workspace kind.
-            var appDataFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.Create);
-            s_cacheDirectory = Path.Combine(appDataFolder, "Microsoft", "VisualStudio", "Roslyn", "Cache");
+            var appDataFolder = Environment.GetFolderPath(
+                Environment.SpecialFolder.LocalApplicationData,
+                Environment.SpecialFolderOption.Create
+            );
+            s_cacheDirectory = Path.Combine(
+                appDataFolder,
+                "Microsoft",
+                "VisualStudio",
+                "Roslyn",
+                "Cache"
+            );
             var fileName = Process.GetCurrentProcess().MainModule?.FileName;
             Contract.ThrowIfNull(fileName);
             s_moduleFileName = SafeName(fileName);
@@ -57,9 +68,7 @@ namespace Microsoft.CodeAnalysis.Host
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultPersistentStorageConfiguration()
-        {
-        }
+        public DefaultPersistentStorageConfiguration() { }
 
         public bool ThrowOnFailure => false;
 
@@ -71,10 +80,7 @@ namespace Microsoft.CodeAnalysis.Host
             // Ensure that each unique workspace kind for any given solution has a unique
             // folder to store their data in.
 
-            return Path.Combine(
-                s_cacheDirectory,
-                s_moduleFileName,
-                SafeName(solutionKey.FilePath));
+            return Path.Combine(s_cacheDirectory, s_moduleFileName, SafeName(solutionKey.FilePath));
         }
 
         private static string SafeName(string fullPath)

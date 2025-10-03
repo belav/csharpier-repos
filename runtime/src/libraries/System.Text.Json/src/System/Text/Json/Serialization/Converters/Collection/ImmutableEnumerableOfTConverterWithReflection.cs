@@ -12,17 +12,30 @@ namespace System.Text.Json.Serialization.Converters
         : ImmutableEnumerableOfTConverter<TCollection, TElement>
         where TCollection : IEnumerable<TElement>
     {
-        [RequiresUnreferencedCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        [RequiresDynamicCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        public ImmutableEnumerableOfTConverterWithReflection()
-        {
-        }
+        [RequiresUnreferencedCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        [RequiresDynamicCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        public ImmutableEnumerableOfTConverterWithReflection() { }
 
-        [RequiresUnreferencedCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        [RequiresDynamicCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        internal override void ConfigureJsonTypeInfoUsingReflection(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        [RequiresUnreferencedCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        [RequiresDynamicCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        internal override void ConfigureJsonTypeInfoUsingReflection(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
-            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver.MemberAccessor.CreateImmutableEnumerableCreateRangeDelegate<TCollection, TElement>();
+            jsonTypeInfo.CreateObjectWithArgs =
+                DefaultJsonTypeInfoResolver.MemberAccessor.CreateImmutableEnumerableCreateRangeDelegate<
+                    TCollection,
+                    TElement
+                >();
         }
     }
 }

@@ -4,68 +4,69 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Web.Util;
-    using System.Diagnostics;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Util;
+    using System.Xml;
 
-    public sealed class UrlMappingsSection : ConfigurationSection {
+    public sealed class UrlMappingsSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
 
         #region Property Declarations
-        private static readonly ConfigurationProperty _propEnabled =
-            new ConfigurationProperty("enabled", 
-                                        typeof(bool), 
-                                        true, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propEnabled = new ConfigurationProperty(
+            "enabled",
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propMappings =
-            new ConfigurationProperty(null, 
-                                        typeof(UrlMappingCollection), 
-                                        null,
-                                        ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propMappings = new ConfigurationProperty(
+            null,
+            typeof(UrlMappingCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
         #endregion
 
-        static UrlMappingsSection() {
+        static UrlMappingsSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propMappings);
             _properties.Add(_propEnabled);
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public UrlMappingCollection UrlMappings {
-            get {
-                return (UrlMappingCollection)base[_propMappings];
-            }
+        public UrlMappingCollection UrlMappings
+        {
+            get { return (UrlMappingCollection)base[_propMappings]; }
         }
 
         [ConfigurationProperty("enabled", DefaultValue = true)]
-        public bool IsEnabled {
-            get {
-                return (bool)base[_propEnabled];
-            }
-            set {
-                base[_propEnabled] = value;
-            }
+        public bool IsEnabled
+        {
+            get { return (bool)base[_propEnabled]; }
+            set { base[_propEnabled] = value; }
         }
 
-        internal string HttpResolveMapping(string path) {
+        internal string HttpResolveMapping(string path)
+        {
             string result = null;
 
             // Convert the 'path' param to be a relative path
@@ -74,7 +75,8 @@ namespace System.Web.Configuration {
             // Look it up in our map
             UrlMapping elem = UrlMappings[relative];
 
-            if (elem != null) {
+            if (elem != null)
+            {
                 result = elem.MappedUrl;
             }
             return result;

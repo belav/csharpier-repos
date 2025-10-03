@@ -11,7 +11,6 @@
     <Compile Include="HandwrittenProgram.cs" />
     <Compile Include="..\Shared\SimpleUnOpTest_DataTable.cs" />
     <Compile Include="..\Shared\SimpleBinOpTest_DataTable.cs" />
-
     <Compile Include="Blend.cs" />
     <Compile Include="ConvertToVector128Int16.Byte.cs" />
     <Compile Include="ConvertToVector128Int16.SByte.cs" />

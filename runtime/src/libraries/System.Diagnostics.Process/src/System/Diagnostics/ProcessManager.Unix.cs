@@ -29,7 +29,8 @@ namespace System.Diagnostics
             // If we get back 0, the process is still alive.
             int output = Interop.Sys.Kill(processId, Interop.Sys.Signals.None);
             // If kill set errno=EPERM, assume querying process is alive.
-            return 0 == output || (-1 == output && Interop.Error.EPERM == Interop.Sys.GetLastError());
+            return 0 == output
+                || (-1 == output && Interop.Error.EPERM == Interop.Sys.GetLastError());
         }
 
         /// <summary>Gets the ProcessInfo for the specified process ID on the specified machine.</summary>
@@ -64,9 +65,7 @@ namespace System.Diagnostics
 
         private static bool IsRemoteMachineCore(string machineName)
         {
-            return
-                machineName != "." &&
-                machineName != Interop.Sys.GetHostName();
+            return machineName != "." && machineName != Interop.Sys.GetHostName();
         }
 
         internal static void ThrowIfRemoteMachine(string machineName)

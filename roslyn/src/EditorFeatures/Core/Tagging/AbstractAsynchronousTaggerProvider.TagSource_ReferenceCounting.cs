@@ -21,21 +21,25 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 if (!Environment.HasShutdownStarted)
                 {
 #if DEBUG
-                    Contract.Fail($@"Should have been disposed!
+                    Contract.Fail(
+                        $@"Should have been disposed!
 DataSource-StackTrace:
 {_dataSource.StackTrace}
 
 StackTrace:
-{_stackTrace}");
+{_stackTrace}"
+                    );
 #else
-                    Contract.Fail($@"Should have been disposed! Try running in Debug to get the allocation callstack");
+                    Contract.Fail(
+                        $@"Should have been disposed! Try running in Debug to get the allocation callstack"
+                    );
 #endif
                 }
             }
 
             internal void OnTaggerAdded(Tagger _)
             {
-                // this should be only called from UI thread. 
+                // this should be only called from UI thread.
                 // in unit test, must be called from same thread as OnTaggerDisposed
                 Contract.ThrowIfFalse(_taggers >= 0);
 
@@ -60,15 +64,14 @@ StackTrace:
                 }
             }
 
-            internal void TestOnly_Dispose()
-                => Dispose();
+            internal void TestOnly_Dispose() => Dispose();
 
 #if DEBUG
             private Thread? _thread;
             private string? _stackTrace;
 
-            private void DebugRecordInitialStackTrace()
-                => _stackTrace = new StackTrace().ToString();
+            private void DebugRecordInitialStackTrace() =>
+                _stackTrace = new StackTrace().ToString();
 
             private void DebugRecordCurrentThread()
             {
@@ -80,20 +83,14 @@ StackTrace:
                 _thread = Thread.CurrentThread;
             }
 
-            private void DebugVerifyThread()
-                => Contract.ThrowIfFalse(Thread.CurrentThread == _thread);
+            private void DebugVerifyThread() =>
+                Contract.ThrowIfFalse(Thread.CurrentThread == _thread);
 #else
-            private static void DebugRecordInitialStackTrace()
-            {
-            }
+            private static void DebugRecordInitialStackTrace() { }
 
-            private static void DebugRecordCurrentThread()
-            {
-            }
+            private static void DebugRecordCurrentThread() { }
 
-            private static void DebugVerifyThread()
-            {
-            }
+            private static void DebugVerifyThread() { }
 #endif
         }
     }

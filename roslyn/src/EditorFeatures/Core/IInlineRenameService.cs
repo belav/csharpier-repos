@@ -3,8 +3,8 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Threading;
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis.Rename;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Editor
 {
@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <param name="triggerSpan">The triggerSpan itself.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The rename session.</returns>
-        InlineRenameSessionInfo StartInlineSession(Document document, TextSpan triggerSpan, CancellationToken cancellationToken);
+        InlineRenameSessionInfo StartInlineSession(
+            Document document,
+            TextSpan triggerSpan,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns the currently active inline session, or null if none is active.

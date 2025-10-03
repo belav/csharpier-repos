@@ -5,9 +5,7 @@ using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using Internal.Runtime.CompilerHelpers;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime
@@ -25,7 +23,10 @@ namespace Internal.Runtime
         /// This method is called from a ReadyToRun helper to get base address of thread
         /// static storage for the given type.
         /// </summary>
-        internal static unsafe object GetThreadStaticBaseForType(TypeManagerSlot* pModuleData, int typeTlsIndex)
+        internal static unsafe object GetThreadStaticBaseForType(
+            TypeManagerSlot* pModuleData,
+            int typeTlsIndex
+        )
         {
             if (typeTlsIndex < 0)
                 return t_inlinedThreadStaticBase;
@@ -50,7 +51,10 @@ namespace Internal.Runtime
             return threadStaticBase;
         }
 
-        internal static unsafe object GetUninlinedThreadStaticBaseForType(TypeManagerSlot* pModuleData, int typeTlsIndex)
+        internal static unsafe object GetUninlinedThreadStaticBaseForType(
+            TypeManagerSlot* pModuleData,
+            int typeTlsIndex
+        )
         {
             Debug.Assert(typeTlsIndex >= 0);
             int moduleIndex = pModuleData->ModuleIndex;
@@ -74,7 +78,10 @@ namespace Internal.Runtime
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static unsafe object GetUninlinedThreadStaticBaseForTypeSlow(TypeManagerSlot* pModuleData, int typeTlsIndex)
+        internal static unsafe object GetUninlinedThreadStaticBaseForTypeSlow(
+            TypeManagerSlot* pModuleData,
+            int typeTlsIndex
+        )
         {
             Debug.Assert(typeTlsIndex >= 0);
             int moduleIndex = pModuleData->ModuleIndex;
@@ -107,7 +114,10 @@ namespace Internal.Runtime
             }
 
             // Allocate an object that will represent a memory block for all thread static fields of the type
-            object threadStaticBase = AllocateThreadStaticStorageForType(pModuleData->TypeManager, typeTlsIndex);
+            object threadStaticBase = AllocateThreadStaticStorageForType(
+                pModuleData->TypeManager,
+                typeTlsIndex
+            );
 
             Debug.Assert(moduleStorage[typeTlsIndex] == null);
             moduleStorage[typeTlsIndex] = threadStaticBase;
@@ -118,14 +128,22 @@ namespace Internal.Runtime
         /// This method allocates an object that represents a memory block for all thread static fields of the type
         /// that corresponds to the specified TLS index.
         /// </summary>
-        private static unsafe object AllocateThreadStaticStorageForType(TypeManagerHandle typeManager, int typeTlsIndex)
+        private static unsafe object AllocateThreadStaticStorageForType(
+            TypeManagerHandle typeManager,
+            int typeTlsIndex
+        )
         {
             int length;
             IntPtr* threadStaticRegion;
 
             // Get a pointer to the beginning of the module's Thread Static section. Then get a pointer
             // to the MethodTable that represents a memory map for thread statics storage.
-            threadStaticRegion = (IntPtr*)RuntimeImports.RhGetModuleSection(typeManager, ReadyToRunSectionType.ThreadStaticRegion, out length);
+            threadStaticRegion = (IntPtr*)
+                RuntimeImports.RhGetModuleSection(
+                    typeManager,
+                    ReadyToRunSectionType.ThreadStaticRegion,
+                    out length
+                );
 
             IntPtr gcDesc;
             if (typeTlsIndex < (length / IntPtr.Size))
@@ -134,7 +152,11 @@ namespace Internal.Runtime
             }
             else
             {
-                gcDesc = Internal.Runtime.Augments.RuntimeAugments.TypeLoaderCallbacks.GetThreadStaticGCDescForDynamicType(typeManager, typeTlsIndex);
+                gcDesc =
+                    Internal.Runtime.Augments.RuntimeAugments.TypeLoaderCallbacks.GetThreadStaticGCDescForDynamicType(
+                        typeManager,
+                        typeTlsIndex
+                    );
             }
 
             return RuntimeImports.RhNewObject(new EETypePtr(gcDesc));

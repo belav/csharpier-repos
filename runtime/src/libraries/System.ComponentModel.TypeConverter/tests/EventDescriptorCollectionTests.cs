@@ -35,10 +35,7 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void ConstructorTests()
         {
-            var descriptors = new EventDescriptor[]
-            {
-                new MockEventDescriptor("descriptor1")
-            };
+            var descriptors = new EventDescriptor[] { new MockEventDescriptor("descriptor1") };
 
             var collection = new EventDescriptorCollection(descriptors);
 
@@ -52,10 +49,7 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void ConstructorReadOnlyTests()
         {
-            var descriptors = new EventDescriptor[]
-            {
-                new MockEventDescriptor("descriptor1")
-            };
+            var descriptors = new EventDescriptor[] { new MockEventDescriptor("descriptor1") };
 
             var collection = new EventDescriptorCollection(descriptors, true);
 
@@ -85,7 +79,7 @@ namespace System.ComponentModel.Tests
             var descriptors = new EventDescriptor[]
             {
                 new MockEventDescriptor("descriptor1"),
-                new MockEventDescriptor("descriptor2")
+                new MockEventDescriptor("descriptor2"),
             };
             var collection = new EventDescriptorCollection(descriptors);
 
@@ -96,9 +90,7 @@ namespace System.ComponentModel.Tests
         private class MockEventDescriptor : EventDescriptor
         {
             public MockEventDescriptor(string name)
-                : base(name, new Attribute[] { })
-            {
-            }
+                : base(name, new Attribute[] { }) { }
 
             public override Type ComponentType { get; } = typeof(EventArgs);
 
@@ -106,13 +98,9 @@ namespace System.ComponentModel.Tests
 
             public override bool IsMulticast { get; } = false;
 
-            public override void AddEventHandler(object component, Delegate value)
-            {
-            }
+            public override void AddEventHandler(object component, Delegate value) { }
 
-            public override void RemoveEventHandler(object component, Delegate value)
-            {
-            }
+            public override void RemoveEventHandler(object component, Delegate value) { }
         }
     }
 }

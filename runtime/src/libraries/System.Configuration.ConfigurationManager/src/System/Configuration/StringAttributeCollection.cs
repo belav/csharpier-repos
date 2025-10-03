@@ -43,7 +43,8 @@ namespace System.Configuration
                 foreach (string item in items)
                 {
                     string trimmedItem = item.Trim();
-                    if (trimmedItem.Length != 0) Add(trimmedItem);
+                    if (trimmedItem.Length != 0)
+                        Add(trimmedItem);
                 }
             }
             _originalString = ToString();
@@ -53,7 +54,8 @@ namespace System.Configuration
 
         public override string ToString()
         {
-            if (Count <= 0) return null;
+            if (Count <= 0)
+                return null;
 
             StringBuilder sb = new StringBuilder();
             foreach (string str in this)
@@ -66,19 +68,23 @@ namespace System.Configuration
                 sb.Append(',');
             }
 
-            if (sb.Length > 0) sb.Length--;
+            if (sb.Length > 0)
+                sb.Length--;
             return sb.Length == 0 ? null : sb.ToString();
         }
 
         private void ThrowIfReadOnly()
         {
-            if (IsReadOnly) throw new ConfigurationErrorsException(SR.Config_base_read_only);
+            if (IsReadOnly)
+                throw new ConfigurationErrorsException(SR.Config_base_read_only);
         }
 
         private static void ThrowIfContainsDelimiter(string value)
         {
             if (value.Contains(",")) // string.Contains(char) is .NetCore2.1+ specific
-                throw new ConfigurationErrorsException(SR.Format(SR.Config_base_value_cannot_contain, ","));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Config_base_value_cannot_contain, ",")
+                );
         }
 
         public void SetReadOnly()
@@ -133,7 +139,8 @@ namespace System.Configuration
             CommaDelimitedStringCollection copy = new CommaDelimitedStringCollection();
 
             // Copy all values
-            foreach (string str in this) copy.Add(str);
+            foreach (string str in this)
+                copy.Add(str);
 
             // Copy Attributes
             copy._modified = false;

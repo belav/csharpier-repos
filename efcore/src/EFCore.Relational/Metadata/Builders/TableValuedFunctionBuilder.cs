@@ -15,7 +15,10 @@ public class TableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public TableValuedFunctionBuilder(IMutableDbFunction function, EntityTypeBuilder entityTypeBuilder)
+    public TableValuedFunctionBuilder(
+        IMutableDbFunction function,
+        EntityTypeBuilder entityTypeBuilder
+    )
         : base(function)
     {
         EntityTypeBuilder = entityTypeBuilder;
@@ -31,8 +34,8 @@ public class TableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure
     /// </remarks>
     /// <param name="name">The name of the function in the database.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TableValuedFunctionBuilder HasName(string name)
-        => (TableValuedFunctionBuilder)base.HasName(name);
+    public new virtual TableValuedFunctionBuilder HasName(string name) =>
+        (TableValuedFunctionBuilder)base.HasName(name);
 
     /// <summary>
     ///     Sets the schema of the database function.
@@ -42,8 +45,8 @@ public class TableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure
     /// </remarks>
     /// <param name="schema">The schema of the function in the database.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TableValuedFunctionBuilder HasSchema(string? schema)
-        => (TableValuedFunctionBuilder)base.HasSchema(schema);
+    public new virtual TableValuedFunctionBuilder HasSchema(string? schema) =>
+        (TableValuedFunctionBuilder)base.HasSchema(schema);
 
     /// <summary>
     ///     Marks whether the database function is built-in.
@@ -53,8 +56,8 @@ public class TableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure
     /// </remarks>
     /// <param name="builtIn">The value indicating whether the database function is built-in.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TableValuedFunctionBuilder IsBuiltIn(bool builtIn = true)
-        => (TableValuedFunctionBuilder)base.IsBuiltIn(builtIn);
+    public new virtual TableValuedFunctionBuilder IsBuiltIn(bool builtIn = true) =>
+        (TableValuedFunctionBuilder)base.IsBuiltIn(builtIn);
 
     /// <summary>
     ///     Returns an object that can be used to configure a parameter with the given name.
@@ -67,8 +70,10 @@ public class TableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure
     /// <param name="buildAction">An action that performs configuration of the parameter.</param>
     /// <returns>The builder to use for further parameter configuration.</returns>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TableValuedFunctionBuilder HasParameter(string name, Action<DbFunctionParameterBuilder> buildAction)
-        => (TableValuedFunctionBuilder)base.HasParameter(name, buildAction);
+    public new virtual TableValuedFunctionBuilder HasParameter(
+        string name,
+        Action<DbFunctionParameterBuilder> buildAction
+    ) => (TableValuedFunctionBuilder)base.HasParameter(name, buildAction);
 
     /// <summary>
     ///     Adds or updates an annotation on the database function. If an annotation with the key specified in
@@ -86,6 +91,5 @@ public class TableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure
         return this;
     }
 
-    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance
-        => EntityTypeBuilder;
+    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance => EntityTypeBuilder;
 }

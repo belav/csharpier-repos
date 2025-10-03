@@ -14,7 +14,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ComplexModelDto(null, Enumerable.Empty<ModelMetadata>()); }, "modelMetadata");
+                delegate
+                {
+                    new ComplexModelDto(null, Enumerable.Empty<ModelMetadata>());
+                },
+                "modelMetadata"
+            );
         }
 
         [Fact]
@@ -25,7 +30,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ComplexModelDto(modelMetadata, null); }, "propertyMetadata");
+                delegate
+                {
+                    new ComplexModelDto(modelMetadata, null);
+                },
+                "propertyMetadata"
+            );
         }
 
         [Fact]
@@ -46,7 +56,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private static ModelMetadata GetModelMetadata()
         {
-            return new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), null, typeof(object), "PropertyName");
+            return new ModelMetadata(
+                new EmptyModelMetadataProvider(),
+                typeof(object),
+                null,
+                typeof(object),
+                "PropertyName"
+            );
         }
     }
 }

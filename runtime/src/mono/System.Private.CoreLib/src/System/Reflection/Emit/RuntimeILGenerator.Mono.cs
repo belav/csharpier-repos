@@ -42,7 +42,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Reflection.Emit
 {
-
     internal struct ILExceptionBlock
     {
         public const int CATCH = 0;
@@ -51,23 +50,23 @@ namespace System.Reflection.Emit
         public const int FAULT = 4;
         public const int FILTER_START = -1;
 
-#region Sync with MonoILExceptionBlock in object-internals.h
+        #region Sync with MonoILExceptionBlock in object-internals.h
         internal Type? extype;
         internal int type;
         internal int start;
         internal int len;
         internal int filter_offset;
-#endregion
+        #endregion
     }
 
     internal struct ILExceptionInfo
     {
-#region Sync with MonoILExceptionInfo in object-internals.h
+        #region Sync with MonoILExceptionInfo in object-internals.h
         internal ILExceptionBlock[] handlers;
         internal int start;
         internal int len;
         internal Label end;
-#endregion
+        #endregion
 
         internal int NumHandlers()
         {
@@ -184,9 +183,10 @@ namespace System.Reflection.Emit
     {
         private struct LabelFixup
         {
-            public int offset;    // The number of bytes between pos and the
-                                  // offset of the jump
-            public int pos;       // Where offset of the label is placed
+            public int offset; // The number of bytes between pos and the
+
+            // offset of the jump
+            public int pos; // Where offset of the label is placed
             public int label_idx; // The label to jump to
         };
 
@@ -202,7 +202,7 @@ namespace System.Reflection.Emit
             public int maxStack;
         }
 
-#region Sync with MonoReflectionILGen in object-internals.h
+        #region Sync with MonoReflectionILGen in object-internals.h
         private byte[] code;
         private int code_len;
         private int max_stack;
@@ -211,7 +211,7 @@ namespace System.Reflection.Emit
         private ILExceptionInfo[]? ex_handlers;
         private int num_token_fixups;
         private object? token_fixups;
-#endregion
+        #endregion
 
         private LabelData[]? labels;
         private int num_labels;
@@ -226,7 +226,7 @@ namespace System.Reflection.Emit
         private const int defaultLabelsSize = 4;
         private const int defaultExceptionStackSize = 2;
 
-        [DynamicDependency(nameof(token_fixups))]  // Automatically keeps all previous fields too due to StructLayout
+        [DynamicDependency(nameof(token_fixups))] // Automatically keeps all previous fields too due to StructLayout
         internal RuntimeILGenerator(Module m, ITokenGenerator token_gen, int size)
         {
             if (size < 0)
@@ -348,7 +348,9 @@ namespace System.Reflection.Emit
             if (!InExceptionBlock)
                 throw new NotSupportedException(SR.Argument_NotInExceptionBlock);
             if (exceptionType != null && exceptionType.IsUserType)
-                throw new NotSupportedException(SR.PlatformNotSupported_UserDefinedSubclassesOfType);
+                throw new NotSupportedException(
+                    SR.PlatformNotSupported_UserDefinedSubclassesOfType
+                );
             if (ex_handlers![cur_block].LastClauseType() == ILExceptionBlock.FILTER_START)
             {
                 if (exceptionType != null)
@@ -433,14 +435,15 @@ namespace System.Reflection.Emit
             ex_handlers[cur_block].AddFinally(code_len);
         }
 
-        public override void BeginScope()
-        { }
+        public override void BeginScope() { }
 
         public override LocalBuilder DeclareLocal(Type localType, bool pinned)
         {
             ArgumentNullException.ThrowIfNull(localType);
             if (localType.IsUserType)
-                throw new NotSupportedException(SR.PlatformNotSupported_UserDefinedSubclassesOfType);
+                throw new NotSupportedException(
+                    SR.PlatformNotSupported_UserDefinedSubclassesOfType
+                );
             RuntimeLocalBuilder res = new RuntimeLocalBuilder(localType, this);
             res.is_pinned = pinned;
 
@@ -564,7 +567,6 @@ namespace System.Reflection.Emit
             fixups[num_fixups].label_idx = label.m_label;
             num_fixups++;
             code_len += tlen;
-
         }
 
         public override void Emit(OpCode opcode, Label[] labels)
@@ -623,8 +625,17 @@ namespace System.Reflection.Emit
                 throw new ArgumentException(SR.Argument_UnmatchedMethodForLocal, nameof(local));
 
             uint pos = localBuilder.position;
-            if ((opcode == OpCodes.Ldloca_S || opcode == OpCodes.Ldloc_S || opcode == OpCodes.Stloc_S) && pos > 255)
-                throw new InvalidOperationException(SR.InvalidOperation_BadInstructionOrIndexOutOfBound);
+            if (
+                (
+                    opcode == OpCodes.Ldloca_S
+                    || opcode == OpCodes.Ldloc_S
+                    || opcode == OpCodes.Stloc_S
+                )
+                && pos > 255
+            )
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_BadInstructionOrIndexOutOfBound
+                );
 
             bool load_addr = false;
             bool is_store = false;
@@ -637,7 +648,10 @@ namespace System.Reflection.Emit
                 cur_stack--;
                 is_store = true;
             }
-            else if (opcode.StackBehaviourPush == StackBehaviour.Push1 || opcode.StackBehaviourPush == StackBehaviour.Pushi)
+            else if (
+                opcode.StackBehaviourPush == StackBehaviour.Push1
+                || opcode.StackBehaviourPush == StackBehaviour.Pushi
+            )
             {
                 cur_stack++;
                 is_load = true;
@@ -712,7 +726,14 @@ namespace System.Reflection.Emit
             ArgumentNullException.ThrowIfNull(meth);
 
             // For compatibility with MS
-            if ((meth is DynamicMethod) && ((opcode == OpCodes.Ldftn) || (opcode == OpCodes.Ldvirtftn) || (opcode == OpCodes.Ldtoken)))
+            if (
+                (meth is DynamicMethod)
+                && (
+                    (opcode == OpCodes.Ldftn)
+                    || (opcode == OpCodes.Ldvirtftn)
+                    || (opcode == OpCodes.Ldtoken)
+                )
+            )
                 throw new ArgumentException(SR.Argument_InvalidOpCodeOnDynamicMethod);
 
             int token = token_gen.GetToken(meth, true);
@@ -771,7 +792,11 @@ namespace System.Reflection.Emit
         }
 
         // FIXME: vararg methods are not supported
-        public override void EmitCall(OpCode opcode, MethodInfo methodInfo, Type[]? optionalParameterTypes)
+        public override void EmitCall(
+            OpCode opcode,
+            MethodInfo methodInfo,
+            Type[]? optionalParameterTypes
+        )
         {
             ArgumentNullException.ThrowIfNull(methodInfo);
             short value = opcode.Value;
@@ -783,7 +808,9 @@ namespace System.Reflection.Emit
             {
                 if ((methodInfo.CallingConvention & CallingConventions.VarArgs) == 0)
                 {
-                    throw new InvalidOperationException(SR.InvalidOperation_NotAVarArgCallingConvention);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_NotAVarArgCallingConvention
+                    );
                 }
 
                 int token = token_gen.GetToken(methodInfo, optionalParameterTypes);
@@ -793,20 +820,43 @@ namespace System.Reflection.Emit
             Emit(opcode, methodInfo);
         }
 
-        public override void EmitCalli(OpCode opcode, CallingConvention unmanagedCallConv, Type? returnType, Type[]? parameterTypes)
+        public override void EmitCalli(
+            OpCode opcode,
+            CallingConvention unmanagedCallConv,
+            Type? returnType,
+            Type[]? parameterTypes
+        )
         {
             // GetMethodSigHelper expects a ModuleBuilder or null, and module might be
             // a normal module when using dynamic methods.
-            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(module as ModuleBuilder, 0, unmanagedCallConv, returnType, parameterTypes);
+            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(
+                module as ModuleBuilder,
+                0,
+                unmanagedCallConv,
+                returnType,
+                parameterTypes
+            );
             Emit(opcode, helper);
         }
 
-        public override void EmitCalli(OpCode opcode, CallingConventions callingConvention, Type? returnType, Type[]? parameterTypes, Type[]? optionalParameterTypes)
+        public override void EmitCalli(
+            OpCode opcode,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type[]? optionalParameterTypes
+        )
         {
             if (optionalParameterTypes != null)
                 throw new NotImplementedException();
 
-            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(module as ModuleBuilder, callingConvention, 0, returnType, parameterTypes);
+            SignatureHelper helper = SignatureHelper.GetMethodSigHelper(
+                module as ModuleBuilder,
+                callingConvention,
+                0,
+                returnType,
+                parameterTypes
+            );
             Emit(opcode, helper);
         }
 
@@ -826,8 +876,7 @@ namespace System.Reflection.Emit
                 cur_block = open_blocks.Peek()!;
         }
 
-        public override void EndScope()
-        { }
+        public override void EndScope() { }
 
         public override void MarkLabel(Label loc)
         {
@@ -840,7 +889,6 @@ namespace System.Reflection.Emit
                 cur_stack = labels[loc.m_label].maxStack;
         }
 
-
         // FIXME: "Not implemented"
         public override void UsingNamespace(string usingNamespace)
         {
@@ -852,7 +900,9 @@ namespace System.Reflection.Emit
             for (int i = 0; i < num_fixups; ++i)
             {
                 if (labels![fixups![i].label_idx].addr < 0)
-                    throw new ArgumentException(SR.Format(SR.Argument_LabelUnmarked, fixups[i].label_idx + 1, mb.Name));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_LabelUnmarked, fixups[i].label_idx + 1, mb.Name)
+                    );
                 // Diff is the offset from the end of the jump instruction to the address of the label
                 int diff = labels[fixups[i].label_idx].addr - (fixups[i].pos + fixups[i].offset);
                 if (fixups[i].offset == 1)
@@ -904,9 +954,8 @@ namespace System.Reflection.Emit
 
     internal sealed class Int32Stack : List<int>
     {
-        public Int32Stack(int initialCapacity) : base(initialCapacity)
-        {
-        }
+        public Int32Stack(int initialCapacity)
+            : base(initialCapacity) { }
 
         public int Peek()
         {

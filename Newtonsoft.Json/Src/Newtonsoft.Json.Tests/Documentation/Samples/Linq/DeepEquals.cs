@@ -59,14 +59,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             {
                 { "Integer", 12345 },
                 { "String", "A string" },
-                { "Items", new JArray(1, 2) }
+                { "Items", new JArray(1, 2) },
             };
 
             JObject o2 = new JObject
             {
                 { "Integer", 12345 },
                 { "String", "A string" },
-                { "Items", new JArray(1, 2) }
+                { "Items", new JArray(1, 2) },
             };
 
             Console.WriteLine(JToken.DeepEquals(o1, o2));

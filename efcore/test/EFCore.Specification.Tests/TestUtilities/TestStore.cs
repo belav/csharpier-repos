@@ -23,7 +23,8 @@ public abstract class TestStore : IDisposable
         IServiceProvider serviceProvider,
         Func<DbContext> createContext,
         Action<DbContext> seed = null,
-        Action<DbContext> clean = null)
+        Action<DbContext> clean = null
+    )
     {
         ServiceProvider = serviceProvider;
         if (createContext == null)
@@ -33,11 +34,16 @@ public abstract class TestStore : IDisposable
 
         if (Shared)
         {
-            GetTestStoreIndex(serviceProvider).CreateShared(GetType().Name + Name, () => Initialize(createContext, seed, clean));
+            GetTestStoreIndex(serviceProvider)
+                .CreateShared(GetType().Name + Name, () => Initialize(createContext, seed, clean));
         }
         else
         {
-            GetTestStoreIndex(serviceProvider).CreateNonShared(GetType().Name + Name, () => Initialize(createContext, seed, clean));
+            GetTestStoreIndex(serviceProvider)
+                .CreateNonShared(
+                    GetType().Name + Name,
+                    () => Initialize(createContext, seed, clean)
+                );
         }
 
         return this;
@@ -47,23 +53,31 @@ public abstract class TestStore : IDisposable
         IServiceProvider serviceProvider,
         Func<TestStore, DbContext> createContext,
         Action<DbContext> seed = null,
-        Action<DbContext> clean = null)
-        => Initialize(serviceProvider, () => createContext(this), seed, clean);
+        Action<DbContext> clean = null
+    ) => Initialize(serviceProvider, () => createContext(this), seed, clean);
 
     public virtual TestStore Initialize<TContext>(
         IServiceProvider serviceProvider,
         Func<TestStore, TContext> createContext,
         Action<TContext> seed = null,
-        Action<TContext> clean = null)
-        where TContext : DbContext
-        => Initialize(
+        Action<TContext> clean = null
+    )
+        where TContext : DbContext =>
+        Initialize(
             serviceProvider,
             createContext,
             // ReSharper disable twice RedundantCast
-            seed == null ? (Action<DbContext>)null : c => seed((TContext)c),
-            clean == null ? (Action<DbContext>)null : c => clean((TContext)c));
+            seed == null
+                ? (Action<DbContext>)null
+                : c => seed((TContext)c),
+            clean == null ? (Action<DbContext>)null : c => clean((TContext)c)
+        );
 
-    protected virtual void Initialize(Func<DbContext> createContext, Action<DbContext> seed, Action<DbContext> clean)
+    protected virtual void Initialize(
+        Func<DbContext> createContext,
+        Action<DbContext> seed,
+        Action<DbContext> clean
+    )
     {
         using var context = createContext();
         clean?.Invoke(context);
@@ -82,15 +96,17 @@ public abstract class TestStore : IDisposable
         return Task.CompletedTask;
     }
 
-    protected virtual DbContext CreateDefaultContext()
-        => new(AddProviderOptions(new DbContextOptionsBuilder().EnableServiceProviderCaching(false)).Options);
+    protected virtual DbContext CreateDefaultContext() =>
+        new(
+            AddProviderOptions(
+                new DbContextOptionsBuilder().EnableServiceProviderCaching(false)
+            ).Options
+        );
 
-    protected virtual TestStoreIndex GetTestStoreIndex(IServiceProvider serviceProvider)
-        => _globalTestStoreIndex;
+    protected virtual TestStoreIndex GetTestStoreIndex(IServiceProvider serviceProvider) =>
+        _globalTestStoreIndex;
 
-    public virtual void Dispose()
-    {
-    }
+    public virtual void Dispose() { }
 
     public virtual Task DisposeAsync()
     {
@@ -112,10 +128,18 @@ public abstract class TestStore : IDisposable
             return new CompositeDisposable(
                 listener,
                 transaction,
-                new TransactionScope(transaction, TimeSpan.FromMinutes(10), TransactionScopeAsyncFlowOption.Enabled));
+                new TransactionScope(
+                    transaction,
+                    TimeSpan.FromMinutes(10),
+                    TransactionScopeAsyncFlowOption.Enabled
+                )
+            );
         }
 
-        return new TransactionScope(TransactionScopeOption.Suppress, TransactionScopeAsyncFlowOption.Enabled);
+        return new TransactionScope(
+            TransactionScopeOption.Suppress,
+            TransactionScopeAsyncFlowOption.Enabled
+        );
     }
 
     private class DistributedTransactionListener : IDisposable
@@ -125,11 +149,11 @@ public abstract class TestStore : IDisposable
             TransactionManager.DistributedTransactionStarted += DistributedTransactionStarted;
         }
 
-        private void DistributedTransactionStarted(object sender, TransactionEventArgs e)
-            => Assert.Fail("Distributed transaction started");
+        private void DistributedTransactionStarted(object sender, TransactionEventArgs e) =>
+            Assert.Fail("Distributed transaction started");
 
-        public void Dispose()
-            => TransactionManager.DistributedTransactionStarted -= DistributedTransactionStarted;
+        public void Dispose() =>
+            TransactionManager.DistributedTransactionStarted -= DistributedTransactionStarted;
     }
 
     private class CompositeDisposable : IDisposable

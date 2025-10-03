@@ -22,39 +22,29 @@ namespace Microsoft.CSharp.Activities
     public class CSharpValue<TResult> : CodeActivity<TResult>, ITextExpression
     {
         CompiledExpressionInvoker invoker;
-          
+
         public CSharpValue()
         {
             this.UseOldFastPath = true;
         }
 
-        public CSharpValue(string expressionText) :
-            this()
+        public CSharpValue(string expressionText)
+            : this()
         {
             this.ExpressionText = expressionText;
         }
 
-        public string ExpressionText
-        {
-            get;
-            set;
-        }
+        public string ExpressionText { get; set; }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Language
         {
-            get
-            {
-                return "C#";
-            }
+            get { return "C#"; }
         }
 
         public bool RequiresCompilation
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
@@ -75,7 +65,9 @@ namespace Microsoft.CSharp.Activities
             }
             else
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ActivityIsUncached));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.ActivityIsUncached)
+                );
             }
         }
     }

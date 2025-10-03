@@ -4,9 +4,7 @@
 using System;
 using System.Runtime.Versioning;
 using System.Threading;
-
 using Internal.Runtime.Augments;
-
 using Debug = Internal.Runtime.CompilerHelpers.StartupDebug;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -16,8 +14,8 @@ namespace Internal.Runtime.CompilerHelpers
         /// <summary>
         /// Return the registered logical modules; optionally copy them into an array.
         /// </summary>
-        internal static ReadOnlySpan<TypeManagerHandle> GetLoadedModules()
-            => s_modules.AsSpan(0, s_moduleCount);
+        internal static ReadOnlySpan<TypeManagerHandle> GetLoadedModules() =>
+            s_modules.AsSpan(0, s_moduleCount);
 
         internal static unsafe void InitializeCommandLineArgsW(int argc, char** argv)
         {

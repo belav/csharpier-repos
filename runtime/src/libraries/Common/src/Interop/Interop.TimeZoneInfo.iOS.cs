@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Globalization
     {
-        [LibraryImport(Libraries.GlobalizationNative, EntryPoint = "GlobalizationNative_GetTimeZoneDisplayNameNative", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.GlobalizationNative,
+            EntryPoint = "GlobalizationNative_GetTimeZoneDisplayNameNative",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static unsafe partial ResultCode GetTimeZoneDisplayNameNative(
             string localeName,
             int lNameLength,
@@ -16,6 +20,7 @@ internal static partial class Interop
             int idLength,
             TimeZoneDisplayNameType type,
             char* result,
-            int resultLength);
+            int resultLength
+        );
     }
 }

@@ -1,14 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -65,7 +64,10 @@ namespace System.Data.Services.Client
         {
             get
             {
-                Debug.Assert(this.parameterExpressionTypes.Count > 0, "this.parameterExpressionTypes.Count > 0");
+                Debug.Assert(
+                    this.parameterExpressionTypes.Count > 0,
+                    "this.parameterExpressionTypes.Count > 0"
+                );
                 return this.parameterExpressionTypes.Peek();
             }
         }
@@ -77,18 +79,12 @@ namespace System.Data.Services.Client
 
         internal Expression LambdaParameterInScope
         {
-            get
-            {
-                return this.parameterExpressions.Peek();
-            }
+            get { return this.parameterExpressions.Peek(); }
         }
 
         internal Expression ParameterEntryInScope
         {
-            get
-            {
-                return this.parameterEntries.Peek();
-            }
+            get { return this.parameterEntries.Peek(); }
         }
 
         #endregion Internal properties.
@@ -104,15 +100,17 @@ namespace System.Data.Services.Client
             }
             else
             {
-                result +=
-                    "entity:" + this.CurrentIsEntity +
-                    " param:" + this.ParameterEntryInScope;
+                result += "entity:" + this.CurrentIsEntity + " param:" + this.ParameterEntryInScope;
             }
 
             return result;
         }
 
-        internal void EnterLambdaScope(LambdaExpression lambda, Expression entry, Expression expectedType)
+        internal void EnterLambdaScope(
+            LambdaExpression lambda,
+            Expression entry,
+            Expression expectedType
+        )
         {
             Debug.Assert(lambda != null, "lambda != null");
             Debug.Assert(lambda.Parameters.Count == 1, "lambda.Parameters.Count == 1");
@@ -181,7 +179,7 @@ namespace System.Data.Services.Client
 
         internal void LeaveLambdaScope()
         {
-            this.entityInScope.Pop(); 
+            this.entityInScope.Pop();
             this.parameterExpressions.Pop();
             this.parameterExpressionTypes.Pop();
             this.parameterEntries.Pop();
@@ -199,7 +197,14 @@ namespace System.Data.Services.Client
             Debug.Assert(names != null, "names != null");
             Debug.Assert(rewriteExpression != null, "rewriteExpression != null");
 
-            this.rewrites.Add(new MemberInitRewrite() { Root = root, MemberNames = names, RewriteExpression = rewriteExpression });
+            this.rewrites.Add(
+                new MemberInitRewrite()
+                {
+                    Root = root,
+                    MemberNames = names,
+                    RewriteExpression = rewriteExpression,
+                }
+            );
             this.parameterEntries.Push(rewriteExpression);
         }
 
@@ -244,23 +249,11 @@ namespace System.Data.Services.Client
 
         internal class MemberInitRewrite
         {
-            internal string[] MemberNames 
-            { 
-                get; 
-                set; 
-            }
+            internal string[] MemberNames { get; set; }
 
-            internal Expression Root 
-            { 
-                get; 
-                set; 
-            }
-         
-            internal Expression RewriteExpression
-            { 
-                get; 
-                set; 
-            }
+            internal Expression Root { get; set; }
+
+            internal Expression RewriteExpression { get; set; }
         }
 
         #endregion Inner types.

@@ -7,11 +7,11 @@
 namespace System.Configuration
 {
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
     using System.Configuration.Provider;
-    using System.Xml;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Text;
-    using  System.Runtime.InteropServices;
+    using System.Xml;
     using Microsoft.Win32;
 
     ////////////////////////////////////////////////////////////////////
@@ -22,6 +22,7 @@ namespace System.Configuration
     {
         public int cbData;
         public IntPtr pbData;
+
         void IDisposable.Dispose()
         {
             if (pbData != IntPtr.Zero)

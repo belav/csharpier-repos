@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Xunit;
 
 namespace System.SpanTests
 {
@@ -16,11 +16,17 @@ namespace System.SpanTests
             ref int asInt = ref MemoryMarshal.AsRef<int>(span);
 
             Assert.Equal(0x11222211, asInt);
-            Assert.True(Unsafe.AreSame<byte>(ref Unsafe.As<int, byte>(ref asInt), ref MemoryMarshal.GetReference(span)));
+            Assert.True(
+                Unsafe.AreSame<byte>(
+                    ref Unsafe.As<int, byte>(ref asInt),
+                    ref MemoryMarshal.GetReference(span)
+                )
+            );
 
             var array = new byte[100];
             Array.Fill<byte>(array, 0x42);
-            ref TestHelpers.TestStructExplicit asStruct = ref MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(new Span<byte>(array));
+            ref TestHelpers.TestStructExplicit asStruct =
+                ref MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(new Span<byte>(array));
 
             Assert.Equal((uint)0x42424242, asStruct.UI1);
         }
@@ -28,10 +34,18 @@ namespace System.SpanTests
         [Fact]
         public static void AsRefFail()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => MemoryMarshal.AsRef<uint>(new Span<byte>(new byte[] { 1 })));
-            Assert.Throws<ArgumentOutOfRangeException>(() => MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(new Span<byte>(new byte[] { 1 })));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                MemoryMarshal.AsRef<uint>(new Span<byte>(new byte[] { 1 }))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                MemoryMarshal.AsRef<TestHelpers.TestStructExplicit>(
+                    new Span<byte>(new byte[] { 1 })
+                )
+            );
 
-            Assert.Throws<ArgumentException>(() => MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(new Span<byte>(new byte[100])));
+            Assert.Throws<ArgumentException>(() =>
+                MemoryMarshal.AsRef<TestHelpers.StructWithReferences>(new Span<byte>(new byte[100]))
+            );
         }
     }
 }

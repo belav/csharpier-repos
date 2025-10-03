@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,26 +28,34 @@
 
 namespace System.IdentityModel.Tokens
 {
-	public static class SecurityTokenTypes
-	{
-		public static string Kerberos {
-			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Kerberos"; }
-		}
+    public static class SecurityTokenTypes
+    {
+        public static string Kerberos
+        {
+            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Kerberos"; }
+        }
 
-		public static string Rsa {
-			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Rsa"; }
-		}
+        public static string Rsa
+        {
+            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Rsa"; }
+        }
 
-		public static string Saml {
-			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Saml"; }
-		}
+        public static string Saml
+        {
+            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/Saml"; }
+        }
 
-		public static string UserName {
-			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/UserName"; }
-		}
+        public static string UserName
+        {
+            get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/UserName"; }
+        }
 
-		public static string X509Certificate {
-			get { return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/X509Certificate"; }
-		}
-	}
+        public static string X509Certificate
+        {
+            get
+            {
+                return "http://schemas.microsoft.com/ws/2006/05/identitymodel/tokens/X509Certificate";
+            }
+        }
+    }
 }

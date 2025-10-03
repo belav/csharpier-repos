@@ -11,15 +11,22 @@ public static class TypeInForwardedAssembly
 {
     public class PublicInner
     {
-        public class PublicInnerInner {}
-        protected class ProtectedInnerInner {}
-        internal class InternalInnerInner{}
-        private class PrivatelInnerInner{}
-        protected internal class ProjectedInternalInnerInner{}
+        public class PublicInnerInner { }
+
+        protected class ProtectedInnerInner { }
+
+        internal class InternalInnerInner { }
+
+        private class PrivatelInnerInner { }
+
+        protected internal class ProjectedInternalInnerInner { }
     }
 
-    protected class ProtectedInner {}
-    internal class InternalInner{}
-    private class PrivatelInner{}
-    protected internal class ProjectedInternalInner{}
+    protected class ProtectedInner { }
+
+    internal class InternalInner { }
+
+    private class PrivatelInner { }
+
+    protected internal class ProjectedInternalInner { }
 }

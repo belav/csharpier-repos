@@ -3,17 +3,29 @@
 
 using System;
 using System.Numerics;
-using System.Runtime.Intrinsics;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 public unsafe class TypeMismatchedArgs
 {
-    private static readonly HfaUnion s_hfaDblFlt = new HfaUnion { DblHfa = { FirstDblValue = 1.0, SecondDblValue = 2.0 } };
-    private static readonly HfaDblLngUnion s_dblLngHfa = new HfaDblLngUnion { DblLng = { FirstLngValue = 10, SecondLngValue = 20 } };
-    private static readonly FourDblLngUnion s_fourDblLngHfa = new FourDblLngUnion { Lngs = { LongOne = 30 } };
-    private static readonly Vtor128Union s_vtor128 = new Vtor128Union { Vtor4 = new Vector4(4, 3, 2, 1) };
+    private static readonly HfaUnion s_hfaDblFlt = new HfaUnion
+    {
+        DblHfa = { FirstDblValue = 1.0, SecondDblValue = 2.0 },
+    };
+    private static readonly HfaDblLngUnion s_dblLngHfa = new HfaDblLngUnion
+    {
+        DblLng = { FirstLngValue = 10, SecondLngValue = 20 },
+    };
+    private static readonly FourDblLngUnion s_fourDblLngHfa = new FourDblLngUnion
+    {
+        Lngs = { LongOne = 30 },
+    };
+    private static readonly Vtor128Union s_vtor128 = new Vtor128Union
+    {
+        Vtor4 = new Vector4(4, 3, 2, 1),
+    };
 
     [Fact]
     public static int TestEntryPoint()
@@ -48,12 +60,26 @@ public unsafe class TypeMismatchedArgs
             return 106;
         }
 
-        if (ProblemWithPromotedStruct_Unix_x64(new StructWithFourLongs { LongOne = 1, LongTwo = 2, LongThree = 3, LongFour = 4 }))
+        if (
+            ProblemWithPromotedStruct_Unix_x64(
+                new StructWithFourLongs
+                {
+                    LongOne = 1,
+                    LongTwo = 2,
+                    LongThree = 3,
+                    LongFour = 4,
+                }
+            )
+        )
         {
             return 107;
         }
 
-        if (ProblemWithPromotedStruct_x86(new DblLngStruct { FirstLngValue = 1, SecondLngValue = 2 }))
+        if (
+            ProblemWithPromotedStruct_x86(
+                new DblLngStruct { FirstLngValue = 1, SecondLngValue = 2 }
+            )
+        )
         {
             return 108;
         }
@@ -123,7 +149,8 @@ public unsafe class TypeMismatchedArgs
     {
         var c = b;
 
-        return CallForDblStructs(default, default, default, default, *(DblLngStruct*)&c) != c.LongTwo;
+        return CallForDblStructs(default, default, default, default, *(DblLngStruct*)&c)
+            != c.LongTwo;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -144,7 +171,11 @@ public unsafe class TypeMismatchedArgs
     private static double CallForHfaDblStruct(HfaDblStruct value) => value.FirstDblValue;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static long CallForSplitStructWithFourLongs(int arg0, int arg1, StructWithFourLongs splitArg) => splitArg.LongOne;
+    private static long CallForSplitStructWithFourLongs(
+        int arg0,
+        int arg1,
+        StructWithFourLongs splitArg
+    ) => splitArg.LongOne;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static double CallForDblStruct(DblStruct value) => value.Dbl;
@@ -153,7 +184,13 @@ public unsafe class TypeMismatchedArgs
     private static float CallForFltStruct(FltStruct value) => value.Flt;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static long CallForDblStructs(DblLngStruct arg0, DblLngStruct arg1, DblLngStruct arg2, DblLngStruct arg3, DblLngStruct stkArg) => stkArg.SecondLngValue;
+    private static long CallForDblStructs(
+        DblLngStruct arg0,
+        DblLngStruct arg1,
+        DblLngStruct arg2,
+        DblLngStruct arg3,
+        DblLngStruct stkArg
+    ) => stkArg.SecondLngValue;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int CallForStructWithIndex(StructWithIndex value) => value.Value;
@@ -164,6 +201,7 @@ struct Vtor128Union
 {
     [FieldOffset(0)]
     public Vector4 Vtor4;
+
     [FieldOffset(0)]
     public Vector128<float> Vtor128;
 }
@@ -173,6 +211,7 @@ struct HfaDblLngUnion
 {
     [FieldOffset(0)]
     public HfaDblStruct DblHfa;
+
     [FieldOffset(0)]
     public DblLngStruct DblLng;
 }
@@ -182,6 +221,7 @@ struct HfaUnion
 {
     [FieldOffset(0)]
     public HfaDblStruct DblHfa;
+
     [FieldOffset(0)]
     public HfaFltStruct FltHfa;
 }
@@ -191,6 +231,7 @@ struct FourDblLngUnion
 {
     [FieldOffset(0)]
     public FourDoublesHfaStruct Hfa;
+
     [FieldOffset(0)]
     public StructWithFourLongs Lngs;
 }

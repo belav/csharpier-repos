@@ -28,8 +28,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_File_HardLink_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_File_HardLink_Async_Internal(format, testFormat);
+        public Task Read_Archive_File_HardLink_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_File_HardLink_Async_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -37,8 +39,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_File_SymbolicLink_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_File_SymbolicLink_Async_Internal(format, testFormat);
+        public Task Read_Archive_File_SymbolicLink_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_File_SymbolicLink_Async_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -46,8 +50,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_Folder_File_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_Folder_File_Async_Internal(format, testFormat);
+        public Task Read_Archive_Folder_File_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_Folder_File_Async_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -55,8 +61,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_Folder_File_Utf8_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_Folder_File_Utf8_Async_Internal(format, testFormat);
+        public Task Read_Archive_Folder_File_Utf8_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_Folder_File_Utf8_Async_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -64,8 +72,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_Folder_Subfolder_File_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_Folder_Subfolder_File_Async_Internal(format, testFormat);
+        public Task Read_Archive_Folder_Subfolder_File_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_Folder_Subfolder_File_Async_Internal(format, testFormat);
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -73,8 +83,14 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Async_Internal(format, testFormat);
+        public Task Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) =>
+            Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Async_Internal(
+                format,
+                testFormat
+            );
 
         [Theory]
         [InlineData(TarEntryFormat.V7, TestTarFormat.v7)]
@@ -82,8 +98,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_Many_Small_Files_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_Many_Small_Files_Async_Internal(format, testFormat);
+        public Task Read_Archive_Many_Small_Files_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_Many_Small_Files_Async_Internal(format, testFormat);
 
         [Theory]
         // V7 does not support longer filenames
@@ -91,8 +109,10 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_LongPath_Splitable_Under255_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_LongPath_Splitable_Under255_Async_Internal(format, testFormat);
+        public Task Read_Archive_LongPath_Splitable_Under255_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_LongPath_Splitable_Under255_Async_Internal(format, testFormat);
 
         [Theory]
         // V7 does not support block devices, character devices or fifos
@@ -100,32 +120,40 @@ namespace System.Formats.Tar.Tests
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_SpecialFiles_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_SpecialFiles_Async_Internal(format, testFormat);
+        public Task Read_Archive_SpecialFiles_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_SpecialFiles_Async_Internal(format, testFormat);
 
         [Theory]
         // Neither V7 not Ustar can handle links with long target filenames
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_File_LongSymbolicLink_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_File_LongSymbolicLink_Async_Internal(format, testFormat);
+        public Task Read_Archive_File_LongSymbolicLink_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_File_LongSymbolicLink_Async_Internal(format, testFormat);
 
         [Theory]
         // Neither V7 not Ustar can handle a path that does not have separators that can be split under 100 bytes
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_LongFileName_Over100_Under255_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_LongFileName_Over100_Under255_Async_Internal(format, testFormat);
+        public Task Read_Archive_LongFileName_Over100_Under255_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_LongFileName_Over100_Under255_Async_Internal(format, testFormat);
 
         [Theory]
         // Neither V7 not Ustar can handle path lengths waaaay beyond name+prefix length
         [InlineData(TarEntryFormat.Pax, TestTarFormat.pax)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.gnu)]
         [InlineData(TarEntryFormat.Gnu, TestTarFormat.oldgnu)]
-        public Task Read_Archive_LongPath_Over255_Async(TarEntryFormat format, TestTarFormat testFormat) =>
-            Read_Archive_LongPath_Over255_Async_Internal(format, testFormat);
+        public Task Read_Archive_LongPath_Over255_Async(
+            TarEntryFormat format,
+            TestTarFormat testFormat
+        ) => Read_Archive_LongPath_Over255_Async_Internal(format, testFormat);
 
         [Theory]
         [MemberData(nameof(GetV7TestCaseNames))]
@@ -135,7 +163,11 @@ namespace System.Formats.Tar.Tests
         [Theory]
         [MemberData(nameof(GetUstarTestCaseNames))]
         public Task ReadDataStreamOfTarGzUstarAsync(string testCaseName) =>
-            VerifyDataStreamOfTarGzInternalAsync(TestTarFormat.ustar, testCaseName, copyData: false);
+            VerifyDataStreamOfTarGzInternalAsync(
+                TestTarFormat.ustar,
+                testCaseName,
+                copyData: false
+            );
 
         [Theory]
         [MemberData(nameof(GetPaxAndGnuTestCaseNames))]
@@ -145,12 +177,20 @@ namespace System.Formats.Tar.Tests
         [Theory]
         [MemberData(nameof(GetPaxAndGnuTestCaseNames))]
         public Task ReadDataStreamOfTarGzPaxGeaAsync(string testCaseName) =>
-            VerifyDataStreamOfTarGzInternalAsync(TestTarFormat.pax_gea, testCaseName, copyData: false);
+            VerifyDataStreamOfTarGzInternalAsync(
+                TestTarFormat.pax_gea,
+                testCaseName,
+                copyData: false
+            );
 
         [Theory]
         [MemberData(nameof(GetPaxAndGnuTestCaseNames))]
         public Task ReadDataStreamOfTarGzOldGnuAsync(string testCaseName) =>
-            VerifyDataStreamOfTarGzInternalAsync(TestTarFormat.oldgnu, testCaseName, copyData: false);
+            VerifyDataStreamOfTarGzInternalAsync(
+                TestTarFormat.oldgnu,
+                testCaseName,
+                copyData: false
+            );
 
         [Theory]
         [MemberData(nameof(GetPaxAndGnuTestCaseNames))]
@@ -175,12 +215,20 @@ namespace System.Formats.Tar.Tests
         [Theory]
         [MemberData(nameof(GetPaxAndGnuTestCaseNames))]
         public Task ReadCopiedDataStreamOfTarGzPaxGeaAsync(string testCaseName) =>
-            VerifyDataStreamOfTarGzInternalAsync(TestTarFormat.pax_gea, testCaseName, copyData: true);
+            VerifyDataStreamOfTarGzInternalAsync(
+                TestTarFormat.pax_gea,
+                testCaseName,
+                copyData: true
+            );
 
         [Theory]
         [MemberData(nameof(GetPaxAndGnuTestCaseNames))]
         public Task ReadCopiedDataStreamOfTarGzOldGnuAsync(string testCaseName) =>
-            VerifyDataStreamOfTarGzInternalAsync(TestTarFormat.oldgnu, testCaseName, copyData: true);
+            VerifyDataStreamOfTarGzInternalAsync(
+                TestTarFormat.oldgnu,
+                testCaseName,
+                copyData: true
+            );
 
         [Theory]
         [MemberData(nameof(GetPaxAndGnuTestCaseNames))]
@@ -190,12 +238,20 @@ namespace System.Formats.Tar.Tests
         [Theory]
         [MemberData(nameof(GetGoLangTarTestCaseNames))]
         public Task ReadDataStreamOfExternalAssetsGoLangAsync(string testCaseName) =>
-            VerifyDataStreamOfTarUncompressedInternalAsync("golang_tar", testCaseName, copyData: false);
+            VerifyDataStreamOfTarUncompressedInternalAsync(
+                "golang_tar",
+                testCaseName,
+                copyData: false
+            );
 
         [Theory]
         [MemberData(nameof(GetNodeTarTestCaseNames))]
         public Task ReadDataStreamOfExternalAssetsNodeAsync(string testCaseName) =>
-            VerifyDataStreamOfTarUncompressedInternalAsync("node-tar", testCaseName, copyData: false);
+            VerifyDataStreamOfTarUncompressedInternalAsync(
+                "node-tar",
+                testCaseName,
+                copyData: false
+            );
 
         [Theory]
         [MemberData(nameof(GetRsTarTestCaseNames))]
@@ -205,12 +261,20 @@ namespace System.Formats.Tar.Tests
         [Theory]
         [MemberData(nameof(GetGoLangTarTestCaseNames))]
         public Task ReadCopiedDataStreamOfExternalAssetsGoLangAsync(string testCaseName) =>
-            VerifyDataStreamOfTarUncompressedInternalAsync("golang_tar", testCaseName, copyData: true);
+            VerifyDataStreamOfTarUncompressedInternalAsync(
+                "golang_tar",
+                testCaseName,
+                copyData: true
+            );
 
         [Theory]
         [MemberData(nameof(GetNodeTarTestCaseNames))]
         public Task ReadCopiedDataStreamOfExternalAssetsNodeAsync(string testCaseName) =>
-            VerifyDataStreamOfTarUncompressedInternalAsync("node-tar", testCaseName, copyData: true);
+            VerifyDataStreamOfTarUncompressedInternalAsync(
+                "node-tar",
+                testCaseName,
+                copyData: true
+            );
 
         [Theory]
         [MemberData(nameof(GetRsTarTestCaseNames))]
@@ -220,7 +284,11 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public async Task Throw_FifoContainsNonZeroDataSectionAsync()
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "hdr-only");
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "hdr-only"
+            );
             await using TarReader reader = new TarReader(archiveStream);
             Assert.NotNull(await reader.GetNextEntryAsync());
             Assert.NotNull(await reader.GetNextEntryAsync());
@@ -230,15 +298,23 @@ namespace System.Formats.Tar.Tests
             Assert.NotNull(await reader.GetNextEntryAsync());
             Assert.NotNull(await reader.GetNextEntryAsync());
             Assert.NotNull(await reader.GetNextEntryAsync());
-            await Assert.ThrowsAsync<InvalidDataException>(async () => await reader.GetNextEntryAsync());
+            await Assert.ThrowsAsync<InvalidDataException>(async () =>
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Fact]
         public async Task Throw_SingleExtendedAttributesEntryWithNoActualEntryAsync()
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "pax-path-hdr");
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "pax-path-hdr"
+            );
             await using TarReader reader = new TarReader(archiveStream);
-            await Assert.ThrowsAsync<EndOfStreamException>(async () => await reader.GetNextEntryAsync());
+            await Assert.ThrowsAsync<EndOfStreamException>(async () =>
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Theory]
@@ -246,7 +322,11 @@ namespace System.Formats.Tar.Tests
         [InlineData("golang_tar", "v7")]
         public async Task AllowSpacesInOctalFieldsAsync(string folderName, string testCaseName)
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, folderName, testCaseName);
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                folderName,
+                testCaseName
+            );
             await using TarReader reader = new TarReader(archiveStream);
             TarEntry entry;
             while ((entry = await reader.GetNextEntryAsync()) != null)
@@ -266,15 +346,25 @@ namespace System.Formats.Tar.Tests
         [InlineData("writer-big")] // The size field contains an euro char
         public async Task Throw_ArchivesWithRandomCharsAsync(string testCaseName)
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", testCaseName);
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                testCaseName
+            );
             await using TarReader reader = new TarReader(archiveStream);
-            await Assert.ThrowsAsync<InvalidDataException>(async () => await reader.GetNextEntryAsync());
+            await Assert.ThrowsAsync<InvalidDataException>(async () =>
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Fact]
         public async Task GarbageEntryChecksumZeroReturnNullAsync()
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "issue12435");
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "issue12435"
+            );
             await using TarReader reader = new TarReader(archiveStream);
             Assert.Null(await reader.GetNextEntryAsync());
         }
@@ -294,15 +384,25 @@ namespace System.Formats.Tar.Tests
             // Sparse entries were created for the GNU format, so they are very rare entry types which are excluded from this test method:
             // pax-nil-sparse-data, pax-nil-sparse-hole, pax-sparse-big
 
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, testFolderName, testCaseName);
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                testFolderName,
+                testCaseName
+            );
             await using TarReader reader = new TarReader(archiveStream);
-            await Assert.ThrowsAsync<NotSupportedException>(async () => await reader.GetNextEntryAsync());
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await reader.GetNextEntryAsync()
+            );
         }
 
         [Fact]
         public async Task DirectoryListRegularFileAndSparseAsync()
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "gnu-incremental");
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "gnu-incremental"
+            );
             await using TarReader reader = new TarReader(archiveStream);
             TarEntry directoryList = await reader.GetNextEntryAsync();
 
@@ -312,33 +412,63 @@ namespace System.Formats.Tar.Tests
 
             Assert.NotNull(await reader.GetNextEntryAsync()); // Just a regular file
 
-            await Assert.ThrowsAsync<NotSupportedException>(async () => await reader.GetNextEntryAsync()); // Sparse
+            await Assert.ThrowsAsync<NotSupportedException>(async () =>
+                await reader.GetNextEntryAsync()
+            ); // Sparse
         }
 
         [Fact]
         public async Task PaxSizeLargerThanMaxAllowedByStreamAsync()
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, "golang_tar", "writer-big-long");
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                "golang_tar",
+                "writer-big-long"
+            );
             await using TarReader reader = new TarReader(archiveStream);
             // The extended attribute 'size' has the value 17179869184
             // Exception message: Stream length must be non-negative and less than 2^31 - 1 - origin
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await reader.GetNextEntryAsync());
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                await reader.GetNextEntryAsync()
+            );
         }
 
-        private static async Task VerifyDataStreamOfTarUncompressedInternalAsync(string testFolderName, string testCaseName, bool copyData)
+        private static async Task VerifyDataStreamOfTarUncompressedInternalAsync(
+            string testFolderName,
+            string testCaseName,
+            bool copyData
+        )
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.Uncompressed, testFolderName, testCaseName);
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                testFolderName,
+                testCaseName
+            );
             await VerifyDataStreamOfTarInternalAsync(archiveStream, copyData);
         }
 
-        private static async Task VerifyDataStreamOfTarGzInternalAsync(TestTarFormat testTarFormat, string testCaseName, bool copyData)
+        private static async Task VerifyDataStreamOfTarGzInternalAsync(
+            TestTarFormat testTarFormat,
+            string testCaseName,
+            bool copyData
+        )
         {
-            await using MemoryStream archiveStream = GetTarMemoryStream(CompressionMethod.GZip, testTarFormat, testCaseName);
-            await using GZipStream decompressor = new GZipStream(archiveStream, CompressionMode.Decompress);
+            await using MemoryStream archiveStream = GetTarMemoryStream(
+                CompressionMethod.GZip,
+                testTarFormat,
+                testCaseName
+            );
+            await using GZipStream decompressor = new GZipStream(
+                archiveStream,
+                CompressionMode.Decompress
+            );
             await VerifyDataStreamOfTarInternalAsync(decompressor, copyData);
         }
 
-        private static async Task VerifyDataStreamOfTarInternalAsync(Stream archiveStream, bool copyData)
+        private static async Task VerifyDataStreamOfTarInternalAsync(
+            Stream archiveStream,
+            bool copyData
+        )
         {
             await using TarReader reader = new TarReader(archiveStream);
 

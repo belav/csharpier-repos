@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+TreeView" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+TreeView">
+<Type
+  Name="VisualStyleElement+TreeView"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+TreeView"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.TreeView" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)</TargetFrameworks>
     <RootNamespace>System.Xml</RootNamespace>
@@ -7,13 +6,14 @@
     <EnableAOTAnalyzer>false</EnableAOTAnalyzer>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkSubstitutionsXmls Include="$(ILLinkDirectory)ILLink.Substitutions.xml" />
   </ItemGroup>
-
   <ItemGroup>
-    <Compile Include="$(CommonPath)System\Text\StringBuilderCache.cs" Link="Common\System\StringBuilderCache.cs" />
+    <Compile
+      Include="$(CommonPath)System\Text\StringBuilderCache.cs"
+      Link="Common\System\StringBuilderCache.cs"
+    />
     <Compile Include="$(CommonPath)System\HexConverter.cs" Link="Common\System\HexConverter.cs" />
     <Compile Include="System\Xml\BinaryXml\XmlBinaryReader.cs" />
     <Compile Include="System\Xml\BinaryXml\BinXmlToken.cs" />
@@ -518,7 +518,6 @@
     <Compile Include="System\Xml\Serialization\Configuration\DateTimeSerializationSection.cs" />
     <Compile Include="System\Xml\Serialization\Globals.cs" />
   </ItemGroup>
-
   <!-- Embedded DTD files -->
   <ItemGroup>
     <EmbeddedResource Include="Utils\DTDs\XHTML10\no_comments\xhtml1-strict.dtd">
@@ -543,7 +542,6 @@
       <LogicalName>rss-0.91.dtd</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="System\Xml\Xsl\IlGen\GenerateHelper.cs" />
     <Compile Include="System\Xml\Xsl\IlGen\IteratorDescriptor.cs" />
@@ -746,25 +744,36 @@
     <Compile Include="System\Xml\Xsl\Xslt\XsltLoader.cs" />
     <Compile Include="System\Xml\Xsl\Xslt\XsltQilFactory.cs" />
     <Compile Include="System\Xml\Xsl\Xslt\XslVisitor.cs" />
-    <Compile Include="$(CommonPath)System\LocalAppContextSwitches.Common.cs" Link="System\LocalAppContextSwitches.Common.cs" />
+    <Compile
+      Include="$(CommonPath)System\LocalAppContextSwitches.Common.cs"
+      Link="System\LocalAppContextSwitches.Common.cs"
+    />
     <Compile Include="System\Xml\Core\LocalAppContextSwitches.cs" />
     <Compile Include="$(CommonPath)System\CSharpHelpers.cs" />
-    <Compile Include="$(CommonPath)System\Text\ValueStringBuilder.cs" Link="Common\System\Text\ValueStringBuilder.cs" />
-    <Compile Include="$(CommonPath)System\Text\ValueStringBuilder.AppendSpanFormattable.cs" Link="Common\System\Text\ValueStringBuilder.AppendSpanFormattable.cs" />
+    <Compile
+      Include="$(CommonPath)System\Text\ValueStringBuilder.cs"
+      Link="Common\System\Text\ValueStringBuilder.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Text\ValueStringBuilder.AppendSpanFormattable.cs"
+      Link="Common\System\Text\ValueStringBuilder.AppendSpanFormattable.cs"
+    />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
     <Compile Include="System\Xml\Xsl\Runtime\XmlCollation.Windows.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == ''">
     <Compile Include="System\Xml\Xsl\Runtime\XmlCollation.Unix.cs" />
     <Compile Include="System\Xml\Core\XmlTextReaderImpl.Unix.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj" ReferenceOutputAssembly="false" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"
+      ReferenceOutputAssembly="false"
+      SetTargetFramework="TargetFramework=netstandard2.0"
+      OutputItemType="Analyzer"
+    />
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
     <Reference Include="System.Collections.NonGeneric" />
@@ -790,5 +799,4 @@
     <Reference Include="System.Threading" />
     <Reference Include="System.Threading.Thread" />
   </ItemGroup>
-
 </Project>

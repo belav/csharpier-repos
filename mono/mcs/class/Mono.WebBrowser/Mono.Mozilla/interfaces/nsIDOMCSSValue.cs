@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,39 +26,46 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("009f7ea5-9e80-41be-b008-db62f10823f2")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDOMCSSValue
+    {
+        #region nsIDOMCSSValue
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCssText( /*DOMString*/
+            HandleRef ret
+        );
 
-	[Guid ("009f7ea5-9e80-41be-b008-db62f10823f2")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDOMCSSValue {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setCssText( /*DOMString*/
+            HandleRef value
+        );
 
-#region nsIDOMCSSValue
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCssText (  /*DOMString*/ HandleRef ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCssValueType(out ushort ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setCssText ( /*DOMString*/ HandleRef value);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCssValueType ( out ushort ret);
-
-#endregion
-	}
-
-
-	internal class nsDOMCSSValue {
-		public static nsIDOMCSSValue GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDOMCSSValue obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDOMCSSValue).GUID, obj);
-			return o as nsIDOMCSSValue;
-		}
-	}
+    internal class nsDOMCSSValue
+    {
+        public static nsIDOMCSSValue GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIDOMCSSValue obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDOMCSSValue).GUID, obj);
+            return o as nsIDOMCSSValue;
+        }
+    }
 }

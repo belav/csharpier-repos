@@ -7,7 +7,7 @@ using Xunit;
 public class Foo
 {
     [Fact]
-    static public void TestEntryPoint()
+    public static void TestEntryPoint()
     {
         double inf = Double.PositiveInfinity;
         System.Console.WriteLine(System.Math.Atan2(inf, inf));

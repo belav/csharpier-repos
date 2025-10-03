@@ -17,11 +17,12 @@ namespace System.ServiceModel.Activities.Configuration
         const string TimeToPersistString = "timeToPersist";
         const string TimeToUnloadString = "timeToUnload";
 
-        public WorkflowIdleElement()
-        {
-        }
+        public WorkflowIdleElement() { }
 
-        [ConfigurationProperty(TimeToPersistString, DefaultValue = WorkflowIdleBehavior.defaultTimeToPersistString)]
+        [ConfigurationProperty(
+            TimeToPersistString,
+            DefaultValue = WorkflowIdleBehavior.defaultTimeToPersistString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan TimeToPersist
@@ -30,7 +31,10 @@ namespace System.ServiceModel.Activities.Configuration
             set { base[TimeToPersistString] = value; }
         }
 
-        [ConfigurationProperty(TimeToUnloadString, DefaultValue = WorkflowIdleBehavior.defaultTimeToUnloadString)]
+        [ConfigurationProperty(
+            TimeToUnloadString,
+            DefaultValue = WorkflowIdleBehavior.defaultTimeToUnloadString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan TimeToUnload
@@ -41,11 +45,19 @@ namespace System.ServiceModel.Activities.Configuration
 
         protected internal override object CreateBehavior()
         {
-            return new WorkflowIdleBehavior() 
-            { TimeToPersist = this.TimeToPersist, TimeToUnload = this.TimeToUnload };
+            return new WorkflowIdleBehavior()
+            {
+                TimeToPersist = this.TimeToPersist,
+                TimeToUnload = this.TimeToUnload,
+            };
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Configuration", "Configuration102:ConfigurationPropertyAttributeRule", MessageId = "System.ServiceModel.Activities.Configuration.WorkflowIdleElement.BehaviorType", Justification = "Not a configurable property; a property that had to be overridden from abstract parent class")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Configuration",
+            "Configuration102:ConfigurationPropertyAttributeRule",
+            MessageId = "System.ServiceModel.Activities.Configuration.WorkflowIdleElement.BehaviorType",
+            Justification = "Not a configurable property; a property that had to be overridden from abstract parent class"
+        )]
         public override Type BehaviorType
         {
             get { return typeof(WorkflowIdleBehavior); }
@@ -57,18 +69,35 @@ namespace System.ServiceModel.Activities.Configuration
             {
                 if (this.properties == null)
                 {
-                    ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-                    properties.Add(new ConfigurationProperty(TimeToPersistString, typeof(TimeSpan), TimeSpan.MaxValue, new TimeSpanOrInfiniteConverter(), new TimeSpanOrInfiniteValidator(TimeSpan.Zero, TimeSpan.MaxValue), ConfigurationPropertyOptions.None));
-                    properties.Add(new ConfigurationProperty(TimeToUnloadString, typeof(TimeSpan), TimeSpan.Parse(WorkflowIdleBehavior.defaultTimeToUnloadString, CultureInfo.InvariantCulture), new TimeSpanOrInfiniteConverter(), new TimeSpanOrInfiniteValidator(TimeSpan.Zero, TimeSpan.MaxValue), ConfigurationPropertyOptions.None));
+                    ConfigurationPropertyCollection properties =
+                        new ConfigurationPropertyCollection();
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TimeToPersistString,
+                            typeof(TimeSpan),
+                            TimeSpan.MaxValue,
+                            new TimeSpanOrInfiniteConverter(),
+                            new TimeSpanOrInfiniteValidator(TimeSpan.Zero, TimeSpan.MaxValue),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
+                    properties.Add(
+                        new ConfigurationProperty(
+                            TimeToUnloadString,
+                            typeof(TimeSpan),
+                            TimeSpan.Parse(
+                                WorkflowIdleBehavior.defaultTimeToUnloadString,
+                                CultureInfo.InvariantCulture
+                            ),
+                            new TimeSpanOrInfiniteConverter(),
+                            new TimeSpanOrInfiniteValidator(TimeSpan.Zero, TimeSpan.MaxValue),
+                            ConfigurationPropertyOptions.None
+                        )
+                    );
                     this.properties = properties;
                 }
                 return this.properties;
             }
         }
-
     }
 }
-
-
-
-

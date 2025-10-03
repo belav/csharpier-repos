@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Library</OutputType>
     <RootNamespace>ILCompiler</RootNamespace>
@@ -10,11 +9,18 @@
     <Configurations>Debug;Release;Checked</Configurations>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Build.Framework" Version="$(MicrosoftBuildFrameworkVersion)" />
-    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="$(MicrosoftBuildUtilitiesCoreVersion)" />
-    <PackageReference Include="System.Reflection.Metadata" Version="$(SystemReflectionMetadataVersion)" />
+    <PackageReference
+      Include="Microsoft.Build.Framework"
+      Version="$(MicrosoftBuildFrameworkVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Build.Utilities.Core"
+      Version="$(MicrosoftBuildUtilitiesCoreVersion)"
+    />
+    <PackageReference
+      Include="System.Reflection.Metadata"
+      Version="$(SystemReflectionMetadataVersion)"
+    />
   </ItemGroup>
-
 </Project>

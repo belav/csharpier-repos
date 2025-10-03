@@ -15,19 +15,25 @@ namespace System.ComponentModel
         /// Indicates all properties should be refreshed if the property value is changed.
         /// This field is read-only.
         /// </summary>
-        public static readonly RefreshPropertiesAttribute All = new RefreshPropertiesAttribute(RefreshProperties.All);
+        public static readonly RefreshPropertiesAttribute All = new RefreshPropertiesAttribute(
+            RefreshProperties.All
+        );
 
         /// <summary>
         /// Indicates all properties should be invalidated and repainted if the property
         /// value is changed. This field is read-only.
         /// </summary>
-        public static readonly RefreshPropertiesAttribute Repaint = new RefreshPropertiesAttribute(RefreshProperties.Repaint);
+        public static readonly RefreshPropertiesAttribute Repaint = new RefreshPropertiesAttribute(
+            RefreshProperties.Repaint
+        );
 
         /// <summary>
         /// Indicates that by default no properties should be refreshed if the property
         /// value is changed. This field is read-only.
         /// </summary>
-        public static readonly RefreshPropertiesAttribute Default = new RefreshPropertiesAttribute(RefreshProperties.None);
+        public static readonly RefreshPropertiesAttribute Default = new RefreshPropertiesAttribute(
+            RefreshProperties.None
+        );
 
         public RefreshPropertiesAttribute(RefreshProperties refresh)
         {

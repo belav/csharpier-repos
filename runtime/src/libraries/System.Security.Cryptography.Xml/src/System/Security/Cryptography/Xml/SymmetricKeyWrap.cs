@@ -8,15 +8,39 @@ namespace System.Security.Cryptography.Xml
     // abstract class providing symmetric key wrap implementation
     internal static class SymmetricKeyWrap
     {
-        private static readonly byte[] s_rgbTripleDES_KW_IV = { 0x4a, 0xdd, 0xa2, 0x2c, 0x79, 0xe8, 0x21, 0x05 };
-        private static readonly byte[] s_rgbAES_KW_IV = { 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6, 0xa6 };
+        private static readonly byte[] s_rgbTripleDES_KW_IV =
+        {
+            0x4a,
+            0xdd,
+            0xa2,
+            0x2c,
+            0x79,
+            0xe8,
+            0x21,
+            0x05,
+        };
+        private static readonly byte[] s_rgbAES_KW_IV =
+        {
+            0xa6,
+            0xa6,
+            0xa6,
+            0xa6,
+            0xa6,
+            0xa6,
+            0xa6,
+            0xa6,
+        };
 
         //
         // internal static methods
         //
 
         // CMS TripleDES KeyWrap as described in "http://www.w3.org/2001/04/xmlenc#kw-tripledes"
-        [SuppressMessage("Microsoft.Cryptography", "CA5350", Justification = "Explicitly requested by the message contents")]
+        [SuppressMessage(
+            "Microsoft.Cryptography",
+            "CA5350",
+            Justification = "Explicitly requested by the message contents"
+        )]
         internal static byte[] TripleDESKeyWrapEncrypt(byte[] rgbKey, byte[] rgbWrappedKeyData)
         {
             byte[] rgbCKS;
@@ -67,12 +91,22 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        [SuppressMessage("Microsoft.Cryptography", "CA5350", Justification = "Explicitly requested by the message contents")]
-        internal static byte[] TripleDESKeyWrapDecrypt(byte[] rgbKey, byte[] rgbEncryptedWrappedKeyData)
+        [SuppressMessage(
+            "Microsoft.Cryptography",
+            "CA5350",
+            Justification = "Explicitly requested by the message contents"
+        )]
+        internal static byte[] TripleDESKeyWrapDecrypt(
+            byte[] rgbKey,
+            byte[] rgbEncryptedWrappedKeyData
+        )
         {
             // Check to see whether the length of the encrypted key is reasonable
-            if (rgbEncryptedWrappedKeyData.Length != 32 && rgbEncryptedWrappedKeyData.Length != 40
-                && rgbEncryptedWrappedKeyData.Length != 48)
+            if (
+                rgbEncryptedWrappedKeyData.Length != 32
+                && rgbEncryptedWrappedKeyData.Length != 40
+                && rgbEncryptedWrappedKeyData.Length != 48
+            )
                 throw new CryptographicException(SR.Cryptography_Xml_KW_BadKeySize);
 
             TripleDES? tripleDES = null;
@@ -86,7 +120,11 @@ namespace System.Security.Cryptography.Xml
                 tripleDES.Padding = PaddingMode.None;
                 dec1 = tripleDES.CreateDecryptor(rgbKey, s_rgbTripleDES_KW_IV);
 
-                byte[] temp2 = dec1.TransformFinalBlock(rgbEncryptedWrappedKeyData, 0, rgbEncryptedWrappedKeyData.Length);
+                byte[] temp2 = dec1.TransformFinalBlock(
+                    rgbEncryptedWrappedKeyData,
+                    0,
+                    rgbEncryptedWrappedKeyData.Length
+                );
                 Array.Reverse(temp2);
                 // Get the IV and temp1
                 byte[] rgbIV = new byte[8];
@@ -103,7 +141,11 @@ namespace System.Security.Cryptography.Xml
                 using (var sha = SHA1.Create())
                 {
                     byte[] rgbCKS = sha.ComputeHash(rgbWrappedKeyData);
-                    for (int index = rgbWrappedKeyData.Length, index1 = 0; index < rgbWKCKS.Length; index++, index1++)
+                    for (
+                        int index = rgbWrappedKeyData.Length, index1 = 0;
+                        index < rgbWKCKS.Length;
+                        index++, index1++
+                    )
                         if (rgbWKCKS[index] != rgbCKS[index1])
                             throw new CryptographicException(SR.Cryptography_Xml_BadWrappedKeySize);
                     return rgbWrappedKeyData;
@@ -142,7 +184,13 @@ namespace System.Security.Cryptography.Xml
                     // temp = 0xa6a6a6a6a6a6a6a6 | P(1)
                     byte[] temp = new byte[s_rgbAES_KW_IV.Length + rgbWrappedKeyData.Length];
                     Buffer.BlockCopy(s_rgbAES_KW_IV, 0, temp, 0, s_rgbAES_KW_IV.Length);
-                    Buffer.BlockCopy(rgbWrappedKeyData, 0, temp, s_rgbAES_KW_IV.Length, rgbWrappedKeyData.Length);
+                    Buffer.BlockCopy(
+                        rgbWrappedKeyData,
+                        0,
+                        temp,
+                        s_rgbAES_KW_IV.Length,
+                        rgbWrappedKeyData.Length
+                    );
                     return enc.TransformFinalBlock(temp, 0, temp.Length);
                 }
                 // second case: more than 1 block
@@ -203,7 +251,11 @@ namespace System.Security.Cryptography.Xml
                 // special case: only 1 block -- 8 bytes
                 if (N == 1)
                 {
-                    byte[] temp = dec.TransformFinalBlock(rgbEncryptedWrappedKeyData, 0, rgbEncryptedWrappedKeyData.Length);
+                    byte[] temp = dec.TransformFinalBlock(
+                        rgbEncryptedWrappedKeyData,
+                        0,
+                        rgbEncryptedWrappedKeyData.Length
+                    );
                     // checksum the key
                     for (int index = 0; index < 8; index++)
                         if (temp[index] != s_rgbAES_KW_IV[index])

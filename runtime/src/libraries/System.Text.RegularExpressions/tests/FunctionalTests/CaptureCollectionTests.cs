@@ -39,7 +39,8 @@ namespace System.Text.RegularExpressions.Tests
 
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             enumerator.Reset();
@@ -63,7 +64,10 @@ namespace System.Text.RegularExpressions.Tests
             CaptureCollection captures = regex.Match("aaabbccccccccccaaaabc").Captures;
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("i", () => captures[-1]);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("i", () => captures[captures.Count]);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "i",
+                () => captures[captures.Count]
+            );
         }
 
         [Fact]
@@ -107,10 +111,16 @@ namespace System.Text.RegularExpressions.Tests
             ICollection collection = regex.Match("aaabbccccccccccaaaabc").Captures;
 
             // Array is null
-            AssertExtensions.Throws<ArgumentNullException>("array", () => collection.CopyTo(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => collection.CopyTo(null, 0)
+            );
 
             // Array is multidimensional
-            AssertExtensions.Throws<ArgumentException>(null, () => collection.CopyTo(new object[10, 10], 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => collection.CopyTo(new object[10, 10], 0)
+            );
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
@@ -120,11 +130,17 @@ namespace System.Text.RegularExpressions.Tests
             }
 
             // Index < 0
-            Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(new object[collection.Count], -1));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                collection.CopyTo(new object[collection.Count], -1)
+            );
 
             // Invalid index + length
-            Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(new object[collection.Count], 1));
-            Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(new object[collection.Count + 1], 2));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                collection.CopyTo(new object[collection.Count], 1)
+            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                collection.CopyTo(new object[collection.Count + 1], 2)
+            );
         }
 
         private static CaptureCollection CreateCollection()

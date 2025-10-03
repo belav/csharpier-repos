@@ -10,9 +10,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class PolicyImporterElement : ConfigurationElement
     {
-        public PolicyImporterElement()
-        {
-        }
+        public PolicyImporterElement() { }
 
         public PolicyImporterElement(string type)
         {
@@ -21,17 +19,21 @@ namespace System.ServiceModel.Configuration
 
         public PolicyImporterElement(Type type)
         {
-            SubclassTypeValidator validator = new SubclassTypeValidator(typeof(IPolicyImportExtension));
+            SubclassTypeValidator validator = new SubclassTypeValidator(
+                typeof(IPolicyImportExtension)
+            );
             validator.Validate(type);
             this.Type = type.AssemblyQualifiedName;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Type, Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Type,
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
         [StringValidator(MinLength = 1)]
         public string Type
         {
-            get
-            { return (string)base[ConfigurationStrings.Type]; }
+            get { return (string)base[ConfigurationStrings.Type]; }
             set
             {
                 if (String.IsNullOrEmpty(value))

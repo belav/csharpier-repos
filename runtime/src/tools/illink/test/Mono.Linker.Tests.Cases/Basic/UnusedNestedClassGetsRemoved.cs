@@ -1,14 +1,9 @@
-﻿
-namespace Mono.Linker.Tests.Cases.Basic
+﻿namespace Mono.Linker.Tests.Cases.Basic
 {
-	public class UnusedNestedClassGetsRemoved
-	{
-		public static void Main ()
-		{
-		}
+    public class UnusedNestedClassGetsRemoved
+    {
+        public static void Main() { }
 
-		class Unused
-		{
-		}
-	}
+        class Unused { }
+    }
 }

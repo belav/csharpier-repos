@@ -14,7 +14,7 @@ namespace System.SpanTests
         {
             Assert.Equal(0, ReadOnlySpan<byte>.Empty.Count<byte>(0));
         }
-        
+
         [Fact]
         public static void ZeroLengthCount_RosByte()
         {
@@ -23,7 +23,7 @@ namespace System.SpanTests
                 Assert.Equal(0, ReadOnlySpan<byte>.Empty.Count(new byte[i]));
             }
         }
-        
+
         [Fact]
         public static void ZeroLengthNeedleCount_RosByte()
         {
@@ -31,7 +31,7 @@ namespace System.SpanTests
 
             Assert.Equal(0, span.Count<byte>(ReadOnlySpan<byte>.Empty));
         }
-        
+
         [Fact]
         public static void DefaultFilledCount_Byte()
         {
@@ -41,23 +41,25 @@ namespace System.SpanTests
                 Assert.Equal(length, span.Count((byte)0));
             }
         }
-        
+
         [Fact]
         public static void DefaultFilledCount_RosByte()
         {
             foreach (int length in new int[] { 0, 1, 7, 8, 9, 15, 16, 17, 31, 32, 33, 255, 256 })
             {
                 var span = new ReadOnlySpan<byte>(new byte[length]);
-                Assert.Equal(length / 2,  span.Count(new byte[2]));
+                Assert.Equal(length / 2, span.Count(new byte[2]));
             }
         }
-        
+
         [Fact]
         public static void TestCount_Byte()
         {
             foreach (int length in new int[] { 0, 1, 7, 8, 9, 15, 16, 17, 31, 32, 33, 255, 256 })
             {
-                var span = new ReadOnlySpan<byte>(Enumerable.Range(1, length).Select(i => (byte)i).ToArray());
+                var span = new ReadOnlySpan<byte>(
+                    Enumerable.Range(1, length).Select(i => (byte)i).ToArray()
+                );
 
                 foreach (byte target in span)
                 {
@@ -65,27 +67,34 @@ namespace System.SpanTests
                 }
             }
         }
-        
+
         [Fact]
         public static void TestCount_RosByte()
         {
             foreach (int length in new int[] { 0, 1, 7, 8, 9, 15, 16, 17, 31, 32, 33, 255, 256 })
             {
-                var span = new ReadOnlySpan<byte>(Enumerable.Range(1, length).Select(i => (byte)i).ToArray());
+                var span = new ReadOnlySpan<byte>(
+                    Enumerable.Range(1, length).Select(i => (byte)i).ToArray()
+                );
 
                 for (int targetIndex = 0; targetIndex < length - 1; targetIndex++)
                 {
-                    Assert.Equal(1, span.Count(new byte[] { span[targetIndex], span[targetIndex + 1] }));
+                    Assert.Equal(
+                        1,
+                        span.Count(new byte[] { span[targetIndex], span[targetIndex + 1] })
+                    );
                 }
             }
         }
-        
+
         [Fact]
         public static void TestSingleValueCount_Byte()
         {
             foreach (int length in new int[] { 0, 1, 7, 8, 9, 15, 16, 17, 31, 32, 33, 255, 256 })
             {
-                var span = new ReadOnlySpan<byte>(Enumerable.Range(1, length).Select(i => (byte)i).ToArray());
+                var span = new ReadOnlySpan<byte>(
+                    Enumerable.Range(1, length).Select(i => (byte)i).ToArray()
+                );
 
                 foreach (byte value in span)
                 {
@@ -177,7 +186,7 @@ namespace System.SpanTests
                 Assert.Equal(span.Length, span.Count<byte>(5));
             }
         }
-        
+
         [Fact]
         public static void TestAlignmentCount_RosByte()
         {
@@ -212,7 +221,7 @@ namespace System.SpanTests
                 Assert.Equal(2, span.Count<byte>(200));
             }
         }
-        
+
         [Fact]
         public static void TestMultipleCount_RosByte()
         {
@@ -256,13 +265,12 @@ namespace System.SpanTests
                 Assert.Equal(0, span.Count<byte>(new byte[] { 99, 99 }));
             }
         }
-        
+
         [Fact]
         public static void TestOverlapDoNotCount_RosByte()
         {
             byte[] a = new byte[10];
             Array.Fill<byte>(a, 6);
-
 
             var span = new ReadOnlySpan<byte>(a);
             Assert.Equal(5, span.Count(new byte[] { 6, 6 }));

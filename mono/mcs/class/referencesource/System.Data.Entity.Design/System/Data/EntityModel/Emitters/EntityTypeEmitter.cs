@@ -8,12 +8,11 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.CodeDom;
+using System.Collections.Generic;
 using System.Data;
-using Som=System.Data.EntityModel.SchemaObjectModel;
 using System.Data.Metadata.Edm;
-
+using Som = System.Data.EntityModel.SchemaObjectModel;
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -24,27 +23,31 @@ namespace System.Data.EntityModel.Emitters
     {
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="generator"></param>
         /// <param name="itemType"></param>
         public EntityTypeEmitter(ClientApiGenerator generator, EntityType entity)
-        : base(generator, entity)
-        {
-        }
+            : base(generator, entity) { }
         #endregion
 
         #region Protected Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="typeDecl"></param>
         protected override void EmitProperties(CodeTypeDeclaration typeDecl)
         {
             base.EmitProperties(typeDecl);
-            foreach ( NavigationProperty navigationProperty in Item.GetDeclaredOnlyMembers<NavigationProperty>() )
+            foreach (
+                NavigationProperty navigationProperty in Item.GetDeclaredOnlyMembers<NavigationProperty>()
+            )
             {
-                NavigationPropertyEmitter navigationPropertyEmitter = new NavigationPropertyEmitter(Generator, navigationProperty, UsingStandardBaseClass);
+                NavigationPropertyEmitter navigationPropertyEmitter = new NavigationPropertyEmitter(
+                    Generator,
+                    navigationProperty,
+                    UsingStandardBaseClass
+                );
                 navigationPropertyEmitter.Emit(typeDecl);
             }
         }
@@ -53,34 +56,34 @@ namespace System.Data.EntityModel.Emitters
         {
             CodeTypeDeclarationCollection typeDecls = base.EmitApiClass();
 
-            if ( Item.KeyMembers.Count > 0 && typeDecls.Count == 1 )
+            if (Item.KeyMembers.Count > 0 && typeDecls.Count == 1)
             {
                 // generate xml comments for the key properties
                 CodeTypeDeclaration typeDecl = typeDecls[0];
-                typeDecl.Comments.Add( new CodeCommentStatement( "<KeyProperties>", true ) );
-                foreach ( EdmMember keyProperty in Item.KeyMembers)
+                typeDecl.Comments.Add(new CodeCommentStatement("<KeyProperties>", true));
+                foreach (EdmMember keyProperty in Item.KeyMembers)
                 {
                     string name = keyProperty.Name;
-                    typeDecl.Comments.Add( new CodeCommentStatement( name, true ) );
+                    typeDecl.Comments.Add(new CodeCommentStatement(name, true));
                 }
-                typeDecl.Comments.Add( new CodeCommentStatement( "</KeyProperties>", true ) );
+                typeDecl.Comments.Add(new CodeCommentStatement("</KeyProperties>", true));
             }
 
             return typeDecls;
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="typeDecl"></param>
         protected override void EmitTypeAttributes(CodeTypeDeclaration typeDecl)
         {
-            Generator.AttributeEmitter.EmitTypeAttributes( this, typeDecl );
-            base.EmitTypeAttributes( typeDecl );
+            Generator.AttributeEmitter.EmitTypeAttributes(this, typeDecl);
+            base.EmitTypeAttributes(typeDecl);
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
         protected override CodeTypeReference GetBaseType()
@@ -100,7 +103,6 @@ namespace System.Data.EntityModel.Emitters
         #endregion
 
 
-
         #region Public Properties
         #endregion
 
@@ -114,15 +116,9 @@ namespace System.Data.EntityModel.Emitters
         /// <value></value>
         public new EntityType Item
         {
-            get
-            {
-                return base.Item as EntityType;
-            }
+            get { return base.Item as EntityType; }
         }
 
         #endregion
-
-
-
     }
 }

@@ -20,15 +20,24 @@ namespace System.Web.Http.Tracing.Tracers
     /// Tracer to wrap a <see cref="FormatterParameterBinding"/>.
     /// Its primary purpose is to intercept binding requests so that it can create tracers for the formatters.
     /// </summary>
-    internal class FormatterParameterBindingTracer : FormatterParameterBinding, IDecorator<FormatterParameterBinding>
+    internal class FormatterParameterBindingTracer
+        : FormatterParameterBinding,
+            IDecorator<FormatterParameterBinding>
     {
         private const string ExecuteBindingAsyncMethodName = "ExecuteBindingAsync";
 
         private readonly FormatterParameterBinding _innerBinding;
         private readonly ITraceWriter _traceWriter;
 
-        public FormatterParameterBindingTracer(FormatterParameterBinding innerBinding, ITraceWriter traceWriter)
-            : base(innerBinding.Descriptor, innerBinding.Formatters, innerBinding.BodyModelValidator)
+        public FormatterParameterBindingTracer(
+            FormatterParameterBinding innerBinding,
+            ITraceWriter traceWriter
+        )
+            : base(
+                innerBinding.Descriptor,
+                innerBinding.Formatters,
+                innerBinding.BodyModelValidator
+            )
         {
             Contract.Assert(innerBinding != null);
             Contract.Assert(traceWriter != null);
@@ -52,22 +61,45 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerBinding.WillReadBody; }
         }
 
-        public override Task<object> ReadContentAsync(HttpRequestMessage request, Type type,
-            IEnumerable<MediaTypeFormatter> formatters, IFormatterLogger formatterLogger)
+        public override Task<object> ReadContentAsync(
+            HttpRequestMessage request,
+            Type type,
+            IEnumerable<MediaTypeFormatter> formatters,
+            IFormatterLogger formatterLogger
+        )
         {
             // Intercept this method solely to wrap formatters with request-aware formatter tracers
             // There is no other interception point where a request and a formatter are paired.
-            return _innerBinding.ReadContentAsync(request, type, CreateFormatterTracers(request, formatters), formatterLogger);
+            return _innerBinding.ReadContentAsync(
+                request,
+                type,
+                CreateFormatterTracers(request, formatters),
+                formatterLogger
+            );
         }
 
-        public override Task<object> ReadContentAsync(HttpRequestMessage request, Type type,
-            IEnumerable<MediaTypeFormatter> formatters, IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+        public override Task<object> ReadContentAsync(
+            HttpRequestMessage request,
+            Type type,
+            IEnumerable<MediaTypeFormatter> formatters,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
-            return _innerBinding.ReadContentAsync(request, type, formatters, formatterLogger, cancellationToken);
+            return _innerBinding.ReadContentAsync(
+                request,
+                type,
+                formatters,
+                formatterLogger,
+                cancellationToken
+            );
         }
 
-        public override Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext,
-            CancellationToken cancellationToken)
+        public override Task ExecuteBindingAsync(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             return _traceWriter.TraceBeginEndAsync(
                 actionContext.Request,
@@ -77,30 +109,46 @@ namespace System.Web.Http.Tracing.Tracers
                 ExecuteBindingAsyncMethodName,
                 beginTrace: (tr) =>
                 {
-                    tr.Message = Error.Format(SRResources.TraceBeginParameterBind,
-                                              _innerBinding.Descriptor.ParameterName);
+                    tr.Message = Error.Format(
+                        SRResources.TraceBeginParameterBind,
+                        _innerBinding.Descriptor.ParameterName
+                    );
                 },
-
-                execute: () => _innerBinding.ExecuteBindingAsync(metadataProvider, actionContext, cancellationToken),
-
+                execute: () =>
+                    _innerBinding.ExecuteBindingAsync(
+                        metadataProvider,
+                        actionContext,
+                        cancellationToken
+                    ),
                 endTrace: (tr) =>
                 {
                     string parameterName = _innerBinding.Descriptor.ParameterName;
                     tr.Message = actionContext.ActionArguments.ContainsKey(parameterName)
-                                    ? Error.Format(SRResources.TraceEndParameterBind, parameterName,
-                                                    FormattingUtilities.ValueToString(actionContext.ActionArguments[parameterName], CultureInfo.CurrentCulture))
-                                    : Error.Format(SRResources.TraceEndParameterBindNoBind,
-                                                    parameterName);
+                        ? Error.Format(
+                            SRResources.TraceEndParameterBind,
+                            parameterName,
+                            FormattingUtilities.ValueToString(
+                                actionContext.ActionArguments[parameterName],
+                                CultureInfo.CurrentCulture
+                            )
+                        )
+                        : Error.Format(SRResources.TraceEndParameterBindNoBind, parameterName);
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
 
-        private IEnumerable<MediaTypeFormatter> CreateFormatterTracers(HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
+        private IEnumerable<MediaTypeFormatter> CreateFormatterTracers(
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
         {
             List<MediaTypeFormatter> formatterTracers = new List<MediaTypeFormatter>();
             foreach (MediaTypeFormatter formatter in formatters)
             {
-                formatterTracers.Add(MediaTypeFormatterTracer.CreateTracer(formatter, _traceWriter, request));
+                formatterTracers.Add(
+                    MediaTypeFormatterTracer.CreateTracer(formatter, _traceWriter, request)
+                );
             }
 
             return formatterTracers;

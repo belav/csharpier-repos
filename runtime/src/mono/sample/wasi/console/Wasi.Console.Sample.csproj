@@ -6,6 +6,5 @@
     <InvariantGlobalization>true</InvariantGlobalization>
     -->
   </PropertyGroup>
-
   <Target Name="RunSample" DependsOnTargets="RunSampleWithWasmtime" />
 </Project>

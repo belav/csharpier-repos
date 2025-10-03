@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,15 +29,25 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices.Internal {
+namespace System.EnterpriseServices.Internal
+{
+    [Guid("d8013ff0-730b-45e2-ba24-874b7242c425")]
+    public interface IComSoapMetadata
+    {
+        [return: MarshalAs(UnmanagedType.BStr)]
+        [DispId(1)]
+        string Generate(
+            [MarshalAs(UnmanagedType.BStr)] string SrcTypeLibFileName,
+            [MarshalAs(UnmanagedType.BStr)] string OutPath
+        );
 
-	[Guid("d8013ff0-730b-45e2-ba24-874b7242c425")]
-	public interface IComSoapMetadata {
-		[return: MarshalAs(UnmanagedType.BStr)]
-		[DispId(1)]
-		string Generate ([MarshalAs(UnmanagedType.BStr)] string SrcTypeLibFileName, [MarshalAs(UnmanagedType.BStr)] string OutPath);
-		[return: MarshalAs(UnmanagedType.BStr)]
-		[DispId(2)]
-		string GenerateSigned ([MarshalAs(UnmanagedType.BStr)] string SrcTypeLibFileName, [MarshalAs(UnmanagedType.BStr)] string OutPath, [MarshalAs(UnmanagedType.Bool)] bool InstallGac, [MarshalAs(UnmanagedType.BStr)] out string Error);
-	}
+        [return: MarshalAs(UnmanagedType.BStr)]
+        [DispId(2)]
+        string GenerateSigned(
+            [MarshalAs(UnmanagedType.BStr)] string SrcTypeLibFileName,
+            [MarshalAs(UnmanagedType.BStr)] string OutPath,
+            [MarshalAs(UnmanagedType.Bool)] bool InstallGac,
+            [MarshalAs(UnmanagedType.BStr)] out string Error
+        );
+    }
 }

@@ -26,11 +26,13 @@ namespace ILCompiler
         }
 
         private MetadataType _arrayOfTType;
+
         private MetadataType InitializeArrayOfTType(TypeSystemEntity contextEntity)
         {
             _arrayOfTType = contextEntity.Context.SystemModule.GetType("System", "Array`1");
             return _arrayOfTType;
         }
+
         private MetadataType GetArrayOfTType(TypeSystemEntity contextEntity)
         {
             if (_arrayOfTType != null)
@@ -52,8 +54,11 @@ namespace ILCompiler
                     return true;
 
                 // Also don't expose the ValueType.__GetFieldOverride method.
-                if (ecmaMethod.Name == Internal.IL.Stubs.ValueTypeGetFieldHelperMethodOverride.MetadataName
-                    && ecmaMethod.OwningType.IsWellKnownType(WellKnownType.ValueType))
+                if (
+                    ecmaMethod.Name
+                        == Internal.IL.Stubs.ValueTypeGetFieldHelperMethodOverride.MetadataName
+                    && ecmaMethod.OwningType.IsWellKnownType(WellKnownType.ValueType)
+                )
                     return true;
 
                 return false;

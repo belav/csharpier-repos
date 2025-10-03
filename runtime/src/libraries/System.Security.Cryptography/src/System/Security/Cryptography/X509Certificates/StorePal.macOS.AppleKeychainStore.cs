@@ -35,12 +35,20 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 HashSet<X509Certificate2> dedupedCerts = new HashSet<X509Certificate2>();
 
-                using (SafeCFArrayHandle identities = Interop.AppleCrypto.KeychainEnumerateIdentities(_keychainHandle))
+                using (
+                    SafeCFArrayHandle identities = Interop.AppleCrypto.KeychainEnumerateIdentities(
+                        _keychainHandle
+                    )
+                )
                 {
                     ReadCollection(identities, dedupedCerts);
                 }
 
-                using (SafeCFArrayHandle certs = Interop.AppleCrypto.KeychainEnumerateCerts(_keychainHandle))
+                using (
+                    SafeCFArrayHandle certs = Interop.AppleCrypto.KeychainEnumerateCerts(
+                        _keychainHandle
+                    )
+                )
                 {
                     ReadCollection(certs, dedupedCerts);
                 }
@@ -58,7 +66,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                 AppleCertificatePal applePal = (AppleCertificatePal)cert;
 
-                var handle = (SafeKeychainItemHandle?)applePal.IdentityHandle ?? applePal.CertificateHandle;
+                var handle =
+                    (SafeKeychainItemHandle?)applePal.IdentityHandle ?? applePal.CertificateHandle;
                 Interop.AppleCrypto.X509StoreAddCertificate(handle, _keychainHandle);
             }
 
@@ -66,7 +75,8 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 AppleCertificatePal applePal = (AppleCertificatePal)cert;
 
-                var handle = (SafeKeychainItemHandle?)applePal.IdentityHandle ?? applePal.CertificateHandle;
+                var handle =
+                    (SafeKeychainItemHandle?)applePal.IdentityHandle ?? applePal.CertificateHandle;
                 Interop.AppleCrypto.X509StoreRemoveCertificate(handle, _keychainHandle, _readonly);
             }
 
@@ -74,7 +84,10 @@ namespace System.Security.Cryptography.X509Certificates
 
             public static AppleKeychainStore OpenDefaultKeychain(OpenFlags openFlags)
             {
-                return new AppleKeychainStore(Interop.AppleCrypto.SecKeychainCopyDefault(), openFlags);
+                return new AppleKeychainStore(
+                    Interop.AppleCrypto.SecKeychainCopyDefault(),
+                    openFlags
+                );
             }
 
             public static AppleKeychainStore OpenSystemSharedKeychain(OpenFlags openFlags)
@@ -83,14 +96,26 @@ namespace System.Security.Cryptography.X509Certificates
                 return OpenKeychain(SharedSystemKeychainPath, openFlags);
             }
 
-            public static AppleKeychainStore CreateOrOpenKeychain(string keychainPath, OpenFlags openFlags)
+            public static AppleKeychainStore CreateOrOpenKeychain(
+                string keychainPath,
+                OpenFlags openFlags
+            )
             {
-                return new AppleKeychainStore(Interop.AppleCrypto.CreateOrOpenKeychain(keychainPath, !openFlags.HasFlag(OpenFlags.OpenExistingOnly)), openFlags);
+                return new AppleKeychainStore(
+                    Interop.AppleCrypto.CreateOrOpenKeychain(
+                        keychainPath,
+                        !openFlags.HasFlag(OpenFlags.OpenExistingOnly)
+                    ),
+                    openFlags
+                );
             }
 
             private static AppleKeychainStore OpenKeychain(string keychainPath, OpenFlags openFlags)
             {
-                return new AppleKeychainStore(Interop.AppleCrypto.SecKeychainOpen(keychainPath), openFlags);
+                return new AppleKeychainStore(
+                    Interop.AppleCrypto.SecKeychainOpen(keychainPath),
+                    openFlags
+                );
             }
         }
     }

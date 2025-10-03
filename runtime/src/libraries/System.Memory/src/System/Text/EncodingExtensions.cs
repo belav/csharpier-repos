@@ -31,7 +31,11 @@ namespace System.Text
         /// <param name="writer">The buffer to which the encoded bytes will be written.</param>
         /// <exception cref="EncoderFallbackException">Thrown if <paramref name="chars"/> contains data that cannot be encoded and <paramref name="encoding"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static long GetBytes(this Encoding encoding, ReadOnlySpan<char> chars, IBufferWriter<byte> writer)
+        public static long GetBytes(
+            this Encoding encoding,
+            ReadOnlySpan<char> chars,
+            IBufferWriter<byte> writer
+        )
         {
             ArgumentNullException.ThrowIfNull(encoding);
             ArgumentNullException.ThrowIfNull(writer);
@@ -52,7 +56,14 @@ namespace System.Text
             {
                 // Allocate a stateful Encoder instance and chunk this.
 
-                Convert(encoding.GetEncoder(), chars, writer, flush: true, out long totalBytesWritten, out _);
+                Convert(
+                    encoding.GetEncoder(),
+                    chars,
+                    writer,
+                    flush: true,
+                    out long totalBytesWritten,
+                    out _
+                );
                 return totalBytesWritten;
             }
         }
@@ -67,7 +78,11 @@ namespace System.Text
         /// <returns>The number of bytes written to <paramref name="writer"/>.</returns>
         /// <exception cref="EncoderFallbackException">Thrown if <paramref name="chars"/> contains data that cannot be encoded and <paramref name="encoding"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static long GetBytes(this Encoding encoding, in ReadOnlySequence<char> chars, IBufferWriter<byte> writer)
+        public static long GetBytes(
+            this Encoding encoding,
+            in ReadOnlySequence<char> chars,
+            IBufferWriter<byte> writer
+        )
         {
             ArgumentNullException.ThrowIfNull(encoding);
             ArgumentNullException.ThrowIfNull(writer);
@@ -81,7 +96,14 @@ namespace System.Text
             }
             else
             {
-                Convert(encoding.GetEncoder(), chars, writer, flush: true, out long bytesWritten, out _);
+                Convert(
+                    encoding.GetEncoder(),
+                    chars,
+                    writer,
+                    flush: true,
+                    out long bytesWritten,
+                    out _
+                );
                 return bytesWritten;
             }
         }
@@ -97,7 +119,11 @@ namespace System.Text
         /// <exception cref="ArgumentException">Thrown if <paramref name="bytes"/> is not large enough to contain the encoded form of <paramref name="chars"/>.</exception>
         /// <exception cref="EncoderFallbackException">Thrown if <paramref name="chars"/> contains data that cannot be encoded and <paramref name="encoding"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static int GetBytes(this Encoding encoding, in ReadOnlySequence<char> chars, Span<byte> bytes)
+        public static int GetBytes(
+            this Encoding encoding,
+            in ReadOnlySequence<char> chars,
+            Span<byte> bytes
+        )
         {
             ArgumentNullException.ThrowIfNull(encoding);
 
@@ -119,10 +145,17 @@ namespace System.Text
 
                 do
                 {
-                    remainingChars.GetFirstSpan(out ReadOnlySpan<char> firstSpan, out SequencePosition next);
+                    remainingChars.GetFirstSpan(
+                        out ReadOnlySpan<char> firstSpan,
+                        out SequencePosition next
+                    );
                     isFinalSegment = remainingChars.IsSingleSegment;
 
-                    int bytesWrittenJustNow = encoder.GetBytes(firstSpan, bytes, flush: isFinalSegment);
+                    int bytesWrittenJustNow = encoder.GetBytes(
+                        firstSpan,
+                        bytes,
+                        flush: isFinalSegment
+                    );
                     bytes = bytes.Slice(bytesWrittenJustNow);
                     remainingChars = remainingChars.Slice(next);
                 } while (!isFinalSegment);
@@ -171,12 +204,22 @@ namespace System.Text
 
                 do
                 {
-                    remainingChars.GetFirstSpan(out ReadOnlySpan<char> firstSpan, out SequencePosition next);
+                    remainingChars.GetFirstSpan(
+                        out ReadOnlySpan<char> firstSpan,
+                        out SequencePosition next
+                    );
                     isFinalSegment = remainingChars.IsSingleSegment;
 
-                    int byteCountThisIteration = encoder.GetByteCount(firstSpan, flush: isFinalSegment);
+                    int byteCountThisIteration = encoder.GetByteCount(
+                        firstSpan,
+                        flush: isFinalSegment
+                    );
                     byte[] rentedArray = ArrayPool<byte>.Shared.Rent(byteCountThisIteration);
-                    int actualBytesWrittenThisIteration = encoder.GetBytes(firstSpan, rentedArray, flush: isFinalSegment); // could throw ArgumentException if overflow would occur
+                    int actualBytesWrittenThisIteration = encoder.GetBytes(
+                        firstSpan,
+                        rentedArray,
+                        flush: isFinalSegment
+                    ); // could throw ArgumentException if overflow would occur
                     listOfSegments.Add((rentedArray, actualBytesWrittenThisIteration));
 
                     totalByteCount += actualBytesWrittenThisIteration;
@@ -222,7 +265,11 @@ namespace System.Text
         /// <returns>The number of chars written to <paramref name="writer"/>.</returns>
         /// <exception cref="DecoderFallbackException">Thrown if <paramref name="bytes"/> contains data that cannot be decoded and <paramref name="encoding"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static long GetChars(this Encoding encoding, ReadOnlySpan<byte> bytes, IBufferWriter<char> writer)
+        public static long GetChars(
+            this Encoding encoding,
+            ReadOnlySpan<byte> bytes,
+            IBufferWriter<char> writer
+        )
         {
             ArgumentNullException.ThrowIfNull(encoding);
             ArgumentNullException.ThrowIfNull(writer);
@@ -243,7 +290,14 @@ namespace System.Text
             {
                 // Allocate a stateful Decoder instance and chunk this.
 
-                Convert(encoding.GetDecoder(), bytes, writer, flush: true, out long totalCharsWritten, out _);
+                Convert(
+                    encoding.GetDecoder(),
+                    bytes,
+                    writer,
+                    flush: true,
+                    out long totalCharsWritten,
+                    out _
+                );
                 return totalCharsWritten;
             }
         }
@@ -258,7 +312,11 @@ namespace System.Text
         /// <returns>The number of chars written to <paramref name="writer"/>.</returns>
         /// <exception cref="DecoderFallbackException">Thrown if <paramref name="bytes"/> contains data that cannot be decoded and <paramref name="encoding"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static long GetChars(this Encoding encoding, in ReadOnlySequence<byte> bytes, IBufferWriter<char> writer)
+        public static long GetChars(
+            this Encoding encoding,
+            in ReadOnlySequence<byte> bytes,
+            IBufferWriter<char> writer
+        )
         {
             ArgumentNullException.ThrowIfNull(encoding);
             ArgumentNullException.ThrowIfNull(writer);
@@ -272,7 +330,14 @@ namespace System.Text
             }
             else
             {
-                Convert(encoding.GetDecoder(), bytes, writer, flush: true, out long charsWritten, out _);
+                Convert(
+                    encoding.GetDecoder(),
+                    bytes,
+                    writer,
+                    flush: true,
+                    out long charsWritten,
+                    out _
+                );
                 return charsWritten;
             }
         }
@@ -288,7 +353,11 @@ namespace System.Text
         /// <exception cref="ArgumentException">Thrown if <paramref name="chars"/> is not large enough to contain the encoded form of <paramref name="bytes"/>.</exception>
         /// <exception cref="DecoderFallbackException">Thrown if <paramref name="bytes"/> contains data that cannot be decoded and <paramref name="encoding"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static int GetChars(this Encoding encoding, in ReadOnlySequence<byte> bytes, Span<char> chars)
+        public static int GetChars(
+            this Encoding encoding,
+            in ReadOnlySequence<byte> bytes,
+            Span<char> chars
+        )
         {
             ArgumentNullException.ThrowIfNull(encoding);
 
@@ -310,10 +379,17 @@ namespace System.Text
 
                 do
                 {
-                    remainingBytes.GetFirstSpan(out ReadOnlySpan<byte> firstSpan, out SequencePosition next);
+                    remainingBytes.GetFirstSpan(
+                        out ReadOnlySpan<byte> firstSpan,
+                        out SequencePosition next
+                    );
                     isFinalSegment = remainingBytes.IsSingleSegment;
 
-                    int charsWrittenJustNow = decoder.GetChars(firstSpan, chars, flush: isFinalSegment);
+                    int charsWrittenJustNow = decoder.GetChars(
+                        firstSpan,
+                        chars,
+                        flush: isFinalSegment
+                    );
                     chars = chars.Slice(charsWrittenJustNow);
                     remainingBytes = remainingBytes.Slice(next);
                 } while (!isFinalSegment);
@@ -358,12 +434,22 @@ namespace System.Text
 
                 do
                 {
-                    remainingBytes.GetFirstSpan(out ReadOnlySpan<byte> firstSpan, out SequencePosition next);
+                    remainingBytes.GetFirstSpan(
+                        out ReadOnlySpan<byte> firstSpan,
+                        out SequencePosition next
+                    );
                     isFinalSegment = remainingBytes.IsSingleSegment;
 
-                    int charCountThisIteration = decoder.GetCharCount(firstSpan, flush: isFinalSegment); // could throw ArgumentException if overflow would occur
+                    int charCountThisIteration = decoder.GetCharCount(
+                        firstSpan,
+                        flush: isFinalSegment
+                    ); // could throw ArgumentException if overflow would occur
                     char[] rentedArray = ArrayPool<char>.Shared.Rent(charCountThisIteration);
-                    int actualCharsWrittenThisIteration = decoder.GetChars(firstSpan, rentedArray, flush: isFinalSegment);
+                    int actualCharsWrittenThisIteration = decoder.GetChars(
+                        firstSpan,
+                        rentedArray,
+                        flush: isFinalSegment
+                    );
                     listOfSegments.Add((rentedArray, actualCharsWrittenThisIteration));
 
                     totalCharCount += actualCharsWrittenThisIteration;
@@ -383,17 +469,21 @@ namespace System.Text
                 // Now build up the string to return, then release all of our scratch buffers
                 // back to the shared pool.
 
-                return string.Create(totalCharCount, listOfSegments, (span, listOfSegments) =>
-                {
-                    foreach ((char[] array, int length) in listOfSegments)
+                return string.Create(
+                    totalCharCount,
+                    listOfSegments,
+                    (span, listOfSegments) =>
                     {
-                        array.AsSpan(0, length).CopyTo(span);
-                        ArrayPool<char>.Shared.Return(array);
-                        span = span.Slice(length);
-                    }
+                        foreach ((char[] array, int length) in listOfSegments)
+                        {
+                            array.AsSpan(0, length).CopyTo(span);
+                            ArrayPool<char>.Shared.Return(array);
+                            span = span.Slice(length);
+                        }
 
-                    Debug.Assert(span.IsEmpty, "Over-allocated the string instance?");
-                });
+                        Debug.Assert(span.IsEmpty, "Over-allocated the string instance?");
+                    }
+                );
             }
         }
 
@@ -411,7 +501,14 @@ namespace System.Text
         /// </param>
         /// <exception cref="EncoderFallbackException">Thrown if <paramref name="chars"/> contains data that cannot be encoded and <paramref name="encoder"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static void Convert(this Encoder encoder, ReadOnlySpan<char> chars, IBufferWriter<byte> writer, bool flush, out long bytesUsed, out bool completed)
+        public static void Convert(
+            this Encoder encoder,
+            ReadOnlySpan<char> chars,
+            IBufferWriter<byte> writer,
+            bool flush,
+            out long bytesUsed,
+            out bool completed
+        )
         {
             ArgumentNullException.ThrowIfNull(encoder);
             ArgumentNullException.ThrowIfNull(writer);
@@ -429,13 +526,24 @@ namespace System.Text
                 // to the transcoding routine, since it may be able to make progress beyond what
                 // was initially computed for the truncated input data.
 
-                int byteCountForThisSlice = (chars.Length <= MaxInputElementsPerIteration)
-                  ? encoder.GetByteCount(chars, flush)
-                  : encoder.GetByteCount(chars.Slice(0, MaxInputElementsPerIteration), flush: false /* this isn't the end of the data */);
+                int byteCountForThisSlice =
+                    (chars.Length <= MaxInputElementsPerIteration)
+                        ? encoder.GetByteCount(chars, flush)
+                        : encoder.GetByteCount(
+                            chars.Slice(0, MaxInputElementsPerIteration),
+                            flush: false /* this isn't the end of the data */
+                        );
 
                 Span<byte> scratchBuffer = writer.GetSpan(byteCountForThisSlice);
 
-                encoder.Convert(chars, scratchBuffer, flush, out int charsUsedJustNow, out int bytesWrittenJustNow, out completed);
+                encoder.Convert(
+                    chars,
+                    scratchBuffer,
+                    flush,
+                    out int charsUsedJustNow,
+                    out int bytesWrittenJustNow,
+                    out completed
+                );
 
                 chars = chars.Slice(charsUsedJustNow);
                 writer.Advance(bytesWrittenJustNow);
@@ -458,7 +566,14 @@ namespace System.Text
         /// <see langword="true"/> when the method returns.</param>
         /// <exception cref="EncoderFallbackException">Thrown if <paramref name="chars"/> contains data that cannot be encoded and <paramref name="encoder"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static void Convert(this Encoder encoder, in ReadOnlySequence<char> chars, IBufferWriter<byte> writer, bool flush, out long bytesUsed, out bool completed)
+        public static void Convert(
+            this Encoder encoder,
+            in ReadOnlySequence<char> chars,
+            IBufferWriter<byte> writer,
+            bool flush,
+            out long bytesUsed,
+            out bool completed
+        )
         {
             // Parameter null checks will be performed by the workhorse routine.
 
@@ -477,10 +592,20 @@ namespace System.Text
                     // Process each segment individually. We need to run at least one iteration of the loop in case
                     // the Encoder has internal state.
 
-                    remainingChars.GetFirstSpan(out ReadOnlySpan<char> firstSpan, out SequencePosition next);
+                    remainingChars.GetFirstSpan(
+                        out ReadOnlySpan<char> firstSpan,
+                        out SequencePosition next
+                    );
                     isFinalSegment = remainingChars.IsSingleSegment;
 
-                    Convert(encoder, firstSpan, writer, flush && isFinalSegment, out long bytesWrittenThisIteration, out completed);
+                    Convert(
+                        encoder,
+                        firstSpan,
+                        writer,
+                        flush && isFinalSegment,
+                        out long bytesWrittenThisIteration,
+                        out completed
+                    );
 
                     totalBytesWritten += bytesWrittenThisIteration;
                     remainingChars = remainingChars.Slice(next);
@@ -504,7 +629,14 @@ namespace System.Text
         /// </param>
         /// <exception cref="DecoderFallbackException">Thrown if <paramref name="bytes"/> contains data that cannot be encoded and <paramref name="decoder"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static void Convert(this Decoder decoder, ReadOnlySpan<byte> bytes, IBufferWriter<char> writer, bool flush, out long charsUsed, out bool completed)
+        public static void Convert(
+            this Decoder decoder,
+            ReadOnlySpan<byte> bytes,
+            IBufferWriter<char> writer,
+            bool flush,
+            out long charsUsed,
+            out bool completed
+        )
         {
             ArgumentNullException.ThrowIfNull(decoder);
             ArgumentNullException.ThrowIfNull(writer);
@@ -522,13 +654,24 @@ namespace System.Text
                 // to the transcoding routine, since it may be able to make progress beyond what
                 // was initially computed for the truncated input data.
 
-                int charCountForThisSlice = (bytes.Length <= MaxInputElementsPerIteration)
-                    ? decoder.GetCharCount(bytes, flush)
-                    : decoder.GetCharCount(bytes.Slice(0, MaxInputElementsPerIteration), flush: false /* this isn't the end of the data */);
+                int charCountForThisSlice =
+                    (bytes.Length <= MaxInputElementsPerIteration)
+                        ? decoder.GetCharCount(bytes, flush)
+                        : decoder.GetCharCount(
+                            bytes.Slice(0, MaxInputElementsPerIteration),
+                            flush: false /* this isn't the end of the data */
+                        );
 
                 Span<char> scratchBuffer = writer.GetSpan(charCountForThisSlice);
 
-                decoder.Convert(bytes, scratchBuffer, flush, out int bytesUsedJustNow, out int charsWrittenJustNow, out completed);
+                decoder.Convert(
+                    bytes,
+                    scratchBuffer,
+                    flush,
+                    out int bytesUsedJustNow,
+                    out int charsWrittenJustNow,
+                    out completed
+                );
 
                 bytes = bytes.Slice(bytesUsedJustNow);
                 writer.Advance(charsWrittenJustNow);
@@ -552,7 +695,14 @@ namespace System.Text
         /// </param>
         /// <exception cref="DecoderFallbackException">Thrown if <paramref name="bytes"/> contains data that cannot be decoded and <paramref name="decoder"/> is configured
         /// to throw an exception when such data is seen.</exception>
-        public static void Convert(this Decoder decoder, in ReadOnlySequence<byte> bytes, IBufferWriter<char> writer, bool flush, out long charsUsed, out bool completed)
+        public static void Convert(
+            this Decoder decoder,
+            in ReadOnlySequence<byte> bytes,
+            IBufferWriter<char> writer,
+            bool flush,
+            out long charsUsed,
+            out bool completed
+        )
         {
             // Parameter null checks will be performed by the workhorse routine.
 
@@ -571,10 +721,20 @@ namespace System.Text
                     // Process each segment individually. We need to run at least one iteration of the loop in case
                     // the Decoder has internal state.
 
-                    remainingBytes.GetFirstSpan(out ReadOnlySpan<byte> firstSpan, out SequencePosition next);
+                    remainingBytes.GetFirstSpan(
+                        out ReadOnlySpan<byte> firstSpan,
+                        out SequencePosition next
+                    );
                     isFinalSegment = remainingBytes.IsSingleSegment;
 
-                    Convert(decoder, firstSpan, writer, flush && isFinalSegment, out long charsWrittenThisIteration, out completed);
+                    Convert(
+                        decoder,
+                        firstSpan,
+                        writer,
+                        flush && isFinalSegment,
+                        out long charsWrittenThisIteration,
+                        out completed
+                    );
 
                     totalCharsWritten += charsWrittenThisIteration;
                     remainingBytes = remainingBytes.Slice(next);

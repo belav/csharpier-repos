@@ -10,16 +10,13 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
-
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
+using AssemblyName = System.Reflection.AssemblyName;
 using Debug = System.Diagnostics.Debug;
 using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
-using AssemblyName = System.Reflection.AssemblyName;
 
 namespace ILCompiler
 {
@@ -33,12 +30,17 @@ namespace ILCompiler
 
         private readonly InstructionEncoder _types = new InstructionEncoder(new BlobBuilder());
         private readonly InstructionEncoder _fieldRvas = new InstructionEncoder(new BlobBuilder());
-        private readonly InstructionEncoder _frozenObjects = new InstructionEncoder(new BlobBuilder());
-        private readonly InstructionEncoder _manifestResources = new InstructionEncoder(new BlobBuilder());
+        private readonly InstructionEncoder _frozenObjects = new InstructionEncoder(
+            new BlobBuilder()
+        );
+        private readonly InstructionEncoder _manifestResources = new InstructionEncoder(
+            new BlobBuilder()
+        );
 
         private readonly BlobBuilder _mangledNames = new BlobBuilder();
 
-        private List<(MethodDesc Method, string MangledName, int Size, int GcInfoSize)> _methods = new();
+        private List<(MethodDesc Method, string MangledName, int Size, int GcInfoSize)> _methods =
+            new();
         private Dictionary<MethodDesc, int> _methodEhInfo = new();
         private Dictionary<string, int> _blobs = new();
 
@@ -51,11 +53,13 @@ namespace ILCompiler
             _emitter.AllowUseOfAddGlobalMethod();
         }
 
-        internal override void Begin()
-        {
-        }
+        internal override void Begin() { }
 
-        protected override void DumpObjectNode(NodeFactory factory, ObjectNode node, ObjectData objectData)
+        protected override void DumpObjectNode(
+            NodeFactory factory,
+            ObjectNode node,
+            ObjectData objectData
+        )
         {
             switch (node)
             {
@@ -63,24 +67,37 @@ namespace ILCompiler
                     _types.OpCode(ILOpCode.Ldtoken);
                     _types.Token(_emitter.EmitMetadataHandleForTypeSystemEntity(eeType.Type));
                     _types.LoadConstantI4(objectData.Data.Length);
-                    _types.LoadConstantI4(AppendMangledName(DependencyNodeCore<NodeFactory>.GetNodeName(node, factory)));
+                    _types.LoadConstantI4(
+                        AppendMangledName(
+                            DependencyNodeCore<NodeFactory>.GetNodeName(node, factory)
+                        )
+                    );
                     break;
                 case IMethodBodyNode methodBody:
                     var codeInfo = (INodeWithCodeInfo)node;
-                    _methods.Add((
-                        methodBody.Method,
-                        DependencyNodeCore<NodeFactory>.GetNodeName(node, factory),
-                        objectData.Data.Length,
-                        codeInfo.GCInfo.Length));
+                    _methods.Add(
+                        (
+                            methodBody.Method,
+                            DependencyNodeCore<NodeFactory>.GetNodeName(node, factory),
+                            objectData.Data.Length,
+                            codeInfo.GCInfo.Length
+                        )
+                    );
                     break;
                 case MethodExceptionHandlingInfoNode ehInfoNode:
                     _methodEhInfo.Add(ehInfoNode.Method, objectData.Data.Length);
                     break;
                 case FieldRvaDataNode rvaDataNode:
                     _fieldRvas.OpCode(ILOpCode.Ldtoken);
-                    _fieldRvas.Token(_emitter.EmitMetadataHandleForTypeSystemEntity(rvaDataNode.Field));
+                    _fieldRvas.Token(
+                        _emitter.EmitMetadataHandleForTypeSystemEntity(rvaDataNode.Field)
+                    );
                     _fieldRvas.LoadConstantI4(rvaDataNode.Field.GetFieldRvaData().Length);
-                    _fieldRvas.LoadConstantI4(AppendMangledName(DependencyNodeCore<NodeFactory>.GetNodeName(node, factory)));
+                    _fieldRvas.LoadConstantI4(
+                        AppendMangledName(
+                            DependencyNodeCore<NodeFactory>.GetNodeName(node, factory)
+                        )
+                    );
                     // Breakdown of RVA data was introduced in MSTAT 2.1. Readers of 2.0 should still see it in the
                     // global blobs section. We can remove it from there in 3.0.
                     if (VersionMajor == 2)
@@ -98,7 +115,7 @@ namespace ILCompiler
                     if (VersionMajor == 2)
                         goto reportAsBlob;
                 default:
-                reportAsBlob:
+                    reportAsBlob:
                     string nodeName = GetObjectNodeName(node);
                     if (!_blobs.TryGetValue(nodeName, out int size))
                         size = 0;
@@ -114,14 +131,22 @@ namespace ILCompiler
             foreach (FrozenObjectNode frozenObject in factory.MetadataManager.GetFrozenObjects())
             {
                 _frozenObjects.OpCode(ILOpCode.Ldtoken);
-                _frozenObjects.Token(_emitter.EmitMetadataHandleForTypeSystemEntity(frozenObject.ObjectType));
+                _frozenObjects.Token(
+                    _emitter.EmitMetadataHandleForTypeSystemEntity(frozenObject.ObjectType)
+                );
                 _frozenObjects.LoadConstantI4(frozenObject.Size);
-                _frozenObjects.LoadConstantI4(AppendMangledName(DependencyNodeCore<NodeFactory>.GetNodeName(frozenObject, factory)));
+                _frozenObjects.LoadConstantI4(
+                    AppendMangledName(
+                        DependencyNodeCore<NodeFactory>.GetNodeName(frozenObject, factory)
+                    )
+                );
 
                 if (frozenObject is SerializedFrozenObjectNode serObj)
                 {
                     _frozenObjects.OpCode(ILOpCode.Ldtoken);
-                    _frozenObjects.Token(_emitter.EmitMetadataHandleForTypeSystemEntity(serObj.OwningType));
+                    _frozenObjects.Token(
+                        _emitter.EmitMetadataHandleForTypeSystemEntity(serObj.OwningType)
+                    );
                 }
                 else
                 {
@@ -136,7 +161,9 @@ namespace ILCompiler
 
             foreach (ResourceIndexData resource in resourceData.GetOrCreateIndexData(factory))
             {
-                _manifestResources.LoadConstantI4(MetadataTokens.GetToken(_emitter.GetAssemblyRef(resource.Assembly)));
+                _manifestResources.LoadConstantI4(
+                    MetadataTokens.GetToken(_emitter.GetAssemblyRef(resource.Assembly))
+                );
                 _manifestResources.LoadString(_emitter.GetUserStringHandle(resource.ResourceName));
                 _manifestResources.LoadConstantI4(resource.Length);
             }
@@ -186,10 +213,13 @@ namespace ILCompiler
         {
             private readonly List<(string Name, BlobBuilder Content)> _customSections = new();
 
-            public MstatEmitter(AssemblyName assemblyName, TypeSystemContext context, AssemblyFlags flags = default(AssemblyFlags), byte[] publicKeyArray = null)
-                : base(assemblyName, context, flags, publicKeyArray)
-            {
-            }
+            public MstatEmitter(
+                AssemblyName assemblyName,
+                TypeSystemContext context,
+                AssemblyFlags flags = default(AssemblyFlags),
+                byte[] publicKeyArray = null
+            )
+                : base(assemblyName, context, flags, publicKeyArray) { }
 
             public void AddPESection(string name, BlobBuilder content)
             {
@@ -205,10 +235,13 @@ namespace ILCompiler
             {
                 private readonly MstatEmitter _emitter;
 
-                public MstatPEBuilder(
-                    MstatEmitter emitter,
-                    BlobBuilder ilStream)
-                    : base(PEHeaderBuilder.CreateLibraryHeader(), new MetadataRootBuilder(emitter.Builder), ilStream, deterministicIdProvider: content => s_contentId)
+                public MstatPEBuilder(MstatEmitter emitter, BlobBuilder ilStream)
+                    : base(
+                        PEHeaderBuilder.CreateLibraryHeader(),
+                        new MetadataRootBuilder(emitter.Builder),
+                        ilStream,
+                        deterministicIdProvider: content => s_contentId
+                    )
                 {
                     _emitter = emitter;
                 }
@@ -216,10 +249,18 @@ namespace ILCompiler
                 protected override ImmutableArray<Section> CreateSections()
                 {
                     ImmutableArray<Section> result = base.CreateSections();
-                    return result.AddRange(_emitter._customSections.Select(s => new Section(s.Name, SectionCharacteristics.MemRead)));
+                    return result.AddRange(
+                        _emitter._customSections.Select(s => new Section(
+                            s.Name,
+                            SectionCharacteristics.MemRead
+                        ))
+                    );
                 }
 
-                protected override BlobBuilder SerializeSection(string name, SectionLocation location)
+                protected override BlobBuilder SerializeSection(
+                    string name,
+                    SectionLocation location
+                )
                 {
                     foreach (var section in _emitter._customSections)
                     {

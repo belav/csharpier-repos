@@ -7,6 +7,6 @@ namespace System.ServiceModel.Diagnostics
     enum TraceSourceKind
     {
         DiagnosticTraceSource,
-        PiiTraceSource
+        PiiTraceSource,
     }
 }

@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace System.Xml.Linq.Tests
@@ -13,10 +13,10 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void ConnectedNodes()
         {
-            XDocument doc =
-                XDocument.Parse(
-                    "\n<?PI?><!--comm1--><A>t1\t<B xmlns='nsb'><C/><!--cpmm--><![CDATA[hey]]></B>t2<D>string\tonly</D></A>",
-                    LoadOptions.PreserveWhitespace);
+            XDocument doc = XDocument.Parse(
+                "\n<?PI?><!--comm1--><A>t1\t<B xmlns='nsb'><C/><!--cpmm--><![CDATA[hey]]></B>t2<D>string\tonly</D></A>",
+                LoadOptions.PreserveWhitespace
+            );
             IEnumerable<XNode> nodes = GetDescendantNodes(doc, true);
             Assert.Equal(nodes.Count(), doc.DescendantNodes().Count() + 1);
             foreach (XNode n1 in nodes)
@@ -39,9 +39,9 @@ namespace System.Xml.Linq.Tests
             Assert.Equal(expected, XNode.DocumentOrderComparer.Compare(n1, n2)); // Comparison XNode
             Assert.Equal(expected, ((IComparer)XNode.DocumentOrderComparer).Compare(n1, n2)); // Comparison interface
             Assert.Equal(-1 * expected, XNode.DocumentOrderComparer.Compare(n2, n1));
-                // Comparison XNode (-1*commutative)
+            // Comparison XNode (-1*commutative)
             Assert.Equal(-1 * expected, ((IComparer)XNode.DocumentOrderComparer).Compare(n2, n1));
-                // Comparison XNode (-1*commutative)
+            // Comparison XNode (-1*commutative)
 
             IsAfterBeforeConsistencyCheck(n1, n2);
         }
@@ -51,7 +51,8 @@ namespace System.Xml.Linq.Tests
             int pos = 0;
             foreach (T n in iter)
             {
-                if ((n == null && node == null) || n.Equals(node)) return pos;
+                if ((n == null && node == null) || n.Equals(node))
+                    return pos;
                 pos++;
             }
             return -1;
@@ -97,7 +98,8 @@ namespace System.Xml.Linq.Tests
                 new XAttribute("id", "a1"),
                 new XProcessingInstruction("PI", "data"),
                 new XElement("B", new XElement("C"), new XElement("D")),
-                new XComment("comment"));
+                new XComment("comment")
+            );
 
             XElement b = a.Element("B");
             XElement c = b.Element("C");
@@ -132,10 +134,20 @@ namespace System.Xml.Linq.Tests
         public static IEnumerable<object[]> GetNotXNodes()
         {
             yield return new object[] { new XAttribute("a", "A"), new XElement("E"), "x" };
-            yield return new object[] { new XDeclaration("1.0", "UFT8", "false"), new XElement("E"), "x" };
+            yield return new object[]
+            {
+                new XDeclaration("1.0", "UFT8", "false"),
+                new XElement("E"),
+                "x",
+            };
             yield return new object[] { "", new XElement("E"), "x" };
             yield return new object[] { new XElement("E"), new XAttribute("a", "A"), "y" };
-            yield return new object[] { new XElement("E"), new XDeclaration("1.0", "UFT8", "false"), "y" };
+            yield return new object[]
+            {
+                new XElement("E"),
+                new XDeclaration("1.0", "UFT8", "false"),
+                "y",
+            };
             yield return new object[] { new XElement("E"), "", "y" };
         }
 
@@ -143,7 +155,10 @@ namespace System.Xml.Linq.Tests
         [MemberData(nameof(GetNotXNodes))]
         public void NotXNode(object x, object y, string paramName)
         {
-            AssertExtensions.Throws<ArgumentException>(paramName, () => ((IComparer)XNode.DocumentOrderComparer).Compare(x, y));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => ((IComparer)XNode.DocumentOrderComparer).Compare(x, y)
+            );
         }
 
         [Fact]
@@ -158,7 +173,8 @@ namespace System.Xml.Linq.Tests
         // This method will return the nodes in the doc order
         private IEnumerable<XNode> GetDescendantNodes(XContainer source, bool self)
         {
-            if (self) yield return source;
+            if (self)
+                yield return source;
             XNode n = source;
             while (true)
             {
@@ -170,9 +186,14 @@ namespace System.Xml.Linq.Tests
                 }
                 else
                 {
-                    while (n != null && n != source
-                           && n == ((n.Parent == null) ? n.Document.LastNode : n.Parent.LastNode)) n = (n.Parent == null) ? (XNode)n.Document : (XNode)n.Parent;
-                    if (n == null || n == source) break;
+                    while (
+                        n != null
+                        && n != source
+                        && n == ((n.Parent == null) ? n.Document.LastNode : n.Parent.LastNode)
+                    )
+                        n = (n.Parent == null) ? (XNode)n.Document : (XNode)n.Parent;
+                    if (n == null || n == source)
+                        break;
                     n = n.NextNode;
                 }
                 yield return n;

@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.DependencyModel
             return string.Equals(Name, other.Name) && string.Equals(Version, other.Version);
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is Dependency dependency && Equals(dependency);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is Dependency dependency && Equals(dependency);
 
         public override int GetHashCode() =>
             HashHelpers.Combine(Name.GetHashCode(), Version.GetHashCode());

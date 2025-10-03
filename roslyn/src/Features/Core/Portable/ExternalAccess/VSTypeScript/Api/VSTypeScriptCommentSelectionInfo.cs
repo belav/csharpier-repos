@@ -22,13 +22,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             bool supportsBlockComment,
             string singleLineCommentString,
             string blockCommentStartString,
-            string blockCommentEndString) : this(new(
-                supportsSingleLineComment,
-                supportsBlockComment,
-                singleLineCommentString,
-                blockCommentStartString,
-                blockCommentEndString))
-        {
-        }
+            string blockCommentEndString
+        )
+            : this(
+                new(
+                    supportsSingleLineComment,
+                    supportsBlockComment,
+                    singleLineCommentString,
+                    blockCommentStartString,
+                    blockCommentEndString
+                )
+            ) { }
     }
 }

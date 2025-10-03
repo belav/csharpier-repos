@@ -33,7 +33,7 @@ namespace Newtonsoft.Json.Linq.JsonPath
 {
     internal class JPath
     {
-        private static readonly char[] FloatCharacters = new[] {'.', 'E', 'e'};
+        private static readonly char[] FloatCharacters = new[] { '.', 'E', 'e' };
 
         private readonly string _expression;
         public List<PathFilter> Filters { get; }
@@ -85,7 +85,10 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
                 if (_currentIndex < _expression.Length)
                 {
-                    throw new JsonException("Unexpected character while parsing path: " + _expression[lastCharacterIndex]);
+                    throw new JsonException(
+                        "Unexpected character while parsing path: "
+                            + _expression[lastCharacterIndex]
+                    );
                 }
             }
         }
@@ -107,7 +110,10 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     case '(':
                         if (_currentIndex > currentPartStartIndex)
                         {
-                            string? member = _expression.Substring(currentPartStartIndex, _currentIndex - currentPartStartIndex);
+                            string? member = _expression.Substring(
+                                currentPartStartIndex,
+                                _currentIndex - currentPartStartIndex
+                            );
                             if (member == "*")
                             {
                                 member = null;
@@ -138,7 +144,10 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     case '.':
                         if (_currentIndex > currentPartStartIndex)
                         {
-                            string? member = _expression.Substring(currentPartStartIndex, _currentIndex - currentPartStartIndex);
+                            string? member = _expression.Substring(
+                                currentPartStartIndex,
+                                _currentIndex - currentPartStartIndex
+                            );
                             if (member == "*")
                             {
                                 member = null;
@@ -147,7 +156,10 @@ namespace Newtonsoft.Json.Linq.JsonPath
                             filters.Add(CreatePathFilter(member, scan));
                             scan = false;
                         }
-                        if (_currentIndex + 1 < _expression.Length && _expression[_currentIndex + 1] == '.')
+                        if (
+                            _currentIndex + 1 < _expression.Length
+                            && _expression[_currentIndex + 1] == '.'
+                        )
                         {
                             scan = true;
                             _currentIndex++;
@@ -158,7 +170,17 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         followingDot = true;
                         break;
                     default:
-                        if (query && (currentChar == '=' || currentChar == '<' || currentChar == '!' || currentChar == '>' || currentChar == '|' || currentChar == '&'))
+                        if (
+                            query
+                            && (
+                                currentChar == '='
+                                || currentChar == '<'
+                                || currentChar == '!'
+                                || currentChar == '>'
+                                || currentChar == '|'
+                                || currentChar == '&'
+                            )
+                        )
                         {
                             ended = true;
                         }
@@ -166,7 +188,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
                         {
                             if (followingIndexer)
                             {
-                                throw new JsonException("Unexpected character following indexer: " + currentChar);
+                                throw new JsonException(
+                                    "Unexpected character following indexer: " + currentChar
+                                );
                             }
 
                             _currentIndex++;
@@ -179,7 +203,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
             if (_currentIndex > currentPartStartIndex)
             {
-                string? member = _expression.Substring(currentPartStartIndex, _currentIndex - currentPartStartIndex).TrimEnd();
+                string? member = _expression
+                    .Substring(currentPartStartIndex, _currentIndex - currentPartStartIndex)
+                    .TrimEnd();
                 if (member == "*")
                 {
                     member = null;
@@ -200,7 +226,8 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
         private static PathFilter CreatePathFilter(string? member, bool scan)
         {
-            PathFilter filter = (scan) ? (PathFilter)new ScanFilter(member) : new FieldFilter(member);
+            PathFilter filter =
+                (scan) ? (PathFilter)new ScanFilter(member) : new FieldFilter(member);
             return filter;
         }
 
@@ -283,7 +310,12 @@ namespace Newtonsoft.Json.Linq.JsonPath
                             }
                         }
 
-                        return new ArraySliceFilter { Start = startIndex, End = endIndex, Step = step };
+                        return new ArraySliceFilter
+                        {
+                            Start = startIndex,
+                            End = endIndex,
+                            Step = step,
+                        };
                     }
                     else
                     {
@@ -330,7 +362,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
                     if (_expression[_currentIndex] != indexerCloseChar)
                     {
-                        throw new JsonException("Unexpected character while parsing path indexer: " + currentCharacter);
+                        throw new JsonException(
+                            "Unexpected character while parsing path indexer: " + currentCharacter
+                        );
                     }
 
                     return new ArrayIndexFilter();
@@ -369,13 +403,17 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 }
                 else if (!char.IsDigit(currentCharacter) && currentCharacter != '-')
                 {
-                    throw new JsonException("Unexpected character while parsing path indexer: " + currentCharacter);
+                    throw new JsonException(
+                        "Unexpected character while parsing path indexer: " + currentCharacter
+                    );
                 }
                 else
                 {
                     if (end != null)
                     {
-                        throw new JsonException("Unexpected character while parsing path indexer: " + currentCharacter);
+                        throw new JsonException(
+                            "Unexpected character while parsing path indexer: " + currentCharacter
+                        );
                     }
 
                     _currentIndex++;
@@ -405,7 +443,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
             if (_expression[_currentIndex] != '(')
             {
-                throw new JsonException("Unexpected character while parsing path indexer: " + _expression[_currentIndex]);
+                throw new JsonException(
+                    "Unexpected character while parsing path indexer: " + _expression[_currentIndex]
+                );
             }
 
             _currentIndex++;
@@ -418,7 +458,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
             if (_expression[_currentIndex] != indexerCloseChar)
             {
-                throw new JsonException("Unexpected character while parsing path indexer: " + _expression[_currentIndex]);
+                throw new JsonException(
+                    "Unexpected character while parsing path indexer: " + _expression[_currentIndex]
+                );
             }
 
             if (!scan)
@@ -459,7 +501,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
         private JsonException CreateUnexpectedCharacterException()
         {
-            return new JsonException("Unexpected character while parsing path query: " + _expression[_currentIndex]);
+            return new JsonException(
+                "Unexpected character while parsing path query: " + _expression[_currentIndex]
+            );
         }
 
         private object ParseSide()
@@ -496,9 +540,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 object? right = null;
 
                 QueryOperator op;
-                if (_expression[_currentIndex] == ')'
+                if (
+                    _expression[_currentIndex] == ')'
                     || _expression[_currentIndex] == '|'
-                    || _expression[_currentIndex] == '&')
+                    || _expression[_currentIndex] == '&'
+                )
                 {
                     op = QueryOperator.Exists;
                 }
@@ -509,7 +555,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
                     right = ParseSide();
                 }
 
-                BooleanQueryExpression booleanExpression = new BooleanQueryExpression(op, left, right);
+                BooleanQueryExpression booleanExpression = new BooleanQueryExpression(
+                    op,
+                    left,
+                    right
+                );
 
                 if (_expression[_currentIndex] == ')')
                 {
@@ -530,7 +580,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
                     if (parentExpression == null || parentExpression.Operator != QueryOperator.And)
                     {
-                        CompositeExpression andExpression = new CompositeExpression(QueryOperator.And);
+                        CompositeExpression andExpression = new CompositeExpression(
+                            QueryOperator.And
+                        );
 
                         parentExpression?.Expressions.Add(andExpression);
 
@@ -553,7 +605,9 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
                     if (parentExpression == null || parentExpression.Operator != QueryOperator.Or)
                     {
-                        CompositeExpression orExpression = new CompositeExpression(QueryOperator.Or);
+                        CompositeExpression orExpression = new CompositeExpression(
+                            QueryOperator.Or
+                        );
 
                         parentExpression?.Expressions.Add(orExpression);
 
@@ -595,13 +649,23 @@ namespace Newtonsoft.Json.Linq.JsonPath
 
                         if (numberText.IndexOfAny(FloatCharacters) != -1)
                         {
-                            bool result = double.TryParse(numberText, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out var d);
+                            bool result = double.TryParse(
+                                numberText,
+                                NumberStyles.Float | NumberStyles.AllowThousands,
+                                CultureInfo.InvariantCulture,
+                                out var d
+                            );
                             value = d;
                             return result;
                         }
                         else
                         {
-                            bool result = long.TryParse(numberText, NumberStyles.Integer, CultureInfo.InvariantCulture, out var l);
+                            bool result = long.TryParse(
+                                numberText,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out var l
+                            );
                             value = l;
                             return result;
                         }
@@ -859,7 +923,10 @@ namespace Newtonsoft.Json.Linq.JsonPath
                 }
                 else
                 {
-                    throw new JsonException("Unexpected character while parsing path indexer: " + _expression[_currentIndex]);
+                    throw new JsonException(
+                        "Unexpected character while parsing path indexer: "
+                            + _expression[_currentIndex]
+                    );
                 }
             }
 
@@ -879,7 +946,12 @@ namespace Newtonsoft.Json.Linq.JsonPath
             return Evaluate(Filters, root, t, settings);
         }
 
-        internal static IEnumerable<JToken> Evaluate(List<PathFilter> filters, JToken root, JToken t, JsonSelectSettings? settings)
+        internal static IEnumerable<JToken> Evaluate(
+            List<PathFilter> filters,
+            JToken root,
+            JToken t,
+            JsonSelectSettings? settings
+        )
         {
             IEnumerable<JToken> current = new[] { t };
             foreach (PathFilter filter in filters)

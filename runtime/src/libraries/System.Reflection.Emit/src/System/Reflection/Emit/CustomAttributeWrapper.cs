@@ -14,7 +14,10 @@ namespace System.Reflection.Emit
         private readonly ConstructorInfo _constructorInfo;
         private readonly byte[] _binaryAttribute;
 
-        public CustomAttributeWrapper(ConstructorInfo constructorInfo, ReadOnlySpan<byte> binaryAttribute)
+        public CustomAttributeWrapper(
+            ConstructorInfo constructorInfo,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             _constructorInfo = constructorInfo;
             _binaryAttribute = binaryAttribute.ToArray(); // TODO: Update to BlobHandle when public API public APi for MetadataBuilder.GetOrAddBlob(ReadOnlySpan<byte>) added
@@ -37,18 +40,31 @@ namespace System.Reflection.Emit
         private const int TwoByteMask = 0x3f;
         private const int FourByteMask = 0x1f;
 
-        internal static CustomAttributeInfo DecodeCustomAttribute(ConstructorInfo ctor, ReadOnlySpan<byte> binaryAttribute)
+        internal static CustomAttributeInfo DecodeCustomAttribute(
+            ConstructorInfo ctor,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             int pos = 2;
             CustomAttributeInfo info = default;
 
             if (binaryAttribute.Length < 2)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidCustomAttributeLength, ctor.DeclaringType, binaryAttribute.Length), nameof(binaryAttribute));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_InvalidCustomAttributeLength,
+                        ctor.DeclaringType,
+                        binaryAttribute.Length
+                    ),
+                    nameof(binaryAttribute)
+                );
             }
             if ((binaryAttribute[0] != 0x01) || (binaryAttribute[1] != 0x00))
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidProlog, ctor.DeclaringType), nameof(binaryAttribute));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidProlog, ctor.DeclaringType),
+                    nameof(binaryAttribute)
+                );
             }
 
             ParameterInfo[] pi = ctor.GetParameters();
@@ -56,7 +72,12 @@ namespace System.Reflection.Emit
             info._ctorArgs = new object?[pi.Length];
             for (int i = 0; i < pi.Length; ++i)
             {
-                info._ctorArgs[i] = DecodeCustomAttributeValue(pi[i].ParameterType, binaryAttribute, pos, out pos);
+                info._ctorArgs[i] = DecodeCustomAttributeValue(
+                    pi[i].ParameterType,
+                    binaryAttribute,
+                    pos,
+                    out pos
+                );
             }
             int numNamed = BinaryPrimitives.ReadUInt16LittleEndian(binaryAttribute.Slice(pos));
             pos += 2;
@@ -83,12 +104,24 @@ namespace System.Reflection.Emit
                 if (namedType == Field)
                 {
                     // For known pseudo custom attributes underlying Enum type is int
-                    Type fieldType = dataType == EnumType ? typeof(int) : ElementTypeToType((PrimitiveSerializationTypeCode)dataType);
-                    info._namedParamValues[i] = DecodeCustomAttributeValue(fieldType, binaryAttribute, pos, out pos); ;
+                    Type fieldType =
+                        dataType == EnumType
+                            ? typeof(int)
+                            : ElementTypeToType((PrimitiveSerializationTypeCode)dataType);
+                    info._namedParamValues[i] = DecodeCustomAttributeValue(
+                        fieldType,
+                        binaryAttribute,
+                        pos,
+                        out pos
+                    );
+                    ;
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_UnknownNamedType, ctor.DeclaringType, namedType), nameof(binaryAttribute));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_UnknownNamedType, ctor.DeclaringType, namedType),
+                        nameof(binaryAttribute)
+                    );
                 }
             }
 
@@ -114,14 +147,23 @@ namespace System.Reflection.Emit
             }
             else
             {
-                len = ((data[pos] & FourByteMask) << 24) + (data[pos + 1] << 16) + (data[pos + 2] << 8) + data[pos + 3];
+                len =
+                    ((data[pos] & FourByteMask) << 24)
+                    + (data[pos + 1] << 16)
+                    + (data[pos + 2] << 8)
+                    + data[pos + 3];
                 pos += 4;
             }
             rpos = pos;
             return len;
         }
 
-        private static object? DecodeCustomAttributeValue(Type t, ReadOnlySpan<byte> data, int pos, out int rpos)
+        private static object? DecodeCustomAttributeValue(
+            Type t,
+            ReadOnlySpan<byte> data,
+            int pos,
+            out int rpos
+        )
         {
             switch (Type.GetTypeCode(t))
             {
@@ -149,7 +191,12 @@ namespace System.Reflection.Emit
 
                     if (subtype >= 0x02 && subtype <= 0x0e)
                     {
-                        return DecodeCustomAttributeValue(ElementTypeToType((PrimitiveSerializationTypeCode)subtype), data, pos, out rpos);
+                        return DecodeCustomAttributeValue(
+                            ElementTypeToType((PrimitiveSerializationTypeCode)subtype),
+                            data,
+                            pos,
+                            out rpos
+                        );
                     }
                     break;
             }
@@ -173,7 +220,10 @@ namespace System.Reflection.Emit
                 PrimitiveSerializationTypeCode.Single => typeof(float),
                 PrimitiveSerializationTypeCode.Double => typeof(double),
                 PrimitiveSerializationTypeCode.String => typeof(string),
-                _ => throw new ArgumentException(SR.Argument_InvalidTypeCodeForTypeArgument, "binaryAttribute"),
+                _ => throw new ArgumentException(
+                    SR.Argument_InvalidTypeCodeForTypeArgument,
+                    "binaryAttribute"
+                ),
             };
     }
 }

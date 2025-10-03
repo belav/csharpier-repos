@@ -19,8 +19,14 @@ namespace System.Linq.Tests
             Func<int, bool> simplePredicate = (value) => true;
             Func<int, int, bool> complexPredicate = (value, index) => true;
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Where(simplePredicate));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Where(complexPredicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Where(simplePredicate)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Where(complexPredicate)
+            );
         }
 
         [Fact]
@@ -30,8 +36,14 @@ namespace System.Linq.Tests
             Func<int, bool> simplePredicate = null;
             Func<int, int, bool> complexPredicate = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.Where(simplePredicate));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.Where(complexPredicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.Where(simplePredicate)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.Where(complexPredicate)
+            );
         }
 
         #endregion
@@ -42,7 +54,14 @@ namespace System.Linq.Tests
         public void Where_Array_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            Func<bool>[] source = { () => { funcCalled = true; return true; } };
+            Func<bool>[] source =
+            {
+                () =>
+                {
+                    funcCalled = true;
+                    return true;
+                },
+            };
 
             IEnumerable<Func<bool>> query = source.Where(value => value());
             Assert.False(funcCalled);
@@ -55,7 +74,14 @@ namespace System.Linq.Tests
         public void Where_List_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            List<Func<bool>> source = new List<Func<bool>>() { () => { funcCalled = true; return true; } };
+            List<Func<bool>> source = new List<Func<bool>>()
+            {
+                () =>
+                {
+                    funcCalled = true;
+                    return true;
+                },
+            };
 
             IEnumerable<Func<bool>> query = source.Where(value => value());
             Assert.False(funcCalled);
@@ -68,7 +94,16 @@ namespace System.Linq.Tests
         public void Where_IReadOnlyCollection_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            IReadOnlyCollection<Func<bool>> source = new ReadOnlyCollection<Func<bool>>(new List<Func<bool>>() { () => { funcCalled = true; return true; } });
+            IReadOnlyCollection<Func<bool>> source = new ReadOnlyCollection<Func<bool>>(
+                new List<Func<bool>>()
+                {
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    },
+                }
+            );
 
             IEnumerable<Func<bool>> query = source.Where(value => value());
             Assert.False(funcCalled);
@@ -81,7 +116,16 @@ namespace System.Linq.Tests
         public void Where_ICollection_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            ICollection<Func<bool>> source = new LinkedList<Func<bool>>(new List<Func<bool>>() { () => { funcCalled = true; return true; } });
+            ICollection<Func<bool>> source = new LinkedList<Func<bool>>(
+                new List<Func<bool>>()
+                {
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    },
+                }
+            );
 
             IEnumerable<Func<bool>> query = source.Where(value => value());
             Assert.False(funcCalled);
@@ -94,7 +138,16 @@ namespace System.Linq.Tests
         public void Where_IEnumerable_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            IEnumerable<Func<bool>> source = Enumerable.Repeat((Func<bool>)(() => { funcCalled = true; return true; }), 1);
+            IEnumerable<Func<bool>> source = Enumerable.Repeat(
+                (Func<bool>)(
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    }
+                ),
+                1
+            );
 
             IEnumerable<Func<bool>> query = source.Where(value => value());
             Assert.False(funcCalled);
@@ -107,7 +160,14 @@ namespace System.Linq.Tests
         public void WhereWhere_Array_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            Func<bool>[] source = new Func<bool>[] { () => { funcCalled = true; return true; } };
+            Func<bool>[] source = new Func<bool>[]
+            {
+                () =>
+                {
+                    funcCalled = true;
+                    return true;
+                },
+            };
 
             IEnumerable<Func<bool>> query = source.Where(value => value()).Where(value => value());
             Assert.False(funcCalled);
@@ -120,7 +180,14 @@ namespace System.Linq.Tests
         public void WhereWhere_List_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            List<Func<bool>> source = new List<Func<bool>>() { () => { funcCalled = true; return true; } };
+            List<Func<bool>> source = new List<Func<bool>>()
+            {
+                () =>
+                {
+                    funcCalled = true;
+                    return true;
+                },
+            };
 
             IEnumerable<Func<bool>> query = source.Where(value => value()).Where(value => value());
             Assert.False(funcCalled);
@@ -133,7 +200,16 @@ namespace System.Linq.Tests
         public void WhereWhere_IReadOnlyCollection_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            IReadOnlyCollection<Func<bool>> source = new ReadOnlyCollection<Func<bool>>(new List<Func<bool>>() { () => { funcCalled = true; return true; } });
+            IReadOnlyCollection<Func<bool>> source = new ReadOnlyCollection<Func<bool>>(
+                new List<Func<bool>>()
+                {
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    },
+                }
+            );
 
             IEnumerable<Func<bool>> query = source.Where(value => value()).Where(value => value());
             Assert.False(funcCalled);
@@ -146,7 +222,16 @@ namespace System.Linq.Tests
         public void WhereWhere_ICollection_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            ICollection<Func<bool>> source = new LinkedList<Func<bool>>(new List<Func<bool>>() { () => { funcCalled = true; return true; } });
+            ICollection<Func<bool>> source = new LinkedList<Func<bool>>(
+                new List<Func<bool>>()
+                {
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    },
+                }
+            );
 
             IEnumerable<Func<bool>> query = source.Where(value => value()).Where(value => value());
             Assert.False(funcCalled);
@@ -159,7 +244,16 @@ namespace System.Linq.Tests
         public void WhereWhere_IEnumerable_ExecutionIsDeferred()
         {
             bool funcCalled = false;
-            IEnumerable<Func<bool>> source = Enumerable.Repeat((Func<bool>)(() => { funcCalled = true; return true; }), 1);
+            IEnumerable<Func<bool>> source = Enumerable.Repeat(
+                (Func<bool>)(
+                    () =>
+                    {
+                        funcCalled = true;
+                        return true;
+                    }
+                ),
+                1
+            );
 
             IEnumerable<Func<bool>> query = source.Where(value => value()).Where(value => value());
             Assert.False(funcCalled);
@@ -202,7 +296,10 @@ namespace System.Linq.Tests
         public void Where_Array_ReturnsExpectedValues_Complex()
         {
             int[] source = new[] { 2, 1, 3, 5, 4 };
-            Func<int, int, bool> complexPredicate = (value, index) => { return (value == index); };
+            Func<int, int, bool> complexPredicate = (value, index) =>
+            {
+                return (value == index);
+            };
 
             IEnumerable<int> result = source.Where(complexPredicate);
 
@@ -241,7 +338,10 @@ namespace System.Linq.Tests
         public void Where_List_ReturnsExpectedValues_Complex()
         {
             List<int> source = new List<int> { 2, 1, 3, 5, 4 };
-            Func<int, int, bool> complexPredicate = (value, index) => { return (value == index); };
+            Func<int, int, bool> complexPredicate = (value, index) =>
+            {
+                return (value == index);
+            };
 
             IEnumerable<int> result = source.Where(complexPredicate);
 
@@ -253,7 +353,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_IReadOnlyCollection_ReturnsExpectedValues_True()
         {
-            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, 5 });
+            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
+                new List<int> { 1, 2, 3, 4, 5 }
+            );
             Func<int, bool> truePredicate = (value) => true;
 
             IEnumerable<int> result = source.Where(truePredicate);
@@ -268,7 +370,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_IReadOnlyCollection_ReturnsExpectedValues_False()
         {
-            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, 5 });
+            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
+                new List<int> { 1, 2, 3, 4, 5 }
+            );
             Func<int, bool> falsePredicate = (value) => false;
 
             IEnumerable<int> result = source.Where(falsePredicate);
@@ -279,8 +383,13 @@ namespace System.Linq.Tests
         [Fact]
         public void Where_IReadOnlyCollection_ReturnsExpectedValues_Complex()
         {
-            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(new List<int> { 2, 1, 3, 5, 4 });
-            Func<int, int, bool> complexPredicate = (value, index) => { return (value == index); };
+            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
+                new List<int> { 2, 1, 3, 5, 4 }
+            );
+            Func<int, int, bool> complexPredicate = (value, index) =>
+            {
+                return (value == index);
+            };
 
             IEnumerable<int> result = source.Where(complexPredicate);
 
@@ -319,7 +428,10 @@ namespace System.Linq.Tests
         public void Where_ICollection_ReturnsExpectedValues_Complex()
         {
             ICollection<int> source = new LinkedList<int>(new List<int> { 2, 1, 3, 5, 4 });
-            Func<int, int, bool> complexPredicate = (value, index) => { return (value == index); };
+            Func<int, int, bool> complexPredicate = (value, index) =>
+            {
+                return (value == index);
+            };
 
             IEnumerable<int> result = source.Where(complexPredicate);
 
@@ -358,7 +470,10 @@ namespace System.Linq.Tests
         public void Where_IEnumerable_ReturnsExpectedValues_Complex()
         {
             IEnumerable<int> source = new LinkedList<int>(new List<int> { 2, 1, 3, 5, 4 });
-            Func<int, int, bool> complexPredicate = (value, index) => { return (value == index); };
+            Func<int, int, bool> complexPredicate = (value, index) =>
+            {
+                return (value == index);
+            };
 
             IEnumerable<int> result = source.Where(complexPredicate);
 
@@ -373,7 +488,11 @@ namespace System.Linq.Tests
             IEnumerable<int> source = Enumerable.Empty<int>();
             bool wasSelectorCalled = false;
 
-            IEnumerable<int> result = source.Where(value => { wasSelectorCalled = true; return true; });
+            IEnumerable<int> result = source.Where(value =>
+            {
+                wasSelectorCalled = true;
+                return true;
+            });
 
             Assert.Equal(0, result.Count());
             Assert.False(wasSelectorCalled);
@@ -392,7 +511,8 @@ namespace System.Linq.Tests
             Func<int, bool> truePredicate = (value) => true;
 
             var enumerator = source.Where(truePredicate).GetEnumerator();
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
 
             Assert.Equal(default(int), enumerator.Current);
         }
@@ -404,7 +524,8 @@ namespace System.Linq.Tests
             Func<int, bool> truePredicate = (value) => true;
 
             var enumerator = source.Where(truePredicate).GetEnumerator();
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
 
             Assert.Equal(default(int), enumerator.Current);
         }
@@ -416,7 +537,8 @@ namespace System.Linq.Tests
             Func<int, bool> truePredicate = (value) => true;
 
             var enumerator = source.Where(truePredicate).GetEnumerator();
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
 
             Assert.Equal(default(int), enumerator.Current);
         }
@@ -428,7 +550,8 @@ namespace System.Linq.Tests
             Func<int, bool> truePredicate = (value) => true;
 
             var enumerator = source.Where(truePredicate).GetEnumerator();
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
 
             Assert.Equal(default(int), enumerator.Current);
         }
@@ -440,7 +563,8 @@ namespace System.Linq.Tests
             Func<int, bool> truePredicate = (value) => true;
 
             var enumerator = source.Where(truePredicate).GetEnumerator();
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
 
             Assert.Equal(default(int), enumerator.Current);
         }
@@ -474,7 +598,9 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereWhere_IReadOnlyCollection_ReturnsExpectedValues()
         {
-            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, 5 });
+            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
+                new List<int> { 1, 2, 3, 4, 5 }
+            );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
 
             IEnumerable<int> result = source.Where(evenPredicate).Where(evenPredicate);
@@ -531,7 +657,10 @@ namespace System.Linq.Tests
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
-            IEnumerable<int> result = source.Where(evenPredicate).Select(i => i).Select(addSelector);
+            IEnumerable<int> result = source
+                .Where(evenPredicate)
+                .Select(i => i)
+                .Select(addSelector);
 
             Assert.Equal(2, result.Count());
             Assert.Equal(3, result.ElementAt(0));
@@ -559,7 +688,10 @@ namespace System.Linq.Tests
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
-            IEnumerable<int> result = source.Where(evenPredicate).Select(i => i).Select(addSelector);
+            IEnumerable<int> result = source
+                .Where(evenPredicate)
+                .Select(i => i)
+                .Select(addSelector);
 
             Assert.Equal(2, result.Count());
             Assert.Equal(3, result.ElementAt(0));
@@ -569,7 +701,9 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereSelect_IReadOnlyCollection_ReturnsExpectedValues()
         {
-            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, 5 });
+            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
+                new List<int> { 1, 2, 3, 4, 5 }
+            );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -583,11 +717,16 @@ namespace System.Linq.Tests
         [Fact]
         public void WhereSelectSelect_IReadOnlyCollection_ReturnsExpectedValues()
         {
-            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, 5 });
+            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
+                new List<int> { 1, 2, 3, 4, 5 }
+            );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
-            IEnumerable<int> result = source.Where(evenPredicate).Select(i => i).Select(addSelector);
+            IEnumerable<int> result = source
+                .Where(evenPredicate)
+                .Select(i => i)
+                .Select(addSelector);
 
             Assert.Equal(2, result.Count());
             Assert.Equal(3, result.ElementAt(0));
@@ -615,7 +754,10 @@ namespace System.Linq.Tests
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
-            IEnumerable<int> result = source.Where(evenPredicate).Select(i => i).Select(addSelector);
+            IEnumerable<int> result = source
+                .Where(evenPredicate)
+                .Select(i => i)
+                .Select(addSelector);
 
             Assert.Equal(2, result.Count());
             Assert.Equal(3, result.ElementAt(0));
@@ -643,7 +785,10 @@ namespace System.Linq.Tests
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
-            IEnumerable<int> result = source.Where(evenPredicate).Select(i => i).Select(addSelector);
+            IEnumerable<int> result = source
+                .Where(evenPredicate)
+                .Select(i => i)
+                .Select(addSelector);
 
             Assert.Equal(2, result.Count());
             Assert.Equal(3, result.ElementAt(0));
@@ -683,7 +828,9 @@ namespace System.Linq.Tests
         [Fact]
         public void SelectWhere_IReadOnlyCollection_ReturnsExpectedValues()
         {
-            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, 5 });
+            IReadOnlyCollection<int> source = new ReadOnlyCollection<int>(
+                new List<int> { 1, 2, 3, 4, 5 }
+            );
             Func<int, bool> evenPredicate = (value) => value % 2 == 0;
             Func<int, int> addSelector = (value) => value + 1;
 
@@ -858,22 +1005,32 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.Where(IsEven), q.Where(IsEven));
-
         }
 
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", null, "SoS", string.Empty }
-                    select x;
+            var q =
+                from x in new[]
+                {
+                    "!@#$%^",
+                    "C",
+                    "AAA",
+                    "",
+                    "Calling Twice",
+                    null,
+                    "SoS",
+                    string.Empty,
+                }
+                select x;
 
             Assert.Equal(q.Where(string.IsNullOrEmpty), q.Where(string.IsNullOrEmpty));
-
         }
 
         [Fact]
@@ -994,7 +1151,10 @@ namespace System.Linq.Tests
         public void PredicateSelectsLast()
         {
             int[] source = { -40, 20, 100, 5, 4, 9 };
-            Assert.Equal(source.Skip(source.Length - 1), source.Where((e, i) => i == source.Length - 1));
+            Assert.Equal(
+                source.Skip(source.Length - 1),
+                source.Where((e, i) => i == source.Length - 1)
+            );
         }
 
         [ConditionalFact(typeof(TestEnvironment), nameof(TestEnvironment.IsStressModeEnabled))]
@@ -1004,9 +1164,7 @@ namespace System.Linq.Tests
             using (var en = infiniteWhere.GetEnumerator())
                 Assert.Throws<OverflowException>(() =>
                 {
-                    while (en.MoveNext())
-                    {
-                    }
+                    while (en.MoveNext()) { }
                 });
         }
 
@@ -1046,7 +1204,9 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerateWhereSelect()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).Where(i => true).Select(i => i);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .Where(i => true)
+                .Select(i => i);
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
         }
@@ -1054,7 +1214,10 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerateWhereSelectArray()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).ToArray().Where(i => true).Select(i => i);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .ToArray()
+                .Where(i => true)
+                .Select(i => i);
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
         }
@@ -1062,7 +1225,10 @@ namespace System.Linq.Tests
         [Fact]
         public void ForcedToEnumeratorDoesntEnumerateWhereSelectList()
         {
-            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3).ToList().Where(i => true).Select(i => i);
+            var iterator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .ToList()
+                .Where(i => true)
+                .Select(i => i);
             var en = iterator as IEnumerator<int>;
             Assert.False(en != null && en.MoveNext());
         }
@@ -1071,7 +1237,13 @@ namespace System.Linq.Tests
         [MemberData(nameof(ToCollectionData))]
         public void ToCollection(IEnumerable<int> source)
         {
-            foreach (IEnumerable<int> equivalent in new[] { source.Where(s => true), source.Where(s => true).Select(s => s) })
+            foreach (
+                IEnumerable<int> equivalent in new[]
+                {
+                    source.Where(s => true),
+                    source.Where(s => true).Select(s => s),
+                }
+            )
             {
                 Assert.Equal(source, equivalent);
                 Assert.Equal(source, equivalent.ToArray());

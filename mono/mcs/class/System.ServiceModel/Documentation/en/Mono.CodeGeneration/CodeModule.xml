@@ -1,6 +1,9 @@
 <Type Name="CodeModule" FullName="Mono.CodeGeneration.CodeModule">
   <TypeSignature Language="C#" Value="public class CodeModule" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit CodeModule extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit CodeModule extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,7 +19,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public CodeModule (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -31,8 +37,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateClass">
-      <MemberSignature Language="C#" Value="public Mono.CodeGeneration.CodeClass CreateClass (string name);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.CodeGeneration.CodeClass CreateClass(string name) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.CodeGeneration.CodeClass CreateClass (string name);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.CodeGeneration.CodeClass CreateClass(string name) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -51,8 +63,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateClass">
-      <MemberSignature Language="C#" Value="public Mono.CodeGeneration.CodeClass CreateClass (string name, Type baseType, Type[] interfaces);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.CodeGeneration.CodeClass CreateClass(string name, class System.Type baseType, class System.Type[] interfaces) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.CodeGeneration.CodeClass CreateClass (string name, Type baseType, Type[] interfaces);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.CodeGeneration.CodeClass CreateClass(string name, class System.Type baseType, class System.Type[] interfaces) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -81,8 +99,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateClass">
-      <MemberSignature Language="C#" Value="public Mono.CodeGeneration.CodeClass CreateClass (string name, System.Reflection.TypeAttributes attr, Type baseType, Type[] interfaces);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.CodeGeneration.CodeClass CreateClass(string name, valuetype System.Reflection.TypeAttributes attr, class System.Type baseType, class System.Type[] interfaces) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.CodeGeneration.CodeClass CreateClass (string name, System.Reflection.TypeAttributes attr, Type baseType, Type[] interfaces);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.CodeGeneration.CodeClass CreateClass(string name, valuetype System.Reflection.TypeAttributes attr, class System.Type baseType, class System.Type[] interfaces) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -113,8 +137,14 @@
       </Docs>
     </Member>
     <Member MemberName="ModuleBuilder">
-      <MemberSignature Language="C#" Value="public System.Reflection.Emit.ModuleBuilder ModuleBuilder { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.Emit.ModuleBuilder ModuleBuilder" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Reflection.Emit.ModuleBuilder ModuleBuilder { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Reflection.Emit.ModuleBuilder ModuleBuilder"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -129,8 +159,14 @@
       </Docs>
     </Member>
     <Member MemberName="Shared">
-      <MemberSignature Language="C#" Value="public static Mono.CodeGeneration.CodeModule Shared { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property class Mono.CodeGeneration.CodeModule Shared" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.CodeGeneration.CodeModule Shared { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property class Mono.CodeGeneration.CodeModule Shared"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

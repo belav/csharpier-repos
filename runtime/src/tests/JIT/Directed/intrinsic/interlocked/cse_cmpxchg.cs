@@ -3,13 +3,15 @@
 //
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Xunit;
+
 public class Foo
 {
     private static int s_taskIdCounter;
     private int _taskId = 0;
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     public int Function()
     {
@@ -20,9 +22,13 @@ public class Foo
         }
         return _taskId;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {
-        if (new Foo().Function() == 1) return 100; else return 101;
+        if (new Foo().Function() == 1)
+            return 100;
+        else
+            return 101;
     }
 }

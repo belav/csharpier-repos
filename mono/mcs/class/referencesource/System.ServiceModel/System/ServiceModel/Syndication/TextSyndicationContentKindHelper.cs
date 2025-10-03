@@ -15,9 +15,11 @@ namespace System.ServiceModel.Syndication
     {
         public static bool IsDefined(TextSyndicationContentKind kind)
         {
-            return (kind == TextSyndicationContentKind.Plaintext
+            return (
+                kind == TextSyndicationContentKind.Plaintext
                 || kind == TextSyndicationContentKind.Html
-                || kind == TextSyndicationContentKind.XHtml);
+                || kind == TextSyndicationContentKind.XHtml
+            );
         }
     }
 }

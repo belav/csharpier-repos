@@ -4,22 +4,23 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
+    using System.Collections.Specialized;
     using System.Configuration;
     using System.Configuration.Internal;
-    using System.Web;
-    using System.Web.Util;
-    using System.Security;
+    using System.Globalization;
     using System.IO;
-    using System.Web.Hosting;
-    using System.Runtime.InteropServices;
     using System.Reflection;
-    using System.Collections.Specialized;
-    using System.Xml;
+    using System.Runtime.InteropServices;
+    using System.Security;
     using System.Security.Principal;
     using System.Threading;
-    using System.Globalization;
+    using System.Web;
+    using System.Web.Hosting;
+    using System.Web.Util;
+    using System.Xml;
 
     internal enum ClsCtx
     {

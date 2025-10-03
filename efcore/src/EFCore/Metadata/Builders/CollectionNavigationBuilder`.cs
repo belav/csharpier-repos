@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <typeparam name="TRelatedEntity">The entity type that this relationship targets.</typeparam>
 public class CollectionNavigationBuilder<
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity,
-    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity> : CollectionNavigationBuilder
+    [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
+> : CollectionNavigationBuilder
     where TEntity : class
     where TRelatedEntity : class
 {
@@ -36,10 +37,9 @@ public class CollectionNavigationBuilder<
         IMutableEntityType relatedEntityType,
         MemberIdentity navigation,
         IMutableForeignKey? foreignKey,
-        IMutableSkipNavigation? skipNavigation)
-        : base(declaringEntityType, relatedEntityType, navigation, foreignKey, skipNavigation)
-    {
-    }
+        IMutableSkipNavigation? skipNavigation
+    )
+        : base(declaringEntityType, relatedEntityType, navigation, foreignKey, skipNavigation) { }
 
     /// <summary>
     ///     Configures this as a one-to-many relationship.
@@ -50,12 +50,13 @@ public class CollectionNavigationBuilder<
     /// </param>
     /// <returns>An object to further configure the relationship.</returns>
     public new virtual ReferenceCollectionBuilder<TEntity, TRelatedEntity> WithOne(
-        string? navigationName = null)
-        => new(
+        string? navigationName = null
+    ) =>
+        new(
             DeclaringEntityType,
             RelatedEntityType,
-            WithOneBuilder(
-                Check.NullButNotEmpty(navigationName, nameof(navigationName))).Metadata);
+            WithOneBuilder(Check.NullButNotEmpty(navigationName, nameof(navigationName))).Metadata
+        );
 
     /// <summary>
     ///     Configures this as a one-to-many relationship.
@@ -72,11 +73,13 @@ public class CollectionNavigationBuilder<
     /// </param>
     /// <returns>An object to further configure the relationship.</returns>
     public virtual ReferenceCollectionBuilder<TEntity, TRelatedEntity> WithOne(
-        Expression<Func<TRelatedEntity, TEntity?>>? navigationExpression)
-        => new(
+        Expression<Func<TRelatedEntity, TEntity?>>? navigationExpression
+    ) =>
+        new(
             DeclaringEntityType,
             RelatedEntityType,
-            WithOneBuilder(navigationExpression?.GetMemberAccess()).Metadata);
+            WithOneBuilder(navigationExpression?.GetMemberAccess()).Metadata
+        );
 
     /// <summary>
     ///     Configures this as a many-to-many relationship.
@@ -86,15 +89,17 @@ public class CollectionNavigationBuilder<
     ///     create a unidirectional relationship.
     /// </param>
     /// <returns>An object to further configure the relationship.</returns>
-    public new virtual CollectionCollectionBuilder<TRelatedEntity, TEntity> WithMany(string? navigationName = null)
+    public new virtual CollectionCollectionBuilder<TRelatedEntity, TEntity> WithMany(
+        string? navigationName = null
+    )
     {
         var leftName = Builder?.Metadata.PrincipalToDependent?.Name;
-        var collectionCollectionBuilder =
-            new CollectionCollectionBuilder<TRelatedEntity, TEntity>(
-                RelatedEntityType,
-                DeclaringEntityType,
-                WithLeftManyNavigation(navigationName),
-                WithRightManyNavigation(navigationName, leftName));
+        var collectionCollectionBuilder = new CollectionCollectionBuilder<TRelatedEntity, TEntity>(
+            RelatedEntityType,
+            DeclaringEntityType,
+            WithLeftManyNavigation(navigationName),
+            WithRightManyNavigation(navigationName, leftName)
+        );
 
         return collectionCollectionBuilder;
     }
@@ -110,15 +115,16 @@ public class CollectionNavigationBuilder<
     /// </param>
     /// <returns>An object to further configure the relationship.</returns>
     public virtual CollectionCollectionBuilder<TRelatedEntity, TEntity> WithMany(
-        Expression<Func<TRelatedEntity, IEnumerable<TEntity>?>> navigationExpression)
+        Expression<Func<TRelatedEntity, IEnumerable<TEntity>?>> navigationExpression
+    )
     {
         var leftName = Builder?.Metadata.PrincipalToDependent?.Name;
-        var collectionCollectionBuilder =
-            new CollectionCollectionBuilder<TRelatedEntity, TEntity>(
-                RelatedEntityType,
-                DeclaringEntityType,
-                WithLeftManyNavigation(navigationExpression.GetMemberAccess()),
-                WithRightManyNavigation(navigationExpression.GetMemberAccess(), leftName));
+        var collectionCollectionBuilder = new CollectionCollectionBuilder<TRelatedEntity, TEntity>(
+            RelatedEntityType,
+            DeclaringEntityType,
+            WithLeftManyNavigation(navigationExpression.GetMemberAccess()),
+            WithRightManyNavigation(navigationExpression.GetMemberAccess(), leftName)
+        );
 
         return collectionCollectionBuilder;
     }

@@ -20,8 +20,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "empty" pattern.</summary>
       </Docs>
@@ -32,8 +31,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "notAllowed" pattern.</summary>
       </Docs>
@@ -44,8 +42,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "text" pattern.</summary>
       </Docs>
@@ -56,8 +53,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "choice" pattern.</summary>
       </Docs>
@@ -68,8 +64,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "interleave" pattern.</summary>
       </Docs>
@@ -80,8 +75,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "group" pattern.</summary>
       </Docs>
@@ -92,8 +86,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "oneOrMore" pattern.</summary>
       </Docs>
@@ -104,8 +97,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "list" pattern.</summary>
       </Docs>
@@ -116,8 +108,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "data" pattern.</summary>
       </Docs>
@@ -128,8 +119,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>This enumeration represents a kind of "derivative" and used only in internal processing.</summary>
       </Docs>
@@ -140,8 +130,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "value" pattern.</summary>
       </Docs>
@@ -152,8 +141,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "attribute" pattern.</summary>
       </Docs>
@@ -164,8 +152,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "element" pattern.</summary>
       </Docs>
@@ -176,8 +163,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>This enumeration represents a kind of "derivative" and used only in internal processing.</summary>
       </Docs>
@@ -188,8 +174,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "ref" pattern.</summary>
       </Docs>
@@ -200,8 +185,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "grammar" pattern.</summary>
       </Docs>
@@ -212,8 +196,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "zeroOrMore" pattern.</summary>
       </Docs>
@@ -224,8 +207,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "mixed" pattern.</summary>
       </Docs>
@@ -236,8 +218,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "optional" pattern.</summary>
       </Docs>
@@ -248,8 +229,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "externalRef" pattern.</summary>
       </Docs>
@@ -260,8 +240,7 @@
       <ReturnValue>
         <ReturnType>Commons.Xml.Relaxng.RelaxngPatternType</ReturnType>
       </ReturnValue>
-      <Parameters>
-      </Parameters>
+      <Parameters></Parameters>
       <Docs>
         <summary>Represents "parentRef" pattern.</summary>
       </Docs>

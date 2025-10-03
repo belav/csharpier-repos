@@ -5,11 +5,11 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Microsoft.CodeAnalysis.CSharp</RootNamespace>
     <TargetFrameworks>$(SourceBuildTargetFrameworks);netstandard2.0</TargetFrameworks>
-    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'">full</ApplyNgenOptimization>
-
+    <ApplyNgenOptimization Condition="'$(TargetFramework)' == 'netstandard2.0'"
+      >full</ApplyNgenOptimization
+    >
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
-
     <PackageDescription>
       .NET Compiler Platform ("Roslyn") support for creating C# editing experiences.
     </PackageDescription>
@@ -46,12 +46,27 @@
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.CodeStyle.LegacyTestFramework.UnitTestUtilities" />
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.EditorFeatures.Test.Utilities2" />
     <InternalsVisibleTo Include="Roslyn.VisualStudio.Next.UnitTests" />
-    <InternalsVisibleTo Include="Microsoft.VisualStudio.Completion.Tests" Key="$(IntelliCodeCSharpKey)" WorkItem="https://github.com/dotnet/roslyn/issues/35081" />
-    <RestrictedInternalsVisibleTo Include="Microsoft.VisualStudio.IntelliCode.CSharp" Partner="Pythia" Key="$(IntelliCodeCSharpKey)" />
-    <RestrictedInternalsVisibleTo Include="Microsoft.VisualStudio.IntelliCode.CSharp.Extraction" Partner="Pythia" Key="$(IntelliCodeCSharpKey)" />
+    <InternalsVisibleTo
+      Include="Microsoft.VisualStudio.Completion.Tests"
+      Key="$(IntelliCodeCSharpKey)"
+      WorkItem="https://github.com/dotnet/roslyn/issues/35081"
+    />
+    <RestrictedInternalsVisibleTo
+      Include="Microsoft.VisualStudio.IntelliCode.CSharp"
+      Partner="Pythia"
+      Key="$(IntelliCodeCSharpKey)"
+    />
+    <RestrictedInternalsVisibleTo
+      Include="Microsoft.VisualStudio.IntelliCode.CSharp.Extraction"
+      Partner="Pythia"
+      Key="$(IntelliCodeCSharpKey)"
+    />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\Compilers\CSharp\Portable\Syntax\SyntaxBindingUtilities.cs" Link="InternalUtilities\SyntaxBindingUtilities.cs" />
+    <Compile
+      Include="..\..\..\Compilers\CSharp\Portable\Syntax\SyntaxBindingUtilities.cs"
+      Link="InternalUtilities\SyntaxBindingUtilities.cs"
+    />
     <Compile Include="..\..\..\Compilers\CSharp\Portable\Syntax\LambdaUtilities.cs">
       <Link>InternalUtilities\LambdaUtilities.cs</Link>
     </Compile>
@@ -64,9 +79,16 @@
     <PublicAPI Include="PublicAPI.Unshipped.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Humanizer.Core" Version="$(HumanizerCoreVersion)" PrivateAssets="compile" />
+    <PackageReference
+      Include="Humanizer.Core"
+      Version="$(HumanizerCoreVersion)"
+      PrivateAssets="compile"
+    />
   </ItemGroup>
-  <Import Project="..\..\..\Compilers\CSharp\CSharpAnalyzerDriver\CSharpAnalyzerDriver.projitems" Label="Shared" />
+  <Import
+    Project="..\..\..\Compilers\CSharp\CSharpAnalyzerDriver\CSharpAnalyzerDriver.projitems"
+    Label="Shared"
+  />
   <Import Project="..\..\..\Analyzers\CSharp\Analyzers\CSharpAnalyzers.projitems" Label="Shared" />
   <Import Project="..\..\..\Analyzers\CSharp\CodeFixes\CSharpCodeFixes.projitems" Label="Shared" />
 </Project>

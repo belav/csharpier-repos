@@ -5,17 +5,15 @@
 using System.IdentityModel;
 using System.IdentityModel.Tokens;
 using System.Runtime.Serialization;
+using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Principal;
-using System.Security.Claims;
-
 using Claim = System.Security.Claims.Claim;
 
 namespace System.Security.Claims
 {
     internal static class ClaimsHelper
     {
-
         /// <summary>
         /// Creates a <see cref="WindowsIdentity"/> associated with a given X509 certificate.
         /// </summary>
@@ -34,8 +32,11 @@ namespace System.Security.Claims
                 string upn = x509Certificate.GetNameInfo(X509NameType.UpnName, false);
                 if (string.IsNullOrEmpty(upn))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.ID4067,
-                        X509Util.GetCertificateId(x509Certificate))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(SR.ID4067, X509Util.GetCertificateId(x509Certificate))
+                        )
+                    );
                 }
 
                 return new WindowsIdentity(upn);
@@ -61,7 +62,9 @@ namespace System.Security.Claims
                     // Complain if we already found a UPN claim
                     if (upn != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID1053)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(SR.GetString(SR.ID1053))
+                        );
                     }
                     upn = claim.Value;
                 }
@@ -69,7 +72,9 @@ namespace System.Security.Claims
 
             if (string.IsNullOrEmpty(upn))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID1054)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.ID1054))
+                );
             }
             return upn;
         }
@@ -128,7 +133,7 @@ namespace System.Security.Claims
                 //
                 // Replace the thread token with the original.
                 // Setting the thread token to zero will stop impersonating.
-                // 
+                //
                 if( !NativeMethods.SetThreadToken(
                             IntPtr.Zero, // current thread
                             originalThreadToken ) )

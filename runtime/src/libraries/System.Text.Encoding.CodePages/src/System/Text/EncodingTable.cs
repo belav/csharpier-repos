@@ -9,9 +9,14 @@ namespace System.Text
 {
     internal static partial class EncodingTable
     {
-        private static readonly Dictionary<string, int> s_nameToCodePageCache = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<int, string> s_codePageToWebNameCache = new Dictionary<int, string>();
-        private static readonly Dictionary<int, string> s_codePageToEnglishNameCache = new Dictionary<int, string>();
+        private static readonly Dictionary<string, int> s_nameToCodePageCache = new Dictionary<
+            string,
+            int
+        >(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<int, string> s_codePageToWebNameCache =
+            new Dictionary<int, string>();
+        private static readonly Dictionary<int, string> s_codePageToEnglishNameCache =
+            new Dictionary<int, string>();
         private static readonly ReaderWriterLockSlim s_cacheLock = new ReaderWriterLockSlim();
 
         internal static int GetCodePageFromName(string name)
@@ -69,7 +74,9 @@ namespace System.Text
             int result;
 
             Debug.Assert(encodingNameIndices.Length == CodePagesByName.Length + 1);
-            Debug.Assert(encodingNameIndices[encodingNameIndices.Length - 1] == EncodingNames.Length);
+            Debug.Assert(
+                encodingNameIndices[encodingNameIndices.Length - 1] == EncodingNames.Length
+            );
 
             name = name.ToLowerInvariant();
 
@@ -80,7 +87,12 @@ namespace System.Text
                 index = ((right - left) / 2) + left;
 
                 Debug.Assert(index < encodingNameIndices.Length - 1);
-                result = CompareOrdinal(name, EncodingNames, encodingNameIndices[index], encodingNameIndices[index + 1] - encodingNameIndices[index]);
+                result = CompareOrdinal(
+                    name,
+                    EncodingNames,
+                    encodingNameIndices[index],
+                    encodingNameIndices[index + 1] - encodingNameIndices[index]
+                );
                 if (result == 0)
                 {
                     //We found the item, return the associated codePage.
@@ -102,7 +114,14 @@ namespace System.Text
             for (; left <= right; left++)
             {
                 Debug.Assert(left < encodingNameIndices.Length - 1);
-                if (CompareOrdinal(name, EncodingNames, encodingNameIndices[left], encodingNameIndices[left + 1] - encodingNameIndices[left]) == 0)
+                if (
+                    CompareOrdinal(
+                        name,
+                        EncodingNames,
+                        encodingNameIndices[left],
+                        encodingNameIndices[left + 1] - encodingNameIndices[left]
+                    ) == 0
+                )
                 {
                     return CodePagesByName[left];
                 }
@@ -130,15 +149,30 @@ namespace System.Text
 
         internal static string? GetWebNameFromCodePage(int codePage)
         {
-            return GetNameFromCodePage(codePage, WebNames, WebNameIndices, s_codePageToWebNameCache);
+            return GetNameFromCodePage(
+                codePage,
+                WebNames,
+                WebNameIndices,
+                s_codePageToWebNameCache
+            );
         }
 
         internal static string? GetEnglishNameFromCodePage(int codePage)
         {
-            return GetNameFromCodePage(codePage, EnglishNames, EnglishNameIndices, s_codePageToEnglishNameCache);
+            return GetNameFromCodePage(
+                codePage,
+                EnglishNames,
+                EnglishNameIndices,
+                s_codePageToEnglishNameCache
+            );
         }
 
-        private static string? GetNameFromCodePage(int codePage, string names, ReadOnlySpan<int> indices, Dictionary<int, string> cache)
+        private static string? GetNameFromCodePage(
+            int codePage,
+            string names,
+            ReadOnlySpan<int> indices,
+            Dictionary<int, string> cache
+        )
         {
             string? name;
 

@@ -17,9 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerLocationColumnDefinition()
-        {
-        }
+        public AnalyzerLocationColumnDefinition() { }
 
         public override string Name => Location;
         public override string DisplayName => ServicesVSResources.Location;

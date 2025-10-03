@@ -25,8 +25,7 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     ///     Gets the entity type that this property belongs to.
     /// </summary>
     [Obsolete("Use DeclaringType and cast to IMutableEntityType or IMutableComplexType")]
-    new IMutableEntityType DeclaringEntityType
-        => (IMutableEntityType)DeclaringType;
+    new IMutableEntityType DeclaringEntityType => (IMutableEntityType)DeclaringType;
 
     /// <summary>
     ///     Gets or sets a value indicating whether this property can contain <see langword="null" />.
@@ -61,16 +60,15 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     ///     if the given property is part of a foreign key.
     /// </summary>
     /// <returns>The first associated principal property, or <see langword="null" /> if none exists.</returns>
-    new IMutableProperty? FindFirstPrincipal()
-        => (IMutableProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
+    new IMutableProperty? FindFirstPrincipal() =>
+        (IMutableProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
     /// <summary>
     ///     Finds the list of principal properties including the given property that the given property is constrained by
     ///     if the given property is part of a foreign key.
     /// </summary>
     /// <returns>The list of all associated principal properties including the given property.</returns>
-    new IReadOnlyList<IMutableProperty> GetPrincipals()
-        => GetPrincipals<IMutableProperty>();
+    new IReadOnlyList<IMutableProperty> GetPrincipals() => GetPrincipals<IMutableProperty>();
 
     /// <summary>
     ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
@@ -97,8 +95,8 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     /// <returns>
     ///     The primary that use this property, or <see langword="null" /> if it is not part of the primary key.
     /// </returns>
-    new IMutableKey? FindContainingPrimaryKey()
-        => (IMutableKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
+    new IMutableKey? FindContainingPrimaryKey() =>
+        (IMutableKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
 
     /// <summary>
     ///     Gets all primary or alternate keys that use this property (including composite keys in which this property
@@ -191,7 +189,9 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     ///     A factory that will be used to create the value generator, or <see langword="null" /> to
     ///     clear any previously set factory.
     /// </param>
-    void SetValueGeneratorFactory(Func<IProperty, ITypeBase, ValueGenerator>? valueGeneratorFactory);
+    void SetValueGeneratorFactory(
+        Func<IProperty, ITypeBase, ValueGenerator>? valueGeneratorFactory
+    );
 
     /// <summary>
     ///     Sets the factory to use for generating values for this property, or <see langword="null" /> to clear any previously set factory.
@@ -206,7 +206,8 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     /// </param>
     void SetValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactory);
+            Type? valueGeneratorFactory
+    );
 
     /// <summary>
     ///     Sets the custom <see cref="ValueConverter" /> for this property.
@@ -220,7 +221,10 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     /// <param name="converterType">
     ///     A type that derives from <see cref="ValueConverter" />, or <see langword="null" /> to remove any previously set converter.
     /// </param>
-    void SetValueConverter([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? converterType);
+    void SetValueConverter(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? converterType
+    );
 
     /// <summary>
     ///     Sets the type that the property value will be converted to before being sent to the database provider.
@@ -246,7 +250,10 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     /// <param name="comparerType">
     ///     A type that derives from <see cref="ValueComparer" />, or <see langword="null" /> to remove any previously set comparer.
     /// </param>
-    void SetValueComparer([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type? comparerType);
+    void SetValueComparer(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? comparerType
+    );
 
     /// <summary>
     ///     Sets the custom <see cref="ValueComparer" /> to use for the provider values for this property.
@@ -262,7 +269,8 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     /// </param>
     void SetProviderValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType);
+            Type? comparerType
+    );
 
     /// <summary>
     ///     Sets the type of <see cref="JsonValueReaderWriter{TValue}" /> to use for this property for this property.
@@ -286,18 +294,14 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     void SetElementType(Type? elementType);
 
     /// <inheritdoc />
-    bool IReadOnlyProperty.IsNullable
-        => IsNullable;
+    bool IReadOnlyProperty.IsNullable => IsNullable;
 
     /// <inheritdoc />
-    ValueGenerated IReadOnlyProperty.ValueGenerated
-        => ValueGenerated;
+    ValueGenerated IReadOnlyProperty.ValueGenerated => ValueGenerated;
 
     /// <inheritdoc />
-    bool IReadOnlyProperty.IsConcurrencyToken
-        => IsConcurrencyToken;
+    bool IReadOnlyProperty.IsConcurrencyToken => IsConcurrencyToken;
 
     /// <inheritdoc />
-    IReadOnlyElementType? IReadOnlyProperty.GetElementType()
-        => GetElementType();
+    IReadOnlyElementType? IReadOnlyProperty.GetElementType() => GetElementType();
 }

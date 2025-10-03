@@ -35,8 +35,11 @@ namespace SourceGenerators
 
         public bool CanBeNull => !IsValueType || SpecialType is SpecialType.System_Nullable_T;
 
-        public bool Equals(TypeRef? other) => other != null && FullyQualifiedName == other.FullyQualifiedName;
+        public bool Equals(TypeRef? other) =>
+            other != null && FullyQualifiedName == other.FullyQualifiedName;
+
         public override bool Equals(object? obj) => Equals(obj as TypeRef);
+
         public override int GetHashCode() => FullyQualifiedName.GetHashCode();
     }
 }

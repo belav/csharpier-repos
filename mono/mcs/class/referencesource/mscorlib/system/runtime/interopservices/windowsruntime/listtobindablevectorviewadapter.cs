@@ -1,21 +1,21 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -41,7 +41,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             // that Size > Int32.MaxValue:
             if (((uint)Int32.MaxValue) <= index || index >= (uint)listCapacity)
             {
-                Exception e = new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_IndexLargerThanMaxValue"));
+                Exception e = new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_IndexLargerThanMaxValue")
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }
@@ -52,7 +55,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         public IBindableIterator First()
         {
             IEnumerator enumerator = list.GetEnumerator();
-            return new EnumeratorToIteratorAdapter<object>(new EnumerableToBindableIterableAdapter.NonGenericToGenericEnumerator(enumerator));
+            return new EnumeratorToIteratorAdapter<object>(
+                new EnumerableToBindableIterableAdapter.NonGenericToGenericEnumerator(enumerator)
+            );
         }
 
         // IBindableVectorView implementation:
@@ -64,20 +69,20 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             try
             {
                 return list[(int)index];
-
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                throw WindowsRuntimeMarshal.GetExceptionForHR(__HResults.E_BOUNDS, ex, "ArgumentOutOfRange_IndexOutOfRange");
+                throw WindowsRuntimeMarshal.GetExceptionForHR(
+                    __HResults.E_BOUNDS,
+                    ex,
+                    "ArgumentOutOfRange_IndexOutOfRange"
+                );
             }
         }
 
         public uint Size
         {
-            get
-            {
-                return (uint)list.Count;
-            }
+            get { return (uint)list.Count; }
         }
 
         public bool IndexOf(object value, out uint index)

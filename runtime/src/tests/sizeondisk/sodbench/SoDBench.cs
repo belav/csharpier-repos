@@ -1,16 +1,16 @@
-using CommandLine;
-using CommandLine.Text;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using CommandLine;
+using CommandLine.Text;
+using Newtonsoft.Json;
 
 namespace SoDBench
 {
@@ -18,14 +18,14 @@ namespace SoDBench
     // Does not have to accurately represent the true file system; only what we care about
     class SizeReportingNode
     {
-        public SizeReportingNode(string name, long? size=null, bool expand=true)
+        public SizeReportingNode(string name, long? size = null, bool expand = true)
         {
             Name = name;
             _size = size;
             Expanded = expand;
         }
 
-        public SizeReportingNode(FileInfo file, bool expand=true)
+        public SizeReportingNode(FileInfo file, bool expand = true)
         {
             Name = file.Name;
             _size = file.Length;
@@ -33,7 +33,7 @@ namespace SoDBench
         }
 
         // Builds out the tree starting from a directory
-        public SizeReportingNode(DirectoryInfo dir, int? reportingDepth=null)
+        public SizeReportingNode(DirectoryInfo dir, int? reportingDepth = null)
         {
             Name = dir.Name;
 
@@ -53,12 +53,12 @@ namespace SoDBench
             }
         }
 
-
         // The directory containing this node
         public SizeReportingNode Parent { get; set; }
 
         // All the directories and files this node contains
-        public List<SizeReportingNode> Children {get; private set;} = new List<SizeReportingNode>();
+        public List<SizeReportingNode> Children { get; private set; } =
+            new List<SizeReportingNode>();
 
         // The file or directory name
         public string Name { get; set; }
@@ -66,7 +66,8 @@ namespace SoDBench
         public bool Expanded { get; set; } = true;
 
         // A list version of the path up to the root level we care about
-        public List<string> SegmentedPath {
+        public List<string> SegmentedPath
+        {
             get
             {
                 if (Parent != null)
@@ -80,7 +81,8 @@ namespace SoDBench
         }
 
         // The size of the file or directory
-        public long Size {
+        public long Size
+        {
             get
             {
                 if (_size == null)
@@ -93,13 +95,8 @@ namespace SoDBench
                 }
                 return _size ?? 0;
             }
-
-            private set
-            {
-                _size = value;
-            }
+            private set { _size = value; }
         }
-
 
         // Add the adoptee node as a child and set the adoptee's parent
         public void AddChild(SizeReportingNode adoptee)
@@ -118,7 +115,7 @@ namespace SoDBench
 
             foreach (var childNode in Children)
             {
-                childNode.LimitReportingDepth(depth-1);
+                childNode.LimitReportingDepth(depth - 1);
             }
         }
 
@@ -151,7 +148,7 @@ namespace SoDBench
     class Program
     {
         public static readonly string NugetConfig =
-        @"<?xml version='1.0' encoding='utf-8'?>
+            @"<?xml version='1.0' encoding='utf-8'?>
         <configuration>
         <packageSources>
             <add key='dotnet-public' value='https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-public/nuget/v3/index.json' protocolVersion='3' />
@@ -159,7 +156,8 @@ namespace SoDBench
         </packageSources>
         </configuration>";
 
-        public static readonly string[] NewTemplates = new string[] {
+        public static readonly string[] NewTemplates = new string[]
+        {
             "console",
             "classlib",
             "mstest",
@@ -173,14 +171,15 @@ namespace SoDBench
             "sln",
             "page",
             "viewimports",
-            "viewstart"
+            "viewstart",
         };
 
-        public static readonly string[] OperatingSystems = new string[] {
+        public static readonly string[] OperatingSystems = new string[]
+        {
             "win10-x64",
             "win10-x86",
             "ubuntu.16.10-x64",
-            "rhel.7-x64"
+            "rhel.7-x64",
         };
 
         static FileInfo s_dotnetExe;
@@ -209,16 +208,23 @@ namespace SoDBench
                 if (s_sandboxDir == null)
                 {
                     // Truncate the Guid used for anti-collision because a full Guid results in expanded paths over 260 chars (the Windows max)
-                    s_sandboxDir = new DirectoryInfo(Path.Combine(Path.GetTempPath(), $"sod{Guid.NewGuid().ToString().Substring(0,13)}"));
+                    s_sandboxDir = new DirectoryInfo(
+                        Path.Combine(
+                            Path.GetTempPath(),
+                            $"sod{Guid.NewGuid().ToString().Substring(0, 13)}"
+                        )
+                    );
                     s_sandboxDir.Create();
                     Console.WriteLine($"** Running inside sandbox directory: {s_sandboxDir}");
                 }
 
                 if (s_dotnetExe == null)
                 {
-                    if(!String.IsNullOrEmpty(options.CoreLibrariesDirectory))
+                    if (!String.IsNullOrEmpty(options.CoreLibrariesDirectory))
                     {
-                        Console.WriteLine($"** Using core libraries found at {options.CoreLibrariesDirectory}");
+                        Console.WriteLine(
+                            $"** Using core libraries found at {options.CoreLibrariesDirectory}"
+                        );
                         s_corelibsDir = new DirectoryInfo(options.CoreLibrariesDirectory);
                     }
                     else
@@ -226,7 +232,9 @@ namespace SoDBench
                         var coreroot = Environment.GetEnvironmentVariable("CORE_ROOT");
                         if (!String.IsNullOrEmpty(coreroot) && Directory.Exists(coreroot))
                         {
-                            Console.WriteLine($"** Using core libraries from CORE_ROOT at {coreroot}");
+                            Console.WriteLine(
+                                $"** Using core libraries from CORE_ROOT at {coreroot}"
+                            );
                             s_corelibsDir = new DirectoryInfo(coreroot);
                         }
                         else
@@ -241,7 +249,9 @@ namespace SoDBench
 
                 if (s_fallbackDir == null)
                 {
-                    s_fallbackDir = new DirectoryInfo(Path.Combine(s_sandboxDir.FullName, "fallback"));
+                    s_fallbackDir = new DirectoryInfo(
+                        Path.Combine(s_sandboxDir.FullName, "fallback")
+                    );
                     s_fallbackDir.Create();
                 }
 
@@ -278,9 +288,13 @@ namespace SoDBench
         private static void PrintHeader(string message)
         {
             Console.WriteLine();
-            Console.WriteLine("**********************************************************************");
+            Console.WriteLine(
+                "**********************************************************************"
+            );
             Console.WriteLine($"** {message}");
-            Console.WriteLine("**********************************************************************");
+            Console.WriteLine(
+                "**********************************************************************"
+            );
         }
 
         private static SizeReportingNode GetAcquisitionSize()
@@ -292,7 +306,7 @@ namespace SoDBench
             {
                 WorkingDirectory = s_sandboxDir.FullName,
                 FileName = s_dotnetExe.FullName,
-                Arguments = "new"
+                Arguments = "new",
             };
 
             // Used to set where the packages will be unpacked to.
@@ -308,11 +322,11 @@ namespace SoDBench
             var dotnetNode = new SizeReportingNode(s_dotnetExe.Directory);
             var reportingDepths = new Dictionary<string, int>
             {
-                {"additionalDeps", 1},
-                {"host", 0},
-                {"sdk", 2},
-                {"shared", 2},
-                {"store", 3}
+                { "additionalDeps", 1 },
+                { "host", 0 },
+                { "sdk", 2 },
+                { "shared", 2 },
+                { "store", 3 },
             };
             foreach (var childNode in dotnetNode.Children)
             {
@@ -343,8 +357,12 @@ namespace SoDBench
                 {
                     Console.WriteLine($"\n\n** Deploying {template}/{os}");
 
-                    var deploymentSandbox = new DirectoryInfo(Path.Combine(s_sandboxDir.FullName, template, os));
-                    var publishDir = new DirectoryInfo(Path.Combine(deploymentSandbox.FullName, "publish"));
+                    var deploymentSandbox = new DirectoryInfo(
+                        Path.Combine(s_sandboxDir.FullName, template, os)
+                    );
+                    var publishDir = new DirectoryInfo(
+                        Path.Combine(deploymentSandbox.FullName, "publish")
+                    );
                     deploymentSandbox.Create();
 
                     ProcessStartInfo dotnetNew = new ProcessStartInfo()
@@ -352,28 +370,32 @@ namespace SoDBench
                         FileName = s_dotnetExe.FullName,
                         Arguments = $"new {template}",
                         UseShellExecute = false,
-                        WorkingDirectory = deploymentSandbox.FullName
+                        WorkingDirectory = deploymentSandbox.FullName,
                     };
-                    dotnetNew.Environment["DOTNET_CLI_TEST_FALLBACKFOLDER"] = s_fallbackDir.FullName;
+                    dotnetNew.Environment["DOTNET_CLI_TEST_FALLBACKFOLDER"] =
+                        s_fallbackDir.FullName;
 
                     ProcessStartInfo dotnetRestore = new ProcessStartInfo()
                     {
                         FileName = s_dotnetExe.FullName,
                         Arguments = $"restore --runtime {os}",
                         UseShellExecute = false,
-                        WorkingDirectory = deploymentSandbox.FullName
+                        WorkingDirectory = deploymentSandbox.FullName,
                     };
-                    dotnetRestore.Environment["DOTNET_CLI_TEST_FALLBACKFOLDER"] = s_fallbackDir.FullName;
+                    dotnetRestore.Environment["DOTNET_CLI_TEST_FALLBACKFOLDER"] =
+                        s_fallbackDir.FullName;
 
                     ProcessStartInfo dotnetPublish = new ProcessStartInfo()
                     {
                         FileName = s_dotnetExe.FullName,
                         // The UserSharedCompiler flag is set to false to prevent handles from being held that will later cause deletion of the installed SDK to fail.
-                        Arguments = $"publish -c Release --runtime {os} --output {publishDir.FullName} /p:UseSharedCompilation=false /p:UseRazorBuildServer=false",
+                        Arguments =
+                            $"publish -c Release --runtime {os} --output {publishDir.FullName} /p:UseSharedCompilation=false /p:UseRazorBuildServer=false",
                         UseShellExecute = false,
-                        WorkingDirectory = deploymentSandbox.FullName
+                        WorkingDirectory = deploymentSandbox.FullName,
                     };
-                    dotnetPublish.Environment["DOTNET_CLI_TEST_FALLBACKFOLDER"] = s_fallbackDir.FullName;
+                    dotnetPublish.Environment["DOTNET_CLI_TEST_FALLBACKFOLDER"] =
+                        s_fallbackDir.FullName;
 
                     try
                     {
@@ -385,7 +407,9 @@ namespace SoDBench
                         }
                         else
                         {
-                            Console.WriteLine($"** {template} does not have a project file to restore or publish");
+                            Console.WriteLine(
+                                $"** {template} does not have a project file to restore or publish"
+                            );
                         }
                     }
                     catch (Exception e)
@@ -401,8 +425,11 @@ namespace SoDBench
                         publishNode.Name = deploymentSandbox.Name;
                         templateNode.AddChild(publishNode);
 
-                        if (publishNode.Size <= 0) {
-                            throw new InvalidOperationException($"{publishNode.Name} reports as invalid size {publishNode.Size}");
+                        if (publishNode.Size <= 0)
+                        {
+                            throw new InvalidOperationException(
+                                $"{publishNode.Name} reports as invalid size {publishNode.Size}"
+                            );
                         }
                     }
                     else
@@ -416,30 +443,36 @@ namespace SoDBench
 
         private static void DownloadDotnetInstaller()
         {
-            var psi = new ProcessStartInfo() {
+            var psi = new ProcessStartInfo()
+            {
                 WorkingDirectory = s_sandboxDir.FullName,
                 FileName = @"powershell.exe",
-                Arguments = $"-NoProfile wget https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.ps1 -OutFile Dotnet-Install.ps1"
+                Arguments =
+                    $"-NoProfile wget https://raw.githubusercontent.com/dotnet/cli/master/scripts/obtain/dotnet-install.ps1 -OutFile Dotnet-Install.ps1",
             };
             LaunchProcess(psi, 180000);
         }
 
         private static void InstallSharedRuntime()
         {
-            var psi = new ProcessStartInfo() {
+            var psi = new ProcessStartInfo()
+            {
                 WorkingDirectory = s_sandboxDir.FullName,
                 FileName = @"powershell.exe",
-                Arguments = $"-NoProfile -ExecutionPolicy Bypass -File .\\Dotnet-Install.ps1 -Runtime dotnet -InstallDir .dotnet -Channel {s_dotnetChannel} -Architecture {s_targetArchitecture}"
+                Arguments =
+                    $"-NoProfile -ExecutionPolicy Bypass -File .\\Dotnet-Install.ps1 -Runtime dotnet -InstallDir .dotnet -Channel {s_dotnetChannel} -Architecture {s_targetArchitecture}",
             };
             LaunchProcess(psi, 180000);
         }
 
         private static void InstallDotnet()
         {
-            var psi = new ProcessStartInfo() {
+            var psi = new ProcessStartInfo()
+            {
                 WorkingDirectory = s_sandboxDir.FullName,
                 FileName = @"powershell.exe",
-                Arguments = $"-NoProfile -ExecutionPolicy Bypass -File .\\Dotnet-Install.ps1 -InstallDir .dotnet -Channel {s_dotnetChannel} -Architecture {s_targetArchitecture}"
+                Arguments =
+                    $"-NoProfile -ExecutionPolicy Bypass -File .\\Dotnet-Install.ps1 -InstallDir .dotnet -Channel {s_dotnetChannel} -Architecture {s_targetArchitecture}",
             };
             LaunchProcess(psi, 180000);
         }
@@ -453,16 +486,25 @@ namespace SoDBench
 
             // Get the directory containing the newest version of Microsodt.NETCore.App libraries
             var targetdi = new DirectoryInfo(
-                new DirectoryInfo(Path.Combine(s_sandboxDir.FullName, ".dotnet", "shared", "Microsoft.NETCore.App"))
-                .GetDirectories("*")
-                .OrderBy(s => s.Name)
-                .Last()
-                .FullName);
+                new DirectoryInfo(
+                    Path.Combine(
+                        s_sandboxDir.FullName,
+                        ".dotnet",
+                        "shared",
+                        "Microsoft.NETCore.App"
+                    )
+                )
+                    .GetDirectories("*")
+                    .OrderBy(s => s.Name)
+                    .Last()
+                    .FullName
+            );
 
             Console.WriteLine($"| Source : {sourcedi.FullName}");
             Console.WriteLine($"| Target : {targetdi.FullName}");
 
-            var compiledBinariesOfInterest = new string[] {
+            var compiledBinariesOfInterest = new string[]
+            {
                 "clretwrc.dll",
                 "clrjit.dll",
                 "coreclr.dll",
@@ -471,7 +513,7 @@ namespace SoDBench
                 "mscorrc.dll",
                 "sos.dll",
                 "SOS.NETCore.dll",
-                "System.Private.CoreLib.dll"
+                "System.Private.CoreLib.dll",
             };
 
             foreach (var compiledBinaryOfInterest in compiledBinariesOfInterest)
@@ -500,17 +542,27 @@ namespace SoDBench
                 ModifySharedFramework();
             }
 
-            var dotnetExe = new FileInfo(Path.Combine(s_sandboxDir.FullName, ".dotnet", "dotnet.exe"));
+            var dotnetExe = new FileInfo(
+                Path.Combine(s_sandboxDir.FullName, ".dotnet", "dotnet.exe")
+            );
             Debug.Assert(dotnetExe.Exists);
 
             return dotnetExe;
         }
 
-        private static void LaunchProcess(ProcessStartInfo processStartInfo, int timeoutMilliseconds, IDictionary<string, string> environment = null)
+        private static void LaunchProcess(
+            ProcessStartInfo processStartInfo,
+            int timeoutMilliseconds,
+            IDictionary<string, string> environment = null
+        )
         {
             Console.WriteLine();
-            Console.WriteLine($"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}@{Environment.MachineName} \"{processStartInfo.WorkingDirectory}\"");
-            Console.WriteLine($"[{DateTime.Now}] $ {processStartInfo.FileName} {processStartInfo.Arguments}");
+            Console.WriteLine(
+                $"{System.Security.Principal.WindowsIdentity.GetCurrent().Name}@{Environment.MachineName} \"{processStartInfo.WorkingDirectory}\""
+            );
+            Console.WriteLine(
+                $"[{DateTime.Now}] $ {processStartInfo.FileName} {processStartInfo.Arguments}"
+            );
 
             if (environment != null)
             {
@@ -530,11 +582,15 @@ namespace SoDBench
                 {
                     // FIXME: What about clean/kill child processes?
                     p.Kill();
-                    throw new TimeoutException($"The process '{processStartInfo.FileName} {processStartInfo.Arguments}' timed out.");
+                    throw new TimeoutException(
+                        $"The process '{processStartInfo.FileName} {processStartInfo.Arguments}' timed out."
+                    );
                 }
 
                 if (p.ExitCode != 0)
-                    throw new Exception($"{processStartInfo.FileName} exited with error code {p.ExitCode}");
+                    throw new Exception(
+                        $"{processStartInfo.FileName} exited with error code {p.ExitCode}"
+                    );
             }
         }
 
@@ -548,85 +604,117 @@ namespace SoDBench
             private static string NormalizePath(string path)
             {
                 if (String.IsNullOrWhiteSpace(path))
-                    throw new InvalidOperationException($"'{path}' is an invalid path: cannot be null or whitespace");
+                    throw new InvalidOperationException(
+                        $"'{path}' is an invalid path: cannot be null or whitespace"
+                    );
 
                 if (path.Any(c => Path.GetInvalidPathChars().Contains(c)))
-                    throw new InvalidOperationException($"'{path}' is an invalid path: contains invalid characters");
+                    throw new InvalidOperationException(
+                        $"'{path}' is an invalid path: contains invalid characters"
+                    );
 
                 return Path.IsPathRooted(path) ? path : Path.GetFullPath(path);
             }
 
-            [Option('o', Required = false, HelpText = "Specifies the output file name for the csv document")]
+            [Option(
+                'o',
+                Required = false,
+                HelpText = "Specifies the output file name for the csv document"
+            )]
             public string OutputFilename
             {
                 get { return _outputFilename; }
-
-                set
-                {
-                    _outputFilename = NormalizePath(value);
-                }
+                set { _outputFilename = NormalizePath(value); }
             }
 
-            [Option("dotnet", Required = false, HelpText = "Specifies the location of dotnet cli to use.")]
+            [Option(
+                "dotnet",
+                Required = false,
+                HelpText = "Specifies the location of dotnet cli to use."
+            )]
             public string DotnetExecutable
             {
                 get { return _dotnetExe; }
-
-                set
-                {
-                    _dotnetExe = NormalizePath(value);
-                }
+                set { _dotnetExe = NormalizePath(value); }
             }
 
-            [Option("corelibs", Required = false, HelpText = "Specifies the location of .NET Core libraries to patch into dotnet. Cannot be used with --dotnet")]
+            [Option(
+                "corelibs",
+                Required = false,
+                HelpText = "Specifies the location of .NET Core libraries to patch into dotnet. Cannot be used with --dotnet"
+            )]
             public string CoreLibrariesDirectory
             {
                 get { return _corelibsDir; }
-
-                set
-                {
-                    _corelibsDir = NormalizePath(value);
-                }
+                set { _corelibsDir = NormalizePath(value); }
             }
 
-            [Option("architecture", Required = false, Default = "x64", HelpText = "JitBench target architecture (It must match the built product that was copied into sandbox).")]
+            [Option(
+                "architecture",
+                Required = false,
+                Default = "x64",
+                HelpText = "JitBench target architecture (It must match the built product that was copied into sandbox)."
+            )]
             public string TargetArchitecture { get; set; }
 
-            [Option("channel", Required = false, Default = "master", HelpText = "Specifies the channel to use when installing the dotnet-cli")]
+            [Option(
+                "channel",
+                Required = false,
+                Default = "master",
+                HelpText = "Specifies the channel to use when installing the dotnet-cli"
+            )]
             public string DotnetChannel { get; set; }
 
             [Option('v', Required = false, HelpText = "Sets output to verbose")]
             public bool Verbose { get; set; }
 
-            [Option("keep-artifacts", Required = false, HelpText = "Specifies that artifacts of this run should be kept")]
+            [Option(
+                "keep-artifacts",
+                Required = false,
+                HelpText = "Specifies that artifacts of this run should be kept"
+            )]
             public bool KeepArtifacts { get; set; }
 
             public static SoDBenchOptions Parse(string[] args)
             {
-                using (var parser = new Parser((settings) => {
-                    settings.CaseInsensitiveEnumValues = true;
-                    settings.CaseSensitive = false;
-                    settings.HelpWriter = new StringWriter();
-                    settings.IgnoreUnknownArguments = true;
-                }))
+                using (
+                    var parser = new Parser(
+                        (settings) =>
+                        {
+                            settings.CaseInsensitiveEnumValues = true;
+                            settings.CaseSensitive = false;
+                            settings.HelpWriter = new StringWriter();
+                            settings.IgnoreUnknownArguments = true;
+                        }
+                    )
+                )
                 {
                     SoDBenchOptions options = null;
-                    parser.ParseArguments<SoDBenchOptions>(args)
+                    parser
+                        .ParseArguments<SoDBenchOptions>(args)
                         .WithParsed(parsed => options = parsed)
-                        .WithNotParsed(errors => {
+                        .WithNotParsed(errors =>
+                        {
                             foreach (Error error in errors)
                             {
                                 switch (error.Tag)
                                 {
                                     case ErrorType.MissingValueOptionError:
                                         throw new ArgumentException(
-                                                $"Missing value option for command line argument '{(error as MissingValueOptionError).NameInfo.NameText}'");
+                                            $"Missing value option for command line argument '{(error as MissingValueOptionError).NameInfo.NameText}'"
+                                        );
                                     case ErrorType.HelpRequestedError:
                                         Console.WriteLine(Usage());
                                         Environment.Exit(0);
                                         break;
                                     case ErrorType.VersionRequestedError:
-                                        Console.WriteLine(new AssemblyName(typeof(SoDBenchOptions).GetTypeInfo().Assembly.FullName).Version);
+                                        Console.WriteLine(
+                                            new AssemblyName(
+                                                typeof(SoDBenchOptions)
+                                                    .GetTypeInfo()
+                                                    .Assembly.FullName
+                                            ).Version
+                                        );
                                         Environment.Exit(0);
                                         break;
                                     case ErrorType.BadFormatTokenError:
@@ -644,9 +732,15 @@ namespace SoDBench
                             }
                         });
 
-                    if (options != null && !String.IsNullOrEmpty(options.DotnetExecutable) && !String.IsNullOrEmpty(options.CoreLibrariesDirectory))
+                    if (
+                        options != null
+                        && !String.IsNullOrEmpty(options.DotnetExecutable)
+                        && !String.IsNullOrEmpty(options.CoreLibrariesDirectory)
+                    )
                     {
-                        throw new ArgumentException("--dotnet and --corlibs cannot be used together");
+                        throw new ArgumentException(
+                            "--dotnet and --corlibs cannot be used together"
+                        );
                     }
 
                     return options;
@@ -655,14 +749,16 @@ namespace SoDBench
 
             public static string Usage()
             {
-                var parser = new Parser((parserSettings) =>
-                {
-                    parserSettings.CaseInsensitiveEnumValues = true;
-                    parserSettings.CaseSensitive = false;
-                    parserSettings.EnableDashDash = true;
-                    parserSettings.HelpWriter = new StringWriter();
-                    parserSettings.IgnoreUnknownArguments = true;
-                });
+                var parser = new Parser(
+                    (parserSettings) =>
+                    {
+                        parserSettings.CaseInsensitiveEnumValues = true;
+                        parserSettings.CaseSensitive = false;
+                        parserSettings.EnableDashDash = true;
+                        parserSettings.HelpWriter = new StringWriter();
+                        parserSettings.IgnoreUnknownArguments = true;
+                    }
+                );
 
                 var helpTextString = new HelpText
                 {
@@ -671,7 +767,9 @@ namespace SoDBench
                     AdditionalNewLineAfterOption = false,
                     Heading = "SoDBench",
                     MaximumDisplayWidth = 80,
-                }.AddOptions(parser.ParseArguments<SoDBenchOptions>(new string[] { "--help" })).ToString();
+                }
+                    .AddOptions(parser.ParseArguments<SoDBenchOptions>(new string[] { "--help" }))
+                    .ToString();
                 return helpTextString;
             }
 
@@ -680,7 +778,7 @@ namespace SoDBench
             private string _outputFilename = "measurement.csv";
         }
 
-        private static void DeleteDirectory(DirectoryInfo dir, uint maxWait=10000)
+        private static void DeleteDirectory(DirectoryInfo dir, uint maxWait = 10000)
         {
             foreach (var subdir in dir.GetDirectories())
             {
@@ -703,8 +801,16 @@ namespace SoDBench
                         {
                             File.Delete(f.FullName);
                         }
-                        catch (IOException) { if (waitTime > maxWait) throw; }
-                        catch (UnauthorizedAccessException) { if (waitTime > maxWait) throw; }
+                        catch (IOException)
+                        {
+                            if (waitTime > maxWait)
+                                throw;
+                        }
+                        catch (UnauthorizedAccessException)
+                        {
+                            if (waitTime > maxWait)
+                                throw;
+                        }
 
                         if (File.Exists(f.FullName))
                         {
@@ -736,12 +842,12 @@ namespace SoDBench
     // Used instead of a package because only these < 20 lines of code are needed
     public static class Csv
     {
-        public static string Escape( string s )
+        public static string Escape(string s)
         {
-            if ( s.Contains( QUOTE ) )
-                s = s.Replace( QUOTE, ESCAPED_QUOTE );
+            if (s.Contains(QUOTE))
+                s = s.Replace(QUOTE, ESCAPED_QUOTE);
 
-            if ( s.IndexOfAny( CHARACTERS_THAT_MUST_BE_QUOTED ) > -1 )
+            if (s.IndexOfAny(CHARACTERS_THAT_MUST_BE_QUOTED) > -1)
                 s = QUOTE + s + QUOTE;
 
             return s;

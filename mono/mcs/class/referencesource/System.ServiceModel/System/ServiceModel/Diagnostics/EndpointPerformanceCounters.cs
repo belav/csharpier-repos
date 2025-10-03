@@ -14,11 +14,13 @@ namespace System.ServiceModel.Diagnostics
         internal EndpointPerformanceCounters(string service, string contract, string uri)
             : base(service, contract, uri)
         {
-
             this.Counters = new PerformanceCounter[(int)PerfCounters.TotalCounters];
             for (int i = 0; i < (int)PerfCounters.TotalCounters; i++)
             {
-                PerformanceCounter counter = PerformanceCounters.GetEndpointPerformanceCounter(perfCounterNames[i], this.instanceName);
+                PerformanceCounter counter = PerformanceCounters.GetEndpointPerformanceCounter(
+                    perfCounterNames[i],
+                    this.instanceName
+                );
                 if (counter != null)
                 {
                     try
@@ -35,8 +37,13 @@ namespace System.ServiceModel.Diagnostics
                         }
                         if (DiagnosticUtility.ShouldTraceError)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.PerformanceCounterFailedToLoad,
-                                SR.GetString(SR.TraceCodePerformanceCounterFailedToLoad), null, e);
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Error,
+                                TraceCode.PerformanceCounterFailedToLoad,
+                                SR.GetString(SR.TraceCodePerformanceCounterFailedToLoad),
+                                null,
+                                e
+                            );
                         }
                         break;
                     }
@@ -75,7 +82,6 @@ namespace System.ServiceModel.Diagnostics
             Decrement((int)PerfCounters.CallsOutstanding);
         }
 
-
         internal override void MethodReturnedError()
         {
             Increment((int)PerfCounters.CallsFailed);
@@ -89,7 +95,6 @@ namespace System.ServiceModel.Diagnostics
             Increment((int)PerfCounters.CallsFaultedPerSecond);
             Decrement((int)PerfCounters.CallsOutstanding);
         }
-
 
         internal override void SaveCallDuration(long time)
         {
@@ -163,4 +168,3 @@ namespace System.ServiceModel.Diagnostics
         }
     }
 }
-

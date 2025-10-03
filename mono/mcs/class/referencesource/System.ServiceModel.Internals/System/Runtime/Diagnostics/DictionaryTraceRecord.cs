@@ -4,8 +4,8 @@
 
 namespace System.Runtime.Diagnostics
 {
-    using System.Xml;
     using System.Collections;
+    using System.Xml;
 
     class DictionaryTraceRecord : TraceRecord
     {
@@ -16,7 +16,10 @@ namespace System.Runtime.Diagnostics
             this.dictionary = dictionary;
         }
 
-        internal override string EventId { get { return TraceRecord.EventIdBase + "Dictionary" + TraceRecord.NamespaceSuffix; } }
+        internal override string EventId
+        {
+            get { return TraceRecord.EventIdBase + "Dictionary" + TraceRecord.NamespaceSuffix; }
+        }
 
         internal override void WriteTo(XmlWriter xml)
         {
@@ -25,7 +28,10 @@ namespace System.Runtime.Diagnostics
                 foreach (object key in this.dictionary.Keys)
                 {
                     object value = this.dictionary[key];
-                    xml.WriteElementString(key.ToString(), value == null ? string.Empty : value.ToString());
+                    xml.WriteElementString(
+                        key.ToString(),
+                        value == null ? string.Empty : value.ToString()
+                    );
                 }
             }
         }

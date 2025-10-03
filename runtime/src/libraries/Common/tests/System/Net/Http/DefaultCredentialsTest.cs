@@ -4,14 +4,12 @@
 using System.Collections.Generic;
 using System.Security.Principal;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
@@ -19,26 +17,38 @@ namespace System.Net.Http.Functional.Tests
     [PlatformSpecific(TestPlatforms.Windows)]
     public abstract class DefaultCredentialsTest : HttpClientHandlerTestBase
     {
-        private static bool DomainJoinedTestsEnabled => !string.IsNullOrEmpty(Configuration.Http.DomainJoinedHttpHost);
+        private static bool DomainJoinedTestsEnabled =>
+            !string.IsNullOrEmpty(Configuration.Http.DomainJoinedHttpHost);
 
-        private static bool DomainProxyTestsEnabled => !string.IsNullOrEmpty(Configuration.Http.DomainJoinedProxyHost);
+        private static bool DomainProxyTestsEnabled =>
+            !string.IsNullOrEmpty(Configuration.Http.DomainJoinedProxyHost);
 
         // Enable this to test against local HttpListener over loopback
         // Note this doesn't work as expected with WinHttpHandler, because WinHttpHandler will always authenticate the
         // current user against a loopback server using NTLM or Negotiate.
         private static bool LocalHttpListenerTestsEnabled = false;
 
-        public static bool ServerAuthenticationTestsEnabled => (LocalHttpListenerTestsEnabled || DomainJoinedTestsEnabled);
+        public static bool ServerAuthenticationTestsEnabled =>
+            (LocalHttpListenerTestsEnabled || DomainJoinedTestsEnabled);
 
         private static string s_specificUserName = Configuration.Security.ActiveDirectoryUserName;
-        private static string s_specificPassword = Configuration.Security.ActiveDirectoryUserPassword;
+        private static string s_specificPassword = Configuration
+            .Security
+            .ActiveDirectoryUserPassword;
         private static string s_specificDomain = Configuration.Security.ActiveDirectoryName;
-        private readonly NetworkCredential _specificCredential =
-            new NetworkCredential(s_specificUserName, s_specificPassword, s_specificDomain);
-        private static Uri s_authenticatedServer = DomainJoinedTestsEnabled ?
-            new Uri($"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/negotiate/showidentity.ashx") : null;
+        private readonly NetworkCredential _specificCredential = new NetworkCredential(
+            s_specificUserName,
+            s_specificPassword,
+            s_specificDomain
+        );
+        private static Uri s_authenticatedServer = DomainJoinedTestsEnabled
+            ? new Uri(
+                $"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/negotiate/showidentity.ashx"
+            )
+            : null;
 
-        public DefaultCredentialsTest(ITestOutputHelper output) : base(output) { }
+        public DefaultCredentialsTest(ITestOutputHelper output)
+            : base(output) { }
 
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
@@ -74,7 +84,10 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
         [MemberData(nameof(AuthenticatedServers))]
-        public async Task UseDefaultCredentials_SetTrue_ConnectAsCurrentIdentity(string uri, bool useProxy)
+        public async Task UseDefaultCredentials_SetTrue_ConnectAsCurrentIdentity(
+            string uri,
+            bool useProxy
+        )
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
@@ -96,13 +109,16 @@ namespace System.Net.Http.Functional.Tests
         [OuterLoop("Uses external servers")]
         [ConditionalTheory(nameof(ServerAuthenticationTestsEnabled))]
         [MemberData(nameof(AuthenticatedServers))]
-        public async Task Credentials_SetToWrappedDefaultCredential_ConnectAsCurrentIdentity(string uri, bool useProxy)
+        public async Task Credentials_SetToWrappedDefaultCredential_ConnectAsCurrentIdentity(
+            string uri,
+            bool useProxy
+        )
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
             handler.Credentials = new CredentialWrapper
             {
-                InnerCredentials = CredentialCache.DefaultCredentials
+                InnerCredentials = CredentialCache.DefaultCredentials,
             };
 
             using (HttpClient client = CreateHttpClient(handler))
@@ -139,7 +155,9 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalTheory(nameof(DomainJoinedTestsEnabled))]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task Credentials_SetToSpecificCredential_ConnectAsSpecificIdentity(bool useProxy)
+        public async Task Credentials_SetToSpecificCredential_ConnectAsSpecificIdentity(
+            bool useProxy
+        )
         {
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.UseProxy = useProxy;
@@ -152,7 +170,11 @@ namespace System.Net.Http.Functional.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
                 string responseBody = await response.Content.ReadAsStringAsync();
-                VerifyAuthentication(responseBody, true, s_specificDomain + "\\" + s_specificUserName);
+                VerifyAuthentication(
+                    responseBody,
+                    true,
+                    s_specificDomain + "\\" + s_specificUserName
+                );
             }
         }
 
@@ -165,7 +187,11 @@ namespace System.Net.Http.Functional.Tests
             handler.Proxy = new AuthenticatedProxy(null);
 
             using (HttpClient client = CreateHttpClient(handler))
-            using (HttpResponseMessage response = await client.GetAsync(Configuration.Http.RemoteEchoServer))
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    Configuration.Http.RemoteEchoServer
+                )
+            )
             {
                 Assert.Equal(HttpStatusCode.ProxyAuthenticationRequired, response.StatusCode);
             }
@@ -180,7 +206,11 @@ namespace System.Net.Http.Functional.Tests
             handler.Proxy = new AuthenticatedProxy(CredentialCache.DefaultCredentials);
 
             using (HttpClient client = CreateHttpClient(handler))
-            using (HttpResponseMessage response = await client.GetAsync(Configuration.Http.RemoteEchoServer))
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    Configuration.Http.RemoteEchoServer
+                )
+            )
             {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
@@ -192,14 +222,18 @@ namespace System.Net.Http.Functional.Tests
         {
             ICredentials wrappedCreds = new CredentialWrapper
             {
-                InnerCredentials = CredentialCache.DefaultCredentials
+                InnerCredentials = CredentialCache.DefaultCredentials,
             };
 
             HttpClientHandler handler = CreateHttpClientHandler();
             handler.Proxy = new AuthenticatedProxy(wrappedCreds);
 
             using (HttpClient client = CreateHttpClient(handler))
-            using (HttpResponseMessage response = await client.GetAsync(Configuration.Http.RemoteEchoServer))
+            using (
+                HttpResponseMessage response = await client.GetAsync(
+                    Configuration.Http.RemoteEchoServer
+                )
+            )
             {
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             }
@@ -212,16 +246,40 @@ namespace System.Net.Http.Functional.Tests
             {
                 if (LocalHttpListenerTestsEnabled)
                 {
-                    yield return new object[] { HttpListenerAuthenticatedLoopbackServer.NtlmOnly.Uri, b };
-                    yield return new object[] { HttpListenerAuthenticatedLoopbackServer.NegotiateOnly.Uri, b };
-                    yield return new object[] { HttpListenerAuthenticatedLoopbackServer.NegotiateAndNtlm.Uri, b };
-                    yield return new object[] { HttpListenerAuthenticatedLoopbackServer.BasicAndNtlm.Uri, b };
+                    yield return new object[]
+                    {
+                        HttpListenerAuthenticatedLoopbackServer.NtlmOnly.Uri,
+                        b,
+                    };
+                    yield return new object[]
+                    {
+                        HttpListenerAuthenticatedLoopbackServer.NegotiateOnly.Uri,
+                        b,
+                    };
+                    yield return new object[]
+                    {
+                        HttpListenerAuthenticatedLoopbackServer.NegotiateAndNtlm.Uri,
+                        b,
+                    };
+                    yield return new object[]
+                    {
+                        HttpListenerAuthenticatedLoopbackServer.BasicAndNtlm.Uri,
+                        b,
+                    };
                 }
 
                 if (!string.IsNullOrEmpty(Configuration.Http.DomainJoinedHttpHost))
                 {
-                    yield return new object[] { $"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/negotiate/showidentity.ashx", b };
-                    yield return new object[] { $"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/multipleschemes/showidentity.ashx", b };
+                    yield return new object[]
+                    {
+                        $"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/negotiate/showidentity.ashx",
+                        b,
+                    };
+                    yield return new object[]
+                    {
+                        $"http://{Configuration.Http.DomainJoinedHttpHost}/test/auth/multipleschemes/showidentity.ashx",
+                        b,
+                    };
                 }
             }
         }
@@ -237,16 +295,19 @@ namespace System.Net.Http.Functional.Tests
             {
                 Assert.True(
                     TestHelper.JsonMessageContainsKeyValue(response, "authenticated", "false"),
-                    "authenticated == false");
+                    "authenticated == false"
+                );
             }
             else
             {
                 Assert.True(
                     TestHelper.JsonMessageContainsKeyValue(response, "authenticated", "true"),
-                    "authenticated == true");
+                    "authenticated == true"
+                );
                 Assert.True(
                     TestHelper.JsonMessageContainsKeyValue(response, "user", user),
-                    $"user == {user}");
+                    $"user == {user}"
+                );
             }
         }
 
@@ -268,28 +329,30 @@ namespace System.Net.Http.Functional.Tests
                 _credentials = credentials;
 
                 string host = Configuration.Http.DomainJoinedProxyHost;
-                Assert.False(string.IsNullOrEmpty(host), "DomainJoinedProxyHost must specify proxy hostname");
+                Assert.False(
+                    string.IsNullOrEmpty(host),
+                    "DomainJoinedProxyHost must specify proxy hostname"
+                );
 
                 string portString = Configuration.Http.DomainJoinedProxyPort;
-                Assert.False(string.IsNullOrEmpty(portString), "DomainJoinedProxyPort must specify proxy port number");
+                Assert.False(
+                    string.IsNullOrEmpty(portString),
+                    "DomainJoinedProxyPort must specify proxy port number"
+                );
 
                 int port;
-                Assert.True(int.TryParse(portString, out port), "DomainJoinedProxyPort must be a valid port number");
+                Assert.True(
+                    int.TryParse(portString, out port),
+                    "DomainJoinedProxyPort must be a valid port number"
+                );
 
                 _proxyUri = new Uri(string.Format("http://{0}:{1}", host, port));
             }
 
             public ICredentials Credentials
             {
-                get
-                {
-                    return _credentials;
-                }
-
-                set
-                {
-                    throw new NotImplementedException();
-                }
+                get { return _credentials; }
+                set { throw new NotImplementedException(); }
             }
 
             public Uri GetProxy(Uri destination)
@@ -308,13 +371,32 @@ namespace System.Net.Http.Functional.Tests
             private readonly HttpListener _listener;
             private readonly string _uri;
 
-            public static readonly HttpListenerAuthenticatedLoopbackServer NtlmOnly = new HttpListenerAuthenticatedLoopbackServer("http://localhost:8080/", AuthenticationSchemes.Ntlm);
-            public static readonly HttpListenerAuthenticatedLoopbackServer NegotiateOnly = new HttpListenerAuthenticatedLoopbackServer("http://localhost:8081/", AuthenticationSchemes.Negotiate);
-            public static readonly HttpListenerAuthenticatedLoopbackServer NegotiateAndNtlm = new HttpListenerAuthenticatedLoopbackServer("http://localhost:8082/", AuthenticationSchemes.Negotiate | AuthenticationSchemes.Ntlm);
-            public static readonly HttpListenerAuthenticatedLoopbackServer BasicAndNtlm = new HttpListenerAuthenticatedLoopbackServer("http://localhost:8083/", AuthenticationSchemes.Basic | AuthenticationSchemes.Ntlm);
+            public static readonly HttpListenerAuthenticatedLoopbackServer NtlmOnly =
+                new HttpListenerAuthenticatedLoopbackServer(
+                    "http://localhost:8080/",
+                    AuthenticationSchemes.Ntlm
+                );
+            public static readonly HttpListenerAuthenticatedLoopbackServer NegotiateOnly =
+                new HttpListenerAuthenticatedLoopbackServer(
+                    "http://localhost:8081/",
+                    AuthenticationSchemes.Negotiate
+                );
+            public static readonly HttpListenerAuthenticatedLoopbackServer NegotiateAndNtlm =
+                new HttpListenerAuthenticatedLoopbackServer(
+                    "http://localhost:8082/",
+                    AuthenticationSchemes.Negotiate | AuthenticationSchemes.Ntlm
+                );
+            public static readonly HttpListenerAuthenticatedLoopbackServer BasicAndNtlm =
+                new HttpListenerAuthenticatedLoopbackServer(
+                    "http://localhost:8083/",
+                    AuthenticationSchemes.Basic | AuthenticationSchemes.Ntlm
+                );
 
             // Don't construct directly, use instances above
-            private HttpListenerAuthenticatedLoopbackServer(string uri, AuthenticationSchemes authenticationSchemes)
+            private HttpListenerAuthenticatedLoopbackServer(
+                string uri,
+                AuthenticationSchemes authenticationSchemes
+            )
             {
                 _uri = uri;
 
@@ -336,7 +418,9 @@ namespace System.Net.Http.Functional.Tests
 
                     // Send a response in the JSON format that the client expects
                     string username = context.User.Identity.Name;
-                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes($"{{\"authenticated\": \"true\", \"user\": \"{username}\" }}");
+                    byte[] bytes = System.Text.Encoding.UTF8.GetBytes(
+                        $"{{\"authenticated\": \"true\", \"user\": \"{username}\" }}"
+                    );
                     await context.Response.OutputStream.WriteAsync(bytes);
 
                     context.Response.Close();

@@ -19,7 +19,7 @@ namespace Roslyn.Utilities
             ///<summary>How many child edges this node has.</summary>
             public readonly int EdgeCount = edgeCount;
 
-            ///<summary>Where the first edge can be found in <see cref="_edges"/>.  The edges 
+            ///<summary>Where the first edge can be found in <see cref="_edges"/>.  The edges
             ///are in the range _edges[FirstEdgeIndex, FirstEdgeIndex + EdgeCount)
             ///</summary>
             public readonly int FirstEdgeIndex = firstEdgeIndex;
@@ -36,7 +36,9 @@ namespace Roslyn.Utilities
             {
                 return new Node(
                     new TextSpan(start: reader.ReadInt32(), length: reader.ReadInt32()),
-                    edgeCount: reader.ReadInt32(), firstEdgeIndex: reader.ReadInt32());
+                    edgeCount: reader.ReadInt32(),
+                    firstEdgeIndex: reader.ReadInt32()
+                );
             }
         }
     }

@@ -7,7 +7,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Data
 {
-
     /// <summary>
     /// This class represents a combined sort expression build using multiple sort expressions.
     /// </summary>
@@ -39,7 +38,8 @@ namespace System.Data
         // E.g: _comparers[i] is used with _selectors[i]
 
         private readonly LinkedList<Func<T, object>> _selectors = new LinkedList<Func<T, object>>();
-        private readonly LinkedList<Comparison<object>> _comparers = new LinkedList<Comparison<object>>();
+        private readonly LinkedList<Comparison<object>> _comparers =
+            new LinkedList<Comparison<object>>();
 
         private LinkedListNode<Func<T, object>>? _currentSelector;
         private LinkedListNode<Comparison<object>>? _currentComparer;
@@ -84,7 +84,6 @@ namespace System.Data
 
             return result;
         }
-
 
         /// <summary>
         /// Represents a Comparer (of IComparer) that compares two combined-selectors using
@@ -141,7 +140,6 @@ namespace System.Data
                 }
             }
 
-
             foreach (Comparison<object> comparer in _comparers)
             {
                 if (comparer == _currentComparer!.Value)
@@ -168,14 +166,15 @@ namespace System.Data
             {
                 if (selector == _currentSelector!.Value)
                 {
-                    builder._currentSelector = builder._selectors.AddLast(r => selector((T)(object)r!));
+                    builder._currentSelector = builder._selectors.AddLast(r =>
+                        selector((T)(object)r!)
+                    );
                 }
                 else
                 {
                     builder._selectors.AddLast(r => selector((T)(object)r!));
                 }
             }
-
 
             foreach (Comparison<object> comparer in _comparers)
             {

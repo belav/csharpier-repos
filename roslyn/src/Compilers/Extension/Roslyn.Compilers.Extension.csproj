@@ -6,7 +6,6 @@
     <RootNamespace>Roslyn.Compilers.Extension</RootNamespace>
     <TargetFramework>net472</TargetFramework>
     <IsShipping>false</IsShipping>
-
     <!-- VSIX -->
     <GeneratePkgDefFile>true</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
@@ -16,10 +15,12 @@
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
   </PropertyGroup>
   <ItemGroup Label="PkgDef">
-    <PkgDefPackageRegistration Include="{31c0675e-87a4-4061-a0dd-a4e510fccf97}"
-                               Name="CompilerPackage"
-                               Class="Roslyn.Compilers.Extension.CompilerPackage"
-                               AllowsBackgroundLoad="true"/>
+    <PkgDefPackageRegistration
+      Include="{31c0675e-87a4-4061-a0dd-a4e510fccf97}"
+      Name="CompilerPackage"
+      Class="Roslyn.Compilers.Extension.CompilerPackage"
+      AllowsBackgroundLoad="true"
+    />
     <PkgDefBindingRedirect Include="$(TargetPath)" />
     <None Include="PackageRegistration.pkgdef" PkgDefEntry="FileContent" />
   </ItemGroup>
@@ -109,16 +110,47 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.ServiceHub.Framework" Version="$(MicrosoftServiceHubFrameworkVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.ComponentModelHost" Version="$(MicrosoftVisualStudioComponentModelHostVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.CoreUtility" Version="$(MicrosoftVisualStudioCoreUtilityVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime" Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Interop" Version="$(MicrosoftVisualStudioInteropVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.ProjectSystem" Version="$(MicrosoftVisualStudioProjectSystemVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Shell.15.0" Version="$(MicrosoftVisualStudioShell150Version)" />
-    <PackageReference Include="Microsoft.VisualStudio.SDK.Analyzers" Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="$(MicrosoftVisualStudioThreadingVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Validation" Version="$(MicrosoftVisualStudioValidationVersion)" />
+    <PackageReference
+      Include="Microsoft.ServiceHub.Framework"
+      Version="$(MicrosoftServiceHubFrameworkVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.ComponentModelHost"
+      Version="$(MicrosoftVisualStudioComponentModelHostVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.CoreUtility"
+      Version="$(MicrosoftVisualStudioCoreUtilityVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Imaging.Interop.14.0.DesignTime"
+      Version="$(MicrosoftVisualStudioImagingInterop140DesignTimeVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Interop"
+      Version="$(MicrosoftVisualStudioInteropVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.ProjectSystem"
+      Version="$(MicrosoftVisualStudioProjectSystemVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Shell.15.0"
+      Version="$(MicrosoftVisualStudioShell150Version)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.SDK.Analyzers"
+      Version="$(MicrosoftVisualStudioSDKAnalyzersVersion)"
+      PrivateAssets="all"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Threading"
+      Version="$(MicrosoftVisualStudioThreadingVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Validation"
+      Version="$(MicrosoftVisualStudioValidationVersion)"
+    />
     <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
 </Project>

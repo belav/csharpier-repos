@@ -25,7 +25,11 @@ namespace System.Diagnostics
 
         public void StopLogicalOperation() => _stackWrapper.Pop();
 
-        public Guid ActivityId { get { return _activityId.Value; } set { _activityId.Value = value; } }
+        public Guid ActivityId
+        {
+            get { return _activityId.Value; }
+            set { _activityId.Value = value; }
+        }
 
         public void StartLogicalOperation(object operationId)
         {
@@ -74,7 +78,8 @@ namespace System.Diagnostics
                 {
                     if (obj == null)
                     {
-                        if (n.Value == null) return true;
+                        if (n.Value == null)
+                            return true;
                     }
                     else if (obj.Equals(n.Value))
                     {
@@ -130,8 +135,7 @@ namespace System.Diagnostics
                 {
                     results.Add(n.Value);
                     n = n.Prev;
-                }
-                while (n != null);
+                } while (n != null);
                 return results.ToArray();
             }
         }

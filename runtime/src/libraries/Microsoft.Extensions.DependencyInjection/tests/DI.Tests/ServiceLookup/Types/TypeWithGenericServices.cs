@@ -9,21 +9,18 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     {
         public TypeWithGenericServices(
             IFakeService fakeService,
-            IFakeOpenGenericService<IFakeService> logger)
-        {
-        }
+            IFakeOpenGenericService<IFakeService> logger
+        ) { }
 
         public TypeWithGenericServices(
-           IFakeMultipleService multipleService,
-           IFakeService fakeService)
-        {
-        }
+            IFakeMultipleService multipleService,
+            IFakeService fakeService
+        ) { }
 
         public TypeWithGenericServices(
             IFakeService fakeService,
             IFactoryService factoryService,
-            IFakeOpenGenericService<IFakeService> logger)
-        {
-        }
+            IFakeOpenGenericService<IFakeService> logger
+        ) { }
     }
 }

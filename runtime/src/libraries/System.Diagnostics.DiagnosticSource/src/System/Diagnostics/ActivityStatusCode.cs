@@ -21,6 +21,6 @@ namespace System.Diagnostics
         /// <summary>
         /// Status code indicating an error is encountered during the operation.
         /// </summary>
-        Error = 2
+        Error = 2,
     }
 }

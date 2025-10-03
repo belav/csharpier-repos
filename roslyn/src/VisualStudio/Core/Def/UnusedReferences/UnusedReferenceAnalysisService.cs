@@ -19,20 +19,44 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UnusedReferenceAnalysisService()
-        {
-        }
+        public UnusedReferenceAnalysisService() { }
 
-        public async Task<ImmutableArray<ReferenceInfo>> GetUnusedReferencesAsync(Solution solution, string projectFilePath, string projectAssetsFilePath, ImmutableArray<ReferenceInfo> projectReferences, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<ReferenceInfo>> GetUnusedReferencesAsync(
+            Solution solution,
+            string projectFilePath,
+            string projectAssetsFilePath,
+            ImmutableArray<ReferenceInfo> projectReferences,
+            CancellationToken cancellationToken
+        )
         {
-            using var logger = Logger.LogBlock(FunctionId.UnusedReferences_GetUnusedReferences, message: null, cancellationToken, LogLevel.Information);
-            var client = await RemoteHostClient.TryGetClientAsync(solution.Services, cancellationToken).ConfigureAwait(false);
+            using var logger = Logger.LogBlock(
+                FunctionId.UnusedReferences_GetUnusedReferences,
+                message: null,
+                cancellationToken,
+                LogLevel.Information
+            );
+            var client = await RemoteHostClient
+                .TryGetClientAsync(solution.Services, cancellationToken)
+                .ConfigureAwait(false);
             if (client != null)
             {
-                var result = await client.TryInvokeAsync<IRemoteUnusedReferenceAnalysisService, ImmutableArray<ReferenceInfo>>(
-                    solution,
-                    (service, solutionInfo, cancellationToken) => service.GetUnusedReferencesAsync(solutionInfo, projectFilePath, projectAssetsFilePath, projectReferences, cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                var result = await client
+                    .TryInvokeAsync<
+                        IRemoteUnusedReferenceAnalysisService,
+                        ImmutableArray<ReferenceInfo>
+                    >(
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.GetUnusedReferencesAsync(
+                                solutionInfo,
+                                projectFilePath,
+                                projectAssetsFilePath,
+                                projectReferences,
+                                cancellationToken
+                            ),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 if (!result.HasValue)
                 {
@@ -43,10 +67,14 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             }
 
             // Read specified references with dependency information from the project assets file.
-            var references = await ProjectAssetsFileReader.ReadReferencesAsync(projectReferences, projectAssetsFilePath).ConfigureAwait(false);
+            var references = await ProjectAssetsFileReader
+                .ReadReferencesAsync(projectReferences, projectAssetsFilePath)
+                .ConfigureAwait(false);
 
             // Determine unused references
-            var unusedReferences = await UnusedReferencesRemover.GetUnusedReferencesAsync(solution, projectFilePath, references, cancellationToken).ConfigureAwait(false);
+            var unusedReferences = await UnusedReferencesRemover
+                .GetUnusedReferencesAsync(solution, projectFilePath, references, cancellationToken)
+                .ConfigureAwait(false);
 
             // Remove dependency information before returning.
             return unusedReferences.SelectAsArray(reference => reference.WithDependencies(null));

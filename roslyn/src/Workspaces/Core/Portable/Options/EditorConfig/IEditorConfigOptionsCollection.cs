@@ -9,6 +9,9 @@ namespace Microsoft.CodeAnalysis.Options
 {
     internal interface IEditorConfigOptionsCollection
     {
-        public abstract IEnumerable<(string feature, ImmutableArray<IOption2> options)> GetOptions();
+        public abstract IEnumerable<(
+            string feature,
+            ImmutableArray<IOption2> options
+        )> GetOptions();
     }
 }

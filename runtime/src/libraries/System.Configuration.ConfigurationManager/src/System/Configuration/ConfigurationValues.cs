@@ -13,7 +13,8 @@ namespace System.Configuration
         private volatile bool _containsElement;
         private volatile bool _containsInvalidValue;
 
-        internal ConfigurationValues() : base(StringComparer.Ordinal) { }
+        internal ConfigurationValues()
+            : base(StringComparer.Ordinal) { }
 
         internal object this[string key]
         {
@@ -36,14 +37,14 @@ namespace System.Configuration
 
         internal object SyncRoot => this;
 
-        internal IEnumerable ConfigurationElements
-            => _containsElement ? new ConfigurationElementsCollection(this) : EmptyCollectionInstance;
+        internal IEnumerable ConfigurationElements =>
+            _containsElement ? new ConfigurationElementsCollection(this) : EmptyCollectionInstance;
 
-        internal IEnumerable InvalidValues
-            => _containsInvalidValue ? new InvalidValuesCollection(this) : EmptyCollectionInstance;
+        internal IEnumerable InvalidValues =>
+            _containsInvalidValue ? new InvalidValuesCollection(this) : EmptyCollectionInstance;
 
-        private static IEnumerable EmptyCollectionInstance
-            => s_emptyCollection ??= new EmptyCollection();
+        private static IEnumerable EmptyCollectionInstance =>
+            s_emptyCollection ??= new EmptyCollection();
 
         internal void AssociateContext(BaseConfigurationRecord configRecord)
         {
@@ -83,11 +84,15 @@ namespace System.Configuration
         internal void ChangeSourceInfo(string key, PropertySourceInfo sourceInfo)
         {
             ConfigurationValue configurationValue = GetConfigValue(key);
-            if (configurationValue != null) configurationValue.SourceInfo = sourceInfo;
+            if (configurationValue != null)
+                configurationValue.SourceInfo = sourceInfo;
         }
 
-        private ConfigurationValue CreateConfigValue(object value, ConfigurationValueFlags valueFlags,
-            PropertySourceInfo sourceInfo)
+        private ConfigurationValue CreateConfigValue(
+            object value,
+            ConfigurationValueFlags valueFlags,
+            PropertySourceInfo sourceInfo
+        )
         {
             if (value != null)
             {
@@ -98,7 +103,8 @@ namespace System.Configuration
                 }
                 else
                 {
-                    if (value is InvalidPropValue) _containsInvalidValue = true;
+                    if (value is InvalidPropValue)
+                        _containsInvalidValue = true;
                 }
             }
 
@@ -106,8 +112,12 @@ namespace System.Configuration
             return configValue;
         }
 
-        internal void SetValue(string key, object value, ConfigurationValueFlags valueFlags,
-            PropertySourceInfo sourceInfo)
+        internal void SetValue(
+            string key,
+            object value,
+            ConfigurationValueFlags valueFlags,
+            PropertySourceInfo sourceInfo
+        )
         {
             ConfigurationValue configValue = CreateConfigValue(value, valueFlags, sourceInfo);
             BaseSet(key, configValue);
@@ -183,7 +193,8 @@ namespace System.Configuration
                     for (int index = 0; index < _values.Count; index++)
                     {
                         object value = _values[index];
-                        if (value is ConfigurationElement) yield return value;
+                        if (value is ConfigurationElement)
+                            yield return value;
                     }
                 }
             }
@@ -205,7 +216,8 @@ namespace System.Configuration
                     for (int index = 0; index < _values.Count; index++)
                     {
                         object value = _values[index];
-                        if (value is InvalidPropValue) yield return value;
+                        if (value is InvalidPropValue)
+                            yield return value;
                     }
                 }
             }

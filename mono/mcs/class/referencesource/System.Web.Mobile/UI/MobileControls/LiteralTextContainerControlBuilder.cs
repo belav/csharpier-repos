@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="LiteralTextContainerControlBuilder.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,11 +10,11 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
@@ -25,17 +25,23 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\LiteralTextContainerControlBuilder.uex' path='docs/doc[@for="LiteralTextContainerControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class LiteralTextContainerControlBuilder : MobileControlBuilder
     {
         private CompileLiteralTextParser _textParser = null;
         private bool _controlsInserted = false;
 
-        internal LiteralTextContainerControlBuilder()
-        {
-        }
+        internal LiteralTextContainerControlBuilder() { }
 
         internal CompileLiteralTextParser TextParser
         {
@@ -43,8 +49,7 @@ namespace System.Web.UI.MobileControls
             {
                 if (_textParser == null)
                 {
-                    _textParser = 
-                        new CompileLiteralTextParser(Parser, this, String.Empty, 1);
+                    _textParser = new CompileLiteralTextParser(Parser, this, String.Empty, 1);
                     if (_controlsInserted)
                     {
                         _textParser.ResetBreaking();
@@ -78,9 +83,8 @@ namespace System.Web.UI.MobileControls
             {
                 base.AppendSubBuilder(subBuilder);
             }
-
             // The first one is used if ASP.NET is compiled with FAST_DATABINDING off. The second
-            // is used if it is compiled with FAST_DATABINDING on. Note: We can't do a type 
+            // is used if it is compiled with FAST_DATABINDING on. Note: We can't do a type
             // comparison because CodeBlockBuilder is internal.
             //else if (typeof(DataBoundLiteralControl).IsAssignableFrom(subBuilder.ControlType))
             else if (subBuilder.GetType().FullName == "System.Web.UI.CodeBlockBuilder")
@@ -105,5 +109,3 @@ namespace System.Web.UI.MobileControls
         }
     }
 }
-
-

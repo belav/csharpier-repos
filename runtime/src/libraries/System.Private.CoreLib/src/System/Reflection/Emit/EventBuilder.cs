@@ -5,17 +5,13 @@ namespace System.Reflection.Emit
 {
     public abstract class EventBuilder
     {
-        protected EventBuilder()
-        {
-        }
+        protected EventBuilder() { }
 
-        public void AddOtherMethod(MethodBuilder mdBuilder)
-            => AddOtherMethodCore(mdBuilder);
+        public void AddOtherMethod(MethodBuilder mdBuilder) => AddOtherMethodCore(mdBuilder);
 
         protected abstract void AddOtherMethodCore(MethodBuilder mdBuilder);
 
-        public void SetAddOnMethod(MethodBuilder mdBuilder)
-            => SetAddOnMethodCore(mdBuilder);
+        public void SetAddOnMethod(MethodBuilder mdBuilder) => SetAddOnMethodCore(mdBuilder);
 
         protected abstract void SetAddOnMethodCore(MethodBuilder mdBuilder);
 
@@ -27,7 +23,10 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(con, binaryAttribute);
         }
 
-        protected abstract void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute);
+        protected abstract void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        );
 
         public void SetCustomAttribute(CustomAttributeBuilder customBuilder)
         {
@@ -36,13 +35,11 @@ namespace System.Reflection.Emit
             SetCustomAttributeCore(customBuilder.Ctor, customBuilder.Data);
         }
 
-        public void SetRaiseMethod(MethodBuilder mdBuilder)
-            => SetRaiseMethodCore(mdBuilder);
+        public void SetRaiseMethod(MethodBuilder mdBuilder) => SetRaiseMethodCore(mdBuilder);
 
         protected abstract void SetRaiseMethodCore(MethodBuilder mdBuilder);
 
-        public void SetRemoveOnMethod(MethodBuilder mdBuilder)
-            => SetRemoveOnMethodCore(mdBuilder);
+        public void SetRemoveOnMethod(MethodBuilder mdBuilder) => SetRemoveOnMethodCore(mdBuilder);
 
         protected abstract void SetRemoveOnMethodCore(MethodBuilder mdBuilder);
     }

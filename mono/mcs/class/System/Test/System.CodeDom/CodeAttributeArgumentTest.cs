@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,36 +27,38 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
+using NUnit.Framework;
 
 namespace MonoTests.System.CodeDom
 {
-	[TestFixture]
-	public class CodeAttributeArgumentTest
-	{
-		[Test]
-		public void DefaultConstructor ()
-		{
-			CodeAttributeArgument caa = new CodeAttributeArgument ();
-			Assert.IsNotNull (caa.Name, "#1");
-			Assert.AreEqual (string.Empty, caa.Name, "#2");
-			Assert.IsNull (caa.Value, "#3");
-		}
+    [TestFixture]
+    public class CodeAttributeArgumentTest
+    {
+        [Test]
+        public void DefaultConstructor()
+        {
+            CodeAttributeArgument caa = new CodeAttributeArgument();
+            Assert.IsNotNull(caa.Name, "#1");
+            Assert.AreEqual(string.Empty, caa.Name, "#2");
+            Assert.IsNull(caa.Value, "#3");
+        }
 
-		[Test]
-		public void NullName ()
-		{
-			CodeAttributeArgument caa = new CodeAttributeArgument ((string) null, (CodeExpression) null);
-			Assert.IsNotNull (caa.Name, "#1");
-			Assert.AreEqual (string.Empty, caa.Name, "#2");
-			Assert.IsNull (caa.Value, "#3");
+        [Test]
+        public void NullName()
+        {
+            CodeAttributeArgument caa = new CodeAttributeArgument(
+                (string)null,
+                (CodeExpression)null
+            );
+            Assert.IsNotNull(caa.Name, "#1");
+            Assert.AreEqual(string.Empty, caa.Name, "#2");
+            Assert.IsNull(caa.Value, "#3");
 
-			caa.Name = null;
-			Assert.IsNotNull (caa.Name, "#4");
-			Assert.AreEqual (string.Empty, caa.Name, "#5");
-		}
-	}
+            caa.Name = null;
+            Assert.IsNotNull(caa.Name, "#4");
+            Assert.AreEqual(string.Empty, caa.Name, "#5");
+        }
+    }
 }

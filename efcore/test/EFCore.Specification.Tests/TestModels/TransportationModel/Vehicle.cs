@@ -9,12 +9,11 @@ public class Vehicle
     public int SeatingCapacity { get; set; }
     public Operator Operator { get; set; }
 
-    public override bool Equals(object obj)
-        => obj is Vehicle other
-            && Name == other.Name
-            && SeatingCapacity == other.SeatingCapacity
-            && Equals(Operator, other.Operator);
+    public override bool Equals(object obj) =>
+        obj is Vehicle other
+        && Name == other.Name
+        && SeatingCapacity == other.SeatingCapacity
+        && Equals(Operator, other.Operator);
 
-    public override int GetHashCode()
-        => HashCode.Combine(Name, SeatingCapacity, Operator);
+    public override int GetHashCode() => HashCode.Combine(Name, SeatingCapacity, Operator);
 }

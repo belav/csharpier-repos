@@ -10,26 +10,18 @@ namespace System.Net.NetworkInformation
 {
     internal sealed class SystemIPGlobalProperties : IPGlobalProperties
     {
-        internal SystemIPGlobalProperties()
-        {
-        }
+        internal SystemIPGlobalProperties() { }
 
         /// Specifies the host name for the local computer.
         public override string HostName
         {
-            get
-            {
-                return HostInformationPal.GetHostName();
-            }
+            get { return HostInformationPal.GetHostName(); }
         }
 
         /// Specifies the domain in which the local computer is registered.
         public override string DomainName
         {
-            get
-            {
-                return HostInformationPal.GetDomainName();
-            }
+            get { return HostInformationPal.GetDomainName(); }
         }
 
         ///
@@ -46,28 +38,19 @@ namespace System.Net.NetworkInformation
         /// </remarks>
         public override NetBiosNodeType NodeType
         {
-            get
-            {
-                return (NetBiosNodeType)HostInformationPal.GetNodeType();
-            }
+            get { return (NetBiosNodeType)HostInformationPal.GetNodeType(); }
         }
 
         /// Specifies the DHCP scope name.
         public override string DhcpScopeName
         {
-            get
-            {
-                return HostInformationPal.GetScopeId();
-            }
+            get { return HostInformationPal.GetScopeId(); }
         }
 
         /// Specifies whether the local computer is acting as an WINS proxy.
         public override bool IsWinsProxy
         {
-            get
-            {
-                return HostInformationPal.GetEnableProxy();
-            }
+            get { return HostInformationPal.GetEnableProxy(); }
         }
 
         public override TcpConnectionInformation[] GetActiveTcpConnections()
@@ -106,7 +89,8 @@ namespace System.Net.NetworkInformation
         {
             uint size = 0;
             uint result;
-            List<SystemTcpConnectionInformation> tcpConnections = new List<SystemTcpConnectionInformation>();
+            List<SystemTcpConnectionInformation> tcpConnections =
+                new List<SystemTcpConnectionInformation>();
 
             // Check if it supports IPv4 for IPv6 only modes.
             if (Socket.OSSupportsIPv4)
@@ -127,7 +111,8 @@ namespace System.Net.NetworkInformation
                             var span = new ReadOnlySpan<byte>((byte*)buffer, (int)size);
 
                             // The table info just gives us the number of rows.
-                            ref readonly Interop.IpHlpApi.MibTcpTable tcpTableInfo = ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcpTable>(span);
+                            ref readonly Interop.IpHlpApi.MibTcpTable tcpTableInfo =
+                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcpTable>(span);
 
                             if (tcpTableInfo.numberOfEntries > 0)
                             {
@@ -136,7 +121,11 @@ namespace System.Net.NetworkInformation
 
                                 for (int i = 0; i < tcpTableInfo.numberOfEntries; i++)
                                 {
-                                    tcpConnections.Add(new SystemTcpConnectionInformation(in MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcpRow>(span)));
+                                    tcpConnections.Add(
+                                        new SystemTcpConnectionInformation(
+                                            in MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcpRow>(span)
+                                        )
+                                    );
                                     span = span.Slice(sizeof(Interop.IpHlpApi.MibTcpRow));
                                 }
                             }
@@ -149,7 +138,10 @@ namespace System.Net.NetworkInformation
                 }
 
                 // If we don't have any ipv4 interfaces detected, just continue.
-                if (result != Interop.IpHlpApi.ERROR_SUCCESS && result != Interop.IpHlpApi.ERROR_NO_DATA)
+                if (
+                    result != Interop.IpHlpApi.ERROR_SUCCESS
+                    && result != Interop.IpHlpApi.ERROR_NO_DATA
+                )
                 {
                     throw new NetworkInformationException((int)result);
                 }
@@ -159,9 +151,14 @@ namespace System.Net.NetworkInformation
             {
                 // Get the buffer size needed.
                 size = 0;
-                result = Interop.IpHlpApi.GetExtendedTcpTable(IntPtr.Zero, &size, order: true,
-                                                                        (uint)AddressFamily.InterNetworkV6,
-                                                                        Interop.IpHlpApi.TcpTableClass.TcpTableOwnerPidAll, 0);
+                result = Interop.IpHlpApi.GetExtendedTcpTable(
+                    IntPtr.Zero,
+                    &size,
+                    order: true,
+                    (uint)AddressFamily.InterNetworkV6,
+                    Interop.IpHlpApi.TcpTableClass.TcpTableOwnerPidAll,
+                    0
+                );
 
                 while (result == Interop.IpHlpApi.ERROR_INSUFFICIENT_BUFFER)
                 {
@@ -169,15 +166,23 @@ namespace System.Net.NetworkInformation
                     IntPtr buffer = Marshal.AllocHGlobal((int)size);
                     try
                     {
-                        result = Interop.IpHlpApi.GetExtendedTcpTable(buffer, &size, order: true,
-                                                                                (uint)AddressFamily.InterNetworkV6,
-                                                                                Interop.IpHlpApi.TcpTableClass.TcpTableOwnerPidAll, 0);
+                        result = Interop.IpHlpApi.GetExtendedTcpTable(
+                            buffer,
+                            &size,
+                            order: true,
+                            (uint)AddressFamily.InterNetworkV6,
+                            Interop.IpHlpApi.TcpTableClass.TcpTableOwnerPidAll,
+                            0
+                        );
                         if (result == Interop.IpHlpApi.ERROR_SUCCESS)
                         {
                             var span = new ReadOnlySpan<byte>((byte*)buffer, (int)size);
 
                             // The table info just gives us the number of rows.
-                            ref readonly Interop.IpHlpApi.MibTcp6TableOwnerPid tcpTable6OwnerPid = ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6TableOwnerPid>(span);
+                            ref readonly Interop.IpHlpApi.MibTcp6TableOwnerPid tcpTable6OwnerPid =
+                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6TableOwnerPid>(
+                                    span
+                                );
 
                             if (tcpTable6OwnerPid.numberOfEntries > 0)
                             {
@@ -186,7 +191,13 @@ namespace System.Net.NetworkInformation
 
                                 for (int i = 0; i < tcpTable6OwnerPid.numberOfEntries; i++)
                                 {
-                                    tcpConnections.Add(new SystemTcpConnectionInformation(in MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6RowOwnerPid>(span)));
+                                    tcpConnections.Add(
+                                        new SystemTcpConnectionInformation(
+                                            in MemoryMarshal.AsRef<Interop.IpHlpApi.MibTcp6RowOwnerPid>(
+                                                span
+                                            )
+                                        )
+                                    );
 
                                     // We increment the pointer to the next row.
                                     span = span.Slice(sizeof(Interop.IpHlpApi.MibTcp6RowOwnerPid));
@@ -201,7 +212,10 @@ namespace System.Net.NetworkInformation
                 }
 
                 // If we don't have any ipv6 interfaces detected, just continue.
-                if (result != Interop.IpHlpApi.ERROR_SUCCESS && result != Interop.IpHlpApi.ERROR_NO_DATA)
+                if (
+                    result != Interop.IpHlpApi.ERROR_SUCCESS
+                    && result != Interop.IpHlpApi.ERROR_NO_DATA
+                )
                 {
                     throw new NetworkInformationException((int)result);
                 }
@@ -236,7 +250,8 @@ namespace System.Net.NetworkInformation
                             var span = new ReadOnlySpan<byte>((byte*)buffer, (int)size);
 
                             // The table info just gives us the number of rows.
-                            ref readonly Interop.IpHlpApi.MibUdpTable udpTableInfo = ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdpTable>(span);
+                            ref readonly Interop.IpHlpApi.MibUdpTable udpTableInfo =
+                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdpTable>(span);
 
                             if (udpTableInfo.numberOfEntries > 0)
                             {
@@ -245,10 +260,13 @@ namespace System.Net.NetworkInformation
 
                                 for (int i = 0; i < udpTableInfo.numberOfEntries; i++)
                                 {
-                                    ref readonly Interop.IpHlpApi.MibUdpRow udpRow = ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdpRow>(span);
+                                    ref readonly Interop.IpHlpApi.MibUdpRow udpRow =
+                                        ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdpRow>(span);
                                     int localPort = udpRow.localPort1 << 8 | udpRow.localPort2;
 
-                                    udpListeners.Add(new IPEndPoint(udpRow.localAddr, (int)localPort));
+                                    udpListeners.Add(
+                                        new IPEndPoint(udpRow.localAddr, (int)localPort)
+                                    );
 
                                     // We increment the pointer to the next row.
                                     span = span.Slice(sizeof(Interop.IpHlpApi.MibUdpRow));
@@ -263,7 +281,10 @@ namespace System.Net.NetworkInformation
                 }
 
                 // If we don't have any ipv4 interfaces detected, just continue.
-                if (result != Interop.IpHlpApi.ERROR_SUCCESS && result != Interop.IpHlpApi.ERROR_NO_DATA)
+                if (
+                    result != Interop.IpHlpApi.ERROR_SUCCESS
+                    && result != Interop.IpHlpApi.ERROR_NO_DATA
+                )
                 {
                     throw new NetworkInformationException((int)result);
                 }
@@ -273,25 +294,38 @@ namespace System.Net.NetworkInformation
             {
                 // Get the buffer size needed.
                 size = 0;
-                result = Interop.IpHlpApi.GetExtendedUdpTable(IntPtr.Zero, &size, order: true,
-                                                                        (uint)AddressFamily.InterNetworkV6,
-                                                                        Interop.IpHlpApi.UdpTableClass.UdpTableOwnerPid, 0);
+                result = Interop.IpHlpApi.GetExtendedUdpTable(
+                    IntPtr.Zero,
+                    &size,
+                    order: true,
+                    (uint)AddressFamily.InterNetworkV6,
+                    Interop.IpHlpApi.UdpTableClass.UdpTableOwnerPid,
+                    0
+                );
                 while (result == Interop.IpHlpApi.ERROR_INSUFFICIENT_BUFFER)
                 {
                     // Allocate the buffer and get the UDP table.
                     IntPtr buffer = Marshal.AllocHGlobal((int)size);
                     try
                     {
-                        result = Interop.IpHlpApi.GetExtendedUdpTable(buffer, &size, order: true,
-                                                                                (uint)AddressFamily.InterNetworkV6,
-                                                                                Interop.IpHlpApi.UdpTableClass.UdpTableOwnerPid, 0);
+                        result = Interop.IpHlpApi.GetExtendedUdpTable(
+                            buffer,
+                            &size,
+                            order: true,
+                            (uint)AddressFamily.InterNetworkV6,
+                            Interop.IpHlpApi.UdpTableClass.UdpTableOwnerPid,
+                            0
+                        );
 
                         if (result == Interop.IpHlpApi.ERROR_SUCCESS)
                         {
                             var span = new ReadOnlySpan<byte>((byte*)buffer, (int)size);
 
                             // The table info just gives us the number of rows.
-                            ref readonly Interop.IpHlpApi.MibUdp6TableOwnerPid udp6TableOwnerPid = ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6TableOwnerPid>(span);
+                            ref readonly Interop.IpHlpApi.MibUdp6TableOwnerPid udp6TableOwnerPid =
+                                ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6TableOwnerPid>(
+                                    span
+                                );
 
                             if (udp6TableOwnerPid.numberOfEntries > 0)
                             {
@@ -300,11 +334,23 @@ namespace System.Net.NetworkInformation
 
                                 for (int i = 0; i < udp6TableOwnerPid.numberOfEntries; i++)
                                 {
-                                    ref readonly Interop.IpHlpApi.MibUdp6RowOwnerPid udp6RowOwnerPid = ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6RowOwnerPid>(span);
-                                    int localPort = udp6RowOwnerPid.localPort1 << 8 | udp6RowOwnerPid.localPort2;
+                                    ref readonly Interop.IpHlpApi.MibUdp6RowOwnerPid udp6RowOwnerPid =
+                                        ref MemoryMarshal.AsRef<Interop.IpHlpApi.MibUdp6RowOwnerPid>(
+                                            span
+                                        );
+                                    int localPort =
+                                        udp6RowOwnerPid.localPort1 << 8
+                                        | udp6RowOwnerPid.localPort2;
 
-                                    udpListeners.Add(new IPEndPoint(new IPAddress(udp6RowOwnerPid.localAddrAsSpan,
-                                        udp6RowOwnerPid.localScopeId), localPort));
+                                    udpListeners.Add(
+                                        new IPEndPoint(
+                                            new IPAddress(
+                                                udp6RowOwnerPid.localAddrAsSpan,
+                                                udp6RowOwnerPid.localScopeId
+                                            ),
+                                            localPort
+                                        )
+                                    );
 
                                     // We increment the pointer to the next row.
                                     span = span.Slice(sizeof(Interop.IpHlpApi.MibUdp6RowOwnerPid));
@@ -318,7 +364,10 @@ namespace System.Net.NetworkInformation
                     }
                 }
                 // If we don't have any ipv6 interfaces detected, just continue.
-                if (result != Interop.IpHlpApi.ERROR_SUCCESS && result != Interop.IpHlpApi.ERROR_NO_DATA)
+                if (
+                    result != Interop.IpHlpApi.ERROR_SUCCESS
+                    && result != Interop.IpHlpApi.ERROR_NO_DATA
+                )
                 {
                     throw new NetworkInformationException((int)result);
                 }
@@ -367,11 +416,14 @@ namespace System.Net.NetworkInformation
             return new SystemIcmpV6Statistics();
         }
 
-        public override IAsyncResult BeginGetUnicastAddresses(AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(GetUnicastAddressesAsync(), callback, state);
+        public override IAsyncResult BeginGetUnicastAddresses(
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToAsyncResult.Begin(GetUnicastAddressesAsync(), callback, state);
 
-        public override UnicastIPAddressInformationCollection EndGetUnicastAddresses(IAsyncResult asyncResult) =>
-            TaskToAsyncResult.End<UnicastIPAddressInformationCollection>(asyncResult);
+        public override UnicastIPAddressInformationCollection EndGetUnicastAddresses(
+            IAsyncResult asyncResult
+        ) => TaskToAsyncResult.End<UnicastIPAddressInformationCollection>(asyncResult);
 
         public override UnicastIPAddressInformationCollection GetUnicastAddresses() =>
             GetUnicastAddressesAsync().GetAwaiter().GetResult();
@@ -380,7 +432,12 @@ namespace System.Net.NetworkInformation
         {
             // Wait for the address table to stabilize.
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            if (!TeredoHelper.UnsafeNotifyStableUnicastIpAddressTable(s => ((TaskCompletionSource)s).TrySetResult(), tcs))
+            if (
+                !TeredoHelper.UnsafeNotifyStableUnicastIpAddressTable(
+                    s => ((TaskCompletionSource)s).TrySetResult(),
+                    tcs
+                )
+            )
             {
                 await tcs.Task.ConfigureAwait(false);
             }
@@ -390,7 +447,9 @@ namespace System.Net.NetworkInformation
 
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-                foreach (UnicastIPAddressInformation address in ni.GetIPProperties().UnicastAddresses)
+                foreach (
+                    UnicastIPAddressInformation address in ni.GetIPProperties().UnicastAddresses
+                )
                 {
                     if (!addresses.Contains(address))
                     {

@@ -26,12 +26,20 @@ namespace System.ServiceModel.Channels
         int messageBufferSize;
         ConnectionBufferPool receiveBufferPool;
 
-        internal UdpSocketReceiveManager(UdpSocket[] receiveSockets, int maxPendingReceivesPerSocket, BufferManager bufferManager, IUdpReceiveHandler receiveHandler)
+        internal UdpSocketReceiveManager(
+            UdpSocket[] receiveSockets,
+            int maxPendingReceivesPerSocket,
+            BufferManager bufferManager,
+            IUdpReceiveHandler receiveHandler
+        )
         {
             Fx.Assert(receiveSockets != null, "receiveSockets parameter is null");
             Fx.Assert(receiveSockets.Length > 0, "receiveSockets parameter is empty");
             Fx.Assert(maxPendingReceivesPerSocket > 0, "maxPendingReceivesPerSocket can't be <= 0");
-            Fx.Assert(receiveHandler.MaxReceivedMessageSize > 0, "maxReceivedMessageSize must be > 0");
+            Fx.Assert(
+                receiveHandler.MaxReceivedMessageSize > 0,
+                "maxReceivedMessageSize must be > 0"
+            );
             Fx.Assert(bufferManager != null, "bufferManager argument should not be null");
             Fx.Assert(receiveHandler != null, "receiveHandler should not be null");
 
@@ -40,25 +48,33 @@ namespace System.ServiceModel.Channels
             this.bufferManager = bufferManager;
             this.receiveSockets = receiveSockets;
             this.maxPendingReceivesPerSocket = maxPendingReceivesPerSocket;
-            this.messageBufferSize = UdpUtility.ComputeMessageBufferSize(receiveHandler.MaxReceivedMessageSize);
+            this.messageBufferSize = UdpUtility.ComputeMessageBufferSize(
+                receiveHandler.MaxReceivedMessageSize
+            );
 
             int maxPendingReceives = maxPendingReceivesPerSocket * receiveSockets.Length;
-            this.receiveBufferPool = new ConnectionBufferPool(this.messageBufferSize, maxPendingReceives);
+            this.receiveBufferPool = new ConnectionBufferPool(
+                this.messageBufferSize,
+                maxPendingReceives
+            );
         }
 
         bool IsDisposed
         {
-            get
-            {
-                return this.openCount < 0;
-            }
+            get { return this.openCount < 0; }
         }
 
         public void SetReceiveHandler(IUdpReceiveHandler handler)
         {
             Fx.Assert(handler != null, "IUdpReceiveHandler can't be null");
-            Fx.Assert(handler.MaxReceivedMessageSize == this.receiveHandler.MaxReceivedMessageSize, "new receive handler's max message size doesn't match");
-            Fx.Assert(this.openCount > 0, "SetReceiveHandler called on a closed UdpSocketReceiveManager");
+            Fx.Assert(
+                handler.MaxReceivedMessageSize == this.receiveHandler.MaxReceivedMessageSize,
+                "new receive handler's max message size doesn't match"
+            );
+            Fx.Assert(
+                this.openCount > 0,
+                "SetReceiveHandler called on a closed UdpSocketReceiveManager"
+            );
             this.receiveHandler = handler;
         }
 
@@ -107,7 +123,6 @@ namespace System.ServiceModel.Channels
                     this.continueReceivingCallback = new Action<object>(ContinueReceiving);
                 }
             }
-
 
             try
             {
@@ -172,12 +187,15 @@ namespace System.ServiceModel.Channels
         }
 
         void ContinueReceiving(object socket)
-        {            
+        {
             try
             {
                 while (StartAsyncReceive(socket as UdpSocket))
                 {
-                    Fx.Assert(Thread.CurrentThread.IsThreadPoolThread, "Receive loop is running on a non-threadpool thread.  If this thread disappears while a completion port operation is outstanding, then the operation will get canceled.");
+                    Fx.Assert(
+                        Thread.CurrentThread.IsThreadPoolThread,
+                        "Receive loop is running on a non-threadpool thread.  If this thread disappears while a completion port operation is outstanding, then the operation will get canceled."
+                    );
                 }
             }
             catch (Exception ex)
@@ -215,7 +233,12 @@ namespace System.ServiceModel.Channels
                 messageBytes = this.CopyMessageIntoBufferManager(messageBytes);
 
                 //when receiveHandler.HandleDataReceived is called, it will return the buffer to the buffer manager.
-                continueReceiving = this.receiveHandler.HandleDataReceived(messageBytes, state.RemoteEndPoint, state.Socket.InterfaceIndex, this.onMessageDequeued);
+                continueReceiving = this.receiveHandler.HandleDataReceived(
+                    messageBytes,
+                    state.RemoteEndPoint,
+                    state.Socket.InterfaceIndex,
+                    this.onMessageDequeued
+                );
             }
             catch (Exception ex)
             {
@@ -236,7 +259,10 @@ namespace System.ServiceModel.Channels
         //returns true if receive completed synchronously, false otherwise
         bool StartAsyncReceive(UdpSocket socket)
         {
-            Fx.Assert(socket != null, "UdpSocketReceiveManager.StartAsyncReceive: Socket should never be null");                         
+            Fx.Assert(
+                socket != null,
+                "UdpSocketReceiveManager.StartAsyncReceive: Socket should never be null"
+            );
             bool completedSync = false;
 
             ArraySegment<byte> messageBytes = default(ArraySegment<byte>);
@@ -244,7 +270,10 @@ namespace System.ServiceModel.Channels
 
             lock (this.thisLock)
             {
-                if (!this.IsDisposed && socket.PendingReceiveCount < this.maxPendingReceivesPerSocket)
+                if (
+                    !this.IsDisposed
+                    && socket.PendingReceiveCount < this.maxPendingReceivesPerSocket
+                )
                 {
                     IAsyncResult result = null;
                     byte[] receiveBuffer = this.receiveBufferPool.Take();
@@ -253,7 +282,14 @@ namespace System.ServiceModel.Channels
                         state = new UdpSocketReceiveState(socket, receiveBuffer);
                         EndPoint remoteEndpoint = socket.CreateIPAnyEndPoint();
 
-                        result = socket.BeginReceiveFrom(receiveBuffer, 0, receiveBuffer.Length, ref remoteEndpoint, onReceiveFrom, state);
+                        result = socket.BeginReceiveFrom(
+                            receiveBuffer,
+                            0,
+                            receiveBuffer.Length,
+                            ref remoteEndpoint,
+                            onReceiveFrom,
+                            state
+                        );
                     }
                     catch (Exception e)
                     {
@@ -277,7 +313,12 @@ namespace System.ServiceModel.Channels
                 messageBytes = this.CopyMessageIntoBufferManager(messageBytes);
                 //if HandleDataReceived returns false, it means that the max pending message count was hit.
                 //when receiveHandler.HandleDataReceived is called (whether now or later), it will return the buffer to the buffer manager.
-                return this.receiveHandler.HandleDataReceived(messageBytes, state.RemoteEndPoint, state.Socket.InterfaceIndex, this.onMessageDequeued);
+                return this.receiveHandler.HandleDataReceived(
+                    messageBytes,
+                    state.RemoteEndPoint,
+                    state.Socket.InterfaceIndex,
+                    this.onMessageDequeued
+                );
             }
 
             return false;
@@ -297,8 +338,11 @@ namespace System.ServiceModel.Channels
             for (int i = 0; i < this.receiveSockets.Length; i++)
             {
                 UdpSocket socket = this.receiveSockets[i];
-                                
-                while (!this.IsDisposed && socket.PendingReceiveCount < this.maxPendingReceivesPerSocket)
+
+                while (
+                    !this.IsDisposed
+                    && socket.PendingReceiveCount < this.maxPendingReceivesPerSocket
+                )
                 {
                     bool jumpThreads = false;
                     try
@@ -329,7 +373,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw FxTrace.Exception.AsError(new ObjectDisposedException("SocketReceiveManager"));
+                throw FxTrace.Exception.AsError(
+                    new ObjectDisposedException("SocketReceiveManager")
+                );
             }
         }
 
@@ -350,9 +396,15 @@ namespace System.ServiceModel.Channels
             try
             {
                 EndPoint remoteEndpoint = null;
-                ArraySegment<byte> messageBytes = state.Socket.EndReceiveFrom(result, ref remoteEndpoint);
+                ArraySegment<byte> messageBytes = state.Socket.EndReceiveFrom(
+                    result,
+                    ref remoteEndpoint
+                );
                 state.RemoteEndPoint = remoteEndpoint;
-                Fx.Assert(messageBytes.Array == state.ReceiveBuffer, "Array returned by Socket.EndReceiveFrom must match the array passed in through the UdpSocketReceiveState");
+                Fx.Assert(
+                    messageBytes.Array == state.ReceiveBuffer,
+                    "Array returned by Socket.EndReceiveFrom must match the array passed in through the UdpSocketReceiveState"
+                );
                 return messageBytes;
             }
             catch (Exception e)
@@ -375,23 +427,11 @@ namespace System.ServiceModel.Channels
                 this.ReceiveBuffer = receiveBuffer;
             }
 
-            public EndPoint RemoteEndPoint
-            {
-                get;
-                set;
-            }
+            public EndPoint RemoteEndPoint { get; set; }
 
-            internal UdpSocket Socket
-            {
-                get;
-                private set;
-            }
+            internal UdpSocket Socket { get; private set; }
 
-            internal byte[] ReceiveBuffer
-            {
-                get;
-                private set;
-            }
+            internal byte[] ReceiveBuffer { get; private set; }
         }
     }
 }

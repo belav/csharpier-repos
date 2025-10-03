@@ -19,15 +19,21 @@ internal readonly record struct DocumentIdSpan(DocumentId documentId, TextSpan s
 {
     [DataMember(Order = 0)]
     public readonly DocumentId DocumentId = documentId;
+
     [DataMember(Order = 1)]
     public readonly TextSpan SourceSpan = sourceSpan;
 
-    public static implicit operator DocumentIdSpan(DocumentSpan documentSpan)
-        => new(documentSpan.Document.Id, documentSpan.SourceSpan);
+    public static implicit operator DocumentIdSpan(DocumentSpan documentSpan) =>
+        new(documentSpan.Document.Id, documentSpan.SourceSpan);
 
-    public async Task<DocumentSpan?> TryRehydrateAsync(Solution solution, CancellationToken cancellationToken)
+    public async Task<DocumentSpan?> TryRehydrateAsync(
+        Solution solution,
+        CancellationToken cancellationToken
+    )
     {
-        var document = await solution.GetDocumentAsync(this.DocumentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+        var document = await solution
+            .GetDocumentAsync(this.DocumentId, includeSourceGenerated: true, cancellationToken)
+            .ConfigureAwait(false);
         return document == null ? null : new DocumentSpan(document, this.SourceSpan);
     }
 }

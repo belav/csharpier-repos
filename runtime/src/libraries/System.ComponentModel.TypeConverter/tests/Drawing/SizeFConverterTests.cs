@@ -22,16 +22,14 @@ namespace System.ComponentModel.TypeConverterTests
         {
             get
             {
-                yield return Tuple.Create(new SizeF(10, 20), new Dictionary<string, object>
-                {
-                    ["Width"] = 10f,
-                    ["Height"] = 20f,
-                });
-                yield return Tuple.Create(new SizeF(-2, 3), new Dictionary<string, object>
-                {
-                    ["Width"] = -2f,
-                    ["Height"] = 3f,
-                });
+                yield return Tuple.Create(
+                    new SizeF(10, 20),
+                    new Dictionary<string, object> { ["Width"] = 10f, ["Height"] = 20f }
+                );
+                yield return Tuple.Create(
+                    new SizeF(-2, 3),
+                    new Dictionary<string, object> { ["Width"] = -2f, ["Height"] = 3f }
+                );
             }
         }
 
@@ -82,22 +80,25 @@ namespace System.ComponentModel.TypeConverterTests
         public static IEnumerable<object[]> SizeFData =>
             new[]
             {
-                new object[] {0, 0},
-                new object[] {1, 1},
-                new object[] {-1, 1},
-                new object[] {1, -1},
-                new object[] {-1, -1},
-                new object[] {float.MaxValue, float.MaxValue},
-                new object[] {float.MinValue, float.MaxValue},
-                new object[] {float.MaxValue, float.MinValue},
-                new object[] {float.MinValue, float.MinValue},
+                new object[] { 0, 0 },
+                new object[] { 1, 1 },
+                new object[] { -1, 1 },
+                new object[] { 1, -1 },
+                new object[] { -1, -1 },
+                new object[] { float.MaxValue, float.MaxValue },
+                new object[] { float.MinValue, float.MaxValue },
+                new object[] { float.MaxValue, float.MinValue },
+                new object[] { float.MinValue, float.MinValue },
             };
 
         [Theory]
         [MemberData(nameof(SizeFData))]
         public void ConvertFrom(float width, float height)
         {
-            TestConvertFromString(new SizeF(width, height), FormattableString.Invariant($"{width:G9}, {height:G9}"));
+            TestConvertFromString(
+                new SizeF(width, height),
+                FormattableString.Invariant($"{width:G9}, {height:G9}")
+            );
         }
 
         [Theory]
@@ -117,11 +118,11 @@ namespace System.ComponentModel.TypeConverterTests
         public static IEnumerable<object[]> ConvertFrom_NotSupportedData =>
             new[]
             {
-                new object[] {new Point(1, 1)},
-                new object[] {new PointF(1, 1)},
-                new object[] {new SizeF(1, 1)},
-                new object[] {new SizeF(1, 1)},
-                new object[] {0x10},
+                new object[] { new Point(1, 1) },
+                new object[] { new PointF(1, 1) },
+                new object[] { new SizeF(1, 1) },
+                new object[] { new SizeF(1, 1) },
+                new object[] { 0x10 },
             };
 
         [Theory]
@@ -135,7 +136,10 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(SizeFData))]
         public void ConvertTo_NotNetFramework(float width, float height)
         {
-            TestConvertToString(new SizeF(width, height), FormattableString.Invariant($"{width}, {height}"));
+            TestConvertToString(
+                new SizeF(width, height),
+                FormattableString.Invariant($"{width}, {height}")
+            );
         }
 
         [Theory]
@@ -153,17 +157,16 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertTo_NullCulture()
         {
             string listSep = CultureInfo.CurrentCulture.TextInfo.ListSeparator;
-            Assert.Equal($"1{listSep} 1", Converter.ConvertTo(null, null, new SizeF(1, 1), typeof(string)));
+            Assert.Equal(
+                $"1{listSep} 1",
+                Converter.ConvertTo(null, null, new SizeF(1, 1), typeof(string))
+            );
         }
 
         [Fact]
         public void CreateInstance_CaseSensitive()
         {
-            var propertyValues = new Dictionary<string, object>
-            {
-                ["width"] = 1,
-                ["Height"] = 1,
-            };
+            var propertyValues = new Dictionary<string, object> { ["width"] = 1, ["Height"] = 1 };
             Assert.Throws<ArgumentException>(() => Converter.CreateInstance(null, propertyValues));
         }
 
@@ -194,7 +197,11 @@ namespace System.ComponentModel.TypeConverterTests
             Assert.Equal((object)false, props["IsEmpty"].GetValue(pt));
 
             // Pick an attribute that cannot be applied to properties to make sure everything gets filtered
-            props = Converter.GetProperties(null, new SizeF(1, 1), new Attribute[] { new System.Reflection.AssemblyCopyrightAttribute("")});
+            props = Converter.GetProperties(
+                null,
+                new SizeF(1, 1),
+                new Attribute[] { new System.Reflection.AssemblyCopyrightAttribute("") }
+            );
             Assert.Equal(0, props.Count);
         }
 
@@ -202,7 +209,10 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(SizeFData))]
         public void ConvertFromInvariantString(float width, float height)
         {
-            var point = (SizeF)Converter.ConvertFromInvariantString(FormattableString.Invariant($"{width:G9}, {height:G9}"));
+            var point = (SizeF)
+                Converter.ConvertFromInvariantString(
+                    FormattableString.Invariant($"{width:G9}, {height:G9}")
+                );
             Assert.Equal(width, point.Width);
             Assert.Equal(height, point.Height);
         }
@@ -223,9 +233,16 @@ namespace System.ComponentModel.TypeConverterTests
         [MemberData(nameof(SizeFData))]
         public void ConvertFromString(float width, float height)
         {
-            var point =
-                (SizeF)Converter.ConvertFromString(string.Format(CultureInfo.CurrentCulture, "{0:g9}{2} {1:g9}", width, height,
-                    CultureInfo.CurrentCulture.TextInfo.ListSeparator));
+            var point = (SizeF)
+                Converter.ConvertFromString(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0:g9}{2} {1:g9}",
+                        width,
+                        height,
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                    )
+                );
             Assert.Equal(width, point.Width);
             Assert.Equal(height, point.Height);
         }
@@ -255,7 +272,16 @@ namespace System.ComponentModel.TypeConverterTests
         public void ConvertToString_NotNetFramework(float width, float height)
         {
             var str = Converter.ConvertToString(new SizeF(width, height));
-            Assert.Equal(string.Format(CultureInfo.CurrentCulture, "{0}{2} {1}", width, height, CultureInfo.CurrentCulture.TextInfo.ListSeparator), str);
+            Assert.Equal(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "{0}{2} {1}",
+                    width,
+                    height,
+                    CultureInfo.CurrentCulture.TextInfo.ListSeparator
+                ),
+                str
+            );
         }
     }
 }

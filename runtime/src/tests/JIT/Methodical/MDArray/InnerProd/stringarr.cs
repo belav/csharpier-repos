@@ -12,7 +12,9 @@ public class Stringmm
 
     public static void InitMatrix2D(out String[,] m, out String[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         m = new String[size, size];
@@ -36,12 +38,20 @@ public class Stringmm
         }
     }
 
-    public static void InnerProduct2D(out String res, ref String[,] a, ref String[,] b, int row, int col)
+    public static void InnerProduct2D(
+        out String res,
+        ref String[,] a,
+        ref String[,] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = "";
 
-        int temp1, temp2, temp3;
+        int temp1,
+            temp2,
+            temp3;
         temp3 = 0;
 
         i = 0;
@@ -55,12 +65,20 @@ public class Stringmm
         }
     }
 
-    public static void InnerProduct2DRef(out String res, ref String[][] a, ref String[][] b, int row, int col)
+    public static void InnerProduct2DRef(
+        out String res,
+        ref String[][] a,
+        ref String[][] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = "";
 
-        int temp1, temp2, temp3;
+        int temp1,
+            temp2,
+            temp3;
         temp3 = 0;
 
         i = 0;
@@ -76,7 +94,9 @@ public class Stringmm
 
     public static void Init3DMatrix(String[,,] m, String[][] refm)
     {
-        int i, j, temp;
+        int i,
+            j,
+            temp;
         i = 0;
 
         while (i < size)
@@ -99,7 +119,9 @@ public class Stringmm
         int i;
         res = "";
 
-        int temp1, temp2, temp3;
+        int temp1,
+            temp2,
+            temp3;
         temp3 = 0;
 
         i = 0;
@@ -113,12 +135,20 @@ public class Stringmm
         }
     }
 
-    public static void InnerProduct3DRef(out String res, String[][] a, String[][] b, int row, int col)
+    public static void InnerProduct3DRef(
+        out String res,
+        String[][] a,
+        String[][] b,
+        int row,
+        int col
+    )
     {
         int i;
         res = "";
 
-        int temp1, temp2, temp3;
+        int temp1,
+            temp2,
+            temp3;
         temp3 = 0;
 
         i = 0;
@@ -139,9 +169,10 @@ public class Stringmm
 
         int seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         rand = new Random(seed);
@@ -149,7 +180,10 @@ public class Stringmm
 
         Console.WriteLine();
         Console.WriteLine("2D Array");
-        Console.WriteLine("Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce", seed);
+        Console.WriteLine(
+            "Random seed: {0}; set environment variable CORECLR_SEED to this value to reproduce",
+            seed
+        );
         Console.WriteLine("Testing inner product of {0} by {0} matrices", size);
         Console.WriteLine("Matrix element stores string data converted from random integer");
         Console.WriteLine("array set/get, ref/out param are used");
@@ -188,7 +222,13 @@ public class Stringmm
             for (int j = 0; j < size; j++)
                 if (imr2d[i, j] != refr2d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr2d[i,j] {2}!=refr2d[i][j] {3}", i, j, imr2d[i, j], refr2d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr2d[i,j] {2}!=refr2d[i][j] {3}",
+                        i,
+                        j,
+                        imr2d[i, j],
+                        refr2d[i][j]
+                    );
                     pass = false;
                 }
         }
@@ -203,9 +243,8 @@ public class Stringmm
         String[,,] imr3d = new String[size, size, size];
 
         for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-                imr3d[i, j, 0] = "";
-
+        for (int j = 0; j < size; j++)
+            imr3d[i, j, 0] = "";
 
         String[][] refa3d = new String[size][];
         String[][] refb3d = new String[size][];
@@ -241,7 +280,13 @@ public class Stringmm
             for (int j = 0; j < size; j++)
                 if (imr3d[i, j, 0] != refr3d[i][j])
                 {
-                    Console.WriteLine("i={0}, j={1}, imr3d[i,j,0] {2}!=refr3d[i][j] {3}", i, j, imr3d[i, j, 0], refr3d[i][j]);
+                    Console.WriteLine(
+                        "i={0}, j={1}, imr3d[i,j,0] {2}!=refr3d[i][j] {3}",
+                        i,
+                        j,
+                        imr3d[i, j, 0],
+                        refr3d[i][j]
+                    );
                     pass = false;
                 }
         }

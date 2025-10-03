@@ -28,21 +28,18 @@ public abstract class JsonTypeMapping : RelationalTypeMapping
     /// <param name="clrType">The .NET type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
     protected JsonTypeMapping(string storeType, Type clrType, DbType? dbType)
-        : base(storeType, clrType, dbType)
-    {
-    }
+        : base(storeType, clrType, dbType) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="JsonTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
     protected JsonTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <inheritdoc />
-    protected override string GenerateNonNullSqlLiteral(object value)
-        => throw new InvalidOperationException(
-            RelationalStrings.MethodNeedsToBeImplementedInTheProvider);
+    protected override string GenerateNonNullSqlLiteral(object value) =>
+        throw new InvalidOperationException(
+            RelationalStrings.MethodNeedsToBeImplementedInTheProvider
+        );
 }

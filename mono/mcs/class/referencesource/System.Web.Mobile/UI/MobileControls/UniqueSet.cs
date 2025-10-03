@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="UniqueSet.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -9,8 +9,8 @@ using System.Collections;
 using System.Diagnostics;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
@@ -20,11 +20,12 @@ namespace System.Web.UI.MobileControls
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class UniqueSet : ArrayList
     {
-        internal UniqueSet() {
-        }
+        internal UniqueSet() { }
 
         public override int Add(Object o)
         {
@@ -39,4 +40,3 @@ namespace System.Web.UI.MobileControls
         }
     }
 }
-

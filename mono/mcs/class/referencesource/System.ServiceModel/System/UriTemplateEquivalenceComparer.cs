@@ -7,10 +7,12 @@
 namespace System
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Runtime.CompilerServices;
+    using System.ServiceModel;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class UriTemplateEquivalenceComparer : IEqualityComparer<UriTemplate>
     {
         static UriTemplateEquivalenceComparer instance;
@@ -35,6 +37,7 @@ namespace System
             }
             return x.IsEquivalentTo(y);
         }
+
         public int GetHashCode(UriTemplate obj)
         {
             if (obj == null)

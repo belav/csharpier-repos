@@ -2,29 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Diagnostics.Tracing;
-using Tracing.Tests.Common;
-using Microsoft.Diagnostics.Tracing.Parsers.Clr;
 using Microsoft.Diagnostics.NETCore.Client;
+using Microsoft.Diagnostics.Tracing;
+using Microsoft.Diagnostics.Tracing.Parsers.Clr;
+using Tracing.Tests.Common;
 using Xunit;
 
 namespace Tracing.Tests.BigEventsValidation
 {
-
     public sealed class BigEventSource : EventSource
     {
         private static string bigString = new String('a', 100 * 1024);
         private static string smallString = new String('a', 10);
 
-        private BigEventSource()
-        {
-        }
+        private BigEventSource() { }
 
         public static BigEventSource Log = new BigEventSource();
 
@@ -39,7 +36,6 @@ namespace Tracing.Tests.BigEventsValidation
         }
     }
 
-
     public class BigEventsValidation
     {
         [Fact]
@@ -49,15 +45,24 @@ namespace Tracing.Tests.BigEventsValidation
             // See https://github.com/dotnet/runtime/issues/50515 for the regression issue
             var providers = new List<EventPipeProvider>()
             {
-                new EventPipeProvider("BigEventSource", EventLevel.Verbose)
+                new EventPipeProvider("BigEventSource", EventLevel.Verbose),
             };
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, _Verify);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                _Verify
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
-            { "BigEventSource", -1 }
+            { "BigEventSource", -1 },
         };
 
         private static Action _eventGeneratingAction = () =>

@@ -4,39 +4,43 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    using System.Collections;
     using System.Configuration.Internal;
     using System.Globalization;
-    using System.Collections;
     using System.IO;
-    using System.Xml;
+    using System.Net;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Net;
+    using System.Xml;
     using Assembly = System.Reflection.Assembly;
     using StringBuilder = System.Text.StringBuilder;
 
 #if NOPERF
-    internal class ClientConfigPerf {
-        const int SIZE=100;
+    internal class ClientConfigPerf
+    {
+        const int SIZE = 100;
 
-        long[]      _counters;
-        long[]      _totals;
-        string[]    _names;
-        int         _current;
-        bool        _enabled;
+        long[] _counters;
+        long[] _totals;
+        string[] _names;
+        int _current;
+        bool _enabled;
 
-        static internal ClientConfigPerf ConfigSystem = new ClientConfigPerf(false);
-        static internal ClientConfigPerf ScanSections = new ClientConfigPerf(false);
-        static internal ClientConfigPerf CopySection = new ClientConfigPerf(false);
-        static internal ClientConfigPerf CopyXmlNode = new ClientConfigPerf(false);
-        static internal ClientConfigPerf GetConfig = new ClientConfigPerf(true);
+        internal static ClientConfigPerf ConfigSystem = new ClientConfigPerf(false);
+        internal static ClientConfigPerf ScanSections = new ClientConfigPerf(false);
+        internal static ClientConfigPerf CopySection = new ClientConfigPerf(false);
+        internal static ClientConfigPerf CopyXmlNode = new ClientConfigPerf(false);
+        internal static ClientConfigPerf GetConfig = new ClientConfigPerf(true);
 
-        ClientConfigPerf(bool enabled) {
+        ClientConfigPerf(bool enabled)
+        {
 #if PERF
             _enabled = enabled;
-            if (_enabled) {
+            if (_enabled)
+            {
                 _counters = new long[SIZE];
                 _totals = new long[SIZE];
                 _names = new string[SIZE];
@@ -44,18 +48,22 @@ namespace System.Configuration {
 #endif
         }
 
-        internal void Reset() {
+        internal void Reset()
+        {
 #if PERF
             _current = 0;
 #endif
         }
 
-        internal void Record(string name) {
+        internal void Record(string name)
+        {
 #if PERF
-            if (_enabled && _current < _counters.Length) {
+            if (_enabled && _current < _counters.Length)
+            {
                 _names[_current] = name;
                 Microsoft.Win32.SafeNativeMethods.QueryPerformanceCounter(out _counters[_current]);
-                if (_current > 0) {
+                if (_current > 0)
+                {
                     _totals[_current] += _counters[_current] - _counters[_current - 1];
                 }
 
@@ -64,15 +72,18 @@ namespace System.Configuration {
 #endif
         }
 
-        void DoPrint() {
+        void DoPrint()
+        {
 #if PERF
-            if (_enabled) {
+            if (_enabled)
+            {
                 long lfreq = 0;
                 Microsoft.Win32.SafeNativeMethods.QueryPerformanceFrequency(out lfreq);
-                double freq = (double) lfreq;
+                double freq = (double)lfreq;
                 double grandtotal = 0;
 
-                for (int i = 0; i < _current; i++) {
+                for (int i = 0; i < _current; i++)
+                {
                     double time = ((double)_totals[i]) / freq;
                     grandtotal += time;
                     Console.WriteLine("{0,-20} : {1:F6}", _names[i], time);
@@ -83,7 +94,8 @@ namespace System.Configuration {
 #endif
         }
 
-        public static void Print() {
+        public static void Print()
+        {
 #if PERF
             ConfigSystem.DoPrint();
             ScanSections.DoPrint();

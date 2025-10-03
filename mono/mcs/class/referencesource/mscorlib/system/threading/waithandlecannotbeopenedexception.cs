@@ -1,42 +1,47 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
-namespace System.Threading 
+namespace System.Threading
 {
     using System;
-    using System.Runtime.Serialization;
     using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
 
     [Serializable]
     [ComVisibleAttribute(false)]
-
 #if FEATURE_CORECLR
-    public class WaitHandleCannotBeOpenedException : Exception {
+    public class WaitHandleCannotBeOpenedException : Exception
+    {
 #else
-    public class WaitHandleCannotBeOpenedException : ApplicationException { 
+    public class WaitHandleCannotBeOpenedException : ApplicationException
+    {
 #endif // FEATURE_CORECLR
-        public WaitHandleCannotBeOpenedException() : base(Environment.GetResourceString("Threading.WaitHandleCannotBeOpenedException")) 
-        {
-            SetErrorCode(__HResults.COR_E_WAITHANDLECANNOTBEOPENED);
-        }
-    
-        public WaitHandleCannotBeOpenedException(String message) : base(message)
+        public WaitHandleCannotBeOpenedException()
+            : base(Environment.GetResourceString("Threading.WaitHandleCannotBeOpenedException"))
         {
             SetErrorCode(__HResults.COR_E_WAITHANDLECANNOTBEOPENED);
         }
 
-        public WaitHandleCannotBeOpenedException(String message, Exception innerException) : base(message, innerException)
+        public WaitHandleCannotBeOpenedException(String message)
+            : base(message)
         {
             SetErrorCode(__HResults.COR_E_WAITHANDLECANNOTBEOPENED);
         }
 
-        protected WaitHandleCannotBeOpenedException(SerializationInfo info, StreamingContext context) : base (info, context) 
+        public WaitHandleCannotBeOpenedException(String message, Exception innerException)
+            : base(message, innerException)
         {
+            SetErrorCode(__HResults.COR_E_WAITHANDLECANNOTBEOPENED);
         }
+
+        protected WaitHandleCannotBeOpenedException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }
-

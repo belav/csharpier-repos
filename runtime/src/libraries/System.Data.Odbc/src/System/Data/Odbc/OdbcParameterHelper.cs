@@ -23,7 +23,8 @@ namespace System.Data.Odbc
 
         private object? _coercedValue;
 
-        private OdbcParameter(OdbcParameter source) : this() // V1.2.3300, Clone
+        private OdbcParameter(OdbcParameter source)
+            : this() // V1.2.3300, Clone
         {
             ADP.CheckArgumentNull(source, nameof(source));
 
@@ -37,14 +38,8 @@ namespace System.Data.Odbc
 
         private object? CoercedValue
         {
-            get
-            {
-                return _coercedValue;
-            }
-            set
-            {
-                _coercedValue = value;
-            }
+            get { return _coercedValue; }
+            set { _coercedValue = value; }
         }
 
         public override ParameterDirection Direction
@@ -76,23 +71,13 @@ namespace System.Data.Odbc
 
         public override bool IsNullable
         {
-            get
-            {
-                return _isNullable;
-            }
-            set
-            {
-                _isNullable = value;
-            }
+            get { return _isNullable; }
+            set { _isNullable = value; }
         }
-
 
         public int Offset
         {
-            get
-            {
-                return _offset;
-            }
+            get { return _offset; }
             set
             {
                 if (value < 0)
@@ -128,7 +113,6 @@ namespace System.Data.Odbc
             }
         }
 
-
         private bool ShouldSerializeSize()
         {
             return (0 != _size);
@@ -137,26 +121,14 @@ namespace System.Data.Odbc
         [AllowNull]
         public override string SourceColumn
         {
-            get
-            {
-                return _sourceColumn ?? string.Empty;
-            }
-            set
-            {
-                _sourceColumn = value;
-            }
+            get { return _sourceColumn ?? string.Empty; }
+            set { _sourceColumn = value; }
         }
 
         public override bool SourceColumnNullMapping
         {
-            get
-            {
-                return _sourceColumnNullMapping;
-            }
-            set
-            {
-                _sourceColumnNullMapping = value;
-            }
+            get { return _sourceColumnNullMapping; }
+            set { _sourceColumnNullMapping = value; }
         }
 
         public override DataRowVersion SourceVersion
@@ -244,7 +216,7 @@ namespace System.Data.Odbc
                     char[] cvalue => cvalue.Length,
                     byte => 1,
                     char => 1,
-                    _ => 0
+                    _ => 0,
                 };
             }
             return 0;

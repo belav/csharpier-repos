@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DeclarationFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b)
@@ -31,28 +32,40 @@ class C
 }
 
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1525: Invalid expression term 'out'
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(6, 16),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(6, 16),
                 // CS1003: Syntax error, ':' expected
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(":").WithLocation(6, 16),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(":")
+                    .WithLocation(6, 16),
                 // CS1525: Invalid expression term 'out'
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out").WithArguments("out").WithLocation(6, 16),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
+                    .WithArguments("out")
+                    .WithLocation(6, 16),
                 // CS1003: Syntax error, ',' expected
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(6, 16),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(6, 16),
                 // CS1003: Syntax error, ',' expected
                 //         M2(b ? out var i1 : out var i2);
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(6, 27),
                 // CS1003: Syntax error, ',' expected
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(6, 29)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
+                    .WithArguments(",")
+                    .WithLocation(6, 29),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -102,7 +115,11 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

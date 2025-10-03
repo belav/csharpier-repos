@@ -1,27 +1,25 @@
 //------------------------------------------------------------------------------
 // <copyright file="VerticalAlign.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-    
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
-    
 
     /// <devdoc>
     ///    <para>
     ///       Specifies the vertical alignment of an object or text within a control.
     ///    </para>
     /// </devdoc>
-    [ TypeConverterAttribute(typeof(VerticalAlignConverter)) ]
-    public enum VerticalAlign {
-
-
+    [TypeConverterAttribute(typeof(VerticalAlignConverter))]
+    public enum VerticalAlign
+    {
         /// <devdoc>
         ///    <para>
         ///       Vertical
@@ -29,7 +27,6 @@ namespace System.Web.UI.WebControls {
         ///    </para>
         /// </devdoc>
         NotSet = 0,
-        
 
         /// <devdoc>
         ///    <para>
@@ -39,7 +36,6 @@ namespace System.Web.UI.WebControls {
         /// </devdoc>
         Top = 1,
 
-
         /// <devdoc>
         ///    <para>
         ///       The object or text is placed
@@ -48,13 +44,12 @@ namespace System.Web.UI.WebControls {
         /// </devdoc>
         Middle = 2,
 
-
         /// <devdoc>
         ///    <para>
         ///       The object or text is aligned with the bottom of the enclosing
         ///       control.
         ///    </para>
         /// </devdoc>
-        Bottom = 3
+        Bottom = 3,
     }
 }

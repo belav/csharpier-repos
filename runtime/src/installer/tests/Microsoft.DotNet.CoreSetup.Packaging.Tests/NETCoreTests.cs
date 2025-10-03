@@ -13,9 +13,7 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
         [Fact]
         public void NETCoreTargetingPackIsValid()
         {
-            using (var tester = NuGetArtifactTester.OpenOrNull(
-                dirs,
-                "Microsoft.NETCore.App.Ref"))
+            using (var tester = NuGetArtifactTester.OpenOrNull(dirs, "Microsoft.NETCore.App.Ref"))
             {
                 // Allow no targeting pack in case this is a servicing build.
                 // This condition should be tightened: https://github.com/dotnet/runtime/issues/3836
@@ -28,17 +26,21 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
                 tester.HasOnlyTheseDataFiles(
                     "data/FrameworkList.xml",
                     "data/PackageOverrides.txt",
-                    "data/PlatformManifest.txt");
+                    "data/PlatformManifest.txt"
+                );
             }
         }
 
         [Fact]
         public void NETCoreAppHostPackIsValid()
         {
-            using (var tester = NuGetArtifactTester.Open(
-                dirs,
-                "Microsoft.NETCore.App.Host",
-                $"Microsoft.NETCore.App.Host.{TestContext.BuildRID}"))
+            using (
+                var tester = NuGetArtifactTester.Open(
+                    dirs,
+                    "Microsoft.NETCore.App.Host",
+                    $"Microsoft.NETCore.App.Host.{TestContext.BuildRID}"
+                )
+            )
             {
                 tester.IsAppHostPack();
             }
@@ -47,10 +49,13 @@ namespace Microsoft.DotNet.CoreSetup.Packaging.Tests
         [Fact]
         public void NETCoreRuntimePackIsValid()
         {
-            using (var tester = NuGetArtifactTester.Open(
-                dirs,
-                "Microsoft.NETCore.App.Runtime",
-                $"Microsoft.NETCore.App.Runtime.{TestContext.BuildRID}"))
+            using (
+                var tester = NuGetArtifactTester.Open(
+                    dirs,
+                    "Microsoft.NETCore.App.Runtime",
+                    $"Microsoft.NETCore.App.Runtime.{TestContext.BuildRID}"
+                )
+            )
             {
                 tester.IsRuntimePack();
             }

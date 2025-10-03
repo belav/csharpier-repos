@@ -8,7 +8,5 @@ using System.Numerics;
 namespace System.Security.Cryptography
 {
     // Marker interface that goes on runtime-provided algorithms.
-    internal interface IRuntimeAlgorithm
-    {
-    }
+    internal interface IRuntimeAlgorithm { }
 }

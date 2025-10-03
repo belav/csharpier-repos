@@ -7,23 +7,30 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
 
-    public sealed class DataRowCollection : InternalDataCollectionBase {
+    public sealed class DataRowCollection : InternalDataCollectionBase
+    {
+        private sealed class DataRowTree : RBTree<DataRow>
+        {
+            internal DataRowTree()
+                : base(TreeAccessMethod.INDEX_ONLY) { }
 
-        private sealed class DataRowTree : RBTree<DataRow> {
-            internal DataRowTree() : base(TreeAccessMethod.INDEX_ONLY) {
-            }
-            
-            protected override int CompareNode (DataRow record1, DataRow record2) {
+            protected override int CompareNode(DataRow record1, DataRow record2)
+            {
                 throw ExceptionBuilder.InternalRBTreeError(RBTreeError.CompareNodeInDataRowTree);
             }
-            protected override int CompareSateliteTreeNode (DataRow record1, DataRow record2) {
-                throw ExceptionBuilder.InternalRBTreeError(RBTreeError.CompareSateliteTreeNodeInDataRowTree);
+
+            protected override int CompareSateliteTreeNode(DataRow record1, DataRow record2)
+            {
+                throw ExceptionBuilder.InternalRBTreeError(
+                    RBTreeError.CompareSateliteTreeNodeInDataRowTree
+                );
             }
         }
 
@@ -34,33 +41,34 @@ namespace System.Data {
         /// <devdoc>
         /// Creates the DataRowCollection for the given table.
         /// </devdoc>
-        internal DataRowCollection(DataTable table) {
+        internal DataRowCollection(DataTable table)
+        {
             this.table = table;
         }
 
-        public override int Count {
-            get {
-                return list.Count;
-            }
+        public override int Count
+        {
+            get { return list.Count; }
         }
 
         /// <devdoc>
         ///    <para>Gets the row at the specified index.</para>
         /// </devdoc>
-        public DataRow this[int index] {
-            get {
-                return list[index];
-            }
+        public DataRow this[int index]
+        {
+            get { return list[index]; }
         }
 
         /// <devdoc>
         /// <para>Adds the specified <see cref='System.Data.DataRow'/> to the <see cref='System.Data.DataRowCollection'/> object.</para>
         /// </devdoc>
-        public void Add(DataRow row) {
+        public void Add(DataRow row)
+        {
             table.AddRow(row, -1);
         }
-        
-        public void InsertAt(DataRow row, int pos) {
+
+        public void InsertAt(DataRow row, int pos)
+        {
             if (pos < 0)
                 throw ExceptionBuilder.RowInsertOutOfRange(pos);
             if (pos >= list.Count)
@@ -69,36 +77,49 @@ namespace System.Data {
                 table.InsertRow(row, -1, pos);
         }
 
-        internal void DiffInsertAt(DataRow row, int pos) {
-            if ((pos < 0) || (pos == list.Count)) {
-                table.AddRow(row, pos >-1? pos+1 : -1);
+        internal void DiffInsertAt(DataRow row, int pos)
+        {
+            if ((pos < 0) || (pos == list.Count))
+            {
+                table.AddRow(row, pos > -1 ? pos + 1 : -1);
                 return;
             }
-            if (table.NestedParentRelations.Length > 0) { // get in this trouble only if  table has a nested parent 
-            // get into trouble if table has JUST a nested parent? how about multi parent!
-                if (pos < list.Count) {
-                    if (list[pos] != null) {
+            if (table.NestedParentRelations.Length > 0)
+            { // get in this trouble only if  table has a nested parent
+                // get into trouble if table has JUST a nested parent? how about multi parent!
+                if (pos < list.Count)
+                {
+                    if (list[pos] != null)
+                    {
                         throw ExceptionBuilder.RowInsertTwice(pos, table.TableName);
                     }
                     list.RemoveAt(pos);
                     nullInList--;
-                    table.InsertRow(row, pos+1, pos);
+                    table.InsertRow(row, pos + 1, pos);
                 }
-                else {
-                    while (pos>list.Count) {
+                else
+                {
+                    while (pos > list.Count)
+                    {
                         list.Add(null);
                         nullInList++;
                     }
-                    table.AddRow(row, pos+1);
+                    table.AddRow(row, pos + 1);
                 }
             }
-            else {
-                table.InsertRow(row, pos+1, pos > list.Count ? -1 : pos);
+            else
+            {
+                table.InsertRow(row, pos + 1, pos > list.Count ? -1 : pos);
             }
         }
 
-        public Int32 IndexOf(DataRow row) {
-            if ((null == row) || (row.Table != this.table) || ((0 == row.RBTreeNodeId) && (row.RowState == DataRowState.Detached))) //Webdata 102857
+        public Int32 IndexOf(DataRow row)
+        {
+            if (
+                (null == row)
+                || (row.Table != this.table)
+                || ((0 == row.RBTreeNodeId) && (row.RowState == DataRowState.Detached))
+            ) //Webdata 102857
                 return -1;
             return list.IndexOf(row.RBTreeNodeId, row);
         }
@@ -107,60 +128,72 @@ namespace System.Data {
         ///    <para>Creates a row using specified values and adds it to the
         ///    <see cref='System.Data.DataRowCollection'/>.</para>
         /// </devdoc>
-        internal DataRow AddWithColumnEvents(params object[] values) {
+        internal DataRow AddWithColumnEvents(params object[] values)
+        {
             DataRow row = table.NewRow(-1);
             row.ItemArray = values;
             table.AddRow(row, -1);
             return row;
         }
-        
-        public DataRow Add(params object[] values) {
+
+        public DataRow Add(params object[] values)
+        {
             int record = table.NewRecordFromArray(values);
             DataRow row = table.NewRow(record);
             table.AddRow(row, -1);
             return row;
         }
 
-        internal void ArrayAdd(DataRow row) {
+        internal void ArrayAdd(DataRow row)
+        {
             row.RBTreeNodeId = list.Add(row);
         }
 
-        internal void ArrayInsert(DataRow row, int pos) {
+        internal void ArrayInsert(DataRow row, int pos)
+        {
             row.RBTreeNodeId = list.Insert(pos, row);
         }
 
-        internal void ArrayClear() {
+        internal void ArrayClear()
+        {
             list.Clear();
         }
 
-        internal void ArrayRemove(DataRow row) {
-            if (row.RBTreeNodeId == 0) {
-                throw ExceptionBuilder.InternalRBTreeError(RBTreeError.AttachedNodeWithZerorbTreeNodeId);
+        internal void ArrayRemove(DataRow row)
+        {
+            if (row.RBTreeNodeId == 0)
+            {
+                throw ExceptionBuilder.InternalRBTreeError(
+                    RBTreeError.AttachedNodeWithZerorbTreeNodeId
+                );
             }
             list.RBDelete(row.RBTreeNodeId);
             row.RBTreeNodeId = 0;
         }
-        
+
         /// <devdoc>
         ///    <para>Gets
         ///       the row specified by the primary key value.
         ///       </para>
         /// </devdoc>
-        public DataRow Find(object key) {
+        public DataRow Find(object key)
+        {
             return table.FindByPrimaryKey(key);
         }
 
         /// <devdoc>
         ///    <para>Gets the row containing the specified primary key values.</para>
         /// </devdoc>
-        public DataRow Find(object[] keys) {
+        public DataRow Find(object[] keys)
+        {
             return table.FindByPrimaryKey(keys);
         }
 
         /// <devdoc>
         ///    <para>Clears the collection of all rows.</para>
         /// </devdoc>
-        public void Clear() {
+        public void Clear()
+        {
             table.Clear(false);
         }
 
@@ -170,8 +203,9 @@ namespace System.Data {
         ///       collection contains the specified value.
         ///    </para>
         /// </devdoc>
-        public bool Contains(object key) {
-            return(table.FindByPrimaryKey(key) != null);
+        public bool Contains(object key)
+        {
+            return (table.FindByPrimaryKey(key) != null);
         }
 
         /// <devdoc>
@@ -180,27 +214,33 @@ namespace System.Data {
         ///       the specified primary key values exists.
         ///    </para>
         /// </devdoc>
-        public bool Contains(object[] keys) {
-            return(table.FindByPrimaryKey(keys) != null);
+        public bool Contains(object[] keys)
+        {
+            return (table.FindByPrimaryKey(keys) != null);
         }
-        
-        public override void CopyTo(Array ar, int index) {
+
+        public override void CopyTo(Array ar, int index)
+        {
             list.CopyTo(ar, index);
         }
 
-        public void CopyTo(DataRow[] array, int index) {
+        public void CopyTo(DataRow[] array, int index)
+        {
             list.CopyTo(array, index);
         }
-        
-        public override IEnumerator GetEnumerator() {
+
+        public override IEnumerator GetEnumerator()
+        {
             return list.GetEnumerator();
         }
 
         /// <devdoc>
         /// <para>Removes the specified <see cref='System.Data.DataRow'/> from the collection.</para>
         /// </devdoc>
-        public void Remove(DataRow row) {
-            if ((null == row) || (row.Table != table) || (-1 == row.rowID)) {
+        public void Remove(DataRow row)
+        {
+            if ((null == row) || (row.Table != table) || (-1 == row.rowID))
+            {
                 throw ExceptionBuilder.RowOutOfRange();
             }
 
@@ -217,8 +257,9 @@ namespace System.Data {
         ///       the collection.
         ///    </para>
         /// </devdoc>
-        public void RemoveAt(int index) {
-                Remove(this[index]);
+        public void RemoveAt(int index)
+        {
+            Remove(this[index]);
         }
     }
 }

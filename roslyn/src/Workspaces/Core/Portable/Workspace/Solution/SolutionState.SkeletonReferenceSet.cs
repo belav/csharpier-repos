@@ -23,18 +23,23 @@ internal partial class SolutionState
     private sealed class SkeletonReferenceSet(
         AssemblyMetadata metadata,
         string? assemblyName,
-        DeferredDocumentationProvider documentationProvider)
+        DeferredDocumentationProvider documentationProvider
+    )
     {
-
         /// <summary>
         /// Lock this object while reading/writing from it.  Used so we can return the same reference for the same
         /// properties.  While this is isn't strictly necessary (as the important thing to keep the same is the
         /// AssemblyMetadata), this allows higher layers to see that reference instances are the same which allow
         /// reusing the same higher level objects (for example, the set of references a compilation has).
         /// </summary>
-        private readonly Dictionary<MetadataReferenceProperties, PortableExecutableReference> _referenceMap = new();
+        private readonly Dictionary<
+            MetadataReferenceProperties,
+            PortableExecutableReference
+        > _referenceMap = new();
 
-        public PortableExecutableReference GetOrCreateMetadataReference(MetadataReferenceProperties properties)
+        public PortableExecutableReference GetOrCreateMetadataReference(
+            MetadataReferenceProperties properties
+        )
         {
             lock (_referenceMap)
             {
@@ -44,7 +49,8 @@ internal partial class SolutionState
                         documentationProvider,
                         aliases: properties.Aliases,
                         embedInteropTypes: properties.EmbedInteropTypes,
-                        display: assemblyName);
+                        display: assemblyName
+                    );
 
                     _referenceMap.Add(properties, value);
                 }

@@ -19,25 +19,50 @@ public class Program
                 return 1;
             }
             long result = 0;
-            if (result < count) result = Depth1<Depth1<T>>.TypeNestedFactorial(count - 1);
-            if (result < count) result = Depth1<Depth2<T>>.TypeNestedFactorial(count - 1);
-            if (result < count) result = Depth1<Depth3<T>>.TypeNestedFactorial(count - 1);
-            if (result < count) result = Depth1<Depth4<T>>.TypeNestedFactorial(count - 1);
+            if (result < count)
+                result = Depth1<Depth1<T>>.TypeNestedFactorial(count - 1);
+            if (result < count)
+                result = Depth1<Depth2<T>>.TypeNestedFactorial(count - 1);
+            if (result < count)
+                result = Depth1<Depth3<T>>.TypeNestedFactorial(count - 1);
+            if (result < count)
+                result = Depth1<Depth4<T>>.TypeNestedFactorial(count - 1);
             return count * result;
         }
     }
-    
-    private struct Depth2<T> {}
-    private struct Depth3<T> {}
-    private struct Depth4<T> {}
-    
+
+    private struct Depth2<T> { }
+
+    private struct Depth3<T> { }
+
+    private struct Depth4<T> { }
+
     [Fact]
     public static void DepthTest()
     {
-        const long Factorial20 = 20L * 19L * 18L * 17L * 16L * 15L * 14L * 13L * 12L * 11L * 10L * 9L * 8L * 7L * 6L * 5L * 4L * 3L * 2L;
+        const long Factorial20 =
+            20L
+            * 19L
+            * 18L
+            * 17L
+            * 16L
+            * 15L
+            * 14L
+            * 13L
+            * 12L
+            * 11L
+            * 10L
+            * 9L
+            * 8L
+            * 7L
+            * 6L
+            * 5L
+            * 4L
+            * 3L
+            * 2L;
         Assert.Equal(Factorial20, Depth1<long>.TypeNestedFactorial(ReturnTwentyAndDontTellJIT()));
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int ReturnTwentyAndDontTellJIT() => 20;
 }

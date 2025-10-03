@@ -25,7 +25,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal readonly string DisplayName;
 
-        internal PlaceholderLocalSymbol(MethodSymbol method, string name, string displayName, TypeSymbol type)
+        internal PlaceholderLocalSymbol(
+            MethodSymbol method,
+            string name,
+            string displayName,
+            TypeSymbol type
+        )
         {
             _method = method;
             _name = name;
@@ -38,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             TypeNameDecoder<PEModuleSymbol, TypeSymbol> typeNameDecoder,
             MethodSymbol containingMethod,
             AssemblySymbol sourceAssembly,
-            Alias alias)
+            Alias alias
+        )
         {
             var typeName = alias.Type;
             Debug.Assert(typeName.Length > 0);
@@ -48,34 +54,72 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             ReadOnlyCollection<byte> dynamicFlags;
             ReadOnlyCollection<string> tupleElementNames;
-            CustomTypeInfo.Decode(alias.CustomTypeInfoId, alias.CustomTypeInfo, out dynamicFlags, out tupleElementNames);
+            CustomTypeInfo.Decode(
+                alias.CustomTypeInfoId,
+                alias.CustomTypeInfo,
+                out dynamicFlags,
+                out tupleElementNames
+            );
 
             if (dynamicFlags != null)
             {
                 type = DecodeDynamicTypes(type, sourceAssembly, dynamicFlags);
             }
 
-            type = TupleTypeDecoder.DecodeTupleTypesIfApplicable(type, tupleElementNames.AsImmutableOrNull());
+            type = TupleTypeDecoder.DecodeTupleTypesIfApplicable(
+                type,
+                tupleElementNames.AsImmutableOrNull()
+            );
 
             var name = alias.FullName;
             var displayName = alias.Name;
             switch (alias.Kind)
             {
                 case DkmClrAliasKind.Exception:
-                    return new ExceptionLocalSymbol(containingMethod, name, displayName, type, ExpressionCompilerConstants.GetExceptionMethodName);
+                    return new ExceptionLocalSymbol(
+                        containingMethod,
+                        name,
+                        displayName,
+                        type,
+                        ExpressionCompilerConstants.GetExceptionMethodName
+                    );
                 case DkmClrAliasKind.StowedException:
-                    return new ExceptionLocalSymbol(containingMethod, name, displayName, type, ExpressionCompilerConstants.GetStowedExceptionMethodName);
+                    return new ExceptionLocalSymbol(
+                        containingMethod,
+                        name,
+                        displayName,
+                        type,
+                        ExpressionCompilerConstants.GetStowedExceptionMethodName
+                    );
                 case DkmClrAliasKind.ReturnValue:
-                    {
-                        int index;
-                        PseudoVariableUtilities.TryParseReturnValueIndex(name, out index);
-                        Debug.Assert(index >= 0);
-                        return new ReturnValueLocalSymbol(containingMethod, name, displayName, type, index);
-                    }
+                {
+                    int index;
+                    PseudoVariableUtilities.TryParseReturnValueIndex(name, out index);
+                    Debug.Assert(index >= 0);
+                    return new ReturnValueLocalSymbol(
+                        containingMethod,
+                        name,
+                        displayName,
+                        type,
+                        index
+                    );
+                }
                 case DkmClrAliasKind.ObjectId:
-                    return new ObjectIdLocalSymbol(containingMethod, type, name, displayName, isWritable: false);
+                    return new ObjectIdLocalSymbol(
+                        containingMethod,
+                        type,
+                        name,
+                        displayName,
+                        isWritable: false
+                    );
                 case DkmClrAliasKind.Variable:
-                    return new ObjectIdLocalSymbol(containingMethod, type, name, displayName, isWritable: true);
+                    return new ObjectIdLocalSymbol(
+                        containingMethod,
+                        type,
+                        name,
+                        displayName,
+                        isWritable: true
+                    );
                 default:
                     throw ExceptionUtilities.UnexpectedValue(alias.Kind);
             }
@@ -148,11 +192,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         /// <summary>
         /// Rewrite the local reference as a call to a synthesized method.
         /// </summary>
-        internal abstract BoundExpression RewriteLocal(CSharpCompilation compilation, SyntaxNode syntax, DiagnosticBag diagnostics);
+        internal abstract BoundExpression RewriteLocal(
+            CSharpCompilation compilation,
+            SyntaxNode syntax,
+            DiagnosticBag diagnostics
+        );
 
-        internal static BoundExpression ConvertToLocalType(CSharpCompilation compilation, BoundExpression expr, TypeSymbol type, DiagnosticBag diagnostics)
+        internal static BoundExpression ConvertToLocalType(
+            CSharpCompilation compilation,
+            BoundExpression expr,
+            TypeSymbol type,
+            DiagnosticBag diagnostics
+        )
         {
-            var bindingDiagnostics = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+            var bindingDiagnostics = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
 
             if (type.IsPointerType())
             {
@@ -160,15 +216,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 var intPtrType = compilation.GetSpecialType(SpecialType.System_IntPtr);
                 Binder.ReportUseSite(intPtrType, bindingDiagnostics, syntax);
                 MethodSymbol conversionMethod;
-                if (Binder.TryGetSpecialTypeMember(compilation, SpecialMember.System_IntPtr__op_Explicit_ToPointer, syntax, bindingDiagnostics, out conversionMethod))
+                if (
+                    Binder.TryGetSpecialTypeMember(
+                        compilation,
+                        SpecialMember.System_IntPtr__op_Explicit_ToPointer,
+                        syntax,
+                        bindingDiagnostics,
+                        out conversionMethod
+                    )
+                )
                 {
-                    var temp = ConvertToLocalTypeHelper(compilation, expr, intPtrType, bindingDiagnostics);
+                    var temp = ConvertToLocalTypeHelper(
+                        compilation,
+                        expr,
+                        intPtrType,
+                        bindingDiagnostics
+                    );
                     expr = BoundCall.Synthesized(
                         syntax,
                         receiverOpt: null,
                         initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown,
                         method: conversionMethod,
-                        arg0: temp);
+                        arg0: temp
+                    );
                 }
                 else
                 {
@@ -180,7 +250,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         LookupResultKind.Empty,
                         ImmutableArray<Symbol>.Empty,
                         ImmutableArray.Create(expr),
-                        type);
+                        type
+                    );
                 }
             }
 
@@ -191,14 +262,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return result;
         }
 
-        private static BoundExpression ConvertToLocalTypeHelper(CSharpCompilation compilation, BoundExpression expr, TypeSymbol type, BindingDiagnosticBag diagnostics)
+        private static BoundExpression ConvertToLocalTypeHelper(
+            CSharpCompilation compilation,
+            BoundExpression expr,
+            TypeSymbol type,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(diagnostics.DiagnosticBag != null);
 
             // NOTE: This conversion can fail if some of the types involved are from not-yet-loaded modules.
             // For example, if System.Exception hasn't been loaded, then this call will fail for $stowedexception.
-            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, compilation.Assembly);
-            var conversion = compilation.Conversions.ClassifyConversionFromExpression(expr, type, isChecked: false, ref useSiteInfo);
+            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                diagnostics,
+                compilation.Assembly
+            );
+            var conversion = compilation.Conversions.ClassifyConversionFromExpression(
+                expr,
+                type,
+                isChecked: false,
+                ref useSiteInfo
+            );
             diagnostics.Add(expr.Syntax, useSiteInfo);
             Debug.Assert(conversion.IsValid || diagnostics.HasAnyErrors());
 
@@ -211,12 +295,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 conversionGroupOpt: null,
                 constantValueOpt: null,
                 type: type,
-                hasErrors: !conversion.IsValid);
+                hasErrors: !conversion.IsValid
+            );
         }
 
-        internal static MethodSymbol GetIntrinsicMethod(CSharpCompilation compilation, string methodName)
+        internal static MethodSymbol GetIntrinsicMethod(
+            CSharpCompilation compilation,
+            string methodName
+        )
         {
-            var type = compilation.GetTypeByMetadataName(ExpressionCompilerConstants.IntrinsicAssemblyTypeMetadataName);
+            var type = compilation.GetTypeByMetadataName(
+                ExpressionCompilerConstants.IntrinsicAssemblyTypeMetadataName
+            );
             if ((object)type == null)
             {
                 return null;
@@ -226,7 +316,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return (MethodSymbol)members[0];
         }
 
-        private static TypeSymbol DecodeDynamicTypes(TypeSymbol type, AssemblySymbol sourceAssembly, ReadOnlyCollection<byte> bytes)
+        private static TypeSymbol DecodeDynamicTypes(
+            TypeSymbol type,
+            AssemblySymbol sourceAssembly,
+            ReadOnlyCollection<byte> bytes
+        )
         {
             var builder = ArrayBuilder<bool>.GetInstance();
             DynamicFlagsCustomTypeInfo.CopyTo(bytes, builder);
@@ -235,9 +329,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 sourceAssembly,
                 RefKind.None,
                 builder.ToImmutableAndFree(),
-                checkLength: false);
+                checkLength: false
+            );
             Debug.Assert((object)dynamicType != null);
-            Debug.Assert(!TypeSymbol.Equals(dynamicType, type, TypeCompareKind.ConsiderEverything2));
+            Debug.Assert(
+                !TypeSymbol.Equals(dynamicType, type, TypeCompareKind.ConsiderEverything2)
+            );
             return dynamicType;
         }
     }

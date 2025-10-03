@@ -26,7 +26,11 @@ namespace System.Security.Cryptography.X509Certificates
             return true;
         }
 
-        private static bool HasUnsuppressedError(X509VerificationFlags flags, X509ChainElement element, bool isEndEntity)
+        private static bool HasUnsuppressedError(
+            X509VerificationFlags flags,
+            X509ChainElement element,
+            bool isEndEntity
+        )
         {
             foreach (X509ChainStatus status in element.ChainElementStatus)
             {
@@ -37,7 +41,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                 Debug.Assert(
                     (status.Status & (status.Status - 1)) == 0,
-                    $"Only one bit should be set in status.Status ({status})");
+                    $"Only one bit should be set in status.Status ({status})"
+                );
 
                 // The Windows certificate store API only checks the time error for a "peer trust" certificate,
                 // but we don't have a concept for that in Unix.  If we did, we'd need to do that logic that here.
@@ -57,7 +62,8 @@ namespace System.Security.Cryptography.X509Certificates
                     }
                     else
                     {
-                        suppressionFlag = X509VerificationFlags.IgnoreCertificateAuthorityRevocationUnknown;
+                        suppressionFlag =
+                            X509VerificationFlags.IgnoreCertificateAuthorityRevocationUnknown;
                     }
                 }
                 else if (status.Status == X509ChainStatusFlags.OfflineRevocation)
@@ -73,8 +79,7 @@ namespace System.Security.Cryptography.X509Certificates
                 // If an error was found, and we do NOT have the suppression flag for it enabled,
                 // we have an unsuppressed error, so return true. (If there's no suppression for a given code,
                 // we (by definition) don't have that flag set.
-                if (!suppressionFlag.HasValue ||
-                    (flags & suppressionFlag) == 0)
+                if (!suppressionFlag.HasValue || (flags & suppressionFlag) == 0)
                 {
                     return true;
                 }

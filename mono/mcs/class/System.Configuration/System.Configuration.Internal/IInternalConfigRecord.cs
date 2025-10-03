@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,23 +26,21 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
 
 namespace System.Configuration.Internal
 {
-	[System.Runtime.InteropServices.ComVisible (false)]
-	public interface IInternalConfigRecord
-	{
-		object GetLkgSection (string configKey);
-		object GetSection (string configKey);
-		void RefreshSection (string configKey);
-		void Remove ();
-		void ThrowIfInitErrors ();
-		
-		string ConfigPath { get; }
-		bool HasInitErrors { get; }
-		string StreamName { get; }
-	}
-}
+    [System.Runtime.InteropServices.ComVisible(false)]
+    public interface IInternalConfigRecord
+    {
+        object GetLkgSection(string configKey);
+        object GetSection(string configKey);
+        void RefreshSection(string configKey);
+        void Remove();
+        void ThrowIfInitErrors();
 
+        string ConfigPath { get; }
+        bool HasInitErrors { get; }
+        string StreamName { get; }
+    }
+}

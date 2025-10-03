@@ -7,9 +7,7 @@ namespace System.Net.NetworkInformation
 {
     public class IPAddressCollection : ICollection<IPAddress>
     {
-        protected internal IPAddressCollection()
-        {
-        }
+        protected internal IPAddressCollection() { }
 
         public virtual void CopyTo(IPAddress[] array, int offset)
         {
@@ -18,18 +16,12 @@ namespace System.Net.NetworkInformation
 
         public virtual int Count
         {
-            get
-            {
-                throw NotImplemented.ByDesign;
-            }
+            get { throw NotImplemented.ByDesign; }
         }
 
         public virtual bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public virtual void Add(IPAddress address)
@@ -54,10 +46,7 @@ namespace System.Net.NetworkInformation
 
         public virtual IPAddress this[int index]
         {
-            get
-            {
-                throw NotImplemented.ByDesign;
-            }
+            get { throw NotImplemented.ByDesign; }
         }
 
         public virtual bool Remove(IPAddress address)

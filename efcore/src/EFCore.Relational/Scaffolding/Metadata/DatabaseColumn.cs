@@ -71,6 +71,5 @@ public class DatabaseColumn : Annotatable
     public virtual ValueGenerated? ValueGenerated { get; set; }
 
     /// <inheritdoc />
-    public override string ToString()
-        => Name ?? "<UNKNOWN>";
+    public override string ToString() => Name ?? "<UNKNOWN>";
 }

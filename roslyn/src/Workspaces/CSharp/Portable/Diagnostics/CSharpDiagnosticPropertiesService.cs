@@ -18,9 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDiagnosticPropertiesService()
-        {
-        }
+        public CSharpDiagnosticPropertiesService() { }
 
         protected override Compilation GetCompilation() => s_compilation;
     }

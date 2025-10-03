@@ -16,19 +16,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal sealed class NamedTypeSymbolReferenceFinder : AbstractReferenceFinder<INamedTypeSymbol>
     {
-        protected override bool CanFind(INamedTypeSymbol symbol)
-            => symbol.TypeKind != TypeKind.Error;
+        protected override bool CanFind(INamedTypeSymbol symbol) =>
+            symbol.TypeKind != TypeKind.Error;
 
-        protected override Task<ImmutableArray<string>> DetermineGlobalAliasesAsync(INamedTypeSymbol symbol, Project project, CancellationToken cancellationToken)
+        protected override Task<ImmutableArray<string>> DetermineGlobalAliasesAsync(
+            INamedTypeSymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
-            return GetAllMatchingGlobalAliasNamesAsync(project, symbol.Name, symbol.Arity, cancellationToken);
+            return GetAllMatchingGlobalAliasNamesAsync(
+                project,
+                symbol.Name,
+                symbol.Arity,
+                cancellationToken
+            );
         }
 
         protected override ValueTask<ImmutableArray<ISymbol>> DetermineCascadedSymbolsAsync(
             INamedTypeSymbol symbol,
             Solution solution,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var result);
 
@@ -44,7 +54,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             return new(result.ToImmutable());
         }
 
-        private static void Add<TSymbol>(ArrayBuilder<ISymbol> result, ImmutableArray<TSymbol> enumerable) where TSymbol : ISymbol
+        private static void Add<TSymbol>(
+            ArrayBuilder<ISymbol> result,
+            ImmutableArray<TSymbol> enumerable
+        )
+            where TSymbol : ISymbol
         {
             result.AddRange(enumerable.Cast<ISymbol>());
         }
@@ -55,22 +69,50 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<Document>.GetInstance(out var result);
 
-            await AddDocumentsToSearchAsync(symbol.Name, project, documents, result, cancellationToken).ConfigureAwait(false);
+            await AddDocumentsToSearchAsync(
+                    symbol.Name,
+                    project,
+                    documents,
+                    result,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (globalAliases != null)
             {
                 foreach (var alias in globalAliases)
-                    await AddDocumentsToSearchAsync(alias, project, documents, result, cancellationToken).ConfigureAwait(false);
+                    await AddDocumentsToSearchAsync(
+                            alias,
+                            project,
+                            documents,
+                            result,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
             }
 
-            result.AddRange(await FindDocumentsAsync(
-                project, documents, symbol.SpecialType.ToPredefinedType(), cancellationToken).ConfigureAwait(false));
+            result.AddRange(
+                await FindDocumentsAsync(
+                        project,
+                        documents,
+                        symbol.SpecialType.ToPredefinedType(),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
 
-            result.AddRange(await FindDocumentsWithGlobalSuppressMessageAttributeAsync(
-                project, documents, cancellationToken).ConfigureAwait(false));
+            result.AddRange(
+                await FindDocumentsWithGlobalSuppressMessageAttributeAsync(
+                        project,
+                        documents,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
 
             return result.ToImmutable();
         }
@@ -84,15 +126,26 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             ArrayBuilder<Document> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = project.Services.GetRequiredService<ISyntaxFactsService>();
 
             var documentsWithName = await FindDocumentsAsync(
-                project, documents, cancellationToken, throughName).ConfigureAwait(false);
+                    project,
+                    documents,
+                    cancellationToken,
+                    throughName
+                )
+                .ConfigureAwait(false);
 
-            var documentsWithAttribute = TryGetNameWithoutAttributeSuffix(throughName, syntaxFacts, out var simpleName)
-                ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName).ConfigureAwait(false)
+            var documentsWithAttribute = TryGetNameWithoutAttributeSuffix(
+                throughName,
+                syntaxFacts,
+                out var simpleName
+            )
+                ? await FindDocumentsAsync(project, documents, cancellationToken, simpleName)
+                    .ConfigureAwait(false)
                 : ImmutableArray<Document>.Empty;
 
             result.AddRange(documentsWithName);
@@ -102,37 +155,55 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static bool IsPotentialReference(
             PredefinedType predefinedType,
             ISyntaxFactsService syntaxFacts,
-            SyntaxToken token)
+            SyntaxToken token
+        )
         {
-            return
-                syntaxFacts.TryGetPredefinedType(token, out var actualType) &&
-                predefinedType == actualType;
+            return syntaxFacts.TryGetPredefinedType(token, out var actualType)
+                && predefinedType == actualType;
         }
 
-        protected override async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected override async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             INamedTypeSymbol namedType,
             FindReferencesDocumentState state,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<FinderLocation>.GetInstance(out var initialReferences);
 
             // First find all references to this type, either with it's actual name, or through potential
             // global alises to it.
             await AddReferencesToTypeOrGlobalAliasToItAsync(
-                namedType, state, initialReferences, cancellationToken).ConfigureAwait(false);
+                    namedType,
+                    state,
+                    initialReferences,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // This named type may end up being locally aliased as well.  If so, now find all the references
             // to the local alias.
 
-            initialReferences.AddRange(await FindLocalAliasReferencesAsync(
-                initialReferences, state, cancellationToken).ConfigureAwait(false));
+            initialReferences.AddRange(
+                await FindLocalAliasReferencesAsync(initialReferences, state, cancellationToken)
+                    .ConfigureAwait(false)
+            );
 
-            initialReferences.AddRange(await FindPredefinedTypeReferencesAsync(
-                namedType, state, cancellationToken).ConfigureAwait(false));
+            initialReferences.AddRange(
+                await FindPredefinedTypeReferencesAsync(namedType, state, cancellationToken)
+                    .ConfigureAwait(false)
+            );
 
-            initialReferences.AddRange(await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
-                namedType, state, cancellationToken).ConfigureAwait(false));
+            initialReferences.AddRange(
+                await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
+                        namedType,
+                        state,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            );
 
             return initialReferences.ToImmutable();
         }
@@ -141,10 +212,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             INamedTypeSymbol namedType,
             FindReferencesDocumentState state,
             ArrayBuilder<FinderLocation> nonAliasReferences,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             await AddNonAliasReferencesAsync(
-                namedType, namedType.Name, state, nonAliasReferences, cancellationToken).ConfigureAwait(false);
+                    namedType,
+                    namedType.Name,
+                    state,
+                    nonAliasReferences,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var globalAlias in state.GlobalAliases)
             {
@@ -155,7 +233,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     continue;
 
                 await AddNonAliasReferencesAsync(
-                    namedType, globalAlias, state, nonAliasReferences, cancellationToken).ConfigureAwait(false);
+                        namedType,
+                        globalAlias,
+                        state,
+                        nonAliasReferences,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -169,20 +253,26 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             string name,
             FindReferencesDocumentState state,
             ArrayBuilder<FinderLocation> nonAliasesReferences,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            nonAliasesReferences.AddRange(await FindOrdinaryReferencesAsync(
-                symbol, name, state, cancellationToken).ConfigureAwait(false));
+            nonAliasesReferences.AddRange(
+                await FindOrdinaryReferencesAsync(symbol, name, state, cancellationToken)
+                    .ConfigureAwait(false)
+            );
 
-            nonAliasesReferences.AddRange(await FindAttributeReferencesAsync(
-                symbol, name, state, cancellationToken).ConfigureAwait(false));
+            nonAliasesReferences.AddRange(
+                await FindAttributeReferencesAsync(symbol, name, state, cancellationToken)
+                    .ConfigureAwait(false)
+            );
         }
 
         private static ValueTask<ImmutableArray<FinderLocation>> FindOrdinaryReferencesAsync(
             INamedTypeSymbol namedType,
             string name,
             FindReferencesDocumentState state,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Get the parent node that best matches what this token represents.  For example, if we have `new a.b()`
             // then the parent node of `b` won't be `a.b`, but rather `new a.b()`.  This will actually cause us to bind
@@ -190,23 +280,30 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             // associate with the type, but rather with the constructor itself.
 
             return FindReferencesInDocumentUsingIdentifierAsync(
-                namedType, name, state, cancellationToken);
+                namedType,
+                name,
+                state,
+                cancellationToken
+            );
         }
 
         private static ValueTask<ImmutableArray<FinderLocation>> FindPredefinedTypeReferencesAsync(
             INamedTypeSymbol symbol,
             FindReferencesDocumentState state,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var predefinedType = symbol.SpecialType.ToPredefinedType();
             if (predefinedType == PredefinedType.None)
                 return new(ImmutableArray<FinderLocation>.Empty);
 
-            var tokens = state.Root
-                .DescendantTokens(descendIntoTrivia: true)
+            var tokens = state
+                .Root.DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
-                    static (token, tuple) => IsPotentialReference(tuple.predefinedType, tuple.state.SyntaxFacts, token),
-                    (state, predefinedType));
+                    static (token, tuple) =>
+                        IsPotentialReference(tuple.predefinedType, tuple.state.SyntaxFacts, token),
+                    (state, predefinedType)
+                );
 
             return FindReferencesInTokensAsync(symbol, state, tokens, cancellationToken);
         }
@@ -215,10 +312,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             INamedTypeSymbol namedType,
             string name,
             FindReferencesDocumentState state,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return TryGetNameWithoutAttributeSuffix(name, state.SyntaxFacts, out var nameWithoutSuffix)
-                ? FindReferencesInDocumentUsingIdentifierAsync(namedType, nameWithoutSuffix, state, cancellationToken)
+            return TryGetNameWithoutAttributeSuffix(
+                name,
+                state.SyntaxFacts,
+                out var nameWithoutSuffix
+            )
+                ? FindReferencesInDocumentUsingIdentifierAsync(
+                    namedType,
+                    nameWithoutSuffix,
+                    state,
+                    cancellationToken
+                )
                 : new(ImmutableArray<FinderLocation>.Empty);
         }
     }

@@ -99,7 +99,9 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.values);
             }
 
-            this = Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values)));
+            this = Unsafe.ReadUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>Creates a new <see cref="Vector{T}" /> from a given readonly span.</summary>
@@ -125,9 +127,8 @@ namespace System.Numerics
         /// <returns>A new <see cref="Vector{T}" /> with its elements set to the first <see cref="Vector{T}.Count" /> elements from <paramref name="values" />.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="values" /> is less than <see cref="Vector{T}.Count" />.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector(Span<T> values) : this((ReadOnlySpan<T>)values)
-        {
-        }
+        public Vector(Span<T> values)
+            : this((ReadOnlySpan<T>)values) { }
 
         /// <summary>Gets a new <see cref="Vector{T}" /> with all bits set to 1.</summary>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
@@ -162,18 +163,19 @@ namespace System.Numerics
         public static bool IsSupported
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (typeof(T) == typeof(byte)) ||
-                   (typeof(T) == typeof(double)) ||
-                   (typeof(T) == typeof(short)) ||
-                   (typeof(T) == typeof(int)) ||
-                   (typeof(T) == typeof(long)) ||
-                   (typeof(T) == typeof(nint)) ||
-                   (typeof(T) == typeof(nuint)) ||
-                   (typeof(T) == typeof(sbyte)) ||
-                   (typeof(T) == typeof(float)) ||
-                   (typeof(T) == typeof(ushort)) ||
-                   (typeof(T) == typeof(uint)) ||
-                   (typeof(T) == typeof(ulong));
+            get =>
+                (typeof(T) == typeof(byte))
+                || (typeof(T) == typeof(double))
+                || (typeof(T) == typeof(short))
+                || (typeof(T) == typeof(int))
+                || (typeof(T) == typeof(long))
+                || (typeof(T) == typeof(nint))
+                || (typeof(T) == typeof(nuint))
+                || (typeof(T) == typeof(sbyte))
+                || (typeof(T) == typeof(float))
+                || (typeof(T) == typeof(ushort))
+                || (typeof(T) == typeof(uint))
+                || (typeof(T) == typeof(ulong));
         }
 
         /// <summary>Gets a new <see cref="Vector{T}" /> with all elements initialized to one.</summary>
@@ -204,10 +206,7 @@ namespace System.Numerics
 
         internal string DisplayString
         {
-            get
-            {
-                return IsSupported ? ToString() : SR.NotSupported_Type;
-            }
+            get { return IsSupported ? ToString() : SR.NotSupported_Type; }
         }
 
         /// <summary>Gets the element at the specified index.</summary>
@@ -219,10 +218,7 @@ namespace System.Numerics
         {
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return this.GetElement(index);
-            }
+            get { return this.GetElement(index); }
         }
 
         /// <summary>Adds two vectors to compute their sum.</summary>
@@ -237,7 +233,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Add(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Add(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -302,7 +301,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Divide(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Divide(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -519,7 +521,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Multiply(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Multiply(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -586,7 +591,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T element = Scalar<T>.ShiftRightArithmetic(value.GetElementUnsafe(index), shiftCount);
+                T element = Scalar<T>.ShiftRightArithmetic(
+                    value.GetElementUnsafe(index),
+                    shiftCount
+                );
                 result.SetElementUnsafe(index, element);
             }
 
@@ -605,7 +613,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Subtract(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Subtract(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -718,14 +729,18 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
         }
 
         /// <summary>Returns a boolean indicating whether the given Object is equal to this vector instance.</summary>
         /// <param name="obj">The Object to compare against.</param>
         /// <returns>True if the Object is equal to this vector; False otherwise.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is Vector<T> other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Vector<T> other) && Equals(other);
 
         /// <summary>Returns a boolean indicating whether the given vector is equal to this vector instance.</summary>
         /// <param name="other">The vector to compare this instance to.</param>
@@ -740,7 +755,9 @@ namespace System.Numerics
             {
                 if ((typeof(T) == typeof(double)) || (typeof(T) == typeof(float)))
                 {
-                    Vector<T> result = Vector.Equals(this, other) | ~(Vector.Equals(this, this) | Vector.Equals(other, other));
+                    Vector<T> result =
+                        Vector.Equals(this, other)
+                        | ~(Vector.Equals(this, this) | Vector.Equals(other, other));
                     return result.As<T, int>() == Vector<int>.AllBitsSet;
                 }
                 else
@@ -755,7 +772,12 @@ namespace System.Numerics
             {
                 for (int index = 0; index < Count; index++)
                 {
-                    if (!Scalar<T>.ObjectEquals(self.GetElementUnsafe(index), other.GetElementUnsafe(index)))
+                    if (
+                        !Scalar<T>.ObjectEquals(
+                            self.GetElementUnsafe(index),
+                            other.GetElementUnsafe(index)
+                        )
+                    )
                     {
                         return false;
                     }
@@ -786,13 +808,18 @@ namespace System.Numerics
         /// <summary>Returns a String representing this vector, using the specified format string to format individual elements.</summary>
         /// <param name="format">The format of individual elements.</param>
         /// <returns>The string representation.</returns>
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format) => ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format
+        ) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a String representing this vector, using the specified format string to format individual elements and the given IFormatProvider.</summary>
         /// <param name="format">The format of individual elements.</param>
         /// <param name="formatProvider">The format provider to use when formatting elements.</param>
         /// <returns>The string representation.</returns>
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? formatProvider
+        )
         {
             ThrowHelper.ThrowForUnsupportedNumericsVectorBaseType<T>();
 
@@ -806,7 +833,9 @@ namespace System.Numerics
             {
                 sb.Append(separator);
                 sb.Append(' ');
-                sb.Append(((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider));
+                sb.Append(
+                    ((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider)
+                );
             }
             sb.Append('>');
 
@@ -841,7 +870,10 @@ namespace System.Numerics
                 return false;
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
             return true;
         }
     }

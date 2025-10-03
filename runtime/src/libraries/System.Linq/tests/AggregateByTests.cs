@@ -13,8 +13,20 @@ namespace System.Linq.Tests
         {
             string[] first = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => first.AggregateBy(x => x, string.Empty, (x, y) => x + y));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => first.AggregateBy(x => x, string.Empty, (x, y) => x + y, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => first.AggregateBy(x => x, string.Empty, (x, y) => x + y)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () =>
+                    first.AggregateBy(
+                        x => x,
+                        string.Empty,
+                        (x, y) => x + y,
+                        new AnagramEqualityComparer()
+                    )
+            );
         }
 
         [Fact]
@@ -23,8 +35,20 @@ namespace System.Linq.Tests
             string[] source = { };
             Func<string, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.AggregateBy(keySelector, string.Empty, (x, y) => x + y));
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.AggregateBy(keySelector, string.Empty, (x, y) => x + y, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => source.AggregateBy(keySelector, string.Empty, (x, y) => x + y)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () =>
+                    source.AggregateBy(
+                        keySelector,
+                        string.Empty,
+                        (x, y) => x + y,
+                        new AnagramEqualityComparer()
+                    )
+            );
         }
 
         [Fact]
@@ -33,8 +57,20 @@ namespace System.Linq.Tests
             string[] source = { };
             Func<string, string> seedSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("seedSelector", () => source.AggregateBy(x => x, seedSelector, (x, y) => x + y));
-            AssertExtensions.Throws<ArgumentNullException>("seedSelector", () => source.AggregateBy(x => x, seedSelector, (x, y) => x + y, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "seedSelector",
+                () => source.AggregateBy(x => x, seedSelector, (x, y) => x + y)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "seedSelector",
+                () =>
+                    source.AggregateBy(
+                        x => x,
+                        seedSelector,
+                        (x, y) => x + y,
+                        new AnagramEqualityComparer()
+                    )
+            );
         }
 
         [Fact]
@@ -43,8 +79,14 @@ namespace System.Linq.Tests
             string[] source = { };
             Func<string, string, string> func = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("func", () => source.AggregateBy(x => x, string.Empty, func));
-            AssertExtensions.Throws<ArgumentNullException>("func", () => source.AggregateBy(x => x, string.Empty, func, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "func",
+                () => source.AggregateBy(x => x, string.Empty, func)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "func",
+                () => source.AggregateBy(x => x, string.Empty, func, new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
@@ -78,19 +120,44 @@ namespace System.Linq.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/92387", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/92387",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [MemberData(nameof(AggregateBy_TestData))]
-        public static void AggregateBy_HasExpectedOutput<TSource, TKey, TAccumulate>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TKey, TAccumulate> seedSelector, Func<TAccumulate, TSource, TAccumulate> func, IEqualityComparer<TKey>? comparer, IEnumerable<KeyValuePair<TKey, TAccumulate>> expected)
+        public static void AggregateBy_HasExpectedOutput<TSource, TKey, TAccumulate>(
+            IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TKey, TAccumulate> seedSelector,
+            Func<TAccumulate, TSource, TAccumulate> func,
+            IEqualityComparer<TKey>? comparer,
+            IEnumerable<KeyValuePair<TKey, TAccumulate>> expected
+        )
         {
             Assert.Equal(expected, source.AggregateBy(keySelector, seedSelector, func, comparer));
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/92387", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/92387",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [MemberData(nameof(AggregateBy_TestData))]
-        public static void AggregateBy_RunOnce_HasExpectedOutput<TSource, TKey, TAccumulate>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TKey, TAccumulate> seedSelector, Func<TAccumulate, TSource, TAccumulate> func, IEqualityComparer<TKey>? comparer, IEnumerable<KeyValuePair<TKey, TAccumulate>> expected)
+        public static void AggregateBy_RunOnce_HasExpectedOutput<TSource, TKey, TAccumulate>(
+            IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TKey, TAccumulate> seedSelector,
+            Func<TAccumulate, TSource, TAccumulate> func,
+            IEqualityComparer<TKey>? comparer,
+            IEnumerable<KeyValuePair<TKey, TAccumulate>> expected
+        )
         {
-            Assert.Equal(expected, source.RunOnce().AggregateBy(keySelector, seedSelector, func, comparer));
+            Assert.Equal(
+                expected,
+                source.RunOnce().AggregateBy(keySelector, seedSelector, func, comparer)
+            );
         }
 
         public static IEnumerable<object[]> AggregateBy_TestData()
@@ -101,7 +168,8 @@ namespace System.Linq.Tests
                 seedSelector: x => 0,
                 func: (x, y) => x + y,
                 comparer: null,
-                expected: Enumerable.Empty<KeyValuePair<int,int>>());
+                expected: Enumerable.Empty<KeyValuePair<int, int>>()
+            );
 
             yield return WrapArgs(
                 source: Enumerable.Range(0, 10),
@@ -109,7 +177,8 @@ namespace System.Linq.Tests
                 seedSelector: x => 0,
                 func: (x, y) => x + y,
                 comparer: null,
-                expected: Enumerable.Range(0, 10).ToDictionary(x => x, x => x));
+                expected: Enumerable.Range(0, 10).ToDictionary(x => x, x => x)
+            );
 
             yield return WrapArgs(
                 source: Enumerable.Range(5, 10),
@@ -117,7 +186,8 @@ namespace System.Linq.Tests
                 seedSelector: x => 0,
                 func: (x, y) => x + y,
                 comparer: null,
-                expected: Enumerable.Repeat(true, 1).ToDictionary(x => x, x => 95));
+                expected: Enumerable.Repeat(true, 1).ToDictionary(x => x, x => 95)
+            );
 
             yield return WrapArgs(
                 source: Enumerable.Range(0, 20),
@@ -125,7 +195,8 @@ namespace System.Linq.Tests
                 seedSelector: x => 0,
                 func: (x, y) => x + y,
                 comparer: null,
-                expected: Enumerable.Range(0, 5).ToDictionary(x => x, x => 30 + 4 * x));
+                expected: Enumerable.Range(0, 5).ToDictionary(x => x, x => 30 + 4 * x)
+            );
 
             yield return WrapArgs(
                 source: Enumerable.Repeat(5, 20),
@@ -133,7 +204,8 @@ namespace System.Linq.Tests
                 seedSelector: x => 0,
                 func: (x, y) => x + y,
                 comparer: null,
-                expected: Enumerable.Repeat(5, 1).ToDictionary(x => x, x => 100));
+                expected: Enumerable.Repeat(5, 1).ToDictionary(x => x, x => 100)
+            );
 
             yield return WrapArgs(
                 source: new string[] { "Bob", "bob", "tim", "Bob", "Tim" },
@@ -147,7 +219,8 @@ namespace System.Linq.Tests
                     { "bob", "bob" },
                     { "tim", "tim" },
                     { "Tim", "Tim" },
-                });
+                }
+            );
 
             yield return WrapArgs(
                 source: new string[] { "Bob", "bob", "tim", "Bob", "Tim" },
@@ -158,8 +231,9 @@ namespace System.Linq.Tests
                 expected: new Dictionary<string, string>
                 {
                     { "Bob", "BobbobBob" },
-                    { "tim", "timTim" }
-                });
+                    { "tim", "timTim" },
+                }
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Tom", 20), ("Dick", 30), ("Harry", 40) },
@@ -171,8 +245,9 @@ namespace System.Linq.Tests
                 {
                     { 20, "I am 20 and my name is Tom" },
                     { 30, "I am 30 and my name is Dick" },
-                    { 40, "I am 40 and my name is Harry" }
-                });
+                    { 40, "I am 40 and my name is Harry" },
+                }
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Tom", 20), ("Dick", 20), ("Harry", 40) },
@@ -183,8 +258,9 @@ namespace System.Linq.Tests
                 expected: new Dictionary<int, string>
                 {
                     { 20, "I am 20 and my name is maybe Tom maybe Dick" },
-                    { 40, "I am 40 and my name is maybe Harry" }
-                });
+                    { 40, "I am 40 and my name is maybe Harry" },
+                }
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Bob", 20), ("bob", 20), ("Harry", 20) },
@@ -192,7 +268,8 @@ namespace System.Linq.Tests
                 seedSelector: x => 0,
                 func: (x, y) => x + y.Age,
                 comparer: null,
-                expected: new string[] { "Bob", "bob", "Harry" }.ToDictionary(x => x, x => 20));
+                expected: new string[] { "Bob", "bob", "Harry" }.ToDictionary(x => x, x => 20)
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Bob", 20), ("bob", 30), ("Harry", 40) },
@@ -200,28 +277,40 @@ namespace System.Linq.Tests
                 seedSelector: x => 0,
                 func: (x, y) => x + y.Age,
                 comparer: StringComparer.OrdinalIgnoreCase,
-                expected: new Dictionary<string, int>
-                {
-                    { "Bob", 50 },
-                    { "Harry", 40 }
-                });
+                expected: new Dictionary<string, int> { { "Bob", 50 }, { "Harry", 40 } }
+            );
 
-            object[] WrapArgs<TSource, TKey, TAccumulate>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TKey, TAccumulate> seedSelector, Func<TAccumulate, TSource, TAccumulate> func, IEqualityComparer<TKey>? comparer, IEnumerable<KeyValuePair<TKey, TAccumulate>> expected)
-                => new object[] { source, keySelector, seedSelector, func, comparer, expected };
+            object[] WrapArgs<TSource, TKey, TAccumulate>(
+                IEnumerable<TSource> source,
+                Func<TSource, TKey> keySelector,
+                Func<TKey, TAccumulate> seedSelector,
+                Func<TAccumulate, TSource, TAccumulate> func,
+                IEqualityComparer<TKey>? comparer,
+                IEnumerable<KeyValuePair<TKey, TAccumulate>> expected
+            ) => new object[] { source, keySelector, seedSelector, func, comparer, expected };
         }
 
         [Fact]
         public void GroupBy()
         {
-            static IEnumerable<KeyValuePair<TKey, List<TSource>>> GroupBy<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector) =>
+            static IEnumerable<KeyValuePair<TKey, List<TSource>>> GroupBy<TSource, TKey>(
+                IEnumerable<TSource> source,
+                Func<TSource, TKey> keySelector
+            ) =>
                 source.AggregateBy(
                     keySelector,
                     seedSelector: _ => new List<TSource>(),
-                    (group, element) => { group.Add(element); return group; });
+                    (group, element) =>
+                    {
+                        group.Add(element);
+                        return group;
+                    }
+                );
 
             IEnumerable<KeyValuePair<bool, List<int>>> oddsEvens = GroupBy(
                 new int[] { 1, 2, 3, 4 },
-                i => i % 2 == 0);
+                i => i % 2 == 0
+            );
 
             var e = oddsEvens.GetEnumerator();
 
@@ -247,15 +336,15 @@ namespace System.Linq.Tests
         [Fact]
         public void LongCountBy()
         {
-            static IEnumerable<KeyValuePair<TKey, long>> LongCountBy<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector) =>
-                source.AggregateBy(
-                    keySelector,
-                    seed: 0L,
-                    (count, _) => ++count);
+            static IEnumerable<KeyValuePair<TKey, long>> LongCountBy<TSource, TKey>(
+                IEnumerable<TSource> source,
+                Func<TSource, TKey> keySelector
+            ) => source.AggregateBy(keySelector, seed: 0L, (count, _) => ++count);
 
             IEnumerable<KeyValuePair<bool, long>> oddsEvens = LongCountBy(
                 new int[] { 1, 2, 3, 4 },
-                i => i % 2 == 0);
+                i => i % 2 == 0
+            );
 
             var e = oddsEvens.GetEnumerator();
 
@@ -283,14 +372,15 @@ namespace System.Linq.Tests
             };
 
             var scores = data.AggregateBy(
-                keySelector: entry => entry.id,
-                seed: 0,
-                (totalScore, curr) => totalScore + curr.score)
+                    keySelector: entry => entry.id,
+                    seed: 0,
+                    (totalScore, curr) => totalScore + curr.score
+                )
                 .ToDictionary();
 
             Assert.Equal(67, scores["0"]);
             Assert.Equal(15, scores["1"]);
-            Assert.Equal( 4, scores["2"]);
+            Assert.Equal(4, scores["2"]);
         }
     }
 }

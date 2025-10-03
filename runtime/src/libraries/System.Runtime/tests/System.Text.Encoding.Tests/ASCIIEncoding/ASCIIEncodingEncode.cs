@@ -42,20 +42,33 @@ namespace System.Text.Tests
             EncodingHelpers.Encode(new ASCIIEncoding(), source, index, count, expected);
 
             // Encoding valid chars should not throw with an EncoderExceptionFallback
-            Encoding exceptionEncoding = Encoding.GetEncoding("ascii", new EncoderExceptionFallback(), new DecoderReplacementFallback("?"));
+            Encoding exceptionEncoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderExceptionFallback(),
+                new DecoderReplacementFallback("?")
+            );
             EncodingHelpers.Encode(exceptionEncoding, source, index, count, expected);
 
             byte[] actual = new byte[expected.Length];
-            Assert.Equal(OperationStatus.Done , Ascii.FromUtf16(source.AsSpan(index, count), actual, out int bytesWritten));
+            Assert.Equal(
+                OperationStatus.Done,
+                Ascii.FromUtf16(source.AsSpan(index, count), actual, out int bytesWritten)
+            );
             Assert.Equal(expected.Length, bytesWritten);
             Assert.Equal(expected, actual.Take(bytesWritten).ToArray());
 
             if (expected.Length > 1)
             {
                 actual = new byte[expected.Length - 1];
-                Assert.Equal(OperationStatus.DestinationTooSmall, Ascii.FromUtf16(source.AsSpan(index, count), actual, out bytesWritten));
+                Assert.Equal(
+                    OperationStatus.DestinationTooSmall,
+                    Ascii.FromUtf16(source.AsSpan(index, count), actual, out bytesWritten)
+                );
                 Assert.Equal(expected.Length - 1, bytesWritten);
-                Assert.Equal(expected.Take(bytesWritten).ToArray(), actual.Take(bytesWritten).ToArray());
+                Assert.Equal(
+                    expected.Take(bytesWritten).ToArray(),
+                    actual.Take(bytesWritten).ToArray()
+                );
             }
         }
 
@@ -97,19 +110,34 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(Encode_InvalidChars_TestData))]
-        public void Encode_InvalidChars(string source, int index, int count, int expectedCharsConsumed)
+        public void Encode_InvalidChars(
+            string source,
+            int index,
+            int count,
+            int expectedCharsConsumed
+        )
         {
             byte[] expected = GetBytes(source, index, count);
             EncodingHelpers.Encode(new ASCIIEncoding(), source, index, count, expected);
 
             // Encoding invalid chars should throw with an EncoderExceptionFallback
-            Encoding exceptionEncoding = Encoding.GetEncoding("ascii", new EncoderExceptionFallback(), new DecoderReplacementFallback("?"));
+            Encoding exceptionEncoding = Encoding.GetEncoding(
+                "ascii",
+                new EncoderExceptionFallback(),
+                new DecoderReplacementFallback("?")
+            );
             NegativeEncodingTests.Encode_Invalid(exceptionEncoding, source, index, count);
 
             byte[] actual = new byte[expected.Length];
-            Assert.Equal(OperationStatus.InvalidData, Ascii.FromUtf16(source.AsSpan(index, count), actual, out int bytesWritten));
+            Assert.Equal(
+                OperationStatus.InvalidData,
+                Ascii.FromUtf16(source.AsSpan(index, count), actual, out int bytesWritten)
+            );
             Assert.Equal(expectedCharsConsumed, bytesWritten);
-            Assert.Equal(expected.Take(bytesWritten).ToArray(), actual.Take(bytesWritten).ToArray());
+            Assert.Equal(
+                expected.Take(bytesWritten).ToArray(),
+                actual.Take(bytesWritten).ToArray()
+            );
         }
 
         private static byte[] GetBytes(string source, int index, int count)
@@ -136,7 +164,11 @@ namespace System.Text.Tests
         [InlineData("\u00ff\u00ff", 10)]
         public void GetCharCount_WithReplacementFallback(string input, int expectedCharCount)
         {
-            Encoding encoding = Encoding.GetEncoding("ascii", EncoderFallback.ExceptionFallback, new DecoderReplacementFallback("abcde"));
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                EncoderFallback.ExceptionFallback,
+                new DecoderReplacementFallback("abcde")
+            );
             Assert.Equal(expectedCharCount, encoding.GetCharCount(WideToNarrowStr(input)));
         }
 
@@ -146,7 +178,11 @@ namespace System.Text.Tests
             // Internal fallback logic should notice that we're about to write out a standalone
             // surrogate character and should abort the operation.
 
-            Encoding encoding = Encoding.GetEncoding("ascii", EncoderFallback.ExceptionFallback, new StandaloneLowSurrogateDecoderFallback());
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                EncoderFallback.ExceptionFallback,
+                new StandaloneLowSurrogateDecoderFallback()
+            );
             Assert.Throws<ArgumentException>(() => encoding.GetCharCount(new byte[] { 0x80 }));
         }
 
@@ -156,7 +192,11 @@ namespace System.Text.Tests
         [InlineData("\u00ff\u00ff", "abcdeabcde")]
         public void GetChars_WithReplacementFallback(string input, string expectedResult)
         {
-            Encoding encoding = Encoding.GetEncoding("ascii", EncoderFallback.ExceptionFallback, new DecoderReplacementFallback("abcde"));
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                EncoderFallback.ExceptionFallback,
+                new DecoderReplacementFallback("abcde")
+            );
             Assert.Equal(expectedResult.ToCharArray(), encoding.GetChars(WideToNarrowStr(input)));
         }
 
@@ -166,7 +206,11 @@ namespace System.Text.Tests
             // Internal fallback logic should notice that we're about to write out a standalone
             // surrogate character and should abort the operation.
 
-            Encoding encoding = Encoding.GetEncoding("ascii", EncoderFallback.ExceptionFallback, new StandaloneLowSurrogateDecoderFallback());
+            Encoding encoding = Encoding.GetEncoding(
+                "ascii",
+                EncoderFallback.ExceptionFallback,
+                new StandaloneLowSurrogateDecoderFallback()
+            );
             Assert.Throws<ArgumentException>(() => encoding.GetChars(new byte[] { 0x80 }));
         }
 

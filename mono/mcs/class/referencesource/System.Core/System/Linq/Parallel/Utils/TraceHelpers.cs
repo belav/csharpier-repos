@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -15,16 +15,14 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.IO;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {
-
     internal static class TraceHelpers
     {
-
 #if PFXTRACE
         // If tracing is turned on, we create a new trace source.
         private static TraceSource s_traceSource = new TraceSource("PFX", SourceLevels.All);
@@ -43,18 +41,27 @@ namespace System.Linq.Parallel
             s_traceSource.Listeners.Clear();
 
             // If trace output is requested in the environment, set it.
-            string traceOutput = Environment.GetEnvironmentVariable(s_traceOutputEnvironmentVariable);
+            string traceOutput = Environment.GetEnvironmentVariable(
+                s_traceOutputEnvironmentVariable
+            );
             if (traceOutput != null && !String.IsNullOrEmpty(traceOutput.Trim()))
             {
-                s_traceSource.Listeners.Add(new TextWriterTraceListener(
-                    new StreamWriter(File.Open(traceOutput, FileMode.OpenOrCreate, FileAccess.ReadWrite))));
+                s_traceSource.Listeners.Add(
+                    new TextWriterTraceListener(
+                        new StreamWriter(
+                            File.Open(traceOutput, FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                        )
+                    )
+                );
             }
 
-            string traceEnable = Environment.GetEnvironmentVariable(s_traceDefaultEnableEnvironmentVariable);
+            string traceEnable = Environment.GetEnvironmentVariable(
+                s_traceDefaultEnableEnvironmentVariable
+            );
             if (traceEnable != null)
             {
                 s_traceSource.Listeners.Add(new DefaultTraceListener());
-            }      
+            }
 
             // If verbose tracing was requested, turn it on.
             string traceLevel = Environment.GetEnvironmentVariable(s_traceLevelEnvironmentVariable);
@@ -73,7 +80,6 @@ namespace System.Linq.Parallel
         [Conditional("PFXTRACE")]
         internal static void AddListener(TraceListener listener)
         {
-
             s_traceSource.Listeners.Add(listener);
         }
 #endif
@@ -89,7 +95,8 @@ namespace System.Linq.Parallel
 #if PFXTRACE
             foreach (TraceListener l in s_traceSource.Listeners)
             {
-                l.TraceOutputOptions = TraceOptions.Callstack | TraceOptions.DateTime | TraceOptions.ThreadId;
+                l.TraceOutputOptions =
+                    TraceOptions.Callstack | TraceOptions.DateTime | TraceOptions.ThreadId;
             }
 #endif
         }
@@ -141,7 +148,7 @@ namespace System.Linq.Parallel
 
         internal static void NotYetImplemented(string message)
         {
-            NotYetImplemented(false, "NYI: " + message);            
+            NotYetImplemented(false, "NYI: " + message);
         }
 
         internal static void NotYetImplemented(bool assertCondition, string message)
@@ -154,5 +161,4 @@ namespace System.Linq.Parallel
             }
         }
     }
-
 }

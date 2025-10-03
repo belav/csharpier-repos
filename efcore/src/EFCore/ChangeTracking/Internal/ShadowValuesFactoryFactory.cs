@@ -13,9 +13,7 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 /// </summary>
 public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<string, object?>>
 {
-    private ShadowValuesFactoryFactory()
-    {
-    }
+    private ShadowValuesFactoryFactory() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -31,8 +29,8 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<str
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override int GetPropertyIndex(IPropertyBase propertyBase)
-        => propertyBase.GetShadowIndex();
+    protected override int GetPropertyIndex(IPropertyBase propertyBase) =>
+        propertyBase.GetShadowIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,8 +38,8 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<str
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override int GetPropertyCount(IRuntimeEntityType entityType)
-        => entityType.ShadowPropertyCount;
+    protected override int GetPropertyCount(IRuntimeEntityType entityType) =>
+        entityType.ShadowPropertyCount;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,8 +47,7 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<str
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ValueComparer? GetValueComparer(IProperty property)
-        => null;
+    protected override ValueComparer? GetValueComparer(IProperty property) => null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,14 +55,16 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<str
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool UseEntityVariable
-        => false;
+    protected override bool UseEntityVariable => false;
 
-    internal static readonly MethodInfo ContainsKeyMethod =
-        typeof(IDictionary<string, object?>).GetMethod(nameof(IDictionary<string, object?>.ContainsKey), new[] { typeof(string) })!;
+    internal static readonly MethodInfo ContainsKeyMethod = typeof(IDictionary<
+        string,
+        object?
+    >).GetMethod(nameof(IDictionary<string, object?>.ContainsKey), new[] { typeof(string) })!;
 
-    private static readonly PropertyInfo DictionaryIndexer
-        = typeof(IDictionary<string, object?>).GetRuntimeProperties().Single(p => p.GetIndexParameters().Length > 0);
+    private static readonly PropertyInfo DictionaryIndexer = typeof(IDictionary<string, object?>)
+        .GetRuntimeProperties()
+        .Single(p => p.GetIndexParameters().Length > 0);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -75,7 +74,8 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<str
     /// </summary>
     protected override Expression CreateReadShadowValueExpression(
         Expression? parameter,
-        IPropertyBase property)
+        IPropertyBase property
+    )
     {
         if (parameter == null)
         {
@@ -88,18 +88,21 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<str
             valueExpression = ((UnaryExpression)valueExpression).Operand; // Unwrap cast
             return valueExpression.Type == property.ClrType
                 ? valueExpression
-                : Expression.Convert(
-                    valueExpression,
-                    property.ClrType);
+                : Expression.Convert(valueExpression, property.ClrType);
         }
 
-        return Expression.Condition(Expression.Call(parameter, ContainsKeyMethod, Expression.Constant(property.Name)),
-            Expression.Convert(Expression.MakeIndex(
-                parameter,
-                DictionaryIndexer,
-                new[] { Expression.Constant(property.Name) }),
-                property.ClrType),
-            Expression.Constant(property.Sentinel, property.ClrType));
+        return Expression.Condition(
+            Expression.Call(parameter, ContainsKeyMethod, Expression.Constant(property.Name)),
+            Expression.Convert(
+                Expression.MakeIndex(
+                    parameter,
+                    DictionaryIndexer,
+                    new[] { Expression.Constant(property.Name) }
+                ),
+                property.ClrType
+            ),
+            Expression.Constant(property.Sentinel, property.ClrType)
+        );
     }
 
     /// <summary>
@@ -110,6 +113,6 @@ public class ShadowValuesFactoryFactory : SnapshotFactoryFactory<IDictionary<str
     /// </summary>
     protected override Expression CreateReadValueExpression(
         Expression? parameter,
-        IPropertyBase property)
-        => CreateReadShadowValueExpression(parameter, property);
+        IPropertyBase property
+    ) => CreateReadShadowValueExpression(parameter, property);
 }

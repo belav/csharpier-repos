@@ -29,13 +29,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     continue;
                 }
 
-                var compilationState = new TypeCompilationState(sourceSymbol.ContainingType, compilation, null);
-                var diagnostics = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+                var compilationState = new TypeCompilationState(
+                    sourceSymbol.ContainingType,
+                    compilation,
+                    null
+                );
+                var diagnostics = BindingDiagnosticBag.GetInstance(
+                    withDiagnostics: true,
+                    withDependencies: false
+                );
 
-                var boundBody = MethodCompiler.BindSynthesizedMethodBody(sourceSymbol, compilationState, diagnostics);
+                var boundBody = MethodCompiler.BindSynthesizedMethodBody(
+                    sourceSymbol,
+                    compilationState,
+                    diagnostics
+                );
                 if (boundBody != null)
                 {
-                    FlowAnalysisPass.Rewrite(sourceSymbol, boundBody, compilationState, flowDiagnostics, hasTrailingExpression: false, originalBodyNested: false);
+                    FlowAnalysisPass.Rewrite(
+                        sourceSymbol,
+                        boundBody,
+                        compilationState,
+                        flowDiagnostics,
+                        hasTrailingExpression: false,
+                        originalBodyNested: false
+                    );
                 }
 
                 diagnostics.Free();
@@ -81,42 +99,95 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         #region "Flow Analysis Utilities"
         protected ControlFlowAnalysis CompileAndAnalyzeControlFlowStatements(string program)
         {
-            return CompileAndGetModelAndStatements(program, (model, stmt1, stmt2) => model.AnalyzeControlFlow(stmt1, stmt2));
+            return CompileAndGetModelAndStatements(
+                program,
+                (model, stmt1, stmt2) => model.AnalyzeControlFlow(stmt1, stmt2)
+            );
         }
 
-        protected DataFlowAnalysis CompileAndAnalyzeDataFlowExpression(string program, params MetadataReference[] references)
+        protected DataFlowAnalysis CompileAndAnalyzeDataFlowExpression(
+            string program,
+            params MetadataReference[] references
+        )
         {
-            return CompileAndGetModelAndExpression(program, (model, expression) => model.AnalyzeDataFlow(expression), references);
+            return CompileAndGetModelAndExpression(
+                program,
+                (model, expression) => model.AnalyzeDataFlow(expression),
+                references
+            );
         }
 
-        protected DataFlowAnalysis CompileAndAnalyzeDataFlowExpression(string program, TargetFramework targetFramework, params MetadataReference[] references)
+        protected DataFlowAnalysis CompileAndAnalyzeDataFlowExpression(
+            string program,
+            TargetFramework targetFramework,
+            params MetadataReference[] references
+        )
         {
-            return CompileAndGetModelAndExpression(program, (model, expression) => model.AnalyzeDataFlow(expression), targetFramework, assertNoDiagnostics: true, references);
+            return CompileAndGetModelAndExpression(
+                program,
+                (model, expression) => model.AnalyzeDataFlow(expression),
+                targetFramework,
+                assertNoDiagnostics: true,
+                references
+            );
         }
 
-        protected DataFlowAnalysis CompileAndAnalyzeDataFlowConstructorInitializer(string program, params MetadataReference[] references)
+        protected DataFlowAnalysis CompileAndAnalyzeDataFlowConstructorInitializer(
+            string program,
+            params MetadataReference[] references
+        )
         {
-            return CompileAndGetModelAndConstructorInitializer(program, (model, constructorInitializer) => model.AnalyzeDataFlow(constructorInitializer), references);
+            return CompileAndGetModelAndConstructorInitializer(
+                program,
+                (model, constructorInitializer) => model.AnalyzeDataFlow(constructorInitializer),
+                references
+            );
         }
 
-        protected DataFlowAnalysis CompileAndAnalyzeDataFlowPrimaryConstructorInitializer(string program, params MetadataReference[] references)
+        protected DataFlowAnalysis CompileAndAnalyzeDataFlowPrimaryConstructorInitializer(
+            string program,
+            params MetadataReference[] references
+        )
         {
-            return CompileAndGetModelAndPrimaryConstructorInitializer(program, (model, primaryConstructorInitializer) => model.AnalyzeDataFlow(primaryConstructorInitializer), references);
+            return CompileAndGetModelAndPrimaryConstructorInitializer(
+                program,
+                (model, primaryConstructorInitializer) =>
+                    model.AnalyzeDataFlow(primaryConstructorInitializer),
+                references
+            );
         }
 
         protected DataFlowAnalysis CompileAndAnalyzeDataFlowStatements(string program)
         {
-            return CompileAndGetModelAndStatements(program, (model, stmt1, stmt2) => model.AnalyzeDataFlow(stmt1, stmt2));
+            return CompileAndGetModelAndStatements(
+                program,
+                (model, stmt1, stmt2) => model.AnalyzeDataFlow(stmt1, stmt2)
+            );
         }
 
-        protected (ControlFlowAnalysis controlFlowAnalysis, DataFlowAnalysis dataFlowAnalysis) CompileAndAnalyzeControlAndDataFlowStatements(string program)
+        protected (
+            ControlFlowAnalysis controlFlowAnalysis,
+            DataFlowAnalysis dataFlowAnalysis
+        ) CompileAndAnalyzeControlAndDataFlowStatements(string program)
         {
-            return CompileAndGetModelAndStatements(program, (model, stmt1, stmt2) => (model.AnalyzeControlFlow(stmt1, stmt2), model.AnalyzeDataFlow(stmt1, stmt2)));
+            return CompileAndGetModelAndStatements(
+                program,
+                (model, stmt1, stmt2) =>
+                    (model.AnalyzeControlFlow(stmt1, stmt2), model.AnalyzeDataFlow(stmt1, stmt2))
+            );
         }
 
-        protected T CompileAndGetModelAndConstructorInitializer<T>(string program, Func<SemanticModel, ConstructorInitializerSyntax, T> analysisDelegate, params MetadataReference[] references)
+        protected T CompileAndGetModelAndConstructorInitializer<T>(
+            string program,
+            Func<SemanticModel, ConstructorInitializerSyntax, T> analysisDelegate,
+            params MetadataReference[] references
+        )
         {
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularPreview, references: references);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularPreview,
+                references: references
+            );
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             int start = program.IndexOf(StartString, StringComparison.Ordinal) + StartString.Length;
@@ -135,9 +206,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return analysisDelegate(model, syntaxToBind);
         }
 
-        protected T CompileAndGetModelAndPrimaryConstructorInitializer<T>(string program, Func<SemanticModel, PrimaryConstructorBaseTypeSyntax, T> analysisDelegate, params MetadataReference[] references)
+        protected T CompileAndGetModelAndPrimaryConstructorInitializer<T>(
+            string program,
+            Func<SemanticModel, PrimaryConstructorBaseTypeSyntax, T> analysisDelegate,
+            params MetadataReference[] references
+        )
         {
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularPreview, references: references);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularPreview,
+                references: references
+            );
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             int start = program.IndexOf(StartString, StringComparison.Ordinal) + StartString.Length;
@@ -156,14 +235,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return analysisDelegate(model, syntaxToBind);
         }
 
-        protected T CompileAndGetModelAndExpression<T>(string program, Func<SemanticModel, ExpressionSyntax, T> analysisDelegate, params MetadataReference[] references)
+        protected T CompileAndGetModelAndExpression<T>(
+            string program,
+            Func<SemanticModel, ExpressionSyntax, T> analysisDelegate,
+            params MetadataReference[] references
+        )
         {
-            return CompileAndGetModelAndExpression<T>(program, analysisDelegate, TargetFramework.Standard, assertNoDiagnostics: false, references);
+            return CompileAndGetModelAndExpression<T>(
+                program,
+                analysisDelegate,
+                TargetFramework.Standard,
+                assertNoDiagnostics: false,
+                references
+            );
         }
 
-        protected T CompileAndGetModelAndExpression<T>(string program, Func<SemanticModel, ExpressionSyntax, T> analysisDelegate, TargetFramework targetFramework, bool assertNoDiagnostics, params MetadataReference[] references)
+        protected T CompileAndGetModelAndExpression<T>(
+            string program,
+            Func<SemanticModel, ExpressionSyntax, T> analysisDelegate,
+            TargetFramework targetFramework,
+            bool assertNoDiagnostics,
+            params MetadataReference[] references
+        )
         {
-            var comp = CreateCompilation(program, parseOptions: TestOptions.RegularPreview, targetFramework: targetFramework, references: references);
+            var comp = CreateCompilation(
+                program,
+                parseOptions: TestOptions.RegularPreview,
+                targetFramework: targetFramework,
+                references: references
+            );
 
             if (assertNoDiagnostics)
             {
@@ -188,14 +288,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return analysisDelegate(model, syntaxToBind);
         }
 
-        protected T CompileAndGetModelAndStatements<T>(string program, Func<SemanticModel, StatementSyntax, StatementSyntax, T> analysisDelegate)
+        protected T CompileAndGetModelAndStatements<T>(
+            string program,
+            Func<SemanticModel, StatementSyntax, StatementSyntax, T> analysisDelegate
+        )
         {
             var comp = CreateCompilation(program);
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
             int start = program.IndexOf(StartString, StringComparison.Ordinal) + StartString.Length;
             int end = program.IndexOf(EndString, StringComparison.Ordinal);
-            StatementSyntax firstStatement = null, lastStatement = null;
+            StatementSyntax firstStatement = null,
+                lastStatement = null;
             foreach (var stmt in GetSyntaxNodeList(tree).OfType<StatementSyntax>())
             {
                 if (firstStatement == null && stmt.SpanStart >= start)
@@ -203,7 +307,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     firstStatement = stmt;
                 }
 
-                if (firstStatement != null && stmt.Span.End <= end && stmt.Parent == firstStatement.Parent)
+                if (
+                    firstStatement != null
+                    && stmt.Span.End <= end
+                    && stmt.Parent == firstStatement.Parent
+                )
                 {
                     lastStatement = stmt;
                 }
@@ -215,7 +323,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected T GetFirstNode<T>(SyntaxTree tree, int offset)
             where T : CSharpSyntaxNode
         {
-            return GetSyntaxNodeList(tree).OfType<T>().Where(n => n.Span.Contains(offset)).FirstOrDefault();
+            return GetSyntaxNodeList(tree)
+                .OfType<T>()
+                .Where(n => n.Span.Contains(offset))
+                .FirstOrDefault();
         }
 
         protected T GetLastNode<T>(SyntaxTree tree, int offset)
@@ -224,7 +335,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return GetSyntaxNodeList(tree).OfType<T>().Where(n => n.Span.Contains(offset)).Last();
         }
 
-        protected static string GetSymbolNamesJoined<T>(IEnumerable<T> symbols, bool sort = false) where T : ISymbol
+        protected static string GetSymbolNamesJoined<T>(IEnumerable<T> symbols, bool sort = false)
+            where T : ISymbol
         {
             if (sort)
             {
@@ -241,27 +353,69 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <param name="treeindex">syntax tree index</param>
         /// <param name="which">-1: all</param>
         /// <returns></returns>
-        protected IEnumerable<ControlFlowAnalysis> CompileAndAnalyzeMultipleControlFlowStatements(string program, int treeindex = 0, int which = -1)
+        protected IEnumerable<ControlFlowAnalysis> CompileAndAnalyzeMultipleControlFlowStatements(
+            string program,
+            int treeindex = 0,
+            int which = -1
+        )
         {
-            return CompileAndGetModelAndMultipleStatements(program, (model, stmt) => model.AnalyzeControlFlow(stmt), treeindex, which);
+            return CompileAndGetModelAndMultipleStatements(
+                program,
+                (model, stmt) => model.AnalyzeControlFlow(stmt),
+                treeindex,
+                which
+            );
         }
 
-        protected IEnumerable<DataFlowAnalysis> CompileAndAnalyzeMultipleDataFlowStatements(string program, int treeindex = 0, int which = -1)
+        protected IEnumerable<DataFlowAnalysis> CompileAndAnalyzeMultipleDataFlowStatements(
+            string program,
+            int treeindex = 0,
+            int which = -1
+        )
         {
-            return CompileAndGetModelAndMultipleStatements(program, (model, stmt) => model.AnalyzeDataFlow(stmt), treeindex, which);
+            return CompileAndGetModelAndMultipleStatements(
+                program,
+                (model, stmt) => model.AnalyzeDataFlow(stmt),
+                treeindex,
+                which
+            );
         }
 
-        protected IEnumerable<DataFlowAnalysis> CompileAndAnalyzeDataFlowMultipleExpressions(string program, int treeindex = 0, int which = -1)
+        protected IEnumerable<DataFlowAnalysis> CompileAndAnalyzeDataFlowMultipleExpressions(
+            string program,
+            int treeindex = 0,
+            int which = -1
+        )
         {
-            return CompileAndGetModelAndMultipleExpressions(program, (model, expression) => model.AnalyzeDataFlow(expression), treeindex, which);
+            return CompileAndGetModelAndMultipleExpressions(
+                program,
+                (model, expression) => model.AnalyzeDataFlow(expression),
+                treeindex,
+                which
+            );
         }
 
-        protected (IEnumerable<ControlFlowAnalysis>, IEnumerable<DataFlowAnalysis>) CompileAndAnalyzeControlAndDataFlowMultipleStatements(string program, int treeindex = 0, int which = -1)
+        protected (
+            IEnumerable<ControlFlowAnalysis>,
+            IEnumerable<DataFlowAnalysis>
+        ) CompileAndAnalyzeControlAndDataFlowMultipleStatements(
+            string program,
+            int treeindex = 0,
+            int which = -1
+        )
         {
-            return (CompileAndAnalyzeMultipleControlFlowStatements(program, treeindex, which), CompileAndAnalyzeMultipleDataFlowStatements(program, treeindex, which));
+            return (
+                CompileAndAnalyzeMultipleControlFlowStatements(program, treeindex, which),
+                CompileAndAnalyzeMultipleDataFlowStatements(program, treeindex, which)
+            );
         }
 
-        protected IEnumerable<T> CompileAndGetModelAndMultipleExpressions<T>(string program, Func<SemanticModel, ExpressionSyntax, T> analysisDelegate, int treeindex = 0, int which = -1)
+        protected IEnumerable<T> CompileAndGetModelAndMultipleExpressions<T>(
+            string program,
+            Func<SemanticModel, ExpressionSyntax, T> analysisDelegate,
+            int treeindex = 0,
+            int which = -1
+        )
         {
             var comp = CreateCompilation(program);
             var tuple = GetBindingNodesAndModel<ExpressionSyntax>(comp, treeindex, which);
@@ -272,7 +426,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
         }
 
-        protected IEnumerable<T> CompileAndGetModelAndMultipleStatements<T>(string program, Func<SemanticModel, StatementSyntax, T> analysisDelegate, int treeindex = 0, int which = -1)
+        protected IEnumerable<T> CompileAndGetModelAndMultipleStatements<T>(
+            string program,
+            Func<SemanticModel, StatementSyntax, T> analysisDelegate,
+            int treeindex = 0,
+            int which = -1
+        )
         {
             var comp = CreateCompilation(program);
             var tuple = GetBindingNodesAndModel<StatementSyntax>(comp, treeindex, which);

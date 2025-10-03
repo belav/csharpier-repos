@@ -1,6 +1,9 @@
 <Type Name="WebRequestMethods+Ftp" FullName="System.Net.WebRequestMethods+Ftp">
   <TypeSignature Language="C#" Value="public static class WebRequestMethods.Ftp" />
-  <TypeSignature Language="ILAsm" Value=".class nested public auto ansi abstract sealed beforefieldinit WebRequestMethods/Ftp extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class nested public auto ansi abstract sealed beforefieldinit WebRequestMethods/Ftp extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -69,7 +72,10 @@
     </Member>
     <Member MemberName="GetDateTimestamp">
       <MemberSignature Language="C#" Value="public const string GetDateTimestamp;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string GetDateTimestamp" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string GetDateTimestamp"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -120,7 +126,10 @@
     </Member>
     <Member MemberName="ListDirectoryDetails">
       <MemberSignature Language="C#" Value="public const string ListDirectoryDetails;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string ListDirectoryDetails" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string ListDirectoryDetails"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -154,7 +163,10 @@
     </Member>
     <Member MemberName="PrintWorkingDirectory">
       <MemberSignature Language="C#" Value="public const string PrintWorkingDirectory;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string PrintWorkingDirectory" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string PrintWorkingDirectory"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -171,7 +183,10 @@
     </Member>
     <Member MemberName="RemoveDirectory">
       <MemberSignature Language="C#" Value="public const string RemoveDirectory;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string RemoveDirectory" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string RemoveDirectory"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -222,7 +237,10 @@
     </Member>
     <Member MemberName="UploadFileWithUniqueName">
       <MemberSignature Language="C#" Value="public const string UploadFileWithUniqueName;" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal string UploadFileWithUniqueName" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal string UploadFileWithUniqueName"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

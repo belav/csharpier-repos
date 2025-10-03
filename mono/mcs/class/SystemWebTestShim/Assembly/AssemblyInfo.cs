@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,15 +31,15 @@
 using System;
 using System.Reflection;
 using System.Resources;
-using System.Security;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Security;
 
 // General Information about the System.Web assembly
 
 #if !TARGET_DOTNET
-[assembly: AssemblyVersion (Consts.FxVersion)]
-[assembly: SatelliteContractVersion (Consts.FxVersion)]
+[assembly: AssemblyVersion(Consts.FxVersion)]
+[assembly: SatelliteContractVersion(Consts.FxVersion)]
 #endif
 
 [assembly: AssemblyTitle("SystemWebTestShim.dll")]
@@ -47,4 +47,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("MONO CLI")]
 [assembly: AssemblyCopyright("(c) 2003 Various Authors")]
 
-[assembly: AssemblyDelaySign (true)]
+[assembly: AssemblyDelaySign(true)]

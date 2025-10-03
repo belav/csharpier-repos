@@ -11,9 +11,10 @@ using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
-   public abstract class HttpClientHandler_ResponseDrain_Test : HttpClientHandlerTestBase
+    public abstract class HttpClientHandler_ResponseDrain_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_ResponseDrain_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_ResponseDrain_Test(ITestOutputHelper output)
+            : base(output) { }
 
         protected virtual void SetResponseDrainTimeout(HttpClientHandler handler, TimeSpan time) { }
 
@@ -22,7 +23,9 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(LoopbackServer.ContentMode.ContentLength)]
         [InlineData(LoopbackServer.ContentMode.SingleChunk)]
         [InlineData(LoopbackServer.ContentMode.BytePerChunk)]
-        public async Task GetAsync_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(LoopbackServer.ContentMode mode)
+        public async Task GetAsync_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(
+            LoopbackServer.ContentMode mode
+        )
         {
             const string simpleContent = "Hello world!";
 
@@ -31,13 +34,24 @@ namespace System.Net.Http.Functional.Tests
                 {
                     using (HttpClient client = CreateHttpClient())
                     {
-                        HttpResponseMessage response1 = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                        HttpResponseMessage response1 = await client.GetAsync(
+                            url,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
                         ValidateResponseHeaders(response1, simpleContent.Length, mode);
 
                         // Read up to exactly 1 byte before the end of the response
-                        Stream responseStream = await response1.Content.ReadAsStreamAsync(TestAsync);
-                        byte[] bytes = await ReadToByteCount(responseStream, simpleContent.Length - 1);
-                        Assert.Equal(simpleContent.Substring(0, simpleContent.Length - 1), Encoding.ASCII.GetString(bytes));
+                        Stream responseStream = await response1.Content.ReadAsStreamAsync(
+                            TestAsync
+                        );
+                        byte[] bytes = await ReadToByteCount(
+                            responseStream,
+                            simpleContent.Length - 1
+                        );
+                        Assert.Equal(
+                            simpleContent.Substring(0, simpleContent.Length - 1),
+                            Encoding.ASCII.GetString(bytes)
+                        );
 
                         // Introduce a short delay to try to ensure that when we dispose the response,
                         // all response data is available and we can drain synchronously and reuse the connection.
@@ -57,11 +71,15 @@ namespace System.Net.Http.Functional.Tests
                     {
                         server.ListenSocket.Close(); // Shut down the listen socket so attempts at additional connections would fail on the client
 
-                        string response = LoopbackServer.GetContentModeResponse(mode, simpleContent);
+                        string response = LoopbackServer.GetContentModeResponse(
+                            mode,
+                            simpleContent
+                        );
                         await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
                         await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
                     });
-                });
+                }
+            );
         }
 
         // The actual amount of drain that's supported is handler and timing dependent, apparently.
@@ -89,7 +107,11 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(10000, 9500, LoopbackServer.ContentMode.ContentLength)]
         [InlineData(10000, 9500, LoopbackServer.ContentMode.SingleChunk)]
         [InlineData(10000, 9500, LoopbackServer.ContentMode.BytePerChunk)]
-        public async Task GetAsyncWithMaxConnections_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(int totalSize, int readSize, LoopbackServer.ContentMode mode)
+        public async Task GetAsyncWithMaxConnections_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(
+            int totalSize,
+            int readSize,
+            LoopbackServer.ContentMode mode
+        )
         {
             await LoopbackServer.CreateClientAndServerAsync(
                 async url =>
@@ -102,11 +124,16 @@ namespace System.Net.Http.Functional.Tests
 
                     using (HttpClient client = CreateHttpClient(handler))
                     {
-                        HttpResponseMessage response1 = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                        HttpResponseMessage response1 = await client.GetAsync(
+                            url,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
                         ValidateResponseHeaders(response1, totalSize, mode);
 
                         // Read part but not all of response
-                        Stream responseStream = await response1.Content.ReadAsStreamAsync(TestAsync);
+                        Stream responseStream = await response1.Content.ReadAsStreamAsync(
+                            TestAsync
+                        );
                         await ReadToByteCount(responseStream, readSize);
 
                         response1.Dispose();
@@ -114,7 +141,10 @@ namespace System.Net.Http.Functional.Tests
                         // Issue another request.  We'll confirm that it comes on the same connection.
                         HttpResponseMessage response2 = await client.GetAsync(url);
                         ValidateResponseHeaders(response2, totalSize, mode);
-                        Assert.Equal(totalSize, (await response2.Content.ReadAsStringAsync()).Length);
+                        Assert.Equal(
+                            totalSize,
+                            (await response2.Content.ReadAsStringAsync()).Length
+                        );
                     }
                 },
                 async server =>
@@ -134,7 +164,8 @@ namespace System.Net.Http.Functional.Tests
                         // Process the second request.
                         await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
                     });
-                });
+                }
+            );
         }
 
         [OuterLoop]
@@ -145,9 +176,17 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(800000, 1, LoopbackServer.ContentMode.ContentLength)]
         [InlineData(800000, 1, LoopbackServer.ContentMode.SingleChunk)]
         [InlineData(1024 * 1024, 1, LoopbackServer.ContentMode.ContentLength)]
-        public async Task GetAsyncLargeRequestWithMaxConnections_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(int totalSize, int readSize, LoopbackServer.ContentMode mode)
+        public async Task GetAsyncLargeRequestWithMaxConnections_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(
+            int totalSize,
+            int readSize,
+            LoopbackServer.ContentMode mode
+        )
         {
-            await GetAsyncWithMaxConnections_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(totalSize, readSize, mode);
+            await GetAsyncWithMaxConnections_DisposeBeforeReadingToEnd_DrainsRequestsAndReusesConnection(
+                totalSize,
+                readSize,
+                mode
+            );
             return;
         }
 
@@ -161,7 +200,11 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(4000000, 1000000, LoopbackServer.ContentMode.ContentLength)]
         [InlineData(4000000, 1000000, LoopbackServer.ContentMode.SingleChunk)]
         [InlineData(4000000, 1000000, LoopbackServer.ContentMode.BytePerChunk)]
-        public async Task GetAsyncWithMaxConnections_DisposeBeforeReadingToEnd_KillsConnection(int totalSize, int readSize, LoopbackServer.ContentMode mode)
+        public async Task GetAsyncWithMaxConnections_DisposeBeforeReadingToEnd_KillsConnection(
+            int totalSize,
+            int readSize,
+            LoopbackServer.ContentMode mode
+        )
         {
             await LoopbackServer.CreateClientAndServerAsync(
                 async url =>
@@ -174,11 +217,16 @@ namespace System.Net.Http.Functional.Tests
 
                     using (HttpClient client = CreateHttpClient(handler))
                     {
-                        HttpResponseMessage response1 = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+                        HttpResponseMessage response1 = await client.GetAsync(
+                            url,
+                            HttpCompletionOption.ResponseHeadersRead
+                        );
                         ValidateResponseHeaders(response1, totalSize, mode);
 
                         // Read part but not all of response
-                        Stream responseStream = await response1.Content.ReadAsStreamAsync(TestAsync);
+                        Stream responseStream = await response1.Content.ReadAsStreamAsync(
+                            TestAsync
+                        );
                         await ReadToByteCount(responseStream, readSize);
 
                         response1.Dispose();
@@ -186,7 +234,10 @@ namespace System.Net.Http.Functional.Tests
                         // Issue another request.  We'll confirm that it comes on a new connection.
                         HttpResponseMessage response2 = await client.GetAsync(url);
                         ValidateResponseHeaders(response2, totalSize, mode);
-                        Assert.Equal(totalSize, (await response2.Content.ReadAsStringAsync()).Length);
+                        Assert.Equal(
+                            totalSize,
+                            (await response2.Content.ReadAsStringAsync()).Length
+                        );
                     }
                 },
                 async server =>
@@ -197,16 +248,33 @@ namespace System.Net.Http.Functional.Tests
                         await connection.ReadRequestHeaderAsync();
                         try
                         {
-                            await connection.WriteStringAsync(LoopbackServer.GetContentModeResponse(mode, content, connectionClose: false));
+                            await connection.WriteStringAsync(
+                                LoopbackServer.GetContentModeResponse(
+                                    mode,
+                                    content,
+                                    connectionClose: false
+                                )
+                            );
                         }
-                        catch (Exception) { }     // Eat errors from client disconnect.
+                        catch (Exception) { } // Eat errors from client disconnect.
 
-                        await server.AcceptConnectionSendCustomResponseAndCloseAsync(LoopbackServer.GetContentModeResponse(mode, content, connectionClose: true));
+                        await server.AcceptConnectionSendCustomResponseAndCloseAsync(
+                            LoopbackServer.GetContentModeResponse(
+                                mode,
+                                content,
+                                connectionClose: true
+                            )
+                        );
                     });
-                });
+                }
+            );
         }
 
-        protected static void ValidateResponseHeaders(HttpResponseMessage response, int contentLength, LoopbackServer.ContentMode mode)
+        protected static void ValidateResponseHeaders(
+            HttpResponseMessage response,
+            int contentLength,
+            LoopbackServer.ContentMode mode
+        )
         {
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
@@ -230,7 +298,11 @@ namespace System.Net.Http.Functional.Tests
 
             while (totalBytesRead < byteCount)
             {
-                int bytesRead = await stream.ReadAsync(buffer, totalBytesRead, (byteCount - totalBytesRead));
+                int bytesRead = await stream.ReadAsync(
+                    buffer,
+                    totalBytesRead,
+                    (byteCount - totalBytesRead)
+                );
                 if (bytesRead == 0)
                 {
                     throw new Exception("Unexpected EOF");

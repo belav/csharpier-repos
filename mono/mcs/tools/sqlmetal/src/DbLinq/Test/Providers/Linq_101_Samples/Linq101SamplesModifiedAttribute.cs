@@ -9,6 +9,7 @@ namespace Test_NUnit.Linq_101_Samples
     sealed class Linq101SamplesModifiedAttribute : Attribute
     {
         readonly string description;
+
         public Linq101SamplesModifiedAttribute(string description)
         {
             this.description = description;

@@ -18,7 +18,10 @@ namespace System.Net.Tests
         {
             using (var listener = new HttpListener())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => listener.TimeoutManager.MinSendBytesPerSecond = value);
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => listener.TimeoutManager.MinSendBytesPerSecond = value
+                );
             }
         }
 
@@ -30,11 +33,26 @@ namespace System.Net.Tests
             using (var listener = new HttpListener())
             {
                 TimeSpan timeSpan = TimeSpan.FromSeconds(totalSeconds);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => listener.TimeoutManager.EntityBody = timeSpan);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => listener.TimeoutManager.DrainEntityBody = timeSpan);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => listener.TimeoutManager.RequestQueue = timeSpan);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => listener.TimeoutManager.IdleConnection = timeSpan);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => listener.TimeoutManager.HeaderWait = timeSpan);
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => listener.TimeoutManager.EntityBody = timeSpan
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => listener.TimeoutManager.DrainEntityBody = timeSpan
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => listener.TimeoutManager.RequestQueue = timeSpan
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => listener.TimeoutManager.IdleConnection = timeSpan
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "value",
+                    () => listener.TimeoutManager.HeaderWait = timeSpan
+                );
             }
         }
 
@@ -54,12 +72,19 @@ namespace System.Net.Tests
     {
         private const string HTTPAPI = "httpapi.dll";
 
-        [DllImport(HTTPAPI, ExactSpelling = true, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            HTTPAPI,
+            ExactSpelling = true,
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         internal static extern uint HttpQueryUrlGroupProperty(
             ulong urlGroupId,
-            HTTP_SERVER_PROPERTY serverProperty, IntPtr pPropertyInfo,
+            HTTP_SERVER_PROPERTY serverProperty,
+            IntPtr pPropertyInfo,
             uint propertyInfoLength,
-            IntPtr reserved);
+            IntPtr reserved
+        );
 
         internal enum HTTP_TIMEOUT_TYPE
         {
@@ -316,7 +341,9 @@ namespace System.Net.Tests
             // Set the MinSendBytesPerSecond timeout after calling Close and make sure that we get the exception.
             _listener.Start();
             _listener.Close();
-            Assert.Throws<ObjectDisposedException>(() => _listener.TimeoutManager.MinSendBytesPerSecond = 10 * 1024 * 1024);
+            Assert.Throws<ObjectDisposedException>(() =>
+                _listener.TimeoutManager.MinSendBytesPerSecond = 10 * 1024 * 1024
+            );
         }
 
         [ConditionalFact(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
@@ -339,7 +366,10 @@ namespace System.Net.Tests
 
             // We need url group id which is private so we get it using reflection.
             string urlGroupIdName = "_urlGroupId";
-            FieldInfo info = typeof(HttpListener).GetField(urlGroupIdName, BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo info = typeof(HttpListener).GetField(
+                urlGroupIdName,
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             ulong urlGroupId = (ulong)info.GetValue(_listener);
 
             HTTP_TIMEOUT_LIMIT_INFO timeoutinfo = new HTTP_TIMEOUT_LIMIT_INFO();
@@ -349,33 +379,38 @@ namespace System.Net.Tests
                 urlGroupId,
                 HTTP_SERVER_PROPERTY.HttpServerTimeoutsProperty,
                 new IntPtr(&timeoutinfo),
-                (uint)Marshal.SizeOf(typeof(HTTP_TIMEOUT_LIMIT_INFO)));
+                (uint)Marshal.SizeOf(typeof(HTTP_TIMEOUT_LIMIT_INFO))
+            );
 
-            timeouts[(uint)HTTP_TIMEOUT_TYPE.DrainEntityBody] =
-                timeoutinfo.DrainEntityBody;
-            timeouts[(uint)HTTP_TIMEOUT_TYPE.EntityBody] =
-                timeoutinfo.EntityBody;
-            timeouts[(uint)HTTP_TIMEOUT_TYPE.RequestQueue] =
-                timeoutinfo.RequestQueue;
-            timeouts[(uint)HTTP_TIMEOUT_TYPE.IdleConnection] =
-                timeoutinfo.IdleConnection;
-            timeouts[(uint)HTTP_TIMEOUT_TYPE.HeaderWait] =
-                timeoutinfo.HeaderWait;
-            timeouts[(uint)HTTP_TIMEOUT_TYPE.MinSendRate] =
-                timeoutinfo.MinSendRate;
+            timeouts[(uint)HTTP_TIMEOUT_TYPE.DrainEntityBody] = timeoutinfo.DrainEntityBody;
+            timeouts[(uint)HTTP_TIMEOUT_TYPE.EntityBody] = timeoutinfo.EntityBody;
+            timeouts[(uint)HTTP_TIMEOUT_TYPE.RequestQueue] = timeoutinfo.RequestQueue;
+            timeouts[(uint)HTTP_TIMEOUT_TYPE.IdleConnection] = timeoutinfo.IdleConnection;
+            timeouts[(uint)HTTP_TIMEOUT_TYPE.HeaderWait] = timeoutinfo.HeaderWait;
+            timeouts[(uint)HTTP_TIMEOUT_TYPE.MinSendRate] = timeoutinfo.MinSendRate;
 
             return timeouts[(int)type];
         }
 
-        private unsafe void GetUrlGroupProperty(ulong urlGroupId, HTTP_SERVER_PROPERTY property, IntPtr info, uint infosize)
+        private unsafe void GetUrlGroupProperty(
+            ulong urlGroupId,
+            HTTP_SERVER_PROPERTY property,
+            IntPtr info,
+            uint infosize
+        )
         {
-            uint statusCode = HttpQueryUrlGroupProperty(urlGroupId, HTTP_SERVER_PROPERTY.HttpServerTimeoutsProperty, info, infosize, IntPtr.Zero);
+            uint statusCode = HttpQueryUrlGroupProperty(
+                urlGroupId,
+                HTTP_SERVER_PROPERTY.HttpServerTimeoutsProperty,
+                info,
+                infosize,
+                IntPtr.Zero
+            );
             if (statusCode != 0)
             {
                 throw new Exception("HttpQueryUrlGroupProperty failed with " + (int)statusCode);
             }
         }
-
 
         [ConditionalTheory(nameof(Helpers) + "." + nameof(Helpers.IsWindowsImplementation))]
         [InlineData(1.3, 1)]

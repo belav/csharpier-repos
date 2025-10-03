@@ -26,7 +26,15 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.Dispose();
 
-            Assert.True(utils.CompareString("<root>" + wSettings.NewLineChars + "\x9<child />" + wSettings.NewLineChars + "</root>"));
+            Assert.True(
+                utils.CompareString(
+                    "<root>"
+                        + wSettings.NewLineChars
+                        + "\x9<child />"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                )
+            );
         }
 
         [Theory]
@@ -46,7 +54,15 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.Dispose();
 
-            Assert.True(utils.CompareString("<root>" + wSettings.NewLineChars + "     <child />" + wSettings.NewLineChars + "</root>"));
+            Assert.True(
+                utils.CompareString(
+                    "<root>"
+                        + wSettings.NewLineChars
+                        + "     <child />"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                )
+            );
         }
 
         [Theory]
@@ -66,7 +82,15 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.Dispose();
 
-            Assert.True(utils.CompareString("<root>" + wSettings.NewLineChars + "\xA<child />" + wSettings.NewLineChars + "</root>"));
+            Assert.True(
+                utils.CompareString(
+                    "<root>"
+                        + wSettings.NewLineChars
+                        + "\xA<child />"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                )
+            );
         }
 
         [Theory]
@@ -86,7 +110,15 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.Dispose();
 
-            Assert.True(utils.CompareString("<root>" + wSettings.NewLineChars + "\xD<child />" + wSettings.NewLineChars + "</root>"));
+            Assert.True(
+                utils.CompareString(
+                    "<root>"
+                        + wSettings.NewLineChars
+                        + "\xD<child />"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                )
+            );
         }
 
         [Theory]
@@ -106,7 +138,15 @@ namespace System.Xml.XmlWriterApiTests
             w.WriteEndElement();
             w.Dispose();
 
-            Assert.True(utils.CompareString("<root>" + wSettings.NewLineChars + "\x20<child />" + wSettings.NewLineChars + "</root>"));
+            Assert.True(
+                utils.CompareString(
+                    "<root>"
+                        + wSettings.NewLineChars
+                        + "\x20<child />"
+                        + wSettings.NewLineChars
+                        + "</root>"
+                )
+            );
         }
 
         [Theory]

@@ -67,20 +67,29 @@ namespace System.Linq.Tests.LegacyTests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).LastOrDefault());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).LastOrDefault()
+            );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).LastOrDefault(i => i != 2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).LastOrDefault(i => i != 2)
+            );
         }
 
         [Fact]
         public void NullPredicate()
         {
             Expression<Func<int, bool>> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).AsQueryable().LastOrDefault(predicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).AsQueryable().LastOrDefault(predicate)
+            );
         }
 
         [Fact]
@@ -101,7 +110,9 @@ namespace System.Linq.Tests.LegacyTests
         public void LastOrDefault_OverloadResolution_Regression()
         {
             // Regression test for https://github.com/dotnet/runtime/issues/65419
-            object? result = new object[] { 1, "" }.AsQueryable().LastOrDefault(x => x is int);
+            object? result = new object[] { 1, "" }
+                .AsQueryable()
+                .LastOrDefault(x => x is int);
             Assert.IsType<int>(result);
 
             result = Array.Empty<object>().AsQueryable().LastOrDefault(1);

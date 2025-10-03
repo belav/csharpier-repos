@@ -20,5 +20,6 @@ public interface IDiscriminatorPropertySetConvention : IConvention
     void ProcessDiscriminatorPropertySet(
         IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        IConventionContext<string?> context);
+        IConventionContext<string?> context
+    );
 }

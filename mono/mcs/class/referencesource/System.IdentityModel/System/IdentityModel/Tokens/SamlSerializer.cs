@@ -20,12 +20,10 @@ namespace System.IdentityModel.Tokens
     {
         DictionaryManager dictionaryManager;
 
-        public SamlSerializer()
-        {
-        }
+        public SamlSerializer() { }
 
         // Interface to plug in external Dictionaries. The external
-        // dictionary should already be populated with all strings 
+        // dictionary should already be populated with all strings
         // required by this assembly.
         public void PopulateDictionary(IXmlDictionary dictionary)
         {
@@ -46,17 +44,29 @@ namespace System.IdentityModel.Tokens
             }
         }
 
-        public virtual SamlSecurityToken ReadToken(XmlReader reader, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual SamlSecurityToken ReadToken(
+            XmlReader reader,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
 
-            XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateDictionaryReader(reader);
+            XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateDictionaryReader(
+                reader
+            );
             WrappedReader wrappedReader = new WrappedReader(dictionaryReader);
 
-            SamlAssertion assertion = LoadAssertion(wrappedReader, keyInfoSerializer, outOfBandTokenResolver);
+            SamlAssertion assertion = LoadAssertion(
+                wrappedReader,
+                keyInfoSerializer,
+                outOfBandTokenResolver
+            );
             if (assertion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAssertion)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAssertion))
+                );
 
             //if (assertion.Signature == null)
             //    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SamlTokenMissingSignature)));
@@ -64,7 +74,11 @@ namespace System.IdentityModel.Tokens
             return new SamlSecurityToken(assertion);
         }
 
-        public virtual void WriteToken(SamlSecurityToken token, XmlWriter writer, SecurityTokenSerializer keyInfoSerializer)
+        public virtual void WriteToken(
+            SamlSecurityToken token,
+            XmlWriter writer,
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
             if (token == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
@@ -73,7 +87,11 @@ namespace System.IdentityModel.Tokens
             token.Assertion.WriteTo(writer, this, keyInfoSerializer);
         }
 
-        public virtual SamlAssertion LoadAssertion(XmlDictionaryReader reader, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual SamlAssertion LoadAssertion(
+            XmlDictionaryReader reader,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
@@ -84,28 +102,61 @@ namespace System.IdentityModel.Tokens
             return assertion;
         }
 
-        public virtual SamlCondition LoadCondition(XmlDictionaryReader reader, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual SamlCondition LoadCondition(
+            XmlDictionaryReader reader,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
 
-            if (reader.IsStartElement(DictionaryManager.SamlDictionary.AudienceRestrictionCondition, DictionaryManager.SamlDictionary.Namespace))
+            if (
+                reader.IsStartElement(
+                    DictionaryManager.SamlDictionary.AudienceRestrictionCondition,
+                    DictionaryManager.SamlDictionary.Namespace
+                )
+            )
             {
-                SamlAudienceRestrictionCondition audienceRestriction = new SamlAudienceRestrictionCondition();
-                audienceRestriction.ReadXml(reader, this, keyInfoSerializer, outOfBandTokenResolver);
+                SamlAudienceRestrictionCondition audienceRestriction =
+                    new SamlAudienceRestrictionCondition();
+                audienceRestriction.ReadXml(
+                    reader,
+                    this,
+                    keyInfoSerializer,
+                    outOfBandTokenResolver
+                );
                 return audienceRestriction;
             }
-            else if (reader.IsStartElement(DictionaryManager.SamlDictionary.DoNotCacheCondition, DictionaryManager.SamlDictionary.Namespace))
+            else if (
+                reader.IsStartElement(
+                    DictionaryManager.SamlDictionary.DoNotCacheCondition,
+                    DictionaryManager.SamlDictionary.Namespace
+                )
+            )
             {
                 SamlDoNotCacheCondition doNotCacheCondition = new SamlDoNotCacheCondition();
-                doNotCacheCondition.ReadXml(reader, this, keyInfoSerializer, outOfBandTokenResolver);
+                doNotCacheCondition.ReadXml(
+                    reader,
+                    this,
+                    keyInfoSerializer,
+                    outOfBandTokenResolver
+                );
                 return doNotCacheCondition;
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
+                    )
+                );
         }
 
-        public virtual SamlConditions LoadConditions(XmlDictionaryReader reader, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual SamlConditions LoadConditions(
+            XmlDictionaryReader reader,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
@@ -116,7 +167,11 @@ namespace System.IdentityModel.Tokens
             return conditions;
         }
 
-        public virtual SamlAdvice LoadAdvice(XmlDictionaryReader reader, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual SamlAdvice LoadAdvice(
+            XmlDictionaryReader reader,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
@@ -127,34 +182,67 @@ namespace System.IdentityModel.Tokens
             return advice;
         }
 
-        public virtual SamlStatement LoadStatement(XmlDictionaryReader reader, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual SamlStatement LoadStatement(
+            XmlDictionaryReader reader,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
 
-            if (reader.IsStartElement(DictionaryManager.SamlDictionary.AuthenticationStatement, DictionaryManager.SamlDictionary.Namespace))
+            if (
+                reader.IsStartElement(
+                    DictionaryManager.SamlDictionary.AuthenticationStatement,
+                    DictionaryManager.SamlDictionary.Namespace
+                )
+            )
             {
                 SamlAuthenticationStatement authStatement = new SamlAuthenticationStatement();
                 authStatement.ReadXml(reader, this, keyInfoSerializer, outOfBandTokenResolver);
                 return authStatement;
             }
-            else if (reader.IsStartElement(DictionaryManager.SamlDictionary.AttributeStatement, DictionaryManager.SamlDictionary.Namespace))
+            else if (
+                reader.IsStartElement(
+                    DictionaryManager.SamlDictionary.AttributeStatement,
+                    DictionaryManager.SamlDictionary.Namespace
+                )
+            )
             {
                 SamlAttributeStatement attrStatement = new SamlAttributeStatement();
                 attrStatement.ReadXml(reader, this, keyInfoSerializer, outOfBandTokenResolver);
                 return attrStatement;
             }
-            else if (reader.IsStartElement(DictionaryManager.SamlDictionary.AuthorizationDecisionStatement, DictionaryManager.SamlDictionary.Namespace))
+            else if (
+                reader.IsStartElement(
+                    DictionaryManager.SamlDictionary.AuthorizationDecisionStatement,
+                    DictionaryManager.SamlDictionary.Namespace
+                )
+            )
             {
-                SamlAuthorizationDecisionStatement authDecisionStatement = new SamlAuthorizationDecisionStatement();
-                authDecisionStatement.ReadXml(reader, this, keyInfoSerializer, outOfBandTokenResolver);
+                SamlAuthorizationDecisionStatement authDecisionStatement =
+                    new SamlAuthorizationDecisionStatement();
+                authDecisionStatement.ReadXml(
+                    reader,
+                    this,
+                    keyInfoSerializer,
+                    outOfBandTokenResolver
+                );
                 return authDecisionStatement;
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.SAMLUnableToLoadUnknownElement, reader.LocalName)
+                    )
+                );
         }
 
-        public virtual SamlAttribute LoadAttribute(XmlDictionaryReader reader, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public virtual SamlAttribute LoadAttribute(
+            XmlDictionaryReader reader,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             // We will load all attributes as string values.
             SamlAttribute attribute = new SamlAttribute();
@@ -163,25 +251,41 @@ namespace System.IdentityModel.Tokens
             return attribute;
         }
 
-
         // Helper metods to read and write SecurityKeyIdentifiers.
-        internal static SecurityKeyIdentifier ReadSecurityKeyIdentifier(XmlReader reader, SecurityTokenSerializer tokenSerializer)
+        internal static SecurityKeyIdentifier ReadSecurityKeyIdentifier(
+            XmlReader reader,
+            SecurityTokenSerializer tokenSerializer
+        )
         {
             if (tokenSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenSerializer", SR.GetString(SR.SamlSerializerRequiresExternalSerializers));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokenSerializer",
+                    SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
+                );
 
             if (tokenSerializer.CanReadKeyIdentifier(reader))
             {
                 return tokenSerializer.ReadKeyIdentifier(reader);
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SamlSerializerUnableToReadSecurityKeyIdentifier)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.SamlSerializerUnableToReadSecurityKeyIdentifier)
+                )
+            );
         }
 
-        internal static void WriteSecurityKeyIdentifier(XmlWriter writer, SecurityKeyIdentifier ski, SecurityTokenSerializer tokenSerializer)
+        internal static void WriteSecurityKeyIdentifier(
+            XmlWriter writer,
+            SecurityKeyIdentifier ski,
+            SecurityTokenSerializer tokenSerializer
+        )
         {
             if (tokenSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenSerializer", SR.GetString(SR.SamlSerializerRequiresExternalSerializers));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokenSerializer",
+                    SR.GetString(SR.SamlSerializerRequiresExternalSerializers)
+                );
 
             bool keyWritten = false;
             if (tokenSerializer.CanWriteKeyIdentifier(ski))
@@ -191,10 +295,20 @@ namespace System.IdentityModel.Tokens
             }
 
             if (!keyWritten)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SamlSerializerUnableToWriteSecurityKeyIdentifier, ski.ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SamlSerializerUnableToWriteSecurityKeyIdentifier,
+                            ski.ToString()
+                        )
+                    )
+                );
         }
 
-        internal static SecurityKey ResolveSecurityKey(SecurityKeyIdentifier ski, SecurityTokenResolver tokenResolver)
+        internal static SecurityKey ResolveSecurityKey(
+            SecurityKeyIdentifier ski,
+            SecurityTokenResolver tokenResolver
+        )
         {
             if (ski == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("ski");
@@ -215,7 +329,10 @@ namespace System.IdentityModel.Tokens
             return null;
         }
 
-        internal static SecurityToken ResolveSecurityToken(SecurityKeyIdentifier ski, SecurityTokenResolver tokenResolver)
+        internal static SecurityToken ResolveSecurityToken(
+            SecurityKeyIdentifier ski,
+            SecurityTokenResolver tokenResolver
+        )
         {
             SecurityToken token = null;
 
@@ -237,12 +354,12 @@ namespace System.IdentityModel.Tokens
                 // Check if this is a X509RawDataKeyIdentifier Clause.
                 X509RawDataKeyIdentifierClause rawDataKeyIdentifierClause;
                 if (ski.TryFind<X509RawDataKeyIdentifierClause>(out rawDataKeyIdentifierClause))
-                    token = new X509SecurityToken(new X509Certificate2(rawDataKeyIdentifierClause.GetX509RawData()));
+                    token = new X509SecurityToken(
+                        new X509Certificate2(rawDataKeyIdentifierClause.GetX509RawData())
+                    );
             }
 
             return token;
         }
-
     }
-
 }

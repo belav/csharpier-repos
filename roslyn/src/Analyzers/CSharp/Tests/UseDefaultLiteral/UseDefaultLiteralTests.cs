@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseDefaultLiteralDiagnosticAnalyzer,
-        CSharpUseDefaultLiteralCodeFixProvider>;
+        CSharpUseDefaultLiteralCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseDefaultLiteral)]
     public class UseDefaultLiteralTests
@@ -35,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7
+                LanguageVersion = LanguageVersion.CSharp7,
             }.RunAsync();
         }
 
@@ -60,7 +61,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -87,7 +88,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -114,7 +115,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -135,7 +136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -166,7 +167,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -189,7 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -216,7 +217,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -237,7 +238,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -258,7 +259,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -289,7 +290,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         void Bar(string s) { }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -313,7 +314,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -342,7 +343,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                     """,
                 LanguageVersion = LanguageVersion.CSharp7_1,
                 DiagnosticSelector = d => d[0],
-                CodeFixTestBehaviors = Testing.CodeFixTestBehaviors.FixOne | Testing.CodeFixTestBehaviors.SkipFixAllCheck
+                CodeFixTestBehaviors =
+                    Testing.CodeFixTestBehaviors.FixOne
+                    | Testing.CodeFixTestBehaviors.SkipFixAllCheck,
             }.RunAsync();
         }
 
@@ -371,7 +374,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                     """,
                 LanguageVersion = LanguageVersion.CSharp7_1,
                 DiagnosticSelector = d => d[1],
-                CodeFixTestBehaviors = Testing.CodeFixTestBehaviors.FixOne | Testing.CodeFixTestBehaviors.SkipFixAllCheck
+                CodeFixTestBehaviors =
+                    Testing.CodeFixTestBehaviors.FixOne
+                    | Testing.CodeFixTestBehaviors.SkipFixAllCheck,
             }.RunAsync();
         }
 
@@ -400,7 +405,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -427,7 +432,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -456,7 +461,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -483,7 +488,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -510,7 +515,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -543,7 +548,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         public new bool Equals(S s) => true;
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -567,7 +572,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -591,7 +596,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -624,7 +629,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -648,7 +653,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -672,7 +677,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -705,7 +710,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -738,7 +743,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -759,7 +764,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -780,7 +785,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -807,7 +812,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDefaultLiteral
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
     }

@@ -20,35 +20,60 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
 {
 #if !CODE_STYLE // Not exported in CodeStyle layer: https://github.com/dotnet/roslyn/issues/47942
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryPragmaSuppressions), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.RemoveUnnecessaryPragmaSuppressions
+        ),
+        Shared
+    ]
 #endif
-    internal sealed class RemoveUnnecessaryInlineSuppressionsCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal sealed class RemoveUnnecessaryInlineSuppressionsCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public RemoveUnnecessaryInlineSuppressionsCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public RemoveUnnecessaryInlineSuppressionsCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetRequiredSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            var root = await context
+                .Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
             foreach (var diagnostic in context.Diagnostics)
             {
                 // Defensive check that we are operating on the diagnostic on a pragma.
-                if (root.FindNode(diagnostic.Location.SourceSpan) is { } node && syntaxFacts.IsAttribute(node) ||
-                    root.FindTrivia(diagnostic.Location.SourceSpan.Start).HasStructure)
+                if (
+                    root.FindNode(diagnostic.Location.SourceSpan) is { } node
+                        && syntaxFacts.IsAttribute(node)
+                    || root.FindTrivia(diagnostic.Location.SourceSpan.Start).HasStructure
+                )
                 {
-                    RegisterCodeFix(context, AnalyzersResources.Remove_unnecessary_suppression, nameof(AnalyzersResources.Remove_unnecessary_suppression));
+                    RegisterCodeFix(
+                        context,
+                        AnalyzersResources.Remove_unnecessary_suppression,
+                        nameof(AnalyzersResources.Remove_unnecessary_suppression)
+                    );
                 }
             }
         }
 
-        protected override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        protected override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             // We need to track unique set of processed nodes when removing the nodes.
             // This is because we generate an unnecessary pragma suppression diagnostic at both the pragma disable and matching pragma restore location
@@ -73,12 +98,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 Location location,
                 SyntaxEditor editor,
                 HashSet<SyntaxNode> processedNodes,
-                ISyntaxFacts syntaxFacts)
+                ISyntaxFacts syntaxFacts
+            )
             {
                 SyntaxNode node;
                 var options = SyntaxGenerator.DefaultRemoveOptions;
-                if (editor.OriginalRoot.FindNode(location.SourceSpan) is { } attribute &&
-                    syntaxFacts.IsAttribute(attribute))
+                if (
+                    editor.OriginalRoot.FindNode(location.SourceSpan) is { } attribute
+                    && syntaxFacts.IsAttribute(attribute)
+                )
                 {
                     node = attribute;
                     // Keep leading trivia for attributes as we don't want to remove doc comments, or anything else
@@ -86,7 +114,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 }
                 else
                 {
-                    node = editor.OriginalRoot.FindTrivia(location.SourceSpan.Start).GetStructure()!;
+                    node = editor
+                        .OriginalRoot.FindTrivia(location.SourceSpan.Start)
+                        .GetStructure()!;
                 }
 
                 if (processedNodes.Add(node))

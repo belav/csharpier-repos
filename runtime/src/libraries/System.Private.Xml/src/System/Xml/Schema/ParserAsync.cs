@@ -27,30 +27,56 @@ namespace System.Xml.Schema
             {
                 _isProcessNamespaces = false;
             }
-            while (reader.NodeType != XmlNodeType.Element && await reader.ReadAsync().ConfigureAwait(false)) { }
+            while (
+                reader.NodeType != XmlNodeType.Element
+                && await reader.ReadAsync().ConfigureAwait(false)
+            ) { }
 
             _markupDepth = int.MaxValue;
             _schemaXmlDepth = reader.Depth;
-            SchemaType rootType = _schemaNames.SchemaTypeFromRoot(reader.LocalName, reader.NamespaceURI);
+            SchemaType rootType = _schemaNames.SchemaTypeFromRoot(
+                reader.LocalName,
+                reader.NamespaceURI
+            );
 
             string? code;
             if (!CheckSchemaRoot(rootType, out code))
             {
-                throw new XmlSchemaException(code, reader.BaseURI, _positionInfo.LineNumber, _positionInfo.LinePosition);
+                throw new XmlSchemaException(
+                    code,
+                    reader.BaseURI,
+                    _positionInfo.LineNumber,
+                    _positionInfo.LinePosition
+                );
             }
 
             if (_schemaType == SchemaType.XSD)
             {
                 _schema = new XmlSchema();
                 _schema.BaseUri = new Uri(reader.BaseURI!, UriKind.RelativeOrAbsolute);
-                _builder = new XsdBuilder(reader, _namespaceManager, _schema, _nameTable, _schemaNames, _eventHandler);
+                _builder = new XsdBuilder(
+                    reader,
+                    _namespaceManager,
+                    _schema,
+                    _nameTable,
+                    _schemaNames,
+                    _eventHandler
+                );
             }
             else
             {
                 Debug.Assert(_schemaType == SchemaType.XDR);
                 _xdrSchema = new SchemaInfo();
                 _xdrSchema.SchemaType = SchemaType.XDR;
-                _builder = new XdrBuilder(reader, _namespaceManager, _xdrSchema, targetNamespace, _nameTable, _schemaNames, _eventHandler);
+                _builder = new XdrBuilder(
+                    reader,
+                    _namespaceManager,
+                    _xdrSchema,
+                    targetNamespace,
+                    _nameTable,
+                    _schemaNames,
+                    _eventHandler
+                );
                 ((XdrBuilder)_builder).XmlResolver = _xmlResolver;
             }
         }

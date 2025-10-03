@@ -11,13 +11,24 @@ namespace System.ComponentModel.Design.Tests
     {
         public static IEnumerable<object[]> Ctor_TestData()
         {
-            yield return new object[] { "component", new MockPropertyDescriptor(), "oldValue", "newValue" };
+            yield return new object[]
+            {
+                "component",
+                new MockPropertyDescriptor(),
+                "oldValue",
+                "newValue",
+            };
             yield return new object[] { null, null, null, null };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TestData))]
-        public void Ctor(object component, MemberDescriptor member, object oldValue, object newValue)
+        public void Ctor(
+            object component,
+            MemberDescriptor member,
+            object oldValue,
+            object newValue
+        )
         {
             var eventArgs = new ComponentChangedEventArgs(component, member, oldValue, newValue);
             Assert.Same(component, eventArgs.Component);

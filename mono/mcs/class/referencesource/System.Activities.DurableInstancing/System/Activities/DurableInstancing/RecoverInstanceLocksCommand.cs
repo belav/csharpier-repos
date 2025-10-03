@@ -8,9 +8,11 @@ namespace System.Activities.DurableInstancing
 
     sealed class RecoverInstanceLocksCommand : InstancePersistenceCommand
     {
-        public RecoverInstanceLocksCommand() :
-            base(SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName("RecoverInstanceLocks"))
-        {
-        }
+        public RecoverInstanceLocksCommand()
+            : base(
+                SqlWorkflowInstanceStoreConstants.DurableInstancingNamespace.GetName(
+                    "RecoverInstanceLocks"
+                )
+            ) { }
     }
 }

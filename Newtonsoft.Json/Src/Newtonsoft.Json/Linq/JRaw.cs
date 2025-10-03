@@ -38,23 +38,17 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="other">A <see cref="JRaw"/> object to copy from.</param>
         public JRaw(JRaw other)
-            : base(other, settings: null)
-        {
-        }
+            : base(other, settings: null) { }
 
         internal JRaw(JRaw other, JsonCloneSettings? settings)
-            : base(other, settings)
-        {
-        }
+            : base(other, settings) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JRaw"/> class.
         /// </summary>
         /// <param name="rawJson">The raw json.</param>
         public JRaw(object? rawJson)
-            : base(rawJson, JTokenType.Raw)
-        {
-        }
+            : base(rawJson, JTokenType.Raw) { }
 
         /// <summary>
         /// Creates an instance of <see cref="JRaw"/> with the content of the reader's current token.

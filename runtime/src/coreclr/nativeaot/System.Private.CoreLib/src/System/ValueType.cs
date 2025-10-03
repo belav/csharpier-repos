@@ -13,9 +13,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace System
@@ -23,7 +21,9 @@ namespace System
     // CONTRACT with Runtime
     // Place holder type for type hierarchy, Compiler/Runtime requires this class
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract class ValueType
     {
         public override string? ToString()
@@ -74,8 +74,14 @@ namespace System
                     int fieldOffset = __GetFieldHelper(i, out MethodTable* fieldType);
 
                     // Fetch the value of the field on both types
-                    object thisField = RuntimeImports.RhBoxAny(ref Unsafe.Add(ref thisRawData, fieldOffset), fieldType);
-                    object thatField = RuntimeImports.RhBoxAny(ref Unsafe.Add(ref thatRawData, fieldOffset), fieldType);
+                    object thisField = RuntimeImports.RhBoxAny(
+                        ref Unsafe.Add(ref thisRawData, fieldOffset),
+                        fieldType
+                    );
+                    object thatField = RuntimeImports.RhBoxAny(
+                        ref Unsafe.Add(ref thatRawData, fieldOffset),
+                        fieldType
+                    );
 
                     // Compare the fields
                     if (thisField == null)

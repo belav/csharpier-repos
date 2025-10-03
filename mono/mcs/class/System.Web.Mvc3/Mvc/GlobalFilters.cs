@@ -1,12 +1,12 @@
-﻿namespace System.Web.Mvc {
-    public static class GlobalFilters {
-        static GlobalFilters() {
+﻿namespace System.Web.Mvc
+{
+    public static class GlobalFilters
+    {
+        static GlobalFilters()
+        {
             Filters = new GlobalFilterCollection();
         }
 
-        public static GlobalFilterCollection Filters {
-            get;
-            private set;
-        }
+        public static GlobalFilterCollection Filters { get; private set; }
     }
 }

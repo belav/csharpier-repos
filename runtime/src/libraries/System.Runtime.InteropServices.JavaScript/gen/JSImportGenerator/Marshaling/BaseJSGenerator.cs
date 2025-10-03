@@ -22,18 +22,37 @@ namespace Microsoft.Interop.JavaScript
         }
 
         public ManagedTypeInfo AsNativeType(TypePositionInfo info) => _inner.AsNativeType(info);
-        public virtual bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => _inner.UsesNativeIdentifier(info, context);
-        public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) => _inner.GetNativeSignatureBehavior(info);
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context) => _inner.GetValueBoundaryBehavior(info, context);
-        public ByValueMarshalKindSupport SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, TypePositionInfo info, StubCodeContext context, out GeneratorDiagnostic? diagnostic)
-            => _inner.SupportsByValueMarshalKind(marshalKind, info, context, out diagnostic);
 
-        public virtual IEnumerable<ExpressionSyntax> GenerateBind(TypePositionInfo info, StubCodeContext context)
+        public virtual bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
+            _inner.UsesNativeIdentifier(info, context);
+
+        public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) =>
+            _inner.GetNativeSignatureBehavior(info);
+
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        ) => _inner.GetValueBoundaryBehavior(info, context);
+
+        public ByValueMarshalKindSupport SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            TypePositionInfo info,
+            StubCodeContext context,
+            out GeneratorDiagnostic? diagnostic
+        ) => _inner.SupportsByValueMarshalKind(marshalKind, info, context, out diagnostic);
+
+        public virtual IEnumerable<ExpressionSyntax> GenerateBind(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             yield return MarshalerTypeName(Type);
         }
 
-        public virtual IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
+        public virtual IEnumerable<StatementSyntax> Generate(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             string argName = context.GetAdditionalIdentifier(info, "js_arg");
 
@@ -41,11 +60,42 @@ namespace Microsoft.Interop.JavaScript
             {
                 if (!info.IsManagedReturnPosition)
                 {
-                    yield return LocalDeclarationStatement(VariableDeclaration(RefType(IdentifierName(Constants.JSMarshalerArgumentGlobal)))
-                    .WithVariables(SingletonSeparatedList(VariableDeclarator(Identifier(argName))
-                    .WithInitializer(EqualsValueClause(RefExpression(ElementAccessExpression(IdentifierName(Constants.ArgumentsBuffer))
-                    .WithArgumentList(BracketedArgumentList(SingletonSeparatedList(
-                        Argument(LiteralExpression(SyntaxKind.NumericLiteralExpression, Literal(info.ManagedIndex + 2))))))))))));
+                    yield return LocalDeclarationStatement(
+                        VariableDeclaration(
+                                RefType(IdentifierName(Constants.JSMarshalerArgumentGlobal))
+                            )
+                            .WithVariables(
+                                SingletonSeparatedList(
+                                    VariableDeclarator(Identifier(argName))
+                                        .WithInitializer(
+                                            EqualsValueClause(
+                                                RefExpression(
+                                                    ElementAccessExpression(
+                                                            IdentifierName(
+                                                                Constants.ArgumentsBuffer
+                                                            )
+                                                        )
+                                                        .WithArgumentList(
+                                                            BracketedArgumentList(
+                                                                SingletonSeparatedList(
+                                                                    Argument(
+                                                                        LiteralExpression(
+                                                                            SyntaxKind.NumericLiteralExpression,
+                                                                            Literal(
+                                                                                info.ManagedIndex
+                                                                                    + 2
+                                                                            )
+                                                                        )
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                )
+                                            )
+                                        )
+                                )
+                            )
+                    );
                 }
             }
 

@@ -38,9 +38,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                     default:
                         Debug.Assert(
-                            Type.FundamentalType == FUNDTYPE.FT_I1 || Type.FundamentalType == FUNDTYPE.FT_I2
-                            || Type.FundamentalType == FUNDTYPE.FT_I4 || Type.FundamentalType == FUNDTYPE.FT_U1
-                            || Type.FundamentalType == FUNDTYPE.FT_U2, "Bad fundType in getI64Value");
+                            Type.FundamentalType == FUNDTYPE.FT_I1
+                                || Type.FundamentalType == FUNDTYPE.FT_I2
+                                || Type.FundamentalType == FUNDTYPE.FT_I4
+                                || Type.FundamentalType == FUNDTYPE.FT_U1
+                                || Type.FundamentalType == FUNDTYPE.FT_U2,
+                            "Bad fundType in getI64Value"
+                        );
                         return Val.Int32Val;
                 }
             }

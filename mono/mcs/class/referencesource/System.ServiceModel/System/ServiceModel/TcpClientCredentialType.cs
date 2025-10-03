@@ -9,16 +9,18 @@ namespace System.ServiceModel
     {
         None,
         Windows,
-        Certificate
+        Certificate,
     }
 
     static class TcpClientCredentialTypeHelper
     {
         internal static bool IsDefined(TcpClientCredentialType value)
         {
-            return (value == TcpClientCredentialType.None ||
-                value == TcpClientCredentialType.Windows ||
-                value == TcpClientCredentialType.Certificate);
+            return (
+                value == TcpClientCredentialType.None
+                || value == TcpClientCredentialType.Windows
+                || value == TcpClientCredentialType.Certificate
+            );
         }
     }
 }

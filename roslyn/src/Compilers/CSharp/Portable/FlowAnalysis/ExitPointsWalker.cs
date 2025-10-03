@@ -20,7 +20,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly ArrayBuilder<LabelSymbol> _labelsInside;
         private readonly ArrayBuilder<StatementSyntax> _branchesOutOf;
 
-        private ExitPointsWalker(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
+        private ExitPointsWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        )
             : base(compilation, member, node, firstInRegion, lastInRegion)
         {
             _labelsInside = new ArrayBuilder<LabelSymbol>();
@@ -38,9 +44,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             base.Free();
         }
 
-        internal static ImmutableArray<StatementSyntax> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
+        internal static ImmutableArray<StatementSyntax> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        )
         {
-            var walker = new ExitPointsWalker(compilation, member, node, firstInRegion, lastInRegion);
+            var walker = new ExitPointsWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion
+            );
             try
             {
                 return walker.Analyze();
@@ -69,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode VisitLabelStatement(BoundLabelStatement node)
         {
-            if (IsInside) _labelsInside.Add(node.Label);
+            if (IsInside)
+                _labelsInside.Add(node.Label);
             return base.VisitLabelStatement(node);
         }
 
@@ -121,17 +140,21 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             foreach (var pending in PendingBranches.AsEnumerable())
             {
-                if (pending.Branch == null || !RegionContains(pending.Branch.Syntax.Span)) continue;
+                if (pending.Branch == null || !RegionContains(pending.Branch.Syntax.Span))
+                    continue;
                 switch (pending.Branch.Kind)
                 {
                     case BoundKind.GotoStatement:
-                        if (_labelsInside.Contains(((BoundGotoStatement)pending.Branch).Label)) continue;
+                        if (_labelsInside.Contains(((BoundGotoStatement)pending.Branch).Label))
+                            continue;
                         break;
                     case BoundKind.BreakStatement:
-                        if (_labelsInside.Contains(((BoundBreakStatement)pending.Branch).Label)) continue;
+                        if (_labelsInside.Contains(((BoundBreakStatement)pending.Branch).Label))
+                            continue;
                         break;
                     case BoundKind.ContinueStatement:
-                        if (_labelsInside.Contains(((BoundContinueStatement)pending.Branch).Label)) continue;
+                        if (_labelsInside.Contains(((BoundContinueStatement)pending.Branch).Label))
+                            continue;
                         break;
                     case BoundKind.YieldBreakStatement:
                     case BoundKind.ReturnStatement:
@@ -140,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.YieldReturnStatement:
                     case BoundKind.AwaitExpression:
                     case BoundKind.UsingStatement:
-                    case BoundKind.ForEachStatement when ((BoundForEachStatement)pending.Branch).AwaitOpt != null:
+                    case BoundKind.ForEachStatement
+                        when ((BoundForEachStatement)pending.Branch).AwaitOpt != null:
                         // We don't do anything with yield return statements, async using statement, async foreach statement, or await expressions;
                         // they are treated as if they are not jumps.
                         continue;

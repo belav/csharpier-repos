@@ -8,6 +8,6 @@ namespace ILCompiler
         Nothing,
         All,
         Fields,
-        Methods
+        Methods,
     }
 }

@@ -4,18 +4,32 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class PermissionSetAttribute : CodeAccessSecurityAttribute
     {
-        public PermissionSetAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public PermissionSetAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
+
         public string File { get; set; }
         public string Hex { get; set; }
         public string Name { get; set; }
         public bool UnicodeEncoded { get; set; }
         public string XML { get; set; }
-        public override IPermission CreatePermission() { return default(IPermission); }
-        public PermissionSet CreatePermissionSet() { return default(PermissionSet); }
+
+        public override IPermission CreatePermission()
+        {
+            return default(IPermission);
+        }
+
+        public PermissionSet CreatePermissionSet()
+        {
+            return default(PermissionSet);
+        }
     }
 }

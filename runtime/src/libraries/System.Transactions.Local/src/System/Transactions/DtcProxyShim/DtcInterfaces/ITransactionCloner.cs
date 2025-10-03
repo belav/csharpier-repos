@@ -7,20 +7,24 @@ using System.Runtime.InteropServices.Marshalling;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms684377(v=vs.85)
-[GeneratedComInterface, Guid("02656950-2152-11d0-944C-00A0C905416E"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    GeneratedComInterface,
+    Guid("02656950-2152-11d0-944C-00A0C905416E"),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal partial interface ITransactionCloner
 {
-    void Commit(
-        [MarshalAs(UnmanagedType.Bool)] bool fRetainingt,
-        OletxXacttc grfTC,
-        uint grfRM);
+    void Commit([MarshalAs(UnmanagedType.Bool)] bool fRetainingt, OletxXacttc grfTC, uint grfRM);
 
     void Abort(
         IntPtr reason,
         [MarshalAs(UnmanagedType.Bool)] bool retaining,
-        [MarshalAs(UnmanagedType.Bool)] bool async);
+        [MarshalAs(UnmanagedType.Bool)] bool async
+    );
 
     void GetTransactionInfo(out OletxXactTransInfo xactInfo);
 
-    void CloneWithCommitDisabled([MarshalAs(UnmanagedType.Interface)] out ITransaction ppITransaction);
+    void CloneWithCommitDisabled(
+        [MarshalAs(UnmanagedType.Interface)] out ITransaction ppITransaction
+    );
 }

@@ -21,50 +21,29 @@ namespace System.IdentityModel.Configuration
 
         public override ConfigurationValidatorBase ValidatorInstance
         {
-            get
-            {
-                return new TimeSpanOrInfiniteValidator(MinValue, MaxValue);
-            }
+            get { return new TimeSpanOrInfiniteValidator(MinValue, MaxValue); }
         }
 
         public TimeSpan MinValue
         {
-            get
-            {
-                return this.innerValidatorAttribute.MinValue;
-            }
+            get { return this.innerValidatorAttribute.MinValue; }
         }
 
         public string MinValueString
         {
-            get
-            {
-                return this.innerValidatorAttribute.MinValueString;
-            }
-            set
-            {
-                this.innerValidatorAttribute.MinValueString = value;
-            }
+            get { return this.innerValidatorAttribute.MinValueString; }
+            set { this.innerValidatorAttribute.MinValueString = value; }
         }
 
         public TimeSpan MaxValue
         {
-            get
-            {
-                return this.innerValidatorAttribute.MaxValue;
-            }
+            get { return this.innerValidatorAttribute.MaxValue; }
         }
 
         public string MaxValueString
         {
-            get
-            {
-                return this.innerValidatorAttribute.MaxValueString;
-            }
-            set
-            {
-                this.innerValidatorAttribute.MaxValueString = value;
-            }
+            get { return this.innerValidatorAttribute.MaxValueString; }
+            set { this.innerValidatorAttribute.MaxValueString = value; }
         }
     }
 }

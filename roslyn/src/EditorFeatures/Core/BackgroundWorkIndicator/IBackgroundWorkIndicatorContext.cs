@@ -9,7 +9,7 @@ namespace Microsoft.CodeAnalysis.Editor.BackgroundWorkIndicator;
 internal interface IBackgroundWorkIndicatorContext : IUIThreadOperationContext
 {
     /// <summary>
-    /// Whether or not this context should cancel work if a navigation happens. Clients that use this indicator can 
+    /// Whether or not this context should cancel work if a navigation happens. Clients that use this indicator can
     /// have this behavior set to true (so that they cancel if the user edits themselves), but then set this to
     /// false right before they edit themselves so that they do not self-cancel.
     /// </summary>

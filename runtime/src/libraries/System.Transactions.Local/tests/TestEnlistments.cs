@@ -10,9 +10,26 @@ using Xunit;
 
 namespace System.Transactions.Tests
 {
-    public enum Phase1Vote { Prepared, ForceRollback, Done };
-    public enum SinglePhaseVote { Committed, Aborted, InDoubt };
-    public enum EnlistmentOutcome { Committed, Aborted, InDoubt };
+    public enum Phase1Vote
+    {
+        Prepared,
+        ForceRollback,
+        Done,
+    };
+
+    public enum SinglePhaseVote
+    {
+        Committed,
+        Aborted,
+        InDoubt,
+    };
+
+    public enum EnlistmentOutcome
+    {
+        Committed,
+        Aborted,
+        InDoubt,
+    };
 
     public class TestSinglePhaseEnlistment : ISinglePhaseNotification
     {
@@ -20,7 +37,11 @@ namespace System.Transactions.Tests
         SinglePhaseVote _singlePhaseVote;
         EnlistmentOutcome _expectedOutcome;
 
-        public TestSinglePhaseEnlistment(Phase1Vote phase1Vote, SinglePhaseVote singlePhaseVote, EnlistmentOutcome expectedOutcome)
+        public TestSinglePhaseEnlistment(
+            Phase1Vote phase1Vote,
+            SinglePhaseVote singlePhaseVote,
+            EnlistmentOutcome expectedOutcome
+        )
         {
             _phase1Vote = phase1Vote;
             _singlePhaseVote = singlePhaseVote;
@@ -32,20 +53,20 @@ namespace System.Transactions.Tests
             switch (_singlePhaseVote)
             {
                 case SinglePhaseVote.Committed:
-                    {
-                        singlePhaseEnlistment.Committed();
-                        break;
-                    }
+                {
+                    singlePhaseEnlistment.Committed();
+                    break;
+                }
                 case SinglePhaseVote.Aborted:
-                    {
-                        singlePhaseEnlistment.Aborted();
-                        break;
-                    }
+                {
+                    singlePhaseEnlistment.Aborted();
+                    break;
+                }
                 case SinglePhaseVote.InDoubt:
-                    {
-                        singlePhaseEnlistment.InDoubt();
-                        break;
-                    }
+                {
+                    singlePhaseEnlistment.InDoubt();
+                    break;
+                }
             }
         }
 
@@ -54,20 +75,20 @@ namespace System.Transactions.Tests
             switch (_phase1Vote)
             {
                 case Phase1Vote.Prepared:
-                    {
-                        preparingEnlistment.Prepared();
-                        break;
-                    }
+                {
+                    preparingEnlistment.Prepared();
+                    break;
+                }
                 case Phase1Vote.ForceRollback:
-                    {
-                        preparingEnlistment.ForceRollback();
-                        break;
-                    }
+                {
+                    preparingEnlistment.ForceRollback();
+                    break;
+                }
                 case Phase1Vote.Done:
-                    {
-                        preparingEnlistment.Done();
-                        break;
-                    }
+                {
+                    preparingEnlistment.Done();
+                    break;
+                }
             }
         }
 
@@ -104,7 +125,8 @@ namespace System.Transactions.Tests
             EnlistmentOutcome expectedOutcome,
             bool volatileEnlistDuringPrepare = false,
             bool expectEnlistToSucceed = true,
-            AutoResetEvent? outcomeReceived = null)
+            AutoResetEvent? outcomeReceived = null
+        )
         {
             _phase1Vote = phase1Vote;
             _expectedOutcome = expectedOutcome;
@@ -124,35 +146,35 @@ namespace System.Transactions.Tests
             switch (_phase1Vote)
             {
                 case Phase1Vote.Prepared:
+                {
+                    if (_volatileEnlistDuringPrepare)
                     {
-                        if (_volatileEnlistDuringPrepare)
+                        TestEnlistment newVol = new TestEnlistment(_phase1Vote, _expectedOutcome);
+                        try
                         {
-                            TestEnlistment newVol = new TestEnlistment(_phase1Vote, _expectedOutcome);
-                            try
-                            {
-                                _txToEnlist.EnlistVolatile(newVol, EnlistmentOptions.None);
-                                Assert.True(_expectEnlistToSucceed);
-                            }
-                            catch (Exception)
-                            {
-                                Assert.False(_expectEnlistToSucceed);
-                            }
+                            _txToEnlist.EnlistVolatile(newVol, EnlistmentOptions.None);
+                            Assert.True(_expectEnlistToSucceed);
                         }
-                        preparingEnlistment.Prepared();
-                        break;
+                        catch (Exception)
+                        {
+                            Assert.False(_expectEnlistToSucceed);
+                        }
                     }
+                    preparingEnlistment.Prepared();
+                    break;
+                }
                 case Phase1Vote.ForceRollback:
-                    {
-                        _outcomeReceived?.Set();
-                        preparingEnlistment.ForceRollback();
-                        break;
-                    }
+                {
+                    _outcomeReceived?.Set();
+                    preparingEnlistment.ForceRollback();
+                    break;
+                }
                 case Phase1Vote.Done:
-                    {
-                        _outcomeReceived?.Set();
-                        preparingEnlistment.Done();
-                        break;
-                    }
+                {
+                    _outcomeReceived?.Set();
+                    preparingEnlistment.Done();
+                    break;
+                }
             }
         }
 
@@ -190,15 +212,18 @@ namespace System.Transactions.Tests
         public bool InitializedCalled { get; private set; }
         public bool PromoteCalled { get; private set; }
 
-        public TestPromotableSinglePhaseEnlistment(Func<byte[]>? promoteDelegate, EnlistmentOutcome expectedOutcome, AutoResetEvent? outcomeReceived = null)
+        public TestPromotableSinglePhaseEnlistment(
+            Func<byte[]>? promoteDelegate,
+            EnlistmentOutcome expectedOutcome,
+            AutoResetEvent? outcomeReceived = null
+        )
         {
             _promoteDelegate = promoteDelegate;
-           _expectedOutcome = expectedOutcome;
-           _outcomeReceived = outcomeReceived;
+            _expectedOutcome = expectedOutcome;
+            _outcomeReceived = outcomeReceived;
         }
 
-        public void Initialize()
-            => InitializedCalled = true;
+        public void Initialize() => InitializedCalled = true;
 
         public byte[]? Promote()
         {

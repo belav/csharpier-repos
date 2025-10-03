@@ -1,30 +1,32 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
+    using System.CodeDom;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.CodeDom;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Printing;
     using System.IO;
     using System.Reflection;
-    using System.Drawing.Printing;
-    using System.Drawing.Drawing2D;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Compiler;
-    using System.Security.Permissions;
 
     #region Workflow Interfaces
 
     #region Interface IIdentifierCreationService
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IIdentifierCreationService
     {
         void EnsureUniqueIdentifiers(CompositeActivity parentActivity, ICollection childActivities);
@@ -36,16 +38,60 @@ namespace System.Workflow.ComponentModel.Design
     #region Interface IMemberCreationService
 
     //Revisit the functions in this interface for consistency and performance
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IMemberCreationService
     {
-        void CreateField(string className, string fieldName, Type fieldType, Type[] genericParameterTypes, MemberAttributes attributes, CodeSnippetExpression initializationExpression, bool overwriteExisting);
-        void CreateProperty(string className, string propertyName, Type propertyType, AttributeInfo[] attributes, bool emitDependencyProperty, bool isMetaProperty, bool isAttached, Type ownerType, bool isReadOnly);
-        void CreateEvent(string className, string eventName, Type eventType, AttributeInfo[] attributes, bool emitDependencyProperty);
+        void CreateField(
+            string className,
+            string fieldName,
+            Type fieldType,
+            Type[] genericParameterTypes,
+            MemberAttributes attributes,
+            CodeSnippetExpression initializationExpression,
+            bool overwriteExisting
+        );
+        void CreateProperty(
+            string className,
+            string propertyName,
+            Type propertyType,
+            AttributeInfo[] attributes,
+            bool emitDependencyProperty,
+            bool isMetaProperty,
+            bool isAttached,
+            Type ownerType,
+            bool isReadOnly
+        );
+        void CreateEvent(
+            string className,
+            string eventName,
+            Type eventType,
+            AttributeInfo[] attributes,
+            bool emitDependencyProperty
+        );
         void UpdateTypeName(string oldClassName, string newClassName);
         void UpdateBaseType(string className, Type baseType);
-        void UpdateProperty(string className, string oldPropertyName, Type oldPropertyType, string newPropertyName, Type newPropertyType, AttributeInfo[] attributes, bool emitDependencyProperty, bool isMetaProperty);
-        void UpdateEvent(string className, string oldEventName, Type oldEventType, string newEventName, Type newEventType, AttributeInfo[] attributes, bool emitDependencyProperty, bool isMetaProperty);
+        void UpdateProperty(
+            string className,
+            string oldPropertyName,
+            Type oldPropertyType,
+            string newPropertyName,
+            Type newPropertyType,
+            AttributeInfo[] attributes,
+            bool emitDependencyProperty,
+            bool isMetaProperty
+        );
+        void UpdateEvent(
+            string className,
+            string oldEventName,
+            Type oldEventType,
+            string newEventName,
+            Type newEventType,
+            AttributeInfo[] attributes,
+            bool emitDependencyProperty,
+            bool isMetaProperty
+        );
         void RemoveProperty(string className, string propertyName, Type propertyType);
         void RemoveEvent(string className, string eventName, Type eventType);
 
@@ -56,7 +102,9 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Interface IExtendedUIService
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IExtendedUIService
     {
         DialogResult AddWebReference(out Uri url, out Type proxyClass);
@@ -81,11 +129,11 @@ namespace System.Workflow.ComponentModel.Design
 
         //Add assembly reference (including dynamic assembly resolution)
         void AddAssemblyReference(AssemblyName assemblyName);
-
-
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IExtendedUIService2
     {
         //Get current project's target version
@@ -170,15 +218,29 @@ namespace System.Workflow.ComponentModel.Design
     /// EventArgs passed to the ActivityDesigners when drag drop operation is in progress on workflow.
     /// ActivityDesigners can access the information contained to influence the drag drop behavior.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDragEventArgs : DragEventArgs
     {
         private Point snapPoint = Point.Empty;
         private Point dragInitiationPoint = Point.Empty;
         private List<Activity> draggedActivities;
 
-        internal ActivityDragEventArgs(DragEventArgs dragEventArgs, Point dragInitiationPoint, Point point, List<Activity> draggedActivities)
-            : base(dragEventArgs.Data, dragEventArgs.KeyState, point.X, point.Y, dragEventArgs.AllowedEffect, dragEventArgs.Effect)
+        internal ActivityDragEventArgs(
+            DragEventArgs dragEventArgs,
+            Point dragInitiationPoint,
+            Point point,
+            List<Activity> draggedActivities
+        )
+            : base(
+                dragEventArgs.Data,
+                dragEventArgs.KeyState,
+                point.X,
+                point.Y,
+                dragEventArgs.AllowedEffect,
+                dragEventArgs.Effect
+            )
         {
             this.dragInitiationPoint = dragInitiationPoint;
 
@@ -193,27 +255,17 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public ReadOnlyCollection<Activity> Activities
         {
-            get
-            {
-                return this.draggedActivities.AsReadOnly();
-            }
+            get { return this.draggedActivities.AsReadOnly(); }
         }
 
         /// <summary>
-        /// WorkflowView creates drag image for the activities being dragged. 
+        /// WorkflowView creates drag image for the activities being dragged.
         /// ActivityDesigners can choose to snap this image to a drop target to indicate that activities can be dropped at a particular location
         /// </summary>
         public Point DragImageSnapPoint
         {
-            get
-            {
-                return this.snapPoint;
-            }
-
-            set
-            {
-                this.snapPoint = value;
-            }
+            get { return this.snapPoint; }
+            set { this.snapPoint = value; }
         }
 
         /// <summary>
@@ -221,10 +273,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public Point DragInitiationPoint
         {
-            get
-            {
-                return this.dragInitiationPoint;
-            }
+            get { return this.dragInitiationPoint; }
         }
     }
     #endregion
@@ -237,7 +286,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Contains information about the changes made to the activity associated with the designer
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityChangedEventArgs : EventArgs
     {
         private Activity activity;
@@ -245,7 +296,12 @@ namespace System.Workflow.ComponentModel.Design
         private object oldValue;
         private object newValue;
 
-        public ActivityChangedEventArgs(Activity activity, MemberDescriptor member, object oldValue, object newValue)
+        public ActivityChangedEventArgs(
+            Activity activity,
+            MemberDescriptor member,
+            object oldValue,
+            object newValue
+        )
         {
             this.activity = activity;
             this.member = member;
@@ -258,10 +314,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
 
         /// <summary>
@@ -269,10 +322,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public MemberDescriptor Member
         {
-            get
-            {
-                return this.member;
-            }
+            get { return this.member; }
         }
 
         /// <summary>
@@ -280,10 +330,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public object OldValue
         {
-            get
-            {
-                return this.oldValue;
-            }
+            get { return this.oldValue; }
         }
 
         /// <summary>
@@ -291,10 +338,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public object NewValue
         {
-            get
-            {
-                return this.newValue;
-            }
+            get { return this.newValue; }
         }
     }
     #endregion
@@ -303,13 +347,18 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Contains arguments passed to layout functions of ActivityDesigner
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDesignerLayoutEventArgs : EventArgs
     {
         private Graphics graphics;
         private ActivityDesignerTheme designerTheme;
 
-        public ActivityDesignerLayoutEventArgs(Graphics graphics, ActivityDesignerTheme designerTheme)
+        public ActivityDesignerLayoutEventArgs(
+            Graphics graphics,
+            ActivityDesignerTheme designerTheme
+        )
         {
             this.graphics = graphics;
             this.designerTheme = designerTheme;
@@ -320,10 +369,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public AmbientTheme AmbientTheme
         {
-            get
-            {
-                return WorkflowTheme.CurrentTheme.AmbientTheme;
-            }
+            get { return WorkflowTheme.CurrentTheme.AmbientTheme; }
         }
 
         /// <summary>
@@ -331,10 +377,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public ActivityDesignerTheme DesignerTheme
         {
-            get
-            {
-                return this.designerTheme;
-            }
+            get { return this.designerTheme; }
         }
 
         /// <summary>
@@ -342,10 +385,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public Graphics Graphics
         {
-            get
-            {
-                return this.graphics;
-            }
+            get { return this.graphics; }
         }
     }
     #endregion
@@ -354,7 +394,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Contains arguments passed to draw function of ActivityDesigner
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDesignerPaintEventArgs : EventArgs
     {
         private Graphics graphics;
@@ -362,7 +404,12 @@ namespace System.Workflow.ComponentModel.Design
         private Rectangle viewPort;
         private ActivityDesignerTheme designerTheme;
 
-        public ActivityDesignerPaintEventArgs(Graphics graphics, Rectangle clipRectangle, Rectangle viewPort, ActivityDesignerTheme designerTheme)
+        public ActivityDesignerPaintEventArgs(
+            Graphics graphics,
+            Rectangle clipRectangle,
+            Rectangle viewPort,
+            ActivityDesignerTheme designerTheme
+        )
         {
             this.graphics = graphics;
             this.clipRectangle = Rectangle.Inflate(clipRectangle, 1, 1);
@@ -375,10 +422,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public Graphics Graphics
         {
-            get
-            {
-                return this.graphics;
-            }
+            get { return this.graphics; }
         }
 
         /// <summary>
@@ -386,10 +430,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public Rectangle ClipRectangle
         {
-            get
-            {
-                return this.clipRectangle;
-            }
+            get { return this.clipRectangle; }
         }
 
         /// <summary>
@@ -397,10 +438,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public AmbientTheme AmbientTheme
         {
-            get
-            {
-                return WorkflowTheme.CurrentTheme.AmbientTheme;
-            }
+            get { return WorkflowTheme.CurrentTheme.AmbientTheme; }
         }
 
         /// <summary>
@@ -408,24 +446,20 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public ActivityDesignerTheme DesignerTheme
         {
-            get
-            {
-                return this.designerTheme;
-            }
+            get { return this.designerTheme; }
         }
 
         internal Rectangle ViewPort
         {
-            get
-            {
-                return this.viewPort;
-            }
+            get { return this.viewPort; }
         }
     }
     #endregion
 
     #region Class ActivityDesignerResizeEventArgs
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDesignerResizeEventArgs : EventArgs
     {
         private DesignerEdges sizingEdge;
@@ -439,25 +473,21 @@ namespace System.Workflow.ComponentModel.Design
 
         public DesignerEdges SizingEdge
         {
-            get
-            {
-                return this.sizingEdge;
-            }
+            get { return this.sizingEdge; }
         }
 
         public Rectangle Bounds
         {
-            get
-            {
-                return this.newBounds;
-            }
+            get { return this.newBounds; }
         }
     }
     #endregion
 
     #region Enum DesignerEdges
     [Flags]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum DesignerEdges
     {
         None = 0,
@@ -465,16 +495,18 @@ namespace System.Workflow.ComponentModel.Design
         Top = 2,
         Right = 4,
         Bottom = 8,
-        All = 15
+        All = 15,
     }
     #endregion
 
     #region Interface IDesignerGlyphProvider
     /// <summary>
-    /// Allows the user to add custom glyph providers. 
+    /// Allows the user to add custom glyph providers.
     /// Custom glyph providers are called to render the glyphs on designer.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IDesignerGlyphProviderService
     {
         void AddGlyphProvider(IDesignerGlyphProvider glyphProvider);
@@ -482,7 +514,9 @@ namespace System.Workflow.ComponentModel.Design
         ReadOnlyCollection<IDesignerGlyphProvider> GlyphProviders { get; }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IDesignerGlyphProvider
     {
         ActivityDesignerGlyphCollection GetGlyphs(ActivityDesigner activityDesigner);
@@ -491,10 +525,12 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Interface IDesignerVerbProvider
     /// <summary>
-    /// Allows the user to add custom verb providers. 
+    /// Allows the user to add custom verb providers.
     /// Custom verb providers are called in order to return the set of verbs associated with the designer.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IDesignerVerbProviderService
     {
         void AddVerbProvider(IDesignerVerbProvider verbProvider);
@@ -502,7 +538,9 @@ namespace System.Workflow.ComponentModel.Design
         ReadOnlyCollection<IDesignerVerbProvider> VerbProviders { get; }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IDesignerVerbProvider
     {
         ActivityDesignerVerbCollection GetVerbs(ActivityDesigner activityDesigner);
@@ -510,7 +548,9 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Interface IPersistUIState
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IPersistUIState
     {
         void SaveViewState(BinaryWriter writer);
@@ -519,7 +559,9 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Interface IWorkflowRootDesigner
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IWorkflowRootDesigner : IRootDesigner
     {
         CompositeActivityDesigner InvokingDesigner { get; set; }
@@ -530,13 +572,15 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Used for keyboard navigation
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum DesignerNavigationDirection
     {
         Down = 0, //Next
         Up = 1, //Previous
         Left = 2,
-        Right = 3
+        Right = 3,
     }
     #endregion
 
@@ -545,7 +589,9 @@ namespace System.Workflow.ComponentModel.Design
     /// Enumeration returning area of the designer which was under the point passed to hit test.
     /// </summary>
     [FlagsAttribute]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum HitTestLocations
     {
         None = 0,
@@ -555,16 +601,18 @@ namespace System.Workflow.ComponentModel.Design
         Top = 8,
         Right = 16,
         Bottom = 32,
-        Connector = 64
+        Connector = 64,
     }
     #endregion
 
     #region Class HitTestInfo
     /// <summary>
-    /// Identifies the part of the designer at the specified location. 
+    /// Identifies the part of the designer at the specified location.
     /// Used by various operation including drag-drop, cut-paste etc
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class HitTestInfo
     {
         private static HitTestInfo nowhere;
@@ -585,9 +633,7 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        internal HitTestInfo()
-        {
-        }
+        internal HitTestInfo() { }
 
         /// <summary>
         /// Constructs HitTestInfo with specified parameters
@@ -609,10 +655,7 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         public ActivityDesigner AssociatedDesigner
         {
-            get
-            {
-                return this.activityDesigner;
-            }
+            get { return this.activityDesigner; }
         }
 
         /// <summary>
@@ -621,10 +664,7 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         public HitTestLocations HitLocation
         {
-            get
-            {
-                return this.location;
-            }
+            get { return this.location; }
         }
 
         /// <summary>
@@ -677,7 +717,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <returns></returns>
         public virtual int MapToIndex()
         {
-            CompositeActivity compositeActivity = this.activityDesigner.Activity as CompositeActivity;
+            CompositeActivity compositeActivity =
+                this.activityDesigner.Activity as CompositeActivity;
             if (compositeActivity != null)
                 return compositeActivity.Activities.Count;
             else
@@ -690,7 +731,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Represents the hittest information for connectors within the designer, structured designers are expected to have connectors within them
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ConnectorHitTestInfo : HitTestInfo
     {
         private int connector = 0;
@@ -701,11 +744,18 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="structuredCompositeActivityDesigner">Designer associated with the HitTestInfo</param>
         /// <param name="flags">Flags where HitTest occured</param>
         /// <param name="connector">Index of the connector which was hit</param>
-        public ConnectorHitTestInfo(CompositeActivityDesigner compositeActivityDesigner, HitTestLocations flags, int connector)
+        public ConnectorHitTestInfo(
+            CompositeActivityDesigner compositeActivityDesigner,
+            HitTestLocations flags,
+            int connector
+        )
             : base(compositeActivityDesigner, flags)
         {
             if (this.connector < 0)
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidConnectorValue), "connector");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidConnectorValue),
+                    "connector"
+                );
 
             this.connector = connector;
         }
@@ -715,7 +765,8 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 //
-                SequentialActivityDesigner sequentialActivityDesigner = AssociatedDesigner as SequentialActivityDesigner;
+                SequentialActivityDesigner sequentialActivityDesigner =
+                    AssociatedDesigner as SequentialActivityDesigner;
                 if (sequentialActivityDesigner != null && sequentialActivityDesigner.Expanded)
                 {
                     Rectangle[] connectors = sequentialActivityDesigner.GetConnectors();
@@ -729,10 +780,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public override object SelectableObject
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public override int MapToIndex()
@@ -745,9 +793,11 @@ namespace System.Workflow.ComponentModel.Design
             ConnectorHitTestInfo destinationConnector = obj as ConnectorHitTestInfo;
             if (destinationConnector != null)
             {
-                if (destinationConnector.AssociatedDesigner == AssociatedDesigner &&
-                    destinationConnector.HitLocation == HitLocation &&
-                    destinationConnector.MapToIndex() == MapToIndex())
+                if (
+                    destinationConnector.AssociatedDesigner == AssociatedDesigner
+                    && destinationConnector.HitLocation == HitLocation
+                    && destinationConnector.MapToIndex() == MapToIndex()
+                )
                     return true;
             }
 
@@ -756,14 +806,18 @@ namespace System.Workflow.ComponentModel.Design
 
         public override int GetHashCode()
         {
-            return base.GetHashCode() ^ ((AssociatedDesigner != null) ? AssociatedDesigner.GetHashCode() : 0) ^ MapToIndex().GetHashCode();
+            return base.GetHashCode()
+                ^ ((AssociatedDesigner != null) ? AssociatedDesigner.GetHashCode() : 0)
+                ^ MapToIndex().GetHashCode();
         }
     }
     #endregion
 
     #region Class DesignerAction
     //Public class as ActivityDesigners can provide their own DesignerActions
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class DesignerAction
     {
         private ActivityDesigner activityDesigner;
@@ -786,7 +840,12 @@ namespace System.Workflow.ComponentModel.Design
             this.text = text;
         }
 
-        public DesignerAction(ActivityDesigner activityDesigner, int actionId, string text, Image image)
+        public DesignerAction(
+            ActivityDesigner activityDesigner,
+            int actionId,
+            string text,
+            Image image
+        )
             : this(activityDesigner, actionId, text)
         {
             this.image = image;
@@ -794,38 +853,23 @@ namespace System.Workflow.ComponentModel.Design
 
         public string PropertyName
         {
-            get
-            {
-                return this.propertyName;
-            }
-            set
-            {
-                this.propertyName = value;
-            }
+            get { return this.propertyName; }
+            set { this.propertyName = value; }
         }
 
         public int ActionId
         {
-            get
-            {
-                return this.actionId;
-            }
+            get { return this.actionId; }
         }
 
         public string Text
         {
-            get
-            {
-                return this.text;
-            }
+            get { return this.text; }
         }
 
         public Image Image
         {
-            get
-            {
-                return this.image;
-            }
+            get { return this.image; }
         }
 
         public IDictionary UserData
@@ -849,7 +893,9 @@ namespace System.Workflow.ComponentModel.Design
     /// <summary>
     /// Provides categories for grouping of similar verbs
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum DesignerVerbGroup
     {
         General = 0,
@@ -857,17 +903,19 @@ namespace System.Workflow.ComponentModel.Design
         Edit = 2,
         Options = 3,
         Actions = 4,
-        Misc = 5
+        Misc = 5,
     }
     #endregion
 
     #region Class ActivityDesignerVerb
     /// <summary>
-    /// DesignerVerb class specific to ActivityDesigners. 
+    /// DesignerVerb class specific to ActivityDesigners.
     /// Allows user to group similar types of DesignerVerbs togather.
     /// Provides user the ability to update the status of the verb.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDesignerVerb : DesignerVerb
     {
         private ActivityDesigner activityDesigner = null;
@@ -876,8 +924,17 @@ namespace System.Workflow.ComponentModel.Design
         private DesignerVerbGroup verbGroup;
         private int id = 0;
 
-        public ActivityDesignerVerb(ActivityDesigner activityDesigner, DesignerVerbGroup verbGroup, string text, EventHandler invokeHandler)
-            : base(text, new EventHandler(OnExecuteDesignerVerb), new CommandID(WorkflowMenuCommands.MenuGuid, 0))
+        public ActivityDesignerVerb(
+            ActivityDesigner activityDesigner,
+            DesignerVerbGroup verbGroup,
+            string text,
+            EventHandler invokeHandler
+        )
+            : base(
+                text,
+                new EventHandler(OnExecuteDesignerVerb),
+                new CommandID(WorkflowMenuCommands.MenuGuid, 0)
+            )
         {
             if (text == null || text.Length == 0)
                 throw new ArgumentNullException("text");
@@ -890,7 +947,13 @@ namespace System.Workflow.ComponentModel.Design
             this.activityDesigner = activityDesigner;
         }
 
-        public ActivityDesignerVerb(ActivityDesigner activityDesigner, DesignerVerbGroup verbGroup, string text, EventHandler invokeHandler, EventHandler statusHandler)
+        public ActivityDesignerVerb(
+            ActivityDesigner activityDesigner,
+            DesignerVerbGroup verbGroup,
+            string text,
+            EventHandler invokeHandler,
+            EventHandler statusHandler
+        )
             : this(activityDesigner, verbGroup, text, invokeHandler)
         {
             this.statusHandler = statusHandler;
@@ -906,9 +969,7 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         statusHandler(this, EventArgs.Empty);
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
 
                 return base.OleStatus;
@@ -917,39 +978,23 @@ namespace System.Workflow.ComponentModel.Design
 
         public override CommandID CommandID
         {
-            get
-            {
-                return new CommandID(WorkflowMenuCommands.MenuGuid, this.id);
-            }
+            get { return new CommandID(WorkflowMenuCommands.MenuGuid, this.id); }
         }
 
         public DesignerVerbGroup Group
         {
-            get
-            {
-                return this.verbGroup;
-            }
+            get { return this.verbGroup; }
         }
 
         internal int Id
         {
-            get
-            {
-                return this.id;
-            }
-
-            set
-            {
-                this.id = value;
-            }
+            get { return this.id; }
+            set { this.id = value; }
         }
 
         internal ActivityDesigner ActivityDesigner
         {
-            get
-            {
-                return this.activityDesigner;
-            }
+            get { return this.activityDesigner; }
         }
 
         private static void OnExecuteDesignerVerb(object sender, EventArgs e)
@@ -965,11 +1010,15 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (activityDesignerVerb.activityDesigner != null)
                 {
-                    foreach (DesignerVerb verb in ((IDesigner)activityDesignerVerb.activityDesigner).Verbs)
+                    foreach (
+                        DesignerVerb verb in (
+                            (IDesigner)activityDesignerVerb.activityDesigner
+                        ).Verbs
+                    )
                     {
                         if (verb is ActivityDesignerVerb)
                         {
-                            //Update the status of the 
+                            //Update the status of the
                             status = verb.OleStatus;
                             status = 0;
                         }
@@ -982,16 +1031,16 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Class ActivityDesignerVerbCollection
     /// <summary>
-    /// Maintains collection of ActivityDesignerVerbs. 
+    /// Maintains collection of ActivityDesignerVerbs.
     /// Groups verbs belonging to the same veb groups and ensures that their identifiers are consecutive.
     /// </summary>
     [PermissionSetAttribute(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityDesignerVerbCollection : DesignerVerbCollection
     {
-        public ActivityDesignerVerbCollection()
-        {
-        }
+        public ActivityDesignerVerbCollection() { }
 
         public ActivityDesignerVerbCollection(IEnumerable<ActivityDesignerVerb> verbs)
         {
@@ -1005,11 +1054,13 @@ namespace System.Workflow.ComponentModel.Design
         protected override void OnValidate(object value)
         {
             if (!(value is ActivityDesignerVerb))
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidDesignerVerbValue));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidDesignerVerbValue)
+                );
         }
 
         /// <summary>
-        /// Returns a collection that is consumable by MenuCommandService. Verbs in the 
+        /// Returns a collection that is consumable by MenuCommandService. Verbs in the
         /// safe collection have Ids in the range of VerbFirst.ID to VerbLast.ID. Also,
         /// the items are sorted, and the first item ID == VerbFirst.ID
         /// </summary>
@@ -1020,7 +1071,8 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.Count == 0)
                     return this;
 
-                Dictionary<DesignerVerbGroup, List<ActivityDesignerVerb>> activityDesignerVerbs = new Dictionary<DesignerVerbGroup, List<ActivityDesignerVerb>>();
+                Dictionary<DesignerVerbGroup, List<ActivityDesignerVerb>> activityDesignerVerbs =
+                    new Dictionary<DesignerVerbGroup, List<ActivityDesignerVerb>>();
                 ArrayList safeCollection = new ArrayList(this);
 
                 // set Ids
@@ -1044,13 +1096,21 @@ namespace System.Workflow.ComponentModel.Design
                     }
                 }
 
-                //items should be sorted by verb id 
+                //items should be sorted by verb id
                 safeCollection.Sort(new ActivityDesignerVerbComparer());
 
                 // add first dummy verb if needed
                 if (((ActivityDesignerVerb)safeCollection[0]).Id != MenuCommands.VerbFirst.ID)
                 {
-                    safeCollection.Insert(0, new ActivityDesignerVerb(null, DesignerVerbGroup.General, "Dummy", new EventHandler(OnDummyVerb)));
+                    safeCollection.Insert(
+                        0,
+                        new ActivityDesignerVerb(
+                            null,
+                            DesignerVerbGroup.General,
+                            "Dummy",
+                            new EventHandler(OnDummyVerb)
+                        )
+                    );
                     ((ActivityDesignerVerb)safeCollection[0]).Visible = false;
                 }
 
@@ -1082,6 +1142,7 @@ namespace System.Workflow.ComponentModel.Design
             else
                 return WorkflowMenuCommands.VerbGroupMisc;
         }
+
         #region class ActivityDesignerVerbComparer
 
         private class ActivityDesignerVerbComparer : IComparer
@@ -1104,14 +1165,15 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         #endregion
-
     }
     #endregion
 
     #endregion
 
     #region ITypeFilterProvider Interface
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface ITypeFilterProvider
     {
         bool CanFilterType(Type type, bool throwOnError);
@@ -1121,7 +1183,9 @@ namespace System.Workflow.ComponentModel.Design
 
     #region TypeFilterProviderAttribute
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Method, AllowMultiple = false)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class TypeFilterProviderAttribute : Attribute
     {
         private string typeName = null;
@@ -1141,10 +1205,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public string TypeFilterProviderTypeName
         {
-            get
-            {
-                return this.typeName;
-            }
+            get { return this.typeName; }
         }
     }
     #endregion
@@ -1152,7 +1213,9 @@ namespace System.Workflow.ComponentModel.Design
     #region ITypeProviderCreator Interface
     [Guid("0E6DF9D7-B4B5-4af7-9647-FC335CCE393F")]
     [ComVisible(true)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface ITypeProviderCreator
     {
         ITypeProvider GetTypeProvider(object obj);

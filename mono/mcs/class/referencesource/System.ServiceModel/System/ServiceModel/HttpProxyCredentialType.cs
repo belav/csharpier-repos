@@ -19,14 +19,18 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(HttpProxyCredentialType value)
         {
-            return (value == HttpProxyCredentialType.None ||
-                value == HttpProxyCredentialType.Basic ||
-                value == HttpProxyCredentialType.Digest ||
-                value == HttpProxyCredentialType.Ntlm ||
-                value == HttpProxyCredentialType.Windows);
+            return (
+                value == HttpProxyCredentialType.None
+                || value == HttpProxyCredentialType.Basic
+                || value == HttpProxyCredentialType.Digest
+                || value == HttpProxyCredentialType.Ntlm
+                || value == HttpProxyCredentialType.Windows
+            );
         }
 
-        internal static AuthenticationSchemes MapToAuthenticationScheme(HttpProxyCredentialType proxyCredentialType)
+        internal static AuthenticationSchemes MapToAuthenticationScheme(
+            HttpProxyCredentialType proxyCredentialType
+        )
         {
             AuthenticationSchemes result;
             switch (proxyCredentialType)
@@ -48,12 +52,16 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported proxy credential type");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
             return result;
         }
 
-        internal static HttpProxyCredentialType MapToProxyCredentialType(AuthenticationSchemes authenticationSchemes)
+        internal static HttpProxyCredentialType MapToProxyCredentialType(
+            AuthenticationSchemes authenticationSchemes
+        )
         {
             HttpProxyCredentialType result;
             switch (authenticationSchemes)
@@ -75,7 +83,9 @@ namespace System.ServiceModel
                     break;
                 default:
                     Fx.Assert("unsupported authentication Scheme");
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
             }
             return result;
         }

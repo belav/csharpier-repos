@@ -76,7 +76,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _collectionKind = CollectionKind.Bag;
                     break;
                 default:
-                    Debug.Assert(typeModifier == TypeModifier.None, string.Format(CultureInfo.CurrentCulture, "Type is not valid for property {0}: {1}. The modifier for the type cannot be used in this context.", FQName, reader.Value));
+                    Debug.Assert(
+                        typeModifier == TypeModifier.None,
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "Type is not valid for property {0}: {1}. The modifier for the type cannot be used in this context.",
+                            FQName,
+                            reader.Value
+                        )
+                    );
                     break;
             }
 
@@ -181,7 +189,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 return _typeUsage;
             }
-            Debug.Assert(_typeSubElement != null, "For attributes typeusage should have been resolved");
+            Debug.Assert(
+                _typeSubElement != null,
+                "For attributes typeusage should have been resolved"
+            );
 
             if (_typeSubElement != null)
             {
@@ -190,13 +201,19 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return _typeUsage;
         }
 
-        internal override bool ResolveNameAndSetTypeUsage(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems)
+        internal override bool ResolveNameAndSetTypeUsage(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        )
         {
             if (_typeUsage == null)
             {
                 if (_typeSubElement != null) //Has sub-elements
                 {
-                    return _typeSubElement.ResolveNameAndSetTypeUsage(convertedItemCache, newGlobalItems);
+                    return _typeSubElement.ResolveNameAndSetTypeUsage(
+                        convertedItemCache,
+                        newGlobalItems
+                    );
                 }
                 else //Does not have sub-elements; try to resolve
                 {
@@ -205,9 +222,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         _typeUsageBuilder.ValidateAndSetTypeUsage(_type as ScalarType, false);
                         _typeUsage = _typeUsageBuilder.TypeUsage;
                     }
-                    else  //Try to resolve edm type. If not now, it will resolve in the second pass
+                    else //Try to resolve edm type. If not now, it will resolve in the second pass
                     {
-                        EdmType edmType = (EdmType)Converter.LoadSchemaElement(_type, _type.Schema.ProviderManifest, convertedItemCache, newGlobalItems);
+                        EdmType edmType = (EdmType)
+                            Converter.LoadSchemaElement(
+                                _type,
+                                _type.Schema.ProviderManifest,
+                                convertedItemCache,
+                                newGlobalItems
+                            );
                         if (edmType != null)
                         {
                             if (_isRefType)
@@ -242,7 +265,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             if (_type != null)
             {
-                if (_type is ScalarType == false || _isRefType || _collectionKind != CollectionKind.None)
+                if (
+                    _type is ScalarType == false
+                    || _isRefType
+                    || _collectionKind != CollectionKind.None
+                )
                 {
                     return false;
                 }

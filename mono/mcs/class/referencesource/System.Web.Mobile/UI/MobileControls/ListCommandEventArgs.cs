@@ -1,18 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListCommandEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * List command event arguments
      *
@@ -20,10 +19,18 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ListCommandEventArgs.uex' path='docs/doc[@for="ListCommandEventArgs"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    public class ListCommandEventArgs : CommandEventArgs 
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    public class ListCommandEventArgs : CommandEventArgs
     {
         /// <include file='doc\ListCommandEventArgs.uex' path='docs/doc[@for="ListCommandEventArgs.DefaultCommand"]/*' />
         protected static readonly String DefaultCommand = "Default";
@@ -31,38 +38,35 @@ namespace System.Web.UI.MobileControls
         private Object _commandSource;
 
         /// <include file='doc\ListCommandEventArgs.uex' path='docs/doc[@for="ListCommandEventArgs.ListCommandEventArgs"]/*' />
-        public ListCommandEventArgs(MobileListItem item, Object commandSource, CommandEventArgs originalArgs) : base(originalArgs) 
+        public ListCommandEventArgs(
+            MobileListItem item,
+            Object commandSource,
+            CommandEventArgs originalArgs
+        )
+            : base(originalArgs)
         {
             _item = item;
             _commandSource = commandSource;
         }
 
         /// <include file='doc\ListCommandEventArgs.uex' path='docs/doc[@for="ListCommandEventArgs.ListCommandEventArgs1"]/*' />
-        public ListCommandEventArgs(MobileListItem item, Object commandSource) : base(DefaultCommand, item) 
+        public ListCommandEventArgs(MobileListItem item, Object commandSource)
+            : base(DefaultCommand, item)
         {
             _item = item;
             _commandSource = commandSource;
         }
 
         /// <include file='doc\ListCommandEventArgs.uex' path='docs/doc[@for="ListCommandEventArgs.ListItem"]/*' />
-        public MobileListItem ListItem 
+        public MobileListItem ListItem
         {
-            get 
-            {
-                return _item;
-            }
+            get { return _item; }
         }
 
         /// <include file='doc\ListCommandEventArgs.uex' path='docs/doc[@for="ListCommandEventArgs.CommandSource"]/*' />
-        public Object CommandSource 
+        public Object CommandSource
         {
-            get 
-            {
-                return _commandSource;
-            }
+            get { return _commandSource; }
         }
-
     }
 }
-
-

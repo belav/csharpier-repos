@@ -14,14 +14,16 @@ namespace System.ServiceModel.Discovery
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state);
+            object state
+        );
         void OnEndOnlineAnnouncement(IAsyncResult result);
 
         IAsyncResult OnBeginOfflineAnnouncement(
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state);
+            object state
+        );
         void OnEndOfflineAnnouncement(IAsyncResult result);
     }
 }

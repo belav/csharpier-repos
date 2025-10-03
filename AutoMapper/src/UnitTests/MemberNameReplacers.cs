@@ -31,7 +31,7 @@ public class When_using_a_member_name_replacer : NonValidatingSpecBase
         {
             Value = 5,
             Ävíator = 3,
-            SubAirlinaFlight = 4
+            SubAirlinaFlight = 4,
         };
 
         //Mapper.AddMemberConvention().AddName<ReplaceName>(_ => _.AddReplace("A", "Ä").AddReplace("i", "í").AddReplace("Airline", "Airlina")).SetMemberInfo<FieldPropertyMemberInfo>();
@@ -43,4 +43,3 @@ public class When_using_a_member_name_replacer : NonValidatingSpecBase
         Assert.Equal(source.SubAirlinaFlight, destination.SubAirlineFlight);
     }
 }
-

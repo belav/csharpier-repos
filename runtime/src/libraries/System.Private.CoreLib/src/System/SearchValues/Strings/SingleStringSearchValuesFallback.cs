@@ -12,7 +12,8 @@ namespace System.Buffers
     {
         private readonly string _value;
 
-        public SingleStringSearchValuesFallback(string value, HashSet<string> uniqueValues) : base(uniqueValues)
+        public SingleStringSearchValuesFallback(string value, HashSet<string> uniqueValues)
+            : base(uniqueValues)
         {
             _value = value;
         }

@@ -1,45 +1,52 @@
 namespace System.Workflow.ComponentModel
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
     using System.Drawing;
-    using System.Runtime.Serialization;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
-    using System.Workflow.Runtime;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Runtime;
 
     [SRDescription(SR.FaultActivityDescription)]
     [ToolboxItem(typeof(ActivityToolboxItem))]
     [Designer(typeof(ThrowDesigner), typeof(IDesigner))]
     [ToolboxBitmap(typeof(ThrowActivity), "Resources.Throw.png")]
     [SRCategory(SR.Standard)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ThrowActivity : Activity, ITypeFilterProvider, IDynamicPropertyTypeProvider
     {
         [Browsable(false)]
-        public static readonly DependencyProperty FaultProperty = DependencyProperty.Register("Fault", typeof(Exception), typeof(ThrowActivity));
+        public static readonly DependencyProperty FaultProperty = DependencyProperty.Register(
+            "Fault",
+            typeof(Exception),
+            typeof(ThrowActivity)
+        );
+
         [Browsable(false)]
-        public static readonly DependencyProperty FaultTypeProperty = DependencyProperty.Register("FaultType", typeof(Type), typeof(ThrowActivity));
+        public static readonly DependencyProperty FaultTypeProperty = DependencyProperty.Register(
+            "FaultType",
+            typeof(Type),
+            typeof(ThrowActivity)
+        );
 
         #region Constructors
 
-        public ThrowActivity()
-        {
-        }
+        public ThrowActivity() { }
 
         public ThrowActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
@@ -51,21 +58,42 @@ namespace System.Workflow.ComponentModel
             base.Initialize(provider);
         }
 
-        protected internal override sealed ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected internal sealed override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (this.Fault == null && this.FaultType == null)
             {
-                throw new InvalidOperationException(SR.GetString(CultureInfo.CurrentCulture, SR.Error_PropertyNotSet, FaultProperty.Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        CultureInfo.CurrentCulture,
+                        SR.Error_PropertyNotSet,
+                        FaultProperty.Name
+                    )
+                );
             }
 
             if (this.FaultType != null && !typeof(Exception).IsAssignableFrom(this.FaultType))
             {
-                throw new InvalidOperationException(SR.GetString(CultureInfo.CurrentCulture, SR.Error_ExceptionTypeNotException, this.FaultType, FaultTypeProperty.Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        CultureInfo.CurrentCulture,
+                        SR.Error_ExceptionTypeNotException,
+                        this.FaultType,
+                        FaultTypeProperty.Name
+                    )
+                );
             }
 
-            if (this.Fault != null && this.FaultType != null && !this.FaultType.IsInstanceOfType(this.Fault))
+            if (
+                this.Fault != null
+                && this.FaultType != null
+                && !this.FaultType.IsInstanceOfType(this.Fault)
+            )
             {
-                throw new InvalidOperationException(SR.GetString(CultureInfo.CurrentCulture, SR.Error_FaultIsNotOfFaultType));
+                throw new InvalidOperationException(
+                    SR.GetString(CultureInfo.CurrentCulture, SR.Error_FaultIsNotOfFaultType)
+                );
             }
 
             if (this.Fault != null)
@@ -76,7 +104,13 @@ namespace System.Workflow.ComponentModel
             if (cInfo != null)
                 throw (Exception)cInfo.Invoke(null);
 
-            throw new InvalidOperationException(SR.GetString(CultureInfo.CurrentCulture, SR.Error_FaultTypeNoDefaultConstructor, this.FaultType));
+            throw new InvalidOperationException(
+                SR.GetString(
+                    CultureInfo.CurrentCulture,
+                    SR.Error_FaultTypeNoDefaultConstructor,
+                    this.FaultType
+                )
+            );
         }
 
         [TypeConverter(typeof(FaultConverter))]
@@ -86,14 +120,8 @@ namespace System.Workflow.ComponentModel
         [DefaultValue(null)]
         public Exception Fault
         {
-            get
-            {
-                return base.GetValue(FaultProperty) as Exception;
-            }
-            set
-            {
-                base.SetValue(FaultProperty, value);
-            }
+            get { return base.GetValue(FaultProperty) as Exception; }
+            set { base.SetValue(FaultProperty, value); }
         }
 
         [Editor(typeof(TypeBrowserEditor), typeof(System.Drawing.Design.UITypeEditor))]
@@ -104,14 +132,8 @@ namespace System.Workflow.ComponentModel
         [TypeConverter(typeof(FaultTypeConverter))]
         public Type FaultType
         {
-            get
-            {
-                return base.GetValue(FaultTypeProperty) as Type;
-            }
-            set
-            {
-                base.SetValue(FaultTypeProperty, value);
-            }
+            get { return base.GetValue(FaultTypeProperty) as Type; }
+            set { base.SetValue(FaultTypeProperty, value); }
         }
 
         #region ITypeFilterProvider Members
@@ -127,23 +149,29 @@ namespace System.Workflow.ComponentModel
 
         string ITypeFilterProvider.FilterDescription
         {
-            get
-            {
-                return SR.GetString(SR.FilterDescription_FaultHandlerActivity);
-            }
+            get { return SR.GetString(SR.FilterDescription_FaultHandlerActivity); }
         }
         #endregion
 
         #region IDynamicPropertyTypeProvider Members
-        Type IDynamicPropertyTypeProvider.GetPropertyType(IServiceProvider serviceProvider, string propertyName)
+        Type IDynamicPropertyTypeProvider.GetPropertyType(
+            IServiceProvider serviceProvider,
+            string propertyName
+        )
         {
-            if (!String.IsNullOrEmpty(propertyName) && propertyName.Equals("Fault", StringComparison.Ordinal))
+            if (
+                !String.IsNullOrEmpty(propertyName)
+                && propertyName.Equals("Fault", StringComparison.Ordinal)
+            )
                 return FaultType;
             else
                 return null;
         }
 
-        AccessTypes IDynamicPropertyTypeProvider.GetAccessType(IServiceProvider serviceProvider, string propertyName)
+        AccessTypes IDynamicPropertyTypeProvider.GetAccessType(
+            IServiceProvider serviceProvider,
+            string propertyName
+        )
         {
             return AccessTypes.Read;
         }
@@ -173,18 +201,24 @@ namespace System.Workflow.ComponentModel
                 return base.CanConvertFrom(context, sourceType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
                 object convertedValue = value;
 
                 string stringValue = value as string;
-                ITypeProvider typeProvider = context.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                ITypeProvider typeProvider =
+                    context.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (context != null && typeProvider != null && !String.IsNullOrEmpty(stringValue))
                 {
                     Type type = typeProvider.GetType(stringValue, false);
                     if (type != null)
                     {
-                        ITypeFilterProvider typeFilterProvider = context.Instance as ITypeFilterProvider;
+                        ITypeFilterProvider typeFilterProvider =
+                            context.Instance as ITypeFilterProvider;
                         if (typeFilterProvider != null)
                             typeFilterProvider.CanFilterType(type, true);
 
@@ -207,7 +241,12 @@ namespace System.Workflow.ComponentModel
                 return base.CanConvertTo(context, destinationType);
             }
 
-            public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
             {
                 if (destinationType == typeof(string))
                 {

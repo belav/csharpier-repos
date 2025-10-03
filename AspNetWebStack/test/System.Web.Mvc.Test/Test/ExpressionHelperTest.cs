@@ -30,53 +30,130 @@ namespace System.Web.Mvc.Test
         {
             // "Model" at the front of the expression is excluded (case insensitively)
             DummyContactModel Model = null;
-            Assert.Equal(String.Empty, ExpressionHelper.GetExpressionText(Lambda<object, DummyContactModel>(m => Model)));
-            Assert.Equal("FirstName", ExpressionHelper.GetExpressionText(Lambda<object, string>(m => Model.FirstName)));
+            Assert.Equal(
+                String.Empty,
+                ExpressionHelper.GetExpressionText(Lambda<object, DummyContactModel>(m => Model))
+            );
+            Assert.Equal(
+                "FirstName",
+                ExpressionHelper.GetExpressionText(Lambda<object, string>(m => Model.FirstName))
+            );
 
             DummyContactModel mOdeL = null;
-            Assert.Equal(String.Empty, ExpressionHelper.GetExpressionText(Lambda<object, DummyContactModel>(m => mOdeL)));
-            Assert.Equal("FirstName", ExpressionHelper.GetExpressionText(Lambda<object, string>(m => mOdeL.FirstName)));
+            Assert.Equal(
+                String.Empty,
+                ExpressionHelper.GetExpressionText(Lambda<object, DummyContactModel>(m => mOdeL))
+            );
+            Assert.Equal(
+                "FirstName",
+                ExpressionHelper.GetExpressionText(Lambda<object, string>(m => mOdeL.FirstName))
+            );
 
             // Model property of model is passed through
-            Assert.Equal("Model", ExpressionHelper.GetExpressionText(Lambda<DummyModelContainer, DummyContactModel>(m => m.Model)));
+            Assert.Equal(
+                "Model",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<DummyModelContainer, DummyContactModel>(m => m.Model)
+                )
+            );
 
             // "Model" in the middle of the expression is not excluded
             DummyModelContainer container = null;
-            Assert.Equal("container.Model", ExpressionHelper.GetExpressionText(Lambda<object, DummyContactModel>(m => container.Model)));
-            Assert.Equal("container.Model.FirstName", ExpressionHelper.GetExpressionText(Lambda<object, string>(m => container.Model.FirstName)));
+            Assert.Equal(
+                "container.Model",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, DummyContactModel>(m => container.Model)
+                )
+            );
+            Assert.Equal(
+                "container.Model.FirstName",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, string>(m => container.Model.FirstName)
+                )
+            );
 
             // The parameter is excluded
-            Assert.Equal(String.Empty, ExpressionHelper.GetExpressionText(Lambda<DummyContactModel, DummyContactModel>(m => m)));
-            Assert.Equal("FirstName", ExpressionHelper.GetExpressionText(Lambda<DummyContactModel, string>(m => m.FirstName)));
+            Assert.Equal(
+                String.Empty,
+                ExpressionHelper.GetExpressionText(
+                    Lambda<DummyContactModel, DummyContactModel>(m => m)
+                )
+            );
+            Assert.Equal(
+                "FirstName",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<DummyContactModel, string>(m => m.FirstName)
+                )
+            );
 
             // Integer indexer is included and properly computed from captured values
             int x = 2;
-            Assert.Equal("container.Model[42].Length", ExpressionHelper.GetExpressionText(Lambda<object, int>(m => container.Model[x * 21].Length)));
-            Assert.Equal("[42]", ExpressionHelper.GetExpressionText(Lambda<int[], int>(m => m[x * 21])));
+            Assert.Equal(
+                "container.Model[42].Length",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, int>(m => container.Model[x * 21].Length)
+                )
+            );
+            Assert.Equal(
+                "[42]",
+                ExpressionHelper.GetExpressionText(Lambda<int[], int>(m => m[x * 21]))
+            );
 
             // String indexer is included and properly computed from captured values
             string y = "Hello world";
-            Assert.Equal("container.Model[Hello].Length", ExpressionHelper.GetExpressionText(Lambda<object, int>(m => container.Model[y.Substring(0, 5)].Length)));
+            Assert.Equal(
+                "container.Model[Hello].Length",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, int>(m => container.Model[y.Substring(0, 5)].Length)
+                )
+            );
 
             // Back to back indexer is included
-            Assert.Equal("container.Model[1024][2]", ExpressionHelper.GetExpressionText(Lambda<object, char>(m => container.Model[x * 512][x])));
+            Assert.Equal(
+                "container.Model[1024][2]",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, char>(m => container.Model[x * 512][x])
+                )
+            );
 
             // Multi-parameter indexer is excluded
-            Assert.Equal("Length", ExpressionHelper.GetExpressionText(Lambda<object, int>(m => container.Model[42, "Hello World"].Length)));
+            Assert.Equal(
+                "Length",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, int>(m => container.Model[42, "Hello World"].Length)
+                )
+            );
 
             // Single array indexer is included
-            Assert.Equal("container.Model.Array[1024]", ExpressionHelper.GetExpressionText(Lambda<object, int>(m => container.Model.Array[x * 512])));
+            Assert.Equal(
+                "container.Model.Array[1024]",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, int>(m => container.Model.Array[x * 512])
+                )
+            );
 
             // Double array indexer is excluded
-            Assert.Equal("", ExpressionHelper.GetExpressionText(Lambda<object, int>(m => container.Model.DoubleArray[1, 2])));
+            Assert.Equal(
+                "",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, int>(m => container.Model.DoubleArray[1, 2])
+                )
+            );
 
             // Non-indexer method call is excluded
-            Assert.Equal("Length", ExpressionHelper.GetExpressionText(Lambda<object, int>(m => container.Model.Method().Length)));
+            Assert.Equal(
+                "Length",
+                ExpressionHelper.GetExpressionText(
+                    Lambda<object, int>(m => container.Model.Method().Length)
+                )
+            );
 
             // Lambda expression which involves indexer which references lambda parameter throws
             Assert.Throws<InvalidOperationException>(
-                () => ExpressionHelper.GetExpressionText(Lambda<string, char>(s => s[s.Length - 4])),
-                "The expression compiler was unable to evaluate the indexer expression '(s.Length - 4)' because it references the model parameter 's' which is unavailable.");
+                () =>
+                    ExpressionHelper.GetExpressionText(Lambda<string, char>(s => s[s.Length - 4])),
+                "The expression compiler was unable to evaluate the indexer expression '(s.Length - 4)' because it references the model parameter 's' which is unavailable."
+            );
         }
 
         public static TheoryDataSet<LambdaExpression, string> ComplicatedLambdaExpressions
@@ -87,7 +164,6 @@ namespace System.Web.Mvc.Test
                 var index = 20;
                 var data = new TheoryDataSet<LambdaExpression, string>
                 {
-
                     {
                         Lambda((List<DummyModelContainer> m) => collection[10].Model.FirstName),
                         "collection[10].Model.FirstName"
@@ -114,7 +190,8 @@ namespace System.Web.Mvc.Test
         [PropertyData("ComplicatedLambdaExpressions")]
         public void GetExpressionText_WithComplicatedLambdaExpressions_ReturnsExpectedText(
             LambdaExpression expression,
-            string expectedText)
+            string expectedText
+        )
         {
             // Arrange & Act
             var result = ExpressionHelper.GetExpressionText(expression);
@@ -135,8 +212,9 @@ namespace System.Web.Mvc.Test
                 var expectedText = string.Format("collection[{0}].Model.FirstName", i);
 
                 // Act 1
-                var result = ExpressionHelper.GetExpressionText(Lambda(
-                    (List<DummyModelContainer> m) => collection[i].Model.FirstName));
+                var result = ExpressionHelper.GetExpressionText(
+                    Lambda((List<DummyModelContainer> m) => collection[i].Model.FirstName)
+                );
 
                 // Assert 1
                 Assert.Equal(expectedText, result);
@@ -145,8 +223,9 @@ namespace System.Web.Mvc.Test
                 expectedText = string.Format("[{0}].Model.FirstName", i);
 
                 // Act 2
-                result = ExpressionHelper.GetExpressionText(Lambda(
-                    (List<DummyModelContainer> m) => m[i].Model.FirstName));
+                result = ExpressionHelper.GetExpressionText(
+                    Lambda((List<DummyModelContainer> m) => m[i].Model.FirstName)
+                );
 
                 // Assert 2
                 Assert.Equal(expectedText, result);

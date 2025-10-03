@@ -47,7 +47,8 @@ public sealed record RelationalModelRuntimeInitializerDependencies
     [EntityFrameworkInternal]
     public RelationalModelRuntimeInitializerDependencies(
         RelationalModelDependencies relationalModelDependencies,
-        IRelationalAnnotationProvider relationalAnnotationProvider)
+        IRelationalAnnotationProvider relationalAnnotationProvider
+    )
     {
         RelationalModelDependencies = relationalModelDependencies;
         RelationalAnnotationProvider = relationalAnnotationProvider;

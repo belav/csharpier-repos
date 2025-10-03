@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Snippets
         public readonly ImmutableArray<int> PlaceHolderPositions;
 
         /// <summary>
-        /// <example> 
+        /// <example>
         /// For loop would have two placeholders:
         /// <code>
         ///     for (var {1:i} = 0; {1:i} &lt; {2:length}; {1:i}++)
@@ -45,8 +45,6 @@ namespace Microsoft.CodeAnalysis.Snippets
         /// Initialize a placeholder with a single position
         /// </summary>
         public SnippetPlaceholder(string identifier, int placeholderPosition)
-            : this(identifier, ImmutableArray.Create(placeholderPosition))
-        {
-        }
+            : this(identifier, ImmutableArray.Create(placeholderPosition)) { }
     }
 }

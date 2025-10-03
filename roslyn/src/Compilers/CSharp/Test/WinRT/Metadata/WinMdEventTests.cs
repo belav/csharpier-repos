@@ -4,6 +4,8 @@
 
 #nullable disable
 
+using System;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
@@ -11,19 +13,18 @@ using Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System;
-using System.Linq;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     // Unit tests for programs that use the Windows.winmd file.
-    // 
-    // Checks to see that types are forwarded correctly, that 
+    //
+    // Checks to see that types are forwarded correctly, that
     // metadata files are loaded as they should, etc.
     public class WinMdEventTests : CSharpTestBase
     {
-        private const string EventInterfaceIL = @"
+        private const string EventInterfaceIL =
+            @"
 .class interface public abstract auto ansi Interface
 {
   .method public hidebysig newslot specialname abstract virtual 
@@ -61,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 } // end of class Interface
 ";
 
-        private const string EventBaseIL = @"
+        private const string EventBaseIL =
+            @"
 .class public auto ansi beforefieldinit Base
        extends [mscorlib]System.Object
 {
@@ -175,7 +177,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         private readonly MetadataReference _eventLibRef;
 
         private const string DynamicCommonSrc =
-@"using System.Runtime.InteropServices.WindowsRuntime;
+            @"using System.Runtime.InteropServices.WindowsRuntime;
 using EventLibrary;
 
 public partial class A : I
@@ -222,7 +224,7 @@ public partial class B : I
             // The following two libraries are shrunk code pulled from
             // corresponding files in the csharp5 legacy tests
             const string eventLibSrc =
-@"namespace EventLibrary
+                @"namespace EventLibrary
 {
     public delegate void voidDelegate();
     public delegate T genericDelegate<T>(T t);
@@ -236,17 +238,23 @@ public partial class B : I
     }
 }";
             _eventLibRef = CreateEmptyCompilation(
-                eventLibSrc,
-                references: new[] { MscorlibRef_v4_0_30316_17626, SystemCoreRef_v4_0_30319_17929 },
-                options: TestOptions.DebugWinMD.WithAllowUnsafe(true),
-                assemblyName: "EventLibrary").EmitToImageReference();
+                    eventLibSrc,
+                    references: new[]
+                    {
+                        MscorlibRef_v4_0_30316_17626,
+                        SystemCoreRef_v4_0_30319_17929,
+                    },
+                    options: TestOptions.DebugWinMD.WithAllowUnsafe(true),
+                    assemblyName: "EventLibrary"
+                )
+                .EmitToImageReference();
         }
 
         [Fact]
         public void WinMdExternalEventTests()
         {
             var src =
-@"
+                @"
 using EventLibrary;
 
 class C
@@ -306,37 +314,40 @@ class C
 
             var dynamicCommon = CreateEmptyCompilation(
                 DynamicCommonSrc,
-                references: new[] {
-                    MscorlibRef_v4_0_30316_17626,
-                    _eventLibRef,
-                },
-                options: TestOptions.DebugModule.WithAllowUnsafe(true));
+                references: new[] { MscorlibRef_v4_0_30316_17626, _eventLibRef },
+                options: TestOptions.DebugModule.WithAllowUnsafe(true)
+            );
 
-            var dynamicCommonRef = dynamicCommon.EmitToImageReference(expectedWarnings: new[]
-            {
-                // (6,31): warning CS0067: The event 'A.d1' is never used
-                //     public event voidDelegate d1;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d1").WithArguments("A.d1"),
-                // (8,34): warning CS0067: The event 'A.d3' is never used
-                //     public event dynamicDelegate d3;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d3").WithArguments("A.d3"),
-                // (7,42): warning CS0067: The event 'A.d2' is never used
-                //     public event genericDelegate<object> d2;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d2").WithArguments("A.d2")
-            });
+            var dynamicCommonRef = dynamicCommon.EmitToImageReference(
+                expectedWarnings: new[]
+                {
+                    // (6,31): warning CS0067: The event 'A.d1' is never used
+                    //     public event voidDelegate d1;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d1").WithArguments("A.d1"),
+                    // (8,34): warning CS0067: The event 'A.d3' is never used
+                    //     public event dynamicDelegate d3;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d3").WithArguments("A.d3"),
+                    // (7,42): warning CS0067: The event 'A.d2' is never used
+                    //     public event genericDelegate<object> d2;
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d2").WithArguments("A.d2"),
+                }
+            );
 
             var verifier = this.CompileAndVerify(
                 src,
                 targetFramework: TargetFramework.Empty,
-                references: new[] {
+                references: new[]
+                {
                     MscorlibRef_v4_0_30316_17626,
                     SystemCoreRef_v4_0_30319_17929,
                     CSharpRef,
                     _eventLibRef,
-                    dynamicCommonRef
-                });
-            verifier.VerifyIL("C.Main",
-@"
+                    dynamicCommonRef,
+                }
+            );
+            verifier.VerifyIL(
+                "C.Main",
+                @"
 {
   // Code size     6468 (0x1944)
   .maxstack  11
@@ -2403,14 +2414,15 @@ class C
   IL_1942:  pop
   IL_1943:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void WinMdEventInternalStaticAccess()
         {
             var src =
-@"  
+                @"  
 using EventLibrary;
 
 public partial class A : I
@@ -2441,22 +2453,30 @@ public partial class A : I
             var verifier = CompileAndVerify(
                 new[] { src, DynamicCommonSrc },
                 targetFramework: TargetFramework.Empty,
-                references: new[] {
+                references: new[]
+                {
                     MscorlibRef_v4_0_30316_17626,
                     SystemCoreRef_v4_0_30319_17929,
                     _eventLibRef,
                 },
-                verify: OSVersion.IsWin8 ? Verification.Passes : Verification.Fails);
+                verify: OSVersion.IsWin8 ? Verification.Passes : Verification.Fails
+            );
 
             verifier.VerifyDiagnostics(
                 // (7,42): warning CS0067: The event 'A.d2' is never used
                 //     public event genericDelegate<object> d2;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d2").WithArguments("A.d2").WithLocation(7, 42),
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d2")
+                    .WithArguments("A.d2")
+                    .WithLocation(7, 42),
                 // (8,34): warning CS0067: The event 'A.d3' is never used
                 //     public event dynamicDelegate d3;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d3").WithArguments("A.d3").WithLocation(8, 34));
-            verifier.VerifyIL("A.Scenario1",
-@"
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d3")
+                    .WithArguments("A.d3")
+                    .WithLocation(8, 34)
+            );
+            verifier.VerifyIL(
+                "A.Scenario1",
+                @"
 {
   // Code size      123 (0x7b)
   .maxstack  3
@@ -2503,9 +2523,11 @@ public partial class A : I
   IL_0078:  ceq
   IL_007a:  ret
 }
-");
-            verifier.VerifyIL("A.Scenario2",
-@"
+"
+            );
+            verifier.VerifyIL(
+                "A.Scenario2",
+                @"
 {
   // Code size      123 (0x7b)
   .maxstack  4
@@ -2552,13 +2574,15 @@ public partial class A : I
   IL_0078:  ceq
   IL_007a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void WinMdEventLambda()
         {
-            var text = @"
+            var text =
+                @"
 using Windows.UI.Xaml;
 using Windows.ApplicationModel;
                             
@@ -2576,7 +2600,9 @@ public class abcdef{
 
             var cv = this.CompileAndVerifyOnWin8Only(text);
 
-            cv.VerifyIL("abcdef.goo()", @"
+            cv.VerifyIL(
+                "abcdef.goo()",
+                @"
 {
   // Code size       65 (0x41)
   .maxstack  4
@@ -2603,7 +2629,8 @@ public class abcdef{
   IL_003b:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.AddEventHandler<Windows.UI.Xaml.SuspendingEventHandler>(System.Func<Windows.UI.Xaml.SuspendingEventHandler, System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, Windows.UI.Xaml.SuspendingEventHandler)""
   IL_0040:  ret
 }
-");
+"
+            );
         }
 
         /// <summary>
@@ -2613,7 +2640,8 @@ public class abcdef{
         [Fact]
         public void WinMdEventTest()
         {
-            var text = @"
+            var text =
+                @"
                             using Windows.UI.Xaml;
                             using Windows.ApplicationModel;
                             
@@ -2637,7 +2665,7 @@ public class abcdef{
             var cv = this.CompileAndVerifyOnWin8Only(text);
 
             var ExpectedIl =
-@"
+                @"
 {
   // Code size       76 (0x4c)
   .maxstack  5
@@ -2676,7 +2704,8 @@ public class abcdef{
         [Fact]
         public void WinMdEventTestLocalGeneration()
         {
-            var text = @"
+            var text =
+                @"
 using Windows.UI.Xaml;
 using Windows.ApplicationModel;
                             
@@ -2700,7 +2729,9 @@ public class abcdef{
 
             var cv = this.CompileAndVerifyOnWin8Only(text);
 
-            cv.VerifyIL("abcdef.goo()", @"
+            cv.VerifyIL(
+                "abcdef.goo()",
+                @"
 {
   // Code size       86 (0x56)
   .maxstack  4
@@ -2730,7 +2761,8 @@ public class abcdef{
   IL_004b:  newobj     ""Windows.UI.Xaml.SuspendingEventHandler..ctor(object, System.IntPtr)""
   IL_0050:  call       ""void System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMarshal.RemoveEventHandler<Windows.UI.Xaml.SuspendingEventHandler>(System.Action<System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken>, Windows.UI.Xaml.SuspendingEventHandler)""
   IL_0055:  ret
-}");
+}"
+            );
         }
 
         /// <summary>
@@ -2758,13 +2790,17 @@ public class abcdef{
             var @event = itextrange.GetMember<PEEventSymbol>("Suspending");
 
             Assert.True(@event.IsWindowsRuntimeEvent, "Failed to detect winrt type event");
-            Assert.True(!@event.MustCallMethodsDirectly, "Failed to override call methods directly");
+            Assert.True(
+                !@event.MustCallMethodsDirectly,
+                "Failed to override call methods directly"
+            );
         }
 
         [Fact]
         public void IsWindowsRuntimeEvent_EventSymbolSubtypes()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi sealed Event
        extends [mscorlib]System.MulticastDelegate
 {
@@ -2818,7 +2854,8 @@ public class abcdef{
 } // end of class Interface
 ";
 
-            var source = @"
+            var source =
+                @"
 class C : Interface<int>
 {
     event Event Interface<int>.Normal 
@@ -2851,8 +2888,14 @@ class C : Interface<int>
             Assert.True(interfaceWinRTEvent.IsWindowsRuntimeEvent);
 
             var implementingType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-            var implementingNormalEvent = implementingType.GetMembers().OfType<EventSymbol>().Single(e => e.Name.Contains("Normal"));
-            var implementingWinRTEvent = implementingType.GetMembers().OfType<EventSymbol>().Single(e => e.Name.Contains("WinRT"));
+            var implementingNormalEvent = implementingType
+                .GetMembers()
+                .OfType<EventSymbol>()
+                .Single(e => e.Name.Contains("Normal"));
+            var implementingWinRTEvent = implementingType
+                .GetMembers()
+                .OfType<EventSymbol>()
+                .Single(e => e.Name.Contains("WinRT"));
 
             Assert.IsType<SourceCustomEventSymbol>(implementingNormalEvent);
             Assert.IsType<SourceCustomEventSymbol>(implementingWinRTEvent);
@@ -2861,8 +2904,10 @@ class C : Interface<int>
             Assert.False(implementingNormalEvent.IsWindowsRuntimeEvent);
             Assert.True(implementingWinRTEvent.IsWindowsRuntimeEvent);
 
-            var substitutedNormalEvent = implementingNormalEvent.ExplicitInterfaceImplementations.Single();
-            var substitutedWinRTEvent = implementingWinRTEvent.ExplicitInterfaceImplementations.Single();
+            var substitutedNormalEvent =
+                implementingNormalEvent.ExplicitInterfaceImplementations.Single();
+            var substitutedWinRTEvent =
+                implementingWinRTEvent.ExplicitInterfaceImplementations.Single();
 
             Assert.IsType<SubstitutedEventSymbol>(substitutedNormalEvent);
             Assert.IsType<SubstitutedEventSymbol>(substitutedWinRTEvent);
@@ -2871,12 +2916,23 @@ class C : Interface<int>
             Assert.False(substitutedNormalEvent.IsWindowsRuntimeEvent);
             Assert.True(substitutedWinRTEvent.IsWindowsRuntimeEvent);
 
-            var retargetingAssembly = new RetargetingAssemblySymbol((SourceAssemblySymbol)comp.Assembly, isLinked: false);
+            var retargetingAssembly = new RetargetingAssemblySymbol(
+                (SourceAssemblySymbol)comp.Assembly,
+                isLinked: false
+            );
             retargetingAssembly.SetCorLibrary(comp.Assembly.CorLibrary);
 
-            var retargetingType = retargetingAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-            var retargetingNormalEvent = retargetingType.GetMembers().OfType<EventSymbol>().Single(e => e.Name.Contains("Normal"));
-            var retargetingWinRTEvent = retargetingType.GetMembers().OfType<EventSymbol>().Single(e => e.Name.Contains("WinRT"));
+            var retargetingType = retargetingAssembly.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                "C"
+            );
+            var retargetingNormalEvent = retargetingType
+                .GetMembers()
+                .OfType<EventSymbol>()
+                .Single(e => e.Name.Contains("Normal"));
+            var retargetingWinRTEvent = retargetingType
+                .GetMembers()
+                .OfType<EventSymbol>()
+                .Single(e => e.Name.Contains("WinRT"));
 
             Assert.IsType<RetargetingEventSymbol>(retargetingNormalEvent);
             Assert.IsType<RetargetingEventSymbol>(retargetingWinRTEvent);
@@ -2891,7 +2947,8 @@ class C : Interface<int>
         {
             // OutputKind only matters when the event does not override or implement
             // (implicitly or explicitly) another event.
-            var source = @"
+            var source =
+                @"
 class C
 {
     event System.Action E 
@@ -2911,7 +2968,11 @@ interface I
 
             foreach (OutputKind kind in Enum.GetValues(typeof(OutputKind)))
             {
-                var comp = CreateEmptyCompilation(source, WinRtRefs, TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug));
+                var comp = CreateEmptyCompilation(
+                    source,
+                    WinRtRefs,
+                    TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug)
+                );
                 comp.VerifyDiagnostics();
 
                 var @class = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -2934,7 +2995,8 @@ interface I
             // is copied from the interface event.
             // NOTE: The case where one source event implements multiple interface events
             // will be tested separately.
-            var source = @"
+            var source =
+                @"
 class C : Interface
 {
     public event System.Action Normal 
@@ -2953,9 +3015,19 @@ class C : Interface
 
             var ilRef = CompileIL(EventInterfaceIL);
 
-            foreach (OutputKind kind in new[] { OutputKind.DynamicallyLinkedLibrary, OutputKind.WindowsRuntimeMetadata })
+            foreach (
+                OutputKind kind in new[]
+                {
+                    OutputKind.DynamicallyLinkedLibrary,
+                    OutputKind.WindowsRuntimeMetadata,
+                }
+            )
             {
-                var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { ilRef }), TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug));
+                var comp = CreateEmptyCompilation(
+                    source,
+                    WinRtRefs.Concat(new[] { ilRef }),
+                    TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug)
+                );
                 comp.VerifyDiagnostics();
 
                 var @class = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -2972,7 +3044,8 @@ class C : Interface
         {
             // Overriding trumps output kind and implicit implementation.
 
-            var source = @"
+            var source =
+                @"
 class OverrideNoImpl : Base
 {
     public override event System.Action Normal
@@ -3022,19 +3095,44 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
             var interfaceILRef = CompileIL(EventInterfaceIL);
             var baseILRef = CompileIL(EventBaseIL);
 
-            foreach (OutputKind kind in new[] { OutputKind.DynamicallyLinkedLibrary, OutputKind.WindowsRuntimeMetadata })
+            foreach (
+                OutputKind kind in new[]
+                {
+                    OutputKind.DynamicallyLinkedLibrary,
+                    OutputKind.WindowsRuntimeMetadata,
+                }
+            )
             {
-                var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { interfaceILRef, baseILRef }), TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug));
+                var comp = CreateEmptyCompilation(
+                    source,
+                    WinRtRefs.Concat(new[] { interfaceILRef, baseILRef }),
+                    TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug)
+                );
                 comp.VerifyDiagnostics(
                     // (40,41): error CS1991: 'OverrideAndImplIncorrectly.WinRT' cannot implement 'Interface.WinRT' because 'Interface.WinRT' is a Windows Runtime event and 'OverrideAndImplIncorrectly.WinRT' is a regular .NET event.
                     //     public override event System.Action WinRT
-                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "WinRT").WithArguments("OverrideAndImplIncorrectly.WinRT", "Interface.WinRT", "Interface.WinRT", "OverrideAndImplIncorrectly.WinRT"),
+                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "WinRT")
+                        .WithArguments(
+                            "OverrideAndImplIncorrectly.WinRT",
+                            "Interface.WinRT",
+                            "Interface.WinRT",
+                            "OverrideAndImplIncorrectly.WinRT"
+                        ),
                     // (34,41): error CS1991: 'OverrideAndImplIncorrectly.Normal' cannot implement 'Interface.Normal' because 'OverrideAndImplIncorrectly.Normal' is a Windows Runtime event and 'Interface.Normal' is a regular .NET event.
                     //     public override event System.Action Normal
-                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "Normal").WithArguments("OverrideAndImplIncorrectly.Normal", "Interface.Normal", "OverrideAndImplIncorrectly.Normal", "Interface.Normal"));
+                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "Normal")
+                        .WithArguments(
+                            "OverrideAndImplIncorrectly.Normal",
+                            "Interface.Normal",
+                            "OverrideAndImplIncorrectly.Normal",
+                            "Interface.Normal"
+                        )
+                );
 
                 {
-                    var overrideNoImplClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("OverrideNoImpl");
+                    var overrideNoImplClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                        "OverrideNoImpl"
+                    );
                     var normalEvent = overrideNoImplClass.GetMember<EventSymbol>("Normal");
                     var winRTEvent = overrideNoImplClass.GetMember<EventSymbol>("WinRT");
 
@@ -3043,8 +3141,11 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 }
 
                 {
-                    var overrideAndImplCorrectlyClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("OverrideAndImplCorrectly");
-                    var normalEvent = overrideAndImplCorrectlyClass.GetMember<EventSymbol>("Normal");
+                    var overrideAndImplCorrectlyClass =
+                        comp.GlobalNamespace.GetMember<NamedTypeSymbol>("OverrideAndImplCorrectly");
+                    var normalEvent = overrideAndImplCorrectlyClass.GetMember<EventSymbol>(
+                        "Normal"
+                    );
                     var winRTEvent = overrideAndImplCorrectlyClass.GetMember<EventSymbol>("WinRT");
 
                     Assert.False(normalEvent.IsWindowsRuntimeEvent);
@@ -3052,9 +3153,16 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 }
 
                 {
-                    var overrideAndImplIncorrectlyClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("OverrideAndImplIncorrectly");
-                    var normalEvent = overrideAndImplIncorrectlyClass.GetMember<EventSymbol>("Normal");
-                    var winRTEvent = overrideAndImplIncorrectlyClass.GetMember<EventSymbol>("WinRT");
+                    var overrideAndImplIncorrectlyClass =
+                        comp.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                            "OverrideAndImplIncorrectly"
+                        );
+                    var normalEvent = overrideAndImplIncorrectlyClass.GetMember<EventSymbol>(
+                        "Normal"
+                    );
+                    var winRTEvent = overrideAndImplIncorrectlyClass.GetMember<EventSymbol>(
+                        "WinRT"
+                    );
 
                     // NB: reversed
                     Assert.True(normalEvent.IsWindowsRuntimeEvent);
@@ -3069,7 +3177,8 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
             // Explicit implementation trumps output kind.  It does not interact
             // with the rules for overriding or implicit implementation, because
             // an explicit implementation (in source) can do neither of those things.
-            var source = @"
+            var source =
+                @"
 class C : Interface
 {
     event System.Action Interface.Normal 
@@ -3088,14 +3197,30 @@ class C : Interface
 
             var ilRef = CompileIL(EventInterfaceIL);
 
-            foreach (OutputKind kind in new[] { OutputKind.DynamicallyLinkedLibrary, OutputKind.WindowsRuntimeMetadata })
+            foreach (
+                OutputKind kind in new[]
+                {
+                    OutputKind.DynamicallyLinkedLibrary,
+                    OutputKind.WindowsRuntimeMetadata,
+                }
+            )
             {
-                var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { ilRef }), TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug));
+                var comp = CreateEmptyCompilation(
+                    source,
+                    WinRtRefs.Concat(new[] { ilRef }),
+                    TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug)
+                );
                 comp.VerifyDiagnostics();
 
                 var @class = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                var normalEvent = @class.GetMembers().OfType<EventSymbol>().Single(e => e.Name.Contains("Normal"));
-                var winRTEvent = @class.GetMembers().OfType<EventSymbol>().Single(e => e.Name.Contains("WinRT"));
+                var normalEvent = @class
+                    .GetMembers()
+                    .OfType<EventSymbol>()
+                    .Single(e => e.Name.Contains("Normal"));
+                var winRTEvent = @class
+                    .GetMembers()
+                    .OfType<EventSymbol>()
+                    .Single(e => e.Name.Contains("WinRT"));
 
                 Assert.False(normalEvent.IsWindowsRuntimeEvent);
                 Assert.True(winRTEvent.IsWindowsRuntimeEvent);
@@ -3105,7 +3230,8 @@ class C : Interface
         [Fact]
         public void ERR_MixingWinRTEventWithRegular_TwoInterfaces()
         {
-            var il = @"
+            var il =
+                @"
 .class interface public abstract auto ansi INormal
 {
   .method public hidebysig newslot specialname abstract virtual 
@@ -3149,7 +3275,8 @@ class C : Interface
 
             // List WinRT interface first.
             {
-                var source = @"
+                var source =
+                    @"
 class C : IWinRT, INormal
 {
     public event System.Action E 
@@ -3165,8 +3292,10 @@ class C : IWinRT, INormal
                 var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { ilRef }));
                 comp.VerifyDiagnostics(
                     // (4,32): error CS1991: 'C.E' cannot implement 'INormal.E' because 'C.E' is a Windows Runtime event and 'INormal.E' is a regular .NET event.
-                    //     public event System.Action E 
-                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "E").WithArguments("C.E", "INormal.E", "C.E", "INormal.E"));
+                    //     public event System.Action E
+                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "E")
+                        .WithArguments("C.E", "INormal.E", "C.E", "INormal.E")
+                );
 
                 var @class = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                 var @event = @class.GetMember<EventSymbol>("E");
@@ -3176,7 +3305,8 @@ class C : IWinRT, INormal
 
             // List normal interface first.
             {
-                var source = @"
+                var source =
+                    @"
 class C : INormal, IWinRT
 {
     public event System.Action E 
@@ -3192,8 +3322,10 @@ class C : INormal, IWinRT
                 var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { ilRef }));
                 comp.VerifyDiagnostics(
                     // (4,32): error CS1991: 'C.E' cannot implement 'INormal.E' because 'C.E' is a Windows Runtime event and 'INormal.E' is a regular .NET event.
-                    //     public event System.Action E 
-                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "E").WithArguments("C.E", "INormal.E", "C.E", "INormal.E"));
+                    //     public event System.Action E
+                    Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "E")
+                        .WithArguments("C.E", "INormal.E", "C.E", "INormal.E")
+                );
 
                 var @class = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                 var @event = @class.GetMember<EventSymbol>("E");
@@ -3206,7 +3338,8 @@ class C : INormal, IWinRT
         [Fact(Skip = "547321")]
         public void ERR_MixingWinRTEventWithRegular_BaseTypeImplementsInterface()
         {
-            var source = @"
+            var source =
+                @"
 class Derived : ReversedBase, Interface
 {
 }
@@ -3215,18 +3348,35 @@ class Derived : ReversedBase, Interface
             var interfaceILRef = CompileIL(EventInterfaceIL);
             var baseILRef = CompileIL(EventBaseIL);
 
-            var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { interfaceILRef, baseILRef }));
+            var comp = CreateEmptyCompilation(
+                source,
+                WinRtRefs.Concat(new[] { interfaceILRef, baseILRef })
+            );
             comp.VerifyDiagnostics(
                 // 53b0a0ee-4ca7-4106-89d3-972416f701c6.dll: error CS1991: 'ReversedBase.WinRT' cannot implement 'Interface.WinRT' because 'Interface.WinRT' is a Windows Runtime event and 'ReversedBase.WinRT' is a regular .NET event.
-                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular).WithArguments("ReversedBase.WinRT", "Interface.WinRT", "Interface.WinRT", "ReversedBase.WinRT"),
+                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular)
+                    .WithArguments(
+                        "ReversedBase.WinRT",
+                        "Interface.WinRT",
+                        "Interface.WinRT",
+                        "ReversedBase.WinRT"
+                    ),
                 // 53b0a0ee-4ca7-4106-89d3-972416f701c6.dll: error CS1991: 'ReversedBase.Normal' cannot implement 'Interface.Normal' because 'ReversedBase.Normal' is a Windows Runtime event and 'Interface.Normal' is a regular .NET event.
-                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular).WithArguments("ReversedBase.Normal", "Interface.Normal", "ReversedBase.Normal", "Interface.Normal"));
+                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular)
+                    .WithArguments(
+                        "ReversedBase.Normal",
+                        "Interface.Normal",
+                        "ReversedBase.Normal",
+                        "Interface.Normal"
+                    )
+            );
         }
 
         [Fact]
         public void ERR_MixingWinRTEventWithRegular_OverrideVsImplementation()
         {
-            var source = @"
+            var source =
+                @"
 class Derived : ReversedBase, Interface
 {
     public override event System.Action Normal
@@ -3246,15 +3396,31 @@ class Derived : ReversedBase, Interface
             var interfaceILRef = CompileIL(EventInterfaceIL);
             var baseILRef = CompileIL(EventBaseIL);
 
-            var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { interfaceILRef, baseILRef }));
+            var comp = CreateEmptyCompilation(
+                source,
+                WinRtRefs.Concat(new[] { interfaceILRef, baseILRef })
+            );
             // BREAK: dev11 doesn't catch these conflicts.
             comp.VerifyDiagnostics(
                 // (10,41): error CS1991: 'Derived.WinRT' cannot implement 'Interface.WinRT' because 'Interface.WinRT' is a Windows Runtime event and 'Derived.WinRT' is a regular .NET event.
                 //     public override event System.Action WinRT
-                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "WinRT").WithArguments("Derived.WinRT", "Interface.WinRT", "Interface.WinRT", "Derived.WinRT"),
+                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "WinRT")
+                    .WithArguments(
+                        "Derived.WinRT",
+                        "Interface.WinRT",
+                        "Interface.WinRT",
+                        "Derived.WinRT"
+                    ),
                 // (4,41): error CS1991: 'Derived.Normal' cannot implement 'Interface.Normal' because 'Derived.Normal' is a Windows Runtime event and 'Interface.Normal' is a regular .NET event.
                 //     public override event System.Action Normal
-                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "Normal").WithArguments("Derived.Normal", "Interface.Normal", "Derived.Normal", "Interface.Normal"));
+                Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "Normal")
+                    .WithArguments(
+                        "Derived.Normal",
+                        "Interface.Normal",
+                        "Derived.Normal",
+                        "Interface.Normal"
+                    )
+            );
 
             var derivedClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Derived");
             var normalEvent = derivedClass.GetMember<EventSymbol>("Normal");
@@ -3268,7 +3434,8 @@ class Derived : ReversedBase, Interface
         [Fact]
         public void AccessorSignatures()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     event System.Action E 
@@ -3283,13 +3450,24 @@ class C
 }
 ";
 
-            foreach (OutputKind kind in new[] { OutputKind.DynamicallyLinkedLibrary, OutputKind.WindowsRuntimeMetadata })
+            foreach (
+                OutputKind kind in new[]
+                {
+                    OutputKind.DynamicallyLinkedLibrary,
+                    OutputKind.WindowsRuntimeMetadata,
+                }
+            )
             {
-                var comp = CreateEmptyCompilation(source, WinRtRefs, TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug));
+                var comp = CreateEmptyCompilation(
+                    source,
+                    WinRtRefs,
+                    TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug)
+                );
                 comp.VerifyDiagnostics(
                     // (10,25): warning CS0067: The event 'C.F' is never used
                     //     event System.Action F;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "F").WithArguments("C.F"));
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "F").WithArguments("C.F")
+                );
 
                 var @class = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
                 var customEvent = @class.GetMember<EventSymbol>("E");
@@ -3311,7 +3489,8 @@ class C
         [Fact]
         public void MissingEventRegistrationTokenType()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     event System.Action E;
@@ -3324,21 +3503,28 @@ class C
                 // Add accessor signature:
                 // (4,25): error CS0518: Predefined type 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken' is not defined or imported
                 //     event System.Action E;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E").WithArguments("System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken"),
-
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
+                    .WithArguments(
+                        "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken"
+                    ),
                 // (4,25): error CS0518: Predefined type 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken' is not defined or imported
                 //     event System.Action E;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E").WithArguments("System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken"),
-
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
+                    .WithArguments(
+                        "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken"
+                    ),
                 // Backing field type:
                 // (4,25): error CS0518: Predefined type 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1' is not defined or imported
                 //     event System.Action E;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E").WithArguments("System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1"),
-
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
+                    .WithArguments(
+                        "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1"
+                    ),
                 // Uninteresting:
                 // (4,25): warning CS0067: The event 'C.E' is never used
                 //     event System.Action E;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E"));
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E").WithArguments("C.E")
+            );
 
             var @class = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var @event = @class.GetMember<EventSymbol>("E");
@@ -3352,7 +3538,8 @@ class C
         [Fact]
         public void EventAccess_RefKind()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public event System.Action Instance;
@@ -3376,25 +3563,31 @@ class C
     }
 }
 ";
-            CreateEmptyCompilation(source, WinRtRefs, TestOptions.ReleaseWinMD).VerifyDiagnostics(
-                // (9,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                //         Ref(ref Instance);
-                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance").WithLocation(9, 17),
-                // (10,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                //         Out(out Instance);
-                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance").WithLocation(10, 17),
-                // (11,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                //         Ref(ref Static);
-                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static").WithLocation(11, 17),
-                // (12,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
-                //         Out(out Static);
-                Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static").WithLocation(12, 17));
+            CreateEmptyCompilation(source, WinRtRefs, TestOptions.ReleaseWinMD)
+                .VerifyDiagnostics(
+                    // (9,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                    //         Ref(ref Instance);
+                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance")
+                        .WithLocation(9, 17),
+                    // (10,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                    //         Out(out Instance);
+                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Instance")
+                        .WithLocation(10, 17),
+                    // (11,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                    //         Ref(ref Static);
+                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static")
+                        .WithLocation(11, 17),
+                    // (12,17): error CS7084: A Windows Runtime event may not be passed as an out or ref parameter.
+                    //         Out(out Static);
+                    Diagnostic(ErrorCode.ERR_WinRtEventPassedByRef, "Static").WithLocation(12, 17)
+                );
         }
 
         [Fact]
         public void EventAccess_MissingInvocationListAccessor()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public event System.Action E;
@@ -3425,22 +3618,37 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     }
 }
 ";
-            CreateCompilationWithMscorlib40(source, options: TestOptions.ReleaseWinMD).VerifyEmitDiagnostics(
-                // (4,32): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.AddEventHandler'
-                //     public event System.Action E;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E").WithArguments("System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1", "AddEventHandler"),
-                // (4,32): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.RemoveEventHandler'
-                //     public event System.Action E;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E").WithArguments("System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1", "RemoveEventHandler"),
-                // (8,9): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable<T>.get_InvocationList'
-                //         E();
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E").WithArguments("System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable<T>", "get_InvocationList"));
+            CreateCompilationWithMscorlib40(source, options: TestOptions.ReleaseWinMD)
+                .VerifyEmitDiagnostics(
+                    // (4,32): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.AddEventHandler'
+                    //     public event System.Action E;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
+                        .WithArguments(
+                            "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1",
+                            "AddEventHandler"
+                        ),
+                    // (4,32): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.RemoveEventHandler'
+                    //     public event System.Action E;
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
+                        .WithArguments(
+                            "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1",
+                            "RemoveEventHandler"
+                        ),
+                    // (8,9): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable<T>.get_InvocationList'
+                    //         E();
+                    Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
+                        .WithArguments(
+                            "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable<T>",
+                            "get_InvocationList"
+                        )
+                );
         }
 
         [Fact]
         public void CallMethodsDirectly_Static()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi sealed beforefieldinit Events
        extends [mscorlib]System.Object
 {
@@ -3496,7 +3704,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 }
 ";
 
-            var compilation = CreateCompilationWithIL("", il, targetFramework: TargetFramework.Empty, references: WinRtRefs);
+            var compilation = CreateCompilationWithIL(
+                "",
+                il,
+                targetFramework: TargetFramework.Empty,
+                references: WinRtRefs
+            );
 
             var type = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("Events");
             var instanceEvent = type.GetMember<EventSymbol>("Instance");
@@ -3517,7 +3730,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [WorkItem(1055825, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1055825")]
         public void AssociatedField()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -3553,7 +3767,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 } // end of class C
 ";
             var ilRef = CompileIL(ilSource);
-            var comp = CreateEmptyCompilation("", WinRtRefs.Concat(new[] { ilRef }), TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var comp = CreateEmptyCompilation(
+                "",
+                WinRtRefs.Concat(new[] { ilRef }),
+                TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             comp.VerifyDiagnostics();
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -3571,7 +3789,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             Assert.True(@event.IsWindowsRuntimeEvent);
 
             var eventType = @event.TypeWithAnnotations;
-            var tokenType = compilation.GetWellKnownType(WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken);
+            var tokenType = compilation.GetWellKnownType(
+                WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken
+            );
             Assert.NotNull(tokenType);
             var voidType = compilation.GetSpecialType(SpecialType.System_Void);
             Assert.NotNull(voidType);
@@ -3590,7 +3810,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
             if (@event.HasAssociatedField)
             {
-                var expectedFieldType = compilation.GetWellKnownType(WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T).Construct(eventType.Type);
+                var expectedFieldType = compilation
+                    .GetWellKnownType(
+                        WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationTokenTable_T
+                    )
+                    .Construct(eventType.Type);
                 Assert.Equal(expectedFieldType, @event.AssociatedField.Type);
             }
             else
@@ -3599,7 +3823,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
         }
 
-        private static void VerifyNormalEventShape(EventSymbol @event, CSharpCompilation compilation)
+        private static void VerifyNormalEventShape(
+            EventSymbol @event,
+            CSharpCompilation compilation
+        )
         {
             Assert.False(@event.IsWindowsRuntimeEvent);
 

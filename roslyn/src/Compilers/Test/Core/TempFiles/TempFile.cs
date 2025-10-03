@@ -6,13 +6,13 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
-using System.Text;
-using System.Diagnostics;
 using Roslyn.Utilities;
-using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
@@ -26,16 +26,29 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             _path = path;
         }
 
-        internal TempFile(string prefix, string extension, string directory, string callerSourcePath, int callerLineNumber)
+        internal TempFile(
+            string prefix,
+            string extension,
+            string directory,
+            string callerSourcePath,
+            int callerLineNumber
+        )
         {
             while (true)
             {
                 if (prefix == null)
                 {
-                    prefix = System.IO.Path.GetFileName(callerSourcePath) + "_" + callerLineNumber.ToString() + "_";
+                    prefix =
+                        System.IO.Path.GetFileName(callerSourcePath)
+                        + "_"
+                        + callerLineNumber.ToString()
+                        + "_";
                 }
 
-                _path = System.IO.Path.Combine(directory ?? TempRoot.Root, prefix + Guid.NewGuid() + (extension ?? ".tmp"));
+                _path = System.IO.Path.Combine(
+                    directory ?? TempRoot.Root,
+                    prefix + Guid.NewGuid() + (extension ?? ".tmp")
+                );
 
                 try
                 {

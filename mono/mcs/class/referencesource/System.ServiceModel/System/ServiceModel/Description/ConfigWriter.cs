@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.Configuration;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Diagnostics;
 
@@ -25,33 +25,44 @@ namespace System.ServiceModel.Description
 
             this.bindingsSection = BindingsSection.GetSection(configuration);
 
-            ServiceModelSectionGroup serviceModelSectionGroup = ServiceModelSectionGroup.GetSectionGroup(configuration);
+            ServiceModelSectionGroup serviceModelSectionGroup =
+                ServiceModelSectionGroup.GetSectionGroup(configuration);
             this.channels = serviceModelSectionGroup.Client.Endpoints;
             this.config = configuration;
         }
 
-        internal ChannelEndpointElement WriteChannelDescription(ServiceEndpoint endpoint, string typeName)
+        internal ChannelEndpointElement WriteChannelDescription(
+            ServiceEndpoint endpoint,
+            string typeName
+        )
         {
             ChannelEndpointElement channelElement = null;
 
             // Create Binding
             BindingDictionaryValue bindingDV = CreateBindingConfig(endpoint.Binding);
 
-
             channelElement = new ChannelEndpointElement(endpoint.Address, typeName);
 
             // Microsoft: review: Use decoded form to preserve the user-given friendly name, however, beacuse our Encoding algorithm
             // does not touch ASCII names, a name that looks like encoded name will not roundtrip(Example: "_x002C_" will turned into ",")
-            channelElement.Name = NamingHelper.GetUniqueName(NamingHelper.CodeName(endpoint.Name), this.CheckIfChannelNameInUse, null);
+            channelElement.Name = NamingHelper.GetUniqueName(
+                NamingHelper.CodeName(endpoint.Name),
+                this.CheckIfChannelNameInUse,
+                null
+            );
 
             channelElement.BindingConfiguration = bindingDV.BindingName;
             channelElement.Binding = bindingDV.BindingSectionName;
             channels.Add(channelElement);
 
-            return channelElement;            
+            return channelElement;
         }
 
-        internal void WriteBinding(Binding binding, out string bindingSectionName, out string configurationName)
+        internal void WriteBinding(
+            Binding binding,
+            out string bindingSectionName,
+            out string configurationName
+        )
         {
             BindingDictionaryValue result = CreateBindingConfig(binding);
 
@@ -66,11 +77,20 @@ namespace System.ServiceModel.Description
             {
                 // Microsoft: review: Use decoded form to preserve the user-given friendly name, however, beacuse our Encoding algorithm
                 // does not touch ASCII names, a name that looks like encoded name will not roundtrip(Example: "_x002C_" will turned into ",")
-                string bindingName = NamingHelper.GetUniqueName(NamingHelper.CodeName(binding.Name), this.CheckIfBindingNameInUse, null);
+                string bindingName = NamingHelper.GetUniqueName(
+                    NamingHelper.CodeName(binding.Name),
+                    this.CheckIfBindingNameInUse,
+                    null
+                );
                 string bindingSectionName;
 
                 if (!BindingsSection.TryAdd(bindingName, binding, config, out bindingSectionName))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ConfigBindingCannotBeConfigured), "endpoint.Binding"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.ConfigBindingCannotBeConfigured),
+                            "endpoint.Binding"
+                        )
+                    );
 
                 bindingDV = new BindingDictionaryValue(bindingName, bindingSectionName);
                 bindingTable.Add(binding, bindingDV);
@@ -80,7 +100,9 @@ namespace System.ServiceModel.Description
 
         bool CheckIfBindingNameInUse(string name, object nameCollection)
         {
-            foreach (BindingCollectionElement bindingCollectionElement in this.bindingsSection.BindingCollections)
+            foreach (
+                BindingCollectionElement bindingCollectionElement in this.bindingsSection.BindingCollections
+            )
                 if (bindingCollectionElement.ContainsKey(name))
                     return true;
 
@@ -107,6 +129,5 @@ namespace System.ServiceModel.Description
                 this.BindingSectionName = bindingSectionName;
             }
         }
-
     }
 }

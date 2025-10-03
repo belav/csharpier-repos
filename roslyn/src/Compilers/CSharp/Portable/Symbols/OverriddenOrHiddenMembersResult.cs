@@ -5,10 +5,10 @@
 #nullable disable
 
 using System.Collections.Immutable;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using System.Diagnostics;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
@@ -21,17 +21,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static readonly OverriddenOrHiddenMembersResult Empty =
             new OverriddenOrHiddenMembersResult(
                 ImmutableArray<Symbol>.Empty,
-                ImmutableArray<Symbol>.Empty);
+                ImmutableArray<Symbol>.Empty
+            );
 
         private readonly ImmutableArray<Symbol> _overriddenMembers;
-        public ImmutableArray<Symbol> OverriddenMembers { get { return _overriddenMembers; } }
+        public ImmutableArray<Symbol> OverriddenMembers
+        {
+            get { return _overriddenMembers; }
+        }
 
         private readonly ImmutableArray<Symbol> _hiddenMembers;
-        public ImmutableArray<Symbol> HiddenMembers { get { return _hiddenMembers; } }
+        public ImmutableArray<Symbol> HiddenMembers
+        {
+            get { return _hiddenMembers; }
+        }
 
         private OverriddenOrHiddenMembersResult(
             ImmutableArray<Symbol> overriddenMembers,
-            ImmutableArray<Symbol> hiddenMembers)
+            ImmutableArray<Symbol> hiddenMembers
+        )
         {
             _overriddenMembers = overriddenMembers;
             _hiddenMembers = hiddenMembers;
@@ -39,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static OverriddenOrHiddenMembersResult Create(
             ImmutableArray<Symbol> overriddenMembers,
-            ImmutableArray<Symbol> hiddenMembers)
+            ImmutableArray<Symbol> hiddenMembers
+        )
         {
             if (overriddenMembers.IsEmpty && hiddenMembers.IsEmpty)
             {
@@ -51,26 +60,49 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal static Symbol GetOverriddenMember(Symbol substitutedOverridingMember, Symbol overriddenByDefinitionMember)
+        internal static Symbol GetOverriddenMember(
+            Symbol substitutedOverridingMember,
+            Symbol overriddenByDefinitionMember
+        )
         {
             Debug.Assert(!substitutedOverridingMember.IsDefinition);
 
             if ((object)overriddenByDefinitionMember != null)
             {
-                NamedTypeSymbol overriddenByDefinitionContaining = overriddenByDefinitionMember.ContainingType;
-                NamedTypeSymbol overriddenByDefinitionContainingTypeDefinition = overriddenByDefinitionContaining.OriginalDefinition;
-                for (NamedTypeSymbol baseType = substitutedOverridingMember.ContainingType.BaseTypeNoUseSiteDiagnostics;
+                NamedTypeSymbol overriddenByDefinitionContaining =
+                    overriddenByDefinitionMember.ContainingType;
+                NamedTypeSymbol overriddenByDefinitionContainingTypeDefinition =
+                    overriddenByDefinitionContaining.OriginalDefinition;
+                for (
+                    NamedTypeSymbol baseType = substitutedOverridingMember
+                        .ContainingType
+                        .BaseTypeNoUseSiteDiagnostics;
                     (object)baseType != null;
-                    baseType = baseType.BaseTypeNoUseSiteDiagnostics)
+                    baseType = baseType.BaseTypeNoUseSiteDiagnostics
+                )
                 {
-                    if (TypeSymbol.Equals(baseType.OriginalDefinition, overriddenByDefinitionContainingTypeDefinition, TypeCompareKind.ConsiderEverything2))
+                    if (
+                        TypeSymbol.Equals(
+                            baseType.OriginalDefinition,
+                            overriddenByDefinitionContainingTypeDefinition,
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                    )
                     {
-                        if (TypeSymbol.Equals(baseType, overriddenByDefinitionContaining, TypeCompareKind.ConsiderEverything2))
+                        if (
+                            TypeSymbol.Equals(
+                                baseType,
+                                overriddenByDefinitionContaining,
+                                TypeCompareKind.ConsiderEverything2
+                            )
+                        )
                         {
                             return overriddenByDefinitionMember;
                         }
 
-                        return overriddenByDefinitionMember.OriginalDefinition.SymbolAsMember(baseType);
+                        return overriddenByDefinitionMember.OriginalDefinition.SymbolAsMember(
+                            baseType
+                        );
                     }
                 }
 
@@ -89,7 +121,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             foreach (var overriddenMember in _overriddenMembers)
             {
-                if (overriddenMember.IsAbstract || overriddenMember.IsVirtual || overriddenMember.IsOverride)
+                if (
+                    overriddenMember.IsAbstract
+                    || overriddenMember.IsVirtual
+                    || overriddenMember.IsOverride
+                )
                 {
                     return overriddenMember;
                 }

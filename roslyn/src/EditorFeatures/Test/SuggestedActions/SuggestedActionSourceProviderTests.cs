@@ -18,10 +18,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SuggestedActions
         public void EnsureAttributesMatchData()
         {
             // Ensure that the list of orderings on this type matches the set we expose in SuggestedActionsSourceProvider.Orderings
-            var attributes = typeof(SuggestedActionsSourceProvider).GetCustomAttributes(inherit: false)
+            var attributes = typeof(SuggestedActionsSourceProvider)
+                .GetCustomAttributes(inherit: false)
                 .OfType<SuggestedActionPriorityAttribute>()
                 .ToImmutableArray();
-            AssertEx.SetEqual(attributes.Select(a => a.Priority), SuggestedActionsSourceProvider.Orderings);
+            AssertEx.SetEqual(
+                attributes.Select(a => a.Priority),
+                SuggestedActionsSourceProvider.Orderings
+            );
         }
     }
 }

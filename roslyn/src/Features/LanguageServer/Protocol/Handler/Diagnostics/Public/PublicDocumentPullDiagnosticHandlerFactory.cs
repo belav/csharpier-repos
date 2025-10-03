@@ -27,16 +27,26 @@ internal sealed class PublicDocumentPullDiagnosticHandlerFactory : ILspServiceFa
     public PublicDocumentPullDiagnosticHandlerFactory(
         IDiagnosticAnalyzerService analyzerService,
         IDiagnosticsRefresher diagnosticRefresher,
-        IGlobalOptionService globalOptions)
+        IGlobalOptionService globalOptions
+    )
     {
         _analyzerService = analyzerService;
         _diagnosticRefresher = diagnosticRefresher;
         _globalOptions = globalOptions;
     }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    )
     {
-        var clientLanguageServerManager = lspServices.GetRequiredService<IClientLanguageServerManager>();
-        return new PublicDocumentPullDiagnosticsHandler(clientLanguageServerManager, _analyzerService, _diagnosticRefresher, _globalOptions);
+        var clientLanguageServerManager =
+            lspServices.GetRequiredService<IClientLanguageServerManager>();
+        return new PublicDocumentPullDiagnosticsHandler(
+            clientLanguageServerManager,
+            _analyzerService,
+            _diagnosticRefresher,
+            _globalOptions
+        );
     }
 }

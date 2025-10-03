@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -25,7 +25,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="TSource"></typeparam>
     internal sealed class ElementAtQueryOperator<TSource> : UnaryQueryOperator<TSource, TSource>
     {
-
         private readonly int m_index; // The index that we're looking for.
         private readonly bool m_prematureMerge = false; // Whether to prematurely merge the input of this operator.
         private readonly bool m_limitsParallelism = false; // Whether this operator limits parallelism
@@ -39,7 +38,7 @@ namespace System.Linq.Parallel
         //
 
         internal ElementAtQueryOperator(IEnumerable<TSource> child, int index)
-            :base(child)
+            : base(child)
         {
             Contract.Assert(child != null, "child data source cannot be null");
             Contract.Assert(index >= 0, "index can't be less than 0");
@@ -58,16 +57,19 @@ namespace System.Linq.Parallel
         // partitions as needed.
         //
 
-        internal override QueryResults<TSource> Open(
-            QuerySettings settings, bool preferStriping)
+        internal override QueryResults<TSource> Open(QuerySettings settings, bool preferStriping)
         {
             // We just open the child operator.
             QueryResults<TSource> childQueryResults = Child.Open(settings, false);
             return new UnaryQueryOperatorResults(childQueryResults, this, settings, preferStriping);
         }
 
-        internal override void  WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource,TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
+        internal override void WrapPartitionedStream<TKey>(
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // If the child OOP index is not correct, reindex.
             int partitionCount = inputStream.PartitionCount;
@@ -75,7 +77,14 @@ namespace System.Linq.Parallel
             PartitionedStream<TSource, int> intKeyStream;
             if (m_prematureMerge)
             {
-                intKeyStream = ExecuteAndCollectResults(inputStream, partitionCount, Child.OutputOrdered, preferStriping, settings).GetPartitionedStream();
+                intKeyStream = ExecuteAndCollectResults(
+                        inputStream,
+                        partitionCount,
+                        Child.OutputOrdered,
+                        preferStriping,
+                        settings
+                    )
+                    .GetPartitionedStream();
                 Contract.Assert(intKeyStream.OrdinalIndexState == OrdinalIndexState.Indexible);
             }
             else
@@ -87,11 +96,19 @@ namespace System.Linq.Parallel
             Shared<bool> resultFoundFlag = new Shared<bool>(false);
 
             PartitionedStream<TSource, int> outputStream = new PartitionedStream<TSource, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Correct);
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Correct
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new ElementAtQueryOperatorEnumerator(intKeyStream[i], m_index, resultFoundFlag, settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new ElementAtQueryOperatorEnumerator(
+                    intKeyStream[i],
+                    m_index,
+                    resultFoundFlag,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
@@ -103,7 +120,10 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TSource> AsSequentialQuery(CancellationToken token)
         {
-            Contract.Assert(false, "This method should never be called as fallback to sequential is handled in Aggregate().");
+            Contract.Assert(
+                false,
+                "This method should never be called as fallback to sequential is handled in Aggregate()."
+            );
             throw new NotSupportedException();
         }
 
@@ -117,7 +137,6 @@ namespace System.Linq.Parallel
             get { return m_limitsParallelism; }
         }
 
-        
         /// <summary>
         /// Executes the query, either sequentially or in parallel, depending on the query execution mode and
         /// whether a premature merge was inserted by this ElementAt operator.
@@ -129,20 +148,38 @@ namespace System.Linq.Parallel
         {
             // If we were to insert a premature merge before this ElementAt, and we are executing in conservative mode, run the whole query
             // sequentially.
-            if (LimitsParallelism && SpecifiedQuerySettings.WithDefaults().ExecutionMode.Value != ParallelExecutionMode.ForceParallelism)
+            if (
+                LimitsParallelism
+                && SpecifiedQuerySettings.WithDefaults().ExecutionMode.Value
+                    != ParallelExecutionMode.ForceParallelism
+            )
             {
                 CancellationState cancelState = SpecifiedQuerySettings.CancellationState;
                 if (withDefaultValue)
                 {
-                    IEnumerable<TSource> childAsSequential = Child.AsSequentialQuery(cancelState.ExternalCancellationToken);
-                    IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, cancelState.ExternalCancellationToken);
-                    result = ExceptionAggregator.WrapEnumerable(childWithCancelChecks, cancelState).ElementAtOrDefault(m_index);
+                    IEnumerable<TSource> childAsSequential = Child.AsSequentialQuery(
+                        cancelState.ExternalCancellationToken
+                    );
+                    IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                        childAsSequential,
+                        cancelState.ExternalCancellationToken
+                    );
+                    result = ExceptionAggregator
+                        .WrapEnumerable(childWithCancelChecks, cancelState)
+                        .ElementAtOrDefault(m_index);
                 }
                 else
                 {
-                    IEnumerable<TSource> childAsSequential = Child.AsSequentialQuery(cancelState.ExternalCancellationToken);
-                    IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(childAsSequential, cancelState.ExternalCancellationToken);
-                    result = ExceptionAggregator.WrapEnumerable(childWithCancelChecks, cancelState).ElementAt(m_index);
+                    IEnumerable<TSource> childAsSequential = Child.AsSequentialQuery(
+                        cancelState.ExternalCancellationToken
+                    );
+                    IEnumerable<TSource> childWithCancelChecks = CancellableEnumerable.Wrap(
+                        childAsSequential,
+                        cancelState.ExternalCancellationToken
+                    );
+                    result = ExceptionAggregator
+                        .WrapEnumerable(childWithCancelChecks, cancelState)
+                        .ElementAt(m_index);
                 }
                 return true;
             }
@@ -162,7 +199,6 @@ namespace System.Linq.Parallel
             return false;
         }
 
-
         //---------------------------------------------------------------------------------------
         // This enumerator performs the search for the element at the specified index.
         //
@@ -178,9 +214,12 @@ namespace System.Linq.Parallel
             // Instantiates a new any/all search operator.
             //
 
-            internal ElementAtQueryOperatorEnumerator(QueryOperatorEnumerator<TSource, int> source,
-                                                      int index, Shared<bool> resultFoundFlag,
-                CancellationToken cancellationToken)
+            internal ElementAtQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TSource, int> source,
+                int index,
+                Shared<bool> resultFoundFlag,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.Assert(source != null);
                 Contract.Assert(index >= 0);

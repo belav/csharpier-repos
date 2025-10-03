@@ -22,7 +22,10 @@ namespace Microsoft.Extensions.Http.Logging
             _httpClientAsyncLogger = httpClientLogger as IHttpClientAsyncLogger;
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             ThrowHelper.ThrowIfNull(request);
 
@@ -30,7 +33,9 @@ namespace Microsoft.Extensions.Http.Logging
             HttpResponseMessage? response = null;
 
             object? state = _httpClientAsyncLogger is not null
-                ? await _httpClientAsyncLogger.LogRequestStartAsync(request, cancellationToken).ConfigureAwait(false)
+                ? await _httpClientAsyncLogger
+                    .LogRequestStartAsync(request, cancellationToken)
+                    .ConfigureAwait(false)
                 : _httpClientLogger.LogRequestStart(request);
 
             try
@@ -39,11 +44,24 @@ namespace Microsoft.Extensions.Http.Logging
 
                 if (_httpClientAsyncLogger is not null)
                 {
-                    await _httpClientAsyncLogger.LogRequestStopAsync(state, request, response, stopwatch.GetElapsedTime(), cancellationToken).ConfigureAwait(false);
+                    await _httpClientAsyncLogger
+                        .LogRequestStopAsync(
+                            state,
+                            request,
+                            response,
+                            stopwatch.GetElapsedTime(),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    _httpClientLogger.LogRequestStop(state, request, response, stopwatch.GetElapsedTime());
+                    _httpClientLogger.LogRequestStop(
+                        state,
+                        request,
+                        response,
+                        stopwatch.GetElapsedTime()
+                    );
                 }
                 return response;
             }
@@ -51,18 +69,36 @@ namespace Microsoft.Extensions.Http.Logging
             {
                 if (_httpClientAsyncLogger is not null)
                 {
-                    await _httpClientAsyncLogger.LogRequestFailedAsync(state, request, response, exception, stopwatch.GetElapsedTime(), cancellationToken).ConfigureAwait(false);
+                    await _httpClientAsyncLogger
+                        .LogRequestFailedAsync(
+                            state,
+                            request,
+                            response,
+                            exception,
+                            stopwatch.GetElapsedTime(),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    _httpClientLogger.LogRequestFailed(state, request, response, exception, stopwatch.GetElapsedTime());
+                    _httpClientLogger.LogRequestFailed(
+                        state,
+                        request,
+                        response,
+                        exception,
+                        stopwatch.GetElapsedTime()
+                    );
                 }
                 throw;
             }
         }
 
 #if NET5_0_OR_GREATER
-        protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             ThrowHelper.ThrowIfNull(request);
 
@@ -75,13 +111,24 @@ namespace Microsoft.Extensions.Http.Logging
             {
                 response = base.Send(request, cancellationToken);
 
-                _httpClientLogger.LogRequestStop(state, request, response, stopwatch.GetElapsedTime());
+                _httpClientLogger.LogRequestStop(
+                    state,
+                    request,
+                    response,
+                    stopwatch.GetElapsedTime()
+                );
 
                 return response;
             }
             catch (Exception exception)
             {
-                _httpClientLogger.LogRequestFailed(state, request, response, exception, stopwatch.GetElapsedTime());
+                _httpClientLogger.LogRequestFailed(
+                    state,
+                    request,
+                    response,
+                    exception,
+                    stopwatch.GetElapsedTime()
+                );
                 throw;
             }
         }

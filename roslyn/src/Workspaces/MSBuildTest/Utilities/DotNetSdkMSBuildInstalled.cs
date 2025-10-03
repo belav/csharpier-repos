@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 // Expected assembly path:
                 //  <solutionFolder>\artifacts\bin\Microsoft.CodeAnalysis.Workspaces.MSBuild.UnitTests\<Configuration>\<TFM>\Microsoft.CodeAnalysis.Workspaces.MSBuild.UnitTests.dll
                 var assemblyLocation = typeof(DotNetSdkMSBuildInstalled).Assembly.Location;
-                var solutionFolder = Directory.GetParent(assemblyLocation)
+                var solutionFolder = Directory
+                    .GetParent(assemblyLocation)
                     ?.Parent?.Parent?.Parent?.Parent?.Parent?.FullName;
                 Assumes.NotNull(solutionFolder);
                 return solutionFolder;
@@ -42,7 +43,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             {
                 buildHostProcessManager = new BuildHostProcessManager();
 
-                var buildHost = buildHostProcessManager.GetBuildHostAsync(BuildHostProcessManager.BuildHostProcessKind.NetCore, CancellationToken.None).Result;
+                var buildHost = buildHostProcessManager
+                    .GetBuildHostAsync(
+                        BuildHostProcessManager.BuildHostProcessKind.NetCore,
+                        CancellationToken.None
+                    )
+                    .Result;
 
                 return buildHost.HasUsableMSBuildAsync(solution, CancellationToken.None).Result;
             }
@@ -52,10 +58,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             }
         }
 
-        public override bool ShouldSkip
-            => s_skipReason is not null;
+        public override bool ShouldSkip => s_skipReason is not null;
 
-        public override string SkipReason
-            => s_skipReason!;
+        public override string SkipReason => s_skipReason!;
     }
 }

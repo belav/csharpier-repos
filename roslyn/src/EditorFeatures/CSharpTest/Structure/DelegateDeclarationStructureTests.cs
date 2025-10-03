@@ -11,20 +11,21 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure;
 
-public class DelegateDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<DelegateDeclarationSyntax>
+public class DelegateDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<DelegateDeclarationSyntax>
 {
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new DelegateDeclarationStructureProvider();
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new DelegateDeclarationStructureProvider();
 
     [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
     public async Task TestDelegateWithComments()
     {
         var code = """
-                {|span:// Goo
-                // Bar|}
-                $$public delegate void C();
-                """;
+            {|span:// Goo
+            // Bar|}
+            $$public delegate void C();
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Goo ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Goo ...", autoCollapse: true));
     }
 }

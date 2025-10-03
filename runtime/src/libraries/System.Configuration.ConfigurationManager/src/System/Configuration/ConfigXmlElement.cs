@@ -11,8 +11,14 @@ namespace System.Configuration
         private string _filename;
         private int _line;
 
-        public ConfigXmlElement(string filename, int line, string prefix, string localName, string namespaceUri,
-            XmlDocument doc)
+        public ConfigXmlElement(
+            string filename,
+            int line,
+            string prefix,
+            string localName,
+            string namespaceUri,
+            XmlDocument doc
+        )
             : base(prefix, localName, namespaceUri, doc)
         {
             _line = line;

@@ -42,9 +42,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (tooLateForMoreUndo)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.PersistenceTooLateToEnlist));                    
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.PersistenceTooLateToEnlist)
+                    );
                 }
-                
+
                 this.enlistedContexts.Add(context);
             }
         }
@@ -144,7 +146,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         internal static void DoPrepare(object state)
         {
             PersistenceContextEnlistment pcEnlist = state as PersistenceContextEnlistment;
-            Fx.Assert(null != pcEnlist, "PersistenceContextEnlistment.DoPrepare called with an object that is not a PersistenceContext.");
+            Fx.Assert(
+                null != pcEnlist,
+                "PersistenceContextEnlistment.DoPrepare called with an object that is not a PersistenceContext."
+            );
 
             lock (pcEnlist.ThisLock)
             {
@@ -161,7 +166,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         internal static void DoCommit(object state)
         {
             PersistenceContextEnlistment pcEnlist = state as PersistenceContextEnlistment;
-            Fx.Assert(null != pcEnlist, "PersistenceContextEnlistment.DoCommit called with an object that is not a PersistenceContext.");
+            Fx.Assert(
+                null != pcEnlist,
+                "PersistenceContextEnlistment.DoCommit called with an object that is not a PersistenceContext."
+            );
 
             lock (pcEnlist.ThisLock)
             {
@@ -182,12 +190,15 @@ namespace System.ServiceModel.Activities.Dispatcher
         internal static void DoRollback(object state)
         {
             PersistenceContextEnlistment pcEnlist = state as PersistenceContextEnlistment;
-            Fx.Assert(null != pcEnlist, "PersistenceContextEnlistment.DoRollback called with an object that is not a PersistenceContext.");
+            Fx.Assert(
+                null != pcEnlist,
+                "PersistenceContextEnlistment.DoRollback called with an object that is not a PersistenceContext."
+            );
 
             lock (pcEnlist.ThisLock)
             {
                 pcEnlist.tooLateForMoreUndo = true;
-               
+
                 foreach (PersistenceContext context in pcEnlist.enlistedContexts)
                 {
                     context.Abort();
@@ -205,7 +216,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         internal static void DoIndoubt(object state)
         {
             PersistenceContextEnlistment pcEnlist = state as PersistenceContextEnlistment;
-            Fx.Assert(null != pcEnlist, "PersistenceContextEnlistment.DoIndoubt called with an object that is not a PersistenceContext.");
+            Fx.Assert(
+                null != pcEnlist,
+                "PersistenceContextEnlistment.DoIndoubt called with an object that is not a PersistenceContext."
+            );
 
             lock (pcEnlist.ThisLock)
             {

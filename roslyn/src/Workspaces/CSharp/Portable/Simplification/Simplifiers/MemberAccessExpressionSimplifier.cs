@@ -14,30 +14,40 @@ using Microsoft.CodeAnalysis.Simplification.Simplifiers;
 
 namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 {
-    internal class MemberAccessExpressionSimplifier : AbstractMemberAccessExpressionSimplifier<
-        ExpressionSyntax,
-        MemberAccessExpressionSyntax,
-        ThisExpressionSyntax>
+    internal class MemberAccessExpressionSimplifier
+        : AbstractMemberAccessExpressionSimplifier<
+            ExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            ThisExpressionSyntax
+        >
     {
         public static readonly MemberAccessExpressionSimplifier Instance = new();
 
-        private MemberAccessExpressionSimplifier()
-        {
-        }
+        private MemberAccessExpressionSimplifier() { }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 
         protected override ISpeculationAnalyzer GetSpeculationAnalyzer(
-            SemanticModel semanticModel, MemberAccessExpressionSyntax memberAccessExpression, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            MemberAccessExpressionSyntax memberAccessExpression,
+            CancellationToken cancellationToken
+        )
         {
-            return new SpeculationAnalyzer(memberAccessExpression, memberAccessExpression.Name, semanticModel, cancellationToken);
+            return new SpeculationAnalyzer(
+                memberAccessExpression,
+                memberAccessExpression.Name,
+                semanticModel,
+                cancellationToken
+            );
         }
 
-        protected override bool MayCauseParseDifference(MemberAccessExpressionSyntax memberAccessExpression)
-            => ParserWouldTreatReplacementWithNameAsCast(memberAccessExpression);
+        protected override bool MayCauseParseDifference(
+            MemberAccessExpressionSyntax memberAccessExpression
+        ) => ParserWouldTreatReplacementWithNameAsCast(memberAccessExpression);
 
         public static bool ParserWouldTreatReplacementWithNameAsCast(
-            MemberAccessExpressionSyntax memberAccessExpression)
+            MemberAccessExpressionSyntax memberAccessExpression
+        )
         {
             SyntaxNode parent = memberAccessExpression;
             while (true)
@@ -71,14 +81,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             var parenthesizedExpression = parent.GetRequiredParent();
             var nextToken = parenthesizedExpression.GetLastToken().GetNextToken();
 
-            if ((nextToken.Kind() is SyntaxKind.TildeToken or SyntaxKind.ExclamationToken or SyntaxKind.OpenParenToken) ||
-                (CSharp.SyntaxFacts.IsKeywordKind(nextToken.Kind()) && nextToken.Kind() is not SyntaxKind.AsKeyword and not SyntaxKind.IsKeyword))
+            if (
+                (
+                    nextToken.Kind()
+                    is SyntaxKind.TildeToken
+                        or SyntaxKind.ExclamationToken
+                        or SyntaxKind.OpenParenToken
+                )
+                || (
+                    CSharp.SyntaxFacts.IsKeywordKind(nextToken.Kind())
+                    && nextToken.Kind() is not SyntaxKind.AsKeyword and not SyntaxKind.IsKeyword
+                )
+            )
             {
                 // This could definitely end up looking like a cast.  See if `The sequence of tokens is correct grammar
                 // for a type` holds true here. Note: this check is likely not super accurate.  It probably is missing
                 // cases with things like array-syntax or alias-syntax.  But it's likely sufficient for the common case
                 // of `this.A.B.C` becoming `A.B.C` which then looks like a type name.
-                return IsEntirelySimpleNames(parent.ReplaceNode(memberAccessExpression, memberAccessExpression.Name));
+                return IsEntirelySimpleNames(
+                    parent.ReplaceNode(memberAccessExpression, memberAccessExpression.Name)
+                );
             }
 
             return false;
@@ -86,7 +108,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
 
         private static bool IsEntirelySimpleNames(SyntaxNode node)
         {
-            return node is MemberAccessExpressionSyntax(SyntaxKind.SimpleMemberAccessExpression) memberAccess
+            return
+                node
+                    is MemberAccessExpressionSyntax
+                    (SyntaxKind.SimpleMemberAccessExpression) memberAccess
                 ? IsEntirelySimpleNames(memberAccess.Expression)
                 : node is SimpleNameSyntax;
         }

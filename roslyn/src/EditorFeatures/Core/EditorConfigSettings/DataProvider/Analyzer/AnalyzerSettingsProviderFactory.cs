@@ -8,7 +8,10 @@ using Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyzer
 {
-    internal class AnalyzerSettingsProviderFactory(Workspace workspace, IDiagnosticAnalyzerService analyzerService) : IWorkspaceSettingsProviderFactory<AnalyzerSetting>
+    internal class AnalyzerSettingsProviderFactory(
+        Workspace workspace,
+        IDiagnosticAnalyzerService analyzerService
+    ) : IWorkspaceSettingsProviderFactory<AnalyzerSetting>
     {
         private readonly Workspace _workspace = workspace;
         private readonly IDiagnosticAnalyzerService _analyzerService = analyzerService;

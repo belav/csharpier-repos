@@ -52,8 +52,8 @@ public interface IDbTransactionInterceptor : IInterceptor
     InterceptionResult<DbTransaction> TransactionStarting(
         DbConnection connection,
         TransactionStartingEventData eventData,
-        InterceptionResult<DbTransaction> result)
-        => result;
+        InterceptionResult<DbTransaction> result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF calls <see cref="DbConnection.BeginTransaction(IsolationLevel)" />.
@@ -73,8 +73,11 @@ public interface IDbTransactionInterceptor : IInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to change the result
     ///     is to return the <paramref name="result" /> value passed in.
     /// </returns>
-    DbTransaction TransactionStarted(DbConnection connection, TransactionEndEventData eventData, DbTransaction result)
-        => result;
+    DbTransaction TransactionStarted(
+        DbConnection connection,
+        TransactionEndEventData eventData,
+        DbTransaction result
+    ) => result;
 
     /// <summary>
     ///     Called just before EF intends to call
@@ -101,8 +104,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbConnection connection,
         TransactionStartingEventData eventData,
         InterceptionResult<DbTransaction> result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called immediately after EF calls <see cref="DbConnection.BeginTransactionAsync(IsolationLevel,CancellationToken)" />.
@@ -129,8 +132,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbConnection connection,
         TransactionEndEventData eventData,
         DbTransaction result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called immediately after <see cref="O:RelationalDatabaseFacadeExtensions.UseTransaction" /> is called.
@@ -146,8 +149,11 @@ public interface IDbTransactionInterceptor : IInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to change the result
     ///     is to return the <paramref name="result" /> value passed in.
     /// </returns>
-    DbTransaction TransactionUsed(DbConnection connection, TransactionEventData eventData, DbTransaction result)
-        => result;
+    DbTransaction TransactionUsed(
+        DbConnection connection,
+        TransactionEventData eventData,
+        DbTransaction result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after <see cref="O:RelationalDatabaseFacadeExtensions.UseTransactionAsync" /> is called.
@@ -170,8 +176,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbConnection connection,
         TransactionEventData eventData,
         DbTransaction result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called just before EF intends to call <see cref="DbTransaction.Commit" />.
@@ -191,17 +197,18 @@ public interface IDbTransactionInterceptor : IInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to suppress
     ///     the operation is to return the <paramref name="result" /> value passed in.
     /// </returns>
-    InterceptionResult TransactionCommitting(DbTransaction transaction, TransactionEventData eventData, InterceptionResult result)
-        => result;
+    InterceptionResult TransactionCommitting(
+        DbTransaction transaction,
+        TransactionEventData eventData,
+        InterceptionResult result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF calls <see cref="DbTransaction.Commit" />.
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void TransactionCommitted(DbTransaction transaction, TransactionEndEventData eventData)
-    {
-    }
+    void TransactionCommitted(DbTransaction transaction, TransactionEndEventData eventData) { }
 
     /// <summary>
     ///     Called just before EF intends to call
@@ -228,8 +235,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbTransaction transaction,
         TransactionEventData eventData,
         InterceptionResult result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called immediately after EF calls <see cref="DbTransaction.CommitAsync" />.
@@ -242,8 +249,8 @@ public interface IDbTransactionInterceptor : IInterceptor
     Task TransactionCommittedAsync(
         DbTransaction transaction,
         TransactionEndEventData eventData,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     /// <summary>
     ///     Called just before EF intends to call <see cref="DbTransaction.Rollback()" />.
@@ -263,17 +270,18 @@ public interface IDbTransactionInterceptor : IInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to suppress
     ///     the operation is to return the <paramref name="result" /> value passed in.
     /// </returns>
-    InterceptionResult TransactionRollingBack(DbTransaction transaction, TransactionEventData eventData, InterceptionResult result)
-        => result;
+    InterceptionResult TransactionRollingBack(
+        DbTransaction transaction,
+        TransactionEventData eventData,
+        InterceptionResult result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF calls <see cref="DbTransaction.Rollback()" />.
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void TransactionRolledBack(DbTransaction transaction, TransactionEndEventData eventData)
-    {
-    }
+    void TransactionRolledBack(DbTransaction transaction, TransactionEndEventData eventData) { }
 
     /// <summary>
     ///     Called just before EF intends to call
@@ -300,8 +308,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbTransaction transaction,
         TransactionEventData eventData,
         InterceptionResult result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called immediately after EF calls <see cref="DbTransaction.RollbackAsync(CancellationToken)" />.
@@ -314,8 +322,8 @@ public interface IDbTransactionInterceptor : IInterceptor
     Task TransactionRolledBackAsync(
         DbTransaction transaction,
         TransactionEndEventData eventData,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     /// <summary>
     ///     Called just before EF intends to create a transaction savepoint.
@@ -335,17 +343,18 @@ public interface IDbTransactionInterceptor : IInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to suppress
     ///     the operation is to return the <paramref name="result" /> value passed in.
     /// </returns>
-    InterceptionResult CreatingSavepoint(DbTransaction transaction, TransactionEventData eventData, InterceptionResult result)
-        => result;
+    InterceptionResult CreatingSavepoint(
+        DbTransaction transaction,
+        TransactionEventData eventData,
+        InterceptionResult result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF creates a transaction savepoint.
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData)
-    {
-    }
+    void CreatedSavepoint(DbTransaction transaction, TransactionEventData eventData) { }
 
     /// <summary>
     ///     Called just before EF intends to create a transaction savepoint.
@@ -371,8 +380,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbTransaction transaction,
         TransactionEventData eventData,
         InterceptionResult result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called immediately after EF calls <see cref="DbTransaction.CommitAsync" />.
@@ -385,8 +394,8 @@ public interface IDbTransactionInterceptor : IInterceptor
     Task CreatedSavepointAsync(
         DbTransaction transaction,
         TransactionEventData eventData,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     /// <summary>
     ///     Called just before EF intends to roll back to a transaction savepoint.
@@ -409,17 +418,15 @@ public interface IDbTransactionInterceptor : IInterceptor
     InterceptionResult RollingBackToSavepoint(
         DbTransaction transaction,
         TransactionEventData eventData,
-        InterceptionResult result)
-        => result;
+        InterceptionResult result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF rolls back to a transaction savepoint.
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void RolledBackToSavepoint(DbTransaction transaction, TransactionEventData eventData)
-    {
-    }
+    void RolledBackToSavepoint(DbTransaction transaction, TransactionEventData eventData) { }
 
     /// <summary>
     ///     Called just before EF intends to roll back to a transaction savepoint.
@@ -445,8 +452,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbTransaction transaction,
         TransactionEventData eventData,
         InterceptionResult result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called immediately after EF rolls back to a transaction savepoint.
@@ -459,8 +466,8 @@ public interface IDbTransactionInterceptor : IInterceptor
     Task RolledBackToSavepointAsync(
         DbTransaction transaction,
         TransactionEventData eventData,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     /// <summary>
     ///     Called just before EF intends to release a transaction savepoint.
@@ -480,17 +487,18 @@ public interface IDbTransactionInterceptor : IInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to suppress
     ///     the operation is to return the <paramref name="result" /> value passed in.
     /// </returns>
-    InterceptionResult ReleasingSavepoint(DbTransaction transaction, TransactionEventData eventData, InterceptionResult result)
-        => result;
+    InterceptionResult ReleasingSavepoint(
+        DbTransaction transaction,
+        TransactionEventData eventData,
+        InterceptionResult result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF releases a transaction savepoint.
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData)
-    {
-    }
+    void ReleasedSavepoint(DbTransaction transaction, TransactionEventData eventData) { }
 
     /// <summary>
     ///     Called just before EF intends to release a transaction savepoint.
@@ -516,8 +524,8 @@ public interface IDbTransactionInterceptor : IInterceptor
         DbTransaction transaction,
         TransactionEventData eventData,
         InterceptionResult result,
-        CancellationToken cancellationToken = default)
-        => new(result);
+        CancellationToken cancellationToken = default
+    ) => new(result);
 
     /// <summary>
     ///     Called immediately after EF releases a transaction savepoint.
@@ -530,17 +538,15 @@ public interface IDbTransactionInterceptor : IInterceptor
     Task ReleasedSavepointAsync(
         DbTransaction transaction,
         TransactionEventData eventData,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 
     /// <summary>
     ///     Called when use of a <see cref="DbTransaction" /> has failed with an exception.
     /// </summary>
     /// <param name="transaction">The transaction.</param>
     /// <param name="eventData">Contextual information about connection and transaction.</param>
-    void TransactionFailed(DbTransaction transaction, TransactionErrorEventData eventData)
-    {
-    }
+    void TransactionFailed(DbTransaction transaction, TransactionErrorEventData eventData) { }
 
     /// <summary>
     ///     Called when use of a <see cref="DbTransaction" /> has failed with an exception.
@@ -553,6 +559,6 @@ public interface IDbTransactionInterceptor : IInterceptor
     Task TransactionFailedAsync(
         DbTransaction transaction,
         TransactionErrorEventData eventData,
-        CancellationToken cancellationToken = default)
-        => Task.CompletedTask;
+        CancellationToken cancellationToken = default
+    ) => Task.CompletedTask;
 }

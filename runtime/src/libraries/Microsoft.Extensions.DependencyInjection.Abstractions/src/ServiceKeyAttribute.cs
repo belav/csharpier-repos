@@ -10,7 +10,5 @@ namespace Microsoft.Extensions.DependencyInjection
     /// registration/resolution.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class ServiceKeyAttribute : Attribute
-    {
-    }
+    public class ServiceKeyAttribute : Attribute { }
 }

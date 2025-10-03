@@ -18,6 +18,6 @@ public static class EntityTypeExtensions
     /// <param name="entityType">The entity type to get the defining query for.</param>
     /// <returns>The LINQ query used as the default source.</returns>
     [Obsolete("Use InMemoryEntityTypeExtensions.GetInMemoryQuery")]
-    public static LambdaExpression? GetDefiningQuery(this IEntityType entityType)
-        => (LambdaExpression?)entityType[CoreAnnotationNames.DefiningQuery];
+    public static LambdaExpression? GetDefiningQuery(this IEntityType entityType) =>
+        (LambdaExpression?)entityType[CoreAnnotationNames.DefiningQuery];
 }

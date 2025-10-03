@@ -28,27 +28,25 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 
-namespace Microsoft.Build.BuildEngine {
+namespace Microsoft.Build.BuildEngine
+{
+    internal class BuildTaskItemGroup : BuildItemGroup
+    {
+        List<IBuildTask> items = new List<IBuildTask>();
 
-	internal class BuildTaskItemGroup : BuildItemGroup {
+        internal BuildTaskItemGroup(XmlElement element, Target target)
+            : base(element, target.Project, null, false, true) { }
 
-		List<IBuildTask> items = new List<IBuildTask> ();
+        internal override BuildItem CreateItem(Project project, XmlElement xe)
+        {
+            var item = new BuildTaskItem(project, xe, this);
+            items.Add(item);
+            return item;
+        }
 
-		internal BuildTaskItemGroup (XmlElement element, Target target)
-			: base (element, target.Project, null, false, true)
-		{
-		}
-
-		internal override BuildItem CreateItem (Project project, XmlElement xe)
-		{
-			var item = new BuildTaskItem (project, xe, this);
-			items.Add (item);
-			return item;
-		}
-
-		public List<IBuildTask> Items {
-			get { return items; }
-		}
-	}
+        public List<IBuildTask> Items
+        {
+            get { return items; }
+        }
+    }
 }
-

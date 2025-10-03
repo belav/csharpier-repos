@@ -8,71 +8,91 @@
  * Config related classes for HttpApplication
  */
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System;
     using System.Configuration;
-    using System.Web.Compilation;
     using System.Security;
     using System.Security.Permissions;
     using System.Web;
+    using System.Web.Compilation;
 
     /*
      * An object to cache a factory
      */
-    internal class HandlerFactoryCache {
+    internal class HandlerFactoryCache
+    {
         private IHttpHandlerFactory _factory;
 
-        internal HandlerFactoryCache(string type) {
+        internal HandlerFactoryCache(string type)
+        {
             Object instance = Create(type);
 
             // make sure it is either handler or handler factory
 
-            if (instance is IHttpHandler) {
+            if (instance is IHttpHandler)
+            {
                 // create bogus factory around it
                 _factory = new HandlerFactoryWrapper((IHttpHandler)instance, GetHandlerType(type));
             }
-            else if (instance is IHttpHandlerFactory) {
+            else if (instance is IHttpHandlerFactory)
+            {
                 _factory = (IHttpHandlerFactory)instance;
             }
-            else {
-                throw new HttpException(SR.GetString(SR.Type_not_factory_or_handler, instance.GetType().FullName));
+            else
+            {
+                throw new HttpException(
+                    SR.GetString(SR.Type_not_factory_or_handler, instance.GetType().FullName)
+                );
             }
             TelemetryLogger.LogHttpHandler(instance.GetType());
         }
 
-        internal HandlerFactoryCache(HttpHandlerAction mapping) {
+        internal HandlerFactoryCache(HttpHandlerAction mapping)
+        {
             Object instance = mapping.Create();
 
             // make sure it is either handler or handler factory
 
-            if (instance is IHttpHandler) {
+            if (instance is IHttpHandler)
+            {
                 // create bogus factory around it
-                _factory = new HandlerFactoryWrapper((IHttpHandler)instance, GetHandlerType(mapping));
+                _factory = new HandlerFactoryWrapper(
+                    (IHttpHandler)instance,
+                    GetHandlerType(mapping)
+                );
             }
-            else if (instance is IHttpHandlerFactory) {
+            else if (instance is IHttpHandlerFactory)
+            {
                 _factory = (IHttpHandlerFactory)instance;
             }
-            else {
-                throw new HttpException(SR.GetString(SR.Type_not_factory_or_handler, instance.GetType().FullName));
+            else
+            {
+                throw new HttpException(
+                    SR.GetString(SR.Type_not_factory_or_handler, instance.GetType().FullName)
+                );
             }
             TelemetryLogger.LogHttpHandler(instance.GetType());
         }
 
-        internal IHttpHandlerFactory Factory {
-            get {
-                return _factory;
-            }
+        internal IHttpHandlerFactory Factory
+        {
+            get { return _factory; }
         }
 
         // Dev10 732000: In a homogenous AppDomain, it is necessary to assert FileIoPermission to load types outside
         // the AppDomain's grant set.
-        [FileIOPermission(SecurityAction.Assert, AllFiles = FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery)]
-        private Type GetTypeWithAssert(string type) {
+        [FileIOPermission(
+            SecurityAction.Assert,
+            AllFiles = FileIOPermissionAccess.Read | FileIOPermissionAccess.PathDiscovery
+        )]
+        private Type GetTypeWithAssert(string type)
+        {
             return BuildManager.GetType(type, throwOnError: true, ignoreCase: false);
         }
 
-        internal Type GetHandlerType( HttpHandlerAction handlerAction ) {
+        internal Type GetHandlerType(HttpHandlerAction handlerAction)
+        {
             // HACKHACK: for now, let uncreatable types through and error later (for .soap factory)
             // This design should change - developers will want to know immediately
             // when they misspell a type
@@ -81,14 +101,17 @@ namespace System.Web.Configuration {
 
             // throw for bad types in deferred case
             if (!ConfigUtil.IsTypeHandlerOrFactory(t))
-                throw new ConfigurationErrorsException(SR.GetString(SR.Type_not_factory_or_handler, handlerAction.Type),
-                    handlerAction.ElementInformation.Source, handlerAction.ElementInformation.LineNumber);
+                throw new ConfigurationErrorsException(
+                    SR.GetString(SR.Type_not_factory_or_handler, handlerAction.Type),
+                    handlerAction.ElementInformation.Source,
+                    handlerAction.ElementInformation.LineNumber
+                );
 
             return t;
-
         }
 
-        internal Type GetHandlerType(string type) {
+        internal Type GetHandlerType(string type)
+        {
             // HACKHACK: for now, let uncreatable types through and error later (for .soap factory)
             // This design should change - developers will want to know immediately
             // when they misspell a type
@@ -99,13 +122,15 @@ namespace System.Web.Configuration {
 
             // throw for bad types in deferred case
             if (!ConfigUtil.IsTypeHandlerOrFactory(t))
-                throw new ConfigurationErrorsException(SR.GetString(SR.Type_not_factory_or_handler, type));
+                throw new ConfigurationErrorsException(
+                    SR.GetString(SR.Type_not_factory_or_handler, type)
+                );
 
             return t;
-
         }
 
-        internal object Create(string type) {
+        internal object Create(string type)
+        {
             // HACKHACK: for now, let uncreatable types through and error later (for .soap factory)
             // This design should change - developers will want to know immediately
             // when they misspell a type

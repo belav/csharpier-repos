@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -27,15 +27,16 @@ namespace System.Web.Configuration {
     //              <numberOfSoftKeys>$(softkeys)</numberOfSoftKeys>
     //         </capabilities>
     //         <controlAdapters>
-    //              <adapter controlType="System.Web.UI.WebControls.Image" 
+    //              <adapter controlType="System.Web.UI.WebControls.Image"
     //                       adapterType="System.Web.UI.WebControls.Adapters.Html32ImageAdapter" />
     //         </controlAdapters>
     //    </browser>
     //    </browsers>
     //
-         
-    internal class BrowserTree : OrderedDictionary {
-        internal BrowserTree() : base(StringComparer.OrdinalIgnoreCase) {
-        }
+
+    internal class BrowserTree : OrderedDictionary
+    {
+        internal BrowserTree()
+            : base(StringComparer.OrdinalIgnoreCase) { }
     }
 }

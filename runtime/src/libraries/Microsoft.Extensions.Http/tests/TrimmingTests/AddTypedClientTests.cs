@@ -1,15 +1,16 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 class Program
 {
     static int Main(string[] args)
     {
         IServiceCollection descriptors = new ServiceCollection();
-        descriptors.AddHttpClient("test1")
+        descriptors
+            .AddHttpClient("test1")
             .AddTypedClient<TypedClientA>()
             .AddTypedClient<ITypedClientB, TypedClientB>();
 
@@ -23,10 +24,12 @@ class Program
         TypedClientC clientC = provider.GetRequiredService<TypedClientC>();
         ITypedClientD clientD = provider.GetRequiredService<ITypedClientD>();
 
-        if (clientA == null ||
-            !(clientB is TypedClientB) ||
-            clientC == null ||
-            !(clientD is TypedClientD))
+        if (
+            clientA == null
+            || !(clientB is TypedClientB)
+            || clientC == null
+            || !(clientD is TypedClientD)
+        )
         {
             return -1;
         }
@@ -40,6 +43,7 @@ class Program
     }
 
     interface ITypedClientB { }
+
     class TypedClientB : ITypedClientB
     {
         public TypedClientB(HttpClient httpClient) { }
@@ -51,6 +55,7 @@ class Program
     }
 
     interface ITypedClientD { }
+
     class TypedClientD : ITypedClientD
     {
         public TypedClientD(HttpClient httpClient) { }

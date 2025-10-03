@@ -26,13 +26,17 @@ namespace System.Web.Cors.Test
         [InlineData("options", "POST", "foo")]
         [InlineData("OPTIONS", "GET", "foo")]
         [InlineData("OPTIONS", "OPTIONS", "")]
-        public void IsPreflight_ReturnsTrue(string httpMethod, string requestedMethod, string origin)
+        public void IsPreflight_ReturnsTrue(
+            string httpMethod,
+            string requestedMethod,
+            string origin
+        )
         {
             CorsRequestContext requestContext = new CorsRequestContext
             {
                 HttpMethod = httpMethod,
                 AccessControlRequestMethod = requestedMethod,
-                Origin = origin
+                Origin = origin,
             };
 
             Assert.True(requestContext.IsPreflight);
@@ -44,13 +48,17 @@ namespace System.Web.Cors.Test
         [InlineData("OPTIONS", null, "foo")]
         [InlineData(null, "POST", "foo")]
         [InlineData("POST", "GET", "bar")]
-        public void IsPreflight_ReturnsFalse(string httpMethod, string requestedMethod, string origin)
+        public void IsPreflight_ReturnsFalse(
+            string httpMethod,
+            string requestedMethod,
+            string origin
+        )
         {
             CorsRequestContext requestContext = new CorsRequestContext()
             {
                 HttpMethod = httpMethod,
                 AccessControlRequestMethod = requestedMethod,
-                Origin = origin
+                Origin = origin,
             };
 
             Assert.False(requestContext.IsPreflight);
@@ -65,12 +73,15 @@ namespace System.Web.Cors.Test
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "DELETE",
                 Origin = "http://localhost",
-                RequestUri = new Uri("http://example.com")
+                RequestUri = new Uri("http://example.com"),
             };
             requestContext.AccessControlRequestHeaders.Add("foo");
             requestContext.AccessControlRequestHeaders.Add("bar");
 
-            Assert.Equal(@"Origin: http://localhost, HttpMethod: OPTIONS, IsPreflight: True, Host: http://example.com, AccessControlRequestMethod: DELETE, RequestUri: http://example.com/, AccessControlRequestHeaders: {foo,bar}", requestContext.ToString());
+            Assert.Equal(
+                @"Origin: http://localhost, HttpMethod: OPTIONS, IsPreflight: True, Host: http://example.com, AccessControlRequestMethod: DELETE, RequestUri: http://example.com/, AccessControlRequestHeaders: {foo,bar}",
+                requestContext.ToString()
+            );
         }
     }
 }

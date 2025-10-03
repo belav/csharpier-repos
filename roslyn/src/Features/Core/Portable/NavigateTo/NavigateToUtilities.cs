@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             var result = ImmutableHashSet.CreateBuilder<string>(StringComparer.Ordinal);
             foreach (var project in solution.Projects)
             {
-                var navigateToSearchService = project.GetLanguageService<INavigateToSearchService>();
+                var navigateToSearchService =
+                    project.GetLanguageService<INavigateToSearchService>();
                 if (navigateToSearchService != null)
                     result.UnionWith(navigateToSearchService.KindsProvided);
             }

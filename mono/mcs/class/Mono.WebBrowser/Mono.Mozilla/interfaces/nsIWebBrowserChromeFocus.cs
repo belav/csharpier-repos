@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,35 +26,38 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("d2206418-1dd1-11b2-8e55-acddcd2bcfb8")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIWebBrowserChromeFocus
+    {
+        #region nsIWebBrowserChromeFocus
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int focusNextElement();
 
-	[Guid ("d2206418-1dd1-11b2-8e55-acddcd2bcfb8")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIWebBrowserChromeFocus {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int focusPrevElement();
 
-#region nsIWebBrowserChromeFocus
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int focusNextElement ();
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int focusPrevElement ();
-
-#endregion
-	}
-
-
-	internal class nsWebBrowserChromeFocus {
-		public static nsIWebBrowserChromeFocus GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowserChromeFocus obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIWebBrowserChromeFocus).GUID, obj);
-			return o as nsIWebBrowserChromeFocus;
-		}
-	}
+    internal class nsWebBrowserChromeFocus
+    {
+        public static nsIWebBrowserChromeFocus GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIWebBrowserChromeFocus obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIWebBrowserChromeFocus).GUID, obj);
+            return o as nsIWebBrowserChromeFocus;
+        }
+    }
 }

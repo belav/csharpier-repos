@@ -1,12 +1,12 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Collections;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
 
@@ -27,10 +27,7 @@ namespace System.Workflow.Activities
         #region Properties and Methods
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanBeParentedTo(CompositeActivityDesigner parentActivityDesigner)
@@ -46,7 +43,10 @@ namespace System.Workflow.Activities
             return base.CanBeParentedTo(parentActivityDesigner);
         }
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {
@@ -66,7 +66,11 @@ namespace System.Workflow.Activities
                     if (PreviewedDesigner != null || ContainedDesigners.Count > 0)
                         return base.FirstSelectableObject;
                     else if (ContainedDesigners.Count == 0)
-                        return new ConnectorHitTestInfo(this, HitTestLocations.Designer, 0).SelectableObject;
+                        return new ConnectorHitTestInfo(
+                            this,
+                            HitTestLocations.Designer,
+                            0
+                        ).SelectableObject;
                 }
 
                 return null;
@@ -82,7 +86,11 @@ namespace System.Workflow.Activities
                     if (PreviewedDesigner != null || ContainedDesigners.Count > 0)
                         return base.LastSelectableObject;
                     else if (ContainedDesigners.Count == 0)
-                        return new ConnectorHitTestInfo(this, HitTestLocations.Designer, GetConnectors().GetLength(0) - 1).SelectableObject;
+                        return new ConnectorHitTestInfo(
+                            this,
+                            HitTestLocations.Designer,
+                            GetConnectors().GetLength(0) - 1
+                        ).SelectableObject;
                 }
 
                 return null;

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.PooledObjects;
-using Roslyn.Utilities;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis.PooledObjects;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -36,7 +36,12 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override object Display
         {
-            get { return ConstantValueOpt?.IsNull == true ? MessageID.IDS_NULL.Localize() : base.Display; }
+            get
+            {
+                return ConstantValueOpt?.IsNull == true
+                    ? MessageID.IDS_NULL.Localize()
+                    : base.Display;
+            }
         }
     }
 
@@ -151,26 +156,32 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal partial class BoundStackAllocArrayCreation
     {
-        public override object Display
-            => (Type is null) ? FormattableStringFactory.Create("stackalloc {0}[{1}]", ElementType, Count.WasCompilerGenerated ? null : Count.Syntax.ToString()) : base.Display;
+        public override object Display =>
+            (Type is null)
+                ? FormattableStringFactory.Create(
+                    "stackalloc {0}[{1}]",
+                    ElementType,
+                    Count.WasCompilerGenerated ? null : Count.Syntax.ToString()
+                )
+                : base.Display;
     }
 
     internal partial class BoundUnconvertedSwitchExpression
     {
-        public override object Display
-            => (Type is null) ? MessageID.IDS_FeatureSwitchExpression.Localize() : base.Display;
+        public override object Display =>
+            (Type is null) ? MessageID.IDS_FeatureSwitchExpression.Localize() : base.Display;
     }
 
     internal partial class BoundUnconvertedConditionalOperator
     {
-        public override object Display
-            => (Type is null) ? MessageID.IDS_FeatureTargetTypedConditional.Localize() : base.Display;
+        public override object Display =>
+            (Type is null) ? MessageID.IDS_FeatureTargetTypedConditional.Localize() : base.Display;
     }
 
     internal partial class BoundUnconvertedCollectionExpression
     {
-        public override object Display
-            => (Type is null) ? MessageID.IDS_FeatureCollectionExpressions.Localize() : base.Display;
+        public override object Display =>
+            (Type is null) ? MessageID.IDS_FeatureCollectionExpressions.Localize() : base.Display;
     }
 
     internal partial class BoundPassByCopy

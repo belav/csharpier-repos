@@ -2,27 +2,27 @@
 
 namespace N1
 {
-	class A<T>
-	{
-		public class B { }
+    class A<T>
+    {
+        public class B { }
 
-		public class C<U> { }
-	}
+        public class C<U> { }
+    }
 
-	class C { }
+    class C { }
 }
 
 namespace N2
 {
-	using Y = N1.A<int>;
+    using Y = N1.A<int>;
 
-	class X
-	{
-		public static void Main ()
-		{
-			Y y = new Y ();
-			Y.B b = new Y.B ();
-			Y.C<long> c = new Y.C<long> ();
-		}
-	}
+    class X
+    {
+        public static void Main()
+        {
+            Y y = new Y();
+            Y.B b = new Y.B();
+            Y.C<long> c = new Y.C<long>();
+        }
+    }
 }

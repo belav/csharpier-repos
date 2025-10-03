@@ -10,7 +10,11 @@ namespace System.ComponentModel.Design.Tests
     {
         public static IEnumerable<object[]> Ctor_TestData()
         {
-            yield return new object[] { "component", new ArrayConverter().GetProperties(new int[1])[0] };
+            yield return new object[]
+            {
+                "component",
+                new ArrayConverter().GetProperties(new int[1])[0],
+            };
             yield return new object[] { null, null };
         }
 

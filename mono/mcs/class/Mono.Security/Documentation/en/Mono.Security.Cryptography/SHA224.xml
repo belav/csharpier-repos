@@ -1,5 +1,8 @@
 <Type Name="SHA224" FullName="Mono.Security.Cryptography.SHA224">
-  <TypeSignature Language="C#" Value="public abstract class SHA224 : System.Security.Cryptography.HashAlgorithm" />
+  <TypeSignature
+    Language="C#"
+    Value="public abstract class SHA224 : System.Security.Cryptography.HashAlgorithm"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Security</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -28,7 +31,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static Mono.Security.Cryptography.SHA224 Create ();" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.Cryptography.SHA224 Create ();"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.SHA224</ReturnType>
@@ -45,7 +51,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static Mono.Security.Cryptography.SHA224 Create (string hashName);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Security.Cryptography.SHA224 Create (string hashName);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Mono.Security.Cryptography.SHA224</ReturnType>

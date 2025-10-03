@@ -20,6 +20,6 @@ namespace System.Net.NetworkInformation
         Closing,
         LastAck,
         TimeWait,
-        DeleteTcb
+        DeleteTcb,
     }
 }

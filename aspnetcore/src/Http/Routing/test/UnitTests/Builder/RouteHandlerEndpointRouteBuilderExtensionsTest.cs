@@ -629,11 +629,11 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
             Assert.Equal(expectedMethod, method);
         }
 
-        Assert.Throws<InvalidOperationException>(
-            () => endpointBuilder.WithMetadata(new RouteNameMetadata("Foo"))
+        Assert.Throws<InvalidOperationException>(() =>
+            endpointBuilder.WithMetadata(new RouteNameMetadata("Foo"))
         );
-        Assert.Throws<InvalidOperationException>(
-            () => endpointBuilder.Finally(b => b.Metadata.Add(new RouteNameMetadata("Foo")))
+        Assert.Throws<InvalidOperationException>(() =>
+            endpointBuilder.Finally(b => b.Metadata.Add(new RouteNameMetadata("Foo")))
         );
     }
 
@@ -1014,8 +1014,8 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
 
         if (throwOnBadRequest)
         {
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(
-                () => endpoint.RequestDelegate!(httpContext)
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                endpoint.RequestDelegate!(httpContext)
             );
             Assert.Equal(400, ex.StatusCode);
         }

@@ -3,5 +3,5 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: TypeForwardedTo (typeof (C))]
-[assembly: TypeForwardedTo (typeof (G<>))]
+[assembly: TypeForwardedTo(typeof(C))]
+[assembly: TypeForwardedTo(typeof(G<>))]

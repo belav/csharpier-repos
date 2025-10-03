@@ -30,7 +30,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlineCompletions;
 /// </summary>
 [ExportCSharpVisualBasicStatelessLspService(typeof(InlineCompletionsHandler)), Shared]
 [Method(VSInternalMethods.TextDocumentInlineCompletionName)]
-internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHandler<VSInternalInlineCompletionRequest, VSInternalInlineCompletionList?>
+internal partial class InlineCompletionsHandler
+    : ILspServiceDocumentRequestHandler<
+        VSInternalInlineCompletionRequest,
+        VSInternalInlineCompletionList?
+    >
 {
     /// <summary>
     /// The set of built in snippets from, typically found in
@@ -38,9 +42,45 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
     /// These are currently the only snippets supported.
     /// </summary>
     public static ImmutableHashSet<string> BuiltInSnippets = ImmutableHashSet.Create(
-        "~", "Attribute", "checked", "class", "ctor", "cw", "do", "else", "enum", "equals", "Exception", "for", "foreach", "forr",
-        "if", "indexer", "interface", "invoke", "iterator", "iterindex", "lock", "mbox", "namespace", "#if", "#region", "prop",
-        "propfull", "propg", "sim", "struct", "svm", "switch", "try", "tryf", "unchecked", "unsafe", "using", "while");
+        "~",
+        "Attribute",
+        "checked",
+        "class",
+        "ctor",
+        "cw",
+        "do",
+        "else",
+        "enum",
+        "equals",
+        "Exception",
+        "for",
+        "foreach",
+        "forr",
+        "if",
+        "indexer",
+        "interface",
+        "invoke",
+        "iterator",
+        "iterindex",
+        "lock",
+        "mbox",
+        "namespace",
+        "#if",
+        "#region",
+        "prop",
+        "propfull",
+        "propg",
+        "sim",
+        "struct",
+        "svm",
+        "switch",
+        "try",
+        "tryf",
+        "unchecked",
+        "unsafe",
+        "using",
+        "while"
+    );
 
     private readonly XmlSnippetParser _xmlSnippetParser;
     private readonly IGlobalOptionService _globalOptions;
@@ -51,18 +91,27 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public InlineCompletionsHandler(XmlSnippetParser xmlSnippetParser, IGlobalOptionService globalOptions)
+    public InlineCompletionsHandler(
+        XmlSnippetParser xmlSnippetParser,
+        IGlobalOptionService globalOptions
+    )
     {
         _xmlSnippetParser = xmlSnippetParser;
         _globalOptions = globalOptions;
     }
 
-    public TextDocumentIdentifier GetTextDocumentIdentifier(VSInternalInlineCompletionRequest request)
+    public TextDocumentIdentifier GetTextDocumentIdentifier(
+        VSInternalInlineCompletionRequest request
+    )
     {
         return request.TextDocument;
     }
 
-    public async Task<VSInternalInlineCompletionList?> HandleRequestAsync(VSInternalInlineCompletionRequest request, RequestContext context, CancellationToken cancellationToken)
+    public async Task<VSInternalInlineCompletionList?> HandleRequestAsync(
+        VSInternalInlineCompletionRequest request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var document = context.GetRequiredDocument();
 
@@ -79,7 +128,14 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
         var syntaxFactsService = document.Project.GetRequiredLanguageService<ISyntaxFactsService>();
         var linePosition = ProtocolConversions.PositionToLinePosition(request.Position);
         var position = sourceText.Lines.GetPosition(linePosition);
-        if (!SnippetUtilities.TryGetWordOnLeft(position, sourceText, syntaxFactsService, out var wordOnLeft))
+        if (
+            !SnippetUtilities.TryGetWordOnLeft(
+                position,
+                sourceText,
+                syntaxFactsService,
+                out var wordOnLeft
+            )
+        )
         {
             return null;
         }
@@ -91,7 +147,9 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
             return null;
         }
 
-        var matchingSnippetInfo = snippetInfo.First(s => wordText.Equals(s.Shortcut, StringComparison.OrdinalIgnoreCase));
+        var matchingSnippetInfo = snippetInfo.First(s =>
+            wordText.Equals(s.Shortcut, StringComparison.OrdinalIgnoreCase)
+        );
 
         var parsedSnippet = _xmlSnippetParser.GetParsedXmlSnippet(matchingSnippetInfo, context);
         if (parsedSnippet == null)
@@ -100,10 +158,23 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
         }
 
         // Use the formatting options specified by the client to format the snippet.
-        var formattingOptions = await ProtocolConversions.GetFormattingOptionsAsync(request.Options, document, _globalOptions, cancellationToken).ConfigureAwait(false);
-        var simplifierOptions = await document.GetSimplifierOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
+        var formattingOptions = await ProtocolConversions
+            .GetFormattingOptionsAsync(request.Options, document, _globalOptions, cancellationToken)
+            .ConfigureAwait(false);
+        var simplifierOptions = await document
+            .GetSimplifierOptionsAsync(_globalOptions, cancellationToken)
+            .ConfigureAwait(false);
 
-        var formattedLspSnippet = await GetFormattedLspSnippetAsync(parsedSnippet, wordOnLeft.Value, document, sourceText, formattingOptions, simplifierOptions, cancellationToken).ConfigureAwait(false);
+        var formattedLspSnippet = await GetFormattedLspSnippetAsync(
+                parsedSnippet,
+                wordOnLeft.Value,
+                document,
+                sourceText,
+                formattingOptions,
+                simplifierOptions,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         return new VSInternalInlineCompletionList
         {
@@ -114,15 +185,15 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
                     Range = ProtocolConversions.TextSpanToRange(wordOnLeft.Value, sourceText),
                     Text = formattedLspSnippet,
                     TextFormat = InsertTextFormat.Snippet,
-                }
-            ]
+                },
+            ],
         };
     }
 
     /// <summary>
     /// Formats the snippet by applying the snippet to the document with the default values / function results for snippet declarations.
     /// Then converts back into an LSP snippet by replacing the declarations with the appropriate LSP tab stops.
-    /// 
+    ///
     /// Note that the operations in this method are sensitive to the context in the document and so must be calculated on each request.
     /// </summary>
     private static async Task<string> GetFormattedLspSnippetAsync(
@@ -132,22 +203,41 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
         SourceText originalSourceText,
         SyntaxFormattingOptions formattingOptions,
         SimplifierOptions simplifierOptions,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // Calculate the snippet text with defaults + snippet function results.
         var (snippetFullText, fields, caretSpan) = await GetReplacedSnippetTextAsync(
-            originalDocument, originalSourceText, snippetShortcut, parsedSnippet, simplifierOptions, cancellationToken).ConfigureAwait(false);
+                originalDocument,
+                originalSourceText,
+                snippetShortcut,
+                parsedSnippet,
+                simplifierOptions,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         // Create a document with the default snippet text that we can use to format the snippet.
         var textChange = new TextChange(snippetShortcut, snippetFullText);
         var snippetEndPosition = textChange.Span.Start + textChange.NewText!.Length;
 
         var documentWithSnippetText = originalSourceText.WithChanges(textChange);
-        var root = await originalDocument.WithText(documentWithSnippetText).GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await originalDocument
+            .WithText(documentWithSnippetText)
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         var spanToFormat = TextSpan.FromBounds(textChange.Span.Start, snippetEndPosition);
-        var formattingChanges = Formatter.GetFormattedTextChanges(root, spanToFormat, originalDocument.Project.Solution.Services, formattingOptions, cancellationToken: cancellationToken)
-            ?.ToImmutableArray() ?? ImmutableArray<TextChange>.Empty;
+        var formattingChanges =
+            Formatter
+                .GetFormattedTextChanges(
+                    root,
+                    spanToFormat,
+                    originalDocument.Project.Solution.Services,
+                    formattingOptions,
+                    cancellationToken: cancellationToken
+                )
+                ?.ToImmutableArray() ?? ImmutableArray<TextChange>.Empty;
 
         var formattedText = documentWithSnippetText.WithChanges(formattingChanges);
 
@@ -157,19 +247,31 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
         // adjusting the old spans based on the formatting changes that occured before them.
 
         // Get the adjusted snippet bounds.
-        snippetEndPosition = GetAdjustedSpan(formattingChanges, new TextSpan(snippetEndPosition, 0)).Start;
-        var spanContainingFormattedSnippet = TextSpan.FromBounds(snippetShortcut.Start, snippetEndPosition);
+        snippetEndPosition = GetAdjustedSpan(
+            formattingChanges,
+            new TextSpan(snippetEndPosition, 0)
+        ).Start;
+        var spanContainingFormattedSnippet = TextSpan.FromBounds(
+            snippetShortcut.Start,
+            snippetEndPosition
+        );
 
         // Get the adjusted fields and determine the text edits to make LSP formatted tab stops.
         using var _1 = ArrayBuilder<TextChange>.GetInstance(out var lspTextChanges);
         foreach (var (field, spans) in fields)
         {
-            var lspTextForField = string.IsNullOrEmpty(field.DefaultText) ? $"${{{field.EditIndex}}}" : $"${{{field.EditIndex}:{field.DefaultText}}}";
+            var lspTextForField = string.IsNullOrEmpty(field.DefaultText)
+                ? $"${{{field.EditIndex}}}"
+                : $"${{{field.EditIndex}:{field.DefaultText}}}";
             foreach (var span in spans)
             {
                 // Adjust the span based on the formatting changes and build the snippet text change.
                 var fieldInFormattedText = GetAdjustedSpan(formattingChanges, span);
-                var fieldInSnippetContext = GetTextSpanInContextOfSnippet(fieldInFormattedText.Start, spanContainingFormattedSnippet.Start, fieldInFormattedText.Length);
+                var fieldInSnippetContext = GetTextSpanInContextOfSnippet(
+                    fieldInFormattedText.Start,
+                    spanContainingFormattedSnippet.Start,
+                    fieldInFormattedText.Length
+                );
                 lspTextChanges.Add(new TextChange(fieldInSnippetContext, lspTextForField));
             }
         }
@@ -178,25 +280,41 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
         if (caretSpan != null)
         {
             var caretInFormattedText = GetAdjustedSpan(formattingChanges, caretSpan.Value);
-            var caretInSnippetContext = GetTextSpanInContextOfSnippet(caretInFormattedText.Start, spanContainingFormattedSnippet.Start, caretInFormattedText.Length);
+            var caretInSnippetContext = GetTextSpanInContextOfSnippet(
+                caretInFormattedText.Start,
+                spanContainingFormattedSnippet.Start,
+                caretInFormattedText.Length
+            );
             lspTextChanges.Add(new TextChange(caretInSnippetContext, "$0"));
         }
 
         // Apply all the text changes to get the text formatted as the LSP snippet syntax.
-        var formattedLspSnippetText = formattedText.GetSubText(spanContainingFormattedSnippet).WithChanges(lspTextChanges);
+        var formattedLspSnippetText = formattedText
+            .GetSubText(spanContainingFormattedSnippet)
+            .WithChanges(lspTextChanges);
 
         return formattedLspSnippetText.ToString();
 
-        static TextSpan GetAdjustedSpan(ImmutableArray<TextChange> textChanges, TextSpan originalSpan)
+        static TextSpan GetAdjustedSpan(
+            ImmutableArray<TextChange> textChanges,
+            TextSpan originalSpan
+        )
         {
             var textChangesBefore = textChanges.Where(t => t.Span.End <= originalSpan.Start);
             var amountToAdjust = textChangesBefore.Sum(t => t.NewText!.Length - t.Span.Length);
             return new TextSpan(originalSpan.Start + amountToAdjust, originalSpan.Length);
         }
 
-        static TextSpan GetTextSpanInContextOfSnippet(int positionInFullText, int snippetPositionInFullText, int length)
+        static TextSpan GetTextSpanInContextOfSnippet(
+            int positionInFullText,
+            int snippetPositionInFullText,
+            int length
+        )
         {
-            var offsetInSnippet = new TextSpan(positionInFullText - snippetPositionInFullText, length);
+            var offsetInSnippet = new TextSpan(
+                positionInFullText - snippetPositionInFullText,
+                length
+            );
             return offsetInSnippet;
         }
     }
@@ -205,16 +323,22 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
     /// Create the snippet with the full default text and functions applied.  Output the spans associated with
     /// each field and the final caret location in that text so that we can find those locations later.
     /// </summary>
-    private static async Task<(string ReplacedSnippetText, ImmutableDictionary<SnippetFieldPart, ImmutableArray<TextSpan>> Fields, TextSpan? CaretSpan)> GetReplacedSnippetTextAsync(
+    private static async Task<(
+        string ReplacedSnippetText,
+        ImmutableDictionary<SnippetFieldPart, ImmutableArray<TextSpan>> Fields,
+        TextSpan? CaretSpan
+    )> GetReplacedSnippetTextAsync(
         Document originalDocument,
         SourceText originalSourceText,
         TextSpan snippetSpan,
         ParsedXmlSnippet parsedSnippet,
         SimplifierOptions simplifierOptions,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var documentWithDefaultSnippet = originalDocument.WithText(
-            originalSourceText.WithChanges(new TextChange(snippetSpan, parsedSnippet.DefaultText)));
+            originalSourceText.WithChanges(new TextChange(snippetSpan, parsedSnippet.DefaultText))
+        );
 
         // Iterate the snippet parts so that we can do two things:
         //   1.  Calculate the snippet function result.  This must be done against the document containing the default snippet text
@@ -239,14 +363,23 @@ internal partial class InlineCompletionsHandler : ILspServiceDocumentRequestHand
                 // To avoid a bunch of document changes and re-parsing, we always calculate the snippet function result
                 // against the document with the default snippet text applied to it instead of with each incremental function result.
                 // So we need to remember the index into the original document.
-                part = await functionPart.WithSnippetFunctionResultAsync(documentWithDefaultSnippet, new TextSpan(locationInDefaultSnippet, part.DefaultText.Length), simplifierOptions, cancellationToken).ConfigureAwait(false);
+                part = await functionPart
+                    .WithSnippetFunctionResultAsync(
+                        documentWithDefaultSnippet,
+                        new TextSpan(locationInDefaultSnippet, part.DefaultText.Length),
+                        simplifierOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             // Only store spans for editable fields or the cursor location, we don't need to get back to anything else.
             if (part is SnippetFieldPart fieldPart && fieldPart.EditIndex != null)
             {
                 var fieldSpan = new TextSpan(locationInFinalSnippet, part.DefaultText.Length);
-                fieldOffsets[fieldPart] = fieldOffsets.GetValueOrDefault(fieldPart, ImmutableArray<TextSpan>.Empty).Add(fieldSpan);
+                fieldOffsets[fieldPart] = fieldOffsets
+                    .GetValueOrDefault(fieldPart, ImmutableArray<TextSpan>.Empty)
+                    .Add(fieldSpan);
             }
             else if (part is SnippetCursorPart cursorPart)
             {

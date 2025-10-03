@@ -13,7 +13,9 @@ namespace System.Net
 {
     public sealed unsafe partial class HttpListener : IDisposable
     {
-        public delegate ExtendedProtectionPolicy ExtendedProtectionSelector(HttpListenerRequest request);
+        public delegate ExtendedProtectionPolicy ExtendedProtectionSelector(
+            HttpListenerRequest request
+        );
 
         private readonly object _internalLock;
         private volatile State _state; // _state is set only within lock blocks, but often read outside locks.
@@ -86,7 +88,10 @@ namespace System.Net
                 ArgumentNullException.ThrowIfNull(value);
                 if (value.CustomChannelBinding != null)
                 {
-                    throw new ArgumentException(SR.net_listener_cannot_set_custom_cbt, nameof(value));
+                    throw new ArgumentException(
+                        SR.net_listener_cannot_set_custom_cbt,
+                        nameof(value)
+                    );
                 }
 
                 _extendedProtectionPolicy = value;
@@ -113,11 +118,29 @@ namespace System.Net
             {
                 CheckDisposed();
                 int i;
-                if (string.Compare(uriPrefix, 0, "http://", 0, 7, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        uriPrefix,
+                        0,
+                        "http://",
+                        0,
+                        7,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     i = 7;
                 }
-                else if (string.Compare(uriPrefix, 0, "https://", 0, 8, StringComparison.OrdinalIgnoreCase) == 0)
+                else if (
+                    string.Compare(
+                        uriPrefix,
+                        0,
+                        "https://",
+                        0,
+                        8,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     i = 8;
                 }
@@ -127,7 +150,11 @@ namespace System.Net
                 }
                 bool inSquareBrakets = false;
                 int j = i;
-                while (j < uriPrefix.Length && uriPrefix[j] != '/' && (uriPrefix[j] != ':' || inSquareBrakets))
+                while (
+                    j < uriPrefix.Length
+                    && uriPrefix[j] != '/'
+                    && (uriPrefix[j] != ':' || inSquareBrakets)
+                )
                 {
                     if (uriPrefix[j] == '[')
                     {
@@ -153,7 +180,11 @@ namespace System.Net
                     throw new ArgumentException(SR.net_listener_slash, nameof(uriPrefix));
                 }
                 registeredPrefix = CreateRegisteredPrefix(uriPrefix, j, i);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"mapped uriPrefix: {uriPrefix} to registeredPrefix: {registeredPrefix}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        $"mapped uriPrefix: {uriPrefix} to registeredPrefix: {registeredPrefix}"
+                    );
                 if (_state == State.Started)
                 {
                     AddPrefixCore(registeredPrefix);
@@ -163,7 +194,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
 
@@ -175,40 +207,49 @@ namespace System.Net
                     length += i == 7 ? ":80".Length : ":443".Length;
                 }
 
-                return string.Create(length, (uriPrefix, j, i), static (destination, state) =>
-                {
-                    if (state.uriPrefix[state.j] == ':')
+                return string.Create(
+                    length,
+                    (uriPrefix, j, i),
+                    static (destination, state) =>
                     {
-                        state.uriPrefix.CopyTo(destination);
-                    }
-                    else
-                    {
-                        int indexOfNextCopy = state.j;
-                        state.uriPrefix.AsSpan(0, indexOfNextCopy).CopyTo(destination);
-
-                        if (state.i == 7)
+                        if (state.uriPrefix[state.j] == ':')
                         {
-                            ":80".CopyTo(destination.Slice(indexOfNextCopy));
-                            indexOfNextCopy += 3;
+                            state.uriPrefix.CopyTo(destination);
                         }
                         else
                         {
-                            ":443".CopyTo(destination.Slice(indexOfNextCopy));
-                            indexOfNextCopy += 4;
+                            int indexOfNextCopy = state.j;
+                            state.uriPrefix.AsSpan(0, indexOfNextCopy).CopyTo(destination);
+
+                            if (state.i == 7)
+                            {
+                                ":80".CopyTo(destination.Slice(indexOfNextCopy));
+                                indexOfNextCopy += 3;
+                            }
+                            else
+                            {
+                                ":443".CopyTo(destination.Slice(indexOfNextCopy));
+                                indexOfNextCopy += 4;
+                            }
+
+                            state
+                                .uriPrefix.AsSpan(state.j)
+                                .CopyTo(destination.Slice(indexOfNextCopy));
                         }
 
-                        state.uriPrefix.AsSpan(state.j).CopyTo(destination.Slice(indexOfNextCopy));
-                    }
+                        int toLowerLength = destination.IndexOf(':');
+                        if (toLowerLength < 0)
+                        {
+                            toLowerLength = destination.Length;
+                        }
 
-                    int toLowerLength = destination.IndexOf(':');
-                    if (toLowerLength < 0)
-                    {
-                        toLowerLength = destination.Length;
+                        OperationStatus operationStatus = Ascii.ToLowerInPlace(
+                            destination.Slice(0, toLowerLength),
+                            out _
+                        );
+                        Debug.Assert(operationStatus == OperationStatus.Done);
                     }
-
-                    OperationStatus operationStatus = Ascii.ToLowerInPlace(destination.Slice(0, toLowerLength), out _);
-                    Debug.Assert(operationStatus == OperationStatus.Done);
-                });
+                );
             }
         }
 
@@ -219,7 +260,8 @@ namespace System.Net
             try
             {
                 CheckDisposed();
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"uriPrefix: {uriPrefix}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"uriPrefix: {uriPrefix}");
                 ArgumentNullException.ThrowIfNull(uriPrefix);
 
                 if (!_uriPrefixes.Contains(uriPrefix))
@@ -237,7 +279,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, exception);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, exception);
                 throw;
             }
             return true;
@@ -292,19 +335,22 @@ namespace System.Net
             return Task.Factory.FromAsync(
                 (callback, state) => ((HttpListener)state!).BeginGetContext(callback, state),
                 iar => ((HttpListener)iar!.AsyncState!).EndGetContext(iar),
-                this);
+                this
+            );
         }
 
         public void Close()
         {
             try
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info("HttpListenerRequest::Close()");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info("HttpListenerRequest::Close()");
                 ((IDisposable)this).Dispose();
             }
             catch (Exception exception)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"Close {exception}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Error(this, $"Close {exception}");
                 throw;
             }
         }

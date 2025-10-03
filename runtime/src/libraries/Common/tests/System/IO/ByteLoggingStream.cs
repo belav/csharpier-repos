@@ -11,7 +11,11 @@ namespace System.IO
 {
     internal sealed class BytesLoggingStream : Stream
     {
-        public delegate void FormattedBytesCallback(Stream stream, ReadOnlySpan<char> hex, ReadOnlySpan<char> ascii);
+        public delegate void FormattedBytesCallback(
+            Stream stream,
+            ReadOnlySpan<char> hex,
+            ReadOnlySpan<char> ascii
+        );
 
         [ThreadStatic]
         private static char[]? s_hexBuffer;
@@ -24,7 +28,11 @@ namespace System.IO
         private readonly FormattedBytesCallback _writeCallback;
         private int _bytesPerLine = 24;
 
-        public BytesLoggingStream(Stream stream, FormattedBytesCallback writeCallback, FormattedBytesCallback readCallback)
+        public BytesLoggingStream(
+            Stream stream,
+            FormattedBytesCallback writeCallback,
+            FormattedBytesCallback readCallback
+        )
         {
             _stream = stream;
             _readCallback = readCallback;
@@ -37,16 +45,31 @@ namespace System.IO
         public override bool CanTimeout => _stream.CanTimeout;
 
         public override long Length => _stream.Length;
-        public override long Position { get => _stream.Position; set => _stream.Position = value; }
+        public override long Position
+        {
+            get => _stream.Position;
+            set => _stream.Position = value;
+        }
 
         public override void Flush() => _stream.Flush();
-        public override Task FlushAsync(CancellationToken cancellationToken) => _stream.FlushAsync(cancellationToken);
+
+        public override Task FlushAsync(CancellationToken cancellationToken) =>
+            _stream.FlushAsync(cancellationToken);
 
         public override long Seek(long offset, SeekOrigin origin) => _stream.Seek(offset, origin);
+
         public override void SetLength(long value) => _stream.SetLength(value);
 
-        public override int ReadTimeout { get => _stream.ReadTimeout; set => _stream.ReadTimeout = value; }
-        public override int WriteTimeout { get => _stream.WriteTimeout; set => _stream.WriteTimeout = value; }
+        public override int ReadTimeout
+        {
+            get => _stream.ReadTimeout;
+            set => _stream.ReadTimeout = value;
+        }
+        public override int WriteTimeout
+        {
+            get => _stream.WriteTimeout;
+            set => _stream.WriteTimeout = value;
+        }
 
         protected override void Dispose(bool disposing)
         {
@@ -61,7 +84,8 @@ namespace System.IO
             get => _bytesPerLine;
             set
             {
-                if (value < 1) throw new ArgumentOutOfRangeException(nameof(BytesPerLine));
+                if (value < 1)
+                    throw new ArgumentOutOfRangeException(nameof(BytesPerLine));
                 _bytesPerLine = value;
             }
         }
@@ -91,14 +115,24 @@ namespace System.IO
             return read;
         }
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
-            int read = await _stream.ReadAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
+            int read = await _stream
+                .ReadAsync(buffer, offset, count, cancellationToken)
+                .ConfigureAwait(false);
             FormatBytes(read: true, buffer.AsSpan(offset, read));
             return read;
         }
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             int read = await _stream.ReadAsync(buffer, cancellationToken).ConfigureAwait(false);
             FormatBytes(read: true, buffer.Span.Slice(0, read));
@@ -123,26 +157,39 @@ namespace System.IO
             _stream.Write(buffer, offset, count);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             FormatBytes(read: false, buffer.AsSpan(offset, count));
             return _stream.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             FormatBytes(read: false, buffer.Span);
             return _stream.WriteAsync(buffer, cancellationToken);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             FormatBytes(read: false, buffer.AsSpan(offset, count));
             return _stream.BeginWrite(buffer, offset, count, callback, state);
         }
 
-        public override void EndWrite(IAsyncResult asyncResult) =>
-            _stream.EndWrite(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) => _stream.EndWrite(asyncResult);
 
         private void FormatBytes(bool read, ReadOnlySpan<byte> bytes)
         {
@@ -184,15 +231,18 @@ namespace System.IO
                         hexBuffer[hexPos++] = ' ';
                     }
 
-                    asciiBuffer[asciiPos++] =
-                        b switch
-                        {
-                            < 32 or >= 0x7F => '.',
-                            _ => (char)b,
-                        };
+                    asciiBuffer[asciiPos++] = b switch
+                    {
+                        < 32 or >= 0x7F => '.',
+                        _ => (char)b,
+                    };
                 }
 
-                (read ? _readCallback : _writeCallback)(this, new ReadOnlySpan<char>(hexBuffer, 0, hexPos), new ReadOnlySpan<char>(asciiBuffer, 0, asciiPos));
+                (read ? _readCallback : _writeCallback)(
+                    this,
+                    new ReadOnlySpan<char>(hexBuffer, 0, hexPos),
+                    new ReadOnlySpan<char>(asciiBuffer, 0, asciiPos)
+                );
                 bytes = bytes.Slice(span.Length);
             }
         }

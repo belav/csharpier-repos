@@ -4,19 +4,31 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [Flags]
     public enum ReflectionPermissionFlag
     {
-        [Obsolete("ReflectionPermissionFlag.AllFlags has been deprecated. Use PermissionState.Unrestricted to get full access.")]
+        [Obsolete(
+            "ReflectionPermissionFlag.AllFlags has been deprecated. Use PermissionState.Unrestricted to get full access."
+        )]
         AllFlags = 7,
         MemberAccess = 2,
         NoFlags = 0,
-        [Obsolete("ReflectionPermissionFlag.ReflectionEmit  has been deprecated and is not supported.")]
+
+        [Obsolete(
+            "ReflectionPermissionFlag.ReflectionEmit  has been deprecated and is not supported."
+        )]
         ReflectionEmit = 4,
         RestrictedMemberAccess = 8,
-        [Obsolete("ReflectionPermissionFlag.TypeInformation has been deprecated and is not supported.")]
+
+        [Obsolete(
+            "ReflectionPermissionFlag.TypeInformation has been deprecated and is not supported."
+        )]
         TypeInformation = 1,
     }
 }

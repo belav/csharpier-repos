@@ -25,33 +25,42 @@ namespace System.Data.EntityClient
         // when not worried about the class being modified during execution
 
 #if DEBUG
-        private const string ConnectionStringPattern =                  // may not contain embedded null except trailing last value
-            "([\\s;]*"                                                  // leading whitespace and extra semicolons
-            + "(?![\\s;])"                                              // key does not start with space or semicolon
-            + "(?<key>([^=\\s\\p{Cc}]|\\s+[^=\\s\\p{Cc}]|\\s+==|==)+)"  // allow any visible character for keyname except '=' which must quoted as '=='
-            + "\\s*=(?!=)\\s*"                                          // the equal sign divides the key and value parts
+        private const string ConnectionStringPattern = // may not contain embedded null except trailing last value
+            "([\\s;]*" // leading whitespace and extra semicolons
+            + "(?![\\s;])" // key does not start with space or semicolon
+            + "(?<key>([^=\\s\\p{Cc}]|\\s+[^=\\s\\p{Cc}]|\\s+==|==)+)" // allow any visible character for keyname except '=' which must quoted as '=='
+            + "\\s*=(?!=)\\s*" // the equal sign divides the key and value parts
             + "(?<value>"
-            + "(\"([^\"\u0000]|\"\")*\")"                              // double quoted string, " must be quoted as ""
+            + "(\"([^\"\u0000]|\"\")*\")" // double quoted string, " must be quoted as ""
             + "|"
-            + "('([^'\u0000]|'')*')"                                   // single quoted string, ' must be quoted as ''
+            + "('([^'\u0000]|'')*')" // single quoted string, ' must be quoted as ''
             + "|"
-            + "((?![\"'\\s])"                                          // unquoted value must not start with " or ' or space, would also like = but too late to change
-            + "([^;\\s\\p{Cc}]|\\s+[^;\\s\\p{Cc}])*"                  // control characters must be quoted
-            + "(?<![\"']))"                                            // unquoted value must not stop with " or '
-            + ")(\\s*)(;|\u0000|$)"                                     // whitespace after value up to semicolon or end-of-line
-            + ")*"                                                      // repeat the key-value pair
-            + "[\\s;\u0000]*"                                           // traling whitespace/semicolons and embedded nulls (DataSourceLocator)
+            + "((?![\"'\\s])" // unquoted value must not start with " or ' or space, would also like = but too late to change
+            + "([^;\\s\\p{Cc}]|\\s+[^;\\s\\p{Cc}])*" // control characters must be quoted
+            + "(?<![\"']))" // unquoted value must not stop with " or '
+            + ")(\\s*)(;|\u0000|$)" // whitespace after value up to semicolon or end-of-line
+            + ")*" // repeat the key-value pair
+            + "[\\s;\u0000]*" // traling whitespace/semicolons and embedded nulls (DataSourceLocator)
         ;
 
-        private static readonly Regex ConnectionStringRegex = new Regex(ConnectionStringPattern, RegexOptions.ExplicitCapture | RegexOptions.Compiled);
+        private static readonly Regex ConnectionStringRegex = new Regex(
+            ConnectionStringPattern,
+            RegexOptions.ExplicitCapture | RegexOptions.Compiled
+        );
 #endif
         internal const string DataDirectory = "|datadirectory|";
 
-#if DEBUG 
+#if DEBUG
         private const string ConnectionStringValidKeyPattern = "^(?![;\\s])[^\\p{Cc}]+(?<!\\s)$"; // key not allowed to start with semi-colon or space or contain non-visible characters or end with space
-        private const string ConnectionStringValidValuePattern = "^[^\u0000]*$";                    // value not allowed to contain embedded null   
-        private static readonly Regex ConnectionStringValidKeyRegex = new Regex(ConnectionStringValidKeyPattern, RegexOptions.Compiled);
-        private static readonly Regex ConnectionStringValidValueRegex = new Regex(ConnectionStringValidValuePattern, RegexOptions.Compiled);
+        private const string ConnectionStringValidValuePattern = "^[^\u0000]*$"; // value not allowed to contain embedded null
+        private static readonly Regex ConnectionStringValidKeyRegex = new Regex(
+            ConnectionStringValidKeyPattern,
+            RegexOptions.Compiled
+        );
+        private static readonly Regex ConnectionStringValidValueRegex = new Regex(
+            ConnectionStringValidValuePattern,
+            RegexOptions.Compiled
+        );
 #endif
 
         private readonly string _usersConnectionString;
@@ -74,10 +83,7 @@ namespace System.Data.EntityClient
 
         internal string UsersConnectionString
         {
-            get
-            {
-                return _usersConnectionString ?? string.Empty;
-            }
+            get { return _usersConnectionString ?? string.Empty; }
         }
 
         internal bool IsEmpty
@@ -104,14 +110,19 @@ namespace System.Data.EntityClient
         internal static string ExpandDataDirectory(string keyword, string value)
         {
             string fullPath = null;
-            if ((null != value) && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase))
+            if (
+                (null != value)
+                && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // find the replacement path
                 object rootFolderObject = AppDomain.CurrentDomain.GetData("DataDirectory");
                 string rootFolderPath = (rootFolderObject as string);
                 if ((null != rootFolderObject) && (null == rootFolderPath))
                 {
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.ADP_InvalidDataDirectory);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.ADP_InvalidDataDirectory
+                    );
                 }
                 else if (rootFolderPath == string.Empty)
                 {
@@ -119,13 +130,16 @@ namespace System.Data.EntityClient
                 }
                 if (null == rootFolderPath)
                 {
-                    rootFolderPath = "";                    
+                    rootFolderPath = "";
                 }
 
                 // We don't know if rootFolderpath ends with '\', and we don't know if the given name starts with onw
-                int fileNamePosition = DataDirectory.Length;    // filename starts right after the '|datadirectory|' keyword
-                bool rootFolderEndsWith = (0 < rootFolderPath.Length) && rootFolderPath[rootFolderPath.Length - 1] == '\\';
-                bool fileNameStartsWith = (fileNamePosition < value.Length) && value[fileNamePosition] == '\\';
+                int fileNamePosition = DataDirectory.Length; // filename starts right after the '|datadirectory|' keyword
+                bool rootFolderEndsWith =
+                    (0 < rootFolderPath.Length)
+                    && rootFolderPath[rootFolderPath.Length - 1] == '\\';
+                bool fileNameStartsWith =
+                    (fileNamePosition < value.Length) && value[fileNamePosition] == '\\';
 
                 // replace |datadirectory| with root folder path
                 if (!rootFolderEndsWith && !fileNameStartsWith)
@@ -145,7 +159,11 @@ namespace System.Data.EntityClient
                 }
 
                 // verify root folder path is a real path without unexpected "..\"
-                if (!EntityUtil.GetFullPath(fullPath).StartsWith(rootFolderPath, StringComparison.Ordinal))
+                if (
+                    !EntityUtil
+                        .GetFullPath(fullPath)
+                        .StartsWith(rootFolderPath, StringComparison.Ordinal)
+                )
                 {
                     throw EntityUtil.InvalidConnectionOptionValue(keyword);
                 }
@@ -153,8 +171,11 @@ namespace System.Data.EntityClient
             return fullPath;
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        static private string GetKeyName(StringBuilder buffer)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
+        private static string GetKeyName(StringBuilder buffer)
         {
             int count = buffer.Length;
             while ((0 < count) && Char.IsWhiteSpace(buffer[count - 1]))
@@ -164,7 +185,7 @@ namespace System.Data.EntityClient
             return buffer.ToString(0, count).ToLowerInvariant();
         }
 
-        static private string GetKeyValue(StringBuilder buffer, bool trimWhitespace)
+        private static string GetKeyValue(StringBuilder buffer, bool trimWhitespace)
         {
             int count = buffer.Length;
             int index = 0;
@@ -185,7 +206,7 @@ namespace System.Data.EntityClient
         // transistion states used for parsing
         private enum ParserState
         {
-            NothingYet = 1,   //start point
+            NothingYet = 1, //start point
             Key,
             KeyEqual,
             KeyEnd,
@@ -197,8 +218,14 @@ namespace System.Data.EntityClient
             QuotedValueEnd,
             NullTermination,
         };
-        
-        static private int GetKeyValuePair(string connectionString, int currentPosition, StringBuilder buffer, out string keyname, out string keyvalue)
+
+        private static int GetKeyValuePair(
+            string connectionString,
+            int currentPosition,
+            StringBuilder buffer,
+            out string keyname,
+            out string keyvalue
+        )
         {
             int startposition = currentPosition;
 
@@ -221,8 +248,15 @@ namespace System.Data.EntityClient
                         {
                             continue;
                         }
-                        if ('\0' == currentChar) { parserState = ParserState.NullTermination; continue; } // MDAC 83540
-                        if (Char.IsControl(currentChar)) { throw EntityUtil.ConnectionStringSyntax(startposition); }
+                        if ('\0' == currentChar)
+                        {
+                            parserState = ParserState.NullTermination;
+                            continue;
+                        } // MDAC 83540
+                        if (Char.IsControl(currentChar))
+                        {
+                            throw EntityUtil.ConnectionStringSyntax(startposition);
+                        }
                         startposition = currentPosition;
                         if ('=' != currentChar)
                         { // MDAC 86902
@@ -236,74 +270,157 @@ namespace System.Data.EntityClient
                         }
 
                     case ParserState.Key: // (?<key>([^=\\s\\p{Cc}]|\\s+[^=\\s\\p{Cc}]|\\s+==|==)+)
-                        if ('=' == currentChar) { parserState = ParserState.KeyEqual; continue; }
-                        if (Char.IsWhiteSpace(currentChar)) { break; }
-                        if (Char.IsControl(currentChar)) { throw EntityUtil.ConnectionStringSyntax(startposition); }
+                        if ('=' == currentChar)
+                        {
+                            parserState = ParserState.KeyEqual;
+                            continue;
+                        }
+                        if (Char.IsWhiteSpace(currentChar))
+                        {
+                            break;
+                        }
+                        if (Char.IsControl(currentChar))
+                        {
+                            throw EntityUtil.ConnectionStringSyntax(startposition);
+                        }
                         break;
 
                     case ParserState.KeyEqual: // \\s*=(?!=)\\s*
-                        if ('=' == currentChar) { parserState = ParserState.Key; break; }
+                        if ('=' == currentChar)
+                        {
+                            parserState = ParserState.Key;
+                            break;
+                        }
                         keyname = GetKeyName(buffer);
-                        if (string.IsNullOrEmpty(keyname)) { throw EntityUtil.ConnectionStringSyntax(startposition); }
+                        if (string.IsNullOrEmpty(keyname))
+                        {
+                            throw EntityUtil.ConnectionStringSyntax(startposition);
+                        }
                         buffer.Length = 0;
                         parserState = ParserState.KeyEnd;
                         goto case ParserState.KeyEnd;
 
                     case ParserState.KeyEnd:
-                        if (Char.IsWhiteSpace(currentChar)) { continue; }
-                        if ('\'' == currentChar) { parserState = ParserState.SingleQuoteValue; continue; }
-                        if ('"' == currentChar) { parserState = ParserState.DoubleQuoteValue; continue; }
+                        if (Char.IsWhiteSpace(currentChar))
+                        {
+                            continue;
+                        }
+                        if ('\'' == currentChar)
+                        {
+                            parserState = ParserState.SingleQuoteValue;
+                            continue;
+                        }
+                        if ('"' == currentChar)
+                        {
+                            parserState = ParserState.DoubleQuoteValue;
+                            continue;
+                        }
 
-                        if (';' == currentChar) { goto ParserExit; }
-                        if ('\0' == currentChar) { goto ParserExit; }
-                        if (Char.IsControl(currentChar)) { throw EntityUtil.ConnectionStringSyntax(startposition); }
+                        if (';' == currentChar)
+                        {
+                            goto ParserExit;
+                        }
+                        if ('\0' == currentChar)
+                        {
+                            goto ParserExit;
+                        }
+                        if (Char.IsControl(currentChar))
+                        {
+                            throw EntityUtil.ConnectionStringSyntax(startposition);
+                        }
                         parserState = ParserState.UnquotedValue;
                         break;
 
                     case ParserState.UnquotedValue: // "((?![\"'\\s])" + "([^;\\s\\p{Cc}]|\\s+[^;\\s\\p{Cc}])*" + "(?<![\"']))"
-                        if (Char.IsWhiteSpace(currentChar)) { break; }
-                        if (Char.IsControl(currentChar) || ';' == currentChar) { goto ParserExit; }
+                        if (Char.IsWhiteSpace(currentChar))
+                        {
+                            break;
+                        }
+                        if (Char.IsControl(currentChar) || ';' == currentChar)
+                        {
+                            goto ParserExit;
+                        }
                         break;
 
                     case ParserState.DoubleQuoteValue: // "(\"([^\"\u0000]|\"\")*\")"
-                        if ('"' == currentChar) { parserState = ParserState.DoubleQuoteValueQuote; continue; }
-                        if ('\0' == currentChar) { throw EntityUtil.ConnectionStringSyntax(startposition); }
+                        if ('"' == currentChar)
+                        {
+                            parserState = ParserState.DoubleQuoteValueQuote;
+                            continue;
+                        }
+                        if ('\0' == currentChar)
+                        {
+                            throw EntityUtil.ConnectionStringSyntax(startposition);
+                        }
                         break;
 
                     case ParserState.DoubleQuoteValueQuote:
-                        if ('"' == currentChar) { parserState = ParserState.DoubleQuoteValue; break; }
+                        if ('"' == currentChar)
+                        {
+                            parserState = ParserState.DoubleQuoteValue;
+                            break;
+                        }
                         keyvalue = GetKeyValue(buffer, false);
                         parserState = ParserState.QuotedValueEnd;
                         goto case ParserState.QuotedValueEnd;
 
                     case ParserState.SingleQuoteValue: // "('([^'\u0000]|'')*')"
-                        if ('\'' == currentChar) { parserState = ParserState.SingleQuoteValueQuote; continue; }
-                        if ('\0' == currentChar) { throw EntityUtil.ConnectionStringSyntax(startposition); }
+                        if ('\'' == currentChar)
+                        {
+                            parserState = ParserState.SingleQuoteValueQuote;
+                            continue;
+                        }
+                        if ('\0' == currentChar)
+                        {
+                            throw EntityUtil.ConnectionStringSyntax(startposition);
+                        }
                         break;
 
                     case ParserState.SingleQuoteValueQuote:
-                        if ('\'' == currentChar) { parserState = ParserState.SingleQuoteValue; break; }
+                        if ('\'' == currentChar)
+                        {
+                            parserState = ParserState.SingleQuoteValue;
+                            break;
+                        }
                         keyvalue = GetKeyValue(buffer, false);
                         parserState = ParserState.QuotedValueEnd;
                         goto case ParserState.QuotedValueEnd;
 
                     case ParserState.QuotedValueEnd:
-                        if (Char.IsWhiteSpace(currentChar)) { continue; }
-                        if (';' == currentChar) { goto ParserExit; }
-                        if ('\0' == currentChar) { parserState = ParserState.NullTermination; continue; } // MDAC 83540
-                        throw EntityUtil.ConnectionStringSyntax(startposition);  // unbalanced single quote
+                        if (Char.IsWhiteSpace(currentChar))
+                        {
+                            continue;
+                        }
+                        if (';' == currentChar)
+                        {
+                            goto ParserExit;
+                        }
+                        if ('\0' == currentChar)
+                        {
+                            parserState = ParserState.NullTermination;
+                            continue;
+                        } // MDAC 83540
+                        throw EntityUtil.ConnectionStringSyntax(startposition); // unbalanced single quote
 
                     case ParserState.NullTermination: // [\\s;\u0000]*
-                        if ('\0' == currentChar) { continue; }
-                        if (Char.IsWhiteSpace(currentChar)) { continue; } // MDAC 83540
+                        if ('\0' == currentChar)
+                        {
+                            continue;
+                        }
+                        if (Char.IsWhiteSpace(currentChar))
+                        {
+                            continue;
+                        } // MDAC 83540
                         throw EntityUtil.ConnectionStringSyntax(currentPosition);
 
                     default:
-                        throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.InvalidParserState1);
+                        throw EntityUtil.InternalError(
+                            EntityUtil.InternalErrorCode.InvalidParserState1
+                        );
                 }
                 buffer.Append(currentChar);
             }
-        ParserExit:
+            ParserExit:
             switch (parserState)
             {
                 case ParserState.Key:
@@ -315,7 +432,10 @@ namespace System.Data.EntityClient
                 case ParserState.KeyEqual:
                     // equal sign at end of line
                     keyname = GetKeyName(buffer);
-                    if (string.IsNullOrEmpty(keyname)) { throw EntityUtil.ConnectionStringSyntax(startposition); }
+                    if (string.IsNullOrEmpty(keyname))
+                    {
+                        throw EntityUtil.ConnectionStringSyntax(startposition);
+                    }
                     break;
 
                 case ParserState.UnquotedValue:
@@ -325,7 +445,7 @@ namespace System.Data.EntityClient
                     char tmpChar = keyvalue[keyvalue.Length - 1];
                     if (('\'' == tmpChar) || ('"' == tmpChar))
                     {
-                        throw EntityUtil.ConnectionStringSyntax(startposition);    // unquoted value must not end in quote
+                        throw EntityUtil.ConnectionStringSyntax(startposition); // unquoted value must not end in quote
                     }
                     break;
 
@@ -343,7 +463,9 @@ namespace System.Data.EntityClient
                     break;
 
                 default:
-                    throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.InvalidParserState2);
+                    throw EntityUtil.InternalError(
+                        EntityUtil.InternalErrorCode.InvalidParserState2
+                    );
             }
             if ((';' == currentChar) && (currentPosition < connectionString.Length))
             {
@@ -357,9 +479,11 @@ namespace System.Data.EntityClient
         {
             if (null != keyvalue)
             {
-
                 bool compValue = ConnectionStringValidValueRegex.IsMatch(keyvalue);
-                Debug.Assert((-1 == keyvalue.IndexOf('\u0000')) == compValue, "IsValueValid mismatch with regex");
+                Debug.Assert(
+                    (-1 == keyvalue.IndexOf('\u0000')) == compValue,
+                    "IsValueValid mismatch with regex"
+                );
                 return (-1 == keyvalue.IndexOf('\u0000'));
             }
             return true;
@@ -372,21 +496,38 @@ namespace System.Data.EntityClient
             {
 #if DEBUG
                 bool compValue = ConnectionStringValidKeyRegex.IsMatch(keyname);
-                Debug.Assert(((0 < keyname.Length) && (';' != keyname[0]) && !Char.IsWhiteSpace(keyname[0]) && (-1 == keyname.IndexOf('\u0000'))) == compValue, "IsValueValid mismatch with regex");
+                Debug.Assert(
+                    (
+                        (0 < keyname.Length)
+                        && (';' != keyname[0])
+                        && !Char.IsWhiteSpace(keyname[0])
+                        && (-1 == keyname.IndexOf('\u0000'))
+                    ) == compValue,
+                    "IsValueValid mismatch with regex"
+                );
 #endif
-                return ((0 < keyname.Length) && (';' != keyname[0]) && !Char.IsWhiteSpace(keyname[0]) && (-1 == keyname.IndexOf('\u0000')));
+                return (
+                    (0 < keyname.Length)
+                    && (';' != keyname[0])
+                    && !Char.IsWhiteSpace(keyname[0])
+                    && (-1 == keyname.IndexOf('\u0000'))
+                );
             }
             return false;
         }
 
 #if DEBUG
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         private static Hashtable SplitConnectionString(string connectionString, Hashtable synonyms)
         {
             Hashtable parsetable = new Hashtable();
             Regex parser = ConnectionStringRegex;
 
-            const int KeyIndex = 1, ValueIndex = 2;
+            const int KeyIndex = 1,
+                ValueIndex = 2;
             Debug.Assert(KeyIndex == parser.GroupNumberFromName("key"), "wrong key index");
             Debug.Assert(ValueIndex == parser.GroupNumberFromName("value"), "wrong value index");
 
@@ -408,10 +549,14 @@ namespace System.Data.EntityClient
                         switch (keyvalue[0])
                         {
                             case '\"':
-                                keyvalue = keyvalue.Substring(1, keyvalue.Length - 2).Replace("\"\"", "\"");
+                                keyvalue = keyvalue
+                                    .Substring(1, keyvalue.Length - 2)
+                                    .Replace("\"\"", "\"");
                                 break;
                             case '\'':
-                                keyvalue = keyvalue.Substring(1, keyvalue.Length - 2).Replace("\'\'", "\'");
+                                keyvalue = keyvalue
+                                    .Substring(1, keyvalue.Length - 2)
+                                    .Replace("\'\'", "\'");
                                 break;
                             default:
                                 break;
@@ -433,7 +578,12 @@ namespace System.Data.EntityClient
             return parsetable;
         }
 
-        private static void ParseComparision(Hashtable parsetable, string connectionString, Hashtable synonyms, Exception e)
+        private static void ParseComparision(
+            Hashtable parsetable,
+            string connectionString,
+            Hashtable synonyms,
+            Exception e
+        )
         {
             try
             {
@@ -443,10 +593,19 @@ namespace System.Data.EntityClient
                     string keyname = (string)entry.Key;
                     string value1 = (string)entry.Value;
                     string value2 = (string)parsetable[keyname];
-                    Debug.Assert(parsetable.Contains(keyname), "ParseInternal code vs. regex mismatch keyname <" + keyname + ">");
-                    Debug.Assert(value1 == value2, "ParseInternal code vs. regex mismatch keyvalue <" + value1 + "> <" + value2 + ">");
+                    Debug.Assert(
+                        parsetable.Contains(keyname),
+                        "ParseInternal code vs. regex mismatch keyname <" + keyname + ">"
+                    );
+                    Debug.Assert(
+                        value1 == value2,
+                        "ParseInternal code vs. regex mismatch keyvalue <"
+                            + value1
+                            + "> <"
+                            + value2
+                            + ">"
+                    );
                 }
-
             }
             catch (ArgumentException f)
             {
@@ -454,13 +613,24 @@ namespace System.Data.EntityClient
                 {
                     string msg1 = e.Message;
                     string msg2 = f.Message;
-                    if (msg1.StartsWith("Keyword not supported:", StringComparison.Ordinal) && msg2.StartsWith("Format of the initialization string", StringComparison.Ordinal))
-                    {
-                    }
+                    if (
+                        msg1.StartsWith("Keyword not supported:", StringComparison.Ordinal)
+                        && msg2.StartsWith(
+                            "Format of the initialization string",
+                            StringComparison.Ordinal
+                        )
+                    ) { }
                     else
                     {
                         // Does not always hold.
-                       Debug.Assert(msg1 == msg2, "ParseInternal code vs regex message mismatch: <" + msg1 + "> <" + msg2 + ">");
+                        Debug.Assert(
+                            msg1 == msg2,
+                            "ParseInternal code vs regex message mismatch: <"
+                                + msg1
+                                + "> <"
+                                + msg2
+                                + ">"
+                        );
                     }
                 }
                 else
@@ -475,11 +645,17 @@ namespace System.Data.EntityClient
             }
         }
 #endif
-        private static NameValuePair ParseInternal(Hashtable parsetable, string connectionString, Hashtable synonyms)
+
+        private static NameValuePair ParseInternal(
+            Hashtable parsetable,
+            string connectionString,
+            Hashtable synonyms
+        )
         {
             Debug.Assert(null != connectionString, "null connectionstring");
             StringBuilder buffer = new StringBuilder();
-            NameValuePair localKeychain = null, keychain = null;
+            NameValuePair localKeychain = null,
+                keychain = null;
 #if DEBUG
             try
             {
@@ -490,8 +666,15 @@ namespace System.Data.EntityClient
                 {
                     int startPosition = nextStartPosition;
 
-                    string keyname, keyvalue;
-                    nextStartPosition = GetKeyValuePair(connectionString, startPosition, buffer, out keyname, out keyvalue);
+                    string keyname,
+                        keyvalue;
+                    nextStartPosition = GetKeyValuePair(
+                        connectionString,
+                        startPosition,
+                        buffer,
+                        out keyname,
+                        out keyvalue
+                    );
                     if (string.IsNullOrEmpty(keyname))
                     {
                         // if (nextStartPosition != endPosition) { throw; }
@@ -511,11 +694,19 @@ namespace System.Data.EntityClient
 
                     if (null != localKeychain)
                     {
-                        localKeychain = localKeychain.Next = new NameValuePair(realkeyname, keyvalue, nextStartPosition - startPosition);
+                        localKeychain = localKeychain.Next = new NameValuePair(
+                            realkeyname,
+                            keyvalue,
+                            nextStartPosition - startPosition
+                        );
                     }
-                    else 
+                    else
                     { // first time only - don't contain modified chain from UDL file
-                        keychain = localKeychain = new NameValuePair(realkeyname, keyvalue, nextStartPosition - startPosition);
+                        keychain = localKeychain = new NameValuePair(
+                            realkeyname,
+                            keyvalue,
+                            nextStartPosition - startPosition
+                        );
                     }
                 }
 #if DEBUG
@@ -528,6 +719,6 @@ namespace System.Data.EntityClient
             ParseComparision(parsetable, connectionString, synonyms, null);
 #endif
             return keychain;
-        } 
+        }
     }
 }

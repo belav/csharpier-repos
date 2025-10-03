@@ -4,19 +4,21 @@ public class MaxDepthWithCollections : IntegrationTest<MaxDepthWithCollections.D
 {
     TrainingCourseDto _course;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        //cfg.AllowNullDestinationValues = false;
-        cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().MaxDepth(1);
-        cfg.CreateProjection<TrainingContent, TrainingContentDto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            //cfg.AllowNullDestinationValues = false;
+            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().MaxDepth(1);
+            cfg.CreateProjection<TrainingContent, TrainingContentDto>();
+        });
 
     [Fact]
     public void Should_project_with_MaxDepth()
     {
         using (var context = new ClientContext())
         {
-            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses).FirstOrDefault(n => n.CourseName == "Course 1");
+            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses)
+                .FirstOrDefault(n => n.CourseName == "Course 1");
         }
         _course.CourseName.ShouldBe("Course 1");
         var content = _course.Content[0];

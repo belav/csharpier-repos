@@ -14,7 +14,12 @@ namespace System.Web.Mvc.Test
         {
             // Act
             string s = "Hello, world!";
-            Func<string, bool> endsWith = TypeHelpers.CreateDelegate<Func<string, bool>>(TypeHelpers.MsCorLibAssembly, "System.String", "EndsWith", s);
+            Func<string, bool> endsWith = TypeHelpers.CreateDelegate<Func<string, bool>>(
+                TypeHelpers.MsCorLibAssembly,
+                "System.String",
+                "EndsWith",
+                s
+            );
 
             // Assert
             Assert.NotNull(endsWith);
@@ -25,7 +30,9 @@ namespace System.Web.Mvc.Test
         public void CreateDelegateBindsStaticMethod()
         {
             // Act
-            Func<object, object, string> concat = TypeHelpers.CreateDelegate<Func<object, object, string>>(TypeHelpers.MsCorLibAssembly, "System.String", "Concat", null);
+            Func<object, object, string> concat = TypeHelpers.CreateDelegate<
+                Func<object, object, string>
+            >(TypeHelpers.MsCorLibAssembly, "System.String", "Concat", null);
 
             // Assert
             Assert.NotNull(concat);
@@ -36,7 +43,12 @@ namespace System.Web.Mvc.Test
         public void CreateDelegateReturnsNullIfTypeDoesNotExist()
         {
             // Act
-            Action d = TypeHelpers.CreateDelegate<Action>(TypeHelpers.MsCorLibAssembly, "System.xyz.TypeDoesNotExist", "SomeMethod", null);
+            Action d = TypeHelpers.CreateDelegate<Action>(
+                TypeHelpers.MsCorLibAssembly,
+                "System.xyz.TypeDoesNotExist",
+                "SomeMethod",
+                null
+            );
 
             // Assert
             Assert.Null(d);
@@ -46,7 +58,12 @@ namespace System.Web.Mvc.Test
         public void CreateDelegateReturnsNullIfMethodDoesNotExist()
         {
             // Act
-            Action d = TypeHelpers.CreateDelegate<Action>(TypeHelpers.MsCorLibAssembly, "System.String", "MethodDoesNotExist", null);
+            Action d = TypeHelpers.CreateDelegate<Action>(
+                TypeHelpers.MsCorLibAssembly,
+                "System.String",
+                "MethodDoesNotExist",
+                null
+            );
 
             // Assert
             Assert.Null(d);
@@ -69,10 +86,7 @@ namespace System.Web.Mvc.Test
         public void CreateTryGetValueDelegateWrapsGenericObjectDictionaries()
         {
             // Arrange
-            object dictionary = new Dictionary<object, int>()
-            {
-                { "theKey", 42 }
-            };
+            object dictionary = new Dictionary<object, int>() { { "theKey", 42 } };
 
             // Act
             TryGetValueDelegate d = TypeHelpers.CreateTryGetValueDelegate(dictionary.GetType());
@@ -89,10 +103,7 @@ namespace System.Web.Mvc.Test
         public void CreateTryGetValueDelegateWrapsGenericStringDictionaries()
         {
             // Arrange
-            object dictionary = new Dictionary<string, int>()
-            {
-                { "theKey", 42 }
-            };
+            object dictionary = new Dictionary<string, int>() { { "theKey", 42 } };
 
             // Act
             TryGetValueDelegate d = TypeHelpers.CreateTryGetValueDelegate(dictionary.GetType());
@@ -109,10 +120,7 @@ namespace System.Web.Mvc.Test
         public void CreateTryGetValueDelegateWrapsNonGenericDictionaries()
         {
             // Arrange
-            object dictionary = new Hashtable()
-            {
-                { "foo", 42 }
-            };
+            object dictionary = new Hashtable() { { "foo", 42 } };
 
             // Act
             TryGetValueDelegate d = TypeHelpers.CreateTryGetValueDelegate(dictionary.GetType());

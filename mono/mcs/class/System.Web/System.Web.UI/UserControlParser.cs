@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,135 +37,178 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-	internal class UserControlParser : TemplateControlParser
-	{
-		string masterPage;
-		string providerName;
-		internal UserControlParser (VirtualPath virtualPath, string inputFile, HttpContext context)
-			: this (virtualPath, inputFile, context, null)
-		{
-		}
+    internal class UserControlParser : TemplateControlParser
+    {
+        string masterPage;
+        string providerName;
 
-		internal UserControlParser (VirtualPath virtualPath, string inputFile, List <string> deps, HttpContext context)
-			: this (virtualPath, inputFile, context, null)
-		{
-			this.Dependencies = deps;
-		}
+        internal UserControlParser(VirtualPath virtualPath, string inputFile, HttpContext context)
+            : this(virtualPath, inputFile, context, null) { }
 
-		internal UserControlParser (VirtualPath virtualPath, string inputFile, HttpContext context, string type)
-		{
-			VirtualPath = virtualPath;
-			Context = context;
-			BaseVirtualDir = virtualPath.DirectoryNoNormalize;
-			InputFile = inputFile;
-			SetBaseType (type);
-			AddApplicationAssembly ();
-			LoadConfigDefaults ();
-		}
+        internal UserControlParser(
+            VirtualPath virtualPath,
+            string inputFile,
+            List<string> deps,
+            HttpContext context
+        )
+            : this(virtualPath, inputFile, context, null)
+        {
+            this.Dependencies = deps;
+        }
 
-		internal UserControlParser (VirtualPath virtualPath, TextReader reader, HttpContext context)
-			: this (virtualPath, null, reader, context)
-		{
-		}
-		
-		internal UserControlParser (VirtualPath virtualPath, string inputFile, TextReader reader, HttpContext context)
-		{
-			VirtualPath = virtualPath;
-			Context = context;
-			BaseVirtualDir = virtualPath.DirectoryNoNormalize;
-			
-			if (String.IsNullOrEmpty (inputFile))
-				InputFile = virtualPath.PhysicalPath;
-			else
-				InputFile = inputFile;
-			
-			Reader = reader;
-			SetBaseType (null);
-			AddApplicationAssembly ();
-			LoadConfigDefaults ();
-		}
+        internal UserControlParser(
+            VirtualPath virtualPath,
+            string inputFile,
+            HttpContext context,
+            string type
+        )
+        {
+            VirtualPath = virtualPath;
+            Context = context;
+            BaseVirtualDir = virtualPath.DirectoryNoNormalize;
+            InputFile = inputFile;
+            SetBaseType(type);
+            AddApplicationAssembly();
+            LoadConfigDefaults();
+        }
 
-		internal UserControlParser (TextReader reader, int? uniqueSuffix, HttpContext context)
-		{
-			Context = context;
+        internal UserControlParser(VirtualPath virtualPath, TextReader reader, HttpContext context)
+            : this(virtualPath, null, reader, context) { }
 
-			string fpath = context.Request.FilePath;
-			VirtualPath = new VirtualPath (fpath);
-			BaseVirtualDir = VirtualPathUtility.GetDirectory (fpath, false);
+        internal UserControlParser(
+            VirtualPath virtualPath,
+            string inputFile,
+            TextReader reader,
+            HttpContext context
+        )
+        {
+            VirtualPath = virtualPath;
+            Context = context;
+            BaseVirtualDir = virtualPath.DirectoryNoNormalize;
 
-			// We're probably being called by ParseControl - let's use the requested
-			// control's path plus unique suffix as our input file, since that's the
-			// context we're being invoked from.
-			InputFile = VirtualPathUtility.GetFileName (fpath) + "#" + (uniqueSuffix != null ? ((int)uniqueSuffix).ToString ("x") : "0");
-			Reader = reader;
-			SetBaseType (null);
-			AddApplicationAssembly ();
-			LoadConfigDefaults ();
-		}		
+            if (String.IsNullOrEmpty(inputFile))
+                InputFile = virtualPath.PhysicalPath;
+            else
+                InputFile = inputFile;
 
-		internal static Type GetCompiledType (TextReader reader, int? inputHashCode, HttpContext context)
-		{
-			UserControlParser ucp = new UserControlParser (reader, inputHashCode, context);
-			return ucp.CompileIntoType ();
-		}
-		
-		internal static Type GetCompiledType (string virtualPath, string inputFile, List <string> deps, HttpContext context)
-		{
-			UserControlParser ucp = new UserControlParser (new VirtualPath (virtualPath), inputFile, deps, context);
+            Reader = reader;
+            SetBaseType(null);
+            AddApplicationAssembly();
+            LoadConfigDefaults();
+        }
 
-			return ucp.CompileIntoType ();
-		}
+        internal UserControlParser(TextReader reader, int? uniqueSuffix, HttpContext context)
+        {
+            Context = context;
 
-		public static Type GetCompiledType (string virtualPath, string inputFile, HttpContext context)
-		{
-			UserControlParser ucp = new UserControlParser (new VirtualPath (virtualPath), inputFile, context);
+            string fpath = context.Request.FilePath;
+            VirtualPath = new VirtualPath(fpath);
+            BaseVirtualDir = VirtualPathUtility.GetDirectory(fpath, false);
 
-			return ucp.CompileIntoType ();
-		}
+            // We're probably being called by ParseControl - let's use the requested
+            // control's path plus unique suffix as our input file, since that's the
+            // context we're being invoked from.
+            InputFile =
+                VirtualPathUtility.GetFileName(fpath)
+                + "#"
+                + (uniqueSuffix != null ? ((int)uniqueSuffix).ToString("x") : "0");
+            Reader = reader;
+            SetBaseType(null);
+            AddApplicationAssembly();
+            LoadConfigDefaults();
+        }
 
-		internal override Type CompileIntoType ()
-		{
-			AspGenerator generator = new AspGenerator (this);
-			return generator.GetCompiledType ();
-		}
+        internal static Type GetCompiledType(
+            TextReader reader,
+            int? inputHashCode,
+            HttpContext context
+        )
+        {
+            UserControlParser ucp = new UserControlParser(reader, inputHashCode, context);
+            return ucp.CompileIntoType();
+        }
 
-		internal override void ProcessMainAttributes (IDictionary atts)
-		{
-			masterPage = GetString (atts, "MasterPageFile", null);
-			if (masterPage != null)
-				AddDependency (masterPage);
+        internal static Type GetCompiledType(
+            string virtualPath,
+            string inputFile,
+            List<string> deps,
+            HttpContext context
+        )
+        {
+            UserControlParser ucp = new UserControlParser(
+                new VirtualPath(virtualPath),
+                inputFile,
+                deps,
+                context
+            );
 
-			base.ProcessMainAttributes (atts);
-		}
-		internal override void ProcessOutputCacheAttributes (IDictionary atts)
-		{
-			providerName = GetString (atts, "ProviderName", null);
-			base.ProcessOutputCacheAttributes (atts);
-		}
+            return ucp.CompileIntoType();
+        }
 
-		internal override Type DefaultBaseType {
-			get {
-				Type ret = PageParser.DefaultUserControlBaseType;
-				if (ret == null)
-					return base.DefaultBaseType;
+        public static Type GetCompiledType(
+            string virtualPath,
+            string inputFile,
+            HttpContext context
+        )
+        {
+            UserControlParser ucp = new UserControlParser(
+                new VirtualPath(virtualPath),
+                inputFile,
+                context
+            );
 
-				return ret;
-			}
-		}
-		internal override string DefaultBaseTypeName {
-			get { return PagesConfig.UserControlBaseType; }
-		}
+            return ucp.CompileIntoType();
+        }
 
-		internal override string DefaultDirectiveName {
-			get { return "control"; }
-		}
+        internal override Type CompileIntoType()
+        {
+            AspGenerator generator = new AspGenerator(this);
+            return generator.GetCompiledType();
+        }
 
-		internal string MasterPageFile {
-			get { return masterPage; }
-		}
-		internal string ProviderName {
-			get { return providerName; }
-		}
-	}
+        internal override void ProcessMainAttributes(IDictionary atts)
+        {
+            masterPage = GetString(atts, "MasterPageFile", null);
+            if (masterPage != null)
+                AddDependency(masterPage);
+
+            base.ProcessMainAttributes(atts);
+        }
+
+        internal override void ProcessOutputCacheAttributes(IDictionary atts)
+        {
+            providerName = GetString(atts, "ProviderName", null);
+            base.ProcessOutputCacheAttributes(atts);
+        }
+
+        internal override Type DefaultBaseType
+        {
+            get
+            {
+                Type ret = PageParser.DefaultUserControlBaseType;
+                if (ret == null)
+                    return base.DefaultBaseType;
+
+                return ret;
+            }
+        }
+        internal override string DefaultBaseTypeName
+        {
+            get { return PagesConfig.UserControlBaseType; }
+        }
+
+        internal override string DefaultDirectiveName
+        {
+            get { return "control"; }
+        }
+
+        internal string MasterPageFile
+        {
+            get { return masterPage; }
+        }
+        internal string ProviderName
+        {
+            get { return providerName; }
+        }
+    }
 }
-

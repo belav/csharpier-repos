@@ -14,13 +14,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.SplitComment
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSplitCommentService()
-        {
-        }
+        public CSharpSplitCommentService() { }
 
         public string CommentStart => "//";
 
-        public bool IsAllowed(SyntaxNode root, SyntaxTrivia trivia)
-            => true;
+        public bool IsAllowed(SyntaxNode root, SyntaxTrivia trivia) => true;
     }
 }

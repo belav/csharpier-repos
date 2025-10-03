@@ -16,8 +16,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
     {
         protected override SourceText Create(string source)
         {
-            byte[] buffer = GetBytes(new UTF8Encoding(encoderShouldEmitUTF8Identifier: true), source);
-            using (var stream = new MemoryStream(buffer, 0, buffer.Length, writable: false, publiclyVisible: true))
+            byte[] buffer = GetBytes(
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: true),
+                source
+            );
+            using (
+                var stream = new MemoryStream(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    writable: false,
+                    publiclyVisible: true
+                )
+            )
             {
                 return EncodedStringText.Create(stream);
             }

@@ -33,8 +33,10 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private static void AnalyzeDefinition(QilNode nd)
         {
-            Debug.Assert(XmlILConstructInfo.Read(nd).PushToWriterLast,
-                         "Only need to analyze expressions which will be compiled in push mode.");
+            Debug.Assert(
+                XmlILConstructInfo.Read(nd).PushToWriterLast,
+                "Only need to analyze expressions which will be compiled in push mode."
+            );
 
             switch (nd.NodeType)
             {
@@ -47,40 +49,43 @@ namespace System.Xml.Xsl.IlGen
                     break;
 
                 case QilNodeType.Loop:
-                    {
-                        // Recursively analyze Loop return value
-                        QilLoop ndLoop = (QilLoop)nd;
-                        if (ndLoop.Variable.NodeType == QilNodeType.Let || !ndLoop.Variable.Binding!.XmlType!.MaybeMany)
-                            AnalyzeDefinition(ndLoop.Body);
-                        break;
-                    }
+                {
+                    // Recursively analyze Loop return value
+                    QilLoop ndLoop = (QilLoop)nd;
+                    if (
+                        ndLoop.Variable.NodeType == QilNodeType.Let
+                        || !ndLoop.Variable.Binding!.XmlType!.MaybeMany
+                    )
+                        AnalyzeDefinition(ndLoop.Body);
+                    break;
+                }
 
                 case QilNodeType.Sequence:
-                    {
-                        // Recursively analyze last expression in Sequence
-                        QilList ndSeq = (QilList)nd;
-                        if (ndSeq.Count > 0)
-                            AnalyzeDefinition(ndSeq[ndSeq.Count - 1]);
-                        break;
-                    }
+                {
+                    // Recursively analyze last expression in Sequence
+                    QilList ndSeq = (QilList)nd;
+                    if (ndSeq.Count > 0)
+                        AnalyzeDefinition(ndSeq[ndSeq.Count - 1]);
+                    break;
+                }
 
                 case QilNodeType.Choice:
-                    {
-                        // Recursively analyze Choice branches
-                        QilChoice ndChoice = (QilChoice)nd;
-                        for (int i = 0; i < ndChoice.Branches.Count; i++)
-                            AnalyzeDefinition(ndChoice.Branches[i]);
-                        break;
-                    }
+                {
+                    // Recursively analyze Choice branches
+                    QilChoice ndChoice = (QilChoice)nd;
+                    for (int i = 0; i < ndChoice.Branches.Count; i++)
+                        AnalyzeDefinition(ndChoice.Branches[i]);
+                    break;
+                }
 
                 case QilNodeType.Conditional:
-                    {
-                        // Recursively analyze Conditional branches
-                        QilTernary ndCond = (QilTernary)nd;
-                        AnalyzeDefinition(ndCond.Center);
-                        AnalyzeDefinition(ndCond.Right);
-                        break;
-                    }
+                {
+                    // Recursively analyze Conditional branches
+                    QilTernary ndCond = (QilTernary)nd;
+                    AnalyzeDefinition(ndCond.Center);
+                    AnalyzeDefinition(ndCond.Right);
+                    break;
+                }
 
                 case QilNodeType.Nop:
                     AnalyzeDefinition(((QilUnary)nd).Child);

@@ -33,20 +33,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             TelemetrySessionInitialized();
         }
 
-        protected virtual void TelemetrySessionInitialized()
-        {
-        }
+        protected virtual void TelemetrySessionInitialized() { }
 
-        public bool HasActiveSession
-            => CurrentSession != null && CurrentSession.IsOptedIn;
+        public bool HasActiveSession => CurrentSession != null && CurrentSession.IsOptedIn;
 
-        public string? SerializeCurrentSessionSettings()
-            => CurrentSession?.SerializeSettings();
+        public string? SerializeCurrentSessionSettings() => CurrentSession?.SerializeSettings();
 
-        public void RegisterUnexpectedExceptionLogger(TraceSource logger)
-            => FaultReporter.RegisterLogger(logger);
+        public void RegisterUnexpectedExceptionLogger(TraceSource logger) =>
+            FaultReporter.RegisterLogger(logger);
 
-        public void UnregisterUnexpectedExceptionLogger(TraceSource logger)
-            => FaultReporter.UnregisterLogger(logger);
+        public void UnregisterUnexpectedExceptionLogger(TraceSource logger) =>
+            FaultReporter.UnregisterLogger(logger);
     }
 }

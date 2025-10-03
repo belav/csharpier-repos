@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,15 +31,15 @@
 //
 
 #if !FULL_AOT_RUNTIME && !MONOTOUCH
-namespace System.Runtime.InteropServices {
-
-	[ComVisible (true)]
-	[Guid("fa1f3615-acb9-486d-9eac-1bef87e36b09")]
-	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-	public interface ITypeLibExporterNameProvider {
-		[return: MarshalAs (UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
-		string[] GetNames ();
-
-	}
+namespace System.Runtime.InteropServices
+{
+    [ComVisible(true)]
+    [Guid("fa1f3615-acb9-486d-9eac-1bef87e36b09")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface ITypeLibExporterNameProvider
+    {
+        [return: MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
+        string[] GetNames();
+    }
 }
 #endif

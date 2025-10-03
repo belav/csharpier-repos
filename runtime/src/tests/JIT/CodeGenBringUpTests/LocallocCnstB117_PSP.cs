@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_LocallocCnstB117_PSP
 {
     const int Pass = 100;
@@ -13,7 +13,8 @@ public class BringUpTest_LocallocCnstB117_PSP
 
     // Reduce all values to byte
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static unsafe bool CHECK(byte check, byte expected) {
+    public static unsafe bool CHECK(byte check, byte expected)
+    {
         return check == expected;
     }
 
@@ -24,7 +25,7 @@ public class BringUpTest_LocallocCnstB117_PSP
         int i;
         for (i = 0; i < 117; i++)
         {
-            a[i] = (byte) i;
+            a[i] = (byte)i;
         }
 
         i = 0;
@@ -32,7 +33,8 @@ public class BringUpTest_LocallocCnstB117_PSP
         {
             for (; i < 117; i++)
             {
-                if (!CHECK(a[i], (byte) i)) return i;
+                if (!CHECK(a[i], (byte)i))
+                    return i;
             }
         }
         catch
@@ -50,7 +52,8 @@ public class BringUpTest_LocallocCnstB117_PSP
         int ret;
 
         ret = LocallocCnstB117_PSP();
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocCnstB117_PSP: Failed on index: " + ret);
             return Fail;
         }

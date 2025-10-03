@@ -13,7 +13,6 @@ namespace System.ServiceModel.Activation
     class HttpsHostedTransportConfiguration : HttpHostedTransportConfiguration
     {
         internal HttpsHostedTransportConfiguration()
-            : base(Uri.UriSchemeHttps)
-        { }
+            : base(Uri.UriSchemeHttps) { }
     }
 }

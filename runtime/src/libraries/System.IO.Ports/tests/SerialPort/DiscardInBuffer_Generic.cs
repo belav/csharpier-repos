@@ -17,18 +17,21 @@ namespace System.IO.Ports.Tests
         {
             using (SerialPort com = new SerialPort())
             {
-                Debug.WriteLine("Verifying Discard method throws exception without a call to Open()");
+                Debug.WriteLine(
+                    "Verifying Discard method throws exception without a call to Open()"
+                );
                 VerifyDiscardException(com, typeof(InvalidOperationException));
             }
         }
-
 
         [Fact]
         public void DiscardAfterFailedOpen()
         {
             using (SerialPort com = new SerialPort("BAD_PORT_NAME"))
             {
-                Debug.WriteLine("Verifying read Discard throws exception with a failed call to Open()");
+                Debug.WriteLine(
+                    "Verifying read Discard throws exception with a failed call to Open()"
+                );
 
                 //Since the PortName is set to a bad port name Open will thrown an exception
                 //however we don't care what it is since we are verifying a read method
@@ -37,13 +40,18 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void DiscardAfterClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                Debug.WriteLine("Verifying Discard method throws exception after a call to Close()");
+                Debug.WriteLine(
+                    "Verifying Discard method throws exception after a call to Close()"
+                );
 
                 com.Open();
                 com.Close();
@@ -52,13 +60,18 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void DiscardAfterOpen()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                Debug.WriteLine("Verifying Discard method does not throw an exception after a call to Open()");
+                Debug.WriteLine(
+                    "Verifying Discard method does not throw an exception after a call to Open()"
+                );
 
                 com.Open();
                 VerifyDiscardException(com, null);
@@ -89,7 +102,11 @@ namespace System.IO.Ports.Tests
 
                 if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!!: {0} exception was thrown expected {1}", e.GetType(), expectedException);
+                    Fail(
+                        "ERROR!!!: {0} exception was thrown expected {1}",
+                        e.GetType(),
+                        expectedException
+                    );
                 }
             }
         }

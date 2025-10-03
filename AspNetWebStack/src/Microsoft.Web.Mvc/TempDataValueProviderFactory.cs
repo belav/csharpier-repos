@@ -25,9 +25,7 @@ namespace Microsoft.Web.Mvc
         /// <summary>
         /// dummy struct that resembles Void but can be used in a generic context
         /// </summary>
-        private struct TempDataVoid
-        {
-        }
+        private struct TempDataVoid { }
 
         private sealed class TempDataValueProvider : DictionaryValueProvider<TempDataVoid>
         {
@@ -47,8 +45,15 @@ namespace Microsoft.Web.Mvc
                 // TryGetValue will mark the entry for removal.
                 if (_tempData.TryGetValue(key, out rawValue))
                 {
-                    string attemptedValue = Convert.ToString(rawValue, CultureInfo.InvariantCulture);
-                    return new ValueProviderResult(rawValue, attemptedValue, CultureInfo.InvariantCulture);
+                    string attemptedValue = Convert.ToString(
+                        rawValue,
+                        CultureInfo.InvariantCulture
+                    );
+                    return new ValueProviderResult(
+                        rawValue,
+                        attemptedValue,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 else
                 {
@@ -57,11 +62,15 @@ namespace Microsoft.Web.Mvc
                 }
             }
 
-            private static Dictionary<string, TempDataVoid> GetVoidDictionary(TempDataDictionary tempData)
+            private static Dictionary<string, TempDataVoid> GetVoidDictionary(
+                TempDataDictionary tempData
+            )
             {
                 // Create a special backing store that doesn't directly hold the values, since the DictionaryValueProvider
                 // enumerates over the backing store but enumerating over TempData marks everything for removal.
-                Dictionary<string, TempDataVoid> d = new Dictionary<string, TempDataVoid>(StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, TempDataVoid> d = new Dictionary<string, TempDataVoid>(
+                    StringComparer.OrdinalIgnoreCase
+                );
 
                 // Enumerating over TempDataDictionary.Keys doesn't mark them for removal.
                 foreach (string key in tempData.Keys)

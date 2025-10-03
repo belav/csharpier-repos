@@ -47,7 +47,10 @@ namespace System.Xml.Xsl.XsltOld
             switch (frame.State)
             {
                 case Initialized:
-                    TextOnlyOutput output = new TextOnlyOutput(processor, new StringWriter(CultureInfo.InvariantCulture));
+                    TextOnlyOutput output = new TextOnlyOutput(
+                        processor,
+                        new StringWriter(CultureInfo.InvariantCulture)
+                    );
                     processor.PushOutput(output);
                     processor.PushActionFrame(frame);
                     frame.State = ProcessingChildren;

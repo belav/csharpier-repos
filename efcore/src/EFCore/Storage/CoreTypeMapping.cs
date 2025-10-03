@@ -50,7 +50,8 @@ public abstract class CoreTypeMapping
             ValueComparer? providerValueComparer = null,
             Func<IProperty, ITypeBase, ValueGenerator>? valueGeneratorFactory = null,
             CoreTypeMapping? elementMapping = null,
-            JsonValueReaderWriter? jsonValueReaderWriter = null)
+            JsonValueReaderWriter? jsonValueReaderWriter = null
+        )
         {
             ClrType = clrType;
             Converter = converter;
@@ -119,7 +120,8 @@ public abstract class CoreTypeMapping
             ValueComparer? comparer,
             ValueComparer? keyComparer,
             CoreTypeMapping? elementMapping,
-            JsonValueReaderWriter? jsonValueReaderWriter)
+            JsonValueReaderWriter? jsonValueReaderWriter
+        )
         {
             converter = converter?.ComposeWith(Converter);
 
@@ -131,9 +133,13 @@ public abstract class CoreTypeMapping
                 ProviderValueComparer,
                 ValueGeneratorFactory,
                 elementMapping ?? ElementTypeMapping,
-                jsonValueReaderWriter ?? CreateReaderWriter(converter, JsonValueReaderWriter));
+                jsonValueReaderWriter ?? CreateReaderWriter(converter, JsonValueReaderWriter)
+            );
 
-            static JsonValueReaderWriter? CreateReaderWriter(ValueConverter? converter, JsonValueReaderWriter? readerWriter)
+            static JsonValueReaderWriter? CreateReaderWriter(
+                ValueConverter? converter,
+                JsonValueReaderWriter? readerWriter
+            )
             {
                 if (converter == null || readerWriter == null)
                 {
@@ -150,10 +156,15 @@ public abstract class CoreTypeMapping
                     readerWriter = convertedValueReaderWriter.InnerReaderWriter;
                 }
 
-                return (JsonValueReaderWriter)Activator.CreateInstance(
-                    typeof(JsonConvertedValueReaderWriter<,>).MakeGenericType(
-                        converter.ModelClrType, readerWriter.ValueType),
-                    readerWriter, converter)!;
+                return (JsonValueReaderWriter)
+                    Activator.CreateInstance(
+                        typeof(JsonConvertedValueReaderWriter<,>).MakeGenericType(
+                            converter.ModelClrType,
+                            readerWriter.ValueType
+                        ),
+                        readerWriter,
+                        converter
+                    )!;
             }
         }
     }
@@ -177,9 +188,10 @@ public abstract class CoreTypeMapping
 
         Check.DebugAssert(
             parameters.Comparer == null
-            || converter != null
-            || parameters.Comparer.Type.IsAssignableFrom(clrType),
-            $"Expected {clrType}, got {parameters.Comparer?.Type}");
+                || converter != null
+                || parameters.Comparer.Type.IsAssignableFrom(clrType),
+            $"Expected {clrType}, got {parameters.Comparer?.Type}"
+        );
         if (parameters.Comparer?.Type.IsAssignableFrom(clrType) == true)
         {
             _comparer = parameters.Comparer;
@@ -187,9 +199,10 @@ public abstract class CoreTypeMapping
 
         Check.DebugAssert(
             parameters.KeyComparer == null
-            || converter != null
-            || parameters.KeyComparer.Type.IsAssignableFrom(parameters.ClrType),
-            $"Expected {parameters.ClrType}, got {parameters.KeyComparer?.Type}");
+                || converter != null
+                || parameters.KeyComparer.Type.IsAssignableFrom(parameters.ClrType),
+            $"Expected {parameters.ClrType}, got {parameters.KeyComparer?.Type}"
+        );
         if (parameters.KeyComparer?.Type.IsAssignableFrom(clrType) == true)
         {
             _keyComparer = parameters.KeyComparer;
@@ -197,16 +210,23 @@ public abstract class CoreTypeMapping
 
         Check.DebugAssert(
             parameters.ProviderValueComparer == null
-            || parameters.ProviderValueComparer.Type.IsAssignableFrom(converter?.ProviderClrType ?? clrType),
-            $"Expected {converter?.ProviderClrType ?? clrType}, got {parameters.ProviderValueComparer?.Type}");
-        if (parameters.ProviderValueComparer?.Type.IsAssignableFrom(converter?.ProviderClrType ?? clrType) == true)
+                || parameters.ProviderValueComparer.Type.IsAssignableFrom(
+                    converter?.ProviderClrType ?? clrType
+                ),
+            $"Expected {converter?.ProviderClrType ?? clrType}, got {parameters.ProviderValueComparer?.Type}"
+        );
+        if (
+            parameters.ProviderValueComparer?.Type.IsAssignableFrom(
+                converter?.ProviderClrType ?? clrType
+            ) == true
+        )
         {
             _providerValueComparer = parameters.ProviderValueComparer;
         }
 
 #pragma warning disable CS0612 // Type or member is obsolete
-        ValueGeneratorFactory = parameters.ValueGeneratorFactory
-            ?? converter?.MappingHints?.ValueGeneratorFactory;
+        ValueGeneratorFactory =
+            parameters.ValueGeneratorFactory ?? converter?.MappingHints?.ValueGeneratorFactory;
 #pragma warning restore CS0612 // Type or member is obsolete
     }
 
@@ -220,16 +240,16 @@ public abstract class CoreTypeMapping
     /// </summary>
     [DynamicallyAccessedMembers(
         DynamicallyAccessedMemberTypes.PublicMethods
-        | DynamicallyAccessedMemberTypes.NonPublicMethods
-        | DynamicallyAccessedMemberTypes.PublicProperties)]
+            | DynamicallyAccessedMemberTypes.NonPublicMethods
+            | DynamicallyAccessedMemberTypes.PublicProperties
+    )]
     public virtual Type ClrType { get; }
 
     /// <summary>
     ///     Converts types to and from the store whenever this mapping is used.
     ///     May be null if no conversion is needed.
     /// </summary>
-    public virtual ValueConverter? Converter
-        => Parameters.Converter;
+    public virtual ValueConverter? Converter => Parameters.Converter;
 
     /// <summary>
     ///     An optional factory for creating a specific <see cref="ValueGenerator" /> to use with
@@ -243,32 +263,39 @@ public abstract class CoreTypeMapping
     ///     CLR types that cannot be compared with <see cref="object.Equals(object, object)" />
     ///     and/or need a deep copy when taking a snapshot.
     /// </summary>
-    public virtual ValueComparer Comparer
-        => NonCapturingLazyInitializer.EnsureInitialized(
+    public virtual ValueComparer Comparer =>
+        NonCapturingLazyInitializer.EnsureInitialized(
             ref _comparer,
             this,
-            static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: false));
+            static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: false)
+        );
 
     /// <summary>
     ///     A <see cref="ValueComparer" /> adds custom value comparison for use when
     ///     comparing key values to each other. For example, when comparing a PK to and FK.
     /// </summary>
-    public virtual ValueComparer KeyComparer
-        => NonCapturingLazyInitializer.EnsureInitialized(
+    public virtual ValueComparer KeyComparer =>
+        NonCapturingLazyInitializer.EnsureInitialized(
             ref _keyComparer,
             this,
-            static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: true));
+            static c => ValueComparer.CreateDefault(c.ClrType, favorStructuralComparisons: true)
+        );
 
     /// <summary>
     ///     A <see cref="ValueComparer" /> for the provider CLR type values.
     /// </summary>
-    public virtual ValueComparer ProviderValueComparer
-        => NonCapturingLazyInitializer.EnsureInitialized(
+    public virtual ValueComparer ProviderValueComparer =>
+        NonCapturingLazyInitializer.EnsureInitialized(
             ref _providerValueComparer,
             this,
-            static c => (c.Converter?.ProviderClrType ?? c.ClrType) == c.ClrType
-                ? c.KeyComparer
-                : ValueComparer.CreateDefault(c.Converter!.ProviderClrType, favorStructuralComparisons: true));
+            static c =>
+                (c.Converter?.ProviderClrType ?? c.ClrType) == c.ClrType
+                    ? c.KeyComparer
+                    : ValueComparer.CreateDefault(
+                        c.Converter!.ProviderClrType,
+                        favorStructuralComparisons: true
+                    )
+        );
 
     /// <summary>
     ///     Creates a copy of this mapping.
@@ -292,7 +319,8 @@ public abstract class CoreTypeMapping
         ValueComparer? comparer = null,
         ValueComparer? keyComparer = null,
         CoreTypeMapping? elementMapping = null,
-        JsonValueReaderWriter? jsonValueReaderWriter = null);
+        JsonValueReaderWriter? jsonValueReaderWriter = null
+    );
 
     /// <summary>
     ///     Clones the type mapping to update any parameter if needed.
@@ -314,8 +342,9 @@ public abstract class CoreTypeMapping
         ValueComparer? keyComparer = null,
         ValueComparer? providerValueComparer = null,
         CoreTypeMapping? elementMapping = null,
-        JsonValueReaderWriter? jsonValueReaderWriter = null)
-        => Clone(
+        JsonValueReaderWriter? jsonValueReaderWriter = null
+    ) =>
+        Clone(
             new CoreTypeMappingParameters(
                 clrType ?? Parameters.ClrType,
                 converter ?? Parameters.Converter,
@@ -324,7 +353,9 @@ public abstract class CoreTypeMapping
                 providerValueComparer ?? Parameters.ProviderValueComparer,
                 Parameters.ValueGeneratorFactory,
                 elementMapping ?? Parameters.ElementTypeMapping,
-                jsonValueReaderWriter ?? Parameters.JsonValueReaderWriter));
+                jsonValueReaderWriter ?? Parameters.JsonValueReaderWriter
+            )
+        );
 
     /// <summary>
     ///     Creates a an expression tree that can be used to generate code for the literal value.
@@ -333,18 +364,18 @@ public abstract class CoreTypeMapping
     /// </summary>
     /// <param name="value">The value for which a literal is needed.</param>
     /// <returns>An expression tree that can be used to generate code for the literal value.</returns>
-    public virtual Expression GenerateCodeLiteral(object value)
-        => throw new NotSupportedException(CoreStrings.LiteralGenerationNotSupported(ClrType.ShortDisplayName()));
+    public virtual Expression GenerateCodeLiteral(object value) =>
+        throw new NotSupportedException(
+            CoreStrings.LiteralGenerationNotSupported(ClrType.ShortDisplayName())
+        );
 
     /// <summary>
     ///     If this type mapping represents a primitive collection, this holds the element's type mapping.
     /// </summary>
-    public virtual CoreTypeMapping? ElementTypeMapping
-        => Parameters.ElementTypeMapping;
+    public virtual CoreTypeMapping? ElementTypeMapping => Parameters.ElementTypeMapping;
 
     /// <summary>
     ///     Handles reading and writing JSON values for instances of the mapped type.
     /// </summary>
-    public virtual JsonValueReaderWriter? JsonValueReaderWriter
-        => Parameters.JsonValueReaderWriter;
+    public virtual JsonValueReaderWriter? JsonValueReaderWriter => Parameters.JsonValueReaderWriter;
 }

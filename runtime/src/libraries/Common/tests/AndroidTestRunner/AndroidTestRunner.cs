@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using Microsoft.DotNet.XHarness.TestRunners.Common;
 using Microsoft.DotNet.XHarness.TestRunners.Xunit;
 
@@ -24,15 +24,22 @@ public class SimpleAndroidTestRunner : AndroidApplicationEntryPoint, IDevice
         s_testLibs = Directory.GetFiles(Environment.CurrentDirectory, "*.Tests.dll").ToList();
         if (s_testLibs.Count < 1)
         {
-            Console.WriteLine($"Test libs were not found (*.Tests.dll was not found in {Environment.CurrentDirectory})");
+            Console.WriteLine(
+                $"Test libs were not found (*.Tests.dll was not found in {Environment.CurrentDirectory})"
+            );
             return -1;
         }
         int exitCode = 0;
         s_MainTestName = Path.GetFileNameWithoutExtension(s_testLibs[0]);
         string? verbose = Environment.GetEnvironmentVariable("XUNIT_VERBOSE")?.ToLower();
-        bool enableMaxThreads = (Environment.GetEnvironmentVariable("XUNIT_SINGLE_THREADED") != "1");
-        var simpleTestRunner = new SimpleAndroidTestRunner(verbose == "true" || verbose == "1", enableMaxThreads);
-        simpleTestRunner.TestsCompleted += (e, result) => 
+        bool enableMaxThreads = (
+            Environment.GetEnvironmentVariable("XUNIT_SINGLE_THREADED") != "1"
+        );
+        var simpleTestRunner = new SimpleAndroidTestRunner(
+            verbose == "true" || verbose == "1",
+            enableMaxThreads
+        );
+        simpleTestRunner.TestsCompleted += (e, result) =>
         {
             if (result.FailedTests > 0)
                 exitCode = 1;
@@ -62,7 +69,7 @@ public class SimpleAndroidTestRunner : AndroidApplicationEntryPoint, IDevice
         }
     }
 
-    protected override void TerminateWithSuccess() {}
+    protected override void TerminateWithSuccess() { }
 
     private int? _maxParallelThreads;
 

@@ -14,4 +14,3 @@ namespace System.IdentityModel.Selectors
         public int feedbackSize;
     }
 }
-

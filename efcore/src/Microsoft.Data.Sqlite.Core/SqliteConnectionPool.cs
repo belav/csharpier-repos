@@ -35,8 +35,7 @@ namespace Microsoft.Data.Sqlite
             _connectionOptions = connectionOptions;
         }
 
-        public int Count
-            => _connections.Count;
+        public int Count => _connections.Count;
 
         public void Shutdown()
         {
@@ -53,8 +52,7 @@ namespace Microsoft.Data.Sqlite
             {
                 if (_poolSemaphore.WaitOne(0))
                 {
-                    if (!_warmPool.TryPop(out connection)
-                        && !_coldPool.TryPop(out connection))
+                    if (!_warmPool.TryPop(out connection) && !_coldPool.TryPop(out connection))
                     {
                         Debug.Fail("Inconceivable!");
                     }
@@ -68,8 +66,7 @@ namespace Microsoft.Data.Sqlite
                         _connections.Add(connection);
                     }
                 }
-            }
-            while (connection == null);
+            } while (connection == null);
 
             return connection;
         }
@@ -78,8 +75,7 @@ namespace Microsoft.Data.Sqlite
         {
             connection.Deactivate();
 
-            if (_state != State.Disabled
-                && connection.CanBePooled)
+            if (_state != State.Disabled && connection.CanBePooled)
             {
                 _warmPool.Push(connection);
                 _poolSemaphore.Release();
@@ -177,7 +173,7 @@ namespace Microsoft.Data.Sqlite
         private enum State
         {
             Active,
-            Disabled
+            Disabled,
         }
     }
 }

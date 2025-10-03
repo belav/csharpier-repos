@@ -19,32 +19,38 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class ConversionCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(UnnamedSymbolCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(UnnamedSymbolCompletionProvider);
 
-        private static string FormatExplicitConversionDescription(string fromType, string toType)
-            => string.Format(WorkspacesResources.Predefined_conversion_from_0_to_1, fromType, toType);
+        private static string FormatExplicitConversionDescription(string fromType, string toType) =>
+            string.Format(WorkspacesResources.Predefined_conversion_from_0_to_1, fromType, toType);
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorIndexerCompletionItemsShouldBePlacedLastInCompletionList()
         {
-            var castCompletionItem = (await GetCompletionItemsAsync("""
-                public class C
-                {
-                    public static explicit operator float(C c) => 0;
-                }
-
-                public class Program
-                {
-                    public static void Main()
+            var castCompletionItem = (
+                await GetCompletionItemsAsync(
+                    """
+                    public class C
                     {
-                        var c = new C();
-                        c.$$
+                        public static explicit operator float(C c) => 0;
                     }
-                }
-                """, SourceCodeKind.Regular)).Single();
 
-            var completionList = new[] {
+                    public class Program
+                    {
+                        public static void Main()
+                        {
+                            var c = new C();
+                            c.$$
+                        }
+                    }
+                    """,
+                    SourceCodeKind.Regular
+                )
+            ).Single();
+
+            var completionList = new[]
+            {
                 CompletionItem.Create("SomeText0"),
                 castCompletionItem,
                 CompletionItem.Create("SomeText1"),
@@ -54,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 CompletionItem.Create("SomeText3"),
             };
             Array.Sort(completionList);
-            Assert.Collection(completionList,
+            Assert.Collection(
+                completionList,
                 c => Assert.Equal("SomeText0", c.DisplayText),
                 c => Assert.Equal("SomeText1", c.DisplayText),
                 c => Assert.Equal("SomeText2", c.DisplayText),
@@ -67,14 +74,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     Assert.Equal("float", c.DisplayText);
                     Assert.Equal("\uFFFD001_float", c.SortText);
                     Assert.Equal("float", c.FilterText);
-                });
+                }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIsNotOfferedAfterNumberLiteral()
         {
             // User may want to type a floating point literal.
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static explicit operator float(C c) => 0;
@@ -87,13 +96,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         1.$$
                     }
                 }
-                """, SourceCodeKind.Regular);
+                """,
+                SourceCodeKind.Regular
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIsSuggestedAfterDot()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class C
                 {
                     public static explicit operator float(C c) => 0;
@@ -107,13 +119,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c.$$
                     }
                 }
-                """, "float", displayTextPrefix: "(", displayTextSuffix: ")", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+                """,
+                "float",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIsSuggestedIfMemberNameIsPartiallyWritten()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class C
                 {
                     public void fly() { }
@@ -128,7 +147,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c.fl$$
                     }
                 }
-                """, "float", displayTextPrefix: "(", displayTextSuffix: ")", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+                """,
+                "float",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -138,20 +163,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("c.fl  $$", false)]
         [InlineData("c.($$", false)]
         [InlineData("c$$", false)]
-        [InlineData("""
-            "c.$$
-            """, false)]
+        [InlineData(
+            """
+                "c.$$
+                """,
+            false
+        )]
         [InlineData("c?.$$", true)]
         [InlineData("((C)c).$$", true)]
         [InlineData("(true ? c : c).$$", true)]
         [InlineData("c.$$ var x=0;", true)]
-        public async Task ExplicitUserDefinedConversionDifferentExpressions(string expression, bool shouldSuggestConversion)
+        public async Task ExplicitUserDefinedConversionDifferentExpressions(
+            string expression,
+            bool shouldSuggestConversion
+        )
         {
             Func<string, string, Task> verifyFunc = shouldSuggestConversion
-                ? (markup, expectedItem) => VerifyItemExistsAsync(markup, expectedItem, displayTextPrefix: "(", displayTextSuffix: ")")
-                : (markup, expectedItem) => VerifyItemIsAbsentAsync(markup, expectedItem, displayTextPrefix: "(", displayTextSuffix: ")");
+                ? (markup, expectedItem) =>
+                    VerifyItemExistsAsync(
+                        markup,
+                        expectedItem,
+                        displayTextPrefix: "(",
+                        displayTextSuffix: ")"
+                    )
+                : (markup, expectedItem) =>
+                    VerifyItemIsAbsentAsync(
+                        markup,
+                        expectedItem,
+                        displayTextPrefix: "(",
+                        displayTextSuffix: ")"
+                    );
 
-            await verifyFunc(@$"
+            await verifyFunc(
+                @$"
 public class C
 {{
     public static explicit operator float(C c) => 0;
@@ -165,13 +209,16 @@ public class Program
         {expression}
     }}
 }}
-", "float");
+",
+                "float"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIsNotSuggestedOnStaticAccess()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static explicit operator float(C c) => 0;
@@ -184,13 +231,15 @@ public class Program
                         C.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIsNotSuggestedInNameofContext()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static explicit operator float(C c) => 0;
@@ -204,7 +253,8 @@ public class Program
                         var name = nameof(c.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -212,9 +262,14 @@ public class Program
         [InlineData("using N1.Nested1;", "C", "Nested2.C")]
         [InlineData("using N1.Nested2;", "C", "Nested1.C")]
         [InlineData("using N1.Nested1;using N1.Nested2;", "Nested1.C", "Nested2.C")]
-        public async Task ExplicitUserDefinedConversionTypeDisplayStringIsMinimal(string usingDirective, string displayText1, string displayText2)
+        public async Task ExplicitUserDefinedConversionTypeDisplayStringIsMinimal(
+            string usingDirective,
+            string displayText1,
+            string displayText2
+        )
         {
-            var items = await GetCompletionItemsAsync(@$"
+            var items = await GetCompletionItemsAsync(
+                @$"
 namespace N1.Nested1
 {{
     public class C
@@ -248,16 +303,21 @@ namespace N1
         }}
     }}
 }}
-", SourceCodeKind.Regular);
-            Assert.Collection(items,
+",
+                SourceCodeKind.Regular
+            );
+            Assert.Collection(
+                items,
                 i => Assert.Equal(displayText1, i.DisplayText),
-                i => Assert.Equal(displayText2, i.DisplayText));
+                i => Assert.Equal(displayText2, i.DisplayText)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIsSuggestedForAllExplicitConversionsToOtherTypesAndNotForImplicitConversions()
         {
-            var items = await GetCompletionItemsAsync("""
+            var items = await GetCompletionItemsAsync(
+                """
                 public class C
                 {
                     public static explicit operator float(C c) => 0;
@@ -276,16 +336,21 @@ namespace N1
                         c.$$
                     }
                 }
-                """, SourceCodeKind.Regular);
-            Assert.Collection(items,
+                """,
+                SourceCodeKind.Regular
+            );
+            Assert.Collection(
+                items,
                 i => Assert.Equal("float", i.DisplayText),
-                i => Assert.Equal("int", i.DisplayText));
+                i => Assert.Equal("int", i.DisplayText)
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIgnoresConversionLikeMethods()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static bool op_Explicit(C c) => false;
@@ -299,13 +364,15 @@ namespace N1
                         c.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionIgnoreMalformedOperators()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static explicit operator int() => 0;
@@ -319,13 +386,15 @@ namespace N1
                         c.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionFromOtherTypeToTargetIsNotSuggested()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static explicit operator C(D d) => null;
@@ -342,14 +411,16 @@ namespace N1
                         d.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitConversionOfNullableStructToNullableStructIsOffered()
         {
             // Lifted conversion https://docs.microsoft.com/hu-hu/dotnet/csharp/language-reference/language-specification/conversions#lifted-conversion-operators
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public struct S {
                     public static explicit operator int(S _) => 0;
                 }
@@ -361,7 +432,13 @@ namespace N1
                         s.$$
                     }
                 }
-                """, "int?", displayTextPrefix: "(", displayTextSuffix: ")", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+                """,
+                "int?",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -385,14 +462,18 @@ namespace N1
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(Markup, "int", displayTextPrefix: "(", displayTextSuffix: ")",
+            await VerifyItemExistsAsync(
+                Markup,
+                "int",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
-                expectedDescriptionOrNull:
-                """
+                expectedDescriptionOrNull: """
                 S.explicit operator int(S value)
                 Explicit conversion of S to int.
-                """);
+                """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -416,14 +497,18 @@ namespace N1
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(Markup, "int?", displayTextPrefix: "(", displayTextSuffix: ")",
+            await VerifyItemExistsAsync(
+                Markup,
+                "int?",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
-                expectedDescriptionOrNull:
-                """
+                expectedDescriptionOrNull: """
                 S.explicit operator int?(S? value)
                 Explicit conversion of S to int.
-                """);
+                """
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -436,14 +521,56 @@ namespace N1
         [InlineData("long", "byte", "char", "int", "sbyte", "short", "uint", "ulong", "ushort")]
         [InlineData("ulong", "byte", "char", "int", "long", "sbyte", "short", "uint", "ushort")]
         [InlineData("char", "byte", "sbyte", "short")]
-        [InlineData("float", "byte", "char", "decimal", "int", "long", "sbyte", "short", "uint", "ulong", "ushort")]
-        [InlineData("double", "byte", "char", "decimal", "float", "int", "long", "sbyte", "short", "uint", "ulong", "ushort")]
-        [InlineData("decimal", "byte", "char", "double", "float", "int", "long", "sbyte", "short", "uint", "ulong", "ushort")]
-        public async Task ExplicitBuiltInNumericConversionsAreOfferedAcordingToSpec(string fromType, params string[] toTypes)
+        [InlineData(
+            "float",
+            "byte",
+            "char",
+            "decimal",
+            "int",
+            "long",
+            "sbyte",
+            "short",
+            "uint",
+            "ulong",
+            "ushort"
+        )]
+        [InlineData(
+            "double",
+            "byte",
+            "char",
+            "decimal",
+            "float",
+            "int",
+            "long",
+            "sbyte",
+            "short",
+            "uint",
+            "ulong",
+            "ushort"
+        )]
+        [InlineData(
+            "decimal",
+            "byte",
+            "char",
+            "double",
+            "float",
+            "int",
+            "long",
+            "sbyte",
+            "short",
+            "uint",
+            "ulong",
+            "ushort"
+        )]
+        public async Task ExplicitBuiltInNumericConversionsAreOfferedAcordingToSpec(
+            string fromType,
+            params string[] toTypes
+        )
         {
             // built-in numeric conversions:
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/numeric-conversions
-            var items = await GetCompletionItemsAsync(@$"
+            var items = await GetCompletionItemsAsync(
+                @$"
 public class Program
 {{
     public static void Main()
@@ -452,7 +579,9 @@ public class Program
         i.$$
     }}
 }}
-", SourceCodeKind.Regular);
+",
+                SourceCodeKind.Regular
+            );
             AssertEx.SetEqual(items.Select(i => i.DisplayText), toTypes);
         }
 
@@ -469,12 +598,16 @@ public class Program
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(Markup, "byte", displayTextPrefix: "(", displayTextSuffix: ")",
+            await VerifyItemExistsAsync(
+                Markup,
+                "byte",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
-                expectedDescriptionOrNull:
-$@"int.explicit operator byte(int value)
-{(FormatExplicitConversionDescription(fromType: "int", toType: "byte"))}");
+                expectedDescriptionOrNull: $@"int.explicit operator byte(int value)
+{(FormatExplicitConversionDescription(fromType: "int", toType: "byte"))}"
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -490,12 +623,16 @@ $@"int.explicit operator byte(int value)
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(Markup, "byte?", displayTextPrefix: "(", displayTextSuffix: ")",
+            await VerifyItemExistsAsync(
+                Markup,
+                "byte?",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
-                expectedDescriptionOrNull:
-$@"int.explicit operator byte?(int? value)
-{(FormatExplicitConversionDescription(fromType: "int", toType: "byte"))}");
+                expectedDescriptionOrNull: $@"int.explicit operator byte?(int? value)
+{(FormatExplicitConversionDescription(fromType: "int", toType: "byte"))}"
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -503,7 +640,8 @@ $@"int.explicit operator byte?(int? value)
         {
             // built-in enum conversions:
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#explicit-enumeration-conversions
-            var items = await GetCompletionItemsAsync("""
+            var items = await GetCompletionItemsAsync(
+                """
                 public enum E { One }
                 public class Program
                 {
@@ -513,8 +651,24 @@ $@"int.explicit operator byte?(int? value)
                         e.$$
                     }
                 }
-                """, SourceCodeKind.Regular);
-            var expected = new[] { "byte", "char", "decimal", "double", "float", "int", "long", "sbyte", "short", "uint", "ulong", "ushort" };
+                """,
+                SourceCodeKind.Regular
+            );
+            var expected = new[]
+            {
+                "byte",
+                "char",
+                "decimal",
+                "double",
+                "float",
+                "int",
+                "long",
+                "sbyte",
+                "short",
+                "uint",
+                "ulong",
+                "ushort",
+            };
             AssertEx.SetEqual(items.Select(i => i.DisplayText), expected);
         }
 
@@ -532,12 +686,16 @@ $@"int.explicit operator byte?(int? value)
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(Markup, "int", displayTextPrefix: "(", displayTextSuffix: ")",
+            await VerifyItemExistsAsync(
+                Markup,
+                "int",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
-                expectedDescriptionOrNull:
-$@"E.explicit operator int(E value)
-{FormatExplicitConversionDescription("E", "int")}");
+                expectedDescriptionOrNull: $@"E.explicit operator int(E value)
+{FormatExplicitConversionDescription("E", "int")}"
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -554,12 +712,16 @@ $@"E.explicit operator int(E value)
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(Markup, "int?", displayTextPrefix: "(", displayTextSuffix: ")",
+            await VerifyItemExistsAsync(
+                Markup,
+                "int?",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
-                expectedDescriptionOrNull:
-$@"E.explicit operator int?(E? value)
-{(FormatExplicitConversionDescription(fromType: "E", toType: "int"))}");
+                expectedDescriptionOrNull: $@"E.explicit operator int?(E? value)
+{(FormatExplicitConversionDescription(fromType: "E", toType: "int"))}"
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -582,26 +744,40 @@ $@"E.explicit operator int?(E? value)
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(Markup, "int", displayTextPrefix: "(", displayTextSuffix: ")",
+            await VerifyItemExistsAsync(
+                Markup,
+                "int",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
                 glyph: (int)Glyph.Operator,
                 matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter },
-                expectedDescriptionOrNull:
-@$"B.E.explicit operator int(B.E value)
-{FormatExplicitConversionDescription("B.E", "int")}");
+                expectedDescriptionOrNull: @$"B.E.explicit operator int(B.E value)
+{FormatExplicitConversionDescription("B.E", "int")}"
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         [InlineData("e.$$", true)]
         [InlineData("e. $$", true)]
         [InlineData("e.in$$", true)]
-        [InlineData("E.$$", false)] // Don't infer with enum member suggestion 
+        [InlineData("E.$$", false)] // Don't infer with enum member suggestion
         [InlineData("E.One.$$", true)]
-        public async Task ExplicitBuiltInEnumConversionToIntAreOffered(string expression, bool conversionIsOffered)
+        public async Task ExplicitBuiltInEnumConversionToIntAreOffered(
+            string expression,
+            bool conversionIsOffered
+        )
         {
             Func<string, Task> verifyFunc = conversionIsOffered
-                ? markup => VerifyItemExistsAsync(markup, "int", displayTextPrefix: "(", displayTextSuffix: ")")
+                ? markup =>
+                    VerifyItemExistsAsync(
+                        markup,
+                        "int",
+                        displayTextPrefix: "(",
+                        displayTextSuffix: ")"
+                    )
                 : markup => VerifyNoItemsExistAsync(markup);
-            await verifyFunc(@$"
+            await verifyFunc(
+                @$"
 public enum E {{ One }}
 public class Program
 {{
@@ -611,14 +787,16 @@ public class Program
         {expression}
     }}
 }}
-");
+"
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionInheritedConversions()
         {
             // Base class lookup rule: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#processing-of-user-defined-explicit-conversions
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class Base {
                     public static explicit operator int(Base b) => 0;
                 }
@@ -633,7 +811,13 @@ public class Program
                         var i = d.$$
                     }
                 }
-                """, "int", displayTextPrefix: "(", displayTextSuffix: ")", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+                """,
+                "int",
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -641,7 +825,8 @@ public class Program
         [InlineData("byte", "C")]
         public async Task ExplicitBuiltinConversionWithAlias(string fromType, string expected)
         {
-            await VerifyItemExistsAsync(@$"
+            await VerifyItemExistsAsync(
+                @$"
 using C = System.Char;
 public class Program
 {{
@@ -651,7 +836,13 @@ public class Program
         var i = test.$$
     }}
 }}
-", expected, displayTextPrefix: "(", displayTextSuffix: ")", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+",
+                expected,
+                displayTextPrefix: "(",
+                displayTextSuffix: ")",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -690,7 +881,8 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -731,7 +923,8 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -772,7 +965,8 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -813,7 +1007,8 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = true;
 
@@ -824,13 +1019,15 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task ExplicitUserDefinedConversionOfDerefenrencedPointerIsNotOffered()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public struct S {
                     public static explicit operator int(S s) => 0;
                 }
@@ -845,7 +1042,8 @@ public class Program
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

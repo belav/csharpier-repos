@@ -1,29 +1,33 @@
 //------------------------------------------------------------------------------
 // <copyright file="FileChangesMonitor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
-
+namespace System.Web.Util
+{
     using System;
 
-    internal enum TimeUnit {
-        Unknown         = 0,
+    internal enum TimeUnit
+    {
+        Unknown = 0,
         Days,
         Hours,
         Minutes,
         Seconds,
-        Milliseconds
+        Milliseconds,
     };
 
-    internal sealed class DateTimeUtil {
-        private DateTimeUtil() {}
-        const long FileTimeOffset = 504911232000000000;
-        static readonly DateTime    MinValuePlusOneDay = DateTime.MinValue.AddDays(1);
-        static readonly DateTime    MaxValueMinusOneDay = DateTime.MaxValue.AddDays(-1);
+    internal sealed class DateTimeUtil
+    {
+        private DateTimeUtil() { }
 
-        static internal DateTime FromFileTimeToUtc(long filetime) {
+        const long FileTimeOffset = 504911232000000000;
+        static readonly DateTime MinValuePlusOneDay = DateTime.MinValue.AddDays(1);
+        static readonly DateTime MaxValueMinusOneDay = DateTime.MaxValue.AddDays(-1);
+
+        internal static DateTime FromFileTimeToUtc(long filetime)
+        {
             long universalTicks = filetime + FileTimeOffset;
             // Dev10 733288: Caching: behavior change for CacheDependency when using UseMemoryCache=1
             // ObjectCacheHost converts DateTime to a DateTimeOffset, and the conversion requires
@@ -31,32 +35,40 @@ namespace System.Web.Util {
             return new DateTime(universalTicks, DateTimeKind.Utc);
         }
 
-        static internal DateTime ConvertToUniversalTime(DateTime localTime) {
-            if (localTime < MinValuePlusOneDay) {
+        internal static DateTime ConvertToUniversalTime(DateTime localTime)
+        {
+            if (localTime < MinValuePlusOneDay)
+            {
                 return DateTime.MinValue;
             }
 
-            if (localTime > MaxValueMinusOneDay) {
+            if (localTime > MaxValueMinusOneDay)
+            {
                 return DateTime.MaxValue;
             }
 
             return localTime.ToUniversalTime();
         }
 
-        static internal DateTime ConvertToLocalTime(DateTime utcTime) {
-            if (utcTime < MinValuePlusOneDay) {
+        internal static DateTime ConvertToLocalTime(DateTime utcTime)
+        {
+            if (utcTime < MinValuePlusOneDay)
+            {
                 return DateTime.MinValue;
             }
 
-            if (utcTime > MaxValueMinusOneDay) {
+            if (utcTime > MaxValueMinusOneDay)
+            {
                 return DateTime.MaxValue;
             }
 
             return utcTime.ToLocalTime();
         }
 
-        static internal TimeSpan GetTimeoutFromTimeUnit(int timeoutValue, TimeUnit timeoutUnit) {
-            switch (timeoutUnit) {
+        internal static TimeSpan GetTimeoutFromTimeUnit(int timeoutValue, TimeUnit timeoutUnit)
+        {
+            switch (timeoutUnit)
+            {
                 case TimeUnit.Days:
                     return new TimeSpan(timeoutValue, 0, 0, 0);
                 case TimeUnit.Hours:
@@ -76,5 +88,3 @@ namespace System.Web.Util {
         }
     }
 }
-
-

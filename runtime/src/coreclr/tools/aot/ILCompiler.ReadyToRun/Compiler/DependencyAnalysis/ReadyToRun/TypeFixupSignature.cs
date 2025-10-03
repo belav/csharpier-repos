@@ -3,13 +3,12 @@
 
 using System;
 using System.Diagnostics;
-
+using Internal.CorConstants;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
-using Internal.ReadyToRunConstants;
-using Internal.CorConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -39,17 +38,27 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 ReadyToRunFixupKind fixupKind = _fixupKind;
                 dataBuilder.AddSymbol(this);
 
-                if ((fixupKind == ReadyToRunFixupKind.Verify_TypeLayout) && ((MetadataType)_typeDesc).IsVectorTOrHasVectorTFields)
+                if (
+                    (fixupKind == ReadyToRunFixupKind.Verify_TypeLayout)
+                    && ((MetadataType)_typeDesc).IsVectorTOrHasVectorTFields
+                )
                 {
                     fixupKind = ReadyToRunFixupKind.Check_TypeLayout;
                 }
 
                 IEcmaModule targetModule = factory.SignatureContext.GetTargetModule(_typeDesc);
-                SignatureContext innerContext = dataBuilder.EmitFixup(factory, fixupKind, targetModule, factory.SignatureContext);
+                SignatureContext innerContext = dataBuilder.EmitFixup(
+                    factory,
+                    fixupKind,
+                    targetModule,
+                    factory.SignatureContext
+                );
                 dataBuilder.EmitTypeSignature(_typeDesc, innerContext);
 
-                if ((fixupKind == ReadyToRunFixupKind.Check_TypeLayout) ||
-                    (fixupKind == ReadyToRunFixupKind.Verify_TypeLayout))
+                if (
+                    (fixupKind == ReadyToRunFixupKind.Check_TypeLayout)
+                    || (fixupKind == ReadyToRunFixupKind.Verify_TypeLayout)
+                )
                 {
                     EncodeTypeLayout(dataBuilder, _typeDesc);
                 }
@@ -65,8 +74,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             int pointerSize = type.Context.Target.PointerSize;
             int size = defType.InstanceFieldSize.AsInt;
-            int alignment = Internal.JitInterface.CorInfoImpl.GetClassAlignmentRequirementStatic(defType);
-            ReadyToRunTypeLayoutFlags flags = ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment | ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_GCLayout;
+            int alignment = Internal.JitInterface.CorInfoImpl.GetClassAlignmentRequirementStatic(
+                defType
+            );
+            ReadyToRunTypeLayoutFlags flags =
+                ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment
+                | ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_GCLayout;
             if (alignment == pointerSize)
             {
                 flags |= ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment_Native;
@@ -87,14 +100,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (defType.IsHomogeneousAggregate)
             {
-                ReadyToRunHFAElemType hfaElementType = (defType.ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask) switch
+                ReadyToRunHFAElemType hfaElementType = (
+                    defType.ValueTypeShapeCharacteristics
+                    & ValueTypeShapeCharacteristics.AggregateMask
+                ) switch
                 {
                     ValueTypeShapeCharacteristics.Float32Aggregate => ReadyToRunHFAElemType.Float32,
                     ValueTypeShapeCharacteristics.Float64Aggregate => ReadyToRunHFAElemType.Float64,
-                    ValueTypeShapeCharacteristics.Vector64Aggregate => ReadyToRunHFAElemType.Vector64,
+                    ValueTypeShapeCharacteristics.Vector64Aggregate =>
+                        ReadyToRunHFAElemType.Vector64,
                     // See MethodTable::GetHFAType
-                    ValueTypeShapeCharacteristics.Vector128Aggregate => ReadyToRunHFAElemType.Vector128,
-                    _ => throw new NotSupportedException()
+                    ValueTypeShapeCharacteristics.Vector128Aggregate =>
+                        ReadyToRunHFAElemType.Vector128,
+                    _ => throw new NotSupportedException(),
                 };
                 dataBuilder.EmitUInt((uint)hfaElementType);
             }
@@ -146,12 +164,17 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             DependencyList dependencies = new DependencyList();
 
-            if (_typeDesc.HasInstantiation &&
-                !_typeDesc.IsGenericDefinition &&
-                (factory.CompilationCurrentPhase == 0) &&
-                factory.CompilationModuleGroup.VersionsWithType(_typeDesc))
+            if (
+                _typeDesc.HasInstantiation
+                && !_typeDesc.IsGenericDefinition
+                && (factory.CompilationCurrentPhase == 0)
+                && factory.CompilationModuleGroup.VersionsWithType(_typeDesc)
+            )
             {
-                dependencies.Add(factory.AllMethodsOnType(_typeDesc), "Methods on generic type instantiation");
+                dependencies.Add(
+                    factory.AllMethodsOnType(_typeDesc),
+                    "Methods on generic type instantiation"
+                );
             }
 
             if (_fixupKind == ReadyToRunFixupKind.TypeHandle)
@@ -161,22 +184,36 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return dependencies;
         }
 
-        public static void AddDependenciesForAsyncStateMachineBox(ref DependencyList dependencies, NodeFactory factory, TypeDesc type)
+        public static void AddDependenciesForAsyncStateMachineBox(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type
+        )
         {
             ReadyToRunCompilerContext context = (ReadyToRunCompilerContext)type.Context;
             // If adding a typehandle to the AsyncStateMachineBox, pre-compile the most commonly used methods.
             // As long as we haven't already reached compilation phase 7, which is an arbitrary number of phases of compilation chosen so that
             // simple examples of async will get compiled
-            if (factory.OptimizationFlags.OptimizeAsyncMethods && type.GetTypeDefinition() == context.AsyncStateMachineBoxType && !type.IsGenericDefinition && factory.CompilationCurrentPhase <= 7)
+            if (
+                factory.OptimizationFlags.OptimizeAsyncMethods
+                && type.GetTypeDefinition() == context.AsyncStateMachineBoxType
+                && !type.IsGenericDefinition
+                && factory.CompilationCurrentPhase <= 7
+            )
             {
                 if (dependencies == null)
                     dependencies = new DependencyList();
 
                 // This is the async state machine box, compile the cctor, and the MoveNext method.
-                foreach (MethodDesc method in type.ConvertToCanonForm(CanonicalFormKind.Specific).GetAllMethods())
+                foreach (
+                    MethodDesc method in type.ConvertToCanonForm(CanonicalFormKind.Specific)
+                        .GetAllMethods()
+                )
                 {
-                    if (!method.IsGenericMethodDefinition &&
-                        factory.CompilationModuleGroup.ContainsMethodBody(method, false))
+                    if (
+                        !method.IsGenericMethodDefinition
+                        && factory.CompilationModuleGroup.ContainsMethodBody(method, false)
+                    )
                     {
                         switch (method.Name)
                         {
@@ -185,11 +222,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                                 try
                                 {
                                     factory.DetectGenericCycles(type, method);
-                                    dependencies.Add(factory.CompiledMethodNode(method), $"AsyncStateMachineBox Method on type {type.ToString()}");
+                                    dependencies.Add(
+                                        factory.CompiledMethodNode(method),
+                                        $"AsyncStateMachineBox Method on type {type.ToString()}"
+                                    );
                                 }
-                                catch (TypeSystemException)
-                                {
-                                }
+                                catch (TypeSystemException) { }
                                 break;
                         }
                     }

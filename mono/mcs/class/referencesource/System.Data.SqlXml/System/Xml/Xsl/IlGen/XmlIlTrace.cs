@@ -1,24 +1,26 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlILTrace.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">akimball</owner>
 //------------------------------------------------------------------------------
 using System;
+using System.Globalization;
 using System.IO;
+using System.Runtime.Versioning;
 using System.Security;
 using System.Xml;
-using System.Globalization;
 using System.Xml.Xsl.Qil;
-using System.Runtime.Versioning;
 
 // This class is only for debug purposes so there is no need to have it in Retail builds
 #if DEBUG
-namespace System.Xml.Xsl.IlGen {
+namespace System.Xml.Xsl.IlGen
+{
     /// <summary>
     /// Helper class that facilitates tracing of ILGen.
     /// </summary>
-    internal static class XmlILTrace {
+    internal static class XmlILTrace
+    {
         private const int MAX_REWRITES = 200;
 
         /// <summary>
@@ -31,19 +33,23 @@ namespace System.Xml.Xsl.IlGen {
         /// <summary>
         /// True if tracing has been enabled (environment variable set).
         /// </summary>
-        public static bool IsEnabled {
-
-            // SxS: This property poses potential SxS issue. However the class is used only in debug builds (it won't 
+        public static bool IsEnabled
+        {
+            // SxS: This property poses potential SxS issue. However the class is used only in debug builds (it won't
             // get compiled into ret build) so it's OK to suppress the SxS warning.
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
             [ResourceExposure(ResourceScope.None)]
-            get {
+            get
+            {
                 // If environment variable has not yet been checked, do so now
-                if (!alreadyCheckedEnabled) {
-                    try {
+                if (!alreadyCheckedEnabled)
+                {
+                    try
+                    {
                         dirName = Environment.GetEnvironmentVariable("XmlILTrace");
                     }
-                    catch (SecurityException) {
+                    catch (SecurityException)
+                    {
                         // If user does not have access to environment variables, tracing will remain disabled
                     }
 
@@ -60,7 +66,8 @@ namespace System.Xml.Xsl.IlGen {
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        public static void PrepareTraceWriter(string fileName) {
+        public static void PrepareTraceWriter(string fileName)
+        {
             if (!IsEnabled)
                 return;
 
@@ -73,7 +80,8 @@ namespace System.Xml.Xsl.IlGen {
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        public static TextWriter GetTraceWriter(string fileName) {
+        public static TextWriter GetTraceWriter(string fileName)
+        {
             if (!IsEnabled)
                 return null;
 
@@ -85,15 +93,18 @@ namespace System.Xml.Xsl.IlGen {
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        public static void WriteQil(QilExpression qil, string fileName) {
+        public static void WriteQil(QilExpression qil, string fileName)
+        {
             if (!IsEnabled)
                 return;
 
             XmlWriter w = XmlWriter.Create(dirName + "\\" + fileName);
-            try {
+            try
+            {
                 WriteQil(qil, w);
             }
-            finally {
+            finally
+            {
                 w.Close();
             }
         }
@@ -103,7 +114,8 @@ namespace System.Xml.Xsl.IlGen {
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        public static void TraceOptimizations(QilExpression qil, string fileName) {
+        public static void TraceOptimizations(QilExpression qil, string fileName)
+        {
             if (!IsEnabled)
                 return;
 
@@ -112,15 +124,25 @@ namespace System.Xml.Xsl.IlGen {
             w.WriteStartDocument();
             w.WriteProcessingInstruction("xml-stylesheet", "href='qilo.xslt' type='text/xsl'");
             w.WriteStartElement("QilOptimizer");
-            w.WriteAttributeString("timestamp", DateTime.Now.ToString(CultureInfo.InvariantCulture));
+            w.WriteAttributeString(
+                "timestamp",
+                DateTime.Now.ToString(CultureInfo.InvariantCulture)
+            );
             WriteQilRewrite(qil, w, null);
 
-            try {
+            try
+            {
                 // Then, rewrite the graph until "done" or some max value is reached.
-                for (int i = 1; i < MAX_REWRITES; i++) {
-                    QilExpression qilTemp = (QilExpression) (new QilCloneVisitor(qil.Factory).Clone(qil));
+                for (int i = 1; i < MAX_REWRITES; i++)
+                {
+                    QilExpression qilTemp = (QilExpression)(
+                        new QilCloneVisitor(qil.Factory).Clone(qil)
+                    );
 
-                    XmlILOptimizerVisitor visitor = new XmlILOptimizerVisitor(qilTemp, !qilTemp.IsDebug);
+                    XmlILOptimizerVisitor visitor = new XmlILOptimizerVisitor(
+                        qilTemp,
+                        !qilTemp.IsDebug
+                    );
                     visitor.Threshold = i;
                     qilTemp = visitor.Optimize();
 
@@ -134,14 +156,17 @@ namespace System.Xml.Xsl.IlGen {
                         break;
                 }
             }
-            catch (Exception e) {
-                if (!XmlException.IsCatchableException(e)) {
+            catch (Exception e)
+            {
+                if (!XmlException.IsCatchableException(e))
+                {
                     throw;
                 }
                 w.WriteElementString("Exception", null, e.ToString());
                 throw;
             }
-            finally {
+            finally
+            {
                 w.WriteEndElement();
                 w.WriteEndDocument();
                 w.Flush();
@@ -152,7 +177,8 @@ namespace System.Xml.Xsl.IlGen {
         /// <summary>
         /// Serialize Qil tree to writer "w".
         /// </summary>
-        private static void WriteQil(QilExpression qil, XmlWriter w) {
+        private static void WriteQil(QilExpression qil, XmlWriter w)
+        {
             QilXmlWriter qw = new QilXmlWriter(w);
             qw.ToXml(qil);
         }
@@ -160,7 +186,8 @@ namespace System.Xml.Xsl.IlGen {
         /// <summary>
         /// Serialize rewritten Qil tree to writer "w".
         /// </summary>
-        private static void WriteQilRewrite(QilExpression qil, XmlWriter w, string rewriteName) {
+        private static void WriteQilRewrite(QilExpression qil, XmlWriter w, string rewriteName)
+        {
             w.WriteStartElement("Diff");
             if (rewriteName != null)
                 w.WriteAttributeString("rewrite", rewriteName);
@@ -171,21 +198,27 @@ namespace System.Xml.Xsl.IlGen {
         /// <summary>
         /// Get friendly string description of an ILGen optimization.
         /// </summary>
-        private static string OptimizationToString(int opt) {
+        private static string OptimizationToString(int opt)
+        {
             string s = Enum.GetName(typeof(XmlILOptimization), opt);
-            if (s.StartsWith("Introduce", StringComparison.Ordinal)) {
+            if (s.StartsWith("Introduce", StringComparison.Ordinal))
+            {
                 return s.Substring(9) + " introduction";
             }
-            else if (s.StartsWith("Eliminate", StringComparison.Ordinal)) {
+            else if (s.StartsWith("Eliminate", StringComparison.Ordinal))
+            {
                 return s.Substring(9) + " elimination";
             }
-            else if (s.StartsWith("Commute", StringComparison.Ordinal)) {
+            else if (s.StartsWith("Commute", StringComparison.Ordinal))
+            {
                 return s.Substring(7) + " commutation";
             }
-            else if (s.StartsWith("Fold", StringComparison.Ordinal)) {
+            else if (s.StartsWith("Fold", StringComparison.Ordinal))
+            {
                 return s.Substring(4) + " folding";
             }
-            else if (s.StartsWith("Misc", StringComparison.Ordinal)) {
+            else if (s.StartsWith("Misc", StringComparison.Ordinal))
+            {
                 return s.Substring(4);
             }
             return s;

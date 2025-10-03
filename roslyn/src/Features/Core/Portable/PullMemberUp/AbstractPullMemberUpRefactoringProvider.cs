@@ -16,17 +16,20 @@ using static Microsoft.CodeAnalysis.CodeActions.CodeAction;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
 {
-    internal abstract partial class AbstractPullMemberUpRefactoringProvider : CodeRefactoringProvider
+    internal abstract partial class AbstractPullMemberUpRefactoringProvider
+        : CodeRefactoringProvider
     {
         private IPullMemberUpOptionsService? _service;
 
-        protected abstract Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(CodeRefactoringContext context);
+        protected abstract Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(
+            CodeRefactoringContext context
+        );
 
         /// <summary>
         /// Test purpose only
         /// </summary>
-        protected AbstractPullMemberUpRefactoringProvider(IPullMemberUpOptionsService? service)
-            => _service = service;
+        protected AbstractPullMemberUpRefactoringProvider(IPullMemberUpOptionsService? service) =>
+            _service = service;
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -34,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // constructor, operator and finalizer are excluded.
             var (document, _, cancellationToken) = context;
 
-            _service ??= document.Project.Solution.Services.GetService<IPullMemberUpOptionsService>();
+            _service ??=
+                document.Project.Solution.Services.GetService<IPullMemberUpOptionsService>();
             if (_service == null)
             {
                 return;
@@ -46,9 +50,13 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var memberNodeSymbolPairs = selectedMemberNodes
-                .SelectAsArray(m => (node: m, symbol: semanticModel.GetRequiredDeclaredSymbol(m, cancellationToken)))
+                .SelectAsArray(m =>
+                    (node: m, symbol: semanticModel.GetRequiredDeclaredSymbol(m, cancellationToken))
+                )
                 .WhereAsArray(pair => MemberAndDestinationValidator.IsMemberValid(pair.symbol));
 
             if (memberNodeSymbolPairs.IsEmpty)
@@ -68,30 +76,48 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             // we want to use a span which covers all the selected viable member nodes, so that more specific nodes have priority
             var memberSpan = TextSpan.FromBounds(
                 memberNodeSymbolPairs.First().node.FullSpan.Start,
-                memberNodeSymbolPairs.Last().node.FullSpan.End);
+                memberNodeSymbolPairs.Last().node.FullSpan.End
+            );
 
             var allDestinations = FindAllValidDestinations(
                 selectedMembers,
                 containingType,
                 document.Project.Solution,
-                cancellationToken);
+                cancellationToken
+            );
             if (allDestinations.Length == 0)
             {
                 return;
             }
 
-            var allActions = allDestinations.Select(destination => MembersPuller.TryComputeCodeAction(document, selectedMembers, destination, context.Options))
+            var allActions = allDestinations
+                .Select(destination =>
+                    MembersPuller.TryComputeCodeAction(
+                        document,
+                        selectedMembers,
+                        destination,
+                        context.Options
+                    )
+                )
                 .WhereNotNull()
-                .Concat(new PullMemberUpWithDialogCodeAction(document, selectedMembers, _service, context.Options))
+                .Concat(
+                    new PullMemberUpWithDialogCodeAction(
+                        document,
+                        selectedMembers,
+                        _service,
+                        context.Options
+                    )
+                )
                 .ToImmutableArray();
 
             var title = selectedMembers.IsSingle()
-                ? string.Format(FeaturesResources.Pull_0_up, selectedMembers.Single().ToNameDisplayString())
+                ? string.Format(
+                    FeaturesResources.Pull_0_up,
+                    selectedMembers.Single().ToNameDisplayString()
+                )
                 : FeaturesResources.Pull_selected_members_up;
 
-            var nestedCodeAction = CodeAction.Create(
-                title,
-                allActions, isInlinable: true);
+            var nestedCodeAction = CodeAction.Create(title, allActions, isInlinable: true);
 
             context.RegisterRefactoring(nestedCodeAction, memberSpan);
         }
@@ -100,13 +126,22 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
             ImmutableArray<ISymbol> selectedMembers,
             INamedTypeSymbol containingType,
             Solution solution,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var allDestinations = selectedMembers.All(m => m.IsKind(SymbolKind.Field))
                 ? containingType.GetBaseTypes().ToImmutableArray()
-                : containingType.AllInterfaces.Concat(containingType.GetBaseTypes()).ToImmutableArray();
+                : containingType
+                    .AllInterfaces.Concat(containingType.GetBaseTypes())
+                    .ToImmutableArray();
 
-            return allDestinations.WhereAsArray(destination => MemberAndDestinationValidator.IsDestinationValid(solution, destination, cancellationToken));
+            return allDestinations.WhereAsArray(destination =>
+                MemberAndDestinationValidator.IsDestinationValid(
+                    solution,
+                    destination,
+                    cancellationToken
+                )
+            );
         }
     }
 }

@@ -24,9 +24,9 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
 using System.Collections;
 using System.Data.Common;
+using Xunit;
 
 namespace System.Data.Tests.Common
 {
@@ -184,14 +184,18 @@ namespace System.Data.Tests.Common
             bool eq;
             DataColumnMapping col1;
             col1 = _columnMapCollection.GetByDataSetColumn("dataSetName");
-            eq = (col1.DataSetColumn.Equals("dataSetName") && col1.SourceColumn.Equals("sourceName"));
+            eq = (
+                col1.DataSetColumn.Equals("dataSetName") && col1.SourceColumn.Equals("sourceName")
+            );
             Assert.True(eq);
             col1 = _columnMapCollection.GetByDataSetColumn("dataSetID");
             eq = (col1.DataSetColumn.Equals("dataSetID") && col1.SourceColumn.Equals("sourceID"));
             Assert.True(eq);
 
             col1 = _columnMapCollection.GetByDataSetColumn("datasetname");
-            eq = (col1.DataSetColumn.Equals("dataSetName") && col1.SourceColumn.Equals("sourceName"));
+            eq = (
+                col1.DataSetColumn.Equals("dataSetName") && col1.SourceColumn.Equals("sourceName")
+            );
             Assert.True(eq);
             col1 = _columnMapCollection.GetByDataSetColumn("datasetid");
             eq = (col1.DataSetColumn.Equals("dataSetID") && col1.SourceColumn.Equals("sourceID"));
@@ -201,9 +205,12 @@ namespace System.Data.Tests.Common
         [Fact]
         public void GetByDataSetColumn_String_InvalidArguments()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
 
-            Assert.Throws<IndexOutOfRangeException>(() => dataColumnMappingCollection.GetByDataSetColumn((string)null));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                dataColumnMappingCollection.GetByDataSetColumn((string)null)
+            );
         }
 
         [Fact]
@@ -212,19 +219,39 @@ namespace System.Data.Tests.Common
             _columnMapCollection.AddRange(_cols);
             bool eq;
             DataColumnMapping col1;
-            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(_columnMapCollection, "sourceName", MissingMappingAction.Passthrough);
-            eq = (col1.DataSetColumn.Equals("dataSetName") && col1.SourceColumn.Equals("sourceName"));
+            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                _columnMapCollection,
+                "sourceName",
+                MissingMappingAction.Passthrough
+            );
+            eq = (
+                col1.DataSetColumn.Equals("dataSetName") && col1.SourceColumn.Equals("sourceName")
+            );
             Assert.True(eq);
-            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(_columnMapCollection, "sourceID", MissingMappingAction.Passthrough);
+            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                _columnMapCollection,
+                "sourceID",
+                MissingMappingAction.Passthrough
+            );
             eq = (col1.DataSetColumn.Equals("dataSetID") && col1.SourceColumn.Equals("sourceID"));
             Assert.True(eq);
 
-            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(_columnMapCollection, "sourceData", MissingMappingAction.Passthrough);
-            eq = (col1.DataSetColumn.Equals("sourceData") && col1.SourceColumn.Equals("sourceData"));
+            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                _columnMapCollection,
+                "sourceData",
+                MissingMappingAction.Passthrough
+            );
+            eq = (
+                col1.DataSetColumn.Equals("sourceData") && col1.SourceColumn.Equals("sourceData")
+            );
             Assert.True(eq);
             eq = _columnMapCollection.Contains(col1);
             Assert.False(eq);
-            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(_columnMapCollection, "sourceData", MissingMappingAction.Ignore);
+            col1 = DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                _columnMapCollection,
+                "sourceData",
+                MissingMappingAction.Ignore
+            );
             Assert.Null(col1);
         }
 
@@ -233,7 +260,11 @@ namespace System.Data.Tests.Common
         {
             Assert.Throws<InvalidOperationException>(() =>
             {
-                DataColumnMappingCollection.GetColumnMappingBySchemaAction(_columnMapCollection, "sourceName", MissingMappingAction.Error);
+                DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                    _columnMapCollection,
+                    "sourceName",
+                    MissingMappingAction.Error
+                );
             });
         }
 
@@ -256,7 +287,8 @@ namespace System.Data.Tests.Common
         [Fact]
         public void IndexOf_Object_IsNull()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
 
             Assert.Equal(-1, dataColumnMappingCollection.IndexOf((object)null));
         }
@@ -264,7 +296,8 @@ namespace System.Data.Tests.Common
         [Fact]
         public void IndexOf_String_IsNull()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
 
             Assert.Equal(-1, dataColumnMappingCollection.IndexOf((string)null));
         }
@@ -301,19 +334,20 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Remove_DataColumnMapping_InvalidArguments()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
 
-            Assert.Throws<ArgumentNullException>(() => dataColumnMappingCollection.Remove((DataColumnMapping)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                dataColumnMappingCollection.Remove((DataColumnMapping)null)
+            );
         }
 
         [Fact]
         public void Remove_DataColumnMapping_Success()
         {
             DataColumnMapping dataColumnMapping = new DataColumnMapping("source", "dataSet");
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection
-            {
-                dataColumnMapping
-            };
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection { dataColumnMapping };
             Assert.Equal(1, dataColumnMappingCollection.Count);
 
             dataColumnMappingCollection.Remove(dataColumnMapping);
@@ -335,12 +369,15 @@ namespace System.Data.Tests.Common
         [Fact]
         public void RemoveException2()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                _columnMapCollection.AddRange(_cols);
-                DataColumnMapping mymap = new DataColumnMapping("sourceAge", "dataSetAge");
-                _columnMapCollection.Remove(mymap);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    _columnMapCollection.AddRange(_cols);
+                    DataColumnMapping mymap = new DataColumnMapping("sourceAge", "dataSetAge");
+                    _columnMapCollection.Remove(mymap);
+                }
+            );
         }
 
         [Fact]
@@ -382,69 +419,139 @@ namespace System.Data.Tests.Common
         [Fact]
         public void ToStringTest()
         {
-            Assert.Equal("System.Data.Common.DataColumnMappingCollection", _columnMapCollection.ToString());
+            Assert.Equal(
+                "System.Data.Common.DataColumnMappingCollection",
+                _columnMapCollection.ToString()
+            );
         }
 
         [Fact]
         public void Insert_Int_DataColumnMapping_InvalidArguments()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
 
-            Assert.Throws<ArgumentNullException>(() => dataColumnMappingCollection.Insert(123, (DataColumnMapping)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                dataColumnMappingCollection.Insert(123, (DataColumnMapping)null)
+            );
         }
 
         [Fact]
         public void GetDataColumn_DataColumnMappingCollection_String_Type_DataTable_MissingMappingAction_MissingSchemaAction_InvalidArguments()
         {
-            AssertExtensions.Throws<ArgumentException>("sourceColumn", () => DataColumnMappingCollection.GetDataColumn((DataColumnMappingCollection)null, null, typeof(string), new DataTable(), new MissingMappingAction(), new MissingSchemaAction()));
+            AssertExtensions.Throws<ArgumentException>(
+                "sourceColumn",
+                () =>
+                    DataColumnMappingCollection.GetDataColumn(
+                        (DataColumnMappingCollection)null,
+                        null,
+                        typeof(string),
+                        new DataTable(),
+                        new MissingMappingAction(),
+                        new MissingSchemaAction()
+                    )
+            );
         }
 
         [Fact]
         public void GetDataColumn_DataColumnMappingCollection_String_Type_DataTable_MissingMappingAction_MissingSchemaAction_MissingMappingActionIgnoreReturnsNull()
         {
-            Assert.Null(DataColumnMappingCollection.GetDataColumn((DataColumnMappingCollection)null, "not null", typeof(string), new DataTable(), MissingMappingAction.Ignore, new MissingSchemaAction()));
+            Assert.Null(
+                DataColumnMappingCollection.GetDataColumn(
+                    (DataColumnMappingCollection)null,
+                    "not null",
+                    typeof(string),
+                    new DataTable(),
+                    MissingMappingAction.Ignore,
+                    new MissingSchemaAction()
+                )
+            );
         }
 
         [Fact]
         public void GetDataColumn_DataColumnMappingCollection_String_Type_DataTable_MissingMappingAction_MissingSchemaAction_MissingMappingActionErrorThrowsException()
         {
-            Assert.Throws<InvalidOperationException>(() => DataColumnMappingCollection.GetDataColumn((DataColumnMappingCollection)null, "not null", typeof(string), new DataTable(), MissingMappingAction.Error, new MissingSchemaAction()));
+            Assert.Throws<InvalidOperationException>(() =>
+                DataColumnMappingCollection.GetDataColumn(
+                    (DataColumnMappingCollection)null,
+                    "not null",
+                    typeof(string),
+                    new DataTable(),
+                    MissingMappingAction.Error,
+                    new MissingSchemaAction()
+                )
+            );
         }
 
         [Fact]
         public void GetDataColumn_DataColumnMappingCollection_String_Type_DataTable_MissingMappingAction_MissingSchemaAction_MissingMappingActionNotFoundThrowsException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("MissingMappingAction", () => DataColumnMappingCollection.GetDataColumn((DataColumnMappingCollection)null, "not null", typeof(string), new DataTable(), new MissingMappingAction(), new MissingSchemaAction()));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "MissingMappingAction",
+                () =>
+                    DataColumnMappingCollection.GetDataColumn(
+                        (DataColumnMappingCollection)null,
+                        "not null",
+                        typeof(string),
+                        new DataTable(),
+                        new MissingMappingAction(),
+                        new MissingSchemaAction()
+                    )
+            );
         }
 
         [Fact]
         public void GetColumnMappingBySchemaAction_DataColumnMappingCollection_String_MissingMappingAction_InvalidArguments()
         {
-            AssertExtensions.Throws<ArgumentException>("sourceColumn", () => DataColumnMappingCollection.GetColumnMappingBySchemaAction((DataColumnMappingCollection)null, null, new MissingMappingAction()));
+            AssertExtensions.Throws<ArgumentException>(
+                "sourceColumn",
+                () =>
+                    DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                        (DataColumnMappingCollection)null,
+                        null,
+                        new MissingMappingAction()
+                    )
+            );
         }
 
         [Fact]
         public void GetColumnMappingBySchemaAction_DataColumnMappingCollection_String_MissingMappingAction_MissingMappingActionNotFoundThrowsException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("MissingMappingAction", () => DataColumnMappingCollection.GetColumnMappingBySchemaAction((DataColumnMappingCollection)null, "not null", new MissingMappingAction()));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "MissingMappingAction",
+                () =>
+                    DataColumnMappingCollection.GetColumnMappingBySchemaAction(
+                        (DataColumnMappingCollection)null,
+                        "not null",
+                        new MissingMappingAction()
+                    )
+            );
         }
 
         [Fact]
         public void AddRange_Array_PassingNullThrowsException()
         {
             Array array = null;
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
 
-            AssertExtensions.Throws<ArgumentNullException>("values", () => dataColumnMappingCollection.AddRange(array));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "values",
+                () => dataColumnMappingCollection.AddRange(array)
+            );
         }
 
         [Fact]
         public void Indexer_String_SetAndGetOK()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
             dataColumnMappingCollection.Add(new DataColumnMapping("sourcePIN", "dataSetPIN"));
 
-            dataColumnMappingCollection["sourcePIN"] = new DataColumnMapping("sourcePIN", "dataSetPINSet");
+            dataColumnMappingCollection["sourcePIN"] = new DataColumnMapping(
+                "sourcePIN",
+                "dataSetPINSet"
+            );
             DataColumnMapping dataColumnMapping = dataColumnMappingCollection["sourcePIN"];
             Assert.Equal("dataSetPINSet", dataColumnMapping.DataSetColumn);
         }
@@ -453,7 +560,8 @@ namespace System.Data.Tests.Common
         public void CopyTo_Array_Int_Success()
         {
             Array array = new DataColumnMapping[1];
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
             dataColumnMappingCollection.Add(new DataColumnMapping("sourcePIN", "dataSetPIN"));
             IEnumerator enumerator = array.GetEnumerator();
             enumerator.MoveNext();
@@ -469,7 +577,8 @@ namespace System.Data.Tests.Common
         [Fact]
         public void GetEnumerator_Success()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
             dataColumnMappingCollection.Add(new DataColumnMapping("a", "b"));
 
             IEnumerator enumerator = dataColumnMappingCollection.GetEnumerator();
@@ -482,10 +591,14 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Insert_Int_Object_Success()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
             Assert.Equal(0, dataColumnMappingCollection.Count);
 
-            dataColumnMappingCollection.Insert(0, (object)new DataColumnMapping("sourcePIN", "dataSetPIN"));
+            dataColumnMappingCollection.Insert(
+                0,
+                (object)new DataColumnMapping("sourcePIN", "dataSetPIN")
+            );
 
             Assert.Equal(1, dataColumnMappingCollection.Count);
             Assert.Equal("dataSetPIN", dataColumnMappingCollection["sourcePIN"].DataSetColumn);
@@ -495,7 +608,8 @@ namespace System.Data.Tests.Common
         public void Remove_Object_Success()
         {
             DataColumnMapping dataColumnMapping = new DataColumnMapping("sourcePIN", "dataSetPIN");
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
             dataColumnMappingCollection.Add(dataColumnMapping);
             Assert.Equal(1, dataColumnMappingCollection.Count);
 
@@ -507,15 +621,20 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Remove_Object_PassingNullThrowsException()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
 
-            AssertExtensions.Throws<ArgumentNullException>("value", () => dataColumnMappingCollection.Remove((object)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => dataColumnMappingCollection.Remove((object)null)
+            );
         }
 
         [Fact]
         public void Indexer_Int_SetAndGetOK()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
             dataColumnMappingCollection.Add(new DataColumnMapping("sourcePIN", "dataSetPIN"));
 
             dataColumnMappingCollection[0] = new DataColumnMapping("sourcePIN", "dataSetPINSet");
@@ -526,10 +645,18 @@ namespace System.Data.Tests.Common
         [Fact]
         public void GetDataColumn_DataColumnMappingCollection_String_Type_DataTable_MissingMappingAction_MissingSchemaAction()
         {
-            DataColumnMappingCollection dataColumnMappingCollection = new DataColumnMappingCollection();
+            DataColumnMappingCollection dataColumnMappingCollection =
+                new DataColumnMappingCollection();
             dataColumnMappingCollection.Add(new DataColumnMapping("sourcePIN", "dataSetPIN"));
 
-            DataColumn dataColumn = DataColumnMappingCollection.GetDataColumn(dataColumnMappingCollection, "sourcePIN", null, new DataTable(), MissingMappingAction.Ignore, MissingSchemaAction.Ignore);
+            DataColumn dataColumn = DataColumnMappingCollection.GetDataColumn(
+                dataColumnMappingCollection,
+                "sourcePIN",
+                null,
+                new DataTable(),
+                MissingMappingAction.Ignore,
+                MissingSchemaAction.Ignore
+            );
 
             Assert.Null(dataColumn);
         }

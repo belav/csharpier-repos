@@ -11,9 +11,15 @@ namespace System.Collections.Tests
         [Fact]
         public void CtorTest()
         {
-            LinkedList_T_Tests<string> helper = new LinkedList_T_Tests<string>(new LinkedList<string>(), new string[0]);
+            LinkedList_T_Tests<string> helper = new LinkedList_T_Tests<string>(
+                new LinkedList<string>(),
+                new string[0]
+            );
             helper.InitialItems_Tests();
-            LinkedList_T_Tests<Person> helper2 = new LinkedList_T_Tests<Person>(new LinkedList<Person>(), new Person[0]);
+            LinkedList_T_Tests<Person> helper2 = new LinkedList_T_Tests<Person>(
+                new LinkedList<Person>(),
+                new Person[0]
+            );
             helper2.InitialItems_Tests();
         }
 
@@ -49,7 +55,10 @@ namespace System.Collections.Tests
 
             // Testing with an reference type
             LinkedList<Person> personList = new LinkedList<Person>(Clone(personArray));
-            LinkedList_T_Tests<Person> helper2 = new LinkedList_T_Tests<Person>(personList, personArray);
+            LinkedList_T_Tests<Person> helper2 = new LinkedList_T_Tests<Person>(
+                personList,
+                personArray
+            );
             helper2.InitialItems_Tests();
 
             personArray = new Person[0];
@@ -113,7 +122,9 @@ namespace System.Collections.Tests
         {
             T[] tempArray;
             int index;
-            LinkedListNode<T> currentNode, previousNode, nextNode;
+            LinkedListNode<T> currentNode,
+                previousNode,
+                nextNode;
 
             //[] Verify Count
             Assert.Equal(expectedItems.Length, linkedList.Count); //"Err_0821279 List.Count"
@@ -132,7 +143,13 @@ namespace System.Collections.Tests
             else
             {
                 VerifyLinkedListNode(linkedList.First, expectedItems[0], linkedList, true, false);
-                VerifyLinkedListNode(linkedList.Last, expectedItems[expectedItems.Length - 1], linkedList, false, true);
+                VerifyLinkedListNode(
+                    linkedList.Last,
+                    expectedItems[expectedItems.Length - 1],
+                    linkedList,
+                    false,
+                    true
+                );
             }
 
             //[] Moving forward through he collection starting at head
@@ -144,7 +161,13 @@ namespace System.Collections.Tests
             {
                 nextNode = currentNode.Next;
 
-                VerifyLinkedListNode(currentNode, expectedItems[index], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[index],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
 
                 previousNode = currentNode;
                 currentNode = currentNode.Next;
@@ -160,7 +183,13 @@ namespace System.Collections.Tests
             while (currentNode != null)
             {
                 previousNode = currentNode.Previous;
-                VerifyLinkedListNode(currentNode, expectedItems[expectedItems.Length - 1 - index], linkedList, previousNode, nextNode);
+                VerifyLinkedListNode(
+                    currentNode,
+                    expectedItems[expectedItems.Length - 1 - index],
+                    linkedList,
+                    previousNode,
+                    nextNode
+                );
 
                 nextNode = currentNode;
                 currentNode = currentNode.Previous;
@@ -171,8 +200,12 @@ namespace System.Collections.Tests
             //[] Verify Contains
             for (int i = 0; i < expectedItems.Length; i++)
             {
-                Assert.True(linkedList.Contains(expectedItems[i]),
-                    "Err_9872haid Expected Contains with item=" + expectedItems[i] + " to return true");
+                Assert.True(
+                    linkedList.Contains(expectedItems[i]),
+                    "Err_9872haid Expected Contains with item="
+                        + expectedItems[i]
+                        + " to return true"
+                );
             }
 
             //[] Verify CopyTo
@@ -196,8 +229,13 @@ namespace System.Collections.Tests
         /// <summary>
         /// Verifies that the contents of a linkedlistnode are correct.
         /// </summary>
-        private static void VerifyLinkedListNode(LinkedListNode<T> node, T expectedValue, LinkedList<T> expectedList,
-            LinkedListNode<T> expectedPrevious, LinkedListNode<T> expectedNext)
+        private static void VerifyLinkedListNode(
+            LinkedListNode<T> node,
+            T expectedValue,
+            LinkedList<T> expectedList,
+            LinkedListNode<T> expectedPrevious,
+            LinkedListNode<T> expectedNext
+        )
         {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Node List"
@@ -209,8 +247,13 @@ namespace System.Collections.Tests
         /// <summary>
         /// verifies that the contents of a linkedlist node are correct.
         /// </summary>
-        private static void VerifyLinkedListNode(LinkedListNode<T> node, T expectedValue, LinkedList<T> expectedList,
-            bool expectedPreviousNull, bool expectedNextNull)
+        private static void VerifyLinkedListNode(
+            LinkedListNode<T> node,
+            T expectedValue,
+            LinkedList<T> expectedList,
+            bool expectedPreviousNull,
+            bool expectedNextNull
+        )
         {
             Assert.Equal(expectedValue, node.Value); //"Err_548ajoid Expected Node Value"
             Assert.Equal(expectedList, node.List); //"Err_0821279 Expected Node List"
@@ -252,8 +295,14 @@ namespace System.Collections.Tests
                 T tempItem;
 
                 //[] Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) than are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) than are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 //[] Verify Current returned the correct value
                 Assert.Equal(currentItem, expectedItems[iterations]); //"Err_1432pauy Current returned unexpected value at index: " + iterations
@@ -317,8 +366,14 @@ namespace System.Collections.Tests
                 object tempItem;
 
                 //[] Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) then are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) then are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 //[] Verify Current returned the correct value
                 itemFound = false;
@@ -332,7 +387,10 @@ namespace System.Collections.Tests
                         break;
                     }
                 }
-                Assert.True(itemFound, "Err_1432pauy Current returned unexpected value=" + currentItem);
+                Assert.True(
+                    itemFound,
+                    "Err_1432pauy Current returned unexpected value=" + currentItem
+                );
 
                 //[] Verify Current always returns the same value every time it is called
                 for (int i = 0; i < 3; i++)
@@ -346,7 +404,13 @@ namespace System.Collections.Tests
 
             for (int i = 0; i < expectedCount; ++i)
             {
-                Assert.True(itemsVisited[i], "Err_052848ahiedoi Expected Current to return true for item: " + expectedItems[i] + "index: " + i);
+                Assert.True(
+                    itemsVisited[i],
+                    "Err_052848ahiedoi Expected Current to return true for item: "
+                        + expectedItems[i]
+                        + "index: "
+                        + i
+                );
             }
 
             Assert.Equal(expectedCount, iterations); //"Err_658805eauz Number of items to iterate through"

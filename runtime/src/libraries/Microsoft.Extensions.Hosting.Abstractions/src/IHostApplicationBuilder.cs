@@ -67,5 +67,9 @@ public interface IHostApplicationBuilder
     /// the previously stored <paramref name="factory"/> and <paramref name="configure"/> delegate.
     /// </para>
     /// </remarks>
-    void ConfigureContainer<TContainerBuilder>(IServiceProviderFactory<TContainerBuilder> factory, Action<TContainerBuilder>? configure = null) where TContainerBuilder : notnull;
+    void ConfigureContainer<TContainerBuilder>(
+        IServiceProviderFactory<TContainerBuilder> factory,
+        Action<TContainerBuilder>? configure = null
+    )
+        where TContainerBuilder : notnull;
 }

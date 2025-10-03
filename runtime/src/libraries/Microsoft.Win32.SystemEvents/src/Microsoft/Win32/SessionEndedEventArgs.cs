@@ -25,10 +25,7 @@ namespace Microsoft.Win32
         /// </devdoc>
         public SessionEndReasons Reason
         {
-            get
-            {
-                return _reason;
-            }
+            get { return _reason; }
         }
     }
 }

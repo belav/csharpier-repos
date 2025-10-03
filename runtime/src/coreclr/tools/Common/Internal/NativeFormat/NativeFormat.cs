@@ -35,25 +35,27 @@ namespace Internal.NativeFormat
 #endif
     enum BagElementKind : uint
     {
-        End                         = 0x00,
-        BaseType                    = 0x01,
-        ImplementedInterfaces       = 0x02,
+        End = 0x00,
+        BaseType = 0x01,
+        ImplementedInterfaces = 0x02,
 
-        DictionaryLayout            = 0x40,
+        DictionaryLayout = 0x40,
+
         // unused                   = 0x41,
-        NonGcStaticData             = 0x42,
-        GcStaticData                = 0x43,
-        NonGcStaticDataSize         = 0x44,
-        GcStaticDataSize            = 0x45,
-        GcStaticDesc                = 0x46,
-        ThreadStaticDataSize        = 0x47,
-        ThreadStaticDesc            = 0x48,
-        ThreadStaticIndex           = 0x49,
-        ThreadStaticOffset          = 0x4a,
-        FieldLayout                 = 0x4b,
+        NonGcStaticData = 0x42,
+        GcStaticData = 0x43,
+        NonGcStaticDataSize = 0x44,
+        GcStaticDataSize = 0x45,
+        GcStaticDesc = 0x46,
+        ThreadStaticDataSize = 0x47,
+        ThreadStaticDesc = 0x48,
+        ThreadStaticIndex = 0x49,
+        ThreadStaticOffset = 0x4a,
+        FieldLayout = 0x4b,
+
         // unused                   = 0x4c,
         // unused                   = 0x4d,
-        ClassConstructorPointer     = 0x4e,
+        ClassConstructorPointer = 0x4e,
         // unused                   = 0x4f,
         // unused                   = 0x50,
         // unused                   = 0x51,
@@ -72,20 +74,23 @@ namespace Internal.NativeFormat
 #endif
     enum FixupSignatureKind : uint
     {
-        Null                        = 0x00,
-        TypeHandle                  = 0x01,
-        InterfaceCall               = 0x02,
+        Null = 0x00,
+        TypeHandle = 0x01,
+        InterfaceCall = 0x02,
+
         // unused                   = 0x03,
-        MethodDictionary            = 0x04,
-        StaticData                  = 0x05,
-        UnwrapNullableType          = 0x06,
-        FieldLdToken                = 0x07,
-        MethodLdToken               = 0x08,
-        AllocateObject              = 0x09,
-        DefaultConstructor          = 0x0a,
-        ThreadStaticIndex           = 0x0b,
+        MethodDictionary = 0x04,
+        StaticData = 0x05,
+        UnwrapNullableType = 0x06,
+        FieldLdToken = 0x07,
+        MethodLdToken = 0x08,
+        AllocateObject = 0x09,
+        DefaultConstructor = 0x0a,
+        ThreadStaticIndex = 0x0b,
+
         // unused                   = 0x0c,
-        Method                      = 0x0d,
+        Method = 0x0d,
+
         // unused                   = 0x0e,
         // unused                   = 0x0f,
         // unused                   = 0x10,
@@ -102,7 +107,7 @@ namespace Internal.NativeFormat
         NonGenericStaticConstrainedMethod = 0x21,
         GenericStaticConstrainedMethod = 0x22,
 
-        NotYetSupported             = 0xee,
+        NotYetSupported = 0xee,
     }
 
     //
@@ -116,16 +121,16 @@ namespace Internal.NativeFormat
 #endif
     enum TypeSignatureKind : uint
     {
-        Null                        = 0x0,
-        Lookback                    = 0x1, // Go back in the stream for signature continuation (data - number of bytes to go back)
-        Modifier                    = 0x2, // Type modifier (data - TypeModifierKind)
-        Instantiation               = 0x3, // Generic instantiation (data - number of instantiation args)
-        Variable                    = 0x4, // Generic variable (data - 2 * varnum + method)
-        BuiltIn                     = 0x5, // Built-in type (data - BuildInTypeKind)
-        External                    = 0x6, // External type reference (data - external type id)
+        Null = 0x0,
+        Lookback = 0x1, // Go back in the stream for signature continuation (data - number of bytes to go back)
+        Modifier = 0x2, // Type modifier (data - TypeModifierKind)
+        Instantiation = 0x3, // Generic instantiation (data - number of instantiation args)
+        Variable = 0x4, // Generic variable (data - 2 * varnum + method)
+        BuiltIn = 0x5, // Built-in type (data - BuildInTypeKind)
+        External = 0x6, // External type reference (data - external type id)
 
-        MultiDimArray               = 0xA, // Multi-dimensional array (data - dimension)
-        FunctionPointer             = 0xB, // Function pointer (data - calling convention, arg count, args)
+        MultiDimArray = 0xA, // Multi-dimensional array (data - dimension)
+        FunctionPointer = 0xB, // Function pointer (data - calling convention, arg count, args)
     };
 
 #if NATIVEFORMAT_PUBLICWRITER
@@ -135,9 +140,9 @@ namespace Internal.NativeFormat
 #endif
     enum TypeModifierKind : uint
     {
-        Array                       = 0x1,
-        ByRef                       = 0x2,
-        Pointer                     = 0x3,
+        Array = 0x1,
+        ByRef = 0x2,
+        Pointer = 0x3,
     };
 
 #if NATIVEFORMAT_PUBLICWRITER
@@ -147,8 +152,8 @@ namespace Internal.NativeFormat
 #endif
     enum StaticDataKind : uint
     {
-        Gc                          = 0x1,
-        NonGc                       = 0x2,
+        Gc = 0x1,
+        NonGc = 0x2,
     };
 
 #if NATIVEFORMAT_PUBLICWRITER
@@ -158,13 +163,13 @@ namespace Internal.NativeFormat
 #endif
     enum GenericContextKind : uint
     {
-        FromThis                    = 0x00,
-        FromHiddenArg               = 0x01,
-        FromMethodHiddenArg         = 0x02,
+        FromThis = 0x00,
+        FromHiddenArg = 0x01,
+        FromMethodHiddenArg = 0x02,
 
-        HasDeclaringType            = 0x04,
+        HasDeclaringType = 0x04,
 
-        NeedsUSGContext             = 0x08,
+        NeedsUSGContext = 0x08,
     };
 
 #if NATIVEFORMAT_PUBLICWRITER
@@ -174,9 +179,9 @@ namespace Internal.NativeFormat
 #endif
     enum CallingConventionConverterKind : uint
     {
-        NoInstantiatingParam        = 0x00,   // The calling convention interpreter can assume that the calling convention of the target method has no instantiating parameter
-        HasInstantiatingParam       = 0x01,   // The calling convention interpreter can assume that the calling convention of the target method has an instantiating parameter
-        MaybeInstantiatingParam     = 0x02,   // The calling convention interpreter can assume that the calling convention of the target method may be a fat function pointer
+        NoInstantiatingParam = 0x00, // The calling convention interpreter can assume that the calling convention of the target method has no instantiating parameter
+        HasInstantiatingParam = 0x01, // The calling convention interpreter can assume that the calling convention of the target method has an instantiating parameter
+        MaybeInstantiatingParam = 0x02, // The calling convention interpreter can assume that the calling convention of the target method may be a fat function pointer
     }
 
     [Flags]
@@ -187,10 +192,10 @@ namespace Internal.NativeFormat
 #endif
     enum MethodFlags : uint
     {
-        HasInstantiation            = 0x1,
-        IsUnboxingStub              = 0x2,
-        HasFunctionPointer          = 0x4,
-        FunctionPointerIsUSG        = 0x8,
+        HasInstantiation = 0x1,
+        IsUnboxingStub = 0x2,
+        HasFunctionPointer = 0x4,
+        FunctionPointerIsUSG = 0x8,
     };
 
     [Flags]
@@ -201,9 +206,9 @@ namespace Internal.NativeFormat
 #endif
     enum MethodCallingConvention : uint
     {
-        Generic                     = 0x1,
-        Static                      = 0x2,
-        Unmanaged                   = 0x4,
+        Generic = 0x1,
+        Static = 0x2,
+        Unmanaged = 0x4,
     };
 
 #if NATIVEFORMAT_PUBLICWRITER
@@ -213,9 +218,9 @@ namespace Internal.NativeFormat
 #endif
     enum FieldStorage : uint
     {
-        Instance                    = 0x0,
-        NonGCStatic                 = 0x1,
-        GCStatic                    = 0x2,
-        TLSStatic                   = 0x3,
+        Instance = 0x0,
+        NonGCStatic = 0x1,
+        GCStatic = 0x2,
+        TLSStatic = 0x3,
     }
 }

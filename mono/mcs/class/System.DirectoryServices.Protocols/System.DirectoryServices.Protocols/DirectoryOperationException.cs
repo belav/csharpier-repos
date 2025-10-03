@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,54 +34,51 @@ using System.Security.Permissions;
 
 namespace System.DirectoryServices.Protocols
 {
-	[Serializable]
-	[MonoTODO]
-	public class DirectoryOperationException : DirectoryException, ISerializable
-	{
-		public DirectoryOperationException ()
-			: this ("directory operation error")
-		{
-		}
+    [Serializable]
+    [MonoTODO]
+    public class DirectoryOperationException : DirectoryException, ISerializable
+    {
+        public DirectoryOperationException()
+            : this("directory operation error") { }
 
-		public DirectoryOperationException (string message)
-			: base (message)
-		{
-		}
+        public DirectoryOperationException(string message)
+            : base(message) { }
 
-		public DirectoryOperationException (DirectoryResponse response, string message)
-			: this (message)
-		{
-		}
+        public DirectoryOperationException(DirectoryResponse response, string message)
+            : this(message) { }
 
-		public DirectoryOperationException (string message, Exception inner)
-			: base (message, inner)
-		{
-		}
+        public DirectoryOperationException(string message, Exception inner)
+            : base(message, inner) { }
 
-		public DirectoryOperationException (DirectoryResponse response, string message, Exception inner)
-			: this (message, inner)
-		{
-			Response = response;
-		}
+        public DirectoryOperationException(
+            DirectoryResponse response,
+            string message,
+            Exception inner
+        )
+            : this(message, inner)
+        {
+            Response = response;
+        }
 
-		public DirectoryOperationException (DirectoryResponse response)
-			: this ()
-		{
-		}
+        public DirectoryOperationException(DirectoryResponse response)
+            : this() { }
 
-		protected DirectoryOperationException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			Response = (DirectoryResponse) info.GetValue ("Response", typeof (DirectoryResponse));
-		}
+        protected DirectoryOperationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            Response = (DirectoryResponse)info.GetValue("Response", typeof(DirectoryResponse));
+        }
 
-		public DirectoryResponse Response { get; private set; }
+        public DirectoryResponse Response { get; private set; }
 
-		[SecurityPermission (SecurityAction.Demand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			base.GetObjectData (serializationInfo, streamingContext);
-			serializationInfo.AddValue ("Response", Response, typeof (DirectoryResponse));
-		}
-	}
+        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
+            base.GetObjectData(serializationInfo, streamingContext);
+            serializationInfo.AddValue("Response", Response, typeof(DirectoryResponse));
+        }
+    }
 }

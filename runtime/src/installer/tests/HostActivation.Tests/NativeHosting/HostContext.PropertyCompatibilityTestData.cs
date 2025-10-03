@@ -40,7 +40,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
             string propertyName1,
             string propertyValue1,
             string propertyName2,
-            string propertyValue2)
+            string propertyValue2
+        )
         {
             var list = new List<PropertyTestData[]>()
             {
@@ -49,50 +50,110 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 // Match
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = propertyValue1, ExistingValue = propertyValue1 }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = propertyValue1,
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Substring
-                new  PropertyTestData[]
+                new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = propertyValue1.Remove(propertyValue1.Length - 1), ExistingValue = propertyValue1 }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = propertyValue1.Remove(propertyValue1.Length - 1),
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Different in case only
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = propertyValue1.ToLower(), ExistingValue = propertyValue1 }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = propertyValue1.ToLower(),
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Different value
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = "NEW_PROPERTY_VALUE", ExistingValue = propertyValue1 }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = "NEW_PROPERTY_VALUE",
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Different value (empty)
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = string.Empty, ExistingValue = propertyValue1 }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = string.Empty,
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // New property
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = "NEW_PROPERTY_NAME", NewValue = "NEW_PROPERTY_VALUE", ExistingValue = null }
+                    new PropertyTestData
+                    {
+                        Name = "NEW_PROPERTY_NAME",
+                        NewValue = "NEW_PROPERTY_VALUE",
+                        ExistingValue = null,
+                    },
                 },
                 // Match, new property
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = propertyValue1, ExistingValue = propertyValue1 },
-                    new PropertyTestData { Name = "NEW_PROPERTY_NAME", NewValue = "NEW_PROPERTY_VALUE", ExistingValue = null }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = propertyValue1,
+                        ExistingValue = propertyValue1,
+                    },
+                    new PropertyTestData
+                    {
+                        Name = "NEW_PROPERTY_NAME",
+                        NewValue = "NEW_PROPERTY_VALUE",
+                        ExistingValue = null,
+                    },
                 },
                 // One match, one different
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = propertyValue1, ExistingValue = propertyValue1 },
-                    new PropertyTestData { Name = propertyName2, NewValue = "NEW_PROPERTY_VALUE", ExistingValue = propertyValue2 }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = propertyValue1,
+                        ExistingValue = propertyValue1,
+                    },
+                    new PropertyTestData
+                    {
+                        Name = propertyName2,
+                        NewValue = "NEW_PROPERTY_VALUE",
+                        ExistingValue = propertyValue2,
+                    },
                 },
                 // Both different
                 new PropertyTestData[]
                 {
-                    new PropertyTestData { Name = propertyName1, NewValue = "NEW_PROPERTY_VALUE", ExistingValue = propertyValue1 },
-                    new PropertyTestData { Name = propertyName2, NewValue = "NEW_PROPERTY_VALUE", ExistingValue = propertyValue2 }
+                    new PropertyTestData
+                    {
+                        Name = propertyName1,
+                        NewValue = "NEW_PROPERTY_VALUE",
+                        ExistingValue = propertyValue1,
+                    },
+                    new PropertyTestData
+                    {
+                        Name = propertyName2,
+                        NewValue = "NEW_PROPERTY_VALUE",
+                        ExistingValue = propertyValue2,
+                    },
                 },
             };
 
@@ -102,23 +163,53 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     // Both match
                     new PropertyTestData[]
                     {
-                        new PropertyTestData { Name = propertyName1, NewValue = propertyValue1, ExistingValue = propertyValue1 },
-                        new PropertyTestData { Name = propertyName2, NewValue = propertyValue2, ExistingValue = propertyValue2 }
-                    });
+                        new PropertyTestData
+                        {
+                            Name = propertyName1,
+                            NewValue = propertyValue1,
+                            ExistingValue = propertyValue1,
+                        },
+                        new PropertyTestData
+                        {
+                            Name = propertyName2,
+                            NewValue = propertyValue2,
+                            ExistingValue = propertyValue2,
+                        },
+                    }
+                );
                 list.Add(
                     // Both match, new property
                     new PropertyTestData[]
                     {
-                        new PropertyTestData { Name = propertyName1, NewValue = propertyValue1, ExistingValue = propertyValue1 },
-                        new PropertyTestData { Name = propertyName2, NewValue = propertyValue2, ExistingValue = propertyValue2 },
-                        new PropertyTestData { Name = "NEW_PROPERTY_NAME", NewValue = "NEW_PROPERTY_VALUE", ExistingValue = null }
-                    });
+                        new PropertyTestData
+                        {
+                            Name = propertyName1,
+                            NewValue = propertyValue1,
+                            ExistingValue = propertyValue1,
+                        },
+                        new PropertyTestData
+                        {
+                            Name = propertyName2,
+                            NewValue = propertyValue2,
+                            ExistingValue = propertyValue2,
+                        },
+                        new PropertyTestData
+                        {
+                            Name = "NEW_PROPERTY_NAME",
+                            NewValue = "NEW_PROPERTY_VALUE",
+                            ExistingValue = null,
+                        },
+                    }
+                );
             }
 
             return list;
         }
 
-        public static IEnumerable<object[]> GetPropertyCompatibilityTestData(string scenario, bool hasSecondProperty)
+        public static IEnumerable<object[]> GetPropertyCompatibilityTestData(
+            string scenario,
+            bool hasSecondProperty
+        )
         {
             List<PropertyTestData[]> properties;
             switch (scenario)
@@ -128,7 +219,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         SharedTestState.ConfigPropertyName,
                         SharedTestState.ConfigPropertyValue,
                         SharedTestState.ConfigMultiPropertyName,
-                        hasSecondProperty ? SharedTestState.ConfigMultiPropertyValue : null);
+                        hasSecondProperty ? SharedTestState.ConfigMultiPropertyValue : null
+                    );
                     break;
                 case Scenario.Mixed:
                 case Scenario.NonContextMixedAppHost:
@@ -137,13 +229,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         SharedTestState.AppPropertyName,
                         SharedTestState.AppPropertyValue,
                         SharedTestState.AppMultiPropertyName,
-                        hasSecondProperty ? SharedTestState.AppMultiPropertyValue : null);
+                        hasSecondProperty ? SharedTestState.AppMultiPropertyValue : null
+                    );
                     break;
                 default:
                     throw new Exception($"Unexpected scenario: {scenario}");
             }
 
-            var list = new List<object[]> ();
+            var list = new List<object[]>();
             foreach (var p in properties)
             {
                 list.Add(new object[] { scenario, hasSecondProperty, p });

@@ -53,16 +53,26 @@ namespace System.CodeDom.Tests
         {
             var property = new CodeMemberProperty();
 
-            CodeStatement statement1 = new CodeMethodReturnStatement(new CodePrimitiveExpression("value1"));
+            CodeStatement statement1 = new CodeMethodReturnStatement(
+                new CodePrimitiveExpression("value1")
+            );
             property.GetStatements.Add(statement1);
             Assert.True(property.HasGet);
-            Assert.Equal(new CodeStatement[] { statement1 }, property.GetStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1 },
+                property.GetStatements.Cast<CodeStatement>()
+            );
 
-            CodeStatement statement2 = new CodeMethodReturnStatement(new CodePrimitiveExpression("value2"));
+            CodeStatement statement2 = new CodeMethodReturnStatement(
+                new CodePrimitiveExpression("value2")
+            );
             property.GetStatements.Add(statement2);
             Assert.True(property.HasGet);
 
-            Assert.Equal(new CodeStatement[] { statement1, statement2 }, property.GetStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1, statement2 },
+                property.GetStatements.Cast<CodeStatement>()
+            );
         }
 
         [Fact]
@@ -72,7 +82,9 @@ namespace System.CodeDom.Tests
             property.HasGet = false;
             Assert.False(property.HasGet);
 
-            property.GetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression("value")));
+            property.GetStatements.Add(
+                new CodeMethodReturnStatement(new CodePrimitiveExpression("value"))
+            );
 
             property.HasGet = false;
             Assert.False(property.HasGet);
@@ -91,16 +103,26 @@ namespace System.CodeDom.Tests
         {
             var property = new CodeMemberProperty();
 
-            CodeStatement statement1 = new CodeMethodReturnStatement(new CodePrimitiveExpression("value1"));
+            CodeStatement statement1 = new CodeMethodReturnStatement(
+                new CodePrimitiveExpression("value1")
+            );
             property.SetStatements.Add(statement1);
             Assert.True(property.HasSet);
-            Assert.Equal(new CodeStatement[] { statement1 }, property.SetStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1 },
+                property.SetStatements.Cast<CodeStatement>()
+            );
 
-            CodeStatement statement2 = new CodeMethodReturnStatement(new CodePrimitiveExpression("value2"));
+            CodeStatement statement2 = new CodeMethodReturnStatement(
+                new CodePrimitiveExpression("value2")
+            );
             property.SetStatements.Add(statement2);
             Assert.True(property.HasSet);
 
-            Assert.Equal(new CodeStatement[] { statement1, statement2 }, property.SetStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1, statement2 },
+                property.SetStatements.Cast<CodeStatement>()
+            );
         }
 
         [Fact]
@@ -110,7 +132,9 @@ namespace System.CodeDom.Tests
             property.HasSet = false;
             Assert.False(property.HasSet);
 
-            property.SetStatements.Add(new CodeMethodReturnStatement(new CodePrimitiveExpression("value")));
+            property.SetStatements.Add(
+                new CodeMethodReturnStatement(new CodePrimitiveExpression("value"))
+            );
             property.HasSet = false;
             Assert.False(property.HasSet);
             Assert.Empty(property.SetStatements);
@@ -121,13 +145,25 @@ namespace System.CodeDom.Tests
         {
             var property = new CodeMemberProperty();
 
-            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name1");
+            CodeParameterDeclarationExpression parameter1 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name1"
+            );
             property.Parameters.Add(parameter1);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1 }, property.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1 },
+                property.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
 
-            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(new CodeTypeReference(typeof(int)), "name2");
+            CodeParameterDeclarationExpression parameter2 = new CodeParameterDeclarationExpression(
+                new CodeTypeReference(typeof(int)),
+                "name2"
+            );
             property.Parameters.Add(parameter2);
-            Assert.Equal(new CodeParameterDeclarationExpression[] { parameter1, parameter2 }, property.Parameters.Cast<CodeParameterDeclarationExpression>());
+            Assert.Equal(
+                new CodeParameterDeclarationExpression[] { parameter1, parameter2 },
+                property.Parameters.Cast<CodeParameterDeclarationExpression>()
+            );
         }
 
         [Fact]
@@ -137,11 +173,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type1 = new CodeTypeReference(typeof(int));
             property.ImplementationTypes.Add(type1);
-            Assert.Equal(new CodeTypeReference[] { type1 }, property.ImplementationTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1 },
+                property.ImplementationTypes.Cast<CodeTypeReference>()
+            );
 
             CodeTypeReference type2 = new CodeTypeReference(typeof(int));
             property.ImplementationTypes.Add(type2);
-            Assert.Equal(new CodeTypeReference[] { type1, type2 }, property.ImplementationTypes.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1, type2 },
+                property.ImplementationTypes.Cast<CodeTypeReference>()
+            );
         }
     }
 }

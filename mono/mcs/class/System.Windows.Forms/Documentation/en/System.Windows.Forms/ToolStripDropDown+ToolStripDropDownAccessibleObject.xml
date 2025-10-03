@@ -1,5 +1,11 @@
-<Type Name="ToolStripDropDown+ToolStripDropDownAccessibleObject" FullName="System.Windows.Forms.ToolStripDropDown+ToolStripDropDownAccessibleObject">
-  <TypeSignature Language="C#" Value="public class ToolStripDropDown.ToolStripDropDownAccessibleObject : System.Windows.Forms.ToolStrip.ToolStripAccessibleObject" />
+<Type
+  Name="ToolStripDropDown+ToolStripDropDownAccessibleObject"
+  FullName="System.Windows.Forms.ToolStripDropDown+ToolStripDropDownAccessibleObject"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripDropDown.ToolStripDropDownAccessibleObject : System.Windows.Forms.ToolStrip.ToolStripAccessibleObject"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -19,7 +25,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripDropDownAccessibleObject (System.Windows.Forms.ToolStripDropDown owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripDropDownAccessibleObject (System.Windows.Forms.ToolStripDropDown owner);"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -49,7 +58,10 @@
       </Docs>
     </Member>
     <Member MemberName="Role">
-      <MemberSignature Language="C#" Value="public override System.Windows.Forms.AccessibleRole Role { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Windows.Forms.AccessibleRole Role { get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

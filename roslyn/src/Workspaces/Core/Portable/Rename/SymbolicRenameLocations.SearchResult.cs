@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Rename
             public SearchResult(
                 ImmutableHashSet<RenameLocation> locations,
                 ImmutableArray<ReferenceLocation> implicitLocations,
-                ImmutableArray<ISymbol> referencedSymbols)
+                ImmutableArray<ISymbol> referencedSymbols
+            )
             {
                 Contract.ThrowIfNull(locations);
                 this.Locations = locations;

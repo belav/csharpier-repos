@@ -13,35 +13,37 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.AddRequiredParentheses
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer :
-        AbstractAddRequiredParenthesesDiagnosticAnalyzer<
-            PatternSyntax, BinaryPatternSyntax, SyntaxKind>
+    internal class CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer
+        : AbstractAddRequiredParenthesesDiagnosticAnalyzer<
+            PatternSyntax,
+            BinaryPatternSyntax,
+            SyntaxKind
+        >
     {
         public CSharpAddRequiredPatternParenthesesDiagnosticAnalyzer()
-            : base(CSharpPatternPrecedenceService.Instance)
-        {
-        }
+            : base(CSharpPatternPrecedenceService.Instance) { }
 
         private static readonly ImmutableArray<SyntaxKind> s_kinds = ImmutableArray.Create(
             SyntaxKind.AndPattern,
-            SyntaxKind.OrPattern);
+            SyntaxKind.OrPattern
+        );
 
-        protected override ImmutableArray<SyntaxKind> GetSyntaxNodeKinds()
-            => s_kinds;
+        protected override ImmutableArray<SyntaxKind> GetSyntaxNodeKinds() => s_kinds;
 
-        protected override int GetPrecedence(BinaryPatternSyntax pattern)
-            => (int)pattern.GetOperatorPrecedence();
+        protected override int GetPrecedence(BinaryPatternSyntax pattern) =>
+            (int)pattern.GetOperatorPrecedence();
 
-        protected override bool IsBinaryLike(PatternSyntax node)
-            => node is BinaryPatternSyntax;
+        protected override bool IsBinaryLike(PatternSyntax node) => node is BinaryPatternSyntax;
 
-        protected override (PatternSyntax, SyntaxToken, PatternSyntax) GetPartsOfBinaryLike(BinaryPatternSyntax binaryPattern)
+        protected override (PatternSyntax, SyntaxToken, PatternSyntax) GetPartsOfBinaryLike(
+            BinaryPatternSyntax binaryPattern
+        )
         {
             Debug.Assert(IsBinaryLike(binaryPattern));
             return (binaryPattern.Left, binaryPattern.OperatorToken, binaryPattern.Right);
         }
 
-        protected override PatternSyntax? TryGetAppropriateParent(BinaryPatternSyntax binaryLike)
-            => binaryLike.Parent as PatternSyntax;
+        protected override PatternSyntax? TryGetAppropriateParent(BinaryPatternSyntax binaryLike) =>
+            binaryLike.Parent as PatternSyntax;
     }
 }

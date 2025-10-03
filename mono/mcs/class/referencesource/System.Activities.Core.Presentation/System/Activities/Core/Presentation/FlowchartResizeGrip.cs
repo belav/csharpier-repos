@@ -3,30 +3,44 @@
 //----------------------------------------------------------------
 namespace System.Activities.Core.Presentation
 {
+    using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
+    using System.Activities.Presentation.Model;
+    using System.ComponentModel;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Media;
-    using System.Runtime;
-    using System.Activities.Presentation.Model;
-    using System.Activities.Presentation;
-    using System.ComponentModel;
-    using System.Activities.Presentation.FreeFormEditing;
 
     //This class is visual representation of ResizeGrip like control, which is used in a Grid to allow resizing.
     class FlowchartResizeGrip : Control
     {
-        public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register("Icon", typeof(DrawingBrush), typeof(FlowchartResizeGrip));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            "Icon",
+            typeof(DrawingBrush),
+            typeof(FlowchartResizeGrip)
+        );
 
         public static readonly DependencyProperty ParentFlowchartDesignerProperty =
-            DependencyProperty.Register("ParentFlowchartDesigner", typeof(FlowchartDesigner), typeof(FlowchartResizeGrip));
+            DependencyProperty.Register(
+                "ParentFlowchartDesigner",
+                typeof(FlowchartDesigner),
+                typeof(FlowchartResizeGrip)
+            );
 
-        public static readonly DependencyProperty ParentGridProperty =
-            DependencyProperty.Register("ParentGrid", typeof(Grid), typeof(FlowchartResizeGrip));
+        public static readonly DependencyProperty ParentGridProperty = DependencyProperty.Register(
+            "ParentGrid",
+            typeof(Grid),
+            typeof(FlowchartResizeGrip)
+        );
 
-        public static readonly DependencyProperty DisabledProperty =
-            DependencyProperty.Register("Disabled", typeof(bool), typeof(FlowchartResizeGrip), new UIPropertyMetadata(false));
+        public static readonly DependencyProperty DisabledProperty = DependencyProperty.Register(
+            "Disabled",
+            typeof(bool),
+            typeof(FlowchartResizeGrip),
+            new UIPropertyMetadata(false)
+        );
 
         Point offset;
 
@@ -86,8 +100,14 @@ namespace System.Activities.Core.Presentation
 
                     currentPosition.Offset(this.offset.X, this.offset.Y);
 
-                    flowchartDesigner.FlowchartWidth = Math.Min(Math.Max(panel.RequiredWidth, currentPosition.X), flowchartGrid.MaxWidth);
-                    flowchartDesigner.FlowchartHeight = Math.Min(Math.Max(panel.RequiredHeight, currentPosition.Y), flowchartGrid.MaxHeight);
+                    flowchartDesigner.FlowchartWidth = Math.Min(
+                        Math.Max(panel.RequiredWidth, currentPosition.X),
+                        flowchartGrid.MaxWidth
+                    );
+                    flowchartDesigner.FlowchartHeight = Math.Min(
+                        Math.Max(panel.RequiredHeight, currentPosition.Y),
+                        flowchartGrid.MaxHeight
+                    );
                     args.Handled = true;
                 }
             }
@@ -99,10 +119,16 @@ namespace System.Activities.Core.Presentation
             {
                 FlowchartDesigner flowchartDesigner = this.ParentFlowchartDesigner;
                 ModelItem flowchartModelItem = this.ParentFlowchartDesigner.ModelItem;
-                using (ModelEditingScope scope = flowchartModelItem.BeginEdit(SR.FCResizeUndoUnitName))
+                using (
+                    ModelEditingScope scope = flowchartModelItem.BeginEdit(SR.FCResizeUndoUnitName)
+                )
                 {
-                    TypeDescriptor.GetProperties(flowchartModelItem)[FlowchartSizeFeature.WidthPropertyName].SetValue(flowchartModelItem, flowchartDesigner.FlowchartWidth);
-                    TypeDescriptor.GetProperties(flowchartModelItem)[FlowchartSizeFeature.HeightPropertyName].SetValue(flowchartModelItem, flowchartDesigner.FlowchartHeight);
+                    TypeDescriptor
+                        .GetProperties(flowchartModelItem)[FlowchartSizeFeature.WidthPropertyName]
+                        .SetValue(flowchartModelItem, flowchartDesigner.FlowchartWidth);
+                    TypeDescriptor
+                        .GetProperties(flowchartModelItem)[FlowchartSizeFeature.HeightPropertyName]
+                        .SetValue(flowchartModelItem, flowchartDesigner.FlowchartHeight);
                     scope.Complete();
                 }
                 Mouse.OverrideCursor = null;

@@ -11,10 +11,12 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeTokenHandle : SafeHandle
     {
-        public SafeTokenHandle() : base(IntPtr.Zero, true) { }
+        public SafeTokenHandle()
+            : base(IntPtr.Zero, true) { }
 
         // 0 is an Invalid Handle
-        internal SafeTokenHandle(IntPtr handle) : base(IntPtr.Zero, true)
+        internal SafeTokenHandle(IntPtr handle)
+            : base(IntPtr.Zero, true)
         {
             SetHandle(handle);
         }
@@ -26,8 +28,7 @@ namespace Microsoft.Win32.SafeHandles
 
         public override bool IsInvalid
         {
-            get
-            { return handle == new IntPtr(0) || handle == new IntPtr(-1); }
+            get { return handle == new IntPtr(0) || handle == new IntPtr(-1); }
         }
 
         protected override bool ReleaseHandle()

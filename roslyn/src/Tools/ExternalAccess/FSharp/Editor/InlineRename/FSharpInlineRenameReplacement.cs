@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         public TextSpan OriginalSpan { get; }
         public TextSpan NewSpan { get; }
 
-        public FSharpInlineRenameReplacement(FSharpInlineRenameReplacementKind kind, TextSpan originalSpan, TextSpan newSpan)
+        public FSharpInlineRenameReplacement(
+            FSharpInlineRenameReplacementKind kind,
+            TextSpan originalSpan,
+            TextSpan newSpan
+        )
         {
             this.Kind = kind;
             this.OriginalSpan = originalSpan;

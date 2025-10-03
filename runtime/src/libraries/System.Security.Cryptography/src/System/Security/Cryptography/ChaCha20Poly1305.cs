@@ -45,7 +45,13 @@ namespace System.Security.Cryptography
             }
         }
 
-        public void Encrypt(byte[] nonce, byte[] plaintext, byte[] ciphertext, byte[] tag, byte[]? associatedData = null)
+        public void Encrypt(
+            byte[] nonce,
+            byte[] plaintext,
+            byte[] ciphertext,
+            byte[] tag,
+            byte[]? associatedData = null
+        )
         {
             ArgumentNullException.ThrowIfNull(nonce);
             ArgumentNullException.ThrowIfNull(plaintext);
@@ -60,13 +66,20 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckParameters(plaintext, ciphertext, nonce, tag);
             EncryptCore(nonce, plaintext, ciphertext, tag, associatedData);
         }
 
-        public void Decrypt(byte[] nonce, byte[] ciphertext, byte[] tag, byte[] plaintext, byte[]? associatedData = null)
+        public void Decrypt(
+            byte[] nonce,
+            byte[] ciphertext,
+            byte[] tag,
+            byte[] plaintext,
+            byte[]? associatedData = null
+        )
         {
             ArgumentNullException.ThrowIfNull(nonce);
             ArgumentNullException.ThrowIfNull(ciphertext);
@@ -81,7 +94,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckParameters(plaintext, ciphertext, nonce, tag);
             DecryptCore(nonce, ciphertext, tag, plaintext, associatedData);
@@ -91,7 +105,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> nonce,
-            ReadOnlySpan<byte> tag)
+            ReadOnlySpan<byte> tag
+        )
         {
             if (plaintext.Length != ciphertext.Length)
                 throw new ArgumentException(SR.Cryptography_PlaintextCiphertextLengthMismatch);
@@ -107,7 +122,9 @@ namespace System.Security.Cryptography
         {
             if (!IsSupported)
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(ChaCha20Poly1305)));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(ChaCha20Poly1305))
+                );
             }
         }
     }

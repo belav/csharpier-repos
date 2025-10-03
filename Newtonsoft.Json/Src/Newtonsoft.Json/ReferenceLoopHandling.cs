@@ -47,6 +47,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Serialize loop references.
         /// </summary>
-        Serialize = 2
+        Serialize = 2,
     }
 }

@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal class CSharpBraceCompletionServiceFactory(
-        [ImportMany(LanguageNames.CSharp)] IEnumerable<IBraceCompletionService> braceCompletionServices) : AbstractBraceCompletionServiceFactory(braceCompletionServices)
-    {
-    }
+        [ImportMany(LanguageNames.CSharp)]
+            IEnumerable<IBraceCompletionService> braceCompletionServices
+    ) : AbstractBraceCompletionServiceFactory(braceCompletionServices) { }
 }

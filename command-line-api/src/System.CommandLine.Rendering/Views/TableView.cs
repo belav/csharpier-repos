@@ -33,11 +33,24 @@ namespace System.CommandLine.Rendering.Views
 
         private void OnLayoutUpdated(object sender, EventArgs e) => OnUpdated();
 
-        public void AddColumn<T>(Func<TItem, T> cellValue, string header, ColumnDefinition column = null) 
-            => AddColumn(cellValue, new ContentView(header), column);
+        public void AddColumn<T>(
+            Func<TItem, T> cellValue,
+            string header,
+            ColumnDefinition column = null
+        ) => AddColumn(cellValue, new ContentView(header), column);
 
-        public void AddColumn<T>(Func<TItem, T> cellValue, View header, ColumnDefinition column = null) 
-            => AddColumn(new TableViewColumn<T>(cellValue, header, column ?? ColumnDefinition.SizeToContent()));
+        public void AddColumn<T>(
+            Func<TItem, T> cellValue,
+            View header,
+            ColumnDefinition column = null
+        ) =>
+            AddColumn(
+                new TableViewColumn<T>(
+                    cellValue,
+                    header,
+                    column ?? ColumnDefinition.SizeToContent()
+                )
+            );
 
         public void AddColumn(ITableViewColumn<TItem> column)
         {
@@ -61,10 +74,13 @@ namespace System.CommandLine.Rendering.Views
 
         private void EnsureInitialized(ConsoleRenderer renderer)
         {
-            if (_gridInitialized) return;
+            if (_gridInitialized)
+                return;
 
             Layout.SetColumns(Columns.Select(x => x.ColumnDefinition).ToArray());
-            Layout.SetRows(Enumerable.Repeat(RowDefinition.SizeToContent(), Items.Count + 1).ToArray());
+            Layout.SetRows(
+                Enumerable.Repeat(RowDefinition.SizeToContent(), Items.Count + 1).ToArray()
+            );
 
             for (int columnIndex = 0; columnIndex < Columns.Count; columnIndex++)
             {
@@ -97,10 +113,15 @@ namespace System.CommandLine.Rendering.Views
 
             public ColumnDefinition ColumnDefinition { get; }
 
-            public TableViewColumn(Func<TItem, T> cellValue, View header, ColumnDefinition columnDefinition)
+            public TableViewColumn(
+                Func<TItem, T> cellValue,
+                View header,
+                ColumnDefinition columnDefinition
+            )
             {
                 Header = header;
-                ColumnDefinition = columnDefinition ?? throw new ArgumentNullException(nameof(columnDefinition));
+                ColumnDefinition =
+                    columnDefinition ?? throw new ArgumentNullException(nameof(columnDefinition));
                 _cellValue = cellValue ?? throw new ArgumentNullException(nameof(cellValue));
             }
 

@@ -17,7 +17,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Type type = typeof(ComUnregisterFunctionAttributeTests);
             MethodInfo method = type.GetTypeInfo().DeclaredMethods.Single(m => m.Name == "Func");
-            ComUnregisterFunctionAttribute attribute = Assert.Single(method.GetCustomAttributes<ComUnregisterFunctionAttribute>(inherit: false));
+            ComUnregisterFunctionAttribute attribute = Assert.Single(
+                method.GetCustomAttributes<ComUnregisterFunctionAttribute>(inherit: false)
+            );
             Assert.NotNull(attribute);
         }
     }

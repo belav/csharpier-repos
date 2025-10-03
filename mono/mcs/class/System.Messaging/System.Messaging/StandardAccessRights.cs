@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,22 +29,22 @@
 //
 using System;
 
-namespace System.Messaging 
+namespace System.Messaging
 {
-	[Flags]
-	[Serializable]
-	public enum StandardAccessRights 
-	{
-		All = 2031616,
-		Delete = 65536,
-		Execute = 131072,
-		ModifyOwner = 524288,
-		None = 0,
-		Read = 131072,
-		ReadSecurity = 131072,
-		Required = 851968,
-		Synchronize = 1048576,
-		Write = 131072,
-		WriteSecurity = 262144
-	}
+    [Flags]
+    [Serializable]
+    public enum StandardAccessRights
+    {
+        All = 2031616,
+        Delete = 65536,
+        Execute = 131072,
+        ModifyOwner = 524288,
+        None = 0,
+        Read = 131072,
+        ReadSecurity = 131072,
+        Required = 851968,
+        Synchronize = 1048576,
+        Write = 131072,
+        WriteSecurity = 262144,
+    }
 }

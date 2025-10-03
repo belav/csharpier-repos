@@ -21,7 +21,8 @@ public class SequenceEventData : EventData
     public SequenceEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        IReadOnlySequence sequence)
+        IReadOnlySequence sequence
+    )
         : base(eventDefinition, messageGenerator)
     {
         Sequence = sequence;

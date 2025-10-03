@@ -2,14 +2,12 @@
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <RuntimeIdentifier>wasi-wasm</RuntimeIdentifier>
-    
     <TargetOs>wasi</TargetOs>
     <WasmBuildNative>true</WasmBuildNative>
     <WasmNativeStrip>false</WasmNativeStrip>
     <IsBrowserWasmProject>false</IsBrowserWasmProject>
     <WasmSingleFileBundle>true</WasmSingleFileBundle>
   </PropertyGroup>
-
   <ItemGroup>
     <NativeFileReference Include="local.c" />
   </ItemGroup>

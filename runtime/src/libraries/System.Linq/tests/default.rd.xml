@@ -18,7 +18,6 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="MinBy_Generic_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
@@ -35,21 +34,18 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="Min_Generic_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
         </Method>
         <Method Name="Min_Generic_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32,System.Runtime" />
         </Method>
-
         <Method Name="Min_Generic_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
         </Method>
         <Method Name="Min_Generic_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32,System.Runtime" />
         </Method>
-
         <Method Name="Min_AllTypes" Dynamic="Required All">
           <GenericArgument Name="System.Byte,System.Runtime" />
         </Method>
@@ -90,7 +86,6 @@
           <GenericArgument Name="System.UIntPtr,System.Runtime" />
         </Method>
       </Type>
-
       <Type Name="System.Linq.Tests.MaxTests">
         <Method Name="MaxBy_Generic_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
@@ -108,7 +103,6 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="MaxBy_Generic_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
@@ -125,21 +119,18 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="Max_Generic_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
         </Method>
         <Method Name="Max_Generic_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32,System.Runtime" />
         </Method>
-
         <Method Name="Max_Generic_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Nullable`1[[System.Int32,System.Runtime]], System.Runtime" />
         </Method>
         <Method Name="Max_Generic_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32,System.Runtime" />
         </Method>
-
         <Method Name="Max_AllTypes" Dynamic="Required All">
           <GenericArgument Name="System.Byte,System.Runtime" />
         </Method>
@@ -180,12 +171,13 @@
           <GenericArgument Name="System.UIntPtr,System.Runtime" />
         </Method>
       </Type>
-
       <Type Name="System.Linq.Tests.CountTests">
-        <Method Name="NonEnumeratedCount_UnsupportedEnumerables_ShouldReturnFalse" Dynamic="Required All">
+        <Method
+          Name="NonEnumeratedCount_UnsupportedEnumerables_ShouldReturnFalse"
+          Dynamic="Required All"
+        >
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
-
         <Method Name="CountMatchesTally" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
@@ -198,11 +190,12 @@
         <Method Name="CountMatchesTally" Dynamic="Required All">
           <GenericArgument Name="System.Decimal, System.Runtime" />
         </Method>
-
-        <Method Name="NonEnumeratedCount_SupportedEnumerables_ShouldReturnExpectedCount" Dynamic="Required All">
+        <Method
+          Name="NonEnumeratedCount_SupportedEnumerables_ShouldReturnExpectedCount"
+          Dynamic="Required All"
+        >
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
-
         <Method Name="RunOnce" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
@@ -216,7 +209,6 @@
           <GenericArgument Name="System.Decimal, System.Runtime" />
         </Method>
       </Type>
-
       <Type Name="System.Linq.Tests.UnionTests">
         <Method Name="UnionBy_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -230,7 +222,6 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="UnionBy_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -244,7 +235,6 @@
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
       </Type>
-
       <Type Name="System.Linq.Tests.IntersectTests">
         <Method Name="IntersectBy_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -258,7 +248,6 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="IntersectBy_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -272,17 +261,14 @@
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
       </Type>
-
       <Type Name="System.Linq.Tests.ReverseTests">
         <Method Name="Reverse" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
-
         <Method Name="RunOnce" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
       </Type>
-
       <Type Name="System.Linq.Tests.DistinctTests">
         <Method Name="DistinctBy_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -300,7 +286,6 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="FindDistinctAndValidate" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
         </Method>
@@ -316,7 +301,6 @@
         <Method Name="FindDistinctAndValidate" Dynamic="Required All">
           <GenericArgument Name="System.Decimal, System.Runtime" />
         </Method>
-
         <Method Name="DistinctBy_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -334,7 +318,6 @@
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
       </Type>
-
       <Type Name="System.Linq.Tests.ExceptTests">
         <Method Name="ExceptBy_RunOnce_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -348,7 +331,6 @@
           <GenericArgument Name="System.ValueTuple`2[[System.String,System.Runtime],[System.Int32,System.Runtime]], System.Runtime" />
           <GenericArgument Name="System.String, System.Runtime" />
         </Method>
-
         <Method Name="ExceptBy_HasExpectedOutput" Dynamic="Required All">
           <GenericArgument Name="System.Int32, System.Runtime" />
           <GenericArgument Name="System.Int32, System.Runtime" />
@@ -363,7 +345,6 @@
         </Method>
       </Type>
     </Assembly>
-
     <Assembly Name="System.Linq">
       <Type Name="System.Linq.Enumerable">
         <Method Name="Select" Dynamic="Required All">
@@ -372,11 +353,12 @@
         </Method>
       </Type>
     </Assembly>
-
     <!-- xUnit does this -->
     <Assembly Name="System.Runtime">
-      <Type Name="System.IEquatable`1[[System.Linq.Tests.GroupJoinTests+JoinRec,System.Linq.Tests]]" Dynamic="Required All" />
+      <Type
+        Name="System.IEquatable`1[[System.Linq.Tests.GroupJoinTests+JoinRec,System.Linq.Tests]]"
+        Dynamic="Required All"
+      />
     </Assembly>
-
   </Application>
 </Directives>

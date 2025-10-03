@@ -8,8 +8,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class EmptyStatementSyntax
     {
-        public EmptyStatementSyntax Update(SyntaxToken semicolonToken)
-            => Update(AttributeLists, semicolonToken);
+        public EmptyStatementSyntax Update(SyntaxToken semicolonToken) =>
+            Update(AttributeLists, semicolonToken);
     }
 }
 
@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static EmptyStatementSyntax EmptyStatement(SyntaxToken semicolonToken)
-            => EmptyStatement(attributeLists: default, semicolonToken);
+        public static EmptyStatementSyntax EmptyStatement(SyntaxToken semicolonToken) =>
+            EmptyStatement(attributeLists: default, semicolonToken);
     }
 }

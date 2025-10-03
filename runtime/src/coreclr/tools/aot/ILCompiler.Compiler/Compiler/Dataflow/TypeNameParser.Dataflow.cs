@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-
 using Internal.TypeSystem;
 
 namespace System.Reflection
@@ -17,30 +16,40 @@ namespace System.Reflection
         private List<ModuleDesc> _referencedModules;
         private bool _typeWasNotFoundInAssemblyNorBaseLibrary;
 
-        public static TypeDesc ResolveType(string name, ModuleDesc callingModule,
-            TypeSystemContext context, List<ModuleDesc> referencedModules, out bool typeWasNotFoundInAssemblyNorBaseLibrary)
+        public static TypeDesc ResolveType(
+            string name,
+            ModuleDesc callingModule,
+            TypeSystemContext context,
+            List<ModuleDesc> referencedModules,
+            out bool typeWasNotFoundInAssemblyNorBaseLibrary
+        )
         {
             var parser = new TypeNameParser(name)
             {
                 _context = context,
                 _callingModule = callingModule,
-                _referencedModules = referencedModules
+                _referencedModules = referencedModules,
             };
 
             TypeDesc result = parser.Parse()?.Value;
 
-            typeWasNotFoundInAssemblyNorBaseLibrary = parser._typeWasNotFoundInAssemblyNorBaseLibrary;
+            typeWasNotFoundInAssemblyNorBaseLibrary =
+                parser._typeWasNotFoundInAssemblyNorBaseLibrary;
             return result;
         }
 
         private sealed class Type
         {
             public Type(TypeDesc type) => Value = type;
+
             public TypeDesc Value { get; }
 
             public Type MakeArrayType() => new Type(Value.MakeArrayType());
+
             public Type MakeArrayType(int rank) => new Type(Value.MakeArrayType(rank));
+
             public Type MakePointerType() => new Type(Value.MakePointerType());
+
             public Type MakeByRefType() => new Type(Value.MakeByRefType());
 
             public Type MakeGenericType(Type[] typeArguments)
@@ -54,14 +63,20 @@ namespace System.Reflection
 
         private static bool CheckTopLevelAssemblyQualifiedName() => true;
 
-        private Type GetType(string typeName, ReadOnlySpan<string> nestedTypeNames, string assemblyNameIfAny)
+        private Type GetType(
+            string typeName,
+            ReadOnlySpan<string> nestedTypeNames,
+            string assemblyNameIfAny
+        )
         {
             ModuleDesc module;
 
             if (assemblyNameIfAny != null)
             {
-                module = (TryParseAssemblyName(assemblyNameIfAny) is AssemblyName an) ?
-                    _context.ResolveAssembly(an, throwIfNotFound: false) : null;
+                module =
+                    (TryParseAssemblyName(assemblyNameIfAny) is AssemblyName an)
+                        ? _context.ResolveAssembly(an, throwIfNotFound: false)
+                        : null;
             }
             else
             {
@@ -110,7 +125,11 @@ namespace System.Reflection
             }
         }
 
-        private static Type GetTypeCore(ModuleDesc module, string typeName, ReadOnlySpan<string> nestedTypeNames)
+        private static Type GetTypeCore(
+            ModuleDesc module,
+            string typeName,
+            ReadOnlySpan<string> nestedTypeNames
+        )
         {
             (string typeNamespace, string name) = SplitFullTypeName(typeName);
 
@@ -128,8 +147,6 @@ namespace System.Reflection
             return new Type(type);
         }
 
-        private static void ParseError()
-        {
-        }
+        private static void ParseError() { }
     }
 }

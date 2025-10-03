@@ -12,12 +12,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
         // Pass in NullProvider since it's only used for testing project reference based CompletionProvider,
         // which F# does not need.
         internal FSharpCompletionServiceWithProviders(Workspace workspace)
-            : base(workspace.Services.SolutionServices, AsynchronousOperationListenerProvider.NullProvider)
-        {
-        }
+            : base(
+                workspace.Services.SolutionServices,
+                AsynchronousOperationListenerProvider.NullProvider
+            ) { }
 
-        internal sealed override CompletionRules GetRules(CompletionOptions options)
-            => GetRulesImpl();
+        internal sealed override CompletionRules GetRules(CompletionOptions options) =>
+            GetRulesImpl();
 
         internal abstract CompletionRules GetRulesImpl();
     }

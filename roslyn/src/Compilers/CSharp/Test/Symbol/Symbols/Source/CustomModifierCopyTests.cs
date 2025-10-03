@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestSingleInterfaceImplementation()
         {
-            var text = @"
+            var text =
+                @"
 class Class : CppCli.CppInterface1
 {
     //copy modifiers (even though dev10 doesn't)
@@ -62,7 +63,9 @@ class Class : CppCli.CppInterface1
             AssertNoParameterHasModOpts(classMethod2);
 
             // bridge method for implicit implementation has custom modifiers
-            var method2ExplicitImpl = @class.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Single();
+            var method2ExplicitImpl = @class
+                .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                .ForwardingMethods.Single();
             Assert.Same(classMethod2, method2ExplicitImpl.ImplementingMethod);
             AssertAllParametersHaveConstModOpt(method2ExplicitImpl);
         }
@@ -73,7 +76,8 @@ class Class : CppCli.CppInterface1
         [Fact]
         public void TestMultipleInterfaceImplementation()
         {
-            var text = @"
+            var text =
+                @"
 class Class : CppCli.CppInterface1, CppCli.CppInterface2
 {
     //copy modifiers (even though dev10 doesn't)
@@ -109,7 +113,9 @@ class Class : CppCli.CppInterface1, CppCli.CppInterface2
             AssertNoParameterHasModOpts(classMethod2);
 
             // bridge methods for implicit implementation have custom modifiers
-            var method2ExplicitImpls = @class.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods;
+            var method2ExplicitImpls = @class
+                .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                .ForwardingMethods;
             Assert.Equal(2, method2ExplicitImpls.Length);
             foreach (var explicitImpl in method2ExplicitImpls)
             {
@@ -127,7 +133,8 @@ class Class : CppCli.CppInterface1, CppCli.CppInterface2
         [Fact]
         public void TestSingleOverride()
         {
-            var text = @"
+            var text =
+                @"
 class Class : CppCli.CppBase1
 {
         //copies custom modifiers
@@ -156,7 +163,12 @@ class Class : CppCli.CppBase1
             AssertNoParameterHasModOpts(classNonVirtualMethod);
 
             // no bridge methods
-            Assert.Equal(0, @class.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Length);
+            Assert.Equal(
+                0,
+                @class
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods.Length
+            );
         }
 
         /// <summary>
@@ -167,7 +179,8 @@ class Class : CppCli.CppBase1
         [Fact]
         public void TestRepeatedOverride()
         {
-            var text = @"
+            var text =
+                @"
 class Base : CppCli.CppBase1
 {
         //copies custom modifiers
@@ -205,7 +218,12 @@ class Derived : Base
             AssertNoParameterHasModOpts(baseClassNonVirtualMethod);
 
             // no bridge methods
-            Assert.Equal(0, baseClass.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Length);
+            Assert.Equal(
+                0,
+                baseClass
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods.Length
+            );
 
             var derivedClass = global.GetMember<SourceNamedTypeSymbol>("Derived");
 
@@ -214,11 +232,18 @@ class Derived : Base
             AssertAllParametersHaveConstModOpt(derivedClassVirtualMethod);
 
             // new does not copy custom modifiers
-            var derivedClassNonVirtualMethod = derivedClass.GetMember<MethodSymbol>("NonVirtualMethod");
+            var derivedClassNonVirtualMethod = derivedClass.GetMember<MethodSymbol>(
+                "NonVirtualMethod"
+            );
             AssertNoParameterHasModOpts(derivedClassNonVirtualMethod);
 
             // no bridge methods
-            Assert.Equal(0, derivedClass.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Length);
+            Assert.Equal(
+                0,
+                derivedClass
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods.Length
+            );
         }
 
         /// <summary>
@@ -227,7 +252,8 @@ class Derived : Base
         [Fact]
         public void TestMethodOverrideCombinations()
         {
-            var text = @"
+            var text =
+                @"
 class Derived : MethodCustomModifierCombinations
 {
     public override int[] Method1111(int[] a) { return a; }
@@ -261,11 +287,14 @@ class Derived : MethodCustomModifierCombinations
             for (int i = 0; i < 0xf; i++)
             {
                 CheckMethodCustomModifiers(
-                    @class.GetMember<MethodSymbol>("Method" + Convert.ToString(i, 2).PadLeft(4, '0')),
+                    @class.GetMember<MethodSymbol>(
+                        "Method" + Convert.ToString(i, 2).PadLeft(4, '0')
+                    ),
                     inReturnType: (i & 0x8) != 0,
                     onReturnType: (i & 0x4) != 0,
                     inParameterType: (i & 0x2) != 0,
-                    onParameterType: (i & 0x1) != 0);
+                    onParameterType: (i & 0x1) != 0
+                );
             }
         }
 
@@ -275,7 +304,8 @@ class Derived : MethodCustomModifierCombinations
         [Fact]
         public void TestPropertyOverrideCombinations()
         {
-            var text = @"
+            var text =
+                @"
 class Derived : PropertyCustomModifierCombinations
 {
     public override int[] Property11 { get; set; }
@@ -296,7 +326,9 @@ class Derived : PropertyCustomModifierCombinations
 
             for (int i = 0; i < 0x4; i++)
             {
-                PropertySymbol property = @class.GetMember<PropertySymbol>("Property" + Convert.ToString(i, 2).PadLeft(2, '0'));
+                PropertySymbol property = @class.GetMember<PropertySymbol>(
+                    "Property" + Convert.ToString(i, 2).PadLeft(2, '0')
+                );
                 bool inType = (i & 0x2) != 0;
                 bool onType = (i & 0x1) != 0;
 
@@ -306,13 +338,15 @@ class Derived : PropertyCustomModifierCombinations
                     inReturnType: inType,
                     onReturnType: onType,
                     inParameterType: false,
-                    onParameterType: false);
+                    onParameterType: false
+                );
                 CheckMethodCustomModifiers(
                     property.SetMethod,
                     inReturnType: false,
                     onReturnType: false,
                     inParameterType: inType,
-                    onParameterType: onType);
+                    onParameterType: onType
+                );
             }
         }
 
@@ -324,17 +358,34 @@ class Derived : PropertyCustomModifierCombinations
         /// <param name="onReturnType">True if a custom modifier is expected on the return type.</param>
         /// <param name="inParameterType">True if a custom modifier is expected on the parameter type array element type.</param>
         /// <param name="onParameterType">True if a custom modifier is expected on the parameter type.</param>
-        private static void CheckMethodCustomModifiers(MethodSymbol method, bool inReturnType, bool onReturnType, bool inParameterType, bool onParameterType)
+        private static void CheckMethodCustomModifiers(
+            MethodSymbol method,
+            bool inReturnType,
+            bool onReturnType,
+            bool inParameterType,
+            bool onParameterType
+        )
         {
             if (!method.ReturnsVoid)
             {
-                CheckCustomModifier(inReturnType, ((ArrayTypeSymbol)method.ReturnType).ElementTypeWithAnnotations.CustomModifiers);
+                CheckCustomModifier(
+                    inReturnType,
+                    ((ArrayTypeSymbol)method.ReturnType).ElementTypeWithAnnotations.CustomModifiers
+                );
                 CheckCustomModifier(onReturnType, method.ReturnTypeWithAnnotations.CustomModifiers);
             }
             if (method.Parameters.Any())
             {
-                CheckCustomModifier(inParameterType, ((ArrayTypeSymbol)method.Parameters.Single().Type).ElementTypeWithAnnotations.CustomModifiers);
-                CheckCustomModifier(onParameterType, method.Parameters.Single().TypeWithAnnotations.CustomModifiers);
+                CheckCustomModifier(
+                    inParameterType,
+                    ((ArrayTypeSymbol)method.Parameters.Single().Type)
+                        .ElementTypeWithAnnotations
+                        .CustomModifiers
+                );
+                CheckCustomModifier(
+                    onParameterType,
+                    method.Parameters.Single().TypeWithAnnotations.CustomModifiers
+                );
             }
         }
 
@@ -344,9 +395,16 @@ class Derived : PropertyCustomModifierCombinations
         /// <param name="property">Must have array type.</param>
         /// <param name="inType">True if a custom modifier is expected on the return type array element type.</param>
         /// <param name="onType">True if a custom modifier is expected on the return type.</param>
-        private static void CheckPropertyCustomModifiers(PropertySymbol property, bool inType, bool onType)
+        private static void CheckPropertyCustomModifiers(
+            PropertySymbol property,
+            bool inType,
+            bool onType
+        )
         {
-            CheckCustomModifier(inType, ((ArrayTypeSymbol)property.Type).ElementTypeWithAnnotations.CustomModifiers);
+            CheckCustomModifier(
+                inType,
+                ((ArrayTypeSymbol)property.Type).ElementTypeWithAnnotations.CustomModifiers
+            );
             CheckCustomModifier(onType, property.TypeWithAnnotations.CustomModifiers);
         }
 
@@ -354,11 +412,17 @@ class Derived : PropertyCustomModifierCombinations
         /// True - assert that the list contains a single const modifier.
         /// False - assert that the list is empty.
         /// </summary>
-        private static void CheckCustomModifier(bool expectCustomModifier, ImmutableArray<CustomModifier> customModifiers)
+        private static void CheckCustomModifier(
+            bool expectCustomModifier,
+            ImmutableArray<CustomModifier> customModifiers
+        )
         {
             if (expectCustomModifier)
             {
-                Assert.Equal(ConstModOptType, customModifiers.Single().Modifier.ToTestDisplayString());
+                Assert.Equal(
+                    ConstModOptType,
+                    customModifiers.Single().Modifier.ToTestDisplayString()
+                );
             }
             else
             {
@@ -376,7 +440,8 @@ class Derived : PropertyCustomModifierCombinations
         [Fact]
         public void TestImplicitImplementationInBase()
         {
-            var text = @"
+            var text =
+                @"
 class Class1 : CppCli.CppBase2, CppCli.CppInterface1
 {
 }
@@ -401,17 +466,24 @@ class Class3 : CppCli.CppBase2, CppCli.CppInterface1
 
             comp.VerifyDiagnostics();
 
-            var baseClass = global.GetMember<NamespaceSymbol>("CppCli").GetMember<NamedTypeSymbol>("CppBase2");
+            var baseClass = global
+                .GetMember<NamespaceSymbol>("CppCli")
+                .GetMember<NamedTypeSymbol>("CppBase2");
 
             var class1 = global.GetMember<SourceNamedTypeSymbol>("Class1");
 
             //both implementations are from the base class
-            var class1SynthesizedExplicitImpls = class1.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods;
+            var class1SynthesizedExplicitImpls = class1
+                .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                .ForwardingMethods;
             Assert.Equal(1, class1SynthesizedExplicitImpls.Length); //Don't need a bridge method for the virtual base method.
             foreach (var explicitImpl in class1SynthesizedExplicitImpls)
             {
                 Assert.Same(baseClass, explicitImpl.ImplementingMethod.ContainingType);
-                AssertAllParametersHaveConstModOpt(explicitImpl, ignoreLast: explicitImpl.MethodKind == MethodKind.PropertySet);
+                AssertAllParametersHaveConstModOpt(
+                    explicitImpl,
+                    ignoreLast: explicitImpl.MethodKind == MethodKind.PropertySet
+                );
             }
 
             var class2 = global.GetMember<SourceNamedTypeSymbol>("Class2");
@@ -421,31 +493,56 @@ class Class3 : CppCli.CppBase2, CppCli.CppInterface1
             AssertAllParametersHaveConstModOpt(class2Method1);
 
             //Method2 is implemented in the base class
-            var class2Method2SynthesizedExplicitImpl = class2.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Single();
-            Assert.Equal("Method2", class2Method2SynthesizedExplicitImpl.ExplicitInterfaceImplementations.Single().Name);
-            Assert.Same(baseClass, class2Method2SynthesizedExplicitImpl.ImplementingMethod.ContainingType);
+            var class2Method2SynthesizedExplicitImpl = class2
+                .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                .ForwardingMethods.Single();
+            Assert.Equal(
+                "Method2",
+                class2Method2SynthesizedExplicitImpl.ExplicitInterfaceImplementations.Single().Name
+            );
+            Assert.Same(
+                baseClass,
+                class2Method2SynthesizedExplicitImpl.ImplementingMethod.ContainingType
+            );
             AssertAllParametersHaveConstModOpt(class2Method2SynthesizedExplicitImpl);
 
             var class3 = global.GetMember<SourceNamedTypeSymbol>("Class3");
 
             //Method1 is implemented in Class3, but a bridge is needed because custom modifiers are not copied
             var class3Method1 = class3.GetMember<MethodSymbol>("Method1");
-            Assert.False(class3Method1.Parameters.Single().TypeWithAnnotations.CustomModifiers.Any());
+            Assert.False(
+                class3Method1.Parameters.Single().TypeWithAnnotations.CustomModifiers.Any()
+            );
 
             // GetSynthesizedExplicitImplementations doesn't guarantee order, so sort to make the asserts easier to write.
 
-            var class3SynthesizedExplicitImpls = (from m in class3.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods orderby m.Name select m).ToArray();
+            var class3SynthesizedExplicitImpls = (
+                from m in class3
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods
+                orderby m.Name
+                select m
+            ).ToArray();
             Assert.Equal(2, class3SynthesizedExplicitImpls.Length);
 
             var class3Method1SynthesizedExplicitImpl = class3SynthesizedExplicitImpls[0];
-            Assert.Equal("Method1", class3Method1SynthesizedExplicitImpl.ExplicitInterfaceImplementations.Single().Name);
+            Assert.Equal(
+                "Method1",
+                class3Method1SynthesizedExplicitImpl.ExplicitInterfaceImplementations.Single().Name
+            );
             Assert.Same(class3Method1, class3Method1SynthesizedExplicitImpl.ImplementingMethod);
             AssertAllParametersHaveConstModOpt(class3Method1SynthesizedExplicitImpl);
 
             //Method2 is implemented in the base class
             var class3Method2SynthesizedExplicitImpl = class3SynthesizedExplicitImpls[1];
-            Assert.Equal("Method2", class3Method2SynthesizedExplicitImpl.ExplicitInterfaceImplementations.Single().Name);
-            Assert.Same(baseClass, class3Method2SynthesizedExplicitImpl.ImplementingMethod.ContainingType);
+            Assert.Equal(
+                "Method2",
+                class3Method2SynthesizedExplicitImpl.ExplicitInterfaceImplementations.Single().Name
+            );
+            Assert.Same(
+                baseClass,
+                class3Method2SynthesizedExplicitImpl.ImplementingMethod.ContainingType
+            );
             AssertAllParametersHaveConstModOpt(class3Method2SynthesizedExplicitImpl);
         }
 
@@ -455,7 +552,8 @@ class Class3 : CppCli.CppBase2, CppCli.CppInterface1
         [Fact]
         public void TestCopyMultipleCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Class : I2
 {
     //copy (both) modifiers (even though dev10 doesn't)
@@ -474,7 +572,9 @@ class Class : I2
 
             // explicit implementation copies custom modifiers
             var classMethod1 = @class.GetMethod("I2.M1");
-            var classMethod1CustomModifiers = classMethod1.Parameters.Single().TypeWithAnnotations.CustomModifiers;
+            var classMethod1CustomModifiers = classMethod1
+                .Parameters.Single()
+                .TypeWithAnnotations.CustomModifiers;
             Assert.Equal(2, classMethod1CustomModifiers.Length);
             foreach (var customModifier in classMethod1CustomModifiers)
             {
@@ -482,7 +582,11 @@ class Class : I2
             }
 
             //no bridge methods
-            Assert.False(@class.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Any());
+            Assert.False(
+                @class
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods.Any()
+            );
         }
 
         /// <summary>
@@ -492,7 +596,8 @@ class Class : I2
         [Fact]
         public void TestParamsKeyword()
         {
-            var text = @"
+            var text =
+                @"
 public class Base
 {
     public virtual void M(params int[] a) { }
@@ -532,9 +637,18 @@ public class Derived2 : Derived
             Assert.True(baseM.Parameters.Single().IsParams, "Base.M.IsParams should be true");
             Assert.False(baseN.Parameters.Single().IsParams, "Base.N.IsParams should be false");
             Assert.True(derivedM.Parameters.Single().IsParams, "Derived.M.IsParams should be true"); //NB: does not reflect source
-            Assert.False(derivedN.Parameters.Single().IsParams, "Derived.N.IsParams should be false"); //NB: does not reflect source
-            Assert.True(derived2M.Parameters.Single().IsParams, "Derived2.M.IsParams should be true");
-            Assert.False(derived2N.Parameters.Single().IsParams, "Derived2.N.IsParams should be false");
+            Assert.False(
+                derivedN.Parameters.Single().IsParams,
+                "Derived.N.IsParams should be false"
+            ); //NB: does not reflect source
+            Assert.True(
+                derived2M.Parameters.Single().IsParams,
+                "Derived2.M.IsParams should be true"
+            );
+            Assert.False(
+                derived2N.Parameters.Single().IsParams,
+                "Derived2.N.IsParams should be false"
+            );
         }
 
         /// <summary>
@@ -543,7 +657,8 @@ public class Derived2 : Derived
         [Fact]
         public void TestIndexerExplicitInterfaceImplementation()
         {
-            var text = @"
+            var text =
+                @"
 class Explicit : CppCli.CppIndexerInterface
 {
     int CppCli.CppIndexerInterface.this[int x]
@@ -564,10 +679,16 @@ class Explicit : CppCli.CppIndexerInterface
             var @class = global.GetMember<SourceNamedTypeSymbol>("Explicit");
 
             // explicit implementation copies custom modifiers
-            var classIndexer = (PropertySymbol)@class.GetMembers().Where(s => s.Kind == SymbolKind.Property).Single();
+            var classIndexer = (PropertySymbol)
+                @class.GetMembers().Where(s => s.Kind == SymbolKind.Property).Single();
             AssertAllParametersHaveConstModOpt(classIndexer);
 
-            Assert.Equal(0, @class.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Length);
+            Assert.Equal(
+                0,
+                @class
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods.Length
+            );
         }
 
         /// <summary>
@@ -576,7 +697,8 @@ class Explicit : CppCli.CppIndexerInterface
         [Fact]
         public void TestIndexerImplicitInterfaceImplementation()
         {
-            var text = @"
+            var text =
+                @"
 class Implicit : CppCli.CppIndexerInterface
 {
     public int this[int x]
@@ -597,17 +719,24 @@ class Implicit : CppCli.CppIndexerInterface
             var @class = global.GetMember<SourceNamedTypeSymbol>("Implicit");
 
             // implicit implementation does not copy custom modifiers
-            var classIndexer = (PropertySymbol)@class.GetMembers().Where(s => s.Kind == SymbolKind.Property).Single();
+            var classIndexer = (PropertySymbol)
+                @class.GetMembers().Where(s => s.Kind == SymbolKind.Property).Single();
             AssertNoParameterHasModOpts(classIndexer);
 
             // bridge methods for implicit implementations have custom modifiers
-            var explicitImpls = @class.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods;
+            var explicitImpls = @class
+                .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                .ForwardingMethods;
             Assert.Equal(2, explicitImpls.Length);
 
-            var explicitGetterImpl = explicitImpls.Where(impl => impl.ImplementingMethod.MethodKind == MethodKind.PropertyGet).Single();
+            var explicitGetterImpl = explicitImpls
+                .Where(impl => impl.ImplementingMethod.MethodKind == MethodKind.PropertyGet)
+                .Single();
             AssertAllParametersHaveConstModOpt(explicitGetterImpl);
 
-            var explicitSetterImpl = explicitImpls.Where(impl => impl.ImplementingMethod.MethodKind == MethodKind.PropertySet).Single();
+            var explicitSetterImpl = explicitImpls
+                .Where(impl => impl.ImplementingMethod.MethodKind == MethodKind.PropertySet)
+                .Single();
             AssertAllParametersHaveConstModOpt(explicitSetterImpl, ignoreLast: true);
         }
 
@@ -617,7 +746,8 @@ class Implicit : CppCli.CppIndexerInterface
         [Fact]
         public void TestOverrideIndexer()
         {
-            var text = @"
+            var text =
+                @"
 class Override : CppCli.CppIndexerBase
 {
     public override int this[int x]
@@ -638,10 +768,16 @@ class Override : CppCli.CppIndexerBase
             var @class = global.GetMember<SourceNamedTypeSymbol>("Override");
 
             // implicit implementation does not copy custom modifiers
-            var classIndexer = (PropertySymbol)@class.GetMembers().Where(s => s.Kind == SymbolKind.Property).Single();
+            var classIndexer = (PropertySymbol)
+                @class.GetMembers().Where(s => s.Kind == SymbolKind.Property).Single();
             AssertAllParametersHaveConstModOpt(classIndexer);
 
-            Assert.Equal(0, @class.GetSynthesizedExplicitImplementations(CancellationToken.None).ForwardingMethods.Length);
+            Assert.Equal(
+                0,
+                @class
+                    .GetSynthesizedExplicitImplementations(CancellationToken.None)
+                    .ForwardingMethods.Length
+            );
         }
 
         /// <summary>
@@ -651,7 +787,8 @@ class Override : CppCli.CppIndexerBase
         [Fact]
         public void TestParamsKeywordOnIndexer()
         {
-            var text = @"
+            var text =
+                @"
 public class Base
 {
     public virtual char this[params int[] a] { set { } }
@@ -677,23 +814,77 @@ public class Derived2 : Derived
             var global = comp.GlobalNamespace;
 
             var baseClass = global.GetMember<NamedTypeSymbol>("Base");
-            var baseIndexer1 = (PropertySymbol)baseClass.GetMembers().Where(IsPropertyWithSingleParameter(SpecialType.System_Int32, isArrayType: true)).Single();
-            var baseIndexer2 = (PropertySymbol)baseClass.GetMembers().Where(IsPropertyWithSingleParameter(SpecialType.System_Int64, isArrayType: true)).Single();
+            var baseIndexer1 = (PropertySymbol)
+                baseClass
+                    .GetMembers()
+                    .Where(
+                        IsPropertyWithSingleParameter(SpecialType.System_Int32, isArrayType: true)
+                    )
+                    .Single();
+            var baseIndexer2 = (PropertySymbol)
+                baseClass
+                    .GetMembers()
+                    .Where(
+                        IsPropertyWithSingleParameter(SpecialType.System_Int64, isArrayType: true)
+                    )
+                    .Single();
 
             var derivedClass = global.GetMember<NamedTypeSymbol>("Derived");
-            var derivedIndexer1 = (PropertySymbol)derivedClass.GetMembers().Where(IsPropertyWithSingleParameter(SpecialType.System_Int32, isArrayType: true)).Single();
-            var derivedIndexer2 = (PropertySymbol)derivedClass.GetMembers().Where(IsPropertyWithSingleParameter(SpecialType.System_Int64, isArrayType: true)).Single();
+            var derivedIndexer1 = (PropertySymbol)
+                derivedClass
+                    .GetMembers()
+                    .Where(
+                        IsPropertyWithSingleParameter(SpecialType.System_Int32, isArrayType: true)
+                    )
+                    .Single();
+            var derivedIndexer2 = (PropertySymbol)
+                derivedClass
+                    .GetMembers()
+                    .Where(
+                        IsPropertyWithSingleParameter(SpecialType.System_Int64, isArrayType: true)
+                    )
+                    .Single();
 
             var derived2Class = global.GetMember<NamedTypeSymbol>("Derived2");
-            var derived2Indexer1 = (PropertySymbol)derived2Class.GetMembers().Where(IsPropertyWithSingleParameter(SpecialType.System_Int32, isArrayType: true)).Single();
-            var derived2Indexer2 = (PropertySymbol)derived2Class.GetMembers().Where(IsPropertyWithSingleParameter(SpecialType.System_Int64, isArrayType: true)).Single();
+            var derived2Indexer1 = (PropertySymbol)
+                derived2Class
+                    .GetMembers()
+                    .Where(
+                        IsPropertyWithSingleParameter(SpecialType.System_Int32, isArrayType: true)
+                    )
+                    .Single();
+            var derived2Indexer2 = (PropertySymbol)
+                derived2Class
+                    .GetMembers()
+                    .Where(
+                        IsPropertyWithSingleParameter(SpecialType.System_Int64, isArrayType: true)
+                    )
+                    .Single();
 
-            Assert.True(baseIndexer1.Parameters.Single().IsParams, "Base.Indexer1.IsParams should be true");
-            Assert.False(baseIndexer2.Parameters.Single().IsParams, "Base.Indexer2.IsParams should be false");
-            Assert.True(derivedIndexer1.Parameters.Single().IsParams, "Derived.Indexer1.IsParams should be true"); //Indexer2B: does not reflect source
-            Assert.False(derivedIndexer2.Parameters.Single().IsParams, "Derived.Indexer2.IsParams should be false"); //Indexer2B: does not reflect source
-            Assert.True(derived2Indexer1.Parameters.Single().IsParams, "Derived2.Indexer1.IsParams should be true");
-            Assert.False(derived2Indexer2.Parameters.Single().IsParams, "Derived2.Indexer2.IsParams should be false");
+            Assert.True(
+                baseIndexer1.Parameters.Single().IsParams,
+                "Base.Indexer1.IsParams should be true"
+            );
+            Assert.False(
+                baseIndexer2.Parameters.Single().IsParams,
+                "Base.Indexer2.IsParams should be false"
+            );
+            Assert.True(
+                derivedIndexer1.Parameters.Single().IsParams,
+                "Derived.Indexer1.IsParams should be true"
+            ); //Indexer2B: does not reflect source
+            Assert.False(
+                derivedIndexer2.Parameters.Single().IsParams,
+                "Derived.Indexer2.IsParams should be false"
+            ); //Indexer2B: does not reflect source
+            Assert.True(
+                derived2Indexer1.Parameters.Single().IsParams,
+                "Derived2.Indexer1.IsParams should be true"
+            );
+            Assert.False(
+                derived2Indexer2.Parameters.Single().IsParams,
+                "Derived2.Indexer2.IsParams should be false"
+            );
         }
 
         [ConditionalFact(typeof(ClrOnly), typeof(DesktopOnly))]
@@ -701,7 +892,8 @@ public class Derived2 : Derived
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void Repro819774()
         {
-            var il = @"
+            var il =
+                @"
 .class interface public abstract auto ansi IBug813305
 {
   .method public hidebysig newslot abstract virtual 
@@ -711,7 +903,8 @@ public class Derived2 : Derived
 } // end of class IBug813305
 ";
 
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
  
 class Bug813305 : IBug813305
@@ -734,25 +927,34 @@ class Test
     }
 }
 ";
-            var comp = CreateCompilationWithILAndMscorlib40(source, il,
-                options: TestOptions.ReleaseExe.WithMetadataImportOptions(MetadataImportOptions.All),
+            var comp = CreateCompilationWithILAndMscorlib40(
+                source,
+                il,
+                options: TestOptions.ReleaseExe.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
                 targetFramework: TargetFramework.Standard,
-                references: new[] { CSharpRef });
+                references: new[] { CSharpRef }
+            );
 
-            CompileAndVerify(comp, expectedOutput: "Bug813305.M",
+            CompileAndVerify(
+                comp,
+                expectedOutput: "Bug813305.M",
                 symbolValidator: m =>
                 {
                     var Bug813305 = m.GlobalNamespace.GetTypeMember("Bug813305");
                     var method = Bug813305.GetMethod("IBug813305.M");
                     Assert.Equal("Bug813305.IBug813305.M(dynamic)", method.ToDisplayString());
-                });
+                }
+            );
         }
 
         [Fact]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void ObjectToDynamic_ImplementationParameter()
         {
-            var il = @"
+            var il =
+                @"
 .class interface public abstract auto ansi I
 {
   .method public hidebysig newslot abstract virtual 
@@ -762,30 +964,47 @@ class Test
 }
 ";
 
-            var source = @"
+            var source =
+                @"
 class C : I
 {
     void I.M(dynamic x) { }
 }
 ";
-            var comp = CreateCompilationWithILAndMscorlib40(source, il, targetFramework: TargetFramework.Standard);
+            var comp = CreateCompilationWithILAndMscorlib40(
+                source,
+                il,
+                targetFramework: TargetFramework.Standard
+            );
             comp.VerifyDiagnostics();
 
             var global = comp.GlobalNamespace;
-            var interfaceMethod = global.GetMember<NamedTypeSymbol>("I").GetMember<MethodSymbol>("M");
+            var interfaceMethod = global
+                .GetMember<NamedTypeSymbol>("I")
+                .GetMember<MethodSymbol>("M");
             var classMethod = global.GetMember<NamedTypeSymbol>("C").GetMethod("I.M");
 
-            Assert.Equal(SpecialType.System_Object, interfaceMethod.ParameterTypesWithAnnotations.Single().SpecialType);
-            Assert.Equal(TypeKind.Dynamic, classMethod.ParameterTypesWithAnnotations.Single().Type.TypeKind);
+            Assert.Equal(
+                SpecialType.System_Object,
+                interfaceMethod.ParameterTypesWithAnnotations.Single().SpecialType
+            );
+            Assert.Equal(
+                TypeKind.Dynamic,
+                classMethod.ParameterTypesWithAnnotations.Single().Type.TypeKind
+            );
 
-            Assert.Equal("void C.I.M(dynamic modopt(System.Runtime.CompilerServices.IsLong) x)", classMethod.ToTestDisplayString());
+            Assert.Equal(
+                "void C.I.M(dynamic modopt(System.Runtime.CompilerServices.IsLong) x)",
+                classMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void DynamicToObject_ImplementationParameter()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 
@@ -805,7 +1024,8 @@ class C : I
 }
 ";
 
-            var source = @"
+            var source =
+                @"
 class C : I
 {
     void I.M(object x) { }
@@ -819,16 +1039,26 @@ class C : I
             var interfaceMethod = global.GetMember<MethodSymbol>("I.M");
             var classMethod = global.GetMember<NamedTypeSymbol>("C").GetMethod("I.M");
 
-            Assert.Equal(TypeKind.Dynamic, interfaceMethod.ParameterTypesWithAnnotations.Single().Type.TypeKind);
-            Assert.Equal(SpecialType.System_Object, classMethod.ParameterTypesWithAnnotations.Single().SpecialType);
+            Assert.Equal(
+                TypeKind.Dynamic,
+                interfaceMethod.ParameterTypesWithAnnotations.Single().Type.TypeKind
+            );
+            Assert.Equal(
+                SpecialType.System_Object,
+                classMethod.ParameterTypesWithAnnotations.Single().SpecialType
+            );
 
-            Assert.Equal("void C.I.M(System.Object modopt(System.Runtime.CompilerServices.IsLong) x)", classMethod.ToTestDisplayString());
+            Assert.Equal(
+                "void C.I.M(System.Object modopt(System.Runtime.CompilerServices.IsLong) x)",
+                classMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void TupleWithCustomModifiersInInterfaceMethod()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 .assembly extern System.ValueTuple { .publickeytoken = (CC 7B 13 FF CD 2D DD 51 ) .ver 4:0:1:0 }
@@ -849,104 +1079,213 @@ class C : I
 } // end of class I
 ";
 
-            var source1 = @"
+            var source1 =
+                @"
 class C : I
 {
     (object a, object b) I.M((object c, object d) x) { return x; }
 }
 ";
             var ilRef = CompileIL(il, prependDefaultHeader: false);
-            var comp1 = CreateEmptyCompilation(source1, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp1 = CreateEmptyCompilation(
+                source1,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp1.VerifyDiagnostics();
 
             var interfaceMethod1 = comp1.GlobalNamespace.GetMember<MethodSymbol>("I.M");
-            var classMethod1 = comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMethod("I.M");
+            var classMethod1 = comp1
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMethod("I.M");
 
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> " +
-                "I.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
-                interfaceMethod1.ToTestDisplayString());
-            AssertEx.Equal("(object a, object b) I.M((object c, object d) x)",
-                interfaceMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)interfaceMethod1.ReturnType).TupleUnderlyingType.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)interfaceMethod1.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> "
+                    + "I.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
+                interfaceMethod1.ToTestDisplayString()
+            );
+            AssertEx.Equal(
+                "(object a, object b) I.M((object c, object d) x)",
+                interfaceMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)interfaceMethod1.ReturnType
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)interfaceMethod1.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> " +
-                "C.I.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
-                classMethod1.ToTestDisplayString());
-            AssertEx.Equal("(object a, object b) C.M((object c, object d) x)",
-                classMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod1.ReturnType).TupleUnderlyingType.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod1.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> "
+                    + "C.I.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
+                classMethod1.ToTestDisplayString()
+            );
+            AssertEx.Equal(
+                "(object a, object b) C.M((object c, object d) x)",
+                classMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classMethod1.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)classMethod1.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var source2 = @"
+            var source2 =
+                @"
 class C : I
 {
     (object a, object b) I.M((object, object) x) { return x; }
 }
 ";
-            var comp2 = CreateEmptyCompilation(source2, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp2 = CreateEmptyCompilation(
+                source2,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp2.VerifyDiagnostics(
                 // (4,28): error CS8141: The tuple element names in the signature of method 'C.I.M((object, object))' must match the tuple element names of interface method 'I.M((object c, object d))' (including on the return type).
                 //     (object a, object b) I.M((object, object) x) { return x; }
-                Diagnostic(ErrorCode.ERR_ImplBadTupleNames, "M").WithArguments("C.I.M((object, object))", "I.M((object c, object d))").WithLocation(4, 28)
-                );
+                Diagnostic(ErrorCode.ERR_ImplBadTupleNames, "M")
+                    .WithArguments("C.I.M((object, object))", "I.M((object c, object d))")
+                    .WithLocation(4, 28)
+            );
 
-            var classMethod2 = comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMethod("I.M");
+            var classMethod2 = comp2
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMethod("I.M");
 
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> " +
-                "C.I.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
-                classMethod2.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                 ((NamedTypeSymbol)classMethod2.ReturnType).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> "
+                    + "C.I.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
+                classMethod2.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classMethod2.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)classMethod2.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)classMethod2.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var source3 = @"
+            var source3 =
+                @"
 class C : I
 {
     (object, object) I.M((object c, object d) x) { return x; }
 }
 ";
-            var comp3 = CreateEmptyCompilation(source3, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp3 = CreateEmptyCompilation(
+                source3,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp3.VerifyDiagnostics(
                 // (4,24): error CS8141: The tuple element names in the signature of method 'C.I.M((object c, object d))' must match the tuple element names of interface method 'I.M((object c, object d))' (including on the return type).
                 //     (object, object) I.M((object c, object d) x) { return x; }
-                Diagnostic(ErrorCode.ERR_ImplBadTupleNames, "M").WithArguments("C.I.M((object c, object d))", "I.M((object c, object d))").WithLocation(4, 24)
-                );
+                Diagnostic(ErrorCode.ERR_ImplBadTupleNames, "M")
+                    .WithArguments("C.I.M((object c, object d))", "I.M((object c, object d))")
+                    .WithLocation(4, 24)
+            );
 
-            var classMethod3 = comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMethod("I.M");
+            var classMethod3 = comp3
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMethod("I.M");
 
-            AssertEx.Equal("(object, object) C.M((object c, object d) x)", classMethod3.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod3.ReturnType).TupleUnderlyingType.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod3.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "(object, object) C.M((object c, object d) x)",
+                classMethod3.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classMethod3.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)classMethod3.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var source4 = @"
+            var source4 =
+                @"
 class C : I
 {
     public (object a, object b) M((object c, object d) x) { return x; }
 }
 ";
-            var comp4 = CreateEmptyCompilation(source4, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp4 = CreateEmptyCompilation(
+                source4,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp4.VerifyDiagnostics();
 
             var classMethod4 = comp4.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMethod("M");
 
-            AssertEx.Equal("(object a, object b) C.M((object c, object d) x)", classMethod4.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("(System.Object, System.Object)", ((NamedTypeSymbol)classMethod4.ReturnType).TupleUnderlyingType.ToTestDisplayString()); // modopts not copied
-            Assert.Equal("(System.Object, System.Object)", ((NamedTypeSymbol)classMethod4.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString()); // modopts not copied
+            AssertEx.Equal(
+                "(object a, object b) C.M((object c, object d) x)",
+                classMethod4.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "(System.Object, System.Object)",
+                ((NamedTypeSymbol)classMethod4.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            ); // modopts not copied
+            Assert.Equal(
+                "(System.Object, System.Object)",
+                (
+                    (NamedTypeSymbol)classMethod4.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            ); // modopts not copied
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void TupleWithCustomModifiersInInterfaceProperty()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 .assembly extern System.ValueTuple { .publickeytoken = (CC 7B 13 FF CD 2D DD 51 ) .ver 4:0:1:0 }
@@ -979,58 +1318,126 @@ class C : I
 } // end of class I
 ";
 
-            var source1 = @"
+            var source1 =
+                @"
 class C : I
 {
     (object a, object b) I.P { get; set; }
 }
 ";
             var ilRef = CompileIL(il, prependDefaultHeader: false);
-            var comp1 = CreateEmptyCompilation(source1, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp1 = CreateEmptyCompilation(
+                source1,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp1.VerifyDiagnostics();
 
             var interfaceProperty1 = comp1.GlobalNamespace.GetMember<PropertySymbol>("I.P");
-            var classProperty1 = comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetProperty("I.P");
+            var classProperty1 = comp1
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetProperty("I.P");
 
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> I.P { get; set; }",
-                interfaceProperty1.ToTestDisplayString());
-            AssertEx.Equal("(object a, object b) I.P", interfaceProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)interfaceProperty1.Type).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> I.P { get; set; }",
+                interfaceProperty1.ToTestDisplayString()
+            );
+            AssertEx.Equal(
+                "(object a, object b) I.P",
+                interfaceProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)interfaceProperty1.Type).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> C.I.P { get; set; }",
-                classProperty1.ToTestDisplayString());
-            AssertEx.Equal("(object a, object b) C.P", classProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classProperty1.Type).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> C.I.P { get; set; }",
+                classProperty1.ToTestDisplayString()
+            );
+            AssertEx.Equal(
+                "(object a, object b) C.P",
+                classProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classProperty1.Type).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var source2 = @"
+            var source2 =
+                @"
 class C : I
 {
     (object, object) I.P { get; set; }
 }
 ";
-            var comp2 = CreateEmptyCompilation(source2, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp2 = CreateEmptyCompilation(
+                source2,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp2.VerifyDiagnostics();
 
-            var classProperty2 = comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetProperty("I.P");
+            var classProperty2 = comp2
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetProperty("I.P");
 
-            Assert.Equal("(System.Object, System.Object) C.I.P { get; set; }", classProperty2.ToTestDisplayString());
-            Assert.Equal("(System.Object, System.Object)", ((NamedTypeSymbol)classProperty2.Type).TupleUnderlyingType.ToTestDisplayString());
+            Assert.Equal(
+                "(System.Object, System.Object) C.I.P { get; set; }",
+                classProperty2.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "(System.Object, System.Object)",
+                ((NamedTypeSymbol)classProperty2.Type).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var source3 = @"
+            var source3 =
+                @"
 class C : I
 {
     public (object a, object b) P { get; set; }
 }
 ";
-            var comp3 = CreateEmptyCompilation(source3, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp3 = CreateEmptyCompilation(
+                source3,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp3.VerifyDiagnostics();
 
-            var classProperty3 = comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetProperty("P");
+            var classProperty3 = comp3
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetProperty("P");
 
-            Assert.Equal("(System.Object a, System.Object b) C.P { get; set; }", classProperty3.ToTestDisplayString());
-            Assert.Equal("(System.Object, System.Object)", ((NamedTypeSymbol)classProperty3.Type).TupleUnderlyingType.ToTestDisplayString());
+            Assert.Equal(
+                "(System.Object a, System.Object b) C.P { get; set; }",
+                classProperty3.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "(System.Object, System.Object)",
+                ((NamedTypeSymbol)classProperty3.Type).TupleUnderlyingType.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
@@ -1043,7 +1450,8 @@ class C : I
             //    public virtual (object a, object b) M((object c, object d) x) { return x; }
             //}
 
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 .assembly extern System.ValueTuple { .publickeytoken = (CC 7B 13 FF CD 2D DD 51 ) .ver 4:0:1:0 }
@@ -1125,7 +1533,8 @@ class C : I
 } // end of class Base
 ";
 
-            var source1 = @"
+            var source1 =
+                @"
 class C : Base
 {
     public override (object a, object b) P { get; set; }
@@ -1133,96 +1542,192 @@ class C : Base
 }
 ";
             var ilRef = CompileIL(il, prependDefaultHeader: false);
-            var comp1 = CreateEmptyCompilation(source1, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp1 = CreateEmptyCompilation(
+                source1,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp1.VerifyDiagnostics();
 
             var baseMethod1 = comp1.GlobalNamespace.GetMember<MethodSymbol>("Base.M");
 
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> " +
-                "Base.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
-                baseMethod1.ToTestDisplayString());
-            AssertEx.Equal("(object a, object b) Base.M((object c, object d) x)",
-                baseMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)baseMethod1.ReturnType).TupleUnderlyingType.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)baseMethod1.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> "
+                    + "Base.M(System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)> x)",
+                baseMethod1.ToTestDisplayString()
+            );
+            AssertEx.Equal(
+                "(object a, object b) Base.M((object c, object d) x)",
+                baseMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)baseMethod1.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)baseMethod1.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
 
             var baseProperty1 = comp1.GlobalNamespace.GetMember<PropertySymbol>("Base.P");
 
-            Assert.Equal("(object a, object b) Base.P", baseProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)baseProperty1.Type).TupleUnderlyingType.ToTestDisplayString());
+            Assert.Equal(
+                "(object a, object b) Base.P",
+                baseProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)baseProperty1.Type).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var classProperty1 = comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetProperty("P");
+            var classProperty1 = comp1
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetProperty("P");
             var classMethod1 = comp1.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMethod("M");
 
-            Assert.Equal("(object a, object b) C.P", classProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)classProperty1.Type).TupleUnderlyingType.ToTestDisplayString());
+            Assert.Equal(
+                "(object a, object b) C.P",
+                classProperty1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classProperty1.Type).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            AssertEx.Equal("(object a, object b) C.M((object c, object d) y)", classMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)classMethod1.ReturnType).TupleUnderlyingType.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                ((NamedTypeSymbol)classMethod1.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "(object a, object b) C.M((object c, object d) y)",
+                classMethod1.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classMethod1.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)classMethod1.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var source2 = @"
+            var source2 =
+                @"
 class C : Base
 {
     public override (object, object) P { get; set; }
     public override (object, object) M((object c, object d) y) { return y; }
 }
 ";
-            var comp2 = CreateEmptyCompilation(source2, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp2 = CreateEmptyCompilation(
+                source2,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp2.VerifyDiagnostics(
                 // (5,38): error CS8139: 'C.M((object c, object d))': cannot change tuple element names when overriding inherited member 'Base.M((object c, object d))'
                 //     public override (object, object) M((object c, object d) y) { return y; }
-                Diagnostic(ErrorCode.ERR_CantChangeTupleNamesOnOverride, "M").WithArguments("C.M((object c, object d))", "Base.M((object c, object d))").WithLocation(5, 38)
-                );
+                Diagnostic(ErrorCode.ERR_CantChangeTupleNamesOnOverride, "M")
+                    .WithArguments("C.M((object c, object d))", "Base.M((object c, object d))")
+                    .WithLocation(5, 38)
+            );
 
-            var classProperty2 = comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetProperty("P");
+            var classProperty2 = comp2
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetProperty("P");
             var classMethod2 = comp2.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMethod("M");
 
-            Assert.Equal("(System.Object, System.Object) C.P { get; set; }", classProperty2.ToTestDisplayString());
+            Assert.Equal(
+                "(System.Object, System.Object) C.P { get; set; }",
+                classProperty2.ToTestDisplayString()
+            );
 
-            Assert.Equal("(System.Object, System.Object)",
-                    ((NamedTypeSymbol)classProperty2.Type).TupleUnderlyingType.ToTestDisplayString());
+            Assert.Equal(
+                "(System.Object, System.Object)",
+                ((NamedTypeSymbol)classProperty2.Type).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            AssertEx.Equal("(object, object) C.M((object c, object d) y)", classMethod2.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod2.ReturnType).TupleUnderlyingType.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod2.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "(object, object) C.M((object c, object d) y)",
+                classMethod2.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classMethod2.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)classMethod2.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
 
-            var source3 = @"
+            var source3 =
+                @"
 class C : Base
 {
     public override (object a, object b) P { get; set; }
     public override (object a, object b) M((object, object) y) { return y; }
 }
 ";
-            var comp3 = CreateEmptyCompilation(source3, new[] { MscorlibRef, SystemCoreRef, ilRef, ValueTupleRef, SystemRuntimeFacadeRef, CSharpRef });
+            var comp3 = CreateEmptyCompilation(
+                source3,
+                new[]
+                {
+                    MscorlibRef,
+                    SystemCoreRef,
+                    ilRef,
+                    ValueTupleRef,
+                    SystemRuntimeFacadeRef,
+                    CSharpRef,
+                }
+            );
             comp3.VerifyDiagnostics(
                 // (5,42): error CS8139: 'C.M((object, object))': cannot change tuple element names when overriding inherited member 'Base.M((object c, object d))'
                 //     public override (object a, object b) M((object, object) y) { return y; }
-                Diagnostic(ErrorCode.ERR_CantChangeTupleNamesOnOverride, "M").WithArguments("C.M((object, object))", "Base.M((object c, object d))").WithLocation(5, 42)
-                );
+                Diagnostic(ErrorCode.ERR_CantChangeTupleNamesOnOverride, "M")
+                    .WithArguments("C.M((object, object))", "Base.M((object c, object d))")
+                    .WithLocation(5, 42)
+            );
 
             var classMethod3 = comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMethod("M");
 
-            AssertEx.Equal("(object a, object b) C.M((object, object) y)", classMethod3.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat));
-            AssertEx.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod3.ReturnType).TupleUnderlyingType.ToTestDisplayString());
-            Assert.Equal("System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
-                    ((NamedTypeSymbol)classMethod3.GetParameterType(0)).TupleUnderlyingType.ToTestDisplayString());
+            AssertEx.Equal(
+                "(object a, object b) C.M((object, object) y)",
+                classMethod3.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+            );
+            AssertEx.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                ((NamedTypeSymbol)classMethod3.ReturnType).TupleUnderlyingType.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "System.ValueTuple<System.Object modopt(System.Runtime.CompilerServices.IsLong), System.Object modopt(System.Runtime.CompilerServices.IsLong)>",
+                (
+                    (NamedTypeSymbol)classMethod3.GetParameterType(0)
+                ).TupleUnderlyingType.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void DynamicToObject_ImplementationReturn()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 
@@ -1242,7 +1747,8 @@ class C : Base
 }
 ";
 
-            var source = @"
+            var source =
+                @"
 class C : I
 {
     object I.M() { throw null; }
@@ -1259,14 +1765,18 @@ class C : I
             Assert.Equal(TypeKind.Dynamic, interfaceMethod.ReturnType.TypeKind);
             Assert.Equal(SpecialType.System_Object, classMethod.ReturnType.SpecialType);
 
-            Assert.Equal("System.Object modopt(System.Int32) C.I.M()", classMethod.ToTestDisplayString());
+            Assert.Equal(
+                "System.Object modopt(System.Int32) C.I.M()",
+                classMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void ObjectToDynamic_ImplementationReturn()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 
 .assembly '<<GeneratedFileName>>'
@@ -1282,7 +1792,8 @@ class C : I
 }
 ";
 
-            var source = @"
+            var source =
+                @"
 class C : I
 {
     dynamic I.M() { throw null; }
@@ -1293,7 +1804,9 @@ class C : I
             comp.VerifyDiagnostics();
 
             var global = comp.GlobalNamespace;
-            var interfaceMethod = global.GetMember<NamedTypeSymbol>("I").GetMember<MethodSymbol>("M");
+            var interfaceMethod = global
+                .GetMember<NamedTypeSymbol>("I")
+                .GetMember<MethodSymbol>("M");
             var classMethod = global.GetMember<NamedTypeSymbol>("C").GetMethod("I.M");
 
             Assert.Equal(SpecialType.System_Object, interfaceMethod.ReturnType.SpecialType);
@@ -1306,7 +1819,8 @@ class C : I
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void DynamicVsObjectComplexParameter()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 
@@ -1327,7 +1841,8 @@ class C : I
 }
 ";
 
-            var source = @"
+            var source =
+                @"
 public class C : I<byte, char>
 {
     void I<byte, char>.M(ref I<dynamic[], object[]> c) { } // object to dynamic and vice versa
@@ -1338,19 +1853,31 @@ public class C : I<byte, char>
             comp.VerifyDiagnostics();
 
             var global = comp.GlobalNamespace;
-            var interfaceMethod = global.GetMember<NamedTypeSymbol>("I").GetMember<MethodSymbol>("M");
-            var classMethod = global.GetMember<NamedTypeSymbol>("C").GetMembers().OfType<MethodSymbol>().Single(
-                m => m.MethodKind == MethodKind.ExplicitInterfaceImplementation);
+            var interfaceMethod = global
+                .GetMember<NamedTypeSymbol>("I")
+                .GetMember<MethodSymbol>("M");
+            var classMethod = global
+                .GetMember<NamedTypeSymbol>("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Single(m => m.MethodKind == MethodKind.ExplicitInterfaceImplementation);
 
-            Assert.Equal("void I<T, U>.M(ref modopt(System.Int64) I<System.Object modopt(System.Int16) [], dynamic modopt(System.Int32) []> c)", interfaceMethod.ToTestDisplayString());
-            Assert.Equal("void C.I<System.Byte, System.Char>.M(ref modopt(System.Int64) I<dynamic modopt(System.Int16) [], System.Object modopt(System.Int32) []> c)", classMethod.ToTestDisplayString());
+            Assert.Equal(
+                "void I<T, U>.M(ref modopt(System.Int64) I<System.Object modopt(System.Int16) [], dynamic modopt(System.Int32) []> c)",
+                interfaceMethod.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void C.I<System.Byte, System.Char>.M(ref modopt(System.Int64) I<dynamic modopt(System.Int16) [], System.Object modopt(System.Int32) []> c)",
+                classMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void DynamicVsObjectComplexReturn()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 
@@ -1371,7 +1898,8 @@ public class C : I<byte, char>
 }
 ";
 
-            var source = @"
+            var source =
+                @"
 public class C : I<byte, char>
 {
     I<dynamic[], object[]> I<byte, char>.M() { throw null; } // object to dynamic and vice versa
@@ -1382,19 +1910,31 @@ public class C : I<byte, char>
             comp.VerifyDiagnostics();
 
             var global = comp.GlobalNamespace;
-            var interfaceMethod = global.GetMember<NamedTypeSymbol>("I").GetMember<MethodSymbol>("M");
-            var classMethod = global.GetMember<NamedTypeSymbol>("C").GetMembers().OfType<MethodSymbol>().Single(
-                m => m.MethodKind == MethodKind.ExplicitInterfaceImplementation);
+            var interfaceMethod = global
+                .GetMember<NamedTypeSymbol>("I")
+                .GetMember<MethodSymbol>("M");
+            var classMethod = global
+                .GetMember<NamedTypeSymbol>("C")
+                .GetMembers()
+                .OfType<MethodSymbol>()
+                .Single(m => m.MethodKind == MethodKind.ExplicitInterfaceImplementation);
 
-            Assert.Equal("I<System.Object modopt(System.Int16) [], dynamic modopt(System.Int32) []> modopt(System.Int64) I<T, U>.M()", interfaceMethod.ToTestDisplayString());
-            Assert.Equal("I<dynamic modopt(System.Int16) [], System.Object modopt(System.Int32) []> modopt(System.Int64) C.I<System.Byte, System.Char>.M()", classMethod.ToTestDisplayString());
+            Assert.Equal(
+                "I<System.Object modopt(System.Int16) [], dynamic modopt(System.Int32) []> modopt(System.Int64) I<T, U>.M()",
+                interfaceMethod.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "I<dynamic modopt(System.Int16) [], System.Object modopt(System.Int32) []> modopt(System.Int64) C.I<System.Byte, System.Char>.M()",
+                classMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void DynamicToObjectAndViceVersa_OverrideParameter()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 
@@ -1426,7 +1966,8 @@ public class C : I<byte, char>
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 class Derived : Base
 {
     public override void M(dynamic o, object d) { }
@@ -1438,17 +1979,26 @@ class Derived : Base
 
             var global = comp.GlobalNamespace;
             var baseMethod = global.GetMember<NamedTypeSymbol>("Base").GetMember<MethodSymbol>("M");
-            var derivedMethod = global.GetMember<NamedTypeSymbol>("Derived").GetMember<MethodSymbol>("M");
+            var derivedMethod = global
+                .GetMember<NamedTypeSymbol>("Derived")
+                .GetMember<MethodSymbol>("M");
 
-            Assert.Equal("void Base.M(System.Object modopt(System.Int16) o, dynamic modopt(System.Int32) d)", baseMethod.ToTestDisplayString());
-            Assert.Equal("void Derived.M(dynamic modopt(System.Int16) o, System.Object modopt(System.Int32) d)", derivedMethod.ToTestDisplayString());
+            Assert.Equal(
+                "void Base.M(System.Object modopt(System.Int16) o, dynamic modopt(System.Int32) d)",
+                baseMethod.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "void Derived.M(dynamic modopt(System.Int16) o, System.Object modopt(System.Int32) d)",
+                derivedMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void DynamicToObject_OverrideReturn()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 .assembly extern System.Core {}
 
@@ -1480,7 +2030,8 @@ class Derived : Base
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 class Derived : Base
 {
     public override object M() { throw null; }
@@ -1492,17 +2043,23 @@ class Derived : Base
 
             var global = comp.GlobalNamespace;
             var baseMethod = global.GetMember<NamedTypeSymbol>("Base").GetMember<MethodSymbol>("M");
-            var derivedMethod = global.GetMember<NamedTypeSymbol>("Derived").GetMember<MethodSymbol>("M");
+            var derivedMethod = global
+                .GetMember<NamedTypeSymbol>("Derived")
+                .GetMember<MethodSymbol>("M");
 
             Assert.Equal("dynamic modopt(System.Int32) Base.M()", baseMethod.ToTestDisplayString());
-            Assert.Equal("System.Object modopt(System.Int32) Derived.M()", derivedMethod.ToTestDisplayString());
+            Assert.Equal(
+                "System.Object modopt(System.Int32) Derived.M()",
+                derivedMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(819774, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/819774")]
         public void ObjectToDynamic_OverrideReturn()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 
 .assembly '<<GeneratedFileName>>'
@@ -1530,7 +2087,8 @@ class Derived : Base
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 class Derived : Base
 {
     public override dynamic M() { throw null; }
@@ -1542,17 +2100,26 @@ class Derived : Base
 
             var global = comp.GlobalNamespace;
             var baseMethod = global.GetMember<NamedTypeSymbol>("Base").GetMember<MethodSymbol>("M");
-            var derivedMethod = global.GetMember<NamedTypeSymbol>("Derived").GetMember<MethodSymbol>("M");
+            var derivedMethod = global
+                .GetMember<NamedTypeSymbol>("Derived")
+                .GetMember<MethodSymbol>("M");
 
-            Assert.Equal("System.Object modopt(System.Int32) Base.M()", baseMethod.ToTestDisplayString());
-            Assert.Equal("dynamic modopt(System.Int32) Derived.M()", derivedMethod.ToTestDisplayString());
+            Assert.Equal(
+                "System.Object modopt(System.Int32) Base.M()",
+                baseMethod.ToTestDisplayString()
+            );
+            Assert.Equal(
+                "dynamic modopt(System.Int32) Derived.M()",
+                derivedMethod.ToTestDisplayString()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(830632, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/830632")]
         public void AccessorsAddCustomModifiers_Override()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 
 .assembly '<<GeneratedFileName>>'
@@ -1614,7 +2181,8 @@ class Derived : Base
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 class Derived : Base
 {
     public override char P { get { return 'a'; } set { } }
@@ -1633,7 +2201,9 @@ class Derived : Base
 
             var derivedType = global.GetMember<NamedTypeSymbol>("Derived");
             var derivedProperty = derivedType.GetMember<PropertySymbol>("P");
-            var derivedIndexer = derivedType.GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var derivedIndexer = derivedType.GetMember<PropertySymbol>(
+                WellKnownMemberNames.Indexer
+            );
 
             var int8Type = comp.GetSpecialType(SpecialType.System_SByte);
             var int16Type = comp.GetSpecialType(SpecialType.System_Int16);
@@ -1646,30 +2216,95 @@ class Derived : Base
             Assert.Equal(0, derivedProperty.CustomModifierCount());
             Assert.Equal(0, derivedIndexer.CustomModifierCount());
 
-            Assert.Equal(int8Type, baseProperty.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, derivedProperty.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                baseProperty.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                derivedProperty
+                    .GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int16Type, baseProperty.SetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int16Type, derivedProperty.SetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int16Type,
+                baseProperty
+                    .SetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int16Type,
+                derivedProperty
+                    .SetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int8Type, baseIndexer.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, derivedIndexer.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                baseIndexer.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                derivedIndexer
+                    .GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int16Type, baseIndexer.GetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int16Type, derivedIndexer.GetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int16Type,
+                baseIndexer
+                    .GetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int16Type,
+                derivedIndexer
+                    .GetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int32Type, baseIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int32Type, derivedIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int32Type,
+                baseIndexer
+                    .SetMethod.Parameters[0]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int32Type,
+                derivedIndexer
+                    .SetMethod.Parameters[0]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int64Type, baseIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int64Type, derivedIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int64Type,
+                baseIndexer
+                    .SetMethod.Parameters[1]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int64Type,
+                derivedIndexer
+                    .SetMethod.Parameters[1]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(830632, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/830632")]
         public void AccessorsRemoveCustomModifiers_Override()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 
 .assembly '<<GeneratedFileName>>'
@@ -1731,7 +2366,8 @@ class Derived : Base
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 class Derived : Base
 {
     public override char P { get { return 'a'; } set { } }
@@ -1750,7 +2386,9 @@ class Derived : Base
 
             var derivedType = global.GetMember<NamedTypeSymbol>("Derived");
             var derivedProperty = derivedType.GetMember<PropertySymbol>("P");
-            var derivedIndexer = derivedType.GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var derivedIndexer = derivedType.GetMember<PropertySymbol>(
+                WellKnownMemberNames.Indexer
+            );
 
             var int8Type = comp.GetSpecialType(SpecialType.System_SByte);
             var int16Type = comp.GetSpecialType(SpecialType.System_Int16);
@@ -1765,14 +2403,38 @@ class Derived : Base
             Assert.Equal(0, derivedIndexer.GetMethod.CustomModifierCount());
             Assert.Equal(0, derivedIndexer.SetMethod.CustomModifierCount());
 
-            Assert.Equal(int8Type, baseProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, derivedProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                baseProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                derivedProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
 
-            Assert.Equal(int8Type, baseIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, derivedIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                baseIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                derivedIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
 
-            Assert.Equal(int16Type, baseIndexer.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int16Type, derivedIndexer.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int16Type,
+                baseIndexer
+                    .Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int16Type,
+                derivedIndexer
+                    .Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
             CompileAndVerify(comp);
         }
@@ -1781,7 +2443,8 @@ class Derived : Base
         [WorkItem(830632, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/830632")]
         public void AccessorsAddCustomModifiers_ExplicitImplementation()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 
 .assembly '<<GeneratedFileName>>'
@@ -1828,7 +2491,8 @@ class Derived : Base
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 class Implementation : I
 {
     char I.P { get { return 'a'; } set { } }
@@ -1843,11 +2507,15 @@ class Implementation : I
 
             var interfaceType = global.GetMember<NamedTypeSymbol>("I");
             var interfaceProperty = interfaceType.GetMember<PropertySymbol>("P");
-            var interfaceIndexer = interfaceType.GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var interfaceIndexer = interfaceType.GetMember<PropertySymbol>(
+                WellKnownMemberNames.Indexer
+            );
 
             var implementationType = global.GetMember<NamedTypeSymbol>("Implementation");
-            var implementationProperty = (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceProperty);
-            var implementationIndexer = (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceIndexer);
+            var implementationProperty = (PropertySymbol)
+                implementationType.FindImplementationForInterfaceMember(interfaceProperty);
+            var implementationIndexer = (PropertySymbol)
+                implementationType.FindImplementationForInterfaceMember(interfaceIndexer);
 
             var int8Type = comp.GetSpecialType(SpecialType.System_SByte);
             var int16Type = comp.GetSpecialType(SpecialType.System_Int16);
@@ -1860,30 +2528,99 @@ class Implementation : I
             Assert.Equal(0, implementationProperty.CustomModifierCount());
             Assert.Equal(0, implementationIndexer.CustomModifierCount());
 
-            Assert.Equal(int8Type, interfaceProperty.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, implementationProperty.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                interfaceProperty
+                    .GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                implementationProperty
+                    .GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int16Type, interfaceProperty.SetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int16Type, implementationProperty.SetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int16Type,
+                interfaceProperty
+                    .SetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int16Type,
+                implementationProperty
+                    .SetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int8Type, interfaceIndexer.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, implementationIndexer.GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                interfaceIndexer
+                    .GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                implementationIndexer
+                    .GetMethod.ReturnTypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int16Type, interfaceIndexer.GetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int16Type, implementationIndexer.GetMethod.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int16Type,
+                interfaceIndexer
+                    .GetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int16Type,
+                implementationIndexer
+                    .GetMethod.Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int32Type, interfaceIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int32Type, implementationIndexer.SetMethod.Parameters[0].TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int32Type,
+                interfaceIndexer
+                    .SetMethod.Parameters[0]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int32Type,
+                implementationIndexer
+                    .SetMethod.Parameters[0]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
-            Assert.Equal(int64Type, interfaceIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int64Type, implementationIndexer.SetMethod.Parameters[1].TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int64Type,
+                interfaceIndexer
+                    .SetMethod.Parameters[1]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int64Type,
+                implementationIndexer
+                    .SetMethod.Parameters[1]
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         [WorkItem(830632, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/830632")]
         public void AccessorsRemoveCustomModifiers_ExplicitImplementation()
         {
-            var il = @"
+            var il =
+                @"
 .assembly extern mscorlib { .ver 4:0:0:0 .publickeytoken = (B7 7A 5C 56 19 34 E0 89) }
 
 .assembly '<<GeneratedFileName>>'
@@ -1930,7 +2667,8 @@ class Implementation : I
 } // end of class Base
 ";
 
-            var source = @"
+            var source =
+                @"
 class Implementation : I
 {
     char I.P { get { return 'a'; } set { } }
@@ -1945,11 +2683,15 @@ class Implementation : I
 
             var interfaceType = global.GetMember<NamedTypeSymbol>("I");
             var interfaceProperty = interfaceType.GetMember<PropertySymbol>("P");
-            var interfaceIndexer = interfaceType.GetMember<PropertySymbol>(WellKnownMemberNames.Indexer);
+            var interfaceIndexer = interfaceType.GetMember<PropertySymbol>(
+                WellKnownMemberNames.Indexer
+            );
 
             var implementationType = global.GetMember<NamedTypeSymbol>("Implementation");
-            var implementationProperty = (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceProperty);
-            var implementationIndexer = (PropertySymbol)implementationType.FindImplementationForInterfaceMember(interfaceIndexer);
+            var implementationProperty = (PropertySymbol)
+                implementationType.FindImplementationForInterfaceMember(interfaceProperty);
+            var implementationIndexer = (PropertySymbol)
+                implementationType.FindImplementationForInterfaceMember(interfaceIndexer);
 
             var int8Type = comp.GetSpecialType(SpecialType.System_SByte);
             var int16Type = comp.GetSpecialType(SpecialType.System_Int16);
@@ -1964,19 +2706,46 @@ class Implementation : I
             Assert.Equal(0, implementationIndexer.GetMethod.CustomModifierCount());
             Assert.Equal(0, implementationIndexer.SetMethod.CustomModifierCount());
 
-            Assert.Equal(int8Type, interfaceProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, implementationProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                interfaceProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                implementationProperty.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
 
-            Assert.Equal(int8Type, interfaceIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int8Type, implementationIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int8Type,
+                interfaceIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
+            Assert.Equal(
+                int8Type,
+                implementationIndexer.TypeWithAnnotations.CustomModifiers.Single().Modifier()
+            );
 
-            Assert.Equal(int16Type, interfaceIndexer.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
-            Assert.Equal(int16Type, implementationIndexer.Parameters.Single().TypeWithAnnotations.CustomModifiers.Single().Modifier());
+            Assert.Equal(
+                int16Type,
+                interfaceIndexer
+                    .Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
+            Assert.Equal(
+                int16Type,
+                implementationIndexer
+                    .Parameters.Single()
+                    .TypeWithAnnotations.CustomModifiers.Single()
+                    .Modifier()
+            );
 
             CompileAndVerify(comp);
         }
 
-        private static Func<Symbol, bool> IsPropertyWithSingleParameter(SpecialType paramSpecialType, bool isArrayType = false)
+        private static Func<Symbol, bool> IsPropertyWithSingleParameter(
+            SpecialType paramSpecialType,
+            bool isArrayType = false
+        )
         {
             return s =>
             {
@@ -1985,12 +2754,17 @@ class Implementation : I
                     return false;
                 }
                 var paramType = s.GetParameters().Single().Type;
-                var comparisonType = isArrayType ? ((ArrayTypeSymbol)paramType).ElementType : paramType;
+                var comparisonType = isArrayType
+                    ? ((ArrayTypeSymbol)paramType).ElementType
+                    : paramType;
                 return comparisonType.SpecialType == paramSpecialType;
             };
         }
 
-        private static void AssertAllParametersHaveConstModOpt(Symbol member, bool ignoreLast = false)
+        private static void AssertAllParametersHaveConstModOpt(
+            Symbol member,
+            bool ignoreLast = false
+        )
         {
             int numParameters = member.GetParameterCount();
             var parameters = member.GetParameters();
@@ -1999,7 +2773,12 @@ class Implementation : I
                 if (!(ignoreLast && i == numParameters - 1))
                 {
                     var param = parameters[i];
-                    Assert.Equal(ConstModOptType, param.TypeWithAnnotations.CustomModifiers.Single().Modifier.ToTestDisplayString());
+                    Assert.Equal(
+                        ConstModOptType,
+                        param
+                            .TypeWithAnnotations.CustomModifiers.Single()
+                            .Modifier.ToTestDisplayString()
+                    );
                 }
             }
         }

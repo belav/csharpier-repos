@@ -12,36 +12,54 @@ public class ThreadSafety
     const int NumberOfIterations = 100;
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void OpenStandardXXXCanBeCalledConcurrently()
     {
-        Parallel.For(0, NumberOfIterations, i =>
-        {
-            using (Stream s = Console.OpenStandardInput())
+        Parallel.For(
+            0,
+            NumberOfIterations,
+            i =>
             {
-                Assert.NotNull(s);
+                using (Stream s = Console.OpenStandardInput())
+                {
+                    Assert.NotNull(s);
+                }
             }
-        });
+        );
 
-        Parallel.For(0, NumberOfIterations, i =>
-        {
-            using (Stream s = Console.OpenStandardOutput())
+        Parallel.For(
+            0,
+            NumberOfIterations,
+            i =>
             {
-                Assert.NotNull(s);
+                using (Stream s = Console.OpenStandardOutput())
+                {
+                    Assert.NotNull(s);
+                }
             }
-        });
+        );
 
-        Parallel.For(0, NumberOfIterations, i =>
-        {
-            using (Stream s = Console.OpenStandardError())
+        Parallel.For(
+            0,
+            NumberOfIterations,
+            i =>
             {
-                Assert.NotNull(s);
+                using (Stream s = Console.OpenStandardError())
+                {
+                    Assert.NotNull(s);
+                }
             }
-        });
+        );
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void SetStandardXXXCanBeCalledConcurrently()
     {
         TextReader savedStandardInput = Console.In;
@@ -56,22 +74,33 @@ public class ThreadSafety
                 {
                     using (StreamWriter sw = new StreamWriter(memStream))
                     {
-                        Parallel.For(0, NumberOfIterations, i =>
-                        {
-                            Console.SetIn(sr);
-                        });
+                        Parallel.For(
+                            0,
+                            NumberOfIterations,
+                            i =>
+                            {
+                                Console.SetIn(sr);
+                            }
+                        );
 
-                        Parallel.For(0, NumberOfIterations, i =>
-                        {
-                            Console.SetOut(sw);
-                        });
+                        Parallel.For(
+                            0,
+                            NumberOfIterations,
+                            i =>
+                            {
+                                Console.SetOut(sw);
+                            }
+                        );
 
-                        Parallel.For(0, NumberOfIterations, i =>
-                        {
-                            Console.SetOut(sw);
-                        });
+                        Parallel.For(
+                            0,
+                            NumberOfIterations,
+                            i =>
+                            {
+                                Console.SetOut(sw);
+                            }
+                        );
                     }
-
                 }
             }
         }
@@ -84,7 +113,10 @@ public class ThreadSafety
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void ReadMayBeCalledConcurrently()
     {
         const char TestChar = '+';
@@ -109,10 +141,14 @@ public class ThreadSafety
                     {
                         Console.SetIn(sr);
 
-                        Parallel.For(0, NumberOfIterations, i =>
-                        {
-                            Assert.Equal(TestChar, Console.Read());
-                        });
+                        Parallel.For(
+                            0,
+                            NumberOfIterations,
+                            i =>
+                            {
+                                Assert.Equal(TestChar, Console.Read());
+                            }
+                        );
 
                         // We should be at EOF now.
                         Assert.Equal(-1, Console.Read());

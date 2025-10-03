@@ -13,7 +13,7 @@ namespace System.Xml.Xsl.XsltOld
     {
         private readonly XmlQualifiedName _mode;
         internal ArrayList? templates;
-        private readonly Stylesheet _stylesheet;    // Owning stylesheet
+        private readonly Stylesheet _stylesheet; // Owning stylesheet
 
         private sealed class TemplateComparer : IComparer
         {
@@ -57,9 +57,9 @@ namespace System.Xml.Xsl.XsltOld
         {
             Debug.Assert(template != null);
             Debug.Assert(
-                ((object)_mode == (object?)template.Mode) ||
-                (template.Mode == null && _mode.Equals(XmlQualifiedName.Empty)) ||
-                _mode.Equals(template.Mode)
+                ((object)_mode == (object?)template.Mode)
+                    || (template.Mode == null && _mode.Equals(XmlQualifiedName.Empty))
+                    || _mode.Equals(template.Mode)
             );
 
             this.templates ??= new ArrayList();

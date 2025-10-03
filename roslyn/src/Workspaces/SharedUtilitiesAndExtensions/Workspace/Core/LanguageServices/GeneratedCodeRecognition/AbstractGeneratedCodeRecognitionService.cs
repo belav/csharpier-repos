@@ -12,7 +12,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.GeneratedCodeRecognition
 {
-    internal abstract class AbstractGeneratedCodeRecognitionService : IGeneratedCodeRecognitionService
+    internal abstract class AbstractGeneratedCodeRecognitionService
+        : IGeneratedCodeRecognitionService
     {
 #if !CODE_STYLE
         public bool IsGeneratedCode(Document document, CancellationToken cancellationToken)
@@ -22,16 +23,29 @@ namespace Microsoft.CodeAnalysis.GeneratedCodeRecognition
         }
 #endif
 
-        public async Task<bool> IsGeneratedCodeAsync(Document document, CancellationToken cancellationToken)
+        public async Task<bool> IsGeneratedCodeAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             return IsGeneratedCode(syntaxTree, document, cancellationToken);
         }
 
-        private static bool IsGeneratedCode(SyntaxTree syntaxTree, Document document, CancellationToken cancellationToken)
+        private static bool IsGeneratedCode(
+            SyntaxTree syntaxTree,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
-            return syntaxTree.IsGeneratedCode(document.Project.AnalyzerOptions, syntaxFacts, cancellationToken);
+            return syntaxTree.IsGeneratedCode(
+                document.Project.AnalyzerOptions,
+                syntaxFacts,
+                cancellationToken
+            );
         }
     }
 }

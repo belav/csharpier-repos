@@ -11,9 +11,16 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.AliasAmbiguousType
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AliasAmbiguousType), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AliasAmbiguousType
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.FullyQualify)]
-    internal class CSharpAliasAmbiguousTypeCodeFixProvider : AbstractAliasAmbiguousTypeCodeFixProvider
+    internal class CSharpAliasAmbiguousTypeCodeFixProvider
+        : AbstractAliasAmbiguousTypeCodeFixProvider
     {
         /// <summary>
         /// 'reference' is an ambiguous reference between 'identifier' and 'identifier'
@@ -21,15 +28,17 @@ namespace Microsoft.CodeAnalysis.CSharp.AliasAmbiguousType
         private const string CS0104 = nameof(CS0104);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpAliasAmbiguousTypeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpAliasAmbiguousTypeCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(CS0104);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS0104);
 
-        protected override string GetTextPreviewOfChange(string alias, ITypeSymbol typeSymbol)
-            => $"using {alias} = {typeSymbol.ToNameDisplayString()};";
+        protected override string GetTextPreviewOfChange(string alias, ITypeSymbol typeSymbol) =>
+            $"using {alias} = {typeSymbol.ToNameDisplayString()};";
     }
 }

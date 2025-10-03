@@ -19,9 +19,7 @@ public class ExistsExpression : SqlExpression
     /// </summary>
     /// <param name="subquery">A subquery to check existence of.</param>
     /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
-    public ExistsExpression(
-        SelectExpression subquery,
-        RelationalTypeMapping? typeMapping)
+    public ExistsExpression(SelectExpression subquery, RelationalTypeMapping? typeMapping)
         : base(typeof(bool), typeMapping)
     {
 #if DEBUG
@@ -39,8 +37,8 @@ public class ExistsExpression : SqlExpression
     public virtual SelectExpression Subquery { get; }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => Update((SelectExpression)visitor.Visit(Subquery));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        Update((SelectExpression)visitor.Visit(Subquery));
 
     /// <summary>
     ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
@@ -48,10 +46,8 @@ public class ExistsExpression : SqlExpression
     /// </summary>
     /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual ExistsExpression Update(SelectExpression subquery)
-        => subquery != Subquery
-            ? new ExistsExpression(subquery, TypeMapping)
-            : this;
+    public virtual ExistsExpression Update(SelectExpression subquery) =>
+        subquery != Subquery ? new ExistsExpression(subquery, TypeMapping) : this;
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -66,17 +62,16 @@ public class ExistsExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is ExistsExpression existsExpression
-                && Equals(existsExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is ExistsExpression existsExpression && Equals(existsExpression)
+        );
 
-    private bool Equals(ExistsExpression existsExpression)
-        => base.Equals(existsExpression)
-            && Subquery.Equals(existsExpression.Subquery);
+    private bool Equals(ExistsExpression existsExpression) =>
+        base.Equals(existsExpression) && Subquery.Equals(existsExpression.Subquery);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Subquery);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Subquery);
 }

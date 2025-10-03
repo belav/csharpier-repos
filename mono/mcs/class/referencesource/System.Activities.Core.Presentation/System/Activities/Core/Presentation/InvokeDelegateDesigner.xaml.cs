@@ -32,12 +32,34 @@ namespace System.Activities.Core.Presentation
 
         public static void RegisterMetadata(AttributeTableBuilder builder)
         {
-            builder.AddCustomAttributes(typeof(InvokeDelegate), new DesignerAttribute(typeof(InvokeDelegateDesigner)));
-            builder.AddCustomAttributes(typeof(InvokeDelegate), new ActivityDesignerOptionsAttribute { AllowDrillIn = false });
-            builder.AddCustomAttributes(typeof(InvokeDelegate), new FeatureAttribute(typeof(InvokeDelegateValidationFeature)));
-            builder.AddCustomAttributes(typeof(InvokeDelegate), DelegatePropertyName, BrowsableAttribute.No);
-            builder.AddCustomAttributes(typeof(InvokeDelegate), DelegateArgumentsPropertyName, PropertyValueEditor.CreateEditorAttribute(typeof(DelegateArgumentsValueEditor)), BrowsableAttribute.Yes);
-            builder.AddCustomAttributes(typeof(InvokeDelegate), DefaultPropertyName, BrowsableAttribute.No);
+            builder.AddCustomAttributes(
+                typeof(InvokeDelegate),
+                new DesignerAttribute(typeof(InvokeDelegateDesigner))
+            );
+            builder.AddCustomAttributes(
+                typeof(InvokeDelegate),
+                new ActivityDesignerOptionsAttribute { AllowDrillIn = false }
+            );
+            builder.AddCustomAttributes(
+                typeof(InvokeDelegate),
+                new FeatureAttribute(typeof(InvokeDelegateValidationFeature))
+            );
+            builder.AddCustomAttributes(
+                typeof(InvokeDelegate),
+                DelegatePropertyName,
+                BrowsableAttribute.No
+            );
+            builder.AddCustomAttributes(
+                typeof(InvokeDelegate),
+                DelegateArgumentsPropertyName,
+                PropertyValueEditor.CreateEditorAttribute(typeof(DelegateArgumentsValueEditor)),
+                BrowsableAttribute.Yes
+            );
+            builder.AddCustomAttributes(
+                typeof(InvokeDelegate),
+                DefaultPropertyName,
+                BrowsableAttribute.No
+            );
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -55,7 +77,8 @@ namespace System.Activities.Core.Presentation
 
         private static bool IsActivityDelegate(DynamicActivityProperty instance)
         {
-            return instance.Type == typeof(ActivityDelegate) || instance.Type.IsSubclassOf(typeof(ActivityDelegate));
+            return instance.Type == typeof(ActivityDelegate)
+                || instance.Type.IsSubclassOf(typeof(ActivityDelegate));
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
@@ -69,7 +92,9 @@ namespace System.Activities.Core.Presentation
 
             this.isSetInternally = true;
             this.chooser.Properties = ModelItem.Root.Properties["Properties"].Collection;
-            this.chooser.SelectedPropertyName = ModelItem.Properties[DelegatePropertyName].Reference;
+            this.chooser.SelectedPropertyName = ModelItem
+                .Properties[DelegatePropertyName]
+                .Reference;
             this.isSetInternally = false;
         }
 
@@ -100,7 +125,10 @@ namespace System.Activities.Core.Presentation
             this.isSetInternally = false;
         }
 
-        private void OnSelectedPropertyNameChanged(object sender, SelectedPropertyNameChangedEventArgs e)
+        private void OnSelectedPropertyNameChanged(
+            object sender,
+            SelectedPropertyNameChangedEventArgs e
+        )
         {
             if (this.isSetInternally)
             {
@@ -124,7 +152,10 @@ namespace System.Activities.Core.Presentation
 
         private void FillArguments()
         {
-            string propertyName = PropertyReferenceUtilities.GetPropertyReference(this.ModelItem.GetCurrentValue(), DelegatePropertyName);
+            string propertyName = PropertyReferenceUtilities.GetPropertyReference(
+                this.ModelItem.GetCurrentValue(),
+                DelegatePropertyName
+            );
 
             if (string.IsNullOrEmpty(propertyName))
             {
@@ -132,18 +163,31 @@ namespace System.Activities.Core.Presentation
             }
 
             ModelTreeManager manager = this.Context.Services.GetService<ModelTreeManager>();
-            DynamicActivityProperty property = DynamicActivityPropertyUtilities.Find(manager.Root.Properties["Properties"].Collection, propertyName);
+            DynamicActivityProperty property = DynamicActivityPropertyUtilities.Find(
+                manager.Root.Properties["Properties"].Collection,
+                propertyName
+            );
 
             if (property == null || !property.Type.IsSubclassOf(typeof(ActivityDelegate)))
             {
                 return;
             }
 
-            ActivityDelegateMetadata metadata = ActivityDelegateUtilities.GetMetadata(property.Type);
+            ActivityDelegateMetadata metadata = ActivityDelegateUtilities.GetMetadata(
+                property.Type
+            );
 
-            ModelItemCollection collection = this.ModelItem.Properties[DelegateArgumentsPropertyName].Value.Properties["ItemsCollection"].Collection;
+            ModelItemCollection collection = this.ModelItem
+                .Properties[DelegateArgumentsPropertyName]
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
 
-            Type underlyingArgumentType = this.ModelItem.Properties[DelegateArgumentsPropertyName].Value.GetCurrentValue().GetType().GetGenericArguments()[1];
+            Type underlyingArgumentType = this
+                .ModelItem.Properties[DelegateArgumentsPropertyName]
+                .Value.GetCurrentValue()
+                .GetType()
+                .GetGenericArguments()[1];
             if (!typeof(Argument).IsAssignableFrom(underlyingArgumentType))
             {
                 return;
@@ -153,11 +197,21 @@ namespace System.Activities.Core.Presentation
             {
                 using (ModelEditingScope change = collection.BeginEdit(SR.FillDelegateArguments))
                 {
-                    Type dictionaryEntryType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(new Type[] { typeof(string), underlyingArgumentType });
+                    Type dictionaryEntryType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(
+                        new Type[] { typeof(string), underlyingArgumentType }
+                    );
                     foreach (ActivityDelegateArgumentMetadata arg in metadata)
                     {
-                        Argument argument = Argument.Create(arg.Type, arg.Direction == ActivityDelegateArgumentDirection.In ? ArgumentDirection.In : ArgumentDirection.Out);
-                        object mutableKVPair = Activator.CreateInstance(dictionaryEntryType, new object[] { arg.Name, argument });
+                        Argument argument = Argument.Create(
+                            arg.Type,
+                            arg.Direction == ActivityDelegateArgumentDirection.In
+                                ? ArgumentDirection.In
+                                : ArgumentDirection.Out
+                        );
+                        object mutableKVPair = Activator.CreateInstance(
+                            dictionaryEntryType,
+                            new object[] { arg.Name, argument }
+                        );
                         ModelItem argumentKVPair = collection.Add(mutableKVPair);
                     }
 

@@ -50,10 +50,7 @@ namespace System.Web.UI.Design.WebControls.Util
         /// </devdoc>
         protected internal IServiceProvider ServiceProvider
         {
-            get
-            {
-                return _serviceProvider;
-            }
+            get { return _serviceProvider; }
         }
 
         /// <devdoc>
@@ -128,10 +125,7 @@ namespace System.Web.UI.Design.WebControls.Util
         /// Returns the help topic for the form. Consult with your UE contact on
         /// what the appropriate help topic is for your dialog.
         /// </devdoc>
-        protected abstract string HelpTopic
-        {
-            get;
-        }
+        protected abstract string HelpTopic { get; }
 
         protected sealed override void OnHelpRequested(HelpEventArgs hevent)
         {
@@ -146,7 +140,10 @@ namespace System.Web.UI.Design.WebControls.Util
         protected virtual void OnInitialActivated(EventArgs e)
         {
 #if DEBUG
-            Debug.Assert(_formInitialized, "All classes deriving from DesignerForm must call InitializeForm() from within InitializeComponent().");
+            Debug.Assert(
+                _formInitialized,
+                "All classes deriving from DesignerForm must call InitializeForm() from within InitializeComponent()."
+            );
 #endif
         }
 
@@ -157,7 +154,8 @@ namespace System.Web.UI.Design.WebControls.Util
         {
             if (ServiceProvider != null)
             {
-                IHelpService helpService = (IHelpService)ServiceProvider.GetService(typeof(IHelpService));
+                IHelpService helpService = (IHelpService)
+                    ServiceProvider.GetService(typeof(IHelpService));
                 if (helpService != null)
                 {
                     helpService.ShowHelpFromKeyword(HelpTopic);
@@ -182,4 +180,3 @@ namespace System.Web.UI.Design.WebControls.Util
         }
     }
 }
-

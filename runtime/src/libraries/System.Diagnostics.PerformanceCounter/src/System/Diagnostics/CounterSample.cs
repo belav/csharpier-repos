@@ -17,9 +17,25 @@ namespace System.Diagnostics
         private readonly long _systemFrequency;
         private readonly long _counterTimeStamp;
 
-        public static CounterSample Empty = new CounterSample(0, 0, 0, 0, 0, 0, PerformanceCounterType.NumberOfItems32);
+        public static CounterSample Empty = new CounterSample(
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            PerformanceCounterType.NumberOfItems32
+        );
 
-        public CounterSample(long rawValue, long baseValue, long counterFrequency, long systemFrequency, long timeStamp, long timeStamp100nSec, PerformanceCounterType counterType)
+        public CounterSample(
+            long rawValue,
+            long baseValue,
+            long counterFrequency,
+            long systemFrequency,
+            long timeStamp,
+            long timeStamp100nSec,
+            PerformanceCounterType counterType
+        )
         {
             _rawValue = rawValue;
             _baseValue = baseValue;
@@ -31,7 +47,16 @@ namespace System.Diagnostics
             _counterTimeStamp = 0;
         }
 
-        public CounterSample(long rawValue, long baseValue, long counterFrequency, long systemFrequency, long timeStamp, long timeStamp100nSec, PerformanceCounterType counterType, long counterTimeStamp)
+        public CounterSample(
+            long rawValue,
+            long baseValue,
+            long counterFrequency,
+            long systemFrequency,
+            long timeStamp,
+            long timeStamp100nSec,
+            PerformanceCounterType counterType,
+            long counterTimeStamp
+        )
         {
             _rawValue = rawValue;
             _baseValue = baseValue;
@@ -48,18 +73,12 @@ namespace System.Diagnostics
         /// </summary>
         public long RawValue
         {
-            get
-            {
-                return _rawValue;
-            }
+            get { return _rawValue; }
         }
 
         internal ulong UnsignedRawValue
         {
-            get
-            {
-                return (ulong)_rawValue;
-            }
+            get { return (ulong)_rawValue; }
         }
 
         /// <summary>
@@ -67,10 +86,7 @@ namespace System.Diagnostics
         /// </summary>
         public long BaseValue
         {
-            get
-            {
-                return _baseValue;
-            }
+            get { return _baseValue; }
         }
 
         /// <summary>
@@ -78,10 +94,7 @@ namespace System.Diagnostics
         /// </summary>
         public long SystemFrequency
         {
-            get
-            {
-                return _systemFrequency;
-            }
+            get { return _systemFrequency; }
         }
 
         /// <summary>
@@ -89,10 +102,7 @@ namespace System.Diagnostics
         /// </summary>
         public long CounterFrequency
         {
-            get
-            {
-                return _counterFrequency;
-            }
+            get { return _counterFrequency; }
         }
 
         /// <summary>
@@ -100,10 +110,7 @@ namespace System.Diagnostics
         /// </summary>
         public long CounterTimeStamp
         {
-            get
-            {
-                return _counterTimeStamp;
-            }
+            get { return _counterTimeStamp; }
         }
 
         /// <summary>
@@ -111,10 +118,7 @@ namespace System.Diagnostics
         /// </summary>
         public long TimeStamp
         {
-            get
-            {
-                return _timeStamp;
-            }
+            get { return _timeStamp; }
         }
 
         /// <summary>
@@ -122,10 +126,7 @@ namespace System.Diagnostics
         /// </summary>
         public long TimeStamp100nSec
         {
-            get
-            {
-                return _timeStamp100nSec;
-            }
+            get { return _timeStamp100nSec; }
         }
 
         /// <summary>
@@ -133,10 +134,7 @@ namespace System.Diagnostics
         /// </summary>
         public PerformanceCounterType CounterType
         {
-            get
-            {
-                return _counterType;
-            }
+            get { return _counterType; }
         }
 
         /// <summary>
@@ -162,14 +160,14 @@ namespace System.Diagnostics
 
         public bool Equals(CounterSample sample)
         {
-            return (_rawValue == sample._rawValue) &&
-                       (_baseValue == sample._baseValue) &&
-                       (_timeStamp == sample._timeStamp) &&
-                       (_counterFrequency == sample._counterFrequency) &&
-                       (_counterType == sample._counterType) &&
-                       (_timeStamp100nSec == sample._timeStamp100nSec) &&
-                       (_systemFrequency == sample._systemFrequency) &&
-                       (_counterTimeStamp == sample._counterTimeStamp);
+            return (_rawValue == sample._rawValue)
+                && (_baseValue == sample._baseValue)
+                && (_timeStamp == sample._timeStamp)
+                && (_counterFrequency == sample._counterFrequency)
+                && (_counterType == sample._counterType)
+                && (_timeStamp100nSec == sample._timeStamp100nSec)
+                && (_systemFrequency == sample._systemFrequency)
+                && (_counterTimeStamp == sample._counterTimeStamp);
         }
 
         public override int GetHashCode()
@@ -186,6 +184,5 @@ namespace System.Diagnostics
         {
             return !(a.Equals(b));
         }
-
     }
 }
