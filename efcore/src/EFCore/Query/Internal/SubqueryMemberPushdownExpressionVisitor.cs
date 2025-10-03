@@ -182,9 +182,9 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             );
 
             return Expression.Call(
-                QueryableMethods.AsQueryable.MakeGenericMethod(
-                    updatedMemberExpression.Type.GetSequenceType()
-                ),
+                QueryableMethods
+                    .AsQueryable
+                    .MakeGenericMethod(updatedMemberExpression.Type.GetSequenceType()),
                 updatedMemberExpression
             );
         }
@@ -236,10 +236,12 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             );
 
             source = Expression.Call(
-                QueryableMethods.Select.MakeGenericMethod(
-                    sourceMethodCallExpression.Arguments[0].Type.GetSequenceType(),
-                    memberAccessExpression.Type
-                ),
+                QueryableMethods
+                    .Select
+                    .MakeGenericMethod(
+                        sourceMethodCallExpression.Arguments[0].Type.GetSequenceType(),
+                        memberAccessExpression.Type
+                    ),
                 sourceMethodCallExpression.Arguments[0],
                 Expression.Quote(Expression.Lambda(memberAccessExpression, selector.Parameters[0]))
             );
@@ -255,10 +257,9 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             );
 
             source = Expression.Call(
-                QueryableMethods.Select.MakeGenericMethod(
-                    queryableType,
-                    memberAccessExpression.Type
-                ),
+                QueryableMethods
+                    .Select
+                    .MakeGenericMethod(queryableType, memberAccessExpression.Type),
                 source,
                 Expression.Quote(Expression.Lambda(memberAccessExpression, parameter))
             );

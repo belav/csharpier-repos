@@ -662,10 +662,9 @@ public class Test
 
             var verifier = CompileAndVerify(
                 files.ToArrayAndFree(),
-                parseOptions: TestOptions.Regular.WithFeature(
-                    "InterceptorsPreviewNamespaces",
-                    "global"
-                ),
+                parseOptions: TestOptions
+                    .Regular
+                    .WithFeature("InterceptorsPreviewNamespaces", "global"),
                 expectedOutput: makeExpectedOutput()
             );
             verifier.VerifyDiagnostics();

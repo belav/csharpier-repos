@@ -70,10 +70,12 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             {
                 var cancellationToken = context.CancellationToken;
                 var syntaxTree = await context
-                    .Document.GetSyntaxTreeAsync(cancellationToken)
+                    .Document
+                    .GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var syntaxFactsService =
-                    context.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFactsService = context
+                    .Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (
                     syntaxFactsService.IsEntirelyWithinStringOrCharOrNumericLiteral(
                         syntaxTree,
@@ -174,9 +176,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return false;
             }
 
-            var internalsVisibleToAttributeSymbol = semanticModel.Compilation.GetTypeByMetadataName(
-                typeof(InternalsVisibleToAttribute).FullName!
-            );
+            var internalsVisibleToAttributeSymbol = semanticModel
+                .Compilation
+                .GetTypeByMetadataName(typeof(InternalsVisibleToAttribute).FullName!);
             return type.Equals(internalsVisibleToAttributeSymbol);
         }
 

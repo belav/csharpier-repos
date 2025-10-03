@@ -64,14 +64,16 @@ namespace System.ServiceModel.Security
             X509SecurityToken result = token as X509SecurityToken;
             if (result == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.TokenProviderReturnedBadToken,
-                            token == null ? "<null>" : token.GetType().ToString()
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.TokenProviderReturnedBadToken,
+                                token == null ? "<null>" : token.GetType().ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
             SecurityUtils.EnsureCertificateCanDoKeyExchange(result.Certificate);
             return result;
@@ -97,9 +99,9 @@ namespace System.ServiceModel.Security
                     return DXD.TrustDec2005Dictionary.TlsnegoValueTypeUri;
                 }
                 // Not supported
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException());
             }
         }
 
@@ -107,9 +109,11 @@ namespace System.ServiceModel.Security
         {
             if (this.serverTokenProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.NoServerX509TokenProvider))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.NoServerX509TokenProvider))
+                    );
             }
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             SecurityUtils.OpenTokenProviderIfRequired(
@@ -257,9 +261,11 @@ namespace System.ServiceModel.Security
             TlsSspiNegotiation tlsNegotiation = (TlsSspiNegotiation)sspiNegotiation;
             if (tlsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
+                    );
             }
 
             if (this.ClientTokenAuthenticator == null)
@@ -271,11 +277,13 @@ namespace System.ServiceModel.Security
             if (clientCertificate == null)
             {
                 // isAnonymous is false. So, fail the negotiation
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new SecurityTokenValidationException(
-                        SR.GetString(SR.ClientCertificateNotProvided)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new SecurityTokenValidationException(
+                            SR.GetString(SR.ClientCertificateNotProvided)
+                        )
+                    );
             }
 
             ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies;

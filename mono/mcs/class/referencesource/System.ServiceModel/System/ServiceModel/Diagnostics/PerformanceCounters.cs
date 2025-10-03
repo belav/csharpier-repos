@@ -230,11 +230,13 @@ namespace System.ServiceModel.Diagnostics
                         TraceEventType.Warning
                     );
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString(SR.PartialTrustPerformanceCountersNotEnabled)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString(SR.PartialTrustPerformanceCountersNotEnabled)
+                            )
+                        );
                 }
             }
 #pragma warning suppress 56500 // covered by FxCOP
@@ -314,19 +316,21 @@ namespace System.ServiceModel.Diagnostics
 
                 if (logEvent)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Error,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.PerformanceCounter,
-                        (uint)
-                            System
-                                .Runtime
-                                .Diagnostics
-                                .EventLogEventId
-                                .FailedToLoadPerformanceCounter,
-                        categoryName,
-                        perfCounterName,
-                        e.ToString()
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.PerformanceCounter,
+                            (uint)
+                                System
+                                    .Runtime
+                                    .Diagnostics
+                                    .EventLogEventId
+                                    .FailedToLoadPerformanceCounter,
+                            categoryName,
+                            perfCounterName,
+                            e.ToString()
+                        );
                 }
             }
             return counter;
@@ -423,10 +427,9 @@ namespace System.ServiceModel.Diagnostics
                     lock (PerformanceCounters.perfCounterDictionarySyncObject)
                     {
                         if (
-                            !PerformanceCounters.PerformanceCountersForEndpoint.TryGetValue(
-                                endpointDispatcher.PerfCounterId,
-                                out counters
-                            )
+                            !PerformanceCounters
+                                .PerformanceCountersForEndpoint
+                                .TryGetValue(endpointDispatcher.PerfCounterId, out counters)
                         )
                         {
                             counters = new ServiceModelPerformanceCounters(
@@ -436,15 +439,13 @@ namespace System.ServiceModel.Diagnostics
                             );
                             if (counters.Initialized)
                             {
-                                PerformanceCounters.PerformanceCountersForEndpoint.Add(
-                                    endpointDispatcher.PerfCounterId,
-                                    counters
-                                );
+                                PerformanceCounters
+                                    .PerformanceCountersForEndpoint
+                                    .Add(endpointDispatcher.PerfCounterId, counters);
 
-                                int index =
-                                    PerformanceCounters.PerformanceCountersForEndpointList.FindIndex(
-                                        c => c == null
-                                    );
+                                int index = PerformanceCounters
+                                    .PerformanceCountersForEndpointList
+                                    .FindIndex(c => c == null);
                                 if (index >= 0)
                                 {
                                     PerformanceCounters.PerformanceCountersForEndpointList[index] =
@@ -452,9 +453,9 @@ namespace System.ServiceModel.Diagnostics
                                 }
                                 else
                                 {
-                                    PerformanceCounters.PerformanceCountersForEndpointList.Add(
-                                        counters
-                                    );
+                                    PerformanceCounters
+                                        .PerformanceCountersForEndpointList
+                                        .Add(counters);
                                     index =
                                         PerformanceCounters.PerformanceCountersForEndpointList.Count
                                         - 1;
@@ -472,10 +473,12 @@ namespace System.ServiceModel.Diagnostics
                     lock (PerformanceCounters.perfCounterDictionarySyncObject)
                     {
                         if (
-                            !PerformanceCounters.PerformanceCountersForBaseUri.TryGetValue(
-                                endpointDispatcher.PerfCounterBaseId,
-                                out countersEntry
-                            )
+                            !PerformanceCounters
+                                .PerformanceCountersForBaseUri
+                                .TryGetValue(
+                                    endpointDispatcher.PerfCounterBaseId,
+                                    out countersEntry
+                                )
                         )
                         {
                             if (performanceCountersEnabled)
@@ -490,10 +493,9 @@ namespace System.ServiceModel.Diagnostics
                                     serviceHost.DefaultCounters
                                 );
                             }
-                            PerformanceCounters.PerformanceCountersForBaseUri.Add(
-                                endpointDispatcher.PerfCounterBaseId,
-                                countersEntry
-                            );
+                            PerformanceCounters
+                                .PerformanceCountersForBaseUri
+                                .Add(endpointDispatcher.PerfCounterBaseId, countersEntry);
                         }
                         countersEntry.Add(counters);
                     }
@@ -511,17 +513,15 @@ namespace System.ServiceModel.Diagnostics
                     {
                         ServiceModelPerformanceCounters counters;
                         if (
-                            PerformanceCounters.PerformanceCountersForEndpoint.TryGetValue(
-                                id,
-                                out counters
-                            )
+                            PerformanceCounters
+                                .PerformanceCountersForEndpoint
+                                .TryGetValue(id, out counters)
                         )
                         {
                             PerformanceCounters.PerformanceCountersForEndpoint.Remove(id);
-                            int index =
-                                PerformanceCounters.PerformanceCountersForEndpointList.IndexOf(
-                                    counters
-                                );
+                            int index = PerformanceCounters
+                                .PerformanceCountersForEndpointList
+                                .IndexOf(counters);
                             PerformanceCounters.PerformanceCountersForEndpointList[index] = null;
                         }
                     }

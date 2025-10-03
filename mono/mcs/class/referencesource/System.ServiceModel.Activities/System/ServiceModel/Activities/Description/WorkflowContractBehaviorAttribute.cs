@@ -33,9 +33,12 @@ namespace System.ServiceModel.Activities.Description
         {
             //Only when DurableServiceBehavior is present ensure this endpoint operates in wrapped mode.
             if (
-                dispatchRuntime.ChannelDispatcher.Host.Description.Behaviors.Contains(
-                    typeof(WorkflowServiceBehavior)
-                )
+                dispatchRuntime
+                    .ChannelDispatcher
+                    .Host
+                    .Description
+                    .Behaviors
+                    .Contains(typeof(WorkflowServiceBehavior))
             )
             {
                 foreach (OperationDescription operation in contractDescription.Operations)

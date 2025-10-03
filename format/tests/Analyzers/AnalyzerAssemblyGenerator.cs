@@ -137,7 +137,8 @@ public class {typeName} : DiagnosticAnalyzer
             if (!result.Success)
             {
                 var failures = result
-                    .Diagnostics.Where(diagnostic =>
+                    .Diagnostics
+                    .Where(diagnostic =>
                         diagnostic.IsWarningAsError
                         || diagnostic.Severity == DiagnosticSeverity.Error
                     )

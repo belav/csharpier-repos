@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia
 
             var context = new PythiaDeclarationNameContext(syntaxContext);
             var result = await _lazyImplementation
-                .Value.ProvideRecommendationsAsync(context, cancellationToken)
+                .Value
+                .ProvideRecommendationsAsync(context, cancellationToken)
                 .ConfigureAwait(false);
 
             // We just pick the first possible symbol kind for glyph.

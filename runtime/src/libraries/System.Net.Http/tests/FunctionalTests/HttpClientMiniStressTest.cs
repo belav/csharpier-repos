@@ -378,7 +378,8 @@ namespace System.Net.Http.Functional.Tests
                 Enumerable
                     .Range(0, dop)
                     .Select(_ =>
-                        Task.Factory.StartNew(
+                        Task.Factory
+                            .StartNew(
                                 async delegate
                                 {
                                     int index;

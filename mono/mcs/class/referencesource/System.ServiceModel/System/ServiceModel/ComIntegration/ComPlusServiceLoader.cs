@@ -74,8 +74,9 @@ namespace System.ServiceModel.ComIntegration
 
             if (AspNetEnvironment.Enabled)
             {
-                AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements =
-                    service.Behaviors.Find<AspNetCompatibilityRequirementsAttribute>();
+                AspNetCompatibilityRequirementsAttribute aspNetCompatibilityRequirements = service
+                    .Behaviors
+                    .Find<AspNetCompatibilityRequirementsAttribute>();
                 if (aspNetCompatibilityRequirements == null)
                 {
                     aspNetCompatibilityRequirements =
@@ -112,18 +113,30 @@ namespace System.ServiceModel.ComIntegration
                     if (endpoint.Contract.SessionMode == SessionMode.Required)
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerCall)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements()
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    System
+                                        .ServiceModel
+                                        .ComIntegration
+                                        .Error
+                                        .InconsistentSessionRequirements()
+                                );
 
                         serviceBehavior.InstanceContextMode = InstanceContextMode.PerSession;
                     }
                     else
                     {
                         if (serviceBehavior.InstanceContextMode == InstanceContextMode.PerSession)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                System.ServiceModel.ComIntegration.Error.InconsistentSessionRequirements()
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    System
+                                        .ServiceModel
+                                        .ComIntegration
+                                        .Error
+                                        .InconsistentSessionRequirements()
+                                );
 
                         serviceBehavior.InstanceContextMode = InstanceContextMode.PerCall;
                     }

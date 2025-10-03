@@ -141,9 +141,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 // off state though.
                 on =
                     on
-                    && _processorProvider._globalOptions.GetOption(
-                        InlineHintsViewOptionsStorage.DisplayAllHintsWhilePressingAltF1
-                    );
+                    && _processorProvider
+                        ._globalOptions
+                        .GetOption(InlineHintsViewOptionsStorage.DisplayAllHintsWhilePressingAltF1);
                 if (_processorProvider.State == on)
                     return;
 

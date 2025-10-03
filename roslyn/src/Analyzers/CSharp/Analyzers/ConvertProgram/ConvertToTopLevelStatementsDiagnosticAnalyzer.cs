@@ -101,9 +101,11 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
                                 this.Descriptor,
                                 GetUseTopLevelStatementsDiagnosticLocation(
                                     methodDeclaration,
-                                    isHidden: option.Notification.Severity.WithDefaultSeverity(
-                                        DiagnosticSeverity.Hidden
-                                    ) == ReportDiagnostic.Hidden
+                                    isHidden: option
+                                        .Notification
+                                        .Severity
+                                        .WithDefaultSeverity(DiagnosticSeverity.Hidden)
+                                        == ReportDiagnostic.Hidden
                                 ),
                                 option.Notification,
                                 ImmutableArray.Create(methodDeclaration.GetLocation()),

@@ -111,10 +111,10 @@ namespace System.Net
                 // .NET Framework behavior.
                 if (
                     _httpResponseMessage.Content != null
-                    && _httpResponseMessage.Content.Headers.TryGetValues(
-                        "Content-Type",
-                        out IEnumerable<string>? values
-                    )
+                    && _httpResponseMessage
+                        .Content
+                        .Headers
+                        .TryGetValues("Content-Type", out IEnumerable<string>? values)
                 )
                 {
                     // In most cases, there is only one media type value as per RFC. But for completeness, we

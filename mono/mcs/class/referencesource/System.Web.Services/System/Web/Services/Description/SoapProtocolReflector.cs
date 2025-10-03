@@ -88,12 +88,14 @@ namespace System.Web.Services.Description
             }
             WebMethodAttribute methodAttr = Method.MethodAttribute;
 
-            OperationBinding.Extensions.Add(
-                CreateSoapOperationBinding(
-                    soapMethod.rpc ? SoapBindingStyle.Rpc : SoapBindingStyle.Document,
-                    soapMethod.action
-                )
-            );
+            OperationBinding
+                .Extensions
+                .Add(
+                    CreateSoapOperationBinding(
+                        soapMethod.rpc ? SoapBindingStyle.Rpc : SoapBindingStyle.Document,
+                        soapMethod.action
+                    )
+                );
 
             CreateMessage(
                 soapMethod.rpc,
@@ -271,9 +273,9 @@ namespace System.Web.Services.Description
                 }
             }
 
-            messageBinding.Extensions.Add(
-                CreateSoapBodyBinding(SoapBindingUse.Encoded, members.Namespace)
-            );
+            messageBinding
+                .Extensions
+                .Add(CreateSoapBodyBinding(SoapBindingUse.Encoded, members.Namespace));
         }
 
         void CreateLiteralMessage(
@@ -342,9 +344,9 @@ namespace System.Web.Services.Description
                     }
                 }
             }
-            messageBinding.Extensions.Add(
-                CreateSoapBodyBinding(SoapBindingUse.Literal, rpc ? members.Namespace : null)
-            );
+            messageBinding
+                .Extensions
+                .Add(CreateSoapBodyBinding(SoapBindingUse.Literal, rpc ? members.Namespace : null));
         }
 
         static string[] GetParameterOrder(LogicalMethodInfo methodInfo)

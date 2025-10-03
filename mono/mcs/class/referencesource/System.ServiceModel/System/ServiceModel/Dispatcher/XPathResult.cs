@@ -84,9 +84,13 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.resultType != XPathResultType.NodeSet)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.CannotRepresentResultAsNodeset))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.CannotRepresentResultAsNodeset)
+                        )
+                    );
             }
 
             return this.nodeSetResult;

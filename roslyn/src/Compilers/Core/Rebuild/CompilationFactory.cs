@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
         )
         {
             var embeddedTexts = rebuildCompilation
-                .SyntaxTrees.Select(st => (path: st.FilePath, text: st.GetText()))
+                .SyntaxTrees
+                .Select(st => (path: st.FilePath, text: st.GetText()))
                 .Where(pair => pair.text.CanBeEmbedded)
                 .Select(pair => EmbeddedText.FromSource(pair.path, pair.text))
                 .ToImmutableArray();
@@ -125,9 +126,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
         )
         {
             var peHeader = OptionsReader.PeReader.PEHeaders.PEHeader!;
-            var win32Resources = OptionsReader.PeReader.GetSectionData(
-                peHeader.ResourceTableDirectory.RelativeVirtualAddress
-            );
+            var win32Resources = OptionsReader
+                .PeReader
+                .GetSectionData(peHeader.ResourceTableDirectory.RelativeVirtualAddress);
             using var win32ResourceStream =
                 win32Resources.Pointer != null
                     ? new UnmanagedMemoryStream(win32Resources.Pointer, win32Resources.Length)
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
                 debugInformationFormat = DebugInformationFormat.PortablePdb;
                 var codeViewEntry = OptionsReader
-                    .PeReader.ReadDebugDirectory()
+                    .PeReader
+                    .ReadDebugDirectory()
                     .Single(entry => entry.Type == DebugDirectoryEntryType.CodeView);
                 var codeView = OptionsReader.PeReader.ReadCodeViewDebugDirectoryData(codeViewEntry);
                 pdbFilePath =

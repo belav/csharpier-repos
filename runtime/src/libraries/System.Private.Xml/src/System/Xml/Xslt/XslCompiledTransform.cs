@@ -42,7 +42,8 @@ namespace System.Xml.Xsl
     {
         // Version for GeneratedCodeAttribute
         private static readonly Version? s_version = typeof(XslCompiledTransform)
-            .Assembly.GetName()
+            .Assembly
+            .GetName()
             .Version;
 
         // Options of compilation

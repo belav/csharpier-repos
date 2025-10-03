@@ -461,14 +461,16 @@ namespace System.Workflow.ComponentModel.Design
             )
             {
                 if (
-                    memberInfo.Name.Equals(
-                        name,
-                        (
-                            (ignoreCase)
-                                ? StringComparison.CurrentCultureIgnoreCase
-                                : StringComparison.CurrentCulture
+                    memberInfo
+                        .Name
+                        .Equals(
+                            name,
+                            (
+                                (ignoreCase)
+                                    ? StringComparison.CurrentCultureIgnoreCase
+                                    : StringComparison.CurrentCulture
+                            )
                         )
-                    )
                 )
                 {
                     matchingMember = memberInfo;

@@ -90,8 +90,9 @@ namespace Microsoft.CodeAnalysis.Remote
                         )
                     )
                     {
-                        var serializer =
-                            workspace.Services.GetRequiredService<ISerializerService>();
+                        var serializer = workspace
+                            .Services
+                            .GetRequiredService<ISerializerService>();
 
                         // Try to get the text associated with baseTextChecksum
                         var text = await TryGetSourceTextAsync(
@@ -131,10 +132,12 @@ namespace Microsoft.CodeAnalysis.Remote
                         // check the cheap and fast one first.
                         // see if the cache has the source text
                         if (
-                            workspaceManager.SolutionAssetCache.TryGetAsset<SerializableSourceText>(
-                                baseTextChecksum,
-                                out var serializableSourceText
-                            )
+                            workspaceManager
+                                .SolutionAssetCache
+                                .TryGetAsset<SerializableSourceText>(
+                                    baseTextChecksum,
+                                    out var serializableSourceText
+                                )
                         )
                         {
                             return await serializableSourceText

@@ -122,10 +122,12 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             }
 
             var openingPointLine = originalDocumentText
-                .Lines.GetLineFromPosition(openingPoint)
+                .Lines
+                .GetLineFromPosition(openingPoint)
                 .LineNumber;
             var closingPointLine = originalDocumentText
-                .Lines.GetLineFromPosition(closingPoint)
+                .Lines
+                .GetLineFromPosition(closingPoint)
                 .LineNumber;
 
             // If there are already multiple empty lines between the braces, don't do anything.
@@ -199,8 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             static TextLine GetLineBetweenCurlys(int closingPosition, SourceText text)
             {
-                var closingBraceLineNumber = text
-                    .Lines.GetLineFromPosition(closingPosition - 1)
+                var closingBraceLineNumber = text.Lines
+                    .GetLineFromPosition(closingPosition - 1)
                     .LineNumber;
                 return text.Lines[closingBraceLineNumber - 1];
             }
@@ -213,8 +215,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 CancellationToken cancellationToken
             )
             {
-                var indentationService =
-                    document.LanguageServices.GetRequiredService<IIndentationService>();
+                var indentationService = document
+                    .LanguageServices
+                    .GetRequiredService<IIndentationService>();
                 var indentation = indentationService.GetIndentation(
                     document,
                     lineNumber,

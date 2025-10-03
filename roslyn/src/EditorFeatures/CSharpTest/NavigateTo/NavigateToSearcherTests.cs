@@ -345,9 +345,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NavigateTo
             }
 
             public INavigableItem.NavigableDocument Document =>
-                INavigableItem.NavigableDocument.FromDocument(
-                    _workspace.CurrentSolution.Projects.Single().Documents.Single()
-                );
+                INavigableItem
+                    .NavigableDocument
+                    .FromDocument(_workspace.CurrentSolution.Projects.Single().Documents.Single());
             public TextSpan SourceSpan => _sourceSpan;
 
             public string AdditionalInformation => throw new NotImplementedException();

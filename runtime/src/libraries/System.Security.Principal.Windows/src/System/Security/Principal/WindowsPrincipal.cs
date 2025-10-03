@@ -157,14 +157,16 @@ namespace System.Security.Principal
                 if (_identity.ImpersonationLevel == TokenImpersonationLevel.None)
                 {
                     if (
-                        !Interop.Advapi32.DuplicateTokenEx(
-                            _identity.AccessToken,
-                            (uint)TokenAccessLevels.Query,
-                            IntPtr.Zero,
-                            (uint)TokenImpersonationLevel.Identification,
-                            (uint)TokenType.TokenImpersonation,
-                            ref token
-                        )
+                        !Interop
+                            .Advapi32
+                            .DuplicateTokenEx(
+                                _identity.AccessToken,
+                                (uint)TokenAccessLevels.Query,
+                                IntPtr.Zero,
+                                (uint)TokenImpersonationLevel.Identification,
+                                (uint)TokenType.TokenImpersonation,
+                                ref token
+                            )
                     )
                     {
                         throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
@@ -175,15 +177,17 @@ namespace System.Security.Principal
 
                 // CheckTokenMembership will check if the SID is both present and enabled in the access token.
                 if (
-                    !Interop.Advapi32.CheckTokenMembership(
-                        (
-                            _identity.ImpersonationLevel != TokenImpersonationLevel.None
-                                ? _identity.AccessToken
-                                : token
-                        ),
-                        sid.BinaryForm,
-                        ref isMember
-                    )
+                    !Interop
+                        .Advapi32
+                        .CheckTokenMembership(
+                            (
+                                _identity.ImpersonationLevel != TokenImpersonationLevel.None
+                                    ? _identity.AccessToken
+                                    : token
+                            ),
+                            sid.BinaryForm,
+                            ref isMember
+                        )
                 )
                 {
                     throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());

@@ -218,13 +218,15 @@ namespace System.Net
                         SocketAddress.IPv6AddressSize
                     );
 
-                    SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAStringToAddress(
-                        ipString,
-                        AddressFamily.InterNetworkV6,
-                        IntPtr.Zero,
-                        saddr.m_Buffer,
-                        ref saddr.m_Size
-                    );
+                    SocketError errorCode = UnsafeNclNativeMethods
+                        .OSSOCK
+                        .WSAStringToAddress(
+                            ipString,
+                            AddressFamily.InterNetworkV6,
+                            IntPtr.Zero,
+                            saddr.m_Buffer,
+                            ref saddr.m_Size
+                        );
 
                     if (errorCode == SocketError.Success)
                     {
@@ -520,13 +522,15 @@ namespace System.Net
                             saddr[26] = (byte)(m_ScopeId >> 16);
                             saddr[27] = (byte)(m_ScopeId >> 24);
                         }
-                        SocketError errorCode = UnsafeNclNativeMethods.OSSOCK.WSAAddressToString(
-                            saddr.m_Buffer,
-                            saddr.m_Size,
-                            IntPtr.Zero,
-                            addressString,
-                            ref addressStringLength
-                        );
+                        SocketError errorCode = UnsafeNclNativeMethods
+                            .OSSOCK
+                            .WSAAddressToString(
+                                saddr.m_Buffer,
+                                saddr.m_Size,
+                                IntPtr.Zero,
+                                addressString,
+                                ref addressStringLength
+                            );
                         if (errorCode != SocketError.Success)
                         {
                             throw new SocketException();

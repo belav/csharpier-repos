@@ -789,9 +789,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (resume == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SFxInvalidAsyncResultState0)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SFxInvalidAsyncResultState0));
             }
 
             resume.Resume(result);
@@ -808,9 +808,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (resume == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SFxInvalidAsyncResultState0)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SFxInvalidAsyncResultState0));
             }
 
             resume.Resume(result);
@@ -923,18 +923,20 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!object.ReferenceEquals(rpc.RequestID, null))
                 {
-                    System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(
-                        rpc.Reply,
-                        rpc.RequestID
-                    );
+                    System
+                        .ServiceModel
+                        .Channels
+                        .RequestReplyCorrelator
+                        .PrepareReply(rpc.Reply, rpc.RequestID);
                 }
 
                 if (!rpc.Channel.HasSession)
                 {
-                    canSendReply = System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(
-                        rpc.Reply,
-                        rpc.ReplyToInfo
-                    );
+                    canSendReply = System
+                        .ServiceModel
+                        .Channels
+                        .RequestReplyCorrelator
+                        .AddressReply(rpc.Reply, rpc.ReplyToInfo);
                 }
             }
 
@@ -1905,16 +1907,18 @@ namespace System.ServiceModel.Dispatcher
                 {
                     DispatchOperationRuntime existingOperation = (DispatchOperationRuntime)
                         map[action];
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxActionDemuxerDuplicate,
-                                existingOperation.Name,
-                                operation.Name,
-                                action
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxActionDemuxerDuplicate,
+                                    existingOperation.Name,
+                                    operation.Name,
+                                    action
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 this.map.Add(action, operation);
             }

@@ -191,9 +191,9 @@ namespace System.Drawing.Printing
                     ptr = new IntPtr(ptr.ToInt64() + Marshal.SizeOf(x));
                     y = Marshal.ReadInt32(ptr);
                     ptr = new IntPtr(ptr.ToInt64() + Marshal.SizeOf(y));
-                    settings.PrinterResolutions.Add(
-                        new PrinterResolution(PrinterResolutionKind.Custom, x, y)
-                    );
+                    settings
+                        .PrinterResolutions
+                        .Add(new PrinterResolution(PrinterResolutionKind.Custom, x, y));
                 }
             }
             Marshal.FreeHGlobal(buff);

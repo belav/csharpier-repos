@@ -550,9 +550,9 @@ namespace System.Data.Query.PlanCompiler
                 }
                 if (
                     !this.m_reapplyNullabilityRules
-                    && TransformationRules.RulesRequiringNullabilityRulesToBeReapplied.Contains(
-                        rule
-                    )
+                    && TransformationRules
+                        .RulesRequiringNullabilityRulesToBeReapplied
+                        .Contains(rule)
                 )
                 {
                     this.m_reapplyNullabilityRules = true;
@@ -1350,9 +1350,9 @@ namespace System.Data.Query.PlanCompiler
                     break;
                 case OpType.Not:
                     PlanCompiler.Assert(otherNode == null, "Not Op with more than 1 child. Gasp!");
-                    newNode = context.Command.CreateNode(
-                        context.Command.CreateConstantPredicateOp(!pred.Value)
-                    );
+                    newNode = context
+                        .Command
+                        .CreateNode(context.Command.CreateConstantPredicateOp(!pred.Value));
                     break;
                 default:
                     PlanCompiler.Assert(false, "Unexpected OpType - " + node.Op.OpType);
@@ -1633,17 +1633,17 @@ namespace System.Data.Query.PlanCompiler
             out Node newNode
         )
         {
-            Node newAndNode = context.Command.CreateNode(
-                context.Command.CreateConditionalOp(OpType.And),
-                filterNode.Child0.Child1,
-                filterNode.Child1
-            );
+            Node newAndNode = context
+                .Command
+                .CreateNode(
+                    context.Command.CreateConditionalOp(OpType.And),
+                    filterNode.Child0.Child1,
+                    filterNode.Child1
+                );
 
-            newNode = context.Command.CreateNode(
-                context.Command.CreateFilterOp(),
-                filterNode.Child0.Child0,
-                newAndNode
-            );
+            newNode = context
+                .Command
+                .CreateNode(context.Command.CreateFilterOp(), filterNode.Child0.Child0, newAndNode);
             return true;
         }
         #endregion
@@ -1910,11 +1910,13 @@ namespace System.Data.Query.PlanCompiler
             // that can be pushed down - create a new distinct node as well
             //
             Node distinctNode = filterNode.Child0;
-            Node pushdownFilterNode = context.Command.CreateNode(
-                context.Command.CreateFilterOp(),
-                distinctNode.Child0,
-                pushdownPredicate
-            );
+            Node pushdownFilterNode = context
+                .Command
+                .CreateNode(
+                    context.Command.CreateFilterOp(),
+                    distinctNode.Child0,
+                    pushdownPredicate
+                );
             Node newDistinctNode = context.Command.CreateNode(distinctNode.Op, pushdownFilterNode);
 
             //
@@ -1923,11 +1925,13 @@ namespace System.Data.Query.PlanCompiler
             //
             if (nonPushdownPredicate != null)
             {
-                newNode = context.Command.CreateNode(
-                    context.Command.CreateFilterOp(),
-                    newDistinctNode,
-                    nonPushdownPredicate
-                );
+                newNode = context
+                    .Command
+                    .CreateNode(
+                        context.Command.CreateFilterOp(),
+                        newDistinctNode,
+                        nonPushdownPredicate
+                    );
             }
             else
             {
@@ -2735,7 +2739,8 @@ namespace System.Data.Query.PlanCompiler
 
             if (
                 varDefListNode
-                    .Children.Where(c => c.Child0.Op.OpType == OpType.NullSentinel)
+                    .Children
+                    .Where(c => c.Child0.Op.OpType == OpType.NullSentinel)
                     .Count() == 0
             )
             {
@@ -2762,7 +2767,9 @@ namespace System.Data.Query.PlanCompiler
                 if (
                     !canChangeNullSentinelValue
                     || !TransformationRulesContext.TryGetInt32Var(
-                        n.Child1.Children.Where(child =>
+                        n.Child1
+                            .Children
+                            .Where(child =>
                                 child.Child0.Op.OpType == OpType.Constant
                                 || child.Child0.Op.OpType == OpType.InternalConstant
                             )
@@ -2771,10 +2778,9 @@ namespace System.Data.Query.PlanCompiler
                     )
                 )
                 {
-                    inputSentinel = n
-                        .Child1.Children.Where(child =>
-                            child.Child0.Op.OpType == OpType.NullSentinel
-                        )
+                    inputSentinel = n.Child1
+                        .Children
+                        .Where(child => child.Child0.Op.OpType == OpType.NullSentinel)
                         .Select(child => ((VarDefOp)(child.Op)).Var)
                         .FirstOrDefault();
                     if (inputSentinel == null)
@@ -2991,9 +2997,9 @@ namespace System.Data.Query.PlanCompiler
             //
             if (
                 projectOp.Outputs.Overlaps(applyLeftChildNodeInfo.Definitions)
-                || filterInputNodeInfo.ExternalReferences.Overlaps(
-                    applyLeftChildNodeInfo.Definitions
-                )
+                || filterInputNodeInfo
+                    .ExternalReferences
+                    .Overlaps(applyLeftChildNodeInfo.Definitions)
             )
             {
                 return false;
@@ -3045,9 +3051,9 @@ namespace System.Data.Query.PlanCompiler
                     && trc.CanChangeNullSentinelValue
                 )
                 {
-                    varDefNode.Child0 = context.Command.CreateNode(
-                        context.Command.CreateVarRefOp(sentinelVar)
-                    );
+                    varDefNode.Child0 = context
+                        .Command
+                        .CreateNode(context.Command.CreateVarRefOp(sentinelVar));
                 }
                 else
                 {
@@ -3203,9 +3209,9 @@ namespace System.Data.Query.PlanCompiler
             Node varDefListNode = projectNode.Child1;
 
             TransformationRulesContext trc = (TransformationRulesContext)context;
-            ExtendedNodeInfo inputNodeInfo = context.Command.GetExtendedNodeInfo(
-                projectNode.Child0
-            );
+            ExtendedNodeInfo inputNodeInfo = context
+                .Command
+                .GetExtendedNodeInfo(projectNode.Child0);
             Var sentinelVar = inputNodeInfo.NonNullableDefinitions.First;
 
             //
@@ -3382,9 +3388,9 @@ namespace System.Data.Query.PlanCompiler
             // does, then simply return from this function
             //
             if (
-                applyRightChildNodeInfo.ExternalReferences.Overlaps(
-                    applyLeftChildNodeInfo.Definitions
-                )
+                applyRightChildNodeInfo
+                    .ExternalReferences
+                    .Overlaps(applyLeftChildNodeInfo.Definitions)
             )
             {
                 if (convertedToCrossApply)
@@ -4006,20 +4012,20 @@ namespace System.Data.Query.PlanCompiler
                 {
                     joinConditionNode = trc.ReMap(joinConditionNode, varMap1);
                     joinConditionNode = trc.ReMap(joinConditionNode, varMap2);
-                    newJoinNode = context.Command.CreateNode(
-                        joinNode.Op,
-                        joinNode.Child0.Child0,
-                        joinNode.Child1.Child0,
-                        joinConditionNode
-                    );
+                    newJoinNode = context
+                        .Command
+                        .CreateNode(
+                            joinNode.Op,
+                            joinNode.Child0.Child0,
+                            joinNode.Child1.Child0,
+                            joinConditionNode
+                        );
                 }
                 else
                 {
-                    newJoinNode = context.Command.CreateNode(
-                        joinNode.Op,
-                        joinNode.Child0.Child0,
-                        joinNode.Child1.Child0
-                    );
+                    newJoinNode = context
+                        .Command
+                        .CreateNode(joinNode.Op, joinNode.Child0.Child0, joinNode.Child1.Child0);
                 }
 
                 newVarSet.InitFrom(projectOp1.Outputs);
@@ -4334,9 +4340,9 @@ namespace System.Data.Query.PlanCompiler
         {
             newNode = singleRowNode;
             TransformationRulesContext trc = (TransformationRulesContext)context;
-            ExtendedNodeInfo childNodeInfo = context.Command.GetExtendedNodeInfo(
-                singleRowNode.Child0
-            );
+            ExtendedNodeInfo childNodeInfo = context
+                .Command
+                .GetExtendedNodeInfo(singleRowNode.Child0);
 
             // If the input to this Op can produce at most one row, then we don't need the
             // singleRowOp - simply return the input
@@ -5057,9 +5063,9 @@ namespace System.Data.Query.PlanCompiler
             out Node newNode
         )
         {
-            ExtendedNodeInfo nodeInfo = (
-                (TransformationRulesContext)context
-            ).Command.GetExtendedNodeInfo(n.Child0);
+            ExtendedNodeInfo nodeInfo = ((TransformationRulesContext)context)
+                .Command
+                .GetExtendedNodeInfo(n.Child0);
 
             //If the input has at most one row, omit the SortOp
             if (nodeInfo.MaxRows == RowCount.Zero || nodeInfo.MaxRows == RowCount.One)
@@ -5107,9 +5113,9 @@ namespace System.Data.Query.PlanCompiler
             out Node newNode
         )
         {
-            ExtendedNodeInfo nodeInfo = (
-                (TransformationRulesContext)context
-            ).Command.GetExtendedNodeInfo(n.Child0);
+            ExtendedNodeInfo nodeInfo = ((TransformationRulesContext)context)
+                .Command
+                .GetExtendedNodeInfo(n.Child0);
 
             //If the input has no rows, remove the ConstraintSortOp node completely
             if (nodeInfo.MaxRows == RowCount.Zero)

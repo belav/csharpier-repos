@@ -96,12 +96,14 @@ internal abstract partial class Http3Stream
 
         _context = context;
 
-        _errorCodeFeature =
-            _context.ConnectionFeatures.GetRequiredFeature<IProtocolErrorCodeFeature>();
+        _errorCodeFeature = _context
+            .ConnectionFeatures
+            .GetRequiredFeature<IProtocolErrorCodeFeature>();
         _streamIdFeature = _context.ConnectionFeatures.GetRequiredFeature<IStreamIdFeature>();
         _streamAbortFeature = _context.ConnectionFeatures.GetRequiredFeature<IStreamAbortFeature>();
-        _streamClosedFeature =
-            _context.ConnectionFeatures.GetRequiredFeature<IStreamClosedFeature>();
+        _streamClosedFeature = _context
+            .ConnectionFeatures
+            .GetRequiredFeature<IStreamClosedFeature>();
 
         _appCompletedTaskSource.Reset();
         _isClosed = 0;

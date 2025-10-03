@@ -51,9 +51,9 @@ public class StartupNtlmAuthentication
             {
                 if (context.Request.Path.Equals("/Anonymous"))
                 {
-                    return context.Response.WriteAsync(
-                        "Anonymous?" + !context.User.Identity.IsAuthenticated
-                    );
+                    return context
+                        .Response
+                        .WriteAsync("Anonymous?" + !context.User.Identity.IsAuthenticated);
                 }
 
                 if (context.Request.Path.Equals("/Restricted"))

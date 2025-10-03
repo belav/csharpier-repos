@@ -157,28 +157,34 @@ namespace System.ServiceModel.Security
 
             if (this.DetectReplays && !this.RequireIntegrity)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "RequireIntegrity",
-                    SR.GetString(SR.ForReplayDetectionToBeDoneRequireIntegrityMustBeSet)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "RequireIntegrity",
+                        SR.GetString(SR.ForReplayDetectionToBeDoneRequireIntegrityMustBeSet)
+                    );
             }
 
             if (this.DoRequestSignatureConfirmation)
             {
                 if (!this.SupportsRequestReply)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SignatureConfirmationRequiresRequestReply)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(SR.SignatureConfirmationRequiresRequestReply)
+                        );
                 }
                 if (!this.StandardsManager.SecurityVersion.SupportsSignatureConfirmation)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SecurityVersionDoesNotSupportSignatureConfirmation,
-                            this.StandardsManager.SecurityVersion
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SecurityVersionDoesNotSupportSignatureConfirmation,
+                                this.StandardsManager.SecurityVersion
+                            )
+                        );
                 }
             }
 
@@ -221,23 +227,27 @@ namespace System.ServiceModel.Security
             MessageFault fault = MessageFault.CreateFault(senderCode, reason);
             if (isForSignature)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.NoSignaturePartsSpecified, action),
-                        null,
-                        fault
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.NoSignaturePartsSpecified, action),
+                            null,
+                            fault
+                        )
+                    );
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.NoEncryptionPartsSpecified, action),
-                        null,
-                        fault
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.NoEncryptionPartsSpecified, action),
+                            null,
+                            fault
+                        )
+                    );
             }
         }
 

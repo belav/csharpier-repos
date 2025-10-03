@@ -7296,7 +7296,8 @@ class C
                 "long _",
                 model
                     .GetSymbolInfo(discard1)
-                    .Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                    .Symbol
+                    .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
             );
 
             var tuple1 = (TupleExpressionSyntax)discard1.Parent.Parent;
@@ -7408,7 +7409,8 @@ class C
                 "int _",
                 model
                     .GetSymbolInfo(discard2)
-                    .Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                    .Symbol
+                    .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
             );
             Assert.Equal("System.Int32", model.GetTypeInfo(discard2).Type.ToTestDisplayString());
 
@@ -8109,7 +8111,8 @@ class C
                 "int _",
                 model
                     .GetSymbolInfo(discard3)
-                    .Symbol.ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
+                    .Symbol
+                    .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat)
             );
             var discard3Symbol = (IDiscardSymbol)model.GetSymbolInfo(discard3).Symbol;
             Assert.Equal("System.Int32", discard3Symbol.Type.ToTestDisplayString());

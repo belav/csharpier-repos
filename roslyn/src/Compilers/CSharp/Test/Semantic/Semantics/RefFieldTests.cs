@@ -742,9 +742,9 @@ readonly ref struct B
             // Read from metadata directly to inspect the embedded type.
             var decoder = new MetadataDecoder(module);
             var reader = module.Module.MetadataReader;
-            var fieldHandle = reader.FieldDefinitions.Single(handle =>
-                reader.GetString(reader.GetFieldDefinition(handle).Name) == "F"
-            );
+            var fieldHandle = reader
+                .FieldDefinitions
+                .Single(handle => reader.GetString(reader.GetFieldDefinition(handle).Name) == "F");
             var fieldInfo = decoder.DecodeFieldSignature(fieldHandle);
             Assert.True(fieldInfo.IsByRef);
             Assert.Equal(
@@ -2594,7 +2594,8 @@ class Program
             var decoder = new MetadataDecoder(module);
             var reader = module.Module.MetadataReader;
             var fieldReferences = reader
-                .MemberReferences.Where(handle =>
+                .MemberReferences
+                .Where(handle =>
                     reader.GetString(reader.GetMemberReference(handle).Name) is "F1" or "F2" or "F3"
                 )
                 .Select(handle => decoder.GetSymbolForILToken(handle))
@@ -2851,7 +2852,11 @@ public ref struct R2<T, U>
 }";
             var compA = CreateCompilation(sourceA, targetFramework: TargetFramework.Net70);
             var emitOptions = Microsoft
-                .CodeAnalysis.Emit.EmitOptions.Default.WithEmitMetadataOnly(true)
+                .CodeAnalysis
+                .Emit
+                .EmitOptions
+                .Default
+                .WithEmitMetadataOnly(true)
                 .WithIncludePrivateMembers(includePrivateMembers);
             var refA = compA.EmitToImageReference(emitOptions);
 
@@ -12850,7 +12855,8 @@ struct B<T>
             {
                 VerifyParameterSymbol(
                     comp.GetMember<NamedTypeSymbol>("A")
-                        .Constructors.Single(c => !c.IsImplicitlyDeclared)
+                        .Constructors
+                        .Single(c => !c.IsImplicitlyDeclared)
                         .Parameters[0],
                     "scoped ref T t",
                     RefKind.Ref,
@@ -14575,7 +14581,8 @@ public class A
         }
 
         private static readonly SymbolDisplayFormat displayFormatWithScoped = SymbolDisplayFormat
-            .TestFormat.AddParameterOptions(SymbolDisplayParameterOptions.IncludeModifiers)
+            .TestFormat
+            .AddParameterOptions(SymbolDisplayParameterOptions.IncludeModifiers)
             .AddLocalOptions(SymbolDisplayLocalOptions.IncludeModifiers);
 
         private static void VerifyParameterSymbol(
@@ -16447,10 +16454,9 @@ class Program
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularDefault.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                )
+                parseOptions: TestOptions
+                    .RegularDefault
+                    .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
 
@@ -16540,10 +16546,9 @@ class Program
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularDefault.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                )
+                parseOptions: TestOptions
+                    .RegularDefault
+                    .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
 
@@ -16644,10 +16649,9 @@ ref struct RR
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularDefault.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                )
+                parseOptions: TestOptions
+                    .RegularDefault
+                    .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
 
@@ -16742,10 +16746,9 @@ class Program
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularDefault.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                )
+                parseOptions: TestOptions
+                    .RegularDefault
+                    .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
 
@@ -17572,7 +17575,8 @@ class Program
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -17626,7 +17630,8 @@ class Program
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -18453,10 +18458,9 @@ class Enumerator2<T>
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularDefault.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                )
+                parseOptions: TestOptions
+                    .RegularDefault
+                    .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
 
@@ -21868,7 +21872,8 @@ class Program
             var delegateInvokeMethods = decls
                 .Select(d =>
                     ((ILocalSymbol)model.GetDeclaredSymbol(d))
-                        .Type.GetSymbol<NamedTypeSymbol>()
+                        .Type
+                        .GetSymbol<NamedTypeSymbol>()
                         .DelegateInvokeMethod
                 )
                 .ToArray();
@@ -32711,9 +32716,12 @@ public class A
                 parseOptions: TestOptions.Regular10
             );
             var ref0 = comp.EmitToImageReference(
-                Microsoft.CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion(
-                    "0.0.0.0"
-                )
+                Microsoft
+                    .CodeAnalysis
+                    .Emit
+                    .EmitOptions
+                    .Default
+                    .WithRuntimeMetadataVersion("0.0.0.0")
             );
 
             var source1 =
@@ -32893,9 +32901,12 @@ public class A
                 parseOptions: TestOptions.Regular10
             );
             var ref0 = comp.EmitToImageReference(
-                Microsoft.CodeAnalysis.Emit.EmitOptions.Default.WithRuntimeMetadataVersion(
-                    "0.0.0.0"
-                )
+                Microsoft
+                    .CodeAnalysis
+                    .Emit
+                    .EmitOptions
+                    .Default
+                    .WithRuntimeMetadataVersion("0.0.0.0")
             );
 
             var source1 =
@@ -33790,10 +33801,9 @@ ref struct R<T>
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularDefault.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                )
+                parseOptions: TestOptions
+                    .RegularDefault
+                    .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
 
@@ -33877,10 +33887,9 @@ ref struct R<T>
 
             comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularDefault.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                )
+                parseOptions: TestOptions
+                    .RegularDefault
+                    .WithFeature("run-nullable-analysis", "never")
             );
             verifyModel(comp);
 
@@ -34167,7 +34176,8 @@ ref struct R
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -34227,7 +34237,8 @@ ref struct R
                     "R",
                     model
                         .GetSymbolInfo(type.SkipScoped(out _).SkipRef())
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
             }
         }
@@ -35485,9 +35496,11 @@ class C
                 OperationTreeVerifier.GetOperationTree(comp, fieldInitializerOperation)
             );
 
-            var controlFlowGraph = Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph.Create(
-                fieldInitializerOperation
-            );
+            var controlFlowGraph = Microsoft
+                .CodeAnalysis
+                .FlowAnalysis
+                .ControlFlowGraph
+                .Create(fieldInitializerOperation);
             ControlFlowGraphVerifier.VerifyGraph(
                 comp,
                 @"    Block[B0] - Entry
@@ -35549,9 +35562,11 @@ Block[B2] - Exit
                 OperationTreeVerifier.GetOperationTree(comp, constructorOperation)
             );
 
-            controlFlowGraph = Microsoft.CodeAnalysis.FlowAnalysis.ControlFlowGraph.Create(
-                constructorOperation
-            );
+            controlFlowGraph = Microsoft
+                .CodeAnalysis
+                .FlowAnalysis
+                .ControlFlowGraph
+                .Create(constructorOperation);
             ControlFlowGraphVerifier.VerifyGraph(
                 comp,
                 @"Block[B0] - Entry
@@ -37210,9 +37225,9 @@ Block[B2] - Exit
                     public RS() => ri = 0;
                 }
                 """,
-                options: TestOptions.DebugExe.WithSpecificDiagnosticOptions(
-                    ReportStructInitializationWarnings
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: "1"
@@ -37274,9 +37289,9 @@ Block[B2] - Exit
                     }
                 }
                 """,
-                options: TestOptions.DebugExe.WithSpecificDiagnosticOptions(
-                    ReportStructInitializationWarnings
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: "1"
@@ -37359,9 +37374,9 @@ Block[B2] - Exit
                     }
                 }
                 """,
-                options: TestOptions.DebugExe.WithSpecificDiagnosticOptions(
-                    ReportStructInitializationWarnings
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: "12"
@@ -37434,9 +37449,9 @@ Block[B2] - Exit
                     }
                 }
                 """,
-                options: TestOptions.DebugExe.WithSpecificDiagnosticOptions(
-                    ReportStructInitializationWarnings
-                ),
+                options: TestOptions
+                    .DebugExe
+                    .WithSpecificDiagnosticOptions(ReportStructInitializationWarnings),
                 verify: Verification.Skipped,
                 targetFramework: TargetFramework.NetCoreApp,
                 expectedOutput: "12"

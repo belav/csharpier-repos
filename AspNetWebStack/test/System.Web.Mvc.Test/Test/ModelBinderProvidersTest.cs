@@ -13,7 +13,8 @@ namespace System.Web.Mvc.Test
         {
             // Act
             Type[] actualTypes = ModelBinderProviders
-                .BinderProviders.Select(b => b.GetType())
+                .BinderProviders
+                .Select(b => b.GetType())
                 .ToArray();
 
             // Assert

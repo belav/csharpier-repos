@@ -85,19 +85,17 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ClickOKAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().OKButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.LightBulb,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         public async Task ClickCancelAsync(CancellationToken cancellationToken)
         {
             await ClickAsync(dialog => dialog.GetTestAccessor().CancelButton, cancellationToken);
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.LightBulb,
-                cancellationToken
-            );
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(FeatureAttribute.LightBulb, cancellationToken);
         }
 
         public async Task SetNamespaceAsync(string @namespace, CancellationToken cancellationToken)
@@ -109,7 +107,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
             var success = await dialog
                 .GetTestAccessor()
-                .NamespaceBox.SimulateSelectItemAsync(
+                .NamespaceBox
+                .SimulateSelectItemAsync(
                     JoinableTaskFactory,
                     @namespace,
                     mustExist: false,

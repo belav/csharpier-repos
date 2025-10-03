@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
                     replacementMap[colonToken] = colonToken
                         .WithLeadingTrivia(
                             colonToken
-                                .LeadingTrivia.AddRange(colonToken.TrailingTrivia)
+                                .LeadingTrivia
+                                .AddRange(colonToken.TrailingTrivia)
                                 .AddRange(thisBaseKeyword.LeadingTrivia)
                         )
                         .WithTrailingTrivia(SyntaxFactory.Space);
@@ -139,9 +140,9 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
             {
                 var allColonTrivia = colonToken.LeadingTrivia.AddRange(colonToken.TrailingTrivia);
 
-                return previousToken.TrailingTrivia.All(t =>
-                    t.Kind() == SyntaxKind.WhitespaceTrivia
-                )
+                return previousToken
+                    .TrailingTrivia
+                    .All(t => t.Kind() == SyntaxKind.WhitespaceTrivia)
                     ? previousToken.WithTrailingTrivia(allColonTrivia)
                     : previousToken.WithAppendedTrailingTrivia(allColonTrivia);
             }

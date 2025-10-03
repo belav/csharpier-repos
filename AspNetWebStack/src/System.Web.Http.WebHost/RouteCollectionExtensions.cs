@@ -112,13 +112,16 @@ namespace System.Web.Http
                 constraints
             );
             HostedHttpRoute httpRoute = (HostedHttpRoute)
-                GlobalConfiguration.Configuration.Routes.CreateRoute(
-                    routeTemplate,
-                    defaultsDictionary,
-                    constraintsDictionary,
-                    dataTokens: null,
-                    handler: handler
-                );
+                GlobalConfiguration
+                    .Configuration
+                    .Routes
+                    .CreateRoute(
+                        routeTemplate,
+                        defaultsDictionary,
+                        constraintsDictionary,
+                        dataTokens: null,
+                        handler: handler
+                    );
             Route route = httpRoute.OriginalRoute;
             routes.Add(name, route);
             return route;

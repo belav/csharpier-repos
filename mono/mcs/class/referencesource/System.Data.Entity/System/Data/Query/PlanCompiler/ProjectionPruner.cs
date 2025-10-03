@@ -539,7 +539,8 @@ namespace System.Data.Query.PlanCompiler
         {
             //Find all the keys that are nulls and constants
             List<Node> constantKeys = varDefListNode
-                .Children.Where(d =>
+                .Children
+                .Where(d =>
                     d.Op.OpType == OpType.VarDef
                     && PlanCompilerUtil.IsConstantBaseOp(d.Child0.Op.OpType)
                 )
@@ -556,9 +557,11 @@ namespace System.Data.Query.PlanCompiler
             keyVec.Minus(constantKeyVars);
             outputVec.Minus(constantKeyVars);
 
-            varDefListNode.Children.RemoveAll(c =>
-                constantKeys.Contains(c) && constantKeyVars.IsSet(((VarDefOp)c.Op).Var)
-            );
+            varDefListNode
+                .Children
+                .RemoveAll(c =>
+                    constantKeys.Contains(c) && constantKeyVars.IsSet(((VarDefOp)c.Op).Var)
+                );
 
             //If no keys are left add one.
             if (keyVec.Count == 0)

@@ -22,5 +22,6 @@ public class ToStringDictionaryMapper : IObjectMapper
     ) =>
         profileMap
             .CreateTypeDetails(source.GetType())
-            .ReadAccessors.ToDictionary(p => p.Name, p => p.GetMemberValue(source));
+            .ReadAccessors
+            .ToDictionary(p => p.Name, p => p.GetMemberValue(source));
 }

@@ -266,7 +266,8 @@ public class StoredProcedureParameter
     private IMutableProperty GetProperty() =>
         StoredProcedure.EntityType.FindProperty(PropertyName!)
         ?? StoredProcedure
-            .EntityType.GetDerivedTypes()
+            .EntityType
+            .GetDerivedTypes()
             .Select(t => t.FindDeclaredProperty(PropertyName!)!)
             .First(n => n != null);
 

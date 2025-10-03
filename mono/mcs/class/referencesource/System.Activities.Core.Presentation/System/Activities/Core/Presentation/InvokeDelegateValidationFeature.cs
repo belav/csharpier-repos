@@ -139,8 +139,9 @@ namespace System.Activities.Core.Presentation
                 {
                     DynamicActivityProperty property = null;
 
-                    ModelTreeManager manager =
-                        this.EditingContext.Services.GetService<ModelTreeManager>();
+                    ModelTreeManager manager = this.EditingContext
+                        .Services
+                        .GetService<ModelTreeManager>();
                     if (manager.Root.ItemType == typeof(ActivityBuilder))
                     {
                         property = DynamicActivityPropertyUtilities.Find(
@@ -219,10 +220,9 @@ namespace System.Activities.Core.Presentation
                         Argument delegateArgument = null;
 
                         if (
-                            activity.DelegateArguments.TryGetValue(
-                                expectedArgument.Name,
-                                out delegateArgument
-                            )
+                            activity
+                                .DelegateArguments
+                                .TryGetValue(expectedArgument.Name, out delegateArgument)
                         )
                         {
                             if (

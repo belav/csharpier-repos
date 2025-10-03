@@ -26,11 +26,13 @@ namespace ILLink.RoslynAnalyzer.Tests
         > GetNullableWarningsFromCompiler()
         {
             string[] args = { "/warnaserror:nullable" };
-            var commandLineArguments = CSharpCommandLineParser.Default.Parse(
-                args,
-                baseDirectory: Environment.CurrentDirectory,
-                sdkDirectory: Environment.CurrentDirectory
-            );
+            var commandLineArguments = CSharpCommandLineParser
+                .Default
+                .Parse(
+                    args,
+                    baseDirectory: Environment.CurrentDirectory,
+                    sdkDirectory: Environment.CurrentDirectory
+                );
             var nullableWarnings = commandLineArguments
                 .CompilationOptions
                 .SpecificDiagnosticOptions;

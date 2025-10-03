@@ -540,7 +540,8 @@ namespace System.Data.Query.PlanCompiler
 
             DbGroupExpressionBinding newBinding = inputInfo
                 .CreateBinding()
-                .Expression.GroupBindAs(varName, groupVarName);
+                .Expression
+                .GroupBindAs(varName, groupVarName);
             GroupByScope newScope = new GroupByScope(newBinding, inputInfo.PublishedVars);
             _bindingScopes.Push(newScope);
             return newScope;
@@ -784,9 +785,9 @@ namespace System.Data.Query.PlanCompiler
             // Create a "true=true" for "true" predicates,
             // Create a "true=false" expression for false predicates
             //
-            return DbExpressionBuilder.True.Equal(
-                op.IsTrue ? DbExpressionBuilder.True : DbExpressionBuilder.False
-            );
+            return DbExpressionBuilder
+                .True
+                .Equal(op.IsTrue ? DbExpressionBuilder.True : DbExpressionBuilder.False);
         }
 
         public override DbExpression Visit(FunctionOp op, Node n)

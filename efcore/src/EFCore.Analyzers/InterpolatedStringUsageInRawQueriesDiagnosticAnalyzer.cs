@@ -112,10 +112,9 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
         // Verify that the method is the one we analyze and its second argument, which corresponds to `string sql`, is an interpolated string
         if (
             correctFromSqlRaw is null
-            || !targetMethod.ConstructedFrom.Equals(
-                correctFromSqlRaw,
-                SymbolEqualityComparer.Default
-            )
+            || !targetMethod
+                .ConstructedFrom
+                .Equals(correctFromSqlRaw, SymbolEqualityComparer.Default)
             || invocation.Arguments[1].Value is not IInterpolatedStringOperation interpolatedString
         )
         {
@@ -195,10 +194,9 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
         // Verify that the method is the one we analyze and its second argument, which corresponds to `string sql`, is an interpolated string
         if (
             correctSqlQueryRaw is null
-            || !targetMethod.ConstructedFrom.Equals(
-                correctSqlQueryRaw,
-                SymbolEqualityComparer.Default
-            )
+            || !targetMethod
+                .ConstructedFrom
+                .Equals(correctSqlQueryRaw, SymbolEqualityComparer.Default)
             || invocation.Arguments[1].Value is not IInterpolatedStringOperation interpolatedString
         )
         {

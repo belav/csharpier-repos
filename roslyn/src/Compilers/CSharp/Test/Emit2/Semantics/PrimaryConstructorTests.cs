@@ -810,8 +810,10 @@ static "
                     symbolValidator: (m) =>
                     {
                         Assert.False(
-                            m.GlobalNamespace.GetTypeMember("C")
-                                .InstanceConstructors.Single()
+                            m.GlobalNamespace
+                                .GetTypeMember("C")
+                                .InstanceConstructors
+                                .Single()
                                 .IsDefaultValueTypeConstructor()
                         );
                     }
@@ -2761,9 +2763,9 @@ interface I {}
 
                 SemanticModel speculativeModel;
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs.ArgumentList.WithArguments(
-                        baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                    )
+                    baseWithargs
+                        .ArgumentList
+                        .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
                 speculativeBaseInitializer = SyntaxFactory.ConstructorInitializer(
@@ -2824,19 +2826,22 @@ interface I {}
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo(speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     CSharpExtensions
                         .GetSymbolInfo(speculativeModel, speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
 
                 Assert.True(
@@ -2861,19 +2866,22 @@ interface I {}
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo((SyntaxNode)speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     speculativeModel
                         .GetSymbolInfo(speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
                 Assert.Equal(
                     "Base..ctor(System.Int32 X)",
                     CSharpExtensions
                         .GetSymbolInfo(speculativeModel, speculativePrimaryInitializer)
-                        .Symbol.ToTestDisplayString()
+                        .Symbol
+                        .ToTestDisplayString()
                 );
 
                 Assert.Throws<ArgumentNullException>(() =>
@@ -2948,7 +2956,9 @@ interface I {}
                             .DescendantNodes()
                             .OfType<ConstructorInitializerSyntax>()
                             .Single()
-                            .ArgumentList.OpenParenToken.SpanStart,
+                            .ArgumentList
+                            .OpenParenToken
+                            .SpanStart,
                         (SyntaxNode)speculativePrimaryInitializer,
                         SpeculativeBindingOption.BindAsExpression
                     )
@@ -3109,9 +3119,9 @@ interface I {}
                 Assert.Empty(model.GetMemberGroup(baseWithargs));
 
                 speculativePrimaryInitializer = baseWithargs.WithArgumentList(
-                    baseWithargs.ArgumentList.WithArguments(
-                        baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                    )
+                    baseWithargs
+                        .ArgumentList
+                        .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
                 );
 
                 speculativeBaseInitializer = SyntaxFactory.ConstructorInitializer(
@@ -3248,7 +3258,9 @@ interface I {}
                             .DescendantNodes()
                             .OfType<ConstructorInitializerSyntax>()
                             .Single()
-                            .ArgumentList.OpenParenToken.SpanStart,
+                            .ArgumentList
+                            .OpenParenToken
+                            .SpanStart,
                         (SyntaxNode)speculativePrimaryInitializer,
                         SpeculativeBindingOption.BindAsExpression
                     )
@@ -3442,9 +3454,9 @@ struct R3(int X) : Error3
             Assert.Equal("Error1(0, 1)", baseWithargs.ToString());
 
             var speculativeBase = baseWithargs.WithArgumentList(
-                baseWithargs.ArgumentList.WithArguments(
-                    baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                )
+                baseWithargs
+                    .ArgumentList
+                    .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
             );
             Assert.Equal("Error1(0)", speculativeBase.ToString());
 
@@ -4170,7 +4182,8 @@ public "
                 var @class = moduleSymbol.GlobalNamespace.GetMember<NamedTypeSymbol>("Test");
 
                 var param1 = @class
-                    .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+                    .InstanceConstructors
+                    .Where(c => !c.IsDefaultValueTypeConstructor())
                     .Single()
                     .Parameters[0];
                 AssertEx.SetEqual(new[] { "C", "D" }, getAttributeStrings(param1));
@@ -4259,7 +4272,8 @@ public "
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Test1")
-                    .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+                    .InstanceConstructors
+                    .Where(c => !c.IsDefaultValueTypeConstructor())
                     .Single()
                     .Parameters[0]
                     .GetAttributes()
@@ -4267,7 +4281,8 @@ public "
             Assert.Equal(
                 2,
                 comp.GetTypeByMetadataName("Test2")
-                    .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+                    .InstanceConstructors
+                    .Where(c => !c.IsDefaultValueTypeConstructor())
                     .Single()
                     .Parameters[0]
                     .GetAttributes()
@@ -4327,7 +4342,8 @@ public "
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Test1")
-                    .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+                    .InstanceConstructors
+                    .Where(c => !c.IsDefaultValueTypeConstructor())
                     .Single()
                     .Parameters[0]
                     .GetAttributes()
@@ -4335,7 +4351,8 @@ public "
             Assert.Equal(
                 1,
                 comp.GetTypeByMetadataName("Test2")
-                    .InstanceConstructors.Where(c => !c.IsDefaultValueTypeConstructor())
+                    .InstanceConstructors
+                    .Where(c => !c.IsDefaultValueTypeConstructor())
                     .Single()
                     .Parameters[0]
                     .GetAttributes()
@@ -4436,7 +4453,8 @@ public class A : System.Attribute
                 Assert.True(c.HasPrimaryConstructor);
                 Assert.Equal("A", c.PrimaryConstructor.GetAttributes().Single().ToString());
                 Assert.True(
-                    c.Constructors.Where(ctor => ctor != c.PrimaryConstructor)
+                    c.Constructors
+                        .Where(ctor => ctor != c.PrimaryConstructor)
                         .All(ctor => ctor.GetAttributes().IsEmpty)
                 );
             }
@@ -4745,7 +4763,8 @@ partial "
             Assert.True(c1.HasPrimaryConstructor);
             Assert.Equal("A", c1.PrimaryConstructor.GetAttributes().Single().ToString());
             Assert.True(
-                c1.Constructors.Where(ctor => ctor != c1.PrimaryConstructor)
+                c1.Constructors
+                    .Where(ctor => ctor != c1.PrimaryConstructor)
                     .All(ctor => ctor.GetAttributes().IsEmpty)
             );
 
@@ -4754,7 +4773,8 @@ partial "
             Assert.True(c2.HasPrimaryConstructor);
             Assert.Equal("A", c2.PrimaryConstructor.GetAttributes().Single().ToString());
             Assert.True(
-                c2.Constructors.Where(ctor => ctor != c2.PrimaryConstructor)
+                c2.Constructors
+                    .Where(ctor => ctor != c2.PrimaryConstructor)
                     .All(ctor => ctor.GetAttributes().IsEmpty)
             );
         }
@@ -4829,7 +4849,8 @@ partial "
             Assert.True(c1.HasPrimaryConstructor);
             Assert.Equal("A", c1.PrimaryConstructor.GetAttributes().Single().ToString());
             Assert.True(
-                c1.Constructors.Where(ctor => ctor != c1.PrimaryConstructor)
+                c1.Constructors
+                    .Where(ctor => ctor != c1.PrimaryConstructor)
                     .All(ctor => ctor.GetAttributes().IsEmpty)
             );
 
@@ -4838,7 +4859,8 @@ partial "
             Assert.True(c2.HasPrimaryConstructor);
             Assert.Equal("B", c2.PrimaryConstructor.GetAttributes().Single().ToString());
             Assert.True(
-                c2.Constructors.Where(ctor => ctor != c2.PrimaryConstructor)
+                c2.Constructors
+                    .Where(ctor => ctor != c2.PrimaryConstructor)
                     .All(ctor => ctor.GetAttributes().IsEmpty)
             );
         }
@@ -7805,9 +7827,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
 
@@ -7868,9 +7890,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (3,49): warning CS1574: XML comment has cref attribute 'I1' that could not be resolved
@@ -7919,9 +7941,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (3,18): warning CS1572: XML comment has a param tag for 'Error', but there is no parameter by that name
@@ -7955,9 +7977,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (4,12): warning CS1571: XML comment has a duplicate param tag for 'I1'
@@ -7990,9 +8012,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
 
@@ -8028,9 +8050,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (2,38): warning CS1734: XML comment on 'C' has a paramref tag for 'Error', but there is no parameter by that name
@@ -8071,9 +8093,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (5,42): warning CS1734: XML comment on 'C.M1(int)' has a paramref tag for 'I1', but there is no parameter by that name
@@ -8112,9 +8134,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             comp.VerifyDiagnostics();
@@ -8171,9 +8193,9 @@ public "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
 
@@ -8223,9 +8245,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
 
@@ -8277,9 +8299,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
 
@@ -8331,9 +8353,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (2,23): warning CS1591: Missing XML comment for publicly visible type or member 'E.E(int)'
@@ -8388,9 +8410,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (3,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that name
@@ -8445,9 +8467,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
 
             comp.VerifyDiagnostics(
@@ -8508,9 +8530,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (6,24): error CS8863: Only a single partial type declaration may have a parameter list
@@ -8569,9 +8591,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (7,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that name
@@ -8635,9 +8657,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (2,23): warning CS1591: Missing XML comment for publicly visible type or member 'E.E(int)'
@@ -8699,9 +8721,9 @@ public partial "
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (7,18): warning CS1572: XML comment has a param tag for 'S1', but there is no parameter by that name
@@ -8763,9 +8785,9 @@ public class Outer
 
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics();
 
@@ -8826,9 +8848,9 @@ public "
 ";
             var comp = CreateCompilation(
                 src,
-                parseOptions: TestOptions.RegularPreview.WithDocumentationMode(
-                    DocumentationMode.Diagnose
-                )
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithDocumentationMode(DocumentationMode.Diagnose)
             );
             comp.VerifyDiagnostics(
                 // (11,22): warning CS1572: XML comment has a param tag for 'O1', but there is no parameter by that name
@@ -8952,10 +8974,9 @@ class Attr : System.Attribute {}
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                ),
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithFeature("run-nullable-analysis", "never"),
                 targetFramework: TargetFramework.NetCoreApp
             );
             comp.VerifyDiagnostics();
@@ -8966,7 +8987,8 @@ class Attr : System.Attribute {}
                 .DescendantNodes()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .Single()
-                .ArgumentList.Arguments[0]
+                .ArgumentList
+                .Arguments[0]
                 .Expression;
 
             AssertEx.Equal(
@@ -8996,10 +9018,9 @@ class Attr : System.Attribute {}
 
             var comp = CreateCompilation(
                 source,
-                parseOptions: TestOptions.RegularPreview.WithFeature(
-                    "run-nullable-analysis",
-                    "never"
-                ),
+                parseOptions: TestOptions
+                    .RegularPreview
+                    .WithFeature("run-nullable-analysis", "never"),
                 targetFramework: TargetFramework.NetCoreApp
             );
             comp.VerifyDiagnostics();
@@ -9010,7 +9031,8 @@ class Attr : System.Attribute {}
                 .DescendantNodes()
                 .OfType<PrimaryConstructorBaseTypeSyntax>()
                 .Single()
-                .ArgumentList.Arguments[0]
+                .ArgumentList
+                .Arguments[0]
                 .Expression;
             var attrApplication = tree.GetRoot()
                 .DescendantNodes()
@@ -9086,25 +9108,29 @@ public class D
             var comp = CreateCompilation(src);
             AssertEx.SetEqual(
                 new string[] { "A..ctor()" },
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
             AssertEx.SetEqual(
                 new string[] { "B..ctor()" },
-                comp.GlobalNamespace.GetTypeMember("B")
+                comp.GlobalNamespace
+                    .GetTypeMember("B")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
             AssertEx.SetEqual(
                 new string[] { "C..ctor(System.Int32 x)" },
-                comp.GlobalNamespace.GetTypeMember("C")
+                comp.GlobalNamespace
+                    .GetTypeMember("C")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
             AssertEx.SetEqual(
                 new string[] { "D..ctor(System.Int32 x)" },
-                comp.GlobalNamespace.GetTypeMember("D")
+                comp.GlobalNamespace
+                    .GetTypeMember("D")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
@@ -9131,25 +9157,29 @@ public struct D
             var comp = CreateCompilation(src);
             AssertEx.SetEqual(
                 new string[] { "A..ctor()" },
-                comp.GlobalNamespace.GetTypeMember("A")
+                comp.GlobalNamespace
+                    .GetTypeMember("A")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
             AssertEx.SetEqual(
                 new string[] { "B..ctor()" },
-                comp.GlobalNamespace.GetTypeMember("B")
+                comp.GlobalNamespace
+                    .GetTypeMember("B")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
             AssertEx.SetEqual(
                 new string[] { "C..ctor(System.Int32 x)", "C..ctor()" },
-                comp.GlobalNamespace.GetTypeMember("C")
+                comp.GlobalNamespace
+                    .GetTypeMember("C")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
             AssertEx.SetEqual(
                 new string[] { "D..ctor(System.Int32 x)", "D..ctor()" },
-                comp.GlobalNamespace.GetTypeMember("D")
+                comp.GlobalNamespace
+                    .GetTypeMember("D")
                     .GetSimpleNonTypeMembers(".ctor")
                     .ToTestDisplayStrings()
             );
@@ -11751,7 +11781,8 @@ class Attr1 : System.Attribute
             }
 
             var capturedParameters = comp.GetTypeByMetadataName("C1")
-                .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                .InstanceConstructors
+                .OfType<SynthesizedPrimaryConstructor>()
                 .Single()
                 .GetCapturedParameters();
 
@@ -12871,7 +12902,8 @@ class C1 (int p1)
             Assert.Empty(
                 ((CSharpCompilation)verifier.Compilation)
                     .GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -14770,7 +14802,8 @@ class C1 (int p1)
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -14841,14 +14874,16 @@ class Program
             Assert.Equal(
                 1,
                 comp.GetTypeByMetadataName("C2")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
             );
             Assert.Empty(
                 comp.GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -14909,14 +14944,16 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
             Assert.Equal(
                 1,
                 comp.GetTypeByMetadataName("C2")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
@@ -14924,7 +14961,8 @@ class Program
             Assert.Equal(
                 1,
                 comp.GetTypeByMetadataName("C3")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
@@ -14932,7 +14970,8 @@ class Program
             Assert.Equal(
                 2,
                 comp.GetTypeByMetadataName("C4")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
@@ -14959,7 +14998,8 @@ class C3 (int nameof)
             Assert.Equal(
                 1,
                 comp.GetTypeByMetadataName("C3")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
@@ -14998,7 +15038,8 @@ class C1 (int p1, C1 p1)
             Assert.Equal(
                 2,
                 comp.GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
@@ -15242,7 +15283,8 @@ class Program
             Assert.Equal(
                 1,
                 comp.GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
@@ -15298,7 +15340,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15342,7 +15385,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15394,7 +15438,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15441,7 +15486,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15478,7 +15524,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15524,7 +15571,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15571,7 +15619,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15618,7 +15667,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15668,7 +15718,8 @@ static class Extension
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15718,7 +15769,8 @@ static class Extension
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15765,7 +15817,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15812,7 +15865,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15862,7 +15916,8 @@ static class Extension
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15912,7 +15967,8 @@ static class Extension
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -15957,7 +16013,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16004,7 +16061,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16051,7 +16109,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16102,7 +16161,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16158,7 +16218,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16211,7 +16272,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16257,7 +16319,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16306,7 +16369,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16362,7 +16426,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16413,7 +16478,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16467,7 +16533,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16511,7 +16578,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16551,7 +16619,8 @@ class Color
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16595,7 +16664,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16635,7 +16705,8 @@ class Color
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16679,7 +16750,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16716,7 +16788,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16763,7 +16836,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16805,7 +16879,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16857,7 +16932,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16902,7 +16978,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -16952,7 +17029,8 @@ class Color
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17001,7 +17079,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17053,7 +17132,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("Color+C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17256,9 +17336,9 @@ class Program
             var comp = CreateCompilation(source, options: TestOptions.ReleaseExe);
 
             var verifier = CompileAndVerify(comp, expectedOutput: methodName);
-            var diagnostics = verifier.Diagnostics.Where(d =>
-                d.Code is not (int)ErrorCode.HDN_UnusedUsingDirective
-            );
+            var diagnostics = verifier
+                .Diagnostics
+                .Where(d => d.Code is not (int)ErrorCode.HDN_UnusedUsingDirective);
 
             if (isStatic)
             {
@@ -17278,7 +17358,8 @@ class Program
             Assert.Equal(
                 isStatic,
                 comp.GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .IsEmpty()
@@ -17333,19 +17414,22 @@ struct S3(int p1)
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
             Assert.Empty(
                 comp.GetTypeByMetadataName("S2")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S3")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17426,7 +17510,8 @@ struct S1(Color Color)
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17474,7 +17559,8 @@ struct S1(Color Color)
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17523,7 +17609,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17584,27 +17671,32 @@ class Program
                 "System.String P1",
                 comp1
                     .GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Single()
-                    .Key.ToTestDisplayString()
+                    .Key
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 "System.Int32 p2",
                 comp1
                     .GetTypeByMetadataName("C2")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Single()
-                    .Key.ToTestDisplayString()
+                    .Key
+                    .ToTestDisplayString()
             );
             Assert.Equal(
                 2,
                 comp1
                     .GetTypeByMetadataName("C3")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
                     .Count
@@ -17650,14 +17742,16 @@ class C2 (string P2)
             Assert.Empty(
                 comp2
                     .GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
             Assert.Empty(
                 comp2
                     .GetTypeByMetadataName("C2")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17703,7 +17797,8 @@ class Program
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17756,7 +17851,8 @@ class Program
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -17818,7 +17914,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -20729,7 +20826,8 @@ readonly struct S1(int x)
 
             Assert.All(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetBackingFields(),
                 f => Assert.True(f.IsReadOnly)
@@ -20955,7 +21053,8 @@ readonly struct S1(in int x, ref int y, out int z)
 
             Assert.All(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetBackingFields(),
                 f => Assert.True(f.IsReadOnly)
@@ -21172,7 +21271,8 @@ struct S2
 
             Assert.All(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetBackingFields(),
                 f => Assert.True(f.IsReadOnly)
@@ -21428,7 +21528,8 @@ struct S2
 
             Assert.All(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetBackingFields(),
                 f => Assert.True(f.IsReadOnly)
@@ -21773,7 +21874,8 @@ ref struct S2
 
             Assert.All(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetBackingFields(),
                 f => Assert.True(f.IsReadOnly)
@@ -21973,8 +22075,8 @@ class C1 (int p1)
                     comp,
                     symbolValidator: (m) =>
                     {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
+                        var attr = m.GlobalNamespace
+                            .GetTypeMember("C1")
                             .GetMembers()
                             .OfType<FieldSymbol>()
                             .Single()
@@ -22012,8 +22114,8 @@ class C1 (nint p1)
                     comp,
                     symbolValidator: (m) =>
                     {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
+                        var attr = m.GlobalNamespace
+                            .GetTypeMember("C1")
                             .GetMembers()
                             .OfType<FieldSymbol>()
                             .Single()
@@ -22047,8 +22149,8 @@ class C1 ((int i1, int i2) p1)
                     comp,
                     symbolValidator: (m) =>
                     {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
+                        var attr = m.GlobalNamespace
+                            .GetTypeMember("C1")
                             .GetMembers()
                             .OfType<FieldSymbol>()
                             .Single()
@@ -22082,8 +22184,8 @@ class C1 (dynamic p1)
                     comp,
                     symbolValidator: (m) =>
                     {
-                        var attr = m
-                            .GlobalNamespace.GetTypeMember("C1")
+                        var attr = m.GlobalNamespace
+                            .GetTypeMember("C1")
                             .GetMembers()
                             .OfType<FieldSymbol>()
                             .Single()
@@ -22762,7 +22864,8 @@ class Color
 
             Assert.NotEmpty(
                 comp.GetTypeByMetadataName("S1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -25927,7 +26030,8 @@ class C1 (int p1)
             Assert.Equal("p1", comp.GetTypeByMetadataName("C1").Indexers.Single().MetadataName);
             Assert.Single(
                 comp.GetTypeByMetadataName("C1")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -26618,7 +26722,8 @@ class C(int X)
 
             Assert.Empty(
                 comp.GetTypeByMetadataName("C")
-                    .InstanceConstructors.OfType<SynthesizedPrimaryConstructor>()
+                    .InstanceConstructors
+                    .OfType<SynthesizedPrimaryConstructor>()
                     .Single()
                     .GetCapturedParameters()
             );
@@ -26744,8 +26849,8 @@ public partial struct S
 
             void validate2(ModuleSymbol m)
             {
-                var fields = m
-                    .GlobalNamespace.GetTypeMember("S")
+                var fields = m.GlobalNamespace
+                    .GetTypeMember("S")
                     .GetMembers()
                     .OfType<FieldSymbol>()
                     .ToArray();
@@ -26756,8 +26861,8 @@ public partial struct S
 
             void validate3(ModuleSymbol m)
             {
-                var fields = m
-                    .GlobalNamespace.GetTypeMember("S")
+                var fields = m.GlobalNamespace
+                    .GetTypeMember("S")
                     .GetMembers()
                     .OfType<FieldSymbol>()
                     .ToArray();
@@ -26837,8 +26942,8 @@ public partial struct S
 
             void validate2(ModuleSymbol m)
             {
-                var fields = m
-                    .GlobalNamespace.GetTypeMember("S")
+                var fields = m.GlobalNamespace
+                    .GetTypeMember("S")
                     .GetMembers()
                     .OfType<FieldSymbol>()
                     .ToArray();
@@ -27100,7 +27205,8 @@ class C1(string p1)
                 primaryConstructor,
                 namedType
                     .GetSymbol<SourceMemberContainerTypeSymbol>()
-                    .PrimaryConstructor.GetPublicSymbol()
+                    .PrimaryConstructor
+                    .GetPublicSymbol()
             );
             Assert.Equal(1, primaryConstructor.GetAttributes().Length);
         }
@@ -27139,7 +27245,8 @@ class C1(string p1)
                 primaryConstructor1,
                 namedType1
                     .GetSymbol<SourceMemberContainerTypeSymbol>()
-                    .PrimaryConstructor.GetPublicSymbol()
+                    .PrimaryConstructor
+                    .GetPublicSymbol()
             );
             Assert.Equal(1, primaryConstructor1.GetAttributes().Length);
 
@@ -27190,7 +27297,8 @@ class C1(string p1)
                 primaryConstructor1,
                 namedType1
                     .GetSymbol<SourceMemberContainerTypeSymbol>()
-                    .PrimaryConstructor.GetPublicSymbol()
+                    .PrimaryConstructor
+                    .GetPublicSymbol()
             );
             Assert.Equal(1, primaryConstructor1.GetAttributes().Length);
 
@@ -27242,7 +27350,8 @@ class C1(string p1)
             var namedType1 = symbols1.OfType<INamedTypeSymbol>().Single();
             var primaryConstructor1 = namedType1
                 .GetSymbol<SourceMemberContainerTypeSymbol>()
-                .PrimaryConstructor.GetPublicSymbol();
+                .PrimaryConstructor
+                .GetPublicSymbol();
             Assert.Empty(primaryConstructor1.GetAttributes());
 
             var typeDeclaration2 = root.ChildNodes().OfType<TypeDeclarationSyntax>().Last();
@@ -27303,7 +27412,8 @@ class C1(string p1)
                 primaryConstructor1,
                 namedType1
                     .GetSymbol<SourceMemberContainerTypeSymbol>()
-                    .PrimaryConstructor.GetPublicSymbol()
+                    .PrimaryConstructor
+                    .GetPublicSymbol()
             );
             Assert.Equal(0, primaryConstructor1.GetAttributes().Length);
 

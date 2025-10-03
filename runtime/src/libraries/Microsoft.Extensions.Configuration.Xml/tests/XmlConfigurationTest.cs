@@ -985,7 +985,8 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
                 .AddXmlFile(filePath, optional: false)
                 .Build();
             XmlConfigurationProvider xmlConfigurationProvider = config
-                .Providers.OfType<XmlConfigurationProvider>()
+                .Providers
+                .OfType<XmlConfigurationProvider>()
                 .Single();
 
             Assert.NotNull(xmlConfigurationProvider.Source.FileProvider);

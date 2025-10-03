@@ -238,7 +238,8 @@ public class PropertyDiscoveryConventionTest
 
     private ProviderConventionSetBuilderDependencies CreateDependencies() =>
         InMemoryTestHelpers
-            .Instance.CreateContextServices()
+            .Instance
+            .CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private InternalEntityTypeBuilder CreateInternalEntityBuilder<T>()

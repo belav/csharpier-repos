@@ -74,10 +74,9 @@ namespace System.Activities.Hosting
             {
                 if (this.SymbolResolver != null)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "singletonExtension",
-                        SR.SymbolResolverAlreadyExists
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument("singletonExtension", SR.SymbolResolverAlreadyExists);
                 }
                 this.SymbolResolver = (SymbolResolver)singletonExtension;
             }
@@ -314,9 +313,9 @@ namespace System.Activities.Hosting
         {
             if (this.isReadonly)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.ExtensionsCannotBeModified)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.ExtensionsCannotBeModified));
             }
         }
     }

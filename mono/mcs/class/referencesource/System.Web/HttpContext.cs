@@ -886,7 +886,8 @@ namespace System.Web
                 {
                     _asyncPreloadModeFlags = RuntimeConfig
                         .GetConfig(this)
-                        .HttpRuntime.AsyncPreloadMode;
+                        .HttpRuntime
+                        .AsyncPreloadMode;
                     _asyncPreloadModeFlagsSet = true;
                 }
                 return _asyncPreloadModeFlags;
@@ -2353,10 +2354,15 @@ namespace System.Web
         {
             if (_sqlDependencyCookie != null)
             {
-                System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(
-                    SqlCacheDependency.SQL9_OUTPUT_CACHE_DEPENDENCY_COOKIE,
-                    _sqlDependencyCookie
-                );
+                System
+                    .Runtime
+                    .Remoting
+                    .Messaging
+                    .CallContext
+                    .LogicalSetData(
+                        SqlCacheDependency.SQL9_OUTPUT_CACHE_DEPENDENCY_COOKIE,
+                        _sqlDependencyCookie
+                    );
             }
         }
 
@@ -2365,10 +2371,12 @@ namespace System.Web
         {
             if (_sqlDependencyCookie != null)
             {
-                System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(
-                    SqlCacheDependency.SQL9_OUTPUT_CACHE_DEPENDENCY_COOKIE,
-                    null
-                );
+                System
+                    .Runtime
+                    .Remoting
+                    .Messaging
+                    .CallContext
+                    .LogicalSetData(SqlCacheDependency.SQL9_OUTPUT_CACHE_DEPENDENCY_COOKIE, null);
             }
         }
 
@@ -2378,10 +2386,12 @@ namespace System.Web
             set
             {
                 _sqlDependencyCookie = value;
-                System.Runtime.Remoting.Messaging.CallContext.LogicalSetData(
-                    SqlCacheDependency.SQL9_OUTPUT_CACHE_DEPENDENCY_COOKIE,
-                    value
-                );
+                System
+                    .Runtime
+                    .Remoting
+                    .Messaging
+                    .CallContext
+                    .LogicalSetData(SqlCacheDependency.SQL9_OUTPUT_CACHE_DEPENDENCY_COOKIE, value);
             }
         }
 

@@ -196,11 +196,15 @@ namespace System.ServiceModel.Security
                     && this.RecipientAsymmetricTokenProvider != null
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(SR.OnlyOneOfEncryptedKeyOrSymmetricBindingCanBeSelected)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(
+                                    SR.OnlyOneOfEncryptedKeyOrSymmetricBindingCanBeSelected
+                                )
+                            )
+                        );
                 }
                 if (resolver != null)
                 {

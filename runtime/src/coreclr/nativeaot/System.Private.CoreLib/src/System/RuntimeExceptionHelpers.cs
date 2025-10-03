@@ -223,18 +223,21 @@ namespace System
                 bool minimalFailFast = (exception == PreallocatedOutOfMemoryException.Instance);
                 if (!minimalFailFast)
                 {
-                    Internal.Console.Error.Write(
-                        (
-                            (exception == null)
-                            || (
-                                reason
-                                is RhFailFastReason.EnvironmentFailFast
-                                    or RhFailFastReason.AssertionFailure
+                    Internal
+                        .Console
+                        .Error
+                        .Write(
+                            (
+                                (exception == null)
+                                || (
+                                    reason
+                                    is RhFailFastReason.EnvironmentFailFast
+                                        or RhFailFastReason.AssertionFailure
+                                )
                             )
-                        )
-                            ? "Process terminated. "
-                            : "Unhandled exception. "
-                    );
+                                ? "Process terminated. "
+                                : "Unhandled exception. "
+                        );
 
                     if (errorSource != null)
                     {
@@ -325,11 +328,13 @@ namespace System
             exceptionRecord.ExceptionInformation[3] = (uint)triageBufferSize;
 
 #if TARGET_WINDOWS
-            Interop.Kernel32.RaiseFailFastException(
-                new IntPtr(&exceptionRecord),
-                pExContext,
-                pExAddress == IntPtr.Zero ? FAIL_FAST_GENERATE_EXCEPTION_ADDRESS : 0
-            );
+            Interop
+                .Kernel32
+                .RaiseFailFastException(
+                    new IntPtr(&exceptionRecord),
+                    pExContext,
+                    pExAddress == IntPtr.Zero ? FAIL_FAST_GENERATE_EXCEPTION_ADDRESS : 0
+                );
 #else
             RuntimeImports.RhCreateCrashDumpIfEnabled(new IntPtr(&exceptionRecord), pExContext);
             Interop.Sys.Abort();

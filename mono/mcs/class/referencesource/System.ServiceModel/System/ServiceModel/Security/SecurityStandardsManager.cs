@@ -44,9 +44,9 @@ namespace System.ServiceModel.Security
         )
         {
             if (messageSecurityVersion == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("messageSecurityVersion")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("messageSecurityVersion"));
             if (tokenSerializer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenSerializer");
 
@@ -69,12 +69,14 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "messageSecurityVersion",
-                        SR.GetString(SR.MessageSecurityVersionOutOfRange)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "messageSecurityVersion",
+                            SR.GetString(SR.MessageSecurityVersionOutOfRange)
+                        )
+                    );
             }
 
             this.wsUtilitySpecificationVersion = WSUtilitySpecificationVersion.Default;
@@ -227,19 +229,27 @@ namespace System.ServiceModel.Security
             if (header == null)
             {
                 if (String.IsNullOrEmpty(actor))
-                    throw System.ServiceModel.Diagnostics.TraceUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(SR.UnableToFindSecurityHeaderInMessageNoActor)
-                        ),
-                        message
-                    );
+                    throw System
+                        .ServiceModel
+                        .Diagnostics
+                        .TraceUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.UnableToFindSecurityHeaderInMessageNoActor)
+                            ),
+                            message
+                        );
                 else
-                    throw System.ServiceModel.Diagnostics.TraceUtility.ThrowHelperError(
-                        new MessageSecurityException(
-                            SR.GetString(SR.UnableToFindSecurityHeaderInMessage, actor)
-                        ),
-                        message
-                    );
+                    throw System
+                        .ServiceModel
+                        .Diagnostics
+                        .TraceUtility
+                        .ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.UnableToFindSecurityHeaderInMessage, actor)
+                            ),
+                            message
+                        );
             }
             return header;
         }

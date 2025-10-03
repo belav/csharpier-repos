@@ -119,16 +119,19 @@ namespace Microsoft.CodeAnalysis
             operation switch
             {
                 ILocalReferenceOperation localReference => localReference.Local.Equals(symbol),
-                IParameterReferenceOperation parameterReference =>
-                    parameterReference.Parameter.Equals(symbol),
+                IParameterReferenceOperation parameterReference => parameterReference
+                    .Parameter
+                    .Equals(symbol),
                 IAssignmentOperation assignment => IsSymbolReferencedByOperation(
                     assignment.Target,
                     symbol
                 ),
-                ITupleOperation tupleOperation => tupleOperation.Elements.Any(
-                    static (element, symbol) => IsSymbolReferencedByOperation(element, symbol),
-                    symbol
-                ),
+                ITupleOperation tupleOperation => tupleOperation
+                    .Elements
+                    .Any(
+                        static (element, symbol) => IsSymbolReferencedByOperation(element, symbol),
+                        symbol
+                    ),
                 IForEachLoopOperation
                 {
                     LoopControlVariable: IVariableDeclaratorOperation variableDeclarator

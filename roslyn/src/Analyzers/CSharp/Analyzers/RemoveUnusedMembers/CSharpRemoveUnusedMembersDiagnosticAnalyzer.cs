@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers
         )
         {
             return namedType
-                .DeclaringSyntaxReferences.Select(r => r.GetSyntax(cancellationToken))
+                .DeclaringSyntaxReferences
+                .Select(r => r.GetSyntax(cancellationToken))
                 .OfType<TypeDeclarationSyntax>();
         }
 

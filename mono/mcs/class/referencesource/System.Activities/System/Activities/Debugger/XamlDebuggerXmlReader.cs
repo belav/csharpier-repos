@@ -568,17 +568,14 @@ namespace System.Activities.Debugger
                                     this.Current.LineNumber,
                                     this.Current.LinePosition
                                 );
-                                bool isInAttribute =
-                                    this.xmlReaderWithSourceLocation.AttributeValueRanges.TryGetValue(
-                                        currentLocation,
-                                        out valueRange
-                                    );
+                                bool isInAttribute = this.xmlReaderWithSourceLocation
+                                    .AttributeValueRanges
+                                    .TryGetValue(currentLocation, out valueRange);
                                 bool isInContent = isInAttribute
                                     ? false
-                                    : this.xmlReaderWithSourceLocation.ContentValueRanges.TryGetValue(
-                                        currentLocation,
-                                        out valueRange
-                                    );
+                                    : this.xmlReaderWithSourceLocation
+                                        .ContentValueRanges
+                                        .TryGetValue(currentLocation, out valueRange);
 
                                 if (isInAttribute || (isInContent && !isInitializationValue))
                                 {
@@ -760,10 +757,9 @@ namespace System.Activities.Debugger
                     startNode.LinePosition
                 );
                 if (
-                    this.xmlReaderWithSourceLocation.EmptyElementRanges.TryGetValue(
-                        myStartLocation,
-                        out myRange
-                    )
+                    this.xmlReaderWithSourceLocation
+                        .EmptyElementRanges
+                        .TryGetValue(myStartLocation, out myRange)
                 )
                 {
                     myStartBracket = myRange.Start;
@@ -775,14 +771,12 @@ namespace System.Activities.Debugger
                         this.Current.LineNumber,
                         this.Current.LinePosition
                     );
-                    this.xmlReaderWithSourceLocation.StartElementLocations.TryGetValue(
-                        myStartLocation,
-                        out myStartBracket
-                    );
-                    this.xmlReaderWithSourceLocation.EndElementLocations.TryGetValue(
-                        myEndLocation,
-                        out myEndBracket
-                    );
+                    this.xmlReaderWithSourceLocation
+                        .StartElementLocations
+                        .TryGetValue(myStartLocation, out myStartBracket);
+                    this.xmlReaderWithSourceLocation
+                        .EndElementLocations
+                        .TryGetValue(myEndLocation, out myEndBracket);
                 }
 
                 // To enhance visual selection

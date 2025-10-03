@@ -109,10 +109,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         )
         {
             Assert.True(
-                CodeStyleOptions2.AccessibilityModifiersRequired.Definition.Serializer.TryParseValue(
-                    configurationString,
-                    out var parsedCodeStyleOption
-                )
+                CodeStyleOptions2
+                    .AccessibilityModifiersRequired
+                    .Definition
+                    .Serializer
+                    .TryParseValue(configurationString, out var parsedCodeStyleOption)
             );
 
             Assert.Equal(value, parsedCodeStyleOption!.Value);
@@ -130,10 +131,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         public void TestParseEditorConfigEndOfLine(string configurationString, string newLine)
         {
             Assert.True(
-                FormattingOptions2.NewLine.Definition.Serializer.TryParseValue(
-                    configurationString,
-                    out var parsedNewLine
-                )
+                FormattingOptions2
+                    .NewLine
+                    .Definition
+                    .Serializer
+                    .TryParseValue(configurationString, out var parsedNewLine)
             );
             Assert.Equal(newLine, parsedNewLine);
         }

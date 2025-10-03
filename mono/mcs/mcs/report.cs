@@ -1294,13 +1294,15 @@ namespace Mono.CSharp
         public void WarningEnable(Location location, int code, CompilerContext context)
         {
             if (context.Settings.IsWarningDisabledGlobally(code))
-                context.Report.Warning(
-                    1635,
-                    1,
-                    location,
-                    "Cannot restore warning `CS{0:0000}' because it was disabled globally",
-                    code
-                );
+                context
+                    .Report
+                    .Warning(
+                        1635,
+                        1,
+                        location,
+                        "Cannot restore warning `CS{0:0000}' because it was disabled globally",
+                        code
+                    );
 
             regions.Add(new Enable(location.Row, code));
         }

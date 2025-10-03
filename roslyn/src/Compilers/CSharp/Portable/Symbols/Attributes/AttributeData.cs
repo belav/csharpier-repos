@@ -95,9 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             int argumentCount =
                 (attributeSyntax.ArgumentList != null)
-                    ? attributeSyntax.ArgumentList.Arguments.Count<AttributeArgumentSyntax>(
-                        (arg) => arg.NameEquals == null
-                    )
+                    ? attributeSyntax
+                        .ArgumentList
+                        .Arguments
+                        .Count<AttributeArgumentSyntax>((arg) => arg.NameEquals == null)
                     : 0;
             return AttributeData.IsTargetEarlyAttribute(attributeType, argumentCount, description);
         }
@@ -388,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             var sense = arguments
-                .Attribute.CommonConstructorArguments[0]
+                .Attribute
+                .CommonConstructorArguments[0]
                 .DecodeValue<bool>(SpecialType.System_Boolean);
             if (value.Kind != TypedConstantKind.Array)
             {

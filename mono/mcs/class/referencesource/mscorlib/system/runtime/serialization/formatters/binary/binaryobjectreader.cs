@@ -1354,12 +1354,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 // Value is Null
                 SerTrace.Log(this, "ParseMember null member: ", pr.PRname);
                 SerTrace.Log(this, "AddValue 1");
-                objectPr.PRobjectInfo.AddValue(
-                    pr.PRname,
-                    null,
-                    ref objectPr.PRsi,
-                    ref objectPr.PRmemberData
-                );
+                objectPr
+                    .PRobjectInfo
+                    .AddValue(pr.PRname, null, ref objectPr.PRsi, ref objectPr.PRmemberData);
             }
             else if (pr.PRmemberValueEnum == InternalMemberValueE.Nested)
             {
@@ -1402,12 +1399,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 else
                 {
                     SerTrace.Log(this, "AddValue 2A ");
-                    objectPr.PRobjectInfo.AddValue(
-                        pr.PRname,
-                        pr.PRnewObj,
-                        ref objectPr.PRsi,
-                        ref objectPr.PRmemberData
-                    );
+                    objectPr
+                        .PRobjectInfo
+                        .AddValue(
+                            pr.PRname,
+                            pr.PRnewObj,
+                            ref objectPr.PRsi,
+                            ref objectPr.PRmemberData
+                        );
                 }
             }
             else if (pr.PRmemberValueEnum == InternalMemberValueE.Reference)
@@ -1419,12 +1418,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 {
                     SerTrace.Log(this, "ParseMember RecordFixup: ", pr.PRname);
                     SerTrace.Log(this, "AddValue 3");
-                    objectPr.PRobjectInfo.AddValue(
-                        pr.PRname,
-                        null,
-                        ref objectPr.PRsi,
-                        ref objectPr.PRmemberData
-                    );
+                    objectPr
+                        .PRobjectInfo
+                        .AddValue(pr.PRname, null, ref objectPr.PRsi, ref objectPr.PRmemberData);
                     objectPr.PRobjectInfo.RecordFixup(objectPr.PRobjectId, pr.PRname, pr.PRidRef); // Object not instantiated
                 }
                 else
@@ -1437,12 +1433,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         refObj
                     );
                     SerTrace.Log(this, "AddValue 5");
-                    objectPr.PRobjectInfo.AddValue(
-                        pr.PRname,
-                        refObj,
-                        ref objectPr.PRsi,
-                        ref objectPr.PRmemberData
-                    );
+                    objectPr
+                        .PRobjectInfo
+                        .AddValue(pr.PRname, refObj, ref objectPr.PRsi, ref objectPr.PRmemberData);
                 }
             }
             else if (pr.PRmemberValueEnum == InternalMemberValueE.InlineValue)
@@ -1454,12 +1447,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 {
                     ParseString(pr, objectPr);
                     SerTrace.Log(this, "AddValue 6");
-                    objectPr.PRobjectInfo.AddValue(
-                        pr.PRname,
-                        pr.PRvalue,
-                        ref objectPr.PRsi,
-                        ref objectPr.PRmemberData
-                    );
+                    objectPr
+                        .PRobjectInfo
+                        .AddValue(
+                            pr.PRname,
+                            pr.PRvalue,
+                            ref objectPr.PRsi,
+                            ref objectPr.PRmemberData
+                        );
                 }
                 else if (pr.PRdtTypeCode == InternalPrimitiveTypeE.Invalid)
                 {
@@ -1467,12 +1462,14 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     if (pr.PRarrayTypeEnum == InternalArrayTypeE.Base64)
                     {
                         SerTrace.Log(this, "AddValue 7");
-                        objectPr.PRobjectInfo.AddValue(
-                            pr.PRname,
-                            Convert.FromBase64String(pr.PRvalue),
-                            ref objectPr.PRsi,
-                            ref objectPr.PRmemberData
-                        );
+                        objectPr
+                            .PRobjectInfo
+                            .AddValue(
+                                pr.PRname,
+                                Convert.FromBase64String(pr.PRvalue),
+                                ref objectPr.PRsi,
+                                ref objectPr.PRmemberData
+                            );
                     }
                     else if (Object.ReferenceEquals(pr.PRdtType, Converter.typeofObject))
                         throw new SerializationException(
@@ -1494,24 +1491,28 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         if (Object.ReferenceEquals(pr.PRdtType, Converter.typeofSystemVoid))
                         {
                             SerTrace.Log(this, "AddValue 9");
-                            objectPr.PRobjectInfo.AddValue(
-                                pr.PRname,
-                                pr.PRdtType,
-                                ref objectPr.PRsi,
-                                ref objectPr.PRmemberData
-                            );
+                            objectPr
+                                .PRobjectInfo
+                                .AddValue(
+                                    pr.PRname,
+                                    pr.PRdtType,
+                                    ref objectPr.PRsi,
+                                    ref objectPr.PRmemberData
+                                );
                         }
                         else if (objectPr.PRobjectInfo.isSi)
                         {
                             // ISerializable are added as strings, the conversion to type is done by the
                             // ISerializable object
                             SerTrace.Log(this, "AddValue 10");
-                            objectPr.PRobjectInfo.AddValue(
-                                pr.PRname,
-                                pr.PRvalue,
-                                ref objectPr.PRsi,
-                                ref objectPr.PRmemberData
-                            );
+                            objectPr
+                                .PRobjectInfo
+                                .AddValue(
+                                    pr.PRname,
+                                    pr.PRvalue,
+                                    ref objectPr.PRsi,
+                                    ref objectPr.PRmemberData
+                                );
                         }
                     }
                 }
@@ -1531,12 +1532,9 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
                     SerTrace.Log(this, "AddValue 11");
 #endif
-                    objectPr.PRobjectInfo.AddValue(
-                        pr.PRname,
-                        var,
-                        ref objectPr.PRsi,
-                        ref objectPr.PRmemberData
-                    );
+                    objectPr
+                        .PRobjectInfo
+                        .AddValue(pr.PRname, var, ref objectPr.PRsi, ref objectPr.PRmemberData);
                 }
             }
             else

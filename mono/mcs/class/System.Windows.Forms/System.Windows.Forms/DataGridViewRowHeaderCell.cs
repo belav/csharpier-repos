@@ -409,11 +409,9 @@ namespace System.Windows.Forms
         )
         {
             if (
-                ThemeEngine.Current.DataGridViewRowHeaderCellDrawBackground(
-                    this,
-                    graphics,
-                    cellBounds
-                )
+                ThemeEngine
+                    .Current
+                    .DataGridViewRowHeaderCellDrawBackground(this, graphics, cellBounds)
             )
                 return;
             base.PaintPartBackground(graphics, cellBounds, style);

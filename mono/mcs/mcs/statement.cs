@@ -3238,14 +3238,17 @@ namespace Mono.CSharp
                 return;
             }
 
-            ParametersBlock.TopBlock.Report.Error(
-                136,
-                variable.Location,
-                "A local variable named `{0}' cannot be declared in this scope because it would give a different meaning "
-                    + "to `{0}', which is already used in a `{1}' scope to denote something else",
-                name,
-                reason
-            );
+            ParametersBlock
+                .TopBlock
+                .Report
+                .Error(
+                    136,
+                    variable.Location,
+                    "A local variable named `{0}' cannot be declared in this scope because it would give a different meaning "
+                        + "to `{0}', which is already used in a `{1}' scope to denote something else",
+                    name,
+                    reason
+                );
         }
 
         public virtual void Error_AlreadyDeclared(string name, INamedBlockVariable variable)
@@ -3257,23 +3260,29 @@ namespace Mono.CSharp
             }
             else
             {
-                ParametersBlock.TopBlock.Report.Error(
-                    128,
-                    variable.Location,
-                    "A local variable named `{0}' is already defined in this scope",
-                    name
-                );
+                ParametersBlock
+                    .TopBlock
+                    .Report
+                    .Error(
+                        128,
+                        variable.Location,
+                        "A local variable named `{0}' is already defined in this scope",
+                        name
+                    );
             }
         }
 
         public virtual void Error_AlreadyDeclaredTypeParameter(string name, Location loc)
         {
-            ParametersBlock.TopBlock.Report.Error(
-                412,
-                loc,
-                "The type parameter name `{0}' is the same as local variable or parameter name",
-                name
-            );
+            ParametersBlock
+                .TopBlock
+                .Report
+                .Error(
+                    412,
+                    loc,
+                    "The type parameter name `{0}' is the same as local variable or parameter name",
+                    name
+                );
         }
 
         //
@@ -4379,13 +4388,15 @@ namespace Mono.CSharp
                         else
                         {
                             var labeled = (LabeledStatement)entry.Value;
-                            target.labels.Add(
-                                entry.Key,
-                                RemapLabeledStatement(
-                                    labeled,
-                                    clonectx.RemapBlockCopy(labeled.Block)
-                                )
-                            );
+                            target
+                                .labels
+                                .Add(
+                                    entry.Key,
+                                    RemapLabeledStatement(
+                                        labeled,
+                                        clonectx.RemapBlockCopy(labeled.Block)
+                                    )
+                                );
                         }
                     }
 
@@ -4688,43 +4699,43 @@ namespace Mono.CSharp
                 Parameter.Modifier mod = p.ModFlags;
                 if ((mod & Parameter.Modifier.RefOutMask) != 0)
                 {
-                    host.Compiler.Report.Error(
-                        1988,
-                        p.Location,
-                        "Async methods cannot have ref or out parameters"
-                    );
+                    host.Compiler
+                        .Report
+                        .Error(1988, p.Location, "Async methods cannot have ref or out parameters");
                     return this;
                 }
 
                 if (p is ArglistParameter)
                 {
-                    host.Compiler.Report.Error(
-                        4006,
-                        p.Location,
-                        "__arglist is not allowed in parameter list of async methods"
-                    );
+                    host.Compiler
+                        .Report
+                        .Error(
+                            4006,
+                            p.Location,
+                            "__arglist is not allowed in parameter list of async methods"
+                        );
                     return this;
                 }
 
                 if (parameters.Types[i].IsPointer)
                 {
-                    host.Compiler.Report.Error(
-                        4005,
-                        p.Location,
-                        "Async methods cannot have unsafe parameters"
-                    );
+                    host.Compiler
+                        .Report
+                        .Error(4005, p.Location, "Async methods cannot have unsafe parameters");
                     return this;
                 }
             }
 
             if (!HasAwait)
             {
-                host.Compiler.Report.Warning(
-                    1998,
-                    1,
-                    loc,
-                    "Async block lacks `await' operator and will run synchronously"
-                );
+                host.Compiler
+                    .Report
+                    .Warning(
+                        1998,
+                        1,
+                        loc,
+                        "Async block lacks `await' operator and will run synchronously"
+                    );
             }
 
             var block_type = host.Module.Compiler.BuiltinTypes.Void;
@@ -6334,10 +6345,11 @@ namespace Mono.CSharp
             if (ec.Module.PredefinedTypes.Dictionary.Define())
             {
                 string_dictionary_type = new TypeExpression(
-                    ec.Module.PredefinedTypes.Dictionary.TypeSpec.MakeGenericType(
-                        ec,
-                        new[] { ec.BuiltinTypes.String, ec.BuiltinTypes.Int }
-                    ),
+                    ec.Module
+                        .PredefinedTypes
+                        .Dictionary
+                        .TypeSpec
+                        .MakeGenericType(ec, new[] { ec.BuiltinTypes.String, ec.BuiltinTypes.Int }),
                     loc
                 );
             }
@@ -9237,12 +9249,14 @@ namespace Mono.CSharp
                 if (variable_ref == null)
                     return false;
 
-                for_each.body.AddScopeStatement(
-                    new StatementExpression(
-                        new CompilerAssign(variable_ref, access, Location.Null),
-                        for_each.type.Location
-                    )
-                );
+                for_each
+                    .body
+                    .AddScopeStatement(
+                        new StatementExpression(
+                            new CompilerAssign(variable_ref, access, Location.Null),
+                            for_each.type.Location
+                        )
+                    );
 
                 return for_each.body.Resolve(ec);
             }
@@ -9655,12 +9669,14 @@ namespace Mono.CSharp
                 if (variable_ref == null)
                     return false;
 
-                for_each.body.AddScopeStatement(
-                    new StatementExpression(
-                        new CompilerAssign(variable_ref, current_pe, Location.Null),
-                        for_each.type.Location
-                    )
-                );
+                for_each
+                    .body
+                    .AddScopeStatement(
+                        new StatementExpression(
+                            new CompilerAssign(variable_ref, current_pe, Location.Null),
+                            for_each.type.Location
+                        )
+                    );
 
                 var init = new Invocation.Predefined(get_enumerator_mg, null);
 

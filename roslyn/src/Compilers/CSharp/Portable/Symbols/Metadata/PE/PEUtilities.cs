@@ -16,11 +16,9 @@ internal static class PEUtilities
         MetadataDecoder decoder
     )
     {
-        string? disallowedFeature = module.Module.GetFirstUnsupportedCompilerFeatureFromToken(
-            handle,
-            decoder,
-            allowedFeatures
-        );
+        string? disallowedFeature = module
+            .Module
+            .GetFirstUnsupportedCompilerFeatureFromToken(handle, decoder, allowedFeatures);
         return disallowedFeature != null
             ? // '{0}' requires compiler feature '{1}', which is not supported by this version of the C# compiler.
             new CSDiagnosticInfo(

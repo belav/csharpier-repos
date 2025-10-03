@@ -108,7 +108,8 @@ namespace System.Activities.Core.Presentation
                 iterationDelegateArgument.Name = (string)
                     originalActivityActionArgument
                         .Properties[PropertyNames.NameProperty]
-                        .Value.GetCurrentValue();
+                        .Value
+                        .GetCurrentValue();
                 morphed
                     .Properties[PropertyNames.ActionArgument]
                     .SetValue(iterationDelegateArgument);
@@ -162,7 +163,8 @@ namespace System.Activities.Core.Presentation
                 newActivityActionArgument.Name = (string)
                     originalActivityFuncArgument
                         .Properties[PropertyNames.NameProperty]
-                        .Value.GetCurrentValue();
+                        .Value
+                        .GetCurrentValue();
                 morphed
                     .Properties[PropertyNames.ActionArgument]
                     .SetValue(newActivityActionArgument);
@@ -181,7 +183,8 @@ namespace System.Activities.Core.Presentation
                 newActivityActionResult.Name = (string)
                     originalActivityFuncResult
                         .Properties[PropertyNames.NameProperty]
-                        .Value.GetCurrentValue();
+                        .Value
+                        .GetCurrentValue();
                 morphed.Properties[PropertyNames.ResultProperty].SetValue(newActivityActionResult);
             }
 

@@ -774,8 +774,8 @@ namespace ILCompiler.Logging
             // Unlike Roslyn, we don't need to decode property names because we are working
             // directly with IL.
             foreach (
-                var propertyHandle in type
-                    .MetadataReader.GetTypeDefinition(type.Handle)
+                var propertyHandle in type.MetadataReader
+                    .GetTypeDefinition(type.Handle)
                     .GetProperties()
             )
             {

@@ -211,11 +211,13 @@ namespace Mono.CodeContracts.Static.Analysis.NonNull
 
         private NonNullDomain<V> Recurse(Pair<bool, NonNullDomain<V>> pair, E expr)
         {
-            return this.context_provider.ExpressionContext.Decode<
-                Pair<bool, NonNullDomain<V>>,
-                NonNullDomain<V>,
-                ExpressionAssumeDecoder<E, V>
-            >(expr, this, pair);
+            return this.context_provider
+                .ExpressionContext
+                .Decode<
+                    Pair<bool, NonNullDomain<V>>,
+                    NonNullDomain<V>,
+                    ExpressionAssumeDecoder<E, V>
+                >(expr, this, pair);
         }
     }
 }

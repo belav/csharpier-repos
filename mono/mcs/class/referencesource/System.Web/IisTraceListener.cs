@@ -153,10 +153,12 @@ namespace System.Web
                 {
                     datastring = data.ToString();
                 }
-                context.WorkerRequest.RaiseTraceEvent(
-                    Convert(eventType),
-                    AppendTraceOptions(eventCache, datastring)
-                );
+                context
+                    .WorkerRequest
+                    .RaiseTraceEvent(
+                        Convert(eventType),
+                        AppendTraceOptions(eventCache, datastring)
+                    );
             }
         }
 
@@ -191,10 +193,12 @@ namespace System.Web
             }
             if (context != null)
             {
-                context.WorkerRequest.RaiseTraceEvent(
-                    Convert(eventType),
-                    AppendTraceOptions(eventCache, sb.ToString())
-                );
+                context
+                    .WorkerRequest
+                    .RaiseTraceEvent(
+                        Convert(eventType),
+                        AppendTraceOptions(eventCache, sb.ToString())
+                    );
             }
         }
 
@@ -216,10 +220,9 @@ namespace System.Web
             if (context == null)
                 return;
 
-            context.WorkerRequest.RaiseTraceEvent(
-                Convert(severity),
-                AppendTraceOptions(eventCache, message)
-            );
+            context
+                .WorkerRequest
+                .RaiseTraceEvent(Convert(severity), AppendTraceOptions(eventCache, message));
         }
 
         public override void TraceEvent(

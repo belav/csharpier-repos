@@ -42,10 +42,9 @@
                 if (boundSuccessfully)
                 {
                     // run validation
-                    newBindingContext.ValidationNode.Validate(
-                        modelBindingExecutionContext,
-                        parentNode: null
-                    );
+                    newBindingContext
+                        .ValidationNode
+                        .Validate(modelBindingExecutionContext, parentNode: null);
                     return true;
                 }
             }

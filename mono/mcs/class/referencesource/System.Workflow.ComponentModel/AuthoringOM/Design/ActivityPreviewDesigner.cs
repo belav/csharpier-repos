@@ -916,9 +916,9 @@ namespace System.Workflow.ComponentModel.Design
                     && listChangeArgs.RemovedItems.Count > 0
                 )
                 {
-                    int index = this.previewStrip.Items.IndexOf(
-                        new ItemInfo(listChangeArgs.RemovedItems[0].GetHashCode())
-                    );
+                    int index = this.previewStrip
+                        .Items
+                        .IndexOf(new ItemInfo(listChangeArgs.RemovedItems[0].GetHashCode()));
                     if (index >= 0)
                         this.previewStrip.Items.RemoveAt(index);
                 }

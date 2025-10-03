@@ -1672,7 +1672,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1680,7 +1681,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1692,7 +1694,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1767,7 +1770,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1775,7 +1779,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1787,7 +1792,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1865,7 +1871,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -1875,7 +1882,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -1890,7 +1898,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1954,7 +1963,8 @@ class C { }
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.Last(),
                 compilation
-                    .SyntaxTrees.Last()
+                    .SyntaxTrees
+                    .Last()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -1976,7 +1986,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -1984,7 +1995,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -1999,7 +2011,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2055,7 +2068,8 @@ class C { }
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.Last(),
                 compilation
-                    .SyntaxTrees.Last()
+                    .SyntaxTrees
+                    .Last()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2078,7 +2092,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2086,7 +2101,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2101,7 +2117,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2174,7 +2191,8 @@ class C { }
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.First(),
                 compilation
-                    .SyntaxTrees.First()
+                    .SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2197,7 +2215,8 @@ class Dummy {}
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2205,7 +2224,8 @@ class Dummy {}
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2220,7 +2240,8 @@ class Dummy {}
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2307,7 +2328,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2315,7 +2337,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2330,7 +2353,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2416,7 +2440,8 @@ class C { }
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2424,7 +2449,8 @@ class C { }
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2439,7 +2465,8 @@ class C { }
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2491,7 +2518,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
                 compilation
-                    .SyntaxTrees.First()
+                    .SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2512,7 +2540,8 @@ global using AAttribute = XAttribute;"
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2520,7 +2549,8 @@ global using AAttribute = XAttribute;"
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2535,7 +2565,8 @@ global using AAttribute = XAttribute;"
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2592,7 +2623,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
                 compilation
-                    .SyntaxTrees.First()
+                    .SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2612,7 +2644,8 @@ global using BAttribute = XAttribute;"
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2620,7 +2653,8 @@ global using BAttribute = XAttribute;"
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2634,7 +2668,8 @@ global using BAttribute = XAttribute;"
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2706,7 +2741,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
                 compilation
-                    .SyntaxTrees.First()
+                    .SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2727,7 +2763,8 @@ class D { }"
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2735,7 +2772,8 @@ class D { }"
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2750,7 +2788,8 @@ class D { }"
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2813,7 +2852,8 @@ class C { }
         driver = driver.RunGenerators(
             compilation.AddSyntaxTrees(
                 compilation
-                    .SyntaxTrees.First()
+                    .SyntaxTrees
+                    .First()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2835,7 +2875,8 @@ class D { }"
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2843,7 +2884,8 @@ class D { }"
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2935,7 +2977,8 @@ class C { }
             compilation.ReplaceSyntaxTree(
                 compilation.SyntaxTrees.Last(),
                 compilation
-                    .SyntaxTrees.Last()
+                    .SyntaxTrees
+                    .Last()
                     .WithChangedText(
                         SourceText.From(
                             @"
@@ -2957,7 +3000,8 @@ class D { }"
             runResult
                 .TrackedSteps["collectedGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(
@@ -2965,7 +3009,8 @@ class D { }"
             runResult
                 .TrackedSteps["allUpGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
 
@@ -2980,7 +3025,8 @@ class D { }"
             runResult
                 .TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
                 .Single()
-                .Outputs.Single()
+                .Outputs
+                .Single()
                 .Reason
         );
         Assert.Equal(

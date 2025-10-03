@@ -34,8 +34,10 @@ public class ClassificationTypeNamesTests
     public void ClassificationTypeExported(string fieldName, object constantValue)
     {
         var classificationTypeName = Assert.IsType<string>(constantValue);
-        var exportProvider =
-            EditorTestCompositions.EditorFeatures.ExportProviderFactory.CreateExportProvider();
+        var exportProvider = EditorTestCompositions
+            .EditorFeatures
+            .ExportProviderFactory
+            .CreateExportProvider();
         var classificationTypeRegistryService = exportProvider
             .GetExport<IClassificationTypeRegistryService>()
             .Value;

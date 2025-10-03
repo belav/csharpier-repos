@@ -147,9 +147,9 @@ namespace System.Activities.Runtime
 
             if (!this.bookmarkManagers.TryGetValue(lookupScope, out manager))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.RegisteredBookmarkScopeRequired)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.RegisteredBookmarkScopeRequired));
             }
 
             return manager.CreateBookmark(name, callback, owningInstance, options);
@@ -447,9 +447,11 @@ namespace System.Activities.Runtime
 
             if (this.uninitializedScopes == null || !this.uninitializedScopes.Contains(lookupScope))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BookmarkScopeNotRegisteredForInitialize)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.BookmarkScopeNotRegisteredForInitialize)
+                    );
             }
 
             Fx.Assert(
@@ -459,9 +461,11 @@ namespace System.Activities.Runtime
 
             if (this.bookmarkManagers.ContainsKey(new BookmarkScope(id)))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BookmarkScopeWithIdAlreadyExists(id))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.BookmarkScopeWithIdAlreadyExists(id))
+                    );
             }
 
             BookmarkManager bookmarks = this.bookmarkManagers[lookupScope];
@@ -574,16 +578,18 @@ namespace System.Activities.Runtime
 
             if (this.bookmarkManagers == null || !this.bookmarkManagers.ContainsKey(scope))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BookmarkScopeNotRegisteredForUnregister)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(SR.BookmarkScopeNotRegisteredForUnregister)
+                    );
             }
 
             if (this.bookmarkManagers[scope].HasBookmarks)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(SR.BookmarkScopeHasBookmarks)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new InvalidOperationException(SR.BookmarkScopeHasBookmarks));
             }
 
             this.bookmarkManagers.Remove(scope);

@@ -140,8 +140,9 @@ internal sealed partial class AssetProvider
                 foreach (var checksum in collection)
                 {
                     // These DocumentStateChecksums must be here due to the synchronizing step that just happened above.
-                    var checksumObject =
-                        @this._assetProvider.GetRequiredAsset<DocumentStateChecksums>(checksum);
+                    var checksumObject = @this
+                        ._assetProvider
+                        .GetRequiredAsset<DocumentStateChecksums>(checksum);
                     checksums.Add(checksumObject.Info);
                     checksums.Add(checksumObject.Text);
                 }

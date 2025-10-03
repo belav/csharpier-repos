@@ -614,13 +614,15 @@ namespace Microsoft.CodeAnalysis
                 return default(SyntaxToken);
             }
 
-            return SyntaxNavigator.Instance.GetNextToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator
+                .Instance
+                .GetNextToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>
@@ -659,13 +661,15 @@ namespace Microsoft.CodeAnalysis
                 return default(SyntaxToken);
             }
 
-            return SyntaxNavigator.Instance.GetPreviousToken(
-                this,
-                includeZeroWidth,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            return SyntaxNavigator
+                .Instance
+                .GetPreviousToken(
+                    this,
+                    includeZeroWidth,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
         }
 
         /// <summary>

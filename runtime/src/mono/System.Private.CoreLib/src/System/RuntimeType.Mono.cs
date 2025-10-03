@@ -1059,11 +1059,9 @@ namespace System
             }
 
             if ((bindingAttr & BindingFlags.ExactBinding) != 0)
-                return System.DefaultBinder.ExactPropertyBinding(
-                    candidates.ToArray(),
-                    returnType,
-                    types
-                );
+                return System
+                    .DefaultBinder
+                    .ExactPropertyBinding(candidates.ToArray(), returnType, types);
 
             binder ??= DefaultBinder;
 
@@ -1758,10 +1756,11 @@ namespace System
                     instantiation = instantiationCopy;
                     if (!RuntimeFeature.IsDynamicCodeSupported)
                         throw new PlatformNotSupportedException();
-                    return System.Reflection.Emit.TypeBuilderInstantiation.MakeGenericType(
-                        this,
-                        instantiation
-                    );
+                    return System
+                        .Reflection
+                        .Emit
+                        .TypeBuilderInstantiation
+                        .MakeGenericType(this, instantiation);
                 }
 
                 instantiationRuntimeType[i] = rtInstantiationElem;

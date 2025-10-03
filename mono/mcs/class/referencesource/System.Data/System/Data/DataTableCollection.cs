@@ -43,9 +43,10 @@ namespace System.Data
         private CollectionChangeEventHandler onCollectionChangingDelegate = null;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         /// <devdoc>
         /// DataTableCollection constructor.  Used only by DataSet.

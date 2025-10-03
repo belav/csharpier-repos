@@ -40,7 +40,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             if (_possiblyNullableTypeSymbol.IsNullableType())
             {
                 return _possiblyNullableTypeSymbol
-                    .Type.OriginalDefinition.GetUseSiteInfo()
+                    .Type
+                    .OriginalDefinition
+                    .GetUseSiteInfo()
                     .DiagnosticInfo;
             }
             return Binder.GetNullableUnconstrainedTypeParameterDiagnosticIfNecessary(

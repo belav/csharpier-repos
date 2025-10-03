@@ -1238,15 +1238,16 @@ namespace System
                     permSet.Assert();
 
                     using (
-                        RegistryKey reg = Registry.LocalMachine.OpenSubKey(
-                            c_timeZonesRegistryHive,
+                        RegistryKey reg = Registry
+                            .LocalMachine
+                            .OpenSubKey(c_timeZonesRegistryHive,
 #if FEATURE_MACL
-                            RegistryKeyPermissionCheck.Default,
-                            System.Security.AccessControl.RegistryRights.ReadKey
+                                RegistryKeyPermissionCheck.Default,
+                                System.Security.AccessControl.RegistryRights.ReadKey
 #else
-                            false
+                                false
 #endif
-                        )
+                            )
                     )
                     {
                         if (reg != null)
@@ -1851,15 +1852,16 @@ namespace System
                 permSet.Assert();
 
                 using (
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(
-                        c_timeZonesRegistryHive,
+                    RegistryKey key = Registry
+                        .LocalMachine
+                        .OpenSubKey(c_timeZonesRegistryHive,
 #if FEATURE_MACL
-                        RegistryKeyPermissionCheck.Default,
-                        System.Security.AccessControl.RegistryRights.ReadKey
+                            RegistryKeyPermissionCheck.Default,
+                            System.Security.AccessControl.RegistryRights.ReadKey
 #else
-                        false
+                            false
 #endif
-                    )
+                        )
                 )
                 {
                     if (key == null)
@@ -3019,20 +3021,22 @@ namespace System
             try
             {
                 using (
-                    RegistryKey dynamicKey = Registry.LocalMachine.OpenSubKey(
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}\\{1}\\Dynamic DST",
-                            c_timeZonesRegistryHive,
-                            id
-                        ),
+                    RegistryKey dynamicKey = Registry
+                        .LocalMachine
+                        .OpenSubKey(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}\\{1}\\Dynamic DST",
+                                c_timeZonesRegistryHive,
+                                id
+                            ),
 #if FEATURE_MACL
-                        RegistryKeyPermissionCheck.Default,
-                        System.Security.AccessControl.RegistryRights.ReadKey
+                            RegistryKeyPermissionCheck.Default,
+                            System.Security.AccessControl.RegistryRights.ReadKey
 #else
-                        false
+                            false
 #endif
-                    )
+                        )
                 )
                 {
                     if (dynamicKey == null)
@@ -3263,20 +3267,22 @@ namespace System
                 permSet.Assert();
 
                 using (
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}\\{1}",
-                            c_timeZonesRegistryHive,
-                            id
-                        ),
+                    RegistryKey key = Registry
+                        .LocalMachine
+                        .OpenSubKey(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}\\{1}",
+                                c_timeZonesRegistryHive,
+                                id
+                            ),
 #if FEATURE_MACL
-                        RegistryKeyPermissionCheck.Default,
-                        System.Security.AccessControl.RegistryRights.ReadKey
+                            RegistryKeyPermissionCheck.Default,
+                            System.Security.AccessControl.RegistryRights.ReadKey
 #else
-                        false
+                            false
 #endif
-                    )
+                        )
                 )
                 {
                     if (key == null)
@@ -3643,20 +3649,22 @@ namespace System
                 permSet.Assert();
 
                 using (
-                    RegistryKey key = Registry.LocalMachine.OpenSubKey(
-                        String.Format(
-                            CultureInfo.InvariantCulture,
-                            "{0}\\{1}",
-                            c_timeZonesRegistryHive,
-                            id
-                        ),
+                    RegistryKey key = Registry
+                        .LocalMachine
+                        .OpenSubKey(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}\\{1}",
+                                c_timeZonesRegistryHive,
+                                id
+                            ),
 #if FEATURE_MACL
-                        RegistryKeyPermissionCheck.Default,
-                        System.Security.AccessControl.RegistryRights.ReadKey
+                            RegistryKeyPermissionCheck.Default,
+                            System.Security.AccessControl.RegistryRights.ReadKey
 #else
-                        false
+                            false
 #endif
-                    )
+                        )
                 )
                 {
                     if (key == null)
@@ -4722,9 +4730,9 @@ namespace System
                         serializedText.Append(sep);
                         serializedText.Append(
                             SerializeSubstitute(
-                                rule.DaylightDelta.TotalMinutes.ToString(
-                                    CultureInfo.InvariantCulture
-                                )
+                                rule.DaylightDelta
+                                    .TotalMinutes
+                                    .ToString(CultureInfo.InvariantCulture)
                             )
                         );
                         serializedText.Append(sep);
@@ -4737,9 +4745,9 @@ namespace System
                         { // Serialize it only when BaseUtcOffsetDelta has a value to reduce the impact of adding rule.BaseUtcOffsetDelta
                             serializedText.Append(
                                 SerializeSubstitute(
-                                    rule.BaseUtcOffsetDelta.TotalMinutes.ToString(
-                                        CultureInfo.InvariantCulture
-                                    )
+                                    rule.BaseUtcOffsetDelta
+                                        .TotalMinutes
+                                        .ToString(CultureInfo.InvariantCulture)
                                 )
                             );
                             serializedText.Append(sep);

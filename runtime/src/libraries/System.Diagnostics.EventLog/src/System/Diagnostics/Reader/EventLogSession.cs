@@ -124,9 +124,9 @@ namespace System.Diagnostics.Eventing.Reader
             try
             {
                 if (password != null)
-                    erLogin.Password.SetMemory(
-                        SecureStringMarshal.SecureStringToCoTaskMemUnicode(password)
-                    );
+                    erLogin
+                        .Password
+                        .SetMemory(SecureStringMarshal.SecureStringToCoTaskMemUnicode(password));
                 // Open a session using the erLogin structure.
                 Handle = NativeWrapper.EvtOpenSession(
                     UnsafeNativeMethods.EvtLoginClass.EvtRpcLogin,

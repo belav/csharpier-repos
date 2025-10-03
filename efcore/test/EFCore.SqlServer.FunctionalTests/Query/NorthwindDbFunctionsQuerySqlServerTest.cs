@@ -182,7 +182,8 @@ WHERE GREATEST([o].[OrderID], 10251) = 10251
     {
         using var context = CreateContext();
         var result = await context
-            .Employees.Where(c => EF.Functions.FreeText(c.Title, "Representative"))
+            .Employees
+            .Where(c => EF.Functions.FreeText(c.Title, "Representative"))
             .ToListAsync();
 
         Assert.Equal(1u, result.First().EmployeeID);
@@ -213,7 +214,8 @@ WHERE FREETEXT([e].[Title], N'Representative')
     {
         using var context = CreateContext();
         var result = context
-            .Employees.Where(c => EF.Functions.FreeText(c.Title, "Representative Sales"))
+            .Employees
+            .Where(c => EF.Functions.FreeText(c.Title, "Representative Sales"))
             .Count();
 
         Assert.Equal(9, result);
@@ -232,9 +234,9 @@ WHERE FREETEXT([e].[Title], N'Representative Sales')
     public void FreeText_with_language_term()
     {
         using var context = CreateContext();
-        var result = context.Employees.SingleOrDefault(c =>
-            EF.Functions.FreeText(c.Title, "President", 1033)
-        );
+        var result = context
+            .Employees
+            .SingleOrDefault(c => EF.Functions.FreeText(c.Title, "President", 1033));
 
         Assert.Equal(2u, result.EmployeeID);
 
@@ -253,9 +255,9 @@ WHERE FREETEXT([e].[Title], N'President', LANGUAGE 1033)
     {
         var language = 1033;
         using var context = CreateContext();
-        var result = context.Employees.SingleOrDefault(c =>
-            EF.Functions.FreeText(c.Title, "President", language)
-        );
+        var result = context
+            .Employees
+            .SingleOrDefault(c => EF.Functions.FreeText(c.Title, "President", language));
 
         Assert.Equal(2u, result.EmployeeID);
 
@@ -274,7 +276,8 @@ WHERE FREETEXT([e].[Title], N'President', LANGUAGE 1033)
     {
         using var context = CreateContext();
         var result = context
-            .Employees.Where(c => EF.Functions.FreeText(c.Title, "Representative President", 1033))
+            .Employees
+            .Where(c => EF.Functions.FreeText(c.Title, "Representative President", 1033))
             .ToList();
 
         Assert.Equal(1u, result.First().EmployeeID);
@@ -294,7 +297,8 @@ WHERE FREETEXT([e].[Title], N'Representative President', LANGUAGE 1033)
     {
         using var context = CreateContext();
         var result = context
-            .Employees.Where(c =>
+            .Employees
+            .Where(c =>
                 EF.Functions.FreeText(c.City, "London")
                 && EF.Functions.FreeText(c.Title, "Manager", 1033)
             )
@@ -327,7 +331,8 @@ WHERE FREETEXT([e].[City], N'London') AND FREETEXT([e].[Title], N'Manager', LANG
     {
         using var context = CreateContext();
         var result = context
-            .Employees.Where(c =>
+            .Employees
+            .Where(c =>
                 EF.Functions.FreeText(c.Manager.Title, "President")
                 && EF.Functions.FreeText(c.Title, "Inside")
                 && c.FirstName.Contains("Lau")
@@ -354,7 +359,8 @@ ORDER BY [e].[EmployeeID] DESC
     {
         using var context = CreateContext();
         var result = context
-            .Employees.Where(c =>
+            .Employees
+            .Where(c =>
                 EF.Functions.FreeText(c.Manager.Title, "President", 1033)
                 && EF.Functions.FreeText(c.Title, "Inside", 1031)
                 && c.FirstName.Contains("Lau")
@@ -379,9 +385,9 @@ WHERE FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Titl
     {
         using var context = CreateContext();
         await Assert.ThrowsAsync<SqlException>(async () =>
-            await context.Employees.FirstOrDefaultAsync(e =>
-                EF.Functions.FreeText(e.City, e.FirstName)
-            )
+            await context
+                .Employees
+                .FirstOrDefaultAsync(e => EF.Functions.FreeText(e.City, e.FirstName))
         );
 
         await Assert.ThrowsAsync<SqlException>(async () =>
@@ -389,9 +395,9 @@ WHERE FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Titl
         );
 
         await Assert.ThrowsAsync<SqlException>(async () =>
-            await context.Employees.FirstOrDefaultAsync(e =>
-                EF.Functions.FreeText(e.City, e.FirstName.ToUpper())
-            )
+            await context
+                .Employees
+                .FirstOrDefaultAsync(e => EF.Functions.FreeText(e.City, e.FirstName.ToUpper()))
         );
     }
 
@@ -401,15 +407,15 @@ WHERE FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Titl
     {
         using var context = CreateContext();
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await context.Employees.FirstOrDefaultAsync(e =>
-                EF.Functions.FreeText(e.City + "1", "President")
-            )
+            await context
+                .Employees
+                .FirstOrDefaultAsync(e => EF.Functions.FreeText(e.City + "1", "President"))
         );
 
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await context.Employees.FirstOrDefaultAsync(e =>
-                EF.Functions.FreeText(e.City.ToLower(), "President")
-            )
+            await context
+                .Employees
+                .FirstOrDefaultAsync(e => EF.Functions.FreeText(e.City.ToLower(), "President"))
         );
 
         await Assert.ThrowsAsync<InvalidOperationException>(async () =>
@@ -449,9 +455,9 @@ WHERE FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Titl
     {
         using var context = CreateContext();
         await Assert.ThrowsAsync<SqlException>(async () =>
-            await context.Employees.FirstOrDefaultAsync(e =>
-                EF.Functions.Contains(e.City, e.FirstName)
-            )
+            await context
+                .Employees
+                .FirstOrDefaultAsync(e => EF.Functions.Contains(e.City, e.FirstName))
         );
 
         await Assert.ThrowsAsync<SqlException>(async () =>
@@ -459,9 +465,9 @@ WHERE FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Titl
         );
 
         await Assert.ThrowsAsync<SqlException>(async () =>
-            await context.Employees.FirstOrDefaultAsync(e =>
-                EF.Functions.Contains(e.City, e.FirstName.ToUpper())
-            )
+            await context
+                .Employees
+                .FirstOrDefaultAsync(e => EF.Functions.Contains(e.City, e.FirstName.ToUpper()))
         );
     }
 
@@ -481,7 +487,8 @@ WHERE FREETEXT([e0].[Title], N'President', LANGUAGE 1033) AND FREETEXT([e].[Titl
     {
         using var context = CreateContext();
         var result = await context
-            .Employees.Where(c => EF.Functions.Contains(c.Title, "Representative"))
+            .Employees
+            .Where(c => EF.Functions.Contains(c.Title, "Representative"))
             .ToListAsync();
 
         Assert.Equal(1u, result.First().EmployeeID);
@@ -500,9 +507,9 @@ WHERE CONTAINS([e].[Title], N'Representative')
     public void Contains_with_language_term()
     {
         using var context = CreateContext();
-        var result = context.Employees.SingleOrDefault(c =>
-            EF.Functions.Contains(c.Title, "President", 1033)
-        );
+        var result = context
+            .Employees
+            .SingleOrDefault(c => EF.Functions.Contains(c.Title, "President", 1033));
 
         Assert.Equal(2u, result.EmployeeID);
 
@@ -521,9 +528,9 @@ WHERE CONTAINS([e].[Title], N'President', LANGUAGE 1033)
     {
         var language = 1033;
         using var context = CreateContext();
-        var result = context.Employees.SingleOrDefault(c =>
-            EF.Functions.Contains(c.Title, "President", language)
-        );
+        var result = context
+            .Employees
+            .SingleOrDefault(c => EF.Functions.Contains(c.Title, "President", language));
 
         Assert.Equal(2u, result.EmployeeID);
 
@@ -542,7 +549,8 @@ WHERE CONTAINS([e].[Title], N'President', LANGUAGE 1033)
     {
         using var context = CreateContext();
         var result = await context
-            .Employees.Where(c => EF.Functions.Contains(c.Title, "Vice OR Inside"))
+            .Employees
+            .Where(c => EF.Functions.Contains(c.Title, "Vice OR Inside"))
             .ToListAsync();
 
         Assert.Equal(2, result.Count);
@@ -562,9 +570,9 @@ WHERE CONTAINS([e].[Title], N'Vice OR Inside')
     public async Task Contains_with_prefix_term_and_language_term()
     {
         using var context = CreateContext();
-        var result = await context.Employees.SingleOrDefaultAsync(c =>
-            EF.Functions.Contains(c.Title, "\"Mana*\"", 1033)
-        );
+        var result = await context
+            .Employees
+            .SingleOrDefaultAsync(c => EF.Functions.Contains(c.Title, "\"Mana*\"", 1033));
 
         Assert.Equal(5u, result.EmployeeID);
 
@@ -582,9 +590,11 @@ WHERE CONTAINS([e].[Title], N'"Mana*"', LANGUAGE 1033)
     public async Task Contains_with_proximity_term_and_language_term()
     {
         using var context = CreateContext();
-        var result = await context.Employees.SingleOrDefaultAsync(c =>
-            EF.Functions.Contains(c.Title, "NEAR((Sales, President), 1)", 1033)
-        );
+        var result = await context
+            .Employees
+            .SingleOrDefaultAsync(c =>
+                EF.Functions.Contains(c.Title, "NEAR((Sales, President), 1)", 1033)
+            );
 
         Assert.Equal(2u, result.EmployeeID);
 
@@ -603,7 +613,8 @@ WHERE CONTAINS([e].[Title], N'NEAR((Sales, President), 1)', LANGUAGE 1033)
     {
         using var context = CreateContext();
         var result = context
-            .Employees.Where(c =>
+            .Employees
+            .Where(c =>
                 EF.Functions.Contains(c.Manager.Title, "President")
                 && EF.Functions.Contains(c.Title, "\"Ins*\"")
             )
@@ -818,9 +829,11 @@ WHERE DATEDIFF(nanosecond, GETDATE(), DATEADD(second, CAST(1.0E0 AS int), GETDAT
     public virtual void DateDiff_Week_datetime()
     {
         using var context = CreateContext();
-        var count = context.Orders.Count(c =>
-            EF.Functions.DateDiffWeek(c.OrderDate, new DateTime(1998, 5, 6, 0, 0, 0)) == 5
-        );
+        var count = context
+            .Orders
+            .Count(c =>
+                EF.Functions.DateDiffWeek(c.OrderDate, new DateTime(1998, 5, 6, 0, 0, 0)) == 5
+            );
 
         Assert.Equal(16, count);
 
@@ -837,12 +850,14 @@ WHERE DATEDIFF(week, [o].[OrderDate], '1998-05-06T00:00:00.000') = 5
     public virtual void DateDiff_Week_datetimeoffset()
     {
         using var context = CreateContext();
-        var count = context.Orders.Count(c =>
-            EF.Functions.DateDiffWeek(
-                c.OrderDate,
-                new DateTimeOffset(1998, 5, 6, 0, 0, 0, TimeSpan.Zero)
-            ) == 5
-        );
+        var count = context
+            .Orders
+            .Count(c =>
+                EF.Functions.DateDiffWeek(
+                    c.OrderDate,
+                    new DateTimeOffset(1998, 5, 6, 0, 0, 0, TimeSpan.Zero)
+                ) == 5
+            );
 
         Assert.Equal(16, count);
 
@@ -1205,10 +1220,12 @@ WHERE @__date_0 > DATEFROMPARTS(DATEPART(year, GETDATE()), @__date_Month_2, @__d
     {
         using (var context = CreateContext())
         {
-            var count = context.Orders.Count(c =>
-                c.OrderDate
-                > EF.Functions.DateTime2FromParts(DateTime.Now.Year, 12, 31, 23, 59, 59, 999, 3)
-            );
+            var count = context
+                .Orders
+                .Count(c =>
+                    c.OrderDate
+                    > EF.Functions.DateTime2FromParts(DateTime.Now.Year, 12, 31, 23, 59, 59, 999, 3)
+                );
 
             Assert.Equal(0, count);
 
@@ -1227,10 +1244,21 @@ WHERE [o].[OrderDate] > DATETIME2FROMPARTS(DATEPART(year, GETDATE()), 12, 31, 23
     {
         using (var context = CreateContext())
         {
-            var count = context.Orders.Count(c =>
-                new DateTime(2018, 12, 29, 23, 20, 40)
-                > EF.Functions.DateTime2FromParts(DateTime.Now.Year, 12, 31, 23, 59, 59, 9999999, 7)
-            );
+            var count = context
+                .Orders
+                .Count(c =>
+                    new DateTime(2018, 12, 29, 23, 20, 40)
+                    > EF.Functions.DateTime2FromParts(
+                        DateTime.Now.Year,
+                        12,
+                        31,
+                        23,
+                        59,
+                        59,
+                        9999999,
+                        7
+                    )
+                );
 
             Assert.Equal(0, count);
 
@@ -1251,19 +1279,21 @@ WHERE '2018-12-29T23:20:40.0000000' > DATETIME2FROMPARTS(DATEPART(year, GETDATE(
         var fractions = 9999999;
         using (var context = CreateContext())
         {
-            var count = context.Orders.Count(c =>
-                dateTime
-                > EF.Functions.DateTime2FromParts(
-                    DateTime.Now.Year,
-                    dateTime.Month,
-                    dateTime.Day,
-                    dateTime.Hour,
-                    dateTime.Minute,
-                    dateTime.Second,
-                    fractions,
-                    7
-                )
-            );
+            var count = context
+                .Orders
+                .Count(c =>
+                    dateTime
+                    > EF.Functions.DateTime2FromParts(
+                        DateTime.Now.Year,
+                        dateTime.Month,
+                        dateTime.Day,
+                        dateTime.Hour,
+                        dateTime.Minute,
+                        dateTime.Second,
+                        fractions,
+                        7
+                    )
+                );
 
             Assert.Equal(0, count);
 
@@ -1290,21 +1320,23 @@ WHERE @__dateTime_0 > DATETIME2FROMPARTS(DATEPART(year, GETDATE()), @__dateTime_
     {
         using (var context = CreateContext())
         {
-            var count = context.Orders.Count(c =>
-                c.OrderDate
-                > EF.Functions.DateTimeOffsetFromParts(
-                    DateTime.Now.Year,
-                    12,
-                    31,
-                    23,
-                    59,
-                    59,
-                    5,
-                    12,
-                    30,
-                    1
-                )
-            );
+            var count = context
+                .Orders
+                .Count(c =>
+                    c.OrderDate
+                    > EF.Functions.DateTimeOffsetFromParts(
+                        DateTime.Now.Year,
+                        12,
+                        31,
+                        23,
+                        59,
+                        59,
+                        5,
+                        12,
+                        30,
+                        1
+                    )
+                );
 
             Assert.Equal(0, count);
 
@@ -1323,21 +1355,23 @@ WHERE CAST([o].[OrderDate] AS datetimeoffset) > DATETIMEOFFSETFROMPARTS(DATEPART
     {
         using (var context = CreateContext())
         {
-            var count = context.Orders.Count(c =>
-                new DateTimeOffset(2018, 12, 29, 23, 20, 40, new TimeSpan(1, 0, 0))
-                > EF.Functions.DateTimeOffsetFromParts(
-                    DateTime.Now.Year,
-                    12,
-                    31,
-                    23,
-                    59,
-                    59,
-                    50,
-                    1,
-                    0,
-                    7
-                )
-            );
+            var count = context
+                .Orders
+                .Count(c =>
+                    new DateTimeOffset(2018, 12, 29, 23, 20, 40, new TimeSpan(1, 0, 0))
+                    > EF.Functions.DateTimeOffsetFromParts(
+                        DateTime.Now.Year,
+                        12,
+                        31,
+                        23,
+                        59,
+                        59,
+                        50,
+                        1,
+                        0,
+                        7
+                    )
+                );
 
             Assert.Equal(0, count);
 
@@ -1360,21 +1394,23 @@ WHERE '2018-12-29T23:20:40.0000000+01:00' > DATETIMEOFFSETFROMPARTS(DATEPART(yea
         var minuteOffset = 30;
         using (var context = CreateContext())
         {
-            var count = context.Orders.Count(c =>
-                dateTimeOffset
-                > EF.Functions.DateTimeOffsetFromParts(
-                    DateTime.Now.Year,
-                    dateTimeOffset.Month,
-                    dateTimeOffset.Day,
-                    dateTimeOffset.Hour,
-                    dateTimeOffset.Minute,
-                    dateTimeOffset.Second,
-                    fractions,
-                    hourOffset,
-                    minuteOffset,
-                    7
-                )
-            );
+            var count = context
+                .Orders
+                .Count(c =>
+                    dateTimeOffset
+                    > EF.Functions.DateTimeOffsetFromParts(
+                        DateTime.Now.Year,
+                        dateTimeOffset.Month,
+                        dateTimeOffset.Day,
+                        dateTimeOffset.Hour,
+                        dateTimeOffset.Minute,
+                        dateTimeOffset.Second,
+                        fractions,
+                        hourOffset,
+                        minuteOffset,
+                        7
+                    )
+                );
 
             Assert.Equal(0, count);
 

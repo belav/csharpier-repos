@@ -197,9 +197,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 bool flagNonDefaultArraySizesOrLowerBounds
             ) =>
                 typeWithAnnotations.CustomModifiers.Any()
-                || typeWithAnnotations.Type.HasCustomModifiers(
-                    flagNonDefaultArraySizesOrLowerBounds
-                );
+                || typeWithAnnotations
+                    .Type
+                    .HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds);
         }
 
         /// <summary>

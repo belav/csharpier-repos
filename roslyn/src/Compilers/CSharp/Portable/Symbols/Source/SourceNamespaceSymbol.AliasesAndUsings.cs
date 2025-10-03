@@ -887,9 +887,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                             );
                             Debug.Assert(
-                                calculated.UsingNamespacesOrTypes.SequenceEqual(
-                                    result.UsingNamespacesOrTypes
-                                )
+                                calculated
+                                    .UsingNamespacesOrTypes
+                                    .SequenceEqual(result.UsingNamespacesOrTypes)
                             );
                             Debug.Assert(calculated.Diagnostics?.IsEmptyWithoutResolution ?? true);
 #endif
@@ -1070,8 +1070,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             var flags = BinderFlags.SuppressConstraintChecks;
                             if (usingDirective.UnsafeKeyword != default)
                             {
-                                var unsafeKeywordLocation =
-                                    usingDirective.UnsafeKeyword.GetLocation();
+                                var unsafeKeywordLocation = usingDirective
+                                    .UnsafeKeyword
+                                    .GetLocation();
                                 if (usingDirective.StaticKeyword == default)
                                 {
                                     diagnostics.Add(
@@ -1081,11 +1082,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 }
                                 else
                                 {
-                                    MessageID.IDS_FeatureUsingTypeAlias.CheckFeatureAvailability(
-                                        diagnostics,
-                                        usingDirective,
-                                        unsafeKeywordLocation
-                                    );
+                                    MessageID
+                                        .IDS_FeatureUsingTypeAlias
+                                        .CheckFeatureAvailability(
+                                            diagnostics,
+                                            usingDirective,
+                                            unsafeKeywordLocation
+                                        );
                                     declaringSymbol.CheckUnsafeModifier(
                                         DeclarationModifiers.Unsafe,
                                         unsafeKeywordLocation,
@@ -1239,7 +1242,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                                 new NamespaceOrTypeAndUsingDirective(
                                                     importedType,
                                                     usingDirective,
-                                                    directiveDiagnostics.DependenciesBag.ToImmutableArray()
+                                                    directiveDiagnostics
+                                                        .DependenciesBag
+                                                        .ToImmutableArray()
                                                 )
                                             );
                                     }
@@ -1501,9 +1506,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             continue;
                         }
 
-                        NamespaceOrTypeSymbol target = alias.Alias.GetAliasTarget(
-                            basesBeingResolved: null
-                        );
+                        NamespaceOrTypeSymbol target = alias
+                            .Alias
+                            .GetAliasTarget(basesBeingResolved: null);
 
                         diagnostics.Clear();
                         if (alias.Alias is AliasSymbolFromSyntax aliasFromSyntax)

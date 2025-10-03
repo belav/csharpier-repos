@@ -271,9 +271,9 @@ namespace System.Web.Compilation
                     {
                         try
                         {
-                            parameters.ReferencedAssemblies.Add(
-                                AssemblyPathResolver.GetAssemblyPath(ai.Assembly)
-                            );
+                            parameters
+                                .ReferencedAssemblies
+                                .Add(AssemblyPathResolver.GetAssemblyPath(ai.Assembly));
                         }
                         catch (Exception ex)
                         {
@@ -526,9 +526,9 @@ namespace System.Web.Compilation
             CodeMemberMethod method = new CodeMemberMethod();
             method.Name = "GetProfile";
             method.ReturnType = new CodeTypeReference("ProfileCommon");
-            method.Parameters.Add(
-                new CodeParameterDeclarationExpression("System.String", "username")
-            );
+            method
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression("System.String", "username"));
             method.Statements.Add(ret);
             method.Attributes = MemberAttributes.Public;
 

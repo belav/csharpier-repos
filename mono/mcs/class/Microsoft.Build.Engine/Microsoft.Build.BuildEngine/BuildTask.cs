@@ -57,10 +57,10 @@ namespace Microsoft.Build.BuildEngine
         [MonoTODO]
         public void AddOutputItem(string taskParameter, string itemName)
         {
-            XmlElement element = parentTarget.Project.XmlDocument.CreateElement(
-                "Output",
-                Project.XmlNamespace
-            );
+            XmlElement element = parentTarget
+                .Project
+                .XmlDocument
+                .CreateElement("Output", Project.XmlNamespace);
             taskElement.AppendChild(element);
 
             if (taskParameter != null)
@@ -72,10 +72,10 @@ namespace Microsoft.Build.BuildEngine
         [MonoTODO]
         public void AddOutputProperty(string taskParameter, string propertyName)
         {
-            XmlElement element = parentTarget.Project.XmlDocument.CreateElement(
-                "Output",
-                Project.XmlNamespace
-            );
+            XmlElement element = parentTarget
+                .Project
+                .XmlDocument
+                .CreateElement("Output", Project.XmlNamespace);
             taskElement.AppendChild(element);
 
             if (taskParameter != null)
@@ -252,12 +252,15 @@ namespace Microsoft.Build.BuildEngine
                 );
                 throw;
             }
-            parentTarget.Project.ParentEngine.LogMessage(
-                MessageImportance.Low,
-                "Using task {0} from {1}",
-                Name,
-                this.Type.AssemblyQualifiedName
-            );
+            parentTarget
+                .Project
+                .ParentEngine
+                .LogMessage(
+                    MessageImportance.Low,
+                    "Using task {0} from {1}",
+                    Name,
+                    this.Type.AssemblyQualifiedName
+                );
 
             task.BuildEngine = new BuildEngine(
                 parentTarget.Project.ParentEngine,

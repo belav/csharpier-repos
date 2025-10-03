@@ -22,8 +22,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         [CombinatorialData]
         public async Task CodeDefinitionWindowOpensMetadataAsSource(bool enableDecompilation)
         {
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -50,16 +51,16 @@ End Class
             if (enableDecompilation)
                 Assert.Contains(
                     "public struct Int32",
-                    await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices
+                        .CodeDefinitionWindow
+                        .GetCurrentLineTextAsync(HangMitigatingCancellationToken)
                 );
             else
                 Assert.Contains(
                     "Public Structure Int32",
-                    await TestServices.CodeDefinitionWindow.GetCurrentLineTextAsync(
-                        HangMitigatingCancellationToken
-                    )
+                    await TestServices
+                        .CodeDefinitionWindow
+                        .GetCurrentLineTextAsync(HangMitigatingCancellationToken)
                 );
         }
     }

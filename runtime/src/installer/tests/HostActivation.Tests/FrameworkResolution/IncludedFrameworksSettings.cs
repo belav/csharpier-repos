@@ -30,7 +30,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     "It's invalid to specify both `framework`/`frameworks` and `includedFrameworks` properties."
                 );
         }
@@ -45,7 +46,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("mock is_framework_dependent: 0");
+                .And
+                .HaveStdOutContaining("mock is_framework_dependent: 0");
         }
 
         [Fact]
@@ -58,7 +60,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining("No framework name specified.");
+                .And
+                .HaveStdErrContaining("No framework name specified.");
         }
 
         [Fact]
@@ -76,7 +79,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 )
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("mock is_framework_dependent: 0");
+                .And
+                .HaveStdOutContaining("mock is_framework_dependent: 0");
         }
 
         private CommandResult RunFrameworkDependentTest(TestSettings testSettings) =>

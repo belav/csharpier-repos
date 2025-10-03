@@ -24,25 +24,25 @@ namespace System.ServiceModel.Administration
             switch (hr)
             {
                 case WbemNative.WbemStatus.WBEM_E_NOT_FOUND:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WbemInstanceNotFoundException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new WbemInstanceNotFoundException());
                 case WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WbemInvalidParameterException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new WbemInvalidParameterException());
                 case WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WbemNotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new WbemNotSupportedException());
                 case WbemNative.WbemStatus.WBEM_E_INVALID_METHOD:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WbemInvalidMethodException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new WbemInvalidMethodException());
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new WbemException(hr)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new WbemException(hr));
             }
         }
 

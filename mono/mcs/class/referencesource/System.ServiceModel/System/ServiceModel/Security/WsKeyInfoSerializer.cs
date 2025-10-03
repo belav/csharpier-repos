@@ -40,12 +40,14 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "securityVersion",
-                            SR.GetString(SR.MessageSecurityVersionOutOfRange)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "securityVersion",
+                                SR.GetString(SR.MessageSecurityVersionOutOfRange)
+                            )
+                        );
                 }
 
                 if (
@@ -63,9 +65,9 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new NotSupportedException());
                 }
 
                 return serializerEntries;
@@ -115,9 +117,9 @@ namespace System.ServiceModel.Security
             {
                 if (tokenEntryList == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "tokenEntryList"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("tokenEntryList");
                 }
                 tokenEntryList.Add(new DerivedKeyTokenEntry(this));
                 tokenEntryList.Add(new SecurityContextTokenEntry(this));

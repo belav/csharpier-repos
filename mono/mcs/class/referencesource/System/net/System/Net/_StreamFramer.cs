@@ -351,9 +351,9 @@ namespace System.Net
                             throw new InvalidOperationException(
                                 SR.GetString(
                                     SR.net_frame_size,
-                                    m_CurReadHeader.MaxMessageSize.ToString(
-                                        NumberFormatInfo.InvariantInfo
-                                    ),
+                                    m_CurReadHeader
+                                        .MaxMessageSize
+                                        .ToString(NumberFormatInfo.InvariantInfo),
                                     payloadSize.ToString(NumberFormatInfo.InvariantInfo)
                                 )
                             );

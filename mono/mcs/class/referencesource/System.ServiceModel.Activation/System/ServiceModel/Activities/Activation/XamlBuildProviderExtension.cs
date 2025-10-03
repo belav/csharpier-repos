@@ -245,12 +245,14 @@ namespace System.ServiceModel.Activities.Activation
             codeMemberMethod.Name = CreateExpressionRootMethodName;
             codeMemberMethod.Attributes = MemberAttributes.Public | MemberAttributes.Static;
             codeMemberMethod.ReturnType = new CodeTypeReference(typeof(ICompiledExpressionRoot));
-            codeMemberMethod.Parameters.Add(
-                new CodeParameterDeclarationExpression(
-                    new CodeTypeReference(typeof(Activity)),
-                    ActivityParameterName
-                )
-            );
+            codeMemberMethod
+                .Parameters
+                .Add(
+                    new CodeParameterDeclarationExpression(
+                        new CodeTypeReference(typeof(Activity)),
+                        ActivityParameterName
+                    )
+                );
 
             CodeTypeReference typeRef = new CodeTypeReference(
                 activityNamespace + "." + activityName
@@ -326,9 +328,13 @@ namespace System.ServiceModel.Activities.Activation
                         throw;
                     }
 
-                    throw FxTrace.Exception.AsError(
-                        new HttpCompileException(SR.XamlBuildProviderExtensionException(ex.Message))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new HttpCompileException(
+                                SR.XamlBuildProviderExtensionException(ex.Message)
+                            )
+                        );
                 }
             }
         }

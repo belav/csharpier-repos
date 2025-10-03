@@ -74,11 +74,14 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                     else
                     {
                         m[providerKey] = fixAllState
-                            .Provider.GetType()
-                            .FullName!.GetHashCode()
+                            .Provider
+                            .GetType()
+                            .FullName!
+                            .GetHashCode()
                             .ToString();
                         m[CodeActionEquivalenceKey] = fixAllState
-                            .CodeActionEquivalenceKey?.GetHashCode()
+                            .CodeActionEquivalenceKey
+                            ?.GetHashCode()
                             .ToString();
                         m[LanguageName] = fixAllState.Project.Language.GetHashCode().ToString();
                     }
@@ -91,9 +94,10 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                             break;
 
                         case CodeFixes.FixAllScope.Solution:
-                            m[DocumentCount] = fixAllState.Solution.Projects.Sum(p =>
-                                p.DocumentIds.Count
-                            );
+                            m[DocumentCount] = fixAllState
+                                .Solution
+                                .Projects
+                                .Sum(p => p.DocumentIds.Count);
                             break;
                     }
                 })
@@ -193,9 +197,9 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 {
                     m[CorrelationId] = correlationId;
                     m[DocumentsWithDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Count;
-                    m[TotalDiagnosticsToFix] = documentsAndDiagnosticsToFixMap.Values.Sum(v =>
-                        v.Length
-                    );
+                    m[TotalDiagnosticsToFix] = documentsAndDiagnosticsToFixMap
+                        .Values
+                        .Sum(v => v.Length);
                 })
             );
         }
@@ -211,9 +215,9 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 {
                     m[CorrelationId] = correlationId;
                     m[ProjectsWithDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Count;
-                    m[TotalDiagnosticsToFix] = projectsAndDiagnosticsToFixMap.Values.Sum(v =>
-                        v.Length
-                    );
+                    m[TotalDiagnosticsToFix] = projectsAndDiagnosticsToFixMap
+                        .Values
+                        .Sum(v => v.Length);
                 })
             );
         }

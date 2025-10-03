@@ -23,8 +23,11 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             Workspace workspace
         )
         {
-            var cloneServices =
-                workspace.Services.SolutionServices.ExportProvider.GetExports<ITextBufferCloneService>();
+            var cloneServices = workspace
+                .Services
+                .SolutionServices
+                .ExportProvider
+                .GetExports<ITextBufferCloneService>();
             foreach (var cloneService in cloneServices)
                 return cloneService.Value.CloneWithRoslynContentType(sourceText);
 
@@ -37,12 +40,18 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// </summary>
         public static ITextBuffer CloneTextBuffer(this Document document, SourceText sourceText)
         {
-            var contentTypeService =
-                document.Project.Services.GetService<IContentTypeLanguageService>();
+            var contentTypeService = document
+                .Project
+                .Services
+                .GetService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
 
-            var cloneServices =
-                document.Project.Solution.Services.ExportProvider.GetExports<ITextBufferCloneService>();
+            var cloneServices = document
+                .Project
+                .Solution
+                .Services
+                .ExportProvider
+                .GetExports<ITextBufferCloneService>();
             foreach (var cloneService in cloneServices)
                 return cloneService.Value.Clone(sourceText, contentType);
 

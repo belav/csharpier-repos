@@ -64,9 +64,10 @@ namespace Internal.Reflection.Extensions.NonPortable
                     }
                     else
                     {
-                        System.Diagnostics.Debug.Assert(
-                            resolver->ResolverType == OpenMethodResolver.GVMResolve
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(resolver->ResolverType == OpenMethodResolver.GVMResolve);
 
                         callTryGetMethod = false;
                         methodHandle = QMethodDefinition.FromObjectAndInt(
@@ -75,12 +76,14 @@ namespace Internal.Reflection.Extensions.NonPortable
                         );
 
                         if (
-                            !TypeLoaderEnvironment.Instance.TryGetRuntimeMethodHandleComponents(
-                                resolver->GVMMethodHandle,
-                                out _,
-                                out _,
-                                out genericMethodTypeArgumentHandles
-                            )
+                            !TypeLoaderEnvironment
+                                .Instance
+                                .TryGetRuntimeMethodHandleComponents(
+                                    resolver->GVMMethodHandle,
+                                    out _,
+                                    out _,
+                                    out genericMethodTypeArgumentHandles
+                                )
                         )
                             throw new NotSupportedException(
                                 SR.DelegateGetMethodInfo_NoInstantiation
@@ -92,19 +95,23 @@ namespace Internal.Reflection.Extensions.NonPortable
             if (callTryGetMethod)
             {
                 if (
-                    !ReflectionExecution.ExecutionEnvironment.TryGetMethodForOriginalLdFtnResult(
-                        originalLdFtnResult,
-                        ref typeOfFirstParameterIfInstanceDelegate,
-                        out methodHandle,
-                        out genericMethodTypeArgumentHandles
-                    )
+                    !ReflectionExecution
+                        .ExecutionEnvironment
+                        .TryGetMethodForOriginalLdFtnResult(
+                            originalLdFtnResult,
+                            ref typeOfFirstParameterIfInstanceDelegate,
+                            out methodHandle,
+                            out genericMethodTypeArgumentHandles
+                        )
                 )
                 {
-                    ReflectionExecution.ExecutionEnvironment.GetFunctionPointerAndInstantiationArgumentForOriginalLdFtnResult(
-                        originalLdFtnResult,
-                        out IntPtr ip,
-                        out IntPtr _
-                    );
+                    ReflectionExecution
+                        .ExecutionEnvironment
+                        .GetFunctionPointerAndInstantiationArgumentForOriginalLdFtnResult(
+                            originalLdFtnResult,
+                            out IntPtr ip,
+                            out IntPtr _
+                        );
 
                     string methodDisplayString = RuntimeAugments.TryGetMethodDisplayStringFromIp(
                         ip

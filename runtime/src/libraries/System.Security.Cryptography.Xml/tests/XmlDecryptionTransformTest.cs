@@ -226,10 +226,9 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlNamespaceManager xmlNamespaceManager = new XmlNamespaceManager(doc.NameTable);
             xmlNamespaceManager.AddNamespace("enc", EncryptedXml.XmlEncNamespaceUrl);
             Assert.NotNull(
-                transformedDocument.DocumentElement.SelectSingleNode(
-                    "//enc:EncryptedData",
-                    xmlNamespaceManager
-                )
+                transformedDocument
+                    .DocumentElement
+                    .SelectSingleNode("//enc:EncryptedData", xmlNamespaceManager)
             );
             Assert.NotEqual(xml, transformedDocument.OuterXml);
         }

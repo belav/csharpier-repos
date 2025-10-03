@@ -99,10 +99,9 @@ namespace System.ServiceModel.Description
             {
                 Message responseMessage = Message.CreateMessage(MessageVersion.None, string.Empty);
                 responseMessageProperty.StatusCode = HttpStatusCode.NotModified;
-                responseMessage.Properties.Add(
-                    HttpResponseMessageProperty.Name,
-                    responseMessageProperty
-                );
+                responseMessage
+                    .Properties
+                    .Add(HttpResponseMessageProperty.Name, responseMessageProperty);
                 return responseMessage;
             }
 
@@ -113,24 +112,21 @@ namespace System.ServiceModel.Description
                 )
             );
             Message response = new WebScriptMetadataMessage(string.Empty, proxyContent);
-            responseMessageProperty.Headers.Add(
-                JsonGlobals.LastModifiedString,
-                ServiceLastModifiedRfc1123String
-            );
-            responseMessageProperty.Headers.Add(
-                JsonGlobals.ExpiresString,
-                ServiceLastModifiedRfc1123String
-            );
+            responseMessageProperty
+                .Headers
+                .Add(JsonGlobals.LastModifiedString, ServiceLastModifiedRfc1123String);
+            responseMessageProperty
+                .Headers
+                .Add(JsonGlobals.ExpiresString, ServiceLastModifiedRfc1123String);
             if (AspNetEnvironment.Current.AspNetCompatibilityEnabled)
             {
                 HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
             }
             else
             {
-                responseMessageProperty.Headers.Add(
-                    JsonGlobals.CacheControlString,
-                    JsonGlobals.publicString
-                );
+                responseMessageProperty
+                    .Headers
+                    .Add(JsonGlobals.CacheControlString, JsonGlobals.publicString);
             }
             response.Properties.Add(HttpResponseMessageProperty.Name, responseMessageProperty);
             return response;

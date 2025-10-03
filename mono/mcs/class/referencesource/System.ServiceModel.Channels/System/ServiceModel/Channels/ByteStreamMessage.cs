@@ -31,10 +31,12 @@ namespace System.ServiceModel.Channels
         {
             if (buffer.Array == null)
             {
-                throw FxTrace.Exception.ArgumentNull(
-                    "buffer.Array",
-                    SR.ArgumentPropertyShouldNotBeNullError("buffer.Array")
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentNull(
+                        "buffer.Array",
+                        SR.ArgumentPropertyShouldNotBeNullError("buffer.Array")
+                    );
             }
 
             ByteStreamBufferedMessageData data = new ByteStreamBufferedMessageData(
@@ -402,11 +404,13 @@ namespace System.ServiceModel.Channels
                     reader.Close();
                     return (T)(object)buffer;
                 }
-                throw FxTrace.Exception.AsError(
-                    new NotSupportedException(
-                        SR.ByteStreamMessageGetTypeNotSupported(typeT.FullName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new NotSupportedException(
+                            SR.ByteStreamMessageGetTypeNotSupported(typeT.FullName)
+                        )
+                    );
             }
 
             protected override XmlDictionaryReader OnGetReaderAtBodyContents()
@@ -658,8 +662,8 @@ namespace System.ServiceModel.Channels
                             ByteStreamMessageUtility.StreamElementName,
                             string.Empty
                         );
-                        IAsyncResult result = this
-                            .writer.WriteValueAsync(new ByteStreamStreamProvider(stream))
+                        IAsyncResult result = this.writer
+                            .WriteValueAsync(new ByteStreamStreamProvider(stream))
                             .AsAsyncResult(PrepareAsyncCompletion(HandleWriteBodyContents), this);
                         bool completeSelf = SyncContinue(result);
 

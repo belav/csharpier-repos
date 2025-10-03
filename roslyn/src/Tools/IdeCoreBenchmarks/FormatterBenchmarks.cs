@@ -53,18 +53,15 @@ namespace IdeCoreBenchmarks
             var documentId = DocumentId.CreateNewId(projectId);
 
             var solution = new AdhocWorkspace()
-                .CurrentSolution.AddProject(
-                    projectId,
-                    "ProjectName",
-                    "AssemblyName",
-                    LanguageNames.CSharp
-                )
+                .CurrentSolution
+                .AddProject(projectId, "ProjectName", "AssemblyName", LanguageNames.CSharp)
                 .AddDocument(documentId, "DocumentName", text);
 
             var document = solution.GetDocument(documentId);
             var root = document
                 .GetSyntaxRootAsync(CancellationToken.None)
-                .Result.WithAdditionalAnnotations(Formatter.Annotation);
+                .Result
+                .WithAdditionalAnnotations(Formatter.Annotation);
             solution = solution.WithDocumentSyntaxRoot(documentId, root);
 
             _document = solution.GetDocument(documentId);

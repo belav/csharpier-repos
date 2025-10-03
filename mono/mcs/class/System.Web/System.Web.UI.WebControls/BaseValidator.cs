@@ -312,9 +312,11 @@ namespace System.Web.UI.WebControls
             if (!EnableClientScript)
                 return false;
             return UplevelHelper.IsUplevel(
-                System.Web.Configuration.HttpCapabilitiesBase.GetUserAgentForDetection(
-                    HttpContext.Current.Request
-                )
+                System
+                    .Web
+                    .Configuration
+                    .HttpCapabilitiesBase
+                    .GetUserAgentForDetection(HttpContext.Current.Request)
             );
         }
 

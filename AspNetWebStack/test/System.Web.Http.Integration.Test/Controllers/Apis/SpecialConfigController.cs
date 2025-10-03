@@ -60,10 +60,9 @@ namespace System.Web.Http
 
                 controllerSettings.ParameterBindingRules.Clear();
 
-                controllerSettings.Services.Replace(
-                    typeof(IDocumentationProvider),
-                    new AttributeDocumentationProvider()
-                );
+                controllerSettings
+                    .Services
+                    .Replace(typeof(IDocumentationProvider), new AttributeDocumentationProvider());
             }
         }
     }

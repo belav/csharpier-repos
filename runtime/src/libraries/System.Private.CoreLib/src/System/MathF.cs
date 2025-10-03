@@ -327,7 +327,8 @@ namespace System
             else if (AdvSimd.Arm64.IsSupported)
             {
                 return AdvSimd
-                    .Arm64.ReciprocalEstimateScalar(Vector64.CreateScalarUnsafe(x))
+                    .Arm64
+                    .ReciprocalEstimateScalar(Vector64.CreateScalarUnsafe(x))
                     .ToScalar();
             }
             else
@@ -354,7 +355,8 @@ namespace System
             else if (AdvSimd.Arm64.IsSupported)
             {
                 return AdvSimd
-                    .Arm64.ReciprocalSquareRootEstimateScalar(Vector64.CreateScalarUnsafe(x))
+                    .Arm64
+                    .ReciprocalSquareRootEstimateScalar(Vector64.CreateScalarUnsafe(x))
                     .ToScalar();
             }
             else

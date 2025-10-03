@@ -5132,7 +5132,8 @@ namespace System
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
 
             CompileAndVerify(comp, expectedOutput: @"called", verify: Verification.Fails)
-                .Diagnostics.Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
+                .Diagnostics
+                .Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
                 .Verify();
         }
 
@@ -5181,7 +5182,8 @@ namespace System
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
 
             CompileAndVerify(comp, expectedOutput: @"called", verify: Verification.Fails)
-                .Diagnostics.Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
+                .Diagnostics
+                .Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
                 .Verify();
         }
 
@@ -5228,7 +5230,8 @@ namespace System
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
 
             CompileAndVerify(comp, expectedOutput: @"called", verify: Verification.Fails)
-                .Diagnostics.Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
+                .Diagnostics
+                .Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
                 .Verify();
         }
 
@@ -5274,7 +5277,8 @@ namespace System
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
 
             CompileAndVerify(comp, expectedOutput: @"called", verify: Verification.Fails)
-                .Diagnostics.Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
+                .Diagnostics
+                .Where(d => d.Code is not (int)ErrorCode.WRN_SameFullNameThisAggAgg)
                 .Verify();
         }
 

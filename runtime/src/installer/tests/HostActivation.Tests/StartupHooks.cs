@@ -43,9 +43,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdErrContaining($"Property STARTUP_HOOKS = {startupHookDll}")
-                .And.HaveStdOutContaining("Hello from startup hook!")
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdErrContaining($"Property STARTUP_HOOKS = {startupHookDll}")
+                .And
+                .HaveStdOutContaining("Hello from startup hook!")
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         [Fact]
@@ -78,7 +81,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutMatching(
+                .And
+                .HaveStdOutMatching(
                     $"Hello from startup hook in {startupHook2Fixture.TestProject.AssemblyName}!"
                         + wildcardPattern
                         + $"Hello from startup hook!"
@@ -104,8 +108,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World")
-                .And.NotHaveStdErr();
+                .And
+                .HaveStdOutContaining("Hello World")
+                .And
+                .NotHaveStdErr();
         }
 
         // Run the app with a startup hook assembly that depends on assemblies not on the TPA list
@@ -130,7 +136,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     "System.IO.FileNotFoundException: Could not load file or assembly 'SharedLibrary"
                 );
         }
@@ -157,8 +164,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Resolving SharedLibrary in startup hook")
-                .And.HaveStdOutContaining("SharedLibrary.SharedType.Value=2");
+                .And
+                .HaveStdOutContaining("Resolving SharedLibrary in startup hook")
+                .And
+                .HaveStdOutContaining("SharedLibrary.SharedType.Value=2");
         }
 
         [Fact]
@@ -186,8 +195,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.NotHaveStdOutContaining("Hello from startup hook!")
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .NotHaveStdOutContaining("Hello from startup hook!")
+                .And
+                .HaveStdOutContaining("Hello World");
         }
 
         public class SharedTestState : IDisposable

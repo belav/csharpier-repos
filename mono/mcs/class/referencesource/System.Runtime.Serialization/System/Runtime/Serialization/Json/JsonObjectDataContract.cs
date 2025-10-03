@@ -52,11 +52,13 @@ namespace System.Runtime.Serialization.Json
                         context
                     );
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(SR.JsonUnexpectedAttributeValue, contentMode)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(SR.JsonUnexpectedAttributeValue, contentMode)
+                            )
+                        );
             }
 
             if (context != null)
@@ -85,15 +87,21 @@ namespace System.Runtime.Serialization.Json
         {
             if (value == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        System.Runtime.Serialization.SR.GetString(
-                            System.Runtime.Serialization.SR.XmlInvalidConversion,
-                            value,
-                            Globals.TypeOfInt
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            System
+                                .Runtime
+                                .Serialization
+                                .SR
+                                .GetString(
+                                    System.Runtime.Serialization.SR.XmlInvalidConversion,
+                                    value,
+                                    Globals.TypeOfInt
+                                )
                         )
-                    )
-                );
+                    );
             }
 
             if (value.IndexOfAny(JsonGlobals.floatingPointCharacters) == -1)

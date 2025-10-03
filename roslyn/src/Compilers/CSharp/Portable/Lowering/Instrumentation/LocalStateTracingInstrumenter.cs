@@ -179,9 +179,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            var contextType = factory.Compilation.GetWellKnownType(
-                WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker
-            );
+            var contextType = factory
+                .Compilation
+                .GetWellKnownType(WellKnownType.Microsoft_CodeAnalysis_Runtime_LocalStoreTracker);
             if (IsSameOrNestedType(method.ContainingType, contextType))
             {
                 return false;
@@ -704,9 +704,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            var targetSymbol = original.Locals.FirstOrDefault(l =>
-                l.SynthesizedKind == SynthesizedLocalKind.UserDefined
-            );
+            var targetSymbol = original
+                .Locals
+                .FirstOrDefault(l => l.SynthesizedKind == SynthesizedLocalKind.UserDefined);
             if (targetSymbol is null)
             {
                 return;

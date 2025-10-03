@@ -234,22 +234,24 @@ namespace System.Security.Principal
                                 sourceNameLength
                             );
 
-                            int ntStatus = Interop.SspiCli.LsaLogonUser(
-                                lsaHandle,
-                                lsaOriginName,
-                                SECURITY_LOGON_TYPE.Network,
-                                packageId,
-                                authenticationInfo.DangerousGetHandle(),
-                                authenticationInfoLength,
-                                IntPtr.Zero,
-                                sourceContext,
-                                out SafeLsaReturnBufferHandle profileBuffer,
-                                out int profileBufferLength,
-                                out LUID logonId,
-                                out SafeAccessTokenHandle accessTokenHandle,
-                                out QUOTA_LIMITS quota,
-                                out int subStatus
-                            );
+                            int ntStatus = Interop
+                                .SspiCli
+                                .LsaLogonUser(
+                                    lsaHandle,
+                                    lsaOriginName,
+                                    SECURITY_LOGON_TYPE.Network,
+                                    packageId,
+                                    authenticationInfo.DangerousGetHandle(),
+                                    authenticationInfoLength,
+                                    IntPtr.Zero,
+                                    sourceContext,
+                                    out SafeLsaReturnBufferHandle profileBuffer,
+                                    out int profileBufferLength,
+                                    out LUID logonId,
+                                    out SafeAccessTokenHandle accessTokenHandle,
+                                    out QUOTA_LIMITS quota,
+                                    out int subStatus
+                                );
 
                             profileBuffer.Dispose();
 
@@ -303,11 +305,13 @@ namespace System.Security.Principal
                         (IntPtr)pAsciiPackageName,
                         checked((ushort)(asciiPackageName.Length))
                     );
-                    int ntStatus = Interop.SspiCli.LsaLookupAuthenticationPackage(
-                        lsaHandle,
-                        ref lsaPackageName,
-                        out packageId
-                    );
+                    int ntStatus = Interop
+                        .SspiCli
+                        .LsaLookupAuthenticationPackage(
+                            lsaHandle,
+                            ref lsaPackageName,
+                            out packageId
+                        );
                     if (ntStatus < 0) // non-negative numbers indicate success
                         throw GetExceptionFromNtStatus(ntStatus);
                 }
@@ -324,13 +328,15 @@ namespace System.Security.Principal
 
             // Find out if the specified token is a valid.
             if (
-                !Interop.Advapi32.GetTokenInformation(
-                    accessToken,
-                    (uint)TokenInformationClass.TokenType,
-                    IntPtr.Zero,
-                    0,
-                    out _
-                )
+                !Interop
+                    .Advapi32
+                    .GetTokenInformation(
+                        accessToken,
+                        (uint)TokenInformationClass.TokenType,
+                        IntPtr.Zero,
+                        0,
+                        out _
+                    )
                 && Marshal.GetLastPInvokeError() == Interop.Errors.ERROR_INVALID_HANDLE
             )
             {
@@ -340,15 +346,17 @@ namespace System.Security.Principal
             SafeAccessTokenHandle duplicateAccessToken;
             IntPtr currentProcessHandle = Interop.Kernel32.GetCurrentProcess();
             if (
-                !Interop.Kernel32.DuplicateHandle(
-                    currentProcessHandle,
-                    accessToken,
-                    currentProcessHandle,
-                    out duplicateAccessToken,
-                    0,
-                    true,
-                    Interop.DuplicateHandleOptions.DUPLICATE_SAME_ACCESS
-                )
+                !Interop
+                    .Kernel32
+                    .DuplicateHandle(
+                        currentProcessHandle,
+                        accessToken,
+                        currentProcessHandle,
+                        out duplicateAccessToken,
+                        0,
+                        true,
+                        Interop.DuplicateHandleOptions.DUPLICATE_SAME_ACCESS
+                    )
             )
             {
                 throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
@@ -458,10 +466,9 @@ namespace System.Security.Principal
                     SafeLsaReturnBufferHandle? pLogonSessionData = null;
                     try
                     {
-                        int status = Interop.SspiCli.LsaGetLogonSessionData(
-                            ref authId,
-                            out pLogonSessionData
-                        );
+                        int status = Interop
+                            .SspiCli
+                            .LsaGetLogonSessionData(ref authId, out pLogonSessionData);
                         if (status < 0) // non-negative numbers indicate success
                             throw GetExceptionFromNtStatus(status);
 
@@ -560,14 +567,16 @@ namespace System.Security.Principal
             {
                 if (
                     til == TokenImpersonationLevel.None
-                    && !Interop.Advapi32.DuplicateTokenEx(
-                        _safeTokenHandle,
-                        (uint)TokenAccessLevels.Query,
-                        IntPtr.Zero,
-                        (uint)TokenImpersonationLevel.Identification,
-                        (uint)TokenType.TokenImpersonation,
-                        ref token
-                    )
+                    && !Interop
+                        .Advapi32
+                        .DuplicateTokenEx(
+                            _safeTokenHandle,
+                            (uint)TokenAccessLevels.Query,
+                            IntPtr.Zero,
+                            (uint)TokenImpersonationLevel.Identification,
+                            (uint)TokenType.TokenImpersonation,
+                            ref token
+                        )
                 )
                 {
                     throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
@@ -575,11 +584,13 @@ namespace System.Security.Principal
 
                 // CheckTokenMembership will check if the SID is both present and enabled in the access token.
                 if (
-                    !Interop.Advapi32.CheckTokenMembership(
-                        (til != TokenImpersonationLevel.None ? _safeTokenHandle : token),
-                        sid.BinaryForm,
-                        ref isMember
-                    )
+                    !Interop
+                        .Advapi32
+                        .CheckTokenMembership(
+                            (til != TokenImpersonationLevel.None ? _safeTokenHandle : token),
+                            sid.BinaryForm,
+                            ref isMember
+                        )
                 )
                 {
                     throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
@@ -1000,11 +1011,13 @@ namespace System.Security.Principal
         {
             isImpersonating = true;
             hr = 0;
-            bool success = Interop.Advapi32.OpenThreadToken(
-                desiredAccess,
-                WinSecurityContext.Both,
-                out SafeAccessTokenHandle safeTokenHandle
-            );
+            bool success = Interop
+                .Advapi32
+                .OpenThreadToken(
+                    desiredAccess,
+                    WinSecurityContext.Both,
+                    out SafeAccessTokenHandle safeTokenHandle
+                );
             if (!success)
             {
                 hr = Marshal.GetHRForLastWin32Error();
@@ -1030,11 +1043,13 @@ namespace System.Security.Principal
         {
             hr = 0;
             if (
-                !Interop.Advapi32.OpenProcessToken(
-                    Interop.Kernel32.GetCurrentProcess(),
-                    desiredAccess,
-                    out SafeAccessTokenHandle safeTokenHandle
-                )
+                !Interop
+                    .Advapi32
+                    .OpenProcessToken(
+                        Interop.Kernel32.GetCurrentProcess(),
+                        desiredAccess,
+                        out SafeAccessTokenHandle safeTokenHandle
+                    )
             )
                 hr = GetHRForWin32Error(Marshal.GetLastPInvokeError());
             return safeTokenHandle;
@@ -1094,13 +1109,15 @@ namespace System.Security.Principal
             SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.InvalidHandle;
             try
             {
-                Interop.Advapi32.GetTokenInformation(
-                    tokenHandle,
-                    (uint)tokenInformationClass,
-                    safeLocalAllocHandle,
-                    0,
-                    out uint dwLength
-                );
+                Interop
+                    .Advapi32
+                    .GetTokenInformation(
+                        tokenHandle,
+                        (uint)tokenInformationClass,
+                        safeLocalAllocHandle,
+                        0,
+                        out uint dwLength
+                    );
                 int dwErrorCode = Marshal.GetLastPInvokeError();
                 switch (dwErrorCode)
                 {
@@ -1111,13 +1128,15 @@ namespace System.Security.Principal
                             checked((int)dwLength)
                         );
 
-                        bool result = Interop.Advapi32.GetTokenInformation(
-                            tokenHandle,
-                            (uint)tokenInformationClass,
-                            safeLocalAllocHandle,
-                            dwLength,
-                            out _
-                        );
+                        bool result = Interop
+                            .Advapi32
+                            .GetTokenInformation(
+                                tokenHandle,
+                                (uint)tokenInformationClass,
+                                safeLocalAllocHandle,
+                                dwLength,
+                                out _
+                            );
                         if (!result)
                         {
                             throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
@@ -1348,10 +1367,12 @@ namespace System.Security.Principal
                                 _issuerName,
                                 this
                             );
-                            claim.Properties.Add(
-                                ClaimTypes.WindowsSubAuthority,
-                                groupSid.IdentifierAuthority.ToString()
-                            );
+                            claim
+                                .Properties
+                                .Add(
+                                    ClaimTypes.WindowsSubAuthority,
+                                    groupSid.IdentifierAuthority.ToString()
+                                );
                             instanceClaims.Add(claim);
                             foundPrimaryGroupSid = true;
                         }
@@ -1364,10 +1385,12 @@ namespace System.Security.Principal
                             _issuerName,
                             this
                         );
-                        claim.Properties.Add(
-                            ClaimTypes.WindowsSubAuthority,
-                            groupSid.IdentifierAuthority.ToString()
-                        );
+                        claim
+                            .Properties
+                            .Add(
+                                ClaimTypes.WindowsSubAuthority,
+                                groupSid.IdentifierAuthority.ToString()
+                            );
                         instanceClaims.Add(claim);
                     }
                     else if (
@@ -1388,10 +1411,12 @@ namespace System.Security.Principal
                                 _issuerName,
                                 this
                             );
-                            claim.Properties.Add(
-                                ClaimTypes.WindowsSubAuthority,
-                                groupSid.IdentifierAuthority.ToString()
-                            );
+                            claim
+                                .Properties
+                                .Add(
+                                    ClaimTypes.WindowsSubAuthority,
+                                    groupSid.IdentifierAuthority.ToString()
+                                );
                             instanceClaims.Add(claim);
                             foundPrimaryGroupSid = true;
                         }
@@ -1404,10 +1429,12 @@ namespace System.Security.Principal
                             _issuerName,
                             this
                         );
-                        claim.Properties.Add(
-                            ClaimTypes.WindowsSubAuthority,
-                            groupSid.IdentifierAuthority.ToString()
-                        );
+                        claim
+                            .Properties
+                            .Add(
+                                ClaimTypes.WindowsSubAuthority,
+                                groupSid.IdentifierAuthority.ToString()
+                            );
                         instanceClaims.Add(claim);
                     }
                 }
@@ -1452,10 +1479,9 @@ namespace System.Security.Principal
                         _issuerName,
                         this
                     );
-                    claim.Properties.Add(
-                        ClaimTypes.WindowsSubAuthority,
-                        sid.IdentifierAuthority.ToString()
-                    );
+                    claim
+                        .Properties
+                        .Add(ClaimTypes.WindowsSubAuthority, sid.IdentifierAuthority.ToString());
                     instanceClaims.Add(claim);
                 }
                 else if (
@@ -1470,10 +1496,9 @@ namespace System.Security.Principal
                         _issuerName,
                         this
                     );
-                    claim.Properties.Add(
-                        ClaimTypes.WindowsSubAuthority,
-                        sid.IdentifierAuthority.ToString()
-                    );
+                    claim
+                        .Properties
+                        .Add(ClaimTypes.WindowsSubAuthority, sid.IdentifierAuthority.ToString());
                     instanceClaims.Add(claim);
                 }
             }
@@ -1533,10 +1558,12 @@ namespace System.Security.Principal
                             _issuerName,
                             this
                         );
-                        claim.Properties.Add(
-                            ClaimTypes.WindowsSubAuthority,
-                            groupSid.IdentifierAuthority.ToString()
-                        );
+                        claim
+                            .Properties
+                            .Add(
+                                ClaimTypes.WindowsSubAuthority,
+                                groupSid.IdentifierAuthority.ToString()
+                            );
                         claim.Properties.Add(claimType, "");
                         instanceClaims.Add(claim);
                     }
@@ -1554,10 +1581,12 @@ namespace System.Security.Principal
                             _issuerName,
                             this
                         );
-                        claim.Properties.Add(
-                            ClaimTypes.WindowsSubAuthority,
-                            groupSid.IdentifierAuthority.ToString()
-                        );
+                        claim
+                            .Properties
+                            .Add(
+                                ClaimTypes.WindowsSubAuthority,
+                                groupSid.IdentifierAuthority.ToString()
+                            );
                         claim.Properties.Add(claimType, "");
                         instanceClaims.Add(claim);
                     }

@@ -867,9 +867,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         // Call Back Paint event
                         if (!selection)
                         {
-                            common.Chart.CallOnPrePaint(
-                                new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                            );
+                            common
+                                .Chart
+                                .CallOnPrePaint(
+                                    new ChartPaintEventArgs(
+                                        ser,
+                                        graph,
+                                        common,
+                                        area.PlotAreaPosition
+                                    )
+                                );
                         }
 
                         // Change Y value if Column is out of plot area
@@ -1099,20 +1106,24 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         // **************************************************
                         if (common.ProcessModeRegions && !shadow && !labels)
                         {
-                            common.HotRegionsList.AddHotRegion(
-                                rectSize,
-                                point,
-                                ser.Name,
-                                pointIndx
-                            );
+                            common
+                                .HotRegionsList
+                                .AddHotRegion(rectSize, point, ser.Name, pointIndx);
                         }
 
                         // Call Paint event
                         if (!selection)
                         {
-                            common.Chart.CallOnPostPaint(
-                                new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                            );
+                            common
+                                .Chart
+                                .CallOnPostPaint(
+                                    new ChartPaintEventArgs(
+                                        ser,
+                                        graph,
+                                        common,
+                                        area.PlotAreaPosition
+                                    )
+                                );
                         }
 
                         // Axis is logarithmic
@@ -1937,14 +1948,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                     if (common.ProcessModeRegions && !labels)
                     {
-                        common.HotRegionsList.AddHotRegion(
-                            rectPath,
-                            false,
-                            graph,
-                            point,
-                            ser.Name,
-                            pointEx.index - 1
-                        );
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                rectPath,
+                                false,
+                                graph,
+                                point,
+                                ser.Name,
+                                pointEx.index - 1
+                            );
                     }
 
                     // Check if labels should be drawn

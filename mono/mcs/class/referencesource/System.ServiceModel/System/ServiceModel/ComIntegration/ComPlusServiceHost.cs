@@ -56,19 +56,21 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                    (uint)
-                        System
-                            .Runtime
-                            .Diagnostics
-                            .EventLogEventId
-                            .ComPlusServiceHostStartingServiceError,
-                    this.info.AppID.ToString(),
-                    this.info.Clsid.ToString(),
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                        (uint)
+                            System
+                                .Runtime
+                                .Diagnostics
+                                .EventLogEventId
+                                .ComPlusServiceHostStartingServiceError,
+                        this.info.AppID.ToString(),
+                        this.info.Clsid.ToString(),
+                        e.ToString()
+                    );
                 throw;
             }
         }
@@ -90,19 +92,21 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (System.ServiceModel.DiagnosticUtility.ShouldTraceError)
                 {
-                    DiagnosticUtility.EventLog.LogEvent(
-                        TraceEventType.Error,
-                        (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                        (uint)
-                            System
-                                .Runtime
-                                .Diagnostics
-                                .EventLogEventId
-                                .ComPlusServiceHostStartingServiceError,
-                        this.info.AppID.ToString(),
-                        this.info.Clsid.ToString(),
-                        e.ToString()
-                    );
+                    DiagnosticUtility
+                        .EventLog
+                        .LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                            (uint)
+                                System
+                                    .Runtime
+                                    .Diagnostics
+                                    .EventLogEventId
+                                    .ComPlusServiceHostStartingServiceError,
+                            this.info.AppID.ToString(),
+                            this.info.Clsid.ToString(),
+                            e.ToString()
+                        );
                 }
 
                 throw;
@@ -145,9 +149,9 @@ namespace System.ServiceModel.ComIntegration
             IServiceSysTxnConfig sysTxnconfing = serviceConfig as IServiceSysTxnConfig;
             if (sysTxnconfing == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    System.ServiceModel.ComIntegration.Error.QFENotPresent()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(System.ServiceModel.ComIntegration.Error.QFENotPresent());
             }
         }
     }

@@ -36,8 +36,10 @@ public static class ListenOptionsConnectionLoggingExtensions
         string? loggerName
     )
     {
-        var loggerFactory =
-            listenOptions.KestrelServerOptions.ApplicationServices.GetRequiredService<ILoggerFactory>();
+        var loggerFactory = listenOptions
+            .KestrelServerOptions
+            .ApplicationServices
+            .GetRequiredService<ILoggerFactory>();
         var logger =
             loggerName == null
                 ? loggerFactory.CreateLogger<LoggingConnectionMiddleware>()

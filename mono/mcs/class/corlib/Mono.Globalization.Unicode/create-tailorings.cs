@@ -309,9 +309,9 @@ public readonly ushort Lcid;
             }
             catch (ArgumentException)
             {
-                Console.Error.WriteLine(
-                    "WARNING: culture " + lcid + " is not supported in the runtime."
-                );
+                Console
+                    .Error
+                    .WriteLine("WARNING: culture " + lcid + " is not supported in the runtime.");
                 return null;
             }
             //			Console.Error.WriteLine ("Processing " + lcid);
@@ -356,10 +356,12 @@ public readonly ushort Lcid;
                         {
                             case "last_primary_ignorable":
                             case "last_secondary_ignorable":
-                                Console.Error.WriteLine(
-                                    "WARNING: {0} is not supported for now.",
-                                    el.FirstChild.LocalName
-                                );
+                                Console
+                                    .Error
+                                    .WriteLine(
+                                        "WARNING: {0} is not supported for now.",
+                                        el.FirstChild.LocalName
+                                    );
                                 continue;
                         }
                         XmlElement cpElem = el.SelectSingleNode("cp") as XmlElement;

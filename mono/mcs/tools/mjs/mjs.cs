@@ -390,9 +390,9 @@ namespace Mono.JScript
                     p.WaitForExit();
                     if (p.ExitCode != 0)
                     {
-                        Console.Error.WriteLine(
-                            "Error running pkg-config. Check the above output."
-                        );
+                        Console
+                            .Error
+                            .WriteLine("Error running pkg-config. Check the above output.");
                         Environment.Exit(1);
                     }
 

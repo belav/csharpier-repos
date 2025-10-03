@@ -536,9 +536,9 @@ namespace MonoTests.System.ServiceModel.Channels
             be.EndpointSupportingTokenParameters.Endorsing.Add(new X509SecurityTokenParameters());
             // This causes multiple supporting token authenticator
             // of the same type.
-            be.OptionalEndpointSupportingTokenParameters.Endorsing.Add(
-                new X509SecurityTokenParameters()
-            );
+            be.OptionalEndpointSupportingTokenParameters
+                .Endorsing
+                .Add(new X509SecurityTokenParameters());
             Binding b = new CustomBinding(be, new HttpTransportBindingElement());
             ClientCredentials cred = new ClientCredentials();
             cred.ClientCertificate.Certificate = new X509Certificate2(
@@ -570,9 +570,9 @@ namespace MonoTests.System.ServiceModel.Channels
             be.EndpointSupportingTokenParameters.Endorsing.Add(new X509SecurityTokenParameters());
             // This causes multiple supporting token authenticator
             // of the same type.
-            be.OptionalEndpointSupportingTokenParameters.Endorsing.Add(
-                new X509SecurityTokenParameters()
-            );
+            be.OptionalEndpointSupportingTokenParameters
+                .Endorsing
+                .Add(new X509SecurityTokenParameters());
             Binding b = new CustomBinding(be, new HttpTransportBindingElement());
             ServiceCredentials cred = new ServiceCredentials();
             cred.ServiceCertificate.Certificate = new X509Certificate2(
@@ -601,9 +601,9 @@ namespace MonoTests.System.ServiceModel.Channels
         {
             SymmetricSecurityBindingElement be = new SymmetricSecurityBindingElement();
             be.ProtectionTokenParameters = new X509SecurityTokenParameters();
-            be.EndpointSupportingTokenParameters.Endorsing.Add(
-                new UserNameSecurityTokenParameters()
-            );
+            be.EndpointSupportingTokenParameters
+                .Endorsing
+                .Add(new UserNameSecurityTokenParameters());
             Binding b = new CustomBinding(be, new HttpTransportBindingElement());
             X509Certificate2 cert = new X509Certificate2(
                 TestResourceHelper.GetFullPathOfResource("Test/Resources/test.pfx"),

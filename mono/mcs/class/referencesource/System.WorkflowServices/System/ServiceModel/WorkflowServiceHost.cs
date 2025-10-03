@@ -119,9 +119,9 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("address")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("address"));
             }
 
             return this.AddServiceEndpoint(
@@ -149,9 +149,9 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("address")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("address"));
             }
 
             return this.AddServiceEndpoint(
@@ -171,31 +171,35 @@ namespace System.ServiceModel
         {
             if (implementedContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("implementedContract")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("implementedContract"));
             }
             if (!implementedContract.IsDefined(typeof(ServiceContractAttribute), false))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.ServiceContractAttributeNotFound,
-                            new object[] { implementedContract.FullName }
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.ServiceContractAttributeNotFound,
+                                new object[] { implementedContract.FullName }
+                            )
                         )
-                    )
-                );
+                    );
             }
             if (this.reflectedContracts == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.ReflectedContractsNotInitialized,
-                            new object[] { implementedContract.FullName }
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.ReflectedContractsNotInitialized,
+                                new object[] { implementedContract.FullName }
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (!reflectedContracts.Contains(implementedContract))
@@ -204,30 +208,34 @@ namespace System.ServiceModel
                 {
                     if (!this.Description.Behaviors.Contains(typeof(ServiceMetadataBehavior)))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR2.GetString(
-                                    SR2.MetadataEndpointCannotBeAdded,
-                                    new object[] { implementedContract.FullName }
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.MetadataEndpointCannotBeAdded,
+                                        new object[] { implementedContract.FullName }
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.ReflectedContractKeyNotFound,
-                                new object[]
-                                {
-                                    implementedContract.FullName,
-                                    this.workflowDefinitionContext.WorkflowName,
-                                }
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.ReflectedContractKeyNotFound,
+                                    new object[]
+                                    {
+                                        implementedContract.FullName,
+                                        this.workflowDefinitionContext.WorkflowName,
+                                    }
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             ServiceEndpoint endpoint = base.AddServiceEndpoint(
@@ -264,8 +272,9 @@ namespace System.ServiceModel
 
         protected override void OnClosing()
         {
-            WorkflowRuntimeBehavior workflowRuntimeBehavior =
-                this.Description.Behaviors.Find<WorkflowRuntimeBehavior>();
+            WorkflowRuntimeBehavior workflowRuntimeBehavior = this.Description
+                .Behaviors
+                .Find<WorkflowRuntimeBehavior>();
 
             if (workflowRuntimeBehavior != null)
             {

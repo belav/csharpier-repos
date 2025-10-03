@@ -258,7 +258,8 @@ namespace System.Net
                     if (Logging.On)
                     {
                         string sendCommand = m_Commands[m_Index]
-                            .Command.Substring(0, m_Commands[m_Index].Command.Length - 2);
+                            .Command
+                            .Substring(0, m_Commands[m_Index].Command.Length - 2);
                         if (m_Commands[m_Index].HasFlag(PipelineEntryFlags.DontLogParameter))
                         {
                             int index = sendCommand.IndexOf(' ');

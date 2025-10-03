@@ -436,10 +436,11 @@ namespace Microsoft.CodeAnalysis.Simplification
         )
         {
             optionSet ??= await document.GetOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var simplificationService =
-                document.Project.Solution.Services.GetRequiredLanguageService<ISimplificationService>(
-                    document.Project.Language
-                );
+            var simplificationService = document
+                .Project
+                .Solution
+                .Services
+                .GetRequiredLanguageService<ISimplificationService>(document.Project.Language);
             return simplificationService.GetSimplifierOptions(optionSet, fallbackOptions: null);
         }
 #pragma warning restore

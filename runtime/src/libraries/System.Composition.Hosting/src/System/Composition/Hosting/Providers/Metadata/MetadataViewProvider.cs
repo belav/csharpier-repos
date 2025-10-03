@@ -76,7 +76,8 @@ namespace System.Composition.Hosting.Providers.Metadata
                 foreach (
                     var prop in typeof(TMetadata)
                         .GetTypeInfo()
-                        .DeclaredProperties.Where(prop =>
+                        .DeclaredProperties
+                        .Where(prop =>
                             prop.GetMethod != null
                             && prop.GetMethod.IsPublic
                             && !prop.GetMethod.IsStatic

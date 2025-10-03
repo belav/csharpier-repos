@@ -48,11 +48,13 @@ namespace System.Threading
             // in response to the cancellation token having cancellation requested.  If the handle is invalid,
             // which could happen if OpenThread fails, skip attempts at cancellation. The handle needs to be
             // opened with THREAD_TERMINATE in order to be able to call CancelSynchronousIo.
-            SafeThreadHandle handle = Interop.Kernel32.OpenThread(
-                Interop.Kernel32.THREAD_TERMINATE,
-                bInheritHandle: false,
-                Interop.Kernel32.GetCurrentThreadId()
-            );
+            SafeThreadHandle handle = Interop
+                .Kernel32
+                .OpenThread(
+                    Interop.Kernel32.THREAD_TERMINATE,
+                    bInheritHandle: false,
+                    Interop.Kernel32.GetCurrentThreadId()
+                );
             if (!handle.IsInvalid)
             {
                 _threadHandle = handle;

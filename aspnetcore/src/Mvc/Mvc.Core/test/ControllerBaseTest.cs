@@ -30,7 +30,8 @@ public class ControllerBaseTest
         {
             return typeof(ControllerBase)
                 .GetTypeInfo()
-                .DeclaredMethods.Where(method =>
+                .DeclaredMethods
+                .Where(method =>
                     method.IsPublic
                     && !method.IsSpecialName
                     && !method.Name.Equals("Dispose", StringComparison.OrdinalIgnoreCase)

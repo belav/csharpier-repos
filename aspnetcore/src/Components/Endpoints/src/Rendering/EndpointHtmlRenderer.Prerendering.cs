@@ -215,13 +215,16 @@ internal partial class EndpointHtmlRenderer
             // forcing the request to be retried, since that allows post-redirect-get to work, plus avoids a
             // duplicated request. The client can't rely on receiving this header, though, since non-Blazor endpoints
             // wouldn't return it.
-            httpContext.Response.Headers.Add(
-                "blazor-enhanced-nav-redirect-location",
-                OpaqueRedirection.CreateProtectedRedirectionUrl(
-                    httpContext,
-                    navigationException.Location
-                )
-            );
+            httpContext
+                .Response
+                .Headers
+                .Add(
+                    "blazor-enhanced-nav-redirect-location",
+                    OpaqueRedirection.CreateProtectedRedirectionUrl(
+                        httpContext,
+                        navigationException.Location
+                    )
+                );
             return new ValueTask<PrerenderedComponentHtmlContent>(
                 PrerenderedComponentHtmlContent.Empty
             );

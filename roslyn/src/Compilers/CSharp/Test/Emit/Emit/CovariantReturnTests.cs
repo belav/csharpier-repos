@@ -379,7 +379,8 @@ Public Class Derived2 : Inherits Derived
 End Class
 ";
             var ERR_InvalidOverrideDueToReturn2 = typeof(VisualBasic.VisualBasicCompilation)
-                .Assembly.GetType("Microsoft.CodeAnalysis.VisualBasic.ERRID")
+                .Assembly
+                .GetType("Microsoft.CodeAnalysis.VisualBasic.ERRID")
                 .GetField("ERR_InvalidOverrideDueToReturn2")
                 .GetValue(null);
             CreateVisualBasicCompilation(

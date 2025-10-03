@@ -255,12 +255,14 @@ namespace System.Security.Cryptography.X509Certificates
                 int cbData = IntPtr.Size;
 
                 if (
-                    Interop.Crypt32.CertGetCertificateContextProperty(
-                        certificateContext,
-                        Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
-                        out privateKeyPtr,
-                        ref cbData
-                    )
+                    Interop
+                        .Crypt32
+                        .CertGetCertificateContextProperty(
+                            certificateContext,
+                            Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
+                            out privateKeyPtr,
+                            ref cbData
+                        )
                 )
                 {
                     handleOptions = CngKeyHandleOpenOptions.EphemeralKey;
@@ -275,17 +277,19 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 int keySpec = 0;
                 if (
-                    !Interop.crypt32.CryptAcquireCertificatePrivateKey(
-                        certificateContext,
-                        Interop
-                            .Crypt32
-                            .CryptAcquireCertificatePrivateKeyFlags
-                            .CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG,
-                        IntPtr.Zero,
-                        out privateKey,
-                        out keySpec,
-                        out freeKey
-                    )
+                    !Interop
+                        .crypt32
+                        .CryptAcquireCertificatePrivateKey(
+                            certificateContext,
+                            Interop
+                                .Crypt32
+                                .CryptAcquireCertificatePrivateKeyFlags
+                                .CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG,
+                            IntPtr.Zero,
+                            out privateKey,
+                            out keySpec,
+                            out freeKey
+                        )
                 )
                 {
                     // The documentation for CryptAcquireCertificatePrivateKey says that freeKey
@@ -341,12 +345,14 @@ namespace System.Security.Cryptography.X509Certificates
         {
             int cbData = 0;
             if (
-                !Interop.Crypt32.CertGetCertificateContextProperty(
-                    _certContext,
-                    Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                    null,
-                    ref cbData
-                )
+                !Interop
+                    .Crypt32
+                    .CertGetCertificateContextProperty(
+                        _certContext,
+                        Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                        null,
+                        ref cbData
+                    )
             )
             {
                 int dwErrorCode = Marshal.GetLastPInvokeError();
@@ -361,12 +367,14 @@ namespace System.Security.Cryptography.X509Certificates
                 fixed (byte* pPrivateKey = privateKey)
                 {
                     if (
-                        !Interop.Crypt32.CertGetCertificateContextProperty(
-                            _certContext,
-                            Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                            privateKey,
-                            ref cbData
-                        )
+                        !Interop
+                            .Crypt32
+                            .CertGetCertificateContextProperty(
+                                _certContext,
+                                Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                                privateKey,
+                                ref cbData
+                            )
                     )
                         throw Marshal.GetLastPInvokeError().ToCryptographicException();
                     Interop.Crypt32.CRYPT_KEY_PROV_INFO* pKeyProvInfo =
@@ -429,12 +437,14 @@ namespace System.Security.Cryptography.X509Certificates
                 keyProvInfo.dwKeySpec = keySpec;
 
                 if (
-                    !Interop.Crypt32.CertSetCertificateContextProperty(
-                        pal._certContext,
-                        Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                        Interop.Crypt32.CertSetPropertyFlags.None,
-                        &keyProvInfo
-                    )
+                    !Interop
+                        .Crypt32
+                        .CertSetCertificateContextProperty(
+                            pal._certContext,
+                            Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                            Interop.Crypt32.CertSetPropertyFlags.None,
+                            &keyProvInfo
+                        )
                 )
                 {
                     Exception e = Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -626,12 +636,14 @@ namespace System.Security.Cryptography.X509Certificates
                 keyProvInfo.dwKeySpec = (int)keyContainerInfo.KeyNumber;
 
                 if (
-                    !Interop.Crypt32.CertSetCertificateContextProperty(
-                        pal._certContext,
-                        Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
-                        Interop.Crypt32.CertSetPropertyFlags.None,
-                        &keyProvInfo
-                    )
+                    !Interop
+                        .Crypt32
+                        .CertSetCertificateContextProperty(
+                            pal._certContext,
+                            Interop.Crypt32.CertContextPropId.CERT_KEY_PROV_INFO_PROP_ID,
+                            Interop.Crypt32.CertSetPropertyFlags.None,
+                            &keyProvInfo
+                        )
                 )
                 {
                     Exception e = Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -661,15 +673,17 @@ namespace System.Security.Cryptography.X509Certificates
                 try
                 {
                     if (
-                        !Interop.Crypt32.CertSetCertificateContextProperty(
-                            pal._certContext,
-                            Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
-                            Interop
-                                .Crypt32
-                                .CertSetPropertyFlags
-                                .CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
-                            handle
-                        )
+                        !Interop
+                            .Crypt32
+                            .CertSetCertificateContextProperty(
+                                pal._certContext,
+                                Interop.Crypt32.CertContextPropId.CERT_NCRYPT_KEY_HANDLE_PROP_ID,
+                                Interop
+                                    .Crypt32
+                                    .CertSetPropertyFlags
+                                    .CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG,
+                                handle
+                            )
                     )
                     {
                         throw Marshal.GetLastPInvokeError().ToCryptographicException();

@@ -57,9 +57,9 @@ public class SqliteQueryTranslationPostprocessor : RelationalQueryTranslationPos
 
             if (
                 extensionExpression is SelectExpression selectExpression
-                && selectExpression.Tables.Any(t =>
-                    t is CrossApplyExpression or OuterApplyExpression
-                )
+                && selectExpression
+                    .Tables
+                    .Any(t => t is CrossApplyExpression or OuterApplyExpression)
             )
             {
                 throw new InvalidOperationException(SqliteStrings.ApplyNotSupported);

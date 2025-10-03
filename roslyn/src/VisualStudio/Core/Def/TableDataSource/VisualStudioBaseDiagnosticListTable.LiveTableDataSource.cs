@@ -321,9 +321,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 // If this diagnostic is for LSP only, then we won't show it here
                 if (
-                    diagnostic.Properties.ContainsKey(
-                        nameof(DocumentPropertiesService.DiagnosticsLspClientName)
-                    )
+                    diagnostic
+                        .Properties
+                        .ContainsKey(nameof(DocumentPropertiesService.DiagnosticsLspClientName))
                 )
                 {
                     return false;

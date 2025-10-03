@@ -60,10 +60,9 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext
                 .Setup(c =>
-                    c.HttpContext.Response.AddHeader(
-                        "Content-Disposition",
-                        @"attachment; filename=""some\\file"""
-                    )
+                    c.HttpContext
+                        .Response
+                        .AddHeader("Content-Disposition", @"attachment; filename=""some\\file""")
                 )
                 .Verifiable();
 
@@ -92,10 +91,12 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext
                 .Setup(c =>
-                    c.HttpContext.Response.AddHeader(
-                        "Content-Disposition",
-                        @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94"
-                    )
+                    c.HttpContext
+                        .Response
+                        .AddHeader(
+                            "Content-Disposition",
+                            @"attachment; filename*=UTF-8''ABCXYZabcxyz012789!%40%23$%25%5E&%2A%28%29-%3D_+.:~%CE%94"
+                        )
                 )
                 .Verifiable();
 
@@ -143,10 +144,9 @@ namespace System.Web.Mvc.Test
                 .Verifiable();
             mockControllerContext
                 .Setup(c =>
-                    c.HttpContext.Response.AddHeader(
-                        "Content-Disposition",
-                        "attachment; filename=filename.ext"
-                    )
+                    c.HttpContext
+                        .Response
+                        .AddHeader("Content-Disposition", "attachment; filename=filename.ext")
                 )
                 .Verifiable();
 

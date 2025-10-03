@@ -65,26 +65,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     if (project == null)
                         return;
 
-                    var document = project.Documents.FirstOrDefault(d =>
-                        string.Equals(
-                            d.FilePath,
-                            sourceLocation.FileName.LocalPath,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                    );
+                    var document = project
+                        .Documents
+                        .FirstOrDefault(d =>
+                            string.Equals(
+                                d.FilePath,
+                                sourceLocation.FileName.LocalPath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
 
                     if (document == null)
                         return;
 
-                    this.ThreadingContext.JoinableTaskFactory.Run(() =>
-                        NavigateToAsync(
-                            sourceLocation,
-                            symbolId,
-                            project,
-                            document,
-                            CancellationToken.None
-                        )
-                    );
+                    this.ThreadingContext
+                        .JoinableTaskFactory
+                        .Run(() =>
+                            NavigateToAsync(
+                                sourceLocation,
+                                symbolId,
+                                project,
+                                document,
+                                CancellationToken.None
+                            )
+                        );
                 }
             }
         }
@@ -101,7 +105,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (symbolId != null)
             {
                 var symbol = symbolId
-                    .Value.Resolve(
+                    .Value
+                    .Resolve(
                         await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false),
                         cancellationToken: cancellationToken
                     )
@@ -127,8 +132,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 if (document != null)
                 {
                     var editorWorkspace = document.Project.Solution.Workspace;
-                    var navigationService =
-                        editorWorkspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService = editorWorkspace
+                        .Services
+                        .GetService<IDocumentNavigationService>();
 
                     // TODO: Get the platform to use and pass us an operation context, or create one ourselves.
                     await navigationService

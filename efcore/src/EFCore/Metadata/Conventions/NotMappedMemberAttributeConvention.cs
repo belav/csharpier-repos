@@ -39,7 +39,8 @@ public class NotMappedMemberAttributeConvention
         var entityType = entityTypeBuilder.Metadata;
         var members = entityType
             .GetRuntimeProperties()
-            .Values.Cast<MemberInfo>()
+            .Values
+            .Cast<MemberInfo>()
             .Concat(entityType.GetRuntimeFields().Values);
 
         foreach (var member in members)
@@ -63,7 +64,8 @@ public class NotMappedMemberAttributeConvention
         var complexType = propertyBuilder.Metadata.ComplexType;
         var members = complexType
             .GetRuntimeProperties()
-            .Values.Cast<MemberInfo>()
+            .Values
+            .Cast<MemberInfo>()
             .Concat(complexType.GetRuntimeFields().Values);
 
         foreach (var member in members)

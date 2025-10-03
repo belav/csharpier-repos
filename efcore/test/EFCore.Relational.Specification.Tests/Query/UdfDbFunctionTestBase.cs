@@ -623,32 +623,25 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 Addresses = new List<Address> { address41, address42, address43 },
             };
 
-            ((UDFSqlContext)context).Products.AddRange(
-                product1,
-                product2,
-                product3,
-                product4,
-                product5
-            );
-            ((UDFSqlContext)context).Addresses.AddRange(
-                address11,
-                address12,
-                address21,
-                address31,
-                address32,
-                address41,
-                address42,
-                address43
-            );
+            ((UDFSqlContext)context)
+                .Products
+                .AddRange(product1, product2, product3, product4, product5);
+            ((UDFSqlContext)context)
+                .Addresses
+                .AddRange(
+                    address11,
+                    address12,
+                    address21,
+                    address31,
+                    address32,
+                    address41,
+                    address42,
+                    address43
+                );
             ((UDFSqlContext)context).Customers.AddRange(customer1, customer2, customer3, customer4);
-            ((UDFSqlContext)context).Orders.AddRange(
-                order11,
-                order12,
-                order13,
-                order21,
-                order22,
-                order31
-            );
+            ((UDFSqlContext)context)
+                .Orders
+                .AddRange(order11, order12, order13, order21, order22, order31);
         }
     }
 
@@ -675,7 +668,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         var customerId = 3;
 
         var len = context
-            .Customers.Where(c => c.Id == customerId)
+            .Customers
+            .Where(c => c.Id == customerId)
             .Select(c => UDFSqlContext.MyCustomLengthStatic(c.LastName))
             .Single();
 
@@ -709,7 +703,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         var customerId = 1;
 
         var custs = context
-            .Customers.Select(c => UDFSqlContext.CustomerOrderCountStatic(customerId))
+            .Customers
+            .Select(c => UDFSqlContext.CustomerOrderCountStatic(customerId))
             .ToList();
 
         Assert.Equal(4, custs.Count);
@@ -1180,7 +1175,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var result = context
-            .Orders.OrderBy(o => o.Id)
+            .Orders
+            .OrderBy(o => o.Id)
             .Select(o => UDFSqlContext.IdentityString(o.Customer.FirstName))
             .FirstOrDefault();
 
@@ -1193,7 +1189,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var result = context
-            .Customers.OrderBy(c => c.Id)
+            .Customers
+            .OrderBy(c => c.Id)
             .Where(c => UDFSqlContext.IdentityString(c.FirstName) != null)
             .ToList();
 
@@ -1206,7 +1203,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var result = context
-            .Customers.OrderBy(c => c.Id)
+            .Customers
+            .OrderBy(c => c.Id)
             .Where(c => UDFSqlContext.IdentityStringPropagateNull(c.FirstName) != null)
             .ToList();
 
@@ -1219,7 +1217,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var result = context
-            .Customers.OrderBy(c => c.Id)
+            .Customers
+            .OrderBy(c => c.Id)
             .Where(c =>
                 UDFSqlContext.IdentityStringNonNullable(c.FirstName) != null
                 && UDFSqlContext.IdentityStringNonNullableFluent(c.FirstName) != null
@@ -1235,7 +1234,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using var context = CreateContext();
 
         var result = context
-            .Customers.OrderBy(c => c.Id)
+            .Customers
+            .OrderBy(c => c.Id)
             .Where(c => context.StringLength(c.FirstName) != context.StringLength(c.LastName))
             .ToList();
 
@@ -1257,7 +1257,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
         var query = context
-            .Customers.Where(c => UDFSqlContext.IsABC(c.FirstName.Substring(0, 1)))
+            .Customers
+            .Where(c => UDFSqlContext.IsABC(c.FirstName.Substring(0, 1)))
             .ToList();
 
         Assert.Equal(4, query.Count);
@@ -1268,7 +1269,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = CreateContext();
         var query = context
-            .Customers.Where(c => UDFSqlContext.IsOrIsNotABC(c.FirstName.Substring(0, 1)))
+            .Customers
+            .Where(c => UDFSqlContext.IsOrIsNotABC(c.FirstName.Substring(0, 1)))
             .ToList();
 
         Assert.Equal(4, query.Count);
@@ -1287,7 +1289,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(
             RelationalStrings.DbFunctionNullableValueReturnType(
                 context
-                    .Model.FindDbFunction(
+                    .Model
+                    .FindDbFunction(
                         typeof(UDFSqlContext).GetMethod(
                             nameof(UDFSqlContext.NullableValueReturnType)
                         )
@@ -1339,7 +1342,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         var customerId = 3;
 
         var len = context
-            .Customers.Where(c => c.Id == customerId)
+            .Customers
+            .Where(c => c.Id == customerId)
             .Select(c => context.MyCustomLengthInstance(c.LastName))
             .Single();
 
@@ -1373,7 +1377,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         var customerId = 1;
 
         var custs = context
-            .Customers.Select(c => context.CustomerOrderCountInstance(customerId))
+            .Customers
+            .Select(c => context.CustomerOrderCountInstance(customerId))
             .ToList();
 
         Assert.Equal(4, custs.Count);
@@ -2633,9 +2638,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             var query = context
-                .Orders.Where(c =>
-                    !context.Set<TopSellingProduct>().Select(x => x.ProductId).Contains(25)
-                )
+                .Orders
+                .Where(c => !context.Set<TopSellingProduct>().Select(x => x.ProductId).Contains(25))
                 .Select(x => new { x.Customer.FirstName, x.Customer.LastName })
                 .GroupBy(x => new { x.LastName })
                 .Select(x => new
@@ -2662,7 +2666,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             var query = context
-                .Orders.Where(c =>
+                .Orders
+                .Where(c =>
                     !context
                         .GetOrdersWithMultipleProducts(
                             context.Customers.OrderBy(x => x.Id).FirstOrDefault().Id
@@ -2739,7 +2744,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             var expected = (
                 from a in context.Addresses.ToList()
                 from r in context
-                    .Orders.ToList()
+                    .Orders
+                    .ToList()
                     .Where(x =>
                         x.CustomerId == 1 && (a.City != a.State || x.OrderDate.Year == 2000)
                     )

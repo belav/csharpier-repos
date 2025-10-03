@@ -82,27 +82,31 @@ namespace System.ServiceModel.ComIntegration
                 application = CatalogUtil.FindApplication(applicationId);
                 if (application == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        Error.ListenerInitFailed(
-                            SR.GetString(
-                                SR.ApplicationNotFound,
-                                applicationId.ToString("B").ToUpperInvariant()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            Error.ListenerInitFailed(
+                                SR.GetString(
+                                    SR.ApplicationNotFound,
+                                    applicationId.ToString("B").ToUpperInvariant()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 bool processPooled = ((int)application.GetValue("ConcurrentApps")) > 1;
                 if (processPooled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        Error.ListenerInitFailed(
-                            SR.GetString(
-                                SR.PooledApplicationNotSupportedForComplusHostedScenarios,
-                                applicationId.ToString("B").ToUpperInvariant()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            Error.ListenerInitFailed(
+                                SR.GetString(
+                                    SR.PooledApplicationNotSupportedForComplusHostedScenarios,
+                                    applicationId.ToString("B").ToUpperInvariant()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 bool processRecycled =
@@ -113,14 +117,16 @@ namespace System.ServiceModel.ComIntegration
 
                 if (processRecycled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        Error.ListenerInitFailed(
-                            SR.GetString(
-                                SR.RecycledApplicationNotSupportedForComplusHostedScenarios,
-                                applicationId.ToString("B").ToUpperInvariant()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            Error.ListenerInitFailed(
+                                SR.GetString(
+                                    SR.RecycledApplicationNotSupportedForComplusHostedScenarios,
+                                    applicationId.ToString("B").ToUpperInvariant()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 ComCatalogCollection classes;
@@ -139,39 +145,43 @@ namespace System.ServiceModel.ComIntegration
                     string[] serviceParams = service.Name.Split(',');
                     if (serviceParams.Length != 2)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
+                                )
+                            );
                     }
 
                     if (
-                        !DiagnosticUtility.Utility.TryCreateGuid(
-                            serviceParams[0],
-                            out appIdToCompare
-                        )
+                        !DiagnosticUtility
+                            .Utility
+                            .TryCreateGuid(serviceParams[0], out appIdToCompare)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
+                                )
+                            );
                     }
 
                     if (
-                        !DiagnosticUtility.Utility.TryCreateGuid(
-                            serviceParams[1],
-                            out clsidToCompare
-                        )
+                        !DiagnosticUtility
+                            .Utility
+                            .TryCreateGuid(serviceParams[1], out clsidToCompare)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.OnlyClsidsAllowedForServiceType, service.Name)
+                                )
+                            );
                     }
 
                     foundService = false;
@@ -208,21 +218,23 @@ namespace System.ServiceModel.ComIntegration
                         }
                     }
                     if (!foundService)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.CannotFindClsidInApplication,
-                                    clsidToCompare.ToString("B").ToUpperInvariant(),
-                                    applicationId.ToString("B").ToUpperInvariant()
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.CannotFindClsidInApplication,
+                                        clsidToCompare.ToString("B").ToUpperInvariant(),
+                                        applicationId.ToString("B").ToUpperInvariant()
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
                 if (foundService == false)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        Error.DllHostInitializerFoundNoServices()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(Error.DllHostInitializerFoundNoServices());
                 }
 
                 foreach (ComPlusServiceHost host in this.hosts)
@@ -232,18 +244,20 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (Exception e)
             {
-                DiagnosticUtility.EventLog.LogEvent(
-                    TraceEventType.Error,
-                    (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                    (uint)
-                        System
-                            .Runtime
-                            .Diagnostics
-                            .EventLogEventId
-                            .ComPlusDllHostInitializerStartingError,
-                    applicationId.ToString(),
-                    e.ToString()
-                );
+                DiagnosticUtility
+                    .EventLog
+                    .LogEvent(
+                        TraceEventType.Error,
+                        (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                        (uint)
+                            System
+                                .Runtime
+                                .Diagnostics
+                                .EventLogEventId
+                                .ComPlusDllHostInitializerStartingError,
+                        applicationId.ToString(),
+                        e.ToString()
+                    );
                 throw;
             }
             finally

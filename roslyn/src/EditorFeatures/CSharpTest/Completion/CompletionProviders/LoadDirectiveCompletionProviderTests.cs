@@ -132,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
             using var workspace = new TestWorkspace(composition: FeaturesTestCompositions.Features);
             var provider = workspace
-                .ExportProvider.GetExports<CompletionProvider, CompletionProviderMetadata>()
+                .ExportProvider
+                .GetExports<CompletionProvider, CompletionProviderMetadata>()
                 .Single(p =>
                     p.Metadata.Language == LanguageNames.CSharp
                     && p.Metadata.Name == nameof(LoadDirectiveCompletionProvider)

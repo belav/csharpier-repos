@@ -189,9 +189,13 @@ namespace MonoTests.System.Data
                 Assert.Fail("CNE14: CaseSensitive wrong exception type. Got: " + exc);
             }
 
-            dtChild.Constraints.Add(
-                new UniqueConstraint(new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] })
-            );
+            dtChild
+                .Constraints
+                .Add(
+                    new UniqueConstraint(
+                        new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] }
+                    )
+                );
             ds.EnforceConstraints = false;
             dtChild.Rows.Add(dtChild.Rows[0].ItemArray);
 

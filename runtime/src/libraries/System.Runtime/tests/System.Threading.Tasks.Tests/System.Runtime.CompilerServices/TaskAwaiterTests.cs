@@ -48,7 +48,8 @@ namespace System.Threading.Tasks.Tests
                 if (generic)
                 {
                     if (continueOnCapturedContext.HasValue)
-                        tcs.Task.ConfigureAwait(continueOnCapturedContext.Value)
+                        tcs.Task
+                            .ConfigureAwait(continueOnCapturedContext.Value)
                             .GetAwaiter()
                             .OnCompleted(callback);
                     else
@@ -127,7 +128,8 @@ namespace System.Threading.Tasks.Tests
                         if (generic)
                         {
                             if (continueOnCapturedContext.HasValue)
-                                tcs.Task.ConfigureAwait(continueOnCapturedContext.Value)
+                                tcs.Task
+                                    .ConfigureAwait(continueOnCapturedContext.Value)
                                     .GetAwaiter()
                                     .OnCompleted(callback);
                             else
@@ -261,8 +263,8 @@ namespace System.Threading.Tasks.Tests
             object scheduler
         )
         {
-            await Task
-                .Factory.StartNew(
+            await Task.Factory
+                .StartNew(
                     async delegate
                     {
                         if (scheduler is SynchronizationContext sc)
@@ -546,10 +548,9 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource().Task.WaitAsync(
-                            timeout,
-                            new CancellationToken(true)
-                        )
+                        new TaskCompletionSource()
+                            .Task
+                            .WaitAsync(timeout, new CancellationToken(true))
                 );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -559,18 +560,16 @@ namespace System.Threading.Tasks.Tests
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>().Task.WaitAsync(
-                            timeout,
-                            CancellationToken.None
-                        )
+                        new TaskCompletionSource<int>()
+                            .Task
+                            .WaitAsync(timeout, CancellationToken.None)
                 );
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
                     "timeout",
                     () =>
-                        new TaskCompletionSource<int>().Task.WaitAsync(
-                            timeout,
-                            new CancellationToken(true)
-                        )
+                        new TaskCompletionSource<int>()
+                            .Task
+                            .WaitAsync(timeout, new CancellationToken(true))
                 );
 
                 AssertExtensions.Throws<ArgumentOutOfRangeException>(
@@ -983,13 +982,15 @@ namespace System.Threading.Tasks.Tests
             yield return new object[]
             {
                 LineNumber(),
-                Task<int>.Factory.FromAsync(
-                    nonGeneric,
-                    new Func<IAsyncResult, int>(ar =>
-                    {
-                        throw oce;
-                    })
-                ),
+                Task<int>
+                    .Factory
+                    .FromAsync(
+                        nonGeneric,
+                        new Func<IAsyncResult, int>(ar =>
+                        {
+                            throw oce;
+                        })
+                    ),
                 oce,
             };
 
@@ -1055,7 +1056,8 @@ namespace System.Threading.Tasks.Tests
             {
                 Assert.False(
                     new TaskCompletionSource<string>()
-                        .Task.ConfigureAwait(options)
+                        .Task
+                        .ConfigureAwait(options)
                         .GetAwaiter()
                         .IsCompleted
                 );

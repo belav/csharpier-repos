@@ -129,15 +129,17 @@ namespace System.IO.Pipes
                 int pipeFlags,
                 int access
             ) =>
-                Interop.Kernel32.CreateNamedPipeClient(
-                    path,
-                    access,
-                    FileShare.None,
-                    ref secAttrs,
-                    FileMode.Open,
-                    pipeFlags,
-                    hTemplateFile: IntPtr.Zero
-                );
+                Interop
+                    .Kernel32
+                    .CreateNamedPipeClient(
+                        path,
+                        access,
+                        FileShare.None,
+                        ref secAttrs,
+                        FileMode.Open,
+                        pipeFlags,
+                        hTemplateFile: IntPtr.Zero
+                    );
         }
 
         [SupportedOSPlatform("windows")]
@@ -154,15 +156,17 @@ namespace System.IO.Pipes
                 // this if they are created (on WinXP SP2 at least)]
                 uint numInstances;
                 if (
-                    !Interop.Kernel32.GetNamedPipeHandleStateW(
-                        InternalHandle!,
-                        null,
-                        &numInstances,
-                        null,
-                        null,
-                        null,
-                        0
-                    )
+                    !Interop
+                        .Kernel32
+                        .GetNamedPipeHandleStateW(
+                            InternalHandle!,
+                            null,
+                            &numInstances,
+                            null,
+                            null,
+                            null,
+                            0
+                        )
                 )
                 {
                     throw WinIOError(Marshal.GetLastPInvokeError());

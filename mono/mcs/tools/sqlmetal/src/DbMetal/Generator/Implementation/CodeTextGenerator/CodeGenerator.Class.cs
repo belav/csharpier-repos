@@ -114,7 +114,9 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         )
         {
             List<DbLinq.Schema.Dbml.Column> primaryKeys = table
-                .Type.Columns.Where(c => c.IsPrimaryKey)
+                .Type
+                .Columns
+                .Where(c => c.IsPrimaryKey)
                 .ToList();
             if (primaryKeys.Count == 0)
             {
@@ -596,9 +598,9 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         )
         {
             // the following is apparently useless
-            DbLinq.Schema.Dbml.Table targetTable = schema.Tables.FirstOrDefault(t =>
-                t.Type.Name == child.Type
-            );
+            DbLinq.Schema.Dbml.Table targetTable = schema
+                .Tables
+                .FirstOrDefault(t => t.Type.Name == child.Type);
             if (targetTable == null)
             {
                 //Logger.Write(Level.Error, "ERROR L143 target table class not found:" + child.Type);
@@ -704,9 +706,9 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
         )
         {
             // the following is apparently useless
-            DbLinq.Schema.Dbml.Table targetTable = schema.Tables.FirstOrDefault(t =>
-                t.Type.Name == parent.Type
-            );
+            DbLinq.Schema.Dbml.Table targetTable = schema
+                .Tables
+                .FirstOrDefault(t => t.Type.Name == parent.Type);
             if (targetTable == null)
             {
                 //Logger.Write(Level.Error, "ERROR L191 target table type not found: " + parent.Type + "  (processing " + parent.Name + ")");
@@ -904,9 +906,10 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                         // 6.1.
                         for (int keyIndex = 0; keyIndex < parentKeys.Length; keyIndex++)
                         {
-                            var column = table.Type.Columns.Single(c =>
-                                c.Member == childKeys[keyIndex]
-                            );
+                            var column = table
+                                .Type
+                                .Columns
+                                .Single(c => c.Member == childKeys[keyIndex]);
                             var columnType = System.Type.GetType(column.Type);
                             var columnLiteralType =
                                 columnType != null

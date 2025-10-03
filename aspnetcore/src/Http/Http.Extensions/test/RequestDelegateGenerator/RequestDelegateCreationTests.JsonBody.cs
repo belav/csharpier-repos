@@ -96,17 +96,19 @@ app.MapPost("/", postTodoWithDefault){withFilter}
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(requestData is not null)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(
+                new RequestBodyDetectionFeature(requestData is not null)
+            );
         httpContext.Request.Headers["Content-Type"] = "application/json";
 
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(requestData);
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
 
         await endpoint.RequestDelegate(httpContext);
         await VerifyResponseBodyAsync(httpContext, expectedBody, expectedStatusCode);
@@ -120,9 +122,9 @@ app.MapPost("/", postTodoWithDefault){withFilter}
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(false)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(false));
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "0";
 
@@ -250,12 +252,12 @@ app.MapPost("/", TestPipeReader);
 
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -294,12 +296,12 @@ app.MapPost("/", TestPipeReader);
 
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -341,12 +343,12 @@ app.MapPost("/", TestPipeReader);
         httpContext.Features.Set<IRequestBodyPipeFeature>(new PipeRequestBodyFeature(pipeReader));
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = requestBodyBytes
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -354,9 +356,10 @@ app.MapPost("/", TestPipeReader);
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(
-            new byte[requestBodyBytes.Length].AsMemory()
-        );
+        int read = await httpContext
+            .Request
+            .Body
+            .ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
@@ -387,12 +390,12 @@ app.MapPost("/", TestPipeReader);
         httpContext.Features.Set<IRequestBodyPipeFeature>(new PipeRequestBodyFeature(pipeReader));
         httpContext.Request.Body = stream;
 
-        httpContext.Request.Headers["Content-Length"] = requestBodyBytes.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext.Request.Headers["Content-Length"] = requestBodyBytes
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -400,9 +403,10 @@ app.MapPost("/", TestPipeReader);
         Assert.Same(httpContext.Request.BodyReader, pipeReader);
 
         // Assert that we can read the body from both the pipe reader and Stream after executing and verify that they are empty (the pipe reader isn't seekable here)
-        int read = await httpContext.Request.Body.ReadAsync(
-            new byte[requestBodyBytes.Length].AsMemory()
-        );
+        int read = await httpContext
+            .Request
+            .Body
+            .ReadAsync(new byte[requestBodyBytes.Length].AsMemory());
         Assert.Equal(0, read);
 
         var result = await httpContext.Request.BodyReader.ReadAsync();
@@ -456,17 +460,17 @@ app.MapPost("/", TestAction);
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
         httpContext.Request.Headers["Content-Type"] = "application/json";
 
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(targetStruct);
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
-            CultureInfo.InvariantCulture
-        );
+        httpContext.Request.Headers["Content-Length"] = stream
+            .Length
+            .ToString(CultureInfo.InvariantCulture);
 
         await endpoint.RequestDelegate(httpContext);
 

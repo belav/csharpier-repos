@@ -3869,11 +3869,11 @@ namespace System.Globalization.Tests
                 for (int i = 0; i < 12; i++)
                 {
                     if (
-                        !ci
-                            .DateTimeFormat.MonthNames[i]
+                        !ci.DateTimeFormat
+                            .MonthNames[i]
                             .Equals(ci.DateTimeFormat.MonthGenitiveNames[i])
-                        || !ci
-                            .DateTimeFormat.AbbreviatedMonthNames[i]
+                        || !ci.DateTimeFormat
+                            .AbbreviatedMonthNames[i]
                             .Equals(ci.DateTimeFormat.AbbreviatedMonthGenitiveNames[i])
                     )
                     {

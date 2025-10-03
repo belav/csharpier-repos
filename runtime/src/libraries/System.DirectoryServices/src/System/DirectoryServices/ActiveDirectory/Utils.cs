@@ -181,10 +181,9 @@ namespace System.DirectoryServices.ActiveDirectory
                             (dsNameResultItem.name.Length - 1) == dsNameResultItem.name.IndexOf('/')
                         )
                         {
-                            dnsName = dsNameResultItem.name.Substring(
-                                0,
-                                dsNameResultItem.name.Length - 1
-                            );
+                            dnsName = dsNameResultItem
+                                .name
+                                .Substring(0, dsNameResultItem.name.Length - 1);
                         }
                         else
                         {
@@ -205,10 +204,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // call DsFreeNameResultW
                         var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
-                            global::Interop.Kernel32.GetProcAddress(
-                                DirectoryContext.ADHandle,
-                                "DsFreeNameResultW"
-                            );
+                            global::Interop
+                                .Kernel32
+                                .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                         if (dsFreeNameResultW == null)
                         {
                             throw ExceptionHelper.GetExceptionFromErrorCode(
@@ -302,10 +300,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // call DsFreeNameResultW
                         var dsFreeNameResultW = (delegate* unmanaged<IntPtr, void>)
-                            global::Interop.Kernel32.GetProcAddress(
-                                DirectoryContext.ADHandle,
-                                "DsFreeNameResultW"
-                            );
+                            global::Interop
+                                .Kernel32
+                                .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                         if (dsFreeNameResultW == null)
                         {
                             throw ExceptionHelper.GetExceptionFromErrorCode(
@@ -1272,14 +1269,16 @@ namespace System.DirectoryServices.ActiveDirectory
 
             Utils.GetDomainAndUsername(context, out userName, out domainName);
 
-            int result = global::Interop.Advapi32.LogonUser(
-                userName!,
-                domainName,
-                context.Password,
-                LOGON32_LOGON_NEW_CREDENTIALS,
-                LOGON32_PROVIDER_WINNT50,
-                ref hToken
-            );
+            int result = global::Interop
+                .Advapi32
+                .LogonUser(
+                    userName!,
+                    domainName,
+                    context.Password,
+                    LOGON32_LOGON_NEW_CREDENTIALS,
+                    LOGON32_PROVIDER_WINNT50,
+                    ref hToken
+                );
             // check the result
             if (result == 0)
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());
@@ -1352,7 +1351,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 serverName = Locator
                     .GetDomainControllerInfo(null, source, null, (long)flag)
-                    .DomainControllerName.Substring(2);
+                    .DomainControllerName
+                    .Substring(2);
             }
             else
             {
@@ -1364,7 +1364,8 @@ namespace System.DirectoryServices.ActiveDirectory
                         flag |= PrivateLocatorFlags.PdcRequired;
                         serverName = Locator
                             .GetDomainControllerInfo(null, source, null, (long)flag)
-                            .DomainControllerName.Substring(2);
+                            .DomainControllerName
+                            .Substring(2);
                     }
                     else
                     {
@@ -1396,14 +1397,16 @@ namespace System.DirectoryServices.ActiveDirectory
                                 // it is not a server in the root domain, so we need to do dc location
                                 serverName = Locator
                                     .GetDomainControllerInfo(null, source, null, (long)flag)
-                                    .DomainControllerName.Substring(2);
+                                    .DomainControllerName
+                                    .Substring(2);
                             }
                         }
                         else
                         {
                             serverName = Locator
                                 .GetDomainControllerInfo(null, source, null, (long)flag)
-                                .DomainControllerName.Substring(2);
+                                .DomainControllerName
+                                .Substring(2);
                         }
                     }
                 }
@@ -1421,12 +1424,14 @@ namespace System.DirectoryServices.ActiveDirectory
             SafeLsaPolicyHandle handle;
             global::Interop.OBJECT_ATTRIBUTES objectAttribute = default;
 
-            uint result = global::Interop.Advapi32.LsaOpenPolicy(
-                serverName,
-                ref objectAttribute,
-                (int)global::Interop.Advapi32.PolicyRights.POLICY_VIEW_LOCAL_INFORMATION,
-                out handle
-            );
+            uint result = global::Interop
+                .Advapi32
+                .LsaOpenPolicy(
+                    serverName,
+                    ref objectAttribute,
+                    (int)global::Interop.Advapi32.PolicyRights.POLICY_VIEW_LOCAL_INFORMATION,
+                    out handle
+                );
             if (result != 0)
             {
                 throw ExceptionHelper.GetExceptionFromErrorCode(
@@ -2818,11 +2823,9 @@ namespace System.DirectoryServices.ActiveDirectory
 
                     // Does the user SID have the same domain as the machine SID?
                     bool sameDomain = false;
-                    bool success = global::Interop.Advapi32.EqualDomainSid(
-                        pCopyOfUserSid,
-                        pMachineDomainSid,
-                        ref sameDomain
-                    );
+                    bool success = global::Interop
+                        .Advapi32
+                        .EqualDomainSid(pCopyOfUserSid, pMachineDomainSid, ref sameDomain);
 
                     // Since both pCopyOfUserSid and pMachineDomainSid should always be account SIDs
                     Debug.Assert(success);
@@ -2860,12 +2863,14 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 // Get the current thread's token
                 if (
-                    !global::Interop.Advapi32.OpenThreadToken(
-                        global::Interop.Kernel32.GetCurrentThread(),
-                        TokenAccessLevels.Query, // TOKEN_QUERY
-                        true,
-                        out tokenHandle
-                    )
+                    !global::Interop
+                        .Advapi32
+                        .OpenThreadToken(
+                            global::Interop.Kernel32.GetCurrentThread(),
+                            TokenAccessLevels.Query, // TOKEN_QUERY
+                            true,
+                            out tokenHandle
+                        )
                 )
                 {
                     if ((error = Marshal.GetLastPInvokeError()) == 1008) // ERROR_NO_TOKEN
@@ -2875,11 +2880,13 @@ namespace System.DirectoryServices.ActiveDirectory
 
                         // Current thread doesn't have a token, try the process
                         if (
-                            !global::Interop.Advapi32.OpenProcessToken(
-                                global::Interop.Kernel32.GetCurrentProcess(),
-                                (int)TokenAccessLevels.Query,
-                                out tokenHandle
-                            )
+                            !global::Interop
+                                .Advapi32
+                                .OpenProcessToken(
+                                    global::Interop.Kernel32.GetCurrentProcess(),
+                                    (int)TokenAccessLevels.Query,
+                                    out tokenHandle
+                                )
                         )
                         {
                             int lastError = Marshal.GetLastPInvokeError();
@@ -2900,13 +2907,15 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 // Retrieve the user info from the current thread's token
                 // First, determine how big a buffer we need.
-                bool success = global::Interop.Advapi32.GetTokenInformation(
-                    tokenHandle.DangerousGetHandle(),
-                    (uint)global::Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
-                    IntPtr.Zero,
-                    0,
-                    out neededBufferSize
-                );
+                bool success = global::Interop
+                    .Advapi32
+                    .GetTokenInformation(
+                        tokenHandle.DangerousGetHandle(),
+                        (uint)global::Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
+                        IntPtr.Zero,
+                        0,
+                        out neededBufferSize
+                    );
 
                 int getTokenInfoError = 0;
                 if ((getTokenInfoError = Marshal.GetLastPInvokeError()) != 122) // ERROR_INSUFFICIENT_BUFFER
@@ -2921,13 +2930,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 pBuffer = Marshal.AllocHGlobal((int)neededBufferSize);
 
                 // Load the user info into the buffer
-                success = global::Interop.Advapi32.GetTokenInformation(
-                    tokenHandle.DangerousGetHandle(),
-                    (uint)global::Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
-                    pBuffer,
-                    neededBufferSize,
-                    out neededBufferSize
-                );
+                success = global::Interop
+                    .Advapi32
+                    .GetTokenInformation(
+                        tokenHandle.DangerousGetHandle(),
+                        (uint)global::Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenUser,
+                        pBuffer,
+                        neededBufferSize,
+                        out neededBufferSize
+                    );
 
                 if (!success)
                 {
@@ -2975,12 +2986,14 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 global::Interop.OBJECT_ATTRIBUTES oa = default;
-                uint err = global::Interop.Advapi32.LsaOpenPolicy(
-                    SystemName: null,
-                    ref oa,
-                    (int)global::Interop.Advapi32.PolicyRights.POLICY_VIEW_LOCAL_INFORMATION,
-                    out policyHandle
-                );
+                uint err = global::Interop
+                    .Advapi32
+                    .LsaOpenPolicy(
+                        SystemName: null,
+                        ref oa,
+                        (int)global::Interop.Advapi32.PolicyRights.POLICY_VIEW_LOCAL_INFORMATION,
+                        out policyHandle
+                    );
 
                 if (err != 0)
                 {
@@ -2993,11 +3006,13 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
 
                 Debug.Assert(!policyHandle.IsInvalid);
-                err = global::Interop.Advapi32.LsaQueryInformationPolicy(
-                    policyHandle.DangerousGetHandle(),
-                    5, // PolicyAccountDomainInformation
-                    ref pBuffer
-                );
+                err = global::Interop
+                    .Advapi32
+                    .LsaQueryInformationPolicy(
+                        policyHandle.DangerousGetHandle(),
+                        5, // PolicyAccountDomainInformation
+                        ref pBuffer
+                    );
 
                 if (err != 0)
                 {
@@ -3018,11 +3033,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 // Now we make a copy of the SID to return
                 int sidLength = global::Interop.Advapi32.GetLengthSid(info.DomainSid);
                 IntPtr pCopyOfSid = Marshal.AllocHGlobal(sidLength);
-                bool success = global::Interop.Advapi32.CopySid(
-                    sidLength,
-                    pCopyOfSid,
-                    info.DomainSid
-                );
+                bool success = global::Interop
+                    .Advapi32
+                    .CopySid(sidLength, pCopyOfSid, info.DomainSid);
                 if (!success)
                 {
                     int lastError = Marshal.GetLastPInvokeError();

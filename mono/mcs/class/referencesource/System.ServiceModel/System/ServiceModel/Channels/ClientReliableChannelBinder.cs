@@ -40,9 +40,9 @@ namespace System.ServiceModel.Channels
         {
             if (channelParameters == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "channelParameters"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("channelParameters");
             }
 
             this.to = to;
@@ -324,9 +324,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (!ReliableChannelBinderHelper.MaskHandled(maskingMode))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new TimeoutException(SR.GetString(SR.TimeoutOnRequest, timeout))
+                            );
                     }
 
                     return null;

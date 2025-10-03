@@ -61,25 +61,29 @@ namespace System.Web.Http
         [Fact]
         public void ControllerContext_Property()
         {
-            Assert.Reflection.Property<HttpActionContext, HttpControllerContext>(
-                instance: new HttpActionContext(),
-                propertyGetter: ac => ac.ControllerContext,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: ContextUtil.CreateControllerContext()
-            );
+            Assert
+                .Reflection
+                .Property<HttpActionContext, HttpControllerContext>(
+                    instance: new HttpActionContext(),
+                    propertyGetter: ac => ac.ControllerContext,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: ContextUtil.CreateControllerContext()
+                );
         }
 
         [Fact]
         public void ActionDescriptor_Property()
         {
-            Assert.Reflection.Property<HttpActionContext, HttpActionDescriptor>(
-                instance: new HttpActionContext(),
-                propertyGetter: ac => ac.ActionDescriptor,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: new Mock<HttpActionDescriptor>().Object
-            );
+            Assert
+                .Reflection
+                .Property<HttpActionContext, HttpActionDescriptor>(
+                    instance: new HttpActionContext(),
+                    propertyGetter: ac => ac.ActionDescriptor,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: new Mock<HttpActionDescriptor>().Object
+                );
         }
 
         [Fact]

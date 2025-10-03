@@ -26,9 +26,9 @@ namespace System.ServiceModel.Dispatcher
                     reply.Properties[HttpResponseMessageProperty.Name];
                 if (prop != null && prop.StatusCode == HttpStatusCode.InternalServerError)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(prop.StatusDescription)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new CommunicationException(prop.StatusDescription));
                 }
             }
         }

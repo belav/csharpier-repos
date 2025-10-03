@@ -92,12 +92,14 @@ namespace System.Net.Security.Tests
             using (client)
             using (server)
             using (
-                X509Certificate2 serverCertificate =
-                    Configuration.Certificates.GetServerCertificate()
+                X509Certificate2 serverCertificate = Configuration
+                    .Certificates
+                    .GetServerCertificate()
             )
             using (
-                X509Certificate2 clientCertificate =
-                    Configuration.Certificates.GetClientCertificate()
+                X509Certificate2 clientCertificate = Configuration
+                    .Certificates
+                    .GetClientCertificate()
             )
             {
                 SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions()

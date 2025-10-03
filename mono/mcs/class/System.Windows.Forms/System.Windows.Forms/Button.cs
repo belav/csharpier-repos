@@ -192,38 +192,46 @@ namespace System.Windows.Forms
             Rectangle text_rectangle;
             Rectangle image_rectangle;
 
-            ThemeEngine.Current.CalculateButtonTextAndImageLayout(
-                pevent.Graphics,
-                this,
-                out text_rectangle,
-                out image_rectangle
-            );
+            ThemeEngine
+                .Current
+                .CalculateButtonTextAndImageLayout(
+                    pevent.Graphics,
+                    this,
+                    out text_rectangle,
+                    out image_rectangle
+                );
 
             // Draw our button
             if (this.FlatStyle == FlatStyle.Standard)
-                ThemeEngine.Current.DrawButton(
-                    pevent.Graphics,
-                    this,
-                    text_rectangle,
-                    image_rectangle,
-                    pevent.ClipRectangle
-                );
+                ThemeEngine
+                    .Current
+                    .DrawButton(
+                        pevent.Graphics,
+                        this,
+                        text_rectangle,
+                        image_rectangle,
+                        pevent.ClipRectangle
+                    );
             else if (this.FlatStyle == FlatStyle.Flat)
-                ThemeEngine.Current.DrawFlatButton(
-                    pevent.Graphics,
-                    this,
-                    text_rectangle,
-                    image_rectangle,
-                    pevent.ClipRectangle
-                );
+                ThemeEngine
+                    .Current
+                    .DrawFlatButton(
+                        pevent.Graphics,
+                        this,
+                        text_rectangle,
+                        image_rectangle,
+                        pevent.ClipRectangle
+                    );
             else if (this.FlatStyle == FlatStyle.Popup)
-                ThemeEngine.Current.DrawPopupButton(
-                    pevent.Graphics,
-                    this,
-                    text_rectangle,
-                    image_rectangle,
-                    pevent.ClipRectangle
-                );
+                ThemeEngine
+                    .Current
+                    .DrawPopupButton(
+                        pevent.Graphics,
+                        this,
+                        text_rectangle,
+                        image_rectangle,
+                        pevent.ClipRectangle
+                    );
         }
 
         internal override Size GetPreferredSizeCore(Size proposedSize)

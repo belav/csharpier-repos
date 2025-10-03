@@ -266,10 +266,12 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
             var key = compilation.GetDeterministicKey(options: DeterministicKeyOptions.Default);
 
             var compilerVersion = typeof(Compilation)
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion;
             var runtimeVersion = typeof(object)
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                 ?.InformationalVersion;
 
             AssertJson(
@@ -524,9 +526,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 {
                     CSharpSyntaxTree.ParseText(
                         @"// this is a comment",
-                        CSharpParseOptions.Default.WithLanguageVersion(
-                            CSharp.LanguageVersion.CSharp10
-                        )
+                        CSharpParseOptions
+                            .Default
+                            .WithLanguageVersion(CSharp.LanguageVersion.CSharp10)
                     ),
                 },
                 options: new CSharpCompilationOptions(

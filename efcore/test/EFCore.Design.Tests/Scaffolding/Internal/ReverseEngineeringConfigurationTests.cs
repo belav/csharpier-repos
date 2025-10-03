@@ -27,7 +27,8 @@ public class ReverseEngineeringConfigurationTests
         )
             .Build("Microsoft.EntityFrameworkCore.SqlServer")
             .CreateScope()
-            .ServiceProvider.GetRequiredService<IReverseEngineerScaffolder>();
+            .ServiceProvider
+            .GetRequiredService<IReverseEngineerScaffolder>();
 
         Assert.Equal(
             DesignStrings.ContextClassNotValidCSharpIdentifier(contextName),

@@ -205,13 +205,15 @@ namespace System.ServiceModel.Security
                 byte[] workBuffer
             )
             {
-                TimestampCanonicalFormWriter.Instance.WriteCanonicalForm(
-                    stream,
-                    timestamp.Id,
-                    timestamp.GetCreationTimeChars(),
-                    timestamp.GetExpiryTimeChars(),
-                    workBuffer
-                );
+                TimestampCanonicalFormWriter
+                    .Instance
+                    .WriteCanonicalForm(
+                        stream,
+                        timestamp.Id,
+                        timestamp.GetCreationTimeChars(),
+                        timestamp.GetExpiryTimeChars(),
+                        workBuffer
+                    );
             }
         }
 

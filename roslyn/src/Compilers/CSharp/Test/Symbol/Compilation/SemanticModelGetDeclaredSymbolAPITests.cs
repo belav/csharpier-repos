@@ -2274,7 +2274,8 @@ static class E
             var model = compilation.GetSemanticModel(tree);
             var position = source.IndexOf("a.F()", StringComparison.Ordinal);
             var method = compilation
-                .GlobalNamespace.GetMember<INamedTypeSymbol>("E")
+                .GlobalNamespace
+                .GetMember<INamedTypeSymbol>("E")
                 .GetMember<IMethodSymbol>("M");
 
             // No type.
@@ -2334,7 +2335,8 @@ static class E
             model = compilation.GetSemanticModel(tree);
             position = source.IndexOf("a.F()", StringComparison.Ordinal);
             method = compilation
-                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>("M");
 
             // No type.
@@ -3244,7 +3246,8 @@ namespace A
             );
 
             var expr = tree.FindNodeOrTokenByKind(SyntaxKind.StringLiteralToken)
-                .Parent.FirstAncestorOrSelf<ExpressionStatementSyntax>()
+                .Parent
+                .FirstAncestorOrSelf<ExpressionStatementSyntax>()
                 .Expression;
 
             var global = compilation.GlobalNamespace;
@@ -4329,7 +4332,8 @@ class Program
 
             var globalStmt = tree.GetCompilationUnitRoot()
                 .FindToken(tree.GetCompilationUnitRoot().ToFullString().IndexOf('/'))
-                .Parent.AncestorsAndSelf()
+                .Parent
+                .AncestorsAndSelf()
                 .Single(x => x.IsKind(SyntaxKind.GlobalStatement));
 
             var symbol = model.GetDeclaredSymbol(globalStmt);
@@ -4856,10 +4860,13 @@ class M {
         {
             return SyntaxFactory
                 .ParseCompilationUnit(source + " class X {}")
-                .Members.First()
+                .Members
+                .First()
                 .AsTypeDeclarationSyntax()
-                .AttributeLists.First()
-                .Attributes.First();
+                .AttributeLists
+                .First()
+                .Attributes
+                .First();
         }
 
         [WorkItem(653957, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/653957")]
@@ -5216,8 +5223,10 @@ class C {
 
             var attr8 = SyntaxFactory
                 .ParseCompilationUnit(@"[assembly: O(""hello"")]")
-                .AttributeLists.First()
-                .Attributes.First();
+                .AttributeLists
+                .First()
+                .Attributes
+                .First();
 
             success = parentModel.TryGetSpeculativeSemanticModel(
                 position3,
@@ -5298,7 +5307,8 @@ class C
             var compilation = (Compilation)CreateCompilation(source);
 
             var conversion = compilation
-                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.ImplicitConversionName);
             Assert.Equal(MethodKind.Conversion, conversion.MethodKind);
 
@@ -5338,7 +5348,8 @@ class C
             var compilation = (Compilation)CreateCompilation(source);
 
             var conversion = compilation
-                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.ExplicitConversionName);
             Assert.Equal(MethodKind.Conversion, conversion.MethodKind);
 
@@ -5378,7 +5389,8 @@ class C
             var compilation = (Compilation)CreateCompilation(source);
 
             var @operator = compilation
-                .GlobalNamespace.GetMember<INamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<INamedTypeSymbol>("C")
                 .GetMember<IMethodSymbol>(WellKnownMemberNames.AdditionOperatorName);
             Assert.Equal(MethodKind.UserDefinedOperator, @operator.MethodKind);
 
@@ -5569,7 +5581,8 @@ class Other
             );
 
             var declaringType = compilation
-                .GlobalNamespace.GetMember<ITypeSymbol>("Enclosing")
+                .GlobalNamespace
+                .GetMember<ITypeSymbol>("Enclosing")
                 .GetMember<ITypeSymbol>("Declaring");
             var fieldLikeEvent = declaringType.GetMember<IEventSymbol>("E");
             var customEvent = declaringType.GetMember<IEventSymbol>("F");

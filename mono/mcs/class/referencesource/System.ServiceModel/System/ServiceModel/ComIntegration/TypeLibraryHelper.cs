@@ -176,11 +176,13 @@ namespace System.ServiceModel.ComIntegration
             }
             catch (ReflectionTypeLoadException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.FailedToConvertTypelibraryToAssembly)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.FailedToConvertTypelibraryToAssembly)
+                        )
+                    );
             }
 
             if (asm == null)

@@ -52,8 +52,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 ) == true;
 
             // Insert line breaks in between sections to ensure we get double spacing between sections.
-            var tags = info
-                .Sections.SelectMany(section =>
+            var tags = info.Sections
+                .SelectMany(section =>
                     section.TaggedParts.Add(new TaggedText(TextTags.LineBreak, Environment.NewLine))
                 )
                 .ToImmutableArray();

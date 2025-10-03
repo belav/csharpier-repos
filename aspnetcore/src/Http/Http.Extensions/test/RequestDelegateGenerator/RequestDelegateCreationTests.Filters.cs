@@ -233,9 +233,9 @@ app.MapGet("/", (IFormFileCollection formFiles) =>
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
-            new RequestBodyDetectionFeature(true)
-        );
+        httpContext
+            .Features
+            .Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
 
         // Act
         httpContext.Features.Set<IEndpointFeature>(new EndpointFeature { Endpoint = endpoint });

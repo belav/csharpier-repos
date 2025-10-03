@@ -160,14 +160,16 @@ namespace System.Speech.Internal.Synthesis
                 {
                     if (reader.Value != xmlNamespaceSsml && reader.Value != xmlNamespacePrompt)
                     {
-                        ssmlAttributes._unknownNamespaces.Add(
-                            new SsmlXmlAttribute(
-                                reader.Prefix,
-                                reader.LocalName,
-                                reader.Value,
-                                reader.NamespaceURI
-                            )
-                        );
+                        ssmlAttributes
+                            ._unknownNamespaces
+                            .Add(
+                                new SsmlXmlAttribute(
+                                    reader.Prefix,
+                                    reader.LocalName,
+                                    reader.Value,
+                                    reader.NamespaceURI
+                                )
+                            );
                     }
                     else if (reader.Value == xmlNamespacePrompt)
                     {
@@ -1012,7 +1014,8 @@ namespace System.Speech.Internal.Synthesis
 
                     case AlphabetType.Ups:
                         aPhoneIds = PhonemeConverter
-                            .UpsConverter.ConvertPronToId(sPh)
+                            .UpsConverter
+                            .ConvertPronToId(sPh)
                             .ToCharArray();
                         alphabet = AlphabetType.Ipa;
                         break;
@@ -1330,11 +1333,13 @@ namespace System.Speech.Internal.Synthesis
                             XmlTextReader textReader = reader as XmlTextReader;
                             if (textReader != null && engine.Ssml != null)
                             {
-                                textPosition = engine.Ssml.IndexOf(
-                                    reader.Value,
-                                    textReader.LinePosition + reader.LocalName.Length,
-                                    StringComparison.Ordinal
-                                );
+                                textPosition = engine
+                                    .Ssml
+                                    .IndexOf(
+                                        reader.Value,
+                                        textReader.LinePosition + reader.LocalName.Length,
+                                        StringComparison.Ordinal
+                                    );
                             }
                             break;
 

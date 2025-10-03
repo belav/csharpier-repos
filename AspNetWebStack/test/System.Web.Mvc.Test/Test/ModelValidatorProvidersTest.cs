@@ -21,7 +21,8 @@ namespace System.Web.Mvc.Test
 
             // Act
             Type[] actualTypes = ModelValidatorProviders
-                .Providers.Select(p => p.GetType())
+                .Providers
+                .Select(p => p.GetType())
                 .ToArray();
 
             // Assert

@@ -63,9 +63,9 @@ namespace System.Net.Http.Functional.Tests
                                 .ConfigureAwait(false);
 
                             using (
-                                Stream clientStream = await (
-                                    await responseTask
-                                ).Content.ReadAsStreamAsync(TestAsync)
+                                Stream clientStream = await (await responseTask)
+                                    .Content
+                                    .ReadAsStreamAsync(TestAsync)
                             )
                             {
                                 Assert.True(clientStream.CanWrite);

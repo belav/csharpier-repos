@@ -324,10 +324,9 @@ namespace Microsoft.Build.BuildEngine
                 XmlElement element = itemElement[metadataName];
                 if (element == null)
                 {
-                    element = itemElement.OwnerDocument.CreateElement(
-                        metadataName,
-                        Project.XmlNamespace
-                    );
+                    element = itemElement
+                        .OwnerDocument
+                        .CreateElement(metadataName, Project.XmlNamespace);
                     element.InnerText = metadataValue;
                     itemElement.AppendChild(element);
                 }
@@ -901,10 +900,9 @@ namespace Microsoft.Build.BuildEngine
             {
                 if (FromXml)
                 {
-                    XmlElement newElement = itemElement.OwnerDocument.CreateElement(
-                        value,
-                        Project.XmlNamespace
-                    );
+                    XmlElement newElement = itemElement
+                        .OwnerDocument
+                        .CreateElement(value, Project.XmlNamespace);
                     newElement.SetAttribute("Include", itemElement.GetAttribute("Include"));
                     newElement.SetAttribute("Condition", itemElement.GetAttribute("Condition"));
                     foreach (XmlNode xn in itemElement)

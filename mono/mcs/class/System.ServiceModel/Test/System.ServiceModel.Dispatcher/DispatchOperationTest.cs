@@ -218,7 +218,8 @@ namespace MonoTests.System.ServiceModel.Dispatcher
                     ContractDescription
                         .GetContract(typeof(TestFaultContract))
                         .Operations[0]
-                        .Faults.Count,
+                        .Faults
+                        .Count,
                     "s#0"
                 );
 

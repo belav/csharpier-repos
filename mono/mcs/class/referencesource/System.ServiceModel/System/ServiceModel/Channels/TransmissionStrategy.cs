@@ -951,9 +951,9 @@ namespace System.ServiceModel.Channels
         void ThrowIfRollover()
         {
             if (this.windowStart + this.window.Count + this.waitQueue.Count == Int64.MaxValue)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageNumberRolloverFault(this.id).CreateException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new MessageNumberRolloverFault(this.id).CreateException());
         }
 
         void UpdateStats(Int64 now, Int64 lastAttemptTime)

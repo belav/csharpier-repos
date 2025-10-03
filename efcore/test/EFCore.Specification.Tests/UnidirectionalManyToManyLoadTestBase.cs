@@ -144,7 +144,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry(right)
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
         }
 
@@ -232,8 +233,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
         if (state != EntityState.Unchanged)
         {
             foreach (
-                var child in left
-                    .TwoSkip.Cast<object>()
+                var child in left.TwoSkip
+                    .Cast<object>()
                     .Concat(left.TwoSkipShared)
                     .Concat(left.SelfSkipPayloadLeft)
                     .Concat(entityOneCollection.CurrentValue!)
@@ -496,7 +497,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry(right)
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
         }
 
@@ -678,7 +680,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry((object)right)
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<UnidirectionalEntityOne>()
+                    .CurrentValue!
+                    .Cast<UnidirectionalEntityOne>()
             );
         }
 
@@ -815,7 +818,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry(right)
                     .Collection("UnidirectionalEntityCompositeKey")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
         }
 
@@ -1014,7 +1018,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry(right)
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
         }
 
@@ -1089,7 +1094,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry(right)
                     .Collection("UnidirectionalEntityOne")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
             );
             foreach (
                 var three in context
@@ -1218,7 +1224,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry(right)
                     .Collection("UnidirectionalEntityOne1")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
                     .Single()
             );
         }
@@ -1233,9 +1240,9 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
     {
         using var context = Fixture.CreateContext();
 
-        var queryable = context.UnidirectionalEntityOnes.Include(e =>
-            e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
-        );
+        var queryable = context
+            .UnidirectionalEntityOnes
+            .Include(e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2));
         var left = async
             ? await queryable.SingleAsync(e => e.Id == 1)
             : queryable.Single(e => e.Id == 1);
@@ -1258,7 +1265,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 context
                     .Entry(right)
                     .Collection("UnidirectionalEntityOne1")
-                    .CurrentValue!.Cast<object>()
+                    .CurrentValue!
+                    .Cast<object>()
                     .Single()
             );
         }

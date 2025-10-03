@@ -162,13 +162,17 @@ namespace System.Web.UI
         /// </devdoc>
         public override int GetHashCode()
         {
-            return System.Web.Util.HashCodeCombiner.CombineHashCodes(
-                _maximumRows.GetHashCode(),
-                _retrieveTotalRowCount.GetHashCode(),
-                _sortExpression.GetHashCode(),
-                _startRowIndex.GetHashCode(),
-                _totalRowCount.GetHashCode()
-            );
+            return System
+                .Web
+                .Util
+                .HashCodeCombiner
+                .CombineHashCodes(
+                    _maximumRows.GetHashCode(),
+                    _retrieveTotalRowCount.GetHashCode(),
+                    _sortExpression.GetHashCode(),
+                    _startRowIndex.GetHashCode(),
+                    _totalRowCount.GetHashCode()
+                );
         }
 
         public override bool Equals(object obj)

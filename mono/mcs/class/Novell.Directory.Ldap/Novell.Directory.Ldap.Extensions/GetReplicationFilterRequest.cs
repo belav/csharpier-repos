@@ -66,16 +66,17 @@ namespace Novell.Directory.Ldap.Extensions
             {
                 LdapExtendedResponse.register(
                     ReplicationConstants.GET_REPLICATION_FILTER_RES,
-                    System.Type.GetType(
-                        "Novell.Directory.Ldap.Extensions.GetReplicationFilterResponse"
-                    )
+                    System
+                        .Type
+                        .GetType("Novell.Directory.Ldap.Extensions.GetReplicationFilterResponse")
                 );
             }
             catch (System.Exception e)
             {
-                System.Console.Error.WriteLine(
-                    "Could not register Extended Response -" + " Class not found"
-                );
+                System
+                    .Console
+                    .Error
+                    .WriteLine("Could not register Extended Response -" + " Class not found");
             }
         }
 

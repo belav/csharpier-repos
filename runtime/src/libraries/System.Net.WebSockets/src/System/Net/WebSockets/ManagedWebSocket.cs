@@ -1135,7 +1135,8 @@ namespace System.Net.WebSockets
                                 Debug.Assert(receiveBufferBytesToCopy > 0);
 
                                 _receiveBuffer
-                                    .Span.Slice(_receiveBufferOffset, receiveBufferBytesToCopy)
+                                    .Span
+                                    .Slice(_receiveBufferOffset, receiveBufferBytesToCopy)
                                     .CopyTo(
                                         header.Compressed ? _inflater!.Span : payloadBuffer.Span
                                     );
@@ -1354,10 +1355,9 @@ namespace System.Net.WebSockets
                     try
                     {
                         closeStatusDescription = s_textEncoding.GetString(
-                            _receiveBuffer.Span.Slice(
-                                _receiveBufferOffset + 2,
-                                (int)header.PayloadLength - 2
-                            )
+                            _receiveBuffer
+                                .Span
+                                .Slice(_receiveBufferOffset + 2, (int)header.PayloadLength - 2)
                         );
                     }
                     catch (DecoderFallbackException exc)
@@ -1705,9 +1705,9 @@ namespace System.Net.WebSockets
             if (State == WebSocketState.CloseSent)
             {
                 // Wait until we've received a close response
-                byte[] closeBuffer = ArrayPool<byte>.Shared.Rent(
-                    MaxMessageHeaderLength + MaxControlPayloadLength
-                );
+                byte[] closeBuffer = ArrayPool<byte>
+                    .Shared
+                    .Rent(MaxMessageHeaderLength + MaxControlPayloadLength);
                 try
                 {
                     // Loop until we've received a close frame.
@@ -1867,7 +1867,8 @@ namespace System.Net.WebSockets
                 if (_receiveBufferCount > 0)
                 {
                     _receiveBuffer
-                        .Span.Slice(_receiveBufferOffset, _receiveBufferCount)
+                        .Span
+                        .Slice(_receiveBufferOffset, _receiveBufferCount)
                         .CopyTo(_receiveBuffer.Span);
                 }
                 _receiveBufferOffset = 0;

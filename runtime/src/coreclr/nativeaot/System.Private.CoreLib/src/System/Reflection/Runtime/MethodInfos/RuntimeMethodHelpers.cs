@@ -94,7 +94,8 @@ namespace System.Reflection.Runtime.MethodInfos
                 if (i != 0)
                     sb.Append(", ");
                 string parameterTypeString = parameters[i]
-                    .ParameterType.FormatTypeNameForReflection();
+                    .ParameterType
+                    .FormatTypeNameForReflection();
 
                 // Legacy: Why use "ByRef" for by ref parameters? What language is this?
                 // VB uses "ByRef" but it should precede (not follow) the parameter name.

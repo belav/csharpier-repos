@@ -351,10 +351,9 @@ namespace System.Windows.Forms
             { // backspace
                 if (base.txtView.SelectionLength > 0)
                 {
-                    string prefix = base.txtView.SelectedText.Substring(
-                        0,
-                        base.txtView.SelectionLength - 1
-                    );
+                    string prefix = base.txtView
+                        .SelectedText
+                        .Substring(0, base.txtView.SelectionLength - 1);
 
                     bool found = false;
 

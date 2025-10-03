@@ -92,7 +92,8 @@ public class SqlServerNavigationExpansionExtensibilityHelper
         entityType.IsOwned()
         && entityType
             .FindOwnership()!
-            .PrincipalEntityType.GetTableMappings()
+            .PrincipalEntityType
+            .GetTableMappings()
             .FirstOrDefault()
             ?.Table
             is ITable ownerTable

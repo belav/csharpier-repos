@@ -271,7 +271,8 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
 
             foreach (
                 var child in parent
-                    .Children.Cast<object>()
+                    .Children
+                    .Cast<object>()
                     .Concat(parent.ChildrenAk)
                     .Concat(parent.ChildrenShadowFk)
                     .Concat(parent.ChildrenCompositeKey)
@@ -1323,7 +1324,8 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         if (state != EntityState.Detached)
         {
             var newParent = context
-                .ChangeTracker.Entries<Parent>()
+                .ChangeTracker
+                .Entries<Parent>()
                 .Single(e => e.Entity.Id != parent.Id)
                 .Entity;
 

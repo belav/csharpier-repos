@@ -151,9 +151,11 @@ namespace System.ServiceModel.Security
                         // Binary Secret tokens aren't referred to externally
                         return null;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentOutOfRangeException("tokenReferenceStyle")
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentOutOfRangeException("tokenReferenceStyle")
+                            );
                 }
             }
 
@@ -186,15 +188,17 @@ namespace System.ServiceModel.Security
                         && secretType != otherDictionary.SymmetricKeyBinarySecret.Value
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(
-                                SR.GetString(
-                                    SR.UnexpectedBinarySecretType,
-                                    parent.SerializerDictionary.SymmetricKeyBinarySecret.Value,
-                                    secretType
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new MessageSecurityException(
+                                    SR.GetString(
+                                        SR.UnexpectedBinarySecretType,
+                                        parent.SerializerDictionary.SymmetricKeyBinarySecret.Value,
+                                        secretType
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
 
@@ -485,14 +489,16 @@ namespace System.ServiceModel.Security
                                     != this.DriverDictionary.Psha1ComputedKeyUri.Value
                                 )
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                                        new SecurityNegotiationException(
-                                            SR.GetString(
-                                                SR.UnknownComputedKeyAlgorithm,
-                                                computedKeyAlgorithm
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperWarning(
+                                            new SecurityNegotiationException(
+                                                SR.GetString(
+                                                    SR.UnknownComputedKeyAlgorithm,
+                                                    computedKeyAlgorithm
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
                                 }
                                 computeKey = true;
                             }
@@ -587,9 +593,13 @@ namespace System.ServiceModel.Security
                 }
                 reader.ReadEndElement();
                 if (rstrCollection.Count == 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.NoRequestSecurityTokenResponseElements))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(SR.NoRequestSecurityTokenResponseElements)
+                            )
+                        );
                 return new RequestSecurityTokenResponseCollection(
                     rstrCollection.AsReadOnly(),
                     this.StandardsManager
@@ -635,9 +645,11 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.NoAppliesToPresent))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.NoAppliesToPresent))
+                        );
                 }
             }
 
@@ -844,10 +856,9 @@ namespace System.ServiceModel.Security
                             );
                             if (valueTypeUri.Length == 0)
                                 valueTypeUri = null;
-                            return standardsManager.SecurityTokenSerializer.ReadToken(
-                                new XmlNodeReader(tokenXml),
-                                resolver
-                            );
+                            return standardsManager
+                                .SecurityTokenSerializer
+                                .ReadToken(new XmlNodeReader(tokenXml), resolver);
                         }
                     }
                 }
@@ -880,11 +891,13 @@ namespace System.ServiceModel.Security
                             {
                                 if (issuedTokenXml != null)
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new InvalidOperationException(
-                                            SR.GetString(SR.RstrHasMultipleIssuedTokens)
-                                        )
-                                    );
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperError(
+                                            new InvalidOperationException(
+                                                SR.GetString(SR.RstrHasMultipleIssuedTokens)
+                                            )
+                                        );
                                 }
                                 issuedTokenXml = XmlHelper.GetChildElement(elem);
                             }
@@ -895,11 +908,13 @@ namespace System.ServiceModel.Security
                             {
                                 if (proofTokenXml != null)
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new InvalidOperationException(
-                                            SR.GetString(SR.RstrHasMultipleProofTokens)
-                                        )
-                                    );
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperError(
+                                            new InvalidOperationException(
+                                                SR.GetString(SR.RstrHasMultipleProofTokens)
+                                            )
+                                        );
                                 }
                                 proofTokenXml = XmlHelper.GetChildElement(elem);
                             }
@@ -933,12 +948,14 @@ namespace System.ServiceModel.Security
 
                 if (defaultKeySize < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "defaultKeySize",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "defaultKeySize",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
 
                 if (rstr == null)
@@ -949,15 +966,17 @@ namespace System.ServiceModel.Security
                 {
                     if (expectedTokenType != null && expectedTokenType != rstr.TokenType)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.BadIssuedTokenType,
-                                    rstr.TokenType,
-                                    expectedTokenType
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.BadIssuedTokenType,
+                                        rstr.TokenType,
+                                        expectedTokenType
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     tokenType = rstr.TokenType;
                 }
@@ -974,18 +993,22 @@ namespace System.ServiceModel.Security
                 GetIssuedAndProofXml(rstr, out issuedTokenXml, out proofXml);
 
                 if (issuedTokenXml == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.NoLicenseXml))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.NoLicenseXml))
+                        );
 
                 if (isBearerKeyType)
                 {
                     if (proofXml != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.BearerKeyTypeCannotHaveProofKey)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.BearerKeyTypeCannotHaveProofKey)
+                                )
+                            );
 
                     return new GenericXmlSecurityToken(
                         issuedTokenXml,
@@ -1004,23 +1027,30 @@ namespace System.ServiceModel.Security
                 {
                     if (requestorEntropy == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.EntropyModeRequiresRequestorEntropy, keyEntropyMode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.EntropyModeRequiresRequestorEntropy,
+                                        keyEntropyMode
+                                    )
+                                )
+                            );
                     }
                     // enforce that there is no entropy or proof token in the RSTR
                     if (proofXml != null || entropyToken != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.EntropyModeCannotHaveProofTokenOrIssuerEntropy,
-                                    keyEntropyMode
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.EntropyModeCannotHaveProofTokenOrIssuerEntropy,
+                                        keyEntropyMode
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     proofToken = new BinarySecretSecurityToken(requestorEntropy);
                 }
@@ -1028,70 +1058,94 @@ namespace System.ServiceModel.Security
                 {
                     if (requestorEntropy != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.EntropyModeCannotHaveRequestorEntropy,
-                                    keyEntropyMode
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.EntropyModeCannotHaveRequestorEntropy,
+                                        keyEntropyMode
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     if (rstr.ComputeKey || entropyToken != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.EntropyModeCannotHaveComputedKey, keyEntropyMode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.EntropyModeCannotHaveComputedKey,
+                                        keyEntropyMode
+                                    )
+                                )
+                            );
                     }
                     if (proofXml == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.EntropyModeRequiresProofToken, keyEntropyMode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.EntropyModeRequiresProofToken, keyEntropyMode)
+                                )
+                            );
                     }
                     string valueTypeUri = proofXml.GetAttribute(SecurityJan2004Strings.ValueType);
                     if (valueTypeUri.Length == 0)
                         valueTypeUri = null;
-                    proofToken = standardsManager.SecurityTokenSerializer.ReadToken(
-                        new XmlNodeReader(proofXml),
-                        resolver
-                    );
+                    proofToken = standardsManager
+                        .SecurityTokenSerializer
+                        .ReadToken(new XmlNodeReader(proofXml), resolver);
                 }
                 else
                 {
                     if (!rstr.ComputeKey)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.EntropyModeRequiresComputedKey, keyEntropyMode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.EntropyModeRequiresComputedKey, keyEntropyMode)
+                                )
+                            );
                     }
                     if (entropyToken == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.EntropyModeRequiresIssuerEntropy, keyEntropyMode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.EntropyModeRequiresIssuerEntropy,
+                                        keyEntropyMode
+                                    )
+                                )
+                            );
                     }
                     if (requestorEntropy == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(SR.EntropyModeRequiresRequestorEntropy, keyEntropyMode)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.EntropyModeRequiresRequestorEntropy,
+                                        keyEntropyMode
+                                    )
+                                )
+                            );
                     }
                     if (rstr.KeySize == 0 && defaultKeySize == 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.RstrKeySizeNotProvided))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.RstrKeySizeNotProvided)
+                                )
+                            );
                     }
                     int issuedKeySize = (rstr.KeySize != 0) ? rstr.KeySize : defaultKeySize;
                     byte[] issuerEntropy;
@@ -1100,9 +1154,13 @@ namespace System.ServiceModel.Security
                     else if (entropyToken is WrappedKeySecurityToken)
                         issuerEntropy = ((WrappedKeySecurityToken)entropyToken).GetWrappedKey();
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NotSupportedException(SR.GetString(SR.UnsupportedIssuerEntropyType))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NotSupportedException(
+                                    SR.GetString(SR.UnsupportedIssuerEntropyType)
+                                )
+                            );
                     // compute the PSHA1 derived key
                     byte[] issuedKey = RequestSecurityTokenResponse.ComputeCombinedKey(
                         requestorEntropy,
@@ -1135,24 +1193,26 @@ namespace System.ServiceModel.Security
             )
             {
                 if (rstr == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("rstr")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("rstr"));
 
                 string tokenType;
                 if (rstr.TokenType != null)
                 {
                     if (expectedTokenType != null && expectedTokenType != rstr.TokenType)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.BadIssuedTokenType,
-                                    rstr.TokenType,
-                                    expectedTokenType
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.BadIssuedTokenType,
+                                        rstr.TokenType,
+                                        expectedTokenType
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     tokenType = rstr.TokenType;
                 }
@@ -1169,18 +1229,22 @@ namespace System.ServiceModel.Security
                 GetIssuedAndProofXml(rstr, out issuedTokenXml, out proofXml);
 
                 if (issuedTokenXml == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.NoLicenseXml))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.NoLicenseXml))
+                        );
 
                 // enforce that there is no proof token in the RSTR
                 if (proofXml != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ProofTokenXmlUnexpectedInRstr)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ProofTokenXmlUnexpectedInRstr)
+                            )
+                        );
                 }
                 SecurityKeyIdentifierClause internalReference = rstr.RequestedAttachedReference;
                 SecurityKeyIdentifierClause externalReference = rstr.RequestedUnattachedReference;
@@ -1258,11 +1322,13 @@ namespace System.ServiceModel.Security
                             encodingUri = attr.Value;
                             if (encodingUri != base64Uri && encodingUri != hexBinaryUri)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new XmlException(
-                                        SR.GetString(SR.UnsupportedBinaryEncoding, encodingUri)
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new XmlException(
+                                            SR.GetString(SR.UnsupportedBinaryEncoding, encodingUri)
+                                        )
+                                    );
                             }
                         }
                         else if (
@@ -1349,14 +1415,16 @@ namespace System.ServiceModel.Security
                         }
                         catch (XmlException)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new XmlException(
-                                    SR.GetString(
-                                        SR.TrustDriverIsUnableToCreatedNecessaryAttachedOrUnattachedReferences,
-                                        issuedTokenXml.ToString()
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new XmlException(
+                                        SR.GetString(
+                                            SR.TrustDriverIsUnableToCreatedNecessaryAttachedOrUnattachedReferences,
+                                            issuedTokenXml.ToString()
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                     }
                 }
@@ -1371,8 +1439,9 @@ namespace System.ServiceModel.Security
 
                 try
                 {
-                    keyIdentifierClause =
-                        standardsManager.SecurityTokenSerializer.ReadKeyIdentifierClause(reader);
+                    keyIdentifierClause = standardsManager
+                        .SecurityTokenSerializer
+                        .ReadKeyIdentifierClause(reader);
                 }
                 catch (XmlException e)
                 {
@@ -1455,16 +1524,18 @@ namespace System.ServiceModel.Security
 
             public override void OnRSTRorRSTRCMissingException()
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.ExpectedOneOfTwoElementsFromNamespace,
-                            DriverDictionary.RequestSecurityTokenResponse,
-                            DriverDictionary.RequestSecurityTokenResponseCollection,
-                            DriverDictionary.Namespace
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ExpectedOneOfTwoElementsFromNamespace,
+                                DriverDictionary.RequestSecurityTokenResponse,
+                                DriverDictionary.RequestSecurityTokenResponseCollection,
+                                DriverDictionary.Namespace
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             void WriteAppliesTo(
@@ -1626,10 +1697,9 @@ namespace System.ServiceModel.Security
                         DriverDictionary.RequestedTokenReference,
                         DriverDictionary.Namespace
                     );
-                    standardsManager.SecurityTokenSerializer.WriteKeyIdentifierClause(
-                        writer,
-                        rstr.RequestedUnattachedReference
-                    );
+                    standardsManager
+                        .SecurityTokenSerializer
+                        .WriteKeyIdentifierClause(writer, rstr.RequestedUnattachedReference);
                     writer.WriteEndElement();
                 }
             }
@@ -1686,10 +1756,9 @@ namespace System.ServiceModel.Security
                         DriverDictionary.RequestedSecurityToken,
                         DriverDictionary.Namespace
                     );
-                    standardsManager.SecurityTokenSerializer.WriteToken(
-                        writer,
-                        rstr.RequestedSecurityToken
-                    );
+                    standardsManager
+                        .SecurityTokenSerializer
+                        .WriteToken(writer, rstr.RequestedSecurityToken);
                     writer.WriteEndElement();
                 }
 
@@ -1723,10 +1792,9 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        standardsManager.SecurityTokenSerializer.WriteToken(
-                            writer,
-                            rstr.RequestedProofToken
-                        );
+                        standardsManager
+                            .SecurityTokenSerializer
+                            .WriteToken(writer, rstr.RequestedProofToken);
                     }
                     writer.WriteEndElement();
                 }
@@ -1843,9 +1911,9 @@ namespace System.ServiceModel.Security
             )
             {
                 if (rstrCollection == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "rstrCollection"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("rstrCollection");
 
                 XmlDictionaryWriter writer = XmlDictionaryWriter.CreateDictionaryWriter(xmlWriter);
                 writer.WriteStartElement(
@@ -1916,12 +1984,14 @@ namespace System.ServiceModel.Security
             {
                 if (keySize < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "keySize",
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "keySize",
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
                 XmlDocument doc = new XmlDocument();
                 XmlElement result = doc.CreateElement(
@@ -1946,14 +2016,16 @@ namespace System.ServiceModel.Security
                 else if (keyType == SecurityKeyType.AsymmetricKey)
                     return CreatePublicKeyTypeElement();
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.UnableToCreateKeyTypeElementForUnknownKeyType,
-                                keyType.ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.UnableToCreateKeyTypeElementForUnknownKeyType,
+                                    keyType.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             public override bool TryParseKeyTypeElement(
@@ -2047,9 +2119,9 @@ namespace System.ServiceModel.Security
             {
                 if (tokenTypeUri == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "tokenTypeUri"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("tokenTypeUri");
                 }
                 XmlDocument doc = new XmlDocument();
                 XmlElement result = doc.CreateElement(
@@ -2068,15 +2140,15 @@ namespace System.ServiceModel.Security
             {
                 if (keyIdentifier == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "keyIdentifier"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("keyIdentifier");
                 }
                 if (standardsManager == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "standardsManager"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("standardsManager");
                 }
                 XmlDocument doc = new XmlDocument();
                 XmlElement result = doc.CreateElement(
@@ -2091,10 +2163,9 @@ namespace System.ServiceModel.Security
                 )
                 {
 #pragma warning suppress 56506 // standardsManager.SecurityTokenSerializer can never be null.
-                    standardsManager.SecurityTokenSerializer.WriteKeyIdentifier(
-                        writer,
-                        keyIdentifier
-                    );
+                    standardsManager
+                        .SecurityTokenSerializer
+                        .WriteKeyIdentifier(writer, keyIdentifier);
                     writer.Flush();
                     stream.Seek(0, SeekOrigin.Begin);
                     XmlNode skiNode;
@@ -2116,9 +2187,9 @@ namespace System.ServiceModel.Security
             {
                 if (signatureAlgorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "signatureAlgorithm"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("signatureAlgorithm");
                 }
                 XmlDocument doc = new XmlDocument();
                 XmlElement result = doc.CreateElement(
@@ -2147,9 +2218,9 @@ namespace System.ServiceModel.Security
             {
                 if (encryptionAlgorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "encryptionAlgorithm"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("encryptionAlgorithm");
                 }
                 XmlDocument doc = new XmlDocument();
                 XmlElement result = doc.CreateElement(
@@ -2165,9 +2236,9 @@ namespace System.ServiceModel.Security
             {
                 if (encryptionAlgorithm == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "encryptionAlgorithm"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("encryptionAlgorithm");
                 }
                 XmlDocument doc = new XmlDocument();
                 XmlElement result = doc.CreateElement(
@@ -2311,11 +2382,13 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new SecurityNegotiationException(
-                            SR.GetString(SR.InvalidKeyLengthRequested, keySize)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.InvalidKeyLengthRequested, keySize)
+                            )
+                        );
                 }
             }
 
@@ -2328,19 +2401,23 @@ namespace System.ServiceModel.Security
                     ) && (entropy == null)
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR.GetString(SR.EntropyModeRequiresRequestorEntropy, mode)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR.GetString(SR.EntropyModeRequiresRequestorEntropy, mode)
+                            )
+                        );
                 }
                 if (mode == SecurityKeyEntropyMode.ServerEntropy && entropy != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                        new InvalidOperationException(
-                            SR.GetString(SR.EntropyModeCannotHaveRequestorEntropy, mode)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperWarning(
+                            new InvalidOperationException(
+                                SR.GetString(SR.EntropyModeCannotHaveRequestorEntropy, mode)
+                            )
+                        );
                 }
             }
 
@@ -2376,14 +2453,16 @@ namespace System.ServiceModel.Security
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.TokenCannotCreateSymmetricCrypto,
-                                    requestorEntropyToken
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperWarning(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.TokenCannotCreateSymmetricCrypto,
+                                        requestorEntropyToken
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 else

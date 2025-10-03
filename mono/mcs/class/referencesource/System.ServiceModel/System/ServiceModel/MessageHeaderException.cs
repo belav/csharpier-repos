@@ -84,11 +84,11 @@ namespace System.ServiceModel
             WSAddressing10ProblemHeaderQNameFault phf = new WSAddressing10ProblemHeaderQNameFault(
                 this
             );
-            Message message = System.ServiceModel.Channels.Message.CreateMessage(
-                messageVersion,
-                phf,
-                AddressingVersion.WSAddressing10.FaultAction
-            );
+            Message message = System
+                .ServiceModel
+                .Channels
+                .Message
+                .CreateMessage(messageVersion, phf, AddressingVersion.WSAddressing10.FaultAction);
             phf.AddHeaders(message.Headers);
             return message;
         }

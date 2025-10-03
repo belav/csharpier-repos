@@ -276,9 +276,10 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"Ignore",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@Ignore)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString((global::System.Boolean)((global::System.Boolean)o.@Ignore))
                 );
             }
             if (o.@IsMergeResultSpecified)
@@ -286,9 +287,12 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"IsMergeResult",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Boolean)((global::System.Boolean)o.@IsMergeResult)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString(
+                            (global::System.Boolean)((global::System.Boolean)o.@IsMergeResult)
+                        )
                 );
             }
             if (o.@SourceIdSpecified)
@@ -296,9 +300,10 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
                 WriteAttribute(
                     @"SourceId",
                     @"",
-                    System.Xml.XmlConvert.ToString(
-                        (global::System.Int32)((global::System.Int32)o.@SourceId)
-                    )
+                    System
+                        .Xml
+                        .XmlConvert
+                        .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
                 );
             }
             WriteAttribute(@"SourceUrl", @"", ((global::System.String)o.@SourceUrl));
@@ -378,9 +383,10 @@ namespace System.Web.Compilation.WCFModel.DataSvcMapFileXmlSerializer
             WriteAttribute(
                 @"SourceId",
                 @"",
-                System.Xml.XmlConvert.ToString(
-                    (global::System.Int32)((global::System.Int32)o.@SourceId)
-                )
+                System
+                    .Xml
+                    .XmlConvert
+                    .ToString((global::System.Int32)((global::System.Int32)o.@SourceId))
             );
             WriteEndElement(o);
         }

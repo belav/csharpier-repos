@@ -18,12 +18,14 @@ namespace System.Security.Cryptography
             bool fallBackToAllGroups
         )
         {
-            CRYPT_OID_INFO oidInfo = Interop.Crypt32.FindOidInfo(
-                CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
-                oid,
-                oidGroup,
-                fallBackToAllGroups
-            );
+            CRYPT_OID_INFO oidInfo = Interop
+                .Crypt32
+                .FindOidInfo(
+                    CryptOidInfoKeyType.CRYPT_OID_INFO_OID_KEY,
+                    oid,
+                    oidGroup,
+                    fallBackToAllGroups
+                );
             return oidInfo.Name;
         }
 
@@ -33,12 +35,14 @@ namespace System.Security.Cryptography
             bool fallBackToAllGroups
         )
         {
-            CRYPT_OID_INFO oidInfo = Interop.Crypt32.FindOidInfo(
-                CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
-                friendlyName,
-                oidGroup,
-                fallBackToAllGroups
-            );
+            CRYPT_OID_INFO oidInfo = Interop
+                .Crypt32
+                .FindOidInfo(
+                    CryptOidInfoKeyType.CRYPT_OID_INFO_NAME_KEY,
+                    friendlyName,
+                    oidGroup,
+                    fallBackToAllGroups
+                );
             return oidInfo.OID;
         }
     }

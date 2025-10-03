@@ -51,7 +51,9 @@ public class InvalidStringToEnum : AutoMapperSpecBase
     public void Should_throw() =>
         new Action(() => Map<ConsoleColor>("d"))
             .ShouldThrow<AutoMapperMappingException>()
-            .InnerException.Message.ShouldBe("Requested value 'd' was not found.");
+            .InnerException
+            .Message
+            .ShouldBe("Requested value 'd' was not found.");
 }
 
 public class DefaultEnumValueToString : AutoMapperSpecBase

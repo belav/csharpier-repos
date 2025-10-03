@@ -373,7 +373,8 @@ public partial class IISExpressDeployer : IISDeployerBase
         {
             using (
                 var stream = GetType()
-                    .Assembly.GetManifestResourceStream(
+                    .Assembly
+                    .GetManifestResourceStream(
                         "Microsoft.AspNetCore.Server.IntegrationTesting.IIS.Http.config"
                     )
             )
@@ -388,7 +389,8 @@ public partial class IISExpressDeployer : IISDeployerBase
         // We take a copy of the original specified applicationHost.Config to prevent modifying the one in the repo.
 
         config
-            .Root.RequiredElement("location")
+            .Root
+            .RequiredElement("location")
             .RequiredElement("system.webServer")
             .RequiredElement("modules")
             .GetOrAdd("add", "name", AspNetCoreModuleV2ModuleName);

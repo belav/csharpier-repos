@@ -987,10 +987,9 @@ namespace System.Runtime.Diagnostics
                     exceptionInfo.Add(
                         new Tuple<string, string>(
                             DiagnosticStrings.NativeErrorCodeTag,
-                            win32Exception.NativeErrorCode.ToString(
-                                "X",
-                                CultureInfo.InvariantCulture
-                            )
+                            win32Exception
+                                .NativeErrorCode
+                                .ToString("X", CultureInfo.InvariantCulture)
                         )
                     );
                 }

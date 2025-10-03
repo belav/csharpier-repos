@@ -52,7 +52,8 @@ namespace System.Net.Http
 
             // Assert
             SimpleModelBinderProvider provider = config
-                .Services.GetServices(typeof(ModelBinderProvider))
+                .Services
+                .GetServices(typeof(ModelBinderProvider))
                 .OfType<SimpleModelBinderProvider>()
                 .First();
             Assert.Equal(type, provider.ModelType);
@@ -271,10 +272,9 @@ namespace System.Net.Http
 
             // Set up the global action selector and controller selector
             var controllerSelector = CreateControllerSelector(new[] { controllerDescriptor });
-            globalConfiguration.Services.Replace(
-                typeof(IHttpControllerSelector),
-                controllerSelector
-            );
+            globalConfiguration
+                .Services
+                .Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             var globalAction = CreateActionDescriptor(
                 controllerDescriptor,
@@ -296,9 +296,8 @@ namespace System.Net.Http
                 new Collection<RouteAttribute>() { new RouteAttribute("PerController") }
             );
             ActionSelectorConfigurationAttribute
-                .PerControllerActionSelectorMock.Setup(a =>
-                    a.GetActionMapping(controllerDescriptor)
-                )
+                .PerControllerActionSelectorMock
+                .Setup(a => a.GetActionMapping(controllerDescriptor))
                 .Returns(
                     new HttpActionDescriptor[] { perControllerAction }.ToLookup(ad => ad.ActionName)
                 );
@@ -468,10 +467,9 @@ namespace System.Net.Http
                 HttpControllerDescriptor controllerDescriptor
             )
             {
-                controllerSettings.Services.Replace(
-                    typeof(IHttpActionSelector),
-                    PerControllerActionSelectorMock.Object
-                );
+                controllerSettings
+                    .Services
+                    .Replace(typeof(IHttpActionSelector), PerControllerActionSelectorMock.Object);
             }
         }
     }

@@ -189,15 +189,17 @@ namespace System.Activities
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.LocationTypeMismatch(
-                                locationReference.Name,
-                                typeof(T),
-                                locationReference.Type
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.LocationTypeMismatch(
+                                    locationReference.Name,
+                                    typeof(T),
+                                    locationReference.Type
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -266,15 +268,17 @@ namespace System.Activities
             {
                 if (!TypeHelper.AreTypesCompatible(value, locationReference.Type))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CannotSetValueToLocation(
-                                value != null ? value.GetType() : typeof(T),
-                                locationReference.Name,
-                                locationReference.Type
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CannotSetValueToLocation(
+                                    value != null ? value.GetType() : typeof(T),
+                                    locationReference.Name,
+                                    locationReference.Type
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 location.Value = value;
@@ -475,9 +479,9 @@ namespace System.Activities
         {
             if (this.isDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(this.GetType().FullName, SR.AECDisposed)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ObjectDisposedException(this.GetType().FullName, SR.AECDisposed));
             }
         }
     }

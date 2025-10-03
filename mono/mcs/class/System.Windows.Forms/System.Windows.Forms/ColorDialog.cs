@@ -1821,10 +1821,12 @@ namespace System.Windows.Forms
                 Color tmpColor = GetColorFromHSB();
 
                 // update the brightness control
-                colorDialog.brightnessControl.ShowColor(
-                    (int)((float)currentXPos * xstep),
-                    240 - ((int)((float)currentYPos * ystep))
-                );
+                colorDialog
+                    .brightnessControl
+                    .ShowColor(
+                        (int)((float)currentXPos * xstep),
+                        240 - ((int)((float)currentYPos * ystep))
+                    );
 
                 // update saturation text box
                 int satvalue = (240 - ((int)((float)currentYPos * ystep)));

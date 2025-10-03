@@ -119,15 +119,13 @@ namespace Mono.Linker.Steps
                 return;
 
             if (serializedFor.HasFlag(SerializerKind.DataContractSerializer))
-                Context.SerializationMarker.TrackForSerialization(
-                    provider,
-                    SerializerKind.DataContractSerializer
-                );
+                Context
+                    .SerializationMarker
+                    .TrackForSerialization(provider, SerializerKind.DataContractSerializer);
             if (serializedFor.HasFlag(SerializerKind.XmlSerializer))
-                Context.SerializationMarker.TrackForSerialization(
-                    provider,
-                    SerializerKind.XmlSerializer
-                );
+                Context
+                    .SerializationMarker
+                    .TrackForSerialization(provider, SerializerKind.XmlSerializer);
         }
 
         static bool IsPreservedSerializationAttribute(

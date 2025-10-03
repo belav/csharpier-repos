@@ -126,8 +126,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 
                             if (document != null)
                             {
-                                var languageDebugInfo =
-                                    document.Project.Services.GetService<ILanguageDebugInfoService>();
+                                var languageDebugInfo = document
+                                    .Project
+                                    .Services
+                                    .GetService<ILanguageDebugInfoService>();
                                 if (languageDebugInfo != null)
                                 {
                                     var spanOpt = textSnapshot.TryGetSpan(textSpan);
@@ -142,9 +144,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             .WaitAndGetResult(cancellationToken);
                                         if (!dataTipInfo.IsDefault)
                                         {
-                                            var resultSpan = dataTipInfo.Span.ToSnapshotSpan(
-                                                textSnapshot
-                                            );
+                                            var resultSpan = dataTipInfo
+                                                .Span
+                                                .ToSnapshotSpan(textSnapshot);
                                             var textOpt = dataTipInfo.Text;
 
                                             pSpan[0] = resultSpan.ToVsTextSpan();
@@ -240,27 +242,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             if (subjectBuffer != null)
             {
                 // PointTrackingMode and PositionAffinity chosen arbitrarily.
-                var positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(
-                    pointInViewBuffer,
-                    PointTrackingMode.Positive,
-                    subjectBuffer,
-                    PositionAffinity.Successor
-                );
-                if (!positionInSubjectBuffer.HasValue)
-                {
-                    positionInSubjectBuffer = textView.BufferGraph.MapDownToBuffer(
+                var positionInSubjectBuffer = textView
+                    .BufferGraph
+                    .MapDownToBuffer(
                         pointInViewBuffer,
                         PointTrackingMode.Positive,
                         subjectBuffer,
-                        PositionAffinity.Predecessor
+                        PositionAffinity.Successor
                     );
+                if (!positionInSubjectBuffer.HasValue)
+                {
+                    positionInSubjectBuffer = textView
+                        .BufferGraph
+                        .MapDownToBuffer(
+                            pointInViewBuffer,
+                            PointTrackingMode.Positive,
+                            subjectBuffer,
+                            PositionAffinity.Predecessor
+                        );
                 }
 
                 if (positionInSubjectBuffer.HasValue)
                 {
                     var position = positionInSubjectBuffer.Value;
-                    var document =
-                        subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                    var document = subjectBuffer
+                        .CurrentSnapshot
+                        .GetOpenDocumentInCurrentContextWithChanges();
                     if (document != null)
                     {
                         var options = globalOptions.GetBraceMatchingOptions(
@@ -316,9 +323,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             .WaitAndGetResult(cancellationToken);
                                         var vsClosingSpans = textView
                                             .GetSpanInView(
-                                                closingSpans.Value.ToSnapshotSpan(
-                                                    subjectBuffer.CurrentSnapshot
-                                                )
+                                                closingSpans
+                                                    .Value
+                                                    .ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
                                             )
                                             .First()
                                             .ToVsTextSpan();
@@ -349,9 +356,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                             .WaitAndGetResult(cancellationToken);
                                         var vsOpeningSpans = textView
                                             .GetSpanInView(
-                                                openingSpans.Value.ToSnapshotSpan(
-                                                    subjectBuffer.CurrentSnapshot
-                                                )
+                                                openingSpans
+                                                    .Value
+                                                    .ToSnapshotSpan(subjectBuffer.CurrentSnapshot)
                                             )
                                             .First()
                                             .ToVsTextSpan();

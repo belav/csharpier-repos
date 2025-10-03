@@ -226,11 +226,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             _compilationOptions =
                 compilationOptions
-                ?? this.LanguageServiceProvider.GetService<ICompilationFactoryService>()
+                ?? this.LanguageServiceProvider
+                    .GetService<ICompilationFactoryService>()
                     .GetDefaultCompilationOptions();
             _parseOptions =
                 parseOptions
-                ?? this.LanguageServiceProvider.GetService<ISyntaxTreeFactoryService>()
+                ?? this.LanguageServiceProvider
+                    .GetService<ISyntaxTreeFactoryService>()
                     .GetDefaultParseOptions();
             this.Documents =
                 documents ?? SpecializedCollections.EmptyEnumerable<TestHostDocument>();

@@ -603,16 +603,16 @@ namespace System.Threading.Tasks.Tests
                         )
                     )
                     .Unwrap(),
-                Task
-                    .Factory.StartNew(() =>
+                Task.Factory
+                    .StartNew(() =>
                         Task.Factory.StartNew(() =>
                         {
                             throw new Exception("uh oh");
                         })
                     )
                     .Unwrap(),
-                Task
-                    .Factory.StartNew<Task<int>>(() =>
+                Task.Factory
+                    .StartNew<Task<int>>(() =>
                         Task.Factory.StartNew<int>(() =>
                         {
                             throw new Exception("uh oh");

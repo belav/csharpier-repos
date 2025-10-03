@@ -211,10 +211,9 @@ namespace System.ServiceModel.Channels
                         PooledConnectionDequeuedCallback
                     );
                 }
-                connectionState.ModeReader.StartReading(
-                    this.idleTimeout,
-                    this.pooledConnectionDequeuedCallback
-                );
+                connectionState
+                    .ModeReader
+                    .StartReading(this.idleTimeout, this.pooledConnectionDequeuedCallback);
             }
         }
 

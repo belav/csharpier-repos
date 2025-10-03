@@ -126,10 +126,9 @@ namespace System.CommandLine.DragonFruit
                     case "param":
                         var value = element.Attribute("name")?.Value;
                         if (value != null)
-                            commandHelpMetadata.ParameterDescriptions.Add(
-                                value,
-                                element.Value.Trim()
-                            );
+                            commandHelpMetadata
+                                .ParameterDescriptions
+                                .Add(value, element.Value.Trim());
                         break;
                 }
             }

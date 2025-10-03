@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
                     using var _ = ArrayBuilder<IFieldSymbol>.GetInstance(out var fields);
                     var compilation = await document
-                        .Project.GetRequiredCompilationAsync(cancellationToken)
+                        .Project
+                        .GetRequiredCompilationAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     foreach (var key in fieldSymbolKeys)

@@ -72,11 +72,13 @@ namespace System.ServiceProcess.Tests
             // Open the service manager
             using (
                 var serviceManagerHandle = new SafeServiceHandle(
-                    Interop.Advapi32.OpenSCManager(
-                        null,
-                        null,
-                        Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
-                    )
+                    Interop
+                        .Advapi32
+                        .OpenSCManager(
+                            null,
+                            null,
+                            Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
+                        )
                 )
             )
             {
@@ -90,21 +92,23 @@ namespace System.ServiceProcess.Tests
                 // Install the service
                 using (
                     var serviceHandle = new SafeServiceHandle(
-                        Interop.Advapi32.CreateService(
-                            serviceManagerHandle,
-                            ServiceName,
-                            DisplayName,
-                            Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL,
-                            Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_OWN_PROCESS,
-                            (int)StartType,
-                            Interop.Advapi32.ServiceStartErrorModes.ERROR_CONTROL_NORMAL,
-                            ServiceCommandLine,
-                            null,
-                            IntPtr.Zero,
-                            servicesDependedOn,
-                            username,
-                            password
-                        )
+                        Interop
+                            .Advapi32
+                            .CreateService(
+                                serviceManagerHandle,
+                                ServiceName,
+                                DisplayName,
+                                Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL,
+                                Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_OWN_PROCESS,
+                                (int)StartType,
+                                Interop.Advapi32.ServiceStartErrorModes.ERROR_CONTROL_NORMAL,
+                                ServiceCommandLine,
+                                null,
+                                IntPtr.Zero,
+                                servicesDependedOn,
+                                username,
+                                password
+                            )
                     )
                 )
                 {
@@ -126,11 +130,13 @@ namespace System.ServiceProcess.Tests
                         Interop.Advapi32.SERVICE_DESCRIPTION serviceDesc =
                             new Interop.Advapi32.SERVICE_DESCRIPTION();
                         serviceDesc.description = Marshal.StringToHGlobalUni(Description);
-                        bool success = Interop.Advapi32.ChangeServiceConfig2(
-                            serviceHandle,
-                            Interop.Advapi32.ServiceConfigOptions.SERVICE_CONFIG_DESCRIPTION,
-                            ref serviceDesc
-                        );
+                        bool success = Interop
+                            .Advapi32
+                            .ChangeServiceConfig2(
+                                serviceHandle,
+                                Interop.Advapi32.ServiceConfigOptions.SERVICE_CONFIG_DESCRIPTION,
+                                ref serviceDesc
+                            );
                         Marshal.FreeHGlobal(serviceDesc.description);
                         if (!success)
                         {
@@ -225,11 +231,13 @@ namespace System.ServiceProcess.Tests
         {
             using (
                 var serviceManagerHandle = new SafeServiceHandle(
-                    Interop.Advapi32.OpenSCManager(
-                        null,
-                        null,
-                        Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
-                    )
+                    Interop
+                        .Advapi32
+                        .OpenSCManager(
+                            null,
+                            null,
+                            Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
+                        )
                 )
             )
             {
@@ -242,11 +250,13 @@ namespace System.ServiceProcess.Tests
 
                 using (
                     var serviceHandle = new SafeServiceHandle(
-                        Interop.Advapi32.OpenService(
-                            serviceManagerHandle,
-                            ServiceName,
-                            Interop.Advapi32.ServiceOptions.STANDARD_RIGHTS_DELETE
-                        )
+                        Interop
+                            .Advapi32
+                            .OpenService(
+                                serviceManagerHandle,
+                                ServiceName,
+                                Interop.Advapi32.ServiceOptions.STANDARD_RIGHTS_DELETE
+                            )
                     )
                 )
                 {

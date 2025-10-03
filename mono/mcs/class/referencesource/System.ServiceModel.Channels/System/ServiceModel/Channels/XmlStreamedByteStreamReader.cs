@@ -66,9 +66,9 @@ namespace System.ServiceModel.Channels
 
         protected override byte[] OnToByteArray()
         {
-            throw FxTrace.Exception.AsError(
-                new InvalidOperationException(SR.GetByteArrayFromStreamContentNotAllowed)
-            );
+            throw FxTrace
+                .Exception
+                .AsError(new InvalidOperationException(SR.GetByteArrayFromStreamContentNotAllowed));
         }
 
         protected override Stream OnToStream()

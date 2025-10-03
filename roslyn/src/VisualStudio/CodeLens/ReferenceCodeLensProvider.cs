@@ -113,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
 
                 var projectVersions = await _lazyCodeLensCallbackService
-                    .Value.InvokeAsync<ImmutableDictionary<Guid, string>>(
+                    .Value
+                    .InvokeAsync<ImmutableDictionary<Guid, string>>(
                         this,
                         nameof(ICodeLensContext.GetProjectVersionsAsync),
                         new object[] { keys },

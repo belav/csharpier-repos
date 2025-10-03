@@ -241,8 +241,8 @@ namespace aotprofiletool
                 types = new HashSet<TypeRecord>();
                 modules = new HashSet<ModuleRecord>();
 
-                methods = pd
-                    .Methods.Where(method =>
+                methods = pd.Methods
+                    .Where(method =>
                     {
                         var type = method.Type;
                         var module = type.Module;

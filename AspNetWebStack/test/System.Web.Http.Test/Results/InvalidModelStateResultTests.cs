@@ -346,9 +346,11 @@ namespace System.Web.Http.Results
             string expectedModelStateKey = "ModelStateKey";
             string expectedModelStateErrorMessage = "ModelStateErrorMessage";
             ModelState originalModelStateItem = new ModelState();
-            originalModelStateItem.Errors.Add(
-                new ModelError(new InvalidOperationException(), expectedModelStateErrorMessage)
-            );
+            originalModelStateItem
+                .Errors
+                .Add(
+                    new ModelError(new InvalidOperationException(), expectedModelStateErrorMessage)
+                );
             modelState.Add(expectedModelStateKey, originalModelStateItem);
             bool includeErrorDetail = false;
             MediaTypeFormatter expectedFormatter = CreateFormatter();
@@ -606,10 +608,9 @@ namespace System.Web.Http.Results
                     InvalidModelStateResult result = CreateProductUnderTest(modelState, controller);
 
                     IContentNegotiator expectedContentNegotiator = CreateDummyContentNegotiator();
-                    configuration.Services.Replace(
-                        typeof(IContentNegotiator),
-                        expectedContentNegotiator
-                    );
+                    configuration
+                        .Services
+                        .Replace(typeof(IContentNegotiator), expectedContentNegotiator);
 
                     // Act
                     IContentNegotiator contentNegotiator = result.ContentNegotiator;
@@ -755,10 +756,9 @@ namespace System.Web.Http.Results
 
                 IContentNegotiator ignore = result.ContentNegotiator;
 
-                configuration.Services.Replace(
-                    typeof(IContentNegotiator),
-                    CreateDummyContentNegotiator()
-                );
+                configuration
+                    .Services
+                    .Replace(typeof(IContentNegotiator), CreateDummyContentNegotiator());
 
                 // Act
                 IContentNegotiator contentNegotiator = result.ContentNegotiator;

@@ -181,12 +181,12 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             }
 
             // Remember prev. series parameters
-            series["OldXValueIndexed"] = series.IsXValueIndexed.ToString(
-                CultureInfo.InvariantCulture
-            );
-            series["OldYValuesPerPoint"] = series.YValuesPerPoint.ToString(
-                CultureInfo.InvariantCulture
-            );
+            series["OldXValueIndexed"] = series
+                .IsXValueIndexed
+                .ToString(CultureInfo.InvariantCulture);
+            series["OldYValuesPerPoint"] = series
+                .YValuesPerPoint
+                .ToString(CultureInfo.InvariantCulture);
             series.IsXValueIndexed = true;
 
             // Calculate date-time interval for indexed series
@@ -853,10 +853,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             {
                 // Check for the PointAndFigure chart type
                 if (
-                    series.Name.StartsWith(
-                        "POINTANDFIGURE_ORIGINAL_DATA_",
-                        StringComparison.Ordinal
-                    )
+                    series
+                        .Name
+                        .StartsWith("POINTANDFIGURE_ORIGINAL_DATA_", StringComparison.Ordinal)
                 )
                 {
                     // Get original series
@@ -920,9 +919,10 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             boxXSize *= 0.8;
 
                             // Get absolute size in pixels
-                            SizeF markSize = chart.chartPicture.ChartGraph.GetAbsoluteSize(
-                                new SizeF((float)boxXSize, (float)boxYSize)
-                            );
+                            SizeF markSize = chart
+                                .chartPicture
+                                .ChartGraph
+                                .GetAbsoluteSize(new SizeF((float)boxXSize, (float)boxYSize));
 
                             // Calculate number of empty points that should be added
                             int pointCount = 0;

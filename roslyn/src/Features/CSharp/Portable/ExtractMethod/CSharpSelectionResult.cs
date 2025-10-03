@@ -40,20 +40,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var lastTokenAnnotation = new SyntaxAnnotation();
 
             var root = await document
-                .Document.GetSyntaxRootAsync(cancellationToken)
+                .Document
+                .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
             var newDocument = await SemanticDocument
                 .CreateAsync(
-                    document.Document.WithSyntaxRoot(
-                        AddAnnotations(
-                            root,
-                            new[]
-                            {
-                                (firstToken, firstTokenAnnotation),
-                                (lastToken, lastTokenAnnotation),
-                            }
-                        )
-                    ),
+                    document
+                        .Document
+                        .WithSyntaxRoot(
+                            AddAnnotations(
+                                root,
+                                new[]
+                                {
+                                    (firstToken, firstTokenAnnotation),
+                                    (lastToken, lastTokenAnnotation),
+                                }
+                            )
+                        ),
                     cancellationToken
                 )
                 .ConfigureAwait(false);
@@ -204,10 +207,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             Contract.ThrowIfNull(statement);
             var firstStatementUnderContainer = GetFirstStatementUnderContainer();
             Contract.ThrowIfFalse(
-                CSharpSyntaxFacts.Instance.AreStatementsInSameContainer(
-                    statement,
-                    firstStatementUnderContainer
-                )
+                CSharpSyntaxFacts
+                    .Instance
+                    .AreStatementsInSameContainer(statement, firstStatementUnderContainer)
             );
 
             return statement;

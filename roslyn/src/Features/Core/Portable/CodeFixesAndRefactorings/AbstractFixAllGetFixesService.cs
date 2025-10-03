@@ -224,7 +224,8 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
             try
             {
                 action = await fixAllContext
-                    .FixAllProvider.GetFixAsync(fixAllContext)
+                    .FixAllProvider
+                    .GetFixAsync(fixAllContext)
                     .ConfigureAwait(false);
             }
             catch (OperationCanceledException)

@@ -334,9 +334,9 @@ if (typeof({0}) === 'undefined') {{",
 {0}.registerEnum('{0}', {2});",
                     className,
                     // This method is also used for WCF, but for enum this should work ...
-                    AsmxLogicalTypeInfo.JSSerializer.Serialize(
-                        GetEnumPrototypeDictionary(scriptType)
-                    ),
+                    AsmxLogicalTypeInfo
+                        .JSSerializer
+                        .Serialize(GetEnumPrototypeDictionary(scriptType)),
                     Attribute.GetCustomAttribute(scriptType, typeof(FlagsAttribute)) != null
                         ? "true"
                         : "false"
@@ -484,9 +484,11 @@ if (typeof({0}) === 'undefined') {{",
                 return "GET".Equals(request.RequestType, StringComparison.OrdinalIgnoreCase)
                     ? GetNameValueCollectionDictionary(request.QueryString)
                     : (IDictionary<string, object>)
-                        JavaScriptSerializer.DefaultSerializer.DeserializeObjectInternal(
-                            new StreamReader(request.InputStream, request.ContentEncoding)
-                        );
+                        JavaScriptSerializer
+                            .DefaultSerializer
+                            .DeserializeObjectInternal(
+                                new StreamReader(request.InputStream, request.ContentEncoding)
+                            );
             }
 
             IDictionary<string, object> GetNameValueCollectionDictionary(NameValueCollection nvc)

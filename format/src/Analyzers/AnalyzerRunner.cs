@@ -121,16 +121,17 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             {
                 // Use mscorlib to represent Runtime references being loaded.
                 if (
-                    !project.MetadataReferences.Any(reference =>
-                        reference.Display?.EndsWith("mscorlib.dll") == true
-                    )
+                    !project
+                        .MetadataReferences
+                        .Any(reference => reference.Display?.EndsWith("mscorlib.dll") == true)
                 )
                 {
                     return false;
                 }
 
                 return project
-                    .ProjectReferences.Select(projectReference =>
+                    .ProjectReferences
+                    .Select(projectReference =>
                         project.Solution.GetProject(projectReference.ProjectId)
                     )
                     .All(referencedProject =>

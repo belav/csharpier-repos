@@ -146,12 +146,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
 
                 Location warningLocation = i == 0 ? attributeLocation : module.GetFirstLocation();
-                System.Diagnostics.Debug.Assert(
-                    warningLocation != null
-                        || !moduleDeclaredCompliance.HasValue
-                        || (i == 0 && _filterTree != null),
-                    "Can only be null when the source location is filtered out."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        warningLocation != null
+                            || !moduleDeclaredCompliance.HasValue
+                            || (i == 0 && _filterTree != null),
+                        "Can only be null when the source location is filtered out."
+                    );
 
                 if (moduleDeclaredCompliance.HasValue)
                 {
@@ -336,10 +339,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && IsAccessibleIfContainerIsAccessible(constructor)
                 )
                 {
-                    System.Diagnostics.Debug.Assert(
-                        IsAccessibleOutsideAssembly(constructor),
-                        "Should be implied by IsAccessibleIfContainerIsAccessible"
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(
+                            IsAccessibleOutsideAssembly(constructor),
+                            "Should be implied by IsAccessibleIfContainerIsAccessible"
+                        );
 
                     bool hasUnacceptableParameterType = false;
 
@@ -414,8 +420,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Location attributeLocation;
                     if (TryGetAttributeWarningLocation(attribute, out attributeLocation))
                     {
-                        AttributeUsageInfo attributeUsage =
-                            attribute.AttributeClass.GetAttributeUsageInfo();
+                        AttributeUsageInfo attributeUsage = attribute
+                            .AttributeClass
+                            .GetAttributeUsageInfo();
                         this.AddDiagnostic(
                             ErrorCode.ERR_AttributeNotOnAccessor,
                             attributeLocation,
@@ -505,13 +512,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             SymbolKind symbolKind = symbol.Kind;
 
-            System.Diagnostics.Debug.Assert(
-                symbolKind == SymbolKind.NamedType
-                    || symbolKind == SymbolKind.Field
-                    || symbolKind == SymbolKind.Property
-                    || symbolKind == SymbolKind.Event
-                    || symbolKind == SymbolKind.Method
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    symbolKind == SymbolKind.NamedType
+                        || symbolKind == SymbolKind.Field
+                        || symbolKind == SymbolKind.Property
+                        || symbolKind == SymbolKind.Event
+                        || symbolKind == SymbolKind.Method
+                );
             System.Diagnostics.Debug.Assert(!symbol.IsAccessor());
 
             if (!CheckForDeclarationWithoutAssemblyDeclaration(symbol, compliance))
@@ -589,10 +599,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForNonCompliantAbstractMember(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(
-                !IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
-                "Only call on non-compliant symbols"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    !IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                    "Only call on non-compliant symbols"
+                );
 
             NamedTypeSymbol containingType = symbol.ContainingType;
             if ((object)containingType != null && containingType.IsInterface)
@@ -615,10 +628,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckBaseTypeCompliance(NamedTypeSymbol symbol)
         {
-            System.Diagnostics.Debug.Assert(
-                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
-                "Only call on compliant symbols"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                    "Only call on compliant symbols"
+                );
 
             // NOTE: implemented interfaces do not have to be CLS-compliant (unless the type itself is an interface).
 
@@ -642,10 +658,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 NamedTypeSymbol baseType =
                     symbol.EnumUnderlyingType ?? symbol.BaseTypeNoUseSiteDiagnostics; // null for interfaces
-                System.Diagnostics.Debug.Assert(
-                    (object)baseType != null || symbol.SpecialType == SpecialType.System_Object,
-                    "Only object has no base."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        (object)baseType != null || symbol.SpecialType == SpecialType.System_Object,
+                        "Only object has no base."
+                    );
                 if ((object)baseType != null && !IsCompliantType(baseType, symbol))
                 {
                     // TODO: it would be nice to report this on the base type clause.
@@ -661,15 +680,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForCompliantWithinNonCompliant(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(
-                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
-                "Only call on compliant symbols"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                    "Only call on compliant symbols"
+                );
 
             NamedTypeSymbol containingType = symbol.ContainingType;
-            System.Diagnostics.Debug.Assert(
-                (object)containingType == null || !containingType.IsImplicitClass
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert((object)containingType == null || !containingType.IsImplicitClass);
             if (
                 (object)containingType != null
                 && !IsTrue(GetDeclaredOrInheritedCompliance(containingType))
@@ -689,10 +712,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol context
         )
         {
-            System.Diagnostics.Debug.Assert(
-                typeParameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
-                "Only call on compliant symbols"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    typeParameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
+                    "Only call on compliant symbols"
+                );
 
             foreach (TypeParameterSymbol typeParameter in typeParameters)
             {
@@ -720,10 +746,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol context
         )
         {
-            System.Diagnostics.Debug.Assert(
-                parameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
-                "Only call on compliant symbols"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    parameters.IsEmpty || IsTrue(GetDeclaredOrInheritedCompliance(context)),
+                    "Only call on compliant symbols"
+                );
 
             foreach (ParameterSymbol parameter in parameters)
             {
@@ -740,10 +769,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckForAttributeWithArrayArgument(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(
-                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
-                "Only call on compliant symbols"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                    "Only call on compliant symbols"
+                );
             CheckForAttributeWithArrayArgumentInternal(symbol.GetAttributes());
             if (symbol.Kind == SymbolKind.Method)
             {
@@ -901,10 +933,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void CheckReturnTypeCompliance(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(
-                IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
-                "Only call on compliant symbols"
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    IsTrue(GetDeclaredOrInheritedCompliance(symbol)),
+                    "Only call on compliant symbols"
+                );
 
             ErrorCode code;
             TypeSymbol type;
@@ -929,9 +964,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (method.MethodKind == MethodKind.DelegateInvoke)
                     {
-                        System.Diagnostics.Debug.Assert(
-                            method.ContainingType.TypeKind == TypeKind.Delegate
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(method.ContainingType.TypeKind == TypeKind.Delegate);
                         symbol = method.ContainingType; // Refer to the delegate type in diagnostics.
                     }
 
@@ -1193,7 +1229,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // forbidden by the unicode spec.
 
             // NOTE: The parser won't actually accept '\uFF3F' as part of an identifier.
-            System.Diagnostics.Debug.Assert(name.Length == 0 || name[0] != '\uFF3F');
+            System
+                .Diagnostics
+                .Debug
+                .Assert(name.Length == 0 || name[0] != '\uFF3F');
 
             if (name.Length > 0 && name[0] == '\u005F')
             {
@@ -1377,10 +1416,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private Compliance GetDeclaredOrInheritedCompliance(Symbol symbol)
         {
-            System.Diagnostics.Debug.Assert(
-                symbol.Kind == SymbolKind.NamedType || !((symbol is TypeSymbol)),
-                "Type kinds without declarations are handled elsewhere."
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    symbol.Kind == SymbolKind.NamedType || !((symbol is TypeSymbol)),
+                    "Type kinds without declarations are handled elsewhere."
+                );
 
             if (symbol.Kind == SymbolKind.Namespace)
             {
@@ -1481,10 +1523,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
 
                         ImmutableArray<TypedConstant> args = data.CommonConstructorArguments;
-                        System.Diagnostics.Debug.Assert(
-                            args.Length == 1,
-                            "We already checked the signature and HasErrors."
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(
+                                args.Length == 1,
+                                "We already checked the signature and HasErrors."
+                            );
 
                         // Duplicates are reported elsewhere - we only care about the first (error-free) occurrence.
                         return (bool)args[0].ValueInternal;

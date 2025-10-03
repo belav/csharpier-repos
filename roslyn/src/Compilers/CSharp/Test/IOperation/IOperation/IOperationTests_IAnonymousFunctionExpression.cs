@@ -477,9 +477,12 @@ class Program
             var variableTreeLambdaOperation = (
                 (IDelegateCreationOperation)
                     variableDeclarationGroupOperation
-                        .Declarations.Single()
-                        .Declarators.Single()
-                        .Initializer.Value
+                        .Declarations
+                        .Single()
+                        .Declarators
+                        .Single()
+                        .Initializer
+                        .Value
             ).Target;
             var lambdaOperation = (IAnonymousFunctionOperation)
                 semanticModel.GetOperation(lambdaSyntax);
@@ -493,9 +496,12 @@ class Program
             var variableTreeLambdaOperationSecondRequest = (
                 (IDelegateCreationOperation)
                     variableDeclarationGroupOperationSecondRequest
-                        .Declarations.Single()
-                        .Declarators.Single()
-                        .Initializer.Value
+                        .Declarations
+                        .Single()
+                        .Declarators
+                        .Single()
+                        .Initializer
+                        .Value
             ).Target;
             var lambdaOperationSecondRequest = (IAnonymousFunctionOperation)
                 semanticModel.GetOperation(lambdaSyntax);
@@ -1011,7 +1017,8 @@ struct C
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph)
             {
                 return graph
-                    .Blocks.SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
+                    .Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .Single();
             }
@@ -1088,7 +1095,8 @@ struct C
             IFlowAnonymousFunctionOperation getLambda(ControlFlowGraph graph, int index)
             {
                 return graph
-                    .Blocks.SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
+                    .Blocks
+                    .SelectMany(b => b.Operations.SelectMany(o => o.DescendantsAndSelf()))
                     .OfType<IFlowAnonymousFunctionOperation>()
                     .ElementAt(index);
             }

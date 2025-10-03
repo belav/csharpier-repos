@@ -44,15 +44,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             if (projectToBeModified == null)
             {
                 // Select the project from which the Codefix was triggered
-                ProjectToBeModified = Workspace.CurrentSolution.GetProject(
-                    _testDocument.Project.Id
-                );
+                ProjectToBeModified = Workspace
+                    .CurrentSolution
+                    .GetProject(_testDocument.Project.Id);
             }
             else
             {
-                ProjectToBeModified = Workspace.CurrentSolution.Projects.FirstOrDefault(proj =>
-                    proj.Name.Equals(projectToBeModified)
-                );
+                ProjectToBeModified = Workspace
+                    .CurrentSolution
+                    .Projects
+                    .FirstOrDefault(proj => proj.Name.Equals(projectToBeModified));
                 Contract.ThrowIfNull(
                     ProjectToBeModified,
                     "Project with the given name does not exist"
@@ -66,9 +67,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             }
             else if (existingFileName != null)
             {
-                ExistingDocument = ProjectToBeModified.Documents.FirstOrDefault(doc =>
-                    doc.Name.Equals(existingFileName)
-                );
+                ExistingDocument = ProjectToBeModified
+                    .Documents
+                    .FirstOrDefault(doc => doc.Name.Equals(existingFileName));
             }
 
             TypeName = typeName;
@@ -79,7 +80,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             get
             {
                 return (TestGenerateTypeOptionsService)
-                    InvocationDocument.Project.Solution.Services.GetRequiredService<IGenerateTypeOptionsService>();
+                    InvocationDocument
+                        .Project
+                        .Solution
+                        .Services
+                        .GetRequiredService<IGenerateTypeOptionsService>();
             }
         }
 
@@ -88,7 +93,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             get
             {
                 return (TestProjectManagementService)
-                    InvocationDocument.Project.Solution.Services.GetService<IProjectManagementService>();
+                    InvocationDocument
+                        .Project
+                        .Solution
+                        .Services
+                        .GetService<IProjectManagementService>();
             }
         }
     }

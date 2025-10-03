@@ -205,25 +205,35 @@ namespace Mono.CodeContracts.Rewrite
                     MethodAttributes.Assembly | MethodAttributes.Static,
                     typeVoid
                 );
-                method.Parameters.Add(
-                    new ParameterDefinition(
-                        "kind",
-                        ParameterAttributes.None,
-                        typeContractFailureKind
-                    )
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("message", ParameterAttributes.None, typeString)
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("userMessage", ParameterAttributes.None, typeString)
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("conditionText", ParameterAttributes.None, typeString)
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("inner", ParameterAttributes.None, typeException)
-                );
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            "kind",
+                            ParameterAttributes.None,
+                            typeContractFailureKind
+                        )
+                    );
+                method
+                    .Parameters
+                    .Add(new ParameterDefinition("message", ParameterAttributes.None, typeString));
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition("userMessage", ParameterAttributes.None, typeString)
+                    );
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            "conditionText",
+                            ParameterAttributes.None,
+                            typeString
+                        )
+                    );
+                method
+                    .Parameters
+                    .Add(new ParameterDefinition("inner", ParameterAttributes.None, typeException));
                 var il = method.Body.GetILProcessor();
                 if (this.options.ThrowOnFailure)
                 {
@@ -281,22 +291,30 @@ namespace Mono.CodeContracts.Rewrite
                     MethodAttributes.Assembly | MethodAttributes.Static,
                     typeVoid
                 );
-                method.Parameters.Add(
-                    new ParameterDefinition(
-                        "kind",
-                        ParameterAttributes.None,
-                        typeContractFailureKind
-                    )
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("message", ParameterAttributes.None, typeString)
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("conditionText", ParameterAttributes.None, typeString)
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("inner", ParameterAttributes.None, typeException)
-                );
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            "kind",
+                            ParameterAttributes.None,
+                            typeContractFailureKind
+                        )
+                    );
+                method
+                    .Parameters
+                    .Add(new ParameterDefinition("message", ParameterAttributes.None, typeString));
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            "conditionText",
+                            ParameterAttributes.None,
+                            typeString
+                        )
+                    );
+                method
+                    .Parameters
+                    .Add(new ParameterDefinition("inner", ParameterAttributes.None, typeException));
                 VariableDefinition vMsg = new VariableDefinition(typeString);
                 method.Body.Variables.Add(vMsg);
                 method.Body.InitLocals = true;
@@ -354,15 +372,23 @@ namespace Mono.CodeContracts.Rewrite
                     MethodAttributes.Assembly | MethodAttributes.Static,
                     typeVoid
                 );
-                method.Parameters.Add(
-                    new ParameterDefinition("condition", ParameterAttributes.None, typeBoolean)
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("message", ParameterAttributes.None, typeString)
-                );
-                method.Parameters.Add(
-                    new ParameterDefinition("conditionText", ParameterAttributes.None, typeString)
-                );
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition("condition", ParameterAttributes.None, typeBoolean)
+                    );
+                method
+                    .Parameters
+                    .Add(new ParameterDefinition("message", ParameterAttributes.None, typeString));
+                method
+                    .Parameters
+                    .Add(
+                        new ParameterDefinition(
+                            "conditionText",
+                            ParameterAttributes.None,
+                            typeString
+                        )
+                    );
                 var il = method.Body.GetILProcessor();
                 il.Emit(OpCodes.Ldarg_0);
                 var instRet = il.Create(OpCodes.Ret);

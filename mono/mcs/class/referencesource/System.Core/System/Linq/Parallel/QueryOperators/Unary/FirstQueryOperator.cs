@@ -41,9 +41,9 @@ namespace System.Linq.Parallel
         {
             Contract.Assert(child != null, "child data source cannot be null");
             m_predicate = predicate;
-            m_prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(
-                OrdinalIndexState.Increasing
-            );
+            m_prematureMergeNeeded = Child
+                .OrdinalIndexState
+                .IsWorseThan(OrdinalIndexState.Increasing);
         }
 
         //---------------------------------------------------------------------------------------

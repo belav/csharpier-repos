@@ -76,7 +76,8 @@ namespace System.CommandLine.Rendering.Tests
             );
 
             _terminal
-                .Out.ToString()
+                .Out
+                .ToString()
                 .Should()
                 .Be(
                     "Option                     "

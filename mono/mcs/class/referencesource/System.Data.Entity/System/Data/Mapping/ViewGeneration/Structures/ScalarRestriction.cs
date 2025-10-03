@@ -159,8 +159,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 () =>
                 {
                     // ( ... AND var IS NOT NULL)
-                    DbExpression varIsNotNull = this
-                        .RestrictedMemberSlot.MemberPath.AsCqt(row)
+                    DbExpression varIsNotNull = this.RestrictedMemberSlot
+                        .MemberPath
+                        .AsCqt(row)
                         .IsNull()
                         .Not();
                     cqt = cqt != null ? cqt.And(varIsNotNull) : varIsNotNull;
@@ -169,8 +170,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 () =>
                 {
                     // (var IS NULL OR ...)
-                    DbExpression varIsNull = this
-                        .RestrictedMemberSlot.MemberPath.AsCqt(row)
+                    DbExpression varIsNull = this.RestrictedMemberSlot
+                        .MemberPath
+                        .AsCqt(row)
                         .IsNull();
                     cqt = cqt != null ? varIsNull.Or(cqt) : varIsNull;
                 },
@@ -288,10 +290,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     }
                     if (userString)
                     {
-                        this.RestrictedMemberSlot.MemberPath.ToCompactString(
-                            builder,
-                            Strings.ViewGen_EntityInstanceToken
-                        );
+                        this.RestrictedMemberSlot
+                            .MemberPath
+                            .ToCompactString(builder, Strings.ViewGen_EntityInstanceToken);
                         builder.Append(" is not NULL)"); // plus the closing bracket
                     }
                     else
@@ -312,10 +313,9 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     }
                     if (userString)
                     {
-                        this.RestrictedMemberSlot.MemberPath.ToCompactString(
-                            varIsNullBuilder,
-                            blockAlias
-                        );
+                        this.RestrictedMemberSlot
+                            .MemberPath
+                            .ToCompactString(varIsNullBuilder, blockAlias);
                         varIsNullBuilder.Append(" is NULL");
                     }
                     else

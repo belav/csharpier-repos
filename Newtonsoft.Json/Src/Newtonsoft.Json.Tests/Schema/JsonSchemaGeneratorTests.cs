@@ -516,9 +516,9 @@ namespace Newtonsoft.Json.Tests.Schema
                 jsonWriter.Token.ToString()
             );
 
-            SerializableTestObject c = jsonWriter.Token.ToObject<SerializableTestObject>(
-                serializer
-            );
+            SerializableTestObject c = jsonWriter
+                .Token
+                .ToObject<SerializableTestObject>(serializer);
             Assert.AreEqual("Name!", c.Name);
         }
 #endif

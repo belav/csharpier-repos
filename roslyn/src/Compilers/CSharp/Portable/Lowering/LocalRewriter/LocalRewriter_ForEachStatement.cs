@@ -1054,14 +1054,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     preambleLocal = null;
                     if (enumeratorInfo.InlineArrayUsedAsValue)
                     {
-                        BoundLocal boundLocal = rewriter._factory.StoreToTemp(
-                            rewrittenExpression,
-                            out BoundAssignmentOperator? valueStore
-                        );
+                        BoundLocal boundLocal = rewriter
+                            ._factory
+                            .StoreToTemp(
+                                rewrittenExpression,
+                                out BoundAssignmentOperator? valueStore
+                            );
                         rewrittenExpression = boundLocal;
-                        collectionVarInitializationPreamble = rewriter._factory.ExpressionStatement(
-                            valueStore
-                        );
+                        collectionVarInitializationPreamble = rewriter
+                            ._factory
+                            .ExpressionStatement(valueStore);
                         preambleLocal = boundLocal.LocalSymbol;
                     }
 
@@ -1086,13 +1088,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var enumeratorInfo = node.EnumeratorInfoOpt;
                     Debug.Assert(enumeratorInfo is not null);
 
-                    NamedTypeSymbol intType = rewriter._factory.SpecialType(
-                        SpecialType.System_Int32
-                    );
+                    NamedTypeSymbol intType = rewriter
+                        ._factory
+                        .SpecialType(SpecialType.System_Int32);
                     if (enumeratorInfo.InlineArraySpanType == WellKnownType.System_Span_T)
                     {
-                        elementRef =
-                            rewriter._factory.ModuleBuilderOpt.EnsureInlineArrayElementRefExists(
+                        elementRef = rewriter
+                            ._factory
+                            .ModuleBuilderOpt
+                            .EnsureInlineArrayElementRefExists(
                                 node.Syntax,
                                 intType,
                                 rewriter._diagnostics.DiagnosticBag
@@ -1104,8 +1108,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             enumeratorInfo.InlineArraySpanType
                                 == WellKnownType.System_ReadOnlySpan_T
                         );
-                        elementRef =
-                            rewriter._factory.ModuleBuilderOpt.EnsureInlineArrayElementRefReadOnlyExists(
+                        elementRef = rewriter
+                            ._factory
+                            .ModuleBuilderOpt
+                            .EnsureInlineArrayElementRefReadOnlyExists(
                                 node.Syntax,
                                 intType,
                                 rewriter._diagnostics.DiagnosticBag
@@ -1118,13 +1124,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                         inlineArrayType.TryGetInlineArrayElementField()!.Type
                     );
 
-                    return rewriter._factory.Call(
-                        null,
-                        elementRef,
-                        boundArrayVar,
-                        boundPositionVar,
-                        useStrictArgumentRefKinds: true
-                    );
+                    return rewriter
+                        ._factory
+                        .Call(
+                            null,
+                            elementRef,
+                            boundArrayVar,
+                            boundPositionVar,
+                            useStrictArgumentRefKinds: true
+                        );
                 },
                 getLength: static (
                     LocalRewriter rewriter,

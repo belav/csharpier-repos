@@ -23,15 +23,17 @@ namespace Mono.XmlTools
 
         static void Usage()
         {
-            Console.Error.WriteLine(
-                @"
+            Console
+                .Error
+                .WriteLine(
+                    @"
 Usage dtd2rng [options] dtdfile [ns]
 
 options:
 	--help : show this message.
 	--compact, -c : output compact syntax.
 "
-            );
+                );
         }
 
         public int Process(string[] args)

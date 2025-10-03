@@ -530,12 +530,9 @@ namespace System.Speech.Recognition
                     .KeyValuePairs;
 
                 // Create the root rule
-                IRule root = elementFactory.Grammar.CreateRule(
-                    rootId,
-                    RulePublic.False,
-                    RuleDynamic.NotSet,
-                    false
-                );
+                IRule root = elementFactory
+                    .Grammar
+                    .CreateRule(rootId, RulePublic.False, RuleDynamic.NotSet, false);
 
                 // Create all the rules
                 foreach (GrammarBuilderBase item in Items)

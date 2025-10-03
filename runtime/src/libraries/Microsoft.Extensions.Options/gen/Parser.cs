@@ -239,23 +239,25 @@ namespace Microsoft.Extensions.Options.Generators
 
         private static string GetFQN(ISymbol type) =>
             type.ToDisplayString(
-                SymbolDisplayFormat.FullyQualifiedFormat.WithMiscellaneousOptions(
-                    SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                )
+                SymbolDisplayFormat
+                    .FullyQualifiedFormat
+                    .WithMiscellaneousOptions(
+                        SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                    )
             );
 
         private static string GetMinimalFQN(ISymbol type) =>
             type.ToDisplayString(
-                SymbolDisplayFormat.MinimallyQualifiedFormat.AddGenericsOptions(
-                    SymbolDisplayGenericsOptions.IncludeTypeParameters
-                )
+                SymbolDisplayFormat
+                    .MinimallyQualifiedFormat
+                    .AddGenericsOptions(SymbolDisplayGenericsOptions.IncludeTypeParameters)
             );
 
         private static string GetMinimalFQNWithoutGenerics(ISymbol type) =>
             type.ToDisplayString(
-                SymbolDisplayFormat.MinimallyQualifiedFormat.WithGenericsOptions(
-                    SymbolDisplayGenericsOptions.None
-                )
+                SymbolDisplayFormat
+                    .MinimallyQualifiedFormat
+                    .WithGenericsOptions(SymbolDisplayGenericsOptions.None)
             );
 
         /// <summary>
@@ -318,10 +320,9 @@ namespace Microsoft.Extensions.Options.Generators
 
             // Check first if the type is IEnumerable<T> interface
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    type.OriginalDefinition,
-                    _symbolHolder.GenericIEnumerableSymbol
-                )
+                SymbolEqualityComparer
+                    .Default
+                    .Equals(type.OriginalDefinition, _symbolHolder.GenericIEnumerableSymbol)
             )
             {
                 return ((INamedTypeSymbol)type).TypeArguments[0];
@@ -331,12 +332,14 @@ namespace Microsoft.Extensions.Options.Generators
             foreach (var implementingInterface in type.AllInterfaces)
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        implementingInterface.OriginalDefinition,
-                        _compilation.GetSpecialType(
-                            SpecialType.System_Collections_Generic_IEnumerable_T
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            implementingInterface.OriginalDefinition,
+                            _compilation.GetSpecialType(
+                                SpecialType.System_Collections_Generic_IEnumerable_T
+                            )
                         )
-                    )
                 )
                 {
                     return implementingInterface.TypeArguments.First();
@@ -457,10 +460,9 @@ namespace Microsoft.Extensions.Options.Generators
                 var attrLoc = attribute.ApplicationSyntaxReference?.GetSyntax().GetLocation();
 
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        attributeType,
-                        _symbolHolder.ValidateObjectMembersAttributeSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(attributeType, _symbolHolder.ValidateObjectMembersAttributeSymbol)
                 )
                 {
                     if (HasOpenGenerics(memberType, out var genericType))
@@ -482,7 +484,8 @@ namespace Microsoft.Extensions.Options.Generators
                             {
                                 if (
                                     transValidatorType
-                                        .Constructors.Where(c => !c.Parameters.Any())
+                                        .Constructors
+                                        .Where(c => !c.Parameters.Any())
                                         .Any()
                                 )
                                 {
@@ -546,10 +549,9 @@ namespace Microsoft.Extensions.Options.Generators
                     );
                 }
                 else if (
-                    SymbolEqualityComparer.Default.Equals(
-                        attributeType,
-                        _symbolHolder.ValidateEnumeratedItemsAttributeSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(attributeType, _symbolHolder.ValidateEnumeratedItemsAttributeSymbol)
                 )
                 {
                     var enumeratedType = GetEnumeratedType(memberType);
@@ -584,7 +586,8 @@ namespace Microsoft.Extensions.Options.Generators
                             {
                                 if (
                                     enumerationValidatorType
-                                        .Constructors.Where(c => c.Parameters.Length == 0)
+                                        .Constructors
+                                        .Where(c => c.Parameters.Length == 0)
                                         .Any()
                                 )
                                 {
@@ -656,9 +659,9 @@ namespace Microsoft.Extensions.Options.Generators
                             DiagDescriptors.InaccessibleValidationAttribute,
                             location,
                             attributeType.Name,
-                            member.OriginalDefinition.ToDisplayString(
-                                SymbolDisplayFormat.MinimallyQualifiedFormat
-                            ),
+                            member
+                                .OriginalDefinition
+                                .ToDisplayString(SymbolDisplayFormat.MinimallyQualifiedFormat),
                             validatorType.Name
                         );
                         continue;
@@ -668,20 +671,17 @@ namespace Microsoft.Extensions.Options.Generators
                         SymbolDisplayFormat.FullyQualifiedFormat
                     );
                     if (
-                        SymbolEqualityComparer.Default.Equals(
-                            attributeType,
-                            _symbolHolder.MaxLengthAttributeSymbol
-                        )
-                        || SymbolEqualityComparer.Default.Equals(
-                            attributeType,
-                            _symbolHolder.MinLengthAttributeSymbol
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attributeType, _symbolHolder.MaxLengthAttributeSymbol)
+                        || SymbolEqualityComparer
+                            .Default
+                            .Equals(attributeType, _symbolHolder.MinLengthAttributeSymbol)
                         || (
                             _symbolHolder.LengthAttributeSymbol is not null
-                            && SymbolEqualityComparer.Default.Equals(
-                                attributeType,
-                                _symbolHolder.LengthAttributeSymbol
-                            )
+                            && SymbolEqualityComparer
+                                .Default
+                                .Equals(attributeType, _symbolHolder.LengthAttributeSymbol)
                         )
                     )
                     {
@@ -698,10 +698,9 @@ namespace Microsoft.Extensions.Options.Generators
                         }
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            attributeType,
-                            _symbolHolder.CompareAttributeSymbol
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attributeType, _symbolHolder.CompareAttributeSymbol)
                     )
                     {
                         TrackCompareAttributeForSubstitution(
@@ -711,10 +710,9 @@ namespace Microsoft.Extensions.Options.Generators
                         );
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            attributeType,
-                            _symbolHolder.RangeAttributeSymbol
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(attributeType, _symbolHolder.RangeAttributeSymbol)
                     )
                     {
                         TrackRangeAttributeForSubstitution(
@@ -742,15 +740,15 @@ namespace Microsoft.Extensions.Options.Generators
                         {
                             bool isParams =
                                 lastParameterDeclaredWithParamsKeyword && i == arguments.Length - 1;
-                            validationAttr.ConstructorArguments.Add(
-                                GetArrayArgumentExpression(argument.Values, isParams)
-                            );
+                            validationAttr
+                                .ConstructorArguments
+                                .Add(GetArrayArgumentExpression(argument.Values, isParams));
                         }
                         else
                         {
-                            validationAttr.ConstructorArguments.Add(
-                                GetArgumentExpression(argument.Type!, argument.Value)
-                            );
+                            validationAttr
+                                .ConstructorArguments
+                                .Add(GetArgumentExpression(argument.Type!, argument.Value));
                         }
                     }
 
@@ -761,20 +759,24 @@ namespace Microsoft.Extensions.Options.Generators
                             bool isParams =
                                 lastParameterDeclaredWithParamsKeyword
                                 && namedArgument.Key == parameters[parameters.Length - 1].Name;
-                            validationAttr.Properties.Add(
-                                namedArgument.Key,
-                                GetArrayArgumentExpression(namedArgument.Value.Values, isParams)
-                            );
+                            validationAttr
+                                .Properties
+                                .Add(
+                                    namedArgument.Key,
+                                    GetArrayArgumentExpression(namedArgument.Value.Values, isParams)
+                                );
                         }
                         else
                         {
-                            validationAttr.Properties.Add(
-                                namedArgument.Key,
-                                GetArgumentExpression(
-                                    namedArgument.Value.Type!,
-                                    namedArgument.Value.Value
-                                )
-                            );
+                            validationAttr
+                                .Properties
+                                .Add(
+                                    namedArgument.Key,
+                                    GetArgumentExpression(
+                                        namedArgument.Value.Type!,
+                                        namedArgument.Value.Value
+                                    )
+                                );
                         }
                     }
                 }
@@ -1000,15 +1002,13 @@ namespace Microsoft.Extensions.Options.Generators
                         argumentType = namedTypeSymbol;
                     }
                     else if (
-                        SymbolEqualityComparer.Default.Equals(
-                            namedTypeSymbol,
-                            _symbolHolder.TimeSpanSymbol
-                        )
+                        SymbolEqualityComparer
+                            .Default
+                            .Equals(namedTypeSymbol, _symbolHolder.TimeSpanSymbol)
                         && (
-                            SymbolEqualityComparer.Default.Equals(
-                                typeSymbol,
-                                _symbolHolder.TimeSpanSymbol
-                            )
+                            SymbolEqualityComparer
+                                .Default
+                                .Equals(typeSymbol, _symbolHolder.TimeSpanSymbol)
                             || typeSymbol.SpecialType == SpecialType.System_String
                         )
                     )
@@ -1093,10 +1093,12 @@ namespace Microsoft.Extensions.Options.Generators
             foreach (var implementingInterface in modelType.AllInterfaces)
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        implementingInterface.OriginalDefinition,
-                        _symbolHolder.IValidatableObjectSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            implementingInterface.OriginalDefinition,
+                            _symbolHolder.IValidatableObjectSymbol
+                        )
                 )
                 {
                     return true;
@@ -1112,10 +1114,12 @@ namespace Microsoft.Extensions.Options.Generators
             foreach (var implementingInterface in validatorType.AllInterfaces)
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        implementingInterface.OriginalDefinition,
-                        _symbolHolder.ValidateOptionsSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            implementingInterface.OriginalDefinition,
+                            _symbolHolder.ValidateOptionsSymbol
+                        )
                 )
                 {
                     result.Add(implementingInterface.TypeArguments.First());
@@ -1130,10 +1134,12 @@ namespace Microsoft.Extensions.Options.Generators
             foreach (var implementingInterface in validatorType.AllInterfaces)
             {
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        implementingInterface.OriginalDefinition,
-                        _symbolHolder.ValidateOptionsSymbol
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            implementingInterface.OriginalDefinition,
+                            _symbolHolder.ValidateOptionsSymbol
+                        )
                 )
                 {
                     var t = implementingInterface.TypeArguments.First();

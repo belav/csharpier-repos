@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 await TaskScheduler.Default.SwitchTo(alwaysYield: true);
 
                 await _languageClientBroker
-                    .Value.LoadAsync(
+                    .Value
+                    .LoadAsync(
                         new LanguageClientMetadata(
                             [
                                 ContentTypeNames.CSharpContentType,

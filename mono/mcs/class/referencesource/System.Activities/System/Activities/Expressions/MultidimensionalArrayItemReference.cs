@@ -88,24 +88,28 @@ namespace System.Activities.Expressions
 
             if (items == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.MemberCannotBeNull("Array", this.GetType().Name, this.DisplayName)
+                        )
+                    );
             }
 
             Type realItemType = items.GetType().GetElementType();
             if (!TypeHelper.AreTypesCompatible(typeof(TItem), realItemType))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidCastException(
-                        SR.IncompatibleTypeForMultidimensionalArrayItemReference(
-                            typeof(TItem).Name,
-                            realItemType.Name
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidCastException(
+                            SR.IncompatibleTypeForMultidimensionalArrayItemReference(
+                                typeof(TItem).Name,
+                                realItemType.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
             int[] itemIndex = new int[this.Indices.Count];
             for (int i = 0; i < this.Indices.Count; i++)

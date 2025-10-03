@@ -95,12 +95,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     RSASignaturePadding.Pkcs1
                 );
 
-                request.CertificateExtensions.Add(
-                    new X509KeyUsageExtension(
-                        X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
-                        false
-                    )
-                );
+                request
+                    .CertificateExtensions
+                    .Add(
+                        new X509KeyUsageExtension(
+                            X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.DigitalSignature,
+                            false
+                        )
+                    );
 
                 if (sanDnsNames != null)
                 {
@@ -194,11 +196,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static bool CheckHostname(X509Certificate2 cert, string targetName)
         {
-            int value = Interop.Crypto.CheckX509Hostname(
-                cert.Handle,
-                targetName,
-                targetName.Length
-            );
+            int value = Interop
+                .Crypto
+                .CheckX509Hostname(cert.Handle, targetName, targetName.Length);
             GC.KeepAlive(cert);
             Assert.InRange(value, 0, 1);
             return value != 0;

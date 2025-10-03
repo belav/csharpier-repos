@@ -151,11 +151,13 @@ namespace System.Drawing
             }
             catch (TypeInitializationException)
             {
-                Console.Error.WriteLine(
-                    "* ERROR: Can not initialize GDI+ library{0}{0}"
-                        + "Please check http://www.mono-project.com/Problem:GDIPlusInit for details",
-                    Environment.NewLine
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "* ERROR: Can not initialize GDI+ library{0}{0}"
+                            + "Please check http://www.mono-project.com/Problem:GDIPlusInit for details",
+                        Environment.NewLine
+                    );
             }
 
             // under MS 1.x this event is raised only for the default application domain

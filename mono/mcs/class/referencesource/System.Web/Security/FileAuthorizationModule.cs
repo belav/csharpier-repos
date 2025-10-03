@@ -331,18 +331,21 @@ namespace System.Web.Security
                         );
                         CacheDependency dependency = new CacheDependency(0, cacheDependencyPath);
                         TimeSpan slidingExp = CachedPathData.UrlMetadataSlidingExpiration;
-                        HttpRuntime.Cache.InternalCache.Insert(
-                            oCacheKey,
-                            oSecDesc,
-                            new CacheInsertOptions()
-                            {
-                                Dependencies = dependency,
-                                SlidingExpiration = slidingExp,
-                                OnRemovedCallback = new CacheItemRemovedCallback(
-                                    oSecDesc.OnCacheItemRemoved
-                                ),
-                            }
-                        );
+                        HttpRuntime
+                            .Cache
+                            .InternalCache
+                            .Insert(
+                                oCacheKey,
+                                oSecDesc,
+                                new CacheInsertOptions()
+                                {
+                                    Dependencies = dependency,
+                                    SlidingExpiration = slidingExp,
+                                    OnRemovedCallback = new CacheItemRemovedCallback(
+                                        oSecDesc.OnCacheItemRemoved
+                                    ),
+                                }
+                            );
                     }
                     catch (Exception e)
                     {
@@ -358,17 +361,21 @@ namespace System.Web.Security
         {
             if (!context.IsCustomErrorEnabled)
             {
-                context.Response.Write(
-                    (
-                        new FileAccessFailedErrorFormatter(context.Request.PhysicalPathInternal)
-                    ).GetErrorMessage(context, false)
-                );
+                context
+                    .Response
+                    .Write(
+                        (
+                            new FileAccessFailedErrorFormatter(context.Request.PhysicalPathInternal)
+                        ).GetErrorMessage(context, false)
+                    );
             }
             else
             {
-                context.Response.Write(
-                    (new FileAccessFailedErrorFormatter(null)).GetErrorMessage(context, true)
-                );
+                context
+                    .Response
+                    .Write(
+                        (new FileAccessFailedErrorFormatter(null)).GetErrorMessage(context, true)
+                    );
             }
             // In Integrated pipeline, ask for handler headers to be generated.  This would be unnecessary
             // if we just threw an access denied exception, and used the standard error mechanism

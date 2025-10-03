@@ -321,9 +321,9 @@ namespace System.ServiceModel.Channels
                     {
                         long lookupId = property.LookupId;
                         property = null;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                            new MsmqPoisonMessageException(lookupId)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperCritical(new MsmqPoisonMessageException(lookupId));
                     }
                 }
                 return true;
@@ -376,9 +376,9 @@ namespace System.ServiceModel.Channels
                 TryTransactedReceiveAsyncResult receiveResult =
                     result as TryTransactedReceiveAsyncResult;
                 if (null == receiveResult)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.InvalidAsyncResult)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.InvalidAsyncResult));
                 return TryTransactedReceiveAsyncResult.End(
                     receiveResult,
                     out msmqMessage,
@@ -390,9 +390,9 @@ namespace System.ServiceModel.Channels
                 TryNonTransactedReceiveAsyncResult receiveResult =
                     result as TryNonTransactedReceiveAsyncResult;
                 if (null == receiveResult)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.InvalidAsyncResult)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.InvalidAsyncResult));
                 return TryNonTransactedReceiveAsyncResult.End(
                     receiveResult,
                     out msmqMessage,
@@ -442,12 +442,14 @@ namespace System.ServiceModel.Channels
                     Exception ex = null;
                     try
                     {
-                        result.expired = !result.receiver.TryReceive(
-                            result.msmqMessage,
-                            result.timeoutHelper.RemainingTime(),
-                            result.transactionMode,
-                            out result.messageProperty
-                        );
+                        result.expired = !result
+                            .receiver
+                            .TryReceive(
+                                result.msmqMessage,
+                                result.timeoutHelper.RemainingTime(),
+                                result.transactionMode,
+                                out result.messageProperty
+                            );
                     }
                     catch (Exception e)
                     {

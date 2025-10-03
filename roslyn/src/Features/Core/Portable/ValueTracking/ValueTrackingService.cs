@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 }
 
                 return await result
-                    .Value.SelectAsArrayAsync(
+                    .Value
+                    .SelectAsArrayAsync(
                         static (item, solution, cancellationToken) =>
                             item.RehydrateAsync(solution, cancellationToken),
                         solution,
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                 }
 
                 return await result
-                    .Value.SelectAsArrayAsync(
+                    .Value
+                    .SelectAsArrayAsync(
                         static (item, solution, cancellationToken) =>
                             item.RehydrateAsync(solution, cancellationToken),
                         solution,

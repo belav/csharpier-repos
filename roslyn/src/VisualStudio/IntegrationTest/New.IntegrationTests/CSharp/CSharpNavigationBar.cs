@@ -43,15 +43,15 @@ struct S
         public async Task VerifyNavBar()
         {
             await SetUpEditorAsync(TestSource, HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync(
-                "this",
-                charsOffset: 1,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Editor.ExpandNavigationBarAsync(
-                NavigationBarDropdownKind.Member,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync("this", charsOffset: 1, HangMitigatingCancellationToken);
+            await TestServices
+                .Editor
+                .ExpandNavigationBarAsync(
+                    NavigationBarDropdownKind.Member,
+                    HangMitigatingCancellationToken
+                );
             var expectedItems = new[]
             {
                 "M(int i)",
@@ -62,22 +62,28 @@ struct S
 
             Assert.Equal(
                 expectedItems,
-                await TestServices.Editor.GetNavigationBarItemsAsync(
+                await TestServices
+                    .Editor
+                    .GetNavigationBarItemsAsync(
+                        NavigationBarDropdownKind.Member,
+                        HangMitigatingCancellationToken
+                    )
+            );
+            await TestServices
+                .Editor
+                .SelectNavigationBarItemAsync(
                     NavigationBarDropdownKind.Member,
+                    "operator !=(C c1, C c2)",
                     HangMitigatingCancellationToken
-                )
-            );
-            await TestServices.Editor.SelectNavigationBarItemAsync(
-                NavigationBarDropdownKind.Member,
-                "operator !=(C c1, C c2)",
-                HangMitigatingCancellationToken
-            );
+                );
 
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    public static bool operator $$!=(C c1, C c2) { return false; }",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    public static bool operator $$!=(C c1, C c2) { return false; }",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -87,49 +93,63 @@ struct S
 
             Assert.Equal(
                 "C",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Type,
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Type,
+                        HangMitigatingCancellationToken
+                    )
             );
             Assert.Equal(
                 "this[int index]",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Member,
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Member,
+                        HangMitigatingCancellationToken
+                    )
+            );
+
+            await TestServices
+                .Editor
+                .ExpandNavigationBarAsync(
+                    NavigationBarDropdownKind.Type,
                     HangMitigatingCancellationToken
-                )
-            );
+                );
 
-            await TestServices.Editor.ExpandNavigationBarAsync(
-                NavigationBarDropdownKind.Type,
-                HangMitigatingCancellationToken
-            );
-
-            await TestServices.Editor.SelectNavigationBarItemAsync(
-                NavigationBarDropdownKind.Type,
-                "S",
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .SelectNavigationBarItemAsync(
+                    NavigationBarDropdownKind.Type,
+                    "S",
+                    HangMitigatingCancellationToken
+                );
 
             Assert.Equal(
                 "S",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Type,
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Type,
+                        HangMitigatingCancellationToken
+                    )
             );
             Assert.Equal(
                 "Goo()",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Member,
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Member,
+                        HangMitigatingCancellationToken
+                    )
+            );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "struct $$S",
+                    assertCaretPosition: true,
                     HangMitigatingCancellationToken
-                )
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "struct $$S",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                );
         }
 
         [IdeFact]
@@ -144,47 +164,58 @@ struct S$$
 }",
                 HangMitigatingCancellationToken
             );
-            await TestServices.Editor.ExpandNavigationBarAsync(
-                NavigationBarDropdownKind.Member,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Editor
+                .ExpandNavigationBarAsync(
+                    NavigationBarDropdownKind.Member,
+                    HangMitigatingCancellationToken
+                );
             var expectedItems = new[] { "Bar()", "Goo()" };
             Assert.Equal(
                 expectedItems,
-                await TestServices.Editor.GetNavigationBarItemsAsync(
+                await TestServices
+                    .Editor
+                    .GetNavigationBarItemsAsync(
+                        NavigationBarDropdownKind.Member,
+                        HangMitigatingCancellationToken
+                    )
+            );
+            await TestServices
+                .Editor
+                .SelectNavigationBarItemAsync(
                     NavigationBarDropdownKind.Member,
+                    "Bar()",
                     HangMitigatingCancellationToken
-                )
-            );
-            await TestServices.Editor.SelectNavigationBarItemAsync(
-                NavigationBarDropdownKind.Member,
-                "Bar()",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.CurrentLineTextAsync(
-                "    void $$Bar() { }",
-                assertCaretPosition: true,
-                HangMitigatingCancellationToken
-            );
+                );
+            await TestServices
+                .EditorVerifier
+                .CurrentLineTextAsync(
+                    "    void $$Bar() { }",
+                    assertCaretPosition: true,
+                    HangMitigatingCancellationToken
+                );
 
-            await TestServices.Shell.ExecuteCommandAsync(
-                VSConstants.VSStd2KCmdID.UP,
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(VSConstants.VSStd2KCmdID.UP, HangMitigatingCancellationToken);
             Assert.Equal(
                 "Goo()",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Member,
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Member,
+                        HangMitigatingCancellationToken
+                    )
             );
         }
 
         [IdeFact]
         public async Task TestSplitWindow()
         {
-            await TestServices.Editor.SetTextAsync(
-                @"
+            await TestServices
+                .Editor
+                .SetTextAsync(
+                    @"
 class C
 {
     public void M(int i) { }
@@ -196,61 +227,70 @@ struct S
     int Goo() { }
     void Bar() { }
 }",
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Shell.ExecuteCommandAsync(
-                VSConstants.VSStd97CmdID.Split,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Editor.PlaceCaretAsync(
-                "this",
-                charsOffset: 1,
-                HangMitigatingCancellationToken
-            );
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(
+                    VSConstants.VSStd97CmdID.Split,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync("this", charsOffset: 1, HangMitigatingCancellationToken);
             Assert.Equal(
                 "C",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Type,
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Type,
+                        HangMitigatingCancellationToken
+                    )
             );
             Assert.Equal(
                 "this[int index]",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Member,
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Member,
+                        HangMitigatingCancellationToken
+                    )
+            );
+            await TestServices
+                .Shell
+                .ExecuteCommandAsync(
+                    VSConstants.VSStd97CmdID.SplitNext,
                     HangMitigatingCancellationToken
-                )
-            );
-            await TestServices.Shell.ExecuteCommandAsync(
-                VSConstants.VSStd97CmdID.SplitNext,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Editor.PlaceCaretAsync(
-                "Goo",
-                charsOffset: 1,
-                HangMitigatingCancellationToken
-            );
+                );
+            await TestServices
+                .Editor
+                .PlaceCaretAsync("Goo", charsOffset: 1, HangMitigatingCancellationToken);
             Assert.Equal(
                 "S",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Type,
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Type,
+                        HangMitigatingCancellationToken
+                    )
             );
             Assert.Equal(
                 "Goo()",
-                await TestServices.Editor.GetNavigationBarSelectionAsync(
-                    NavigationBarDropdownKind.Member,
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .GetNavigationBarSelectionAsync(
+                        NavigationBarDropdownKind.Member,
+                        HangMitigatingCancellationToken
+                    )
             );
         }
 
         [IdeFact]
         public async Task VerifyOption()
         {
-            var globalOptions =
-                await TestServices.Shell.GetComponentModelServiceAsync<IGlobalOptionService>(
+            var globalOptions = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<IGlobalOptionService>(
                     HangMitigatingCancellationToken
                 );
             globalOptions.SetGlobalOption(
@@ -259,9 +299,9 @@ struct S
                 false
             );
             Assert.False(
-                await TestServices.Editor.IsNavigationBarEnabledAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .IsNavigationBarEnabledAsync(HangMitigatingCancellationToken)
             );
 
             globalOptions.SetGlobalOption(
@@ -270,9 +310,9 @@ struct S
                 true
             );
             Assert.True(
-                await TestServices.Editor.IsNavigationBarEnabledAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Editor
+                    .IsNavigationBarEnabledAsync(HangMitigatingCancellationToken)
             );
         }
     }

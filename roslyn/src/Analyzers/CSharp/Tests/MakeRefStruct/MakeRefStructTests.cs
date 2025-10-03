@@ -21,8 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeRefStruct)]
     public class MakeRefStructTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly CSharpParseOptions s_parseOptions =
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3);
+        private static readonly CSharpParseOptions s_parseOptions = CSharpParseOptions
+            .Default
+            .WithLanguageVersion(LanguageVersion.CSharp7_3);
 
         public MakeRefStructTests(ITestOutputHelper logger)
             : base(logger) { }

@@ -30,20 +30,23 @@ namespace System.Data
         private CollectionChangeEventHandler? _onCollectionChangingDelegate;
 
         private static int s_objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref s_objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref s_objectTypeCount);
 
         /// <summary>
         /// DataTableCollection constructor.  Used only by DataSet.
         /// </summary>
         internal DataTableCollection(DataSet dataSet)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTableCollection.DataTableCollection|INFO> {0}, dataSet={1}",
-                ObjectID,
-                (dataSet != null) ? dataSet.ObjectID : 0
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTableCollection.DataTableCollection|INFO> {0}, dataSet={1}",
+                    ObjectID,
+                    (dataSet != null) ? dataSet.ObjectID : 0
+                );
             _dataSet = dataSet!;
         }
 
@@ -154,11 +157,13 @@ namespace System.Data
         /// </summary>
         public void Add(DataTable table)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTableCollection.Add|API> {0}, table={1}",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTableCollection.Add|API> {0}, table={1}",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0
+                );
             try
             {
                 OnCollectionChanging(
@@ -186,10 +191,9 @@ namespace System.Data
 
         public void AddRange(DataTable?[]? tables)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTableCollection.AddRange|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTableCollection.AddRange|API> {0}", ObjectID);
             try
             {
                 if (_dataSet._fInitInProgress)
@@ -249,18 +253,16 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTableCollection.add_CollectionChanged|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTableCollection.add_CollectionChanged|API> {0}", ObjectID);
                 _onCollectionChangedDelegate += value;
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTableCollection.remove_CollectionChanged|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTableCollection.remove_CollectionChanged|API> {0}", ObjectID);
                 _onCollectionChangedDelegate -= value;
             }
         }
@@ -269,18 +271,16 @@ namespace System.Data
         {
             add
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTableCollection.add_CollectionChanging|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTableCollection.add_CollectionChanging|API> {0}", ObjectID);
                 _onCollectionChangingDelegate += value;
             }
             remove
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTableCollection.remove_CollectionChanging|API> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTableCollection.remove_CollectionChanging|API> {0}", ObjectID);
                 _onCollectionChangingDelegate -= value;
             }
         }
@@ -420,12 +420,14 @@ namespace System.Data
 
         internal bool CanRemove([NotNullWhen(true)] DataTable? table, bool fThrowException)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTableCollection.CanRemove|INFO> {0}, table={1}, fThrowException={2}",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0,
-                fThrowException
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTableCollection.CanRemove|INFO> {0}, table={1}, fThrowException={2}",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0,
+                    fThrowException
+                );
             try
             {
                 if (table == null)
@@ -515,10 +517,9 @@ namespace System.Data
         /// </summary>
         public void Clear()
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTableCollection.Clear|API> {0}",
-                ObjectID
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTableCollection.Clear|API> {0}", ObjectID);
             try
             {
                 int oldLength = _list.Count;
@@ -787,10 +788,9 @@ namespace System.Data
         {
             if (_onCollectionChangedDelegate != null)
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTableCollection.OnCollectionChanged|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTableCollection.OnCollectionChanged|INFO> {0}", ObjectID);
                 _onCollectionChangedDelegate(this, ccevent);
             }
         }
@@ -799,10 +799,9 @@ namespace System.Data
         {
             if (_onCollectionChangingDelegate != null)
             {
-                DataCommonEventSource.Log.Trace(
-                    "<ds.DataTableCollection.OnCollectionChanging|INFO> {0}",
-                    ObjectID
-                );
+                DataCommonEventSource
+                    .Log
+                    .Trace("<ds.DataTableCollection.OnCollectionChanging|INFO> {0}", ObjectID);
                 _onCollectionChangingDelegate(this, ccevent);
             }
         }
@@ -814,12 +813,14 @@ namespace System.Data
         /// </summary>
         internal void RegisterName(string name, string tbNamespace)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTableCollection.RegisterName|INFO> {0}, name='{1}', tbNamespace='{2}'",
-                ObjectID,
-                name,
-                tbNamespace
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTableCollection.RegisterName|INFO> {0}, name='{1}', tbNamespace='{2}'",
+                    ObjectID,
+                    name,
+                    tbNamespace
+                );
             Debug.Assert(name != null);
 
             CultureInfo locale = _dataSet.Locale;
@@ -846,11 +847,13 @@ namespace System.Data
         /// </summary>
         public void Remove(DataTable table)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTableCollection.Remove|API> {0}, table={1}",
-                ObjectID,
-                (table != null) ? table.ObjectID : 0
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTableCollection.Remove|API> {0}, table={1}",
+                    ObjectID,
+                    (table != null) ? table.ObjectID : 0
+                );
             try
             {
                 OnCollectionChanging(
@@ -872,11 +875,13 @@ namespace System.Data
         /// </summary>
         public void RemoveAt(int index)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTableCollection.RemoveAt|API> {0}, index={1}",
-                ObjectID,
-                index
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope(
+                    "<ds.DataTableCollection.RemoveAt|API> {0}, index={1}",
+                    ObjectID,
+                    index
+                );
             try
             {
                 DataTable dt = this[index];
@@ -897,11 +902,9 @@ namespace System.Data
         /// </summary>
         public void Remove(string name)
         {
-            long logScopeId = DataCommonEventSource.Log.EnterScope(
-                "<ds.DataTableCollection.Remove|API> {0}, name='{1}'",
-                ObjectID,
-                name
-            );
+            long logScopeId = DataCommonEventSource
+                .Log
+                .EnterScope("<ds.DataTableCollection.Remove|API> {0}, name='{1}'", ObjectID, name);
             try
             {
                 DataTable? dt = this[name];
@@ -942,11 +945,13 @@ namespace System.Data
         /// </summary>
         internal void UnregisterName(string name)
         {
-            DataCommonEventSource.Log.Trace(
-                "<ds.DataTableCollection.UnregisterName|INFO> {0}, name='{1}'",
-                ObjectID,
-                name
-            );
+            DataCommonEventSource
+                .Log
+                .Trace(
+                    "<ds.DataTableCollection.UnregisterName|INFO> {0}, name='{1}'",
+                    ObjectID,
+                    name
+                );
             if (NamesEqual(name, MakeName(_defaultNameIndex - 1), true, _dataSet.Locale) != 0)
             {
                 do

@@ -23,10 +23,12 @@ namespace System.Web.Http
         [Fact]
         public void IsCorrectType()
         {
-            Assert.Type.HasProperties<HttpServer, DelegatingHandler>(
-                TypeAssert.TypeProperties.IsPublicVisibleClass
-                    | TypeAssert.TypeProperties.IsDisposable
-            );
+            Assert
+                .Type
+                .HasProperties<HttpServer, DelegatingHandler>(
+                    TypeAssert.TypeProperties.IsPublicVisibleClass
+                        | TypeAssert.TypeProperties.IsDisposable
+                );
         }
 
         [Fact]

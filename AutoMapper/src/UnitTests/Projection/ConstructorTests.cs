@@ -111,7 +111,8 @@ public class ConstructorToString : AutoMapperSpecBase
             .AsQueryable()
             .ProjectTo<Destination>(Configuration)
             .First()
-            .Value.ShouldBe("5");
+            .Value
+            .ShouldBe("5");
 }
 
 public class ConstructorMapFrom : AutoMapperSpecBase
@@ -135,7 +136,8 @@ public class ConstructorMapFrom : AutoMapperSpecBase
             .AsQueryable()
             .ProjectTo<Destination>(Configuration)
             .First()
-            .Value.ShouldBeTrue();
+            .Value
+            .ShouldBeTrue();
 }
 
 public class ConstructorIncludeMembers : AutoMapperSpecBase
@@ -170,7 +172,8 @@ public class ConstructorIncludeMembers : AutoMapperSpecBase
             .AsQueryable()
             .ProjectTo<Destination>(Configuration)
             .First()
-            .Value.ShouldBe("5");
+            .Value
+            .ShouldBe("5");
 }
 
 public class ConstructorsWithCollections : AutoMapperSpecBase
@@ -224,7 +227,9 @@ public class ConstructorsWithCollections : AutoMapperSpecBase
                 }.AsQueryable()
             )
             .First()
-            .AddressDto.Address.ShouldBe("address");
+            .AddressDto
+            .Address
+            .ShouldBe("address");
 }
 
 public class ConstructorTests : AutoMapperSpecBase
@@ -310,5 +315,7 @@ public class NestedConstructors : AutoMapperSpecBase
     public void Should_project_ok() =>
         ProjectTo<DtoA>(new[] { new A { B = new B { Id = 3 } } }.AsQueryable())
             .FirstOrDefault()
-            .B.Id.ShouldBe(3);
+            .B
+            .Id
+            .ShouldBe(3);
 }

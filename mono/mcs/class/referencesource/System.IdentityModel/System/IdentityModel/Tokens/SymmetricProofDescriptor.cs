@@ -182,10 +182,9 @@ namespace System.IdentityModel.Tokens
 
             if (sourceEntropy.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "sourceEntropy",
-                    SR.GetString(SR.ID2058)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("sourceEntropy", SR.GetString(SR.ID2058));
             }
 
             _keySizeInBits = keySizeInBits;
@@ -199,19 +198,15 @@ namespace System.IdentityModel.Tokens
                 || encryptWith == SecurityAlgorithms.TripleDesKeyWrap
             )
             {
-                _key = CryptoHelper.KeyGenerator.GenerateDESKey(
-                    _keySizeInBits,
-                    _sourceEntropy,
-                    out _targetEntropy
-                );
+                _key = CryptoHelper
+                    .KeyGenerator
+                    .GenerateDESKey(_keySizeInBits, _sourceEntropy, out _targetEntropy);
             }
             else
             {
-                _key = CryptoHelper.KeyGenerator.GenerateSymmetricKey(
-                    _keySizeInBits,
-                    _sourceEntropy,
-                    out _targetEntropy
-                );
+                _key = CryptoHelper
+                    .KeyGenerator
+                    .GenerateSymmetricKey(_keySizeInBits, _sourceEntropy, out _targetEntropy);
             }
 
             //
@@ -312,10 +307,9 @@ namespace System.IdentityModel.Tokens
             {
                 if (_ski == null)
                 {
-                    _ski = CryptoHelper.KeyGenerator.GetSecurityKeyIdentifier(
-                        _key,
-                        _targetWrappingCredentials
-                    );
+                    _ski = CryptoHelper
+                        .KeyGenerator
+                        .GetSecurityKeyIdentifier(_key, _targetWrappingCredentials);
                 }
 
                 return _ski;

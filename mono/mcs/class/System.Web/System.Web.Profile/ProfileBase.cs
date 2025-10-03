@@ -187,10 +187,9 @@ namespace System.Web.Profile
         {
             if (!_propertiyValuesLoaded)
             {
-                _propertiyValues = ProfileManager.Provider.GetPropertyValues(
-                    _settingsContext,
-                    Properties
-                );
+                _propertiyValues = ProfileManager
+                    .Provider
+                    .GetPropertyValues(_settingsContext, Properties);
                 _propertiyValuesLoaded = true;
             }
         }

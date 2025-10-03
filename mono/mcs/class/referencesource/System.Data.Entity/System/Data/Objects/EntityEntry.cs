@@ -1322,11 +1322,9 @@ namespace System.Data.Objects
                         string relationshipName = relationship.First;
                         string targetRoleName = relationship.Second;
 
-                        RelatedEnd relatedEnd =
-                            this.WrappedEntity.RelationshipManager.GetRelatedEndInternal(
-                                relationshipName,
-                                targetRoleName
-                            );
+                        RelatedEnd relatedEnd = this.WrappedEntity
+                            .RelationshipManager
+                            .GetRelatedEndInternal(relationshipName, targetRoleName);
                         Debug.Assert(
                             relatedEnd != null,
                             "relatedEnd should exist if property is a foreign key"
@@ -1434,11 +1432,9 @@ namespace System.Data.Objects
                 if (newValueRecord != null)
                 {
                     // Requires materialization
-                    newValue = _cache.ComplexTypeMaterializer.CreateComplex(
-                        newValueRecord,
-                        newValueRecord.DataRecordInfo,
-                        null
-                    );
+                    newValue = _cache
+                        .ComplexTypeMaterializer
+                        .CreateComplex(newValueRecord, newValueRecord.DataRecordInfo, null);
                 }
 
                 // We only store scalar properties values in original values, so no need to search the list
@@ -1724,8 +1720,9 @@ namespace System.Data.Objects
 
             ValidateState();
 
-            AssociationEndMember endMember =
-                relationshipEntry.RelationshipWrapper.GetAssociationEndMember(EntityKey);
+            AssociationEndMember endMember = relationshipEntry
+                .RelationshipWrapper
+                .GetAssociationEndMember(EntityKey);
             Debug.Assert(null != endMember, "should be one of the ends of the relationship");
             return endMember;
         }
@@ -2189,10 +2186,14 @@ namespace System.Data.Objects
                     if (Object.ReferenceEquals(complexObject, oldComplexObject))
                     {
                         throw new InvalidOperationException(
-                            System.Data.Entity.Strings.ObjectStateEntry_ComplexObjectUsedMultipleTimes(
-                                this.Entity.GetType().FullName,
-                                complexObject.GetType().FullName
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ObjectStateEntry_ComplexObjectUsedMultipleTimes(
+                                    this.Entity.GetType().FullName,
+                                    complexObject.GetType().FullName
+                                )
                         );
                     }
                 }
@@ -2685,10 +2686,14 @@ namespace System.Data.Objects
                         if (collection == null)
                         {
                             throw new EntityException(
-                                System.Data.Entity.Strings.ObjectStateEntry_UnableToEnumerateCollection(
-                                    n.Name,
-                                    this.Entity.GetType().FullName
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .ObjectStateEntry_UnableToEnumerateCollection(
+                                        n.Name,
+                                        this.Entity.GetType().FullName
+                                    )
                             );
                         }
 
@@ -2734,11 +2739,9 @@ namespace System.Data.Objects
                 // In case of unidirectional relationships, it is possible that the other end of relationship was already added
                 // to the context but its relationship manager doesn't contain proper related end with the current entity.
                 // In OSM we treat all relationships as bidirectional so the related end has to be updated.
-                RelatedEnd otherRelatedEnd =
-                    relatedWrapper.RelationshipManager.GetRelatedEndInternal(
-                        n.RelationshipType.FullName,
-                        n.FromEndMember.Name
-                    );
+                RelatedEnd otherRelatedEnd = relatedWrapper
+                    .RelationshipManager
+                    .GetRelatedEndInternal(n.RelationshipType.FullName, n.FromEndMember.Name);
                 if (!otherRelatedEnd.ContainsEntity(this._wrappedEntity))
                 {
                     Debug.Assert(
@@ -2800,9 +2803,10 @@ namespace System.Data.Objects
                     EntityReference otherEndAsRef = otherRelatedEnd as EntityReference;
                     if (otherEndAsRef != null && otherEndAsRef.NavigationPropertyIsNullOrMissing())
                     {
-                        ObjectStateManager.TransactionManager.AlignedEntityReferences.Add(
-                            otherEndAsRef
-                        );
+                        ObjectStateManager
+                            .TransactionManager
+                            .AlignedEntityReferences
+                            .Add(otherEndAsRef);
                     }
                     otherRelatedEnd.AddToLocalCache(this._wrappedEntity, applyConstraints: true);
                     otherRelatedEnd.OnAssociationChanged(
@@ -2814,10 +2818,10 @@ namespace System.Data.Objects
             else
             {
                 if (
-                    !this.ObjectStateManager.TransactionManager.WrappedEntities.TryGetValue(
-                        o,
-                        out relatedWrapper
-                    )
+                    !this.ObjectStateManager
+                        .TransactionManager
+                        .WrappedEntities
+                        .TryGetValue(o, out relatedWrapper)
                 )
                 {
                     relatedWrapper = EntityWrapperFactory.WrapEntityUsingStateManager(
@@ -2850,11 +2854,9 @@ namespace System.Data.Objects
 
             foreach (NavigationProperty n in navigationProperties)
             {
-                RelatedEnd relatedEnd =
-                    this.WrappedEntity.RelationshipManager.GetRelatedEndInternal(
-                        n.RelationshipType.FullName,
-                        n.ToEndMember.Name
-                    );
+                RelatedEnd relatedEnd = this.WrappedEntity
+                    .RelationshipManager
+                    .GetRelatedEndInternal(n.RelationshipType.FullName, n.ToEndMember.Name);
                 Debug.Assert(relatedEnd != null, "relatedEnd is null");
 
                 object val = this.WrappedEntity.GetNavigationPropertyValue(relatedEnd);
@@ -2869,10 +2871,14 @@ namespace System.Data.Objects
                         if (collection == null)
                         {
                             throw new EntityException(
-                                System.Data.Entity.Strings.ObjectStateEntry_UnableToEnumerateCollection(
-                                    n.Name,
-                                    this.Entity.GetType().FullName
-                                )
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .ObjectStateEntry_UnableToEnumerateCollection(
+                                        n.Name,
+                                        this.Entity.GetType().FullName
+                                    )
                             );
                         }
                         foreach (object o in collection)
@@ -3203,10 +3209,12 @@ namespace System.Data.Objects
             foreach (var dependent in ForeignKeyDependents)
             {
                 EntityReference relatedEnd =
-                    WrappedEntity.RelationshipManager.GetRelatedEndInternal(
-                        dependent.Item1.ElementType.FullName,
-                        dependent.Item2.FromRole.Name
-                    ) as EntityReference;
+                    WrappedEntity
+                        .RelationshipManager
+                        .GetRelatedEndInternal(
+                            dependent.Item1.ElementType.FullName,
+                            dependent.Item2.FromRole.Name
+                        ) as EntityReference;
                 Debug.Assert(relatedEnd != null, "Expected non-null EntityReference to principal.");
                 relatedEnd.NullAllForeignKeys();
             }
@@ -3226,9 +3234,9 @@ namespace System.Data.Objects
                     || multiplicity == RelationshipMultiplicity.ZeroOrOne
                 )
                 {
-                    EntityKey targetKey = relationshipEntry.RelationshipWrapper.GetOtherEntityKey(
-                        EntityKey
-                    );
+                    EntityKey targetKey = relationshipEntry
+                        .RelationshipWrapper
+                        .GetOtherEntityKey(EntityKey);
                     EntityEntry relatedEntry = _cache.GetEntityEntry(targetKey);
                     // Relationships with KeyEntries don't count.
                     if (!relatedEntry.IsKeyEntry)
@@ -3256,9 +3264,9 @@ namespace System.Data.Objects
             )
             {
                 // Get state entry for other side of the relationship
-                EntityKey targetKey = relationshipEntry.RelationshipWrapper.GetOtherEntityKey(
-                    EntityKey
-                );
+                EntityKey targetKey = relationshipEntry
+                    .RelationshipWrapper
+                    .GetOtherEntityKey(EntityKey);
                 Debug.Assert(
                     (object)targetKey != null,
                     "EntityKey not on either side of relationship as expected"
@@ -3272,10 +3280,9 @@ namespace System.Data.Objects
                     //          we don't always want to preserve the EntityKey for every detached relationship, if the source entity itself isn't being detached
                     if (relationshipEntry.State != EntityState.Deleted)
                     {
-                        AssociationEndMember targetMember =
-                            relationshipEntry.RelationshipWrapper.GetAssociationEndMember(
-                                targetKey
-                            );
+                        AssociationEndMember targetMember = relationshipEntry
+                            .RelationshipWrapper
+                            .GetAssociationEndMember(targetKey);
                         // devnote: Since we know the target end of this relationship is a key entry, it has to be a reference, so just cast
                         EntityReference entityReference = (EntityReference)
                             relationshipManager.GetRelatedEndInternal(
@@ -3583,12 +3590,14 @@ namespace System.Data.Objects
                                     if (constraint.ToProperties[i].Name == pair.Key)
                                     {
                                         if (
-                                            !ByValueEqualityComparer.Default.Equals(
-                                                GetCurrentEntityValue(
-                                                    constraint.FromProperties[i].Name
-                                                ),
-                                                pair.Value
-                                            )
+                                            !ByValueEqualityComparer
+                                                .Default
+                                                .Equals(
+                                                    GetCurrentEntityValue(
+                                                        constraint.FromProperties[i].Name
+                                                    ),
+                                                    pair.Value
+                                                )
                                         )
                                         {
                                             throw EntityUtil.InconsistentReferentialConstraintProperties();
@@ -3626,9 +3635,11 @@ namespace System.Data.Objects
             {
                 // shadowState always  coms from materializer, just copy the shadowstate values
                 Debug.Assert(
-                    shadowValues.DataRecordInfo.RecordType.EdmType.Equals(
-                        _cacheTypeMetadata.CdmMetadata.EdmType
-                    ),
+                    shadowValues
+                        .DataRecordInfo
+                        .RecordType
+                        .EdmType
+                        .Equals(_cacheTypeMetadata.CdmMetadata.EdmType),
                     "different cspace metadata instance"
                 );
                 for (int ordinal = 0; ordinal < _cacheTypeMetadata.FieldCount; ordinal++)
@@ -3843,11 +3854,9 @@ namespace System.Data.Objects
                     throw EntityUtil.InvalidTypeForComplexTypeProperty("value");
                 }
 
-                newValue = _cache.ComplexTypeMaterializer.CreateComplex(
-                    newValueRecord,
-                    newValueRecord.DataRecordInfo,
-                    null
-                );
+                newValue = _cache
+                    .ComplexTypeMaterializer
+                    .CreateComplex(newValueRecord, newValueRecord.DataRecordInfo, null);
             }
 
             _wrappedEntity.SetCurrentValue(this, member, ordinal, userObject, newValue);
@@ -4298,10 +4307,12 @@ namespace System.Data.Objects
                 foreach (var dependent in ForeignKeyDependents)
                 {
                     EntityReference relatedEnd =
-                        WrappedEntity.RelationshipManager.GetRelatedEndInternal(
-                            dependent.Item1.ElementType.FullName,
-                            dependent.Item2.FromRole.Name
-                        ) as EntityReference;
+                        WrappedEntity
+                            .RelationshipManager
+                            .GetRelatedEndInternal(
+                                dependent.Item1.ElementType.FullName,
+                                dependent.Item2.FromRole.Name
+                            ) as EntityReference;
                     Debug.Assert(
                         relatedEnd != null,
                         "Expected non-null EntityReference to principal."
@@ -4768,12 +4779,12 @@ namespace System.Data.Objects
                         dependentPropsChecked = true;
                         foreach (EdmProperty dependentProp in principal.Item2.ToProperties)
                         {
-                            int dependentOrdinal =
-                                dependentEntry._cacheTypeMetadata.GetOrdinalforOLayerMemberName(
-                                    dependentProp.Name
-                                );
-                            StateManagerMemberMetadata member =
-                                dependentEntry._cacheTypeMetadata.Member(dependentOrdinal);
+                            int dependentOrdinal = dependentEntry
+                                ._cacheTypeMetadata
+                                .GetOrdinalforOLayerMemberName(dependentProp.Name);
+                            StateManagerMemberMetadata member = dependentEntry
+                                ._cacheTypeMetadata
+                                .Member(dependentOrdinal);
                             if (member.IsPartOfKey)
                             {
                                 // If the FK overlpas the PK then we can't set it for non-Added entities.

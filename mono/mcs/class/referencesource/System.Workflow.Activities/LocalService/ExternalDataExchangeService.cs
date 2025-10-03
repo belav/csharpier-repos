@@ -444,9 +444,9 @@ namespace System.Workflow.Activities
                 IPendingWork workHandler
             )
             {
-                WorkflowInstance workflowInstance = this.eds.Runtime.GetWorkflow(
-                    eventArgs.InstanceId
-                );
+                WorkflowInstance workflowInstance = this.eds
+                    .Runtime
+                    .GetWorkflow(eventArgs.InstanceId);
                 if (eventArgs.WaitForIdle)
                 {
                     workflowInstance.EnqueueItemOnIdle(queueName, message, workHandler, workItem);

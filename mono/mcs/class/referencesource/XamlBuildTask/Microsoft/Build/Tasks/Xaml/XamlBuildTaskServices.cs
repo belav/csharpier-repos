@@ -176,9 +176,13 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.ClassModifierNotSupported(classModifier))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.ClassModifierNotSupported(classModifier)
+                            )
+                        );
                 }
             }
             return true;
@@ -250,9 +254,13 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.FieldModifierNotSupported(memberModifier))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.FieldModifierNotSupported(memberModifier)
+                            )
+                        );
                 }
             }
             // Public is only the default modifier for properties, not for fields.
@@ -289,11 +297,13 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (buildTaskPath == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new LoggableException(
-                        new InvalidOperationException(SR.BuildTaskPathMustNotBeNull)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new LoggableException(
+                            new InvalidOperationException(SR.BuildTaskPathMustNotBeNull)
+                        )
+                    );
             }
 
             // Enable shadow copying in the Designer appdomain, so that we can continue to rebuild
@@ -397,9 +407,9 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (e.FileName == null)
                 {
-                    throw FxTrace.Exception.AsError(
-                        (new FileNotFoundException(e.Message, fullPath))
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError((new FileNotFoundException(e.Message, fullPath)));
                 }
                 else
                     throw;
@@ -724,9 +734,9 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     qualifiedName = name + "`" + xamlType.TypeArguments.Count;
                 }
-                XamlType resolvedType = xamlType.SchemaContext.GetXamlType(
-                    new XamlTypeName(@namespace, qualifiedName)
-                );
+                XamlType resolvedType = xamlType
+                    .SchemaContext
+                    .GetXamlType(new XamlTypeName(@namespace, qualifiedName));
                 if (resolvedType != null && resolvedType.UnderlyingType != null)
                 {
                     clrTypeName = resolvedType.UnderlyingType.FullName;
@@ -981,15 +991,15 @@ namespace Microsoft.Build.Tasks.Xaml
                     assemblyName = taskItem.GetMetadata("AssemblyName");
                     if (assemblyName != "" && assemblyFile != "")
                     {
-                        throw FxTrace.Exception.AsError(
-                            new LoggableException(SR.BothAssemblyNameAndFileSpecified)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(new LoggableException(SR.BothAssemblyNameAndFileSpecified));
                     }
                     if (assemblyName == "" && assemblyFile == "")
                     {
-                        throw FxTrace.Exception.AsError(
-                            new LoggableException(SR.AssemblyNameOrFileNotSpecified)
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(new LoggableException(SR.AssemblyNameOrFileNotSpecified));
                     }
 
                     extensionNames.Add(

@@ -527,9 +527,9 @@ namespace System.Reflection.Tests
                 "MethodWithOptionalDefaultOutInMarshalParam",
                 0
             );
-            CustomAttributeData attribute = parameterInfo.CustomAttributes.SingleOrDefault(a =>
-                a.AttributeType.Equals(attrType)
-            );
+            CustomAttributeData attribute = parameterInfo
+                .CustomAttributes
+                .SingleOrDefault(a => a.AttributeType.Equals(attrType));
             Assert.NotNull(attribute);
 
             Assert.NotNull(attribute);
@@ -562,9 +562,9 @@ namespace System.Reflection.Tests
                 "VirtualMethodWithCustomAttributes",
                 paramIndex
             );
-            CustomAttributeData attribute = parameterInfo.CustomAttributes.SingleOrDefault(a =>
-                a.AttributeType.Equals(typeof(MyAttribute))
-            );
+            CustomAttributeData attribute = parameterInfo
+                .CustomAttributes
+                .SingleOrDefault(a => a.AttributeType.Equals(typeof(MyAttribute)));
             Assert.Equal(exists, attribute != null);
 
             ICustomAttributeProvider prov = parameterInfo as ICustomAttributeProvider;
@@ -583,7 +583,8 @@ namespace System.Reflection.Tests
         {
             var parameterWithNullMetadataToken = typeof(int[])
                 .GetProperty(nameof(Array.Length))
-                .GetMethod.ReturnParameter;
+                .GetMethod
+                .ReturnParameter;
             Assert.Equal(
                 typeof(Attribute[]),
                 Attribute.GetCustomAttributes(parameterWithNullMetadataToken).GetType()
@@ -713,7 +714,8 @@ namespace System.Reflection.Tests
         private static MethodInfo GetMethod(Type type, string name)
         {
             return type.GetTypeInfo()
-                .DeclaredMethods.FirstOrDefault(methodInfo => methodInfo.Name.Equals(name));
+                .DeclaredMethods
+                .FirstOrDefault(methodInfo => methodInfo.Name.Equals(name));
         }
 
         private class CustomDateTimeConstantAttribute : UsableCustomConstantAttribute

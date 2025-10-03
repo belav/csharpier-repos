@@ -161,7 +161,8 @@ namespace Microsoft.Build.Internal
                     + string.Join(
                         Environment.NewLine,
                         project
-                            .Properties.OrderBy(p => p.Name)
+                            .Properties
+                            .OrderBy(p => p.Name)
                             .Where(p => p.IsImmutable)
                             .Select(p => string.Format("{0} = {1}", p.Name, p.EvaluatedValue))
                             .ToArray()
@@ -179,7 +180,8 @@ namespace Microsoft.Build.Internal
                     + string.Join(
                         Environment.NewLine,
                         project
-                            .Properties.OrderBy(p => p.Name)
+                            .Properties
+                            .OrderBy(p => p.Name)
                             .Where(p => !p.IsImmutable)
                             .Select(p => string.Format("{0} = {1}", p.Name, p.EvaluatedValue))
                             .ToArray()
@@ -197,7 +199,8 @@ namespace Microsoft.Build.Internal
                     + string.Join(
                         Environment.NewLine,
                         project
-                            .Items.OrderBy(i => i.ItemType)
+                            .Items
+                            .OrderBy(i => i.ItemType)
                             .Select(i => string.Format("{0} : {1}", i.ItemType, i.EvaluatedInclude))
                             .ToArray()
                     );
@@ -218,9 +221,9 @@ namespace Microsoft.Build.Internal
                 if (request.TargetNames == null)
                     args.Result.OverallResult =
                         args.CheckCancel() ? BuildResultCode.Failure
-                        : args.Result.ResultsByTarget.Any(p =>
-                            p.Value.ResultCode == TargetResultCode.Failure
-                        )
+                        : args.Result
+                            .ResultsByTarget
+                            .Any(p => p.Value.ResultCode == TargetResultCode.Failure)
                             ? BuildResultCode.Failure
                         : BuildResultCode.Success;
                 else
@@ -238,9 +241,9 @@ namespace Microsoft.Build.Internal
                     // FIXME: check .NET behavior, whether cancellation always results in failure.
                     args.Result.OverallResult =
                         args.CheckCancel() ? BuildResultCode.Failure
-                        : args.Result.ResultsByTarget.Any(p =>
-                            p.Value.ResultCode == TargetResultCode.Failure
-                        )
+                        : args.Result
+                            .ResultsByTarget
+                            .Any(p => p.Value.ResultCode == TargetResultCode.Failure)
                             ? BuildResultCode.Failure
                         : BuildResultCode.Success;
                 }
@@ -651,11 +654,9 @@ namespace Microsoft.Build.Internal
             var host =
                 request.HostServices == null
                     ? null
-                    : request.HostServices.GetHostObject(
-                        request.ProjectFullPath,
-                        target.Name,
-                        taskInstance.Name
-                    );
+                    : request
+                        .HostServices
+                        .GetHostObject(request.ProjectFullPath, target.Name, taskInstance.Name);
 
             // Create Task instance.
             var factoryIdentityParameters = new Dictionary<string, string>();
@@ -683,10 +684,12 @@ namespace Microsoft.Build.Internal
 
             // Prepare task parameters.
             var evaluator = new ExpressionEvaluator(project);
-            var evaluatedTaskParams = taskInstance.Parameters.Select(p => new KeyValuePair<
-                string,
-                string
-            >(p.Key, project.ExpandString(evaluator, p.Value)));
+            var evaluatedTaskParams = taskInstance
+                .Parameters
+                .Select(p => new KeyValuePair<string, string>(
+                    p.Key,
+                    project.ExpandString(evaluator, p.Value)
+                ));
 
             var requiredProps = task.GetType()
                 .GetProperties()
@@ -890,9 +893,11 @@ namespace Microsoft.Build.Internal
         {
             if (targetType == typeof(ITaskItem) || targetType.IsSubclassOf(typeof(ITaskItem)))
             {
-                var item = evaluator.EvaluatedTaskItems.FirstOrDefault(i =>
-                    string.Equals(i.ItemSpec, source.Trim(), StringComparison.OrdinalIgnoreCase)
-                );
+                var item = evaluator
+                    .EvaluatedTaskItems
+                    .FirstOrDefault(i =>
+                        string.Equals(i.ItemSpec, source.Trim(), StringComparison.OrdinalIgnoreCase)
+                    );
                 var ret = new TargetOutputTaskItem() { ItemSpec = source.Trim() };
                 if (item != null)
                     foreach (string name in item.MetadataNames)

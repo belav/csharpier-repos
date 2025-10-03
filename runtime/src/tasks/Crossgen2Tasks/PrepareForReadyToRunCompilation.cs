@@ -621,14 +621,12 @@ namespace Microsoft.NET.Build.Tasks
                 if (
                     !attributeTypeName.IsNil
                     && !attributeTypeNamespace.IsNil
-                    && mdReader.StringComparer.Equals(
-                        attributeTypeName,
-                        "ReferenceAssemblyAttribute"
-                    )
-                    && mdReader.StringComparer.Equals(
-                        attributeTypeNamespace,
-                        "System.Runtime.CompilerServices"
-                    )
+                    && mdReader
+                        .StringComparer
+                        .Equals(attributeTypeName, "ReferenceAssemblyAttribute")
+                    && mdReader
+                        .StringComparer
+                        .Equals(attributeTypeNamespace, "System.Runtime.CompilerServices")
                 )
                 {
                     return true;

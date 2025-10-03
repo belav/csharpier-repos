@@ -2734,20 +2734,22 @@ public static class EntityFrameworkQueryableExtensions
 
         return new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                    Expression.Call(
-                        instance: null,
-                        method: IncludeMethodInfo.MakeGenericMethod(
-                            typeof(TEntity),
-                            typeof(TProperty)
-                        ),
-                        arguments: new[]
-                        {
-                            source.Expression,
-                            Expression.Quote(navigationPropertyPath),
-                        }
+                ? source
+                    .Provider
+                    .CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: IncludeMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath),
+                            }
+                        )
                     )
-                )
                 : source
         );
     }
@@ -2760,20 +2762,22 @@ public static class EntityFrameworkQueryableExtensions
         where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                    Expression.Call(
-                        instance: null,
-                        method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
-                            typeof(TEntity),
-                            typeof(TProperty)
-                        ),
-                        arguments: new[]
-                        {
-                            source.Expression,
-                            Expression.Quote(navigationPropertyPath),
-                        }
+                ? source
+                    .Provider
+                    .CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: NotQuiteIncludeMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath),
+                            }
+                        )
                     )
-                )
                 : source
         );
 
@@ -2824,21 +2828,23 @@ public static class EntityFrameworkQueryableExtensions
         where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                    Expression.Call(
-                        instance: null,
-                        method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
-                            typeof(TEntity),
-                            typeof(TPreviousProperty),
-                            typeof(TProperty)
-                        ),
-                        arguments: new[]
-                        {
-                            source.Expression,
-                            Expression.Quote(navigationPropertyPath),
-                        }
+                ? source
+                    .Provider
+                    .CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: ThenIncludeAfterEnumerableMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TPreviousProperty),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath),
+                            }
+                        )
                     )
-                )
                 : source
         );
 
@@ -2868,21 +2874,23 @@ public static class EntityFrameworkQueryableExtensions
         where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
-                ? source.Provider.CreateQuery<TEntity>(
-                    Expression.Call(
-                        instance: null,
-                        method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
-                            typeof(TEntity),
-                            typeof(TPreviousProperty),
-                            typeof(TProperty)
-                        ),
-                        arguments: new[]
-                        {
-                            source.Expression,
-                            Expression.Quote(navigationPropertyPath),
-                        }
+                ? source
+                    .Provider
+                    .CreateQuery<TEntity>(
+                        Expression.Call(
+                            instance: null,
+                            method: ThenIncludeAfterReferenceMethodInfo.MakeGenericMethod(
+                                typeof(TEntity),
+                                typeof(TPreviousProperty),
+                                typeof(TProperty)
+                            ),
+                            arguments: new[]
+                            {
+                                source.Expression,
+                                Expression.Quote(navigationPropertyPath),
+                            }
+                        )
                     )
-                )
                 : source
         );
 
@@ -2949,14 +2957,16 @@ public static class EntityFrameworkQueryableExtensions
         Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
         return source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    instance: null,
-                    method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    arg0: source.Expression,
-                    arg1: Expression.Constant(navigationPropertyPath)
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: StringIncludeMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(navigationPropertyPath)
+                    )
                 )
-            )
             : source;
     }
 
@@ -2981,13 +2991,15 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> IgnoreAutoIncludes<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    instance: null,
-                    method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    arguments: source.Expression
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreAutoIncludesMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
                 )
-            )
             : source;
 
     #endregion
@@ -3012,13 +3024,15 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> IgnoreQueryFilters<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    instance: null,
-                    method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    arguments: source.Expression
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: IgnoreQueryFiltersMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
                 )
-            )
             : source;
 
     #endregion
@@ -3060,13 +3074,15 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> AsNoTracking<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    instance: null,
-                    method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    arguments: source.Expression
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
                 )
-            )
             : source;
 
     internal static readonly MethodInfo AsNoTrackingWithIdentityResolutionMethodInfo =
@@ -3106,15 +3122,17 @@ public static class EntityFrameworkQueryableExtensions
     )
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    instance: null,
-                    method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
-                        typeof(TEntity)
-                    ),
-                    arguments: source.Expression
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsNoTrackingWithIdentityResolutionMethodInfo.MakeGenericMethod(
+                            typeof(TEntity)
+                        ),
+                        arguments: source.Expression
+                    )
                 )
-            )
             : source;
 
     internal static readonly MethodInfo AsTrackingMethodInfo =
@@ -3143,13 +3161,15 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> AsTracking<TEntity>(this IQueryable<TEntity> source)
         where TEntity : class =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<TEntity>(
-                Expression.Call(
-                    instance: null,
-                    method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
-                    arguments: source.Expression
+            ? source
+                .Provider
+                .CreateQuery<TEntity>(
+                    Expression.Call(
+                        instance: null,
+                        method: AsTrackingMethodInfo.MakeGenericMethod(typeof(TEntity)),
+                        arguments: source.Expression
+                    )
                 )
-            )
             : source;
 
     /// <summary>
@@ -3238,14 +3258,16 @@ public static class EntityFrameworkQueryableExtensions
         Check.NotEmpty(tag, nameof(tag));
 
         return source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<T>(
-                Expression.Call(
-                    instance: null,
-                    method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
-                    arg0: source.Expression,
-                    arg1: Expression.Constant(tag)
+            ? source
+                .Provider
+                .CreateQuery<T>(
+                    Expression.Call(
+                        instance: null,
+                        method: TagWithMethodInfo.MakeGenericMethod(typeof(T)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(tag)
+                    )
                 )
-            )
             : source;
     }
 
@@ -3270,15 +3292,17 @@ public static class EntityFrameworkQueryableExtensions
         [NotParameterized] [CallerLineNumber] int lineNumber = 0
     ) =>
         source.Provider is EntityQueryProvider
-            ? source.Provider.CreateQuery<T>(
-                Expression.Call(
-                    instance: null,
-                    method: TagWithCallSiteMethodInfo.MakeGenericMethod(typeof(T)),
-                    arg0: source.Expression,
-                    arg1: Expression.Constant(filePath),
-                    arg2: Expression.Constant(lineNumber)
+            ? source
+                .Provider
+                .CreateQuery<T>(
+                    Expression.Call(
+                        instance: null,
+                        method: TagWithCallSiteMethodInfo.MakeGenericMethod(typeof(T)),
+                        arg0: source.Expression,
+                        arg1: Expression.Constant(filePath),
+                        arg2: Expression.Constant(lineNumber)
+                    )
                 )
-            )
             : source;
 
     #endregion

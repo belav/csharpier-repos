@@ -183,9 +183,10 @@ namespace System.Data
         private SerializationFormat _remotingFormat = SerializationFormat.Xml;
 
         private static int _objectTypeCount; // Bid counter
-        private readonly int _objectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        private readonly int _objectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Data.DataTable'/> class with no arguments.</para>
@@ -2370,12 +2371,9 @@ namespace System.Data
                                 // do this extra check only if the namespace is really going to change
                                 // inheritance-wise.
                                 if (
-                                    dataSet.Tables.Contains(
-                                        this.TableName,
-                                        realNamespace,
-                                        true,
-                                        true
-                                    )
+                                    dataSet
+                                        .Tables
+                                        .Contains(this.TableName, realNamespace, true, true)
                                 )
                                     throw ExceptionBuilder.DuplicateTableName2(
                                         this.TableName,
@@ -3029,9 +3027,9 @@ namespace System.Data
                     if (foreign.Table == foreign.RelatedTable)
                     {
                         ForeignKeyConstraint clonedConstraint = foreign.Clone(clone);
-                        Constraint oldConstraint = clone.Constraints.FindConstraint(
-                            clonedConstraint
-                        );
+                        Constraint oldConstraint = clone
+                            .Constraints
+                            .FindConstraint(clonedConstraint);
                         if (oldConstraint != null)
                         {
                             oldConstraint.ConstraintName = Constraints[j].ConstraintName;
@@ -5718,9 +5716,11 @@ namespace System.Data
                     { // CurrentVersion, and Deleted
                         if (loadIndexwithCurrentDeleted == null)
                         {
-                            loadIndexwithCurrentDeleted = this.primaryKey.Key.GetSortIndex(
-                                DataViewRowState.CurrentRows | DataViewRowState.Deleted
-                            );
+                            loadIndexwithCurrentDeleted = this.primaryKey
+                                .Key
+                                .GetSortIndex(
+                                    DataViewRowState.CurrentRows | DataViewRowState.Deleted
+                                );
                             Debug.Assert(
                                 loadIndexwithCurrentDeleted != null,
                                 "loadIndexwithCurrentDeleted should not be null"
@@ -5736,9 +5736,11 @@ namespace System.Data
                     { // CurrentVersion, and Deleted : OverwriteRow, PreserveCurrentValues
                         if (loadIndexwithOriginalAdded == null)
                         {
-                            loadIndexwithOriginalAdded = this.primaryKey.Key.GetSortIndex(
-                                DataViewRowState.OriginalRows | DataViewRowState.Added
-                            );
+                            loadIndexwithOriginalAdded = this.primaryKey
+                                .Key
+                                .GetSortIndex(
+                                    DataViewRowState.OriginalRows | DataViewRowState.Added
+                                );
                             Debug.Assert(
                                 loadIndexwithOriginalAdded != null,
                                 "loadIndexwithOriginalAdded should not be null"
@@ -6896,10 +6898,9 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader
+                                .NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
                             if (this.DataSet != null)
@@ -6986,10 +6987,9 @@ namespace System.Data
 
                             if (
                                 reader.LocalName == Keywords.XSD_SCHEMA
-                                && reader.NamespaceURI.StartsWith(
-                                    Keywords.XSD_NS_START,
-                                    StringComparison.Ordinal
-                                )
+                                && reader
+                                    .NamespaceURI
+                                    .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                             )
                             {
                                 if (this.DataSet != null)
@@ -7203,10 +7203,9 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader
+                                .NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
                             if (this.DataSet != null)
@@ -7326,10 +7325,9 @@ namespace System.Data
 
                         if (
                             reader.LocalName == Keywords.XSD_SCHEMA
-                            && reader.NamespaceURI.StartsWith(
-                                Keywords.XSD_NS_START,
-                                StringComparison.Ordinal
-                            )
+                            && reader
+                                .NamespaceURI
+                                .StartsWith(Keywords.XSD_NS_START, StringComparison.Ordinal)
                         )
                         {
                             if (this.DataSet != null)
@@ -7770,9 +7768,9 @@ namespace System.Data
                                         ForeignKeyConstraint newFKC = (ForeignKeyConstraint)
                                             fkc.Clone(destinationTable.DataSet);
                                         if (
-                                            !destinationTable.Constraints.Contains(
-                                                newFKC.ConstraintName
-                                            )
+                                            !destinationTable
+                                                .Constraints
+                                                .Contains(newFKC.ConstraintName)
                                         )
                                             destinationTable.Constraints.Add(newFKC); // we know that the dest table is already in the table
                                     }
@@ -8330,30 +8328,36 @@ namespace System.Data
                             && relatedRow.oldRecord != relatedRow.newRecord
                         )
                         {
-                            relatedRow.Table.EvaluateDependentExpressions(
-                                relatedRow.Table.dependentColumns,
-                                relatedRow,
-                                DataRowVersion.Original,
-                                null
-                            );
+                            relatedRow
+                                .Table
+                                .EvaluateDependentExpressions(
+                                    relatedRow.Table.dependentColumns,
+                                    relatedRow,
+                                    DataRowVersion.Original,
+                                    null
+                                );
                         }
                         if (relatedRow.newRecord != -1)
                         {
-                            relatedRow.Table.EvaluateDependentExpressions(
-                                relatedRow.Table.dependentColumns,
-                                relatedRow,
-                                DataRowVersion.Current,
-                                null
-                            );
+                            relatedRow
+                                .Table
+                                .EvaluateDependentExpressions(
+                                    relatedRow.Table.dependentColumns,
+                                    relatedRow,
+                                    DataRowVersion.Current,
+                                    null
+                                );
                         }
                         if (relatedRow.tempRecord != -1)
                         {
-                            relatedRow.Table.EvaluateDependentExpressions(
-                                relatedRow.Table.dependentColumns,
-                                relatedRow,
-                                DataRowVersion.Proposed,
-                                null
-                            );
+                            relatedRow
+                                .Table
+                                .EvaluateDependentExpressions(
+                                    relatedRow.Table.dependentColumns,
+                                    relatedRow,
+                                    DataRowVersion.Proposed,
+                                    null
+                                );
                         }
                     }
                 }
@@ -8395,24 +8399,21 @@ namespace System.Data
 
                     if (row.oldRecord != -1 && row.oldRecord != row.newRecord)
                     {
-                        column[row.oldRecord] = column.DataExpression.Evaluate(
-                            row,
-                            DataRowVersion.Original
-                        );
+                        column[row.oldRecord] = column
+                            .DataExpression
+                            .Evaluate(row, DataRowVersion.Original);
                     }
                     if (row.newRecord != -1)
                     {
-                        column[row.newRecord] = column.DataExpression.Evaluate(
-                            row,
-                            DataRowVersion.Current
-                        );
+                        column[row.newRecord] = column
+                            .DataExpression
+                            .Evaluate(row, DataRowVersion.Current);
                     }
                     if (row.tempRecord != -1)
                     {
-                        column[row.tempRecord] = column.DataExpression.Evaluate(
-                            row,
-                            DataRowVersion.Proposed
-                        );
+                        column[row.tempRecord] = column
+                            .DataExpression
+                            .Evaluate(row, DataRowVersion.Proposed);
                     }
                 }
             }

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context
-                .Document.GetRequiredSyntaxRootAsync(context.CancellationToken)
+                .Document
+                .GetRequiredSyntaxRootAsync(context.CancellationToken)
                 .ConfigureAwait(false);
             foreach (var diagnostic in context.Diagnostics)
             {

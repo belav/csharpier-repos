@@ -20,7 +20,8 @@ public class AuthorizationBuilderTests
             .SetFallbackPolicy(policy);
 
         var options = builder
-            .Services.BuildServiceProvider()
+            .Services
+            .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
 
@@ -40,7 +41,8 @@ public class AuthorizationBuilderTests
             .SetFallbackPolicy(null);
 
         var options = builder
-            .Services.BuildServiceProvider()
+            .Services
+            .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
 
@@ -59,7 +61,8 @@ public class AuthorizationBuilderTests
             .SetDefaultPolicy(policy);
 
         var options = builder
-            .Services.BuildServiceProvider()
+            .Services
+            .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
 
@@ -79,7 +82,8 @@ public class AuthorizationBuilderTests
             .SetInvokeHandlersAfterFailure(invoke);
 
         var options = builder
-            .Services.BuildServiceProvider()
+            .Services
+            .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
 
@@ -98,7 +102,8 @@ public class AuthorizationBuilderTests
             .AddPolicy("name", policy);
 
         var options = builder
-            .Services.BuildServiceProvider()
+            .Services
+            .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
 
@@ -116,7 +121,8 @@ public class AuthorizationBuilderTests
             .AddPolicy("name", p => p.RequireAssertion(_ => true));
 
         var options = builder
-            .Services.BuildServiceProvider()
+            .Services
+            .BuildServiceProvider()
             .GetRequiredService<IOptions<AuthorizationOptions>>()
             .Value;
 

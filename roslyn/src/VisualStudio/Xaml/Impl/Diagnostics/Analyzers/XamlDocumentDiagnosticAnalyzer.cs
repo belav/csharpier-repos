@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
             }
 
             return await XamlProjectService
-                .AnalyzerService.AnalyzeSyntaxAsync(document, cancellationToken)
+                .AnalyzerService
+                .AnalyzeSyntaxAsync(document, cancellationToken)
                 .ConfigureAwait(false);
         }
 
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Xaml.Diagnostics.Analyzers
             }
 
             return await XamlProjectService
-                .AnalyzerService.AnalyzeSemanticsAsync(document, cancellationToken)
+                .AnalyzerService
+                .AnalyzeSemanticsAsync(document, cancellationToken)
                 .ConfigureAwait(false);
         }
     }

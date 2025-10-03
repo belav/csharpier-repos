@@ -9444,10 +9444,9 @@ namespace MonoTests.System.Diagnostics
         {
             get
             {
-                return Registry.LocalMachine.OpenSubKey(
-                    @"SYSTEM\CurrentControlSet\Services\EventLog",
-                    true
-                );
+                return Registry
+                    .LocalMachine
+                    .OpenSubKey(@"SYSTEM\CurrentControlSet\Services\EventLog", true);
             }
         }
 

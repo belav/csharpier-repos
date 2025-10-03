@@ -1121,11 +1121,13 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
     public virtual async Task FromSqlRaw_annotations_do_not_affect_successive_calls(bool async)
     {
         using var context = CreateContext();
-        var query = context.Customers.FromSqlRaw(
-            NormalizeDelimitersInRawString(
-                "SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'"
-            )
-        );
+        var query = context
+            .Customers
+            .FromSqlRaw(
+                NormalizeDelimitersInRawString(
+                    "SELECT * FROM [Customers] WHERE [ContactName] LIKE '%z%'"
+                )
+            );
 
         var actual = async ? await query.ToArrayAsync() : query.ToArray();
 
@@ -1244,7 +1246,8 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
             Assert.Equal(ConnectionState.Open, connection.State);
 
             var query = context
-                .Customers.Include(v => v.Orders)
+                .Customers
+                .Include(v => v.Orders)
                 .Where(v => v.CustomerID == "MAMRFC");
 
             var actual = async ? await query.ToArrayAsync() : query.ToArray();
@@ -1267,10 +1270,14 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         using var context = CreateContext();
         var parameter = CreateDbParameter("@id", "ALFKI");
 
-        var query = context.Customers.FromSqlRaw(
-            NormalizeDelimitersInRawString("SELECT * FROM [Customers] WHERE [CustomerID] = @id"),
-            parameter
-        );
+        var query = context
+            .Customers
+            .FromSqlRaw(
+                NormalizeDelimitersInRawString(
+                    "SELECT * FROM [Customers] WHERE [CustomerID] = @id"
+                ),
+                parameter
+            );
 
         // ReSharper disable PossibleMultipleEnumeration
         var result1 = async ? await query.ToArrayAsync() : query.ToArray();
@@ -1447,7 +1454,8 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         var max = 10400;
 
         var query1 = context
-            .Orders.FromSqlInterpolated(
+            .Orders
+            .FromSqlInterpolated(
                 NormalizeDelimitersInInterpolatedString(
                     $"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"
                 )
@@ -1457,16 +1465,19 @@ AND (([UnitsInStock] + [UnitsOnOrder]) < [ReorderLevel])"
         var actual1 = async ? await query1.ToArrayAsync() : query1.ToArray();
 
         var query2 = context
-            .Orders.Where(o => o.OrderID <= max && query1.Contains(o.OrderID))
+            .Orders
+            .Where(o => o.OrderID <= max && query1.Contains(o.OrderID))
             .Select(o => o.OrderID);
 
         var actual2 = async ? await query2.ToArrayAsync() : query2.ToArray();
 
         var query3 = context
-            .Orders.Where(o =>
+            .Orders
+            .Where(o =>
                 o.OrderID <= max
                 && context
-                    .Orders.FromSqlInterpolated(
+                    .Orders
+                    .FromSqlInterpolated(
                         NormalizeDelimitersInInterpolatedString(
                             $"SELECT * FROM [Orders] WHERE [OrderID] >= {min}"
                         )
@@ -1920,10 +1931,12 @@ SELECT * FROM [Customers2]"
     {
         using var context = CreateContext();
         var city = "Seattle";
-        var fromSqlQuery = context.Customers.FromSqlRaw(
-            NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
-            CreateDbParameter("city", city)
-        );
+        var fromSqlQuery = context
+            .Customers
+            .FromSqlRaw(
+                NormalizeDelimitersInRawString(@"SELECT * FROM [Customers] WHERE [City] = {0}"),
+                CreateDbParameter("city", city)
+            );
 
         var query = fromSqlQuery.Intersect(fromSqlQuery);
 

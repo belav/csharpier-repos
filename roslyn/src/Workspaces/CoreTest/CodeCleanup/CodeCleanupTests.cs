@@ -451,19 +451,23 @@ End Module";
 
                     root = root.ReplaceToken(
                         previousToken,
-                        CSharp.SyntaxFactory.Identifier(
-                            previousToken.LeadingTrivia,
-                            previousToken.ValueText,
-                            previousToken.TrailingTrivia
-                        )
+                        CSharp
+                            .SyntaxFactory
+                            .Identifier(
+                                previousToken.LeadingTrivia,
+                                previousToken.ValueText,
+                                previousToken.TrailingTrivia
+                            )
                     );
                     root = root.ReplaceToken(
                         nextToken,
-                        CSharp.SyntaxFactory.Token(
-                            nextToken.LeadingTrivia,
-                            CSharp.CSharpExtensions.Kind(nextToken),
-                            nextToken.TrailingTrivia
-                        )
+                        CSharp
+                            .SyntaxFactory
+                            .Token(
+                                nextToken.LeadingTrivia,
+                                CSharp.CSharpExtensions.Kind(nextToken),
+                                nextToken.TrailingTrivia
+                            )
                     );
 
                     expectedResult = SpecializedCollections.EmptyEnumerable<TextSpan>();
@@ -483,10 +487,12 @@ End Module";
             string returnType = "void",
             string methodName = "Method"
         ) =>
-            CSharp.SyntaxFactory.MethodDeclaration(
-                CSharp.SyntaxFactory.ParseTypeName(returnType),
-                CSharp.SyntaxFactory.Identifier(methodName)
-            );
+            CSharp
+                .SyntaxFactory
+                .MethodDeclaration(
+                    CSharp.SyntaxFactory.ParseTypeName(returnType),
+                    CSharp.SyntaxFactory.Identifier(methodName)
+                );
 
         private static void VerifyRange(
             string codeWithMarker,

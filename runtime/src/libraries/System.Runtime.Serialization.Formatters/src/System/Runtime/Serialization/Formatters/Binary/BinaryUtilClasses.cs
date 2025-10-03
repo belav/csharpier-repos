@@ -410,22 +410,18 @@ namespace System.Runtime.Serialization.Formatters.Binary
                     Debug.Assert(_objectInfo!._objectManager != null);
                     if (_objectInfo._isSi)
                     {
-                        _objectInfo._objectManager.RecordDelayedFixup(
-                            parent._objectId,
-                            _memberName!,
-                            record._objectId
-                        );
+                        _objectInfo
+                            ._objectManager
+                            .RecordDelayedFixup(parent._objectId, _memberName!, record._objectId);
                     }
                     else
                     {
                         MemberInfo? memberInfo = _objectInfo.GetMemberInfo(_memberName);
                         if (memberInfo != null)
                         {
-                            _objectInfo._objectManager.RecordFixup(
-                                parent._objectId,
-                                memberInfo,
-                                record._objectId
-                            );
+                            _objectInfo
+                                ._objectManager
+                                .RecordFixup(parent._objectId, memberInfo, record._objectId);
                         }
                     }
                     break;

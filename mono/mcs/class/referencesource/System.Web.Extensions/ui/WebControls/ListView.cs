@@ -3904,9 +3904,9 @@ namespace System.Web.UI.WebControls
                 {
                     for (int i = 0; i < _groupsItemCreatedCount; i++)
                     {
-                        _groupsGroupPlaceholderContainer.Controls.RemoveAt(
-                            _groupsOriginalIndexOfGroupPlaceholderInContainer
-                        );
+                        _groupsGroupPlaceholderContainer
+                            .Controls
+                            .RemoveAt(_groupsOriginalIndexOfGroupPlaceholderInContainer);
                     }
                     _groupsItemCreatedCount = 0;
                 }
@@ -3919,9 +3919,9 @@ namespace System.Web.UI.WebControls
                 {
                     for (int i = 0; i < _noGroupsItemCreatedCount; i++)
                     {
-                        _noGroupsItemPlaceholderContainer.Controls.RemoveAt(
-                            _noGroupsOriginalIndexOfItemPlaceholderInContainer
-                        );
+                        _noGroupsItemPlaceholderContainer
+                            .Controls
+                            .RemoveAt(_noGroupsOriginalIndexOfItemPlaceholderInContainer);
                     }
                     _noGroupsItemCreatedCount = 0;
                 }

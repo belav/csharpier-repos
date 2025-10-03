@@ -29,13 +29,15 @@ namespace System.Net
             {
                 byte[] newBuffer = new byte[size];
 
-                System.Buffer.BlockCopy(
-                    buffer, // src
-                    offset, // src index
-                    newBuffer, // dest
-                    0, // dest index
-                    size
-                ); // total size to copy
+                System
+                    .Buffer
+                    .BlockCopy(
+                        buffer, // src
+                        offset, // src index
+                        newBuffer, // dest
+                        0, // dest index
+                        size
+                    ); // total size to copy
 
                 offset = 0;
                 buffer = newBuffer;

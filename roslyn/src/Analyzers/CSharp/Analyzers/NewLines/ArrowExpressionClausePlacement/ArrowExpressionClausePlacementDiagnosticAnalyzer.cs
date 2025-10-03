@@ -131,13 +131,15 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ArrowExpressionClausePlacement
                     return true;
 
                 if (
-                    nextToken.LeadingTrivia.Any(static t =>
-                        t.Kind()
-                            is SyntaxKind.IfDirectiveTrivia
-                                or SyntaxKind.ElseDirectiveTrivia
-                                or SyntaxKind.ElifDirectiveTrivia
-                                or SyntaxKind.EndIfDirectiveTrivia
-                    )
+                    nextToken
+                        .LeadingTrivia
+                        .Any(static t =>
+                            t.Kind()
+                                is SyntaxKind.IfDirectiveTrivia
+                                    or SyntaxKind.ElseDirectiveTrivia
+                                    or SyntaxKind.ElifDirectiveTrivia
+                                    or SyntaxKind.EndIfDirectiveTrivia
+                        )
                 )
                 {
                     return true;

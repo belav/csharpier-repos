@@ -1126,10 +1126,11 @@ namespace System.Web.UI.WebControls
 
             if (authenticateEventArgs.Authenticated)
             {
-                System.Web.Security.FormsAuthentication.SetAuthCookie(
-                    UserNameInternal,
-                    RememberMeSet
-                );
+                System
+                    .Web
+                    .Security
+                    .FormsAuthentication
+                    .SetAuthCookie(UserNameInternal, RememberMeSet);
 
                 OnLoggedIn(EventArgs.Empty);
 
@@ -1141,9 +1142,11 @@ namespace System.Web.UI.WebControls
 
                 if (FailureAction == LoginFailureAction.RedirectToLoginPage)
                 {
-                    System.Web.Security.FormsAuthentication.RedirectToLoginPage(
-                        _failureParameterName + "=1"
-                    );
+                    System
+                        .Web
+                        .Security
+                        .FormsAuthentication
+                        .RedirectToLoginPage(_failureParameterName + "=1");
                 }
 
                 ITextControl failureTextLabel = (ITextControl)TemplateContainer.FailureTextLabel;

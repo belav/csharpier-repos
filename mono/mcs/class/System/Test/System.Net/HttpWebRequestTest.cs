@@ -77,7 +77,8 @@ namespace MonoTests.System.Net
             Assert.AreEqual("OK", res.StatusDescription, "#B2");
 
             Assert.IsTrue(
-                res.Headers.Get("Content-Type")
+                res.Headers
+                    .Get("Content-Type")
                     .StartsWith("text/html; charset=", StringComparison.OrdinalIgnoreCase),
                 "#C1"
             );

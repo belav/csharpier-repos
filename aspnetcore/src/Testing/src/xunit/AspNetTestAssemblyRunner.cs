@@ -53,18 +53,20 @@ public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
                 foreach (var fixtureAttribute in fixturesAttributes)
                 {
                     object instance = null;
-                    var staticCreator = fixtureAttribute.FixtureType.GetMethod(
-                        name: "ForAssembly",
-                        bindingAttr: BindingFlags.Public | BindingFlags.Static,
-                        binder: null,
-                        types: new[] { typeof(Assembly) },
-                        modifiers: null
-                    );
+                    var staticCreator = fixtureAttribute
+                        .FixtureType
+                        .GetMethod(
+                            name: "ForAssembly",
+                            bindingAttr: BindingFlags.Public | BindingFlags.Static,
+                            binder: null,
+                            types: new[] { typeof(Assembly) },
+                            modifiers: null
+                        );
                     if (staticCreator is null)
                     {
-                        var ctorWithDiagnostics = fixtureAttribute.FixtureType.GetConstructor(
-                            new[] { typeof(IMessageSink) }
-                        );
+                        var ctorWithDiagnostics = fixtureAttribute
+                            .FixtureType
+                            .GetConstructor(new[] { typeof(IMessageSink) });
                         if (ctorWithDiagnostics is null)
                         {
                             instance = Activator.CreateInstance(fixtureAttribute.FixtureType);

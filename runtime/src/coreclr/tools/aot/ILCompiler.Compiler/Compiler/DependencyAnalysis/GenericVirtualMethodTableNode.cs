@@ -65,11 +65,12 @@ namespace ILCompiler.DependencyAnalysis
             MethodDesc openCallingMethod = callingMethod.GetTypicalMethodDefinition();
             MethodDesc openImplementationMethod = implementationMethod.GetTypicalMethodDefinition();
 
-            var openCallingMethodNameAndSig = factory.NativeLayout.MethodNameAndSignatureVertex(
-                openCallingMethod
-            );
-            var openImplementationMethodNameAndSig =
-                factory.NativeLayout.MethodNameAndSignatureVertex(openImplementationMethod);
+            var openCallingMethodNameAndSig = factory
+                .NativeLayout
+                .MethodNameAndSignatureVertex(openCallingMethod);
+            var openImplementationMethodNameAndSig = factory
+                .NativeLayout
+                .MethodNameAndSignatureVertex(openImplementationMethod);
 
             dependencies.Add(
                 new DependencyListEntry(
@@ -162,9 +163,11 @@ namespace ILCompiler.DependencyAnalysis
                         nativeFormatWriter.GetUnsignedConstant(targetTypeId)
                     );
 
-                    var nameAndSig = factory.NativeLayout.PlacedSignatureVertex(
-                        factory.NativeLayout.MethodNameAndSignatureVertex(callingMethod)
-                    );
+                    var nameAndSig = factory
+                        .NativeLayout
+                        .PlacedSignatureVertex(
+                            factory.NativeLayout.MethodNameAndSignatureVertex(callingMethod)
+                        );
                     vertex = nativeFormatWriter.GetTuple(
                         vertex,
                         nativeFormatWriter.GetUnsignedConstant(
@@ -172,9 +175,11 @@ namespace ILCompiler.DependencyAnalysis
                         )
                     );
 
-                    nameAndSig = factory.NativeLayout.PlacedSignatureVertex(
-                        factory.NativeLayout.MethodNameAndSignatureVertex(implementationMethod)
-                    );
+                    nameAndSig = factory
+                        .NativeLayout
+                        .PlacedSignatureVertex(
+                            factory.NativeLayout.MethodNameAndSignatureVertex(implementationMethod)
+                        );
                     vertex = nativeFormatWriter.GetTuple(
                         vertex,
                         nativeFormatWriter.GetUnsignedConstant(

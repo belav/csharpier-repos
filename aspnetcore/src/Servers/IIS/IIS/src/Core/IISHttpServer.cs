@@ -254,11 +254,13 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            context?.Server._logger.LogError(
-                0,
-                ex,
-                $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnDisconnect)}."
-            );
+            context
+                ?.Server._logger
+                .LogError(
+                    0,
+                    ex,
+                    $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnDisconnect)}."
+                );
         }
     }
 
@@ -285,11 +287,13 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            context?.Server._logger.LogError(
-                0,
-                ex,
-                $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnAsyncCompletion)}."
-            );
+            context
+                ?.Server._logger
+                .LogError(
+                    0,
+                    ex,
+                    $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnAsyncCompletion)}."
+                );
 
             return NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
         }

@@ -46,7 +46,8 @@ public class MultiThreadingIssues
 
         for (int i = 0; i < threadCount; i++)
         {
-            Task.Factory.StartNew(doMapping)
+            Task.Factory
+                .StartNew(doMapping)
                 .ContinueWith(a =>
                 {
                     if (Interlocked.Increment(ref _done) == threadCount)

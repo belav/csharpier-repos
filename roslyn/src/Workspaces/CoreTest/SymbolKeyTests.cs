@@ -128,15 +128,14 @@ public class C
     void N(nuint x);
 }
 ";
-            var netstandardReferences =
-                await ReferenceAssemblies.NetStandard.NetStandard20.ResolveAsync(
-                    LanguageNames.CSharp,
-                    cancellationToken: default
-                );
-            var netcoreReferences = await ReferenceAssemblies.Net.Net70.ResolveAsync(
-                LanguageNames.CSharp,
-                cancellationToken: default
-            );
+            var netstandardReferences = await ReferenceAssemblies
+                .NetStandard
+                .NetStandard20
+                .ResolveAsync(LanguageNames.CSharp, cancellationToken: default);
+            var netcoreReferences = await ReferenceAssemblies
+                .Net
+                .Net70
+                .ResolveAsync(LanguageNames.CSharp, cancellationToken: default);
 
             var compilation1 = GetCompilation(
                 source,
@@ -488,7 +487,8 @@ public class C
             var b = (
                 (IMethodSymbol)
                     compilation1
-                        .GlobalNamespace.GetTypeMembers("C")
+                        .GlobalNamespace
+                        .GetTypeMembers("C")
                         .Single()
                         .GetMembers("M")
                         .Single()
@@ -521,7 +521,8 @@ public class C
             var b = (
                 (IMethodSymbol)
                     compilation1
-                        .GlobalNamespace.GetTypeMembers("C")
+                        .GlobalNamespace
+                        .GetTypeMembers("C")
                         .Single()
                         .GetMembers("M")
                         .Single()
@@ -989,7 +990,8 @@ public class A<T1>
                 .OfType<INamedTypeSymbol>()
                 .Where(n => !n.IsImplicitlyDeclared)
                 .Single()
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             TestRoundTrip(typeParameter, compilation);
         }
@@ -1014,7 +1016,8 @@ public class A<T1>
                 .GetMembers("M")
                 .OfType<IMethodSymbol>()
                 .Single()
-                .TypeParameters.Single();
+                .TypeParameters
+                .Single();
 
             TestRoundTrip(typeParameter, compilation);
         }
@@ -1769,20 +1772,16 @@ public class C
             if (language == LanguageNames.CSharp)
             {
                 var tree = CSharp.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return CSharp.CSharpCompilation.Create(
-                    "Test",
-                    syntaxTrees: new[] { tree },
-                    references: references
-                );
+                return CSharp
+                    .CSharpCompilation
+                    .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
             else if (language == LanguageNames.VisualBasic)
             {
                 var tree = VisualBasic.SyntaxFactory.ParseSyntaxTree(source, path: path);
-                return VisualBasic.VisualBasicCompilation.Create(
-                    "Test",
-                    syntaxTrees: new[] { tree },
-                    references: references
-                );
+                return VisualBasic
+                    .VisualBasicCompilation
+                    .Create("Test", syntaxTrees: new[] { tree }, references: references);
             }
 
             throw new NotSupportedException();

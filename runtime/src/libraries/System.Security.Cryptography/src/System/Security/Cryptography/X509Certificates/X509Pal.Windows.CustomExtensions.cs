@@ -24,10 +24,9 @@ namespace System.Security.Cryptography.X509Certificates
                     pbData = new IntPtr((byte*)&keyUsagesAsShort),
                     cUnusedBits = 0,
                 };
-                return Interop.crypt32.EncodeObject(
-                    CryptDecodeObjectStructType.X509_KEY_USAGE,
-                    &blob
-                );
+                return Interop
+                    .crypt32
+                    .EncodeObject(CryptDecodeObjectStructType.X509_KEY_USAGE, &blob);
             }
         }
 
@@ -264,15 +263,17 @@ namespace System.Security.Cryptography.X509Certificates
                             int cb = 20;
                             byte[] buffer = new byte[cb];
                             if (
-                                !Interop.Crypt32.CryptHashPublicKeyInfo(
-                                    IntPtr.Zero,
-                                    AlgId.CALG_SHA1,
-                                    0,
-                                    Interop.Crypt32.CertEncodingType.All,
-                                    ref publicKeyInfo,
-                                    buffer,
-                                    ref cb
-                                )
+                                !Interop
+                                    .Crypt32
+                                    .CryptHashPublicKeyInfo(
+                                        IntPtr.Zero,
+                                        AlgId.CALG_SHA1,
+                                        0,
+                                        Interop.Crypt32.CertEncodingType.All,
+                                        ref publicKeyInfo,
+                                        buffer,
+                                        ref cb
+                                    )
                             )
                                 throw Marshal.GetHRForLastWin32Error().ToCryptographicException();
                             if (cb < buffer.Length)

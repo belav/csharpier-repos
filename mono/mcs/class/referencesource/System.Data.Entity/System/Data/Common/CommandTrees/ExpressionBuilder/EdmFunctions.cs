@@ -35,22 +35,22 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             Debug.Assert(!string.IsNullOrEmpty(functionName), "Function name must not be null");
 
             List<EdmFunction> functions = new List<EdmFunction>(
-                System.Linq.Enumerable.Where(
-                    EdmProviderManifest.Instance.GetStoreFunctions(),
-                    func => string.Equals(func.Name, functionName, StringComparison.Ordinal)
-                )
+                System
+                    .Linq
+                    .Enumerable
+                    .Where(
+                        EdmProviderManifest.Instance.GetStoreFunctions(),
+                        func => string.Equals(func.Name, functionName, StringComparison.Ordinal)
+                    )
             );
 
             EdmFunction foundFunction = null;
             bool ambiguous = false;
             if (functions.Count > 0)
             {
-                foundFunction = EntitySql.FunctionOverloadResolver.ResolveFunctionOverloads(
-                    functions,
-                    argumentTypes,
-                    false,
-                    out ambiguous
-                );
+                foundFunction = EntitySql
+                    .FunctionOverloadResolver
+                    .ResolveFunctionOverloads(functions, argumentTypes, false, out ambiguous);
                 if (ambiguous)
                 {
                     throw EntityUtil.Argument(

@@ -241,7 +241,10 @@ namespace MonoTests.System.Data.OleDb
             }
 
             //
-            ((IDbDataAdapter)dbDA).SelectCommand.Transaction.Commit();
+            ((IDbDataAdapter)dbDA)
+                .SelectCommand
+                .Transaction
+                .Commit();
 
             //close connection
             if (((IDbDataAdapter)dbDA).SelectCommand.Connection.State != ConnectionState.Closed)

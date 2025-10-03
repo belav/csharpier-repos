@@ -50,7 +50,10 @@ namespace System.ServiceModel
             Type contractType =
                 channelDispatcher != null
                     ? channelDispatcher
-                        .Host.ImplementedContracts.Values.First(hcd =>
+                        .Host
+                        .ImplementedContracts
+                        .Values
+                        .First(hcd =>
                             hcd.Name == ed.ContractName && hcd.Namespace == ed.ContractNamespace
                         )
                         .ContractType

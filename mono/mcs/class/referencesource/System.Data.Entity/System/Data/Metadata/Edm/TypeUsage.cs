@@ -446,11 +446,10 @@ namespace System.Data.Metadata.Edm
                     MetadataCollection<Facet> facets = new MetadataCollection<Facet>(GetFacets());
                     // we never modify the collection so we can set it readonly from the start
                     facets.SetReadOnly();
-                    System.Threading.Interlocked.CompareExchange(
-                        ref _facets,
-                        facets.AsReadOnlyMetadataCollection(),
-                        null
-                    );
+                    System
+                        .Threading
+                        .Interlocked
+                        .CompareExchange(ref _facets, facets.AsReadOnlyMetadataCollection(), null);
                 }
                 return _facets;
             }
@@ -496,9 +495,10 @@ namespace System.Data.Metadata.Edm
                 }
                 else if (Helper.IsRefType(edmType))
                 {
-                    System.Diagnostics.Debug.Assert(
-                        ((RefType)edmType).ElementType.DataSpace == DataSpace.CSpace
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(((RefType)edmType).ElementType.DataSpace == DataSpace.CSpace);
                     result = this;
                 }
                 else if (Helper.IsPrimitiveType(edmType))
@@ -508,9 +508,11 @@ namespace System.Data.Metadata.Edm
                     if (result == null)
                     {
                         throw EntityUtil.ProviderIncompatible(
-                            System.Data.Entity.Strings.Mapping_ProviderReturnsNullType(
-                                this.ToString()
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .Mapping_ProviderReturnsNullType(this.ToString())
                         );
                     }
 
@@ -528,10 +530,10 @@ namespace System.Data.Metadata.Edm
                 }
                 else
                 {
-                    System.Diagnostics.Debug.Assert(
-                        false,
-                        "Unexpected type found in entity data reader"
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(false, "Unexpected type found in entity data reader");
                     return null;
                 }
                 System.Threading.Interlocked.CompareExchange(ref _modelTypeUsage, result, null);

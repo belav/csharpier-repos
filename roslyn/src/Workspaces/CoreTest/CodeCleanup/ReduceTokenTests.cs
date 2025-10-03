@@ -1767,8 +1767,10 @@ End Module
 
             try
             {
-                System.Threading.Thread.CurrentThread.CurrentCulture =
-                    System.Globalization.CultureInfo.CreateSpecificCulture("de-DE");
+                System.Threading.Thread.CurrentThread.CurrentCulture = System
+                    .Globalization
+                    .CultureInfo
+                    .CreateSpecificCulture("de-DE");
 
                 var code =
                     @"[|

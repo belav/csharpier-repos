@@ -51,9 +51,11 @@ namespace Tracing.Tests.ReverseValidation
                                 config,
                                 out var sessionId
                             );
-                            Logger.logger.Log(
-                                $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
-                            );
+                            Logger
+                                .logger
+                                .Log(
+                                    $"Started EventPipeSession over standard connection with session id: 0x{sessionId:x}"
+                                );
                             // using var source = new EventPipeEventSource(stream);
                             using var memroyStream = new MemoryStream();
                             Task readerTask = stream.CopyToAsync(memroyStream); //Task.Run(() => source.Process());

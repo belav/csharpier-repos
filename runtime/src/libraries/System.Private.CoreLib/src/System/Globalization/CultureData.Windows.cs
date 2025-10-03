@@ -109,11 +109,13 @@ namespace System.Globalization
 
                 // Specific locale name is whatever ResolveLocaleName (win7+) returns.
                 // (Buffer has our name in it, and we can recycle that because windows resolves it before writing to the buffer)
-                result = Interop.Kernel32.ResolveLocaleName(
-                    realNameBuffer,
-                    pBuffer,
-                    Interop.Kernel32.LOCALE_NAME_MAX_LENGTH
-                );
+                result = Interop
+                    .Kernel32
+                    .ResolveLocaleName(
+                        realNameBuffer,
+                        pBuffer,
+                        Interop.Kernel32.LOCALE_NAME_MAX_LENGTH
+                    );
 
                 // 0 is failure, 1 is invariant (""), which we expect
                 if (result < 1)
@@ -191,13 +193,15 @@ namespace System.Globalization
                 int geoIsoIdLength;
                 fixed (char* pGeoIsoId = geoIso2Letters)
                 {
-                    geoIsoIdLength = Interop.Kernel32.GetGeoInfo(
-                        geoId,
-                        Interop.Kernel32.GEO_ISO2,
-                        pGeoIsoId,
-                        geoIso2Letters.Length,
-                        0
-                    );
+                    geoIsoIdLength = Interop
+                        .Kernel32
+                        .GetGeoInfo(
+                            geoId,
+                            Interop.Kernel32.GEO_ISO2,
+                            pGeoIsoId,
+                            geoIso2Letters.Length,
+                            0
+                        );
                 }
 
                 if (geoIsoIdLength != 0)
@@ -230,12 +234,14 @@ namespace System.Globalization
             }
 
             char* pBuffer = stackalloc char[Interop.Kernel32.LOCALE_NAME_MAX_LENGTH + 1]; // +1 for the null termination
-            int length = Interop.Kernel32.LCIDToLocaleName(
-                culture,
-                pBuffer,
-                Interop.Kernel32.LOCALE_NAME_MAX_LENGTH + 1,
-                Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES
-            );
+            int length = Interop
+                .Kernel32
+                .LCIDToLocaleName(
+                    culture,
+                    pBuffer,
+                    Interop.Kernel32.LOCALE_NAME_MAX_LENGTH + 1,
+                    Interop.Kernel32.LOCALE_ALLOW_NEUTRAL_NAMES
+                );
 
             if (length > 0)
             {

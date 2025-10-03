@@ -64,9 +64,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (persistenceProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "persistenceProvider"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("persistenceProvider");
             }
 
             if (contextManager == null)
@@ -76,9 +76,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (runtimeValidator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "runtimeValidator"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("runtimeValidator");
             }
 
             Fx.Assert(operationTimeout > TimeSpan.Zero, "Timeout needs to be greater than zero.");
@@ -113,31 +113,39 @@ namespace System.ServiceModel.Dispatcher
 
             if (concurrencyMode != ConcurrencyMode.Single)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.AbortInstanceRequiresSingle))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.AbortInstanceRequiresSingle)
+                        )
+                    );
             }
 
             if (this.saveStateInOperationTransaction)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.CannotAbortWithSaveStateInTransaction)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.CannotAbortWithSaveStateInTransaction)
+                        )
+                    );
             }
 
             if (this.markedForCompletion)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.DurableOperationMethodInvalid,
-                            "AbortInstance",
-                            "CompleteInstance"
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.DurableOperationMethodInvalid,
+                                "AbortInstance",
+                                "CompleteInstance"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.abortInstance = true;
@@ -350,15 +358,17 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.abortInstance)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(
-                            SR2.DurableOperationMethodInvalid,
-                            "CompleteInstance",
-                            "AbortInstance"
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.DurableOperationMethodInvalid,
+                                "CompleteInstance",
+                                "AbortInstance"
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.markedForCompletion = true;
@@ -370,9 +380,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.markedForCompletion)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InstanceNotFoundException(this.InstanceId)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new InstanceNotFoundException(this.InstanceId));
                 }
 
                 if (this.instance == null)
@@ -675,9 +685,11 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     DurableErrorHandler.CleanUpInstanceContextAtOperationCompletion();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FaultException(new DurableDispatcherAddressingFault())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new FaultException(new DurableDispatcherAddressingFault())
+                        );
                 }
             }
 
@@ -737,11 +749,13 @@ namespace System.ServiceModel.Dispatcher
                                     )
                                 )
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginUnlock(
-                                        this.durableInstance.operationTimeout,
-                                        unlockCallback,
-                                        this
-                                    );
+                                    result = this.durableInstance
+                                        .lockingProvider
+                                        .BeginUnlock(
+                                            this.durableInstance.operationTimeout,
+                                            unlockCallback,
+                                            this
+                                        );
                                 }
                             }
                             break;
@@ -753,12 +767,14 @@ namespace System.ServiceModel.Dispatcher
                                 )
                             )
                             {
-                                result = this.durableInstance.provider.BeginDelete(
-                                    this.durableInstance.Instance,
-                                    this.durableInstance.operationTimeout,
-                                    deleteCallback,
-                                    this
-                                );
+                                result = this.durableInstance
+                                    .provider
+                                    .BeginDelete(
+                                        this.durableInstance.Instance,
+                                        this.durableInstance.operationTimeout,
+                                        deleteCallback,
+                                        this
+                                    );
                             }
                             break;
                         case OperationType.Create:
@@ -771,22 +787,26 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (this.durableInstance.lockingProvider != null)
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginCreate(
-                                        this.durableInstance.Instance,
-                                        this.durableInstance.operationTimeout,
-                                        disposeInstace,
-                                        createCallback,
-                                        this
-                                    );
+                                    result = this.durableInstance
+                                        .lockingProvider
+                                        .BeginCreate(
+                                            this.durableInstance.Instance,
+                                            this.durableInstance.operationTimeout,
+                                            disposeInstace,
+                                            createCallback,
+                                            this
+                                        );
                                 }
                                 else
                                 {
-                                    result = this.durableInstance.provider.BeginCreate(
-                                        this.durableInstance.Instance,
-                                        this.durableInstance.operationTimeout,
-                                        createCallback,
-                                        this
-                                    );
+                                    result = this.durableInstance
+                                        .provider
+                                        .BeginCreate(
+                                            this.durableInstance.Instance,
+                                            this.durableInstance.operationTimeout,
+                                            createCallback,
+                                            this
+                                        );
                                 }
                             }
                             break;
@@ -800,22 +820,26 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (this.durableInstance.lockingProvider != null)
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginUpdate(
-                                        this.durableInstance.Instance,
-                                        this.durableInstance.operationTimeout,
-                                        disposeInstace,
-                                        updateCallback,
-                                        this
-                                    );
+                                    result = this.durableInstance
+                                        .lockingProvider
+                                        .BeginUpdate(
+                                            this.durableInstance.Instance,
+                                            this.durableInstance.operationTimeout,
+                                            disposeInstace,
+                                            updateCallback,
+                                            this
+                                        );
                                 }
                                 else
                                 {
-                                    result = this.durableInstance.provider.BeginUpdate(
-                                        this.durableInstance.Instance,
-                                        this.durableInstance.operationTimeout,
-                                        updateCallback,
-                                        this
-                                    );
+                                    result = this.durableInstance
+                                        .provider
+                                        .BeginUpdate(
+                                            this.durableInstance.Instance,
+                                            this.durableInstance.operationTimeout,
+                                            updateCallback,
+                                            this
+                                        );
                                 }
                             }
                             break;
@@ -1023,20 +1047,24 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (this.durableInstance.lockingProvider != null)
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginLoad(
-                                        this.durableInstance.operationTimeout,
-                                        true,
-                                        loadCallback,
-                                        this
-                                    );
+                                    result = this.durableInstance
+                                        .lockingProvider
+                                        .BeginLoad(
+                                            this.durableInstance.operationTimeout,
+                                            true,
+                                            loadCallback,
+                                            this
+                                        );
                                 }
                                 else
                                 {
-                                    result = this.durableInstance.provider.BeginLoad(
-                                        this.durableInstance.operationTimeout,
-                                        loadCallback,
-                                        this
-                                    );
+                                    result = this.durableInstance
+                                        .provider
+                                        .BeginLoad(
+                                            this.durableInstance.operationTimeout,
+                                            loadCallback,
+                                            this
+                                        );
                                 }
                             }
 
@@ -1069,9 +1097,9 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (result != null)
                         {
-                            this.durableInstance.instance = this.durableInstance.provider.EndLoad(
-                                result
-                            );
+                            this.durableInstance.instance = this.durableInstance
+                                .provider
+                                .EndLoad(result);
                         }
 
                         Fx.Assert(
@@ -1120,8 +1148,10 @@ namespace System.ServiceModel.Dispatcher
                 {
                     try
                     {
-                        startResult.durableInstance.instance =
-                            startResult.durableInstance.provider.EndLoad(result);
+                        startResult.durableInstance.instance = startResult
+                            .durableInstance
+                            .provider
+                            .EndLoad(result);
 
                         Fx.Assert(
                             startResult.durableInstance.instance != null,
@@ -1175,9 +1205,9 @@ namespace System.ServiceModel.Dispatcher
                     && Transaction.Current != null
                 )
                 {
-                    this.durableInstance.clonedTransaction = Transaction.Current.DependentClone(
-                        DependentCloneOption.BlockCommitUntilComplete
-                    );
+                    this.durableInstance.clonedTransaction = Transaction
+                        .Current
+                        .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
                 }
             }
 

@@ -93,10 +93,9 @@ namespace Roslyn.Utilities
                     var name = (string)
                         _ResolveEventArgs.get_Name.Invoke(resolveEventArgs, Array.Empty<object>());
                     var requestingAssembly = (Assembly)
-                        _ResolveEventArgs.get_RequestingAssembly.Invoke(
-                            resolveEventArgs,
-                            Array.Empty<object>()
-                        );
+                        _ResolveEventArgs
+                            .get_RequestingAssembly
+                            .Invoke(resolveEventArgs, Array.Empty<object>());
 
                     return _handler(name, requestingAssembly);
                 }

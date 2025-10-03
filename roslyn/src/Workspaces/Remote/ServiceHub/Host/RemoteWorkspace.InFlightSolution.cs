@@ -181,10 +181,9 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 // If we're going away, we better find ourself in the mapping for this checksum.
                 Contract.ThrowIfFalse(
-                    _workspace._solutionChecksumToSolution.TryGetValue(
-                        SolutionChecksum,
-                        out var existingSolution
-                    )
+                    _workspace
+                        ._solutionChecksumToSolution
+                        .TryGetValue(SolutionChecksum, out var existingSolution)
                 );
                 Contract.ThrowIfFalse(existingSolution == this);
 

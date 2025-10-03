@@ -26,24 +26,28 @@ namespace Internal.Cryptography.Pal.Windows
             SafeCryptMsgHandle? hCryptMsg = null;
             try
             {
-                hCryptMsg = Interop.Crypt32.CryptMsgOpenToDecode(
-                    MsgEncodingType.All,
-                    0,
-                    0,
-                    IntPtr.Zero,
-                    IntPtr.Zero,
-                    IntPtr.Zero
-                );
+                hCryptMsg = Interop
+                    .Crypt32
+                    .CryptMsgOpenToDecode(
+                        MsgEncodingType.All,
+                        0,
+                        0,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
                 if (hCryptMsg == null || hCryptMsg.IsInvalid)
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
 
                 if (
-                    !Interop.Crypt32.CryptMsgUpdate(
-                        hCryptMsg,
-                        ref MemoryMarshal.GetReference(encodedMessage),
-                        encodedMessage.Length,
-                        fFinal: true
-                    )
+                    !Interop
+                        .Crypt32
+                        .CryptMsgUpdate(
+                            hCryptMsg,
+                            ref MemoryMarshal.GetReference(encodedMessage),
+                            encodedMessage.Length,
+                            fFinal: true
+                        )
                 )
                 {
                     throw Marshal.GetLastPInvokeError().ToCryptographicException();
@@ -74,9 +78,9 @@ namespace Internal.Cryptography.Pal.Windows
                         contentEncryptionAlgorithmAsn.Algorithm = contentEncryptionAlgorithm
                             .Oid
                             .Value!;
-                        contentEncryptionAlgorithmAsn.Parameters = (
-                            *pCryptAlgorithmIdentifier
-                        ).Parameters.ToByteArray();
+                        contentEncryptionAlgorithmAsn.Parameters = (*pCryptAlgorithmIdentifier)
+                            .Parameters
+                            .ToByteArray();
                     }
                 }
 

@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         )
         {
             var composition = EditorTestCompositions
-                .EditorFeatures.RemoveParts(typeof(MockWorkspaceEventListenerProvider))
+                .EditorFeatures
+                .RemoveParts(typeof(MockWorkspaceEventListenerProvider))
                 .AddParts(typeof(MockHostWorkspaceProvider), typeof(MockManagedHotReloadService))
                 .AddParts(additionalParts);
 
@@ -636,7 +637,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                 if (
                     context
-                        .AnalyzerConfigOptions.GetOptions(syntaxTree)
+                        .AnalyzerConfigOptions
+                        .GetOptions(syntaxTree)
                         .TryGetValue("enc_generator_output", out var optionValue)
                 )
                 {
@@ -1279,10 +1281,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Assert.False(designTimeOnlyDocument2.State.SupportsEditAndContinue());
             Assert.True(designTimeOnlyDocument2.Project.SupportsEditAndContinue());
 
-            var activeStatementMap =
-                await debuggingSession.EditSession.BaseActiveStatements.GetValueAsync(
-                    CancellationToken.None
-                );
+            var activeStatementMap = await debuggingSession
+                .EditSession
+                .BaseActiveStatements
+                .GetValueAsync(CancellationToken.None);
             Assert.NotEmpty(activeStatementMap.DocumentPathMap);
 
             // Active statements in design-time documents should be left unchanged.
@@ -1982,8 +1984,9 @@ class C1
 
             EnterBreakState(debuggingSession);
 
-            var (document, state) =
-                await debuggingSession.LastCommittedSolution.GetDocumentAndStateAsync(
+            var (document, state) = await debuggingSession
+                .LastCommittedSolution
+                .GetDocumentAndStateAsync(
                     documentId,
                     currentDocument: null,
                     CancellationToken.None
@@ -2110,9 +2113,11 @@ class C1
             var debuggingSession = await StartDebuggingSessionAsync(service, solution);
 
             var activeLineSpan1 = CreateText(source1)
-                .Lines.GetLinePositionSpan(GetSpan(source1, "System.Console.WriteLine(1);"));
+                .Lines
+                .GetLinePositionSpan(GetSpan(source1, "System.Console.WriteLine(1);"));
             var activeLineSpan2 = CreateText(source2)
-                .Lines.GetLinePositionSpan(GetSpan(source2, "System.Console.WriteLine(2);"));
+                .Lines
+                .GetLinePositionSpan(GetSpan(source2, "System.Console.WriteLine(2);"));
 
             var activeStatements = ImmutableArray.Create(
                 new ManagedActiveStatementDebugInfo(
@@ -2752,13 +2757,20 @@ class C { int Y => 2; }
                     "class Program { void Main() { System.Console.WriteLine(1); } }",
                     filePath: pathA
                 )
-                .Project.Solution.AddProject("B", "B", "C#")
+                .Project
+                .Solution
+                .AddProject("B", "B", "C#")
                 .AddDocument("Common.cs", "class Common {}", filePath: pathCommon)
-                .Project.AddDocument("B.cs", "class B {}", filePath: pathB)
-                .Project.Solution.AddProject("C", "C", "C#")
+                .Project
+                .AddDocument("B.cs", "class B {}", filePath: pathB)
+                .Project
+                .Solution
+                .AddProject("C", "C", "C#")
                 .AddDocument("Common.cs", "class Common {}", filePath: pathCommon)
-                .Project.AddDocument("C.cs", "class C {}", filePath: pathC)
-                .Project.Solution;
+                .Project
+                .AddDocument("C.cs", "class C {}", filePath: pathC)
+                .Project
+                .Solution;
 
             var debuggingSession = await StartDebuggingSessionAsync(service, solution);
             EnterBreakState(debuggingSession);
@@ -2859,9 +2871,9 @@ class C { int Y => 2; }
                             context.AddSource(
                                 "Generated.cs",
                                 context
-                                    .Compilation.SyntaxTrees.SingleOrDefault(t =>
-                                        t.FilePath.EndsWith("X.cs")
-                                    )
+                                    .Compilation
+                                    .SyntaxTrees
+                                    .SingleOrDefault(t => t.FilePath.EndsWith("X.cs"))
                                     ?.ToString()
                                 ?? "none"
                             );
@@ -2876,11 +2888,13 @@ class C { int Y => 2; }
                             break;
 
                         case DocumentKind.AnalyzerConfig:
-                            var syntaxTree = context.Compilation.SyntaxTrees.Single(t =>
-                                t.FilePath.EndsWith("A.cs")
-                            );
+                            var syntaxTree = context
+                                .Compilation
+                                .SyntaxTrees
+                                .Single(t => t.FilePath.EndsWith("A.cs"));
                             var content = context
-                                .AnalyzerConfigOptions.GetOptions(syntaxTree)
+                                .AnalyzerConfigOptions
+                                .GetOptions(syntaxTree)
                                 .TryGetValue("x", out var optionValue)
                                 ? optionValue.ToString()
                                 : "none";
@@ -2898,10 +2912,9 @@ class C { int Y => 2; }
                 .AddDocument("A.cs", "", filePath: pathA)
                 .Project;
             var projectId = project.Id;
-            solution = project.Solution.AddAnalyzerReference(
-                projectId,
-                new TestGeneratorReference(generator)
-            );
+            solution = project
+                .Solution
+                .AddAnalyzerReference(projectId, new TestGeneratorReference(generator));
             project = solution.GetRequiredProject(projectId);
             var generatedDocument = (await project.GetSourceGeneratedDocumentsAsync()).Single();
             var generatedDocumentId = generatedDocument.Id;
@@ -3196,9 +3209,11 @@ class C { int Y => 2; }
 
             // An active statement may be present in the added file since the file exists in the PDB:
             var activeLineSpanA1 = CreateText(sourceA1)
-                .Lines.GetLinePositionSpan(GetSpan(sourceA1, "System.Console.WriteLine(1);"));
+                .Lines
+                .GetLinePositionSpan(GetSpan(sourceA1, "System.Console.WriteLine(1);"));
             var activeLineSpanB1 = CreateText(sourceB1)
-                .Lines.GetLinePositionSpan(GetSpan(sourceB1, "1"));
+                .Lines
+                .GetLinePositionSpan(GetSpan(sourceB1, "1"));
 
             var activeStatements = ImmutableArray.Create(
                 new ManagedActiveStatementDebugInfo(
@@ -3821,12 +3836,9 @@ class G
 
             // save (note that this call will fail to match the content with the PDB since it uses the content prior to the actual file write)
             // TODO: await debuggingSession.OnSourceFileUpdatedAsync(currentDocument);
-            var (doc, state) =
-                await debuggingSession.LastCommittedSolution.GetDocumentAndStateAsync(
-                    documentId,
-                    currentDocument,
-                    CancellationToken.None
-                );
+            var (doc, state) = await debuggingSession
+                .LastCommittedSolution
+                .GetDocumentAndStateAsync(documentId, currentDocument, CancellationToken.None);
             Assert.Null(doc);
             Assert.Equal(CommittedSolution.DocumentState.OutOfSync, state);
             sourceFile.WriteAllText(source1, Encoding.UTF8);
@@ -4866,10 +4878,12 @@ class C { int Y => 1; }
             // the update should be stored on the service:
             var pendingUpdate = debuggingSession.GetTestAccessor().GetPendingSolutionUpdate();
             var newBaselineA1 = pendingUpdate
-                .ProjectBaselines.Single(b => b.ProjectId == projectA.Id)
+                .ProjectBaselines
+                .Single(b => b.ProjectId == projectA.Id)
                 .EmitBaseline;
             var newBaselineB1 = pendingUpdate
-                .ProjectBaselines.Single(b => b.ProjectId == projectB.Id)
+                .ProjectBaselines
+                .Single(b => b.ProjectId == projectB.Id)
                 .EmitBaseline;
 
             var baselineA0 = newBaselineA1.GetInitialEmitBaseline();
@@ -4930,10 +4944,12 @@ class C { int Y => 1; }
             // the update should be stored on the service:
             pendingUpdate = debuggingSession.GetTestAccessor().GetPendingSolutionUpdate();
             var newBaselineA2 = pendingUpdate
-                .ProjectBaselines.Single(b => b.ProjectId == projectA.Id)
+                .ProjectBaselines
+                .Single(b => b.ProjectId == projectA.Id)
                 .EmitBaseline;
             var newBaselineB2 = pendingUpdate
-                .ProjectBaselines.Single(b => b.ProjectId == projectB.Id)
+                .ProjectBaselines
+                .Single(b => b.ProjectId == projectB.Id)
                 .EmitBaseline;
 
             Assert.NotSame(newBaselineA1, newBaselineA2);
@@ -5111,12 +5127,12 @@ class C { int Y => 1; }
             var activeLineSpan12 = sourceTextV1.Lines.GetLinePositionSpan(activeSpan12);
             var activeLineSpan21 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan21);
             var activeLineSpan22 = sourceTextV2.Lines.GetLinePositionSpan(activeSpan22);
-            var adjustedActiveLineSpan1 = sourceTextV2.Lines.GetLinePositionSpan(
-                adjustedActiveSpan1
-            );
-            var adjustedActiveLineSpan2 = sourceTextV2.Lines.GetLinePositionSpan(
-                adjustedActiveSpan2
-            );
+            var adjustedActiveLineSpan1 = sourceTextV2
+                .Lines
+                .GetLinePositionSpan(adjustedActiveSpan1);
+            var adjustedActiveLineSpan2 = sourceTextV2
+                .Lines
+                .GetLinePositionSpan(adjustedActiveSpan2);
 
             var debuggingSession = await StartDebuggingSessionAsync(service, solution);
 
@@ -5334,9 +5350,9 @@ class C { int Y => 1; }
         [CombinatorialData]
         public async Task ActiveStatements_ForeignDocument(bool withPath, bool designTimeOnly)
         {
-            var composition = FeaturesTestCompositions.Features.AddParts(
-                typeof(NoCompilationLanguageService)
-            );
+            var composition = FeaturesTestCompositions
+                .Features
+                .AddParts(typeof(NoCompilationLanguageService));
 
             using var _ = CreateWorkspace(
                 out var solution,
@@ -5469,7 +5485,9 @@ class C { int Y => 1; }
             // Base Active Statements
 
             var baseActiveStatementsMap = await debuggingSession
-                .EditSession.BaseActiveStatements.GetValueAsync(CancellationToken.None)
+                .EditSession
+                .BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
             var documentMap = baseActiveStatementsMap.DocumentPathMap;
 
@@ -5492,7 +5510,9 @@ class C { int Y => 1; }
             Assert.Equal(3, baseActiveStatementsMap.InstructionMap.Count);
 
             var statements = baseActiveStatementsMap
-                .InstructionMap.Values.OrderBy(v => v.Ordinal)
+                .InstructionMap
+                .Values
+                .OrderBy(v => v.Ordinal)
                 .ToArray();
             var s = statements[0];
             Assert.Equal(0x06000001, s.InstructionId.Method.Token);
@@ -5591,7 +5611,9 @@ class C { int Y => 1; }
             document = solution.GetDocument(document.Id);
 
             var baseActiveStatementMap = await debuggingSession
-                .EditSession.BaseActiveStatements.GetValueAsync(CancellationToken.None)
+                .EditSession
+                .BaseActiveStatements
+                .GetValueAsync(CancellationToken.None)
                 .ConfigureAwait(false);
 
             // Active Statements - available in out-of-sync documents, as they reflect the state of the debuggee and not the base document content
@@ -5611,7 +5633,9 @@ class C { int Y => 1; }
             Assert.Equal(1, baseActiveStatementMap.InstructionMap.Count);
 
             var activeStatement1 = baseActiveStatementMap
-                .InstructionMap.Values.OrderBy(v => v.InstructionId.Method.Token)
+                .InstructionMap
+                .Values
+                .OrderBy(v => v.InstructionId.Method.Token)
                 .Single();
             Assert.Equal(0x06000001, activeStatement1.InstructionId.Method.Token);
             Assert.Equal(document.FilePath, activeStatement1.FilePath);
@@ -5629,10 +5653,12 @@ class C { int Y => 1; }
             );
 
             // Document got synchronized:
-            debuggingSession.LastCommittedSolution.Test_SetDocumentState(
-                document.Id,
-                CommittedSolution.DocumentState.MatchesBuildOutput
-            );
+            debuggingSession
+                .LastCommittedSolution
+                .Test_SetDocumentState(
+                    document.Id,
+                    CommittedSolution.DocumentState.MatchesBuildOutput
+                );
 
             // New location of the active statement reported:
             baseSpans = await debuggingSession.GetBaseActiveStatementSpansAsync(
@@ -5697,7 +5723,8 @@ class C
 
             var generatedDocument1 = (
                 await solution
-                    .Projects.Single()
+                    .Projects
+                    .Single()
                     .GetSourceGeneratedDocumentsAsync()
                     .ConfigureAwait(false)
             ).Single();
@@ -6762,8 +6789,9 @@ class C
 
             // check committed document status:
             var debuggingSession = service.GetTestAccessor().GetActiveDebuggingSessions().Single();
-            var (document, state) =
-                await debuggingSession.LastCommittedSolution.GetDocumentAndStateAsync(
+            var (document, state) = await debuggingSession
+                .LastCommittedSolution
+                .GetDocumentAndStateAsync(
                     documentId,
                     currentDocument: null,
                     CancellationToken.None

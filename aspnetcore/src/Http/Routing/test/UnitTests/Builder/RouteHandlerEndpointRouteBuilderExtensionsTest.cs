@@ -1172,7 +1172,8 @@ public class RouteHandlerEndpointRouteBuilderExtensionsTest : LoggedTest
         addFilter(innerGroup.Map("/{id}", PrintId));
 
         var endpoints = builder
-            .DataSources.SelectMany(ds => ds.Endpoints)
+            .DataSources
+            .SelectMany(ds => ds.Endpoints)
             .ToDictionary(e => ((RouteEndpoint)e).RoutePattern.RawText!);
 
         Assert.Equal(3, endpoints.Count);

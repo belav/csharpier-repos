@@ -121,10 +121,12 @@ namespace System.Web.Mvc
         private static bool GetPrecompiledNonUpdateable()
         {
             IVirtualPathUtility virtualPathUtility = new VirtualPathUtilityWrapper();
-            return WebPages.BuildManagerWrapper.IsNonUpdateablePrecompiledApp(
-                HostingEnvironment.VirtualPathProvider,
-                virtualPathUtility
-            );
+            return WebPages
+                .BuildManagerWrapper
+                .IsNonUpdateablePrecompiledApp(
+                    HostingEnvironment.VirtualPathProvider,
+                    virtualPathUtility
+                );
         }
 
         internal class DefaultViewPageActivator : IViewPageActivator

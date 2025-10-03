@@ -78,9 +78,9 @@ namespace System.ServiceModel.Channels
                 if (encryptAndSignChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header.HeaderTypes.Add(
-                        new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace)
-                    );
+                    header
+                        .HeaderTypes
+                        .Add(new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace));
                     ChannelProtectionRequirements requirements =
                         new ChannelProtectionRequirements();
                     requirements.IncomingSignatureParts.AddParts(header);
@@ -97,9 +97,9 @@ namespace System.ServiceModel.Channels
                 if (signChannelProtectionRequirements == null)
                 {
                     MessagePartSpecification header = new MessagePartSpecification();
-                    header.HeaderTypes.Add(
-                        new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace)
-                    );
+                    header
+                        .HeaderTypes
+                        .Add(new XmlQualifiedName(ContextHeaderName, ContextHeaderNamespace));
                     ChannelProtectionRequirements requirements =
                         new ChannelProtectionRequirements();
                     requirements.IncomingSignatureParts.AddParts(header);
@@ -111,9 +111,9 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("protectionLevel")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentOutOfRangeException("protectionLevel"));
             }
 
             return result;
@@ -140,11 +140,13 @@ namespace System.ServiceModel.Channels
                             || reader.NamespaceURI != ContextHeaderNamespace
                         )
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ProtocolException(
-                                    SR.GetString(SR.SchemaViolationInsideContextHeader)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ProtocolException(
+                                        SR.GetString(SR.SchemaViolationInsideContextHeader)
+                                    )
+                                );
                         }
 
                         string propertyName = reader.GetAttribute(ContextPropertyNameAttribute);
@@ -154,30 +156,36 @@ namespace System.ServiceModel.Channels
                             || !ContextDictionary.TryValidateKeyValueSpace(propertyName)
                         )
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new ProtocolException(
-                                    SR.GetString(SR.InvalidCookieContent, propertyName)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new ProtocolException(
+                                        SR.GetString(SR.InvalidCookieContent, propertyName)
+                                    )
+                                );
                         }
                         result.Context[propertyName] = reader.ReadElementString();
                     }
 
                     if (reader.NodeType != XmlNodeType.EndElement)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(
-                                SR.GetString(SR.SchemaViolationInsideContextHeader)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ProtocolException(
+                                    SR.GetString(SR.SchemaViolationInsideContextHeader)
+                                )
+                            );
                     }
                 }
             }
             catch (XmlException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(SR.GetString(SR.XmlFormatViolationInContextHeader), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(SR.GetString(SR.XmlFormatViolationInContextHeader), e)
+                    );
             }
 
             return result;

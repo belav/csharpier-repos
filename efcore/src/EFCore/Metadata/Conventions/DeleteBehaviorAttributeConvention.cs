@@ -29,8 +29,10 @@ public class DeleteBehaviorAttributeConvention
         IConventionContext<IConventionNavigationBuilder> context
     )
     {
-        var navAttribute =
-            navigationBuilder.Metadata.PropertyInfo?.GetCustomAttribute<DeleteBehaviorAttribute>();
+        var navAttribute = navigationBuilder
+            .Metadata
+            .PropertyInfo
+            ?.GetCustomAttribute<DeleteBehaviorAttribute>();
         if (navAttribute == null)
         {
             return;
@@ -81,8 +83,9 @@ public class DeleteBehaviorAttributeConvention
                     return;
                 }
 
-                var navAttribute =
-                    navigation.PropertyInfo?.GetCustomAttribute<DeleteBehaviorAttribute>();
+                var navAttribute = navigation
+                    .PropertyInfo
+                    ?.GetCustomAttribute<DeleteBehaviorAttribute>();
                 if (navAttribute != null)
                 {
                     throw new InvalidOperationException(

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         )
         {
             var analyzer = project
-                .Services.GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
+                .Services
+                .GetRequiredService<VSTypeScriptDiagnosticAnalyzerLanguageService>()
                 .Implementation;
             if (analyzer == null)
             {

@@ -74,9 +74,10 @@ namespace System.Data.SqlClient
         private CommandBehavior _commandBehavior;
 
         private static int _objectTypeCount; // Bid counter
-        internal readonly int ObjectID = System.Threading.Interlocked.Increment(
-            ref _objectTypeCount
-        );
+        internal readonly int ObjectID = System
+            .Threading
+            .Interlocked
+            .Increment(ref _objectTypeCount);
 
         // context
         // undone: we may still want to do this...it's nice to pass in an lpvoid (essentially) and just have the reader keep the state
@@ -952,11 +953,9 @@ namespace System.Data.SqlClient
                 // iib.
                 // now read the remaining values off the wire for this row
                 if (
-                    !_stateObj.Parser.TrySkipRow(
-                        _metaData,
-                        _sharedState._nextColumnHeaderToRead,
-                        _stateObj
-                    )
+                    !_stateObj
+                        .Parser
+                        .TrySkipRow(_metaData, _sharedState._nextColumnHeaderToRead, _stateObj)
                 )
                 {
                     return false;
@@ -1062,7 +1061,9 @@ namespace System.Data.SqlClient
                     try
                     {
                         // Wait for the task to complete
-                        ((IAsyncResult)currentTask).AsyncWaitHandle.WaitOne();
+                        ((IAsyncResult)currentTask)
+                            .AsyncWaitHandle
+                            .WaitOne();
 
                         // Ensure that we've finished reading any pending data
                         var networkPacketTaskSource = stateObj._networkPacketTaskSource;
@@ -4964,11 +4965,9 @@ namespace System.Data.SqlClient
                     {
                         ulong ignored;
                         if (
-                            !_stateObj.Parser.TrySkipPlpValue(
-                                UInt64.MaxValue,
-                                _stateObj,
-                                out ignored
-                            )
+                            !_stateObj
+                                .Parser
+                                .TrySkipPlpValue(UInt64.MaxValue, _stateObj, out ignored)
                         )
                         {
                             return false;
@@ -6348,7 +6347,8 @@ namespace System.Data.SqlClient
             else
             {
                 return completionSource
-                    .Task.ContinueWith(
+                    .Task
+                    .ContinueWith(
                         (retryTask) =>
                         {
                             if (retryTask.IsFaulted)

@@ -63,28 +63,28 @@ public class RequestParsingData
         + "Cookie: prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric\r\n"
         + "\r\n";
 
-    public static readonly byte[] PlaintextTechEmpowerPipelinedRequests = Encoding.ASCII.GetBytes(
-        string.Concat(Enumerable.Repeat(_plaintextTechEmpowerRequest, Pipelining))
-    );
-    public static readonly byte[] PlaintextTechEmpowerRequest = Encoding.ASCII.GetBytes(
-        _plaintextTechEmpowerRequest
-    );
+    public static readonly byte[] PlaintextTechEmpowerPipelinedRequests = Encoding
+        .ASCII
+        .GetBytes(string.Concat(Enumerable.Repeat(_plaintextTechEmpowerRequest, Pipelining)));
+    public static readonly byte[] PlaintextTechEmpowerRequest = Encoding
+        .ASCII
+        .GetBytes(_plaintextTechEmpowerRequest);
 
-    public static readonly byte[] JsonTechEmpowerRequest = Encoding.ASCII.GetBytes(
-        _jsonTechEmpowerRequest
-    );
+    public static readonly byte[] JsonTechEmpowerRequest = Encoding
+        .ASCII
+        .GetBytes(_jsonTechEmpowerRequest);
 
-    public static readonly byte[] PlaintextAbsoluteUriRequest = Encoding.ASCII.GetBytes(
-        _plaintextAbsoluteUriRequest
-    );
+    public static readonly byte[] PlaintextAbsoluteUriRequest = Encoding
+        .ASCII
+        .GetBytes(_plaintextAbsoluteUriRequest);
 
-    public static readonly byte[] LiveaspnetPipelinedRequests = Encoding.ASCII.GetBytes(
-        string.Concat(Enumerable.Repeat(_liveaspnetRequest, Pipelining))
-    );
+    public static readonly byte[] LiveaspnetPipelinedRequests = Encoding
+        .ASCII
+        .GetBytes(string.Concat(Enumerable.Repeat(_liveaspnetRequest, Pipelining)));
     public static readonly byte[] LiveaspnetRequest = Encoding.ASCII.GetBytes(_liveaspnetRequest);
 
-    public static readonly byte[] UnicodePipelinedRequests = Encoding.ASCII.GetBytes(
-        string.Concat(Enumerable.Repeat(_unicodeRequest, Pipelining))
-    );
+    public static readonly byte[] UnicodePipelinedRequests = Encoding
+        .ASCII
+        .GetBytes(string.Concat(Enumerable.Repeat(_unicodeRequest, Pipelining)));
     public static readonly byte[] UnicodeRequest = Encoding.ASCII.GetBytes(_unicodeRequest);
 }

@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             }
 
             var accessibleConstructors = attributeType
-                .InstanceConstructors.WhereAsArray(c => c.IsAccessibleWithin(within))
+                .InstanceConstructors
+                .WhereAsArray(c => c.IsAccessibleWithin(within))
                 .FilterToVisibleAndBrowsableSymbols(
                     options.HideAdvancedMembers,
                     semanticModel.Compilation
@@ -205,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         {
             var position = attribute.SpanStart;
             var namedParameters = constructor
-                .ContainingType.GetAttributeNamedParameters(semanticModel.Compilation, within)
+                .ContainingType
+                .GetAttributeNamedParameters(semanticModel.Compilation, within)
                 .OrderBy(s => s.Name)
                 .ToList();
 

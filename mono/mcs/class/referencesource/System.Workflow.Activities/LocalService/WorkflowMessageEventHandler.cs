@@ -128,7 +128,8 @@ namespace System.Workflow.Activities
                     WindowsIdentity windowsIdentity = identity as WindowsIdentity;
                     if (windowsIdentity != null && windowsIdentity.User != null)
                         securityIdentifier = windowsIdentity
-                            .User.Translate(typeof(NTAccount))
+                            .User
+                            .Translate(typeof(NTAccount))
                             .ToString();
                     else if (identity != null)
                         securityIdentifier = identity.Name;
@@ -147,13 +148,15 @@ namespace System.Workflow.Activities
                     securityIdentifier
                 );
 
-                WorkflowActivityTrace.Activity.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Firing event {0} for instance {1}",
-                    this.eventName,
-                    eventArgs.InstanceId
-                );
+                WorkflowActivityTrace
+                    .Activity
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Firing event {0} for instance {1}",
+                        this.eventName,
+                        eventArgs.InstanceId
+                    );
 
                 this.enqueueWrapper.DeliverMessage(eventArgs, key, message, workItem, workHandler);
             }

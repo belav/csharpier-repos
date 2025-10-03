@@ -97,16 +97,19 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-            System.Security.Cryptography.X509Certificates.Asn1.TbsCertificateAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.TbsCertificate
-            );
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
-                ref sequenceReader,
-                rebind,
-                out decoded.SignatureAlgorithm
-            );
+            System
+                .Security
+                .Cryptography
+                .X509Certificates
+                .Asn1
+                .TbsCertificateAsn
+                .Decode(ref sequenceReader, rebind, out decoded.TbsCertificate);
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .AlgorithmIdentifierAsn
+                .Decode(ref sequenceReader, rebind, out decoded.SignatureAlgorithm);
 
             if (sequenceReader.TryReadPrimitiveBitString(out _, out tmpSpan))
             {

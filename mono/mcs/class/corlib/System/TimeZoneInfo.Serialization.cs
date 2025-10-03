@@ -113,13 +113,15 @@ namespace System
             var transitionEnd = DeserializeTransitionTime(ref input);
             input.Remove(0, 1); // ]
             var deltaSpan = TimeSpan.FromMinutes(delta);
-            return TimeZoneInfo.AdjustmentRule.CreateAdjustmentRule(
-                dateStart,
-                dateEnd,
-                deltaSpan,
-                transitionStart,
-                transitionEnd
-            );
+            return TimeZoneInfo
+                .AdjustmentRule
+                .CreateAdjustmentRule(
+                    dateStart,
+                    dateEnd,
+                    deltaSpan,
+                    transitionStart,
+                    transitionEnd
+                );
         }
 
         private static TimeZoneInfo.TransitionTime DeserializeTransitionTime(
@@ -138,12 +140,9 @@ namespace System
                 var week = DeserializeInt(ref input);
                 var dayOfWeek = DeserializeInt(ref input);
                 input.Remove(0, 2); // ];
-                return TimeZoneInfo.TransitionTime.CreateFloatingDateRule(
-                    timeOfDay,
-                    month,
-                    week,
-                    (DayOfWeek)dayOfWeek
-                );
+                return TimeZoneInfo
+                    .TransitionTime
+                    .CreateFloatingDateRule(timeOfDay, month, week, (DayOfWeek)dayOfWeek);
             }
 
             // Fixed rule such as: [1;02:15:59.999;6;2;];

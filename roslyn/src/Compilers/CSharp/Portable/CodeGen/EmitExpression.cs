@@ -89,9 +89,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 _diagnostics.Add(
                     ErrorCode.ERR_InsufficientStack,
-                    BoundTreeVisitor.CancelledByStackGuardException.GetTooLongOrComplexExpressionErrorLocation(
-                        expression
-                    )
+                    BoundTreeVisitor
+                        .CancelledByStackGuardException
+                        .GetTooLongOrComplexExpressionErrorLocation(expression)
                 );
                 throw new EmitCancelledException();
             }
@@ -2429,17 +2429,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                 if (
                     (object)originalMethod
-                        == this._module.Compilation.GetSpecialTypeMember(
-                            SpecialMember.System_Nullable_T_GetValueOrDefault
-                        )
+                        == this._module
+                            .Compilation
+                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_GetValueOrDefault)
                     || (object)originalMethod
-                        == this._module.Compilation.GetSpecialTypeMember(
-                            SpecialMember.System_Nullable_T_get_Value
-                        )
+                        == this._module
+                            .Compilation
+                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_Value)
                     || (object)originalMethod
-                        == this._module.Compilation.GetSpecialTypeMember(
-                            SpecialMember.System_Nullable_T_get_HasValue
-                        )
+                        == this._module
+                            .Compilation
+                            .GetSpecialTypeMember(SpecialMember.System_Nullable_T_get_HasValue)
                 )
                 {
                     return true;
@@ -2754,17 +2754,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                         argumentsLength == 1
                         && expression.Constructor.OriginalDefinition
                             == (object)
-                                this._module.Compilation.GetWellKnownTypeMember(
-                                    WellKnownMember.System_ReadOnlySpan_T__ctor_Array
-                                )
+                                this._module
+                                    .Compilation
+                                    .GetWellKnownTypeMember(
+                                        WellKnownMember.System_ReadOnlySpan_T__ctor_Array
+                                    )
                     )
                     || (
                         argumentsLength == 3
                         && expression.Constructor.OriginalDefinition
                             == (object)
-                                this._module.Compilation.GetWellKnownTypeMember(
-                                    WellKnownMember.System_ReadOnlySpan_T__ctor_Array_Start_Length
-                                )
+                                this._module
+                                    .Compilation
+                                    .GetWellKnownTypeMember(
+                                        WellKnownMember.System_ReadOnlySpan_T__ctor_Array_Start_Length
+                                    )
                     )
                 )
                 && TryEmitReadonlySpanAsBlobWrapper(
@@ -2984,10 +2988,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                     // ctor can possibly see its own assignments indirectly if there are ref parameters or __arglist
                     if (
-                        System.Linq.ImmutableArrayExtensions.All(
-                            ctor.Parameters,
-                            p => p.RefKind == RefKind.None
-                        )
+                        System
+                            .Linq
+                            .ImmutableArrayExtensions
+                            .All(ctor.Parameters, p => p.RefKind == RefKind.None)
                         && !ctor.IsVararg
                         && TryInPlaceCtorCall(left, objCreation, used)
                     )
@@ -4203,12 +4207,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                     IsNumeric(expr.Type)
                     || expr.Type.PrimitiveTypeCode == Cci.PrimitiveTypeCode.Boolean
                 )
-                && expr.Consequence.ConstantValueOpt?.IsIntegralValueZeroOrOne(
-                    out bool isConsequenceOne
-                ) == true
-                && expr.Alternative.ConstantValueOpt?.IsIntegralValueZeroOrOne(
-                    out bool isAlternativeOne
-                ) == true
+                && expr.Consequence
+                    .ConstantValueOpt
+                    ?.IsIntegralValueZeroOrOne(out bool isConsequenceOne) == true
+                && expr.Alternative
+                    .ConstantValueOpt
+                    ?.IsIntegralValueZeroOrOne(out bool isAlternativeOne) == true
                 && isConsequenceOne != isAlternativeOne
                 && TryEmitComparison(expr.Condition, sense: isConsequenceOne)
             )

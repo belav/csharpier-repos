@@ -117,14 +117,16 @@ namespace System.IdentityModel.Tokens
                         return;
                     }
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.StandardsManagerCannotWriteObject,
-                            keyIdentifierClause.GetType()
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.StandardsManagerCannotWriteObject,
+                                keyIdentifierClause.GetType()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             private string GetTokenTypeUri(

@@ -855,9 +855,9 @@ namespace System.ServiceModel.Channels
                 if (!TimeoutHelper.WaitOne(this.shutdownEvent, timeoutHelper.RemainingTime()))
                 {
                     Abort(neighbors); // abort neighbors that haven't been closed yet
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new TimeoutException());
                 }
             }
         }
@@ -870,9 +870,9 @@ namespace System.ServiceModel.Channels
             }
             if (Closed())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.ToString())
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.ToString()));
             }
         }
 
@@ -1182,13 +1182,16 @@ namespace System.ServiceModel.Channels
                     binding,
                     meshEprBuilder.ToEndpointAddress()
                 );
-                this.channelFactory.Endpoint.Behaviors.Add(
-                    new ClientViaBehavior(remoteAddress.Uri)
-                );
+                this.channelFactory
+                    .Endpoint
+                    .Behaviors
+                    .Add(new ClientViaBehavior(remoteAddress.Uri));
                 this.channelFactory.Endpoint.Behaviors.Add(new PeerNeighborBehavior(this));
-                this.channelFactory.Endpoint.Contract.Behaviors.Add(
-                    new PeerOperationSelectorBehavior(this.messageHandler)
-                );
+                this.channelFactory
+                    .Endpoint
+                    .Contract
+                    .Behaviors
+                    .Add(new PeerOperationSelectorBehavior(this.messageHandler));
                 this.config.SecurityManager.ApplyClientSecurity(channelFactory);
                 this.channelFactory.Open(timeoutHelper.RemainingTime());
                 this.Proxy = this.channelFactory.CreateChannel();
@@ -1450,9 +1453,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.state == PeerNeighborState.Closed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.ToString())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(this.ToString()));
                 }
             }
 
@@ -1464,21 +1467,23 @@ namespace System.ServiceModel.Channels
             {
                 if (this.state == PeerNeighborState.Closed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ObjectDisposedException(this.ToString())
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ObjectDisposedException(this.ToString()));
                 }
                 if (this.state >= newState)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.PeerNeighborInvalidState,
-                                this.state.ToString(),
-                                newState.ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.PeerNeighborInvalidState,
+                                    this.state.ToString(),
+                                    newState.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 
@@ -1673,9 +1678,11 @@ namespace System.ServiceModel.Channels
                             );
                             if (this.closed())
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    new ObjectDisposedException(this.GetType().ToString())
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        new ObjectDisposedException(this.GetType().ToString())
+                                    );
                             }
                             try
                             {

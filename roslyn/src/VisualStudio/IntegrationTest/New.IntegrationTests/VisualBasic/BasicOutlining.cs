@@ -36,9 +36,9 @@ Imports System.Text|]
 End Namespace|]";
             MarkupTestFile.GetSpans(input, out var text, out var spans);
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            var actualSpansWithState = await TestServices.Editor.GetOutliningSpansAsync(
-                HangMitigatingCancellationToken
-            );
+            var actualSpansWithState = await TestServices
+                .Editor
+                .GetOutliningSpansAsync(HangMitigatingCancellationToken);
             var actualSpans = actualSpansWithState.Select(span => span.Span);
             Assert.Equal(spans.OrderBy(s => s.Start), actualSpans);
         }

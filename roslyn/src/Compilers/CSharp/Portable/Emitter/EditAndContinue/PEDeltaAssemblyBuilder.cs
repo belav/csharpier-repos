@@ -201,14 +201,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 }
 
                 if (
-                    reader.StringComparer.StartsWith(
-                        def.Name,
-                        GeneratedNames.ActionDelegateNamePrefix
-                    )
-                    || reader.StringComparer.StartsWith(
-                        def.Name,
-                        GeneratedNames.FuncDelegateNamePrefix
-                    )
+                    reader
+                        .StringComparer
+                        .StartsWith(def.Name, GeneratedNames.ActionDelegateNamePrefix)
+                    || reader
+                        .StringComparer
+                        .StartsWith(def.Name, GeneratedNames.FuncDelegateNamePrefix)
                 )
                 {
                     // The name of a synthesized delegate neatly encodes everything we need to identify it, either
@@ -224,10 +222,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 // In general, the anonymous type name is "<{module-id}>f__AnonymousType{index}#{submission-index}",
                 // but EnC is not supported for modules nor submissions. Hence we only look for type names with no module id and no submission index.
                 if (
-                    reader.StringComparer.StartsWith(
-                        def.Name,
-                        GeneratedNames.AnonymousTypeNameWithoutModulePrefix
-                    )
+                    reader
+                        .StringComparer
+                        .StartsWith(def.Name, GeneratedNames.AnonymousTypeNameWithoutModulePrefix)
                 )
                 {
                     var name = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(
@@ -262,10 +259,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 // In general, the anonymous delegate name is "<{module-id}>f__AnonymousDelegate{index}#{submission-index}",
                 // but EnC is not supported for modules nor submissions. Hence we only look for type names with no module id and no submission index.
                 if (
-                    reader.StringComparer.StartsWith(
-                        def.Name,
-                        GeneratedNames.AnonymousDelegateNameWithoutModulePrefix
-                    )
+                    reader
+                        .StringComparer
+                        .StartsWith(
+                            def.Name,
+                            GeneratedNames.AnonymousDelegateNameWithoutModulePrefix
+                        )
                 )
                 {
                     var name = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(

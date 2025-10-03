@@ -14,7 +14,8 @@ public class HeaderDictionaryTypeExtensionsTest
         context.Request.Headers.ContentType = "text/plain";
 
         var result = context
-            .Request.GetTypedHeaders()
+            .Request
+            .GetTypedHeaders()
             .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
         var expected = new MediaTypeHeaderValue("text/plain");
@@ -27,7 +28,8 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
 
         var result = context
-            .Request.GetTypedHeaders()
+            .Request
+            .GetTypedHeaders()
             .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
         Assert.Null(result);
@@ -40,7 +42,8 @@ public class HeaderDictionaryTypeExtensionsTest
         context.Request.Headers.ContentType = "invalid";
 
         var result = context
-            .Request.GetTypedHeaders()
+            .Request
+            .GetTypedHeaders()
             .Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
 
         Assert.Null(result);
@@ -93,7 +96,8 @@ public class HeaderDictionaryTypeExtensionsTest
         context.Request.Headers.Accept = "text/plain; q=0.9, text/other, */*";
 
         var result = context
-            .Request.GetTypedHeaders()
+            .Request
+            .GetTypedHeaders()
             .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
         var expected = new[]
@@ -111,7 +115,8 @@ public class HeaderDictionaryTypeExtensionsTest
         var context = new DefaultHttpContext();
 
         var result = context
-            .Request.GetTypedHeaders()
+            .Request
+            .GetTypedHeaders()
             .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
         Assert.Empty(result);
@@ -124,7 +129,8 @@ public class HeaderDictionaryTypeExtensionsTest
         context.Request.Headers.Accept = "invalid";
 
         var result = context
-            .Request.GetTypedHeaders()
+            .Request
+            .GetTypedHeaders()
             .GetList<MediaTypeHeaderValue>(HeaderNames.Accept);
 
         Assert.Empty(result);

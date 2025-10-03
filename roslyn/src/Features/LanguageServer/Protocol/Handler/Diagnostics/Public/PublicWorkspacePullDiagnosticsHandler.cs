@@ -135,7 +135,8 @@ internal sealed class PublicWorkspacePullDiagnosticsHandler(
     )
     {
         return diagnosticsParams
-            .PreviousResultId.Select(id => new PreviousPullResult
+            .PreviousResultId
+            .Select(id => new PreviousPullResult
             {
                 PreviousResultId = id.Value,
                 TextDocument = new TextDocumentIdentifier { Uri = id.Uri },

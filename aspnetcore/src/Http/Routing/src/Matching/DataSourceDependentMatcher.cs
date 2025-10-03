@@ -49,7 +49,8 @@ internal sealed class DataSourceDependentMatcher : Matcher
             {
                 // Validate that endpoint names are unique.
                 var endpointName = endpoint
-                    .Metadata.GetMetadata<IEndpointNameMetadata>()
+                    .Metadata
+                    .GetMetadata<IEndpointNameMetadata>()
                     ?.EndpointName;
                 if (endpointName is not null)
                 {

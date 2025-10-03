@@ -42,9 +42,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (tooLateForMoreUndo)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.PersistenceTooLateToEnlist)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new InvalidOperationException(SR.PersistenceTooLateToEnlist));
                 }
 
                 this.enlistedContexts.Add(context);

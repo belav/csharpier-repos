@@ -120,10 +120,9 @@ public class Tests
     {
         string name = "CustomModifiersOverride";
         AssemblyName asmName = new AssemblyName(name);
-        AssemblyBuilder ab = AppDomain.CurrentDomain.DefineDynamicAssembly(
-            asmName,
-            AssemblyBuilderAccess.RunAndSave
-        );
+        AssemblyBuilder ab = AppDomain
+            .CurrentDomain
+            .DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave);
         ModuleBuilder mb = ab.DefineDynamicModule(name, name + ".dll");
 
         // Create class hierarchy:

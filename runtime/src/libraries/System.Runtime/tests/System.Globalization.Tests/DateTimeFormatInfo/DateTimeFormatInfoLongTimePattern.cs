@@ -282,7 +282,8 @@ namespace System.Globalization.Tests
             // Ensuring when reading such formats from ICU we'll not eat the spaces after the single quotes.
             string longTimeFormat = CultureInfo
                 .GetCultureInfo("fr-CA")
-                .DateTimeFormat.LongTimePattern;
+                .DateTimeFormat
+                .LongTimePattern;
             int startIndex = 0;
 
             while (

@@ -625,13 +625,15 @@ public ref struct TypeMapPlanBuilder
     )
     {
         var valueResolverFunc =
-            memberMap.Resolver?.GetExpression(
-                _configuration,
-                memberMap,
-                customSource,
-                _destination,
-                destValueExpr
-            ) ?? destValueExpr;
+            memberMap
+                .Resolver
+                ?.GetExpression(
+                    _configuration,
+                    memberMap,
+                    customSource,
+                    _destination,
+                    destValueExpr
+                ) ?? destValueExpr;
         if (memberMap.NullSubstitute != null)
         {
             valueResolverFunc = memberMap.NullSubstitute(valueResolverFunc);
@@ -878,7 +880,8 @@ public class ClassValueResolver : ValueResolverConfig, IValueResolver
         if (iValueResolver.ContainsGenericParameters)
         {
             var typeArgs = iValueResolver
-                .GenericTypeArguments.Zip(
+                .GenericTypeArguments
+                .Zip(
                     new[]
                     {
                         typeMap.SourceType,

@@ -150,7 +150,8 @@ namespace System.Linq.Parallel
             {
                 // stuff in appropriate defaults for unspecified options.
                 _querySettings = _queryOperator
-                    .SpecifiedQuerySettings.WithPerExecutionSettings(
+                    .SpecifiedQuerySettings
+                    .WithPerExecutionSettings(
                         _topLevelCancellationTokenSource,
                         _topLevelDisposedFlag
                     )

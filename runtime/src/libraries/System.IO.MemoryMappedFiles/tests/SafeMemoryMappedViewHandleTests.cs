@@ -22,22 +22,26 @@ namespace System.IO.MemoryMappedFiles.Tests
             const int BUF_SIZE = 256;
 
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = default;
-            using SafeMemoryMappedFileHandle fileHandle = Interop.Kernel32.CreateFileMapping(
-                new IntPtr(-1),
-                ref secAttrs,
-                Interop.Kernel32.PageOptions.PAGE_EXECUTE_READWRITE,
-                0,
-                BUF_SIZE,
-                CreateUniqueMapName()
-            );
+            using SafeMemoryMappedFileHandle fileHandle = Interop
+                .Kernel32
+                .CreateFileMapping(
+                    new IntPtr(-1),
+                    ref secAttrs,
+                    Interop.Kernel32.PageOptions.PAGE_EXECUTE_READWRITE,
+                    0,
+                    BUF_SIZE,
+                    CreateUniqueMapName()
+                );
 
-            using SafeMemoryMappedViewHandle handle = Interop.Kernel32.MapViewOfFile(
-                fileHandle,
-                Interop.Kernel32.FileMapOptions.FILE_MAP_READ,
-                0,
-                0,
-                (UIntPtr)BUF_SIZE
-            );
+            using SafeMemoryMappedViewHandle handle = Interop
+                .Kernel32
+                .MapViewOfFile(
+                    fileHandle,
+                    Interop.Kernel32.FileMapOptions.FILE_MAP_READ,
+                    0,
+                    0,
+                    (UIntPtr)BUF_SIZE
+                );
 
             Assert.NotNull(handle);
         }

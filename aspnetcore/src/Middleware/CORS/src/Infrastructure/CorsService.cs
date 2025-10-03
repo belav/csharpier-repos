@@ -204,9 +204,11 @@ public class CorsService : ICorsService
 
             if (result.PreflightMaxAge.HasValue)
             {
-                headers.AccessControlMaxAge = result.PreflightMaxAge.Value.TotalSeconds.ToString(
-                    CultureInfo.InvariantCulture
-                );
+                headers.AccessControlMaxAge = result
+                    .PreflightMaxAge
+                    .Value
+                    .TotalSeconds
+                    .ToString(CultureInfo.InvariantCulture);
             }
         }
         else

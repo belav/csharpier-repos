@@ -20,9 +20,12 @@ namespace System.Runtime.Serialization.Configuration
         {
             if (String.IsNullOrEmpty(typeName))
             {
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "typeName"
-                );
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("typeName");
             }
             this.Type = typeName;
         }
@@ -98,25 +101,35 @@ namespace System.Runtime.Serialization.Configuration
                     int typeArgsCount = typeArgs == null ? 0 : typeArgs.Length;
                     if (typeArgsCount == 0)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.KnownTypeConfigIndexOutOfBoundsZero,
-                                rootType,
-                                typeArgsCount,
-                                index
-                            )
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.KnownTypeConfigIndexOutOfBoundsZero,
+                                    rootType,
+                                    typeArgsCount,
+                                    index
+                                )
+                            );
                     }
                     else
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.KnownTypeConfigIndexOutOfBounds,
-                                rootType,
-                                typeArgsCount,
-                                index
-                            )
-                        );
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.KnownTypeConfigIndexOutOfBounds,
+                                    rootType,
+                                    typeArgsCount,
+                                    index
+                                )
+                            );
                     }
                 }
 
@@ -127,14 +140,19 @@ namespace System.Runtime.Serialization.Configuration
             if (t.IsGenericTypeDefinition)
             {
                 if (parameters.Count != t.GetGenericArguments().Length)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.KnownTypeConfigGenericParamMismatch,
-                            type,
-                            t.GetGenericArguments().Length,
-                            parameters.Count
-                        )
-                    );
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.KnownTypeConfigGenericParamMismatch,
+                                type,
+                                t.GetGenericArguments().Length,
+                                parameters.Count
+                            )
+                        );
 
                 Type[] types = new Type[parameters.Count];
                 for (int i = 0; i < types.Length; ++i)

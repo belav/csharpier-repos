@@ -21,9 +21,9 @@ namespace System.ServiceModel
             }
 
             if (xmlLang == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.XmlLangAttributeMissing))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new XmlException(SR.GetString(SR.XmlLangAttributeMissing)));
 
             return xmlLang;
         }
@@ -120,17 +120,21 @@ namespace System.ServiceModel
             else
             {
                 if (index == qname.Length - 1)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.InvalidXmlQualifiedName, qname))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(SR.GetString(SR.InvalidXmlQualifiedName, qname))
+                        );
                 prefix = TrimStart(qname.Substring(0, index));
                 localName = TrimEnd(qname.Substring(index + 1));
             }
             ns = reader.LookupNamespace(prefix);
             if (ns == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.UnboundPrefixInQName, qname))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(SR.GetString(SR.UnboundPrefixInQName, qname))
+                    );
         }
     }
 }

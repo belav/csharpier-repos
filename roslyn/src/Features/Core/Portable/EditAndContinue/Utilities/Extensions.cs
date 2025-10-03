@@ -217,7 +217,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
         public static bool IsAutoProperty(this IPropertySymbol property) =>
             property
-                .ContainingType.GetMembers()
+                .ContainingType
+                .GetMembers()
                 .Any(
                     static (member, property) =>
                         member is IFieldSymbol field && field.AssociatedSymbol == property,
@@ -239,15 +240,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         ) =>
             method.Parameters.Length > 0
             && method.Parameters.Length == constructor.Parameters.Length
-            && method.Parameters.All(
-                static (param, constructor) =>
-                    param.RefKind == RefKind.Out
-                    && param.Type.Equals(
-                        constructor.Parameters[param.Ordinal].Type,
-                        SymbolEqualityComparer.Default
-                    ),
-                constructor
-            );
+            && method
+                .Parameters
+                .All(
+                    static (param, constructor) =>
+                        param.RefKind == RefKind.Out
+                        && param
+                            .Type
+                            .Equals(
+                                constructor.Parameters[param.Ordinal].Type,
+                                SymbolEqualityComparer.Default
+                            ),
+                    constructor
+                );
 
         // TODO: use AssociatedSymbol to tie field to the parameter (see https://github.com/dotnet/roslyn/issues/69115)
         public static IFieldSymbol? GetPrimaryParameterBackingField(
@@ -255,7 +260,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         ) =>
             (IFieldSymbol?)
                 parameter
-                    .ContainingType.GetMembers()
+                    .ContainingType
+                    .GetMembers()
                     .FirstOrDefault(
                         static (member, parameter) =>
                             member is IFieldSymbol field
@@ -286,7 +292,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public static IMethodSymbol? GetMatchingDeconstructor(this IMethodSymbol constructor) =>
             (IMethodSymbol?)
                 constructor
-                    .ContainingType.GetMembers(WellKnownMemberNames.DeconstructMethodName)
+                    .ContainingType
+                    .GetMembers(WellKnownMemberNames.DeconstructMethodName)
                     .FirstOrDefault(
                         static (symbol, constructor) =>
                             symbol is IMethodSymbol method

@@ -30,8 +30,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             {
                 try
                 {
-                    return await Task
-                        .Factory.FromAsync(BeginAccept, EndAccept, this)
+                    return await Task.Factory
+                        .FromAsync(BeginAccept, EndAccept, this)
                         .ConfigureAwait(false);
                 }
                 // When the socket is closed, the FromAsync logic will try to call EndAccept on the socket,
@@ -76,8 +76,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     {
                         return BeginConnect(remoteEP, callback, state);
                     };
-                    await Task
-                        .Factory.FromAsync(beginConnect, EndConnect, this)
+                    await Task.Factory
+                        .FromAsync(beginConnect, EndConnect, this)
                         .ConfigureAwait(false);
                 }
                 // When the socket is closed, the FromAsync logic will try to call EndAccept on the socket,

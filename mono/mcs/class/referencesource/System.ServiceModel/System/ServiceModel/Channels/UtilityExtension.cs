@@ -172,11 +172,13 @@ namespace System.ServiceModel.Channels
                     || (uint)outTotal < total
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.PeerLinkUtilityInvalidValues, useful, total)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.PeerLinkUtilityInvalidValues, useful, total)
+                            )
+                        );
                 }
 
                 //VERIFY with in this range, we are hoping that the order of useful/useless messages doesnt matter much.

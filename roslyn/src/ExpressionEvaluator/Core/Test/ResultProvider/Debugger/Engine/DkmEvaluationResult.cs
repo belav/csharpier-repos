@@ -53,30 +53,34 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmCompletionRoutine<DkmGetChildrenAsyncResult> completionRoutine
         )
         {
-            InspectionContext.InspectionSession.InvokeResultProvider(
-                this,
-                MethodId.GetChildren,
-                r =>
-                {
-                    r.GetChildren(
-                        this,
-                        workList,
-                        initialRequestSize,
-                        inspectionContext,
-                        completionRoutine
-                    );
-                    return (object)null;
-                }
-            );
+            InspectionContext
+                .InspectionSession
+                .InvokeResultProvider(
+                    this,
+                    MethodId.GetChildren,
+                    r =>
+                    {
+                        r.GetChildren(
+                            this,
+                            workList,
+                            initialRequestSize,
+                            inspectionContext,
+                            completionRoutine
+                        );
+                        return (object)null;
+                    }
+                );
         }
 
         public string GetUnderlyingString()
         {
-            return InspectionContext.InspectionSession.InvokeResultProvider(
-                this,
-                MethodId.GetUnderlyingString,
-                r => r.GetUnderlyingString(this)
-            );
+            return InspectionContext
+                .InspectionSession
+                .InvokeResultProvider(
+                    this,
+                    MethodId.GetUnderlyingString,
+                    r => r.GetUnderlyingString(this)
+                );
         }
     }
 }

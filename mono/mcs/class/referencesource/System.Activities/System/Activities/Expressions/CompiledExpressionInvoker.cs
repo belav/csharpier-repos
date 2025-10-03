@@ -62,10 +62,9 @@ namespace System.Activities.Expressions
 
             if (this.expressionActivity == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "expression",
-                    SR.ITextExpressionParameterMustBeActivity
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument("expression", SR.ITextExpressionParameterMustBeActivity);
             }
 
             ActivityWithResult resultActivity = this.expressionActivity as ActivityWithResult;
@@ -100,13 +99,15 @@ namespace System.Activities.Expressions
                         )
                     )
                     {
-                        throw FxTrace.Exception.AsError(
-                            new NotSupportedException(
-                                SR.TextExpressionMetadataRequiresCompilation(
-                                    this.expressionActivity.GetType().Name
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new NotSupportedException(
+                                    SR.TextExpressionMetadataRequiresCompilation(
+                                        this.expressionActivity.GetType().Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }

@@ -17,14 +17,16 @@ namespace System.Net
             IntPtr socket = INVALID_SOCKET;
             try
             {
-                socket = Interop.Winsock.WSASocketW(
-                    af,
-                    StreamSocketType,
-                    0,
-                    IntPtr.Zero,
-                    0,
-                    (int)Interop.Winsock.SocketConstructorFlags.WSA_FLAG_NO_HANDLE_INHERIT
-                );
+                socket = Interop
+                    .Winsock
+                    .WSASocketW(
+                        af,
+                        StreamSocketType,
+                        0,
+                        IntPtr.Zero,
+                        0,
+                        (int)Interop.Winsock.SocketConstructorFlags.WSA_FLAG_NO_HANDLE_INHERIT
+                    );
                 return socket != INVALID_SOCKET
                     || (SocketError)Marshal.GetLastPInvokeError()
                         != SocketError.AddressFamilyNotSupported;

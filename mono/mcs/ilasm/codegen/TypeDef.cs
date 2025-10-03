@@ -409,33 +409,29 @@ namespace Mono.ILASM
                 {
                     if (!outer.IsDefined)
                         outer.Define(code_gen);
-                    classdef = outer.PeapiType.AddNestedClass(
-                        attr,
-                        name_space,
-                        name,
-                        parent.PeapiClass
-                    );
+                    classdef = outer
+                        .PeapiType
+                        .AddNestedClass(attr, name_space, name, parent.PeapiClass);
                 }
                 else
                 {
                     if (is_value_class || is_enum_class)
                     {
                         // Should probably confirm that the parent is System.ValueType
-                        classdef = code_gen.PEFile.AddValueClass(
-                            attr,
-                            name_space,
-                            name,
-                            is_value_class ? PEAPI.ValueClass.ValueType : PEAPI.ValueClass.Enum
-                        );
+                        classdef = code_gen
+                            .PEFile
+                            .AddValueClass(
+                                attr,
+                                name_space,
+                                name,
+                                is_value_class ? PEAPI.ValueClass.ValueType : PEAPI.ValueClass.Enum
+                            );
                     }
                     else
                     {
-                        classdef = code_gen.PEFile.AddClass(
-                            attr,
-                            name_space,
-                            name,
-                            parent.PeapiClass
-                        );
+                        classdef = code_gen
+                            .PEFile
+                            .AddClass(attr, name_space, name, parent.PeapiClass);
                     }
                 }
             }
@@ -451,12 +447,14 @@ namespace Mono.ILASM
                 {
                     if (is_value_class || is_enum_class)
                     {
-                        classdef = code_gen.PEFile.AddValueClass(
-                            attr,
-                            name_space,
-                            name,
-                            is_value_class ? PEAPI.ValueClass.ValueType : PEAPI.ValueClass.Enum
-                        );
+                        classdef = code_gen
+                            .PEFile
+                            .AddValueClass(
+                                attr,
+                                name_space,
+                                name,
+                                is_value_class ? PEAPI.ValueClass.ValueType : PEAPI.ValueClass.Enum
+                            );
                     }
                     else
                     {

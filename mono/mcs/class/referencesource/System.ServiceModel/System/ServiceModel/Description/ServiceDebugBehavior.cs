@@ -43,15 +43,17 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttp)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
-                            "HttpHelpPageUrl",
-                            Uri.UriSchemeHttp,
-                            value.ToString(),
-                            value.Scheme
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
+                                "HttpHelpPageUrl",
+                                Uri.UriSchemeHttp,
+                                value.ToString(),
+                                value.Scheme
+                            )
+                        );
                 }
                 this.httpHelpPageUrl = value;
             }
@@ -73,15 +75,17 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
-                            "HttpsHelpPageUrl",
-                            Uri.UriSchemeHttps,
-                            value.ToString(),
-                            value.Scheme
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
+                                "HttpsHelpPageUrl",
+                                Uri.UriSchemeHttps,
+                                value.ToString(),
+                                value.Scheme
+                            )
+                        );
                 }
                 this.httpsHelpPageUrl = value;
             }
@@ -96,35 +100,40 @@ namespace System.ServiceModel.Description
                 {
                     if (!value.Scheme.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxBindingSchemeDoesNotMatch,
-                                value.Scheme,
-                                value.GetType().ToString(),
-                                Uri.UriSchemeHttp
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxBindingSchemeDoesNotMatch,
+                                    value.Scheme,
+                                    value.GetType().ToString(),
+                                    Uri.UriSchemeHttp
+                                )
+                            );
                     }
                     CustomBinding customBinding = new CustomBinding(value);
                     TextMessageEncodingBindingElement textMessageEncodingBindingElement =
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement.MessageVersion.IsMatch(
-                            MessageVersion.None
-                        )
+                        && !textMessageEncodingBindingElement
+                            .MessageVersion
+                            .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxIncorrectMessageVersion,
-                                textMessageEncodingBindingElement.MessageVersion.ToString(),
-                                MessageVersion.None.ToString()
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxIncorrectMessageVersion,
+                                    textMessageEncodingBindingElement.MessageVersion.ToString(),
+                                    MessageVersion.None.ToString()
+                                )
+                            );
                     }
-                    HttpTransportBindingElement httpTransportBindingElement =
-                        customBinding.Elements.Find<HttpTransportBindingElement>();
+                    HttpTransportBindingElement httpTransportBindingElement = customBinding
+                        .Elements
+                        .Find<HttpTransportBindingElement>();
                     if (httpTransportBindingElement != null)
                     {
                         httpTransportBindingElement.Method = "GET";
@@ -145,35 +154,40 @@ namespace System.ServiceModel.Description
                         !value.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxBindingSchemeDoesNotMatch,
-                                value.Scheme,
-                                value.GetType().ToString(),
-                                Uri.UriSchemeHttps
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxBindingSchemeDoesNotMatch,
+                                    value.Scheme,
+                                    value.GetType().ToString(),
+                                    Uri.UriSchemeHttps
+                                )
+                            );
                     }
                     CustomBinding customBinding = new CustomBinding(value);
                     TextMessageEncodingBindingElement textMessageEncodingBindingElement =
                         customBinding.Elements.Find<TextMessageEncodingBindingElement>();
                     if (
                         textMessageEncodingBindingElement != null
-                        && !textMessageEncodingBindingElement.MessageVersion.IsMatch(
-                            MessageVersion.None
-                        )
+                        && !textMessageEncodingBindingElement
+                            .MessageVersion
+                            .IsMatch(MessageVersion.None)
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                            SR.GetString(
-                                SR.SFxIncorrectMessageVersion,
-                                textMessageEncodingBindingElement.MessageVersion.ToString(),
-                                MessageVersion.None.ToString()
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperArgument(
+                                SR.GetString(
+                                    SR.SFxIncorrectMessageVersion,
+                                    textMessageEncodingBindingElement.MessageVersion.ToString(),
+                                    MessageVersion.None.ToString()
+                                )
+                            );
                     }
-                    HttpsTransportBindingElement httpsTransportBindingElement =
-                        customBinding.Elements.Find<HttpsTransportBindingElement>();
+                    HttpsTransportBindingElement httpsTransportBindingElement = customBinding
+                        .Elements
+                        .Find<HttpsTransportBindingElement>();
                     if (httpsTransportBindingElement != null)
                     {
                         httpsTransportBindingElement.Method = "GET";

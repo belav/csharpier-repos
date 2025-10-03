@@ -27,7 +27,8 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
     {
         // Get unique services
         var nameAndServiceDescriptor = context
-            .ApiDescriptions.Select(apiDesc => apiDesc.ActionDescriptor)
+            .ApiDescriptions
+            .Select(apiDesc => apiDesc.ActionDescriptor)
             .Where(actionDesc =>
                 actionDesc != null
                 && (actionDesc.EndpointMetadata?.Any(m => m is GrpcMethodMetadata) ?? false)
@@ -38,7 +39,9 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
         foreach (var nameAndType in nameAndServiceDescriptor)
         {
             var grpcMethodMetadata = nameAndType
-                .Value.EndpointMetadata.OfType<GrpcMethodMetadata>()
+                .Value
+                .EndpointMetadata
+                .OfType<GrpcMethodMetadata>()
                 .First();
             if (TryAdd(swaggerDoc, nameAndType, grpcMethodMetadata.ServiceType))
             {
@@ -76,13 +79,15 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
                     swaggerDoc.Tags = new List<OpenApiTag>();
                 }
 
-                swaggerDoc.Tags.Add(
-                    new OpenApiTag
-                    {
-                        Name = nameAndType.Key,
-                        Description = XmlCommentsTextHelper.Humanize(summaryNode.InnerXml),
-                    }
-                );
+                swaggerDoc
+                    .Tags
+                    .Add(
+                        new OpenApiTag
+                        {
+                            Name = nameAndType.Key,
+                            Description = XmlCommentsTextHelper.Humanize(summaryNode.InnerXml),
+                        }
+                    );
             }
             return true;
         }

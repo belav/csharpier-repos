@@ -700,8 +700,8 @@ namespace XLinqTests
                 FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
                 LoadOptions.PreserveWhitespace
             );
-            IEnumerable<XNode> toRemove = doc
-                .Root.Descendants(@"{http://www.books.com/}book")
+            IEnumerable<XNode> toRemove = doc.Root
+                .Descendants(@"{http://www.books.com/}book")
                 .OfType<XNode>();
             if (_runWithEvents)
             {
@@ -748,8 +748,8 @@ namespace XLinqTests
                 FilePathUtil.getStream(Path.Combine("TestData", "XLinq", "Books.xml")),
                 LoadOptions.PreserveWhitespace
             );
-            IEnumerable<XNode> toRemove = doc
-                .Root.Elements(@"{http://www.books.com/}book")
+            IEnumerable<XNode> toRemove = doc.Root
+                .Elements(@"{http://www.books.com/}book")
                 .OfType<XNode>();
             if (_runWithEvents)
             {
@@ -872,15 +872,15 @@ namespace XLinqTests
                 "<A xmlns='b'>text1<X/>text2</A>",
                 LoadOptions.PreserveWhitespace
             );
-            IEnumerable<XNode> toRemove = doc1
-                .Root.DescendantNodes()
+            IEnumerable<XNode> toRemove = doc1.Root
+                .DescendantNodes()
                 .Where(x => x.NodeType == XmlNodeType.Comment)
                 .Concat2(doc2.Root.Elements());
             if (_runWithEvents)
             {
                 _eHelper = new EventsHelper(doc1);
-                count = doc1
-                    .Root.DescendantNodes()
+                count = doc1.Root
+                    .DescendantNodes()
                     .Where(x => x.NodeType == XmlNodeType.Comment)
                     .Count();
             }

@@ -26,13 +26,15 @@ namespace System.ServiceModel.Security.Tokens
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException(
-                        "value",
-                        (int)value,
-                        typeof(SecurityTokenReferenceStyle)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "value",
+                            (int)value,
+                            typeof(SecurityTokenReferenceStyle)
+                        )
+                    );
             }
         }
     }

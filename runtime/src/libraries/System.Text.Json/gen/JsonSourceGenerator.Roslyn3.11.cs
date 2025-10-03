@@ -156,7 +156,8 @@ namespace System.Text.Json.SourceGeneration
 
                         IMethodSymbol? attributeSymbol =
                             context
-                                .SemanticModel.GetSymbolInfo(attributeSyntax, cancellationToken)
+                                .SemanticModel
+                                .GetSymbolInfo(attributeSyntax, cancellationToken)
                                 .Symbol as IMethodSymbol;
                         if (attributeSymbol == null)
                         {

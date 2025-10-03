@@ -52,13 +52,15 @@ namespace System.ServiceModel
             }
             else if (!this.AllowCookies)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.BasicHttpContextBindingRequiresAllowCookie,
-                        this.Namespace,
-                        this.Name
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.BasicHttpContextBindingRequiresAllowCookie,
+                            this.Namespace,
+                            this.Name
+                        )
+                    );
             }
         }
 
@@ -73,15 +75,17 @@ namespace System.ServiceModel
         {
             if (!this.AllowCookies)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.BasicHttpContextBindingRequiresAllowCookie,
-                            this.Namespace,
-                            this.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.BasicHttpContextBindingRequiresAllowCookie,
+                                this.Namespace,
+                                this.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             BindingElementCollection result;

@@ -71,7 +71,8 @@ namespace System.CommandLine.Binding
             {
                 string alias = commandResult.Command.Name;
                 CompletionItem[] completionItems = argumentResult
-                    .Argument.GetCompletions(CompletionContext.Empty)
+                    .Argument
+                    .GetCompletions(CompletionContext.Empty)
                     .ToArray();
 
                 if (completionItems.Length > 0)
@@ -96,7 +97,8 @@ namespace System.CommandLine.Binding
             {
                 string alias = optionResult.Option.Name;
                 CompletionItem[] completionItems = optionResult
-                    .Option.GetCompletions(CompletionContext.Empty)
+                    .Option
+                    .GetCompletions(CompletionContext.Empty)
                     .ToArray();
 
                 if (completionItems.Length > 0)

@@ -82,11 +82,13 @@ namespace System.ServiceModel.MsmqIntegration
             lock (ThisLock)
             {
                 if (this.xmlSerializerTable.Count >= maxSerializerTableSize)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(
-                            SR.GetString(SR.MsmqSerializationTableFull, maxSerializerTableSize)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(SR.MsmqSerializationTableFull, maxSerializerTableSize)
+                            )
+                        );
                 // double-locking
                 serializer = (XmlSerializer)this.xmlSerializerTable[serializedType];
                 if (serializer != null)
@@ -142,11 +144,13 @@ namespace System.ServiceModel.MsmqIntegration
                 case MsmqMessageSerializationFormat.ActiveX:
                     if (property.BodyType.HasValue)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ArgumentException(
-                                SR.GetString(SR.MsmqCannotUseBodyTypeWithActiveXSerialization)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(SR.MsmqCannotUseBodyTypeWithActiveXSerialization)
+                                )
+                            );
                     }
 
                     stream = new MemoryStream();
@@ -163,9 +167,13 @@ namespace System.ServiceModel.MsmqIntegration
                     // body MUST be byte array
                     byte[] byteArray = property.Body as byte[];
                     if (byteArray == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SerializationException(SR.GetString(SR.MsmqByteArrayBodyExpected))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SerializationException(
+                                    SR.GetString(SR.MsmqByteArrayBodyExpected)
+                                )
+                            );
 
                     stream = new MemoryStream();
                     stream.Write(byteArray, 0, byteArray.Length);
@@ -175,22 +183,26 @@ namespace System.ServiceModel.MsmqIntegration
                     // body MUST be a stream
                     Stream bodyStream = property.Body as Stream;
                     if (bodyStream == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SerializationException(SR.GetString(SR.MsmqStreamBodyExpected))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SerializationException(SR.GetString(SR.MsmqStreamBodyExpected))
+                            );
 
                     // NOTE: we don't copy here as a perf optimization, but this might be dangerous
                     return bodyStream;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SerializationException(
-                            SR.GetString(
-                                SR.MsmqUnsupportedSerializationFormat,
-                                this.SerializationFormat
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SerializationException(
+                                SR.GetString(
+                                    SR.MsmqUnsupportedSerializationFormat,
+                                    this.SerializationFormat
+                                )
                             )
-                        )
-                    );
+                        );
             }
         }
     }

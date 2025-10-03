@@ -92,11 +92,13 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 e.Kind is WorkspaceChangeKind.SolutionCleared or WorkspaceChangeKind.SolutionRemoved
             )
             {
-                _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                    ViewModel.Roots.Clear();
-                });
+                _ = _threadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(async () =>
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        ViewModel.Roots.Clear();
+                    });
             }
         }
     }

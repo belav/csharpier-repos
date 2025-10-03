@@ -118,10 +118,8 @@ namespace System.Runtime.Tests
 
             Assert.True(type.CustomAttributes.GetNullableAttributes().Any());
 
-            bool foundAtLeastOneNullableAttribute = type
-                .CustomAttributes.Where(a =>
-                    a.AttributeType.Name.Equals(NullableContextAttributeFullName)
-                )
+            bool foundAtLeastOneNullableAttribute = type.CustomAttributes
+                .Where(a => a.AttributeType.Name.Equals(NullableContextAttributeFullName))
                 .Any();
 
             // If there is a NullableContextAttribute there is no guarantee that its members will have
@@ -144,7 +142,9 @@ namespace System.Runtime.Tests
                     {
                         if (
                             methodInfo
-                                .ReturnParameter.CustomAttributes.GetNullableAttributes()
+                                .ReturnParameter
+                                .CustomAttributes
+                                .GetNullableAttributes()
                                 .Any()
                         )
                         {
@@ -197,8 +197,9 @@ namespace System.Runtime.Tests
         [MemberData(nameof(NullableMetadataTypesTestData))]
         public static void NullablePublicOnlyAttributePresent(Type type)
         {
-            CustomAttributeData nullablePublicOnlyAttribute =
-                type.Module.CustomAttributes.GetNullablePublicOnlyAttribute();
+            CustomAttributeData nullablePublicOnlyAttribute = type.Module
+                .CustomAttributes
+                .GetNullablePublicOnlyAttribute();
             Assert.NotNull(nullablePublicOnlyAttribute);
 
             Assert.False((bool)nullablePublicOnlyAttribute.ConstructorArguments.First().Value);

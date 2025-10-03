@@ -95,12 +95,14 @@ namespace System.Management
                                 methodName = null;
                                 inParameters = null;
                                 outParameters = null;
-                                status = parent.wbemObject.NextMethod_(
-                                    0,
-                                    out methodName,
-                                    out inParameters,
-                                    out outParameters
-                                );
+                                status = parent
+                                    .wbemObject
+                                    .NextMethod_(
+                                        0,
+                                        out methodName,
+                                        out inParameters,
+                                        out outParameters
+                                    );
                                 if (
                                     status >= 0
                                     && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA
@@ -286,12 +288,9 @@ namespace System.Management
                             )
                             {
                                 tempMethodName = null;
-                                status = parent.wbemObject.NextMethod_(
-                                    0,
-                                    out tempMethodName,
-                                    out inP,
-                                    out outP
-                                );
+                                status = parent
+                                    .wbemObject
+                                    .NextMethod_(0, out tempMethodName, out inP, out outP);
                                 if (
                                     status >= 0
                                     && status != (int)tag_WBEMSTATUS.WBEM_S_NO_MORE_DATA

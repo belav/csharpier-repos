@@ -154,9 +154,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid4.DataBind();
                 ;
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.EditCommandColumn)DataGrid4.Columns[0]
-                    ).ButtonType.ToString()
+                    ((System.Web.UI.WebControls.EditCommandColumn)DataGrid4.Columns[0])
+                        .ButtonType
+                        .ToString()
                 );
             }
             catch (Exception ex)
@@ -170,9 +170,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid5.DataSource = GHTTests.GHDataSources.DSDataTable();
                 DataGrid5.DataBind();
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.EditCommandColumn)DataGrid5.Columns[0]
-                    ).ButtonType.ToString()
+                    ((System.Web.UI.WebControls.EditCommandColumn)DataGrid5.Columns[0])
+                        .ButtonType
+                        .ToString()
                 );
             }
             catch (Exception ex)
@@ -186,9 +186,9 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
                 DataGrid6.DataSource = GHTTests.GHDataSources.DSDataTable();
                 DataGrid6.DataBind();
                 GHTSubTestAddResult(
-                    (
-                        (System.Web.UI.WebControls.EditCommandColumn)DataGrid6.Columns[0]
-                    ).ButtonType.ToString()
+                    ((System.Web.UI.WebControls.EditCommandColumn)DataGrid6.Columns[0])
+                        .ButtonType
+                        .ToString()
                 );
             }
             catch (Exception ex)

@@ -386,7 +386,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                 // We construct our own composition here because we only want the decompilation metadata as source provider
                 // to be available.
                 var composition = EditorTestCompositions
-                    .EditorFeatures.WithExcludedPartTypes(
+                    .EditorFeatures
+                    .WithExcludedPartTypes(
                         ImmutableHashSet.Create(typeof(IMetadataAsSourceFileProvider))
                     )
                     .AddParts(typeof(DecompilationMetadataAsSourceFileProvider));

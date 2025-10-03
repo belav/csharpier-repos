@@ -43,7 +43,8 @@ internal static class TemplatePackageInstaller
         Path.GetFullPath(
             (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
                 ? typeof(TemplatePackageInstaller)
-                    .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .Assembly
+                    .GetCustomAttributes<AssemblyMetadataAttribute>()
                     .Single(s => s.Key == "CustomTemplateHivePath")
                     .Value
                 : Path.Combine("Hives", ".templateEngine")
@@ -88,7 +89,8 @@ internal static class TemplatePackageInstaller
         else
         {
             packagesDir = typeof(TemplatePackageInstaller)
-                .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                .Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
                 .Single(a => a.Key == "ArtifactsShippingPackagesDir")
                 .Value;
         }

@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             );
 
             var loadDiagnostic = await textDocument
-                .State.GetLoadDiagnosticAsync(cancellationToken)
+                .State
+                .GetLoadDiagnosticAsync(cancellationToken)
                 .ConfigureAwait(false);
 
             if (analyzer == FileContentLoadAnalyzer.Instance)
@@ -177,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (kind != AnalysisKind.Syntax && isCompilerAnalyzer)
             {
                 var isEnabled = await textDocument
-                    .Project.HasSuccessfullyLoadedAsync(cancellationToken)
+                    .Project
+                    .HasSuccessfullyLoadedAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 Logger.Log(
@@ -576,8 +578,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             // Check if IWorkspaceVenusSpanMappingService is present for remapping.
-            var diagnosticSpanMappingService =
-                textDocument.Project.Solution.Services.GetService<IWorkspaceVenusSpanMappingService>();
+            var diagnosticSpanMappingService = textDocument
+                .Project
+                .Solution
+                .Services
+                .GetService<IWorkspaceVenusSpanMappingService>();
             if (diagnosticSpanMappingService == null)
             {
                 return diagnostics;

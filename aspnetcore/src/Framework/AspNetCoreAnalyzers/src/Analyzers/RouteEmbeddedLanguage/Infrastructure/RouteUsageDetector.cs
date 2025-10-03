@@ -202,12 +202,14 @@ internal static class RouteUsageDetector
     )
     {
         if (
-            SymbolEqualityComparer.Default.Equals(
-                wellKnownTypes.Get(
-                    WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
-                ),
-                mapMethodSymbol.ContainingType
-            )
+            SymbolEqualityComparer
+                .Default
+                .Equals(
+                    wellKnownTypes.Get(
+                        WellKnownType.Microsoft_AspNetCore_Builder_EndpointRouteBuilderExtensions
+                    ),
+                    mapMethodSymbol.ContainingType
+                )
         )
         {
             var httpMethodsBuilder = ImmutableArray.CreateBuilder<string>();
@@ -344,19 +346,23 @@ internal static class RouteUsageDetector
         // IEndpointRouteBuilder may be removed from symbol because the method is called as an extension method.
         // ReducedFrom includes the original IEndpointRouteBuilder parameter.
         if (
-            !(method.ReducedFrom ?? method).Parameters.Any(a =>
-                SymbolEqualityComparer.Default.Equals(
-                    a.Type,
-                    wellKnownTypes.Get(
-                        WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+            !(method.ReducedFrom ?? method)
+                .Parameters
+                .Any(a =>
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            a.Type,
+                            wellKnownTypes.Get(
+                                WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+                            )
+                        )
+                    || a.Type.Implements(
+                        wellKnownTypes.Get(
+                            WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
+                        )
                     )
                 )
-                || a.Type.Implements(
-                    wellKnownTypes.Get(
-                        WellKnownType.Microsoft_AspNetCore_Routing_IEndpointRouteBuilder
-                    )
-                )
-            )
         )
         {
             return null;
@@ -364,9 +370,9 @@ internal static class RouteUsageDetector
 
         // Method has a delegate parameter. Could be Delegate or something that inherits from it, e.g. RequestDelegate.
         var delegateSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_Delegate);
-        var delegateParameter = method.Parameters.FirstOrDefault(p =>
-            delegateSymbol.IsAssignableFrom(p.Type)
-        );
+        var delegateParameter = method
+            .Parameters
+            .FirstOrDefault(p => delegateSymbol.IsAssignableFrom(p.Type));
         if (delegateParameter == null)
         {
             return null;
@@ -379,11 +385,13 @@ internal static class RouteUsageDetector
         }
 
         var stringSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_String);
-        var routeStringParameter = method.Parameters.FirstOrDefault(p =>
-            SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type)
-            && RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(p, out var identifer)
-            && identifer == "Route"
-        );
+        var routeStringParameter = method
+            .Parameters
+            .FirstOrDefault(p =>
+                SymbolEqualityComparer.Default.Equals(stringSymbol, p.Type)
+                && RouteStringSyntaxDetector.HasMatchingStringSyntaxAttribute(p, out var identifer)
+                && identifer == "Route"
+            );
         if (routeStringParameter == null)
         {
             return null;

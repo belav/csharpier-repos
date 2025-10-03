@@ -59,40 +59,46 @@ namespace System.Web.Http.Filters
         [Fact]
         public void ActionContext_Property()
         {
-            Assert.Reflection.Property<HttpActionExecutedContext, HttpActionContext>(
-                instance: new HttpActionExecutedContext(),
-                propertyGetter: aec => aec.ActionContext,
-                expectedDefaultValue: null,
-                allowNull: false,
-                roundTripTestValue: ContextUtil.CreateActionContext()
-            );
+            Assert
+                .Reflection
+                .Property<HttpActionExecutedContext, HttpActionContext>(
+                    instance: new HttpActionExecutedContext(),
+                    propertyGetter: aec => aec.ActionContext,
+                    expectedDefaultValue: null,
+                    allowNull: false,
+                    roundTripTestValue: ContextUtil.CreateActionContext()
+                );
         }
 
         [Fact]
         public void Exception_Property()
         {
-            Assert.Reflection.Property<HttpActionExecutedContext, Exception>(
-                instance: new HttpActionExecutedContext(),
-                propertyGetter: aec => aec.Exception,
-                expectedDefaultValue: null,
-                allowNull: true,
-                roundTripTestValue: new ArgumentException()
-            );
+            Assert
+                .Reflection
+                .Property<HttpActionExecutedContext, Exception>(
+                    instance: new HttpActionExecutedContext(),
+                    propertyGetter: aec => aec.Exception,
+                    expectedDefaultValue: null,
+                    allowNull: true,
+                    roundTripTestValue: new ArgumentException()
+                );
         }
 
         [Fact]
         public void Result_Property()
         {
-            Assert.Reflection.Property<HttpActionExecutedContext, HttpResponseMessage>(
-                instance: new HttpActionExecutedContext(
-                    actionContext: ContextUtil.CreateActionContext(),
-                    exception: null
-                ),
-                propertyGetter: aec => aec.Response,
-                expectedDefaultValue: null,
-                allowNull: true,
-                roundTripTestValue: new HttpResponseMessage()
-            );
+            Assert
+                .Reflection
+                .Property<HttpActionExecutedContext, HttpResponseMessage>(
+                    instance: new HttpActionExecutedContext(
+                        actionContext: ContextUtil.CreateActionContext(),
+                        exception: null
+                    ),
+                    propertyGetter: aec => aec.Response,
+                    expectedDefaultValue: null,
+                    allowNull: true,
+                    roundTripTestValue: new HttpResponseMessage()
+                );
         }
     }
 }

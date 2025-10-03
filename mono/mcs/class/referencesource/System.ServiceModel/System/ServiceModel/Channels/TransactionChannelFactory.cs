@@ -42,9 +42,11 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!TransactionProtocol.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
+                        );
                 this.transactionProtocol = value;
             }
         }
@@ -154,9 +156,9 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    CreateChannelTypeNotSupportedException(typeof(TChannel))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(CreateChannelTypeNotSupportedException(typeof(TChannel)));
             }
         }
 

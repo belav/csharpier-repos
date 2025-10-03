@@ -376,15 +376,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     // It's also used to sort the items by pattern matching results while preserving the original alphabetical order for items with
                     // same pattern match score since `List<T>.Sort` isn't stable.
                     if (
-                        threadLocalPatternMatchHelper.Value!.TryCreateMatchResult(
-                            itemData.RoslynItem,
-                            roslynInitialTriggerKind,
-                            roslynFilterReason,
-                            _recentItemsManager.GetRecentItemIndex(itemData.RoslynItem),
-                            _highlightMatchingPortions,
-                            index,
-                            out var matchResult
-                        )
+                        threadLocalPatternMatchHelper
+                            .Value!
+                            .TryCreateMatchResult(
+                                itemData.RoslynItem,
+                                roslynInitialTriggerKind,
+                                roslynFilterReason,
+                                _recentItemsManager.GetRecentItemIndex(itemData.RoslynItem),
+                                _highlightMatchingPortions,
+                                index,
+                                out var matchResult
+                            )
                     )
                     {
                         lock (_gate)
@@ -402,9 +404,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                             else
                             {
                                 if (
-                                    _snapshotData.Defaults.IndexOf(
-                                        matchResult.CompletionItem.FilterText
-                                    ) >= 0
+                                    _snapshotData
+                                        .Defaults
+                                        .IndexOf(matchResult.CompletionItem.FilterText) >= 0
                                 )
                                 {
                                     includedDefaults.TryAdd(
@@ -430,9 +432,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         if (includedPreferredItems.Contains(completionItem.FilterText))
                             continue;
 
-                        var defaultIndex = _snapshotData.Defaults.IndexOf(
-                            completionItem.FilterText
-                        );
+                        var defaultIndex = _snapshotData
+                            .Defaults
+                            .IndexOf(completionItem.FilterText);
                         var fabricatedIndex = DefaultIndexToFabricatedOriginalSortedIndex(
                             defaultIndex
                         );
@@ -495,18 +497,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         selectedItemIndex = 0;
                         bestOrFirstMatchResult = matchResults[0];
 
-                        var longestCommonPrefixLength =
-                            bestOrFirstMatchResult.FilterTextUsed.GetCaseInsensitivePrefixLength(
-                                _filterText
-                            );
+                        var longestCommonPrefixLength = bestOrFirstMatchResult
+                            .FilterTextUsed
+                            .GetCaseInsensitivePrefixLength(_filterText);
 
                         for (var i = 1; i < matchResults.Count; ++i)
                         {
                             var matchResult = matchResults[i];
-                            var commonPrefixLength =
-                                matchResult.FilterTextUsed.GetCaseInsensitivePrefixLength(
-                                    _filterText
-                                );
+                            var commonPrefixLength = matchResult
+                                .FilterTextUsed
+                                .GetCaseInsensitivePrefixLength(_filterText);
 
                             if (commonPrefixLength > longestCommonPrefixLength)
                             {
@@ -724,10 +724,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     // This also preserves the behavior the VB had through Dev12.
                     hardSelect =
                         !_hasSuggestedItemOptions
-                        && bestMatchResult.Value.FilterTextUsed.StartsWith(
-                            _filterText,
-                            StringComparison.CurrentCultureIgnoreCase
-                        );
+                        && bestMatchResult
+                            .Value
+                            .FilterTextUsed
+                            .StartsWith(_filterText, StringComparison.CurrentCultureIgnoreCase);
                 }
 
                 // The best match we have selected is unique if `moreThanOneMatch` is false.
@@ -744,15 +744,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 static int CompareForDeletion(MatchResult x, MatchResult y, string pattern)
                 {
                     // Prefer the item that matches a longer prefix of the filter text.
-                    var comparison = x
-                        .FilterTextUsed.GetCaseInsensitivePrefixLength(pattern)
+                    var comparison = x.FilterTextUsed
+                        .GetCaseInsensitivePrefixLength(pattern)
                         .CompareTo(y.FilterTextUsed.GetCaseInsensitivePrefixLength(pattern));
                     if (comparison != 0)
                         return comparison;
 
                     // If there are "Abc" vs "abc", we should prefer the case typed by user.
-                    comparison = x
-                        .FilterTextUsed.GetCaseSensitivePrefixLength(pattern)
+                    comparison = x.FilterTextUsed
+                        .GetCaseSensitivePrefixLength(pattern)
                         .CompareTo(y.FilterTextUsed.GetCaseSensitivePrefixLength(pattern));
                     if (comparison != 0)
                         return comparison;
@@ -828,10 +828,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     {
                         // Since VS item's display text is created as Prefix + DisplayText + Suffix,
                         // we can calculate the highlighted span by adding an offset that is the length of the Prefix.
-                        return patternMatch.Value.MatchedSpans.SelectAsArray(
-                            GetOffsetSpan,
-                            matchResult.CompletionItem
-                        );
+                        return patternMatch
+                            .Value
+                            .MatchedSpans
+                            .SelectAsArray(GetOffsetSpan, matchResult.CompletionItem);
                     }
 
                     // If there's no match for Roslyn item's filter text which is identical to its display text,
@@ -899,9 +899,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
                 // When no items are available for a given filter, it becomes unavailable.
                 // Expanders always appear available as long as it's presented.
-                return _snapshotData.SelectedFilters.SelectAsArray(n =>
-                    n.WithAvailability(n.Filter is CompletionExpander || filters.Contains(n.Filter))
-                );
+                return _snapshotData
+                    .SelectedFilters
+                    .SelectAsArray(n =>
+                        n.WithAvailability(
+                            n.Filter is CompletionExpander || filters.Contains(n.Filter)
+                        )
+                    );
             }
 
             /// <summary>
@@ -1185,9 +1189,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                     var item = matches[i].CompletionItem;
                     if (item.IsPreferredItem())
                     {
-                        var defaultIndex = _snapshotData.Defaults.IndexOf(
-                            matches[i].CompletionItem.FilterText
-                        );
+                        var defaultIndex = _snapshotData
+                            .Defaults
+                            .IndexOf(matches[i].CompletionItem.FilterText);
 
                         // This is not a starred item that matches default
                         if (defaultIndex < 0)

@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                     notificationOption: styleOption.Notification,
                     additionalLocations: additionalLocations.ToArrayAndFree(),
                     properties: ImmutableDictionary<string, string?>
-                        .Empty.Add(
+                        .Empty
+                        .Add(
                             Constants.NodeToGenerateKey,
                             ((int)nodeToGenerate).ToString(CultureInfo.InvariantCulture)
                         )

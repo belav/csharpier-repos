@@ -81,11 +81,13 @@ namespace System.Workflow.Runtime.Hosting
             {
                 timerCallback = new TimerCallback(OnTimerCallback);
                 pendingScheduleRequests.FirstElementChanged += OnFirstElementChanged;
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "ManualWorkflowSchedulerService: started with active timers"
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "ManualWorkflowSchedulerService: started with active timers"
+                    );
             }
         }
 
@@ -120,11 +122,13 @@ namespace System.Workflow.Runtime.Hosting
                 {
                     timerCallback = new TimerCallback(OnTimerCallback);
                     pendingScheduleRequests.FirstElementChanged += OnFirstElementChanged;
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "ManualWorkflowSchedulerService: Started with active timers"
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "ManualWorkflowSchedulerService: Started with active timers"
+                        );
                 }
             }
         }
@@ -144,12 +148,14 @@ namespace System.Workflow.Runtime.Hosting
 
             lock (locker)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "ManualWorkflowSchedulerService: Schedule workflow {0}",
-                    workflowInstanceId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "ManualWorkflowSchedulerService: Schedule workflow {0}",
+                        workflowInstanceId
+                    );
                 if (!scheduleRequests.ContainsKey(workflowInstanceId))
                     scheduleRequests.Add(
                         workflowInstanceId,
@@ -193,14 +199,16 @@ namespace System.Workflow.Runtime.Hosting
 
             lock (locker)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "ManualWorkflowSchedulerService: Schedule timer {0} for workflow {1} at {2}",
-                    timerId,
-                    workflowInstanceId,
-                    whenUtc
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "ManualWorkflowSchedulerService: Schedule timer {0} for workflow {1} at {2}",
+                        timerId,
+                        workflowInstanceId,
+                        whenUtc
+                    );
                 pendingScheduleRequests.Enqueue(
                     timerId,
                     new CallbackInfo(callback, workflowInstanceId, timerId, whenUtc),
@@ -222,12 +230,14 @@ namespace System.Workflow.Runtime.Hosting
 
             lock (locker)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "ManualWorkflowSchedulerService: Cancel timer {0}",
-                    timerId
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "ManualWorkflowSchedulerService: Cancel timer {0}",
+                        timerId
+                    );
                 pendingScheduleRequests.Remove(timerId);
             }
         }
@@ -248,12 +258,14 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (cs != null)
                 {
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "ManualWorkflowSchedulerService: Executing {0}",
-                        workflowInstanceId
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "ManualWorkflowSchedulerService: Executing {0}",
+                            workflowInstanceId
+                        );
                     if (queueCounters != null)
                     {
                         foreach (PerformanceCounter p in queueCounters)
@@ -310,12 +322,14 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (cs != null)
                 {
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "ManualWorkflowSchedulerService: Processing timer {0}",
-                        timerId
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "ManualWorkflowSchedulerService: Processing timer {0}",
+                            timerId
+                        );
                     cs.Callback(cs.InstanceId);
                     retval = true;
                 }
@@ -336,12 +350,14 @@ namespace System.Workflow.Runtime.Hosting
                 retval =
                     scheduleRequests.ContainsKey(workflowInstanceId)
                     || HasExpiredTimer(workflowInstanceId, out timerId);
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "ManualWorkflowSchedulerService: CanRun is {0}",
-                    retval
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "ManualWorkflowSchedulerService: CanRun is {0}",
+                        retval
+                    );
             }
             return retval;
         }
@@ -357,12 +373,14 @@ namespace System.Workflow.Runtime.Hosting
                     )
                 );
 
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "ManualWorkflowSchedulerService: Running workflow {0}",
-                workflowInstanceId
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "ManualWorkflowSchedulerService: Running workflow {0}",
+                    workflowInstanceId
+                );
 
             bool retval = false; // return true if we do any work at all
             while (CanRun(workflowInstanceId))
@@ -403,9 +421,11 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (queueCounters == null && this.Runtime.PerformanceCounterManager != null)
                 {
-                    queueCounters = this.Runtime.PerformanceCounterManager.CreateCounters(
-                        ExecutionStringManager.PerformanceCounterWorkflowsWaitingName
-                    );
+                    queueCounters = this.Runtime
+                        .PerformanceCounterManager
+                        .CreateCounters(
+                            ExecutionStringManager.PerformanceCounterWorkflowsWaitingName
+                        );
                 }
             }
         }
@@ -440,12 +460,14 @@ namespace System.Workflow.Runtime.Hosting
                         {
                             if (ci.IsExpired)
                             {
-                                WorkflowTrace.Host.TraceEvent(
-                                    TraceEventType.Information,
-                                    0,
-                                    "Timeout occured for timer for instance {0}",
-                                    ci.InstanceId
-                                );
+                                WorkflowTrace
+                                    .Host
+                                    .TraceEvent(
+                                        TraceEventType.Information,
+                                        0,
+                                        "Timeout occured for timer for instance {0}",
+                                        ci.InstanceId
+                                    );
                                 threadRunning = true;
                                 pendingScheduleRequests.Dequeue();
                             }
@@ -464,25 +486,29 @@ namespace System.Workflow.Runtime.Hosting
             }
             catch (ThreadAbortException e)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Timeout for instance, {0} threw exception {1}",
-                    ci == null ? Guid.Empty : ci.InstanceId,
-                    e.Message
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Timeout for instance, {0} threw exception {1}",
+                        ci == null ? Guid.Empty : ci.InstanceId,
+                        e.Message
+                    );
                 RaiseServicesExceptionNotHandledEvent(e, ci.InstanceId);
                 throw;
             }
             catch (Exception e)
             {
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Error,
-                    0,
-                    "Timeout for instance, {0} threw exception {1}",
-                    ci == null ? Guid.Empty : ci.InstanceId,
-                    e.Message
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Timeout for instance, {0} threw exception {1}",
+                        ci == null ? Guid.Empty : ci.InstanceId,
+                        e.Message
+                    );
                 RaiseServicesExceptionNotHandledEvent(e, ci.InstanceId);
             }
             finally

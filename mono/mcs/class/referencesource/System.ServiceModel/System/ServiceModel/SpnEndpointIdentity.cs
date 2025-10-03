@@ -37,13 +37,15 @@ namespace System.ServiceModel
             {
                 if (value.Ticks < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            value.Ticks,
-                            SR.GetString(SR.ValueMustBeNonNegative)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                value.Ticks,
+                                SR.GetString(SR.ValueMustBeNonNegative)
+                            )
+                        );
                 }
                 spnLookupTime = value;
             }
@@ -65,13 +67,15 @@ namespace System.ServiceModel
             // PreSharp Bug: Parameter 'identity.ResourceType' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506 // Claim.ClaimType will never return null
             if (!identity.ClaimType.Equals(ClaimTypes.Spn))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.UnrecognizedClaimTypeForIdentity,
-                        identity.ClaimType,
-                        ClaimTypes.Spn
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.UnrecognizedClaimTypeForIdentity,
+                            identity.ClaimType,
+                            ClaimTypes.Spn
+                        )
+                    );
 
             base.Initialize(identity);
         }

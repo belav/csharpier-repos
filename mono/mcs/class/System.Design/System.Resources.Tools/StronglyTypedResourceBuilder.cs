@@ -284,30 +284,36 @@ namespace System.Resources.Tools
                 else if (!kvp.Value.toIgnore)
                 {
                     if (kvp.Value.Resource is Stream)
-                        resType.Members.Add(
-                            GenerateStreamResourceProp(
-                                kvp.Value.VerifiedKey,
-                                kvp.Key,
-                                internalClass
-                            )
-                        );
+                        resType
+                            .Members
+                            .Add(
+                                GenerateStreamResourceProp(
+                                    kvp.Value.VerifiedKey,
+                                    kvp.Key,
+                                    internalClass
+                                )
+                            );
                     else if (kvp.Value.Resource is String)
-                        resType.Members.Add(
-                            GenerateStringResourceProp(
-                                kvp.Value.VerifiedKey,
-                                kvp.Key,
-                                internalClass
-                            )
-                        );
+                        resType
+                            .Members
+                            .Add(
+                                GenerateStringResourceProp(
+                                    kvp.Value.VerifiedKey,
+                                    kvp.Key,
+                                    internalClass
+                                )
+                            );
                     else
-                        resType.Members.Add(
-                            GenerateStandardResourceProp(
-                                kvp.Value.VerifiedKey,
-                                kvp.Key,
-                                kvp.Value.Resource.GetType(),
-                                internalClass
-                            )
-                        );
+                        resType
+                            .Members
+                            .Add(
+                                GenerateStandardResourceProp(
+                                    kvp.Value.VerifiedKey,
+                                    kvp.Key,
+                                    kvp.Value.Resource.GetType(),
+                                    internalClass
+                                )
+                            );
                 }
             }
 
@@ -336,9 +342,9 @@ namespace System.Resources.Tools
             resType.Members.Add(GenerateConstructor());
 
             // Default Properties
-            resType.Members.Add(
-                GenerateResourceManagerProp(baseNameToUse, resourcesToUse, internalClass)
-            );
+            resType
+                .Members
+                .Add(GenerateResourceManagerProp(baseNameToUse, resourcesToUse, internalClass));
             resType.Members.Add(GenerateCultureProp(internalClass));
 
             return ccu;
@@ -407,27 +413,33 @@ namespace System.Resources.Tools
                 resType.TypeAttributes = TypeAttributes.Public;
 
             //class CustomAttributes
-            resType.CustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    "System.CodeDom.Compiler.GeneratedCodeAttribute",
-                    new CodeAttributeArgument(
-                        new CodePrimitiveExpression(
-                            "System.Resources.Tools.StronglyTypedResourceBuilder"
-                        )
-                    ),
-                    new CodeAttributeArgument(new CodePrimitiveExpression("4.0.0.0"))
-                )
-            );
+            resType
+                .CustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        "System.CodeDom.Compiler.GeneratedCodeAttribute",
+                        new CodeAttributeArgument(
+                            new CodePrimitiveExpression(
+                                "System.Resources.Tools.StronglyTypedResourceBuilder"
+                            )
+                        ),
+                        new CodeAttributeArgument(new CodePrimitiveExpression("4.0.0.0"))
+                    )
+                );
 
-            resType.CustomAttributes.Add(
-                new CodeAttributeDeclaration("System.Diagnostics.DebuggerNonUserCodeAttribute")
-            );
+            resType
+                .CustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration("System.Diagnostics.DebuggerNonUserCodeAttribute")
+                );
 
-            resType.CustomAttributes.Add(
-                new CodeAttributeDeclaration(
-                    "System.Runtime.CompilerServices.CompilerGeneratedAttribute"
-                )
-            );
+            resType
+                .CustomAttributes
+                .Add(
+                    new CodeAttributeDeclaration(
+                        "System.Runtime.CompilerServices.CompilerGeneratedAttribute"
+                    )
+                );
 
             return resType;
         }
@@ -510,19 +522,23 @@ namespace System.Resources.Tools
             cultureProp.CustomAttributes.Add(DefaultPropertyAttribute());
 
             // getter
-            cultureProp.GetStatements.Add(
-                new CodeMethodReturnStatement(
-                    new CodeFieldReferenceExpression(null, "resourceCulture")
-                )
-            );
+            cultureProp
+                .GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeFieldReferenceExpression(null, "resourceCulture")
+                    )
+                );
 
             // setter
-            cultureProp.SetStatements.Add(
-                new CodeAssignStatement(
-                    new CodeFieldReferenceExpression(null, "resourceCulture"),
-                    new CodePropertySetValueReferenceExpression()
-                )
-            );
+            cultureProp
+                .SetStatements
+                .Add(
+                    new CodeAssignStatement(
+                        new CodeFieldReferenceExpression(null, "resourceCulture"),
+                        new CodePropertySetValueReferenceExpression()
+                    )
+                );
 
             return cultureProp;
         }
@@ -566,23 +582,29 @@ namespace System.Resources.Tools
                 new CodeVariableReferenceExpression("temp")
             );
 
-            resourceManagerProp.GetStatements.Add(
-                new CodeConditionStatement(
-                    new CodeMethodInvokeExpression(
-                        new CodeMethodReferenceExpression(
-                            new CodeTypeReferenceExpression("System.Object"),
-                            "Equals"
+            resourceManagerProp
+                .GetStatements
+                .Add(
+                    new CodeConditionStatement(
+                        new CodeMethodInvokeExpression(
+                            new CodeMethodReferenceExpression(
+                                new CodeTypeReferenceExpression("System.Object"),
+                                "Equals"
+                            ),
+                            new CodePrimitiveExpression(null),
+                            new CodeFieldReferenceExpression(null, "resourceMan")
                         ),
-                        new CodePrimitiveExpression(null),
-                        new CodeFieldReferenceExpression(null, "resourceMan")
-                    ),
-                    trueStatements
-                )
-            );
+                        trueStatements
+                    )
+                );
 
-            resourceManagerProp.GetStatements.Add(
-                new CodeMethodReturnStatement(new CodeFieldReferenceExpression(null, "resourceMan"))
-            );
+            resourceManagerProp
+                .GetStatements
+                .Add(
+                    new CodeMethodReturnStatement(
+                        new CodeFieldReferenceExpression(null, "resourceMan")
+                    )
+                );
 
             return resourceManagerProp;
         }

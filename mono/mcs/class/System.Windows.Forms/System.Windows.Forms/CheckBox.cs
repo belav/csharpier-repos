@@ -135,24 +135,28 @@ namespace System.Windows.Forms
             Rectangle text_rectangle;
             Rectangle image_rectangle;
 
-            ThemeEngine.Current.CalculateCheckBoxTextAndImageLayout(
-                this,
-                Point.Empty,
-                out glyph_rectangle,
-                out text_rectangle,
-                out image_rectangle
-            );
+            ThemeEngine
+                .Current
+                .CalculateCheckBoxTextAndImageLayout(
+                    this,
+                    Point.Empty,
+                    out glyph_rectangle,
+                    out text_rectangle,
+                    out image_rectangle
+                );
 
             // Draw our button
             if (FlatStyle != FlatStyle.System)
-                ThemeEngine.Current.DrawCheckBox(
-                    pe.Graphics,
-                    this,
-                    glyph_rectangle,
-                    text_rectangle,
-                    image_rectangle,
-                    pe.ClipRectangle
-                );
+                ThemeEngine
+                    .Current
+                    .DrawCheckBox(
+                        pe.Graphics,
+                        this,
+                        glyph_rectangle,
+                        text_rectangle,
+                        image_rectangle,
+                        pe.ClipRectangle
+                    );
             else
                 ThemeEngine.Current.DrawCheckBox(pe.Graphics, this.ClientRectangle, this);
         }

@@ -48,9 +48,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 keyBagAttrs[1].Values[0]
             );
 
-            byte[] cspNameBytes = Encoding.BigEndianUnicode.GetBytes(
-                "Microsoft Strong Cryptographic Provider"
-            );
+            byte[] cspNameBytes = Encoding
+                .BigEndianUnicode
+                .GetBytes("Microsoft Strong Cryptographic Provider");
 
             Assert.Equal(
                 $"1E{cspNameBytes.Length:X2}{cspNameBytes.ByteArrayToHex()}",

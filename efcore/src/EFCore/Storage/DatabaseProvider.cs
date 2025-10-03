@@ -56,7 +56,8 @@ public class DatabaseProvider<TOptionsExtension> : IDatabaseProvider
     /// </summary>
     public virtual string? Version =>
         typeof(TOptionsExtension)
-            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            .Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion;
 
     /// <summary>

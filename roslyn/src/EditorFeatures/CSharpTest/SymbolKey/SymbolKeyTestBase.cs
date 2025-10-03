@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             );
 
             var ret = CodeAnalysis
-                .SymbolKey.GetComparer(ignoreCase, ignoreAssemblyIds)
+                .SymbolKey
+                .GetComparer(ignoreCase, ignoreAssemblyIds)
                 .Equals(sid2, sid1);
             if (expectEqual)
             {

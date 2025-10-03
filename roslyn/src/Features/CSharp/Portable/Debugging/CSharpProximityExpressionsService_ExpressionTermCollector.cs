@@ -298,9 +298,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             if (arrayCreationExpression.Initializer != null)
             {
                 var flags = ExpressionType.Invalid;
-                arrayCreationExpression.Initializer.Expressions.Do(e =>
-                    AddSubExpressionTerms(e, terms, ref flags)
-                );
+                arrayCreationExpression
+                    .Initializer
+                    .Expressions
+                    .Do(e => AddSubExpressionTerms(e, terms, ref flags));
 
                 validTerm &= IsValidTerm(flags);
             }

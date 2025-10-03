@@ -54,7 +54,8 @@ namespace System.ServiceModel
             BindingsSection bindingsSection = ConfigUtil.BindingsSection;
             WebHttpBindingElement el = (WebHttpBindingElement)
                 bindingsSection["webHttpBinding"]
-                    .ConfiguredBindings.FirstOrDefault(c => c.Name == configurationName);
+                    .ConfiguredBindings
+                    .FirstOrDefault(c => c.Name == configurationName);
             if (el != null)
             {
                 Initialize(el.Security.Mode); // to initialize Transport correctly.

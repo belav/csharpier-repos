@@ -78,9 +78,9 @@ namespace System.ServiceModel.Channels
             if (null == message)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             if (null == message.Properties)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "message.Properties"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("message.Properties");
 
             return message.Properties[Name] as MsmqMessageProperty;
         }

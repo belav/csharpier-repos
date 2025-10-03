@@ -39,10 +39,12 @@ internal class HubSample
             logging.AddConsole();
         });
 
-        connectionBuilder.Services.Configure<LoggerFilterOptions>(options =>
-        {
-            options.MinLevel = LogLevel.Trace;
-        });
+        connectionBuilder
+            .Services
+            .Configure<LoggerFilterOptions>(options =>
+            {
+                options.MinLevel = LogLevel.Trace;
+            });
 
         if (uri.Scheme == "net.tcp")
         {

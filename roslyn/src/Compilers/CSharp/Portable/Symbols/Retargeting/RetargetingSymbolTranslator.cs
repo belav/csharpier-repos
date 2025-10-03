@@ -564,10 +564,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                             type.MetadataName,
                             forcedArity: type.Arity
                         );
-                        result1 = destination.To.LookupDeclaredOrForwardedTopLevelMetadataType(
-                            ref mdName,
-                            visitedAssemblies: null
-                        );
+                        result1 = destination
+                            .To
+                            .LookupDeclaredOrForwardedTopLevelMetadataType(
+                                ref mdName,
+                                visitedAssemblies: null
+                            );
                     }
 
                     Debug.Assert(result1.Arity == type.Arity);
@@ -1287,22 +1289,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     IEqualityComparer<MethodSymbol> retargetedMethodComparer
                 )
                 {
-                    var targetParams = method.Parameters.SelectAsArray(
-                        static ParameterSymbol (param, translator) =>
-                            new SignatureOnlyParameterSymbol(
-                                translator.Retarget(
-                                    param.TypeWithAnnotations,
-                                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                    var targetParams = method
+                        .Parameters
+                        .SelectAsArray(
+                            static ParameterSymbol (param, translator) =>
+                                new SignatureOnlyParameterSymbol(
+                                    translator.Retarget(
+                                        param.TypeWithAnnotations,
+                                        RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                                    ),
+                                    translator.RetargetModifiers(
+                                        param.RefCustomModifiers,
+                                        modifiersHaveChanged: out _
+                                    ),
+                                    param.IsParams,
+                                    param.RefKind
                                 ),
-                                translator.RetargetModifiers(
-                                    param.RefCustomModifiers,
-                                    modifiersHaveChanged: out _
-                                ),
-                                param.IsParams,
-                                param.RefKind
-                            ),
-                        translator
-                    );
+                            translator
+                        );
 
                     // We will be using this symbol only for the purpose of method signature comparison,
                     // IndexedTypeParameterSymbols should work just fine as the type parameters for the method.
@@ -1379,22 +1383,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                 IEqualityComparer<PropertySymbol> retargetedPropertyComparer
             )
             {
-                var targetParams = property.Parameters.SelectAsArray(
-                    static ParameterSymbol (param, self) =>
-                        new SignatureOnlyParameterSymbol(
-                            self.Retarget(
-                                param.TypeWithAnnotations,
-                                RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                var targetParams = property
+                    .Parameters
+                    .SelectAsArray(
+                        static ParameterSymbol (param, self) =>
+                            new SignatureOnlyParameterSymbol(
+                                self.Retarget(
+                                    param.TypeWithAnnotations,
+                                    RetargetOptions.RetargetPrimitiveTypesByTypeCode
+                                ),
+                                self.RetargetModifiers(
+                                    param.RefCustomModifiers,
+                                    modifiersHaveChanged: out _
+                                ),
+                                param.IsParams,
+                                param.RefKind
                             ),
-                            self.RetargetModifiers(
-                                param.RefCustomModifiers,
-                                modifiersHaveChanged: out _
-                            ),
-                            param.IsParams,
-                            param.RefKind
-                        ),
-                    this
-                );
+                        this
+                    );
 
                 var targetProperty = new SignatureOnlyPropertySymbol(
                     property.Name,

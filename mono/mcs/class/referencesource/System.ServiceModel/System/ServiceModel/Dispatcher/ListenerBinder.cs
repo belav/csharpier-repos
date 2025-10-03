@@ -41,11 +41,13 @@ namespace System.ServiceModel.Dispatcher
             if (duplexSession != null)
                 return new DuplexSessionListenerBinder(duplexSession, messageVersion);
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    SR.GetString(SR.UnknownListenerType1, listener.Uri.AbsoluteUri)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnknownListenerType1, listener.Uri.AbsoluteUri)
+                    )
+                );
         }
 
         // ------------------------------------------------------------------------------------------------------------

@@ -42,10 +42,12 @@ internal class Mainy
             Threads = Int64.Parse(args[0]);
         }
 
-        TestLibrary.Logging.WriteLine(
-            "LargeObjectAlloc started with {0} threads. Control-C to exit",
-            Threads.ToString()
-        );
+        TestLibrary
+            .Logging
+            .WriteLine(
+                "LargeObjectAlloc started with {0} threads. Control-C to exit",
+                Threads.ToString()
+            );
 
         Thread myThread = null;
         for (long i = 0; i < Threads; i++)

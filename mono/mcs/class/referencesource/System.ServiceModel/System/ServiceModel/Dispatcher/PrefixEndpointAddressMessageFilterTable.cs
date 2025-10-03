@@ -43,11 +43,13 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(
                 "EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"
             );
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    "EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        "EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"
+                    )
+                );
         }
 
         public void Add(PrefixEndpointAddressMessageFilter filter, TFilterData data)
@@ -140,11 +142,13 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(
                 "EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"
             );
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(
-                    "EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new InvalidOperationException(
+                        "EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"
+                    )
+                );
         }
 
         public bool Remove(PrefixEndpointAddressMessageFilter filter)

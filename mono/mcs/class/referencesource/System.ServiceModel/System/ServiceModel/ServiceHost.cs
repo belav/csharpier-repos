@@ -154,18 +154,20 @@ namespace System.ServiceModel
                 if (value < TimeSpan.Zero)
                 {
                     string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value", message)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value", message));
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 lock (this.ThisLock)
@@ -258,18 +260,20 @@ namespace System.ServiceModel
                 if (value < TimeSpan.Zero)
                 {
                     string message = SR.GetString(SR.SFxTimeoutOutOfRange0);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value", message)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value", message));
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                            )
+                        );
                 }
 
                 lock (this.ThisLock)
@@ -332,9 +336,11 @@ namespace System.ServiceModel
         {
             if (this.initializeDescriptionHasFinished)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SFxCannotCallAddBaseAddress))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxCannotCallAddBaseAddress))
+                    );
             }
             this.baseAddresses.Add(baseAddress);
         }
@@ -357,9 +363,9 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("address")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("address"));
             }
 
             ServiceEndpoint endpoint = this.AddServiceEndpoint(
@@ -394,23 +400,23 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("address")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("address"));
             }
 
             if (binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("binding")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("binding"));
             }
 
             if (implementedContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("implementedContract")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("implementedContract"));
             }
 
             if (
@@ -418,20 +424,24 @@ namespace System.ServiceModel
                 && this.State != CommunicationState.Opening
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
+                        )
+                    );
             }
 
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
+                        )
+                    );
             }
 
             Uri via = this.MakeAbsoluteUri(address, binding);
@@ -472,37 +482,41 @@ namespace System.ServiceModel
                 && this.State != CommunicationState.Opening
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointAfterOpen)
+                        )
+                    );
             }
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxServiceHostBaseCannotAddEndpointWithoutDescription)
+                        )
+                    );
             }
             if (endpoint.Address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SFxEndpointAddressNotSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SFxEndpointAddressNotSpecified));
             }
             if (endpoint.Contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SFxEndpointContractNotSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SFxEndpointContractNotSpecified));
             }
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SFxEndpointBindingNotSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SFxEndpointBindingNotSpecified));
             }
             if (
                 !endpoint.IsSystemEndpoint
@@ -529,9 +543,9 @@ namespace System.ServiceModel
             }
             if (endpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SFxEndpointBindingNotSpecified)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SFxEndpointBindingNotSpecified));
             }
             Uri absoluteUri = MakeAbsoluteUri(
                 new Uri(relativeAddress, UriKind.Relative),
@@ -556,25 +570,29 @@ namespace System.ServiceModel
             {
                 if (binding.Scheme == string.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.SFxCustomBindingWithoutTransport)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxCustomBindingWithoutTransport)
+                            )
+                        );
                 }
                 result = GetVia(binding.Scheme, result, baseAddresses);
                 if (result == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SFxEndpointNoMatchingScheme,
-                                binding.Scheme,
-                                binding.Name,
-                                GetBaseAddressSchemes(baseAddresses)
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxEndpointNoMatchingScheme,
+                                    binding.Scheme,
+                                    binding.Name,
+                                    GetBaseAddressSchemes(baseAddresses)
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             return result;
@@ -584,13 +602,15 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             ConfigLoader configLoader = new ConfigLoader(GetContractResolver(implementedContracts));
@@ -632,14 +652,16 @@ namespace System.ServiceModel
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Exception(
-                                SR.GetString(
-                                    SR.BindingProtocolMappingNotDefined,
-                                    baseAddress.Scheme
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new Exception(
+                                    SR.GetString(
+                                        SR.BindingProtocolMappingNotDefined,
+                                        baseAddress.Scheme
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
             }
@@ -690,11 +712,15 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxServiceHostBaseCannotInitializeRuntimeWithoutDescription)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxServiceHostBaseCannotInitializeRuntimeWithoutDescription
+                            )
+                        )
+                    );
             }
 
             if (this.Description.Endpoints.Count == 0)
@@ -733,8 +759,9 @@ namespace System.ServiceModel
                     || this.State == CommunicationState.Opening,
                 ""
             );
-            ServiceAuthorizationBehavior a =
-                description.Behaviors.Find<ServiceAuthorizationBehavior>();
+            ServiceAuthorizationBehavior a = description
+                .Behaviors
+                .Find<ServiceAuthorizationBehavior>();
 
             if (a == null)
             {
@@ -752,8 +779,9 @@ namespace System.ServiceModel
                     || this.State == CommunicationState.Opening,
                 ""
             );
-            ServiceAuthenticationBehavior a =
-                description.Behaviors.Find<ServiceAuthenticationBehavior>();
+            ServiceAuthenticationBehavior a = description
+                .Behaviors
+                .Find<ServiceAuthenticationBehavior>();
 
             if (a == null)
             {
@@ -969,13 +997,15 @@ namespace System.ServiceModel
             }
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxServiceHostBaseCannotLoadConfigurationSectionWithoutDescription
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxServiceHostBaseCannotLoadConfigurationSectionWithoutDescription
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             ConfigLoader configLoader = new ConfigLoader(
@@ -1271,13 +1301,15 @@ namespace System.ServiceModel
                 )
                 {
                     HttpTransportBindingElement httpTransportBindingElement = serviceEndpoint
-                        .Binding.CreateBindingElements()
+                        .Binding
+                        .CreateBindingElements()
                         .Find<HttpTransportBindingElement>();
 
                     if (httpTransportBindingElement != null)
                     {
-                        AuthenticationSchemes hostSupportedAuthenticationSchemes =
-                            AspNetEnvironment.Current.GetAuthenticationSchemes(
+                        AuthenticationSchemes hostSupportedAuthenticationSchemes = AspNetEnvironment
+                            .Current
+                            .GetAuthenticationSchemes(
                                 this.baseAddresses[serviceEndpoint.ListenUri.Scheme]
                             );
 
@@ -1333,8 +1365,9 @@ namespace System.ServiceModel
                     this.readOnlyCredentials = credentialsCopy;
                 }
 
-                ServiceAuthorizationBehavior authorization =
-                    description.Behaviors.Find<ServiceAuthorizationBehavior>();
+                ServiceAuthorizationBehavior authorization = description
+                    .Behaviors
+                    .Find<ServiceAuthorizationBehavior>();
                 if (authorization != null)
                 {
                     ServiceAuthorizationBehavior authorizationCopy = authorization.Clone();
@@ -1342,8 +1375,9 @@ namespace System.ServiceModel
                     this.readOnlyAuthorization = authorizationCopy;
                 }
 
-                ServiceAuthenticationBehavior authentication =
-                    description.Behaviors.Find<ServiceAuthenticationBehavior>();
+                ServiceAuthenticationBehavior authentication = description
+                    .Behaviors
+                    .Find<ServiceAuthenticationBehavior>();
                 if (authentication != null)
                 {
                     ServiceAuthenticationBehavior authenticationCopy = authentication.Clone();
@@ -1705,11 +1739,9 @@ namespace System.ServiceModel
                         dispatcher.CloseInput(this.timeoutHelper.RemainingTime());
                     }
 
-                    result = this.serviceHost.instances.BeginCloseInput(
-                        this.timeoutHelper.RemainingTime(),
-                        callback,
-                        this
-                    );
+                    result = this.serviceHost
+                        .instances
+                        .BeginCloseInput(this.timeoutHelper.RemainingTime(), callback, this);
                 }
                 catch (Exception e)
                 {
@@ -1988,9 +2020,9 @@ namespace System.ServiceModel
         {
             if (serviceType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serviceType")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serviceType"));
             }
 
             this.serviceType = serviceType;
@@ -2072,9 +2104,9 @@ namespace System.ServiceModel
         {
             if (address == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("address")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("address"));
             }
 
             ServiceEndpoint endpoint = this.AddServiceEndpoint(
@@ -2107,38 +2139,44 @@ namespace System.ServiceModel
             if (!implementedContract.IsDefined(typeof(ServiceContractAttribute), false))
             {
 #pragma warning suppress 56506 // implementedContract is never null at this point
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SfxServiceContractAttributeNotFound,
-                            implementedContract.FullName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxServiceContractAttributeNotFound,
+                                implementedContract.FullName
+                            )
                         )
-                    )
-                );
+                    );
             }
             if (!reflectedAndBehaviorContracts.Contains(implementedContract))
             {
                 if (implementedContract == typeof(IMetadataExchange))
 #pragma warning suppress 56506 // ServiceType is never null at this point
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SfxReflectedContractKeyNotFoundIMetadataExchange,
-                                this.serviceType.FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SfxReflectedContractKeyNotFoundIMetadataExchange,
+                                    this.serviceType.FullName
+                                )
                             )
-                        )
-                    );
+                        );
                 else
 #pragma warning suppress 56506 // implementedContract and ServiceType are never null at this point
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.SfxReflectedContractKeyNotFound2,
-                                implementedContract.FullName,
-                                this.serviceType.FullName
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SfxReflectedContractKeyNotFound2,
+                                    implementedContract.FullName,
+                                    this.serviceType.FullName
+                                )
                             )
-                        )
-                    );
+                        );
             }
         }
 
@@ -2151,20 +2189,22 @@ namespace System.ServiceModel
         {
             if (implementedContract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("implementedContract")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("implementedContract"));
             }
             if (this.reflectedContracts == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SfxReflectedContractsNotInitialized1,
-                            implementedContract.FullName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxReflectedContractsNotInitialized1,
+                                implementedContract.FullName
+                            )
                         )
-                    )
-                );
+                    );
             }
             ReflectedAndBehaviorContractCollection reflectedAndBehaviorContracts =
                 new ReflectedAndBehaviorContractCollection(
@@ -2307,13 +2347,15 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             ConfigLoader configLoader = new ConfigLoader(
@@ -2334,13 +2376,15 @@ namespace System.ServiceModel
         {
             if (this.Description == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxServiceHostBaseCannotApplyConfigurationWithoutDescription
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             ConfigLoader configLoader = new ConfigLoader(
@@ -2426,11 +2470,13 @@ namespace System.ServiceModel
         {
             if (this.serviceType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxServiceHostCannotCreateDescriptionWithoutServiceType)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxServiceHostCannotCreateDescriptionWithoutServiceType)
+                        )
+                    );
             }
 
             ServiceDescription description;
@@ -2442,8 +2488,9 @@ namespace System.ServiceModel
             {
                 description = ServiceDescription.GetService(this.serviceType);
             }
-            ServiceBehaviorAttribute serviceBehavior =
-                description.Behaviors.Find<ServiceBehaviorAttribute>();
+            ServiceBehaviorAttribute serviceBehavior = description
+                .Behaviors
+                .Find<ServiceBehaviorAttribute>();
             object serviceInstanceUsedAsABehavior = serviceBehavior.GetWellKnownSingleton();
             if (serviceInstanceUsedAsABehavior == null)
             {
@@ -2533,9 +2580,9 @@ namespace System.ServiceModel
         {
             if (serviceType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serviceType")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serviceType"));
             }
 
             this.serviceType = serviceType;
@@ -2633,15 +2680,17 @@ namespace System.ServiceModel
 
                 Fx.Assert("Calls to GetConfigKey are preceeded by calls to Contains.");
 #pragma warning suppress 56506 // implementedContract is never null at this point
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SfxReflectedContractKeyNotFound2,
-                            implementedContract.FullName,
-                            string.Empty
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxReflectedContractKeyNotFound2,
+                                implementedContract.FullName,
+                                string.Empty
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
     }

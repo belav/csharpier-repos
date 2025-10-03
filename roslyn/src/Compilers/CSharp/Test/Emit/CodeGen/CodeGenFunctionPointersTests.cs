@@ -7669,31 +7669,33 @@ Derived2 Stdcall, Stdcall, Thiscall ref return
 
                         Assert.True(
                             baseM1
-                                .Parameters.Single()
-                                .Type.Equals(
+                                .Parameters
+                                .Single()
+                                .Type
+                                .Equals(
                                     derivedM1.Parameters.Single().Type,
                                     TypeCompareKind.ConsiderEverything
                                 )
                         );
                         Assert.True(
-                            baseM2.ReturnType.Equals(
-                                derivedM2.ReturnType,
-                                TypeCompareKind.ConsiderEverything
-                            )
+                            baseM2
+                                .ReturnType
+                                .Equals(derivedM2.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                         Assert.True(
                             baseM3
-                                .Parameters.Single()
-                                .Type.Equals(
+                                .Parameters
+                                .Single()
+                                .Type
+                                .Equals(
                                     derivedM3.Parameters.Single().Type,
                                     TypeCompareKind.ConsiderEverything
                                 )
                         );
                         Assert.True(
-                            baseM4.ReturnType.Equals(
-                                derivedM4.ReturnType,
-                                TypeCompareKind.ConsiderEverything
-                            )
+                            baseM4
+                                .ReturnType
+                                .Equals(derivedM4.ReturnType, TypeCompareKind.ConsiderEverything)
                         );
                     }
                 };
@@ -13185,7 +13187,8 @@ unsafe class D
                 callConvCdecl!.Equals(
                     (NamedTypeSymbol)
                         m.GetUnmanagedCallersOnlyAttributeData(forceComplete: true)!
-                            .CallingConventionTypes.Single(),
+                            .CallingConventionTypes
+                            .Single(),
                     TypeCompareKind.ConsiderEverything
                 )
             );

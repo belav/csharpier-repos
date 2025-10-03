@@ -1544,11 +1544,13 @@ namespace System.Windows.Forms
             else
             {
 #if DEBUG
-                Console.Error.WriteLine(
-                    "setting bottom to value greater then maximum ({0}, {1})",
-                    nv,
-                    vbar.Maximum
-                );
+                Console
+                    .Error
+                    .WriteLine(
+                        "setting bottom to value greater then maximum ({0}, {1})",
+                        nv,
+                        vbar.Maximum
+                    );
 #endif
             }
         }
@@ -1985,13 +1987,15 @@ namespace System.Windows.Forms
             if (draw_mode == TreeViewDrawMode.Normal || draw_mode == TreeViewDrawMode.OwnerDrawText)
             {
                 if ((show_root_lines || node.Parent != null) && show_plus_minus && child_count > 0)
-                    ThemeEngine.Current.TreeViewDrawNodePlusMinus(
-                        this,
-                        node,
-                        dc,
-                        node.GetLinesX() - Indent + 5,
-                        middle
-                    );
+                    ThemeEngine
+                        .Current
+                        .TreeViewDrawNodePlusMinus(
+                            this,
+                            node,
+                            dc,
+                            node.GetLinesX() - Indent + 5,
+                            middle
+                        );
 
                 if (checkboxes && state_image_list == null)
                     DrawNodeCheckBox(node, dc, CheckBoxLeft(node) - 3, middle);

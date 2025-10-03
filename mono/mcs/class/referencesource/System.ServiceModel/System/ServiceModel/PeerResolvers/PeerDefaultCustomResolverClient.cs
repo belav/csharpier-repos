@@ -116,9 +116,13 @@ namespace System.ServiceModel.PeerResolvers
 
                 if (nodeAddress.IPAddresses.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.MustRegisterMoreThanZeroAddresses))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(SR.MustRegisterMoreThanZeroAddresses)
+                            )
+                        );
                 }
 
                 foreach (IPAddress address in nodeAddress.IPAddresses)
@@ -146,9 +150,11 @@ namespace System.ServiceModel.PeerResolvers
 
                 if (addresslist.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationException(SR.GetString(SR.AmbiguousConnectivitySpec))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationException(SR.GetString(SR.AmbiguousConnectivitySpec))
+                        );
                 }
 
                 ReadOnlyCollection<IPAddress> addresses = new ReadOnlyCollection<IPAddress>(

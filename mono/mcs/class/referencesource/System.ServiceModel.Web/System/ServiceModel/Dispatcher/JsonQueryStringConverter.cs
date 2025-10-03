@@ -31,13 +31,16 @@ namespace System.ServiceModel.Dispatcher
         {
             if (operationDescription == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "operationDescription"
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("operationDescription");
             }
             this.operationDescription = operationDescription;
-            this.dataContractSerializerOperationBehavior =
-                this.operationDescription.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            this.dataContractSerializerOperationBehavior = this.operationDescription
+                .Behaviors
+                .Find<DataContractSerializerOperationBehavior>();
         }
 
         public override bool CanConvert(Type type)
@@ -50,9 +53,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (parameterType == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "parameterType"
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("parameterType");
             }
             switch (Type.GetTypeCode(parameterType))
             {
@@ -178,11 +183,13 @@ namespace System.ServiceModel.Dispatcher
             GetDataContractJsonSerializer(parameterType).WriteObject(jsonWriter, parameter);
             jsonWriter.Flush();
             memoryStream.Seek(0, SeekOrigin.Begin);
-            return Encoding.UTF8.GetString(
-                memoryStream.GetBuffer(),
-                (int)memoryStream.Position,
-                (int)memoryStream.Length
-            );
+            return Encoding
+                .UTF8
+                .GetString(
+                    memoryStream.GetBuffer(),
+                    (int)memoryStream.Position,
+                    (int)memoryStream.Length
+                );
         }
 
         object CreateJsonDeserializedObject(string parameter, Type parameterType)

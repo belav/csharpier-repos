@@ -66,17 +66,19 @@ namespace System.Web.DynamicData
 
             // Rely on the ASP.NET cache for file change notifications, since FileSystemWatcher
             // doesn't work in medium trust
-            HttpRuntime.Cache.Insert(
-                virtualPath /*key*/
-                ,
-                virtualPath /*value*/
-                ,
-                cacheDependency,
-                Cache.NoAbsoluteExpiration,
-                Cache.NoSlidingExpiration,
-                CacheItemPriority.NotRemovable,
-                new CacheItemRemovedCallback(OnCacheItemRemoved)
-            );
+            HttpRuntime
+                .Cache
+                .Insert(
+                    virtualPath /*key*/
+                    ,
+                    virtualPath /*value*/
+                    ,
+                    cacheDependency,
+                    Cache.NoAbsoluteExpiration,
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.NotRemovable,
+                    new CacheItemRemovedCallback(OnCacheItemRemoved)
+                );
         }
 
         private void OnCacheItemRemoved(string key, object value, CacheItemRemovedReason reason)

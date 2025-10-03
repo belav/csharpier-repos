@@ -393,7 +393,8 @@ namespace Microsoft.Build.Internal.Expressions
                     if (Access.Arguments != null)
                     {
                         var args = Access
-                            .Arguments.Select(e => e.EvaluateAsObject(context))
+                            .Arguments
+                            .Select(e => e.EvaluateAsObject(context))
                             .ToArray();
                         var method = FindMethod(obj.GetType(), Access.Name.Name, args);
                         if (method == null)
@@ -438,7 +439,8 @@ namespace Microsoft.Build.Internal.Expressions
                     if (Access.Arguments != null)
                     {
                         var args = Access
-                            .Arguments.Select(e => e.EvaluateAsObject(context))
+                            .Arguments
+                            .Select(e => e.EvaluateAsObject(context))
                             .ToArray();
                         var method = FindMethod(type, Access.Name.Name, args);
                         if (method == null)

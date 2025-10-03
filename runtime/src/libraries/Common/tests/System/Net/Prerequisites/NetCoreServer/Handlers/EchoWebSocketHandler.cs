@@ -100,8 +100,9 @@ namespace NetCoreServer
                     }
                     else
                     {
-                        WebSocketCloseStatus closeStatus =
-                            receiveResult.CloseStatus.GetValueOrDefault();
+                        WebSocketCloseStatus closeStatus = receiveResult
+                            .CloseStatus
+                            .GetValueOrDefault();
                         await socket.CloseAsync(
                             closeStatus,
                             replyWithEnhancedCloseMessage

@@ -102,7 +102,8 @@ internal abstract partial class AbstractUseCollectionInitializerDiagnosticAnalyz
     protected AbstractUseCollectionInitializerDiagnosticAnalyzer()
         : base(
             ImmutableDictionary<DiagnosticDescriptor, IOption2>
-                .Empty.Add(s_descriptor, CodeStyleOptions2.PreferCollectionInitializer)
+                .Empty
+                .Add(s_descriptor, CodeStyleOptions2.PreferCollectionInitializer)
                 .Add(s_unnecessaryCodeDescriptor, CodeStyleOptions2.PreferCollectionInitializer)
         ) { }
 
@@ -126,9 +127,9 @@ internal abstract partial class AbstractUseCollectionInitializerDiagnosticAnalyz
         if (!AreCollectionInitializersSupported(context.Compilation))
             return;
 
-        var ienumerableType = context.Compilation.GetTypeByMetadataName(
-            typeof(IEnumerable).FullName!
-        );
+        var ienumerableType = context
+            .Compilation
+            .GetTypeByMetadataName(typeof(IEnumerable).FullName!);
         if (ienumerableType != null)
         {
             var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
@@ -187,10 +188,9 @@ internal abstract partial class AbstractUseCollectionInitializerDiagnosticAnalyz
         }
 
         // Object creation can only be converted to collection initializer if it implements the IEnumerable type.
-        var objectType = context.SemanticModel.GetTypeInfo(
-            objectCreationExpression,
-            cancellationToken
-        );
+        var objectType = context
+            .SemanticModel
+            .GetTypeInfo(objectCreationExpression, cancellationToken);
         if (objectType.Type == null || !objectType.Type.AllInterfaces.Contains(ienumerableType))
             return;
 

@@ -22,13 +22,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.dll");
             TestContext
-                .BuiltDotNet.Exec("exec", assemblyName)
+                .BuiltDotNet
+                .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"The application to execute does not exist: '{assemblyName}'"
                 );
         }
@@ -38,13 +40,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             string assemblyName = Path.Combine(GetNonexistentAndUnnormalizedPath(), "foo.xzy");
             TestContext
-                .BuiltDotNet.Exec("exec", assemblyName)
+                .BuiltDotNet
+                .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"The application to execute does not exist: '{assemblyName}'"
                 );
         }
@@ -57,13 +61,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             string assemblyName = Path.Combine(fxDir, "Microsoft.NETCore.App.deps.json");
 
             TestContext
-                .BuiltDotNet.Exec("exec", assemblyName)
+                .BuiltDotNet
+                .Exec("exec", assemblyName)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(
+                .And
+                .HaveStdErrContaining(
                     $"dotnet exec needs a managed .dll or .exe extension. The application specified was '{assemblyName}'"
                 );
         }
@@ -72,13 +78,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         public void MissingArgumentValue_Fails()
         {
             TestContext
-                .BuiltDotNet.Exec("--fx-version")
+                .BuiltDotNet
+                .Exec("--fx-version")
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining($"Failed to parse supported options or their values:");
+                .And
+                .HaveStdErrContaining($"Failed to parse supported options or their values:");
         }
 
         [Fact]
@@ -86,29 +94,35 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         {
             string fileName = "NonExistent";
             TestContext
-                .BuiltDotNet.Exec(fileName)
+                .BuiltDotNet
+                .Exec(fileName)
                 .WorkingDirectory(sharedTestState.BaseDirectory.Location)
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute(expectedToFail: true)
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining($"The application '{fileName}' does not exist")
-                .And.FindAnySdk(false);
+                .And
+                .HaveStdErrContaining($"The application '{fileName}' does not exist")
+                .And
+                .FindAnySdk(false);
         }
 
         [Fact]
         public void DotNetInfo_NoSDK()
         {
             TestContext
-                .BuiltDotNet.Exec("--info")
+                .BuiltDotNet
+                .Exec("--info")
                 .CaptureStdOut()
                 .CaptureStdErr()
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutMatching($@"Architecture:\s*{TestContext.BuildArchitecture}")
-                .And.HaveStdOutMatching($@"RID:\s*{TestContext.BuildRID}");
+                .And
+                .HaveStdOutMatching($@"Architecture:\s*{TestContext.BuildArchitecture}")
+                .And
+                .HaveStdOutMatching($@"RID:\s*{TestContext.BuildRID}");
         }
 
         [Fact]
@@ -131,7 +145,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 .Execute()
                 .Should()
                 .Pass()
-                .And.NotHaveStdOutMatching($@"RID:\s*{TestContext.BuildRID}");
+                .And
+                .NotHaveStdOutMatching($@"RID:\s*{TestContext.BuildRID}");
         }
 
         // Return a non-existent path that contains a mix of / and \

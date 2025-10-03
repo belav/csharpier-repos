@@ -37,9 +37,9 @@ namespace System.ServiceModel
         public bool TryLookup(string key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("key")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("key"));
             if (this.dictionary == null)
             {
                 Dictionary<string, int> dictionary = new Dictionary<string, int>(count);
@@ -92,9 +92,9 @@ namespace System.ServiceModel
         public bool TryLookup(XmlDictionaryString key, out XmlDictionaryString value)
         {
             if (key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("key")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("key"));
             if (key.Dictionary == this)
             {
                 value = key;

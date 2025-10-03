@@ -39,8 +39,8 @@ namespace Microsoft.Build.Execution
             condition = xml.Condition;
             ContinueOnError = xml.ContinueOnError;
             Name = xml.Name;
-            Outputs = xml
-                .Outputs.Select(o =>
+            Outputs = xml.Outputs
+                .Select(o =>
                 {
                     if (o.IsOutputItem)
                         return (ProjectTaskInstanceChild)

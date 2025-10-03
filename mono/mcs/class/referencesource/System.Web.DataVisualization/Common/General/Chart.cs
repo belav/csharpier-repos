@@ -440,10 +440,8 @@ namespace System.Web.UI.DataVisualization.Charting
                                 // SQL derived datasource
                                 Type selectArgsType = dataSource
                                     .GetType()
-                                    .Assembly.GetType(
-                                        "System.Web.UI.DataSourceSelectArguments",
-                                        true
-                                    );
+                                    .Assembly
+                                    .GetType("System.Web.UI.DataSourceSelectArguments", true);
                                 ConstructorInfo ci = selectArgsType.GetConstructor(new Type[] { });
                                 dataSource = m.Invoke(
                                     dataSource,
@@ -681,9 +679,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 // Convert data source to recognizable source for the series
                 if (dataSource is DataSet && ((DataSet)dataSource).Tables.Count > 0)
                 {
-                    dataSource = ((DataSet)dataSource).DefaultViewManager.CreateDataView(
-                        ((DataSet)dataSource).Tables[0]
-                    );
+                    dataSource = ((DataSet)dataSource)
+                        .DefaultViewManager
+                        .CreateDataView(((DataSet)dataSource).Tables[0]);
                 }
                 else if (dataSource is DataTable)
                 {
@@ -856,9 +854,14 @@ namespace System.Web.UI.DataVisualization.Charting
                                     new ArgumentOutOfRangeException(
                                         "dataSource",
                                         SR.ExceptionDataPointYValuesCountMismatch(
-                                            series.YValuesPerPoint.ToString(
-                                                System.Globalization.CultureInfo.InvariantCulture
-                                            )
+                                            series
+                                                .YValuesPerPoint
+                                                .ToString(
+                                                    System
+                                                        .Globalization
+                                                        .CultureInfo
+                                                        .InvariantCulture
+                                                )
                                         )
                                     )
                                 );
@@ -2252,9 +2255,9 @@ namespace System.Web.UI.DataVisualization.Charting
                 this._chartBorderPosition = chartGraph.GetAbsoluteRectangle(chartAreasRectangle);
 
                 // Get border interface
-                border3D = Common.BorderTypeRegistry.GetBorderType(
-                    _borderSkin.SkinStyle.ToString()
-                );
+                border3D = Common
+                    .BorderTypeRegistry
+                    .GetBorderType(_borderSkin.SkinStyle.ToString());
                 if (border3D != null)
                 {
                     border3D.Resolution = chartGraph.Graphics.DpiX;
@@ -3168,9 +3171,9 @@ namespace System.Web.UI.DataVisualization.Charting
             //****************************************************************
             //** Find the smalles size of the inner plot
             //****************************************************************
-            RectangleF areaPlotPosition = (
-                (ChartArea)areasGroup[0]
-            ).PlotAreaPosition.ToRectangleF();
+            RectangleF areaPlotPosition = ((ChartArea)areasGroup[0])
+                .PlotAreaPosition
+                .ToRectangleF();
             foreach (ChartArea area in areasGroup)
             {
                 if (area.PlotAreaPosition.X > areaPlotPosition.X)

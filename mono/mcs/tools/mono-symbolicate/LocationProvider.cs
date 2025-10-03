@@ -75,8 +75,8 @@ namespace Mono
                 var parensStart = sfData.MethodSignature.IndexOf('(');
                 var methodName = sfData.MethodSignature.Substring(0, parensStart).TrimEnd();
                 var methodParameters = sfData.MethodSignature.Substring(parensStart);
-                var methods = type
-                    .Methods.Where(m =>
+                var methods = type.Methods
+                    .Where(m =>
                         CompareName(m, methodName)
                         && CompareParameters(m.Parameters, methodParameters)
                     )
@@ -168,10 +168,12 @@ namespace Mono
             if (!method.HasCustomAttributes)
                 return null;
 
-            return method.CustomAttributes.FirstOrDefault(l =>
-                l.AttributeType.Name == "AsyncStateMachineAttribute"
-                && l.AttributeType.Namespace == "System.Runtime.CompilerServices"
-            );
+            return method
+                .CustomAttributes
+                .FirstOrDefault(l =>
+                    l.AttributeType.Name == "AsyncStateMachineAttribute"
+                    && l.AttributeType.Namespace == "System.Runtime.CompilerServices"
+                );
         }
 
         static bool CompareName(MethodDefinition candidate, string expected)

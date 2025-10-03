@@ -853,10 +853,9 @@ namespace Microsoft.Extensions.DependencyModel
                 if (targetLibrary.RuntimeTargets != null)
                 {
                     foreach (
-                        IGrouping<
-                            string?,
-                            RuntimeTargetEntryStub
-                        > ridGroup in targetLibrary.RuntimeTargets.GroupBy(e => e.Rid)
+                        IGrouping<string?, RuntimeTargetEntryStub> ridGroup in targetLibrary
+                            .RuntimeTargets
+                            .GroupBy(e => e.Rid)
                     )
                     {
                         RuntimeFile[] groupRuntimeAssemblies = ridGroup

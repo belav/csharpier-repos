@@ -91,10 +91,10 @@ namespace Mono.CSharp
             }
             catch (ArgumentOutOfRangeException)
             {
-                method.Compiler.Report.RuntimeMissingSupport(
-                    location,
-                    "custom attributes on the return type"
-                );
+                method
+                    .Compiler
+                    .Report
+                    .RuntimeMissingSupport(location, "custom attributes on the return type");
             }
         }
 
@@ -107,12 +107,15 @@ namespace Mono.CSharp
         {
             if (a.Type == pa.CLSCompliant)
             {
-                method.Compiler.Report.Warning(
-                    3023,
-                    1,
-                    a.Location,
-                    "CLSCompliant attribute has no meaning when applied to return types. Try putting it on the method instead"
-                );
+                method
+                    .Compiler
+                    .Report
+                    .Warning(
+                        3023,
+                        1,
+                        a.Location,
+                        "CLSCompliant attribute has no meaning when applied to return types. Try putting it on the method instead"
+                    );
             }
 
             // This occurs after Warning -28
@@ -179,11 +182,14 @@ namespace Mono.CSharp
             var ac = parameter_type as ArrayContainer;
             if (ac == null || ac.Rank != 1)
             {
-                ec.Module.Compiler.Report.Error(
-                    225,
-                    Location,
-                    "The params parameter must be a single dimensional array"
-                );
+                ec.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        225,
+                        Location,
+                        "The params parameter must be a single dimensional array"
+                    );
                 return null;
             }
 
@@ -494,12 +500,15 @@ namespace Mono.CSharp
                 && parameter_type.IsSpecialRuntimeType
             )
             {
-                rc.Module.Compiler.Report.Error(
-                    1601,
-                    Location,
-                    "Method or delegate parameter cannot be of type `{0}'",
-                    GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        1601,
+                        Location,
+                        "Method or delegate parameter cannot be of type `{0}'",
+                        GetSignatureForError()
+                    );
                 return null;
             }
 
@@ -513,12 +522,15 @@ namespace Mono.CSharp
 
             if (parameter_type.IsStatic)
             {
-                rc.Module.Compiler.Report.Error(
-                    721,
-                    Location,
-                    "`{0}': static types cannot be used as parameters",
-                    texpr.GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        721,
+                        Location,
+                        "`{0}': static types cannot be used as parameters",
+                        texpr.GetSignatureForError()
+                    );
                 return parameter_type;
             }
 
@@ -530,12 +542,15 @@ namespace Mono.CSharp
                 )
             )
             {
-                rc.Module.Compiler.Report.Error(
-                    1103,
-                    Location,
-                    "The extension method cannot be of type `{0}'",
-                    parameter_type.GetSignatureForError()
-                );
+                rc.Module
+                    .Compiler
+                    .Report
+                    .Error(
+                        1103,
+                        Location,
+                        "The extension method cannot be of type `{0}'",
+                        parameter_type.GetSignatureForError()
+                    );
             }
 
             return parameter_type;
@@ -882,13 +897,16 @@ namespace Mono.CSharp
             if (parameter_type.IsCLSCompliant())
                 return;
 
-            ctx.Module.Compiler.Report.Warning(
-                3001,
-                1,
-                Location,
-                "Argument type `{0}' is not CLS-compliant",
-                parameter_type.GetSignatureForError()
-            );
+            ctx.Module
+                .Compiler
+                .Report
+                .Warning(
+                    3001,
+                    1,
+                    Location,
+                    "Argument type `{0}' is not CLS-compliant",
+                    parameter_type.GetSignatureForError()
+                );
         }
 
         public virtual void ApplyAttributes(

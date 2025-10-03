@@ -247,9 +247,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     AddError(
                         ErrorCode.TableAndSchemaAreMutuallyExclusiveWithDefiningQuery,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.TableAndSchemaAreMutuallyExclusiveWithDefiningQuery(
-                            FQName
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .TableAndSchemaAreMutuallyExclusiveWithDefiningQuery(FQName)
                     );
                 }
             }

@@ -46,10 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 CancellationToken cancellationToken
             )
             {
-                return Document.SemanticModel.GenerateParameterNames(
-                    _invocationExpression.ArgumentList,
-                    cancellationToken
-                );
+                return Document
+                    .SemanticModel
+                    .GenerateParameterNames(_invocationExpression.ArgumentList, cancellationToken);
             }
 
             protected override RefKind DetermineRefKind(CancellationToken cancellationToken) =>
@@ -108,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                         genericName.TypeArgumentList.Arguments.First(),
                         s =>
                             !State
-                                .TypeToGenerateIn.GetAllTypeParameters()
+                                .TypeToGenerateIn
+                                .GetAllTypeParameters()
                                 .Any(static (t, s) => t.Name == s, s),
                         cancellationToken
                     );
@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                             s =>
                                 !usedIdentifiers.Contains(s)
                                 && !State
-                                    .TypeToGenerateIn.GetAllTypeParameters()
+                                    .TypeToGenerateIn
+                                    .GetAllTypeParameters()
                                     .Any(static (t, s) => t.Name == s, s),
                             cancellationToken
                         );
@@ -178,16 +179,18 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 CancellationToken cancellationToken
             ) =>
                 _invocationExpression
-                    .ArgumentList.Arguments.Select(a => a.GetRefKind())
+                    .ArgumentList
+                    .Arguments
+                    .Select(a => a.GetRefKind())
                     .ToImmutableArray();
 
             protected override ImmutableArray<ITypeSymbol> DetermineParameterTypes(
                 CancellationToken cancellationToken
             ) =>
                 _invocationExpression
-                    .ArgumentList.Arguments.Select(a =>
-                        DetermineParameterType(a, cancellationToken)
-                    )
+                    .ArgumentList
+                    .Arguments
+                    .Select(a => DetermineParameterType(a, cancellationToken))
                     .ToImmutableArray();
 
             private ITypeSymbol DetermineParameterType(
@@ -222,10 +225,9 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 {
                     foreach (var typeArgument in genericName.TypeArgumentList.Arguments)
                     {
-                        var typeInfo = Document.SemanticModel.GetTypeInfo(
-                            typeArgument,
-                            cancellationToken
-                        );
+                        var typeInfo = Document
+                            .SemanticModel
+                            .GetTypeInfo(typeArgument, cancellationToken);
                         result.Add(typeInfo.Type);
                     }
                 }

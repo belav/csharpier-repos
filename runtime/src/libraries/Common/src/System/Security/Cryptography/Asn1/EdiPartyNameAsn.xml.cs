@@ -112,22 +112,24 @@ namespace System.Security.Cryptography.Asn1
                     new Asn1Tag(TagClass.ContextSpecific, 0)
                 );
                 System.Security.Cryptography.Asn1.DirectoryStringAsn tmpNameAssigner;
-                System.Security.Cryptography.Asn1.DirectoryStringAsn.Decode(
-                    ref explicitReader,
-                    rebind,
-                    out tmpNameAssigner
-                );
+                System
+                    .Security
+                    .Cryptography
+                    .Asn1
+                    .DirectoryStringAsn
+                    .Decode(ref explicitReader, rebind, out tmpNameAssigner);
                 decoded.NameAssigner = tmpNameAssigner;
 
                 explicitReader.ThrowIfNotEmpty();
             }
 
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 1));
-            System.Security.Cryptography.Asn1.DirectoryStringAsn.Decode(
-                ref explicitReader,
-                rebind,
-                out decoded.PartyName
-            );
+            System
+                .Security
+                .Cryptography
+                .Asn1
+                .DirectoryStringAsn
+                .Decode(ref explicitReader, rebind, out decoded.PartyName);
             explicitReader.ThrowIfNotEmpty();
 
             sequenceReader.ThrowIfNotEmpty();

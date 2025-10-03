@@ -25,16 +25,16 @@ namespace Microsoft.Extensions.Logging.Configuration
             var configurationBuilder = new ConfigurationBuilder();
             foreach (LoggingConfiguration configuration in _configurations)
             {
-                IConfigurationSection sectionFromFullName = configuration.Configuration.GetSection(
-                    fullName
-                );
+                IConfigurationSection sectionFromFullName = configuration
+                    .Configuration
+                    .GetSection(fullName);
                 configurationBuilder.AddConfiguration(sectionFromFullName);
 
                 if (!string.IsNullOrWhiteSpace(alias))
                 {
-                    IConfigurationSection sectionFromAlias = configuration.Configuration.GetSection(
-                        alias
-                    );
+                    IConfigurationSection sectionFromAlias = configuration
+                        .Configuration
+                        .GetSection(alias);
                     configurationBuilder.AddConfiguration(sectionFromAlias);
                 }
             }

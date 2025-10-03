@@ -41,7 +41,8 @@ public abstract class QueryCompilationTests
         _simpleQuery = _context.Products.AsNoTracking();
 
         _complexQuery = _context
-            .Products.AsNoTracking()
+            .Products
+            .AsNoTracking()
             .Where(p => p.Retail < 1000)
             .OrderBy(p => p.Name)
             .ThenBy(p => p.Retail)
@@ -57,7 +58,8 @@ public abstract class QueryCompilationTests
             });
 
         _multipleJoinQuery = _context
-            .Customers.AsNoTracking()
+            .Customers
+            .AsNoTracking()
             .Include(c => c.Orders)
             .ThenInclude(o => o.OrderLines)
             .ThenInclude(ol => ol.Product);

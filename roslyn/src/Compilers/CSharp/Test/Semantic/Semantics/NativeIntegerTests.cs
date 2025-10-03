@@ -173,10 +173,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             Assert.Equal("void I.F1(System.IntPtr x, nint y)", method.ToTestDisplayString());
             Assert.Equal(
                 "Sub I.F1(x As System.IntPtr, y As System.IntPtr)",
-                VisualBasic.SymbolDisplay.ToDisplayString(
-                    method.GetPublicSymbol(),
-                    SymbolDisplayFormat.TestFormat
-                )
+                VisualBasic
+                    .SymbolDisplay
+                    .ToDisplayString(method.GetPublicSymbol(), SymbolDisplayFormat.TestFormat)
             );
             VerifyTypes(
                 (NamedTypeSymbol)method.Parameters[0].Type,
@@ -188,10 +187,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
             Assert.Equal("void I.F2(System.UIntPtr x, nuint y)", method.ToTestDisplayString());
             Assert.Equal(
                 "Sub I.F2(x As System.UIntPtr, y As System.UIntPtr)",
-                VisualBasic.SymbolDisplay.ToDisplayString(
-                    method.GetPublicSymbol(),
-                    SymbolDisplayFormat.TestFormat
-                )
+                VisualBasic
+                    .SymbolDisplay
+                    .ToDisplayString(method.GetPublicSymbol(), SymbolDisplayFormat.TestFormat)
             );
             VerifyTypes(
                 (NamedTypeSymbol)method.Parameters[0].Type,
@@ -16600,9 +16598,9 @@ enum E {{ }}
 
                 if (!useExplicitCast)
                 {
-                    var destTypeSymbol = (
-                        (MethodSymbol)comp.GetMember("Program.Convert")
-                    ).ReturnType.GetPublicSymbol();
+                    var destTypeSymbol = ((MethodSymbol)comp.GetMember("Program.Convert"))
+                        .ReturnType
+                        .GetPublicSymbol();
                     AssertMatches(
                         expectedConversions,
                         model.ClassifyConversion(expr, destTypeSymbol)
@@ -16944,11 +16942,15 @@ enum E {{ }}
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -17447,11 +17449,15 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -17741,11 +17747,15 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)
@@ -23275,11 +23285,15 @@ class Program
                 var symbolInfo = model.GetSymbolInfo(expr);
                 Assert.Equal(
                     expectedSymbol,
-                    symbolInfo.Symbol?.ToDisplayString(
-                        SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    symbolInfo
+                        .Symbol
+                        ?.ToDisplayString(
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .WithMiscellaneousOptions(
+                                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                                )
                         )
-                    )
                 );
 
                 if (expectedDiagnostics.Length == 0)

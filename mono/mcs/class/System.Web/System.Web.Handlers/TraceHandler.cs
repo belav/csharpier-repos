@@ -111,9 +111,9 @@ namespace System.Web.Handlers
             }
             else
             {
-                string dir = context.Server.MapPath(
-                    UrlUtils.GetDirectory(context.Request.FilePath)
-                );
+                string dir = context
+                    .Server
+                    .MapPath(UrlUtils.GetDirectory(context.Request.FilePath));
                 RenderMenu(manager, output, dir);
             }
         }
@@ -145,16 +145,18 @@ namespace System.Web.Handlers
             Table table = TraceData.CreateTable();
 
             table.Rows.Add(TraceData.AltRow("Requests to the Application"));
-            table.Rows.Add(
-                TraceData.SubHeadRow(
-                    "No",
-                    "Time of Request",
-                    "File",
-                    "Status Code",
-                    "Verb",
-                    "&nbsp;"
-                )
-            );
+            table
+                .Rows
+                .Add(
+                    TraceData.SubHeadRow(
+                        "No",
+                        "Time of Request",
+                        "File",
+                        "Status Code",
+                        "Verb",
+                        "&nbsp;"
+                    )
+                );
 
             if (manager.TraceData != null)
             {

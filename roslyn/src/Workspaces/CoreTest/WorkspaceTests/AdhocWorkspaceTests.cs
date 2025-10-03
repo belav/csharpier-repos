@@ -428,8 +428,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             // get partial semantics doc
-            var frozen = pws
-                .CurrentSolution.GetDocument(docid1)
+            var frozen = pws.CurrentSolution
+                .GetDocument(docid1)
                 .WithFrozenPartialSemantics(CancellationToken.None);
         }
 

@@ -180,9 +180,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        decoder.CreatePrematureEOFException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(decoder.CreatePrematureEOFException());
                 }
             }
 
@@ -201,10 +201,9 @@ namespace System.ServiceModel.Channels
         {
             if (readException != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    readException,
-                    Connection.ExceptionEventType
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelper(readException, Connection.ExceptionEventType);
             }
 
             return decoder.Mode;

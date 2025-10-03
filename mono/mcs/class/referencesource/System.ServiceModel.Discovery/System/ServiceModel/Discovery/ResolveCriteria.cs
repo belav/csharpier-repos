@@ -55,11 +55,13 @@ namespace System.ServiceModel.Discovery
             {
                 if (value.CompareTo(TimeSpan.Zero) <= 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange(
-                        "value",
-                        value,
-                        SR2.DiscoveryResolveDurationLessThanZero
-                    );
+                    throw FxTrace
+                        .Exception
+                        .ArgumentOutOfRange(
+                            "value",
+                            value,
+                            SR2.DiscoveryResolveDurationLessThanZero
+                        );
                 }
                 this.duration = value;
             }

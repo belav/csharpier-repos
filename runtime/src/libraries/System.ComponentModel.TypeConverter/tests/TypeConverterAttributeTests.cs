@@ -32,9 +32,9 @@ namespace System.ComponentModel.Tests
         public static void Equals_Negative()
         {
             Assert.False(
-                TypeConverterAttributeTests.s_attributeFromType.Equals(
-                    TypeConverterAttributeTests.s_attributeFromString
-                )
+                TypeConverterAttributeTests
+                    .s_attributeFromType
+                    .Equals(TypeConverterAttributeTests.s_attributeFromString)
             );
             Assert.False(TypeConverterAttributeTests.s_attributeFromType.Equals(null));
         }

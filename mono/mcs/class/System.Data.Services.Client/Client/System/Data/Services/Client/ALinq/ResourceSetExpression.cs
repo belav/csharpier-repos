@@ -130,8 +130,8 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return this
-                    .sequenceQueryOptions.OfType<FilterQueryOptionExpression>()
+                return this.sequenceQueryOptions
+                    .OfType<FilterQueryOptionExpression>()
                     .SingleOrDefault();
             }
         }
@@ -140,8 +140,8 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return this
-                    .sequenceQueryOptions.OfType<OrderByQueryOptionExpression>()
+                return this.sequenceQueryOptions
+                    .OfType<OrderByQueryOptionExpression>()
                     .SingleOrDefault();
             }
         }
@@ -150,8 +150,8 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return this
-                    .sequenceQueryOptions.OfType<SkipQueryOptionExpression>()
+                return this.sequenceQueryOptions
+                    .OfType<SkipQueryOptionExpression>()
                     .SingleOrDefault();
             }
         }
@@ -160,8 +160,8 @@ namespace System.Data.Services.Client
         {
             get
             {
-                return this
-                    .sequenceQueryOptions.OfType<TakeQueryOptionExpression>()
+                return this.sequenceQueryOptions
+                    .OfType<TakeQueryOptionExpression>()
                     .SingleOrDefault();
             }
         }
@@ -201,8 +201,8 @@ namespace System.Data.Services.Client
         internal void AddSequenceQueryOption(QueryOptionExpression qoe)
         {
             Debug.Assert(qoe != null, "qoe != null");
-            QueryOptionExpression old = this
-                .sequenceQueryOptions.Where(o => o.GetType() == qoe.GetType())
+            QueryOptionExpression old = this.sequenceQueryOptions
+                .Where(o => o.GetType() == qoe.GetType())
                 .FirstOrDefault();
             if (old != null)
             {

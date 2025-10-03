@@ -88,7 +88,9 @@ namespace MonoTests.Features
                 serviceHostBase.ChannelDispatchers[0] as ChannelDispatcher;
             dispatcher
                 .Endpoints[0]
-                .DispatchRuntime.MessageInspectors.Add(new LoggerMessageInspector());
+                .DispatchRuntime
+                .MessageInspectors
+                .Add(new LoggerMessageInspector());
         }
 
         public void Validate(
@@ -250,13 +252,15 @@ namespace MonoTests.Features
             smb.HttpGetEnabled = true;
             smb.HttpGetUrl = new Uri(getMexEndpoint());
             host.Description.Behaviors.Add(smb);
-            host.Description.Behaviors.Add(
-                new ServiceThrottlingBehavior()
-                {
-                    MaxConcurrentCalls = 1,
-                    MaxConcurrentSessions = 1,
-                }
-            );
+            host.Description
+                .Behaviors
+                .Add(
+                    new ServiceThrottlingBehavior()
+                    {
+                        MaxConcurrentCalls = 1,
+                        MaxConcurrentSessions = 1,
+                    }
+                );
             if (Configuration.logMessages)
                 host.Description.Behaviors.Add(new LoggerBehavior());
             return host;

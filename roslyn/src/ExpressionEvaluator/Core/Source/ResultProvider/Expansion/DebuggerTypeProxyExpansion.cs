@@ -138,8 +138,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 string proxyMemberFullNamePrefix = null;
                 if (childFullNamePrefix != null)
                 {
-                    proxyMemberFullNamePrefix =
-                        resultProvider.FullNameProvider.GetClrObjectCreationExpression(
+                    proxyMemberFullNamePrefix = resultProvider
+                        .FullNameProvider
+                        .GetClrObjectCreationExpression(
                             inspectionContext,
                             proxyTypeAndInfo.ClrType,
                             proxyTypeAndInfo.Info,

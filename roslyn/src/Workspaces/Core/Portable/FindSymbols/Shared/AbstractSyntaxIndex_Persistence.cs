@@ -17,8 +17,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal partial class AbstractSyntaxIndex<TIndex>
     {
         private static readonly string s_persistenceName = typeof(TIndex).Name;
-        private static readonly Checksum s_serializationFormatChecksum =
-            CodeAnalysis.Checksum.Create("38");
+        private static readonly Checksum s_serializationFormatChecksum = CodeAnalysis
+            .Checksum
+            .Create("38");
 
         /// <summary>
         /// Cache of ParseOptions to a checksum for the <see cref="ParseOptions.PreprocessorSymbolNames"/> contained
@@ -42,8 +43,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var storageService =
-                project.LanguageServices.SolutionServices.GetPersistentStorageService();
+            var storageService = project
+                .LanguageServices
+                .SolutionServices
+                .GetPersistentStorageService();
             var documentKey = DocumentKey.ToDocumentKey(
                 ProjectKey.ToProjectKey(solutionKey, project),
                 document
@@ -164,14 +167,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 )
             );
 
-            var textChecksum = CodeAnalysis.Checksum.Create(
-                documentChecksumState.Text,
-                s_serializationFormatChecksum
-            );
-            var textAndDirectivesChecksum = CodeAnalysis.Checksum.Create(
-                textChecksum,
-                directivesChecksum.Value
-            );
+            var textChecksum = CodeAnalysis
+                .Checksum
+                .Create(documentChecksumState.Text, s_serializationFormatChecksum);
+            var textAndDirectivesChecksum = CodeAnalysis
+                .Checksum
+                .Create(textChecksum, directivesChecksum.Value);
 
             return (textChecksum, textAndDirectivesChecksum);
         }
@@ -183,8 +184,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             CancellationToken cancellationToken
         )
         {
-            var persistentStorageService =
-                project.LanguageServices.SolutionServices.GetPersistentStorageService();
+            var persistentStorageService = project
+                .LanguageServices
+                .SolutionServices
+                .GetPersistentStorageService();
             return SaveAsync(
                 solutionKey,
                 project,

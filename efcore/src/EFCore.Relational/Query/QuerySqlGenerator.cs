@@ -179,7 +179,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
             }
         && selectExpression.Projection.Count == setOperation.Source1.Projection.Count
         && selectExpression
-            .Projection.Select(
+            .Projection
+            .Select(
                 (pe, index) =>
                     pe.Expression is ColumnExpression column
                     && string.Equals(
@@ -337,7 +338,8 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                 }
             && selectExpression.Projection.Count == valuesExpression.ColumnNames.Count
             && selectExpression
-                .Projection.Select(
+                .Projection
+                .Select(
                     (pe, index) =>
                         pe.Expression is ColumnExpression column
                         && column.Name == valuesExpression.ColumnNames[index]
@@ -517,9 +519,9 @@ public class QuerySqlGenerator : SqlExpressionVisitor
                     }
                     else if (value is SqlConstantExpression sqlConstantExpression)
                     {
-                        substitutions[i] = sqlConstantExpression.TypeMapping!.GenerateSqlLiteral(
-                            sqlConstantExpression.Value
-                        );
+                        substitutions[i] = sqlConstantExpression
+                            .TypeMapping!
+                            .GenerateSqlLiteral(sqlConstantExpression.Value);
                     }
                 }
 
@@ -697,20 +699,26 @@ public class QuerySqlGenerator : SqlExpressionVisitor
         // TODO: Note that we perform Equals comparison on the value converter. We should be able to do reference comparison, but for
         // that we need to ensure that there's only ever one type mapping instance (i.e. no type mappings are ever instantiated out of the
         // type mapping source). See #30677.
-        var parameter = _relationalCommandBuilder.Parameters.FirstOrDefault(p =>
-            p.InvariantName == parameterName
-            && p is TypeMappedRelationalParameter { RelationalTypeMapping: var existingTypeMapping }
-            && string.Equals(
-                existingTypeMapping.StoreType,
-                typeMapping.StoreType,
-                StringComparison.OrdinalIgnoreCase
-            )
-            && (
-                existingTypeMapping.Converter is null && typeMapping.Converter is null
-                || existingTypeMapping.Converter is not null
-                    && existingTypeMapping.Converter.Equals(typeMapping.Converter)
-            )
-        );
+        var parameter = _relationalCommandBuilder
+            .Parameters
+            .FirstOrDefault(p =>
+                p.InvariantName == parameterName
+                && p
+                    is TypeMappedRelationalParameter
+                    {
+                        RelationalTypeMapping: var existingTypeMapping
+                    }
+                && string.Equals(
+                    existingTypeMapping.StoreType,
+                    typeMapping.StoreType,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && (
+                    existingTypeMapping.Converter is null && typeMapping.Converter is null
+                    || existingTypeMapping.Converter is not null
+                        && existingTypeMapping.Converter.Equals(typeMapping.Converter)
+                )
+            );
 
         if (parameter is null)
         {

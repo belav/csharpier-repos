@@ -52,7 +52,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             var extractDir = app.GetExtractionDir(extractBaseDir, bundledApp.Manifest);
             extractDir
@@ -88,10 +89,9 @@ namespace AppHost.Bundle.Tests
                 return;
 
             Manifest manifest;
-            string singleFile = sharedTestState.SelfContainedApp.Bundle(
-                bundleOptions,
-                out manifest
-            );
+            string singleFile = sharedTestState
+                .SelfContainedApp
+                .Bundle(bundleOptions, out manifest);
 
             // Run the bundled app (extract files to <path>)
             Command
@@ -103,7 +103,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             using (
                 TestArtifact extractionRoot = new TestArtifact(
@@ -111,10 +112,9 @@ namespace AppHost.Bundle.Tests
                 )
             )
             {
-                var extractedDir = sharedTestState.SelfContainedApp.GetExtractionDir(
-                    extractionRoot.Location,
-                    manifest
-                );
+                var extractedDir = sharedTestState
+                    .SelfContainedApp
+                    .GetExtractionDir(extractionRoot.Location, manifest);
                 var extractedFiles = BundleHelper.GetExtractedFiles(manifest, bundleOptions);
                 extractedDir.Should().OnlyHaveFiles(extractedFiles);
             }
@@ -142,7 +142,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             var extractDir = app.GetExtractionDir(extractBaseDir, bundledApp.Manifest);
             extractDir.Refresh();
@@ -165,7 +166,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             extractDir.Should().NotBeModifiedAfter(firstWriteTime);
         }
@@ -192,7 +194,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             // Remove the extracted files, but keep the extraction directory
             var extractDir = app.GetExtractionDir(extractBaseDir, bundledApp.Manifest);
@@ -219,7 +222,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
             extractDir.Should().OnlyHaveFiles(extractedFiles);
         }
@@ -246,7 +250,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Fail()
-                .And.HaveStdErrContaining(expectedErrorMessagePart);
+                .And
+                .HaveStdErrContaining(expectedErrorMessagePart);
         }
 
         [Fact]
@@ -273,12 +278,12 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("Hello World");
+                .And
+                .HaveStdOutContaining("Hello World");
 
-            DirectoryInfo expectedExtractDir = sharedTestState.SelfContainedApp.GetExtractionDir(
-                Path.Combine(home, ".net"),
-                bundledApp.Manifest
-            );
+            DirectoryInfo expectedExtractDir = sharedTestState
+                .SelfContainedApp
+                .GetExtractionDir(Path.Combine(home, ".net"), bundledApp.Manifest);
             var extractedFiles = BundleHelper.GetExtractedFiles(
                 bundledApp.Manifest,
                 bundledApp.Options

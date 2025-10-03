@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             private readonly int _position;
             private readonly AbstractOverrideCompletionProvider _provider;
             private readonly SymbolDisplayFormat _overrideNameFormat = SymbolDisplayFormats
-                .NameFormat.WithParameterOptions(
+                .NameFormat
+                .WithParameterOptions(
                     SymbolDisplayParameterOptions.IncludeDefaultValue
                         | SymbolDisplayParameterOptions.IncludeExtensionThis
                         | SymbolDisplayParameterOptions.IncludeType

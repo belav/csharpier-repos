@@ -685,9 +685,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // Normally we would skip second `:` and `case` keyword after it as bad tokens and continue parsing pattern, which produces a lot of noise errors.
             // In order to avoid that and produce single error of missing `}` we exit on unexpected `:` in such cases.
             if (
-                @this._termState.HasFlag(
-                    TerminatorState.IsExpressionOrPatternInCaseLabelOfSwitchStatement
-                )
+                @this
+                    ._termState
+                    .HasFlag(TerminatorState.IsExpressionOrPatternInCaseLabelOfSwitchStatement)
                 && @this.CurrentToken.Kind is SyntaxKind.ColonToken
             )
                 return PostSkipAction.Abort;

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         {
             var cancellationToken = context.CancellationToken;
             var tree = await context
-                .Document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .Document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
                 .ConfigureAwait(false);
             var tokens = await GetTokensAsync(tree, context.Position, context.CancellationToken)
                 .ConfigureAwait(false);

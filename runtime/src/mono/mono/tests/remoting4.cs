@@ -124,10 +124,9 @@ namespace RemotingTest
             if (!RemotingServices.IsTransparentProxy(app2))
                 return 1;
 
-            ObjectHandle o = AppDomain.CurrentDomain.CreateInstance(
-                typeof(R1).Assembly.FullName,
-                typeof(R1).FullName
-            );
+            ObjectHandle o = AppDomain
+                .CurrentDomain
+                .CreateInstance(typeof(R1).Assembly.FullName, typeof(R1).FullName);
             R1 myobj = (R1)o.Unwrap();
 
             // should not be a proxy in our domain..

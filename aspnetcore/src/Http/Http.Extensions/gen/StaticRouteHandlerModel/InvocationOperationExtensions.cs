@@ -46,10 +46,12 @@ internal static class InvocationOperationExtensions
                 is "Microsoft.AspNetCore.Routing"
             && targetOperation.TryGetRouteHandlerArgument(out var routeHandlerParameter)
             && routeHandlerParameter is { Parameter.Type: { } delegateType }
-            && SymbolEqualityComparer.Default.Equals(
-                delegateType,
-                wellKnownTypes.Get(WellKnownTypeData.WellKnownType.System_Delegate)
-            )
+            && SymbolEqualityComparer
+                .Default
+                .Equals(
+                    delegateType,
+                    wellKnownTypes.Get(WellKnownTypeData.WellKnownType.System_Delegate)
+                )
         )
         {
             invocationOperation = targetOperation;

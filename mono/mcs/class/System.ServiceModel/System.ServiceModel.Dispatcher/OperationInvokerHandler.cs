@@ -110,11 +110,9 @@ namespace System.ServiceModel.Dispatcher
 
             Message res = null;
             if (operation.SerializeReply)
-                res = operation.Formatter.SerializeReply(
-                    mrc.OperationContext.IncomingMessageVersion,
-                    outputs,
-                    result
-                );
+                res = operation
+                    .Formatter
+                    .SerializeReply(mrc.OperationContext.IncomingMessageVersion, outputs, result);
             else
                 res = (Message)result;
             res.Headers.CopyHeadersFrom(mrc.OperationContext.OutgoingMessageHeaders);

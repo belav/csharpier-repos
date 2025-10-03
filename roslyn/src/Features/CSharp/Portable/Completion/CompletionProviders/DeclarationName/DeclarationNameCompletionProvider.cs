@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 foreach (var recommender in Recommenders)
                 {
                     var names = await recommender
-                        .Value.ProvideRecommendedNamesAsync(
+                        .Value
+                        .ProvideRecommendedNamesAsync(
                             completionContext,
                             document,
                             context,

@@ -76,9 +76,9 @@ namespace System.ServiceModel.Security
                 if (nonce == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("nonce");
                 if (nonce.Length < minimumNonceLength)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.NonceLengthTooShort)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.NonceLengthTooShort));
                 DateTime expirationTime = TimeoutHelper.Add(DateTime.UtcNow, this.cachingTimeSpan);
                 return base.TryAddItem(nonce, dummyItem, expirationTime, false);
             }
@@ -88,9 +88,9 @@ namespace System.ServiceModel.Security
                 if (nonce == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("nonce");
                 if (nonce.Length < minimumNonceLength)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.NonceLengthTooShort)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.NonceLengthTooShort));
                 if (base.GetItem(nonce) != null)
                     return true;
                 else

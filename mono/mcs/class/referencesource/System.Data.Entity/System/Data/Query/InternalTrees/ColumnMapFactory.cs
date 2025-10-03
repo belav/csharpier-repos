@@ -483,9 +483,9 @@ namespace System.Data.Query.InternalTrees
         {
             // choose an arbitrary type for discriminator columns -- the type is not
             // actually statically known
-            EdmType discriminatorType = MetadataItem.EdmProviderManifest.GetPrimitiveType(
-                PrimitiveTypeKind.String
-            );
+            EdmType discriminatorType = MetadataItem
+                .EdmProviderManifest
+                .GetPrimitiveType(PrimitiveTypeKind.String);
             TypeUsage discriminatorTypeUsage = TypeUsage.Create(discriminatorType);
 
             IList<string> discriminatorColumnNames = mapping.GetDiscriminatorColumns(resultIndex);

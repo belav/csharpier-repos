@@ -121,7 +121,8 @@ public class TableSharingConcurrencyTokenConvention : IModelFinalizingConvention
                 )
                 {
                     var propertyBuilder = conventionEntityType
-                        .Builder.CreateUniqueProperty(
+                        .Builder
+                        .CreateUniqueProperty(
                             exampleProperty.ClrType,
                             ConcurrencyPropertyPrefix + exampleProperty.Name,
                             !exampleProperty.IsNullable

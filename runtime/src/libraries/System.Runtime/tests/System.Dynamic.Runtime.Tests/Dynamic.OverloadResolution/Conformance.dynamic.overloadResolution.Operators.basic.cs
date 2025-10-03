@@ -1271,21 +1271,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                 }
                 else
                 {
-                    System.Console.WriteLine(
-                        "Got invalid result when testing {0}: {1}[{2}]",
-                        tip,
-                        dr,
-                        dr.GetType()
-                    );
+                    System
+                        .Console
+                        .WriteLine(
+                            "Got invalid result when testing {0}: {1}[{2}]",
+                            tip,
+                            dr,
+                            dr.GetType()
+                        );
                 }
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine(
-                    "Catch an unexpected exception when testing {0}: {1}",
-                    tip,
-                    ex
-                );
+                System
+                    .Console
+                    .WriteLine("Catch an unexpected exception when testing {0}: {1}", tip, ex);
             }
 
             result += flag;
@@ -1302,12 +1302,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             try
             {
                 dynamic dr = test(dobj);
-                System.Console.WriteLine(
-                    "Got invalid result when testing {0}: {1}[{2}]",
-                    tip,
-                    dr,
-                    dr.GetType()
-                );
+                System
+                    .Console
+                    .WriteLine(
+                        "Got invalid result when testing {0}: {1}[{2}]",
+                        tip,
+                        dr,
+                        dr.GetType()
+                    );
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
@@ -1317,20 +1319,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
                 }
                 else
                 {
-                    System.Console.WriteLine(
-                        "Catch an unexpected RuntimeBinderException when testing {0}: {1}",
-                        tip,
-                        ex
-                    );
+                    System
+                        .Console
+                        .WriteLine(
+                            "Catch an unexpected RuntimeBinderException when testing {0}: {1}",
+                            tip,
+                            ex
+                        );
                 }
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine(
-                    "Catch an unexpected exception when testing {0}: {1}",
-                    tip,
-                    ex
-                );
+                System
+                    .Console
+                    .WriteLine("Catch an unexpected exception when testing {0}: {1}", tip, ex);
             }
 
             result += flag;

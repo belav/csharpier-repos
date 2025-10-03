@@ -144,9 +144,9 @@ namespace System.ServiceModel.Activities.Presentation
             var activity = e.NewValue as ModelItem;
             if (null != activity && !activity.IsMessagingActivity())
             {
-                throw FxTrace.Exception.AsError(
-                    new NotSupportedException(activity.ItemType.FullName)
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new NotSupportedException(activity.ItemType.FullName));
             }
             ((CorrelationInitializerDesigner)sender).OnActivityChanged();
         }

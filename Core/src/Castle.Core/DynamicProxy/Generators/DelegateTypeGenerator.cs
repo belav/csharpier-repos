@@ -52,9 +52,11 @@ namespace Castle.DynamicProxy.Generators
                 new ArgumentReference(typeof(object)),
                 new ArgumentReference(typeof(IntPtr))
             );
-            constructor.ConstructorBuilder.SetImplementationFlags(
-                MethodImplAttributes.Runtime | MethodImplAttributes.Managed
-            );
+            constructor
+                .ConstructorBuilder
+                .SetImplementationFlags(
+                    MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                );
         }
 
         private void BuildInvokeMethod(AbstractTypeEmitter @delegate)
@@ -69,9 +71,11 @@ namespace Castle.DynamicProxy.Generators
                 @delegate.GetClosedParameterType(method.MethodOnTarget.ReturnType),
                 paramTypes
             );
-            invoke.MethodBuilder.SetImplementationFlags(
-                MethodImplAttributes.Runtime | MethodImplAttributes.Managed
-            );
+            invoke
+                .MethodBuilder
+                .SetImplementationFlags(
+                    MethodImplAttributes.Runtime | MethodImplAttributes.Managed
+                );
         }
 
         private AbstractTypeEmitter GetEmitter(ClassEmitter @class, INamingScope namingScope)

@@ -215,11 +215,13 @@ namespace Mono.Linker
             if (type == null)
                 return;
 
-            _context.Annotations.Mark(
-                type,
-                typeReason,
-                new MessageOrigin(reason.Source as ICustomAttributeProvider)
-            );
+            _context
+                .Annotations
+                .Mark(
+                    type,
+                    typeReason,
+                    new MessageOrigin(reason.Source as ICustomAttributeProvider)
+                );
 
             if (!RecursiveTypes.Add(type))
                 return;
@@ -244,11 +246,13 @@ namespace Mono.Linker
                         field.FieldType,
                         new DependencyInfo(DependencyKind.SerializedRecursiveType, type)
                     );
-                    _context.Annotations.Mark(
-                        field,
-                        new DependencyInfo(DependencyKind.SerializedMember, type),
-                        new MessageOrigin(type)
-                    );
+                    _context
+                        .Annotations
+                        .Mark(
+                            field,
+                            new DependencyInfo(DependencyKind.SerializedMember, type),
+                            new MessageOrigin(type)
+                        );
                 }
             }
 
@@ -270,17 +274,21 @@ namespace Mono.Linker
                         new DependencyInfo(DependencyKind.SerializedRecursiveType, type)
                     );
                     if (get != null)
-                        _context.Annotations.Mark(
-                            get,
-                            new DependencyInfo(DependencyKind.SerializedMember, type),
-                            new MessageOrigin(type)
-                        );
+                        _context
+                            .Annotations
+                            .Mark(
+                                get,
+                                new DependencyInfo(DependencyKind.SerializedMember, type),
+                                new MessageOrigin(type)
+                            );
                     if (set != null)
-                        _context.Annotations.Mark(
-                            set,
-                            new DependencyInfo(DependencyKind.SerializedMember, type),
-                            new MessageOrigin(type)
-                        );
+                        _context
+                            .Annotations
+                            .Mark(
+                                set,
+                                new DependencyInfo(DependencyKind.SerializedMember, type),
+                                new MessageOrigin(type)
+                            );
                     // The property will be marked as a consequence of marking the getter/setter.
                 }
             }
@@ -293,11 +301,13 @@ namespace Mono.Linker
                     if (!method.IsPublic || !method.IsDefaultConstructor())
                         continue;
 
-                    _context.Annotations.Mark(
-                        method,
-                        new DependencyInfo(DependencyKind.SerializedMember, type),
-                        new MessageOrigin(type)
-                    );
+                    _context
+                        .Annotations
+                        .Mark(
+                            method,
+                            new DependencyInfo(DependencyKind.SerializedMember, type),
+                            new MessageOrigin(type)
+                        );
                 }
             }
         }

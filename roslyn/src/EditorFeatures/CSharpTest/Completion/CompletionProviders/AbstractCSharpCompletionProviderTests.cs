@@ -417,9 +417,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 position,
                 RoslynTrigger.Invoke
             );
-            var item = completionList.ItemsList.First(i =>
-                (i.DisplayText + i.DisplayTextSuffix).StartsWith(textTypedSoFar)
-            );
+            var item = completionList
+                .ItemsList
+                .First(i => (i.DisplayText + i.DisplayTextSuffix).StartsWith(textTypedSoFar));
 
             Assert.Equal(
                 expected,

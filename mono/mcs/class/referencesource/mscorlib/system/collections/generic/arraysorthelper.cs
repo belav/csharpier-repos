@@ -136,9 +136,9 @@ namespace System.Collections.Generic
                 defaultArraySortHelper =
                     (IArraySortHelper<T>)
                         RuntimeTypeHandle.Allocate(
-                            typeof(GenericArraySortHelper<string>).TypeHandle.Instantiate(
-                                new Type[] { typeof(T) }
-                            )
+                            typeof(GenericArraySortHelper<string>)
+                                .TypeHandle
+                                .Instantiate(new Type[] { typeof(T) })
                         );
             }
             else
@@ -1041,9 +1041,9 @@ namespace System.Collections.Generic
                 defaultArraySortHelper =
                     (IArraySortHelper<TKey, TValue>)
                         RuntimeTypeHandle.Allocate(
-                            typeof(GenericArraySortHelper<string, string>).TypeHandle.Instantiate(
-                                new Type[] { typeof(TKey), typeof(TValue) }
-                            )
+                            typeof(GenericArraySortHelper<string, string>)
+                                .TypeHandle
+                                .Instantiate(new Type[] { typeof(TKey), typeof(TValue) })
                         );
             }
             else

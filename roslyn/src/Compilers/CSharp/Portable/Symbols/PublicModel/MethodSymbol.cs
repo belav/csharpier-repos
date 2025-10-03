@@ -163,9 +163,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                 {
                     Interlocked.CompareExchange(
                         ref _lazyReceiverType,
-                        _underlying.ReceiverType?.GetITypeSymbol(
-                            _underlying.ReceiverNullableAnnotation
-                        ),
+                        _underlying
+                            .ReceiverType
+                            ?.GetITypeSymbol(_underlying.ReceiverNullableAnnotation),
                         null
                     );
                 }

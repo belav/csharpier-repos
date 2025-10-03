@@ -44,19 +44,17 @@ public sealed class ForeignKeyComparer
             return result;
         }
 
-        result = PropertyListComparer.Instance.Compare(
-            x?.PrincipalKey.Properties,
-            y?.PrincipalKey.Properties
-        );
+        result = PropertyListComparer
+            .Instance
+            .Compare(x?.PrincipalKey.Properties, y?.PrincipalKey.Properties);
         if (result != 0)
         {
             return result;
         }
 
-        result = TypeBaseNameComparer.Instance.Compare(
-            x?.PrincipalEntityType,
-            y?.PrincipalEntityType
-        );
+        result = TypeBaseNameComparer
+            .Instance
+            .Compare(x?.PrincipalEntityType, y?.PrincipalEntityType);
         return result != 0
             ? result
             : TypeBaseNameComparer.Instance.Compare(x?.DeclaringEntityType, y?.DeclaringEntityType);

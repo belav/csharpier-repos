@@ -478,7 +478,8 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_DefaultSchedulerUsed()
         {
             var scheduler = new CountingScheduler();
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     () =>
                     {
                         int initialCallCount = scheduler.QueueTaskCalls;
@@ -509,7 +510,8 @@ namespace System.Threading.Tasks.Tests
         public void Generic_DefaultSchedulerUsed()
         {
             var scheduler = new CountingScheduler();
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     () =>
                     {
                         int initialCallCount = scheduler.QueueTaskCalls;
@@ -544,8 +546,8 @@ namespace System.Threading.Tasks.Tests
             Func<int, Task<int>> func = null;
             func = count =>
                 ++count < DiveDepth
-                    ? Task
-                        .Factory.StartNew(
+                    ? Task.Factory
+                        .StartNew(
                             () => func(count),
                             CancellationToken.None,
                             TaskCreationOptions.None,

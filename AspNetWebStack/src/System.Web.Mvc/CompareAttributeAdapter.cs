@@ -53,7 +53,8 @@ namespace System.Web.Mvc
                 if (_otherPropertyDisplayName == null && metadata.ContainerType != null)
                 {
                     _otherPropertyDisplayName = ModelMetadataProviders
-                        .Current.GetMetadataForProperty(
+                        .Current
+                        .GetMetadataForProperty(
                             () => metadata.Model,
                             metadata.ContainerType,
                             attribute.OtherProperty

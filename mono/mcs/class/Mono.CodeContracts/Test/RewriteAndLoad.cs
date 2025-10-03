@@ -126,8 +126,8 @@ namespace MonoTests.Mono.CodeContracts
                 throw new ArgumentException("Method must be static");
             }
             var m = e.Method;
-            var args = e
-                .Arguments.Select(a =>
+            var args = e.Arguments
+                .Select(a =>
                 {
                     while (a.CanReduce)
                     {

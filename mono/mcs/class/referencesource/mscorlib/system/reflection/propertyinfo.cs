@@ -322,7 +322,8 @@ namespace System.Reflection
 
                     void* name;
                     GetRuntimeModule()
-                        .MetadataImport.GetPropertyProps(m_token, out name, out flags, out sig);
+                        .MetadataImport
+                        .GetPropertyProps(m_token, out name, out flags, out sig);
 
                     m_signature = new Signature(
                         sig.Signature.ToPointer(),

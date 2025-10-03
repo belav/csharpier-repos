@@ -20,9 +20,9 @@ namespace System.IdentityModel.Tokens
             if (string.IsNullOrEmpty(issuerName))
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuerName");
             if (string.IsNullOrEmpty(issuerSerialNumber))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "issuerSerialNumber"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("issuerSerialNumber");
 
             this.issuerName = issuerName;
             this.issuerSerialNumber = issuerSerialNumber;

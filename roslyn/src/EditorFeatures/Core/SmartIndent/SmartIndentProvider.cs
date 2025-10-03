@@ -29,9 +29,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
             }
 
             if (
-                !_editorOptionsService.GlobalOptions.GetOption(
-                    SmartIndenterOptionsStorage.SmartIndenter
-                )
+                !_editorOptionsService
+                    .GlobalOptions
+                    .GetOption(SmartIndenterOptionsStorage.SmartIndenter)
             )
             {
                 return null;

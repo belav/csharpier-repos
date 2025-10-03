@@ -237,10 +237,10 @@ namespace System.Workflow.ComponentModel.Design
                             this.treeView.ImageList.ColorDepth = ColorDepth.Depth32Bit;
                         }
 
-                        this.treeView.ImageList.Images.Add(
-                            activity.GetType().FullName,
-                            activityImage
-                        );
+                        this.treeView
+                            .ImageList
+                            .Images
+                            .Add(activity.GetType().FullName, activityImage);
                         imageIndex = this.treeView.ImageList.Images.Count - 1;
                     }
                 }

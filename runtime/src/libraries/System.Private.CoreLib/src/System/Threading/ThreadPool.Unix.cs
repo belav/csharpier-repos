@@ -33,39 +33,34 @@ namespace System.Threading
             PortableThreadPool.ThreadPoolInstance.GetOrCreateThreadLocalCompletionCountObject();
 
         public static bool SetMaxThreads(int workerThreads, int completionPortThreads) =>
-            PortableThreadPool.ThreadPoolInstance.SetMaxThreads(
-                workerThreads,
-                completionPortThreads
-            );
+            PortableThreadPool
+                .ThreadPoolInstance
+                .SetMaxThreads(workerThreads, completionPortThreads);
 
         public static void GetMaxThreads(out int workerThreads, out int completionPortThreads)
         {
-            PortableThreadPool.ThreadPoolInstance.GetMaxThreads(
-                out workerThreads,
-                out completionPortThreads
-            );
+            PortableThreadPool
+                .ThreadPoolInstance
+                .GetMaxThreads(out workerThreads, out completionPortThreads);
         }
 
         public static bool SetMinThreads(int workerThreads, int completionPortThreads) =>
-            PortableThreadPool.ThreadPoolInstance.SetMinThreads(
-                workerThreads,
-                completionPortThreads
-            );
+            PortableThreadPool
+                .ThreadPoolInstance
+                .SetMinThreads(workerThreads, completionPortThreads);
 
         public static void GetMinThreads(out int workerThreads, out int completionPortThreads)
         {
-            PortableThreadPool.ThreadPoolInstance.GetMinThreads(
-                out workerThreads,
-                out completionPortThreads
-            );
+            PortableThreadPool
+                .ThreadPoolInstance
+                .GetMinThreads(out workerThreads, out completionPortThreads);
         }
 
         public static void GetAvailableThreads(out int workerThreads, out int completionPortThreads)
         {
-            PortableThreadPool.ThreadPoolInstance.GetAvailableThreads(
-                out workerThreads,
-                out completionPortThreads
-            );
+            PortableThreadPool
+                .ThreadPoolInstance
+                .GetAvailableThreads(out workerThreads, out completionPortThreads);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -87,10 +82,9 @@ namespace System.Threading
             object threadLocalCompletionCountObject,
             int currentTimeMs
         ) =>
-            PortableThreadPool.ThreadPoolInstance.NotifyWorkItemComplete(
-                threadLocalCompletionCountObject,
-                currentTimeMs
-            );
+            PortableThreadPool
+                .ThreadPoolInstance
+                .NotifyWorkItemComplete(threadLocalCompletionCountObject, currentTimeMs);
 
         /// <summary>
         /// This method is called to request a new thread pool worker to handle pending work.

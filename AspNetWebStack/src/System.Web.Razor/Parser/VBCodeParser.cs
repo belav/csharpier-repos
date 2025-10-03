@@ -457,10 +457,9 @@ namespace System.Web.Razor.Parser
                 Debug.Assert(ReferenceEquals(Context.ActiveParser, Context.MarkupParser));
                 if (!String.IsNullOrEmpty(startSequence) || !String.IsNullOrEmpty(endSequence))
                 {
-                    Context.MarkupParser.ParseSection(
-                        Tuple.Create(startSequence, endSequence),
-                        false
-                    );
+                    Context
+                        .MarkupParser
+                        .ParseSection(Tuple.Create(startSequence, endSequence), false);
                 }
                 else
                 {

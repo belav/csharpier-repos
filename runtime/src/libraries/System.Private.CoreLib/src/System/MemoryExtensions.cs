@@ -3931,11 +3931,9 @@ namespace System
 
             if (keys.Length > 1)
             {
-                ArraySortHelper<TKey, TValue>.Default.Sort(
-                    keys,
-                    items,
-                    new ComparisonComparer<TKey>(comparison)
-                );
+                ArraySortHelper<TKey, TValue>
+                    .Default
+                    .Sort(keys, items, new ComparisonComparer<TKey>(comparison));
             }
         }
 

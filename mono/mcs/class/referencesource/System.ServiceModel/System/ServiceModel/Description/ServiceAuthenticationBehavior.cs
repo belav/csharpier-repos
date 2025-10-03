@@ -94,14 +94,16 @@ namespace System.ServiceModel.Description
                     parameters.Find<ServiceAuthenticationManager>();
                 if (otherAuthenticationManager != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.MultipleAuthenticationManagersInServiceBindingParameters,
-                                otherAuthenticationManager
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.MultipleAuthenticationManagersInServiceBindingParameters,
+                                    otherAuthenticationManager
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 parameters.Add(this.serviceAuthenticationManager);
@@ -119,14 +121,16 @@ namespace System.ServiceModel.Description
                         != authenticationSchemes
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.MultipleAuthenticationSchemesInServiceBindingParameters,
-                                    otherAuthenticationSchemesBindingParameter.AuthenticationSchemes
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.MultipleAuthenticationSchemesInServiceBindingParameters,
+                                        otherAuthenticationSchemesBindingParameter.AuthenticationSchemes
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                 }
                 else
@@ -144,13 +148,13 @@ namespace System.ServiceModel.Description
         )
         {
             if (description == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("description")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("description"));
             if (serviceHostBase == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("serviceHostBase")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("serviceHostBase"));
 
             if (this.serviceAuthenticationManager == null)
             {
@@ -220,9 +224,11 @@ namespace System.ServiceModel.Description
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             }
         }
 
@@ -281,10 +287,9 @@ namespace System.ServiceModel.Description
                 .Find<SecurityBindingElement>();
             if (securityBindingElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "binding",
-                    SR.GetString(SR.NoSecurityBindingElementFound)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("binding", SR.GetString(SR.NoSecurityBindingElementFound));
             }
 
             return new SecurityStandardsManager(

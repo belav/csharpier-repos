@@ -189,10 +189,12 @@ namespace System.Activities.DurableInstancing
             {
                 retryErrorOptions |= RetryErrorOptions.RetryWhenTransaction;
             }
-            return SqlCommandAsyncResult.retryErrorCodes.Any(x =>
-                x.ErrorCode == error
-                && (x.RetryErrorOptions & retryErrorOptions) == retryErrorOptions
-            );
+            return SqlCommandAsyncResult
+                .retryErrorCodes
+                .Any(x =>
+                    x.ErrorCode == error
+                    && (x.RetryErrorOptions & retryErrorOptions) == retryErrorOptions
+                );
         }
 
         static void StartCommandCallback(object state)

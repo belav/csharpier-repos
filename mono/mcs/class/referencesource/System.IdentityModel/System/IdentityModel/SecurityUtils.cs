@@ -126,9 +126,11 @@ namespace System.IdentityModel
             }
             if (wrappingSecurityKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
+                    );
             }
             return wrappingSecurityKey.EncryptKey(encryptionMethod, keyToWrap);
         }
@@ -257,10 +259,9 @@ namespace System.IdentityModel
         {
             int fipsAlgorithmPolicy = -1;
             using (
-                RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine.OpenSubKey(
-                    fipsPolicyRegistryKey,
-                    false
-                )
+                RegistryKey fipsAlgorithmPolicyKey = Registry
+                    .LocalMachine
+                    .OpenSubKey(fipsPolicyRegistryKey, false)
             )
             {
                 if (fipsAlgorithmPolicyKey != null)
@@ -463,11 +464,13 @@ namespace System.IdentityModel
                     read += actual;
                 }
                 if (totalRead > maxBufferSize - read)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new LimitExceededException(
-                            SR.GetString(SR.BufferQuotaExceededReadingBase64, maxBufferSize)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new LimitExceededException(
+                                SR.GetString(SR.BufferQuotaExceededReadingBase64, maxBufferSize)
+                            )
+                        );
                 totalRead += read;
                 if (read < buffer.Length)
                     break;
@@ -505,11 +508,13 @@ namespace System.IdentityModel
             }
             if (unwrappingSecurityKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                    new SecurityMessageSerializationException(
-                        SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperWarning(
+                        new SecurityMessageSerializationException(
+                            SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
+                        )
+                    );
             }
             return unwrappingSecurityKey.DecryptKey(encryptionMethod, wrappedKey);
         }
@@ -544,18 +549,18 @@ namespace System.IdentityModel
             }
 
             if (length < 2)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(SR.GetString(SR.InvalidHexString))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
 
             byte[] sArray;
 
             if (length >= 3 && hexString[i + 2] == ' ')
             {
                 if (length % 3 != 2)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.InvalidHexString))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
 
                 spaceSkippingMode = true;
 
@@ -565,9 +570,9 @@ namespace System.IdentityModel
             else
             {
                 if (length % 2 != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new FormatException(SR.GetString(SR.InvalidHexString))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
 
                 spaceSkippingMode = false;
 
@@ -597,9 +602,9 @@ namespace System.IdentityModel
             else if (val >= 'A' && val <= 'F')
                 return ((val - 'A') + 10);
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new FormatException(SR.GetString(SR.InvalidHexString))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
         }
 
         internal static ReadOnlyCollection<IAuthorizationPolicy> CreateAuthorizationPolicies(
@@ -964,21 +969,29 @@ namespace System.IdentityModel
                     && statusCode != (int)SecurityStatus.Unsupported
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding
+                                )
+                            )
+                        );
                 }
 
                 // if policyEnforcement is Always we needed to see a TargetName (SPN)
                 if (_policyEnforcement == PolicyEnforcement.Always)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding
+                                )
+                            )
+                        );
                 }
 
                 // in this case we accept because either the client or service is not patched.
@@ -988,11 +1001,13 @@ namespace System.IdentityModel
                 }
 
                 // guard against futures, force failure and fix as necessary
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
+                        )
+                    );
             }
 
             switch (_policyEnforcement)
@@ -1007,14 +1022,16 @@ namespace System.IdentityModel
                     // serviceBinding == null => client is not patched
                     // serviceBinding == "" => SB was not specified
                     if (string.IsNullOrEmpty(serviceBinding))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(
-                                    SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
-                                    string.Empty
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(
+                                        SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                        string.Empty
+                                    )
                                 )
-                            )
-                        );
+                            );
                     break;
             }
 
@@ -1022,14 +1039,16 @@ namespace System.IdentityModel
             if (_serviceNameCollection == null || _serviceNameCollection.Count < 1)
             {
                 if (defaultServiceBinding == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(
-                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
-                                string.Empty
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                    string.Empty
+                                )
                             )
-                        )
-                    );
+                        );
 
                 if (
                     string.Compare(
@@ -1041,23 +1060,27 @@ namespace System.IdentityModel
                     return;
 
                 if (string.IsNullOrEmpty(serviceBinding))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(
-                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
-                                string.Empty
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                    string.Empty
+                                )
                             )
-                        )
-                    );
+                        );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(
-                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
-                                serviceBinding
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                    serviceBinding
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             if (_serviceNameCollection != null)
@@ -1069,23 +1092,27 @@ namespace System.IdentityModel
             }
 
             if (string.IsNullOrEmpty(serviceBinding))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
-                            string.Empty
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                string.Empty
+                            )
                         )
-                    )
-                );
+                    );
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
-                            serviceBinding
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                serviceBinding
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         /// <summary>

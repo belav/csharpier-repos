@@ -303,7 +303,8 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                 // Creating a new method name by concatenating the parameter name that has been upper-cased.
                 var newMethodIdentifier = "Get" + parameterName.ToPascalCase();
                 var validParameters = _methodSymbol
-                    .Parameters.Intersect(expressionParameterMap.Values)
+                    .Parameters
+                    .Intersect(expressionParameterMap.Values)
                     .ToImmutableArray();
 
                 if (_actionKind is IntroduceParameterCodeActionKind.Trampoline)
@@ -833,10 +834,9 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                         var argumentExpression = _syntaxFacts.GetExpressionOfArgument(
                             updatedInvocationArgument
                         );
-                        var parenthesizedArgumentExpression = editor.Generator.AddParentheses(
-                            argumentExpression,
-                            includeElasticTrivia: false
-                        );
+                        var parenthesizedArgumentExpression = editor
+                            .Generator
+                            .AddParentheses(argumentExpression, includeElasticTrivia: false);
                         editor.ReplaceNode(variable, parenthesizedArgumentExpression);
                     }
                     else if (mappedParameter.HasExplicitDefaultValue)
@@ -844,10 +844,9 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                         var generatedExpression = _service.GenerateExpressionFromOptionalParameter(
                             mappedParameter
                         );
-                        var parenthesizedGeneratedExpression = editor.Generator.AddParentheses(
-                            generatedExpression,
-                            includeElasticTrivia: false
-                        );
+                        var parenthesizedGeneratedExpression = editor
+                            .Generator
+                            .AddParentheses(generatedExpression, includeElasticTrivia: false);
                         editor.ReplaceNode(variable, parenthesizedGeneratedExpression);
                     }
                 }
@@ -912,9 +911,11 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
             ) =>
                 !parameter.HasExplicitDefaultValue
                 && !parameter.IsParams
-                && !parameter.Type.Equals(
-                    compilation.GetTypeByMetadataName(typeof(CancellationToken)?.FullName!)
-                );
+                && !parameter
+                    .Type
+                    .Equals(
+                        compilation.GetTypeByMetadataName(typeof(CancellationToken)?.FullName!)
+                    );
 
             private void MapParameterToArgumentsAtInvocation(
                 Dictionary<IParameterSymbol, int> mapping,

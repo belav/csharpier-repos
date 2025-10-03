@@ -186,16 +186,19 @@ namespace System.ServiceModel.Description
                 new WrappedBodyTypeGenerator(context),
                 new Dictionary<MessagePartDescription, ICollection<CodeTypeReference>>()
             );
-            context.ServiceContractGenerator.AddReferencedAssembly(
-                typeof(System.Xml.Serialization.XmlTypeAttribute).Assembly
-            );
+            context
+                .ServiceContractGenerator
+                .AddReferencedAssembly(typeof(System.Xml.Serialization.XmlTypeAttribute).Assembly);
             xmlSerializerFormatAttribute.Style = style;
-            context.SyncMethod.CustomAttributes.Add(
-                OperationGenerator.GenerateAttributeDeclaration(
-                    context.Contract.ServiceContractGenerator,
-                    xmlSerializerFormatAttribute
-                )
-            );
+            context
+                .SyncMethod
+                .CustomAttributes
+                .Add(
+                    OperationGenerator.GenerateAttributeDeclaration(
+                        context.Contract.ServiceContractGenerator,
+                        xmlSerializerFormatAttribute
+                    )
+                );
             AddKnownTypes(
                 context.SyncMethod.CustomAttributes,
                 xmlSerializerFormatAttribute.IsEncoded

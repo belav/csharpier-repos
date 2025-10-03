@@ -60,9 +60,9 @@ namespace System.Runtime.CompilerServices
         public DefaultInterpolatedStringHandler(int literalLength, int formattedCount)
         {
             _provider = null;
-            _chars = _arrayToReturnToPool = ArrayPool<char>.Shared.Rent(
-                GetDefaultLength(literalLength, formattedCount)
-            );
+            _chars = _arrayToReturnToPool = ArrayPool<char>
+                .Shared
+                .Rent(GetDefaultLength(literalLength, formattedCount));
             _pos = 0;
             _hasCustomFormatter = false;
         }
@@ -79,9 +79,9 @@ namespace System.Runtime.CompilerServices
         )
         {
             _provider = provider;
-            _chars = _arrayToReturnToPool = ArrayPool<char>.Shared.Rent(
-                GetDefaultLength(literalLength, formattedCount)
-            );
+            _chars = _arrayToReturnToPool = ArrayPool<char>
+                .Shared
+                .Rent(GetDefaultLength(literalLength, formattedCount));
             _pos = 0;
             _hasCustomFormatter = provider is not null && HasCustomFormatter(provider);
         }

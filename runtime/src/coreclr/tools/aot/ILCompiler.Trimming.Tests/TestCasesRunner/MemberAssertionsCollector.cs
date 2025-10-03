@@ -149,8 +149,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
 
             foreach (
-                var propertyHandle in type
-                    .MetadataReader.GetTypeDefinition(type.Handle)
+                var propertyHandle in type.MetadataReader
+                    .GetTypeDefinition(type.Handle)
                     .GetProperties()
             )
             {

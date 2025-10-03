@@ -23,12 +23,14 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
         httpContext.Items[
             AntiforgeryMiddlewareAuthorizationFilter.AntiforgeryMiddlewareWithEndpointInvokedKey
         ] = new object();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(
-            new AntiforgeryValidationFeature(
-                false,
-                new AntiforgeryValidationException(string.Empty)
-            )
-        );
+        httpContext
+            .Features
+            .Set<IAntiforgeryValidationFeature>(
+                new AntiforgeryValidationFeature(
+                    false,
+                    new AntiforgeryValidationException(string.Empty)
+                )
+            );
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 
@@ -50,9 +52,9 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
         httpContext.Items[
             AntiforgeryMiddlewareAuthorizationFilter.AntiforgeryMiddlewareWithEndpointInvokedKey
         ] = new object();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(
-            new AntiforgeryValidationFeature(true, null)
-        );
+        httpContext
+            .Features
+            .Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(true, null));
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 
@@ -71,12 +73,14 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
             NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
         );
         var httpContext = new DefaultHttpContext();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(
-            new AntiforgeryValidationFeature(
-                false,
-                new AntiforgeryValidationException(string.Empty)
-            )
-        );
+        httpContext
+            .Features
+            .Set<IAntiforgeryValidationFeature>(
+                new AntiforgeryValidationFeature(
+                    false,
+                    new AntiforgeryValidationException(string.Empty)
+                )
+            );
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 
@@ -95,9 +99,9 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
             NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
         );
         var httpContext = new DefaultHttpContext();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(
-            new AntiforgeryValidationFeature(true, null)
-        );
+        httpContext
+            .Features
+            .Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(true, null));
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 

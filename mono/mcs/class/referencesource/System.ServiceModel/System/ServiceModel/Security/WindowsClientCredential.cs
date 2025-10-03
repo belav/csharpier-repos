@@ -46,15 +46,17 @@ namespace System.ServiceModel.Security
                     && System.ServiceModel.Channels.UnsafeNativeMethods.IsTailoredApplication.Value
                 )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(
-                            SR.GetString(
-                                SR.UnsupportedTokenImpersonationLevel,
-                                "AllowedImpersonationLevel",
-                                value.ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(
+                                SR.GetString(
+                                    SR.UnsupportedTokenImpersonationLevel,
+                                    "AllowedImpersonationLevel",
+                                    value.ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
 
                 this.allowedImpersonationLevel = value;
@@ -98,9 +100,11 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             }
         }
     }

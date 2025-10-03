@@ -15,7 +15,8 @@ namespace System.Globalization
 
             return CultureInfo
                     .GetCultureInfo(localeName)
-                    .CompareInfo.Compare("\u0131", "I", CompareOptions.IgnoreCase) == 0;
+                    .CompareInfo
+                    .Compare("\u0131", "I", CompareOptions.IgnoreCase) == 0;
         }
 
         internal unsafe void IcuChangeCase(
@@ -34,13 +35,9 @@ namespace System.Globalization
 
             if (HasEmptyCultureName)
             {
-                Interop.Globalization.ChangeCaseInvariant(
-                    src,
-                    srcLen,
-                    dstBuffer,
-                    dstBufferCapacity,
-                    bToUpper
-                );
+                Interop
+                    .Globalization
+                    .ChangeCaseInvariant(src, srcLen, dstBuffer, dstBufferCapacity, bToUpper);
             }
             else
             {
@@ -52,23 +49,15 @@ namespace System.Globalization
                 }
                 if (_needsTurkishCasing == Tristate.True)
                 {
-                    Interop.Globalization.ChangeCaseTurkish(
-                        src,
-                        srcLen,
-                        dstBuffer,
-                        dstBufferCapacity,
-                        bToUpper
-                    );
+                    Interop
+                        .Globalization
+                        .ChangeCaseTurkish(src, srcLen, dstBuffer, dstBufferCapacity, bToUpper);
                 }
                 else
                 {
-                    Interop.Globalization.ChangeCase(
-                        src,
-                        srcLen,
-                        dstBuffer,
-                        dstBufferCapacity,
-                        bToUpper
-                    );
+                    Interop
+                        .Globalization
+                        .ChangeCase(src, srcLen, dstBuffer, dstBufferCapacity, bToUpper);
                 }
             }
         }

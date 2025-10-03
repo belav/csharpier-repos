@@ -74,9 +74,9 @@ public class KeyAttributeConvention
                 switch (entityType.GetIsKeylessConfigurationSource())
                 {
                     case ConfigurationSource.DataAnnotation:
-                        Dependencies.Logger.ConflictingKeylessAndKeyAttributesWarning(
-                            propertyBuilder.Metadata
-                        );
+                        Dependencies
+                            .Logger
+                            .ConflictingKeylessAndKeyAttributesWarning(propertyBuilder.Metadata);
                         return;
 
                     case ConfigurationSource.Explicit:
@@ -136,7 +136,8 @@ public class KeyAttributeConvention
             {
                 properties.AddRange(
                     currentKey
-                        .Properties.Where(p =>
+                        .Properties
+                        .Where(p =>
                             !p.Name.Equals(
                                 propertyBuilder.Metadata.Name,
                                 StringComparison.OrdinalIgnoreCase
@@ -270,7 +271,8 @@ public class KeyAttributeConvention
     )
     {
         var primaryKeyAttribute = entityType
-            .ClrType.GetCustomAttributes<PrimaryKeyAttribute>(inherit: true)
+            .ClrType
+            .GetCustomAttributes<PrimaryKeyAttribute>(inherit: true)
             .FirstOrDefault();
         if (primaryKeyAttribute == null)
         {
@@ -287,10 +289,9 @@ public class KeyAttributeConvention
         IConventionKeyBuilder? keyBuilder;
         if (
             !shouldThrow
-            && !entityType.Builder.CanSetPrimaryKey(
-                primaryKeyAttribute.PropertyNames,
-                fromDataAnnotation: true
-            )
+            && !entityType
+                .Builder
+                .CanSetPrimaryKey(primaryKeyAttribute.PropertyNames, fromDataAnnotation: true)
         )
         {
             return true;
@@ -298,10 +299,9 @@ public class KeyAttributeConvention
 
         try
         {
-            keyBuilder = entityType.Builder.PrimaryKey(
-                primaryKeyAttribute.PropertyNames,
-                fromDataAnnotation: true
-            );
+            keyBuilder = entityType
+                .Builder
+                .PrimaryKey(primaryKeyAttribute.PropertyNames, fromDataAnnotation: true);
         }
         catch (InvalidOperationException exception)
         {

@@ -22,12 +22,10 @@ namespace System.Net
             {
 #if MONO
                 int errorCode;
-                Handle = System.Threading.Semaphore.CreateSemaphore_internal(
-                    initialCount,
-                    maxCount,
-                    null,
-                    out errorCode
-                );
+                Handle = System
+                    .Threading
+                    .Semaphore
+                    .CreateSemaphore_internal(initialCount, maxCount, null, out errorCode);
 #else
                 //
                 Handle = UnsafeNclNativeMethods.CreateSemaphore(
@@ -54,11 +52,10 @@ namespace System.Net
         {
 #if MONO
             int previousCount;
-            return System.Threading.Semaphore.ReleaseSemaphore_internal(
-                Handle,
-                1,
-                out previousCount
-            );
+            return System
+                .Threading
+                .Semaphore
+                .ReleaseSemaphore_internal(Handle, 1, out previousCount);
 #else
 #if DEBUG
             int previousCount;

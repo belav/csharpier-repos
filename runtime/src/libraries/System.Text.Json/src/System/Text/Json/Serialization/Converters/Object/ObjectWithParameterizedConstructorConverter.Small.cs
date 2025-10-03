@@ -152,14 +152,9 @@ namespace System.Text.Json.Serialization.Converters
             JsonSerializerOptions options
         )
         {
-            jsonTypeInfo.CreateObjectWithArgs =
-                DefaultJsonTypeInfoResolver.MemberAccessor.CreateParameterizedConstructor<
-                    T,
-                    TArg0,
-                    TArg1,
-                    TArg2,
-                    TArg3
-                >(ConstructorInfo!);
+            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver
+                .MemberAccessor
+                .CreateParameterizedConstructor<T, TArg0, TArg1, TArg2, TArg3>(ConstructorInfo!);
         }
     }
 }

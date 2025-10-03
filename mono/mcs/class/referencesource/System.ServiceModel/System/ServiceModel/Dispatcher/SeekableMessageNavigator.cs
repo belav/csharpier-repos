@@ -189,12 +189,14 @@ namespace System.ServiceModel.Dispatcher
                         // validator
                         if (n == NullIndex)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new QueryProcessingException(
-                                    QueryProcessingError.InvalidNavigatorPosition,
-                                    SR.GetString(SR.SeekableMessageNavInvalidPosition)
-                                )
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new QueryProcessingException(
+                                        QueryProcessingError.InvalidNavigatorPosition,
+                                        SR.GetString(SR.SeekableMessageNavInvalidPosition)
+                                    )
+                                );
                         }
 
                         this.nsStack.Push(this.dom.nodes[n].name);
@@ -392,12 +394,14 @@ namespace System.ServiceModel.Dispatcher
             // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
+                        )
+                    );
             }
             return base.Evaluate(xpath);
         }
@@ -408,12 +412,14 @@ namespace System.ServiceModel.Dispatcher
             // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
+                        )
+                    );
             }
             return base.Evaluate(expr);
         }
@@ -424,12 +430,14 @@ namespace System.ServiceModel.Dispatcher
             // We can only evaluate atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "Evaluate")
+                        )
+                    );
             }
             return base.Evaluate(expr, context);
         }
@@ -642,12 +650,14 @@ namespace System.ServiceModel.Dispatcher
             // We can only match atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")
+                        )
+                    );
             }
             return base.Matches(xpath);
         }
@@ -658,12 +668,14 @@ namespace System.ServiceModel.Dispatcher
             // We can only match atomized navigators
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "Matches")
+                        )
+                    );
             }
             return base.Matches(expr);
         }
@@ -870,12 +882,14 @@ namespace System.ServiceModel.Dispatcher
         public override bool MoveToId(string id)
         {
             // SOAP prohibits the inclusion of a DTD, so unique IDs cannot be defined.
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new QueryProcessingException(
-                    QueryProcessingError.NotSupported,
-                    SR.GetString(SR.SeekableMessageNavIDNotSupported)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new QueryProcessingException(
+                        QueryProcessingError.NotSupported,
+                        SR.GetString(SR.SeekableMessageNavIDNotSupported)
+                    )
+                );
         }
 
         // Move the navigator to the namespace manager the given prefix
@@ -1073,12 +1087,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")
+                        )
+                    );
             }
             return base.Select(xpath);
         }
@@ -1089,12 +1105,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "Select")
+                        )
+                    );
             }
             return base.Select(xpath);
         }
@@ -1105,12 +1123,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")
+                        )
+                    );
             }
             return base.SelectAncestors(type, matchSelf);
         }
@@ -1125,12 +1145,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectAncestors")
+                        )
+                    );
             }
             return base.SelectAncestors(name, namespaceURI, matchSelf);
         }
@@ -1141,12 +1163,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")
+                        )
+                    );
             }
             return base.SelectChildren(type);
         }
@@ -1157,12 +1181,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectChildren")
+                        )
+                    );
             }
             return base.SelectChildren(name, namespaceURI);
         }
@@ -1173,12 +1199,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")
+                        )
+                    );
             }
             return base.SelectDescendants(type, matchSelf);
         }
@@ -1193,12 +1221,14 @@ namespace System.ServiceModel.Dispatcher
             // Cannot select from an unatomized navigator
             if (!this.dom.atomize)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                    new QueryProcessingException(
-                        QueryProcessingError.NotAtomized,
-                        SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperCritical(
+                        new QueryProcessingException(
+                            QueryProcessingError.NotAtomized,
+                            SR.GetString(SR.SeekableMessageNavNonAtomized, "SelectDescendants")
+                        )
+                    );
             }
             return base.SelectDescendants(name, namespaceURI, matchSelf);
         }
@@ -1401,12 +1431,14 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!IsValidPosition(elem, parent))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new QueryProcessingException(
-                        QueryProcessingError.InvalidNavigatorPosition,
-                        SR.GetString(SR.SeekableMessageNavInvalidPosition)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new QueryProcessingException(
+                            QueryProcessingError.InvalidNavigatorPosition,
+                            SR.GetString(SR.SeekableMessageNavInvalidPosition)
+                        )
+                    );
             }
         }
 #endif
@@ -1587,12 +1619,14 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new QueryProcessingException(
-                    QueryProcessingError.InvalidNavigatorPosition,
-                    SR.GetString(SR.SeekableMessageNavInvalidPosition)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new QueryProcessingException(
+                        QueryProcessingError.InvalidNavigatorPosition,
+                        SR.GetString(SR.SeekableMessageNavInvalidPosition)
+                    )
+                );
         }
 
         // Get the index of the next namespace that matches the scope
@@ -1956,11 +1990,13 @@ namespace System.ServiceModel.Dispatcher
                     else
                     {
                         // Throw an exception if we try to navigate into the body.
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new NavigatorInvalidBodyAccessException(
-                                SR.GetString(SR.SeekableMessageNavBodyForbidden)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new NavigatorInvalidBodyAccessException(
+                                    SR.GetString(SR.SeekableMessageNavBodyForbidden)
+                                )
+                            );
                     }
                 }
                 else
@@ -1971,11 +2007,13 @@ namespace System.ServiceModel.Dispatcher
             else if (elem == this.bodyIndex && !this.includeBody)
             {
                 // Throw an exception if we try to navigate into the body.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NavigatorInvalidBodyAccessException(
-                        SR.GetString(SR.SeekableMessageNavBodyForbidden)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NavigatorInvalidBodyAccessException(
+                            SR.GetString(SR.SeekableMessageNavBodyForbidden)
+                        )
+                    );
             }
         }
 
@@ -2039,12 +2077,17 @@ namespace System.ServiceModel.Dispatcher
                         || String.CompareOrdinal(name, XmlnsP) == 0
                     )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new QueryProcessingException(
-                                QueryProcessingError.InvalidNamespacePrefix,
-                                SR.GetString(SR.SeekableMessageNavOverrideForbidden, reader.Name)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new QueryProcessingException(
+                                    QueryProcessingError.InvalidNamespacePrefix,
+                                    SR.GetString(
+                                        SR.SeekableMessageNavOverrideForbidden,
+                                        reader.Name
+                                    )
+                                )
+                            );
                     }
 
                     n = NewNode();
@@ -2250,11 +2293,13 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XPathNavigatorException(
-                        SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XPathNavigatorException(
+                            SR.GetString(SR.FilterNodeQuotaExceeded, this.counter.nodeCountMax)
+                        )
+                    );
             }
         }
 

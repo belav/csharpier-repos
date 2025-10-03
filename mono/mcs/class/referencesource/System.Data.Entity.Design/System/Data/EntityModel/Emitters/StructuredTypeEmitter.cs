@@ -259,15 +259,17 @@ namespace System.Data.EntityModel.Emitters
                 // Complex property:
                 //     Property = StructuralObject.VerifyComplexObjectIsNotNull(param, propertyName);
 
-                method.Statements.Add(
-                    new CodeAssignStatement(
-                        new CodePropertyReferenceExpression(
-                            instanceRef,
-                            propertyEmitter.PropertyName
-                        ),
-                        newPropertyValue
-                    )
-                );
+                method
+                    .Statements
+                    .Add(
+                        new CodeAssignStatement(
+                            new CodePropertyReferenceExpression(
+                                instanceRef,
+                                propertyEmitter.PropertyName
+                            ),
+                            newPropertyValue
+                        )
+                    );
             }
 
             // return class;

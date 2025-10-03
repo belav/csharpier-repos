@@ -313,9 +313,9 @@ public class E
 
             var compVerifier = CompileAndVerify(text, expectedOutput: "T1H1H2T2H2T3T4H1H2T5H2T6");
             compVerifier.VerifyDiagnostics(DiagnosticDescription.None);
-            var semanticModel = compVerifier.Compilation.GetSemanticModel(
-                compVerifier.Compilation.SyntaxTrees.Single()
-            );
+            var semanticModel = compVerifier
+                .Compilation
+                .GetSemanticModel(compVerifier.Compilation.SyntaxTrees.Single());
 
             var eventSymbol1 =
                 semanticModel

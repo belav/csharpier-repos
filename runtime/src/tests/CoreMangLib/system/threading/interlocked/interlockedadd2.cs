@@ -205,16 +205,18 @@ public class InterlockedAdd2
     {
         if (totalInc != totalMan || location != totalMan)
         {
-            TestLibrary.TestFramework.LogError(
-                "005",
-                "Interlocked.Add() returned wrong value. Expected("
-                    + totalMan
-                    + ") Got("
-                    + totalInc
-                    + ") and ("
-                    + location
-                    + ")"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "005",
+                    "Interlocked.Add() returned wrong value. Expected("
+                        + totalMan
+                        + ") Got("
+                        + totalInc
+                        + ") and ("
+                        + location
+                        + ")"
+                );
             return false;
         }
 

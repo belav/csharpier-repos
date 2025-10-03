@@ -37,14 +37,9 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop.AppleCrypto.AesGcmEncrypt(
-                _key,
-                nonce,
-                plaintext,
-                ciphertext,
-                tag,
-                associatedData
-            );
+            Interop
+                .AppleCrypto
+                .AesGcmEncrypt(_key, nonce, plaintext, ciphertext, tag, associatedData);
         }
 
         private void DecryptCore(
@@ -56,14 +51,9 @@ namespace System.Security.Cryptography
         )
         {
             CheckDisposed();
-            Interop.AppleCrypto.AesGcmDecrypt(
-                _key,
-                nonce,
-                ciphertext,
-                tag,
-                plaintext,
-                associatedData
-            );
+            Interop
+                .AppleCrypto
+                .AesGcmDecrypt(_key, nonce, ciphertext, tag, plaintext, associatedData);
         }
 
         public void Dispose()

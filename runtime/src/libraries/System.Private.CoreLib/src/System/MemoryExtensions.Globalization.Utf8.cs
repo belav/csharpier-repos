@@ -51,21 +51,26 @@ namespace System
                 case StringComparison.CurrentCulture:
                 case StringComparison.CurrentCultureIgnoreCase:
                 {
-                    return CultureInfo.CurrentCulture.CompareInfo.IsPrefixUtf8(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CultureInfo
+                        .CurrentCulture
+                        .CompareInfo
+                        .IsPrefixUtf8(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
                 }
 
                 case StringComparison.InvariantCulture:
                 case StringComparison.InvariantCultureIgnoreCase:
                 {
-                    return CompareInfo.Invariant.IsPrefixUtf8(
-                        span,
-                        value,
-                        string.GetCaseCompareOfComparisonCulture(comparisonType)
-                    );
+                    return CompareInfo
+                        .Invariant
+                        .IsPrefixUtf8(
+                            span,
+                            value,
+                            string.GetCaseCompareOfComparisonCulture(comparisonType)
+                        );
                 }
 
                 case StringComparison.Ordinal:

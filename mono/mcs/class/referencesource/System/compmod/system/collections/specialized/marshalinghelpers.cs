@@ -97,13 +97,16 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (managedArgs == null)
                 return IntPtr.Zero;
 
-            return System.StubHelpers.EventArgsMarshaler.CreateNativeNCCEventArgsInstance(
-                (int)managedArgs.Action,
-                managedArgs.NewItems,
-                managedArgs.OldItems,
-                managedArgs.NewStartingIndex,
-                managedArgs.OldStartingIndex
-            );
+            return System
+                .StubHelpers
+                .EventArgsMarshaler
+                .CreateNativeNCCEventArgsInstance(
+                    (int)managedArgs.Action,
+                    managedArgs.NewItems,
+                    managedArgs.OldItems,
+                    managedArgs.NewStartingIndex,
+                    managedArgs.OldStartingIndex
+                );
         }
 
         // Extracts properties from a WinRT NotifyCollectionChangedEventArgs and creates a new
@@ -115,9 +118,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (nativeArgsIP == IntPtr.Zero)
                 return null;
 
-            object obj = System.StubHelpers.InterfaceMarshaler.ConvertToManagedWithoutUnboxing(
-                nativeArgsIP
-            );
+            object obj = System
+                .StubHelpers
+                .InterfaceMarshaler
+                .ConvertToManagedWithoutUnboxing(nativeArgsIP);
             INotifyCollectionChangedEventArgs nativeArgs = (INotifyCollectionChangedEventArgs)obj;
 
             return new NotifyCollectionChangedEventArgs(
@@ -141,9 +145,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (managedArgs == null)
                 return IntPtr.Zero;
 
-            return System.StubHelpers.EventArgsMarshaler.CreateNativePCEventArgsInstance(
-                managedArgs.PropertyName
-            );
+            return System
+                .StubHelpers
+                .EventArgsMarshaler
+                .CreateNativePCEventArgsInstance(managedArgs.PropertyName);
         }
 
         // Extracts properties from a WinRT PropertyChangedEventArgs and creates a new
@@ -155,9 +160,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             if (nativeArgsIP == IntPtr.Zero)
                 return null;
 
-            object obj = System.StubHelpers.InterfaceMarshaler.ConvertToManagedWithoutUnboxing(
-                nativeArgsIP
-            );
+            object obj = System
+                .StubHelpers
+                .InterfaceMarshaler
+                .ConvertToManagedWithoutUnboxing(nativeArgsIP);
             IPropertyChangedEventArgs nativeArgs = (IPropertyChangedEventArgs)obj;
 
             return new PropertyChangedEventArgs(nativeArgs.PropertyName);

@@ -43,10 +43,12 @@ namespace Microsoft.CodeAnalysis
         )
         {
             return (NodeStateTable<T>)
-                graphState.SyntaxStore.GetSyntaxInputTable(
-                    this,
-                    graphState.GetLatestStateTableForNode(SharedInputNodes.SyntaxTrees)
-                );
+                graphState
+                    .SyntaxStore
+                    .GetSyntaxInputTable(
+                        this,
+                        graphState.GetLatestStateTableForNode(SharedInputNodes.SyntaxTrees)
+                    );
         }
 
         public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) =>

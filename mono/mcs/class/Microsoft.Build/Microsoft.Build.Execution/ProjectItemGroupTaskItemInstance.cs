@@ -39,8 +39,8 @@ namespace Microsoft.Build.Execution
             Exclude = xml.Exclude;
             Include = xml.Include;
             ItemType = xml.ItemType;
-            Metadata = xml
-                .Metadata.Select(m => new ProjectItemGroupTaskMetadataInstance(m))
+            Metadata = xml.Metadata
+                .Select(m => new ProjectItemGroupTaskMetadataInstance(m))
                 .ToArray();
             Remove = xml.Remove;
             KeepDuplicates = xml.KeepDuplicates;

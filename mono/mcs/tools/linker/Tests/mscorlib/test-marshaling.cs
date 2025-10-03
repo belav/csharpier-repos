@@ -274,18 +274,22 @@ namespace marshalertest
             {
                 if (exc.GetType() != typeof(T))
                 {
-                    Console.Error.WriteLine(
-                        $"Expected {func.Method.Name} to throw {typeof(T)} but it threw {exc.GetType()}."
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            $"Expected {func.Method.Name} to throw {typeof(T)} but it threw {exc.GetType()}."
+                        );
                     Console.Error.WriteLine(exc);
                     Console.Error.WriteLine();
                     errorCount++;
                 }
                 else if (!exc.Message.Contains(message))
                 {
-                    Console.Error.WriteLine(
-                        $"Expected {func.Method.Name} to throw {typeof(T)} with '{message}' in its message."
-                    );
+                    Console
+                        .Error
+                        .WriteLine(
+                            $"Expected {func.Method.Name} to throw {typeof(T)} with '{message}' in its message."
+                        );
                     Console.Error.WriteLine(exc);
                     Console.Error.WriteLine();
                     errorCount++;

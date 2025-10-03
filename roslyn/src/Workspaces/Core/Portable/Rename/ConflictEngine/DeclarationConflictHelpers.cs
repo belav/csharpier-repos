@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         )
         {
             var potentiallyConflictingMethods = renamedMethod
-                .ContainingType.GetMembers(renamedMethod.Name)
+                .ContainingType
+                .GetMembers(renamedMethod.Name)
                 .OfType<IMethodSymbol>()
                 .Where(m => !m.Equals(renamedMethod) && m.Arity == renamedMethod.Arity);
 
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         )
         {
             var potentiallyConflictingProperties = renamedProperty
-                .ContainingType.GetMembers(renamedProperty.Name)
+                .ContainingType
+                .GetMembers(renamedProperty.Name)
                 .OfType<IPropertySymbol>()
                 .Where(m =>
                     !m.Equals(renamedProperty)

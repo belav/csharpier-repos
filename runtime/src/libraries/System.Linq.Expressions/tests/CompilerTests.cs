@@ -487,10 +487,12 @@ namespace System.Linq.Expressions.Tests
         public static void CompileWorksWhenDynamicCodeNotSupported()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add(
-                "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
-                false.ToString()
-            );
+            options
+                .RuntimeConfigurationOptions
+                .Add(
+                    "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported",
+                    false.ToString()
+                );
 
             using RemoteInvokeHandle remoteHandle = RemoteExecutor.Invoke(
                 static () =>

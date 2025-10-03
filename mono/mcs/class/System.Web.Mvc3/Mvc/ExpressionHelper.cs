@@ -136,7 +136,9 @@
             }
 
             return methodExpression
-                .Method.DeclaringType.GetDefaultMembers()
+                .Method
+                .DeclaringType
+                .GetDefaultMembers()
                 .OfType<PropertyInfo>()
                 .Any(p => p.GetGetMethod() == methodExpression.Method);
         }

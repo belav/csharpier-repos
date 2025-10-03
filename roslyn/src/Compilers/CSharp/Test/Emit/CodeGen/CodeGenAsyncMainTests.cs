@@ -1029,7 +1029,8 @@ class A
             using var reader = new PEReader(image);
             var metadataReader = reader.GetMetadataReader();
             var main = metadataReader
-                .MethodDefinitions.Where(mh => getMethodName(mh) == "<Main>")
+                .MethodDefinitions
+                .Where(mh => getMethodName(mh) == "<Main>")
                 .Single();
             Assert.Equal(
                 new[]

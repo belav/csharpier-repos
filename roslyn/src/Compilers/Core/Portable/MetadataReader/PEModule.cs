@@ -3494,10 +3494,12 @@ namespace Microsoft.CodeAnalysis
                 {
                     // Check whether matching name
                     if (
-                        MetadataReader.StringComparer.Equals(
-                            MetadataReader.GetAssemblyReference(assemblyRef).Name,
-                            assemblyName
-                        )
+                        MetadataReader
+                            .StringComparer
+                            .Equals(
+                                MetadataReader.GetAssemblyReference(assemblyRef).Name,
+                                assemblyName
+                            )
                     )
                     {
                         // Return assembly ref token
@@ -3826,10 +3828,9 @@ namespace Microsoft.CodeAnalysis
                     StringHandle ctorName = memberRef.Name;
 
                     if (
-                        !metadataReader.StringComparer.Equals(
-                            ctorName,
-                            WellKnownMemberNames.InstanceConstructorName
-                        )
+                        !metadataReader
+                            .StringComparer
+                            .Equals(ctorName, WellKnownMemberNames.InstanceConstructorName)
                     )
                     {
                         // Not a constructor.
@@ -3845,10 +3846,9 @@ namespace Microsoft.CodeAnalysis
                     );
 
                     if (
-                        !metadataReader.StringComparer.Equals(
-                            methodDef.Name,
-                            WellKnownMemberNames.InstanceConstructorName
-                        )
+                        !metadataReader
+                            .StringComparer
+                            .Equals(methodDef.Name, WellKnownMemberNames.InstanceConstructorName)
                     )
                     {
                         // Not a constructor.

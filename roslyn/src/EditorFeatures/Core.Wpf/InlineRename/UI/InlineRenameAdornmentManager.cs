@@ -193,7 +193,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         )
         {
             return textView
-                .BufferGraph.GetTextBuffers(b => GetWorkspace(b.AsTextContainer()) == workspace)
+                .BufferGraph
+                .GetTextBuffers(b => GetWorkspace(b.AsTextContainer()) == workspace)
                 .Any();
         }
 

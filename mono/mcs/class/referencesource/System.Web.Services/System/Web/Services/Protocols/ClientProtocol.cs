@@ -338,11 +338,13 @@ namespace System.Web.Services.Protocols
                 processingRequest = false;
                 try
                 {
-                    client.ClientProtocol.AsyncBufferedSerialize(
-                        client.Request,
-                        requestStream,
-                        client.InternalAsyncState
-                    );
+                    client
+                        .ClientProtocol
+                        .AsyncBufferedSerialize(
+                            client.Request,
+                            requestStream,
+                            client.InternalAsyncState
+                        );
                 }
                 finally
                 {
@@ -439,13 +441,9 @@ namespace System.Web.Services.Protocols
                     buffer = client.Buffer = new byte[(contentLength == -1) ? 1024 : contentLength];
                 else if (contentLength != -1 && contentLength > buffer.Length)
                     buffer = client.Buffer = new byte[contentLength];
-                asyncResult = client.ResponseStream.BeginRead(
-                    buffer,
-                    0,
-                    buffer.Length,
-                    readResponseAsyncCallback,
-                    client
-                );
+                asyncResult = client
+                    .ResponseStream
+                    .BeginRead(buffer, 0, buffer.Length, readResponseAsyncCallback, client);
                 if (!asyncResult.CompletedSynchronously)
                     return;
             } while (!ProcessAsyncResponseStreamResult(client, asyncResult));

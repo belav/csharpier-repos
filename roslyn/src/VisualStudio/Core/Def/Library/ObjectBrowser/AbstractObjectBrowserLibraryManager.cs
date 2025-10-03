@@ -416,13 +416,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             }
 
             // TODO: Make sure we pass the right value for Visual Basic.
-            ppNavInfo = this.LibraryService.NavInfoFactory.Create(
-                libraryName,
-                referenceOwnerName,
-                namespaceName.ToString(),
-                className.ToString(),
-                memberName
-            );
+            ppNavInfo = this.LibraryService
+                .NavInfoFactory
+                .Create(
+                    libraryName,
+                    referenceOwnerName,
+                    namespaceName.ToString(),
+                    className.ToString(),
+                    memberName
+                );
 
             SharedPools.Default<StringBuilder>().ClearAndFree(namespaceName);
             SharedPools.Default<StringBuilder>().ClearAndFree(className);
@@ -452,30 +454,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 
             if (symbolListItem is MemberListItem)
             {
-                return this.LibraryService.NavInfoFactory.CreateForMember(
-                    symbol,
-                    project,
-                    compilation,
-                    useExpandedHierarchy
-                );
+                return this.LibraryService
+                    .NavInfoFactory
+                    .CreateForMember(symbol, project, compilation, useExpandedHierarchy);
             }
             else if (symbolListItem is TypeListItem)
             {
-                return this.LibraryService.NavInfoFactory.CreateForType(
-                    (INamedTypeSymbol)symbol,
-                    project,
-                    compilation,
-                    useExpandedHierarchy
-                );
+                return this.LibraryService
+                    .NavInfoFactory
+                    .CreateForType(
+                        (INamedTypeSymbol)symbol,
+                        project,
+                        compilation,
+                        useExpandedHierarchy
+                    );
             }
             else if (symbolListItem is NamespaceListItem)
             {
-                return this.LibraryService.NavInfoFactory.CreateForNamespace(
-                    (INamespaceSymbol)symbol,
-                    project,
-                    compilation,
-                    useExpandedHierarchy
-                );
+                return this.LibraryService
+                    .NavInfoFactory
+                    .CreateForNamespace(
+                        (INamespaceSymbol)symbol,
+                        project,
+                        compilation,
+                        useExpandedHierarchy
+                    );
             }
 
             return this.LibraryService.NavInfoFactory.CreateForProject(project);
@@ -518,9 +521,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                         var symbolListItem = _activeListItem as SymbolListItem;
                         if (symbolListItem?.ProjectId != null)
                         {
-                            var project = this.Workspace.CurrentSolution.GetProject(
-                                symbolListItem.ProjectId
-                            );
+                            var project = this.Workspace
+                                .CurrentSolution
+                                .GetProject(symbolListItem.ProjectId);
                             if (project != null)
                             {
                                 // Note: we kick of FindReferencesAsync in a 'fire and forget' manner. We don't want to

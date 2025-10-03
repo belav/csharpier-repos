@@ -122,11 +122,13 @@ namespace System.Workflow.Runtime.Hosting
         #region WorkflowRuntimeService
         override protected internal void Start()
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "SharedConnectionWorkflowCommitWorkBatchService: Starting"
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "SharedConnectionWorkflowCommitWorkBatchService: Starting"
+                );
 
             this.dbResourceAllocator = new DbResourceAllocator(
                 this.Runtime,
@@ -166,11 +168,13 @@ namespace System.Workflow.Runtime.Hosting
 
         protected override void OnStopped()
         {
-            WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information,
-                0,
-                "SharedConnectionWorkflowCommitWorkBatchService: Stopping"
-            );
+            WorkflowTrace
+                .Host
+                .TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "SharedConnectionWorkflowCommitWorkBatchService: Stopping"
+                );
             foreach (
                 KeyValuePair<
                     Transaction,
@@ -179,11 +183,13 @@ namespace System.Workflow.Runtime.Hosting
             )
             {
                 kvp.Value.Dispose();
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "Removing transaction " + kvp.Key.GetHashCode()
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Removing transaction " + kvp.Key.GetHashCode()
+                    );
             }
             this.transactionConnectionTable.Clear();
             this.dbResourceAllocator = null;
@@ -233,9 +239,9 @@ namespace System.Workflow.Runtime.Hosting
                         //
                         // Can't retry as we don't own the tx
                         // Create a dependent transaction and don't restrict promotion.
-                        tx = Transaction.Current.DependentClone(
-                            DependentCloneOption.BlockCommitUntilComplete
-                        );
+                        tx = Transaction
+                            .Current
+                            .DependentClone(DependentCloneOption.BlockCommitUntilComplete);
                         connectionInfo = new SharedConnectionInfo(
                             this.dbResourceAllocator,
                             tx,
@@ -276,24 +282,28 @@ namespace System.Workflow.Runtime.Hosting
                 {
                     tx.Rollback();
 
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Error,
-                        0,
-                        "SharedConnectionWorkflowCommitWorkBatchService caught exception from commitWorkBatchCallback: "
-                            + e.ToString()
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "SharedConnectionWorkflowCommitWorkBatchService caught exception from commitWorkBatchCallback: "
+                                + e.ToString()
+                        );
 
                     if (dbRetry.TryDoRetry(ref retryCounter))
                     {
-                        WorkflowTrace.Host.TraceEvent(
-                            TraceEventType.Information,
-                            0,
-                            "SharedConnectionWorkflowCommitWorkBatchService retrying commitWorkBatchCallback (retry attempt "
-                                + retryCounter.ToString(
-                                    System.Globalization.CultureInfo.InvariantCulture
-                                )
-                                + ")"
-                        );
+                        WorkflowTrace
+                            .Host
+                            .TraceEvent(
+                                TraceEventType.Information,
+                                0,
+                                "SharedConnectionWorkflowCommitWorkBatchService retrying commitWorkBatchCallback (retry attempt "
+                                    + retryCounter.ToString(
+                                        System.Globalization.CultureInfo.InvariantCulture
+                                    )
+                                    + ")"
+                            );
                         continue;
                     }
                     else
@@ -329,11 +339,13 @@ namespace System.Workflow.Runtime.Hosting
             lock (this.tableSyncObject)
             {
                 SharedConnectionInfo connectionInfo;
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "TransactionCompleted " + transaction.GetHashCode()
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "TransactionCompleted " + transaction.GetHashCode()
+                    );
                 if (transactionConnectionTable.TryGetValue(transaction, out connectionInfo))
                 {
                     connectionInfo.Dispose();
@@ -341,14 +353,16 @@ namespace System.Workflow.Runtime.Hosting
                 }
                 else
                 {
-                    WorkflowTrace.Host.TraceEvent(
-                        TraceEventType.Information,
-                        0,
-                        "TransactionCompleted "
-                            + transaction.GetHashCode()
-                            + " not found in table of count "
-                            + this.transactionConnectionTable.Count
-                    );
+                    WorkflowTrace
+                        .Host
+                        .TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "TransactionCompleted "
+                                + transaction.GetHashCode()
+                                + " not found in table of count "
+                                + this.transactionConnectionTable.Count
+                        );
                 }
             }
         }
@@ -361,14 +375,16 @@ namespace System.Workflow.Runtime.Hosting
             lock (this.tableSyncObject)
             {
                 this.transactionConnectionTable.Add(transaction, connectionInfo);
-                WorkflowTrace.Host.TraceEvent(
-                    TraceEventType.Information,
-                    0,
-                    "AddToConnectionInfoTable "
-                        + transaction.GetHashCode()
-                        + " in table of count "
-                        + this.transactionConnectionTable.Count
-                );
+                WorkflowTrace
+                    .Host
+                    .TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "AddToConnectionInfoTable "
+                            + transaction.GetHashCode()
+                            + " in table of count "
+                            + this.transactionConnectionTable.Count
+                    );
             }
         }
 

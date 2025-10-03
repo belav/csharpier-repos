@@ -152,7 +152,8 @@ namespace MonoTests.System.Xml
         {
             navigator = XDocument
                 .Parse("<foo bar='baz' quux='quuux' />")
-                .FirstNode.CreateNavigator();
+                .FirstNode
+                .CreateNavigator();
 
             Assert.AreEqual(XPathNodeType.Element, navigator.NodeType, "#1");
             Assert.AreEqual("foo", navigator.Name, "#2");
@@ -171,7 +172,8 @@ namespace MonoTests.System.Xml
         {
             navigator = XDocument
                 .Parse("<foo><bar>baz</bar><quux>quuux</quux></foo>")
-                .FirstNode.CreateNavigator();
+                .FirstNode
+                .CreateNavigator();
 
             Assert.AreEqual(XPathNodeType.Element, navigator.NodeType, "#1");
             Assert.AreEqual("foo", navigator.Name, "#2");

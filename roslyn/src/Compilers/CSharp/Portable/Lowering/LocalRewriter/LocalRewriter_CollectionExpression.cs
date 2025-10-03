@@ -124,14 +124,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                             or CollectionExpressionTypeKind.ReadOnlySpan
                 );
                 Debug.Assert(
-                    spanType.OriginalDefinition.Equals(
-                        _compilation.GetWellKnownType(
-                            collectionTypeKind == CollectionExpressionTypeKind.Span
-                                ? WellKnownType.System_Span_T
-                                : WellKnownType.System_ReadOnlySpan_T
-                        ),
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    spanType
+                        .OriginalDefinition
+                        .Equals(
+                            _compilation.GetWellKnownType(
+                                collectionTypeKind == CollectionExpressionTypeKind.Span
+                                    ? WellKnownType.System_Span_T
+                                    : WellKnownType.System_ReadOnlySpan_T
+                            ),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                 );
                 Debug.Assert(
                     elementType.Equals(
@@ -229,12 +231,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 Debug.Assert(list.Type is { });
                 Debug.Assert(
-                    list.Type.OriginalDefinition.Equals(
-                        _compilation.GetWellKnownType(
-                            WellKnownType.System_Collections_Generic_List_T
-                        ),
-                        TypeCompareKind.AllIgnoreOptions
-                    )
+                    list.Type
+                        .OriginalDefinition
+                        .Equals(
+                            _compilation.GetWellKnownType(
+                                WellKnownType.System_Collections_Generic_List_T
+                            ),
+                            TypeCompareKind.AllIgnoreOptions
+                        )
                 );
 
                 var listToArray = (
@@ -354,8 +358,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var syntax = node.Syntax;
             var collectionType = (NamedTypeSymbol)node.Type;
-            var elementType =
-                collectionType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.Single();
+            var elementType = collectionType
+                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics
+                .Single();
             BoundExpression arrayOrList;
 
             if (
@@ -380,7 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     var typeArgs = ImmutableArray.Create(elementType);
                     var synthesizedType = _factory
-                        .ModuleBuilderOpt.EnsureReadOnlyListTypeExists(
+                        .ModuleBuilderOpt
+                        .EnsureReadOnlyListTypeExists(
                             syntax,
                             hasKnownLength: useKnownLength,
                             _diagnostics.DiagnosticBag
@@ -442,10 +448,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var spanType = (NamedTypeSymbol)constructMethod.Parameters[0].Type;
             Debug.Assert(
-                spanType.OriginalDefinition.Equals(
-                    _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                    TypeCompareKind.AllIgnoreOptions
-                )
+                spanType
+                    .OriginalDefinition
+                    .Equals(
+                        _compilation.GetWellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                        TypeCompareKind.AllIgnoreOptions
+                    )
             );
 
             var elementType = spanType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[0];
@@ -538,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             int arrayLength = elements.Length;
             var inlineArrayType = _factory
-                .ModuleBuilderOpt.EnsureInlineArrayTypeExists(
+                .ModuleBuilderOpt
+                .EnsureInlineArrayTypeExists(
                     syntax,
                     _factory,
                     arrayLength,
@@ -552,11 +561,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var intType = _factory.SpecialType(SpecialType.System_Int32);
             MethodSymbol elementRef = _factory
-                .ModuleBuilderOpt.EnsureInlineArrayElementRefExists(
-                    syntax,
-                    intType,
-                    _diagnostics.DiagnosticBag
-                )
+                .ModuleBuilderOpt
+                .EnsureInlineArrayElementRefExists(syntax, intType, _diagnostics.DiagnosticBag)
                 .Construct(
                     ImmutableArray.Create(TypeWithAnnotations.Create(inlineArrayType), elementType)
                 );
@@ -599,18 +605,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             // or
             // ... InlineArrayAsSpan<<>y__InlineArrayN<ElementType>, ElementType>(ref tmp, N)
             MethodSymbol inlineArrayAsSpan = asReadOnlySpan
-                ? _factory.ModuleBuilderOpt.EnsureInlineArrayAsReadOnlySpanExists(
-                    syntax,
-                    _factory.WellKnownType(WellKnownType.System_ReadOnlySpan_T),
-                    intType,
-                    _diagnostics.DiagnosticBag
-                )
-                : _factory.ModuleBuilderOpt.EnsureInlineArrayAsSpanExists(
-                    syntax,
-                    _factory.WellKnownType(WellKnownType.System_Span_T),
-                    intType,
-                    _diagnostics.DiagnosticBag
-                );
+                ? _factory
+                    .ModuleBuilderOpt
+                    .EnsureInlineArrayAsReadOnlySpanExists(
+                        syntax,
+                        _factory.WellKnownType(WellKnownType.System_ReadOnlySpan_T),
+                        intType,
+                        _diagnostics.DiagnosticBag
+                    )
+                : _factory
+                    .ModuleBuilderOpt
+                    .EnsureInlineArrayAsSpanExists(
+                        syntax,
+                        _factory.WellKnownType(WellKnownType.System_Span_T),
+                        intType,
+                        _diagnostics.DiagnosticBag
+                    );
             inlineArrayAsSpan = inlineArrayAsSpan.Construct(
                 ImmutableArray.Create(TypeWithAnnotations.Create(inlineArrayType), elementType)
             );

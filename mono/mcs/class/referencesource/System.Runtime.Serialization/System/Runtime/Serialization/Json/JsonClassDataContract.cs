@@ -236,17 +236,19 @@ namespace System.Runtime.Serialization.Json
                             )
                         )
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new SerializationException(
-                                    SR.GetString(
-                                        SR.JsonDuplicateMemberNames,
-                                        DataContract.GetClrTypeFullName(
-                                            traditionalClassDataContract.UnderlyingType
-                                        ),
-                                        traditionalClassDataContract.MemberNames[i].Value
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new SerializationException(
+                                        SR.GetString(
+                                            SR.JsonDuplicateMemberNames,
+                                            DataContract.GetClrTypeFullName(
+                                                traditionalClassDataContract.UnderlyingType
+                                            ),
+                                            traditionalClassDataContract.MemberNames[i].Value
+                                        )
                                     )
-                                )
-                            );
+                                );
                         }
                         else
                         {

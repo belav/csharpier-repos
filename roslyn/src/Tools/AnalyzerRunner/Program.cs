@@ -159,7 +159,8 @@ namespace AnalyzerRunner
             }
 
             var projects = solution
-                .Projects.Where(project =>
+                .Projects
+                .Where(project =>
                     project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
                 )
                 .ToList();
@@ -209,7 +210,8 @@ namespace AnalyzerRunner
         )
         {
             var projects = solution
-                .Projects.Where(project =>
+                .Projects
+                .Where(project =>
                     project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
                 )
                 .ToList();

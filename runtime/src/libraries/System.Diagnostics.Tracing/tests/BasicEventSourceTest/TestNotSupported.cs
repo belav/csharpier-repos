@@ -23,10 +23,9 @@ namespace BasicEventSourceTests
         public void TestBasicOperations_IsSupported_False()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add(
-                "System.Diagnostics.Tracing.EventSource.IsSupported",
-                false
-            );
+            options
+                .RuntimeConfigurationOptions
+                .Add("System.Diagnostics.Tracing.EventSource.IsSupported", false);
 
             RemoteExecutor
                 .Invoke(

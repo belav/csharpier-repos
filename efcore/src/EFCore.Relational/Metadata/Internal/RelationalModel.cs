@@ -921,9 +921,9 @@ public class RelationalModel : Annotatable, IRelationalModel
             )
             {
                 functionMappings.Add(functionMapping);
-                ((StoreFunction)functionMapping.StoreFunction).EntityTypeMappings.Add(
-                    functionMapping
-                );
+                ((StoreFunction)functionMapping.StoreFunction)
+                    .EntityTypeMappings
+                    .Add(functionMapping);
             }
         }
 
@@ -1041,10 +1041,9 @@ public class RelationalModel : Annotatable, IRelationalModel
             if (storeFunction == null)
             {
                 storeFunction = new StoreFunction(dbFunction, databaseModel);
-                databaseModel.Functions.Add(
-                    (storeFunction.Name, storeFunction.Schema, parameterTypes),
-                    storeFunction
-                );
+                databaseModel
+                    .Functions
+                    .Add((storeFunction.Name, storeFunction.Schema, parameterTypes), storeFunction);
             }
             else
             {
@@ -1407,10 +1406,12 @@ public class RelationalModel : Annotatable, IRelationalModel
                         );
                     }
 
-                    databaseModel.StoredProcedures.Add(
-                        (storeStoredProcedure.Name, storeStoredProcedure.Schema),
-                        storeStoredProcedure
-                    );
+                    databaseModel
+                        .StoredProcedures
+                        .Add(
+                            (storeStoredProcedure.Name, storeStoredProcedure.Schema),
+                            storeStoredProcedure
+                        );
                 }
 
                 storeStoredProcedure.StoredProcedures.Add(storedProcedure);
@@ -1698,15 +1699,15 @@ public class RelationalModel : Annotatable, IRelationalModel
                 if (
                     (foreignKey.IsUnique || entityType.IsMappedToJson())
                     && foreignKey.PrincipalKey.IsPrimaryKey()
-                    && !foreignKey.DeclaringEntityType.IsAssignableFrom(
-                        foreignKey.PrincipalEntityType
-                    )
-                    && !foreignKey.PrincipalEntityType.IsAssignableFrom(
-                        foreignKey.DeclaringEntityType
-                    )
-                    && ((ITableBase)table).EntityTypeMappings.Any(m =>
-                        m.TypeBase == foreignKey.PrincipalEntityType
-                    )
+                    && !foreignKey
+                        .DeclaringEntityType
+                        .IsAssignableFrom(foreignKey.PrincipalEntityType)
+                    && !foreignKey
+                        .PrincipalEntityType
+                        .IsAssignableFrom(foreignKey.DeclaringEntityType)
+                    && ((ITableBase)table)
+                        .EntityTypeMappings
+                        .Any(m => m.TypeBase == foreignKey.PrincipalEntityType)
                 )
                 {
                     isMainMapping = false;
@@ -1789,7 +1790,8 @@ public class RelationalModel : Annotatable, IRelationalModel
 
                 if (
                     table
-                        .EntityTypeMappings.Single(etm => etm.TypeBase == typeBase)
+                        .EntityTypeMappings
+                        .Single(etm => etm.TypeBase == typeBase)
                         .IncludesDerivedTypes
                 )
                 {
@@ -1828,7 +1830,8 @@ public class RelationalModel : Annotatable, IRelationalModel
             {
                 foreach (
                     var principalMapping in foreignKey
-                        .PrincipalEntityType.GetTableMappings()
+                        .PrincipalEntityType
+                        .GetTableMappings()
                         .Reverse()
                 )
                 {
@@ -1843,9 +1846,9 @@ public class RelationalModel : Annotatable, IRelationalModel
                         continue;
                     }
 
-                    var constraint = table.ForeignKeyConstraints.FirstOrDefault(fk =>
-                        fk.Name == name
-                    );
+                    var constraint = table
+                        .ForeignKeyConstraints
+                        .FirstOrDefault(fk => fk.Name == name);
                     if (constraint != null)
                     {
                         GetOrCreateForeignKeyConstraints(foreignKey).Add(constraint);
@@ -1908,9 +1911,9 @@ public class RelationalModel : Annotatable, IRelationalModel
                         break;
                     }
 
-                    var principalUniqueConstraintName = foreignKey.PrincipalKey.GetName(
-                        principalStoreObject
-                    );
+                    var principalUniqueConstraintName = foreignKey
+                        .PrincipalKey
+                        .GetName(principalStoreObject);
                     if (principalUniqueConstraintName == null)
                     {
                         continue;

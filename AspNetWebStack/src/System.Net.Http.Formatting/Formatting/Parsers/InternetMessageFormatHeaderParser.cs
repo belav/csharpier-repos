@@ -206,11 +206,9 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string headerFieldName = Encoding.UTF8.GetString(
-                                buffer,
-                                segmentStart,
-                                bytesConsumed - segmentStart
-                            );
+                            string headerFieldName = Encoding
+                                .UTF8
+                                .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                             currentField.Name.Append(headerFieldName);
                             goto quit;
                         }
@@ -218,11 +216,9 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string headerFieldName = Encoding.UTF8.GetString(
-                            buffer,
-                            segmentStart,
-                            bytesConsumed - segmentStart
-                        );
+                        string headerFieldName = Encoding
+                            .UTF8
+                            .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                         currentField.Name.Append(headerFieldName);
                     }
 
@@ -241,11 +237,9 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string headerFieldValue = Encoding.UTF8.GetString(
-                                buffer,
-                                segmentStart,
-                                bytesConsumed - segmentStart
-                            );
+                            string headerFieldValue = Encoding
+                                .UTF8
+                                .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                             currentField.Value.Append(headerFieldValue);
                             goto quit;
                         }
@@ -253,11 +247,9 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string headerFieldValue = Encoding.UTF8.GetString(
-                            buffer,
-                            segmentStart,
-                            bytesConsumed - segmentStart
-                        );
+                        string headerFieldValue = Encoding
+                            .UTF8
+                            .GetString(buffer, segmentStart, bytesConsumed - segmentStart);
                         currentField.Value.Append(headerFieldValue);
                     }
 

@@ -99,9 +99,10 @@ public class LocalRedirectResult : ActionResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<
-            IActionResultExecutor<LocalRedirectResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IActionResultExecutor<LocalRedirectResult>>();
         return executor.ExecuteAsync(context, this);
     }
 }

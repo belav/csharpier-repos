@@ -161,7 +161,8 @@ public class SqlServerDatabaseModelFactory : DatabaseModelFactory
             foreach (
                 var schema in schemaList.Except(
                     databaseModel
-                        .Sequences.Select(s => s.Schema)
+                        .Sequences
+                        .Select(s => s.Schema)
                         .Concat(databaseModel.Tables.Select(t => t.Schema))
                 )
             )
@@ -173,10 +174,12 @@ public class SqlServerDatabaseModelFactory : DatabaseModelFactory
             {
                 var (parsedSchema, parsedTableName) = Parse(table);
                 if (
-                    !databaseModel.Tables.Any(t =>
-                        !string.IsNullOrEmpty(parsedSchema) && t.Schema == parsedSchema
-                        || t.Name == parsedTableName
-                    )
+                    !databaseModel
+                        .Tables
+                        .Any(t =>
+                            !string.IsNullOrEmpty(parsedSchema) && t.Schema == parsedSchema
+                            || t.Name == parsedTableName
+                        )
                 )
                 {
                     _logger.MissingTableWarning(table);
@@ -1271,9 +1274,11 @@ ORDER BY [table_schema], [table_name], [index_name], [ic].[key_ordinal];";
                     var columnName = dataRecord.GetValueOrDefault<string>("column_name");
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-                        );
+                        ?? table
+                            .Columns
+                            .FirstOrDefault(c =>
+                                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+                            );
 
                     if (column is null)
                     {
@@ -1307,9 +1312,11 @@ ORDER BY [table_schema], [table_name], [index_name], [ic].[key_ordinal];";
                     var columnName = dataRecord.GetValueOrDefault<string>("column_name");
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-                        );
+                        ?? table
+                            .Columns
+                            .FirstOrDefault(c =>
+                                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+                            );
 
                     if (column is null)
                     {
@@ -1367,9 +1374,11 @@ ORDER BY [table_schema], [table_name], [index_name], [ic].[key_ordinal];";
 
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-                        );
+                        ?? table
+                            .Columns
+                            .FirstOrDefault(c =>
+                                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+                            );
 
                     if (column is null)
                     {
@@ -1499,21 +1508,30 @@ ORDER BY [table_schema], [table_name], [f].[name], [fc].[constraint_column_id];
                     var columnName = dataRecord.GetValueOrDefault<string>("column_name");
                     var column =
                         table.Columns.FirstOrDefault(c => c.Name == columnName)
-                        ?? table.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
-                        );
+                        ?? table
+                            .Columns
+                            .FirstOrDefault(c =>
+                                c.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase)
+                            );
                     Check.DebugAssert(column != null, "column is null.");
 
                     var principalColumnName = dataRecord.GetValueOrDefault<string>(
                         "referenced_column_name"
                     );
                     var principalColumn =
-                        foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
-                            c.Name == principalColumnName
-                        )
-                        ?? foreignKey.PrincipalTable.Columns.FirstOrDefault(c =>
-                            c.Name.Equals(principalColumnName, StringComparison.OrdinalIgnoreCase)
-                        );
+                        foreignKey
+                            .PrincipalTable
+                            .Columns
+                            .FirstOrDefault(c => c.Name == principalColumnName)
+                        ?? foreignKey
+                            .PrincipalTable
+                            .Columns
+                            .FirstOrDefault(c =>
+                                c.Name.Equals(
+                                    principalColumnName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            );
                     if (principalColumn == null)
                     {
                         invalid = true;
@@ -1541,11 +1559,13 @@ ORDER BY [table_schema], [table_name], [f].[name], [fc].[constraint_column_id];
                     }
                     else
                     {
-                        var duplicated = table.ForeignKeys.FirstOrDefault(k =>
-                            k.Columns.SequenceEqual(foreignKey.Columns)
-                            && k.PrincipalColumns.SequenceEqual(foreignKey.PrincipalColumns)
-                            && k.PrincipalTable.Equals(foreignKey.PrincipalTable)
-                        );
+                        var duplicated = table
+                            .ForeignKeys
+                            .FirstOrDefault(k =>
+                                k.Columns.SequenceEqual(foreignKey.Columns)
+                                && k.PrincipalColumns.SequenceEqual(foreignKey.PrincipalColumns)
+                                && k.PrincipalTable.Equals(foreignKey.PrincipalTable)
+                            );
                         if (duplicated != null)
                         {
                             _logger.DuplicateForeignKeyConstraintIgnored(

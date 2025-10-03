@@ -24,8 +24,9 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
 {
     public class OptionRoundTripTests : CSharpTestBase
     {
-        public static readonly CSharpCompilationOptions BaseCSharpCompilationOptions =
-            TestOptions.DebugExe.WithDeterministic(true);
+        public static readonly CSharpCompilationOptions BaseCSharpCompilationOptions = TestOptions
+            .DebugExe
+            .WithDeterministic(true);
 
         public static readonly VisualBasicCompilationOptions BaseVisualBasicCompilationOptions =
             new VisualBasicCompilationOptions(

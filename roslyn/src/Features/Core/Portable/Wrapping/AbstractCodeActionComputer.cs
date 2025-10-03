@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
 
                 var indentationService = Wrapper.IndentationService;
                 var originalLineNumber = newSourceText
-                    .Lines.GetLineFromPosition(nodeOrToken.Span.End)
+                    .Lines
+                    .GetLineFromPosition(nodeOrToken.Span.End)
                     .LineNumber;
 
                 // TODO: should be async https://github.com/dotnet/roslyn/issues/61998
@@ -283,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     .GetRequiredSyntaxRootAsync(CancellationToken)
                     .ConfigureAwait(false);
                 var tokens = leftTokenToTrailingTrivia
-                    .Keys.Concat(rightTokenToLeadingTrivia.Keys)
+                    .Keys
+                    .Concat(rightTokenToLeadingTrivia.Keys)
                     .Distinct()
                     .ToImmutableArray();
 
@@ -308,7 +310,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     computeReplacementNode: (oldNode, newNode) =>
                         newNode.WithAdditionalAnnotations(s_toFormatAnnotation),
                     tokens: leftTokenToTrailingTrivia
-                        .Keys.Concat(rightTokenToLeadingTrivia.Keys)
+                        .Keys
+                        .Concat(rightTokenToLeadingTrivia.Keys)
                         .Distinct(),
                     computeReplacementToken: (oldToken, newToken) =>
                     {
@@ -346,7 +349,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
                     {
                         // if a group is empty just ignore it.
                         var wrappingActions = group
-                            .WrappingActions.WhereNotNull()
+                            .WrappingActions
+                            .WhereNotNull()
                             .ToImmutableArray();
                         if (wrappingActions.Length == 0)
                         {

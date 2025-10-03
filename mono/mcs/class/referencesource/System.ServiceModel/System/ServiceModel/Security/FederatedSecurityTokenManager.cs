@@ -49,16 +49,16 @@ namespace System.ServiceModel.Security
         {
             if (parentCredentials == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "parentCredentials"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("parentCredentials");
             }
 
             if (parentCredentials.IdentityConfiguration == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "parentCredentials.IdentityConfiguration"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("parentCredentials.IdentityConfiguration");
             }
 
             _exceptionMapper = parentCredentials.ExceptionMapper;
@@ -120,9 +120,9 @@ namespace System.ServiceModel.Security
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tokenRequirement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("tokenRequirement");
             }
 
             outOfBandTokenResolver = null;
@@ -157,16 +157,18 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as UserNameSecurityTokenHandler;
                     if (upSecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ID4072,
-                                    securityTokenHandler.GetType(),
-                                    tokenType,
-                                    typeof(UserNameSecurityTokenHandler)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID4072,
+                                        securityTokenHandler.GetType(),
+                                        tokenType,
+                                        typeof(UserNameSecurityTokenHandler)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     securityTokenAuthenticator = new WrappedUserNameSecurityTokenAuthenticator(
                         upSecurityTokenHandler,
@@ -186,16 +188,18 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as RsaSecurityTokenHandler;
                     if (rsaSecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ID4072,
-                                    securityTokenHandler.GetType(),
-                                    tokenType,
-                                    typeof(RsaSecurityTokenHandler)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID4072,
+                                        securityTokenHandler.GetType(),
+                                        tokenType,
+                                        typeof(RsaSecurityTokenHandler)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     securityTokenAuthenticator = new WrappedRsaSecurityTokenAuthenticator(
                         rsaSecurityTokenHandler,
@@ -210,16 +214,18 @@ namespace System.ServiceModel.Security
                         securityTokenHandler as X509SecurityTokenHandler;
                     if (x509SecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ID4072,
-                                    securityTokenHandler.GetType(),
-                                    tokenType,
-                                    typeof(X509SecurityTokenHandler)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID4072,
+                                        securityTokenHandler.GetType(),
+                                        tokenType,
+                                        typeof(X509SecurityTokenHandler)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     securityTokenAuthenticator = new WrappedX509SecurityTokenAuthenticator(
                         x509SecurityTokenHandler,
@@ -228,33 +234,34 @@ namespace System.ServiceModel.Security
                 }
                 else if (
                     StringComparer.Ordinal.Equals(tokenType, SecurityTokenTypes.SamlTokenProfile11)
-                    || StringComparer.Ordinal.Equals(
-                        tokenType,
-                        SecurityTokenTypes.OasisWssSamlTokenProfile11
-                    )
+                    || StringComparer
+                        .Ordinal
+                        .Equals(tokenType, SecurityTokenTypes.OasisWssSamlTokenProfile11)
                 )
                 {
                     SamlSecurityTokenHandler saml11SecurityTokenHandler =
                         securityTokenHandler as SamlSecurityTokenHandler;
                     if (saml11SecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ID4072,
-                                    securityTokenHandler.GetType(),
-                                    tokenType,
-                                    typeof(SamlSecurityTokenHandler)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID4072,
+                                        securityTokenHandler.GetType(),
+                                        tokenType,
+                                        typeof(SamlSecurityTokenHandler)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     if (saml11SecurityTokenHandler.Configuration == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(SR.ID4274)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
                     }
 
                     securityTokenAuthenticator = new WrappedSaml11SecurityTokenAuthenticator(
@@ -268,33 +275,34 @@ namespace System.ServiceModel.Security
                 }
                 else if (
                     StringComparer.Ordinal.Equals(tokenType, SecurityTokenTypes.Saml2TokenProfile11)
-                    || StringComparer.Ordinal.Equals(
-                        tokenType,
-                        SecurityTokenTypes.OasisWssSaml2TokenProfile11
-                    )
+                    || StringComparer
+                        .Ordinal
+                        .Equals(tokenType, SecurityTokenTypes.OasisWssSaml2TokenProfile11)
                 )
                 {
                     Saml2SecurityTokenHandler saml2SecurityTokenHandler =
                         securityTokenHandler as Saml2SecurityTokenHandler;
                     if (saml2SecurityTokenHandler == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ID4072,
-                                    securityTokenHandler.GetType(),
-                                    tokenType,
-                                    typeof(Saml2SecurityTokenHandler)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ID4072,
+                                        securityTokenHandler.GetType(),
+                                        tokenType,
+                                        typeof(Saml2SecurityTokenHandler)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     if (saml2SecurityTokenHandler.Configuration == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(SR.ID4274)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
                     }
 
                     securityTokenAuthenticator = new WrappedSaml2SecurityTokenAuthenticator(
@@ -307,19 +315,20 @@ namespace System.ServiceModel.Security
                         .ServiceTokenResolver;
                 }
                 else if (
-                    StringComparer.Ordinal.Equals(
-                        tokenType,
-                        ServiceModelSecurityTokenTypes.SecureConversation
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(tokenType, ServiceModelSecurityTokenTypes.SecureConversation)
                 )
                 {
                     RecipientServiceModelSecurityTokenRequirement tr =
                         tokenRequirement as RecipientServiceModelSecurityTokenRequirement;
                     if (tr == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(SR.ID4240, tokenRequirement.GetType().ToString())
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperInvalidOperation(
+                                SR.GetString(SR.ID4240, tokenRequirement.GetType().ToString())
+                            );
                     }
 
                     securityTokenAuthenticator = SetupSecureConversationWrapper(
@@ -350,9 +359,11 @@ namespace System.ServiceModel.Security
                         tokenRequirement as RecipientServiceModelSecurityTokenRequirement;
                     if (tr == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                            SR.GetString(SR.ID4240, tokenRequirement.GetType().ToString())
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperInvalidOperation(
+                                SR.GetString(SR.ID4240, tokenRequirement.GetType().ToString())
+                            );
                     }
 
                     securityTokenAuthenticator = SetupSecureConversationWrapper(
@@ -502,37 +513,36 @@ namespace System.ServiceModel.Security
             foreach (string securitySpecification in version.GetSecuritySpecifications())
             {
                 if (
-                    StringComparer.Ordinal.Equals(
-                        securitySpecification,
-                        WSTrustFeb2005Constants.NamespaceURI
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(securitySpecification, WSTrustFeb2005Constants.NamespaceURI)
                 )
                 {
                     trustVersion = TrustVersion.WSTrustFeb2005;
                 }
                 else if (
-                    StringComparer.Ordinal.Equals(
-                        securitySpecification,
-                        WSTrust13Constants.NamespaceURI
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(securitySpecification, WSTrust13Constants.NamespaceURI)
                 )
                 {
                     trustVersion = TrustVersion.WSTrust13;
                 }
                 else if (
-                    StringComparer.Ordinal.Equals(
-                        securitySpecification,
-                        WSSecureConversationFeb2005Constants.Namespace
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(
+                            securitySpecification,
+                            WSSecureConversationFeb2005Constants.Namespace
+                        )
                 )
                 {
                     scVersion = SecureConversationVersion.WSSecureConversationFeb2005;
                 }
                 else if (
-                    StringComparer.Ordinal.Equals(
-                        securitySpecification,
-                        WSSecureConversation13Constants.Namespace
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(securitySpecification, WSSecureConversation13Constants.Namespace)
                 )
                 {
                     scVersion = SecureConversationVersion.WSSecureConversation13;
@@ -746,9 +756,9 @@ namespace System.ServiceModel.Security
                 && saml11SecurityTokenHandler.Configuration == null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4274)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
             }
 
             if (
@@ -756,9 +766,9 @@ namespace System.ServiceModel.Security
                 && saml2SecurityTokenHandler.Configuration == null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4274)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID4274));
             }
 
             if (saml11SecurityTokenHandler != null && saml2SecurityTokenHandler != null)
@@ -843,9 +853,9 @@ namespace System.ServiceModel.Security
         {
             if (tokenRequirement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "tokenRequirement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("tokenRequirement");
             }
 
             Uri listenUri = null;
@@ -856,9 +866,9 @@ namespace System.ServiceModel.Security
 
             if (listenUri == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
-                    SR.GetString(SR.ID4287, tokenRequirement)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperInvalidOperation(SR.GetString(SR.ID4287, tokenRequirement));
             }
 
             if (listenUri.IsDefaultPort)

@@ -41,8 +41,9 @@ public static class ComponentsWebAssemblyApplicationBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        var webHostEnvironment =
-            builder.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+        var webHostEnvironment = builder
+            .ApplicationServices
+            .GetRequiredService<IWebHostEnvironment>();
 
         var options = CreateStaticFilesOptions(webHostEnvironment.WebRootFileProvider);
 
@@ -57,30 +58,33 @@ public static class ComponentsWebAssemblyApplicationBuilderExtensions
                 subBuilder.Use(
                     async (context, next) =>
                     {
-                        context.Response.Headers.Append(
-                            "Blazor-Environment",
-                            webHostEnvironment.EnvironmentName
-                        );
+                        context
+                            .Response
+                            .Headers
+                            .Append("Blazor-Environment", webHostEnvironment.EnvironmentName);
 
                         // DOTNET_MODIFIABLE_ASSEMBLIES is used by the runtime to initialize hot-reload specific environment variables and is configured
                         // by the launching process (dotnet-watch / Visual Studio).
                         // Always add the header if the environment variable is set, regardless of the kind of environment.
                         if (s_dotnetModifiableAssemblies != null)
                         {
-                            context.Response.Headers.Append(
-                                "DOTNET-MODIFIABLE-ASSEMBLIES",
-                                s_dotnetModifiableAssemblies
-                            );
+                            context
+                                .Response
+                                .Headers
+                                .Append(
+                                    "DOTNET-MODIFIABLE-ASSEMBLIES",
+                                    s_dotnetModifiableAssemblies
+                                );
                         }
 
                         // See https://github.com/dotnet/aspnetcore/issues/37357#issuecomment-941237000
                         // Translate the _ASPNETCORE_BROWSER_TOOLS environment configured by the browser tools agent in to a HTTP response header.
                         if (s_aspnetcoreBrowserTools != null)
                         {
-                            context.Response.Headers.Append(
-                                "ASPNETCORE-BROWSER-TOOLS",
-                                s_aspnetcoreBrowserTools
-                            );
+                            context
+                                .Response
+                                .Headers
+                                .Append("ASPNETCORE-BROWSER-TOOLS", s_aspnetcoreBrowserTools);
                         }
 
                         await next(context);

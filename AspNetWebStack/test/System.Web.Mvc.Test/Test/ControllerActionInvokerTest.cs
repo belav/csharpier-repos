@@ -3163,13 +3163,15 @@ namespace System.Web.Mvc.Test
                 DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context.RouteData.AddDirectRouteMatches(
-                (r, rd) =>
-                {
-                    rd.Values.Add("action", "Action1");
-                    return true;
-                }
-            );
+            context
+                .RouteData
+                .AddDirectRouteMatches(
+                    (r, rd) =>
+                    {
+                        rd.Values.Add("action", "Action1");
+                        return true;
+                    }
+                );
 
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 
@@ -3204,13 +3206,15 @@ namespace System.Web.Mvc.Test
                 DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context.RouteData.AddDirectRouteMatches(
-                (r, rd) =>
-                {
-                    rd.Values.Add("action", "Action3");
-                    return true;
-                }
-            );
+            context
+                .RouteData
+                .AddDirectRouteMatches(
+                    (r, rd) =>
+                    {
+                        rd.Values.Add("action", "Action3");
+                        return true;
+                    }
+                );
 
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 
@@ -3240,13 +3244,15 @@ namespace System.Web.Mvc.Test
                 DirectRouteTestHelpers.BuildDirectRouteFromController<AttributeRoutingOnTheController>();
 
             // Simulate a match that binds the action parameter
-            context.RouteData.AddDirectRouteMatches(
-                (r, rd) =>
-                {
-                    rd.Values.Add("action", "Action2");
-                    return true;
-                }
-            );
+            context
+                .RouteData
+                .AddDirectRouteMatches(
+                    (r, rd) =>
+                    {
+                        rd.Values.Add("action", "Action2");
+                        return true;
+                    }
+                );
 
             ControllerActionInvokerHelper invoker = new ControllerActionInvokerHelper();
 

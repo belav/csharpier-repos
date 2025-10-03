@@ -35,15 +35,21 @@ namespace System.ServiceModel.Discovery
             }
             if (
                 endpoint.IsSystemEndpoint
-                && endpointDispatcher.ChannelDispatcher.Host.Description.Behaviors.Find<ServiceDiscoveryBehavior>()
-                    == null
+                && endpointDispatcher
+                    .ChannelDispatcher
+                    .Host
+                    .Description
+                    .Behaviors
+                    .Find<ServiceDiscoveryBehavior>() == null
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.DiscoveryEndpointWithoutBehavior(endpoint.Name)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.DiscoveryEndpointWithoutBehavior(endpoint.Name)
+                        )
+                    );
             }
         }
 

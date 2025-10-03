@@ -101,26 +101,30 @@ public class InterlockedDecrement2
     {
         if (exValue != nwValue)
         {
-            TestLibrary.TestFramework.LogError(
-                "003",
-                "Interlocked.Decrement() returned wrong value. Expected("
-                    + exValue
-                    + ") Got("
-                    + nwValue
-                    + ")"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "003",
+                    "Interlocked.Decrement() returned wrong value. Expected("
+                        + exValue
+                        + ") Got("
+                        + nwValue
+                        + ")"
+                );
             return false;
         }
         if (exValue != value)
         {
-            TestLibrary.TestFramework.LogError(
-                "003",
-                "Interlocked.Decrement() did not update value. Expected("
-                    + exValue
-                    + ") Got("
-                    + value
-                    + ")"
-            );
+            TestLibrary
+                .TestFramework
+                .LogError(
+                    "003",
+                    "Interlocked.Decrement() did not update value. Expected("
+                        + exValue
+                        + ") Got("
+                        + value
+                        + ")"
+                );
             return false;
         }
 

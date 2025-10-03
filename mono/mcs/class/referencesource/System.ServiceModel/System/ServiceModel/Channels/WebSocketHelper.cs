@@ -138,10 +138,9 @@ namespace System.ServiceModel.Channels
             return uri != null
                 && (
                     WebSocketHelper.SchemeWs.Equals(uri.Scheme, StringComparison.OrdinalIgnoreCase)
-                    || WebSocketHelper.SchemeWss.Equals(
-                        uri.Scheme,
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    || WebSocketHelper
+                        .SchemeWss
+                        .Equals(uri.Scheme, StringComparison.OrdinalIgnoreCase)
                 );
         }
 
@@ -199,15 +198,17 @@ namespace System.ServiceModel.Channels
                         }
                         else
                         {
-                            FxTrace.Exception.AsWarning(
-                                new WebException(
-                                    SR.GetString(
-                                        SR.WebSocketInvalidProtocolInvalidCharInProtocolString,
-                                        token,
-                                        invalidChar
+                            FxTrace
+                                .Exception
+                                .AsWarning(
+                                    new WebException(
+                                        SR.GetString(
+                                            SR.WebSocketInvalidProtocolInvalidCharInProtocolString,
+                                            token,
+                                            invalidChar
+                                        )
                                     )
-                                )
-                            );
+                                );
                             return false;
                         }
                     }
@@ -329,9 +330,9 @@ namespace System.ServiceModel.Channels
             AggregateException aggregationException = ex as AggregateException;
             if (aggregationException != null)
             {
-                Exception exception = FxTrace.Exception.AsError<OperationCanceledException>(
-                    aggregationException
-                );
+                Exception exception = FxTrace
+                    .Exception
+                    .AsError<OperationCanceledException>(aggregationException);
                 OperationCanceledException operationCanceledException =
                     exception as OperationCanceledException;
                 if (operationCanceledException != null)

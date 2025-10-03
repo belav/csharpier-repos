@@ -70,16 +70,20 @@ namespace System.IdentityModel
         {
             if (this.count != 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeOne))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeOne))
+                    );
             }
 
             if (index != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeZero))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException("index", SR.GetString(SR.ValueMustBeZero))
+                    );
             }
         }
 

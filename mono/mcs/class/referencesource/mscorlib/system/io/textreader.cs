@@ -218,13 +218,15 @@ namespace System.IO
         [ComVisible(false)]
         public virtual Task<String> ReadLineAsync()
         {
-            return Task<String>.Factory.StartNew(
-                _ReadLineDelegate,
-                this,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task<String>
+                .Factory
+                .StartNew(
+                    _ReadLineDelegate,
+                    this,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]
@@ -279,13 +281,15 @@ namespace System.IO
                 index,
                 count
             );
-            return Task<int>.Factory.StartNew(
-                _ReadDelegate,
-                tuple,
-                CancellationToken.None,
-                TaskCreationOptions.DenyChildAttach,
-                TaskScheduler.Default
-            );
+            return Task<int>
+                .Factory
+                .StartNew(
+                    _ReadDelegate,
+                    tuple,
+                    CancellationToken.None,
+                    TaskCreationOptions.DenyChildAttach,
+                    TaskScheduler.Default
+                );
         }
 
         [HostProtection(ExternalThreading = true)]

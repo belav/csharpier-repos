@@ -510,7 +510,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                             );
 
                             var symbol = _document
-                                .SemanticModel.GetSymbolInfo(left, cancellationToken)
+                                .SemanticModel
+                                .GetSymbolInfo(left, cancellationToken)
                                 .Symbol;
                             if (
                                 symbol?.Kind == symbolKind
@@ -581,8 +582,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                 // arbitrary variable (field, local, etc.).
                 if (inferredType.IsDelegateType())
                 {
-                    var syntaxKinds =
-                        _document.Document.GetRequiredLanguageService<ISyntaxKindsService>();
+                    var syntaxKinds = _document
+                        .Document
+                        .GetRequiredLanguageService<ISyntaxKindsService>();
                     if (
                         syntaxKinds.AddressOfExpression
                         == SimpleNameOrMemberAccessExpressionOpt.Parent?.RawKind
@@ -628,8 +630,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
                     availableTypeParameters
                 );
 
-                var enclosingMethodSymbol =
-                    _document.SemanticModel.GetEnclosingSymbol<IMethodSymbol>(
+                var enclosingMethodSymbol = _document
+                    .SemanticModel
+                    .GetEnclosingSymbol<IMethodSymbol>(
                         SimpleNameOrMemberAccessExpressionOpt.SpanStart,
                         cancellationToken
                     );
@@ -664,8 +667,9 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
 
                 // If we're in an lambda/local function we're not actually 'in' the constructor.
                 // i.e. we can't actually write to read-only fields here.
-                var syntaxFacts =
-                    _document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var syntaxFacts = _document
+                    .Document
+                    .GetRequiredLanguageService<ISyntaxFactsService>();
                 if (simpleName.AncestorsAndSelf().Any(syntaxFacts.IsAnonymousOrLocalFunction))
                     return false;
 

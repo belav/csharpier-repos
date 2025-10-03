@@ -483,7 +483,9 @@ namespace Microsoft.CodeAnalysis.Tools
             {
                 // Get the global.json pinned SDK or latest instance.
                 var msBuildInstance = Build
-                    .Locator.MSBuildLocator.QueryVisualStudioInstances()
+                    .Locator
+                    .MSBuildLocator
+                    .QueryVisualStudioInstances()
                     .Where(instance => instance.Version.Major >= 6)
                     .FirstOrDefault();
                 if (msBuildInstance is null)

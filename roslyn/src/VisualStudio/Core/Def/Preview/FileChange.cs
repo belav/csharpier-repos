@@ -91,7 +91,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
             var diffSelector = _componentModel.GetService<ITextDifferencingSelectorService>();
             var diffService = diffSelector.GetTextDifferencingService(
-                left.Project.Services.GetService<IContentTypeLanguageService>()
+                left.Project
+                    .Services
+                    .GetService<IContentTypeLanguageService>()
                     .GetDefaultContentType()
             );
 
@@ -123,10 +125,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 var leftText = oldText.GetSubText(leftSpan.ToTextSpan()).ToString();
                 var rightText = newText.GetSubText(rightSpan.ToTextSpan()).ToString();
 
-                var trackingSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(
-                    leftSpan,
-                    SpanTrackingMode.EdgeInclusive
-                );
+                var trackingSpan = _buffer
+                    .CurrentSnapshot
+                    .CreateTrackingSpan(leftSpan, SpanTrackingMode.EdgeInclusive);
 
                 var isDeletion = difference.DifferenceType == DifferenceType.Remove;
                 var displayText = isDeletion ? GetDisplayText(leftText) : GetDisplayText(rightText);
@@ -152,11 +153,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private ChangeList GetEntireDocumentAsSpanChange(TextDocument document)
         {
             // Show the whole document.
-            var entireSpan = _buffer.CurrentSnapshot.CreateTrackingSpan(
-                0,
-                _buffer.CurrentSnapshot.Length,
-                SpanTrackingMode.EdgeInclusive
-            );
+            var entireSpan = _buffer
+                .CurrentSnapshot
+                .CreateTrackingSpan(
+                    0,
+                    _buffer.CurrentSnapshot.Length,
+                    SpanTrackingMode.EdgeInclusive
+                );
             var text = document.GetTextSynchronously(CancellationToken.None).ToString();
             var displayText = GetDisplayText(text);
             var entireSpanChild = new SpanChange(

@@ -195,24 +195,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         public static readonly CSharpCompilationOptions SigningDebugDll =
             DebugDll.WithStrongNameProvider(SigningTestHelpers.DefaultDesktopStrongNameProvider);
 
-        public static readonly EmitOptions NativePdbEmit =
-            EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Pdb);
+        public static readonly EmitOptions NativePdbEmit = EmitOptions
+            .Default
+            .WithDebugInformationFormat(DebugInformationFormat.Pdb);
 
         public static CSharpParseOptions WithStrictFeature(this CSharpParseOptions options)
         {
             return options.WithFeatures(
-                options.Features.Concat(
-                    new[] { new KeyValuePair<string, string>("strict", "true") }
-                )
+                options
+                    .Features
+                    .Concat(new[] { new KeyValuePair<string, string>("strict", "true") })
             );
         }
 
         public static CSharpParseOptions WithPEVerifyCompatFeature(this CSharpParseOptions options)
         {
             return options.WithFeatures(
-                options.Features.Concat(
-                    new[] { new KeyValuePair<string, string>("peverify-compat", "true") }
-                )
+                options
+                    .Features
+                    .Concat(new[] { new KeyValuePair<string, string>("peverify-compat", "true") })
             );
         }
 
@@ -307,7 +308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
         {
             return options.WithSpecificDiagnosticOptions(
                 ImmutableDictionary<string, ReportDiagnostic>
-                    .Empty.Add(key1, value)
+                    .Empty
+                    .Add(key1, value)
                     .Add(key2, value)
             );
         }

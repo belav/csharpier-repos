@@ -260,8 +260,9 @@ namespace System.ServiceModel.Discovery
         void IDiscoveryTargetContract11.EndFind(IAsyncResult result)
         {
             OnEndFind(result);
-            var cb =
-                OperationContext.Current.GetCallbackChannel<IDiscoveryTargetCallbackContract11>();
+            var cb = OperationContext
+                .Current
+                .GetCallbackChannel<IDiscoveryTargetCallbackContract11>();
             cb.ReplyFind(CreateFindResponse11());
         }
 
@@ -313,8 +314,9 @@ namespace System.ServiceModel.Discovery
         void IDiscoveryTargetContractApril2005.EndFind(IAsyncResult result)
         {
             OnEndFind(result);
-            var cb =
-                OperationContext.Current.GetCallbackChannel<IDiscoveryTargetCallbackContractApril2005>();
+            var cb = OperationContext
+                .Current
+                .GetCallbackChannel<IDiscoveryTargetCallbackContractApril2005>();
             cb.ReplyFind(CreateFindResponseApril2005());
         }
 
@@ -366,8 +368,9 @@ namespace System.ServiceModel.Discovery
         void IDiscoveryTargetContractCD1.EndFind(IAsyncResult result)
         {
             OnEndFind(result);
-            var cb =
-                OperationContext.Current.GetCallbackChannel<IDiscoveryTargetCallbackContractCD1>();
+            var cb = OperationContext
+                .Current
+                .GetCallbackChannel<IDiscoveryTargetCallbackContractCD1>();
             cb.ReplyFind(CreateFindResponseCD1());
         }
 

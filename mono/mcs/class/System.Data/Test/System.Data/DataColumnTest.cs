@@ -645,7 +645,8 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet("Example");
             ds.Tables.Add("MyType");
             ds.Tables["MyType"]
-                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
             try
             {
                 ds.Tables["MyType"].Columns["Desc"].MaxLength = 32;
@@ -661,7 +662,8 @@ namespace MonoTests.System.Data
             DataSet ds = new DataSet("Example");
             ds.Tables.Add("MyType");
             ds.Tables["MyType"]
-                .Columns.Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
+                .Columns
+                .Add(new DataColumn("Desc", typeof(string), "", MappingType.SimpleContent));
             ds.Tables["MyType"].Columns["Desc"].MaxLength = -1;
         }
 

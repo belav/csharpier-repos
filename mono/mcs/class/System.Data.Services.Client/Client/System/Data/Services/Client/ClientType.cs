@@ -198,9 +198,9 @@ namespace System.Data.Services.Client
                             {
                                 int shadow = this.IndexOfProperty(property.PropertyName);
                                 if (
-                                    !property.DeclaringType.IsAssignableFrom(
-                                        this.properties[shadow].DeclaringType
-                                    )
+                                    !property
+                                        .DeclaringType
+                                        .IsAssignableFrom(this.properties[shadow].DeclaringType)
                                 )
                                 {
                                     this.properties.RemoveAt(shadow);
@@ -241,7 +241,8 @@ namespace System.Data.Services.Client
                                 if (
                                     (null == keyPropertyDeclaredType)
                                     || this.properties[i]
-                                        .DeclaringType.IsAssignableFrom(keyPropertyDeclaredType)
+                                        .DeclaringType
+                                        .IsAssignableFrom(keyPropertyDeclaredType)
                                 )
                                 {
                                     keyPropertyDeclaredType = this.properties[i].DeclaringType;
@@ -776,8 +777,8 @@ namespace System.Data.Services.Client
         private void WireUpMimeTypeProperties()
         {
             MimeTypePropertyAttribute attribute = (MimeTypePropertyAttribute)
-                this
-                    .ElementType.GetCustomAttributes(typeof(MimeTypePropertyAttribute), true)
+                this.ElementType
+                    .GetCustomAttributes(typeof(MimeTypePropertyAttribute), true)
                     .SingleOrDefault();
             if (null != attribute)
             {

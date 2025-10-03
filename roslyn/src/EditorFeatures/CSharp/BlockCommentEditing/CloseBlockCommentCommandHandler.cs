@@ -51,10 +51,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
                         if (line.End == position && line.IsEmptyOrWhitespace(0, line.Length - 2))
                         {
                             if (
-                                _editorOptionsService.GlobalOptions.GetOption(
-                                    BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString,
-                                    LanguageNames.CSharp
-                                )
+                                _editorOptionsService
+                                    .GlobalOptions
+                                    .GetOption(
+                                        BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString,
+                                        LanguageNames.CSharp
+                                    )
                                 && BlockCommentEditingCommandHandler.IsCaretInsideBlockCommentSyntax(
                                     caret.Value,
                                     args.SubjectBuffer,

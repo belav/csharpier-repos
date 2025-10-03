@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 // referenced.  So we also need to include documents with our property's name. Just
                 // defer to the Property finder to find these docs and combine them with the result.
                 propertyDocuments = await ReferenceFinders
-                    .Property.DetermineDocumentsToSearchAsync(
+                    .Property
+                    .DetermineDocumentsToSearchAsync(
                         property,
                         globalAliases,
                         project,
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             }
 
             var propertyReferences = await ReferenceFinders
-                .Property.FindReferencesInDocumentAsync(
+                .Property
+                .FindReferencesInDocumentAsync(
                     property,
                     state,
                     options with

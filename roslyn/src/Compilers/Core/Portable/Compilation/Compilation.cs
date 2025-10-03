@@ -2265,7 +2265,8 @@ namespace Microsoft.CodeAnalysis
                         {
                             manifestContents = typeof(Compilation)
                                 .GetTypeInfo()
-                                .Assembly.GetManifestResourceStream(
+                                .Assembly
+                                .GetManifestResourceStream(
                                     "Microsoft.CodeAnalysis.Resources.default.win32manifest"
                                 );
                         }
@@ -3940,9 +3941,9 @@ namespace Microsoft.CodeAnalysis
                             emitOptions.EmitMetadataOnly,
                             emitOptions.IncludePrivateMembers,
                             deterministic,
-                            emitOptions.InstrumentationKinds.Contains(
-                                InstrumentationKind.TestCoverage
-                            ),
+                            emitOptions
+                                .InstrumentationKinds
+                                .Contains(InstrumentationKind.TestCoverage),
                             privateKeyOpt,
                             cancellationToken
                         )

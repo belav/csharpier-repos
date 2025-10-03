@@ -114,18 +114,22 @@ namespace System.Web.Configuration
 
         internal Type GetProviderTypeForExtension(string extension)
         {
-            return global::System.Web.Compilation.BuildProvider.GetProviderTypeForExtension(
-                extension
-            );
+            return global::System
+                .Web
+                .Compilation
+                .BuildProvider
+                .GetProviderTypeForExtension(extension);
         }
 
         internal global::System.Web.Compilation.BuildProvider GetProviderInstanceForExtension(
             string extension
         )
         {
-            return global::System.Web.Compilation.BuildProvider.GetProviderInstanceForExtension(
-                extension
-            );
+            return global::System
+                .Web
+                .Compilation
+                .BuildProvider
+                .GetProviderInstanceForExtension(extension);
         }
     }
 }

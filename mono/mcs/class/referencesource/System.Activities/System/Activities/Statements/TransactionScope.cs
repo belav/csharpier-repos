@@ -347,22 +347,26 @@ namespace System.Activities.Statements
                     )
                 )
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.AbortInstanceOnTransactionFailureDoesNotMatch
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.AbortInstanceOnTransactionFailureDoesNotMatch
+                            )
+                        );
                 }
 
                 if (foundHandle.SuppressTransaction)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.CannotNestTransactionScopeWhenAmbientHandleIsSuppressed(
-                                this.DisplayName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.CannotNestTransactionScopeWhenAmbientHandleIsSuppressed(
+                                    this.DisplayName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 transactionHandle = foundHandle;
             }
@@ -379,9 +383,9 @@ namespace System.Activities.Statements
                 //Most likely, you are inside a nested TSA
                 if (transaction.IsolationLevel != this.IsolationLevel)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.IsolationLevelValidation)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(new InvalidOperationException(SR.IsolationLevelValidation));
                 }
 
                 //Check if the nested TSA had a timeout specified explicitly

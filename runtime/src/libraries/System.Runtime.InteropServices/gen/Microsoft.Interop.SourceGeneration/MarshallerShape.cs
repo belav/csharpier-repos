@@ -323,10 +323,9 @@ namespace Microsoft.Interop
                     {
                         if (
                             currentType.TypeParameters[i].HasUnmanagedTypeConstraint
-                            && SymbolEqualityComparer.Default.Equals(
-                                currentType.TypeArguments[i],
-                                typeArgument
-                            )
+                            && SymbolEqualityComparer
+                                .Default
+                                .Equals(currentType.TypeArguments[i], typeArgument)
                         )
                         {
                             return true;
@@ -487,10 +486,9 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                        && SymbolEqualityComparer.Default.Equals(
-                            readOnlySpanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }
 
@@ -513,10 +511,9 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer.Default.Equals(
-                            spanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
 
@@ -580,10 +577,9 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && managedType.IsConstructedFromEqualTypes(m.Parameters[0].Type)
-                        && SymbolEqualityComparer.Default.Equals(
-                            spanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
 
@@ -606,10 +602,9 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[1].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer.Default.Equals(
-                            readOnlySpanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }
         }
@@ -950,10 +945,9 @@ namespace Microsoft.Interop
             }
 
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    candidates[0].Parameters[0].Type,
-                    unmanagedType
-                )
+                SymbolEqualityComparer
+                    .Default
+                    .Equals(candidates[0].Parameters[0].Type, unmanagedType)
             )
             {
                 // We know the unmanaged type and it matches.
@@ -1029,10 +1023,9 @@ namespace Microsoft.Interop
                                 ReturnsVoid: false,
                                 ReturnType: INamedTypeSymbol returnType
                             }
-                        && SymbolEqualityComparer.Default.Equals(
-                            readOnlySpanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }
 
@@ -1054,10 +1047,9 @@ namespace Microsoft.Interop
                                 ReturnsVoid: false,
                                 ReturnType: INamedTypeSymbol returnType
                             }
-                        && SymbolEqualityComparer.Default.Equals(
-                            spanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
 
@@ -1080,10 +1072,9 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer.Default.Equals(
-                            spanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(spanOfT, returnType.ConstructedFrom)
                     );
             }
 
@@ -1106,10 +1097,9 @@ namespace Microsoft.Interop
                                 ReturnType: INamedTypeSymbol returnType
                             }
                         && m.Parameters[0].Type.SpecialType == SpecialType.System_Int32
-                        && SymbolEqualityComparer.Default.Equals(
-                            readOnlySpanOfT,
-                            returnType.ConstructedFrom
-                        )
+                        && SymbolEqualityComparer
+                            .Default
+                            .Equals(readOnlySpanOfT, returnType.ConstructedFrom)
                     );
             }
         }

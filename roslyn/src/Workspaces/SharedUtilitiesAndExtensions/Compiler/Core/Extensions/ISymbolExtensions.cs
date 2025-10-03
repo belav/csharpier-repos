@@ -495,7 +495,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 if (delegateType != null)
                 {
                     var types = method
-                        .Parameters.Skip(skip)
+                        .Parameters
+                        .Skip(skip)
                         .Select(p =>
                             (
                                 p.Type ?? compilation.GetSpecialType(SpecialType.System_Object)
@@ -584,15 +585,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 default:
                     return symbol.DeclaredAccessibility;
                 case Accessibility.ProtectedAndInternal:
-                    return symbol.ContainingAssembly.GivesAccessTo(
-                        finalDestination.ContainingAssembly
-                    )
+                    return symbol
+                        .ContainingAssembly
+                        .GivesAccessTo(finalDestination.ContainingAssembly)
                         ? Accessibility.ProtectedAndInternal
                         : Accessibility.Internal;
                 case Accessibility.ProtectedOrInternal:
-                    return symbol.ContainingAssembly.GivesAccessTo(
-                        finalDestination.ContainingAssembly
-                    )
+                    return symbol
+                        .ContainingAssembly
+                        .GivesAccessTo(finalDestination.ContainingAssembly)
                         ? Accessibility.ProtectedOrInternal
                         : Accessibility.Protected;
             }
@@ -617,7 +618,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             var declarationSyntax = symbol
-                .DeclaringSyntaxReferences.Select(r => r.GetSyntax())
+                .DeclaringSyntaxReferences
+                .Select(r => r.GetSyntax())
                 .FirstOrDefault();
             return declarationSyntax != null && position < declarationSyntax.SpanStart;
         }
@@ -760,7 +762,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             var members = returnType
-                .AllInterfaces.Concat(returnType.GetBaseTypesAndThis())
+                .AllInterfaces
+                .Concat(returnType.GetBaseTypesAndThis())
                 .SelectMany(x => x.GetMembers())
                 .Where(x => x.DeclaredAccessibility == Accessibility.Public)
                 .ToList();
@@ -811,7 +814,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
 
             var members = returnType
-                .AllInterfaces.Concat(returnType.GetBaseTypesAndThis())
+                .AllInterfaces
+                .Concat(returnType.GetBaseTypesAndThis())
                 .SelectMany(x => x.GetMembers())
                 .Where(x => x.DeclaredAccessibility == Accessibility.Public)
                 .ToList();

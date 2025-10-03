@@ -47,10 +47,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     or BasePropertyDeclarationSyntax
                     or EventDeclarationSyntax
             )
-                modifierErrors |= !MessageID.IDS_FeatureReadOnlyMembers.CheckFeatureAvailability(
-                    diagnostics,
-                    readonlyToken
-                );
+                modifierErrors |= !MessageID
+                    .IDS_FeatureReadOnlyMembers
+                    .CheckFeatureAvailability(diagnostics, readonlyToken);
 
             if ((result & DeclarationModifiers.AccessibilityMask) == 0)
                 result |= defaultAccess;
@@ -177,9 +176,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(modifier.Kind() == SyntaxKind.ScopedKeyword);
 
             if (
-                MessageID.IDS_FeatureRefFields.GetFeatureAvailabilityDiagnosticInfo(
-                    (CSharpParseOptions)syntax.SyntaxTree.Options
-                ) is
+                MessageID
+                    .IDS_FeatureRefFields
+                    .GetFeatureAvailabilityDiagnosticInfo(
+                        (CSharpParseOptions)syntax.SyntaxTree.Options
+                    ) is
                 { } diagnosticInfo
             )
             {
@@ -264,8 +265,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         reportModifiers &= ~DeclarationModifiers.Sealed;
                     }
 
-                    requiredVersion =
-                        MessageID.IDS_FeatureStaticAbstractMembersInInterfaces.RequiredVersion();
+                    requiredVersion = MessageID
+                        .IDS_FeatureStaticAbstractMembersInInterfaces
+                        .RequiredVersion();
                     if (availableVersion < requiredVersion)
                     {
                         ReportUnsupportedModifiersForLanguageVersion(
@@ -301,8 +303,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    requiredVersion =
-                        MessageID.IDS_DefaultInterfaceImplementation.RequiredVersion();
+                    requiredVersion = MessageID
+                        .IDS_DefaultInterfaceImplementation
+                        .RequiredVersion();
                     if (availableVersion < requiredVersion)
                     {
                         ReportUnsupportedModifiersForLanguageVersion(
@@ -359,8 +362,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 LanguageVersion availableVersion = (
                     (CSharpParseOptions)location.SourceTree.Options
                 ).LanguageVersion;
-                LanguageVersion requiredVersion =
-                    MessageID.IDS_FeatureStaticAbstractMembersInInterfaces.RequiredVersion();
+                LanguageVersion requiredVersion = MessageID
+                    .IDS_FeatureStaticAbstractMembersInInterfaces
+                    .RequiredVersion();
                 if (availableVersion < requiredVersion)
                 {
                     ModifierUtils.ReportUnsupportedModifiersForLanguageVersion(

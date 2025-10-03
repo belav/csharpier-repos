@@ -659,7 +659,8 @@ public class CosmosOptionsExtension : IDbContextOptionsExtension
             if (!string.IsNullOrEmpty(Extension._connectionString))
             {
                 debugInfo["Cosmos:" + nameof(ConnectionString)] = Extension
-                    ._connectionString.GetHashCode()
+                    ._connectionString
+                    .GetHashCode()
                     .ToString(CultureInfo.InvariantCulture);
             }
             else

@@ -140,9 +140,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 Contract.ThrowIfNull(parameterList);
 
                 var outParameters = parameterList
-                    .Parameters.Select(p =>
-                        semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken)
-                    )
+                    .Parameters
+                    .Select(p => semanticModel.GetRequiredDeclaredSymbol(p, cancellationToken))
                     .Where(p => p.RefKind == RefKind.Out)
                     .ToImmutableArray();
 

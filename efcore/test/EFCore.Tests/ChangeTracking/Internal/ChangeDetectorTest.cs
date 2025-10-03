@@ -35,9 +35,9 @@ public class ChangeDetectorTest
     [ConditionalFact]
     public void PropertyChanging_snapshots_original_and_FK_value_if_lazy_snapshots_are_in_use()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            BuildNotifyingModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(BuildNotifyingModel());
         var entity = new NotifyingProduct { DependentId = 77 };
         var entry = CreateInternalEntry(contextServices, entity);
         entry.SetEntityState(EntityState.Unchanged);
@@ -65,9 +65,9 @@ public class ChangeDetectorTest
     [ConditionalFact]
     public void PropertyChanging_does_not_snapshot_original_values_for_properties_with_no_original_value_tracking()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            BuildNotifyingModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(BuildNotifyingModel());
         var entity = new NotifyingProduct { Name = "Cheese" };
         var entry = CreateInternalEntry(contextServices, entity);
 
@@ -89,9 +89,9 @@ public class ChangeDetectorTest
     [ConditionalFact]
     public void PropertyChanging_snapshots_reference_navigations_if_lazy_snapshots_are_in_use()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            BuildNotifyingModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(BuildNotifyingModel());
         var category = new NotifyingCategory();
         var entity = new NotifyingProduct { Category = category };
         var entry = CreateInternalEntry(contextServices, entity);
@@ -119,9 +119,9 @@ public class ChangeDetectorTest
     [ConditionalFact]
     public void PropertyChanging_snapshots_PK_for_relationships_if_lazy_snapshots_are_in_use()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            BuildNotifyingModel()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(BuildNotifyingModel());
         var id = Guid.NewGuid();
         var entity = new NotifyingProduct { Id = id };
         var entry = CreateInternalEntry(contextServices, entity);
@@ -387,9 +387,9 @@ public class ChangeDetectorTest
     [ConditionalFact]
     public void Skips_detection_of_scalar_property_change_for_notification_entities()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            BuildModelWithChanged()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(BuildModelWithChanged());
 
         var stateManager = contextServices.GetRequiredService<IStateManager>();
         var changeDetector = contextServices.GetRequiredService<IChangeDetector>();
@@ -409,9 +409,9 @@ public class ChangeDetectorTest
     [ConditionalFact]
     public void Skips_local_detection_of_scalar_property_change_for_notification_entities()
     {
-        var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(
-            BuildModelWithChanged()
-        );
+        var contextServices = InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(BuildModelWithChanged());
 
         var changeDetector = contextServices.GetRequiredService<IChangeDetector>();
 
@@ -2097,7 +2097,8 @@ public class ChangeDetectorTest
     private static IModel BuildNotifyingModel()
     {
         var builder = InMemoryTestHelpers
-            .Instance.CreateConventionBuilder()
+            .Instance
+            .CreateConventionBuilder()
             .HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotifications);
 
         builder.Entity<NotifyingProduct>(b =>
@@ -2164,7 +2165,8 @@ public class ChangeDetectorTest
     private static IModel BuildModelWithChanged()
     {
         var builder = InMemoryTestHelpers
-            .Instance.CreateConventionBuilder()
+            .Instance
+            .CreateConventionBuilder()
             .HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications);
 
         builder.Entity<ProductWithChanged>();
@@ -2190,13 +2192,17 @@ public class ChangeDetectorTest
             );
 
     private static IServiceProvider CreateContextServices(IModel model = null) =>
-        InMemoryTestHelpers.Instance.CreateContextServices(
-            new ServiceCollection()
-                .AddScoped<TestRelationshipListener>()
-                .AddScoped<IEntityGraphAttacher, TestAttacher>()
-                .AddScoped<INavigationFixer>(p => p.GetRequiredService<TestRelationshipListener>()),
-            model ?? BuildModel()
-        );
+        InMemoryTestHelpers
+            .Instance
+            .CreateContextServices(
+                new ServiceCollection()
+                    .AddScoped<TestRelationshipListener>()
+                    .AddScoped<IEntityGraphAttacher, TestAttacher>()
+                    .AddScoped<INavigationFixer>(p =>
+                        p.GetRequiredService<TestRelationshipListener>()
+                    ),
+                model ?? BuildModel()
+            );
 
     private class TestAttacher : EntityGraphAttacher
     {

@@ -61,9 +61,10 @@ public class FileStreamResult : FileResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<
-            IActionResultExecutor<FileStreamResult>
-        >();
+        var executor = context
+            .HttpContext
+            .RequestServices
+            .GetRequiredService<IActionResultExecutor<FileStreamResult>>();
         return executor.ExecuteAsync(context, this);
     }
 }

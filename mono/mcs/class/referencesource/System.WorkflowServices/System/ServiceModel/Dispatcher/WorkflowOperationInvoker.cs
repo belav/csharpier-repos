@@ -35,9 +35,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (operationDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "operationDescription"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("operationDescription");
             }
 
             if (workflowRuntime == null)
@@ -47,9 +47,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (workflowOperationBehavior == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "workflowOperationBehavior"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("workflowOperationBehavior");
             }
 
             this.isOneWay = operationDescription.IsOneWay;
@@ -96,8 +96,11 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.workflowInstanceLifeTimeManager == null)
                 {
-                    this.workflowInstanceLifeTimeManager =
-                        this.dispatchRuntime.ChannelDispatcher.Host.Extensions.Find<WorkflowInstanceLifetimeManagerExtension>();
+                    this.workflowInstanceLifeTimeManager = this.dispatchRuntime
+                        .ChannelDispatcher
+                        .Host
+                        .Extensions
+                        .Find<WorkflowInstanceLifetimeManagerExtension>();
                 }
 
                 return this.workflowInstanceLifeTimeManager;
@@ -130,9 +133,9 @@ namespace System.ServiceModel.Dispatcher
 
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException());
         }
 
         public IAsyncResult InvokeBegin(
@@ -158,12 +161,14 @@ namespace System.ServiceModel.Dispatcher
                 catch (SecurityException exception)
                 {
                     DiagnosticUtility.TraceHandledException(exception, TraceEventType.Warning);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(
-                            SR.GetString("PartialTrustPerformanceCountersNotEnabled"),
-                            exception
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityException(
+                                SR.GetString("PartialTrustPerformanceCountersNotEnabled"),
+                                exception
+                            )
+                        );
                 }
             }
 
@@ -289,9 +294,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!this.serviceAuthorizationManager.CheckAccess(OperationContext.Current))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        AuthorizationBehavior.CreateAccessDeniedFaultException()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
                 }
             }
         }

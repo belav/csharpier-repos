@@ -215,7 +215,8 @@ public class TypeMap
         type.IsGenericTypeDefinition
             ? type.MakeGenericType(
                 SourceType
-                    .GenericTypeArguments.Concat(DestinationType.GenericTypeArguments)
+                    .GenericTypeArguments
+                    .Concat(DestinationType.GenericTypeArguments)
                     .Take(type.GenericParametersCount())
                     .ToArray()
             )
@@ -257,7 +258,8 @@ public class TypeMap
         {
             properties = Profile
                 .CreateTypeDetails(DestinationType)
-                .WriteAccessors.Select(p => p.Name)
+                .WriteAccessors
+                .Select(p => p.Name)
                 .Where(p => !ConstructorParameterMatches(p))
                 .Except(MappedMembers().Select(m => m.DestinationName))
                 .Except(PathMaps.Select(p => p.MemberPath.First.Name));
@@ -269,7 +271,8 @@ public class TypeMap
                 .Select(pm => pm.SourceMember.Name);
             properties = Profile
                 .CreateTypeDetails(SourceType)
-                .ReadAccessors.Select(p => p.Name)
+                .ReadAccessors
+                .Select(p => p.Name)
                 .Except(MappedMembers().Select(m => m.GetSourceMemberName()))
                 .Except(IncludedMembersNames)
                 .Except(IncludedMembers.Select(m => m.GetMember()?.Name))
@@ -601,7 +604,8 @@ public class TypeMap
         {
             var typeMap = includedMember.TypeMap;
             var includedMemberMaps = typeMap
-                .PropertyMaps.Where(m => m.CanResolveValue && thisMap.GetPropertyMap(m) == null)
+                .PropertyMaps
+                .Where(m => m.CanResolveValue && thisMap.GetPropertyMap(m) == null)
                 .Select(p => new PropertyMap(p, thisMap, includedMember))
                 .ToArray();
             var notOverridenPathMaps = NotOverridenPathMaps(typeMap);
@@ -723,7 +727,8 @@ public class TypeMap
             }
             PathMaps ??= new();
             return inheritedTypeMap
-                .PathMaps.Where(baseConfig => GetPathMap(baseConfig.MemberPath) == null)
+                .PathMaps
+                .Where(baseConfig => GetPathMap(baseConfig.MemberPath) == null)
                 .ToArray();
         }
     }

@@ -68,10 +68,11 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             PropertyInfo property;
 #if DNXCORE50 && !(NETSTANDARD2_0 || NET6_0_OR_GREATER)
-            property = Newtonsoft.Json.Utilities.TypeExtensions.GetProperty(
-                typeof(ReflectionTestObject),
-                "TestProperty"
-            );
+            property = Newtonsoft
+                .Json
+                .Utilities
+                .TypeExtensions
+                .GetProperty(typeof(ReflectionTestObject), "TestProperty");
 #else
             property = typeof(ReflectionTestObject).GetProperty("TestProperty");
 #endif
@@ -94,10 +95,11 @@ namespace Newtonsoft.Json.Tests.Serialization
             FieldInfo field;
 #if DNXCORE50 && !(NETSTANDARD2_0 || NET6_0_OR_GREATER)
             field = (FieldInfo)
-                Newtonsoft.Json.Utilities.TypeExtensions.GetField(
-                    typeof(ReflectionTestObject),
-                    "TestField"
-                );
+                Newtonsoft
+                    .Json
+                    .Utilities
+                    .TypeExtensions
+                    .GetField(typeof(ReflectionTestObject), "TestField");
 #else
             field = typeof(ReflectionTestObject).GetField("TestField");
 #endif

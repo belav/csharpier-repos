@@ -178,8 +178,9 @@ namespace Microsoft.Interop
                 // Declare variable for return value
                 if (marshaller.TypeInfo.IsNativeReturnPosition)
                 {
-                    bool nativeReturnUsesNativeIdentifier =
-                        marshaller.Generator.UsesNativeIdentifier(marshaller.TypeInfo, context);
+                    bool nativeReturnUsesNativeIdentifier = marshaller
+                        .Generator
+                        .UsesNativeIdentifier(marshaller.TypeInfo, context);
 
                     // Always initialize the return value.
                     statementsToUpdate.Add(
@@ -203,8 +204,9 @@ namespace Microsoft.Interop
                 }
                 else
                 {
-                    ValueBoundaryBehavior boundaryBehavior =
-                        marshaller.Generator.GetValueBoundaryBehavior(marshaller.TypeInfo, context);
+                    ValueBoundaryBehavior boundaryBehavior = marshaller
+                        .Generator
+                        .GetValueBoundaryBehavior(marshaller.TypeInfo, context);
 
                     // Declare variable with native type for parameter
                     // if the marshaller uses the native identifier and the signature uses a different identifier
@@ -219,7 +221,8 @@ namespace Microsoft.Interop
                     )
                     {
                         TypeSyntax localType = marshaller
-                            .Generator.AsNativeType(marshaller.TypeInfo)
+                            .Generator
+                            .AsNativeType(marshaller.TypeInfo)
                             .Syntax;
                         if (boundaryBehavior != ValueBoundaryBehavior.AddressOfNativeIdentifier)
                         {
@@ -235,10 +238,12 @@ namespace Microsoft.Interop
                                 Declare(
                                     RefType(localType),
                                     native,
-                                    marshaller.Generator.GenerateNativeByRefInitialization(
-                                        marshaller.TypeInfo,
-                                        context
-                                    )
+                                    marshaller
+                                        .Generator
+                                        .GenerateNativeByRefInitialization(
+                                            marshaller.TypeInfo,
+                                            context
+                                        )
                                 )
                             );
                         }

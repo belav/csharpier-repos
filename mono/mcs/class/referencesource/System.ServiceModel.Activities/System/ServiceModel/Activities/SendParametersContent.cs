@@ -68,9 +68,9 @@ namespace System.ServiceModel.Activities
             {
                 if (this.ArgumentTypes.Length == 1)
                 {
-                    return ContractInferenceHelper.ExceptionType.IsAssignableFrom(
-                        this.ArgumentTypes[0]
-                    );
+                    return ContractInferenceHelper
+                        .ExceptionType
+                        .IsAssignableFrom(this.ArgumentTypes[0]);
                 }
                 else
                 {
@@ -156,9 +156,9 @@ namespace System.ServiceModel.Activities
 
             foreach (KeyValuePair<string, InArgument> parameter in this.Parameters)
             {
-                requestFormatter.Parameters.Add(
-                    InArgument.CreateReference(parameter.Value, parameter.Key)
-                );
+                requestFormatter
+                    .Parameters
+                    .Add(InArgument.CreateReference(parameter.Value, parameter.Key));
             }
         }
 
@@ -171,9 +171,9 @@ namespace System.ServiceModel.Activities
 
             foreach (KeyValuePair<string, InArgument> parameter in this.Parameters)
             {
-                responseFormatter.Parameters.Add(
-                    InArgument.CreateReference(parameter.Value, parameter.Key)
-                );
+                responseFormatter
+                    .Parameters
+                    .Add(InArgument.CreateReference(parameter.Value, parameter.Key));
             }
         }
 

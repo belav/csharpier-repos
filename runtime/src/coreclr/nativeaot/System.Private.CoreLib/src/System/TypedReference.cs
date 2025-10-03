@@ -28,12 +28,9 @@ namespace System
         {
             Type type;
             int offset;
-            ReflectionAugments.ReflectionCoreCallbacks.MakeTypedReference(
-                target,
-                flds,
-                out type,
-                out offset
-            );
+            ReflectionAugments
+                .ReflectionCoreCallbacks
+                .MakeTypedReference(target, flds, out type, out offset);
             return new TypedReference(target, offset, type.TypeHandle);
         }
 

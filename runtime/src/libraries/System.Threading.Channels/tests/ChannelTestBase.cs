@@ -1734,7 +1734,8 @@ namespace System.Threading.Channels.Tests
             Assert.Throws<InvalidOperationException>(() => readVt.GetResult());
 
             ValueTaskAwaiter<bool> waitReadVt = CreateChannel()
-                .Reader.WaitToReadAsync()
+                .Reader
+                .WaitToReadAsync()
                 .GetAwaiter();
             Assert.Throws<InvalidOperationException>(() => waitReadVt.GetResult());
 
@@ -1744,7 +1745,8 @@ namespace System.Threading.Channels.Tests
                 Assert.Throws<InvalidOperationException>(() => writeVt.GetResult());
 
                 ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel()
-                    .Writer.WaitToWriteAsync()
+                    .Writer
+                    .WaitToWriteAsync()
                     .GetAwaiter();
                 Assert.Throws<InvalidOperationException>(() => waitWriteVt.GetResult());
             }
@@ -1758,7 +1760,8 @@ namespace System.Threading.Channels.Tests
             Assert.Throws<InvalidOperationException>(() => readVt.OnCompleted(() => { }));
 
             ValueTaskAwaiter<bool> waitReadVt = CreateChannel()
-                .Reader.WaitToReadAsync()
+                .Reader
+                .WaitToReadAsync()
                 .GetAwaiter();
             waitReadVt.OnCompleted(() => { });
             Assert.Throws<InvalidOperationException>(() => waitReadVt.OnCompleted(() => { }));
@@ -1770,7 +1773,8 @@ namespace System.Threading.Channels.Tests
                 Assert.Throws<InvalidOperationException>(() => writeVt.OnCompleted(() => { }));
 
                 ValueTaskAwaiter<bool> waitWriteVt = CreateFullChannel()
-                    .Writer.WaitToWriteAsync()
+                    .Writer
+                    .WaitToWriteAsync()
                     .GetAwaiter();
                 waitWriteVt.OnCompleted(() => { });
                 Assert.Throws<InvalidOperationException>(() => waitWriteVt.OnCompleted(() => { }));

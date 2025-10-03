@@ -316,7 +316,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
 
                 var analysis = semanticModel.AnalyzeDataFlow(syntax);
                 var captures = analysis
-                    .CapturedInside.Except(analysis.VariablesDeclared)
+                    .CapturedInside
+                    .Except(analysis.VariablesDeclared)
                     .ToImmutableArray();
                 if (!captures.IsEmpty)
                 {
@@ -341,7 +342,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             }
 
             private static readonly SymbolDisplayFormat s_formatForCaptures = SymbolDisplayFormat
-                .MinimallyQualifiedFormat.RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
+                .MinimallyQualifiedFormat
+                .RemoveLocalOptions(SymbolDisplayLocalOptions.IncludeType)
                 .RemoveParameterOptions(SymbolDisplayParameterOptions.IncludeType);
 
             public async Task<ImmutableArray<SymbolDisplayPart>> BuildDescriptionAsync(
@@ -565,11 +567,13 @@ namespace Microsoft.CodeAnalysis.LanguageService
                 )
                 {
                     AddEnumUnderlyingTypeSeparator();
-                    var underlyingTypeDisplayParts = symbol.EnumUnderlyingType.ToDisplayParts(
-                        s_descriptionStyle.WithMiscellaneousOptions(
-                            SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        )
-                    );
+                    var underlyingTypeDisplayParts = symbol
+                        .EnumUnderlyingType
+                        .ToDisplayParts(
+                            s_descriptionStyle.WithMiscellaneousOptions(
+                                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                            )
+                        );
                     AddToGroup(SymbolDescriptionGroups.MainDescription, underlyingTypeDisplayParts);
                 }
             }

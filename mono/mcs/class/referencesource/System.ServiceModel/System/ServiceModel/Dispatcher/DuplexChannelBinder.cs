@@ -446,9 +446,9 @@ namespace System.ServiceModel.Dispatcher
             AsyncDuplexRequest duplexRequest = result as AsyncDuplexRequest;
 
             if (duplexRequest == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.InvalidAsyncResult))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidAsyncResult)));
 
             return duplexRequest.End();
         }
@@ -783,12 +783,9 @@ namespace System.ServiceModel.Dispatcher
                             onSend = Fx.ThunkCallback(new AsyncCallback(OnSend));
                         }
                         this.context = context;
-                        IAsyncResult result = context.channel.BeginSend(
-                            message,
-                            timeout,
-                            onSend,
-                            this
-                        );
+                        IAsyncResult result = context
+                            .channel
+                            .BeginSend(message, timeout, onSend, this);
                         if (!result.CompletedSynchronously)
                         {
                             return;
@@ -875,9 +872,9 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (!TimeoutHelper.WaitOne(this.wait, timeout))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            this.parent.GetReceiveTimeoutException(timeout)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(this.parent.GetReceiveTimeoutException(timeout));
                     }
                 }
                 finally

@@ -185,15 +185,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 // waiting for the foreground thread to release its lock on the file change service.
                 // To avoid this, just queue up a Task to do the work on the foreground thread later, after
                 // the lock on the file change service has been released.
-                _ruleSetManager._threadingContext.JoinableTaskFactory.RunAsync(async () =>
-                {
-                    using var _ = _ruleSetManager._listener.BeginAsyncOperation("IncludeUpdated");
-                    await _ruleSetManager._threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        alwaysYield: true,
-                        _disposalToken
-                    );
-                    IncludeUpdateCore();
-                });
+                _ruleSetManager
+                    ._threadingContext
+                    .JoinableTaskFactory
+                    .RunAsync(async () =>
+                    {
+                        using var _ = _ruleSetManager
+                            ._listener
+                            .BeginAsyncOperation("IncludeUpdated");
+                        await _ruleSetManager
+                            ._threadingContext
+                            .JoinableTaskFactory
+                            .SwitchToMainThreadAsync(alwaysYield: true, _disposalToken);
+                        IncludeUpdateCore();
+                    });
             }
 
             private void IncludeUpdateCore()

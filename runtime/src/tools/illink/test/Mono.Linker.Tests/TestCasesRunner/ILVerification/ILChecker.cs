@@ -104,8 +104,10 @@ public class ILChecker
     )
     {
         return linkResult
-                .TestCase.FindTypeDefinition(original)
-                .CustomAttributes.FirstOrDefault(attr =>
+                .TestCase
+                .FindTypeDefinition(original)
+                .CustomAttributes
+                .FirstOrDefault(attr =>
                     attr.AttributeType.Name == nameof(DisableILVerifyDiffingAttribute)
                 ) != null;
     }
@@ -118,10 +120,10 @@ public class ILChecker
     )
     {
         var attrs = linkResult
-            .TestCase.FindTypeDefinition(original)
-            .CustomAttributes.Where(attr =>
-                attr.AttributeType.Name == nameof(ExpectILFailureAttribute)
-            )
+            .TestCase
+            .FindTypeDefinition(original)
+            .CustomAttributes
+            .Where(attr => attr.AttributeType.Name == nameof(ExpectILFailureAttribute))
             .ToArray();
         expectILFailures = attrs.Length > 0;
         failureMessages = new List<string>();
@@ -144,10 +146,10 @@ public class ILChecker
     )
     {
         var attrs = linkResult
-            .TestCase.FindTypeDefinition(original)
-            .CustomAttributes.Where(attr =>
-                attr.AttributeType.Name == nameof(SkipILVerifyAttribute)
-            );
+            .TestCase
+            .FindTypeDefinition(original)
+            .CustomAttributes
+            .Where(attr => attr.AttributeType.Name == nameof(SkipILVerifyAttribute));
         skipCheckEntirely = false;
         assembliesToSkip = new HashSet<string>();
         foreach (var attr in attrs)
@@ -205,10 +207,10 @@ public class ILChecker
             result.Result.Code,
             result.TypeFullName,
             result.MethodSignature,
-            result.Result.ErrorArguments.Aggregate(
-                string.Empty,
-                (accum, error) => $"{accum}, {KeyForArgument(error)}"
-            )
+            result
+                .Result
+                .ErrorArguments
+                .Aggregate(string.Empty, (accum, error) => $"{accum}, {KeyForArgument(error)}")
         );
 
         static string KeyForArgument(ErrorArgument argument)

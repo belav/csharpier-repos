@@ -65,12 +65,14 @@ public static class WsFederationExtensions
         Action<WsFederationOptions> configureOptions
     )
     {
-        builder.Services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<
-                IPostConfigureOptions<WsFederationOptions>,
-                WsFederationPostConfigureOptions
-            >()
-        );
+        builder
+            .Services
+            .TryAddEnumerable(
+                ServiceDescriptor.Singleton<
+                    IPostConfigureOptions<WsFederationOptions>,
+                    WsFederationPostConfigureOptions
+                >()
+            );
         return builder.AddRemoteScheme<WsFederationOptions, WsFederationHandler>(
             authenticationScheme,
             displayName,

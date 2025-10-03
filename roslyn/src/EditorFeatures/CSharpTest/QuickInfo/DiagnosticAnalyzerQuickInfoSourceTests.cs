@@ -278,7 +278,8 @@ namespace T
             Assert.Equal(expectedDescription, description.Text);
             Assert.Collection(
                 relatedSpans,
-                info.RelatedSpans.Select(actualSpan => new Action<TextSpan>(expectedSpan =>
+                info.RelatedSpans
+                    .Select(actualSpan => new Action<TextSpan>(expectedSpan =>
                         Assert.Equal(expectedSpan, actualSpan)
                     ))
                     .ToArray()
@@ -291,8 +292,9 @@ namespace T
             int position
         )
         {
-            var sharedGlobalCache =
-                workspace.ExportProvider.GetExportedValue<DiagnosticAnalyzerInfoCache.SharedGlobalCache>();
+            var sharedGlobalCache = workspace
+                .ExportProvider
+                .GetExportedValue<DiagnosticAnalyzerInfoCache.SharedGlobalCache>();
             var provider = new CSharpDiagnosticAnalyzerQuickInfoProvider(sharedGlobalCache);
             var info = await provider.GetQuickInfoAsync(
                 new QuickInfoContext(

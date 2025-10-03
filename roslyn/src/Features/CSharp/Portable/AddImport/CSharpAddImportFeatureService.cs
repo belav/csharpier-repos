@@ -507,7 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             );
 
             var compilation = await document
-                .Project.GetCompilationAsync(cancellationToken)
+                .Project
+                .GetCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var service = document.GetLanguageService<IAddImportsService>();
             var generator = SyntaxGenerator.GetGenerator(document);
@@ -727,9 +728,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         )
         {
             string externAliasString = null;
-            var metadataReference = semanticModel.Compilation.GetMetadataReference(
-                namespaceSymbol.ContainingAssembly
-            );
+            var metadataReference = semanticModel
+                .Compilation
+                .GetMetadataReference(namespaceSymbol.ContainingAssembly);
             if (metadataReference == null)
             {
                 return (null, false);
@@ -742,7 +743,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
             }
 
             aliases = metadataReference
-                .Properties.Aliases.Where(a => a != MetadataReferenceProperties.GlobalAlias)
+                .Properties
+                .Aliases
+                .Where(a => a != MetadataReferenceProperties.GlobalAlias)
                 .ToImmutableArray();
             if (!aliases.Any())
             {

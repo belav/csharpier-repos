@@ -60,9 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
                 )
                     return;
 
-                var expressionType = context.Compilation.GetTypeByMetadataName(
-                    typeof(System.Linq.Expressions.Expression<>).FullName!
-                );
+                var expressionType = context
+                    .Compilation
+                    .GetTypeByMetadataName(typeof(System.Linq.Expressions.Expression<>).FullName!);
 
                 context.RegisterOperationAction(
                     c => AnalyzeOperation(c, expressionType),
@@ -105,11 +105,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
             var semanticModel = context.Operation.SemanticModel;
             Contract.ThrowIfNull(semanticModel);
             if (
-                arrayCreationOperation.Syntax.IsInExpressionTree(
-                    semanticModel,
-                    expressionType,
-                    context.CancellationToken
-                )
+                arrayCreationOperation
+                    .Syntax
+                    .IsInExpressionTree(semanticModel, expressionType, context.CancellationToken)
             )
                 return;
 
@@ -214,10 +212,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
             var additionalLocations = ImmutableArray.Create(syntaxNode.GetLocation());
 
             // Also let the code fix where to look to find the operation that originally trigger this diagnostic
-            var properties = ImmutableDictionary<string, string?>.Empty.Add(
-                nameof(ArrayCreationOperationLocation),
-                operationLocation.ToString()
-            );
+            var properties = ImmutableDictionary<string, string?>
+                .Empty
+                .Add(nameof(ArrayCreationOperationLocation), operationLocation.ToString());
 
             context.ReportDiagnostic(
                 DiagnosticHelper.Create(

@@ -380,7 +380,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 GetSeparatorParts(),
                 GetPostambleParts(),
                 indexer
-                    .Parameters.Select(p =>
+                    .Parameters
+                    .Select(p =>
                         Convert(p, semanticModel, position, documentationCommentFormattingService)
                     )
                     .ToList()

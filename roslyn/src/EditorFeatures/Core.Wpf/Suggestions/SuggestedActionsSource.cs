@@ -266,7 +266,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     )
                     {
                         var result = await state
-                            .Target.Owner._codeFixService.GetMostSevereFixAsync(
+                            .Target
+                            .Owner
+                            ._codeFixService
+                            .GetMostSevereFixAsync(
                                 document,
                                 range.Span.ToTextSpan(),
                                 priorityProvider,
@@ -317,7 +320,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 {
                     if (
                         await state
-                            .Target.Owner._codeRefactoringService.HasRefactoringsAsync(
+                            .Target
+                            .Owner
+                            ._codeRefactoringService
+                            .HasRefactoringsAsync(
                                 document,
                                 selection.Value,
                                 fallbackOptions,
@@ -341,12 +347,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 this.AssertIsForeground();
 
                 var selectedSpans = state
-                    .Target.TextView.Selection.SelectedSpans.SelectMany(ss =>
-                        state.Target.TextView.BufferGraph.MapDownToBuffer(
-                            ss,
-                            SpanTrackingMode.EdgeExclusive,
-                            state.Target.SubjectBuffer
-                        )
+                    .Target
+                    .TextView
+                    .Selection
+                    .SelectedSpans
+                    .SelectMany(ss =>
+                        state
+                            .Target
+                            .TextView
+                            .BufferGraph
+                            .MapDownToBuffer(
+                                ss,
+                                SpanTrackingMode.EdgeExclusive,
+                                state.Target.SubjectBuffer
+                            )
                     )
                     .Where(ss => !state.Target.TextView.IsReadOnlyOnSurfaceBuffer(ss))
                     .ToList();
@@ -388,7 +402,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 // never show light bulb if solution is not fully loaded yet
                 if (
                     !await workspace
-                        .Services.GetRequiredService<IWorkspaceStatusService>()
+                        .Services
+                        .GetRequiredService<IWorkspaceStatusService>()
                         .IsFullyLoadedAsync(cancellationToken)
                         .ConfigureAwait(false)
                 )
@@ -396,9 +411,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using var asyncToken = state.Target.Owner.OperationListener.BeginAsyncOperation(
-                    nameof(GetSuggestedActionCategoriesAsync)
-                );
+                using var asyncToken = state
+                    .Target
+                    .Owner
+                    .OperationListener
+                    .BeginAsyncOperation(nameof(GetSuggestedActionCategoriesAsync));
                 var document = range.Snapshot.GetOpenTextDocumentInCurrentContextWithChanges();
                 if (document == null)
                     return null;

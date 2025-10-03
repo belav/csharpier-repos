@@ -239,10 +239,9 @@ namespace Mono.Tools
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(
-                    "error loading certificate or private key [{0}]",
-                    e.Message
-                );
+                Console
+                    .Error
+                    .WriteLine("error loading certificate or private key [{0}]", e.Message);
                 Help(true);
             }
 

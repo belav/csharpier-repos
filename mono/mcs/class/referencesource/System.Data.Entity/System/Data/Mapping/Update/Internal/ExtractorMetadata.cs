@@ -68,9 +68,9 @@ namespace System.Data.Mapping.Update.Internal
                     entityType = (EntityType)type;
                     keyMembers = new Set<EdmMember>(entityType.KeyMembers).MakeReadOnly();
                     foreignKeyMembers = new Set<EdmMember>(
-                        ((EntitySet)entitySetBase).ForeignKeyDependents.SelectMany(fk =>
-                            fk.Item2.ToProperties
-                        )
+                        ((EntitySet)entitySetBase)
+                            .ForeignKeyDependents
+                            .SelectMany(fk => fk.Item2.ToProperties)
                     ).MakeReadOnly();
                     break;
                 default:
@@ -109,18 +109,14 @@ namespace System.Data.Mapping.Update.Internal
 
                 // figure out whether this member is mapped to any server generated
                 // columns in the store
-                bool isServerGenerated = m_translator.ViewLoader.IsServerGen(
-                    entitySetBase,
-                    m_translator.MetadataWorkspace,
-                    member
-                );
+                bool isServerGenerated = m_translator
+                    .ViewLoader
+                    .IsServerGen(entitySetBase, m_translator.MetadataWorkspace, member);
 
                 // figure out whether member nullability is used as a condition in mapping
-                bool isNullConditionMember = m_translator.ViewLoader.IsNullConditionMember(
-                    entitySetBase,
-                    m_translator.MetadataWorkspace,
-                    member
-                );
+                bool isNullConditionMember = m_translator
+                    .ViewLoader
+                    .IsNullConditionMember(entitySetBase, m_translator.MetadataWorkspace, member);
 
                 // add information about this member
                 m_memberMap[ordinal] = new MemberInformation(
@@ -175,19 +171,19 @@ namespace System.Data.Mapping.Update.Internal
                         + "the metadata wrapper"
                 );
                 int keyOrdinal = memberInformation.EntityKeyOrdinal.Value;
-                identifier = m_translator.KeyManager.GetKeyIdentifierForMemberOffset(
-                    key,
-                    keyOrdinal,
-                    ((EntityType)m_type).KeyMembers.Count
-                );
+                identifier = m_translator
+                    .KeyManager
+                    .GetKeyIdentifierForMemberOffset(
+                        key,
+                        keyOrdinal,
+                        ((EntityType)m_type).KeyMembers.Count
+                    );
             }
             else if (memberInformation.IsForeignKeyMember)
             {
-                identifier = m_translator.KeyManager.GetKeyIdentifierForMember(
-                    key,
-                    record.GetName(ordinal),
-                    useCurrentValues
-                );
+                identifier = m_translator
+                    .KeyManager
+                    .GetKeyIdentifierForMember(key, record.GetName(ordinal), useCurrentValues);
             }
             else
             {
@@ -284,20 +280,22 @@ namespace System.Data.Mapping.Update.Internal
                 // retrieve information about this key value
                 MemberInformation keyMemberInformation = keyMetadata.m_memberMap[ordinal];
 
-                int keyIdentifier = m_translator.KeyManager.GetKeyIdentifierForMemberOffset(
-                    entityKey,
-                    ordinal,
-                    keyRowType.Properties.Count
-                );
+                int keyIdentifier = m_translator
+                    .KeyManager
+                    .GetKeyIdentifierForMemberOffset(
+                        entityKey,
+                        ordinal,
+                        keyRowType.Properties.Count
+                    );
 
                 object keyValue = null;
                 if (entityKey.IsTemporary)
                 {
                     // If the EntityKey is temporary, we need to retrieve the appropriate
                     // key value from the entity itself (or in this case, the IEntityStateEntry).
-                    IEntityStateEntry entityEntry = stateEntry.StateManager.GetEntityStateEntry(
-                        entityKey
-                    );
+                    IEntityStateEntry entityEntry = stateEntry
+                        .StateManager
+                        .GetEntityStateEntry(entityKey);
                     Debug.Assert(
                         entityEntry.State == EntityState.Added,
                         "The corresponding entry for a temp EntityKey should be in the Added State."

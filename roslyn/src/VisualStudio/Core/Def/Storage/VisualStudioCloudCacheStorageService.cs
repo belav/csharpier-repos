@@ -75,10 +75,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
                     // replace with CacheService.RelativePathBaseActivationArgKey once available.
                     new ServiceActivationOptions
                     {
-                        ActivationArguments = ImmutableDictionary<string, string>.Empty.Add(
-                            "RelativePathBase",
-                            solutionFolder
-                        ),
+                        ActivationArguments = ImmutableDictionary<string, string>
+                            .Empty
+                            .Add("RelativePathBase", solutionFolder),
                     },
                     cancellationToken
                 )

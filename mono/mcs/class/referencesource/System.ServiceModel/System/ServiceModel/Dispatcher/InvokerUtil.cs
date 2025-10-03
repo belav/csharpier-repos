@@ -140,11 +140,16 @@ namespace System.ServiceModel.Dispatcher
                             securityException,
                             TraceEventType.Warning
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(
-                                SR.GetString(SR.PartialTrustServiceCtorNotVisible, type.FullName)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityException(
+                                    SR.GetString(
+                                        SR.PartialTrustServiceCtorNotVisible,
+                                        type.FullName
+                                    )
+                                )
+                            );
                     }
                     else
                     {
@@ -194,15 +199,17 @@ namespace System.ServiceModel.Dispatcher
                             securityException,
                             TraceEventType.Warning
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(
-                                SR.GetString(
-                                    SR.PartialTrustServiceMethodNotVisible,
-                                    method.DeclaringType.FullName,
-                                    method.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityException(
+                                    SR.GetString(
+                                        SR.PartialTrustServiceMethodNotVisible,
+                                        method.DeclaringType.FullName,
+                                        method.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
@@ -269,15 +276,17 @@ namespace System.ServiceModel.Dispatcher
                             securityException,
                             TraceEventType.Warning
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(
-                                SR.GetString(
-                                    SR.PartialTrustServiceMethodNotVisible,
-                                    method.DeclaringType.FullName,
-                                    method.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityException(
+                                    SR.GetString(
+                                        SR.PartialTrustServiceMethodNotVisible,
+                                        method.DeclaringType.FullName,
+                                        method.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {
@@ -341,15 +350,17 @@ namespace System.ServiceModel.Dispatcher
                             securityException,
                             TraceEventType.Warning
                         );
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityException(
-                                SR.GetString(
-                                    SR.PartialTrustServiceMethodNotVisible,
-                                    method.DeclaringType.FullName,
-                                    method.Name
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityException(
+                                    SR.GetString(
+                                        SR.PartialTrustServiceMethodNotVisible,
+                                        method.DeclaringType.FullName,
+                                        method.Name
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
                     else
                     {

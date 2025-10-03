@@ -43,9 +43,11 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (!TransactionProtocol.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
+                        );
                 this.transactionProtocol = value;
             }
         }
@@ -157,9 +159,11 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        listener.CreateChannelTypeNotSupportedException(typeof(TChannel))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            listener.CreateChannelTypeNotSupportedException(typeof(TChannel))
+                        );
                 }
             }
         }
@@ -266,9 +270,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
 
             this.innerContext.Abort();
@@ -300,9 +304,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
 
             this.innerContext.Close(timeout);
@@ -312,9 +316,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ObjectDisposedException(this.GetType().FullName)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
             }
 
             this.innerContext.EndReply(result);
@@ -557,9 +561,11 @@ namespace System.ServiceModel.Channels
 
             ReceiveTimeoutAsyncResult result = asyncResult as ReceiveTimeoutAsyncResult;
             if (result == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.AsyncEndCalledWithAnIAsyncResult))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.AsyncEndCalledWithAnIAsyncResult))
+                    );
 
             RequestContext innerContext;
             if (InnerChannel.EndTryReceiveRequest(result.InnerResult, out innerContext))
@@ -678,10 +684,11 @@ namespace System.ServiceModel.Channels
                 );
 
                 System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(reply, message);
-                System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(
-                    reply,
-                    message.Headers.MessageId
-                );
+                System
+                    .ServiceModel
+                    .Channels
+                    .RequestReplyCorrelator
+                    .PrepareReply(reply, message.Headers.MessageId);
 
                 try
                 {
@@ -793,9 +800,13 @@ namespace System.ServiceModel.Channels
                 }
                 else if (this.innerResult != value)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.SFxAsyncResultsDontMatch0))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.SFxAsyncResultsDontMatch0)
+                            )
+                        );
                 }
             }
         }

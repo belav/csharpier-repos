@@ -372,11 +372,13 @@ namespace Microsoft.Build.BuildEngine
                 if (!Directory.Exists(extn_path))
                 {
                     if (extn_path != DotConfigExtensionsPath)
-                        project.ParentEngine.LogMessage(
-                            MessageImportance.Low,
-                            "Extension path '{0}' not found, ignoring.",
-                            extn_path
-                        );
+                        project
+                            .ParentEngine
+                            .LogMessage(
+                                MessageImportance.Low,
+                                "Extension path '{0}' not found, ignoring.",
+                                extn_path
+                            );
                     continue;
                 }
 

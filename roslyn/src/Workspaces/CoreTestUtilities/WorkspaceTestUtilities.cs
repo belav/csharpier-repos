@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         ) =>
             new WorkspaceWithPartialSemantics(
                 FeaturesTestCompositions
-                    .Features.AddParts(additionalParts)
+                    .Features
+                    .AddParts(additionalParts)
                     .WithTestHostParts(testHost)
                     .GetHostServices()
             );

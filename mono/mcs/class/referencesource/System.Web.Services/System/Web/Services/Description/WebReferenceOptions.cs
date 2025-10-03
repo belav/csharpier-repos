@@ -599,9 +599,10 @@ namespace System.Web.Services.Description
                     )
                     {
                         {
-                            o.@Verbose = System.Xml.XmlConvert.ToBoolean(
-                                Reader.ReadElementString()
-                            );
+                            o.@Verbose = System
+                                .Xml
+                                .XmlConvert
+                                .ToBoolean(Reader.ReadElementString());
                         }
                         paramsRead[3] = true;
                     }

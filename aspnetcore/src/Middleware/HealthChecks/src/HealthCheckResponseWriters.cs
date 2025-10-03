@@ -9,15 +9,15 @@ namespace Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 internal static class HealthCheckResponseWriters
 {
-    private static readonly byte[] DegradedBytes = Encoding.UTF8.GetBytes(
-        HealthStatus.Degraded.ToString()
-    );
-    private static readonly byte[] HealthyBytes = Encoding.UTF8.GetBytes(
-        HealthStatus.Healthy.ToString()
-    );
-    private static readonly byte[] UnhealthyBytes = Encoding.UTF8.GetBytes(
-        HealthStatus.Unhealthy.ToString()
-    );
+    private static readonly byte[] DegradedBytes = Encoding
+        .UTF8
+        .GetBytes(HealthStatus.Degraded.ToString());
+    private static readonly byte[] HealthyBytes = Encoding
+        .UTF8
+        .GetBytes(HealthStatus.Healthy.ToString());
+    private static readonly byte[] UnhealthyBytes = Encoding
+        .UTF8
+        .GetBytes(HealthStatus.Unhealthy.ToString());
 
     public static Task WriteMinimalPlaintext(HttpContext httpContext, HealthReport result)
     {
@@ -25,13 +25,19 @@ internal static class HealthCheckResponseWriters
         return result.Status switch
         {
             HealthStatus.Degraded => httpContext
-                .Response.Body.WriteAsync(DegradedBytes.AsMemory())
+                .Response
+                .Body
+                .WriteAsync(DegradedBytes.AsMemory())
                 .AsTask(),
             HealthStatus.Healthy => httpContext
-                .Response.Body.WriteAsync(HealthyBytes.AsMemory())
+                .Response
+                .Body
+                .WriteAsync(HealthyBytes.AsMemory())
                 .AsTask(),
             HealthStatus.Unhealthy => httpContext
-                .Response.Body.WriteAsync(UnhealthyBytes.AsMemory())
+                .Response
+                .Body
+                .WriteAsync(UnhealthyBytes.AsMemory())
                 .AsTask(),
             _ => httpContext.Response.WriteAsync(result.Status.ToString()),
         };

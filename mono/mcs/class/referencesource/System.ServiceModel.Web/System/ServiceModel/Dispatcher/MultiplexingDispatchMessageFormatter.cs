@@ -49,11 +49,13 @@ namespace System.ServiceModel.Dispatcher
 
         public void DeserializeRequest(Message message, object[] parameters)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(
-                    SR2.GetString(SR2.SerializingRequestNotSupportedByFormatter, this)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.GetString(SR2.SerializingRequestNotSupportedByFormatter, this)
+                    )
+                );
         }
 
         public Message SerializeReply(
@@ -101,15 +103,17 @@ namespace System.ServiceModel.Dispatcher
                             ] as string;
                     }
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR2.GetString(
-                            SR2.OperationDoesNotSupportFormat,
-                            operationName,
-                            format.ToString()
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(
+                                SR2.OperationDoesNotSupportFormat,
+                                operationName,
+                                format.ToString()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (outgoingResponse != null && string.IsNullOrEmpty(outgoingResponse.ContentType))

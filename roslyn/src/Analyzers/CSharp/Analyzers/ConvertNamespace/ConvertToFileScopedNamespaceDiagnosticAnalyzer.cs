@@ -73,9 +73,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 option.Notification.Severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
                 != ReportDiagnostic.Hidden
                     ? declaration.Name.GetLocation()
-                    : declaration.SyntaxTree.GetLocation(
-                        TextSpan.FromBounds(declaration.SpanStart, declaration.Name.Span.End)
-                    );
+                    : declaration
+                        .SyntaxTree
+                        .GetLocation(
+                            TextSpan.FromBounds(declaration.SpanStart, declaration.Name.Span.End)
+                        );
 
             return DiagnosticHelper.Create(
                 this.Descriptor,

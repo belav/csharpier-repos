@@ -196,10 +196,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Collectible load contexts should use the ConditionalWeakTable so they can be unloaded.
             if (
-                s_collectibleConstructorInfos.Value.TryGetValue(
-                    type,
-                    out ConstructorInfoEx[]? value
-                )
+                s_collectibleConstructorInfos
+                    .Value
+                    .TryGetValue(type, out ConstructorInfoEx[]? value)
             )
             {
                 return value;
@@ -960,7 +959,8 @@ namespace Microsoft.Extensions.DependencyInjection
                             _parameterValues[applyIndex] == null
                             && _constructor
                                 .Parameters[applyIndex]
-                                .ParameterType.IsAssignableFrom(givenType)
+                                .ParameterType
+                                .IsAssignableFrom(givenType)
                         )
                         {
                             givenMatched = true;
@@ -1050,12 +1050,14 @@ namespace Microsoft.Extensions.DependencyInjection
                     throw;
                 }
 #else
-                return _constructor.Info.Invoke(
-                    BindingFlags.DoNotWrapExceptions,
-                    binder: null,
-                    parameters: _parameterValues,
-                    culture: null
-                );
+                return _constructor
+                    .Info
+                    .Invoke(
+                        BindingFlags.DoNotWrapExceptions,
+                        binder: null,
+                        parameters: _parameterValues,
+                        culture: null
+                    );
 #endif
             }
 

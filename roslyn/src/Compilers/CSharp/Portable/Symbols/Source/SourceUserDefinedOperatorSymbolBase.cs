@@ -255,8 +255,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     LanguageVersion availableVersion = (
                         (CSharpParseOptions)location.SourceTree.Options
                     ).LanguageVersion;
-                    LanguageVersion requiredVersion =
-                        MessageID.IDS_FeatureStaticAbstractMembersInInterfaces.RequiredVersion();
+                    LanguageVersion requiredVersion = MessageID
+                        .IDS_FeatureStaticAbstractMembersInInterfaces
+                        .RequiredVersion();
 
                     if (availableVersion < requiredVersion)
                     {
@@ -360,8 +361,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeWithAnnotations returnType;
             ImmutableArray<ParameterSymbol> parameters;
 
-            var binder = this
-                .DeclaringCompilation.GetBinderFactory(declarationSyntax.SyntaxTree)
+            var binder = this.DeclaringCompilation
+                .GetBinderFactory(declarationSyntax.SyntaxTree)
                 .GetBinder(returnTypeSyntax, declarationSyntax, this);
 
             SyntaxToken arglistToken;
@@ -906,11 +907,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 && IsContainingType(parameterType)
                                 && IsSelfConstrainedTypeParameter(this.ReturnType)
                             )
-                            || this.ReturnType.EffectiveTypeNoUseSiteDiagnostics.IsEqualToOrDerivedFrom(
-                                parameterType,
-                                ComparisonForUserDefinedOperators,
-                                useSiteInfo: ref useSiteInfo
-                            )
+                            || this.ReturnType
+                                .EffectiveTypeNoUseSiteDiagnostics
+                                .IsEqualToOrDerivedFrom(
+                                    parameterType,
+                                    ComparisonForUserDefinedOperators,
+                                    useSiteInfo: ref useSiteInfo
+                                )
                         )
                 )
             )

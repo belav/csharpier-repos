@@ -76,7 +76,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             )
                 .Build(SqlServerTestHelpers.Instance.CreateContext())
                 .CreateScope()
-                .ServiceProvider.GetRequiredService<ISnapshotModelProcessor>();
+                .ServiceProvider
+                .GetRequiredService<ISnapshotModelProcessor>();
 
             Assert.NotNull(snapshotModelProcessor);
         }
@@ -201,8 +202,10 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 model
                     .FindEntityType(typeof(Blog))
                     .FindNavigation(nameof(Blog.Details))
-                    .TargetEntityType.FindPrimaryKey()
-                    .Properties.Single()
+                    .TargetEntityType
+                    .FindPrimaryKey()
+                    .Properties
+                    .Single()
                     .Name
             );
         }
@@ -219,7 +222,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var snapshot = (ModelSnapshot)Activator.CreateInstance(snapshotType);
             var reporter = new TestOperationReporter();
             var modelRuntimeInitializer = SqlServerTestHelpers
-                .Instance.CreateContextServices()
+                .Instance
+                .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>();
             var processor = new SnapshotModelProcessor(reporter, modelRuntimeInitializer);
             var model = processor.Process(snapshot.Model);
@@ -243,7 +247,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             var snapshot = (ModelSnapshot)Activator.CreateInstance(snapshotType);
             var reporter = new TestOperationReporter();
             var setBuilder = SqlServerTestHelpers
-                .Instance.CreateContextServices()
+                .Instance
+                .CreateContextServices()
                 .GetRequiredService<IModelRuntimeInitializer>();
             var processor = new SnapshotModelProcessor(reporter, setBuilder);
             var model = processor.Process(snapshot.Model);

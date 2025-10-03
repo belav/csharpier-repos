@@ -482,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         )
         {
             return node.GetAncestorOrThis<CompilationUnitSyntax>()!
-                .Usings.Concat(
+                .Usings
+                .Concat(
                     node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
                         .Reverse()
                         .SelectMany(n => n.Usings)
@@ -494,7 +495,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         )
         {
             return node.GetAncestorOrThis<CompilationUnitSyntax>()!
-                .Externs.Concat(
+                .Externs
+                .Concat(
                     node.GetAncestorsOrThis<BaseNamespaceDeclarationSyntax>()
                         .Reverse()
                         .SelectMany(n => n.Externs)
@@ -725,11 +727,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             TextSpan span,
             CancellationToken cancellationToken
         ) =>
-            CSharpSyntaxFacts.Instance.ContainsInterleavedDirective(
-                span,
-                syntaxNode,
-                cancellationToken
-            );
+            CSharpSyntaxFacts
+                .Instance
+                .ContainsInterleavedDirective(span, syntaxNode, cancellationToken);
 
         public static bool ContainsInterleavedDirective(
             this SyntaxToken token,
@@ -913,10 +913,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             out ImmutableArray<SyntaxTrivia> strippedTrivia
         )
             where TSyntaxNode : SyntaxNode =>
-            CSharpFileBannerFacts.Instance.GetNodeWithoutLeadingBlankLines(
-                node,
-                out strippedTrivia
-            );
+            CSharpFileBannerFacts
+                .Instance
+                .GetNodeWithoutLeadingBlankLines(node, out strippedTrivia);
 
         public static ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             this TSyntaxNode node
@@ -928,19 +927,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this TSyntaxNode node
         )
             where TSyntaxNode : SyntaxNode =>
-            CSharpFileBannerFacts.Instance.GetNodeWithoutLeadingBannerAndPreprocessorDirectives(
-                node
-            );
+            CSharpFileBannerFacts
+                .Instance
+                .GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node);
 
         public static TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             this TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
         )
             where TSyntaxNode : SyntaxNode =>
-            CSharpFileBannerFacts.Instance.GetNodeWithoutLeadingBannerAndPreprocessorDirectives(
-                node,
-                out strippedTrivia
-            );
+            CSharpFileBannerFacts
+                .Instance
+                .GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out strippedTrivia);
 
         public static bool IsVariableDeclaratorValue(this SyntaxNode node) =>
             node?.Parent is EqualsValueClauseSyntax equalsValue

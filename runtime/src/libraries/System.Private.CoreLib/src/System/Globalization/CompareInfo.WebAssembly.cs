@@ -50,16 +50,18 @@ namespace System.Globalization
             fixed (char* pString1 = &MemoryMarshal.GetReference(string1))
             fixed (char* pString2 = &MemoryMarshal.GetReference(string2))
             {
-                cmpResult = Interop.JsGlobalization.CompareString(
-                    cultureName,
-                    pString1,
-                    string1.Length,
-                    pString2,
-                    string2.Length,
-                    options,
-                    out int exception,
-                    out object ex_result
-                );
+                cmpResult = Interop
+                    .JsGlobalization
+                    .CompareString(
+                        cultureName,
+                        pString1,
+                        string1.Length,
+                        pString2,
+                        string2.Length,
+                        options,
+                        out int exception,
+                        out object ex_result
+                    );
                 if (exception != 0)
                     throw new Exception((string)ex_result);
             }
@@ -82,16 +84,18 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
             {
-                result = Interop.JsGlobalization.StartsWith(
-                    cultureName,
-                    pSource,
-                    source.Length,
-                    pPrefix,
-                    prefix.Length,
-                    options,
-                    out int exception,
-                    out object ex_result
-                );
+                result = Interop
+                    .JsGlobalization
+                    .StartsWith(
+                        cultureName,
+                        pSource,
+                        source.Length,
+                        pPrefix,
+                        prefix.Length,
+                        options,
+                        out int exception,
+                        out object ex_result
+                    );
                 if (exception != 0)
                     throw new Exception((string)ex_result);
             }
@@ -114,16 +118,18 @@ namespace System.Globalization
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pPrefix = &MemoryMarshal.GetReference(prefix))
             {
-                result = Interop.JsGlobalization.EndsWith(
-                    cultureName,
-                    pSource,
-                    source.Length,
-                    pPrefix,
-                    prefix.Length,
-                    options,
-                    out int exception,
-                    out object ex_result
-                );
+                result = Interop
+                    .JsGlobalization
+                    .EndsWith(
+                        cultureName,
+                        pSource,
+                        source.Length,
+                        pPrefix,
+                        prefix.Length,
+                        options,
+                        out int exception,
+                        out object ex_result
+                    );
                 if (exception != 0)
                     throw new Exception((string)ex_result);
             }
@@ -169,17 +175,19 @@ namespace System.Globalization
                 fixed (char* pSource = &MemoryMarshal.GetReference(source))
                 fixed (char* pTarget = &MemoryMarshal.GetReference(target))
                 {
-                    idx = Interop.JsGlobalization.IndexOf(
-                        m_name,
-                        pTarget,
-                        target.Length,
-                        pSource,
-                        source.Length,
-                        options,
-                        fromBeginning,
-                        out int exception,
-                        out object ex_result
-                    );
+                    idx = Interop
+                        .JsGlobalization
+                        .IndexOf(
+                            m_name,
+                            pTarget,
+                            target.Length,
+                            pSource,
+                            source.Length,
+                            options,
+                            fromBeginning,
+                            out int exception,
+                            out object ex_result
+                        );
                     if (exception != 0)
                         throw new Exception((string)ex_result);
                 }

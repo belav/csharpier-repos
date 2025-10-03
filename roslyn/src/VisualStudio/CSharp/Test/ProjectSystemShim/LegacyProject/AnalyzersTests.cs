@@ -294,8 +294,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
             File.WriteAllText(ruleSetFile.Path, ruleSetSource.Replace("Error", "Warning"));
             await environment.RaiseFileChangeAsync(ruleSetFile.Path);
 
-            var listenerProvider =
-                environment.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var listenerProvider = environment
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             var waiter = listenerProvider.GetWaiter(FeatureAttribute.RuleSetEditor);
             waiter.ExpeditedWaitAsync().JoinUsingDispatcher(CancellationToken.None);
 

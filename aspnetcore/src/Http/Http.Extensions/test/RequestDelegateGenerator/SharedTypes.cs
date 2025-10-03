@@ -1042,9 +1042,14 @@ public class AddsRoutePatternMetadata : IEndpointMetadataProvider
             return;
         }
 
-        builder.Metadata.Add(
-            new RoutePatternMetadata { RoutePattern = reb.RoutePattern?.RawText ?? string.Empty }
-        );
+        builder
+            .Metadata
+            .Add(
+                new RoutePatternMetadata
+                {
+                    RoutePattern = reb.RoutePattern?.RawText ?? string.Empty,
+                }
+            );
     }
 }
 

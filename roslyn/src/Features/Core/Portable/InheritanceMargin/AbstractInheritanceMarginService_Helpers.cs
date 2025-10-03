@@ -113,8 +113,11 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                     .GetRequiredSemanticModelAsync(cancellationToken)
                     .ConfigureAwait(false);
 
-                var mappingService =
-                    document.Project.Solution.Services.GetRequiredService<ISymbolMappingService>();
+                var mappingService = document
+                    .Project
+                    .Solution
+                    .Services
+                    .GetRequiredService<ISymbolMappingService>();
                 using var _ = ArrayBuilder<(ISymbol symbol, int lineNumber)>.GetInstance(
                     out var builder
                 );
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                         (
                             mappingResult.Symbol,
                             sourceText
-                                .Lines.GetLineFromPosition(
+                                .Lines
+                                .GetLineFromPosition(
                                     GetDeclarationToken(memberDeclarationNode).SpanStart
                                 )
                                 .LineNumber
@@ -250,15 +254,16 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             // Pull in any project level imports, or imports from other files (e.g. global usings).
             var syntaxTree = semanticModel.SyntaxTree;
             var nonLocalImports = lastScope
-                .Imports.WhereAsArray(i => i.DeclaringSyntaxReference?.SyntaxTree != syntaxTree)
+                .Imports
+                .WhereAsArray(i => i.DeclaringSyntaxReference?.SyntaxTree != syntaxTree)
                 .Sort(
                     (i1, i2) =>
                     {
                         return (i1.DeclaringSyntaxReference, i2.DeclaringSyntaxReference) switch
                         {
                             // Both are project level imports.  Sort by name of symbol imported.
-                            (null, null) => i1
-                                .NamespaceOrType.ToDisplayString()
+                            (null, null) => i1.NamespaceOrType
+                                .ToDisplayString()
                                 .CompareTo(i2.NamespaceOrType.ToDisplayString()),
                             // project level imports come first.
                             (null, not null) => -1,
@@ -268,10 +273,9 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                                 { SyntaxTree: var syntaxTree1, Span: var span1 },
                                 { SyntaxTree: var syntaxTree2, Span: var span2 }
                             ) => syntaxTree1.FilePath != syntaxTree2.FilePath
-                                ? StringComparer.OrdinalIgnoreCase.Compare(
-                                    syntaxTree1.FilePath,
-                                    syntaxTree2.FilePath
-                                )
+                                ? StringComparer
+                                    .OrdinalIgnoreCase
+                                    .Compare(syntaxTree1.FilePath, syntaxTree2.FilePath)
                                 : span1.CompareTo(span2),
                         };
                     }
@@ -337,9 +341,10 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
                 }
                 else
                 {
-                    var destinationDocument = document.Project.Solution.GetDocument(
-                        groupSyntaxTree
-                    );
+                    var destinationDocument = document
+                        .Project
+                        .Solution
+                        .GetDocument(groupSyntaxTree);
                     if (destinationDocument is null)
                         continue;
 

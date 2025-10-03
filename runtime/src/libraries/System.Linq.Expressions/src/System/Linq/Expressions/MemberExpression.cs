@@ -167,20 +167,24 @@ namespace System.Linq.Expressions
 
             // bind to public names first
             FieldInfo? fi =
-                expression.Type.GetField(
-                    fieldName,
-                    BindingFlags.Instance
-                        | BindingFlags.Public
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                )
-                ?? expression.Type.GetField(
-                    fieldName,
-                    BindingFlags.Instance
-                        | BindingFlags.NonPublic
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                );
+                expression
+                    .Type
+                    .GetField(
+                        fieldName,
+                        BindingFlags.Instance
+                            | BindingFlags.Public
+                            | BindingFlags.IgnoreCase
+                            | BindingFlags.FlattenHierarchy
+                    )
+                ?? expression
+                    .Type
+                    .GetField(
+                        fieldName,
+                        BindingFlags.Instance
+                            | BindingFlags.NonPublic
+                            | BindingFlags.IgnoreCase
+                            | BindingFlags.FlattenHierarchy
+                    );
             if (fi == null)
             {
                 throw Error.InstanceFieldNotDefinedForType(fieldName, expression.Type);
@@ -251,20 +255,24 @@ namespace System.Linq.Expressions
             ArgumentNullException.ThrowIfNull(propertyName);
             // bind to public names first
             PropertyInfo? pi =
-                expression.Type.GetProperty(
-                    propertyName,
-                    BindingFlags.Instance
-                        | BindingFlags.Public
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                )
-                ?? expression.Type.GetProperty(
-                    propertyName,
-                    BindingFlags.Instance
-                        | BindingFlags.NonPublic
-                        | BindingFlags.IgnoreCase
-                        | BindingFlags.FlattenHierarchy
-                );
+                expression
+                    .Type
+                    .GetProperty(
+                        propertyName,
+                        BindingFlags.Instance
+                            | BindingFlags.Public
+                            | BindingFlags.IgnoreCase
+                            | BindingFlags.FlattenHierarchy
+                    )
+                ?? expression
+                    .Type
+                    .GetProperty(
+                        propertyName,
+                        BindingFlags.Instance
+                            | BindingFlags.NonPublic
+                            | BindingFlags.IgnoreCase
+                            | BindingFlags.FlattenHierarchy
+                    );
             if (pi == null)
             {
                 throw Error.InstancePropertyNotDefinedForType(
@@ -456,40 +464,48 @@ namespace System.Linq.Expressions
         {
             ExpressionUtils.RequiresCanRead(expression, nameof(expression));
             // bind to public names first
-            PropertyInfo? pi = expression.Type.GetProperty(
-                propertyOrFieldName,
-                BindingFlags.Instance
-                    | BindingFlags.Public
-                    | BindingFlags.IgnoreCase
-                    | BindingFlags.FlattenHierarchy
-            );
+            PropertyInfo? pi = expression
+                .Type
+                .GetProperty(
+                    propertyOrFieldName,
+                    BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.IgnoreCase
+                        | BindingFlags.FlattenHierarchy
+                );
             if (pi != null)
                 return Property(expression, pi);
-            FieldInfo? fi = expression.Type.GetField(
-                propertyOrFieldName,
-                BindingFlags.Instance
-                    | BindingFlags.Public
-                    | BindingFlags.IgnoreCase
-                    | BindingFlags.FlattenHierarchy
-            );
+            FieldInfo? fi = expression
+                .Type
+                .GetField(
+                    propertyOrFieldName,
+                    BindingFlags.Instance
+                        | BindingFlags.Public
+                        | BindingFlags.IgnoreCase
+                        | BindingFlags.FlattenHierarchy
+                );
             if (fi != null)
                 return Field(expression, fi);
-            pi = expression.Type.GetProperty(
-                propertyOrFieldName,
-                BindingFlags.Instance
-                    | BindingFlags.NonPublic
-                    | BindingFlags.IgnoreCase
-                    | BindingFlags.FlattenHierarchy
-            );
+            pi = expression
+                .Type
+                .GetProperty(
+                    propertyOrFieldName,
+                    BindingFlags.Instance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.IgnoreCase
+                        | BindingFlags.FlattenHierarchy
+                );
             if (pi != null)
                 return Property(expression, pi);
-            fi = expression.Type.GetField(
-                propertyOrFieldName,
-                BindingFlags.Instance
-                    | BindingFlags.NonPublic
-                    | BindingFlags.IgnoreCase
-                    | BindingFlags.FlattenHierarchy
-            );
+            fi = expression
+                .Type
+                .GetField(
+                    propertyOrFieldName,
+                    BindingFlags.Instance
+                        | BindingFlags.NonPublic
+                        | BindingFlags.IgnoreCase
+                        | BindingFlags.FlattenHierarchy
+                );
             if (fi != null)
                 return Field(expression, fi);
 

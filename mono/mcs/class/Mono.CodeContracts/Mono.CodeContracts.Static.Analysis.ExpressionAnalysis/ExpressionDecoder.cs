@@ -109,27 +109,31 @@ namespace Mono.CodeContracts.Static.Analysis.ExpressionAnalysis
             FlatDomain<Expr<TSymbolicValue>> aExpr = ifFound[expr.Symbol];
             if (aExpr.IsNormal())
             {
-                return aExpr.Value.Decode<
-                    Data,
-                    Result,
-                    ExpressionDecoderAdapter<TSymbolicValue, Data, Result, Visitor>
-                >(
-                    expr.ReadAt,
-                    expr.Symbol,
-                    new ExpressionDecoderAdapter<TSymbolicValue, Data, Result, Visitor>(visitor),
-                    data
-                );
+                return aExpr
+                    .Value
+                    .Decode<
+                        Data,
+                        Result,
+                        ExpressionDecoderAdapter<TSymbolicValue, Data, Result, Visitor>
+                    >(
+                        expr.ReadAt,
+                        expr.Symbol,
+                        new ExpressionDecoderAdapter<TSymbolicValue, Data, Result, Visitor>(
+                            visitor
+                        ),
+                        data
+                    );
             }
 
             TypeNode type;
             object constant;
             if (
-                this.parent.ValueLayer.ILDecoder.ContextProvider.ValueContext.IsConstant(
-                    expr.ReadAt,
-                    expr.Symbol,
-                    out type,
-                    out constant
-                )
+                this.parent
+                    .ValueLayer
+                    .ILDecoder
+                    .ContextProvider
+                    .ValueContext
+                    .IsConstant(expr.ReadAt, expr.Symbol, out type, out constant)
             )
                 return visitor.LoadConst(expr, type, constant, expr.Symbol, data);
 

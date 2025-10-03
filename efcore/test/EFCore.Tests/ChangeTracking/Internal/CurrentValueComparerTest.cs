@@ -91,7 +91,8 @@ public class CurrentValueComparerTest
                 .Throws<InvalidOperationException>(() =>
                     factory.Create(
                         context
-                            .Model.FindEntityType(typeof(Godzilla))
+                            .Model
+                            .FindEntityType(typeof(Godzilla))
                             .FindProperty(nameof(Godzilla.NotComparable))
                     )
                 )
@@ -117,7 +118,8 @@ public class CurrentValueComparerTest
                 .Throws<InvalidOperationException>(() =>
                     factory.Create(
                         context
-                            .Model.FindEntityType(typeof(Godzilla))
+                            .Model
+                            .FindEntityType(typeof(Godzilla))
                             .FindProperty(nameof(Godzilla.NotComparableConverted))
                     )
                 )
@@ -180,12 +182,14 @@ public class CurrentValueComparerTest
         );
 
         var comparer = context
-            .Model.FindEntityType(typeof(Godzilla))
+            .Model
+            .FindEntityType(typeof(Godzilla))
             .FindProperty(propertyName)
             .GetCurrentValueComparer();
 
         var entries = context
-            .ChangeTracker.Entries<Godzilla>()
+            .ChangeTracker
+            .Entries<Godzilla>()
             .OrderBy(e => e.GetInfrastructure(), comparer)
             .Select(e => selector(e.Entity))
             .ToList();
@@ -251,12 +255,14 @@ public class CurrentValueComparerTest
         );
 
         var comparer = context
-            .Model.FindEntityType(typeof(Godzilla))
+            .Model
+            .FindEntityType(typeof(Godzilla))
             .FindProperty(propertyName)
             .GetCurrentValueComparer();
 
         var entries = context
-            .ChangeTracker.Entries<Godzilla>()
+            .ChangeTracker
+            .Entries<Godzilla>()
             .OrderBy(e => e.GetInfrastructure(), comparer)
             .Select(e => selector(e.Entity))
             .ToList();
@@ -390,12 +396,14 @@ public class CurrentValueComparerTest
         );
 
         var comparer = context
-            .Model.FindEntityType(typeof(Godzilla))
+            .Model
+            .FindEntityType(typeof(Godzilla))
             .FindProperty(propertyName)
             .GetCurrentValueComparer();
 
         var entries = context
-            .ChangeTracker.Entries<Godzilla>()
+            .ChangeTracker
+            .Entries<Godzilla>()
             .OrderBy(e => e.GetInfrastructure(), comparer)
             .Select(e => selector(e.Entity))
             .ToList();
@@ -474,12 +482,14 @@ public class CurrentValueComparerTest
         );
 
         var comparer = context
-            .Model.FindEntityType(typeof(Godzilla))
+            .Model
+            .FindEntityType(typeof(Godzilla))
             .FindProperty(propertyName)
             .GetCurrentValueComparer();
 
         var entries = context
-            .ChangeTracker.Entries<Godzilla>()
+            .ChangeTracker
+            .Entries<Godzilla>()
             .OrderBy(e => e.GetInfrastructure(), comparer)
             .Select(e => selector(e.Entity))
             .ToList();
@@ -666,10 +676,9 @@ public class CurrentValueComparerTest
                 return result;
             }
 
-            return StructuralComparisons.StructuralComparer.Compare(
-                Value,
-                ((ComparableBytesStruct)other).Value
-            );
+            return StructuralComparisons
+                .StructuralComparer
+                .Compare(Value, ((ComparableBytesStruct)other).Value);
         }
     }
 

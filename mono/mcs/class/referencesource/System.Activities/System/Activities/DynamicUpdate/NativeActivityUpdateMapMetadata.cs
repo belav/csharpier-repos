@@ -30,10 +30,12 @@ namespace System.Activities.DynamicUpdate
             );
             if (GetMatch(updatedChildActivity) == null)
             {
-                throw FxTrace.Exception.Argument(
-                    "updatedChildActivity",
-                    SR.CannotSaveOriginalValueForNewActivity(updatedChildActivity)
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "updatedChildActivity",
+                        SR.CannotSaveOriginalValueForNewActivity(updatedChildActivity)
+                    );
             }
 
             this.Finalizer.SetOriginalValue(updatedChildActivity, originalValue, isReferencedChild);

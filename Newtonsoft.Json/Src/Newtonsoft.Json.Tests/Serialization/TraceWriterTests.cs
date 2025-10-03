@@ -657,7 +657,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[2]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing System.Collections.Generic.IList`1[System.Int32]. Path 'IntList'"
                     )
             );
@@ -668,9 +669,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[4]
-                    .Message.StartsWith(
-                        "Finished deserializing System.String[]. Path 'StringArray'"
-                    )
+                    .Message
+                    .StartsWith("Finished deserializing System.String[]. Path 'StringArray'")
             );
             Assert.AreEqual(
                 "Deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld using creator with parameters: Major, Minor, Build, Revision. Path 'Version.Major', line 11, position 12.",
@@ -679,14 +679,16 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[6]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Started deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path 'Version'"
                     )
             );
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[7]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path 'Version'"
                     )
             );
@@ -697,14 +699,16 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[9]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing System.Collections.Generic.IDictionary`2[System.String,System.String]. Path 'StringDictionary'"
                     )
             );
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[10]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.Serialization.TraceTestObject. Path ''"
                     )
             );
@@ -773,7 +777,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[2]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing System.Collections.Generic.IList`1[System.Int32]. Path 'IntList'"
                     )
             );
@@ -784,9 +789,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[4]
-                    .Message.StartsWith(
-                        "Finished deserializing System.String[]. Path 'StringArray'"
-                    )
+                    .Message
+                    .StartsWith("Finished deserializing System.String[]. Path 'StringArray'")
             );
             Assert.AreEqual(
                 "Deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld using creator with parameters: Major, Minor, Build, Revision. Path 'Version.Major', line 11, position 12.",
@@ -795,14 +799,16 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[6]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Started deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path 'Version'"
                     )
             );
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[7]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path 'Version'"
                     )
             );
@@ -813,14 +819,16 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[9]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing System.Collections.Generic.IDictionary`2[System.String,System.String]. Path 'StringDictionary'"
                     )
             );
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[10]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.Serialization.TraceTestObject. Path ''"
                     )
             );
@@ -927,22 +935,28 @@ Newtonsoft.Json Error: 0 : Error!
             );
 
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(r =>
-                    r.Message
-                    == "Writing object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path ''."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(r =>
+                        r.Message
+                        == "Writing object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path ''."
+                    )
             );
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(r =>
-                    r.Message
-                    == "Writing object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other'."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(r =>
+                        r.Message
+                        == "Writing object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other'."
+                    )
             );
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(r =>
-                    r.Message
-                    == "Writing object reference to Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'."
-                )
+                traceWriter
+                    .TraceRecords
+                    .Any(r =>
+                        r.Message
+                        == "Writing object reference to Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'."
+                    )
             );
         }
 
@@ -977,23 +991,29 @@ Newtonsoft.Json Error: 0 : Error!
             );
 
             Assert.IsTrue(
-                traceWriter.TraceRecords.Any(r =>
-                    r.Message
-                    == "Read object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other', line 3, position 10."
-                )
-            );
-            Assert.IsTrue(
-                traceWriter.TraceRecords.Any(r =>
-                    r.Message
-                    == "Read object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other.blah', line 5, position 11."
-                )
-            );
-            Assert.IsTrue(
-                traceWriter.TraceRecords.Any(r =>
-                    r.Message.StartsWith(
-                        "Resolved object reference '1' to Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'"
+                traceWriter
+                    .TraceRecords
+                    .Any(r =>
+                        r.Message
+                        == "Read object reference Id '1' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other', line 3, position 10."
                     )
-                )
+            );
+            Assert.IsTrue(
+                traceWriter
+                    .TraceRecords
+                    .Any(r =>
+                        r.Message
+                        == "Read object reference Id '2' for Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'other.blah', line 5, position 11."
+                    )
+            );
+            Assert.IsTrue(
+                traceWriter
+                    .TraceRecords
+                    .Any(r =>
+                        r.Message.StartsWith(
+                            "Resolved object reference '1' to Newtonsoft.Json.Tests.Serialization.PreserveReferencesHandlingTests+CircularDictionary. Path 'self'"
+                        )
+                    )
             );
         }
 
@@ -1213,7 +1233,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[4]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing System.Collections.Generic.Dictionary`2[System.String,System.String]. Path '$values[0]'"
                     )
             );
@@ -1228,21 +1249,24 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[7]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Started deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path '$values[1]'"
                     )
             );
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[8]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path '$values[1]'"
                     )
             );
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[9]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing System.Collections.Generic.List`1[System.Object]. Path '$values'"
                     )
             );
@@ -1272,7 +1296,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[0]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Deserializing System.Exception using ISerializable constructor. Path ''"
                     )
             );
@@ -1318,7 +1343,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[2]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.TestObjects.Organization.Person. Path ''"
                     )
             );
@@ -1359,14 +1385,16 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[2]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Started deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path ''"
                     )
             );
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[3]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.TestObjects.VersionOld. Path ''"
                     )
             );
@@ -1502,7 +1530,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[1]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.Serialization.SpecifiedTestClass. Path ''"
                     )
             );
@@ -1557,7 +1586,8 @@ Newtonsoft.Json Error: 0 : Error!
             Assert.IsTrue(
                 traceWriter
                     .TraceRecords[4]
-                    .Message.StartsWith(
+                    .Message
+                    .StartsWith(
                         "Finished deserializing Newtonsoft.Json.Tests.Serialization.SpecifiedTestClass. Path ''"
                     )
             );

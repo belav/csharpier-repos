@@ -238,15 +238,17 @@ namespace System.Xml.Schema
                     SR.Sch_EnumerationFacetProhibited
                 );
                 _derivedRestriction.Enumeration ??= new ArrayList();
-                _derivedRestriction.Enumeration.Add(
-                    ParseFacetValue(
-                        _datatype,
-                        facet,
-                        SR.Sch_EnumerationFacetInvalid,
-                        nsmgr,
-                        nameTable
-                    )
-                );
+                _derivedRestriction
+                    .Enumeration
+                    .Add(
+                        ParseFacetValue(
+                            _datatype,
+                            facet,
+                            SR.Sch_EnumerationFacetInvalid,
+                            nsmgr,
+                            nameTable
+                        )
+                    );
                 SetFlag(facet, RestrictionFlags.Enumeration);
             }
 

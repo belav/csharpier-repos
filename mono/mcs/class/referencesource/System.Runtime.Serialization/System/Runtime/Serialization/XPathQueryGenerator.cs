@@ -34,15 +34,15 @@ namespace System.Runtime.Serialization
         {
             if (type == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("type")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("type"));
             }
             if (pathToMember == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("pathToMember")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("pathToMember"));
             }
 
             DataContract currentContract = DataContract.GetDataContract(type);
@@ -85,11 +85,13 @@ namespace System.Runtime.Serialization
             {
                 return ProcessClassDataContract((ClassDataContract)contract, context, memberNode);
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.GetString(SR.QueryGeneratorPathToMemberNotFound)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.QueryGeneratorPathToMemberNotFound)
+                    )
+                );
         }
 
         static DataContract ProcessClassDataContract(
@@ -110,11 +112,13 @@ namespace System.Runtime.Serialization
                     return member.MemberTypeContract;
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.GetString(SR.QueryGeneratorPathToMemberNotFound)
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.QueryGeneratorPathToMemberNotFound)
+                    )
+                );
         }
 
         static IEnumerable<DataMember> GetDataMembers(ClassDataContract contract)

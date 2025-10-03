@@ -9,8 +9,8 @@ class NestedQuery
             .Select((values) => new { values = values, length = values.Length })
             .Select(
                 (ti0) =>
-                    ti0
-                        .values.Select((type) => new { type = type, x = 9 })
+                    ti0.values
+                        .Select((type) => new { type = type, x = 9 })
                         .Where((ti1) => (ti0.length == 3))
                         .Select((ti1) => ti1.type)
             );

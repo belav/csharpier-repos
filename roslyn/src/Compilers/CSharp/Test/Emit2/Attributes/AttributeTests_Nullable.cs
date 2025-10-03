@@ -168,9 +168,9 @@ public class C0 : I1<string>
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                lib2_c0.AllInterfacesNoUseSiteDiagnostics.Select(i =>
-                    i.ToTestDisplayString(includeNonNullable: true)
-                )
+                lib2_c0
+                    .AllInterfacesNoUseSiteDiagnostics
+                    .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );
 
             CompileAndVerify(
@@ -228,9 +228,9 @@ public class C1 : C0
 
             AssertEx.SetEqual(
                 new[] { "I1<System.String>", "I2<System.String, System.Object!>" },
-                lib3_c0.AllInterfacesNoUseSiteDiagnostics.Select(i =>
-                    i.ToTestDisplayString(includeNonNullable: true)
-                )
+                lib3_c0
+                    .AllInterfacesNoUseSiteDiagnostics
+                    .Select(i => i.ToTestDisplayString(includeNonNullable: true))
             );
 
             CompileAndVerify(
@@ -250,16 +250,20 @@ public class C1 : C0
             {
                 if (exists)
                 {
-                    _ = reader.TypeDefinitions.Single(h =>
-                        reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                    );
+                    _ = reader
+                        .TypeDefinitions
+                        .Single(h =>
+                            reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                        );
                 }
                 else
                 {
                     Assert.False(
-                        reader.TypeDefinitions.Any(h =>
-                            reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                        )
+                        reader
+                            .TypeDefinitions
+                            .Any(h =>
+                                reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                            )
                     );
                 }
             }
@@ -678,9 +682,9 @@ class A
 {
     object? F = null;
 }";
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var comp = CreateCompilation(sourceA, assemblyName: "A", options: options);
             CompileAndVerify(
                 comp,
@@ -728,9 +732,9 @@ class A
 {
     object? F = null;
 }";
-            var options = TestOptions.ReleaseDll.WithMetadataImportOptions(
-                MetadataImportOptions.All
-            );
+            var options = TestOptions
+                .ReleaseDll
+                .WithMetadataImportOptions(MetadataImportOptions.All);
             var comp = CreateCompilation(
                 new[] { sourceAttribute, sourceA },
                 assemblyName: "A",
@@ -2277,8 +2281,10 @@ public class Program
                     )
                     {
                         var typeParameter = module
-                            .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
+                            .GlobalNamespace
+                            .GetMember<NamedTypeSymbol>(typeName)
+                            .TypeParameters
+                            .Single();
                         Assert.True(typeParameter.HasReferenceTypeConstraint);
                         Assert.Equal(
                             expectedConstraintIsNullable,
@@ -2359,8 +2365,10 @@ public class Program
                     )
                     {
                         var typeParameter = module
-                            .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
+                            .GlobalNamespace
+                            .GetMember<NamedTypeSymbol>(typeName)
+                            .TypeParameters
+                            .Single();
                         Assert.True(typeParameter.HasReferenceTypeConstraint);
                         Assert.Equal(
                             expectedConstraintIsNullable,
@@ -2423,8 +2431,10 @@ public class C2<T2>
                     void verifyTypeParameterConstraint(string typeName)
                     {
                         var typeParameter = module
-                            .GlobalNamespace.GetMember<NamedTypeSymbol>(typeName)
-                            .TypeParameters.Single();
+                            .GlobalNamespace
+                            .GetMember<NamedTypeSymbol>(typeName)
+                            .TypeParameters
+                            .Single();
                         Assert.True(typeParameter.HasNotNullConstraint);
                     }
                 }
@@ -2795,7 +2805,8 @@ class C
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("C+<>c")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("C+<>c")
                         .GetMethod("<Main>b__1_0");
                     AssertAttributes(method.GetAttributes());
                     AssertNullableAttribute(method.GetReturnTypeAttributes());
@@ -2825,7 +2836,8 @@ class C
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("C+<>c")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("C+<>c")
                         .GetMethod("<G>b__1_0");
                     AssertAttributes(
                         method.GetAttributes(),
@@ -2858,7 +2870,8 @@ class C
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("C+<>c")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("C+<>c")
                         .GetMethod("<G>b__1_0");
                     AssertAttributes(method.GetReturnTypeAttributes());
                     AssertAttributes(method.Parameters[0].GetAttributes());
@@ -2918,7 +2931,8 @@ class B
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("C")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetMethod("<M>g__L|0_0");
                     AssertNullableAttribute(method.GetReturnTypeAttributes());
                     AssertAttributes(
@@ -2948,7 +2962,8 @@ class B
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("C")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetMethod("<M>g__L|0_0");
                     AssertNullableAttribute(method.Parameters[0].GetAttributes());
                     AssertNoNullableAttribute(method.Parameters[1].GetAttributes());
@@ -3180,7 +3195,8 @@ class B : A, I
                 symbolValidator: module =>
                 {
                     var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("B")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("B")
                         .GetMethod("I.F");
                     AssertNullableAttribute(method.GetReturnTypeAttributes());
                     AssertNoNullableAttribute(method.GetAttributes());
@@ -3208,7 +3224,8 @@ class C
                 symbolValidator: module =>
                 {
                     var property = module
-                        .ContainingAssembly.GetTypeByMetadataName("C")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetTypeMember("<F>d__0")
                         .GetProperty(
                             "System.Collections.Generic.IEnumerator<System.Object>.Current"
@@ -3243,7 +3260,8 @@ class C
                 symbolValidator: module =>
                 {
                     var property = module
-                        .ContainingAssembly.GetTypeByMetadataName("C")
+                        .ContainingAssembly
+                        .GetTypeByMetadataName("C")
                         .GetTypeMember("<F>d__0")
                         .GetProperty(
                             "System.Collections.Generic.IEnumerator<System.Object[]>.Current"
@@ -5692,7 +5710,8 @@ public class Program
         }
 
         private static readonly SymbolDisplayFormat _displayFormat = SymbolDisplayFormat
-            .TestFormat.WithMiscellaneousOptions(
+            .TestFormat
+            .WithMiscellaneousOptions(
                 SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
                     | SymbolDisplayMiscellaneousOptions.IncludeNotNullableReferenceTypeModifier
                     | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
@@ -6752,9 +6771,11 @@ public class Program
                 comp,
                 symbolValidator: module =>
                 {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NullableAttribute"
-                    );
+                    var attributeType = module
+                        .GlobalNamespace
+                        .GetMember<NamedTypeSymbol>(
+                            "System.Runtime.CompilerServices.NullableAttribute"
+                        );
                     AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
                     Assert.False(attributeUsage.Inherited);
                     Assert.False(attributeUsage.AllowMultiple);
@@ -7248,9 +7269,11 @@ System.Object? Program.<Main>g__f|1_1(System.String! s)
         private static TypeDefinition GetTypeDefinitionByName(MetadataReader reader, string name)
         {
             return reader.GetTypeDefinition(
-                reader.TypeDefinitions.Single(h =>
-                    reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
-                )
+                reader
+                    .TypeDefinitions
+                    .Single(h =>
+                        reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                    )
             );
         }
 

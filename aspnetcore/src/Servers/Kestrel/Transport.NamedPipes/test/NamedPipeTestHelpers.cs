@@ -87,7 +87,9 @@ internal static class NamedPipeTestHelpers
 
         logger.LogInformation("Server reading data.");
         var readResult = await serverConnection
-            .Transport.Input.ReadAtLeastAsync(TestData.Length)
+            .Transport
+            .Input
+            .ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverConnection.Transport.Input.AdvanceTo(readResult.Buffer.End);
 

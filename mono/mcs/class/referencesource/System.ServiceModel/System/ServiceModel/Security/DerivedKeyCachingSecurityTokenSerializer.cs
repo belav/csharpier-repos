@@ -32,24 +32,26 @@ namespace System.ServiceModel.Security
         {
             if (innerTokenSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "innerTokenSerializer"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("innerTokenSerializer");
             }
             if (secureConversation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "secureConversation"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("secureConversation");
             }
             if (cacheSize <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "cacheSize",
-                        SR.GetString(SR.ValueMustBeGreaterThanZero)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "cacheSize",
+                            SR.GetString(SR.ValueMustBeGreaterThanZero)
+                        )
+                    );
             }
             this.cachedTokens = new DerivedKeySecurityTokenCache[cacheSize];
             this.isInitiator = isInitiator;

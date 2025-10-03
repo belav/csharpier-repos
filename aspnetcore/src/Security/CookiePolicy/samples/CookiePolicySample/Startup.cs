@@ -58,11 +58,10 @@ public class Startup
                     context.Response.Cookies.Delete("Temp");
                     break;
                 case "/CreateEssentialCookie":
-                    context.Response.Cookies.Append(
-                        "EssentialCookie",
-                        "2",
-                        new CookieOptions() { IsEssential = true }
-                    );
+                    context
+                        .Response
+                        .Cookies
+                        .Append("EssentialCookie", "2", new CookieOptions() { IsEssential = true });
                     break;
                 case "/RemoveEssentialCookie":
                     context.Response.Cookies.Delete("EssentialCookie");

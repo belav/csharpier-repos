@@ -53,8 +53,9 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
                     TypeForwarder typeForwarder = typeForwarderHandle.GetTypeForwarder(reader);
                     if (typeForwarder.Name.StringEquals(name, reader))
                     {
-                        RuntimeAssemblyName redirectedAssemblyName =
-                            typeForwarder.Scope.ToRuntimeAssemblyName(reader);
+                        RuntimeAssemblyName redirectedAssemblyName = typeForwarder
+                            .Scope
+                            .ToRuntimeAssemblyName(reader);
                         RuntimeAssemblyInfo redirectedAssembly =
                             RuntimeAssemblyInfo.GetRuntimeAssemblyIfExists(redirectedAssemblyName);
                         if (redirectedAssembly == null)
@@ -76,7 +77,8 @@ namespace System.Reflection.Runtime.Assemblies.NativeFormat
         {
             namespaceDefinition = scopeDefinitionHandle
                 .GetScopeDefinition(reader)
-                .RootNamespaceDefinition.GetNamespaceDefinition(reader);
+                .RootNamespaceDefinition
+                .GetNamespaceDefinition(reader);
             NamespaceDefinitionHandleCollection candidates =
                 namespaceDefinition.NamespaceDefinitions;
             int idx = namespaceParts.Length;

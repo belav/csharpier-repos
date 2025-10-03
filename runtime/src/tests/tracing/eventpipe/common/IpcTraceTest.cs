@@ -261,17 +261,17 @@ namespace Tracing.Tests.Common
                                 }
                                 else
                                 {
-                                    Logger.logger.Log(
-                                        $"Saw new provider '{eventData.ProviderName}'"
-                                    );
+                                    Logger
+                                        .logger
+                                        .Log($"Saw new provider '{eventData.ProviderName}'");
                                     _actualEventCounts[eventData.ProviderName] = 1;
                                 }
                             }
                             catch (Exception e)
                             {
-                                Logger.logger.Log(
-                                    "Exception in Dynamic.All callback " + e.ToString()
-                                );
+                                Logger
+                                    .logger
+                                    .Log("Exception in Dynamic.All callback " + e.ToString());
                             }
                         };
                         Logger.logger.Log("Dynamic.All callback registered");
@@ -290,9 +290,11 @@ namespace Tracing.Tests.Common
                         }
                         catch (Exception)
                         {
-                            Logger.logger.Log(
-                                $"Exception thrown while reading; dumping culprit stream to disk..."
-                            );
+                            Logger
+                                .logger
+                                .Log(
+                                    $"Exception thrown while reading; dumping culprit stream to disk..."
+                                );
                             eventPipeStream.DumpStreamToDisk();
                             // rethrow it to fail the test
                             throw;
@@ -394,7 +396,9 @@ namespace Tracing.Tests.Common
                         })
                         .GroupBy(fileInfos => fileInfos.pid, fileInfos => fileInfos.fileInfo);
                     List<int> currentPids = System
-                        .Diagnostics.Process.GetProcesses()
+                        .Diagnostics
+                        .Process
+                        .GetProcesses()
                         .Select(pid => pid.Id)
                         .ToList();
                     return (currentIpcs, currentPids);
@@ -408,9 +412,9 @@ namespace Tracing.Tests.Common
                     {
                         foreach (FileInfo fi in ipc)
                         {
-                            Logger.logger.Log(
-                                $"Attempting to delete the zombied pipe: {fi.FullName}"
-                            );
+                            Logger
+                                .logger
+                                .Log($"Attempting to delete the zombied pipe: {fi.FullName}");
                             fi.Delete();
                             Logger.logger.Log($"Deleted");
                         }
@@ -424,9 +428,9 @@ namespace Tracing.Tests.Common
                                 .SkipLast(1);
                             foreach (FileInfo fi in duplicates)
                             {
-                                Logger.logger.Log(
-                                    $"Attempting to delete the zombied pipe: {fi.FullName}"
-                                );
+                                Logger
+                                    .logger
+                                    .Log($"Attempting to delete the zombied pipe: {fi.FullName}");
                                 fi.Delete();
                             }
                         }

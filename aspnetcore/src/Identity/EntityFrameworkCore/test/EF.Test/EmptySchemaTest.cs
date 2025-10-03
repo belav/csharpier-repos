@@ -33,7 +33,8 @@ public class EmptySchemaTest : IClassFixture<ScratchDatabaseFixture>
 
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
         using var scope = _builder
-            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<EmptyDbContext>();
         db.Database.EnsureCreated();
@@ -43,7 +44,8 @@ public class EmptySchemaTest : IClassFixture<ScratchDatabaseFixture>
     public void CanIgnoreEverything()
     {
         using var scope = _builder
-            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<EmptyDbContext>();
         VerifyEmptySchema(db);

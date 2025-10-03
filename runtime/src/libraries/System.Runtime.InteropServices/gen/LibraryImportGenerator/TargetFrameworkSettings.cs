@@ -36,8 +36,10 @@ namespace Microsoft.Interop
         // even in debug builds.
         private static readonly Version ThisAssemblyVersion = Version.Parse(
             typeof(TargetFrameworkSettingsExtensions)
-                .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                .InformationalVersion.Split('-', '+')[0]
+                .Assembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .InformationalVersion
+                .Split('-', '+')[0]
         );
 
         public static TargetFrameworkSettings GetTargetFrameworkSettings(

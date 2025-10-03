@@ -54,19 +54,19 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (string.IsNullOrEmpty(assertionId))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLAssertionIdRequired)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIdRequired));
 
             if (!IsAssertionIdValid(assertionId))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLAssertionIDIsInvalid, assertionId)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIDIsInvalid, assertionId));
 
             if (string.IsNullOrEmpty(issuer))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLAssertionIssuerRequired)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIssuerRequired));
 
             if (samlStatements == null)
             {
@@ -82,20 +82,22 @@ namespace System.IdentityModel.Tokens
             foreach (SamlStatement samlStatement in samlStatements)
             {
                 if (samlStatement == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SAMLEntityCannotBeNullOrEmpty,
-                            XD.SamlDictionary.Statement.Value
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SAMLEntityCannotBeNullOrEmpty,
+                                XD.SamlDictionary.Statement.Value
+                            )
+                        );
 
                 this.statements.Add(samlStatement);
             }
 
             if (this.statements.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(SR.SAMLAssertionRequireOneStatement)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionRequireOneStatement));
         }
 
         public int MinorVersion
@@ -114,14 +116,16 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLAssertionIdRequired)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIdRequired));
 
                 this.assertionId = value;
             }
@@ -157,14 +161,16 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLAssertionIssuerRequired)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(SR.GetString(SR.SAMLAssertionIssuerRequired));
 
                 this.issuer = value;
             }
@@ -176,9 +182,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.issueInstant = value;
             }
@@ -190,9 +198,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.conditions = value;
             }
@@ -204,9 +214,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.advice = value;
             }
@@ -223,9 +235,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.signingCredentials = value;
             }
@@ -247,9 +261,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.signingToken = value;
             }
@@ -327,9 +343,11 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("samlSerializer");
 
             if (this.signature != null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SAMLSignatureAlreadyRead))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SAMLSignatureAlreadyRead))
+                    );
 
             // If the reader cannot canonicalize then buffer the signature element to a canonicalizing reader.
             XmlDictionaryReader effectiveReader = reader;
@@ -366,11 +384,13 @@ namespace System.IdentityModel.Tokens
                 outOfBandTokenResolver
             );
             if (this.verificationKey == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLUnableToResolveSignatureKey, this.issuer)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLUnableToResolveSignatureKey, this.issuer)
+                        )
+                    );
 
             this.signature = signedXml;
             this.signingToken = SamlSerializer.ResolveSecurityToken(
@@ -378,9 +398,11 @@ namespace System.IdentityModel.Tokens
                 outOfBandTokenResolver
             );
             if (this.signingToken == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SamlSigningTokenNotFound))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SamlSigningTokenNotFound))
+                    );
 
             if (!ReferenceEquals(reader, effectiveReader))
                 effectiveReader.Close();
@@ -389,26 +411,36 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (string.IsNullOrEmpty(this.assertionId))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLAssertionIdRequired))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SAMLAssertionIdRequired))
+                    );
 
             if (!IsAssertionIdValid(this.assertionId))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAssertionIDIsInvalid, this.assertionId)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAssertionIDIsInvalid, this.assertionId)
+                        )
+                    );
 
             if (string.IsNullOrEmpty(this.issuer))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLAssertionIssuerRequired))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SAMLAssertionIssuerRequired))
+                    );
 
             if (this.statements.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLAssertionRequireOneStatement))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAssertionRequireOneStatement)
+                        )
+                    );
         }
 
         bool IsAssertionIdValid(string assertionId)
@@ -484,9 +516,9 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("signature");
 
             if (signatureVerificationKey == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "signatureVerificatonKey"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("signatureVerificatonKey");
 
             signature.StartSignatureVerification(signatureVerificationKey);
             signature.EnsureDigestValidity(this.assertionId, tokenStream);
@@ -524,14 +556,14 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("ReadXml")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("ReadXml"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
             XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateDictionaryReader(
                 reader
@@ -541,28 +573,34 @@ namespace System.IdentityModel.Tokens
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
             if (!wrappedReader.IsStartElement(dictionary.Assertion, dictionary.Namespace))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLElementNotRecognized, wrappedReader.LocalName)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLElementNotRecognized, wrappedReader.LocalName)
+                        )
+                    );
 
             string attributeValue = wrappedReader.GetAttribute(dictionary.MajorVersion, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAssertionMissingMajorVersionAttributeOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAssertionMissingMajorVersionAttributeOnRead)
+                        )
+                    );
             int majorVersion = Int32.Parse(attributeValue, CultureInfo.InvariantCulture);
 
             attributeValue = wrappedReader.GetAttribute(dictionary.MinorVersion, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAssertionMissingMinorVersionAttributeOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAssertionMissingMinorVersionAttributeOnRead)
+                        )
+                    );
 
             int minorVersion = Int32.Parse(attributeValue, CultureInfo.InvariantCulture);
 
@@ -571,41 +609,49 @@ namespace System.IdentityModel.Tokens
                 || (minorVersion != SamlConstants.MinorVersionValue)
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SAMLTokenVersionNotSupported,
-                            majorVersion,
-                            minorVersion,
-                            SamlConstants.MajorVersionValue,
-                            SamlConstants.MinorVersionValue
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SAMLTokenVersionNotSupported,
+                                majorVersion,
+                                minorVersion,
+                                SamlConstants.MajorVersionValue,
+                                SamlConstants.MinorVersionValue
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             attributeValue = wrappedReader.GetAttribute(dictionary.AssertionId, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLAssertionIdRequired))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.SAMLAssertionIdRequired))
+                    );
 
             if (!IsAssertionIdValid(attributeValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAssertionIDIsInvalid, attributeValue)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAssertionIDIsInvalid, attributeValue)
+                        )
+                    );
 
             this.assertionId = attributeValue;
 
             attributeValue = wrappedReader.GetAttribute(dictionary.Issuer, null);
             if (string.IsNullOrEmpty(attributeValue))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAssertionMissingIssuerAttributeOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAssertionMissingIssuerAttributeOnRead)
+                        )
+                    );
             this.issuer = attributeValue;
 
             attributeValue = wrappedReader.GetAttribute(dictionary.IssueInstant, null);
@@ -630,9 +676,11 @@ namespace System.IdentityModel.Tokens
                     outOfBandTokenResolver
                 );
                 if (this.conditions == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadCondtions))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadCondtions))
+                        );
             }
 
             if (wrappedReader.IsStartElement(dictionary.Advice, dictionary.Namespace))
@@ -643,9 +691,11 @@ namespace System.IdentityModel.Tokens
                     outOfBandTokenResolver
                 );
                 if (this.advice == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAdvice))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAdvice))
+                        );
             }
 
             while (wrappedReader.IsStartElement())
@@ -668,19 +718,25 @@ namespace System.IdentityModel.Tokens
                         outOfBandTokenResolver
                     );
                     if (statement == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadStatement))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(SR.SAMLUnableToLoadStatement)
+                                )
+                            );
                     this.statements.Add(statement);
                 }
             }
 
             if (this.statements.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAssertionRequireOneStatementOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAssertionRequireOneStatementOnRead)
+                        )
+                    );
 
             if (
                 wrappedReader.IsStartElement(
@@ -718,11 +774,13 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
             if ((this.signingCredentials == null) && (this.signature == null))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SamlAssertionMissingSigningCredentials)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SamlAssertionMissingSigningCredentials)
+                        )
+                    );
 
             XmlDictionaryWriter dictionaryWriter = XmlDictionaryWriter.CreateDictionaryWriter(
                 writer
@@ -767,9 +825,9 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
@@ -828,9 +886,11 @@ namespace System.IdentityModel.Tokens
                 if (Fx.IsFatal(e))
                     throw;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SAMLTokenNotSerialized), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SAMLTokenNotSerialized), e)
+                    );
             }
         }
 
@@ -843,9 +903,9 @@ namespace System.IdentityModel.Tokens
         {
             if (!this.CanWriteSourceData)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID4140))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID4140)));
             }
 
             // This call will properly just reuse the existing writer if it already qualifies

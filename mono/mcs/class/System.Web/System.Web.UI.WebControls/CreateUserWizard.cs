@@ -2338,14 +2338,14 @@ namespace System.Web.UI.WebControls
                 table.ControlStyle.Height = Unit.Percentage(100);
 
                 // Row #0
-                table.Controls.Add(
-                    CreateRow(null, null, null, _createUserWizard.TitleTextStyle, null)
-                );
+                table
+                    .Controls
+                    .Add(CreateRow(null, null, null, _createUserWizard.TitleTextStyle, null));
 
                 // Row #1
-                table.Controls.Add(
-                    CreateRow(null, null, null, _createUserWizard.InstructionTextStyle, null)
-                );
+                table
+                    .Controls
+                    .Add(CreateRow(null, null, null, _createUserWizard.InstructionTextStyle, null));
 
                 // Row #2
                 TextBox UserName = new TextBox();
@@ -2368,15 +2368,17 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table.Controls.Add(
-                    CreateRow(
-                        UserNameLabel,
-                        UserName,
-                        UserNameRequired,
-                        _createUserWizard.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            UserNameLabel,
+                            UserName,
+                            UserNameRequired,
+                            _createUserWizard.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #3
                 TextBox Password = new TextBox();
@@ -2399,26 +2401,30 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table.Controls.Add(
-                    CreateRow(
-                        PasswordLabel,
-                        Password,
-                        PasswordRequired,
-                        _createUserWizard.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            PasswordLabel,
+                            Password,
+                            PasswordRequired,
+                            _createUserWizard.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #4
-                table.Controls.Add(
-                    CreateRow(
-                        new LiteralControl(String.Empty),
-                        new LiteralControl(String.Empty),
-                        new LiteralControl(String.Empty),
-                        null,
-                        _createUserWizard.PasswordHintStyle
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            new LiteralControl(String.Empty),
+                            new LiteralControl(String.Empty),
+                            new LiteralControl(String.Empty),
+                            null,
+                            _createUserWizard.PasswordHintStyle
+                        )
+                    );
 
                 // Row #5
                 TextBox ConfirmPassword = new TextBox();
@@ -2443,15 +2449,17 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table.Controls.Add(
-                    CreateRow(
-                        ConfirmPasswordLabel,
-                        ConfirmPassword,
-                        ConfirmPasswordRequired,
-                        _createUserWizard.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            ConfirmPasswordLabel,
+                            ConfirmPassword,
+                            ConfirmPasswordRequired,
+                            _createUserWizard.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #6
                 TextBox Email = new TextBox();
@@ -2472,9 +2480,17 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table.Controls.Add(
-                    CreateRow(EmailLabel, Email, EmailRequired, _createUserWizard.LabelStyle, null)
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            EmailLabel,
+                            Email,
+                            EmailRequired,
+                            _createUserWizard.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #7
                 TextBox Question = new TextBox();
@@ -2495,15 +2511,17 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table.Controls.Add(
-                    CreateRow(
-                        QuestionLabel,
-                        Question,
-                        QuestionRequired,
-                        _createUserWizard.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            QuestionLabel,
+                            Question,
+                            QuestionRequired,
+                            _createUserWizard.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #8
                 TextBox Answer = new TextBox();
@@ -2524,15 +2542,17 @@ namespace System.Web.UI.WebControls
                     _createUserWizard.ValidatorTextStyle
                 );
 
-                table.Controls.Add(
-                    CreateRow(
-                        AnswerLabel,
-                        Answer,
-                        AnswerRequired,
-                        _createUserWizard.LabelStyle,
-                        null
-                    )
-                );
+                table
+                    .Controls
+                    .Add(
+                        CreateRow(
+                            AnswerLabel,
+                            Answer,
+                            AnswerRequired,
+                            _createUserWizard.LabelStyle,
+                            null
+                        )
+                    );
 
                 // Row #9
                 CompareValidator PasswordCompare = new CompareValidator();

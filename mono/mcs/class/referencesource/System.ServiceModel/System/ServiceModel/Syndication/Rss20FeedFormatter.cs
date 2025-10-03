@@ -58,16 +58,22 @@ namespace System.ServiceModel.Syndication
         {
             if (feedTypeToCreate == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "feedTypeToCreate"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("feedTypeToCreate");
             }
             if (!typeof(SyndicationFeed).IsAssignableFrom(feedTypeToCreate))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "feedTypeToCreate",
-                    SR.GetString(SR.InvalidObjectTypePassed, "feedTypeToCreate", "SyndicationFeed")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        "feedTypeToCreate",
+                        SR.GetString(
+                            SR.InvalidObjectTypePassed,
+                            "feedTypeToCreate",
+                            "SyndicationFeed"
+                        )
+                    );
             }
             this.serializeExtensionsAsAtom = true;
             this.maxExtensionSize = int.MaxValue;
@@ -176,11 +182,13 @@ namespace System.ServiceModel.Syndication
             TraceFeedReadBegin();
             if (!CanRead(reader))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(SR.UnknownFeedXml, reader.LocalName, reader.NamespaceURI)
+                        )
+                    );
             }
             ReadFeed(reader);
             TraceFeedReadEnd();
@@ -309,9 +317,11 @@ namespace System.ServiceModel.Syndication
             StringBuilder dateTimeStringBuilder = new StringBuilder(dateTimeString.Trim());
             if (dateTimeStringBuilder.Length < 18)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
+                    );
             }
             if (dateTimeStringBuilder[3] == ',')
             {
@@ -331,9 +341,11 @@ namespace System.ServiceModel.Syndication
             }
             if (dateTimeStringBuilder.Length < 19)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
+                    );
             }
             bool thereAreSeconds = (dateTimeStringBuilder[17] == ':');
             int timeZoneStartIndex;
@@ -376,9 +388,11 @@ namespace System.ServiceModel.Syndication
             {
                 return theTime;
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingDateTime))
+                );
         }
 
         static string NormalizeTimeZone(string rfc822TimeZone, out bool isUtc)
@@ -872,11 +886,13 @@ namespace System.ServiceModel.Syndication
                     reader.ReadEndElement(); // item
                     if (!readAlternateLink && fallbackAlternateLink != null)
                     {
-                        result.Links.Add(
-                            SyndicationLink.CreateAlternateLink(
-                                new Uri(fallbackAlternateLink, UriKind.RelativeOrAbsolute)
-                            )
-                        );
+                        result
+                            .Links
+                            .Add(
+                                SyndicationLink.CreateAlternateLink(
+                                    new Uri(fallbackAlternateLink, UriKind.RelativeOrAbsolute)
+                                )
+                            );
                         readAlternateLink = true;
                     }
 
@@ -890,15 +906,19 @@ namespace System.ServiceModel.Syndication
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingItem), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingItem), e)
+                    );
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingItem), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingItem), e)
+                    );
             }
         }
 
@@ -1024,14 +1044,16 @@ namespace System.ServiceModel.Syndication
                 );
                 if (version != Rss20Constants.Version)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            FeedUtils.AddLineInfo(
-                                reader,
-                                (SR.GetString(SR.UnsupportedRssVersion, version))
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                FeedUtils.AddLineInfo(
+                                    reader,
+                                    (SR.GetString(SR.UnsupportedRssVersion, version))
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 if (reader.AttributeCount > 1)
                 {
@@ -1221,14 +1243,16 @@ namespace System.ServiceModel.Syndication
                         {
                             if (readItemsAtLeastOnce)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
-                                    new InvalidOperationException(
-                                        SR.GetString(
-                                            SR.FeedHasNonContiguousItems,
-                                            this.GetType().ToString()
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperWarning(
+                                        new InvalidOperationException(
+                                            SR.GetString(
+                                                SR.FeedHasNonContiguousItems,
+                                                this.GetType().ToString()
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                             result.Items = ReadItems(reader, result, out areAllItemsRead);
                             readItemsAtLeastOnce = true;
@@ -1283,15 +1307,19 @@ namespace System.ServiceModel.Syndication
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingFeed), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingFeed), e)
+                    );
             }
             catch (ArgumentException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingFeed), e)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(FeedUtils.AddLineInfo(reader, SR.ErrorParsingFeed), e)
+                    );
             }
         }
 
@@ -1340,9 +1368,11 @@ namespace System.ServiceModel.Syndication
         {
             if (this.Feed == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.FeedFormatterDoesNotHaveFeed))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.FeedFormatterDoesNotHaveFeed))
+                    );
             }
             if (this.serializeExtensionsAsAtom)
             {

@@ -122,7 +122,8 @@ public class AuthorizationPolicyFacts
         // Assert
         Assert.Contains(combined.Requirements, r => r is RolesAuthorizationRequirement);
         var rolesAuthorizationRequirement = combined
-            .Requirements.OfType<RolesAuthorizationRequirement>()
+            .Requirements
+            .OfType<RolesAuthorizationRequirement>()
             .First();
         Assert.Equal(2, rolesAuthorizationRequirement.AllowedRoles.Count());
         Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r1"));
@@ -188,7 +189,8 @@ public class AuthorizationPolicyFacts
         // Assert
         Assert.Contains(combined.Requirements, r => r is RolesAuthorizationRequirement);
         var rolesAuthorizationRequirement = combined
-            .Requirements.OfType<RolesAuthorizationRequirement>()
+            .Requirements
+            .OfType<RolesAuthorizationRequirement>()
             .First();
         Assert.Equal(2, rolesAuthorizationRequirement.AllowedRoles.Count());
         Assert.Contains(rolesAuthorizationRequirement.AllowedRoles, r => r.Equals("r1"));

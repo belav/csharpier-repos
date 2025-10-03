@@ -34,14 +34,12 @@ namespace Microsoft.Interop.Analyzers
 
             context.RegisterCompilationStartAction(context =>
             {
-                INamedTypeSymbol? interfaceTypeAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.InterfaceTypeAttribute
-                    )!;
-                INamedTypeSymbol? generatedComInterfaceAttribute =
-                    context.Compilation.GetBestTypeByMetadataName(
-                        TypeNames.GeneratedComInterfaceAttribute
-                    );
+                INamedTypeSymbol? interfaceTypeAttribute = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.InterfaceTypeAttribute)!;
+                INamedTypeSymbol? generatedComInterfaceAttribute = context
+                    .Compilation
+                    .GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
 
                 if (generatedComInterfaceAttribute is null)
                 {
@@ -204,10 +202,9 @@ namespace Microsoft.Interop.Analyzers
                                             );
                                         return managedToUnmanagedGenerator with
                                         {
-                                            Diagnostics =
-                                                managedToUnmanagedGenerator.Diagnostics.AddRange(
-                                                    unmanagedToManagedGenerator.Diagnostics
-                                                ),
+                                            Diagnostics = managedToUnmanagedGenerator
+                                                .Diagnostics
+                                                .AddRange(unmanagedToManagedGenerator.Diagnostics),
                                         };
                                     }
                                 ),

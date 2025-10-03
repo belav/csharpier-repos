@@ -499,9 +499,11 @@ namespace System.ServiceModel.Channels
             }
             catch (TimeoutException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(SR.GetString(SR.TimeoutOnOpen, timeout), exception)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TimeoutException(SR.GetString(SR.TimeoutOnOpen, timeout), exception)
+                    );
             }
 
             bool connectionAccepted = false;
@@ -550,11 +552,13 @@ namespace System.ServiceModel.Channels
             {
                 if (this.State != CommunicationState.Opening)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationObjectAbortedException(
-                            SR.GetString(SR.DuplexChannelAbortedDuringOpen, this.Via)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationObjectAbortedException(
+                                SR.GetString(SR.DuplexChannelAbortedDuringOpen, this.Via)
+                            )
+                        );
                 }
 
                 this.Connection = connection;
@@ -736,12 +740,12 @@ namespace System.ServiceModel.Channels
                 // now upgrade if necessary
                 if (channel.upgrade != null)
                 {
-                    this.channelBindingProvider =
-                        this.channel.upgrade.GetProperty<IStreamUpgradeChannelBindingProvider>();
-                    this.upgradeInitiator = channel.upgrade.CreateUpgradeInitiator(
-                        channel.RemoteAddress,
-                        channel.Via
-                    );
+                    this.channelBindingProvider = this.channel
+                        .upgrade
+                        .GetProperty<IStreamUpgradeChannelBindingProvider>();
+                    this.upgradeInitiator = channel
+                        .upgrade
+                        .CreateUpgradeInitiator(channel.RemoteAddress, channel.Via);
                     if (onUpgradeInitiatorOpen == null)
                     {
                         onUpgradeInitiatorOpen = Fx.ThunkCallback(
@@ -1155,17 +1159,21 @@ namespace System.ServiceModel.Channels
                 IAsyncResult result;
                 try
                 {
-                    result = duplexChannel.connectionPoolHelper.BeginEstablishConnection(
-                        timeoutHelper.RemainingTime(),
-                        onEstablishConnection,
-                        this
-                    );
+                    result = duplexChannel
+                        .connectionPoolHelper
+                        .BeginEstablishConnection(
+                            timeoutHelper.RemainingTime(),
+                            onEstablishConnection,
+                            this
+                        );
                 }
                 catch (TimeoutException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException(SR.GetString(SR.TimeoutOnOpen, timeout), exception)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new TimeoutException(SR.GetString(SR.TimeoutOnOpen, timeout), exception)
+                        );
                 }
 
                 if (!result.CompletedSynchronously)
@@ -1193,12 +1201,14 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new TimeoutException(
-                            SR.GetString(SR.TimeoutOnOpen, this.timeoutHelper.OriginalTimeout),
-                            exception
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new TimeoutException(
+                                SR.GetString(SR.TimeoutOnOpen, this.timeoutHelper.OriginalTimeout),
+                                exception
+                            )
+                        );
                 }
 
                 duplexChannel.AcceptConnection(connection);
@@ -1280,9 +1290,9 @@ namespace System.ServiceModel.Channels
             ValidateReadingFaultString(decoder);
 
             int offset = 0;
-            byte[] faultBuffer = DiagnosticUtility.Utility.AllocateByteArray(
-                FaultStringDecoder.FaultSizeQuota
-            );
+            byte[] faultBuffer = DiagnosticUtility
+                .Utility
+                .AllocateByteArray(FaultStringDecoder.FaultSizeQuota);
             int size = connection.Read(
                 faultBuffer,
                 offset,
@@ -1299,13 +1309,15 @@ namespace System.ServiceModel.Channels
                 if (decoder.CurrentState == ClientFramingDecoderState.Fault)
                 {
                     ConnectionUtilities.CloseNoThrow(connection, timeoutHelper.RemainingTime());
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        FaultStringDecoder.GetFaultException(
-                            decoder.Fault,
-                            via.ToString(),
-                            contentType
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            FaultStringDecoder.GetFaultException(
+                                decoder.Fault,
+                                via.ToString(),
+                                contentType
+                            )
+                        );
                 }
                 else
                 {
@@ -1326,9 +1338,9 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                decoder.CreatePrematureEOFException()
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(decoder.CreatePrematureEOFException());
         }
 
         public static IAsyncResult BeginInitiateUpgrade(
@@ -1414,11 +1426,13 @@ namespace System.ServiceModel.Channels
         {
             if (decoder.CurrentState != ClientFramingDecoderState.ReadingFaultString)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new System.ServiceModel.Security.MessageSecurityException(
-                        SR.GetString(SR.ServerRejectedUpgradeRequest)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new System.ServiceModel.Security.MessageSecurityException(
+                            SR.GetString(SR.ServerRejectedUpgradeRequest)
+                        )
+                    );
             }
         }
 
@@ -1431,12 +1445,14 @@ namespace System.ServiceModel.Channels
         {
             if (count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ProtocolException(
-                        SR.GetString(SR.ServerRejectedSessionPreamble, via),
-                        decoder.CreatePrematureEOFException()
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ProtocolException(
+                            SR.GetString(SR.ServerRejectedSessionPreamble, via),
+                            decoder.CreatePrematureEOFException()
+                        )
+                    );
             }
 
             // decode until the framing byte has been processed (it always will be)
@@ -1457,12 +1473,14 @@ namespace System.ServiceModel.Channels
         {
             if (count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MessageSecurityException(
-                        SR.GetString(SR.ServerRejectedUpgradeRequest),
-                        decoder.CreatePrematureEOFException()
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.ServerRejectedUpgradeRequest),
+                            decoder.CreatePrematureEOFException()
+                        )
+                    );
             }
 
             // decode until the framing byte has been processed (it always will be)
@@ -1537,13 +1555,15 @@ namespace System.ServiceModel.Channels
                     if (decoder.CurrentState == ClientFramingDecoderState.Fault)
                     {
                         ConnectionUtilities.CloseNoThrow(connection, timeoutHelper.RemainingTime());
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            FaultStringDecoder.GetFaultException(
-                                decoder.Fault,
-                                via.ToString(),
-                                contentType
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                FaultStringDecoder.GetFaultException(
+                                    decoder.Fault,
+                                    via.ToString(),
+                                    contentType
+                                )
+                            );
                     }
                     else
                     {
@@ -1575,9 +1595,9 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    decoder.CreatePrematureEOFException()
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(decoder.CreatePrematureEOFException());
             }
 
             public static void End(IAsyncResult result)

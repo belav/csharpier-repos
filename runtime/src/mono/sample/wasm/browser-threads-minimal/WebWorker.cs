@@ -40,9 +40,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (runAsyncMethod == null)
             {
-                var webWorker = typeof(JSObject).Assembly.GetType(
-                    "System.Runtime.InteropServices.JavaScript.WebWorker"
-                );
+                var webWorker = typeof(JSObject)
+                    .Assembly
+                    .GetType("System.Runtime.InteropServices.JavaScript.WebWorker");
                 runAsyncMethod = webWorker.GetMethod(
                     "RunAsync",
                     BindingFlags.Public | BindingFlags.Static
@@ -78,9 +78,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (runAsyncVoidMethod == null)
             {
-                var webWorker = typeof(JSObject).Assembly.GetType(
-                    "System.Runtime.InteropServices.JavaScript.WebWorker"
-                );
+                var webWorker = typeof(JSObject)
+                    .Assembly
+                    .GetType("System.Runtime.InteropServices.JavaScript.WebWorker");
                 runAsyncVoidMethod = webWorker.GetMethod(
                     "RunAsyncVoid",
                     BindingFlags.Public | BindingFlags.Static
@@ -113,9 +113,9 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (runMethod == null)
             {
-                var webWorker = typeof(JSObject).Assembly.GetType(
-                    "System.Runtime.InteropServices.JavaScript.WebWorker"
-                );
+                var webWorker = typeof(JSObject)
+                    .Assembly
+                    .GetType("System.Runtime.InteropServices.JavaScript.WebWorker");
                 runMethod = webWorker.GetMethod("Run", BindingFlags.Public | BindingFlags.Static);
             }
             return (Task)runMethod.Invoke(null, new object[] { body, cancellationToken });

@@ -58,10 +58,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             await TestServices.Editor.SelectTextInCurrentDocumentAsync(text, cancellationToken);
 
             var caretPosition = await TestServices.Editor.GetCaretPositionAsync(cancellationToken);
-            caretPosition.BufferPosition.GetLineAndCharacter(
-                out var lineNumber,
-                out var characterIndex
-            );
+            caretPosition
+                .BufferPosition
+                .GetLineAndCharacter(out var lineNumber, out var characterIndex);
             await SetBreakpointAsync(
                 fileName,
                 lineNumber,

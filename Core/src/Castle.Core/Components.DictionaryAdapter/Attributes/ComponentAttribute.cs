@@ -78,11 +78,14 @@ namespace Castle.Components.DictionaryAdapter
                 {
                     var descriptor = new PropertyDescriptor(property.Property, null);
                     descriptor.AddBehavior(new KeyPrefixAttribute(key));
-                    component = dictionaryAdapter.This.Factory.GetAdapter(
-                        property.Property.PropertyType,
-                        dictionaryAdapter.This.Dictionary,
-                        descriptor
-                    );
+                    component = dictionaryAdapter
+                        .This
+                        .Factory
+                        .GetAdapter(
+                            property.Property.PropertyType,
+                            dictionaryAdapter.This.Dictionary,
+                            descriptor
+                        );
                     dictionaryAdapter.This.ExtendedProperties[property.PropertyName] = component;
                 }
 

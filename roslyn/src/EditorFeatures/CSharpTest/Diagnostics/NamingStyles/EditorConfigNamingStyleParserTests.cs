@@ -596,20 +596,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             var vbResult = ParseDictionary(vbRule);
 
             Assert.Equal(
-                csharpResult.SymbolSpecifications.SelectMany(x =>
-                    x.RequiredModifierList.Select(y => y.Modifier)
-                ),
-                vbResult.SymbolSpecifications.SelectMany(x =>
-                    x.RequiredModifierList.Select(y => y.Modifier)
-                )
+                csharpResult
+                    .SymbolSpecifications
+                    .SelectMany(x => x.RequiredModifierList.Select(y => y.Modifier)),
+                vbResult
+                    .SymbolSpecifications
+                    .SelectMany(x => x.RequiredModifierList.Select(y => y.Modifier))
             );
             Assert.Equal(
-                csharpResult.SymbolSpecifications.SelectMany(x =>
-                    x.RequiredModifierList.Select(y => y.ModifierKindWrapper)
-                ),
-                vbResult.SymbolSpecifications.SelectMany(x =>
-                    x.RequiredModifierList.Select(y => y.ModifierKindWrapper)
-                )
+                csharpResult
+                    .SymbolSpecifications
+                    .SelectMany(x => x.RequiredModifierList.Select(y => y.ModifierKindWrapper)),
+                vbResult
+                    .SymbolSpecifications
+                    .SelectMany(x => x.RequiredModifierList.Select(y => y.ModifierKindWrapper))
             );
         }
 

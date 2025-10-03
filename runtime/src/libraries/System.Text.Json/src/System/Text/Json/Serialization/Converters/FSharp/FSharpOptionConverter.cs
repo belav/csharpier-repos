@@ -25,15 +25,12 @@ namespace System.Text.Json.Serialization.Converters
         public FSharpOptionConverter(JsonConverter<TElement> elementConverter)
         {
             _elementConverter = elementConverter;
-            _optionValueGetter = FSharpCoreReflectionProxy.Instance.CreateFSharpOptionValueGetter<
-                TOption,
-                TElement
-            >();
-            _optionConstructor =
-                FSharpCoreReflectionProxy.Instance.CreateFSharpOptionSomeConstructor<
-                    TOption,
-                    TElement
-                >();
+            _optionValueGetter = FSharpCoreReflectionProxy
+                .Instance
+                .CreateFSharpOptionValueGetter<TOption, TElement>();
+            _optionConstructor = FSharpCoreReflectionProxy
+                .Instance
+                .CreateFSharpOptionSomeConstructor<TOption, TElement>();
             ConverterStrategy = elementConverter.ConverterStrategy;
         }
 

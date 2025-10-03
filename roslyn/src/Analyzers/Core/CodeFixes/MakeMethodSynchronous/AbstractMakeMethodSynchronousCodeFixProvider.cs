@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.MakeMethodSynchronous
         )
         {
             var compilation = await document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var knownTypes = new KnownTypes(compilation);
 

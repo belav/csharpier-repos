@@ -129,7 +129,8 @@ namespace Microsoft.CodeAnalysis.ImplementAbstractClass
         )
         {
             var compilation = await _document
-                .Project.GetRequiredCompilationAsync(cancellationToken)
+                .Project
+                .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
             var memberDefinitions = GenerateMembers(
                 compilation,

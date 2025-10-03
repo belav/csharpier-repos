@@ -143,7 +143,8 @@ namespace System.Linq.Parallel.Tests
             _ = count;
             AssertThrows.Wrapped<InvalidCastException>(() =>
                 labeled
-                    .Item.Cast<double>()
+                    .Item
+                    .Cast<double>()
                     .ForAll(x =>
                     {
                         ;
@@ -183,7 +184,8 @@ namespace System.Linq.Parallel.Tests
             _ = count;
             AssertThrows.Wrapped<InvalidCastException>(() =>
                 labeled
-                    .Item.Select(x => (Int32)x)
+                    .Item
+                    .Select(x => (Int32)x)
                     .Cast<Castable>()
                     .ForAll(x =>
                     {

@@ -36,18 +36,22 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer>
         if (applyFilters)
         {
             var customers = expectedData
-                .Customers.Where(c => c.CompanyName.StartsWith(tenantPrefix))
+                .Customers
+                .Where(c => c.CompanyName.StartsWith(tenantPrefix))
                 .ToArray();
             var customerQueriesWithQueryFilter = expectedData
-                .CustomerQueriesWithQueryFilter.Where(cq => cq.CompanyName.StartsWith(searchTerm))
+                .CustomerQueriesWithQueryFilter
+                .Where(cq => cq.CompanyName.StartsWith(searchTerm))
                 .ToArray();
             var employees = expectedData.Employees.Where(e => e.Address.StartsWith("A")).ToArray();
             var products = expectedData.Products.Where(p => p.Discontinued).ToArray();
             var orders = expectedData
-                .Orders.Where(o => o.Customer.CompanyName.StartsWith(tenantPrefix))
+                .Orders
+                .Where(o => o.Customer.CompanyName.StartsWith(tenantPrefix))
                 .ToArray();
             var orderDetails = expectedData
-                .OrderDetails.Where(od =>
+                .OrderDetails
+                .Where(od =>
                     od.Order.Customer.CompanyName.StartsWith(tenantPrefix) && od.Quantity > 50
                 )
                 .ToArray();

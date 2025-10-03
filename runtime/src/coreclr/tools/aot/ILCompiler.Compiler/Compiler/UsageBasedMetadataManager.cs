@@ -316,9 +316,9 @@ namespace ILCompiler
             {
                 foreach (var resourceHandle in ecmaModule.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = ecmaModule.MetadataReader.GetManifestResource(
-                        resourceHandle
-                    );
+                    ManifestResource resource = ecmaModule
+                        .MetadataReader
+                        .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)
@@ -783,10 +783,9 @@ namespace ILCompiler
             {
                 if (
                     methodIL != null
-                    && Dataflow.ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForMethodBody(
-                        FlowAnnotations,
-                        method
-                    )
+                    && Dataflow
+                        .ReflectionMethodBodyScanner
+                        .RequiresReflectionMethodBodyScannerForMethodBody(FlowAnnotations, method)
                 )
                 {
                     AddDataflowDependency(
@@ -964,10 +963,9 @@ namespace ILCompiler
                 != 0;
             if (
                 scanReflection
-                && Dataflow.ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
-                    FlowAnnotations,
-                    writtenField
-                )
+                && Dataflow
+                    .ReflectionMethodBodyScanner
+                    .RequiresReflectionMethodBodyScannerForAccess(FlowAnnotations, writtenField)
             )
             {
                 AddDataflowDependency(
@@ -995,10 +993,12 @@ namespace ILCompiler
                     TypeDesc fieldOwningTypeNormalized = fieldOwningType.NormalizeInstantiation();
                     if (fieldOwningType != fieldOwningTypeNormalized)
                     {
-                        fieldToReport = factory.TypeSystemContext.GetFieldForInstantiatedType(
-                            writtenField.GetTypicalFieldDefinition(),
-                            (InstantiatedType)fieldOwningTypeNormalized
-                        );
+                        fieldToReport = factory
+                            .TypeSystemContext
+                            .GetFieldForInstantiatedType(
+                                writtenField.GetTypicalFieldDefinition(),
+                                (InstantiatedType)fieldOwningTypeNormalized
+                            );
                     }
                 }
 
@@ -1028,10 +1028,9 @@ namespace ILCompiler
                 != 0;
             if (
                 scanReflection
-                && Dataflow.ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForCallSite(
-                    FlowAnnotations,
-                    calledMethod
-                )
+                && Dataflow
+                    .ReflectionMethodBodyScanner
+                    .RequiresReflectionMethodBodyScannerForCallSite(FlowAnnotations, calledMethod)
             )
             {
                 AddDataflowDependency(
@@ -1278,10 +1277,12 @@ namespace ILCompiler
 
             MethodIL methodILDefinition = methodIL.GetMethodILDefinition();
             if (
-                FlowAnnotations.CompilerGeneratedState.TryGetUserMethodForCompilerGeneratedMember(
-                    methodILDefinition.OwningMethod,
-                    out var userMethod
-                )
+                FlowAnnotations
+                    .CompilerGeneratedState
+                    .TryGetUserMethodForCompilerGeneratedMember(
+                        methodILDefinition.OwningMethod,
+                        out var userMethod
+                    )
             )
             {
                 Debug.Assert(userMethod != methodILDefinition.OwningMethod);
@@ -1496,15 +1497,22 @@ namespace ILCompiler
                 EcmaModule xmlModule = globalAttributeRemoval
                     ? (EcmaModule)module.Context.SystemModule
                     : module;
-                PEMemoryBlock resourceDirectory = xmlModule.PEReader.GetSectionData(
-                    xmlModule.PEReader.PEHeaders.CorHeader.ResourcesDirectory.RelativeVirtualAddress
-                );
+                PEMemoryBlock resourceDirectory = xmlModule
+                    .PEReader
+                    .GetSectionData(
+                        xmlModule
+                            .PEReader
+                            .PEHeaders
+                            .CorHeader
+                            .ResourcesDirectory
+                            .RelativeVirtualAddress
+                    );
 
                 foreach (var resourceHandle in xmlModule.MetadataReader.ManifestResources)
                 {
-                    ManifestResource resource = xmlModule.MetadataReader.GetManifestResource(
-                        resourceHandle
-                    );
+                    ManifestResource resource = xmlModule
+                        .MetadataReader
+                        .GetManifestResource(resourceHandle);
 
                     // Don't try to process linked resources or resources in other assemblies
                     if (!resource.Implementation.IsNil)

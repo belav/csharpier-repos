@@ -127,9 +127,11 @@ public class Program
         }
         else
         {
-            Console.Error.WriteLine(
-                $@"unbox != box: original {LineCount}, boxed {intAsObject:X8}, unboxed {unboxedInt:X8}"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    $@"unbox != box: original {LineCount}, boxed {intAsObject:X8}, unboxed {unboxedInt:X8}"
+                );
             success = false;
         }
         int? nullableInt = LineCount;
@@ -143,9 +145,11 @@ public class Program
         }
         else
         {
-            Console.Error.WriteLine(
-                $@"unbox_nullable != box_nullable: original {nullableInt:X8}, boxed {nullableIntAsObject:X8}, unboxed {unboxedNullable:X8}"
-            );
+            Console
+                .Error
+                .WriteLine(
+                    $@"unbox_nullable != box_nullable: original {nullableInt:X8}, boxed {nullableIntAsObject:X8}, unboxed {unboxedNullable:X8}"
+                );
             success = false;
         }
         return success;
@@ -233,13 +237,15 @@ public class Program
         {
             return true;
         }
-        Console.Error.WriteLine(
-            "val = {0} = 0x{1:x2}, val1 = {2} = 0x{3:x2}",
-            val,
-            (int)val,
-            val1,
-            (int)val1
-        );
+        Console
+            .Error
+            .WriteLine(
+                "val = {0} = 0x{1:x2}, val1 = {2} = 0x{3:x2}",
+                val,
+                (int)val,
+                val1,
+                (int)val1
+            );
         return false;
     }
 

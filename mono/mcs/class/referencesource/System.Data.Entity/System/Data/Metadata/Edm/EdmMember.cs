@@ -116,11 +116,13 @@ namespace System.Data.Metadata.Edm
             {
                 Facet item = null;
                 if (
-                    TypeUsage.Facets.TryGetValue(
-                        EdmProviderManifest.StoreGeneratedPatternFacetName,
-                        false,
-                        out item
-                    )
+                    TypeUsage
+                        .Facets
+                        .TryGetValue(
+                            EdmProviderManifest.StoreGeneratedPatternFacetName,
+                            false,
+                            out item
+                        )
                 )
                 {
                     return ((StoreGeneratedPattern)item.Value) == StoreGeneratedPattern.Computed;
@@ -138,11 +140,13 @@ namespace System.Data.Metadata.Edm
             {
                 Facet item = null;
                 if (
-                    TypeUsage.Facets.TryGetValue(
-                        EdmProviderManifest.StoreGeneratedPatternFacetName,
-                        false,
-                        out item
-                    )
+                    TypeUsage
+                        .Facets
+                        .TryGetValue(
+                            EdmProviderManifest.StoreGeneratedPatternFacetName,
+                            false,
+                            out item
+                        )
                 )
                 {
                     return ((StoreGeneratedPattern)item.Value) == StoreGeneratedPattern.Identity;

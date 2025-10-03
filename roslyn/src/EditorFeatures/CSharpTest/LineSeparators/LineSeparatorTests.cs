@@ -619,14 +619,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.LineSeparators
         )
         {
             using var workspace = TestWorkspace.CreateCSharp(contents, options);
-            var document = workspace.CurrentSolution.GetRequiredDocument(
-                workspace.Documents.First().Id
-            );
+            var document = workspace
+                .CurrentSolution
+                .GetRequiredDocument(workspace.Documents.First().Id);
             var root = await document.GetRequiredSyntaxRootAsync(default);
 
             var lineSeparatorService = Assert.IsType<CSharpLineSeparatorService>(
                 workspace
-                    .Services.GetLanguageServices(LanguageNames.CSharp)
+                    .Services
+                    .GetLanguageServices(LanguageNames.CSharp)
                     .GetRequiredService<ILineSeparatorService>()
             );
             var spans = await lineSeparatorService.GetLineSeparatorsAsync(

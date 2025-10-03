@@ -38,12 +38,14 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (!this.sourceLock.TryEnter(timeoutHelper.RemainingTime()))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(
-                        SR.GetString(SR.WaitForMessageTimedOut, timeout),
-                        ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.WaitForMessageTimedOut, timeout),
+                            ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
+                        )
+                    );
             }
 
             try
@@ -71,12 +73,14 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             if (!this.sourceLock.TryEnter(timeoutHelper.RemainingTime()))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(
-                        SR.GetString(SR.ReceiveTimedOut2, timeout),
-                        ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.ReceiveTimedOut2, timeout),
+                            ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
+                        )
+                    );
             }
 
             try
@@ -109,11 +113,9 @@ namespace System.ServiceModel.Channels
                 this.timeoutHelper = new TimeoutHelper(timeout);
 
                 if (
-                    !syncSource.sourceLock.EnterAsync(
-                        this.timeoutHelper.RemainingTime(),
-                        onEnterComplete,
-                        this
-                    )
+                    !syncSource
+                        .sourceLock
+                        .EnterAsync(this.timeoutHelper.RemainingTime(), onEnterComplete, this)
                 )
                 {
                     return;

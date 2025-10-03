@@ -115,10 +115,9 @@ namespace System.Data.Services.Client
                 return this.Visit(original);
             }
 
-            var nullCheck = ResourceBinder.PatternRules.MatchNullCheck(
-                this.pathBuilder.LambdaParameterInScope,
-                conditional
-            );
+            var nullCheck = ResourceBinder
+                .PatternRules
+                .MatchNullCheck(this.pathBuilder.LambdaParameterInScope, conditional);
             if (
                 !nullCheck.Match
                 || !ClientType.CheckElementTypeIsEntity(nullCheck.AssignExpression.Type)
@@ -837,8 +836,8 @@ namespace System.Data.Services.Client
 
             if (result != null)
             {
-                ConstructorInfo constructorInfo = nex
-                    .Type.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
+                ConstructorInfo constructorInfo = nex.Type
+                    .GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
                     .First(c =>
                         c.GetParameters().Length == 7
                         && c.GetParameters()[0].ParameterType == typeof(object)

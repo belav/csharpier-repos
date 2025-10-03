@@ -42,11 +42,9 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_ReturnsTheModel_WhenIdIsValid(string apiId)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
             Assert.NotNull(model);
             Assert.Same(model, config.GetHelpPageApiModel(apiId));
@@ -66,11 +64,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             // string is parsed.
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             // Act
             HelpPageApiModel model = config.GetHelpPageApiModel("GET-Values_point");
@@ -109,11 +105,13 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             // Arrange
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{unused}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute(
+                    "Default",
+                    "{controller}/{unused}/{id}",
+                    new { id = RouteParameter.Optional }
+                );
 
             // Act
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
@@ -136,11 +134,9 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_ReturnsNull_WhenIdIsInvalid(string apiId)
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
             Assert.Null(model);
         }
@@ -161,11 +157,9 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_HandlesException_ThrownDuringSampleGeneration()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             Mock<HelpPageSampleGenerator> faultyGenerator = new Mock<HelpPageSampleGenerator>();
             faultyGenerator
                 .Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>()))
@@ -190,11 +184,9 @@ namespace WebApiHelpPageWebHost.UnitTest
             config.Formatters.Clear();
             config.Formatters.Add(new JQueryMvcFormUrlEncodedFormatter());
             config.SetSampleObjects(new Dictionary<Type, object> { { typeof(string), "sample" } });
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             HelpPageApiModel model = config.GetHelpPageApiModel("Post-Values");
             Assert.NotNull(model);
             Assert.NotEmpty(model.ErrorMessages);
@@ -208,11 +200,9 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetHelpPageApiModel_UnwrapsAggregateException()
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
             Mock<HelpPageSampleGenerator> faultyGenerator = new Mock<HelpPageSampleGenerator>();
             faultyGenerator
                 .Setup(g => g.GetSample(It.IsAny<ApiDescription>(), It.IsAny<SampleDirection>()))
@@ -246,11 +236,9 @@ namespace WebApiHelpPageWebHost.UnitTest
         )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute(
-                "Default",
-                "{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
+            config
+                .Routes
+                .MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional });
 
             HelpPageApiModel model = config.GetHelpPageApiModel(apiId);
 

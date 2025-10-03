@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Classification
             if (lastSemanticVersion != null)
             {
                 var currentSemanticVersion = await document
-                    .Project.GetDependentSemanticVersionAsync(cancellationToken)
+                    .Project
+                    .GetDependentSemanticVersionAsync(cancellationToken)
                     .ConfigureAwait(false);
                 if (lastSemanticVersion.Value != currentSemanticVersion)
                 {
@@ -218,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Classification
                         context.AddTag(Convert(typeMap, snapshotSpan.Snapshot, span));
 
                     var version = await document
-                        .Project.GetDependentSemanticVersionAsync(cancellationToken)
+                        .Project
+                        .GetDependentSemanticVersionAsync(cancellationToken)
                         .ConfigureAwait(false);
 
                     // Let the context know that this was the span we actually tried to tag.

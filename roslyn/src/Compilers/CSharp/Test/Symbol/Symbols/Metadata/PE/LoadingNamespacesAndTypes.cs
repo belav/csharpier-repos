@@ -197,11 +197,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.NotNull((someName[0] as NamespaceSymbol));
 
             var someName1_1 = module0
-                .GlobalNamespace.GetTypeMembers("somEnamE1")
+                .GlobalNamespace
+                .GetTypeMembers("somEnamE1")
                 .OrderBy((t) => t.Name)
                 .ToArray();
             var someName1_2 = module0
-                .GlobalNamespace.GetTypeMembers("SomeName1")
+                .GlobalNamespace
+                .GetTypeMembers("SomeName1")
                 .OrderBy((t) => t.Name)
                 .ToArray();
 
@@ -212,12 +214,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.NotEqual(someName1_1[0], someName1_2[0]);
 
             var someName2_1 = module0
-                .GlobalNamespace.GetMembers("somEnamE2")
+                .GlobalNamespace
+                .GetMembers("somEnamE2")
                 .OfType<NamespaceSymbol>()
                 .OrderBy((t) => t.Name)
                 .ToArray();
             var someName2_2 = module0
-                .GlobalNamespace.GetMembers("SomeName2")
+                .GlobalNamespace
+                .GetMembers("SomeName2")
                 .OfType<NamespaceSymbol>()
                 .OrderBy((t) => t.Name)
                 .ToArray();

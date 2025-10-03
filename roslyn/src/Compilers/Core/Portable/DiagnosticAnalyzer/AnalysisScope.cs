@@ -440,10 +440,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (
                     filterFile.AdditionalFile == null
-                    || !PathUtilities.Comparer.Equals(
-                        externalFileLocation.GetLineSpan().Path,
-                        filterFile.AdditionalFile.Path
-                    )
+                    || !PathUtilities
+                        .Comparer
+                        .Equals(
+                            externalFileLocation.GetLineSpan().Path,
+                            filterFile.AdditionalFile.Path
+                        )
                 )
                 {
                     return false;

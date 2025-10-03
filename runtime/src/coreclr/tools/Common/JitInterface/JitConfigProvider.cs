@@ -68,7 +68,8 @@ namespace Internal.JitInterface
                         libHandle = NativeLibrary.Load(
                             "jitinterface_"
                                 + RuntimeInformation
-                                    .ProcessArchitecture.ToString()
+                                    .ProcessArchitecture
+                                    .ToString()
                                     .ToLowerInvariant(),
                             assembly,
                             searchPath

@@ -43,19 +43,21 @@ namespace System.IdentityModel.Tokens
             : base(samlSubject)
         {
             if (samlActions == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlActions")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlActions"));
 
             foreach (SamlAction action in samlActions)
             {
                 if (action == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SAMLEntityCannotBeNullOrEmpty,
-                            XD.SamlDictionary.Action.Value
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SAMLEntityCannotBeNullOrEmpty,
+                                XD.SamlDictionary.Action.Value
+                            )
+                        );
 
                 this.actions.Add(action);
             }
@@ -83,9 +85,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.accessDecision = value;
             }
@@ -97,9 +101,11 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 this.evidence = value;
             }
@@ -111,14 +117,18 @@ namespace System.IdentityModel.Tokens
             set
             {
                 if (isReadOnly)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                        );
 
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SAMLAuthorizationDecisionResourceRequired)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(SR.SAMLAuthorizationDecisionResourceRequired)
+                        );
 
                 this.resource = value;
             }
@@ -150,9 +160,9 @@ namespace System.IdentityModel.Tokens
         protected override void AddClaimsToList(IList<Claim> claims)
         {
             if (claims == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("claims")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("claims"));
 
             for (int i = 0; i < this.actions.Count; ++i)
             {
@@ -174,23 +184,31 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (this.SamlSubject == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.SAMLSubjectStatementRequiresSubject))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLSubjectStatementRequiresSubject)
+                        )
+                    );
 
             if (string.IsNullOrEmpty(this.resource))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAuthorizationDecisionResourceRequired)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAuthorizationDecisionResourceRequired)
+                        )
+                    );
 
             if (this.actions.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAuthorizationDecisionShouldHaveOneAction)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAuthorizationDecisionShouldHaveOneAction)
+                        )
+                    );
         }
 
         public override void ReadXml(
@@ -201,37 +219,41 @@ namespace System.IdentityModel.Tokens
         )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("reader")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("reader"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
             this.resource = reader.GetAttribute(dictionary.Resource, null);
             if (string.IsNullOrEmpty(this.resource))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SAMLAuthorizationDecisionStatementMissingResourceAttributeOnRead
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SAMLAuthorizationDecisionStatementMissingResourceAttributeOnRead
+                            )
                         )
-                    )
-                );
+                    );
 
             string decisionString = reader.GetAttribute(dictionary.Decision, null);
             if (string.IsNullOrEmpty(decisionString))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(
-                            SR.SAMLAuthorizationDecisionStatementMissingDecisionAttributeOnRead
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.SAMLAuthorizationDecisionStatementMissingDecisionAttributeOnRead
+                            )
                         )
-                    )
-                );
+                    );
 
             if (
                 decisionString.Equals(
@@ -260,11 +282,13 @@ namespace System.IdentityModel.Tokens
                 base.SamlSubject = subject;
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAuthorizationDecisionStatementMissingSubjectOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAuthorizationDecisionStatementMissingSubjectOnRead)
+                        )
+                    );
 
             while (reader.IsStartElement())
             {
@@ -282,11 +306,13 @@ namespace System.IdentityModel.Tokens
                 else if (reader.IsStartElement(dictionary.Evidence, dictionary.Namespace))
                 {
                     if (this.evidence != null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(
-                                SR.GetString(SR.SAMLAuthorizationDecisionHasMoreThanOneEvidence)
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenException(
+                                    SR.GetString(SR.SAMLAuthorizationDecisionHasMoreThanOneEvidence)
+                                )
+                            );
 
                     this.evidence = new SamlEvidence();
                     this.evidence.ReadXml(
@@ -297,22 +323,26 @@ namespace System.IdentityModel.Tokens
                     );
                 }
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityTokenException(
-                            SR.GetString(
-                                SR.SAMLBadSchema,
-                                dictionary.AuthorizationDecisionStatement
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.SAMLBadSchema,
+                                    dictionary.AuthorizationDecisionStatement
+                                )
                             )
-                        )
-                    );
+                        );
             }
 
             if (this.actions.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(
-                        SR.GetString(SR.SAMLAuthorizationDecisionShouldHaveOneActionOnRead)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.SAMLAuthorizationDecisionShouldHaveOneActionOnRead)
+                        )
+                    );
 
             reader.MoveToContent();
             reader.ReadEndElement();
@@ -327,14 +357,14 @@ namespace System.IdentityModel.Tokens
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("writer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("writer"));
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("samlSerializer")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("samlSerializer"));
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;

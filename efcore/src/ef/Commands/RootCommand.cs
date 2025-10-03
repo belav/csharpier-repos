@@ -69,6 +69,7 @@ internal partial class RootCommand : HelpCommandBase
 
     private static string GetVersion() =>
         typeof(RootCommand)
-            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
+            .Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()!
             .InformationalVersion;
 }

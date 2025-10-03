@@ -249,10 +249,13 @@ namespace System.Xml.Serialization
 
         private void ConvertNullableValue(Type nullableType, Type targetType)
         {
-            System.Diagnostics.Debug.Assert(
-                targetType == nullableType
-                    || targetType.IsAssignableFrom(nullableType.GetGenericArguments()[0])
-            );
+            System
+                .Diagnostics
+                .Debug
+                .Assert(
+                    targetType == nullableType
+                        || targetType.IsAssignableFrom(nullableType.GetGenericArguments()[0])
+                );
             if (targetType != nullableType)
             {
                 MethodInfo Nullable_get_Value = nullableType.GetMethod(

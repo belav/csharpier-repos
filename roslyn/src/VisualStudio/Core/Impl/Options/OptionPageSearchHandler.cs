@@ -91,16 +91,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 var lastPartLength = length - firstPartLength - 1;
 
                 if (firstPartLength > 0)
-                    textBlock.Inlines.Add(
-                        CreateRun(start, firstPartLength, highlight, underline: false)
-                    );
+                    textBlock
+                        .Inlines
+                        .Add(CreateRun(start, firstPartLength, highlight, underline: false));
 
                 textBlock.Inlines.Add(CreateRun(_accessKeyIndex, 1, highlight, underline: true));
 
                 if (lastPartLength > 0)
-                    textBlock.Inlines.Add(
-                        CreateRun(_accessKeyIndex + 1, lastPartLength, highlight, underline: false)
-                    );
+                    textBlock
+                        .Inlines
+                        .Add(
+                            CreateRun(
+                                _accessKeyIndex + 1,
+                                lastPartLength,
+                                highlight,
+                                underline: false
+                            )
+                        );
             }
             else
             {

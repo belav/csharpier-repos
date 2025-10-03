@@ -113,14 +113,16 @@ namespace System.IdentityModel.Selectors
                     string name = x509Token.Certificate.GetNameInfo(X509NameType.UpnName, false);
                     if (string.IsNullOrEmpty(name))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenValidationException(
-                                SR.GetString(
-                                    SR.InvalidNtMapping,
-                                    SecurityUtils.GetCertificateId(x509Token.Certificate)
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new SecurityTokenValidationException(
+                                    SR.GetString(
+                                        SR.InvalidNtMapping,
+                                        SecurityUtils.GetCertificateId(x509Token.Certificate)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     }
 
                     using (
@@ -222,9 +224,11 @@ namespace System.IdentityModel.Selectors
                     }
                     if (status < 0) // non-negative numbers indicate success
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
+                            );
                     }
                 }
                 finally
@@ -276,9 +280,11 @@ namespace System.IdentityModel.Selectors
                 );
                 if (status < 0) // non-negative numbers indicate success
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
+                        );
                 }
 
                 // source context
@@ -286,9 +292,9 @@ namespace System.IdentityModel.Selectors
                 if (!NativeMethods.AllocateLocallyUniqueId(out sourceContext.SourceIdentifier))
                 {
                     int dwErrorCode = Marshal.GetLastWin32Error();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(dwErrorCode)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(dwErrorCode));
                 }
 
                 // SourceContext
@@ -346,15 +352,19 @@ namespace System.IdentityModel.Selectors
                 }
                 if (status < 0) // non-negative numbers indicate success
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(NativeMethods.LsaNtStatusToWinError(status))
+                        );
                 }
                 if (subStatus < 0) // non-negative numbers indicate success
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(NativeMethods.LsaNtStatusToWinError(subStatus))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new Win32Exception(NativeMethods.LsaNtStatusToWinError(subStatus))
+                        );
                 }
 
                 return new WindowsIdentity(

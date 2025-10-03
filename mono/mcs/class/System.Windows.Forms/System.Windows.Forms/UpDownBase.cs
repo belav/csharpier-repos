@@ -134,18 +134,12 @@ namespace System.Windows.Forms
                     top_button_state = VisualStyles.PushButtonState.Disabled;
                     bottom_button_state = VisualStyles.PushButtonState.Disabled;
                 }
-                ThemeEngine.Current.UpDownBaseDrawButton(
-                    graphics,
-                    top_button_rect,
-                    true,
-                    top_button_state
-                );
-                ThemeEngine.Current.UpDownBaseDrawButton(
-                    graphics,
-                    bottom_button_rect,
-                    false,
-                    bottom_button_state
-                );
+                ThemeEngine
+                    .Current
+                    .UpDownBaseDrawButton(graphics, top_button_rect, true, top_button_state);
+                ThemeEngine
+                    .Current
+                    .UpDownBaseDrawButton(graphics, bottom_button_rect, false, bottom_button_state);
             }
 
             private void tmrRepeat_Tick(object sender, EventArgs e)

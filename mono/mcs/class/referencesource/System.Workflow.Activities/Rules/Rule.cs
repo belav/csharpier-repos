@@ -165,21 +165,25 @@ namespace System.Workflow.Activities.Rules
             int oldErrorCount = validation.Errors.Count;
 
             if (string.IsNullOrEmpty(name))
-                validation.Errors.Add(
-                    new ValidationError(
-                        Messages.RuleNameMissing,
-                        ErrorNumbers.Error_InvalidConditionName
-                    )
-                );
+                validation
+                    .Errors
+                    .Add(
+                        new ValidationError(
+                            Messages.RuleNameMissing,
+                            ErrorNumbers.Error_InvalidConditionName
+                        )
+                    );
 
             // check the condition
             if (condition == null)
-                validation.Errors.Add(
-                    new ValidationError(
-                        Messages.MissingRuleCondition,
-                        ErrorNumbers.Error_MissingRuleCondition
-                    )
-                );
+                validation
+                    .Errors
+                    .Add(
+                        new ValidationError(
+                            Messages.MissingRuleCondition,
+                            ErrorNumbers.Error_MissingRuleCondition
+                        )
+                    );
             else
                 condition.Validate(validation);
 
@@ -238,13 +242,15 @@ namespace System.Workflow.Activities.Rules
             if (statementsAfterHalt)
             {
                 // one or more actions after Halt
-                validator.Errors.Add(
-                    new ValidationError(
-                        Messages.UnreachableCodeHalt,
-                        ErrorNumbers.Warning_UnreachableCode,
-                        true
-                    )
-                );
+                validator
+                    .Errors
+                    .Add(
+                        new ValidationError(
+                            Messages.UnreachableCodeHalt,
+                            ErrorNumbers.Warning_UnreachableCode,
+                            true
+                        )
+                    );
             }
         }
 

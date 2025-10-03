@@ -29,7 +29,10 @@ public class LspWorkspaceRegistrationServiceTests : AbstractLanguageServerProtoc
         )
         {
             registrationService = (TestWorkspaceRegistrationService)
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<LspWorkspaceRegistrationService>();
+                testLspServer
+                    .TestWorkspace
+                    .ExportProvider
+                    .GetExportedValue<LspWorkspaceRegistrationService>();
         }
 
         Assert.Empty(registrationService.GetAllRegistrations());

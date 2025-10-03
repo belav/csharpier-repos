@@ -263,14 +263,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
             element.Add(
                 new XElement(
                     "Captures",
-                    tree.CaptureNumbersToSpan.OrderBy(kvp => kvp.Key)
+                    tree.CaptureNumbersToSpan
+                        .OrderBy(kvp => kvp.Key)
                         .Select(kvp => new XElement(
                             "Capture",
                             new XAttribute("Name", kvp.Key),
                             new XAttribute("Span", kvp.Value),
                             GetTextAttribute(text, kvp.Value)
                         )),
-                    tree.CaptureNamesToSpan.OrderBy(kvp => kvp.Key)
+                    tree.CaptureNamesToSpan
+                        .OrderBy(kvp => kvp.Key)
                         .Select(kvp => new XElement(
                             "Capture",
                             new XAttribute("Name", kvp.Key),

@@ -26,38 +26,44 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         {
             var project = ProjectName;
             var csProject = "CSProject";
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "test1.vb",
-                open: false,
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "test1.vb",
+                    open: false,
+                    contents: @"
 Class FirstClass
     Sub FirstMethod()
     End Sub
 End Class",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
-            await TestServices.SolutionExplorer.AddFileAsync(
-                project,
-                "test2.vb",
-                open: true,
-                contents: @"
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    project,
+                    "test2.vb",
+                    open: true,
+                    contents: @"
 ",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             await TestServices.Shell.ShowNavigateToDialogAsync(HangMitigatingCancellationToken);
-            await TestServices.Input.SendToNavigateToAsync(
-                ["FirstMethod", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendToNavigateToAsync(
+                    ["FirstMethod", VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
             await TestServices.Workarounds.WaitForNavigationAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(
                 $"test1.vb",
-                await TestServices.Shell.GetActiveWindowCaptionAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 "FirstMethod",
@@ -65,31 +71,37 @@ End Class",
             );
 
             // Verify C# files are found when navigating from VB
-            await TestServices.SolutionExplorer.AddProjectAsync(
-                csProject,
-                WellKnownProjectTemplates.ClassLibrary,
-                LanguageNames.CSharp,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.SolutionExplorer.AddFileAsync(
-                csProject,
-                "csfile.cs",
-                open: true,
-                cancellationToken: HangMitigatingCancellationToken
-            );
+            await TestServices
+                .SolutionExplorer
+                .AddProjectAsync(
+                    csProject,
+                    WellKnownProjectTemplates.ClassLibrary,
+                    LanguageNames.CSharp,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .SolutionExplorer
+                .AddFileAsync(
+                    csProject,
+                    "csfile.cs",
+                    open: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
 
             await TestServices.Shell.ShowNavigateToDialogAsync(HangMitigatingCancellationToken);
-            await TestServices.Input.SendToNavigateToAsync(
-                ["FirstClass", VirtualKeyCode.RETURN],
-                HangMitigatingCancellationToken
-            );
+            await TestServices
+                .Input
+                .SendToNavigateToAsync(
+                    ["FirstClass", VirtualKeyCode.RETURN],
+                    HangMitigatingCancellationToken
+                );
             await TestServices.Workarounds.WaitForNavigationAsync(HangMitigatingCancellationToken);
 
             Assert.Equal(
                 $"test1.vb",
-                await TestServices.Shell.GetActiveWindowCaptionAsync(
-                    HangMitigatingCancellationToken
-                )
+                await TestServices
+                    .Shell
+                    .GetActiveWindowCaptionAsync(HangMitigatingCancellationToken)
             );
             Assert.Equal(
                 "FirstClass",

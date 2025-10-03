@@ -36,14 +36,16 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
             await SetUpEditorAsync(testCode, HangMitigatingCancellationToken);
 
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"Module A
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"Module A
     Sub Main(args As String())
 
     End Sub
 End Module",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -56,12 +58,14 @@ end module",
                 HangMitigatingCancellationToken
             );
             await TestServices.Editor.FormatDocumentAsync(HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"
 Module A
 End Module",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
 
         [IdeFact]
@@ -76,24 +80,30 @@ Module Program
 End Module",
                 HangMitigatingCancellationToken
             );
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(
-                FeatureAttribute.Workspace,
-                HangMitigatingCancellationToken
-            );
-            await TestServices.Input.SendAsync(
-                ["(o", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "'comment"],
-                HangMitigatingCancellationToken
-            );
-            await TestServices.EditorVerifier.TextContainsAsync(
-                @"
+            await TestServices
+                .Workspace
+                .WaitForAsyncOperationsAsync(
+                    FeatureAttribute.Workspace,
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .Input
+                .SendAsync(
+                    ["(o", (VirtualKeyCode.RETURN, VirtualKeyCode.SHIFT), "'comment"],
+                    HangMitigatingCancellationToken
+                );
+            await TestServices
+                .EditorVerifier
+                .TextContainsAsync(
+                    @"
 Module Program
     Function Main(ooo As Object) As Object
         Return Main(ooo)
         'comment
     End Function
 End Module",
-                cancellationToken: HangMitigatingCancellationToken
-            );
+                    cancellationToken: HangMitigatingCancellationToken
+                );
         }
     }
 }

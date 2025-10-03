@@ -862,9 +862,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         // Call Back Paint event
                         if (!selection)
                         {
-                            common.Chart.CallOnPrePaint(
-                                new ChartPaintEventArgs(ser, graph, common, area.PlotAreaPosition)
-                            );
+                            common
+                                .Chart
+                                .CallOnPrePaint(
+                                    new ChartPaintEventArgs(
+                                        ser,
+                                        graph,
+                                        common,
+                                        area.PlotAreaPosition
+                                    )
+                                );
                         }
 
                         // Change Y value if Bar is out of plot area
@@ -1092,12 +1099,9 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             // ***************************************************
                             if (common.ProcessModeRegions && !shadow && !labels)
                             {
-                                common.HotRegionsList.AddHotRegion(
-                                    rectSize,
-                                    point,
-                                    ser.Name,
-                                    pointIndx
-                                );
+                                common
+                                    .HotRegionsList
+                                    .AddHotRegion(rectSize, point, ser.Name, pointIndx);
 
                                 // Process labels and markers regions only if it was not done while painting
                                 if (labels && !common.ProcessModePaint)
@@ -1117,14 +1121,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                             // Call Paint event
                             if (!selection)
                             {
-                                common.Chart.CallOnPostPaint(
-                                    new ChartPaintEventArgs(
-                                        ser,
-                                        graph,
-                                        common,
-                                        area.PlotAreaPosition
-                                    )
-                                );
+                                common
+                                    .Chart
+                                    .CallOnPostPaint(
+                                        new ChartPaintEventArgs(
+                                            ser,
+                                            graph,
+                                            common,
+                                            area.PlotAreaPosition
+                                        )
+                                    );
                             }
                         }
 
@@ -1918,14 +1924,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
 
                     if (common.ProcessModeRegions && !drawLabels)
                     {
-                        common.HotRegionsList.AddHotRegion(
-                            rectPath,
-                            false,
-                            graph,
-                            point,
-                            ser.Name,
-                            pointEx.index - 1
-                        );
+                        common
+                            .HotRegionsList
+                            .AddHotRegion(
+                                rectPath,
+                                false,
+                                graph,
+                                point,
+                                ser.Name,
+                                pointEx.index - 1
+                            );
                     }
                     if (rectPath != null)
                     {

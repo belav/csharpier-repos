@@ -179,9 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
                     newReturnType = knownTypes.IAsyncEnumerableOfTTypeOpt is null
                         ? MakeGenericType(nameof(IAsyncEnumerable<int>), methodSymbol.ReturnType)
                         : knownTypes
-                            .IAsyncEnumerableOfTTypeOpt.Construct(
-                                methodSymbol.ReturnType.GetTypeArguments()[0]
-                            )
+                            .IAsyncEnumerableOfTTypeOpt
+                            .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                             .GenerateTypeSyntax();
                 }
                 else if (
@@ -192,9 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
                     newReturnType = knownTypes.IAsyncEnumeratorOfTTypeOpt is null
                         ? MakeGenericType(nameof(IAsyncEnumerator<int>), methodSymbol.ReturnType)
                         : knownTypes
-                            .IAsyncEnumeratorOfTTypeOpt.Construct(
-                                methodSymbol.ReturnType.GetTypeArguments()[0]
-                            )
+                            .IAsyncEnumeratorOfTTypeOpt
+                            .Construct(methodSymbol.ReturnType.GetTypeArguments()[0])
                             .GenerateTypeSyntax();
                 }
                 else if (IsIAsyncEnumerableOrEnumerator(returnType, knownTypes))
@@ -206,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
                     // If it's not already Task-like, then wrap the existing return type
                     // in Task<>.
                     newReturnType = knownTypes
-                        .TaskOfTType!.Construct(methodSymbol.ReturnType)
+                        .TaskOfTType!
+                        .Construct(methodSymbol.ReturnType)
                         .GenerateTypeSyntax();
                 }
             }
@@ -231,10 +230,13 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMethodAsynchronous
         }
 
         private static bool IsIterator(IMethodSymbol method, CancellationToken cancellationToken) =>
-            method.Locations.Any(
-                static (loc, cancellationToken) => loc.FindNode(cancellationToken).ContainsYield(),
-                cancellationToken
-            );
+            method
+                .Locations
+                .Any(
+                    static (loc, cancellationToken) =>
+                        loc.FindNode(cancellationToken).ContainsYield(),
+                    cancellationToken
+                );
 
         private static bool IsIAsyncEnumerableOrEnumerator(
             ITypeSymbol returnType,

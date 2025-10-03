@@ -54,10 +54,12 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 if (boundSuccessfully)
                 {
                     // run validation and return the model
-                    newBindingContext.ValidationNode.Validate(
-                        controllerContext,
-                        null /* parentNode */
-                    );
+                    newBindingContext
+                        .ValidationNode
+                        .Validate(
+                            controllerContext,
+                            null /* parentNode */
+                        );
                     return newBindingContext.Model;
                 }
             }
@@ -69,7 +71,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
         {
             if (
                 bindingContext
-                    .ModelType.GetProperties()
+                    .ModelType
+                    .GetProperties()
                     .Select(p => p.Name)
                     .Any(name => !bindingContext.PropertyFilter(name))
             )

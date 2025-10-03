@@ -67,10 +67,13 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             finally
             {
-                System.Diagnostics.Debug.Assert(
-                    manager.Context.Current == activity,
-                    "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Assert(
+                        manager.Context.Current == activity,
+                        "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
+                    );
                 manager.Context.Pop();
             }
 

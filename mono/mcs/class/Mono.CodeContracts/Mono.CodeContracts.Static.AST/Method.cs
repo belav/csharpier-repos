@@ -244,8 +244,9 @@ namespace Mono.CodeContracts.Static.AST
             get
             {
                 if (this.parameters == null)
-                    this.parameters = this
-                        .definition.Parameters.Select(i => new Parameter(i))
+                    this.parameters = this.definition
+                        .Parameters
+                        .Select(i => new Parameter(i))
                         .ToList();
                 return this.parameters;
             }

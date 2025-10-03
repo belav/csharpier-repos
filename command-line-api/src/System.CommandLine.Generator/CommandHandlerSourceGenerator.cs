@@ -113,7 +113,8 @@ namespace System.CommandLine
             );
             foreach (
                 var propertyAssignment in invocation
-                    .Parameters.Select(x => x.GetPropertyAssignment())
+                    .Parameters
+                    .Select(x => x.GetPropertyAssignment())
                     .Where(x => !string.IsNullOrWhiteSpace(x))
             )
             {
@@ -132,7 +133,8 @@ namespace System.CommandLine
 
             foreach (
                 var propertyDeclaration in invocation
-                    .Parameters.Select(x => x.GetPropertyDeclaration())
+                    .Parameters
+                    .Select(x => x.GetPropertyDeclaration())
                     .Where(x => !string.IsNullOrWhiteSpace(x))
             )
             {
@@ -168,7 +170,8 @@ namespace System.CommandLine
         )
         {
             return invocation
-                .Parameters.Select(x => x.GetMethodParameter())
+                .Parameters
+                .Select(x => x.GetMethodParameter())
                 .Where(x => !string.IsNullOrWhiteSpace(x.Name))
                 .ToArray();
         }

@@ -34,14 +34,14 @@ namespace System.ServiceModel
         )
         {
             if (primaryCertificate == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "primaryCertificate"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("primaryCertificate");
 
             if (supportingCertificates == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "supportingCertificates"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("supportingCertificates");
 
             base.Initialize(
                 new Claim(
@@ -66,15 +66,17 @@ namespace System.ServiceModel
 
             reader.MoveToContent();
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.UnexpectedEmptyElementExpectingClaim,
-                            XD.AddressingDictionary.X509v3Certificate.Value,
-                            XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.UnexpectedEmptyElementExpectingClaim,
+                                XD.AddressingDictionary.X509v3Certificate.Value,
+                                XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                            )
                         )
-                    )
-                );
+                    );
 
             reader.ReadStartElement(
                 XD.XmlSignatureDictionary.X509Data,
@@ -109,15 +111,17 @@ namespace System.ServiceModel
             reader.ReadEndElement();
 
             if (this.certificateCollection.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(
-                        SR.GetString(
-                            SR.UnexpectedEmptyElementExpectingClaim,
-                            XD.AddressingDictionary.X509v3Certificate.Value,
-                            XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.UnexpectedEmptyElementExpectingClaim,
+                                XD.AddressingDictionary.X509v3Certificate.Value,
+                                XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         public X509Certificate2Collection Certificates

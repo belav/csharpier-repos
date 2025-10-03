@@ -338,12 +338,14 @@ namespace System.Data.OleDb
                 {
                     throw ODB.TransactionsNotSupported(Provider, null);
                 }
-                transactionJoin.Value.JoinTransaction(
-                    oleTxTransaction,
-                    (int)IsolationLevel.Unspecified,
-                    0,
-                    IntPtr.Zero
-                );
+                transactionJoin
+                    .Value
+                    .JoinTransaction(
+                        oleTxTransaction,
+                        (int)IsolationLevel.Unspecified,
+                        0,
+                        IntPtr.Zero
+                    );
                 _unEnlistDuringDeactivate = (null != transaction);
             }
             EnlistedTransaction = transaction;

@@ -216,8 +216,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler =
-                workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(
+            var handler = workspace
+                .ExportProvider
+                .GetCommandHandler<EncapsulateFieldCommandHandler>(
                     PredefinedCommandHandlerNames.EncapsulateField,
                     ContentTypeNames.CSharpContentType
                 );

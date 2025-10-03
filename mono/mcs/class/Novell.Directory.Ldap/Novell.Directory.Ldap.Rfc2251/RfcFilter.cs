@@ -587,9 +587,10 @@ namespace Novell.Directory.Ldap.Rfc2251
                             {
                                 // char > 0x7f, could be encoded in 2 or 3 bytes
                                 ca[0] = ch;
-                                System.Text.Encoding encoder = System.Text.Encoding.GetEncoding(
-                                    "utf-8"
-                                );
+                                System.Text.Encoding encoder = System
+                                    .Text
+                                    .Encoding
+                                    .GetEncoding("utf-8");
                                 byte[] ibytes = encoder.GetBytes(new System.String(ca));
                                 utf8Bytes = SupportClass.ToSByteArray(ibytes);
 
@@ -611,9 +612,10 @@ namespace Novell.Directory.Ldap.Rfc2251
                             // found invalid character
                             System.String escString = "";
                             ca[0] = ch;
-                            System.Text.Encoding encoder = System.Text.Encoding.GetEncoding(
-                                "utf-8"
-                            );
+                            System.Text.Encoding encoder = System
+                                .Text
+                                .Encoding
+                                .GetEncoding("utf-8");
                             byte[] ibytes = encoder.GetBytes(new System.String(ca));
                             utf8Bytes = SupportClass.ToSByteArray(ibytes);
 

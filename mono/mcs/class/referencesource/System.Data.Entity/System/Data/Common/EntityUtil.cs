@@ -197,10 +197,14 @@ namespace System.Data
             if (!EntityUtil.TryGetICollectionElementType(propertyType, out elementType))
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.PocoEntityWrapper_UnexpectedTypeForNavigationProperty(
-                        propertyType.FullName,
-                        typeof(ICollection<>)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .PocoEntityWrapper_UnexpectedTypeForNavigationProperty(
+                            propertyType.FullName,
+                            typeof(ICollection<>)
+                        )
                 );
             }
             return elementType;
@@ -229,10 +233,14 @@ namespace System.Data
             if (requestedType.IsArray)
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.ObjectQuery_UnableToMaterializeArray(
-                        requestedType,
-                        typeof(List<>).MakeGenericType(elementType)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .ObjectQuery_UnableToMaterializeArray(
+                            requestedType,
+                            typeof(List<>).MakeGenericType(elementType)
+                        )
                 );
             }
 
@@ -560,19 +568,25 @@ namespace System.Data
         )
         {
             return IndexOutOfRange(
-                System.Data.Entity.Strings.ADP_InvalidBufferSizeOrIndex(
-                    numBytes.ToString(CultureInfo.InvariantCulture),
-                    bufferIndex.ToString(CultureInfo.InvariantCulture)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidBufferSizeOrIndex(
+                        numBytes.ToString(CultureInfo.InvariantCulture),
+                        bufferIndex.ToString(CultureInfo.InvariantCulture)
+                    )
             );
         }
 
         internal static IndexOutOfRangeException InvalidDataLength(long length)
         {
             return IndexOutOfRange(
-                System.Data.Entity.Strings.ADP_InvalidDataLength(
-                    length.ToString(CultureInfo.InvariantCulture)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidDataLength(length.ToString(CultureInfo.InvariantCulture))
             );
         }
 
@@ -583,10 +597,14 @@ namespace System.Data
         )
         {
             return ArgumentOutOfRange(
-                System.Data.Entity.Strings.ADP_InvalidDestinationBufferIndex(
-                    maxLen.ToString(CultureInfo.InvariantCulture),
-                    dstOffset.ToString(CultureInfo.InvariantCulture)
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidDestinationBufferIndex(
+                        maxLen.ToString(CultureInfo.InvariantCulture),
+                        dstOffset.ToString(CultureInfo.InvariantCulture)
+                    ),
                 parameterName
             );
         }
@@ -598,10 +616,14 @@ namespace System.Data
         )
         {
             return ArgumentOutOfRange(
-                System.Data.Entity.Strings.ADP_InvalidSourceBufferIndex(
-                    maxLen.ToString(CultureInfo.InvariantCulture),
-                    srcOffset.ToString(CultureInfo.InvariantCulture)
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidSourceBufferIndex(
+                        maxLen.ToString(CultureInfo.InvariantCulture),
+                        srcOffset.ToString(CultureInfo.InvariantCulture)
+                    ),
                 parameterName
             );
         }
@@ -623,21 +645,29 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ADP_NonSequentialChunkAccess(
-                    badIndex.ToString(CultureInfo.InvariantCulture),
-                    currIndex.ToString(CultureInfo.InvariantCulture),
-                    method
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_NonSequentialChunkAccess(
+                        badIndex.ToString(CultureInfo.InvariantCulture),
+                        currIndex.ToString(CultureInfo.InvariantCulture),
+                        method
+                    )
             );
         }
 
         internal static InvalidOperationException NonSequentialColumnAccess(int badCol, int currCol)
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ADP_NonSequentialColumnAccess(
-                    badCol.ToString(CultureInfo.InvariantCulture),
-                    currCol.ToString(CultureInfo.InvariantCulture)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_NonSequentialColumnAccess(
+                        badCol.ToString(CultureInfo.InvariantCulture),
+                        currCol.ToString(CultureInfo.InvariantCulture)
+                    )
             );
         }
 
@@ -659,10 +689,11 @@ namespace System.Data
         )
         {
             return NotSupported(
-                System.Data.Entity.Strings.ADP_NestingNotSupported(
-                    parentOp.OpType.ToString(),
-                    childOp.OpType.ToString()
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_NestingNotSupported(parentOp.OpType.ToString(), childOp.OpType.ToString())
             );
         }
 
@@ -684,10 +715,11 @@ namespace System.Data
         )
         {
             return CommandExecution(
-                System.Data.Entity.Strings.ADP_InvalidDataReaderMissingColumnForType(
-                    currentType.FullName,
-                    member.Name
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidDataReaderMissingColumnForType(currentType.FullName, member.Name)
             );
         }
 
@@ -697,10 +729,14 @@ namespace System.Data
         )
         {
             return CommandExecution(
-                System.Data.Entity.Strings.ADP_InvalidDataReaderMissingDiscriminatorColumn(
-                    columnName,
-                    functionImport.FullName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidDataReaderMissingDiscriminatorColumn(
+                        columnName,
+                        functionImport.FullName
+                    )
             );
         }
 
@@ -920,9 +956,11 @@ namespace System.Data
         internal static ArgumentException InvalidEDMVersion(double edmVersion)
         {
             return Argument(
-                System.Data.Entity.Strings.InvalidEDMVersion(
-                    edmVersion.ToString(CultureInfo.CurrentCulture)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .InvalidEDMVersion(edmVersion.ToString(CultureInfo.CurrentCulture))
             );
         }
 
@@ -945,10 +983,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.MinAndMaxValueMustBeSameForConstantFacet(
-                    facetName,
-                    typeName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .MinAndMaxValueMustBeSameForConstantFacet(facetName, typeName)
             );
         }
 
@@ -968,10 +1007,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.BothMinAndMaxValueMustBeSpecifiedForNonConstantFacet(
-                    facetName,
-                    typeName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .BothMinAndMaxValueMustBeSpecifiedForNonConstantFacet(facetName, typeName)
             );
         }
 
@@ -981,10 +1021,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.MinAndMaxValueMustBeDifferentForNonConstantFacet(
-                    facetName,
-                    typeName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .MinAndMaxValueMustBeDifferentForNonConstantFacet(facetName, typeName)
             );
         }
 
@@ -1018,11 +1059,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.TypeNotInEntitySet(
-                    entityTypeName,
-                    rootEntityTypeName,
-                    entitySetName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .TypeNotInEntitySet(entityTypeName, rootEntityTypeName, entitySetName)
             );
         }
 
@@ -1038,11 +1079,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.TypeNotInAssociationSet(
-                    typeName,
-                    rootEntityTypeName,
-                    setName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .TypeNotInAssociationSet(typeName, rootEntityTypeName, setName)
             );
         }
         #endregion //Metadata Errors
@@ -1272,9 +1313,11 @@ namespace System.Data
         internal static ArgumentException InvalidModifiedPropertyName(string propertyName)
         {
             return EntityUtil.Argument(
-                System.Data.Entity.Strings.ObjectStateEntry_SetModifiedOnInvalidProperty(
-                    propertyName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateEntry_SetModifiedOnInvalidProperty(propertyName)
             );
         }
 
@@ -1312,9 +1355,11 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System.Data.Entity.Strings.ObjectStateManager_DoesnotAllowToReAddUnchangedOrModifiedOrDeletedEntity(
-                    state
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateManager_DoesnotAllowToReAddUnchangedOrModifiedOrDeletedEntity(state)
             );
         }
 
@@ -1401,9 +1446,13 @@ namespace System.Data
         internal static InvalidOperationException ObjectDoesNotHaveAKey(object entity)
         {
             return EntityUtil.InvalidOperation(
-                System.Data.Entity.Strings.ObjectStateManager_GetEntityKeyRequiresObjectToHaveAKey(
-                    entity.GetType().FullName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateManager_GetEntityKeyRequiresObjectToHaveAKey(
+                        entity.GetType().FullName
+                    )
             );
         }
 
@@ -1424,19 +1473,25 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System.Data.Entity.Strings.ObjectStateEntry_ChangedInDifferentStateFromChanging(
-                    previousState,
-                    currentState
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateEntry_ChangedInDifferentStateFromChanging(
+                        previousState,
+                        currentState
+                    )
             );
         }
 
         internal static ArgumentException ChangeOnUnmappedProperty(string entityPropertyName)
         {
             return EntityUtil.Argument(
-                System.Data.Entity.Strings.ObjectStateEntry_ChangeOnUnmappedProperty(
-                    entityPropertyName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateEntry_ChangeOnUnmappedProperty(entityPropertyName)
             );
         }
 
@@ -1445,9 +1500,11 @@ namespace System.Data
         )
         {
             return EntityUtil.Argument(
-                System.Data.Entity.Strings.ObjectStateEntry_ChangeOnUnmappedComplexProperty(
-                    complexPropertyName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateEntry_ChangeOnUnmappedComplexProperty(complexPropertyName)
             );
         }
 
@@ -1458,10 +1515,14 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.ObjectStateManager_EntityTypeDoesnotMatchtoEntitySetType(
-                    entityType,
-                    entitysetName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateManager_EntityTypeDoesnotMatchtoEntitySetType(
+                        entityType,
+                        entitysetName
+                    ),
                 argument
             );
         }
@@ -1469,9 +1530,11 @@ namespace System.Data
         internal static InvalidOperationException NoEntryExistsForObject(object entity)
         {
             return EntityUtil.InvalidOperation(
-                System.Data.Entity.Strings.ObjectStateManager_NoEntryExistsForObject(
-                    entity.GetType().FullName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectStateManager_NoEntryExistsForObject(entity.GetType().FullName)
             );
         }
 
@@ -1524,9 +1587,11 @@ namespace System.Data
             else
             {
                 throw EntityUtil.PropertyConstraint(
-                    System.Data.Entity.Strings.Materializer_PropertyIsNotNullableWithName(
-                        propertyName
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Materializer_PropertyIsNotNullableWithName(propertyName),
                     propertyName
                 );
             }
@@ -1542,23 +1607,31 @@ namespace System.Data
             if (null == value)
             {
                 throw EntityUtil.Constraint(
-                    System.Data.Entity.Strings.Materializer_SetInvalidValue(
-                        (Nullable.GetUnderlyingType(destinationType) ?? destinationType).Name,
-                        className,
-                        propertyName,
-                        "null"
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Materializer_SetInvalidValue(
+                            (Nullable.GetUnderlyingType(destinationType) ?? destinationType).Name,
+                            className,
+                            propertyName,
+                            "null"
+                        )
                 );
             }
             else
             {
                 throw EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.Materializer_SetInvalidValue(
-                        (Nullable.GetUnderlyingType(destinationType) ?? destinationType).Name,
-                        className,
-                        propertyName,
-                        value.GetType().Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Materializer_SetInvalidValue(
+                            (Nullable.GetUnderlyingType(destinationType) ?? destinationType).Name,
+                            className,
+                            propertyName,
+                            value.GetType().Name
+                        )
                 );
             }
         }
@@ -1577,19 +1650,24 @@ namespace System.Data
             )
             {
                 return EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.Materializer_InvalidCastNullable(
-                        valueType,
-                        destinationType.GetGenericArguments()[0]
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Materializer_InvalidCastNullable(
+                            valueType,
+                            destinationType.GetGenericArguments()[0]
+                        )
                 );
             }
             else
             {
                 return EntityUtil.InvalidOperation(
-                    System.Data.Entity.Strings.Materializer_InvalidCastReference(
-                        valueType,
-                        destinationType
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Materializer_InvalidCastReference(valueType, destinationType)
                 );
             }
         }
@@ -1609,24 +1687,31 @@ namespace System.Data
         )
         {
             return NotSupported(
-                System.Data.Entity.Strings.Materializer_RecyclingEntity(
-                    System.Data.Common.TypeHelpers.GetFullName(
-                        key.EntityContainerName,
-                        key.EntitySetName
-                    ),
-                    newEntityType.FullName,
-                    existingEntityType.FullName,
-                    key.ConcatKeyValue()
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Materializer_RecyclingEntity(
+                        System
+                            .Data
+                            .Common
+                            .TypeHelpers
+                            .GetFullName(key.EntityContainerName, key.EntitySetName),
+                        newEntityType.FullName,
+                        existingEntityType.FullName,
+                        key.ConcatKeyValue()
+                    )
             );
         }
 
         internal static InvalidOperationException AddedEntityAlreadyExists(EntityKey key)
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.Materializer_AddedEntityAlreadyExists(
-                    key.ConcatKeyValue()
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Materializer_AddedEntityAlreadyExists(key.ConcatKeyValue())
             );
         }
 
@@ -1703,11 +1788,15 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.Collections_ExpectedCollectionGotReference(
-                    typeName,
-                    roleName,
-                    relationshipName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Collections_ExpectedCollectionGotReference(
+                        typeName,
+                        roleName,
+                        relationshipName
+                    )
             );
         }
 
@@ -1735,11 +1824,15 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.EntityReference_ExpectedReferenceGotCollection(
-                    typeName,
-                    roleName,
-                    relationshipName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityReference_ExpectedReferenceGotCollection(
+                        typeName,
+                        roleName,
+                        relationshipName
+                    )
             );
         }
 
@@ -1749,10 +1842,14 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.EntityReference_CannotAddMoreThanOneEntityToEntityReference(
-                    roleName,
-                    relationshipName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityReference_CannotAddMoreThanOneEntityToEntityReference(
+                        roleName,
+                        relationshipName
+                    )
             );
         }
 
@@ -1785,9 +1882,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelatedEnd_CannotCreateRelationshipBetweenTrackedAndNoTrackedEntities(
-                    roleName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelatedEnd_CannotCreateRelationshipBetweenTrackedAndNoTrackedEntities(roleName)
             );
         }
 
@@ -1808,10 +1907,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelatedEnd_InvalidContainedType_Collection(
-                    entityType,
-                    relatedEndType
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelatedEnd_InvalidContainedType_Collection(entityType, relatedEndType)
             );
         }
 
@@ -1821,19 +1921,22 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelatedEnd_InvalidContainedType_Reference(
-                    entityType,
-                    relatedEndType
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelatedEnd_InvalidContainedType_Reference(entityType, relatedEndType)
             );
         }
 
         internal static InvalidOperationException CannotAddToFixedSizeArray(object collectionType)
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelatedEnd_CannotAddToFixedSizeArray(
-                    collectionType.GetType()
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelatedEnd_CannotAddToFixedSizeArray(collectionType.GetType())
             );
         }
 
@@ -1842,9 +1945,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelatedEnd_CannotRemoveFromFixedSizeArray(
-                    collectionType.GetType()
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelatedEnd_CannotRemoveFromFixedSizeArray(collectionType.GetType())
             );
         }
 
@@ -1873,10 +1978,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelatedEnd_InvalidRelationshipFixupDetected(
-                    propertyName,
-                    entityType
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelatedEnd_InvalidRelationshipFixupDetected(propertyName, entityType)
             );
         }
 
@@ -1938,13 +2044,17 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelatedEnd_EntitySetIsNotValidForRelationship(
-                    entitySetContainerName,
-                    entitySetName,
-                    roleName,
-                    associationSetContainerName,
-                    associationSetName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelatedEnd_EntitySetIsNotValidForRelationship(
+                        entitySetContainerName,
+                        entitySetName,
+                        roleName,
+                        associationSetContainerName,
+                        associationSetName
+                    )
             );
         }
 
@@ -1987,9 +2097,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.RelationshipManager_UnableToFindRelationshipTypeInMetadata(
-                    relationshipName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelationshipManager_UnableToFindRelationshipTypeInMetadata(relationshipName),
                 parameterName
             );
         }
@@ -2001,10 +2113,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.RelationshipManager_InvalidTargetRole(
-                    relationshipName,
-                    targetRoleName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelationshipManager_InvalidTargetRole(relationshipName, targetRoleName),
                 parameterName
             );
         }
@@ -2017,12 +2130,16 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelationshipManager_OwnerIsNotSourceType(
-                    ownerType,
-                    sourceRoleType,
-                    sourceRoleName,
-                    relationshipName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelationshipManager_OwnerIsNotSourceType(
+                        ownerType,
+                        sourceRoleType,
+                        sourceRoleName,
+                        relationshipName
+                    )
             );
         }
 
@@ -2036,44 +2153,68 @@ namespace System.Data
         internal static InvalidOperationException ReferenceAlreadyInitialized()
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelationshipManager_ReferenceAlreadyInitialized(
-                    System.Data.Entity.Strings.RelationshipManager_InitializeIsForDeserialization
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelationshipManager_ReferenceAlreadyInitialized(
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .RelationshipManager_InitializeIsForDeserialization
+                    )
             );
         }
 
         internal static InvalidOperationException RelationshipManagerAttached()
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelationshipManager_RelationshipManagerAttached(
-                    System.Data.Entity.Strings.RelationshipManager_InitializeIsForDeserialization
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelationshipManager_RelationshipManagerAttached(
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .RelationshipManager_InitializeIsForDeserialization
+                    )
             );
         }
 
         internal static InvalidOperationException CollectionAlreadyInitialized()
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelationshipManager_CollectionAlreadyInitialized(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .RelationshipManager_CollectionInitializeIsForDeserialization
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelationshipManager_CollectionAlreadyInitialized(
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .RelationshipManager_CollectionInitializeIsForDeserialization
+                    )
             );
         }
 
         internal static InvalidOperationException CollectionRelationshipManagerAttached()
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.RelationshipManager_CollectionRelationshipManagerAttached(
-                    System
-                        .Data
-                        .Entity
-                        .Strings
-                        .RelationshipManager_CollectionInitializeIsForDeserialization
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .RelationshipManager_CollectionRelationshipManagerAttached(
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .RelationshipManager_CollectionInitializeIsForDeserialization
+                    )
             );
         }
 
@@ -2183,9 +2324,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.EntityProxyTypeInfo_ProxyMetadataIsUnavailable(
-                    type.FullName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityProxyTypeInfo_ProxyMetadataIsUnavailable(type.FullName),
                 inner
             );
         }
@@ -2266,9 +2409,11 @@ namespace System.Data
         )
         {
             return EntityUtil.Argument(
-                System.Data.Entity.Strings.ObjectContext_InvalidDefaultContainerName(
-                    defaultContainerName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_InvalidDefaultContainerName(defaultContainerName),
                 parameter
             );
         }
@@ -2349,9 +2494,11 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_EntityContainerNotFoundForName(
-                    entityContainerName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_EntityContainerNotFoundForName(entityContainerName)
             );
         }
 
@@ -2378,12 +2525,16 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_InvalidEntitySetInKey(
-                    keyContainer,
-                    keyEntitySet,
-                    expectedContainer,
-                    expectedEntitySet
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_InvalidEntitySetInKey(
+                        keyContainer,
+                        keyEntitySet,
+                        expectedContainer,
+                        expectedEntitySet
+                    )
             );
         }
 
@@ -2396,13 +2547,17 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_InvalidEntitySetInKeyFromName(
-                    keyContainer,
-                    keyEntitySet,
-                    expectedContainer,
-                    expectedEntitySet,
-                    argument
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_InvalidEntitySetInKeyFromName(
+                        keyContainer,
+                        keyEntitySet,
+                        expectedContainer,
+                        expectedEntitySet,
+                        argument
+                    )
             );
         }
 
@@ -2433,10 +2588,14 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_ExecuteFunctionTypeMismatch(
-                    typeArgument.FullName,
-                    expectedElementType.FullName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_ExecuteFunctionTypeMismatch(
+                        typeArgument.FullName,
+                        expectedElementType.FullName
+                    )
             );
         }
 
@@ -2448,15 +2607,19 @@ namespace System.Data
             string message;
             if (null == functionImport.ReturnParameter)
             {
-                message =
-                    System.Data.Entity.Strings.ObjectContext_ExecuteFunctionCalledWithNonQueryFunction(
-                        functionImport.Name
-                    );
+                message = System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_ExecuteFunctionCalledWithNonQueryFunction(functionImport.Name);
             }
             else
             {
-                message =
-                    System.Data.Entity.Strings.ObjectContext_ExecuteFunctionCalledWithScalarFunction(
+                message = System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_ExecuteFunctionCalledWithScalarFunction(
                         functionImport.ReturnParameter.TypeUsage.EdmType.FullName,
                         functionImport.Name
                     );
@@ -2493,19 +2656,25 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.ObjectContext_EntitiesHaveDifferentType(
-                    originalEntityTypeName,
-                    changedEntityTypeName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_EntitiesHaveDifferentType(
+                        originalEntityTypeName,
+                        changedEntityTypeName
+                    )
             );
         }
 
         internal static InvalidOperationException EntityMustBeUnchangedOrModified(EntityState state)
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_EntityMustBeUnchangedOrModified(
-                    state.ToString()
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_EntityMustBeUnchangedOrModified(state.ToString())
             );
         }
 
@@ -2514,9 +2683,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_EntityMustBeUnchangedOrModifiedOrDeleted(
-                    state.ToString()
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_EntityMustBeUnchangedOrModifiedOrDeleted(state.ToString())
             );
         }
 
@@ -2541,10 +2712,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.ObjectContext_InvalidEntitySetOnEntity(
-                    entitySetName,
-                    entityType
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_InvalidEntitySetOnEntity(entitySetName, entityType),
                 parameter
             );
         }
@@ -2557,11 +2729,15 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.ObjectContext_InvalidObjectSetTypeForEntitySet(
-                    tEntityType,
-                    entitySetType,
-                    entitySetName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_InvalidObjectSetTypeForEntitySet(
+                        tEntityType,
+                        entitySetType,
+                        entitySetName
+                    ),
                 parameter
             );
         }
@@ -2580,10 +2756,14 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.ObjectContext_MultipleEntitySetsFoundInSingleContainer(
-                    entityTypeName,
-                    entityContainerName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_MultipleEntitySetsFoundInSingleContainer(
+                        entityTypeName,
+                        entityContainerName
+                    ),
                 exceptionParameterName
             );
         }
@@ -2594,9 +2774,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.ObjectContext_MultipleEntitySetsFoundInAllContainers(
-                    entityTypeName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_MultipleEntitySetsFoundInAllContainers(entityTypeName),
                 exceptionParameterName
             );
         }
@@ -2620,12 +2802,16 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_EntityNotInObjectSet_Delete(
-                    actualContainerName,
-                    actualEntitySetName,
-                    expectedContainerName,
-                    expectedEntitySetName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_EntityNotInObjectSet_Delete(
+                        actualContainerName,
+                        actualEntitySetName,
+                        expectedContainerName,
+                        expectedEntitySetName
+                    )
             );
         }
 
@@ -2637,12 +2823,16 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.ObjectContext_EntityNotInObjectSet_Detach(
-                    actualContainerName,
-                    actualEntitySetName,
-                    expectedContainerName,
-                    expectedEntitySetName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ObjectContext_EntityNotInObjectSet_Detach(
+                        actualContainerName,
+                        actualEntitySetName,
+                        expectedContainerName,
+                        expectedEntitySetName
+                    )
             );
         }
 
@@ -2665,9 +2855,11 @@ namespace System.Data
         )
         {
             return EntityUtil.InvalidOperation(
-                System.Data.Entity.Strings.ComplexObject_NullableComplexTypesNotSupported(
-                    propertyName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ComplexObject_NullableComplexTypesNotSupported(propertyName)
             );
         }
 
@@ -2683,9 +2875,11 @@ namespace System.Data
         )
         {
             return EntityUtil.Argument(
-                System.Data.Entity.Strings.ComplexObject_ComplexChangeRequestedOnScalarProperty(
-                    propertyName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ComplexObject_ComplexChangeRequestedOnScalarProperty(propertyName)
             );
         }
         #endregion
@@ -2715,9 +2909,11 @@ namespace System.Data
         internal static ArgumentException InvalidSizeValue(int value)
         {
             return Argument(
-                System.Data.Entity.Strings.ADP_InvalidSizeValue(
-                    value.ToString(CultureInfo.InvariantCulture)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidSizeValue(value.ToString(CultureInfo.InvariantCulture))
             );
         }
 
@@ -2748,10 +2944,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.EntityKey_EntityTypesDoNotMatch(
-                    recordType,
-                    entitySetType
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_EntityTypesDoNotMatch(recordType, entitySetType)
             );
         }
 
@@ -2763,11 +2960,15 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.EntityKey_IncorrectNumberOfKeyValuePairs(
-                    typeName,
-                    expectedNumFields,
-                    actualNumFields
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_IncorrectNumberOfKeyValuePairs(
+                        typeName,
+                        expectedNumFields,
+                        actualNumFields
+                    ),
                 argument
             );
         }
@@ -2779,11 +2980,15 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.EntityKey_IncorrectNumberOfKeyValuePairs(
-                    typeName,
-                    expectedNumFields,
-                    actualNumFields
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_IncorrectNumberOfKeyValuePairs(
+                        typeName,
+                        expectedNumFields,
+                        actualNumFields
+                    )
             );
         }
 
@@ -2795,11 +3000,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.EntityKey_IncorrectValueType(
-                    keyField,
-                    expectedTypeName,
-                    actualTypeName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_IncorrectValueType(keyField, expectedTypeName, actualTypeName),
                 argument
             );
         }
@@ -2811,11 +3016,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.EntityKey_IncorrectValueType(
-                    keyField,
-                    expectedTypeName,
-                    actualTypeName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_IncorrectValueType(keyField, expectedTypeName, actualTypeName)
             );
         }
 
@@ -2826,10 +3031,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.EntityKey_NoCorrespondingOSpaceTypeForEnumKeyMember(
-                    keyField,
-                    cspaceTypeName
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_NoCorrespondingOSpaceTypeForEnumKeyMember(keyField, cspaceTypeName),
                 argument
             );
         }
@@ -2840,10 +3046,11 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.EntityKey_NoCorrespondingOSpaceTypeForEnumKeyMember(
-                    keyField,
-                    cspaceTypeName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_NoCorrespondingOSpaceTypeForEnumKeyMember(keyField, cspaceTypeName)
             );
         }
 
@@ -2932,9 +3139,11 @@ namespace System.Data
         internal static InvalidOperationException EntityKeyDoesntMatchKeySetOnEntity(object entity)
         {
             return new InvalidOperationException(
-                System.Data.Entity.Strings.EntityKey_DoesntMatchKeyOnEntity(
-                    entity.GetType().FullName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityKey_DoesntMatchKeyOnEntity(entity.GetType().FullName)
             );
         }
 
@@ -3060,10 +3269,14 @@ namespace System.Data
         internal static ArgumentException UnknownDataTypeCode(Type dataType, TypeCode typeCode)
         {
             return Argument(
-                System.Data.Entity.Strings.ADP_UnknownDataTypeCode(
-                    ((int)typeCode).ToString(CultureInfo.InvariantCulture),
-                    dataType.FullName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_UnknownDataTypeCode(
+                        ((int)typeCode).ToString(CultureInfo.InvariantCulture),
+                        dataType.FullName
+                    )
             );
         }
 
@@ -3186,13 +3399,17 @@ namespace System.Data
             {
                 // Just one acceptable value and itis value is 1
                 return Update(
-                    System.Data.Entity.Strings.Update_RelationshipCardinalityConstraintViolationSingleValue(
-                        entitySetName,
-                        relationshipSetName,
-                        actualCountString,
-                        otherEndPluralName,
-                        minimumCountString
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Update_RelationshipCardinalityConstraintViolationSingleValue(
+                            entitySetName,
+                            relationshipSetName,
+                            actualCountString,
+                            otherEndPluralName,
+                            minimumCountString
+                        ),
                     null,
                     stateEntry
                 );
@@ -3201,14 +3418,18 @@ namespace System.Data
             {
                 // Range of acceptable values
                 return Update(
-                    System.Data.Entity.Strings.Update_RelationshipCardinalityConstraintViolation(
-                        entitySetName,
-                        relationshipSetName,
-                        actualCountString,
-                        otherEndPluralName,
-                        minimumCountString,
-                        maximumCountString
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Update_RelationshipCardinalityConstraintViolation(
+                            entitySetName,
+                            relationshipSetName,
+                            actualCountString,
+                            otherEndPluralName,
+                            minimumCountString,
+                            maximumCountString
+                        ),
                     null,
                     stateEntry
                 );
@@ -3221,11 +3442,11 @@ namespace System.Data
             IEntityStateEntry stateEntry
         )
         {
-            string message = System.Data.Entity.Strings.Update_MissingRequiredEntity(
-                relationshipSetName,
-                stateEntry.State,
-                endName
-            );
+            string message = System
+                .Data
+                .Entity
+                .Strings
+                .Update_MissingRequiredEntity(relationshipSetName, stateEntry.State, endName);
             return Update(message, null, stateEntry);
         }
 
@@ -3266,9 +3487,11 @@ namespace System.Data
         )
         {
             return Argument(
-                System.Data.Entity.Strings.ADP_CollectionParameterElementIsNullOrEmpty(
-                    parameterName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_CollectionParameterElementIsNullOrEmpty(parameterName)
             );
         }
 
@@ -3285,21 +3508,29 @@ namespace System.Data
         )
         {
             return InvalidOperation(
-                System.Data.Entity.Strings.Cqt_UDF_FunctionDefinitionResultTypeMismatch(
-                    TypeHelpers.GetFullName(function.ReturnParameter.TypeUsage),
-                    function.FullName,
-                    TypeHelpers.GetFullName(generatedDefinitionResultType)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .Cqt_UDF_FunctionDefinitionResultTypeMismatch(
+                        TypeHelpers.GetFullName(function.ReturnParameter.TypeUsage),
+                        function.FullName,
+                        TypeHelpers.GetFullName(generatedDefinitionResultType)
+                    )
             );
         }
 
         internal static Exception EntityParameterCollectionInvalidIndex(int index, int count)
         {
             return new IndexOutOfRangeException(
-                System.Data.Entity.Strings.EntityParameterCollectionInvalidIndex(
-                    index.ToString(CultureInfo.InvariantCulture),
-                    count.ToString(CultureInfo.InvariantCulture)
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityParameterCollectionInvalidIndex(
+                        index.ToString(CultureInfo.InvariantCulture),
+                        count.ToString(CultureInfo.InvariantCulture)
+                    )
             );
         }
 
@@ -3308,9 +3539,11 @@ namespace System.Data
         )
         {
             return new IndexOutOfRangeException(
-                System.Data.Entity.Strings.EntityParameterCollectionInvalidParameterName(
-                    parameterName
-                )
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .EntityParameterCollectionInvalidParameterName(parameterName)
             );
         }
 
@@ -3460,10 +3693,14 @@ namespace System.Data
         static internal ArgumentOutOfRangeException InvalidEnumerationValue(Type type, int value)
         {
             return EntityUtil.ArgumentOutOfRange(
-                System.Data.Entity.Strings.ADP_InvalidEnumerationValue(
-                    type.Name,
-                    value.ToString(System.Globalization.CultureInfo.InvariantCulture)
-                ),
+                System
+                    .Data
+                    .Entity
+                    .Strings
+                    .ADP_InvalidEnumerationValue(
+                        type.Name,
+                        value.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    ),
                 type.Name
             );
         }
@@ -3705,11 +3942,10 @@ namespace System.Data
 
         internal static int DstCompare(string strA, string strB)
         {
-            return CultureInfo.CurrentCulture.CompareInfo.Compare(
-                strA,
-                strB,
-                EntityUtil.StringCompareOptions
-            );
+            return CultureInfo
+                .CurrentCulture
+                .CompareInfo
+                .Compare(strA, strB, EntityUtil.StringCompareOptions);
         }
 
         internal static Dictionary<string, string> COMPILER_VERSION = new Dictionary<

@@ -90,10 +90,9 @@ namespace System.Net
                     }
                     else
                     {
-                        asyncResult.m_RequestContext.Reset(
-                            asyncResult.m_RequestContext.RequestBlob->RequestId,
-                            numBytes
-                        );
+                        asyncResult
+                            .m_RequestContext
+                            .Reset(asyncResult.m_RequestContext.RequestBlob->RequestId, numBytes);
                     }
 
                     // We need to issue a new request, either because auth failed, or because our buffer was too small the first time.
@@ -169,19 +168,21 @@ namespace System.Net
                 );
                 (AsyncObject as HttpListener).EnsureBoundHandle();
                 uint bytesTransferred = 0;
-                statusCode = UnsafeNclNativeMethods.HttpApi.HttpReceiveHttpRequest(
-                    (AsyncObject as HttpListener).RequestQueueHandle,
-                    m_RequestContext.RequestBlob->RequestId,
-                    (uint)
-                        UnsafeNclNativeMethods
-                            .HttpApi
-                            .HTTP_FLAGS
-                            .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
-                    m_RequestContext.RequestBlob,
-                    m_RequestContext.Size,
-                    &bytesTransferred,
-                    m_RequestContext.NativeOverlapped
-                );
+                statusCode = UnsafeNclNativeMethods
+                    .HttpApi
+                    .HttpReceiveHttpRequest(
+                        (AsyncObject as HttpListener).RequestQueueHandle,
+                        m_RequestContext.RequestBlob->RequestId,
+                        (uint)
+                            UnsafeNclNativeMethods
+                                .HttpApi
+                                .HTTP_FLAGS
+                                .HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY,
+                        m_RequestContext.RequestBlob,
+                        m_RequestContext.Size,
+                        &bytesTransferred,
+                        m_RequestContext.NativeOverlapped
+                    );
 
                 GlobalLog.Print(
                     "ListenerAsyncResult#"

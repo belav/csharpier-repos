@@ -24,9 +24,11 @@ namespace Microsoft.SqlServer.Server
             // Implement body with throw because there are only a couple of ways to get to this code:
             //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
-            System.Data.Common.ADP.InternalError(
-                System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
-            );
+            System
+                .Data
+                .Common
+                .ADP
+                .InternalError(System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod);
         }
 
         internal abstract void ProcessEvent(SmiEventSink sink);

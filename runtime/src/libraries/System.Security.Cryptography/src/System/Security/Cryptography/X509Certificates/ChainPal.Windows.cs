@@ -23,9 +23,9 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new ArgumentNullException(nameof(chainContext));
             }
 
-            SafeX509ChainHandle certChainHandle = Interop.Crypt32.CertDuplicateCertificateChain(
-                chainContext
-            );
+            SafeX509ChainHandle certChainHandle = Interop
+                .Crypt32
+                .CertDuplicateCertificateChain(chainContext);
             if (certChainHandle == null || certChainHandle.IsInvalid)
             {
                 certChainHandle?.Dispose();
@@ -56,12 +56,14 @@ namespace System.Security.Cryptography.X509Certificates
                 status.cbSize = (uint)sizeof(Interop.Crypt32.CERT_CHAIN_POLICY_STATUS);
 
                 if (
-                    !Interop.crypt32.CertVerifyCertificateChainPolicy(
-                        ChainPolicy.CERT_CHAIN_POLICY_BASE,
-                        _chain,
-                        ref para,
-                        ref status
-                    )
+                    !Interop
+                        .crypt32
+                        .CertVerifyCertificateChainPolicy(
+                            ChainPolicy.CERT_CHAIN_POLICY_BASE,
+                            _chain,
+                            ref para,
+                            ref status
+                        )
                 )
                 {
                     int errorCode = Marshal.GetLastPInvokeError();

@@ -145,7 +145,9 @@ namespace System.Data.Odbc
             if (XMLStream == null)
             {
                 XMLStream = System
-                    .Reflection.Assembly.GetExecutingAssembly()
+                    .Reflection
+                    .Assembly
+                    .GetExecutingAssembly()
                     .GetManifestResourceStream("System.Data.Odbc.OdbcMetaData.xml");
                 cacheMetaDataFactory = true;
             }

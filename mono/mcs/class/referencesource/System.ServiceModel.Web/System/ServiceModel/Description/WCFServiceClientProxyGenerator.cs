@@ -73,8 +73,9 @@ namespace System.ServiceModel.Description
             {
                 return null;
             }
-            WebMessageEncodingBindingElement webEncodingBindingElement = this
-                .serviceEndpoint.Binding.CreateBindingElements()
+            WebMessageEncodingBindingElement webEncodingBindingElement = this.serviceEndpoint
+                .Binding
+                .CreateBindingElements()
                 .Find<WebMessageEncodingBindingElement>();
             if (
                 webEncodingBindingElement != null
@@ -82,9 +83,10 @@ namespace System.ServiceModel.Description
             )
             {
                 if (
-                    this.serviceEndpoint.Contract.Behaviors.Contains(
-                        typeof(JavascriptCallbackBehaviorAttribute)
-                    )
+                    this.serviceEndpoint
+                        .Contract
+                        .Behaviors
+                        .Contains(typeof(JavascriptCallbackBehaviorAttribute))
                 )
                 {
                     JavascriptCallbackBehaviorAttribute behavior =

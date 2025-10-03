@@ -70,15 +70,17 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetSampleRequests_FromSampleObjects_AndSettingActualRequestTypes()
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
-            sampleGenerator.ActualHttpMessageTypes.Add(
-                new HelpPageSampleKey(
-                    SampleDirection.Request,
-                    "values",
-                    "options",
-                    new[] { "request" }
-                ),
-                typeof(string)
-            );
+            sampleGenerator
+                .ActualHttpMessageTypes
+                .Add(
+                    new HelpPageSampleKey(
+                        SampleDirection.Request,
+                        "values",
+                        "options",
+                        new[] { "request" }
+                    ),
+                    typeof(string)
+                );
             sampleGenerator.SampleObjects.Add(typeof(string), "sample value");
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
@@ -101,13 +103,15 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator.ActionSamples.Add(
-                new HelpPageSampleKey(
-                    new MediaTypeHeaderValue("application/json"),
-                    typeof(Tuple<int, string>)
-                ),
-                sample
-            );
+            sampleGenerator
+                .ActionSamples
+                .Add(
+                    new HelpPageSampleKey(
+                        new MediaTypeHeaderValue("application/json"),
+                        typeof(Tuple<int, string>)
+                    ),
+                    sample
+                );
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
                 "Values",
@@ -130,16 +134,18 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator.ActionSamples.Add(
-                new HelpPageSampleKey(
-                    new MediaTypeHeaderValue("application/xml"),
-                    SampleDirection.Request,
-                    "Values",
-                    "Put",
-                    new[] { "valuePairCollection" }
-                ),
-                sample
-            );
+            sampleGenerator
+                .ActionSamples
+                .Add(
+                    new HelpPageSampleKey(
+                        new MediaTypeHeaderValue("application/xml"),
+                        SampleDirection.Request,
+                        "Values",
+                        "Put",
+                        new[] { "valuePairCollection" }
+                    ),
+                    sample
+                );
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
                 "Values",
@@ -162,16 +168,18 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator.ActionSamples.Add(
-                new HelpPageSampleKey(
-                    new MediaTypeHeaderValue("plain/text"),
-                    SampleDirection.Request,
-                    "Values",
-                    "Options",
-                    new[] { "request" }
-                ),
-                sample
-            );
+            sampleGenerator
+                .ActionSamples
+                .Add(
+                    new HelpPageSampleKey(
+                        new MediaTypeHeaderValue("plain/text"),
+                        SampleDirection.Request,
+                        "Values",
+                        "Options",
+                        new[] { "request" }
+                    ),
+                    sample
+                );
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
                 "Values",
@@ -230,15 +238,17 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void GetSampleResponses_FromSampleObjects_AndSettingActualResponseTypes()
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
-            sampleGenerator.ActualHttpMessageTypes.Add(
-                new HelpPageSampleKey(
-                    SampleDirection.Response,
-                    "values",
-                    "post",
-                    new[] { "value" }
-                ),
-                typeof(string)
-            );
+            sampleGenerator
+                .ActualHttpMessageTypes
+                .Add(
+                    new HelpPageSampleKey(
+                        SampleDirection.Response,
+                        "values",
+                        "post",
+                        new[] { "value" }
+                    ),
+                    typeof(string)
+                );
             sampleGenerator.SampleObjects.Add(typeof(string), "sample value");
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
@@ -261,13 +271,15 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator.ActionSamples.Add(
-                new HelpPageSampleKey(
-                    new MediaTypeHeaderValue("application/json"),
-                    typeof(IEnumerable<string>)
-                ),
-                sample
-            );
+            sampleGenerator
+                .ActionSamples
+                .Add(
+                    new HelpPageSampleKey(
+                        new MediaTypeHeaderValue("application/json"),
+                        typeof(IEnumerable<string>)
+                    ),
+                    sample
+                );
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
                 "Values",
@@ -290,16 +302,18 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator.ActionSamples.Add(
-                new HelpPageSampleKey(
-                    new MediaTypeHeaderValue("application/xml"),
-                    SampleDirection.Response,
-                    "Values",
-                    "Get",
-                    new[] { "id" }
-                ),
-                sample
-            );
+            sampleGenerator
+                .ActionSamples
+                .Add(
+                    new HelpPageSampleKey(
+                        new MediaTypeHeaderValue("application/xml"),
+                        SampleDirection.Response,
+                        "Values",
+                        "Get",
+                        new[] { "id" }
+                    ),
+                    sample
+                );
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
                 "Values",
@@ -322,16 +336,18 @@ namespace WebApiHelpPageWebHost.UnitTest
         {
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             var sample = new TextSample("test");
-            sampleGenerator.ActionSamples.Add(
-                new HelpPageSampleKey(
-                    new MediaTypeHeaderValue("plain/text"),
-                    SampleDirection.Response,
-                    "Values",
-                    "Post",
-                    new[] { "value" }
-                ),
-                sample
-            );
+            sampleGenerator
+                .ActionSamples
+                .Add(
+                    new HelpPageSampleKey(
+                        new MediaTypeHeaderValue("plain/text"),
+                        SampleDirection.Response,
+                        "Values",
+                        "Post",
+                        new[] { "value" }
+                    ),
+                    sample
+                );
             ApiDescription apiDescription = ApiDescriptionHelpers.GetApiDescription(
                 null,
                 "Values",

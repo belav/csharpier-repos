@@ -250,11 +250,9 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                     );
                 }
 
-                Dependencies.Logger.ExecutionStrategyRetrying(
-                    ExceptionsEncountered,
-                    delay.Value,
-                    async: true
-                );
+                Dependencies
+                    .Logger
+                    .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                 OnRetry();
 
@@ -385,11 +383,9 @@ public abstract class ExecutionStrategy : IExecutionStrategy
                     );
                 }
 
-                Dependencies.Logger.ExecutionStrategyRetrying(
-                    ExceptionsEncountered,
-                    delay.Value,
-                    async: true
-                );
+                Dependencies
+                    .Logger
+                    .ExecutionStrategyRetrying(ExceptionsEncountered, delay.Value, async: true);
 
                 OnRetry();
 

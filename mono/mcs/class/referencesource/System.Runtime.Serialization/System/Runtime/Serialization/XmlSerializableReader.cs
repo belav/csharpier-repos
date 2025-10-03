@@ -24,12 +24,14 @@ namespace System.Runtime.Serialization
         internal void BeginRead(XmlReaderDelegator xmlReader)
         {
             if (xmlReader.NodeType != XmlNodeType.Element)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializerReadContext.CreateUnexpectedStateException(
-                        XmlNodeType.Element,
-                        xmlReader
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializerReadContext.CreateUnexpectedStateException(
+                            XmlNodeType.Element,
+                            xmlReader
+                        )
+                    );
             this.xmlReader = xmlReader;
             this.startDepth = xmlReader.Depth;
             this.innerReader = xmlReader.UnderlyingReader;
@@ -47,12 +49,14 @@ namespace System.Runtime.Serialization
                 while (xmlReader.Depth > startDepth)
                 {
                     if (!xmlReader.Read())
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            XmlObjectSerializerReadContext.CreateUnexpectedStateException(
-                                XmlNodeType.EndElement,
-                                xmlReader
-                            )
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                XmlObjectSerializerReadContext.CreateUnexpectedStateException(
+                                    XmlNodeType.EndElement,
+                                    xmlReader
+                                )
+                            );
                 }
             }
         }
@@ -75,11 +79,16 @@ namespace System.Runtime.Serialization
 
         public override void Close()
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.GetString(SR.IXmlSerializableIllegalOperation)
-                )
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.IXmlSerializableIllegalOperation)
+                    )
+                );
         }
 
         public override XmlReaderSettings Settings

@@ -46,13 +46,15 @@ namespace System.ServiceModel.Discovery.Configuration
                 )
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR2.DiscoveryConfigAddressSpecifiedForUdpDiscoveryEndpoint(
-                            channelEndpointElement.Kind
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR2.DiscoveryConfigAddressSpecifiedForUdpDiscoveryEndpoint(
+                                channelEndpointElement.Kind
+                            )
                         )
-                    )
-                );
+                    );
             }
             channelEndpointElement.Address = null;
         }
@@ -68,25 +70,29 @@ namespace System.ServiceModel.Discovery.Configuration
                 )
             )
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR2.DiscoveryConfigAddressSpecifiedForUdpDiscoveryEndpoint(
-                            serviceEndpointElement.Kind
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR2.DiscoveryConfigAddressSpecifiedForUdpDiscoveryEndpoint(
+                                serviceEndpointElement.Kind
+                            )
                         )
-                    )
-                );
+                    );
             }
             serviceEndpointElement.Address = null;
 
             if (serviceEndpointElement.ListenUri != null)
             {
-                throw FxTrace.Exception.AsError(
-                    new ConfigurationErrorsException(
-                        SR2.DiscoveryConfigListenUriSpecifiedForUdpDiscoveryEndpoint(
-                            serviceEndpointElement.Kind
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new ConfigurationErrorsException(
+                            SR2.DiscoveryConfigListenUriSpecifiedForUdpDiscoveryEndpoint(
+                                serviceEndpointElement.Kind
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -121,26 +127,30 @@ namespace System.ServiceModel.Discovery.Configuration
                         {
                             if (wildcard)
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR2.DiscoveryConfigMultipleEndpointsMatchWildcard(
-                                            typeof(TEndpoint).FullName,
-                                            clientSection.SectionInformation.SectionName
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR2.DiscoveryConfigMultipleEndpointsMatchWildcard(
+                                                typeof(TEndpoint).FullName,
+                                                clientSection.SectionInformation.SectionName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                             else
                             {
-                                throw FxTrace.Exception.AsError(
-                                    new InvalidOperationException(
-                                        SR2.DiscoveryConfigMultipleEndpointsMatch(
-                                            typeof(TEndpoint).FullName,
-                                            endpointConfigurationName,
-                                            clientSection.SectionInformation.SectionName
+                                throw FxTrace
+                                    .Exception
+                                    .AsError(
+                                        new InvalidOperationException(
+                                            SR2.DiscoveryConfigMultipleEndpointsMatch(
+                                                typeof(TEndpoint).FullName,
+                                                endpointConfigurationName,
+                                                clientSection.SectionInformation.SectionName
+                                            )
                                         )
-                                    )
-                                );
+                                    );
                             }
                         }
                         else
@@ -155,26 +165,30 @@ namespace System.ServiceModel.Discovery.Configuration
             {
                 if (wildcard)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.DiscoveryConfigNoEndpointsMatchWildcard(
-                                typeof(TEndpoint).FullName,
-                                clientSection.SectionInformation.SectionName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.DiscoveryConfigNoEndpointsMatchWildcard(
+                                    typeof(TEndpoint).FullName,
+                                    clientSection.SectionInformation.SectionName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR2.DiscoveryConfigNoEndpointsMatch(
-                                typeof(TEndpoint).FullName,
-                                endpointConfigurationName,
-                                clientSection.SectionInformation.SectionName
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR2.DiscoveryConfigNoEndpointsMatch(
+                                    typeof(TEndpoint).FullName,
+                                    endpointConfigurationName,
+                                    clientSection.SectionInformation.SectionName
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
 

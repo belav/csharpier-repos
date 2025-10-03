@@ -46,8 +46,11 @@ public class StoreStoredProcedureReturnValue
             ? PropertyMappings[0].TypeMapping
             : (RelationalTypeMapping)
                 Table
-                    .Model.Model.GetModelDependencies()
-                    .TypeMappingSource.FindMapping(typeof(int))!;
+                    .Model
+                    .Model
+                    .GetModelDependencies()
+                    .TypeMappingSource
+                    .FindMapping(typeof(int))!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

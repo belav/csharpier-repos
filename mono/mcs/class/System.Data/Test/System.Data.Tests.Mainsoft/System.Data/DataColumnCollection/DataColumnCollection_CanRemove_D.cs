@@ -166,12 +166,8 @@ namespace tests.system_data_dll.System_Data
             ds.Tables["table2"].Columns.Add("col1");
 
             ds.Tables[1]
-                .ParentRelations.Add(
-                    "name1",
-                    ds.Tables[0].Columns["col1"],
-                    ds.Tables[1].Columns["col1"],
-                    false
-                );
+                .ParentRelations
+                .Add("name1", ds.Tables[0].Columns["col1"], ds.Tables[1].Columns["col1"], false);
 
             Compare(ds.Tables[1].Columns.CanRemove(ds.Tables[1].Columns["col1"]), false); //Part of a parent
             Compare(ds.Tables[0].Columns.CanRemove(ds.Tables[0].Columns["col1"]), false); //Part of a child

@@ -187,9 +187,9 @@ namespace System.Data.Linq.SqlClient
         {
             if (this.provider.Log != null)
             {
-                this.provider.Log.WriteLine(
-                    Strings.LogGeneralInfoMessage(args.Source, args.Message)
-                );
+                this.provider
+                    .Log
+                    .WriteLine(Strings.LogGeneralInfoMessage(args.Source, args.Message));
             }
         }
 

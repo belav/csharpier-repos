@@ -514,10 +514,10 @@ namespace System.Workflow.Activities.Rules
             {
                 for (int m = 0; m < methods.Length; ++m)
                 {
-                    System.Diagnostics.Debug.Assert(
-                        methods[m].MemberType == MemberTypes.Method,
-                        "expect methods only"
-                    );
+                    System
+                        .Diagnostics
+                        .Debug
+                        .Assert(methods[m].MemberType == MemberTypes.Method, "expect methods only");
                     MethodInfo method = (MethodInfo)methods[m];
 
                     if (!method.IsGenericMethod) // Skip generic methods.
@@ -1102,9 +1102,10 @@ namespace System.Workflow.Activities.Rules
                     if (parserContext.NumTokens == 2 && token.TokenID == TokenID.Identifier)
                     {
                         string ident = (string)token.Value;
-                        System.Diagnostics.Debug.Assert(
-                            parserContext.NextToken().TokenID == TokenID.EndOfInput
-                        );
+                        System
+                            .Diagnostics
+                            .Debug
+                            .Assert(parserContext.NextToken().TokenID == TokenID.EndOfInput);
 
                         if (ident.Length == 1)
                         {
@@ -2324,9 +2325,9 @@ namespace System.Workflow.Activities.Rules
                     {
                         // both specified
                         primaryExpr = new CodeArrayCreateExpression(type, size);
-                        ((CodeArrayCreateExpression)primaryExpr).Initializers.AddRange(
-                            initializers.ToArray()
-                        );
+                        ((CodeArrayCreateExpression)primaryExpr)
+                            .Initializers
+                            .AddRange(initializers.ToArray());
                     }
                 }
                 else
@@ -3282,10 +3283,13 @@ namespace System.Workflow.Activities.Rules
                             else
                             {
                                 Type paramType = parms[p].ParameterType;
-                                System.Diagnostics.Debug.Assert(
-                                    paramType.IsArray,
-                                    "last parameter in 'params' list must have an array type"
-                                );
+                                System
+                                    .Diagnostics
+                                    .Debug
+                                    .Assert(
+                                        paramType.IsArray,
+                                        "last parameter in 'params' list must have an array type"
+                                    );
                                 Type elementType = paramType.GetElementType();
 
                                 Array paramsArgs = (Array)

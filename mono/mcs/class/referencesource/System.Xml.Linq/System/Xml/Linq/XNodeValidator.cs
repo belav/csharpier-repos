@@ -49,9 +49,11 @@ namespace System.Xml.Schema
                     source = ((XDocument)source).Root;
                     if (source == null)
                         throw new InvalidOperationException(
-                            System.Xml.Linq.Res.GetString(
-                                System.Xml.Linq.Res.InvalidOperation_MissingRoot
-                            )
+                            System
+                                .Xml
+                                .Linq
+                                .Res
+                                .GetString(System.Xml.Linq.Res.InvalidOperation_MissingRoot)
                         );
                     validationFlags |= XmlSchemaValidationFlags.ProcessIdentityConstraints;
                     break;
@@ -62,17 +64,20 @@ namespace System.Xml.Schema
                         goto default;
                     if (source.Parent == null)
                         throw new InvalidOperationException(
-                            System.Xml.Linq.Res.GetString(
-                                System.Xml.Linq.Res.InvalidOperation_MissingParent
-                            )
+                            System
+                                .Xml
+                                .Linq
+                                .Res
+                                .GetString(System.Xml.Linq.Res.InvalidOperation_MissingParent)
                         );
                     break;
                 default:
                     throw new InvalidOperationException(
-                        System.Xml.Linq.Res.GetString(
-                            System.Xml.Linq.Res.InvalidOperation_BadNodeType,
-                            nt
-                        )
+                        System
+                            .Xml
+                            .Linq
+                            .Res
+                            .GetString(System.Xml.Linq.Res.InvalidOperation_BadNodeType, nt)
                     );
             }
             namespaceManager = new XmlNamespaceManager(schemas.NameTable);

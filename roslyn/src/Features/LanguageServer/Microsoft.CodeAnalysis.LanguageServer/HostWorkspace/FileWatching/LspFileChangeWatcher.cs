@@ -46,7 +46,8 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             languageServerHost.GetRequiredLspService<IInitializeManager>();
         return clientCapabilitiesProvider
                 .GetClientCapabilities()
-                .Workspace?.DidChangeWatchedFiles?.DynamicRegistration
+                .Workspace
+                ?.DidChangeWatchedFiles?.DynamicRegistration
             ?? false;
     }
 
@@ -269,11 +270,12 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
                 ],
             };
 
-            var asyncToken = _changeWatcher._asynchronousOperationListener.BeginAsyncOperation(
-                nameof(LspFileWatchRegistration)
-            );
+            var asyncToken = _changeWatcher
+                ._asynchronousOperationListener
+                .BeginAsyncOperation(nameof(LspFileWatchRegistration));
             _registrationTask = changeWatcher
-                ._clientLanguageServerManager.SendRequestAsync(
+                ._clientLanguageServerManager
+                .SendRequestAsync(
                     "client/registerCapability",
                     registrationParams,
                     _cancellationTokenSource.Token
@@ -290,9 +292,9 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
             // means it never actually made it to the client, and fault would mean it never was actually created.
             _cancellationTokenSource.Cancel();
 
-            var asyncToken = _changeWatcher._asynchronousOperationListener.BeginAsyncOperation(
-                nameof(LspFileWatchRegistration) + "." + nameof(Dispose)
-            );
+            var asyncToken = _changeWatcher
+                ._asynchronousOperationListener
+                .BeginAsyncOperation(nameof(LspFileWatchRegistration) + "." + nameof(Dispose));
 
             _registrationTask
                 .ContinueWith(
@@ -312,11 +314,13 @@ internal sealed class LspFileChangeWatcher : IFileChangeWatcher
 
                         try
                         {
-                            await _changeWatcher._clientLanguageServerManager.SendRequestAsync(
-                                "client/unregisterCapability",
-                                unregistrationParams,
-                                CancellationToken.None
-                            );
+                            await _changeWatcher
+                                ._clientLanguageServerManager
+                                .SendRequestAsync(
+                                    "client/unregisterCapability",
+                                    unregistrationParams,
+                                    CancellationToken.None
+                                );
                         }
                         catch (ConnectionLostException)
                         {

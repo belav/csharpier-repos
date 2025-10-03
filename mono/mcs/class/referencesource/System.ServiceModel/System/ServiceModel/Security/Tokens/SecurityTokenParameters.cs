@@ -76,14 +76,16 @@ namespace System.ServiceModel.Security.Tokens
             SecurityTokenParameters result = this.CloneCore();
 
             if (result == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SecurityTokenParametersCloneInvalidResult,
-                            this.GetType().ToString()
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SecurityTokenParametersCloneInvalidResult,
+                                this.GetType().ToString()
+                            )
                         )
-                    )
-                );
+                    );
 
             return result;
         }
@@ -114,15 +116,17 @@ namespace System.ServiceModel.Security.Tokens
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
-                                token.GetType().Name,
-                                referenceStyle
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
+                                    token.GetType().Name,
+                                    referenceStyle
+                                )
                             )
-                        )
-                    );
+                        );
                 case SecurityTokenReferenceStyle.External:
                     result = token.CreateKeyIdentifierClause<TExternalClause>();
                     break;
@@ -155,9 +159,11 @@ namespace System.ServiceModel.Security.Tokens
                     return xmlToken.ExternalTokenReference;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new MessageSecurityException(SR.GetString(SR.UnableToCreateTokenReference))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.UnableToCreateTokenReference))
+                );
         }
 
         protected internal virtual bool MatchesKeyIdentifierClause(
@@ -183,15 +189,17 @@ namespace System.ServiceModel.Security.Tokens
             switch (referenceStyle)
             {
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(
-                                SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
-                                token.GetType().Name,
-                                referenceStyle
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.TokenDoesNotSupportKeyIdentifierClauseCreation,
+                                    token.GetType().Name,
+                                    referenceStyle
+                                )
                             )
-                        )
-                    );
+                        );
                 case SecurityTokenReferenceStyle.External:
                     if (keyIdentifierClause is LocalIdKeyIdentifierClause)
                         result = false;

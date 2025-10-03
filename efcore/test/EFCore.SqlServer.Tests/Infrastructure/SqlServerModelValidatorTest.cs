@@ -42,7 +42,8 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
             .Entity<Abstract>()
             .Property<int>("SomeOtherId")
             .ValueGeneratedOnAdd()
-            .Metadata.SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
+            .Metadata
+            .SetValueGenerationStrategy(SqlServerValueGenerationStrategy.None);
         modelBuilder.Entity<Abstract>().HasAlternateKey("SomeId", "SomeOtherId");
         modelBuilder
             .Entity<Generic<int>>()
@@ -69,7 +70,8 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
         Validate(modelBuilder);
 
         var keyProperty = modelBuilder
-            .Model.FindEntityType(typeof(Animal))!
+            .Model
+            .FindEntityType(typeof(Animal))!
             .FindProperty(nameof(Animal.Id))!;
         Assert.Equal(ValueGenerated.OnAdd, keyProperty.ValueGenerated);
         Assert.Equal(
@@ -1061,7 +1063,8 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
         modelBuilder.Entity<Dog>().ToTable(tb => tb.IsTemporal());
         modelBuilder
             .Entity<Dog>()
-            .Metadata.RemoveAnnotation(SqlServerAnnotationNames.TemporalPeriodStartPropertyName);
+            .Metadata
+            .RemoveAnnotation(SqlServerAnnotationNames.TemporalPeriodStartPropertyName);
 
         VerifyError(SqlServerStrings.TemporalMustDefinePeriodProperties(nameof(Dog)), modelBuilder);
     }
@@ -1073,7 +1076,8 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
         modelBuilder.Entity<Dog>().ToTable(tb => tb.IsTemporal());
         modelBuilder
             .Entity<Dog>()
-            .Metadata.RemoveAnnotation(SqlServerAnnotationNames.TemporalPeriodEndPropertyName);
+            .Metadata
+            .RemoveAnnotation(SqlServerAnnotationNames.TemporalPeriodEndPropertyName);
 
         VerifyError(SqlServerStrings.TemporalMustDefinePeriodProperties(nameof(Dog)), modelBuilder);
     }

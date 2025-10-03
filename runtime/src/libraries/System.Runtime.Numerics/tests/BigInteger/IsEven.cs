@@ -27,10 +27,9 @@ namespace System.Numerics.Tests
 
             for (int i = 0; i < Reps; i++)
             {
-                string bigInt1 = BigIntTools.Utils.BuildRandomNumber(
-                    random.Next() % MaxDigits + 1,
-                    random.Next()
-                );
+                string bigInt1 = BigIntTools
+                    .Utils
+                    .BuildRandomNumber(random.Next() % MaxDigits + 1, random.Next());
                 VerifyIsEven(BigInteger.Parse(bigInt1) * 2, true);
             }
 
@@ -38,10 +37,9 @@ namespace System.Numerics.Tests
 
             for (int i = 0; i < Reps; i++)
             {
-                string bigInt1 = BigIntTools.Utils.BuildRandomNumber(
-                    random.Next() % MaxDigits + 1,
-                    random.Next()
-                );
+                string bigInt1 = BigIntTools
+                    .Utils
+                    .BuildRandomNumber(random.Next() % MaxDigits + 1, random.Next());
                 VerifyIsEven((BigInteger.Parse(bigInt1) * 2) - 1, false);
             }
 
@@ -61,10 +59,9 @@ namespace System.Numerics.Tests
             // Large Negative Random Even Number
             for (int i = 0; i < Reps; i++)
             {
-                string bigInt2 = BigIntTools.Utils.BuildRandomNumber(
-                    random.Next() % MaxDigits + 1,
-                    random.Next()
-                );
+                string bigInt2 = BigIntTools
+                    .Utils
+                    .BuildRandomNumber(random.Next() % MaxDigits + 1, random.Next());
                 VerifyIsEven(BigInteger.Parse(bigInt2) * -2, true);
             }
 

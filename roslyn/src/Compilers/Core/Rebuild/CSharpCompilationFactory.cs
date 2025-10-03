@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
                     : define.Split(',').ToImmutableArray();
 
             var parseOptions = CSharpParseOptions
-                .Default.WithLanguageVersion(langVersion)
+                .Default
+                .WithLanguageVersion(langVersion)
                 .WithPreprocessorSymbols(preprocessorSymbols);
 
             var (optimizationLevel, plus) = GetOptimizationLevel(optimization);

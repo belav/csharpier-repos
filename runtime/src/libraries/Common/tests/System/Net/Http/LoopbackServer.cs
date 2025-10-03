@@ -60,9 +60,9 @@ namespace System.Net.Test.Common
                 );
 
                 byte[] buffer = new byte[128 * 1024];
-                var message = Encoding.ASCII.GetBytes(
-                    $"{_options.ListenBacklog},{_options.Address}"
-                );
+                var message = Encoding
+                    .ASCII
+                    .GetBytes($"{_options.ListenBacklog},{_options.Address}");
                 await _listenSocket.SendAsync(
                     message,
                     WebSocketMessageType.Binary,
@@ -1089,10 +1089,9 @@ namespace System.Net.Test.Common
                     foreach (HttpHeaderData headerData in headers)
                     {
                         if (
-                            headerData.Name.Equals(
-                                "Content-Length",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            headerData
+                                .Name
+                                .Equals("Content-Length", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             hasContentLength = true;
@@ -1104,14 +1103,12 @@ namespace System.Net.Test.Common
                             contentLength = int.Parse(headerData.Value);
                         }
                         else if (
-                            headerData.Name.Equals(
-                                "Transfer-Encoding",
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                            && headerData.Value.Equals(
-                                "chunked",
-                                StringComparison.OrdinalIgnoreCase
-                            )
+                            headerData
+                                .Name
+                                .Equals("Transfer-Encoding", StringComparison.OrdinalIgnoreCase)
+                            && headerData
+                                .Value
+                                .Equals("chunked", StringComparison.OrdinalIgnoreCase)
                         )
                         {
                             isChunked = true;
@@ -1139,14 +1136,16 @@ namespace System.Net.Test.Common
 
                 headerBytes.SetLength(0);
 
-                byte[] headerStartBytes = Encoding.ASCII.GetBytes(
-                    $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n"
-                        + (
-                            !hasContentLength && !isChunked && content != null
-                                ? $"Content-length: {content.Length}\r\n"
-                                : ""
-                        )
-                );
+                byte[] headerStartBytes = Encoding
+                    .ASCII
+                    .GetBytes(
+                        $"HTTP/1.1 {(int)statusCode} {GetStatusDescription(statusCode)}\r\n"
+                            + (
+                                !hasContentLength && !isChunked && content != null
+                                    ? $"Content-length: {content.Length}\r\n"
+                                    : ""
+                            )
+                    );
 
                 headerBytes.Write(headerStartBytes, 0, headerStartBytes.Length);
                 headerBytes.Write(temp, 0, temp.Length);
@@ -1220,9 +1219,9 @@ namespace System.Net.Test.Common
                 if (
                     PlatformDetection.IsBrowser
                     && requestData.Method == "OPTIONS"
-                    && requestData.Headers.Any(h =>
-                        h.Name.StartsWith("Access-Control-Request-Method")
-                    )
+                    && requestData
+                        .Headers
+                        .Any(h => h.Name.StartsWith("Access-Control-Request-Method"))
                 )
                 {
                     // handle CORS pre-flight
@@ -1378,11 +1377,9 @@ namespace System.Net.Test.Common
             GenericLoopbackOptions options = null
         )
         {
-            return await LoopbackServer.Connection.CreateAsync(
-                socket,
-                stream,
-                CreateOptions(options)
-            );
+            return await LoopbackServer
+                .Connection
+                .CreateAsync(socket, stream, CreateOptions(options));
         }
 
         private static LoopbackServer.Options CreateOptions(GenericLoopbackOptions options)

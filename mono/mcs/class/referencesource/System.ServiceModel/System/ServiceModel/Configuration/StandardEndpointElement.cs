@@ -46,9 +46,9 @@ namespace System.ServiceModel.Configuration
         {
             if (null == channelEndpointElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "channelEndpointElement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("channelEndpointElement");
             }
 
             // The properties channelEndpointElement.Name and this.Name are actually two different things:
@@ -64,9 +64,9 @@ namespace System.ServiceModel.Configuration
         {
             if (null == serviceEndpointElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serviceEndpointElement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serviceEndpointElement");
             }
 
             // The properties serviceEndpointElement.Name and this.Name are actually two different things:
@@ -90,20 +90,22 @@ namespace System.ServiceModel.Configuration
 
             if (null == channelEndpointElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "channelEndpointElement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("channelEndpointElement");
             }
 
             if (endpoint.GetType() != this.EndpointType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.ConfigInvalidTypeForEndpoint,
-                        this.EndpointType.AssemblyQualifiedName,
-                        endpoint.GetType().AssemblyQualifiedName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.ConfigInvalidTypeForEndpoint,
+                            this.EndpointType.AssemblyQualifiedName,
+                            endpoint.GetType().AssemblyQualifiedName
+                        )
+                    );
             }
 
             // The properties endpoint.Name and this.Name are actually two different things:
@@ -128,22 +130,24 @@ namespace System.ServiceModel.Configuration
 
             if (null == serviceEndpointElement)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serviceEndpointElement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serviceEndpointElement");
             }
 
             if (endpoint.GetType() != this.EndpointType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.ConfigInvalidTypeForEndpoint,
-                        (this.EndpointType == null)
-                            ? string.Empty
-                            : this.EndpointType.AssemblyQualifiedName,
-                        endpoint.GetType().AssemblyQualifiedName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.ConfigInvalidTypeForEndpoint,
+                            (this.EndpointType == null)
+                                ? string.Empty
+                                : this.EndpointType.AssemblyQualifiedName,
+                            endpoint.GetType().AssemblyQualifiedName
+                        )
+                    );
             }
 
             // The properties endpoint.Name and this.Name are actually two different things:
@@ -164,15 +168,17 @@ namespace System.ServiceModel.Configuration
             }
             if (endpoint.GetType() != this.EndpointType)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR.GetString(
-                        SR.ConfigInvalidTypeForEndpoint,
-                        (this.EndpointType == null)
-                            ? string.Empty
-                            : this.EndpointType.AssemblyQualifiedName,
-                        endpoint.GetType().AssemblyQualifiedName
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument(
+                        SR.GetString(
+                            SR.ConfigInvalidTypeForEndpoint,
+                            (this.EndpointType == null)
+                                ? string.Empty
+                                : this.EndpointType.AssemblyQualifiedName,
+                            endpoint.GetType().AssemblyQualifiedName
+                        )
+                    );
             }
 
             // The properties endpoint.Name and this.Name are actually two different things:

@@ -607,7 +607,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         )
         {
             var emitOptions = EmitOptions
-                .Default.WithDebugInformationFormat(debugInformationFormat)
+                .Default
+                .WithDebugInformationFormat(debugInformationFormat)
                 .WithInstrumentationKinds(ImmutableArray.Create(kind));
 
             var obj = GetEmitOptionsValue(emitOptions);

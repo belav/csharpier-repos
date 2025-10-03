@@ -55,13 +55,16 @@ namespace System.Web.UI
             }
             catch
             {
-                System.Diagnostics.Debug.Fail(
-                    "ControlValuePropertyAttribute: Default value of type "
-                        + type.FullName
-                        + " threw converting from the string '"
-                        + defaultValue
-                        + "'."
-                );
+                System
+                    .Diagnostics
+                    .Debug
+                    .Fail(
+                        "ControlValuePropertyAttribute: Default value of type "
+                            + type.FullName
+                            + " threw converting from the string '"
+                            + defaultValue
+                            + "'."
+                    );
             }
         }
 
@@ -104,10 +107,14 @@ namespace System.Web.UI
 
         public override int GetHashCode()
         {
-            return System.Web.Util.HashCodeCombiner.CombineHashCodes(
-                ((Name != null) ? Name.GetHashCode() : 0),
-                ((DefaultValue != null) ? DefaultValue.GetHashCode() : 0)
-            );
+            return System
+                .Web
+                .Util
+                .HashCodeCombiner
+                .CombineHashCodes(
+                    ((Name != null) ? Name.GetHashCode() : 0),
+                    ((DefaultValue != null) ? DefaultValue.GetHashCode() : 0)
+                );
         }
     }
 }

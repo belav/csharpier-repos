@@ -232,11 +232,13 @@ namespace System.Windows.Forms.PropertyGridInternal
 
         private void dropdown_button_Paint(object sender, PaintEventArgs e)
         {
-            ThemeEngine.Current.CPDrawComboButton(
-                e.Graphics,
-                dropdown_button.ClientRectangle,
-                dropdown_button.ButtonState
-            );
+            ThemeEngine
+                .Current
+                .CPDrawComboButton(
+                    e.Graphics,
+                    dropdown_button.ClientRectangle,
+                    dropdown_button.ButtonState
+                );
         }
 
         private void dialog_button_Paint(object sender, PaintEventArgs e)

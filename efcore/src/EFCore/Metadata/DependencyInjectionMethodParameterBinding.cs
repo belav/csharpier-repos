@@ -68,9 +68,9 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(ParameterBindingInfo bindingInfo)
     {
-        var serviceInstance = bindingInfo.ServiceInstances.FirstOrDefault(e =>
-            e.Type == ServiceType
-        );
+        var serviceInstance = bindingInfo
+            .ServiceInstances
+            .FirstOrDefault(e => e.Type == ServiceType);
         if (serviceInstance != null)
         {
             var parameters = Method
@@ -129,8 +129,8 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
                 var entityTypeParam = Expression.Parameter(typeof(IEntityType));
                 var entityParam = Expression.Parameter(typeof(object));
 
-                var parameters = b
-                    .Method.GetParameters()
+                var parameters = b.Method
+                    .GetParameters()
                     .Select((p, i) => Expression.Parameter(p.ParameterType, "param" + i))
                     .ToArray();
 

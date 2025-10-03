@@ -63,7 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
                 var currentTypeSymbol = currentTreeNode.Symbol;
 
                 currentTreeNode.BaseTypeNodes = currentTypeSymbol
-                    .Interfaces.Concat(currentTypeSymbol.BaseType)
+                    .Interfaces
+                    .Concat(currentTypeSymbol.BaseType)
                     .Where(baseType =>
                         baseType != null
                         && MemberAndDestinationValidator.IsDestinationValid(

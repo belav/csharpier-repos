@@ -633,8 +633,9 @@ namespace System.Web
                     // Dev11 - 364642: if Dispose is called while finalizing for AD unload then
                     // the native DirMonCompletion won't be able to call back into the appdomain.
                     // But it does not need to because _rootCallback is already reclaimed as part of AD unload
-                    bool fNeedToSendFileActionDispose =
-                        !AppDomain.CurrentDomain.IsFinalizingForUnload();
+                    bool fNeedToSendFileActionDispose = !AppDomain
+                        .CurrentDomain
+                        .IsFinalizingForUnload();
                     HandleRef ndirMonCompletionHandle = _ndirMonCompletionHandle;
                     if (ndirMonCompletionHandle.Handle != IntPtr.Zero)
                     {
@@ -1517,10 +1518,9 @@ namespace System.Web
                         Debug.Trace(
                             "FileChangesMonitorIgnoreSubdirChange",
                             "*** Ignoring SubDirChange "
-                                + DateTime.Now.ToString(
-                                    "hh:mm:ss.fff",
-                                    CultureInfo.InvariantCulture
-                                )
+                                + DateTime
+                                    .Now
+                                    .ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
                                 + ": fullPath="
                                 + fullPath
                                 + ", action="
@@ -1535,10 +1535,9 @@ namespace System.Web
                         Debug.Trace(
                             "FileChangesMonitorIgnoreSubdirChange",
                             "*** SubDirChange "
-                                + DateTime.Now.ToString(
-                                    "hh:mm:ss.fff",
-                                    CultureInfo.InvariantCulture
-                                )
+                                + DateTime
+                                    .Now
+                                    .ToString("hh:mm:ss.fff", CultureInfo.InvariantCulture)
                                 + ": fullPath="
                                 + fullPath
                                 + ", action="
@@ -1818,7 +1817,9 @@ namespace System.Web
                                     + "; Target="
                                     + nqi.Callback.Target
                                     + "(HC="
-                                    + nqi.Callback.Target.GetHashCode()
+                                    + nqi.Callback
+                                        .Target
+                                        .GetHashCode()
                                         .ToString("x", NumberFormatInfo.InvariantInfo)
                                     + ")"
                             );
@@ -2454,11 +2455,9 @@ namespace System.Web
                         {
                             // Used the cached directory monitor and file name.
                             file = fileMon.FileNameLong;
-                            fileMon = fileMon.DirectoryMonitor.StartMonitoringFileWithAssert(
-                                file,
-                                callback,
-                                alias
-                            );
+                            fileMon = fileMon
+                                .DirectoryMonitor
+                                .StartMonitoringFileWithAssert(file, callback, alias);
                             continue;
                         }
 
@@ -2836,7 +2835,8 @@ namespace System.Web
                             + handler.Target
                             + "(HC="
                             + handler
-                                .Target.GetHashCode()
+                                .Target
+                                .GetHashCode()
                                 .ToString("x", NumberFormatInfo.InvariantInfo)
                             + ")"
                     );

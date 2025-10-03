@@ -186,9 +186,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                             .UnmanagedCallingConventionTypes
                             .IsEmpty
                             ? null
-                            : symbol.Signature.UnmanagedCallingConventionTypes.Select(type =>
-                                GetConventionForString(type.Name["CallConv".Length..])
-                            ),
+                            : symbol
+                                .Signature
+                                .UnmanagedCallingConventionTypes
+                                .Select(type =>
+                                    GetConventionForString(type.Name["CallConv".Length..])
+                                ),
 
                         _ => throw ExceptionUtilities.UnexpectedValue(
                             symbol.Signature.CallingConvention
@@ -213,7 +216,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
 
                 var parameters = symbol
-                    .Signature.Parameters.Select(p =>
+                    .Signature
+                    .Parameters
+                    .Select(p =>
                         (
                             p.Type,
                             RefKindModifiers: CSharpSyntaxGeneratorInternal.GetParameterModifiers(

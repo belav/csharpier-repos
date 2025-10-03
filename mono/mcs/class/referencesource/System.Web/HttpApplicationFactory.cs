@@ -276,14 +276,15 @@ namespace System.Web
                     ApplicationFileParser parser;
 
                     parser = new ApplicationFileParser();
-                    AssemblySet referencedAssemblies = System.Web.UI.Util.GetReferencedAssemblies(
-                        _theApplicationType.Assembly
-                    );
+                    AssemblySet referencedAssemblies = System
+                        .Web
+                        .UI
+                        .Util
+                        .GetReferencedAssemblies(_theApplicationType.Assembly);
                     referencedAssemblies.Add(typeof(string).Assembly);
-                    VirtualPath virtualPath =
-                        HttpRuntime.AppDomainAppVirtualPathObject.SimpleCombine(
-                            applicationFileName
-                        );
+                    VirtualPath virtualPath = HttpRuntime
+                        .AppDomainAppVirtualPathObject
+                        .SimpleCombine(applicationFileName);
                     parser.Parse(referencedAssemblies, virtualPath);
 
                     // Create app state
@@ -410,10 +411,9 @@ namespace System.Web
             {
                 foreach (string fileName in _fileDependencies)
                 {
-                    HttpRuntime.FileChangesMonitor.StartMonitoringFile(
-                        HostingEnvironment.MapPathInternal(fileName),
-                        handler
-                    );
+                    HttpRuntime
+                        .FileChangesMonitor
+                        .StartMonitoringFile(HostingEnvironment.MapPathInternal(fileName), handler);
                 }
             }
         }
@@ -470,11 +470,13 @@ namespace System.Web
             {
                 // When this HttpApplication instance is no longer in use, recycle it.
                 app.ApplicationInstanceConsumersCounter = new CountdownTask(1); // representing required call to HttpApplication.ReleaseAppInstance
-                app.ApplicationInstanceConsumersCounter.Task.ContinueWith(
-                    (_, o) => RecycleApplicationInstance((HttpApplication)o),
-                    app,
-                    TaskContinuationOptions.ExecuteSynchronously
-                );
+                app.ApplicationInstanceConsumersCounter
+                    .Task
+                    .ContinueWith(
+                        (_, o) => RecycleApplicationInstance((HttpApplication)o),
+                        app,
+                        TaskContinuationOptions.ExecuteSynchronously
+                    );
             }
             return app;
         }
@@ -691,14 +693,16 @@ namespace System.Web
         {
             AspCompatSessionOnEndHelper helper = (AspCompatSessionOnEndHelper)eventSource;
 
-            helper.Application.ProcessSpecialRequest(
-                null,
-                _sessionOnEndMethod,
-                _sessionOnEndParamCount,
-                helper.Source,
-                helper.Args,
-                helper.Session
-            );
+            helper
+                .Application
+                .ProcessSpecialRequest(
+                    null,
+                    _sessionOnEndMethod,
+                    _sessionOnEndParamCount,
+                    helper.Source,
+                    helper.Args,
+                    helper.Session
+                );
         }
 
         private void FireSessionOnEnd(

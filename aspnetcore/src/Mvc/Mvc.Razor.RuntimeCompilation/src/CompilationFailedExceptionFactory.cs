@@ -118,9 +118,9 @@ internal static class CompilationFailedExceptionFactory
         }
         else
         {
-            sourceDocument = codeDocument.Imports.FirstOrDefault(f =>
-                string.Equals(f.FilePath, filePath, StringComparison.Ordinal)
-            );
+            sourceDocument = codeDocument
+                .Imports
+                .FirstOrDefault(f => string.Equals(f.FilePath, filePath, StringComparison.Ordinal));
         }
 
         if (sourceDocument != null)

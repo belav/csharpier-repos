@@ -129,7 +129,8 @@ namespace Internal.TypeSystem
 
             MethodSignatureFlags unmanagedCallConv = method
                 .GetPInvokeMethodMetadata()
-                .Flags.UnmanagedCallingConvention;
+                .Flags
+                .UnmanagedCallingConvention;
             if (unmanagedCallConv != MethodSignatureFlags.None)
             {
                 Debug.Assert(
@@ -310,10 +311,9 @@ namespace Internal.TypeSystem
                 {
                     index = MethodSignature.IndexOfCustomModifiersOnReturnType,
                     kind = EmbeddedSignatureDataKind.OptionalCustomModifier,
-                    type = context.SystemModule.GetKnownType(
-                        "System.Runtime.CompilerServices",
-                        name
-                    ),
+                    type = context
+                        .SystemModule
+                        .GetKnownType("System.Runtime.CompilerServices", name),
                 };
         }
 

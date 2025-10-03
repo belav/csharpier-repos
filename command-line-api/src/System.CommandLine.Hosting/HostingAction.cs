@@ -79,7 +79,8 @@ namespace System.CommandLine.Hosting
 
                         config.AddInMemoryCollection(
                             directiveResult
-                                .Values.Select(s =>
+                                .Values
+                                .Select(s =>
                                 {
                                     var parts = s.Split(kvpSeparator, count: 2);
                                     var key = parts[0];

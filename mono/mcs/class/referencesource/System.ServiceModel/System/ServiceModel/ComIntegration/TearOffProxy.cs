@@ -43,12 +43,14 @@ namespace System.ServiceModel.ComIntegration
                     throw;
 
                 return new ReturnMessage(
-                    DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new COMException(
-                            e.GetBaseException().Message,
-                            Marshal.GetHRForException(e.GetBaseException())
-                        )
-                    ),
+                    DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new COMException(
+                                e.GetBaseException().Message,
+                                Marshal.GetHRForException(e.GetBaseException())
+                            )
+                        ),
                     msg
                 );
             }
@@ -67,24 +69,30 @@ namespace System.ServiceModel.ComIntegration
                     return msgReturned;
                 else
                     return new ReturnMessage(
-                        DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new COMException(
-                                returnMsg.Exception.GetBaseException().Message,
-                                Marshal.GetHRForException(returnMsg.Exception.GetBaseException())
-                            )
-                        ),
+                        DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new COMException(
+                                    returnMsg.Exception.GetBaseException().Message,
+                                    Marshal.GetHRForException(
+                                        returnMsg.Exception.GetBaseException()
+                                    )
+                                )
+                            ),
                         msg
                     );
             }
             else
             {
                 return new ReturnMessage(
-                    DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new COMException(
-                            SR.GetString(SR.OperationNotFound, typeMethod.Name),
-                            HR.DISP_E_UNKNOWNNAME
-                        )
-                    ),
+                    DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new COMException(
+                                SR.GetString(SR.OperationNotFound, typeMethod.Name),
+                                HR.DISP_E_UNKNOWNNAME
+                            )
+                        ),
                     msg
                 );
             }

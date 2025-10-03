@@ -49,14 +49,19 @@ namespace System.Runtime.Serialization
                 null
             );
             if (ctor == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidDataContractException(
-                        SR.GetString(
-                            SR.IXmlSerializableMustHaveDefaultConstructor,
-                            DataContract.GetClrTypeFullName(type)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidDataContractException(
+                            SR.GetString(
+                                SR.IXmlSerializableMustHaveDefaultConstructor,
+                                DataContract.GetClrTypeFullName(type)
+                            )
                         )
-                    )
-                );
+                    );
 
             return ctor;
         }

@@ -29,10 +29,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static readonly ImmutableSegmentedDictionary<
             string,
             Symbol
-        > RequiredMembersErrorSentinel = ImmutableSegmentedDictionary<string, Symbol>.Empty.Add(
-            "<error sentinel>",
-            null!
-        );
+        > RequiredMembersErrorSentinel = ImmutableSegmentedDictionary<string, Symbol>
+            .Empty
+            .Add("<error sentinel>", null!);
 
         /// <summary>
         /// <see langword="default"/> if uninitialized. <see cref="RequiredMembersErrorSentinel"/> if there are errors. <see cref="ImmutableSegmentedDictionary{TKey, TValue}.Empty"/> if

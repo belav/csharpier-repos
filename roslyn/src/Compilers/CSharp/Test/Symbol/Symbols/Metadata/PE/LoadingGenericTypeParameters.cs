@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             var module0 = assembly.Modules[0];
 
             var objectType = module0
-                .GlobalNamespace.GetMembers("System")
+                .GlobalNamespace
+                .GetMembers("System")
                 .OfType<NamespaceSymbol>()
                 .Single()
                 .GetTypeMembers("Object")

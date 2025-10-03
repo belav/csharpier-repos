@@ -250,12 +250,14 @@ namespace Microsoft.CodeAnalysis
                 if ((options & DeterministicKeyOptions.IgnoreToolVersions) == 0)
                 {
                     var compilerVersion = typeof(Compilation)
-                        .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        .Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion;
                     writer.Write("compilerVersion", compilerVersion);
 
                     var runtimeVersion = typeof(object)
-                        .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                        .Assembly
+                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
                         ?.InformationalVersion;
                     writer.Write("runtimeVersion", runtimeVersion);
 

@@ -46,7 +46,8 @@ internal sealed class ConnectionLimitMiddleware<T>
             _trace.ConnectionRejected(connection.ConnectionId);
             _metrics.ConnectionRejected(
                 connection
-                    .Features.GetRequiredFeature<IConnectionMetricsContextFeature>()
+                    .Features
+                    .GetRequiredFeature<IConnectionMetricsContextFeature>()
                     .MetricsContext
             );
             await connection.DisposeAsync();

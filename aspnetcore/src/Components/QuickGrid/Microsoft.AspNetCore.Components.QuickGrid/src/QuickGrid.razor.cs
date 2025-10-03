@@ -401,9 +401,9 @@ public partial class QuickGrid<TGridItem> : IAsyncDisposable
             // the virtualized start index. It might be more performant just to have some _latestQueryRowStartIndex field, but we'd have
             // to make sure it doesn't get out of sync with the rows being rendered.
             return new ItemsProviderResult<(int, TGridItem)>(
-                items: providerResult.Items.Select(
-                    (x, i) => ValueTuple.Create(i + request.StartIndex + 2, x)
-                ),
+                items: providerResult
+                    .Items
+                    .Select((x, i) => ValueTuple.Create(i + request.StartIndex + 2, x)),
                 totalItemCount: _ariaBodyRowCount
             );
         }

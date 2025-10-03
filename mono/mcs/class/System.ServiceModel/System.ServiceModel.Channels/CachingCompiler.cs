@@ -71,15 +71,17 @@ namespace System.ServiceModel.Channels
             //CacheDependency dep = new CacheDependency (null, cacheKeys);
             CacheDependency dep = new CacheDependency(filename);
 
-            HttpRuntime.Cache.Insert(
-                cacheTypePrefix + key,
-                type,
-                dep,
-                Cache.NoAbsoluteExpiration,
-                Cache.NoSlidingExpiration,
-                CacheItemPriority.Normal,
-                removed_callback
-            );
+            HttpRuntime
+                .Cache
+                .Insert(
+                    cacheTypePrefix + key,
+                    type,
+                    dep,
+                    Cache.NoAbsoluteExpiration,
+                    Cache.NoSlidingExpiration,
+                    CacheItemPriority.Normal,
+                    removed_callback
+                );
         }
 
         public static Type GetTypeFromCache(string filename)

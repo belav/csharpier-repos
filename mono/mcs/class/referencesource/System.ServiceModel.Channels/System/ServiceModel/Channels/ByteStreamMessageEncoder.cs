@@ -243,19 +243,23 @@ namespace System.ServiceModel.Channels
             }
             if (maxMessageSize < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "maxMessageSize",
-                    maxMessageSize,
-                    SR.ArgumentOutOfMinRange(0)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "maxMessageSize",
+                        maxMessageSize,
+                        SR.ArgumentOutOfMinRange(0)
+                    );
             }
             if (messageOffset < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange(
-                    "messageOffset",
-                    messageOffset,
-                    SR.ArgumentOutOfMinRange(0)
-                );
+                throw FxTrace
+                    .Exception
+                    .ArgumentOutOfRange(
+                        "messageOffset",
+                        messageOffset,
+                        SR.ArgumentOutOfMinRange(0)
+                    );
             }
 
             EventTraceActivity eventTraceActivity = null;

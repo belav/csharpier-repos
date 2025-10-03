@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AnonymousFunctionExpressionSyntax anonymousFunction => GetSymbolInfo(
                         anonymousFunction
                     )
-                        .Symbol.GetSymbol(),
+                        .Symbol
+                        .GetSymbol(),
                     _ => null,
                 };
             }

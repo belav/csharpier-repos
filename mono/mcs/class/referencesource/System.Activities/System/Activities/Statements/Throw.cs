@@ -43,11 +43,17 @@ namespace System.Activities.Statements
 
             if (exception == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.MemberCannotBeNull("Exception", this.GetType().Name, this.DisplayName)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.MemberCannotBeNull(
+                                "Exception",
+                                this.GetType().Name,
+                                this.DisplayName
+                            )
+                        )
+                    );
             }
 
             throw FxTrace.Exception.AsError(exception);

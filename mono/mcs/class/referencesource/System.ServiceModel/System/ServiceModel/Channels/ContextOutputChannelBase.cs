@@ -179,12 +179,9 @@ namespace System.ServiceModel.Channels
 
                 if (shouldSend)
                 {
-                    IAsyncResult result = this.channel.InnerChannel.BeginSend(
-                        this.message,
-                        this.timeoutHelper.RemainingTime(),
-                        onSend,
-                        this
-                    );
+                    IAsyncResult result = this.channel
+                        .InnerChannel
+                        .BeginSend(this.message, this.timeoutHelper.RemainingTime(), onSend, this);
                     if (result.CompletedSynchronously)
                     {
                         OnSendCompleted(result);
@@ -265,12 +262,14 @@ namespace System.ServiceModel.Channels
                 IAsyncResult sendResult;
                 try
                 {
-                    sendResult = this.channel.InnerChannel.BeginSend(
-                        this.sendMessage,
-                        this.timeoutHelper.RemainingTime(),
-                        onSend,
-                        this
-                    );
+                    sendResult = this.channel
+                        .InnerChannel
+                        .BeginSend(
+                            this.sendMessage,
+                            this.timeoutHelper.RemainingTime(),
+                            onSend,
+                            this
+                        );
                     throwing = false;
                 }
                 finally

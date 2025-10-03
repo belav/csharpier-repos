@@ -402,10 +402,12 @@ namespace Novell.Directory.Ldap
                 {
                     decoded.Append(
                         (char)
-                            System.Convert.ToInt32(
-                                URLEncoded.Substring(fieldStart, (fieldEnd) - (fieldStart)),
-                                16
-                            )
+                            System
+                                .Convert
+                                .ToInt32(
+                                    URLEncoded.Substring(fieldStart, (fieldEnd) - (fieldStart)),
+                                    16
+                                )
                     );
                 }
                 catch (System.FormatException ex)
@@ -797,9 +799,9 @@ namespace Novell.Directory.Ldap
                 if ((portStart < hostPortEnd) && (portStart != -1))
                 {
                     // port is specified
-                    port = System.Int32.Parse(
-                        url.Substring(portStart + 1, (hostPortEnd) - (portStart + 1))
-                    );
+                    port = System
+                        .Int32
+                        .Parse(url.Substring(portStart + 1, (hostPortEnd) - (portStart + 1)));
                 }
                 else { }
             }
@@ -816,9 +818,9 @@ namespace Novell.Directory.Ldap
                 {
                     // port specified in URL
                     host = url.Substring(scanStart, (portStart) - (scanStart));
-                    port = System.Int32.Parse(
-                        url.Substring(portStart + 1, (hostPortEnd) - (portStart + 1))
-                    );
+                    port = System
+                        .Int32
+                        .Parse(url.Substring(portStart + 1, (hostPortEnd) - (portStart + 1)));
                 }
             }
 

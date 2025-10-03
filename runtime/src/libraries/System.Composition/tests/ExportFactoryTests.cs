@@ -158,7 +158,8 @@ namespace System.Composition.UnitTests
                 )
                 .CreateContainer();
             var s = cc.GetExport<DataConsistencyBoundaryProvider>()
-                .SharingScopeFactory.CreateExport();
+                .SharingScopeFactory
+                .CreateExport();
             var g = s.Value.GetExport<GloballySharedWithDependency>();
             s.Dispose();
             var a = (A)g.A;

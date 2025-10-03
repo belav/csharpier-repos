@@ -91,10 +91,12 @@ namespace ILCompiler.DependencyAnalysis
             if (_typeDefinition.HasBaseType)
             {
                 if (
-                    _typeDefinition.BaseType.DoesTypeRequire(
-                        DiagnosticUtilities.RequiresUnreferencedCodeAttribute,
-                        out var requiresAttribute
-                    )
+                    _typeDefinition
+                        .BaseType
+                        .DoesTypeRequire(
+                            DiagnosticUtilities.RequiresUnreferencedCodeAttribute,
+                            out var requiresAttribute
+                        )
                     && !_typeDefinition.DoesTypeRequire(
                         DiagnosticUtilities.RequiresUnreferencedCodeAttribute,
                         out _
@@ -109,14 +111,16 @@ namespace ILCompiler.DependencyAnalysis
                     string arg2 = MessageFormat.FormatRequiresAttributeUrlArg(
                         DiagnosticUtilities.GetRequiresAttributeUrl(requiresAttribute.Value)
                     );
-                    metadataManager.Logger.LogWarning(
-                        new MessageOrigin(_typeDefinition),
-                        DiagnosticId.RequiresUnreferencedCodeOnBaseClass,
-                        _typeDefinition.GetDisplayName(),
-                        _typeDefinition.BaseType.GetDisplayName(),
-                        arg1,
-                        arg2
-                    );
+                    metadataManager
+                        .Logger
+                        .LogWarning(
+                            new MessageOrigin(_typeDefinition),
+                            DiagnosticId.RequiresUnreferencedCodeOnBaseClass,
+                            _typeDefinition.GetDisplayName(),
+                            _typeDefinition.BaseType.GetDisplayName(),
+                            arg1,
+                            arg2
+                        );
                 }
 
                 GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(

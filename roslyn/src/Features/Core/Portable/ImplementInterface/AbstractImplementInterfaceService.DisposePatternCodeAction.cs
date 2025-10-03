@@ -169,7 +169,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             )
             {
                 var compilation = await document
-                    .Project.GetRequiredCompilationAsync(cancellationToken)
+                    .Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 var disposedValueField = await CreateDisposedValueFieldAsync(
@@ -470,10 +471,11 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                 var syntaxTree = await document
                     .GetRequiredSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
-                var configOptions =
-                    document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(
-                        syntaxTree
-                    );
+                var configOptions = document
+                    .Project
+                    .AnalyzerOptions
+                    .AnalyzerConfigOptionsProvider
+                    .GetOptions(syntaxTree);
 
                 if (
                     configOptions.TryGetEditorConfigOption<
@@ -515,7 +517,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     .ConfigureAwait(false);
 
                 var compilation = await document
-                    .Project.GetRequiredCompilationAsync(cancellationToken)
+                    .Project
+                    .GetRequiredCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var boolType = compilation.GetSpecialType(SpecialType.System_Boolean);
                 var accessibilityLevel = requireAccessiblity

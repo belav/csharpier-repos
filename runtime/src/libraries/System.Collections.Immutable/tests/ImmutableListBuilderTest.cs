@@ -86,7 +86,8 @@ namespace System.Collections.Immutable.Tests
         public void EnumerateBuilderWhileMutating()
         {
             ImmutableList<int>.Builder builder = ImmutableList<int>
-                .Empty.AddRange(Enumerable.Range(1, 10))
+                .Empty
+                .AddRange(Enumerable.Range(1, 10))
                 .ToBuilder();
             Assert.Equal(Enumerable.Range(1, 10), builder);
 

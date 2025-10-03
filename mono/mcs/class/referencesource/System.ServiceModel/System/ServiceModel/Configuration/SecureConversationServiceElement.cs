@@ -35,9 +35,11 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                    );
             }
             if (null == from)
             {
@@ -50,24 +52,26 @@ namespace System.ServiceModel.Configuration
         {
             if (secureConversation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "secureConversation"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("secureConversation");
             }
             if (!string.IsNullOrEmpty(this.SecurityStateEncoderType))
             {
                 Type type = System.Type.GetType(this.SecurityStateEncoderType, true);
                 if (!typeof(SecurityStateEncoder).IsAssignableFrom(type))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(
-                            SR.GetString(
-                                SR.ConfigInvalidSecurityStateEncoderType,
-                                this.SecurityStateEncoderType,
-                                typeof(SecurityStateEncoder).ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidSecurityStateEncoderType,
+                                    this.SecurityStateEncoderType,
+                                    typeof(SecurityStateEncoder).ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 secureConversation.SecurityStateEncoder = (SecurityStateEncoder)
                     Activator.CreateInstance(type);

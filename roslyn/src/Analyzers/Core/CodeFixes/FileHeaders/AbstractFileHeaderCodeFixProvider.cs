@@ -101,7 +101,10 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             if (
                 fileHeaderTemplate is null
                 && !document
-                    .Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(tree)
+                    .Project
+                    .AnalyzerOptions
+                    .AnalyzerConfigOptionsProvider
+                    .GetOptions(tree)
                     .TryGetEditorConfigOption(
                         CodeStyleOptions2.FileHeaderTemplate,
                         out fileHeaderTemplate

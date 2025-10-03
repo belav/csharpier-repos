@@ -102,11 +102,13 @@ namespace Microsoft.Extensions.Hosting
             // install the service
             using (
                 var serviceManagerHandle = new SafeServiceHandle(
-                    Interop.Advapi32.OpenSCManager(
-                        null,
-                        null,
-                        Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
-                    )
+                    Interop
+                        .Advapi32
+                        .OpenSCManager(
+                            null,
+                            null,
+                            Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
+                        )
                 )
             )
             {
@@ -118,11 +120,13 @@ namespace Microsoft.Extensions.Hosting
                 // delete existing service if it exists
                 using (
                     var existingServiceHandle = new SafeServiceHandle(
-                        Interop.Advapi32.OpenService(
-                            serviceManagerHandle,
-                            serviceName,
-                            Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL
-                        )
+                        Interop
+                            .Advapi32
+                            .OpenService(
+                                serviceManagerHandle,
+                                serviceName,
+                                Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL
+                            )
                     )
                 )
                 {
@@ -133,21 +137,23 @@ namespace Microsoft.Extensions.Hosting
                 }
 
                 var serviceHandle = new SafeServiceHandle(
-                    Interop.Advapi32.CreateService(
-                        serviceManagerHandle,
-                        serviceName,
-                        $"{nameof(WindowsServiceTester)} {serviceName} test service",
-                        Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL,
-                        Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_OWN_PROCESS,
-                        (int)ServiceStartMode.Manual,
-                        Interop.Advapi32.ServiceStartErrorModes.ERROR_CONTROL_NORMAL,
-                        commandLine,
-                        loadOrderGroup: null,
-                        pTagId: IntPtr.Zero,
-                        dependencies: null,
-                        servicesStartName: null,
-                        password: null
-                    )
+                    Interop
+                        .Advapi32
+                        .CreateService(
+                            serviceManagerHandle,
+                            serviceName,
+                            $"{nameof(WindowsServiceTester)} {serviceName} test service",
+                            Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL,
+                            Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_OWN_PROCESS,
+                            (int)ServiceStartMode.Manual,
+                            Interop.Advapi32.ServiceStartErrorModes.ERROR_CONTROL_NORMAL,
+                            commandLine,
+                            loadOrderGroup: null,
+                            pTagId: IntPtr.Zero,
+                            dependencies: null,
+                            servicesStartName: null,
+                            password: null
+                        )
                 );
 
                 if (serviceHandle.IsInvalid)

@@ -60,7 +60,8 @@ namespace System.Web.Http.Cors
 
             HttpResponseMessage response = await invoker.SendAsync(request, CancellationToken.None);
             string origin = response
-                .Headers.GetValues("Access-Control-Allow-Origin")
+                .Headers
+                .GetValues("Access-Control-Allow-Origin")
                 .FirstOrDefault();
 
             Assert.Equal(expectedOrigin, origin);
@@ -92,13 +93,16 @@ namespace System.Web.Http.Cors
 
             HttpResponseMessage response = await invoker.SendAsync(request, CancellationToken.None);
             string origin = response
-                .Headers.GetValues(CorsConstants.AccessControlAllowOrigin)
+                .Headers
+                .GetValues(CorsConstants.AccessControlAllowOrigin)
                 .FirstOrDefault();
             string allowMethod = response
-                .Headers.GetValues(CorsConstants.AccessControlAllowMethods)
+                .Headers
+                .GetValues(CorsConstants.AccessControlAllowMethods)
                 .FirstOrDefault();
             string[] allowHeaders = response
-                .Headers.GetValues(CorsConstants.AccessControlAllowHeaders)
+                .Headers
+                .GetValues(CorsConstants.AccessControlAllowHeaders)
                 .FirstOrDefault()
                 .Split(',');
             string[] requestedHeaderArray = requestedHeaders.Split(',');

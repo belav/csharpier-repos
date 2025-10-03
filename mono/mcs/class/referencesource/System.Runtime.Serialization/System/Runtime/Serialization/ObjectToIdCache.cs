@@ -104,11 +104,16 @@ namespace System.Runtime.Serialization
             }
             // m_obj must ALWAYS have atleast one slot empty (null).
             Fx.Assert("Object table overflow");
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.GetString(SR.ObjectTableOverflow)
-                )
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.ObjectTableOverflow)
+                    )
+                );
         }
 
         private void RemoveAt(int position)
@@ -156,11 +161,16 @@ namespace System.Runtime.Serialization
             }
             // m_obj must ALWAYS have atleast one slot empty (null).
             Fx.Assert("Object table overflow");
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                XmlObjectSerializer.CreateSerializationException(
-                    SR.GetString(SR.ObjectTableOverflow)
-                )
-            );
+            throw System
+                .Runtime
+                .Serialization
+                .DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(SR.ObjectTableOverflow)
+                    )
+                );
         }
 
         private int ComputeStartPosition(object o)

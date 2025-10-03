@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis
                 if (diagnostic.ProgrammaticSuppressionInfo is { } programmaticSuppressionInfo)
                 {
                     var suppressionsStr = programmaticSuppressionInfo
-                        .Suppressions.OrderBy(idAndJustification => idAndJustification.Id)
+                        .Suppressions
+                        .OrderBy(idAndJustification => idAndJustification.Id)
                         .Select(idAndJustification =>
                             $"Suppression Id: {idAndJustification.Id}, Suppression Justification: {idAndJustification.Justification}"
                         )

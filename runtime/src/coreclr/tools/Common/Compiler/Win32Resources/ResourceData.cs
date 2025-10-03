@@ -50,7 +50,8 @@ namespace ILCompiler.Win32Resources
         )
         {
             System.Collections.Immutable.ImmutableArray<byte> ecmaData = ecmaModule
-                .PEReader.GetEntireImage()
+                .PEReader
+                .GetEntireImage()
                 .GetContent();
             PEReader peFile = ecmaModule.PEReader;
 
@@ -58,7 +59,8 @@ namespace ILCompiler.Win32Resources
             if (resourceDirectory.Size != 0)
             {
                 BlobReader resourceDataBlob = ecmaModule
-                    .PEReader.GetSectionData(resourceDirectory.RelativeVirtualAddress)
+                    .PEReader
+                    .GetSectionData(resourceDirectory.RelativeVirtualAddress)
                     .GetReader(0, resourceDirectory.Size);
                 ReadResourceData(resourceDataBlob, peFile, resourceFilter);
             }
@@ -142,13 +144,14 @@ namespace ILCompiler.Win32Resources
             )
             {
                 return resType
-                    .NameHeadID.SelectMany(nameIdPair =>
-                        SelectResName(type, nameIdPair.Key, nameIdPair.Value)
-                    )
+                    .NameHeadID
+                    .SelectMany(nameIdPair => SelectResName(type, nameIdPair.Key, nameIdPair.Value))
                     .Concat(
-                        resType.NameHeadName.SelectMany(nameNamePair =>
-                            SelectResName(type, nameNamePair.Key, nameNamePair.Value)
-                        )
+                        resType
+                            .NameHeadName
+                            .SelectMany(nameNamePair =>
+                                SelectResName(type, nameNamePair.Key, nameNamePair.Value)
+                            )
                     );
             }
 
@@ -158,9 +161,9 @@ namespace ILCompiler.Win32Resources
                 ResName resType
             )
             {
-                return resType.Languages.Select(
-                    (lang) => (name, type, lang.Key, lang.Value.DataEntry)
-                );
+                return resType
+                    .Languages
+                    .Select((lang) => (name, type, lang.Key, lang.Value.DataEntry));
             }
         }
 

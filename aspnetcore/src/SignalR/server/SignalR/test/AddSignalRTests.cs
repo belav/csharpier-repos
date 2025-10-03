@@ -125,13 +125,17 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 1,
                 serviceProvider
                     .GetRequiredService<IOptions<HubOptions>>()
-                    .Value.SupportedProtocols.Count
+                    .Value
+                    .SupportedProtocols
+                    .Count
             );
             Assert.Equal(
                 0,
                 serviceProvider
                     .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
-                    .Value.SupportedProtocols.Count
+                    .Value
+                    .SupportedProtocols
+                    .Count
             );
 
             Assert.Null(
@@ -140,7 +144,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             Assert.Single(
                 serviceProvider
                     .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
-                    .Value.HubFilters
+                    .Value
+                    .HubFilters
             );
         }
 
@@ -199,7 +204,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 42,
                 serviceProvider
                     .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
-                    .Value.StreamBufferCapacity
+                    .Value
+                    .StreamBufferCapacity
             );
         }
 
@@ -257,7 +263,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             Assert.Collection(
                 serviceProvider
                     .GetRequiredService<IOptions<HubOptions<CustomHub>>>()
-                    .Value.SupportedProtocols,
+                    .Value
+                    .SupportedProtocols,
                 p =>
                 {
                     Assert.Equal("json", p);

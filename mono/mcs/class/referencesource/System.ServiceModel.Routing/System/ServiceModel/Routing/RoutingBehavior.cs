@@ -161,8 +161,9 @@ namespace System.ServiceModel.Routing
             )
             {
                 //Turn on ReceiveContext here if supported
-                IReceiveContextSettings receiveContextSettings =
-                    endpoint.Binding.GetProperty<IReceiveContextSettings>(bindingParameters);
+                IReceiveContextSettings receiveContextSettings = endpoint
+                    .Binding
+                    .GetProperty<IReceiveContextSettings>(bindingParameters);
                 if (receiveContextSettings != null)
                 {
                     receiveContextSettings.Enabled = true;
@@ -208,8 +209,9 @@ namespace System.ServiceModel.Routing
                     this.TransactedReceiveEnabled = true;
                 }
 
-                IReceiveContextSettings rcSettings =
-                    endpoint.Binding.GetProperty<IReceiveContextSettings>(bindingParams);
+                IReceiveContextSettings rcSettings = endpoint
+                    .Binding
+                    .GetProperty<IReceiveContextSettings>(bindingParams);
                 if (rcSettings != null && rcSettings.Enabled)
                 {
                     foreach (OperationDescription operation in endpoint.Contract.Operations)
@@ -238,8 +240,9 @@ namespace System.ServiceModel.Routing
 
             void IInputSessionShutdown.ChannelFaulted(IDuplexContextChannel channel)
             {
-                RoutingChannelExtension channelExtension =
-                    channel.Extensions.Find<RoutingChannelExtension>();
+                RoutingChannelExtension channelExtension = channel
+                    .Extensions
+                    .Find<RoutingChannelExtension>();
                 if (channelExtension != null)
                 {
                     channelExtension.Fault(new CommunicationObjectFaultedException());
@@ -252,8 +255,9 @@ namespace System.ServiceModel.Routing
 
             void IInputSessionShutdown.DoneReceiving(IDuplexContextChannel channel)
             {
-                RoutingChannelExtension channelExtension =
-                    channel.Extensions.Find<RoutingChannelExtension>();
+                RoutingChannelExtension channelExtension = channel
+                    .Extensions
+                    .Find<RoutingChannelExtension>();
                 channelExtension.DoneReceiving(this.Endpoint.Binding.CloseTimeout);
             }
         }

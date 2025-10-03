@@ -36,12 +36,14 @@ public sealed class HeaderDictionaryAddAnalyzer : DiagnosticAnalyzer
                 if (
                     IsAddMethod(invocation.TargetMethod)
                     && invocation.TargetMethod.Parameters.Length == 2
-                    && SymbolEqualityComparer.Default.Equals(
-                        wellKnownTypes.Get(
-                            WellKnownType.Microsoft_AspNetCore_Http_IHeaderDictionary
-                        ),
-                        invocation.Instance?.Type
-                    )
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            wellKnownTypes.Get(
+                                WellKnownType.Microsoft_AspNetCore_Http_IHeaderDictionary
+                            ),
+                            invocation.Instance?.Type
+                        )
                 )
                 {
                     AddDiagnosticWarning(context, invocation.Syntax.GetLocation());

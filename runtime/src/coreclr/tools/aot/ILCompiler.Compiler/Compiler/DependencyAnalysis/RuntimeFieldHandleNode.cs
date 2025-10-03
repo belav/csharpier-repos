@@ -60,14 +60,17 @@ namespace ILCompiler.DependencyAnalysis
             objData.RequireInitialPointerAlignment();
             objData.AddSymbol(this);
 
-            NativeLayoutFieldLdTokenVertexNode ldtokenSigNode =
-                factory.NativeLayout.FieldLdTokenVertex(_targetField);
+            NativeLayoutFieldLdTokenVertexNode ldtokenSigNode = factory
+                .NativeLayout
+                .FieldLdTokenVertex(_targetField);
             objData.EmitPointerReloc(
-                factory.NativeLayout.NativeLayoutSignature(
-                    ldtokenSigNode,
-                    s_NativeLayoutSignaturePrefix,
-                    _targetField
-                )
+                factory
+                    .NativeLayout
+                    .NativeLayoutSignature(
+                        ldtokenSigNode,
+                        s_NativeLayoutSignaturePrefix,
+                        _targetField
+                    )
             );
 
             return objData.ToObjectData();

@@ -48,7 +48,8 @@ public class ComplexPropertyEntry : MemberEntry
     {
         get =>
             Metadata
-                .ComplexType.GetFlattenedProperties()
+                .ComplexType
+                .GetFlattenedProperties()
                 .Any(property => InternalEntry.IsModified(property));
         set
         {
@@ -105,7 +106,8 @@ public class ComplexPropertyEntry : MemberEntry
     /// </remarks>
     public virtual IEnumerable<PropertyEntry> Properties =>
         Metadata
-            .ComplexType.GetProperties()
+            .ComplexType
+            .GetProperties()
             .Select(property => new PropertyEntry(InternalEntry, property));
 
     /// <summary>
@@ -154,6 +156,7 @@ public class ComplexPropertyEntry : MemberEntry
     /// </remarks>
     public virtual IEnumerable<ComplexPropertyEntry> ComplexProperties =>
         Metadata
-            .ComplexType.GetComplexProperties()
+            .ComplexType
+            .GetComplexProperties()
             .Select(property => new ComplexPropertyEntry(InternalEntry, property));
 }

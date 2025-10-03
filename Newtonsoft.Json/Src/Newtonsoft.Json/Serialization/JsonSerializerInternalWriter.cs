@@ -401,9 +401,9 @@ namespace Newtonsoft.Json.Serialization
 
             if (
                 HasFlag(
-                    property.DefaultValueHandling.GetValueOrDefault(
-                        Serializer._defaultValueHandling
-                    ),
+                    property
+                        .DefaultValueHandling
+                        .GetValueOrDefault(Serializer._defaultValueHandling),
                     DefaultValueHandling.Ignore
                 ) && MiscellaneousUtils.ValueEquals(memberValue, property.GetResolvedDefaultValue())
             )
@@ -735,8 +735,9 @@ namespace Newtonsoft.Json.Serialization
                 }
             }
 
-            IEnumerable<KeyValuePair<object, object>>? extensionData =
-                contract.ExtensionDataGetter?.Invoke(value);
+            IEnumerable<KeyValuePair<object, object>>? extensionData = contract
+                .ExtensionDataGetter
+                ?.Invoke(value);
             if (extensionData != null)
             {
                 foreach (KeyValuePair<object, object> e in extensionData)
@@ -805,9 +806,9 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (property.PropertyContract == null)
                 {
-                    property.PropertyContract = Serializer._contractResolver.ResolveContract(
-                        property.PropertyType!
-                    );
+                    property.PropertyContract = Serializer
+                        ._contractResolver
+                        .ResolveContract(property.PropertyType!);
                 }
 
                 memberValue = property.ValueProvider!.GetValue(value);
@@ -1360,9 +1361,9 @@ namespace Newtonsoft.Json.Serialization
 
             if (contract.ItemContract == null)
             {
-                contract.ItemContract = Serializer._contractResolver.ResolveContract(
-                    contract.CollectionItemType ?? typeof(object)
-                );
+                contract.ItemContract = Serializer
+                    ._contractResolver
+                    .ResolveContract(contract.CollectionItemType ?? typeof(object));
             }
 
             return writeMetadataObject;
@@ -1675,9 +1676,9 @@ namespace Newtonsoft.Json.Serialization
                 }
                 else if (_rootType != null && _serializeStack.Count == _rootLevel)
                 {
-                    JsonContract rootContract = Serializer._contractResolver.ResolveContract(
-                        _rootType
-                    );
+                    JsonContract rootContract = Serializer
+                        ._contractResolver
+                        .ResolveContract(_rootType);
 
                     if (contract.NonNullableUnderlyingType != rootContract.CreatedType)
                     {
@@ -1717,16 +1718,16 @@ namespace Newtonsoft.Json.Serialization
 
             if (contract.ItemContract == null)
             {
-                contract.ItemContract = Serializer._contractResolver.ResolveContract(
-                    contract.DictionaryValueType ?? typeof(object)
-                );
+                contract.ItemContract = Serializer
+                    ._contractResolver
+                    .ResolveContract(contract.DictionaryValueType ?? typeof(object));
             }
 
             if (contract.KeyContract == null)
             {
-                contract.KeyContract = Serializer._contractResolver.ResolveContract(
-                    contract.DictionaryKeyType ?? typeof(object)
-                );
+                contract.KeyContract = Serializer
+                    ._contractResolver
+                    .ResolveContract(contract.DictionaryKeyType ?? typeof(object));
             }
 
             int initialDepth = writer.Top;

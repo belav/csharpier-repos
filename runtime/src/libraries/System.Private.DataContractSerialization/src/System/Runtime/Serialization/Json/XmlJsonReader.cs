@@ -1178,10 +1178,9 @@ namespace System.Runtime.Serialization.Json
             } while (_complexTextMode == JsonComplexTextMode.QuotedText);
 
             int actualOffset = BufferReader.Offset - 1; //  -1 to ignore " at end of local name
-            elementNode.LocalName.SetValue(
-                elementNode.NameOffset,
-                actualOffset - elementNode.NameOffset
-            );
+            elementNode
+                .LocalName
+                .SetValue(elementNode.NameOffset, actualOffset - elementNode.NameOffset);
             elementNode.NameLength = actualOffset - elementNode.NameOffset;
             elementNode.Namespace.Uri.SetValue(elementNode.NameOffset, 0);
             elementNode.Prefix.SetValue(PrefixHandleType.Empty);
@@ -1622,11 +1621,9 @@ namespace System.Runtime.Serialization.Json
                         }
                     } while (_complexTextMode == JsonComplexTextMode.QuotedText);
 
-                    attribute.Value.SetValue(
-                        ValueHandleType.UTF8,
-                        offset,
-                        BufferReader.Offset - 1 - offset
-                    );
+                    attribute
+                        .Value
+                        .SetValue(ValueHandleType.UTF8, offset, BufferReader.Offset - 1 - offset);
 
                     SkipWhitespaceInBufferReader();
 
@@ -1672,11 +1669,9 @@ namespace System.Runtime.Serialization.Json
             attribute.LocalName.SetConstantValue(StringHandleConstStringType.Item);
             attribute.Namespace.Uri.SetValue(0, 0);
             attribute.Prefix.SetValue(PrefixHandleType.Empty);
-            attribute.Value.SetValue(
-                ValueHandleType.UTF8,
-                elementNode.NameOffset,
-                elementNode.NameLength
-            );
+            attribute
+                .Value
+                .SetValue(ValueHandleType.UTF8, elementNode.NameOffset, elementNode.NameLength);
 
             elementNode.NameLength = 0;
             elementNode.Prefix.SetValue(PrefixHandleType.A);

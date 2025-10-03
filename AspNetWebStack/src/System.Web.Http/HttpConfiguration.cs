@@ -96,7 +96,8 @@ namespace System.Web.Http
             if (
                 settings.IsServiceCollectionInitialized
                 && !settings
-                    .Services.GetModelValidatorProviders()
+                    .Services
+                    .GetModelValidatorProviders()
                     .SequenceEqual(configuration.Services.GetModelValidatorProviders())
             )
             {
@@ -270,10 +271,12 @@ namespace System.Web.Http
         private static void DefaultInitializer(HttpConfiguration configuration)
         {
             // Register the default IRequiredMemberSelector for formatters that haven't been assigned one
-            ModelMetadataProvider metadataProvider =
-                configuration.Services.GetModelMetadataProvider();
-            IEnumerable<ModelValidatorProvider> validatorProviders =
-                configuration.Services.GetModelValidatorProviders();
+            ModelMetadataProvider metadataProvider = configuration
+                .Services
+                .GetModelMetadataProvider();
+            IEnumerable<ModelValidatorProvider> validatorProviders = configuration
+                .Services
+                .GetModelValidatorProviders();
             IRequiredMemberSelector defaultRequiredMemberSelector =
                 new ModelValidationRequiredMemberSelector(metadataProvider, validatorProviders);
 

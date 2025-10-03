@@ -52,12 +52,9 @@ namespace System.Web
         {
             if (enableHeaderChecking)
             {
-                HttpEncoder.Current.HeaderNameValueEncode(
-                    unknownHeader,
-                    value,
-                    out _unknownHeader,
-                    out _value
-                );
+                HttpEncoder
+                    .Current
+                    .HeaderNameValueEncode(unknownHeader, value, out _unknownHeader, out _value);
                 _knownHeaderIndex = HttpWorkerRequest.GetKnownResponseHeaderIndex(_unknownHeader);
             }
             else

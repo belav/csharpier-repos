@@ -1703,7 +1703,8 @@ namespace System.Data.SqlClient
                 {
                     // Get the sources rowset for the SQLOLEDB enumerator
                     DataTable table = SqlClientFactory
-                        .Instance.CreateDataSourceEnumerator()
+                        .Instance
+                        .CreateDataSourceEnumerator()
                         .GetDataSources();
                     DataColumn serverName = table.Columns[
                         System.Data.Sql.SqlDataSourceEnumerator.ServerName

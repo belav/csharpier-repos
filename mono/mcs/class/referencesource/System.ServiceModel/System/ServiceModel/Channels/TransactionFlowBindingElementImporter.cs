@@ -149,11 +149,15 @@ namespace System.ServiceModel.Channels
                 )
                     tfbe.TransactionProtocol = agreedTransactionProtocol;
                 else if (anOperationCaresAboutTransactionProtocol)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(
-                            SR.GetString(SR.SFxCannotHaveDifferentTransactionProtocolsInOneBinding)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.SFxCannotHaveDifferentTransactionProtocolsInOneBinding
+                                )
+                            )
+                        );
             }
         }
 
@@ -220,15 +224,17 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new NotSupportedException(
-                        SR.GetString(
-                            SR.UnsupportedBooleanAttribute,
-                            TransactionPolicyStrings.OptionalLocal,
-                            e.Message
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.UnsupportedBooleanAttribute,
+                                TransactionPolicyStrings.OptionalLocal,
+                                e.Message
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -256,8 +262,9 @@ namespace System.ServiceModel.Channels
 
         TransactionFlowBindingElement EnsureBindingElement(PolicyConversionContext context)
         {
-            TransactionFlowBindingElement settings =
-                context.BindingElements.Find<TransactionFlowBindingElement>();
+            TransactionFlowBindingElement settings = context
+                .BindingElements
+                .Find<TransactionFlowBindingElement>();
             if (settings == null)
             {
                 settings = new TransactionFlowBindingElement(false);

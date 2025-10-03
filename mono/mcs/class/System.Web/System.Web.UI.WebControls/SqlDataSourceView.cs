@@ -241,9 +241,9 @@ namespace System.Web.UI.WebControls
             {
                 command.CommandType = CommandType.StoredProcedure;
                 if (SortParameterName.Length > 0 && arguments.SortExpression.Length > 0)
-                    command.Parameters.Add(
-                        CreateDbParameter(SortParameterName, arguments.SortExpression)
-                    );
+                    command
+                        .Parameters
+                        .Add(CreateDbParameter(SortParameterName, arguments.SortExpression));
             }
 
             if (SelectParameters.Count > 0)
@@ -554,14 +554,16 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    command.Parameters.Add(
-                        CreateDbParameter(
-                            p.Name,
-                            parameterValues[parameterName],
-                            p.Direction,
-                            p.Size
-                        )
-                    );
+                    command
+                        .Parameters
+                        .Add(
+                            CreateDbParameter(
+                                p.Name,
+                                parameterValues[parameterName],
+                                p.Direction,
+                                p.Size
+                            )
+                        );
                 }
             }
 
@@ -576,13 +578,13 @@ namespace System.Web.UI.WebControls
             {
                 foreach (DictionaryEntry de in oldValues)
                     if (
-                        !command.Parameters.Contains(
-                            ParameterPrefix + FormatOldParameter((string)de.Key)
-                        )
+                        !command
+                            .Parameters
+                            .Contains(ParameterPrefix + FormatOldParameter((string)de.Key))
                     )
-                        command.Parameters.Add(
-                            CreateDbParameter(FormatOldParameter((string)de.Key), de.Value)
-                        );
+                        command
+                            .Parameters
+                            .Add(CreateDbParameter(FormatOldParameter((string)de.Key), de.Value));
             }
         }
 

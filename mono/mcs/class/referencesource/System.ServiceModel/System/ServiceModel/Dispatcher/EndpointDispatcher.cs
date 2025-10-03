@@ -277,9 +277,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (channelDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "channelDispatcher"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("channelDispatcher");
             }
 
             if (this.channelDispatcher != null)
@@ -298,9 +298,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (channelDispatcher == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "channelDispatcher"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("channelDispatcher");
             }
 
             if (this.channelDispatcher != channelDispatcher)

@@ -409,10 +409,9 @@ namespace System.Web.DynamicData
             {
                 object value;
                 if (
-                    FilterUserControl.RouteValues.TryGetValue(
-                        FilterUserControl.Column.Name,
-                        out value
-                    )
+                    FilterUserControl
+                        .RouteValues
+                        .TryGetValue(FilterUserControl.Column.Name, out value)
                 )
                 {
                     return value as string;
@@ -429,18 +428,22 @@ namespace System.Web.DynamicData
 
             public override void PopulateListControl(ListControl listControl)
             {
-                listControl.Items.Add(
-                    new ListItem(
-                        DynamicDataResources.FilterUserControlBase_BooleanFilter_TrueString,
-                        bool.TrueString
-                    )
-                );
-                listControl.Items.Add(
-                    new ListItem(
-                        DynamicDataResources.FilterUserControlBase_BooleanFilter_FalseString,
-                        bool.FalseString
-                    )
-                );
+                listControl
+                    .Items
+                    .Add(
+                        new ListItem(
+                            DynamicDataResources.FilterUserControlBase_BooleanFilter_TrueString,
+                            bool.TrueString
+                        )
+                    );
+                listControl
+                    .Items
+                    .Add(
+                        new ListItem(
+                            DynamicDataResources.FilterUserControlBase_BooleanFilter_FalseString,
+                            bool.FalseString
+                        )
+                    );
             }
         }
 

@@ -258,11 +258,13 @@ namespace System.Text.Json.Serialization.Tests
                     JsonSerializer.Serialize<SimpleTestClass>(testObj, options);
                     Assert.NotEqual(0, getCount(options));
 
-                    Type updateHandler = typeof(JsonSerializerOptions).Assembly.GetType(
-                        "System.Text.Json.JsonSerializerOptionsUpdateHandler",
-                        throwOnError: true,
-                        ignoreCase: false
-                    );
+                    Type updateHandler = typeof(JsonSerializerOptions)
+                        .Assembly
+                        .GetType(
+                            "System.Text.Json.JsonSerializerOptionsUpdateHandler",
+                            throwOnError: true,
+                            ignoreCase: false
+                        );
                     MethodInfo clearCache = updateHandler.GetMethod("ClearCache");
                     Assert.NotNull(clearCache);
                     clearCache.Invoke(null, new object[] { null });
@@ -280,10 +282,9 @@ namespace System.Text.Json.Serialization.Tests
                     BindingFlags.NonPublic | BindingFlags.Instance
                 );
                 Assert.NotNull(cacheField);
-                PropertyInfo countProperty = cacheField.FieldType.GetProperty(
-                    "Count",
-                    BindingFlags.Public | BindingFlags.Instance
-                );
+                PropertyInfo countProperty = cacheField
+                    .FieldType
+                    .GetProperty("Count", BindingFlags.Public | BindingFlags.Instance);
                 Assert.NotNull(countProperty);
                 return options =>
                 {
@@ -354,10 +355,9 @@ namespace System.Text.Json.Serialization.Tests
                     BindingFlags.NonPublic | BindingFlags.Instance
                 );
                 Assert.NotNull(cacheField);
-                PropertyInfo optionsField = cacheField.FieldType.GetProperty(
-                    "Options",
-                    BindingFlags.Public | BindingFlags.Instance
-                );
+                PropertyInfo optionsField = cacheField
+                    .FieldType
+                    .GetProperty("Options", BindingFlags.Public | BindingFlags.Instance);
                 Assert.NotNull(optionsField);
                 return options =>
                 {

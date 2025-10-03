@@ -35,7 +35,9 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
         _mvcOptions = mvcOptionsAccessor.Value;
 
         _conventions = pagesOptionsAccessor
-            .Value.Conventions.OfType<IPageRouteModelConvention>()
+            .Value
+            .Conventions
+            .OfType<IPageRouteModelConvention>()
             .ToArray();
     }
 
@@ -132,7 +134,8 @@ public class PageActionDescriptorProvider : IActionDescriptorProvider
         }
 
         var pageRouteMetadata = selectorModel
-            .EndpointMetadata.OfType<PageRouteMetadata>()
+            .EndpointMetadata
+            .OfType<PageRouteMetadata>()
             .SingleOrDefault();
         if (pageRouteMetadata == null)
         {

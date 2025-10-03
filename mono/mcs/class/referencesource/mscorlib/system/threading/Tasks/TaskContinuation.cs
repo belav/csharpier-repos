@@ -575,19 +575,22 @@ namespace System.Threading.Tasks
             {
                 Guid savedActivityId;
                 Guid activityId = TplEtwProvider.CreateGuidForTaskID(continuationId);
-                System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                    activityId,
-                    out savedActivityId
-                );
+                System
+                    .Diagnostics
+                    .Tracing
+                    .EventSource
+                    .SetCurrentThreadActivityId(activityId, out savedActivityId);
                 try
                 {
                     action();
                 }
                 finally
                 {
-                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                        savedActivityId
-                    );
+                    System
+                        .Diagnostics
+                        .Tracing
+                        .EventSource
+                        .SetCurrentThreadActivityId(savedActivityId);
                 }
             };
         }
@@ -846,10 +849,11 @@ namespace System.Threading.Tasks
             if (etwLog.TasksSetActivityIds && m_continuationId != 0)
             {
                 Guid activityId = TplEtwProvider.CreateGuidForTaskID(m_continuationId);
-                System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                    activityId,
-                    out savedActivityId
-                );
+                System
+                    .Diagnostics
+                    .Tracing
+                    .EventSource
+                    .SetCurrentThreadActivityId(activityId, out savedActivityId);
             }
 #endif
             try
@@ -885,9 +889,11 @@ namespace System.Threading.Tasks
 #if !MONO
                 if (etwLog.TasksSetActivityIds && m_continuationId != 0)
                 {
-                    System.Diagnostics.Tracing.EventSource.SetCurrentThreadActivityId(
-                        savedActivityId
-                    );
+                    System
+                        .Diagnostics
+                        .Tracing
+                        .EventSource
+                        .SetCurrentThreadActivityId(savedActivityId);
                 }
 #endif
             }

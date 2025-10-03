@@ -125,12 +125,14 @@ namespace System.ServiceModel.Security
                     ImmutableDispatchRuntime runtime = dispatchRuntime.GetRuntime();
                     if (runtime != null && runtime.SecurityImpersonation != null)
                     {
-                        runtime.SecurityImpersonation.StartImpersonation(
-                            ref this.rpc,
-                            out impersonationContext,
-                            out originalPrincipal,
-                            out isThreadPrincipalSet
-                        );
+                        runtime
+                            .SecurityImpersonation
+                            .StartImpersonation(
+                                ref this.rpc,
+                                out impersonationContext,
+                                out originalPrincipal,
+                                out isThreadPrincipalSet
+                            );
                     }
                 }
             }
@@ -163,12 +165,14 @@ namespace System.ServiceModel.Security
                     ImmutableDispatchRuntime runtime = dispatchRuntime.GetRuntime();
                     if (runtime != null && runtime.SecurityImpersonation != null)
                     {
-                        runtime.SecurityImpersonation.StopImpersonation(
-                            ref this.rpc,
-                            impersonationContext,
-                            originalPrincipal,
-                            isThreadPrincipalSet
-                        );
+                        runtime
+                            .SecurityImpersonation
+                            .StopImpersonation(
+                                ref this.rpc,
+                                impersonationContext,
+                                originalPrincipal,
+                                isThreadPrincipalSet
+                            );
                     }
                 }
             }

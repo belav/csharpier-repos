@@ -275,11 +275,9 @@ namespace System.Net.Tests
 
                     // Ignore the specific error message - just make sure that this failed.
                     Assert.Same(clientTask, completedTask);
-                    string errorMessage = Encoding.Default.GetString(
-                        errorMessageBytes,
-                        0,
-                        clientTask.Result
-                    );
+                    string errorMessage = Encoding
+                        .Default
+                        .GetString(errorMessageBytes, 0, clientTask.Result);
                     Assert.Contains(expectedMessage, errorMessage);
 
                     Assert.False(

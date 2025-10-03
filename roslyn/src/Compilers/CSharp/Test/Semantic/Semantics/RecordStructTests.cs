@@ -528,9 +528,9 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "record struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat.TestFormat.AddKindOptions(
-                                SymbolDisplayKindOptions.IncludeTypeKeyword
-                            )
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                         )
                     );
                 }
@@ -542,9 +542,9 @@ record struct Point(int x, int y);
                     Assert.Equal(
                         "struct Point",
                         point.ToDisplayString(
-                            SymbolDisplayFormat.TestFormat.AddKindOptions(
-                                SymbolDisplayKindOptions.IncludeTypeKeyword
-                            )
+                            SymbolDisplayFormat
+                                .TestFormat
+                                .AddKindOptions(SymbolDisplayKindOptions.IncludeTypeKeyword)
                         )
                     );
                 }
@@ -3394,8 +3394,8 @@ record struct C(int X)
 record struct R(int P1, int* P2, delegate*<int> P3);";
 
             var comp = CreateCompilation(src);
-            var p = comp
-                .GlobalNamespace.GetTypeMember("R")
+            var p = comp.GlobalNamespace
+                .GetTypeMember("R")
                 .GetMember<SourcePropertySymbolBase>("P1");
             Assert.False(p.HasPointerType);
 
@@ -3424,7 +3424,8 @@ record struct R(in int P1);
             var verifier = CompileAndVerify(comp, expectedOutput: "(42, 43)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(in System.Int32 P1)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -3446,7 +3447,8 @@ record struct R(params int[] Array);
             CompileAndVerify(comp, expectedOutput: "(42, 43, 44, 45)");
 
             var actualMembers = comp.GetMember<NamedTypeSymbol>("R")
-                .Constructors.ToTestDisplayStrings();
+                .Constructors
+                .ToTestDisplayStrings();
             var expectedMembers = new[] { "R..ctor(params System.Int32[] Array)", "R..ctor()" };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -4288,7 +4290,8 @@ record struct B(int X)
             Assert.Equal(
                 "readonly void B.Deconstruct(out System.Int32 X)",
                 verifier
-                    .Compilation.GetMember("B.Deconstruct")
+                    .Compilation
+                    .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -4401,7 +4404,8 @@ record struct B(int X, int Y)
             Assert.Equal(
                 "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
                 verifier
-                    .Compilation.GetMember("B.Deconstruct")
+                    .Compilation
+                    .GetMember("B.Deconstruct")
                     .ToTestDisplayString(includeNonNullable: false)
             );
         }
@@ -12495,9 +12499,9 @@ record struct R3(int X) : Error3
             Assert.Equal("Error1(0, 1)", baseWithargs.ToString());
 
             var speculativeBase = baseWithargs.WithArgumentList(
-                baseWithargs.ArgumentList.WithArguments(
-                    baseWithargs.ArgumentList.Arguments.RemoveAt(1)
-                )
+                baseWithargs
+                    .ArgumentList
+                    .WithArguments(baseWithargs.ArgumentList.Arguments.RemoveAt(1))
             );
             Assert.Equal("Error1(0)", speculativeBase.ToString());
 

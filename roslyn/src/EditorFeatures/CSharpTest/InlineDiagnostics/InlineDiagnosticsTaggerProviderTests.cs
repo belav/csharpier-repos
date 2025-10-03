@@ -70,11 +70,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDiagnostics
             TestWorkspace workspace
         )
         {
-            workspace.GlobalOptions.SetGlobalOption(
-                InlineDiagnosticsOptionsStorage.EnableInlineDiagnostics,
-                LanguageNames.CSharp,
-                true
-            );
+            workspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    InlineDiagnosticsOptionsStorage.EnableInlineDiagnostics,
+                    LanguageNames.CSharp,
+                    true
+                );
             return (
                 await TestDiagnosticTagProducer<
                     InlineDiagnosticsTaggerProvider,

@@ -31,10 +31,9 @@ namespace System.Web.Http.Validation.Providers
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () =>
-                    provider.Object.GetValidators(
-                        metadata: null,
-                        validatorProviders: _noValidatorProviders
-                    ),
+                    provider
+                        .Object
+                        .GetValidators(metadata: null, validatorProviders: _noValidatorProviders),
                 "metadata"
             );
             Assert.ThrowsArgumentNull(

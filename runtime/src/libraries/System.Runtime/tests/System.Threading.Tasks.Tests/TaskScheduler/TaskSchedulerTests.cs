@@ -52,7 +52,8 @@ namespace System.Threading.Tasks.Tests
             }
 
             // Create one task that signals the MRE, and wait for it.
-            Task.Factory.StartNew(
+            Task.Factory
+                .StartNew(
                     delegate
                     {
                         mre.Set();

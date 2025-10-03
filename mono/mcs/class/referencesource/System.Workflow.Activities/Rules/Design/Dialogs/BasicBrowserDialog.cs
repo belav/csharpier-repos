@@ -142,9 +142,9 @@ namespace System.Workflow.Activities.Rules.Design
                 {
                     using (new WaitCursor())
                     {
-                        ListViewItem listViewItem = this.rulesListView.Items.Add(
-                            new ListViewItem()
-                        );
+                        ListViewItem listViewItem = this.rulesListView
+                            .Items
+                            .Add(new ListViewItem());
                         this.UpdateListViewItem(newObject, listViewItem);
                         listViewItem.Selected = true;
                         this.OnComponentChanged();

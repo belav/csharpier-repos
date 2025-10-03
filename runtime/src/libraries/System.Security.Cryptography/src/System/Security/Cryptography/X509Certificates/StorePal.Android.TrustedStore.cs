@@ -43,11 +43,13 @@ namespace System.Security.Cryptography.X509Certificates
                 bool systemOnly = _location == StoreLocation.LocalMachine;
                 unsafe
                 {
-                    bool success = Interop.AndroidCrypto.X509StoreEnumerateTrustedCertificates(
-                        (byte)(systemOnly ? 1 : 0),
-                        &EnumCertificatesCallback,
-                        &context
-                    );
+                    bool success = Interop
+                        .AndroidCrypto
+                        .X509StoreEnumerateTrustedCertificates(
+                            (byte)(systemOnly ? 1 : 0),
+                            &EnumCertificatesCallback,
+                            &context
+                        );
                     if (!success)
                     {
                         throw new CryptographicException(

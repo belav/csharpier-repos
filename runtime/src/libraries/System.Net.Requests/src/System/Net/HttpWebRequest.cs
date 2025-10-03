@@ -1058,17 +1058,16 @@ namespace System.Net
                         // Create empty content so that we can send the entity-body header.
                         request.Content ??= new ByteArrayContent(Array.Empty<byte>());
 
-                        request.Content.Headers.TryAddWithoutValidation(
-                            headerName,
-                            _webHeaderCollection[headerName!]
-                        );
+                        request
+                            .Content
+                            .Headers
+                            .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                     else
                     {
-                        request.Headers.TryAddWithoutValidation(
-                            headerName,
-                            _webHeaderCollection[headerName!]
-                        );
+                        request
+                            .Headers
+                            .TryAddWithoutValidation(headerName, _webHeaderCollection[headerName!]);
                     }
                 }
 

@@ -260,10 +260,9 @@ class PeerMap
             peer.NearestBase = GetPeer(peer.CLRType.BaseType);
             if (peer.NearestBase == null)
             {
-                Console.Error.WriteLine(
-                    "Error: cannot find an internal base type for {0}.",
-                    peer.Name
-                );
+                Console
+                    .Error
+                    .WriteLine("Error: cannot find an internal base type for {0}.", peer.Name);
                 Environment.Exit(-1);
             }
         }

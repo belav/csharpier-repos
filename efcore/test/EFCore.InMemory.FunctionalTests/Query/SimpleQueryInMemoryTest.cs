@@ -15,7 +15,8 @@ public class SimpleQueryInMemoryTest : SimpleQueryTestBase
         Assert.Equal(1, staff.ManagerId);
 
         var query = context
-            .Appraisals.Include(ap => ap.Staff)
+            .Appraisals
+            .Include(ap => ap.Staff)
             .ThenInclude(s => s.Manager)
             .Include(ap => ap.Staff)
             .ThenInclude(s => s.SecondaryManager)

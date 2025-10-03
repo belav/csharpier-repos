@@ -12,12 +12,12 @@ public class Startup
         services
             .AddControllers(options =>
             {
-                options.ModelMetadataDetailsProviders.Add(
-                    new SuppressChildValidationMetadataProvider(typeof(Developer))
-                );
-                options.ModelMetadataDetailsProviders.Add(
-                    new SuppressChildValidationMetadataProvider(typeof(Supplier))
-                );
+                options
+                    .ModelMetadataDetailsProviders
+                    .Add(new SuppressChildValidationMetadataProvider(typeof(Developer)));
+                options
+                    .ModelMetadataDetailsProviders
+                    .Add(new SuppressChildValidationMetadataProvider(typeof(Supplier)));
 
                 options.InputFormatters.Add(new StringInputFormatter());
             })

@@ -82,9 +82,9 @@ namespace System.Net.Security
             {
                 if (!s_initialized)
                 {
-                    Interop.AndroidCrypto.RegisterRemoteCertificateValidationCallback(
-                        &VerifyRemoteCertificate
-                    );
+                    Interop
+                        .AndroidCrypto
+                        .RegisterRemoteCertificateValidationCallback(&VerifyRemoteCertificate);
                     s_initialized = true;
                 }
             }

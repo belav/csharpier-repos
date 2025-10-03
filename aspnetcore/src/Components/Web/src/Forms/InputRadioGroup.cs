@@ -38,11 +38,13 @@ public class InputRadioGroup<
         // On the first render, we can instantiate the InputRadioContext
         if (_context is null)
         {
-            var changeEventCallback = EventCallback.Factory.CreateBinder<string?>(
-                this,
-                __value => CurrentValueAsString = __value,
-                CurrentValueAsString
-            );
+            var changeEventCallback = EventCallback
+                .Factory
+                .CreateBinder<string?>(
+                    this,
+                    __value => CurrentValueAsString = __value,
+                    CurrentValueAsString
+                );
             _context = new InputRadioContext(CascadedContext, changeEventCallback);
         }
         else if (_context.ParentContext != CascadedContext)

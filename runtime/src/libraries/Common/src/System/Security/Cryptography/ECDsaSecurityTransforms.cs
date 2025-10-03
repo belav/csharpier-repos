@@ -61,12 +61,14 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                 }
 
-                byte[] derFormatSignature = Interop.AppleCrypto.CreateSignature(
-                    keys.PrivateKey,
-                    hash,
-                    Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
-                    Interop.AppleCrypto.PAL_SignatureAlgorithm.EC
-                );
+                byte[] derFormatSignature = Interop
+                    .AppleCrypto
+                    .CreateSignature(
+                        keys.PrivateKey,
+                        hash,
+                        Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
+                        Interop.AppleCrypto.PAL_SignatureAlgorithm.EC
+                    );
                 byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                     derFormatSignature.AsSpan(0, derFormatSignature.Length),
                     KeySize
@@ -87,12 +89,14 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_CSP_NoPrivateKey);
                 }
 
-                byte[] derFormatSignature = Interop.AppleCrypto.CreateSignature(
-                    keys.PrivateKey,
-                    source,
-                    Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
-                    Interop.AppleCrypto.PAL_SignatureAlgorithm.EC
-                );
+                byte[] derFormatSignature = Interop
+                    .AppleCrypto
+                    .CreateSignature(
+                        keys.PrivateKey,
+                        source,
+                        Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
+                        Interop.AppleCrypto.PAL_SignatureAlgorithm.EC
+                    );
                 byte[] ieeeFormatSignature = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
                     derFormatSignature.AsSpan(0, derFormatSignature.Length),
                     KeySize
@@ -133,13 +137,15 @@ namespace System.Security.Cryptography
                     return false;
                 }
 
-                return Interop.AppleCrypto.VerifySignature(
-                    GetKeys().PublicKey,
-                    hash,
-                    AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature),
-                    Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
-                    Interop.AppleCrypto.PAL_SignatureAlgorithm.EC
-                );
+                return Interop
+                    .AppleCrypto
+                    .VerifySignature(
+                        GetKeys().PublicKey,
+                        hash,
+                        AsymmetricAlgorithmHelpers.ConvertIeee1363ToDer(signature),
+                        Interop.AppleCrypto.PAL_HashAlgorithm.Unknown,
+                        Interop.AppleCrypto.PAL_SignatureAlgorithm.EC
+                    );
             }
 
             private void ThrowIfDisposed()

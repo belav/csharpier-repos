@@ -121,10 +121,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             ErrorCode.ConstantFacetSpecifiedInSchema,
                             EdmSchemaErrorSeverity.Error,
                             _element,
-                            System.Data.Entity.Strings.ConstantFacetSpecifiedInSchema(
-                                defaultFacet.Name,
-                                edmType.Name
-                            )
+                            System
+                                .Data
+                                .Entity
+                                .Strings
+                                .ConstantFacetSpecifiedInSchema(defaultFacet.Name, edmType.Name)
                         );
                         noErrors = false;
                     }
@@ -146,10 +147,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.RequiredFacetMissing,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.RequiredFacetMissing(
-                            defaultFacet.Name,
-                            edmType.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .RequiredFacetMissing(defaultFacet.Name, edmType.Name)
                     );
                     noErrors = false;
                 }
@@ -436,12 +438,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.PrecisionOutOfRange,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.PrecisionOutOfRange(
-                            precision,
-                            precisionFacetDescription.MinValue.Value,
-                            precisionFacetDescription.MaxValue.Value,
-                            primitiveType.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .PrecisionOutOfRange(
+                                precision,
+                                precisionFacetDescription.MinValue.Value,
+                                precisionFacetDescription.MaxValue.Value,
+                                primitiveType.Name
+                            )
                     );
                 }
             }
@@ -466,12 +472,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.ScaleOutOfRange,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.ScaleOutOfRange(
-                            scale,
-                            scaleFacetDescription.MinValue.Value,
-                            scaleFacetDescription.MaxValue.Value,
-                            primitiveType.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .ScaleOutOfRange(
+                                scale,
+                                scaleFacetDescription.MinValue.Value,
+                                scaleFacetDescription.MaxValue.Value,
+                                primitiveType.Name
+                            )
                     );
                 }
                 else if (precision.HasValue)
@@ -526,12 +536,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     _element.AddError(
                         ErrorCode.PrecisionOutOfRange,
                         EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.PrecisionOutOfRange(
-                            precision,
-                            precisionFacetDescription.MinValue.Value,
-                            precisionFacetDescription.MaxValue.Value,
-                            primitiveType.Name
-                        )
+                        System
+                            .Data
+                            .Entity
+                            .Strings
+                            .PrecisionOutOfRange(
+                                precision,
+                                precisionFacetDescription.MinValue.Value,
+                                precisionFacetDescription.MaxValue.Value,
+                                primitiveType.Name
+                            )
                     );
                 }
             }
@@ -581,12 +595,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.InvalidSize,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidSize(
-                        length,
-                        minLength,
-                        maxLength,
-                        primitiveType.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InvalidSize(length, minLength, maxLength, primitiveType.Name)
                 );
             }
         }
@@ -602,10 +615,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.FacetNotAllowedByType,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.FacetNotAllowed(
-                        EdmProviderManifest.ConcurrencyModeFacetName,
-                        type.FullName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .FacetNotAllowed(
+                            EdmProviderManifest.ConcurrencyModeFacetName,
+                            type.FullName
+                        )
                 );
             }
 
@@ -653,12 +670,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.InvalidSystemReferenceId,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidSystemReferenceId(
-                        srid,
-                        minSrid,
-                        maxSrid,
-                        primitiveType.Name
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InvalidSystemReferenceId(srid, minSrid, maxSrid, primitiveType.Name)
                 );
             }
         }
@@ -1013,11 +1029,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _element.AddError(
                     ErrorCode.InvalidDefault,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidDefaultFloatingPoint(
-                        _default,
-                        minValue,
-                        maxValue
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .InvalidDefaultFloatingPoint(_default, minValue, maxValue)
                 );
         }
 

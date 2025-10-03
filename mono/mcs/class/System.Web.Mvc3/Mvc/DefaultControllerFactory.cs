@@ -219,10 +219,10 @@
             Type match;
             if (
                 requestContext != null
-                && requestContext.RouteData.DataTokens.TryGetValue(
-                    "Namespaces",
-                    out routeNamespacesObj
-                )
+                && requestContext
+                    .RouteData
+                    .DataTokens
+                    .TryGetValue("Namespaces", out routeNamespacesObj)
             )
             {
                 IEnumerable<string> routeNamespaces = routeNamespacesObj as IEnumerable<string>;

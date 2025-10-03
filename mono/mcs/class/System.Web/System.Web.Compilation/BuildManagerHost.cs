@@ -44,12 +44,14 @@ namespace System.Web.Compilation
             if (String.IsNullOrEmpty(assemblyName) || String.IsNullOrEmpty(assemblyLocation))
                 return;
 
-            HttpRuntime.RegisteredAssemblies.InsertOrUpdate(
-                (uint)assemblyName.GetHashCode(),
-                assemblyName,
-                assemblyLocation,
-                assemblyLocation
-            );
+            HttpRuntime
+                .RegisteredAssemblies
+                .InsertOrUpdate(
+                    (uint)assemblyName.GetHashCode(),
+                    assemblyName,
+                    assemblyLocation,
+                    assemblyLocation
+                );
             HttpRuntime.EnableAssemblyMapping(true);
         }
 

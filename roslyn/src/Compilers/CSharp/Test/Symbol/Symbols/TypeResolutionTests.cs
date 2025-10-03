@@ -90,9 +90,11 @@ namespace System
             NamedTypeSymbol c3TestClass = c3.GetTypeByMetadataName("System.TestClass");
             Assert.NotSame(c2TestClass, c3TestClass);
             Assert.True(
-                c3TestClass.ContainingAssembly.RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
-                    c2TestClass.ContainingAssembly
-                )
+                c3TestClass
+                    .ContainingAssembly
+                    .RepresentsTheSameAssemblyButHasUnresolvedReferencesByComparisonTo(
+                        c2TestClass.ContainingAssembly
+                    )
             );
 
             Assert.Null(c3.GetTypeByMetadataName("System.TestClass`1"));

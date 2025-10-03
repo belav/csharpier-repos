@@ -136,10 +136,9 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
             );
 
             ServerQueryExpression = Call(
-                EnumerableMethods.Select.MakeGenericMethod(
-                    typeof(ValueBuffer),
-                    typeof(ValueBuffer)
-                ),
+                EnumerableMethods
+                    .Select
+                    .MakeGenericMethod(typeof(ValueBuffer), typeof(ValueBuffer)),
                 ServerQueryExpression,
                 selectorLambda
             );
@@ -270,7 +269,8 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
             // Also compute nested entity projections
             foreach (
                 var navigation in entityProjectionExpression
-                    .EntityType.GetAllBaseTypes()
+                    .EntityType
+                    .GetAllBaseTypes()
                     .Concat(entityProjectionExpression.EntityType.GetDerivedTypesInclusive())
                     .SelectMany(t => t.GetDeclaredNavigations())
             )
@@ -532,10 +532,12 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
             _projectionMapping = projectionMapping;
 
             ServerQueryExpression = Call(
-                EnumerableMethods.Select.MakeGenericMethod(
-                    ServerQueryExpression.Type.GetSequenceType(),
-                    typeof(ValueBuffer)
-                ),
+                EnumerableMethods
+                    .Select
+                    .MakeGenericMethod(
+                        ServerQueryExpression.Type.GetSequenceType(),
+                        typeof(ValueBuffer)
+                    ),
                 ServerQueryExpression,
                 Lambda(
                     New(
@@ -552,10 +554,12 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
             );
 
             source2.ServerQueryExpression = Call(
-                EnumerableMethods.Select.MakeGenericMethod(
-                    source2.ServerQueryExpression.Type.GetSequenceType(),
-                    typeof(ValueBuffer)
-                ),
+                EnumerableMethods
+                    .Select
+                    .MakeGenericMethod(
+                        source2.ServerQueryExpression.Type.GetSequenceType(),
+                        typeof(ValueBuffer)
+                    ),
                 source2.ServerQueryExpression,
                 Lambda(
                     New(
@@ -703,10 +707,9 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
         ServerQueryExpression = Call(
             EnumerableMethods.Distinct.MakeGenericMethod(typeof(ValueBuffer)),
             Call(
-                EnumerableMethods.Select.MakeGenericMethod(
-                    CurrentParameter.Type,
-                    typeof(ValueBuffer)
-                ),
+                EnumerableMethods
+                    .Select
+                    .MakeGenericMethod(CurrentParameter.Type, typeof(ValueBuffer)),
                 ServerQueryExpression,
                 selectorLambda
             )
@@ -774,11 +777,9 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
         );
 
         ServerQueryExpression = Call(
-            EnumerableMethods.GroupByWithKeyElementSelector.MakeGenericMethod(
-                typeof(ValueBuffer),
-                typeof(ValueBuffer),
-                typeof(ValueBuffer)
-            ),
+            EnumerableMethods
+                .GroupByWithKeyElementSelector
+                .MakeGenericMethod(typeof(ValueBuffer), typeof(ValueBuffer), typeof(ValueBuffer)),
             source,
             keySelector,
             selector
@@ -1418,12 +1419,14 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
                 ServerQueryExpression =
                     comparer == null
                         ? Call(
-                            EnumerableMethods.Join.MakeGenericMethod(
-                                typeof(ValueBuffer),
-                                typeof(ValueBuffer),
-                                outerKeySelector.ReturnType,
-                                typeof(ValueBuffer)
-                            ),
+                            EnumerableMethods
+                                .Join
+                                .MakeGenericMethod(
+                                    typeof(ValueBuffer),
+                                    typeof(ValueBuffer),
+                                    outerKeySelector.ReturnType,
+                                    typeof(ValueBuffer)
+                                ),
                             ServerQueryExpression,
                             innerQueryExpression.ServerQueryExpression,
                             outerKeySelector,
@@ -1431,12 +1434,14 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
                             resultSelector
                         )
                         : Call(
-                            EnumerableMethods.JoinWithComparer.MakeGenericMethod(
-                                typeof(ValueBuffer),
-                                typeof(ValueBuffer),
-                                outerKeySelector.ReturnType,
-                                typeof(ValueBuffer)
-                            ),
+                            EnumerableMethods
+                                .JoinWithComparer
+                                .MakeGenericMethod(
+                                    typeof(ValueBuffer),
+                                    typeof(ValueBuffer),
+                                    outerKeySelector.ReturnType,
+                                    typeof(ValueBuffer)
+                                ),
                             ServerQueryExpression,
                             innerQueryExpression.ServerQueryExpression,
                             outerKeySelector,
@@ -1456,11 +1461,13 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
             // inner nullable should do something different here
             // Issue#17536
             ServerQueryExpression = Call(
-                EnumerableMethods.SelectManyWithCollectionSelector.MakeGenericMethod(
-                    typeof(ValueBuffer),
-                    typeof(ValueBuffer),
-                    typeof(ValueBuffer)
-                ),
+                EnumerableMethods
+                    .SelectManyWithCollectionSelector
+                    .MakeGenericMethod(
+                        typeof(ValueBuffer),
+                        typeof(ValueBuffer),
+                        typeof(ValueBuffer)
+                    ),
                 ServerQueryExpression,
                 Lambda(innerQueryExpression.ServerQueryExpression, CurrentParameter),
                 resultSelector
@@ -1561,7 +1568,8 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
         // Also compute nested entity projections
         foreach (
             var navigation in entityProjectionExpression
-                .EntityType.GetAllBaseTypes()
+                .EntityType
+                .GetAllBaseTypes()
                 .Concat(entityProjectionExpression.EntityType.GetDerivedTypesInclusive())
                 .SelectMany(t => t.GetDeclaredNavigations())
         )
@@ -1674,9 +1682,9 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
         return methodCallExpression.Type.IsNullableType()
             ? methodCallExpression
             : Call(
-                ExpressionExtensions.ValueBufferTryReadValueMethod.MakeGenericMethod(
-                    methodCallExpression.Type.MakeNullable()
-                ),
+                ExpressionExtensions
+                    .ValueBufferTryReadValueMethod
+                    .MakeGenericMethod(methodCallExpression.Type.MakeNullable()),
                 methodCallExpression.Arguments
             );
     }
@@ -1713,7 +1721,8 @@ public partial class InMemoryQueryExpression : Expression, IPrintableExpression
         // Also compute nested entity projections
         foreach (
             var navigation in entityProjectionExpression
-                .EntityType.GetAllBaseTypes()
+                .EntityType
+                .GetAllBaseTypes()
                 .Concat(entityProjectionExpression.EntityType.GetDerivedTypesInclusive())
                 .SelectMany(t => t.GetDeclaredNavigations())
         )

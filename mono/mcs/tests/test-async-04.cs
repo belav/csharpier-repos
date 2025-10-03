@@ -9,8 +9,8 @@ class C
 
     public async Task<int> TestTaskGeneric()
     {
-        await Task
-            .Factory.StartNew(() =>
+        await Task.Factory
+            .StartNew(() =>
             {
                 mre_task.Set();
                 mre.WaitOne(3000);

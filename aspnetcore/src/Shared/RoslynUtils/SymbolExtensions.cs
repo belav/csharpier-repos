@@ -173,10 +173,9 @@ internal static class SymbolExtensions
         string typeName,
         SemanticModel semanticModel
     ) =>
-        SymbolEqualityComparer.Default.Equals(
-            type,
-            semanticModel.Compilation.GetTypeByMetadataName(typeName)
-        );
+        SymbolEqualityComparer
+            .Default
+            .Equals(type, semanticModel.Compilation.GetTypeByMetadataName(typeName));
 
     public static bool IsType(this INamedTypeSymbol type, INamedTypeSymbol otherType) =>
         SymbolEqualityComparer.Default.Equals(type, otherType);
@@ -262,9 +261,9 @@ internal static class SymbolExtensions
         if (parameterSymbol is { ContainingSymbol: IMethodSymbol constructor })
         {
             var constructedType = $"typeof({parameterSymbol.ContainingType.ToDisplayString()})";
-            var parameterTypes = constructor.Parameters.Select(parameter =>
-                $"typeof({parameter.Type.ToDisplayString()})"
-            );
+            var parameterTypes = constructor
+                .Parameters
+                .Select(parameter => $"typeof({parameter.Type.ToDisplayString()})");
             var parameterTypesString = string.Join(", ", parameterTypes);
             var getConstructorParameters = $$"""new[] { {{parameterTypesString}} }""";
             return $"{constructedType}.GetConstructor({getConstructorParameters})?.GetParameters()[{parameterSymbol.Ordinal}]";

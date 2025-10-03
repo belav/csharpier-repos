@@ -1162,12 +1162,16 @@ class Class
 
                 // Suppress the diagnostic in options.
                 var projectId = workspace.Projects[0].Id;
-                var compilationOptions = TestOptions.DebugDll.WithSpecificDiagnosticOptions(
-                    ImmutableDictionary<string, ReportDiagnostic>.Empty.Add(
-                        IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
-                        ReportDiagnostic.Suppress
-                    )
-                );
+                var compilationOptions = TestOptions
+                    .DebugDll
+                    .WithSpecificDiagnosticOptions(
+                        ImmutableDictionary<string, ReportDiagnostic>
+                            .Empty
+                            .Add(
+                                IDEDiagnosticIds.RemoveUnnecessarySuppressionDiagnosticId,
+                                ReportDiagnostic.Suppress
+                            )
+                    );
                 workspace.SetCurrentSolution(
                     s => s.WithProjectCompilationOptions(projectId, compilationOptions),
                     WorkspaceChangeKind.ProjectChanged,

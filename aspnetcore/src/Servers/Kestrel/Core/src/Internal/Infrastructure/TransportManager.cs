@@ -197,7 +197,8 @@ internal sealed class TransportManager
         {
             if (
                 !await transport
-                    .TransportConnectionManager.CloseAllConnectionsAsync(cancellationToken)
+                    .TransportConnectionManager
+                    .CloseAllConnectionsAsync(cancellationToken)
                     .ConfigureAwait(false)
             )
             {
@@ -205,7 +206,8 @@ internal sealed class TransportManager
 
                 if (
                     !await transport
-                        .TransportConnectionManager.AbortAllConnectionsAsync()
+                        .TransportConnectionManager
+                        .AbortAllConnectionsAsync()
                         .ConfigureAwait(false)
                 )
                 {

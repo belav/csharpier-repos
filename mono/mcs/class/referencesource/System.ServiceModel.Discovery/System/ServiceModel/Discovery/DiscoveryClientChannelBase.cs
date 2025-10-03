@@ -166,45 +166,57 @@ namespace System.ServiceModel.Discovery
                     }
                     catch (TimeoutException te)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new TimeoutException(
-                                SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout),
-                                te
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new TimeoutException(
+                                    SR.DiscoveryClientChannelOpenTimeout(
+                                        timeoutHelper.OriginalTimeout
+                                    ),
+                                    te
+                                )
+                            );
                     }
 
                     if (currentEndpointDiscoveryMetadata == null)
                     {
                         if (this.totalDiscoveredEndpoints < 1)
                         {
-                            throw FxTrace.Exception.AsError(
-                                new EndpointNotFoundException(
-                                    SR.DiscoveryClientChannelEndpointNotFound,
-                                    this.exception
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new EndpointNotFoundException(
+                                        SR.DiscoveryClientChannelEndpointNotFound,
+                                        this.exception
+                                    )
+                                );
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(
-                                new EndpointNotFoundException(
-                                    SR.DiscoveryClientChannelCreationFailed(
-                                        this.totalDiscoveredEndpoints
-                                    ),
-                                    this.exception
-                                )
-                            );
+                            throw FxTrace
+                                .Exception
+                                .AsError(
+                                    new EndpointNotFoundException(
+                                        SR.DiscoveryClientChannelCreationFailed(
+                                            this.totalDiscoveredEndpoints
+                                        ),
+                                        this.exception
+                                    )
+                                );
                         }
                     }
 
                     if (timeoutHelper.RemainingTime() == TimeSpan.Zero)
                     {
-                        throw FxTrace.Exception.AsError(
-                            new TimeoutException(
-                                SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout)
-                            )
-                        );
+                        throw FxTrace
+                            .Exception
+                            .AsError(
+                                new TimeoutException(
+                                    SR.DiscoveryClientChannelOpenTimeout(
+                                        timeoutHelper.OriginalTimeout
+                                    )
+                                )
+                            );
                     }
 
                     if (currentEndpointDiscoveryMetadata.ListenUris.Count == 0)
@@ -269,12 +281,14 @@ namespace System.ServiceModel.Discovery
             }
             catch (TimeoutException timeoutException)
             {
-                throw FxTrace.Exception.AsError(
-                    new TimeoutException(
-                        SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout),
-                        timeoutException
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new TimeoutException(
+                            SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout),
+                            timeoutException
+                        )
+                    );
             }
             catch (CommunicationException communicationException)
             {
@@ -356,14 +370,16 @@ namespace System.ServiceModel.Discovery
 
             if (discoveryEndpoint == null)
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidOperationException(
-                        SR.DiscoveryMethodImplementationReturnsNull(
-                            "GetDiscoveryEndpoint",
-                            this.discoveryEndpointProvider.GetType()
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidOperationException(
+                            SR.DiscoveryMethodImplementationReturnsNull(
+                                "GetDiscoveryEndpoint",
+                                this.discoveryEndpointProvider.GetType()
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.discoveryClient = new DiscoveryClient(discoveryEndpoint);
@@ -588,16 +604,15 @@ namespace System.ServiceModel.Discovery
                 {
                     dequeueStep = DiscoveryChannelBuilderAsyncResult.CallAsync(
                         (thisPtr, t, c, s) =>
-                            thisPtr.discoveryClientChannelBase.discoveredEndpoints.BeginDequeue(
-                                thisPtr.RemainingTime(),
-                                c,
-                                s
-                            ),
+                            thisPtr
+                                .discoveryClientChannelBase
+                                .discoveredEndpoints
+                                .BeginDequeue(thisPtr.RemainingTime(), c, s),
                         (thisPtr, r) =>
-                            thisPtr.currentEndpointDiscoveryMetadata =
-                                thisPtr.discoveryClientChannelBase.discoveredEndpoints.EndDequeue(
-                                    r
-                                ),
+                            thisPtr.currentEndpointDiscoveryMetadata = thisPtr
+                                .discoveryClientChannelBase
+                                .discoveredEndpoints
+                                .EndDequeue(r),
                         new IAsyncCatch[]
                         {
                             new DiscoveryChannelBuilderAsyncResult.AsyncCatch<TimeoutException>(
@@ -697,11 +712,9 @@ namespace System.ServiceModel.Discovery
 
                 try
                 {
-                    this.innerChannel =
-                        this.discoveryClientChannelBase.innerChannelFactory.CreateChannel(
-                            address,
-                            listenUri
-                        );
+                    this.innerChannel = this.discoveryClientChannelBase
+                        .innerChannelFactory
+                        .CreateChannel(address, listenUri);
                 }
                 catch (ArgumentException argumentException)
                 {

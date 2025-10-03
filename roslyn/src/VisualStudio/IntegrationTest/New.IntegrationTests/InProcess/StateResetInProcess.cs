@@ -48,10 +48,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
         public async Task ResetGlobalOptionsAsync(CancellationToken cancellationToken)
         {
             // clear configuration options, so that the workspace configuration global option update below is effective:
-            var workspace =
-                await TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
-                    cancellationToken
-                );
+            var workspace = await TestServices
+                .Shell
+                .GetComponentModelServiceAsync<VisualStudioWorkspace>(cancellationToken);
             var configurationService = (WorkspaceConfigurationService)
                 workspace.Services.GetRequiredService<IWorkspaceConfigurationService>();
             configurationService.Clear();
@@ -139,22 +138,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
             // Use default navigation behavior
-            await TestServices.Editor.ConfigureAsyncNavigation(
-                AsyncNavigationKind.Default,
-                cancellationToken
-            );
+            await TestServices
+                .Editor
+                .ConfigureAsyncNavigation(AsyncNavigationKind.Default, cancellationToken);
 
             // Suggestion mode defaults to on for debugger views, and off for other views.
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                forDebuggerTextView: true,
-                true,
-                cancellationToken
-            );
-            await TestServices.Editor.SetUseSuggestionModeAsync(
-                forDebuggerTextView: false,
-                false,
-                cancellationToken
-            );
+            await TestServices
+                .Editor
+                .SetUseSuggestionModeAsync(forDebuggerTextView: true, true, cancellationToken);
+            await TestServices
+                .Editor
+                .SetUseSuggestionModeAsync(forDebuggerTextView: false, false, cancellationToken);
 
             // Make sure responsive completion doesn't interfere if integration tests run slowly.
             await DisableResponsiveCompletion(cancellationToken);
@@ -198,10 +192,9 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     break;
                 }
 
-                await TestServices.Input.SendWithoutActivateAsync(
-                    VirtualKeyCode.ESCAPE,
-                    cancellationToken
-                );
+                await TestServices
+                    .Input
+                    .SendWithoutActivateAsync(VirtualKeyCode.ESCAPE, cancellationToken);
                 var nextModalWindow = IntegrationHelper.GetModalWindowFromParentWindow(mainWindow);
                 if (nextModalWindow == modalWindow)
                 {
@@ -215,7 +208,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             // Close tool windows where desired (see s_windowsToClose)
             await foreach (
                 var window in TestServices
-                    .Shell.EnumerateWindowsAsync(
+                    .Shell
+                    .EnumerateWindowsAsync(
                         __WindowFrameTypeFlags.WINDOWFRAMETYPE_Tool,
                         cancellationToken
                     )

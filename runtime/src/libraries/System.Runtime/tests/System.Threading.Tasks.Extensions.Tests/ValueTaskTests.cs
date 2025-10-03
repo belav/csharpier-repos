@@ -1483,9 +1483,8 @@ namespace System.Threading.Tasks.Tests
         {
             CustomAttributeData cad = valueTaskType
                 .GetTypeInfo()
-                .CustomAttributes.Single(attr =>
-                    attr.AttributeType == typeof(AsyncMethodBuilderAttribute)
-                );
+                .CustomAttributes
+                .Single(attr => attr.AttributeType == typeof(AsyncMethodBuilderAttribute));
             Type builderTypeCtorArg = (Type)cad.ConstructorArguments[0].Value;
             Assert.Equal(typeof(AsyncValueTaskMethodBuilder), builderTypeCtorArg);
 
@@ -1509,9 +1508,8 @@ namespace System.Threading.Tasks.Tests
         {
             CustomAttributeData cad = valueTaskType
                 .GetTypeInfo()
-                .CustomAttributes.Single(attr =>
-                    attr.AttributeType == typeof(AsyncMethodBuilderAttribute)
-                );
+                .CustomAttributes
+                .Single(attr => attr.AttributeType == typeof(AsyncMethodBuilderAttribute));
             Type builderTypeCtorArg = (Type)cad.ConstructorArguments[0].Value;
             Assert.Equal(typeof(AsyncValueTaskMethodBuilder<>), builderTypeCtorArg);
 

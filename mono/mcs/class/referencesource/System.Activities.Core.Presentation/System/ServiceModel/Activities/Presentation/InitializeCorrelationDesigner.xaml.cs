@@ -91,10 +91,9 @@ namespace System.ServiceModel.Activities.Presentation
         {
             public CorrelationDataValueEditor()
             {
-                this.InlineEditorTemplate =
-                    EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
-                        "CorrelationDataValueEditor_InlineTemplate"
-                    );
+                this.InlineEditorTemplate = EditorCategoryTemplateDictionary
+                    .Instance
+                    .GetCategoryTemplate("CorrelationDataValueEditor_InlineTemplate");
             }
 
             public override void ShowDialog(

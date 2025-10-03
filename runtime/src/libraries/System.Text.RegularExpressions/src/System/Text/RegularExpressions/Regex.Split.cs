@@ -114,9 +114,9 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.results.Add(
-                            state.input.Substring(state.prevat, match.Index - state.prevat)
-                        );
+                        state
+                            .results
+                            .Add(state.input.Substring(state.prevat, match.Index - state.prevat));
                         state.prevat = match.Index + match.Length;
 
                         // add all matched capture groups to the list.
@@ -154,12 +154,16 @@ namespace System.Text.RegularExpressions
                         Match match
                     ) =>
                     {
-                        state.results.Add(
-                            state.input.Substring(
-                                match.Index + match.Length,
-                                state.prevat - match.Index - match.Length
-                            )
-                        );
+                        state
+                            .results
+                            .Add(
+                                state
+                                    .input
+                                    .Substring(
+                                        match.Index + match.Length,
+                                        state.prevat - match.Index - match.Length
+                                    )
+                            );
                         state.prevat = match.Index;
 
                         // add all matched capture groups to the list.

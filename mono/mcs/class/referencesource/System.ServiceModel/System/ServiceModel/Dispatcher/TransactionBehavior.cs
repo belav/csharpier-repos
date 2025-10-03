@@ -229,13 +229,15 @@ namespace System.ServiceModel.Dispatcher
             catch (TransactionException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    TransactionBehavior.CreateFault(
-                        SR.GetString(SR.SFxTransactionUnmarshalFailed, e.Message),
-                        FaultCodeConstants.Codes.TransactionUnmarshalingFailed,
-                        false
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        TransactionBehavior.CreateFault(
+                            SR.GetString(SR.SFxTransactionUnmarshalFailed, e.Message),
+                            FaultCodeConstants.Codes.TransactionUnmarshalingFailed,
+                            false
+                        )
+                    );
             }
 
             if (rpc.Operation.TransactionRequired)
@@ -301,13 +303,15 @@ namespace System.ServiceModel.Dispatcher
                             catch (TransactionException e)
                             {
                                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                    TransactionBehavior.CreateFault(
-                                        SR.GetString(SR.SFxTransactionAsyncAborted),
-                                        FaultCodeConstants.Codes.TransactionAborted,
-                                        true
-                                    )
-                                );
+                                throw DiagnosticUtility
+                                    .ExceptionUtility
+                                    .ThrowHelperError(
+                                        TransactionBehavior.CreateFault(
+                                            SR.GetString(SR.SFxTransactionAsyncAborted),
+                                            FaultCodeConstants.Codes.TransactionAborted,
+                                            true
+                                        )
+                                    );
                             }
                         }
                     }
@@ -366,13 +370,15 @@ namespace System.ServiceModel.Dispatcher
                 if (transaction == null || transaction == contextTransaction)
                 {
                     rpc.Transaction.Current = contextTransaction;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        TransactionBehavior.CreateFault(
-                            SR.GetString(SR.SFxTransactionAsyncAborted),
-                            FaultCodeConstants.Codes.TransactionAborted,
-                            true
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            TransactionBehavior.CreateFault(
+                                SR.GetString(SR.SFxTransactionAsyncAborted),
+                                FaultCodeConstants.Codes.TransactionAborted,
+                                true
+                            )
+                        );
                 }
                 else
                 {
@@ -441,11 +447,9 @@ namespace System.ServiceModel.Dispatcher
                 }
 
                 rpc.Transaction.Current = transaction;
-                rpc.InstanceContext.Transaction.AddReference(
-                    ref rpc,
-                    rpc.Transaction.Current,
-                    true
-                );
+                rpc.InstanceContext
+                    .Transaction
+                    .AddReference(ref rpc, rpc.Transaction.Current, true);
 
                 try
                 {
@@ -462,13 +466,15 @@ namespace System.ServiceModel.Dispatcher
                 catch (ObjectDisposedException e) //transaction may be async aborted
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        TransactionBehavior.CreateFault(
-                            SR.GetString(SR.SFxTransactionAsyncAborted),
-                            FaultCodeConstants.Codes.TransactionAborted,
-                            true
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            TransactionBehavior.CreateFault(
+                                SR.GetString(SR.SFxTransactionAsyncAborted),
+                                FaultCodeConstants.Codes.TransactionAborted,
+                                true
+                            )
+                        );
                 }
 
                 rpc.InstanceContext.Transaction.AddReference(ref rpc, rpc.Transaction.Clone, false);
@@ -558,10 +564,9 @@ namespace System.ServiceModel.Dispatcher
                     {
                         // Commit the transaction when TransactionSetComplete() is called and
                         // even when an exception(non transactional) happens after this call.
-                        rpc.InstanceContext.Transaction.CompletePendingTransaction(
-                            this.Current,
-                            null
-                        );
+                        rpc.InstanceContext
+                            .Transaction
+                            .CompletePendingTransaction(this.Current, null);
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
                             TraceUtility.TraceEvent(
@@ -577,10 +582,9 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else if (this.IsCompleted || (error != null))
                     {
-                        rpc.InstanceContext.Transaction.CompletePendingTransaction(
-                            this.Current,
-                            error
-                        );
+                        rpc.InstanceContext
+                            .Transaction
+                            .CompletePendingTransaction(this.Current, error);
                     }
                 }
                 if (this.rpc.Operation.IsInsideTransactedReceiveScope)
@@ -618,15 +622,17 @@ namespace System.ServiceModel.Dispatcher
                     //we don't want to mask the real error here
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxTransactionInvalidSetTransactionComplete,
-                            rpc.Operation.Name,
-                            rpc.Host.Description.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxTransactionInvalidSetTransactionComplete,
+                                rpc.Operation.Name,
+                                rpc.Host.Description.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
             // Prohibit user from calling SetTransactionComplete() multiple times.
             // Transaction will be aborted.
@@ -641,15 +647,17 @@ namespace System.ServiceModel.Dispatcher
                     //we don't want to mask the real error here
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.SFxMultiSetTransactionComplete,
-                            rpc.Operation.Name,
-                            rpc.Host.Description.Name
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxMultiSetTransactionComplete,
+                                rpc.Operation.Name,
+                                rpc.Host.Description.Name
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             this.transactionSetComplete = true;
@@ -699,13 +707,15 @@ namespace System.ServiceModel.Dispatcher
                 catch (TransactionException e)
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        TransactionBehavior.CreateFault(
-                            SR.GetString(SR.SFxTransactionAsyncAborted),
-                            FaultCodeConstants.Codes.TransactionAborted,
-                            true
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            TransactionBehavior.CreateFault(
+                                SR.GetString(SR.SFxTransactionAsyncAborted),
+                                FaultCodeConstants.Codes.TransactionAborted,
+                                true
+                            )
+                        );
                 }
             }
         }
@@ -934,13 +944,15 @@ namespace System.ServiceModel.Dispatcher
             catch (TransactionException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    TransactionBehavior.CreateFault(
-                        SR.GetString(SR.SFxTransactionAsyncAborted),
-                        FaultCodeConstants.Codes.TransactionAborted,
-                        true
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        TransactionBehavior.CreateFault(
+                            SR.GetString(SR.SFxTransactionAsyncAborted),
+                            FaultCodeConstants.Codes.TransactionAborted,
+                            true
+                        )
+                    );
             }
         }
 
@@ -964,13 +976,15 @@ namespace System.ServiceModel.Dispatcher
             }
 
             //the transaction was asynchronously aborted
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                TransactionBehavior.CreateFault(
-                    SR.GetString(SR.SFxTransactionAsyncAborted),
-                    FaultCodeConstants.Codes.TransactionAborted,
-                    true
-                )
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    TransactionBehavior.CreateFault(
+                        SR.GetString(SR.SFxTransactionAsyncAborted),
+                        FaultCodeConstants.Codes.TransactionAborted,
+                        true
+                    )
+                );
         }
 
         // ........................................................................................................

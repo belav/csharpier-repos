@@ -202,10 +202,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.MissingExtentEntityContainerEnd,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.MissingEntityContainerEnd(
-                        relationshipEnd.Name,
-                        FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .MissingEntityContainerEnd(relationshipEnd.Name, FQName)
                 );
             }
             else
@@ -214,10 +215,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 AddError(
                     ErrorCode.AmbiguousEntityContainerEnd,
                     EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.AmbiguousEntityContainerEnd(
-                        relationshipEnd.Name,
-                        FQName
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .AmbiguousEntityContainerEnd(relationshipEnd.Name, FQName)
                 );
             }
 

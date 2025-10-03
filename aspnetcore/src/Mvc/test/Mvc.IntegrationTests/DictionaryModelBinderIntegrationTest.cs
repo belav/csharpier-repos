@@ -625,10 +625,9 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options.ValueProviderFactories.Insert(
-                    0,
-                    new JQueryQueryStringValueProviderFactory()
-                )
+                options
+                    .ValueProviderFactories
+                    .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 
         var modelState = testContext.ModelState;
@@ -720,10 +719,9 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options.ValueProviderFactories.Insert(
-                    0,
-                    new JQueryQueryStringValueProviderFactory()
-                )
+                options
+                    .ValueProviderFactories
+                    .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 
         var modelState = testContext.ModelState;
@@ -1105,10 +1103,9 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options.ValueProviderFactories.Insert(
-                    0,
-                    new JQueryQueryStringValueProviderFactory()
-                )
+                options
+                    .ValueProviderFactories
+                    .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 
         var modelState = testContext.ModelState;
@@ -1202,10 +1199,9 @@ public class DictionaryModelBinderIntegrationTest
             request => request.QueryString = new QueryString(queryString),
             // Add JQueryQueryStringValueProviderFactory before default factories.
             options =>
-                options.ValueProviderFactories.Insert(
-                    0,
-                    new JQueryQueryStringValueProviderFactory()
-                )
+                options
+                    .ValueProviderFactories
+                    .Insert(0, new JQueryQueryStringValueProviderFactory())
         );
 
         var modelState = testContext.ModelState;

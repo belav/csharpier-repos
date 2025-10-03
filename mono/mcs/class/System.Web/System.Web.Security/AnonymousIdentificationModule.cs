@@ -84,9 +84,9 @@ namespace System.Web.Security
             {
                 try
                 {
-                    anonymousID = Encoding.Unicode.GetString(
-                        Convert.FromBase64String(cookie.Value)
-                    );
+                    anonymousID = Encoding
+                        .Unicode
+                        .GetString(Convert.FromBase64String(cookie.Value));
                 }
                 catch { }
             }

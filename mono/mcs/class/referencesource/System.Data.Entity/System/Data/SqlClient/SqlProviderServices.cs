@@ -105,9 +105,11 @@ namespace System.Data.SqlClient
             if (sqlManifest == null)
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Mapping_Provider_WrongManifestType(
-                        typeof(SqlProviderManifest)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Provider_WrongManifestType(typeof(SqlProviderManifest))
                 );
             }
 
@@ -117,13 +119,18 @@ namespace System.Data.SqlClient
             List<SqlParameter> parameters;
             CommandType commandType;
             HashSet<string> paramsToForceNonUnicode;
-            command.CommandText = System.Data.SqlClient.SqlGen.SqlGenerator.GenerateSql(
-                commandTree,
-                sqlVersion,
-                out parameters,
-                out commandType,
-                out paramsToForceNonUnicode
-            );
+            command.CommandText = System
+                .Data
+                .SqlClient
+                .SqlGen
+                .SqlGenerator
+                .GenerateSql(
+                    commandTree,
+                    sqlVersion,
+                    out parameters,
+                    out commandType,
+                    out paramsToForceNonUnicode
+                );
             command.CommandType = commandType;
 
             // Get the function (if any) implemented by the command tree since this influences our interpretation of parameters
@@ -142,11 +149,9 @@ namespace System.Data.SqlClient
                 FunctionParameter functionParameter;
                 if (
                     null != function
-                    && function.Parameters.TryGetValue(
-                        queryParameter.Key,
-                        false,
-                        out functionParameter
-                    )
+                    && function
+                        .Parameters
+                        .TryGetValue(queryParameter.Key, false, out functionParameter)
                 )
                 {
                     const bool preventTruncation = false;
@@ -168,9 +173,9 @@ namespace System.Data.SqlClient
                         (paramsToForceNonUnicode.Contains(queryParameter.Key))
                     )
                     {
-                        parameterType = queryParameter.Value.ShallowCopy(
-                            new FacetValues { Unicode = false }
-                        );
+                        parameterType = queryParameter
+                            .Value
+                            .ShallowCopy(new FacetValues { Unicode = false });
                     }
                     else
                     {
@@ -979,9 +984,11 @@ namespace System.Data.SqlClient
             if (sqlManifest == null)
             {
                 throw EntityUtil.Argument(
-                    System.Data.Entity.Strings.Mapping_Provider_WrongManifestType(
-                        typeof(SqlProviderManifest)
-                    )
+                    System
+                        .Data
+                        .Entity
+                        .Strings
+                        .Mapping_Provider_WrongManifestType(typeof(SqlProviderManifest))
                 );
             }
             SqlVersion sqlVersion = sqlManifest.SqlVersion;
@@ -1088,10 +1095,11 @@ namespace System.Data.SqlClient
             Debug.Assert(!string.IsNullOrEmpty(attachDBFile));
 
             //Handle the case when attachDBFilename starts with |DataDirectory|
-            string dataFileName = System.Data.EntityClient.DbConnectionOptions.ExpandDataDirectory(
-                "AttachDBFilename",
-                attachDBFile
-            );
+            string dataFileName = System
+                .Data
+                .EntityClient
+                .DbConnectionOptions
+                .ExpandDataDirectory("AttachDBFilename", attachDBFile);
 
             //Handle the other cases
             dataFileName = dataFileName ?? attachDBFile;

@@ -99,10 +99,9 @@ public unsafe class PlatformDefaultMemberFunctionTest
 
     private static void Test8ByteHFA(PlatformDefaultMemberFunctionNative.C* instance)
     {
-        PlatformDefaultMemberFunctionNative.SizeF result = instance->vtable->getSize(
-            instance,
-            1234
-        );
+        PlatformDefaultMemberFunctionNative.SizeF result = instance
+            ->vtable
+            ->getSize(instance, 1234);
 
         Assert.Equal(instance->width, result.width);
         Assert.Equal(instance->height, result.height);
@@ -117,9 +116,9 @@ public unsafe class PlatformDefaultMemberFunctionTest
 
     private static void Test4ByteNonHFA(PlatformDefaultMemberFunctionNative.C* instance)
     {
-        PlatformDefaultMemberFunctionNative.IntWrapper result = instance->vtable->getHeightAsInt(
-            instance
-        );
+        PlatformDefaultMemberFunctionNative.IntWrapper result = instance
+            ->vtable
+            ->getHeightAsInt(instance);
 
         Assert.Equal((int)instance->height, result.i);
     }

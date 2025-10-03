@@ -95,7 +95,8 @@ namespace System.Web.WebPages.Administration.Test
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
             var assemblies = document
-                .Root.Elements()
+                .Root
+                .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
@@ -157,7 +158,8 @@ namespace System.Web.WebPages.Administration.Test
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
             var assemblies = document
-                .Root.Elements()
+                .Root
+                .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
@@ -170,7 +172,8 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal(
                 "test",
                 document
-                    .Root.Elements()
+                    .Root
+                    .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
                     .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("add"))
@@ -182,7 +185,8 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal(
                 "awesomeprofile",
                 document
-                    .Root.Element("system.web")
+                    .Root
+                    .Element("system.web")
                     .Element("profiles")
                     .Element("add")
                     .Attribute("name")
@@ -250,7 +254,8 @@ namespace System.Web.WebPages.Administration.Test
 
             // Use SingleOrDefault to ensure there's exactly one element with that name
             var assemblies = document
-                .Root.Elements()
+                .Root
+                .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("system.web"))
                 .Elements()
                 .SingleOrDefault(e => e.Name.ToString().Equals("compilation"))
@@ -271,7 +276,8 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal(
                 "test",
                 document
-                    .Root.Elements()
+                    .Root
+                    .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("connectionStrings"))
                     .Elements()
                     .SingleOrDefault(e => e.Name.ToString().Equals("add"))
@@ -283,7 +289,8 @@ namespace System.Web.WebPages.Administration.Test
             Assert.Equal(
                 "awesomeprofile",
                 document
-                    .Root.Element("system.web")
+                    .Root
+                    .Element("system.web")
                     .Element("profiles")
                     .Element("add")
                     .Attribute("name")

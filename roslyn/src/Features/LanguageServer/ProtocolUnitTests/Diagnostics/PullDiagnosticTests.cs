@@ -431,10 +431,10 @@ class A {
             await OpenDocumentAsync(testLspServer, document);
 
             // Ensure we get no diagnostics when feature flag is off.
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag,
-                false
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag, false);
 
             await Assert.ThrowsAsync<StreamJsonRpc.RemoteInvocationException>(async () =>
                 await RunGetDocumentPullDiagnosticsAsync(
@@ -468,10 +468,10 @@ class A {
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
             await OpenDocumentAsync(testLspServer, document);
 
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag,
-                true
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(DiagnosticOptionsStorage.LspPullDiagnosticsFeatureFlag, true);
 
             var results = await RunGetDocumentPullDiagnosticsAsync(
                 testLspServer,
@@ -608,8 +608,10 @@ class A {
             var resultId = results.Single().ResultId;
 
             // Trigger refresh due to a change to global state that affects diagnostics.
-            var refresher =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<IDiagnosticsRefresher>();
+            var refresher = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<IDiagnosticsRefresher>();
             refresher.RequestWorkspaceRefresh();
 
             results = await RunGetDocumentPullDiagnosticsAsync(
@@ -804,14 +806,18 @@ class B {";
 
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Open either of the documents via LSP, we're tracking the URI and text.
             await OpenDocumentAsync(testLspServer, csproj1Document);
@@ -878,14 +884,18 @@ class B {";
 
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Open either of the documents via LSP, we're tracking the URI and text.
             await OpenDocumentAsync(testLspServer, csproj1Document);
@@ -956,14 +966,18 @@ class B {";
                 .ConfigureAwait(false);
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             await testLspServer.OpenDocumentAsync(csproj1Document.GetURI());
             await testLspServer.OpenDocumentAsync(csproj2Document.GetURI());
@@ -1031,14 +1045,18 @@ class B {";
                 .ConfigureAwait(false);
             var csproj1Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj1")
+                .Projects
+                .Where(p => p.Name == "CSProj1")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             await testLspServer.OpenDocumentAsync(csproj1Document.GetURI());
             await testLspServer.OpenDocumentAsync(csproj2Document.GetURI());
@@ -1173,10 +1191,12 @@ class B {";
                 Location.Create(context.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
             );
 
-            testLspServer.TestWorkspace.OnAnalyzerReferenceAdded(
-                document.Project.Id,
-                new TestGeneratorReference(generator)
-            );
+            testLspServer
+                .TestWorkspace
+                .OnAnalyzerReferenceAdded(
+                    document.Project.Id,
+                    new TestGeneratorReference(generator)
+                );
 
             await OpenDocumentAsync(testLspServer, document);
 
@@ -1210,11 +1230,10 @@ class A
                 useVSDiagnostics
             );
             var firstLocation = testLspServer.GetLocations("first").Single().Range;
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                FadingOptions.FadeOutUnusedImports,
-                LanguageNames.CSharp,
-                true
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(FadingOptions.FadeOutUnusedImports, LanguageNames.CSharp, true);
 
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
 
@@ -1270,11 +1289,10 @@ class A
                 useVSDiagnostics
             );
             var firstLocation = testLspServer.GetLocations("first").Single().Range;
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                FadingOptions.FadeOutUnusedImports,
-                LanguageNames.CSharp,
-                false
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(FadingOptions.FadeOutUnusedImports, LanguageNames.CSharp, false);
 
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.Single();
 
@@ -1801,15 +1819,18 @@ class A {
                 useVSDiagnostics: true
             );
 
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                TaskListOptionsStorage.Descriptors,
-                ImmutableArray.Create(
-                    "HACK:2",
-                    $"TODO:{priString}",
-                    "UNDONE:2",
-                    "UnresolvedMergeConflict:3"
-                )
-            );
+            testLspServer
+                .TestWorkspace
+                .GlobalOptions
+                .SetGlobalOption(
+                    TaskListOptionsStorage.Descriptors,
+                    ImmutableArray.Create(
+                        "HACK:2",
+                        $"TODO:{priString}",
+                        "UNDONE:2",
+                        "UnresolvedMergeConflict:3"
+                    )
+                );
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -1961,8 +1982,10 @@ class A {
 
             var firstDocument = testLspServer
                 .GetCurrentSolution()
-                .Projects.Single()
-                .Documents.First();
+                .Projects
+                .Single()
+                .Documents
+                .First();
             await OpenDocumentAsync(testLspServer, firstDocument);
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
@@ -1994,10 +2017,12 @@ class A {
                 Location.Create(context.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
             );
 
-            testLspServer.TestWorkspace.OnAnalyzerReferenceAdded(
-                document.Project.Id,
-                new TestGeneratorReference(generator)
-            );
+            testLspServer
+                .TestWorkspace
+                .OnAnalyzerReferenceAdded(
+                    document.Project.Id,
+                    new TestGeneratorReference(generator)
+                );
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -2030,10 +2055,12 @@ class A {
                 Location.Create(context.Compilation.SyntaxTrees.Single(), new TextSpan(0, 10))
             );
 
-            testLspServer.TestWorkspace.OnAnalyzerReferenceAdded(
-                testLspServer.GetCurrentSolution().Projects.Single().Id,
-                new TestGeneratorReference(generator)
-            );
+            testLspServer
+                .TestWorkspace
+                .OnAnalyzerReferenceAdded(
+                    testLspServer.GetCurrentSolution().Projects.Single().Id,
+                    new TestGeneratorReference(generator)
+                );
 
             var results = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -2160,9 +2187,9 @@ class A {
             Assert.Empty(results[1].Diagnostics);
             Assert.Empty(results[2].Diagnostics);
 
-            testLspServer.TestWorkspace.OnDocumentRemoved(
-                testLspServer.TestWorkspace.Documents.First().Id
-            );
+            testLspServer
+                .TestWorkspace
+                .OnDocumentRemoved(testLspServer.TestWorkspace.Documents.First().Id);
 
             var results2 = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -2310,10 +2337,12 @@ class A {
 
             // Hacky, but we need to close the document manually since editing the text-buffer will open it in the
             // test-workspace.
-            testLspServer.TestWorkspace.OnDocumentClosed(
-                document.Id,
-                TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()))
-            );
+            testLspServer
+                .TestWorkspace
+                .OnDocumentClosed(
+                    document.Id,
+                    TextLoader.From(TextAndVersion.Create(text, VersionStamp.Create()))
+                );
 
             var results2 = await RunGetWorkspacePullDiagnosticsAsync(
                 testLspServer,
@@ -2437,9 +2466,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2463,10 +2494,9 @@ class A {";
                     )
                 )
             );
-            await testLspServer.TestWorkspace.ChangeDocumentAsync(
-                csproj2Document.Id,
-                newCsProj2Document.Project.Solution
-            );
+            await testLspServer
+                .TestWorkspace
+                .ChangeDocumentAsync(csproj2Document.Id, newCsProj2Document.Project.Solution);
 
             // Get updated workspace diagnostics for the change.
             var previousResultIds = CreateDiagnosticParamsFromPreviousReports(results);
@@ -2539,9 +2569,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj3Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj3")
+                .Projects
+                .Where(p => p.Name == "CSProj3")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we have a diagnostic in C.cs initially.
             var results = await RunGetWorkspacePullDiagnosticsAsync(
@@ -2569,10 +2601,8 @@ class A {";
                 )
             );
             await testLspServer
-                .TestWorkspace.ChangeDocumentAsync(
-                    csproj3Document.Id,
-                    newCsProj3Document.Project.Solution
-                )
+                .TestWorkspace
+                .ChangeDocumentAsync(csproj3Document.Id, newCsProj3Document.Project.Solution)
                 .ConfigureAwait(false);
 
             // Get updated workspace diagnostics for the change.
@@ -2640,9 +2670,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2668,10 +2700,9 @@ class A {";
                     )
                 )
             );
-            await testLspServer.TestWorkspace.ChangeDocumentAsync(
-                csproj2Document.Id,
-                newCsProj2Document.Project.Solution
-            );
+            await testLspServer
+                .TestWorkspace
+                .ChangeDocumentAsync(csproj2Document.Id, newCsProj2Document.Project.Solution);
 
             // Get updated workspace diagnostics for the change.
             var previousResultIds = CreateDiagnosticParamsFromPreviousReports(results);
@@ -2733,9 +2764,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2750,15 +2783,19 @@ class A {";
 
             // Change and reload the project via the workspace.
             var projectInfo = testLspServer
-                .TestWorkspace.Projects.Where(p => p.AssemblyName == "CSProj2")
+                .TestWorkspace
+                .Projects
+                .Where(p => p.AssemblyName == "CSProj2")
                 .Single()
                 .ToProjectInfo();
             projectInfo = projectInfo.WithCompilationOptions(
                 projectInfo.CompilationOptions!.WithPlatform(Platform.X64)
             );
             testLspServer.TestWorkspace.OnProjectReloaded(projectInfo);
-            var operations =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await operations.GetWaiter(FeatureAttribute.Workspace).ExpeditedWaitAsync();
 
             // Get updated workspace diagnostics for the change.
@@ -2814,9 +2851,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2831,12 +2870,16 @@ class A {";
 
             // Reload the project via the workspace.
             var projectInfo = testLspServer
-                .TestWorkspace.Projects.Where(p => p.AssemblyName == "CSProj2")
+                .TestWorkspace
+                .Projects
+                .Where(p => p.AssemblyName == "CSProj2")
                 .Single()
                 .ToProjectInfo();
             testLspServer.TestWorkspace.OnProjectReloaded(projectInfo);
-            var operations =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await operations.GetWaiter(FeatureAttribute.Workspace).ExpeditedWaitAsync();
 
             // Get updated workspace diagnostics for the change.
@@ -2894,9 +2937,11 @@ class A {";
                 .ConfigureAwait(false);
             var csproj2Document = testLspServer
                 .GetCurrentSolution()
-                .Projects.Where(p => p.Name == "CSProj2")
+                .Projects
+                .Where(p => p.Name == "CSProj2")
                 .Single()
-                .Documents.First();
+                .Documents
+                .First();
 
             // Verify we a diagnostic in A.cs since B does not exist
             // and a diagnostic in B.cs since it is missing the class name.
@@ -2910,12 +2955,16 @@ class A {";
 
             // Reload the project via the workspace.
             var projectInfo = testLspServer
-                .TestWorkspace.Projects.Where(p => p.AssemblyName == "CSProj2")
+                .TestWorkspace
+                .Projects
+                .Where(p => p.AssemblyName == "CSProj2")
                 .Single()
                 .ToProjectInfo();
             testLspServer.TestWorkspace.OnProjectReloaded(projectInfo);
-            var operations =
-                testLspServer.TestWorkspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();
+            var operations = testLspServer
+                .TestWorkspace
+                .ExportProvider
+                .GetExportedValue<AsynchronousOperationListenerProvider>();
             await operations.GetWaiter(FeatureAttribute.Workspace).ExpeditedWaitAsync();
 
             // Get updated workspace diagnostics for the change.
@@ -3004,8 +3053,10 @@ class A {";
             // Make an LSP document change that will trigger connection close.
             var uri = testLspServer
                 .GetCurrentSolution()
-                .Projects.First()
-                .Documents.First()
+                .Projects
+                .First()
+                .Documents
+                .First()
                 .GetURI();
             await testLspServer.OpenDocumentAsync(uri);
 

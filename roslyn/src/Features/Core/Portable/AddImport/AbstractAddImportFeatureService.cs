@@ -664,8 +664,9 @@ namespace Microsoft.CodeAnalysis.AddImport
             PortableExecutableReference reference
         )
         {
-            var compilationService =
-                project.Services.GetRequiredService<ICompilationFactoryService>();
+            var compilationService = project
+                .Services
+                .GetRequiredService<ICompilationFactoryService>();
             var compilation = compilationService.CreateCompilation(
                 "TempAssembly",
                 compilationService.GetDefaultCompilationOptions()

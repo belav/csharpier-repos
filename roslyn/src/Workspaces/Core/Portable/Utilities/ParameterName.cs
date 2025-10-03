@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Utilities
                 // Otherwise, massage it a bit to be a more suitable match for
                 // how people actually writing parameters.
                 BestNameForParameter = parameterNamingRule
-                    .NamingStyle.MakeCompliant(nameBasedOnArgument)
+                    .NamingStyle
+                    .MakeCompliant(nameBasedOnArgument)
                     .First();
             }
         }

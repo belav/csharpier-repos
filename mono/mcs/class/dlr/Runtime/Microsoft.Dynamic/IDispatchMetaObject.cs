@@ -304,7 +304,8 @@ namespace Microsoft.Scripting
                 return new DynamicMetaObject(
                     Expression.Constant(null),
                     value
-                        .Restrictions.Merge(IDispatchRestriction())
+                        .Restrictions
+                        .Merge(IDispatchRestriction())
                         .Merge(
                             BindingRestrictions.GetTypeRestriction(
                                 value.Expression,

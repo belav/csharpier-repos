@@ -2656,11 +2656,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // Creates a dummy declaration node to which we can attach a stack overflow message
             static MemberDeclarationSyntax createEmptyNodeFunc(LanguageParser @this)
             {
-                return @this._syntaxFactory.IncompleteMember(
-                    new SyntaxList<AttributeListSyntax>(),
-                    new SyntaxList<SyntaxToken>(),
-                    @this.CreateMissingIdentifierName()
-                );
+                return @this
+                    ._syntaxFactory
+                    .IncompleteMember(
+                        new SyntaxList<AttributeListSyntax>(),
+                        new SyntaxList<SyntaxToken>(),
+                        @this.CreateMissingIdentifierName()
+                    );
             }
         }
 
@@ -6275,7 +6277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 {
                     var isAfterNewLine = parentType
                         .GetLastToken()
-                        .TrailingTrivia.Any((int)SyntaxKind.EndOfLineTrivia);
+                        .TrailingTrivia
+                        .Any((int)SyntaxKind.EndOfLineTrivia);
                     if (isAfterNewLine)
                     {
                         int offset,

@@ -15,7 +15,8 @@ public static class EntityExtensions
             StartTime = session.StartTime,
             EndTime = session.EndTime,
             Speakers = session
-                .SessionSpeakers?.Select(ss => new ConferenceDTO.Speaker
+                .SessionSpeakers
+                ?.Select(ss => new ConferenceDTO.Speaker
                 {
                     Id = ss.SpeakerId,
                     Name = ss.Speaker.Name,
@@ -38,7 +39,8 @@ public static class EntityExtensions
             Bio = speaker.Bio,
             WebSite = speaker.WebSite,
             Sessions = speaker
-                .SessionSpeakers?.Select(ss => new ConferenceDTO.Session
+                .SessionSpeakers
+                ?.Select(ss => new ConferenceDTO.Session
                 {
                     Id = ss.SessionId,
                     Title = ss.Session.Title,
@@ -55,7 +57,8 @@ public static class EntityExtensions
             UserName = attendee.UserName,
             EmailAddress = attendee.EmailAddress,
             Sessions = attendee
-                .SessionsAttendees?.Select(sa => new ConferenceDTO.Session
+                .SessionsAttendees
+                ?.Select(sa => new ConferenceDTO.Session
                 {
                     Id = sa.SessionId,
                     Title = sa.Session.Title,

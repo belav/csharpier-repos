@@ -127,7 +127,8 @@ internal readonly struct CSharpCodeFixOptionsProvider
         (CSharpSimplifierOptions)
             _fallbackOptions
                 .GetOptions(_languageServices.LanguageServices)
-                .CleanupOptions.SimplifierOptions;
+                .CleanupOptions
+                .SimplifierOptions;
 #endif
 
     private CSharpSyntaxFormattingOptions FallbackSyntaxFormattingOptions
@@ -139,7 +140,8 @@ internal readonly struct CSharpCodeFixOptionsProvider
         (CSharpSyntaxFormattingOptions)
             _fallbackOptions
                 .GetOptions(_languageServices.LanguageServices)
-                .CleanupOptions.FormattingOptions;
+                .CleanupOptions
+                .FormattingOptions;
 #endif
 
     private LineFormattingOptions FallbackLineFormattingOptions
@@ -149,7 +151,9 @@ internal readonly struct CSharpCodeFixOptionsProvider
         =>
         _fallbackOptions
             .GetOptions(_languageServices.LanguageServices)
-            .CleanupOptions.FormattingOptions.LineFormatting;
+            .CleanupOptions
+            .FormattingOptions
+            .LineFormatting;
 #endif
 
     private AddImportPlacementOptions FallbackAddImportPlacementOptions
@@ -160,7 +164,8 @@ internal readonly struct CSharpCodeFixOptionsProvider
         =>
         _fallbackOptions
             .GetOptions(_languageServices.LanguageServices)
-            .CleanupOptions.AddImportOptions;
+            .CleanupOptions
+            .AddImportOptions;
 #endif
 }
 

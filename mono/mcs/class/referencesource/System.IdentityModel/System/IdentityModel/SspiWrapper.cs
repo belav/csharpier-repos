@@ -351,9 +351,9 @@ namespace System.IdentityModel
                 );
                 if (errorCode != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(errorCode)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(errorCode));
                 }
 
                 SecurityPackageInfoClass[] securityPackages = new SecurityPackageInfoClass[
@@ -396,9 +396,11 @@ namespace System.IdentityModel
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotSupportedException(SR.GetString(SR.SSPIPackageNotSupported, packageName))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.SSPIPackageNotSupported, packageName))
+                );
         }
 
         public static bool IsNegotiateExPackagePresent()
@@ -438,9 +440,9 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
             return outCredential;
         }
@@ -460,9 +462,9 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
             return credentialsHandle;
         }
@@ -482,9 +484,9 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
             return outCredential;
         }
@@ -504,9 +506,9 @@ namespace System.IdentityModel
             );
             if (errorCode != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
             return outCredential;
         }
@@ -632,16 +634,18 @@ namespace System.IdentityModel
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "handleType",
-                            SR.GetString(
-                                SR.ValueMustBeOf2Types,
-                                typeof(SafeFreeContextBuffer).ToString(),
-                                typeof(SafeFreeCertContext).ToString()
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "handleType",
+                                SR.GetString(
+                                    SR.ValueMustBeOf2Types,
+                                    typeof(SafeFreeContextBuffer).ToString(),
+                                    typeof(SafeFreeCertContext).ToString()
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
             fixed (byte* bufferPtr = buffer)
@@ -700,13 +704,15 @@ namespace System.IdentityModel
                     nativeBlockSize = SecPkgContext_SessionKey.Size;
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidEnumArgumentException(
-                            "contextAttribute",
-                            (int)contextAttribute,
-                            typeof(ContextAttribute)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidEnumArgumentException(
+                                "contextAttribute",
+                                (int)contextAttribute,
+                                typeof(ContextAttribute)
+                            )
+                        );
             }
 
             SafeHandle sspiHandle = null;
@@ -723,9 +729,9 @@ namespace System.IdentityModel
                 );
                 if (errorCode != 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new Win32Exception(errorCode)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new Win32Exception(errorCode));
                 }
 
                 switch (contextAttribute)
@@ -851,9 +857,9 @@ namespace System.IdentityModel
             int errorCode = SafeDeleteContext.ImpersonateSecurityContext(context);
             if (errorCode != (int)SecurityStatus.OK)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new Win32Exception(errorCode)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new Win32Exception(errorCode));
             }
         }
 
@@ -923,9 +929,9 @@ namespace System.IdentityModel
                         }
                         else if (isGssBlob && !encrypt && iBuffer.type == BufferType.Data)
                         {
-                            iBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(
-                                iBuffer.size
-                            );
+                            iBuffer.token = DiagnosticUtility
+                                .Utility
+                                .AllocateByteArray(iBuffer.size);
                             Marshal.Copy(unmanagedBuffer[i].token, iBuffer.token, 0, iBuffer.size);
                         }
                         else
@@ -976,14 +982,16 @@ namespace System.IdentityModel
                                             iBuffer.offset
                                         )
                                     );
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new InvalidOperationException(
-                                            SR.GetString(
-                                                SR.SspiWrapperEncryptDecryptAssert1,
-                                                iBuffer.offset
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperError(
+                                            new InvalidOperationException(
+                                                SR.GetString(
+                                                    SR.SspiWrapperEncryptDecryptAssert1,
+                                                    iBuffer.offset
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
                                 }
                                 if (
                                     !(
@@ -1003,14 +1011,16 @@ namespace System.IdentityModel
                                             iBuffer.size
                                         )
                                     );
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new InvalidOperationException(
-                                            SR.GetString(
-                                                SR.SspiWrapperEncryptDecryptAssert2,
-                                                iBuffer.size
+                                    throw DiagnosticUtility
+                                        .ExceptionUtility
+                                        .ThrowHelperError(
+                                            new InvalidOperationException(
+                                                SR.GetString(
+                                                    SR.SspiWrapperEncryptDecryptAssert2,
+                                                    iBuffer.size
+                                                )
                                             )
-                                        )
-                                    );
+                                        );
                                 }
                             }
                     }

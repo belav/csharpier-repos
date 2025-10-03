@@ -37,9 +37,9 @@ namespace Internal.Runtime.TypeLoader
 
                 // Check if we have metadata.
                 if (TryGetMetadataForNamedType(rtth, out qTypeDefinition))
-                    return qTypeDefinition.NativeFormatHandle.GetFullName(
-                        qTypeDefinition.NativeFormatReader
-                    );
+                    return qTypeDefinition
+                        .NativeFormatHandle
+                        .GetFullName(qTypeDefinition.NativeFormatReader);
             }
             return "?";
         }
@@ -282,7 +282,8 @@ namespace Internal.Runtime.TypeLoader
                     if (
                         !targetType
                             .GetTypeDefinition()
-                            .RuntimeTypeHandle.Equals(implementingTypeHandle)
+                            .RuntimeTypeHandle
+                            .Equals(implementingTypeHandle)
                         || defaultMethods != isDefaultInterfaceMethodImplementation
                     )
                     {
@@ -302,9 +303,9 @@ namespace Internal.Runtime.TypeLoader
 
                         NativeLayoutInfoLoadContext nativeLayoutContext =
                             new NativeLayoutInfoLoadContext();
-                        nativeLayoutContext._module = ModuleList.Instance.GetModuleInfoByHandle(
-                            module.Handle
-                        );
+                        nativeLayoutContext._module = ModuleList
+                            .Instance
+                            .GetModuleInfoByHandle(module.Handle);
                         nativeLayoutContext._typeSystemContext = context;
                         nativeLayoutContext._typeArgumentHandles = targetType.Instantiation;
 
@@ -367,7 +368,8 @@ namespace Internal.Runtime.TypeLoader
                                     currentIfaceType.HasInstantiation
                                     && currentIfaceType
                                         .GetTypeDefinition()
-                                        .RuntimeTypeHandle.Equals(targetTypeHandle)
+                                        .RuntimeTypeHandle
+                                        .Equals(targetTypeHandle)
                                 )
                                 {
                                     // Default interface method implemented on the same type that declared the slot.
@@ -386,7 +388,8 @@ namespace Internal.Runtime.TypeLoader
                                         if (
                                             instIntf
                                                 .GetTypeDefinition()
-                                                .RuntimeTypeHandle.Equals(targetTypeHandle)
+                                                .RuntimeTypeHandle
+                                                .Equals(targetTypeHandle)
                                         )
                                         {
                                             // Got a potential interface. Check if the implementing interface is in the interface
@@ -440,7 +443,8 @@ namespace Internal.Runtime.TypeLoader
         {
             // Get the open type definition of the containing type of the generic virtual method being resolved
             RuntimeTypeHandle openCallingTypeHandle = slotMethod
-                .OwningType.GetTypeDefinition()
+                .OwningType
+                .GetTypeDefinition()
                 .RuntimeTypeHandle;
 
             // Get the open type definition of the current type of the object instance on which the GVM is being resolved

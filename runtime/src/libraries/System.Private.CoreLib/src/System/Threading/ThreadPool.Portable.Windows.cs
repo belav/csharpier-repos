@@ -46,9 +46,9 @@ namespace System.Threading
             try
             {
                 osHandle.DangerousAddRef(ref mustReleaseSafeHandle);
-                PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(
-                    osHandle.DangerousGetHandle()
-                );
+                PortableThreadPool
+                    .ThreadPoolInstance
+                    .RegisterForIOCompletionNotifications(osHandle.DangerousGetHandle());
                 return true;
             }
             finally

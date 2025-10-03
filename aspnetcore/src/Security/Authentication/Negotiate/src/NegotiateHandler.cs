@@ -213,10 +213,9 @@ public class NegotiateHandler
                     // Only include it if the response ultimately succeeds. This avoids adding it twice if Challenge is called again.
                     if (Response.StatusCode < StatusCodes.Status400BadRequest)
                     {
-                        Response.Headers.Append(
-                            HeaderNames.WWWAuthenticate,
-                            AuthHeaderPrefix + outgoing
-                        );
+                        Response
+                            .Headers
+                            .Append(HeaderNames.WWWAuthenticate, AuthHeaderPrefix + outgoing);
                     }
                     return Task.CompletedTask;
                 });

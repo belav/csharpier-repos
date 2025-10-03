@@ -176,16 +176,16 @@ namespace GHTUtils
             }
             else if (t.FullName == "System.Byte")
             {
-                objOut = System.Convert.ToByte(
-                    rnd.Next(System.Byte.MinValue + 1, System.Byte.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToByte(rnd.Next(System.Byte.MinValue + 1, System.Byte.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.Char")
             {
-                objOut = System.Convert.ToChar(
-                    rnd.Next(System.Char.MinValue + 65, System.Char.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToChar(rnd.Next(System.Char.MinValue + 65, System.Char.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.DateTime")
@@ -196,9 +196,9 @@ namespace GHTUtils
             }
             else if (t.FullName == "System.Decimal")
             {
-                objOut = System.Convert.ToDecimal(
-                    rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToDecimal(rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.Double")
@@ -213,37 +213,37 @@ namespace GHTUtils
             }
             else if (t.FullName == "System.Int16")
             {
-                objOut = System.Convert.ToInt16(
-                    rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToInt16(rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.Int32")
             {
-                objOut = System.Convert.ToInt32(
-                    rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToInt32(rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.Int64")
             {
-                objOut = System.Convert.ToInt64(
-                    rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToInt64(rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.SByte")
             {
-                objOut = System.Convert.ToSByte(
-                    rnd.Next(System.SByte.MinValue + 1, System.SByte.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToSByte(rnd.Next(System.SByte.MinValue + 1, System.SByte.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.Single")
             {
-                objOut = System.Convert.ToSingle(
-                    rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToSingle(rnd.Next(System.Int16.MinValue + 1, System.Int16.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.String")
@@ -254,32 +254,36 @@ namespace GHTUtils
                     size = 16;
                 for (int i = 0; i < size; i++)
                 {
-                    str += System.Convert.ToChar(
-                        rnd.Next(System.Byte.MinValue + 65, System.Byte.MaxValue - 128)
-                    );
+                    str += System
+                        .Convert
+                        .ToChar(rnd.Next(System.Byte.MinValue + 65, System.Byte.MaxValue - 128));
                 }
                 objOut = str;
                 return objOut;
             }
             else if (t.FullName == "System.UInt16")
             {
-                objOut = System.Convert.ToUInt16(
-                    rnd.Next(System.UInt16.MinValue + 1, System.UInt16.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToUInt16(rnd.Next(System.UInt16.MinValue + 1, System.UInt16.MaxValue - 128));
                 return objOut;
             }
             else if (t.FullName == "System.UInt32")
             {
-                objOut = System.Convert.ToUInt32(
-                    rnd.Next((int)System.UInt32.MinValue + 1, System.Int32.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToUInt32(
+                        rnd.Next((int)System.UInt32.MinValue + 1, System.Int32.MaxValue - 128)
+                    );
                 return objOut;
             }
             else if (t.FullName == "System.UInt64")
             {
-                objOut = System.Convert.ToUInt64(
-                    rnd.Next((int)System.UInt64.MinValue + 1, System.Int32.MaxValue - 128)
-                );
+                objOut = System
+                    .Convert
+                    .ToUInt64(
+                        rnd.Next((int)System.UInt64.MinValue + 1, System.Int32.MaxValue - 128)
+                    );
                 return objOut;
             }
             else if (t.FullName == "System.Data.DataTable")
@@ -705,9 +709,13 @@ namespace GHTUtils
                         object new_obj = Activator_CreateInstance(field.FieldType);
 
                         MethodInfo mm = null;
-                        MethodInfo[] mmi = field.FieldType.GetMethods(
-                            BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public
-                        );
+                        MethodInfo[] mmi = field
+                            .FieldType
+                            .GetMethods(
+                                BindingFlags.DeclaredOnly
+                                    | BindingFlags.Instance
+                                    | BindingFlags.Public
+                            );
 
                         foreach (MethodInfo m in mmi)
                         {

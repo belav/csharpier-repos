@@ -657,7 +657,8 @@ namespace System.Data.Entity.Design.PluralizationServices
 
             this._knownSingluarWords = new List<string>(
                 _irregularPluralsDictionary
-                    .Keys.Concat(_assimilatedClassicalInflectionDictionary.Keys)
+                    .Keys
+                    .Concat(_assimilatedClassicalInflectionDictionary.Keys)
                     .Concat(_oSuffixDictionary.Keys)
                     .Concat(_classicalInflectionDictionary.Keys)
                     .Concat(_irregularVerbList.Keys)
@@ -672,7 +673,8 @@ namespace System.Data.Entity.Design.PluralizationServices
 
             this._knownPluralWords = new List<string>(
                 _irregularPluralsDictionary
-                    .Values.Concat(_assimilatedClassicalInflectionDictionary.Values)
+                    .Values
+                    .Concat(_assimilatedClassicalInflectionDictionary.Values)
                     .Concat(_oSuffixDictionary.Values)
                     .Concat(_classicalInflectionDictionary.Values)
                     .Concat(_irregularVerbList.Values)

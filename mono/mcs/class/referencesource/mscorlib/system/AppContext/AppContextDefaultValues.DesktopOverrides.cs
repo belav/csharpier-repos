@@ -23,8 +23,11 @@ namespace System
         static partial void PopulateOverrideValuesPartial()
         {
             // Retrieve the value from EE config.
-            string overrides =
-                System.Runtime.Versioning.CompatibilitySwitch.GetAppContextOverridesInternalCall();
+            string overrides = System
+                .Runtime
+                .Versioning
+                .CompatibilitySwitch
+                .GetAppContextOverridesInternalCall();
 
             // If we have no override values, do nothing.
             if (string.IsNullOrEmpty(overrides))
@@ -116,9 +119,11 @@ namespace System
             if (valueFromConfig == null)
             {
                 // We are only going to check the Shim Database for an override in this case
-                valueFromConfig = System.Runtime.Versioning.CompatibilitySwitch.GetValue(
-                    switchName
-                );
+                valueFromConfig = System
+                    .Runtime
+                    .Versioning
+                    .CompatibilitySwitch
+                    .GetValue(switchName);
             }
 
             if (valueFromConfig != null && bool.TryParse(valueFromConfig, out boolFromConfig))

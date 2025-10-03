@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             Assert.Empty(
                 diagnosticService
                     .GetTestAccessor()
-                    .EventListenerTracker.GetTestAccessor()
+                    .EventListenerTracker
+                    .GetTestAccessor()
                     .EventListeners
             );
 
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
             var mutex = new ManualResetEvent(false);
             var document = workspace
-                .CurrentSolution.AddProject("TestProject", "TestProject", LanguageNames.CSharp)
+                .CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
 
             var source = new TestDiagnosticUpdateSource(false, null);
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
             var mutex = new ManualResetEvent(false);
             var document = workspace
-                .CurrentSolution.AddProject("TestProject", "TestProject", LanguageNames.CSharp)
+                .CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);
 
@@ -209,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             );
             var mutex = new ManualResetEvent(false);
             var document = workspace
-                .CurrentSolution.AddProject("TestProject", "TestProject", LanguageNames.CSharp)
+                .CurrentSolution
+                .AddProject("TestProject", "TestProject", LanguageNames.CSharp)
                 .AddDocument("TestDocument", string.Empty);
             var document2 = document.Project.AddDocument("TestDocument2", string.Empty);
 

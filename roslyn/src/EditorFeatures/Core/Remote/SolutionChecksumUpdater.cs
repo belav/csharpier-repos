@@ -55,7 +55,10 @@ namespace Microsoft.CodeAnalysis.Remote
             var listener = listenerProvider.GetListener(FeatureAttribute.SolutionChecksumUpdater);
 
             _globalOperationService = workspace
-                .Services.SolutionServices.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                .Services
+                .SolutionServices
+                .ExportProvider
+                .GetExports<IGlobalOperationNotificationService>()
                 .FirstOrDefault()
                 ?.Value;
 
@@ -255,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Remote
                     return;
 
                 var state = await oldDocument
-                    .State.GetStateChecksumsAsync(cancellationToken)
+                    .State
+                    .GetStateChecksumsAsync(cancellationToken)
                     .ConfigureAwait(false);
 
                 await client

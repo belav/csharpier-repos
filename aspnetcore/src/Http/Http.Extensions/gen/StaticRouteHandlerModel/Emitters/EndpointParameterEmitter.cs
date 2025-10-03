@@ -88,9 +88,9 @@ internal static class EndpointParameterEmitter
         // is invoked.
         if (!readFormEmitted)
         {
-            var shortParameterTypeName = endpointParameter.Type.ToDisplayString(
-                SymbolDisplayFormat.CSharpShortErrorMessageFormat
-            );
+            var shortParameterTypeName = endpointParameter
+                .Type
+                .ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat);
             var assigningCode =
                 $"await GeneratedRouteBuilderExtensionsCore.TryResolveFormAsync(httpContext, logOrThrowExceptionHelper, {SymbolDisplay.FormatLiteral(shortParameterTypeName, true)}, {SymbolDisplay.FormatLiteral(endpointParameter.SymbolName, true)})";
             var resolveFormResult = $"{endpointParameter.SymbolName}_resolveFormResult";
@@ -281,9 +281,9 @@ internal static class EndpointParameterEmitter
 
         // Invoke TryResolveBody method to parse JSON and set
         // status codes on exceptions.
-        var shortParameterTypeName = endpointParameter.Type.ToDisplayString(
-            SymbolDisplayFormat.CSharpShortErrorMessageFormat
-        );
+        var shortParameterTypeName = endpointParameter
+            .Type
+            .ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat);
         var assigningCode =
             $"await GeneratedRouteBuilderExtensionsCore.TryResolveBodyAsync<{endpointParameter.Type.ToDisplayString(EmitterConstants.DisplayFormat)}>(httpContext, logOrThrowExceptionHelper, {(endpointParameter.IsOptional ? "true" : "false")}, {SymbolDisplay.FormatLiteral(shortParameterTypeName, true)}, {SymbolDisplay.FormatLiteral(endpointParameter.SymbolName, true)}, {endpointParameter.SymbolName}_JsonTypeInfo)";
         var resolveBodyResult = $"{endpointParameter.SymbolName}_resolveBodyResult";
@@ -362,9 +362,9 @@ internal static class EndpointParameterEmitter
         // This code is adapted from the EmitJsonBodyParameterPreparationString method with some modifications
         // because the handler argument is emitted before the containing if block (which makes it awkward to
         // simply reuse that emission code) - opted for duplication (with tweaks) over complexity.
-        var shortParameterTypeName = endpointParameter.Type.ToDisplayString(
-            SymbolDisplayFormat.CSharpShortErrorMessageFormat
-        );
+        var shortParameterTypeName = endpointParameter
+            .Type
+            .ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat);
         var assigningCode =
             $"await GeneratedRouteBuilderExtensionsCore.TryResolveBodyAsync<{endpointParameter.Type.ToDisplayString(EmitterConstants.DisplayFormat)}>(httpContext, logOrThrowExceptionHelper, {(endpointParameter.IsOptional ? "true" : "false")}, {SymbolDisplay.FormatLiteral(shortParameterTypeName, true)}, {SymbolDisplay.FormatLiteral(endpointParameter.SymbolName, true)}, {endpointParameter.SymbolName}_JsonTypeInfo)";
         var resolveBodyResult = $"{endpointParameter.SymbolName}_resolveBodyResult";
@@ -498,10 +498,12 @@ internal static class EndpointParameterEmitter
     {
         codeWriter.WriteLine(endpointParameter.EmitParameterDiagnosticComment());
         codeWriter.WriteLine(
-            endpointParameter.EndpointParameters?.EmitParameterPreparation(
-                baseIndent: codeWriter.Indent,
-                emitterContext: emitterContext
-            )
+            endpointParameter
+                .EndpointParameters
+                ?.EmitParameterPreparation(
+                    baseIndent: codeWriter.Indent,
+                    emitterContext: emitterContext
+                )
         );
         codeWriter.WriteLine(
             $"var {endpointParameter.EmitHandlerArgument()} = {endpointParameter.AssigningCode};"

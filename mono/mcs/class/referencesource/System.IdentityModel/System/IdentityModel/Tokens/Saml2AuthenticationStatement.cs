@@ -38,9 +38,9 @@ namespace System.IdentityModel.Tokens
         {
             if (null == authenticationContext)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "authenticationContext"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("authenticationContext");
             }
 
             this.authnContext = authenticationContext;

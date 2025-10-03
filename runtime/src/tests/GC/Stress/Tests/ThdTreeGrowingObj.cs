@@ -90,9 +90,16 @@ namespace DefaultNamespace
             {
                 m_pRoot = Insert(m_pRoot, m_Random.Next(100));
             }
-            Console.Out.WriteLine(
-                "Thread " + ThreadId + " Added: " + howMany + " Nodes: " + GC.GetTotalMemory(false)
-            );
+            Console
+                .Out
+                .WriteLine(
+                    "Thread "
+                        + ThreadId
+                        + " Added: "
+                        + howMany
+                        + " Nodes: "
+                        + GC.GetTotalMemory(false)
+                );
         }
 
         public void DeleteNodes(int howMany, int ThreadId)
@@ -101,14 +108,16 @@ namespace DefaultNamespace
             {
                 m_pRoot = Delete(m_pRoot, m_Random.Next(100));
             }
-            Console.Out.WriteLine(
-                "Thread "
-                    + ThreadId
-                    + " Deleted: "
-                    + howMany
-                    + " Nodes: "
-                    + GC.GetTotalMemory(false)
-            );
+            Console
+                .Out
+                .WriteLine(
+                    "Thread "
+                        + ThreadId
+                        + " Deleted: "
+                        + howMany
+                        + " Nodes: "
+                        + GC.GetTotalMemory(false)
+                );
         }
 
         public Node Insert(Node root, int element)

@@ -59,18 +59,15 @@ namespace System.Runtime.Serialization.Formatters.Tests
             return EqualityComparer<int>.Default.Equals(Member1, o.Member1)
                 && EqualityComparer<string>.Default.Equals(Member2, o.Member2)
                 && EqualityComparer<string>.Default.Equals(_member3, o._member3)
-                && EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(
-                    Member4,
-                    o.Member4
-                )
-                && EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(
-                    Member4shared,
-                    o.Member4shared
-                )
-                && EqualityComparer<SealedObjectWithIntStringFields>.Default.Equals(
-                    Member5,
-                    o.Member5
-                )
+                && EqualityComparer<SealedObjectWithIntStringFields>
+                    .Default
+                    .Equals(Member4, o.Member4)
+                && EqualityComparer<SealedObjectWithIntStringFields>
+                    .Default
+                    .Equals(Member4shared, o.Member4shared)
+                && EqualityComparer<SealedObjectWithIntStringFields>
+                    .Default
+                    .Equals(Member5, o.Member5)
                 && EqualityComparer<string>.Default.Equals(Member6, o.Member6)
                 && EqualityComparer<string>.Default.Equals(str1, o.str1)
                 && EqualityComparer<string>.Default.Equals(str2, o.str2)

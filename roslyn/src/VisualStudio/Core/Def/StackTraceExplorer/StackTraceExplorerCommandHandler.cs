@@ -56,23 +56,25 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             var window = GetOrInitializeWindow();
-            _threadingContext.JoinableTaskFactory.RunAsync(async () =>
-            {
-                var shouldActivate = await window
-                    .ShouldShowOnActivatedAsync(default)
-                    .ConfigureAwait(false);
-
-                if (shouldActivate)
+            _threadingContext
+                .JoinableTaskFactory
+                .RunAsync(async () =>
                 {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                    var windowFrame = (IVsWindowFrame)window.Frame;
-                    ErrorHandler.ThrowOnFailure(windowFrame.Show());
-                    Logger.Log(
-                        FunctionId.StackTraceToolWindow_ShowOnActivated,
-                        logLevel: LogLevel.Information
-                    );
-                }
-            });
+                    var shouldActivate = await window
+                        .ShouldShowOnActivatedAsync(default)
+                        .ConfigureAwait(false);
+
+                    if (shouldActivate)
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        var windowFrame = (IVsWindowFrame)window.Frame;
+                        ErrorHandler.ThrowOnFailure(windowFrame.Show());
+                        Logger.Log(
+                            FunctionId.StackTraceToolWindow_ShowOnActivated,
+                            logLevel: LogLevel.Information
+                        );
+                    }
+                });
 
             return VSConstants.S_OK;
         }

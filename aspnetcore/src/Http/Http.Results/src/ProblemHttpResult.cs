@@ -57,8 +57,9 @@ public sealed class ProblemHttpResult
 
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
         var logger = loggerFactory.CreateLogger(typeof(ProblemHttpResult));
-        var problemDetailsService =
-            httpContext.RequestServices.GetService<IProblemDetailsService>();
+        var problemDetailsService = httpContext
+            .RequestServices
+            .GetService<IProblemDetailsService>();
 
         if (StatusCode is { } code)
         {

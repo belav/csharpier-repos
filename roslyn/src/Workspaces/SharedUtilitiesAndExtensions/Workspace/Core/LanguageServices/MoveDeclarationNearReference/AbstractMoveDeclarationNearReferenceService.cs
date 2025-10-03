@@ -147,9 +147,9 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
             }
             else
             {
-                var statementIndex = state.OutermostBlockStatements.IndexOf(
-                    state.DeclarationStatement
-                );
+                var statementIndex = state
+                    .OutermostBlockStatements
+                    .IndexOf(state.DeclarationStatement);
                 if (
                     statementIndex + 1 < state.OutermostBlockStatements.Count
                     && state.OutermostBlockStatements[statementIndex + 1]
@@ -360,15 +360,17 @@ namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
                 out var right
             );
 
-            return state.DeclarationStatement.ReplaceNode(
-                state.VariableDeclarator,
-                generator
-                    .WithInitializer(
-                        state.VariableDeclarator.WithoutTrailingTrivia(),
-                        generator.EqualsValueClause(operatorToken, right)
-                    )
-                    .WithTrailingTrivia(state.VariableDeclarator.GetTrailingTrivia())
-            );
+            return state
+                .DeclarationStatement
+                .ReplaceNode(
+                    state.VariableDeclarator,
+                    generator
+                        .WithInitializer(
+                            state.VariableDeclarator.WithoutTrailingTrivia(),
+                            generator.EqualsValueClause(operatorToken, right)
+                        )
+                        .WithTrailingTrivia(state.VariableDeclarator.GetTrailingTrivia())
+                );
         }
     }
 }

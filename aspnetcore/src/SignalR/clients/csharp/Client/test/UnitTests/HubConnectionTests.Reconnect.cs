@@ -1101,7 +1101,9 @@ public partial class HubConnectionTests
                         output
                     );
                     await currentTestConnection
-                        .Application.Output.WriteAsync(output.ToArray())
+                        .Application
+                        .Output
+                        .WriteAsync(output.ToArray())
                         .DefaultTimeout();
                 }
                 finally

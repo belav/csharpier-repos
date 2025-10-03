@@ -721,10 +721,9 @@ namespace System.Web
             }
 
             if (
-                !_virtualPath.Extension.Equals(
-                    _xmlSiteMapFileExtension,
-                    StringComparison.OrdinalIgnoreCase
-                )
+                !_virtualPath
+                    .Extension
+                    .Equals(_xmlSiteMapFileExtension, StringComparison.OrdinalIgnoreCase)
             )
             {
                 throw new InvalidOperationException(
@@ -743,9 +742,9 @@ namespace System.Web
             if (xmlParentProvider != null && xmlParentProvider._parentSiteMapFileCollection != null)
             {
                 if (
-                    xmlParentProvider._parentSiteMapFileCollection.Contains(
-                        _normalizedVirtualPath.VirtualPathString
-                    )
+                    xmlParentProvider
+                        ._parentSiteMapFileCollection
+                        .Contains(_normalizedVirtualPath.VirtualPathString)
                 )
                 {
                     throw new InvalidOperationException(

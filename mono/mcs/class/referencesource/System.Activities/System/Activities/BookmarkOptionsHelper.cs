@@ -22,13 +22,15 @@ namespace System.Activities
         {
             if (!IsDefined(options))
             {
-                throw FxTrace.Exception.AsError(
-                    new InvalidEnumArgumentException(
-                        argumentName,
-                        (int)options,
-                        typeof(BookmarkOptions)
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        new InvalidEnumArgumentException(
+                            argumentName,
+                            (int)options,
+                            typeof(BookmarkOptions)
+                        )
+                    );
             }
         }
 

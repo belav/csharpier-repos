@@ -39,10 +39,12 @@ namespace System.ServiceModel.Channels
             {
                 if (value != MessageVersion.None)
                 {
-                    throw FxTrace.Exception.Argument(
-                        "MessageVersion",
-                        SR.ByteStreamMessageEncoderMessageVersionNotSupported(value)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument(
+                            "MessageVersion",
+                            SR.ByteStreamMessageEncoderMessageVersionNotSupported(value)
+                        );
                 }
             }
         }

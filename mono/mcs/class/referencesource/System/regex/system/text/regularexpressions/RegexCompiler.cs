@@ -3284,11 +3284,13 @@ namespace System.Text.RegularExpressions
                 );
                 assemblyAttributes.Add(securityRulesAttribute);
 #endif
-                _assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(
-                    an,
-                    AssemblyBuilderAccess.RunAndSave,
-                    assemblyAttributes
-                );
+                _assembly = AppDomain
+                    .CurrentDomain
+                    .DefineDynamicAssembly(
+                        an,
+                        AssemblyBuilderAccess.RunAndSave,
+                        assemblyAttributes
+                    );
                 _module = _assembly.DefineDynamicModule(an.Name + ".dll");
 
                 if (attribs != null)

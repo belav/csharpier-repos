@@ -49,9 +49,9 @@ internal sealed class ListCommand : ICommand
         {
             foreach (var secret in context.SecretStore.AsEnumerable())
             {
-                context.Reporter.Output(
-                    Resources.FormatMessage_Secret_Value_Format(secret.Key, secret.Value)
-                );
+                context
+                    .Reporter
+                    .Output(Resources.FormatMessage_Secret_Value_Format(secret.Key, secret.Value));
             }
         }
     }

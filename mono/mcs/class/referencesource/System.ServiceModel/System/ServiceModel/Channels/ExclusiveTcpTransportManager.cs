@@ -225,10 +225,9 @@ namespace System.ServiceModel.Channels
 
             if ((this.ipv4TransportManager == null) && (this.ipv6TransportManager == null))
             {
-                TcpChannelListener.StaticTransportManagerTable.UnregisterUri(
-                    this.ListenUri,
-                    this.HostNameComparisonMode
-                );
+                TcpChannelListener
+                    .StaticTransportManagerTable
+                    .UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
             }
         }
 

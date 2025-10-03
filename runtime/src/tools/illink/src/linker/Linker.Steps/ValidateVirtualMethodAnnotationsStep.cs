@@ -19,10 +19,9 @@ namespace Mono.Linker.Steps
                 {
                     foreach (var baseOv in baseOverrideInformations)
                     {
-                        annotations.FlowAnnotations.ValidateMethodAnnotationsAreSame(
-                            method,
-                            baseOv.Base
-                        );
+                        annotations
+                            .FlowAnnotations
+                            .ValidateMethodAnnotationsAreSame(method, baseOv.Base);
                         ValidateMethodRequiresUnreferencedCodeAreSame(method, baseOv.Base);
                     }
                 }
@@ -36,16 +35,15 @@ namespace Mono.Linker.Steps
                         // when validating the override from the list.
                         // This avoids validating the edge twice (it would produce the same warning twice)
                         if (
-                            annotations.VirtualMethodsWithAnnotationsToValidate.Contains(
-                                overrideInformation.Override
-                            )
+                            annotations
+                                .VirtualMethodsWithAnnotationsToValidate
+                                .Contains(overrideInformation.Override)
                         )
                             continue;
 
-                        annotations.FlowAnnotations.ValidateMethodAnnotationsAreSame(
-                            overrideInformation.Override,
-                            method
-                        );
+                        annotations
+                            .FlowAnnotations
+                            .ValidateMethodAnnotationsAreSame(overrideInformation.Override, method);
                         ValidateMethodRequiresUnreferencedCodeAreSame(
                             overrideInformation.Override,
                             method

@@ -41,10 +41,9 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/Test/PostWithRequireAntiforgeryToken"
         );
-        request.Headers.Add(
-            "Cookie",
-            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
-        );
+        request
+            .Headers
+            .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),
@@ -62,7 +61,8 @@ public class AntiforgeryMiddlewareTest
     {
         var builder = WebApplication.CreateBuilder();
         builder
-            .Services.AddMvcCore()
+            .Services
+            .AddMvcCore()
             .UseSpecificControllers(typeof(TestWithBothAttributesController))
             .AddViews();
         builder.Services.AddAntiforgery();
@@ -118,9 +118,11 @@ public class AntiforgeryMiddlewareTest
         app.Use(
             (context, next) =>
             {
-                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
-                    new FakeHttpMaxRequestBodySizeFeature(5_000_000)
-                );
+                context
+                    .Features
+                    .Set<IHttpMaxRequestBodySizeFeature>(
+                        new FakeHttpMaxRequestBodySizeFeature(5_000_000)
+                    );
                 return next(context);
             }
         );
@@ -149,10 +151,9 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/Test/PostWithRequireAntiforgeryTokenAndSizeLimit"
         );
-        request.Headers.Add(
-            "Cookie",
-            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
-        );
+        request
+            .Headers
+            .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),
@@ -189,10 +190,9 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/Test/PostWithRequireAntiforgeryTokenAndFormLimit"
         );
-        request.Headers.Add(
-            "Cookie",
-            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
-        );
+        request
+            .Headers
+            .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),
@@ -210,7 +210,8 @@ public class AntiforgeryMiddlewareTest
     {
         var builder = WebApplication.CreateBuilder();
         builder
-            .Services.AddMvcCore()
+            .Services
+            .AddMvcCore()
             .UseSpecificControllers(typeof(TestWithRequestSizeLimitController));
         builder.Services.AddAntiforgery();
         builder.WebHost.UseTestServer();
@@ -229,10 +230,9 @@ public class AntiforgeryMiddlewareTest
             HttpMethod.Post,
             "/TestWithRequestSizeLimit/PostWithRequireAntiforgeryTokenAndDisableSizeLimit"
         );
-        request.Headers.Add(
-            "Cookie",
-            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
-        );
+        request
+            .Headers
+            .Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),

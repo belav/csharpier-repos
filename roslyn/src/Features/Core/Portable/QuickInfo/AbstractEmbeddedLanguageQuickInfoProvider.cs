@@ -41,7 +41,8 @@ internal abstract class AbstractEmbeddedLanguageQuickInfoProvider : CommonQuickI
             return null;
 
         var semanticModel = await context
-            .Document.GetRequiredSemanticModelAsync(context.CancellationToken)
+            .Document
+            .GetRequiredSemanticModelAsync(context.CancellationToken)
             .ConfigureAwait(false);
 
         var quickInfoProviders = _embeddedLanguageProviderFeature.GetServices(

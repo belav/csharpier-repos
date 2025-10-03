@@ -196,9 +196,9 @@ namespace System.Web.Mvc.Test
                 .Returns(new object());
             mockControllerContext
                 .Setup(o =>
-                    o.HttpContext.Session.Remove(
-                        SessionStateTempDataProvider.TempDataSessionStateKey
-                    )
+                    o.HttpContext
+                        .Session
+                        .Remove(SessionStateTempDataProvider.TempDataSessionStateKey)
                 )
                 .Verifiable();
 

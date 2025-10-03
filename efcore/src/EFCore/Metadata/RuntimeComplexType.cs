@@ -126,7 +126,8 @@ public class RuntimeComplexType : RuntimeTypeBase, IRuntimeComplexType
                     {
                         ((IModel)complexType.Model)
                             .GetModelDependencies()
-                            .ConstructorBindingFactory.GetBindings(
+                            .ConstructorBindingFactory
+                            .GetBindings(
                                 complexType,
                                 out complexType._constructorBinding,
                                 out complexType._serviceOnlyConstructorBinding

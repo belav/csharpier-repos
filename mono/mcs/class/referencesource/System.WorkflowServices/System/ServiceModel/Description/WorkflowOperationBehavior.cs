@@ -52,21 +52,30 @@ namespace System.ServiceModel.Description
                 || dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors == null
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR2.GetString(SR2.DispatchOperationInInvalidState)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.DispatchOperationInInvalidState)
+                        )
+                    );
             }
 
-            WorkflowRuntimeBehavior workflowRuntimeBehavior =
-                dispatch.Parent.ChannelDispatcher.Host.Description.Behaviors.Find<WorkflowRuntimeBehavior>();
+            WorkflowRuntimeBehavior workflowRuntimeBehavior = dispatch
+                .Parent
+                .ChannelDispatcher
+                .Host
+                .Description
+                .Behaviors
+                .Find<WorkflowRuntimeBehavior>();
 
             if (workflowRuntimeBehavior == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.NoWorkflowRuntimeBehavior))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR2.GetString(SR2.NoWorkflowRuntimeBehavior))
+                    );
             }
 
             dispatch.Invoker = new WorkflowOperationInvoker(

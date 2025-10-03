@@ -52,12 +52,9 @@ namespace System.Net.Http.Headers
             parsedValue = null;
 
             if (
-                TransferCodingHeaderParser.SingleValueParser.TryParseValue(
-                    input,
-                    null,
-                    ref index,
-                    out object? output
-                )
+                TransferCodingHeaderParser
+                    .SingleValueParser
+                    .TryParseValue(input, null, ref index, out object? output)
             )
             {
                 parsedValue = (TransferCodingHeaderValue)output!;

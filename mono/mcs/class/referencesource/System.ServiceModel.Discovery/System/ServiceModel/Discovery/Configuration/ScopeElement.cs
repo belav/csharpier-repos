@@ -61,9 +61,9 @@ namespace System.ServiceModel.Discovery.Configuration
         {
             if ((scope != null) && !((Uri)scope).IsAbsoluteUri)
             {
-                throw FxTrace.Exception.AsError(
-                    new ArgumentException(SR2.DiscoveryConfigInvalidScopeUri(scope))
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ArgumentException(SR2.DiscoveryConfigInvalidScopeUri(scope)));
             }
         }
     }

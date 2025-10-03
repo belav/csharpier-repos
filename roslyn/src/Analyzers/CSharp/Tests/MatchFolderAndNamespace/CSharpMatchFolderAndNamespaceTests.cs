@@ -83,13 +83,15 @@ build_property.RootNamespace = {DefaultNamespace}
             // If empty string was provided as the namespace, then we will not set a default
             if (defaultNamespace.Length > 0)
             {
-                testState.SolutionTransforms.Add(
-                    (solution, projectId) =>
-                    {
-                        var project = solution.GetRequiredProject(projectId);
-                        return project.WithDefaultNamespace(defaultNamespace).Solution;
-                    }
-                );
+                testState
+                    .SolutionTransforms
+                    .Add(
+                        (solution, projectId) =>
+                        {
+                            var project = solution.GetRequiredProject(projectId);
+                            return project.WithDefaultNamespace(defaultNamespace).Solution;
+                        }
+                    );
             }
 
             return testState.RunAsync();
@@ -919,17 +921,19 @@ namespace [|Project2.Test|]
                 },
             };
 
-            testState.SolutionTransforms.Add(
-                (solution, projectId) =>
-                {
-                    foreach (var id in solution.ProjectIds)
+            testState
+                .SolutionTransforms
+                .Add(
+                    (solution, projectId) =>
                     {
-                        var project = solution.GetRequiredProject(id);
-                        solution = project.WithDefaultNamespace(DefaultNamespace).Solution;
+                        foreach (var id in solution.ProjectIds)
+                        {
+                            var project = solution.GetRequiredProject(id);
+                            solution = project.WithDefaultNamespace(DefaultNamespace).Solution;
+                        }
+                        return solution;
                     }
-                    return solution;
-                }
-            );
+                );
 
             await testState.RunAsync();
         }

@@ -41,8 +41,10 @@ namespace System.ServiceModel.Dispatcher
                         mrc.Channel is ISessionChannel<IInputSession>
                         || mrc.Channel is ISessionChannel<IDuplexSession>
                     )
-                    && host.Description.Behaviors.Find<ServiceBehaviorAttribute>().InstanceContextMode
-                        == InstanceContextMode.PerSession
+                    && host.Description
+                        .Behaviors
+                        .Find<ServiceBehaviorAttribute>()
+                        .InstanceContextMode == InstanceContextMode.PerSession
                 )
                     mrc.Channel.Closed += delegate
                     {

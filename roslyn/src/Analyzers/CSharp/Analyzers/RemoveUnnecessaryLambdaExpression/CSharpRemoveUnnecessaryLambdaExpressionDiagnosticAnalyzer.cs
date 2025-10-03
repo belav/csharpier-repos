@@ -140,12 +140,14 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryLambdaExpression
             // Looks like a reasonable candidate to simplify.  Now switch to semantics to check for sure.
 
             if (
-                CSharpSemanticFacts.Instance.IsInExpressionTree(
-                    semanticModel,
-                    anonymousFunction,
-                    expressionType,
-                    cancellationToken
-                )
+                CSharpSemanticFacts
+                    .Instance
+                    .IsInExpressionTree(
+                        semanticModel,
+                        anonymousFunction,
+                        expressionType,
+                        cancellationToken
+                    )
             )
                 return;
 

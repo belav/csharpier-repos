@@ -616,12 +616,12 @@ namespace System.StubHelpers
                 throw new ArgumentNullException(); // We don't have enough information to get the argument name just yet - that support will be coming in M3
 
             IntPtr hstring;
-            int hrCreate =
-                System.Runtime.InteropServices.WindowsRuntime.UnsafeNativeMethods.WindowsCreateString(
-                    managed,
-                    managed.Length,
-                    &hstring
-                );
+            int hrCreate = System
+                .Runtime
+                .InteropServices
+                .WindowsRuntime
+                .UnsafeNativeMethods
+                .WindowsCreateString(managed, managed.Length, &hstring);
             Marshal.ThrowExceptionForHR(hrCreate, new IntPtr(-1));
             return hstring;
         }
@@ -650,8 +650,12 @@ namespace System.StubHelpers
             fixed (char* pManaged = managed)
             {
                 IntPtr hstring;
-                int hrCreate =
-                    System.Runtime.InteropServices.WindowsRuntime.UnsafeNativeMethods.WindowsCreateStringReference(
+                int hrCreate = System
+                    .Runtime
+                    .InteropServices
+                    .WindowsRuntime
+                    .UnsafeNativeMethods
+                    .WindowsCreateStringReference(
                         pManaged,
                         managed.Length,
                         hstringHeader,
@@ -682,9 +686,12 @@ namespace System.StubHelpers
 
             if (hstring != IntPtr.Zero)
             {
-                System.Runtime.InteropServices.WindowsRuntime.UnsafeNativeMethods.WindowsDeleteString(
-                    hstring
-                );
+                System
+                    .Runtime
+                    .InteropServices
+                    .WindowsRuntime
+                    .UnsafeNativeMethods
+                    .WindowsDeleteString(hstring);
             }
         }
     } // class HStringMarshaler
@@ -1789,12 +1796,12 @@ namespace System.StubHelpers
                 pNativeType->typeKind = TypeKind.Projection;
             }
 
-            int hrCreate =
-                System.Runtime.InteropServices.WindowsRuntime.UnsafeNativeMethods.WindowsCreateString(
-                    typeName,
-                    typeName.Length,
-                    &pNativeType->typeName
-                );
+            int hrCreate = System
+                .Runtime
+                .InteropServices
+                .WindowsRuntime
+                .UnsafeNativeMethods
+                .WindowsCreateString(typeName, typeName.Length, &pNativeType->typeName);
             Marshal.ThrowExceptionForHR(hrCreate, new IntPtr(-1));
         }
 
@@ -1848,9 +1855,12 @@ namespace System.StubHelpers
 
             if (pNativeType->typeName != null)
             {
-                System.Runtime.InteropServices.WindowsRuntime.UnsafeNativeMethods.WindowsDeleteString(
-                    pNativeType->typeName
-                );
+                System
+                    .Runtime
+                    .InteropServices
+                    .WindowsRuntime
+                    .UnsafeNativeMethods
+                    .WindowsDeleteString(pNativeType->typeName);
             }
         }
     } // class SystemTypeMarshaler

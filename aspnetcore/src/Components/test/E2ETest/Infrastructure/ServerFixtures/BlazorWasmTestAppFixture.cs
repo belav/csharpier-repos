@@ -16,7 +16,8 @@ public class BlazorWasmTestAppFixture<TProgram> : WebHostServerFixture
 {
     public readonly bool TestTrimmedApps =
         typeof(ToggleExecutionModeServerFixture<>)
-            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            .Assembly
+            .GetCustomAttributes<AssemblyMetadataAttribute>()
             .First(m => m.Key == "Microsoft.AspNetCore.E2ETesting.TestTrimmedApps")
             .Value == "true";
 

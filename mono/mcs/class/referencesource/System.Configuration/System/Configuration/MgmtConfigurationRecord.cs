@@ -179,11 +179,9 @@ namespace System.Configuration
                 TypeUtil.InvokeCtorWithReflectionPermission(ctor);
 
             // Attach the ConfigurationSection to this record
-            configSection.SectionInformation.AttachToConfigurationRecord(
-                this,
-                factoryRecord,
-                sectionRecord
-            );
+            configSection
+                .SectionInformation
+                .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
             configSection.CallInit();
 
             // Initialize the ConfigurationSection with XML or just its parent.
@@ -712,8 +710,9 @@ namespace System.Configuration
                 try
                 {
                     bool wasPresent = configSection.ElementPresent;
-                    PropertySourceInfo saveInfo =
-                        configSection.ElementInformation.PropertyInfoInternal();
+                    PropertySourceInfo saveInfo = configSection
+                        .ElementInformation
+                        .PropertyInfoInternal();
 
                     configSection.Reset(parentConfigSection);
                     configSection.DeserializeSection(reader);
@@ -1100,11 +1099,9 @@ namespace System.Configuration
             }
 
             // Attach the section to the configuration record.
-            configSection.SectionInformation.AttachToConfigurationRecord(
-                this,
-                factoryRecord,
-                sectionRecord
-            );
+            configSection
+                .SectionInformation
+                .AttachToConfigurationRecord(this, factoryRecord, sectionRecord);
 
             //
             // If there is rawXml, set it now. Note this will override any other changes to the section

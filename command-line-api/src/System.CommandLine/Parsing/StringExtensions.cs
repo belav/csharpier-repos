@@ -14,11 +14,10 @@ namespace System.CommandLine.Parsing
             source.IndexOfCaseInsensitive(value) >= 0;
 
         internal static int IndexOfCaseInsensitive(this string source, string value) =>
-            CultureInfo.InvariantCulture.CompareInfo.IndexOf(
-                source,
-                value,
-                CompareOptions.OrdinalIgnoreCase
-            );
+            CultureInfo
+                .InvariantCulture
+                .CompareInfo
+                .IndexOf(source, value, CompareOptions.OrdinalIgnoreCase);
 
         internal static (string? Prefix, string Alias) SplitPrefix(this string rawAlias)
         {

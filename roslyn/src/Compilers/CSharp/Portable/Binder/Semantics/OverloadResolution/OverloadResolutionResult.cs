@@ -1281,13 +1281,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             TypeSymbol formalParameterType = method.GetParameterType(result.Result.BadParameter);
 
-            var boxedArgs = ConstraintsHelper.CheckConstraintsArgsBoxed.Allocate(
-                compilation,
-                conversions,
-                includeNullability: false,
-                location,
-                diagnostics
-            );
+            var boxedArgs = ConstraintsHelper
+                .CheckConstraintsArgsBoxed
+                .Allocate(
+                    compilation,
+                    conversions,
+                    includeNullability: false,
+                    location,
+                    diagnostics
+                );
             formalParameterType.CheckAllConstraints(boxedArgs);
             boxedArgs.Free();
 
@@ -1527,9 +1529,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && !(
                     refArg == RefKind.Ref
                     && refParameter == RefKind.In
-                    && binder.Compilation.IsFeatureEnabled(
-                        MessageID.IDS_FeatureRefReadonlyParameters
-                    )
+                    && binder
+                        .Compilation
+                        .IsFeatureEnabled(MessageID.IDS_FeatureRefReadonlyParameters)
                 )
                 && !(
                     refParameter == RefKind.RefReadOnlyParameter
@@ -1553,9 +1555,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 else if (
                     refArg == RefKind.Ref
                     && refParameter == RefKind.In
-                    && !binder.Compilation.IsFeatureEnabled(
-                        MessageID.IDS_FeatureRefReadonlyParameters
-                    )
+                    && !binder
+                        .Compilation
+                        .IsFeatureEnabled(MessageID.IDS_FeatureRefReadonlyParameters)
                 )
                 {
                     //  Argument {0} may not be passed with the 'ref' keyword in language version {1}. To pass 'ref' arguments to 'in' parameters, upgrade to language version {2} or greater.
@@ -1930,15 +1932,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
             else if (
-                System.Linq.Enumerable.Any(
-                    ResultsBuilder,
-                    x =>
-                        (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
-                        || (
-                            x.Result.Kind
-                            == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
-                        )
-                )
+                System
+                    .Linq
+                    .Enumerable
+                    .Any(
+                        ResultsBuilder,
+                        x =>
+                            (x.Result.Kind == MemberResolutionKind.TypeInferenceFailed)
+                            || (
+                                x.Result.Kind
+                                == MemberResolutionKind.TypeInferenceExtensionInstanceArgument
+                            )
+                    )
             )
             {
                 sb.AppendLine(

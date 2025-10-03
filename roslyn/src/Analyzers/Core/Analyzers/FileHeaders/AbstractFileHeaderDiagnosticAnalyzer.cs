@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
         protected AbstractFileHeaderDiagnosticAnalyzer()
             : base(
                 ImmutableDictionary<DiagnosticDescriptor, IOption2>
-                    .Empty.Add(s_invalidHeaderDescriptor, CodeStyleOptions2.FileHeaderTemplate)
+                    .Empty
+                    .Add(s_invalidHeaderDescriptor, CodeStyleOptions2.FileHeaderTemplate)
                     .Add(s_missingHeaderDescriptor, CodeStyleOptions2.FileHeaderTemplate)
             ) { }
 

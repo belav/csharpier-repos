@@ -33,12 +33,14 @@ namespace System.ServiceModel
                 }
                 if (value == "")
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException(
-                            "value",
-                            SR.GetString(SR.SFxNameCannotBeEmpty)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(SR.SFxNameCannotBeEmpty)
+                            )
+                        );
                 }
 
                 this.name = value;
@@ -67,9 +69,9 @@ namespace System.ServiceModel
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentOutOfRangeException("value"));
                 this.protectionLevel = value;
                 this.hasProtectionLevel = true;
             }
@@ -130,18 +132,20 @@ namespace System.ServiceModel
             {
                 if (!this.IsOneWay || !this.IsInitiating || methodInfo.GetParameters().Length > 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(
-                                SR.ContractIsNotSelfConsistentWhenIsSessionOpenNotificationEnabled,
-                                operationName,
-                                "Action",
-                                OperationDescription.SessionOpenedAction,
-                                "IsOneWay",
-                                "IsInitiating"
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ContractIsNotSelfConsistentWhenIsSessionOpenNotificationEnabled,
+                                    operationName,
+                                    "Action",
+                                    OperationDescription.SessionOpenedAction,
+                                    "IsOneWay",
+                                    "IsInitiating"
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }

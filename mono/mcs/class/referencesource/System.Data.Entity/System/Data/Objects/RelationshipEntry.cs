@@ -570,11 +570,9 @@ namespace System.Data.Objects
                             _relationshipWrapper.AssociationEndMembers;
                         string toRole = endMembers[1].Name;
                         string relationshipName = ((AssociationSet)_entitySet).ElementType.FullName;
-                        wrappedEntity1.RelationshipManager.RemoveEntity(
-                            toRole,
-                            relationshipName,
-                            wrappedEntity2
-                        );
+                        wrappedEntity1
+                            .RelationshipManager
+                            .RemoveEntity(toRole, relationshipName, wrappedEntity2);
                     }
                     else
                     {

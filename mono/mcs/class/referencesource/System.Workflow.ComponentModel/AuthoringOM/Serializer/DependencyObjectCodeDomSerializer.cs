@@ -137,8 +137,9 @@ namespace System.Workflow.ComponentModel.Serialization
                                 )
                             )
                             {
-                                object[] attributes =
-                                    dependencyProperty.DefaultMetadata.GetAttributes(
+                                object[] attributes = dependencyProperty
+                                    .DefaultMetadata
+                                    .GetAttributes(
                                         typeof(DesignerSerializationVisibilityAttribute)
                                     );
                                 if (attributes.Length > 0)
@@ -157,12 +158,14 @@ namespace System.Workflow.ComponentModel.Serialization
                                 string dependencyPropertyName =
                                     dependencyProperty.Name
                                     + ((dependencyProperty.IsEvent) ? "Event" : "Property");
-                                FieldInfo fieldInfo = dependencyProperty.OwnerType.GetField(
-                                    dependencyPropertyName,
-                                    BindingFlags.NonPublic
-                                        | BindingFlags.Public
-                                        | BindingFlags.Static
-                                );
+                                FieldInfo fieldInfo = dependencyProperty
+                                    .OwnerType
+                                    .GetField(
+                                        dependencyPropertyName,
+                                        BindingFlags.NonPublic
+                                            | BindingFlags.Public
+                                            | BindingFlags.Static
+                                    );
                                 if (fieldInfo != null && !fieldInfo.IsPublic)
                                     param1 = new CodeMethodInvokeExpression(
                                         new CodeTypeReferenceExpression(typeof(DependencyProperty)),
@@ -288,8 +291,9 @@ namespace System.Workflow.ComponentModel.Serialization
                                     if (propertiesSerialized.Contains(dependencyProperty))
                                         continue;
 
-                                    object[] attributes =
-                                        dependencyProperty.DefaultMetadata.GetAttributes(
+                                    object[] attributes = dependencyProperty
+                                        .DefaultMetadata
+                                        .GetAttributes(
                                             typeof(DesignerSerializationVisibilityAttribute)
                                         );
                                     if (attributes.Length > 0)

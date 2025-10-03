@@ -815,7 +815,8 @@ class Program
             var nameSyntaxes = GetNameAttributeValues(compilation).ToArray();
 
             var method = compilation
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("Program")
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("Program")
                 .GetMember<MethodSymbol>("M")
                 .GetPublicSymbol();
 
@@ -872,7 +873,8 @@ class C
             var model = compilation.GetSemanticModel(tree);
 
             var method = compilation
-                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GlobalNamespace
+                .GetMember<NamedTypeSymbol>("C")
                 .GetMember<MethodSymbol>("M")
                 .GetPublicSymbol();
             var expectedParameter = method.Parameters.Single();
@@ -994,19 +996,21 @@ class C<T>
             CSharpCompilation compilation
         )
         {
-            return compilation.SyntaxTrees.SelectMany(tree =>
-            {
-                var docComments = tree.GetCompilationUnitRoot()
-                    .DescendantTrivia()
-                    .Select(trivia => trivia.GetStructure())
-                    .OfType<DocumentationCommentTriviaSyntax>();
-                return docComments.SelectMany(docComment =>
-                    docComment
-                        .DescendantNodes()
-                        .OfType<XmlNameAttributeSyntax>()
-                        .Select(attr => attr.Identifier)
-                );
-            });
+            return compilation
+                .SyntaxTrees
+                .SelectMany(tree =>
+                {
+                    var docComments = tree.GetCompilationUnitRoot()
+                        .DescendantTrivia()
+                        .Select(trivia => trivia.GetStructure())
+                        .OfType<DocumentationCommentTriviaSyntax>();
+                    return docComments.SelectMany(docComment =>
+                        docComment
+                            .DescendantNodes()
+                            .OfType<XmlNameAttributeSyntax>()
+                            .Select(attr => attr.Identifier)
+                    );
+                });
         }
     }
 }

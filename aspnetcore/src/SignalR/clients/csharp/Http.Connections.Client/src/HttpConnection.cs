@@ -463,10 +463,9 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                         );
                     }
                     else if (
-                        !transport.TransferFormats!.Contains(
-                            transferFormatString,
-                            StringComparer.Ordinal
-                        )
+                        !transport
+                            .TransferFormats!
+                            .Contains(transferFormatString, StringComparer.Ordinal)
                     )
                     {
                         Log.TransportDoesNotSupportTransferFormat(
@@ -604,7 +603,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
                     response.EnsureSuccessStatusCode();
 #pragma warning disable CA2016 // Forward the 'CancellationToken' parameter to methods
                     var responseBuffer = await response
-                        .Content.ReadAsByteArrayAsync()
+                        .Content
+                        .ReadAsByteArrayAsync()
                         .ConfigureAwait(false);
 #pragma warning restore CA2016 // Forward the 'CancellationToken' parameter to methods
                     var negotiateResponse = NegotiateProtocol.ParseResponse(responseBuffer);

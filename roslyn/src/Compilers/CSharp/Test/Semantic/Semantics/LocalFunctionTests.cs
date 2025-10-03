@@ -1210,7 +1210,8 @@ class C
             Assert.Equal(4, attributeSyntaxes.Count);
 
             var attributeConstructor = comp.GetTypeByMetadataName("A")
-                .InstanceConstructors.Single();
+                .InstanceConstructors
+                .Single();
             foreach (var attributeSyntax in attributeSyntaxes)
             {
                 var symbol = model.GetSymbolInfo(attributeSyntax).Symbol.GetSymbol<MethodSymbol>();
@@ -2056,7 +2057,8 @@ class C
                 .Single();
             var localSymbol = model
                 .GetDeclaredSymbol(x)
-                .ContainingSymbol.GetSymbol<LocalFunctionSymbol>();
+                .ContainingSymbol
+                .GetSymbol<LocalFunctionSymbol>();
             var typeParam = localSymbol.TypeParameters.Single();
             var attrs = typeParam.GetAttributes();
 
@@ -2064,7 +2066,8 @@ class C
             Assert.True(attrs[1].AttributeClass.IsErrorType());
             Assert.False(attrs[2].AttributeClass.IsErrorType());
             Assert.Equal(
-                comp.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                comp.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMember<NamedTypeSymbol>("CLSCompliantAttribute"),
                 attrs[2].AttributeClass
             );
@@ -2140,8 +2143,8 @@ class C
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => id.Identifier.ValueText == "CLSCompliant")
                 .Single();
-            var clsCompliantSymbol = comp
-                .GlobalNamespace.GetMember<INamespaceSymbol>("System")
+            var clsCompliantSymbol = comp.GlobalNamespace
+                .GetMember<INamespaceSymbol>("System")
                 .GetTypeMember("CLSCompliantAttribute");
 
             Assert.Null(model.GetDeclaredSymbol(clsCompliant));
@@ -2239,8 +2242,8 @@ class C
                 .OfType<IdentifierNameSyntax>()
                 .Where(id => id.Identifier.ValueText == "CLSCompliant")
                 .Single();
-            var clsCompliantSymbol = comp
-                .GlobalNamespace.GetMember<INamespaceSymbol>("System")
+            var clsCompliantSymbol = comp.GlobalNamespace
+                .GetMember<INamespaceSymbol>("System")
                 .GetTypeMember("CLSCompliantAttribute");
 
             Assert.Null(model.GetDeclaredSymbol(clsCompliant));
@@ -2341,7 +2344,8 @@ class C
             Assert.True(attrs[1].AttributeClass.IsErrorType());
             Assert.False(attrs[2].AttributeClass.IsErrorType());
             Assert.Equal(
-                comp.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                comp.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMember<NamedTypeSymbol>("CLSCompliantAttribute"),
                 attrs[2].AttributeClass
             );
@@ -2413,7 +2417,8 @@ class C
             param = localSymbol.Parameters[1];
             attrs = param.GetAttributes();
             Assert.Equal(
-                comp.GlobalNamespace.GetMember<NamespaceSymbol>("System")
+                comp.GlobalNamespace
+                    .GetMember<NamespaceSymbol>("System")
                     .GetMember<NamedTypeSymbol>("CLSCompliantAttribute"),
                 attrs[0].AttributeClass
             );
@@ -8748,7 +8753,8 @@ public class MyAttribute : System.Attribute
                         newNameOf,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.ToTestDisplayString()
+                    .Type
+                    .ToTestDisplayString()
             );
 
             var bPosition = getIdentifierPosition("b");
@@ -8761,7 +8767,8 @@ public class MyAttribute : System.Attribute
                         newNameOfArgument,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.ToTestDisplayString()
+                    .Type
+                    .ToTestDisplayString()
             );
 
             var cPosition = getIdentifierPosition("c");
@@ -8773,7 +8780,8 @@ public class MyAttribute : System.Attribute
                         newNameOf,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.ToTestDisplayString()
+                    .Type
+                    .ToTestDisplayString()
             );
 
             var dPosition = getIdentifierPosition("d");
@@ -8785,7 +8793,8 @@ public class MyAttribute : System.Attribute
                         newNameOfArgument,
                         SpeculativeBindingOption.BindAsExpression
                     )
-                    .Type.ToTestDisplayString()
+                    .Type
+                    .ToTestDisplayString()
             );
 
             return;

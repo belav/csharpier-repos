@@ -74,6 +74,7 @@ public class LoggingSqlServerTest
 
     protected override string ProviderVersion =>
         typeof(SqlServerOptionsExtension)
-            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            .Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion;
 }

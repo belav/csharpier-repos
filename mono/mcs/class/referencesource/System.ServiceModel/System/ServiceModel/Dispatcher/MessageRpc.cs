@@ -751,9 +751,11 @@ namespace System.ServiceModel.Dispatcher
                 this.Host.IncrementBusyCount();
                 if (AspNetEnvironment.Current.TraceIncrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceIncrementBusyCount(
-                        SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
-                    );
+                    AspNetEnvironment
+                        .Current
+                        .TraceIncrementBusyCount(
+                            SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
+                        );
                 }
             }
         }
@@ -765,9 +767,11 @@ namespace System.ServiceModel.Dispatcher
                 this.Host.DecrementBusyCount();
                 if (AspNetEnvironment.Current.TraceDecrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceDecrementBusyCount(
-                        SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
-                    );
+                    AspNetEnvironment
+                        .Current
+                        .TraceDecrementBusyCount(
+                            SR.GetString(SR.ServiceBusyCountTrace, this.Operation.Action)
+                        );
                 }
             }
         }

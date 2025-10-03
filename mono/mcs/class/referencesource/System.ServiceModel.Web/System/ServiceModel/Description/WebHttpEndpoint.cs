@@ -58,15 +58,17 @@ namespace System.ServiceModel.Description
                 WebHttpBehavior webHttpBehavior = this.Behaviors.Find<WebHttpBehavior>();
                 if (webHttpBehavior == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR2.GetString(
-                                SR2.WebBehaviorNotFoundWithEndpoint,
-                                typeof(WebHttpEndpoint).Name,
-                                typeof(WebHttpBehavior).Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.WebBehaviorNotFoundWithEndpoint,
+                                    typeof(WebHttpEndpoint).Name,
+                                    typeof(WebHttpBehavior).Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
                 return webHttpBehavior;
             }

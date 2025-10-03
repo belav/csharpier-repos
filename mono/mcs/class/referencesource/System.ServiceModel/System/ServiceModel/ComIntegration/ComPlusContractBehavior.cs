@@ -38,9 +38,9 @@ namespace System.ServiceModel.ComIntegration
 
             foreach (DispatchOperation operation in dispatch.Operations)
             {
-                operation.CallContextInitializers.Add(
-                    new ComPlusThreadInitializer(description, operation, info)
-                );
+                operation
+                    .CallContextInitializers
+                    .Add(new ComPlusThreadInitializer(description, operation, info));
             }
         }
 

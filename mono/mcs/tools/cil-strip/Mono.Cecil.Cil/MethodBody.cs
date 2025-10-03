@@ -193,9 +193,9 @@ namespace Mono.Cecil.Cil
                             ni.Operand = nb.Method.This;
                         else
                         {
-                            int param = body.Method.Parameters.IndexOf(
-                                (ParameterDefinition)instr.Operand
-                            );
+                            int param = body.Method
+                                .Parameters
+                                .IndexOf((ParameterDefinition)instr.Operand);
                             ni.Operand = parent.Parameters[param];
                         }
                         break;

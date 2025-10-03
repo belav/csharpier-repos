@@ -2739,8 +2739,8 @@ namespace System.Windows.Forms
                 range = new SelectionRange(range.Start, bounds.End);
             }
             // now invalidate the date rectangles as series of rows
-            DateTime last_month = this
-                .current_month.AddMonths((CalendarDimensions.Width * CalendarDimensions.Height))
+            DateTime last_month = this.current_month
+                .AddMonths((CalendarDimensions.Width * CalendarDimensions.Height))
                 .AddDays(-1);
             DateTime current = range.Start;
             while (current <= range.End)

@@ -462,11 +462,13 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.host.State == CommunicationState.Opened)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(SR.SFxImmutableThrottle1, memberName)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxImmutableThrottle1, memberName)
+                        )
+                    );
             }
             else
             {

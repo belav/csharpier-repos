@@ -165,11 +165,9 @@ namespace System.Globalization
             int count;
 #if TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
             if (GlobalizationMode.Hybrid)
-                count = Interop.Globalization.GetCalendarsNative(
-                    localeName,
-                    calendars,
-                    calendars.Length
-                );
+                count = Interop
+                    .Globalization
+                    .GetCalendarsNative(localeName, calendars, calendars.Length);
             else
                 count = Interop.Globalization.GetCalendars(localeName, calendars, calendars.Length);
 #else
@@ -208,13 +206,9 @@ namespace System.Globalization
                 {
                     fixed (char* bufferPtr = buffer)
                     {
-                        return Interop.Globalization.GetCalendarInfo(
-                            locale,
-                            id,
-                            type,
-                            bufferPtr,
-                            buffer.Length
-                        );
+                        return Interop
+                            .Globalization
+                            .GetCalendarInfo(locale, id, type, bufferPtr, buffer.Length);
                     }
                 },
                 localeName,
@@ -555,13 +549,15 @@ namespace System.Globalization
             ref IcuEnumCalendarsData callbackContext
         )
         {
-            return Interop.Globalization.EnumCalendarInfo(
-                &EnumCalendarInfoCallback,
-                localeName,
-                calendarId,
-                dataType,
-                (IntPtr)Unsafe.AsPointer(ref callbackContext)
-            );
+            return Interop
+                .Globalization
+                .EnumCalendarInfo(
+                    &EnumCalendarInfoCallback,
+                    localeName,
+                    calendarId,
+                    dataType,
+                    (IntPtr)Unsafe.AsPointer(ref callbackContext)
+                );
         }
 
         [UnmanagedCallersOnly]

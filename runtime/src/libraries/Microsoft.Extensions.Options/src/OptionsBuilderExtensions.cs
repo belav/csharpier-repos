@@ -35,7 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             optionsBuilder.Services.AddTransient<IStartupValidator, StartupValidator>();
             optionsBuilder
-                .Services.AddOptions<StartupValidatorOptions>()
+                .Services
+                .AddOptions<StartupValidatorOptions>()
                 .Configure<IOptionsMonitor<TOptions>>(
                     (vo, options) =>
                     {

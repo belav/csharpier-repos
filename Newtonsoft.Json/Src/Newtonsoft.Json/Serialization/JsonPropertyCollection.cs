@@ -100,9 +100,9 @@ namespace Newtonsoft.Json.Serialization
                             property.DeclaringType.IsSubclassOf(existingProperty.DeclaringType)
                             || (
                                 existingProperty.DeclaringType.IsInterface()
-                                && property.DeclaringType.ImplementInterface(
-                                    existingProperty.DeclaringType
-                                )
+                                && property
+                                    .DeclaringType
+                                    .ImplementInterface(existingProperty.DeclaringType)
                             )
                         )
                         {
@@ -114,9 +114,9 @@ namespace Newtonsoft.Json.Serialization
                             existingProperty.DeclaringType.IsSubclassOf(property.DeclaringType)
                             || (
                                 property.DeclaringType.IsInterface()
-                                && existingProperty.DeclaringType.ImplementInterface(
-                                    property.DeclaringType
-                                )
+                                && existingProperty
+                                    .DeclaringType
+                                    .ImplementInterface(property.DeclaringType)
                             )
                         )
                         {

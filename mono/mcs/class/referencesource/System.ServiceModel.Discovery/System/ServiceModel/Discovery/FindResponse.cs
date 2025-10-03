@@ -43,10 +43,12 @@ namespace System.ServiceModel.Discovery
                 )
             )
             {
-                throw FxTrace.Exception.Argument(
-                    "endpointDiscoveryMetadata",
-                    SR2.DiscoveryFindResponseMessageSequenceNotFound
-                );
+                throw FxTrace
+                    .Exception
+                    .Argument(
+                        "endpointDiscoveryMetadata",
+                        SR2.DiscoveryFindResponseMessageSequenceNotFound
+                    );
             }
 
             return messageSequence;

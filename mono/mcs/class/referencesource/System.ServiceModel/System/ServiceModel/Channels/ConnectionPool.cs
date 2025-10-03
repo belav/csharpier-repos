@@ -922,9 +922,11 @@ namespace System.ServiceModel.Channels
                     }
                     catch (TimeoutException e)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateNewConnectionTimeoutException(connectTimeout, e)
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                CreateNewConnectionTimeoutException(connectTimeout, e)
+                            );
                     }
 
                     this.connectionInitiator = null;
@@ -984,11 +986,16 @@ namespace System.ServiceModel.Channels
                         );
                     }
 
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new CommunicationObjectAbortedException(
-                            SR.GetString(SR.OperationAbortedDuringConnectionEstablishment, this.via)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new CommunicationObjectAbortedException(
+                                SR.GetString(
+                                    SR.OperationAbortedDuringConnectionEstablishment,
+                                    this.via
+                                )
+                            )
+                        );
                 }
                 else
                 {
@@ -1232,18 +1239,17 @@ namespace System.ServiceModel.Channels
                         onConnect = Fx.ThunkCallback(new AsyncCallback(OnConnect));
                     }
 
-                    result = parent.connectionInitiator.BeginConnect(
-                        parent.via,
-                        this.connectTimeout,
-                        onConnect,
-                        this
-                    );
+                    result = parent
+                        .connectionInitiator
+                        .BeginConnect(parent.via, this.connectTimeout, onConnect, this);
                 }
                 catch (TimeoutException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        parent.CreateNewConnectionTimeoutException(connectTimeout, e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            parent.CreateNewConnectionTimeoutException(connectTimeout, e)
+                        );
                 }
 
                 if (!result.CompletedSynchronously)
@@ -1262,9 +1268,11 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        parent.CreateNewConnectionTimeoutException(connectTimeout, e)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            parent.CreateNewConnectionTimeoutException(connectTimeout, e)
+                        );
                 }
 
                 if (ProcessConnection())
@@ -1345,12 +1353,14 @@ namespace System.ServiceModel.Channels
                         }
 
                         // This cannot throw TimeoutException since isConnectionStillGood is false (doesn't attempt a Close).
-                        parent.connectionPool.ReturnConnection(
-                            parent.connectionKey,
-                            this.rawConnection,
-                            false,
-                            timeoutHelper.RemainingTime()
-                        );
+                        parent
+                            .connectionPool
+                            .ReturnConnection(
+                                parent.connectionKey,
+                                this.rawConnection,
+                                false,
+                                timeoutHelper.RemainingTime()
+                            );
                         this.currentConnection = null;
                         this.rawConnection = null;
                     }

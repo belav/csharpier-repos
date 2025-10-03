@@ -1055,15 +1055,15 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (XPathNavigatorException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        e.Process(nextOpcode)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(e.Process(nextOpcode));
                 }
                 catch (NavigatorInvalidBodyAccessException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        e.Process(nextOpcode)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(e.Process(nextOpcode));
                 }
                 context.Processor.CounterMarker = marker;
             }
@@ -1142,15 +1142,15 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (XPathNavigatorException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    e.Process(result.Branch.Branch.Next)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(e.Process(result.Branch.Branch.Next));
             }
             catch (NavigatorInvalidBodyAccessException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    e.Process(result.Branch.Branch.Next)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(e.Process(result.Branch.Branch.Next));
             }
 
             context.Processor.CounterMarker = marker;
@@ -1542,9 +1542,11 @@ namespace System.ServiceModel.Dispatcher
 
         internal override void Replace(Opcode replace, Opcode with)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
-                new NotImplementedException(SR.GetString(SR.FilterUnexpectedError))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperCritical(
+                    new NotImplementedException(SR.GetString(SR.FilterUnexpectedError))
+                );
         }
 
         internal override void Trim()

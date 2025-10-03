@@ -106,22 +106,21 @@ namespace System.Workflow.ComponentModel
                 if (
                     context.Activity.HasPrimaryClosed
                     && !(bool)
-                        context.Activity.GetValue(
-                            FaultAndCancellationHandlingFilter.FaultProcessedProperty
-                        )
+                        context
+                            .Activity
+                            .GetValue(FaultAndCancellationHandlingFilter.FaultProcessedProperty)
                 )
                 {
-                    context.Activity.SetValue(
-                        FaultAndCancellationHandlingFilter.FaultProcessedProperty,
-                        true
-                    );
+                    context
+                        .Activity
+                        .SetValue(FaultAndCancellationHandlingFilter.FaultProcessedProperty, true);
 
                     if (
                         context.Activity.WasExecuting
                         && context.Activity.ExecutionResult == ActivityExecutionResult.Faulted
-                        && context.Activity.GetValue(
-                            ActivityExecutionContext.CurrentExceptionProperty
-                        ) != null
+                        && context
+                            .Activity
+                            .GetValue(ActivityExecutionContext.CurrentExceptionProperty) != null
                     )
                     {
                         // execute exceptionHandlers, iff activity has transitioned from Executing to Faulting.
@@ -234,9 +233,9 @@ namespace System.Workflow.ComponentModel
             }
             catch (Exception)
             {
-                context.Activity.RemoveProperty(
-                    FaultAndCancellationHandlingFilter.FaultProcessedProperty
-                );
+                context
+                    .Activity
+                    .RemoveProperty(FaultAndCancellationHandlingFilter.FaultProcessedProperty);
                 throw;
             }
         }

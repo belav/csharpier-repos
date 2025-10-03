@@ -40,29 +40,39 @@ namespace System.Runtime.Serialization
                 if (source.IsValueType)
                 {
                     if (!CanConvert(Type.GetTypeCode(target)))
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            XmlObjectSerializer.CreateSerializationException(
-                                SR.GetString(
-                                    SR.NoConversionPossibleTo,
-                                    DataContract.GetClrTypeFullName(target)
+                        throw System
+                            .Runtime
+                            .Serialization
+                            .DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.GetString(
+                                        SR.NoConversionPossibleTo,
+                                        DataContract.GetClrTypeFullName(target)
+                                    )
                                 )
-                            )
-                        );
+                            );
                     else
                         return target;
                 }
                 else if (source.IsAssignableFrom(target))
                     return arg;
                 else
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        XmlObjectSerializer.CreateSerializationException(
-                            SR.GetString(
-                                SR.IsNotAssignableFrom,
-                                DataContract.GetClrTypeFullName(target),
-                                DataContract.GetClrTypeFullName(source)
+                    throw System
+                        .Runtime
+                        .Serialization
+                        .DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(
+                                SR.GetString(
+                                    SR.IsNotAssignableFrom,
+                                    DataContract.GetClrTypeFullName(target),
+                                    DataContract.GetClrTypeFullName(source)
+                                )
                             )
-                        )
-                    );
+                        );
             }
             else if (target.IsAssignableFrom(source))
                 return arg;
@@ -71,15 +81,20 @@ namespace System.Runtime.Serialization
             else if (target.IsInterface || source.IsInterface)
                 return arg;
             else
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    XmlObjectSerializer.CreateSerializationException(
-                        SR.GetString(
-                            SR.IsNotAssignableFrom,
-                            DataContract.GetClrTypeFullName(target),
-                            DataContract.GetClrTypeFullName(source)
+                throw System
+                    .Runtime
+                    .Serialization
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.IsNotAssignableFrom,
+                                DataContract.GetClrTypeFullName(target),
+                                DataContract.GetClrTypeFullName(source)
+                            )
                         )
-                    )
-                );
+                    );
         }
 
         public static object GetMember(MemberInfo memberInfo, object instance)

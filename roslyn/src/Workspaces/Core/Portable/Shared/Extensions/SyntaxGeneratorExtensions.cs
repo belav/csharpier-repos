@@ -287,13 +287,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             var identifier = factory.IdentifierName(identifierName);
             var nullExpr = factory.NullLiteralExpression();
-            var condition = factory.SyntaxGeneratorInternal.SupportsPatterns(
-                semanticModel.SyntaxTree.Options
-            )
-                ? factory.SyntaxGeneratorInternal.IsPatternExpression(
-                    identifier,
-                    factory.SyntaxGeneratorInternal.ConstantPattern(nullExpr)
-                )
+            var condition = factory
+                .SyntaxGeneratorInternal
+                .SupportsPatterns(semanticModel.SyntaxTree.Options)
+                ? factory
+                    .SyntaxGeneratorInternal
+                    .IsPatternExpression(
+                        identifier,
+                        factory.SyntaxGeneratorInternal.ConstantPattern(nullExpr)
+                    )
                 : factory.ReferenceEqualsExpression(identifier, nullExpr);
             return condition;
         }
@@ -440,12 +442,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             CancellationToken cancellationToken
         )
         {
-            var getAccessibility = overriddenProperty.GetMethod.ComputeResultantAccessibility(
-                containingType
-            );
-            var setAccessibility = overriddenProperty.SetMethod.ComputeResultantAccessibility(
-                containingType
-            );
+            var getAccessibility = overriddenProperty
+                .GetMethod
+                .ComputeResultantAccessibility(containingType);
+            var setAccessibility = overriddenProperty
+                .SetMethod
+                .ComputeResultantAccessibility(containingType);
 
             SyntaxNode? getBody;
             SyntaxNode? setBody;
@@ -453,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (overriddenProperty.IsAbstract)
             {
                 var compilation = await document
-                    .Project.GetCompilationAsync(cancellationToken)
+                    .Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var statement = codeFactory.CreateThrowNotImplementedStatement(compilation);
 
@@ -728,7 +731,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             if (overriddenMethod.IsAbstract)
             {
                 var compilation = await newDocument
-                    .Project.GetCompilationAsync(cancellationToken)
+                    .Project
+                    .GetCompilationAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var statement = codeFactory.CreateThrowNotImplementedStatement(compilation);
 

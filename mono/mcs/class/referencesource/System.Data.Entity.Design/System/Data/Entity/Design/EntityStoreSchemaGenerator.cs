@@ -599,8 +599,12 @@ namespace System.Data.Entity.Design
 
             EntitySet entitySet = new EntitySet(type.Name, schema, table, null, type);
 
-            MetadataProperty property =
-                System.Data.EntityModel.SchemaObjectModel.SchemaElement.CreateMetadataPropertyFromOtherNamespaceXmlArtifact(
+            MetadataProperty property = System
+                .Data
+                .EntityModel
+                .SchemaObjectModel
+                .SchemaElement
+                .CreateMetadataPropertyFromOtherNamespaceXmlArtifact(
                     DesignXmlConstants.EntityStoreSchemaGeneratorNamespace,
                     DesignXmlConstants.EntityStoreSchemaGeneratorTypeAttributeName,
                     GetSourceNameFromObjectType(key.ObjectType)
@@ -759,10 +763,9 @@ namespace System.Data.Entity.Design
                     List<EdmSchemaError> tvfReturnTypeErrors;
                     if (
                         tvfReturnType != null
-                        && session.ItemToErrorsMap.TryGetValue(
-                            tvfReturnType,
-                            out tvfReturnTypeErrors
-                        )
+                        && session
+                            .ItemToErrorsMap
+                            .TryGetValue(tvfReturnType, out tvfReturnTypeErrors)
                     )
                     {
                         errors.AddRange(tvfReturnTypeErrors);
@@ -1075,9 +1078,13 @@ namespace System.Data.Entity.Design
                     //If so, we keep one Association and throw the rest away.
 
                     foreach (
-                        var toPropertyOfAddedAssociation in session.AssociationTypes.SelectMany(t =>
-                            t.ReferentialConstraints.SelectMany(refconst => refconst.ToProperties)
-                        )
+                        var toPropertyOfAddedAssociation in session
+                            .AssociationTypes
+                            .SelectMany(t =>
+                                t.ReferentialConstraints.SelectMany(refconst =>
+                                    refconst.ToProperties
+                                )
+                            )
                     )
                     {
                         foreach (
@@ -1087,9 +1094,10 @@ namespace System.Data.Entity.Design
                         )
                         {
                             if (
-                                toProperty.DeclaringType.Equals(
-                                    toPropertyOfAddedAssociation.DeclaringType
-                                ) && toProperty.Equals(toPropertyOfAddedAssociation)
+                                toProperty
+                                    .DeclaringType
+                                    .Equals(toPropertyOfAddedAssociation.DeclaringType)
+                                && toProperty.Equals(toPropertyOfAddedAssociation)
                             )
                             {
                                 errors.Add(
@@ -1265,11 +1273,9 @@ namespace System.Data.Entity.Design
                 EdmProperty property;
 
                 if (
-                    !pkEntityType.Properties.TryGetValue(
-                        columns[index].PKColumn,
-                        false,
-                        out property
-                    )
+                    !pkEntityType
+                        .Properties
+                        .TryGetValue(columns[index].PKColumn, false, out property)
                 )
                 {
                     errors.Add(
@@ -1288,11 +1294,9 @@ namespace System.Data.Entity.Design
                 fromProperties[index] = property;
 
                 if (
-                    !fkEntityType.Properties.TryGetValue(
-                        columns[index].FKColumn,
-                        false,
-                        out property
-                    )
+                    !fkEntityType
+                        .Properties
+                        .TryGetValue(columns[index].FKColumn, false, out property)
                 )
                 {
                     errors.Add(
@@ -1993,19 +1997,29 @@ namespace System.Data.Entity.Design
                     if (key.Schema != null)
                     {
                         properties.Add(
-                            System.Data.EntityModel.SchemaObjectModel.SchemaElement.CreateMetadataPropertyFromOtherNamespaceXmlArtifact(
-                                DesignXmlConstants.EntityStoreSchemaGeneratorNamespace,
-                                DesignXmlConstants.EntityStoreSchemaGeneratorSchemaAttributeName,
-                                key.Schema
-                            )
+                            System
+                                .Data
+                                .EntityModel
+                                .SchemaObjectModel
+                                .SchemaElement
+                                .CreateMetadataPropertyFromOtherNamespaceXmlArtifact(
+                                    DesignXmlConstants.EntityStoreSchemaGeneratorNamespace,
+                                    DesignXmlConstants.EntityStoreSchemaGeneratorSchemaAttributeName,
+                                    key.Schema
+                                )
                         );
                     }
                     properties.Add(
-                        System.Data.EntityModel.SchemaObjectModel.SchemaElement.CreateMetadataPropertyFromOtherNamespaceXmlArtifact(
-                            DesignXmlConstants.EntityStoreSchemaGeneratorNamespace,
-                            DesignXmlConstants.EntityStoreSchemaGeneratorNameAttributeName,
-                            key.TableName
-                        )
+                        System
+                            .Data
+                            .EntityModel
+                            .SchemaObjectModel
+                            .SchemaElement
+                            .CreateMetadataPropertyFromOtherNamespaceXmlArtifact(
+                                DesignXmlConstants.EntityStoreSchemaGeneratorNamespace,
+                                DesignXmlConstants.EntityStoreSchemaGeneratorNameAttributeName,
+                                key.TableName
+                            )
                     );
                     entitySet.AddMetadataProperties(properties);
 

@@ -60,11 +60,12 @@ namespace System.Data.EntityModel.Emitters
             )
             {
                 Generator.AddError(
-                    System.Data.Entity.Design.Strings.GeneratedPropertyAccessibilityConflict(
-                        Item.Name,
-                        "Internal",
-                        "Protected"
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Design
+                        .Strings
+                        .GeneratedPropertyAccessibilityConflict(Item.Name, "Internal", "Protected"),
                     ModelBuilderErrorCode.GeneratedPropertyAccessibilityConflict,
                     EdmSchemaErrorSeverity.Error,
                     Item.DeclaringType.FullName,
@@ -77,11 +78,12 @@ namespace System.Data.EntityModel.Emitters
             )
             {
                 Generator.AddError(
-                    System.Data.Entity.Design.Strings.GeneratedPropertyAccessibilityConflict(
-                        Item.Name,
-                        "Protected",
-                        "Internal"
-                    ),
+                    System
+                        .Data
+                        .Entity
+                        .Design
+                        .Strings
+                        .GeneratedPropertyAccessibilityConflict(Item.Name, "Protected", "Internal"),
                     ModelBuilderErrorCode.GeneratedPropertyAccessibilityConflict,
                     EdmSchemaErrorSeverity.Error,
                     Item.DeclaringType.FullName,

@@ -153,7 +153,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
             var options = CompletionOptions.Default with
             {
                 HideAdvancedMembers = context
-                    .Options.GetOptions(document.Project.Services)
+                    .Options
+                    .GetOptions(document.Project.Services)
                     .HideAdvancedMembers,
                 SnippetsBehavior = SnippetsRule.NeverInclude,
                 ShowItemsFromUnimportedNamespaces = false,

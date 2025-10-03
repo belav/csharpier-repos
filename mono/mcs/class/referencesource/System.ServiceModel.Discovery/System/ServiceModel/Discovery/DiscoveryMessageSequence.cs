@@ -143,10 +143,9 @@ namespace System.ServiceModel.Discovery
             {
                 if (!Uri.Equals(this.SequenceId, other.SequenceId))
                 {
-                    throw FxTrace.Exception.Argument(
-                        "other",
-                        SR2.DiscoveryIncompatibleMessageSequence
-                    );
+                    throw FxTrace
+                        .Exception
+                        .Argument("other", SR2.DiscoveryIncompatibleMessageSequence);
                 }
 
                 result = this.MessageNumber.CompareTo(other.MessageNumber);
@@ -185,9 +184,11 @@ namespace System.ServiceModel.Discovery
                 }
                 catch (FormatException fe)
                 {
-                    throw FxTrace.Exception.AsError(
-                        new XmlException(SR2.DiscoveryXmlUriFormatError(sequenceIdString), fe)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new XmlException(SR2.DiscoveryXmlUriFormatError(sequenceIdString), fe)
+                        );
                 }
             }
 

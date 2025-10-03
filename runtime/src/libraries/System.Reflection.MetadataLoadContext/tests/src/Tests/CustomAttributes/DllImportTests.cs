@@ -19,7 +19,8 @@ namespace System.Reflection.Tests
         {
             TypeInfo runtimeType = typeof(DllImportHolders).GetTypeInfo(); // Intentionally not projected - using to get expected results.
             MethodInfo[] runtimeMethods = runtimeType
-                .DeclaredMethods.OrderBy(m => m.Name)
+                .DeclaredMethods
+                .OrderBy(m => m.Name)
                 .ToArray();
 
             TypeInfo ecmaType = runtimeType.Project().GetTypeInfo();
@@ -31,9 +32,8 @@ namespace System.Reflection.Tests
                 DllImportAttribute expected = runtimeMethods[i]
                     .GetCustomAttribute<DllImportAttribute>();
                 CustomAttributeData cad = ecmaMethods[i]
-                    .CustomAttributes.Single(c =>
-                        c.AttributeType.Name == nameof(DllImportAttribute)
-                    );
+                    .CustomAttributes
+                    .Single(c => c.AttributeType.Name == nameof(DllImportAttribute));
                 DllImportAttribute actual = cad.UnprojectAndInstantiate<DllImportAttribute>();
                 AssertEqual(expected, actual);
             }
@@ -63,9 +63,9 @@ namespace System.Reflection.Tests
             TypeInfo ecmaType = typeof(MarshalAsHolders).Project().GetTypeInfo();
             FieldInfo ecmaField = ecmaType.GetDeclaredField(fieldName);
             Assert.NotNull(ecmaField);
-            CustomAttributeData cad = ecmaField.CustomAttributes.Single(c =>
-                c.AttributeType.Name == nameof(MarshalAsAttribute)
-            );
+            CustomAttributeData cad = ecmaField
+                .CustomAttributes
+                .Single(c => c.AttributeType.Name == nameof(MarshalAsAttribute));
             MarshalAsAttribute actual = cad.UnprojectAndInstantiate<MarshalAsAttribute>();
             AssertEqual(expected, actual);
         }

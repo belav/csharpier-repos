@@ -118,12 +118,16 @@ public class SqlServerValueGenerationStrategyConvention
                             )
                             .Metadata;
 
-                        property.Builder.HasDefaultValueSql(
-                            RelationalDependencies.UpdateSqlGenerator.GenerateObtainNextSequenceValueOperation(
-                                sequence.Name,
-                                sequence.Schema
-                            )
-                        );
+                        property
+                            .Builder
+                            .HasDefaultValueSql(
+                                RelationalDependencies
+                                    .UpdateSqlGenerator
+                                    .GenerateObtainNextSequenceValueOperation(
+                                        sequence.Name,
+                                        sequence.Schema
+                                    )
+                            );
                     }
                 }
             }

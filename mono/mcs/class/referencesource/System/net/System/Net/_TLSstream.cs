@@ -226,13 +226,9 @@ namespace System.Net
 
             try
             {
-                return m_Worker.SecureStream.BeginRead(
-                    buffer,
-                    offset,
-                    size,
-                    asyncCallback,
-                    asyncState
-                );
+                return m_Worker
+                    .SecureStream
+                    .BeginRead(buffer, offset, size, asyncCallback, asyncState);
             }
             catch
             {
@@ -399,13 +395,9 @@ namespace System.Net
 
             try
             {
-                return m_Worker.SecureStream.BeginWrite(
-                    buffer,
-                    offset,
-                    size,
-                    asyncCallback,
-                    asyncState
-                );
+                return m_Worker
+                    .SecureStream
+                    .BeginWrite(buffer, offset, size, asyncCallback, asyncState);
             }
             catch
             {
@@ -878,29 +870,31 @@ namespace System.Net
             if (bufferResult.IsWrite)
             {
                 if (bufferResult.Buffers != null)
-                    result = m_Worker.SecureStream.BeginWrite(
-                        bufferResult.Buffers,
-                        _CompleteIOCallback,
-                        bufferResult
-                    );
+                    result = m_Worker
+                        .SecureStream
+                        .BeginWrite(bufferResult.Buffers, _CompleteIOCallback, bufferResult);
                 else
-                    result = m_Worker.SecureStream.BeginWrite(
+                    result = m_Worker
+                        .SecureStream
+                        .BeginWrite(
+                            bufferResult.Buffer,
+                            bufferResult.Offset,
+                            bufferResult.Count,
+                            _CompleteIOCallback,
+                            bufferResult
+                        );
+            }
+            else
+            {
+                result = m_Worker
+                    .SecureStream
+                    .BeginRead(
                         bufferResult.Buffer,
                         bufferResult.Offset,
                         bufferResult.Count,
                         _CompleteIOCallback,
                         bufferResult
                     );
-            }
-            else
-            {
-                result = m_Worker.SecureStream.BeginRead(
-                    bufferResult.Buffer,
-                    bufferResult.Offset,
-                    bufferResult.Count,
-                    _CompleteIOCallback,
-                    bufferResult
-                );
             }
 
             if (result.CompletedSynchronously)
@@ -948,9 +942,10 @@ namespace System.Net
             if (bufferResult.IsWrite)
                 ((TlsStream)bufferResult.AsyncObject).m_Worker.SecureStream.EndWrite(result);
             else
-                readBytes = ((TlsStream)bufferResult.AsyncObject).m_Worker.SecureStream.EndRead(
-                    result
-                );
+                readBytes = ((TlsStream)bufferResult.AsyncObject)
+                    .m_Worker
+                    .SecureStream
+                    .EndRead(result);
 
             bufferResult.InvokeCallback(readBytes);
         }

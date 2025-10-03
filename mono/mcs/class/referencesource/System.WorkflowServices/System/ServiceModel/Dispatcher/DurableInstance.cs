@@ -19,9 +19,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (instanceContextProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "instanceContextProvider"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("instanceContextProvider");
             }
 
             this.instanceId = instanceId;

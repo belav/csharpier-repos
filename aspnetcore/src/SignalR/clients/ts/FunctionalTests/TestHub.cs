@@ -79,7 +79,8 @@ public class TestHub : Hub
             async (state) =>
             {
                 await ((IHubContext<TestHub>)state)
-                    .Clients.Client(connectionId)
+                    .Clients
+                    .Client(connectionId)
                     .SendAsync("StreamCanceled");
             },
             _context

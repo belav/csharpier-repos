@@ -1458,7 +1458,8 @@ namespace Microsoft.CodeAnalysis
                             // points at.  This way things like tree data can be shared across docs.
 
                             var options = oldSolution
-                                .Services.GetRequiredService<IWorkspaceConfigurationService>()
+                                .Services
+                                .GetRequiredService<IWorkspaceConfigurationService>()
                                 .Options;
 
                             var newDocument = newSolution.GetRequiredDocument(documentId);
@@ -1807,9 +1808,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 if (
-                    !CurrentSolution.AnalyzerReferences.SequenceEqual(
-                        newSolution.AnalyzerReferences
-                    )
+                    !CurrentSolution
+                        .AnalyzerReferences
+                        .SequenceEqual(newSolution.AnalyzerReferences)
                 )
                 {
                     foreach (
@@ -1907,8 +1908,10 @@ namespace Microsoft.CodeAnalysis
                 // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
                 // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
                 // document edits, which the host is expected to actually apply directly.
-                var newOptionsWithoutSyntaxTreeOptionsChange =
-                    projectChanges.NewProject.CompilationOptions.WithSyntaxTreeOptionsProvider(
+                var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
+                    .NewProject
+                    .CompilationOptions
+                    .WithSyntaxTreeOptionsProvider(
                         projectChanges.OldProject.CompilationOptions.SyntaxTreeOptionsProvider
                     );
 
@@ -1977,7 +1980,8 @@ namespace Microsoft.CodeAnalysis
                     .GetChangedDocuments()
                     .Any(id =>
                         projectChanges
-                            .NewProject.GetDocument(id)!
+                            .NewProject
+                            .GetDocument(id)!
                             .HasInfoChanged(projectChanges.OldProject.GetDocument(id)!)
                     )
             )
@@ -2187,8 +2191,10 @@ namespace Microsoft.CodeAnalysis
             // if an .editorconfig was added, removed, or modified. We'll compute the options without that change, and if there's
             // still changes then we need to verify we can apply those. The .editorconfig changes will also be represented as
             // document edits, which the host is expected to actually apply directly.
-            var newOptionsWithoutSyntaxTreeOptionsChange =
-                projectChanges.NewProject.CompilationOptions?.WithSyntaxTreeOptionsProvider(
+            var newOptionsWithoutSyntaxTreeOptionsChange = projectChanges
+                .NewProject
+                .CompilationOptions
+                ?.WithSyntaxTreeOptionsProvider(
                     projectChanges.OldProject.CompilationOptions!.SyntaxTreeOptionsProvider
                 );
             if (
@@ -2394,9 +2400,9 @@ namespace Microsoft.CodeAnalysis
                 project.MetadataReferences,
                 project.AnalyzerReferences,
                 additionalDocuments: project.AdditionalDocuments.Select(CreateDocumentInfoWithText),
-                analyzerConfigDocuments: project.AnalyzerConfigDocuments.Select(
-                    CreateDocumentInfoWithText
-                ),
+                analyzerConfigDocuments: project
+                    .AnalyzerConfigDocuments
+                    .Select(CreateDocumentInfoWithText),
                 hostObjectType: project.State.HostObjectType
             );
         }
@@ -2796,9 +2802,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this
-                    .CurrentSolution.GetProject(fromProjectId)!
-                    .ProjectReferences.Contains(projectReference)
+                !this.CurrentSolution
+                    .GetProject(fromProjectId)!
+                    .ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2819,9 +2826,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this
-                    .CurrentSolution.GetProject(fromProjectId)!
-                    .ProjectReferences.Contains(projectReference)
+                this.CurrentSolution
+                    .GetProject(fromProjectId)!
+                    .ProjectReferences
+                    .Contains(projectReference)
             )
             {
                 throw new ArgumentException(
@@ -2841,8 +2849,8 @@ namespace Microsoft.CodeAnalysis
             ProjectId toProjectId
         )
         {
-            var transitiveReferences = this
-                .CurrentSolution.GetProjectDependencyGraph()
+            var transitiveReferences = this.CurrentSolution
+                .GetProjectDependencyGraph()
                 .GetProjectsThatThisProjectTransitivelyDependsOn(toProjectId);
             if (transitiveReferences.Contains(fromProjectId))
             {
@@ -2865,9 +2873,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this
-                    .CurrentSolution.GetProject(projectId)!
-                    .MetadataReferences.Contains(metadataReference)
+                !this.CurrentSolution
+                    .GetProject(projectId)!
+                    .MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_not_referenced);
@@ -2883,9 +2892,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this
-                    .CurrentSolution.GetProject(projectId)!
-                    .MetadataReferences.Contains(metadataReference)
+                this.CurrentSolution
+                    .GetProject(projectId)!
+                    .MetadataReferences
+                    .Contains(metadataReference)
             )
             {
                 throw new ArgumentException(WorkspacesResources.Metadata_is_already_referenced);
@@ -2901,9 +2911,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                !this
-                    .CurrentSolution.GetProject(projectId)!
-                    .AnalyzerReferences.Contains(analyzerReference)
+                !this.CurrentSolution
+                    .GetProject(projectId)!
+                    .AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(
@@ -2921,9 +2932,10 @@ namespace Microsoft.CodeAnalysis
         )
         {
             if (
-                this
-                    .CurrentSolution.GetProject(projectId)!
-                    .AnalyzerReferences.Contains(analyzerReference)
+                this.CurrentSolution
+                    .GetProject(projectId)!
+                    .AnalyzerReferences
+                    .Contains(analyzerReference)
             )
             {
                 throw new ArgumentException(

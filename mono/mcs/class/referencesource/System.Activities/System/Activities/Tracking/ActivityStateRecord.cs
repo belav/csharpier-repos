@@ -305,10 +305,9 @@ namespace System.Activities.Tracking
                 int count = containsWildcard
                     ? currentElement.RuntimeArguments.Count
                     : arguments.Count;
-                bool isActivityStateExecuting = ActivityStates.Executing.Equals(
-                    this.State,
-                    StringComparison.Ordinal
-                );
+                bool isActivityStateExecuting = ActivityStates
+                    .Executing
+                    .Equals(this.State, StringComparison.Ordinal);
 
                 //look at arguments for this element.
                 for (int i = 0; i < currentElement.RuntimeArguments.Count; i++)

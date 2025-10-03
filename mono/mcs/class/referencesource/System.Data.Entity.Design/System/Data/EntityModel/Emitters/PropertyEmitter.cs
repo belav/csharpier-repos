@@ -110,9 +110,9 @@ namespace System.Data.EntityModel.Emitters
             onChangingDomMethod.Name = OnChangingPartialMethodName(PropertyName);
             onChangingDomMethod.ReturnType = new CodeTypeReference(typeof(void));
             onChangingDomMethod.Attributes = MemberAttributes.Abstract | MemberAttributes.Public;
-            onChangingDomMethod.Parameters.Add(
-                new CodeParameterDeclarationExpression(returnType, "value")
-            );
+            onChangingDomMethod
+                .Parameters
+                .Add(new CodeParameterDeclarationExpression(returnType, "value"));
             typeDecl.Members.Add(onChangingDomMethod);
 
             CodeMemberMethod onChangedDomMethod = new CodeMemberMethod();
@@ -122,18 +122,22 @@ namespace System.Data.EntityModel.Emitters
             onChangedDomMethod.Attributes = MemberAttributes.Abstract | MemberAttributes.Public;
             typeDecl.Members.Add(onChangedDomMethod);
 
-            Generator.FixUps.Add(
-                new FixUp(
-                    PropertyClassName + "." + OnChangingPartialMethodName(PropertyName),
-                    FixUpType.MarkAbstractMethodAsPartial
-                )
-            );
-            Generator.FixUps.Add(
-                new FixUp(
-                    PropertyClassName + "." + OnChangedPartialMethodName(PropertyName),
-                    FixUpType.MarkAbstractMethodAsPartial
-                )
-            );
+            Generator
+                .FixUps
+                .Add(
+                    new FixUp(
+                        PropertyClassName + "." + OnChangingPartialMethodName(PropertyName),
+                        FixUpType.MarkAbstractMethodAsPartial
+                    )
+                );
+            Generator
+                .FixUps
+                .Add(
+                    new FixUp(
+                        PropertyClassName + "." + OnChangedPartialMethodName(PropertyName),
+                        FixUpType.MarkAbstractMethodAsPartial
+                    )
+                );
         }
 
         private void EmitField(CodeTypeDeclaration typeDecl, CodeTypeReference fieldType)
@@ -217,11 +221,9 @@ namespace System.Data.EntityModel.Emitters
             List<CodeAttributeDeclaration> additionalAttributes
         )
         {
-            Generator.AttributeEmitter.EmitPropertyAttributes(
-                this,
-                memberProperty,
-                additionalAttributes
-            );
+            Generator
+                .AttributeEmitter
+                .EmitPropertyAttributes(this, memberProperty, additionalAttributes);
         }
 
         private void EmitPropertyGetter(

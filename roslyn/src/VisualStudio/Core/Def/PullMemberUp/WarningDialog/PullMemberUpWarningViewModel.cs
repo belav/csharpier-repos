@@ -26,9 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Wa
 
             if (
                 !options.Destination.IsAbstract
-                && options.MemberAnalysisResults.Any(static result =>
-                    result.ChangeDestinationTypeToAbstract
-                )
+                && options
+                    .MemberAnalysisResults
+                    .Any(static result => result.ChangeDestinationTypeToAbstract)
             )
             {
                 Logger.Log(FunctionId.PullMembersUpWarning_ChangeTargetToAbstract);

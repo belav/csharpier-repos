@@ -139,9 +139,11 @@ namespace System.Windows.Forms
                     ? this.Image
                     : ToolStripRenderer.CreateDisabledImage(this.Image);
 
-                this.Owner.Renderer.DrawDropDownButtonBackground(
-                    new System.Windows.Forms.ToolStripItemRenderEventArgs(e.Graphics, this)
-                );
+                this.Owner
+                    .Renderer
+                    .DrawDropDownButtonBackground(
+                        new System.Windows.Forms.ToolStripItemRenderEventArgs(e.Graphics, this)
+                    );
 
                 Rectangle text_layout_rect;
                 Rectangle image_layout_rect;
@@ -149,36 +151,42 @@ namespace System.Windows.Forms
                 this.CalculateTextAndImageRectangles(out text_layout_rect, out image_layout_rect);
 
                 if (text_layout_rect != Rectangle.Empty)
-                    this.Owner.Renderer.DrawItemText(
-                        new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            this.Text,
-                            text_layout_rect,
-                            font_color,
-                            this.Font,
-                            this.TextAlign
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawItemText(
+                            new System.Windows.Forms.ToolStripItemTextRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                this.Text,
+                                text_layout_rect,
+                                font_color,
+                                this.Font,
+                                this.TextAlign
+                            )
+                        );
                 if (image_layout_rect != Rectangle.Empty)
-                    this.Owner.Renderer.DrawItemImage(
-                        new System.Windows.Forms.ToolStripItemImageRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            draw_image,
-                            image_layout_rect
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawItemImage(
+                            new System.Windows.Forms.ToolStripItemImageRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                draw_image,
+                                image_layout_rect
+                            )
+                        );
                 if (this.ShowDropDownArrow)
-                    this.Owner.Renderer.DrawArrow(
-                        new ToolStripArrowRenderEventArgs(
-                            e.Graphics,
-                            this,
-                            new Rectangle(this.Width - 10, 0, 6, this.Height),
-                            Color.Black,
-                            ArrowDirection.Down
-                        )
-                    );
+                    this.Owner
+                        .Renderer
+                        .DrawArrow(
+                            new ToolStripArrowRenderEventArgs(
+                                e.Graphics,
+                                this,
+                                new Rectangle(this.Width - 10, 0, 6, this.Height),
+                                Color.Black,
+                                ArrowDirection.Down
+                            )
+                        );
                 return;
             }
         }

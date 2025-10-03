@@ -2127,10 +2127,15 @@ public class Tests : TestsBase, ITest2
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static void unhandled_exception_user()
     {
-        System.Threading.Tasks.Task.Factory.StartNew(() =>
-        {
-            Throw();
-        });
+        System
+            .Threading
+            .Tasks
+            .Task
+            .Factory
+            .StartNew(() =>
+            {
+                Throw();
+            });
         Thread.Sleep(10000);
     }
 

@@ -71,7 +71,8 @@ namespace System.Collections.Immutable.Tests
         public void EnumerateBuilderWhileMutating()
         {
             ImmutableHashSet<int>.Builder builder = ImmutableHashSet<int>
-                .Empty.Union(Enumerable.Range(1, 10))
+                .Empty
+                .Union(Enumerable.Range(1, 10))
                 .ToBuilder();
             CollectionAssertAreEquivalent(Enumerable.Range(1, 10).ToArray(), builder.ToArray());
 

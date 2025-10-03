@@ -40,11 +40,13 @@ public class Program
 
         var response = context.Response;
         response.ContentType = "application/json";
-        response.Cookies.Append(
-            "Cookie1",
-            "value1",
-            new CookieOptions() { Expires = DateTimeOffset.UtcNow + TimeSpan.FromDays(1) }
-        );
+        response
+            .Cookies
+            .Append(
+                "Cookie1",
+                "value1",
+                new CookieOptions() { Expires = DateTimeOffset.UtcNow + TimeSpan.FromDays(1) }
+            );
 
         Console.WriteLine(context);
     }

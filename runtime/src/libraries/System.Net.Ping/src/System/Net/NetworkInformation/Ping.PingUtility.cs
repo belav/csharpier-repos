@@ -113,7 +113,8 @@ namespace System.Net.NetworkInformation
                     .ConfigureAwait(false);
 
                 string stdout = await pingProcess
-                    .StandardOutput.ReadToEndAsync(timeoutOrCancellationToken)
+                    .StandardOutput
+                    .ReadToEndAsync(timeoutOrCancellationToken)
                     .ConfigureAwait(false);
 
                 return ParsePingUtilityOutput(address, pingProcess.ExitCode, stdout);

@@ -170,9 +170,9 @@ namespace System.Web.Compilation
                 new CodeVariableReferenceExpression("ctrl")
             );
 
-            method.Statements.Add(
-                new CodeVariableDeclarationStatement(builder.ControlType, "__ctrl")
-            );
+            method
+                .Statements
+                .Add(new CodeVariableDeclarationStatement(builder.ControlType, "__ctrl"));
             CodeAssignStatement assign = new CodeAssignStatement();
             assign.Left = ctrlVar;
             assign.Right = castExpr;

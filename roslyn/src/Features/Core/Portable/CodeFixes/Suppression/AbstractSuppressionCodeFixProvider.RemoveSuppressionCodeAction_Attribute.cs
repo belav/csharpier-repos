@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 )
                 {
                     var attributeNode = await _attribute
-                        .ApplicationSyntaxReference.GetSyntaxAsync(cancellationToken)
+                        .ApplicationSyntaxReference
+                        .GetSyntaxAsync(cancellationToken)
                         .ConfigureAwait(false);
                     return Fixer.IsSingleAttributeInAttributeList(attributeNode)
                         ? attributeNode.Parent

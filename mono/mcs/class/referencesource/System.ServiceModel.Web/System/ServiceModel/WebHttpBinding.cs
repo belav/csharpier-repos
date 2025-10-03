@@ -214,14 +214,16 @@ namespace System.ServiceModel
                     == HttpClientCredentialType.InheritedFromHost
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                        SR.GetString(
-                            SR.HttpClientCredentialTypeInvalid,
-                            security.Transport.ClientCredentialType
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.HttpClientCredentialTypeInvalid,
+                                security.Transport.ClientCredentialType
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             return base.BuildChannelFactory<TChannel>(parameters);
@@ -247,15 +249,17 @@ namespace System.ServiceModel
             WebHttpBindingElement element = section.Bindings[configurationName];
             if (element == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ConfigurationErrorsException(
-                        SR2.GetString(
-                            SR2.ConfigInvalidBindingConfigurationName,
-                            configurationName,
-                            WebHttpBindingConfigurationStrings.WebHttpBindingCollectionElementName
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR2.GetString(
+                                SR2.ConfigInvalidBindingConfigurationName,
+                                configurationName,
+                                WebHttpBindingConfigurationStrings.WebHttpBindingCollectionElementName
+                            )
                         )
-                    )
-                );
+                    );
             }
             else
             {

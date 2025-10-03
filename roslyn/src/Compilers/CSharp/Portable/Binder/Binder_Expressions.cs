@@ -1074,10 +1074,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return BindUtf8StringLiteral((LiteralExpressionSyntax)node, diagnostics);
 
                     case SyntaxKind.DefaultLiteralExpression:
-                        MessageID.IDS_FeatureDefaultLiteral.CheckFeatureAvailability(
-                            diagnostics,
-                            node
-                        );
+                        MessageID
+                            .IDS_FeatureDefaultLiteral
+                            .CheckFeatureAvailability(diagnostics, node);
                         return new BoundDefaultLiteral(node);
 
                     case SyntaxKind.ParenthesizedExpression:
@@ -1309,10 +1308,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureThrowExpression.CheckFeatureAvailability(
-                diagnostics,
-                node.ThrowKeyword
-            );
+            MessageID
+                .IDS_FeatureThrowExpression
+                .CheckFeatureAvailability(diagnostics, node.ThrowKeyword);
 
             bool hasErrors = node.HasErrors;
             if (!IsThrowExpressionInProperContext(node))
@@ -1458,8 +1456,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray<bool> inferredPositions = tupleNames.IsDefault
                         ? default
                         : tupleNames.SelectAsArray(n => n != null);
-                    bool disallowInferredNames =
-                        this.Compilation.LanguageVersion.DisallowInferredTupleElementNames();
+                    bool disallowInferredNames = this.Compilation
+                        .LanguageVersion
+                        .DisallowInferredTupleElementNames();
 
                     // We will not check constraints at this point as this code path
                     // is failure-only and the caller is expected to produce a diagnostic.
@@ -1575,8 +1574,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (hasNaturalType)
             {
-                bool disallowInferredNames =
-                    this.Compilation.LanguageVersion.DisallowInferredTupleElementNames();
+                bool disallowInferredNames = this.Compilation
+                    .LanguageVersion
+                    .DisallowInferredTupleElementNames();
 
                 tupleTypeOpt = NamedTypeSymbol.CreateTuple(
                     node.Location,
@@ -2197,9 +2197,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics.Add(ErrorCode.WRN_ManagedAddr, location, type);
                     return false;
                 case ManagedKind.UnmanagedWithGenerics
-                    when MessageID.IDS_FeatureUnmanagedConstructedTypes.GetFeatureAvailabilityDiagnosticInfo(
-                        compilation
-                    )
+                    when MessageID
+                        .IDS_FeatureUnmanagedConstructedTypes
+                        .GetFeatureAvailabilityDiagnosticInfo(compilation)
                         is CSDiagnosticInfo diagnosticInfo:
                     diagnostics.Add(diagnosticInfo, location);
                     return true;
@@ -4321,8 +4321,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Section 6.2.3 of the spec only applies when the non-null version of the types involved have a
             // built in conversion.
             var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
-            TypeWithAnnotations underlyingTargetTypeWithAnnotations =
-                targetTypeWithAnnotations.Type.GetNullableUnderlyingTypeWithAnnotations();
+            TypeWithAnnotations underlyingTargetTypeWithAnnotations = targetTypeWithAnnotations
+                .Type
+                .GetNullableUnderlyingTypeWithAnnotations();
             var underlyingConversion = Conversions.ClassifyBuiltInConversion(
                 operand.Type,
                 underlyingTargetTypeWithAnnotations.Type,
@@ -4601,18 +4602,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             if (argumentSyntax.RefKindKeyword.IsKind(SyntaxKind.InKeyword))
-                MessageID.IDS_FeatureReadOnlyReferences.CheckFeatureAvailability(
-                    diagnostics,
-                    argumentSyntax.RefKindKeyword
-                );
+                MessageID
+                    .IDS_FeatureReadOnlyReferences
+                    .CheckFeatureAvailability(diagnostics, argumentSyntax.RefKindKeyword);
 
             if (argumentSyntax.Expression.Kind() == SyntaxKind.DeclarationExpression)
             {
                 if (argumentSyntax.RefKindKeyword.IsKind(SyntaxKind.OutKeyword))
-                    MessageID.IDS_FeatureOutVar.CheckFeatureAvailability(
-                        diagnostics,
-                        argumentSyntax.RefKindKeyword
-                    );
+                    MessageID
+                        .IDS_FeatureOutVar
+                        .CheckFeatureAvailability(diagnostics, argumentSyntax.RefKindKeyword);
 
                 var declarationExpression = (DeclarationExpressionSyntax)argumentSyntax.Expression;
                 if (declarationExpression.IsOutDeclaration())
@@ -4739,10 +4738,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     out alias
                 );
 
-                localSymbol.ScopeBinder.ValidateDeclarationNameConflictsInScope(
-                    localSymbol,
-                    diagnostics
-                );
+                localSymbol
+                    .ScopeBinder
+                    .ValidateDeclarationNameConflictsInScope(localSymbol, diagnostics);
 
                 if (isVar)
                 {
@@ -5489,10 +5487,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             // See BindArrayCreationExpression method above for implicitly typed array creation SPEC.
-            MessageID.IDS_FeatureImplicitArray.CheckFeatureAvailability(
-                diagnostics,
-                node.NewKeyword
-            );
+            MessageID
+                .IDS_FeatureImplicitArray
+                .CheckFeatureAvailability(diagnostics, node.NewKeyword);
 
             InitializerExpressionSyntax initializer = node.Initializer;
             int rank = node.Commas.Count + 1;
@@ -6148,8 +6145,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inLegalPosition = true;
 
             // If we are using a language version that does not restrict the position of a stackalloc expression, skip that test.
-            LanguageVersion requiredVersion =
-                MessageID.IDS_FeatureNestedStackalloc.RequiredVersion();
+            LanguageVersion requiredVersion = MessageID
+                .IDS_FeatureNestedStackalloc
+                .RequiredVersion();
             if (requiredVersion > Compilation.LanguageVersion)
             {
                 inLegalPosition =
@@ -6157,10 +6155,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     && node.IsLegalCSharp73SpanStackAllocPosition();
                 if (!inLegalPosition)
                 {
-                    MessageID.IDS_FeatureNestedStackalloc.CheckFeatureAvailability(
-                        diagnostics,
-                        node.GetFirstToken()
-                    );
+                    MessageID
+                        .IDS_FeatureNestedStackalloc
+                        .CheckFeatureAvailability(diagnostics, node.GetFirstToken());
                 }
             }
 
@@ -6257,10 +6254,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     || node.IsKind(SyntaxKind.StackAllocArrayCreationExpression)
             );
 
-            MessageID.IDS_FeatureStackAllocInitializer.CheckFeatureAvailability(
-                diagnostics,
-                stackAllocKeyword
-            );
+            MessageID
+                .IDS_FeatureStackAllocInitializer
+                .CheckFeatureAvailability(diagnostics, stackAllocKeyword);
 
             if (boundInitExprOpt.IsDefault)
             {
@@ -6896,10 +6892,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureImplicitObjectCreation.CheckFeatureAvailability(
-                diagnostics,
-                node.NewKeyword
-            );
+            MessageID
+                .IDS_FeatureImplicitObjectCreation
+                .CheckFeatureAvailability(diagnostics, node.NewKeyword);
 
             var arguments = AnalyzedArguments.GetInstance();
             BindArgumentsAndNames(node.ArgumentList, diagnostics, arguments, allowArglist: true);
@@ -7037,11 +7032,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            MessageID.IDS_FeatureCollectionExpressions.CheckFeatureAvailability(
-                diagnostics,
-                syntax,
-                syntax.OpenBracketToken.GetLocation()
-            );
+            MessageID
+                .IDS_FeatureCollectionExpressions
+                .CheckFeatureAvailability(
+                    diagnostics,
+                    syntax,
+                    syntax.OpenBracketToken.GetLocation()
+                );
 
             var builder = ArrayBuilder<BoundNode>.GetInstance(syntax.Elements.Count);
             foreach (var element in syntax.Elements)
@@ -7125,12 +7122,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var enumeratorInfo = builder.Build(location: default);
                 var collectionType = enumeratorInfo.CollectionType;
                 var useSiteInfo = @this.GetNewCompoundUseSiteInfo(diagnostics);
-                var conversion = @this.Conversions.ClassifyConversionFromExpression(
-                    expression,
-                    collectionType,
-                    isChecked: @this.CheckOverflowAtRuntime,
-                    ref useSiteInfo
-                );
+                var conversion = @this
+                    .Conversions
+                    .ClassifyConversionFromExpression(
+                        expression,
+                        collectionType,
+                        isChecked: @this.CheckOverflowAtRuntime,
+                        ref useSiteInfo
+                    );
                 Debug.Assert(conversion.IsValid);
                 diagnostics.Add(syntax.Expression, useSiteInfo);
                 var convertedExpression = @this.ConvertForEachCollection(
@@ -7786,10 +7785,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert((object)initializerType != null);
 
             if (initializerSyntax.Kind() == SyntaxKind.ObjectInitializerExpression)
-                MessageID.IDS_FeatureObjectInitializer.CheckFeatureAvailability(
-                    diagnostics,
-                    initializerSyntax.OpenBraceToken
-                );
+                MessageID
+                    .IDS_FeatureObjectInitializer
+                    .CheckFeatureAvailability(diagnostics, initializerSyntax.OpenBraceToken);
 
             // We use a location specific binder for binding object initializer field/property access to generate object initializer specific diagnostics:
             //  1) CS1914 (ERR_StaticMemberInObjectInitializer)
@@ -7865,10 +7863,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Debug.Assert((object)boundLeft.Type != null);
 
-                    var rhsExpr = initializer.Right.CheckAndUnwrapRefExpression(
-                        diagnostics,
-                        out RefKind refKind
-                    );
+                    var rhsExpr = initializer
+                        .Right
+                        .CheckAndUnwrapRefExpression(diagnostics, out RefKind refKind);
                     bool isRef = refKind == RefKind.Ref;
                     var rhsKind = isRef
                         ? GetRequiredRHSValueKindForRefAssignment(boundLeft)
@@ -7981,10 +7978,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var implicitIndexing = (ImplicitElementAccessSyntax)leftSyntax;
 
-                MessageID.IDS_FeatureDictionaryInitializer.CheckFeatureAvailability(
-                    diagnostics,
-                    implicitIndexing.ArgumentList.OpenBracketToken
-                );
+                MessageID
+                    .IDS_FeatureDictionaryInitializer
+                    .CheckFeatureAvailability(
+                        diagnostics,
+                        implicitIndexing.ArgumentList.OpenBracketToken
+                    );
 
                 boundMember = BindElementAccess(
                     implicitIndexing,
@@ -8457,10 +8456,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(initializerSyntax.Expressions.Any());
             Debug.Assert((object)initializerType != null);
 
-            MessageID.IDS_FeatureCollectionInitializer.CheckFeatureAvailability(
-                diagnostics,
-                initializerSyntax.OpenBraceToken
-            );
+            MessageID
+                .IDS_FeatureCollectionInitializer
+                .CheckFeatureAvailability(diagnostics, initializerSyntax.OpenBraceToken);
 
             var initializerBuilder = ArrayBuilder<BoundExpression>.GetInstance();
 
@@ -8708,9 +8706,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             Debug.Assert(collectionInitializerAddMethodBinder != null);
             Debug.Assert(
-                collectionInitializerAddMethodBinder.Flags.Includes(
-                    BinderFlags.CollectionInitializerAddMethod
-                )
+                collectionInitializerAddMethodBinder
+                    .Flags
+                    .Includes(BinderFlags.CollectionInitializerAddMethod)
             );
             Debug.Assert(implicitReceiver != null);
             Debug.Assert((object)implicitReceiver.Type != null);
@@ -12498,7 +12496,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (
                     diagnosticsForBindElementAccessCore
-                        .DiagnosticBag.AsEnumerableWithoutResolution()
+                        .DiagnosticBag
+                        .AsEnumerableWithoutResolution()
                         .AsSingleton()
                         is { Code: (int)ErrorCode.ERR_BadIndexLHS, Arguments: [TypeSymbol type] }
                     && type.Equals(expr.Type, TypeCompareKind.ConsiderEverything)
@@ -12662,12 +12661,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 && conditional.Expression == expr.Syntax
                             )
                             {
-                                location = expr.Syntax.SyntaxTree.GetLocation(
-                                    TextSpan.FromBounds(
-                                        expr.Syntax.SpanStart,
-                                        conditional.OperatorToken.Span.End
-                                    )
-                                );
+                                location = expr.Syntax
+                                    .SyntaxTree
+                                    .GetLocation(
+                                        TextSpan.FromBounds(
+                                            expr.Syntax.SpanStart,
+                                            conditional.OperatorToken.Span.End
+                                        )
+                                    );
                             }
                             else
                             {
@@ -13707,8 +13708,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             ImmutableArray<string> argumentNames = analyzedArguments.GetNames();
-            ImmutableArray<RefKind> argumentRefKinds =
-                analyzedArguments.RefKinds.ToImmutableOrNull();
+            ImmutableArray<RefKind> argumentRefKinds = analyzedArguments
+                .RefKinds
+                .ToImmutableOrNull();
             if (!overloadResolutionResult.Succeeded)
             {
                 // If the arguments had an error reported about them then suppress further error
@@ -14780,10 +14782,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
                 if (
-                    MemberSignatureComparer.CSharp10MethodGroupSignatureComparer.Equals(
-                        method,
-                        candidate
-                    )
+                    MemberSignatureComparer
+                        .CSharp10MethodGroupSignatureComparer
+                        .Equals(method, candidate)
                 )
                 {
                     return true;
@@ -14924,10 +14925,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return true;
                 }
                 if (
-                    MemberSignatureComparer.MethodGroupSignatureComparer.Equals(
-                        foundMethod,
-                        candidate
-                    )
+                    MemberSignatureComparer
+                        .MethodGroupSignatureComparer
+                        .Equals(foundMethod, candidate)
                 )
                 {
                     return true;
@@ -15199,10 +15199,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            MessageID.IDS_FeatureNullPropagatingOperator.CheckFeatureAvailability(
-                diagnostics,
-                node.OperatorToken
-            );
+            MessageID
+                .IDS_FeatureNullPropagatingOperator
+                .CheckFeatureAvailability(diagnostics, node.OperatorToken);
 
             BoundExpression receiver = BindConditionalAccessReceiver(node, diagnostics);
 

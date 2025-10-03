@@ -62,9 +62,15 @@ namespace Cairo
         {
             get
             {
-                return System.Runtime.InteropServices.Marshal.PtrToStringAuto(
-                    NativeMethods.cairo_status_to_string(NativeMethods.cairo_device_status(handle))
-                );
+                return System
+                    .Runtime
+                    .InteropServices
+                    .Marshal
+                    .PtrToStringAuto(
+                        NativeMethods.cairo_status_to_string(
+                            NativeMethods.cairo_device_status(handle)
+                        )
+                    );
             }
         }
 

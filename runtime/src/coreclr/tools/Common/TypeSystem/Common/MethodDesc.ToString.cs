@@ -18,11 +18,9 @@ namespace Internal.TypeSystem
 
             if (includeReturnType)
             {
-                DebugNameFormatter.Instance.AppendName(
-                    sb,
-                    ReturnType,
-                    DebugNameFormatter.FormatOptions.None
-                );
+                DebugNameFormatter
+                    .Instance
+                    .AppendName(sb, ReturnType, DebugNameFormatter.FormatOptions.None);
                 sb.Append('(');
             }
 
@@ -33,11 +31,9 @@ namespace Internal.TypeSystem
                     first = false;
                 else
                     sb.Append(',');
-                DebugNameFormatter.Instance.AppendName(
-                    sb,
-                    param,
-                    DebugNameFormatter.FormatOptions.None
-                );
+                DebugNameFormatter
+                    .Instance
+                    .AppendName(sb, param, DebugNameFormatter.FormatOptions.None);
             }
 
             if (includeReturnType)
@@ -70,11 +66,9 @@ namespace Internal.TypeSystem
                 {
                     sb.Append(',');
                 }
-                DebugNameFormatter.Instance.AppendName(
-                    sb,
-                    Instantiation[i],
-                    DebugNameFormatter.FormatOptions.None
-                );
+                DebugNameFormatter
+                    .Instance
+                    .AppendName(sb, Instantiation[i], DebugNameFormatter.FormatOptions.None);
             }
             if (!first)
                 sb.Append('>');

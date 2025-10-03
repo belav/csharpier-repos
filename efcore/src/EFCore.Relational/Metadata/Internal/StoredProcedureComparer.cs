@@ -81,16 +81,16 @@ public sealed class StoredProcedureComparer
             return result;
         }
 
-        result = x
-            .Parameters.Zip(y.Parameters, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
+        result = x.Parameters
+            .Zip(y.Parameters, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
             .FirstOrDefault(r => r != 0);
         if (result != 0)
         {
             return result;
         }
 
-        return x
-            .ResultColumns.Zip(y.ResultColumns, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
+        return x.ResultColumns
+            .Zip(y.ResultColumns, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
             .FirstOrDefault(r => r != 0);
     }
 

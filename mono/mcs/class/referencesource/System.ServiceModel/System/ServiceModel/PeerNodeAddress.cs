@@ -50,13 +50,13 @@ namespace System.ServiceModel
         )
         {
             if (endpointAddress == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("endpointAddress")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("endpointAddress"));
             if (ipAddresses == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentNullException("ipAddresses")
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new ArgumentNullException("ipAddresses"));
             Initialize(endpointAddress, ipAddresses);
         }
 

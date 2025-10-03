@@ -26,17 +26,20 @@ public static class EntityFrameworkCoreDataProtectionExtensions
     )
         where TContext : DbContext, IDataProtectionKeyContext
     {
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
-        {
-            var loggerFactory = services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-            return new ConfigureOptions<KeyManagementOptions>(options =>
+        builder
+            .Services
+            .AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
             {
-                options.XmlRepository = new EntityFrameworkCoreXmlRepository<TContext>(
-                    services,
-                    loggerFactory
-                );
+                var loggerFactory =
+                    services.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+                return new ConfigureOptions<KeyManagementOptions>(options =>
+                {
+                    options.XmlRepository = new EntityFrameworkCoreXmlRepository<TContext>(
+                        services,
+                        loggerFactory
+                    );
+                });
             });
-        });
 
         return builder;
     }

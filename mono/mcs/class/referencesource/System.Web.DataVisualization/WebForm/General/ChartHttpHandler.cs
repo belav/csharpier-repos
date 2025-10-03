@@ -148,10 +148,10 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         using (TextWriter w = new StringWriter(CultureInfo.InvariantCulture))
                         {
-                            HttpContext.Current.Server.Execute(
-                                ChartHttpHandlerName + "?" + handlerCheckQry + "=0",
-                                w
-                            );
+                            HttpContext
+                                .Current
+                                .Server
+                                .Execute(ChartHttpHandlerName + "?" + handlerCheckQry + "=0", w);
                         }
                         _installed = true;
                     }
@@ -1309,19 +1309,17 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 Process process = Process.GetCurrentProcess();
                 if (
-                    process.ProcessName.StartsWith(
-                        "WebDev.WebServer",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    process
+                        .ProcessName
+                        .StartsWith("WebDev.WebServer", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return true;
                 }
                 if (
-                    process.ProcessName.StartsWith(
-                        "ii----press",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    process
+                        .ProcessName
+                        .StartsWith("ii----press", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     return true;

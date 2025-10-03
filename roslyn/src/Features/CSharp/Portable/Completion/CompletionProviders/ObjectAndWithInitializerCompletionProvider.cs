@@ -237,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     {
                         return new HashSet<string>(
                             initializer
-                                .Expressions.OfType<AssignmentExpressionSyntax>()
+                                .Expressions
+                                .OfType<AssignmentExpressionSyntax>()
                                 .Where(b => b.OperatorToken.Kind() == SyntaxKind.EqualsToken)
                                 .Select(b => b.Left)
                                 .OfType<IdentifierNameSyntax>()

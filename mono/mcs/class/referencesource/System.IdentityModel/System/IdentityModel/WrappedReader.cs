@@ -26,9 +26,11 @@ namespace System.IdentityModel
             }
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.InnerReaderMustBeAtElement))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.InnerReaderMustBeAtElement))
+                    );
             }
             this.xmlTokens = new XmlTokenStream(32);
             base.InitializeInnerReader(reader);
@@ -314,15 +316,17 @@ namespace System.IdentityModel
                 }
                 default:
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(
-                            SR.GetString(
-                                SR.UnsupportedNodeTypeInReader,
-                                base.InnerReader.NodeType,
-                                base.InnerReader.Name
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new XmlException(
+                                SR.GetString(
+                                    SR.UnsupportedNodeTypeInReader,
+                                    base.InnerReader.NodeType,
+                                    base.InnerReader.Name
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -372,12 +376,14 @@ namespace System.IdentityModel
         {
             if (initialSize < 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException(
-                        "initialSize",
-                        SR.GetString(SR.ValueMustBeGreaterThanZero)
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "initialSize",
+                            SR.GetString(SR.ValueMustBeGreaterThanZero)
+                        )
+                    );
             }
             this.entries = new XmlTokenEntry[initialSize];
         }
@@ -618,15 +624,17 @@ namespace System.IdentityModel
             {
                 if (writer == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentNullException("writer")
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new ArgumentNullException("writer"));
                 }
                 if (!MoveToFirst())
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.XmlTokenBufferIsEmpty))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.XmlTokenBufferIsEmpty))
+                        );
                 }
                 int depth = 0;
                 int recordedDepth = -1;

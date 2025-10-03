@@ -133,10 +133,9 @@ namespace System.Reflection.Runtime.FieldInfos.NativeFormat
         {
             get
             {
-                return RuntimeAugments.TypeLoaderCallbacks.GetRuntimeFieldHandleForComponents(
-                    DeclaringType.TypeHandle,
-                    Name
-                );
+                return RuntimeAugments
+                    .TypeLoaderCallbacks
+                    .GetRuntimeFieldHandleForComponents(DeclaringType.TypeHandle, Name);
             }
         }
 
@@ -156,12 +155,14 @@ namespace System.Reflection.Runtime.FieldInfos.NativeFormat
 
         protected sealed override FieldAccessor TryGetFieldAccessor()
         {
-            return ReflectionCoreExecution.ExecutionEnvironment.TryGetFieldAccessor(
-                this._reader,
-                this.DeclaringType.TypeHandle,
-                this.FieldType.TypeHandle,
-                _fieldHandle
-            );
+            return ReflectionCoreExecution
+                .ExecutionEnvironment
+                .TryGetFieldAccessor(
+                    this._reader,
+                    this.DeclaringType.TypeHandle,
+                    this.FieldType.TypeHandle,
+                    _fieldHandle
+                );
         }
 
         protected sealed override RuntimeTypeInfo FieldRuntimeType

@@ -46,10 +46,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
                 {
                     return memberDeclaration switch
                     {
-                        FieldDeclarationSyntax fieldDeclaration =>
-                            fieldDeclaration.Declaration.Variables.AsImmutable<SyntaxNode>(),
-                        EventFieldDeclarationSyntax eventFieldDeclaration =>
-                            eventFieldDeclaration.Declaration.Variables.AsImmutable<SyntaxNode>(),
+                        FieldDeclarationSyntax fieldDeclaration => fieldDeclaration
+                            .Declaration
+                            .Variables
+                            .AsImmutable<SyntaxNode>(),
+                        EventFieldDeclarationSyntax eventFieldDeclaration => eventFieldDeclaration
+                            .Declaration
+                            .Variables
+                            .AsImmutable<SyntaxNode>(),
                         IncompleteMemberSyntax or GlobalStatementSyntax =>
                             ImmutableArray<SyntaxNode>.Empty,
                         _ => ImmutableArray.Create<SyntaxNode>(memberDeclaration),
@@ -66,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings
                     .GetSyntaxTreeAsync(cancellationToken)
                     .ConfigureAwait(false);
                 var members = await CSharpSelectedMembers
-                    .Instance.GetSelectedMembersAsync(
+                    .Instance
+                    .GetSelectedMembersAsync(
                         tree,
                         span,
                         allowPartialSelection: true,

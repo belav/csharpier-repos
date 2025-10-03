@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateParameterizedMemb
             if (
                 typeToGenerateIn == null
                 || document
-                    .SemanticModel.GetTypeInfo(castExpression.Expression, cancellationToken)
+                    .SemanticModel
+                    .GetTypeInfo(castExpression.Expression, cancellationToken)
                     .Type
                     is not INamedTypeSymbol parameterSymbol
                 || typeToGenerateIn.IsErrorType()

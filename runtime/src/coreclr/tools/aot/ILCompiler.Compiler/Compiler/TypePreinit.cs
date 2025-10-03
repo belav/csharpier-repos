@@ -2537,8 +2537,11 @@ namespace ILCompiler
                         && fieldHandle.Field is Internal.TypeSystem.Ecma.EcmaField ecmaField
                     )
                     {
-                        byte[] rvaData =
-                            Internal.TypeSystem.Ecma.EcmaFieldExtensions.GetFieldRvaData(ecmaField);
+                        byte[] rvaData = Internal
+                            .TypeSystem
+                            .Ecma
+                            .EcmaFieldExtensions
+                            .GetFieldRvaData(ecmaField);
                         return array.TryInitialize(rvaData);
                     }
                     return false;
@@ -2558,10 +2561,11 @@ namespace ILCompiler
                     {
                         var elementType = (MetadataType)method.Instantiation[0];
                         int elementSize = elementType.InstanceFieldSize.AsInt;
-                        byte[] rvaData =
-                            Internal.TypeSystem.Ecma.EcmaFieldExtensions.GetFieldRvaData(
-                                createSpanEcmaField
-                            );
+                        byte[] rvaData = Internal
+                            .TypeSystem
+                            .Ecma
+                            .EcmaFieldExtensions
+                            .GetFieldRvaData(createSpanEcmaField);
                         if (rvaData.Length % elementSize != 0)
                             return false;
                         retVal = new ReadOnlySpanValue(elementType, rvaData, 0, rvaData.Length);
@@ -3206,16 +3210,14 @@ namespace ILCompiler
             )
             {
                 if (
-                    !preinitContext._internedTypes.TryGetValue(
-                        TypeRepresented,
-                        out RuntimeTypeValue result
-                    )
+                    !preinitContext
+                        ._internedTypes
+                        .TryGetValue(TypeRepresented, out RuntimeTypeValue result)
                 )
                 {
-                    preinitContext._internedTypes.Add(
-                        TypeRepresented,
-                        result = new RuntimeTypeValue(TypeRepresented)
-                    );
+                    preinitContext
+                        ._internedTypes
+                        .Add(TypeRepresented, result = new RuntimeTypeValue(TypeRepresented));
                 }
                 return result;
             }
@@ -3588,15 +3590,12 @@ namespace ILCompiler
             {
                 DelegateCreationInfo creationInfo = GetDelegateCreationInfo(factory);
 
-                MethodDesc targetMethod =
-                    creationInfo.PossiblyUnresolvedTargetMethod.GetCanonMethodTarget(
-                        CanonicalFormKind.Specific
-                    );
-                factory.MetadataManager.GetDependenciesDueToDelegateCreation(
-                    ref dependencies,
-                    factory,
-                    targetMethod
-                );
+                MethodDesc targetMethod = creationInfo
+                    .PossiblyUnresolvedTargetMethod
+                    .GetCanonMethodTarget(CanonicalFormKind.Specific);
+                factory
+                    .MetadataManager
+                    .GetDependenciesDueToDelegateCreation(ref dependencies, factory, targetMethod);
             }
 
             public void WriteContent(
@@ -3899,10 +3898,9 @@ namespace ILCompiler
                 string value = ValueAsString;
                 if (!preinitContext._internedStrings.TryGetValue(value, out StringInstance result))
                 {
-                    preinitContext._internedStrings.Add(
-                        value,
-                        result = new StringInstance(Type, value)
-                    );
+                    preinitContext
+                        ._internedStrings
+                        .Add(value, result = new StringInstance(Type, value));
                 }
                 return result;
             }

@@ -26,9 +26,9 @@ namespace System.ServiceModel.ComIntegration
         ComProxy IProxyCreator.CreateProxy(IntPtr outer, ref Guid riid)
         {
             if ((riid != typeof(ITransactionProxy).GUID))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidCastException(SR.GetString(SR.NoInterface, riid))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidCastException(SR.GetString(SR.NoInterface, riid)));
             if (outer == IntPtr.Zero)
             {
                 // transactions require failfasts to prevent corruption
@@ -128,9 +128,9 @@ namespace System.ServiceModel.ComIntegration
                 }
                 else if (this.currentTransaction != transaction)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        Error.TransactionMismatch()
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(Error.TransactionMismatch());
                 }
             }
         }
@@ -250,9 +250,9 @@ namespace System.ServiceModel.ComIntegration
             lock (this.syncRoot)
             {
                 if (this.currentTransaction == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new COMException(null, HR.CONTEXT_E_NOTRANSACTION)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(new COMException(null, HR.CONTEXT_E_NOTRANSACTION));
             }
         }
 
@@ -378,9 +378,11 @@ namespace System.ServiceModel.ComIntegration
             {
                 if (this.preparingEnlistment == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.NoVoteIssued))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(SR.GetString(SR.NoVoteIssued))
+                        );
                 }
 
                 if (S_OK == hr)

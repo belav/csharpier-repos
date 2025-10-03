@@ -15,10 +15,12 @@ namespace System.Web.Http.Internal
         [Fact]
         public void TypeIsCorrect()
         {
-            Assert.Type.HasProperties(
-                typeof(TypeActivator),
-                TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
-            );
+            Assert
+                .Type
+                .HasProperties(
+                    typeof(TypeActivator),
+                    TypeAssert.TypeProperties.IsClass | TypeAssert.TypeProperties.IsStatic
+                );
         }
 
         public static TheoryDataSet<Type, Type> ValidTypeParameters

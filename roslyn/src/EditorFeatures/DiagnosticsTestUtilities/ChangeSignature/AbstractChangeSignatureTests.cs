@@ -150,9 +150,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
                 // Allow testing of invocation document regardless of success/failure
                 if (expectedUpdatedInvocationDocumentCode != null)
                 {
-                    var updatedInvocationDocument = result.UpdatedSolution.GetDocument(
-                        testState.InvocationDocument.Id
-                    );
+                    var updatedInvocationDocument = result
+                        .UpdatedSolution
+                        .GetDocument(testState.InvocationDocument.Id);
                     var updatedCode = (await updatedInvocationDocument.GetTextAsync()).ToString();
                     Assert.Equal(expectedUpdatedInvocationDocumentCode, updatedCode);
                 }

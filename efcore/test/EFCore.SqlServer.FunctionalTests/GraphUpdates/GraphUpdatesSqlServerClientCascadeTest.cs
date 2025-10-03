@@ -26,7 +26,8 @@ public class GraphUpdatesSqlServerClientCascadeTest
 
             foreach (
                 var foreignKey in modelBuilder
-                    .Model.GetEntityTypes()
+                    .Model
+                    .GetEntityTypes()
                     .SelectMany(e => e.GetDeclaredForeignKeys())
                     .Where(e => e.DeleteBehavior == DeleteBehavior.Cascade)
             )

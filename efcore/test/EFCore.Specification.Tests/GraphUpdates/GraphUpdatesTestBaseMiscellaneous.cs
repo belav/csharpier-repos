@@ -2108,14 +2108,16 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
         if (secondLevel2)
         {
-            firstLevel.SecondLaw.Add(
-                new SecondLaw
-                {
-                    SecondLawId = 112,
-                    SecondLawName = "secondLaw2",
-                    FirstLawId = 11,
-                }
-            );
+            firstLevel
+                .SecondLaw
+                .Add(
+                    new SecondLaw
+                    {
+                        SecondLawId = 112,
+                        SecondLawName = "secondLaw2",
+                        FirstLawId = 11,
+                    }
+                );
         }
 
         return firstLevel;
@@ -2132,26 +2134,30 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
 
         if (thirdLevel1)
         {
-            secondLevel.ThirdLaw.Add(
-                new ThirdLaw
-                {
-                    ThirdLawId = 1111,
-                    ThirdLawName = "thirdLaw1",
-                    SecondLawId = 111,
-                }
-            );
+            secondLevel
+                .ThirdLaw
+                .Add(
+                    new ThirdLaw
+                    {
+                        ThirdLawId = 1111,
+                        ThirdLawName = "thirdLaw1",
+                        SecondLawId = 111,
+                    }
+                );
         }
 
         if (thirdLevel2)
         {
-            secondLevel.ThirdLaw.Add(
-                new ThirdLaw
-                {
-                    ThirdLawId = 1112,
-                    ThirdLawName = "thirdLaw2",
-                    SecondLawId = 111,
-                }
-            );
+            secondLevel
+                .ThirdLaw
+                .Add(
+                    new ThirdLaw
+                    {
+                        ThirdLawId = 1112,
+                        ThirdLawName = "thirdLaw2",
+                        SecondLawId = 111,
+                    }
+                );
         }
 
         return secondLevel;

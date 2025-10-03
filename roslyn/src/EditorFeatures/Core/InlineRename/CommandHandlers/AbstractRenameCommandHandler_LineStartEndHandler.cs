@@ -78,10 +78,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             if (caretPoint.HasValue)
             {
                 if (
-                    _renameService.ActiveSession.TryGetContainingEditableSpan(
-                        caretPoint.Value,
-                        out var span
-                    )
+                    _renameService
+                        .ActiveSession
+                        .TryGetContainingEditableSpan(caretPoint.Value, out var span)
                 )
                 {
                     var newPoint = lineStart ? span.Start : span.End;

@@ -78,10 +78,9 @@ namespace System.Activities.Core.Presentation
             {
                 if (clonedFlowElements.ContainsKey(currentFlowSwitch.Cases[key]))
                 {
-                    clonedFlowSwitch.Cases.Add(
-                        key,
-                        clonedFlowElements[currentFlowSwitch.Cases[key]]
-                    );
+                    clonedFlowSwitch
+                        .Cases
+                        .Add(key, clonedFlowElements[currentFlowSwitch.Cases[key]]);
                 }
             }
         }

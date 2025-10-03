@@ -51,9 +51,9 @@ namespace System.IdentityModel.Tokens
         {
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityKeyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
             return securityKeyIdentifierClause is X509IssuerSerialKeyIdentifierClause
@@ -156,9 +156,9 @@ namespace System.IdentityModel.Tokens
 
             if (securityKeyIdentifierClause == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityKeyIdentifierClause"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityKeyIdentifierClause");
             }
 
             X509IssuerSerialKeyIdentifierClause issuerSerialClause =
@@ -259,10 +259,12 @@ namespace System.IdentityModel.Tokens
                 return;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                "securityKeyIdentifierClause",
-                SR.GetString(SR.ID4259, securityKeyIdentifierClause.GetType())
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperArgument(
+                    "securityKeyIdentifierClause",
+                    SR.GetString(SR.ID4259, securityKeyIdentifierClause.GetType())
+                );
         }
 
         /// <summary>

@@ -1366,10 +1366,9 @@ namespace System.DirectoryServices.ActiveDirectory
                 int*,
                 IntPtr*,
                 int>)
-                global::Interop.Kernel32.GetProcAddress(
-                    DirectoryContext.ADHandle,
-                    "DsGetDomainControllerInfoW"
-                );
+                global::Interop
+                    .Kernel32
+                    .GetProcAddress(DirectoryContext.ADHandle, "DsGetDomainControllerInfoW");
             if (dsGetDomainControllerInfo == null)
             {
                 throw ExceptionHelper.GetExceptionFromErrorCode(Marshal.GetLastPInvokeError());
@@ -1486,10 +1485,12 @@ namespace System.DirectoryServices.ActiveDirectory
                             int,
                             IntPtr,
                             void>)
-                            global::Interop.Kernel32.GetProcAddress(
-                                DirectoryContext.ADHandle,
-                                "DsFreeDomainControllerInfoW"
-                            );
+                            global::Interop
+                                .Kernel32
+                                .GetProcAddress(
+                                    DirectoryContext.ADHandle,
+                                    "DsFreeDomainControllerInfoW"
+                                );
                         if (dsFreeDomainControllerInfo == null)
                         {
                             throw ExceptionHelper.GetExceptionFromErrorCode(
@@ -1633,10 +1634,9 @@ namespace System.DirectoryServices.ActiveDirectory
                     {
                         // call DsFreeNameResult
                         var dsFreeNameResult = (delegate* unmanaged<IntPtr, void>)
-                            global::Interop.Kernel32.GetProcAddress(
-                                DirectoryContext.ADHandle,
-                                "DsFreeNameResultW"
-                            );
+                            global::Interop
+                                .Kernel32
+                                .GetProcAddress(DirectoryContext.ADHandle, "DsFreeNameResultW");
                         if (dsFreeNameResult == null)
                         {
                             throw ExceptionHelper.GetExceptionFromErrorCode(

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             var contextBuilderSource = context
-                .CompilationProvider.Select((c, _) => new GeneratorContextBuilder(c))
+                .CompilationProvider
+                .Select((c, _) => new GeneratorContextBuilder(c))
                 .Combine(context.ParseOptionsProvider)
                 .Select((p, _) => p.Item1 with { ParseOptions = p.Item2 })
                 .Combine(context.AnalyzerConfigOptionsProvider)
@@ -54,9 +55,9 @@ namespace Microsoft.CodeAnalysis
             {
                 contextBuilderSource = contextBuilderSource
                     .Combine(
-                        context.SyntaxProvider.CreateSyntaxReceiverProvider(
-                            syntaxContextReceiverCreator
-                        )
+                        context
+                            .SyntaxProvider
+                            .CreateSyntaxReceiverProvider(syntaxContextReceiverCreator)
                     )
                     .Select((p, _) => p.Item1 with { Receiver = p.Item2 });
             }

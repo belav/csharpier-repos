@@ -75,10 +75,9 @@ namespace ILLink.RoslynAnalyzer
             if (isDynamicCodeSupportedProperty == null)
                 return false;
 
-            return SymbolEqualityComparer.Default.Equals(
-                propertySymbol,
-                isDynamicCodeSupportedProperty
-            );
+            return SymbolEqualityComparer
+                .Default
+                .Equals(propertySymbol, isDynamicCodeSupportedProperty);
         }
 
         protected override bool VerifyAttributeArguments(AttributeData attribute) =>

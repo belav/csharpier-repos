@@ -69,7 +69,8 @@ namespace Mono.Linker
                 sb.Append(
                     method
                         .Parameters[method.Parameters.Count - 1]
-                        .ParameterType.GetDisplayNameWithoutNamespace()
+                        .ParameterType
+                        .GetDisplayNameWithoutNamespace()
                 );
 #pragma warning restore RS0030 // Do not used banned APIs
             }

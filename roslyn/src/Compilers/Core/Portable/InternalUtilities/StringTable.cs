@@ -707,10 +707,12 @@ namespace Roslyn.Utilities
             foreach (var chunk in text.GetChunks())
             {
                 if (
-                    !chunk.Span.Equals(
-                        array.AsSpan().Slice(chunkOffset, chunk.Length),
-                        StringComparison.Ordinal
-                    )
+                    !chunk
+                        .Span
+                        .Equals(
+                            array.AsSpan().Slice(chunkOffset, chunk.Length),
+                            StringComparison.Ordinal
+                        )
                 )
                     return false;
 

@@ -221,9 +221,11 @@ namespace System.Speech.Recognition
                 // If the grammar is actually loaded then update its state in sapi.
                 if (grammar.Loaded)
                 {
-                    grammarData._sapiGrammar.SetGrammarState(
-                        enabled ? SPGRAMMARSTATE.SPGS_ENABLED : SPGRAMMARSTATE.SPGS_DISABLED
-                    );
+                    grammarData
+                        ._sapiGrammar
+                        .SetGrammarState(
+                            enabled ? SPGRAMMARSTATE.SPGS_ENABLED : SPGRAMMARSTATE.SPGS_DISABLED
+                        );
                 }
 
                 // Otherwise just update the local copy so it gets set correctly when Loaded.

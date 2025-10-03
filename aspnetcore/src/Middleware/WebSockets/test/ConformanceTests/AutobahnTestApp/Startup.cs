@@ -20,9 +20,11 @@ public class Startup
                 {
                     logger.LogInformation("Received WebSocket request");
                     using (
-                        var webSocket = await context.WebSockets.AcceptWebSocketAsync(
-                            new WebSocketAcceptContext() { DangerousEnableCompression = true }
-                        )
+                        var webSocket = await context
+                            .WebSockets
+                            .AcceptWebSocketAsync(
+                                new WebSocketAcceptContext() { DangerousEnableCompression = true }
+                            )
                     )
                     {
                         await Echo(webSocket, context.RequestAborted);
@@ -33,9 +35,9 @@ public class Startup
                     var wsScheme = context.Request.IsHttps ? "wss" : "ws";
                     var wsUrl =
                         $"{wsScheme}://{context.Request.Host.Host}:{context.Request.Host.Port}{context.Request.Path}";
-                    await context.Response.WriteAsync(
-                        $"Ready to accept a WebSocket request at: {wsUrl}"
-                    );
+                    await context
+                        .Response
+                        .WriteAsync($"Ready to accept a WebSocket request at: {wsUrl}");
                 }
             }
         );

@@ -31,7 +31,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         {
             var token = Subject[expected];
             Execute
-                .Assertion.ForCondition(token != null)
+                .Assertion
+                .ForCondition(token != null)
                 .FailWith("Expected {0} to have property '{1}'", Subject, expected);
 
             return new AndWhichConstraint<JsonAssertions, JToken>(this, token);
@@ -41,7 +42,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
         {
             var token = Subject[expected];
             Execute
-                .Assertion.ForCondition(token == null)
+                .Assertion
+                .ForCondition(token == null)
                 .FailWith("Expected {0} to have property '{1}'", Subject, expected);
 
             return new AndConstraint<JsonAssertions>(this);

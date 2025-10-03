@@ -52,7 +52,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
             // we try, if it fails to load let the exception to propagate up to the caller.
             foreach (
                 var version in EntityFrameworkVersions
-                    .ValidVersions.Where(v => v > EntityFrameworkVersions.Version2)
+                    .ValidVersions
+                    .Where(v => v > EntityFrameworkVersions.Version2)
                     .OrderByDescending(v => v)
             )
             {

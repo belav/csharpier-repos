@@ -245,7 +245,8 @@ public class AuthorizeViewTest
         renderer.AssignRootComponentId(rootComponent);
         rootComponent.TriggerRender();
         var authorizeViewComponentId = renderer
-            .Batches.Single()
+            .Batches
+            .Single()
             .GetComponentFrames<AuthorizeView>()
             .Single()
             .ComponentId;

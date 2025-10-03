@@ -1403,7 +1403,8 @@ namespace MonoTests.System.Text
             catch (ArgumentOutOfRangeException) { }
 
             int charactersWritten = Encoding
-                .UTF8.GetDecoder()
+                .UTF8
+                .GetDecoder()
                 .GetChars(bytes, 0, 0, chars, 10, false);
             Assert.AreEqual(0, charactersWritten, "#3");
         }

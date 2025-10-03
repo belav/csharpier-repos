@@ -47,10 +47,10 @@ namespace System.Data.OleDb.Tests
                     !PlatformDetection.Is32BitProcess
                     && providerNames.Contains(ExpectedProviderName);
                 if (
-                    !CultureInfo.CurrentCulture.Name.Equals(
-                        "en-US",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+                    !CultureInfo
+                        .CurrentCulture
+                        .Name
+                        .Equals("en-US", StringComparison.OrdinalIgnoreCase)
                 )
                 {
                     IsAvailable = false; // ActiveIssue: https://github.com/dotnet/runtime/issues/29969

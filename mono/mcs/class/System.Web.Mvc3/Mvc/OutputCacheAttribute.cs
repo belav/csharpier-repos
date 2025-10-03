@@ -167,11 +167,10 @@
             uniqueIdBuilder.Append(DescriptorUtil.CreateUniqueId(VaryByCustom));
             if (!String.IsNullOrEmpty(VaryByCustom))
             {
-                string varyByCustomResult =
-                    filterContext.HttpContext.ApplicationInstance.GetVaryByCustomString(
-                        HttpContext.Current,
-                        VaryByCustom
-                    );
+                string varyByCustomResult = filterContext
+                    .HttpContext
+                    .ApplicationInstance
+                    .GetVaryByCustomString(HttpContext.Current, VaryByCustom);
                 uniqueIdBuilder.Append(varyByCustomResult);
             }
 

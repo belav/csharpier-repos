@@ -40,9 +40,9 @@ namespace System.ServiceModel.Security
 
             if (requestSecurityTokenResponse == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestSecurityTokenResponse"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("requestSecurityTokenResponse");
             }
 
             if (context == null)

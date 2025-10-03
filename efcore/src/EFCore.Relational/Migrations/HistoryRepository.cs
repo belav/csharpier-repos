@@ -94,11 +94,9 @@ public abstract class HistoryRepository : IHistoryRepository
                 x.ToTable(TableName, TableSchema);
             });
 
-            _model = Dependencies.ModelRuntimeInitializer.Initialize(
-                (IModel)modelBuilder.Model,
-                designTime: true,
-                validationLogger: null
-            );
+            _model = Dependencies
+                .ModelRuntimeInitializer
+                .Initialize((IModel)modelBuilder.Model, designTime: true, validationLogger: null);
         }
 
         return _model;
@@ -126,7 +124,8 @@ public abstract class HistoryRepository : IHistoryRepository
         Dependencies.DatabaseCreator.Exists()
         && InterpretExistsResult(
             Dependencies
-                .RawSqlCommandBuilder.Build(ExistsSql)
+                .RawSqlCommandBuilder
+                .Build(ExistsSql)
                 .ExecuteScalar(
                     new RelationalCommandParameterObject(
                         Dependencies.Connection,
@@ -152,7 +151,8 @@ public abstract class HistoryRepository : IHistoryRepository
         await Dependencies.DatabaseCreator.ExistsAsync(cancellationToken).ConfigureAwait(false)
         && InterpretExistsResult(
             await Dependencies
-                .RawSqlCommandBuilder.Build(ExistsSql)
+                .RawSqlCommandBuilder
+                .Build(ExistsSql)
                 .ExecuteScalarAsync(
                     new RelationalCommandParameterObject(
                         Dependencies.Connection,

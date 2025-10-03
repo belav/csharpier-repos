@@ -116,13 +116,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         // All operation blocks for a symbol belong to the same tree.
                         var firstBlock = context.OperationBlocks[0];
                         if (
-                            !symbolStartAnalyzer._compilationAnalyzer.TryGetOptions(
-                                firstBlock.Syntax.SyntaxTree,
-                                context.Options,
-                                context.Compilation.Options,
-                                context.CancellationToken,
-                                out options
-                            )
+                            !symbolStartAnalyzer
+                                ._compilationAnalyzer
+                                .TryGetOptions(
+                                    firstBlock.Syntax.SyntaxTree,
+                                    context.Options,
+                                    context.Compilation.Options,
+                                    context.CancellationToken,
+                                    out options
+                                )
                         )
                         {
                             return false;
@@ -154,12 +156,15 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             Contract.ThrowIfNull(
                                 symbolStartAnalyzer._symbolStartAnalysisContext.FilterTree
                             );
-                            var root = firstBlock.Syntax.SyntaxTree.GetRoot(
-                                context.CancellationToken
-                            );
+                            var root = firstBlock
+                                .Syntax
+                                .SyntaxTree
+                                .GetRoot(context.CancellationToken);
                             var spanStart = firstBlock.Syntax.SpanStart;
-                            var memberDecl =
-                                symbolStartAnalyzer._compilationAnalyzer.SyntaxFacts.GetContainingMemberDeclaration(
+                            var memberDecl = symbolStartAnalyzer
+                                ._compilationAnalyzer
+                                .SyntaxFacts
+                                .GetContainingMemberDeclaration(
                                     root,
                                     spanStart,
                                     useFullSpan: false
@@ -177,7 +182,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         {
                             if (
                                 operationBlock
-                                    .Syntax.GetDiagnostics()
+                                    .Syntax
+                                    .GetDiagnostics()
                                     .ToImmutableArrayOrEmpty()
                                     .HasAnyErrors()
                             )
@@ -193,7 +199,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         {
                             if (
                                 operationBlock
-                                    .Syntax.DescendantNodes(descendIntoTrivia: true)
+                                    .Syntax
+                                    .DescendantNodes(descendIntoTrivia: true)
                                     .Any(
                                         symbolStartAnalyzer
                                             ._compilationAnalyzer
@@ -259,12 +266,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     //     an invocation by prefixing the invocation with keyword "Call".
                     //     Similarly, we do not want to flag an expression of a C# expression body.
                     if (
-                        _symbolStartAnalyzer._compilationAnalyzer.IsCallStatement(
-                            expressionStatement
-                        )
-                        || _symbolStartAnalyzer._compilationAnalyzer.IsExpressionOfExpressionBody(
-                            expressionStatement
-                        )
+                        _symbolStartAnalyzer
+                            ._compilationAnalyzer
+                            .IsCallStatement(expressionStatement)
+                        || _symbolStartAnalyzer
+                            ._compilationAnalyzer
+                            .IsExpressionOfExpressionBody(expressionStatement)
                     )
                     {
                         return;
@@ -540,9 +547,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                         owningSymbol is IMethodSymbol method
                         && (
                             method.ReturnType.IsDelegateType()
-                            || method.Parameters.Any(static p =>
-                                p.IsRefOrOut() && p.Type.IsDelegateType()
-                            )
+                            || method
+                                .Parameters
+                                .Any(static p => p.IsRefOrOut() && p.Type.IsDelegateType())
                         )
                     )
                     {
@@ -695,9 +702,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                                     && unusedParameter.ContainingSymbol.IsLocalFunction()
                                 )
                                 {
-                                    var hasReference = symbolUsageResult.SymbolsRead.Contains(
-                                        unusedParameter
-                                    );
+                                    var hasReference = symbolUsageResult
+                                        .SymbolsRead
+                                        .Contains(unusedParameter);
 
                                     bool shouldReport;
                                     switch (unusedParameter.RefKind)
@@ -750,9 +757,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                             {
                                 var diagnostic = DiagnosticHelper.Create(
                                     s_valueAssignedIsUnusedRule,
-                                    _symbolStartAnalyzer._compilationAnalyzer.GetDefinitionLocationToFade(
-                                        unreadWriteOperation
-                                    ),
+                                    _symbolStartAnalyzer
+                                        ._compilationAnalyzer
+                                        .GetDefinitionLocationToFade(unreadWriteOperation),
                                     _options.UnusedValueAssignmentSeverity,
                                     additionalLocations: null,
                                     properties,
@@ -832,9 +839,11 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                     )
                     {
                         if (
-                            _symbolStartAnalyzer._compilationAnalyzer.ShouldBailOutFromRemovableAssignmentAnalysis(
-                                unusedSymbolWriteOperation
-                            )
+                            _symbolStartAnalyzer
+                                ._compilationAnalyzer
+                                .ShouldBailOutFromRemovableAssignmentAnalysis(
+                                    unusedSymbolWriteOperation
+                                )
                         )
                         {
                             return false;

@@ -206,7 +206,8 @@ class GeneratedClass { }
             Assert.NotEqual(compilation, outputCompilation);
 
             var generatedClass = outputCompilation
-                .GlobalNamespace.GetTypeMembers("GeneratedClass")
+                .GlobalNamespace
+                .GetTypeMembers("GeneratedClass")
                 .Single();
             Assert.True(generatedClass.Locations.Single().IsInSource);
         }
@@ -667,10 +668,10 @@ class C { }
                 isEnabledByDefault: true,
                 description: description
             );
-            var diagnostic = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic,
-                Location.None
-            );
+            var diagnostic = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(generatorDiagnostic, Location.None);
 
             var generator = new CallbackGenerator(
                 (ic) => { },
@@ -1050,18 +1051,18 @@ class C { }
                 description: description
             );
 
-            var diagnostic1 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic1,
-                Location.None
-            );
-            var diagnostic2 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic2,
-                Location.None
-            );
-            var diagnostic3 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic3,
-                Location.None
-            );
+            var diagnostic1 = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(generatorDiagnostic1, Location.None);
+            var diagnostic2 = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(generatorDiagnostic2, Location.None);
+            var diagnostic3 = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(generatorDiagnostic3, Location.None);
 
             var generator = new CallbackGenerator(
                 (ic) => { },
@@ -1151,18 +1152,18 @@ class C { }
                 description: description
             );
 
-            var diagnostic1 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic1,
-                Location.None
-            );
-            var diagnostic2 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic2,
-                Location.None
-            );
-            var diagnostic3 = Microsoft.CodeAnalysis.Diagnostic.Create(
-                generatorDiagnostic3,
-                Location.None
-            );
+            var diagnostic1 = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(generatorDiagnostic1, Location.None);
+            var diagnostic2 = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(generatorDiagnostic2, Location.None);
+            var diagnostic3 = Microsoft
+                .CodeAnalysis
+                .Diagnostic
+                .Create(generatorDiagnostic3, Location.None);
 
             var generator = new CallbackGenerator(
                 (ic) => { },
@@ -2664,7 +2665,8 @@ class C { }
                 new PipelineCallbackGenerator(ctx =>
                 {
                     ctx.RegisterSourceOutput(
-                        ctx.CompilationProvider.Select((c, ct) => c)
+                        ctx.CompilationProvider
+                            .Select((c, ct) => c)
                             .WithTrackingName("IdentityTransform"),
                         (spc, c) => { }
                     );
@@ -2749,13 +2751,15 @@ class C { }
                 new PipelineCallbackGenerator(ctx =>
                 {
                     ctx.RegisterSourceOutput(
-                        ctx.CompilationProvider.Select((c, ct) => c)
+                        ctx.CompilationProvider
+                            .Select((c, ct) => c)
                             .WithTrackingName("CompilationTransform"),
                         (spc, c) => { }
                     );
 
                     ctx.RegisterSourceOutput(
-                        ctx.AdditionalTextsProvider.Select((at, ct) => at)
+                        ctx.AdditionalTextsProvider
+                            .Select((at, ct) => at)
                             .WithTrackingName("AdditionalTextsTransform"),
                         (spc, at) => { }
                     );
@@ -3152,8 +3156,8 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    var compilationSource = ctx
-                        .CompilationProvider.Combine(ctx.AdditionalTextsProvider.Collect())
+                    var compilationSource = ctx.CompilationProvider
+                        .Combine(ctx.AdditionalTextsProvider.Collect())
                         // comparer that ignores the LHS (additional texts)
                         .WithComparer(
                             new LambdaComparer<(Compilation, ImmutableArray<AdditionalText>)>(
@@ -3362,8 +3366,8 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(static ctx =>
                 {
-                    var invokedMethodsProvider = ctx
-                        .SyntaxProvider.CreateSyntaxProvider(
+                    var invokedMethodsProvider = ctx.SyntaxProvider
+                        .CreateSyntaxProvider(
                             static (node, _) => node is InvocationExpressionSyntax,
                             static (ctx, ct) =>
                                 ctx.SemanticModel.GetSymbolInfo(ctx.Node, ct).Symbol?.Name
@@ -3471,8 +3475,8 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(static ctx =>
                 {
-                    var invokedMethodsProvider = ctx
-                        .SyntaxProvider.CreateSyntaxProvider(
+                    var invokedMethodsProvider = ctx.SyntaxProvider
+                        .CreateSyntaxProvider(
                             static (node, _) => node is InvocationExpressionSyntax,
                             static (ctx, ct) =>
                                 ctx.SemanticModel.GetSymbolInfo(ctx.Node, ct).Symbol?.Name
@@ -3608,8 +3612,8 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(static ctx =>
                 {
-                    var invokedMethodsProvider = ctx
-                        .SyntaxProvider.CreateSyntaxProvider(
+                    var invokedMethodsProvider = ctx.SyntaxProvider
+                        .CreateSyntaxProvider(
                             static (node, _) => node is InvocationExpressionSyntax,
                             static (ctx, ct) =>
                                 ctx.SemanticModel.GetSymbolInfo(ctx.Node, ct).Symbol?.Name
@@ -3690,7 +3694,8 @@ class C { }
                 },
                 driver
                     .GetRunResult()
-                    .Results.Single()
+                    .Results
+                    .Single()
                     .TrackedSteps["Select"]
                     .Select(r => r.Outputs.Single())
             );
@@ -3716,7 +3721,8 @@ class C { }
                 },
                 driver
                     .GetRunResult()
-                    .Results.Single()
+                    .Results
+                    .Single()
                     .TrackedSteps["Select"]
                     .Select(r => r.Outputs.Single())
             );
@@ -3778,8 +3784,8 @@ class C { }
                     {
                         ctx.RegisterPostInitializationOutput(c => c.AddSource("a", "class D {}"));
 
-                        var input = ctx
-                            .SyntaxProvider.CreateSyntaxProvider(
+                        var input = ctx.SyntaxProvider
+                            .CreateSyntaxProvider(
                                 static (n, _) => n is ClassDeclarationSyntax,
                                 (gsc, _) => (ClassDeclarationSyntax)gsc.Node
                             )
@@ -4027,12 +4033,13 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = ctx
-                        .SyntaxProvider.CreateSyntaxProvider(
-                            static (s, t) => isSyntaxTargetForGeneration(s),
-                            static (context, ct) => getSemanticTargetForGeneration(context, ct)
-                        )
-                        .Where(static c => c is not null)!;
+                    IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations =
+                        ctx.SyntaxProvider
+                            .CreateSyntaxProvider(
+                                static (s, t) => isSyntaxTargetForGeneration(s),
+                                static (context, ct) => getSemanticTargetForGeneration(context, ct)
+                            )
+                            .Where(static c => c is not null)!;
 
                     IncrementalValueProvider<(
                         Compilation,
@@ -4127,7 +4134,8 @@ class C { }
                 new PipelineCallbackGenerator(ctx =>
                 {
                     ctx.RegisterSourceOutput(
-                        ctx.AnalyzerConfigOptionsProvider.Select(
+                        ctx.AnalyzerConfigOptionsProvider
+                            .Select(
                                 (p, ct) =>
                                 {
                                     p.GlobalOptions.TryGetValue(
@@ -4256,7 +4264,8 @@ class C { }
                 new PipelineCallbackGenerator(ctx =>
                 {
                     ctx.RegisterSourceOutput(
-                        ctx.AdditionalTextsProvider.Select((t, _) => t.Path)
+                        ctx.AdditionalTextsProvider
+                            .Select((t, _) => t.Path)
                             .WithTrackingName("Paths"),
                         (spc, p) => { }
                     );
@@ -4890,7 +4899,8 @@ class C { }
             var generator = new PipelineCallbackGenerator(ctx =>
             {
                 ctx.RegisterSourceOutput(
-                    ctx.SyntaxProvider.CreateSyntaxProvider(
+                    ctx.SyntaxProvider
+                        .CreateSyntaxProvider(
                             (node, ct) => node is ClassDeclarationSyntax c,
                             (context, ct) => context.Node
                         )
@@ -5097,7 +5107,8 @@ public static readonly string F = ""a""
             var generator = new PipelineCallbackGenerator(ctx =>
             {
                 ctx.RegisterSourceOutput(
-                    ctx.SyntaxProvider.CreateSyntaxProvider(
+                    ctx.SyntaxProvider
+                        .CreateSyntaxProvider(
                             (node, ct) => node is ClassDeclarationSyntax c,
                             (context, ct) => context.Node
                         )
@@ -5584,16 +5595,18 @@ class D {  (int, bool) _field; }";
                             path: "/detached"
                         );
                         ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    "TEST0001",
+                                    "Test",
+                                    "Test diagnostic",
+                                    DiagnosticSeverity.Warning,
+                                    DiagnosticSeverity.Warning,
+                                    isEnabledByDefault: true,
+                                    warningLevel: 1,
+                                    location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
+                                )
                         );
                     }
                 );
@@ -5643,23 +5656,28 @@ class D {  (int, bool) _field; }";
                             path: "/detached"
                         );
                         ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(
-                                    validSyntaxTree,
-                                    TextSpan.FromBounds(0, 2)
-                                ),
-                                additionalLocations: new[]
-                                {
-                                    Location.Create(invalidSyntaxTree, TextSpan.FromBounds(0, 2)),
-                                }
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    "TEST0001",
+                                    "Test",
+                                    "Test diagnostic",
+                                    DiagnosticSeverity.Warning,
+                                    DiagnosticSeverity.Warning,
+                                    isEnabledByDefault: true,
+                                    warningLevel: 1,
+                                    location: Location.Create(
+                                        validSyntaxTree,
+                                        TextSpan.FromBounds(0, 2)
+                                    ),
+                                    additionalLocations: new[]
+                                    {
+                                        Location.Create(
+                                            invalidSyntaxTree,
+                                            TextSpan.FromBounds(0, 2)
+                                        ),
+                                    }
+                                )
                         );
                     }
                 );
@@ -5706,16 +5724,18 @@ class D {  (int, bool) _field; }";
                         path: "/detached"
                     );
                     ctx.ReportDiagnostic(
-                        CodeAnalysis.Diagnostic.Create(
-                            "TEST0001",
-                            "Test",
-                            "Test diagnostic",
-                            DiagnosticSeverity.Warning,
-                            DiagnosticSeverity.Warning,
-                            isEnabledByDefault: true,
-                            warningLevel: 1,
-                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
-                        )
+                        CodeAnalysis
+                            .Diagnostic
+                            .Create(
+                                "TEST0001",
+                                "Test",
+                                "Test diagnostic",
+                                DiagnosticSeverity.Warning,
+                                DiagnosticSeverity.Warning,
+                                isEnabledByDefault: true,
+                                warningLevel: 1,
+                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
+                            )
                     );
                 }
             );
@@ -5762,20 +5782,25 @@ class D {  (int, bool) _field; }";
                         path: "/detached"
                     );
                     ctx.ReportDiagnostic(
-                        CodeAnalysis.Diagnostic.Create(
-                            "TEST0001",
-                            "Test",
-                            "Test diagnostic",
-                            DiagnosticSeverity.Warning,
-                            DiagnosticSeverity.Warning,
-                            isEnabledByDefault: true,
-                            warningLevel: 1,
-                            location: Location.Create(validSyntaxTree, TextSpan.FromBounds(0, 2)),
-                            additionalLocations: new[]
-                            {
-                                Location.Create(invalidSyntaxTree, TextSpan.FromBounds(0, 2)),
-                            }
-                        )
+                        CodeAnalysis
+                            .Diagnostic
+                            .Create(
+                                "TEST0001",
+                                "Test",
+                                "Test diagnostic",
+                                DiagnosticSeverity.Warning,
+                                DiagnosticSeverity.Warning,
+                                isEnabledByDefault: true,
+                                warningLevel: 1,
+                                location: Location.Create(
+                                    validSyntaxTree,
+                                    TextSpan.FromBounds(0, 2)
+                                ),
+                                additionalLocations: new[]
+                                {
+                                    Location.Create(invalidSyntaxTree, TextSpan.FromBounds(0, 2)),
+                                }
+                            )
                     );
                 }
             );
@@ -5820,16 +5845,21 @@ class D {  (int, bool) _field; }";
                     {
                         var syntaxTree = comp.SyntaxTrees.Single();
                         ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 100))
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    "TEST0001",
+                                    "Test",
+                                    "Test diagnostic",
+                                    DiagnosticSeverity.Warning,
+                                    DiagnosticSeverity.Warning,
+                                    isEnabledByDefault: true,
+                                    warningLevel: 1,
+                                    location: Location.Create(
+                                        syntaxTree,
+                                        TextSpan.FromBounds(0, 100)
+                                    )
+                                )
                         );
                     }
                 );
@@ -5875,20 +5905,25 @@ class D {  (int, bool) _field; }";
                     {
                         var syntaxTree = comp.SyntaxTrees.Single();
                         ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2)),
-                                additionalLocations: new[]
-                                {
-                                    Location.Create(syntaxTree, TextSpan.FromBounds(0, 100)),
-                                }
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    "TEST0001",
+                                    "Test",
+                                    "Test diagnostic",
+                                    DiagnosticSeverity.Warning,
+                                    DiagnosticSeverity.Warning,
+                                    isEnabledByDefault: true,
+                                    warningLevel: 1,
+                                    location: Location.Create(
+                                        syntaxTree,
+                                        TextSpan.FromBounds(0, 2)
+                                    ),
+                                    additionalLocations: new[]
+                                    {
+                                        Location.Create(syntaxTree, TextSpan.FromBounds(0, 100)),
+                                    }
+                                )
                         );
                     }
                 );
@@ -5932,16 +5967,18 @@ class D {  (int, bool) _field; }";
                 {
                     var syntaxTree = ctx.Compilation.SyntaxTrees.Single();
                     ctx.ReportDiagnostic(
-                        CodeAnalysis.Diagnostic.Create(
-                            "TEST0001",
-                            "Test",
-                            "Test diagnostic",
-                            DiagnosticSeverity.Warning,
-                            DiagnosticSeverity.Warning,
-                            isEnabledByDefault: true,
-                            warningLevel: 1,
-                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 100))
-                        )
+                        CodeAnalysis
+                            .Diagnostic
+                            .Create(
+                                "TEST0001",
+                                "Test",
+                                "Test diagnostic",
+                                DiagnosticSeverity.Warning,
+                                DiagnosticSeverity.Warning,
+                                isEnabledByDefault: true,
+                                warningLevel: 1,
+                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 100))
+                            )
                     );
                 }
             );
@@ -5984,20 +6021,22 @@ class D {  (int, bool) _field; }";
                 {
                     var syntaxTree = ctx.Compilation.SyntaxTrees.Single();
                     ctx.ReportDiagnostic(
-                        CodeAnalysis.Diagnostic.Create(
-                            "TEST0001",
-                            "Test",
-                            "Test diagnostic",
-                            DiagnosticSeverity.Warning,
-                            DiagnosticSeverity.Warning,
-                            isEnabledByDefault: true,
-                            warningLevel: 1,
-                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2)),
-                            additionalLocations: new[]
-                            {
-                                Location.Create(syntaxTree, TextSpan.FromBounds(0, 100)),
-                            }
-                        )
+                        CodeAnalysis
+                            .Diagnostic
+                            .Create(
+                                "TEST0001",
+                                "Test",
+                                "Test diagnostic",
+                                DiagnosticSeverity.Warning,
+                                DiagnosticSeverity.Warning,
+                                isEnabledByDefault: true,
+                                warningLevel: 1,
+                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2)),
+                                additionalLocations: new[]
+                                {
+                                    Location.Create(syntaxTree, TextSpan.FromBounds(0, 100)),
+                                }
+                            )
                     );
                 }
             );
@@ -6041,16 +6080,18 @@ class D {  (int, bool) _field; }";
                     {
                         var syntaxTree = comp.SyntaxTrees.Single();
                         ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST 0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
-                            )
+                            CodeAnalysis
+                                .Diagnostic
+                                .Create(
+                                    "TEST 0001",
+                                    "Test",
+                                    "Test diagnostic",
+                                    DiagnosticSeverity.Warning,
+                                    DiagnosticSeverity.Warning,
+                                    isEnabledByDefault: true,
+                                    warningLevel: 1,
+                                    location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
+                                )
                         );
                     }
                 );
@@ -6093,16 +6134,18 @@ class D {  (int, bool) _field; }";
                 {
                     var syntaxTree = ctx.Compilation.SyntaxTrees.Single();
                     ctx.ReportDiagnostic(
-                        CodeAnalysis.Diagnostic.Create(
-                            "TEST 0001",
-                            "Test",
-                            "Test diagnostic",
-                            DiagnosticSeverity.Warning,
-                            DiagnosticSeverity.Warning,
-                            isEnabledByDefault: true,
-                            warningLevel: 1,
-                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
-                        )
+                        CodeAnalysis
+                            .Diagnostic
+                            .Create(
+                                "TEST 0001",
+                                "Test",
+                                "Test diagnostic",
+                                DiagnosticSeverity.Warning,
+                                DiagnosticSeverity.Warning,
+                                isEnabledByDefault: true,
+                                warningLevel: 1,
+                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
+                            )
                     );
                 }
             );
@@ -6319,8 +6362,8 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    var provider = ctx
-                        .SyntaxProvider.CreateSyntaxProvider(
+                    var provider = ctx.SyntaxProvider
+                        .CreateSyntaxProvider(
                             static (node, _) => node is ClassDeclarationSyntax c,
                             static (gsc, _) => gsc.Node
                         )
@@ -6404,7 +6447,8 @@ class C { }
             {
                 var tree = compilation
                     .GetMember(className)
-                    .DeclaringSyntaxReferences.Single()
+                    .DeclaringSyntaxReferences
+                    .Single()
                     .SyntaxTree;
                 compilation = compilation.ReplaceSyntaxTree(
                     tree,

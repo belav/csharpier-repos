@@ -60,14 +60,15 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
                 var invocation = (IInvocationOperation)context.Operation;
 
                 if (
-                    SymbolEqualityComparer.Default.Equals(
-                        invocation.TargetMethod,
-                        addAuthorizationMethod
-                    )
-                    && SymbolEqualityComparer.Default.Equals(
-                        invocation.TargetMethod.ContainingType,
-                        policyServiceCollectionExtensions
-                    )
+                    SymbolEqualityComparer
+                        .Default
+                        .Equals(invocation.TargetMethod, addAuthorizationMethod)
+                    && SymbolEqualityComparer
+                        .Default
+                        .Equals(
+                            invocation.TargetMethod.ContainingType,
+                            policyServiceCollectionExtensions
+                        )
                     && IsLastCallInChain(invocation)
                     && IsCompatibleWithAuthorizationBuilder(invocation, authorizationOptionsTypes)
                 )
@@ -102,9 +103,8 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
         {
             // Ensure that the child operations of the configuration action passed to AddAuthorization are all related to AuthorizationOptions.
             var allOperationsInvolveAuthorizationOptions = configureBlockOperation
-                .ChildOperations.Where(operation =>
-                    operation is not IReturnOperation { IsImplicit: true }
-                )
+                .ChildOperations
+                .Where(operation => operation is not IReturnOperation { IsImplicit: true })
                 .All(operation =>
                     DoesOperationInvolveAuthorizationOptions(operation, authorizationOptionsTypes)
                 );
@@ -218,10 +218,12 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
                             Property.ContainingType: { } propertyReferenceContainingType
                         }
                     }
-                && SymbolEqualityComparer.Default.Equals(
-                    propertyReferenceContainingType,
-                    authorizationOptionsTypes.AuthorizationOptions
-                )
+                && SymbolEqualityComparer
+                    .Default
+                    .Equals(
+                        propertyReferenceContainingType,
+                        authorizationOptionsTypes.AuthorizationOptions
+                    )
             )
             {
                 return true;
@@ -233,10 +235,12 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
                     {
                         TargetMethod.ContainingType: { } invokedMethodContainingType
                     }
-                && SymbolEqualityComparer.Default.Equals(
-                    invokedMethodContainingType,
-                    authorizationOptionsTypes.AuthorizationOptions
-                )
+                && SymbolEqualityComparer
+                    .Default
+                    .Equals(
+                        invokedMethodContainingType,
+                        authorizationOptionsTypes.AuthorizationOptions
+                    )
             )
             {
                 return true;
@@ -292,18 +296,15 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
             }
 
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    property,
-                    authorizationOptionsTypes.DefaultPolicy
-                )
-                || SymbolEqualityComparer.Default.Equals(
-                    property,
-                    authorizationOptionsTypes.FallbackPolicy
-                )
-                || SymbolEqualityComparer.Default.Equals(
-                    property,
-                    authorizationOptionsTypes.InvokeHandlersAfterFailure
-                )
+                SymbolEqualityComparer
+                    .Default
+                    .Equals(property, authorizationOptionsTypes.DefaultPolicy)
+                || SymbolEqualityComparer
+                    .Default
+                    .Equals(property, authorizationOptionsTypes.FallbackPolicy)
+                || SymbolEqualityComparer
+                    .Default
+                    .Equals(property, authorizationOptionsTypes.InvokeHandlersAfterFailure)
             )
             {
                 return true;
@@ -320,14 +321,15 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
     {
         if (
             operation is IMethodReferenceOperation methodReferenceOperation
-            && SymbolEqualityComparer.Default.Equals(
-                methodReferenceOperation.Member,
-                authorizationOptionsTypes.GetPolicy
-            )
-            && SymbolEqualityComparer.Default.Equals(
-                methodReferenceOperation.Member.ContainingType,
-                authorizationOptionsTypes.AuthorizationOptions
-            )
+            && SymbolEqualityComparer
+                .Default
+                .Equals(methodReferenceOperation.Member, authorizationOptionsTypes.GetPolicy)
+            && SymbolEqualityComparer
+                .Default
+                .Equals(
+                    methodReferenceOperation.Member.ContainingType,
+                    authorizationOptionsTypes.AuthorizationOptions
+                )
         )
         {
             return true;
@@ -335,14 +337,15 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
 
         if (
             operation is IInvocationOperation invocationOperation
-            && SymbolEqualityComparer.Default.Equals(
-                invocationOperation.TargetMethod,
-                authorizationOptionsTypes.GetPolicy
-            )
-            && SymbolEqualityComparer.Default.Equals(
-                invocationOperation.TargetMethod.ContainingType,
-                authorizationOptionsTypes.AuthorizationOptions
-            )
+            && SymbolEqualityComparer
+                .Default
+                .Equals(invocationOperation.TargetMethod, authorizationOptionsTypes.GetPolicy)
+            && SymbolEqualityComparer
+                .Default
+                .Equals(
+                    invocationOperation.TargetMethod.ContainingType,
+                    authorizationOptionsTypes.AuthorizationOptions
+                )
         )
         {
             return true;

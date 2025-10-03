@@ -31,10 +31,9 @@ namespace System.IdentityModel.Protocols.WSTrust
 
             if (!tempUri.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    "uri",
-                    SR.GetString(SR.ID0013)
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgument("uri", SR.GetString(SR.ID0013));
             }
 
             this.uri = tempUri;

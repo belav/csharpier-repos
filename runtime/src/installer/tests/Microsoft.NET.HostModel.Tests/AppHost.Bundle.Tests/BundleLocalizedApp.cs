@@ -35,7 +35,8 @@ namespace AppHost.Bundle.Tests
                 .Execute()
                 .Should()
                 .Pass()
-                .And.HaveStdOutContaining("[kn-IN]! [ta-IN]! [default]!");
+                .And
+                .HaveStdOutContaining("[kn-IN]! [ta-IN]! [default]!");
         }
 
         public class SharedTestState : SharedTestStateBase, IDisposable

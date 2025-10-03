@@ -79,12 +79,14 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MsmqException(
-                        SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)),
-                        error
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MsmqException(
+                            SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)),
+                            error
+                        )
+                    );
             }
         }
 
@@ -210,37 +212,45 @@ namespace System.ServiceModel.Channels
                     != System.Transactions.TransactionStatus.Active
             )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MsmqException(SR.GetString(SR.MsmqAmbientTransactionInactive))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new MsmqException(SR.GetString(SR.MsmqAmbientTransactionInactive))
+                    );
             }
 
             lock (this.internalStateLock)
             {
                 if (!this.lockMap.TryGetValue(lookupId, out entry))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId))
+                        );
                 }
 
                 // a failed relock is the same as not having a lock
                 if (entry.MsmqInternalTransaction == null)
                 {
                     this.lockMap.Remove(entry.LookupId);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId))
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId))
+                        );
                 }
             }
 
             if (Transaction.Current == null)
             {
-                entry.MsmqInternalTransaction.Commit(
-                    0, // fRetaining
-                    0, // grfTC
-                    0 // grfRM
-                );
+                entry
+                    .MsmqInternalTransaction
+                    .Commit(
+                        0, // fRetaining
+                        0, // grfTC
+                        0 // grfRM
+                    );
 
                 lock (this.internalStateLock)
                 {
@@ -256,11 +266,13 @@ namespace System.ServiceModel.Channels
 
                     // abort internal transaction and re-receive in the ambient transaction
                     BOID boid = new BOID();
-                    entry.MsmqInternalTransaction.Abort(
-                        ref boid, // pboidReason
-                        0, // fRetaining
-                        0 // fAsync
-                    );
+                    entry
+                        .MsmqInternalTransaction
+                        .Abort(
+                            ref boid, // pboidReason
+                            0, // fRetaining
+                            0 // fAsync
+                        );
                     // null indicates that the associated internal tx was aborted and the message is now
                     // unlocked as far as the native queue manager is concerned
                     entry.MsmqInternalTransaction = null;
@@ -291,9 +303,14 @@ namespace System.ServiceModel.Channels
                                 HandleIsStale(handle);
                             }
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MsmqException(SR.GetString(SR.MsmqCannotReacquireLock), error)
-                            );
+                            throw DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new MsmqException(
+                                        SR.GetString(SR.MsmqCannotReacquireLock),
+                                        error
+                                    )
+                                );
                         }
                     }
                 }
@@ -340,11 +357,13 @@ namespace System.ServiceModel.Channels
                     {
                         BOID boid = new BOID();
 
-                        entry.MsmqInternalTransaction.Abort(
-                            ref boid, // pboidReason
-                            0, // fRetaining
-                            0 // fAsync
-                        );
+                        entry
+                            .MsmqInternalTransaction
+                            .Abort(
+                                ref boid, // pboidReason
+                                0, // fRetaining
+                                0 // fAsync
+                            );
                     }
                     this.lockMap.Remove(lookupId);
                 }

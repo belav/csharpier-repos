@@ -67,17 +67,21 @@ namespace System.ServiceModel.Security
             )
             {
                 if (token.KeyGeneration == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SecurityContextExpiredNoKeyGeneration, token.ContextId)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(SR.SecurityContextExpiredNoKeyGeneration, token.ContextId)
+                        );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SecurityContextExpired,
-                            token.ContextId,
-                            token.KeyGeneration.ToString()
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SecurityContextExpired,
+                                token.ContextId,
+                                token.KeyGeneration.ToString()
+                            )
+                        );
             }
 
             if (
@@ -89,17 +93,24 @@ namespace System.ServiceModel.Security
             )
             {
                 if (token.KeyGeneration == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(SR.SecurityContextKeyExpiredNoKeyGeneration, token.ContextId)
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SecurityContextKeyExpiredNoKeyGeneration,
+                                token.ContextId
+                            )
+                        );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR.GetString(
-                            SR.SecurityContextKeyExpired,
-                            token.ContextId,
-                            token.KeyGeneration.ToString()
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SecurityContextKeyExpired,
+                                token.ContextId,
+                                token.KeyGeneration.ToString()
+                            )
+                        );
             }
 
             object hashKey = GetHashKey(token.ContextId, token.KeyGeneration);
@@ -113,24 +124,28 @@ namespace System.ServiceModel.Security
                 if (throwOnFailure)
                 {
                     if (token.KeyGeneration == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ContextAlreadyRegisteredNoKeyGeneration,
-                                    token.ContextId
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ContextAlreadyRegisteredNoKeyGeneration,
+                                        token.ContextId
+                                    )
                                 )
-                            )
-                        );
+                            );
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(
-                                SR.GetString(
-                                    SR.ContextAlreadyRegistered,
-                                    token.ContextId,
-                                    token.KeyGeneration.ToString()
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.ContextAlreadyRegistered,
+                                        token.ContextId,
+                                        token.KeyGeneration.ToString()
+                                    )
                                 )
-                            )
-                        );
+                            );
                 }
             }
             return wasTokenAdded;
@@ -174,17 +189,21 @@ namespace System.ServiceModel.Security
             if (!base.TryRemoveItem(hashKey) && throwIfNotPresent)
             {
                 if (generation == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ContextNotPresentNoKeyGeneration, contextId)
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ContextNotPresentNoKeyGeneration, contextId)
+                            )
+                        );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(
-                            SR.GetString(SR.ContextNotPresent, contextId, generation.ToString())
-                        )
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ContextNotPresent, contextId, generation.ToString())
+                            )
+                        );
             }
         }
 

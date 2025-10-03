@@ -945,11 +945,9 @@ namespace System.Net
                 }
                 finally
                 {
-                    NameResolutionTelemetry.Log.AfterResolution(
-                        hostName,
-                        startingTimestamp,
-                        exception
-                    );
+                    NameResolutionTelemetry
+                        .Log
+                        .AfterResolution(hostName, startingTimestamp, exception);
                 }
             }
         }
@@ -988,11 +986,9 @@ namespace System.Net
             Exception exception
         )
         {
-            NameResolutionTelemetry.Log.AfterResolution(
-                hostNameOrAddress,
-                startingTimestamp,
-                exception
-            );
+            NameResolutionTelemetry
+                .Log
+                .AfterResolution(hostNameOrAddress, startingTimestamp, exception);
             return false;
         }
 

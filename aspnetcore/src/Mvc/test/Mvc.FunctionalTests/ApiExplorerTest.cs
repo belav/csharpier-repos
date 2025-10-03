@@ -698,7 +698,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .OrderBy(o => o)
                 .ToArray()
         );
@@ -708,7 +709,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .OrderBy(o => o)
                 .ToArray()
         );
@@ -739,7 +741,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .ToArray()
         );
         responseType = description.SupportedResponseTypes[1];
@@ -748,7 +751,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .ToArray()
         );
     }
@@ -784,7 +788,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .OrderBy(o => o)
                 .ToArray()
         );
@@ -794,7 +799,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .OrderBy(o => o)
                 .ToArray()
         );
@@ -825,7 +831,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .ToArray()
         );
         responseType = description.SupportedResponseTypes[1];
@@ -834,7 +841,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(
             expectedMediaTypes,
             responseType
-                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ResponseFormats
+                .Select(responseFormat => responseFormat.MediaType)
                 .ToArray()
         );
     }
@@ -1497,7 +1505,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(IEnumerable<Product>).FullName, responseType.ResponseType);
                 Assert.Equal(200, responseType.StatusCode);
                 var actualMediaTypes = responseType
-                    .ResponseFormats.Select(r => r.MediaType)
+                    .ResponseFormats
+                    .Select(r => r.MediaType)
                     .OrderBy(r => r);
                 Assert.Equal(expectedMediaTypes, actualMediaTypes);
             }
@@ -1780,7 +1789,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     private IEnumerable<string> GetSortedMediaTypes(ApiExplorerResponseType apiResponseType)
     {
         return apiResponseType
-            .ResponseFormats.OrderBy(format => format.MediaType)
+            .ResponseFormats
+            .OrderBy(format => format.MediaType)
             .Select(format => format.MediaType);
     }
 

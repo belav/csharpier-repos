@@ -173,8 +173,8 @@ namespace System.Data.Services.Client
                     object target = link.Target;
                     if (MergeOption.PreserveChanges == this.mergeOption)
                     {
-                        LinkDescriptor end = this
-                            .context.GetLinks(link.Source, link.SourceProperty)
+                        LinkDescriptor end = this.context
+                            .GetLinks(link.Source, link.SourceProperty)
                             .FirstOrDefault();
                         if (null != end && null == end.Target)
                         {

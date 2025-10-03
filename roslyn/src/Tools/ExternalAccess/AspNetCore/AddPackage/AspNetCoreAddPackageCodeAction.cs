@@ -120,7 +120,8 @@ internal static class AspNetCoreAddPackageCodeAction
             .GetRequiredSyntaxRootAsync(cancellationToken)
             .ConfigureAwait(false);
         var compilation = await document
-            .Project.GetRequiredCompilationAsync(cancellationToken)
+            .Project
+            .GetRequiredCompilationAsync(cancellationToken)
             .ConfigureAwait(false);
 
         var addImportOptions = await document

@@ -102,10 +102,9 @@ public class WasmSdkBasedProjectProvider : ProjectProviderBase
             assertOptions.IsPublish ? "for-publish" : "for-build"
         );
 
-        string runtimeNativeDir = BuildTestBase.s_buildEnv.GetRuntimeNativeDir(
-            assertOptions.TargetFramework,
-            assertOptions.RuntimeType
-        );
+        string runtimeNativeDir = BuildTestBase
+            .s_buildEnv
+            .GetRuntimeNativeDir(assertOptions.TargetFramework, assertOptions.RuntimeType);
 
         string srcDirForNativeFileToCompareAgainst = assertOptions.ExpectedFileType switch
         {

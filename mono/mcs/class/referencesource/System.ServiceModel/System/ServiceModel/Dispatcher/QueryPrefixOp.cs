@@ -579,11 +579,9 @@ namespace System.ServiceModel.Dispatcher
                         null != parent
                         && -1
                             != (
-                                indexDivergence = traverser.Segment.FindDivergence(
-                                    newPrefix,
-                                    traverser.Offset,
-                                    traverser.Length
-                                )
+                                indexDivergence = traverser
+                                    .Segment
+                                    .FindDivergence(newPrefix, traverser.Offset, traverser.Length)
                             )
                     )
                     {
@@ -822,9 +820,9 @@ namespace System.ServiceModel.Dispatcher
         internal override IEnumerator GetEnumerator()
         {
             //return new TrieBreadthFirstEnum(this.trie);
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new NotImplementedException("TODO")
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new NotImplementedException("TODO"));
         }
 #endif
 

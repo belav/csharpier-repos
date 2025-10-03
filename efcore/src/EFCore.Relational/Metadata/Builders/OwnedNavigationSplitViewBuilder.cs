@@ -84,11 +84,9 @@ public class OwnedNavigationSplitViewBuilder : IInfrastructure<OwnedNavigationBu
     {
         Check.NotEmpty(annotation, nameof(annotation));
 
-        ((EntityTypeMappingFragment)MappingFragment).Builder.HasAnnotation(
-            annotation,
-            value,
-            ConfigurationSource.Explicit
-        );
+        ((EntityTypeMappingFragment)MappingFragment)
+            .Builder
+            .HasAnnotation(annotation, value, ConfigurationSource.Explicit);
 
         return this;
     }

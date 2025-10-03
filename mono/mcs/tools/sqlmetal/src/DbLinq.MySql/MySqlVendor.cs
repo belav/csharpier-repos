@@ -77,8 +77,11 @@ namespace DbLinq.MySql
             var tableName = table.Context.Mapping.GetTable(typeof(T)).TableName;
             foreach (
                 var dataMember in table
-                    .Context.Mapping.GetTable(typeof(T))
-                    .RowType.PersistentDataMembers
+                    .Context
+                    .Mapping
+                    .GetTable(typeof(T))
+                    .RowType
+                    .PersistentDataMembers
             )
             {
                 members[dataMember.MappedName.Trim('"')] = dataMember.Member;

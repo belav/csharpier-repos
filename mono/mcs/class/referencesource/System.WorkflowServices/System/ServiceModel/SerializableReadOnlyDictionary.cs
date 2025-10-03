@@ -73,31 +73,33 @@ namespace System.ServiceModel
             get { return this.dictionary[key]; }
             set
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
             }
         }
 
         public void Add(K key, V value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public void Add(KeyValuePair<K, V> item)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public void Clear()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public bool Contains(KeyValuePair<K, V> item)
@@ -127,16 +129,16 @@ namespace System.ServiceModel
 
         public bool Remove(K key)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public bool Remove(KeyValuePair<K, V> item)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
-            );
+            throw DiagnosticUtility
+                .ExceptionUtility
+                .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
         }
 
         public bool TryGetValue(K key, out V value)

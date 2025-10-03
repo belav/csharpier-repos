@@ -74,9 +74,11 @@ namespace System.ServiceModel.Security
         {
             if (securityTokenServiceConfiguration == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "securityTokenServiceConfiguration"
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("securityTokenServiceConfiguration");
             }
 
             _securityTokenServiceConfiguration = securityTokenServiceConfiguration;
@@ -108,9 +110,11 @@ namespace System.ServiceModel.Security
         {
             if (requestContext == null)
             {
-                throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestContext"
-                );
+                throw System
+                    .ServiceModel
+                    .DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("requestContext");
             }
 
             List<SecurityToken> tokenList = new List<SecurityToken>();
@@ -199,8 +203,12 @@ namespace System.ServiceModel.Security
                 && OperationContext.Current.Host.Description != null
             )
             {
-                ServiceCredentials serviceCreds =
-                    OperationContext.Current.Host.Description.Behaviors.Find<ServiceCredentials>();
+                ServiceCredentials serviceCreds = OperationContext
+                    .Current
+                    .Host
+                    .Description
+                    .Behaviors
+                    .Find<ServiceCredentials>();
                 if (
                     serviceCreds != null
                     && serviceCreds.ServiceCertificate != null
@@ -296,16 +304,20 @@ namespace System.ServiceModel.Security
                         dispatchContext.ResponseMessage = sts.Validate(icp, rst);
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR.GetString(SR.ID3112, rst.RequestType))
-                        );
+                        throw DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.ID3112, rst.RequestType)
+                                )
+                            );
                 }
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidRequestException(SR.GetString(SR.ID3022))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3022)));
             }
         }
 
@@ -336,16 +348,16 @@ namespace System.ServiceModel.Security
 
             if (requestSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestSerializer"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("requestSerializer");
             }
 
             if (responseSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "responseSerializer"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("responseSerializer");
             }
 
             if (String.IsNullOrEmpty(requestAction))
@@ -478,9 +490,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidRequestException(SR.GetString(SR.ID3114))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3114)));
             }
 
             //
@@ -504,28 +516,32 @@ namespace System.ServiceModel.Security
         {
             if (dispatchContext.RequestMessage is RST && !IsValidRSTAction(dispatchContext))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidRequestException(
-                        SR.GetString(
-                            SR.ID3113,
-                            "RequestSecurityToken",
-                            dispatchContext.RequestAction
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidRequestException(
+                            SR.GetString(
+                                SR.ID3113,
+                                "RequestSecurityToken",
+                                dispatchContext.RequestAction
+                            )
                         )
-                    )
-                );
+                    );
             }
 
             if (dispatchContext.RequestMessage is RSTR && !IsValidRSTRAction(dispatchContext))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidRequestException(
-                        SR.GetString(
-                            SR.ID3113,
-                            "RequestSecurityTokenResponse",
-                            dispatchContext.RequestAction
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new InvalidRequestException(
+                            SR.GetString(
+                                SR.ID3113,
+                                "RequestSecurityTokenResponse",
+                                dispatchContext.RequestAction
+                            )
                         )
-                    )
-                );
+                    );
             }
         }
 
@@ -611,9 +627,9 @@ namespace System.ServiceModel.Security
 
             if (sts == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ID3002))
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3002)));
             }
 
             return sts;
@@ -650,16 +666,16 @@ namespace System.ServiceModel.Security
 
             if (requestSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "requestSerializer"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("requestSerializer");
             }
 
             if (responseSerializer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "responseSerializer"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("responseSerializer");
             }
 
             if (String.IsNullOrEmpty(requestAction))
@@ -758,12 +774,14 @@ namespace System.ServiceModel.Security
             ProcessCoreAsyncResult asyncResult = ar as ProcessCoreAsyncResult;
             if (asyncResult == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(
-                        SR.GetString(SR.ID2004, typeof(ProcessCoreAsyncResult), ar.GetType()),
-                        "ar"
-                    )
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.ID2004, typeof(ProcessCoreAsyncResult), ar.GetType()),
+                            "ar"
+                        )
+                    );
             }
 
             Message message = null;
@@ -828,8 +846,12 @@ namespace System.ServiceModel.Security
             }
 
             bool preserveOriginalException = false;
-            ServiceDebugBehavior debugBehavior =
-                OperationContext.Current.Host.Description.Behaviors.Find<ServiceDebugBehavior>();
+            ServiceDebugBehavior debugBehavior = OperationContext
+                .Current
+                .Host
+                .Description
+                .Behaviors
+                .Find<ServiceDebugBehavior>();
             if (debugBehavior != null)
             {
                 preserveOriginalException = debugBehavior.IncludeExceptionDetailInFaults;
@@ -847,8 +869,12 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                FaultException faultException =
-                    OperationContext.Current.Host.Credentials.ExceptionMapper.FromException(
+                FaultException faultException = OperationContext
+                    .Current
+                    .Host
+                    .Credentials
+                    .ExceptionMapper
+                    .FromException(
                         ex,
                         (requestEnvelopeVersion == EnvelopeVersion.Soap11)
                             ? soap11Namespace
@@ -1817,23 +1843,23 @@ namespace System.ServiceModel.Security
 
                 if (dispatchContext == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "dispatchContext"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("dispatchContext");
                 }
 
                 if (responseSerializer == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "responseSerializer"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("responseSerializer");
                 }
 
                 if (serializationContext == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                        "serializationContext"
-                    );
+                    throw DiagnosticUtility
+                        .ExceptionUtility
+                        .ThrowHelperArgumentNull("serializationContext");
                 }
 
                 _trustServiceContract = contract;
@@ -1946,9 +1972,9 @@ namespace System.ServiceModel.Security
                 {
                     this.Complete(
                         true,
-                        DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidRequestException(SR.GetString(SR.ID3023))
-                        )
+                        DiagnosticUtility
+                            .ExceptionUtility
+                            .ThrowHelperError(new InvalidRequestException(SR.GetString(SR.ID3023)))
                     );
                     return;
                 }
@@ -1970,11 +1996,13 @@ namespace System.ServiceModel.Security
                     default:
                         this.Complete(
                             true,
-                            DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(
-                                    SR.GetString(SR.ID3112, rst.RequestType)
+                            DiagnosticUtility
+                                .ExceptionUtility
+                                .ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(SR.ID3112, rst.RequestType)
+                                    )
                                 )
-                            )
                         );
                         break;
                 }
@@ -1998,16 +2026,17 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage =
-                        _dispatchContext.SecurityTokenService.EndCancel(ar);
+                    _dispatchContext.ResponseMessage = _dispatchContext
+                        .SecurityTokenService
+                        .EndCancel(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System.ServiceModel.DiagnosticUtility.TraceHandledException(
-                        e,
-                        TraceEventType.Error
-                    );
+                    System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .TraceHandledException(e, TraceEventType.Error);
 
                     if (Fx.IsFatal(e))
                         throw;
@@ -2019,16 +2048,17 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage =
-                        _dispatchContext.SecurityTokenService.EndIssue(ar);
+                    _dispatchContext.ResponseMessage = _dispatchContext
+                        .SecurityTokenService
+                        .EndIssue(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System.ServiceModel.DiagnosticUtility.TraceHandledException(
-                        e,
-                        TraceEventType.Error
-                    );
+                    System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .TraceHandledException(e, TraceEventType.Error);
 
                     if (Fx.IsFatal(e))
                         throw;
@@ -2040,16 +2070,17 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage =
-                        _dispatchContext.SecurityTokenService.EndRenew(ar);
+                    _dispatchContext.ResponseMessage = _dispatchContext
+                        .SecurityTokenService
+                        .EndRenew(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System.ServiceModel.DiagnosticUtility.TraceHandledException(
-                        e,
-                        TraceEventType.Error
-                    );
+                    System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .TraceHandledException(e, TraceEventType.Error);
 
                     if (Fx.IsFatal(e))
                         throw;
@@ -2061,16 +2092,17 @@ namespace System.ServiceModel.Security
             {
                 try
                 {
-                    _dispatchContext.ResponseMessage =
-                        _dispatchContext.SecurityTokenService.EndValidate(ar);
+                    _dispatchContext.ResponseMessage = _dispatchContext
+                        .SecurityTokenService
+                        .EndValidate(ar);
                     Complete(false);
                 }
                 catch (Exception e)
                 {
-                    System.ServiceModel.DiagnosticUtility.TraceHandledException(
-                        e,
-                        TraceEventType.Error
-                    );
+                    System
+                        .ServiceModel
+                        .DiagnosticUtility
+                        .TraceHandledException(e, TraceEventType.Error);
 
                     if (Fx.IsFatal(e))
                         throw;
@@ -2210,10 +2242,12 @@ namespace System.ServiceModel.Security
             foreach (PortType portType in serviceDescription.PortTypes)
             {
                 if (
-                    StringComparer.Ordinal.Equals(
-                        portType.Name,
-                        WSTrustServiceContractConstants.Contracts.IWSTrustFeb2005Sync
-                    )
+                    StringComparer
+                        .Ordinal
+                        .Equals(
+                            portType.Name,
+                            WSTrustServiceContractConstants.Contracts.IWSTrustFeb2005Sync
+                        )
                 )
                 {
                     IncludeNamespace(
@@ -2284,10 +2318,12 @@ namespace System.ServiceModel.Security
                     );
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        portType.Name,
-                        WSTrustServiceContractConstants.Contracts.IWSTrust13Sync
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(
+                            portType.Name,
+                            WSTrustServiceContractConstants.Contracts.IWSTrust13Sync
+                        )
                 )
                 {
                     IncludeNamespace(
@@ -2358,10 +2394,12 @@ namespace System.ServiceModel.Security
                     );
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        portType.Name,
-                        WSTrustServiceContractConstants.Contracts.IWSTrustFeb2005Async
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(
+                            portType.Name,
+                            WSTrustServiceContractConstants.Contracts.IWSTrustFeb2005Async
+                        )
                 )
                 {
                     IncludeNamespace(
@@ -2432,10 +2470,12 @@ namespace System.ServiceModel.Security
                     );
                 }
                 else if (
-                    StringComparer.OrdinalIgnoreCase.Equals(
-                        portType.Name,
-                        WSTrustServiceContractConstants.Contracts.IWSTrust13Async
-                    )
+                    StringComparer
+                        .OrdinalIgnoreCase
+                        .Equals(
+                            portType.Name,
+                            WSTrustServiceContractConstants.Contracts.IWSTrust13Async
+                        )
                 )
                 {
                     IncludeNamespace(
@@ -2540,8 +2580,11 @@ namespace System.ServiceModel.Security
             }
 
             bool alreadyPresent = false;
-            XmlQualifiedName[] namespaces =
-                context.WsdlBinding.ServiceDescription.Namespaces.ToArray();
+            XmlQualifiedName[] namespaces = context
+                .WsdlBinding
+                .ServiceDescription
+                .Namespaces
+                .ToArray();
             for (int i = 0; i < namespaces.Length; ++i)
             {
                 if (StringComparer.Ordinal.Equals(namespaces[i].Namespace, ns))
@@ -2714,9 +2757,9 @@ namespace System.ServiceModel.Security
         {
             if (serviceDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "serviceDescription"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("serviceDescription");
             }
 
             if (portType == null)
@@ -2736,16 +2779,16 @@ namespace System.ServiceModel.Security
 
             if (inputMessageElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "inputMessageElement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("inputMessageElement");
             }
 
             if (outputMessageElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
-                    "outputMessageElement"
-                );
+                throw DiagnosticUtility
+                    .ExceptionUtility
+                    .ThrowHelperArgumentNull("outputMessageElement");
             }
 
             Operation operation = null;
@@ -2764,10 +2807,9 @@ namespace System.ServiceModel.Security
                     )
                     {
                         if (
-                            StringComparer.Ordinal.Equals(
-                                message.Name,
-                                op.Messages.Input.Message.Name
-                            )
+                            StringComparer
+                                .Ordinal
+                                .Equals(message.Name, op.Messages.Input.Message.Name)
                         )
                         {
                             if (message.Parts.Count != 1)
@@ -2785,10 +2827,9 @@ namespace System.ServiceModel.Security
                             inputMessage = message;
                         }
                         else if (
-                            StringComparer.Ordinal.Equals(
-                                message.Name,
-                                op.Messages.Output.Message.Name
-                            )
+                            StringComparer
+                                .Ordinal
+                                .Equals(message.Name, op.Messages.Output.Message.Name)
                         )
                         {
                             if (message.Parts.Count != 1)

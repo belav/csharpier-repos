@@ -136,7 +136,8 @@ public partial class BodyModelBinder : IModelBinder
             if (AllowEmptyBody)
             {
                 var hasBody = httpContext
-                    .Features.Get<IHttpRequestBodyDetectionFeature>()
+                    .Features
+                    .Get<IHttpRequestBodyDetectionFeature>()
                     ?.CanHaveBody;
                 hasBody ??=
                     httpContext.Request.ContentLength is not null
@@ -152,11 +153,9 @@ public partial class BodyModelBinder : IModelBinder
 
             var message = Resources.FormatUnsupportedContentType(httpContext.Request.ContentType);
             var exception = new UnsupportedContentTypeException(message);
-            bindingContext.ModelState.AddModelError(
-                modelBindingKey,
-                exception,
-                bindingContext.ModelMetadata
-            );
+            bindingContext
+                .ModelState
+                .AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
             _logger.DoneAttemptingToBindModel(bindingContext);
             return;
         }
@@ -184,19 +183,19 @@ public partial class BodyModelBinder : IModelBinder
                 // If instead the input formatter wants to treat the input as optional, it must do so by
                 // returning InputFormatterResult.Success(defaultForModelType), because input formatters
                 // are responsible for choosing a default value for the model type.
-                var message =
-                    bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingRequestBodyRequiredValueAccessor();
+                var message = bindingContext
+                    .ModelMetadata
+                    .ModelBindingMessageProvider
+                    .MissingRequestBodyRequiredValueAccessor();
                 bindingContext.ModelState.AddModelError(modelBindingKey, message);
             }
         }
         catch (Exception exception)
             when (exception is InputFormatterException || ShouldHandleException(formatter))
         {
-            bindingContext.ModelState.AddModelError(
-                modelBindingKey,
-                exception,
-                bindingContext.ModelMetadata
-            );
+            bindingContext
+                .ModelState
+                .AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
         }
 
         _logger.DoneAttemptingToBindModel(bindingContext);

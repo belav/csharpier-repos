@@ -76,9 +76,9 @@ namespace System.Net.Http.Unit.Tests.QPack
         private const string _headerNameString = "new-header";
         private const string _headerValueString = "value";
 
-        private static readonly byte[] _headerValueBytes = Encoding.ASCII.GetBytes(
-            _headerValueString
-        );
+        private static readonly byte[] _headerValueBytes = Encoding
+            .ASCII
+            .GetBytes(_headerValueString);
 
         // v      a     l      u      e    *
         // 11101110 00111010 00101101 00101111

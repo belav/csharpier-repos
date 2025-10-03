@@ -60,6 +60,7 @@ public class LoggingSqliteTest
 
     protected override string ProviderVersion =>
         typeof(SqliteOptionsExtension)
-            .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            .Assembly
+            .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             ?.InformationalVersion;
 }

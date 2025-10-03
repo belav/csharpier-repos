@@ -52,21 +52,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         )
         {
             var obj = _underlyingObject;
-            return _threadingProvider.Service.Run(async () =>
-            {
-                var location = await obj.GetLocationForPositionAsync(
-                        workspace,
-                        documentId,
-                        position,
-                        virtualSpace,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
-                return location != null
-                    && await location
-                        .NavigateToAsync(NavigationOptions.Default, cancellationToken)
+            return _threadingProvider
+                .Service
+                .Run(async () =>
+                {
+                    var location = await obj.GetLocationForPositionAsync(
+                            workspace,
+                            documentId,
+                            position,
+                            virtualSpace,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
-            });
+                    return location != null
+                        && await location
+                            .NavigateToAsync(NavigationOptions.Default, cancellationToken)
+                            .ConfigureAwait(false);
+                });
         }
 
         public bool TryNavigateToPosition(
@@ -78,21 +80,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         )
         {
             var obj = _underlyingObject;
-            return _threadingProvider.Service.Run(async () =>
-            {
-                var location = await obj.GetLocationForPositionAsync(
-                        workspace,
-                        documentId,
-                        position,
-                        virtualSpace,
-                        cancellationToken
-                    )
-                    .ConfigureAwait(false);
-                return location != null
-                    && await location
-                        .NavigateToAsync(NavigationOptions.Default, cancellationToken)
+            return _threadingProvider
+                .Service
+                .Run(async () =>
+                {
+                    var location = await obj.GetLocationForPositionAsync(
+                            workspace,
+                            documentId,
+                            position,
+                            virtualSpace,
+                            cancellationToken
+                        )
                         .ConfigureAwait(false);
-            });
+                    return location != null
+                        && await location
+                            .NavigateToAsync(NavigationOptions.Default, cancellationToken)
+                            .ConfigureAwait(false);
+                });
         }
     }
 }

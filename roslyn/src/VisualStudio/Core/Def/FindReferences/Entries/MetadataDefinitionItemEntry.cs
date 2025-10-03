@@ -58,10 +58,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             )
             {
                 var location = await DefinitionBucket
-                    .DefinitionItem.GetNavigableLocationAsync(
-                        Presenter._workspace,
-                        cancellationToken
-                    )
+                    .DefinitionItem
+                    .GetNavigableLocationAsync(Presenter._workspace, cancellationToken)
                     .ConfigureAwait(false);
                 await location
                     .TryNavigateToAsync(_threadingContext, options, cancellationToken)
@@ -69,10 +67,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             }
 
             protected override IList<Inline> CreateLineTextInlines() =>
-                DefinitionBucket.DefinitionItem.DisplayParts.ToInlines(
-                    Presenter.ClassificationFormatMap,
-                    Presenter.TypeMap
-                );
+                DefinitionBucket
+                    .DefinitionItem
+                    .DisplayParts
+                    .ToInlines(Presenter.ClassificationFormatMap, Presenter.TypeMap);
         }
     }
 }

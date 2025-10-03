@@ -571,8 +571,11 @@ namespace System.Data.Metadata.Edm
             DbLambda generatedDefinition;
 
             // Generate the body
-            generatedDefinition =
-                Mapping.ViewGeneration.Utils.ExternalCalls.CompileFunctionDefinition(
+            generatedDefinition = Mapping
+                .ViewGeneration
+                .Utils
+                .ExternalCalls
+                .CompileFunctionDefinition(
                     function.FullName,
                     function.CommandTextAttribute,
                     function.Parameters,

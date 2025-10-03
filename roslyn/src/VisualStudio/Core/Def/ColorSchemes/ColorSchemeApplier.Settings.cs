@@ -69,9 +69,9 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 CancellationToken cancellationToken
             )
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 using var registryRoot = VSRegistry.RegistryRoot(
                     _serviceProvider,
@@ -107,9 +107,9 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
                 CancellationToken cancellationToken
             )
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                    cancellationToken
-                );
+                await _threadingContext
+                    .JoinableTaskFactory
+                    .SwitchToMainThreadAsync(cancellationToken);
 
                 // The applied color scheme is stored in the configuration registry with the color theme information because
                 // when the hive gets rebuilt during upgrades, we need to reapply the color scheme information.

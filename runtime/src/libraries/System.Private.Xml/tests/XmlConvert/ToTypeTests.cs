@@ -1881,16 +1881,18 @@ namespace System.Xml.XmlConvertTests
                     23,
                     15,
                     55,
-                    TimeZoneInfo.Local.GetUtcOffset(
-                        new DateTime(
-                            DateTime.Now.Year,
-                            DateTime.Now.Month,
-                            DateTime.Now.Day,
-                            23,
-                            15,
-                            55
+                    TimeZoneInfo
+                        .Local
+                        .GetUtcOffset(
+                            new DateTime(
+                                DateTime.Now.Year,
+                                DateTime.Now.Month,
+                                DateTime.Now.Day,
+                                23,
+                                15,
+                                55
+                            )
                         )
-                    )
                 ),
                 (
                     new DateTimeOffset(

@@ -214,13 +214,15 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 if (!String.IsNullOrEmpty(requiredPropertiesNotSpecified))
                 {
-                    throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(
-                            SR.MissingRequiredParametersCompilationPass2Task(
-                                requiredPropertiesNotSpecified
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            new InvalidOperationException(
+                                SR.MissingRequiredParametersCompilationPass2Task(
+                                    requiredPropertiesNotSpecified
+                                )
                             )
-                        )
-                    );
+                        );
                 }
             }
         }
@@ -241,8 +243,8 @@ namespace Microsoft.Build.Tasks.Xaml
 
             wrapper.BuildLogger = this.Log;
 
-            wrapper.References = this
-                .References.Select(i => new DelegatingTaskItem(i) as ITaskItem)
+            wrapper.References = this.References
+                .Select(i => new DelegatingTaskItem(i) as ITaskItem)
                 .ToList();
 
             wrapper.LocalAssemblyReference = this.LocalAssemblyReference;

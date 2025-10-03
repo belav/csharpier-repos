@@ -135,7 +135,9 @@ public class ModelBindingCommandHandler : BindingHandler
     private ParameterDescriptor? FindParameterDescriptor(ParameterInfo? param) =>
         param is null
             ? null
-            : _methodDescriptor.ParameterDescriptors.FirstOrDefault(x =>
-                x.ValueName == param.Name && x.ValueType == param.ParameterType
-            );
+            : _methodDescriptor
+                .ParameterDescriptors
+                .FirstOrDefault(x =>
+                    x.ValueName == param.Name && x.ValueType == param.ParameterType
+                );
 }

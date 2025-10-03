@@ -139,8 +139,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                 model =>
                 {
                     var lazyConstructorEntity = model.FindEntityType(typeof(LazyConstructorEntity));
-                    var lazyParameterBinding =
-                        lazyConstructorEntity!.ConstructorBinding!.ParameterBindings.Single();
+                    var lazyParameterBinding = lazyConstructorEntity!
+                        .ConstructorBinding!
+                        .ParameterBindings
+                        .Single();
                     Assert.Equal(typeof(ILazyLoader), lazyParameterBinding.ParameterType);
 
                     var lazyPropertyEntity = model.FindEntityType(typeof(LazyPropertyEntity));
@@ -400,7 +402,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding
                         e =>
                         {
                             e.Property<int>("Id")
-                                .Metadata.SetTypeMapping(
+                                .Metadata
+                                .SetTypeMapping(
                                     new InMemoryTypeMapping(
                                         typeof(int),
                                         jsonValueReaderWriter: JsonInt32ReaderWriter.Instance

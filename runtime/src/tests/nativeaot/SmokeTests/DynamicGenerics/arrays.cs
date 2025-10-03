@@ -202,7 +202,8 @@ namespace ArrayTests
             Assert.AreEqual("ArrayTests.ArrayTests[]", myArray.ToString());
 
             TypeInfo listArray = TypeOf
-                .List.MakeGenericType(TypeOf.AT_ArrayTests)
+                .List
+                .MakeGenericType(TypeOf.AT_ArrayTests)
                 .MakeArrayType()
                 .GetTypeInfo();
             Assert.AreEqual(

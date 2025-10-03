@@ -196,14 +196,16 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw FxTrace.Exception.AsError(
-                    ConvertNetworkError(
-                        socketException,
-                        size - offset,
-                        TransferDirection.Send,
-                        this.timeToLive
-                    )
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(
+                        ConvertNetworkError(
+                            socketException,
+                            size - offset,
+                            TransferDirection.Send,
+                            this.timeToLive
+                        )
+                    );
             }
         }
 
@@ -322,9 +324,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.IsDisposed)
             {
-                throw FxTrace.Exception.AsError(
-                    new ObjectDisposedException(this.GetType().ToString())
-                );
+                throw FxTrace
+                    .Exception
+                    .AsError(new ObjectDisposedException(this.GetType().ToString()));
             }
         }
 
@@ -386,14 +388,16 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SocketException socketException)
                 {
-                    throw FxTrace.Exception.AsError(
-                        ConvertNetworkError(
-                            socketException,
-                            this.size - this.offset,
-                            TransferDirection.Send,
-                            this.timeToLive
-                        )
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(
+                            ConvertNetworkError(
+                                socketException,
+                                this.size - this.offset,
+                                TransferDirection.Send,
+                                this.timeToLive
+                            )
+                        );
                 }
 
                 this.Complete(count, true);
@@ -491,9 +495,9 @@ namespace System.ServiceModel.Channels
                 }
                 catch (SocketException socketException)
                 {
-                    throw FxTrace.Exception.AsError(
-                        UdpSocket.ConvertNetworkError(socketException, this)
-                    );
+                    throw FxTrace
+                        .Exception
+                        .AsError(UdpSocket.ConvertNetworkError(socketException, this));
                 }
 
                 Complete(data, true);

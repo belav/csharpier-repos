@@ -15,11 +15,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             int position,
             CancellationToken cancellationToken
         ) =>
-            CSharp.Extensions.SyntaxTreeExtensions.IsInNonUserCode(
-                syntaxTree,
-                position,
-                cancellationToken
-            );
+            CSharp
+                .Extensions
+                .SyntaxTreeExtensions
+                .IsInNonUserCode(syntaxTree, position, cancellationToken);
 
         public static SyntaxToken GetPreviousTokenIfTouchingWord(
             this SyntaxToken token,
@@ -35,14 +34,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             bool includeDirectives = false,
             bool includeDocumentationComments = false
         ) =>
-            Shared.Extensions.SyntaxTreeExtensions.FindTokenOnLeftOfPosition(
-                syntaxTree,
-                position,
-                cancellationToken,
-                includeSkipped,
-                includeDirectives,
-                includeDocumentationComments
-            );
+            Shared
+                .Extensions
+                .SyntaxTreeExtensions
+                .FindTokenOnLeftOfPosition(
+                    syntaxTree,
+                    position,
+                    cancellationToken,
+                    includeSkipped,
+                    includeDirectives,
+                    includeDocumentationComments
+                );
 
         public static bool IsFoundUnder<TParent>(
             this SyntaxNode node,

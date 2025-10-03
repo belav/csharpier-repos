@@ -1202,10 +1202,9 @@
                         thisFrame.GetMethod().Module == typeof(AppVerifier).Module
                         && thisFrame
                             .GetMethod()
-                            .DeclaringType.FullName.StartsWith(
-                                "System.Web.Util.AppVerifier",
-                                StringComparison.Ordinal
-                            )
+                            .DeclaringType
+                            .FullName
+                            .StartsWith("System.Web.Util.AppVerifier", StringComparison.Ordinal)
                     )
                     {
                         // we want to skip this frame since it's an AppVerifier.* frame
