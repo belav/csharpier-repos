@@ -1,4 +1,7 @@
-<linker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../src/ILLink.Shared/ILLink.LinkAttributes.xsd">
+<linker
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../src/ILLink.Shared/ILLink.LinkAttributes.xsd"
+>
   <assembly fullname="test">
     <type fullname="Mono.Linker.Tests.Cases.LinkAttributes.TypedArguments">
       <field name="field1">
@@ -24,7 +27,7 @@
         <attribute fullname="Mono.Linker.Tests.Cases.LinkAttributes.TypedArguments/ByteAttribute">
           <argument type="System.Byte">6</argument>
         </attribute>
-      </field>      
+      </field>
       <field name="field5">
         <attribute fullname="Mono.Linker.Tests.Cases.LinkAttributes.TypedArguments/StringAttribute">
           <argument type="System.String">str</argument>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <NoWarn>$(NoWarn);1634;1691;649</NoWarn>
@@ -8,16 +7,17 @@
     <ILLinkTrimAssembly>false</ILLinkTrimAssembly>
     <UseCompilerGeneratedDocXmlFile>false</UseCompilerGeneratedDocXmlFile>
   </PropertyGroup>
-
   <PropertyGroup>
     <RuntimeSerializationSources>System\Runtime\Serialization</RuntimeSerializationSources>
     <JsonSources>System\Runtime\Serialization\Json</JsonSources>
     <XmlSources>System\Xml</XmlSources>
     <TextSources>System\Text</TextSources>
   </PropertyGroup>
-
   <ItemGroup>
-    <Compile Include="$(CommonPath)System\NotImplemented.cs" Link="Common\System\NotImplemented.cs" />
+    <Compile
+      Include="$(CommonPath)System\NotImplemented.cs"
+      Link="Common\System\NotImplemented.cs"
+    />
     <Compile Include="$(CommonPath)System\HexConverter.cs" Link="Common\System\HexConverter.cs" />
     <Compile Include="$(RuntimeSerializationSources)\AccessorBuilder.cs" />
     <Compile Include="$(RuntimeSerializationSources)\Attributes.cs" />
@@ -149,12 +149,13 @@
     <Compile Include="$(CommonPath)System\CodeDom\CodeObject.cs" />
     <Compile Include="System\Runtime\Serialization\ContextAware.cs" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"
-                      ReferenceOutputAssembly="false"
-                      SetTargetFramework="TargetFramework=netstandard2.0"
-                      OutputItemType="Analyzer" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"
+      ReferenceOutputAssembly="false"
+      SetTargetFramework="TargetFramework=netstandard2.0"
+      OutputItemType="Analyzer"
+    />
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
     <Reference Include="System.Collections.NonGeneric" />
@@ -177,5 +178,4 @@
     <Reference Include="System.Xml.XDocument" />
     <Reference Include="System.Xml.XmlSerializer" />
   </ItemGroup>
-
 </Project>

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppPrevious);$(NetCoreAppMinimum);netstandard2.0;$(NetFrameworkMinimum)</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -13,42 +12,108 @@
 
 The System.Text.Json library is built-in as part of the shared framework in .NET Runtime. The package can be installed when you need to use it in other target frameworks.</PackageDescription>
   </PropertyGroup>
-
   <!-- DesignTimeBuild requires all the TargetFramework Derived Properties to not be present in the first property group. -->
   <PropertyGroup>
-    <NoWarn Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'">$(NoWarn);nullable</NoWarn>
+    <NoWarn
+      Condition="$([MSBuild]::GetTargetFrameworkIdentifier('$(TargetFramework)')) != '.NETCoreApp'"
+      >$(NoWarn);nullable</NoWarn
+    >
   </PropertyGroup>
-
   <ItemGroup>
     <ILLinkSubstitutionsXmls Include="ILLink\ILLink.Substitutions.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="$(CommonPath)System\HexConverter.cs" Link="Common\System\HexConverter.cs" />
-    <Compile Include="$(CommonPath)System\Text\ValueStringBuilder.cs" Link="Common\ValueStringBuilder.cs" />
-    <Compile Include="$(CommonPath)System\Text\Json\PooledByteBufferWriter.cs" Link="Common\System\Text\Json\PooledByteBufferWriter.cs" />
-    <Compile Include="..\Common\JsonCamelCaseNamingPolicy.cs" Link="Common\System\Text\Json\JsonCamelCaseNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonNamingPolicy.cs" Link="Common\System\Text\Json\JsonNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonAttribute.cs" Link="Common\System\Text\Json\Serialization\JsonAttribute.cs" />
-    <Compile Include="..\Common\JsonCommentHandling.cs" Link="Common\System\Text\Json\JsonCommentHandling.cs" />
+    <Compile
+      Include="$(CommonPath)System\Text\ValueStringBuilder.cs"
+      Link="Common\ValueStringBuilder.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Text\Json\PooledByteBufferWriter.cs"
+      Link="Common\System\Text\Json\PooledByteBufferWriter.cs"
+    />
+    <Compile
+      Include="..\Common\JsonCamelCaseNamingPolicy.cs"
+      Link="Common\System\Text\Json\JsonCamelCaseNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonNamingPolicy.cs"
+      Link="Common\System\Text\Json\JsonNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonAttribute.cs"
+      Link="Common\System\Text\Json\Serialization\JsonAttribute.cs"
+    />
+    <Compile
+      Include="..\Common\JsonCommentHandling.cs"
+      Link="Common\System\Text\Json\JsonCommentHandling.cs"
+    />
     <Compile Include="..\Common\JsonConstants.cs" Link="Common\System\Text\Json\JsonConstants.cs" />
     <Compile Include="..\Common\JsonHelpers.cs" Link="Common\System\Text\Json\JsonHelpers.cs" />
-    <Compile Include="..\Common\JsonIgnoreCondition.cs" Link="Common\System\Text\Json\Serialization\JsonIgnoreCondition.cs" />
-    <Compile Include="..\Common\JsonKebabCaseLowerNamingPolicy.cs" Link="Common\System\Text\Json\Serialization\JsonKebabCaseLowerNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonKebabCaseUpperNamingPolicy.cs" Link="Common\System\Text\Json\Serialization\JsonKebabCaseUpperNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonKnownNamingPolicy.cs" Link="Common\System\Text\Json\Serialization\JsonKnownNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonNumberHandling.cs" Link="Common\System\Text\Json\Serialization\JsonNumberHandling.cs" />
-    <Compile Include="..\Common\JsonObjectCreationHandling.cs" Link="Common\System\Text\Json\Serialization\JsonObjectCreationHandling.cs" />
-    <Compile Include="..\Common\JsonUnmappedMemberHandling.cs" Link="Common\System\Text\Json\Serialization\JsonUnmappedMemberHandling.cs" />
-    <Compile Include="..\Common\JsonSeparatorNamingPolicy.cs" Link="Common\System\Text\Json\Serialization\JsonSeparatorNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonSerializableAttribute.cs" Link="Common\System\Text\Json\Serialization\JsonSerializableAttribute.cs" />
-    <Compile Include="..\Common\JsonSerializerDefaults.cs" Link="Common\System\Text\Json\Serialization\JsonSerializerDefaults.cs" />
-    <Compile Include="..\Common\JsonSnakeCaseLowerNamingPolicy.cs" Link="Common\System\Text\Json\Serialization\JsonSnakeCaseLowerNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonSnakeCaseUpperNamingPolicy.cs" Link="Common\System\Text\Json\Serialization\JsonSnakeCaseUpperNamingPolicy.cs" />
-    <Compile Include="..\Common\JsonSourceGenerationMode.cs" Link="Common\System\Text\Json\Serialization\JsonSourceGenerationMode.cs" />
-    <Compile Include="..\Common\JsonSourceGenerationOptionsAttribute.cs" Link="Common\System\Text\Json\Serialization\JsonSourceGenerationOptionsAttribute.cs" />
-    <Compile Include="..\Common\JsonUnknownTypeHandling.cs" Link="Common\System\Text\Json\Serialization\JsonUnknownTypeHandling.cs" />
-    <Compile Include="..\Common\ReflectionExtensions.cs" Link="Common\System\Text\Json\Serialization\ReflectionExtensions.cs" />
+    <Compile
+      Include="..\Common\JsonIgnoreCondition.cs"
+      Link="Common\System\Text\Json\Serialization\JsonIgnoreCondition.cs"
+    />
+    <Compile
+      Include="..\Common\JsonKebabCaseLowerNamingPolicy.cs"
+      Link="Common\System\Text\Json\Serialization\JsonKebabCaseLowerNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonKebabCaseUpperNamingPolicy.cs"
+      Link="Common\System\Text\Json\Serialization\JsonKebabCaseUpperNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonKnownNamingPolicy.cs"
+      Link="Common\System\Text\Json\Serialization\JsonKnownNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonNumberHandling.cs"
+      Link="Common\System\Text\Json\Serialization\JsonNumberHandling.cs"
+    />
+    <Compile
+      Include="..\Common\JsonObjectCreationHandling.cs"
+      Link="Common\System\Text\Json\Serialization\JsonObjectCreationHandling.cs"
+    />
+    <Compile
+      Include="..\Common\JsonUnmappedMemberHandling.cs"
+      Link="Common\System\Text\Json\Serialization\JsonUnmappedMemberHandling.cs"
+    />
+    <Compile
+      Include="..\Common\JsonSeparatorNamingPolicy.cs"
+      Link="Common\System\Text\Json\Serialization\JsonSeparatorNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonSerializableAttribute.cs"
+      Link="Common\System\Text\Json\Serialization\JsonSerializableAttribute.cs"
+    />
+    <Compile
+      Include="..\Common\JsonSerializerDefaults.cs"
+      Link="Common\System\Text\Json\Serialization\JsonSerializerDefaults.cs"
+    />
+    <Compile
+      Include="..\Common\JsonSnakeCaseLowerNamingPolicy.cs"
+      Link="Common\System\Text\Json\Serialization\JsonSnakeCaseLowerNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonSnakeCaseUpperNamingPolicy.cs"
+      Link="Common\System\Text\Json\Serialization\JsonSnakeCaseUpperNamingPolicy.cs"
+    />
+    <Compile
+      Include="..\Common\JsonSourceGenerationMode.cs"
+      Link="Common\System\Text\Json\Serialization\JsonSourceGenerationMode.cs"
+    />
+    <Compile
+      Include="..\Common\JsonSourceGenerationOptionsAttribute.cs"
+      Link="Common\System\Text\Json\Serialization\JsonSourceGenerationOptionsAttribute.cs"
+    />
+    <Compile
+      Include="..\Common\JsonUnknownTypeHandling.cs"
+      Link="Common\System\Text\Json\Serialization\JsonUnknownTypeHandling.cs"
+    />
+    <Compile
+      Include="..\Common\ReflectionExtensions.cs"
+      Link="Common\System\Text\Json\Serialization\ReflectionExtensions.cs"
+    />
     <Compile Include="..\Common\ThrowHelper.cs" Link="Common\System\Text\Json\ThrowHelper.cs" />
     <Compile Include="System\Text\Json\AppContextSwitchHelper.cs" />
     <Compile Include="System\Text\Json\BitStack.cs" />
@@ -336,7 +401,6 @@ The System.Text.Json library is built-in as part of the shared framework in .NET
     <Compile Include="System\ReflectionExtensions.cs" />
     <Compile Include="$(CommonPath)System\Obsoletions.cs" Link="Common\System\Obsoletions.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Include="$(CoreLibSharedDir)System\Collections\Generic\ReferenceEqualityComparer.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Runtime\CompilerServices\IsExternalInit.cs" />
@@ -347,12 +411,10 @@ The System.Text.Json library is built-in as part of the shared framework in .NET
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\RequiresUnreferencedCodeAttribute.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\UnconditionalSuppressMessageAttribute.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp' and $([MSBuild]::VersionGreaterThanOrEquals('$(TargetFrameworkVersion)', '7.0'))">
     <Compile Include="System\Text\Json\Serialization\Converters\Value\Int128Converter.cs" />
     <Compile Include="System\Text\Json\Serialization\Converters\Value\UInt128Converter.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <Compile Include="System.Text.Json.Typeforwards.netcoreapp.cs" />
     <Compile Include="System\Text\Json\Serialization\JsonSerializerOptionsUpdateHandler.cs" />
@@ -361,20 +423,20 @@ The System.Text.Json library is built-in as part of the shared framework in .NET
     <Compile Include="System\Text\Json\Serialization\Converters\Value\HalfConverter.cs" />
     <Compile Include="System\Text\Json\Reader\JsonReaderHelper.net8.cs" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <Compile Include="System\Collections\Generic\StackExtensions.netstandard.cs" />
-    <Compile Include="$(CommonPath)System\Buffers\ArrayBufferWriter.cs" Link="Common\System\Buffers\ArrayBufferWriter.cs" />
+    <Compile
+      Include="$(CommonPath)System\Buffers\ArrayBufferWriter.cs"
+      Link="Common\System\Buffers\ArrayBufferWriter.cs"
+    />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\StringSyntaxAttribute.cs" />
     <Compile Include="$(CoreLibSharedDir)System\Diagnostics\CodeAnalysis\RequiresDynamicCodeAttribute.cs" />
     <Compile Include="System\Text\Json\Reader\JsonReaderHelper.netstandard.cs" />
   </ItemGroup>
-
   <!-- Application tfms (.NETCoreApp, .NETFramework) need to use the same or higher version of .NETStandard's dependencies. -->
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Text.Encodings.Web\src\System.Text.Encodings.Web.csproj" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == '$(NetCoreAppCurrent)'">
     <Reference Include="System.Collections" />
     <Reference Include="System.Collections.Concurrent" />
@@ -391,30 +453,46 @@ The System.Text.Json library is built-in as part of the shared framework in .NET
     <Reference Include="System.Threading" />
     <Reference Include="System.Text.RegularExpressions" />
   </ItemGroup>
-  
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"
-                      ReferenceOutputAssembly="false"
-                      SetTargetFramework="TargetFramework=netstandard2.0"
-                      OutputItemType="Analyzer" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Text.RegularExpressions\gen\System.Text.RegularExpressions.Generator.csproj"
+      ReferenceOutputAssembly="false"
+      SetTargetFramework="TargetFramework=netstandard2.0"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
-  
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'">
     <PackageReference Include="System.Buffers" Version="$(SystemBuffersVersion)" />
     <PackageReference Include="System.Memory" Version="$(SystemMemoryVersion)" />
-    <PackageReference Include="System.Threading.Tasks.Extensions" Version="$(SystemThreadingTasksExtensionsVersion)" />
+    <PackageReference
+      Include="System.Threading.Tasks.Extensions"
+      Version="$(SystemThreadingTasksExtensionsVersion)"
+    />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Bcl.AsyncInterfaces\src\Microsoft.Bcl.AsyncInterfaces.csproj" />
-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="$(SystemRuntimeCompilerServicesUnsafeVersion)" />
+    <PackageReference
+      Include="System.Runtime.CompilerServices.Unsafe"
+      Version="$(SystemRuntimeCompilerServicesUnsafeVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTupleVersion)" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\gen\System.Text.Json.SourceGeneration.Roslyn3.11.csproj" ReferenceOutputAssembly="false" PackAsAnalyzer="true" Condition="'$(DotNetBuildFromSource)' != 'true'" />
-    <ProjectReference Include="..\gen\System.Text.Json.SourceGeneration.Roslyn4.0.csproj" ReferenceOutputAssembly="false" PackAsAnalyzer="true" />
-    <ProjectReference Include="..\gen\System.Text.Json.SourceGeneration.Roslyn4.4.csproj" ReferenceOutputAssembly="false" PackAsAnalyzer="true" />
+    <ProjectReference
+      Include="..\gen\System.Text.Json.SourceGeneration.Roslyn3.11.csproj"
+      ReferenceOutputAssembly="false"
+      PackAsAnalyzer="true"
+      Condition="'$(DotNetBuildFromSource)' != 'true'"
+    />
+    <ProjectReference
+      Include="..\gen\System.Text.Json.SourceGeneration.Roslyn4.0.csproj"
+      ReferenceOutputAssembly="false"
+      PackAsAnalyzer="true"
+    />
+    <ProjectReference
+      Include="..\gen\System.Text.Json.SourceGeneration.Roslyn4.4.csproj"
+      ReferenceOutputAssembly="false"
+      PackAsAnalyzer="true"
+    />
   </ItemGroup>
-
 </Project>

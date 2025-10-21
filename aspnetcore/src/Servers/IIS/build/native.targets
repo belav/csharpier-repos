@@ -1,9 +1,7 @@
 <Project>
-
   <PropertyGroup>
     <IncludePath>$(IncludePath);$(IntDir)</IncludePath>
   </PropertyGroup>
-
   <ItemGroup Condition="'@(MessageFile->Count())' != '0'">
     <!-- Checking if the IntDir exists is a local development optimization. Normally, each time the build runs,
       the aspnetcore_msg.h file is auto generated. The compiler notices that the file has been updated, and recompiles c++ files.
@@ -15,11 +13,13 @@
       <Message>Compiling Event Messages ...</Message>
       <Outputs>$(IntDir)\%(Filename).rc;$(IntDir)\%(Filename).h;$(IntDir)\MSG00001.bin</Outputs>
     </CustomBuild>
-
     <MessageFile Remove="@(MessageFile)" />
   </ItemGroup>
-
-  <Target Name="CreateVersionHeader" DependsOnTargets="InitializeSourceControlInformation" BeforeTargets="PrepareForBuild">
+  <Target
+    Name="CreateVersionHeader"
+    DependsOnTargets="InitializeSourceControlInformation"
+    BeforeTargets="PrepareForBuild"
+  >
     <ItemGroup>
       <VersionHeaderContents Include="// Copyright (c) .NET Foundation. All rights reserved." />
       <VersionHeaderContents Include="// Licensed under the MIT License. See LICENSE.txt in the project root for license information." />
@@ -33,12 +33,14 @@
       <VersionHeaderContents Include="#define PlatformToolset &quot;$(PlatformToolset)\0&quot;" />
       <VersionHeaderContents Include="#define CommitHash &quot;$(SourceRevisionId)\0&quot;" />
     </ItemGroup>
-
     <ItemGroup>
       <FileWrites Include="$(IntDir)version.h" />
     </ItemGroup>
-
-    <WriteLinesToFile File="$(IntDir)version.h" Lines="@(VersionHeaderContents)" OverWrite="true" WriteOnlyWhenDifferent="True" />
+    <WriteLinesToFile
+      File="$(IntDir)version.h"
+      Lines="@(VersionHeaderContents)"
+      OverWrite="true"
+      WriteOnlyWhenDifferent="True"
+    />
   </Target>
-
 </Project>

@@ -2,7 +2,6 @@
   <PropertyGroup>
     <!-- Do not complain about lack of lib folder. -->
     <NoPackageAnalysis>true</NoPackageAnalysis>
-
     <Description>MSBuild tasks and targets for code generation</Description>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <NuspecFile>$(MSBuildProjectName).nuspec</NuspecFile>
@@ -11,16 +10,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <DevelopmentDependency>true</DevelopmentDependency>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Build.Utilities.Core" />
   </ItemGroup>
-
   <ItemGroup>
     <NuspecProperty Include="baseOutputPath=$(BaseOutputPath)" />
     <NuspecProperty Include="configuration=$(Configuration)" />
   </ItemGroup>
-
   <ItemGroup>
     <InternalsVisibleTo Include="Microsoft.Extensions.ApiDescription.Client.Tests" />
   </ItemGroup>

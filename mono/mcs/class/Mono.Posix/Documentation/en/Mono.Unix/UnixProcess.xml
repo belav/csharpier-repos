@@ -1,6 +1,9 @@
 <Type Name="UnixProcess" FullName="Mono.Unix.UnixProcess">
   <TypeSignature Language="C#" Value="public sealed class UnixProcess" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit UnixProcess extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit UnixProcess extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Posix</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -20,26 +23,31 @@
       <para>
         The <see cref="T:Mono.Unix.UnixProcess" /> class provides the means 
         for inspecting and interacting with an operating system process.
-      </para>
+      </para
+      >
       <para>
         No mechanism is currently provided to enumerate all processes on the
         system.  This limitation exists for two reasons:
       </para>
       <list type="bullet">
         <item>
-          <term>POSIX doesn't provide a mechanism to enumerate all
+          <term
+            >POSIX doesn't provide a mechanism to enumerate all
           processes, so such functionality wouldn't be portable.  Common
           workarounds include the <c>/proc</c> filesystem, but not all
           operating systems provide that.
-        </term>
+        </term
+          >
         </item>
         <item>
-          <term>Many methods, such as
+          <term
+            >Many methods, such as
           <see cref="M:Mono.Unix.UnixProcess.WaitForExit" />, require that the
           target process be a child of the current process.  Enumerating all
           processes on the system would return processes that are not children
           of the current process, and thus these methods would error.
-        </term>
+        </term
+          >
         </item>
       </list>
     </remarks>
@@ -62,19 +70,26 @@
         <value>
           A <see cref="T:System.In32" /> containing the value the process
           exited with.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixProcess.HasExited" /> returns 
           <see langword="false" />.
-        </exception>
+        </exception
+        >
         <altmember cref="M:Mono.Unix.Native.Syscall.WEXITSTATUS" />
       </Docs>
     </Member>
     <Member MemberName="GetCurrentProcess">
-      <MemberSignature Language="C#" Value="public static Mono.Unix.UnixProcess GetCurrentProcess ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Mono.Unix.UnixProcess GetCurrentProcess() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Mono.Unix.UnixProcess GetCurrentProcess ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig class Mono.Unix.UnixProcess GetCurrentProcess() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -90,15 +105,18 @@
         <returns>
           A <see cref="T:Mono.Unix.UnixProcess" /> instance providing
           information about the current process.
-        </returns>
-        <remarks>
-        </remarks>
+        </returns
+        >
+        <remarks></remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpid" />
       </Docs>
     </Member>
     <Member MemberName="GetCurrentProcessId">
       <MemberSignature Language="C#" Value="public static int GetCurrentProcessId ();" />
-      <MemberSignature Language="ILAsm" Value=".method public static hidebysig int32 GetCurrentProcessId() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public static hidebysig int32 GetCurrentProcessId() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -114,9 +132,9 @@
         <returns>
           A <see cref="T:System.Int32" /> containing the process ID of the
           current process.
-        </returns>
-        <remarks>
-        </remarks>
+        </returns
+        >
+        <remarks></remarks>
         <altmember cref="M:Mono.Unix.Native.Syscall.getpid" />
       </Docs>
     </Member>
@@ -137,20 +155,23 @@
         <value>
           <see langword="true" /> if the process has exited; otherwise, 
           <see langword="false" />.
-        </value>
+        </value
+        >
         <remarks>
           <para>
             If the process has exited, 
             <see cref="M:Mono.Unix.UnixProcess.ExitCode" /> contains the
             process' exit code.
-          </para>
+          </para
+          >
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -161,7 +182,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -169,7 +191,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para>
+          </para
+          >
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFEXITED" />
       </Docs>
@@ -191,15 +214,16 @@
         <value>
           <see langword="true" /> if the process terminated due to an unhandled 
           signal; otherwise, <see langword="false" />.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -210,7 +234,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -218,7 +243,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para>
+          </para
+          >
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFSIGNALED" />
       </Docs>
@@ -240,15 +266,16 @@
         <value>
           <see langword="true" /> if the process has been stopped; otherwise, 
           <see langword="false" />.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -259,7 +286,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -267,7 +295,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para>
+          </para
+          >
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.WIFSTOPPED" />
       </Docs>
@@ -289,14 +318,17 @@
         <value>
           A <see cref="T:System.Int32" /> containing the operating system
           process ID.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Kill">
       <MemberSignature Language="C#" Value="public void Kill ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Kill() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Kill() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -311,9 +343,9 @@
         <summary>
           Send the <see cref="F:Mono.Unix.Native.Signum.SIGKILL" /> signal to
           the process.
-        </summary>
-        <remarks>
-        </remarks>
+        </summary
+        >
+        <remarks></remarks>
         <exception cref="System.InvalidOperationException">
           <para>
             The sending process is not the super-user and its effective
@@ -321,7 +353,8 @@
             When signaling a process group, this error is returned if any members
             of the group could not be signaled.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para>
+          </para
+          >
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.kill" />
       </Docs>
@@ -343,7 +376,8 @@
         <value>
           A <see cref="T:System.Int32" /> containing the process group that
           the process should belong to.
-        </value>
+        </value
+        >
         <remarks>
           <para>
             Process groups are used for distribution of signals, and by 
@@ -374,14 +408,17 @@
         <value>
           A <see cref="T:System.Int32" /> containing the session ID of the
           process.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
       </Docs>
     </Member>
     <Member MemberName="Signal">
       <MemberSignature Language="C#" Value="public void Signal (Mono.Unix.Native.Signum signal);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Signal(valuetype Mono.Unix.Native.Signum signal) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Signal(valuetype Mono.Unix.Native.Signum signal) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -403,10 +440,10 @@
         <param name="signal">
           A <see cref="T:Mono.Unix.Native.Signum" /> containing the signal to
           send to the process.
-        </param>
+        </param
+        >
         <summary>Send the <paramref name="signal" /> signal to the process.</summary>
-        <remarks>
-        </remarks>
+        <remarks></remarks>
         <exception cref="System.InvalidOperationException">
           <para>
             The sending process is not the super-user and its effective
@@ -414,13 +451,17 @@
             process.  When signaling a process group, this error is returned 
             if any members of the group could not be signaled.
             [<see cref="F:Mono.Unix.Native.Errno.EPERM" />]
-          </para>
+          </para
+          >
         </exception>
       </Docs>
     </Member>
     <Member MemberName="StopSignal">
       <MemberSignature Language="C#" Value="public Mono.Unix.Native.Signum StopSignal { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Mono.Unix.Native.Signum StopSignal" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype Mono.Unix.Native.Signum StopSignal"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -435,19 +476,26 @@
         <value>
           A <see cref="T:Mono.Unix.Native.Signum" /> containing the signal
           which caused the process to stop.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixProcess.HasStopped" /> returns 
           <see langword="false" />.
-        </exception>
+        </exception
+        >
         <altmember cref="M:Mono.Unix.Native.Syscall.WSTOPSIG" />
       </Docs>
     </Member>
     <Member MemberName="TerminationSignal">
-      <MemberSignature Language="C#" Value="public Mono.Unix.Native.Signum TerminationSignal { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype Mono.Unix.Native.Signum TerminationSignal" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Unix.Native.Signum TerminationSignal { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype Mono.Unix.Native.Signum TerminationSignal"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -462,19 +510,23 @@
         <value>
           A <see cref="T:Mono.Unix.Native.Signum" /> containing the signal
           which terminated the process.
-        </value>
-        <remarks>
-        </remarks>
+        </value
+        >
+        <remarks></remarks>
         <exception cref="T:System.InvalidOperationException">
           <see cref="P:Mono.Unix.UnixProcess.HasSignaled" /> returns 
           <see langword="false" />.
-        </exception>
+        </exception
+        >
         <altmember cref="M:Mono.Unix.Native.Syscall.WTERMSIG" />
       </Docs>
     </Member>
     <Member MemberName="WaitForExit">
       <MemberSignature Language="C#" Value="public void WaitForExit ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void WaitForExit() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void WaitForExit() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>1.0.5000.0</AssemblyVersion>
@@ -495,14 +547,16 @@
             will generate a 
             <see cref="T:Mono.Unix.UnixIOException" /> 
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />].
-          </para>
+          </para
+          >
         </remarks>
         <exception cref="Mono.Unix.UnixIOException">
           <para>
             The calling process has no existing unwaited-for
             child processes.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             No status from the terminated child process is available
@@ -513,7 +567,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_NOCLDWAIT" />
             for that signal.
             [<see cref="F:Mono.Unix.Native.Errno.ECHILD" />]
-          </para>
+          </para
+          >
           <para>-or-</para>
           <para>
             The call was interrupted by a caught signal,
@@ -521,7 +576,8 @@
             <see cref="F:Mono.Unix.Native.TODO.SA_RESTART" />
             flag set.
             [<see cref="F:Mono.Unix.Native.Errno.EINTR" />]
-          </para>
+          </para
+          >
         </exception>
         <altmember cref="M:Mono.Unix.Native.Syscall.waitpid" />
       </Docs>

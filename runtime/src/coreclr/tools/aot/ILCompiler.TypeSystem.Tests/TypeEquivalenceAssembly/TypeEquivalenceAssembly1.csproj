@@ -15,7 +15,6 @@
     <!-- This assembly has no LibraryImports and uses a custom corelib, so disable the generator. -->
     <EnableLibraryImportGenerator>false</EnableLibraryImportGenerator>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\CoreTestAssembly\CoreTestAssembly.csproj">
       <Name>CoreTestAssembly</Name>

@@ -6,9 +6,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildProjectName).cs" />
-
     <CLRTestEnvironmentVariable Include="DOTNET_TieredCompilation" Value="0" />
     <CLRTestEnvironmentVariable Include="DOTNET_JITMinOpts" Value="0" />
-    <CLRTestEnvironmentVariable Include="DOTNET_JitStressModeNames" Value="STRESS_IF_CONVERSION_COST" />
+    <CLRTestEnvironmentVariable
+      Include="DOTNET_JitStressModeNames"
+      Value="STRESS_IF_CONVERSION_COST"
+    />
   </ItemGroup>
 </Project>

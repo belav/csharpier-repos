@@ -3,7 +3,10 @@
     <!-- Needed for CLRTestTargetUnsupported, CMakeProjectReference, GC.WaitForPendingFinalizers -->
     <RequiresProcessIsolation>true</RequiresProcessIsolation>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <CLRTestTargetUnsupported Condition="'$(TargetsOSX)' != 'true' and '$(TargetsiOS)' != 'true' and '$(TargetstvOS)' != 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported
+      Condition="'$(TargetsOSX)' != 'true' and '$(TargetsiOS)' != 'true' and '$(TargetstvOS)' != 'true'"
+      >true</CLRTestTargetUnsupported
+    >
     <AutoreleasePoolSupport>true</AutoreleasePoolSupport>
   </PropertyGroup>
   <ItemGroup>

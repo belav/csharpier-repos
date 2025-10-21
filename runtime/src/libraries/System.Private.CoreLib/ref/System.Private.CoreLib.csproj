@@ -10,10 +10,18 @@
     <NoWarn>$(NoWarn);0809;0618;CS8614;CS3015</NoWarn>
     <StrongNameKeyId>SilverlightPlatform</StrongNameKeyId>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
-    <FeatureWasmPerfTracing Condition="'$(MonoWasmBuildVariant)' == 'multithread'">true</FeatureWasmPerfTracing>
-    <FeatureWasmThreads Condition="'$(MonoWasmBuildVariant)' == 'multithread'">true</FeatureWasmThreads>
-    <DefineConstants Condition="'$(FeatureWasmPerfTracing)' == 'true'">$(DefineConstants);FEATURE_WASM_PERFTRACING</DefineConstants>
-    <DefineConstants Condition="'$(FeatureWasmThreads)' == 'true'">$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants>
+    <FeatureWasmPerfTracing Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
+      >true</FeatureWasmPerfTracing
+    >
+    <FeatureWasmThreads Condition="'$(MonoWasmBuildVariant)' == 'multithread'"
+      >true</FeatureWasmThreads
+    >
+    <DefineConstants Condition="'$(FeatureWasmPerfTracing)' == 'true'"
+      >$(DefineConstants);FEATURE_WASM_PERFTRACING</DefineConstants
+    >
+    <DefineConstants Condition="'$(FeatureWasmThreads)' == 'true'"
+      >$(DefineConstants);FEATURE_WASM_THREADS</DefineConstants
+    >
     <DefineConstants>$(DefineConstants);BUILDING_CORELIB_REFERENCE</DefineConstants>
     <!-- Disable binplacing since the System.Private.CoreLib reference assembly is internal to our build and shouldn't be exposed anywhere -->
     <EnableBinPlacing>false</EnableBinPlacing>
@@ -36,7 +44,6 @@
     <Compile Include="..\..\System.Threading.Overlapped\ref\System.Threading.Overlapped.cs" />
     <Compile Include="..\..\System.Threading.ThreadPool\ref\System.Threading.ThreadPool.cs" />
     <Compile Include="..\..\System.Threading.Thread\ref\System.Threading.Thread.cs" />
-  
     <!-- contracts where types were partially moved to CoreLib, these are used both here and in the contract assemblies and are generated -->
     <Compile Include="..\..\System.Collections.Concurrent\ref\System.Collections.Concurrent.cs" />
     <Compile Include="..\..\System.Collections\ref\System.Collections.cs" />
@@ -44,10 +51,8 @@
     <Compile Include="..\..\System.Memory\ref\System.Memory.cs" />
     <Compile Include="..\..\System.Runtime.InteropServices\ref\System.Runtime.InteropServices.cs" />
     <Compile Include="..\..\System.Threading\ref\System.Threading.cs" />
-
     <!-- types only exposed through CoreLib, this is manually maintained -->
     <Compile Include="System.Private.CoreLib.ExtraApis.cs" />
-
     <!-- types not exposed in contracts but forwarded from the mscorlib shim, this is manually maintained -->
     <Compile Include="System.Private.CoreLib.ManualShimTypeForwards.cs" />
   </ItemGroup>

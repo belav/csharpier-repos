@@ -1,7 +1,5 @@
 <!-- Whenever altering this or other Source Build files, please include @dotnet/source-build-internal as a reviewer. -->
-
 <Project>
-
   <PropertyGroup>
     <GitHubRepositoryName>roslyn</GitHubRepositoryName>
     <SourceBuildManagedOnly>true</SourceBuildManagedOnly>
@@ -9,8 +7,10 @@
          Only the non-stable artifacts should flow downstream in source build -->
     <EnableDefaultSourceBuildIntermediateItems>false</EnableDefaultSourceBuildIntermediateItems>
   </PropertyGroup>
-
-  <Target Name="GetCustomIntermediateNupkgContents" BeforeTargets="GetCategorizedIntermediateNupkgContents">
+  <Target
+    Name="GetCustomIntermediateNupkgContents"
+    BeforeTargets="GetCategorizedIntermediateNupkgContents"
+  >
     <ItemGroup>
       <IntermediateNupkgArtifactFile Include="$(CurrentRepoSourceBuildArtifactsPackagesDir)Shipping\**\*.nupkg" />
       <IntermediateNupkgArtifactFile Include="$(CurrentRepoSourceBuildArtifactsPackagesDir)NonShipping\**\*.nupkg" />
@@ -19,7 +19,6 @@
       <IntermediateNupkgArtifactFile Remove="$(CurrentRepoSourceBuildArtifactsPackagesDir)**\*.Symbols.*.nupkg" />
     </ItemGroup>
   </Target>
-
   <!--
     The build script passes in the full path of the sln to build.  This must be overridden in order to build
     the cloned source in the inner build.
@@ -29,5 +28,4 @@
       <InnerBuildArgs>$(InnerBuildArgs) /p:Projects="$(InnerSourceBuildRepoRoot)\Roslyn.sln"</InnerBuildArgs>
     </PropertyGroup>
   </Target>
-
 </Project>

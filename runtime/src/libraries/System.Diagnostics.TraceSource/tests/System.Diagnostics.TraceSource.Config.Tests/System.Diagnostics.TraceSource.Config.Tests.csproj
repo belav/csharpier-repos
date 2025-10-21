@@ -4,7 +4,10 @@
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs" Link="Common\TestUtilities\System\DisableParallelization.cs" />
+    <Compile
+      Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs"
+      Link="Common\TestUtilities\System\DisableParallelization.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
@@ -12,7 +15,8 @@
     <Compile Include="TraceSourceWithConfigurationTests.cs" />
   </ItemGroup>
   <ItemGroup>
-  <None Include="testhost_AllTypes.config;
+    <None
+      Include="testhost_AllTypes.config;
                  testhost_ChangeSwitch_after.config;
                  testhost_ChangeSwitch_before.config;
                  testhost_ConfigWithRuntime.config;
@@ -21,7 +25,8 @@
                  testhost_RemoveSwitch_after.config;
                  testhost_RemoveSwitch_before.config;
                  testhost_Switch_MissingValue_Throws.config"
-          CopyToOutputDirectory="Always" />
+      CopyToOutputDirectory="Always"
+    />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(LibrariesProjectRoot)System.Configuration.ConfigurationManager\src\System.Configuration.ConfigurationManager.csproj" />

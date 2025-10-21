@@ -23,9 +23,20 @@
       <Visible>false</Visible>
       <Pack>false</Pack>
     </Content>
-
-    <PackageReference Include="runtime.win-x64.Microsoft.NETCore.ILDAsm" Version="$(runtimeWinX64MicrosoftNETCoreILDAsmPackageVersion)" ExcludeAssets="all" />
-    <PackageReference Include="runtime.linux-x64.Microsoft.NETCore.ILDAsm" Version="$(runtimeLinuxX64MicrosoftNETCoreILDAsmPackageVersion)" ExcludeAssets="all" />
-    <PackageReference Include="runtime.osx-x64.Microsoft.NETCore.ILDAsm" Version="$(runtimeOSXX64MicrosoftNETCoreILDAsmPackageVersion)" ExcludeAssets="all" />
+    <PackageReference
+      Include="runtime.win-x64.Microsoft.NETCore.ILDAsm"
+      Version="$(runtimeWinX64MicrosoftNETCoreILDAsmPackageVersion)"
+      ExcludeAssets="all"
+    />
+    <PackageReference
+      Include="runtime.linux-x64.Microsoft.NETCore.ILDAsm"
+      Version="$(runtimeLinuxX64MicrosoftNETCoreILDAsmPackageVersion)"
+      ExcludeAssets="all"
+    />
+    <PackageReference
+      Include="runtime.osx-x64.Microsoft.NETCore.ILDAsm"
+      Version="$(runtimeOSXX64MicrosoftNETCoreILDAsmPackageVersion)"
+      ExcludeAssets="all"
+    />
   </ItemGroup>
 </Project>

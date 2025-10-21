@@ -60,7 +60,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Attributes">
-      <MemberSignature Language="C#" Value="public System.Collections.ArrayList Attributes { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public System.Collections.ArrayList Attributes { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Collections.ArrayList</ReturnType>
@@ -76,7 +79,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DecodeDSA">
-      <MemberSignature Language="C#" Value="public static System.Security.Cryptography.DSA DecodeDSA (byte[] privateKey, System.Security.Cryptography.DSAParameters dsaParameters);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Security.Cryptography.DSA DecodeDSA (byte[] privateKey, System.Security.Cryptography.DSAParameters dsaParameters);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Security.Cryptography.DSA</ReturnType>
@@ -98,7 +104,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DecodeRSA">
-      <MemberSignature Language="C#" Value="public static System.Security.Cryptography.RSA DecodeRSA (byte[] keypair);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Security.Cryptography.RSA DecodeRSA (byte[] keypair);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Security.Cryptography.RSA</ReturnType>
@@ -118,7 +127,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Encode">
-      <MemberSignature Language="C#" Value="public static byte[] Encode (System.Security.Cryptography.AsymmetricAlgorithm aa);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Encode (System.Security.Cryptography.AsymmetricAlgorithm aa);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -138,7 +150,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Encode">
-      <MemberSignature Language="C#" Value="public static byte[] Encode (System.Security.Cryptography.DSA dsa);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Encode (System.Security.Cryptography.DSA dsa);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>
@@ -158,7 +173,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Encode">
-      <MemberSignature Language="C#" Value="public static byte[] Encode (System.Security.Cryptography.RSA rsa);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static byte[] Encode (System.Security.Cryptography.RSA rsa);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Byte[]</ReturnType>

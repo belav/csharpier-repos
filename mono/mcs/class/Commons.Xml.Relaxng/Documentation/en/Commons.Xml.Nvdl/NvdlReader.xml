@@ -10,7 +10,10 @@
   <Interfaces />
   <Members>
     <Member MemberName="Read">
-      <MemberSignature Language="C#" Value="public static Commons.Xml.Nvdl.NvdlRules Read (System.Xml.XmlReader reader);" />
+      <MemberSignature
+        Language="C#"
+        Value="public static Commons.Xml.Nvdl.NvdlRules Read (System.Xml.XmlReader reader);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>Commons.Xml.Nvdl.NvdlRules</ReturnType>

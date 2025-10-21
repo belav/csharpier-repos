@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  DefaultTargets="Build"
+  ToolsVersion="4.0"
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
   <PropertyGroup>
     <ExcludeFromWindowsBuild>true</ExcludeFromWindowsBuild>
   </PropertyGroup>
@@ -24,7 +28,10 @@
     <ClCompile Include="$(MonoSourceLocation)\mono\utils\mach-support-amd64.c">
       <ExcludedFromBuild>$(ExcludeFromWindowsBuild)</ExcludedFromBuild>
     </ClCompile>
-    <MASM Include="$(MonoSourceLocation)\mono\utils\win64.asm" Condition="'$(ExcludeMASMFromWindowsBuild)'=='false'">
+    <MASM
+      Include="$(MonoSourceLocation)\mono\utils\win64.asm"
+      Condition="'$(ExcludeMASMFromWindowsBuild)'=='false'"
+    >
       <FileType>Document</FileType>
       <ExcludedFromBuild>$(ExcludeFromWindows32Build)</ExcludedFromBuild>
       <PreprocessorDefinitions>X64</PreprocessorDefinitions>

@@ -1,11 +1,8 @@
 <Project>
-
   <PropertyGroup>
     <OutDirName>$(MSBuildProjectName)$([System.IO.Path]::DirectorySeparatorChar)stub</OutDirName>
   </PropertyGroup>
-
   <Import Project="..\Directory.Build.props" />
-
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
     <!-- Opt out of some features which are on by default. -->
@@ -20,7 +17,6 @@
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
-
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.ReferenceAssemblyAttribute" />
     <AssemblyAttribute Include="System.Reflection.AssemblyFlags">
@@ -28,9 +24,11 @@
       <_Parameter1_IsLiteral>true</_Parameter1_IsLiteral>
     </AssemblyAttribute>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Runtime\src\System.Runtime.csproj" PrivateAssets="all" Condition="'$(DisableImplicitFrameworkReferences)' == 'true'" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Runtime\src\System.Runtime.csproj"
+      PrivateAssets="all"
+      Condition="'$(DisableImplicitFrameworkReferences)' == 'true'"
+    />
   </ItemGroup>
-
 </Project>

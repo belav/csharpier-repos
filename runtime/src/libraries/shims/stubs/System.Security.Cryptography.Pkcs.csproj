@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <StrongNameKeyId>Microsoft</StrongNameKeyId>
   </PropertyGroup>
-
   <ItemGroup>
     <ForwardedType Include="System.Security.Cryptography.CryptographicAttributeObject" />
     <ForwardedType Include="System.Security.Cryptography.CryptographicAttributeObjectCollection" />
@@ -38,5 +36,4 @@
     <ForwardedType Include="System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
     <ForwardedType Include="System.Security.Cryptography.Xml.X509IssuerSerial" />
   </ItemGroup>
-
 </Project>

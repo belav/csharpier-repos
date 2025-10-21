@@ -1,10 +1,12 @@
 <Type Name="LdapCompareAttrNames" FullName="Novell.Directory.Ldap.LdapCompareAttrNames">
-  <TypeSignature Language="C#" Value="public class LdapCompareAttrNames : System.Collections.IComparer" />
+  <TypeSignature
+    Language="C#"
+    Value="public class LdapCompareAttrNames : System.Collections.IComparer"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -63,7 +65,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapCompareAttrNames(string attrName, bool ascendingFlag)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapCompareAttrNames(string attrName, bool ascendingFlag)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="attrName" Type="System.String" />
@@ -89,7 +94,10 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public LdapCompareAttrNames(string[] attrNames, bool[] ascendingFlags)" />
+      <MemberSignature
+        Language="C#"
+        Value="public LdapCompareAttrNames(string[] attrNames, bool[] ascendingFlags)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="attrNames" Type="System.String[]" />
@@ -103,7 +111,10 @@
       </Docs>
     </Member>
     <Member MemberName="Compare">
-      <MemberSignature Language="C#" Value="public virtual int Compare(object object1, object object2)" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual int Compare(object object1, object object2)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -121,7 +132,10 @@
       </Docs>
     </Member>
     <Member MemberName="Locale">
-      <MemberSignature Language="C#" Value="public virtual System.Globalization.CultureInfo Locale { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Globalization.CultureInfo Locale { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Globalization.CultureInfo</ReturnType>

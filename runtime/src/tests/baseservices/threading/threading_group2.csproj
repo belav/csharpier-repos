@@ -9,6 +9,5 @@
     <MergedWrapperProjectReference Remove="generics/threadstart/*.??proj" />
     <MergedWrapperProjectReference Remove="regressions/**/*.??proj" />
   </ItemGroup>
-
   <Import Project="$(TestSourceDir)MergedTestRunner.targets" />
 </Project>

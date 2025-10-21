@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <AssemblyName>Microsoft.EntityFrameworkCore.Cosmos.FunctionalTests</AssemblyName>
@@ -9,15 +8,12 @@
     <!-- Avoid referencing EFCore.Relational -->
     <DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Scaffolding\Baselines\**\*" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="Scaffolding\Baselines\**\*" />
   </ItemGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -45,7 +41,6 @@
     <Using Include="Xunit" />
     <Using Include="Xunit.Abstractions" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="config.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -54,17 +49,14 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\src\Shared\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Internal\**" />
     <EmbeddedResource Remove="Internal\**" />
     <None Remove="Internal\**" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\EFCore\EFCore.csproj" />
     <ProjectReference Include="..\..\src\EFCore.Abstractions\EFCore.Abstractions.csproj" />
@@ -73,11 +65,15 @@
     <ProjectReference Include="..\..\src\EFCore.Proxies\EFCore.Proxies.csproj" />
     <ProjectReference Include="..\EFCore.Specification.Tests\EFCore.Specification.Tests.csproj" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="$(MicrosoftExtensionsConfigurationEnvironmentVariablesVersion)" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="$(MicrosoftExtensionsConfigurationJsonVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Configuration.EnvironmentVariables"
+      Version="$(MicrosoftExtensionsConfigurationEnvironmentVariablesVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.Extensions.Configuration.Json"
+      Version="$(MicrosoftExtensionsConfigurationJsonVersion)"
+    />
     <PackageReference Include="Azure.Identity" Version="1.10.4" />
   </ItemGroup>
-
 </Project>

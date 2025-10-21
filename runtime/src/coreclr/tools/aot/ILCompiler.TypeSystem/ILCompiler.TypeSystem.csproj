@@ -9,9 +9,12 @@
     <Platforms>x64;x86</Platforms>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <EnableDiaSymReaderUse Condition="'$(DotNetBuildFromSource)' != 'true'">true</EnableDiaSymReaderUse>
-    <DefineConstants Condition="'$(EnableDiaSymReaderUse)' != 'true'">$(DefineConstants);DISABLE_UNMANAGED_PDB_SYMBOLS</DefineConstants>
-
+    <EnableDiaSymReaderUse Condition="'$(DotNetBuildFromSource)' != 'true'"
+      >true</EnableDiaSymReaderUse
+    >
+    <DefineConstants Condition="'$(EnableDiaSymReaderUse)' != 'true'"
+      >$(DefineConstants);DISABLE_UNMANAGED_PDB_SYMBOLS</DefineConstants
+    >
     <!-- We're binplacing these into an existing publish layout so that F5 build in VS updates
          the same bits tests expect to see in artifacts/ilc. That way we never need to wonder which
          binaries are up to date and which are stale. -->
@@ -19,19 +22,19 @@
     <Configurations>Debug;Release;Checked</Configurations>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup Label="Embedded Resources">
     <EmbeddedResource Include="..\..\Common\TypeSystem\Common\Properties\Resources.resx">
       <LogicalName>Internal.TypeSystem.Strings.resources</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Condition="'$(EnableDiaSymReaderUse)' == 'true'" Include="Microsoft.DiaSymReader">
+    <PackageReference
+      Condition="'$(EnableDiaSymReaderUse)' == 'true'"
+      Include="Microsoft.DiaSymReader"
+    >
       <Version>1.4.0</Version>
     </PackageReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\..\Common\TypeSystem\Common\ArrayMethod.Diagnostic.cs">
       <Link>TypeSystem\Common\ArrayMethod.Diagnostic.cs</Link>
@@ -688,13 +691,15 @@
       <Link>TypeSystem\Sorting\TypeSystemComparer.cs</Link>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="BannedSymbols.txt" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="$(MicrosoftCodeAnalysisBannedApiAnalyzersVersion)" Condition="'$(DotNetBuildFromSource)' != 'true'">
+    <PackageReference
+      Include="Microsoft.CodeAnalysis.BannedApiAnalyzers"
+      Version="$(MicrosoftCodeAnalysisBannedApiAnalyzersVersion)"
+      Condition="'$(DotNetBuildFromSource)' != 'true'"
+    >
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

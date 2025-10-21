@@ -385,7 +385,7 @@
   <lcid name="iu_Cans" id="0x785D" parent="0x005D" iso2="iu" iso3="iku" win="IUS" />
   <lcid name="tzm_Tfng" id="0x785F" parent="0x005F" iso2="tzm" iso3="tzm" win="TZM" />
   <lcid name="zh_Hant" id="0x7C04" parent="0x7804" iso2="zh" iso3="zho" win="CHT" />
-  <lcid name="zh_CHT" id="0x7C04" parent="0x7C04" iso2="zh" iso3="zho" win="CHT" />  
+  <lcid name="zh_CHT" id="0x7C04" parent="0x7C04" iso2="zh" iso3="zho" win="CHT" />
   <lcid name="nb" id="0x7C14" parent="0x0014" iso2="nb" iso3="nob" win="NOR" />
   <lcid name="sr" id="0x7C1A" parent="0x007F" iso2="sr" iso3="srp" win="SRB" />
   <lcid name="tg_Cyrl" id="0x7C28" parent="0x0028" iso2="tg" iso3="tgk" win="TAJ" />

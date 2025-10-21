@@ -91,7 +91,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.AddMetafileComment(System.Byte[])" />.</para>
+          <para
+            >See <see cref="M:System.Drawing.Graphics.AddMetafileComment(System.Byte[])" />.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -281,7 +283,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />.</para>
+          <para
+            >See <see cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2732,7 +2736,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.EndContainer(System.Drawing.Drawing2D.GraphicsContainer)" />.</para>
+          <para
+            >See <see cref="M:System.Drawing.Graphics.EndContainer(System.Drawing.Drawing2D.GraphicsContainer)" />.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2808,7 +2814,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />.</para>
+          <para
+            >See <see cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -2884,7 +2892,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />.</para>
+          <para
+            >See <see cref="M:System.Drawing.Graphics.FillRegion(System.Drawing.Brush,System.Drawing.Region)" />.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3055,7 +3065,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="Overload:System.Drawing.Graphics.MultiplyTransform" /> methods.</para>
+          <para
+            >See <see cref="Overload:System.Drawing.Graphics.MultiplyTransform" /> methods.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -3150,7 +3162,9 @@
         <remarks>To be added</remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>See <see cref="M:System.Drawing.Graphics.Restore(System.Drawing.Drawing2D.GraphicsState)" />.</para>
+          <para
+            >See <see cref="M:System.Drawing.Graphics.Restore(System.Drawing.Drawing2D.GraphicsState)" />.</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

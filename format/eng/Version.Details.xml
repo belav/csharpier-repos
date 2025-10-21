@@ -6,12 +6,18 @@
       <Sha>4414e2ffe333e304e7d9b2122f88242a23ab25a6</Sha>
       <SourceBuild RepoName="roslyn" ManagedOnly="true" />
     </Dependency>
-    <Dependency Name="Microsoft.SourceBuild.Intermediate.source-build-externals" Version="9.0.0-alpha.1.23518.2">
+    <Dependency
+      Name="Microsoft.SourceBuild.Intermediate.source-build-externals"
+      Version="9.0.0-alpha.1.23518.2"
+    >
       <Uri>https://github.com/dotnet/source-build-externals</Uri>
       <Sha>54ad220ef4f236325dec31f2c0c66fa48a6fce33</Sha>
       <SourceBuild RepoName="source-build-externals" ManagedOnly="true" />
     </Dependency>
-    <Dependency Name="Microsoft.SourceBuild.Intermediate.source-build-reference-packages" Version="8.0.0-alpha.1.23471.1">
+    <Dependency
+      Name="Microsoft.SourceBuild.Intermediate.source-build-reference-packages"
+      Version="8.0.0-alpha.1.23471.1"
+    >
       <Uri>https://github.com/dotnet/source-build-reference-packages</Uri>
       <Sha>7b55da982fc6e71c1776c4de89111aee0eecb45a</Sha>
       <SourceBuild RepoName="source-build-reference-packages" ManagedOnly="true" />
@@ -33,7 +39,10 @@
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>e5c631d28b985b773b28d0cb2346f49a92bd41dd</Sha>
     </Dependency>
-    <Dependency Name="Microsoft.SourceBuild.Intermediate.runtime.linux-x64" Version="9.0.0-alpha.1.23529.4">
+    <Dependency
+      Name="Microsoft.SourceBuild.Intermediate.runtime.linux-x64"
+      Version="9.0.0-alpha.1.23529.4"
+    >
       <Uri>https://github.com/dotnet/runtime</Uri>
       <Sha>e5c631d28b985b773b28d0cb2346f49a92bd41dd</Sha>
       <SourceBuild RepoName="runtime" />

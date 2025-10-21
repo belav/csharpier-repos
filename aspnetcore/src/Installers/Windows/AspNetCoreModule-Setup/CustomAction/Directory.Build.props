@@ -1,8 +1,5 @@
-
-
 <Project>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory)..\, Directory.Build.props))\Directory.Build.props" />
-
   <PropertyGroup>
     <BUILD_MAJOR>$(_TwoDigitYear)$(_ThreeDigitDayOfYear)</BUILD_MAJOR>
     <BLDVERMAJOR>$(PRODUCT_MAJOR)</BLDVERMAJOR>
@@ -11,5 +8,4 @@
     <BLDNUMMINOR>$(BUILD_MINOR)</BLDNUMMINOR>
     <DefineConstants>BLDVERMAJOR=$(BLDVERMAJOR);BLDVERMINOR=$(BLDVERMINOR);BLDNUMMAJOR=$(BLDNUMMAJOR);BLDNUMMINOR=$(BLDNUMMINOR);$(DefineConstants)</DefineConstants>
   </PropertyGroup>
-
 </Project>

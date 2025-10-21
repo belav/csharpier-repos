@@ -3,8 +3,8 @@
   xmlns:asn="http://schemas.dot.net/asnxml/201808/"
   name="CertificateTemplateAsn"
   namespace="System.Security.Cryptography.X509Certificates.Asn1"
-  rebind="false">
-
+  rebind="false"
+>
   <!--
     Microsoft extension (1.3.6.1.4.1.311.21.7)
 

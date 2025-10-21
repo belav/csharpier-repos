@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <AssemblyName>ILCompiler.Diagnostics</AssemblyName>
     <OutputType>Library</OutputType>
@@ -9,7 +8,6 @@
     <Platforms>x64;x86;arm;arm64</Platforms>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-
     <!-- We're binplacing these into an existing publish layout so that F5 build in VS updates
          the same bits tests expect to see in artifacts/crossgen2. That way we never need to wonder which
          binaries are up to date and which are stale. -->
@@ -18,9 +16,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
   </ItemGroup>
-
 </Project>

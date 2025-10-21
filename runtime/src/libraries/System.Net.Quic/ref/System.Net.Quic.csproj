@@ -2,15 +2,12 @@
   <PropertyGroup>
     <TargetFramework>$(NetCoreAppCurrent)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.Versioning.RequiresPreviewFeaturesAttribute" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="System.Net.Quic.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(LIbrariesProjectRoot)System.Memory\ref\System.Memory.csproj" />
     <ProjectReference Include="$(LIbrariesProjectRoot)System.Net.Primitives\ref\System.Net.Primitives.csproj" />

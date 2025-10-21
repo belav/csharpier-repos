@@ -7,25 +7,39 @@
     <Compile Include="MyResourceType.cs" />
     <Compile Include="TestData.cs" />
     <Compile Include="BinaryResourceWriterUnitTest.cs" />
-    <Compile Include="$(CoreLibSharedDir)System\Numerics\Hashing\HashHelpers.cs"
-             Link="System\Numerics\Hashing\HashHelpers.cs" />
-    <Compile Include="..\src\System\Resources\Extensions\TypeNameComparer.cs"
-             Link="TypeNameComparer.cs" />
+    <Compile
+      Include="$(CoreLibSharedDir)System\Numerics\Hashing\HashHelpers.cs"
+      Link="System\Numerics\Hashing\HashHelpers.cs"
+    />
+    <Compile
+      Include="..\src\System\Resources\Extensions\TypeNameComparer.cs"
+      Link="TypeNameComparer.cs"
+    />
     <Compile Include="TypeNameComparerTests.cs" />
-    <EmbeddedResource Include="TestData.resources" WithCulture="false" Type="Non-Resx" LogicalName="$(RootNamespace).%(FileName)%(Extension)" />
+    <EmbeddedResource
+      Include="TestData.resources"
+      WithCulture="false"
+      Type="Non-Resx"
+      LogicalName="$(RootNamespace).%(FileName)%(Extension)"
+    />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Drawing.Common.TestData" Version="$(SystemDrawingCommonTestDataVersion)" />    
+    <PackageReference
+      Include="System.Drawing.Common.TestData"
+      Version="$(SystemDrawingCommonTestDataVersion)"
+    />
     <ProjectReference Include="..\src\System.Resources.Extensions.csproj" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
     <PackageReference Include="System.Drawing.Common" Version="$(SystemDrawingCommonVersion)" />
-    <ProjectReference Include="$(LibrariesProjectRoot)System.Windows.Extensions\src\System.Windows.Extensions.csproj" Condition="'$(TargetPlatformIdentifier)' == 'windows'" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)System.Windows.Extensions\src\System.Windows.Extensions.csproj"
+      Condition="'$(TargetPlatformIdentifier)' == 'windows'"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'">
     <PackageReference Include="System.ValueTuple" Version="$(SystemValueTupleVersion)" />
   </ItemGroup>
-
   <!-- Use the following target to regenerate the test resources file.
        This is done from a test application and checked in so that we don't run
        product code during the build.
@@ -38,7 +52,11 @@
       <_executor>Microsoft.DotNet.RemoteExecutor.dll</_executor>
     </PropertyGroup>
     <ItemGroup>
-      <ExecuteMethod Class="System.Resources.Extensions.Tests.TestData" Include="WriteResources" Parameters="$(MSBuildProjectDirectory)\TestData.resources" />
+      <ExecuteMethod
+        Class="System.Resources.Extensions.Tests.TestData"
+        Include="WriteResources"
+        Parameters="$(MSBuildProjectDirectory)\TestData.resources"
+      />
       <ExecuteMethod>
         <ExceptionFile>$(TargetDir)%(Class)%(Identity).exception.txt</ExceptionFile>
       </ExecuteMethod>

@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+ToolBar" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ToolBar">
+<Type
+  Name="VisualStyleElement+ToolBar"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ToolBar"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.ToolBar" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

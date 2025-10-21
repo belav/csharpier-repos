@@ -15,26 +15,46 @@
     <Compile Include="TestSettings.cs" />
     <Compile Include="UnixPingUtilityTests.cs" />
     <!-- Common -->
-    <Compile Include="$(CommonPath)DisableRuntimeMarshalling.cs"
-             Link="Common\DisableRuntimeMarshalling.cs" />
+    <Compile
+      Include="$(CommonPath)DisableRuntimeMarshalling.cs"
+      Link="Common\DisableRuntimeMarshalling.cs"
+    />
     <!-- System.Net Common -->
-    <Compile Include="$(CommonTestPath)System\Net\Configuration.cs"
-             Link="SocketCommon\Configuration.cs" />
-    <Compile Include="$(CommonTestPath)System\Net\Configuration.Ping.cs"
-             Link="SocketCommon\Configuration.Ping.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\Interop.DefaultPathBufferSize.cs"
-             Link="Common\Interop\Unix\Interop.DefaultPathBufferSize.cs" />
-    <Compile Include="$(CommonPath)System\Net\RawSocketPermissions.cs"
-             Link="Common\System\Net\RawSocketPermissions.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs"
-             Link="Common\Interop\Unix\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\System.Native\Interop.ReadLink.cs"
-             Link="Common\Interop\Unix\System.Native\Interop.ReadLink.cs" />
-    <Compile Include="$(CommonPath)System\Net\NetworkInformation\UnixCommandLinePing.cs"
-             Link="Common\System\Net\NetworkInformation\UnixCommandLinePing.cs" />
-    <Compile Include="$(CommonTestPath)System\Net\Capability.RawSocketPermissions.cs"
-             Link="Common\System\Net\Capability.RawSocketPermissions.cs" />
-    <Compile Include="$(CommonPath)System\Text\ValueUtf8Converter.cs"
-             Link="Common\System\Text\ValueUtf8Converter.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Net\Configuration.cs"
+      Link="SocketCommon\Configuration.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Net\Configuration.Ping.cs"
+      Link="SocketCommon\Configuration.Ping.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\Interop.DefaultPathBufferSize.cs"
+      Link="Common\Interop\Unix\Interop.DefaultPathBufferSize.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\RawSocketPermissions.cs"
+      Link="Common\System\Net\RawSocketPermissions.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs"
+      Link="Common\Interop\Unix\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\System.Native\Interop.ReadLink.cs"
+      Link="Common\Interop\Unix\System.Native\Interop.ReadLink.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Net\NetworkInformation\UnixCommandLinePing.cs"
+      Link="Common\System\Net\NetworkInformation\UnixCommandLinePing.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Net\Capability.RawSocketPermissions.cs"
+      Link="Common\System\Net\Capability.RawSocketPermissions.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Text\ValueUtf8Converter.cs"
+      Link="Common\System\Text\ValueUtf8Converter.cs"
+    />
   </ItemGroup>
 </Project>

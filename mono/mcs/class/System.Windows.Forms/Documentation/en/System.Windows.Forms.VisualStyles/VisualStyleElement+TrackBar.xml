@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+TrackBar" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+TrackBar">
+<Type
+  Name="VisualStyleElement+TrackBar"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+TrackBar"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.TrackBar" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

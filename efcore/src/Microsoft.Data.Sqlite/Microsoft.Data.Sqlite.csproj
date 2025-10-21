@@ -1,7 +1,5 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
-
   <PropertyGroup>
     <Description>Microsoft.Data.Sqlite is a lightweight ADO.NET provider for SQLite.
 
@@ -22,25 +20,19 @@ Microsoft.Data.Sqlite.SqliteTransaction</Description>
     <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
     <PackageProjectUrl>https://docs.microsoft.com/dotnet/standard/data/sqlite/</PackageProjectUrl>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.6" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Data.Sqlite.Core\Microsoft.Data.Sqlite.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="lib\**\*">
       <Pack>True</Pack>
       <PackagePath>lib</PackagePath>
     </None>
   </ItemGroup>
-
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
-
   <Target Name="Compile" />
   <Target Name="CopyFilesToOutputDirectory" />
-
 </Project>

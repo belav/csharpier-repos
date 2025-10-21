@@ -1,5 +1,4 @@
 <Project>
-
   <PropertyGroup>
     <EnableDefaultItems>False</EnableDefaultItems>
     <GenerateAssemblyInfo>False</GenerateAssemblyInfo>
@@ -11,14 +10,11 @@
     <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
     <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
     <!-- So you can make changes and re-run tests within VS without command-line builds -->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="content/**" />
   </ItemGroup>
-
 </Project>

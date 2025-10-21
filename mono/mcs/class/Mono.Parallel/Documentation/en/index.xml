@@ -13,7 +13,11 @@
   <Copyright>To be added.</Copyright>
   <Types>
     <Namespace Name="Mono.Collections.Concurrent">
-      <Type Name="ConcurrentOrderedList`1" DisplayName="ConcurrentOrderedList&lt;T&gt;" Kind="Class" />
+      <Type
+        Name="ConcurrentOrderedList`1"
+        DisplayName="ConcurrentOrderedList&lt;T&gt;"
+        Kind="Class"
+      />
       <Type Name="ConcurrentSkipList`1" DisplayName="ConcurrentSkipList&lt;T&gt;" Kind="Class" />
     </Namespace>
     <Namespace Name="Mono.Threading">
