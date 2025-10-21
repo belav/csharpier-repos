@@ -401,7 +401,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         ref elementName,
                         attrs,
                         // not expected condition
-                        p => p.CurrentToken.Kind != SyntaxKind.IdentifierName,
+                        p =>
+                            p.CurrentToken.Kind != SyntaxKind.IdentifierName,
                         // abort condition (looks like something we might understand later)
                         p =>
                             p.CurrentToken.Kind == SyntaxKind.GreaterThanToken

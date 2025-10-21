@@ -2338,7 +2338,8 @@ public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture
         AssertQuery(
             async,
             // ReSharper disable once RedundantTernaryExpression
-            ss => ss.Set<CogTag>().Where(t => t.Gear.HasSoulPatch ? true : false)
+            ss =>
+                ss.Set<CogTag>().Where(t => t.Gear.HasSoulPatch ? true : false)
         );
 
     [ConditionalTheory]

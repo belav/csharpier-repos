@@ -1640,7 +1640,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
         AssertQuery(
             async,
             // ReSharper disable twice RedundantCast
-            ss => ss.Set<Customer>().Where(c => (object)c.City == (object)"London")
+            ss =>
+                ss.Set<Customer>().Where(c => (object)c.City == (object)"London")
         );
 
     [ConditionalTheory]
@@ -1657,7 +1658,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
         AssertQuery(
             async,
             // ReSharper disable once ConvertTypeCheckToNullCheck
-            ss => ss.Set<Customer>().Where(c => c is Customer)
+            ss =>
+                ss.Set<Customer>().Where(c => c is Customer)
         );
 
     [ConditionalTheory]
@@ -1810,7 +1812,8 @@ public abstract class NorthwindWhereQueryTestBase<TFixture> : QueryTestBase<TFix
             async,
             // ReSharper disable once ConvertTypeCheckToNullCheck
             // ReSharper disable once SimplifyConditionalTernaryExpression
-            ss => ss.Set<Product>().Where(p => p is Product ? false : true),
+            ss =>
+                ss.Set<Product>().Where(p => p is Product ? false : true),
             assertEmpty: true
         );
 

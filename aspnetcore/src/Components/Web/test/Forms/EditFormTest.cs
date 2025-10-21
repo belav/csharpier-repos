@@ -162,13 +162,16 @@ public class EditFormTest
             frame => AssertFrame.Region(frame, 13),
             frame => AssertFrame.Element(frame, "form", 12),
             // Sets "method" to "post" by default
-            frame => AssertFrame.Attribute(frame, "method", "post"),
+            frame =>
+                AssertFrame.Attribute(frame, "method", "post"),
             // Assigns name to the submit event
-            frame => AssertFrame.Attribute(frame, "onsubmit"),
+            frame =>
+                AssertFrame.Attribute(frame, "onsubmit"),
             frame => AssertFrame.NamedEvent(frame, "onsubmit", "my-form"),
             frame => AssertFrame.Region(frame, 4),
             // Adds FormMappingValidator child
-            frame => AssertFrame.Component<FormMappingValidator>(frame, 2),
+            frame =>
+                AssertFrame.Component<FormMappingValidator>(frame, 2),
             frame =>
                 AssertFrame.Attribute(
                     frame,
@@ -176,7 +179,8 @@ public class EditFormTest
                     editContext
                 ),
             // Adds AntiforgeryToken child
-            frame => AssertFrame.Component<AntiforgeryToken>(frame, 1),
+            frame =>
+                AssertFrame.Component<AntiforgeryToken>(frame, 1),
             frame => AssertFrame.Component<CascadingValue<EditContext>>(frame, 4),
             frame => AssertFrame.Attribute(frame, "IsFixed", true),
             frame => AssertFrame.Attribute(frame, "Value"),

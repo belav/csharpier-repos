@@ -261,7 +261,8 @@ public abstract class InheritanceBulkUpdatesTestBase<TFixture> : BulkUpdatesTest
             ss => ss.Set<Coke>(),
             e => e,
             // ReSharper disable once RedundantCast
-            s => s.SetProperty(c => EF.Property<int>((ISugary)c, nameof(ISugary.SugarGrams)), 0),
+            s =>
+                s.SetProperty(c => EF.Property<int>((ISugary)c, nameof(ISugary.SugarGrams)), 0),
             rowsAffectedCount: 1
         );
 

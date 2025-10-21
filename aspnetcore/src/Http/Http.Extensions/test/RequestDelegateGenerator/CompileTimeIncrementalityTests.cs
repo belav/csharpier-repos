@@ -52,9 +52,11 @@ public class CompileTimeIncrementalityTests : RequestDelegateCreationTestBase
         Assert.Collection(
             outputSteps,
             // First source output for diagnostics is unchanged.
-            step => Assert.Equal(IncrementalStepRunReason.Unchanged, step.Reason),
+            step =>
+                Assert.Equal(IncrementalStepRunReason.Unchanged, step.Reason),
             // Second source output for generated code is changed.
-            step => Assert.Equal(IncrementalStepRunReason.Modified, step.Reason)
+            step =>
+                Assert.Equal(IncrementalStepRunReason.Modified, step.Reason)
         );
     }
 
@@ -75,9 +77,11 @@ app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)}? todo) => TypedRes
         Assert.Collection(
             outputSteps,
             // First source output for diagnostics is unchanged.
-            step => Assert.Equal(IncrementalStepRunReason.Unchanged, step.Reason),
+            step =>
+                Assert.Equal(IncrementalStepRunReason.Unchanged, step.Reason),
             // Second source output for generated code is changed.
-            step => Assert.Equal(IncrementalStepRunReason.Modified, step.Reason)
+            step =>
+                Assert.Equal(IncrementalStepRunReason.Modified, step.Reason)
         );
     }
 

@@ -743,7 +743,8 @@ public abstract class NorthwindAggregateOperatorsQueryTestBase<TFixture> : Query
         AssertFirst(
             async,
             // ReSharper disable once ReplaceWithSingleCallToFirst
-            ss => ss.Set<Customer>().OrderBy(c => c.ContactName).Where(c => c.City == "London")
+            ss =>
+                ss.Set<Customer>().OrderBy(c => c.ContactName).Where(c => c.City == "London")
         );
 
     [ConditionalTheory]

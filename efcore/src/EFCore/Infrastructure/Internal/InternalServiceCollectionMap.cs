@@ -189,7 +189,8 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
                     var injectedDescriptor = new ServiceDescriptor(
                         typeof(TService),
                         // TODO: What should we do here? Can annotate InjectServices to accept null, but then it has to return it too...
-                        p => InjectServices(p, descriptor.ImplementationInstance!),
+                        p =>
+                            InjectServices(p, descriptor.ImplementationInstance!),
                         lifetime
                     );
 

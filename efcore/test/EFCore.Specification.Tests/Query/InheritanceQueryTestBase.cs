@@ -61,7 +61,8 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
             async,
             // ReSharper disable once IsExpressionAlwaysTrue
             // ReSharper disable once ConvertTypeCheckToNullCheck
-            ss => ss.Set<Kiwi>().Where(a => a is Animal)
+            ss =>
+                ss.Set<Kiwi>().Where(a => a is Animal)
         );
 
     [ConditionalTheory]

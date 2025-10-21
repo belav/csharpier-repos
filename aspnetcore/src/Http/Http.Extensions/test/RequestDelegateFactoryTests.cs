@@ -3826,7 +3826,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             // Initial metadata from RequestDelegateFactoryOptions.EndpointBuilder. If the caller want to override inferred metadata,
             // They need to call InferMetadata first, then add the overriding metadata, and then call Create with InferMetadata's result.
             // This is demonstrated in the following tests.
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller }),
+            m =>
+                Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller }),
             // Inferred AcceptsMetadata from RDF for complex type
             m =>
                 Assert.True(
@@ -3839,11 +3840,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     ((IProducesResponseTypeMetadata)m).Type
                 ),
             // Metadata provided by parameters implementing IEndpointParameterMetadataProvider
-            m => Assert.True(m is ParameterNameMetadata { Name: "param1" }),
+            m =>
+                Assert.True(m is ParameterNameMetadata { Name: "param1" }),
             // Metadata provided by parameters implementing IEndpointMetadataProvider
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Parameter }),
+            m =>
+                Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Parameter }),
             // Metadata provided by return type implementing IEndpointMetadataProvider
-            m => Assert.True(m is MetadataCountMetadata { Count: 5 })
+            m =>
+                Assert.True(m is MetadataCountMetadata { Count: 5 })
         );
     }
 

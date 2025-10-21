@@ -572,7 +572,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
                 Assert.Equal("some key", referenceFrames[edit.ReferenceFrameIndex].ElementKey);
             },
             // Delete old
-            edit => AssertEdit(edit, RenderTreeEditType.RemoveFrame, 1)
+            edit =>
+                AssertEdit(edit, RenderTreeEditType.RemoveFrame, 1)
         );
     }
 
@@ -598,9 +599,11 @@ public class RenderTreeDiffBuilderTest : IDisposable
         Assert.Collection(
             result.Edits,
             // Insert new
-            edit => AssertEdit(edit, RenderTreeEditType.RemoveFrame, 0),
+            edit =>
+                AssertEdit(edit, RenderTreeEditType.RemoveFrame, 0),
             // Delete old
-            edit => AssertEdit(edit, RenderTreeEditType.PrependFrame, 0)
+            edit =>
+                AssertEdit(edit, RenderTreeEditType.PrependFrame, 0)
         );
     }
 
@@ -2228,7 +2231,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
         Assert.Collection(
             result.Edits,
             // First we update the modified descendants in place
-            entry => AssertEdit(entry, RenderTreeEditType.StepIn, 0),
+            entry =>
+                AssertEdit(entry, RenderTreeEditType.StepIn, 0),
             entry =>
             {
                 AssertEdit(entry, RenderTreeEditType.UpdateText, 0);
@@ -2240,7 +2244,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
             },
             entry => AssertEdit(entry, RenderTreeEditType.StepOut, 0),
             // Then we have the permutation list
-            entry => AssertPermutationListEntry(entry, 0, 2),
+            entry =>
+                AssertPermutationListEntry(entry, 0, 2),
             entry => AssertPermutationListEntry(entry, 2, 0),
             entry => AssertEdit(entry, RenderTreeEditType.PermutationListEnd, 0)
         );

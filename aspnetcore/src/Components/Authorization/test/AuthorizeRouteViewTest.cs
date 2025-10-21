@@ -397,7 +397,8 @@ public class AuthorizeRouteViewTest
             componentInstances,
             // This is the hierarchy inside the AuthorizeRouteView, which contains its
             // own CascadingAuthenticationState
-            component => Assert.IsType<CascadingAuthenticationState>(component),
+            component =>
+                Assert.IsType<CascadingAuthenticationState>(component),
             component => Assert.IsType<CascadingValue<Task<AuthenticationState>>>(component),
             component => Assert.IsAssignableFrom<AuthorizeViewCore>(component),
             component => Assert.IsType<LayoutView>(component),
@@ -431,11 +432,13 @@ public class AuthorizeRouteViewTest
         Assert.Collection(
             componentInstances,
             // This is the externally-supplied cascading value
-            component => Assert.IsType<CascadingValue<Task<AuthenticationState>>>(component),
+            component =>
+                Assert.IsType<CascadingValue<Task<AuthenticationState>>>(component),
             component => Assert.IsType<AuthorizeRouteView>(component),
             // This is the hierarchy inside the AuthorizeRouteView. It doesn't contain a
             // further CascadingAuthenticationState
-            component => Assert.IsAssignableFrom<AuthorizeViewCore>(component),
+            component =>
+                Assert.IsAssignableFrom<AuthorizeViewCore>(component),
             component => Assert.IsType<LayoutView>(component),
             component => Assert.IsType<TestPageWithNoAuthorization>(component)
         );

@@ -646,13 +646,17 @@ app.MapPost("/test/pattern", [Attribute1, Attribute2] (AddsCustomParameterMetada
                     ((IProducesResponseTypeMetadata)m).Type
                 ),
             // Metadata provided by parameters implementing IEndpointParameterMetadataProvider
-            m => Assert.True(m is ParameterNameMetadata { Name: "param1" }),
+            m =>
+                Assert.True(m is ParameterNameMetadata { Name: "param1" }),
             // Metadata provided by parameters implementing IEndpointMetadataProvider
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Parameter }),
+            m =>
+                Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Parameter }),
             // Metadata provided by return type implementing IEndpointMetadataProvider
-            m => Assert.True(m is MetadataCountMetadata),
+            m =>
+                Assert.True(m is MetadataCountMetadata),
             // Entry-specific metadata added after a call to InferMetadata
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller })
+            m =>
+                Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller })
         );
     }
 
