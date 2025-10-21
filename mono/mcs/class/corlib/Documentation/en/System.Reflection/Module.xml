@@ -335,6 +335,8 @@
    the full path of the module reflected by the current instance. If the assembly
    that contains the module reflected by the current instance was loaded from
    a <see cref="T:System.Byte" />
+
+            
    
    
    array, the value of this string is "&lt;Unknown&gt;".</para
@@ -1662,6 +1664,8 @@
    name of the module reflected by the current instance, with the path component
    removed. If the assembly that contains the module reflected by the current
    instance was loaded from a <see cref="T:System.Byte" />
+
+            
    
    array, the value of this string is "&lt;Unknown&gt;".</para
           >

@@ -2414,6 +2414,8 @@ if the attribute is not found.</para
             <para
               >If the reader
          is positioned on a <see langword="DocumentType" />
+
+              
          
          node, this method can be used to get the PUBLIC and
          SYSTEM literals.</para
@@ -2999,6 +3001,8 @@ have a name (like <see langword="Text" />, <see langword="Comment" /> , and so o
             <para
               > The qualified name is equivalent to
          the <see cref="P:System.Xml.XmlReader.LocalName" />
+
+              
          
          prefixed with <see cref="P:System.Xml.XmlReader.Prefix" /> and the
          ':' character. For example, <see cref="P:System.Xml.XmlReader.Name" /> is

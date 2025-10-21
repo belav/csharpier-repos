@@ -150,6 +150,8 @@ Cairo.Context g = new Cairo.Context (s);
             >
           </example>
 
+          
+
 
 Note that the <paramref name="surface" /> can be a <see cref="T:Cairo.Surface" /> or <see cref="T:Cairo.ImageSurface" />.</remarks
         >

@@ -114,6 +114,8 @@ y.Equals(z) implies x.Equals(z); for any values x, y and z for  which these expr
    Hash functions are used with <see langword="hashtables" />. A good hash function
    algorithm rarely generates hash codes that collide. For more information about
    hash functions, see <paramref name="The Art of Computer Programming" />
+
+              
    
    , Vol. 3, by Donald E. Knuth.</block
             >

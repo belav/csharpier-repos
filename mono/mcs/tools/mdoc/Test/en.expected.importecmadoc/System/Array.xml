@@ -112,6 +112,8 @@ with 0 and 1 and the second dimension indexed with 0, 1, 2, and 3. </para
    the pair specifying the lower bound for that dimension and the second specifying
    the total number of elements in that dimension. Thus, a two-dimensional array
    of <see cref="T:System.Int32" />
+
+        
    
    objects would also have a constructor that could be called with <c>(-1, 2, 1, 3)</c> as its arguments,
 specifying an array of 6 zeros, with the first dimension indexed by -1 and 0,
