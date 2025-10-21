@@ -16,7 +16,8 @@ public partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorUnusedTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorUnusedTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorUnused(T t1, T t2)
         {
@@ -67,21 +68,36 @@ public partial class VectorTest
     {
         int returnVal = Pass;
 
-        if (VectorUnusedTest<float>.VectorUnused(3f, 2f) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<double>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<int>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<long>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<ushort>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<byte>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<short>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<sbyte>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<uint>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<ulong>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<nint>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (VectorUnusedTest<nuint>.VectorUnused(3, 2) != Pass) returnVal = Fail;
-        if (Vector4Test.VectorUnused() != Pass) returnVal = Fail;
-        if (Vector3Test.VectorUnused() != Pass) returnVal = Fail;
-        if (Vector2Test.VectorUnused() != Pass) returnVal = Fail;
+        if (VectorUnusedTest<float>.VectorUnused(3f, 2f) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<double>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<int>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<long>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<ushort>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<byte>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<short>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<sbyte>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<uint>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<ulong>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<nint>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (VectorUnusedTest<nuint>.VectorUnused(3, 2) != Pass)
+            returnVal = Fail;
+        if (Vector4Test.VectorUnused() != Pass)
+            returnVal = Fail;
+        if (Vector3Test.VectorUnused() != Pass)
+            returnVal = Fail;
+        if (Vector2Test.VectorUnused() != Pass)
+            returnVal = Fail;
         return returnVal;
     }
 }

@@ -8,22 +8,27 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public static class TestEnvironment
 {
-    public static IConfiguration Config { get; } = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("config.json", optional: true)
-        .AddJsonFile("config.test.json", optional: true)
-        .AddEnvironmentVariables()
-        .Build()
-        .GetSection("Test:SqlServer");
+    public static IConfiguration Config { get; } =
+        new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("config.json", optional: true)
+            .AddJsonFile("config.test.json", optional: true)
+            .AddEnvironmentVariables()
+            .Build()
+            .GetSection("Test:SqlServer");
 
-    public static string DefaultConnection { get; } = Config["DefaultConnection"]
+    public static string DefaultConnection { get; } =
+        Config["DefaultConnection"]
         ?? "Data Source=(localdb)\\MSSQLLocalDB;Database=master;Integrated Security=True;Connect Timeout=60;ConnectRetryCount=0";
 
-    private static readonly string _dataSource = new SqlConnectionStringBuilder(DefaultConnection).DataSource;
+    private static readonly string _dataSource = new SqlConnectionStringBuilder(
+        DefaultConnection
+    ).DataSource;
 
     public static bool IsConfigured { get; } = !string.IsNullOrEmpty(_dataSource);
 
-    public static bool IsCI { get; } = Environment.GetEnvironmentVariable("PIPELINE_WORKSPACE") != null;
+    public static bool IsCI { get; } =
+        Environment.GetEnvironmentVariable("PIPELINE_WORKSPACE") != null;
 
     private static bool? _isAzureSqlDb;
 
@@ -80,7 +85,8 @@ public static class TestEnvironment
         }
     }
 
-    public static bool IsLocalDb { get; } = _dataSource.StartsWith("(localdb)", StringComparison.OrdinalIgnoreCase);
+    public static bool IsLocalDb { get; } =
+        _dataSource.StartsWith("(localdb)", StringComparison.OrdinalIgnoreCase);
 
     public static bool IsFullTextSearchSupported
     {
@@ -98,11 +104,15 @@ public static class TestEnvironment
 
             try
             {
-                using var sqlConnection = new SqlConnection(SqlServerTestStore.CreateConnectionString("master"));
+                using var sqlConnection = new SqlConnection(
+                    SqlServerTestStore.CreateConnectionString("master")
+                );
                 sqlConnection.Open();
 
                 using var command = new SqlCommand(
-                    "SELECT FULLTEXTSERVICEPROPERTY('IsFullTextInstalled')", sqlConnection);
+                    "SELECT FULLTEXTSERVICEPROPERTY('IsFullTextInstalled')",
+                    sqlConnection
+                );
                 var result = (int)command.ExecuteScalar();
 
                 _fullTextInstalled = result == 1;
@@ -132,7 +142,8 @@ public static class TestEnvironment
 
             try
             {
-                _supportsHiddenColumns = (GetProductMajorVersion() >= 13 && GetEngineEdition() != 6) || IsSqlAzure;
+                _supportsHiddenColumns =
+                    (GetProductMajorVersion() >= 13 && GetEngineEdition() != 6) || IsSqlAzure;
             }
             catch (PlatformNotSupportedException)
             {
@@ -219,13 +230,20 @@ public static class TestEnvironment
 
             try
             {
-                using var sqlConnection = new SqlConnection(SqlServerTestStore.CreateConnectionString("master"));
+                using var sqlConnection = new SqlConnection(
+                    SqlServerTestStore.CreateConnectionString("master")
+                );
                 sqlConnection.Open();
 
                 using var command = new SqlCommand(
-                    "SELECT SERVERPROPERTY('IsXTPSupported');", sqlConnection);
+                    "SELECT SERVERPROPERTY('IsXTPSupported');",
+                    sqlConnection
+                );
                 var result = command.ExecuteScalar();
-                _supportsMemoryOptimizedTables = (result != null ? Convert.ToInt32(result) : 0) == 1 && !IsSqlAzure && !IsLocalDb;
+                _supportsMemoryOptimizedTables =
+                    (result != null ? Convert.ToInt32(result) : 0) == 1
+                    && !IsSqlAzure
+                    && !IsLocalDb;
             }
             catch (PlatformNotSupportedException)
             {
@@ -252,7 +270,10 @@ public static class TestEnvironment
 
             try
             {
-                _supportsTemporalTablesCascadeDelete = (GetProductMajorVersion() >= 14 /* && GetEngineEdition() != 6*/) || IsSqlAzure;
+                _supportsTemporalTablesCascadeDelete =
+                    (
+                        GetProductMajorVersion() >= 14 /* && GetEngineEdition() != 6*/
+                    ) || IsSqlAzure;
             }
             catch (PlatformNotSupportedException)
             {
@@ -398,16 +419,15 @@ public static class TestEnvironment
         }
     }
 
-    public static byte SqlServerMajorVersion
-        => GetProductMajorVersion();
+    public static byte SqlServerMajorVersion => GetProductMajorVersion();
 
     public static string ElasticPoolName { get; } = Config["ElasticPoolName"];
 
-    public static bool? GetFlag(string key)
-        => bool.TryParse(Config[key], out var flag) ? flag : null;
+    public static bool? GetFlag(string key) =>
+        bool.TryParse(Config[key], out var flag) ? flag : null;
 
-    public static int? GetInt(string key)
-        => int.TryParse(Config[key], out var value) ? value : null;
+    public static int? GetInt(string key) =>
+        int.TryParse(Config[key], out var value) ? value : null;
 
     private static int GetEngineEdition()
     {
@@ -416,11 +436,15 @@ public static class TestEnvironment
             return _engineEdition.Value;
         }
 
-        using var sqlConnection = new SqlConnection(SqlServerTestStore.CreateConnectionString("master"));
+        using var sqlConnection = new SqlConnection(
+            SqlServerTestStore.CreateConnectionString("master")
+        );
         sqlConnection.Open();
 
         using var command = new SqlCommand(
-            "SELECT SERVERPROPERTY('EngineEdition');", sqlConnection);
+            "SELECT SERVERPROPERTY('EngineEdition');",
+            sqlConnection
+        );
         _engineEdition = (int)command.ExecuteScalar();
 
         return _engineEdition.Value;
@@ -433,11 +457,15 @@ public static class TestEnvironment
             return _productMajorVersion.Value;
         }
 
-        using var sqlConnection = new SqlConnection(SqlServerTestStore.CreateConnectionString("master"));
+        using var sqlConnection = new SqlConnection(
+            SqlServerTestStore.CreateConnectionString("master")
+        );
         sqlConnection.Open();
 
         using var command = new SqlCommand(
-            "SELECT SERVERPROPERTY('ProductVersion');", sqlConnection);
+            "SELECT SERVERPROPERTY('ProductVersion');",
+            sqlConnection
+        );
         _productMajorVersion = (byte)Version.Parse((string)command.ExecuteScalar()).Major;
 
         return _productMajorVersion.Value;

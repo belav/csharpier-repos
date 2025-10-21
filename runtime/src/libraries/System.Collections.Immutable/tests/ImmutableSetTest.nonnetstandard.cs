@@ -4,7 +4,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using SetTriad = System.Tuple<System.Collections.Generic.IEnumerable<int>, System.Collections.Generic.IEnumerable<int>, bool>;
+using SetTriad = System.Tuple<
+    System.Collections.Generic.IEnumerable<int>,
+    System.Collections.Generic.IEnumerable<int>,
+    bool
+>;
 
 namespace System.Collections.Immutable.Tests
 {
@@ -19,8 +23,14 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void SymmetricExceptTest()
         {
-            this.SymmetricExceptTestHelper(Empty<int>().Add(1).Add(3).Add(5).Add(7), Enumerable.Range(0, 9).ToArray());
-            this.SymmetricExceptTestHelper(Empty<int>().Add(1).Add(3).Add(5).Add(7), Enumerable.Range(0, 5).ToArray());
+            this.SymmetricExceptTestHelper(
+                Empty<int>().Add(1).Add(3).Add(5).Add(7),
+                Enumerable.Range(0, 9).ToArray()
+            );
+            this.SymmetricExceptTestHelper(
+                Empty<int>().Add(1).Add(3).Add(5).Add(7),
+                Enumerable.Range(0, 5).ToArray()
+            );
         }
 
         [Fact]
@@ -51,7 +61,10 @@ namespace System.Collections.Immutable.Tests
             this.UnionTestHelper(this.Empty<int>(), new[] { 1, 3, 5, 7 });
             this.UnionTestHelper(this.Empty<int>().Union(new[] { 2, 4, 6 }), new[] { 1, 3, 5, 7 });
             this.UnionTestHelper(this.Empty<int>().Union(new[] { 1, 2, 3 }), new int[0] { });
-            this.UnionTestHelper(this.Empty<int>().Union(new[] { 2 }), Enumerable.Range(0, 1000).ToArray());
+            this.UnionTestHelper(
+                this.Empty<int>().Union(new[] { 2 }),
+                Enumerable.Range(0, 1000).ToArray()
+            );
         }
 
         internal abstract IBinaryTree GetRootNode<T>(IImmutableSet<T> set);

@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis
 {
     public readonly partial struct ChildSyntaxList
     {
-        public readonly partial struct Reversed : IEnumerable<SyntaxNodeOrToken>, IEquatable<Reversed>
+        public readonly partial struct Reversed
+            : IEnumerable<SyntaxNodeOrToken>,
+                IEquatable<Reversed>
         {
             private readonly SyntaxNode? _node;
             private readonly int _count;
@@ -62,8 +64,7 @@ namespace Microsoft.CodeAnalysis
 
             public bool Equals(Reversed other)
             {
-                return _node == other._node
-                    && _count == other._count;
+                return _node == other._node && _count == other._count;
             }
 
             public struct Enumerator
@@ -155,8 +156,7 @@ namespace Microsoft.CodeAnalysis
                 /// <summary>
                 /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
                 /// </summary>
-                public void Dispose()
-                { }
+                public void Dispose() { }
             }
         }
     }

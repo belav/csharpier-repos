@@ -1,19 +1,19 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Windows.Forms;
     using System.Windows.Forms.Design;
-    using System.ComponentModel;
-    using System.Drawing.Drawing2D;
-    using System.Xml;
-    using System.Collections.Generic;
-    using System.ComponentModel.Design;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.ComponentModel.Design.Serialization;
+    using System.Xml;
 
     [ActivityDesignerTheme(typeof(ConditionedActivityGroupDesignerTheme))]
     internal sealed class ConditionedActivityGroupDesigner : ActivityPreviewDesigner
@@ -24,11 +24,15 @@ namespace System.Workflow.Activities
         {
             base.Initialize(activity);
 
-            IExtenderListService extenderListService = (IExtenderListService)GetService(typeof(IExtenderListService));
+            IExtenderListService extenderListService = (IExtenderListService)GetService(
+                typeof(IExtenderListService)
+            );
             if (extenderListService != null)
             {
                 bool foundCAGExtender = false;
-                foreach (IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders())
+                foreach (
+                    IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders()
+                )
                 {
                     if (extenderProvider.GetType() == typeof(ConditionPropertyProviderExtender))
                         foundCAGExtender = true;
@@ -36,10 +40,13 @@ namespace System.Workflow.Activities
 
                 if (!foundCAGExtender)
                 {
-                    IExtenderProviderService extenderProviderService = (IExtenderProviderService)GetService(typeof(IExtenderProviderService));
+                    IExtenderProviderService extenderProviderService =
+                        (IExtenderProviderService)GetService(typeof(IExtenderProviderService));
                     if (extenderProviderService != null)
                     {
-                        extenderProviderService.AddExtenderProvider(new ConditionPropertyProviderExtender());
+                        extenderProviderService.AddExtenderProvider(
+                            new ConditionPropertyProviderExtender()
+                        );
                     }
                 }
             }
@@ -78,9 +85,7 @@ namespace System.Workflow.Activities
     [ProvideProperty("UnlessCondition", typeof(Activity))]
     internal sealed class ConditionPropertyProviderExtender : IExtenderProvider
     {
-        internal ConditionPropertyProviderExtender()
-        {
-        }
+        internal ConditionPropertyProviderExtender() { }
 
         [SRCategory(SR.ConditionedActivityConditions)]
         [SRDescription(SR.WhenConditionDescr)]
@@ -88,7 +93,8 @@ namespace System.Workflow.Activities
         public ActivityCondition GetWhenCondition(Activity activity)
         {
             if (activity.Parent is ConditionedActivityGroup)
-                return activity.GetValue(ConditionedActivityGroup.WhenConditionProperty) as ActivityCondition;
+                return activity.GetValue(ConditionedActivityGroup.WhenConditionProperty)
+                    as ActivityCondition;
             else
                 return null;
         }
@@ -104,7 +110,11 @@ namespace System.Workflow.Activities
         #region IExtenderProvider Members
         public bool CanExtend(object extendee)
         {
-            return ((extendee != this) && (extendee is Activity) && (((Activity)extendee).Parent is ConditionedActivityGroup));
+            return (
+                (extendee != this)
+                && (extendee is Activity)
+                && (((Activity)extendee).Parent is ConditionedActivityGroup)
+            );
         }
         #endregion
     }

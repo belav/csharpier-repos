@@ -18,6 +18,7 @@ public class Runtime_55131
     static ushort s_6;
     static uint[] s_15 = new uint[] { 0 };
     static bool s_19 = false;
+
     [Fact]
     public static int TestEntryPoint()
     {

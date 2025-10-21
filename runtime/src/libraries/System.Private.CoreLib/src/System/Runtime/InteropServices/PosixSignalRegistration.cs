@@ -34,7 +34,10 @@ namespace System.Runtime.InteropServices
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        public static PosixSignalRegistration Create(PosixSignal signal, Action<PosixSignalContext> handler)
+        public static PosixSignalRegistration Create(
+            PosixSignal signal,
+            Action<PosixSignalContext> handler
+        )
         {
             ArgumentNullException.ThrowIfNull(handler);
 

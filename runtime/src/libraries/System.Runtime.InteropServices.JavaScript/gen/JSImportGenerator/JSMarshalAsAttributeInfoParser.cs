@@ -10,20 +10,38 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.Interop.JavaScript
 {
-    internal sealed class JSMarshalAsAttributeParser : IMarshallingInfoAttributeParser, IUseSiteAttributeParser
+    internal sealed class JSMarshalAsAttributeParser
+        : IMarshallingInfoAttributeParser,
+            IUseSiteAttributeParser
     {
         private readonly INamedTypeSymbol _jsMarshalAsAttribute;
 
         public JSMarshalAsAttributeParser(Compilation compilation)
         {
-            _jsMarshalAsAttribute = compilation.GetTypeByMetadataName(Constants.JSMarshalAsAttribute)!.ConstructUnboundGenericType();
+            _jsMarshalAsAttribute = compilation
+                .GetTypeByMetadataName(Constants.JSMarshalAsAttribute)!
+                .ConstructUnboundGenericType();
         }
-        public bool CanParseAttributeType(INamedTypeSymbol attributeType) => attributeType.IsGenericType && SymbolEqualityComparer.Default.Equals(_jsMarshalAsAttribute, attributeType.ConstructUnboundGenericType());
-        public MarshallingInfo ParseAttribute(AttributeData attributeData, ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+
+        public bool CanParseAttributeType(INamedTypeSymbol attributeType) =>
+            attributeType.IsGenericType
+            && SymbolEqualityComparer.Default.Equals(
+                _jsMarshalAsAttribute,
+                attributeType.ConstructUnboundGenericType()
+            );
+
+        public MarshallingInfo ParseAttribute(
+            AttributeData attributeData,
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             JSTypeFlags jsType = JSTypeFlags.None;
             List<JSTypeFlags> jsTypeArguments = new List<JSTypeFlags>();
-            INamedTypeSymbol? jsTypeArgs = attributeData.AttributeClass.TypeArguments[0] as INamedTypeSymbol;
+            INamedTypeSymbol? jsTypeArgs =
+                attributeData.AttributeClass.TypeArguments[0] as INamedTypeSymbol;
             if (jsTypeArgs.IsGenericType)
             {
                 string gt = jsTypeArgs.ConstructUnboundGenericType().ToDisplayString();
@@ -32,7 +50,11 @@ namespace Microsoft.Interop.JavaScript
 
                 Enum.TryParse(name, out jsType);
 
-                foreach (var ta in jsTypeArgs.TypeArguments.Cast<INamedTypeSymbol>().Select(x => x.ToDisplayString()))
+                foreach (
+                    var ta in jsTypeArgs
+                        .TypeArguments.Cast<INamedTypeSymbol>()
+                        .Select(x => x.ToDisplayString())
+                )
                 {
                     string argName = ta.Substring(ta.IndexOf("JSType") + "JSType.".Length);
                     JSTypeFlags jsTypeArg = JSTypeFlags.None;
@@ -52,14 +74,21 @@ namespace Microsoft.Interop.JavaScript
                 return new JSMissingMarshallingInfo(JSTypeInfo.CreateJSTypeInfoForTypeSymbol(type));
             }
 
-            return new JSMarshallingInfo(NoMarshallingInfo.Instance, JSTypeInfo.CreateJSTypeInfoForTypeSymbol(type))
+            return new JSMarshallingInfo(
+                NoMarshallingInfo.Instance,
+                JSTypeInfo.CreateJSTypeInfoForTypeSymbol(type)
+            )
             {
                 JSType = jsType,
                 JSTypeArguments = jsTypeArguments.ToArray(),
             };
         }
 
-        UseSiteAttributeData IUseSiteAttributeParser.ParseAttribute(AttributeData attributeData, IElementInfoProvider elementInfoProvider, GetMarshallingInfoCallback marshallingInfoCallback)
+        UseSiteAttributeData IUseSiteAttributeParser.ParseAttribute(
+            AttributeData attributeData,
+            IElementInfoProvider elementInfoProvider,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             return new UseSiteAttributeData(0, NoCountInfo.Instance, attributeData);
         }

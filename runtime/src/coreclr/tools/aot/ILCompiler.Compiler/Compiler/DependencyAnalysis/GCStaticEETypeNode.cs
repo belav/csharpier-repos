@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.Runtime;
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -27,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis
             _target = target;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         protected override ObjectNodeSection GetDehydratedSection(NodeFactory factory)
         {
@@ -57,14 +56,20 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool IsShareable => true;
 
-        protected override ObjectData GetDehydratableData(NodeFactory factory, bool relocsOnly = false)
+        protected override ObjectData GetDehydratableData(
+            NodeFactory factory,
+            bool relocsOnly = false
+        )
         {
             ObjectDataBuilder dataBuilder = new ObjectDataBuilder(factory, relocsOnly);
             dataBuilder.RequireInitialPointerAlignment();
             dataBuilder.AddSymbol(this);
 
             // +1 for SyncBlock (static size already includes MethodTable)
-            Debug.Assert(factory.Target.Abi == TargetAbi.NativeAot || factory.Target.Abi == TargetAbi.CppCodegen);
+            Debug.Assert(
+                factory.Target.Abi == TargetAbi.NativeAot
+                    || factory.Target.Abi == TargetAbi.CppCodegen
+            );
             int totalSize = (_gcMap.Size + 1) * _target.PointerSize;
 
             // We only need to check for containsPointers because ThreadStatics are always allocated
@@ -90,7 +95,11 @@ namespace ILCompiler.DependencyAnalysis
             dataBuilder.EmitInt(totalSize);
 
             // Related type: System.Object. This allows storing an instance of this type in an array of objects.
-            dataBuilder.EmitPointerReloc(factory.NecessaryTypeSymbol(factory.TypeSystemContext.GetWellKnownType(WellKnownType.Object)));
+            dataBuilder.EmitPointerReloc(
+                factory.NecessaryTypeSymbol(
+                    factory.TypeSystemContext.GetWellKnownType(WellKnownType.Object)
+                )
+            );
 
             return dataBuilder.ToObjectData();
         }

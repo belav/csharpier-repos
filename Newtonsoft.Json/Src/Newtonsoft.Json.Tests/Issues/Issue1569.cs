@@ -46,7 +46,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public async Task Test()
         {
-            string json = "[1,2,3,456789999999999999999999999999999999999999999999999999999999999999456789999999999999999999999999999999999999999999999999999999999999456789999999999999999999999999999999999999999999999999999999999999]";
+            string json =
+                "[1,2,3,456789999999999999999999999999999999999999999999999999999999999999456789999999999999999999999999999999999999999999999999999999999999456789999999999999999999999999999999999999999999999999999999999999]";
 
             Stream s = new AsyncOnlyStream(new MemoryStream(Encoding.UTF8.GetBytes(json)));
             StreamReader sr = new StreamReader(s, Encoding.UTF8, true, 2);
@@ -55,9 +56,7 @@ namespace Newtonsoft.Json.Tests.Issues
             reader.CharBuffer = new char[2];
 #endif
 
-            while (await reader.ReadAsync())
-            {   
-            }
+            while (await reader.ReadAsync()) { }
         }
 
         public class AsyncOnlyStream : Stream
@@ -94,7 +93,12 @@ namespace Newtonsoft.Json.Tests.Issues
                 throw new NotSupportedException();
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
             }
@@ -104,7 +108,12 @@ namespace Newtonsoft.Json.Tests.Issues
                 throw new NotSupportedException();
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
             }

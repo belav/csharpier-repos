@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -10,11 +11,12 @@ using System.Reflection;
 using System.Threading;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.Hosting;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    internal class ReflectionComposablePartDefinition : ComposablePartDefinition, ICompositionElement
+    internal class ReflectionComposablePartDefinition
+        : ComposablePartDefinition,
+            ICompositionElement
     {
         private readonly IReflectionPartCreationInfo _creationInfo;
 
@@ -101,7 +103,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (this._metadata == null)
                 {
-                    IDictionary<string, object> metadata = this._creationInfo.GetMetadata().AsReadOnly();
+                    IDictionary<string, object> metadata = this
+                        ._creationInfo.GetMetadata()
+                        .AsReadOnly();
                     lock (this._lock)
                     {
                         if (this._metadata == null)
@@ -116,10 +120,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         internal bool IsDisposalRequired
         {
-            get
-            {
-                return this._creationInfo.IsDisposalRequired;
-            }
+            get { return this._creationInfo.IsDisposalRequired; }
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
@@ -137,7 +138,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         internal override ComposablePartDefinition GetGenericPartDefinition()
         {
-            GenericSpecializationPartCreationInfo genericCreationInfo = this._creationInfo as GenericSpecializationPartCreationInfo;
+            GenericSpecializationPartCreationInfo genericCreationInfo =
+                this._creationInfo as GenericSpecializationPartCreationInfo;
             if (genericCreationInfo != null)
             {
                 return genericCreationInfo.OriginalPart;
@@ -146,13 +148,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return null;
         }
 
-        internal override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        internal override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             if (this.IsGeneric())
             {
                 List<Tuple<ComposablePartDefinition, ExportDefinition>> exports = null;
 
-                var genericParameters = (definition.Metadata.Count > 0) ? definition.Metadata.GetValue<IEnumerable<object>>(CompositionConstants.GenericParametersMetadataName) : null;
+                var genericParameters =
+                    (definition.Metadata.Count > 0)
+                        ? definition.Metadata.GetValue<IEnumerable<object>>(
+                            CompositionConstants.GenericParametersMetadataName
+                        )
+                        : null;
                 // if and only if generic parameters have been supplied can we attempt to "close" the generic
                 if (genericParameters != null)
                 {
@@ -161,15 +170,26 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     if (TryGetGenericTypeParameters(genericParameters, out genericTypeParameters))
                     {
                         // go through all orders of generic parameters that part exports allows
-                        foreach (Type[] candidateParameters in this.GetCandidateParameters(genericTypeParameters))
+                        foreach (
+                            Type[] candidateParameters in this.GetCandidateParameters(
+                                genericTypeParameters
+                            )
+                        )
                         {
                             ComposablePartDefinition candidatePart = null;
-                            if (this.TryMakeGenericPartDefinition(candidateParameters, out candidatePart))
+                            if (
+                                this.TryMakeGenericPartDefinition(
+                                    candidateParameters,
+                                    out candidatePart
+                                )
+                            )
                             {
                                 var candidatePartExports = candidatePart.GetExports(definition);
                                 if (candidatePartExports != ComposablePartDefinition._EmptyExports)
                                 {
-                                    exports = exports.FastAppendToListAllowNulls(candidatePartExports);
+                                    exports = exports.FastAppendToListAllowNulls(
+                                        candidatePartExports
+                                    );
                                 }
                             }
                         }
@@ -188,15 +208,23 @@ namespace System.ComponentModel.Composition.ReflectionModel
             // we iterate over all exports and find only generic ones. Assuming the arity matches, we reorder the original parameters
             foreach (ExportDefinition export in this.ExportDefinitions)
             {
-                var genericParametersOrder = export.Metadata.GetValue<int[]>(CompositionConstants.GenericExportParametersOrderMetadataName);
-                if ((genericParametersOrder != null) && (genericParametersOrder.Length == genericParameters.Length))
+                var genericParametersOrder = export.Metadata.GetValue<int[]>(
+                    CompositionConstants.GenericExportParametersOrderMetadataName
+                );
+                if (
+                    (genericParametersOrder != null)
+                    && (genericParametersOrder.Length == genericParameters.Length)
+                )
                 {
                     yield return GenericServices.Reorder(genericParameters, genericParametersOrder);
                 }
             }
         }
 
-        private static bool TryGetGenericTypeParameters(IEnumerable<object> genericParameters, out Type[] genericTypeParameters)
+        private static bool TryGetGenericTypeParameters(
+            IEnumerable<object> genericParameters,
+            out Type[] genericTypeParameters
+        )
         {
             genericTypeParameters = genericParameters as Type[];
             if (genericTypeParameters == null)
@@ -215,16 +243,30 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return true;
         }
 
-        internal bool TryMakeGenericPartDefinition(Type[] genericTypeParameters, out ComposablePartDefinition genericPartDefinition)
+        internal bool TryMakeGenericPartDefinition(
+            Type[] genericTypeParameters,
+            out ComposablePartDefinition genericPartDefinition
+        )
         {
             genericPartDefinition = null;
 
-            if (!GenericSpecializationPartCreationInfo.CanSpecialize(this.Metadata, genericTypeParameters))
+            if (
+                !GenericSpecializationPartCreationInfo.CanSpecialize(
+                    this.Metadata,
+                    genericTypeParameters
+                )
+            )
             {
                 return false;
             }
 
-            genericPartDefinition = new ReflectionComposablePartDefinition(new GenericSpecializationPartCreationInfo(this._creationInfo, this, genericTypeParameters));
+            genericPartDefinition = new ReflectionComposablePartDefinition(
+                new GenericSpecializationPartCreationInfo(
+                    this._creationInfo,
+                    this,
+                    genericTypeParameters
+                )
+            );
             return true;
         }
 

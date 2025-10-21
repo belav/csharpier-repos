@@ -51,6 +51,6 @@ namespace System.Runtime.InteropServices
         VT_CLSID = 72,
         VT_VECTOR = 0x1000,
         VT_ARRAY = 0x2000,
-        VT_BYREF = 0x4000
+        VT_BYREF = 0x4000,
     }
 }

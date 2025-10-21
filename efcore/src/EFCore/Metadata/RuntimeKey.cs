@@ -63,8 +63,9 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual void SetPrincipalKeyValueFactory<TKey>(IPrincipalKeyValueFactory<TKey> factory)
-        => _principalKeyValueFactory = factory;
+    public virtual void SetPrincipalKeyValueFactory<TKey>(
+        IPrincipalKeyValueFactory<TKey> factory
+    ) => _principalKeyValueFactory = factory;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -73,15 +74,15 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual void SetIdentityMapFactory(Func<bool, IIdentityMap> factory)
-        => _identityMapFactory = factory;
+    public virtual void SetIdentityMapFactory(Func<bool, IIdentityMap> factory) =>
+        _identityMapFactory = factory;
 
     /// <summary>
     ///     Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-        => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,10 +91,11 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyKey)this).ToDebugString(),
-            () => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <inheritdoc />
     IReadOnlyList<IReadOnlyProperty> IReadOnlyKey.Properties
@@ -125,29 +127,42 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyForeignKey> IReadOnlyKey.GetReferencingForeignKeys()
-        => ReferencingForeignKeys ?? Enumerable.Empty<IReadOnlyForeignKey>();
+    IEnumerable<IReadOnlyForeignKey> IReadOnlyKey.GetReferencingForeignKeys() =>
+        ReferencingForeignKeys ?? Enumerable.Empty<IReadOnlyForeignKey>();
 
     /// <inheritdoc />
-    IPrincipalKeyValueFactory<TKey> IKey.GetPrincipalKeyValueFactory<TKey>()
-        => (IPrincipalKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-            ref _principalKeyValueFactory, this, static key => key.CreatePrincipalKeyValueFactory<TKey>());
+    IPrincipalKeyValueFactory<TKey> IKey.GetPrincipalKeyValueFactory<TKey>() =>
+        (IPrincipalKeyValueFactory<TKey>)
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _principalKeyValueFactory,
+                this,
+                static key => key.CreatePrincipalKeyValueFactory<TKey>()
+            );
 
     /// <inheritdoc />
-    IPrincipalKeyValueFactory IKey.GetPrincipalKeyValueFactory()
-        => (IPrincipalKeyValueFactory)NonCapturingLazyInitializer.EnsureInitialized(
-            ref _principalKeyValueFactory, (IKey)this, static key => _createPrincipalKeyValueFactoryMethod
-                .MakeGenericMethod(key.GetKeyType())
-                .Invoke(key, new object[0])!);
+    IPrincipalKeyValueFactory IKey.GetPrincipalKeyValueFactory() =>
+        (IPrincipalKeyValueFactory)
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _principalKeyValueFactory,
+                (IKey)this,
+                static key =>
+                    _createPrincipalKeyValueFactoryMethod
+                        .MakeGenericMethod(key.GetKeyType())
+                        .Invoke(key, new object[0])!
+            );
 
-    private static readonly MethodInfo _createPrincipalKeyValueFactoryMethod = typeof(Key).GetTypeInfo()
+    private static readonly MethodInfo _createPrincipalKeyValueFactoryMethod = typeof(Key)
+        .GetTypeInfo()
         .GetDeclaredMethod(nameof(CreatePrincipalKeyValueFactory))!;
 
     private IPrincipalKeyValueFactory<TKey> CreatePrincipalKeyValueFactory<TKey>()
         where TKey : notnull => new KeyValueFactoryFactory().Create<TKey>(this);
 
     /// <inheritdoc />
-    Func<bool, IIdentityMap> IRuntimeKey.GetIdentityMapFactory()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _identityMapFactory, this, static key => new IdentityMapFactoryFactory().Create(key));
+    Func<bool, IIdentityMap> IRuntimeKey.GetIdentityMapFactory() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _identityMapFactory,
+            this,
+            static key => new IdentityMapFactoryFactory().Create(key)
+        );
 }

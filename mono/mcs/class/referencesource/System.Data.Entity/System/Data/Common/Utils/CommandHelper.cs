@@ -42,7 +42,12 @@ namespace System.Data.Common.Utils
         /// requires: commandText must not be null
         /// The command text must be in the form Container.FunctionImportName.
         /// </summary>
-        internal static void ParseFunctionImportCommandText(string commandText, string defaultContainerName, out string containerName, out string functionImportName)
+        internal static void ParseFunctionImportCommandText(
+            string commandText,
+            string defaultContainerName,
+            out string containerName,
+            out string functionImportName
+        )
         {
             Debug.Assert(null != commandText);
 
@@ -62,7 +67,9 @@ namespace System.Data.Common.Utils
             }
             if (string.IsNullOrEmpty(containerName) || string.IsNullOrEmpty(functionImportName))
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_InvalidStoredProcedureCommandText);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_InvalidStoredProcedureCommandText
+                );
             }
         }
 
@@ -79,16 +86,20 @@ namespace System.Data.Common.Utils
 
             // Check to make sure that either the command has no transaction associated with it, or it
             // matches the one used by the connection
-            if (entityTransaction != null && entityTransaction != entityCommand.Connection.CurrentTransaction)
+            if (
+                entityTransaction != null
+                && entityTransaction != entityCommand.Connection.CurrentTransaction
+            )
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_InvalidTransactionForCommand);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_InvalidTransactionForCommand
+                );
             }
             // Now we have asserted that EntityCommand either has no transaction or has one that matches the
             // one used in the connection, we can simply use the connection's transaction object
             entityTransaction = entityCommand.Connection.CurrentTransaction;
             return entityTransaction;
         }
-
 
         /// <summary>
         /// Given an entity command and entity transaction, passes through relevant state to store provider
@@ -97,17 +108,23 @@ namespace System.Data.Common.Utils
         /// <param name="entityCommand">Entity command. Must not be null.</param>
         /// <param name="entityTransaction">Entity transaction. Must not be null.</param>
         /// <param name="storeProviderCommand">Store provider command that is being setup. Must not be null.</param>
-        internal static void SetStoreProviderCommandState(EntityCommand entityCommand, EntityTransaction entityTransaction, DbCommand storeProviderCommand)
+        internal static void SetStoreProviderCommandState(
+            EntityCommand entityCommand,
+            EntityTransaction entityTransaction,
+            DbCommand storeProviderCommand
+        )
         {
             Debug.Assert(null != entityCommand);
             Debug.Assert(null != storeProviderCommand);
 
             storeProviderCommand.CommandTimeout = entityCommand.CommandTimeout;
-            storeProviderCommand.Connection = ((EntityConnection)entityCommand.Connection).StoreConnection;
-            storeProviderCommand.Transaction = (null != entityTransaction) ? entityTransaction.StoreTransaction : null;
+            storeProviderCommand.Connection = (
+                (EntityConnection)entityCommand.Connection
+            ).StoreConnection;
+            storeProviderCommand.Transaction =
+                (null != entityTransaction) ? entityTransaction.StoreTransaction : null;
             storeProviderCommand.UpdatedRowSource = entityCommand.UpdatedRowSource;
         }
-
 
         /// <summary>
         /// Given an entity command, store provider command and a connection, sets all output parameter values on the entity command.
@@ -117,7 +134,11 @@ namespace System.Data.Common.Utils
         /// <param name="storeProviderCommand">Store provider command from which to retrieve parameter values. Must not
         /// be null.</param>
         /// <param name="connection">The connection on which the command was run.  Must not be null</param>
-        internal static void SetEntityParameterValues(EntityCommand entityCommand, DbCommand storeProviderCommand, EntityConnection connection)
+        internal static void SetEntityParameterValues(
+            EntityCommand entityCommand,
+            DbCommand storeProviderCommand,
+            EntityConnection connection
+        )
         {
             Debug.Assert(null != entityCommand);
             Debug.Assert(null != storeProviderCommand);
@@ -130,15 +151,23 @@ namespace System.Data.Common.Utils
                 {
                     // if the entity command also defines the parameter, propagate store parameter value
                     // to entity parameter
-                    int parameterOrdinal = entityCommand.Parameters.IndexOf(storeParameter.ParameterName);
+                    int parameterOrdinal = entityCommand.Parameters.IndexOf(
+                        storeParameter.ParameterName
+                    );
                     if (0 <= parameterOrdinal)
                     {
-                        EntityParameter entityParameter = entityCommand.Parameters[parameterOrdinal];
+                        EntityParameter entityParameter = entityCommand.Parameters[
+                            parameterOrdinal
+                        ];
                         object parameterValue = storeParameter.Value;
                         TypeUsage parameterType = entityParameter.GetTypeUsage();
                         if (Helper.IsSpatialType(parameterType))
                         {
-                            parameterValue = GetSpatialValueFromProviderValue(parameterValue, (PrimitiveType)parameterType.EdmType, connection);
+                            parameterValue = GetSpatialValueFromProviderValue(
+                                parameterValue,
+                                (PrimitiveType)parameterType.EdmType,
+                                connection
+                            );
                         }
                         entityParameter.Value = parameterValue;
                     }
@@ -146,11 +175,20 @@ namespace System.Data.Common.Utils
             }
         }
 
-        private static object GetSpatialValueFromProviderValue(object spatialValue, PrimitiveType parameterType, EntityConnection connection)
+        private static object GetSpatialValueFromProviderValue(
+            object spatialValue,
+            PrimitiveType parameterType,
+            EntityConnection connection
+        )
         {
-            DbProviderServices providerServices = DbProviderServices.GetProviderServices(connection.StoreConnection);
-            StoreItemCollection storeItemCollection = (StoreItemCollection)connection.GetMetadataWorkspace().GetItemCollection(DataSpace.SSpace);
-            DbSpatialServices spatialServices = providerServices.GetSpatialServices(storeItemCollection.StoreProviderManifestToken);
+            DbProviderServices providerServices = DbProviderServices.GetProviderServices(
+                connection.StoreConnection
+            );
+            StoreItemCollection storeItemCollection = (StoreItemCollection)
+                connection.GetMetadataWorkspace().GetItemCollection(DataSpace.SSpace);
+            DbSpatialServices spatialServices = providerServices.GetSpatialServices(
+                storeItemCollection.StoreProviderManifestToken
+            );
             if (Helper.IsGeographicType(parameterType))
             {
                 return spatialServices.GeographyFromProviderValue(spatialValue);
@@ -163,15 +201,28 @@ namespace System.Data.Common.Utils
         }
 
         // requires: all arguments must be given
-        internal static EdmFunction FindFunctionImport(MetadataWorkspace workspace, string containerName, string functionImportName)
+        internal static EdmFunction FindFunctionImport(
+            MetadataWorkspace workspace,
+            string containerName,
+            string functionImportName
+        )
         {
             Debug.Assert(null != workspace && null != containerName && null != functionImportName);
             // find entity container
             EntityContainer entityContainer;
-            if (!workspace.TryGetEntityContainer(containerName, DataSpace.CSpace, out entityContainer))
+            if (
+                !workspace.TryGetEntityContainer(
+                    containerName,
+                    DataSpace.CSpace,
+                    out entityContainer
+                )
+            )
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_UnableToFindFunctionImportContainer(
-                    containerName));
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_UnableToFindFunctionImportContainer(
+                        containerName
+                    )
+                );
             }
 
             // find function import
@@ -186,12 +237,20 @@ namespace System.Data.Common.Utils
             }
             if (null == functionImport)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_UnableToFindFunctionImport(
-                    containerName, functionImportName));
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_UnableToFindFunctionImport(
+                        containerName,
+                        functionImportName
+                    )
+                );
             }
             if (functionImport.IsComposableAttribute)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_FunctionImportMustBeNonComposable(containerName + "." + functionImportName));
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_FunctionImportMustBeNonComposable(
+                        containerName + "." + functionImportName
+                    )
+                );
             }
             return functionImport;
         }

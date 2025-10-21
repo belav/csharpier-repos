@@ -14,11 +14,20 @@ namespace System.Threading
 
         [Intrinsic]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void CompareExchange(ref object? location1, ref object? value, ref object? comparand, [NotNullIfNotNull(nameof(location1))] ref object? result);
+        private static extern void CompareExchange(
+            ref object? location1,
+            ref object? value,
+            ref object? comparand,
+            [NotNullIfNotNull(nameof(location1))] ref object? result
+        );
 
         [Intrinsic]
         [return: NotNullIfNotNull(nameof(location1))]
-        public static object? CompareExchange(ref object? location1, object? value, object? comparand)
+        public static object? CompareExchange(
+            ref object? location1,
+            object? value,
+            object? comparand
+        )
         {
             // This avoids coop handles, esp. on the output which would be particularly inefficient.
             // Passing everything by ref is equivalent to coop handles -- ref to locals at least.
@@ -58,10 +67,17 @@ namespace System.Threading
         public static extern int Exchange(ref int location1, int value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void Exchange([NotNullIfNotNull(nameof(value))] ref object? location1, ref object? value, [NotNullIfNotNull(nameof(location1))] ref object? result);
+        private static extern void Exchange(
+            [NotNullIfNotNull(nameof(value))] ref object? location1,
+            ref object? value,
+            [NotNullIfNotNull(nameof(location1))] ref object? result
+        );
 
         [return: NotNullIfNotNull(nameof(location1))]
-        public static object? Exchange([NotNullIfNotNull(nameof(value))] ref object? location1, object? value)
+        public static object? Exchange(
+            [NotNullIfNotNull(nameof(value))] ref object? location1,
+            object? value
+        )
         {
             // See CompareExchange(object) for comments.
             object? result = null;
@@ -74,7 +90,8 @@ namespace System.Threading
 
         [return: NotNullIfNotNull(nameof(location1))]
         [Intrinsic]
-        public static T CompareExchange<T>(ref T location1, T value, T comparand) where T : class?
+        public static T CompareExchange<T>(ref T location1, T value, T comparand)
+            where T : class?
         {
             if (Unsafe.IsNullRef(ref location1))
                 throw new NullReferenceException();
@@ -89,7 +106,12 @@ namespace System.Threading
             //
             T? result = null;
             // T : class so call the object overload.
-            CompareExchange(ref Unsafe.As<T, object?>(ref location1), ref Unsafe.As<T, object?>(ref value), ref Unsafe.As<T, object?>(ref comparand), ref Unsafe.As<T, object?>(ref result!));
+            CompareExchange(
+                ref Unsafe.As<T, object?>(ref location1),
+                ref Unsafe.As<T, object?>(ref value),
+                ref Unsafe.As<T, object?>(ref comparand),
+                ref Unsafe.As<T, object?>(ref result!)
+            );
             return result;
         }
 
@@ -99,7 +121,8 @@ namespace System.Threading
 
         [return: NotNullIfNotNull(nameof(location1))]
         [Intrinsic]
-        public static T Exchange<T>([NotNullIfNotNull(nameof(value))] ref T location1, T value) where T : class?
+        public static T Exchange<T>([NotNullIfNotNull(nameof(value))] ref T location1, T value)
+            where T : class?
         {
             if (Unsafe.IsNullRef(ref location1))
                 throw new NullReferenceException();
@@ -109,7 +132,11 @@ namespace System.Threading
             //
             T? result = null;
             // T : class so call the object overload.
-            Exchange(ref Unsafe.As<T, object?>(ref location1), ref Unsafe.As<T, object?>(ref value), ref Unsafe.As<T, object?>(ref result!));
+            Exchange(
+                ref Unsafe.As<T, object?>(ref location1),
+                ref Unsafe.As<T, object?>(ref value),
+                ref Unsafe.As<T, object?>(ref result!)
+            );
             return result;
         }
 

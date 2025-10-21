@@ -13,14 +13,16 @@ namespace System.IO.Tests.Enumeration
             return Directory.GetFiles(directory, pattern);
         }
 
-        protected virtual string[] GetFiles(string directory, string pattern, EnumerationOptions options)
+        protected virtual string[] GetFiles(
+            string directory,
+            string pattern,
+            EnumerationOptions options
+        )
         {
             return Directory.GetFiles(directory, pattern, options);
         }
 
-        [Theory,
-            InlineData("."),
-            InlineData("*.*")]
+        [Theory, InlineData("."), InlineData("*.*")]
         public void GetFiles_WildcardPatternIsTranslated(string pattern)
         {
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
@@ -31,7 +33,11 @@ namespace System.IO.Tests.Enumeration
             string[] results = GetFiles(testDirectory.FullName, pattern);
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, results);
 
-            results = GetFiles(testDirectory.FullName, pattern, new EnumerationOptions { MatchType = MatchType.Win32 });
+            results = GetFiles(
+                testDirectory.FullName,
+                pattern,
+                new EnumerationOptions { MatchType = MatchType.Win32 }
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, results);
         }
 
@@ -60,10 +66,16 @@ namespace System.IO.Tests.Enumeration
             fileTwo.Create().Dispose();
 
             // We allow for expression to be "foo\" which would translate to "foo\*".
-            string[] results = GetFiles(testDirectory.Parent.FullName, testDirectory.Name + Path.DirectorySeparatorChar);
+            string[] results = GetFiles(
+                testDirectory.Parent.FullName,
+                testDirectory.Name + Path.DirectorySeparatorChar
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, results);
 
-            results = GetFiles(testDirectory.Parent.FullName, testDirectory.Name + Path.AltDirectorySeparatorChar);
+            results = GetFiles(
+                testDirectory.Parent.FullName,
+                testDirectory.Name + Path.AltDirectorySeparatorChar
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, results);
 
             results = GetFiles(testDirectory.FullName, string.Empty);
@@ -111,15 +123,21 @@ namespace System.IO.Tests.Enumeration
 
     public class PatternTransformTests_DirectoryInfo : PatternTransformTests_Directory
     {
-
         protected override string[] GetFiles(string directory, string pattern)
         {
             return new DirectoryInfo(directory).GetFiles(pattern).Select(i => i.FullName).ToArray();
         }
 
-        protected override string[] GetFiles(string directory, string pattern, EnumerationOptions options)
+        protected override string[] GetFiles(
+            string directory,
+            string pattern,
+            EnumerationOptions options
+        )
         {
-            return new DirectoryInfo(directory).GetFiles(pattern, options).Select(i => i.FullName).ToArray();
+            return new DirectoryInfo(directory)
+                .GetFiles(pattern, options)
+                .Select(i => i.FullName)
+                .ToArray();
         }
     }
 }

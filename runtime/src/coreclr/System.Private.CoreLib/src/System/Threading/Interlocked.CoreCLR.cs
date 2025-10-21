@@ -14,15 +14,13 @@ namespace System.Threading
         /// <param name="location">The variable whose value is to be incremented.</param>
         /// <returns>The incremented value.</returns>
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
-        public static int Increment(ref int location) =>
-            Add(ref location, 1);
+        public static int Increment(ref int location) => Add(ref location, 1);
 
         /// <summary>Increments a specified variable and stores the result, as an atomic operation.</summary>
         /// <param name="location">The variable whose value is to be incremented.</param>
         /// <returns>The incremented value.</returns>
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
-        public static long Increment(ref long location) =>
-            Add(ref location, 1);
+        public static long Increment(ref long location) => Add(ref location, 1);
         #endregion
 
         #region Decrement
@@ -30,15 +28,13 @@ namespace System.Threading
         /// <param name="location">The variable whose value is to be decremented.</param>
         /// <returns>The decremented value.</returns>
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
-        public static int Decrement(ref int location) =>
-            Add(ref location, -1);
+        public static int Decrement(ref int location) => Add(ref location, -1);
 
         /// <summary>Decrements a specified variable and stores the result, as an atomic operation.</summary>
         /// <param name="location">The variable whose value is to be decremented.</param>
         /// <returns>The decremented value.</returns>
         /// <exception cref="NullReferenceException">The address of location is a null pointer.</exception>
-        public static long Decrement(ref long location) =>
-            Add(ref location, -1);
+        public static long Decrement(ref long location) => Add(ref location, -1);
         #endregion
 
         #region Exchange
@@ -68,7 +64,10 @@ namespace System.Threading
         [Intrinsic]
         [MethodImpl(MethodImplOptions.InternalCall)]
         [return: NotNullIfNotNull(nameof(location1))]
-        public static extern object? Exchange([NotNullIfNotNull(nameof(value))] ref object? location1, object? value);
+        public static extern object? Exchange(
+            [NotNullIfNotNull(nameof(value))] ref object? location1,
+            object? value
+        );
 
         // The below whole method reduces to a single call to Exchange(ref object, object) but
         // the JIT thinks that it will generate more native code than it actually does.
@@ -82,7 +81,8 @@ namespace System.Threading
         [Intrinsic]
         [return: NotNullIfNotNull(nameof(location1))]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Exchange<T>([NotNullIfNotNull(nameof(value))] ref T location1, T value) where T : class? =>
+        public static T Exchange<T>([NotNullIfNotNull(nameof(value))] ref T location1, T value)
+            where T : class? =>
             Unsafe.As<T>(Exchange(ref Unsafe.As<T, object?>(ref location1), value));
         #endregion
 
@@ -116,7 +116,11 @@ namespace System.Threading
         [Intrinsic]
         [MethodImpl(MethodImplOptions.InternalCall)]
         [return: NotNullIfNotNull(nameof(location1))]
-        public static extern object? CompareExchange(ref object? location1, object? value, object? comparand);
+        public static extern object? CompareExchange(
+            ref object? location1,
+            object? value,
+            object? comparand
+        );
 
         // Note that getILIntrinsicImplementationForInterlocked() in vm\jitinterface.cpp replaces
         // the body of the following method with the following IL:
@@ -138,8 +142,11 @@ namespace System.Threading
         [Intrinsic]
         [return: NotNullIfNotNull(nameof(location1))]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T CompareExchange<T>(ref T location1, T value, T comparand) where T : class? =>
-            Unsafe.As<T>(CompareExchange(ref Unsafe.As<T, object?>(ref location1), value, comparand));
+        public static T CompareExchange<T>(ref T location1, T value, T comparand)
+            where T : class? =>
+            Unsafe.As<T>(
+                CompareExchange(ref Unsafe.As<T, object?>(ref location1), value, comparand)
+            );
         #endregion
 
         #region Add

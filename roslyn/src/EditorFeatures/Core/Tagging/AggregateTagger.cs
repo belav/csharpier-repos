@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging;
 /// Base type of all taggers that wrap a set of other <paramref name="taggers"/>, presenting them all as if they were a
 /// single <see cref="ITagger{T}"/>.
 /// </summary>
-internal abstract class AbstractAggregateTagger<TTag>(ImmutableArray<EfficientTagger<TTag>> taggers) : EfficientTagger<TTag>, IDisposable
+internal abstract class AbstractAggregateTagger<TTag>(ImmutableArray<EfficientTagger<TTag>> taggers)
+    : EfficientTagger<TTag>,
+        IDisposable
     where TTag : ITag
 {
     protected readonly ImmutableArray<EfficientTagger<TTag>> Taggers = taggers;
@@ -38,7 +40,6 @@ internal abstract class AbstractAggregateTagger<TTag>(ImmutableArray<EfficientTa
             foreach (var tagger in this.Taggers)
                 tagger.TagsChanged += value;
         }
-
         remove
         {
             foreach (var tagger in this.Taggers)
@@ -56,7 +57,10 @@ internal sealed class SimpleAggregateTagger<TTag>(ImmutableArray<EfficientTagger
     : AbstractAggregateTagger<TTag>(taggers)
     where TTag : ITag
 {
-    public override void AddTags(NormalizedSnapshotSpanCollection spans, SegmentedList<ITagSpan<TTag>> tags)
+    public override void AddTags(
+        NormalizedSnapshotSpanCollection spans,
+        SegmentedList<ITagSpan<TTag>> tags
+    )
     {
         foreach (var tagger in this.Taggers)
             tagger.AddTags(spans, tags);

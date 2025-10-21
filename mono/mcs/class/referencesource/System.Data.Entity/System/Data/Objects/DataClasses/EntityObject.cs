@@ -6,10 +6,10 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
+using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Reflection;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 
 namespace System.Data.Objects.DataClasses
@@ -17,9 +17,13 @@ namespace System.Data.Objects.DataClasses
     /// <summary>
     /// This is the class is the basis for all perscribed EntityObject classes.
     /// </summary>
-    [DataContract(IsReference=true)]
+    [DataContract(IsReference = true)]
     [Serializable]
-    public abstract class EntityObject : StructuralObject, IEntityWithKey, IEntityWithChangeTracker, IEntityWithRelationships
+    public abstract class EntityObject
+        : StructuralObject,
+            IEntityWithKey,
+            IEntityWithChangeTracker,
+            IEntityWithRelationships
     {
         #region Privates
 
@@ -32,8 +36,10 @@ namespace System.Data.Objects.DataClasses
 
         [NonSerialized]
         private IEntityChangeTracker _entityChangeTracker = s_detachedEntityChangeTracker;
+
         [NonSerialized]
-        private static readonly DetachedEntityChangeTracker s_detachedEntityChangeTracker = new DetachedEntityChangeTracker();
+        private static readonly DetachedEntityChangeTracker s_detachedEntityChangeTracker =
+            new DetachedEntityChangeTracker();
 
         /// <summary>
         /// Helper class used when we are not currently attached to a change tracker.
@@ -42,15 +48,24 @@ namespace System.Data.Objects.DataClasses
         private class DetachedEntityChangeTracker : IEntityChangeTracker
         {
             void IEntityChangeTracker.EntityMemberChanging(string entityMemberName) { }
+
             void IEntityChangeTracker.EntityMemberChanged(string entityMemberName) { }
-            void IEntityChangeTracker.EntityComplexMemberChanging(string entityMemberName, object complexObject, string complexMemberName) { }
-            void IEntityChangeTracker.EntityComplexMemberChanged(string entityMemberName, object complexObject, string complexMemberName) { }
+
+            void IEntityChangeTracker.EntityComplexMemberChanging(
+                string entityMemberName,
+                object complexObject,
+                string complexMemberName
+            ) { }
+
+            void IEntityChangeTracker.EntityComplexMemberChanged(
+                string entityMemberName,
+                object complexObject,
+                string complexMemberName
+            ) { }
+
             EntityState IEntityChangeTracker.EntityState
             {
-                get
-                {
-                    return EntityState.Detached;
-                }
+                get { return EntityState.Detached; }
             }
         }
 
@@ -64,16 +79,13 @@ namespace System.Data.Objects.DataClasses
                 }
                 return _entityChangeTracker;
             }
-            set
-            {
-                _entityChangeTracker = value;
-            }
+            set { _entityChangeTracker = value; }
         }
 
         #endregion
         #region Publics
         /// <summary>
-        /// The storage state of this EntityObject 
+        /// The storage state of this EntityObject
         /// </summary>
         /// <value>
         /// This property returns a value from the EntityState enum.
@@ -84,10 +96,16 @@ namespace System.Data.Objects.DataClasses
         {
             get
             {
-                Debug.Assert(EntityChangeTracker != null,
-                    "EntityChangeTracker should never return null -- if detached should be set to s_detachedEntityChangeTracker");
-                Debug.Assert(EntityChangeTracker != s_detachedEntityChangeTracker ? EntityChangeTracker.EntityState != EntityState.Detached : true,
-                    "Should never get a detached state from an attached change tracker.");
+                Debug.Assert(
+                    EntityChangeTracker != null,
+                    "EntityChangeTracker should never return null -- if detached should be set to s_detachedEntityChangeTracker"
+                );
+                Debug.Assert(
+                    EntityChangeTracker != s_detachedEntityChangeTracker
+                        ? EntityChangeTracker.EntityState != EntityState.Detached
+                        : true,
+                    "Should never get a detached state from an attached change tracker."
+                );
 
                 return EntityChangeTracker.EntityState;
             }
@@ -102,23 +120,23 @@ namespace System.Data.Objects.DataClasses
         [DataMember]
         public EntityKey EntityKey
         {
-            get
-            {
-                return _entityKey;
-            }
+            get { return _entityKey; }
             set
             {
                 // Report the change to the change tracker
                 // If we are not attached to a change tracker, we can do anything we want to the key
                 // If we are attached, the change tracker should make sure the new value is valid for the current state
-                Debug.Assert(EntityChangeTracker != null, "_entityChangeTracker should never be null -- if detached it should return s_detachedEntityChangeTracker");
+                Debug.Assert(
+                    EntityChangeTracker != null,
+                    "_entityChangeTracker should never be null -- if detached it should return s_detachedEntityChangeTracker"
+                );
                 EntityChangeTracker.EntityMemberChanging(StructuralObject.EntityKeyPropertyName);
                 _entityKey = value;
-                EntityChangeTracker.EntityMemberChanged(StructuralObject.EntityKeyPropertyName);                
+                EntityChangeTracker.EntityMemberChanged(StructuralObject.EntityKeyPropertyName);
             }
-        } 
+        }
 
-        #endregion       
+        #endregion
         #region IEntityWithChangeTracker
 
 
@@ -133,7 +151,11 @@ namespace System.Data.Objects.DataClasses
             // Fail if the change tracker is already set for this EntityObject and it's being set to something different
             // If the original change tracker is associated with a disposed ObjectStateManager, then allow
             // the entity to be attached
-            if (changeTracker != null && EntityChangeTracker != s_detachedEntityChangeTracker && !Object.ReferenceEquals(changeTracker, EntityChangeTracker))
+            if (
+                changeTracker != null
+                && EntityChangeTracker != s_detachedEntityChangeTracker
+                && !Object.ReferenceEquals(changeTracker, EntityChangeTracker)
+            )
             {
                 EntityEntry entry = EntityChangeTracker as EntityEntry;
                 if (entry == null || !entry.ObjectStateManager.IsDisposed)
@@ -141,7 +163,7 @@ namespace System.Data.Objects.DataClasses
                     throw EntityUtil.EntityCantHaveMultipleChangeTrackers();
                 }
             }
-            
+
             EntityChangeTracker = changeTracker;
         }
 
@@ -149,7 +171,7 @@ namespace System.Data.Objects.DataClasses
         #region IEntityWithRelationships
 
         /// <summary>
-        /// Returns the container for the lazily created relationship 
+        /// Returns the container for the lazily created relationship
         /// navigation property objects, collections and refs.
         /// </summary>
         RelationshipManager IEntityWithRelationships.RelationshipManager
@@ -166,25 +188,27 @@ namespace System.Data.Objects.DataClasses
         }
 
         #endregion
-        #endregion        
+        #endregion
         #region Protected Change Tracking Methods
 
         /// <summary>
-        /// This method is called whenever a change is going to be made to an EntityObject 
+        /// This method is called whenever a change is going to be made to an EntityObject
         /// property.
         /// </summary>
         /// <param name="property">
         /// The name of the changing property.
-        /// </param>        
+        /// </param>
         /// <exception cref="System.ArgumentNullException">
         /// When parameter member is null (Nothing in Visual Basic).
         /// </exception>
-        protected sealed override void ReportPropertyChanging(
-            string property)
+        protected sealed override void ReportPropertyChanging(string property)
         {
             EntityUtil.CheckStringArgument(property, "property");
 
-            Debug.Assert(EntityChangeTracker != null, "_entityChangeTracker should never be null -- if detached it should return s_detachedEntityChangeTracker");
+            Debug.Assert(
+                EntityChangeTracker != null,
+                "_entityChangeTracker should never be null -- if detached it should return s_detachedEntityChangeTracker"
+            );
 
             base.ReportPropertyChanging(property);
 
@@ -192,23 +216,25 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// This method is called whenever a change is made to an EntityObject 
+        /// This method is called whenever a change is made to an EntityObject
         /// property.
         /// </summary>
         /// <param name="property">
         /// The name of the changed property.
-        /// </param>        
+        /// </param>
         /// <exception cref="System.ArgumentNullException">
         /// When parameter member is null (Nothing in Visual Basic).
         /// </exception>
-        protected sealed override void ReportPropertyChanged(
-            string property)
+        protected sealed override void ReportPropertyChanged(string property)
         {
             EntityUtil.CheckStringArgument(property, "property");
 
-            Debug.Assert(EntityChangeTracker != null, "EntityChangeTracker should never return null -- if detached it should be return s_detachedEntityChangeTracker");
-            EntityChangeTracker.EntityMemberChanged(property);           
-            
+            Debug.Assert(
+                EntityChangeTracker != null,
+                "EntityChangeTracker should never return null -- if detached it should be return s_detachedEntityChangeTracker"
+            );
+            EntityChangeTracker.EntityMemberChanged(property);
+
             base.ReportPropertyChanged(property);
         }
 
@@ -217,15 +243,12 @@ namespace System.Data.Objects.DataClasses
 
         internal sealed override bool IsChangeTracked
         {
-            get
-            {
-                return EntityState != EntityState.Detached;
-            }
+            get { return EntityState != EntityState.Detached; }
         }
 
         /// <summary>
-        /// This method is called by a ComplexObject contained in this Entity 
-        /// whenever a change is about to be made to a property of the  
+        /// This method is called by a ComplexObject contained in this Entity
+        /// whenever a change is about to be made to a property of the
         /// ComplexObject so that the change can be forwarded to the change tracker.
         /// </summary>
         /// <param name="entityMemberName">
@@ -236,19 +259,26 @@ namespace System.Data.Objects.DataClasses
         /// </param>
         /// <param name="complexMemberName">
         /// The name of the changing property on complexObject.
-        /// </param>        
+        /// </param>
         internal sealed override void ReportComplexPropertyChanging(
-            string entityMemberName, ComplexObject complexObject, string complexMemberName)
+            string entityMemberName,
+            ComplexObject complexObject,
+            string complexMemberName
+        )
         {
             Debug.Assert(complexObject != null, "invalid complexObject");
             Debug.Assert(!String.IsNullOrEmpty(complexMemberName), "invalid complexMemberName");
 
-            EntityChangeTracker.EntityComplexMemberChanging(entityMemberName, complexObject, complexMemberName);            
+            EntityChangeTracker.EntityComplexMemberChanging(
+                entityMemberName,
+                complexObject,
+                complexMemberName
+            );
         }
 
         /// <summary>
-        /// This method is called by a ComplexObject contained in this Entity 
-        /// whenever a change has been made to a property of the  
+        /// This method is called by a ComplexObject contained in this Entity
+        /// whenever a change has been made to a property of the
         /// ComplexObject so that the change can be forwarded to the change tracker.
         /// </summary>
         /// <param name="entityMemberName">
@@ -259,17 +289,23 @@ namespace System.Data.Objects.DataClasses
         /// </param>
         /// <param name="complexMemberName">
         /// The name of the changing property on complexObject.
-        /// </param>        
+        /// </param>
         internal sealed override void ReportComplexPropertyChanged(
-            string entityMemberName, ComplexObject complexObject, string complexMemberName)
+            string entityMemberName,
+            ComplexObject complexObject,
+            string complexMemberName
+        )
         {
             Debug.Assert(complexObject != null, "invalid complexObject");
             Debug.Assert(!String.IsNullOrEmpty(complexMemberName), "invalid complexMemberName");
 
-            EntityChangeTracker.EntityComplexMemberChanged(entityMemberName, complexObject, complexMemberName);
+            EntityChangeTracker.EntityComplexMemberChanged(
+                entityMemberName,
+                complexObject,
+                complexMemberName
+            );
         }
 
-        #endregion      
+        #endregion
     }
 }
-

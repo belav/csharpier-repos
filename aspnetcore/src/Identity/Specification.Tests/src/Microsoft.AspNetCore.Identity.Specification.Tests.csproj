@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Shared test suite for Asp.Net Identity Core store implementations.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -7,7 +6,6 @@
     <PackageTags>aspnetcore;identity;membership</PackageTags>
     <Nullable>disable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Identity" />
     <Reference Include="Microsoft.Extensions.Configuration" />
@@ -18,5 +16,4 @@
     <Reference Include="xunit.extensibility.core" />
     <Reference Include="xunit.analyzers" PrivateAssets="All" />
   </ItemGroup>
-
 </Project>

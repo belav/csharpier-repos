@@ -31,14 +31,8 @@ namespace System.Activities
 
         public string Name
         {
-            get
-            {
-                return this.typeDescriptor.Name;
-            }
-            set
-            {
-                this.typeDescriptor.Name = value;
-            }
+            get { return this.typeDescriptor.Name; }
+            set { this.typeDescriptor.Name = value; }
         }
 
         [DependsOn("Name")]
@@ -58,33 +52,21 @@ namespace System.Activities
         [DependsOn("Attributes")]
         public KeyedCollection<string, DynamicActivityProperty> Properties
         {
-            get
-            {
-                return this.typeDescriptor.Properties; 
-            }
+            get { return this.typeDescriptor.Properties; }
         }
 
         [DependsOn("Properties")]
         public new Collection<Constraint> Constraints
         {
-            get
-            {              
-                return base.Constraints;
-            }
+            get { return base.Constraints; }
         }
 
         [TypeConverter(typeof(ImplementationVersionConverter))]
         [DefaultValue(null)]
         public new Version ImplementationVersion
         {
-            get
-            {
-                return base.ImplementationVersion;
-            }
-            set
-            {
-                base.ImplementationVersion = value;
-            }
+            get { return base.ImplementationVersion; }
+            set { base.ImplementationVersion = value; }
         }
 
         [XamlDeferLoad(typeof(FuncDeferringLoader), typeof(Activity))]
@@ -93,25 +75,20 @@ namespace System.Activities
         [Ambient]
         public new Func<Activity> Implementation
         {
-            get
-            {
-                return base.Implementation;
-            }
-            set
-            {
-                base.Implementation = value;
-            }
+            get { return base.Implementation; }
+            set { base.Implementation = value; }
         }
 
         KeyedCollection<string, DynamicActivityProperty> IDynamicActivity.Properties
         {
-            get
-            {
-                return this.Properties;
-            }
+            get { return this.Properties; }
         }
 
-        internal override void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal override void InternalExecute(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             if (this.runtimeImplementation != null)
             {
@@ -119,7 +96,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadata(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadata(bool createEmptyBindings)
         {
             Activity body = null;
             if (this.Implementation != null)
@@ -205,7 +182,10 @@ namespace System.Activities
     }
 
     [ContentProperty("Implementation")]
-    public sealed class DynamicActivity<TResult> : Activity<TResult>, ICustomTypeDescriptor, IDynamicActivity
+    public sealed class DynamicActivity<TResult>
+        : Activity<TResult>,
+            ICustomTypeDescriptor,
+            IDynamicActivity
     {
         Activity runtimeImplementation;
         DynamicActivityTypeDescriptor typeDescriptor;
@@ -219,14 +199,8 @@ namespace System.Activities
 
         public string Name
         {
-            get
-            {
-                return this.typeDescriptor.Name;
-            }
-            set
-            {
-                this.typeDescriptor.Name = value;
-            }
+            get { return this.typeDescriptor.Name; }
+            set { this.typeDescriptor.Name = value; }
         }
 
         [DependsOn("Name")]
@@ -246,33 +220,21 @@ namespace System.Activities
         [DependsOn("Attributes")]
         public KeyedCollection<string, DynamicActivityProperty> Properties
         {
-            get
-            {
-                return this.typeDescriptor.Properties;
-            }
+            get { return this.typeDescriptor.Properties; }
         }
 
         [DependsOn("Properties")]
         public new Collection<Constraint> Constraints
         {
-            get
-            {
-                return base.Constraints;
-            }
+            get { return base.Constraints; }
         }
 
         [TypeConverter(typeof(ImplementationVersionConverter))]
         [DefaultValue(null)]
         public new Version ImplementationVersion
         {
-            get
-            {
-                return base.ImplementationVersion;
-            }
-            set
-            {
-                base.ImplementationVersion = value;
-            }
+            get { return base.ImplementationVersion; }
+            set { base.ImplementationVersion = value; }
         }
 
         [XamlDeferLoad(typeof(FuncDeferringLoader), typeof(Activity))]
@@ -281,25 +243,20 @@ namespace System.Activities
         [Ambient]
         public new Func<Activity> Implementation
         {
-            get
-            {
-                return base.Implementation;
-            }
-            set
-            {
-                base.Implementation = value;
-            }
+            get { return base.Implementation; }
+            set { base.Implementation = value; }
         }
 
         KeyedCollection<string, DynamicActivityProperty> IDynamicActivity.Properties
         {
-            get
-            {
-                return this.Properties;
-            }
+            get { return this.Properties; }
         }
 
-        internal override void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal override void InternalExecute(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             if (this.runtimeImplementation != null)
             {
@@ -307,7 +264,7 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
         {
             Activity body = null;
             if (this.Implementation != null)
@@ -329,7 +286,7 @@ namespace System.Activities
             SetVariablesCollection(information.GetVariables());
             SetImportedDelegatesCollection(information.GetDelegates());
             SetArgumentsCollection(information.GetArguments(), createEmptyBindings);
-        }       
+        }
 
         AttributeCollection ICustomTypeDescriptor.GetAttributes()
         {
@@ -392,5 +349,3 @@ namespace System.Activities
         }
     }
 }
-
-

@@ -34,7 +34,8 @@ public static class CoreLoggerExtensions
     public static void SaveChangesFailed(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         DbContext context,
-        Exception exception)
+        Exception exception
+    )
     {
         var definition = CoreResources.LogExceptionDuringSaveChanges(diagnostics);
 
@@ -42,17 +43,30 @@ public static class CoreLoggerExtensions
         {
             definition.Log(
                 diagnostics,
-                context.GetType(), Environment.NewLine, exception,
-                exception);
+                context.GetType(),
+                Environment.NewLine,
+                exception,
+                exception
+            );
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = CreateDbContextErrorEventData(context, exception, definition);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             interceptor?.SaveChangesFailed(eventData);
         }
@@ -71,7 +85,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         DbContext context,
         Exception exception,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = CoreResources.LogExceptionDuringSaveChanges(diagnostics);
 
@@ -79,17 +94,30 @@ public static class CoreLoggerExtensions
         {
             definition.Log(
                 diagnostics,
-                context.GetType(), Environment.NewLine, exception,
-                exception);
+                context.GetType(),
+                Environment.NewLine,
+                exception,
+                exception
+            );
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = CreateDbContextErrorEventData(context, exception, definition);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -103,8 +131,8 @@ public static class CoreLoggerExtensions
     private static DbContextErrorEventData CreateDbContextErrorEventData(
         DbContext context,
         Exception exception,
-        EventDefinition<Type?, string, Exception> definition)
-        => new(definition, SaveChangesFailed, context, exception);
+        EventDefinition<Type?, string, Exception> definition
+    ) => new(definition, SaveChangesFailed, context, exception);
 
     private static string SaveChangesFailed(EventDefinitionBase definition, EventData payload)
     {
@@ -120,7 +148,8 @@ public static class CoreLoggerExtensions
     /// <param name="context">The context in use.</param>
     public static void SaveChangesCanceled(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
-        DbContext context)
+        DbContext context
+    )
     {
         var definition = CoreResources.LogSaveChangesCanceled(diagnostics);
 
@@ -129,13 +158,23 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType());
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextEventData(definition, SaveChangesCanceled, context);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             interceptor?.SaveChangesCanceled(eventData);
         }
@@ -152,7 +191,8 @@ public static class CoreLoggerExtensions
     public static Task SaveChangesCanceledAsync(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         DbContext context,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = CoreResources.LogSaveChangesCanceled(diagnostics);
 
@@ -161,13 +201,23 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType());
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextEventData(definition, SaveChangesCanceled, context);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -194,29 +244,41 @@ public static class CoreLoggerExtensions
     public static void OldModelVersionWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
         DbContext context,
-        DbContextOptions contextOptions)
+        DbContextOptions contextOptions
+    )
     {
         var definition = CoreResources.LogOldModelVersion(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            var modelVersion = contextOptions.FindExtension<CoreOptionsExtension>()?.Model?.GetProductVersion() ?? "";
+            var modelVersion =
+                contextOptions.FindExtension<CoreOptionsExtension>()?.Model?.GetProductVersion()
+                ?? "";
 
-            definition.Log(
-                diagnostics,
-                modelVersion,
-                ProductInfo.GetVersion());
+            definition.Log(diagnostics, modelVersion, ProductInfo.GetVersion());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ContextInitializedEventData(
                 definition,
                 OldModelVersion,
                 context,
-                contextOptions);
+                contextOptions
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -224,10 +286,10 @@ public static class CoreLoggerExtensions
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (ContextInitializedEventData)payload;
-        var modelVersion = p.ContextOptions.FindExtension<CoreOptionsExtension>()?.Model?.GetProductVersion() ?? "";
-        return d.GenerateMessage(
-            modelVersion,
-            ProductInfo.GetVersion());
+        var modelVersion =
+            p.ContextOptions.FindExtension<CoreOptionsExtension>()?.Model?.GetProductVersion()
+            ?? "";
+        return d.GenerateMessage(modelVersion, ProductInfo.GetVersion());
     }
 
     /// <summary>
@@ -243,8 +305,14 @@ public static class CoreLoggerExtensions
         DbContext context,
         IReadOnlyList<IUpdateEntry> entries,
         DbUpdateConcurrencyException exception,
-        Func<DbContext, DbUpdateConcurrencyException, IReadOnlyList<IUpdateEntry>, EventDefinition<Exception>,
-            ConcurrencyExceptionEventData>? createEventData)
+        Func<
+            DbContext,
+            DbUpdateConcurrencyException,
+            IReadOnlyList<IUpdateEntry>,
+            EventDefinition<Exception>,
+            ConcurrencyExceptionEventData
+        >? createEventData
+    )
     {
         var definition = CoreResources.LogOptimisticConcurrencyException(diagnostics);
 
@@ -253,14 +321,25 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, exception);
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = createEventData?.Invoke(context, exception, entries, definition)
+            var eventData =
+                createEventData?.Invoke(context, exception, entries, definition)
                 ?? CreateConcurrencyExceptionEventData(context, exception, entries, definition);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -287,9 +366,15 @@ public static class CoreLoggerExtensions
         DbContext context,
         IReadOnlyList<IUpdateEntry> entries,
         DbUpdateConcurrencyException exception,
-        Func<DbContext, DbUpdateConcurrencyException, IReadOnlyList<IUpdateEntry>, EventDefinition<Exception>,
-            ConcurrencyExceptionEventData>? createEventData,
-        CancellationToken cancellationToken = default)
+        Func<
+            DbContext,
+            DbUpdateConcurrencyException,
+            IReadOnlyList<IUpdateEntry>,
+            EventDefinition<Exception>,
+            ConcurrencyExceptionEventData
+        >? createEventData,
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = CoreResources.LogOptimisticConcurrencyException(diagnostics);
 
@@ -298,18 +383,33 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, exception);
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = createEventData?.Invoke(context, exception, entries, definition)
+            var eventData =
+                createEventData?.Invoke(context, exception, entries, definition)
                 ?? CreateConcurrencyExceptionEventData(context, exception, entries, definition);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.ThrowingConcurrencyExceptionAsync(eventData, default, cancellationToken);
+                return interceptor.ThrowingConcurrencyExceptionAsync(
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -320,15 +420,13 @@ public static class CoreLoggerExtensions
         DbContext context,
         DbUpdateConcurrencyException exception,
         IReadOnlyList<IUpdateEntry> entries,
-        EventDefinition<Exception> definition)
-        => new(
-            definition,
-            OptimisticConcurrencyException,
-            context,
-            entries,
-            exception);
+        EventDefinition<Exception> definition
+    ) => new(definition, OptimisticConcurrencyException, context, entries, exception);
 
-    private static string OptimisticConcurrencyException(EventDefinitionBase definition, EventData payload)
+    private static string OptimisticConcurrencyException(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<Exception>)definition;
         var p = (ConcurrencyExceptionEventData)payload;
@@ -344,7 +442,8 @@ public static class CoreLoggerExtensions
     public static void DuplicateDependentEntityTypeInstanceWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         IEntityType dependent1,
-        IEntityType dependent2)
+        IEntityType dependent2
+    )
     {
         var definition = CoreResources.LogDuplicateDependentEntityTypeInstance(diagnostics);
 
@@ -353,19 +452,34 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, dependent1.DisplayName(), dependent2.DisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new SharedDependentEntityEventData(
                 definition,
                 DuplicateDependentEntityTypeInstanceWarning,
                 dependent1,
-                dependent2);
+                dependent2
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string DuplicateDependentEntityTypeInstanceWarning(EventDefinitionBase definition, EventData payload)
+    private static string DuplicateDependentEntityTypeInstanceWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (SharedDependentEntityEventData)payload;
@@ -381,27 +495,37 @@ public static class CoreLoggerExtensions
     public static void QueryIterationFailed(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         Type contextType,
-        Exception exception)
+        Exception exception
+    )
     {
         var definition = CoreResources.LogExceptionDuringQueryIteration(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                contextType, Environment.NewLine, exception,
-                exception);
+            definition.Log(diagnostics, contextType, Environment.NewLine, exception, exception);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new DbContextTypeErrorEventData(
                 definition,
                 QueryIterationFailed,
                 contextType,
-                exception);
+                exception
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -417,7 +541,10 @@ public static class CoreLoggerExtensions
     /// </summary>
     /// <param name="diagnostics">The diagnostics logger to use.</param>
     /// <param name="contextType">The <see cref="DbContext" /> type being used.</param>
-    public static void QueryCanceled(this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics, Type contextType)
+    public static void QueryCanceled(
+        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
+        Type contextType
+    )
     {
         var definition = CoreResources.LogQueryCanceled(diagnostics);
 
@@ -426,14 +553,22 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, contextType);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new DbContextTypeEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                QueryCanceled,
-                contextType);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new DbContextTypeEventData(definition, QueryCanceled, contextType);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -456,41 +591,67 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         DbContext? context,
         ExpressionPrinter expressionPrinter,
-        Expression queryExpression)
+        Expression queryExpression
+    )
     {
         var definition = CoreResources.LogQueryCompilationStarting(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, Environment.NewLine, expressionPrinter.PrintExpression(queryExpression));
+            definition.Log(
+                diagnostics,
+                Environment.NewLine,
+                expressionPrinter.PrintExpression(queryExpression)
+            );
         }
 
-        if (diagnostics.NeedsEventData<IQueryExpressionInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData<IQueryExpressionInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new QueryExpressionEventData(
                 definition,
                 QueryCompilationStarting,
                 context,
                 queryExpression,
-                expressionPrinter);
+                expressionPrinter
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return (interceptor.QueryCompilationStarting(queryExpression, eventData), eventData);
+                return (
+                    interceptor.QueryCompilationStarting(queryExpression, eventData),
+                    eventData
+                );
             }
         }
 
         return (queryExpression, null);
     }
 
-    private static string QueryCompilationStarting(EventDefinitionBase definition, EventData payload)
+    private static string QueryCompilationStarting(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (QueryExpressionEventData)payload;
-        return d.GenerateMessage(Environment.NewLine, p.ExpressionPrinter.PrintExpression(p.Expression));
+        return d.GenerateMessage(
+            Environment.NewLine,
+            p.ExpressionPrinter.PrintExpression(p.Expression)
+        );
     }
 
     /// <summary>
@@ -498,7 +659,8 @@ public static class CoreLoggerExtensions
     /// </summary>
     /// <param name="diagnostics">The diagnostics logger to use.</param>
     public static void FirstWithoutOrderByAndFilterWarning(
-        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics)
+        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics
+    )
     {
         var definition = CoreResources.LogFirstWithoutOrderByAndFilter(diagnostics);
 
@@ -507,17 +669,29 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new EventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                FirstWithoutOrderByAndFilterWarning);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new EventData(definition, FirstWithoutOrderByAndFilterWarning);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string FirstWithoutOrderByAndFilterWarning(EventDefinitionBase definition, EventData payload)
+    private static string FirstWithoutOrderByAndFilterWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition)definition;
         return d.GenerateMessage();
@@ -528,7 +702,8 @@ public static class CoreLoggerExtensions
     /// </summary>
     /// <param name="diagnostics">The diagnostics logger to use.</param>
     public static void RowLimitingOperationWithoutOrderByWarning(
-        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics)
+        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics
+    )
     {
         var definition = CoreResources.LogRowLimitingOperationWithoutOrderBy(diagnostics);
 
@@ -537,17 +712,29 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new EventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                RowLimitingOperationWithoutOrderByWarning);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new EventData(definition, RowLimitingOperationWithoutOrderByWarning);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string RowLimitingOperationWithoutOrderByWarning(EventDefinitionBase definition, EventData payload)
+    private static string RowLimitingOperationWithoutOrderByWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition)definition;
         return d.GenerateMessage();
@@ -558,26 +745,44 @@ public static class CoreLoggerExtensions
     /// </summary>
     /// <param name="diagnostics">The diagnostics logger to use.</param>
     public static void DistinctAfterOrderByWithoutRowLimitingOperatorWarning(
-        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics)
+        this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics
+    )
     {
-        var definition = CoreResources.LogDistinctAfterOrderByWithoutRowLimitingOperatorWarning(diagnostics);
+        var definition = CoreResources.LogDistinctAfterOrderByWithoutRowLimitingOperatorWarning(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EventData(
                 definition,
-                DistinctAfterOrderByWithoutRowLimitingOperatorWarning);
+                DistinctAfterOrderByWithoutRowLimitingOperatorWarning
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string DistinctAfterOrderByWithoutRowLimitingOperatorWarning(EventDefinitionBase definition, EventData payload)
+    private static string DistinctAfterOrderByWithoutRowLimitingOperatorWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition)definition;
         return d.GenerateMessage();
@@ -590,23 +795,39 @@ public static class CoreLoggerExtensions
     /// <param name="navigation">The navigation being included.</param>
     public static void NavigationBaseIncluded(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
-        INavigationBase navigation)
+        INavigationBase navigation
+    )
     {
         var definition = CoreResources.LogNavigationBaseIncluded(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, navigation.DeclaringEntityType.ShortName() + "." + navigation.Name);
+            definition.Log(
+                diagnostics,
+                navigation.DeclaringEntityType.ShortName() + "." + navigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new NavigationBaseEventData(
                 definition,
                 NavigationBaseIncluded,
-                navigation);
+                navigation
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -614,7 +835,9 @@ public static class CoreLoggerExtensions
     {
         var d = (EventDefinition<string>)definition;
         var p = (NavigationBaseEventData)payload;
-        return d.GenerateMessage(p.NavigationBase.DeclaringEntityType.ShortName() + "." + p.NavigationBase.Name);
+        return d.GenerateMessage(
+            p.NavigationBase.DeclaringEntityType.ShortName() + "." + p.NavigationBase.Name
+        );
     }
 
     /// <summary>
@@ -624,31 +847,52 @@ public static class CoreLoggerExtensions
     /// <param name="navigation">The navigation being included.</param>
     public static void NavigationBaseIncludeIgnored(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
-        INavigationBase navigation)
+        INavigationBase navigation
+    )
     {
         var definition = CoreResources.LogNavigationBaseIncludeIgnored(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, navigation.DeclaringEntityType.ShortName() + "." + navigation.Name);
+            definition.Log(
+                diagnostics,
+                navigation.DeclaringEntityType.ShortName() + "." + navigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new NavigationBaseEventData(
                 definition,
                 NavigationBaseIncludeIgnored,
-                navigation);
+                navigation
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string NavigationBaseIncludeIgnored(EventDefinitionBase definition, EventData payload)
+    private static string NavigationBaseIncludeIgnored(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (NavigationBaseEventData)payload;
-        return d.GenerateMessage(p.NavigationBase.DeclaringEntityType.ShortName() + "." + p.NavigationBase.Name);
+        return d.GenerateMessage(
+            p.NavigationBase.DeclaringEntityType.ShortName() + "." + p.NavigationBase.Name
+        );
     }
 
     /// <summary>
@@ -662,25 +906,42 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         DbContext? context,
         ExpressionPrinter expressionPrinter,
-        Expression queryExecutorExpression)
+        Expression queryExecutorExpression
+    )
     {
         var definition = CoreResources.LogQueryExecutionPlanned(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, Environment.NewLine, expressionPrinter.PrintExpression(queryExecutorExpression));
+            definition.Log(
+                diagnostics,
+                Environment.NewLine,
+                expressionPrinter.PrintExpression(queryExecutorExpression)
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new QueryExpressionEventData(
                 definition,
                 QueryExecutionPlanned,
                 context,
                 queryExecutorExpression,
-                expressionPrinter);
+                expressionPrinter
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -688,7 +949,10 @@ public static class CoreLoggerExtensions
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (QueryExpressionEventData)payload;
-        return d.GenerateMessage(Environment.NewLine, p.ExpressionPrinter.PrintExpression(p.Expression));
+        return d.GenerateMessage(
+            Environment.NewLine,
+            p.ExpressionPrinter.PrintExpression(p.Expression)
+        );
     }
 
     /// <summary>
@@ -697,7 +961,8 @@ public static class CoreLoggerExtensions
     /// <param name="diagnostics">The diagnostics logger to use.</param>
     /// <typeparam name="TLoggerCategory">The logger category for which to log the warning.</typeparam>
     public static void SensitiveDataLoggingEnabledWarning<TLoggerCategory>(
-        this IDiagnosticsLogger<TLoggerCategory> diagnostics)
+        this IDiagnosticsLogger<TLoggerCategory> diagnostics
+    )
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         var definition = CoreResources.LogSensitiveDataLoggingEnabled(diagnostics);
@@ -707,13 +972,25 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EventData(
                 definition,
-                (d, _) => ((EventDefinition)d).GenerateMessage());
+                (d, _) => ((EventDefinition)d).GenerateMessage()
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -762,33 +1039,54 @@ public static class CoreLoggerExtensions
     /// <param name="navigation">The navigation being used.</param>
     public static void PossibleUnintendedCollectionNavigationNullComparisonWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
-        INavigation navigation)
+        INavigation navigation
+    )
     {
-        var definition = CoreResources.LogPossibleUnintendedCollectionNavigationNullComparison(diagnostics);
+        var definition = CoreResources.LogPossibleUnintendedCollectionNavigationNullComparison(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
             definition.Log(
                 diagnostics,
-                $"{navigation.DeclaringEntityType.DisplayName()}.{navigation.Name}");
+                $"{navigation.DeclaringEntityType.DisplayName()}.{navigation.Name}"
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new NavigationEventData(
                 definition,
                 PossibleUnintendedCollectionNavigationNullComparisonWarning,
-                navigation);
+                navigation
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string PossibleUnintendedCollectionNavigationNullComparisonWarning(EventDefinitionBase definition, EventData payload)
+    private static string PossibleUnintendedCollectionNavigationNullComparisonWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (NavigationEventData)payload;
-        return d.GenerateMessage($"{p.Navigation.DeclaringEntityType.DisplayName()}.{p.Navigation.Name}");
+        return d.GenerateMessage(
+            $"{p.Navigation.DeclaringEntityType.DisplayName()}.{p.Navigation.Name}"
+        );
     }
 
     /// <summary>
@@ -800,7 +1098,8 @@ public static class CoreLoggerExtensions
     public static void PossibleUnintendedReferenceComparisonWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         Expression left,
-        Expression right)
+        Expression right
+    )
     {
         var definition = CoreResources.LogPossibleUnintendedReferenceComparison(diagnostics);
 
@@ -809,19 +1108,34 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, left, right);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new BinaryExpressionEventData(
                 definition,
                 PossibleUnintendedReferenceComparisonWarning,
                 left,
-                right);
+                right
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string PossibleUnintendedReferenceComparisonWarning(EventDefinitionBase definition, EventData payload)
+    private static string PossibleUnintendedReferenceComparisonWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<object, object>)definition;
         var p = (BinaryExpressionEventData)payload;
@@ -840,7 +1154,8 @@ public static class CoreLoggerExtensions
     public static void InvalidIncludePathError(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
         string navigationChain,
-        string navigationName)
+        string navigationName
+    )
     {
         var definition = CoreResources.LogInvalidIncludePath(diagnostics);
         if (diagnostics.ShouldLog(definition))
@@ -848,15 +1163,27 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, navigationName, navigationChain);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new InvalidIncludePathEventData(
                 definition,
                 InvalidIncludePathError,
                 navigationChain,
-                navigationName);
+                navigationName
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -875,7 +1202,8 @@ public static class CoreLoggerExtensions
     /// <param name="serviceProvider">The service provider.</param>
     public static void ServiceProviderCreated(
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
     {
         var definition = CoreResources.LogServiceProviderCreated(diagnostics);
 
@@ -884,14 +1212,26 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ServiceProviderEventData(
                 definition,
                 (d, _) => ((EventDefinition)d).GenerateMessage(),
-                serviceProvider);
+                serviceProvider
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -902,7 +1242,8 @@ public static class CoreLoggerExtensions
     /// <param name="serviceProviders">The service providers that have been created.</param>
     public static void ManyServiceProvidersCreatedWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
-        ICollection<IServiceProvider> serviceProviders)
+        ICollection<IServiceProvider> serviceProviders
+    )
     {
         var definition = CoreResources.LogManyServiceProvidersCreated(diagnostics);
 
@@ -911,14 +1252,26 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ServiceProvidersEventData(
                 definition,
                 (d, _) => ((EventDefinition)d).GenerateMessage(),
-                serviceProviders);
+                serviceProviders
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -931,7 +1284,8 @@ public static class CoreLoggerExtensions
     public static void ServiceProviderDebugInfo(
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
         IDictionary<string, string> newDebugInfo,
-        IList<IDictionary<string, string>> cachedDebugInfos)
+        IList<IDictionary<string, string>> cachedDebugInfos
+    )
     {
         var definition = CoreResources.LogServiceProviderDebugInfo(diagnostics);
 
@@ -940,29 +1294,44 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, GenerateDebugInfoString(newDebugInfo, cachedDebugInfos));
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ServiceProviderDebugInfoEventData(
                 definition,
                 (d, p) => ServiceProviderDebugInfo(d, p),
                 newDebugInfo,
-                cachedDebugInfos);
+                cachedDebugInfos
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ServiceProviderDebugInfo(EventDefinitionBase definition, EventData payload)
+    private static string ServiceProviderDebugInfo(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (ServiceProviderDebugInfoEventData)payload;
-        return d.GenerateMessage(
-            GenerateDebugInfoString(p.NewDebugInfo, p.CachedDebugInfos));
+        return d.GenerateMessage(GenerateDebugInfoString(p.NewDebugInfo, p.CachedDebugInfos));
     }
 
     private static string GenerateDebugInfoString(
         IDictionary<string, string> newDebugInfo,
-        IList<IDictionary<string, string>> cachedDebugInfos)
+        IList<IDictionary<string, string>> cachedDebugInfos
+    )
     {
         List<string>? leastConflicts = null;
 
@@ -993,8 +1362,7 @@ public static class CoreLoggerExtensions
                 conflicts.Add(CoreStrings.ServiceProviderConfigAdded(addedKey));
             }
 
-            if (leastConflicts == null
-                || leastConflicts.Count > conflicts.Count)
+            if (leastConflicts == null || leastConflicts.Count > conflicts.Count)
             {
                 leastConflicts = conflicts;
             }
@@ -1012,7 +1380,8 @@ public static class CoreLoggerExtensions
     public static void ContextInitialized(
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
         DbContext context,
-        DbContextOptions contextOptions)
+        DbContextOptions contextOptions
+    )
     {
         var definition = CoreResources.LogContextInitialized(diagnostics);
 
@@ -1024,18 +1393,31 @@ public static class CoreLoggerExtensions
                 context.GetType().ShortDisplayName(),
                 context.Database.ProviderName,
                 GetProviderVersion(context),
-                contextOptions.BuildOptionsFragment());
+                contextOptions.BuildOptionsFragment()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ContextInitializedEventData(
                 definition,
                 ContextInitialized,
                 context,
-                contextOptions);
+                contextOptions
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -1048,11 +1430,12 @@ public static class CoreLoggerExtensions
             p.Context.GetType().ShortDisplayName(),
             p.Context.Database.ProviderName,
             GetProviderVersion(p.Context),
-            p.ContextOptions.BuildOptionsFragment());
+            p.ContextOptions.BuildOptionsFragment()
+        );
     }
 
-    private static string? GetProviderVersion(DbContext context)
-        => context.GetService<IEnumerable<IDatabaseProvider>>().FirstOrDefault()?.Version;
+    private static string? GetProviderVersion(DbContext context) =>
+        context.GetService<IEnumerable<IDatabaseProvider>>().FirstOrDefault()?.Version;
 
     /// <summary>
     ///     Logs for the <see cref="CoreEventId.ExecutionStrategyRetrying" /> event.
@@ -1065,7 +1448,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
         IReadOnlyList<Exception> exceptionsEncountered,
         TimeSpan delay,
-        bool async)
+        bool async
+    )
     {
         var definition = CoreResources.LogExecutionStrategyRetrying(diagnostics);
 
@@ -1074,29 +1458,50 @@ public static class CoreLoggerExtensions
             var lastException = exceptionsEncountered[^1];
             definition.Log(
                 diagnostics,
-                (int)delay.TotalMilliseconds, Environment.NewLine, lastException,
-                lastException);
+                (int)delay.TotalMilliseconds,
+                Environment.NewLine,
+                lastException,
+                lastException
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ExecutionStrategyEventData(
                 definition,
                 ExecutionStrategyRetrying,
                 exceptionsEncountered,
                 delay,
-                async);
+                async
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ExecutionStrategyRetrying(EventDefinitionBase definition, EventData payload)
+    private static string ExecutionStrategyRetrying(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<int, string, Exception>)definition;
         var p = (ExecutionStrategyEventData)payload;
         return d.GenerateMessage(
-            (int)p.Delay.TotalMilliseconds, Environment.NewLine, p.ExceptionsEncountered[^1]);
+            (int)p.Delay.TotalMilliseconds,
+            Environment.NewLine,
+            p.ExceptionsEncountered[^1]
+        );
     }
 
     /// <summary>
@@ -1110,7 +1515,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
         DbContext? context,
         object entityType,
-        string navigationName)
+        string navigationName
+    )
     {
         var definition = CoreResources.LogLazyLoadOnDisposedContext(diagnostics);
 
@@ -1119,20 +1525,35 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, entityType.GetType().ShortDisplayName(), navigationName);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new LazyLoadingEventData(
                 definition,
                 LazyLoadOnDisposedContextWarning,
                 context,
                 entityType,
-                navigationName);
+                navigationName
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string LazyLoadOnDisposedContextWarning(EventDefinitionBase definition, EventData payload)
+    private static string LazyLoadOnDisposedContextWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (LazyLoadingEventData)payload;
@@ -1150,7 +1571,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
         DbContext context,
         object entityType,
-        string navigationName)
+        string navigationName
+    )
     {
         var definition = CoreResources.LogNavigationLazyLoading(diagnostics);
 
@@ -1159,16 +1581,28 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, entityType.GetType().ShortDisplayName(), navigationName);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new LazyLoadingEventData(
                 definition,
                 NavigationLazyLoading,
                 context,
                 entityType,
-                navigationName);
+                navigationName
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -1190,7 +1624,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
         DbContext? context,
         object entityType,
-        string navigationName)
+        string navigationName
+    )
     {
         var definition = CoreResources.LogDetachedLazyLoading(diagnostics);
 
@@ -1199,20 +1634,35 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, navigationName, entityType.GetType().ShortDisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new LazyLoadingEventData(
                 definition,
                 DetachedLazyLoadingWarning,
                 context,
                 entityType,
-                navigationName);
+                navigationName
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string DetachedLazyLoadingWarning(EventDefinitionBase definition, EventData payload)
+    private static string DetachedLazyLoadingWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (LazyLoadingEventData)payload;
@@ -1226,7 +1676,8 @@ public static class CoreLoggerExtensions
     /// <param name="serviceProvider">The service provider used.</param>
     public static void RedundantAddServicesCallWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
     {
         var definition = CoreResources.LogRedundantAddServicesCall(diagnostics);
 
@@ -1235,14 +1686,26 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ServiceProviderEventData(
                 definition,
                 (d, _) => ((EventDefinition)d).GenerateMessage(),
-                serviceProvider);
+                serviceProvider
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -1255,32 +1718,57 @@ public static class CoreLoggerExtensions
     public static void ShadowForeignKeyPropertyCreated(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
         IProperty property,
-        string basePropertyName)
+        string basePropertyName
+    )
     {
         var definition = CoreResources.LogShadowForeignKeyPropertyCreated(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, property.DeclaringType.DisplayName(), property.Name, basePropertyName);
+            definition.Log(
+                diagnostics,
+                property.DeclaringType.DisplayName(),
+                property.Name,
+                basePropertyName
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new UniquifiedPropertyEventData(
                 definition,
                 ShadowForeignKeyPropertyCreated,
                 property,
-                basePropertyName);
+                basePropertyName
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ShadowForeignKeyPropertyCreated(EventDefinitionBase definition, EventData payload)
+    private static string ShadowForeignKeyPropertyCreated(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (UniquifiedPropertyEventData)payload;
-        return d.GenerateMessage(p.Property.DeclaringType.DisplayName(), p.Property.Name, p.BasePropertyName);
+        return d.GenerateMessage(
+            p.Property.DeclaringType.DisplayName(),
+            p.Property.Name,
+            p.BasePropertyName
+        );
     }
 
     /// <summary>
@@ -1290,7 +1778,8 @@ public static class CoreLoggerExtensions
     /// <param name="property">The property.</param>
     public static void ShadowPropertyCreated(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IProperty property)
+        IProperty property
+    )
     {
         var definition = CoreResources.LogShadowPropertyCreated(diagnostics);
 
@@ -1299,14 +1788,22 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, property.DeclaringType.DisplayName(), property.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new PropertyEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                ShadowPropertyCreated,
-                property);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new PropertyEventData(definition, ShadowPropertyCreated, property);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -1324,7 +1821,8 @@ public static class CoreLoggerExtensions
     /// <param name="property">The property.</param>
     public static void CollectionWithoutComparer(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IProperty property)
+        IProperty property
+    )
     {
         var definition = CoreResources.LogCollectionWithoutComparer(diagnostics);
 
@@ -1333,18 +1831,29 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, property.DeclaringType.DisplayName(), property.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new PropertyEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                CollectionWithoutComparer,
-                property);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new PropertyEventData(definition, CollectionWithoutComparer, property);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string CollectionWithoutComparer(EventDefinitionBase definition, EventData payload)
+    private static string CollectionWithoutComparer(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (PropertyEventData)payload;
@@ -1360,7 +1869,8 @@ public static class CoreLoggerExtensions
     public static void RedundantIndexRemoved(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
         IReadOnlyList<IReadOnlyPropertyBase> redundantIndex,
-        IReadOnlyList<IReadOnlyPropertyBase> otherIndex)
+        IReadOnlyList<IReadOnlyPropertyBase> otherIndex
+    )
     {
         var definition = CoreResources.LogRedundantIndexRemoved(diagnostics);
 
@@ -1370,18 +1880,31 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 redundantIndex.Format(),
                 redundantIndex.First().DeclaringType.DisplayName(),
-                otherIndex.Format());
+                otherIndex.Format()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoPropertyBaseCollectionsEventData(
                 definition,
                 RedundantIndexRemoved,
                 redundantIndex,
-                otherIndex);
+                otherIndex
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -1392,7 +1915,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             p.FirstPropertyCollection.Format(),
             p.FirstPropertyCollection.First().DeclaringType.DisplayName(),
-            p.SecondPropertyCollection.Format());
+            p.SecondPropertyCollection.Format()
+        );
     }
 
     /// <summary>
@@ -1402,7 +1926,8 @@ public static class CoreLoggerExtensions
     /// <param name="redundantForeignKey">The redundant foreign key.</param>
     public static void RedundantForeignKeyWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IForeignKey redundantForeignKey)
+        IForeignKey redundantForeignKey
+    )
     {
         var definition = CoreResources.LogRedundantForeignKey(diagnostics);
 
@@ -1411,27 +1936,44 @@ public static class CoreLoggerExtensions
             definition.Log(
                 diagnostics,
                 redundantForeignKey.Properties.Format(),
-                redundantForeignKey.DeclaringEntityType.DisplayName());
+                redundantForeignKey.DeclaringEntityType.DisplayName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ForeignKeyEventData(
                 definition,
                 RedundantForeignKeyWarning,
-                redundantForeignKey);
+                redundantForeignKey
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string RedundantForeignKeyWarning(EventDefinitionBase definition, EventData payload)
+    private static string RedundantForeignKeyWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (ForeignKeyEventData)payload;
         return d.GenerateMessage(
             p.ForeignKey.Properties.Format(),
-            p.ForeignKey.DeclaringEntityType.DisplayName());
+            p.ForeignKey.DeclaringEntityType.DisplayName()
+        );
     }
 
     /// <summary>
@@ -1453,7 +1995,8 @@ public static class CoreLoggerExtensions
         string dependentToPrincipalNavigationSpecification,
         string principalToDependentNavigationSpecification,
         IReadOnlyList<IReadOnlyPropertyBase> foreignKeyProperties,
-        IReadOnlyList<IReadOnlyPropertyBase> principalKeyProperties)
+        IReadOnlyList<IReadOnlyPropertyBase> principalKeyProperties
+    )
     {
         var definition = CoreResources.LogIncompatibleMatchingForeignKeyProperties(diagnostics);
 
@@ -1464,10 +2007,17 @@ public static class CoreLoggerExtensions
                 dependentToPrincipalNavigationSpecification,
                 principalToDependentNavigationSpecification,
                 foreignKeyProperties.Format(includeTypes: true),
-                principalKeyProperties.Format(includeTypes: true));
+                principalKeyProperties.Format(includeTypes: true)
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ForeignKeyCandidateEventData(
                 definition,
@@ -1475,13 +2025,22 @@ public static class CoreLoggerExtensions
                 dependentToPrincipalNavigationSpecification,
                 principalToDependentNavigationSpecification,
                 foreignKeyProperties,
-                principalKeyProperties);
+                principalKeyProperties
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string IncompatibleMatchingForeignKeyProperties(EventDefinitionBase definition, EventData payload)
+    private static string IncompatibleMatchingForeignKeyProperties(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string, string>)definition;
         var p = (ForeignKeyCandidateEventData)payload;
@@ -1489,7 +2048,8 @@ public static class CoreLoggerExtensions
             p.DependentToPrincipalNavigationSpecification,
             p.PrincipalToDependentNavigationSpecification,
             p.FirstPropertyCollection.Format(includeTypes: true),
-            p.SecondPropertyCollection.Format(includeTypes: true));
+            p.SecondPropertyCollection.Format(includeTypes: true)
+        );
     }
 
     /// <summary>
@@ -1499,7 +2059,8 @@ public static class CoreLoggerExtensions
     /// <param name="foreignKey">The foreign key.</param>
     public static void AmbiguousEndRequiredWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
         var definition = CoreResources.LogAmbiguousEndRequired(diagnostics);
 
@@ -1508,27 +2069,44 @@ public static class CoreLoggerExtensions
             definition.Log(
                 diagnostics,
                 foreignKey.Properties.Format(),
-                foreignKey.DeclaringEntityType.DisplayName());
+                foreignKey.DeclaringEntityType.DisplayName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ForeignKeyEventData(
                 definition,
                 AmbiguousEndRequiredWarning,
-                foreignKey);
+                foreignKey
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string AmbiguousEndRequiredWarning(EventDefinitionBase definition, EventData payload)
+    private static string AmbiguousEndRequiredWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (ForeignKeyEventData)payload;
         return d.GenerateMessage(
             p.ForeignKey.Properties.Format(),
-            p.ForeignKey.DeclaringEntityType.DisplayName());
+            p.ForeignKey.DeclaringEntityType.DisplayName()
+        );
     }
 
     /// <summary>
@@ -1538,27 +2116,47 @@ public static class CoreLoggerExtensions
     /// <param name="navigation">The navigation property.</param>
     public static void RequiredAttributeOnCollection(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IReadOnlyNavigation navigation)
+        IReadOnlyNavigation navigation
+    )
     {
         var definition = CoreResources.LogRequiredAttributeOnCollection(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, navigation.DeclaringEntityType.DisplayName(), navigation.Name);
+            definition.Log(
+                diagnostics,
+                navigation.DeclaringEntityType.DisplayName(),
+                navigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new NavigationEventData(
                 definition,
                 RequiredAttributeOnCollection,
-                navigation);
+                navigation
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string RequiredAttributeOnCollection(EventDefinitionBase definition, EventData payload)
+    private static string RequiredAttributeOnCollection(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (NavigationEventData)payload;
@@ -1572,27 +2170,47 @@ public static class CoreLoggerExtensions
     /// <param name="navigation">The navigation property.</param>
     public static void RequiredAttributeOnSkipNavigation(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IReadOnlySkipNavigation navigation)
+        IReadOnlySkipNavigation navigation
+    )
     {
         var definition = CoreResources.LogRequiredAttributeOnSkipNavigation(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, navigation.DeclaringEntityType.DisplayName(), navigation.Name);
+            definition.Log(
+                diagnostics,
+                navigation.DeclaringEntityType.DisplayName(),
+                navigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new SkipNavigationEventData(
                 definition,
                 RequiredAttributeOnSkipNavigation,
-                navigation);
+                navigation
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string RequiredAttributeOnSkipNavigation(EventDefinitionBase definition, EventData payload)
+    private static string RequiredAttributeOnSkipNavigation(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (SkipNavigationEventData)payload;
@@ -1606,7 +2224,8 @@ public static class CoreLoggerExtensions
     /// <param name="foreignKey">The foreign key.</param>
     public static void ConflictingShadowForeignKeysWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IReadOnlyForeignKey foreignKey)
+        IReadOnlyForeignKey foreignKey
+    )
     {
         var definition = CoreResources.LogConflictingShadowForeignKeys(diagnostics);
 
@@ -1617,28 +2236,45 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 declaringTypeName,
                 foreignKey.PrincipalEntityType.DisplayName(),
-                declaringTypeName);
+                declaringTypeName
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ForeignKeyEventData(
                 definition,
                 ConflictingShadowForeignKeysWarning,
-                foreignKey);
+                foreignKey
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ConflictingShadowForeignKeysWarning(EventDefinitionBase definition, EventData payload)
+    private static string ConflictingShadowForeignKeysWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (ForeignKeyEventData)payload;
         return d.GenerateMessage(
             p.ForeignKey.DeclaringEntityType.DisplayName(),
             p.ForeignKey.PrincipalEntityType.DisplayName(),
-            p.ForeignKey.DeclaringEntityType.DisplayName());
+            p.ForeignKey.DeclaringEntityType.DisplayName()
+        );
     }
 
     /// <summary>
@@ -1650,7 +2286,8 @@ public static class CoreLoggerExtensions
     public static void MultiplePrimaryKeyCandidates(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
         IReadOnlyProperty firstProperty,
-        IReadOnlyProperty secondProperty)
+        IReadOnlyProperty secondProperty
+    )
     {
         var definition = CoreResources.LogMultiplePrimaryKeyCandidates(diagnostics);
 
@@ -1660,22 +2297,38 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 firstProperty.Name,
                 secondProperty.Name,
-                firstProperty.DeclaringType.DisplayName());
+                firstProperty.DeclaringType.DisplayName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoPropertyBaseCollectionsEventData(
                 definition,
                 MultiplePrimaryKeyCandidates,
                 new[] { firstProperty },
-                new[] { secondProperty });
+                new[] { secondProperty }
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MultiplePrimaryKeyCandidates(EventDefinitionBase definition, EventData payload)
+    private static string MultiplePrimaryKeyCandidates(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (TwoPropertyBaseCollectionsEventData)payload;
@@ -1684,7 +2337,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             firstProperty.Name,
             secondProperty.Name,
-            firstProperty.DeclaringType.DisplayName());
+            firstProperty.DeclaringType.DisplayName()
+        );
     }
 
     /// <summary>
@@ -1696,7 +2350,8 @@ public static class CoreLoggerExtensions
     public static void MultipleNavigationProperties(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
         IEnumerable<Tuple<MemberInfo?, Type>> firstPropertyCollection,
-        IEnumerable<Tuple<MemberInfo?, Type>> secondPropertyCollection)
+        IEnumerable<Tuple<MemberInfo?, Type>> secondPropertyCollection
+    )
     {
         var definition = CoreResources.LogMultipleNavigationProperties(diagnostics);
 
@@ -1707,22 +2362,38 @@ public static class CoreLoggerExtensions
                 firstPropertyCollection.First().Item2.ShortDisplayName(),
                 secondPropertyCollection.First().Item2.ShortDisplayName(),
                 Property.Format(firstPropertyCollection.Select(p => p.Item1?.Name)),
-                Property.Format(secondPropertyCollection.Select(p => p.Item1?.Name)));
+                Property.Format(secondPropertyCollection.Select(p => p.Item1?.Name))
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoUnmappedPropertyCollectionsEventData(
                 definition,
                 MultipleNavigationProperties,
                 firstPropertyCollection,
-                secondPropertyCollection);
+                secondPropertyCollection
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MultipleNavigationProperties(EventDefinitionBase definition, EventData payload)
+    private static string MultipleNavigationProperties(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string, string>)definition;
         var p = (TwoUnmappedPropertyCollectionsEventData)payload;
@@ -1730,7 +2401,8 @@ public static class CoreLoggerExtensions
             p.FirstPropertyCollection.First().Item2.ShortDisplayName(),
             p.SecondPropertyCollection.First().Item2.ShortDisplayName(),
             Property.Format(p.FirstPropertyCollection.Select(i => i.Item1?.Name)),
-            Property.Format(p.SecondPropertyCollection.Select(i => i.Item1?.Name)));
+            Property.Format(p.SecondPropertyCollection.Select(i => i.Item1?.Name))
+        );
     }
 
     /// <summary>
@@ -1744,7 +2416,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
         IEnumerable<Tuple<MemberInfo?, Type>> conflictingNavigations,
         MemberInfo inverseNavigation,
-        Type targetType)
+        Type targetType
+    )
     {
         var definition = CoreResources.LogMultipleInversePropertiesSameTarget(diagnostics);
 
@@ -1752,30 +2425,56 @@ public static class CoreLoggerExtensions
         {
             definition.Log(
                 diagnostics,
-                string.Join(", ", conflictingNavigations.Select(n => n.Item2.ShortDisplayName() + "." + n.Item1?.Name)),
-                inverseNavigation.Name);
+                string.Join(
+                    ", ",
+                    conflictingNavigations.Select(n =>
+                        n.Item2.ShortDisplayName() + "." + n.Item1?.Name
+                    )
+                ),
+                inverseNavigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoUnmappedPropertyCollectionsEventData(
                 definition,
                 MultipleInversePropertiesSameTargetWarning,
                 conflictingNavigations,
-                new[] { new Tuple<MemberInfo?, Type>(inverseNavigation, targetType) });
+                new[] { new Tuple<MemberInfo?, Type>(inverseNavigation, targetType) }
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MultipleInversePropertiesSameTargetWarning(EventDefinitionBase definition, EventData payload)
+    private static string MultipleInversePropertiesSameTargetWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string?>)definition;
         var p = (TwoUnmappedPropertyCollectionsEventData)payload;
         return d.GenerateMessage(
             string.Join(
-                ", ", p.FirstPropertyCollection.Select(n => n.Item2.ShortDisplayName() + "." + n.Item1!.Name)),
-            p.SecondPropertyCollection.First().Item1?.Name);
+                ", ",
+                p.FirstPropertyCollection.Select(n =>
+                    n.Item2.ShortDisplayName() + "." + n.Item1!.Name
+                )
+            ),
+            p.SecondPropertyCollection.First().Item1?.Name
+        );
     }
 
     /// <summary>
@@ -1793,7 +2492,8 @@ public static class CoreLoggerExtensions
         MemberInfo navigation,
         IReadOnlyEntityType targetType,
         MemberInfo inverseNavigation,
-        MemberInfo ownershipNavigation)
+        MemberInfo ownershipNavigation
+    )
     {
         var definition = CoreResources.LogNonOwnershipInverseNavigation(diagnostics);
 
@@ -1805,10 +2505,17 @@ public static class CoreLoggerExtensions
                 inverseNavigation.Name,
                 declaringType.DisplayName(),
                 navigation.Name,
-                ownershipNavigation.Name);
+                ownershipNavigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoUnmappedPropertyCollectionsEventData(
                 definition,
@@ -1817,14 +2524,23 @@ public static class CoreLoggerExtensions
                 new[]
                 {
                     new Tuple<MemberInfo?, Type>(inverseNavigation, targetType.ClrType),
-                    new Tuple<MemberInfo?, Type>(ownershipNavigation, targetType.ClrType)
-                });
+                    new Tuple<MemberInfo?, Type>(ownershipNavigation, targetType.ClrType),
+                }
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string NonOwnershipInverseNavigationWarning(EventDefinitionBase definition, EventData payload)
+    private static string NonOwnershipInverseNavigationWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string?, string, string?, string?>)definition;
         var p = (TwoUnmappedPropertyCollectionsEventData)payload;
@@ -1836,7 +2552,8 @@ public static class CoreLoggerExtensions
             memberInfo2?.Name,
             type1.ShortDisplayName(),
             memberInfo1?.Name,
-            ownershipNavigation.Item1?.Name);
+            ownershipNavigation.Item1?.Name
+        );
     }
 
     /// <summary>
@@ -1852,7 +2569,8 @@ public static class CoreLoggerExtensions
         IReadOnlyNavigation firstNavigation,
         IReadOnlyNavigation secondNavigation,
         MemberInfo firstProperty,
-        MemberInfo secondProperty)
+        MemberInfo secondProperty
+    )
     {
         var definition = CoreResources.LogForeignKeyAttributesOnBothProperties(diagnostics);
 
@@ -1865,10 +2583,17 @@ public static class CoreLoggerExtensions
                 secondNavigation.DeclaringEntityType.ClrType.ShortDisplayName(),
                 secondNavigation.GetIdentifyingMemberInfo()!.Name,
                 firstProperty.Name,
-                secondProperty.Name);
+                secondProperty.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoUnmappedPropertyCollectionsEventData(
                 definition,
@@ -1876,21 +2601,40 @@ public static class CoreLoggerExtensions
                 new[]
                 {
                     new Tuple<MemberInfo?, Type>(
-                        firstNavigation.GetIdentifyingMemberInfo()!, firstNavigation.DeclaringEntityType.ClrType),
-                    new Tuple<MemberInfo?, Type>(firstProperty, firstNavigation.DeclaringEntityType.ClrType)
+                        firstNavigation.GetIdentifyingMemberInfo()!,
+                        firstNavigation.DeclaringEntityType.ClrType
+                    ),
+                    new Tuple<MemberInfo?, Type>(
+                        firstProperty,
+                        firstNavigation.DeclaringEntityType.ClrType
+                    ),
                 },
                 new[]
                 {
                     new Tuple<MemberInfo?, Type>(
-                        secondNavigation.GetIdentifyingMemberInfo()!, secondNavigation.DeclaringEntityType.ClrType),
-                    new Tuple<MemberInfo?, Type>(secondProperty, secondNavigation.DeclaringEntityType.ClrType)
-                });
+                        secondNavigation.GetIdentifyingMemberInfo()!,
+                        secondNavigation.DeclaringEntityType.ClrType
+                    ),
+                    new Tuple<MemberInfo?, Type>(
+                        secondProperty,
+                        secondNavigation.DeclaringEntityType.ClrType
+                    ),
+                }
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ForeignKeyAttributesOnBothPropertiesWarning(EventDefinitionBase definition, EventData payload)
+    private static string ForeignKeyAttributesOnBothPropertiesWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string?, string, string?, string?, string?>)definition;
         var p = (TwoUnmappedPropertyCollectionsEventData)payload;
@@ -1904,7 +2648,8 @@ public static class CoreLoggerExtensions
             type2.ShortDisplayName(),
             memberInfo2?.Name,
             firstProperty.Item1?.Name,
-            secondProperty.Item1?.Name);
+            secondProperty.Item1?.Name
+        );
     }
 
     /// <summary>
@@ -1916,7 +2661,8 @@ public static class CoreLoggerExtensions
     public static void ForeignKeyAttributesOnBothNavigationsWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
         IReadOnlyNavigation firstNavigation,
-        IReadOnlyNavigation secondNavigation)
+        IReadOnlyNavigation secondNavigation
+    )
     {
         var definition = CoreResources.LogForeignKeyAttributesOnBothNavigations(diagnostics);
 
@@ -1927,22 +2673,38 @@ public static class CoreLoggerExtensions
                 firstNavigation.DeclaringEntityType.DisplayName(),
                 firstNavigation.Name,
                 secondNavigation.DeclaringEntityType.DisplayName(),
-                secondNavigation.Name);
+                secondNavigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoPropertyBaseCollectionsEventData(
                 definition,
                 ForeignKeyAttributesOnBothNavigationsWarning,
                 new[] { firstNavigation },
-                new[] { secondNavigation });
+                new[] { secondNavigation }
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ForeignKeyAttributesOnBothNavigationsWarning(EventDefinitionBase definition, EventData payload)
+    private static string ForeignKeyAttributesOnBothNavigationsWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string, string>)definition;
         var p = (TwoPropertyBaseCollectionsEventData)payload;
@@ -1952,7 +2714,8 @@ public static class CoreLoggerExtensions
             firstNavigation.DeclaringType.DisplayName(),
             firstNavigation.Name,
             secondNavigation.DeclaringType.DisplayName(),
-            secondNavigation.Name);
+            secondNavigation.Name
+        );
     }
 
     /// <summary>
@@ -1964,9 +2727,12 @@ public static class CoreLoggerExtensions
     public static void ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
         IReadOnlyNavigation navigation,
-        MemberInfo property)
+        MemberInfo property
+    )
     {
-        var definition = CoreResources.LogConflictingForeignKeyAttributesOnNavigationAndProperty(diagnostics);
+        var definition = CoreResources.LogConflictingForeignKeyAttributesOnNavigationAndProperty(
+            diagnostics
+        );
 
         if (diagnostics.ShouldLog(definition))
         {
@@ -1975,24 +2741,44 @@ public static class CoreLoggerExtensions
                 navigation.DeclaringEntityType.ClrType.ShortDisplayName(),
                 navigation.GetIdentifyingMemberInfo()?.Name,
                 property.DeclaringType!.ShortDisplayName(),
-                property.Name);
+                property.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new TwoUnmappedPropertyCollectionsEventData(
                 definition,
                 ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning,
-                new[] { new Tuple<MemberInfo?, Type>(navigation.GetIdentifyingMemberInfo()!, navigation.DeclaringEntityType.ClrType) },
-                new[] { new Tuple<MemberInfo?, Type>(property, property.DeclaringType!) });
+                new[]
+                {
+                    new Tuple<MemberInfo?, Type>(
+                        navigation.GetIdentifyingMemberInfo()!,
+                        navigation.DeclaringEntityType.ClrType
+                    ),
+                },
+                new[] { new Tuple<MemberInfo?, Type>(property, property.DeclaringType!) }
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
     private static string ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
         EventDefinitionBase definition,
-        EventData payload)
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string?, string, string?>)definition;
         var p = (TwoUnmappedPropertyCollectionsEventData)payload;
@@ -2002,7 +2788,8 @@ public static class CoreLoggerExtensions
             type1.ShortDisplayName(),
             memberInfo1?.Name,
             type2.ShortDisplayName(),
-            memberInfo2?.Name);
+            memberInfo2?.Name
+        );
     }
 
     /// <summary>
@@ -2012,7 +2799,8 @@ public static class CoreLoggerExtensions
     /// <param name="context">The context being used.</param>
     public static void DetectChangesStarting(
         this IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> diagnostics,
-        DbContext context)
+        DbContext context
+    )
     {
         var definition = CoreResources.LogDetectChangesStarting(diagnostics);
 
@@ -2021,14 +2809,22 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType().ShortDisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new DbContextEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                DetectChangesStarting,
-                context);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new DbContextEventData(definition, DetectChangesStarting, context);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2046,7 +2842,8 @@ public static class CoreLoggerExtensions
     /// <param name="context">The context being used.</param>
     public static void DetectChangesCompleted(
         this IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> diagnostics,
-        DbContext context)
+        DbContext context
+    )
     {
         var definition = CoreResources.LogDetectChangesCompleted(diagnostics);
 
@@ -2055,14 +2852,22 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType().ShortDisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new DbContextEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                DetectChangesCompleted,
-                context);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new DbContextEventData(definition, DetectChangesCompleted, context);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2086,7 +2891,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         IProperty property,
         object? oldValue,
-        object? newValue)
+        object? newValue
+    )
     {
         var definition = CoreResources.LogPropertyChangeDetected(diagnostics);
 
@@ -2095,7 +2901,13 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, property.DeclaringType.ShortName(), property.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyChangedEventData(
                 definition,
@@ -2103,9 +2915,15 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 property,
                 oldValue,
-                newValue);
+                newValue
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2113,9 +2931,7 @@ public static class CoreLoggerExtensions
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (PropertyChangedEventData)payload;
-        return d.GenerateMessage(
-            p.Property.DeclaringType.ShortName(),
-            p.Property.Name);
+        return d.GenerateMessage(p.Property.DeclaringType.ShortName(), p.Property.Name);
     }
 
     /// <summary>
@@ -2131,7 +2947,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         IProperty property,
         object? oldValue,
-        object? newValue)
+        object? newValue
+    )
     {
         var definition = CoreResources.LogPropertyChangeDetectedSensitive(diagnostics);
 
@@ -2143,10 +2960,19 @@ public static class CoreLoggerExtensions
                 property.Name,
                 oldValue,
                 newValue,
-                internalEntityEntry.BuildCurrentValuesString(property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties));
+                internalEntityEntry.BuildCurrentValuesString(
+                    property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties
+                )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyChangedEventData(
                 definition,
@@ -2154,13 +2980,22 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 property,
                 oldValue,
-                newValue);
+                newValue
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string PropertyChangeDetectedSensitive(EventDefinitionBase definition, EventData payload)
+    private static string PropertyChangeDetectedSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, object?, object?, string>)definition;
         var p = (PropertyChangedEventData)payload;
@@ -2169,8 +3004,11 @@ public static class CoreLoggerExtensions
             p.Property.Name,
             p.OldValue,
             p.NewValue,
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(
-                p.Property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties));
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(
+                    p.Property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties
+                )
+        );
     }
 
     /// <summary>
@@ -2186,19 +3024,23 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         IProperty property,
         object? oldValue,
-        object? newValue)
+        object? newValue
+    )
     {
         var definition = CoreResources.LogForeignKeyChangeDetected(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(
-                diagnostics,
-                property.DeclaringType.ShortName(),
-                property.Name);
+            definition.Log(diagnostics, property.DeclaringType.ShortName(), property.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyChangedEventData(
                 definition,
@@ -2206,19 +3048,26 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 property,
                 oldValue,
-                newValue);
+                newValue
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ForeignKeyChangeDetected(EventDefinitionBase definition, EventData payload)
+    private static string ForeignKeyChangeDetected(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (PropertyChangedEventData)payload;
-        return d.GenerateMessage(
-            p.Property.DeclaringType.ShortName(),
-            p.Property.Name);
+        return d.GenerateMessage(p.Property.DeclaringType.ShortName(), p.Property.Name);
     }
 
     /// <summary>
@@ -2234,7 +3083,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         IProperty property,
         object? oldValue,
-        object? newValue)
+        object? newValue
+    )
     {
         var definition = CoreResources.LogForeignKeyChangeDetectedSensitive(diagnostics);
 
@@ -2246,10 +3096,19 @@ public static class CoreLoggerExtensions
                 property.Name,
                 oldValue,
                 newValue,
-                internalEntityEntry.BuildCurrentValuesString(property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties));
+                internalEntityEntry.BuildCurrentValuesString(
+                    property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties
+                )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyChangedEventData(
                 definition,
@@ -2257,13 +3116,22 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 property,
                 oldValue,
-                newValue);
+                newValue
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ForeignKeyChangeDetectedSensitive(EventDefinitionBase definition, EventData payload)
+    private static string ForeignKeyChangeDetectedSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, object?, object?, string>)definition;
         var p = (PropertyChangedEventData)payload;
@@ -2272,8 +3140,11 @@ public static class CoreLoggerExtensions
             p.Property.Name,
             p.OldValue,
             p.NewValue,
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(
-                p.Property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties));
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(
+                    p.Property.DeclaringType.ContainingEntityType.FindPrimaryKey()!.Properties
+                )
+        );
     }
 
     /// <summary>
@@ -2289,7 +3160,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         INavigation navigation,
         ISet<object> added,
-        ISet<object> removed)
+        ISet<object> removed
+    )
     {
         var definition = CoreResources.LogCollectionChangeDetected(diagnostics);
 
@@ -2300,10 +3172,17 @@ public static class CoreLoggerExtensions
                 added.Count,
                 removed.Count,
                 navigation.DeclaringEntityType.ShortName(),
-                navigation.Name);
+                navigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new CollectionChangedEventData(
                 definition,
@@ -2311,13 +3190,22 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 navigation,
                 added,
-                removed);
+                removed
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string CollectionChangeDetected(EventDefinitionBase definition, EventData payload)
+    private static string CollectionChangeDetected(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<int, int, string, string>)definition;
         var p = (CollectionChangedEventData)payload;
@@ -2325,7 +3213,8 @@ public static class CoreLoggerExtensions
             p.Added.Count(),
             p.Removed.Count(),
             p.Navigation.DeclaringEntityType.ShortName(),
-            p.Navigation.Name);
+            p.Navigation.Name
+        );
     }
 
     /// <summary>
@@ -2341,7 +3230,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         INavigation navigation,
         ISet<object> added,
-        ISet<object> removed)
+        ISet<object> removed
+    )
     {
         var definition = CoreResources.LogCollectionChangeDetectedSensitive(diagnostics);
 
@@ -2353,10 +3243,19 @@ public static class CoreLoggerExtensions
                 removed.Count,
                 navigation.DeclaringEntityType.ShortName(),
                 navigation.Name,
-                internalEntityEntry.BuildCurrentValuesString(navigation.DeclaringEntityType.FindPrimaryKey()!.Properties));
+                internalEntityEntry.BuildCurrentValuesString(
+                    navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
+                )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new CollectionChangedEventData(
                 definition,
@@ -2364,13 +3263,22 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 navigation,
                 added,
-                removed);
+                removed
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string CollectionChangeDetectedSensitive(EventDefinitionBase definition, EventData payload)
+    private static string CollectionChangeDetectedSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<int, int, string, string, string>)definition;
         var p = (CollectionChangedEventData)payload;
@@ -2379,7 +3287,11 @@ public static class CoreLoggerExtensions
             p.Removed.Count(),
             p.Navigation.DeclaringEntityType.ShortName(),
             p.Navigation.Name,
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties));
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(
+                    p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
+                )
+        );
     }
 
     /// <summary>
@@ -2395,7 +3307,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         ISkipNavigation navigation,
         ISet<object> added,
-        ISet<object> removed)
+        ISet<object> removed
+    )
     {
         var definition = CoreResources.LogSkipCollectionChangeDetected(diagnostics);
 
@@ -2406,10 +3319,17 @@ public static class CoreLoggerExtensions
                 added.Count,
                 removed.Count,
                 navigation.DeclaringEntityType.ShortName(),
-                navigation.Name);
+                navigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new SkipCollectionChangedEventData(
                 definition,
@@ -2417,13 +3337,22 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 navigation,
                 added,
-                removed);
+                removed
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string SkipCollectionChangeDetected(EventDefinitionBase definition, EventData payload)
+    private static string SkipCollectionChangeDetected(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<int, int, string, string>)definition;
         var p = (SkipCollectionChangedEventData)payload;
@@ -2431,7 +3360,8 @@ public static class CoreLoggerExtensions
             p.Added.Count(),
             p.Removed.Count(),
             p.Navigation.DeclaringEntityType.ShortName(),
-            p.Navigation.Name);
+            p.Navigation.Name
+        );
     }
 
     /// <summary>
@@ -2447,7 +3377,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         ISkipNavigation navigation,
         ISet<object> added,
-        ISet<object> removed)
+        ISet<object> removed
+    )
     {
         var definition = CoreResources.LogSkipCollectionChangeDetectedSensitive(diagnostics);
 
@@ -2459,10 +3390,19 @@ public static class CoreLoggerExtensions
                 removed.Count,
                 navigation.DeclaringEntityType.ShortName(),
                 navigation.Name,
-                internalEntityEntry.BuildCurrentValuesString(navigation.DeclaringEntityType.FindPrimaryKey()!.Properties));
+                internalEntityEntry.BuildCurrentValuesString(
+                    navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
+                )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new SkipCollectionChangedEventData(
                 definition,
@@ -2470,13 +3410,22 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 navigation,
                 added,
-                removed);
+                removed
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string SkipCollectionChangeDetectedSensitive(EventDefinitionBase definition, EventData payload)
+    private static string SkipCollectionChangeDetectedSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<int, int, string, string, string>)definition;
         var p = (SkipCollectionChangedEventData)payload;
@@ -2485,7 +3434,11 @@ public static class CoreLoggerExtensions
             p.Removed.Count(),
             p.Navigation.DeclaringEntityType.ShortName(),
             p.Navigation.Name,
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties));
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(
+                    p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
+                )
+        );
     }
 
     /// <summary>
@@ -2501,16 +3454,27 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         INavigation navigation,
         object? oldValue,
-        object? newValue)
+        object? newValue
+    )
     {
         var definition = CoreResources.LogReferenceChangeDetected(diagnostics);
 
         if (diagnostics.ShouldLog(definition))
         {
-            definition.Log(diagnostics, navigation.DeclaringEntityType.ShortName(), navigation.Name);
+            definition.Log(
+                diagnostics,
+                navigation.DeclaringEntityType.ShortName(),
+                navigation.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ReferenceChangedEventData(
                 definition,
@@ -2518,9 +3482,15 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 navigation,
                 oldValue,
-                newValue);
+                newValue
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2528,9 +3498,7 @@ public static class CoreLoggerExtensions
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (ReferenceChangedEventData)payload;
-        return d.GenerateMessage(
-            p.Navigation.DeclaringEntityType.ShortName(),
-            p.Navigation.Name);
+        return d.GenerateMessage(p.Navigation.DeclaringEntityType.ShortName(), p.Navigation.Name);
     }
 
     /// <summary>
@@ -2546,7 +3514,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         INavigation navigation,
         object? oldValue,
-        object? newValue)
+        object? newValue
+    )
     {
         var definition = CoreResources.LogReferenceChangeDetectedSensitive(diagnostics);
 
@@ -2556,10 +3525,19 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 navigation.DeclaringEntityType.ShortName(),
                 navigation.Name,
-                internalEntityEntry.BuildCurrentValuesString(navigation.DeclaringEntityType.FindPrimaryKey()!.Properties));
+                internalEntityEntry.BuildCurrentValuesString(
+                    navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
+                )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ReferenceChangedEventData(
                 definition,
@@ -2567,20 +3545,33 @@ public static class CoreLoggerExtensions
                 new EntityEntry(internalEntityEntry),
                 navigation,
                 oldValue,
-                newValue);
+                newValue
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ReferenceChangeDetectedSensitive(EventDefinitionBase definition, EventData payload)
+    private static string ReferenceChangeDetectedSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (ReferenceChangedEventData)payload;
         return d.GenerateMessage(
             p.Navigation.DeclaringEntityType.ShortName(),
             p.Navigation.Name,
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties));
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(
+                    p.Navigation.DeclaringEntityType.FindPrimaryKey()!.Properties
+                )
+        );
     }
 
     /// <summary>
@@ -2590,7 +3581,8 @@ public static class CoreLoggerExtensions
     /// <param name="enumType">The type.</param>
     public static void StringEnumValueInJson(
         this IDiagnosticsLogger<DbLoggerCategory.Query> diagnostics,
-        Type enumType)
+        Type enumType
+    )
     {
         var definition = CoreResources.LogStringEnumValueInJson(diagnostics);
 
@@ -2599,14 +3591,22 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, enumType.ShortDisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new TypeEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                StringEnumValueInJson,
-                enumType);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new TypeEventData(definition, StringEnumValueInJson, enumType);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2624,7 +3624,8 @@ public static class CoreLoggerExtensions
     /// <param name="internalEntityEntry">The internal entity entry.</param>
     public static void StartedTracking(
         this IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> diagnostics,
-        InternalEntityEntry internalEntityEntry)
+        InternalEntityEntry internalEntityEntry
+    )
     {
         var definition = CoreResources.LogStartedTracking(diagnostics);
 
@@ -2633,17 +3634,30 @@ public static class CoreLoggerExtensions
             definition.Log(
                 diagnostics,
                 internalEntityEntry.Context.GetType().ShortDisplayName(),
-                internalEntityEntry.EntityType.ShortName());
+                internalEntityEntry.EntityType.ShortName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EntityEntryEventData(
                 definition,
                 StartedTracking,
-                new EntityEntry(internalEntityEntry));
+                new EntityEntry(internalEntityEntry)
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2653,7 +3667,8 @@ public static class CoreLoggerExtensions
         var p = (EntityEntryEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Context.GetType().ShortDisplayName(),
-            p.EntityEntry.Metadata.ShortName());
+            p.EntityEntry.Metadata.ShortName()
+        );
     }
 
     /// <summary>
@@ -2663,7 +3678,8 @@ public static class CoreLoggerExtensions
     /// <param name="internalEntityEntry">The internal entity entry.</param>
     public static void StartedTrackingSensitive(
         this IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> diagnostics,
-        InternalEntityEntry internalEntityEntry)
+        InternalEntityEntry internalEntityEntry
+    )
     {
         var definition = CoreResources.LogStartedTrackingSensitive(diagnostics);
 
@@ -2673,28 +3689,48 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 internalEntityEntry.Context.GetType().ShortDisplayName(),
                 internalEntityEntry.EntityType.ShortName(),
-                internalEntityEntry.BuildCurrentValuesString(internalEntityEntry.EntityType.FindPrimaryKey()!.Properties));
+                internalEntityEntry.BuildCurrentValuesString(
+                    internalEntityEntry.EntityType.FindPrimaryKey()!.Properties
+                )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new EntityEntryEventData(
                 definition,
                 StartedTrackingSensitive,
-                new EntityEntry(internalEntityEntry));
+                new EntityEntry(internalEntityEntry)
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string StartedTrackingSensitive(EventDefinitionBase definition, EventData payload)
+    private static string StartedTrackingSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, string>)definition;
         var p = (EntityEntryEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Context.GetType().ShortDisplayName(),
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties));
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties)
+        );
     }
 
     /// <summary>
@@ -2708,7 +3744,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> diagnostics,
         InternalEntityEntry internalEntityEntry,
         EntityState oldState,
-        EntityState newState)
+        EntityState newState
+    )
     {
         var definition = CoreResources.LogStateChanged(diagnostics);
 
@@ -2719,19 +3756,32 @@ public static class CoreLoggerExtensions
                 internalEntityEntry.EntityType.ShortName(),
                 internalEntityEntry.Context.GetType().ShortDisplayName(),
                 oldState,
-                newState);
+                newState
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new StateChangedEventData(
                 definition,
                 StateChanged,
                 new EntityEntry(internalEntityEntry),
                 oldState,
-                newState);
+                newState
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2743,7 +3793,8 @@ public static class CoreLoggerExtensions
             p.EntityEntry.Metadata.ShortName(),
             p.EntityEntry.Context.GetType().ShortDisplayName(),
             p.OldState,
-            p.NewState);
+            p.NewState
+        );
     }
 
     /// <summary>
@@ -2757,7 +3808,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> diagnostics,
         InternalEntityEntry internalEntityEntry,
         EntityState oldState,
-        EntityState newState)
+        EntityState newState
+    )
     {
         var definition = CoreResources.LogStateChangedSensitive(diagnostics);
 
@@ -2766,22 +3818,37 @@ public static class CoreLoggerExtensions
             definition.Log(
                 diagnostics,
                 internalEntityEntry.EntityType.ShortName(),
-                internalEntityEntry.BuildCurrentValuesString(internalEntityEntry.EntityType.FindPrimaryKey()!.Properties),
+                internalEntityEntry.BuildCurrentValuesString(
+                    internalEntityEntry.EntityType.FindPrimaryKey()!.Properties
+                ),
                 internalEntityEntry.Context.GetType().ShortDisplayName(),
                 oldState,
-                newState);
+                newState
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new StateChangedEventData(
                 definition,
                 StateChangedSensitive,
                 new EntityEntry(internalEntityEntry),
                 oldState,
-                newState);
+                newState
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2791,10 +3858,12 @@ public static class CoreLoggerExtensions
         var p = (StateChangedEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
             p.EntityEntry.Context.GetType().ShortDisplayName(),
             p.OldState,
-            p.NewState);
+            p.NewState
+        );
     }
 
     /// <summary>
@@ -2810,7 +3879,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         IProperty property,
         object? value,
-        bool temporary)
+        bool temporary
+    )
     {
         var definition = temporary
             ? CoreResources.LogTempValueGenerated(diagnostics)
@@ -2822,19 +3892,32 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 internalEntityEntry.Context.GetType().ShortDisplayName(),
                 internalEntityEntry.EntityType.ShortName(),
-                property.Name);
+                property.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyValueEventData(
                 definition,
                 ValueGenerated,
                 new EntityEntry(internalEntityEntry),
                 property,
-                value);
+                value
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2845,7 +3928,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             p.EntityEntry.Context.GetType().ShortDisplayName(),
             p.EntityEntry.Metadata.ShortName(),
-            p.Property.Name);
+            p.Property.Name
+        );
     }
 
     /// <summary>
@@ -2861,7 +3945,8 @@ public static class CoreLoggerExtensions
         InternalEntityEntry internalEntityEntry,
         IProperty property,
         object? value,
-        bool temporary)
+        bool temporary
+    )
     {
         var definition = temporary
             ? CoreResources.LogTempValueGeneratedSensitive(diagnostics)
@@ -2874,19 +3959,32 @@ public static class CoreLoggerExtensions
                 internalEntityEntry.Context.GetType().ShortDisplayName(),
                 value,
                 internalEntityEntry.EntityType.ShortName(),
-                property.Name);
+                property.Name
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyValueEventData(
                 definition,
                 ValueGeneratedSensitive,
                 new EntityEntry(internalEntityEntry),
                 property,
-                value);
+                value
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2898,7 +3996,8 @@ public static class CoreLoggerExtensions
             p.EntityEntry.Context.GetType().ShortDisplayName(),
             p.Value,
             p.EntityEntry.Metadata.ShortName(),
-            p.Property.Name);
+            p.Property.Name
+        );
     }
 
     /// <summary>
@@ -2912,7 +4011,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         InternalEntityEntry internalChildEntry,
         InternalEntityEntry internalParentEntry,
-        EntityState state)
+        EntityState state
+    )
     {
         var definition = CoreResources.LogCascadeDelete(diagnostics);
 
@@ -2922,19 +4022,32 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 internalChildEntry.EntityType.ShortName(),
                 state,
-                internalParentEntry.EntityType.ShortName());
+                internalParentEntry.EntityType.ShortName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new CascadeDeleteEventData(
                 definition,
                 CascadeDelete,
                 new EntityEntry(internalChildEntry),
                 new EntityEntry(internalParentEntry),
-                state);
+                state
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2945,7 +4058,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
             p.State,
-            p.ParentEntityEntry.Metadata.ShortName());
+            p.ParentEntityEntry.Metadata.ShortName()
+        );
     }
 
     /// <summary>
@@ -2959,7 +4073,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         InternalEntityEntry internalChildEntry,
         InternalEntityEntry internalParentEntry,
-        EntityState state)
+        EntityState state
+    )
     {
         var definition = CoreResources.LogCascadeDeleteSensitive(diagnostics);
 
@@ -2968,22 +4083,39 @@ public static class CoreLoggerExtensions
             definition.Log(
                 diagnostics,
                 internalChildEntry.EntityType.ShortName(),
-                internalChildEntry.BuildCurrentValuesString(internalChildEntry.EntityType.FindPrimaryKey()!.Properties),
+                internalChildEntry.BuildCurrentValuesString(
+                    internalChildEntry.EntityType.FindPrimaryKey()!.Properties
+                ),
                 state,
                 internalParentEntry.EntityType.ShortName(),
-                internalParentEntry.BuildCurrentValuesString(internalParentEntry.EntityType.FindPrimaryKey()!.Properties));
+                internalParentEntry.BuildCurrentValuesString(
+                    internalParentEntry.EntityType.FindPrimaryKey()!.Properties
+                )
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new CascadeDeleteEventData(
                 definition,
                 CascadeDeleteSensitive,
                 new EntityEntry(internalChildEntry),
                 new EntityEntry(internalParentEntry),
-                state);
+                state
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -2993,11 +4125,13 @@ public static class CoreLoggerExtensions
         var p = (CascadeDeleteEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
             p.State,
             p.ParentEntityEntry.Metadata.ShortName(),
             p.ParentEntityEntry.GetInfrastructure()
-                .BuildCurrentValuesString(p.ParentEntityEntry.Metadata.FindPrimaryKey()!.Properties));
+                .BuildCurrentValuesString(p.ParentEntityEntry.Metadata.FindPrimaryKey()!.Properties)
+        );
     }
 
     /// <summary>
@@ -3011,7 +4145,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         InternalEntityEntry internalChildEntry,
         IEntityType parentEntityType,
-        EntityState state)
+        EntityState state
+    )
     {
         var definition = CoreResources.LogCascadeDeleteOrphan(diagnostics);
 
@@ -3021,19 +4156,32 @@ public static class CoreLoggerExtensions
                 diagnostics,
                 internalChildEntry.EntityType.ShortName(),
                 state,
-                parentEntityType.ShortName());
+                parentEntityType.ShortName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new CascadeDeleteOrphanEventData(
                 definition,
                 CascadeDeleteOrphan,
                 new EntityEntry(internalChildEntry),
                 parentEntityType,
-                state);
+                state
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -3044,7 +4192,8 @@ public static class CoreLoggerExtensions
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
             p.State,
-            p.ParentEntityType.ShortName());
+            p.ParentEntityType.ShortName()
+        );
     }
 
     /// <summary>
@@ -3054,7 +4203,8 @@ public static class CoreLoggerExtensions
     /// <param name="navigation">The navigation.</param>
     public static void MappedNavigationIgnoredWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        INavigationBase navigation)
+        INavigationBase navigation
+    )
     {
         var definition = CoreResources.LogMappedNavigationIgnored(diagnostics);
 
@@ -3063,15 +4213,33 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, navigation.DeclaringType.ShortName(), navigation.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = new NavigationBaseEventData(definition, MappedNavigationIgnoredWarning, navigation);
+            var eventData = new NavigationBaseEventData(
+                definition,
+                MappedNavigationIgnoredWarning,
+                navigation
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MappedNavigationIgnoredWarning(EventDefinitionBase definition, EventData payload)
+    private static string MappedNavigationIgnoredWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (NavigationBaseEventData)payload;
@@ -3085,7 +4253,8 @@ public static class CoreLoggerExtensions
     /// <param name="property">The property.</param>
     public static void MappedPropertyIgnoredWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IProperty property)
+        IProperty property
+    )
     {
         var definition = CoreResources.LogMappedPropertyIgnored(diagnostics);
 
@@ -3094,15 +4263,33 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, property.DeclaringType.ShortName(), property.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = new PropertyEventData(definition, MappedPropertyIgnoredWarning, property);
+            var eventData = new PropertyEventData(
+                definition,
+                MappedPropertyIgnoredWarning,
+                property
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MappedPropertyIgnoredWarning(EventDefinitionBase definition, EventData payload)
+    private static string MappedPropertyIgnoredWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (PropertyEventData)payload;
@@ -3116,7 +4303,8 @@ public static class CoreLoggerExtensions
     /// <param name="property">The property.</param>
     public static void MappedComplexPropertyIgnoredWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IComplexProperty property)
+        IComplexProperty property
+    )
     {
         var definition = CoreResources.LogMappedComplexPropertyIgnored(diagnostics);
 
@@ -3125,15 +4313,33 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, property.DeclaringType.ShortName(), property.Name);
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = new ComplexPropertyEventData(definition, MappedComplexPropertyIgnoredWarning, property);
+            var eventData = new ComplexPropertyEventData(
+                definition,
+                MappedComplexPropertyIgnoredWarning,
+                property
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MappedComplexPropertyIgnoredWarning(EventDefinitionBase definition, EventData payload)
+    private static string MappedComplexPropertyIgnoredWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (ComplexPropertyEventData)payload;
@@ -3147,7 +4353,8 @@ public static class CoreLoggerExtensions
     /// <param name="entityType">The entity type.</param>
     public static void MappedEntityTypeIgnoredWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IEntityType entityType)
+        IEntityType entityType
+    )
     {
         var definition = CoreResources.LogMappedEntityTypeIgnored(diagnostics);
 
@@ -3156,15 +4363,33 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, entityType.ShortName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = new EntityTypeEventData(definition, MappedEntityTypeIgnoredWarning, entityType);
+            var eventData = new EntityTypeEventData(
+                definition,
+                MappedEntityTypeIgnoredWarning,
+                entityType
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string MappedEntityTypeIgnoredWarning(EventDefinitionBase definition, EventData payload)
+    private static string MappedEntityTypeIgnoredWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string>)definition;
         var p = (EntityTypeEventData)payload;
@@ -3182,7 +4407,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         InternalEntityEntry internalChildEntry,
         IEntityType parentEntityType,
-        EntityState state)
+        EntityState state
+    )
     {
         var definition = CoreResources.LogCascadeDeleteOrphanSensitive(diagnostics);
 
@@ -3191,33 +4417,53 @@ public static class CoreLoggerExtensions
             definition.Log(
                 diagnostics,
                 internalChildEntry.EntityType.ShortName(),
-                internalChildEntry.BuildCurrentValuesString(internalChildEntry.EntityType.FindPrimaryKey()!.Properties),
+                internalChildEntry.BuildCurrentValuesString(
+                    internalChildEntry.EntityType.FindPrimaryKey()!.Properties
+                ),
                 state,
-                parentEntityType.ShortName());
+                parentEntityType.ShortName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new CascadeDeleteOrphanEventData(
                 definition,
                 CascadeDeleteOrphanSensitive,
                 new EntityEntry(internalChildEntry),
                 parentEntityType,
-                state);
+                state
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string CascadeDeleteOrphanSensitive(EventDefinitionBase definition, EventData payload)
+    private static string CascadeDeleteOrphanSensitive(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string, EntityState, string>)definition;
         var p = (CascadeDeleteOrphanEventData)payload;
         return d.GenerateMessage(
             p.EntityEntry.Metadata.ShortName(),
-            p.EntityEntry.GetInfrastructure().BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
+            p.EntityEntry.GetInfrastructure()
+                .BuildCurrentValuesString(p.EntityEntry.Metadata.FindPrimaryKey()!.Properties),
             p.State,
-            p.ParentEntityType.ShortName());
+            p.ParentEntityType.ShortName()
+        );
     }
 
     /// <summary>
@@ -3228,7 +4474,8 @@ public static class CoreLoggerExtensions
     /// <returns>The, possibly intercepted, result.</returns>
     public static InterceptionResult<int> SaveChangesStarting(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
-        DbContext context)
+        DbContext context
+    )
     {
         var definition = CoreResources.LogSaveChangesStarting(diagnostics);
 
@@ -3237,13 +4484,23 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType().ShortDisplayName());
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = CreateSaveChangesStartingEventData(context, definition);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -3265,7 +4522,8 @@ public static class CoreLoggerExtensions
     public static ValueTask<InterceptionResult<int>> SaveChangesStartingAsync(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         DbContext context,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = CoreResources.LogSaveChangesStarting(diagnostics);
 
@@ -3274,13 +4532,23 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType().ShortDisplayName());
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = CreateSaveChangesStartingEventData(context, definition);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -3291,11 +4559,10 @@ public static class CoreLoggerExtensions
         return default;
     }
 
-    private static DbContextEventData CreateSaveChangesStartingEventData(DbContext context, EventDefinition<string?> definition)
-        => new(
-            definition,
-            SaveChangesStarting,
-            context);
+    private static DbContextEventData CreateSaveChangesStartingEventData(
+        DbContext context,
+        EventDefinition<string?> definition
+    ) => new(definition, SaveChangesStarting, context);
 
     private static string SaveChangesStarting(EventDefinitionBase definition, EventData payload)
     {
@@ -3314,7 +4581,8 @@ public static class CoreLoggerExtensions
     public static int SaveChangesCompleted(
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         DbContext context,
-        int entitiesSavedCount)
+        int entitiesSavedCount
+    )
     {
         var definition = CoreResources.LogSaveChangesCompleted(diagnostics);
 
@@ -3323,13 +4591,27 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType().ShortDisplayName(), entitiesSavedCount);
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = CreateSaveChangesCompletedEventData(context, entitiesSavedCount, definition);
+            var eventData = CreateSaveChangesCompletedEventData(
+                context,
+                entitiesSavedCount,
+                definition
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
@@ -3353,7 +4635,8 @@ public static class CoreLoggerExtensions
         this IDiagnosticsLogger<DbLoggerCategory.Update> diagnostics,
         DbContext context,
         int entitiesSavedCount,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = CoreResources.LogSaveChangesCompleted(diagnostics);
 
@@ -3362,17 +4645,35 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType().ShortDisplayName(), entitiesSavedCount);
         }
 
-        if (diagnostics.NeedsEventData<ISaveChangesInterceptor>(
+        if (
+            diagnostics.NeedsEventData<ISaveChangesInterceptor>(
                 definition,
-                out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
-            var eventData = CreateSaveChangesCompletedEventData(context, entitiesSavedCount, definition);
+            var eventData = CreateSaveChangesCompletedEventData(
+                context,
+                entitiesSavedCount,
+                definition
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
 
             if (interceptor != null)
             {
-                return interceptor.SavedChangesAsync(eventData, entitiesSavedCount, cancellationToken);
+                return interceptor.SavedChangesAsync(
+                    eventData,
+                    entitiesSavedCount,
+                    cancellationToken
+                );
             }
         }
 
@@ -3382,20 +4683,14 @@ public static class CoreLoggerExtensions
     private static SaveChangesCompletedEventData CreateSaveChangesCompletedEventData(
         DbContext context,
         int entitiesSavedCount,
-        EventDefinition<string?, int> definition)
-        => new(
-            definition,
-            SaveChangesCompleted,
-            context,
-            entitiesSavedCount);
+        EventDefinition<string?, int> definition
+    ) => new(definition, SaveChangesCompleted, context, entitiesSavedCount);
 
     private static string SaveChangesCompleted(EventDefinitionBase definition, EventData payload)
     {
         var d = (EventDefinition<string?, int>)definition;
         var p = (SaveChangesCompletedEventData)payload;
-        return d.GenerateMessage(
-            p.Context?.GetType().ShortDisplayName(),
-            p.EntitiesSavedCount);
+        return d.GenerateMessage(p.Context?.GetType().ShortDisplayName(), p.EntitiesSavedCount);
     }
 
     /// <summary>
@@ -3405,7 +4700,8 @@ public static class CoreLoggerExtensions
     /// <param name="context">The context being used.</param>
     public static void ContextDisposed(
         this IDiagnosticsLogger<DbLoggerCategory.Infrastructure> diagnostics,
-        DbContext context)
+        DbContext context
+    )
     {
         var definition = CoreResources.LogContextDisposed(diagnostics);
 
@@ -3414,14 +4710,22 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, context.GetType().ShortDisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
-        {
-            var eventData = new DbContextEventData(
+        if (
+            diagnostics.NeedsEventData(
                 definition,
-                ContextDisposed,
-                context);
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
+        {
+            var eventData = new DbContextEventData(definition, ContextDisposed, context);
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
@@ -3439,7 +4743,8 @@ public static class CoreLoggerExtensions
     /// <param name="property">The property which is being defined as part of a key.</param>
     public static void ConflictingKeylessAndKeyAttributesWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model> diagnostics,
-        IReadOnlyProperty property)
+        IReadOnlyProperty property
+    )
     {
         var definition = CoreResources.LogConflictingKeylessAndKeyAttributes(diagnostics);
 
@@ -3448,24 +4753,37 @@ public static class CoreLoggerExtensions
             definition.Log(diagnostics, property.Name, property.DeclaringType.DisplayName());
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new PropertyEventData(
                 definition,
                 ConflictingKeylessAndKeyAttributesWarning,
-                property);
+                property
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
-    private static string ConflictingKeylessAndKeyAttributesWarning(EventDefinitionBase definition, EventData payload)
+    private static string ConflictingKeylessAndKeyAttributesWarning(
+        EventDefinitionBase definition,
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (PropertyEventData)payload;
-        return d.GenerateMessage(
-            p.Property.Name,
-            p.Property.DeclaringType.DisplayName());
+        return d.GenerateMessage(p.Property.Name, p.Property.DeclaringType.DisplayName());
     }
 
     /// <summary>
@@ -3475,37 +4793,56 @@ public static class CoreLoggerExtensions
     /// <param name="foreignKey">Foreign key which is used in the incorrectly setup navigation.</param>
     public static void PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning(
         this IDiagnosticsLogger<DbLoggerCategory.Model.Validation> diagnostics,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
-        var definition = CoreResources.LogPossibleIncorrectRequiredNavigationWithQueryFilterInteraction(diagnostics);
+        var definition =
+            CoreResources.LogPossibleIncorrectRequiredNavigationWithQueryFilterInteraction(
+                diagnostics
+            );
 
         if (diagnostics.ShouldLog(definition))
         {
             definition.Log(
                 diagnostics,
                 foreignKey.PrincipalEntityType.DisplayName(),
-                foreignKey.DeclaringEntityType.DisplayName());
+                foreignKey.DeclaringEntityType.DisplayName()
+            );
         }
 
-        if (diagnostics.NeedsEventData(definition, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            diagnostics.NeedsEventData(
+                definition,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = new ForeignKeyEventData(
                 definition,
                 PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning,
-                foreignKey);
+                foreignKey
+            );
 
-            diagnostics.DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
+            diagnostics.DispatchEventData(
+                definition,
+                eventData,
+                diagnosticSourceEnabled,
+                simpleLogEnabled
+            );
         }
     }
 
     private static string PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning(
         EventDefinitionBase definition,
-        EventData payload)
+        EventData payload
+    )
     {
         var d = (EventDefinition<string, string>)definition;
         var p = (ForeignKeyEventData)payload;
         return d.GenerateMessage(
             p.ForeignKey.PrincipalEntityType.DisplayName(),
-            p.ForeignKey.DeclaringEntityType.DisplayName());
+            p.ForeignKey.DeclaringEntityType.DisplayName()
+        );
     }
 }

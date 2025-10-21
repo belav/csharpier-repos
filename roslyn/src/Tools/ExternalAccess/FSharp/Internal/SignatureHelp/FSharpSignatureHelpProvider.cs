@@ -5,8 +5,8 @@
 #nullable disable
 
 using System;
-using System.Linq;
 using System.Composition;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp;
@@ -28,37 +28,54 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.SignatureHelp
             _provider = provider;
         }
 
-        public async Task<SignatureHelpItems> GetItemsAsync(Document document, int position, SignatureHelpTriggerInfo triggerInfo, SignatureHelpOptions options, CancellationToken cancellationToken)
+        public async Task<SignatureHelpItems> GetItemsAsync(
+            Document document,
+            int position,
+            SignatureHelpTriggerInfo triggerInfo,
+            SignatureHelpOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var mappedTriggerReason = FSharpSignatureHelpTriggerReasonHelpers.ConvertFrom(triggerInfo.TriggerReason);
-            var mappedTriggerInfo = new FSharpSignatureHelpTriggerInfo(mappedTriggerReason, triggerInfo.TriggerCharacter);
-            var mappedSignatureHelpItems = await _provider.GetItemsAsync(document, position, mappedTriggerInfo, cancellationToken).ConfigureAwait(false);
+            var mappedTriggerReason = FSharpSignatureHelpTriggerReasonHelpers.ConvertFrom(
+                triggerInfo.TriggerReason
+            );
+            var mappedTriggerInfo = new FSharpSignatureHelpTriggerInfo(
+                mappedTriggerReason,
+                triggerInfo.TriggerCharacter
+            );
+            var mappedSignatureHelpItems = await _provider
+                .GetItemsAsync(document, position, mappedTriggerInfo, cancellationToken)
+                .ConfigureAwait(false);
 
             if (mappedSignatureHelpItems != null)
             {
                 return new SignatureHelpItems(
-                    mappedSignatureHelpItems.Items?.Select(x =>
-                        new SignatureHelpItem(
+                    mappedSignatureHelpItems
+                        .Items?.Select(x => new SignatureHelpItem(
                             x.IsVariadic,
                             x.DocumentationFactory,
                             x.PrefixDisplayParts,
                             x.SeparatorDisplayParts,
                             x.SuffixDisplayParts,
-                            x.Parameters.Select(y =>
-                                new SignatureHelpParameter(
+                            x.Parameters.Select(y => new SignatureHelpParameter(
                                     y.Name,
                                     y.IsOptional,
                                     y.DocumentationFactory,
                                     y.DisplayParts,
                                     y.PrefixDisplayParts,
                                     y.SuffixDisplayParts,
-                                    y.SelectedDisplayParts)).ToList(),
-                            x.DescriptionParts)).ToList(),
+                                    y.SelectedDisplayParts
+                                ))
+                                .ToList(),
+                            x.DescriptionParts
+                        ))
+                        .ToList(),
                     mappedSignatureHelpItems.ApplicableSpan,
                     mappedSignatureHelpItems.ArgumentIndex,
                     mappedSignatureHelpItems.ArgumentCount,
                     mappedSignatureHelpItems.ArgumentName,
-                    mappedSignatureHelpItems.SelectedItemIndex);
+                    mappedSignatureHelpItems.SelectedItemIndex
+                );
             }
             else
             {

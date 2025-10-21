@@ -30,31 +30,57 @@ namespace System.Buffers.Text
         /// </remarks>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(DateTimeOffset value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            DateTimeOffset value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             if (format.IsDefault)
             {
-                return DateTimeFormat.TryFormatInvariantG(value.DateTime, value.Offset, destination, out bytesWritten);
+                return DateTimeFormat.TryFormatInvariantG(
+                    value.DateTime,
+                    value.Offset,
+                    destination,
+                    out bytesWritten
+                );
             }
 
             switch (format.Symbol)
             {
                 case 'R':
-                    return DateTimeFormat.TryFormatR(value.UtcDateTime, NullOffset, destination, out bytesWritten);
+                    return DateTimeFormat.TryFormatR(
+                        value.UtcDateTime,
+                        NullOffset,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'O':
-                    return DateTimeFormat.TryFormatO(value.DateTime, value.Offset, destination, out bytesWritten);
+                    return DateTimeFormat.TryFormatO(
+                        value.DateTime,
+                        value.Offset,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'l':
                     return TryFormatDateTimeL(value.UtcDateTime, destination, out bytesWritten);
 
                 case 'G':
-                    return DateTimeFormat.TryFormatInvariantG(value.DateTime, NullOffset, destination, out bytesWritten);
+                    return DateTimeFormat.TryFormatInvariantG(
+                        value.DateTime,
+                        NullOffset,
+                        destination,
+                        out bytesWritten
+                    );
 
                 default:
                     ThrowHelper.ThrowFormatException_BadFormatSpecifier();
                     goto case 'R';
-            };
+            }
+            ;
         }
 
         /// <summary>
@@ -78,21 +104,41 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(DateTime value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            DateTime value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             switch (FormattingHelpers.GetSymbolOrDefault(format, 'G'))
             {
                 case 'R':
-                    return DateTimeFormat.TryFormatR(value, NullOffset, destination, out bytesWritten);
+                    return DateTimeFormat.TryFormatR(
+                        value,
+                        NullOffset,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'O':
-                    return DateTimeFormat.TryFormatO(value, NullOffset, destination, out bytesWritten);
+                    return DateTimeFormat.TryFormatO(
+                        value,
+                        NullOffset,
+                        destination,
+                        out bytesWritten
+                    );
 
                 case 'l':
                     return TryFormatDateTimeL(value, destination, out bytesWritten);
 
                 case 'G':
-                    return DateTimeFormat.TryFormatInvariantG(value, NullOffset, destination, out bytesWritten);
+                    return DateTimeFormat.TryFormatInvariantG(
+                        value,
+                        NullOffset,
+                        destination,
+                        out bytesWritten
+                    );
 
                 default:
                     ThrowHelper.ThrowFormatException_BadFormatSpecifier();
@@ -101,7 +147,11 @@ namespace System.Buffers.Text
         }
 
         // Rfc1123 lowercased
-        private static bool TryFormatDateTimeL(DateTime value, Span<byte> destination, out int bytesWritten)
+        private static bool TryFormatDateTimeL(
+            DateTime value,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (DateTimeFormat.TryFormatR(value, NullOffset, destination, out bytesWritten))
             {

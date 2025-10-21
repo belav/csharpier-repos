@@ -8,7 +8,8 @@ namespace Microsoft.Extensions.Options
     /// Note: These are run after all <see cref="IConfigureOptions{TOptions}"/>.
     /// </summary>
     /// <typeparam name="TOptions">Options type being configured.</typeparam>
-    public interface IPostConfigureOptions<in TOptions> where TOptions : class
+    public interface IPostConfigureOptions<in TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Invoked to configure a <typeparamref name="TOptions"/> instance.

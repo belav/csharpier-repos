@@ -7,7 +7,12 @@ namespace System.Reflection
 {
     public abstract partial class FieldInfo : MemberInfo
     {
-        public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle) => ReflectionAugments.ReflectionCoreCallbacks.GetFieldFromHandle(handle);
-        public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle, RuntimeTypeHandle declaringType) => ReflectionAugments.ReflectionCoreCallbacks.GetFieldFromHandle(handle, declaringType);
+        public static FieldInfo GetFieldFromHandle(RuntimeFieldHandle handle) =>
+            ReflectionAugments.ReflectionCoreCallbacks.GetFieldFromHandle(handle);
+
+        public static FieldInfo GetFieldFromHandle(
+            RuntimeFieldHandle handle,
+            RuntimeTypeHandle declaringType
+        ) => ReflectionAugments.ReflectionCoreCallbacks.GetFieldFromHandle(handle, declaringType);
     }
 }

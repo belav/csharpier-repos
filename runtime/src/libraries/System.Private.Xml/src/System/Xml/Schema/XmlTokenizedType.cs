@@ -18,6 +18,6 @@ namespace System.Xml
         ENUMERATION = 9,
         QName = 10,
         NCName = 11,
-        None = 12
+        None = 12,
     }
 }

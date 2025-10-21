@@ -30,9 +30,7 @@ namespace System.IO.IsolatedStorage
         public void CreateFile_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
-            {
-            }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
 
             Assert.Throws<ObjectDisposedException>(() => isf.CreateFile("foo"));
         }

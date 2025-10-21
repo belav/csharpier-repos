@@ -4,9 +4,10 @@
     <CLRTestPriority>0</CLRTestPriority>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NullabilityInfoContextSupport>false</NullabilityInfoContextSupport>
-
     <!-- We don't run the scanner in optimized builds -->
-    <CLRTestTargetUnsupported Condition="'$(IlcMultiModule)' == 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(IlcMultiModule)' == 'true'"
+      >true</CLRTestTargetUnsupported
+    >
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Dataflow.cs" />
@@ -17,7 +18,6 @@
     <Compile Include="FeatureSwitches.cs" />
     <Compile Include="Main.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="ILLink.LinkAttributes.xml">
       <LogicalName>ILLink.LinkAttributes.xml</LogicalName>
@@ -29,16 +29,13 @@
       <LogicalName>ILLink.Descriptors.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
   <ItemGroup>
     <TrimmerRootDescriptor Include="NonEmbedded.ILLink.Descriptor.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <IlcArg Include="--substitution:$(MSBuildThisFileDirectory)NonEmbedded.ILLink.Substitutions1.xml" />
     <IlcArg Include="--substitution:$(MSBuildThisFileDirectory)NonEmbedded.ILLink.Substitutions2.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Dataflow.cs">
       <LogicalName>RemovedResource1</LogicalName>
@@ -53,5 +50,4 @@
       <LogicalName>KeptResource</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

@@ -25,15 +25,20 @@ public interface IConventionNavigationBase : IReadOnlyNavigationBase, IConventio
     /// <param name="eagerLoaded">A value indicating whether this navigation should be eager loaded by default.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    bool? SetIsEagerLoaded(bool? eagerLoaded, bool fromDataAnnotation = false)
-        => (bool?)SetOrRemoveAnnotation(CoreAnnotationNames.EagerLoaded, eagerLoaded, fromDataAnnotation)?.Value;
+    bool? SetIsEagerLoaded(bool? eagerLoaded, bool fromDataAnnotation = false) =>
+        (bool?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.EagerLoaded,
+                eagerLoaded,
+                fromDataAnnotation
+            )?.Value;
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyNavigationBase.IsEagerLoaded" />.
     /// </summary>
     /// <returns>The configuration source for <see cref="IReadOnlyNavigationBase.IsEagerLoaded" />.</returns>
-    ConfigurationSource? GetIsEagerLoadedConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.EagerLoaded)?.GetConfigurationSource();
+    ConfigurationSource? GetIsEagerLoadedConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.EagerLoaded)?.GetConfigurationSource();
 
     /// <summary>
     ///     Sets a value indicating whether this navigation should be lazy-loaded, if lazy-loading is enabled and in place.
@@ -41,13 +46,18 @@ public interface IConventionNavigationBase : IReadOnlyNavigationBase, IConventio
     /// <param name="lazyLoadingEnabled">A value indicating whether this navigation should lazy-loaded.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    bool? SetLazyLoadingEnabled(bool? lazyLoadingEnabled, bool fromDataAnnotation = false)
-        => (bool?)SetOrRemoveAnnotation(CoreAnnotationNames.LazyLoadingEnabled, lazyLoadingEnabled, fromDataAnnotation)?.Value;
+    bool? SetLazyLoadingEnabled(bool? lazyLoadingEnabled, bool fromDataAnnotation = false) =>
+        (bool?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.LazyLoadingEnabled,
+                lazyLoadingEnabled,
+                fromDataAnnotation
+            )?.Value;
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyNavigationBase.LazyLoadingEnabled" />.
     /// </summary>
     /// <returns>The configuration source for <see cref="IReadOnlyNavigationBase.LazyLoadingEnabled" />.</returns>
-    ConfigurationSource? GetLazyLoadingEnabledConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.LazyLoadingEnabled)?.GetConfigurationSource();
+    ConfigurationSource? GetLazyLoadingEnabledConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.LazyLoadingEnabled)?.GetConfigurationSource();
 }

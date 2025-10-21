@@ -8,7 +8,8 @@ namespace System.Speech.Synthesis
     public abstract class PromptEventArgs : AsyncCompletedEventArgs
     {
         #region Constructors
-        internal PromptEventArgs(Prompt prompt) : base(prompt.Exception, prompt.Exception != null, prompt)
+        internal PromptEventArgs(Prompt prompt)
+            : base(prompt.Exception, prompt.Exception != null, prompt)
         {
             _prompt = prompt;
         }
@@ -20,10 +21,7 @@ namespace System.Speech.Synthesis
         // Use Add* naming convention.
         public Prompt Prompt
         {
-            get
-            {
-                return _prompt;
-            }
+            get { return _prompt; }
         }
 
         #endregion
@@ -34,13 +32,12 @@ namespace System.Speech.Synthesis
 
         #endregion
     }
+
     public class SpeakStartedEventArgs : PromptEventArgs
     {
         #region Constructors
         internal SpeakStartedEventArgs(Prompt prompt)
-            : base(prompt)
-        {
-        }
+            : base(prompt) { }
 
         #endregion
     }

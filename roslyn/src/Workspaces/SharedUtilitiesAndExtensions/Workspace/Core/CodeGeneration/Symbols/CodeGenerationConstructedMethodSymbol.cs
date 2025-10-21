@@ -15,13 +15,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public CodeGenerationConstructedMethodSymbol(
             CodeGenerationAbstractMethodSymbol constructedFrom,
-            ImmutableArray<ITypeSymbol> typeArguments)
-            : base(constructedFrom.ContainingType,
-                   constructedFrom.GetAttributes(),
-                   constructedFrom.DeclaredAccessibility,
-                   constructedFrom.Modifiers,
-                   constructedFrom.Name,
-                   constructedFrom.GetReturnTypeAttributes())
+            ImmutableArray<ITypeSymbol> typeArguments
+        )
+            : base(
+                constructedFrom.ContainingType,
+                constructedFrom.GetAttributes(),
+                constructedFrom.DeclaredAccessibility,
+                constructedFrom.Modifiers,
+                constructedFrom.Name,
+                constructedFrom.GetReturnTypeAttributes()
+            )
         {
             _constructedFrom = constructedFrom;
             this.OriginalDefinition = _constructedFrom.OriginalDefinition;
@@ -38,10 +41,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override bool ReturnsByRefReadonly
         {
-            get
-            {
-                return _constructedFrom.ReturnsByRefReadonly;
-            }
+            get { return _constructedFrom.ReturnsByRefReadonly; }
         }
 
         public override ITypeSymbol ReturnType
@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public override ImmutableArray<ITypeSymbol> TypeArguments => _typeArguments;
 
-        public override ImmutableArray<ITypeParameterSymbol> TypeParameters => _constructedFrom.TypeParameters;
+        public override ImmutableArray<ITypeParameterSymbol> TypeParameters =>
+            _constructedFrom.TypeParameters;
 
         public override ImmutableArray<IParameterSymbol> Parameters
         {
@@ -71,18 +72,22 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public override bool IsReadOnly => _constructedFrom.IsReadOnly;
         public override bool IsInitOnly => _constructedFrom.IsInitOnly;
 
-        public override System.Reflection.MethodImplAttributes MethodImplementationFlags => _constructedFrom.MethodImplementationFlags;
+        public override System.Reflection.MethodImplAttributes MethodImplementationFlags =>
+            _constructedFrom.MethodImplementationFlags;
 
         public override IMethodSymbol OverriddenMethod
-                // TODO(cyrusn): Construct this.
-                => _constructedFrom.OverriddenMethod;
+            // TODO(cyrusn): Construct this.
+            =>
+            _constructedFrom.OverriddenMethod;
 
         public override IMethodSymbol ReducedFrom
-                // TODO(cyrusn): Construct this.
-                => _constructedFrom.ReducedFrom;
+            // TODO(cyrusn): Construct this.
+            =>
+            _constructedFrom.ReducedFrom;
 
-        public override ITypeSymbol GetTypeInferredDuringReduction(ITypeParameterSymbol reducedFromTypeParameter)
-            => throw new System.InvalidOperationException();
+        public override ITypeSymbol GetTypeInferredDuringReduction(
+            ITypeParameterSymbol reducedFromTypeParameter
+        ) => throw new System.InvalidOperationException();
 
         public override IMethodSymbol ReduceExtensionMethod(ITypeSymbol receiverType)
         {
@@ -91,20 +96,23 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         }
 
         public override ImmutableArray<IMethodSymbol> ExplicitInterfaceImplementations
-                // TODO(cyrusn): Construct this.
-                => _constructedFrom.ExplicitInterfaceImplementations;
+            // TODO(cyrusn): Construct this.
+            =>
+            _constructedFrom.ExplicitInterfaceImplementations;
 
         public override IMethodSymbol PartialDefinitionPart
-                // TODO(cyrusn): Construct this.
-                => _constructedFrom.PartialDefinitionPart;
+            // TODO(cyrusn): Construct this.
+            =>
+            _constructedFrom.PartialDefinitionPart;
 
         public override IMethodSymbol PartialImplementationPart
-                // TODO(cyrusn): Construct this.
-                => _constructedFrom.PartialImplementationPart;
+            // TODO(cyrusn): Construct this.
+            =>
+            _constructedFrom.PartialImplementationPart;
 
         public override bool IsPartialDefinition => _constructedFrom.IsPartialDefinition;
 
-        protected override CodeGenerationSymbol Clone()
-            => new CodeGenerationConstructedMethodSymbol(_constructedFrom, _typeArguments);
+        protected override CodeGenerationSymbol Clone() =>
+            new CodeGenerationConstructedMethodSymbol(_constructedFrom, _typeArguments);
     }
 }

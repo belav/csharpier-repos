@@ -22,8 +22,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The name to use for the hi-lo sequence.</returns>
-    public static string? GetHiLoSequenceName(this IReadOnlyProperty property)
-        => (string?)property[SqlServerAnnotationNames.HiLoSequenceName];
+    public static string? GetHiLoSequenceName(this IReadOnlyProperty property) =>
+        (string?)property[SqlServerAnnotationNames.HiLoSequenceName];
 
     /// <summary>
     ///     Returns the name to use for the hi-lo sequence.
@@ -31,7 +31,10 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The name to use for the hi-lo sequence.</returns>
-    public static string? GetHiLoSequenceName(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static string? GetHiLoSequenceName(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName);
         if (annotation != null)
@@ -39,7 +42,9 @@ public static class SqlServerPropertyExtensions
             return (string?)annotation.Value;
         }
 
-        return property.FindSharedStoreObjectRootProperty(storeObject)?.GetHiLoSequenceName(storeObject);
+        return property
+            .FindSharedStoreObjectRootProperty(storeObject)
+            ?.GetHiLoSequenceName(storeObject);
     }
 
     /// <summary>
@@ -47,10 +52,11 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="name">The sequence name to use.</param>
-    public static void SetHiLoSequenceName(this IMutableProperty property, string? name)
-        => property.SetOrRemoveAnnotation(
+    public static void SetHiLoSequenceName(this IMutableProperty property, string? name) =>
+        property.SetOrRemoveAnnotation(
             SqlServerAnnotationNames.HiLoSequenceName,
-            Check.NullButNotEmpty(name, nameof(name)));
+            Check.NullButNotEmpty(name, nameof(name))
+        );
 
     /// <summary>
     ///     Sets the name to use for the hi-lo sequence.
@@ -62,27 +68,36 @@ public static class SqlServerPropertyExtensions
     public static string? SetHiLoSequenceName(
         this IConventionProperty property,
         string? name,
-        bool fromDataAnnotation = false)
-        => (string?)property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.HiLoSequenceName,
-            Check.NullButNotEmpty(name, nameof(name)),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            property
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.HiLoSequenceName,
+                    Check.NullButNotEmpty(name, nameof(name)),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the hi-lo sequence name.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the hi-lo sequence name.</returns>
-    public static ConfigurationSource? GetHiLoSequenceNameConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName)?.GetConfigurationSource();
+    public static ConfigurationSource? GetHiLoSequenceNameConfigurationSource(
+        this IConventionProperty property
+    ) =>
+        property
+            .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceName)
+            ?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the schema to use for the hi-lo sequence.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The schema to use for the hi-lo sequence.</returns>
-    public static string? GetHiLoSequenceSchema(this IReadOnlyProperty property)
-        => (string?)property[SqlServerAnnotationNames.HiLoSequenceSchema];
+    public static string? GetHiLoSequenceSchema(this IReadOnlyProperty property) =>
+        (string?)property[SqlServerAnnotationNames.HiLoSequenceSchema];
 
     /// <summary>
     ///     Returns the schema to use for the hi-lo sequence.
@@ -90,7 +105,10 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The schema to use for the hi-lo sequence.</returns>
-    public static string? GetHiLoSequenceSchema(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static string? GetHiLoSequenceSchema(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema);
         if (annotation != null)
@@ -98,7 +116,9 @@ public static class SqlServerPropertyExtensions
             return (string?)annotation.Value;
         }
 
-        return property.FindSharedStoreObjectRootProperty(storeObject)?.GetHiLoSequenceSchema(storeObject);
+        return property
+            .FindSharedStoreObjectRootProperty(storeObject)
+            ?.GetHiLoSequenceSchema(storeObject);
     }
 
     /// <summary>
@@ -106,10 +126,11 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="schema">The schema to use.</param>
-    public static void SetHiLoSequenceSchema(this IMutableProperty property, string? schema)
-        => property.SetOrRemoveAnnotation(
+    public static void SetHiLoSequenceSchema(this IMutableProperty property, string? schema) =>
+        property.SetOrRemoveAnnotation(
             SqlServerAnnotationNames.HiLoSequenceSchema,
-            Check.NullButNotEmpty(schema, nameof(schema)));
+            Check.NullButNotEmpty(schema, nameof(schema))
+        );
 
     /// <summary>
     ///     Sets the schema to use for the hi-lo sequence.
@@ -121,19 +142,28 @@ public static class SqlServerPropertyExtensions
     public static string? SetHiLoSequenceSchema(
         this IConventionProperty property,
         string? schema,
-        bool fromDataAnnotation = false)
-        => (string?)property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.HiLoSequenceSchema,
-            Check.NullButNotEmpty(schema, nameof(schema)),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            property
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.HiLoSequenceSchema,
+                    Check.NullButNotEmpty(schema, nameof(schema)),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the hi-lo sequence schema.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the hi-lo sequence schema.</returns>
-    public static ConfigurationSource? GetHiLoSequenceSchemaConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema)?.GetConfigurationSource();
+    public static ConfigurationSource? GetHiLoSequenceSchemaConfigurationSource(
+        this IConventionProperty property
+    ) =>
+        property
+            .FindAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema)
+            ?.GetConfigurationSource();
 
     /// <summary>
     ///     Finds the <see cref="ISequence" /> in the model to use for the hi-lo pattern.
@@ -144,11 +174,9 @@ public static class SqlServerPropertyExtensions
     {
         var model = property.DeclaringType.Model;
 
-        var sequenceName = property.GetHiLoSequenceName()
-            ?? model.GetHiLoSequenceName();
+        var sequenceName = property.GetHiLoSequenceName() ?? model.GetHiLoSequenceName();
 
-        var sequenceSchema = property.GetHiLoSequenceSchema()
-            ?? model.GetHiLoSequenceSchema();
+        var sequenceSchema = property.GetHiLoSequenceSchema() ?? model.GetHiLoSequenceSchema();
 
         return model.FindSequence(sequenceName, sequenceSchema);
     }
@@ -159,15 +187,17 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
-    public static IReadOnlySequence? FindHiLoSequence(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static IReadOnlySequence? FindHiLoSequence(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var model = property.DeclaringType.Model;
 
-        var sequenceName = property.GetHiLoSequenceName(storeObject)
-            ?? model.GetHiLoSequenceName();
+        var sequenceName = property.GetHiLoSequenceName(storeObject) ?? model.GetHiLoSequenceName();
 
-        var sequenceSchema = property.GetHiLoSequenceSchema(storeObject)
-            ?? model.GetHiLoSequenceSchema();
+        var sequenceSchema =
+            property.GetHiLoSequenceSchema(storeObject) ?? model.GetHiLoSequenceSchema();
 
         return model.FindSequence(sequenceName, sequenceSchema);
     }
@@ -177,8 +207,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
-    public static ISequence? FindHiLoSequence(this IProperty property)
-        => (ISequence?)((IReadOnlyProperty)property).FindHiLoSequence();
+    public static ISequence? FindHiLoSequence(this IProperty property) =>
+        (ISequence?)((IReadOnlyProperty)property).FindHiLoSequence();
 
     /// <summary>
     ///     Finds the <see cref="ISequence" /> in the model to use for the hi-lo pattern.
@@ -186,16 +216,18 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
-    public static ISequence? FindHiLoSequence(this IProperty property, in StoreObjectIdentifier storeObject)
-        => (ISequence?)((IReadOnlyProperty)property).FindHiLoSequence(storeObject);
+    public static ISequence? FindHiLoSequence(
+        this IProperty property,
+        in StoreObjectIdentifier storeObject
+    ) => (ISequence?)((IReadOnlyProperty)property).FindHiLoSequence(storeObject);
 
     /// <summary>
     ///     Returns the name to use for the key value generation sequence.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The name to use for the key value generation sequence.</returns>
-    public static string? GetSequenceName(this IReadOnlyProperty property)
-        => (string?)property[SqlServerAnnotationNames.SequenceName];
+    public static string? GetSequenceName(this IReadOnlyProperty property) =>
+        (string?)property[SqlServerAnnotationNames.SequenceName];
 
     /// <summary>
     ///     Returns the name to use for the key value generation sequence.
@@ -203,7 +235,10 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The name to use for the key value generation sequence.</returns>
-    public static string? GetSequenceName(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static string? GetSequenceName(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.SequenceName);
         if (annotation != null)
@@ -211,7 +246,9 @@ public static class SqlServerPropertyExtensions
             return (string?)annotation.Value;
         }
 
-        return property.FindSharedStoreObjectRootProperty(storeObject)?.GetSequenceName(storeObject);
+        return property
+            .FindSharedStoreObjectRootProperty(storeObject)
+            ?.GetSequenceName(storeObject);
     }
 
     /// <summary>
@@ -219,10 +256,11 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="name">The sequence name to use.</param>
-    public static void SetSequenceName(this IMutableProperty property, string? name)
-        => property.SetOrRemoveAnnotation(
+    public static void SetSequenceName(this IMutableProperty property, string? name) =>
+        property.SetOrRemoveAnnotation(
             SqlServerAnnotationNames.SequenceName,
-            Check.NullButNotEmpty(name, nameof(name)));
+            Check.NullButNotEmpty(name, nameof(name))
+        );
 
     /// <summary>
     ///     Sets the name to use for the key value generation sequence.
@@ -234,27 +272,33 @@ public static class SqlServerPropertyExtensions
     public static string? SetSequenceName(
         this IConventionProperty property,
         string? name,
-        bool fromDataAnnotation = false)
-        => (string?)property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.SequenceName,
-            Check.NullButNotEmpty(name, nameof(name)),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            property
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.SequenceName,
+                    Check.NullButNotEmpty(name, nameof(name)),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the key value generation sequence name.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the key value generation sequence name.</returns>
-    public static ConfigurationSource? GetSequenceNameConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.SequenceName)?.GetConfigurationSource();
+    public static ConfigurationSource? GetSequenceNameConfigurationSource(
+        this IConventionProperty property
+    ) => property.FindAnnotation(SqlServerAnnotationNames.SequenceName)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the schema to use for the key value generation sequence.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The schema to use for the key value generation sequence.</returns>
-    public static string? GetSequenceSchema(this IReadOnlyProperty property)
-        => (string?)property[SqlServerAnnotationNames.SequenceSchema];
+    public static string? GetSequenceSchema(this IReadOnlyProperty property) =>
+        (string?)property[SqlServerAnnotationNames.SequenceSchema];
 
     /// <summary>
     ///     Returns the schema to use for the key value generation sequence.
@@ -262,7 +306,10 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The schema to use for the key value generation sequence.</returns>
-    public static string? GetSequenceSchema(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static string? GetSequenceSchema(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.SequenceSchema);
         if (annotation != null)
@@ -270,7 +317,9 @@ public static class SqlServerPropertyExtensions
             return (string?)annotation.Value;
         }
 
-        return property.FindSharedStoreObjectRootProperty(storeObject)?.GetSequenceSchema(storeObject);
+        return property
+            .FindSharedStoreObjectRootProperty(storeObject)
+            ?.GetSequenceSchema(storeObject);
     }
 
     /// <summary>
@@ -278,10 +327,11 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="schema">The schema to use.</param>
-    public static void SetSequenceSchema(this IMutableProperty property, string? schema)
-        => property.SetOrRemoveAnnotation(
+    public static void SetSequenceSchema(this IMutableProperty property, string? schema) =>
+        property.SetOrRemoveAnnotation(
             SqlServerAnnotationNames.SequenceSchema,
-            Check.NullButNotEmpty(schema, nameof(schema)));
+            Check.NullButNotEmpty(schema, nameof(schema))
+        );
 
     /// <summary>
     ///     Sets the schema to use for the key value generation sequence.
@@ -293,19 +343,25 @@ public static class SqlServerPropertyExtensions
     public static string? SetSequenceSchema(
         this IConventionProperty property,
         string? schema,
-        bool fromDataAnnotation = false)
-        => (string?)property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.SequenceSchema,
-            Check.NullButNotEmpty(schema, nameof(schema)),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            property
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.SequenceSchema,
+                    Check.NullButNotEmpty(schema, nameof(schema)),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the key value generation sequence schema.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the key value generation sequence schema.</returns>
-    public static ConfigurationSource? GetSequenceSchemaConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.SequenceSchema)?.GetConfigurationSource();
+    public static ConfigurationSource? GetSequenceSchemaConfigurationSource(
+        this IConventionProperty property
+    ) => property.FindAnnotation(SqlServerAnnotationNames.SequenceSchema)?.GetConfigurationSource();
 
     /// <summary>
     ///     Finds the <see cref="ISequence" /> in the model to use for the key value generation pattern.
@@ -316,11 +372,9 @@ public static class SqlServerPropertyExtensions
     {
         var model = property.DeclaringType.Model;
 
-        var sequenceName = property.GetSequenceName()
-            ?? model.GetSequenceNameSuffix();
+        var sequenceName = property.GetSequenceName() ?? model.GetSequenceNameSuffix();
 
-        var sequenceSchema = property.GetSequenceSchema()
-            ?? model.GetSequenceSchema();
+        var sequenceSchema = property.GetSequenceSchema() ?? model.GetSequenceSchema();
 
         return model.FindSequence(sequenceName, sequenceSchema);
     }
@@ -331,15 +385,16 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
-    public static IReadOnlySequence? FindSequence(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static IReadOnlySequence? FindSequence(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         var model = property.DeclaringType.Model;
 
-        var sequenceName = property.GetSequenceName(storeObject)
-            ?? model.GetSequenceNameSuffix();
+        var sequenceName = property.GetSequenceName(storeObject) ?? model.GetSequenceNameSuffix();
 
-        var sequenceSchema = property.GetSequenceSchema(storeObject)
-            ?? model.GetSequenceSchema();
+        var sequenceSchema = property.GetSequenceSchema(storeObject) ?? model.GetSequenceSchema();
 
         return model.FindSequence(sequenceName, sequenceSchema);
     }
@@ -349,8 +404,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
-    public static ISequence? FindSequence(this IProperty property)
-        => (ISequence?)((IReadOnlyProperty)property).FindSequence();
+    public static ISequence? FindSequence(this IProperty property) =>
+        (ISequence?)((IReadOnlyProperty)property).FindSequence();
 
     /// <summary>
     ///     Finds the <see cref="ISequence" /> in the model to use for the key value generation pattern.
@@ -358,8 +413,10 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The sequence to use, or <see langword="null" /> if no sequence exists in the model.</returns>
-    public static ISequence? FindSequence(this IProperty property, in StoreObjectIdentifier storeObject)
-        => (ISequence?)((IReadOnlyProperty)property).FindSequence(storeObject);
+    public static ISequence? FindSequence(
+        this IProperty property,
+        in StoreObjectIdentifier storeObject
+    ) => (ISequence?)((IReadOnlyProperty)property).FindSequence(storeObject);
 
     /// <summary>
     ///     Returns the identity seed.
@@ -375,11 +432,9 @@ public static class SqlServerPropertyExtensions
 
         // Support pre-6.0 IdentitySeed annotations, which contained an int rather than a long
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
-        return annotation is null
-            ? null
-            : annotation.Value is int intValue
-                ? intValue
-                : (long?)annotation.Value;
+        return annotation is null ? null
+            : annotation.Value is int intValue ? intValue
+            : (long?)annotation.Value;
     }
 
     /// <summary>
@@ -388,14 +443,19 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The identity seed.</returns>
-    public static long? GetIdentitySeed(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static long? GetIdentitySeed(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         if (property is RuntimeProperty)
         {
             throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
         }
 
-        var @override = property.FindOverrides(storeObject)?.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
+        var @override = property
+            .FindOverrides(storeObject)
+            ?.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
         if (@override != null)
         {
             return (long?)@override.Value;
@@ -405,9 +465,7 @@ public static class SqlServerPropertyExtensions
         if (annotation is not null)
         {
             // Support pre-6.0 IdentitySeed annotations, which contained an int rather than a long
-            return annotation.Value is int intValue
-                ? intValue
-                : (long?)annotation.Value;
+            return annotation.Value is int intValue ? intValue : (long?)annotation.Value;
         }
 
         var sharedProperty = property.FindSharedStoreObjectRootProperty(storeObject);
@@ -421,8 +479,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <returns>The identity seed.</returns>
-    public static long? GetIdentitySeed(this IReadOnlyRelationalPropertyOverrides overrides)
-        => overrides is RuntimeRelationalPropertyOverrides
+    public static long? GetIdentitySeed(this IReadOnlyRelationalPropertyOverrides overrides) =>
+        overrides is RuntimeRelationalPropertyOverrides
             ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
             : (long?)overrides.FindAnnotation(SqlServerAnnotationNames.IdentitySeed)?.Value;
 
@@ -431,10 +489,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="seed">The value to set.</param>
-    public static void SetIdentitySeed(this IMutableProperty property, long? seed)
-        => property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.IdentitySeed,
-            seed);
+    public static void SetIdentitySeed(this IMutableProperty property, long? seed) =>
+        property.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentitySeed, seed);
 
     /// <summary>
     ///     Sets the identity seed.
@@ -446,11 +502,16 @@ public static class SqlServerPropertyExtensions
     public static long? SetIdentitySeed(
         this IConventionProperty property,
         long? seed,
-        bool fromDataAnnotation = false)
-        => (long?)property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.IdentitySeed,
-            seed,
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (long?)
+            property
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.IdentitySeed,
+                    seed,
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Sets the identity seed for a particular table.
@@ -461,9 +522,8 @@ public static class SqlServerPropertyExtensions
     public static void SetIdentitySeed(
         this IMutableProperty property,
         long? seed,
-        in StoreObjectIdentifier storeObject)
-        => property.GetOrCreateOverrides(storeObject)
-            .SetIdentitySeed(seed);
+        in StoreObjectIdentifier storeObject
+    ) => property.GetOrCreateOverrides(storeObject).SetIdentitySeed(seed);
 
     /// <summary>
     ///     Sets the identity seed for a particular table.
@@ -477,8 +537,10 @@ public static class SqlServerPropertyExtensions
         this IConventionProperty property,
         long? seed,
         in StoreObjectIdentifier storeObject,
-        bool fromDataAnnotation = false)
-        => property.GetOrCreateOverrides(storeObject, fromDataAnnotation)
+        bool fromDataAnnotation = false
+    ) =>
+        property
+            .GetOrCreateOverrides(storeObject, fromDataAnnotation)
             .SetIdentitySeed(seed, fromDataAnnotation);
 
     /// <summary>
@@ -486,8 +548,10 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <param name="seed">The value to set.</param>
-    public static void SetIdentitySeed(this IMutableRelationalPropertyOverrides overrides, long? seed)
-        => overrides.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentitySeed, seed);
+    public static void SetIdentitySeed(
+        this IMutableRelationalPropertyOverrides overrides,
+        long? seed
+    ) => overrides.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentitySeed, seed);
 
     /// <summary>
     ///     Sets the identity seed for a particular table.
@@ -499,16 +563,25 @@ public static class SqlServerPropertyExtensions
     public static long? SetIdentitySeed(
         this IConventionRelationalPropertyOverrides overrides,
         long? seed,
-        bool fromDataAnnotation = false)
-        => (long?)overrides.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentitySeed, seed, fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (long?)
+            overrides
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.IdentitySeed,
+                    seed,
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the identity seed.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the identity seed.</returns>
-    public static ConfigurationSource? GetIdentitySeedConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.IdentitySeed)?.GetConfigurationSource();
+    public static ConfigurationSource? GetIdentitySeedConfigurationSource(
+        this IConventionProperty property
+    ) => property.FindAnnotation(SqlServerAnnotationNames.IdentitySeed)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the identity seed for a particular table.
@@ -518,8 +591,8 @@ public static class SqlServerPropertyExtensions
     /// <returns>The <see cref="ConfigurationSource" /> for the identity seed.</returns>
     public static ConfigurationSource? GetIdentitySeedConfigurationSource(
         this IConventionProperty property,
-        in StoreObjectIdentifier storeObject)
-        => property.FindOverrides(storeObject)?.GetIdentitySeedConfigurationSource();
+        in StoreObjectIdentifier storeObject
+    ) => property.FindOverrides(storeObject)?.GetIdentitySeedConfigurationSource();
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the identity seed for a particular table.
@@ -527,19 +600,19 @@ public static class SqlServerPropertyExtensions
     /// <param name="overrides">The property overrides.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the identity seed.</returns>
     public static ConfigurationSource? GetIdentitySeedConfigurationSource(
-        this IConventionRelationalPropertyOverrides overrides)
-        => overrides.FindAnnotation(SqlServerAnnotationNames.IdentitySeed)?.GetConfigurationSource();
+        this IConventionRelationalPropertyOverrides overrides
+    ) => overrides.FindAnnotation(SqlServerAnnotationNames.IdentitySeed)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the identity increment.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The identity increment.</returns>
-    public static int? GetIdentityIncrement(this IReadOnlyProperty property)
-        => (property is RuntimeProperty)
+    public static int? GetIdentityIncrement(this IReadOnlyProperty property) =>
+        (property is RuntimeProperty)
             ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
             : (int?)property[SqlServerAnnotationNames.IdentityIncrement]
-            ?? property.DeclaringType.Model.GetIdentityIncrement();
+                ?? property.DeclaringType.Model.GetIdentityIncrement();
 
     /// <summary>
     ///     Returns the identity increment.
@@ -547,14 +620,19 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The identity increment.</returns>
-    public static int? GetIdentityIncrement(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static int? GetIdentityIncrement(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         if (property is RuntimeProperty)
         {
             throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData);
         }
 
-        var @override = property.FindOverrides(storeObject)?.FindAnnotation(SqlServerAnnotationNames.IdentityIncrement);
+        var @override = property
+            .FindOverrides(storeObject)
+            ?.FindAnnotation(SqlServerAnnotationNames.IdentityIncrement);
         if (@override != null)
         {
             return (int?)@override.Value;
@@ -577,8 +655,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <returns>The identity increment.</returns>
-    public static int? GetIdentityIncrement(this IReadOnlyRelationalPropertyOverrides overrides)
-        => overrides is RuntimeRelationalPropertyOverrides
+    public static int? GetIdentityIncrement(this IReadOnlyRelationalPropertyOverrides overrides) =>
+        overrides is RuntimeRelationalPropertyOverrides
             ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
             : (int?)overrides.FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)?.Value;
 
@@ -587,10 +665,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="increment">The value to set.</param>
-    public static void SetIdentityIncrement(this IMutableProperty property, int? increment)
-        => property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.IdentityIncrement,
-            increment);
+    public static void SetIdentityIncrement(this IMutableProperty property, int? increment) =>
+        property.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentityIncrement, increment);
 
     /// <summary>
     ///     Sets the identity increment.
@@ -602,11 +678,16 @@ public static class SqlServerPropertyExtensions
     public static int? SetIdentityIncrement(
         this IConventionProperty property,
         int? increment,
-        bool fromDataAnnotation = false)
-        => (int?)property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.IdentityIncrement,
-            increment,
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (int?)
+            property
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.IdentityIncrement,
+                    increment,
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Sets the identity increment for a particular table.
@@ -617,9 +698,8 @@ public static class SqlServerPropertyExtensions
     public static void SetIdentityIncrement(
         this IMutableProperty property,
         int? increment,
-        in StoreObjectIdentifier storeObject)
-        => property.GetOrCreateOverrides(storeObject)
-            .SetIdentityIncrement(increment);
+        in StoreObjectIdentifier storeObject
+    ) => property.GetOrCreateOverrides(storeObject).SetIdentityIncrement(increment);
 
     /// <summary>
     ///     Sets the identity increment for a particular table.
@@ -633,8 +713,10 @@ public static class SqlServerPropertyExtensions
         this IConventionProperty property,
         int? increment,
         in StoreObjectIdentifier storeObject,
-        bool fromDataAnnotation = false)
-        => property.GetOrCreateOverrides(storeObject, fromDataAnnotation)
+        bool fromDataAnnotation = false
+    ) =>
+        property
+            .GetOrCreateOverrides(storeObject, fromDataAnnotation)
             .SetIdentityIncrement(increment, fromDataAnnotation);
 
     /// <summary>
@@ -642,8 +724,10 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="overrides">The property overrides.</param>
     /// <param name="increment">The value to set.</param>
-    public static void SetIdentityIncrement(this IMutableRelationalPropertyOverrides overrides, int? increment)
-        => overrides.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentityIncrement, increment);
+    public static void SetIdentityIncrement(
+        this IMutableRelationalPropertyOverrides overrides,
+        int? increment
+    ) => overrides.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentityIncrement, increment);
 
     /// <summary>
     ///     Sets the identity increment for a particular table.
@@ -655,17 +739,28 @@ public static class SqlServerPropertyExtensions
     public static int? SetIdentityIncrement(
         this IConventionRelationalPropertyOverrides overrides,
         int? increment,
-        bool fromDataAnnotation = false)
-        => (int?)overrides.SetOrRemoveAnnotation(SqlServerAnnotationNames.IdentityIncrement, increment, fromDataAnnotation)
-            ?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (int?)
+            overrides
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.IdentityIncrement,
+                    increment,
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the identity increment.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the identity increment.</returns>
-    public static ConfigurationSource? GetIdentityIncrementConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)?.GetConfigurationSource();
+    public static ConfigurationSource? GetIdentityIncrementConfigurationSource(
+        this IConventionProperty property
+    ) =>
+        property
+            .FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)
+            ?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the identity increment for a particular table.
@@ -675,8 +770,8 @@ public static class SqlServerPropertyExtensions
     /// <returns>The <see cref="ConfigurationSource" /> for the identity increment.</returns>
     public static ConfigurationSource? GetIdentityIncrementConfigurationSource(
         this IConventionProperty property,
-        in StoreObjectIdentifier storeObject)
-        => property.FindOverrides(storeObject)?.GetIdentityIncrementConfigurationSource();
+        in StoreObjectIdentifier storeObject
+    ) => property.FindOverrides(storeObject)?.GetIdentityIncrementConfigurationSource();
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the identity increment for a particular table.
@@ -684,8 +779,11 @@ public static class SqlServerPropertyExtensions
     /// <param name="overrides">The property overrides.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the identity increment.</returns>
     public static ConfigurationSource? GetIdentityIncrementConfigurationSource(
-        this IConventionRelationalPropertyOverrides overrides)
-        => overrides.FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)?.GetConfigurationSource();
+        this IConventionRelationalPropertyOverrides overrides
+    ) =>
+        overrides
+            .FindAnnotation(SqlServerAnnotationNames.IdentityIncrement)
+            ?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the <see cref="SqlServerValueGenerationStrategy" /> to use for the property.
@@ -695,21 +793,29 @@ public static class SqlServerPropertyExtensions
     /// </remarks>
     /// <param name="property">The property.</param>
     /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was set.</returns>
-    public static SqlServerValueGenerationStrategy GetValueGenerationStrategy(this IReadOnlyProperty property)
+    public static SqlServerValueGenerationStrategy GetValueGenerationStrategy(
+        this IReadOnlyProperty property
+    )
     {
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy);
         if (annotation != null)
         {
-            return (SqlServerValueGenerationStrategy?)annotation.Value ?? SqlServerValueGenerationStrategy.None;
+            return (SqlServerValueGenerationStrategy?)annotation.Value
+                ?? SqlServerValueGenerationStrategy.None;
         }
 
         var defaultValueGenerationStrategy = GetDefaultValueGenerationStrategy(property);
 
-        if (property.ValueGenerated != ValueGenerated.OnAdd
+        if (
+            property.ValueGenerated != ValueGenerated.OnAdd
             || property.IsForeignKey()
             || property.TryGetDefaultValue(out _)
-            || (defaultValueGenerationStrategy != SqlServerValueGenerationStrategy.Sequence && property.GetDefaultValueSql() != null)
-            || property.GetComputedColumnSql() != null)
+            || (
+                defaultValueGenerationStrategy != SqlServerValueGenerationStrategy.Sequence
+                && property.GetDefaultValueSql() != null
+            )
+            || property.GetComputedColumnSql() != null
+        )
         {
             return SqlServerValueGenerationStrategy.None;
         }
@@ -728,23 +834,30 @@ public static class SqlServerPropertyExtensions
     /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was set.</returns>
     public static SqlServerValueGenerationStrategy GetValueGenerationStrategy(
         this IReadOnlyProperty property,
-        in StoreObjectIdentifier storeObject)
-        => GetValueGenerationStrategy(property, storeObject, null);
+        in StoreObjectIdentifier storeObject
+    ) => GetValueGenerationStrategy(property, storeObject, null);
 
     internal static SqlServerValueGenerationStrategy GetValueGenerationStrategy(
         this IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject,
-        ITypeMappingSource? typeMappingSource)
+        ITypeMappingSource? typeMappingSource
+    )
     {
-        var @override = property.FindOverrides(storeObject)?.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy);
+        var @override = property
+            .FindOverrides(storeObject)
+            ?.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy);
         if (@override != null)
         {
-            return (SqlServerValueGenerationStrategy?)@override.Value ?? SqlServerValueGenerationStrategy.None;
+            return (SqlServerValueGenerationStrategy?)@override.Value
+                ?? SqlServerValueGenerationStrategy.None;
         }
 
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy);
-        if (annotation?.Value != null
-            && StoreObjectIdentifier.Create(property.DeclaringType, storeObject.StoreObjectType) == storeObject)
+        if (
+            annotation?.Value != null
+            && StoreObjectIdentifier.Create(property.DeclaringType, storeObject.StoreObjectType)
+                == storeObject
+        )
         {
             return (SqlServerValueGenerationStrategy)annotation.Value;
         }
@@ -753,41 +866,59 @@ public static class SqlServerPropertyExtensions
         var sharedTableRootProperty = property.FindSharedStoreObjectRootProperty(storeObject);
         if (sharedTableRootProperty != null)
         {
-            return sharedTableRootProperty.GetValueGenerationStrategy(storeObject, typeMappingSource)
-                == SqlServerValueGenerationStrategy.IdentityColumn
+            return
+                sharedTableRootProperty.GetValueGenerationStrategy(storeObject, typeMappingSource)
+                    == SqlServerValueGenerationStrategy.IdentityColumn
                 && table.StoreObjectType == StoreObjectType.Table
-                && !property.GetContainingForeignKeys().Any(
-                    fk =>
+                && !property
+                    .GetContainingForeignKeys()
+                    .Any(fk =>
                         !fk.IsBaseLinking()
-                        || (StoreObjectIdentifier.Create(fk.PrincipalEntityType, StoreObjectType.Table)
+                        || (
+                            StoreObjectIdentifier.Create(
+                                fk.PrincipalEntityType,
+                                StoreObjectType.Table
+                            )
                                 is StoreObjectIdentifier principal
-                            && fk.GetConstraintName(table, principal) != null))
-                    ? SqlServerValueGenerationStrategy.IdentityColumn
-                    : SqlServerValueGenerationStrategy.None;
+                            && fk.GetConstraintName(table, principal) != null
+                        )
+                    )
+                ? SqlServerValueGenerationStrategy.IdentityColumn
+                : SqlServerValueGenerationStrategy.None;
         }
 
-        if (property.ValueGenerated != ValueGenerated.OnAdd
+        if (
+            property.ValueGenerated != ValueGenerated.OnAdd
             || table.StoreObjectType != StoreObjectType.Table
             || property.TryGetDefaultValue(storeObject, out _)
             || property.GetDefaultValueSql(storeObject) != null
             || property.GetComputedColumnSql(storeObject) != null
-            || property.GetContainingForeignKeys()
-                .Any(
-                    fk =>
-                        !fk.IsBaseLinking()
-                        || (StoreObjectIdentifier.Create(fk.PrincipalEntityType, StoreObjectType.Table)
-                                is StoreObjectIdentifier principal
-                            && fk.GetConstraintName(table, principal) != null)))
+            || property
+                .GetContainingForeignKeys()
+                .Any(fk =>
+                    !fk.IsBaseLinking()
+                    || (
+                        StoreObjectIdentifier.Create(fk.PrincipalEntityType, StoreObjectType.Table)
+                            is StoreObjectIdentifier principal
+                        && fk.GetConstraintName(table, principal) != null
+                    )
+                )
+        )
         {
             return SqlServerValueGenerationStrategy.None;
         }
 
-        var defaultStrategy = GetDefaultValueGenerationStrategy(property, storeObject, typeMappingSource);
+        var defaultStrategy = GetDefaultValueGenerationStrategy(
+            property,
+            storeObject,
+            typeMappingSource
+        );
         if (defaultStrategy != SqlServerValueGenerationStrategy.None)
         {
             if (annotation != null)
             {
-                return (SqlServerValueGenerationStrategy?)annotation.Value ?? SqlServerValueGenerationStrategy.None;
+                return (SqlServerValueGenerationStrategy?)annotation.Value
+                    ?? SqlServerValueGenerationStrategy.None;
             }
         }
 
@@ -803,45 +934,60 @@ public static class SqlServerPropertyExtensions
     /// <param name="overrides">The property overrides.</param>
     /// <returns>The strategy, or <see cref="SqlServerValueGenerationStrategy.None" /> if none was set.</returns>
     public static SqlServerValueGenerationStrategy? GetValueGenerationStrategy(
-        this IReadOnlyRelationalPropertyOverrides overrides)
-        => (SqlServerValueGenerationStrategy?)overrides.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
-            ?.Value;
+        this IReadOnlyRelationalPropertyOverrides overrides
+    ) =>
+        (SqlServerValueGenerationStrategy?)
+            overrides.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)?.Value;
 
-    private static SqlServerValueGenerationStrategy GetDefaultValueGenerationStrategy(IReadOnlyProperty property)
+    private static SqlServerValueGenerationStrategy GetDefaultValueGenerationStrategy(
+        IReadOnlyProperty property
+    )
     {
         var modelStrategy = property.DeclaringType.Model.GetValueGenerationStrategy();
 
-        if (modelStrategy is SqlServerValueGenerationStrategy.SequenceHiLo or SqlServerValueGenerationStrategy.Sequence
-            && IsCompatibleWithValueGeneration(property))
+        if (
+            modelStrategy
+                is SqlServerValueGenerationStrategy.SequenceHiLo
+                    or SqlServerValueGenerationStrategy.Sequence
+            && IsCompatibleWithValueGeneration(property)
+        )
         {
             return modelStrategy.Value;
         }
 
-        return modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
+        return
+            modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
             && IsCompatibleWithValueGeneration(property)
-                ? SqlServerValueGenerationStrategy.IdentityColumn
-                : SqlServerValueGenerationStrategy.None;
+            ? SqlServerValueGenerationStrategy.IdentityColumn
+            : SqlServerValueGenerationStrategy.None;
     }
 
     private static SqlServerValueGenerationStrategy GetDefaultValueGenerationStrategy(
         IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject,
-        ITypeMappingSource? typeMappingSource)
+        ITypeMappingSource? typeMappingSource
+    )
     {
         var modelStrategy = property.DeclaringType.Model.GetValueGenerationStrategy();
 
-        if (modelStrategy is SqlServerValueGenerationStrategy.SequenceHiLo or SqlServerValueGenerationStrategy.Sequence
-            && IsCompatibleWithValueGeneration(property, storeObject, typeMappingSource))
+        if (
+            modelStrategy
+                is SqlServerValueGenerationStrategy.SequenceHiLo
+                    or SqlServerValueGenerationStrategy.Sequence
+            && IsCompatibleWithValueGeneration(property, storeObject, typeMappingSource)
+        )
         {
             return modelStrategy.Value;
         }
 
-        return modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
+        return
+            modelStrategy == SqlServerValueGenerationStrategy.IdentityColumn
             && IsCompatibleWithValueGeneration(property, storeObject, typeMappingSource)
-                ? property.DeclaringType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy
-                    ? SqlServerValueGenerationStrategy.Sequence
-                    : SqlServerValueGenerationStrategy.IdentityColumn
-                : SqlServerValueGenerationStrategy.None;
+            ? property.DeclaringType.GetMappingStrategy()
+            == RelationalAnnotationNames.TpcMappingStrategy
+                ? SqlServerValueGenerationStrategy.Sequence
+                : SqlServerValueGenerationStrategy.IdentityColumn
+            : SqlServerValueGenerationStrategy.None;
     }
 
     /// <summary>
@@ -851,10 +997,12 @@ public static class SqlServerPropertyExtensions
     /// <param name="value">The strategy to use.</param>
     public static void SetValueGenerationStrategy(
         this IMutableProperty property,
-        SqlServerValueGenerationStrategy? value)
-        => property.SetOrRemoveAnnotation(
+        SqlServerValueGenerationStrategy? value
+    ) =>
+        property.SetOrRemoveAnnotation(
             SqlServerAnnotationNames.ValueGenerationStrategy,
-            CheckValueGenerationStrategy(property, value));
+            CheckValueGenerationStrategy(property, value)
+        );
 
     /// <summary>
     ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property.
@@ -866,11 +1014,16 @@ public static class SqlServerPropertyExtensions
     public static SqlServerValueGenerationStrategy? SetValueGenerationStrategy(
         this IConventionProperty property,
         SqlServerValueGenerationStrategy? value,
-        bool fromDataAnnotation = false)
-        => (SqlServerValueGenerationStrategy?)property.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.ValueGenerationStrategy,
-            CheckValueGenerationStrategy(property, value),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (SqlServerValueGenerationStrategy?)
+            property
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.ValueGenerationStrategy,
+                    CheckValueGenerationStrategy(property, value),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a particular table.
@@ -881,9 +1034,8 @@ public static class SqlServerPropertyExtensions
     public static void SetValueGenerationStrategy(
         this IMutableProperty property,
         SqlServerValueGenerationStrategy? value,
-        in StoreObjectIdentifier storeObject)
-        => property.GetOrCreateOverrides(storeObject)
-            .SetValueGenerationStrategy(value);
+        in StoreObjectIdentifier storeObject
+    ) => property.GetOrCreateOverrides(storeObject).SetValueGenerationStrategy(value);
 
     /// <summary>
     ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a particular table.
@@ -897,8 +1049,10 @@ public static class SqlServerPropertyExtensions
         this IConventionProperty property,
         SqlServerValueGenerationStrategy? value,
         in StoreObjectIdentifier storeObject,
-        bool fromDataAnnotation = false)
-        => property.GetOrCreateOverrides(storeObject, fromDataAnnotation)
+        bool fromDataAnnotation = false
+    ) =>
+        property
+            .GetOrCreateOverrides(storeObject, fromDataAnnotation)
             .SetValueGenerationStrategy(value, fromDataAnnotation);
 
     /// <summary>
@@ -908,10 +1062,12 @@ public static class SqlServerPropertyExtensions
     /// <param name="value">The strategy to use.</param>
     public static void SetValueGenerationStrategy(
         this IMutableRelationalPropertyOverrides overrides,
-        SqlServerValueGenerationStrategy? value)
-        => overrides.SetOrRemoveAnnotation(
+        SqlServerValueGenerationStrategy? value
+    ) =>
+        overrides.SetOrRemoveAnnotation(
             SqlServerAnnotationNames.ValueGenerationStrategy,
-            CheckValueGenerationStrategy(overrides.Property, value));
+            CheckValueGenerationStrategy(overrides.Property, value)
+        );
 
     /// <summary>
     ///     Sets the <see cref="SqlServerValueGenerationStrategy" /> to use for the property for a particular table.
@@ -923,15 +1079,21 @@ public static class SqlServerPropertyExtensions
     public static SqlServerValueGenerationStrategy? SetValueGenerationStrategy(
         this IConventionRelationalPropertyOverrides overrides,
         SqlServerValueGenerationStrategy? value,
-        bool fromDataAnnotation = false)
-        => (SqlServerValueGenerationStrategy?)overrides.SetOrRemoveAnnotation(
-            SqlServerAnnotationNames.ValueGenerationStrategy,
-            CheckValueGenerationStrategy(overrides.Property, value),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (SqlServerValueGenerationStrategy?)
+            overrides
+                .SetOrRemoveAnnotation(
+                    SqlServerAnnotationNames.ValueGenerationStrategy,
+                    CheckValueGenerationStrategy(overrides.Property, value),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     private static SqlServerValueGenerationStrategy? CheckValueGenerationStrategy(
         IReadOnlyProperty property,
-        SqlServerValueGenerationStrategy? value)
+        SqlServerValueGenerationStrategy? value
+    )
     {
         if (value == null)
         {
@@ -940,20 +1102,34 @@ public static class SqlServerPropertyExtensions
 
         var propertyType = property.ClrType;
 
-        if (value == SqlServerValueGenerationStrategy.IdentityColumn
-            && !IsCompatibleWithValueGeneration(property))
+        if (
+            value == SqlServerValueGenerationStrategy.IdentityColumn
+            && !IsCompatibleWithValueGeneration(property)
+        )
         {
             throw new ArgumentException(
                 SqlServerStrings.IdentityBadType(
-                    property.Name, property.DeclaringType.DisplayName(), propertyType.ShortDisplayName()));
+                    property.Name,
+                    property.DeclaringType.DisplayName(),
+                    propertyType.ShortDisplayName()
+                )
+            );
         }
 
-        if (value is SqlServerValueGenerationStrategy.SequenceHiLo or SqlServerValueGenerationStrategy.Sequence
-            && !IsCompatibleWithValueGeneration(property))
+        if (
+            value
+                is SqlServerValueGenerationStrategy.SequenceHiLo
+                    or SqlServerValueGenerationStrategy.Sequence
+            && !IsCompatibleWithValueGeneration(property)
+        )
         {
             throw new ArgumentException(
                 SqlServerStrings.SequenceBadType(
-                    property.Name, property.DeclaringType.DisplayName(), propertyType.ShortDisplayName()));
+                    property.Name,
+                    property.DeclaringType.DisplayName(),
+                    propertyType.ShortDisplayName()
+                )
+            );
         }
 
         return value;
@@ -965,8 +1141,11 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" />.</returns>
     public static ConfigurationSource? GetValueGenerationStrategyConfigurationSource(
-        this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)?.GetConfigurationSource();
+        this IConventionProperty property
+    ) =>
+        property
+            .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
+            ?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" /> for a particular table.
@@ -976,8 +1155,8 @@ public static class SqlServerPropertyExtensions
     /// <returns>The <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" />.</returns>
     public static ConfigurationSource? GetValueGenerationStrategyConfigurationSource(
         this IConventionProperty property,
-        in StoreObjectIdentifier storeObject)
-        => property.FindOverrides(storeObject)?.GetValueGenerationStrategyConfigurationSource();
+        in StoreObjectIdentifier storeObject
+    ) => property.FindOverrides(storeObject)?.GetValueGenerationStrategyConfigurationSource();
 
     /// <summary>
     ///     Returns the <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" /> for a particular table.
@@ -985,8 +1164,11 @@ public static class SqlServerPropertyExtensions
     /// <param name="overrides">The property overrides.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the <see cref="SqlServerValueGenerationStrategy" />.</returns>
     public static ConfigurationSource? GetValueGenerationStrategyConfigurationSource(
-        this IConventionRelationalPropertyOverrides overrides)
-        => overrides.FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)?.GetConfigurationSource();
+        this IConventionRelationalPropertyOverrides overrides
+    ) =>
+        overrides
+            .FindAnnotation(SqlServerAnnotationNames.ValueGenerationStrategy)
+            ?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns a value indicating whether the property is compatible with any <see cref="SqlServerValueGenerationStrategy" />.
@@ -995,34 +1177,33 @@ public static class SqlServerPropertyExtensions
     /// <returns><see langword="true" /> if compatible.</returns>
     public static bool IsCompatibleWithValueGeneration(IReadOnlyProperty property)
     {
-        var valueConverter = property.GetValueConverter()
-            ?? property.FindTypeMapping()?.Converter;
+        var valueConverter = property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
 
         var type = (valueConverter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
-        return type.IsInteger()
-            || type.IsEnum
-            || type == typeof(decimal);
+        return type.IsInteger() || type.IsEnum || type == typeof(decimal);
     }
 
     private static bool IsCompatibleWithValueGeneration(
         IReadOnlyProperty property,
         in StoreObjectIdentifier storeObject,
-        ITypeMappingSource? typeMappingSource)
+        ITypeMappingSource? typeMappingSource
+    )
     {
         if (storeObject.StoreObjectType != StoreObjectType.Table)
         {
             return false;
         }
 
-        var valueConverter = property.GetValueConverter()
-            ?? (property.FindRelationalTypeMapping(storeObject)
-                ?? typeMappingSource?.FindMapping((IProperty)property))?.Converter;
+        var valueConverter =
+            property.GetValueConverter()
+            ?? (
+                property.FindRelationalTypeMapping(storeObject)
+                ?? typeMappingSource?.FindMapping((IProperty)property)
+            )?.Converter;
 
         var type = (valueConverter?.ProviderClrType ?? property.ClrType).UnwrapNullableType();
 
-        return (type.IsInteger()
-            || type.IsEnum
-            || type == typeof(decimal));
+        return (type.IsInteger() || type.IsEnum || type == typeof(decimal));
     }
 
     /// <summary>
@@ -1030,8 +1211,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns><see langword="true" /> if the property's column is sparse.</returns>
-    public static bool? IsSparse(this IReadOnlyProperty property)
-        => (property is RuntimeProperty)
+    public static bool? IsSparse(this IReadOnlyProperty property) =>
+        (property is RuntimeProperty)
             ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
             : (bool?)property[SqlServerAnnotationNames.Sparse];
 
@@ -1041,7 +1222,10 @@ public static class SqlServerPropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns><see langword="true" /> if the property's column is sparse.</returns>
-    public static bool? IsSparse(this IReadOnlyProperty property, in StoreObjectIdentifier storeObject)
+    public static bool? IsSparse(
+        this IReadOnlyProperty property,
+        in StoreObjectIdentifier storeObject
+    )
     {
         if (property is RuntimeProperty)
         {
@@ -1063,8 +1247,8 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="sparse">The value to set.</param>
-    public static void SetIsSparse(this IMutableProperty property, bool? sparse)
-        => property.SetAnnotation(SqlServerAnnotationNames.Sparse, sparse);
+    public static void SetIsSparse(this IMutableProperty property, bool? sparse) =>
+        property.SetAnnotation(SqlServerAnnotationNames.Sparse, sparse);
 
     /// <summary>
     ///     Sets a value indicating whether the property's column is sparse.
@@ -1076,12 +1260,10 @@ public static class SqlServerPropertyExtensions
     public static bool? SetIsSparse(
         this IConventionProperty property,
         bool? sparse,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        property.SetAnnotation(
-            SqlServerAnnotationNames.Sparse,
-            sparse,
-            fromDataAnnotation);
+        property.SetAnnotation(SqlServerAnnotationNames.Sparse, sparse, fromDataAnnotation);
 
         return sparse;
     }
@@ -1091,6 +1273,7 @@ public static class SqlServerPropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for whether the property's column is sparse.</returns>
-    public static ConfigurationSource? GetIsSparseConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqlServerAnnotationNames.Sparse)?.GetConfigurationSource();
+    public static ConfigurationSource? GetIsSparseConfigurationSource(
+        this IConventionProperty property
+    ) => property.FindAnnotation(SqlServerAnnotationNames.Sparse)?.GetConfigurationSource();
 }

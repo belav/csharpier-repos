@@ -38,7 +38,9 @@ namespace System.Linq.Parallel
         {
             Debug.Assert(child != null, "child data source cannot be null");
             _predicate = predicate;
-            _prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(OrdinalIndexState.Increasing);
+            _prematureMergeNeeded = Child.OrdinalIndexState.IsWorseThan(
+                OrdinalIndexState.Increasing
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -54,12 +56,22 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             // If the index is not at least increasing, we need to reindex.
             if (_prematureMergeNeeded)
             {
-                ListQueryResults<TSource> listResults = ExecuteAndCollectResults(inputStream, inputStream.PartitionCount, Child.OutputOrdered, preferStriping, settings);
+                ListQueryResults<TSource> listResults = ExecuteAndCollectResults(
+                    inputStream,
+                    inputStream.PartitionCount,
+                    Child.OutputOrdered,
+                    preferStriping,
+                    settings
+                );
                 WrapHelper<int>(listResults.GetPartitionedStream(), recipient, settings);
             }
             else
@@ -69,7 +81,10 @@ namespace System.Linq.Parallel
         }
 
         private void WrapHelper<TKey>(
-            PartitionedStream<TSource, TKey> inputStream, IPartitionedStreamRecipient<TSource> recipient, QuerySettings settings)
+            PartitionedStream<TSource, TKey> inputStream,
+            IPartitionedStreamRecipient<TSource> recipient,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
             if (ParallelEnumerable.SinglePartitionMode)
@@ -80,27 +95,39 @@ namespace System.Linq.Parallel
             CountdownEvent sharedBarrier = new CountdownEvent(partitionCount);
 
             PartitionedStream<TSource, int> outputStream = new PartitionedStream<TSource, int>(
-                partitionCount, Util.GetDefaultComparer<int>(), OrdinalIndexState.Shuffled);
+                partitionCount,
+                Util.GetDefaultComparer<int>(),
+                OrdinalIndexState.Shuffled
+            );
 
             for (int i = 0; i < partitionCount; i++)
             {
                 outputStream[i] = new FirstQueryOperatorEnumerator<TKey>(
-                    inputStream[i], _predicate, operatorState, sharedBarrier,
-                    settings.CancellationState.MergedCancellationToken, inputStream.KeyComparer, i);
+                    inputStream[i],
+                    _predicate,
+                    operatorState,
+                    sharedBarrier,
+                    settings.CancellationState.MergedCancellationToken,
+                    inputStream.KeyComparer,
+                    i
+                );
             }
 
             recipient.Receive(outputStream);
         }
 
-
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
         //
 
-        [ExcludeFromCodeCoverage(Justification = "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First()")]
+        [ExcludeFromCodeCoverage(
+            Justification = "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First()"
+        )]
         internal override IEnumerable<TSource> AsSequentialQuery(CancellationToken token)
         {
-            Debug.Fail("This method should never be called as fallback to sequential is handled in ParallelEnumerable.First().");
+            Debug.Fail(
+                "This method should never be called as fallback to sequential is handled in ParallelEnumerable.First()."
+            );
             throw new NotSupportedException();
         }
 
@@ -118,7 +145,8 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the first operation.
         //
 
-        private sealed class FirstQueryOperatorEnumerator<TKey> : QueryOperatorEnumerator<TSource, int>
+        private sealed class FirstQueryOperatorEnumerator<TKey>
+            : QueryOperatorEnumerator<TSource, int>
         {
             private readonly QueryOperatorEnumerator<TSource, TKey> _source; // The data source to enumerate.
             private readonly Func<TSource, bool>? _predicate; // The optional predicate used during the search.
@@ -136,9 +164,14 @@ namespace System.Linq.Parallel
             //
 
             internal FirstQueryOperatorEnumerator(
-                QueryOperatorEnumerator<TSource, TKey> source, Func<TSource, bool>? predicate,
-                FirstQueryOperatorState<TKey> operatorState, CountdownEvent sharedBarrier, CancellationToken cancellationToken,
-                IComparer<TKey> keyComparer, int partitionId)
+                QueryOperatorEnumerator<TSource, TKey> source,
+                Func<TSource, bool>? predicate,
+                FirstQueryOperatorState<TKey> operatorState,
+                CountdownEvent sharedBarrier,
+                CancellationToken cancellationToken,
+                IComparer<TKey> keyComparer,
+                int partitionId
+            )
             {
                 Debug.Assert(source != null);
                 Debug.Assert(operatorState != null);
@@ -158,7 +191,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TSource currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TSource currentElement,
+                ref int currentKey
+            )
             {
                 Debug.Assert(_source != null);
 
@@ -189,7 +225,10 @@ namespace System.Linq.Parallel
 
                             lock (_operatorState)
                             {
-                                if (_operatorState._partitionId == -1 || _keyComparer.Compare(candidateKey, _operatorState._key) < 0)
+                                if (
+                                    _operatorState._partitionId == -1
+                                    || _keyComparer.Compare(candidateKey, _operatorState._key) < 0
+                                )
                                 {
                                     _operatorState._key = candidateKey;
                                     _operatorState._partitionId = _partitionId;
@@ -202,7 +241,8 @@ namespace System.Linq.Parallel
                 }
                 finally
                 {
-                    if (!ParallelEnumerable.SinglePartitionMode) {
+                    if (!ParallelEnumerable.SinglePartitionMode)
+                    {
                         // No matter whether we exit due to an exception or normal completion, we must ensure
                         // that we signal other partitions that we have completed.  Otherwise, we can cause deadlocks.
                         _sharedBarrier.Signal();

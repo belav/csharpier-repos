@@ -26,14 +26,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using NUnit.Framework;
 #if NDESK_OPTIONS
 using NDesk.Options;
 #else
 using Mono.Options;
 #endif
-
-using NUnit.Framework;
 
 #if NDESK_OPTIONS
 namespace Tests.NDesk.Options
@@ -45,123 +43,99 @@ namespace MonoTests.Mono.Options
     public class CaseSensitivityTests
     {
         [Test]
-        public void Default_Case_Match ()
+        public void Default_Case_Match()
         {
             string argValue = null;
 
-            var opts = new OptionSet ()
-            {
-                {"MiXeDcAsE=", "arg desc", v => argValue = v}
-            };
+            var opts = new OptionSet() { { "MiXeDcAsE=", "arg desc", v => argValue = v } };
 
-            var args = new string[]
-            {
-                "/MiXeDcAsE=Arg Value",
-            };
+            var args = new string[] { "/MiXeDcAsE=Arg Value" };
 
-            opts.Parse (args);
+            opts.Parse(args);
 
-            Assert.AreEqual ("Arg Value", argValue);
+            Assert.AreEqual("Arg Value", argValue);
         }
 
         [Test]
-        public void Default_Case_MisMatch ()
+        public void Default_Case_MisMatch()
         {
             string argValue = null;
 
-            var opts = new OptionSet ()
-            {
-                {"MiXeDcAsE=", "arg desc", v => argValue = v}
-            };
+            var opts = new OptionSet() { { "MiXeDcAsE=", "arg desc", v => argValue = v } };
 
-            var args = new string[]
-            {
-                "/MixedCase=Arg Value",
-            };
+            var args = new string[] { "/MixedCase=Arg Value" };
 
-            opts.Parse (args);
+            opts.Parse(args);
 
-            Assert.Null (argValue);
+            Assert.Null(argValue);
         }
 
         [Test]
-        public void CaseSensitive_Case_Match ()
+        public void CaseSensitive_Case_Match()
         {
             string argValue = null;
 
-            var opts = new OptionSet (StringComparer.Ordinal)
+            var opts = new OptionSet(StringComparer.Ordinal)
             {
-                {"MiXeDcAsE=", "arg desc", v => argValue = v}
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[]
-            {
-                "/MiXeDcAsE=Arg Value",
-            };
+            var args = new string[] { "/MiXeDcAsE=Arg Value" };
 
-            opts.Parse (args);
+            opts.Parse(args);
 
-            Assert.AreEqual ("Arg Value", argValue);
+            Assert.AreEqual("Arg Value", argValue);
         }
 
         [Test]
-        public void CaseSensitive_Case_MisMatch ()
+        public void CaseSensitive_Case_MisMatch()
         {
             string argValue = null;
 
-            var opts = new OptionSet (StringComparer.Ordinal)
+            var opts = new OptionSet(StringComparer.Ordinal)
             {
-                {"MiXeDcAsE=", "arg desc", v => argValue = v}
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[]
-            {
-                "/MixedCase=Arg Value",
-            };
+            var args = new string[] { "/MixedCase=Arg Value" };
 
-            opts.Parse (args);
+            opts.Parse(args);
 
-            Assert.Null (argValue);
+            Assert.Null(argValue);
         }
 
         [Test]
-        public void CaseInsensitive_Case_Match ()
+        public void CaseInsensitive_Case_Match()
         {
             string argValue = null;
 
-            var opts = new OptionSet (StringComparer.OrdinalIgnoreCase)
+            var opts = new OptionSet(StringComparer.OrdinalIgnoreCase)
             {
-                {"MiXeDcAsE=", "arg desc", v => argValue = v}
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[]
-            {
-                "/MiXeDcAsE=Arg Value",
-            };
+            var args = new string[] { "/MiXeDcAsE=Arg Value" };
 
-            opts.Parse (args);
+            opts.Parse(args);
 
-            Assert.AreEqual ("Arg Value", argValue);
+            Assert.AreEqual("Arg Value", argValue);
         }
 
         [Test]
-        public void CaseInsensitive_Case_MisMatch ()
+        public void CaseInsensitive_Case_MisMatch()
         {
             string argValue = null;
 
-            var opts = new OptionSet (StringComparer.OrdinalIgnoreCase)
+            var opts = new OptionSet(StringComparer.OrdinalIgnoreCase)
             {
-                {"MiXeDcAsE=", "arg desc", v => argValue = v}
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[]
-            {
-                "/MixedCase=Arg Value",
-            };
+            var args = new string[] { "/MixedCase=Arg Value" };
 
-            opts.Parse (args);
+            opts.Parse(args);
 
-            Assert.AreEqual ("Arg Value", argValue);
+            Assert.AreEqual("Arg Value", argValue);
         }
     }
 }

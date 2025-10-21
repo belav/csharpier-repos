@@ -6,7 +6,6 @@
 
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
-
 #if CODE_STYLE
 using Microsoft.CodeAnalysis.Internal.Editing;
 #else
@@ -21,8 +20,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         private readonly ImmutableArray<AttributeData> _returnTypeAttributes;
 
-        public virtual ImmutableArray<AttributeData> GetReturnTypeAttributes()
-            => _returnTypeAttributes;
+        public virtual ImmutableArray<AttributeData> GetReturnTypeAttributes() =>
+            _returnTypeAttributes;
 
         protected CodeGenerationAbstractMethodSymbol(
             INamedTypeSymbol containingType,
@@ -31,8 +30,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             DeclarationModifiers modifiers,
             string name,
             ImmutableArray<AttributeData> returnTypeAttributes,
-            string documentationCommentXml = null)
-            : base(containingType?.ContainingAssembly, containingType, attributes, declaredAccessibility, modifiers, name, documentationCommentXml)
+            string documentationCommentXml = null
+        )
+            : base(
+                containingType?.ContainingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name,
+                documentationCommentXml
+            )
         {
             _returnTypeAttributes = returnTypeAttributes.NullToEmpty();
         }
@@ -52,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public abstract bool IsInitOnly { get; }
         public abstract IMethodSymbol OverriddenMethod { get; }
         public abstract IMethodSymbol ReducedFrom { get; }
-        public abstract ITypeSymbol GetTypeInferredDuringReduction(ITypeParameterSymbol reducedFromTypeParameter);
+        public abstract ITypeSymbol GetTypeInferredDuringReduction(
+            ITypeParameterSymbol reducedFromTypeParameter
+        );
         public abstract IMethodSymbol ReduceExtensionMethod(ITypeSymbol receiverType);
         public abstract ImmutableArray<IMethodSymbol> ExplicitInterfaceImplementations { get; }
         public abstract IMethodSymbol PartialDefinitionPart { get; }
@@ -61,18 +71,20 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public NullableAnnotation ReceiverNullableAnnotation => ReceiverType.NullableAnnotation;
         public NullableAnnotation ReturnNullableAnnotation => ReturnType.NullableAnnotation;
-        public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations => TypeArguments.SelectAsArray(a => a.NullableAnnotation);
+        public ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations =>
+            TypeArguments.SelectAsArray(a => a.NullableAnnotation);
 
         public virtual ITypeSymbol ReceiverType => this.ContainingType;
 
-        public override void Accept(SymbolVisitor visitor)
-            => visitor.VisitMethod(this);
+        public override void Accept(SymbolVisitor visitor) => visitor.VisitMethod(this);
 
-        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor)
-            => visitor.VisitMethod(this);
+        public override TResult Accept<TResult>(SymbolVisitor<TResult> visitor) =>
+            visitor.VisitMethod(this);
 
-        public override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
-            => visitor.VisitMethod(this, argument);
+        public override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        ) => visitor.VisitMethod(this, argument);
 
         public virtual MethodKind MethodKind => MethodKind.Ordinary;
 
@@ -92,11 +104,11 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public virtual bool HidesBaseMethodsByName => false;
 
-        public ImmutableArray<CustomModifier> RefCustomModifiers
-            => ImmutableArray.Create<CustomModifier>();
+        public ImmutableArray<CustomModifier> RefCustomModifiers =>
+            ImmutableArray.Create<CustomModifier>();
 
-        public virtual ImmutableArray<CustomModifier> ReturnTypeCustomModifiers
-            => ImmutableArray.Create<CustomModifier>();
+        public virtual ImmutableArray<CustomModifier> ReturnTypeCustomModifiers =>
+            ImmutableArray.Create<CustomModifier>();
 
         public virtual ISymbol AssociatedSymbol => null;
 
@@ -106,15 +118,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public SignatureCallingConvention CallingConvention => SignatureCallingConvention.Default;
 
-        public ImmutableArray<INamedTypeSymbol> UnmanagedCallingConventionTypes => ImmutableArray<INamedTypeSymbol>.Empty;
+        public ImmutableArray<INamedTypeSymbol> UnmanagedCallingConventionTypes =>
+            ImmutableArray<INamedTypeSymbol>.Empty;
 
-        public IMethodSymbol Construct(params ITypeSymbol[] typeArguments)
-            => new CodeGenerationConstructedMethodSymbol(this, typeArguments.ToImmutableArray());
+        public IMethodSymbol Construct(params ITypeSymbol[] typeArguments) =>
+            new CodeGenerationConstructedMethodSymbol(this, typeArguments.ToImmutableArray());
 
-        public IMethodSymbol Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations)
-            => new CodeGenerationConstructedMethodSymbol(this, typeArguments);
+        public IMethodSymbol Construct(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations
+        ) => new CodeGenerationConstructedMethodSymbol(this, typeArguments);
 
-        public DllImportData GetDllImportData()
-            => null;
+        public DllImportData GetDllImportData() => null;
     }
 }

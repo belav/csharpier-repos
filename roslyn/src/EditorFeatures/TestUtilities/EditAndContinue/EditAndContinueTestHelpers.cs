@@ -9,8 +9,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.CodeAnalysis.Contracts.EditAndContinue;
+using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Test.Utilities;
@@ -24,25 +24,26 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {
     internal abstract class EditAndContinueTestHelpers
     {
-        public const EditAndContinueCapabilities BaselineCapabilities = EditAndContinueCapabilities.Baseline;
+        public const EditAndContinueCapabilities BaselineCapabilities =
+            EditAndContinueCapabilities.Baseline;
 
         public const EditAndContinueCapabilities Net5RuntimeCapabilities =
-            EditAndContinueCapabilities.Baseline |
-            EditAndContinueCapabilities.AddInstanceFieldToExistingType |
-            EditAndContinueCapabilities.AddStaticFieldToExistingType |
-            EditAndContinueCapabilities.AddMethodToExistingType |
-            EditAndContinueCapabilities.NewTypeDefinition;
+            EditAndContinueCapabilities.Baseline
+            | EditAndContinueCapabilities.AddInstanceFieldToExistingType
+            | EditAndContinueCapabilities.AddStaticFieldToExistingType
+            | EditAndContinueCapabilities.AddMethodToExistingType
+            | EditAndContinueCapabilities.NewTypeDefinition;
 
         public const EditAndContinueCapabilities Net6RuntimeCapabilities =
-            Net5RuntimeCapabilities |
-            EditAndContinueCapabilities.ChangeCustomAttributes |
-            EditAndContinueCapabilities.UpdateParameters;
+            Net5RuntimeCapabilities
+            | EditAndContinueCapabilities.ChangeCustomAttributes
+            | EditAndContinueCapabilities.UpdateParameters;
 
         public const EditAndContinueCapabilities AllRuntimeCapabilities =
-            Net6RuntimeCapabilities |
-            EditAndContinueCapabilities.GenericAddMethodToExistingType |
-            EditAndContinueCapabilities.GenericUpdateMethod |
-            EditAndContinueCapabilities.GenericAddFieldToExistingType;
+            Net6RuntimeCapabilities
+            | EditAndContinueCapabilities.GenericAddMethodToExistingType
+            | EditAndContinueCapabilities.GenericUpdateMethod
+            | EditAndContinueCapabilities.GenericAddFieldToExistingType;
 
         public abstract AbstractEditAndContinueAnalyzer Analyzer { get; }
 
@@ -57,10 +58,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SyntaxTree oldTree,
             SyntaxTree newTree,
             ImmutableArray<ActiveStatement> actualNewActiveStatements,
-            ImmutableArray<ImmutableArray<SourceFileSpan>> actualNewExceptionRegions)
+            ImmutableArray<ImmutableArray<SourceFileSpan>> actualNewExceptionRegions
+        )
         {
             // check active statements:
-            AssertSpansEqual(description.NewMappedSpans, actualNewActiveStatements.OrderBy(x => x.Ordinal).Select(s => s.FileSpan), newTree);
+            AssertSpansEqual(
+                description.NewMappedSpans,
+                actualNewActiveStatements.OrderBy(x => x.Ordinal).Select(s => s.FileSpan),
+                newTree
+            );
 
             var oldRoot = oldTree.GetRoot();
 
@@ -71,7 +77,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     oldRoot,
                     oldStatement.UnmappedSpan,
                     isNonLeaf: oldStatement.Statement.IsNonLeaf,
-                    CancellationToken.None);
+                    CancellationToken.None
+                );
 
                 AssertSpansEqual(oldStatement.ExceptionRegions.Spans, oldRegions.Spans, oldTree);
             }
@@ -84,7 +91,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 for (var i = 0; i < actualNewActiveStatements.Length; i++)
                 {
                     var activeStatement = actualNewActiveStatements[i];
-                    AssertSpansEqual(description.NewMappedRegions[activeStatement.Ordinal], actualNewExceptionRegions[i], newTree);
+                    AssertSpansEqual(
+                        description.NewMappedRegions[activeStatement.Ordinal],
+                        actualNewExceptionRegions[i],
+                        newTree
+                    );
                 }
             }
         }
@@ -94,42 +105,69 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SequencePointUpdates[] expectedLineEdits,
             SemanticEditDescription[]? expectedSemanticEdits,
             RudeEditDiagnosticDescription[]? expectedDiagnostics,
-            EditAndContinueCapabilities? capabilities)
+            EditAndContinueCapabilities? capabilities
+        )
         {
             VerifySemantics(
                 [editScript],
                 TargetFramework.NetStandard20,
-                [new DocumentAnalysisResultsDescription(semanticEdits: expectedSemanticEdits, lineEdits: expectedLineEdits, diagnostics: expectedDiagnostics)],
-                capabilities);
+                [
+                    new DocumentAnalysisResultsDescription(
+                        semanticEdits: expectedSemanticEdits,
+                        lineEdits: expectedLineEdits,
+                        diagnostics: expectedDiagnostics
+                    ),
+                ],
+                capabilities
+            );
         }
 
         internal void VerifySemantics(
             EditScript<SyntaxNode>[] editScripts,
             TargetFramework targetFramework,
             DocumentAnalysisResultsDescription[] expectedResults,
-            EditAndContinueCapabilities? capabilities = null)
+            EditAndContinueCapabilities? capabilities = null
+        )
         {
             Assert.True(editScripts.Length == expectedResults.Length);
             var documentCount = expectedResults.Length;
 
-            using var workspace = new AdhocWorkspace(FeaturesTestCompositions.Features.GetHostServices());
-            CreateProjects(editScripts, workspace, targetFramework, out var oldProject, out var newProject);
+            using var workspace = new AdhocWorkspace(
+                FeaturesTestCompositions.Features.GetHostServices()
+            );
+            CreateProjects(
+                editScripts,
+                workspace,
+                targetFramework,
+                out var oldProject,
+                out var newProject
+            );
 
             var oldDocuments = oldProject.Documents.ToArray();
             var newDocuments = newProject.Documents.ToArray();
 
             Debug.Assert(oldDocuments.Length == newDocuments.Length);
 
-            var oldTrees = oldDocuments.Select(d => d.GetSyntaxTreeSynchronously(default)!).ToArray();
-            var newTrees = newDocuments.Select(d => d.GetSyntaxTreeSynchronously(default)!).ToArray();
+            var oldTrees = oldDocuments
+                .Select(d => d.GetSyntaxTreeSynchronously(default)!)
+                .ToArray();
+            var newTrees = newDocuments
+                .Select(d => d.GetSyntaxTreeSynchronously(default)!)
+                .ToArray();
 
             var testAccessor = Analyzer.GetTestAccessor();
             var allEdits = new List<SemanticEditInfo>();
 
             // include Baseline by default, unless no capabilities are explicitly specified:
-            var requiredCapabilities = capabilities.HasValue
-                ? (capabilities.Value == 0 ? 0 : capabilities.Value | EditAndContinueCapabilities.Baseline)
-                : expectedResults.Any(r => r.Diagnostics.Any()) ? AllRuntimeCapabilities : EditAndContinueCapabilities.Baseline;
+            var requiredCapabilities =
+                capabilities.HasValue
+                    ? (
+                        capabilities.Value == 0
+                            ? 0
+                            : capabilities.Value | EditAndContinueCapabilities.Baseline
+                    )
+                : expectedResults.Any(r => r.Diagnostics.Any()) ? AllRuntimeCapabilities
+                : EditAndContinueCapabilities.Baseline;
 
             var lazyCapabilities = AsyncLazy.Create(requiredCapabilities);
             var actualRequiredCapabilities = EditAndContinueCapabilities.None;
@@ -141,8 +179,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                 var expectedResult = expectedResults[documentIndex];
 
-                var includeFirstLineInDiagnostics = expectedResult.Diagnostics.Any(d => d.FirstLine != null) == true;
-                var newActiveStatementSpans = expectedResult.ActiveStatements.OldUnmappedTrackingSpans;
+                var includeFirstLineInDiagnostics =
+                    expectedResult.Diagnostics.Any(d => d.FirstLine != null) == true;
+                var newActiveStatementSpans = expectedResult
+                    .ActiveStatements
+                    .OldUnmappedTrackingSpans;
 
                 // we need to rebuild the edit script, so that it operates on nodes associated with the same syntax trees backing the documents:
                 var oldTree = oldTrees[documentIndex];
@@ -158,21 +199,44 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 Contract.ThrowIfNull(oldModel);
                 Contract.ThrowIfNull(newModel);
 
-                var lazyOldActiveStatementMap = AsyncLazy.Create(expectedResult.ActiveStatements.OldStatementsMap);
-                var result = Analyzer.AnalyzeDocumentAsync(oldProject, lazyOldActiveStatementMap, newDocument, newActiveStatementSpans, lazyCapabilities, CancellationToken.None).Result;
+                var lazyOldActiveStatementMap = AsyncLazy.Create(
+                    expectedResult.ActiveStatements.OldStatementsMap
+                );
+                var result = Analyzer
+                    .AnalyzeDocumentAsync(
+                        oldProject,
+                        lazyOldActiveStatementMap,
+                        newDocument,
+                        newActiveStatementSpans,
+                        lazyCapabilities,
+                        CancellationToken.None
+                    )
+                    .Result;
                 var oldText = oldDocument.GetTextSynchronously(default);
                 var newText = newDocument.GetTextSynchronously(default);
 
                 actualRequiredCapabilities |= result.RequiredCapabilities;
                 hasValidChanges &= result.HasSignificantValidChanges;
 
-                VerifyDiagnostics(expectedResult.Diagnostics, result.RudeEditErrors.ToDescription(newText, includeFirstLineInDiagnostics), assertMessagePrefix);
+                VerifyDiagnostics(
+                    expectedResult.Diagnostics,
+                    result.RudeEditErrors.ToDescription(newText, includeFirstLineInDiagnostics),
+                    assertMessagePrefix
+                );
 
                 if (!expectedResult.SemanticEdits.IsDefault)
                 {
                     if (result.HasChanges)
                     {
-                        VerifySemanticEdits(expectedResult.SemanticEdits, result.SemanticEdits, oldModel.Compilation, newModel.Compilation, oldRoot, newRoot, assertMessagePrefix);
+                        VerifySemanticEdits(
+                            expectedResult.SemanticEdits,
+                            result.SemanticEdits,
+                            oldModel.Compilation,
+                            newModel.Compilation,
+                            oldRoot,
+                            newRoot,
+                            assertMessagePrefix
+                        );
 
                         allEdits.AddRange(result.SemanticEdits);
                     }
@@ -192,14 +256,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 else
                 {
                     // exception regions not available in presence of rude edits:
-                    Assert.Equal(!expectedResult.Diagnostics.IsEmpty, result.ExceptionRegions.IsDefault);
+                    Assert.Equal(
+                        !expectedResult.Diagnostics.IsEmpty,
+                        result.ExceptionRegions.IsDefault
+                    );
 
                     VerifyDocumentActiveStatementsAndExceptionRegions(
                         expectedResult.ActiveStatements,
                         oldTree,
                         newTree,
                         result.ActiveStatements,
-                        result.ExceptionRegions);
+                        result.ExceptionRegions
+                    );
                 }
 
                 if (!result.RudeEditErrors.IsEmpty)
@@ -215,20 +283,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         expectedResult.LineEdits.Select(e => e.FileName),
                         result.LineEdits.Select(e => e.FileName),
                         itemSeparator: ",\r\n",
-                        message: "File names of line edits differ in " + assertMessagePrefix);
+                        message: "File names of line edits differ in " + assertMessagePrefix
+                    );
 
                     // check lines of line edits:
-                    _ = expectedResult.LineEdits.Zip(result.LineEdits, (expected, actual) =>
-                    {
-                        AssertEx.Equal(
-                            expected.LineUpdates,
-                            actual.LineUpdates,
-                            itemSeparator: ",\r\n",
-                            itemInspector: s => $"new({s.OldLine}, {s.NewLine})",
-                            message: "Line deltas differ in " + assertMessagePrefix);
+                    _ = expectedResult
+                        .LineEdits.Zip(
+                            result.LineEdits,
+                            (expected, actual) =>
+                            {
+                                AssertEx.Equal(
+                                    expected.LineUpdates,
+                                    actual.LineUpdates,
+                                    itemSeparator: ",\r\n",
+                                    itemInspector: s => $"new({s.OldLine}, {s.NewLine})",
+                                    message: "Line deltas differ in " + assertMessagePrefix
+                                );
 
-                        return true;
-                    }).ToArray();
+                                return true;
+                            }
+                        )
+                        .ToArray();
                 }
             }
 
@@ -239,30 +314,49 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var duplicateNonPartial = allEdits
                 .Where(e => e.PartialType == null && e.DeletedSymbolContainer is null)
-                .GroupBy(e => e.Symbol, SymbolKey.GetComparer(ignoreCase: false, ignoreAssemblyKeys: true))
+                .GroupBy(
+                    e => e.Symbol,
+                    SymbolKey.GetComparer(ignoreCase: false, ignoreAssemblyKeys: true)
+                )
                 .Where(g => g.Count() > 1)
                 .Select(g => g.Key);
 
             AssertEx.Empty(duplicateNonPartial, "Duplicate non-partial symbols");
 
             // check if we can merge edits without throwing:
-            EditSession.MergePartialEdits(oldProject.GetCompilationAsync().Result!, newProject.GetCompilationAsync().Result!, allEdits, out var mergedEdits, out _, CancellationToken.None);
+            EditSession.MergePartialEdits(
+                oldProject.GetCompilationAsync().Result!,
+                newProject.GetCompilationAsync().Result!,
+                allEdits,
+                out var mergedEdits,
+                out _,
+                CancellationToken.None
+            );
 
             // merging is where we fill in NewSymbol for deletes, so make sure that happened too
             foreach (var edit in mergedEdits)
             {
-                if (edit.Kind is SemanticEditKind.Delete &&
-                    edit.OldSymbol is IMethodSymbol)
+                if (edit.Kind is SemanticEditKind.Delete && edit.OldSymbol is IMethodSymbol)
                 {
                     Assert.True(edit.NewSymbol is not null);
                 }
             }
         }
 
-        public void VerifyDiagnostics(IEnumerable<RudeEditDiagnosticDescription> expected, IEnumerable<RudeEditDiagnosticDescription> actual, string? message = null)
+        public void VerifyDiagnostics(
+            IEnumerable<RudeEditDiagnosticDescription> expected,
+            IEnumerable<RudeEditDiagnosticDescription> actual,
+            string? message = null
+        )
         {
             // Assert that the diagnostics are actually what the test expects
-            AssertEx.SetEqual(expected, actual, message: message, itemSeparator: ",\r\n", itemInspector: d => d.ToString(TryGetResource));
+            AssertEx.SetEqual(
+                expected,
+                actual,
+                message: message,
+                itemSeparator: ",\r\n",
+                itemInspector: d => d.ToString(TryGetResource)
+            );
 
             // Also make sure to realise each diagnostic to ensure its message is able to be formatted
             foreach (var diagnostic in actual)
@@ -278,23 +372,44 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Compilation newCompilation,
             SyntaxNode oldRoot,
             SyntaxNode newRoot,
-            string? message = null)
+            string? message = null
+        )
         {
             // sort expected and actual edits to ignore differences in order, which are insignificant:
-            expectedSemanticEdits = expectedSemanticEdits.Sort((x, y) => CompareEdits(CreateSymbolKey(x), x.Kind, CreateSymbolKey(y), y.Kind));
-            actualSemanticEdits = actualSemanticEdits.Sort((x, y) => CompareEdits(x.Symbol, x.Kind, y.Symbol, y.Kind));
+            expectedSemanticEdits = expectedSemanticEdits.Sort(
+                (x, y) => CompareEdits(CreateSymbolKey(x), x.Kind, CreateSymbolKey(y), y.Kind)
+            );
+            actualSemanticEdits = actualSemanticEdits.Sort(
+                (x, y) => CompareEdits(x.Symbol, x.Kind, y.Symbol, y.Kind)
+            );
 
-            static int CompareEdits(SymbolKey leftKey, SemanticEditKind leftKind, SymbolKey rightKey, SemanticEditKind rightKind)
-                => leftKey.ToString().CompareTo(rightKey.ToString()) is not 0 and var result ? result : leftKind.CompareTo(rightKind);
+            static int CompareEdits(
+                SymbolKey leftKey,
+                SemanticEditKind leftKind,
+                SymbolKey rightKey,
+                SemanticEditKind rightKind
+            ) =>
+                leftKey.ToString().CompareTo(rightKey.ToString()) is not 0 and var result
+                    ? result
+                    : leftKind.CompareTo(rightKind);
 
-            SymbolKey CreateSymbolKey(SemanticEditDescription edit)
-                => SymbolKey.Create(edit.SymbolProvider((edit.Kind == SemanticEditKind.Delete) ? oldCompilation : newCompilation));
+            SymbolKey CreateSymbolKey(SemanticEditDescription edit) =>
+                SymbolKey.Create(
+                    edit.SymbolProvider(
+                        (edit.Kind == SemanticEditKind.Delete) ? oldCompilation : newCompilation
+                    )
+                );
 
             // string comparison to simplify understanding why a test failed:
             AssertEx.Equal(
-                expectedSemanticEdits.Select(e => $"{e.Kind}: {e.SymbolProvider((e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation))}"),
-                actualSemanticEdits.Select(e => $"{e.Kind}: {e.Symbol.Resolve(e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation).Symbol}"),
-                message: message);
+                expectedSemanticEdits.Select(e =>
+                    $"{e.Kind}: {e.SymbolProvider((e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation))}"
+                ),
+                actualSemanticEdits.Select(e =>
+                    $"{e.Kind}: {e.Symbol.Resolve(e.Kind == SemanticEditKind.Delete ? oldCompilation : newCompilation).Symbol}"
+                ),
+                message: message
+            );
 
             for (var i = 0; i < actualSemanticEdits.Length; i++)
             {
@@ -305,7 +420,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 Assert.Equal(editKind, actualSemanticEdit.Kind);
 
                 var symbolKey = actualSemanticEdit.Symbol;
-                ISymbol? expectedOldSymbol = null, expectedNewSymbol = null;
+                ISymbol? expectedOldSymbol = null,
+                    expectedNewSymbol = null;
 
                 switch (editKind)
                 {
@@ -313,8 +429,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         expectedOldSymbol = expectedSemanticEdit.SymbolProvider(oldCompilation);
                         expectedNewSymbol = expectedSemanticEdit.SymbolProvider(newCompilation);
 
-                        Assert.Equal(expectedOldSymbol, symbolKey.Resolve(oldCompilation, ignoreAssemblyKey: true).Symbol);
-                        Assert.Equal(expectedNewSymbol, symbolKey.Resolve(newCompilation, ignoreAssemblyKey: true).Symbol);
+                        Assert.Equal(
+                            expectedOldSymbol,
+                            symbolKey.Resolve(oldCompilation, ignoreAssemblyKey: true).Symbol
+                        );
+                        Assert.Equal(
+                            expectedNewSymbol,
+                            symbolKey.Resolve(newCompilation, ignoreAssemblyKey: true).Symbol
+                        );
                         break;
 
                     case SemanticEditKind.Delete:
@@ -322,36 +444,59 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                         // Symbol key will happily resolve to a definition part that has no implementation, so we validate that
                         // differently
-                        if (expectedOldSymbol is IMethodSymbol { IsPartialDefinition: true } &&
-                            symbolKey.Resolve(oldCompilation, ignoreAssemblyKey: true).Symbol is IMethodSymbol resolvedMethod)
+                        if (
+                            expectedOldSymbol is IMethodSymbol { IsPartialDefinition: true }
+                            && symbolKey.Resolve(oldCompilation, ignoreAssemblyKey: true).Symbol
+                                is IMethodSymbol resolvedMethod
+                        )
                         {
                             Assert.Equal(expectedOldSymbol, resolvedMethod.PartialDefinitionPart);
                             Assert.Equal(null, resolvedMethod.PartialImplementationPart);
                         }
                         else
                         {
-                            Assert.Equal(expectedOldSymbol, symbolKey.Resolve(oldCompilation, ignoreAssemblyKey: true).Symbol);
+                            Assert.Equal(
+                                expectedOldSymbol,
+                                symbolKey.Resolve(oldCompilation, ignoreAssemblyKey: true).Symbol
+                            );
 
                             // When we're deleting a symbol, and have a deleted symbol container, it means the symbol wasn't really deleted,
                             // but rather had its signature changed in some way. Some of those ways, like changing the return type, are not
                             // represented in the symbol key, so the check below would fail, so we skip it.
                             if (expectedSemanticEdit.DeletedSymbolContainerProvider is null)
                             {
-                                Assert.Equal(null, symbolKey.Resolve(newCompilation, ignoreAssemblyKey: true).Symbol);
+                                Assert.Equal(
+                                    null,
+                                    symbolKey
+                                        .Resolve(newCompilation, ignoreAssemblyKey: true)
+                                        .Symbol
+                                );
                             }
                         }
 
-                        var deletedSymbolContainer = actualSemanticEdit.DeletedSymbolContainer?.Resolve(newCompilation, ignoreAssemblyKey: true).Symbol;
+                        var deletedSymbolContainer = actualSemanticEdit
+                            .DeletedSymbolContainer?.Resolve(
+                                newCompilation,
+                                ignoreAssemblyKey: true
+                            )
+                            .Symbol;
                         AssertEx.AreEqual(
                             deletedSymbolContainer,
-                            expectedSemanticEdit.DeletedSymbolContainerProvider?.Invoke(newCompilation),
-                            message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Incorrect deleted container");
+                            expectedSemanticEdit.DeletedSymbolContainerProvider?.Invoke(
+                                newCompilation
+                            ),
+                            message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Incorrect deleted container"
+                        );
 
                         break;
 
-                    case SemanticEditKind.Insert or SemanticEditKind.Replace:
+                    case SemanticEditKind.Insert
+                    or SemanticEditKind.Replace:
                         expectedNewSymbol = expectedSemanticEdit.SymbolProvider(newCompilation);
-                        Assert.Equal(expectedNewSymbol, symbolKey.Resolve(newCompilation, ignoreAssemblyKey: true).Symbol);
+                        Assert.Equal(
+                            expectedNewSymbol,
+                            symbolKey.Resolve(newCompilation, ignoreAssemblyKey: true).Symbol
+                        );
                         break;
 
                     default:
@@ -361,15 +506,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 // Partial types must match:
                 AssertEx.AreEqual(
                     expectedSemanticEdit.PartialType?.Invoke(newCompilation),
-                    actualSemanticEdit.PartialType?.Resolve(newCompilation, ignoreAssemblyKey: true).Symbol,
-                    message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Partial types do not match");
+                    actualSemanticEdit
+                        .PartialType?.Resolve(newCompilation, ignoreAssemblyKey: true)
+                        .Symbol,
+                    message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Partial types do not match"
+                );
 
                 // Edit is expected to have a syntax map:
                 var actualSyntaxMap = actualSemanticEdit.SyntaxMap;
                 AssertEx.AreEqual(
                     expectedSemanticEdit.HasSyntaxMap,
                     actualSyntaxMap != null,
-                    message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Incorrect syntax map");
+                    message: $"{message}, {editKind}({expectedNewSymbol ?? expectedOldSymbol}): Incorrect syntax map"
+                );
 
                 // If expected map is specified validate its mappings with the actual one:
                 var expectedSyntaxMap = expectedSemanticEdit.SyntaxMap;
@@ -397,7 +546,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SyntaxNode oldRoot,
             SyntaxNode newRoot,
             IEnumerable<KeyValuePair<TextSpan, TextSpan>> expectedSyntaxMap,
-            Func<SyntaxNode, SyntaxNode?> actualSyntaxMap)
+            Func<SyntaxNode, SyntaxNode?> actualSyntaxMap
+        )
         {
             foreach (var expectedSpanMapping in expectedSyntaxMap)
             {
@@ -409,7 +559,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             }
         }
 
-        private void CreateProjects(EditScript<SyntaxNode>[] editScripts, AdhocWorkspace workspace, TargetFramework targetFramework, out Project oldProject, out Project newProject)
+        private void CreateProjects(
+            EditScript<SyntaxNode>[] editScripts,
+            AdhocWorkspace workspace,
+            TargetFramework targetFramework,
+            out Project oldProject,
+            out Project newProject
+        )
         {
             var projectInfo = ProjectInfo.Create(
                 new ProjectInfo.ProjectAttributes(
@@ -420,9 +576,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     language: LanguageName,
                     compilationOutputFilePaths: default,
                     filePath: Path.Combine(TempRoot.Root, "project" + ProjectFileExtension),
-                    checksumAlgorithm: SourceHashAlgorithms.Default));
+                    checksumAlgorithm: SourceHashAlgorithms.Default
+                )
+            );
 
-            oldProject = workspace.AddProject(projectInfo).WithMetadataReferences(TargetFrameworkUtil.GetReferences(targetFramework));
+            oldProject = workspace
+                .AddProject(projectInfo)
+                .WithMetadataReferences(TargetFrameworkUtil.GetReferences(targetFramework));
             foreach (var editScript in editScripts)
             {
                 var oldRoot = editScript.Match.OldRoot;
@@ -435,20 +595,29 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var documentIndex = 0;
             foreach (var oldDocument in oldProject.Documents)
             {
-                newSolution = newSolution.WithDocumentSyntaxRoot(oldDocument.Id, editScripts[documentIndex].Match.NewRoot, PreservationMode.PreserveIdentity);
+                newSolution = newSolution.WithDocumentSyntaxRoot(
+                    oldDocument.Id,
+                    editScripts[documentIndex].Match.NewRoot,
+                    PreservationMode.PreserveIdentity
+                );
                 documentIndex++;
             }
 
             newProject = newSolution.Projects.Single();
         }
 
-        private static void AssertSpansEqual(IEnumerable<SourceFileSpan> expected, IEnumerable<SourceFileSpan> actual, SyntaxTree newTree)
+        private static void AssertSpansEqual(
+            IEnumerable<SourceFileSpan> expected,
+            IEnumerable<SourceFileSpan> actual,
+            SyntaxTree newTree
+        )
         {
             AssertEx.Equal(
                 expected,
                 actual,
                 itemSeparator: "\r\n",
-                itemInspector: span => DisplaySpan(newTree, span));
+                itemInspector: span => DisplaySpan(newTree, span)
+            );
         }
 
         private static string DisplaySpan(SyntaxTree tree, SourceFileSpan span)
@@ -459,14 +628,25 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             }
 
             var text = tree.GetText();
-            var code = text.GetSubText(text.Lines.GetTextSpan(span.Span)).ToString().Replace("\r\n", " ");
+            var code = text.GetSubText(text.Lines.GetTextSpan(span.Span))
+                .ToString()
+                .Replace("\r\n", " ");
             return $"{span}: [{code}]";
         }
 
-        internal static IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>> GetMethodMatches(AbstractEditAndContinueAnalyzer analyzer, Match<SyntaxNode> bodyMatch)
+        internal static IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>> GetMethodMatches(
+            AbstractEditAndContinueAnalyzer analyzer,
+            Match<SyntaxNode> bodyMatch
+        )
         {
             Dictionary<LambdaBody, LambdaInfo>? lazyActiveOrMatchedLambdas = null;
-            var map = analyzer.GetTestAccessor().IncludeLambdaBodyMaps(BidirectionalMap<SyntaxNode>.FromMatch(bodyMatch), new ArrayBuilder<ActiveNode>(), ref lazyActiveOrMatchedLambdas);
+            var map = analyzer
+                .GetTestAccessor()
+                .IncludeLambdaBodyMaps(
+                    BidirectionalMap<SyntaxNode>.FromMatch(bodyMatch),
+                    new ArrayBuilder<ActiveNode>(),
+                    ref lazyActiveOrMatchedLambdas
+                );
 
             var result = new Dictionary<SyntaxNode, SyntaxNode>();
             foreach (var pair in map.Forward)
@@ -483,25 +663,37 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             return result;
         }
 
-        public static MatchingPairs ToMatchingPairs(Match<SyntaxNode> match)
-            => ToMatchingPairs(match.Matches.Where(partners => partners.Key != match.OldRoot));
+        public static MatchingPairs ToMatchingPairs(Match<SyntaxNode> match) =>
+            ToMatchingPairs(match.Matches.Where(partners => partners.Key != match.OldRoot));
 
-        public static MatchingPairs ToMatchingPairs(IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>> matches)
+        public static MatchingPairs ToMatchingPairs(
+            IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>> matches
+        )
         {
-            return new MatchingPairs(matches
-                .OrderBy(partners => partners.Key.GetLocation().SourceSpan.Start)
-                .ThenByDescending(partners => partners.Key.Span.Length)
-                .Select(partners => new MatchingPair
-                {
-                    Old = partners.Key.ToString().Replace("\r\n", " ").Replace("\n", " "),
-                    New = partners.Value.ToString().Replace("\r\n", " ").Replace("\n", " ")
-                }));
+            return new MatchingPairs(
+                matches
+                    .OrderBy(partners => partners.Key.GetLocation().SourceSpan.Start)
+                    .ThenByDescending(partners => partners.Key.Span.Length)
+                    .Select(partners => new MatchingPair
+                    {
+                        Old = partners.Key.ToString().Replace("\r\n", " ").Replace("\n", " "),
+                        New = partners.Value.ToString().Replace("\r\n", " ").Replace("\n", " "),
+                    })
+            );
         }
     }
 
     internal static class EditScriptTestUtils
     {
-        public static void VerifyEdits<TNode>(this EditScript<TNode> actual, params string[] expected)
-            => AssertEx.Equal(expected, actual.Edits.Select(e => e.GetDebuggerDisplay()), itemSeparator: ",\r\n", itemInspector: s => $"\"{s}\"");
+        public static void VerifyEdits<TNode>(
+            this EditScript<TNode> actual,
+            params string[] expected
+        ) =>
+            AssertEx.Equal(
+                expected,
+                actual.Edits.Select(e => e.GetDebuggerDisplay()),
+                itemSeparator: ",\r\n",
+                itemInspector: s => $"\"{s}\""
+            );
     }
 }

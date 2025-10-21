@@ -1,6 +1,9 @@
 <Type Name="NtlmTargetInformation" FullName="Mono.Security.Protocol.Ntlm.NtlmTargetInformation">
   <TypeSignature Language="C#" Value="public class NtlmTargetInformation" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NtlmTargetInformation extends System.Object" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi beforefieldinit NtlmTargetInformation extends System.Object"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -16,7 +19,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public NtlmTargetInformation ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -28,8 +34,14 @@
       </Docs>
     </Member>
     <Member MemberName="Decode">
-      <MemberSignature Language="C#" Value="public void Decode (byte[] bytes, int length, int offset);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void Decode(unsigned int8[] bytes, int32 length, int32 offset) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Decode (byte[] bytes, int length, int offset);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance void Decode(unsigned int8[] bytes, int32 length, int32 offset) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -116,7 +128,10 @@
     </Member>
     <Member MemberName="ToBytes">
       <MemberSignature Language="C#" Value="public byte[] ToBytes ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance unsigned int8[] ToBytes() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance unsigned int8[] ToBytes() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

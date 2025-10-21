@@ -2,9 +2,9 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 using System;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
-using System.Runtime.Serialization;
 
 namespace System.ServiceModel.Dispatcher
 {
@@ -15,11 +15,6 @@ namespace System.ServiceModel.Dispatcher
 
     internal interface IDispatchFaultFormatterWrapper
     {
-        IDispatchFaultFormatter InnerFaultFormatter
-        {
-            get;
-            set;
-        }
+        IDispatchFaultFormatter InnerFaultFormatter { get; set; }
     }
 }
-

@@ -13,8 +13,15 @@ namespace System.Reflection.Emit.Tests
         public void SetRaiseMethod_AbstractMethod_Twice()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            EventBuilder eventBuilder = type.DefineEvent("TestEvent", EventAttributes.None, typeof(TestEventHandler));
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Abstract | MethodAttributes.Virtual);
+            EventBuilder eventBuilder = type.DefineEvent(
+                "TestEvent",
+                EventAttributes.None,
+                typeof(TestEventHandler)
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Abstract | MethodAttributes.Virtual
+            );
 
             eventBuilder.SetRaiseMethod(method);
             eventBuilder.SetRaiseMethod(method);
@@ -24,7 +31,11 @@ namespace System.Reflection.Emit.Tests
         public void SetRaiseMethod_InstanceMethod_Twice()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            EventBuilder eventBuilder = type.DefineEvent("TestEvent", EventAttributes.None, typeof(TestEventHandler));
+            EventBuilder eventBuilder = type.DefineEvent(
+                "TestEvent",
+                EventAttributes.None,
+                typeof(TestEventHandler)
+            );
             MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public);
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
@@ -37,7 +48,11 @@ namespace System.Reflection.Emit.Tests
         public void SetRaiseMethod_StaticMethod_Twice()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            EventBuilder eventBuilder = type.DefineEvent("TestEvent", EventAttributes.None, typeof(TestEventHandler));
+            EventBuilder eventBuilder = type.DefineEvent(
+                "TestEvent",
+                EventAttributes.None,
+                typeof(TestEventHandler)
+            );
             MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Static);
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
@@ -50,7 +65,11 @@ namespace System.Reflection.Emit.Tests
         public void SetRaiseMethod_PInvokeImplMethod_Twice()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            EventBuilder eventBuilder = type.DefineEvent("TestEvent", EventAttributes.None, typeof(TestEventHandler));
+            EventBuilder eventBuilder = type.DefineEvent(
+                "TestEvent",
+                EventAttributes.None,
+                typeof(TestEventHandler)
+            );
             MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.PinvokeImpl);
 
             eventBuilder.SetRaiseMethod(method);
@@ -61,13 +80,23 @@ namespace System.Reflection.Emit.Tests
         public void SetRaiseMethod_MultipleDifferentMethods()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            EventBuilder eventBuilder = type.DefineEvent("TestEvent", EventAttributes.None, typeof(TestEventHandler));
-            MethodBuilder method1 = type.DefineMethod("PInvokeMethod", MethodAttributes.PinvokeImpl);
+            EventBuilder eventBuilder = type.DefineEvent(
+                "TestEvent",
+                EventAttributes.None,
+                typeof(TestEventHandler)
+            );
+            MethodBuilder method1 = type.DefineMethod(
+                "PInvokeMethod",
+                MethodAttributes.PinvokeImpl
+            );
             MethodBuilder method2 = type.DefineMethod("InstanceMethod", MethodAttributes.Public);
             ILGenerator ilGenerator = method2.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
             MethodBuilder method3 = type.DefineMethod("StaticMethod", MethodAttributes.Static);
-            MethodBuilder method4 = type.DefineMethod("AbstractMethod", MethodAttributes.Abstract | MethodAttributes.Virtual);
+            MethodBuilder method4 = type.DefineMethod(
+                "AbstractMethod",
+                MethodAttributes.Abstract | MethodAttributes.Virtual
+            );
 
             eventBuilder.SetRaiseMethod(method1);
             eventBuilder.SetRaiseMethod(method2);
@@ -79,16 +108,30 @@ namespace System.Reflection.Emit.Tests
         public void SetRaiseMethod_NullMethod_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            EventBuilder eventBuilder = type.DefineEvent("TestEvent", EventAttributes.None, typeof(TestEventHandler));
-            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () => eventBuilder.SetRaiseMethod(null));
+            EventBuilder eventBuilder = type.DefineEvent(
+                "TestEvent",
+                EventAttributes.None,
+                typeof(TestEventHandler)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "mdBuilder",
+                () => eventBuilder.SetRaiseMethod(null)
+            );
         }
 
         [Fact]
         public void SetRaiseMethod_TypeCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            EventBuilder eventBuilder = type.DefineEvent("TestEvent", EventAttributes.None, typeof(TestEventHandler));
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Abstract | MethodAttributes.Virtual);
+            EventBuilder eventBuilder = type.DefineEvent(
+                "TestEvent",
+                EventAttributes.None,
+                typeof(TestEventHandler)
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Abstract | MethodAttributes.Virtual
+            );
             type.CreateType();
 
             Assert.Throws<InvalidOperationException>(() => eventBuilder.SetRaiseMethod(method));

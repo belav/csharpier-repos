@@ -52,8 +52,8 @@ public class BoolToZeroOneConverterTest
     }
 
     [ConditionalFact]
-    public void Ordering_preserved_for_bools_to_zero_one()
-        => ValueConverterTest.OrderingTest(_boolToZeroOne, false, true);
+    public void Ordering_preserved_for_bools_to_zero_one() =>
+        ValueConverterTest.OrderingTest(_boolToZeroOne, false, true);
 
     [ConditionalFact]
     public void Can_convert_bools_to_zero_one_for_all_numerics()

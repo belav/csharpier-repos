@@ -5,12 +5,11 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class EntitySplittingQuerySqlServerTest : EntitySplittingQueryTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Can_query_entity_which_is_split_in_two(bool async)
     {
@@ -21,10 +20,13 @@ public class EntitySplittingQuerySqlServerTest : EntitySplittingQueryTestBase
 SELECT [e].[Id], [e].[EntityThreeId], [e].[IntValue1], [e].[IntValue2], [s].[IntValue3], [s].[IntValue4], [e].[StringValue1], [e].[StringValue2], [s].[StringValue3], [s].[StringValue4]
 FROM [EntityOne] AS [e]
 INNER JOIN [SplitEntityOnePart] AS [s] ON [e].[Id] = [s].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Can_query_entity_which_is_split_selecting_only_main_properties(bool async)
+    public override async Task Can_query_entity_which_is_split_selecting_only_main_properties(
+        bool async
+    )
     {
         await base.Can_query_entity_which_is_split_selecting_only_main_properties(async);
 
@@ -32,7 +34,8 @@ INNER JOIN [SplitEntityOnePart] AS [s] ON [e].[Id] = [s].[Id]
             """
 SELECT [e].[Id], [e].[IntValue1], [e].[StringValue1]
 FROM [EntityOne] AS [e]
-""");
+"""
+        );
     }
 
     public override async Task Can_query_entity_which_is_split_in_three(bool async)
@@ -45,10 +48,13 @@ SELECT [e].[Id], [e].[EntityThreeId], [e].[IntValue1], [e].[IntValue2], [s0].[In
 FROM [EntityOne] AS [e]
 INNER JOIN [SplitEntityOnePart3] AS [s] ON [e].[Id] = [s].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Can_query_entity_which_is_split_selecting_only_part_2_properties(bool async)
+    public override async Task Can_query_entity_which_is_split_selecting_only_part_2_properties(
+        bool async
+    )
     {
         await base.Can_query_entity_which_is_split_selecting_only_part_2_properties(async);
 
@@ -57,10 +63,13 @@ INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
 SELECT [e].[Id], [s0].[IntValue3], [s0].[StringValue3]
 FROM [EntityOne] AS [e]
 INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Can_query_entity_which_is_split_selecting_only_part_3_properties(bool async)
+    public override async Task Can_query_entity_which_is_split_selecting_only_part_3_properties(
+        bool async
+    )
     {
         await base.Can_query_entity_which_is_split_selecting_only_part_3_properties(async);
 
@@ -69,7 +78,8 @@ INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
 SELECT [e].[Id], [s].[IntValue4], [s].[StringValue4]
 FROM [EntityOne] AS [e]
 INNER JOIN [SplitEntityOnePart3] AS [s] ON [e].[Id] = [s].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Include_reference_to_split_entity(bool async)
@@ -86,7 +96,8 @@ LEFT JOIN (
     INNER JOIN [SplitEntityOnePart3] AS [s] ON [e0].[Id] = [s].[Id]
     INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e0].[Id] = [s0].[Id]
 ) AS [t] ON [e].[EntityOneId] = [t].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Include_collection_to_split_entity(bool async)
@@ -104,7 +115,8 @@ LEFT JOIN (
     INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e0].[Id] = [s0].[Id]
 ) AS [t] ON [e].[Id] = [t].[EntityThreeId]
 ORDER BY [e].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Include_reference_to_split_entity_including_reference(bool async)
@@ -122,7 +134,8 @@ LEFT JOIN (
     INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e0].[Id] = [s0].[Id]
 ) AS [t] ON [e].[EntityOneId] = [t].[Id]
 LEFT JOIN [EntityThree] AS [e1] ON [t].[EntityThreeId] = [e1].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Include_collection_to_split_entity_including_collection(bool async)
@@ -141,7 +154,8 @@ LEFT JOIN (
     LEFT JOIN [EntityTwo] AS [e1] ON [e0].[Id] = [e1].[EntityOneId]
 ) AS [t] ON [e].[Id] = [t].[EntityThreeId]
 ORDER BY [e].[Id], [t].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Include_reference_on_split_entity(bool async)
@@ -155,7 +169,8 @@ FROM [EntityOne] AS [e]
 INNER JOIN [SplitEntityOnePart3] AS [s] ON [e].[Id] = [s].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
 LEFT JOIN [EntityThree] AS [e0] ON [e].[EntityThreeId] = [e0].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Include_collection_on_split_entity(bool async)
@@ -170,7 +185,8 @@ INNER JOIN [SplitEntityOnePart3] AS [s] ON [e].[Id] = [s].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
 LEFT JOIN [EntityTwo] AS [e0] ON [e].[Id] = [e0].[EntityOneId]
 ORDER BY [e].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Custom_projection_trim_when_multiple_tables(bool async)
@@ -183,10 +199,13 @@ SELECT [e].[IntValue1], [s0].[IntValue3], [e0].[Id], [e0].[Name]
 FROM [EntityOne] AS [e]
 INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
 LEFT JOIN [EntityThree] AS [e0] ON [e].[EntityThreeId] = [e0].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_sharing(bool async)
+    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_sharing(
+        bool async
+    )
     {
         await base.Normal_entity_owning_a_split_reference_with_main_fragment_sharing(async);
 
@@ -196,12 +215,17 @@ SELECT [e].[Id], [e].[EntityThreeId], [e].[IntValue1], [e].[IntValue2], [e].[Int
 FROM [EntityOne] AS [e]
 LEFT JOIN [OwnedReferenceExtras2] AS [o] ON [e].[Id] = [o].[EntityOneId]
 LEFT JOIN [OwnedReferenceExtras1] AS [o0] ON [e].[Id] = [o0].[EntityOneId]
-""");
+"""
+        );
     }
 
-    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_sharing_custom_projection(bool async)
+    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_sharing_custom_projection(
+        bool async
+    )
     {
-        await base.Normal_entity_owning_a_split_reference_with_main_fragment_sharing_custom_projection(async);
+        await base.Normal_entity_owning_a_split_reference_with_main_fragment_sharing_custom_projection(
+            async
+        );
 
         AssertSql(
             """
@@ -213,11 +237,14 @@ END AS [OwnedStringValue4]
 FROM [EntityOnes] AS [e]
 LEFT JOIN [OwnedReferenceExtras2] AS [o] ON [e].[Id] = [o].[EntityOneId]
 LEFT JOIN [OwnedReferenceExtras1] AS [o0] ON [e].[Id] = [o0].[EntityOneId]
-""");
+"""
+        );
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing(bool async)
+    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing(
+        bool async
+    )
     {
         await base.Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing(async);
 
@@ -225,9 +252,13 @@ LEFT JOIN [OwnedReferenceExtras1] AS [o0] ON [e].[Id] = [o0].[EntityOneId]
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(bool async)
+    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(
+        bool async
+    )
     {
-        await base.Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(async);
+        await base.Normal_entity_owning_a_split_reference_with_main_fragment_not_sharing_custom_projection(
+            async
+        );
 
         AssertSql();
     }
@@ -240,9 +271,13 @@ LEFT JOIN [OwnedReferenceExtras1] AS [o0] ON [e].[Id] = [o0].[EntityOneId]
         AssertSql();
     }
 
-    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_sharing_multiple_level(bool async)
+    public override async Task Normal_entity_owning_a_split_reference_with_main_fragment_sharing_multiple_level(
+        bool async
+    )
     {
-        await base.Normal_entity_owning_a_split_reference_with_main_fragment_sharing_multiple_level(async);
+        await base.Normal_entity_owning_a_split_reference_with_main_fragment_sharing_multiple_level(
+            async
+        );
 
         AssertSql(
             """
@@ -252,7 +287,8 @@ LEFT JOIN [OwnedReferenceExtras2] AS [o] ON [e].[Id] = [o].[EntityOneId]
 LEFT JOIN [OwnedReferenceExtras1] AS [o0] ON [e].[Id] = [o0].[EntityOneId]
 LEFT JOIN [OwnedNestedReferenceExtras2] AS [o1] ON [e].[Id] = [o1].[OwnedReferenceEntityOneId]
 LEFT JOIN [OwnedNestedReferenceExtras1] AS [o2] ON [e].[Id] = [o2].[OwnedReferenceEntityOneId]
-""");
+"""
+        );
     }
 
     public override async Task Split_entity_owning_a_reference(bool async)
@@ -265,7 +301,8 @@ SELECT [e].[Id], [e].[EntityThreeId], [e].[IntValue1], [e].[IntValue2], [s0].[In
 FROM [EntityOne] AS [e]
 INNER JOIN [SplitEntityOnePart3] AS [s] ON [e].[Id] = [s].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
-""");
+"""
+        );
     }
 
     public override async Task Split_entity_owning_a_collection(bool async)
@@ -280,11 +317,14 @@ INNER JOIN [SplitEntityOnePart3] AS [s] ON [e].[Id] = [s].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s0] ON [e].[Id] = [s0].[Id]
 LEFT JOIN [OwnedCollection] AS [o] ON [e].[Id] = [o].[EntityOneId]
 ORDER BY [e].[Id], [o].[EntityOneId]
-""");
+"""
+        );
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Split_entity_owning_a_split_reference_without_table_sharing(bool async)
+    public override async Task Split_entity_owning_a_split_reference_without_table_sharing(
+        bool async
+    )
     {
         await base.Split_entity_owning_a_split_reference_without_table_sharing(async);
 
@@ -299,7 +339,9 @@ ORDER BY [e].[Id], [o].[EntityOneId]
         AssertSql();
     }
 
-    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_1(bool async)
+    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_1(
+        bool async
+    )
     {
         await base.Split_entity_owning_a_split_reference_with_table_sharing_1(async);
 
@@ -309,10 +351,13 @@ SELECT [s].[Id], [s].[EntityThreeId], [s].[IntValue1], [s].[IntValue2], [s1].[In
 FROM [SplitEntityOnePart1] AS [s]
 INNER JOIN [SplitEntityOnePart3] AS [s0] ON [s].[Id] = [s0].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s1] ON [s].[Id] = [s1].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_4(bool async)
+    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_4(
+        bool async
+    )
     {
         await base.Split_entity_owning_a_split_reference_with_table_sharing_4(async);
 
@@ -323,10 +368,13 @@ FROM [SplitEntityOnePart1] AS [s]
 INNER JOIN [SplitEntityOnePart3] AS [s0] ON [s].[Id] = [s0].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s1] ON [s].[Id] = [s1].[Id]
 LEFT JOIN [OwnedReferencePart3] AS [o] ON [s].[Id] = [o].[EntityOneId]
-""");
+"""
+        );
     }
 
-    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_6(bool async)
+    public override async Task Split_entity_owning_a_split_reference_with_table_sharing_6(
+        bool async
+    )
     {
         await base.Split_entity_owning_a_split_reference_with_table_sharing_6(async);
 
@@ -338,10 +386,13 @@ INNER JOIN [SplitEntityOnePart3] AS [s0] ON [s].[Id] = [s0].[Id]
 INNER JOIN [SplitEntityOnePart2] AS [s1] ON [s].[Id] = [s1].[Id]
 LEFT JOIN [OwnedReferencePart3] AS [o] ON [s1].[Id] = [o].[EntityOneId]
 LEFT JOIN [OwnedReferencePart2] AS [o0] ON [s1].[Id] = [o0].[EntityOneId]
-""");
+"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_base_with_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_base_with_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_base_with_table_sharing(async);
 
@@ -351,10 +402,13 @@ SELECT [b].[Id], [b].[BaseValue], [b].[Discriminator], [b].[MiddleValue], [b].[S
 FROM [BaseEntity] AS [b]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [b].[Id] = [o].[BaseEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [b].[Id] = [o0].[BaseEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_base_with_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_base_with_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_base_with_table_sharing(async);
 
@@ -371,10 +425,13 @@ LEFT JOIN [SiblingEntity] AS [s] ON [b].[Id] = [s].[Id]
 LEFT JOIN [LeafEntity] AS [l] ON [b].[Id] = [l].[Id]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [b].[Id] = [o].[BaseEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [b].[Id] = [o0].[BaseEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_middle_with_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_middle_with_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_middle_with_table_sharing(async);
 
@@ -384,10 +441,13 @@ SELECT [b].[Id], [b].[BaseValue], [b].[Discriminator], [b].[MiddleValue], [b].[S
 FROM [BaseEntity] AS [b]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [b].[Id] = [o].[MiddleEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [b].[Id] = [o0].[MiddleEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_middle_with_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_middle_with_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_middle_with_table_sharing(async);
 
@@ -404,10 +464,13 @@ LEFT JOIN [SiblingEntity] AS [s] ON [b].[Id] = [s].[Id]
 LEFT JOIN [LeafEntity] AS [l] ON [b].[Id] = [l].[Id]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [m].[Id] = [o].[MiddleEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [m].[Id] = [o0].[MiddleEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_leaf_with_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_leaf_with_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_leaf_with_table_sharing(async);
 
@@ -417,10 +480,13 @@ SELECT [b].[Id], [b].[BaseValue], [b].[Discriminator], [b].[MiddleValue], [b].[S
 FROM [BaseEntity] AS [b]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [b].[Id] = [o].[LeafEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [b].[Id] = [o0].[LeafEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_with_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_with_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_leaf_with_table_sharing(async);
 
@@ -437,10 +503,13 @@ LEFT JOIN [SiblingEntity] AS [s] ON [b].[Id] = [s].[Id]
 LEFT JOIN [LeafEntity] AS [l] ON [b].[Id] = [l].[Id]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [l].[Id] = [o].[LeafEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [l].[Id] = [o0].[LeafEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_with_table_sharing(bool async)
+    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_with_table_sharing(
+        bool async
+    )
     {
         await base.Tpc_entity_owning_a_split_reference_on_leaf_with_table_sharing(async);
 
@@ -463,12 +532,17 @@ FROM (
 LEFT JOIN [LeafEntity] AS [l] ON [t].[Id] = [l].[Id]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [l].[Id] = [o].[LeafEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [l].[Id] = [o0].[LeafEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(
+        bool async
+    )
     {
-        await base.Tph_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(async);
+        await base.Tph_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(
+            async
+        );
 
         AssertSql(
             """
@@ -477,12 +551,17 @@ FROM [BaseEntity] AS [b]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [b].[Id] = [o].[BaseEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [b].[Id] = [o0].[BaseEntityId]
 WHERE [b].[Discriminator] = N'SiblingEntity'
-""");
+"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(
+        bool async
+    )
     {
-        await base.Tpt_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(async);
+        await base.Tpt_entity_owning_a_split_reference_on_base_with_table_sharing_querying_sibling(
+            async
+        );
 
         AssertSql(
             """
@@ -491,70 +570,98 @@ FROM [BaseEntity] AS [b]
 INNER JOIN [SiblingEntity] AS [s] ON [b].[Id] = [s].[Id]
 LEFT JOIN [OwnedReferencePart4] AS [o] ON [b].[Id] = [o].[BaseEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o0] ON [b].[Id] = [o0].[BaseEntityId]
-""");
+"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(
+        bool async
+    )
     {
-        await base.Tph_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(async);
+        await base.Tph_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(
+            async
+        );
 
         AssertSql(
             """
 SELECT [b].[Id], [b].[BaseValue], [b].[Discriminator], [b].[SiblingValue]
 FROM [BaseEntity] AS [b]
 WHERE [b].[Discriminator] = N'SiblingEntity'
-""");
+"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(
+        bool async
+    )
     {
-        await base.Tpt_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(async);
+        await base.Tpt_entity_owning_a_split_reference_on_middle_with_table_sharing_querying_sibling(
+            async
+        );
 
         AssertSql(
             """
 SELECT [b].[Id], [b].[BaseValue], [s].[SiblingValue]
 FROM [BaseEntity] AS [b]
 INNER JOIN [SiblingEntity] AS [s] ON [b].[Id] = [s].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Tph_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(
+        bool async
+    )
     {
-        await base.Tph_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(async);
+        await base.Tph_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(
+            async
+        );
 
         AssertSql(
             """
 SELECT [b].[Id], [b].[BaseValue], [b].[Discriminator], [b].[SiblingValue]
 FROM [BaseEntity] AS [b]
 WHERE [b].[Discriminator] = N'SiblingEntity'
-""");
+"""
+        );
     }
 
-    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(
+        bool async
+    )
     {
-        await base.Tpt_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(async);
+        await base.Tpt_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(
+            async
+        );
 
         AssertSql(
             """
 SELECT [b].[Id], [b].[BaseValue], [s].[SiblingValue]
 FROM [BaseEntity] AS [b]
 INNER JOIN [SiblingEntity] AS [s] ON [b].[Id] = [s].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(bool async)
+    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(
+        bool async
+    )
     {
-        await base.Tpc_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(async);
+        await base.Tpc_entity_owning_a_split_reference_on_leaf_with_table_sharing_querying_sibling(
+            async
+        );
 
         AssertSql(
             """
 SELECT [s].[Id], [s].[BaseValue], [s].[SiblingValue]
 FROM [SiblingEntity] AS [s]
-""");
+"""
+        );
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Tph_entity_owning_a_split_reference_on_base_without_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_base_without_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_base_without_table_sharing(async);
 
@@ -562,14 +669,18 @@ FROM [SiblingEntity] AS [s]
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Tpt_entity_owning_a_split_reference_on_base_without_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_base_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_base_without_table_sharing(async);
 
         AssertSql();
     }
 
-    public override async Task Tpc_entity_owning_a_split_reference_on_base_without_table_sharing(bool async)
+    public override async Task Tpc_entity_owning_a_split_reference_on_base_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpc_entity_owning_a_split_reference_on_base_without_table_sharing(async);
 
@@ -592,11 +703,14 @@ FROM (
 LEFT JOIN [OwnedReferencePart1] AS [o] ON [t].[Id] = [o].[BaseEntityId]
 LEFT JOIN [OwnedReferencePart4] AS [o0] ON [o].[BaseEntityId] = [o0].[BaseEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o1] ON [o].[BaseEntityId] = [o1].[BaseEntityId]
-""");
+"""
+        );
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Tph_entity_owning_a_split_reference_on_middle_without_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_middle_without_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_middle_without_table_sharing(async);
 
@@ -604,14 +718,18 @@ LEFT JOIN [OwnedReferencePart3] AS [o1] ON [o].[BaseEntityId] = [o1].[BaseEntity
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Tpt_entity_owning_a_split_reference_on_middle_without_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_middle_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_middle_without_table_sharing(async);
 
         AssertSql();
     }
 
-    public override async Task Tpc_entity_owning_a_split_reference_on_middle_without_table_sharing(bool async)
+    public override async Task Tpc_entity_owning_a_split_reference_on_middle_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpc_entity_owning_a_split_reference_on_middle_without_table_sharing(async);
 
@@ -634,11 +752,14 @@ FROM (
 LEFT JOIN [OwnedReferencePart1] AS [o] ON [t].[Id] = [o].[MiddleEntityId]
 LEFT JOIN [OwnedReferencePart4] AS [o0] ON [o].[MiddleEntityId] = [o0].[MiddleEntityId]
 LEFT JOIN [OwnedReferencePart3] AS [o1] ON [o].[MiddleEntityId] = [o1].[MiddleEntityId]
-""");
+"""
+        );
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Tph_entity_owning_a_split_reference_on_leaf_without_table_sharing(bool async)
+    public override async Task Tph_entity_owning_a_split_reference_on_leaf_without_table_sharing(
+        bool async
+    )
     {
         await base.Tph_entity_owning_a_split_reference_on_leaf_without_table_sharing(async);
 
@@ -646,7 +767,9 @@ LEFT JOIN [OwnedReferencePart3] AS [o1] ON [o].[MiddleEntityId] = [o1].[MiddleEn
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_without_table_sharing(bool async)
+    public override async Task Tpt_entity_owning_a_split_reference_on_leaf_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpt_entity_owning_a_split_reference_on_leaf_without_table_sharing(async);
 
@@ -654,7 +777,9 @@ LEFT JOIN [OwnedReferencePart3] AS [o1] ON [o].[MiddleEntityId] = [o1].[MiddleEn
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
-    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_without_table_sharing(bool async)
+    public override async Task Tpc_entity_owning_a_split_reference_on_leaf_without_table_sharing(
+        bool async
+    )
     {
         await base.Tpc_entity_owning_a_split_reference_on_leaf_without_table_sharing(async);
 
@@ -704,7 +829,8 @@ LEFT JOIN (
     INNER JOIN [OwnedReferencePart3] AS [o1] ON [o].[BaseEntityId] = [o1].[BaseEntityId] AND [o].[Id] = [o1].[Id]
 ) AS [t0] ON [t].[Id] = [t0].[BaseEntityId]
 ORDER BY [t].[Id], [t0].[BaseEntityId]
-""");
+"""
+        );
     }
 
     [ConditionalTheory(Skip = "Issue29075")]
@@ -750,7 +876,8 @@ LEFT JOIN (
     INNER JOIN [OwnedReferencePart3] AS [o1] ON [o].[MiddleEntityId] = [o1].[MiddleEntityId] AND [o].[Id] = [o1].[Id]
 ) AS [t0] ON [t].[Id] = [t0].[MiddleEntityId]
 ORDER BY [t].[Id], [t0].[MiddleEntityId]
-""");
+"""
+        );
     }
 
     [ConditionalTheory(Skip = "Issue29075")]

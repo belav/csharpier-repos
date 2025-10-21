@@ -5,47 +5,51 @@
 
 using System;
 
-struct S {
-	int v;
+struct S
+{
+    int v;
 }
 
-class X {
-	static bool receive, create, create_and_box;
-	
-	static void receiver (S x)
-	{
-		receive = true;
-	}
+class X
+{
+    static bool receive,
+        create,
+        create_and_box;
 
-	static object BoxS ()
-	{
-		create_and_box = true;
-		return new S ();
-	}
+    static void receiver(S x)
+    {
+        receive = true;
+    }
 
-	static S Plain ()
-	{
-		create = true;
-		return new S ();
-	}
-	
-	public static int Main ()
-	{
-		object a = new S ();
-		receiver (new S ());
-		S s = Plain ();
-		object o = BoxS ();
-		
-		if (a == null)
-			return 1;
-		if (receive == false)
-			return 2;
-		if (create == false)
-			return 3;
-		if (create_and_box == false)
-			return 4;
+    static object BoxS()
+    {
+        create_and_box = true;
+        return new S();
+    }
 
-		Console.WriteLine ("Test pass");
-		return 0;
-	}
+    static S Plain()
+    {
+        create = true;
+        return new S();
+    }
+
+    public static int Main()
+    {
+        object a = new S();
+        receiver(new S());
+        S s = Plain();
+        object o = BoxS();
+
+        if (a == null)
+            return 1;
+        if (receive == false)
+            return 2;
+        if (create == false)
+            return 3;
+        if (create_and_box == false)
+            return 4;
+
+        Console.WriteLine("Test pass");
+        return 0;
+    }
 }

@@ -48,8 +48,8 @@ public interface IReadOnlyAnnotatable
     /// </summary>
     /// <param name="annotationName">The key of the annotation to find.</param>
     /// <returns>The annotation with the specified name.</returns>
-    IAnnotation GetAnnotation(string annotationName)
-        => AnnotatableBase.GetAnnotation(this, annotationName);
+    IAnnotation GetAnnotation(string annotationName) =>
+        AnnotatableBase.GetAnnotation(this, annotationName);
 
     /// <summary>
     ///     Gets the debug string for all annotations declared on the object.

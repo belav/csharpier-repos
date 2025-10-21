@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
+
 namespace Microsoft.CodeAnalysis.Differencing
 {
-    // Based on general algorithm described in  
+    // Based on general algorithm described in
     // "Change Detection in Hierarchically Structured Information"
     // by Sudarshan S. Chawathe, Anand Rajaraman, Hector Garcia-Molina, and Jennifer Widom.
 
@@ -21,28 +22,29 @@ namespace Microsoft.CodeAnalysis.Differencing
     /// <typeparam name="TNode">Tree node.</typeparam>
     public abstract class TreeComparer<TNode>
     {
-        protected TreeComparer()
-        {
-        }
+        protected TreeComparer() { }
 
         /// <summary>
         /// Returns an edit script that transforms <paramref name="oldRoot"/> to <paramref name="newRoot"/>.
         /// </summary>
-        public EditScript<TNode> ComputeEditScript(TNode oldRoot, TNode newRoot)
-            => new Match<TNode>(oldRoot, newRoot, this, knownMatches: null).GetTreeEdits();
+        public EditScript<TNode> ComputeEditScript(TNode oldRoot, TNode newRoot) =>
+            new Match<TNode>(oldRoot, newRoot, this, knownMatches: null).GetTreeEdits();
 
         /// <summary>
         /// Returns a match map of <paramref name="oldRoot"/> descendants to <paramref name="newRoot"/> descendants.
         /// </summary>
-        public Match<TNode> ComputeMatch(TNode oldRoot, TNode newRoot, IEnumerable<KeyValuePair<TNode, TNode>>? knownMatches = null)
-            => new(oldRoot, newRoot, this, knownMatches);
+        public Match<TNode> ComputeMatch(
+            TNode oldRoot,
+            TNode newRoot,
+            IEnumerable<KeyValuePair<TNode, TNode>>? knownMatches = null
+        ) => new(oldRoot, newRoot, this, knownMatches);
 
         /// <summary>
         /// Calculates the distance [0..1] of two nodes.
         /// </summary>
         /// <remarks>
         /// The more similar the nodes the smaller the distance.
-        /// 
+        ///
         /// Used to determine whether two nodes of the same label match.
         /// Even if 0 is returned the nodes might be slightly different.
         /// </remarks>
@@ -91,7 +93,10 @@ namespace Microsoft.CodeAnalysis.Differencing
         /// <summary>
         /// Returns a parent for the specified node.
         /// </summary>
-        protected internal abstract bool TryGetParent(TNode node, [MaybeNullWhen(false)] out TNode parent);
+        protected internal abstract bool TryGetParent(
+            TNode node,
+            [MaybeNullWhen(false)] out TNode parent
+        );
 
         internal TNode GetParent(TNode node)
         {
@@ -100,7 +105,11 @@ namespace Microsoft.CodeAnalysis.Differencing
             return parent!;
         }
 
-        internal bool TryGetAncestor(TNode node, int level, [MaybeNullWhen(false)] out TNode ancestor)
+        internal bool TryGetAncestor(
+            TNode node,
+            int level,
+            [MaybeNullWhen(false)] out TNode ancestor
+        )
         {
             while (level > 0)
             {

@@ -26,7 +26,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
             _addedParameterFullyQualifiedTypeName = null;
         }
 
-        public AddedParameterOrExistingIndex(AddedParameter addedParameterWithoutTypeSymbol, string addedParameterFullyQualifiedTypeName)
+        public AddedParameterOrExistingIndex(
+            AddedParameter addedParameterWithoutTypeSymbol,
+            string addedParameterFullyQualifiedTypeName
+        )
         {
             OldIndex = null;
             IsExisting = false;
@@ -41,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
             string callSiteValue = "",
             bool isRequired = true,
             string defaultValue = "",
-            bool typeBinds = true)
+            bool typeBinds = true
+        )
         {
             var parameter = new AddedParameter(
                 type: null!, // Filled in later based on the fullTypeName
@@ -51,28 +55,51 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
                 callSiteValue,
                 isRequired,
                 defaultValue,
-                typeBinds);
+                typeBinds
+            );
 
             return new AddedParameterOrExistingIndex(parameter, fullTypeName);
         }
 
-        public override string ToString()
-            => IsExisting ? OldIndex.ToString() : (_addedParameterWithoutTypeSymbol?.ToString() ?? string.Empty);
+        public override string ToString() =>
+            IsExisting
+                ? OldIndex.ToString()
+                : (_addedParameterWithoutTypeSymbol?.ToString() ?? string.Empty);
 
         internal AddedParameter GetAddedParameter(Document document)
         {
-            var semanticModel = document.GetRequiredSemanticModelAsync(CancellationToken.None).AsTask().Result;
+            var semanticModel = document
+                .GetRequiredSemanticModelAsync(CancellationToken.None)
+                .AsTask()
+                .Result;
 
             var type = document.Project.Language switch
             {
-                LanguageNames.CSharp => semanticModel.GetSpeculativeTypeInfo(0, CSharp.SyntaxFactory.ParseTypeName(_addedParameterFullyQualifiedTypeName!), SpeculativeBindingOption.BindAsTypeOrNamespace).Type,
-                LanguageNames.VisualBasic => semanticModel.GetSpeculativeTypeInfo(0, VisualBasic.SyntaxFactory.ParseTypeName(_addedParameterFullyQualifiedTypeName!), SpeculativeBindingOption.BindAsTypeOrNamespace).Type,
-                _ => throw new ArgumentException("Unsupported language")
+                LanguageNames.CSharp => semanticModel
+                    .GetSpeculativeTypeInfo(
+                        0,
+                        CSharp.SyntaxFactory.ParseTypeName(_addedParameterFullyQualifiedTypeName!),
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type,
+                LanguageNames.VisualBasic => semanticModel
+                    .GetSpeculativeTypeInfo(
+                        0,
+                        VisualBasic.SyntaxFactory.ParseTypeName(
+                            _addedParameterFullyQualifiedTypeName!
+                        ),
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type,
+                _ => throw new ArgumentException("Unsupported language"),
             };
 
             if (type == null)
             {
-                throw new ArgumentException($"Could not bind type {_addedParameterFullyQualifiedTypeName}", nameof(_addedParameterFullyQualifiedTypeName));
+                throw new ArgumentException(
+                    $"Could not bind type {_addedParameterFullyQualifiedTypeName}",
+                    nameof(_addedParameterFullyQualifiedTypeName)
+                );
             }
 
             return new AddedParameter(
@@ -82,7 +109,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
                 _addedParameterWithoutTypeSymbol.CallSiteKind,
                 _addedParameterWithoutTypeSymbol.CallSiteValue,
                 _addedParameterWithoutTypeSymbol.IsRequired,
-                _addedParameterWithoutTypeSymbol.DefaultValue);
+                _addedParameterWithoutTypeSymbol.DefaultValue
+            );
         }
     }
 }

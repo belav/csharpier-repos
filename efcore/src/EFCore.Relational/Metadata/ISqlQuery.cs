@@ -58,15 +58,11 @@ public interface ISqlQuery : ITableBase
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("SqlQuery: ");
+            builder.Append(indentString).Append("SqlQuery: ");
 
             if (Schema != null)
             {
-                builder
-                    .Append(Schema)
-                    .Append('.');
+                builder.Append(Schema).Append('.');
             }
 
             builder.Append(Name);
@@ -76,7 +72,11 @@ public interface ISqlQuery : ITableBase
                 if (Sql != null)
                 {
                     builder.AppendLine().Append(indentString).Append("  Sql: ");
-                    builder.AppendLine().Append(indentString).Append(new string(' ', 4)).Append(Sql);
+                    builder
+                        .AppendLine()
+                        .Append(indentString)
+                        .Append(new string(' ', 4))
+                        .Append(Sql);
                 }
 
                 var mappings = EntityTypeMappings.ToList();

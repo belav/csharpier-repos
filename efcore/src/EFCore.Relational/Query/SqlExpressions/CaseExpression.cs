@@ -25,7 +25,8 @@ public class CaseExpression : SqlExpression
     public CaseExpression(
         SqlExpression operand,
         IReadOnlyList<CaseWhenClause> whenClauses,
-        SqlExpression? elseResult = null)
+        SqlExpression? elseResult = null
+    )
         : base(whenClauses[0].Result.Type, whenClauses[0].Result.TypeMapping)
     {
         Operand = operand;
@@ -40,7 +41,8 @@ public class CaseExpression : SqlExpression
     /// <param name="elseResult">A value to return if no <see cref="WhenClauses" /> matches, if any.</param>
     public CaseExpression(
         IReadOnlyList<CaseWhenClause> whenClauses,
-        SqlExpression? elseResult = null)
+        SqlExpression? elseResult = null
+    )
         : base(whenClauses[0].Result.Type, whenClauses[0].Result.TypeMapping)
     {
         _whenClauses.AddRange(whenClauses);
@@ -55,8 +57,7 @@ public class CaseExpression : SqlExpression
     /// <summary>
     ///     The list of <see cref="CaseWhenClause" /> to match <see cref="Operand" /> or evaluate condition to get result.
     /// </summary>
-    public virtual IReadOnlyList<CaseWhenClause> WhenClauses
-        => _whenClauses;
+    public virtual IReadOnlyList<CaseWhenClause> WhenClauses => _whenClauses;
 
     /// <summary>
     ///     The value to return if none of the <see cref="WhenClauses" /> matches.
@@ -74,8 +75,7 @@ public class CaseExpression : SqlExpression
             var test = (SqlExpression)visitor.Visit(whenClause.Test);
             var result = (SqlExpression)visitor.Visit(whenClause.Result);
 
-            if (test != whenClause.Test
-                || result != whenClause.Result)
+            if (test != whenClause.Test || result != whenClause.Result)
             {
                 changed = true;
                 whenClauses.Add(new CaseWhenClause(test, result));
@@ -107,11 +107,14 @@ public class CaseExpression : SqlExpression
     public virtual CaseExpression Update(
         SqlExpression? operand,
         IReadOnlyList<CaseWhenClause> whenClauses,
-        SqlExpression? elseResult)
-        => operand != Operand || !whenClauses.SequenceEqual(WhenClauses) || elseResult != ElseResult
-            ? (operand == null
-                ? new CaseExpression(whenClauses, elseResult)
-                : new CaseExpression(operand, whenClauses, elseResult))
+        SqlExpression? elseResult
+    ) =>
+        operand != Operand || !whenClauses.SequenceEqual(WhenClauses) || elseResult != ElseResult
+            ? (
+                operand == null
+                    ? new CaseExpression(whenClauses, elseResult)
+                    : new CaseExpression(operand, whenClauses, elseResult)
+            )
             : this;
 
     /// <inheritdoc />
@@ -145,17 +148,18 @@ public class CaseExpression : SqlExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is CaseExpression caseExpression
-                && Equals(caseExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is CaseExpression caseExpression && Equals(caseExpression)
+        );
 
-    private bool Equals(CaseExpression caseExpression)
-        => base.Equals(caseExpression)
-            && (Operand?.Equals(caseExpression.Operand) ?? caseExpression.Operand == null)
-            && WhenClauses.SequenceEqual(caseExpression.WhenClauses)
-            && (ElseResult?.Equals(caseExpression.ElseResult) ?? caseExpression.ElseResult == null);
+    private bool Equals(CaseExpression caseExpression) =>
+        base.Equals(caseExpression)
+        && (Operand?.Equals(caseExpression.Operand) ?? caseExpression.Operand == null)
+        && WhenClauses.SequenceEqual(caseExpression.WhenClauses)
+        && (ElseResult?.Equals(caseExpression.ElseResult) ?? caseExpression.ElseResult == null);
 
     /// <inheritdoc />
     public override int GetHashCode()

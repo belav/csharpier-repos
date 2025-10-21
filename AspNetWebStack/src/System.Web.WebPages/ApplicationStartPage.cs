@@ -14,7 +14,8 @@ namespace System.Web.WebPages
 {
     public abstract class ApplicationStartPage : WebPageExecutingBase
     {
-        private static readonly Action<Action> _safeExecuteStartPageThunk = GetSafeExecuteStartPageThunk();
+        private static readonly Action<Action> _safeExecuteStartPageThunk =
+            GetSafeExecuteStartPageThunk();
         public static readonly string StartPageVirtualPath = "~/_appstart.";
         public static readonly string CacheKeyPrefix = "__AppStartPage__";
 
@@ -54,17 +55,29 @@ namespace System.Web.WebPages
 
         internal static void ExecuteStartPage(HttpApplication application)
         {
-            ExecuteStartPage(application,
-                             vpath => MonitorFile(vpath),
-                             VirtualPathFactoryManager.Instance,
-                             WebPageHttpHandler.GetRegisteredExtensions());
+            ExecuteStartPage(
+                application,
+                vpath => MonitorFile(vpath),
+                VirtualPathFactoryManager.Instance,
+                WebPageHttpHandler.GetRegisteredExtensions()
+            );
         }
 
-        internal static void ExecuteStartPage(HttpApplication application, Action<string> monitorFile, IVirtualPathFactory virtualPathFactory, IEnumerable<string> supportedExtensions)
+        internal static void ExecuteStartPage(
+            HttpApplication application,
+            Action<string> monitorFile,
+            IVirtualPathFactory virtualPathFactory,
+            IEnumerable<string> supportedExtensions
+        )
         {
             try
             {
-                ExecuteStartPageInternal(application, monitorFile, virtualPathFactory, supportedExtensions);
+                ExecuteStartPageInternal(
+                    application,
+                    monitorFile,
+                    virtualPathFactory,
+                    supportedExtensions
+                );
             }
             catch (Exception e)
             {
@@ -75,7 +88,12 @@ namespace System.Web.WebPages
             }
         }
 
-        internal static void ExecuteStartPageInternal(HttpApplication application, Action<string> monitorFile, IVirtualPathFactory virtualPathFactory, IEnumerable<string> supportedExtensions)
+        internal static void ExecuteStartPageInternal(
+            HttpApplication application,
+            Action<string> monitorFile,
+            IVirtualPathFactory virtualPathFactory,
+            IEnumerable<string> supportedExtensions
+        )
         {
             ApplicationStartPage startPage = null;
 
@@ -109,7 +127,12 @@ namespace System.Web.WebPages
             //
             // See Dev10 #906296 and Dev10 #898600 for more information.
 
-            if (typeof(HttpResponse).GetProperty("DisableCustomHttpEncoder", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly) != null)
+            if (
+                typeof(HttpResponse).GetProperty(
+                    "DisableCustomHttpEncoder",
+                    BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly
+                ) != null
+            )
             {
                 // this version suffers from the bug
                 return HttpContextHelper.ExecuteInNullContext;
@@ -121,7 +144,11 @@ namespace System.Web.WebPages
             }
         }
 
-        private static void InitiateShutdown(string key, object value, CacheItemRemovedReason reason)
+        private static void InitiateShutdown(
+            string key,
+            object value,
+            CacheItemRemovedReason reason
+        )
         {
             // Only handle case when the dependency has changed.
             if (reason != CacheItemRemovedReason.DependencyChanged)
@@ -136,13 +163,23 @@ namespace System.Web.WebPages
         {
             var virtualPathDependencies = new List<string>();
             virtualPathDependencies.Add(virtualPath);
-            CacheDependency cacheDependency = HostingEnvironment.VirtualPathProvider.GetCacheDependency(
-                virtualPath, virtualPathDependencies, DateTime.UtcNow);
+            CacheDependency cacheDependency =
+                HostingEnvironment.VirtualPathProvider.GetCacheDependency(
+                    virtualPath,
+                    virtualPathDependencies,
+                    DateTime.UtcNow
+                );
             var key = CacheKeyPrefix + virtualPath;
 
-            HttpRuntime.Cache.Insert(key, virtualPath, cacheDependency,
-                                     Cache.NoAbsoluteExpiration, Cache.NoSlidingExpiration,
-                                     CacheItemPriority.NotRemovable, new CacheItemRemovedCallback(InitiateShutdown));
+            HttpRuntime.Cache.Insert(
+                key,
+                virtualPath,
+                cacheDependency,
+                Cache.NoAbsoluteExpiration,
+                Cache.NoSlidingExpiration,
+                CacheItemPriority.NotRemovable,
+                new CacheItemRemovedCallback(InitiateShutdown)
+            );
         }
 
         private static void ShutdownCallBack(object state)

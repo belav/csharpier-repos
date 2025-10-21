@@ -11,11 +11,17 @@ namespace Microsoft.Extensions.Options
     /// Used to cache <typeparamref name="TOptions"/> instances.
     /// </summary>
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
-    public class OptionsCache<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions> :
-        IOptionsMonitorCache<TOptions>
+    public class OptionsCache<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
+    > : IOptionsMonitorCache<TOptions>
         where TOptions : class
     {
-        private readonly ConcurrentDictionary<string, Lazy<TOptions>> _cache = new ConcurrentDictionary<string, Lazy<TOptions>>(concurrencyLevel: 1, capacity: 31, StringComparer.Ordinal); // 31 == default capacity
+        private readonly ConcurrentDictionary<string, Lazy<TOptions>> _cache =
+            new ConcurrentDictionary<string, Lazy<TOptions>>(
+                concurrencyLevel: 1,
+                capacity: 31,
+                StringComparer.Ordinal
+            ); // 31 == default capacity
 
         /// <summary>
         /// Clears all options instances from the cache.
@@ -36,7 +42,11 @@ namespace Microsoft.Extensions.Options
             Lazy<TOptions> value;
 
 #if NET || NETSTANDARD2_1
-            value = _cache.GetOrAdd(name, static (name, createOptions) => new Lazy<TOptions>(createOptions), createOptions);
+            value = _cache.GetOrAdd(
+                name,
+                static (name, createOptions) => new Lazy<TOptions>(createOptions),
+                createOptions
+            );
 #else
             if (!_cache.TryGetValue(name, out value))
             {
@@ -47,7 +57,11 @@ namespace Microsoft.Extensions.Options
             return value.Value;
         }
 
-        internal TOptions GetOrAdd<TArg>(string? name, Func<string, TArg, TOptions> createOptions, TArg factoryArgument)
+        internal TOptions GetOrAdd<TArg>(
+            string? name,
+            Func<string, TArg, TOptions> createOptions,
+            TArg factoryArgument
+        )
         {
             // For compatibility, fall back to public GetOrAdd() if we're in a derived class.
             // For simplicity, we do the same for older frameworks that don't support the factoryArgument overload of GetOrAdd().
@@ -59,13 +73,21 @@ namespace Microsoft.Extensions.Options
                 string? localName = name;
                 Func<string, TArg, TOptions> localCreateOptions = createOptions;
                 TArg localFactoryArgument = factoryArgument;
-                return GetOrAdd(name, () => localCreateOptions(localName ?? Options.DefaultName, localFactoryArgument));
+                return GetOrAdd(
+                    name,
+                    () => localCreateOptions(localName ?? Options.DefaultName, localFactoryArgument)
+                );
             }
 
 #if NET || NETSTANDARD2_1
-            return _cache.GetOrAdd(
-                name ?? Options.DefaultName,
-                static (name, arg) => new Lazy<TOptions>(() => arg.createOptions(name, arg.factoryArgument)), (createOptions, factoryArgument)).Value;
+            return _cache
+                .GetOrAdd(
+                    name ?? Options.DefaultName,
+                    static (name, arg) =>
+                        new Lazy<TOptions>(() => arg.createOptions(name, arg.factoryArgument)),
+                    (createOptions, factoryArgument)
+                )
+                .Value;
 #endif
         }
 
@@ -99,9 +121,9 @@ namespace Microsoft.Extensions.Options
 
             return _cache.TryAdd(name ?? Options.DefaultName, new Lazy<TOptions>(
 #if !(NET || NETSTANDARD2_1)
-                () =>
+                    () =>
 #endif
-                options));
+                    options));
         }
 
         /// <summary>

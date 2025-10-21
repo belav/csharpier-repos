@@ -59,7 +59,11 @@ namespace System.Security.Cryptography.X509Certificates
         ///   <paramref name="value" /> is not encodable as defined by <paramref name="stringEncodingType" />.
         /// </para>
         /// </exception>
-        public void Add(string oidValue, string value, UniversalTagNumber? stringEncodingType = null)
+        public void Add(
+            string oidValue,
+            string value,
+            UniversalTagNumber? stringEncodingType = null
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
             ArgumentException.ThrowIfNullOrEmpty(oidValue);
@@ -221,9 +225,16 @@ namespace System.Security.Cryptography.X509Certificates
             // those will be prohibited, so "Length" should be fine for checking the length of
             // the string.
             // Input must be A-Z per ISO 3166.
-            if (twoLetterCode.Length != 2 || !char.IsAsciiLetter(twoLetterCode[0]) || !char.IsAsciiLetter(twoLetterCode[1]))
+            if (
+                twoLetterCode.Length != 2
+                || !char.IsAsciiLetter(twoLetterCode[0])
+                || !char.IsAsciiLetter(twoLetterCode[1])
+            )
             {
-                throw new ArgumentException(SR.Argument_X500_InvalidCountryOrRegion, nameof(twoLetterCode));
+                throw new ArgumentException(
+                    SR.Argument_X500_InvalidCountryOrRegion,
+                    nameof(twoLetterCode)
+                );
             }
 
             Span<char> fixupTwoLetterCode = stackalloc char[2];
@@ -234,7 +245,8 @@ namespace System.Security.Cryptography.X509Certificates
                 Oids.CountryOrRegionName,
                 fixupTwoLetterCode,
                 UniversalTagNumber.PrintableString,
-                nameof(twoLetterCode));
+                nameof(twoLetterCode)
+            );
         }
 
         /// <summary>
@@ -280,7 +292,11 @@ namespace System.Security.Cryptography.X509Certificates
             // WITH SYNTAX UnboundedDirectoryString
 
             ArgumentException.ThrowIfNullOrEmpty(organizationalUnitName);
-            EncodeComponent(Oids.OrganizationalUnit, organizationalUnitName, UniversalTagNumber.UTF8String);
+            EncodeComponent(
+                Oids.OrganizationalUnit,
+                organizationalUnitName,
+                UniversalTagNumber.UTF8String
+            );
         }
 
         /// <summary>
@@ -303,7 +319,11 @@ namespace System.Security.Cryptography.X509Certificates
             // WITH SYNTAX UnboundedDirectoryString
 
             ArgumentException.ThrowIfNullOrEmpty(stateOrProvinceName);
-            EncodeComponent(Oids.StateOrProvinceName, stateOrProvinceName, UniversalTagNumber.UTF8String);
+            EncodeComponent(
+                Oids.StateOrProvinceName,
+                stateOrProvinceName,
+                UniversalTagNumber.UTF8String
+            );
         }
 
         /// <summary>
@@ -361,7 +381,8 @@ namespace System.Security.Cryptography.X509Certificates
             string oid,
             ReadOnlySpan<char> value,
             UniversalTagNumber stringEncodingType,
-            [CallerArgumentExpression(nameof(value))] string? paramName = null)
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        )
         {
             _writer.Reset();
 
@@ -376,14 +397,19 @@ namespace System.Security.Cryptography.X509Certificates
                 }
                 catch (EncoderFallbackException)
                 {
-                    throw new ArgumentException(SR.Format(SR.Argument_Asn1_InvalidStringContents, stringEncodingType), paramName);
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_Asn1_InvalidStringContents, stringEncodingType),
+                        paramName
+                    );
                 }
             }
 
             _encodedComponents.Add(_writer.Encode());
         }
 
-        private static UniversalTagNumber GetAndValidateTagNumber(UniversalTagNumber? stringEncodingType)
+        private static UniversalTagNumber GetAndValidateTagNumber(
+            UniversalTagNumber? stringEncodingType
+        )
         {
             switch (stringEncodingType)
             {
@@ -398,7 +424,10 @@ namespace System.Security.Cryptography.X509Certificates
                 case UniversalTagNumber.T61String:
                     return stringEncodingType.GetValueOrDefault();
                 default:
-                    throw new ArgumentException(SR.Argument_Asn1_InvalidCharacterString, nameof(stringEncodingType));
+                    throw new ArgumentException(
+                        SR.Argument_Asn1_InvalidCharacterString,
+                        nameof(stringEncodingType)
+                    );
             }
         }
     }

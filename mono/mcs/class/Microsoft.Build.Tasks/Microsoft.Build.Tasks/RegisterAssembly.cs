@@ -25,77 +25,61 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public class RegisterAssembly : AppDomainIsolatedTaskExtension, ITypeLibExporterNotifySink {
-	
-		ITaskItem[]	assemblies;
-		ITaskItem 	assemblyListFile;
-		bool		createCodeBase;
-		ITaskItem[]	typeLibFiles;
-	
-		public RegisterAssembly ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class RegisterAssembly : AppDomainIsolatedTaskExtension, ITypeLibExporterNotifySink
+    {
+        ITaskItem[] assemblies;
+        ITaskItem assemblyListFile;
+        bool createCodeBase;
+        ITaskItem[] typeLibFiles;
 
-		public override bool Execute ()
-		{
-			throw new NotImplementedException ();
-		}
+        public RegisterAssembly() { }
 
-		public void ReportEvent (ExporterEventKind kind, int code,
-					 string msg)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool Execute()
+        {
+            throw new NotImplementedException();
+        }
 
-		public object ResolveRef (Assembly assemblyToResolve)
-		{
-			throw new NotImplementedException ();
-		}
+        public void ReportEvent(ExporterEventKind kind, int code, string msg)
+        {
+            throw new NotImplementedException();
+        }
 
-		[Required]
-		public ITaskItem[] Assemblies {
-			get {
-				return assemblies;
-			}
-			set {
-				assemblies = value;
-			}
-		}
+        public object ResolveRef(Assembly assemblyToResolve)
+        {
+            throw new NotImplementedException();
+        }
 
-		public ITaskItem AssemblyListFile {
-			get {
-				return assemblyListFile;
-			}
-			set {
-				assemblyListFile = value;
-			}
-		}
+        [Required]
+        public ITaskItem[] Assemblies
+        {
+            get { return assemblies; }
+            set { assemblies = value; }
+        }
 
-		public bool CreateCodeBase  {
-			get {
-				return createCodeBase;
-			}
-			set {
-				createCodeBase = value;
-			}
-		}
+        public ITaskItem AssemblyListFile
+        {
+            get { return assemblyListFile; }
+            set { assemblyListFile = value; }
+        }
 
-		[Output]
-		public ITaskItem[] TypeLibFiles {
-			get {
-				return typeLibFiles;
-			}
-			set {
-				typeLibFiles = value;
-			}
-		}
-	}
+        public bool CreateCodeBase
+        {
+            get { return createCodeBase; }
+            set { createCodeBase = value; }
+        }
+
+        [Output]
+        public ITaskItem[] TypeLibFiles
+        {
+            get { return typeLibFiles; }
+            set { typeLibFiles = value; }
+        }
+    }
 }
-

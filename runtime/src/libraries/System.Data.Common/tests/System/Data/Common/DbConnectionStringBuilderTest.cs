@@ -29,7 +29,6 @@ using System.Collections.Generic;
 using System.Data.Common;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using Xunit;
 
 #endregion
@@ -72,7 +71,8 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Add_Keyword_Invalid()
         {
-            string[] invalid_keywords = new string[] {
+            string[] invalid_keywords = new string[]
+            {
                 string.Empty,
                 " ",
                 " abc",
@@ -80,14 +80,16 @@ namespace System.Data.Tests.Common
                 "\r",
                 "ab\rc",
                 ";abc",
-                "a\0b"
-                };
+                "a\0b",
+            };
 
             for (int i = 0; i < invalid_keywords.Length; i++)
             {
                 string keyword = invalid_keywords[i];
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(() => _builder.Add(keyword, "abc"));
+                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                    _builder.Add(keyword, "abc")
+                );
                 // Invalid keyword, contain one or more of 'no characters',
                 // 'control characters', 'leading or trailing whitespace'
                 // or 'leading semicolons'
@@ -101,7 +103,9 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Add_Keyword_Null()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => _builder.Add(null, "abc"));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                _builder.Add(null, "abc")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
@@ -145,11 +149,12 @@ namespace System.Data.Tests.Common
         [Fact]
         public void ConnectionString_Value_Empty()
         {
-            DbConnectionStringBuilder[] sbs = new DbConnectionStringBuilder[] {
-                new DbConnectionStringBuilder (),
-                new DbConnectionStringBuilder (false),
-                new DbConnectionStringBuilder (true)
-                };
+            DbConnectionStringBuilder[] sbs = new DbConnectionStringBuilder[]
+            {
+                new DbConnectionStringBuilder(),
+                new DbConnectionStringBuilder(false),
+                new DbConnectionStringBuilder(true),
+            };
 
             foreach (DbConnectionStringBuilder sb in sbs)
             {
@@ -163,11 +168,12 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Clear()
         {
-            DbConnectionStringBuilder[] sbs = new DbConnectionStringBuilder[] {
-                new DbConnectionStringBuilder (),
-                new DbConnectionStringBuilder (false),
-                new DbConnectionStringBuilder (true)
-                };
+            DbConnectionStringBuilder[] sbs = new DbConnectionStringBuilder[]
+            {
+                new DbConnectionStringBuilder(),
+                new DbConnectionStringBuilder(false),
+                new DbConnectionStringBuilder(true),
+            };
 
             foreach (DbConnectionStringBuilder sb in sbs)
             {
@@ -208,13 +214,22 @@ namespace System.Data.Tests.Common
             Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\"", _builder.ConnectionString);
             _builder["val"] = ";xyz";
             Assert.Equal(";xyz", _builder["val"]);
-            Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\"", _builder.ConnectionString);
+            Assert.Equal(
+                "abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\"",
+                _builder.ConnectionString
+            );
             _builder["name"] = string.Empty;
             Assert.Equal(string.Empty, _builder["name"]);
-            Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=", _builder.ConnectionString);
+            Assert.Equal(
+                "abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=",
+                _builder.ConnectionString
+            );
             _builder["name"] = " ";
             Assert.Equal(" ", _builder["name"]);
-            Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=\" \"", _builder.ConnectionString);
+            Assert.Equal(
+                "abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=\" \"",
+                _builder.ConnectionString
+            );
 
             _builder = new DbConnectionStringBuilder(false);
             _builder["abc Def"] = "xa 34";
@@ -228,13 +243,22 @@ namespace System.Data.Tests.Common
             Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\"", _builder.ConnectionString);
             _builder["val"] = ";xyz";
             Assert.Equal(";xyz", _builder["val"]);
-            Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\"", _builder.ConnectionString);
+            Assert.Equal(
+                "abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\"",
+                _builder.ConnectionString
+            );
             _builder["name"] = string.Empty;
             Assert.Equal(string.Empty, _builder["name"]);
-            Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=", _builder.ConnectionString);
+            Assert.Equal(
+                "abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=",
+                _builder.ConnectionString
+            );
             _builder["name"] = " ";
             Assert.Equal(" ", _builder["name"]);
-            Assert.Equal("abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=\" \"", _builder.ConnectionString);
+            Assert.Equal(
+                "abc Def=\"xa 34\";na;=\"de\rfg\";val=\";xyz\";name=\" \"",
+                _builder.ConnectionString
+            );
 
             _builder = new DbConnectionStringBuilder(true);
             _builder["abc Def"] = "xa 34";
@@ -260,7 +284,8 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Indexer_Keyword_Invalid()
         {
-            string[] invalid_keywords = new string[] {
+            string[] invalid_keywords = new string[]
+            {
                 string.Empty,
                 " ",
                 " abc",
@@ -268,13 +293,15 @@ namespace System.Data.Tests.Common
                 "\r",
                 "ab\rc",
                 ";abc",
-                "a\0b"
-                };
+                "a\0b",
+            };
 
             for (int i = 0; i < invalid_keywords.Length; i++)
             {
                 string keyword = invalid_keywords[i];
-                ArgumentException ex = Assert.Throws<ArgumentException>(() => _builder[keyword] = "abc");
+                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                    _builder[keyword] = "abc"
+                );
                 // Invalid keyword, contain one or more of 'no characters',
                 // 'control characters', 'leading or trailing whitespace'
                 // or 'leading semicolons'
@@ -293,7 +320,10 @@ namespace System.Data.Tests.Common
                 // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
                 // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
                 // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
-                Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape(keyword) + @"[\p{Pf}\p{Po}]", ex2.Message);
+                Assert.Matches(
+                    @"[\p{Pi}\p{Po}]" + Regex.Escape(keyword) + @"[\p{Pf}\p{Po}]",
+                    ex2.Message
+                );
                 Assert.Null(ex2.ParamName);
             }
         }
@@ -315,12 +345,16 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Indexer_Keyword_Null()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => _builder[null] = "abc");
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                _builder[null] = "abc"
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
 
-            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() => _builder[null] = null);
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
+                _builder[null] = null
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("keyword", ex2.ParamName);
@@ -438,7 +472,9 @@ namespace System.Data.Tests.Common
         [Fact]
         public void Remove_Keyword_Null()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => _builder.Remove(null));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                _builder.Remove(null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
@@ -499,7 +535,9 @@ namespace System.Data.Tests.Common
         public void ContainsKey_Keyword_Null()
         {
             _builder["SourceType"] = "DBC";
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => _builder.ContainsKey(null));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                _builder.ContainsKey(null)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
@@ -639,8 +677,9 @@ namespace System.Data.Tests.Common
         [Fact] // AppendKeyValuePair (StringBuilder, String, String)
         public void AppendKeyValuePair1_Builder_Null()
         {
-            ArgumentNullException ex =
-                Assert.Throws<ArgumentNullException>(() => DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost"));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("builder", ex.ParamName);
@@ -650,8 +689,9 @@ namespace System.Data.Tests.Common
         public void AppendKeyValuePair1_Keyword_Empty()
         {
             StringBuilder sb = new StringBuilder();
-            ArgumentException ex =
-                Assert.Throws<ArgumentException>(() => DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost"));
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost")
+            );
             // Expecting non-empty string for 'keyName' parameter
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -662,8 +702,9 @@ namespace System.Data.Tests.Common
         public void AppendKeyValuePair1_Keyword_Null()
         {
             StringBuilder sb = new StringBuilder();
-            ArgumentNullException ex =
-                Assert.Throws<ArgumentNullException>(() => DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost"));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost")
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyName", ex.ParamName);
@@ -685,19 +726,34 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adven'ture", false);
             Assert.Equal("Database=\"Adven'ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adven\"ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adven\"ture Works",
+                false
+            );
             Assert.Equal("Database='Adven\"ture Works'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adven\"ture", false);
             Assert.Equal("Database='Adven\"ture'", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adventure Works\"", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adventure Works\"",
+                false
+            );
             Assert.Equal("Database='\"Adventure Works\"'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adventure\"", false);
             Assert.Equal("Database='\"Adventure\"'", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven'ture Works\"", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven'ture Works\"",
+                false
+            );
             Assert.Equal("Database=\"\"\"Adven'ture Works\"\"\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven'ture\"", false);
@@ -722,25 +778,45 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", ";Adventure", false);
             Assert.Equal("Database=\";Adventure\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en;ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv'en;ture Works",
+                false
+            );
             Assert.Equal("Database=\"Adv'en;ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en;ture", false);
             Assert.Equal("Database=\"Adv'en;ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en;ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en;ture Works",
+                false
+            );
             Assert.Equal("Database='Adv\"en;ture Works'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en;ture", false);
             Assert.Equal("Database='Adv\"en;ture'", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en;ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en;ture Works",
+                false
+            );
             Assert.Equal("Database=\"A'dv\"\"en;ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en;ture", false);
             Assert.Equal("Database=\"A'dv\"\"en;ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven;ture Works\"", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven;ture Works\"",
+                false
+            );
             Assert.Equal("Database='\"Adven;ture Works\"'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven;ture\"", false);
@@ -753,25 +829,45 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adven=ture", false);
             Assert.Equal("Database=\"Adven=ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en=ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv'en=ture Works",
+                false
+            );
             Assert.Equal("Database=\"Adv'en=ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en=ture", false);
             Assert.Equal("Database=\"Adv'en=ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en=ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en=ture Works",
+                false
+            );
             Assert.Equal("Database='Adv\"en=ture Works'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en=ture", false);
             Assert.Equal("Database='Adv\"en=ture'", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en=ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en=ture Works",
+                false
+            );
             Assert.Equal("Database=\"A'dv\"\"en=ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en=ture", false);
             Assert.Equal("Database=\"A'dv\"\"en=ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven=ture Works\"", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven=ture Works\"",
+                false
+            );
             Assert.Equal("Database='\"Adven=ture Works\"'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven=ture\"", false);
@@ -814,49 +910,89 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adventure}", false);
             Assert.Equal("Database=Adventure}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en{ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv'en{ture Works",
+                false
+            );
             Assert.Equal("Database=\"Adv'en{ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en{ture", false);
             Assert.Equal("Database=\"Adv'en{ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en}ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv'en}ture Works",
+                false
+            );
             Assert.Equal("Database=\"Adv'en}ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv'en}ture", false);
             Assert.Equal("Database=\"Adv'en}ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en{ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en{ture Works",
+                false
+            );
             Assert.Equal("Database='Adv\"en{ture Works'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en{ture", false);
             Assert.Equal("Database='Adv\"en{ture'", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en}ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en}ture Works",
+                false
+            );
             Assert.Equal("Database='Adv\"en}ture Works'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en}ture", false);
             Assert.Equal("Database='Adv\"en}ture'", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en{ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en{ture Works",
+                false
+            );
             Assert.Equal("Database=\"A'dv\"\"en{ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en{ture", false);
             Assert.Equal("Database=\"A'dv\"\"en{ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en}ture Works", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en}ture Works",
+                false
+            );
             Assert.Equal("Database=\"A'dv\"\"en}ture Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en}ture", false);
             Assert.Equal("Database=\"A'dv\"\"en}ture\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven{ture Works\"", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven{ture Works\"",
+                false
+            );
             Assert.Equal("Database='\"Adven{ture Works\"'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven{ture\"", false);
             Assert.Equal("Database='\"Adven{ture\"'", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven}ture Works\"", false);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven}ture Works\"",
+                false
+            );
             Assert.Equal("Database='\"Adven}ture Works\"'", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven}ture\"", false);
@@ -994,7 +1130,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adven\"ture", true);
             Assert.Equal("Driver={Adven\"ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adventure Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adventure Works\"",
+                true
+            );
             Assert.Equal("Database=\"Adventure Works\"", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adventure Works\"", true);
@@ -1006,10 +1147,20 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adventure\"", true);
             Assert.Equal("Driver={\"Adventure\"}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven'ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven'ture Works\"",
+                true
+            );
             Assert.Equal("Database=\"Adven'ture Works\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adven'ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Driver",
+                "\"Adven'ture Works\"",
+                true
+            );
             Assert.Equal("Driver={\"Adven'ture Works\"}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven'ture\"", true);
@@ -1067,7 +1218,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv'en;ture", true);
             Assert.Equal("Driver={Adv'en;ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en;ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en;ture Works",
+                true
+            );
             Assert.Equal("Database={Adv\"en;ture Works}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en;ture Works", true);
@@ -1079,7 +1235,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en;ture", true);
             Assert.Equal("Driver={Adv\"en;ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en;ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en;ture Works",
+                true
+            );
             Assert.Equal("Database={A'dv\"en;ture Works}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en;ture Works", true);
@@ -1091,10 +1252,20 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en;ture", true);
             Assert.Equal("Driver={A'dv\"en;ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven;ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven;ture Works\"",
+                true
+            );
             Assert.Equal("Database={\"Adven;ture Works\"}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adven;ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Driver",
+                "\"Adven;ture Works\"",
+                true
+            );
             Assert.Equal("Driver={\"Adven;ture Works\"}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven;ture\"", true);
@@ -1128,7 +1299,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv'en=ture", true);
             Assert.Equal("Driver={Adv'en=ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en=ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en=ture Works",
+                true
+            );
             Assert.Equal("Database=Adv\"en=ture Works", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en=ture Works", true);
@@ -1140,7 +1316,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en=ture", true);
             Assert.Equal("Driver={Adv\"en=ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en=ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en=ture Works",
+                true
+            );
             Assert.Equal("Database=A'dv\"en=ture Works", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en=ture Works", true);
@@ -1152,10 +1333,20 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en=ture", true);
             Assert.Equal("Driver={A'dv\"en=ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven=ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven=ture Works\"",
+                true
+            );
             Assert.Equal("Database=\"Adven=ture Works\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adven=ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Driver",
+                "\"Adven=ture Works\"",
+                true
+            );
             Assert.Equal("Driver={\"Adven=ture Works\"}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven=ture\"", true);
@@ -1219,13 +1410,23 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "{Adventure Works}", true);
             Assert.Equal("Driver={Adventure Works}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "{Adventu{re Works}", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "{Adventu{re Works}",
+                true
+            );
             Assert.Equal("Database={Adventu{re Works}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "{Adventu{re Works}", true);
             Assert.Equal("Driver={Adventu{re Works}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "{Adventu}re Works}", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "{Adventu}re Works}",
+                true
+            );
             Assert.Equal("Database={{Adventu}}re Works}}}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "{Adventu}re Works}", true);
@@ -1321,7 +1522,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv'en}ture", true);
             Assert.Equal("Driver={Adv'en}}ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en{ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en{ture Works",
+                true
+            );
             Assert.Equal("Database=Adv\"en{ture Works", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en{ture Works", true);
@@ -1333,7 +1539,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en{ture", true);
             Assert.Equal("Driver={Adv\"en{ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "Adv\"en}ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "Adv\"en}ture Works",
+                true
+            );
             Assert.Equal("Database=Adv\"en}ture Works", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en}ture Works", true);
@@ -1345,7 +1556,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "Adv\"en}ture", true);
             Assert.Equal("Driver={Adv\"en}}ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en{ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en{ture Works",
+                true
+            );
             Assert.Equal("Database=A'dv\"en{ture Works", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en{ture Works", true);
@@ -1357,7 +1573,12 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en{ture", true);
             Assert.Equal("Driver={A'dv\"en{ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "A'dv\"en}ture Works", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "A'dv\"en}ture Works",
+                true
+            );
             Assert.Equal("Database=A'dv\"en}ture Works", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en}ture Works", true);
@@ -1369,10 +1590,20 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "A'dv\"en}ture", true);
             Assert.Equal("Driver={A'dv\"en}}ture}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven{ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven{ture Works\"",
+                true
+            );
             Assert.Equal("Database=\"Adven{ture Works\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adven{ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Driver",
+                "\"Adven{ture Works\"",
+                true
+            );
             Assert.Equal("Driver={\"Adven{ture Works\"}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven{ture\"", true);
@@ -1381,10 +1612,20 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adven{ture\"", true);
             Assert.Equal("Driver={\"Adven{ture\"}", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven}ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Database",
+                "\"Adven}ture Works\"",
+                true
+            );
             Assert.Equal("Database=\"Adven}ture Works\"", sb.ToString());
             sb.Length = 0;
-            DbConnectionStringBuilder.AppendKeyValuePair(sb, "Driver", "\"Adven}ture Works\"", true);
+            DbConnectionStringBuilder.AppendKeyValuePair(
+                sb,
+                "Driver",
+                "\"Adven}ture Works\"",
+                true
+            );
             Assert.Equal("Driver={\"Adven}}ture Works\"}", sb.ToString());
             sb.Length = 0;
             DbConnectionStringBuilder.AppendKeyValuePair(sb, "Database", "\"Adven}ture\"", true);
@@ -1502,14 +1743,16 @@ namespace System.Data.Tests.Common
         [Fact] // AppendKeyValuePair (StringBuilder, String, String, Boolean)
         public void AppendKeyValuePair2_Builder_Null()
         {
-            ArgumentNullException ex1 =
-                Assert.Throws<ArgumentNullException>(() => DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", true));
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", true)
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("builder", ex1.ParamName);
 
-            ArgumentNullException ex2 =
-                Assert.Throws<ArgumentNullException>(() => DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", false));
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(null, "Server", "localhost", false)
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("builder", ex2.ParamName);
@@ -1520,15 +1763,17 @@ namespace System.Data.Tests.Common
         {
             StringBuilder sb = new StringBuilder();
 
-            ArgumentException ex1 =
-                Assert.Throws<ArgumentException>(() => DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", true));
+            ArgumentException ex1 = Assert.Throws<ArgumentException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", true)
+            );
             // Expecting non-empty string for 'keyName' parameter
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Null(ex1.ParamName);
 
-            ArgumentException ex2 =
-                Assert.Throws<ArgumentException>(() => DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", false));
+            ArgumentException ex2 = Assert.Throws<ArgumentException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, string.Empty, "localhost", false)
+            );
             // Expecting non-empty string for 'keyName' parameter
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
@@ -1539,14 +1784,16 @@ namespace System.Data.Tests.Common
         public void AppendKeyValuePair2_Keyword_Null()
         {
             StringBuilder sb = new StringBuilder();
-            ArgumentNullException ex1 =
-                Assert.Throws<ArgumentNullException>(() => DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", true));
+            ArgumentNullException ex1 = Assert.Throws<ArgumentNullException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", true)
+            );
             Assert.Null(ex1.InnerException);
             Assert.NotNull(ex1.Message);
             Assert.Equal("keyName", ex1.ParamName);
 
-            ArgumentNullException ex2 =
-                Assert.Throws<ArgumentNullException>(() => DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", false));
+            ArgumentNullException ex2 = Assert.Throws<ArgumentNullException>(() =>
+                DbConnectionStringBuilder.AppendKeyValuePair(sb, null, "localhost", false)
+            );
             Assert.Null(ex2.InnerException);
             Assert.NotNull(ex2.Message);
             Assert.Equal("keyName", ex2.ParamName);
@@ -1588,14 +1835,17 @@ namespace System.Data.Tests.Common
         [Fact]
         public void NegICollectionCopyToTest()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                KeyValuePair<string, object>[] dict = new KeyValuePair<string, object>[1];
-                _builder.Add(SERVER, SERVER_VALUE);
-                _builder.Add(SERVER + "1", SERVER_VALUE + "1");
-                ((ICollection)_builder).CopyTo(dict, 0);
-                Assert.Fail();
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    KeyValuePair<string, object>[] dict = new KeyValuePair<string, object>[1];
+                    _builder.Add(SERVER, SERVER_VALUE);
+                    _builder.Add(SERVER + "1", SERVER_VALUE + "1");
+                    ((ICollection)_builder).CopyTo(dict, 0);
+                    Assert.Fail();
+                }
+            );
         }
 
         [Fact]
@@ -1672,11 +1922,12 @@ namespace System.Data.Tests.Common
         [Fact]
         public void TryGetValue_Keyword_Null()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => _builder.TryGetValue(null, out object value));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                _builder.TryGetValue(null, out object value)
+            );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             Assert.Equal("keyword", ex.ParamName);
-
         }
 
         [Fact]
@@ -1692,47 +1943,63 @@ namespace System.Data.Tests.Common
             sb["Data Source"] = "testdb";
             sb["User ID"] = "someuser";
             sb["Password"] = "PLACEHOLDER";
-            Assert.Equal("Data Source=testdb;User ID=someuser;Password=PLACEHOLDER",
-                sb.ConnectionString);
+            Assert.Equal(
+                "Data Source=testdb;User ID=someuser;Password=PLACEHOLDER",
+                sb.ConnectionString
+            );
 
             sb["Password"] = "PLACEHOLDER#";
-            Assert.Equal("Data Source=testdb;User ID=someuser;Password=PLACEHOLDER#",
-                sb.ConnectionString);
+            Assert.Equal(
+                "Data Source=testdb;User ID=someuser;Password=PLACEHOLDER#",
+                sb.ConnectionString
+            );
 
             // an embedded single-quote value will result in the value being delimieted with double quotes
             sb["Password"] = "PLACEHOLDER\'def";
-            Assert.Equal("Data Source=testdb;User ID=someuser;Password=\"PLACEHOLDER\'def\"",
-                sb.ConnectionString);
+            Assert.Equal(
+                "Data Source=testdb;User ID=someuser;Password=\"PLACEHOLDER\'def\"",
+                sb.ConnectionString
+            );
 
             // an embedded double-quote value will result in the value being delimieted with single quotes
             sb["Password"] = "abc\"def";
-            Assert.Equal("Data Source=testdb;User ID=someuser;Password=\'abc\"def\'",
-                sb.ConnectionString);
+            Assert.Equal(
+                "Data Source=testdb;User ID=someuser;Password=\'abc\"def\'",
+                sb.ConnectionString
+            );
 
             // an embedded single-quote and double-quote in the value
             // will result in the value being delimited by double-quotes
             // with the embedded double quote being escaped with two double-quotes
             sb["Password"] = "abc\"d\'ef";
-            Assert.Equal("Data Source=testdb;User ID=someuser;Password=\"abc\"\"d\'ef\"",
-                sb.ConnectionString);
+            Assert.Equal(
+                "Data Source=testdb;User ID=someuser;Password=\"abc\"\"d\'ef\"",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder();
             sb["PASSWORD"] = "PLACEHOLDERabcdef1";
             sb["user id"] = "someuser";
             sb["Data Source"] = "testdb";
-            Assert.Equal("PASSWORD=PLACEHOLDERabcdef1;user id=someuser;Data Source=testdb",
-                sb.ConnectionString);
+            Assert.Equal(
+                "PASSWORD=PLACEHOLDERabcdef1;user id=someuser;Data Source=testdb",
+                sb.ConnectionString
+            );
 
             // case is preserved for a keyword that was added the first time
             sb = new DbConnectionStringBuilder();
             sb["PassWord"] = "PLACEHOLDERabcdef2";
             sb["uSER iD"] = "someuser";
             sb["DaTa SoUrCe"] = "testdb";
-            Assert.Equal("PassWord=PLACEHOLDERabcdef2;uSER iD=someuser;DaTa SoUrCe=testdb",
-                sb.ConnectionString);
+            Assert.Equal(
+                "PassWord=PLACEHOLDERabcdef2;uSER iD=someuser;DaTa SoUrCe=testdb",
+                sb.ConnectionString
+            );
             sb["passWORD"] = "PLACEHOLDERabc123";
-            Assert.Equal("PassWord=PLACEHOLDERabc123;uSER iD=someuser;DaTa SoUrCe=testdb",
-                sb.ConnectionString);
+            Assert.Equal(
+                "PassWord=PLACEHOLDERabc123;uSER iD=someuser;DaTa SoUrCe=testdb",
+                sb.ConnectionString
+            );
 
             // embedded equal sign in the value will cause the value to be
             // delimited with double-quotes
@@ -1740,8 +2007,10 @@ namespace System.Data.Tests.Common
             sb["Password"] = "PLACEHOLDER=def";
             sb["Data Source"] = "testdb";
             sb["User ID"] = "someuser";
-            Assert.Equal("Password=\"PLACEHOLDER=def\";Data Source=testdb;User ID=someuser",
-                sb.ConnectionString);
+            Assert.Equal(
+                "Password=\"PLACEHOLDER=def\";Data Source=testdb;User ID=someuser",
+                sb.ConnectionString
+            );
 
             // embedded semicolon in the value will cause the value to be
             // delimited with double-quotes
@@ -1749,46 +2018,40 @@ namespace System.Data.Tests.Common
             sb["Password"] = "PLACEHOLDER;def";
             sb["Data Source"] = "testdb";
             sb["User ID"] = "someuser";
-            Assert.Equal("Password=\"PLACEHOLDER;def\";Data Source=testdb;User ID=someuser",
-                sb.ConnectionString);
+            Assert.Equal(
+                "Password=\"PLACEHOLDER;def\";Data Source=testdb;User ID=someuser",
+                sb.ConnectionString
+            );
 
             // more right parentheses then left parentheses - happily takes it
             sb = new DbConnectionStringBuilder();
             sb.ConnectionString = "Data Source=(((Blah=Something))))))";
-            Assert.Equal("data source=\"(((Blah=Something))))))\"",
-                sb.ConnectionString);
+            Assert.Equal("data source=\"(((Blah=Something))))))\"", sb.ConnectionString);
 
             // more left curly braces then right curly braces - happily takes it
             sb = new DbConnectionStringBuilder();
             sb.ConnectionString = "Data Source={{{{Blah=Something}}";
-            Assert.Equal("data source=\"{{{{Blah=Something}}\"",
-                sb.ConnectionString);
+            Assert.Equal("data source=\"{{{{Blah=Something}}\"", sb.ConnectionString);
 
             // spaces, empty string, null are treated like an empty string
             // and any previous settings is cleared
             sb.ConnectionString = "   ";
-            Assert.Equal(string.Empty,
-                sb.ConnectionString);
+            Assert.Equal(string.Empty, sb.ConnectionString);
 
             sb.ConnectionString = " ";
-            Assert.Equal(string.Empty,
-                sb.ConnectionString);
+            Assert.Equal(string.Empty, sb.ConnectionString);
 
             sb.ConnectionString = "";
-            Assert.Equal(string.Empty,
-                sb.ConnectionString);
+            Assert.Equal(string.Empty, sb.ConnectionString);
 
             sb.ConnectionString = string.Empty;
-            Assert.Equal(string.Empty,
-                sb.ConnectionString);
+            Assert.Equal(string.Empty, sb.ConnectionString);
 
             sb.ConnectionString = null;
-            Assert.Equal(string.Empty,
-                sb.ConnectionString);
+            Assert.Equal(string.Empty, sb.ConnectionString);
 
             sb = new DbConnectionStringBuilder();
-            Assert.Equal(string.Empty,
-                sb.ConnectionString);
+            Assert.Equal(string.Empty, sb.ConnectionString);
         }
 
         [Fact]
@@ -1797,72 +2060,90 @@ namespace System.Data.Tests.Common
             DbConnectionStringBuilder sb;
 
             sb = new DbConnectionStringBuilder();
-            sb.ConnectionString = "Driver={SQL Server};Server=(local host);" +
-                "Trusted_Connection=Yes Or No;Database=Adventure Works;";
+            sb.ConnectionString =
+                "Driver={SQL Server};Server=(local host);"
+                + "Trusted_Connection=Yes Or No;Database=Adventure Works;";
             Assert.Equal("{SQL Server}", sb["Driver"]);
             Assert.Equal("(local host)", sb["Server"]);
             Assert.Equal("Yes Or No", sb["Trusted_Connection"]);
-            Assert.Equal("driver=\"{SQL Server}\";server=\"(local host)\";" +
-                "trusted_connection=\"Yes Or No\";database=\"Adventure Works\"",
-                sb.ConnectionString);
+            Assert.Equal(
+                "driver=\"{SQL Server}\";server=\"(local host)\";"
+                    + "trusted_connection=\"Yes Or No\";database=\"Adventure Works\"",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder();
-            sb.ConnectionString = "Driver={SQLServer};Server=(local);" +
-                "Trusted_Connection=Yes;Database=AdventureWorks;";
+            sb.ConnectionString =
+                "Driver={SQLServer};Server=(local);"
+                + "Trusted_Connection=Yes;Database=AdventureWorks;";
             Assert.Equal("{SQLServer}", sb["Driver"]);
             Assert.Equal("(local)", sb["Server"]);
             Assert.Equal("Yes", sb["Trusted_Connection"]);
-            Assert.Equal("driver={SQLServer};server=(local);" +
-                "trusted_connection=Yes;database=AdventureWorks",
-                sb.ConnectionString);
+            Assert.Equal(
+                "driver={SQLServer};server=(local);"
+                    + "trusted_connection=Yes;database=AdventureWorks",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(false);
-            sb.ConnectionString = "Driver={SQL Server};Server=(local host);" +
-                "Trusted_Connection=Yes Or No;Database=Adventure Works;";
+            sb.ConnectionString =
+                "Driver={SQL Server};Server=(local host);"
+                + "Trusted_Connection=Yes Or No;Database=Adventure Works;";
             Assert.Equal("{SQL Server}", sb["Driver"]);
             Assert.Equal("(local host)", sb["Server"]);
             Assert.Equal("Yes Or No", sb["Trusted_Connection"]);
-            Assert.Equal("driver=\"{SQL Server}\";server=\"(local host)\";" +
-                "trusted_connection=\"Yes Or No\";database=\"Adventure Works\"",
-                sb.ConnectionString);
-
+            Assert.Equal(
+                "driver=\"{SQL Server}\";server=\"(local host)\";"
+                    + "trusted_connection=\"Yes Or No\";database=\"Adventure Works\"",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(false);
-            sb.ConnectionString = "Driver={SQLServer};Server=(local);" +
-                "Trusted_Connection=Yes;Database=AdventureWorks;";
+            sb.ConnectionString =
+                "Driver={SQLServer};Server=(local);"
+                + "Trusted_Connection=Yes;Database=AdventureWorks;";
             Assert.Equal("{SQLServer}", sb["Driver"]);
             Assert.Equal("(local)", sb["Server"]);
             Assert.Equal("Yes", sb["Trusted_Connection"]);
-            Assert.Equal("driver={SQLServer};server=(local);" +
-                "trusted_connection=Yes;database=AdventureWorks",
-                sb.ConnectionString);
+            Assert.Equal(
+                "driver={SQLServer};server=(local);"
+                    + "trusted_connection=Yes;database=AdventureWorks",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(true);
-            sb.ConnectionString = "Driver={SQL Server};Server=(local host);" +
-                "Trusted_Connection=Yes Or No;Database=Adventure Works;";
+            sb.ConnectionString =
+                "Driver={SQL Server};Server=(local host);"
+                + "Trusted_Connection=Yes Or No;Database=Adventure Works;";
             Assert.Equal("{SQL Server}", sb["Driver"]);
             Assert.Equal("(local host)", sb["Server"]);
             Assert.Equal("Yes Or No", sb["Trusted_Connection"]);
-            Assert.Equal("driver={SQL Server};server=(local host);" +
-                "trusted_connection=Yes Or No;database=Adventure Works",
-                sb.ConnectionString);
+            Assert.Equal(
+                "driver={SQL Server};server=(local host);"
+                    + "trusted_connection=Yes Or No;database=Adventure Works",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(true);
-            sb.ConnectionString = "Driver={SQLServer};Server=(local);" +
-                "Trusted_Connection=Yes;Database=AdventureWorks;";
+            sb.ConnectionString =
+                "Driver={SQLServer};Server=(local);"
+                + "Trusted_Connection=Yes;Database=AdventureWorks;";
             Assert.Equal("{SQLServer}", sb["Driver"]);
             Assert.Equal("(local)", sb["Server"]);
             Assert.Equal("Yes", sb["Trusted_Connection"]);
-            Assert.Equal("driver={SQLServer};server=(local);" +
-                "trusted_connection=Yes;database=AdventureWorks",
-                sb.ConnectionString);
+            Assert.Equal(
+                "driver={SQLServer};server=(local);"
+                    + "trusted_connection=Yes;database=AdventureWorks",
+                sb.ConnectionString
+            );
         }
 
         [Fact]
         public void EmbeddedCharTest3()
         {
-            string dataSource = "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.101)" +
-                "(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=TESTDB)))";
+            string dataSource =
+                "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.101)"
+                + "(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=TESTDB)))";
             DbConnectionStringBuilder sb;
 
             sb = new DbConnectionStringBuilder();
@@ -1871,9 +2152,11 @@ namespace System.Data.Tests.Common
             Assert.Equal("SCOTT", sb["User ID"]);
             Assert.Equal("PLACEHOLDER", sb["Password"]);
             Assert.Equal(
-                "user id=SCOTT;password=PLACEHOLDER;data source=\"(DESCRIPTION=(ADDRESS=(PROTOCOL=" +
-                "TCP)(HOST=192.168.1.101)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)" +
-                "(SERVICE_NAME=TESTDB)))\"", sb.ConnectionString);
+                "user id=SCOTT;password=PLACEHOLDER;data source=\"(DESCRIPTION=(ADDRESS=(PROTOCOL="
+                    + "TCP)(HOST=192.168.1.101)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)"
+                    + "(SERVICE_NAME=TESTDB)))\"",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(false);
             sb.ConnectionString = "User ID=SCOTT;Password=PLACEHOLDER;Data Source=" + dataSource;
@@ -1881,9 +2164,11 @@ namespace System.Data.Tests.Common
             Assert.Equal("SCOTT", sb["User ID"]);
             Assert.Equal("PLACEHOLDER", sb["Password"]);
             Assert.Equal(
-                "user id=SCOTT;password=PLACEHOLDER;data source=\"(DESCRIPTION=(ADDRESS=(PROTOCOL=" +
-                "TCP)(HOST=192.168.1.101)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)" +
-                "(SERVICE_NAME=TESTDB)))\"", sb.ConnectionString);
+                "user id=SCOTT;password=PLACEHOLDER;data source=\"(DESCRIPTION=(ADDRESS=(PROTOCOL="
+                    + "TCP)(HOST=192.168.1.101)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)"
+                    + "(SERVICE_NAME=TESTDB)))\"",
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(true);
             sb.ConnectionString = "User ID=SCOTT;Password=PLACEHOLDER;Data Source=" + dataSource;
@@ -1891,9 +2176,11 @@ namespace System.Data.Tests.Common
             Assert.Equal("SCOTT", sb["User ID"]);
             Assert.Equal("PLACEHOLDER", sb["Password"]);
             Assert.Equal(
-                "user id=SCOTT;password=PLACEHOLDER;data source=(DESCRIPTION=(ADDRESS=(PROTOCOL=" +
-                "TCP)(HOST=192.168.1.101)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)" +
-                "(SERVICE_NAME=TESTDB)))", sb.ConnectionString);
+                "user id=SCOTT;password=PLACEHOLDER;data source=(DESCRIPTION=(ADDRESS=(PROTOCOL="
+                    + "TCP)(HOST=192.168.1.101)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)"
+                    + "(SERVICE_NAME=TESTDB)))",
+                sb.ConnectionString
+            );
         }
 
         [Fact]
@@ -1906,32 +2193,39 @@ namespace System.Data.Tests.Common
             sb["Integrated Security"] = "False";
             Assert.Equal(
                 "password=PLACEHOLDER;user id=someuser;data source=testdb;Integrated Security=False",
-                sb.ConnectionString);
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(false);
             sb.ConnectionString = "PassWord=PLACEHOLDER;uSER iD=someuser;DaTa SoUrCe=testdb";
             sb["Integrated Security"] = "False";
             Assert.Equal(
                 "password=PLACEHOLDER;user id=someuser;data source=testdb;Integrated Security=False",
-                sb.ConnectionString);
+                sb.ConnectionString
+            );
 
             sb = new DbConnectionStringBuilder(true);
             sb.ConnectionString = "PassWord=PLACEHOLDER;uSER iD=someuser;DaTa SoUrCe=testdb";
             sb["Integrated Security"] = "False";
             Assert.Equal(
                 "password=PLACEHOLDER;user id=someuser;data source=testdb;Integrated Security=False",
-                sb.ConnectionString);
+                sb.ConnectionString
+            );
         }
 
         [Fact]
         public void EmbeddedCharTest5()
         {
-            string connectionString = "A={abcdef2};B=some{us;C=test}db;D=12\"3;E=\"45;6\";F=AB==C;G{A'}\";F={1='\"2};G==C=B==C;Z=ABC";
+            string connectionString =
+                "A={abcdef2};B=some{us;C=test}db;D=12\"3;E=\"45;6\";F=AB==C;G{A'}\";F={1='\"2};G==C=B==C;Z=ABC";
             DbConnectionStringBuilder sb;
 
             sb = new DbConnectionStringBuilder();
             sb.ConnectionString = connectionString;
-            Assert.Equal("a={abcdef2};b=some{us;c=test}db;d='12\"3';e=\"45;6\";f=\"AB==C\";g{a'}\";f=\"{1='\"\"2}\";g==c=\"B==C\";z=ABC", sb.ConnectionString);
+            Assert.Equal(
+                "a={abcdef2};b=some{us;c=test}db;d='12\"3';e=\"45;6\";f=\"AB==C\";g{a'}\";f=\"{1='\"\"2}\";g==c=\"B==C\";z=ABC",
+                sb.ConnectionString
+            );
             Assert.Equal("{abcdef2}", sb["A"]);
             Assert.Equal("some{us", sb["B"]);
             Assert.Equal("test}db", sb["C"]);
@@ -1944,7 +2238,10 @@ namespace System.Data.Tests.Common
 
             sb = new DbConnectionStringBuilder(false);
             sb.ConnectionString = connectionString;
-            Assert.Equal("a={abcdef2};b=some{us;c=test}db;d='12\"3';e=\"45;6\";f=\"AB==C\";g{a'}\";f=\"{1='\"\"2}\";g==c=\"B==C\";z=ABC", sb.ConnectionString);
+            Assert.Equal(
+                "a={abcdef2};b=some{us;c=test}db;d='12\"3';e=\"45;6\";f=\"AB==C\";g{a'}\";f=\"{1='\"\"2}\";g==c=\"B==C\";z=ABC",
+                sb.ConnectionString
+            );
             Assert.Equal("{abcdef2}", sb["A"]);
             Assert.Equal("some{us", sb["B"]);
             Assert.Equal("test}db", sb["C"]);
@@ -1957,7 +2254,10 @@ namespace System.Data.Tests.Common
 
             sb = new DbConnectionStringBuilder(true);
             sb.ConnectionString = connectionString;
-            Assert.Equal("a={abcdef2};b=some{us;c=test}db;d=12\"3;e=\"45;6\";f=AB==C;g{a'}\";f={1='\"2};g==C=B==C;z=ABC", sb.ConnectionString);
+            Assert.Equal(
+                "a={abcdef2};b=some{us;c=test}db;d=12\"3;e=\"45;6\";f=AB==C;g{a'}\";f={1='\"2};g==C=B==C;z=ABC",
+                sb.ConnectionString
+            );
             Assert.Equal("{abcdef2}", sb["A"]);
             Assert.Equal("some{us", sb["B"]);
             Assert.Equal("test}db", sb["C"]);
@@ -1972,80 +2272,82 @@ namespace System.Data.Tests.Common
         [Fact]
         public void EmbeddedCharTest6()
         {
-            string[][] shared_tests = new string[][] {
-                new string [] { "A=(B;", "A", "(B", "a=(B" },
-                new string [] { "A={B{}", "A", "{B{}", "a={B{}" },
-                new string [] { "A={B{{}", "A", "{B{{}", "a={B{{}" },
-                new string [] { " A =B{C", "A", "B{C", "a=B{C" },
-                new string [] { " A =B{{C}", "A", "B{{C}", "a=B{{C}" },
-                new string [] { "A={{{B}}}", "A", "{{{B}}}", "a={{{B}}}" },
-                new string [] { "A={B}", "A", "{B}", "a={B}" },
-                new string [] { "A= {B}", "A", "{B}", "a={B}" },
-                new string [] { " A =BC",  "a", "BC", "a=BC" },
-                new string [] { "\rA\t=BC",  "a", "BC", "a=BC" },
-                new string [] { "\rA\t=BC",  "a", "BC", "a=BC" },
-                new string [] { "A;B=BC",  "a;b", "BC", "a;b=BC" },
-                };
+            string[][] shared_tests = new string[][]
+            {
+                new string[] { "A=(B;", "A", "(B", "a=(B" },
+                new string[] { "A={B{}", "A", "{B{}", "a={B{}" },
+                new string[] { "A={B{{}", "A", "{B{{}", "a={B{{}" },
+                new string[] { " A =B{C", "A", "B{C", "a=B{C" },
+                new string[] { " A =B{{C}", "A", "B{{C}", "a=B{{C}" },
+                new string[] { "A={{{B}}}", "A", "{{{B}}}", "a={{{B}}}" },
+                new string[] { "A={B}", "A", "{B}", "a={B}" },
+                new string[] { "A= {B}", "A", "{B}", "a={B}" },
+                new string[] { " A =BC", "a", "BC", "a=BC" },
+                new string[] { "\rA\t=BC", "a", "BC", "a=BC" },
+                new string[] { "\rA\t=BC", "a", "BC", "a=BC" },
+                new string[] { "A;B=BC", "a;b", "BC", "a;b=BC" },
+            };
 
-            string[][] non_odbc_tests = new string[][] {
-                new string [] { "A=''", "A", "", "a=" },
-                new string [] { "A='BC;D'", "A", "BC;D", "a=\"BC;D\"" },
-                new string [] { "A=BC''D", "A", "BC''D", "a=\"BC''D\"" },
-                new string [] { "A='\"'", "A", "\"", "a='\"'" },
-                new string [] { "A=B\"\"C;", "A", "B\"\"C", "a='B\"\"C'" },
-                new string [] { "A={B{", "A", "{B{", "a={B{" },
-                new string [] { "A={B}C", "A", "{B}C", "a={B}C" },
-                new string [] { "A=B'C", "A", "B'C", "a=\"B'C\"" },
-                new string [] { "A=B''C", "A", "B''C", "a=\"B''C\"" },
-                new string [] { "A=  B C ;", "A", "B C", "a=\"B C\"" },
-                new string [] { "A={B { }} }", "A", "{B { }} }", "a=\"{B { }} }\"" },
-                new string [] { "A={B {{ }} }", "A", "{B {{ }} }", "a=\"{B {{ }} }\"" },
-                new string [] { "A= B {C ", "A", "B {C", "a=\"B {C\"" },
-                new string [] { "A= B }C ", "A", "B }C", "a=\"B }C\"" },
-                new string [] { "A=B }C", "A", "B }C", "a=\"B }C\"" },
-                new string [] { "A=B { }C", "A", "B { }C", "a=\"B { }C\"" },
-                new string [] { "A= B{C {}}", "A", "B{C {}}", "a=\"B{C {}}\"" },
-                new string [] { "A= {C {};B=A", "A", "{C {}", "a=\"{C {}\";b=A" },
-                new string [] { "A= {C {}  ", "A", "{C {}", "a=\"{C {}\"" },
-                new string [] { "A= {C {}  ;B=A", "A", "{C {}", "a=\"{C {}\";b=A" },
-                new string [] { "A= {C {}}}", "A", "{C {}}}", "a=\"{C {}}}\"" },
-                new string [] { "A={B=C}", "A", "{B=C}", "a=\"{B=C}\"" },
-                new string [] { "A={B==C}", "A", "{B==C}", "a=\"{B==C}\"" },
-                new string [] { "A=B==C", "A", "B==C", "a=\"B==C\"" },
-                new string [] { "A={=}", "A", "{=}", "a=\"{=}\"" },
-                new string [] { "A={==}", "A", "{==}", "a=\"{==}\"" },
-                new string [] { "A=\"B;(C)'\"", "A", "B;(C)'", "a=\"B;(C)'\"" },
-                new string [] { "A=B(=)C", "A", "B(=)C", "a=\"B(=)C\"" },
-                new string [] { "A=B=C", "A", "B=C", "a=\"B=C\"" },
-                new string [] { "A=B(==)C", "A", "B(==)C", "a=\"B(==)C\"" },
-                new string [] { "A=B  C", "A", "B  C", "a=\"B  C\"" },
-                new string [] { "A= B  C ", "A", "B  C", "a=\"B  C\"" },
-                new string [] { "A=  B  C  ", "A", "B  C", "a=\"B  C\"" },
-                new string [] { "A='  B C '", "A", "  B C ", "a=\"  B C \"" },
-                new string [] { "A=\"  B C \"", "A", "  B C ", "a=\"  B C \"" },
-                new string [] { "A={  B C }", "A", "{  B C }", "a=\"{  B C }\"" },
-                new string [] { "A=  B C  ;", "A", "B C", "a=\"B C\"" },
-                new string [] { "A=  B\rC\r\t;", "A", "B\rC", "a=\"B\rC\"" },
-                new string [] { "A=\"\"\"B;C\"\"\"", "A", "\"B;C\"", "a='\"B;C\"'" },
-                new string [] { "A= \"\"\"B;C\"\"\" ", "A", "\"B;C\"", "a='\"B;C\"'" },
-                new string [] { "A='''B;C'''", "A", "'B;C'", "a=\"'B;C'\"" },
-                new string [] { "A= '''B;C''' ", "A", "'B;C'", "a=\"'B;C'\"" },
-                new string [] { "A={{", "A", "{{", "a={{" },
-                new string [] { "A={B C}", "A", "{B C}", "a=\"{B C}\"" },
-                new string [] { "A={ B C }", "A", "{ B C }", "a=\"{ B C }\"" },
-                new string [] { "A={B {{ } }", "A", "{B {{ } }", "a=\"{B {{ } }\"" },
-                new string [] { "A='='", "A", "=", "a=\"=\"" },
-                new string [] { "A='=='", "A", "==", "a=\"==\"" },
-                new string [] { "A=\"=\"", "A", "=", "a=\"=\"" },
-                new string [] { "A=\"==\"", "A", "==", "a=\"==\"" },
-                new string [] { "A={B}}", "A", "{B}}", "a={B}}" },
-                new string [] { "A=\";\"", "A", ";", "a=\";\"" },
-                new string [] { "A(=)=B", "A(", ")=B", "a(=\")=B\"" },
-                new string [] { "A==B=C",  "A=B", "C", "a==b=C" },
-                new string [] { "A===B=C",  "A=", "B=C", "a===\"B=C\"" },
-                new string [] { "(A=)=BC",  "(a", ")=BC", "(a=\")=BC\"" },
-                new string [] { "A==C=B==C", "a=c", "B==C", "a==c=\"B==C\"" },
-                };
+            string[][] non_odbc_tests = new string[][]
+            {
+                new string[] { "A=''", "A", "", "a=" },
+                new string[] { "A='BC;D'", "A", "BC;D", "a=\"BC;D\"" },
+                new string[] { "A=BC''D", "A", "BC''D", "a=\"BC''D\"" },
+                new string[] { "A='\"'", "A", "\"", "a='\"'" },
+                new string[] { "A=B\"\"C;", "A", "B\"\"C", "a='B\"\"C'" },
+                new string[] { "A={B{", "A", "{B{", "a={B{" },
+                new string[] { "A={B}C", "A", "{B}C", "a={B}C" },
+                new string[] { "A=B'C", "A", "B'C", "a=\"B'C\"" },
+                new string[] { "A=B''C", "A", "B''C", "a=\"B''C\"" },
+                new string[] { "A=  B C ;", "A", "B C", "a=\"B C\"" },
+                new string[] { "A={B { }} }", "A", "{B { }} }", "a=\"{B { }} }\"" },
+                new string[] { "A={B {{ }} }", "A", "{B {{ }} }", "a=\"{B {{ }} }\"" },
+                new string[] { "A= B {C ", "A", "B {C", "a=\"B {C\"" },
+                new string[] { "A= B }C ", "A", "B }C", "a=\"B }C\"" },
+                new string[] { "A=B }C", "A", "B }C", "a=\"B }C\"" },
+                new string[] { "A=B { }C", "A", "B { }C", "a=\"B { }C\"" },
+                new string[] { "A= B{C {}}", "A", "B{C {}}", "a=\"B{C {}}\"" },
+                new string[] { "A= {C {};B=A", "A", "{C {}", "a=\"{C {}\";b=A" },
+                new string[] { "A= {C {}  ", "A", "{C {}", "a=\"{C {}\"" },
+                new string[] { "A= {C {}  ;B=A", "A", "{C {}", "a=\"{C {}\";b=A" },
+                new string[] { "A= {C {}}}", "A", "{C {}}}", "a=\"{C {}}}\"" },
+                new string[] { "A={B=C}", "A", "{B=C}", "a=\"{B=C}\"" },
+                new string[] { "A={B==C}", "A", "{B==C}", "a=\"{B==C}\"" },
+                new string[] { "A=B==C", "A", "B==C", "a=\"B==C\"" },
+                new string[] { "A={=}", "A", "{=}", "a=\"{=}\"" },
+                new string[] { "A={==}", "A", "{==}", "a=\"{==}\"" },
+                new string[] { "A=\"B;(C)'\"", "A", "B;(C)'", "a=\"B;(C)'\"" },
+                new string[] { "A=B(=)C", "A", "B(=)C", "a=\"B(=)C\"" },
+                new string[] { "A=B=C", "A", "B=C", "a=\"B=C\"" },
+                new string[] { "A=B(==)C", "A", "B(==)C", "a=\"B(==)C\"" },
+                new string[] { "A=B  C", "A", "B  C", "a=\"B  C\"" },
+                new string[] { "A= B  C ", "A", "B  C", "a=\"B  C\"" },
+                new string[] { "A=  B  C  ", "A", "B  C", "a=\"B  C\"" },
+                new string[] { "A='  B C '", "A", "  B C ", "a=\"  B C \"" },
+                new string[] { "A=\"  B C \"", "A", "  B C ", "a=\"  B C \"" },
+                new string[] { "A={  B C }", "A", "{  B C }", "a=\"{  B C }\"" },
+                new string[] { "A=  B C  ;", "A", "B C", "a=\"B C\"" },
+                new string[] { "A=  B\rC\r\t;", "A", "B\rC", "a=\"B\rC\"" },
+                new string[] { "A=\"\"\"B;C\"\"\"", "A", "\"B;C\"", "a='\"B;C\"'" },
+                new string[] { "A= \"\"\"B;C\"\"\" ", "A", "\"B;C\"", "a='\"B;C\"'" },
+                new string[] { "A='''B;C'''", "A", "'B;C'", "a=\"'B;C'\"" },
+                new string[] { "A= '''B;C''' ", "A", "'B;C'", "a=\"'B;C'\"" },
+                new string[] { "A={{", "A", "{{", "a={{" },
+                new string[] { "A={B C}", "A", "{B C}", "a=\"{B C}\"" },
+                new string[] { "A={ B C }", "A", "{ B C }", "a=\"{ B C }\"" },
+                new string[] { "A={B {{ } }", "A", "{B {{ } }", "a=\"{B {{ } }\"" },
+                new string[] { "A='='", "A", "=", "a=\"=\"" },
+                new string[] { "A='=='", "A", "==", "a=\"==\"" },
+                new string[] { "A=\"=\"", "A", "=", "a=\"=\"" },
+                new string[] { "A=\"==\"", "A", "==", "a=\"==\"" },
+                new string[] { "A={B}}", "A", "{B}}", "a={B}}" },
+                new string[] { "A=\";\"", "A", ";", "a=\";\"" },
+                new string[] { "A(=)=B", "A(", ")=B", "a(=\")=B\"" },
+                new string[] { "A==B=C", "A=B", "C", "a==b=C" },
+                new string[] { "A===B=C", "A=", "B=C", "a===\"B=C\"" },
+                new string[] { "(A=)=BC", "(a", ")=BC", "(a=\")=BC\"" },
+                new string[] { "A==C=B==C", "a=c", "B==C", "a==c=\"B==C\"" },
+            };
             DbConnectionStringBuilder sb;
 
             for (int i = 0; i < non_odbc_tests.Length; i++)
@@ -2084,73 +2386,80 @@ namespace System.Data.Tests.Common
                 Assert.Equal(test[2], sb[test[1]]);
             }
 
-            string[][] odbc_tests = new string[][] {
-                new string [] { "A=B(=)C", "A", "B(=)C", "a=B(=)C" },
-                new string [] { "A=B(==)C", "A", "B(==)C", "a=B(==)C" },
-                new string [] { "A=  B C  ;", "A", "B C", "a=B C" },
-                new string [] { "A=  B\rC\r\t;", "A", "B\rC", "a=B\rC" },
-                new string [] { "A='''", "A", "'''", "a='''" },
-                new string [] { "A=''", "A", "''", "a=''" },
-                new string [] { "A=''B", "A", "''B", "a=''B" },
-                new string [] { "A=BC''D", "A", "BC''D", "a=BC''D" },
-                new string [] { "A='\"'", "A", "'\"'", "a='\"'" },
-                new string [] { "A=\"\"B", "A", "\"\"B", "a=\"\"B"},
-                new string [] { "A=B\"\"C;", "A", "B\"\"C", "a=B\"\"C" },
-                new string [] { "A=\"B", "A", "\"B", "a=\"B" },
-                new string [] { "A=\"", "A", "\"", "a=\"" },
-                new string [] { "A=B'C", "A", "B'C", "a=B'C" },
-                new string [] { "A=B''C", "A", "B''C", "a=B''C" },
-                new string [] { "A='A'C", "A", "'A'C", "a='A'C" },
-                new string [] { "A=B  C", "A", "B  C", "a=B  C" },
-                new string [] { "A= B  C ", "A", "B  C", "a=B  C" },
-                new string [] { "A=  B  C  ", "A", "B  C", "a=B  C" },
-                new string [] { "A='  B C '", "A", "'  B C '", "a='  B C '" },
-                new string [] { "A=\"  B C \"", "A", "\"  B C \"", "a=\"  B C \"" },
-                new string [] { "A={  B C }", "A", "{  B C }", "a={  B C }" },
-                new string [] { "A=  B C ;", "A", "B C", "a=B C" },
-                new string [] { "A=\"\"BC\"\"", "A", "\"\"BC\"\"", "a=\"\"BC\"\"" },
-                new string [] { "A=\"\"B\"C\"\";", "A", "\"\"B\"C\"\"", "a=\"\"B\"C\"\"" },
-                new string [] { "A= \"\"B\"C\"\" ", "A", "\"\"B\"C\"\"", "a=\"\"B\"C\"\"" },
-                new string [] { "A=''BC''", "A", "''BC''", "a=''BC''" },
-                new string [] { "A=''B'C'';", "A", "''B'C''", "a=''B'C''" },
-                new string [] { "A= ''B'C'' ", "A", "''B'C''", "a=''B'C''" },
-                new string [] { "A={B C}", "A", "{B C}", "a={B C}" },
-                new string [] { "A={ B C }", "A", "{ B C }", "a={ B C }" },
-                new string [] { "A={ B;C }", "A", "{ B;C }", "a={ B;C }" },
-                new string [] { "A={B { }} }", "A", "{B { }} }", "a={B { }} }" },
-                new string [] { "A={ B;= {;=}};= }", "A", "{ B;= {;=}};= }", "a={ B;= {;=}};= }" },
-                new string [] { "A={B {{ }} }", "A", "{B {{ }} }", "a={B {{ }} }" },
-                new string [] { "A={ B;= {{:= }};= }", "A", "{ B;= {{:= }};= }", "a={ B;= {{:= }};= }" },
-                new string [] { "A= B {C ", "A", "B {C", "a=B {C" },
-                new string [] { "A= B }C ", "A", "B }C", "a=B }C" },
-                new string [] { "A=B }C", "A", "B }C", "a=B }C" },
-                new string [] { "A=B { }C", "A", "B { }C", "a=B { }C" },
-                new string [] { "A= {B;{}", "A", "{B;{}", "a={B;{}" },
-                new string [] { "A= {B;{}}}", "A", "{B;{}}}", "a={B;{}}}" },
-                new string [] { "A= B{C {}}", "A", "B{C {}}", "a=B{C {}}" },
-                new string [] { "A= {C {};B=A", "A", "{C {}", "a={C {};b=A" },
-                new string [] { "A= {C {}  ", "A", "{C {}", "a={C {}" },
-                new string [] { "A= {C {}  ;B=A", "A", "{C {}", "a={C {};b=A" },
-                new string [] { "A= {C {}}}", "A", "{C {}}}", "a={C {}}}" },
-                new string [] { "A={B=C}", "A", "{B=C}", "a={B=C}" },
-                new string [] { "A={B==C}", "A", "{B==C}", "a={B==C}" },
-                new string [] { "A=B==C", "A", "B==C", "a=B==C" },
-                new string [] { "A='='", "A", "'='", "a='='" },
-                new string [] { "A='=='", "A", "'=='", "a='=='" },
-                new string [] { "A=\"=\"", "A", "\"=\"", "a=\"=\"" },
-                new string [] { "A=\"==\"", "A", "\"==\"", "a=\"==\"" },
-                new string [] { "A={=}", "A", "{=}", "a={=}" },
-                new string [] { "A={==}", "A", "{==}", "a={==}" },
-                new string [] { "A=B=C", "A", "B=C", "a=B=C" },
-                new string [] { "A(=)=B", "A(", ")=B", "a(=)=B" },
-                new string [] { "A==B=C",  "A", "=B=C", "a==B=C" },
-                new string [] { "A===B=C",  "A", "==B=C", "a===B=C" },
-                new string [] { "A'='=B=C",  "A'", "'=B=C", "a'='=B=C" },
-                new string [] { "A\"=\"=B=C",  "A\"", "\"=B=C", "a\"=\"=B=C" },
-                new string [] { "\"A=\"=BC",  "\"a", "\"=BC", "\"a=\"=BC" },
-                new string [] { "(A=)=BC",  "(a", ")=BC", "(a=)=BC" },
-                new string [] { "A==C=B==C", "A", "=C=B==C", "a==C=B==C" },
-                };
+            string[][] odbc_tests = new string[][]
+            {
+                new string[] { "A=B(=)C", "A", "B(=)C", "a=B(=)C" },
+                new string[] { "A=B(==)C", "A", "B(==)C", "a=B(==)C" },
+                new string[] { "A=  B C  ;", "A", "B C", "a=B C" },
+                new string[] { "A=  B\rC\r\t;", "A", "B\rC", "a=B\rC" },
+                new string[] { "A='''", "A", "'''", "a='''" },
+                new string[] { "A=''", "A", "''", "a=''" },
+                new string[] { "A=''B", "A", "''B", "a=''B" },
+                new string[] { "A=BC''D", "A", "BC''D", "a=BC''D" },
+                new string[] { "A='\"'", "A", "'\"'", "a='\"'" },
+                new string[] { "A=\"\"B", "A", "\"\"B", "a=\"\"B" },
+                new string[] { "A=B\"\"C;", "A", "B\"\"C", "a=B\"\"C" },
+                new string[] { "A=\"B", "A", "\"B", "a=\"B" },
+                new string[] { "A=\"", "A", "\"", "a=\"" },
+                new string[] { "A=B'C", "A", "B'C", "a=B'C" },
+                new string[] { "A=B''C", "A", "B''C", "a=B''C" },
+                new string[] { "A='A'C", "A", "'A'C", "a='A'C" },
+                new string[] { "A=B  C", "A", "B  C", "a=B  C" },
+                new string[] { "A= B  C ", "A", "B  C", "a=B  C" },
+                new string[] { "A=  B  C  ", "A", "B  C", "a=B  C" },
+                new string[] { "A='  B C '", "A", "'  B C '", "a='  B C '" },
+                new string[] { "A=\"  B C \"", "A", "\"  B C \"", "a=\"  B C \"" },
+                new string[] { "A={  B C }", "A", "{  B C }", "a={  B C }" },
+                new string[] { "A=  B C ;", "A", "B C", "a=B C" },
+                new string[] { "A=\"\"BC\"\"", "A", "\"\"BC\"\"", "a=\"\"BC\"\"" },
+                new string[] { "A=\"\"B\"C\"\";", "A", "\"\"B\"C\"\"", "a=\"\"B\"C\"\"" },
+                new string[] { "A= \"\"B\"C\"\" ", "A", "\"\"B\"C\"\"", "a=\"\"B\"C\"\"" },
+                new string[] { "A=''BC''", "A", "''BC''", "a=''BC''" },
+                new string[] { "A=''B'C'';", "A", "''B'C''", "a=''B'C''" },
+                new string[] { "A= ''B'C'' ", "A", "''B'C''", "a=''B'C''" },
+                new string[] { "A={B C}", "A", "{B C}", "a={B C}" },
+                new string[] { "A={ B C }", "A", "{ B C }", "a={ B C }" },
+                new string[] { "A={ B;C }", "A", "{ B;C }", "a={ B;C }" },
+                new string[] { "A={B { }} }", "A", "{B { }} }", "a={B { }} }" },
+                new string[] { "A={ B;= {;=}};= }", "A", "{ B;= {;=}};= }", "a={ B;= {;=}};= }" },
+                new string[] { "A={B {{ }} }", "A", "{B {{ }} }", "a={B {{ }} }" },
+                new string[]
+                {
+                    "A={ B;= {{:= }};= }",
+                    "A",
+                    "{ B;= {{:= }};= }",
+                    "a={ B;= {{:= }};= }",
+                },
+                new string[] { "A= B {C ", "A", "B {C", "a=B {C" },
+                new string[] { "A= B }C ", "A", "B }C", "a=B }C" },
+                new string[] { "A=B }C", "A", "B }C", "a=B }C" },
+                new string[] { "A=B { }C", "A", "B { }C", "a=B { }C" },
+                new string[] { "A= {B;{}", "A", "{B;{}", "a={B;{}" },
+                new string[] { "A= {B;{}}}", "A", "{B;{}}}", "a={B;{}}}" },
+                new string[] { "A= B{C {}}", "A", "B{C {}}", "a=B{C {}}" },
+                new string[] { "A= {C {};B=A", "A", "{C {}", "a={C {};b=A" },
+                new string[] { "A= {C {}  ", "A", "{C {}", "a={C {}" },
+                new string[] { "A= {C {}  ;B=A", "A", "{C {}", "a={C {};b=A" },
+                new string[] { "A= {C {}}}", "A", "{C {}}}", "a={C {}}}" },
+                new string[] { "A={B=C}", "A", "{B=C}", "a={B=C}" },
+                new string[] { "A={B==C}", "A", "{B==C}", "a={B==C}" },
+                new string[] { "A=B==C", "A", "B==C", "a=B==C" },
+                new string[] { "A='='", "A", "'='", "a='='" },
+                new string[] { "A='=='", "A", "'=='", "a='=='" },
+                new string[] { "A=\"=\"", "A", "\"=\"", "a=\"=\"" },
+                new string[] { "A=\"==\"", "A", "\"==\"", "a=\"==\"" },
+                new string[] { "A={=}", "A", "{=}", "a={=}" },
+                new string[] { "A={==}", "A", "{==}", "a={==}" },
+                new string[] { "A=B=C", "A", "B=C", "a=B=C" },
+                new string[] { "A(=)=B", "A(", ")=B", "a(=)=B" },
+                new string[] { "A==B=C", "A", "=B=C", "a==B=C" },
+                new string[] { "A===B=C", "A", "==B=C", "a===B=C" },
+                new string[] { "A'='=B=C", "A'", "'=B=C", "a'='=B=C" },
+                new string[] { "A\"=\"=B=C", "A\"", "\"=B=C", "a\"=\"=B=C" },
+                new string[] { "\"A=\"=BC", "\"a", "\"=BC", "\"a=\"=BC" },
+                new string[] { "(A=)=BC", "(a", ")=BC", "(a=)=BC" },
+                new string[] { "A==C=B==C", "A", "=C=B==C", "a==C=B==C" },
+            };
 
             for (int i = 0; i < odbc_tests.Length; i++)
             {
@@ -2179,7 +2488,8 @@ namespace System.Data.Tests.Common
         [Fact]
         public void EmbeddedChar_ConnectionString_Invalid()
         {
-            string[] tests = new string[] {
+            string[] tests = new string[]
+            {
                 " =",
                 "=",
                 "=;",
@@ -2191,13 +2501,14 @@ namespace System.Data.Tests.Common
                 "A=B { {;} }",
                 "A=B { ; }C",
                 "A=BC'E;F'D",
-                };
+            };
 
-            DbConnectionStringBuilder[] cbs = new DbConnectionStringBuilder[] {
-                new DbConnectionStringBuilder (),
-                new DbConnectionStringBuilder (false),
-                new DbConnectionStringBuilder (true)
-                };
+            DbConnectionStringBuilder[] cbs = new DbConnectionStringBuilder[]
+            {
+                new DbConnectionStringBuilder(),
+                new DbConnectionStringBuilder(false),
+                new DbConnectionStringBuilder(true),
+            };
 
             for (int i = 0; i < tests.Length; i++)
             {
@@ -2250,7 +2561,9 @@ namespace System.Data.Tests.Common
                 if (found)
                     continue;
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(() => sb.ConnectionString = test1[0]);
+                ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                    sb.ConnectionString = test1[0]
+                );
                 // Format of the initialization string does
                 // not conform to specification starting
                 // at index 0

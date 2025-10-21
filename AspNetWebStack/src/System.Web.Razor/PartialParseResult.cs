@@ -17,12 +17,16 @@ namespace System.Web.Razor
     /// The result of attempting an incremental parse
     /// </summary>
     /// <remarks>
-    /// Either the Accepted or Rejected flag is ALWAYS set.  
+    /// Either the Accepted or Rejected flag is ALWAYS set.
     /// Additionally, Provisional may be set with Accepted and SpanContextChanged may be set with Rejected.
     /// Provisional may NOT be set with Rejected and SpanContextChanged may NOT be set with Accepted.
     /// </remarks>
     [Flags]
-    [SuppressMessage("Microsoft.Naming", "CA1714:FlagsEnumsShouldHavePluralNames", Justification = "The singular name is more appropriate here")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1714:FlagsEnumsShouldHavePluralNames",
+        Justification = "The singular name is more appropriate here"
+    )]
     public enum PartialParseResult
     {
         /// <summary>
@@ -55,6 +59,6 @@ namespace System.Web.Razor
         /// <summary>
         /// Indicates that the edit requires an auto completion to occur
         /// </summary>
-        AutoCompleteBlock = 16
+        AutoCompleteBlock = 16,
     }
 }

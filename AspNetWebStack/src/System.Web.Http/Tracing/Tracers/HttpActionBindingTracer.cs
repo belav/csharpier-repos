@@ -43,7 +43,10 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerBinding; }
         }
 
-        public override Task ExecuteBindingAsync(Controllers.HttpActionContext actionContext, CancellationToken cancellationToken)
+        public override Task ExecuteBindingAsync(
+            Controllers.HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             return _traceWriter.TraceBeginEndAsync(
                 actionContext.ControllerContext.Request,
@@ -57,21 +60,26 @@ namespace System.Web.Http.Tracing.Tracers
                 {
                     if (!actionContext.ModelState.IsValid)
                     {
-                        tr.Message = Error.Format(SRResources.TraceModelStateInvalidMessage,
-                                                  FormattingUtilities.ModelStateToString(
-                                                        actionContext.ModelState));
+                        tr.Message = Error.Format(
+                            SRResources.TraceModelStateInvalidMessage,
+                            FormattingUtilities.ModelStateToString(actionContext.ModelState)
+                        );
                     }
                     else
                     {
                         if (actionContext.ActionDescriptor.GetParameters().Count > 0)
                         {
-                            tr.Message = Error.Format(SRResources.TraceValidModelState,
-                                                      FormattingUtilities.ActionArgumentsToString(
-                                                            actionContext.ActionArguments));
+                            tr.Message = Error.Format(
+                                SRResources.TraceValidModelState,
+                                FormattingUtilities.ActionArgumentsToString(
+                                    actionContext.ActionArguments
+                                )
+                            );
                         }
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

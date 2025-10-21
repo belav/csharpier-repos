@@ -18,20 +18,27 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureSeverity
 {
-    public abstract partial class MultipleCodeStyleOptionBasedSeverityConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class MultipleCodeStyleOptionBasedSeverityConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         protected internal override string GetLanguage() => LanguageNames.CSharp;
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CSharpUseInferredMemberNameDiagnosticAnalyzer(), new ConfigureSeverityLevelCodeFixProvider());
+                new CSharpUseInferredMemberNameDiagnosticAnalyzer(),
+                new ConfigureSeverityLevelCodeFixProvider()
+            );
         }
 
         [Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
-        public class ErrorConfigurationTests : MultipleCodeStyleOptionBasedSeverityConfigurationTests
+        public class ErrorConfigurationTests
+            : MultipleCodeStyleOptionBasedSeverityConfigurationTests
         {
             protected override int CodeActionIndex => 4;
 

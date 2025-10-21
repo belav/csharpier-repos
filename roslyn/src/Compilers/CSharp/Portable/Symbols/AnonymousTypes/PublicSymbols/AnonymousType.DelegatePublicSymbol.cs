@@ -16,29 +16,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             private ImmutableArray<Symbol> _lazyMembers;
 
-            internal AnonymousDelegatePublicSymbol(AnonymousTypeManager manager, AnonymousTypeDescriptor typeDescr) :
-                base(manager, typeDescr)
-            {
-            }
+            internal AnonymousDelegatePublicSymbol(
+                AnonymousTypeManager manager,
+                AnonymousTypeDescriptor typeDescr
+            )
+                : base(manager, typeDescr) { }
 
             internal override NamedTypeSymbol MapToImplementationSymbol()
             {
                 return Manager.ConstructAnonymousDelegateImplementationSymbol(this, generation: 0);
             }
 
-            internal override AnonymousTypeOrDelegatePublicSymbol SubstituteTypes(AbstractTypeMap map)
+            internal override AnonymousTypeOrDelegatePublicSymbol SubstituteTypes(
+                AbstractTypeMap map
+            )
             {
                 var typeDescr = TypeDescriptor.SubstituteTypes(map, out bool changed);
-                return changed ?
-                    new AnonymousDelegatePublicSymbol(Manager, typeDescr) :
-                    this;
+                return changed ? new AnonymousDelegatePublicSymbol(Manager, typeDescr) : this;
             }
 
             public override TypeKind TypeKind => TypeKind.Delegate;
 
-            internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics => Manager.System_MulticastDelegate;
+            internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+                Manager.System_MulticastDelegate;
 
-            public override IEnumerable<string> MemberNames => GetMembers().SelectAsArray(member => member.Name);
+            public override IEnumerable<string> MemberNames =>
+                GetMembers().SelectAsArray(member => member.Name);
 
             public override ImmutableArray<Symbol> GetMembers()
             {
@@ -51,28 +54,50 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             private ImmutableArray<Symbol> CreateMembers()
             {
-                var constructor = new SynthesizedDelegateConstructor(this, Manager.System_Object, Manager.System_IntPtr);
+                var constructor = new SynthesizedDelegateConstructor(
+                    this,
+                    Manager.System_Object,
+                    Manager.System_IntPtr
+                );
                 var fields = TypeDescriptor.Fields;
                 int parameterCount = fields.Length - 1;
-                var parameters = ArrayBuilder<SynthesizedDelegateInvokeMethod.ParameterDescription>.GetInstance(parameterCount);
+                var parameters =
+                    ArrayBuilder<SynthesizedDelegateInvokeMethod.ParameterDescription>.GetInstance(
+                        parameterCount
+                    );
                 for (int i = 0; i < parameterCount; i++)
                 {
                     var field = fields[i];
                     parameters.Add(
-                        new SynthesizedDelegateInvokeMethod.ParameterDescription(field.TypeWithAnnotations, field.RefKind, field.Scope, field.DefaultValue, isParams: field.IsParams, hasUnscopedRefAttribute: field.HasUnscopedRefAttribute));
+                        new SynthesizedDelegateInvokeMethod.ParameterDescription(
+                            field.TypeWithAnnotations,
+                            field.RefKind,
+                            field.Scope,
+                            field.DefaultValue,
+                            isParams: field.IsParams,
+                            hasUnscopedRefAttribute: field.HasUnscopedRefAttribute
+                        )
+                    );
                 }
                 var returnField = fields.Last();
-                var invokeMethod = new SynthesizedDelegateInvokeMethod(this, parameters, returnField.TypeWithAnnotations, returnField.RefKind);
+                var invokeMethod = new SynthesizedDelegateInvokeMethod(
+                    this,
+                    parameters,
+                    returnField.TypeWithAnnotations,
+                    returnField.RefKind
+                );
                 parameters.Free();
                 // https://github.com/dotnet/roslyn/issues/56808: Synthesized delegates should include BeginInvoke() and EndInvoke().
                 return ImmutableArray.Create<Symbol>(constructor, invokeMethod);
             }
 
-            public override ImmutableArray<Symbol> GetMembers(string name) => GetMembers().WhereAsArray((member, name) => member.Name == name, name);
+            public override ImmutableArray<Symbol> GetMembers(string name) =>
+                GetMembers().WhereAsArray((member, name) => member.Name == name, name);
 
             public override bool IsImplicitlyDeclared => true;
 
-            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+            public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+                ImmutableArray<SyntaxReference>.Empty;
 
             internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
             {

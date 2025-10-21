@@ -7,7 +7,6 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using Xunit;
 
 namespace TestUnhandledExceptionTester
@@ -21,10 +20,16 @@ namespace TestUnhandledExceptionTester
 
             Process testProcess = new Process();
 
-            testProcess.StartInfo.FileName = Path.Combine(Environment.GetEnvironmentVariable("CORE_ROOT"), "corerun");
-            testProcess.StartInfo.Arguments = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "unhandled.dll");
+            testProcess.StartInfo.FileName = Path.Combine(
+                Environment.GetEnvironmentVariable("CORE_ROOT"),
+                "corerun"
+            );
+            testProcess.StartInfo.Arguments = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "unhandled.dll"
+            );
             testProcess.StartInfo.RedirectStandardError = true;
-            testProcess.ErrorDataReceived += (sender, line) => 
+            testProcess.ErrorDataReceived += (sender, line) =>
             {
                 Console.WriteLine($"\"{line.Data}\"");
                 if (!string.IsNullOrEmpty(line.Data))
@@ -58,7 +63,9 @@ namespace TestUnhandledExceptionTester
 
             if (expectedExitCode != testProcess.ExitCode)
             {
-                throw new Exception($"Wrong exit code 0x{testProcess.ExitCode:X8}, expected 0x{expectedExitCode:X8}");
+                throw new Exception(
+                    $"Wrong exit code 0x{testProcess.ExitCode:X8}, expected 0x{expectedExitCode:X8}"
+                );
             }
 
             int exceptionStackFrameLine = 1;
@@ -81,10 +88,13 @@ namespace TestUnhandledExceptionTester
                 {
                     throw new Exception("Missing Unhandled exception header");
                 }
-
             }
 
-            if (!lines[exceptionStackFrameLine].TrimStart().StartsWith("at TestUnhandledException.Program.Main"))
+            if (
+                !lines[exceptionStackFrameLine]
+                    .TrimStart()
+                    .StartsWith("at TestUnhandledException.Program.Main")
+            )
             {
                 throw new Exception("Missing exception source frame");
             }

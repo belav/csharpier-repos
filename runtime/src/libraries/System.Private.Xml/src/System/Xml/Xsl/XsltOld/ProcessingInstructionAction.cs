@@ -12,6 +12,7 @@ namespace System.Xml.Xsl.XsltOld
         private const int NameReady = 3;
 
         private Avt? _nameAvt;
+
         // Compile time precalculated AVT
         private string? _name;
 
@@ -86,7 +87,15 @@ namespace System.Xml.Xsl.XsltOld
 
                 case NameReady:
                     Debug.Assert(frame.StoredOutput != null);
-                    if (processor.BeginEvent(XPathNodeType.ProcessingInstruction, string.Empty, frame.StoredOutput, string.Empty, false) == false)
+                    if (
+                        processor.BeginEvent(
+                            XPathNodeType.ProcessingInstruction,
+                            string.Empty,
+                            frame.StoredOutput,
+                            string.Empty,
+                            false
+                        ) == false
+                    )
                     {
                         // Come back later
                         frame.State = NameReady;
@@ -94,7 +103,7 @@ namespace System.Xml.Xsl.XsltOld
                     }
                     processor.PushActionFrame(frame);
                     frame.State = ProcessingChildren;
-                    break;                              // Allow children to run
+                    break; // Allow children to run
 
                 case ProcessingChildren:
                     if (processor.EndEvent(XPathNodeType.ProcessingInstruction) == false)
@@ -110,7 +119,6 @@ namespace System.Xml.Xsl.XsltOld
                     break;
             }
         }
-
 
         internal static bool IsProcessingInstructionName(string? name)
         {

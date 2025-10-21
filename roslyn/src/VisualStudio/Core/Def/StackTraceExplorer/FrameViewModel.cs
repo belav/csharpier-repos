@@ -43,9 +43,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         public string AutomationName => string.Join("", Inlines.Select(InlineExtensions.GetText));
 
         /// <summary>
-        /// By default datatemplates in WPF bind AutomationName to the tostring() of 
+        /// By default datatemplates in WPF bind AutomationName to the tostring() of
         /// the data item. It's possible to fix this with some XAML trickery, but
-        /// easy enough to just override the ToString() here and provide something 
+        /// easy enough to just override the ToString() here and provide something
         /// that makes sense. See https://docs.microsoft.com/en-us/windows/apps/design/controls/item-templates-listview
         /// for more information.
         /// </summary>

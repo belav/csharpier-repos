@@ -15,11 +15,15 @@ namespace Roslyn.Test.Utilities
 {
     public sealed class TestSourceReferenceResolver : SourceReferenceResolver
     {
-        public static readonly SourceReferenceResolver Default = new TestSourceReferenceResolver(sources: null);
+        public static readonly SourceReferenceResolver Default = new TestSourceReferenceResolver(
+            sources: null
+        );
 
         public static SourceReferenceResolver Create(params KeyValuePair<string, string>[] sources)
         {
-            return new TestSourceReferenceResolver(sources.ToDictionary(p => p.Key, p => (object)p.Value));
+            return new TestSourceReferenceResolver(
+                sources.ToDictionary(p => p.Key, p => (object)p.Value)
+            );
         }
 
         public static SourceReferenceResolver Create(params KeyValuePair<string, object>[] sources)
@@ -29,7 +33,9 @@ namespace Roslyn.Test.Utilities
 
         public static SourceReferenceResolver Create(Dictionary<string, string> sources = null)
         {
-            return new TestSourceReferenceResolver(sources.ToDictionary(p => p.Key, p => (object)p.Value));
+            return new TestSourceReferenceResolver(
+                sources.ToDictionary(p => p.Key, p => (object)p.Value)
+            );
         }
 
         private readonly Dictionary<string, object> _sources;
@@ -49,7 +55,9 @@ namespace Roslyn.Test.Utilities
             if (_sources != null && resolvedPath != null)
             {
                 var data = _sources[resolvedPath];
-                return new MemoryStream((data is string) ? Encoding.UTF8.GetBytes((string)data) : (byte[])data);
+                return new MemoryStream(
+                    (data is string) ? Encoding.UTF8.GetBytes((string)data) : (byte[])data
+                );
             }
             else
             {

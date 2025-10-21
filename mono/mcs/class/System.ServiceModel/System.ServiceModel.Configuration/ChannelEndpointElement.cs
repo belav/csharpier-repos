@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,182 +49,246 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[MonoTODO]
-	public sealed partial class ChannelEndpointElement
-		 : ConfigurationElement
-	{
-		// Static Fields
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty address;
-		static ConfigurationProperty behavior_configuration;
-		static ConfigurationProperty binding;
-		static ConfigurationProperty binding_configuration;
-		static ConfigurationProperty contract;
-		static ConfigurationProperty headers;
-		static ConfigurationProperty identity;
-		static ConfigurationProperty name;
-		static ConfigurationProperty endpoint_configuration;
-		static ConfigurationProperty kind;
+    [MonoTODO]
+    public sealed partial class ChannelEndpointElement : ConfigurationElement
+    {
+        // Static Fields
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty address;
+        static ConfigurationProperty behavior_configuration;
+        static ConfigurationProperty binding;
+        static ConfigurationProperty binding_configuration;
+        static ConfigurationProperty contract;
+        static ConfigurationProperty headers;
+        static ConfigurationProperty identity;
+        static ConfigurationProperty name;
+        static ConfigurationProperty endpoint_configuration;
+        static ConfigurationProperty kind;
 
-		static ChannelEndpointElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-			address = new ConfigurationProperty ("address",
-				typeof (Uri), null, new UriTypeConverter (), null,
-				ConfigurationPropertyOptions.None);
+        static ChannelEndpointElement()
+        {
+            properties = new ConfigurationPropertyCollection();
+            address = new ConfigurationProperty(
+                "address",
+                typeof(Uri),
+                null,
+                new UriTypeConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			behavior_configuration = new ConfigurationProperty ("behaviorConfiguration",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+            behavior_configuration = new ConfigurationProperty(
+                "behaviorConfiguration",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			binding = new ConfigurationProperty ("binding",
-				typeof (string), null, new StringConverter (), null,
-				ConfigurationPropertyOptions.IsRequired);
+            binding = new ConfigurationProperty(
+                "binding",
+                typeof(string),
+                null,
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired
+            );
 
-			binding_configuration = new ConfigurationProperty ("bindingConfiguration",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.None);
+            binding_configuration = new ConfigurationProperty(
+                "bindingConfiguration",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			contract = new ConfigurationProperty ("contract",
-				typeof (string), null, new StringConverter (), null,
-				ConfigurationPropertyOptions.IsRequired| ConfigurationPropertyOptions.IsKey);
+            contract = new ConfigurationProperty(
+                "contract",
+                typeof(string),
+                null,
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			headers = new ConfigurationProperty ("headers",
-				typeof (AddressHeaderCollectionElement), null, null/* FIXME: get converter for AddressHeaderCollectionElement*/, null,
-				ConfigurationPropertyOptions.None);
+            headers = new ConfigurationProperty(
+                "headers",
+                typeof(AddressHeaderCollectionElement),
+                null,
+                null /* FIXME: get converter for AddressHeaderCollectionElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			identity = new ConfigurationProperty ("identity",
-				typeof (IdentityElement), null, null/* FIXME: get converter for IdentityElement*/, null,
-				ConfigurationPropertyOptions.None);
+            identity = new ConfigurationProperty(
+                "identity",
+                typeof(IdentityElement),
+                null,
+                null /* FIXME: get converter for IdentityElement*/
+                ,
+                null,
+                ConfigurationPropertyOptions.None
+            );
 
-			name = new ConfigurationProperty ("name",
-				typeof (string), "", new StringConverter (), null,
-				ConfigurationPropertyOptions.IsKey);
+            name = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                "",
+                new StringConverter(),
+                null,
+                ConfigurationPropertyOptions.IsKey
+            );
 
-			endpoint_configuration = new ConfigurationProperty ("endpointConfiguration", typeof (string), "", null, new StringValidator (0), ConfigurationPropertyOptions.IsKey);
-			kind = new ConfigurationProperty ("kind", typeof (string), "", null, new StringValidator (0), ConfigurationPropertyOptions.IsKey);
+            endpoint_configuration = new ConfigurationProperty(
+                "endpointConfiguration",
+                typeof(string),
+                "",
+                null,
+                new StringValidator(0),
+                ConfigurationPropertyOptions.IsKey
+            );
+            kind = new ConfigurationProperty(
+                "kind",
+                typeof(string),
+                "",
+                null,
+                new StringValidator(0),
+                ConfigurationPropertyOptions.IsKey
+            );
 
-			properties.Add (address);
-			properties.Add (behavior_configuration);
-			properties.Add (binding);
-			properties.Add (binding_configuration);
-			properties.Add (contract);
-			properties.Add (headers);
-			properties.Add (identity);
-			properties.Add (name);
+            properties.Add(address);
+            properties.Add(behavior_configuration);
+            properties.Add(binding);
+            properties.Add(binding_configuration);
+            properties.Add(contract);
+            properties.Add(headers);
+            properties.Add(identity);
+            properties.Add(name);
 
-			properties.Add (endpoint_configuration);
-			properties.Add (kind);
-		}
+            properties.Add(endpoint_configuration);
+            properties.Add(kind);
+        }
 
-		public ChannelEndpointElement ()
-		{
-		}
+        public ChannelEndpointElement() { }
 
+        // Properties
 
-		// Properties
+        [ConfigurationProperty("address", Options = ConfigurationPropertyOptions.None)]
+        public Uri Address
+        {
+            get { return (Uri)base[address]; }
+            set { base[address] = value; }
+        }
 
-		[ConfigurationProperty ("address",
-			 Options = ConfigurationPropertyOptions.None)]
-		public Uri Address {
-			get { return (Uri) base [address]; }
-			set { base [address] = value; }
-		}
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "behaviorConfiguration",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public string BehaviorConfiguration
+        {
+            get { return (string)base[behavior_configuration]; }
+            set { base[behavior_configuration] = value; }
+        }
 
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("behaviorConfiguration",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		public string BehaviorConfiguration {
-			get { return (string) base [behavior_configuration]; }
-			set { base [behavior_configuration] = value; }
-		}
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        [ConfigurationProperty(
+            "binding",
+            Options = ConfigurationPropertyOptions.IsRequired,
+            IsRequired = true
+        )]
+        public string Binding
+        {
+            get { return (string)base[binding]; }
+            set { base[binding] = value; }
+        }
 
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		[ConfigurationProperty ("binding",
-			 Options = ConfigurationPropertyOptions.IsRequired,
-			IsRequired = true)]
-		public string Binding {
-			get { return (string) base [binding]; }
-			set { base [binding] = value; }
-		}
+        [ConfigurationProperty(
+            "bindingConfiguration",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string BindingConfiguration
+        {
+            get { return (string)base[binding_configuration]; }
+            set { base[binding_configuration] = value; }
+        }
 
-		[ConfigurationProperty ("bindingConfiguration",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.None)]
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string BindingConfiguration {
-			get { return (string) base [binding_configuration]; }
-			set { base [binding_configuration] = value; }
-		}
+        [ConfigurationProperty(
+            "contract",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
+            IsRequired = true,
+            IsKey = true
+        )]
+        [StringValidator(MinLength = 1, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Contract
+        {
+            get { return (string)base[contract]; }
+            set { base[contract] = value; }
+        }
 
-		[ConfigurationProperty ("contract",
-			 Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey,
-			IsRequired = true,
-			IsKey = true)]
-		[StringValidator ( MinLength = 1,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Contract {
-			get { return (string) base [contract]; }
-			set { base [contract] = value; }
-		}
+        [ConfigurationProperty("headers", Options = ConfigurationPropertyOptions.None)]
+        public AddressHeaderCollectionElement Headers
+        {
+            get { return (AddressHeaderCollectionElement)base[headers]; }
+        }
 
-		[ConfigurationProperty ("headers",
-			 Options = ConfigurationPropertyOptions.None)]
-		public AddressHeaderCollectionElement Headers {
-			get { return (AddressHeaderCollectionElement) base [headers]; }
-		}
+        [ConfigurationProperty("identity", Options = ConfigurationPropertyOptions.None)]
+        public IdentityElement Identity
+        {
+            get { return (IdentityElement)base[identity]; }
+        }
 
-		[ConfigurationProperty ("identity",
-			 Options = ConfigurationPropertyOptions.None)]
-		public IdentityElement Identity {
-			get { return (IdentityElement) base [identity]; }
-		}
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey,
+            IsKey = true
+        )]
+        [StringValidator(MinLength = 0, MaxLength = int.MaxValue, InvalidCharacters = null)]
+        public string Name
+        {
+            get { return (string)base[name]; }
+            set { base[name] = value; }
+        }
 
-		[ConfigurationProperty ("name",
-			 DefaultValue = "",
-			 Options = ConfigurationPropertyOptions.IsKey,
-			IsKey = true)]
-		[StringValidator ( MinLength = 0,
-			MaxLength = int.MaxValue,
-			 InvalidCharacters = null)]
-		public string Name {
-			get { return (string) base [name]; }
-			set { base [name] = value; }
-		}
+        [StringValidator(MinLength = 0)]
+        [ConfigurationProperty(
+            "endpointConfiguration",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
+        public string EndpointConfiguration
+        {
+            get { return (string)base[endpoint_configuration]; }
+            set { base[endpoint_configuration] = value; }
+        }
 
-		[StringValidator (MinLength = 0)]
-		[ConfigurationProperty ("endpointConfiguration", DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
-		public string EndpointConfiguration {
-			get { return (string) base [endpoint_configuration]; }
-			set { base [endpoint_configuration] = value; }
-		}
+        [ConfigurationProperty(
+            "kind",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
+        [StringValidator(MinLength = 0)]
+        public string Kind
+        {
+            get { return (string)base[kind]; }
+            set { base[kind] = value; }
+        }
 
-		[ConfigurationProperty ("kind", DefaultValue = "", Options = ConfigurationPropertyOptions.IsKey)]
-		[StringValidator (MinLength = 0)]
-		public string Kind {
-			get { return (string) base [kind]; }
-			set { base [kind] = value; }
-		}
-
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-
-	}
-
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }

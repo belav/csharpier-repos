@@ -52,7 +52,7 @@ public class ComplexTypeData : ISetSource
         {
             AddressLine1 = "804 S. Lakeshore Road",
             ZipCode = 38654,
-            Country = new Country { FullName = "United States", Code = "US" }
+            Country = new Country { FullName = "United States", Code = "US" },
         };
 
         var customer1 = new Customer
@@ -60,7 +60,7 @@ public class ComplexTypeData : ISetSource
             Id = 1,
             Name = "Mona Cy",
             ShippingAddress = address1,
-            BillingAddress = address1
+            BillingAddress = address1,
         };
 
         var customer2 = new Customer
@@ -71,21 +71,21 @@ public class ComplexTypeData : ISetSource
             {
                 AddressLine1 = "72 Hickory Rd.",
                 ZipCode = 07728,
-                Country = new Country { FullName = "Germany", Code = "DE" }
+                Country = new Country { FullName = "Germany", Code = "DE" },
             },
             BillingAddress = new Address
             {
                 AddressLine1 = "79 Main St.",
                 ZipCode = 29293,
-                Country = new Country { FullName = "Germany", Code = "DE" }
-            }
+                Country = new Country { FullName = "Germany", Code = "DE" },
+            },
         };
 
         var address3 = new Address
         {
             AddressLine1 = "79 Main St.",
             ZipCode = 29293,
-            Country = new Country { FullName = "Germany", Code = "DE" }
+            Country = new Country { FullName = "Germany", Code = "DE" },
         };
 
         var customer3 = new Customer
@@ -93,46 +93,38 @@ public class ComplexTypeData : ISetSource
             Id = 3,
             Name = "Monty Elias",
             ShippingAddress = address3,
-            BillingAddress = address3
+            BillingAddress = address3,
         };
 
-        return new List<Customer>
-        {
-            customer1,
-            customer2,
-            customer3
-        };
+        return new List<Customer> { customer1, customer2, customer3 };
     }
 
-    private static IReadOnlyList<CustomerGroup> CreateCustomerGroups(IReadOnlyList<Customer> customers)
+    private static IReadOnlyList<CustomerGroup> CreateCustomerGroups(
+        IReadOnlyList<Customer> customers
+    )
     {
         var group1 = new CustomerGroup
         {
             Id = 1,
             RequiredCustomer = customers[0],
-            OptionalCustomer = customers[1]
+            OptionalCustomer = customers[1],
         };
 
         var group2 = new CustomerGroup
         {
             Id = 2,
             RequiredCustomer = customers[1],
-            OptionalCustomer = customers[0]
+            OptionalCustomer = customers[0],
         };
 
         var group3 = new CustomerGroup
         {
             Id = 3,
             RequiredCustomer = customers[0],
-            OptionalCustomer = null
+            OptionalCustomer = null,
         };
 
-        return new List<CustomerGroup>
-        {
-            group1,
-            group2,
-            group3
-        };
+        return new List<CustomerGroup> { group1, group2, group3 };
     }
 
     private static IReadOnlyList<ValuedCustomer> CreateValuedCustomers()
@@ -141,7 +133,7 @@ public class ComplexTypeData : ISetSource
         {
             AddressLine1 = "804 S. Lakeshore Road",
             ZipCode = 38654,
-            Country = new CountryStruct { FullName = "United States", Code = "US" }
+            Country = new CountryStruct { FullName = "United States", Code = "US" },
         };
 
         var customer1 = new ValuedCustomer
@@ -149,7 +141,7 @@ public class ComplexTypeData : ISetSource
             Id = 1,
             Name = "Mona Cy",
             ShippingAddress = address1,
-            BillingAddress = address1
+            BillingAddress = address1,
         };
 
         var customer2 = new ValuedCustomer
@@ -160,21 +152,21 @@ public class ComplexTypeData : ISetSource
             {
                 AddressLine1 = "72 Hickory Rd.",
                 ZipCode = 07728,
-                Country = new CountryStruct { FullName = "Germany", Code = "DE" }
+                Country = new CountryStruct { FullName = "Germany", Code = "DE" },
             },
             BillingAddress = new AddressStruct
             {
                 AddressLine1 = "79 Main St.",
                 ZipCode = 29293,
-                Country = new CountryStruct { FullName = "Germany", Code = "DE" }
-            }
+                Country = new CountryStruct { FullName = "Germany", Code = "DE" },
+            },
         };
 
         var address3 = new AddressStruct
         {
             AddressLine1 = "79 Main St.",
             ZipCode = 29293,
-            Country = new CountryStruct { FullName = "Germany", Code = "DE" }
+            Country = new CountryStruct { FullName = "Germany", Code = "DE" },
         };
 
         var customer3 = new ValuedCustomer
@@ -182,46 +174,38 @@ public class ComplexTypeData : ISetSource
             Id = 3,
             Name = "Monty Elias",
             ShippingAddress = address3,
-            BillingAddress = address3
+            BillingAddress = address3,
         };
 
-        return new List<ValuedCustomer>
-        {
-            customer1,
-            customer2,
-            customer3
-        };
+        return new List<ValuedCustomer> { customer1, customer2, customer3 };
     }
 
-    private static IReadOnlyList<ValuedCustomerGroup> CreateValuedCustomerGroups(IReadOnlyList<ValuedCustomer> customers)
+    private static IReadOnlyList<ValuedCustomerGroup> CreateValuedCustomerGroups(
+        IReadOnlyList<ValuedCustomer> customers
+    )
     {
         var group1 = new ValuedCustomerGroup
         {
             Id = 1,
             RequiredCustomer = customers[0],
-            OptionalCustomer = customers[1]
+            OptionalCustomer = customers[1],
         };
 
         var group2 = new ValuedCustomerGroup
         {
             Id = 2,
             RequiredCustomer = customers[1],
-            OptionalCustomer = customers[0]
+            OptionalCustomer = customers[0],
         };
 
         var group3 = new ValuedCustomerGroup
         {
             Id = 3,
             RequiredCustomer = customers[0],
-            OptionalCustomer = null
+            OptionalCustomer = null,
         };
 
-        return new List<ValuedCustomerGroup>
-        {
-            group1,
-            group2,
-            group3
-        };
+        return new List<ValuedCustomerGroup> { group1, group2, group3 };
     }
 
     public static void Seed(PoolableDbContext context)

@@ -11,7 +11,12 @@ namespace System.Web.Mvc.Test
         public void Constructor()
         {
             // Arrange & Act
-            var rule = new ModelClientValidationMembershipPasswordRule("ErrorMessage", 10, 5, "regex-value");
+            var rule = new ModelClientValidationMembershipPasswordRule(
+                "ErrorMessage",
+                10,
+                5,
+                "regex-value"
+            );
 
             // Assert
             Assert.Equal("password", rule.ValidationType);

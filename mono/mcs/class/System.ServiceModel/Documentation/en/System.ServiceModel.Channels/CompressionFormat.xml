@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="CompressionFormat" FullName="System.ServiceModel.Channels.CompressionFormat">
   <TypeSignature Language="C#" Value="public enum CompressionFormat" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed CompressionFormat extends System.Enum" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed CompressionFormat extends System.Enum"
+  />
   <AssemblyInfo>
     <AssemblyName>System.ServiceModel</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -19,7 +22,10 @@
   <Members>
     <Member MemberName="Deflate">
       <MemberSignature Language="C#" Value="Deflate" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Channels.CompressionFormat Deflate = int32(2)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.Channels.CompressionFormat Deflate = int32(2)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -36,7 +42,10 @@
     </Member>
     <Member MemberName="GZip">
       <MemberSignature Language="C#" Value="GZip" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Channels.CompressionFormat GZip = int32(1)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.Channels.CompressionFormat GZip = int32(1)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -53,7 +62,10 @@
     </Member>
     <Member MemberName="None">
       <MemberSignature Language="C#" Value="None" />
-      <MemberSignature Language="ILAsm" Value=".field public static literal valuetype System.ServiceModel.Channels.CompressionFormat None = int32(0)" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".field public static literal valuetype System.ServiceModel.Channels.CompressionFormat None = int32(0)"
+      />
       <MemberType>Field</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

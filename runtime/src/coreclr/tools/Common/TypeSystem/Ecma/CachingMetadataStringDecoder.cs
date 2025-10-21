@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Reflection.Metadata;
-using Debug = System.Diagnostics.Debug;
-
 using Internal.NativeFormat;
+using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.Ecma
 {
@@ -106,7 +105,10 @@ namespace Internal.TypeSystem.Ecma
 #if DEBUG
             for (var i = 0; i < length; i++)
             {
-                Debug.Assert((ascii[i] & 0x80) == 0, "The byte* input to this method must be valid ASCII.");
+                Debug.Assert(
+                    (ascii[i] & 0x80) == 0,
+                    "The byte* input to this method must be valid ASCII."
+                );
             }
 #endif
 
@@ -153,7 +155,7 @@ namespace Internal.TypeSystem.Ecma
             var i1 = _evictionHint++ & (BucketSize - 1);
             idx = (idx + ((i1 * i1 + i1) / 2)) & mask;
 
-        foundIdx:
+            foundIdx:
             arr[idx].HashCode = hashCode;
             arr[idx].Text = s;
 
@@ -174,7 +176,11 @@ namespace Internal.TypeSystem.Ecma
         public override unsafe string GetString(byte* bytes, int byteCount)
         {
             bool isAscii;
-            int hashCode = TypeHashingAlgorithms.ComputeASCIINameHashCode(bytes, byteCount, out isAscii);
+            int hashCode = TypeHashingAlgorithms.ComputeASCIINameHashCode(
+                bytes,
+                byteCount,
+                out isAscii
+            );
 
             if (isAscii)
             {

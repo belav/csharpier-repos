@@ -13,10 +13,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
         [DataMember(Order = 0)]
         internal RemoteServiceCallbackId UnderlyingObject { get; }
 
-        public PythiaRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public PythiaRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static implicit operator PythiaRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId id)
-            => new(id);
+        public static implicit operator PythiaRemoteServiceCallbackIdWrapper(
+            RemoteServiceCallbackId id
+        ) => new(id);
     }
 }

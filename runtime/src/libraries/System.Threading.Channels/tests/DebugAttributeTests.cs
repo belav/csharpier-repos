@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Channels;
-using System.Collections.Generic;
 using Xunit;
 
 namespace System.Threading.Channels.Tests
@@ -17,7 +17,9 @@ namespace System.Threading.Channels.Tests
             yield return new object[] { c1.Reader };
             yield return new object[] { c1.Writer };
 
-            var c2 = Channel.CreateUnbounded<int>(new UnboundedChannelOptions() { SingleReader = true });
+            var c2 = Channel.CreateUnbounded<int>(
+                new UnboundedChannelOptions() { SingleReader = true }
+            );
             yield return new object[] { c2 };
             yield return new object[] { c2.Reader };
             yield return new object[] { c2.Writer };
@@ -28,7 +30,10 @@ namespace System.Threading.Channels.Tests
             yield return new object[] { c3.Writer };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         [MemberData(nameof(TestData))]
         public void TestDebuggerDisplaysAndTypeProxies(object obj)
         {
@@ -36,12 +41,16 @@ namespace System.Threading.Channels.Tests
             DebuggerAttributes.ValidateDebuggerTypeProxyProperties(obj);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void TestDequeueClass()
         {
             var c = Channel.CreateBounded<int>(10);
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(DebuggerAttributes.GetFieldValue(c, "_items"));
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                DebuggerAttributes.GetFieldValue(c, "_items")
+            );
         }
-
     }
 }

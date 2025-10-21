@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public sealed class IncrementalGeneratorRunStep
     {
-        internal IncrementalGeneratorRunStep(string? stepName, ImmutableArray<(IncrementalGeneratorRunStep Source, int OutputIndex)> inputs, ImmutableArray<(object Value, IncrementalStepRunReason OutputState)> outputs, TimeSpan elapsedTime)
+        internal IncrementalGeneratorRunStep(
+            string? stepName,
+            ImmutableArray<(IncrementalGeneratorRunStep Source, int OutputIndex)> inputs,
+            ImmutableArray<(object Value, IncrementalStepRunReason OutputState)> outputs,
+            TimeSpan elapsedTime
+        )
         {
             Debug.Assert(!inputs.IsDefault);
             Debug.Assert(!outputs.IsDefault);

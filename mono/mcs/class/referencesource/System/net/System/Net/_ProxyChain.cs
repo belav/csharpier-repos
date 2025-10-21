@@ -46,18 +46,12 @@ namespace System.Net
 
         internal IEnumerator<Uri> Enumerator
         {
-            get
-            {
-                return m_MainEnumerator == null ? GetEnumerator() : m_MainEnumerator;
-            }
+            get { return m_MainEnumerator == null ? GetEnumerator() : m_MainEnumerator; }
         }
 
         internal Uri Destination
         {
-            get
-            {
-                return m_Destination;
-            }
+            get { return m_Destination; }
         }
 
         // MoveNext can be time-consuming (download proxy script).  This lets you abort it.
@@ -102,20 +96,22 @@ namespace System.Net
                 {
                     if (m_Finished || m_CurrentIndex < 0)
                     {
-                        throw new InvalidOperationException(SR.GetString(SR.InvalidOperation_EnumOpCantHappen));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.InvalidOperation_EnumOpCantHappen)
+                        );
                     }
 
-                    GlobalLog.Assert(m_Chain.m_Cache.Count > m_CurrentIndex, "ProxyEnumerator::Current|Not all proxies made it to the cache.");
+                    GlobalLog.Assert(
+                        m_Chain.m_Cache.Count > m_CurrentIndex,
+                        "ProxyEnumerator::Current|Not all proxies made it to the cache."
+                    );
                     return m_Chain.m_Cache[m_CurrentIndex];
                 }
             }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return Current;
-                }
+                get { return Current; }
             }
 
             public bool MoveNext()
@@ -124,8 +120,10 @@ namespace System.Net
                 {
                     return false;
                 }
-
-                checked{m_CurrentIndex++;}
+                checked
+                {
+                    m_CurrentIndex++;
+                }
                 if (m_Chain.m_Cache.Count > m_CurrentIndex)
                 {
                     return true;
@@ -172,7 +170,10 @@ namespace System.Net
                     }
 
                     m_Chain.m_Cache.Add(nextProxy);
-                    GlobalLog.Assert(m_Chain.m_Cache.Count > m_CurrentIndex, "ProxyEnumerator::MoveNext|Not all proxies made it to the cache.");
+                    GlobalLog.Assert(
+                        m_Chain.m_Cache.Count > m_CurrentIndex,
+                        "ProxyEnumerator::MoveNext|Not all proxies made it to the cache."
+                    );
                     return true;
                 }
             }
@@ -187,7 +188,6 @@ namespace System.Net
         }
     }
 
-
     // This class implements failover logic for proxy scripts.
     internal class ProxyScriptChain : ProxyChain
     {
@@ -196,8 +196,8 @@ namespace System.Net
         private int m_CurrentIndex;
         private int m_SyncStatus;
 
-        internal ProxyScriptChain(WebProxy proxy, Uri destination) :
-            base(destination)
+        internal ProxyScriptChain(WebProxy proxy, Uri destination)
+            : base(destination)
         {
             m_Proxy = proxy;
         }
@@ -237,7 +237,8 @@ namespace System.Net
     {
         private bool m_ProxyRetrieved;
 
-        internal DirectProxy(Uri destination) : base(destination) { }
+        internal DirectProxy(Uri destination)
+            : base(destination) { }
 
         protected override bool GetNextProxy(out Uri proxy)
         {
@@ -256,8 +257,8 @@ namespace System.Net
     {
         private Uri m_Proxy;
 
-        internal StaticProxy(Uri destination, Uri proxy) :
-            base(destination)
+        internal StaticProxy(Uri destination, Uri proxy)
+            : base(destination)
         {
             if (proxy == null)
             {

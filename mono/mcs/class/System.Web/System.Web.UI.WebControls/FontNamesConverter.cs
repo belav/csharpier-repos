@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,66 +28,79 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class FontNamesConverter : System.ComponentModel.TypeConverter
+    {
+        #region Public Constructors
+        public FontNamesConverter() { }
+        #endregion	// Public Constructors
 
-	// CAS
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class FontNamesConverter : System.ComponentModel.TypeConverter 
-	{
-		#region Public Constructors
-		public FontNamesConverter() 
-		{
-		}
-		#endregion	// Public Constructors
+        #region Public Instance Methods
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof(string))
+            {
+                return true;
+            }
 
-		#region Public Instance Methods
-		public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) 
-		{
-			if (sourceType == typeof(string)) 
-			{
-				return true;
-			}
+            return base.CanConvertFrom(context, sourceType);
+        }
 
-			return base.CanConvertFrom(context, sourceType);
-		}
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
+            if (value is string)
+            {
+                string[] names;
+                string namelist;
+                int count;
 
-		public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) 
-		{
-			if (value is string) 
-			{
-				string[]	names;
-				string		namelist;
-				int		count;
+                namelist = (string)value;
 
-				namelist = (string)value;
+                if (namelist == string.Empty)
+                {
+                    return new string[0];
+                }
 
-				if (namelist == string.Empty) 
-				{
-					return new string[0];
-				}
+                names = namelist.Split(new char[] { ',' });
 
-				names = namelist.Split(new char[] { ',' });
+                count = names.Length;
+                for (int i = 0; i < count; i++)
+                {
+                    names[i] = names[i].Trim();
+                }
 
-				count = names.Length;
-				for (int i = 0; i < count; i++) 
-				{
-					names[i] = names[i].Trim();
-				}
+                return names;
+            }
+            return base.ConvertFrom(context, culture, value);
+        }
 
-				return names;
-			}
-			return base.ConvertFrom(context, culture, value);
-		}
-
-		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) 
-		{
-			if ((destinationType == typeof(string)) && (value is string[])) 
-			{
-				return String.Join(",", (string[])value);
-			}
-			return base.ConvertTo(context, culture, value, destinationType);
-		}
-		#endregion	// Public Instance Methods
-	}
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if ((destinationType == typeof(string)) && (value is string[]))
+            {
+                return String.Join(",", (string[])value);
+            }
+            return base.ConvertTo(context, culture, value, destinationType);
+        }
+        #endregion	// Public Instance Methods
+    }
 }

@@ -39,7 +39,9 @@ namespace System.IO.Tests
 
         public override string[] GetEntries(string path, string searchPattern)
         {
-            return Directory.EnumerateFiles(path, searchPattern, SearchOption.TopDirectoryOnly).ToArray();
+            return Directory
+                .EnumerateFiles(path, searchPattern, SearchOption.TopDirectoryOnly)
+                .ToArray();
         }
 
         public override string[] GetEntries(string path, string searchPattern, SearchOption option)
@@ -84,7 +86,10 @@ namespace System.IO.Tests
         public void Clone_Enumerator_Trimmed_SearchPattern()
         {
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
-            var enumerator1 = Directory.EnumerateFileSystemEntries(testDir.FullName, ((char)0xA).ToString());
+            var enumerator1 = Directory.EnumerateFileSystemEntries(
+                testDir.FullName,
+                ((char)0xA).ToString()
+            );
             var enumerator2 = enumerator1;
             Assert.Empty(enumerator1.ToArray());
             Assert.Empty(enumerator2.ToArray());
@@ -104,7 +109,6 @@ namespace System.IO.Tests
             Assert.Equal(0, enumerator.ToArray().Length);
         }
 
-
         [Fact]
         public void Trailing_Slash_Adds_Trailing_Star()
         {
@@ -112,7 +116,10 @@ namespace System.IO.Tests
             DirectoryInfo testDir = Directory.CreateDirectory(GetTestFilePath());
             Directory.CreateDirectory(Path.Combine(testDir.FullName, "a"));
             Directory.CreateDirectory(Path.Combine(testDir.FullName, "b"));
-            var enumerator = Directory.EnumerateDirectories(testDir.FullName, "a" + Path.DirectorySeparatorChar);
+            var enumerator = Directory.EnumerateDirectories(
+                testDir.FullName,
+                "a" + Path.DirectorySeparatorChar
+            );
             Assert.Equal(0, enumerator.ToArray().Length);
         }
     }
@@ -121,33 +128,50 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string dirName)
         {
-            return Directory.EnumerateFileSystemEntries(dirName, "*", SearchOption.TopDirectoryOnly).ToArray();
+            return Directory
+                .EnumerateFileSystemEntries(dirName, "*", SearchOption.TopDirectoryOnly)
+                .ToArray();
         }
 
         public override string[] GetEntries(string dirName, string searchPattern)
         {
-            return Directory.EnumerateFileSystemEntries(dirName, searchPattern, SearchOption.TopDirectoryOnly).ToArray();
+            return Directory
+                .EnumerateFileSystemEntries(dirName, searchPattern, SearchOption.TopDirectoryOnly)
+                .ToArray();
         }
 
-        public override string[] GetEntries(string dirName, string searchPattern, SearchOption option)
+        public override string[] GetEntries(
+            string dirName,
+            string searchPattern,
+            SearchOption option
+        )
         {
             return Directory.EnumerateFileSystemEntries(dirName, searchPattern, option).ToArray();
         }
     }
 
-    public class Directory_EnumFSE_str_str_so_alldirs : Directory_GetFileSystemEntries_str_str_so_alldirs
+    public class Directory_EnumFSE_str_str_so_alldirs
+        : Directory_GetFileSystemEntries_str_str_so_alldirs
     {
         public override string[] GetEntries(string dirName)
         {
-            return Directory.EnumerateFileSystemEntries(dirName, "*", SearchOption.AllDirectories).ToArray();
+            return Directory
+                .EnumerateFileSystemEntries(dirName, "*", SearchOption.AllDirectories)
+                .ToArray();
         }
 
         public override string[] GetEntries(string dirName, string searchPattern)
         {
-            return Directory.EnumerateFileSystemEntries(dirName, searchPattern, SearchOption.AllDirectories).ToArray();
+            return Directory
+                .EnumerateFileSystemEntries(dirName, searchPattern, SearchOption.AllDirectories)
+                .ToArray();
         }
 
-        public override string[] GetEntries(string dirName, string searchPattern, SearchOption option)
+        public override string[] GetEntries(
+            string dirName,
+            string searchPattern,
+            SearchOption option
+        )
         {
             return Directory.EnumerateFileSystemEntries(dirName, searchPattern, option).ToArray();
         }
@@ -182,15 +206,23 @@ namespace System.IO.Tests
     {
         public override string[] GetEntries(string dirName)
         {
-            return Directory.EnumerateDirectories(dirName, "*", SearchOption.TopDirectoryOnly).ToArray();
+            return Directory
+                .EnumerateDirectories(dirName, "*", SearchOption.TopDirectoryOnly)
+                .ToArray();
         }
 
         public override string[] GetEntries(string dirName, string searchPattern)
         {
-            return Directory.EnumerateDirectories(dirName, searchPattern, SearchOption.TopDirectoryOnly).ToArray();
+            return Directory
+                .EnumerateDirectories(dirName, searchPattern, SearchOption.TopDirectoryOnly)
+                .ToArray();
         }
 
-        public override string[] GetEntries(string dirName, string searchPattern, SearchOption option)
+        public override string[] GetEntries(
+            string dirName,
+            string searchPattern,
+            SearchOption option
+        )
         {
             return Directory.EnumerateDirectories(dirName, searchPattern, option).ToArray();
         }

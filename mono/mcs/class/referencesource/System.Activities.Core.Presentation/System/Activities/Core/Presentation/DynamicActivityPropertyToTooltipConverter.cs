@@ -24,7 +24,11 @@ namespace System.Activities.Core.Presentation
 
             if (property.Type == null)
             {
-                return string.Format(CultureInfo.CurrentUICulture, SR.PropertyReferenceNotResolved, property.Name);
+                return string.Format(
+                    CultureInfo.CurrentUICulture,
+                    SR.PropertyReferenceNotResolved,
+                    property.Name
+                );
             }
             else
             {
@@ -32,7 +36,12 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotImplementedException());
         }

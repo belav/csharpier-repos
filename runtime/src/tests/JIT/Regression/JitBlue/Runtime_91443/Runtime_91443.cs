@@ -12,7 +12,7 @@ public class Runtime_91443
     {
         new Runtime_91443().Method0();
     }
-    
+
     static Vector3 s;
 
     [MethodImpl(MethodImplOptions.NoInlining)]

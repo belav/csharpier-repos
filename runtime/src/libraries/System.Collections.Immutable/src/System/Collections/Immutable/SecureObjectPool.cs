@@ -31,8 +31,7 @@ namespace System.Collections.Immutable
             do
             {
                 result = Interlocked.Increment(ref s_poolUserIdCounter);
-            }
-            while (result == UnassignedId);
+            } while (result == UnassignedId);
 
             return result;
         }
@@ -53,7 +52,10 @@ namespace System.Collections.Immutable
 
         public static bool TryTake(TCaller caller, out SecurePooledObject<T>? item)
         {
-            if (caller.PoolUserId != SecureObjectPool.UnassignedId && AllocFreeConcurrentStack<SecurePooledObject<T>>.TryTake(out item))
+            if (
+                caller.PoolUserId != SecureObjectPool.UnassignedId
+                && AllocFreeConcurrentStack<SecurePooledObject<T>>.TryTake(out item)
+            )
             {
                 item.Owner = caller.PoolUserId;
                 return true;

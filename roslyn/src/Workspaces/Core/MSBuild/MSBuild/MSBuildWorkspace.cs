@@ -36,12 +36,21 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private MSBuildWorkspace(
             HostServices hostServices,
-            ImmutableDictionary<string, string> properties)
+            ImmutableDictionary<string, string> properties
+        )
             : base(hostServices, WorkspaceKind.MSBuild)
         {
             _reporter = new DiagnosticReporter(this);
-            _projectFileExtensionRegistry = new ProjectFileExtensionRegistry(Services.SolutionServices, _reporter);
-            _loader = new MSBuildProjectLoader(Services.SolutionServices, _reporter, _projectFileExtensionRegistry, properties);
+            _projectFileExtensionRegistry = new ProjectFileExtensionRegistry(
+                Services.SolutionServices,
+                _reporter
+            );
+            _loader = new MSBuildProjectLoader(
+                Services.SolutionServices,
+                _reporter,
+                _projectFileExtensionRegistry,
+                properties
+            );
         }
 
         /// <summary>
@@ -77,7 +86,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// <param name="properties">The MSBuild properties used when interpreting project files.
         /// These are the same properties that are passed to msbuild via the /property:&lt;n&gt;=&lt;v&gt; command line argument.</param>
         /// <param name="hostServices">The <see cref="HostServices"/> used to configure this workspace.</param>
-        public static MSBuildWorkspace Create(IDictionary<string, string> properties, HostServices hostServices)
+        public static MSBuildWorkspace Create(
+            IDictionary<string, string> properties,
+            HostServices hostServices
+        )
         {
             if (properties == null)
             {
@@ -122,13 +134,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         /// <summary>
         /// Determines if unrecognized projects are skipped when solutions or projects are opened.
-        /// 
-        /// An project is unrecognized if it either has 
-        ///   a) an invalid file path, 
+        ///
+        /// An project is unrecognized if it either has
+        ///   a) an invalid file path,
         ///   b) a non-existent project file,
-        ///   c) has an unrecognized file extension or 
+        ///   c) has an unrecognized file extension or
         ///   d) a file extension associated with an unsupported language.
-        /// 
+        ///
         /// If unrecognized projects cannot be skipped a corresponding exception is thrown.
         /// </summary>
         public bool SkipUnrecognizedProjects
@@ -158,7 +170,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         private static string GetAbsolutePath(string path, string baseDirectoryPath)
         {
-            return Path.GetFullPath(FileUtilities.ResolveRelativePath(path, baseDirectoryPath) ?? path);
+            return Path.GetFullPath(
+                FileUtilities.ResolveRelativePath(path, baseDirectoryPath) ?? path
+            );
         }
 
         #region Open Solution & Project
@@ -174,8 +188,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 #pragma warning restore RS0026
             string solutionFilePath,
             IProgress<ProjectLoadProgress>? progress = null,
-            CancellationToken cancellationToken = default)
-            => OpenSolutionAsync(solutionFilePath, msbuildLogger: null, progress, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) => OpenSolutionAsync(solutionFilePath, msbuildLogger: null, progress, cancellationToken);
 
         /// <summary>
         /// Open a solution file and all referenced projects.
@@ -191,7 +205,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string solutionFilePath,
             ILogger? msbuildLogger,
             IProgress<ProjectLoadProgress>? progress = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (solutionFilePath == null)
             {
@@ -200,7 +215,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
             this.ClearSolution();
 
-            var solutionInfo = await _loader.LoadSolutionInfoAsync(solutionFilePath, progress, msbuildLogger, cancellationToken).ConfigureAwait(false);
+            var solutionInfo = await _loader
+                .LoadSolutionInfoAsync(solutionFilePath, progress, msbuildLogger, cancellationToken)
+                .ConfigureAwait(false);
 
             // construct workspace from loaded project infos
             this.OnSolutionAdded(solutionInfo);
@@ -222,8 +239,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
 #pragma warning restore RS0026
             string projectFilePath,
             IProgress<ProjectLoadProgress>? progress = null,
-            CancellationToken cancellationToken = default)
-            => OpenProjectAsync(projectFilePath, msbuildLogger: null, progress, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) => OpenProjectAsync(projectFilePath, msbuildLogger: null, progress, cancellationToken);
 
         /// <summary>
         /// Open a project file and all referenced projects.
@@ -239,7 +256,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             string projectFilePath,
             ILogger? msbuildLogger,
             IProgress<ProjectLoadProgress>? progress = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (projectFilePath == null)
             {
@@ -247,7 +265,15 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
 
             var projectMap = ProjectMap.Create(this.CurrentSolution);
-            var projects = await _loader.LoadProjectInfoAsync(projectFilePath, projectMap, progress, msbuildLogger, cancellationToken).ConfigureAwait(false);
+            var projects = await _loader
+                .LoadProjectInfoAsync(
+                    projectFilePath,
+                    projectMap,
+                    progress,
+                    msbuildLogger,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // add projects to solution
             foreach (var project in projects)
@@ -267,29 +293,29 @@ namespace Microsoft.CodeAnalysis.MSBuild
         #region Apply Changes
         public override bool CanApplyChange(ApplyChangesKind feature)
         {
-            return feature is
-                ApplyChangesKind.ChangeDocument or
-                ApplyChangesKind.AddDocument or
-                ApplyChangesKind.RemoveDocument or
-                ApplyChangesKind.AddMetadataReference or
-                ApplyChangesKind.RemoveMetadataReference or
-                ApplyChangesKind.AddProjectReference or
-                ApplyChangesKind.RemoveProjectReference or
-                ApplyChangesKind.AddAnalyzerReference or
-                ApplyChangesKind.RemoveAnalyzerReference or
-                ApplyChangesKind.ChangeAdditionalDocument;
+            return feature
+                is ApplyChangesKind.ChangeDocument
+                    or ApplyChangesKind.AddDocument
+                    or ApplyChangesKind.RemoveDocument
+                    or ApplyChangesKind.AddMetadataReference
+                    or ApplyChangesKind.RemoveMetadataReference
+                    or ApplyChangesKind.AddProjectReference
+                    or ApplyChangesKind.RemoveProjectReference
+                    or ApplyChangesKind.AddAnalyzerReference
+                    or ApplyChangesKind.RemoveAnalyzerReference
+                    or ApplyChangesKind.ChangeAdditionalDocument;
         }
 
         private static bool HasProjectFileChanges(ProjectChanges changes)
         {
-            return changes.GetAddedDocuments().Any() ||
-                   changes.GetRemovedDocuments().Any() ||
-                   changes.GetAddedMetadataReferences().Any() ||
-                   changes.GetRemovedMetadataReferences().Any() ||
-                   changes.GetAddedProjectReferences().Any() ||
-                   changes.GetRemovedProjectReferences().Any() ||
-                   changes.GetAddedAnalyzerReferences().Any() ||
-                   changes.GetRemovedAnalyzerReferences().Any();
+            return changes.GetAddedDocuments().Any()
+                || changes.GetRemovedDocuments().Any()
+                || changes.GetAddedMetadataReferences().Any()
+                || changes.GetRemovedMetadataReferences().Any()
+                || changes.GetAddedProjectReferences().Any()
+                || changes.GetRemovedProjectReferences().Any()
+                || changes.GetAddedAnalyzerReferences().Any()
+                || changes.GetRemovedAnalyzerReferences().Any();
         }
 
         private BuildHostProcessManager? _applyChangesBuildHostProcessManager;
@@ -305,7 +331,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             return TryApplyChanges(newSolution, CodeAnalysisProgress.None);
         }
 
-        internal override bool TryApplyChanges(Solution newSolution, IProgress<CodeAnalysisProgress> progressTracker)
+        internal override bool TryApplyChanges(
+            Solution newSolution,
+            IProgress<CodeAnalysisProgress> progressTracker
+        )
         {
             using (_serializationLock.DisposableWait())
             {
@@ -339,22 +368,49 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     var projectPath = project.FilePath;
                     if (projectPath is null)
                     {
-                        _reporter.Report(new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure,
-                                                               string.Format(WorkspaceMSBuildResources.Project_path_for_0_was_null, project.Name),
-                                                               projectChanges.ProjectId));
+                        _reporter.Report(
+                            new ProjectDiagnostic(
+                                WorkspaceDiagnosticKind.Failure,
+                                string.Format(
+                                    WorkspaceMSBuildResources.Project_path_for_0_was_null,
+                                    project.Name
+                                ),
+                                projectChanges.ProjectId
+                            )
+                        );
                         return;
                     }
 
-                    if (_projectFileExtensionRegistry.TryGetLanguageNameFromProjectPath(projectPath, DiagnosticReportingMode.Log, out var languageName))
+                    if (
+                        _projectFileExtensionRegistry.TryGetLanguageNameFromProjectPath(
+                            projectPath,
+                            DiagnosticReportingMode.Log,
+                            out var languageName
+                        )
+                    )
                     {
                         try
                         {
-                            var (buildHost, _) = _applyChangesBuildHostProcessManager.GetBuildHostAsync(projectPath, CancellationToken.None).Result;
-                            _applyChangesProjectFile = buildHost.LoadProjectFileAsync(projectPath, languageName, CancellationToken.None).Result;
+                            var (buildHost, _) = _applyChangesBuildHostProcessManager
+                                .GetBuildHostAsync(projectPath, CancellationToken.None)
+                                .Result;
+                            _applyChangesProjectFile = buildHost
+                                .LoadProjectFileAsync(
+                                    projectPath,
+                                    languageName,
+                                    CancellationToken.None
+                                )
+                                .Result;
                         }
                         catch (IOException exception)
                         {
-                            _reporter.Report(new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, projectChanges.ProjectId));
+                            _reporter.Report(
+                                new ProjectDiagnostic(
+                                    WorkspaceDiagnosticKind.Failure,
+                                    exception.Message,
+                                    projectChanges.ProjectId
+                                )
+                            );
                         }
                     }
                 }
@@ -371,7 +427,13 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     }
                     catch (IOException exception)
                     {
-                        _reporter.Report(new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, projectChanges.ProjectId));
+                        _reporter.Report(
+                            new ProjectDiagnostic(
+                                WorkspaceDiagnosticKind.Failure,
+                                exception.Message,
+                                projectChanges.ProjectId
+                            )
+                        );
                     }
                 }
             }
@@ -389,17 +451,34 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 var encoding = DetermineEncoding(text, document);
                 if (document.FilePath is null)
                 {
-                    var message = string.Format(WorkspaceMSBuildResources.Path_for_document_0_was_null, document.Name);
-                    _reporter.Report(new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, message, document.Id));
+                    var message = string.Format(
+                        WorkspaceMSBuildResources.Path_for_document_0_was_null,
+                        document.Name
+                    );
+                    _reporter.Report(
+                        new DocumentDiagnostic(
+                            WorkspaceDiagnosticKind.Failure,
+                            message,
+                            document.Id
+                        )
+                    );
                     return;
                 }
 
-                this.SaveDocumentText(documentId, document.FilePath, text, encoding ?? new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
+                this.SaveDocumentText(
+                    documentId,
+                    document.FilePath,
+                    text,
+                    encoding ?? new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)
+                );
                 this.OnDocumentTextChanged(documentId, text, PreservationMode.PreserveValue);
             }
         }
 
-        protected override void ApplyAdditionalDocumentTextChanged(DocumentId documentId, SourceText text)
+        protected override void ApplyAdditionalDocumentTextChanged(
+            DocumentId documentId,
+            SourceText text
+        )
         {
             var document = this.CurrentSolution.GetAdditionalDocument(documentId);
             if (document != null)
@@ -407,13 +486,31 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 var encoding = DetermineEncoding(text, document);
                 if (document.FilePath is null)
                 {
-                    var message = string.Format(WorkspaceMSBuildResources.Path_for_additional_document_0_was_null, document.Name);
-                    _reporter.Report(new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, message, document.Id));
+                    var message = string.Format(
+                        WorkspaceMSBuildResources.Path_for_additional_document_0_was_null,
+                        document.Name
+                    );
+                    _reporter.Report(
+                        new DocumentDiagnostic(
+                            WorkspaceDiagnosticKind.Failure,
+                            message,
+                            document.Id
+                        )
+                    );
                     return;
                 }
 
-                this.SaveDocumentText(documentId, document.FilePath, text, encoding ?? new UTF8Encoding(encoderShouldEmitUTF8Identifier: false));
-                this.OnAdditionalDocumentTextChanged(documentId, text, PreservationMode.PreserveValue);
+                this.SaveDocumentText(
+                    documentId,
+                    document.FilePath,
+                    text,
+                    encoding ?? new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)
+                );
+                this.OnAdditionalDocumentTextChanged(
+                    documentId,
+                    text,
+                    PreservationMode.PreserveValue
+                );
             }
         }
 
@@ -431,16 +528,17 @@ namespace Microsoft.CodeAnalysis.MSBuild
                     return null;
                 }
 
-                using var stream = new FileStream(document.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                using var stream = new FileStream(
+                    document.FilePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.ReadWrite
+                );
                 var onDiskText = EncodedStringText.Create(stream);
                 return onDiskText.Encoding;
             }
-            catch (IOException)
-            {
-            }
-            catch (InvalidDataException)
-            {
-            }
+            catch (IOException) { }
+            catch (InvalidDataException) { }
 
             return null;
         }
@@ -451,21 +549,28 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
             var project = this.CurrentSolution.GetRequiredProject(info.Id.ProjectId);
 
-            var extension = _applyChangesProjectFile.GetDocumentExtensionAsync(info.SourceCodeKind, CancellationToken.None).Result;
+            var extension = _applyChangesProjectFile
+                .GetDocumentExtensionAsync(info.SourceCodeKind, CancellationToken.None)
+                .Result;
             var fileName = Path.ChangeExtension(info.Name, extension);
 
-            var relativePath = (info.Folders != null && info.Folders.Count > 0)
-                ? Path.Combine(Path.Combine(info.Folders.ToArray()), fileName)
-                : fileName;
+            var relativePath =
+                (info.Folders != null && info.Folders.Count > 0)
+                    ? Path.Combine(Path.Combine(info.Folders.ToArray()), fileName)
+                    : fileName;
 
             var fullPath = GetAbsolutePath(relativePath, Path.GetDirectoryName(project.FilePath)!);
 
             var newDocumentInfo = info.WithName(fileName)
                 .WithFilePath(fullPath)
-                .WithTextLoader(new WorkspaceFileTextLoader(Services.SolutionServices, fullPath, text.Encoding));
+                .WithTextLoader(
+                    new WorkspaceFileTextLoader(Services.SolutionServices, fullPath, text.Encoding)
+                );
 
             // add document to project file
-            _applyChangesProjectFile.AddDocumentAsync(relativePath, logicalPath: null, CancellationToken.None).Wait();
+            _applyChangesProjectFile
+                .AddDocumentAsync(relativePath, logicalPath: null, CancellationToken.None)
+                .Wait();
 
             // add to solution
             this.OnDocumentAdded(newDocumentInfo);
@@ -477,7 +582,12 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
         }
 
-        private void SaveDocumentText(DocumentId id, string fullPath, SourceText newText, Encoding encoding)
+        private void SaveDocumentText(
+            DocumentId id,
+            string fullPath,
+            SourceText newText,
+            Encoding encoding
+        )
         {
             try
             {
@@ -495,7 +605,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
             catch (IOException exception)
             {
-                _reporter.Report(new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, id));
+                _reporter.Report(
+                    new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, id)
+                );
             }
         }
 
@@ -506,7 +618,9 @@ namespace Microsoft.CodeAnalysis.MSBuild
             var document = this.CurrentSolution.GetDocument(documentId);
             if (document?.FilePath is not null)
             {
-                _applyChangesProjectFile.RemoveDocumentAsync(document.FilePath, CancellationToken.None).Wait();
+                _applyChangesProjectFile
+                    .RemoveDocumentAsync(document.FilePath, CancellationToken.None)
+                    .Wait();
                 this.DeleteDocumentFile(document.Id, document.FilePath);
                 this.OnDocumentRemoved(documentId);
             }
@@ -523,21 +637,42 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
             catch (IOException exception)
             {
-                _reporter.Report(new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, documentId));
+                _reporter.Report(
+                    new DocumentDiagnostic(
+                        WorkspaceDiagnosticKind.Failure,
+                        exception.Message,
+                        documentId
+                    )
+                );
             }
             catch (NotSupportedException exception)
             {
-                _reporter.Report(new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, documentId));
+                _reporter.Report(
+                    new DocumentDiagnostic(
+                        WorkspaceDiagnosticKind.Failure,
+                        exception.Message,
+                        documentId
+                    )
+                );
             }
             catch (UnauthorizedAccessException exception)
             {
-                _reporter.Report(new DocumentDiagnostic(WorkspaceDiagnosticKind.Failure, exception.Message, documentId));
+                _reporter.Report(
+                    new DocumentDiagnostic(
+                        WorkspaceDiagnosticKind.Failure,
+                        exception.Message,
+                        documentId
+                    )
+                );
             }
         }
 
         private static bool IsInGAC(string filePath)
         {
-            return GlobalAssemblyCacheLocation.RootLocations.Any(static (gloc, filePath) => PathUtilities.IsChildPath(gloc, filePath), filePath);
+            return GlobalAssemblyCacheLocation.RootLocations.Any(
+                static (gloc, filePath) => PathUtilities.IsChildPath(gloc, filePath),
+                filePath
+            );
         }
 
         private static string? s_frameworkRoot;
@@ -547,11 +682,15 @@ namespace Microsoft.CodeAnalysis.MSBuild
             {
                 if (RoslynString.IsNullOrEmpty(s_frameworkRoot))
                 {
-                    var runtimeDir = System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
+                    var runtimeDir =
+                        System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory();
                     s_frameworkRoot = Path.GetDirectoryName(runtimeDir); // back out one directory level to be root path of all framework versions
                 }
 
-                return s_frameworkRoot ?? throw new InvalidOperationException($"Unable to get {nameof(FrameworkRoot)}");
+                return s_frameworkRoot
+                    ?? throw new InvalidOperationException(
+                        $"Unable to get {nameof(FrameworkRoot)}"
+                    );
             }
         }
 
@@ -560,14 +699,22 @@ namespace Microsoft.CodeAnalysis.MSBuild
             return PathUtilities.IsChildPath(FrameworkRoot, filePath);
         }
 
-        protected override void ApplyMetadataReferenceAdded(ProjectId projectId, MetadataReference metadataReference)
+        protected override void ApplyMetadataReferenceAdded(
+            ProjectId projectId,
+            MetadataReference metadataReference
+        )
         {
             RoslynDebug.AssertNotNull(_applyChangesProjectFile);
             var identity = GetAssemblyIdentity(projectId, metadataReference);
             if (identity is null)
             {
-                var message = string.Format(WorkspaceMSBuildResources.Unable_to_add_metadata_reference_0, metadataReference.Display);
-                _reporter.Report(new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, message, projectId));
+                var message = string.Format(
+                    WorkspaceMSBuildResources.Unable_to_add_metadata_reference_0,
+                    metadataReference.Display
+                );
+                _reporter.Report(
+                    new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, message, projectId)
+                );
                 return;
             }
 
@@ -577,45 +724,92 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     // Since the location of the reference is in GAC, need to use full identity name to find it again.
                     // This typically happens when you base the reference off of a reflection assembly location.
-                    _applyChangesProjectFile.AddMetadataReferenceAsync(identity.GetDisplayName(), metadataReference.Properties, hintPath: null, CancellationToken.None).Wait();
+                    _applyChangesProjectFile
+                        .AddMetadataReferenceAsync(
+                            identity.GetDisplayName(),
+                            metadataReference.Properties,
+                            hintPath: null,
+                            CancellationToken.None
+                        )
+                        .Wait();
                 }
                 else if (IsFrameworkReferenceAssembly(peRef.FilePath))
                 {
                     // just use short name since this will be resolved by msbuild relative to the known framework reference assemblies.
-                    var fileName = identity != null ? identity.Name : Path.GetFileNameWithoutExtension(peRef.FilePath);
-                    _applyChangesProjectFile.AddMetadataReferenceAsync(fileName, metadataReference.Properties, hintPath: null, CancellationToken.None).Wait();
+                    var fileName =
+                        identity != null
+                            ? identity.Name
+                            : Path.GetFileNameWithoutExtension(peRef.FilePath);
+                    _applyChangesProjectFile
+                        .AddMetadataReferenceAsync(
+                            fileName,
+                            metadataReference.Properties,
+                            hintPath: null,
+                            CancellationToken.None
+                        )
+                        .Wait();
                 }
                 else // other location -- need hint to find correct assembly
                 {
-                    var relativePath = PathUtilities.GetRelativePath(Path.GetDirectoryName(CurrentSolution.GetRequiredProject(projectId).FilePath)!, peRef.FilePath);
+                    var relativePath = PathUtilities.GetRelativePath(
+                        Path.GetDirectoryName(
+                            CurrentSolution.GetRequiredProject(projectId).FilePath
+                        )!,
+                        peRef.FilePath
+                    );
                     var fileName = Path.GetFileNameWithoutExtension(peRef.FilePath);
-                    _applyChangesProjectFile.AddMetadataReferenceAsync(fileName, metadataReference.Properties, relativePath, CancellationToken.None).Wait();
+                    _applyChangesProjectFile
+                        .AddMetadataReferenceAsync(
+                            fileName,
+                            metadataReference.Properties,
+                            relativePath,
+                            CancellationToken.None
+                        )
+                        .Wait();
                 }
             }
 
             this.OnMetadataReferenceAdded(projectId, metadataReference);
         }
 
-        protected override void ApplyMetadataReferenceRemoved(ProjectId projectId, MetadataReference metadataReference)
+        protected override void ApplyMetadataReferenceRemoved(
+            ProjectId projectId,
+            MetadataReference metadataReference
+        )
         {
             RoslynDebug.AssertNotNull(_applyChangesProjectFile);
             var identity = GetAssemblyIdentity(projectId, metadataReference);
             if (identity is null)
             {
-                var message = string.Format(WorkspaceMSBuildResources.Unable_to_remove_metadata_reference_0, metadataReference.Display);
-                _reporter.Report(new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, message, projectId));
+                var message = string.Format(
+                    WorkspaceMSBuildResources.Unable_to_remove_metadata_reference_0,
+                    metadataReference.Display
+                );
+                _reporter.Report(
+                    new ProjectDiagnostic(WorkspaceDiagnosticKind.Failure, message, projectId)
+                );
                 return;
             }
 
             if (metadataReference is PortableExecutableReference peRef && peRef.FilePath != null)
             {
-                _applyChangesProjectFile.RemoveMetadataReferenceAsync(identity.Name, identity.GetDisplayName(), peRef.FilePath, CancellationToken.None).Wait();
+                _applyChangesProjectFile
+                    .RemoveMetadataReferenceAsync(
+                        identity.Name,
+                        identity.GetDisplayName(),
+                        peRef.FilePath,
+                        CancellationToken.None
+                    )
+                    .Wait();
             }
 
             this.OnMetadataReferenceRemoved(projectId, metadataReference);
         }
 
-        private AssemblyIdentity? GetAssemblyIdentity(ProjectId projectId, MetadataReference metadataReference)
+        private AssemblyIdentity? GetAssemblyIdentity(
+            ProjectId projectId,
+            MetadataReference metadataReference
+        )
         {
             var project = this.CurrentSolution.GetProject(projectId);
             if (project is null)
@@ -628,66 +822,97 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 project = project.AddMetadataReference(metadataReference);
             }
 
-            var compilation = project.GetCompilationAsync(CancellationToken.None).WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
+            var compilation = project
+                .GetCompilationAsync(CancellationToken.None)
+                .WaitAndGetResult_CanCallOnBackground(CancellationToken.None);
             if (compilation is null)
             {
                 return null;
             }
 
-            var symbol = compilation.GetAssemblyOrModuleSymbol(metadataReference) as IAssemblySymbol;
+            var symbol =
+                compilation.GetAssemblyOrModuleSymbol(metadataReference) as IAssemblySymbol;
             return symbol?.Identity;
         }
 
-        protected override void ApplyProjectReferenceAdded(ProjectId projectId, ProjectReference projectReference)
+        protected override void ApplyProjectReferenceAdded(
+            ProjectId projectId,
+            ProjectReference projectReference
+        )
         {
             Debug.Assert(_applyChangesProjectFile != null);
 
             var project = this.CurrentSolution.GetProject(projectReference.ProjectId);
             if (project?.FilePath is not null)
             {
-                _applyChangesProjectFile.AddProjectReferenceAsync(project.Name, new ProjectFileReference(project.FilePath, projectReference.Aliases), CancellationToken.None).Wait();
+                _applyChangesProjectFile
+                    .AddProjectReferenceAsync(
+                        project.Name,
+                        new ProjectFileReference(project.FilePath, projectReference.Aliases),
+                        CancellationToken.None
+                    )
+                    .Wait();
             }
 
             this.OnProjectReferenceAdded(projectId, projectReference);
         }
 
-        protected override void ApplyProjectReferenceRemoved(ProjectId projectId, ProjectReference projectReference)
+        protected override void ApplyProjectReferenceRemoved(
+            ProjectId projectId,
+            ProjectReference projectReference
+        )
         {
             Debug.Assert(_applyChangesProjectFile != null);
 
             var project = this.CurrentSolution.GetProject(projectReference.ProjectId);
             if (project?.FilePath is not null)
             {
-                _applyChangesProjectFile.RemoveProjectReferenceAsync(project.Name, project.FilePath, CancellationToken.None).Wait();
+                _applyChangesProjectFile
+                    .RemoveProjectReferenceAsync(
+                        project.Name,
+                        project.FilePath,
+                        CancellationToken.None
+                    )
+                    .Wait();
             }
 
             this.OnProjectReferenceRemoved(projectId, projectReference);
         }
 
-        protected override void ApplyAnalyzerReferenceAdded(ProjectId projectId, AnalyzerReference analyzerReference)
+        protected override void ApplyAnalyzerReferenceAdded(
+            ProjectId projectId,
+            AnalyzerReference analyzerReference
+        )
         {
             Debug.Assert(_applyChangesProjectFile != null);
 
             if (analyzerReference is AnalyzerFileReference fileRef)
             {
-                _applyChangesProjectFile.AddAnalyzerReferenceAsync(fileRef.FullPath, CancellationToken.None).Wait();
+                _applyChangesProjectFile
+                    .AddAnalyzerReferenceAsync(fileRef.FullPath, CancellationToken.None)
+                    .Wait();
             }
 
             this.OnAnalyzerReferenceAdded(projectId, analyzerReference);
         }
 
-        protected override void ApplyAnalyzerReferenceRemoved(ProjectId projectId, AnalyzerReference analyzerReference)
+        protected override void ApplyAnalyzerReferenceRemoved(
+            ProjectId projectId,
+            AnalyzerReference analyzerReference
+        )
         {
             Debug.Assert(_applyChangesProjectFile != null);
 
             if (analyzerReference is AnalyzerFileReference fileRef)
             {
-                _applyChangesProjectFile.RemoveAnalyzerReferenceAsync(fileRef.FullPath, CancellationToken.None).Wait();
+                _applyChangesProjectFile
+                    .RemoveAnalyzerReferenceAsync(fileRef.FullPath, CancellationToken.None)
+                    .Wait();
             }
 
             this.OnAnalyzerReferenceRemoved(projectId, analyzerReference);
         }
     }
 
-    #endregion
+        #endregion
 }

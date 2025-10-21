@@ -16,26 +16,39 @@ namespace System.Web.Razor
     /// </remarks>
     public class GeneratorResults : ParserResults
     {
-        public GeneratorResults(ParserResults parserResults,
-                                CodeCompileUnit generatedCode,
-                                IDictionary<int, GeneratedCodeMapping> designTimeLineMappings)
-            : this(parserResults.Document, parserResults.ParserErrors, generatedCode, designTimeLineMappings)
-        {
-        }
+        public GeneratorResults(
+            ParserResults parserResults,
+            CodeCompileUnit generatedCode,
+            IDictionary<int, GeneratedCodeMapping> designTimeLineMappings
+        )
+            : this(
+                parserResults.Document,
+                parserResults.ParserErrors,
+                generatedCode,
+                designTimeLineMappings
+            ) { }
 
-        public GeneratorResults(Block document,
-                                IList<RazorError> parserErrors,
-                                CodeCompileUnit generatedCode,
-                                IDictionary<int, GeneratedCodeMapping> designTimeLineMappings)
-            : this(parserErrors.Count == 0, document, parserErrors, generatedCode, designTimeLineMappings)
-        {
-        }
+        public GeneratorResults(
+            Block document,
+            IList<RazorError> parserErrors,
+            CodeCompileUnit generatedCode,
+            IDictionary<int, GeneratedCodeMapping> designTimeLineMappings
+        )
+            : this(
+                parserErrors.Count == 0,
+                document,
+                parserErrors,
+                generatedCode,
+                designTimeLineMappings
+            ) { }
 
-        protected GeneratorResults(bool success,
-                                   Block document,
-                                   IList<RazorError> parserErrors,
-                                   CodeCompileUnit generatedCode,
-                                   IDictionary<int, GeneratedCodeMapping> designTimeLineMappings)
+        protected GeneratorResults(
+            bool success,
+            Block document,
+            IList<RazorError> parserErrors,
+            CodeCompileUnit generatedCode,
+            IDictionary<int, GeneratedCodeMapping> designTimeLineMappings
+        )
             : base(success, document, parserErrors)
         {
             GeneratedCode = generatedCode;

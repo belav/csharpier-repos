@@ -18,9 +18,15 @@ namespace System.Globalization
 
         UserCustomCulture = 0x0008, // User defined custom culture
         ReplacementCultures = 0x0010, // User defined replacement custom culture.
-        [Obsolete("CultureTypes.WindowsOnlyCultures has been deprecated. Use other values in CultureTypes instead.")]
+
+        [Obsolete(
+            "CultureTypes.WindowsOnlyCultures has been deprecated. Use other values in CultureTypes instead."
+        )]
         WindowsOnlyCultures = 0x0020, // this will always return empty list.
-        [Obsolete("CultureTypes.FrameworkCultures has been deprecated. Use other values in CultureTypes instead.")]
+
+        [Obsolete(
+            "CultureTypes.FrameworkCultures has been deprecated. Use other values in CultureTypes instead."
+        )]
         FrameworkCultures = 0x0040, // will return only the v2 cultures marked as Framework culture.
     }
 }

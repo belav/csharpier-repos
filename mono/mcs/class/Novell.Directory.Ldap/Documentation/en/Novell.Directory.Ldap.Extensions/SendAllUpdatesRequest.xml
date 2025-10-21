@@ -1,10 +1,15 @@
-<Type Name="SendAllUpdatesRequest" FullName="Novell.Directory.Ldap.Extensions.SendAllUpdatesRequest">
-  <TypeSignature Language="C#" Value="public class SendAllUpdatesRequest : Novell.Directory.Ldap.LdapExtendedOperation, System.ICloneable" />
+<Type
+  Name="SendAllUpdatesRequest"
+  FullName="Novell.Directory.Ldap.Extensions.SendAllUpdatesRequest"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class SendAllUpdatesRequest : Novell.Directory.Ldap.LdapExtendedOperation, System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +56,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SendAllUpdatesRequest(string partitionRoot, string origServerDN)" />
+      <MemberSignature
+        Language="C#"
+        Value="public SendAllUpdatesRequest(string partitionRoot, string origServerDN)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="partitionRoot" Type="System.String" />

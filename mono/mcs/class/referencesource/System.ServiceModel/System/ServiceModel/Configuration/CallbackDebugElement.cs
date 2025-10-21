@@ -9,11 +9,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class CallbackDebugElement : BehaviorExtensionElement
     {
-        public CallbackDebugElement()
-        {
-        }
+        public CallbackDebugElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.IncludeExceptionDetailInFaults, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IncludeExceptionDetailInFaults,
+            DefaultValue = false
+        )]
         public bool IncludeExceptionDetailInFaults
         {
             get { return (bool)base[ConfigurationStrings.IncludeExceptionDetailInFaults]; }

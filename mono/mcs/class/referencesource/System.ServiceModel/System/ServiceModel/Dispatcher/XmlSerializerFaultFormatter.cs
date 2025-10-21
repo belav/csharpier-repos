@@ -2,16 +2,15 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 using System;
-using System.Xml;
-using System.Text;
-using System.Reflection;
-using System.Diagnostics;
-using System.Xml.Serialization;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace System.ServiceModel.Dispatcher
 {
@@ -19,34 +18,47 @@ namespace System.ServiceModel.Dispatcher
     {
         SynchronizedCollection<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> xmlSerializerFaultContractInfos;
 
-        internal XmlSerializerFaultFormatter(Type[] detailTypes,
-            SynchronizedCollection<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> xmlSerializerFaultContractInfos)
+        internal XmlSerializerFaultFormatter(
+            Type[] detailTypes,
+            SynchronizedCollection<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> xmlSerializerFaultContractInfos
+        )
             : base(detailTypes)
         {
             Initialize(xmlSerializerFaultContractInfos);
         }
 
-        internal XmlSerializerFaultFormatter(SynchronizedCollection<FaultContractInfo> faultContractInfoCollection,
-            SynchronizedCollection<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> xmlSerializerFaultContractInfos)
+        internal XmlSerializerFaultFormatter(
+            SynchronizedCollection<FaultContractInfo> faultContractInfoCollection,
+            SynchronizedCollection<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> xmlSerializerFaultContractInfos
+        )
             : base(faultContractInfoCollection)
         {
             Initialize(xmlSerializerFaultContractInfos);
         }
 
-        void Initialize(SynchronizedCollection<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> xmlSerializerFaultContractInfos)
+        void Initialize(
+            SynchronizedCollection<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> xmlSerializerFaultContractInfos
+        )
         {
             if (xmlSerializerFaultContractInfos == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("xmlSerializerFaultContractInfos");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "xmlSerializerFaultContractInfos"
+                );
             }
             this.xmlSerializerFaultContractInfos = xmlSerializerFaultContractInfos;
         }
 
-        protected override XmlObjectSerializer GetSerializer(Type detailType, string faultExceptionAction, out string action)
+        protected override XmlObjectSerializer GetSerializer(
+            Type detailType,
+            string faultExceptionAction,
+            out string action
+        )
         {
             action = faultExceptionAction;
-            
-            XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo faultInfo = null;
+
+            XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo faultInfo =
+                null;
             for (int i = 0; i < this.xmlSerializerFaultContractInfos.Count; i++)
             {
                 if (this.xmlSerializerFaultContractInfos[i].FaultContractInfo.Detail == detailType)
@@ -66,16 +78,23 @@ namespace System.ServiceModel.Dispatcher
                 return new XmlSerializerObjectSerializer(detailType);
         }
 
-        protected override FaultException CreateFaultException(MessageFault messageFault, string action)
+        protected override FaultException CreateFaultException(
+            MessageFault messageFault,
+            string action
+        )
         {
             IList<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo> faultInfos;
             if (action != null)
             {
-                faultInfos = new List<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo>();
+                faultInfos =
+                    new List<XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo>();
                 for (int i = 0; i < this.xmlSerializerFaultContractInfos.Count; i++)
                 {
-                    if (this.xmlSerializerFaultContractInfos[i].FaultContractInfo.Action == action
-                        || this.xmlSerializerFaultContractInfos[i].FaultContractInfo.Action == MessageHeaders.WildcardAction)
+                    if (
+                        this.xmlSerializerFaultContractInfos[i].FaultContractInfo.Action == action
+                        || this.xmlSerializerFaultContractInfos[i].FaultContractInfo.Action
+                            == MessageHeaders.WildcardAction
+                    )
                     {
                         faultInfos.Add(this.xmlSerializerFaultContractInfos[i]);
                     }
@@ -90,7 +109,8 @@ namespace System.ServiceModel.Dispatcher
             object detailObj = null;
             for (int i = 0; i < faultInfos.Count; i++)
             {
-                XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo faultInfo = faultInfos[i];
+                XmlSerializerOperationBehavior.Reflector.XmlSerializerFaultContractInfo faultInfo =
+                    faultInfos[i];
                 XmlDictionaryReader detailReader = messageFault.GetReaderAtDetailContents();
                 XmlObjectSerializer serializer = faultInfo.Serializer;
 
@@ -100,14 +120,17 @@ namespace System.ServiceModel.Dispatcher
                     try
                     {
                         detailObj = serializer.ReadObject(detailReader);
-                        FaultException faultException = CreateFaultException(messageFault, action, 
-                            detailObj, detailType, detailReader);
+                        FaultException faultException = CreateFaultException(
+                            messageFault,
+                            action,
+                            detailObj,
+                            detailType,
+                            detailReader
+                        );
                         if (faultException != null)
                             return faultException;
                     }
-                    catch (SerializationException)
-                    {
-                    }
+                    catch (SerializationException) { }
                 }
             }
             return new FaultException(messageFault, action);

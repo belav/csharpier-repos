@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NoConversions()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -29,7 +30,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int32, System.Int32)) (Syntax: '(1, 2)')
   NaturalType: (System.Int32, System.Int32)
   Elements(2):
@@ -38,14 +40,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int32, System.Int32)) (Synta
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NoConversions_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -57,7 +64,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(int, int) t = (1, 2);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(int, int) t = (1, 2)')
     Declarators:
@@ -74,14 +82,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversions()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -93,7 +106,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.UInt32, System.UInt32)) (Syntax: '(1, 2)')
   NaturalType: (System.Int32, System.Int32)
   Elements(2):
@@ -108,14 +122,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.UInt32, System.UInt32)) (Syn
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversions_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -127,7 +146,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(uint, uint) t = (1, 2);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(uint, uint) t = (1, 2)')
     Declarators:
@@ -150,14 +170,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversionsWithTypedExpression_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -171,7 +196,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int64 a, System.Int64 b)) (Syntax: '(a, b)')
   NaturalType: (System.Int32 a, System.Int32 b)
   Elements(2):
@@ -186,14 +212,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int64 a, System.Int64 b)) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversionsWithTypedExpression_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -207,7 +238,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (a, b)')
   IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: (System.Int64, System.Int64), IsImplicit) (Syntax: '(a, b)')
     Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -226,14 +258,19 @@ IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversionsWithTypedExpression_03()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -247,7 +284,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (Syntax: '= (a, b)')
   ITupleOperation (OperationKind.Tuple, Type: (System.Int64 a, System.Int64 b)) (Syntax: '(a, b)')
     NaturalType: (System.Int32 a, System.Int32 b)
@@ -263,14 +301,19 @@ IVariableInitializerOperation (OperationKind.VariableInitializer, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversionsWithTypedExpression_WithParentDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -284,7 +327,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(long, long) t = (a, b);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(long, long) t = (a, b)')
     Declarators:
@@ -310,14 +354,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversionFromNull()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -329,7 +378,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.UInt32, System.String)) (Syntax: '(1, null)')
   NaturalType: null
   Elements(2):
@@ -344,14 +394,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.UInt32, System.String)) (Syn
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_ImplicitConversionFromNull_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -363,7 +418,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(uint, stri ...  (1, null);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(uint, stri ... = (1, null)')
     Declarators:
@@ -386,14 +442,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NamedElements()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -405,7 +466,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int32 A, System.Int32 B)) (Syntax: '(A: 1, B: 2)')
   NaturalType: (System.Int32 A, System.Int32 B)
   Elements(2):
@@ -414,14 +476,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int32 A, System.Int32 B)) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NamedElements_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -433,7 +500,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'var t = (A: 1, B: 2);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'var t = (A: 1, B: 2)')
     Declarators:
@@ -450,14 +518,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NamedElementsInTupleType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -469,7 +542,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int32, System.Int32)) (Syntax: '(1, 2)')
   NaturalType: (System.Int32, System.Int32)
   Elements(2):
@@ -478,14 +552,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int32, System.Int32)) (Synta
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NamedElementsInTupleType_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -497,7 +576,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(int A, int ... t = (1, 2);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(int A, int ...  t = (1, 2)')
     Declarators:
@@ -517,14 +597,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NamedElementsAndImplicitConversions()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -536,7 +621,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int16 A, System.String B)) (Syntax: '(A: 1, B: null)')
   NaturalType: null
   Elements(2):
@@ -549,23 +635,33 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int16 A, System.String B)) (
         Operand: 
           ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8123: The tuple element name 'A' is ignored because a different name or no name is specified by the target type '(short, string)'.
                 //         (short, string) t = /*<bind>*/(A: 1, B: null)/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "A: 1").WithArguments("A", "(short, string)").WithLocation(8, 40),
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "A: 1")
+                    .WithArguments("A", "(short, string)")
+                    .WithLocation(8, 40),
                 // CS8123: The tuple element name 'B' is ignored because a different name or no name is specified by the target type '(short, string)'.
                 //         (short, string) t = /*<bind>*/(A: 1, B: null)/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null").WithArguments("B", "(short, string)").WithLocation(8, 46)
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null")
+                    .WithArguments("B", "(short, string)")
+                    .WithLocation(8, 46),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_NamedElementsAndImplicitConversions_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -577,7 +673,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(short, str ... , B: null);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(short, str ... 1, B: null)')
     Declarators:
@@ -601,23 +698,33 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8123: The tuple element name 'A' is ignored because a different name or no name is specified by the target type '(short, string)'.
                 //         /*<bind>*/(short, string) t = (A: 1, B: null)/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "A: 1").WithArguments("A", "(short, string)").WithLocation(8, 40),
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "A: 1")
+                    .WithArguments("A", "(short, string)")
+                    .WithLocation(8, 40),
                 // CS8123: The tuple element name 'B' is ignored because a different name or no name is specified by the target type '(short, string)'.
                 //         /*<bind>*/(short, string) t = (A: 1, B: null)/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null").WithArguments("B", "(short, string)").WithLocation(8, 46)
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null")
+                    .WithArguments("B", "(short, string)")
+                    .WithLocation(8, 46),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_UserDefinedConversionsForArguments()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -650,7 +757,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int16, System.String c1)) (Syntax: '(new C(0), c1)')
   NaturalType: (C, C c1)
   Elements(2):
@@ -672,14 +780,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int16, System.String c1)) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_UserDefinedConversionsForArguments_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -712,7 +825,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(short, str ...  C(0), c1);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(short, str ... w C(0), c1)')
     Declarators:
@@ -745,14 +859,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_UserDefinedConversionFromTupleExpression()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -780,7 +899,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int32, System.String)) (Syntax: '(0, null)')
   NaturalType: null
   Elements(2):
@@ -792,14 +912,19 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int32, System.String)) (Synt
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_UserDefinedConversionFromTupleExpression_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -827,7 +952,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: 'C t = (0, null);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: 'C t = (0, null)')
     Declarators:
@@ -850,14 +976,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_UserDefinedConversionToTupleType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -885,19 +1016,25 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IParameterReferenceOperation: c1 (OperationKind.ParameterReference, Type: C) (Syntax: 'c1')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_UserDefinedConversionToTupleType_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -925,7 +1062,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null) (Syntax: '(int, string) t = c1;')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null) (Syntax: '(int, string) t = c1')
     Declarators:
@@ -941,14 +1079,19 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_InvalidConversion()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -981,7 +1124,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITupleOperation (OperationKind.Tuple, Type: (System.Int16, System.String c1), IsInvalid) (Syntax: '(new C(0), c1)')
   NaturalType: (C, C c1)
   Elements(2):
@@ -1004,20 +1148,28 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int16, System.String c1), Is
         Operand: 
           IParameterReferenceOperation: c1 (OperationKind.ParameterReference, Type: C) (Syntax: 'c1')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C' to 'short'
                 //         (short, string) t = /*<bind>*/(new C(0), c1)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C(0)").WithArguments("C", "short").WithLocation(29, 40)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C(0)")
+                    .WithArguments("C", "short")
+                    .WithLocation(29, 40),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_InvalidConversion_ParentVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -1050,7 +1202,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDeclarationGroup, Type: null, IsInvalid) (Syntax: '(short, str ...  C(0), c1);')
   IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration, Type: null, IsInvalid) (Syntax: '(short, str ... w C(0), c1)')
     Declarators:
@@ -1084,20 +1237,28 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
     Initializer: 
       null
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0029: Cannot implicitly convert type 'C' to 'short'
                 //         /*<bind>*/(short, string) t = (new C(0), c1)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C(0)").WithArguments("C", "short").WithLocation(29, 40)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C(0)")
+                    .WithArguments("C", "short")
+                    .WithLocation(29, 40),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_Deconstruction()
         {
-            string source = @"
+            string source =
+                @"
 class Point
 {
     public int X { get; }
@@ -1124,7 +1285,8 @@ class Class1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type: (System.Int32 x, System.Int32 y)) (Syntax: 'var (x, y)  ... Point(0, 1)')
   Left: 
     IDeclarationExpressionOperation (OperationKind.DeclarationExpression, Type: (System.Int32 x, System.Int32 y)) (Syntax: 'var (x, y)')
@@ -1149,14 +1311,19 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_Deconstruction_ForEach()
         {
-            string source = @"
+            string source =
+                @"
 class Point
 {
     public int X { get; }
@@ -1185,7 +1352,8 @@ class Class1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
   Locals: Local_1: System.UInt32 x
     Local_2: System.UInt32 y
@@ -1224,14 +1392,19 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(10856, "https://github.com/dotnet/roslyn/issues/10856")]
         public void TupleExpression_DeconstructionWithConversion()
         {
-            string source = @"
+            string source =
+                @"
 class Point
 {
     public int X { get; }
@@ -1258,7 +1431,8 @@ class Class1
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type: (System.UInt32 x, System.UInt32 y)) (Syntax: '(uint x, ui ... Point(0, 1)')
   Left: 
     ITupleOperation (OperationKind.Tuple, Type: (System.UInt32 x, System.UInt32 y)) (Syntax: '(uint x, uint y)')
@@ -1284,14 +1458,19 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ExplicitConversionOfANestedTuple_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -1303,7 +1482,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type: (System.Int32, (System.Int64 c, System.Int32 d))) (Syntax: '((int, (lon ... : 2, b: 3))')
   Conversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   Operand: 
@@ -1329,23 +1509,33 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                       Operand: 
                         ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 3) (Syntax: '3')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (8,56): warning CS8123: The tuple element name 'a' is ignored because a different name or no name is specified by the target type '(long c, int d)'.
                 //         var t = /*<bind>*/((int, (long c, int d)))(1, (a: 2, b: 3))/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "a: 2").WithArguments("a", "(long c, int d)").WithLocation(8, 56),
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "a: 2")
+                    .WithArguments("a", "(long c, int d)")
+                    .WithLocation(8, 56),
                 // (8,62): warning CS8123: The tuple element name 'b' is ignored because a different name or no name is specified by the target type '(long c, int d)'.
                 //         var t = /*<bind>*/((int, (long c, int d)))(1, (a: 2, b: 3))/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "b: 3").WithArguments("b", "(long c, int d)").WithLocation(8, 62)
+                Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "b: 3")
+                    .WithArguments("b", "(long c, int d)")
+                    .WithLocation(8, 62),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b)
@@ -1354,13 +1544,17 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 't' is assigned but its value is never used
                 //         (int, int) t = (1, b ? 2 : 3);
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t").WithArguments("t").WithLocation(6, 20)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
+                    .WithArguments("t")
+                    .WithLocation(6, 20),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1418,14 +1612,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b)
@@ -1434,13 +1633,17 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 't' is assigned but its value is never used
                 //         var t = (1, (2, b ? 2 : 3));
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t").WithArguments("t").WithLocation(6, 13)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
+                    .WithArguments("t")
+                    .WithLocation(6, 13),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1506,14 +1709,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b)
@@ -1526,7 +1734,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1592,14 +1801,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b, int i1, int i2, int i3)
@@ -1611,13 +1825,15 @@ class C
 }
 
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (i1, b ? i2 : i3) = (1, 2);
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? i2 : i3").WithLocation(6, 14)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? i2 : i3").WithLocation(6, 14),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1682,14 +1898,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b, int i1, int i2, int i3)
@@ -1703,7 +1924,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1766,14 +1988,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b)
@@ -1782,13 +2009,17 @@ class C
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0219: The variable 't' is assigned but its value is never used
                 //         (int, int) t = (b ? 2 : 3, 1);
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t").WithArguments("t").WithLocation(6, 20)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
+                    .WithArguments("t")
+                    .WithLocation(6, 20),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1842,14 +2073,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b, int i1, int i2, int i3, int i4, int i5, int i6)
@@ -1859,13 +2095,16 @@ class C
 }
 
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (b ? (i1, i2) : (i3, i4)) = (i5, i6);
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? (i1, i2) : (i3, i4)").WithLocation(6, 10)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? (i1, i2) : (i3, i4)")
+                    .WithLocation(6, 10),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1938,14 +2177,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TupleFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(bool b)
@@ -1955,25 +2199,35 @@ class C
 }
 
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS8185: A declaration is not allowed in this context.
                 //         (b ? (var i1, var i2) : (var i3, var i4)) = (1, 2);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i1").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i1")
+                    .WithLocation(6, 15),
                 // CS8185: A declaration is not allowed in this context.
                 //         (b ? (var i1, var i2) : (var i3, var i4)) = (1, 2);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i2").WithLocation(6, 23),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i2")
+                    .WithLocation(6, 23),
                 // CS8185: A declaration is not allowed in this context.
                 //         (b ? (var i1, var i2) : (var i3, var i4)) = (1, 2);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i3").WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i3")
+                    .WithLocation(6, 34),
                 // CS8185: A declaration is not allowed in this context.
                 //         (b ? (var i1, var i2) : (var i3, var i4)) = (1, 2);
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i4").WithLocation(6, 42),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var i4")
+                    .WithLocation(6, 42),
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (b ? (var i1, var i2) : (var i3, var i4)) = (1, 2);
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? (var i1, var i2) : (var i3, var i4)").WithLocation(6, 10)
+                Diagnostic(
+                        ErrorCode.ERR_AssgLvalueExpected,
+                        "b ? (var i1, var i2) : (var i3, var i4)"
+                    )
+                    .WithLocation(6, 10),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2051,7 +2305,11 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -2059,7 +2317,8 @@ Block[B5] - Exit
         public void TupleFlow_09()
         {
             // Nested tuple, no control flow.
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i1, int i2, int i3, ((int, int), int) result)
@@ -2071,7 +2330,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2103,7 +2363,11 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
@@ -2111,7 +2375,8 @@ Block[B2] - Exit
         public void TupleFlow_10()
         {
             // Nested tuple, verify control flow does not spill sibling tuple.
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i1, int i2, int? i3, int i4, ((int, int), int) result)
@@ -2123,7 +2388,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2220,13 +2486,18 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void UnexpectedTupleExpressionRecovery()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static void Main()
@@ -2239,19 +2510,25 @@ class C
             {
                 // file.cs(6,19): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         /*<bind>*/(var ((a,b), c), int d);/*</bind>*/
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "(var ((a,b), c), int d)").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "(var ((a,b), c), int d)")
+                    .WithLocation(6, 19),
                 // file.cs(6,20): error CS8185: A declaration is not allowed in this context.
                 //         /*<bind>*/(var ((a,b), c), int d);/*</bind>*/
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var ((a,b), c)").WithLocation(6, 20),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "var ((a,b), c)")
+                    .WithLocation(6, 20),
                 // file.cs(6,36): error CS8185: A declaration is not allowed in this context.
                 //         /*<bind>*/(var ((a,b), c), int d);/*</bind>*/
-                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int d").WithLocation(6, 36),
+                Diagnostic(ErrorCode.ERR_DeclarationExpressionNotPermitted, "int d")
+                    .WithLocation(6, 36),
                 // file.cs(6,36): error CS0165: Use of unassigned local variable 'd'
                 //         /*<bind>*/(var ((a,b), c), int d);/*</bind>*/
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "int d").WithArguments("d").WithLocation(6, 36)
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "int d")
+                    .WithArguments("d")
+                    .WithLocation(6, 36),
             };
 
-            var expectedTree = @"
+            var expectedTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null, IsInvalid) (Syntax: '(var ((a,b), c), int d);')
   Expression:
     ITupleOperation (OperationKind.Tuple, Type: (((var a, var b), var c), System.Int32 d), IsInvalid) (Syntax: '(var ((a,b), c), int d)')
@@ -2271,7 +2548,11 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null, Is
             ILocalReferenceOperation: d (IsDeclaration: True) (OperationKind.LocalReference, Type: System.Int32, IsInvalid) (Syntax: 'd')
 ";
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedTree,
+                expectedDiagnostics
+            );
         }
     }
 }

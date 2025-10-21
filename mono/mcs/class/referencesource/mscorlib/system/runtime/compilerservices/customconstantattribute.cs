@@ -1,15 +1,15 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {
     [Serializable]
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited=false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
     public abstract class CustomConstantAttribute : Attribute
     {
@@ -29,4 +29,3 @@ namespace System.Runtime.CompilerServices
         }
     }
 }
-

@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="DesignOnlyAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -16,7 +17,8 @@ namespace System.ComponentModel {
     ///       design time.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class DesignOnlyAttribute : Attribute {
+    public sealed class DesignOnlyAttribute : Attribute
+    {
         private bool isDesignOnly = false;
 
         /// <devdoc>
@@ -24,7 +26,8 @@ namespace System.ComponentModel {
         ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignOnlyAttribute'/> class.
         ///    </para>
         /// </devdoc>
-        public DesignOnlyAttribute(bool isDesignOnly) {
+        public DesignOnlyAttribute(bool isDesignOnly)
+        {
             this.isDesignOnly = isDesignOnly;
         }
 
@@ -34,16 +37,15 @@ namespace System.ComponentModel {
         ///       can be set only at design time.
         ///    </para>
         /// </devdoc>
-        public bool IsDesignOnly {
-            get {
-                return isDesignOnly;
-            }
+        public bool IsDesignOnly
+        {
+            get { return isDesignOnly; }
         }
 
         /// <devdoc>
         ///    <para>
         ///       Specifies that a property can be set only at design time. This
-        ///    <see langword='static '/>field is read-only. 
+        ///    <see langword='static '/>field is read-only.
         ///    </para>
         /// </devdoc>
         public static readonly DesignOnlyAttribute Yes = new DesignOnlyAttribute(true);
@@ -69,12 +71,15 @@ namespace System.ComponentModel {
         /// <devdoc>
         /// </devdoc>
         /// <internalonly/>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return IsDesignOnly == Default.IsDesignOnly;
         }
 
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
@@ -83,7 +88,8 @@ namespace System.ComponentModel {
             return (other != null) && other.isDesignOnly == isDesignOnly;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return isDesignOnly.GetHashCode();
         }
     }

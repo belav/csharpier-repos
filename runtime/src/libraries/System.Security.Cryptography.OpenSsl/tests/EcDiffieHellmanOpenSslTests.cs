@@ -160,8 +160,14 @@ namespace System.Security.Cryptography.EcDiffieHellman.OpenSsl.Tests
             using (ECDiffieHellmanPublicKey firstPublic = first.PublicKey)
             using (ECDiffieHellmanPublicKey secondPublic = second.PublicKey)
             {
-                byte[] firstSecond = first.DeriveKeyFromHash(secondPublic, HashAlgorithmName.SHA256);
-                byte[] secondFirst = second.DeriveKeyFromHash(firstPublic, HashAlgorithmName.SHA256);
+                byte[] firstSecond = first.DeriveKeyFromHash(
+                    secondPublic,
+                    HashAlgorithmName.SHA256
+                );
+                byte[] secondFirst = second.DeriveKeyFromHash(
+                    firstPublic,
+                    HashAlgorithmName.SHA256
+                );
                 byte[] firstFirst = first.DeriveKeyFromHash(firstPublic, HashAlgorithmName.SHA256);
 
                 Assert.Equal(firstSecond, secondFirst);
@@ -198,7 +204,11 @@ namespace System.Security.Cryptography.EcDiffieHellman.OpenSsl.Tests
             using (second)
             using (ECDiffieHellmanPublicKey secondPublic = second.PublicKey)
             {
-                byte[] derived2 = second.DeriveKeyFromHmac(secondPublic, HashAlgorithmName.SHA384, null);
+                byte[] derived2 = second.DeriveKeyFromHmac(
+                    secondPublic,
+                    HashAlgorithmName.SHA384,
+                    null
+                );
                 Assert.Equal(derived, derived2);
             }
         }
@@ -217,11 +227,12 @@ namespace System.Security.Cryptography.EcDiffieHellman.OpenSsl.Tests
             {
                 SafeEvpPKeyHandle pkey = ecdsa.DuplicateKeyHandle();
 
-                using (pkey)
-                {
-                }
+                using (pkey) { }
 
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new ECDiffieHellmanOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>(
+                    "pkeyHandle",
+                    () => new ECDiffieHellmanOpenSsl(pkey)
+                );
             }
         }
 
@@ -230,7 +241,10 @@ namespace System.Security.Cryptography.EcDiffieHellman.OpenSsl.Tests
         {
             using (SafeEvpPKeyHandle pkey = new SafeEvpPKeyHandle(IntPtr.Zero, false))
             {
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new ECDiffieHellmanOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>(
+                    "pkeyHandle",
+                    () => new ECDiffieHellmanOpenSsl(pkey)
+                );
             }
         }
 

@@ -10,10 +10,20 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptSetKeyParam(SafeCapiKeyHandle hKey, int dwParam, byte[] pbData, int dwFlags);
+        public static partial bool CryptSetKeyParam(
+            SafeCapiKeyHandle hKey,
+            int dwParam,
+            byte[] pbData,
+            int dwFlags
+        );
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptSetKeyParam(SafeCapiKeyHandle safeKeyHandle, int dwParam, ref int pdw, int dwFlags);
+        public static partial bool CryptSetKeyParam(
+            SafeCapiKeyHandle safeKeyHandle,
+            int dwParam,
+            ref int pdw,
+            int dwFlags
+        );
     }
 }

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
-
 using Xunit;
 
 namespace System.Runtime.InteropServices.Tests
@@ -147,11 +146,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetValueRefOrNullRefValueType()
         {
-            var dict = new Dictionary<int, Struct>
-            {
-                {  1, default },
-                {  2, default }
-            };
+            var dict = new Dictionary<int, Struct> { { 1, default }, { 2, default } };
 
             Assert.Equal(2, dict.Count);
 
@@ -195,7 +190,9 @@ namespace System.Runtime.InteropServices.Tests
             // Check for null refs
 
             Assert.True(Unsafe.IsNullRef(ref CollectionsMarshal.GetValueRefOrNullRef(dict, 3)));
-            Assert.Throws<NullReferenceException>(() => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9);
+            Assert.Throws<NullReferenceException>(() =>
+                CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9
+            );
 
             Assert.Equal(2, dict.Count);
         }
@@ -205,8 +202,8 @@ namespace System.Runtime.InteropServices.Tests
         {
             var dict = new Dictionary<int, IntAsObject>
             {
-                {  1, new IntAsObject() },
-                {  2, new IntAsObject() }
+                { 1, new IntAsObject() },
+                { 2, new IntAsObject() },
             };
 
             Assert.Equal(2, dict.Count);
@@ -251,7 +248,9 @@ namespace System.Runtime.InteropServices.Tests
             // Check for null refs
 
             Assert.True(Unsafe.IsNullRef(ref CollectionsMarshal.GetValueRefOrNullRef(dict, 3)));
-            Assert.Throws<NullReferenceException>(() => CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9);
+            Assert.Throws<NullReferenceException>(() =>
+                CollectionsMarshal.GetValueRefOrNullRef(dict, 3).Value = 9
+            );
 
             Assert.Equal(2, dict.Count);
         }
@@ -259,10 +258,7 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetValueRefOrNullRefLinkBreaksOnResize()
         {
-            var dict = new Dictionary<int, Struct>
-            {
-                {  1, new Struct() }
-            };
+            var dict = new Dictionary<int, Struct> { { 1, new Struct() } };
 
             Assert.Equal(1, dict.Count);
 
@@ -305,11 +301,7 @@ namespace System.Runtime.InteropServices.Tests
             // This test is the same as the one for GetValueRefOrNullRef, but it uses
             // GetValueRefOrAddDefault instead, and also checks for incorrect additions.
             // The two APIs should behave the same when values already exist.
-            var dict = new Dictionary<int, Struct>
-            {
-                {  1, default },
-                {  2, default }
-            };
+            var dict = new Dictionary<int, Struct> { { 1, default }, { 2, default } };
 
             Assert.Equal(2, dict.Count);
 
@@ -336,7 +328,11 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(3, dict[1].Value);
             Assert.Equal(4, dict[1].Property);
 
-            ref Struct itemRef = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, 2, out exists);
+            ref Struct itemRef = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                dict,
+                2,
+                out exists
+            );
 
             Assert.True(exists);
             Assert.Equal(2, dict.Count);
@@ -360,7 +356,11 @@ namespace System.Runtime.InteropServices.Tests
 
             // Check for correct additions
 
-            ref Struct entry3Ref = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, 3, out exists);
+            ref Struct entry3Ref = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                dict,
+                3,
+                out exists
+            );
 
             Assert.False(exists);
             Assert.Equal(3, dict.Count);
@@ -381,8 +381,8 @@ namespace System.Runtime.InteropServices.Tests
         {
             var dict = new Dictionary<int, IntAsObject>
             {
-                {  1, new IntAsObject() },
-                {  2, new IntAsObject() }
+                { 1, new IntAsObject() },
+                { 2, new IntAsObject() },
             };
 
             Assert.Equal(2, dict.Count);
@@ -410,7 +410,11 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(3, dict[1].Value);
             Assert.Equal(4, dict[1].Property);
 
-            ref IntAsObject itemRef = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, 2, out exists);
+            ref IntAsObject itemRef = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                dict,
+                2,
+                out exists
+            );
 
             Assert.True(exists);
             Assert.Equal(2, dict.Count);
@@ -434,7 +438,11 @@ namespace System.Runtime.InteropServices.Tests
 
             // Check for correct additions
 
-            ref IntAsObject entry3Ref = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, 3, out exists);
+            ref IntAsObject entry3Ref = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                dict,
+                3,
+                out exists
+            );
 
             Assert.False(exists);
             Assert.Equal(3, dict.Count);
@@ -452,14 +460,15 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetValueRefOrAddDefaultLinkBreaksOnResize()
         {
-            var dict = new Dictionary<int, Struct>
-            {
-                {  1, new Struct() }
-            };
+            var dict = new Dictionary<int, Struct> { { 1, new Struct() } };
 
             Assert.Equal(1, dict.Count);
 
-            ref Struct itemRef = ref CollectionsMarshal.GetValueRefOrAddDefault(dict, 1, out bool exists);
+            ref Struct itemRef = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                dict,
+                1,
+                out bool exists
+            );
 
             Assert.True(exists);
             Assert.Equal(1, dict.Count);
@@ -528,32 +537,71 @@ namespace System.Runtime.InteropServices.Tests
             Assert.Equal(3, list.Count);
             Assert.Throws<ArgumentOutOfRangeException>(() => list[3]);
             AssertExtensions.SequenceEqual(CollectionsMarshal.AsSpan(list), new int[] { 1, 2, 3 });
-            Assert.True(Unsafe.AreSame(ref intRef, ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(list))));
+            Assert.True(
+                Unsafe.AreSame(
+                    ref intRef,
+                    ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(list))
+                )
+            );
 
             // make sure that size increase preserves content and doesn't clear
             CollectionsMarshal.SetCount(list, 5);
-            AssertExtensions.SequenceEqual(CollectionsMarshal.AsSpan(list), new int[] { 1, 2, 3, 4, 5 });
-            Assert.True(Unsafe.AreSame(ref intRef, ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(list))));
+            AssertExtensions.SequenceEqual(
+                CollectionsMarshal.AsSpan(list),
+                new int[] { 1, 2, 3, 4, 5 }
+            );
+            Assert.True(
+                Unsafe.AreSame(
+                    ref intRef,
+                    ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(list))
+                )
+            );
 
             // make sure that reallocations preserve content
             int newCount = list.Capacity * 2;
             CollectionsMarshal.SetCount(list, newCount);
             Assert.Equal(newCount, list.Count);
-            AssertExtensions.SequenceEqual(CollectionsMarshal.AsSpan(list)[..3], new int[] { 1, 2, 3 });
-            Assert.True(!Unsafe.AreSame(ref intRef, ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(list))));
+            AssertExtensions.SequenceEqual(
+                CollectionsMarshal.AsSpan(list)[..3],
+                new int[] { 1, 2, 3 }
+            );
+            Assert.True(
+                !Unsafe.AreSame(
+                    ref intRef,
+                    ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(list))
+                )
+            );
 
             List<string> listReference = new() { "a", "b", "c", "d", "e" };
-            ref string stringRef = ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(listReference));
+            ref string stringRef = ref MemoryMarshal.GetReference(
+                CollectionsMarshal.AsSpan(listReference)
+            );
             CollectionsMarshal.SetCount(listReference, 3);
 
             // verify that reference types aren't cleared
-            AssertExtensions.SequenceEqual(CollectionsMarshal.AsSpan(listReference), new string[] { "a", "b", "c" });
-            Assert.True(Unsafe.AreSame(ref stringRef, ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(listReference))));
+            AssertExtensions.SequenceEqual(
+                CollectionsMarshal.AsSpan(listReference),
+                new string[] { "a", "b", "c" }
+            );
+            Assert.True(
+                Unsafe.AreSame(
+                    ref stringRef,
+                    ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(listReference))
+                )
+            );
             CollectionsMarshal.SetCount(listReference, 5);
 
             // verify that removed reference types are cleared
-            AssertExtensions.SequenceEqual(CollectionsMarshal.AsSpan(listReference), new string[] { "a", "b", "c", null, null });
-            Assert.True(Unsafe.AreSame(ref stringRef, ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(listReference))));
+            AssertExtensions.SequenceEqual(
+                CollectionsMarshal.AsSpan(listReference),
+                new string[] { "a", "b", "c", null, null }
+            );
+            Assert.True(
+                Unsafe.AreSame(
+                    ref stringRef,
+                    ref MemoryMarshal.GetReference(CollectionsMarshal.AsSpan(listReference))
+                )
+            );
         }
     }
 }

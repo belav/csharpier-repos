@@ -42,15 +42,27 @@ namespace System.ServiceModel.Channels
         int maxPooledConnections;
         int pooledConnectionCount;
 
-        public ConnectionDemuxer(IConnectionListener listener, int maxAccepts, int maxPendingConnections,
-            TimeSpan channelInitializationTimeout, TimeSpan idleTimeout, int maxPooledConnections,
+        public ConnectionDemuxer(
+            IConnectionListener listener,
+            int maxAccepts,
+            int maxPendingConnections,
+            TimeSpan channelInitializationTimeout,
+            TimeSpan idleTimeout,
+            int maxPooledConnections,
             TransportSettingsCallback transportSettingsCallback,
             SingletonPreambleDemuxCallback singletonPreambleCallback,
-            ServerSessionPreambleDemuxCallback serverSessionPreambleCallback, ErrorCallback errorCallback)
+            ServerSessionPreambleDemuxCallback serverSessionPreambleCallback,
+            ErrorCallback errorCallback
+        )
         {
             this.connectionReaders = new List<InitialServerConnectionReader>();
-            this.acceptor =
-                new ConnectionAcceptor(listener, maxAccepts, maxPendingConnections, OnConnectionAvailable, errorCallback);
+            this.acceptor = new ConnectionAcceptor(
+                listener,
+                maxAccepts,
+                maxPendingConnections,
+                OnConnectionAvailable,
+                errorCallback
+            );
             this.channelInitializationTimeout = channelInitializationTimeout;
             this.idleTimeout = idleTimeout;
             this.maxPooledConnections = maxPooledConnections;
@@ -91,10 +103,16 @@ namespace System.ServiceModel.Channels
             {
                 if (onCachedConnectionModeKnown == null)
                 {
-                    onCachedConnectionModeKnown = new ConnectionModeCallback(OnCachedConnectionModeKnown);
+                    onCachedConnectionModeKnown = new ConnectionModeCallback(
+                        OnCachedConnectionModeKnown
+                    );
                 }
 
-                modeReader = new ConnectionModeReader(connection, onCachedConnectionModeKnown, onConnectionClosed);
+                modeReader = new ConnectionModeReader(
+                    connection,
+                    onCachedConnectionModeKnown,
+                    onConnectionClosed
+                );
             }
             else
             {
@@ -103,7 +121,11 @@ namespace System.ServiceModel.Channels
                     onConnectionModeKnown = new ConnectionModeCallback(OnConnectionModeKnown);
                 }
 
-                modeReader = new ConnectionModeReader(connection, onConnectionModeKnown, onConnectionClosed);
+                modeReader = new ConnectionModeReader(
+                    connection,
+                    onConnectionModeKnown,
+                    onConnectionClosed
+                );
             }
 
             lock (ThisLock)
@@ -131,7 +153,10 @@ namespace System.ServiceModel.Channels
                     reuseConnectionCallback = new Action<object>(ReuseConnectionCallback);
                 }
 
-                ActionItem.Schedule(reuseConnectionCallback, new ReuseConnectionState(modeReader, closeTimeout));
+                ActionItem.Schedule(
+                    reuseConnectionCallback,
+                    new ReuseConnectionState(modeReader, closeTimeout)
+                );
             }
         }
 
@@ -155,11 +180,20 @@ namespace System.ServiceModel.Channels
             {
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
                         TraceCode.ServerMaxPooledConnectionsQuotaReached,
-                        SR.GetString(SR.TraceCodeServerMaxPooledConnectionsQuotaReached, maxPooledConnections),
-                        new StringTraceRecord("MaxOutboundConnectionsPerEndpoint", maxPooledConnections.ToString(CultureInfo.InvariantCulture)),
-                        this, null);
+                        SR.GetString(
+                            SR.TraceCodeServerMaxPooledConnectionsQuotaReached,
+                            maxPooledConnections
+                        ),
+                        new StringTraceRecord(
+                            "MaxOutboundConnectionsPerEndpoint",
+                            maxPooledConnections.ToString(CultureInfo.InvariantCulture)
+                        ),
+                        this,
+                        null
+                    );
                 }
 
                 if (TD.ServerMaxPooledConnectionsQuotaReachedIsEnabled())
@@ -173,9 +207,14 @@ namespace System.ServiceModel.Channels
             {
                 if (this.pooledConnectionDequeuedCallback == null)
                 {
-                    this.pooledConnectionDequeuedCallback = new Action(PooledConnectionDequeuedCallback);
+                    this.pooledConnectionDequeuedCallback = new Action(
+                        PooledConnectionDequeuedCallback
+                    );
                 }
-                connectionState.ModeReader.StartReading(this.idleTimeout, this.pooledConnectionDequeuedCallback);
+                connectionState.ModeReader.StartReading(
+                    this.idleTimeout,
+                    this.pooledConnectionDequeuedCallback
+                );
             }
         }
 
@@ -184,7 +223,10 @@ namespace System.ServiceModel.Channels
             lock (ThisLock)
             {
                 this.pooledConnectionCount--;
-                Fx.Assert(this.pooledConnectionCount >= 0, "Connection Throttle should never be negative");
+                Fx.Assert(
+                    this.pooledConnectionCount >= 0,
+                    "Connection Throttle should never be negative"
+                );
             }
         }
 
@@ -194,10 +236,13 @@ namespace System.ServiceModel.Channels
 
             if (modeReader != null)
             {
-                // StartReading() will never throw non-fatal exceptions; 
-                // it propagates all exceptions into the onConnectionModeKnown callback, 
+                // StartReading() will never throw non-fatal exceptions;
+                // it propagates all exceptions into the onConnectionModeKnown callback,
                 // which is where we need our robust handling
-                modeReader.StartReading(this.channelInitializationTimeout, connectionDequeuedCallback);
+                modeReader.StartReading(
+                    this.channelInitializationTimeout,
+                    connectionDequeuedCallback
+                );
             }
             else
             {
@@ -243,13 +288,24 @@ namespace System.ServiceModel.Channels
                 {
                     if (!isCached)
                     {
-                        exception = new TimeoutException(SR.GetString(SR.ChannelInitializationTimeout, this.channelInitializationTimeout), exception);
+                        exception = new TimeoutException(
+                            SR.GetString(
+                                SR.ChannelInitializationTimeout,
+                                this.channelInitializationTimeout
+                            ),
+                            exception
+                        );
                         System.ServiceModel.Dispatcher.ErrorBehavior.ThrowAndCatch(exception);
                     }
 
                     if (TD.ChannelInitializationTimeoutIsEnabled())
                     {
-                        TD.ChannelInitializationTimeout(SR.GetString(SR.ChannelInitializationTimeout, this.channelInitializationTimeout));
+                        TD.ChannelInitializationTimeout(
+                            SR.GetString(
+                                SR.ChannelInitializationTimeout,
+                                this.channelInitializationTimeout
+                            )
+                        );
                     }
 
                     TraceEventType eventType = modeReader.Connection.ExceptionEventType;
@@ -260,26 +316,40 @@ namespace System.ServiceModel.Channels
                 switch (framingMode)
                 {
                     case FramingMode.Duplex:
-                        OnDuplexConnection(modeReader.Connection, modeReader.ConnectionDequeuedCallback,
-                            modeReader.StreamPosition, modeReader.BufferOffset, modeReader.BufferSize,
-                            modeReader.GetRemainingTimeout());
+                        OnDuplexConnection(
+                            modeReader.Connection,
+                            modeReader.ConnectionDequeuedCallback,
+                            modeReader.StreamPosition,
+                            modeReader.BufferOffset,
+                            modeReader.BufferSize,
+                            modeReader.GetRemainingTimeout()
+                        );
                         break;
 
                     case FramingMode.Singleton:
-                        OnSingletonConnection(modeReader.Connection, modeReader.ConnectionDequeuedCallback,
-                            modeReader.StreamPosition, modeReader.BufferOffset, modeReader.BufferSize,
-                            modeReader.GetRemainingTimeout());
+                        OnSingletonConnection(
+                            modeReader.Connection,
+                            modeReader.ConnectionDequeuedCallback,
+                            modeReader.StreamPosition,
+                            modeReader.BufferOffset,
+                            modeReader.BufferSize,
+                            modeReader.GetRemainingTimeout()
+                        );
                         break;
 
                     default:
-                        {
-                            Exception inner = new InvalidDataException(SR.GetString(
-                                SR.FramingModeNotSupported, framingMode));
-                            Exception exception = new ProtocolException(inner.Message, inner);
-                            FramingEncodingString.AddFaultString(exception, FramingEncodingString.UnsupportedModeFault);
-                            System.ServiceModel.Dispatcher.ErrorBehavior.ThrowAndCatch(exception);
-                            return;
-                        }
+                    {
+                        Exception inner = new InvalidDataException(
+                            SR.GetString(SR.FramingModeNotSupported, framingMode)
+                        );
+                        Exception exception = new ProtocolException(inner.Message, inner);
+                        FramingEncodingString.AddFaultString(
+                            exception,
+                            FramingEncodingString.UnsupportedModeFault
+                        );
+                        System.ServiceModel.Dispatcher.ErrorBehavior.ThrowAndCatch(exception);
+                        return;
+                    }
                 }
 
                 closeReader = false;
@@ -317,16 +387,30 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void OnSingletonConnection(IConnection connection, Action connectionDequeuedCallback,
-            long streamPosition, int offset, int size, TimeSpan timeout)
+        void OnSingletonConnection(
+            IConnection connection,
+            Action connectionDequeuedCallback,
+            long streamPosition,
+            int offset,
+            int size,
+            TimeSpan timeout
+        )
         {
             if (onSingletonPreambleKnown == null)
             {
                 onSingletonPreambleKnown = OnSingletonPreambleKnown;
             }
             ServerSingletonPreambleConnectionReader singletonPreambleReader =
-                new ServerSingletonPreambleConnectionReader(connection, connectionDequeuedCallback, streamPosition, offset, size,
-                transportSettingsCallback, onConnectionClosed, onSingletonPreambleKnown);
+                new ServerSingletonPreambleConnectionReader(
+                    connection,
+                    connectionDequeuedCallback,
+                    streamPosition,
+                    offset,
+                    size,
+                    transportSettingsCallback,
+                    onConnectionClosed,
+                    onSingletonPreambleKnown
+                );
 
             lock (ThisLock)
             {
@@ -341,7 +425,9 @@ namespace System.ServiceModel.Channels
             singletonPreambleReader.StartReading(viaDelegate, timeout);
         }
 
-        void OnSingletonPreambleKnown(ServerSingletonPreambleConnectionReader serverSingletonPreambleReader)
+        void OnSingletonPreambleKnown(
+            ServerSingletonPreambleConnectionReader serverSingletonPreambleReader
+        )
         {
             lock (ThisLock)
             {
@@ -355,16 +441,27 @@ namespace System.ServiceModel.Channels
 
             if (onSingletonPreambleComplete == null)
             {
-                onSingletonPreambleComplete = Fx.ThunkCallback(new AsyncCallback(OnSingletonPreambleComplete));
+                onSingletonPreambleComplete = Fx.ThunkCallback(
+                    new AsyncCallback(OnSingletonPreambleComplete)
+                );
             }
 
-            ISingletonChannelListener singletonChannelListener = singletonPreambleCallback(serverSingletonPreambleReader);
-            Fx.Assert(singletonChannelListener != null,
-                "singletonPreambleCallback must return a listener or send a Fault/throw");
+            ISingletonChannelListener singletonChannelListener = singletonPreambleCallback(
+                serverSingletonPreambleReader
+            );
+            Fx.Assert(
+                singletonChannelListener != null,
+                "singletonPreambleCallback must return a listener or send a Fault/throw"
+            );
 
             // transfer ownership of the connection from the preamble reader to the message handler
 
-            IAsyncResult result = BeginCompleteSingletonPreamble(serverSingletonPreambleReader, singletonChannelListener, onSingletonPreambleComplete, this);
+            IAsyncResult result = BeginCompleteSingletonPreamble(
+                serverSingletonPreambleReader,
+                singletonChannelListener,
+                onSingletonPreambleComplete,
+                this
+            );
 
             if (result.CompletedSynchronously)
             {
@@ -373,11 +470,19 @@ namespace System.ServiceModel.Channels
         }
 
         IAsyncResult BeginCompleteSingletonPreamble(
-            ServerSingletonPreambleConnectionReader serverSingletonPreambleReader, 
+            ServerSingletonPreambleConnectionReader serverSingletonPreambleReader,
             ISingletonChannelListener singletonChannelListener,
-            AsyncCallback callback, object state)
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new CompleteSingletonPreambleAndDispatchRequestAsyncResult(serverSingletonPreambleReader, singletonChannelListener, this, callback, state);
+            return new CompleteSingletonPreambleAndDispatchRequestAsyncResult(
+                serverSingletonPreambleReader,
+                singletonChannelListener,
+                this,
+                callback,
+                state
+            );
         }
 
         void EndCompleteSingletonPreamble(IAsyncResult result)
@@ -409,8 +514,10 @@ namespace System.ServiceModel.Channels
                 DiagnosticUtility.TraceHandledException(ex, TraceEventType.Warning);
             }
         }
-      
-        void OnSessionPreambleKnown(ServerSessionPreambleConnectionReader serverSessionPreambleReader)
+
+        void OnSessionPreambleKnown(
+            ServerSessionPreambleConnectionReader serverSessionPreambleReader
+        )
         {
             lock (ThisLock)
             {
@@ -427,24 +534,44 @@ namespace System.ServiceModel.Channels
             serverSessionPreambleCallback(serverSessionPreambleReader, this);
         }
 
-        static void TraceOnSessionPreambleKnown(ServerSessionPreambleConnectionReader serverSessionPreambleReader)
+        static void TraceOnSessionPreambleKnown(
+            ServerSessionPreambleConnectionReader serverSessionPreambleReader
+        )
         {
             if (TD.SessionPreambleUnderstoodIsEnabled())
             {
-                TD.SessionPreambleUnderstood((serverSessionPreambleReader.Via != null) ? serverSessionPreambleReader.Via.ToString() : String.Empty);
+                TD.SessionPreambleUnderstood(
+                    (serverSessionPreambleReader.Via != null)
+                        ? serverSessionPreambleReader.Via.ToString()
+                        : String.Empty
+                );
             }
         }
 
-        void OnDuplexConnection(IConnection connection, Action connectionDequeuedCallback,
-            long streamPosition, int offset, int size, TimeSpan timeout)
+        void OnDuplexConnection(
+            IConnection connection,
+            Action connectionDequeuedCallback,
+            long streamPosition,
+            int offset,
+            int size,
+            TimeSpan timeout
+        )
         {
             if (onSessionPreambleKnown == null)
             {
                 onSessionPreambleKnown = OnSessionPreambleKnown;
             }
-            ServerSessionPreambleConnectionReader sessionPreambleReader = new ServerSessionPreambleConnectionReader(
-                connection, connectionDequeuedCallback, streamPosition, offset, size,
-                transportSettingsCallback, onConnectionClosed, onSessionPreambleKnown);
+            ServerSessionPreambleConnectionReader sessionPreambleReader =
+                new ServerSessionPreambleConnectionReader(
+                    connection,
+                    connectionDequeuedCallback,
+                    streamPosition,
+                    offset,
+                    size,
+                    transportSettingsCallback,
+                    onConnectionClosed,
+                    onSessionPreambleKnown
+                );
             lock (ThisLock)
             {
                 if (isDisposed)
@@ -477,20 +604,24 @@ namespace System.ServiceModel.Channels
             ConnectionDemuxer demuxer;
             TimeoutHelper timeoutHelper;
 
-            static AsyncCallback onPreambleComplete = Fx.ThunkCallback(new AsyncCallback(OnPreambleComplete));
+            static AsyncCallback onPreambleComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnPreambleComplete)
+            );
 
             public CompleteSingletonPreambleAndDispatchRequestAsyncResult(
                 ServerSingletonPreambleConnectionReader serverSingletonPreambleReader,
                 ISingletonChannelListener singletonChannelListener,
                 ConnectionDemuxer demuxer,
-                AsyncCallback callback, object state)
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.serverSingletonPreambleReader = serverSingletonPreambleReader;
                 this.singletonChannelListener = singletonChannelListener;
                 this.demuxer = demuxer;
 
-                //if this throws, the calling code paths will abort the connection, so we only need to 
+                //if this throws, the calling code paths will abort the connection, so we only need to
                 //call AbortConnection if BeginCompletePramble completes asynchronously.
                 if (BeginCompletePreamble())
                 {
@@ -505,8 +636,14 @@ namespace System.ServiceModel.Channels
 
             bool BeginCompletePreamble()
             {
-                this.timeoutHelper = new TimeoutHelper(this.singletonChannelListener.ReceiveTimeout);
-                IAsyncResult result = this.serverSingletonPreambleReader.BeginCompletePreamble(this.timeoutHelper.RemainingTime(), onPreambleComplete, this);
+                this.timeoutHelper = new TimeoutHelper(
+                    this.singletonChannelListener.ReceiveTimeout
+                );
+                IAsyncResult result = this.serverSingletonPreambleReader.BeginCompletePreamble(
+                    this.timeoutHelper.RemainingTime(),
+                    onPreambleComplete,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -523,7 +660,8 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                CompleteSingletonPreambleAndDispatchRequestAsyncResult thisPtr = (CompleteSingletonPreambleAndDispatchRequestAsyncResult)result.AsyncState;
+                CompleteSingletonPreambleAndDispatchRequestAsyncResult thisPtr =
+                    (CompleteSingletonPreambleAndDispatchRequestAsyncResult)result.AsyncState;
                 bool completeSelf = false;
 
                 try
@@ -551,12 +689,24 @@ namespace System.ServiceModel.Channels
 
             bool HandlePreambleComplete(IAsyncResult result)
             {
-                IConnection upgradedConnection = this.serverSingletonPreambleReader.EndCompletePreamble(result);
-                ServerSingletonConnectionReader singletonReader = new ServerSingletonConnectionReader(serverSingletonPreambleReader, upgradedConnection, this.demuxer);
+                IConnection upgradedConnection =
+                    this.serverSingletonPreambleReader.EndCompletePreamble(result);
+                ServerSingletonConnectionReader singletonReader =
+                    new ServerSingletonConnectionReader(
+                        serverSingletonPreambleReader,
+                        upgradedConnection,
+                        this.demuxer
+                    );
 
                 //singletonReader doesn't have async version of ReceiveRequest, so just call the sync method for now.
-                RequestContext requestContext = singletonReader.ReceiveRequest(this.timeoutHelper.RemainingTime());
-                singletonChannelListener.ReceiveRequest(requestContext, serverSingletonPreambleReader.ConnectionDequeuedCallback, true);
+                RequestContext requestContext = singletonReader.ReceiveRequest(
+                    this.timeoutHelper.RemainingTime()
+                );
+                singletonChannelListener.ReceiveRequest(
+                    requestContext,
+                    serverSingletonPreambleReader.ConnectionDequeuedCallback,
+                    true
+                );
 
                 return true;
             }

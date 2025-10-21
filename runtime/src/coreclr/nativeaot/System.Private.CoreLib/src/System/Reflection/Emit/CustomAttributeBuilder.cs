@@ -10,17 +10,34 @@ namespace System.Reflection.Emit
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
 
-        public CustomAttributeBuilder(ConstructorInfo con, object[] constructorArgs, FieldInfo[] namedFields, object[] fieldValues)
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object[] constructorArgs,
+            FieldInfo[] namedFields,
+            object[] fieldValues
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
 
-        public CustomAttributeBuilder(ConstructorInfo con, object[] constructorArgs, PropertyInfo[] namedProperties, object[] propertyValues)
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object[] propertyValues
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
 
-        public CustomAttributeBuilder(ConstructorInfo con, object[] constructorArgs, PropertyInfo[] namedProperties, object[] propertyValues, FieldInfo[] namedFields, object[] fieldValues)
+        public CustomAttributeBuilder(
+            ConstructorInfo con,
+            object[] constructorArgs,
+            PropertyInfo[] namedProperties,
+            object[] propertyValues,
+            FieldInfo[] namedFields,
+            object[] fieldValues
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }

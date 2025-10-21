@@ -44,7 +44,9 @@ namespace System.Xml.XmlDocumentTests
         public static void NoNamespaceWhenAttributeByThatNameWithNamespaceExists()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<ns1:elem1 ns1:att1=\"value1\" att1=\"value2\" xmlns:ns1=\"urn:URN1\"></ns1:elem1>");
+            xmlDocument.LoadXml(
+                "<ns1:elem1 ns1:att1=\"value1\" att1=\"value2\" xmlns:ns1=\"urn:URN1\"></ns1:elem1>"
+            );
 
             var node = (XmlElement)xmlDocument.DocumentElement;
             node.SetAttribute("att3", "value3");
@@ -58,7 +60,9 @@ namespace System.Xml.XmlDocumentTests
         public static void ValueWithNamespace()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<ns1:elem1 ns1:att1=\"value1\" att1=\"value2\" xmlns:ns1=\"urn:URN1\"></ns1:elem1>");
+            xmlDocument.LoadXml(
+                "<ns1:elem1 ns1:att1=\"value1\" att1=\"value2\" xmlns:ns1=\"urn:URN1\"></ns1:elem1>"
+            );
 
             var node = (XmlElement)xmlDocument.DocumentElement;
             var attribute = node.GetAttributeNode("ns1:att1");

@@ -13,31 +13,56 @@ namespace System.Numerics.Tests
         [Fact]
         public static void AwayFromZeroRoundingTest()
         {
-            Assert.Equal(float.Round(baseValue, MidpointRounding.AwayFromZero), FloatingPointHelper<FloatingPointDimHelper>.Round(helperValue, MidpointRounding.AwayFromZero).Value);
+            Assert.Equal(
+                float.Round(baseValue, MidpointRounding.AwayFromZero),
+                FloatingPointHelper<FloatingPointDimHelper>
+                    .Round(helperValue, MidpointRounding.AwayFromZero)
+                    .Value
+            );
         }
 
         [Fact]
         public static void ToEvenRoundingTest()
         {
-            Assert.Equal(float.Round(baseValue, MidpointRounding.ToEven), FloatingPointHelper<FloatingPointDimHelper>.Round(helperValue, MidpointRounding.ToEven).Value);
+            Assert.Equal(
+                float.Round(baseValue, MidpointRounding.ToEven),
+                FloatingPointHelper<FloatingPointDimHelper>
+                    .Round(helperValue, MidpointRounding.ToEven)
+                    .Value
+            );
         }
 
         [Fact]
         public static void ToNegativeInfinityRoundingTest()
         {
-            Assert.Equal(float.Round(baseValue, MidpointRounding.ToNegativeInfinity), FloatingPointHelper<FloatingPointDimHelper>.Round(helperValue, MidpointRounding.ToNegativeInfinity).Value);
+            Assert.Equal(
+                float.Round(baseValue, MidpointRounding.ToNegativeInfinity),
+                FloatingPointHelper<FloatingPointDimHelper>
+                    .Round(helperValue, MidpointRounding.ToNegativeInfinity)
+                    .Value
+            );
         }
 
         [Fact]
         public static void ToPositiveRoundingTest()
         {
-            Assert.Equal(float.Round(baseValue, MidpointRounding.ToPositiveInfinity), FloatingPointHelper<FloatingPointDimHelper>.Round(helperValue, MidpointRounding.ToPositiveInfinity).Value);
+            Assert.Equal(
+                float.Round(baseValue, MidpointRounding.ToPositiveInfinity),
+                FloatingPointHelper<FloatingPointDimHelper>
+                    .Round(helperValue, MidpointRounding.ToPositiveInfinity)
+                    .Value
+            );
         }
 
         [Fact]
         public static void ToZeroRoundingTest()
         {
-            Assert.Equal(float.Round(baseValue, MidpointRounding.ToZero), FloatingPointHelper<FloatingPointDimHelper>.Round(helperValue, MidpointRounding.ToZero).Value);
+            Assert.Equal(
+                float.Round(baseValue, MidpointRounding.ToZero),
+                FloatingPointHelper<FloatingPointDimHelper>
+                    .Round(helperValue, MidpointRounding.ToZero)
+                    .Value
+            );
         }
     }
 }

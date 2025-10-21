@@ -40,12 +40,11 @@ namespace AnalyzerRunner
             }
 
             var cts = new CancellationTokenSource();
-            Console.CancelKeyPress +=
-                (sender, e) =>
-                {
-                    e.Cancel = true;
-                    cts.Cancel();
-                };
+            Console.CancelKeyPress += (sender, e) =>
+            {
+                e.Cancel = true;
+                cts.Cancel();
+            };
 
             var cancellationToken = cts.Token;
 
@@ -61,7 +60,11 @@ namespace AnalyzerRunner
             var diagnosticAnalyzerRunner = new DiagnosticAnalyzerRunner(workspace, options);
             var codeRefactoringRunner = new CodeRefactoringRunner(workspace, options);
 
-            if (!incrementalAnalyzerRunner.HasAnalyzers && !diagnosticAnalyzerRunner.HasAnalyzers && !codeRefactoringRunner.HasRefactorings)
+            if (
+                !incrementalAnalyzerRunner.HasAnalyzers
+                && !diagnosticAnalyzerRunner.HasAnalyzers
+                && !codeRefactoringRunner.HasRefactorings
+            )
             {
                 WriteLine("No analyzers found", ConsoleColor.Red);
                 PrintHelp();
@@ -75,7 +78,9 @@ namespace AnalyzerRunner
                 ProfileOptimization.StartProfile(nameof(MSBuildWorkspace.OpenSolutionAsync));
             }
 
-            await workspace.OpenSolutionAsync(options.SolutionPath, progress: null, cancellationToken).ConfigureAwait(false);
+            await workspace
+                .OpenSolutionAsync(options.SolutionPath, progress: null, cancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var workspaceDiagnostic in workspace.Diagnostics)
             {
@@ -91,12 +96,15 @@ namespace AnalyzerRunner
             {
                 stopwatch = PerformanceTracker.StartNew();
                 ShowSolutionStatistics(workspace.CurrentSolution, cancellationToken);
-                Console.WriteLine($"Statistics gathered in {stopwatch.GetSummary(preciseMemory: true)}");
+                Console.WriteLine(
+                    $"Statistics gathered in {stopwatch.GetSummary(preciseMemory: true)}"
+                );
             }
 
             if (options.ShowCompilerDiagnostics)
             {
-                await ShowCompilerDiagnosticsAsync(workspace.CurrentSolution, cancellationToken).ConfigureAwait(false);
+                await ShowCompilerDiagnosticsAsync(workspace.CurrentSolution, cancellationToken)
+                    .ConfigureAwait(false);
             }
 
             Console.WriteLine("Pausing 5 seconds before starting analysis...");
@@ -106,7 +114,9 @@ namespace AnalyzerRunner
             {
                 if (!string.IsNullOrEmpty(options.ProfileRoot))
                 {
-                    ProfileOptimization.StartProfile(nameof(Microsoft.CodeAnalysis.SolutionCrawler.IIncrementalAnalyzer));
+                    ProfileOptimization.StartProfile(
+                        nameof(Microsoft.CodeAnalysis.SolutionCrawler.IIncrementalAnalyzer)
+                    );
                 }
 
                 await incrementalAnalyzerRunner.RunAsync(cancellationToken).ConfigureAwait(false);
@@ -133,21 +143,37 @@ namespace AnalyzerRunner
             }
         }
 
-        private static async Task ShowCompilerDiagnosticsAsync(Solution solution, CancellationToken cancellationToken)
+        private static async Task ShowCompilerDiagnosticsAsync(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             var projectIds = solution.ProjectIds;
 
             foreach (var projectId in projectIds)
             {
-                solution = solution.WithProjectAnalyzerReferences(projectId, ImmutableArray<AnalyzerReference>.Empty);
+                solution = solution.WithProjectAnalyzerReferences(
+                    projectId,
+                    ImmutableArray<AnalyzerReference>.Empty
+                );
             }
 
-            var projects = solution.Projects.Where(project => project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic).ToList();
+            var projects = solution
+                .Projects.Where(project =>
+                    project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
+                )
+                .ToList();
 
-            var diagnosticStatistics = new Dictionary<string, (string description, DiagnosticSeverity severity, int count)>();
+            var diagnosticStatistics =
+                new Dictionary<
+                    string,
+                    (string description, DiagnosticSeverity severity, int count)
+                >();
             foreach (var project in projects)
             {
-                var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                var compilation = await project
+                    .GetCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 foreach (var diagnostic in compilation.GetDiagnostics(cancellationToken))
                 {
                     diagnosticStatistics.TryGetValue(diagnostic.Id, out var existing);
@@ -161,19 +187,32 @@ namespace AnalyzerRunner
                         }
                     }
 
-                    diagnosticStatistics[diagnostic.Id] = (description, diagnostic.Descriptor.DefaultSeverity, existing.count + 1);
+                    diagnosticStatistics[diagnostic.Id] = (
+                        description,
+                        diagnostic.Descriptor.DefaultSeverity,
+                        existing.count + 1
+                    );
                 }
             }
 
             foreach (var pair in diagnosticStatistics)
             {
-                Console.WriteLine($"  {pair.Value.severity} {pair.Key}: {pair.Value.count} instances ({pair.Value.description})");
+                Console.WriteLine(
+                    $"  {pair.Value.severity} {pair.Key}: {pair.Value.count} instances ({pair.Value.description})"
+                );
             }
         }
 
-        private static void ShowSolutionStatistics(Solution solution, CancellationToken cancellationToken)
+        private static void ShowSolutionStatistics(
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
-            var projects = solution.Projects.Where(project => project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic).ToList();
+            var projects = solution
+                .Projects.Where(project =>
+                    project.Language is LanguageNames.CSharp or LanguageNames.VisualBasic
+                )
+                .ToList();
 
             Console.WriteLine("Number of projects:\t\t" + projects.Count);
             Console.WriteLine("Number of documents:\t\t" + projects.Sum(x => x.DocumentIds.Count));
@@ -185,23 +224,38 @@ namespace AnalyzerRunner
             Console.WriteLine("Number of syntax trivia:\t" + statistics.NumberOfTrivia);
         }
 
-        private static Statistic GetSolutionStatistics(IEnumerable<Project> projects, CancellationToken cancellationToken)
+        private static Statistic GetSolutionStatistics(
+            IEnumerable<Project> projects,
+            CancellationToken cancellationToken
+        )
         {
             var sums = new ConcurrentBag<Statistic>();
 
-            Parallel.ForEach(projects.SelectMany(project => project.Documents), document =>
-            {
-                var documentStatistics = GetSolutionStatisticsAsync(document, cancellationToken).ConfigureAwait(false).GetAwaiter().GetResult();
-                sums.Add(documentStatistics);
-            });
+            Parallel.ForEach(
+                projects.SelectMany(project => project.Documents),
+                document =>
+                {
+                    var documentStatistics = GetSolutionStatisticsAsync(document, cancellationToken)
+                        .ConfigureAwait(false)
+                        .GetAwaiter()
+                        .GetResult();
+                    sums.Add(documentStatistics);
+                }
+            );
 
-            var sum = sums.Aggregate(new Statistic(0, 0, 0), (currentResult, value) => currentResult + value);
+            var sum = sums.Aggregate(
+                new Statistic(0, 0, 0),
+                (currentResult, value) => currentResult + value
+            );
             return sum;
         }
 
         // TODO consider removing this and using GetAnalysisResultAsync
         // https://github.com/dotnet/roslyn/issues/23108
-        private static async Task<Statistic> GetSolutionStatisticsAsync(Document document, CancellationToken cancellationToken)
+        private static async Task<Statistic> GetSolutionStatisticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
 
@@ -225,19 +279,35 @@ namespace AnalyzerRunner
 
         internal static void PrintHelp()
         {
-            Console.WriteLine("Usage: AnalyzerRunner <AnalyzerAssemblyOrFolder> <Solution> [options]");
+            Console.WriteLine(
+                "Usage: AnalyzerRunner <AnalyzerAssemblyOrFolder> <Solution> [options]"
+            );
             Console.WriteLine("Options:");
-            Console.WriteLine("/all                 Run all analyzers, including ones that are disabled by default");
+            Console.WriteLine(
+                "/all                 Run all analyzers, including ones that are disabled by default"
+            );
             Console.WriteLine("/stats               Display statistics of the solution");
-            Console.WriteLine("/a <analyzer name>   Enable analyzer with <analyzer name> (when this is specified, only analyzers specificed are enabled. Use: /a <name1> /a <name2>, etc.");
+            Console.WriteLine(
+                "/a <analyzer name>   Enable analyzer with <analyzer name> (when this is specified, only analyzers specificed are enabled. Use: /a <name1> /a <name2>, etc."
+            );
             Console.WriteLine("/concurrent          Executes analyzers in concurrent mode");
             Console.WriteLine("/suppressed          Reports suppressed diagnostics");
             Console.WriteLine("/log <logFile>       Write logs into the log file specified");
-            Console.WriteLine("/editperf[:<match>]     Test the incremental performance of analyzers to simulate the behavior of editing files. If <match> is specified, only files matching this regular expression are evaluated for editor performance.");
-            Console.WriteLine("/edititer:<iterations>  Specifies the number of iterations to use for testing documents with /editperf. When this is not specified, the default value is 10.");
-            Console.WriteLine("/persist             Enable persistent storage (e.g. SQLite; only applies to IIncrementalAnalyzer testing)");
-            Console.WriteLine("/fsa                 Enable full solution analysis (only applies to IIncrementalAnalyzer testing)");
-            Console.WriteLine("/ia <analyzer name>  Enable incremental analyzer with <analyzer name> (when this is specified, only incremental analyzers specified are enabled. Use: /ia <name1> /ia <name2>, etc.");
+            Console.WriteLine(
+                "/editperf[:<match>]     Test the incremental performance of analyzers to simulate the behavior of editing files. If <match> is specified, only files matching this regular expression are evaluated for editor performance."
+            );
+            Console.WriteLine(
+                "/edititer:<iterations>  Specifies the number of iterations to use for testing documents with /editperf. When this is not specified, the default value is 10."
+            );
+            Console.WriteLine(
+                "/persist             Enable persistent storage (e.g. SQLite; only applies to IIncrementalAnalyzer testing)"
+            );
+            Console.WriteLine(
+                "/fsa                 Enable full solution analysis (only applies to IIncrementalAnalyzer testing)"
+            );
+            Console.WriteLine(
+                "/ia <analyzer name>  Enable incremental analyzer with <analyzer name> (when this is specified, only incremental analyzers specified are enabled. Use: /ia <name1> /ia <name2>, etc."
+            );
         }
     }
 }

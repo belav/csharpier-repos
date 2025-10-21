@@ -52,7 +52,10 @@ namespace System.Buffers.ArrayPool.Tests
         [InlineData(-1)]
         public static void CreatingAPoolWithInvalidArrayCountThrows(int length)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxArraysPerBucket", () => ArrayPool<byte>.Create(maxArraysPerBucket: length, maxArrayLength: 16));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxArraysPerBucket",
+                () => ArrayPool<byte>.Create(maxArraysPerBucket: length, maxArrayLength: 16)
+            );
         }
 
         [Theory]
@@ -60,7 +63,10 @@ namespace System.Buffers.ArrayPool.Tests
         [InlineData(-1)]
         public static void CreatingAPoolWithInvalidMaximumArraySizeThrows(int length)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxArrayLength", () => ArrayPool<byte>.Create(maxArrayLength: length, maxArraysPerBucket: 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "maxArrayLength",
+                () => ArrayPool<byte>.Create(maxArrayLength: length, maxArraysPerBucket: 1)
+            );
         }
 
         [Theory]
@@ -79,7 +85,10 @@ namespace System.Buffers.ArrayPool.Tests
         [MemberData(nameof(BytePoolInstances))]
         public static void RentingWithInvalidLengthThrows(ArrayPool<byte> pool)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("minimumLength", () => pool.Rent(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "minimumLength",
+                () => pool.Rent(-1)
+            );
         }
 
         [Fact]
@@ -119,14 +128,20 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingMultipleArraysGivesBackDifferentInstances()
         {
-            ArrayPool<byte> instance = ArrayPool<byte>.Create(maxArraysPerBucket: 2, maxArrayLength: 16);
+            ArrayPool<byte> instance = ArrayPool<byte>.Create(
+                maxArraysPerBucket: 2,
+                maxArrayLength: 16
+            );
             Assert.NotSame(instance.Rent(100), instance.Rent(100));
         }
 
         [Fact]
         public static void RentingMoreArraysThanSpecifiedInCreateWillStillSucceed()
         {
-            ArrayPool<byte> instance = ArrayPool<byte>.Create(maxArraysPerBucket: 1, maxArrayLength: 16);
+            ArrayPool<byte> instance = ArrayPool<byte>.Create(
+                maxArraysPerBucket: 1,
+                maxArrayLength: 16
+            );
             Assert.NotNull(instance.Rent(100));
             Assert.NotNull(instance.Rent(100));
         }
@@ -134,7 +149,10 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentCanReturnBiggerArraySizeThanRequested()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArraysPerBucket: 1, maxArrayLength: 32);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArraysPerBucket: 1,
+                maxArrayLength: 32
+            );
             byte[] rented = pool.Rent(27);
             Assert.NotNull(rented);
             Assert.Equal(32, rented.Length);
@@ -143,7 +161,9 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAnArrayWithLengthGreaterThanSpecifiedInCreateStillSucceeds()
         {
-            Assert.NotNull(ArrayPool<byte>.Create(maxArrayLength: 100, maxArraysPerBucket: 1).Rent(200));
+            Assert.NotNull(
+                ArrayPool<byte>.Create(maxArrayLength: 100, maxArraysPerBucket: 1).Rent(200)
+            );
         }
 
         [Theory]
@@ -228,7 +248,10 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void TakingAllBuffersFromABucketPlusAnAllocatedOneShouldAllowReturningAllBuffers()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArrayLength: 16,
+                maxArraysPerBucket: 1
+            );
             byte[] rented = pool.Rent(16);
             byte[] allocated = pool.Rent(16);
             pool.Return(rented);
@@ -246,7 +269,10 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void ReturningToCreatePoolABufferGreaterThanMaxSizeDoesNotThrow()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArrayLength: 16,
+                maxArraysPerBucket: 1
+            );
             byte[] rented = pool.Rent(32);
             pool.Return(rented);
         }
@@ -254,7 +280,10 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAllBuffersAndCallingRentAgainWillAllocateBufferAndReturnIt()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArrayLength: 16,
+                maxArraysPerBucket: 1
+            );
             byte[] rented1 = pool.Rent(16);
             byte[] rented2 = pool.Rent(16);
             Assert.NotNull(rented1);
@@ -264,7 +293,10 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingReturningThenRentingABufferShouldNotAllocate()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArrayLength: 16,
+                maxArraysPerBucket: 1
+            );
             byte[] bt = pool.Rent(16);
             int id = bt.GetHashCode();
             pool.Return(bt);
@@ -279,7 +311,10 @@ namespace System.Buffers.ArrayPool.Tests
             for (int i = 1; i < 10000; i++)
             {
                 byte[] buffer = pool.Rent(i);
-                Assert.Equal(i <= 16 ? 16 : (int)BitOperations.RoundUpToPowerOf2((uint)i), buffer.Length);
+                Assert.Equal(
+                    i <= 16 ? 16 : (int)BitOperations.RoundUpToPowerOf2((uint)i),
+                    buffer.Length
+                );
                 pool.Return(buffer);
             }
         }
@@ -294,9 +329,21 @@ namespace System.Buffers.ArrayPool.Tests
         [InlineData(1024 * 1024, 1024 * 1024)]
         [InlineData(1024 * 1024 + 1, 1024 * 1024 * 2)]
         [InlineData(1024 * 1024 * 2, 1024 * 1024 * 2)]
-        public static void RentingSpecificLengthsYieldsExpectedLengths(int requestedMinimum, int expectedLength)
+        public static void RentingSpecificLengthsYieldsExpectedLengths(
+            int requestedMinimum,
+            int expectedLength
+        )
         {
-            foreach (ArrayPool<byte> pool in new[] { ArrayPool<byte>.Create((int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum), 1), ArrayPool<byte>.Shared })
+            foreach (
+                ArrayPool<byte> pool in new[]
+                {
+                    ArrayPool<byte>.Create(
+                        (int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum),
+                        1
+                    ),
+                    ArrayPool<byte>.Shared,
+                }
+            )
             {
                 byte[] buffer1 = pool.Rent(requestedMinimum);
                 byte[] buffer2 = pool.Rent(requestedMinimum);
@@ -313,7 +360,16 @@ namespace System.Buffers.ArrayPool.Tests
                 pool.Return(buffer1);
             }
 
-            foreach (ArrayPool<char> pool in new[] { ArrayPool<char>.Create((int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum), 1), ArrayPool<char>.Shared })
+            foreach (
+                ArrayPool<char> pool in new[]
+                {
+                    ArrayPool<char>.Create(
+                        (int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum),
+                        1
+                    ),
+                    ArrayPool<char>.Shared,
+                }
+            )
             {
                 char[] buffer1 = pool.Rent(requestedMinimum);
                 char[] buffer2 = pool.Rent(requestedMinimum);
@@ -330,7 +386,16 @@ namespace System.Buffers.ArrayPool.Tests
                 pool.Return(buffer1);
             }
 
-            foreach (ArrayPool<string> pool in new[] { ArrayPool<string>.Create((int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum), 1), ArrayPool<string>.Shared })
+            foreach (
+                ArrayPool<string> pool in new[]
+                {
+                    ArrayPool<string>.Create(
+                        (int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum),
+                        1
+                    ),
+                    ArrayPool<string>.Shared,
+                }
+            )
             {
                 string[] buffer1 = pool.Rent(requestedMinimum);
                 string[] buffer2 = pool.Rent(requestedMinimum);
@@ -348,43 +413,61 @@ namespace System.Buffers.ArrayPool.Tests
             }
         }
 
-        public static bool Is64BitProcessAndRemoteExecutorSupported => PlatformDetection.Is64BitProcess && RemoteExecutor.IsSupported;
+        public static bool Is64BitProcessAndRemoteExecutorSupported =>
+            PlatformDetection.Is64BitProcess && RemoteExecutor.IsSupported;
 
         [ConditionalTheory(nameof(Is64BitProcessAndRemoteExecutorSupported))]
         [InlineData(1024 * 1024 * 1024 - 1, true)]
         [InlineData(1024 * 1024 * 1024, true)]
         [InlineData(1024 * 1024 * 1024 + 1, false)]
-        [InlineData(0X7FFFFFC7 /* Array.MaxLength */, false)]
+        [InlineData(
+            0X7FFFFFC7 /* Array.MaxLength */
+            ,
+            false
+        )]
         [OuterLoop]
         public static void RentingGiganticArraySucceeds(int length, bool expectPooled)
         {
             var options = new RemoteInvokeOptions();
             options.StartInfo.UseShellExecute = false;
 
-            RemoteExecutor.Invoke((lengthStr, expectPooledStr) =>
-            {
-                int length = int.Parse(lengthStr);
-                byte[] array;
-                try
-                {
-                    array = ArrayPool<byte>.Shared.Rent(length);
-                }
-                catch (OutOfMemoryException)
-                {
-                    return;
-                }
+            RemoteExecutor
+                .Invoke(
+                    (lengthStr, expectPooledStr) =>
+                    {
+                        int length = int.Parse(lengthStr);
+                        byte[] array;
+                        try
+                        {
+                            array = ArrayPool<byte>.Shared.Rent(length);
+                        }
+                        catch (OutOfMemoryException)
+                        {
+                            return;
+                        }
 
-                Assert.InRange(array.Length, length, int.MaxValue);
-                ArrayPool<byte>.Shared.Return(array);
+                        Assert.InRange(array.Length, length, int.MaxValue);
+                        ArrayPool<byte>.Shared.Return(array);
 
-                Assert.Equal(bool.Parse(expectPooledStr), ReferenceEquals(array, ArrayPool<byte>.Shared.Rent(length)));
-            }, length.ToString(), expectPooled.ToString(), options).Dispose();
+                        Assert.Equal(
+                            bool.Parse(expectPooledStr),
+                            ReferenceEquals(array, ArrayPool<byte>.Shared.Rent(length))
+                        );
+                    },
+                    length.ToString(),
+                    expectPooled.ToString(),
+                    options
+                )
+                .Dispose();
         }
 
         [Fact]
         public static void RentingAfterPoolExhaustionReturnsSizeForCorrespondingBucket_SmallerThanLimit()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 64, maxArraysPerBucket: 2);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArrayLength: 64,
+                maxArraysPerBucket: 2
+            );
 
             Assert.Equal(16, pool.Rent(15).Length); // try initial bucket
             Assert.Equal(16, pool.Rent(15).Length);
@@ -398,7 +481,10 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAfterPoolExhaustionReturnsSizeForCorrespondingBucket_JustBelowLimit()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 64, maxArraysPerBucket: 2);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArrayLength: 64,
+                maxArraysPerBucket: 2
+            );
 
             Assert.Equal(32, pool.Rent(31).Length); // try initial bucket
             Assert.Equal(32, pool.Rent(31).Length);
@@ -412,7 +498,10 @@ namespace System.Buffers.ArrayPool.Tests
         [Fact]
         public static void RentingAfterPoolExhaustionReturnsSizeForCorrespondingBucket_AtLimit()
         {
-            ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 64, maxArraysPerBucket: 2);
+            ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                maxArrayLength: 64,
+                maxArraysPerBucket: 2
+            );
 
             Assert.Equal(64, pool.Rent(63).Length); // try initial bucket
             Assert.Equal(64, pool.Rent(63).Length);
@@ -425,18 +514,28 @@ namespace System.Buffers.ArrayPool.Tests
         {
             RemoteInvokeWithTrimming(() =>
             {
-                ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
 
                 byte[] buffer = pool.Rent(16);
                 pool.Return(buffer);
 
-                Assert.Equal(1, RunWithListener(() => pool.Rent(16), EventLevel.Verbose, e =>
-                {
-                    Assert.Equal(1, e.EventId);
-                    Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
-                    Assert.Equal(buffer.Length, e.Payload[1]);
-                    Assert.Equal(pool.GetHashCode(), e.Payload[2]);
-                }));
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Rent(16),
+                        EventLevel.Verbose,
+                        e =>
+                        {
+                            Assert.Equal(1, e.EventId);
+                            Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
+                            Assert.Equal(buffer.Length, e.Payload[1]);
+                            Assert.Equal(pool.GetHashCode(), e.Payload[2]);
+                        }
+                    )
+                );
             });
         }
 
@@ -461,7 +560,8 @@ namespace System.Buffers.ArrayPool.Tests
                         }
                     },
                     EventLevel.Informational,
-                    events.Enqueue);
+                    events.Enqueue
+                );
 
                 Assert.Contains(events, e => e.EventId == 6);
             });
@@ -472,15 +572,25 @@ namespace System.Buffers.ArrayPool.Tests
         {
             RemoteInvokeWithTrimming(() =>
             {
-                ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
                 byte[] buffer = pool.Rent(16);
-                Assert.Equal(1, RunWithListener(() => pool.Return(buffer), EventLevel.Verbose, e =>
-                {
-                    Assert.Equal(3, e.EventId);
-                    Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
-                    Assert.Equal(buffer.Length, e.Payload[1]);
-                    Assert.Equal(pool.GetHashCode(), e.Payload[2]);
-                }));
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Return(buffer),
+                        EventLevel.Verbose,
+                        e =>
+                        {
+                            Assert.Equal(3, e.EventId);
+                            Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
+                            Assert.Equal(buffer.Length, e.Payload[1]);
+                            Assert.Equal(pool.GetHashCode(), e.Payload[2]);
+                        }
+                    )
+                );
             });
         }
 
@@ -489,8 +599,18 @@ namespace System.Buffers.ArrayPool.Tests
         {
             RemoteInvokeWithTrimming(() =>
             {
-                ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
-                Assert.Equal(1, RunWithListener(() => pool.Rent(16), EventLevel.Informational, e => Assert.Equal(2, e.EventId)));
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Rent(16),
+                        EventLevel.Informational,
+                        e => Assert.Equal(2, e.EventId)
+                    )
+                );
             });
         }
 
@@ -499,8 +619,18 @@ namespace System.Buffers.ArrayPool.Tests
         {
             RemoteInvokeWithTrimming(() =>
             {
-                ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 1);
-                Assert.Equal(1, RunWithListener(() => pool.Rent(64), EventLevel.Informational, e => Assert.Equal(2, e.EventId)));
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Rent(64),
+                        EventLevel.Informational,
+                        e => Assert.Equal(2, e.EventId)
+                    )
+                );
             });
         }
 
@@ -509,20 +639,30 @@ namespace System.Buffers.ArrayPool.Tests
         {
             RemoteInvokeWithTrimming(() =>
             {
-                ArrayPool<byte> pool = ArrayPool<byte>.Create(maxArrayLength: 16, maxArraysPerBucket: 10);
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 10
+                );
                 var list = new List<EventWrittenEventArgs>();
 
-                Assert.Equal(60, RunWithListener(() =>
-                {
-                    for (int i = 0; i < 10; i++)
-                        pool.Return(pool.Rent(16)); // 10 rents + 10 allocations, 10 returns
-                    for (int i = 0; i < 10; i++)
-                        pool.Return(pool.Rent(0)); // 0 events for empty arrays
-                    for (int i = 0; i < 10; i++)
-                        pool.Rent(16); // 10 rents
-                    for (int i = 0; i < 10; i++)
-                        pool.Rent(16); // 10 rents + 10 allocations
-                }, EventLevel.Verbose, list.Add));
+                Assert.Equal(
+                    60,
+                    RunWithListener(
+                        () =>
+                        {
+                            for (int i = 0; i < 10; i++)
+                                pool.Return(pool.Rent(16)); // 10 rents + 10 allocations, 10 returns
+                            for (int i = 0; i < 10; i++)
+                                pool.Return(pool.Rent(0)); // 0 events for empty arrays
+                            for (int i = 0; i < 10; i++)
+                                pool.Rent(16); // 10 rents
+                            for (int i = 0; i < 10; i++)
+                                pool.Rent(16); // 10 rents + 10 allocations
+                        },
+                        EventLevel.Verbose,
+                        list.Add
+                    )
+                );
 
                 Assert.Equal(30, list.Where(e => e.EventId == 1).Count()); // rents
                 Assert.Equal(20, list.Where(e => e.EventId == 2).Count()); // allocations
@@ -532,7 +672,9 @@ namespace System.Buffers.ArrayPool.Tests
 
         [Theory]
         [MemberData(nameof(BytePoolInstances))]
-        public static void ReturningANonPooledBufferOfDifferentSizeToThePoolThrows(ArrayPool<byte> pool)
+        public static void ReturningANonPooledBufferOfDifferentSizeToThePoolThrows(
+            ArrayPool<byte> pool
+        )
         {
             AssertExtensions.Throws<ArgumentException>("array", () => pool.Return(new byte[1]));
         }
@@ -561,31 +703,41 @@ namespace System.Buffers.ArrayPool.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [MemberData(nameof(BytePoolInstances))]
         public static void UsePoolInParallel(ArrayPool<byte> pool)
         {
             int[] sizes = new int[] { 16, 32, 64, 128 };
-            Parallel.For(0, 250000, i =>
-            {
-                foreach (int size in sizes)
+            Parallel.For(
+                0,
+                250000,
+                i =>
                 {
-                    byte[] array = pool.Rent(size);
-                    Assert.NotNull(array);
-                    Assert.InRange(array.Length, size, int.MaxValue);
-                    pool.Return(array);
+                    foreach (int size in sizes)
+                    {
+                        byte[] array = pool.Rent(size);
+                        Assert.NotNull(array);
+                        Assert.InRange(array.Length, size, int.MaxValue);
+                        pool.Return(array);
+                    }
                 }
-            });
+            );
         }
 
         [Fact]
-        public void ConfigurablePool_AllocatedArraysAreCleared_string() => ConfigurablePool_AllocatedArraysAreCleared<string>();
+        public void ConfigurablePool_AllocatedArraysAreCleared_string() =>
+            ConfigurablePool_AllocatedArraysAreCleared<string>();
 
         [Fact]
-        public void ConfigurablePool_AllocatedArraysAreCleared_byte() => ConfigurablePool_AllocatedArraysAreCleared<byte>();
+        public void ConfigurablePool_AllocatedArraysAreCleared_byte() =>
+            ConfigurablePool_AllocatedArraysAreCleared<byte>();
 
         [Fact]
-        public void ConfigurablePool_AllocatedArraysAreCleared_DateTime() => ConfigurablePool_AllocatedArraysAreCleared<DateTime>();
+        public void ConfigurablePool_AllocatedArraysAreCleared_DateTime() =>
+            ConfigurablePool_AllocatedArraysAreCleared<DateTime>();
 
         private static void ConfigurablePool_AllocatedArraysAreCleared<T>()
         {
@@ -618,70 +770,117 @@ namespace System.Buffers.ArrayPool.Tests
         [InlineData("   1    ", "   2   ", "1", "2")]
         [InlineData(
             "                                                                                         1 ",
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "2" +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     " +
-            "                                                                                                                     ",
-            "2147483647", MaxArraysPerPartitionDefault)]
+            "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "2"
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     "
+                + "                                                                                                                     ",
+            "2147483647",
+            MaxArraysPerPartitionDefault
+        )]
         public void SharedPool_SetEnvironmentVariables_ValuesRespected(
-            string partitionCount, string maxArraysPerPartition, string expectedPartitionCount, string expectedMaxArraysPerPartition)
+            string partitionCount,
+            string maxArraysPerPartition,
+            string expectedPartitionCount,
+            string expectedMaxArraysPerPartition
+        )
         {
             // This test relies on private reflection into the shared pool implementation.
             // If those details change, this test will need to be updated accordingly.
 
             var psi = new ProcessStartInfo();
-            psi.Environment.Add("DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXPARTITIONCOUNT", partitionCount);
-            psi.Environment.Add("DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXARRAYSPERPARTITION", maxArraysPerPartition);
+            psi.Environment.Add(
+                "DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXPARTITIONCOUNT",
+                partitionCount
+            );
+            psi.Environment.Add(
+                "DOTNET_SYSTEM_BUFFERS_SHAREDARRAYPOOL_MAXARRAYSPERPARTITION",
+                maxArraysPerPartition
+            );
 
-            RemoteExecutor.Invoke((partitionCount, maxArraysPerPartition, expectedPartitionCount, expectedMaxArraysPerPartition) =>
-            {
-                Type staticsType = typeof(ArrayPool<>).Assembly.GetType("System.Buffers.SharedArrayPoolStatics");
-                Assert.NotNull(staticsType);
+            RemoteExecutor
+                .Invoke(
+                    (
+                        partitionCount,
+                        maxArraysPerPartition,
+                        expectedPartitionCount,
+                        expectedMaxArraysPerPartition
+                    ) =>
+                    {
+                        Type staticsType = typeof(ArrayPool<>).Assembly.GetType(
+                            "System.Buffers.SharedArrayPoolStatics"
+                        );
+                        Assert.NotNull(staticsType);
 
-                FieldInfo partitionCountField = staticsType.GetField("s_partitionCount", BindingFlags.NonPublic | BindingFlags.Static);
-                Assert.NotNull(partitionCountField);
-                int partitionCountValue = (int)partitionCountField.GetValue(null);
-                if (int.Parse(expectedPartitionCount) > 0)
-                {
-                    Assert.Equal(Math.Min(int.Parse(expectedPartitionCount), Environment.ProcessorCount), partitionCountValue);
-                }
-                else
-                {
-                    Assert.Equal(Environment.ProcessorCount, partitionCountValue);
-                }
+                        FieldInfo partitionCountField = staticsType.GetField(
+                            "s_partitionCount",
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        );
+                        Assert.NotNull(partitionCountField);
+                        int partitionCountValue = (int)partitionCountField.GetValue(null);
+                        if (int.Parse(expectedPartitionCount) > 0)
+                        {
+                            Assert.Equal(
+                                Math.Min(
+                                    int.Parse(expectedPartitionCount),
+                                    Environment.ProcessorCount
+                                ),
+                                partitionCountValue
+                            );
+                        }
+                        else
+                        {
+                            Assert.Equal(Environment.ProcessorCount, partitionCountValue);
+                        }
 
-                FieldInfo maxArraysPerPartitionField = staticsType.GetField("s_maxArraysPerPartition", BindingFlags.NonPublic | BindingFlags.Static);
-                Assert.NotNull(maxArraysPerPartitionField);
-                int maxArraysPerPartitionValue = (int)maxArraysPerPartitionField.GetValue(null);
-                Assert.Equal(int.Parse(int.Parse(expectedMaxArraysPerPartition) > 0 ? expectedMaxArraysPerPartition : MaxArraysPerPartitionDefault), maxArraysPerPartitionValue);
+                        FieldInfo maxArraysPerPartitionField = staticsType.GetField(
+                            "s_maxArraysPerPartition",
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        );
+                        Assert.NotNull(maxArraysPerPartitionField);
+                        int maxArraysPerPartitionValue = (int)
+                            maxArraysPerPartitionField.GetValue(null);
+                        Assert.Equal(
+                            int.Parse(
+                                int.Parse(expectedMaxArraysPerPartition) > 0
+                                    ? expectedMaxArraysPerPartition
+                                    : MaxArraysPerPartitionDefault
+                            ),
+                            maxArraysPerPartitionValue
+                        );
 
-                // Make sure the pool is still usable
-                for (int i = 0; i < 2; i++)
-                {
-                    byte[] array = ArrayPool<byte>.Shared.Rent(123);
-                    Assert.NotNull(array);
-                    Assert.InRange(array.Length, 123, int.MaxValue);
-                    ArrayPool<byte>.Shared.Return(array);
-                }
-
-            }, partitionCount, maxArraysPerPartition, expectedPartitionCount, expectedMaxArraysPerPartition, new RemoteInvokeOptions() { StartInfo = psi }).Dispose();
+                        // Make sure the pool is still usable
+                        for (int i = 0; i < 2; i++)
+                        {
+                            byte[] array = ArrayPool<byte>.Shared.Rent(123);
+                            Assert.NotNull(array);
+                            Assert.InRange(array.Length, 123, int.MaxValue);
+                            ArrayPool<byte>.Shared.Return(array);
+                        }
+                    },
+                    partitionCount,
+                    maxArraysPerPartition,
+                    expectedPartitionCount,
+                    expectedMaxArraysPerPartition,
+                    new RemoteInvokeOptions() { StartInfo = psi }
+                )
+                .Dispose();
         }
     }
 }

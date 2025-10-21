@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TypeParameterObjectCreation_Simple()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M<T>(T t1) where T : C1, new()
@@ -27,19 +28,25 @@ class C1
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeParameterObjectCreationOperation (OperationKind.TypeParameterObjectCreation, Type: T) (Syntax: 'new T()')
   Initializer: 
     null
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TypeParameterObjectCreation_WithObjectInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class C1
 {
     void M<T>(T t1) where T : C1, new()
@@ -51,7 +58,8 @@ class C1
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeParameterObjectCreationOperation (OperationKind.TypeParameterObjectCreation, Type: T) (Syntax: 'new T() { I = 1 }')
   Initializer: 
     IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: T) (Syntax: '{ I = 1 }')
@@ -64,14 +72,19 @@ ITypeParameterObjectCreationOperation (OperationKind.TypeParameterObjectCreation
             Right: 
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TypeParameterObjectCreation_WithCollectionInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class C1
@@ -85,7 +98,8 @@ class C1
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ITypeParameterObjectCreationOperation (OperationKind.TypeParameterObjectCreation, Type: T) (Syntax: 'new T() { 1 }')
   Initializer: 
     IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: T) (Syntax: '{ 1 }')
@@ -99,14 +113,19 @@ ITypeParameterObjectCreationOperation (OperationKind.TypeParameterObjectCreation
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TypeParameterObjectCreation_NoNewConstraint()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -119,14 +138,18 @@ class C1
     void Add(int i) { }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
                 //         t1 = /*<bind>*/new T() { 1, b ? 2 : 3 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, b ? 2 : 3 }").WithArguments("T").WithLocation(9, 24)
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, b ? 2 : 3 }")
+                    .WithArguments("T")
+                    .WithLocation(9, 24),
             };
 
             // Asserts that no ITypeParameterObjectCreationOperation is generated in this tree
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: T, IsInvalid) (Syntax: 'new T() { 1, b ? 2 : 3 }')
   Children(1):
       IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: T, IsInvalid) (Syntax: '{ 1, b ? 2 : 3 }')
@@ -154,14 +177,19 @@ IInvalidOperation (OperationKind.Invalid, Type: T, IsInvalid) (Syntax: 'new T() 
                     InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                     OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TypeParameterObjectCreationFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -176,7 +204,8 @@ class C1
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -271,14 +300,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TypeParameterObjectCreationFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -294,7 +328,8 @@ class C1
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -387,14 +422,19 @@ Block[B7] - Exit
     Predecessors: [B6]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TypeParameterObjectCreationFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -409,7 +449,8 @@ class C1
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -465,14 +506,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void TypeParameterObjectCreationFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -485,13 +531,17 @@ class C1
     void Add(int i) { }
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
                 //         t1 = /*<bind>*/new T() { 1, b ? 2 : 3 };
-                Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, 2 }").WithArguments("T").WithLocation(9, 14)
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, 2 }")
+                    .WithArguments("T")
+                    .WithLocation(9, 14),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -546,7 +596,11 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<MethodDeclarationSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

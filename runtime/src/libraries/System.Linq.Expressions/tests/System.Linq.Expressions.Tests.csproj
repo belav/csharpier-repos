@@ -3,11 +3,9 @@
     <TargetFrameworks>$(NetCoreAppCurrent);$(NetCoreAppCurrent)-ios;$(NetCoreAppCurrent)-tvos;$(NetCoreAppCurrent)-maccatalyst</TargetFrameworks>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
   </PropertyGroup>
-
   <ItemGroup>
     <RdXmlFile Include="default.rd.xml" />
   </ItemGroup>
-
   <ItemGroup>
     <AssembliesBeingTested Include="Microsoft.CSharp" />
   </ItemGroup>
@@ -223,8 +221,10 @@
     <Compile Include="Visitor\VisitorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(CommonTestPath)System\Collections\DictionaryExtensions.cs"
-             Link="Common\System\Collections\DictionaryExtensions.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\Collections\DictionaryExtensions.cs"
+      Link="Common\System\Collections\DictionaryExtensions.cs"
+    />
     <Compile Include="ILReader\DynamicMethodILProvider.cs" />
     <Compile Include="ILReader\DynamicScopeTokenResolver.cs" />
     <Compile Include="ILReader\FormatProvider.cs" />
@@ -245,6 +245,9 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="xunit.extensibility.execution" Version="$(XUnitVersion)" />
-    <ProjectReference Include="..\src\System.Linq.Expressions.csproj" SkipUseReferenceAssembly="true" />
+    <ProjectReference
+      Include="..\src\System.Linq.Expressions.csproj"
+      SkipUseReferenceAssembly="true"
+    />
   </ItemGroup>
 </Project>

@@ -10,11 +10,19 @@ namespace System.Runtime.InteropServices.Tests
     {
         [Fact]
         [SkipOnMono("ComWrappers are not supported on Mono")]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/76005", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot), nameof(PlatformDetection.IsNotWindows))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/76005",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot),
+            nameof(PlatformDetection.IsNotWindows)
+        )]
         public void Release_ValidPointer_Success()
         {
             var cw = new ComWrappersImpl();
-            IntPtr iUnknown = cw.GetOrCreateComInterfaceForObject(new object(), CreateComInterfaceFlags.None);
+            IntPtr iUnknown = cw.GetOrCreateComInterfaceForObject(
+                new object(),
+                CreateComInterfaceFlags.None
+            );
             try
             {
                 Marshal.AddRef(iUnknown);
@@ -35,7 +43,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Release_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.Release(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.Release(IntPtr.Zero)
+            );
         }
     }
 }

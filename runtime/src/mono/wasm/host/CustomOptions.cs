@@ -6,6 +6,7 @@
 using Microsoft.Extensions.Logging.Console;
 
 namespace Microsoft.WebAssembly.AppHost;
+
 internal sealed class PassThroughConsoleFormatterOptions : ConsoleFormatterOptions
 {
     public string Prefix = string.Empty;

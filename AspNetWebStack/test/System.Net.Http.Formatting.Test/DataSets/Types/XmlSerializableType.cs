@@ -15,9 +15,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         private int id;
         private string name;
 
-        public XmlSerializableType()
-        {
-        }
+        public XmlSerializableType() { }
 
         public XmlSerializableType(int id, string name)
         {
@@ -28,11 +26,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
         [XmlAttribute]
         public int Id
         {
-            get
-            {
-                return this.id;
-            }
-
+            get { return this.id; }
             set
             {
                 this.IdSet = true;
@@ -43,17 +37,12 @@ namespace System.Net.Http.Formatting.DataSets.Types
         [XmlElement]
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-
+            get { return this.name; }
             set
             {
                 this.NameSet = true;
                 this.name = value;
             }
-
         }
 
         [XmlIgnore]
@@ -75,7 +64,8 @@ namespace System.Net.Http.Formatting.DataSets.Types
                 return false;
             }
 
-            return String.Equals(this.Name, other.Name, StringComparison.Ordinal) && this.Id == other.Id;
+            return String.Equals(this.Name, other.Name, StringComparison.Ordinal)
+                && this.Id == other.Id;
         }
 
         public override int GetHashCode()
@@ -85,15 +75,21 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public static IEnumerable<XmlSerializableType> GetTestData()
         {
-            return new XmlSerializableType[] { new XmlSerializableType(), new XmlSerializableType(1, "SomeName") };
+            return new XmlSerializableType[]
+            {
+                new XmlSerializableType(),
+                new XmlSerializableType(1, "SomeName"),
+            };
         }
 
         public static IEnumerable<DerivedXmlSerializableType> GetDerivedTypeTestData()
         {
-            return new DerivedXmlSerializableType[] { 
-                new DerivedXmlSerializableType(), 
-                new DerivedXmlSerializableType(1, "SomeName", null), 
-                new DerivedXmlSerializableType(1, "SomeName", new WcfPocoType(2, "SomeOtherName"))};
+            return new DerivedXmlSerializableType[]
+            {
+                new DerivedXmlSerializableType(),
+                new DerivedXmlSerializableType(1, "SomeName", null),
+                new DerivedXmlSerializableType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")),
+            };
         }
     }
 }

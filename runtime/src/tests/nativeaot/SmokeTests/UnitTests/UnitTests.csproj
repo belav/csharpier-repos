@@ -3,11 +3,9 @@
     <OutputType>Exe</OutputType>
     <CLRTestPriority>0</CLRTestPriority>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
     <!-- There's just too many of these warnings -->
     <SuppressTrimAnalysisWarnings>true</SuppressTrimAnalysisWarnings>
     <NoWarn>$(NoWarn);IL3050;IL3054</NoWarn>
-
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BasicThreading.cs" />

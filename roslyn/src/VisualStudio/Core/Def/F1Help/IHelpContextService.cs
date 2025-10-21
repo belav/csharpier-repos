@@ -15,7 +15,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.F1Help
         string Language { get; }
         string Product { get; }
 
-        Task<string> GetHelpTermAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken);
+        Task<string> GetHelpTermAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
 
         string FormatSymbol(ISymbol symbol);
     }

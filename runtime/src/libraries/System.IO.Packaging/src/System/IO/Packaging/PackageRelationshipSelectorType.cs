@@ -16,6 +16,6 @@ namespace System.IO.Packaging
         /// <summary>
         /// Type
         /// </summary>
-        Type = 1
+        Type = 1,
     }
 }

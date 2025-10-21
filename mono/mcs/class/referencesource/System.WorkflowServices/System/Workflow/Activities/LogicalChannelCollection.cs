@@ -20,13 +20,13 @@ namespace System.Workflow.Activities
     {
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty LogicalChannelCollectionProperty =
-            DependencyProperty.RegisterAttached("LogicalChannelCollection",
-            typeof(LogicalChannelCollection),
-            typeof(LogicalChannelCollection));
+            DependencyProperty.RegisterAttached(
+                "LogicalChannelCollection",
+                typeof(LogicalChannelCollection),
+                typeof(LogicalChannelCollection)
+            );
 
-        public LogicalChannelCollection()
-        {
-        }
+        public LogicalChannelCollection() { }
 
         public LogicalChannel GetItem(string key)
         {

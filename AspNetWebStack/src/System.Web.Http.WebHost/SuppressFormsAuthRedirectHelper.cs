@@ -17,14 +17,17 @@ namespace System.Web.Http.WebHost
     /// </summary>
     internal static class SuppressFormsAuthRedirectHelper
     {
-        internal static readonly string AppSettingsSuppressFormsAuthenticationRedirectKey = "webapi:EnableSuppressRedirect";
+        internal static readonly string AppSettingsSuppressFormsAuthenticationRedirectKey =
+            "webapi:EnableSuppressRedirect";
 
         /// <summary>
         /// Returns whether the module is explicitly enabled or not
         /// </summary>
         internal static bool GetEnabled(NameValueCollection appSettings)
         {
-            string disableSuppressRedirect = appSettings.Get(AppSettingsSuppressFormsAuthenticationRedirectKey);
+            string disableSuppressRedirect = appSettings.Get(
+                AppSettingsSuppressFormsAuthenticationRedirectKey
+            );
 
             if (!String.IsNullOrEmpty(disableSuppressRedirect))
             {

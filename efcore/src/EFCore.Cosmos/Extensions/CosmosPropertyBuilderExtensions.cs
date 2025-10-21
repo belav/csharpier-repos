@@ -30,9 +30,7 @@ public static class CosmosPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <param name="name">The name of the property.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static PropertyBuilder ToJsonProperty(
-        this PropertyBuilder propertyBuilder,
-        string name)
+    public static PropertyBuilder ToJsonProperty(this PropertyBuilder propertyBuilder, string name)
     {
         Check.NotNull(name, nameof(name));
 
@@ -54,8 +52,8 @@ public static class CosmosPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> ToJsonProperty<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string name)
-        => (PropertyBuilder<TProperty>)ToJsonProperty((PropertyBuilder)propertyBuilder, name);
+        string name
+    ) => (PropertyBuilder<TProperty>)ToJsonProperty((PropertyBuilder)propertyBuilder, name);
 
     /// <summary>
     ///     Configures the property name that the property is mapped to when targeting Azure Cosmos. If an empty string is
@@ -75,7 +73,8 @@ public static class CosmosPropertyBuilderExtensions
     public static IConventionPropertyBuilder? ToJsonProperty(
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetJsonProperty(name, fromDataAnnotation))
         {
@@ -101,8 +100,13 @@ public static class CosmosPropertyBuilderExtensions
     public static bool CanSetJsonProperty(
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(CosmosAnnotationNames.PropertyName, name, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
+            CosmosAnnotationNames.PropertyName,
+            name,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures this property to be the etag concurrency token.
@@ -115,10 +119,7 @@ public static class CosmosPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder IsETagConcurrency(this PropertyBuilder propertyBuilder)
     {
-        propertyBuilder
-            .IsConcurrencyToken()
-            .ToJsonProperty("_etag")
-            .ValueGeneratedOnAddOrUpdate();
+        propertyBuilder.IsConcurrencyToken().ToJsonProperty("_etag").ValueGeneratedOnAddOrUpdate();
 
         return propertyBuilder;
     }
@@ -134,6 +135,6 @@ public static class CosmosPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> IsETagConcurrency<TProperty>(
-        this PropertyBuilder<TProperty> propertyBuilder)
-        => (PropertyBuilder<TProperty>)IsETagConcurrency((PropertyBuilder)propertyBuilder);
+        this PropertyBuilder<TProperty> propertyBuilder
+    ) => (PropertyBuilder<TProperty>)IsETagConcurrency((PropertyBuilder)propertyBuilder);
 }

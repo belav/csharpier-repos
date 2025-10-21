@@ -15,11 +15,8 @@ namespace System.Activities.Core.Presentation.Factories
             {
                 Body = new ActivityAction<T>()
                 {
-                    Argument = new DelegateInArgument<T>()
-                    {
-                        Name = "item"
-                    }
-                }
+                    Argument = new DelegateInArgument<T>() { Name = "item" },
+                },
             };
         }
     }

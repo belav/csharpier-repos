@@ -18,7 +18,10 @@ namespace System.Text.Tests
         protected abstract bool Equals(byte[] left, byte[] right);
         protected abstract bool EqualsIgnoreCase(byte[] left, byte[] right);
         protected abstract bool Equals(ReadOnlySpan<TLeft> left, ReadOnlySpan<TRight> right);
-        protected abstract bool EqualsIgnoreCase(ReadOnlySpan<TLeft> left, ReadOnlySpan<TRight> right);
+        protected abstract bool EqualsIgnoreCase(
+            ReadOnlySpan<TLeft> left,
+            ReadOnlySpan<TRight> right
+        );
 
         public static IEnumerable<object[]> ValidAsciiInputs
         {
@@ -59,11 +62,19 @@ namespace System.Text.Tests
                 {
                     if (i != '?') // ASCIIEncoding maps invalid ASCII to ?
                     {
-                        yield return new object[] { new string(i, i), string.Create(i, i, (destination, iteration) =>
+                        yield return new object[]
                         {
-                            destination.Fill(iteration);
-                            destination[iteration / 2] = (char)128;
-                        })};
+                            new string(i, i),
+                            string.Create(
+                                i,
+                                i,
+                                (destination, iteration) =>
+                                {
+                                    destination.Fill(iteration);
+                                    destination[iteration / 2] = (char)128;
+                                }
+                            ),
+                        };
                     }
                 }
             }
@@ -94,7 +105,10 @@ namespace System.Text.Tests
                 for (char i = (char)0; i <= 127; i++)
                 {
                     char left = i;
-                    char right = char.IsAsciiLetterUpper(left) ? char.ToLower(left) : char.IsAsciiLetterLower(left) ? char.ToUpper(left) : left;
+                    char right =
+                        char.IsAsciiLetterUpper(left) ? char.ToLower(left)
+                        : char.IsAsciiLetterLower(left) ? char.ToUpper(left)
+                        : left;
                     yield return new object[] { new string(left, i), new string(right, i) };
                 }
             }
@@ -102,7 +116,10 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(EqualIgnoringCaseConsiderations))]
-        public void EqualIgnoreCase_EqualIgnoringCaseConsiderations_ReturnsTrue(string left, string right)
+        public void EqualIgnoreCase_EqualIgnoringCaseConsiderations_ReturnsTrue(
+            string left,
+            string right
+        )
         {
             Assert.True(EqualsIgnoreCase(left, right));
             Assert.True(EqualsIgnoreCase(right, left));
@@ -112,7 +129,15 @@ namespace System.Text.Tests
         {
             get
             {
-                foreach (int length in new[] { 1, Vector128<byte>.Count - 1, Vector128<byte>.Count, Vector256<byte>.Count + 1 })
+                foreach (
+                    int length in new[]
+                    {
+                        1,
+                        Vector128<byte>.Count - 1,
+                        Vector128<byte>.Count,
+                        Vector256<byte>.Count + 1,
+                    }
+                )
                 {
                     for (int index = 0; index < length; index++)
                     {
@@ -138,25 +163,31 @@ namespace System.Text.Tests
 
         [Theory]
         [MemberData(nameof(ContainingNonAsciiCharactersBuffers))]
-        public void Equals_EqualValues_ButNonAscii_ReturnsFalse(byte[] input)
-            => Assert.False(Equals(input, input));
+        public void Equals_EqualValues_ButNonAscii_ReturnsFalse(byte[] input) =>
+            Assert.False(Equals(input, input));
 
         [Theory]
         [MemberData(nameof(ContainingNonAsciiCharactersBuffers))]
-        public void EqualsIgnoreCase_EqualValues_ButNonAscii_ReturnsFalse(byte[] input)
-            => Assert.False(EqualsIgnoreCase(input, input));
+        public void EqualsIgnoreCase_EqualValues_ButNonAscii_ReturnsFalse(byte[] input) =>
+            Assert.False(EqualsIgnoreCase(input, input));
 
         [Theory]
         [InlineData(PoisonPagePlacement.After, PoisonPagePlacement.After)]
         [InlineData(PoisonPagePlacement.After, PoisonPagePlacement.Before)]
         [InlineData(PoisonPagePlacement.Before, PoisonPagePlacement.After)]
         [InlineData(PoisonPagePlacement.Before, PoisonPagePlacement.Before)]
-        public void Boundaries_Are_Respected(PoisonPagePlacement leftPoison, PoisonPagePlacement rightPoison)
+        public void Boundaries_Are_Respected(
+            PoisonPagePlacement leftPoison,
+            PoisonPagePlacement rightPoison
+        )
         {
             for (int size = 1; size < 129; size++)
             {
                 using BoundedMemory<TLeft> left = BoundedMemory.Allocate<TLeft>(size, leftPoison);
-                using BoundedMemory<TRight> right = BoundedMemory.Allocate<TRight>(size, rightPoison);
+                using BoundedMemory<TRight> right = BoundedMemory.Allocate<TRight>(
+                    size,
+                    rightPoison
+                );
 
                 left.Span.Fill(default);
                 right.Span.Fill(default);
@@ -172,85 +203,94 @@ namespace System.Text.Tests
 
     public class AsciiEqualityTests_Byte_Byte : AsciiEqualityTests<byte, byte>
     {
-        protected override bool Equals(string left, string right)
-            => Ascii.Equals(Encoding.ASCII.GetBytes(left), Encoding.ASCII.GetBytes(right));
+        protected override bool Equals(string left, string right) =>
+            Ascii.Equals(Encoding.ASCII.GetBytes(left), Encoding.ASCII.GetBytes(right));
 
-        protected override bool EqualsIgnoreCase(string left, string right)
-            => Ascii.EqualsIgnoreCase(Encoding.ASCII.GetBytes(left), Encoding.ASCII.GetBytes(right));
+        protected override bool EqualsIgnoreCase(string left, string right) =>
+            Ascii.EqualsIgnoreCase(Encoding.ASCII.GetBytes(left), Encoding.ASCII.GetBytes(right));
 
-        protected override bool Equals(byte[] left, byte[] right)
-            => Ascii.Equals(left, right);
+        protected override bool Equals(byte[] left, byte[] right) => Ascii.Equals(left, right);
 
-        protected override bool EqualsIgnoreCase(byte[] left, byte[] right)
-            => Ascii.EqualsIgnoreCase(left, right);
+        protected override bool EqualsIgnoreCase(byte[] left, byte[] right) =>
+            Ascii.EqualsIgnoreCase(left, right);
 
-        protected override bool Equals(ReadOnlySpan<byte> left, ReadOnlySpan<byte> right)
-            => Ascii.Equals(left, right);
+        protected override bool Equals(ReadOnlySpan<byte> left, ReadOnlySpan<byte> right) =>
+            Ascii.Equals(left, right);
 
-        protected override bool EqualsIgnoreCase(ReadOnlySpan<byte> left, ReadOnlySpan<byte> right)
-            => Ascii.EqualsIgnoreCase(left, right);
+        protected override bool EqualsIgnoreCase(
+            ReadOnlySpan<byte> left,
+            ReadOnlySpan<byte> right
+        ) => Ascii.EqualsIgnoreCase(left, right);
     }
 
     public class AsciiEqualityTests_Byte_Char : AsciiEqualityTests<byte, char>
     {
-        protected override bool Equals(string left, string right)
-            => Ascii.Equals(Encoding.ASCII.GetBytes(left), right);
+        protected override bool Equals(string left, string right) =>
+            Ascii.Equals(Encoding.ASCII.GetBytes(left), right);
 
-        protected override bool EqualsIgnoreCase(string left, string right)
-            => Ascii.EqualsIgnoreCase(Encoding.ASCII.GetBytes(left), right);
+        protected override bool EqualsIgnoreCase(string left, string right) =>
+            Ascii.EqualsIgnoreCase(Encoding.ASCII.GetBytes(left), right);
 
-        protected override bool Equals(byte[] left, byte[] right)
-            => Ascii.Equals(left, right.Select(b => (char)b).ToArray());
+        protected override bool Equals(byte[] left, byte[] right) =>
+            Ascii.Equals(left, right.Select(b => (char)b).ToArray());
 
-        protected override bool EqualsIgnoreCase(byte[] left, byte[] right)
-            => Ascii.EqualsIgnoreCase(left, right.Select(b => (char)b).ToArray());
+        protected override bool EqualsIgnoreCase(byte[] left, byte[] right) =>
+            Ascii.EqualsIgnoreCase(left, right.Select(b => (char)b).ToArray());
 
-        protected override bool Equals(ReadOnlySpan<byte> left, ReadOnlySpan<char> right)
-            => Ascii.Equals(left, right);
+        protected override bool Equals(ReadOnlySpan<byte> left, ReadOnlySpan<char> right) =>
+            Ascii.Equals(left, right);
 
-        protected override bool EqualsIgnoreCase(ReadOnlySpan<byte> left, ReadOnlySpan<char> right)
-            => Ascii.EqualsIgnoreCase(left, right);
+        protected override bool EqualsIgnoreCase(
+            ReadOnlySpan<byte> left,
+            ReadOnlySpan<char> right
+        ) => Ascii.EqualsIgnoreCase(left, right);
     }
 
     public class AsciiEqualityTests_Char_Byte : AsciiEqualityTests<char, byte>
     {
-        protected override bool Equals(string left, string right)
-            => Ascii.Equals(left, Encoding.ASCII.GetBytes(right));
+        protected override bool Equals(string left, string right) =>
+            Ascii.Equals(left, Encoding.ASCII.GetBytes(right));
 
-        protected override bool EqualsIgnoreCase(string left, string right)
-            => Ascii.EqualsIgnoreCase(left, Encoding.ASCII.GetBytes(right));
+        protected override bool EqualsIgnoreCase(string left, string right) =>
+            Ascii.EqualsIgnoreCase(left, Encoding.ASCII.GetBytes(right));
 
-        protected override bool Equals(byte[] left, byte[] right)
-            => Ascii.Equals(left.Select(b => (char)b).ToArray(), right);
+        protected override bool Equals(byte[] left, byte[] right) =>
+            Ascii.Equals(left.Select(b => (char)b).ToArray(), right);
 
-        protected override bool EqualsIgnoreCase(byte[] left, byte[] right)
-            => Ascii.EqualsIgnoreCase(left.Select(b => (char)b).ToArray(), right);
+        protected override bool EqualsIgnoreCase(byte[] left, byte[] right) =>
+            Ascii.EqualsIgnoreCase(left.Select(b => (char)b).ToArray(), right);
 
-        protected override bool Equals(ReadOnlySpan<char> left, ReadOnlySpan<byte> right)
-            => Ascii.Equals(left, right);
+        protected override bool Equals(ReadOnlySpan<char> left, ReadOnlySpan<byte> right) =>
+            Ascii.Equals(left, right);
 
-        protected override bool EqualsIgnoreCase(ReadOnlySpan<char> left, ReadOnlySpan<byte> right)
-            => Ascii.EqualsIgnoreCase(left, right);
+        protected override bool EqualsIgnoreCase(
+            ReadOnlySpan<char> left,
+            ReadOnlySpan<byte> right
+        ) => Ascii.EqualsIgnoreCase(left, right);
     }
 
     public class AsciiEqualityTests_Char_Char : AsciiEqualityTests<char, char>
     {
-        protected override bool Equals(string left, string right)
-            => Ascii.Equals(left, right);
+        protected override bool Equals(string left, string right) => Ascii.Equals(left, right);
 
-        protected override bool EqualsIgnoreCase(string left, string right)
-            => Ascii.EqualsIgnoreCase(left, right);
+        protected override bool EqualsIgnoreCase(string left, string right) =>
+            Ascii.EqualsIgnoreCase(left, right);
 
-        protected override bool Equals(byte[] left, byte[] right)
-            => Ascii.Equals(left.Select(b => (char)b).ToArray(), right.Select(b => (char)b).ToArray());
+        protected override bool Equals(byte[] left, byte[] right) =>
+            Ascii.Equals(left.Select(b => (char)b).ToArray(), right.Select(b => (char)b).ToArray());
 
-        protected override bool EqualsIgnoreCase(byte[] left, byte[] right)
-            => Ascii.EqualsIgnoreCase(left.Select(b => (char)b).ToArray(), right.Select(b => (char)b).ToArray());
+        protected override bool EqualsIgnoreCase(byte[] left, byte[] right) =>
+            Ascii.EqualsIgnoreCase(
+                left.Select(b => (char)b).ToArray(),
+                right.Select(b => (char)b).ToArray()
+            );
 
-        protected override bool Equals(ReadOnlySpan<char> left, ReadOnlySpan<char> right)
-            => Ascii.Equals(left, right);
+        protected override bool Equals(ReadOnlySpan<char> left, ReadOnlySpan<char> right) =>
+            Ascii.Equals(left, right);
 
-        protected override bool EqualsIgnoreCase(ReadOnlySpan<char> left, ReadOnlySpan<char> right)
-            => Ascii.EqualsIgnoreCase(left, right);
+        protected override bool EqualsIgnoreCase(
+            ReadOnlySpan<char> left,
+            ReadOnlySpan<char> right
+        ) => Ascii.EqualsIgnoreCase(left, right);
     }
 }

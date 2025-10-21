@@ -38,7 +38,10 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         public async Task WaitForNavigationAsync(CancellationToken cancellationToken)
         {
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace, FeatureAttribute.NavigateTo], cancellationToken);
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [FeatureAttribute.Workspace, FeatureAttribute.NavigateTo],
+                cancellationToken
+            );
             await TestServices.Editor.WaitForEditorOperationsAsync(cancellationToken);
 
             // It's not clear why this delay is necessary. Navigation operations are expected to fully complete as part
@@ -56,8 +59,13 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             // Wait for workspace (including project system, file change notifications, and EditorPackage operations),
             // as well as Roslyn's solution crawler and diagnostic service that report light bulb session changes.
             await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                [FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy, FeatureAttribute.DiagnosticService],
-                cancellationToken);
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                ],
+                cancellationToken
+            );
 
             // Wait for operations dispatched to the main thread without other tracking
             await WaitForApplicationIdleAsync(cancellationToken);
@@ -75,16 +83,29 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
             await JoinableTaskFactory.SwitchToMainThreadAsync();
 
-            var shell = await TestServices.Shell.GetRequiredGlobalServiceAsync<SVsShell, IVsShell>(cancellationToken);
+            var shell = await TestServices.Shell.GetRequiredGlobalServiceAsync<SVsShell, IVsShell>(
+                cancellationToken
+            );
             var packageGuid = new Guid("{22818076-b98c-4525-b959-c9e12ff2433c}");
 
-            if (ErrorHandler.Succeeded(shell.IsPackageInstalled(packageGuid, out var fInstalled)) && fInstalled != 0)
+            if (
+                ErrorHandler.Succeeded(shell.IsPackageInstalled(packageGuid, out var fInstalled))
+                && fInstalled != 0
+            )
             {
                 shell.LoadPackage(packageGuid, out _);
 
                 var tempFile = Path.Combine(Path.GetTempPath(), "GitHubCopilotWorkaround.txt");
                 File.WriteAllText(tempFile, "");
-                VsShellUtilities.OpenDocument(ServiceProvider.GlobalProvider, tempFile, VSConstants.LOGVIEWID.Code_guid, out _, out _, out var windowFrame, out _);
+                VsShellUtilities.OpenDocument(
+                    ServiceProvider.GlobalProvider,
+                    tempFile,
+                    VSConstants.LOGVIEWID.Code_guid,
+                    out _,
+                    out _,
+                    out var windowFrame,
+                    out _
+                );
 
                 await Task.Delay(TimeSpan.FromSeconds(10));
 

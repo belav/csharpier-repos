@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -13,29 +12,26 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
     {
         public static readonly ISyntaxHelper Instance = new CSharpSyntaxHelper();
 
-        private CSharpSyntaxHelper()
-        {
-        }
+        private CSharpSyntaxHelper() { }
 
-        public override bool IsCaseSensitive
-            => true;
+        public override bool IsCaseSensitive => true;
 
-        public override bool IsValidIdentifier(string name)
-            => SyntaxFacts.IsValidIdentifier(name);
+        public override bool IsValidIdentifier(string name) => SyntaxFacts.IsValidIdentifier(name);
 
-        public override bool IsAnyNamespaceBlock(SyntaxNode node)
-            => node is BaseNamespaceDeclarationSyntax;
+        public override bool IsAnyNamespaceBlock(SyntaxNode node) =>
+            node is BaseNamespaceDeclarationSyntax;
 
-        public override bool IsAttribute(SyntaxNode node)
-            => node is AttributeSyntax;
+        public override bool IsAttribute(SyntaxNode node) => node is AttributeSyntax;
 
-        public override SyntaxNode GetNameOfAttribute(SyntaxNode node)
-            => ((AttributeSyntax)node).Name;
+        public override SyntaxNode GetNameOfAttribute(SyntaxNode node) =>
+            ((AttributeSyntax)node).Name;
 
-        public override bool IsAttributeList(SyntaxNode node)
-            => node is AttributeListSyntax;
+        public override bool IsAttributeList(SyntaxNode node) => node is AttributeListSyntax;
 
-        public override void AddAttributeTargets(SyntaxNode node, ref ValueListBuilder<SyntaxNode> targets)
+        public override void AddAttributeTargets(
+            SyntaxNode node,
+            ref ValueListBuilder<SyntaxNode> targets
+        )
         {
             var attributeList = (AttributeListSyntax)node;
             var container = attributeList.Parent;
@@ -58,16 +54,20 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
             }
         }
 
-        public override SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(SyntaxNode node)
-            => ((AttributeListSyntax)node).Attributes;
+        public override SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(
+            SyntaxNode node
+        ) => ((AttributeListSyntax)node).Attributes;
 
-        public override bool IsLambdaExpression(SyntaxNode node)
-            => node is LambdaExpressionSyntax;
+        public override bool IsLambdaExpression(SyntaxNode node) => node is LambdaExpressionSyntax;
 
-        public override SyntaxToken GetUnqualifiedIdentifierOfName(SyntaxNode node)
-            => ((NameSyntax)node).GetUnqualifiedName().Identifier;
+        public override SyntaxToken GetUnqualifiedIdentifierOfName(SyntaxNode node) =>
+            ((NameSyntax)node).GetUnqualifiedName().Identifier;
 
-        public override void AddAliases(SyntaxNode node, ref ValueListBuilder<(string aliasName, string symbolName)> aliases, bool global)
+        public override void AddAliases(
+            SyntaxNode node,
+            ref ValueListBuilder<(string aliasName, string symbolName)> aliases,
+            bool global
+        )
         {
             if (node is CompilationUnitSyntax compilationUnit)
             {
@@ -79,11 +79,17 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
             }
             else
             {
-                Debug.Fail("This should not be reachable.  Caller already checked we had a compilation unit or namespace.");
+                Debug.Fail(
+                    "This should not be reachable.  Caller already checked we had a compilation unit or namespace."
+                );
             }
         }
 
-        private static void AddAliases(SyntaxList<UsingDirectiveSyntax> usings, ref ValueListBuilder<(string aliasName, string symbolName)> aliases, bool global)
+        private static void AddAliases(
+            SyntaxList<UsingDirectiveSyntax> usings,
+            ref ValueListBuilder<(string aliasName, string symbolName)> aliases,
+            bool global
+        )
         {
             foreach (var usingDirective in usings)
             {
@@ -99,7 +105,10 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
             }
         }
 
-        public override void AddAliases(CompilationOptions compilation, ref ValueListBuilder<(string aliasName, string symbolName)> aliases)
+        public override void AddAliases(
+            CompilationOptions compilation,
+            ref ValueListBuilder<(string aliasName, string symbolName)> aliases
+        )
         {
             // C# doesn't have global aliases at the compilation level.
             return;
@@ -112,8 +121,10 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
 
             foreach (var directive in compilationUnit.Usings)
             {
-                if (directive.GlobalKeyword.IsKind(SyntaxKind.GlobalKeyword) &&
-                    directive.Alias != null)
+                if (
+                    directive.GlobalKeyword.IsKind(SyntaxKind.GlobalKeyword)
+                    && directive.Alias != null
+                )
                 {
                     return true;
                 }

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using Internal.TypeSystem;
 
 #nullable disable
@@ -18,10 +17,19 @@ namespace Internal.TypeSystem
         /// The type name string should be in the 'SerString' format as defined by the ECMA-335 standard.
         /// This is the inverse of what <see cref="CustomAttributeTypeNameFormatter"/> does.
         /// </summary>
-        public static TypeDesc GetTypeByCustomAttributeTypeName(this ModuleDesc module, string name, bool throwIfNotFound = true,
-            Func<ModuleDesc, string, MetadataType> canonResolver = null)
+        public static TypeDesc GetTypeByCustomAttributeTypeName(
+            this ModuleDesc module,
+            string name,
+            bool throwIfNotFound = true,
+            Func<ModuleDesc, string, MetadataType> canonResolver = null
+        )
         {
-            return System.Reflection.TypeNameParser.ResolveType(module, name, throwIfNotFound, canonResolver);
+            return System.Reflection.TypeNameParser.ResolveType(
+                module,
+                name,
+                throwIfNotFound,
+                canonResolver
+            );
         }
     }
 }
@@ -34,25 +42,35 @@ namespace System.Reflection
         private bool _throwIfNotFound;
         private Func<ModuleDesc, string, MetadataType> _canonResolver;
 
-        public static TypeDesc ResolveType(ModuleDesc module, string name, bool throwIfNotFound,
-            Func<ModuleDesc, string, MetadataType> canonResolver)
+        public static TypeDesc ResolveType(
+            ModuleDesc module,
+            string name,
+            bool throwIfNotFound,
+            Func<ModuleDesc, string, MetadataType> canonResolver
+        )
         {
             return new TypeNameParser(name.AsSpan())
             {
                 _module = module,
                 _throwIfNotFound = throwIfNotFound,
-                _canonResolver = canonResolver
-            }.Parse()?.Value;
+                _canonResolver = canonResolver,
+            }
+                .Parse()
+                ?.Value;
         }
 
         private sealed class Type
         {
             public Type(TypeDesc type) => Value = type;
+
             public TypeDesc Value { get; }
 
             public Type MakeArrayType() => new Type(Value.MakeArrayType());
+
             public Type MakeArrayType(int rank) => new Type(Value.MakeArrayType(rank));
+
             public Type MakePointerType() => new Type(Value.MakePointerType());
+
             public Type MakeByRefType() => new Type(Value.MakeByRefType());
 
             public Type MakeGenericType(Type[] typeArguments)
@@ -66,10 +84,19 @@ namespace System.Reflection
 
         private static bool CheckTopLevelAssemblyQualifiedName() => true;
 
-        private Type GetType(string typeName, ReadOnlySpan<string> nestedTypeNames, string assemblyNameIfAny)
+        private Type GetType(
+            string typeName,
+            ReadOnlySpan<string> nestedTypeNames,
+            string assemblyNameIfAny
+        )
         {
-            ModuleDesc module = (assemblyNameIfAny == null) ? _module :
-                _module.Context.ResolveAssembly(new AssemblyName(assemblyNameIfAny), throwIfNotFound: _throwIfNotFound);
+            ModuleDesc module =
+                (assemblyNameIfAny == null)
+                    ? _module
+                    : _module.Context.ResolveAssembly(
+                        new AssemblyName(assemblyNameIfAny),
+                        throwIfNotFound: _throwIfNotFound
+                    );
 
             if (_canonResolver != null && nestedTypeNames.IsEmpty)
             {
@@ -94,11 +121,18 @@ namespace System.Reflection
             }
 
             if (_throwIfNotFound)
-                ThrowHelper.ThrowTypeLoadException(EscapeTypeName(typeName, nestedTypeNames), module);
+                ThrowHelper.ThrowTypeLoadException(
+                    EscapeTypeName(typeName, nestedTypeNames),
+                    module
+                );
             return null;
         }
 
-        private static Type GetTypeCore(ModuleDesc module, string typeName, ReadOnlySpan<string> nestedTypeNames)
+        private static Type GetTypeCore(
+            ModuleDesc module,
+            string typeName,
+            ReadOnlySpan<string> nestedTypeNames
+        )
         {
             (string typeNamespace, string name) = SplitFullTypeName(typeName);
 

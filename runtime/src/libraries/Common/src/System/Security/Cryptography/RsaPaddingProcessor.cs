@@ -12,56 +12,180 @@ namespace System.Security.Cryptography
         // DigestInfo header values taken from https://tools.ietf.org/html/rfc3447#section-9.2, Note 1.
         private static ReadOnlySpan<byte> DigestInfoMD5 =>
             [
-                0x30, 0x20, 0x30, 0x0C, 0x06, 0x08, 0x2A, 0x86,
-                0x48, 0x86, 0xF7, 0x0D, 0x02, 0x05, 0x05, 0x00,
-                0x04, 0x10,
+                0x30,
+                0x20,
+                0x30,
+                0x0C,
+                0x06,
+                0x08,
+                0x2A,
+                0x86,
+                0x48,
+                0x86,
+                0xF7,
+                0x0D,
+                0x02,
+                0x05,
+                0x05,
+                0x00,
+                0x04,
+                0x10,
             ];
 
         private static ReadOnlySpan<byte> DigestInfoSha1 =>
             [
-                0x30, 0x21, 0x30, 0x09, 0x06, 0x05, 0x2B, 0x0E, 0x03,
-                0x02, 0x1A, 0x05, 0x00, 0x04, 0x14,
+                0x30,
+                0x21,
+                0x30,
+                0x09,
+                0x06,
+                0x05,
+                0x2B,
+                0x0E,
+                0x03,
+                0x02,
+                0x1A,
+                0x05,
+                0x00,
+                0x04,
+                0x14,
             ];
 
         private static ReadOnlySpan<byte> DigestInfoSha256 =>
             [
-                0x30, 0x31, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x01, 0x05, 0x00, 0x04,
+                0x30,
+                0x31,
+                0x30,
+                0x0D,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x01,
+                0x05,
+                0x00,
+                0x04,
                 0x20,
             ];
 
         private static ReadOnlySpan<byte> DigestInfoSha384 =>
             [
-                0x30, 0x41, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x02, 0x05, 0x00, 0x04,
+                0x30,
+                0x41,
+                0x30,
+                0x0D,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x02,
+                0x05,
+                0x00,
+                0x04,
                 0x30,
             ];
 
         private static ReadOnlySpan<byte> DigestInfoSha512 =>
             [
-                0x30, 0x51, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x03, 0x05, 0x00, 0x04,
+                0x30,
+                0x51,
+                0x30,
+                0x0D,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x03,
+                0x05,
+                0x00,
+                0x04,
                 0x40,
             ];
 
         private static ReadOnlySpan<byte> DigestInfoSha3_256 =>
             [
-                0x30, 0x31, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x08, 0x05, 0x00, 0x04,
+                0x30,
+                0x31,
+                0x30,
+                0x0D,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x08,
+                0x05,
+                0x00,
+                0x04,
                 0x20,
             ];
 
         private static ReadOnlySpan<byte> DigestInfoSha3_384 =>
             [
-                0x30, 0x41, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x09, 0x05, 0x00, 0x04,
+                0x30,
+                0x41,
+                0x30,
+                0x0D,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x09,
+                0x05,
+                0x00,
+                0x04,
                 0x30,
             ];
 
         private static ReadOnlySpan<byte> DigestInfoSha3_512 =>
             [
-                0x30, 0x51, 0x30, 0x0D, 0x06, 0x09, 0x60, 0x86, 0x48,
-                0x01, 0x65, 0x03, 0x04, 0x02, 0x0A, 0x05, 0x00, 0x04,
+                0x30,
+                0x51,
+                0x30,
+                0x0D,
+                0x06,
+                0x09,
+                0x60,
+                0x86,
+                0x48,
+                0x01,
+                0x65,
+                0x03,
+                0x04,
+                0x02,
+                0x0A,
+                0x05,
+                0x00,
+                0x04,
                 0x40,
             ];
 
@@ -69,7 +193,8 @@ namespace System.Security.Cryptography
 
         private static ReadOnlySpan<byte> GetDigestInfoForAlgorithm(
             HashAlgorithmName hashAlgorithmName,
-            out int digestLengthInBytes)
+            out int digestLengthInBytes
+        )
         {
             switch (hashAlgorithmName.Name)
             {
@@ -114,9 +239,7 @@ namespace System.Security.Cryptography
             return hLen;
         }
 
-        internal static void PadPkcs1Encryption(
-            ReadOnlySpan<byte> source,
-            Span<byte> destination)
+        internal static void PadPkcs1Encryption(ReadOnlySpan<byte> source, Span<byte> destination)
         {
             // https://tools.ietf.org/html/rfc3447#section-7.2.1
 
@@ -145,7 +268,8 @@ namespace System.Security.Cryptography
         internal static void PadPkcs1Signature(
             HashAlgorithmName hashAlgorithmName,
             ReadOnlySpan<byte> source,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             // https://tools.ietf.org/html/rfc3447#section-9.2
 
@@ -153,7 +277,10 @@ namespace System.Security.Cryptography
             // Done by the caller.
 
             // 2. Encode the DigestInfo value
-            ReadOnlySpan<byte> digestInfoPrefix = GetDigestInfoForAlgorithm(hashAlgorithmName, out _);
+            ReadOnlySpan<byte> digestInfoPrefix = GetDigestInfoForAlgorithm(
+                hashAlgorithmName,
+                out _
+            );
             int expectedLength = digestInfoPrefix[^1];
 
             if (source.Length != expectedLength)
@@ -184,7 +311,8 @@ namespace System.Security.Cryptography
         internal static void PadOaep(
             HashAlgorithmName hashAlgorithmName,
             ReadOnlySpan<byte> source,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             // https://tools.ietf.org/html/rfc3447#section-7.1.1
 
@@ -204,7 +332,8 @@ namespace System.Security.Cryptography
                 if (source.Length > maxInput)
                 {
                     throw new CryptographicException(
-                        SR.Format(SR.Cryptography_Encryption_MessageTooLong, maxInput));
+                        SR.Format(SR.Cryptography_Encryption_MessageTooLong, maxInput)
+                    );
                 }
 
                 // The final message (step 2(i)) will be
@@ -275,7 +404,12 @@ namespace System.Security.Cryptography
             }
         }
 
-        internal static void EncodePss(HashAlgorithmName hashAlgorithmName, ReadOnlySpan<byte> mHash, Span<byte> destination, int keySize)
+        internal static void EncodePss(
+            HashAlgorithmName hashAlgorithmName,
+            ReadOnlySpan<byte> mHash,
+            Span<byte> destination,
+            int keySize
+        )
         {
             int hLen = HashLength(hashAlgorithmName);
 
@@ -363,7 +497,12 @@ namespace System.Security.Cryptography
             CryptoPool.Return(dbMaskRented, clearSize: 0);
         }
 
-        internal static bool VerifyPss(HashAlgorithmName hashAlgorithmName, ReadOnlySpan<byte> mHash, ReadOnlySpan<byte> em, int keySize)
+        internal static bool VerifyPss(
+            HashAlgorithmName hashAlgorithmName,
+            ReadOnlySpan<byte> mHash,
+            ReadOnlySpan<byte> em,
+            int keySize
+        )
         {
             int hLen = HashLength(hashAlgorithmName);
 
@@ -478,7 +617,11 @@ namespace System.Security.Cryptography
         }
 
         // https://tools.ietf.org/html/rfc3447#appendix-B.2.1
-        private static void Mgf1(IncrementalHash hasher, ReadOnlySpan<byte> mgfSeed, Span<byte> mask)
+        private static void Mgf1(
+            IncrementalHash hasher,
+            ReadOnlySpan<byte> mgfSeed,
+            Span<byte> mask
+        )
         {
             int hLen = hasher.HashLengthInBytes;
             Span<byte> writePtr = mask;

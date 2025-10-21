@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -21,14 +19,40 @@ namespace Internal.IL.Stubs
             switch (method.Name)
             {
                 case "AsPointer":
-                    return new ILStubMethodIL(method, new byte[] { (byte)ILOpcode.ldarg_0, (byte)ILOpcode.conv_u, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.conv_u,
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "As":
                 case "AsRef":
-                    return new ILStubMethodIL(method, new byte[] { (byte)ILOpcode.ldarg_0, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[] { (byte)ILOpcode.ldarg_0, (byte)ILOpcode.ret },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "Add":
                     return EmitAdd(method);
                 case "AddByteOffset":
-                    return new ILStubMethodIL(method, new byte[] { (byte)ILOpcode.ldarg_0, (byte)ILOpcode.ldarg_1, (byte)ILOpcode.add, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.ldarg_1,
+                            (byte)ILOpcode.add,
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "Copy":
                     return EmitCopy(method);
                 case "CopyBlock":
@@ -48,47 +72,109 @@ namespace Internal.IL.Stubs
                 case "WriteUnaligned":
                     return EmitReadWrite(method, write: true, unaligned: true);
                 case "AreSame":
-                    return new ILStubMethodIL(method, new byte[]
-                    {
-                        (byte)ILOpcode.ldarg_0, (byte)ILOpcode.ldarg_1,
-                        (byte)ILOpcode.prefix1, unchecked((byte)ILOpcode.ceq),
-                        (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.ldarg_1,
+                            (byte)ILOpcode.prefix1,
+                            unchecked((byte)ILOpcode.ceq),
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "IsAddressGreaterThan":
-                    return new ILStubMethodIL(method, new byte[]
-                    {
-                        (byte)ILOpcode.ldarg_0, (byte)ILOpcode.ldarg_1,
-                        (byte)ILOpcode.prefix1, unchecked((byte)ILOpcode.cgt_un),
-                        (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.ldarg_1,
+                            (byte)ILOpcode.prefix1,
+                            unchecked((byte)ILOpcode.cgt_un),
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "IsAddressLessThan":
-                    return new ILStubMethodIL(method, new byte[]
-                    {
-                        (byte)ILOpcode.ldarg_0, (byte)ILOpcode.ldarg_1,
-                        (byte)ILOpcode.prefix1, unchecked((byte)ILOpcode.clt_un),
-                        (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.ldarg_1,
+                            (byte)ILOpcode.prefix1,
+                            unchecked((byte)ILOpcode.clt_un),
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "ByteOffset":
-                    return new ILStubMethodIL(method, new byte[]
-                    {
-                        (byte)ILOpcode.ldarg_1, (byte)ILOpcode.ldarg_0,
-                        (byte)ILOpcode.sub,
-                        (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_1,
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.sub,
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "NullRef":
-                    return new ILStubMethodIL(method, new byte[]
-                    {
-                        (byte)ILOpcode.ldc_i4_0, (byte)ILOpcode.conv_u,
-                        (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldc_i4_0,
+                            (byte)ILOpcode.conv_u,
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "IsNullRef":
-                    return new ILStubMethodIL(method, new byte[]
-                    {
-                        (byte)ILOpcode.ldarg_0,
-                        (byte)ILOpcode.ldc_i4_0, (byte)ILOpcode.conv_u,
-                        (byte)ILOpcode.prefix1, unchecked((byte)ILOpcode.ceq),
-                        (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.ldc_i4_0,
+                            (byte)ILOpcode.conv_u,
+                            (byte)ILOpcode.prefix1,
+                            unchecked((byte)ILOpcode.ceq),
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "SkipInit":
-                    return new ILStubMethodIL(method, new byte[] { (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[] { (byte)ILOpcode.ret },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "Subtract":
                     return EmitSubtract(method);
                 case "SubtractByteOffset":
-                    return new ILStubMethodIL(method, new byte[] { (byte)ILOpcode.ldarg_0, (byte)ILOpcode.ldarg_1, (byte)ILOpcode.sub, (byte)ILOpcode.ret }, Array.Empty<LocalVariableDefinition>(), null);
+                    return new ILStubMethodIL(
+                        method,
+                        new byte[]
+                        {
+                            (byte)ILOpcode.ldarg_0,
+                            (byte)ILOpcode.ldarg_1,
+                            (byte)ILOpcode.sub,
+                            (byte)ILOpcode.ret,
+                        },
+                        Array.Empty<LocalVariableDefinition>(),
+                        null
+                    );
                 case "Unbox":
                     return EmitUnbox(method);
             }
@@ -105,7 +191,10 @@ namespace Internal.IL.Stubs
             ILEmitter emit = new ILEmitter();
             ILCodeStream codeStream = emit.NewCodeStream();
             codeStream.Emit(ILOpcode.ldarg_1);
-            codeStream.Emit(ILOpcode.sizeof_, emit.NewToken(context.GetSignatureVariable(0, method: true)));
+            codeStream.Emit(
+                ILOpcode.sizeof_,
+                emit.NewToken(context.GetSignatureVariable(0, method: true))
+            );
             codeStream.Emit(ILOpcode.conv_i);
             codeStream.Emit(ILOpcode.mul);
             codeStream.Emit(ILOpcode.ldarg_0);
@@ -125,7 +214,10 @@ namespace Internal.IL.Stubs
 
             codeStream.Emit(ILOpcode.ldarg_0);
             codeStream.Emit(ILOpcode.ldarg_1);
-            codeStream.Emit(ILOpcode.sizeof_, emit.NewToken(context.GetSignatureVariable(0, method: true)));
+            codeStream.Emit(
+                ILOpcode.sizeof_,
+                emit.NewToken(context.GetSignatureVariable(0, method: true))
+            );
             codeStream.Emit(ILOpcode.conv_i);
             codeStream.Emit(ILOpcode.mul);
             codeStream.Emit(ILOpcode.sub);
@@ -144,10 +236,14 @@ namespace Internal.IL.Stubs
             ILCodeStream codeStream = emit.NewCodeStream();
 
             codeStream.EmitLdArg(0);
-            if (write) codeStream.EmitLdArg(1);
-            if (unaligned) codeStream.EmitUnaligned();
-            codeStream.Emit(write ? ILOpcode.stobj : ILOpcode.ldobj,
-                emit.NewToken(context.GetSignatureVariable(0, method: true)));
+            if (write)
+                codeStream.EmitLdArg(1);
+            if (unaligned)
+                codeStream.EmitUnaligned();
+            codeStream.Emit(
+                write ? ILOpcode.stobj : ILOpcode.ldobj,
+                emit.NewToken(context.GetSignatureVariable(0, method: true))
+            );
             codeStream.Emit(ILOpcode.ret);
             return emit.Link(method);
         }
@@ -217,7 +313,10 @@ namespace Internal.IL.Stubs
             ILCodeStream codeStream = emit.NewCodeStream();
 
             codeStream.EmitLdArg(0);
-            codeStream.Emit(ILOpcode.unbox, emit.NewToken(context.GetSignatureVariable(0, method: true)));
+            codeStream.Emit(
+                ILOpcode.unbox,
+                emit.NewToken(context.GetSignatureVariable(0, method: true))
+            );
             codeStream.Emit(ILOpcode.ret);
 
             return emit.Link(method);

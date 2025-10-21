@@ -10,12 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
     {
         public static readonly IFileBannerFacts Instance = new CSharpFileBannerFacts();
 
-        protected CSharpFileBannerFacts()
-        {
-        }
+        protected CSharpFileBannerFacts() { }
 
         protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 
-        protected override IDocumentationCommentService DocumentationCommentService => CSharpDocumentationCommentService.Instance;
+        protected override IDocumentationCommentService DocumentationCommentService =>
+            CSharpDocumentationCommentService.Instance;
     }
 }

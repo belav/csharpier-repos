@@ -23,7 +23,9 @@ namespace System.Linq
             return array;
         }
 
-        internal TResult[] ToArray<TResult>(Func<TKey, IEnumerable<TElement>, TResult> resultSelector)
+        internal TResult[] ToArray<TResult>(
+            Func<TKey, IEnumerable<TElement>, TResult> resultSelector
+        )
         {
             TResult[] array = new TResult[_count];
             int index = 0;
@@ -38,8 +40,7 @@ namespace System.Linq
                     g.Trim();
                     array[index] = resultSelector(g._key, g._elements);
                     ++index;
-                }
-                while (g != _lastGrouping);
+                } while (g != _lastGrouping);
             }
 
             return array;
@@ -56,7 +57,10 @@ namespace System.Linq
             return list;
         }
 
-        private static void Fill(Grouping<TKey, TElement>? lastGrouping, Span<IGrouping<TKey, TElement>> results)
+        private static void Fill(
+            Grouping<TKey, TElement>? lastGrouping,
+            Span<IGrouping<TKey, TElement>> results
+        )
         {
             int index = 0;
             Grouping<TKey, TElement>? g = lastGrouping;
@@ -69,8 +73,7 @@ namespace System.Linq
 
                     results[index] = g;
                     ++index;
-                }
-                while (g != lastGrouping);
+                } while (g != lastGrouping);
             }
 
             Debug.Assert(index == results.Length, "All list elements were not initialized.");

@@ -12,7 +12,9 @@ namespace System.Workflow.ComponentModel.Design
     //Class is internal but not sealed as we dont expect the ActivityDesigner writers to supply their own
     //Glyph instead based on comment property comment glyph is shown
     //Exception: StripItemCommentGlyph
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class CommentGlyph : DesignerGlyph
     {
         private static CommentGlyph defaultCommentGlyph = null;
@@ -39,13 +41,15 @@ namespace System.Workflow.ComponentModel.Design
 
         public override int Priority
         {
-            get
-            {
-                return DesignerGlyph.CommentPriority;
-            }
+            get { return DesignerGlyph.CommentPriority; }
         }
 
-        protected override void OnPaint(Graphics graphics, bool activated, AmbientTheme ambientTheme, ActivityDesigner designer)
+        protected override void OnPaint(
+            Graphics graphics,
+            bool activated,
+            AmbientTheme ambientTheme,
+            ActivityDesigner designer
+        )
         {
             Rectangle bounds = GetBounds(designer, activated);
             graphics.FillRectangle(AmbientTheme.FadeBrush, bounds);
@@ -57,4 +61,3 @@ namespace System.Workflow.ComponentModel.Design
 
     #endregion
 }
-

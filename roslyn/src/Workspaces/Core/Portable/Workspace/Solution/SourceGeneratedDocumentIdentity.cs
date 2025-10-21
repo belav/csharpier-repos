@@ -17,14 +17,27 @@ namespace Microsoft.CodeAnalysis;
 /// as new generations happen. This is mostly for convenience as we are reguarly working with this combination of values.
 /// </summary>
 [DataContract]
-internal readonly record struct SourceGeneratedDocumentIdentity : IEquatable<SourceGeneratedDocumentIdentity>
+internal readonly record struct SourceGeneratedDocumentIdentity
+    : IEquatable<SourceGeneratedDocumentIdentity>
 {
-    [DataMember(Order = 0)] public DocumentId DocumentId { get; }
-    [DataMember(Order = 1)] public string HintName { get; }
-    [DataMember(Order = 2)] public SourceGeneratorIdentity Generator { get; }
-    [DataMember(Order = 3)] public string FilePath { get; }
+    [DataMember(Order = 0)]
+    public DocumentId DocumentId { get; }
 
-    public SourceGeneratedDocumentIdentity(DocumentId documentId, string hintName, SourceGeneratorIdentity generator, string filePath)
+    [DataMember(Order = 1)]
+    public string HintName { get; }
+
+    [DataMember(Order = 2)]
+    public SourceGeneratorIdentity Generator { get; }
+
+    [DataMember(Order = 3)]
+    public string FilePath { get; }
+
+    public SourceGeneratedDocumentIdentity(
+        DocumentId documentId,
+        string hintName,
+        SourceGeneratorIdentity generator,
+        string filePath
+    )
     {
         Contract.ThrowIfFalse(documentId.IsSourceGenerated);
         DocumentId = documentId;
@@ -33,7 +46,13 @@ internal readonly record struct SourceGeneratedDocumentIdentity : IEquatable<Sou
         FilePath = filePath;
     }
 
-    public static SourceGeneratedDocumentIdentity Generate(ProjectId projectId, string hintName, ISourceGenerator generator, string filePath, AnalyzerReference analyzerReference)
+    public static SourceGeneratedDocumentIdentity Generate(
+        ProjectId projectId,
+        string hintName,
+        ISourceGenerator generator,
+        string filePath,
+        AnalyzerReference analyzerReference
+    )
     {
         // We want the DocumentId generated for a generated output to be stable between Compilations; this is so
         // features that track a document by DocumentId can find it after some change has happened that requires
@@ -50,7 +69,17 @@ internal readonly record struct SourceGeneratedDocumentIdentity : IEquatable<Sou
         // dynamic assembly they produced at runtime and passed us that via a custom AnalyzerReference.
         var assemblyNameToHash = generatorIdentity.AssemblyPath ?? generatorIdentity.AssemblyName;
 
-        using var _ = ArrayBuilder<byte>.GetInstance(capacity: (assemblyNameToHash.Length + 1 + generatorIdentity.TypeName.Length + 1 + hintName.Length) * 2 + projectIdBytes.Length, out var hashInput);
+        using var _ = ArrayBuilder<byte>.GetInstance(
+            capacity: (
+                assemblyNameToHash.Length
+                + 1
+                + generatorIdentity.TypeName.Length
+                + 1
+                + hintName.Length
+            ) * 2
+                + projectIdBytes.Length,
+            out var hashInput
+        );
         hashInput.AddRange(projectIdBytes);
 
         // Add a null to separate the generator name and hint name; since this is effectively a joining of UTF-16 bytes
@@ -68,9 +97,19 @@ internal readonly record struct SourceGeneratedDocumentIdentity : IEquatable<Sou
         Array.Resize(ref hash, 16);
         var guid = new Guid(hash);
 
-        var documentId = DocumentId.CreateFromSerialized(projectId, guid, isSourceGenerated: true, hintName);
+        var documentId = DocumentId.CreateFromSerialized(
+            projectId,
+            guid,
+            isSourceGenerated: true,
+            hintName
+        );
 
-        return new SourceGeneratedDocumentIdentity(documentId, hintName, generatorIdentity, filePath);
+        return new SourceGeneratedDocumentIdentity(
+            documentId,
+            hintName,
+            generatorIdentity,
+            filePath
+        );
     }
 
     public void WriteTo(ObjectWriter writer)
@@ -103,7 +142,9 @@ internal readonly record struct SourceGeneratedDocumentIdentity : IEquatable<Sou
                 generatorAssemblyName,
                 generatorAssemblyPath,
                 generatorAssemblyVersion,
-                generatorTypeName),
-            filePath);
+                generatorTypeName
+            ),
+            filePath
+        );
     }
 }

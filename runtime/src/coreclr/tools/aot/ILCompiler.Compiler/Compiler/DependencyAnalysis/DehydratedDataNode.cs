@@ -3,11 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Runtime;
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -49,13 +47,19 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__dehydrated_data");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This is a summary node that doesn't contribute to the dependency graph.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, Array.Empty<ISymbolDefinitionNode>());
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    Array.Empty<ISymbolDefinitionNode>()
+                );
 
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.AddSymbol(this);
@@ -80,12 +84,23 @@ namespace ILCompiler.DependencyAnalysis
             }
 
             if (firstSymbol != null)
-                builder.EmitReloc(firstSymbol, RelocType.IMAGE_REL_BASED_RELPTR32, -firstSymbol.Offset);
+                builder.EmitReloc(
+                    firstSymbol,
+                    RelocType.IMAGE_REL_BASED_RELPTR32,
+                    -firstSymbol.Offset
+                );
             else
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             // Sort the reloc targets and create reloc lookup table.
-            KeyValuePair<ISymbolNode, int>[] relocSort = new List<KeyValuePair<ISymbolNode, int>>(relocOccurences).ToArray();
+            KeyValuePair<ISymbolNode, int>[] relocSort = new List<KeyValuePair<ISymbolNode, int>>(
+                relocOccurences
+            ).ToArray();
             Array.Sort(relocSort, (x, y) => y.Value.CompareTo(x.Value));
             int lastProfitableReloc = 0;
             for (int i = 0; i < relocSort.Length; i++)
@@ -119,7 +134,11 @@ namespace ILCompiler.DependencyAnalysis
                     dehydratedSegmentPosition = dehydratedSegmentPosition.AlignUp(o.Alignment);
                     if (dehydratedSegmentPosition > oldPosition)
                     {
-                        int written = DehydratedDataCommand.Encode(DehydratedDataCommand.ZeroFill, dehydratedSegmentPosition - oldPosition, buff);
+                        int written = DehydratedDataCommand.Encode(
+                            DehydratedDataCommand.ZeroFill,
+                            dehydratedSegmentPosition - oldPosition,
+                            buff
+                        );
                         builder.EmitBytes(buff, 0, written);
                     }
                 }
@@ -185,7 +204,11 @@ namespace ILCompiler.DependencyAnalysis
                         // Emit literal data if there's any.
                         if (chunkLength > 0)
                         {
-                            int written = DehydratedDataCommand.Encode(DehydratedDataCommand.Copy, chunkLength, buff);
+                            int written = DehydratedDataCommand.Encode(
+                                DehydratedDataCommand.Copy,
+                                chunkLength,
+                                buff
+                            );
                             builder.EmitBytes(buff, 0, written);
                             builder.EmitBytes(o.Data, sourcePosition, chunkLength);
                             sourcePosition += chunkLength;
@@ -195,7 +218,11 @@ namespace ILCompiler.DependencyAnalysis
                         // Emit a ZeroFill instruction if there's any zeros.
                         if (numZeros > 0)
                         {
-                            int written = DehydratedDataCommand.Encode(DehydratedDataCommand.ZeroFill, numZeros, buff);
+                            int written = DehydratedDataCommand.Encode(
+                                DehydratedDataCommand.ZeroFill,
+                                numZeros,
+                                buff
+                            );
                             builder.EmitBytes(buff, 0, written);
                             sourcePosition += numZeros;
                             bytesToCopy -= numZeros;
@@ -229,11 +256,16 @@ namespace ILCompiler.DependencyAnalysis
                             int relocCommand = reloc.RelocType switch
                             {
                                 RelocType.IMAGE_REL_BASED_DIR64 => DehydratedDataCommand.PtrReloc,
-                                RelocType.IMAGE_REL_BASED_RELPTR32 => DehydratedDataCommand.RelPtr32Reloc,
+                                RelocType.IMAGE_REL_BASED_RELPTR32 =>
+                                    DehydratedDataCommand.RelPtr32Reloc,
                                 _ => throw new NotSupportedException(),
                             };
 
-                            int written = DehydratedDataCommand.Encode(relocCommand, targetIndex, buff);
+                            int written = DehydratedDataCommand.Encode(
+                                relocCommand,
+                                targetIndex,
+                                buff
+                            );
                             builder.EmitBytes(buff, 0, written);
                         }
                         else
@@ -247,7 +279,11 @@ namespace ILCompiler.DependencyAnalysis
                             bool hasNextReloc;
                             do
                             {
-                                builder.EmitReloc(target, RelocType.IMAGE_REL_BASED_RELPTR32, checked((int)delta));
+                                builder.EmitReloc(
+                                    target,
+                                    RelocType.IMAGE_REL_BASED_RELPTR32,
+                                    checked((int)delta)
+                                );
                                 numRelocs++;
                                 hasNextReloc = false;
 
@@ -294,11 +330,16 @@ namespace ILCompiler.DependencyAnalysis
                             // Now update the byte we reserved with the command to emit for the run
                             int relocCommand = reloc.RelocType switch
                             {
-                                RelocType.IMAGE_REL_BASED_DIR64 => DehydratedDataCommand.InlinePtrReloc,
-                                RelocType.IMAGE_REL_BASED_RELPTR32 => DehydratedDataCommand.InlineRelPtr32Reloc,
+                                RelocType.IMAGE_REL_BASED_DIR64 =>
+                                    DehydratedDataCommand.InlinePtrReloc,
+                                RelocType.IMAGE_REL_BASED_RELPTR32 =>
+                                    DehydratedDataCommand.InlineRelPtr32Reloc,
                                 _ => throw new NotSupportedException(),
                             };
-                            builder.EmitByte(reservation, DehydratedDataCommand.EncodeShort(relocCommand, numRelocs));
+                            builder.EmitByte(
+                                reservation,
+                                DehydratedDataCommand.EncodeShort(relocCommand, numRelocs)
+                            );
                         }
                     }
                 }
@@ -316,6 +357,7 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
     }
 }

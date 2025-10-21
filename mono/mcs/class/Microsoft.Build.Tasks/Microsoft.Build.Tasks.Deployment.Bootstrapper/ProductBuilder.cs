@@ -25,24 +25,21 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    public class ProductBuilder : IProductBuilder
+    {
+        Product product;
 
-	public class ProductBuilder : IProductBuilder {
-	
-		Product	product;
+        ProductBuilder() { }
 
-		ProductBuilder ()
-		{
-		}
-		
-		public Product Product {
-			get { return product; }
-		}
-	}
+        public Product Product
+        {
+            get { return product; }
+        }
+    }
 }
-

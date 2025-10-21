@@ -6,15 +6,15 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
     using System.Transactions;
-    using System.Runtime.Diagnostics;
 
     public abstract class ReceiveContext
     {
-        public readonly static string Name = "ReceiveContext";
+        public static readonly string Name = "ReceiveContext";
         ThreadNeutralSemaphore stateLock; // protects state that may be reverted
         bool contextFaulted;
         object thisLock;
@@ -27,11 +27,7 @@ namespace System.ServiceModel.Channels
             this.stateLock = new ThreadNeutralSemaphore(1);
         }
 
-        public ReceiveContextState State
-        {
-            get;
-            protected set;
-        }
+        public ReceiveContextState State { get; protected set; }
 
         protected object ThisLock
         {
@@ -48,7 +44,11 @@ namespace System.ServiceModel.Channels
             }
 
             bool result = TryGet(message.Properties, out property);
-            if (result && FxTrace.Trace.IsEnd2EndActivityTracingEnabled && property.eventTraceActivity == null)
+            if (
+                result
+                && FxTrace.Trace.IsEnd2EndActivityTracingEnabled
+                && property.eventTraceActivity == null
+            )
             {
                 property.eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message);
             }
@@ -108,7 +108,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (TD.ReceiveContextAbandonWithExceptionIsEnabled())
                     {
-                        TD.ReceiveContextAbandonWithException(this.eventTraceActivity, this.GetType().ToString(), exception.GetType().ToString());
+                        TD.ReceiveContextAbandonWithException(
+                            this.eventTraceActivity,
+                            this.GetType().ToString(),
+                            exception.GetType().ToString()
+                        );
                     }
                     OnAbandon(exception, timeoutHelper.RemainingTime());
                 }
@@ -126,26 +130,41 @@ namespace System.ServiceModel.Channels
                 {
                     if (TD.ReceiveContextAbandonFailedIsEnabled())
                     {
-                        TD.ReceiveContextAbandonFailed(this.eventTraceActivity, this.GetType().ToString());
+                        TD.ReceiveContextAbandonFailed(
+                            this.eventTraceActivity,
+                            this.GetType().ToString()
+                        );
                     }
                     Fault();
                 }
             }
-
         }
 
-        public virtual IAsyncResult BeginAbandon(TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginAbandon(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return BeginAbandon(null, timeout, callback, state);
         }
 
-        public virtual IAsyncResult BeginAbandon(Exception exception, TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginAbandon(
+            Exception exception,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             EnsureValidTimeout(timeout);
             return new AbandonAsyncResult(this, exception, timeout, callback, state);
         }
 
-        public virtual IAsyncResult BeginComplete(TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginComplete(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             EnsureValidTimeout(timeout);
             return new CompleteAsyncResult(this, timeout, callback, state);
@@ -192,7 +211,10 @@ namespace System.ServiceModel.Channels
                 {
                     if (TD.ReceiveContextCompleteFailedIsEnabled())
                     {
-                        TD.ReceiveContextCompleteFailed(this.eventTraceActivity, this.GetType().ToString());
+                        TD.ReceiveContextCompleteFailed(
+                            this.eventTraceActivity,
+                            this.GetType().ToString()
+                        );
                     }
                     Fault();
                 }
@@ -214,13 +236,22 @@ namespace System.ServiceModel.Channels
             if (timeout < TimeSpan.Zero)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
             }
 
             if (TimeoutHelper.IsTooLarge(timeout))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                    )
+                );
             }
         }
 
@@ -228,7 +259,11 @@ namespace System.ServiceModel.Channels
         {
             lock (ThisLock)
             {
-                if (this.State == ReceiveContextState.Completed || this.State == ReceiveContextState.Abandoned || this.State == ReceiveContextState.Faulted)
+                if (
+                    this.State == ReceiveContextState.Completed
+                    || this.State == ReceiveContextState.Abandoned
+                    || this.State == ReceiveContextState.Faulted
+                )
                 {
                     return;
                 }
@@ -238,20 +273,35 @@ namespace System.ServiceModel.Channels
         }
 
         protected abstract void OnAbandon(TimeSpan timeout);
+
         protected virtual void OnAbandon(Exception exception, TimeSpan timeout)
         {
             // default implementation: delegate to non-exception overload, ignoring reason
             OnAbandon(timeout);
         }
 
-        protected abstract IAsyncResult OnBeginAbandon(TimeSpan timeout, AsyncCallback callback, object state);
-        protected virtual IAsyncResult OnBeginAbandon(Exception exception, TimeSpan timeout, AsyncCallback callback, object state)
+        protected abstract IAsyncResult OnBeginAbandon(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
+
+        protected virtual IAsyncResult OnBeginAbandon(
+            Exception exception,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             // default implementation: delegate to non-exception overload, ignoring reason
             return OnBeginAbandon(timeout, callback, state);
         }
 
-        protected abstract IAsyncResult OnBeginComplete(TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract IAsyncResult OnBeginComplete(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
         protected abstract void OnComplete(TimeSpan timeout);
         protected abstract void OnEndAbandon(IAsyncResult result);
@@ -299,7 +349,10 @@ namespace System.ServiceModel.Channels
             {
                 if (status == TransactionStatus.Aborted)
                 {
-                    if (this.State == ReceiveContextState.Completing || this.State == ReceiveContextState.Completed)
+                    if (
+                        this.State == ReceiveContextState.Completing
+                        || this.State == ReceiveContextState.Completed
+                    )
                     {
                         this.State = ReceiveContextState.Received;
                     }
@@ -317,7 +370,10 @@ namespace System.ServiceModel.Channels
             bool alreadyAbandoned = false;
             lock (ThisLock)
             {
-                if (this.State == ReceiveContextState.Abandoning || this.State == ReceiveContextState.Abandoned)
+                if (
+                    this.State == ReceiveContextState.Abandoning
+                    || this.State == ReceiveContextState.Abandoned
+                )
                 {
                     alreadyAbandoned = true;
                 }
@@ -339,7 +395,10 @@ namespace System.ServiceModel.Channels
                 ThrowIfNotReceived();
                 if (Transaction.Current != null)
                 {
-                    Transaction.Current.EnlistVolatile(new EnlistmentNotifications(this), EnlistmentOptions.None);
+                    Transaction.Current.EnlistVolatile(
+                        new EnlistmentNotifications(this),
+                        EnlistmentOptions.None
+                    );
                 }
                 this.State = ReceiveContextState.Completing;
             }
@@ -352,11 +411,13 @@ namespace System.ServiceModel.Channels
 
         void ThrowIfFaulted()
         {
-
             if (State == ReceiveContextState.Faulted)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new CommunicationException(SR.GetString(SR.ReceiveContextFaulted, this.GetType().ToString())));
+                    new CommunicationException(
+                        SR.GetString(SR.ReceiveContextFaulted, this.GetType().ToString())
+                    )
+                );
             }
         }
 
@@ -365,7 +426,14 @@ namespace System.ServiceModel.Channels
             if (State != ReceiveContextState.Abandoning)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ReceiveContextInInvalidState, this.GetType().ToString(), this.State.ToString())));
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ReceiveContextInInvalidState,
+                            this.GetType().ToString(),
+                            this.State.ToString()
+                        )
+                    )
+                );
             }
         }
 
@@ -374,7 +442,14 @@ namespace System.ServiceModel.Channels
             if (State != ReceiveContextState.Completing)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ReceiveContextInInvalidState, this.GetType().ToString(), this.State.ToString())));
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ReceiveContextInInvalidState,
+                            this.GetType().ToString(),
+                            this.State.ToString()
+                        )
+                    )
+                );
             }
         }
 
@@ -383,7 +458,14 @@ namespace System.ServiceModel.Channels
             if (State != ReceiveContextState.Received)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.ReceiveContextCannotBeUsed, this.GetType().ToString(), this.State.ToString())));
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ReceiveContextCannotBeUsed,
+                            this.GetType().ToString(),
+                            this.State.ToString()
+                        )
+                    )
+                );
             }
         }
 
@@ -395,7 +477,9 @@ namespace System.ServiceModel.Channels
             }
             catch (TimeoutException exception)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WrapStateException(exception));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    WrapStateException(exception)
+                );
             }
         }
 
@@ -406,15 +490,30 @@ namespace System.ServiceModel.Channels
 
         Exception WrapStateException(Exception exception)
         {
-            return new InvalidOperationException(SR.GetString(SR.ReceiveContextInInvalidState, this.GetType().ToString(), this.State.ToString()), exception);
+            return new InvalidOperationException(
+                SR.GetString(
+                    SR.ReceiveContextInInvalidState,
+                    this.GetType().ToString(),
+                    this.State.ToString()
+                ),
+                exception
+            );
         }
 
         sealed class AbandonAsyncResult : WaitAndContinueOperationAsyncResult
         {
             Exception exception;
-            static AsyncCompletion handleOperationComplete = new AsyncCompletion(HandleOperationComplete);
+            static AsyncCompletion handleOperationComplete = new AsyncCompletion(
+                HandleOperationComplete
+            );
 
-            public AbandonAsyncResult(ReceiveContext receiveContext, Exception exception, TimeSpan timeout, AsyncCallback callback, object state)
+            public AbandonAsyncResult(
+                ReceiveContext receiveContext,
+                Exception exception,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(receiveContext, timeout, callback, state)
             {
                 this.exception = exception;
@@ -443,16 +542,29 @@ namespace System.ServiceModel.Channels
                 {
                     if (exception == null)
                     {
-                        result = this.ReceiveContext.OnBeginAbandon(this.TimeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleOperationComplete), this);
+                        result = this.ReceiveContext.OnBeginAbandon(
+                            this.TimeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(handleOperationComplete),
+                            this
+                        );
                     }
                     else
                     {
                         if (TD.ReceiveContextAbandonWithExceptionIsEnabled())
                         {
-                            TD.ReceiveContextAbandonWithException(this.ReceiveContext.eventTraceActivity, this.GetType().ToString(), exception.GetType().ToString());
+                            TD.ReceiveContextAbandonWithException(
+                                this.ReceiveContext.eventTraceActivity,
+                                this.GetType().ToString(),
+                                exception.GetType().ToString()
+                            );
                         }
 
-                        result = this.ReceiveContext.OnBeginAbandon(exception, this.TimeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleOperationComplete), this);
+                        result = this.ReceiveContext.OnBeginAbandon(
+                            exception,
+                            this.TimeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(handleOperationComplete),
+                            this
+                        );
                     }
 
                     success = true;
@@ -463,8 +575,12 @@ namespace System.ServiceModel.Channels
                     {
                         if (TD.ReceiveContextAbandonFailedIsEnabled())
                         {
-                            TD.ReceiveContextAbandonFailed((this.ReceiveContext != null) ? this.ReceiveContext.eventTraceActivity : null, 
-                                                            this.GetType().ToString());
+                            TD.ReceiveContextAbandonFailed(
+                                (this.ReceiveContext != null)
+                                    ? this.ReceiveContext.eventTraceActivity
+                                    : null,
+                                this.GetType().ToString()
+                            );
                         }
 
                         this.ReceiveContext.Fault();
@@ -507,7 +623,10 @@ namespace System.ServiceModel.Channels
                     {
                         if (TD.ReceiveContextAbandonFailedIsEnabled())
                         {
-                            TD.ReceiveContextAbandonFailed(thisPtr.ReceiveContext.eventTraceActivity, thisPtr.GetType().ToString());
+                            TD.ReceiveContextAbandonFailed(
+                                thisPtr.ReceiveContext.eventTraceActivity,
+                                thisPtr.GetType().ToString()
+                            );
                         }
 
                         thisPtr.ReceiveContext.Fault();
@@ -519,9 +638,16 @@ namespace System.ServiceModel.Channels
         sealed class CompleteAsyncResult : WaitAndContinueOperationAsyncResult
         {
             Transaction transaction;
-            static AsyncCompletion handleOperationComplete = new AsyncCompletion(HandleOperationComplete);
+            static AsyncCompletion handleOperationComplete = new AsyncCompletion(
+                HandleOperationComplete
+            );
 
-            public CompleteAsyncResult(ReceiveContext receiveContext, TimeSpan timeout, AsyncCallback callback, object state)
+            public CompleteAsyncResult(
+                ReceiveContext receiveContext,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(receiveContext, timeout, callback, state)
             {
                 this.transaction = Transaction.Current;
@@ -556,7 +682,11 @@ namespace System.ServiceModel.Channels
 
                     try
                     {
-                        result = this.ReceiveContext.OnBeginComplete(this.TimeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleOperationComplete), this);
+                        result = this.ReceiveContext.OnBeginComplete(
+                            this.TimeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(handleOperationComplete),
+                            this
+                        );
                         success = true;
                     }
                     finally
@@ -565,7 +695,10 @@ namespace System.ServiceModel.Channels
                         {
                             if (TD.ReceiveContextCompleteFailedIsEnabled())
                             {
-                                TD.ReceiveContextCompleteFailed(this.ReceiveContext.eventTraceActivity, this.GetType().ToString());
+                                TD.ReceiveContextCompleteFailed(
+                                    this.ReceiveContext.eventTraceActivity,
+                                    this.GetType().ToString()
+                                );
                             }
 
                             this.ReceiveContext.Fault();
@@ -609,7 +742,10 @@ namespace System.ServiceModel.Channels
                     {
                         if (TD.ReceiveContextCompleteFailedIsEnabled())
                         {
-                            TD.ReceiveContextCompleteFailed(thisPtr.ReceiveContext.eventTraceActivity, thisPtr.GetType().ToString());
+                            TD.ReceiveContextCompleteFailed(
+                                thisPtr.ReceiveContext.eventTraceActivity,
+                                thisPtr.GetType().ToString()
+                            );
                         }
 
                         thisPtr.ReceiveContext.Fault();
@@ -654,30 +790,35 @@ namespace System.ServiceModel.Channels
 
         abstract class WaitAndContinueOperationAsyncResult : TransactedAsyncResult
         {
-            static FastAsyncCallback onWaitForStateLockComplete = new FastAsyncCallback(OnWaitForStateLockComplete);
+            static FastAsyncCallback onWaitForStateLockComplete = new FastAsyncCallback(
+                OnWaitForStateLockComplete
+            );
 
-            public WaitAndContinueOperationAsyncResult(ReceiveContext receiveContext, TimeSpan timeout, AsyncCallback callback, object state)
+            public WaitAndContinueOperationAsyncResult(
+                ReceiveContext receiveContext,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.ReceiveContext = receiveContext;
                 this.TimeoutHelper = new TimeoutHelper(timeout);
             }
 
-            protected ReceiveContext ReceiveContext
-            {
-                get;
-                private set;
-            }
+            protected ReceiveContext ReceiveContext { get; private set; }
 
-            protected TimeoutHelper TimeoutHelper
-            {
-                get;
-                private set;
-            }
+            protected TimeoutHelper TimeoutHelper { get; private set; }
 
             protected void Begin()
             {
-                if (!this.ReceiveContext.WaitForStateLockAsync(this.TimeoutHelper.RemainingTime(), onWaitForStateLockComplete, this))
+                if (
+                    !this.ReceiveContext.WaitForStateLockAsync(
+                        this.TimeoutHelper.RemainingTime(),
+                        onWaitForStateLockComplete,
+                        this
+                    )
+                )
                 {
                     return;
                 }
@@ -692,7 +833,8 @@ namespace System.ServiceModel.Channels
 
             static void OnWaitForStateLockComplete(object state, Exception asyncException)
             {
-                WaitAndContinueOperationAsyncResult thisPtr = (WaitAndContinueOperationAsyncResult)state;
+                WaitAndContinueOperationAsyncResult thisPtr =
+                    (WaitAndContinueOperationAsyncResult)state;
                 bool completeAsyncResult = true;
                 Exception completeException = null;
 

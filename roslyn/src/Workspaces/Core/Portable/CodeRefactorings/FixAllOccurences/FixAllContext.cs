@@ -75,14 +75,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         IFixAllContext IFixAllContext.With(
             Optional<(Document? document, Project project)> documentAndProject,
             Optional<FixAllScope> scope,
-            Optional<string?> codeActionEquivalenceKey)
-            => this.With(documentAndProject, scope, codeActionEquivalenceKey);
+            Optional<string?> codeActionEquivalenceKey
+        ) => this.With(documentAndProject, scope, codeActionEquivalenceKey);
         #endregion
 
         internal FixAllContext(
             FixAllState state,
             IProgress<CodeAnalysisProgress> progressTracker,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             State = state;
             this.Progress = progressTracker;
@@ -106,19 +107,29 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// Gets the spans to fix by document for the <see cref="Scope"/> for this fix all occurences fix.
         /// If no spans are specified, it indicates the entire document needs to be fixed.
         /// </summary>
-        public Task<ImmutableDictionary<Document, Optional<ImmutableArray<TextSpan>>>> GetFixAllSpansAsync(CancellationToken cancellationToken)
-            => State.GetFixAllSpansAsync(cancellationToken);
+        public Task<
+            ImmutableDictionary<Document, Optional<ImmutableArray<TextSpan>>>
+        > GetFixAllSpansAsync(CancellationToken cancellationToken) =>
+            State.GetFixAllSpansAsync(cancellationToken);
 
         internal FixAllContext With(
             Optional<(Document? document, Project project)> documentAndProject = default,
             Optional<FixAllScope> scope = default,
-            Optional<string?> codeActionEquivalenceKey = default)
+            Optional<string?> codeActionEquivalenceKey = default
+        )
         {
             var newState = State.With(documentAndProject, scope, codeActionEquivalenceKey);
-            return State == newState ? this : new FixAllContext(newState, this.Progress, CancellationToken);
+            return State == newState
+                ? this
+                : new FixAllContext(newState, this.Progress, CancellationToken);
         }
 
-        internal string GetDefaultFixAllTitle()
-            => FixAllHelper.GetDefaultFixAllTitle(this.Scope, this.State.CodeActionTitle, this.Document, this.Project);
+        internal string GetDefaultFixAllTitle() =>
+            FixAllHelper.GetDefaultFixAllTitle(
+                this.Scope,
+                this.State.CodeActionTitle,
+                this.Document,
+                this.Project
+            );
     }
 }

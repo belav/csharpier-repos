@@ -9,9 +9,7 @@
     <!-- Suppress experimental trim warnings. This can be removed when we get a preview6 SDK. -->
     <NoWarn>$(NoWarn);IL2121</NoWarn>
   </PropertyGroup>
-
-  <Import Project="..\Directory.Build.props"/>
-
+  <Import Project="..\Directory.Build.props" />
   <PropertyGroup>
     <OutputPath>bin</OutputPath>
     <WasmAppDir>$(MSBuildProjectDirectory)\bin\$(Configuration)\AppBundle\</WasmAppDir>
@@ -19,7 +17,6 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <WasmNativeStrip>false</WasmNativeStrip>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)' != 'Debug'">
     <!-- Runtime feature defaults to trim unnecessary code -->
     <EventSourceSupport>false</EventSourceSupport>
@@ -29,11 +26,9 @@
     <DebuggerSupport>false</DebuggerSupport>
     <WasmEmitSymbolMap>true</WasmEmitSymbolMap>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CommonAssemblyInfo.cs" />
   </ItemGroup>
-
   <!-- Import late, so properties like $(ArtifactsBinDir) are set -->
   <Import Project="$(MonoProjectRoot)wasm\build\WasmApp.InTree.props" />
 </Project>

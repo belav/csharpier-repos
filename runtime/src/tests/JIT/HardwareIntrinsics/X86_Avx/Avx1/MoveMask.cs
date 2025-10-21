@@ -5,15 +5,14 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.Avx1
 {
     public partial class Program
     {
-
         [Fact]
         public static unsafe void MoveMask()
         {
@@ -21,9 +20,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
 
             if (Avx.IsSupported)
             {
-                using (TestTable_SingleArray<float> floatTable = new TestTable_SingleArray<float>(new float[8] { 1, -5, 100, 0, 1, -5, 100, 0 }))
+                using (
+                    TestTable_SingleArray<float> floatTable = new TestTable_SingleArray<float>(
+                        new float[8] { 1, -5, 100, 0, 1, -5, 100, 0 }
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector256<float>>(floatTable.inArray1Ptr);
                     var res = Avx.MoveMask(vf1);
 
@@ -35,9 +37,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable_SingleArray<double> doubleTable = new TestTable_SingleArray<double>(new double[4] { 1, -5, 1, -5 }))
+                using (
+                    TestTable_SingleArray<double> doubleTable = new TestTable_SingleArray<double>(
+                        new double[4] { 1, -5, 1, -5 }
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector256<double>>(doubleTable.inArray1Ptr);
                     var res = Avx.MoveMask(vf1);
 
@@ -53,7 +58,8 @@ namespace IntelHardwareIntrinsicTest.Avx1
             Assert.Equal(Pass, testResult);
         }
 
-        public unsafe struct TestTable_SingleArray<T> : IDisposable where T : struct
+        public unsafe struct TestTable_SingleArray<T> : IDisposable
+            where T : struct
         {
             public T[] inArray1;
             public void* inArray1Ptr => inHandle1.AddrOfPinnedObject().ToPointer();
@@ -70,6 +76,5 @@ namespace IntelHardwareIntrinsicTest.Avx1
                 inHandle1.Free();
             }
         }
-
     }
 }

@@ -5,16 +5,16 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Reflection;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Globalization;
-    using System.Threading;
     using System.Collections;
     using System.Diagnostics;
-    using System.Security;
+    using System.Globalization;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     class SyncMethodInvoker : IOperationInvoker
     {
@@ -28,7 +28,9 @@ namespace System.ServiceModel.Dispatcher
         public SyncMethodInvoker(MethodInfo method)
         {
             if (method == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("method"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("method")
+                );
 
             this.method = method;
         }
@@ -36,10 +38,14 @@ namespace System.ServiceModel.Dispatcher
         public SyncMethodInvoker(Type type, string methodName)
         {
             if (type == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("type"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("type")
+                );
 
             if (methodName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("methodName"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("methodName")
+                );
 
             this.type = type;
             this.methodName = methodName;
@@ -82,14 +88,31 @@ namespace System.ServiceModel.Dispatcher
             EnsureIsInitialized();
 
             if (instance == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                );
             if (inputs == null)
             {
                 if (this.inputParameterCount > 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInputParametersToServiceNull, this.inputParameterCount)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInputParametersToServiceNull,
+                                this.inputParameterCount
+                            )
+                        )
+                    );
             }
             else if (inputs.Length != this.inputParameterCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInputParametersToServiceInvalid, this.inputParameterCount, inputs.Length)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxInputParametersToServiceInvalid,
+                            this.inputParameterCount,
+                            inputs.Length
+                        )
+                    )
+                );
 
             outputs = EmptyArray.Allocate(this.outputParameterCount);
 
@@ -104,30 +127,44 @@ namespace System.ServiceModel.Dispatcher
                 PerformanceCounters.MethodCalled(this.MethodName);
                 try
                 {
-                    if (System.ServiceModel.Channels.UnsafeNativeMethods.QueryPerformanceCounter(out startCounter) == 0)
+                    if (
+                        System.ServiceModel.Channels.UnsafeNativeMethods.QueryPerformanceCounter(
+                            out startCounter
+                        ) == 0
+                    )
                     {
                         startCounter = -1;
                     }
                 }
                 catch (SecurityException securityException)
                 {
-                    DiagnosticUtility.TraceHandledException(securityException, TraceEventType.Warning);
+                    DiagnosticUtility.TraceHandledException(
+                        securityException,
+                        TraceEventType.Warning
+                    );
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new SecurityException(SR.GetString(
-                                SR.PartialTrustPerformanceCountersNotEnabled), securityException));
+                        new SecurityException(
+                            SR.GetString(SR.PartialTrustPerformanceCountersNotEnabled),
+                            securityException
+                        )
+                    );
                 }
             }
 
             EventTraceActivity eventTraceActivity = null;
-            if (TD.OperationCompletedIsEnabled() ||
-                    TD.OperationFaultedIsEnabled() ||
-                    TD.OperationFailedIsEnabled())
+            if (
+                TD.OperationCompletedIsEnabled()
+                || TD.OperationFaultedIsEnabled()
+                || TD.OperationFailedIsEnabled()
+            )
             {
                 beginOperation = DateTime.UtcNow.Ticks;
                 OperationContext context = OperationContext.Current;
                 if (context != null && context.IncomingMessage != null)
                 {
-                    eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(context.IncomingMessage);
+                    eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                        context.IncomingMessage
+                    );
                 }
             }
 
@@ -152,7 +189,9 @@ namespace System.ServiceModel.Dispatcher
                 else if (TraceUtility.ShouldPropagateActivity)
                 {
                     //Message flow tracing only scenarios use a light-weight ActivityID management logic
-                    Guid activityId = ActivityIdHeader.ExtractActivityId(OperationContext.Current.IncomingMessage);
+                    Guid activityId = ActivityIdHeader.ExtractActivityId(
+                        OperationContext.Current.IncomingMessage
+                    );
                     if (activityId != Guid.Empty)
                     {
                         boundActivity = Activity.CreateActivity(activityId);
@@ -163,11 +202,23 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (DiagnosticUtility.ShouldUseActivity)
                     {
-                        ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityExecuteMethod, this.method.DeclaringType.FullName, this.method.Name), ActivityType.ExecuteUserCode);
+                        ServiceModelActivity.Start(
+                            activity,
+                            SR.GetString(
+                                SR.ActivityExecuteMethod,
+                                this.method.DeclaringType.FullName,
+                                this.method.Name
+                            ),
+                            ActivityType.ExecuteUserCode
+                        );
                     }
                     if (TD.OperationInvokedIsEnabled())
                     {
-                        TD.OperationInvoked(eventTraceActivity, this.MethodName, TraceUtility.GetCallerInfo(OperationContext.Current));
+                        TD.OperationInvoked(
+                            eventTraceActivity,
+                            this.MethodName,
+                            TraceUtility.GetCallerInfo(OperationContext.Current)
+                        );
                     }
                     returnValue = this.invokeDelegate(instance, inputs, outputs);
                     callSucceeded = true;
@@ -181,14 +232,21 @@ namespace System.ServiceModel.Dispatcher
             catch (System.Security.SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    AuthorizationBehavior.CreateAccessDeniedFaultException()
+                );
             }
             finally
             {
                 if (PerformanceCounters.PerformanceCountersEnabled)
                 {
                     long elapsedTime = 0;
-                    if (startCounter >= 0 && System.ServiceModel.Channels.UnsafeNativeMethods.QueryPerformanceCounter(out stopCounter) != 0)
+                    if (
+                        startCounter >= 0
+                        && System.ServiceModel.Channels.UnsafeNativeMethods.QueryPerformanceCounter(
+                            out stopCounter
+                        ) != 0
+                    )
                     {
                         elapsedTime = stopCounter - startCounter;
                     }
@@ -213,24 +271,33 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (TD.OperationCompletedIsEnabled())
                         {
-                            TD.OperationCompleted(eventTraceActivity, this.methodName,
-                                TraceUtility.GetUtcBasedDurationForTrace(beginOperation));
+                            TD.OperationCompleted(
+                                eventTraceActivity,
+                                this.methodName,
+                                TraceUtility.GetUtcBasedDurationForTrace(beginOperation)
+                            );
                         }
                     }
                     else if (callFaulted)
                     {
                         if (TD.OperationFaultedIsEnabled())
                         {
-                            TD.OperationFaulted(eventTraceActivity, this.methodName,
-                                TraceUtility.GetUtcBasedDurationForTrace(beginOperation));
+                            TD.OperationFaulted(
+                                eventTraceActivity,
+                                this.methodName,
+                                TraceUtility.GetUtcBasedDurationForTrace(beginOperation)
+                            );
                         }
                     }
                     else
                     {
                         if (TD.OperationFailedIsEnabled())
                         {
-                            TD.OperationFailed(eventTraceActivity, this.methodName,
-                                TraceUtility.GetUtcBasedDurationForTrace(beginOperation));
+                            TD.OperationFailed(
+                                eventTraceActivity,
+                                this.methodName,
+                                TraceUtility.GetUtcBasedDurationForTrace(beginOperation)
+                            );
                         }
                     }
                 }
@@ -239,14 +306,23 @@ namespace System.ServiceModel.Dispatcher
             return returnValue;
         }
 
-        public IAsyncResult InvokeBegin(object instance, object[] inputs, AsyncCallback callback, object state)
+        public IAsyncResult InvokeBegin(
+            object instance,
+            object[] inputs,
+            AsyncCallback callback,
+            object state
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         public object InvokeEnd(object instance, out object[] outputs, IAsyncResult result)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
         void EnsureIsInitialized()
@@ -263,10 +339,14 @@ namespace System.ServiceModel.Dispatcher
             // If two threads both reference this.count, temporary results may interact.
             int inputParameterCount;
             int outputParameterCount;
-            InvokeDelegate invokeDelegate = new InvokerUtil().GenerateInvokeDelegate(this.Method, out inputParameterCount, out outputParameterCount);
+            InvokeDelegate invokeDelegate = new InvokerUtil().GenerateInvokeDelegate(
+                this.Method,
+                out inputParameterCount,
+                out outputParameterCount
+            );
             this.outputParameterCount = outputParameterCount;
             this.inputParameterCount = inputParameterCount;
-            this.invokeDelegate = invokeDelegate;  // must set this last due to ----
+            this.invokeDelegate = invokeDelegate; // must set this last due to ----
         }
     }
 }

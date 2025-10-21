@@ -30,47 +30,47 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TableStyle_CopyFrom_S
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.Table Table2;
-		protected System.Web.UI.WebControls.Table Table1;
-		protected GHTWebControls.GHTSubTest GHTSubTest2;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class TableStyle_CopyFrom_S : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.Table Table2;
+        protected System.Web.UI.WebControls.Table Table1;
+        protected GHTWebControls.GHTSubTest GHTSubTest2;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
-			base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
-			System.Web.UI.WebControls.TableStyle tableStyle = new System.Web.UI.WebControls.TableStyle();
-			tableStyle.CopyFrom(Table2.ControlStyle);
-			Table1.ApplyStyle(tableStyle);
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			base.GHTTestEnd();
-		}
-	}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
+            base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
+            System.Web.UI.WebControls.TableStyle tableStyle =
+                new System.Web.UI.WebControls.TableStyle();
+            tableStyle.CopyFrom(Table2.ControlStyle);
+            Table1.ApplyStyle(tableStyle);
+
+            base.GHTTestEnd();
+        }
+    }
 }

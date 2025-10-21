@@ -33,7 +33,8 @@ namespace System.Text.Encodings.Web
         /// Unlike the <see cref="Default"/>, this encoder instance allows some other characters to go through unescaped (for example, '+'), and hence must be used cautiously.
         /// </para>
         /// </remarks>
-        public static JavaScriptEncoder UnsafeRelaxedJsonEscaping => DefaultJavaScriptEncoder.UnsafeRelaxedEscapingSingleton;
+        public static JavaScriptEncoder UnsafeRelaxedJsonEscaping =>
+            DefaultJavaScriptEncoder.UnsafeRelaxedEscapingSingleton;
 
         /// <summary>
         /// Creates a new instance of JavaScriptEncoder with provided settings.

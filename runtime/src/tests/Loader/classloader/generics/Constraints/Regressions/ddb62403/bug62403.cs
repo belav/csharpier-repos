@@ -4,28 +4,31 @@
 using System;
 using Xunit;
 
-
 public class TestClass
 {
-    public static void N<U,V>() where U : V { }
+    public static void N<U, V>()
+        where U : V { }
 
-    public static void M<U,V>() where U : V
+    public static void M<U, V>()
+        where U : V
     {
-        N<U,U>();
+        N<U, U>();
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-	try {
-		M<object,object>();
-		Console.WriteLine("PASS");
-		return 100;
-	} catch (Exception e)
-	{
-		Console.WriteLine("CATCH UNEXPECTED EXCEPTION: " + e.ToString());
-		Console.WriteLine("FAIL");
-		return 99;
-	}
+        try
+        {
+            M<object, object>();
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("CATCH UNEXPECTED EXCEPTION: " + e.ToString());
+            Console.WriteLine("FAIL");
+            return 99;
+        }
     }
 }

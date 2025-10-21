@@ -46,6 +46,6 @@ namespace System.Net.Http
         /// indicates that the server suppprts sending individual datagrams over Http/3
         /// rather than just streams.
         /// </summary>
-        H3Datagram = 0xffd277
+        H3Datagram = 0xffd277,
     }
 }

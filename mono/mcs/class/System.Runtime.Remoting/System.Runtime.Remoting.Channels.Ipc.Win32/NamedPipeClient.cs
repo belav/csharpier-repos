@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 
 using System;
 using System.Runtime.InteropServices;
@@ -39,7 +38,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
     {
         readonly string pipeName;
 
-        public string Name 
+        public string Name
         {
             get { return pipeName; }
         }
@@ -48,10 +47,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// Creates a new instance with the local Named Pipe name specified as an unique ID.
         /// </summary>
         /// <param name="uid">The Guid.</param>
-        public NamedPipeClient(Guid uid) 
-            : this(uid.ToString("N"))
-        {
-        }
+        public NamedPipeClient(Guid uid)
+            : this(uid.ToString("N")) { }
 
         /// <summary>
         /// Creates a new instance for the specified pipe name.
@@ -66,7 +63,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// Connects to a local Named Pipe server.
         /// </summary>
         /// <returns>The NamedPipeSocket</returns>
-        public NamedPipeSocket Connect() 
+        public NamedPipeSocket Connect()
         {
             return Connect(2000);
         }
@@ -76,33 +73,32 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// </summary>
         /// <param name="timeout">Timeout in millisecons to wait for the connection.</param>
         /// <returns></returns>
-        public NamedPipeSocket Connect(int timeout) 
+        public NamedPipeSocket Connect(int timeout)
         {
-            while (true) 
+            while (true)
             {
-                IntPtr hPipe = NamedPipeHelper.CreateFile( 
+                IntPtr hPipe = NamedPipeHelper.CreateFile(
                     pipeName,
-                    NamedPipeHelper.GENERIC_READ |
-                    NamedPipeHelper.GENERIC_WRITE, 
+                    NamedPipeHelper.GENERIC_READ | NamedPipeHelper.GENERIC_WRITE,
                     0,
                     IntPtr.Zero,
                     NamedPipeHelper.OPEN_EXISTING,
                     0,
                     IntPtr.Zero
-                    );
+                );
 
-                if (hPipe.ToInt32() == NamedPipeHelper.INVALID_HANDLE_VALUE) 
+                if (hPipe.ToInt32() == NamedPipeHelper.INVALID_HANDLE_VALUE)
                 {
                     int lastError = Marshal.GetLastWin32Error();
                     if (lastError != NamedPipeHelper.ERROR_PIPE_BUSY)
                         throw new NamedPipeException(lastError);
 
-                    if (!NamedPipeHelper.WaitNamedPipe(pipeName, timeout)) 
+                    if (!NamedPipeHelper.WaitNamedPipe(pipeName, timeout))
                     {
                         throw new NamedPipeException();
                     }
                 }
-                else 
+                else
                 {
                     return new NamedPipeSocket(hPipe);
                 }
@@ -110,4 +106,3 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         }
     }
 }
-

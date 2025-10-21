@@ -12,7 +12,10 @@ namespace Microsoft.AspNet.Facebook.Test
         [Fact]
         public void Constructor_ThrowsArgumentNullException()
         {
-            Assert.ThrowsArgumentNull(() => new DefaultFacebookPermissionService(null), "configuration");
+            Assert.ThrowsArgumentNull(
+                () => new DefaultFacebookPermissionService(null),
+                "configuration"
+            );
         }
 
         [Fact]
@@ -20,10 +23,17 @@ namespace Microsoft.AspNet.Facebook.Test
         {
             FacebookConfiguration config = new FacebookConfiguration();
             config.ClientProvider = new DefaultFacebookClientProvider(config);
-            DefaultFacebookPermissionService permissionService = new DefaultFacebookPermissionService(config);
+            DefaultFacebookPermissionService permissionService =
+                new DefaultFacebookPermissionService(config);
 
-            Assert.ThrowsArgumentNull(() => permissionService.GetUserPermissions(null, "accessToken"), "userId");
-            Assert.ThrowsArgumentNull(() => permissionService.GetUserPermissions("userId", null), "accessToken");
+            Assert.ThrowsArgumentNull(
+                () => permissionService.GetUserPermissions(null, "accessToken"),
+                "userId"
+            );
+            Assert.ThrowsArgumentNull(
+                () => permissionService.GetUserPermissions("userId", null),
+                "accessToken"
+            );
         }
 
         [Fact]
@@ -31,7 +41,8 @@ namespace Microsoft.AspNet.Facebook.Test
         {
             LocalFacebookClient localClient = new LocalFacebookClient();
             FacebookConfiguration config = MockHelpers.CreateConfiguration(localClient);
-            DefaultFacebookPermissionService permissionService = new DefaultFacebookPermissionService(config);
+            DefaultFacebookPermissionService permissionService =
+                new DefaultFacebookPermissionService(config);
 
             permissionService.GetUserPermissions("123456", "sampleAccessToken");
 

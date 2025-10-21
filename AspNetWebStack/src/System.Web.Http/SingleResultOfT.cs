@@ -11,7 +11,9 @@ namespace System.Web.Http
     /// <c>[EnableQuery]</c> from the System.Web.Http.OData or System.Web.OData namespace.
     /// </summary>
     /// <typeparam name="T">The type of the data in the data source.</typeparam>
-    [TypeForwardedFrom("System.Web.Http.OData, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.Web.Http.OData, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public sealed class SingleResult<T> : SingleResult
     {
         /// <summary>
@@ -19,19 +21,14 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="queryable">The <see cref="IQueryable{T}"/> containing zero or one entities.</param>
         public SingleResult(IQueryable<T> queryable)
-            : base(queryable)
-        {
-        }
+            : base(queryable) { }
 
         /// <summary>
         /// The <see cref="IQueryable{T}"/> containing zero or one entities.
         /// </summary>
         public new IQueryable<T> Queryable
         {
-            get
-            {
-                return base.Queryable as IQueryable<T>;
-            }
+            get { return base.Queryable as IQueryable<T>; }
         }
     }
 }

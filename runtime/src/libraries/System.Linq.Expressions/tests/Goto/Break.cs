@@ -17,7 +17,7 @@ namespace System.Linq.Expressions.Tests
             Expression block = Expression.Block(
                 Expression.Break(target, Expression.Constant(value)),
                 Expression.Label(target, Expression.Default(type))
-                );
+            );
             Expression equals = Expression.Equal(Expression.Constant(value), block);
             Assert.True(Expression.Lambda<Func<bool>>(equals).Compile(useInterpreter)());
         }
@@ -32,7 +32,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Break(target, Expression.Constant(1)),
                 Expression.Label(target, Expression.Constant(2)),
                 Expression.Constant(3)
-                );
+            );
             Assert.Equal(3, Expression.Lambda<Func<int>>(block).Compile(useInterpreter)());
         }
 
@@ -46,8 +46,12 @@ namespace System.Linq.Expressions.Tests
                 Expression.Break(target, Expression.Constant(value)),
                 Expression.Throw(Expression.Constant(new InvalidOperationException())),
                 Expression.Label(target, Expression.Default(type))
-                );
-            Assert.True(Expression.Lambda<Func<bool>>(Expression.Equal(Expression.Constant(value), block)).Compile(useInterpreter)());
+            );
+            Assert.True(
+                Expression
+                    .Lambda<Func<bool>>(Expression.Equal(Expression.Constant(value), block))
+                    .Compile(useInterpreter)()
+            );
         }
 
         [Theory]
@@ -63,7 +67,10 @@ namespace System.Linq.Expressions.Tests
         public void NonVoidTargetBreakHasNoValueTypeExplicit(Type type)
         {
             LabelTarget target = Expression.Label(type);
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Break(target, type));
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Break(target, type)
+            );
         }
 
         [Theory]
@@ -75,7 +82,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Break(target),
                 Expression.Throw(Expression.Constant(new InvalidOperationException())),
                 Expression.Label(target)
-                );
+            );
             Expression.Lambda<Action>(block).Compile(useInterpreter)();
         }
 
@@ -88,7 +95,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.Break(target, typeof(void)),
                 Expression.Throw(Expression.Constant(new InvalidOperationException())),
                 Expression.Label(target)
-                );
+            );
             Expression.Lambda<Action>(block).Compile(useInterpreter)();
         }
 
@@ -96,16 +103,28 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(TypesData))]
         public void NullValueOnNonVoidBreak(Type type)
         {
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Break(Expression.Label(type)));
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Break(Expression.Label(type), default(Expression)));
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Break(Expression.Label(type), null, type));
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Break(Expression.Label(type))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Break(Expression.Label(type), default(Expression))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Break(Expression.Label(type), null, type)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ConstantValueData))]
         public void ExplicitNullTypeWithValue(object value)
         {
-            AssertExtensions.Throws<ArgumentException>("target", () => Expression.Break(Expression.Label(value.GetType()), default(Type)));
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => Expression.Break(Expression.Label(value.GetType()), default(Type))
+            );
         }
 
         [Fact]
@@ -113,8 +132,14 @@ namespace System.Linq.Expressions.Tests
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
             LabelTarget target = Expression.Label(typeof(string));
-            AssertExtensions.Throws<ArgumentException>("value", () => Expression.Break(target, value));
-            AssertExtensions.Throws<ArgumentException>("value", () => Expression.Break(target, value, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => Expression.Break(target, value)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => Expression.Break(target, value, typeof(string))
+            );
         }
 
         [Theory]
@@ -125,7 +150,7 @@ namespace System.Linq.Expressions.Tests
             BlockExpression block = Expression.Block(
                 Expression.Break(target, Expression.Constant(value)),
                 Expression.Label(target)
-                );
+            );
             Assert.Equal(typeof(void), block.Type);
             Expression.Lambda<Action>(block).Compile(useInterpreter)();
         }
@@ -134,7 +159,10 @@ namespace System.Linq.Expressions.Tests
         [MemberData(nameof(NonObjectAssignableConstantValueData))]
         public void CannotAssignValueTypesToObject(object value)
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Expression.Break(Expression.Label(typeof(object)), Expression.Constant(value)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Expression.Break(Expression.Label(typeof(object)), Expression.Constant(value))
+            );
         }
 
         [Theory]
@@ -145,7 +173,7 @@ namespace System.Linq.Expressions.Tests
             BlockExpression block = Expression.Block(
                 Expression.Break(target, Expression.Constant(value), typeof(object)),
                 Expression.Label(target, Expression.Default(typeof(object)))
-                );
+            );
             Assert.Equal(typeof(object), block.Type);
             Assert.Equal(value, Expression.Lambda<Func<object>>(block).Compile(useInterpreter)());
         }
@@ -157,7 +185,7 @@ namespace System.Linq.Expressions.Tests
             BlockExpression block = Expression.Block(
                 Expression.Break(target, Expression.Lambda<Func<int>>(Expression.Constant(0))),
                 Expression.Label(target, Expression.Default(typeof(Expression<Func<int>>)))
-                );
+            );
             Assert.Equal(typeof(Expression<Func<int>>), block.Type);
         }
 
@@ -190,32 +218,54 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void OpenGenericType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Break(Expression.Label(typeof(void)), typeof(List<>)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Break(Expression.Label(typeof(void)), typeof(List<>))
+            );
         }
 
         [Fact]
         public static void TypeContainsGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Break(Expression.Label(typeof(void)), typeof(List<>.Enumerator)));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Break(Expression.Label(typeof(void)), typeof(List<>).MakeGenericType(typeof(List<>))));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Break(Expression.Label(typeof(void)), typeof(List<>.Enumerator))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.Break(
+                        Expression.Label(typeof(void)),
+                        typeof(List<>).MakeGenericType(typeof(List<>))
+                    )
+            );
         }
 
         [Fact]
         public void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Break(Expression.Label(typeof(void)), typeof(int).MakePointerType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.Break(Expression.Label(typeof(void)), typeof(int).MakePointerType())
+            );
         }
 
         [Fact]
         public void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.Break(Expression.Label(typeof(void)), typeof(int).MakeByRefType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.Break(Expression.Label(typeof(void)), typeof(int).MakeByRefType())
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public void UndefinedLabel(bool useInterpreter)
         {
-            Expression<Action> breakNowhere = Expression.Lambda<Action>(Expression.Break(Expression.Label()));
+            Expression<Action> breakNowhere = Expression.Lambda<Action>(
+                Expression.Break(Expression.Label())
+            );
             Assert.Throws<InvalidOperationException>(() => breakNowhere.Compile(useInterpreter));
         }
 
@@ -228,8 +278,8 @@ namespace System.Linq.Expressions.Tests
                     Expression.Break(target),
                     Expression.Block(Expression.Label(target)),
                     Expression.Block(Expression.Label(target))
-                    )
-                );
+                )
+            );
             Assert.Throws<InvalidOperationException>(() => exp.Compile(useInterpreter));
         }
 
@@ -237,27 +287,29 @@ namespace System.Linq.Expressions.Tests
         public void MultipleDefinitionsInSeparateBlocks(bool useInterpreter)
         {
             LabelTarget target = Expression.Label(typeof(int));
-            Func<int> add = Expression.Lambda<Func<int>>(
-                Expression.Add(
+            Func<int> add = Expression
+                .Lambda<Func<int>>(
                     Expression.Add(
-                        Expression.Block(
-                            Expression.Break(target, Expression.Constant(6)),
-                            Expression.Throw(Expression.Constant(new Exception())),
-                            Expression.Label(target, Expression.Constant(0))
+                        Expression.Add(
+                            Expression.Block(
+                                Expression.Break(target, Expression.Constant(6)),
+                                Expression.Throw(Expression.Constant(new Exception())),
+                                Expression.Label(target, Expression.Constant(0))
+                            ),
+                            Expression.Block(
+                                Expression.Break(target, Expression.Constant(4)),
+                                Expression.Throw(Expression.Constant(new Exception())),
+                                Expression.Label(target, Expression.Constant(0))
+                            )
                         ),
                         Expression.Block(
-                            Expression.Break(target, Expression.Constant(4)),
+                            Expression.Break(target, Expression.Constant(5)),
                             Expression.Throw(Expression.Constant(new Exception())),
                             Expression.Label(target, Expression.Constant(0))
                         )
-                    ),
-                    Expression.Block(
-                        Expression.Break(target, Expression.Constant(5)),
-                        Expression.Throw(Expression.Constant(new Exception())),
-                        Expression.Label(target, Expression.Constant(0))
                     )
                 )
-            ).Compile(useInterpreter);
+                .Compile(useInterpreter);
             Assert.Equal(15, add());
         }
 
@@ -280,9 +332,8 @@ namespace System.Linq.Expressions.Tests
             LabelTarget target = Expression.Label(typeof(int));
             Expression<Func<int>> exp = Expression.Lambda<Func<int>>(
                 Expression.Block(
-                Expression.Break(target, Expression.Constant(2)),
-                Expression.Block(
-                    Expression.Label(target, Expression.Constant(3)))
+                    Expression.Break(target, Expression.Constant(2)),
+                    Expression.Block(Expression.Label(target, Expression.Constant(3)))
                 )
             );
             Assert.Throws<InvalidOperationException>(() => exp.Compile(useInterpreter));

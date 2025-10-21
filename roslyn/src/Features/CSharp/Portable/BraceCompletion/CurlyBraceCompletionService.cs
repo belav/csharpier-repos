@@ -30,35 +30,56 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CurlyBraceCompletionService()
-        {
-        }
+        public CurlyBraceCompletionService() { }
 
         protected override char OpeningBrace => CurlyBrace.OpenCharacter;
 
         protected override char ClosingBrace => CurlyBrace.CloseCharacter;
 
-        public override bool AllowOverType(BraceCompletionContext context, CancellationToken cancellationToken)
-            => AllowOverTypeInUserCodeWithValidClosingToken(context, cancellationToken);
+        public override bool AllowOverType(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeInUserCodeWithValidClosingToken(context, cancellationToken);
 
-        public override bool CanProvideBraceCompletion(char brace, int openingPosition, ParsedDocument document, CancellationToken cancellationToken)
+        public override bool CanProvideBraceCompletion(
+            char brace,
+            int openingPosition,
+            ParsedDocument document,
+            CancellationToken cancellationToken
+        )
         {
             // Only potentially valid for curly brace completion if not in an interpolation brace completion context.
-            if (OpeningBrace == brace && InterpolationBraceCompletionService.IsPositionInInterpolationContext(document, openingPosition))
+            if (
+                OpeningBrace == brace
+                && InterpolationBraceCompletionService.IsPositionInInterpolationContext(
+                    document,
+                    openingPosition
+                )
+            )
             {
                 return false;
             }
 
-            return base.CanProvideBraceCompletion(brace, openingPosition, document, cancellationToken);
+            return base.CanProvideBraceCompletion(
+                brace,
+                openingPosition,
+                document,
+                cancellationToken
+            );
         }
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token)
-            => token.IsKind(SyntaxKind.OpenBraceToken) && !token.Parent.IsKind(SyntaxKind.Interpolation);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.OpenBraceToken)
+            && !token.Parent.IsKind(SyntaxKind.Interpolation);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token)
-            => token.IsKind(SyntaxKind.CloseBraceToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CloseBraceToken);
 
-        protected override int AdjustFormattingEndPoint(ParsedDocument document, int startPoint, int endPoint)
+        protected override int AdjustFormattingEndPoint(
+            ParsedDocument document,
+            int startPoint,
+            int endPoint
+        )
         {
             // Only format outside of the completed braces if they're on the same line for array/collection/object initializer expressions.
             // Example:   `var x = new int[]{}`:
@@ -66,12 +87,20 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             // Incorrect: `var x = new int[] { }`
             // This is a heuristic to prevent brace completion from breaking user expectation/muscle memory in common scenarios.
             // see bug Devdiv:823958
-            if (document.Text.Lines.GetLineFromPosition(startPoint) == document.Text.Lines.GetLineFromPosition(endPoint))
+            if (
+                document.Text.Lines.GetLineFromPosition(startPoint)
+                == document.Text.Lines.GetLineFromPosition(endPoint)
+            )
             {
                 var startToken = document.Root.FindToken(startPoint, findInsideTrivia: true);
-                if (IsValidOpeningBraceToken(startToken) &&
-                    (startToken.Parent?.IsInitializerForArrayOrCollectionCreationExpression() == true ||
-                     startToken.Parent is AnonymousObjectCreationExpressionSyntax))
+                if (
+                    IsValidOpeningBraceToken(startToken)
+                    && (
+                        startToken.Parent?.IsInitializerForArrayOrCollectionCreationExpression()
+                            == true
+                        || startToken.Parent is AnonymousObjectCreationExpressionSyntax
+                    )
+                )
                 {
                     // Since the braces are next to each other the span to format is everything up to the opening brace start.
                     endPoint = startToken.SpanStart;
@@ -81,7 +110,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             return endPoint;
         }
 
-        protected override ImmutableArray<AbstractFormattingRule> GetBraceFormattingIndentationRulesAfterReturn(IndentationOptions options)
+        protected override ImmutableArray<AbstractFormattingRule> GetBraceFormattingIndentationRulesAfterReturn(
+            IndentationOptions options
+        )
         {
             var indentStyle = options.IndentStyle;
             return ImmutableArray.Create(BraceCompletionFormattingRule.ForIndentStyle(indentStyle));
@@ -89,28 +120,34 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
         private sealed class BraceCompletionFormattingRule : BaseFormattingRule
         {
-            private static readonly Predicate<SuppressOperation> s_predicate = o => o == null || o.Option.IsOn(SuppressOption.NoWrapping);
+            private static readonly Predicate<SuppressOperation> s_predicate = o =>
+                o == null || o.Option.IsOn(SuppressOption.NoWrapping);
 
-            private static readonly ImmutableArray<BraceCompletionFormattingRule> s_instances = ImmutableArray.Create(
-                new BraceCompletionFormattingRule(FormattingOptions2.IndentStyle.None),
-                new BraceCompletionFormattingRule(FormattingOptions2.IndentStyle.Block),
-                new BraceCompletionFormattingRule(FormattingOptions2.IndentStyle.Smart));
+            private static readonly ImmutableArray<BraceCompletionFormattingRule> s_instances =
+                ImmutableArray.Create(
+                    new BraceCompletionFormattingRule(FormattingOptions2.IndentStyle.None),
+                    new BraceCompletionFormattingRule(FormattingOptions2.IndentStyle.Block),
+                    new BraceCompletionFormattingRule(FormattingOptions2.IndentStyle.Smart)
+                );
 
             private readonly FormattingOptions2.IndentStyle _indentStyle;
             private readonly CSharpSyntaxFormattingOptions _options;
 
             public BraceCompletionFormattingRule(FormattingOptions2.IndentStyle indentStyle)
-                : this(indentStyle, CSharpSyntaxFormattingOptions.Default)
-            {
-            }
+                : this(indentStyle, CSharpSyntaxFormattingOptions.Default) { }
 
-            private BraceCompletionFormattingRule(FormattingOptions2.IndentStyle indentStyle, CSharpSyntaxFormattingOptions options)
+            private BraceCompletionFormattingRule(
+                FormattingOptions2.IndentStyle indentStyle,
+                CSharpSyntaxFormattingOptions options
+            )
             {
                 _indentStyle = indentStyle;
                 _options = options;
             }
 
-            public static AbstractFormattingRule ForIndentStyle(FormattingOptions2.IndentStyle indentStyle)
+            public static AbstractFormattingRule ForIndentStyle(
+                FormattingOptions2.IndentStyle indentStyle
+            )
             {
                 Debug.Assert(s_instances[(int)indentStyle]._indentStyle == indentStyle);
                 return s_instances[(int)indentStyle];
@@ -118,7 +155,9 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
             public override AbstractFormattingRule WithOptions(SyntaxFormattingOptions options)
             {
-                var newOptions = options as CSharpSyntaxFormattingOptions ?? CSharpSyntaxFormattingOptions.Default;
+                var newOptions =
+                    options as CSharpSyntaxFormattingOptions
+                    ?? CSharpSyntaxFormattingOptions.Default;
                 if (_options.NewLines == newOptions.NewLines)
                 {
                     return this;
@@ -127,7 +166,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 return new BraceCompletionFormattingRule(_indentStyle, newOptions);
             }
 
-            private static bool? NeedsNewLine(in SyntaxToken currentToken, CSharpSyntaxFormattingOptions options)
+            private static bool? NeedsNewLine(
+                in SyntaxToken currentToken,
+                CSharpSyntaxFormattingOptions options
+            )
             {
                 if (!currentToken.IsKind(SyntaxKind.OpenBraceToken))
                 {
@@ -142,15 +184,22 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 // int[] arr = {
                 //           = new[] {
                 //           = new int[] {
-                if (currentToken.Parent is (kind:
-                        SyntaxKind.ObjectInitializerExpression or
-                        SyntaxKind.CollectionInitializerExpression or
-                        SyntaxKind.ArrayInitializerExpression or
-                        SyntaxKind.ImplicitArrayCreationExpression or
-                        SyntaxKind.WithInitializerExpression or
-                        SyntaxKind.PropertyPatternClause))
+                if (
+                    currentToken.Parent is
+
+                    (
+                        kind: SyntaxKind.ObjectInitializerExpression
+                            or SyntaxKind.CollectionInitializerExpression
+                            or SyntaxKind.ArrayInitializerExpression
+                            or SyntaxKind.ImplicitArrayCreationExpression
+                            or SyntaxKind.WithInitializerExpression
+                            or SyntaxKind.PropertyPatternClause
+                    )
+                )
                 {
-                    return options.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers);
+                    return options.NewLines.HasFlag(
+                        NewLinePlacement.BeforeOpenBraceInObjectCollectionArrayInitializers
+                    );
                 }
 
                 var currentTokenParentParent = currentToken.Parent?.Parent;
@@ -164,25 +213,40 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 // * { - in the anonymous Method context
                 if (currentTokenParentParent.IsKind(SyntaxKind.AnonymousMethodExpression))
                 {
-                    return options.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInAnonymousMethods);
+                    return options.NewLines.HasFlag(
+                        NewLinePlacement.BeforeOpenBraceInAnonymousMethods
+                    );
                 }
 
                 // new { - Anonymous object creation
                 if (currentToken.Parent.IsKind(SyntaxKind.AnonymousObjectCreationExpression))
                 {
-                    return options.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInAnonymousTypes);
+                    return options.NewLines.HasFlag(
+                        NewLinePlacement.BeforeOpenBraceInAnonymousTypes
+                    );
                 }
 
                 // * { - in the control statement context
                 if (IsControlBlock(currentToken.Parent))
                 {
-                    return options.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInControlBlocks);
+                    return options.NewLines.HasFlag(
+                        NewLinePlacement.BeforeOpenBraceInControlBlocks
+                    );
                 }
 
                 // * { - in the simple Lambda context
-                if (currentTokenParentParent is (kind: SyntaxKind.SimpleLambdaExpression or SyntaxKind.ParenthesizedLambdaExpression))
+                if (
+                    currentTokenParentParent is
+
+                    (
+                        kind: SyntaxKind.SimpleLambdaExpression
+                            or SyntaxKind.ParenthesizedLambdaExpression
+                    )
+                )
                 {
-                    return options.NewLines.HasFlag(NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody);
+                    return options.NewLines.HasFlag(
+                        NewLinePlacement.BeforeOpenBraceInLambdaExpressionBody
+                    );
                 }
 
                 // * { - in the member declaration context
@@ -236,18 +300,30 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 }
             }
 
-            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustNewLinesOperation nextOperation
+            )
             {
                 var needsNewLine = NeedsNewLine(currentToken, _options);
                 return needsNewLine switch
                 {
                     true => CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines),
                     false => null,
-                    _ => base.GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation),
+                    _ => base.GetAdjustNewLinesOperation(
+                        in previousToken,
+                        in currentToken,
+                        in nextOperation
+                    ),
                 };
             }
 
-            public override void AddAlignTokensOperations(List<AlignTokensOperation> list, SyntaxNode node, in NextAlignTokensOperationAction nextOperation)
+            public override void AddAlignTokensOperations(
+                List<AlignTokensOperation> list,
+                SyntaxNode node,
+                in NextAlignTokensOperationAction nextOperation
+            )
             {
                 base.AddAlignTokensOperations(list, node, in nextOperation);
                 if (_indentStyle == FormattingOptions2.IndentStyle.Block)
@@ -257,13 +333,22 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                     {
                         // If the user has set block style indentation and we're in a valid brace pair
                         // then make sure we align the close brace to the open brace.
-                        AddAlignIndentationOfTokensToBaseTokenOperation(list, node, bracePair.openBrace,
-                            SpecializedCollections.SingletonEnumerable(bracePair.closeBrace), AlignTokensOption.AlignIndentationOfTokensToFirstTokenOfBaseTokenLine);
+                        AddAlignIndentationOfTokensToBaseTokenOperation(
+                            list,
+                            node,
+                            bracePair.openBrace,
+                            SpecializedCollections.SingletonEnumerable(bracePair.closeBrace),
+                            AlignTokensOption.AlignIndentationOfTokensToFirstTokenOfBaseTokenLine
+                        );
                     }
                 }
             }
 
-            public override void AddSuppressOperations(List<SuppressOperation> list, SyntaxNode node, in NextSuppressOperationAction nextOperation)
+            public override void AddSuppressOperations(
+                List<SuppressOperation> list,
+                SyntaxNode node,
+                in NextSuppressOperationAction nextOperation
+            )
             {
                 base.AddSuppressOperations(list, node, in nextOperation);
 

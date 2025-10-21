@@ -8,7 +8,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.ExternalAccess.VSMac;
 
 internal static class AnalyzerHelper
 {
-    public static DiagnosticData CreateAnalyzerLoadFailureDiagnostic(AnalyzerLoadFailureEventArgs e, string fullPath, ProjectId? projectId, string? language)
-        => DocumentAnalysisExecutor.CreateAnalyzerLoadFailureDiagnostic(e, fullPath, projectId, language);
+    public static DiagnosticData CreateAnalyzerLoadFailureDiagnostic(
+        AnalyzerLoadFailureEventArgs e,
+        string fullPath,
+        ProjectId? projectId,
+        string? language
+    ) =>
+        DocumentAnalysisExecutor.CreateAnalyzerLoadFailureDiagnostic(
+            e,
+            fullPath,
+            projectId,
+            language
+        );
 }
-

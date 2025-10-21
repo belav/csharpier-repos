@@ -9,7 +9,6 @@
 **
 =============================================================================*/
 
-
 namespace System.Collections.Specialized
 {
     public class CollectionsUtil

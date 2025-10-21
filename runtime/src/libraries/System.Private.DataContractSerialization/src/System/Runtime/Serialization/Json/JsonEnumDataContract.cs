@@ -22,16 +22,25 @@ namespace System.Runtime.Serialization.Json
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override object? ReadJsonValueCore(XmlReaderDelegator jsonReader, XmlObjectSerializerReadContextComplexJson? context)
+        public override object? ReadJsonValueCore(
+            XmlReaderDelegator jsonReader,
+            XmlObjectSerializerReadContextComplexJson? context
+        )
         {
             object enumValue;
             if (IsULong)
             {
-                enumValue = Enum.ToObject(TraditionalDataContract.UnderlyingType, jsonReader.ReadElementContentAsUnsignedLong());
+                enumValue = Enum.ToObject(
+                    TraditionalDataContract.UnderlyingType,
+                    jsonReader.ReadElementContentAsUnsignedLong()
+                );
             }
             else
             {
-                enumValue = Enum.ToObject(TraditionalDataContract.UnderlyingType, jsonReader.ReadElementContentAsLong());
+                enumValue = Enum.ToObject(
+                    TraditionalDataContract.UnderlyingType,
+                    jsonReader.ReadElementContentAsLong()
+                );
             }
 
             context?.AddNewObject(enumValue);
@@ -40,7 +49,12 @@ namespace System.Runtime.Serialization.Json
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override void WriteJsonValueCore(XmlWriterDelegator jsonWriter, object obj, XmlObjectSerializerWriteContextComplexJson? context, RuntimeTypeHandle declaredTypeHandle)
+        public override void WriteJsonValueCore(
+            XmlWriterDelegator jsonWriter,
+            object obj,
+            XmlObjectSerializerWriteContextComplexJson? context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
             if (IsULong)
             {

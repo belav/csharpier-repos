@@ -17,16 +17,21 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedMembers
             DocumentationCommentTriviaSyntax,
             IdentifierNameSyntax,
             TypeDeclarationSyntax,
-            MemberDeclarationSyntax>
+            MemberDeclarationSyntax
+        >
     {
-        protected override IEnumerable<TypeDeclarationSyntax> GetTypeDeclarations(INamedTypeSymbol namedType, CancellationToken cancellationToken)
+        protected override IEnumerable<TypeDeclarationSyntax> GetTypeDeclarations(
+            INamedTypeSymbol namedType,
+            CancellationToken cancellationToken
+        )
         {
-            return namedType.DeclaringSyntaxReferences
-                .Select(r => r.GetSyntax(cancellationToken))
+            return namedType
+                .DeclaringSyntaxReferences.Select(r => r.GetSyntax(cancellationToken))
                 .OfType<TypeDeclarationSyntax>();
         }
 
-        protected override SyntaxList<MemberDeclarationSyntax> GetMembers(TypeDeclarationSyntax typeDeclaration)
-            => typeDeclaration.Members;
+        protected override SyntaxList<MemberDeclarationSyntax> GetMembers(
+            TypeDeclarationSyntax typeDeclaration
+        ) => typeDeclaration.Members;
     }
 }

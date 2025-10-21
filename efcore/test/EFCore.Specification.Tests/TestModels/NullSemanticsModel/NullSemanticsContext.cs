@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.NullSemanticsModel;
 public class NullSemanticsContext : PoolableDbContext
 {
     public NullSemanticsContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<NullSemanticsEntity1> Entities1 { get; set; }
     public DbSet<NullSemanticsEntity2> Entities2 { get; set; }

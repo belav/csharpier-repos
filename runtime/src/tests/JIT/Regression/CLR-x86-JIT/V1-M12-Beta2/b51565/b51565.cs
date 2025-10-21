@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 /*
 set DOTNET_JITStress=1
 */
@@ -30,6 +31,7 @@ namespace Test
                 }
             }
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

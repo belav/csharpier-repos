@@ -30,7 +30,10 @@ namespace Tracing.Tests.Common
             if (args.Length >= 1)
                 return new EtlFile(args[0], true);
 
-            return new EtlFile(System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".etl", false);
+            return new EtlFile(
+                System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() + ".etl",
+                false
+            );
         }
     }
 }

@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.Serialization;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Workflow.ComponentModel;
-using System.Workflow.ComponentModel.Design;
-using System.Workflow.ComponentModel.Compiler;
-using System.Windows.Forms.Design;
-using System.Security.Permissions;
+using System.ComponentModel.Design.Serialization;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.Windows.Forms;
-using System.ComponentModel.Design.Serialization;
+using System.Windows.Forms.Design;
 using System.Workflow.Activities.Common;
+using System.Workflow.ComponentModel;
+using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Design;
 
 namespace System.Workflow.Activities
 {
@@ -31,7 +31,10 @@ namespace System.Workflow.Activities
             webServiceReceive.GetParameterPropertyDescriptors(properties);
 
             if (properties.Contains("InterfaceType"))
-                properties["InterfaceType"] = new WebServiceInterfacePropertyDescriptor(Activity.Site, properties["InterfaceType"] as PropertyDescriptor);
+                properties["InterfaceType"] = new WebServiceInterfacePropertyDescriptor(
+                    Activity.Site,
+                    properties["InterfaceType"] as PropertyDescriptor
+                );
         }
 
         protected override void OnActivityChanged(ActivityChangedEventArgs e)
@@ -47,10 +50,16 @@ namespace System.Workflow.Activities
                     {
                         Type interfaceType = e.NewValue as Type;
                         if (interfaceType != null)
-                            new InterfaceTypeFilterProvider(Activity.Site).CanFilterType(interfaceType, true);
+                            new InterfaceTypeFilterProvider(Activity.Site).CanFilterType(
+                                interfaceType,
+                                true
+                            );
 
-                        WebServiceInputActivity webServiceReceive = e.Activity as WebServiceInputActivity;
-                        PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(Activity)["MethodName"];
+                        WebServiceInputActivity webServiceReceive =
+                            e.Activity as WebServiceInputActivity;
+                        PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(
+                            Activity
+                        )["MethodName"];
                         if (propertyDescriptor != null)
                             propertyDescriptor.SetValue(Activity, String.Empty);
                     }
@@ -65,9 +74,17 @@ namespace System.Workflow.Activities
                 if (e.Member.Name == "InterfaceType" || e.Member.Name == "MethodName")
                     TypeDescriptor.Refresh(e.Activity);
 
-                foreach (Activity succeedingActivity in WebServiceActivityHelpers.GetSucceedingActivities(this.Activity))
+                foreach (
+                    Activity succeedingActivity in WebServiceActivityHelpers.GetSucceedingActivities(
+                        this.Activity
+                    )
+                )
                 {
-                    if (succeedingActivity is WebServiceOutputActivity && ((WebServiceOutputActivity)(succeedingActivity)).InputActivityName == this.Activity.QualifiedName)
+                    if (
+                        succeedingActivity is WebServiceOutputActivity
+                        && ((WebServiceOutputActivity)(succeedingActivity)).InputActivityName
+                            == this.Activity.QualifiedName
+                    )
                         TypeDescriptor.Refresh(succeedingActivity);
                 }
             }
@@ -93,31 +110,43 @@ namespace System.Workflow.Activities
 
     internal sealed class WebServiceInterfacePropertyDescriptor : DynamicPropertyDescriptor
     {
-        internal WebServiceInterfacePropertyDescriptor(IServiceProvider serviceProvider, PropertyDescriptor pd)
-            : base(serviceProvider, pd)
-        {
-        }
+        internal WebServiceInterfacePropertyDescriptor(
+            IServiceProvider serviceProvider,
+            PropertyDescriptor pd
+        )
+            : base(serviceProvider, pd) { }
 
         public override void SetValue(object component, object value)
         {
             string typeName = value as String;
             if (typeName != null && typeName.Length > 0)
             {
-                ITypeProvider typeProvider = (ITypeProvider)this.ServiceProvider.GetService(typeof(ITypeProvider));
+                ITypeProvider typeProvider = (ITypeProvider)
+                    this.ServiceProvider.GetService(typeof(ITypeProvider));
                 if (typeProvider == null)
-                    throw new Exception(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                    throw new Exception(
+                        SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                    );
 
                 Type type = typeProvider.GetType(value as string);
                 if (type == null)
                     throw new Exception(SR.GetString(SR.Error_TypeNotResolved, value));
 
-                TypeFilterProviderAttribute filterProviderAttribute = this.Attributes[typeof(TypeFilterProviderAttribute)] as TypeFilterProviderAttribute;
+                TypeFilterProviderAttribute filterProviderAttribute =
+                    this.Attributes[typeof(TypeFilterProviderAttribute)]
+                    as TypeFilterProviderAttribute;
                 if (filterProviderAttribute != null)
                 {
                     ITypeFilterProvider typeFilterProvider = null;
-                    Type typeFilterProviderType = Type.GetType(filterProviderAttribute.TypeFilterProviderTypeName);
+                    Type typeFilterProviderType = Type.GetType(
+                        filterProviderAttribute.TypeFilterProviderTypeName
+                    );
                     if (typeFilterProviderType != null)
-                        typeFilterProvider = Activator.CreateInstance(typeFilterProviderType, new object[] { this.ServiceProvider }) as ITypeFilterProvider;
+                        typeFilterProvider =
+                            Activator.CreateInstance(
+                                typeFilterProviderType,
+                                new object[] { this.ServiceProvider }
+                            ) as ITypeFilterProvider;
                     if (typeFilterProvider != null)
                         typeFilterProvider.CanFilterType(type, true);
                 }

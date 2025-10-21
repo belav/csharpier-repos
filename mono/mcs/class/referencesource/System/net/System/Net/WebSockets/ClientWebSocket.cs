@@ -28,16 +28,17 @@ namespace System.Net.WebSockets
         private const int connected = 2;
         private const int disposed = 3;
 
-        static ClientWebSocket() 
+        static ClientWebSocket()
         {
-            // Register ws: and wss: with WebRequest.Register so that WebRequest.Create returns a 
+            // Register ws: and wss: with WebRequest.Register so that WebRequest.Create returns a
             // WebSocket capable HttpWebRequest instance.
             WebSocket.RegisterPrefixes();
         }
-        
-        public ClientWebSocket() 
+
+        public ClientWebSocket()
         {
-            if (Logging.On) Logging.Enter(Logging.WebSockets, this, ".ctor", null);
+            if (Logging.On)
+                Logging.Enter(Logging.WebSockets, this, ".ctor", null);
 
             if (!WebSocketProtocolComponent.IsSupported)
             {
@@ -48,22 +49,26 @@ namespace System.Net.WebSockets
             options = new ClientWebSocketOptions();
             cts = new CancellationTokenSource();
 
-            if (Logging.On) Logging.Exit(Logging.WebSockets, this, ".ctor", null);
+            if (Logging.On)
+                Logging.Exit(Logging.WebSockets, this, ".ctor", null);
         }
 
         #region Properties
 
-        public ClientWebSocketOptions Options { get { return options; } }
+        public ClientWebSocketOptions Options
+        {
+            get { return options; }
+        }
 
         public override WebSocketCloseStatus? CloseStatus
         {
-            get 
+            get
             {
                 if (innerWebSocket != null)
                 {
                     return innerWebSocket.CloseStatus;
                 }
-                return null; 
+                return null;
             }
         }
 
@@ -93,7 +98,7 @@ namespace System.Net.WebSockets
 
         public override WebSocketState State
         {
-            get 
+            get
             {
                 // state == Connected or Disposed
                 if (innerWebSocket != null)
@@ -155,22 +160,32 @@ namespace System.Net.WebSockets
             try
             {
                 HttpWebRequest request = CreateAndConfigureRequest(uri);
-                if (Logging.On) Logging.Associate(Logging.WebSockets, this, request);
+                if (Logging.On)
+                    Logging.Associate(Logging.WebSockets, this, request);
 
                 connectCancellation = cancellationToken.Register(AbortRequest, request, false);
 
-                response = await request.GetResponseAsync().SuppressContextFlow() as HttpWebResponse;
+                response =
+                    await request.GetResponseAsync().SuppressContextFlow() as HttpWebResponse;
                 Contract.Assert(response != null, "Not an HttpWebResponse");
 
-                if (Logging.On) Logging.Associate(Logging.WebSockets, this, response);
+                if (Logging.On)
+                    Logging.Associate(Logging.WebSockets, this, response);
 
                 string subprotocol = ValidateResponse(request, response);
 
-                innerWebSocket = WebSocket.CreateClientWebSocket(response.GetResponseStream(), subprotocol,
-                    options.ReceiveBufferSize, options.SendBufferSize, options.KeepAliveInterval, false,
-                    options.GetOrCreateBuffer());
+                innerWebSocket = WebSocket.CreateClientWebSocket(
+                    response.GetResponseStream(),
+                    subprotocol,
+                    options.ReceiveBufferSize,
+                    options.SendBufferSize,
+                    options.KeepAliveInterval,
+                    false,
+                    options.GetOrCreateBuffer()
+                );
 
-                if (Logging.On) Logging.Associate(Logging.WebSockets, this, innerWebSocket);
+                if (Logging.On)
+                    Logging.Associate(Logging.WebSockets, this, innerWebSocket);
 
                 // Change internal state to 'connected' to enable the other methods
                 if (Interlocked.CompareExchange(ref state, connected, connecting) != connecting)
@@ -182,19 +197,24 @@ namespace System.Net.WebSockets
             catch (WebException ex)
             {
                 ConnectExceptionCleanup(response);
-                WebSocketException wex = new WebSocketException(SR.GetString(SR.net_webstatus_ConnectFailure), ex);
-                if (Logging.On) Logging.Exception(Logging.WebSockets, this, "ConnectAsync", wex);
+                WebSocketException wex = new WebSocketException(
+                    SR.GetString(SR.net_webstatus_ConnectFailure),
+                    ex
+                );
+                if (Logging.On)
+                    Logging.Exception(Logging.WebSockets, this, "ConnectAsync", wex);
                 throw wex;
             }
             catch (Exception ex)
             {
                 ConnectExceptionCleanup(response);
-                if (Logging.On) Logging.Exception(Logging.WebSockets, this, "ConnectAsync", ex);
+                if (Logging.On)
+                    Logging.Exception(Logging.WebSockets, this, "ConnectAsync", ex);
                 throw;
             }
             finally
             {
-                // We successfully connected (or failed trying), disengage from this token.  
+                // We successfully connected (or failed trying), disengage from this token.
                 // Otherwise any timeout/cancellation would apply to the full session.
                 // In the failure case we need to release the reference to HWR.
                 connectCancellation.Dispose();
@@ -215,7 +235,9 @@ namespace System.Net.WebSockets
             HttpWebRequest request = WebRequest.Create(uri) as HttpWebRequest;
             if (request == null)
             {
-                throw new InvalidOperationException(SR.GetString(SR.net_WebSockets_InvalidRegistration));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.net_WebSockets_InvalidRegistration)
+                );
             }
 
             // Request Headers
@@ -227,8 +249,10 @@ namespace System.Net.WebSockets
             // SubProtocols
             if (options.RequestedSubProtocols.Count > 0)
             {
-                request.Headers.Add(HttpKnownHeaderNames.SecWebSocketProtocol,
-                    string.Join(", ", options.RequestedSubProtocols));
+                request.Headers.Add(
+                    HttpKnownHeaderNames.SecWebSocketProtocol,
+                    string.Join(", ", options.RequestedSubProtocols)
+                );
             }
 
             // Creds
@@ -255,43 +279,78 @@ namespace System.Net.WebSockets
 
             return request;
         }
-        
+
         // Validate the response headers and return the sub-protocol.
         private string ValidateResponse(HttpWebRequest request, HttpWebResponse response)
         {
             // 101
             if (response.StatusCode != HttpStatusCode.SwitchingProtocols)
             {
-                throw new WebSocketException(SR.GetString(SR.net_WebSockets_Connect101Expected, 
-                    (int)response.StatusCode));
+                throw new WebSocketException(
+                    SR.GetString(SR.net_WebSockets_Connect101Expected, (int)response.StatusCode)
+                );
             }
 
             // Upgrade: websocket
             string upgradeHeader = response.Headers[HttpKnownHeaderNames.Upgrade];
-            if (!string.Equals(upgradeHeader, WebSocketHelpers.WebSocketUpgradeToken, 
-                StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(
+                    upgradeHeader,
+                    WebSocketHelpers.WebSocketUpgradeToken,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw new WebSocketException(SR.GetString(SR.net_WebSockets_InvalidResponseHeader, 
-                    HttpKnownHeaderNames.Upgrade, upgradeHeader));
+                throw new WebSocketException(
+                    SR.GetString(
+                        SR.net_WebSockets_InvalidResponseHeader,
+                        HttpKnownHeaderNames.Upgrade,
+                        upgradeHeader
+                    )
+                );
             }
 
             // Connection: Upgrade
             string connectionHeader = response.Headers[HttpKnownHeaderNames.Connection];
-            if (!string.Equals(connectionHeader, HttpKnownHeaderNames.Upgrade,
-                StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(
+                    connectionHeader,
+                    HttpKnownHeaderNames.Upgrade,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw new WebSocketException(SR.GetString(SR.net_WebSockets_InvalidResponseHeader,
-                    HttpKnownHeaderNames.Connection, connectionHeader));
+                throw new WebSocketException(
+                    SR.GetString(
+                        SR.net_WebSockets_InvalidResponseHeader,
+                        HttpKnownHeaderNames.Connection,
+                        connectionHeader
+                    )
+                );
             }
 
             // Sec-WebSocket-Accept derived from request Sec-WebSocket-Key
-            string websocketAcceptHeader = response.Headers[HttpKnownHeaderNames.SecWebSocketAccept];
+            string websocketAcceptHeader = response.Headers[
+                HttpKnownHeaderNames.SecWebSocketAccept
+            ];
             string expectedAcceptHeader = WebSocketHelpers.GetSecWebSocketAcceptString(
-                request.Headers[HttpKnownHeaderNames.SecWebSocketKey]);
-            if (!string.Equals(websocketAcceptHeader, expectedAcceptHeader, StringComparison.OrdinalIgnoreCase))
+                request.Headers[HttpKnownHeaderNames.SecWebSocketKey]
+            );
+            if (
+                !string.Equals(
+                    websocketAcceptHeader,
+                    expectedAcceptHeader,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw new WebSocketException(SR.GetString(SR.net_WebSockets_InvalidResponseHeader,
-                    HttpKnownHeaderNames.SecWebSocketAccept, websocketAcceptHeader));
+                throw new WebSocketException(
+                    SR.GetString(
+                        SR.net_WebSockets_InvalidResponseHeader,
+                        HttpKnownHeaderNames.SecWebSocketAccept,
+                        websocketAcceptHeader
+                    )
+                );
             }
 
             // Sec-WebSocket-Protocol matches one from request
@@ -302,7 +361,13 @@ namespace System.Net.WebSockets
                 bool foundMatch = false;
                 foreach (string requestedSubProtocol in options.RequestedSubProtocols)
                 {
-                    if (string.Equals(requestedSubProtocol, subProtocol, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            requestedSubProtocol,
+                            subProtocol,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         foundMatch = true;
                         break;
@@ -310,40 +375,61 @@ namespace System.Net.WebSockets
                 }
                 if (!foundMatch)
                 {
-                    throw new WebSocketException(SR.GetString(SR.net_WebSockets_AcceptUnsupportedProtocol,
-                        string.Join(", ", options.RequestedSubProtocols), subProtocol));
+                    throw new WebSocketException(
+                        SR.GetString(
+                            SR.net_WebSockets_AcceptUnsupportedProtocol,
+                            string.Join(", ", options.RequestedSubProtocols),
+                            subProtocol
+                        )
+                    );
                 }
             }
 
             return string.IsNullOrWhiteSpace(subProtocol) ? null : subProtocol; // May be null or valid.
         }
 
-        public override Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, 
-            CancellationToken cancellationToken)
+        public override Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfNotConnected();
             return innerWebSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
         }
 
-        public override Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, 
-            CancellationToken cancellationToken)
+        public override Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfNotConnected();
             return innerWebSocket.ReceiveAsync(buffer, cancellationToken);
         }
 
-        public override Task CloseAsync(WebSocketCloseStatus closeStatus, string statusDescription, 
-            CancellationToken cancellationToken)
+        public override Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfNotConnected();
             return innerWebSocket.CloseAsync(closeStatus, statusDescription, cancellationToken);
         }
 
-        public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string statusDescription, 
-            CancellationToken cancellationToken)
+        public override Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        )
         {
             ThrowIfNotConnected();
-            return innerWebSocket.CloseOutputAsync(closeStatus, statusDescription, cancellationToken);
+            return innerWebSocket.CloseOutputAsync(
+                closeStatus,
+                statusDescription,
+                cancellationToken
+            );
         }
 
         public override void Abort()
@@ -429,14 +515,14 @@ namespace System.Net.WebSockets
             requestHeaders.Set(headerName, headerValue);
         }
 
-        internal WebHeaderCollection RequestHeaders { get { return requestHeaders; } }
+        internal WebHeaderCollection RequestHeaders
+        {
+            get { return requestHeaders; }
+        }
 
         public bool UseDefaultCredentials
         {
-            get
-            {
-                return useDefaultCredentials;
-            }
+            get { return useDefaultCredentials; }
             set
             {
                 ThrowIfReadOnly();
@@ -446,10 +532,7 @@ namespace System.Net.WebSockets
 
         public ICredentials Credentials
         {
-            get
-            {
-                return credentials;
-            }
+            get { return credentials; }
             set
             {
                 ThrowIfReadOnly();
@@ -459,10 +542,7 @@ namespace System.Net.WebSockets
 
         public IWebProxy Proxy
         {
-            get
-            {
-                return proxy;
-            }
+            get { return proxy; }
             set
             {
                 ThrowIfReadOnly();
@@ -470,8 +550,11 @@ namespace System.Net.WebSockets
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
-            Justification = "This collectin will be handed off directly to HttpWebRequest.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This collectin will be handed off directly to HttpWebRequest."
+        )]
         public X509CertificateCollection ClientCertificates
         {
             get
@@ -493,14 +576,14 @@ namespace System.Net.WebSockets
             }
         }
 
-        internal X509CertificateCollection InternalClientCertificates { get { return clientCertificates; } }
+        internal X509CertificateCollection InternalClientCertificates
+        {
+            get { return clientCertificates; }
+        }
 
         public CookieContainer Cookies
         {
-            get
-            {
-                return cookies;
-            }
+            get { return cookies; }
             set
             {
                 ThrowIfReadOnly();
@@ -531,7 +614,7 @@ namespace System.Net.WebSockets
 
             this.receiveBufferSize = receiveBufferSize;
             this.sendBufferSize = sendBufferSize;
-            
+
             // Only full-trust applications can specify their own buffer to be used as the
             // internal buffer for the WebSocket object.  This is because the contents of the
             // buffer are used internally by the WebSocket as it marshals data with embedded
@@ -549,9 +632,15 @@ namespace System.Net.WebSockets
             }
         }
 
-        internal int ReceiveBufferSize { get { return receiveBufferSize; } }
+        internal int ReceiveBufferSize
+        {
+            get { return receiveBufferSize; }
+        }
 
-        internal int SendBufferSize { get { return sendBufferSize; } }
+        internal int SendBufferSize
+        {
+            get { return sendBufferSize; }
+        }
 
         internal ArraySegment<byte> GetOrCreateBuffer()
         {
@@ -562,7 +651,7 @@ namespace System.Net.WebSockets
             return buffer.Value;
         }
 
-        public void AddSubProtocol(string subProtocol) 
+        public void AddSubProtocol(string subProtocol)
         {
             ThrowIfReadOnly();
             WebSocketHelpers.ValidateSubprotocol(subProtocol);
@@ -571,29 +660,36 @@ namespace System.Net.WebSockets
             {
                 if (string.Equals(item, subProtocol, StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new ArgumentException(SR.GetString(SR.net_WebSockets_NoDuplicateProtocol, subProtocol), 
-                        "subProtocol");
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_WebSockets_NoDuplicateProtocol, subProtocol),
+                        "subProtocol"
+                    );
                 }
             }
             requestedSubProtocols.Add(subProtocol);
         }
 
-        internal IList<string> RequestedSubProtocols { get { return requestedSubProtocols; } }
-
-        public TimeSpan KeepAliveInterval 
+        internal IList<string> RequestedSubProtocols
         {
-            get
-            {
-                return keepAliveInterval;
-            }
+            get { return requestedSubProtocols; }
+        }
+
+        public TimeSpan KeepAliveInterval
+        {
+            get { return keepAliveInterval; }
             set
             {
                 ThrowIfReadOnly();
                 if (value < Timeout.InfiniteTimeSpan)
                 {
-                    throw new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
-                        Timeout.InfiniteTimeSpan.ToString()));
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        value,
+                        SR.GetString(
+                            SR.net_WebSockets_ArgumentOutOfRange_TooSmall,
+                            Timeout.InfiniteTimeSpan.ToString()
+                        )
+                    );
                 }
                 keepAliveInterval = value;
             }

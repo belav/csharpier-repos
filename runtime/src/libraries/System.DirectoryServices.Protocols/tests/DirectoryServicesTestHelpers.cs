@@ -10,7 +10,8 @@ namespace System.DirectoryServices.Protocols.Tests
 {
     public static class DirectoryServicesTestHelpers
     {
-        public static bool IsWindowsOrLibLdapIsInstalled => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || IsLibLdapInstalled;
+        public static bool IsWindowsOrLibLdapIsInstalled =>
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) || IsLibLdapInstalled;
 
         // Cache the check once we have performed it once
         private static bool? _isLibLdapInstalled = null;

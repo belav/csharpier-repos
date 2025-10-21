@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public DocumentActiveStatementChanges(
             ImmutableArray<UnmappedActiveStatement> oldSpans,
             ImmutableArray<ActiveStatement> newStatements,
-            ImmutableArray<ImmutableArray<SourceFileSpan>> newExceptionRegions)
+            ImmutableArray<ImmutableArray<SourceFileSpan>> newExceptionRegions
+        )
         {
             Contract.ThrowIfFalse(oldSpans.Length == newStatements.Length);
             Contract.ThrowIfFalse(oldSpans.Length == newExceptionRegions.Length);
@@ -26,7 +27,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             for (var i = 0; i < oldSpans.Length; i++)
             {
                 // old and new exception region counts must match:
-                Debug.Assert(oldSpans[i].ExceptionRegions.Spans.Length == newExceptionRegions[i].Length);
+                Debug.Assert(
+                    oldSpans[i].ExceptionRegions.Spans.Length == newExceptionRegions[i].Length
+                );
             }
 #endif
 
@@ -38,7 +41,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public void Deconstruct(
             out ImmutableArray<UnmappedActiveStatement> oldStatements,
             out ImmutableArray<ActiveStatement> newStatements,
-            out ImmutableArray<ImmutableArray<SourceFileSpan>> newExceptionRegions)
+            out ImmutableArray<ImmutableArray<SourceFileSpan>> newExceptionRegions
+        )
         {
             oldStatements = OldStatements;
             newStatements = NewStatements;

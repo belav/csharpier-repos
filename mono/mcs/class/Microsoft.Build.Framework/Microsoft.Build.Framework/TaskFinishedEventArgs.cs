@@ -26,59 +26,54 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class TaskFinishedEventArgs : BuildStatusEventArgs {
-	
-		string	projectFile;
-		string	taskFile;
-		string	taskName;
-		bool	succeeded;
-		
-		protected TaskFinishedEventArgs ()
-		{
-		}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class TaskFinishedEventArgs : BuildStatusEventArgs
+    {
+        string projectFile;
+        string taskFile;
+        string taskName;
+        bool succeeded;
 
-		public TaskFinishedEventArgs (string message,
-					      string helpKeyword,
-					      string projectFile,
-					      string taskFile,
-					      string taskName,
-					      bool succeeded)
-			: base (message, helpKeyword, null)
-		{
-			this.projectFile = projectFile;
-			this.taskFile = taskFile;
-			this.taskName = taskName;
-			this.succeeded = succeeded;
-		}
+        protected TaskFinishedEventArgs() { }
 
-		public string ProjectFile {
-			get {
-				return projectFile;
-			}
-		}
+        public TaskFinishedEventArgs(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            string taskFile,
+            string taskName,
+            bool succeeded
+        )
+            : base(message, helpKeyword, null)
+        {
+            this.projectFile = projectFile;
+            this.taskFile = taskFile;
+            this.taskName = taskName;
+            this.succeeded = succeeded;
+        }
 
-		public bool Succeeded {
-			get {
-				return succeeded;
-			}
-		}
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
 
-		public string TaskFile {
-			get {
-				return taskFile;
-			}
-		}
+        public bool Succeeded
+        {
+            get { return succeeded; }
+        }
 
-		public string TaskName {
-			get {
-				return taskName;
-			}
-		}
-	}
+        public string TaskFile
+        {
+            get { return taskFile; }
+        }
+
+        public string TaskName
+        {
+            get { return taskName; }
+        }
+    }
 }
-

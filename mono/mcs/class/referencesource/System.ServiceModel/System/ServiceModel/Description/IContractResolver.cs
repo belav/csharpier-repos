@@ -9,5 +9,4 @@ namespace System.ServiceModel.Description
     {
         ContractDescription ResolveContract(string contractName);
     }
-
 }

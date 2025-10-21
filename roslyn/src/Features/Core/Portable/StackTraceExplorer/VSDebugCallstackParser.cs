@@ -3,17 +3,20 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Text;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.CodeAnalysis.Text;
+using System.Text;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame;
 using Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars;
+using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal sealed class VSDebugCallstackParser : IStackFrameParser
     {
-        public bool TryParseLine(VirtualCharSequence line, [NotNullWhen(true)] out ParsedFrame? parsedFrame)
+        public bool TryParseLine(
+            VirtualCharSequence line,
+            [NotNullWhen(true)] out ParsedFrame? parsedFrame
+        )
         {
             // Example line:
             // ConsoleApp4.dll!ConsoleApp4.MyClass.ThrowAtOne() Line 19	C#

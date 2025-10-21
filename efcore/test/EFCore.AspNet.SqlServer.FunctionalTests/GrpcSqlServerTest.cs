@@ -6,13 +6,10 @@ namespace Microsoft.EntityFrameworkCore;
 public class GrpcSqlServerTest : GrpcTestBase<GrpcSqlServerTest.GrpcSqlServerFixture>
 {
     public GrpcSqlServerTest(GrpcSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class GrpcSqlServerFixture : GrpcFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

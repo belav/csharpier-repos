@@ -42,7 +42,10 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactory_NullValueFactory_ThrowsArguentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () => new Lazy<object>(null)); // Value factory is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueFactory",
+                () => new Lazy<object>(null)
+            ); // Value factory is null
         }
 
         [Fact]
@@ -55,8 +58,14 @@ namespace System.Tests
         [Fact]
         public static void Ctor_LazyThreadSafetyMode_InvalidMode_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<string>(LazyThreadSafetyMode.None - 1)); // Invalid thread saftety mode
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<string>(LazyThreadSafetyMode.ExecutionAndPublication + 1)); // Invalid thread saftety mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () => new Lazy<string>(LazyThreadSafetyMode.None - 1)
+            ); // Invalid thread saftety mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () => new Lazy<string>(LazyThreadSafetyMode.ExecutionAndPublication + 1)
+            ); // Invalid thread saftety mode
         }
 
         [Theory]
@@ -71,7 +80,10 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactory_Bool_NullValueFactory_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () => new Lazy<object>(null, false)); // Value factory is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueFactory",
+                () => new Lazy<object>(null, false)
+            ); // Value factory is null
         }
 
         [Fact]
@@ -87,10 +99,20 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactor_LazyThreadSafetyMode_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () => new Lazy<object>(null, LazyThreadSafetyMode.PublicationOnly)); // Value factory is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueFactory",
+                () => new Lazy<object>(null, LazyThreadSafetyMode.PublicationOnly)
+            ); // Value factory is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<string>(() => "foo", LazyThreadSafetyMode.None - 1)); // Invalid thread saftety mode
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<string>(() => "foof", LazyThreadSafetyMode.ExecutionAndPublication + 1)); // Invalid thread saftety mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () => new Lazy<string>(() => "foo", LazyThreadSafetyMode.None - 1)
+            ); // Invalid thread saftety mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () =>
+                    new Lazy<string>(() => "foof", LazyThreadSafetyMode.ExecutionAndPublication + 1)
+            ); // Invalid thread saftety mode
         }
 
         [Fact]
@@ -119,7 +141,10 @@ namespace System.Tests
             Value_Invalid_Impl(ref x, new Lazy<int>(f));
             Value_Invalid_Impl(ref x, new Lazy<int>(f, true));
             Value_Invalid_Impl(ref x, new Lazy<int>(f, false));
-            Value_Invalid_Impl(ref x, new Lazy<int>(f, LazyThreadSafetyMode.ExecutionAndPublication));
+            Value_Invalid_Impl(
+                ref x,
+                new Lazy<int>(f, LazyThreadSafetyMode.ExecutionAndPublication)
+            );
             Value_Invalid_Impl(ref x, new Lazy<int>(f, LazyThreadSafetyMode.None));
 
             // When used with LazyThreadSafetyMode.PublicationOnly this causes a stack overflow
@@ -129,6 +154,7 @@ namespace System.Tests
         public class InitiallyExceptionThrowingCtor
         {
             public static int counter = 0;
+
             public static int getValue()
             {
                 if (++counter < 5)
@@ -145,14 +171,20 @@ namespace System.Tests
             }
         }
 
-        private static IEnumerable<Lazy<InitiallyExceptionThrowingCtor>> Ctor_ExceptionRecovery_MemberData()
+        private static IEnumerable<
+            Lazy<InitiallyExceptionThrowingCtor>
+        > Ctor_ExceptionRecovery_MemberData()
         {
             yield return new Lazy<InitiallyExceptionThrowingCtor>();
             yield return new Lazy<InitiallyExceptionThrowingCtor>(true);
             yield return new Lazy<InitiallyExceptionThrowingCtor>(false);
-            yield return new Lazy<InitiallyExceptionThrowingCtor>(LazyThreadSafetyMode.ExecutionAndPublication);
+            yield return new Lazy<InitiallyExceptionThrowingCtor>(
+                LazyThreadSafetyMode.ExecutionAndPublication
+            );
             yield return new Lazy<InitiallyExceptionThrowingCtor>(LazyThreadSafetyMode.None);
-            yield return new Lazy<InitiallyExceptionThrowingCtor>(LazyThreadSafetyMode.PublicationOnly);
+            yield return new Lazy<InitiallyExceptionThrowingCtor>(
+                LazyThreadSafetyMode.PublicationOnly
+            );
         }
 
         //
@@ -162,38 +194,58 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ExceptionRecovery()
         {
-            foreach (Lazy<InitiallyExceptionThrowingCtor> lazy in Ctor_ExceptionRecovery_MemberData())
+            foreach (
+                Lazy<InitiallyExceptionThrowingCtor> lazy in Ctor_ExceptionRecovery_MemberData()
+            )
             {
                 InitiallyExceptionThrowingCtor.counter = 0;
                 InitiallyExceptionThrowingCtor result = null;
                 for (int i = 0; i < 10; ++i)
                 {
                     try
-                    { result = lazy.Value; }
+                    {
+                        result = lazy.Value;
+                    }
                     catch (Exception) { }
                 }
                 Assert.Equal(5, result.Value);
             }
         }
 
-        private static void Value_ExceptionRecovery_IntImpl(Lazy<int> lazy, ref int counter, int expected)
+        private static void Value_ExceptionRecovery_IntImpl(
+            Lazy<int> lazy,
+            ref int counter,
+            int expected
+        )
         {
             counter = 0;
             int result = 0;
             for (var i = 0; i < 10; ++i)
             {
-                try { result = lazy.Value; } catch (Exception) { }
+                try
+                {
+                    result = lazy.Value;
+                }
+                catch (Exception) { }
             }
             Assert.Equal(result, expected);
         }
 
-        private static void Value_ExceptionRecovery_StringImpl(Lazy<string> lazy, ref int counter, string expected)
+        private static void Value_ExceptionRecovery_StringImpl(
+            Lazy<string> lazy,
+            ref int counter,
+            string expected
+        )
         {
             counter = 0;
             var result = default(string);
             for (var i = 0; i < 10; ++i)
             {
-                try { result = lazy.Value; } catch (Exception) { }
+                try
+                {
+                    result = lazy.Value;
+                }
+                catch (Exception) { }
             }
             Assert.Equal(expected, result);
         }
@@ -203,26 +255,61 @@ namespace System.Tests
         {
             int counter = 0; // set in test function
 
-            var fint = new Func<int>   (() => { if (++counter < 5) throw new Exception(); else return counter; });
-            var fobj = new Func<string>(() => { if (++counter < 5) throw new Exception(); else return counter.ToString(); });
+            var fint = new Func<int>(() =>
+            {
+                if (++counter < 5)
+                    throw new Exception();
+                else
+                    return counter;
+            });
+            var fobj = new Func<string>(() =>
+            {
+                if (++counter < 5)
+                    throw new Exception();
+                else
+                    return counter.ToString();
+            });
 
             Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint), ref counter, 0);
             Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint, true), ref counter, 0);
             Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint, false), ref counter, 0);
-            Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint, LazyThreadSafetyMode.ExecutionAndPublication), ref counter, 0);
-            Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint, LazyThreadSafetyMode.None), ref counter, 0);
-            Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint, LazyThreadSafetyMode.PublicationOnly), ref counter, 5);
+            Value_ExceptionRecovery_IntImpl(
+                new Lazy<int>(fint, LazyThreadSafetyMode.ExecutionAndPublication),
+                ref counter,
+                0
+            );
+            Value_ExceptionRecovery_IntImpl(
+                new Lazy<int>(fint, LazyThreadSafetyMode.None),
+                ref counter,
+                0
+            );
+            Value_ExceptionRecovery_IntImpl(
+                new Lazy<int>(fint, LazyThreadSafetyMode.PublicationOnly),
+                ref counter,
+                5
+            );
 
             Value_ExceptionRecovery_StringImpl(new Lazy<string>(fobj), ref counter, null);
             Value_ExceptionRecovery_StringImpl(new Lazy<string>(fobj, true), ref counter, null);
             Value_ExceptionRecovery_StringImpl(new Lazy<string>(fobj, false), ref counter, null);
-            Value_ExceptionRecovery_StringImpl(new Lazy<string>(fobj, LazyThreadSafetyMode.ExecutionAndPublication), ref counter, null);
-            Value_ExceptionRecovery_StringImpl(new Lazy<string>(fobj, LazyThreadSafetyMode.None), ref counter, null);
-            Value_ExceptionRecovery_StringImpl(new Lazy<string>(fobj, LazyThreadSafetyMode.PublicationOnly), ref counter, 5.ToString());
+            Value_ExceptionRecovery_StringImpl(
+                new Lazy<string>(fobj, LazyThreadSafetyMode.ExecutionAndPublication),
+                ref counter,
+                null
+            );
+            Value_ExceptionRecovery_StringImpl(
+                new Lazy<string>(fobj, LazyThreadSafetyMode.None),
+                ref counter,
+                null
+            );
+            Value_ExceptionRecovery_StringImpl(
+                new Lazy<string>(fobj, LazyThreadSafetyMode.PublicationOnly),
+                ref counter,
+                5.ToString()
+            );
         }
 
-        class MyException
-            : Exception
+        class MyException : Exception
         {
             public int Value { get; }
 
@@ -234,7 +321,8 @@ namespace System.Tests
 
         public class ExceptionInCtor
         {
-            public ExceptionInCtor() : this(99) { }
+            public ExceptionInCtor()
+                : this(99) { }
 
             public ExceptionInCtor(int value)
             {
@@ -244,12 +332,63 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Value_Func_Exception_MemberData()
         {
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, true) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, false) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, LazyThreadSafetyMode.ExecutionAndPublication) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, LazyThreadSafetyMode.None) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, LazyThreadSafetyMode.PublicationOnly) };
+            yield return new object[]
+            {
+                new Lazy<int>(() =>
+                {
+                    throw new MyException(99);
+                }),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    true
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    false
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    LazyThreadSafetyMode.ExecutionAndPublication
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    LazyThreadSafetyMode.None
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    LazyThreadSafetyMode.PublicationOnly
+                ),
+            };
         }
 
         [Theory]
@@ -262,11 +401,32 @@ namespace System.Tests
         public static IEnumerable<object[]> Value_FuncCtor_Exception_MemberData()
         {
             yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99)) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.ExecutionAndPublication) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.PublicationOnly) };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(
+                    () => new ExceptionInCtor(99),
+                    LazyThreadSafetyMode.ExecutionAndPublication
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(
+                    () => new ExceptionInCtor(99),
+                    LazyThreadSafetyMode.PublicationOnly
+                ),
+            };
         }
 
         [Theory]
@@ -281,9 +441,15 @@ namespace System.Tests
             yield return new object[] { new Lazy<ExceptionInCtor>() };
             yield return new object[] { new Lazy<ExceptionInCtor>(true) };
             yield return new object[] { new Lazy<ExceptionInCtor>(false) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication) };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication),
+            };
             yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.None) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly) };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly),
+            };
         }
 
         [Theory]
@@ -295,11 +461,53 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Exceptions_Func_Idempotent_MemberData()
         {
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, true) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, false) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, LazyThreadSafetyMode.ExecutionAndPublication) };
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, LazyThreadSafetyMode.None) };
+            yield return new object[]
+            {
+                new Lazy<int>(() =>
+                {
+                    throw new MyException(99);
+                }),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    true
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    false
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    LazyThreadSafetyMode.ExecutionAndPublication
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    LazyThreadSafetyMode.None
+                ),
+            };
         }
 
         [Theory]
@@ -313,10 +521,25 @@ namespace System.Tests
         public static IEnumerable<object[]> Exceptions_Ctor_Idempotent_MemberData()
         {
             yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99)) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.ExecutionAndPublication) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None) };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(
+                    () => new ExceptionInCtor(99),
+                    LazyThreadSafetyMode.ExecutionAndPublication
+                ),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None),
+            };
         }
 
         [Theory]
@@ -329,7 +552,16 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Exceptions_Func_NotIdempotent_MemberData()
         {
-            yield return new object[] { new Lazy<int>(() => { throw new MyException(99); }, LazyThreadSafetyMode.PublicationOnly) };
+            yield return new object[]
+            {
+                new Lazy<int>(
+                    () =>
+                    {
+                        throw new MyException(99);
+                    },
+                    LazyThreadSafetyMode.PublicationOnly
+                ),
+            };
         }
 
         public static IEnumerable<object[]> Exceptions_Ctor_NotIdempotent_MemberData()
@@ -337,10 +569,22 @@ namespace System.Tests
             yield return new object[] { new Lazy<ExceptionInCtor>() };
             yield return new object[] { new Lazy<ExceptionInCtor>(true) };
             yield return new object[] { new Lazy<ExceptionInCtor>(false) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication) };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication),
+            };
             yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.None) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly) };
-            yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.PublicationOnly) };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly),
+            };
+            yield return new object[]
+            {
+                new Lazy<ExceptionInCtor>(
+                    () => new ExceptionInCtor(99),
+                    LazyThreadSafetyMode.PublicationOnly
+                ),
+            };
         }
 
         [Theory]
@@ -364,7 +608,13 @@ namespace System.Tests
         [InlineData(LazyThreadSafetyMode.None)]
         public static void Value_ThrownException_DoesntCreateValue(LazyThreadSafetyMode mode)
         {
-            var lazy = new Lazy<string>(() => { throw new DivideByZeroException(); }, mode);
+            var lazy = new Lazy<string>(
+                () =>
+                {
+                    throw new DivideByZeroException();
+                },
+                mode
+            );
 
             Exception exception1 = Assert.Throws<DivideByZeroException>(() => lazy.Value);
             Exception exception2 = Assert.Throws<DivideByZeroException>(() => lazy.Value);
@@ -376,7 +626,13 @@ namespace System.Tests
         [Fact]
         public static void Value_ThrownException_DoesntCreateValue_PublicationOnly()
         {
-            var lazy = new Lazy<string>(() => { throw new DivideByZeroException(); }, LazyThreadSafetyMode.PublicationOnly);
+            var lazy = new Lazy<string>(
+                () =>
+                {
+                    throw new DivideByZeroException();
+                },
+                LazyThreadSafetyMode.PublicationOnly
+            );
 
             Exception exception1 = Assert.Throws<DivideByZeroException>(() => lazy.Value);
             Exception exception2 = Assert.Throws<DivideByZeroException>(() => lazy.Value);
@@ -411,7 +667,10 @@ namespace System.Tests
 
             // Func based initialization (already initialized).
             string d = strTemplate;
-            Assert.Equal(strTemplate, LazyInitializer.EnsureInitialized(ref d, () => strTemplate + "bar"));
+            Assert.Equal(
+                strTemplate,
+                LazyInitializer.EnsureInitialized(ref d, () => strTemplate + "bar")
+            );
             Assert.Same(d, LazyInitializer.EnsureInitialized(ref d));
             Assert.Equal(strTemplate, d);
         }
@@ -421,7 +680,9 @@ namespace System.Tests
         {
             // Func based initialization (nulls not permitted).
             string e = null;
-            Assert.Throws<InvalidOperationException>(() => LazyInitializer.EnsureInitialized(ref e, () => null));
+            Assert.Throws<InvalidOperationException>(() =>
+                LazyInitializer.EnsureInitialized(ref e, () => null)
+            );
 
             // Activator.CreateInstance (for a type without a default ctor).
             NoDefaultCtor ndc = null;
@@ -447,7 +708,10 @@ namespace System.Tests
             HasDefaultCtor b = hdcTemplate;
             bool bInit = true;
             object bLock = null;
-            Assert.Equal(hdcTemplate, LazyInitializer.EnsureInitialized(ref b, ref bInit, ref bLock));
+            Assert.Equal(
+                hdcTemplate,
+                LazyInitializer.EnsureInitialized(ref b, ref bInit, ref bLock)
+            );
             Assert.Equal(hdcTemplate, b);
             Assert.True(bInit);
             Assert.Null(bLock);
@@ -456,7 +720,10 @@ namespace System.Tests
             string c = null;
             bool cInit = false;
             object cLock = null;
-            Assert.Equal(strTemplate, LazyInitializer.EnsureInitialized(ref c, ref cInit, ref cLock, () => strTemplate));
+            Assert.Equal(
+                strTemplate,
+                LazyInitializer.EnsureInitialized(ref c, ref cInit, ref cLock, () => strTemplate)
+            );
             Assert.Equal(strTemplate, c);
             Assert.True(cInit);
             Assert.NotNull(cLock);
@@ -465,7 +732,15 @@ namespace System.Tests
             string d = strTemplate;
             bool dInit = true;
             object dLock = null;
-            Assert.Equal(strTemplate, LazyInitializer.EnsureInitialized(ref d, ref dInit, ref dLock, () => strTemplate + "bar"));
+            Assert.Equal(
+                strTemplate,
+                LazyInitializer.EnsureInitialized(
+                    ref d,
+                    ref dInit,
+                    ref dLock,
+                    () => strTemplate + "bar"
+                )
+            );
             Assert.Equal(strTemplate, d);
             Assert.True(dInit);
             Assert.Null(dLock);
@@ -476,12 +751,34 @@ namespace System.Tests
             object elock = null;
             int initCount = 0;
 
-            Assert.Null(LazyInitializer.EnsureInitialized(ref e, ref einit, ref elock, () => { initCount++; return null; }));
+            Assert.Null(
+                LazyInitializer.EnsureInitialized(
+                    ref e,
+                    ref einit,
+                    ref elock,
+                    () =>
+                    {
+                        initCount++;
+                        return null;
+                    }
+                )
+            );
             Assert.Null(e);
             Assert.Equal(1, initCount);
             Assert.True(einit);
             Assert.NotNull(elock);
-            Assert.Null(LazyInitializer.EnsureInitialized(ref e, ref einit, ref elock, () => { initCount++; return null; }));
+            Assert.Null(
+                LazyInitializer.EnsureInitialized(
+                    ref e,
+                    ref einit,
+                    ref elock,
+                    () =>
+                    {
+                        initCount++;
+                        return null;
+                    }
+                )
+            );
         }
 
         [Fact]
@@ -491,7 +788,9 @@ namespace System.Tests
             NoDefaultCtor ndc = null;
             bool ndcInit = false;
             object ndcLock = null;
-            Assert.Throws<MissingMemberException>(() => LazyInitializer.EnsureInitialized(ref ndc, ref ndcInit, ref ndcLock));
+            Assert.Throws<MissingMemberException>(() =>
+                LazyInitializer.EnsureInitialized(ref ndc, ref ndcInit, ref ndcLock)
+            );
         }
 
         [Fact]
@@ -520,7 +819,12 @@ namespace System.Tests
             LIX c = default(LIX);
             bool cInit = false;
             object cLock = null;
-            LIX ensuredValC = LazyInitializer.EnsureInitialized(ref c, ref cInit, ref cLock, () => template);
+            LIX ensuredValC = LazyInitializer.EnsureInitialized(
+                ref c,
+                ref cInit,
+                ref cLock,
+                () => template
+            );
             Assert.Equal(template, c);
             Assert.Equal(template, ensuredValC);
 
@@ -529,7 +833,12 @@ namespace System.Tests
             bool dInit = true;
             object dLock = null;
             LIX template2 = new LIX(template.f * 2);
-            LIX ensuredValD = LazyInitializer.EnsureInitialized(ref d, ref dInit, ref dLock, () => template2);
+            LIX ensuredValD = LazyInitializer.EnsureInitialized(
+                ref d,
+                ref dInit,
+                ref dLock,
+                () => template2
+            );
             Assert.Equal(template, ensuredValD);
             Assert.Equal(template, d);
         }
@@ -554,7 +863,10 @@ namespace System.Tests
             string template = "foo";
             string target = null;
             object syncLock = null;
-            Assert.Equal(template, LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => template));
+            Assert.Equal(
+                template,
+                LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => template)
+            );
             Assert.Equal(template, target);
             Assert.NotNull(syncLock);
         }
@@ -565,7 +877,10 @@ namespace System.Tests
             string template = "foo";
             string target = template;
             object syncLock = null;
-            Assert.Equal(template, LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => template + "bar"));
+            Assert.Equal(
+                template,
+                LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => template + "bar")
+            );
             Assert.Equal(template, target);
             Assert.Null(syncLock);
         }
@@ -575,9 +890,17 @@ namespace System.Tests
         {
             string target = null;
             object syncLock = null;
-            Assert.Throws<InvalidOperationException>(() => LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => null));
+            Assert.Throws<InvalidOperationException>(() =>
+                LazyInitializer.EnsureInitialized(ref target, ref syncLock, () => null)
+            );
         }
-        private static void VerifyLazy<T>(Lazy<T> lazy, T expectedValue, bool hasValue, bool isValueCreated)
+
+        private static void VerifyLazy<T>(
+            Lazy<T> lazy,
+            T expectedValue,
+            bool hasValue,
+            bool isValueCreated
+        )
         {
             Assert.Equal(isValueCreated, lazy.IsValueCreated);
             if (hasValue)
@@ -602,10 +925,16 @@ namespace System.Tests
         private struct LIX
         {
             public int f;
-            public LIX(int f) { this.f = f; }
+
+            public LIX(int f)
+            {
+                this.f = f;
+            }
 
             public override bool Equals(object other) => other is LIX && ((LIX)other).f == f;
+
             public override int GetHashCode() => f.GetHashCode();
+
             public override string ToString() => "LIX<" + f + ">";
         }
     }

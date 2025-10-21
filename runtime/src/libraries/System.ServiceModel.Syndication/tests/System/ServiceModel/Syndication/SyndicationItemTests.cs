@@ -35,7 +35,12 @@ namespace System.ServiceModel.Syndication.Tests
         {
             yield return new object[] { null, null, null };
             yield return new object[] { "", "", new Uri("http://microsoft.com") };
-            yield return new object[] { "title", "content", new Uri("/relative", UriKind.Relative) };
+            yield return new object[]
+            {
+                "title",
+                "content",
+                new Uri("/relative", UriKind.Relative),
+            };
         }
 
         [Theory]
@@ -53,7 +58,9 @@ namespace System.ServiceModel.Syndication.Tests
             }
             else
             {
-                TextSyndicationContent textContent = Assert.IsType<TextSyndicationContent>(item.Content);
+                TextSyndicationContent textContent = Assert.IsType<TextSyndicationContent>(
+                    item.Content
+                );
                 Assert.Empty(textContent.AttributeExtensions);
                 Assert.Equal(content, textContent.Text);
                 Assert.Equal("text", textContent.Type);
@@ -97,13 +104,33 @@ namespace System.ServiceModel.Syndication.Tests
         public static IEnumerable<object[]> Ctor_String_String_Uri_String_DateTimeOffset_TestData()
         {
             yield return new object[] { null, null, null, null, default(DateTimeOffset) };
-            yield return new object[] { "", "", new Uri("http://microsoft.com"), "", DateTimeOffset.Now };
-            yield return new object[] { "title", "content", new Uri("/relative", UriKind.Relative), "id", DateTimeOffset.Now.AddDays(2) };
+            yield return new object[]
+            {
+                "",
+                "",
+                new Uri("http://microsoft.com"),
+                "",
+                DateTimeOffset.Now,
+            };
+            yield return new object[]
+            {
+                "title",
+                "content",
+                new Uri("/relative", UriKind.Relative),
+                "id",
+                DateTimeOffset.Now.AddDays(2),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_String_Uri_String_DateTimeOffset_TestData))]
-        public void Ctor_String_String_Uri_String_DateTimeOffset(string title, string content, Uri itemAlternateLink, string id, DateTimeOffset lastUpdatedTime)
+        public void Ctor_String_String_Uri_String_DateTimeOffset(
+            string title,
+            string content,
+            Uri itemAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
         {
             var item = new SyndicationItem(title, content, itemAlternateLink, id, lastUpdatedTime);
             Assert.Empty(item.AttributeExtensions);
@@ -116,7 +143,9 @@ namespace System.ServiceModel.Syndication.Tests
             }
             else
             {
-                TextSyndicationContent textContent = Assert.IsType<TextSyndicationContent>(item.Content);
+                TextSyndicationContent textContent = Assert.IsType<TextSyndicationContent>(
+                    item.Content
+                );
                 Assert.Empty(textContent.AttributeExtensions);
                 Assert.Equal(content, textContent.Text);
                 Assert.Equal("text", textContent.Type);
@@ -160,13 +189,33 @@ namespace System.ServiceModel.Syndication.Tests
         public static IEnumerable<object[]> Ctor_String_SyndicationContent_Uri_String_DateTimeOffset_TestData()
         {
             yield return new object[] { null, null, null, null, default(DateTimeOffset) };
-            yield return new object[] { "",  new TextSyndicationContent("text"), new Uri("http://microsoft.com"), "", DateTimeOffset.Now };
-            yield return new object[] { "title", new TextSyndicationContent("text", TextSyndicationContentKind.XHtml), new Uri("/relative", UriKind.Relative), "id", DateTimeOffset.Now.AddDays(2) };
+            yield return new object[]
+            {
+                "",
+                new TextSyndicationContent("text"),
+                new Uri("http://microsoft.com"),
+                "",
+                DateTimeOffset.Now,
+            };
+            yield return new object[]
+            {
+                "title",
+                new TextSyndicationContent("text", TextSyndicationContentKind.XHtml),
+                new Uri("/relative", UriKind.Relative),
+                "id",
+                DateTimeOffset.Now.AddDays(2),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_SyndicationContent_Uri_String_DateTimeOffset_TestData))]
-        public void Ctor_String_SyndicationContent_Uri_String_DateTimeOffset(string title, SyndicationContent content, Uri itemAlternateLink, string id, DateTimeOffset lastUpdatedTime)
+        public void Ctor_String_SyndicationContent_Uri_String_DateTimeOffset(
+            string title,
+            SyndicationContent content,
+            Uri itemAlternateLink,
+            string id,
+            DateTimeOffset lastUpdatedTime
+        )
         {
             var item = new SyndicationItem(title, content, itemAlternateLink, id, lastUpdatedTime);
             Assert.Empty(item.AttributeExtensions);
@@ -213,17 +262,33 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_SyndicationItem_Full()
         {
-            var original = new SyndicationItem("title", new TextSyndicationContent("content", TextSyndicationContentKind.Html), new Uri("http://microsoft.com"), "id", DateTimeOffset.MinValue.AddTicks(10));
+            var original = new SyndicationItem(
+                "title",
+                new TextSyndicationContent("content", TextSyndicationContentKind.Html),
+                new Uri("http://microsoft.com"),
+                "id",
+                DateTimeOffset.MinValue.AddTicks(10)
+            );
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");
             original.Authors.Add(new SyndicationPerson("email", "author", "uri"));
             original.BaseUri = new Uri("http://category_baseuri.com");
             original.Categories.Add(new SyndicationCategory("category"));
             original.Contributors.Add(new SyndicationPerson("name", "contributor", "uri"));
-            original.Copyright = new TextSyndicationContent("copyright", TextSyndicationContentKind.Plaintext);
+            original.Copyright = new TextSyndicationContent(
+                "copyright",
+                TextSyndicationContentKind.Plaintext
+            );
             original.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             original.PublishDate = DateTimeOffset.MinValue.AddTicks(11);
-            original.SourceFeed = new SyndicationFeed("title", "description", new Uri("http://microsoft.com"));
-            original.Summary = new TextSyndicationContent("summary", TextSyndicationContentKind.Html);
+            original.SourceFeed = new SyndicationFeed(
+                "title",
+                "description",
+                new Uri("http://microsoft.com")
+            );
+            original.Summary = new TextSyndicationContent(
+                "summary",
+                TextSyndicationContentKind.Html
+            );
 
             var clone = new SyndicationItemSubclass(original);
             Assert.NotSame(clone.AttributeExtensions, original.AttributeExtensions);
@@ -302,7 +367,10 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => new SyndicationItemSubclass(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => new SyndicationItemSubclass(null)
+            );
         }
 
         [Fact]
@@ -327,7 +395,10 @@ namespace System.ServiceModel.Syndication.Tests
         public void AddPermalink_NullPermalink_ThrowsArgumentNullException()
         {
             var item = new SyndicationItem();
-            AssertExtensions.Throws<ArgumentNullException>("permalink", () => item.AddPermalink(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "permalink",
+                () => item.AddPermalink(null)
+            );
         }
 
         [Fact]
@@ -341,24 +412,46 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Load_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => SyndicationItem.Load(null));
-            AssertExtensions.Throws<ArgumentNullException>("reader", () => SyndicationItem.Load<SyndicationItem>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () => SyndicationItem.Load(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "reader",
+                () => SyndicationItem.Load<SyndicationItem>(null)
+            );
         }
 
         [Fact]
         public void Clone_Full_ReturnsExpected()
         {
-            var original = new SyndicationItem("title", new TextSyndicationContent("content", TextSyndicationContentKind.Html), new Uri("http://microsoft.com"), "id", DateTimeOffset.MinValue.AddTicks(10));
+            var original = new SyndicationItem(
+                "title",
+                new TextSyndicationContent("content", TextSyndicationContentKind.Html),
+                new Uri("http://microsoft.com"),
+                "id",
+                DateTimeOffset.MinValue.AddTicks(10)
+            );
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");
             original.Authors.Add(new SyndicationPerson("email", "author", "uri"));
             original.BaseUri = new Uri("http://category_baseuri.com");
             original.Categories.Add(new SyndicationCategory("category"));
             original.Contributors.Add(new SyndicationPerson("name", "contributor", "uri"));
-            original.Copyright = new TextSyndicationContent("copyright", TextSyndicationContentKind.Plaintext);
+            original.Copyright = new TextSyndicationContent(
+                "copyright",
+                TextSyndicationContentKind.Plaintext
+            );
             original.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             original.PublishDate = DateTimeOffset.MinValue.AddTicks(11);
-            original.SourceFeed = new SyndicationFeed("title", "description", new Uri("http://microsoft.com"));
-            original.Summary = new TextSyndicationContent("summary", TextSyndicationContentKind.Html);
+            original.SourceFeed = new SyndicationFeed(
+                "title",
+                "description",
+                new Uri("http://microsoft.com")
+            );
+            original.Summary = new TextSyndicationContent(
+                "summary",
+                TextSyndicationContentKind.Html
+            );
 
             SyndicationItem clone = original.Clone();
             Assert.NotSame(clone.AttributeExtensions, original.AttributeExtensions);
@@ -438,7 +531,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void GetAtom10Formatter_Invoke_ReturnsExpected()
         {
             var item = new SyndicationItem();
-            Atom10ItemFormatter formatter = Assert.IsType<Atom10ItemFormatter>(item.GetAtom10Formatter());
+            Atom10ItemFormatter formatter = Assert.IsType<Atom10ItemFormatter>(
+                item.GetAtom10Formatter()
+            );
             Assert.Same(item, formatter.Item);
             Assert.True(formatter.PreserveAttributeExtensions);
             Assert.True(formatter.PreserveElementExtensions);
@@ -451,7 +546,9 @@ namespace System.ServiceModel.Syndication.Tests
         public void GetRss20Formatter_Invoke_ReturnsExpected(bool serializeExtensionsAsAtom)
         {
             var item = new SyndicationItem();
-            Rss20ItemFormatter formatter = Assert.IsType<Rss20ItemFormatter>(item.GetRss20Formatter(serializeExtensionsAsAtom));
+            Rss20ItemFormatter formatter = Assert.IsType<Rss20ItemFormatter>(
+                item.GetRss20Formatter(serializeExtensionsAsAtom)
+            );
             Assert.Same(item, formatter.Item);
             Assert.True(formatter.PreserveAttributeExtensions);
             Assert.True(formatter.PreserveElementExtensions);
@@ -506,7 +603,12 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("name", "http://www.w3.org/2000/xmlns/", "value", "version")]
         [InlineData("type", "ns", "value", "version")]
         [InlineData("name", "http://www.w3.org/2001/XMLSchema-instance", "value", "version")]
-        public void TryParseAttribute_Invoke_ReturnsFalse(string name, string ns, string value, string version)
+        public void TryParseAttribute_Invoke_ReturnsFalse(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             var item = new SyndicationItemSubclass();
             Assert.False(item.TryParseAttributeEntryPoint(name, ns, value, version));
@@ -516,15 +618,31 @@ namespace System.ServiceModel.Syndication.Tests
         {
             yield return new object[] { null, null, null };
             yield return new object[] { new XElement("name").CreateReader(), "", "" };
-            yield return new object[] { new XElement("name").CreateReader(), "contentType", "version" };
+            yield return new object[]
+            {
+                new XElement("name").CreateReader(),
+                "contentType",
+                "version",
+            };
         }
 
         [Theory]
         [MemberData(nameof(TryParseContent_TestData))]
-        public void TryParseContent_Invoke_ReturnsFalse(XmlReader reader, string contentType, string version)
+        public void TryParseContent_Invoke_ReturnsFalse(
+            XmlReader reader,
+            string contentType,
+            string version
+        )
         {
             var item = new SyndicationItemSubclass();
-            Assert.False(item.TryParseContentEntryPoint(reader, contentType, version, out SyndicationContent content));
+            Assert.False(
+                item.TryParseContentEntryPoint(
+                    reader,
+                    contentType,
+                    version,
+                    out SyndicationContent content
+                )
+            );
             Assert.Null(content);
         }
 
@@ -550,19 +668,28 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var item = new SyndicationItemSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => item.WriteAttributeExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => item.WriteAttributeExtensionsEntryPoint(writer, version)
+            );
 
             item.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             item.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             item.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => item.WriteAttributeExtensionsEntryPoint(writer, "version"));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => item.WriteAttributeExtensionsEntryPoint(writer, "version")
+            );
         }
 
         [Fact]
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var item = new SyndicationItemSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => item.WriteAttributeExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => item.WriteAttributeExtensionsEntryPoint(null, "version")
+            );
         }
 
         [Theory]
@@ -572,31 +699,41 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var item = new SyndicationItemSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => item.WriteElementExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => item.WriteElementExtensionsEntryPoint(writer, version)
+            );
 
             item.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             item.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<SyndicationItemTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<SyndicationItemTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </SyndicationItemTests.ExtensionObject>
 <SyndicationItemTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</SyndicationItemTests.ExtensionObject>", writer => item.WriteElementExtensionsEntryPoint(writer, version));
+</SyndicationItemTests.ExtensionObject>",
+                writer => item.WriteElementExtensionsEntryPoint(writer, version)
+            );
         }
 
         [Fact]
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var item = new SyndicationItemSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => item.WriteElementExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => item.WriteElementExtensionsEntryPoint(null, "version")
+            );
         }
 
         private class SyndicationItemSubclass : SyndicationItem
         {
-            public SyndicationItemSubclass() : base() { }
+            public SyndicationItemSubclass()
+                : base() { }
 
-            public SyndicationItemSubclass(SyndicationItem source) : base(source) { }
+            public SyndicationItemSubclass(SyndicationItem source)
+                : base(source) { }
 
             public SyndicationCategory CreateCategoryEntryPoint() => CreateCategory();
 
@@ -604,18 +741,31 @@ namespace System.ServiceModel.Syndication.Tests
 
             public SyndicationPerson CreatePersonEntryPoint() => CreatePerson();
 
-            public bool TryParseAttributeEntryPoint(string name, string ns, string value, string version) => TryParseAttribute(name, ns, value, version);
+            public bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => TryParseAttribute(name, ns, value, version);
 
-            public bool TryParseContentEntryPoint(XmlReader reader, string contentType, string version, out SyndicationContent content)
+            public bool TryParseContentEntryPoint(
+                XmlReader reader,
+                string contentType,
+                string version,
+                out SyndicationContent content
+            )
             {
                 return TryParseContent(reader, contentType, version, out content);
             }
 
-            public bool TryParseElementEntryPoint(XmlReader reader, string version) => TryParseElement(reader, version);
+            public bool TryParseElementEntryPoint(XmlReader reader, string version) =>
+                TryParseElement(reader, version);
 
-            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) => WriteAttributeExtensions(writer, version);
+            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteAttributeExtensions(writer, version);
 
-            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) => WriteElementExtensions(writer, version);
+            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteElementExtensions(writer, version);
         }
 
         [DataContract]

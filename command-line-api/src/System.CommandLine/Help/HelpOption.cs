@@ -22,9 +22,8 @@ namespace System.CommandLine.Help
         ///    /?
         /// </code>
         /// </summary>
-        public HelpOption() : this("--help", new[] { "-h", "/h", "-?", "/?" })
-        {
-        }
+        public HelpOption()
+            : this("--help", new[] { "-h", "/h", "-?", "/?" }) { }
 
         /// <summary>
         /// When added to a <see cref="CliCommand"/>, it configures the application to show help when given name or one of the aliases are specified on the command line.
@@ -37,9 +36,9 @@ namespace System.CommandLine.Help
         }
 
         /// <inheritdoc />
-        public override CliAction? Action 
-        { 
-            get => _action ??= new HelpAction(); 
+        public override CliAction? Action
+        {
+            get => _action ??= new HelpAction();
             set => _action = value ?? throw new ArgumentNullException(nameof(value));
         }
     }

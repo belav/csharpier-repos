@@ -30,70 +30,68 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TableRowCollection_GetRowIndex_T
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class TableRowCollection_GetRowIndex_T : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
-			base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
+            base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
 
+            System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
 
-			System.Web.UI.WebControls.TableRow tblRow = new System.Web.UI.WebControls.TableRow();
-			try 
-			{
-				base.GHTSubTestBegin("GetRowIndex");
-				base.GHTActiveSubTest.Controls.Add(tbl);
-				base.GHTSubTestAddResult("GetRowIndex=" + tbl.Rows.GetRowIndex(tblRow));
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
+            System.Web.UI.WebControls.TableRow tblRow = new System.Web.UI.WebControls.TableRow();
+            try
+            {
+                base.GHTSubTestBegin("GetRowIndex");
+                base.GHTActiveSubTest.Controls.Add(tbl);
+                base.GHTSubTestAddResult("GetRowIndex=" + tbl.Rows.GetRowIndex(tblRow));
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
 
-			tbl.Rows.Add(tblRow);
-			try 
-			{
-				base.GHTSubTestBegin("GetRowIndex");
-				base.GHTSubTestAddResult("GetRowIndex=" + tbl.Rows.GetRowIndex(tblRow));
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
+            tbl.Rows.Add(tblRow);
+            try
+            {
+                base.GHTSubTestBegin("GetRowIndex");
+                base.GHTSubTestAddResult("GetRowIndex=" + tbl.Rows.GetRowIndex(tblRow));
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
 
-			base.GHTTestEnd();
-		}
-	}
+            base.GHTTestEnd();
+        }
+    }
 }

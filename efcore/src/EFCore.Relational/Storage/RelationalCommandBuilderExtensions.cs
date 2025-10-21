@@ -23,7 +23,8 @@ public static class RelationalCommandBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static IRelationalCommandBuilder AppendLine(
         this IRelationalCommandBuilder commandBuilder,
-        string value)
+        string value
+    )
     {
         commandBuilder.Append(value).AppendLine();
 
@@ -41,7 +42,8 @@ public static class RelationalCommandBuilderExtensions
     public static IRelationalCommandBuilder AppendLines(
         this IRelationalCommandBuilder commandBuilder,
         string value,
-        bool skipFinalNewline = false)
+        bool skipFinalNewline = false
+    )
     {
         using (var reader = new StringReader(value))
         {
@@ -78,8 +80,8 @@ public static class RelationalCommandBuilderExtensions
     /// </summary>
     /// <param name="commandBuilder">The command builder.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static IDisposable Indent(this IRelationalCommandBuilder commandBuilder)
-        => new Indenter(commandBuilder);
+    public static IDisposable Indent(this IRelationalCommandBuilder commandBuilder) =>
+        new Indenter(commandBuilder);
 
     /// <summary>
     ///     Adds a parameter.
@@ -98,8 +100,8 @@ public static class RelationalCommandBuilderExtensions
     public static IRelationalCommandBuilder AddParameter(
         this IRelationalCommandBuilder commandBuilder,
         string invariantName,
-        string name)
-        => throw new InvalidOperationException("Use overload which takes TypeMapping argument.");
+        string name
+    ) => throw new InvalidOperationException("Use overload which takes TypeMapping argument.");
 
     /// <summary>
     ///     Adds a parameter.
@@ -123,14 +125,17 @@ public static class RelationalCommandBuilderExtensions
         string name,
         RelationalTypeMapping relationalTypeMapping,
         bool? nullable,
-        ParameterDirection direction = ParameterDirection.Input)
-        => commandBuilder.AddParameter(
+        ParameterDirection direction = ParameterDirection.Input
+    ) =>
+        commandBuilder.AddParameter(
             new TypeMappedRelationalParameter(
                 invariantName,
                 name,
                 relationalTypeMapping,
                 nullable,
-                direction));
+                direction
+            )
+        );
 
     /// <summary>
     ///     Adds a parameter that is ultimately represented as multiple <see cref="DbParameter" />s in the
@@ -147,14 +152,14 @@ public static class RelationalCommandBuilderExtensions
     public static IRelationalCommandBuilder AddCompositeParameter(
         this IRelationalCommandBuilder commandBuilder,
         string invariantName,
-        IReadOnlyList<IRelationalParameter> subParameters)
+        IReadOnlyList<IRelationalParameter> subParameters
+    )
     {
         if (subParameters.Count > 0)
         {
             commandBuilder.AddParameter(
-                new CompositeRelationalParameter(
-                    invariantName,
-                    subParameters));
+                new CompositeRelationalParameter(invariantName, subParameters)
+            );
         }
 
         return commandBuilder;
@@ -174,9 +179,8 @@ public static class RelationalCommandBuilderExtensions
     public static IRelationalCommandBuilder AddRawParameter(
         this IRelationalCommandBuilder commandBuilder,
         string invariantName,
-        DbParameter dbParameter)
-        => commandBuilder.AddParameter(
-            new RawRelationalParameter(invariantName, dbParameter));
+        DbParameter dbParameter
+    ) => commandBuilder.AddParameter(new RawRelationalParameter(invariantName, dbParameter));
 
     private sealed class Indenter : IDisposable
     {
@@ -189,7 +193,6 @@ public static class RelationalCommandBuilderExtensions
             _builder.IncrementIndent();
         }
 
-        public void Dispose()
-            => _builder.DecrementIndent();
+        public void Dispose() => _builder.DecrementIndent();
     }
 }

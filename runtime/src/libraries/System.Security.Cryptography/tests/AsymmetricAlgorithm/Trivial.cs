@@ -96,12 +96,12 @@ namespace System.Security.Cryptography.Tests.Asymmetric
             public Trivial()
             {
                 LegalKeySizesValue = new KeySizes[]
-                    {
-                        new KeySizes(5*8, -99*8, 0*8),
-                        new KeySizes(13*8, 22*8, 6*8),
-                        new KeySizes(101*8, 104*8, 1*8),
-                        new KeySizes(101*8 + 1, 101*8 + 2, 1),
-                    };
+                {
+                    new KeySizes(5 * 8, -99 * 8, 0 * 8),
+                    new KeySizes(13 * 8, 22 * 8, 6 * 8),
+                    new KeySizes(101 * 8, 104 * 8, 1 * 8),
+                    new KeySizes(101 * 8 + 1, 101 * 8 + 2, 1),
+                };
             }
 
             public void SetKeySize(int keySize)

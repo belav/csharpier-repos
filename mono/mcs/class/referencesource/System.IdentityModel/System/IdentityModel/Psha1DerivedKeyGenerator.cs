@@ -7,8 +7,8 @@ namespace System.IdentityModel
     using System;
     using System.IO;
     using System.Security.Cryptography;
-    using System.Text;
     using System.ServiceModel.Diagnostics;
+    using System.Text;
 
     sealed class Psha1DerivedKeyGenerator
     {
@@ -23,7 +23,12 @@ namespace System.IdentityModel
             this.key = key;
         }
 
-        public byte[] GenerateDerivedKey(byte[] label, byte[] nonce, int derivedKeySize, int position)
+        public byte[] GenerateDerivedKey(
+            byte[] label,
+            byte[] nonce,
+            int derivedKeySize,
+            int position
+        )
         {
             if (label == null)
             {
@@ -54,7 +59,9 @@ namespace System.IdentityModel
             public ManagedPsha1(byte[] secret, byte[] label, byte[] seed)
             {
                 this.secret = secret;
-                this.seed = DiagnosticUtility.Utility.AllocateByteArray(checked(label.Length + seed.Length));
+                this.seed = DiagnosticUtility.Utility.AllocateByteArray(
+                    checked(label.Length + seed.Length)
+                );
                 label.CopyTo(this.seed, 0);
                 seed.CopyTo(this.seed, label.Length);
 
@@ -64,18 +71,30 @@ namespace System.IdentityModel
                 this.position = 0;
                 this.hmac = CryptoHelper.NewHmacSha1KeyedHashAlgorithm(secret);
 
-                this.buffer = DiagnosticUtility.Utility.AllocateByteArray(checked(this.hmac.HashSize / 8 + this.seed.Length));
+                this.buffer = DiagnosticUtility.Utility.AllocateByteArray(
+                    checked(this.hmac.HashSize / 8 + this.seed.Length)
+                );
             }
 
             public byte[] GetDerivedKey(int derivedKeySize, int position)
             {
                 if (derivedKeySize < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("derivedKeySize", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "derivedKeySize",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 if (this.position > position)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("position", SR.GetString(SR.ValueMustBeInRange, 0, this.position)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "position",
+                            SR.GetString(SR.ValueMustBeInRange, 0, this.position)
+                        )
+                    );
                 }
 
                 // Seek to the desired position in the pseudo-random stream.

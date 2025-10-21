@@ -25,31 +25,31 @@
 // THE SOFTWARE.
 using System;
 
-namespace Mono.Security.Protocol.Ntlm {
-	
-	/*
-	 * On Windows, this is controlled by a registry setting
-	 * (http://msdn.microsoft.com/en-us/library/ms814176.aspx)
-	 *
-	 * This can be configured by setting the static
-	 * Type3Message.DefaultAuthLevel property, the default value
-	 * is LM_and_NTLM_and_try_NTLMv2_Session.
-	 */
-	
-	public enum NtlmAuthLevel {
-		/* Use LM and NTLM, never use NTLMv2 session security. */
-		LM_and_NTLM,
-		
-		/* Use NTLMv2 session security if the server supports it,
-		 * otherwise fall back to LM and NTLM. */
-		LM_and_NTLM_and_try_NTLMv2_Session,
-		
-		/* Use NTLMv2 session security if the server supports it,
-		 * otherwise fall back to NTLM.  Never use LM. */
-		NTLM_only,
-		
-		/* Use NTLMv2 only. */
-		NTLMv2_only,
-	}
-}
+namespace Mono.Security.Protocol.Ntlm
+{
+    /*
+     * On Windows, this is controlled by a registry setting
+     * (http://msdn.microsoft.com/en-us/library/ms814176.aspx)
+     *
+     * This can be configured by setting the static
+     * Type3Message.DefaultAuthLevel property, the default value
+     * is LM_and_NTLM_and_try_NTLMv2_Session.
+     */
 
+    public enum NtlmAuthLevel
+    {
+        /* Use LM and NTLM, never use NTLMv2 session security. */
+        LM_and_NTLM,
+
+        /* Use NTLMv2 session security if the server supports it,
+         * otherwise fall back to LM and NTLM. */
+        LM_and_NTLM_and_try_NTLMv2_Session,
+
+        /* Use NTLMv2 session security if the server supports it,
+         * otherwise fall back to NTLM.  Never use LM. */
+        NTLM_only,
+
+        /* Use NTLMv2 only. */
+        NTLMv2_only,
+    }
+}

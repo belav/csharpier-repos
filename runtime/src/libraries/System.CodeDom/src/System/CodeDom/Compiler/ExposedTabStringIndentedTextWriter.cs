@@ -8,7 +8,8 @@ namespace System.CodeDom.Compiler
 {
     internal sealed class ExposedTabStringIndentedTextWriter : IndentedTextWriter
     {
-        public ExposedTabStringIndentedTextWriter(TextWriter writer, string tabString) : base(writer, tabString)
+        public ExposedTabStringIndentedTextWriter(TextWriter writer, string tabString)
+            : base(writer, tabString)
         {
             Debug.Assert(tabString != null, "CodeGeneratorOptions can never have a null TabString");
             TabString = tabString;
@@ -48,10 +49,18 @@ namespace System.CodeDom.Compiler
 
                     switch (_indent)
                     {
-                        case 1: _s = tabString; break;
-                        case 2: _s = tabString + tabString; break;
-                        case 3: _s = tabString + tabString + tabString; break;
-                        case 4: _s = tabString + tabString + tabString + tabString; break;
+                        case 1:
+                            _s = tabString;
+                            break;
+                        case 2:
+                            _s = tabString + tabString;
+                            break;
+                        case 3:
+                            _s = tabString + tabString + tabString;
+                            break;
+                        case 4:
+                            _s = tabString + tabString + tabString + tabString;
+                            break;
                         default:
                             var args = new string[_indent];
                             for (int i = 0; i < args.Length; i++)

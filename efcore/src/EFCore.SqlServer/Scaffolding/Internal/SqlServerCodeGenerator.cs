@@ -11,19 +11,23 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 /// </summary>
 public class SqlServerCodeGenerator : ProviderCodeGenerator
 {
-    private static readonly MethodInfo UseSqlServerMethodInfo
-        = typeof(SqlServerDbContextOptionsExtensions).GetRuntimeMethod(
+    private static readonly MethodInfo UseSqlServerMethodInfo =
+        typeof(SqlServerDbContextOptionsExtensions).GetRuntimeMethod(
             nameof(SqlServerDbContextOptionsExtensions.UseSqlServer),
-            new[] { typeof(DbContextOptionsBuilder), typeof(string), typeof(Action<SqlServerDbContextOptionsBuilder>) })!;
+            new[]
+            {
+                typeof(DbContextOptionsBuilder),
+                typeof(string),
+                typeof(Action<SqlServerDbContextOptionsBuilder>),
+            }
+        )!;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="SqlServerCodeGenerator" /> class.
     /// </summary>
     /// <param name="dependencies">The dependencies.</param>
     public SqlServerCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,10 +37,16 @@ public class SqlServerCodeGenerator : ProviderCodeGenerator
     /// </summary>
     public override MethodCallCodeFragment GenerateUseProvider(
         string connectionString,
-        MethodCallCodeFragment? providerOptions)
-        => new(
+        MethodCallCodeFragment? providerOptions
+    ) =>
+        new(
             UseSqlServerMethodInfo,
             providerOptions == null
                 ? new object[] { connectionString }
-                : new object[] { connectionString, new NestedClosureCodeFragment("x", providerOptions) });
+                : new object[]
+                {
+                    connectionString,
+                    new NestedClosureCodeFragment("x", providerOptions),
+                }
+        );
 }

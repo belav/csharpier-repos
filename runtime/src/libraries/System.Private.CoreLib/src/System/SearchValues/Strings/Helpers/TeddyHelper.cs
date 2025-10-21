@@ -20,8 +20,11 @@ namespace System.Buffers
         public static (Vector128<byte> Result, Vector128<byte> Prev0) ProcessInputN2(
             Vector128<byte> input,
             Vector128<byte> prev0,
-            Vector128<byte> n0Low, Vector128<byte> n0High,
-            Vector128<byte> n1Low, Vector128<byte> n1High)
+            Vector128<byte> n0Low,
+            Vector128<byte> n0High,
+            Vector128<byte> n1Low,
+            Vector128<byte> n1High
+        )
         {
             // See the full description of ProcessInputN3 below for more details.
             // This method follows the same pattern as ProcessInputN3, but compares 2 bytes of each bucket at a time instead of 3.
@@ -48,8 +51,11 @@ namespace System.Buffers
         public static (Vector256<byte> Result, Vector256<byte> Prev0) ProcessInputN2(
             Vector256<byte> input,
             Vector256<byte> prev0,
-            Vector256<byte> n0Low, Vector256<byte> n0High,
-            Vector256<byte> n1Low, Vector256<byte> n1High)
+            Vector256<byte> n0Low,
+            Vector256<byte> n0High,
+            Vector256<byte> n1Low,
+            Vector256<byte> n1High
+        )
         {
             // See comments in 'ProcessInputN2' for Vector128<byte> above.
             // This method is the same, but operates on 32 input characters at a time.
@@ -70,8 +76,11 @@ namespace System.Buffers
         public static (Vector512<byte> Result, Vector512<byte> Prev0) ProcessInputN2(
             Vector512<byte> input,
             Vector512<byte> prev0,
-            Vector512<byte> n0Low, Vector512<byte> n0High,
-            Vector512<byte> n1Low, Vector512<byte> n1High)
+            Vector512<byte> n0Low,
+            Vector512<byte> n0High,
+            Vector512<byte> n1Low,
+            Vector512<byte> n1High
+        )
         {
             // See comments in 'ProcessInputN2' for Vector128<byte> above.
             // This method is the same, but operates on 64 input characters at a time.
@@ -90,12 +99,21 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd.Arm64))]
-        public static (Vector128<byte> Result, Vector128<byte> Prev0, Vector128<byte> Prev1) ProcessInputN3(
+        public static (
+            Vector128<byte> Result,
+            Vector128<byte> Prev0,
+            Vector128<byte> Prev1
+        ) ProcessInputN3(
             Vector128<byte> input,
-            Vector128<byte> prev0, Vector128<byte> prev1,
-            Vector128<byte> n0Low, Vector128<byte> n0High,
-            Vector128<byte> n1Low, Vector128<byte> n1High,
-            Vector128<byte> n2Low, Vector128<byte> n2High)
+            Vector128<byte> prev0,
+            Vector128<byte> prev1,
+            Vector128<byte> n0Low,
+            Vector128<byte> n0High,
+            Vector128<byte> n1Low,
+            Vector128<byte> n1High,
+            Vector128<byte> n2Low,
+            Vector128<byte> n2High
+        )
         {
             // This is the core operation of the Teddy algorithm that determines which of the buckets contain potential matches.
             // Every input bitmap argument (n0Low, n0High, ...) encodes a mapping of each of the possible 16 nibble values into an 8-bit bitmap.
@@ -159,12 +177,21 @@ namespace System.Buffers
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        public static (Vector256<byte> Result, Vector256<byte> Prev0, Vector256<byte> Prev1) ProcessInputN3(
+        public static (
+            Vector256<byte> Result,
+            Vector256<byte> Prev0,
+            Vector256<byte> Prev1
+        ) ProcessInputN3(
             Vector256<byte> input,
-            Vector256<byte> prev0, Vector256<byte> prev1,
-            Vector256<byte> n0Low, Vector256<byte> n0High,
-            Vector256<byte> n1Low, Vector256<byte> n1High,
-            Vector256<byte> n2Low, Vector256<byte> n2High)
+            Vector256<byte> prev0,
+            Vector256<byte> prev1,
+            Vector256<byte> n0Low,
+            Vector256<byte> n0High,
+            Vector256<byte> n1Low,
+            Vector256<byte> n1High,
+            Vector256<byte> n2Low,
+            Vector256<byte> n2High
+        )
         {
             // See comments in 'ProcessInputN3' for Vector128<byte> above.
             // This method is the same, but operates on 32 input characters at a time.
@@ -184,12 +211,21 @@ namespace System.Buffers
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx512BW))]
-        public static (Vector512<byte> Result, Vector512<byte> Prev0, Vector512<byte> Prev1) ProcessInputN3(
+        public static (
+            Vector512<byte> Result,
+            Vector512<byte> Prev0,
+            Vector512<byte> Prev1
+        ) ProcessInputN3(
             Vector512<byte> input,
-            Vector512<byte> prev0, Vector512<byte> prev1,
-            Vector512<byte> n0Low, Vector512<byte> n0High,
-            Vector512<byte> n1Low, Vector512<byte> n1High,
-            Vector512<byte> n2Low, Vector512<byte> n2High)
+            Vector512<byte> prev0,
+            Vector512<byte> prev1,
+            Vector512<byte> n0Low,
+            Vector512<byte> n0High,
+            Vector512<byte> n1Low,
+            Vector512<byte> n1High,
+            Vector512<byte> n2Low,
+            Vector512<byte> n2High
+        )
         {
             // See comments in 'ProcessInputN3' for Vector128<byte> above.
             // This method is the same, but operates on 64 input characters at a time.
@@ -215,11 +251,17 @@ namespace System.Buffers
         public static Vector128<byte> LoadAndPack16AsciiChars(ref char source)
         {
             Vector128<ushort> source0 = Vector128.LoadUnsafe(ref source);
-            Vector128<ushort> source1 = Vector128.LoadUnsafe(ref source, (nuint)Vector128<ushort>.Count);
+            Vector128<ushort> source1 = Vector128.LoadUnsafe(
+                ref source,
+                (nuint)Vector128<ushort>.Count
+            );
 
             return Sse2.IsSupported
                 ? Sse2.PackUnsignedSaturate(source0.AsInt16(), source1.AsInt16())
-                : AdvSimd.ExtractNarrowingSaturateUpper(AdvSimd.ExtractNarrowingSaturateLower(source0), source1);
+                : AdvSimd.ExtractNarrowingSaturateUpper(
+                    AdvSimd.ExtractNarrowingSaturateLower(source0),
+                    source1
+                );
         }
 
         // Read two Vector512<ushort> and concatenate their lower bytes together into a single Vector512<byte>.
@@ -229,9 +271,15 @@ namespace System.Buffers
         public static Vector256<byte> LoadAndPack32AsciiChars(ref char source)
         {
             Vector256<ushort> source0 = Vector256.LoadUnsafe(ref source);
-            Vector256<ushort> source1 = Vector256.LoadUnsafe(ref source, (nuint)Vector256<ushort>.Count);
+            Vector256<ushort> source1 = Vector256.LoadUnsafe(
+                ref source,
+                (nuint)Vector256<ushort>.Count
+            );
 
-            Vector256<byte> packed = Avx2.PackUnsignedSaturate(source0.AsInt16(), source1.AsInt16());
+            Vector256<byte> packed = Avx2.PackUnsignedSaturate(
+                source0.AsInt16(),
+                source1.AsInt16()
+            );
 
             return PackedSpanHelpers.FixUpPackedVector256Result(packed);
         }
@@ -243,9 +291,15 @@ namespace System.Buffers
         public static Vector512<byte> LoadAndPack64AsciiChars(ref char source)
         {
             Vector512<ushort> source0 = Vector512.LoadUnsafe(ref source);
-            Vector512<ushort> source1 = Vector512.LoadUnsafe(ref source, (nuint)Vector512<ushort>.Count);
+            Vector512<ushort> source1 = Vector512.LoadUnsafe(
+                ref source,
+                (nuint)Vector512<ushort>.Count
+            );
 
-            Vector512<byte> packed = Avx512BW.PackUnsignedSaturate(source0.AsInt16(), source1.AsInt16());
+            Vector512<byte> packed = Avx512BW.PackUnsignedSaturate(
+                source0.AsInt16(),
+                source1.AsInt16()
+            );
 
             return PackedSpanHelpers.FixUpPackedVector512Result(packed);
         }
@@ -257,9 +311,7 @@ namespace System.Buffers
         {
             // 'low' is not strictly correct here, but we take advantage of Ssse3.Shuffle's behavior
             // of doing an implicit 'AND 0xF' in order to skip the redundant AND.
-            Vector128<byte> low = Ssse3.IsSupported
-                ? input
-                : input & Vector128.Create((byte)0xF);
+            Vector128<byte> low = Ssse3.IsSupported ? input : input & Vector128.Create((byte)0xF);
 
             Vector128<byte> high = input >>> 4;
 
@@ -293,21 +345,36 @@ namespace System.Buffers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Ssse3))]
         [CompExactlyDependsOn(typeof(AdvSimd.Arm64))]
-        private static Vector128<byte> Shuffle(Vector128<byte> maskLow, Vector128<byte> maskHigh, Vector128<byte> low, Vector128<byte> high)
+        private static Vector128<byte> Shuffle(
+            Vector128<byte> maskLow,
+            Vector128<byte> maskHigh,
+            Vector128<byte> low,
+            Vector128<byte> high
+        )
         {
             return Vector128.ShuffleUnsafe(maskLow, low) & Vector128.ShuffleUnsafe(maskHigh, high);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx2))]
-        private static Vector256<byte> Shuffle(Vector256<byte> maskLow, Vector256<byte> maskHigh, Vector256<byte> low, Vector256<byte> high)
+        private static Vector256<byte> Shuffle(
+            Vector256<byte> maskLow,
+            Vector256<byte> maskHigh,
+            Vector256<byte> low,
+            Vector256<byte> high
+        )
         {
             return Avx2.Shuffle(maskLow, low) & Avx2.Shuffle(maskHigh, high);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [CompExactlyDependsOn(typeof(Avx512BW))]
-        private static Vector512<byte> Shuffle(Vector512<byte> maskLow, Vector512<byte> maskHigh, Vector512<byte> low, Vector512<byte> high)
+        private static Vector512<byte> Shuffle(
+            Vector512<byte> maskLow,
+            Vector512<byte> maskHigh,
+            Vector512<byte> low,
+            Vector512<byte> high
+        )
         {
             return Avx512BW.Shuffle(maskLow, low) & Avx512BW.Shuffle(maskHigh, high);
         }
@@ -333,8 +400,15 @@ namespace System.Buffers
                 // We then use TBX to shuffle all the elements one place to the left.
                 // 0xFF is used for the first element to replace it with the one from 'leftShifted'.
 
-                Vector128<byte> leftShifted = Vector128.Shuffle(left, Vector128.Create(15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).AsByte());
-                return AdvSimd.Arm64.VectorTableLookupExtension(leftShifted, right, Vector128.Create(0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14));
+                Vector128<byte> leftShifted = Vector128.Shuffle(
+                    left,
+                    Vector128.Create(15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).AsByte()
+                );
+                return AdvSimd.Arm64.VectorTableLookupExtension(
+                    leftShifted,
+                    right,
+                    Vector128.Create(0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)
+                );
             }
         }
 
@@ -359,8 +433,15 @@ namespace System.Buffers
                 // We then use TBX to shuffle all the elements two places to the left.
                 // 0xFF is used for the first two elements to replace them with the ones from 'leftShifted'.
 
-                Vector128<byte> leftShifted = Vector128.Shuffle(left, Vector128.Create(14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).AsByte());
-                return AdvSimd.Arm64.VectorTableLookupExtension(leftShifted, right, Vector128.Create(0xFF, 0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13));
+                Vector128<byte> leftShifted = Vector128.Shuffle(
+                    left,
+                    Vector128.Create(14, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).AsByte()
+                );
+                return AdvSimd.Arm64.VectorTableLookupExtension(
+                    leftShifted,
+                    right,
+                    Vector128.Create(0xFF, 0xFF, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+                );
             }
         }
 
@@ -420,7 +501,13 @@ namespace System.Buffers
             // Similar to Avx2 above, we create a temporary value where we shift these positions by 48 places - shift 8-byte values by 6 places (PermuteVar8x64x2).
             // The indices vector below could be [6, 7, 8, 9, 10, 11, 12, 13], but we only care about the last byte in each 128-bit block (positions with value 0 don't affect the result).
 
-            Vector512<byte> leftShifted = Avx512F.PermuteVar8x64x2(left.AsInt64(), Vector512.Create(0, 7, 0, 9, 0, 11, 0, 13), right.AsInt64()).AsByte();
+            Vector512<byte> leftShifted = Avx512F
+                .PermuteVar8x64x2(
+                    left.AsInt64(),
+                    Vector512.Create(0, 7, 0, 9, 0, 11, 0, 13),
+                    right.AsInt64()
+                )
+                .AsByte();
             return Avx512BW.AlignRight(right, leftShifted, 15);
         }
 
@@ -429,7 +516,13 @@ namespace System.Buffers
         private static Vector512<byte> RightShift2(Vector512<byte> left, Vector512<byte> right)
         {
             // See comments in 'RightShift1(Vector512<byte> left, Vector512<byte> right)' above.
-            Vector512<byte> leftShifted = Avx512F.PermuteVar8x64x2(left.AsInt64(), Vector512.Create(0, 7, 0, 9, 0, 11, 0, 13), right.AsInt64()).AsByte();
+            Vector512<byte> leftShifted = Avx512F
+                .PermuteVar8x64x2(
+                    left.AsInt64(),
+                    Vector512.Create(0, 7, 0, 9, 0, 11, 0, 13),
+                    right.AsInt64()
+                )
+                .AsByte();
             return Avx512BW.AlignRight(right, leftShifted, 14);
         }
     }

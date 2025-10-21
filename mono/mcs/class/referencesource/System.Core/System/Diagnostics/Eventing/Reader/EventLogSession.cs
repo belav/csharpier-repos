@@ -1,35 +1,37 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class: EventLogSession
 **
-** Purpose: 
-** Defines a session for Event Log operations.  The session can 
+** Purpose:
+** Defines a session for Event Log operations.  The session can
 ** be configured for a remote machine and can use specfic
 ** user credentials.
 ============================================================*/
 using System;
-using System.Security;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using Microsoft.Win32;
 using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using Microsoft.Win32;
 
-namespace System.Diagnostics.Eventing.Reader {
+namespace System.Diagnostics.Eventing.Reader
+{
     /// <summary>
     /// Session Login Type
     /// </summary>
-    public enum SessionAuthentication {
+    public enum SessionAuthentication
+    {
         Default = 0,
         Negotiate = 1,
         Kerberos = 2,
-        Ntlm = 3
+        Ntlm = 3,
     }
 
     /// <summary>
@@ -38,15 +40,16 @@ namespace System.Diagnostics.Eventing.Reader {
     public enum PathType
     {
         LogName = 1,
-        FilePath = 2
+        FilePath = 2,
     }
 
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public class EventLogSession : IDisposable {
+    public class EventLogSession : IDisposable
+    {
         //
         //the two context handles for rendering (for EventLogRecord).
         //the system and user context handles. They are both common for all the event instances and can be created only once.
-        //access to the data member references is safe, while 
+        //access to the data member references is safe, while
         //invoking methods on it is marked SecurityCritical as appropriate.
         //
         internal EventLogHandle renderContextHandleSystem = EventLogHandle.Zero;
@@ -59,39 +62,53 @@ namespace System.Diagnostics.Eventing.Reader {
         private string user;
         private string domain;
         private SessionAuthentication logOnType;
+
         //we do not maintain the password here.
 
         //
-        //access to the data member references is safe, while 
+        //access to the data member references is safe, while
         //invoking methods on it is marked SecurityCritical as appropriate.
         //
         private EventLogHandle handle = EventLogHandle.Zero;
 
-
         //setup the System Context, once for all the EventRecords.
         [System.Security.SecuritySafeCritical]
-        internal void SetupSystemContext() {
+        internal void SetupSystemContext()
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
             if (!this.renderContextHandleSystem.IsInvalid)
                 return;
-            lock (this.syncObject) {
-                if (this.renderContextHandleSystem.IsInvalid) {
+            lock (this.syncObject)
+            {
+                if (this.renderContextHandleSystem.IsInvalid)
+                {
                     //create the SYSTEM render context
                     //call the EvtCreateRenderContext to get the renderContextHandleSystem, so that we can get the system/values/user properties.
-                    this.renderContextHandleSystem = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextSystem);
+                    this.renderContextHandleSystem = NativeWrapper.EvtCreateRenderContext(
+                        0,
+                        null,
+                        UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextSystem
+                    );
                 }
             }
         }
 
         [System.Security.SecuritySafeCritical]
-        internal void SetupUserContext() {
+        internal void SetupUserContext()
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
-            lock (this.syncObject) {
-                if (this.renderContextHandleUser.IsInvalid) {
+            lock (this.syncObject)
+            {
+                if (this.renderContextHandleUser.IsInvalid)
+                {
                     //create the USER render context
-                    this.renderContextHandleUser = NativeWrapper.EvtCreateRenderContext(0, null, UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextUser);
+                    this.renderContextHandleUser = NativeWrapper.EvtCreateRenderContext(
+                        0,
+                        null,
+                        UnsafeNativeMethods.EvtRenderContextFlags.EvtRenderContextUser
+                    );
                 }
             }
         }
@@ -99,20 +116,26 @@ namespace System.Diagnostics.Eventing.Reader {
         // marked as SecurityCritical because allocates SafeHandle.
         // marked as TreatAsSafe because performs Demand().
         [System.Security.SecurityCritical]
-        public EventLogSession() {
+        public EventLogSession()
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
             //handle = EventLogHandle.Zero;
             syncObject = new object();
         }
 
         public EventLogSession(string server)
-            :
-            this(server, null, null, (SecureString)null, SessionAuthentication.Default) {
-        }
+            : this(server, null, null, (SecureString)null, SessionAuthentication.Default) { }
 
         // marked as TreatAsSafe because performs Demand().
         [System.Security.SecurityCritical]
-        public EventLogSession(string server, string domain, string user, SecureString password, SessionAuthentication logOnType) {
+        public EventLogSession(
+            string server,
+            string domain,
+            string user,
+            SecureString password,
+            SessionAuthentication logOnType
+        )
+        {
             EventLogPermissionHolder.GetEventLogPermission().Demand();
 
             if (server == null)
@@ -132,57 +155,63 @@ namespace System.Diagnostics.Eventing.Reader {
             erLogin.Flags = (int)this.logOnType;
             erLogin.Password = CoTaskMemUnicodeSafeHandle.Zero;
 
-            try {
+            try
+            {
                 if (password != null)
                     erLogin.Password.SetMemory(Marshal.SecureStringToCoTaskMemUnicode(password));
                 //open a session using the erLogin structure.
-                handle = NativeWrapper.EvtOpenSession(UnsafeNativeMethods.EvtLoginClass.EvtRpcLogin, ref erLogin, 0, 0);
+                handle = NativeWrapper.EvtOpenSession(
+                    UnsafeNativeMethods.EvtLoginClass.EvtRpcLogin,
+                    ref erLogin,
+                    0,
+                    0
+                );
             }
-            finally {
+            finally
+            {
                 erLogin.Password.Close();
             }
-
         }
 
-        internal EventLogHandle Handle {
-            get {
-                return handle;
-            }
+        internal EventLogHandle Handle
+        {
+            get { return handle; }
         }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         [System.Security.SecuritySafeCritical]
-        protected virtual void Dispose(bool disposing) {
-
-            if (disposing) {
-                if ( this == globalSession )
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (this == globalSession)
                     throw new InvalidOperationException();
                 EventLogPermissionHolder.GetEventLogPermission().Demand();
             }
 
-            if (this.renderContextHandleSystem != null &&
-                !this.renderContextHandleSystem.IsInvalid)
+            if (this.renderContextHandleSystem != null && !this.renderContextHandleSystem.IsInvalid)
                 this.renderContextHandleSystem.Dispose();
 
-            if (this.renderContextHandleUser != null &&
-                !this.renderContextHandleUser.IsInvalid)
+            if (this.renderContextHandleUser != null && !this.renderContextHandleUser.IsInvalid)
                 this.renderContextHandleUser.Dispose();
 
             if (handle != null && !handle.IsInvalid)
                 handle.Dispose();
         }
 
-        public void CancelCurrentOperations() {
-
+        public void CancelCurrentOperations()
+        {
             NativeWrapper.EvtCancel(handle);
         }
 
         static EventLogSession globalSession = new EventLogSession();
-        public static EventLogSession GlobalSession {
+        public static EventLogSession GlobalSession
+        {
             get { return globalSession; }
         }
 
@@ -200,9 +229,9 @@ namespace System.Diagnostics.Eventing.Reader {
                 do
                 {
                     string s = NativeWrapper.EvtNextPublisherId(ProviderEnum, ref finish);
-                    if (finish == false) namesList.Add(s);
-                }
-                while (finish == false);
+                    if (finish == false)
+                        namesList.Add(s);
+                } while (finish == false);
 
                 return namesList;
             }
@@ -222,26 +251,34 @@ namespace System.Diagnostics.Eventing.Reader {
                 do
                 {
                     string s = NativeWrapper.EvtNextChannelPath(channelEnum, ref finish);
-                    if (finish == false) namesList.Add(s);
-                }
-                while (finish == false);
+                    if (finish == false)
+                        namesList.Add(s);
+                } while (finish == false);
 
                 return namesList;
             }
         }
 
-        public EventLogInformation GetLogInformation(string logName, PathType pathType) {
+        public EventLogInformation GetLogInformation(string logName, PathType pathType)
+        {
             if (logName == null)
                 throw new ArgumentNullException("logName");
 
             return new EventLogInformation(this, logName, pathType);
         }
 
-        public void ExportLog(string path, PathType pathType, string query, string targetFilePath) {
+        public void ExportLog(string path, PathType pathType, string query, string targetFilePath)
+        {
             this.ExportLog(path, pathType, query, targetFilePath, false);
         }
 
-        public void ExportLog(string path, PathType pathType, string query, string targetFilePath, bool tolerateQueryErrors)
+        public void ExportLog(
+            string path,
+            PathType pathType,
+            string query,
+            string targetFilePath,
+            bool tolerateQueryErrors
+        )
         {
             if (path == null)
                 throw new ArgumentNullException("path");
@@ -265,19 +302,51 @@ namespace System.Diagnostics.Eventing.Reader {
             if (tolerateQueryErrors == false)
                 NativeWrapper.EvtExportLog(this.Handle, path, query, targetFilePath, (int)flag);
             else
-                NativeWrapper.EvtExportLog(this.Handle, path, query, targetFilePath, (int)flag | (int)UnsafeNativeMethods.EvtExportLogFlags.EvtExportLogTolerateQueryErrors);
+                NativeWrapper.EvtExportLog(
+                    this.Handle,
+                    path,
+                    query,
+                    targetFilePath,
+                    (int)flag
+                        | (int)UnsafeNativeMethods.EvtExportLogFlags.EvtExportLogTolerateQueryErrors
+                );
         }
 
-        public void ExportLogAndMessages(string path, PathType pathType, string query, string targetFilePath)
+        public void ExportLogAndMessages(
+            string path,
+            PathType pathType,
+            string query,
+            string targetFilePath
+        )
         {
-            this.ExportLogAndMessages(path, pathType, query, targetFilePath, false, CultureInfo.CurrentCulture );
+            this.ExportLogAndMessages(
+                path,
+                pathType,
+                query,
+                targetFilePath,
+                false,
+                CultureInfo.CurrentCulture
+            );
         }
 
-        public void ExportLogAndMessages(string path, PathType pathType, string query, string targetFilePath, bool tolerateQueryErrors, CultureInfo targetCultureInfo ) {
+        public void ExportLogAndMessages(
+            string path,
+            PathType pathType,
+            string query,
+            string targetFilePath,
+            bool tolerateQueryErrors,
+            CultureInfo targetCultureInfo
+        )
+        {
             if (targetCultureInfo == null)
                 targetCultureInfo = CultureInfo.CurrentCulture;
             ExportLog(path, pathType, query, targetFilePath, tolerateQueryErrors);
-            NativeWrapper.EvtArchiveExportedLog(this.Handle, targetFilePath, targetCultureInfo.LCID, 0);
+            NativeWrapper.EvtArchiveExportedLog(
+                this.Handle,
+                targetFilePath,
+                targetCultureInfo.LCID,
+                0
+            );
         }
 
         public void ClearLog(string logName)

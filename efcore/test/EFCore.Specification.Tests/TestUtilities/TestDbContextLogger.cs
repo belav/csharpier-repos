@@ -14,6 +14,5 @@ public class TestDbContextLogger : IDbContextLogger
         LoggedEvent = eventData.EventId;
     }
 
-    public bool ShouldLog(EventId eventId, LogLevel logLevel)
-        => true;
+    public bool ShouldLog(EventId eventId, LogLevel logLevel) => true;
 }

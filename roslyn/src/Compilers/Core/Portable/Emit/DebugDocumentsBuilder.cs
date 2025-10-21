@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Emit
 {
@@ -21,14 +21,18 @@ namespace Microsoft.CodeAnalysis.Emit
         private readonly ConcurrentCache<(string, string?), string> _normalizedPathsCache;
         private readonly SourceReferenceResolver? _resolver;
 
-        public DebugDocumentsBuilder(SourceReferenceResolver? resolver, bool isDocumentNameCaseSensitive)
+        public DebugDocumentsBuilder(
+            SourceReferenceResolver? resolver,
+            bool isDocumentNameCaseSensitive
+        )
         {
             _resolver = resolver;
 
             _debugDocuments = new ConcurrentDictionary<string, Cci.DebugSourceDocument>(
-                    isDocumentNameCaseSensitive ?
-                    StringComparer.Ordinal :
-                    StringComparer.OrdinalIgnoreCase);
+                isDocumentNameCaseSensitive
+                    ? StringComparer.Ordinal
+                    : StringComparer.OrdinalIgnoreCase
+            );
 
             _normalizedPathsCache = new ConcurrentCache<(string, string?), string>(16);
         }
@@ -40,22 +44,28 @@ namespace Microsoft.CodeAnalysis.Emit
             _debugDocuments.Add(document.Location, document);
         }
 
-        internal IReadOnlyDictionary<string, Cci.DebugSourceDocument> DebugDocuments
-            => _debugDocuments;
+        internal IReadOnlyDictionary<string, Cci.DebugSourceDocument> DebugDocuments =>
+            _debugDocuments;
 
         internal Cci.DebugSourceDocument? TryGetDebugDocument(string path, string basePath)
         {
             return TryGetDebugDocumentForNormalizedPath(NormalizeDebugDocumentPath(path, basePath));
         }
 
-        internal Cci.DebugSourceDocument? TryGetDebugDocumentForNormalizedPath(string normalizedPath)
+        internal Cci.DebugSourceDocument? TryGetDebugDocumentForNormalizedPath(
+            string normalizedPath
+        )
         {
             Cci.DebugSourceDocument? document;
             _debugDocuments.TryGetValue(normalizedPath, out document);
             return document;
         }
 
-        internal Cci.DebugSourceDocument GetOrAddDebugDocument(string path, string basePath, Func<string, Cci.DebugSourceDocument> factory)
+        internal Cci.DebugSourceDocument GetOrAddDebugDocument(
+            string path,
+            string basePath,
+            Func<string, Cci.DebugSourceDocument> factory
+        )
         {
             return _debugDocuments.GetOrAdd(NormalizeDebugDocumentPath(path, basePath), factory);
         }

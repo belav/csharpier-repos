@@ -15,7 +15,8 @@ namespace System.Web.Http.SelfHost.Channels
 {
     internal class HttpMessageEncodingRequestContext : RequestContext
     {
-        private const string HttpMessageEncodingRequestContextPropertyName = "MS_HttpMessageEncodingRequestContextKey";
+        private const string HttpMessageEncodingRequestContextPropertyName =
+            "MS_HttpMessageEncodingRequestContextKey";
         private const string DefaultReasonPhrase = "OK";
 
         private RequestContext _innerContext;
@@ -23,7 +24,10 @@ namespace System.Web.Http.SelfHost.Channels
 
         public HttpMessageEncodingRequestContext(RequestContext innerContext)
         {
-            Contract.Assert(innerContext != null, "The 'innerContext' parameter should not be null.");
+            Contract.Assert(
+                innerContext != null,
+                "The 'innerContext' parameter should not be null."
+            );
             _innerContext = innerContext;
         }
 
@@ -37,7 +41,9 @@ namespace System.Web.Http.SelfHost.Channels
             {
                 if (_configuredRequestMessage == null)
                 {
-                    _configuredRequestMessage = ConfigureRequestMessage(_innerContext.RequestMessage);
+                    _configuredRequestMessage = ConfigureRequestMessage(
+                        _innerContext.RequestMessage
+                    );
                 }
 
                 return _configuredRequestMessage;
@@ -50,13 +56,22 @@ namespace System.Web.Http.SelfHost.Channels
             _innerContext.Abort();
         }
 
-        public override IAsyncResult BeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ConfigureResponseMessage(message);
             return _innerContext.BeginReply(message, timeout, callback, state);
         }
 
-        public override IAsyncResult BeginReply(Message message, AsyncCallback callback, object state)
+        public override IAsyncResult BeginReply(
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
         {
             ConfigureResponseMessage(message);
             return _innerContext.BeginReply(message, callback, state);
@@ -121,11 +136,18 @@ namespace System.Web.Http.SelfHost.Channels
         internal static HttpMessageEncodingRequestContext GetContextFromMessage(Message message)
         {
             HttpMessageEncodingRequestContext context = null;
-            message.Properties.TryGetValue<HttpMessageEncodingRequestContext>(HttpMessageEncodingRequestContextPropertyName, out context);
+            message.Properties.TryGetValue<HttpMessageEncodingRequestContext>(
+                HttpMessageEncodingRequestContextPropertyName,
+                out context
+            );
             return context;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Cleanup exceptions are ignored as they are not fatal to the host.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Cleanup exceptions are ignored as they are not fatal to the host."
+        )]
         private void Cleanup()
         {
             if (_configuredRequestMessage != null)
@@ -134,13 +156,14 @@ namespace System.Web.Http.SelfHost.Channels
                 {
                     _configuredRequestMessage.Close();
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
-        private static void CopyHeadersToNameValueCollection(HttpHeaders headers, NameValueCollection nameValueCollection)
+        private static void CopyHeadersToNameValueCollection(
+            HttpHeaders headers,
+            NameValueCollection nameValueCollection
+        )
         {
             foreach (KeyValuePair<string, IEnumerable<string>> header in headers)
             {
@@ -151,7 +174,11 @@ namespace System.Web.Http.SelfHost.Channels
             }
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "disposed later.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "disposed later."
+        )]
         private static Message ConfigureRequestMessage(Message message)
         {
             if (message == null)
@@ -160,12 +187,18 @@ namespace System.Web.Http.SelfHost.Channels
             }
 
             HttpRequestMessageProperty requestProperty;
-            if (!message.Properties.TryGetValue(HttpRequestMessageProperty.Name, out requestProperty))
+            if (
+                !message.Properties.TryGetValue(
+                    HttpRequestMessageProperty.Name,
+                    out requestProperty
+                )
+            )
             {
                 throw Error.InvalidOperation(
                     SRResources.RequestMissingHttpRequestMessageProperty,
                     HttpRequestMessageProperty.Name,
-                    typeof(HttpRequestMessageProperty).Name);
+                    typeof(HttpRequestMessageProperty).Name
+                );
             }
 
             Uri uri = message.Headers.To;
@@ -179,7 +212,11 @@ namespace System.Web.Http.SelfHost.Channels
             {
                 if (!message.IsEmpty)
                 {
-                    throw Error.InvalidOperation(SRResources.NonHttpMessageMustBeEmpty, HttpMessageExtensions.ToHttpRequestMessageMethodName, typeof(HttpMessage).Name);
+                    throw Error.InvalidOperation(
+                        SRResources.NonHttpMessageMustBeEmpty,
+                        HttpMessageExtensions.ToHttpRequestMessageMethodName,
+                        typeof(HttpMessage).Name
+                    );
                 }
 
                 httpRequestMessage = new HttpRequestMessage();
@@ -224,7 +261,10 @@ namespace System.Web.Http.SelfHost.Channels
                 string headerValue = headers[headerName];
                 if (!httpRequestMessage.Headers.TryAddWithoutValidation(headerName, headerValue))
                 {
-                    httpRequestMessage.Content.Headers.TryAddWithoutValidation(headerName, headerValue);
+                    httpRequestMessage.Content.Headers.TryAddWithoutValidation(
+                        headerName,
+                        headerValue
+                    );
                 }
             }
 
@@ -246,17 +286,25 @@ namespace System.Web.Http.SelfHost.Channels
             else
             {
                 responseProperty.StatusCode = httpResponseMessage.StatusCode;
-                if (httpResponseMessage.ReasonPhrase != null &&
-                    httpResponseMessage.ReasonPhrase != DefaultReasonPhrase)
+                if (
+                    httpResponseMessage.ReasonPhrase != null
+                    && httpResponseMessage.ReasonPhrase != DefaultReasonPhrase
+                )
                 {
                     responseProperty.StatusDescription = httpResponseMessage.ReasonPhrase;
                 }
 
-                CopyHeadersToNameValueCollection(httpResponseMessage.Headers, responseProperty.Headers);
+                CopyHeadersToNameValueCollection(
+                    httpResponseMessage.Headers,
+                    responseProperty.Headers
+                );
                 HttpContent content = httpResponseMessage.Content;
                 if (content != null)
                 {
-                    CopyHeadersToNameValueCollection(httpResponseMessage.Content.Headers, responseProperty.Headers);
+                    CopyHeadersToNameValueCollection(
+                        httpResponseMessage.Content.Headers,
+                        responseProperty.Headers
+                    );
                 }
                 else
                 {

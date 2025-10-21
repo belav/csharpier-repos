@@ -22,65 +22,39 @@ namespace System.Xml.Schema
             Clear();
         }
 
-        internal XmlSchemaInfo(XmlSchemaValidity validity) : this()
+        internal XmlSchemaInfo(XmlSchemaValidity validity)
+            : this()
         {
             _validity = validity;
         }
 
         public XmlSchemaValidity Validity
         {
-            get
-            {
-                return _validity;
-            }
-            set
-            {
-                _validity = value;
-            }
+            get { return _validity; }
+            set { _validity = value; }
         }
 
         public bool IsDefault
         {
-            get
-            {
-                return _isDefault;
-            }
-            set
-            {
-                _isDefault = value;
-            }
+            get { return _isDefault; }
+            set { _isDefault = value; }
         }
 
         public bool IsNil
         {
-            get
-            {
-                return _isNil;
-            }
-            set
-            {
-                _isNil = value;
-            }
+            get { return _isNil; }
+            set { _isNil = value; }
         }
 
         public XmlSchemaSimpleType? MemberType
         {
-            get
-            {
-                return _memberType;
-            }
-            set
-            {
-                _memberType = value;
-            }
+            get { return _memberType; }
+            set { _memberType = value; }
         }
 
         public XmlSchemaType? SchemaType
         {
-            get
-            {
-                return _schemaType;
-            }
+            get { return _schemaType; }
             set
             {
                 _schemaType = value;
@@ -97,10 +71,7 @@ namespace System.Xml.Schema
 
         public XmlSchemaElement? SchemaElement
         {
-            get
-            {
-                return _schemaElement;
-            }
+            get { return _schemaElement; }
             set
             {
                 _schemaElement = value;
@@ -113,10 +84,7 @@ namespace System.Xml.Schema
 
         public XmlSchemaAttribute? SchemaAttribute
         {
-            get
-            {
-                return _schemaAttribute;
-            }
+            get { return _schemaAttribute; }
             set
             {
                 _schemaAttribute = value;
@@ -129,14 +97,8 @@ namespace System.Xml.Schema
 
         public XmlSchemaContentType ContentType
         {
-            get
-            {
-                return _contentType;
-            }
-            set
-            {
-                _contentType = value;
-            }
+            get { return _contentType; }
+            set { _contentType = value; }
         }
 
         internal XmlSchemaType? XmlType
@@ -155,7 +117,8 @@ namespace System.Xml.Schema
         {
             get
             {
-                return _schemaElement != null && _schemaElement.ElementDecl!.DefaultValueTyped != null;
+                return _schemaElement != null
+                    && _schemaElement.ElementDecl!.DefaultValueTyped != null;
             }
         }
 

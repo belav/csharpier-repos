@@ -13,19 +13,23 @@ namespace System.Data.Metadata.Edm
 
     internal sealed class ObjectItemCachedAssemblyLoader : ObjectItemAssemblyLoader
     {
-        private new ImmutableAssemblyCacheEntry CacheEntry { get { return (ImmutableAssemblyCacheEntry)base.CacheEntry; } }
-
-        internal ObjectItemCachedAssemblyLoader(Assembly assembly, ImmutableAssemblyCacheEntry cacheEntry, ObjectItemLoadingSessionData sessionData)
-            : base(assembly, cacheEntry, sessionData)
+        private new ImmutableAssemblyCacheEntry CacheEntry
         {
+            get { return (ImmutableAssemblyCacheEntry)base.CacheEntry; }
         }
+
+        internal ObjectItemCachedAssemblyLoader(
+            Assembly assembly,
+            ImmutableAssemblyCacheEntry cacheEntry,
+            ObjectItemLoadingSessionData sessionData
+        )
+            : base(assembly, cacheEntry, sessionData) { }
 
         protected override void AddToAssembliesLoaded()
         {
             // wasn't loaded, was pulled from cache instead
             // so don't load it
         }
-
 
         protected override void LoadTypesFromAssembly()
         {
@@ -37,7 +41,5 @@ namespace System.Data.Metadata.Edm
                 }
             }
         }
-
-
     }
 }

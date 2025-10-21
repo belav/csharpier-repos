@@ -1,4 +1,5 @@
-﻿namespace System.Web.ModelBinding {
+﻿namespace System.Web.ModelBinding
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -8,12 +9,14 @@
     /// them in a sorted array. All queries for prefixes are also normalized to dotted-form, and searches
     /// for ContainsPrefix are done with a binary search.
     /// </summary>
-    internal sealed class PrefixContainer {
-
+    internal sealed class PrefixContainer
+    {
         private readonly string[] _sortedValues;
 
-        internal PrefixContainer(IEnumerable<string> values) {
-            if (values == null) {
+        internal PrefixContainer(IEnumerable<string> values)
+        {
+            if (values == null)
+            {
                 throw new ArgumentNullException("values");
             }
 
@@ -21,41 +24,51 @@
             Array.Sort(_sortedValues, StringComparer.OrdinalIgnoreCase);
         }
 
-        internal bool ContainsPrefix(string prefix) {
-            if (prefix == null) {
+        internal bool ContainsPrefix(string prefix)
+        {
+            if (prefix == null)
+            {
                 throw new ArgumentNullException("prefix");
             }
 
-            if (prefix.Length == 0) {
+            if (prefix.Length == 0)
+            {
                 return _sortedValues.Length > 0; // only match empty string when we have some value
             }
 
             return Array.BinarySearch(_sortedValues, prefix, new PrefixComparer(prefix)) > -1;
         }
 
-        internal static bool IsPrefixMatch(string prefix, string testString) {
-            if (testString == null) {
+        internal static bool IsPrefixMatch(string prefix, string testString)
+        {
+            if (testString == null)
+            {
                 return false;
             }
 
-            if (prefix.Length == 0) {
+            if (prefix.Length == 0)
+            {
                 return true; // shortcut - non-null testString matches empty prefix
             }
 
-            if (prefix.Length > testString.Length) {
+            if (prefix.Length > testString.Length)
+            {
                 return false; // not long enough
             }
 
-            if (!testString.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)) {
+            if (!testString.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+            {
                 return false; // prefix doesn't match
             }
 
-            if (testString.Length == prefix.Length) {
+            if (testString.Length == prefix.Length)
+            {
                 return true; // exact match
             }
 
             // invariant: testString.Length > prefix.Length
-            switch (testString[prefix.Length]) {
+            switch (testString[prefix.Length])
+            {
                 case '.':
                 case '[':
                     return true; // known delimiters
@@ -65,22 +78,25 @@
             }
         }
 
-        private sealed class PrefixComparer : IComparer<String> {
+        private sealed class PrefixComparer : IComparer<String>
+        {
             private string _prefix;
 
-            public PrefixComparer(string prefix) {
+            public PrefixComparer(string prefix)
+            {
                 _prefix = prefix;
             }
 
-            public int Compare(string x, string y) {
+            public int Compare(string x, string y)
+            {
                 string testString = Object.ReferenceEquals(x, _prefix) ? y : x;
-                if (IsPrefixMatch(_prefix, testString)) {
+                if (IsPrefixMatch(_prefix, testString))
+                {
                     return 0;
                 }
 
                 return StringComparer.OrdinalIgnoreCase.Compare(x, y);
             }
         }
-
     }
 }

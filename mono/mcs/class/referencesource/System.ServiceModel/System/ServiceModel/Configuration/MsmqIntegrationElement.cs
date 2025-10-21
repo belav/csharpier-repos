@@ -30,12 +30,12 @@ namespace System.ServiceModel.Configuration
             return new Msmq.MsmqIntegrationBindingElement();
         }
 
-
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
             base.ApplyConfiguration(bindingElement);
 
-            Msmq.MsmqIntegrationBindingElement binding = bindingElement as Msmq.MsmqIntegrationBindingElement;
+            Msmq.MsmqIntegrationBindingElement binding =
+                bindingElement as Msmq.MsmqIntegrationBindingElement;
             binding.SerializationFormat = this.SerializationFormat;
         }
 
@@ -43,20 +43,28 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
 
-            Msmq.MsmqIntegrationBindingElement binding = bindingElement as Msmq.MsmqIntegrationBindingElement;
+            Msmq.MsmqIntegrationBindingElement binding =
+                bindingElement as Msmq.MsmqIntegrationBindingElement;
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SerializationFormat, binding.SerializationFormat);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SerializationFormat,
+                binding.SerializationFormat
+            );
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SerializationFormat, DefaultValue = MsmqIntegrationDefaults.SerializationFormat)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SerializationFormat,
+            DefaultValue = MsmqIntegrationDefaults.SerializationFormat
+        )]
         [ServiceModelEnumValidator(typeof(Msmq.MsmqMessageSerializationFormatHelper))]
         public Msmq.MsmqMessageSerializationFormat SerializationFormat
         {
-            get { return (Msmq.MsmqMessageSerializationFormat)base[ConfigurationStrings.SerializationFormat]; }
+            get
+            {
+                return (Msmq.MsmqMessageSerializationFormat)
+                    base[ConfigurationStrings.SerializationFormat];
+            }
             set { base[ConfigurationStrings.SerializationFormat] = value; }
         }
     }
 }
-
-
-

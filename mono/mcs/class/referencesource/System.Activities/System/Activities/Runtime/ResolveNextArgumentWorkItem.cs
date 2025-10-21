@@ -5,8 +5,8 @@
 namespace System.Activities.Runtime
 {
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
 
     [DataContract]
     class ResolveNextArgumentWorkItem : ActivityExecutionWorkItem
@@ -58,9 +58,17 @@ namespace System.Activities.Runtime
             TraceRuntimeWorkItemCompleted();
         }
 
-        public void Initialize(ActivityInstance activityInstance, int nextArgumentIndex, IDictionary<string, object> argumentValueOverrides, Location resultLocation)
+        public void Initialize(
+            ActivityInstance activityInstance,
+            int nextArgumentIndex,
+            IDictionary<string, object> argumentValueOverrides,
+            Location resultLocation
+        )
         {
-            Fx.Assert(nextArgumentIndex > 0, "The nextArgumentIndex must be greater than 0 otherwise we will incorrectly set the sub-state when ResolveArguments completes");
+            Fx.Assert(
+                nextArgumentIndex > 0,
+                "The nextArgumentIndex must be greater than 0 otherwise we will incorrectly set the sub-state when ResolveArguments completes"
+            );
             base.Reinitialize(activityInstance);
             this.nextArgumentIndex = nextArgumentIndex;
             this.argumentValueOverrides = argumentValueOverrides;
@@ -95,7 +103,12 @@ namespace System.Activities.Runtime
 
         public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
         {
-            this.ActivityInstance.ResolveArguments(executor, argumentValueOverrides, resultLocation, nextArgumentIndex);
+            this.ActivityInstance.ResolveArguments(
+                executor,
+                argumentValueOverrides,
+                resultLocation,
+                nextArgumentIndex
+            );
 
             // Return true always to prevent scheduler from yielding silently.
             return true;

@@ -19,7 +19,35 @@ namespace XLinqTests
         {
             get
             {
-                return new object[] { new XElement("X2", new XElement("X1", new XAttribute("id", "myID")), "textX", new XElement("X")), new XElement("X2", new XElement("X1", new XAttribute("id", "myID")), "textX", new XElement("X")), new XDocumentType("A", null, null, null), new XDocumentType("X2", null, null, null), new XText(""), new XText(" "), new XText("\n"), new XText("\t"), new XCData("cdatata"), new XProcessingInstruction("PI", "click"), new XComment("comma"), "\n", "\t", "", " ", null };
+                return new object[]
+                {
+                    new XElement(
+                        "X2",
+                        new XElement("X1", new XAttribute("id", "myID")),
+                        "textX",
+                        new XElement("X")
+                    ),
+                    new XElement(
+                        "X2",
+                        new XElement("X1", new XAttribute("id", "myID")),
+                        "textX",
+                        new XElement("X")
+                    ),
+                    new XDocumentType("A", null, null, null),
+                    new XDocumentType("X2", null, null, null),
+                    new XText(""),
+                    new XText(" "),
+                    new XText("\n"),
+                    new XText("\t"),
+                    new XCData("cdatata"),
+                    new XProcessingInstruction("PI", "click"),
+                    new XComment("comma"),
+                    "\n",
+                    "\t",
+                    "",
+                    " ",
+                    null,
+                };
             }
         }
 
@@ -27,7 +55,27 @@ namespace XLinqTests
         {
             get
             {
-                return new object[] { new XElement("X"), new XElement("X1", new XAttribute("id", "myID")), new XElement("X2", new XElement("X1", new XAttribute("id", "myID")), "textX", new XElement("X")), new XText("textNewBoom"), new XText(""), new XText(" "), new XCData("cdatata"), new XProcessingInstruction("PI", "click"), new XComment("comma"), "stringplain", "", " ", null };
+                return new object[]
+                {
+                    new XElement("X"),
+                    new XElement("X1", new XAttribute("id", "myID")),
+                    new XElement(
+                        "X2",
+                        new XElement("X1", new XAttribute("id", "myID")),
+                        "textX",
+                        new XElement("X")
+                    ),
+                    new XText("textNewBoom"),
+                    new XText(""),
+                    new XText(" "),
+                    new XCData("cdatata"),
+                    new XProcessingInstruction("PI", "click"),
+                    new XComment("comma"),
+                    "stringplain",
+                    "",
+                    " ",
+                    null,
+                };
             }
         }
 
@@ -90,7 +138,13 @@ namespace XLinqTests
         /// <param name="touchOrigNodes"></param>
         /// <param name="type">type 1 = XDocument; type 2 = XElement</param>
         /// </summary>
-        private void TestReplacement(XContainer e, object[] nodes, int numOfNodes, bool touchOrigNodes, int type)
+        private void TestReplacement(
+            XContainer e,
+            object[] nodes,
+            int numOfNodes,
+            bool touchOrigNodes,
+            int type
+        )
         {
             int count = 0;
             foreach (var replacement in nodes.NonRecursiveVariations(numOfNodes))
@@ -105,7 +159,13 @@ namespace XLinqTests
                     elem = new XElement(e as XElement);
                 }
 
-                IEnumerable<ExpectedValue> expValues = replacement.Select(o => new ExpectedValue(o is XNode && (o as XNode).Parent == null && (o as XNode).Document == null, o)).ProcessNodes().ToList();
+                IEnumerable<ExpectedValue> expValues = replacement
+                    .Select(o => new ExpectedValue(
+                        o is XNode && (o as XNode).Parent == null && (o as XNode).Document == null,
+                        o
+                    ))
+                    .ProcessNodes()
+                    .ToList();
                 IEnumerable<XNode> originalContent = touchOrigNodes ? elem.Nodes().ToList() : null;
 
                 bool shouldFail = (e is XDocument) && expValues.IsXDocValid();
@@ -119,9 +179,20 @@ namespace XLinqTests
                     elem.ReplaceNodes(replacement);
 
                     TestLog.Compare(!shouldFail, "Should fail ... ");
-                    TestLog.Compare(originalContent == null || originalContent.Where(o => o.Parent != null).IsEmpty(), "originalContent.Where(o=>o.Parent!=null).IsEmpty()");
-                    TestLog.Compare(originalContent == null || originalContent.Where(o => o.Document != null).IsEmpty(), "originalContent.Where(o=>o.Document!=null).IsEmpty()");
-                    TestLog.Compare(expValues.EqualAll(elem.Nodes(), XNode.EqualityComparer), "expected values");
+                    TestLog.Compare(
+                        originalContent == null
+                            || originalContent.Where(o => o.Parent != null).IsEmpty(),
+                        "originalContent.Where(o=>o.Parent!=null).IsEmpty()"
+                    );
+                    TestLog.Compare(
+                        originalContent == null
+                            || originalContent.Where(o => o.Document != null).IsEmpty(),
+                        "originalContent.Where(o=>o.Document!=null).IsEmpty()"
+                    );
+                    TestLog.Compare(
+                        expValues.EqualAll(elem.Nodes(), XNode.EqualityComparer),
+                        "expected values"
+                    );
                 }
                 catch (InvalidOperationException)
                 {

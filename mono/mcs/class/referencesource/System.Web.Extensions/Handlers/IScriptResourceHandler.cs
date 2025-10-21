@@ -3,8 +3,9 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.Handlers {
+
+namespace System.Web.Handlers
+{
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -12,12 +13,19 @@ namespace System.Web.Handlers {
     using System.Text;
     using System.Web.Util;
 
-    internal interface IScriptResourceHandler {
+    internal interface IScriptResourceHandler
+    {
         string GetScriptResourceUrl(
-            Assembly assembly, string resourceName, CultureInfo culture, bool zip);
+            Assembly assembly,
+            string resourceName,
+            CultureInfo culture,
+            bool zip
+        );
 
         string GetScriptResourceUrl(
-            List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>> assemblyResourceLists, bool zip);
+            List<Tuple<Assembly, List<Tuple<string, CultureInfo>>>> assemblyResourceLists,
+            bool zip
+        );
 
         string GetEmptyPageUrl(string title);
     }

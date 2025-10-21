@@ -9,11 +9,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal struct SearchQuery : IDisposable
     {
-        /// <summary>The name being searched for.  Is null in the case of custom predicate searching..  But 
-        /// can be used for faster index based searching when it is available.</summary> 
+        /// <summary>The name being searched for.  Is null in the case of custom predicate searching..  But
+        /// can be used for faster index based searching when it is available.</summary>
         public readonly string? Name;
 
-        ///<summary>The kind of search this is.  Faster index-based searching can be used if the 
+        ///<summary>The kind of search this is.  Faster index-based searching can be used if the
         /// SearchKind is not <see cref="SearchKind.Custom"/>.</summary>
         public readonly SearchKind Kind;
 
@@ -39,11 +39,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     _predicate = s => CaseInsensitiveComparison.Comparer.Equals(name, s);
                     break;
                 case SearchKind.Fuzzy:
-                    // Create a single WordSimilarityChecker and capture a delegate reference to 
+                    // Create a single WordSimilarityChecker and capture a delegate reference to
                     // its 'AreSimilar' method. That way we only create the WordSimilarityChecker
                     // once and it can cache all the information it needs while it does the AreSimilar
                     // check against all the possible candidates.
-                    _wordSimilarityChecker = new WordSimilarityChecker(name, substringsAreSimilar: false);
+                    _wordSimilarityChecker = new WordSimilarityChecker(
+                        name,
+                        substringsAreSimilar: false
+                    );
                     _predicate = _wordSimilarityChecker.AreSimilar;
                     break;
                 default:
@@ -57,22 +60,17 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             _predicate = predicate ?? throw new ArgumentNullException(nameof(predicate));
         }
 
-        public readonly void Dispose()
-            => _wordSimilarityChecker.Dispose();
+        public readonly void Dispose() => _wordSimilarityChecker.Dispose();
 
-        public static SearchQuery Create(string name, SearchKind kind)
-            => new(name, kind);
+        public static SearchQuery Create(string name, SearchKind kind) => new(name, kind);
 
-        public static SearchQuery Create(string name, bool ignoreCase)
-            => new(name, ignoreCase ? SearchKind.ExactIgnoreCase : SearchKind.Exact);
+        public static SearchQuery Create(string name, bool ignoreCase) =>
+            new(name, ignoreCase ? SearchKind.ExactIgnoreCase : SearchKind.Exact);
 
-        public static SearchQuery CreateFuzzy(string name)
-            => new(name, SearchKind.Fuzzy);
+        public static SearchQuery CreateFuzzy(string name) => new(name, SearchKind.Fuzzy);
 
-        public static SearchQuery CreateCustom(Func<string, bool> predicate)
-            => new(predicate);
+        public static SearchQuery CreateCustom(Func<string, bool> predicate) => new(predicate);
 
-        public readonly Func<string, bool> GetPredicate()
-            => _predicate;
+        public readonly Func<string, bool> GetPredicate() => _predicate;
     }
 }

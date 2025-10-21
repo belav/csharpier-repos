@@ -5,6 +5,7 @@ using System;
 using Xunit;
 
 internal class BaseException : Exception { }
+
 internal class DerivedException : BaseException { }
 
 public class Test_cast_throw
@@ -25,7 +26,7 @@ public class Test_cast_throw
         Console.WriteLine("failed(1)");
         return 101;
 
-    continue_1:
+        continue_1:
         try
         {
             if (ex is DerivedException)
@@ -38,7 +39,7 @@ public class Test_cast_throw
         Console.WriteLine("failed(2)");
         return 102;
 
-    continue_2:
+        continue_2:
         Console.WriteLine("Good");
         return 100;
     }

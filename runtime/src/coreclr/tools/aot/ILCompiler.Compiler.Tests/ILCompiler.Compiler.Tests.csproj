@@ -15,18 +15,18 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.DotNet.XUnitExtensions" Version="$(MicrosoftDotNetXUnitExtensionsVersion)" />
+    <PackageReference
+      Include="Microsoft.DotNet.XUnitExtensions"
+      Version="$(MicrosoftDotNetXUnitExtensionsVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ILCompiler.Compiler\ILCompiler.Compiler.csproj" />
     <ProjectReference Include="..\ILCompiler.DependencyAnalysisFramework\ILCompiler.DependencyAnalysisFramework.csproj" />
     <ProjectReference Include="..\ILCompiler.MetadataTransform\ILCompiler.MetadataTransform.csproj" />
     <ProjectReference Include="..\ILCompiler.RyuJit\ILCompiler.RyuJit.csproj" />
     <ProjectReference Include="..\ILCompiler.TypeSystem\ILCompiler.TypeSystem.csproj" />
-
     <ProjectReference Include="..\..\..\nativeaot\Test.CoreLib\src\Test.CoreLib.csproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <OutputItemType>Content</OutputItemType>
@@ -38,7 +38,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </ProjectReference>
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="DependencyGraphTests.cs" />
     <Compile Include="DevirtualizationTests.cs" />

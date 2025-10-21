@@ -8,10 +8,12 @@
 using System.Diagnostics;
 using System.Xml.XPath;
 
-namespace System.Xml.Xsl.XsltOld {
+namespace System.Xml.Xsl.XsltOld
+{
     using Res = System.Xml.Utils.Res;
 
-    internal enum VariableType {
+    internal enum VariableType
+    {
         GlobalVariable,
         GlobalParameter,
         LocalVariable,
@@ -19,158 +21,203 @@ namespace System.Xml.Xsl.XsltOld {
         WithParameter,
     }
 
-    internal class VariableAction : ContainerAction, IXsltContextVariable {
+    internal class VariableAction : ContainerAction, IXsltContextVariable
+    {
         public static object BeingComputedMark = new object();
         private const int ValueCalculated = 2;
 
-        protected XmlQualifiedName  name;
-        protected string            nameStr;
-        protected string            baseUri;
-        protected int               selectKey = Compiler.InvalidQueryKey;
-        protected int               stylesheetid;
-        protected VariableType      varType;
-        private   int               varKey;
+        protected XmlQualifiedName name;
+        protected string nameStr;
+        protected string baseUri;
+        protected int selectKey = Compiler.InvalidQueryKey;
+        protected int stylesheetid;
+        protected VariableType varType;
+        private int varKey;
 
-        internal int Stylesheetid {
+        internal int Stylesheetid
+        {
             get { return this.stylesheetid; }
         }
-        internal XmlQualifiedName Name {
+        internal XmlQualifiedName Name
+        {
             get { return this.name; }
         }
-        internal string NameStr {
+        internal string NameStr
+        {
             get { return this.nameStr; }
         }
-        internal VariableType VarType {
+        internal VariableType VarType
+        {
             get { return this.varType; }
         }
-        internal int VarKey {
+        internal int VarKey
+        {
             get { return this.varKey; }
         }
-        internal bool IsGlobal {
-            get { return this.varType == VariableType.GlobalVariable || this.varType == VariableType.GlobalParameter; }
+        internal bool IsGlobal
+        {
+            get
+            {
+                return this.varType == VariableType.GlobalVariable
+                    || this.varType == VariableType.GlobalParameter;
+            }
         }
 
-        internal VariableAction(VariableType type) {
+        internal VariableAction(VariableType type)
+        {
             this.varType = type;
         }
 
-        internal override void Compile(Compiler compiler) {
+        internal override void Compile(Compiler compiler)
+        {
             this.stylesheetid = compiler.Stylesheetid;
-            this.baseUri      = compiler.Input.BaseURI;
+            this.baseUri = compiler.Input.BaseURI;
             CompileAttributes(compiler);
             CheckRequiredAttribute(compiler, this.name, "name");
 
-
-            if (compiler.Recurse()) {
+            if (compiler.Recurse())
+            {
                 CompileTemplate(compiler);
                 compiler.ToParent();
 
-                if (this.selectKey != Compiler.InvalidQueryKey && this.containedActions != null) {
+                if (this.selectKey != Compiler.InvalidQueryKey && this.containedActions != null)
+                {
                     throw XsltException.Create(Res.Xslt_VariableCntSel2, this.nameStr);
                 }
             }
-            if (this.containedActions != null) {
+            if (this.containedActions != null)
+            {
                 baseUri = baseUri + '#' + compiler.GetUnicRtfId();
-            } else {
+            }
+            else
+            {
                 baseUri = null;
             }
 
             this.varKey = compiler.InsertVariable(this);
         }
 
-        internal override bool CompileAttribute(Compiler compiler) {
-            string name   = compiler.Input.LocalName;
-            string value  = compiler.Input.Value;
+        internal override bool CompileAttribute(Compiler compiler)
+        {
+            string name = compiler.Input.LocalName;
+            string value = compiler.Input.Value;
 
-            if (Ref.Equal(name, compiler.Atoms.Name)) {
+            if (Ref.Equal(name, compiler.Atoms.Name))
+            {
                 Debug.Assert(this.name == null && this.nameStr == null);
                 this.nameStr = value;
-                this.name    = compiler.CreateXPathQName(this.nameStr);
+                this.name = compiler.CreateXPathQName(this.nameStr);
             }
-            else if (Ref.Equal(name, compiler.Atoms.Select)) {
+            else if (Ref.Equal(name, compiler.Atoms.Select))
+            {
                 this.selectKey = compiler.AddQuery(value);
             }
-            else {
+            else
+            {
                 return false;
             }
 
             return true;
         }
 
-        internal override void Execute(Processor processor, ActionFrame frame) {
+        internal override void Execute(Processor processor, ActionFrame frame)
+        {
             Debug.Assert(processor != null && frame != null && frame.State != ValueCalculated);
             object value = null;
 
-            switch(frame.State) {
-            case Initialized:
-                if (IsGlobal) {
-                    if (frame.GetVariable(this.varKey) != null) { // This var was calculated already
-                        frame.Finished();
-                        break;
+            switch (frame.State)
+            {
+                case Initialized:
+                    if (IsGlobal)
+                    {
+                        if (frame.GetVariable(this.varKey) != null)
+                        { // This var was calculated already
+                            frame.Finished();
+                            break;
+                        }
+                        // Mark that the variable is being computed to check for circular references
+                        frame.SetVariable(this.varKey, BeingComputedMark);
                     }
-                    // Mark that the variable is being computed to check for circular references
-                    frame.SetVariable(this.varKey, BeingComputedMark);
-                }
-                // If this is a parameter, check whether the caller has passed the value
-                if (this.varType == VariableType.GlobalParameter) {
-                    value = processor.GetGlobalParameter(this.name);
-                } else if (this.varType == VariableType.LocalParameter) {
-                    value = processor.GetParameter(this.name);
-                }
-                if (value != null) {
+                    // If this is a parameter, check whether the caller has passed the value
+                    if (this.varType == VariableType.GlobalParameter)
+                    {
+                        value = processor.GetGlobalParameter(this.name);
+                    }
+                    else if (this.varType == VariableType.LocalParameter)
+                    {
+                        value = processor.GetParameter(this.name);
+                    }
+                    if (value != null)
+                    {
+                        goto case ValueCalculated;
+                    }
+
+                    // If value was not passed, check the 'select' attribute
+                    if (this.selectKey != Compiler.InvalidQueryKey)
+                    {
+                        value = processor.RunQuery(frame, this.selectKey);
+                        goto case ValueCalculated;
+                    }
+
+                    // If there is no 'select' attribute and the content is empty, use the empty string
+                    if (this.containedActions == null)
+                    {
+                        value = string.Empty;
+                        goto case ValueCalculated;
+                    }
+
+                    // RTF case
+                    NavigatorOutput output = new NavigatorOutput(this.baseUri);
+                    processor.PushOutput(output);
+                    processor.PushActionFrame(frame);
+                    frame.State = ProcessingChildren;
+                    break;
+
+                case ProcessingChildren:
+                    RecordOutput recOutput = processor.PopOutput();
+                    Debug.Assert(recOutput is NavigatorOutput);
+                    value = ((NavigatorOutput)recOutput).Navigator;
                     goto case ValueCalculated;
-                }
 
-                // If value was not passed, check the 'select' attribute
-                if (this.selectKey != Compiler.InvalidQueryKey) {
-                    value = processor.RunQuery(frame, this.selectKey);
-                    goto case ValueCalculated;
-                }
+                case ValueCalculated:
+                    Debug.Assert(value != null);
+                    frame.SetVariable(this.varKey, value);
+                    frame.Finished();
+                    break;
 
-                // If there is no 'select' attribute and the content is empty, use the empty string
-                if (this.containedActions == null) {
-                    value = string.Empty;
-                    goto case ValueCalculated;
-                }
-
-                // RTF case
-                NavigatorOutput output = new NavigatorOutput(this.baseUri);
-                processor.PushOutput(output);
-                processor.PushActionFrame(frame);
-                frame.State = ProcessingChildren;
-                break;
-
-            case ProcessingChildren:
-                RecordOutput recOutput = processor.PopOutput();
-                Debug.Assert(recOutput is NavigatorOutput);
-                value = ((NavigatorOutput)recOutput).Navigator;
-                goto case ValueCalculated;
-
-            case ValueCalculated:
-                Debug.Assert(value != null);
-                frame.SetVariable(this.varKey, value);
-                frame.Finished();
-                break;
-
-            default:
-                Debug.Fail("Invalid execution state inside VariableAction.Execute");
-    		    break;
+                default:
+                    Debug.Fail("Invalid execution state inside VariableAction.Execute");
+                    break;
             }
         }
 
         // ---------------------- IXsltContextVariable --------------------
 
-        XPathResultType IXsltContextVariable.VariableType {
+        XPathResultType IXsltContextVariable.VariableType
+        {
             get { return XPathResultType.Any; }
         }
-        object IXsltContextVariable.Evaluate(XsltContext xsltContext) {
+
+        object IXsltContextVariable.Evaluate(XsltContext xsltContext)
+        {
             return ((XsltCompileContext)xsltContext).EvaluateVariable(this);
         }
-        bool   IXsltContextVariable.IsLocal {
-            get { return this.varType == VariableType.LocalVariable  || this.varType == VariableType.LocalParameter;  }
+
+        bool IXsltContextVariable.IsLocal
+        {
+            get
+            {
+                return this.varType == VariableType.LocalVariable
+                    || this.varType == VariableType.LocalParameter;
+            }
         }
-        bool   IXsltContextVariable.IsParam {
-            get { return this.varType == VariableType.LocalParameter || this.varType == VariableType.GlobalParameter; }
+        bool IXsltContextVariable.IsParam
+        {
+            get
+            {
+                return this.varType == VariableType.LocalParameter
+                    || this.varType == VariableType.GlobalParameter;
+            }
         }
     }
 }

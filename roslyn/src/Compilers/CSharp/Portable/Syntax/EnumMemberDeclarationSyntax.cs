@@ -6,7 +6,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     public partial class EnumMemberDeclarationSyntax
     {
-        public EnumMemberDeclarationSyntax Update(SyntaxList<AttributeListSyntax> attributeLists, SyntaxToken identifier, EqualsValueClauseSyntax equalsValue)
-            => this.Update(attributeLists, this.Modifiers, identifier, equalsValue);
+        public EnumMemberDeclarationSyntax Update(
+            SyntaxList<AttributeListSyntax> attributeLists,
+            SyntaxToken identifier,
+            EqualsValueClauseSyntax equalsValue
+        ) => this.Update(attributeLists, this.Modifiers, identifier, equalsValue);
     }
 }

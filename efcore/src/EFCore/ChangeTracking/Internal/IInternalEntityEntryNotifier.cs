@@ -59,7 +59,8 @@ public interface IInternalEntityEntryNotifier
         InternalEntityEntry entry,
         INavigation navigation,
         object? oldValue,
-        object? newValue);
+        object? newValue
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -71,7 +72,8 @@ public interface IInternalEntityEntryNotifier
         InternalEntityEntry entry,
         INavigationBase navigationBase,
         IEnumerable<object> added,
-        IEnumerable<object> removed);
+        IEnumerable<object> removed
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,7 +87,8 @@ public interface IInternalEntityEntryNotifier
         IEnumerable<IKey> keys,
         IEnumerable<IForeignKey> foreignKeys,
         object? oldValue,
-        object? newValue);
+        object? newValue
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="Timer.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Timers {
-
+namespace System.Timers
+{
+    using System;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
-    using System;
-    using System.Runtime.Versioning;
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
 
@@ -21,18 +21,19 @@ namespace System.Timers {
     ///    <para>Handles recurring events in an application.</para>
     /// </devdoc>
     [
-    DefaultProperty("Interval"),
-    DefaultEvent("Elapsed"),
-    HostProtection(Synchronization=true, ExternalThreading=true)
+        DefaultProperty("Interval"),
+        DefaultEvent("Elapsed"),
+        HostProtection(Synchronization = true, ExternalThreading = true)
     ]
-    public class Timer : Component, ISupportInitialize {
+    public class Timer : Component, ISupportInitialize
+    {
         private double interval;
-        private bool  enabled;
+        private bool enabled;
         private bool initializing;
-        private bool delayedEnable;                
+        private bool delayedEnable;
         private ElapsedEventHandler onIntervalElapsed;
-        private bool autoReset;               
-        private ISynchronizeInvoke synchronizingObject;  
+        private bool autoReset;
+        private ISynchronizeInvoke synchronizingObject;
         private bool disposed;
         private System.Threading.Timer timer;
         private TimerCallback callback;
@@ -43,7 +44,8 @@ namespace System.Timers {
         ///    set to initial values.</para>
         /// </devdoc>
         public Timer()
-        : base() {
+            : base()
+        {
             interval = 100;
             enabled = false;
             autoReset = true;
@@ -58,10 +60,13 @@ namespace System.Timers {
         ///    </para>
         /// </devdoc>
         public Timer(double interval)
-        : this() {
+            : this()
+        {
             if (interval <= 0)
-                throw new ArgumentException(SR.GetString(SR.InvalidParameter, "interval", interval));
-                        
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidParameter, "interval", interval)
+                );
+
             this.interval = CalculateRoundedInterval(interval, true);
         }
 
@@ -70,19 +75,20 @@ namespace System.Timers {
         /// Interval has elapsed,
         ///    when Enabled is set to true.</para>
         /// </devdoc>
-        [Category("Behavior"),  TimersDescription(SR.TimerAutoReset), DefaultValue(true)]
-        public bool AutoReset {
-            get {
-                return this.autoReset;
-            }
-
-            set {
+        [Category("Behavior"), TimersDescription(SR.TimerAutoReset), DefaultValue(true)]
+        public bool AutoReset
+        {
+            get { return this.autoReset; }
+            set
+            {
                 if (DesignMode)
-                     this.autoReset = value;
-                else if (this.autoReset != value) {
-                     this.autoReset = value;
-                    if( timer != null) {
-                         UpdateTimer();
+                    this.autoReset = value;
+                else if (this.autoReset != value)
+                {
+                    this.autoReset = value;
+                    if (timer != null)
+                    {
+                        UpdateTimer();
                     }
                 }
             }
@@ -95,196 +101,216 @@ namespace System.Timers {
         /// </devdoc>
         //Microsoft - The default value by design is false, don't change it.
         [Category("Behavior"), TimersDescription(SR.TimerEnabled), DefaultValue(false)]
-        public bool Enabled {
-            get {
-                return this.enabled;
-            }
-
-            set {
-                if (DesignMode) {
-                    this.delayedEnable = value;            
-                    this.enabled = value; 
-                }                    
+        public bool Enabled
+        {
+            get { return this.enabled; }
+            set
+            {
+                if (DesignMode)
+                {
+                    this.delayedEnable = value;
+                    this.enabled = value;
+                }
                 else if (initializing)
-                    this.delayedEnable = value;            
-                else if (enabled != value) {                                                                                                     
-                    if (!value) {                                           
-                        if( timer != null) {
+                    this.delayedEnable = value;
+                else if (enabled != value)
+                {
+                    if (!value)
+                    {
+                        if (timer != null)
+                        {
                             cookie = null;
                             timer.Dispose();
                             timer = null;
                         }
-                        enabled = value;                        
-                    }
-                    else {                          
                         enabled = value;
-                        if( timer == null) {
-                            if (disposed) {
+                    }
+                    else
+                    {
+                        enabled = value;
+                        if (timer == null)
+                        {
+                            if (disposed)
+                            {
                                 throw new ObjectDisposedException(GetType().Name);
                             }
 
                             int i = CalculateRoundedInterval(interval);
                             cookie = new Object();
-                            timer = new System.Threading.Timer(callback, cookie, i, autoReset? i:Timeout.Infinite);
+                            timer = new System.Threading.Timer(
+                                callback,
+                                cookie,
+                                i,
+                                autoReset ? i : Timeout.Infinite
+                            );
                         }
-                        else {
+                        else
+                        {
                             UpdateTimer();
                         }
-                    }                        
-
-                }                                                     
-          }
+                    }
+                }
+            }
         }
 
-        private static int CalculateRoundedInterval(double interval, bool argumentCheck = false) {
+        private static int CalculateRoundedInterval(double interval, bool argumentCheck = false)
+        {
             double roundedInterval = Math.Ceiling(interval);
-            if (roundedInterval > Int32.MaxValue || roundedInterval <= 0) {
+            if (roundedInterval > Int32.MaxValue || roundedInterval <= 0)
+            {
                 if (argumentCheck)
-                    throw new ArgumentException(SR.GetString(SR.InvalidParameter, "interval", interval));
+                    throw new ArgumentException(
+                        SR.GetString(SR.InvalidParameter, "interval", interval)
+                    );
 
-                throw new ArgumentOutOfRangeException(SR.GetString(SR.InvalidParameter, "interval", interval));
+                throw new ArgumentOutOfRangeException(
+                    SR.GetString(SR.InvalidParameter, "interval", interval)
+                );
             }
             return (int)roundedInterval;
         }
 
-        private void UpdateTimer() {
+        private void UpdateTimer()
+        {
             int i = CalculateRoundedInterval(interval);
-            timer.Change(i, autoReset? i :Timeout.Infinite );
+            timer.Change(i, autoReset ? i : Timeout.Infinite);
         }
-        
+
         /// <devdoc>
         ///    <para>Gets or
         ///       sets the interval on which
         ///       to raise events.</para>
         /// </devdoc>
-        [Category("Behavior"), TimersDescription(SR.TimerInterval), DefaultValue(100d), SettingsBindable(true)]
-        public double Interval {
-            get {
-                return this.interval;
-            }
-
-            set {
+        [
+            Category("Behavior"),
+            TimersDescription(SR.TimerInterval),
+            DefaultValue(100d),
+            SettingsBindable(true)
+        ]
+        public double Interval
+        {
+            get { return this.interval; }
+            set
+            {
                 if (value <= 0)
                     throw new ArgumentException(SR.GetString(SR.TimerInvalidInterval, value, 0));
-                                
-                interval = value;                
-                if (timer != null) {
+
+                interval = value;
+                if (timer != null)
+                {
                     UpdateTimer();
                 }
             }
-        }      
-
+        }
 
         /// <devdoc>
         /// <para>Occurs when the <see cref='System.Timers.Timer.Interval'/> has
         ///    elapsed.</para>
         /// </devdoc>
         [Category("Behavior"), TimersDescription(SR.TimerIntervalElapsed)]
-        public event ElapsedEventHandler Elapsed {
-            add {
-                onIntervalElapsed += value;
-            }
-            remove {
-                onIntervalElapsed -= value;
-            }
+        public event ElapsedEventHandler Elapsed
+        {
+            add { onIntervalElapsed += value; }
+            remove { onIntervalElapsed -= value; }
         }
 
         /// <devdoc>
         ///    <para>
         ///       Sets the enable property in design mode to true by default.
         ///    </para>
-        /// </devdoc>                              
+        /// </devdoc>
         /// <internalonly/>
-        public override ISite Site {
-            set {
+        public override ISite Site
+        {
+            set
+            {
                 base.Site = value;
                 if (this.DesignMode)
-                    this.enabled= true;
+                    this.enabled = true;
             }
-            
-            get {
-                return base.Site;
-            }
+            get { return base.Site; }
         }
-
 
         /// <devdoc>
         ///    <para>Gets or sets the object used to marshal event-handler calls that are issued when
         ///       an interval has elapsed.</para>
         /// </devdoc>
-        [
-        Browsable(false),        
-        DefaultValue(null), 
-        TimersDescription(SR.TimerSynchronizingObject)
-        ]
-        public ISynchronizeInvoke SynchronizingObject {
-            get {
-                if (this.synchronizingObject == null && DesignMode) {
+        [Browsable(false), DefaultValue(null), TimersDescription(SR.TimerSynchronizingObject)]
+        public ISynchronizeInvoke SynchronizingObject
+        {
+            get
+            {
+                if (this.synchronizingObject == null && DesignMode)
+                {
                     IDesignerHost host = (IDesignerHost)GetService(typeof(IDesignerHost));
-                    if (host != null) {
+                    if (host != null)
+                    {
                         object baseComponent = host.RootComponent;
                         if (baseComponent != null && baseComponent is ISynchronizeInvoke)
                             this.synchronizingObject = (ISynchronizeInvoke)baseComponent;
-                    }                        
+                    }
                 }
-            
+
                 return this.synchronizingObject;
             }
-            
-            set {
-                this.synchronizingObject = value;
-            }
-        }                  
-        
+            set { this.synchronizingObject = value; }
+        }
+
         /// <devdoc>
         ///    <para>
         ///       Notifies
         ///       the object that initialization is beginning and tells it to stand by.
         ///    </para>
         /// </devdoc>
-        public void BeginInit() {
+        public void BeginInit()
+        {
             this.Close();
             this.initializing = true;
         }
-                
+
         /// <devdoc>
         ///    <para>Disposes of the resources (other than memory) used by
         ///       the <see cref='System.Timers.Timer'/>.</para>
         /// </devdoc>
-        public void Close() {                  
+        public void Close()
+        {
             initializing = false;
             delayedEnable = false;
             enabled = false;
-                                        
-            if (timer != null ) {
+
+            if (timer != null)
+            {
                 timer.Dispose();
                 timer = null;
-            }                                            
-        }                                
+            }
+        }
 
         /// <internalonly/>
-        /// <devdoc>        
+        /// <devdoc>
         /// </devdoc>
-        protected override void Dispose(bool disposing) {            
-            Close();                        
+        protected override void Dispose(bool disposing)
+        {
+            Close();
             this.disposed = true;
             base.Dispose(disposing);
-        }      
-         
+        }
+
         /// <devdoc>
         ///    <para>
         ///       Notifies the object that initialization is complete.
         ///    </para>
         /// </devdoc>
-        public void EndInit() {
-            this.initializing = false;            
+        public void EndInit()
+        {
+            this.initializing = false;
             this.Enabled = this.delayedEnable;
-        }        
+        }
 
         /// <devdoc>
         /// <para>Starts the timing by setting <see cref='System.Timers.Timer.Enabled'/> to <see langword='true'/>.</para>
         /// </devdoc>
-        public void Start() {
+        public void Start()
+        {
             Enabled = true;
         }
 
@@ -293,18 +319,22 @@ namespace System.Timers {
         ///       Stops the timing by setting <see cref='System.Timers.Timer.Enabled'/> to <see langword='false'/>.
         ///    </para>
         /// </devdoc>
-        public void Stop() {
+        public void Stop()
+        {
             Enabled = false;
         }
-                        
-        private void MyTimerCallback(object state) {
+
+        private void MyTimerCallback(object state)
+        {
             // System.Threading.Timer will not cancel the work item queued before the timer is stopped.
             // We don't want to handle the callback after a timer is stopped.
-            if( state != cookie) { 
+            if (state != cookie)
+            {
                 return;
-            } 
-            
-            if (!this.autoReset) {
+            }
+
+            if (!this.autoReset)
+            {
                 enabled = false;
             }
 #if MONO
@@ -312,32 +342,40 @@ namespace System.Timers {
 #else
             FILE_TIME filetime = new FILE_TIME();
             GetSystemTimeAsFileTime(ref filetime);
-            ElapsedEventArgs elapsedEventArgs = new ElapsedEventArgs(filetime.ftTimeLow, filetime.ftTimeHigh); 
+            ElapsedEventArgs elapsedEventArgs = new ElapsedEventArgs(
+                filetime.ftTimeLow,
+                filetime.ftTimeHigh
+            );
 #endif
-            try {                                            
+            try
+            {
                 // To avoid ---- between remove handler and raising the event
                 ElapsedEventHandler intervalElapsed = this.onIntervalElapsed;
-                if (intervalElapsed != null) {
+                if (intervalElapsed != null)
+                {
                     if (this.SynchronizingObject != null && this.SynchronizingObject.InvokeRequired)
-                        this.SynchronizingObject.BeginInvoke(intervalElapsed, new object[]{this, elapsedEventArgs});
-                    else                        
-                       intervalElapsed(this,  elapsedEventArgs);                                   
+                        this.SynchronizingObject.BeginInvoke(
+                            intervalElapsed,
+                            new object[] { this, elapsedEventArgs }
+                        );
+                    else
+                        intervalElapsed(this, elapsedEventArgs);
                 }
             }
-            catch {             
-            }            
-        }                        
+            catch { }
+        }
+
 #if !MONO
         [StructLayout(LayoutKind.Sequential)]
-        internal struct FILE_TIME {
+        internal struct FILE_TIME
+        {
             internal int ftTimeLow;
             internal int ftTimeHigh;
         }
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(ExternDll.Kernel32), SuppressUnmanagedCodeSecurityAttribute()]
-        internal static extern void GetSystemTimeAsFileTime(ref FILE_TIME lpSystemTimeAsFileTime);		
+        internal static extern void GetSystemTimeAsFileTime(ref FILE_TIME lpSystemTimeAsFileTime);
 #endif
     }
 }
-

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,26 +31,26 @@ using System;
 
 namespace System.Runtime.InteropServices
 {
-	[Flags]
-	public enum RegistrationClassContext
-	{
-		DisableActivateAsActivator = 32768,
-		EnableActivateAsActivator = 65536,
-		EnableCodeDownload = 8192,
-		FromDefaultContext = 131072,
-		InProcessHandler = 2,
-		InProcessHandler16 = 32,
-		InProcessServer = 1,
-		InProcessServer16 = 8,
-		LocalServer = 4,
-		NoCodeDownload = 1024,
-		NoCustomMarshal = 4096,
-		NoFailureLog = 16384,
-		RemoteServer = 16,
-		Reserved1 = 64,
-		Reserved2 = 128,
-		Reserved3 = 256,
-		Reserved4 = 512,
-		Reserved5 = 2048,
-	}
+    [Flags]
+    public enum RegistrationClassContext
+    {
+        DisableActivateAsActivator = 32768,
+        EnableActivateAsActivator = 65536,
+        EnableCodeDownload = 8192,
+        FromDefaultContext = 131072,
+        InProcessHandler = 2,
+        InProcessHandler16 = 32,
+        InProcessServer = 1,
+        InProcessServer16 = 8,
+        LocalServer = 4,
+        NoCodeDownload = 1024,
+        NoCustomMarshal = 4096,
+        NoFailureLog = 16384,
+        RemoteServer = 16,
+        Reserved1 = 64,
+        Reserved2 = 128,
+        Reserved3 = 256,
+        Reserved4 = 512,
+        Reserved5 = 2048,
+    }
 }

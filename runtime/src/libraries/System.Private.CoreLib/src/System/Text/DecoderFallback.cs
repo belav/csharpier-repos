@@ -27,7 +27,6 @@ namespace System.Text
         public abstract int MaxCharCount { get; }
     }
 
-
     public abstract class DecoderFallbackBuffer
     {
         // Most implementations will probably need an implementation-specific constructor
@@ -53,7 +52,8 @@ namespace System.Text
 
         public virtual void Reset()
         {
-            while (GetNextChar() != (char)0) ;
+            while (GetNextChar() != (char)0)
+                ;
         }
 
         // Internal items to help us figure out what we're doing as far as error messages, etc.
@@ -80,14 +80,21 @@ namespace System.Text
             this.charEnd = charEnd;
         }
 
-        internal static DecoderFallbackBuffer CreateAndInitialize(Encoding encoding, DecoderNLS? decoder, int originalByteCount)
+        internal static DecoderFallbackBuffer CreateAndInitialize(
+            Encoding encoding,
+            DecoderNLS? decoder,
+            int originalByteCount
+        )
         {
             // The original byte count is only used for keeping track of what 'index' value needs
             // to be passed to the abstract Fallback method. The index value is calculated by subtracting
             // 'bytes.Length' (where bytes is expected to be the entire remaining input buffer)
             // from the 'originalByteCount' value specified here.
 
-            DecoderFallbackBuffer fallbackBuffer = (decoder is null) ? encoding.DecoderFallback.CreateFallbackBuffer() : decoder.FallbackBuffer;
+            DecoderFallbackBuffer fallbackBuffer =
+                (decoder is null)
+                    ? encoding.DecoderFallback.CreateFallbackBuffer()
+                    : decoder.FallbackBuffer;
 
             fallbackBuffer._encoding = encoding;
             fallbackBuffer._decoder = decoder;
@@ -106,7 +113,10 @@ namespace System.Text
         // Don't touch ref chars unless we succeed
         internal virtual unsafe bool InternalFallback(byte[] bytes, byte* pBytes, ref char* chars)
         {
-            Debug.Assert(byteStart != null, "[DecoderFallback.InternalFallback]Used InternalFallback without calling InternalInitialize");
+            Debug.Assert(
+                byteStart != null,
+                "[DecoderFallback.InternalFallback]Used InternalFallback without calling InternalInitialize"
+            );
 
             // See if there's a fallback character and we have an output buffer then copy our string.
             if (this.Fallback(bytes, (int)(pBytes - byteStart - bytes.Length)))
@@ -161,7 +171,10 @@ namespace System.Text
         // Right now this has both bytes and bytes[], since we might have extra bytes, hence the
         // array, and we might need the index, hence the byte*
         {
-            Debug.Assert(byteStart != null, "[DecoderFallback.InternalFallback]Used InternalFallback without calling InternalInitialize");
+            Debug.Assert(
+                byteStart != null,
+                "[DecoderFallback.InternalFallback]Used InternalFallback without calling InternalInitialize"
+            );
 
             // See if there's a fallback character and we have an output buffer then copy our string.
             if (this.Fallback(bytes, (int)(pBytes - byteStart - bytes.Length)))
@@ -205,16 +218,34 @@ namespace System.Text
             return 0;
         }
 
-        internal int InternalFallbackGetCharCount(ReadOnlySpan<byte> remainingBytes, int fallbackLength)
+        internal int InternalFallbackGetCharCount(
+            ReadOnlySpan<byte> remainingBytes,
+            int fallbackLength
+        )
         {
-            return (Fallback(remainingBytes.Slice(0, fallbackLength).ToArray(), index: _originalByteCount - remainingBytes.Length))
+            return (
+                Fallback(
+                    remainingBytes.Slice(0, fallbackLength).ToArray(),
+                    index: _originalByteCount - remainingBytes.Length
+                )
+            )
                 ? DrainRemainingDataForGetCharCount()
                 : 0;
         }
 
-        internal bool TryInternalFallbackGetChars(ReadOnlySpan<byte> remainingBytes, int fallbackLength, Span<char> chars, out int charsWritten)
+        internal bool TryInternalFallbackGetChars(
+            ReadOnlySpan<byte> remainingBytes,
+            int fallbackLength,
+            Span<char> chars,
+            out int charsWritten
+        )
         {
-            if (Fallback(remainingBytes.Slice(0, fallbackLength).ToArray(), index: _originalByteCount - remainingBytes.Length))
+            if (
+                Fallback(
+                    remainingBytes.Slice(0, fallbackLength).ToArray(),
+                    index: _originalByteCount - remainingBytes.Length
+                )
+            )
             {
                 return TryDrainRemainingDataForGetChars(chars, out charsWritten);
             }
@@ -309,8 +340,9 @@ namespace System.Text
 
             // Throw it, using our complete bytes
             throw new ArgumentException(
-                SR.Format(SR.Argument_RecursiveFallbackBytes,
-                    strBytes.ToString()), nameof(bytesUnknown));
+                SR.Format(SR.Argument_RecursiveFallbackBytes, strBytes.ToString()),
+                nameof(bytesUnknown)
+            );
         }
     }
 }

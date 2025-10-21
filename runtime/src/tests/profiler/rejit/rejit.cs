@@ -96,10 +96,12 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "ReJITWithInlining",
-                                          profilerClsid: ReJitProfilerGuid,
-                                          profileeOptions: ProfileeOptions.OptimizationSensitive);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "ReJITWithInlining",
+                profilerClsid: ReJitProfilerGuid,
+                profileeOptions: ProfileeOptions.OptimizationSensitive
+            );
         }
     }
 

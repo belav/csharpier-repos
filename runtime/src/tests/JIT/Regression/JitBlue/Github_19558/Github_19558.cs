@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 struct S0
 {
     public uint F1;
@@ -9,7 +10,9 @@ struct S0
     public ulong F3;
     public ushort F5;
     public bool F7;
-    public S0(uint f1) : this()
+
+    public S0(uint f1)
+        : this()
     {
         F1 = f1;
     }

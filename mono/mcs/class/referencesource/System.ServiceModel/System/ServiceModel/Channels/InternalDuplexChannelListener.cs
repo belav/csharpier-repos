@@ -11,7 +11,10 @@ namespace System.ServiceModel.Channels
         IChannelFactory<IOutputChannel> innerChannelFactory;
         bool providesCorrelation;
 
-        internal InternalDuplexChannelListener(InternalDuplexBindingElement bindingElement, BindingContext context)
+        internal InternalDuplexChannelListener(
+            InternalDuplexBindingElement bindingElement,
+            BindingContext context
+        )
             : base(context.Binding, context.Clone().BuildInnerChannelListener<IInputChannel>())
         {
             this.innerChannelFactory = context.BuildInnerChannelFactory<IOutputChannel>();
@@ -20,7 +23,9 @@ namespace System.ServiceModel.Channels
 
         IOutputChannel GetOutputChannel(Uri to, TimeoutHelper timeoutHelper)
         {
-            IOutputChannel channel = this.innerChannelFactory.CreateChannel(new EndpointAddress(to));
+            IOutputChannel channel = this.innerChannelFactory.CreateChannel(
+                new EndpointAddress(to)
+            );
             channel.Open(timeoutHelper.RemainingTime());
             return channel;
         }
@@ -37,9 +42,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, this.innerChannelFactory);
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                this.innerChannelFactory
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -57,12 +73,29 @@ namespace System.ServiceModel.Channels
         protected override void OnOpening()
         {
             base.OnOpening();
-            this.Acceptor = (IChannelAcceptor<IDuplexChannel>)(object)new CompositeDuplexChannelAcceptor(this, (IChannelListener<IInputChannel>)this.InnerChannelListener);
+            this.Acceptor =
+                (IChannelAcceptor<IDuplexChannel>)
+                    (object)
+                        new CompositeDuplexChannelAcceptor(
+                            this,
+                            (IChannelListener<IInputChannel>)this.InnerChannelListener
+                        );
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, this.innerChannelFactory);
+            return new ChainedOpenAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                this.innerChannelFactory
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -86,7 +119,9 @@ namespace System.ServiceModel.Channels
 
             if (typeof(T) == typeof(ISecurityCapabilities) && !this.providesCorrelation)
             {
-                return InternalDuplexBindingElement.GetSecurityCapabilities<T>(base.GetProperty<ISecurityCapabilities>());
+                return InternalDuplexBindingElement.GetSecurityCapabilities<T>(
+                    base.GetProperty<ISecurityCapabilities>()
+                );
             }
 
             T baseProperty = base.GetProperty<T>();
@@ -98,16 +133,21 @@ namespace System.ServiceModel.Channels
             return this.innerChannelFactory.GetProperty<T>();
         }
 
-        sealed class CompositeDuplexChannelAcceptor : LayeredChannelAcceptor<IDuplexChannel, IInputChannel>
+        sealed class CompositeDuplexChannelAcceptor
+            : LayeredChannelAcceptor<IDuplexChannel, IInputChannel>
         {
-            public CompositeDuplexChannelAcceptor(InternalDuplexChannelListener listener, IChannelListener<IInputChannel> innerListener)
-                : base(listener, innerListener)
-            {
-            }
+            public CompositeDuplexChannelAcceptor(
+                InternalDuplexChannelListener listener,
+                IChannelListener<IInputChannel> innerListener
+            )
+                : base(listener, innerListener) { }
 
             protected override IDuplexChannel OnAcceptChannel(IInputChannel innerChannel)
             {
-                return new ServerCompositeDuplexChannel((InternalDuplexChannelListener)ChannelManager, innerChannel);
+                return new ServerCompositeDuplexChannel(
+                    (InternalDuplexChannelListener)ChannelManager,
+                    innerChannel
+                );
             }
         }
 
@@ -116,7 +156,10 @@ namespace System.ServiceModel.Channels
             IInputChannel innerInputChannel;
             TimeSpan sendTimeout;
 
-            public ServerCompositeDuplexChannel(InternalDuplexChannelListener listener, IInputChannel innerInputChannel)
+            public ServerCompositeDuplexChannel(
+                InternalDuplexChannelListener listener,
+                IInputChannel innerInputChannel
+            )
                 : base(listener)
             {
                 this.innerInputChannel = innerInputChannel;
@@ -168,7 +211,11 @@ namespace System.ServiceModel.Channels
                 return InputChannel.HelpEndReceive(result);
             }
 
-            public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginTryReceive(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerInputChannel.BeginTryReceive(timeout, callback, state);
             }
@@ -178,7 +225,12 @@ namespace System.ServiceModel.Channels
                 return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
             }
 
-            public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new SendAsyncResult(this, message, timeout, callback, state);
             }
@@ -198,7 +250,11 @@ namespace System.ServiceModel.Channels
                 this.innerInputChannel.Abort();
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerInputChannel.BeginClose(timeout, callback, state);
             }
@@ -214,7 +270,11 @@ namespace System.ServiceModel.Channels
                     this.innerInputChannel.Close(timeout);
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerInputChannel.BeginOpen(callback, state);
             }
@@ -242,7 +302,10 @@ namespace System.ServiceModel.Channels
             public void Send(Message message, TimeSpan timeout)
             {
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                IOutputChannel outputChannel = ValidateStateAndGetOutputChannel(message, timeoutHelper);
+                IOutputChannel outputChannel = ValidateStateAndGetOutputChannel(
+                    message,
+                    timeoutHelper
+                );
                 try
                 {
                     outputChannel.Send(message, timeoutHelper.RemainingTime());
@@ -254,7 +317,10 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            IOutputChannel ValidateStateAndGetOutputChannel(Message message, TimeoutHelper timeoutHelper)
+            IOutputChannel ValidateStateAndGetOutputChannel(
+                Message message,
+                TimeoutHelper timeoutHelper
+            )
             {
                 ThrowIfDisposedOrNotOpen();
                 if (message == null)
@@ -267,18 +333,47 @@ namespace System.ServiceModel.Channels
                     to = message.Headers.To;
                     if (to == null)
                     {
-                        throw TraceUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.MessageMustHaveViaOrToSetForSendingOnServerSideCompositeDuplexChannels)), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.MessageMustHaveViaOrToSetForSendingOnServerSideCompositeDuplexChannels
+                                )
+                            ),
+                            message
+                        );
                     }
                     //Check for EndpointAddress.AnonymousUri is just redundant
-                    else if (to.Equals(EndpointAddress.AnonymousUri) || to.Equals(message.Version.Addressing.AnonymousUri))
+                    else if (
+                        to.Equals(EndpointAddress.AnonymousUri)
+                        || to.Equals(message.Version.Addressing.AnonymousUri)
+                    )
                     {
-                        throw TraceUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.MessageToCannotBeAddressedToAnonymousOnServerSideCompositeDuplexChannels, to)), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.MessageToCannotBeAddressedToAnonymousOnServerSideCompositeDuplexChannels,
+                                    to
+                                )
+                            ),
+                            message
+                        );
                     }
                 }
                 //Check for EndpointAddress.AnonymousUri is just redundant
-                else if (to.Equals(EndpointAddress.AnonymousUri) || to.Equals(message.Version.Addressing.AnonymousUri))
+                else if (
+                    to.Equals(EndpointAddress.AnonymousUri)
+                    || to.Equals(message.Version.Addressing.AnonymousUri)
+                )
                 {
-                    throw TraceUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.MessageViaCannotBeAddressedToAnonymousOnServerSideCompositeDuplexChannels, to)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.MessageViaCannotBeAddressedToAnonymousOnServerSideCompositeDuplexChannels,
+                                to
+                            )
+                        ),
+                        message
+                    );
                 }
                 return this.Listener.GetOutputChannel(to, timeoutHelper);
             }
@@ -286,19 +381,35 @@ namespace System.ServiceModel.Channels
             class SendAsyncResult : AsyncResult
             {
                 IOutputChannel outputChannel;
-                static AsyncCallback sendCompleteCallback = Fx.ThunkCallback(new AsyncCallback(SendCompleteCallback));
+                static AsyncCallback sendCompleteCallback = Fx.ThunkCallback(
+                    new AsyncCallback(SendCompleteCallback)
+                );
                 TimeoutHelper timeoutHelper;
 
-                public SendAsyncResult(ServerCompositeDuplexChannel outer, Message message, TimeSpan timeout, AsyncCallback callback, object state)
+                public SendAsyncResult(
+                    ServerCompositeDuplexChannel outer,
+                    Message message,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.timeoutHelper = new TimeoutHelper(timeout);
-                    this.outputChannel = outer.ValidateStateAndGetOutputChannel(message, timeoutHelper);
+                    this.outputChannel = outer.ValidateStateAndGetOutputChannel(
+                        message,
+                        timeoutHelper
+                    );
 
                     bool success = false;
                     try
                     {
-                        IAsyncResult result = outputChannel.BeginSend(message, timeoutHelper.RemainingTime(), sendCompleteCallback, this);
+                        IAsyncResult result = outputChannel.BeginSend(
+                            message,
+                            timeoutHelper.RemainingTime(),
+                            sendCompleteCallback,
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             CompleteSend(result);
@@ -363,7 +474,11 @@ namespace System.ServiceModel.Channels
                 return innerInputChannel.WaitForMessage(timeout);
             }
 
-            public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginWaitForMessage(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return innerInputChannel.BeginWaitForMessage(timeout, callback, state);
             }

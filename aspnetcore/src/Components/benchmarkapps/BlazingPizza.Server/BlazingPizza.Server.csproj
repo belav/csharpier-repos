@@ -1,11 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <IsTestAssetProject>true</IsTestAssetProject>
     <NoWarn>$(NoWarn);IDE0161;IDE0073</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Components.Server" />
@@ -13,5 +11,4 @@
     <Reference Include="Microsoft.AspNetCore.Mvc" />
     <Reference Include="Microsoft.Extensions.Hosting" />
   </ItemGroup>
-
 </Project>

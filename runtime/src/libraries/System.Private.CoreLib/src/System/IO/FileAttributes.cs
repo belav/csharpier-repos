@@ -22,6 +22,6 @@ namespace System.IO
         NotContentIndexed = 0x2000,
         Encrypted = 0x4000,
         IntegrityStream = 0x8000,
-        NoScrubData = 0x20000
+        NoScrubData = 0x20000,
     }
 }

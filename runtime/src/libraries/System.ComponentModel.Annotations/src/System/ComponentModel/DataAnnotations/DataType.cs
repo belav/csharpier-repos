@@ -91,6 +91,6 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         ///     File upload data type
         /// </summary>
-        Upload = 16
+        Upload = 16,
     }
 }

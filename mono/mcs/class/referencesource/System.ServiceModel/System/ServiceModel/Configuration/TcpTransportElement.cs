@@ -6,15 +6,13 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
     using System.Net.Sockets;
-    using System.ServiceModel.Channels;
     using System.Security.Authentication.ExtendedProtection.Configuration;
+    using System.ServiceModel.Channels;
 
     public sealed partial class TcpTransportElement : ConnectionOrientedTransportElement
     {
-        public TcpTransportElement() 
-            : base()
-        {
-        }
+        public TcpTransportElement()
+            : base() { }
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
@@ -24,13 +22,15 @@ namespace System.ServiceModel.Configuration
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
             if (this.ListenBacklog != TcpTransportDefaults.ListenBacklogConst)
             {
-                binding.ListenBacklog = this.ListenBacklog;                
+                binding.ListenBacklog = this.ListenBacklog;
             }
             binding.PortSharingEnabled = this.PortSharingEnabled;
             binding.TeredoEnabled = this.TeredoEnabled;
 #pragma warning suppress 56506 // Microsoft, base.ApplyConfiguration() validates the argument
             this.ConnectionPoolSettings.ApplyConfiguration(binding.ConnectionPoolSettings);
-            binding.ExtendedProtectionPolicy = ChannelBindingUtility.BuildPolicy(this.ExtendedProtectionPolicy);
+            binding.ExtendedProtectionPolicy = ChannelBindingUtility.BuildPolicy(
+                this.ExtendedProtectionPolicy
+            );
         }
 
         public override Type BindingElementType
@@ -48,14 +48,17 @@ namespace System.ServiceModel.Configuration
             this.PortSharingEnabled = source.PortSharingEnabled;
             this.TeredoEnabled = source.TeredoEnabled;
             this.ConnectionPoolSettings.CopyFrom(source.ConnectionPoolSettings);
-            ChannelBindingUtility.CopyFrom(source.ExtendedProtectionPolicy, this.ExtendedProtectionPolicy);
+            ChannelBindingUtility.CopyFrom(
+                source.ExtendedProtectionPolicy,
+                this.ExtendedProtectionPolicy
+            );
         }
 
         protected override TransportBindingElement CreateDefaultBindingElement()
         {
             return new TcpTransportBindingElement();
         }
-        
+
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             base.InitializeFrom(bindingElement);
@@ -63,16 +66,34 @@ namespace System.ServiceModel.Configuration
             TcpTransportBindingElement binding = (TcpTransportBindingElement)bindingElement;
             if (binding.IsListenBacklogSet)
             {
-                ConfigurationProperty listenBacklogProperty = this.Properties[ConfigurationStrings.ListenBacklog];
-                SetPropertyValue(listenBacklogProperty, binding.ListenBacklog, false /*ignore locks*/);
+                ConfigurationProperty listenBacklogProperty = this.Properties[
+                    ConfigurationStrings.ListenBacklog
+                ];
+                SetPropertyValue(
+                    listenBacklogProperty,
+                    binding.ListenBacklog,
+                    false /*ignore locks*/
+                );
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.PortSharingEnabled, binding.PortSharingEnabled);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TeredoEnabled, binding.TeredoEnabled);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.PortSharingEnabled,
+                binding.PortSharingEnabled
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TeredoEnabled,
+                binding.TeredoEnabled
+            );
             this.ConnectionPoolSettings.InitializeFrom(binding.ConnectionPoolSettings);
-            ChannelBindingUtility.InitializeFrom(binding.ExtendedProtectionPolicy, this.ExtendedProtectionPolicy);
+            ChannelBindingUtility.InitializeFrom(
+                binding.ExtendedProtectionPolicy,
+                this.ExtendedProtectionPolicy
+            );
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ListenBacklog, DefaultValue = TcpTransportDefaults.ListenBacklogConst)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ListenBacklog,
+            DefaultValue = TcpTransportDefaults.ListenBacklogConst
+        )]
         [IntegerValidator(MinValue = 0)]
         public int ListenBacklog
         {
@@ -80,14 +101,20 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.ListenBacklog] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.PortSharingEnabled, DefaultValue = TcpTransportDefaults.PortSharingEnabled)]
+        [ConfigurationProperty(
+            ConfigurationStrings.PortSharingEnabled,
+            DefaultValue = TcpTransportDefaults.PortSharingEnabled
+        )]
         public bool PortSharingEnabled
         {
             get { return (bool)base[ConfigurationStrings.PortSharingEnabled]; }
             set { base[ConfigurationStrings.PortSharingEnabled] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TeredoEnabled, DefaultValue = TcpTransportDefaults.TeredoEnabled)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TeredoEnabled,
+            DefaultValue = TcpTransportDefaults.TeredoEnabled
+        )]
         public bool TeredoEnabled
         {
             get { return (bool)base[ConfigurationStrings.TeredoEnabled]; }
@@ -97,18 +124,23 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ConnectionPoolSettings)]
         public TcpConnectionPoolSettingsElement ConnectionPoolSettings
         {
-            get { return (TcpConnectionPoolSettingsElement)base[ConfigurationStrings.ConnectionPoolSettings]; }
+            get
+            {
+                return (TcpConnectionPoolSettingsElement)
+                    base[ConfigurationStrings.ConnectionPoolSettings];
+            }
             set { base[ConfigurationStrings.ConnectionPoolSettings] = value; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.ExtendedProtectionPolicy)]
         public ExtendedProtectionPolicyElement ExtendedProtectionPolicy
         {
-            get { return (ExtendedProtectionPolicyElement)base[ConfigurationStrings.ExtendedProtectionPolicy]; }
+            get
+            {
+                return (ExtendedProtectionPolicyElement)
+                    base[ConfigurationStrings.ExtendedProtectionPolicy];
+            }
             private set { base[ConfigurationStrings.ExtendedProtectionPolicy] = value; }
         }
     }
 }
-
-
-

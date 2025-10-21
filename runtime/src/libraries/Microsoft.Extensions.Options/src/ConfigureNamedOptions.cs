@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.Options
     /// Implementation of <see cref="IConfigureNamedOptions{TOptions}"/>.
     /// </summary>
     /// <typeparam name="TOptions">Options type being configured.</typeparam>
-    public class ConfigureNamedOptions<TOptions> : IConfigureNamedOptions<TOptions> where TOptions : class
+    public class ConfigureNamedOptions<TOptions> : IConfigureNamedOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Constructor.
@@ -133,7 +134,12 @@ namespace Microsoft.Extensions.Options
         /// <param name="dependency">A dependency.</param>
         /// <param name="dependency2">A second dependency.</param>
         /// <param name="action">The action to register.</param>
-        public ConfigureNamedOptions(string? name, TDep1 dependency, TDep2 dependency2, Action<TOptions, TDep1, TDep2>? action)
+        public ConfigureNamedOptions(
+            string? name,
+            TDep1 dependency,
+            TDep2 dependency2,
+            Action<TOptions, TDep1, TDep2>? action
+        )
         {
             Name = name;
             Action = action;
@@ -191,7 +197,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TDep1">First dependency type.</typeparam>
     /// <typeparam name="TDep2">Second dependency type.</typeparam>
     /// <typeparam name="TDep3">Third dependency type.</typeparam>
-    public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3> : IConfigureNamedOptions<TOptions>
+    public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3>
+        : IConfigureNamedOptions<TOptions>
         where TOptions : class
         where TDep1 : class
         where TDep2 : class
@@ -205,7 +212,13 @@ namespace Microsoft.Extensions.Options
         /// <param name="dependency2">A second dependency.</param>
         /// <param name="dependency3">A third dependency.</param>
         /// <param name="action">The action to register.</param>
-        public ConfigureNamedOptions(string? name, TDep1 dependency, TDep2 dependency2, TDep3 dependency3, Action<TOptions, TDep1, TDep2, TDep3>? action)
+        public ConfigureNamedOptions(
+            string? name,
+            TDep1 dependency,
+            TDep2 dependency2,
+            TDep3 dependency3,
+            Action<TOptions, TDep1, TDep2, TDep3>? action
+        )
         {
             Name = name;
             Action = action;
@@ -270,7 +283,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TDep2">Second dependency type.</typeparam>
     /// <typeparam name="TDep3">Third dependency type.</typeparam>
     /// <typeparam name="TDep4">Fourth dependency type.</typeparam>
-    public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4> : IConfigureNamedOptions<TOptions>
+    public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
+        : IConfigureNamedOptions<TOptions>
         where TOptions : class
         where TDep1 : class
         where TDep2 : class
@@ -286,7 +300,14 @@ namespace Microsoft.Extensions.Options
         /// <param name="dependency3">A third dependency.</param>
         /// <param name="dependency4">A fourth dependency.</param>
         /// <param name="action">The action to register.</param>
-        public ConfigureNamedOptions(string? name, TDep1 dependency1, TDep2 dependency2, TDep3 dependency3, TDep4 dependency4, Action<TOptions, TDep1, TDep2, TDep3, TDep4>? action)
+        public ConfigureNamedOptions(
+            string? name,
+            TDep1 dependency1,
+            TDep2 dependency2,
+            TDep3 dependency3,
+            TDep4 dependency4,
+            Action<TOptions, TDep1, TDep2, TDep3, TDep4>? action
+        )
         {
             Name = name;
             Action = action;
@@ -358,7 +379,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TDep3">Third dependency type.</typeparam>
     /// <typeparam name="TDep4">Fourth dependency type.</typeparam>
     /// <typeparam name="TDep5">Fifth dependency type.</typeparam>
-    public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5> : IConfigureNamedOptions<TOptions>
+    public class ConfigureNamedOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
+        : IConfigureNamedOptions<TOptions>
         where TOptions : class
         where TDep1 : class
         where TDep2 : class
@@ -376,7 +398,15 @@ namespace Microsoft.Extensions.Options
         /// <param name="dependency4">A fourth dependency.</param>
         /// <param name="dependency5">A fifth dependency.</param>
         /// <param name="action">The action to register.</param>
-        public ConfigureNamedOptions(string? name, TDep1 dependency1, TDep2 dependency2, TDep3 dependency3, TDep4 dependency4, TDep5 dependency5, Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>? action)
+        public ConfigureNamedOptions(
+            string? name,
+            TDep1 dependency1,
+            TDep2 dependency2,
+            TDep3 dependency3,
+            TDep4 dependency4,
+            TDep5 dependency5,
+            Action<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>? action
+        )
         {
             Name = name;
             Action = action;
@@ -434,7 +464,14 @@ namespace Microsoft.Extensions.Options
             // Null name is used to configure all named options.
             if (Name == null || name == Name)
             {
-                Action?.Invoke(options, Dependency1, Dependency2, Dependency3, Dependency4, Dependency5);
+                Action?.Invoke(
+                    options,
+                    Dependency1,
+                    Dependency2,
+                    Dependency3,
+                    Dependency4,
+                    Dependency5
+                );
             }
         }
 

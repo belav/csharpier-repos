@@ -33,7 +33,7 @@ namespace System.ServiceModel.Transactions
             entry.AddEntry(tx, identifier, tx);
         }
     }
-    
+
     abstract class TransactionCache<T, S>
     {
         static Dictionary<T, S> cache = new Dictionary<T, S>();
@@ -47,7 +47,9 @@ namespace System.ServiceModel.Transactions
 
             if (Add(key, value))
             {
-                transaction.TransactionCompleted += new TransactionCompletedEventHandler(OnTransactionCompleted);
+                transaction.TransactionCompleted += new TransactionCompletedEventHandler(
+                    OnTransactionCompleted
+                );
             }
         }
 
@@ -101,7 +103,9 @@ namespace System.ServiceModel.Transactions
                 if (!(remove))
                 {
                     // tx processing requires failfast when state is inconsistent
-                    DiagnosticUtility.FailFast("TransactionCache: key must be present in transaction cache");
+                    DiagnosticUtility.FailFast(
+                        "TransactionCache: key must be present in transaction cache"
+                    );
                 }
             }
             finally
@@ -111,7 +115,6 @@ namespace System.ServiceModel.Transactions
                     cacheLock.ReleaseWriterLock();
                 }
             }
-
         }
 
         public static bool Find(T key, out S value)

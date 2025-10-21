@@ -36,10 +36,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             RefKind refKind,
             bool isPinned,
             bool isCompilerGenerated,
-            bool canScheduleToStack)
-            : this(method, locations, nameOpt, ordinal, declarationKind, TypeWithAnnotations.Create(type), refKind, isPinned, isCompilerGenerated, canScheduleToStack)
-        {
-        }
+            bool canScheduleToStack
+        )
+            : this(
+                method,
+                locations,
+                nameOpt,
+                ordinal,
+                declarationKind,
+                TypeWithAnnotations.Create(type),
+                refKind,
+                isPinned,
+                isCompilerGenerated,
+                canScheduleToStack
+            ) { }
 
         public EELocalSymbol(
             MethodSymbol method,
@@ -51,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             RefKind refKind,
             bool isPinned,
             bool isCompilerGenerated,
-            bool canScheduleToStack)
+            bool canScheduleToStack
+        )
         {
             Debug.Assert(method != null);
             Debug.Assert(ordinal >= -1);
@@ -73,7 +84,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal override EELocalSymbolBase ToOtherMethod(MethodSymbol method, TypeMap typeMap)
         {
             var type = typeMap.SubstituteType(_type);
-            return new EELocalSymbol(method, _locations, _nameOpt, _ordinal, _declarationKind, type, _refKind, _isPinned, _isCompilerGenerated, _canScheduleToStack);
+            return new EELocalSymbol(
+                method,
+                _locations,
+                _nameOpt,
+                _ordinal,
+                _declarationKind,
+                type,
+                _refKind,
+                _isPinned,
+                _isCompilerGenerated,
+                _canScheduleToStack
+            );
         }
 
         internal override LocalDeclarationKind DeclarationKind

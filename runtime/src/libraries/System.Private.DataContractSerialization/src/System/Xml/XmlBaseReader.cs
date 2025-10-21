@@ -32,7 +32,7 @@ namespace System.Xml
         private readonly XmlAtomicTextNode _atomicTextNode;
         private int _depth;
         private int _attributeCount;
-        private int _attributeStart;    // Starting index for searching
+        private int _attributeStart; // Starting index for searching
         private readonly XmlDictionaryReaderQuotas _quotas;
         private QuotaNameTable? _nameTable;
         private XmlDeclarationNode? _declarationNode;
@@ -41,7 +41,7 @@ namespace System.Xml
         private XmlCDataNode? _cdataNode;
         private XmlCommentNode? _commentNode;
         private readonly XmlElementNode _rootElementNode;
-        private int _attributeIndex;    // Index for iteration
+        private int _attributeIndex; // Index for iteration
         private char[]? _chars;
         private string? _prefix;
         private string? _localName;
@@ -54,9 +54,15 @@ namespace System.Xml
         private bool _rootElement;
         private bool _readingElement;
         private AttributeSorter? _attributeSorter;
-        private static readonly XmlInitialNode s_initialNode = new XmlInitialNode(XmlBufferReader.Empty);
-        private static readonly XmlEndOfFileNode s_endOfFileNode = new XmlEndOfFileNode(XmlBufferReader.Empty);
-        private static readonly XmlClosedNode s_closedNode = new XmlClosedNode(XmlBufferReader.Empty);
+        private static readonly XmlInitialNode s_initialNode = new XmlInitialNode(
+            XmlBufferReader.Empty
+        );
+        private static readonly XmlEndOfFileNode s_endOfFileNode = new XmlEndOfFileNode(
+            XmlBufferReader.Empty
+        );
+        private static readonly XmlClosedNode s_closedNode = new XmlClosedNode(
+            XmlBufferReader.Empty
+        );
         private const string xmlns = "xmlns";
         private const string xml = "xml";
         private const string xmlnsNamespace = "http://www.w3.org/2000/xmlns/";
@@ -76,26 +82,17 @@ namespace System.Xml
 
         protected XmlBufferReader BufferReader
         {
-            get
-            {
-                return _bufferReader;
-            }
+            get { return _bufferReader; }
         }
 
         public override XmlDictionaryReaderQuotas Quotas
         {
-            get
-            {
-                return _quotas;
-            }
+            get { return _quotas; }
         }
 
         protected XmlNode Node
         {
-            get
-            {
-                return _node;
-            }
+            get { return _node; }
         }
 
         protected void MoveToNode(XmlNode node)
@@ -127,14 +124,20 @@ namespace System.Xml
         protected XmlDeclarationNode MoveToDeclaration()
         {
             if (_attributeCount < 1)
-                XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlDeclMissingVersion));
+                XmlExceptionHelper.ThrowXmlException(
+                    this,
+                    new XmlException(SR.XmlDeclMissingVersion)
+                );
 
             if (_attributeCount > 3)
                 XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlMalformedDecl));
 
             // version
             if (!CheckDeclAttribute(0, "version", "1.0", false, SR.XmlInvalidVersion))
-                XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlDeclMissingVersion));
+                XmlExceptionHelper.ThrowXmlException(
+                    this,
+                    new XmlException(SR.XmlDeclMissingVersion)
+                );
 
             // encoding/standalone
             // We only validate that they are the only attributes that exist.  Encoding can have any value.
@@ -143,11 +146,17 @@ namespace System.Xml
                 if (CheckDeclAttribute(1, "encoding", null, true, SR.XmlInvalidEncoding_UTF8))
                 {
                     if (_attributeCount == 3 && !CheckStandalone(2))
-                        XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlMalformedDecl));
+                        XmlExceptionHelper.ThrowXmlException(
+                            this,
+                            new XmlException(SR.XmlMalformedDecl)
+                        );
                 }
                 else if (!CheckStandalone(1) || _attributeCount > 2)
                 {
-                    XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlMalformedDecl));
+                    XmlExceptionHelper.ThrowXmlException(
+                        this,
+                        new XmlException(SR.XmlMalformedDecl)
+                    );
                 }
             }
 
@@ -166,12 +175,21 @@ namespace System.Xml
                 return false;
 
             if (!node.Value.Equals2("yes", false) && !node.Value.Equals2("no", false))
-                XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.XmlInvalidStandalone));
+                XmlExceptionHelper.ThrowXmlException(
+                    this,
+                    new XmlException(SR.XmlInvalidStandalone)
+                );
 
             return true;
         }
 
-        private bool CheckDeclAttribute(int index, string localName, string? value, bool checkLower, string valueSR)
+        private bool CheckDeclAttribute(
+            int index,
+            string localName,
+            string? value,
+            bool checkLower,
+            string valueSR
+        )
         {
             XmlAttributeNode node = _attributeNodes![index];
             if (!node.Prefix.IsEmpty)
@@ -346,11 +364,19 @@ namespace System.Xml
             // Some prefixes can only be bound to a particular namespace
             if (ns.Prefix.IsXml && ns.Uri != xmlNamespace)
             {
-                XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.Format(SR.XmlSpecificBindingPrefix, "xml", xmlNamespace)));
+                XmlExceptionHelper.ThrowXmlException(
+                    this,
+                    new XmlException(SR.Format(SR.XmlSpecificBindingPrefix, "xml", xmlNamespace))
+                );
             }
             else if (ns.Prefix.IsXmlns && ns.Uri != xmlnsNamespace)
             {
-                XmlExceptionHelper.ThrowXmlException(this, new XmlException(SR.Format(SR.XmlSpecificBindingPrefix, "xmlns", xmlnsNamespace)));
+                XmlExceptionHelper.ThrowXmlException(
+                    this,
+                    new XmlException(
+                        SR.Format(SR.XmlSpecificBindingPrefix, "xmlns", xmlnsNamespace)
+                    )
+                );
             }
 
             _nsMgr.Register(ns);
@@ -385,10 +411,7 @@ namespace System.Xml
 
         protected bool OutsideRootElement
         {
-            get
-            {
-                return _depth == 0;
-            }
+            get { return _depth == 0; }
         }
 
         public override bool CanReadBinaryContent
@@ -403,50 +426,32 @@ namespace System.Xml
 
         public override string BaseURI
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         public override bool HasValue
         {
-            get
-            {
-                return _node.HasValue;
-            }
+            get { return _node.HasValue; }
         }
 
         public override bool IsDefault
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override string this[int index]
         {
-            get
-            {
-                return GetAttribute(index);
-            }
+            get { return GetAttribute(index); }
         }
 
         public override string? this[string name]
         {
-            get
-            {
-                return GetAttribute(name);
-            }
+            get { return GetAttribute(name); }
         }
 
         public override string? this[string localName, string? namespaceUri]
         {
-            get
-            {
-                return GetAttribute(localName, namespaceUri);
-            }
+            get { return GetAttribute(localName, namespaceUri); }
         }
 
         public override int AttributeCount
@@ -490,10 +495,7 @@ namespace System.Xml
 
         public override bool EOF
         {
-            get
-            {
-                return _node.ReadState == ReadState.EndOfFile;
-            }
+            get { return _node.ReadState == ReadState.EndOfFile; }
         }
 
         private XmlAttributeNode GetAttributeNode(int index)
@@ -502,7 +504,10 @@ namespace System.Xml
                 throw new ArgumentOutOfRangeException(nameof(index), SR.XmlElementAttributes);
             ArgumentOutOfRangeException.ThrowIfNegative(index);
             if (index >= _attributeCount)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.Format(SR.OffsetExceedsBufferSize, _attributeCount));
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.Format(SR.OffsetExceedsBufferSize, _attributeCount)
+                );
             return _attributeNodes![index];
         }
 
@@ -581,7 +586,10 @@ namespace System.Xml
             return null;
         }
 
-        private XmlAttributeNode? GetAttributeNode(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        private XmlAttributeNode? GetAttributeNode(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             ArgumentNullException.ThrowIfNull(localName);
 
@@ -629,7 +637,10 @@ namespace System.Xml
             return attributeNode.ValueAsString;
         }
 
-        public override string? GetAttribute(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override string? GetAttribute(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             XmlAttributeNode? attributeNode = GetAttributeNode(localName, namespaceUri);
             if (attributeNode == null)
@@ -639,10 +650,7 @@ namespace System.Xml
 
         public sealed override bool IsEmptyElement
         {
-            get
-            {
-                return _node.IsEmptyElement;
-            }
+            get { return _node.IsEmptyElement; }
         }
 
         public override string LocalName
@@ -738,9 +746,19 @@ namespace System.Xml
                             for (int j = i + 1; j < attributeCount; j++)
                             {
                                 XmlAttributeNode attributeNode2 = attributeNodes[j];
-                                if (attributeNode2.QNameType == QNameType.Normal && attributeNode1.LocalName == attributeNode2.LocalName && attributeNode1.Namespace.Uri == attributeNode2.Namespace.Uri)
+                                if (
+                                    attributeNode2.QNameType == QNameType.Normal
+                                    && attributeNode1.LocalName == attributeNode2.LocalName
+                                    && attributeNode1.Namespace.Uri == attributeNode2.Namespace.Uri
+                                )
                                 {
-                                    XmlExceptionHelper.ThrowDuplicateAttribute(this, attributeNode1.Prefix.GetString(), attributeNode2.Prefix.GetString(), attributeNode1.LocalName.GetString(), attributeNode1.Namespace.Uri.GetString());
+                                    XmlExceptionHelper.ThrowDuplicateAttribute(
+                                        this,
+                                        attributeNode1.Prefix.GetString(),
+                                        attributeNode2.Prefix.GetString(),
+                                        attributeNode1.LocalName.GetString(),
+                                        attributeNode1.Namespace.Uri.GetString()
+                                    );
                                 }
                             }
                         }
@@ -750,8 +768,18 @@ namespace System.Xml
                             for (int j = i + 1; j < attributeCount; j++)
                             {
                                 XmlAttributeNode attributeNode2 = attributeNodes[j];
-                                if (attributeNode2.QNameType == QNameType.Xmlns && attributeNode1.Namespace.Prefix == attributeNode2.Namespace.Prefix)
-                                    XmlExceptionHelper.ThrowDuplicateAttribute(this, xmlns, xmlns, attributeNode1.Namespace.Prefix.GetString(), xmlnsNamespace);
+                                if (
+                                    attributeNode2.QNameType == QNameType.Xmlns
+                                    && attributeNode1.Namespace.Prefix
+                                        == attributeNode2.Namespace.Prefix
+                                )
+                                    XmlExceptionHelper.ThrowDuplicateAttribute(
+                                        this,
+                                        xmlns,
+                                        xmlns,
+                                        attributeNode1.Namespace.Prefix.GetString(),
+                                        xmlnsNamespace
+                                    );
                             }
                         }
                     }
@@ -770,12 +798,23 @@ namespace System.Xml
 
             if (!_attributeSorter.Sort(attributeNodes, attributeCount))
             {
-                int attribute1, attribute2;
+                int attribute1,
+                    attribute2;
                 _attributeSorter.GetIndices(out attribute1, out attribute2);
                 if (attributeNodes[attribute1].QNameType == QNameType.Xmlns)
-                    XmlExceptionHelper.ThrowDuplicateXmlnsAttribute(this, attributeNodes[attribute1].Namespace.Prefix.GetString(), xmlnsNamespace);
+                    XmlExceptionHelper.ThrowDuplicateXmlnsAttribute(
+                        this,
+                        attributeNodes[attribute1].Namespace.Prefix.GetString(),
+                        xmlnsNamespace
+                    );
                 else
-                    XmlExceptionHelper.ThrowDuplicateAttribute(this, attributeNodes[attribute1].Prefix.GetString(), attributeNodes[attribute2].Prefix.GetString(), attributeNodes[attribute1].LocalName.GetString(), attributeNodes[attribute1].Namespace.Uri.GetString());
+                    XmlExceptionHelper.ThrowDuplicateAttribute(
+                        this,
+                        attributeNodes[attribute1].Prefix.GetString(),
+                        attributeNodes[attribute2].Prefix.GetString(),
+                        attributeNodes[attribute1].LocalName.GetString(),
+                        attributeNodes[attribute1].Namespace.Uri.GetString()
+                    );
             }
         }
 
@@ -850,8 +889,7 @@ namespace System.Xml
                         break;
                     }
                 }
-            }
-            while (Read());
+            } while (Read());
             return _node.NodeType;
         }
 
@@ -920,10 +958,7 @@ namespace System.Xml
 
         public sealed override XmlNodeType NodeType
         {
-            get
-            {
-                return _node.NodeType;
-            }
+            get { return _node.NodeType; }
         }
 
         public override string Prefix
@@ -956,10 +991,7 @@ namespace System.Xml
 
         public override char QuoteChar
         {
-            get
-            {
-                return _node.QuoteChar;
-            }
+            get { return _node.QuoteChar; }
         }
 
         public override bool IsLocalName(string localName)
@@ -975,6 +1007,7 @@ namespace System.Xml
 
             return _node.IsLocalName(localName);
         }
+
         public override bool IsNamespaceUri(string namespaceUri)
         {
             ArgumentNullException.ThrowIfNull(namespaceUri);
@@ -988,6 +1021,7 @@ namespace System.Xml
 
             return _node.IsNamespaceUri(namespaceUri);
         }
+
         public sealed override bool IsStartElement()
         {
             XmlNodeType nodeType = _node.NodeType;
@@ -1021,7 +1055,9 @@ namespace System.Xml
                 prefix = name.Substring(0, index);
                 localName = name.Substring(index + 1);
             }
-            return (_node.NodeType == XmlNodeType.Element || IsStartElement()) && _node.Prefix == prefix && _node.LocalName == localName;
+            return (_node.NodeType == XmlNodeType.Element || IsStartElement())
+                && _node.Prefix == prefix
+                && _node.LocalName == localName;
         }
 
         public override bool IsStartElement(string localName, string namespaceUri)
@@ -1030,15 +1066,22 @@ namespace System.Xml
                 return false;
             if (namespaceUri == null)
                 return false;
-            return (_node.NodeType == XmlNodeType.Element || IsStartElement()) && _node.LocalName == localName && _node.IsNamespaceUri(namespaceUri);
+            return (_node.NodeType == XmlNodeType.Element || IsStartElement())
+                && _node.LocalName == localName
+                && _node.IsNamespaceUri(namespaceUri);
         }
 
-        public override bool IsStartElement(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override bool IsStartElement(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             ArgumentNullException.ThrowIfNull(localName);
             ArgumentNullException.ThrowIfNull(namespaceUri);
 
-            return (_node.NodeType == XmlNodeType.Element || IsStartElement()) && _node.LocalName == localName && _node.IsNamespaceUri(namespaceUri);
+            return (_node.NodeType == XmlNodeType.Element || IsStartElement())
+                && _node.LocalName == localName
+                && _node.IsNamespaceUri(namespaceUri);
         }
 
         public override int IndexOfLocalName(string[] localNames, string namespaceUri)
@@ -1082,7 +1125,10 @@ namespace System.Xml
             return -1;
         }
 
-        public override int IndexOfLocalName(XmlDictionaryString[] localNames, XmlDictionaryString namespaceUri)
+        public override int IndexOfLocalName(
+            XmlDictionaryString[] localNames,
+            XmlDictionaryString namespaceUri
+        )
         {
             ArgumentNullException.ThrowIfNull(localNames);
             ArgumentNullException.ThrowIfNull(namespaceUri);
@@ -1129,10 +1175,16 @@ namespace System.Xml
 
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
             if (offset > chars.Length)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, chars.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (count > chars.Length - offset)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - offset)
+                );
             int actual;
 
             if (_value == null)
@@ -1157,10 +1209,16 @@ namespace System.Xml
 
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
             if (offset > buffer.Length)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (count > buffer.Length - offset)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                );
             if (count == 0)
                 return 0;
             int actual;
@@ -1175,7 +1233,15 @@ namespace System.Xml
                     }
                 }
             }
-            return ReadBytes(DataContractSerializer.Base64Encoding, 3, 4, buffer, offset, Math.Min(count, 512), false);
+            return ReadBytes(
+                DataContractSerializer.Base64Encoding,
+                3,
+                4,
+                buffer,
+                offset,
+                Math.Min(count, 512),
+                false
+            );
         }
 
         public override string ReadElementContentAsString()
@@ -1247,14 +1313,21 @@ namespace System.Xml
 
         public override void ReadEndElement()
         {
-            if (_node.NodeType != XmlNodeType.EndElement && MoveToContent() != XmlNodeType.EndElement)
+            if (
+                _node.NodeType != XmlNodeType.EndElement
+                && MoveToContent() != XmlNodeType.EndElement
+            )
             {
                 int nodeDepth = _node.NodeType == XmlNodeType.Element ? _depth - 1 : _depth;
                 if (nodeDepth == 0)
                     throw new InvalidOperationException(SR.XmlEndElementNoOpenNodes);
                 // If depth is non-zero, then the document isn't what was expected
                 XmlElementNode elementNode = _elementNodes![nodeDepth];
-                XmlExceptionHelper.ThrowEndElementExpected(this, elementNode.LocalName.GetString(), elementNode.Namespace.Uri.GetString());
+                XmlExceptionHelper.ThrowEndElementExpected(
+                    this,
+                    elementNode.LocalName.GetString(),
+                    elementNode.Namespace.Uri.GetString()
+                );
             }
             Read();
         }
@@ -1270,10 +1343,7 @@ namespace System.Xml
 
         public override ReadState ReadState
         {
-            get
-            {
-                return _node.ReadState;
-            }
+            get { return _node.ReadState; }
         }
 
         private void SkipValue(XmlNode node)
@@ -1302,7 +1372,10 @@ namespace System.Xml
                 {
                     byte[] value = node.Value.ToByteArray();
                     if (value.Length > _quotas.MaxArrayLength)
-                        XmlExceptionHelper.ThrowMaxArrayLengthExceeded(this, _quotas.MaxArrayLength);
+                        XmlExceptionHelper.ThrowMaxArrayLengthExceeded(
+                            this,
+                            _quotas.MaxArrayLength
+                        );
                     SkipValue(node);
                     return value;
                 }
@@ -1311,7 +1384,10 @@ namespace System.Xml
             if (!_bufferReader.IsStreamed)
                 return ReadContentAsBase64(_quotas.MaxArrayLength, _bufferReader.Buffer.Length);
 
-            return ReadContentAsBase64(_quotas.MaxArrayLength, XmlDictionaryReader.MaxInitialArrayLength);  // Initial count will get ignored
+            return ReadContentAsBase64(
+                _quotas.MaxArrayLength,
+                XmlDictionaryReader.MaxInitialArrayLength
+            ); // Initial count will get ignored
         }
 
         public override int ReadElementContentAsBase64(byte[] buffer, int offset, int count)
@@ -1345,10 +1421,16 @@ namespace System.Xml
 
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
             if (offset > buffer.Length)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (count > buffer.Length - offset)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                );
             if (count == 0)
                 return 0;
             int actual;
@@ -1356,7 +1438,10 @@ namespace System.Xml
             {
                 if (_node.QNameType == QNameType.Normal)
                 {
-                    while (_node.NodeType != XmlNodeType.Comment && _node.Value.TryReadBase64(buffer, offset, count, out actual))
+                    while (
+                        _node.NodeType != XmlNodeType.Comment
+                        && _node.Value.TryReadBase64(buffer, offset, count, out actual)
+                    )
                     {
                         if (actual != 0)
                             return actual;
@@ -1367,7 +1452,15 @@ namespace System.Xml
             XmlNodeType nodeType = _node.NodeType;
             if (nodeType == XmlNodeType.Element || nodeType == XmlNodeType.EndElement)
                 return 0;
-            return ReadBytes(DataContractSerializer.Base64Encoding, 3, 4, buffer, offset, Math.Min(count, 512), true);
+            return ReadBytes(
+                DataContractSerializer.Base64Encoding,
+                3,
+                4,
+                buffer,
+                offset,
+                Math.Min(count, 512),
+                true
+            );
         }
 
         public override byte[] ReadContentAsBinHex()
@@ -1381,13 +1474,27 @@ namespace System.Xml
 
             ArgumentOutOfRangeException.ThrowIfNegative(offset);
             if (offset > buffer.Length)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length));
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                );
             ArgumentOutOfRangeException.ThrowIfNegative(count);
             if (count > buffer.Length - offset)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset));
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.Format(SR.SizeExceedsRemainingBufferSpace, buffer.Length - offset)
+                );
             if (count == 0)
                 return 0;
-            return ReadBytes(DataContractSerializer.BinHexEncoding, 1, 2, buffer, offset, Math.Min(count, 512), true);
+            return ReadBytes(
+                DataContractSerializer.BinHexEncoding,
+                1,
+                2,
+                buffer,
+                offset,
+                Math.Min(count, 512),
+                true
+            );
         }
 
         public override int ReadElementContentAsBinHex(byte[] buffer, int offset, int count)
@@ -1415,7 +1522,15 @@ namespace System.Xml
             return i;
         }
 
-        private int ReadBytes(Encoding encoding, int byteBlock, int charBlock, byte[] buffer, int offset, int byteCount, bool readContent)
+        private int ReadBytes(
+            Encoding encoding,
+            int byteBlock,
+            int charBlock,
+            byte[] buffer,
+            int offset,
+            int byteCount,
+            bool readContent
+        )
         {
             // If there are any trailing buffer return them.
             if (_trailByteCount > 0)
@@ -1459,7 +1574,11 @@ namespace System.Xml
                     int actualCharCount;
                     if (readContent)
                     {
-                        actualCharCount = ReadContentAsChars(chars, charCount, maxCharCount - charCount);
+                        actualCharCount = ReadContentAsChars(
+                            chars,
+                            charCount,
+                            maxCharCount - charCount
+                        );
                         // When deserializing base64 content which contains new line chars (CR, LF) chars from ReadObject, the reader reads in chunks of base64 content, LF char, base64 content, LF char and so on
                         // Relying on encoding.GetBytes' exception to handle LF char would result in performance degradation so skipping LF char here
                         if (actualCharCount == 1 && chars[charCount] == '\n')
@@ -1467,7 +1586,11 @@ namespace System.Xml
                     }
                     else
                     {
-                        actualCharCount = ReadValueChunk(chars, charCount, maxCharCount - charCount);
+                        actualCharCount = ReadValueChunk(
+                            chars,
+                            charCount,
+                            maxCharCount - charCount
+                        );
                     }
                     if (actualCharCount == 0)
                         break;
@@ -1534,7 +1657,10 @@ namespace System.Xml
                     value = node.Value.GetString();
                     SkipValue(node);
                     if (value.Length > _quotas.MaxStringContentLength)
-                        XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(this, _quotas.MaxStringContentLength);
+                        XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(
+                            this,
+                            _quotas.MaxStringContentLength
+                        );
                 }
                 return value;
             }
@@ -1760,123 +1886,240 @@ namespace System.Xml
 
         public override string XmlLang
         {
-            get
-            {
-                return _nsMgr.XmlLang;
-            }
+            get { return _nsMgr.XmlLang; }
         }
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return _nsMgr.XmlSpace;
-            }
+            get { return _nsMgr.XmlSpace; }
         }
 
-        public override bool TryGetLocalNameAsDictionaryString([NotNullWhen(true)] out XmlDictionaryString? localName)
+        public override bool TryGetLocalNameAsDictionaryString(
+            [NotNullWhen(true)] out XmlDictionaryString? localName
+        )
         {
             return _node.TryGetLocalNameAsDictionaryString(out localName);
         }
 
-        public override bool TryGetNamespaceUriAsDictionaryString([NotNullWhen(true)] out XmlDictionaryString? localName)
+        public override bool TryGetNamespaceUriAsDictionaryString(
+            [NotNullWhen(true)] out XmlDictionaryString? localName
+        )
         {
             return _node.TryGetNamespaceUriAsDictionaryString(out localName);
         }
 
-        public override bool TryGetValueAsDictionaryString([NotNullWhen(true)] out XmlDictionaryString? value)
+        public override bool TryGetValueAsDictionaryString(
+            [NotNullWhen(true)] out XmlDictionaryString? value
+        )
         {
             return _node.TryGetValueAsDictionaryString(out value);
         }
 
         public override short[] ReadInt16Array(string localName, string namespaceUri)
         {
-            return Int16ArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return Int16ArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override short[] ReadInt16Array(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override short[] ReadInt16Array(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return Int16ArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return Int16ArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override int[] ReadInt32Array(string localName, string namespaceUri)
         {
-            return Int32ArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return Int32ArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override int[] ReadInt32Array(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override int[] ReadInt32Array(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return Int32ArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return Int32ArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override long[] ReadInt64Array(string localName, string namespaceUri)
         {
-            return Int64ArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return Int64ArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override long[] ReadInt64Array(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override long[] ReadInt64Array(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return Int64ArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return Int64ArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override float[] ReadSingleArray(string localName, string namespaceUri)
         {
-            return SingleArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return SingleArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override float[] ReadSingleArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override float[] ReadSingleArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return SingleArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return SingleArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override double[] ReadDoubleArray(string localName, string namespaceUri)
         {
-            return DoubleArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return DoubleArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override double[] ReadDoubleArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override double[] ReadDoubleArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return DoubleArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return DoubleArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override decimal[] ReadDecimalArray(string localName, string namespaceUri)
         {
-            return DecimalArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return DecimalArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override decimal[] ReadDecimalArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override decimal[] ReadDecimalArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return DecimalArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return DecimalArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override DateTime[] ReadDateTimeArray(string localName, string namespaceUri)
         {
-            return DateTimeArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return DateTimeArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override DateTime[] ReadDateTimeArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override DateTime[] ReadDateTimeArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
-            return GuidArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return GuidArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override Guid[] ReadGuidArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override Guid[] ReadGuidArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return GuidArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return GuidArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public override TimeSpan[] ReadTimeSpanArray(string localName, string namespaceUri)
         {
-            return TimeSpanArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return TimeSpanArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
-        public override TimeSpan[] ReadTimeSpanArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public override TimeSpan[] ReadTimeSpanArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return TimeSpanArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, _quotas.MaxArrayLength);
+            return TimeSpanArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                _quotas.MaxArrayLength
+            );
         }
 
         public string GetOpenElements()
@@ -1905,44 +2148,98 @@ namespace System.Xml
 
         private void SignStartElement(XmlSigningNodeWriter writer)
         {
-            int prefixOffset, prefixLength;
+            int prefixOffset,
+                prefixLength;
             byte[] prefixBuffer = _node.Prefix.GetString(out prefixOffset, out prefixLength);
-            int localNameOffset, localNameLength;
-            byte[] localNameBuffer = _node.LocalName.GetString(out localNameOffset, out localNameLength);
-            writer.WriteStartElement(prefixBuffer, prefixOffset, prefixLength, localNameBuffer, localNameOffset, localNameLength);
+            int localNameOffset,
+                localNameLength;
+            byte[] localNameBuffer = _node.LocalName.GetString(
+                out localNameOffset,
+                out localNameLength
+            );
+            writer.WriteStartElement(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                localNameBuffer,
+                localNameOffset,
+                localNameLength
+            );
         }
 
-        private static void SignAttribute(XmlSigningNodeWriter writer, XmlAttributeNode attributeNode)
+        private static void SignAttribute(
+            XmlSigningNodeWriter writer,
+            XmlAttributeNode attributeNode
+        )
         {
             QNameType qnameType = attributeNode.QNameType;
             if (qnameType == QNameType.Normal)
             {
-                int prefixOffset, prefixLength;
-                byte[] prefixBuffer = attributeNode.Prefix.GetString(out prefixOffset, out prefixLength);
-                int localNameOffset, localNameLength;
-                byte[] localNameBuffer = attributeNode.LocalName.GetString(out localNameOffset, out localNameLength);
-                writer.WriteStartAttribute(prefixBuffer, prefixOffset, prefixLength, localNameBuffer, localNameOffset, localNameLength);
+                int prefixOffset,
+                    prefixLength;
+                byte[] prefixBuffer = attributeNode.Prefix.GetString(
+                    out prefixOffset,
+                    out prefixLength
+                );
+                int localNameOffset,
+                    localNameLength;
+                byte[] localNameBuffer = attributeNode.LocalName.GetString(
+                    out localNameOffset,
+                    out localNameLength
+                );
+                writer.WriteStartAttribute(
+                    prefixBuffer,
+                    prefixOffset,
+                    prefixLength,
+                    localNameBuffer,
+                    localNameOffset,
+                    localNameLength
+                );
                 attributeNode.Value.Sign(writer);
                 writer.WriteEndAttribute();
             }
             else
             {
                 Debug.Assert(qnameType == QNameType.Xmlns);
-                int prefixOffset, prefixLength;
-                byte[] prefixBuffer = attributeNode.Namespace.Prefix.GetString(out prefixOffset, out prefixLength);
-                int nsOffset, nsLength;
+                int prefixOffset,
+                    prefixLength;
+                byte[] prefixBuffer = attributeNode.Namespace.Prefix.GetString(
+                    out prefixOffset,
+                    out prefixLength
+                );
+                int nsOffset,
+                    nsLength;
                 byte[] nsBuffer = attributeNode.Namespace.Uri.GetString(out nsOffset, out nsLength);
-                writer.WriteXmlnsAttribute(prefixBuffer, prefixOffset, prefixLength, nsBuffer, nsOffset, nsLength);
+                writer.WriteXmlnsAttribute(
+                    prefixBuffer,
+                    prefixOffset,
+                    prefixLength,
+                    nsBuffer,
+                    nsOffset,
+                    nsLength
+                );
             }
         }
 
         private void SignEndElement(XmlSigningNodeWriter writer)
         {
-            int prefixOffset, prefixLength;
+            int prefixOffset,
+                prefixLength;
             byte[] prefixBuffer = _node.Prefix.GetString(out prefixOffset, out prefixLength);
-            int localNameOffset, localNameLength;
-            byte[] localNameBuffer = _node.LocalName.GetString(out localNameOffset, out localNameLength);
-            writer.WriteEndElement(prefixBuffer, prefixOffset, prefixLength, localNameBuffer, localNameOffset, localNameLength);
+            int localNameOffset,
+                localNameLength;
+            byte[] localNameBuffer = _node.LocalName.GetString(
+                out localNameOffset,
+                out localNameLength
+            );
+            writer.WriteEndElement(
+                prefixBuffer,
+                prefixOffset,
+                prefixLength,
+                localNameBuffer,
+                localNameOffset,
+                localNameLength
+            );
         }
 
         private void SignNode(XmlSigningNodeWriter writer)
@@ -1979,18 +2276,12 @@ namespace System.Xml
 
         public override bool CanCanonicalize
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected bool Signing
         {
-            get
-            {
-                return _signing;
-            }
+            get { return _signing; }
         }
 
         protected void SignNode()
@@ -2001,14 +2292,23 @@ namespace System.Xml
             }
         }
 
-        public override void StartCanonicalization(Stream stream, bool includeComments, string[]? inclusivePrefixes)
+        public override void StartCanonicalization(
+            Stream stream,
+            bool includeComments,
+            string[]? inclusivePrefixes
+        )
         {
             if (_signing)
                 throw new InvalidOperationException(SR.XmlCanonicalizationStarted);
 
             _signingWriter ??= CreateSigningNodeWriter();
 
-            _signingWriter.SetOutput(XmlNodeWriter.Null, stream, includeComments, inclusivePrefixes);
+            _signingWriter.SetOutput(
+                XmlNodeWriter.Null,
+                stream,
+                includeComments,
+                inclusivePrefixes
+            );
             _nsMgr.Sign(_signingWriter);
             _signing = true;
         }
@@ -2060,17 +2360,19 @@ namespace System.Xml
                 HasValue = 0x04,
                 AtomicValue = 0x08,
                 SkipValue = 0x10,
-                HasContent = 0x20
+                HasContent = 0x20,
             }
 
-            protected XmlNode(XmlNodeType nodeType,
-                              PrefixHandle prefix,
-                              StringHandle localName,
-                              ValueHandle value,
-                              XmlNodeFlags nodeFlags,
-                              ReadState readState,
-                              XmlAttributeTextNode? attributeTextNode,
-                              int depthDelta)
+            protected XmlNode(
+                XmlNodeType nodeType,
+                PrefixHandle prefix,
+                StringHandle localName,
+                ValueHandle value,
+                XmlNodeFlags nodeFlags,
+                ReadState readState,
+                XmlAttributeTextNode? attributeTextNode,
+                int depthDelta
+            )
             {
                 _nodeType = nodeType;
                 _prefix = prefix;
@@ -2099,100 +2401,103 @@ namespace System.Xml
             // QuoteChar is only updated by text for attributes
             // IsAtomicValue is set to false for XmlnsAttributes so we don't have to check QNameType
 
-            public bool HasValue { get { return _hasValue; } }
-            public ReadState ReadState { get { return _readState; } }
-            public StringHandle LocalName { get { Debug.Assert(_qnameType != QNameType.Xmlns); return _localName; } }
-            public PrefixHandle Prefix { get { Debug.Assert(_qnameType != QNameType.Xmlns); return _prefix; } }
-            public bool CanGetAttribute { get { return _canGetAttribute; } }
-            public bool CanMoveToElement { get { return _canMoveToElement; } }
-            public XmlAttributeTextNode? AttributeText { get { return _attributeTextNode; } }
-            public bool SkipValue { get { return _skipValue; } }
-            public ValueHandle Value { get { Debug.Assert(_qnameType != QNameType.Xmlns); return _value; } }
-            public int DepthDelta { get { return _depthDelta; } }
-            public bool HasContent { get { return _hasContent; } }
-
-            public XmlNodeType NodeType
+            public bool HasValue
+            {
+                get { return _hasValue; }
+            }
+            public ReadState ReadState
+            {
+                get { return _readState; }
+            }
+            public StringHandle LocalName
             {
                 get
                 {
-                    return _nodeType;
+                    Debug.Assert(_qnameType != QNameType.Xmlns);
+                    return _localName;
                 }
-                set
+            }
+            public PrefixHandle Prefix
+            {
+                get
                 {
-                    _nodeType = value;
+                    Debug.Assert(_qnameType != QNameType.Xmlns);
+                    return _prefix;
                 }
+            }
+            public bool CanGetAttribute
+            {
+                get { return _canGetAttribute; }
+            }
+            public bool CanMoveToElement
+            {
+                get { return _canMoveToElement; }
+            }
+            public XmlAttributeTextNode? AttributeText
+            {
+                get { return _attributeTextNode; }
+            }
+            public bool SkipValue
+            {
+                get { return _skipValue; }
+            }
+            public ValueHandle Value
+            {
+                get
+                {
+                    Debug.Assert(_qnameType != QNameType.Xmlns);
+                    return _value;
+                }
+            }
+            public int DepthDelta
+            {
+                get { return _depthDelta; }
+            }
+            public bool HasContent
+            {
+                get { return _hasContent; }
+            }
+
+            public XmlNodeType NodeType
+            {
+                get { return _nodeType; }
+                set { _nodeType = value; }
             }
 
             public QNameType QNameType
             {
-                get
-                {
-                    return _qnameType;
-                }
-                set
-                {
-                    _qnameType = value;
-                }
+                get { return _qnameType; }
+                set { _qnameType = value; }
             }
 
             public Namespace Namespace
             {
-                get
-                {
-                    return _ns;
-                }
-                set
-                {
-                    _ns = value;
-                }
+                get { return _ns; }
+                set { _ns = value; }
             }
 
             public bool IsAtomicValue
             {
-                get
-                {
-                    return _isAtomicValue;
-                }
-                set
-                {
-                    _isAtomicValue = value;
-                }
+                get { return _isAtomicValue; }
+                set { _isAtomicValue = value; }
             }
 
             public bool ExitScope
             {
-                get
-                {
-                    return _exitScope;
-                }
-                set
-                {
-                    _exitScope = value;
-                }
+                get { return _exitScope; }
+                set { _exitScope = value; }
             }
 
             public bool IsEmptyElement
             {
-                get
-                {
-                    return _isEmptyElement;
-                }
-                set
-                {
-                    _isEmptyElement = value;
-                }
+                get { return _isEmptyElement; }
+                set { _isEmptyElement = value; }
             }
 
             public char QuoteChar
             {
-                get
-                {
-                    return _quoteChar;
-                }
-                set
-                {
-                    _quoteChar = value;
-                }
+                get { return _quoteChar; }
+                set { _quoteChar = value; }
             }
 
             public bool IsLocalName(string localName)
@@ -2260,7 +2565,10 @@ namespace System.Xml
                 }
             }
 
-            public bool IsLocalNameAndNamespaceUri(XmlDictionaryString localName, XmlDictionaryString ns)
+            public bool IsLocalNameAndNamespaceUri(
+                XmlDictionaryString localName,
+                XmlDictionaryString ns
+            )
             {
                 if (_qnameType == QNameType.Normal)
                 {
@@ -2286,7 +2594,9 @@ namespace System.Xml
                 }
             }
 
-            public bool TryGetLocalNameAsDictionaryString([NotNullWhen(true)] out XmlDictionaryString? localName)
+            public bool TryGetLocalNameAsDictionaryString(
+                [NotNullWhen(true)] out XmlDictionaryString? localName
+            )
             {
                 if (_qnameType == QNameType.Normal)
                 {
@@ -2300,7 +2610,9 @@ namespace System.Xml
                 }
             }
 
-            public bool TryGetNamespaceUriAsDictionaryString([NotNullWhen(true)] out XmlDictionaryString? ns)
+            public bool TryGetNamespaceUriAsDictionaryString(
+                [NotNullWhen(true)] out XmlDictionaryString? ns
+            )
             {
                 if (_qnameType == QNameType.Normal)
                 {
@@ -2314,7 +2626,9 @@ namespace System.Xml
                 }
             }
 
-            public bool TryGetValueAsDictionaryString([NotNullWhen(true)] out XmlDictionaryString? value)
+            public bool TryGetValueAsDictionaryString(
+                [NotNullWhen(true)] out XmlDictionaryString? value
+            )
             {
                 if (_qnameType == QNameType.Normal)
                 {
@@ -2327,6 +2641,7 @@ namespace System.Xml
                     return false;
                 }
             }
+
             public string ValueAsString
             {
                 get
@@ -2350,43 +2665,36 @@ namespace System.Xml
             private int _bufferOffset;
 
             public XmlElementNode(XmlBufferReader bufferReader)
-                : this(new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader))
-            {
-            }
+                : this(
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader)
+                ) { }
 
             private XmlElementNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
-                : base(XmlNodeType.Element,
-                       prefix,
-                       localName,
-                       value,
-                       XmlNodeFlags.CanGetAttribute | XmlNodeFlags.HasContent,
-                       ReadState.Interactive,
-                       null,
-                       -1)
+                : base(
+                    XmlNodeType.Element,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.CanGetAttribute | XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    -1
+                )
             {
                 _endElementNode = new XmlEndElementNode(prefix, localName, value);
             }
 
             public XmlEndElementNode EndElement
             {
-                get
-                {
-                    return _endElementNode;
-                }
+                get { return _endElementNode; }
             }
 
             public int BufferOffset
             {
-                get
-                {
-                    return _bufferOffset;
-                }
-                set
-                {
-                    _bufferOffset = value;
-                }
+                get { return _bufferOffset; }
+                set { _bufferOffset = value; }
             }
 
             public int NameOffset;
@@ -2396,202 +2704,226 @@ namespace System.Xml
         protected sealed class XmlAttributeNode : XmlNode
         {
             public XmlAttributeNode(XmlBufferReader bufferReader)
-                : this(new PrefixHandle(bufferReader), new StringHandle(bufferReader), new ValueHandle(bufferReader))
-            {
-            }
+                : this(
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader)
+                ) { }
 
             private XmlAttributeNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
-                : base(XmlNodeType.Attribute,
-                       prefix,
-                       localName,
-                       value,
-                       XmlNodeFlags.CanGetAttribute | XmlNodeFlags.CanMoveToElement | XmlNodeFlags.HasValue | XmlNodeFlags.AtomicValue,
-                       ReadState.Interactive,
-                       new XmlAttributeTextNode(prefix, localName, value),
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.Attribute,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.CanGetAttribute
+                        | XmlNodeFlags.CanMoveToElement
+                        | XmlNodeFlags.HasValue
+                        | XmlNodeFlags.AtomicValue,
+                    ReadState.Interactive,
+                    new XmlAttributeTextNode(prefix, localName, value),
+                    0
+                ) { }
         }
 
         protected sealed class XmlEndElementNode : XmlNode
         {
             public XmlEndElementNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
-                : base(XmlNodeType.EndElement,
-                       prefix,
-                       localName,
-                       value,
-                       XmlNodeFlags.HasContent,
-                       ReadState.Interactive,
-                       null,
-                       -1)
-            {
-            }
+                : base(
+                    XmlNodeType.EndElement,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    -1
+                ) { }
         }
 
         protected class XmlTextNode : XmlNode
         {
-            protected XmlTextNode(XmlNodeType nodeType,
-                              PrefixHandle prefix,
-                              StringHandle localName,
-                              ValueHandle value,
-                              XmlNodeFlags nodeFlags,
-                              ReadState readState,
-                              XmlAttributeTextNode? attributeTextNode,
-                              int depthDelta)
-                :
-                base(nodeType, prefix, localName, value, nodeFlags, readState, attributeTextNode, depthDelta)
-            {
-            }
+            protected XmlTextNode(
+                XmlNodeType nodeType,
+                PrefixHandle prefix,
+                StringHandle localName,
+                ValueHandle value,
+                XmlNodeFlags nodeFlags,
+                ReadState readState,
+                XmlAttributeTextNode? attributeTextNode,
+                int depthDelta
+            )
+                : base(
+                    nodeType,
+                    prefix,
+                    localName,
+                    value,
+                    nodeFlags,
+                    readState,
+                    attributeTextNode,
+                    depthDelta
+                ) { }
         }
 
-        protected  sealed class XmlAtomicTextNode : XmlTextNode
+        protected sealed class XmlAtomicTextNode : XmlTextNode
         {
             public XmlAtomicTextNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.Text,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.HasValue | XmlNodeFlags.AtomicValue | XmlNodeFlags.SkipValue | XmlNodeFlags.HasContent,
-                       ReadState.Interactive,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.Text,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.HasValue
+                        | XmlNodeFlags.AtomicValue
+                        | XmlNodeFlags.SkipValue
+                        | XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlComplexTextNode : XmlTextNode
         {
             public XmlComplexTextNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.Text,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.HasValue | XmlNodeFlags.HasContent,
-                       ReadState.Interactive,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.Text,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.HasValue | XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlWhitespaceTextNode : XmlTextNode
         {
             public XmlWhitespaceTextNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.Whitespace,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.HasValue,
-                       ReadState.Interactive,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.Whitespace,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.HasValue,
+                    ReadState.Interactive,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlCDataNode : XmlTextNode
         {
             public XmlCDataNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.CDATA,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.HasValue | XmlNodeFlags.HasContent,
-                       ReadState.Interactive,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.CDATA,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.HasValue | XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlAttributeTextNode : XmlTextNode
         {
-            public XmlAttributeTextNode(PrefixHandle prefix, StringHandle localName, ValueHandle value)
-                : base(XmlNodeType.Text,
-                       prefix,
-                       localName,
-                       value,
-                       XmlNodeFlags.HasValue | XmlNodeFlags.CanGetAttribute | XmlNodeFlags.CanMoveToElement | XmlNodeFlags.AtomicValue | XmlNodeFlags.HasContent,
-                       ReadState.Interactive,
-                       null,
-                       1)
-            {
-            }
+            public XmlAttributeTextNode(
+                PrefixHandle prefix,
+                StringHandle localName,
+                ValueHandle value
+            )
+                : base(
+                    XmlNodeType.Text,
+                    prefix,
+                    localName,
+                    value,
+                    XmlNodeFlags.HasValue
+                        | XmlNodeFlags.CanGetAttribute
+                        | XmlNodeFlags.CanMoveToElement
+                        | XmlNodeFlags.AtomicValue
+                        | XmlNodeFlags.HasContent,
+                    ReadState.Interactive,
+                    null,
+                    1
+                ) { }
         }
 
         protected sealed class XmlInitialNode : XmlNode
         {
             public XmlInitialNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.None,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.None,
-                       ReadState.Initial,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.None,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.None,
+                    ReadState.Initial,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlDeclarationNode : XmlNode
         {
             public XmlDeclarationNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.XmlDeclaration,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.CanGetAttribute,
-                       ReadState.Interactive,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.XmlDeclaration,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.CanGetAttribute,
+                    ReadState.Interactive,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlCommentNode : XmlNode
         {
             public XmlCommentNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.Comment,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.HasValue,
-                       ReadState.Interactive,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.Comment,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.HasValue,
+                    ReadState.Interactive,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlEndOfFileNode : XmlNode
         {
             public XmlEndOfFileNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.None,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.None,
-                       ReadState.EndOfFile,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.None,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.None,
+                    ReadState.EndOfFile,
+                    null,
+                    0
+                ) { }
         }
 
         protected sealed class XmlClosedNode : XmlNode
         {
             public XmlClosedNode(XmlBufferReader bufferReader)
-                : base(XmlNodeType.None,
-                       new PrefixHandle(bufferReader),
-                       new StringHandle(bufferReader),
-                       new ValueHandle(bufferReader),
-                       XmlNodeFlags.None,
-                       ReadState.Closed,
-                       null,
-                       0)
-            {
-            }
+                : base(
+                    XmlNodeType.None,
+                    new PrefixHandle(bufferReader),
+                    new StringHandle(bufferReader),
+                    new ValueHandle(bufferReader),
+                    XmlNodeFlags.None,
+                    ReadState.Closed,
+                    null,
+                    0
+                ) { }
         }
 
         private sealed class AttributeSorter : IComparer
@@ -2699,7 +3031,9 @@ namespace System.Xml
             private int _nsCount;
             private int _depth;
             private readonly Namespace?[] _shortPrefixUri;
-            private static readonly Namespace s_emptyNamespace = new Namespace(XmlBufferReader.Empty);
+            private static readonly Namespace s_emptyNamespace = new Namespace(
+                XmlBufferReader.Empty
+            );
             private static Namespace? s_xmlNamespace;
             private XmlAttribute[]? _attributes;
             private int _attributeCount;
@@ -2747,26 +3081,17 @@ namespace System.Xml
 
             public static Namespace EmptyNamespace
             {
-                get
-                {
-                    return s_emptyNamespace;
-                }
+                get { return s_emptyNamespace; }
             }
 
             public string XmlLang
             {
-                get
-                {
-                    return _lang;
-                }
+                get { return _lang; }
             }
 
             public XmlSpace XmlSpace
             {
-                get
-                {
-                    return _space;
-                }
+                get { return _space; }
             }
 
             public void Clear()
@@ -2833,11 +3158,20 @@ namespace System.Xml
                     }
                     if (!found)
                     {
-                        int prefixOffset, prefixLength;
+                        int prefixOffset,
+                            prefixLength;
                         byte[] prefixBuffer = prefix.GetString(out prefixOffset, out prefixLength);
-                        int nsOffset, nsLength;
+                        int nsOffset,
+                            nsLength;
                         byte[] nsBuffer = _namespaces[i].Uri.GetString(out nsOffset, out nsLength);
-                        writer.WriteXmlnsAttribute(prefixBuffer, prefixOffset, prefixLength, nsBuffer, nsOffset, nsLength);
+                        writer.WriteXmlnsAttribute(
+                            prefixBuffer,
+                            prefixOffset,
+                            prefixLength,
+                            nsBuffer,
+                            nsOffset,
+                            nsLength
+                        );
                     }
                 }
             }
@@ -2980,47 +3314,28 @@ namespace System.Xml
                 private string _lang = string.Empty;
                 private int _depth;
 
-                public XmlAttribute()
-                {
-                }
+                public XmlAttribute() { }
 
                 public int Depth
                 {
-                    get
-                    {
-                        return _depth;
-                    }
-                    set
-                    {
-                        _depth = value;
-                    }
+                    get { return _depth; }
+                    set { _depth = value; }
                 }
 
                 public string XmlLang
                 {
-                    get
-                    {
-                        return _lang;
-                    }
-                    set
-                    {
-                        _lang = value;
-                    }
+                    get { return _lang; }
+                    set { _lang = value; }
                 }
 
                 public XmlSpace XmlSpace
                 {
-                    get
-                    {
-                        return _space;
-                    }
-                    set
-                    {
-                        _space = value;
-                    }
+                    get { return _space; }
+                    set { _space = value; }
                 }
             }
         }
+
         protected sealed class Namespace
         {
             private readonly PrefixHandle _prefix;
@@ -3044,22 +3359,13 @@ namespace System.Xml
 
             public int Depth
             {
-                get
-                {
-                    return _depth;
-                }
-                set
-                {
-                    _depth = value;
-                }
+                get { return _depth; }
+                set { _depth = value; }
             }
 
             public PrefixHandle Prefix
             {
-                get
-                {
-                    return _prefix;
-                }
+                get { return _prefix; }
             }
 
             public bool IsUri(string s)
@@ -3089,22 +3395,13 @@ namespace System.Xml
 
             public StringHandle Uri
             {
-                get
-                {
-                    return _uri;
-                }
+                get { return _uri; }
             }
 
             public Namespace? OuterUri
             {
-                get
-                {
-                    return _outerUri;
-                }
-                set
-                {
-                    _outerUri = value;
-                }
+                get { return _outerUri; }
+                set { _outerUri = value; }
             }
         }
 

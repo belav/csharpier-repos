@@ -7,10 +7,8 @@
   <ItemGroup>
     <Compile Include="IcuAppLocal.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.9" />
-
     <!--
       We define this switch dynamically during the runtime using RemoteExecutor.
       The reason is, if we enable ICU app-local here, this test will compile and run

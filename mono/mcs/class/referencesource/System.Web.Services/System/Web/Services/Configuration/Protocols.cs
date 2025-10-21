@@ -5,9 +5,10 @@
 namespace System.Web.Services.Configuration
 {
     using System.ComponentModel;
-    
+
     [Flags]
-    public enum WebServiceProtocols {
+    public enum WebServiceProtocols
+    {
         Unknown = 0x0,
         HttpSoap = 0x1,
         HttpGet = 0x2,

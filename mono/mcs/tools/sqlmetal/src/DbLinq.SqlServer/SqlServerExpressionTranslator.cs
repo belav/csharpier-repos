@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using DbLinq.Data.Linq.Sugar.Expressions;
 
 namespace DbLinq.SqlServer
@@ -13,10 +12,13 @@ namespace DbLinq.SqlServer
         {
             // Check for (from f in foo orderby f.Field select f).Count() trees
             // SQL Server doesn't support 'ORDER BY' for 'SELECT COUNT(*)'.
-            if (e.Operands.Select(o => o as SpecialExpression)
+            if (
+                e
+                    .Operands.Select(o => o as SpecialExpression)
                     .Where(o => o != null)
                     .Where(s => s.SpecialNodeType == SpecialExpressionType.Count)
-                    .Any())
+                    .Any()
+            )
             {
                 e.OrderBy.Clear();
             }

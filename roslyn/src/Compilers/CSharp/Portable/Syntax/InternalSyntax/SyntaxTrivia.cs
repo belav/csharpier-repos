@@ -11,7 +11,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     {
         public readonly string Text;
 
-        internal SyntaxTrivia(SyntaxKind kind, string text, DiagnosticInfo[]? diagnostics = null, SyntaxAnnotation[]? annotations = null)
+        internal SyntaxTrivia(
+            SyntaxKind kind,
+            string text,
+            DiagnosticInfo[]? diagnostics = null,
+            SyntaxAnnotation[]? annotations = null
+        )
             : base(kind, diagnostics, annotations, text.Length)
         {
             this.Text = text;

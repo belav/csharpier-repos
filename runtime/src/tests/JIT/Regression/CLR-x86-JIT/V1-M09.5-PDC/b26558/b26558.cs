@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     using System;
@@ -33,7 +34,7 @@ namespace DefaultNamespace
 
 /*
 ---------------------------
-Assert Failure (PID 1052, Thread 972/3cc)        
+Assert Failure (PID 1052, Thread 972/3cc)
 ---------------------------
 Assertion failed 'optLoopTable[loopNum].lpEntry != bNext' in 'DefaultNamespace.AA.Main()'
 
@@ -49,6 +50,6 @@ Image:
 D:\bugs\loop.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */

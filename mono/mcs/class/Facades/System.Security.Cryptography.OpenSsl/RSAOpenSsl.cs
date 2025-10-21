@@ -28,61 +28,70 @@
 
 namespace System.Security.Cryptography
 {
-	public sealed class RSAOpenSsl : RSA
-	{
-		public RSAOpenSsl ()
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class RSAOpenSsl : RSA
+    {
+        public RSAOpenSsl()
+        {
+            throw new NotImplementedException();
+        }
 
-		public RSAOpenSsl (int keySize)
-		{
-			throw new NotImplementedException ();
-		}
+        public RSAOpenSsl(int keySize)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RSAOpenSsl(IntPtr handle)
-		{
-			throw new NotImplementedException ();
-		}
+        public RSAOpenSsl(IntPtr handle)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RSAOpenSsl (ECCurve curve)
-		{
-			throw new NotImplementedException ();
-		}
+        public RSAOpenSsl(ECCurve curve)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RSAOpenSsl (RSAParameters parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        public RSAOpenSsl(RSAParameters parameters)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RSAOpenSsl (SafeEvpPKeyHandle pkeyHandle)
-		{
-			throw new NotImplementedException ();
-		}
+        public RSAOpenSsl(SafeEvpPKeyHandle pkeyHandle)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override RSAParameters ExportParameters (bool includePrivateParameters)
-		{
-			throw new NotImplementedException ();
-		}
+        public override RSAParameters ExportParameters(bool includePrivateParameters)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void ImportParameters (RSAParameters parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void ImportParameters(RSAParameters parameters)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override byte[] SignHash (byte[] hash, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
-		{
-			throw new NotImplementedException ();
-		}
+        public override byte[] SignHash(
+            byte[] hash,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool VerifyHash (byte[] hash, byte[] signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool VerifyHash(
+            byte[] hash,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public SafeEvpPKeyHandle DuplicateKeyHandle ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public SafeEvpPKeyHandle DuplicateKeyHandle()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

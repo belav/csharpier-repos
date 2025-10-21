@@ -30,7 +30,11 @@ namespace Microsoft.Interop.Analyzers
 
         internal static LocalizableResourceString GetResourceString(string resourceName)
         {
-            return new LocalizableResourceString(resourceName, SR.ResourceManager, typeof(FxResources.Microsoft.Interop.LibraryImportGenerator.SR));
+            return new LocalizableResourceString(
+                resourceName,
+                SR.ResourceManager,
+                typeof(FxResources.Microsoft.Interop.LibraryImportGenerator.SR)
+            );
         }
     }
 }

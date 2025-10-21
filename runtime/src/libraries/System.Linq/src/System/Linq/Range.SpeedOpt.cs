@@ -41,9 +41,11 @@ namespace System.Linq
                 ref int pos = ref MemoryMarshal.GetReference(destination);
                 ref int end = ref Unsafe.Add(ref pos, destination.Length);
 
-                if (Vector.IsHardwareAccelerated &&
-                    Vector<int>.Count <= 8 &&
-                    destination.Length >= Vector<int>.Count)
+                if (
+                    Vector.IsHardwareAccelerated
+                    && Vector<int>.Count <= 8
+                    && destination.Length >= Vector<int>.Count
+                )
                 {
                     Vector<int> init = new Vector<int>((ReadOnlySpan<int>)[0, 1, 2, 3, 4, 5, 6, 7]);
                     Vector<int> current = new Vector<int>(value) + init;
@@ -55,8 +57,7 @@ namespace System.Linq
                         current.StoreUnsafe(ref pos);
                         current += increment;
                         pos = ref Unsafe.Add(ref pos, Vector<int>.Count);
-                    }
-                    while (!Unsafe.IsAddressGreaterThan(ref pos, ref oneVectorFromEnd));
+                    } while (!Unsafe.IsAddressGreaterThan(ref pos, ref oneVectorFromEnd));
 
                     value = current[0];
                 }
@@ -117,11 +118,9 @@ namespace System.Linq
                 return _end - 1;
             }
 
-            public bool Contains(int item) =>
-                (uint)(item - _start) < (uint)(_end - _start);
+            public bool Contains(int item) => (uint)(item - _start) < (uint)(_end - _start);
 
-            public int IndexOf(int item) =>
-                Contains(item) ? item - _start : -1;
+            public int IndexOf(int item) => Contains(item) ? item - _start : -1;
 
             public int this[int index]
             {
@@ -140,9 +139,14 @@ namespace System.Linq
             public bool IsReadOnly => true;
 
             void ICollection<int>.Add(int item) => ThrowHelper.ThrowNotSupportedException();
+
             void ICollection<int>.Clear() => ThrowHelper.ThrowNotSupportedException();
+
             void IList<int>.Insert(int index, int item) => ThrowHelper.ThrowNotSupportedException();
-            bool ICollection<int>.Remove(int item) => ThrowHelper.ThrowNotSupportedException_Boolean();
+
+            bool ICollection<int>.Remove(int item) =>
+                ThrowHelper.ThrowNotSupportedException_Boolean();
+
             void IList<int>.RemoveAt(int index) => ThrowHelper.ThrowNotSupportedException();
         }
     }

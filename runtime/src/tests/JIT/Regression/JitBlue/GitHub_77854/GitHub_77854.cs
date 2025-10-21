@@ -31,7 +31,7 @@ public class Program
     }
 }
 
-[StructLayout(LayoutKind.Sequential, Size=4096)]
+[StructLayout(LayoutKind.Sequential, Size = 4096)]
 public partial struct FourKStruct
 {
     internal byte bytes;

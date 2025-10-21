@@ -26,5 +26,6 @@ public interface INavigationAnnotationChangedConvention : IConvention
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context);
+        IConventionContext<IConventionAnnotation> context
+    );
 }

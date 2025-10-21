@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 
 using System;
 using System.Collections;
@@ -77,9 +76,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// </summary>
         /// <param name="portName">The port name.</param>
         public IpcServerChannel(string portName)
-            : this(BuildDefaultProperties(portName), null)
-        {
-        }
+            : this(BuildDefaultProperties(portName), null) { }
 
         /// <summary>
         /// Creates a server channel
@@ -87,9 +84,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <param name="mame">The channel name.</param>
         /// <param name="portName">The port name.</param>
         public IpcServerChannel(string name, string portName)
-            : this(BuildDefaultProperties(name, portName), null)
-        {
-        }
+            : this(BuildDefaultProperties(name, portName), null) { }
 
         /// <summary>
         /// Creates a server channel
@@ -97,11 +92,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <param name="mame">The channel name.</param>
         /// <param name="portName">The port name.</param>
         /// <param name="provider">The sink provider.</param>
-        public IpcServerChannel(string name, string portName,
-                                IServerChannelSinkProvider provider)
-            : this(BuildDefaultProperties(name, portName), provider)
-        {
-        }
+        public IpcServerChannel(string name, string portName, IServerChannelSinkProvider provider)
+            : this(BuildDefaultProperties(name, portName), provider) { }
 
         /// <summary>
         /// Creates a server channel.
@@ -112,11 +104,11 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         {
             bool impersonate = false;
 
-            if (properties != null) 
+            if (properties != null)
             {
-                foreach (DictionaryEntry e in properties) 
+                foreach (DictionaryEntry e in properties)
                 {
-                    switch ((string)e.Key) 
+                    switch ((string)e.Key)
                     {
                         case "name":
                             channelName = (string)e.Value;
@@ -139,34 +131,33 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
                 }
             }
 
-            if (portName == null) 
+            if (portName == null)
             {
                 portName = Guid.NewGuid().ToString("N");
             }
 
             serverProvider = provider;
 
-            if (serverProvider == null) 
+            if (serverProvider == null)
             {
                 serverProvider = new BinaryServerFormatterSinkProvider();
             }
 
             dataStore = new ChannelDataStore(
-                new string[] {IpcChannelHelper.SchemeStart + portName}
-                );
+                new string[] { IpcChannelHelper.SchemeStart + portName }
+            );
             PopulateChannelData(dataStore, serverProvider);
 
             sink = new IpcServerChannelSink(
                 ChannelServices.CreateServerChannelSinkChain(serverProvider, this),
                 portName,
                 impersonate
-                );
+            );
 
             StartListening(null);
         }
 
-        void PopulateChannelData( ChannelDataStore channelData,
-            IServerChannelSinkProvider provider)
+        void PopulateChannelData(ChannelDataStore channelData, IServerChannelSinkProvider provider)
         {
             while (provider != null)
             {
@@ -175,12 +166,11 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             }
         }
 
-
         #region IChannelReceiver Members
 
         public void StartListening(object data)
         {
-            if (worker == null) 
+            if (worker == null)
             {
                 worker = new Thread(new ThreadStart(sink.Listen));
                 worker.IsBackground = true;
@@ -190,15 +180,12 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         public object ChannelData
         {
-            get
-            {
-                return dataStore;
-            }
+            get { return dataStore; }
         }
 
         public void StopListening(object data)
         {
-            if (worker != null) 
+            if (worker != null)
             {
                 worker.Abort();
                 worker = null;
@@ -207,7 +194,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         public string[] GetUrlsForUri(string objectURI)
         {
-            if (!objectURI.StartsWith("/")) objectURI = "/" + objectURI;
+            if (!objectURI.StartsWith("/"))
+                objectURI = "/" + objectURI;
             string[] urls = new string[1];
             urls[0] = IpcChannelHelper.SchemeStart + portName + objectURI;
             return urls;
@@ -219,18 +207,12 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         public string ChannelName
         {
-            get
-            {
-                return channelName;
-            }
+            get { return channelName; }
         }
 
         public int ChannelPriority
         {
-            get
-            {
-                return channelPriority;
-            }
+            get { return channelPriority; }
         }
 
         public string Parse(string url, out string objectURI)
@@ -247,7 +229,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         string portName;
         bool impersonate;
 
-        public IpcServerChannelSink(IServerChannelSink nextSink, string portName, bool impersonate) 
+        public IpcServerChannelSink(IServerChannelSink nextSink, string portName, bool impersonate)
         {
             this.nextSink = nextSink;
             this.portName = portName;
@@ -256,26 +238,40 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         #region IServerChannelSink Members
 
-        public Stream GetResponseStream(IServerResponseChannelSinkStack sinkStack, object state, IMessage msg, ITransportHeaders headers)
+        public Stream GetResponseStream(
+            IServerResponseChannelSinkStack sinkStack,
+            object state,
+            IMessage msg,
+            ITransportHeaders headers
+        )
         {
             return null;
         }
 
-        public ServerProcessing ProcessMessage(IServerChannelSinkStack sinkStack, IMessage requestMsg, ITransportHeaders requestHeaders, Stream requestStream, out IMessage responseMsg, out ITransportHeaders responseHeaders, out Stream responseStream)
+        public ServerProcessing ProcessMessage(
+            IServerChannelSinkStack sinkStack,
+            IMessage requestMsg,
+            ITransportHeaders requestHeaders,
+            Stream requestStream,
+            out IMessage responseMsg,
+            out ITransportHeaders responseHeaders,
+            out Stream responseStream
+        )
         {
             throw new NotSupportedException();
         }
 
-        public void AsyncProcessResponse(IServerResponseChannelSinkStack sinkStack, object state, IMessage msg, ITransportHeaders headers, Stream stream)
-        {
-        }
+        public void AsyncProcessResponse(
+            IServerResponseChannelSinkStack sinkStack,
+            object state,
+            IMessage msg,
+            ITransportHeaders headers,
+            Stream stream
+        ) { }
 
         public IServerChannelSink NextChannelSink
         {
-            get
-            {
-                return nextSink;
-            }
+            get { return nextSink; }
         }
 
         #endregion
@@ -284,36 +280,31 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         public IDictionary Properties
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
         /// Listens for incoming requests.
         /// </summary>
-        internal void Listen() 
+        internal void Listen()
         {
-            while (true) 
+            while (true)
             {
-                try 
+                try
                 {
                     NamedPipeListener listener = new NamedPipeListener(portName);
                     NamedPipeSocket socket = listener.Accept();
                     ThreadPool.QueueUserWorkItem(new WaitCallback(ProcessClient), socket);
                 }
-                catch (NamedPipeException) 
-                {
-                }
+                catch (NamedPipeException) { }
             }
         }
 
-        void ProcessClient(object state) 
+        void ProcessClient(object state)
         {
-            try 
+            try
             {
-                NamedPipeSocket socket = (NamedPipeSocket) state;
+                NamedPipeSocket socket = (NamedPipeSocket)state;
 
                 ITransportHeaders requestHeaders;
                 Stream requestStream;
@@ -323,9 +314,10 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
                 // parse the RequestUri
                 string objectUri;
-                string uri = (string) requestHeaders[CommonTransportKeys.RequestUri];
+                string uri = (string)requestHeaders[CommonTransportKeys.RequestUri];
                 IpcChannelHelper.Parse(uri, out objectUri);
-                if (objectUri == null) objectUri = uri;
+                if (objectUri == null)
+                    objectUri = uri;
                 requestHeaders[CommonTransportKeys.RequestUri] = objectUri;
 
                 ServerChannelSinkStack stack = new ServerChannelSinkStack();
@@ -337,7 +329,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
                 requestHeaders["__CustomErrorsEnabled"] = false;
 
-                if (impersonate) 
+                if (impersonate)
                 {
                     // TODO: Impersonate might throw exceptions. What to do with them?
                     socket.Impersonate();
@@ -351,14 +343,14 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
                     out responseMsg,
                     out responseHeaders,
                     out responseStream
-                    );
+                );
 
-                if (impersonate) 
+                if (impersonate)
                 {
                     NamedPipeSocket.RevertToSelf();
                 }
 
-                switch (op) 
+                switch (op)
                 {
                     case ServerProcessing.Complete:
                         stack.Pop(this);
@@ -381,8 +373,5 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         }
 
         #endregion
-
     }
-
 }
-

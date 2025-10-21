@@ -12,7 +12,9 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
 
-    [TypeForwardedFrom("System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class BasicHttpContextBinding : BasicHttpBinding
     {
         bool contextManagementEnabled = ContextBindingElement.DefaultContextManagementEnabled;
@@ -37,45 +39,57 @@ namespace System.ServiceModel
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("configName");
             }
 
-            BasicHttpContextBindingCollectionElement section = BasicHttpContextBindingCollectionElement.GetBindingCollectionElement();
+            BasicHttpContextBindingCollectionElement section =
+                BasicHttpContextBindingCollectionElement.GetBindingCollectionElement();
             BasicHttpContextBindingElement element = section.Bindings[configName];
             element.ApplyConfiguration(this);
-            if (element.ElementInformation.Properties["allowCookies"].ValueOrigin == PropertyValueOrigin.Default)
+            if (
+                element.ElementInformation.Properties["allowCookies"].ValueOrigin
+                == PropertyValueOrigin.Default
+            )
             {
                 this.AllowCookies = true;
             }
             else if (!this.AllowCookies)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.BasicHttpContextBindingRequiresAllowCookie, this.Namespace, this.Name));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.BasicHttpContextBindingRequiresAllowCookie,
+                        this.Namespace,
+                        this.Name
+                    )
+                );
             }
         }
 
         [DefaultValue(ContextBindingElement.DefaultContextManagementEnabled)]
         public bool ContextManagementEnabled
         {
-            get
-            {
-                return this.contextManagementEnabled;
-            }
-            set
-            {
-                this.contextManagementEnabled = value;
-            }
+            get { return this.contextManagementEnabled; }
+            set { this.contextManagementEnabled = value; }
         }
 
         public override BindingElementCollection CreateBindingElements()
         {
             if (!this.AllowCookies)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BasicHttpContextBindingRequiresAllowCookie, this.Namespace, this.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.BasicHttpContextBindingRequiresAllowCookie,
+                            this.Namespace,
+                            this.Name
+                        )
+                    )
+                );
             }
 
             BindingElementCollection result;
             try
             {
                 // Passing AllowCookies=false to HttpTransportBinding means we don't want transport layer to manage
-                // cookie containers. We are going to do this at the context channel level, because we need channel 
-                // level isolation as opposed to channel factory level isolation. 
+                // cookie containers. We are going to do this at the context channel level, because we need channel
+                // level isolation as opposed to channel factory level isolation.
 
                 this.AllowCookies = false;
                 result = base.CreateBindingElements();
@@ -84,7 +98,15 @@ namespace System.ServiceModel
             {
                 this.AllowCookies = true;
             }
-            result.Insert(0, new ContextBindingElement(ProtectionLevel.None, ContextExchangeMechanism.HttpCookie, null, this.ContextManagementEnabled));
+            result.Insert(
+                0,
+                new ContextBindingElement(
+                    ProtectionLevel.None,
+                    ContextExchangeMechanism.HttpCookie,
+                    null,
+                    this.ContextManagementEnabled
+                )
+            );
 
             return result;
         }

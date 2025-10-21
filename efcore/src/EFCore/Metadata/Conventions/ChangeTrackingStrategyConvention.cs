@@ -31,7 +31,8 @@ public class ChangeTrackingStrategyConvention : IModelFinalizingConvention
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {

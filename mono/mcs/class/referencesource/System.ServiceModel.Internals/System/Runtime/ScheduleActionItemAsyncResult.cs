@@ -13,11 +13,12 @@ namespace System.Runtime
         static Action<object> doWork = new Action<object>(DoWork);
 
         // Implement your own constructor taking in necessary parameters
-        // Constructor needs to call "Schedule()" to schedule work 
+        // Constructor needs to call "Schedule()" to schedule work
         // Cache all parameters
-        // Implement OnDoWork to do work! 
-        
-        protected ScheduleActionItemAsyncResult(AsyncCallback callback, object state) : base(callback, state) { } 
+        // Implement OnDoWork to do work!
+
+        protected ScheduleActionItemAsyncResult(AsyncCallback callback, object state)
+            : base(callback, state) { }
 
         protected void Schedule()
         {
@@ -27,18 +28,18 @@ namespace System.Runtime
         static void DoWork(object state)
         {
             ScheduleActionItemAsyncResult thisPtr = (ScheduleActionItemAsyncResult)state;
-            Exception completionException = null; 
+            Exception completionException = null;
             try
             {
-                thisPtr.OnDoWork(); 
+                thisPtr.OnDoWork();
             }
             catch (Exception ex)
             {
                 if (Fx.IsFatal(ex))
                 {
-                    throw; 
+                    throw;
                 }
-                completionException = ex; 
+                completionException = ex;
             }
 
             thisPtr.Complete(false, completionException);
@@ -48,7 +49,7 @@ namespace System.Runtime
 
         public static void End(IAsyncResult result)
         {
-            AsyncResult.End<ScheduleActionItemAsyncResult>(result); 
+            AsyncResult.End<ScheduleActionItemAsyncResult>(result);
         }
     }
 }

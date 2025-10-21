@@ -29,12 +29,15 @@ namespace System.Linq
                     Vector<long> sums = default;
                     do
                     {
-                        Vector.Widen(new Vector<int>(span.Slice(i)), out Vector<long> low, out Vector<long> high);
+                        Vector.Widen(
+                            new Vector<int>(span.Slice(i)),
+                            out Vector<long> low,
+                            out Vector<long> high
+                        );
                         sums += low;
                         sums += high;
                         i += Vector<int>.Count;
-                    }
-                    while (i <= span.Length - Vector<int>.Count);
+                    } while (i <= span.Length - Vector<int>.Count);
                     sum += Vector.Sum(sums);
                 }
 
@@ -58,7 +61,10 @@ namespace System.Linq
 
                 while (e.MoveNext())
                 {
-                    checked { sum += e.Current; }
+                    checked
+                    {
+                        sum += e.Current;
+                    }
                     count++;
                 }
 
@@ -66,15 +72,21 @@ namespace System.Linq
             }
         }
 
-        public static double Average(this IEnumerable<long> source) => Average<long, long, double>(source);
+        public static double Average(this IEnumerable<long> source) =>
+            Average<long, long, double>(source);
 
-        public static float Average(this IEnumerable<float> source) => (float)Average<float, double, double>(source);
+        public static float Average(this IEnumerable<float> source) =>
+            (float)Average<float, double, double>(source);
 
-        public static double Average(this IEnumerable<double> source) => Average<double, double, double>(source);
+        public static double Average(this IEnumerable<double> source) =>
+            Average<double, double, double>(source);
 
-        public static decimal Average(this IEnumerable<decimal> source) => Average<decimal, decimal, decimal>(source);
+        public static decimal Average(this IEnumerable<decimal> source) =>
+            Average<decimal, decimal, decimal>(source);
 
-        private static TResult Average<TSource, TAccumulator, TResult>(this IEnumerable<TSource> source)
+        private static TResult Average<TSource, TAccumulator, TResult>(
+            this IEnumerable<TSource> source
+        )
             where TSource : struct, INumber<TSource>
             where TAccumulator : struct, INumber<TAccumulator>
             where TResult : struct, INumber<TResult>
@@ -86,7 +98,8 @@ namespace System.Linq
                     ThrowHelper.ThrowNoElementsException();
                 }
 
-                return TResult.CreateChecked(Sum<TSource, TAccumulator>(span)) / TResult.CreateChecked(span.Length);
+                return TResult.CreateChecked(Sum<TSource, TAccumulator>(span))
+                    / TResult.CreateChecked(span.Length);
             }
 
             using (IEnumerator<TSource> e = source.GetEnumerator())
@@ -100,7 +113,10 @@ namespace System.Linq
                 long count = 1;
                 while (e.MoveNext())
                 {
-                    checked { sum += TAccumulator.CreateChecked(e.Current); }
+                    checked
+                    {
+                        sum += TAccumulator.CreateChecked(e.Current);
+                    }
                     count++;
                 }
 
@@ -108,18 +124,24 @@ namespace System.Linq
             }
         }
 
+        public static double? Average(this IEnumerable<int?> source) =>
+            Average<int, long, double>(source);
 
-        public static double? Average(this IEnumerable<int?> source) => Average<int, long, double>(source);
+        public static double? Average(this IEnumerable<long?> source) =>
+            Average<long, long, double>(source);
 
-        public static double? Average(this IEnumerable<long?> source) => Average<long, long, double>(source);
+        public static float? Average(this IEnumerable<float?> source) =>
+            Average<float, double, double>(source) is double result ? (float)result : null;
 
-        public static float? Average(this IEnumerable<float?> source) => Average<float, double, double>(source) is double result ? (float)result : null;
+        public static double? Average(this IEnumerable<double?> source) =>
+            Average<double, double, double>(source);
 
-        public static double? Average(this IEnumerable<double?> source) => Average<double, double, double>(source);
+        public static decimal? Average(this IEnumerable<decimal?> source) =>
+            Average<decimal, decimal, decimal>(source);
 
-        public static decimal? Average(this IEnumerable<decimal?> source) => Average<decimal, decimal, decimal>(source);
-
-        private static TResult? Average<TSource, TAccumulator, TResult>(this IEnumerable<TSource?> source)
+        private static TResult? Average<TSource, TAccumulator, TResult>(
+            this IEnumerable<TSource?> source
+        )
             where TSource : struct, INumber<TSource>
             where TAccumulator : struct, INumber<TAccumulator>
             where TResult : struct, INumber<TResult>
@@ -144,7 +166,10 @@ namespace System.Linq
                             value = e.Current;
                             if (value.HasValue)
                             {
-                                checked { sum += TAccumulator.CreateChecked(value.GetValueOrDefault()); }
+                                checked
+                                {
+                                    sum += TAccumulator.CreateChecked(value.GetValueOrDefault());
+                                }
                                 count++;
                             }
                         }
@@ -157,18 +182,35 @@ namespace System.Linq
             return null;
         }
 
+        public static double Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int> selector
+        ) => Average<TSource, int, long, double>(source, selector);
 
-        public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, int> selector) => Average<TSource, int, long, double>(source, selector);
+        public static double Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long> selector
+        ) => Average<TSource, long, long, double>(source, selector);
 
-        public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, long> selector) => Average<TSource, long, long, double>(source, selector);
+        public static float Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float> selector
+        ) => (float)Average<TSource, float, double, double>(source, selector);
 
-        public static float Average<TSource>(this IEnumerable<TSource> source, Func<TSource, float> selector) => (float)Average<TSource, float, double, double>(source, selector);
+        public static double Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double> selector
+        ) => Average<TSource, double, double, double>(source, selector);
 
-        public static double Average<TSource>(this IEnumerable<TSource> source, Func<TSource, double> selector) => Average<TSource, double, double, double>(source, selector);
+        public static decimal Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal> selector
+        ) => Average<TSource, decimal, decimal, decimal>(source, selector);
 
-        public static decimal Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal> selector) => Average<TSource, decimal, decimal, decimal>(source, selector);
-
-        private static TResult Average<TSource, TSelector, TAccumulator, TResult>(this IEnumerable<TSource> source, Func<TSource, TSelector> selector)
+        private static TResult Average<TSource, TSelector, TAccumulator, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TSelector> selector
+        )
             where TSelector : struct, INumber<TSelector>
             where TAccumulator : struct, INumber<TAccumulator>
             where TResult : struct, INumber<TResult>
@@ -195,7 +237,10 @@ namespace System.Linq
 
                 while (e.MoveNext())
                 {
-                    checked { sum += TAccumulator.CreateChecked(selector(e.Current)); }
+                    checked
+                    {
+                        sum += TAccumulator.CreateChecked(selector(e.Current));
+                    }
                     count++;
                 }
 
@@ -203,18 +248,38 @@ namespace System.Linq
             }
         }
 
+        public static double? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, int?> selector
+        ) => Average<TSource, int, long, double>(source, selector);
 
-        public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, int?> selector) => Average<TSource, int, long, double>(source, selector);
+        public static double? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, long?> selector
+        ) => Average<TSource, long, long, double>(source, selector);
 
-        public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, long?> selector) => Average<TSource, long, long, double>(source, selector);
+        public static float? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, float?> selector
+        ) =>
+            Average<TSource, float, double, double>(source, selector) is double result
+                ? (float)result
+                : null;
 
-        public static float? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, float?> selector) => Average<TSource, float, double, double>(source, selector) is double result ? (float)result : null;
+        public static double? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, double?> selector
+        ) => Average<TSource, double, double, double>(source, selector);
 
-        public static double? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, double?> selector) => Average<TSource, double, double, double>(source, selector);
+        public static decimal? Average<TSource>(
+            this IEnumerable<TSource> source,
+            Func<TSource, decimal?> selector
+        ) => Average<TSource, decimal, decimal, decimal>(source, selector);
 
-        public static decimal? Average<TSource>(this IEnumerable<TSource> source, Func<TSource, decimal?> selector) => Average<TSource, decimal, decimal, decimal>(source, selector);
-
-        private static TResult? Average<TSource, TSelector, TAccumulator, TResult>(this IEnumerable<TSource> source, Func<TSource, TSelector?> selector)
+        private static TResult? Average<TSource, TSelector, TAccumulator, TResult>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TSelector?> selector
+        )
             where TSelector : struct, INumber<TSelector>
             where TAccumulator : struct, INumber<TAccumulator>
             where TResult : struct, INumber<TResult>
@@ -244,7 +309,10 @@ namespace System.Linq
                             value = selector(e.Current);
                             if (value.HasValue)
                             {
-                                checked { sum += TAccumulator.CreateChecked(value.GetValueOrDefault()); }
+                                checked
+                                {
+                                    sum += TAccumulator.CreateChecked(value.GetValueOrDefault());
+                                }
                                 count++;
                             }
                         }

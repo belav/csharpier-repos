@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -43,10 +43,12 @@ namespace DbLinq.Language.Implementation
         /// Words and corresponding weights
         /// </summary>
         protected IDictionary<string, int> WordsWeights;
+
         /// <summary>
         /// Plural forms for singular words (exceptions)
         /// </summary>
         protected IDictionary<string, string> SingularToPlural = new Dictionary<string, string>();
+
         /// <summary>
         /// Singular froms for plural words (exceptions)
         /// </summary>
@@ -87,6 +89,7 @@ namespace DbLinq.Language.Implementation
         /// <param name="plural">The plural.</param>
         /// <returns></returns>
         protected abstract string ComputeSingular(string plural);
+
         /// <summary>
         /// Computes the plural.
         /// </summary>
@@ -100,6 +103,7 @@ namespace DbLinq.Language.Implementation
         /// <param name="cultureInfo"></param>
         /// <returns></returns>
         public abstract bool Supports(CultureInfo cultureInfo);
+
         /// <summary>
         /// Loads the words (operation may be slow, so it is excluded from ctor)
         /// </summary>
@@ -132,7 +136,10 @@ namespace DbLinq.Language.Implementation
                             word = word.Substring(1);
                         }
 
-                        var singularPlural = word.Split(singularPluralSeparator, StringSplitOptions.RemoveEmptyEntries);
+                        var singularPlural = word.Split(
+                            singularPluralSeparator,
+                            StringSplitOptions.RemoveEmptyEntries
+                        );
                         // "a => b" declares a singular => plural form
                         if (singularPlural.Length > 1)
                         {
@@ -264,7 +271,8 @@ namespace DbLinq.Language.Implementation
             {
                 var left = magma.Substring(0, i);
                 var right = magma.Substring(i);
-                IList<string> leftWords, rightWords;
+                IList<string> leftWords,
+                    rightWords;
                 double leftNote = ComputeWords(left, out leftWords, context);
                 double rightNote = ComputeWords(right, out rightWords, context);
                 double note = leftNote + rightNote;
@@ -292,10 +300,7 @@ namespace DbLinq.Language.Implementation
             Context.Split split;
             if (!context.Splits.TryGetValue(magma, out split))
             {
-                split = new Context.Split
-                            {
-                                Words = GetMagmaWords(magma, context)
-                            };
+                split = new Context.Split { Words = GetMagmaWords(magma, context) };
                 split.Note = GetNote(split.Words);
                 context.Splits[magma] = split;
             }
@@ -322,8 +327,7 @@ namespace DbLinq.Language.Implementation
                 totalWeight += weight;
             }
             double averageWeight = totalWeight / words.Count;
-            return averageWeight / words.Count
-                   * 1000; // coz it's easier to read
+            return averageWeight / words.Count * 1000; // coz it's easier to read
         }
     }
 }

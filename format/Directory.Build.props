@@ -1,7 +1,5 @@
 <Project>
-
   <Import Project="Sdk.props" Sdk="Microsoft.DotNet.Arcade.Sdk" />
-
   <PropertyGroup>
     <Copyright>$(CopyrightMicrosoft)</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -9,10 +7,8 @@
     <!-- Enables faster restore times -->
     <RestoreUseStaticGraphEvaluation>true</RestoreUseStaticGraphEvaluation>
   </PropertyGroup>
-
   <!-- TODO: Remove when Arcades updates NetCurrent to net9.0. -->
   <PropertyGroup>
     <NetCurrent>net9.0</NetCurrent>
   </PropertyGroup>
-
 </Project>

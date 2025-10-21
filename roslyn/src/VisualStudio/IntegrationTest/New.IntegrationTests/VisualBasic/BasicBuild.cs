@@ -17,21 +17,29 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
 {
     public class BasicBuild : AbstractIntegrationTest
     {
-        public BasicBuild() : base()
-        {
-        }
+        public BasicBuild()
+            : base() { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(true);
-            await TestServices.SolutionExplorer.CreateSolutionAsync(nameof(BasicBuild), HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddProjectAsync("TestProj", WellKnownProjectTemplates.ConsoleApplication, LanguageNames.VisualBasic, HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.CreateSolutionAsync(
+                nameof(BasicBuild),
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestProj",
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.VisualBasic,
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.Build)]
         public async Task BuildProject()
         {
-            var editorText = @"Module Module1
+            var editorText =
+                @"Module Module1
 
     Sub Main()
         Console.WriteLine(""Hello, World!"")
@@ -41,12 +49,19 @@ End Module";
 
             await TestServices.Editor.SetTextAsync(editorText, HangMitigatingCancellationToken);
 
-            var buildSummary = await TestServices.SolutionExplorer.BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
-            Assert.Equal("========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========", buildSummary);
+            var buildSummary = await TestServices.SolutionExplorer.BuildSolutionAndWaitAsync(
+                HangMitigatingCancellationToken
+            );
+            Assert.Equal(
+                "========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========",
+                buildSummary
+            );
 
             await TestServices.ErrorList.ShowBuildErrorsAsync(HangMitigatingCancellationToken);
 
-            var errors = await TestServices.ErrorList.GetBuildErrorsAsync(HangMitigatingCancellationToken);
+            var errors = await TestServices.ErrorList.GetBuildErrorsAsync(
+                HangMitigatingCancellationToken
+            );
             AssertEx.EqualOrDiff(string.Empty, string.Join(Environment.NewLine, errors));
         }
     }

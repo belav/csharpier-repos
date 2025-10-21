@@ -10,44 +10,64 @@
  * Copyright (c) 1999 Microsoft Corporation
  */
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Collections;
     using System.Reflection;
     using System.Web.Util;
 
     [AttributeUsage(AttributeTargets.Property)]
-    internal sealed class IgnoreUnknownContentAttribute : Attribute {
-        internal IgnoreUnknownContentAttribute() {}
+    internal sealed class IgnoreUnknownContentAttribute : Attribute
+    {
+        internal IgnoreUnknownContentAttribute() { }
     }
-
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    internal sealed class CollectionBuilder : ControlBuilder {
-
+    internal sealed class CollectionBuilder : ControlBuilder
+    {
         private Type _itemType;
         private bool _ignoreUnknownContent;
 
-        internal CollectionBuilder(bool ignoreUnknownContent) { _ignoreUnknownContent = ignoreUnknownContent; }
-
+        internal CollectionBuilder(bool ignoreUnknownContent)
+        {
+            _ignoreUnknownContent = ignoreUnknownContent;
+        }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override void Init(TemplateParser parser, ControlBuilder parentBuilder,
-                                  Type type, string tagName, string ID, IDictionary attribs) {
+        public override void Init(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            string tagName,
+            string ID,
+            IDictionary attribs
+        )
+        {
+            base.Init(
+                parser,
+                parentBuilder,
+                type /*type*/
+                ,
+                tagName,
+                ID,
+                attribs
+            );
 
-            base.Init(parser, parentBuilder, type /*type*/, tagName, ID, attribs);
+            //
 
-            // 
-
-
-
-            PropertyInfo propInfo = TargetFrameworkUtil.GetProperty(parentBuilder.ControlType, 
-                tagName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.IgnoreCase);
+            PropertyInfo propInfo = TargetFrameworkUtil.GetProperty(
+                parentBuilder.ControlType,
+                tagName,
+                BindingFlags.Public
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.IgnoreCase
+            );
             SetControlType(propInfo.PropertyType);
             Debug.Assert(ControlType != null, "ControlType != null");
 
@@ -55,8 +75,14 @@ namespace System.Web.UI {
 
             // Look for an "item" property on the collection that takes in an integer index
             // (similar to IList::Item)
-            propInfo = TargetFrameworkUtil.GetProperty(ControlType, "Item", bindingFlags, types: new Type[] { typeof(int) });
-            if (propInfo == null) {
+            propInfo = TargetFrameworkUtil.GetProperty(
+                ControlType,
+                "Item",
+                bindingFlags,
+                types: new Type[] { typeof(int) }
+            );
+            if (propInfo == null)
+            {
                 // fall-back on finding a non-specific Item property
                 // a type with overloaded indexed properties will result in an exception however
                 propInfo = TargetFrameworkUtil.GetProperty(ControlType, "Item", bindingFlags);
@@ -72,58 +98,69 @@ namespace System.Web.UI {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override object BuildObject() {
+        public override object BuildObject()
+        {
             return this;
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override Type GetChildControlType(string tagName, IDictionary attribs) {
-
+        public override Type GetChildControlType(string tagName, IDictionary attribs)
+        {
             Type childType = Parser.MapStringToType(tagName, attribs);
 
             // If possible, check if the item is of the required type
-            if (_itemType != null) {
-
-                if (!_itemType.IsAssignableFrom(childType)) {
+            if (_itemType != null)
+            {
+                if (!_itemType.IsAssignableFrom(childType))
+                {
                     if (_ignoreUnknownContent)
                         return null;
 
                     string controlTypeName = String.Empty;
-                    if (ControlType != null) {
+                    if (ControlType != null)
+                    {
                         controlTypeName = ControlType.FullName;
                     }
-                    else {
+                    else
+                    {
                         controlTypeName = TagName;
                     }
 
-                    throw new HttpException(SR.GetString(SR.Invalid_collection_item_type, new String[] { controlTypeName,
-                                                                        _itemType.FullName,
-                                                                        tagName,
-                                                                        childType.FullName}));
+                    throw new HttpException(
+                        SR.GetString(
+                            SR.Invalid_collection_item_type,
+                            new String[]
+                            {
+                                controlTypeName,
+                                _itemType.FullName,
+                                tagName,
+                                childType.FullName,
+                            }
+                        )
+                    );
                 }
-
             }
 
             return childType;
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override void AppendLiteralString(string s) {
-
+        public override void AppendLiteralString(string s)
+        {
             if (_ignoreUnknownContent)
                 return;
 
             // Don't allow non-whitespace literal content
-            if (!Util.IsWhiteSpaceString(s)) {
-                throw new HttpException(SR.GetString(SR.Literal_content_not_allowed, ControlType.FullName, s.Trim()));
+            if (!Util.IsWhiteSpaceString(s))
+            {
+                throw new HttpException(
+                    SR.GetString(SR.Literal_content_not_allowed, ControlType.FullName, s.Trim())
+                );
             }
         }
     }
-
 }

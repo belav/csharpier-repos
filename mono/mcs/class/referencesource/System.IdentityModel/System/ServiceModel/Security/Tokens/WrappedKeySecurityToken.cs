@@ -12,7 +12,9 @@ namespace System.ServiceModel.Security.Tokens
     using System.ServiceModel.Security;
     using System.Xml;
 
-    [TypeForwardedFrom("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class WrappedKeySecurityToken : SecurityToken
     {
         string id;
@@ -31,29 +33,64 @@ namespace System.ServiceModel.Security.Tokens
         XmlDictionaryString wrappingAlgorithmDictionaryString;
 
         // sender use
-        internal WrappedKeySecurityToken(string id, byte[] keyToWrap, ISspiNegotiation wrappingSspiContext)
-            : this(id, keyToWrap, (wrappingSspiContext != null) ? (wrappingSspiContext.KeyEncryptionAlgorithm) : null, wrappingSspiContext, null)
-        {
-        }
+        internal WrappedKeySecurityToken(
+            string id,
+            byte[] keyToWrap,
+            ISspiNegotiation wrappingSspiContext
+        )
+            : this(
+                id,
+                keyToWrap,
+                (wrappingSspiContext != null) ? (wrappingSspiContext.KeyEncryptionAlgorithm) : null,
+                wrappingSspiContext,
+                null
+            ) { }
 
         // sender use
-        public WrappedKeySecurityToken(string id, byte[] keyToWrap, string wrappingAlgorithm, SecurityToken wrappingToken, SecurityKeyIdentifier wrappingTokenReference)
+        public WrappedKeySecurityToken(
+            string id,
+            byte[] keyToWrap,
+            string wrappingAlgorithm,
+            SecurityToken wrappingToken,
+            SecurityKeyIdentifier wrappingTokenReference
+        )
             : this(id, keyToWrap, wrappingAlgorithm, null, wrappingToken, wrappingTokenReference)
-        {
-        }
+        { }
 
-        internal WrappedKeySecurityToken(string id, byte[] keyToWrap, string wrappingAlgorithm, XmlDictionaryString wrappingAlgorithmDictionaryString, SecurityToken wrappingToken, SecurityKeyIdentifier wrappingTokenReference)
-            : this(id, keyToWrap, wrappingAlgorithm, wrappingAlgorithmDictionaryString, wrappingToken, wrappingTokenReference, null, null)
-        {
-        }
+        internal WrappedKeySecurityToken(
+            string id,
+            byte[] keyToWrap,
+            string wrappingAlgorithm,
+            XmlDictionaryString wrappingAlgorithmDictionaryString,
+            SecurityToken wrappingToken,
+            SecurityKeyIdentifier wrappingTokenReference
+        )
+            : this(
+                id,
+                keyToWrap,
+                wrappingAlgorithm,
+                wrappingAlgorithmDictionaryString,
+                wrappingToken,
+                wrappingTokenReference,
+                null,
+                null
+            ) { }
 
         // direct receiver use, chained sender use
-        internal WrappedKeySecurityToken(string id, byte[] keyToWrap, string wrappingAlgorithm, ISspiNegotiation wrappingSspiContext, byte[] wrappedKey)
+        internal WrappedKeySecurityToken(
+            string id,
+            byte[] keyToWrap,
+            string wrappingAlgorithm,
+            ISspiNegotiation wrappingSspiContext,
+            byte[] wrappedKey
+        )
             : this(id, keyToWrap, wrappingAlgorithm, null)
         {
             if (wrappingSspiContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("wrappingSspiContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappingSspiContext"
+                );
             }
             this.wrappingSspiContext = wrappingSspiContext;
             if (wrappedKey == null)
@@ -68,12 +105,36 @@ namespace System.ServiceModel.Security.Tokens
         }
 
         // receiver use
-        internal WrappedKeySecurityToken(string id, byte[] keyToWrap, string wrappingAlgorithm, SecurityToken wrappingToken, SecurityKeyIdentifier wrappingTokenReference, byte[] wrappedKey, SecurityKey wrappingSecurityKey)
-            : this(id, keyToWrap, wrappingAlgorithm, null, wrappingToken, wrappingTokenReference, wrappedKey, wrappingSecurityKey)
-        {
-        }
+        internal WrappedKeySecurityToken(
+            string id,
+            byte[] keyToWrap,
+            string wrappingAlgorithm,
+            SecurityToken wrappingToken,
+            SecurityKeyIdentifier wrappingTokenReference,
+            byte[] wrappedKey,
+            SecurityKey wrappingSecurityKey
+        )
+            : this(
+                id,
+                keyToWrap,
+                wrappingAlgorithm,
+                null,
+                wrappingToken,
+                wrappingTokenReference,
+                wrappedKey,
+                wrappingSecurityKey
+            ) { }
 
-        WrappedKeySecurityToken(string id, byte[] keyToWrap, string wrappingAlgorithm, XmlDictionaryString wrappingAlgorithmDictionaryString, SecurityToken wrappingToken, SecurityKeyIdentifier wrappingTokenReference, byte[] wrappedKey, SecurityKey wrappingSecurityKey)
+        WrappedKeySecurityToken(
+            string id,
+            byte[] keyToWrap,
+            string wrappingAlgorithm,
+            XmlDictionaryString wrappingAlgorithmDictionaryString,
+            SecurityToken wrappingToken,
+            SecurityKeyIdentifier wrappingTokenReference,
+            byte[] wrappedKey,
+            SecurityKey wrappingSecurityKey
+        )
             : this(id, keyToWrap, wrappingAlgorithm, wrappingAlgorithmDictionaryString)
         {
             if (wrappingToken == null)
@@ -84,7 +145,11 @@ namespace System.ServiceModel.Security.Tokens
             this.wrappingTokenReference = wrappingTokenReference;
             if (wrappedKey == null)
             {
-                this.wrappedKey = SecurityUtils.EncryptKey(wrappingToken, wrappingAlgorithm, keyToWrap);
+                this.wrappedKey = SecurityUtils.EncryptKey(
+                    wrappingToken,
+                    wrappingAlgorithm,
+                    keyToWrap
+                );
             }
             else
             {
@@ -94,14 +159,23 @@ namespace System.ServiceModel.Security.Tokens
             this.serializeCarriedKeyName = true;
         }
 
-        WrappedKeySecurityToken(string id, byte[] keyToWrap, string wrappingAlgorithm, XmlDictionaryString wrappingAlgorithmDictionaryString)
+        WrappedKeySecurityToken(
+            string id,
+            byte[] keyToWrap,
+            string wrappingAlgorithm,
+            XmlDictionaryString wrappingAlgorithmDictionaryString
+        )
         {
             if (id == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("id");
             if (wrappingAlgorithm == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("wrappingAlgorithm");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappingAlgorithm"
+                );
             if (keyToWrap == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("securityKeyToWrap");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityKeyToWrap"
+                );
 
             this.id = id;
             this.effectiveTime = DateTime.UtcNow;
@@ -134,10 +208,7 @@ namespace System.ServiceModel.Security.Tokens
 
         internal ReferenceList ReferenceList
         {
-            get
-            {
-                return this.encryptedKey == null ? null : this.encryptedKey.ReferenceList;
-            }
+            get { return this.encryptedKey == null ? null : this.encryptedKey.ReferenceList; }
         }
 
         public string WrappingAlgorithm
@@ -229,9 +300,12 @@ namespace System.ServiceModel.Security.Tokens
             return base.CreateKeyIdentifierClause<T>();
         }
 
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            EncryptedKeyHashIdentifierClause encKeyIdentifierClause = keyIdentifierClause as EncryptedKeyHashIdentifierClause;
+            EncryptedKeyHashIdentifierClause encKeyIdentifierClause =
+                keyIdentifierClause as EncryptedKeyHashIdentifierClause;
             if (encKeyIdentifierClause != null)
                 return encKeyIdentifierClause.Matches(GetHash());
 

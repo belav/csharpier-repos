@@ -16,14 +16,25 @@ namespace Microsoft.Web.Mvc.Test
             // Arrange
             var attribute = new UrlAttribute();
             var provider = new Mock<ModelMetadataProvider>();
-            var metadata = new ModelMetadata(provider.Object, null, null, typeof(string), "PropertyName");
+            var metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(string),
+                "PropertyName"
+            );
 
             // Act
-            ModelClientValidationRule clientRule = attribute.GetClientValidationRules(metadata, null).Single();
+            ModelClientValidationRule clientRule = attribute
+                .GetClientValidationRules(metadata, null)
+                .Single();
 
             // Assert
             Assert.Equal("url", clientRule.ValidationType);
-            Assert.Equal("The PropertyName field is not a valid fully-qualified http, https, or ftp URL.", clientRule.ErrorMessage);
+            Assert.Equal(
+                "The PropertyName field is not a valid fully-qualified http, https, or ftp URL.",
+                clientRule.ErrorMessage
+            );
             Assert.Empty(clientRule.ValidationParameters);
         }
 

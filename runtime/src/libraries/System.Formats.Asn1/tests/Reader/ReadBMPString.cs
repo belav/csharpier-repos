@@ -44,76 +44,62 @@ namespace System.Formats.Asn1.Tests.Reader
                     "3E1C" + "041A004A006F0068006E00200051002E00200053006D006900740068",
                     "John Q. Smith",
                 },
+                new object[] { AsnEncodingRules.BER, "1E00", "" },
+                new object[] { AsnEncodingRules.CER, "1E00", "" },
+                new object[] { AsnEncodingRules.DER, "1E00", "" },
+                new object[] { AsnEncodingRules.BER, "3E00", "" },
+                new object[] { AsnEncodingRules.BER, "3E80" + "0000", "" },
                 new object[]
                 {
                     AsnEncodingRules.BER,
-                    "1E00",
-                    "",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.CER,
-                    "1E00",
-                    "",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.DER,
-                    "1E00",
-                    "",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.BER,
-                    "3E00",
-                    "",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.BER,
-                    "3E80" + "0000",
-                    "",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.BER,
-                    "3E80" +
-                      "2480" +
+                    "3E80"
+                        + "2480"
+                        +
                         // "Dr."
-                        "040600440072002E" +
+                        "040600440072002E"
+                        +
                         // " & "
-                        "0406002000260020" +
+                        "0406002000260020"
+                        +
                         // "Mrs."
-                        "0408004D00720073002E" +
-                        "0000" +
-                      // " "
-                      "04020020" +
-                      "2480" +
-                        "2410" +
-                          // "Smith"
-                          "040A0053006D006900740068" +
-                          // hyphen (U+2010)
-                          "04022010" +
-                        "0000" +
-                      // "Jones"
-                      "040A004A006F006E00650073" +
-                      "2480" +
+                        "0408004D00720073002E"
+                        + "0000"
+                        +
                         // " "
-                        "04020020" +
-                        "2480" +
-                          // The next two bytes are U+FE60, small ampersand
-                          // Since UCS-2 would always chunk evenly under CER the odds of
-                          // misaligned data are low in reality, but maybe some BER encoder
-                          // chunks odd, so a split scenario could still happen.
-                          "0401FE" +
-                          "040160" +
-                          "0000" +
+                        "04020020"
+                        + "2480"
+                        + "2410"
+                        +
+                        // "Smith"
+                        "040A0053006D006900740068"
+                        +
+                        // hyphen (U+2010)
+                        "04022010"
+                        + "0000"
+                        +
+                        // "Jones"
+                        "040A004A006F006E00650073"
+                        + "2480"
+                        +
                         // " "
-                        "04020020" +
+                        "04020020"
+                        + "2480"
+                        +
+                        // The next two bytes are U+FE60, small ampersand
+                        // Since UCS-2 would always chunk evenly under CER the odds of
+                        // misaligned data are low in reality, but maybe some BER encoder
+                        // chunks odd, so a split scenario could still happen.
+                        "0401FE"
+                        + "040160"
+                        + "0000"
+                        +
+                        // " "
+                        "04020020"
+                        +
                         // "children"
-                        "0410006300680069006C006400720065006E" +
-                        "0000" +
-                      "0000",
+                        "0410006300680069006C006400720065006E"
+                        + "0000"
+                        + "0000",
                     "Dr. & Mrs. Smith\u2010Jones \uFE60 children",
                 },
             };
@@ -123,7 +109,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void GetBMPString_Success(
             AsnEncodingRules ruleSet,
             string inputHex,
-            string expectedValue)
+            string expectedValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -137,7 +124,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryCopyBMPString(
             AsnEncodingRules ruleSet,
             string inputHex,
-            string expectedValue)
+            string expectedValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             char[] output = new char[expectedValue.Length];
@@ -152,16 +140,15 @@ namespace System.Formats.Asn1.Tests.Reader
 
                 copied = reader.TryCopyBMPString(
                     output.AsSpan(0, expectedValue.Length - 1),
-                    out charsWritten);
+                    out charsWritten
+                );
 
                 Assert.False(copied, "reader.TryCopyBMPString - too short");
                 Assert.Equal(0, charsWritten);
                 Assert.Equal('a', output[0]);
             }
 
-            copied = reader.TryCopyBMPString(
-                output,
-                out charsWritten);
+            copied = reader.TryCopyBMPString(output, out charsWritten);
 
             Assert.True(copied, "reader.TryCopyBMPString");
 
@@ -174,10 +161,13 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryCopyBMPStringBytes(
             AsnEncodingRules ruleSet,
             string inputHex,
-            string expectedString)
+            string expectedString
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
-            string expectedHex = Text.Encoding.BigEndianUnicode.GetBytes(expectedString).ByteArrayToHex();
+            string expectedHex = Text
+                .Encoding.BigEndianUnicode.GetBytes(expectedString)
+                .ByteArrayToHex();
             byte[] output = new byte[expectedHex.Length / 2];
 
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -188,22 +178,24 @@ namespace System.Formats.Asn1.Tests.Reader
             {
                 output[0] = 32;
 
-                copied = reader.TryCopyBMPStringBytes(output.AsSpan(0, output.Length - 1),
-                    out bytesWritten);
+                copied = reader.TryCopyBMPStringBytes(
+                    output.AsSpan(0, output.Length - 1),
+                    out bytesWritten
+                );
 
                 Assert.False(copied, "reader.TryCopyBMPStringBytes - too short");
                 Assert.Equal(0, bytesWritten);
                 Assert.Equal(32, output[0]);
             }
 
-            copied = reader.TryCopyBMPStringBytes(output,
-                out bytesWritten);
+            copied = reader.TryCopyBMPStringBytes(output, out bytesWritten);
 
             Assert.True(copied, "reader.TryCopyBMPStringBytes");
 
             Assert.Equal(
                 expectedHex,
-                new ReadOnlySpan<byte>(output, 0, bytesWritten).ByteArrayToHex());
+                new ReadOnlySpan<byte>(output, 0, bytesWritten).ByteArrayToHex()
+            );
 
             Assert.Equal(output.Length, bytesWritten);
         }
@@ -215,7 +207,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadBMPStringBytes(
             AsnEncodingRules ruleSet,
             string inputHex,
-            bool expectSuccess)
+            bool expectSuccess
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -227,9 +220,8 @@ namespace System.Formats.Asn1.Tests.Reader
                 Assert.True(got, "reader.TryReadBMPStringBytes");
 
                 Assert.True(
-                    Unsafe.AreSame(
-                        ref MemoryMarshal.GetReference(contents.Span),
-                        ref inputData[2]));
+                    Unsafe.AreSame(ref MemoryMarshal.GetReference(contents.Span), ref inputData[2])
+                );
             }
             else
             {
@@ -255,17 +247,17 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryReadBMPStringBytes_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBMPStringBytes(out ReadOnlyMemory<byte> contents);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBMPStringBytes(out ReadOnlyMemory<byte> contents);
+            });
         }
 
         [Theory]
@@ -289,7 +281,11 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Length Too Long", AsnEncodingRules.DER, "1E034869")]
         [InlineData("Definite Constructed Form", AsnEncodingRules.CER, "3E03040149")]
         [InlineData("Definite Constructed Form", AsnEncodingRules.DER, "3E03040149")]
-        [InlineData("Indefinite Constructed Form - Short Payload", AsnEncodingRules.CER, "3E800401490000")]
+        [InlineData(
+            "Indefinite Constructed Form - Short Payload",
+            AsnEncodingRules.CER,
+            "3E800401490000"
+        )]
         [InlineData("Indefinite Constructed Form", AsnEncodingRules.DER, "3E800401490000")]
         [InlineData("No nested content", AsnEncodingRules.CER, "3E800000")]
         [InlineData("No EoC", AsnEncodingRules.BER, "3E80" + "04024869")]
@@ -297,15 +293,31 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Wrong Tag - Primitive", AsnEncodingRules.CER, "04024869")]
         [InlineData("Wrong Tag - Primitive", AsnEncodingRules.DER, "04024869")]
         [InlineData("Wrong Tag - Constructed", AsnEncodingRules.BER, "240404024869")]
-        [InlineData("Wrong Tag - Constructed Indef", AsnEncodingRules.BER, "2480" + "04024869" + "0000")]
-        [InlineData("Wrong Tag - Constructed Indef", AsnEncodingRules.CER, "2480" + "04024869" + "0000")]
+        [InlineData(
+            "Wrong Tag - Constructed Indef",
+            AsnEncodingRules.BER,
+            "2480" + "04024869" + "0000"
+        )]
+        [InlineData(
+            "Wrong Tag - Constructed Indef",
+            AsnEncodingRules.CER,
+            "2480" + "04024869" + "0000"
+        )]
         [InlineData("Wrong Tag - Constructed", AsnEncodingRules.DER, "240404024869")]
         [InlineData("Nested Bad Tag", AsnEncodingRules.BER, "3E04" + "1E024869")]
         [InlineData("Nested context-specific", AsnEncodingRules.BER, "3E04800400FACE")]
         [InlineData("Nested context-specific (indef)", AsnEncodingRules.BER, "3E80800400FACE0000")]
         [InlineData("Nested context-specific (indef)", AsnEncodingRules.CER, "3E80800400FACE0000")]
-        [InlineData("Nested Length Too Long", AsnEncodingRules.BER, "3E07" + ("2402" + "0404") + "04020049")]
-        [InlineData("Nested Simple Length Too Long", AsnEncodingRules.BER, "3E03" + "040548656C6C6F")]
+        [InlineData(
+            "Nested Length Too Long",
+            AsnEncodingRules.BER,
+            "3E07" + ("2402" + "0404") + "04020049"
+        )]
+        [InlineData(
+            "Nested Simple Length Too Long",
+            AsnEncodingRules.BER,
+            "3E03" + "040548656C6C6F"
+        )]
         [InlineData("Constructed Null", AsnEncodingRules.BER, "3E8020000000")]
         [InlineData("Constructed Null", AsnEncodingRules.CER, "3E8020000000")]
         [InlineData("NonEmpty Null", AsnEncodingRules.BER, "3E80000100")]
@@ -314,7 +326,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryCopyBMPStringBytes_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -325,17 +338,19 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryCopyBMPStringBytes(outputData, out bytesWritten);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryCopyBMPStringBytes(outputData, out bytesWritten);
+            });
 
             Assert.Equal(-1, bytesWritten);
             Assert.Equal(252, outputData[0]);
         }
 
-        private static void TryCopyBMPString_Throws_Helper(AsnEncodingRules ruleSet, byte[] inputData)
+        private static void TryCopyBMPString_Throws_Helper(
+            AsnEncodingRules ruleSet,
+            byte[] inputData
+        )
         {
             char[] outputData = new char[inputData.Length + 1];
             outputData[0] = 'a';
@@ -343,13 +358,10 @@ namespace System.Formats.Asn1.Tests.Reader
             int bytesWritten = -1;
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryCopyBMPString(
-                        outputData,
-                        out bytesWritten);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryCopyBMPString(outputData, out bytesWritten);
+            });
 
             Assert.Equal(-1, bytesWritten);
             Assert.Equal('a', outputData[0]);
@@ -377,17 +389,17 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void GetBMPString_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.ReadCharacterString(UniversalTagNumber.BMPString);
-                });
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.ReadCharacterString(UniversalTagNumber.BMPString);
+            });
         }
 
         [Theory]
@@ -411,7 +423,11 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Length Too Long", AsnEncodingRules.DER, "1E034869")]
         [InlineData("Definite Constructed Form", AsnEncodingRules.CER, "3E03040149")]
         [InlineData("Definite Constructed Form", AsnEncodingRules.DER, "3E03040149")]
-        [InlineData("Indefinite Constructed Form - Short Payload", AsnEncodingRules.CER, "3E800401490000")]
+        [InlineData(
+            "Indefinite Constructed Form - Short Payload",
+            AsnEncodingRules.CER,
+            "3E800401490000"
+        )]
         [InlineData("Indefinite Constructed Form", AsnEncodingRules.DER, "3E800401490000")]
         [InlineData("No nested content", AsnEncodingRules.CER, "3E800000")]
         [InlineData("No EoC", AsnEncodingRules.BER, "3E80" + "04024869")]
@@ -419,15 +435,31 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Wrong Tag - Primitive", AsnEncodingRules.CER, "04024869")]
         [InlineData("Wrong Tag - Primitive", AsnEncodingRules.DER, "04024869")]
         [InlineData("Wrong Tag - Constructed", AsnEncodingRules.BER, "240404024869")]
-        [InlineData("Wrong Tag - Constructed Indef", AsnEncodingRules.BER, "2480" + "04024869" + "0000")]
-        [InlineData("Wrong Tag - Constructed Indef", AsnEncodingRules.CER, "2480" + "04024869" + "0000")]
+        [InlineData(
+            "Wrong Tag - Constructed Indef",
+            AsnEncodingRules.BER,
+            "2480" + "04024869" + "0000"
+        )]
+        [InlineData(
+            "Wrong Tag - Constructed Indef",
+            AsnEncodingRules.CER,
+            "2480" + "04024869" + "0000"
+        )]
         [InlineData("Wrong Tag - Constructed", AsnEncodingRules.DER, "240404024869")]
         [InlineData("Nested Bad Tag", AsnEncodingRules.BER, "3E04" + "1E024869")]
         [InlineData("Nested context-specific", AsnEncodingRules.BER, "3E04800400FACE")]
         [InlineData("Nested context-specific (indef)", AsnEncodingRules.BER, "3E80800400FACE0000")]
         [InlineData("Nested context-specific (indef)", AsnEncodingRules.CER, "3E80800400FACE0000")]
-        [InlineData("Nested Length Too Long", AsnEncodingRules.BER, "3E07" + ("2402" + "0404") + "04020049")]
-        [InlineData("Nested Simple Length Too Long", AsnEncodingRules.BER, "3E03" + "040548656C6C6F")]
+        [InlineData(
+            "Nested Length Too Long",
+            AsnEncodingRules.BER,
+            "3E07" + ("2402" + "0404") + "04020049"
+        )]
+        [InlineData(
+            "Nested Simple Length Too Long",
+            AsnEncodingRules.BER,
+            "3E03" + "040548656C6C6F"
+        )]
         [InlineData("Constructed Null", AsnEncodingRules.BER, "3E8020000000")]
         [InlineData("Constructed Null", AsnEncodingRules.CER, "3E8020000000")]
         [InlineData("NonEmpty Null", AsnEncodingRules.BER, "3E80000100")]
@@ -440,7 +472,8 @@ namespace System.Formats.Asn1.Tests.Reader
         public static void TryCopyBMPString_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -543,9 +576,7 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(success, "reader.TryCopyBMPStringBytes");
             Assert.Equal(1000, bytesWritten);
 
-            Assert.Equal(
-                input.AsSpan(4).ByteArrayToHex(),
-                output.ByteArrayToHex());
+            Assert.Equal(input.AsSpan(4).ByteArrayToHex(), output.ByteArrayToHex());
         }
 
         [Fact]
@@ -607,9 +638,7 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(success, "reader.TryCopyBMPStringBytes");
             Assert.Equal(1001, bytesWritten);
 
-            Assert.Equal(
-                expected.ByteArrayToHex(),
-                output.ByteArrayToHex());
+            Assert.Equal(expected.ByteArrayToHex(), output.ByteArrayToHex());
         }
 
         [Theory]
@@ -623,12 +652,14 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadBMPStringBytes(Asn1Tag.Null, out _));
+                () => reader.TryReadBMPStringBytes(Asn1Tag.Null, out _)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadBMPStringBytes(new Asn1Tag(TagClass.ContextSpecific, 0), out _));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadBMPStringBytes(new Asn1Tag(TagClass.ContextSpecific, 0), out _)
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -648,7 +679,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.TryReadBMPStringBytes(Asn1Tag.Null, out _));
+                () => reader.TryReadBMPStringBytes(Asn1Tag.Null, out _)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
@@ -656,20 +688,24 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadBMPStringBytes(new Asn1Tag(TagClass.Application, 0), out _));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadBMPStringBytes(new Asn1Tag(TagClass.Application, 0), out _)
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.TryReadBMPStringBytes(new Asn1Tag(TagClass.ContextSpecific, 1), out _));
+            Assert.Throws<AsnContentException>(() =>
+                reader.TryReadBMPStringBytes(new Asn1Tag(TagClass.ContextSpecific, 1), out _)
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
             Assert.True(
                 reader.TryReadBMPStringBytes(
                     new Asn1Tag(TagClass.ContextSpecific, 7),
-                    out ReadOnlyMemory<byte> value));
+                    out ReadOnlyMemory<byte> value
+                )
+            );
 
             Assert.Equal("2010", value.ByteArrayToHex());
             Assert.False(reader.HasData, "HasData after reading value");
@@ -686,7 +722,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             TagClass tagClass,
-            int tagValue)
+            int tagValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -694,7 +731,9 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(
                 reader.TryReadBMPStringBytes(
                     new Asn1Tag(tagClass, tagValue, true),
-                    out ReadOnlyMemory<byte> val1));
+                    out ReadOnlyMemory<byte> val1
+                )
+            );
 
             Assert.False(reader.HasData);
 
@@ -703,7 +742,9 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.True(
                 reader.TryReadBMPStringBytes(
                     new Asn1Tag(tagClass, tagValue, false),
-                    out ReadOnlyMemory<byte> val2));
+                    out ReadOnlyMemory<byte> val2
+                )
+            );
 
             Assert.False(reader.HasData);
 
@@ -715,43 +756,48 @@ namespace System.Formats.Asn1.Tests.Reader
     {
         public static bool TryReadBMPStringBytes(
             this AsnReader reader,
-            out ReadOnlyMemory<byte> contents)
+            out ReadOnlyMemory<byte> contents
+        )
         {
             return reader.TryReadPrimitiveCharacterStringBytes(
                 new Asn1Tag(UniversalTagNumber.BMPString),
-                out contents);
+                out contents
+            );
         }
 
         public static bool TryReadBMPStringBytes(
             this AsnReader reader,
             Asn1Tag expectedTag,
-            out ReadOnlyMemory<byte> contents)
+            out ReadOnlyMemory<byte> contents
+        )
         {
-            return reader.TryReadPrimitiveCharacterStringBytes(
-                expectedTag,
-                out contents);
+            return reader.TryReadPrimitiveCharacterStringBytes(expectedTag, out contents);
         }
 
         public static bool TryCopyBMPStringBytes(
             this AsnReader reader,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return reader.TryReadCharacterStringBytes(
                 destination,
                 new Asn1Tag(UniversalTagNumber.BMPString),
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         public static bool TryCopyBMPString(
             this AsnReader reader,
             Span<char> destination,
-            out int charsWritten)
+            out int charsWritten
+        )
         {
             return reader.TryReadCharacterString(
                 destination,
                 UniversalTagNumber.BMPString,
-                out charsWritten);
+                out charsWritten
+            );
         }
     }
 }

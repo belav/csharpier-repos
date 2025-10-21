@@ -19,8 +19,19 @@ namespace System.Security.Cryptography.OpenSsl.Tests
             {
                 using (RSA second = new RSAOpenSsl(firstHandle))
                 {
-                    byte[] signed = second.SignData(data, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
-                    Assert.True(first.VerifyData(data, signed, HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1));
+                    byte[] signed = second.SignData(
+                        data,
+                        HashAlgorithmName.SHA512,
+                        RSASignaturePadding.Pkcs1
+                    );
+                    Assert.True(
+                        first.VerifyData(
+                            data,
+                            signed,
+                            HashAlgorithmName.SHA512,
+                            RSASignaturePadding.Pkcs1
+                        )
+                    );
                 }
             }
         }
@@ -46,14 +57,25 @@ namespace System.Security.Cryptography.OpenSsl.Tests
             using (RSAOpenSsl first = new RSAOpenSsl())
             using (SafeEvpPKeyHandle firstHandle = first.DuplicateKeyHandle())
             {
-                signature = first.SignData(data, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1);
+                signature = first.SignData(
+                    data,
+                    HashAlgorithmName.SHA384,
+                    RSASignaturePadding.Pkcs1
+                );
                 second = new RSAOpenSsl(firstHandle);
             }
 
             // Now show that second still works, despite first and firstHandle being Disposed.
             using (second)
             {
-                Assert.True(second.VerifyData(data, signature, HashAlgorithmName.SHA384, RSASignaturePadding.Pkcs1));
+                Assert.True(
+                    second.VerifyData(
+                        data,
+                        signature,
+                        HashAlgorithmName.SHA384,
+                        RSASignaturePadding.Pkcs1
+                    )
+                );
             }
         }
 
@@ -71,11 +93,12 @@ namespace System.Security.Cryptography.OpenSsl.Tests
             {
                 SafeEvpPKeyHandle pkey = rsa.DuplicateKeyHandle();
 
-                using (pkey)
-                {
-                }
+                using (pkey) { }
 
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new RSAOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>(
+                    "pkeyHandle",
+                    () => new RSAOpenSsl(pkey)
+                );
             }
         }
 
@@ -84,7 +107,10 @@ namespace System.Security.Cryptography.OpenSsl.Tests
         {
             using (SafeEvpPKeyHandle pkey = new SafeEvpPKeyHandle(IntPtr.Zero, false))
             {
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new RSAOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>(
+                    "pkeyHandle",
+                    () => new RSAOpenSsl(pkey)
+                );
             }
         }
 
@@ -103,7 +129,10 @@ namespace System.Security.Cryptography.OpenSsl.Tests
         {
             using (RSA rsa = new RSAOpenSsl(TestData.RSA1032Parameters))
             {
-                ImportExport.AssertKeyEquals(TestData.RSA1032Parameters, rsa.ExportParameters(true));
+                ImportExport.AssertKeyEquals(
+                    TestData.RSA1032Parameters,
+                    rsa.ExportParameters(true)
+                );
             }
         }
     }

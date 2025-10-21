@@ -9,20 +9,40 @@ using System;
 using System.Reflection;
 using System.Globalization;
 
-namespace System.Diagnostics {
-    internal class TypedElement : ConfigurationElement {
+namespace System.Diagnostics
+{
+    internal class TypedElement : ConfigurationElement
+    {
 #if BOOTSTRAP_BASIC
-        protected static readonly ConfigurationProperty _propTypeName = new ConfigurationProperty("type", typeof(string), String.Empty, ConfigurationPropertyOptions.IsRequired);
+        protected static readonly ConfigurationProperty _propTypeName = new ConfigurationProperty(
+            "type",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.IsRequired
+        );
 #else
-        protected static readonly ConfigurationProperty _propTypeName = new ConfigurationProperty("type", typeof(string), String.Empty, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsTypeStringTransformationRequired);
+        protected static readonly ConfigurationProperty _propTypeName = new ConfigurationProperty(
+            "type",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.IsRequired
+                | ConfigurationPropertyOptions.IsTypeStringTransformationRequired
+        );
 #endif
-        protected static readonly ConfigurationProperty _propInitData = new ConfigurationProperty("initializeData", typeof(string), String.Empty, ConfigurationPropertyOptions.None);
+        protected static readonly ConfigurationProperty _propInitData = new ConfigurationProperty(
+            "initializeData",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
 
         protected ConfigurationPropertyCollection _properties;
         protected object _runtimeObject = null;
         private Type _baseType;
 
-        public TypedElement(Type baseType) : base() {
+        public TypedElement(Type baseType)
+            : base()
+        {
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propTypeName);
             _properties.Add(_propInitData);
@@ -31,40 +51,32 @@ namespace System.Diagnostics {
         }
 
         [ConfigurationProperty("initializeData", DefaultValue = "")]
-        public string InitData {
-            get {
-                return (string) this[_propInitData];
-            }
+        public string InitData
+        {
+            get { return (string)this[_propInitData]; }
             // This is useful when the OM becomes public. In the meantime, this can be utilized via reflection
-            set {
-                this[_propInitData] = value;
-            }
-
+            set { this[_propInitData] = value; }
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("type", IsRequired = true, DefaultValue = "")]
-        public virtual string TypeName {
-            get {
-                return (string) this[_propTypeName];
-            }
-            set {
-                this[_propTypeName] = value;
-            }
+        public virtual string TypeName
+        {
+            get { return (string)this[_propTypeName]; }
+            set { this[_propTypeName] = value; }
         }
 
-        protected object BaseGetRuntimeObject() {
+        protected object BaseGetRuntimeObject()
+        {
             if (_runtimeObject == null)
                 _runtimeObject = TraceUtils.GetRuntimeObject(TypeName, _baseType, InitData);
 
             return _runtimeObject;
         }
-
     }
 }
 #endif

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,53 +34,60 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class BypassElement : ConfigurationElement
-	{
-		#region Fields
+    public sealed class BypassElement : ConfigurationElement
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty addressProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty addressProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static BypassElement ()
-		{
-			addressProp = new ConfigurationProperty ("address", typeof (string),
-								 null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        static BypassElement()
+        {
+            addressProp = new ConfigurationProperty(
+                "address",
+                typeof(string),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (addressProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(addressProp);
+        }
 
-		public BypassElement ()
-		{
-		}
+        public BypassElement() { }
 
-		public BypassElement (string address)
-		{
-			Address = address;
-		}
+        public BypassElement(string address)
+        {
+            Address = address;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[ConfigurationProperty ("address", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Address {
-			get { return (string) base [addressProp]; }
-			set { base [addressProp] = value; }
-		}
+        [ConfigurationProperty(
+            "address",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Address
+        {
+            get { return (string)base[addressProp]; }
+            set { base[addressProp] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
 
 #endif

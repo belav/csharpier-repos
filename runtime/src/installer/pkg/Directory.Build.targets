@@ -1,6 +1,5 @@
 <Project>
   <Import Project="..\Directory.Build.targets" />
-
   <!--
     Add hook for depproj build to respect OrderProjectReferences like pkgproj does. "BeforeTargets"
     runs after "DependsOnTargets", so hook each crossgen target individually to ensure this happens
@@ -8,12 +7,13 @@
 
     TODO: (Consolidation) Add this target properly to the sharedfx tooling. https://github.com/dotnet/runtime/issues/749
   -->
-  <Target Name="EnsureOrderProjectReferencesBuilt"
-          BeforeTargets="
+  <Target
+    Name="EnsureOrderProjectReferencesBuilt"
+    BeforeTargets="
             CrossGen;
             CreateCrossGenImages;
-            CreateCrossGenSymbols">
+            CreateCrossGenSymbols"
+  >
     <MSBuild Projects="@(OrderProjectReference)" Targets="Build" />
   </Target>
-
 </Project>

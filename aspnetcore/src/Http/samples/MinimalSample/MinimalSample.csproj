@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <Nullable>enable</Nullable>
@@ -7,7 +6,6 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <IsTrimmable>true</IsTrimmable>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore" />
     <Reference Include="Microsoft.AspNetCore.Diagnostics" />
@@ -17,9 +15,10 @@
     <!-- Mvc.Core is referenced only for its attributes -->
     <Reference Include="Microsoft.AspNetCore.Mvc.Core" />
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="$(RepoRoot)/src/Http/Http.Extensions/gen/Microsoft.AspNetCore.Http.RequestDelegateGenerator.csproj" OutputItemType="Analyzer" />
+    <ProjectReference
+      Include="$(RepoRoot)/src/Http/Http.Extensions/gen/Microsoft.AspNetCore.Http.RequestDelegateGenerator.csproj"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
-
 </Project>

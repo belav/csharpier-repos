@@ -38,11 +38,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             string searchPattern,
             IImmutableSet<string> kinds,
             Func<INavigateToSearchResult, Task> onResultFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var results = await _service.SearchDocumentAsync(document, searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+            var results = await _service
+                .SearchDocumentAsync(document, searchPattern, kinds, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var result in results)
-                await onResultFound(new InternalFSharpNavigateToSearchResult(result)).ConfigureAwait(false);
+                await onResultFound(new InternalFSharpNavigateToSearchResult(result))
+                    .ConfigureAwait(false);
         }
 
         public async Task SearchProjectsAsync(
@@ -54,16 +58,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.NavigateTo
             Document? activeDocument,
             Func<Project, INavigateToSearchResult, Task> onResultFound,
             Func<Task> onProjectCompleted,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfTrue(projects.IsEmpty);
             Contract.ThrowIfTrue(projects.Select(p => p.Language).Distinct().Count() != 1);
 
             foreach (var project in projects)
             {
-                var results = await _service.SearchProjectAsync(project, priorityDocuments, searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+                var results = await _service
+                    .SearchProjectAsync(
+                        project,
+                        priorityDocuments,
+                        searchPattern,
+                        kinds,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 foreach (var result in results)
-                    await onResultFound(project, new InternalFSharpNavigateToSearchResult(result)).ConfigureAwait(false);
+                    await onResultFound(project, new InternalFSharpNavigateToSearchResult(result))
+                        .ConfigureAwait(false);
 
                 await onProjectCompleted().ConfigureAwait(false);
             }

@@ -45,25 +45,33 @@ namespace System.Threading.Tasks.Dataflow.Internal
     {
         /// <summary>The target block using this helper.</summary>
         private readonly ITargetBlock<TInput> _owningTarget;
+
         /// <summary>The messages in this target.</summary>
-        private readonly SingleProducerSingleConsumerQueue<TInput> _messages = new SingleProducerSingleConsumerQueue<TInput>();
+        private readonly SingleProducerSingleConsumerQueue<TInput> _messages =
+            new SingleProducerSingleConsumerQueue<TInput>();
+
         /// <summary>The options to use to configure this block. The target core assumes these options are immutable.</summary>
         private readonly ExecutionDataflowBlockOptions _dataflowBlockOptions;
+
         /// <summary>An action to invoke for every accepted message.</summary>
         private readonly Action<TInput> _action;
 
         /// <summary>Exceptions that may have occurred and gone unhandled during processing.  This field is lazily initialized.</summary>
         private volatile List<Exception>? _exceptions;
+
         /// <summary>Whether to stop accepting new messages.</summary>
         private volatile bool _decliningPermanently;
+
         /// <summary>A task has reserved the right to run the completion routine.</summary>
         private volatile bool _completionReserved;
+
         /// <summary>
         /// The Task currently active to process the block. This field is used to synchronize between producer and consumer,
         /// and it should not be set to null once the block completes, as doing so would allow for races where the producer
         /// gets another consumer task queued even though the block has completed.
         /// </summary>
         private volatile Task? _activeConsumer;
+
         /// <summary>A task representing the completion of the block.  This field is lazily initialized.</summary>
         private TaskCompletionSource<VoidResult>? _completionTask;
 
@@ -72,7 +80,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="action">The action to be invoked for every message.</param>
         /// <param name="dataflowBlockOptions">The options to use to configure this block. The target core assumes these options are immutable.</param>
         internal SpscTargetCore(
-            ITargetBlock<TInput> owningTarget, Action<TInput> action, ExecutionDataflowBlockOptions dataflowBlockOptions)
+            ITargetBlock<TInput> owningTarget,
+            Action<TInput> action,
+            ExecutionDataflowBlockOptions dataflowBlockOptions
+        )
         {
             Debug.Assert(owningTarget != null, "Expected non-null owningTarget");
             Debug.Assert(action != null, "Expected non-null action");
@@ -108,12 +119,17 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
-        internal DataflowMessageStatus OfferMessage(DataflowMessageHeader messageHeader, TInput messageValue, ISourceBlock<TInput>? source, bool consumeToAccept)
+        internal DataflowMessageStatus OfferMessage(
+            DataflowMessageHeader messageHeader,
+            TInput messageValue,
+            ISourceBlock<TInput>? source,
+            bool consumeToAccept
+        )
         {
             // If we're not required to go back to the source to consume the offered message, try fast path.
-            return !consumeToAccept && Post(messageValue) ?
-                DataflowMessageStatus.Accepted :
-                OfferMessage_Slow(messageHeader, messageValue, source, consumeToAccept);
+            return !consumeToAccept && Post(messageValue)
+                ? DataflowMessageStatus.Accepted
+                : OfferMessage_Slow(messageHeader, messageValue, source, consumeToAccept);
         }
 
         /// <summary>Implements the slow path for OfferMessage.</summary>
@@ -122,7 +138,12 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="source">The source offering the message. This may be null.</param>
         /// <param name="consumeToAccept">true if we need to call back to the source to consume the message; otherwise, false if we can simply accept it directly.</param>
         /// <returns>The status of the message.</returns>
-        private DataflowMessageStatus OfferMessage_Slow(DataflowMessageHeader messageHeader, TInput messageValue, ISourceBlock<TInput>? source, bool consumeToAccept)
+        private DataflowMessageStatus OfferMessage_Slow(
+            DataflowMessageHeader messageHeader,
+            TInput messageValue,
+            ISourceBlock<TInput>? source,
+            bool consumeToAccept
+        )
         {
             // If we're declining permanently, let the caller know.
             if (_decliningPermanently)
@@ -133,16 +154,24 @@ namespace System.Threading.Tasks.Dataflow.Internal
             // If the message header is invalid, throw.
             if (!messageHeader.IsValid)
             {
-                throw new ArgumentException(SR.Argument_InvalidMessageHeader, nameof(messageHeader));
+                throw new ArgumentException(
+                    SR.Argument_InvalidMessageHeader,
+                    nameof(messageHeader)
+                );
             }
 
             // If the caller has requested we consume the message using ConsumeMessage, do so.
             if (consumeToAccept)
             {
-                if (source == null) throw new ArgumentException(SR.Argument_CantConsumeFromANullSource, nameof(consumeToAccept));
+                if (source == null)
+                    throw new ArgumentException(
+                        SR.Argument_CantConsumeFromANullSource,
+                        nameof(consumeToAccept)
+                    );
                 bool consumed;
                 messageValue = source.ConsumeMessage(messageHeader, _owningTarget, out consumed)!;
-                if (!consumed) return DataflowMessageStatus.NotAvailable;
+                if (!consumed)
+                    return DataflowMessageStatus.NotAvailable;
             }
 
             // See the "fast path" comments in Post
@@ -165,7 +194,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Create a new consumption task and try to set it as current as long as there's still no other task
                 var newConsumer = new Task(
                     static state => ((SpscTargetCore<TInput>)state!).ProcessMessagesLoopCore(),
-                    this, CancellationToken.None, Common.GetCreationOptionsForTask(isReplica));
+                    this,
+                    CancellationToken.None,
+                    Common.GetCreationOptionsForTask(isReplica)
+                );
                 if (Interlocked.CompareExchange(ref _activeConsumer, newConsumer, null) == null)
                 {
                     // We won the race.  This task is now the consumer.
@@ -174,7 +206,11 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     if (etwLog.IsEnabled())
                     {
                         etwLog.TaskLaunchedForMessageHandling(
-                            _owningTarget, newConsumer, DataflowEtwProvider.TaskLaunchedReason.ProcessingInputMessages, _messages.Count);
+                            _owningTarget,
+                            newConsumer,
+                            DataflowEtwProvider.TaskLaunchedReason.ProcessingInputMessages,
+                            _messages.Count
+                        );
                     }
 
                     // Start the task.  In the erroneous case where the scheduler throws an exception,
@@ -192,7 +228,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             Debug.Assert(
                 _activeConsumer != null && _activeConsumer.Id == Task.CurrentId,
-                "This method should only be called when it's the active consumer.");
+                "This method should only be called when it's the active consumer."
+            );
 
             int messagesProcessed = 0;
             int maxMessagesToProcess = _dataflowBlockOptions.ActualMaxMessagesPerTask;
@@ -208,9 +245,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     // While there are more messages to be processed, process each one.
                     // NOTE: This loop is critical for performance.  It must be super lean.
                     while (
-                        _exceptions == null &&
-                        messagesProcessed < maxMessagesToProcess &&
-                        _messages.TryDequeue(out nextMessage))
+                        _exceptions == null
+                        && messagesProcessed < maxMessagesToProcess
+                        && _messages.TryDequeue(out nextMessage)
+                    )
                     {
                         messagesProcessed++; // done before _action invoked in case it throws exception
                         _action(nextMessage);
@@ -223,7 +261,11 @@ namespace System.Threading.Tasks.Dataflow.Internal
                     if (!Common.IsCooperativeCancellation(exc))
                     {
                         _decliningPermanently = true; // stop accepting from producers
-                        Common.StoreDataflowMessageValueIntoExceptionData<TInput>(exc, nextMessage!, false);
+                        Common.StoreDataflowMessageValueIntoExceptionData<TInput>(
+                            exc,
+                            nextMessage!,
+                            false
+                        );
                         StoreException(exc);
                     }
                 }
@@ -231,7 +273,11 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 {
                     // If more messages just arrived and we should still process them,
                     // loop back around and keep going.
-                    if (!_messages.IsEmpty && _exceptions == null && (messagesProcessed < maxMessagesToProcess))
+                    if (
+                        !_messages.IsEmpty
+                        && _exceptions == null
+                        && (messagesProcessed < maxMessagesToProcess)
+                    )
                     {
                         continueProcessing = true;
                     }
@@ -252,9 +298,14 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         else
                         {
                             // Mark that we're exiting.
-                            Task? previousConsumer = Interlocked.Exchange<Task?>(ref _activeConsumer, null);
-                            Debug.Assert(previousConsumer != null && previousConsumer.Id == Task.CurrentId,
-                                "The running task should have been denoted as the active task.");
+                            Task? previousConsumer = Interlocked.Exchange<Task?>(
+                                ref _activeConsumer,
+                                null
+                            );
+                            Debug.Assert(
+                                previousConsumer != null && previousConsumer.Id == Task.CurrentId,
+                                "The running task should have been denoted as the active task."
+                            );
 
                             // Now that we're no longer the active task, double
                             // check to make sure there's really nothing to do,
@@ -262,9 +313,13 @@ namespace System.Threading.Tasks.Dataflow.Internal
                             // If there is more to do, schedule a task to try to do it.
                             // This is to handle a race with Post/Complete/Fault and this
                             // task completing.
-                            if (!_messages.IsEmpty || // messages to be processed
-                                (!wasDecliningPermanently && _decliningPermanently) || // potentially completion to be processed
-                                _exceptions != null) // exceptions/completion to be processed
+                            if (
+                                !_messages.IsEmpty
+                                || // messages to be processed
+                                (!wasDecliningPermanently && _decliningPermanently)
+                                || // potentially completion to be processed
+                                _exceptions != null
+                            ) // exceptions/completion to be processed
                             {
                                 ScheduleConsumerIfNecessary(isReplica: true);
                             }
@@ -275,7 +330,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <summary>Gets the number of messages waiting to be processed.</summary>
-        internal int InputCount { get { return _messages.Count; } }
+        internal int InputCount
+        {
+            get { return _messages.Count; }
+        }
 
         /// <summary>
         /// Completes the target core.  If an exception is provided, the block will end up in a faulted state.
@@ -291,7 +349,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 // Mark us as declining permanently, and then kick off a processing task
                 // if we need one.  It's this processing task's job to complete the block
                 // once all data has been consumed and/or we're in a valid state for completion.
-                if (exception != null) StoreException(exception);
+                if (exception != null)
+                    StoreException(exception);
                 _decliningPermanently = true;
                 ScheduleConsumerIfNecessary(isReplica: false);
             }
@@ -309,7 +368,10 @@ namespace System.Threading.Tasks.Dataflow.Internal
             // by the producer and consumer, a producer calling Fault and the
             // processing task processing the user delegate which might throw.
 #pragma warning disable 0420
-            lock (LazyInitializer.EnsureInitialized(ref _exceptions, static () => new List<Exception>()))
+            lock (LazyInitializer.EnsureInitialized(
+                ref _exceptions,
+                static () => new List<Exception>()
+            ))
 #pragma warning restore 0420
             {
                 _exceptions.Add(exception);
@@ -321,17 +383,22 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// </summary>
         private void CompleteBlockOncePossible()
         {
-            Debug.Assert(_completionReserved, "Should only invoke once completion has been reserved.");
+            Debug.Assert(
+                _completionReserved,
+                "Should only invoke once completion has been reserved."
+            );
 
             // Dump any messages that might remain in the queue, which could happen if we completed due to exceptions.
-            while (_messages.TryDequeue(out _)) ;
+            while (_messages.TryDequeue(out _))
+                ;
 
             // Complete the completion task
             bool result;
             if (_exceptions != null)
             {
                 Exception[] exceptions;
-                lock (_exceptions) exceptions = _exceptions.ToArray();
+                lock (_exceptions)
+                    exceptions = _exceptions.ToArray();
                 result = CompletionSource.TrySetException(exceptions);
             }
             else
@@ -352,20 +419,35 @@ namespace System.Threading.Tasks.Dataflow.Internal
         }
 
         /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
-        internal Task Completion { get { return CompletionSource.Task; } }
+        internal Task Completion
+        {
+            get { return CompletionSource.Task; }
+        }
 
         /// <summary>Gets the lazily-initialized completion source.</summary>
         private TaskCompletionSource<VoidResult> CompletionSource
         {
-            get { return LazyInitializer.EnsureInitialized(ref _completionTask, static () => new TaskCompletionSource<VoidResult>()); }
+            get
+            {
+                return LazyInitializer.EnsureInitialized(
+                    ref _completionTask,
+                    static () => new TaskCompletionSource<VoidResult>()
+                );
+            }
         }
 
         /// <summary>Gets the DataflowBlockOptions used to configure this block.</summary>
-        internal ExecutionDataflowBlockOptions DataflowBlockOptions { get { return _dataflowBlockOptions; } }
+        internal ExecutionDataflowBlockOptions DataflowBlockOptions
+        {
+            get { return _dataflowBlockOptions; }
+        }
 
         /// <summary>Gets information about this helper to be used for display in a debugger.</summary>
         /// <returns>Debugging information about this target.</returns>
-        internal DebuggingInformation GetDebuggingInformation() { return new DebuggingInformation(this); }
+        internal DebuggingInformation GetDebuggingInformation()
+        {
+            return new DebuggingInformation(this);
+        }
 
         /// <summary>Gets the object to display in the debugger display attribute.</summary>
         private object DebuggerDisplayContent
@@ -385,19 +467,45 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
             /// <summary>Initializes the debugging helper.</summary>
             /// <param name="target">The target being viewed.</param>
-            internal DebuggingInformation(SpscTargetCore<TInput> target) { _target = target; }
+            internal DebuggingInformation(SpscTargetCore<TInput> target)
+            {
+                _target = target;
+            }
 
             /// <summary>Gets the messages waiting to be processed.</summary>
-            internal IEnumerable<TInput> InputQueue { get { return _target._messages.ToList(); } }
+            internal IEnumerable<TInput> InputQueue
+            {
+                get { return _target._messages.ToList(); }
+            }
 
             /// <summary>Gets the current number of outstanding input processing operations.</summary>
-            internal int CurrentDegreeOfParallelism { get { return _target._activeConsumer != null && !_target.Completion.IsCompleted ? 1 : 0; } }
+            internal int CurrentDegreeOfParallelism
+            {
+                get
+                {
+                    return _target._activeConsumer != null && !_target.Completion.IsCompleted
+                        ? 1
+                        : 0;
+                }
+            }
+
             /// <summary>Gets the DataflowBlockOptions used to configure this block.</summary>
-            internal ExecutionDataflowBlockOptions DataflowBlockOptions { get { return _target._dataflowBlockOptions; } }
+            internal ExecutionDataflowBlockOptions DataflowBlockOptions
+            {
+                get { return _target._dataflowBlockOptions; }
+            }
+
             /// <summary>Gets whether the block is declining further messages.</summary>
-            internal bool IsDecliningPermanently { get { return _target._decliningPermanently; } }
+            internal bool IsDecliningPermanently
+            {
+                get { return _target._decliningPermanently; }
+            }
+
             /// <summary>Gets whether the block is completed.</summary>
-            internal bool IsCompleted { get { return _target.Completion.IsCompleted; } }
+            internal bool IsCompleted
+            {
+                get { return _target.Completion.IsCompleted; }
+            }
         }
     }
 }

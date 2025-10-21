@@ -18,7 +18,13 @@ namespace System
             {
                 if (!s_isAppContainerProcessInitialized)
                 {
-                    if (Environment.OSVersion.Version.Major < 6 || (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor <= 1))
+                    if (
+                        Environment.OSVersion.Version.Major < 6
+                        || (
+                            Environment.OSVersion.Version.Major == 6
+                            && Environment.OSVersion.Version.Minor <= 1
+                        )
+                    )
                     {
                         // Windows 7 or older.
                         s_isAppContainerProcess = false;
@@ -42,7 +48,15 @@ namespace System
 
             using (WindowsIdentity wi = WindowsIdentity.GetCurrent(TokenAccessLevels.Query))
             {
-                if (!Interop.Advapi32.GetTokenInformation(wi.Token, (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenIsAppContainer, new IntPtr(dwIsAppContainerPtr), sizeof(int), out dwLength))
+                if (
+                    !Interop.Advapi32.GetTokenInformation(
+                        wi.Token,
+                        (uint)Interop.Advapi32.TOKEN_INFORMATION_CLASS.TokenIsAppContainer,
+                        new IntPtr(dwIsAppContainerPtr),
+                        sizeof(int),
+                        out dwLength
+                    )
+                )
                 {
                     throw new Win32Exception();
                 }

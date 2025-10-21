@@ -2,7 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
@@ -12,7 +11,6 @@
       Microsoft .NET Compiler Platform ("Roslyn") CSharp and VB scripting package.
     </PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Scripting\CSharp\Microsoft.CodeAnalysis.CSharp.Scripting.csproj" />
   </ItemGroup>

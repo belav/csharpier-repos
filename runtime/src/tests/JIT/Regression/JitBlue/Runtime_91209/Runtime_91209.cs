@@ -6,10 +6,10 @@
 // Test ARM64 read-modify-write (RMW) intrinsics with identical target/accumulator local to arguments
 
 using System;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.Arm;
-using System.Numerics;
 using Xunit;
 
 public class Runtime_91209
@@ -85,7 +85,7 @@ public class Runtime_91209
     {
         Vector64<byte> l = GetVector64ByteValue();
         Vector128<byte> t = Vector128.Create((byte)7);
-        return AdvSimd.VectorTableLookupExtension(l, (t,t), l);
+        return AdvSimd.VectorTableLookupExtension(l, (t, t), l);
     }
 
     [Fact]
@@ -114,7 +114,11 @@ public class Runtime_91209
     private static Vector64<byte> Problem4()
     {
         Vector128<byte> l = GetVector128ByteValue();
-        return AdvSimd.VectorTableLookupExtension(Vector128.GetLower<byte>(l), (l,l), Vector128.GetLower<byte>(l));
+        return AdvSimd.VectorTableLookupExtension(
+            Vector128.GetLower<byte>(l),
+            (l, l),
+            Vector128.GetLower<byte>(l)
+        );
     }
 
     [Fact]

@@ -43,11 +43,17 @@ namespace System.Workflow.Activities.Rules.Design
                 typeProvider = (ITypeProvider)serviceProvider.GetService(typeof(ITypeProvider));
                 if (typeProvider == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.MissingService, typeof(ITypeProvider).FullName);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MissingService,
+                        typeof(ITypeProvider).FullName
+                    );
                     throw new InvalidOperationException(message);
                 }
 
-                WorkflowDesignerLoader loader = serviceProvider.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                WorkflowDesignerLoader loader =
+                    serviceProvider.GetService(typeof(WorkflowDesignerLoader))
+                    as WorkflowDesignerLoader;
                 if (loader != null)
                     loader.Flush();
             }
@@ -66,7 +72,11 @@ namespace System.Workflow.Activities.Rules.Design
             InitializeDialog(expression);
         }
 
-        public RuleConditionDialog(Type activityType, ITypeProvider typeProvider, CodeExpression expression)
+        public RuleConditionDialog(
+            Type activityType,
+            ITypeProvider typeProvider,
+            CodeExpression expression
+        )
         {
             if (activityType == null)
                 throw (new ArgumentNullException("activityType"));
@@ -87,13 +97,20 @@ namespace System.Workflow.Activities.Rules.Design
             if (expression != null)
             {
                 this.ruleExpressionCondition.Expression = RuleExpressionWalker.Clone(expression);
-                this.conditionTextBox.Text = ruleExpressionCondition.ToString().Replace("\n", "\r\n");
+                this.conditionTextBox.Text = ruleExpressionCondition
+                    .ToString()
+                    .Replace("\n", "\r\n");
             }
             else
                 this.conditionTextBox.Text = string.Empty;
 
-            this.conditionTextBox.PopulateAutoCompleteList += new EventHandler<AutoCompletionEventArgs>(ConditionTextBox_PopulateAutoCompleteList);
-            this.conditionTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(ConditionTextBox_PopulateAutoCompleteList);
+            this.conditionTextBox.PopulateAutoCompleteList +=
+                new EventHandler<AutoCompletionEventArgs>(
+                    ConditionTextBox_PopulateAutoCompleteList
+                );
+            this.conditionTextBox.PopulateToolTipList += new EventHandler<AutoCompletionEventArgs>(
+                ConditionTextBox_PopulateAutoCompleteList
+            );
 
             try
             {
@@ -106,31 +123,31 @@ namespace System.Workflow.Activities.Rules.Design
             }
         }
 
-
         public CodeExpression Expression
         {
-            get
-            {
-                return this.ruleExpressionCondition.Expression;
-            }
+            get { return this.ruleExpressionCondition.Expression; }
         }
 
-
-        private void ConditionTextBox_PopulateAutoCompleteList(object sender, AutoCompletionEventArgs e)
+        private void ConditionTextBox_PopulateAutoCompleteList(
+            object sender,
+            AutoCompletionEventArgs e
+        )
         {
             e.AutoCompleteValues = this.ruleParser.GetExpressionCompletions(e.Prefix);
         }
-
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
         private void conditionTextBox_Validating(object sender, CancelEventArgs e)
         {
             try
             {
-                this.ruleExpressionCondition = (RuleExpressionCondition)this.ruleParser.ParseCondition(this.conditionTextBox.Text);
+                this.ruleExpressionCondition = (RuleExpressionCondition)
+                    this.ruleParser.ParseCondition(this.conditionTextBox.Text);
 
                 if (!string.IsNullOrEmpty(this.conditionTextBox.Text))
-                    this.conditionTextBox.Text = this.ruleExpressionCondition.ToString().Replace("\n", "\r\n");
+                    this.conditionTextBox.Text = this
+                        .ruleExpressionCondition.ToString()
+                        .Replace("\n", "\r\n");
                 conditionErrorProvider.SetError(this.conditionTextBox, string.Empty);
                 syntaxException = null;
             }
@@ -141,25 +158,23 @@ namespace System.Workflow.Activities.Rules.Design
             }
         }
 
-
         private void OnHelpClicked(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
             ShowHelp();
         }
 
-
         private void OnHelpRequested(object sender, HelpEventArgs e)
         {
             ShowHelp();
         }
 
-
         private void ShowHelp()
         {
             if (serviceProvider != null)
             {
-                IHelpService helpService = serviceProvider.GetService(typeof(IHelpService)) as IHelpService;
+                IHelpService helpService =
+                    serviceProvider.GetService(typeof(IHelpService)) as IHelpService;
                 if (helpService != null)
                 {
                     helpService.ShowHelpFromKeyword(this.GetType().FullName + ".UI");
@@ -179,7 +194,6 @@ namespace System.Workflow.Activities.Rules.Design
             }
         }
 
-
         private void okButton_Click(object sender, EventArgs e)
         {
             wasOKed = true;
@@ -190,9 +204,15 @@ namespace System.Workflow.Activities.Rules.Design
             if (wasOKed && syntaxException != null)
             {
                 e.Cancel = true;
-                DesignerHelpers.DisplayError(Messages.Error_ConditionParser + "\n" + syntaxException.Message, this.Text, this.serviceProvider);
+                DesignerHelpers.DisplayError(
+                    Messages.Error_ConditionParser + "\n" + syntaxException.Message,
+                    this.Text,
+                    this.serviceProvider
+                );
                 if (syntaxException is RuleSyntaxException)
-                    this.conditionTextBox.SelectionStart = ((RuleSyntaxException)syntaxException).Position;
+                    this.conditionTextBox.SelectionStart = (
+                        (RuleSyntaxException)syntaxException
+                    ).Position;
                 this.conditionTextBox.SelectionLength = 0;
                 this.conditionTextBox.ScrollToCaret();
                 wasOKed = false;

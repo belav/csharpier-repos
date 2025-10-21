@@ -12,9 +12,23 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
         internal static partial void M1(ILogger logger, string @myevent1);
 
         [LoggerMessage(Message = "Force use of Struct, {@myevent2} {otherevent}", EventId = 2)]
-        public static partial void UseAtSymbol3(this ILogger logger,  LogLevel level, string @myevent2, int otherevent);
+        public static partial void UseAtSymbol3(
+            this ILogger logger,
+            LogLevel level,
+            string @myevent2,
+            int otherevent
+        );
 
-        [LoggerMessage(Message = "Force use of Struct with error, {@myevent3} {otherevent}", EventId = 3)]
-        public static partial void UseAtSymbol4(this ILogger logger,  LogLevel level, string @myevent3, int otherevent, System.Exception ex);
+        [LoggerMessage(
+            Message = "Force use of Struct with error, {@myevent3} {otherevent}",
+            EventId = 3
+        )]
+        public static partial void UseAtSymbol4(
+            this ILogger logger,
+            LogLevel level,
+            string @myevent3,
+            int otherevent,
+            System.Exception ex
+        );
     }
 }

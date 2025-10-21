@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
         [Fact]
         public void TestCounts()
         {
-            var map = ImmutableDictionary.Create<string, int>()
+            var map = ImmutableDictionary
+                .Create<string, int>()
                 .Add("1", 1)
                 .Add("2", 2)
                 .Add("3", 3)
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
         [Fact]
         public void TestRemove()
         {
-            var map = ImmutableDictionary.Create<string, int>()
+            var map = ImmutableDictionary
+                .Create<string, int>()
                 .Add("1", 1)
                 .Add("2", 2)
                 .Add("3", 3)
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
         [Fact]
         public void TestPathology()
         {
-            var map = ImmutableDictionary.Create<string, int>(new PathologicalComparer<string>())
+            var map = ImmutableDictionary
+                .Create<string, int>(new PathologicalComparer<string>())
                 .Add("1", 1)
                 .Add("2", 2)
                 .Add("3", 3)
@@ -123,11 +126,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections.Immutable.Maps
 
         private class PathologicalComparer<T> : IEqualityComparer<T>
         {
-            public bool Equals(T x, T y)
-                => EqualityComparer<T>.Default.Equals(x, y);
+            public bool Equals(T x, T y) => EqualityComparer<T>.Default.Equals(x, y);
 
-            public int GetHashCode(T obj)
-                => 0;
+            public int GetHashCode(T obj) => 0;
         }
     }
 }

@@ -11,11 +11,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
-  <Target Name="GenerateReproProjectResponseFile"
-          AfterTargets="Build"
-          Condition="'$(BuildingInsideVisualStudio)' != 'true'">
-
+  <Target
+    Name="GenerateReproProjectResponseFile"
+    AfterTargets="Build"
+    Condition="'$(BuildingInsideVisualStudio)' != 'true'"
+  >
     <ItemGroup>
       <ReproResponseLines Include="$(OutputPath)$(AssemblyName)$(TargetExt)" />
       <ReproResponseLines Include="-o:$(OutputPath)$(AssemblyName).obj" />
@@ -42,10 +42,11 @@
       <ReproResponseLines Include="--feature:System.Globalization.Invariant=true" />
       <ReproResponseLines Include="--feature:System.Diagnostics.Debugger.IsSupported=false" />
     </ItemGroup>
-
-    <WriteLinesToFile File="$(OutputPath)\compile-with-$(LibrariesConfiguration)-libs.rsp"
-                      Lines="@(ReproResponseLines)"
-                      Overwrite="true"
-                      WriteOnlyWhenDifferent="true" />
+    <WriteLinesToFile
+      File="$(OutputPath)\compile-with-$(LibrariesConfiguration)-libs.rsp"
+      Lines="@(ReproResponseLines)"
+      Overwrite="true"
+      WriteOnlyWhenDifferent="true"
+    />
   </Target>
 </Project>

@@ -14,16 +14,32 @@ namespace System.Security.Cryptography.Xml
     /// This unique exception helps catch the recursion limit issue.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class CryptoSignedXmlRecursionException : XmlException
     {
-        public CryptoSignedXmlRecursionException() : base() { }
-        public CryptoSignedXmlRecursionException(string message) : base(message) { }
-        public CryptoSignedXmlRecursionException(string message, Exception inner) : base(message, inner) { }
+        public CryptoSignedXmlRecursionException()
+            : base() { }
+
+        public CryptoSignedXmlRecursionException(string message)
+            : base(message) { }
+
+        public CryptoSignedXmlRecursionException(string message, Exception inner)
+            : base(message, inner) { }
+
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected CryptoSignedXmlRecursionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected CryptoSignedXmlRecursionException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

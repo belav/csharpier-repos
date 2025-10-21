@@ -15,14 +15,17 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly ImmutableSegmentedDictionary<object, IStateTable> _tables;
 
-        public static readonly StateTableStore Empty = new StateTableStore(ImmutableSegmentedDictionary<object, IStateTable>.Empty);
+        public static readonly StateTableStore Empty = new StateTableStore(
+            ImmutableSegmentedDictionary<object, IStateTable>.Empty
+        );
 
         private StateTableStore(ImmutableSegmentedDictionary<object, IStateTable> tables)
         {
             _tables = tables;
         }
 
-        public bool TryGetValue(object key, [NotNullWhen(true)] out IStateTable? table) => _tables.TryGetValue(key, out table);
+        public bool TryGetValue(object key, [NotNullWhen(true)] out IStateTable? table) =>
+            _tables.TryGetValue(key, out table);
 
         public NodeStateTable<T> GetStateTableOrEmpty<T>(object input)
         {
@@ -40,11 +43,18 @@ namespace Microsoft.CodeAnalysis
 
         public sealed class Builder
         {
-            private readonly ImmutableSegmentedDictionary<object, IStateTable>.Builder _tableBuilder = ImmutableSegmentedDictionary.CreateBuilder<object, IStateTable>();
+            private readonly ImmutableSegmentedDictionary<
+                object,
+                IStateTable
+            >.Builder _tableBuilder = ImmutableSegmentedDictionary.CreateBuilder<
+                object,
+                IStateTable
+            >();
 
             public bool Contains(object key) => _tableBuilder.ContainsKey(key);
 
-            public bool TryGetTable(object key, [NotNullWhen(true)] out IStateTable? table) => _tableBuilder.TryGetValue(key, out table);
+            public bool TryGetTable(object key, [NotNullWhen(true)] out IStateTable? table) =>
+                _tableBuilder.TryGetValue(key, out table);
 
             public void SetTable(object key, IStateTable table) => _tableBuilder[key] = table;
 

@@ -12,7 +12,6 @@ using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
-
 using ILCompiler.DependencyAnalysis;
 
 namespace ILCompiler.PEWriter
@@ -28,7 +27,7 @@ namespace ILCompiler.PEWriter
         /// Maximum number of bytes to process for any relocation type.
         /// </summary>
         const int LongestRelocationBytes = 8;
-        
+
         /// <summary>
         /// Enumerator of blobs within the blob builder.
         /// </summary>
@@ -79,11 +78,15 @@ namespace ILCompiler.PEWriter
         /// </summary>
         /// <param name="outputStream">Output stream for the relocated PE file</param>
         /// <param name="peFileBuilder">PE file blob builder</param>
-        public RelocationHelper(Stream outputStream, ulong defaultImageBase, BlobBuilder peFileBuilder)
+        public RelocationHelper(
+            Stream outputStream,
+            ulong defaultImageBase,
+            BlobBuilder peFileBuilder
+        )
         {
             _outputStream = outputStream;
             _outputFilePos = 0;
-            
+
             _defaultImageBase = defaultImageBase;
 
             _peFileLength = peFileBuilder.Count;
@@ -118,9 +121,8 @@ namespace ILCompiler.PEWriter
             do
             {
                 CopyBytesToOutput(_remainingLength);
-            }
-            while (TryFetchNextBlob());
-            
+            } while (TryFetchNextBlob());
+
             if (_outputFilePos != _peFileLength)
             {
                 // Input / output PE file length mismatch - internal error in the relocator
@@ -135,7 +137,12 @@ namespace ILCompiler.PEWriter
         /// <param name="relocationType">Relocation type to process</param>
         /// <param name="sourceRVA">RVA representing the address to relocate</param>
         /// <param name="targetRVA">RVA representing the relocation target</param>
-        public void ProcessRelocation(RelocType relocationType, int sourceRVA, int targetRVA, int filePosWhenPlaced)
+        public void ProcessRelocation(
+            RelocType relocationType,
+            int sourceRVA,
+            int targetRVA,
+            int filePosWhenPlaced
+        )
         {
             int relocationLength = 0;
             long delta = 0;
@@ -145,112 +152,121 @@ namespace ILCompiler.PEWriter
                 case RelocType.IMAGE_REL_BASED_ABSOLUTE:
                     // No relocation
                     return;
-                    
+
                 case RelocType.IMAGE_REL_BASED_HIGHLOW:
-                    {
-                        relocationLength = 4;
-                        delta = unchecked(targetRVA + (int)_defaultImageBase);
-                        break;
-                    }
+                {
+                    relocationLength = 4;
+                    delta = unchecked(targetRVA + (int)_defaultImageBase);
+                    break;
+                }
 
                 case RelocType.IMAGE_REL_BASED_ADDR32NB:
                 case RelocType.IMAGE_REL_SYMBOL_SIZE:
-                    {
-                        relocationLength = 4;
-                        delta = targetRVA;
-                        break;
-                    }
-                
+                {
+                    relocationLength = 4;
+                    delta = targetRVA;
+                    break;
+                }
+
                 case RelocType.IMAGE_REL_BASED_REL32:
-                    {
-                        relocationLength = 4;
-                        delta = targetRVA - sourceRVA - 4;
-                        break;
-                    }
-                    
+                {
+                    relocationLength = 4;
+                    delta = targetRVA - sourceRVA - 4;
+                    break;
+                }
+
                 case RelocType.IMAGE_REL_BASED_DIR64:
-                    {
-                        relocationLength = 8;
-                        delta = unchecked(targetRVA + (long)_defaultImageBase);
-                        break;
-                    }
-                    
+                {
+                    relocationLength = 8;
+                    delta = unchecked(targetRVA + (long)_defaultImageBase);
+                    break;
+                }
+
                 case RelocType.IMAGE_REL_BASED_THUMB_MOV32:
-                    {
-                        relocationLength = 8;
-                        delta = unchecked(targetRVA + (int)_defaultImageBase);
-                        break;
-                    }
+                {
+                    relocationLength = 8;
+                    delta = unchecked(targetRVA + (int)_defaultImageBase);
+                    break;
+                }
 
                 case RelocType.IMAGE_REL_BASED_THUMB_MOV32_PCREL:
-                    {
-                        relocationLength = 8;
-                        const uint offsetCorrection = 12;
-                        delta = unchecked(targetRVA - (sourceRVA + offsetCorrection));
-                        break;
-                    }
-                    
+                {
+                    relocationLength = 8;
+                    const uint offsetCorrection = 12;
+                    delta = unchecked(targetRVA - (sourceRVA + offsetCorrection));
+                    break;
+                }
+
                 case RelocType.IMAGE_REL_BASED_THUMB_BRANCH24:
-                    {
-                        relocationLength = 4;
-                        delta = targetRVA - sourceRVA - 4;
-                        break;
-                    }
+                {
+                    relocationLength = 4;
+                    delta = targetRVA - sourceRVA - 4;
+                    break;
+                }
 
                 case RelocType.IMAGE_REL_BASED_ARM64_PAGEBASE_REL21:
-                    {
-                        relocationLength = 4;
-                        int sourcePageRVA = sourceRVA & ~0xfff;
-                        // Page delta always fits in 21 bits as long as we use 4-byte RVAs
-                        delta = ((targetRVA - sourcePageRVA) >> 12) & 0x1f_ffff;
-                        break;
-                    }
+                {
+                    relocationLength = 4;
+                    int sourcePageRVA = sourceRVA & ~0xfff;
+                    // Page delta always fits in 21 bits as long as we use 4-byte RVAs
+                    delta = ((targetRVA - sourcePageRVA) >> 12) & 0x1f_ffff;
+                    break;
+                }
 
                 case RelocType.IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A:
-                    {
-                        relocationLength = 4;
-                        delta = targetRVA & 0xfff;
-                        break;
-                    }
+                {
+                    relocationLength = 4;
+                    delta = targetRVA & 0xfff;
+                    break;
+                }
 
                 case RelocType.IMAGE_REL_FILE_ABSOLUTE:
-                    {
-                        relocationLength = 4;
-                        delta = filePosWhenPlaced;
-                        break;
-                    }
+                {
+                    relocationLength = 4;
+                    delta = filePosWhenPlaced;
+                    break;
+                }
 
                 case RelocType.IMAGE_REL_BASED_LOONGARCH64_PC:
                 case RelocType.IMAGE_REL_BASED_LOONGARCH64_JIR:
-                    {
-                        relocationLength = 8;
-                        delta = targetRVA - sourceRVA;
-                        break;
-                    }
+                {
+                    relocationLength = 8;
+                    delta = targetRVA - sourceRVA;
+                    break;
+                }
 
                 default:
                     throw new NotSupportedException();
             }
-            
+
             if (relocationLength > 0)
             {
                 CopyBytesToBuffer(_relocationBuffer, relocationLength);
                 unsafe
                 {
-                    fixed (byte *bufferContent = _relocationBuffer)
+                    fixed (byte* bufferContent = _relocationBuffer)
                     {
                         long value = Relocation.ReadValue(relocationType, bufferContent);
                         // Supporting non-zero values for ARM64 would require refactoring this function
-                        if (((relocationType == RelocType.IMAGE_REL_BASED_ARM64_PAGEBASE_REL21) ||
-                             (relocationType == RelocType.IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A) ||
-                             (relocationType == RelocType.IMAGE_REL_BASED_LOONGARCH64_PC) ||
-                             (relocationType == RelocType.IMAGE_REL_BASED_LOONGARCH64_JIR)
-                             ) && (value != 0))
+                        if (
+                            (
+                                (relocationType == RelocType.IMAGE_REL_BASED_ARM64_PAGEBASE_REL21)
+                                || (
+                                    relocationType == RelocType.IMAGE_REL_BASED_ARM64_PAGEOFFSET_12A
+                                )
+                                || (relocationType == RelocType.IMAGE_REL_BASED_LOONGARCH64_PC)
+                                || (relocationType == RelocType.IMAGE_REL_BASED_LOONGARCH64_JIR)
+                            ) && (value != 0)
+                        )
                         {
                             throw new NotSupportedException();
                         }
 
-                        Relocation.WriteValue(relocationType, bufferContent, unchecked(value + delta));
+                        Relocation.WriteValue(
+                            relocationType,
+                            bufferContent,
+                            unchecked(value + delta)
+                        );
                     }
                 }
 
@@ -335,7 +351,8 @@ namespace ILCompiler.PEWriter
                     sourceIndex: _blobOffset,
                     destinationArray: buffer,
                     destinationIndex: offset,
-                    length: part);
+                    length: part
+                );
 
                 _blobOffset += part;
                 _remainingLength -= part;
@@ -353,16 +370,16 @@ namespace ILCompiler.PEWriter
             uint opcode0 = BitConverter.ToUInt16(bytes, offset + 0);
             uint opcode1 = BitConverter.ToUInt16(bytes, offset + 2);
 
-            uint s  = opcode0 >> 10;
+            uint s = opcode0 >> 10;
             uint j2 = opcode1 >> 11;
             uint j1 = opcode1 >> 13;
 
             uint ret =
-                ((s << 24)              & 0x1000000) |
-                (((j1 ^ s ^ 1) << 23)   & 0x0800000) |
-                (((j2 ^ s ^ 1) << 22)   & 0x0400000) |
-                ((opcode0 << 12)        & 0x03FF000) |
-                ((opcode1 <<  1)        & 0x0000FFE);
+                ((s << 24) & 0x1000000)
+                | (((j1 ^ s ^ 1) << 23) & 0x0800000)
+                | (((j2 ^ s ^ 1) << 22) & 0x0400000)
+                | ((opcode0 << 12) & 0x03FF000)
+                | ((opcode1 << 1) & 0x0000FFE);
 
             // Sign-extend and return
             return (int)((ret << 7) >> 7);
@@ -390,7 +407,14 @@ namespace ILCompiler.PEWriter
             ushort opcode1 = BitConverter.ToUInt16(bytes, offset + 2);
 
             opcode0 &= unchecked((ushort)~Val);
-            opcode0 |= unchecked((ushort)(((imm16 & Mask1) >> 12) | ((imm16 & Mask2) >> 1) | ((imm16 & Mask3) << 4) | ((imm16 & Mask4) << 0)));
+            opcode0 |= unchecked(
+                (ushort)(
+                    ((imm16 & Mask1) >> 12)
+                    | ((imm16 & Mask2) >> 1)
+                    | ((imm16 & Mask3) << 4)
+                    | ((imm16 & Mask4) << 0)
+                )
+            );
 
             WriteUInt16(opcode0, bytes, offset);
             WriteUInt16(opcode1, bytes, offset + 2);
@@ -407,7 +431,7 @@ namespace ILCompiler.PEWriter
 
             return (int)GetThumb2Imm16(bytes, 0) + ((int)(GetThumb2Imm16(bytes, 4) << 16));
         }
-        
+
         /// <summary>
         /// Decode the 16-bit immediate operand from a MOVW / MOVT instruction.
         /// </summary>
@@ -416,10 +440,10 @@ namespace ILCompiler.PEWriter
             uint opcode0 = BitConverter.ToUInt16(bytes, offset);
             uint opcode1 = BitConverter.ToUInt16(bytes, offset + 2);
             uint result =
-                ((opcode0 << 12) & 0xf000) |
-                ((opcode0 <<  1) & 0x0800) |
-                ((opcode1 >>  4) & 0x0700) |
-                ((opcode1 >>  0) & 0x00ff);
+                ((opcode0 << 12) & 0xf000)
+                | ((opcode0 << 1) & 0x0800)
+                | ((opcode1 >> 4) & 0x0700)
+                | ((opcode1 >> 0) & 0x00ff);
             return (ushort)result;
         }
 
@@ -445,19 +469,25 @@ namespace ILCompiler.PEWriter
 
             // Ensure that the ThumbBit is not set on the offset
             // as it cannot be encoded.
-            Debug.Assert((imm24 & 1/*THUMB_CODE*/) == 0);
+            Debug.Assert(
+                (
+                    imm24 & 1 /*THUMB_CODE*/
+                ) == 0
+            );
 
             ushort opcode0 = BitConverter.ToUInt16(bytes, 0);
             ushort opcode1 = BitConverter.ToUInt16(bytes, 2);
             opcode0 &= 0xF800;
             opcode1 &= 0xD000;
 
-            uint s  =  (unchecked((uint)imm24) & 0x1000000) >> 24;
+            uint s = (unchecked((uint)imm24) & 0x1000000) >> 24;
             uint j1 = ((unchecked((uint)imm24) & 0x0800000) >> 23) ^ s ^ 1;
             uint j2 = ((unchecked((uint)imm24) & 0x0400000) >> 22) ^ s ^ 1;
 
             opcode0 |= (ushort)(((unchecked((uint)imm24) & 0x03FF000) >> 12) | (s << 10));
-            opcode1 |= (ushort)(((unchecked((uint)imm24) & 0x0000FFE) >>  1) | (j1 << 13) | (j2 << 11));
+            opcode1 |= (ushort)(
+                ((unchecked((uint)imm24) & 0x0000FFE) >> 1) | (j1 << 13) | (j2 << 11)
+            );
 
             WriteUInt16(opcode0, bytes, offset + 0);
             WriteUInt16(opcode1, bytes, offset + 2);

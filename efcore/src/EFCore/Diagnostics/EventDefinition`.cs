@@ -30,7 +30,8 @@ public class EventDefinition<TParam> : EventDefinitionBase
         EventId eventId,
         LogLevel level,
         string eventIdCode,
-        Func<LogLevel, Action<ILogger, TParam, Exception?>> logActionFunc)
+        Func<LogLevel, Action<ILogger, TParam, Exception?>> logActionFunc
+    )
         : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
@@ -42,8 +43,7 @@ public class EventDefinition<TParam> : EventDefinitionBase
     /// </summary>
     /// <param name="arg">The message argument.</param>
     /// <returns>The message string.</returns>
-    public virtual string GenerateMessage(
-        TParam arg)
+    public virtual string GenerateMessage(TParam arg)
     {
         var extractor = new MessageExtractingLogger();
         _logAction(extractor, arg, null);
@@ -56,9 +56,7 @@ public class EventDefinition<TParam> : EventDefinitionBase
     /// <typeparam name="TLoggerCategory">The <see cref="DbLoggerCategory" />.</typeparam>
     /// <param name="logger">The logger to which the event should be logged.</param>
     /// <param name="arg">Message argument.</param>
-    public virtual void Log<TLoggerCategory>(
-        IDiagnosticsLogger<TLoggerCategory> logger,
-        TParam arg)
+    public virtual void Log<TLoggerCategory>(IDiagnosticsLogger<TLoggerCategory> logger, TParam arg)
         where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)

@@ -16,7 +16,12 @@
   <Docs>
     <remarks>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>The <see cref="T:System.Drawing.Brushes" /> class contains static read-only properties that return a <see cref="T:System.Drawing.Brush" /> object of the color indicated by the property name. You typically do not have to explicitly dispose of the brush returned by a property in this class, unless it is used to construct a new brush. For more information about the colors represented by the brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>. </para>
+      <para
+        >The <see cref="T:System.Drawing.Brushes" /> class contains static read-only properties that return a <see cref="T:System.Drawing.Brush" /> object of the color indicated by the property name. You typically do not have to explicitly dispose of the brush returned by a property in this class, unless it is used to construct a new brush. For more information about the colors represented by the brushes in this class, see <see
+          cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+          >Colors by Name</see
+        >. </para
+      >
     </remarks>
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
@@ -25,7 +30,10 @@
   </Docs>
   <Members>
     <Member MemberName="AliceBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush AliceBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush AliceBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -34,7 +42,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -47,7 +60,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AntiqueWhite">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush AntiqueWhite { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush AntiqueWhite { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -56,7 +72,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -78,7 +99,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -91,7 +117,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Aquamarine">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Aquamarine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Aquamarine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -100,7 +129,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -122,7 +156,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -144,7 +183,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -166,7 +210,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -188,7 +237,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -201,7 +255,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BlanchedAlmond">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush BlanchedAlmond { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush BlanchedAlmond { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -210,7 +267,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -232,7 +294,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -245,7 +312,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BlueViolet">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush BlueViolet { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush BlueViolet { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -254,7 +324,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -276,7 +351,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -289,7 +369,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="BurlyWood">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush BurlyWood { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush BurlyWood { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -298,7 +381,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -311,7 +399,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CadetBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush CadetBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush CadetBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -320,7 +411,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -333,7 +429,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Chartreuse">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Chartreuse { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Chartreuse { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -342,7 +441,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -355,7 +459,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Chocolate">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Chocolate { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Chocolate { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -364,7 +471,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -386,7 +498,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -399,7 +516,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CornflowerBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush CornflowerBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush CornflowerBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -408,7 +528,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -430,7 +555,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -452,7 +582,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -474,7 +609,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -496,7 +636,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -518,7 +663,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -531,7 +681,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkGoldenrod">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkGoldenrod { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkGoldenrod { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -540,7 +693,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -562,7 +720,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -575,7 +738,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -584,7 +750,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -597,7 +768,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkKhaki">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkKhaki { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkKhaki { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -606,7 +780,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -619,7 +798,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkMagenta">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkMagenta { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkMagenta { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -628,7 +810,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -641,7 +828,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkOliveGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkOliveGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkOliveGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -650,7 +840,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -663,7 +858,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkOrange">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkOrange { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkOrange { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -672,7 +870,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -685,7 +888,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkOrchid">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkOrchid { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkOrchid { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -694,7 +900,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -716,7 +927,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -729,7 +945,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkSalmon">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkSalmon { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkSalmon { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -738,7 +957,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -751,7 +975,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkSeaGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkSeaGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkSeaGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -760,7 +987,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -773,7 +1005,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkSlateBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkSlateBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkSlateBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -782,7 +1017,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -795,7 +1035,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkSlateGray">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkSlateGray { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkSlateGray { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -804,7 +1047,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -817,7 +1065,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkTurquoise">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkTurquoise { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkTurquoise { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -826,7 +1077,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -839,7 +1095,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DarkViolet">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DarkViolet { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DarkViolet { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -848,7 +1107,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -870,7 +1134,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -883,7 +1152,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DeepSkyBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DeepSkyBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DeepSkyBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -892,7 +1164,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -914,7 +1191,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -927,7 +1209,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="DodgerBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush DodgerBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush DodgerBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -936,7 +1221,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -949,7 +1239,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Firebrick">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Firebrick { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Firebrick { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -958,7 +1251,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -971,7 +1269,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="FloralWhite">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush FloralWhite { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush FloralWhite { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -980,7 +1281,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -993,7 +1299,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="ForestGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush ForestGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush ForestGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1002,7 +1311,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1024,7 +1338,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1037,7 +1356,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Gainsboro">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Gainsboro { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Gainsboro { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1046,7 +1368,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1059,7 +1386,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GhostWhite">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush GhostWhite { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush GhostWhite { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1068,7 +1398,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1090,7 +1425,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1103,7 +1443,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Goldenrod">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Goldenrod { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Goldenrod { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1112,7 +1455,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1134,7 +1482,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1156,7 +1509,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1169,7 +1527,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="GreenYellow">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush GreenYellow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush GreenYellow { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1178,7 +1539,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1200,7 +1566,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1222,7 +1593,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1235,7 +1611,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IndianRed">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush IndianRed { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush IndianRed { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1244,7 +1623,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1266,7 +1650,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1288,7 +1677,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1310,7 +1704,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1332,7 +1731,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1345,7 +1749,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LavenderBlush">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LavenderBlush { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LavenderBlush { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1354,7 +1761,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1367,7 +1779,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LawnGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LawnGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LawnGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1376,7 +1791,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1389,7 +1809,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LemonChiffon">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LemonChiffon { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LemonChiffon { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1398,7 +1821,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1411,7 +1839,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1420,7 +1851,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1433,7 +1869,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightCoral">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightCoral { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightCoral { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1442,7 +1881,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1455,7 +1899,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightCyan">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightCyan { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightCyan { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1464,7 +1911,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1477,7 +1929,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightGoldenrodYellow">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightGoldenrodYellow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightGoldenrodYellow { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1486,7 +1941,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1499,7 +1959,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightGray">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightGray { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightGray { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1508,7 +1971,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1521,7 +1989,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1530,7 +2001,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1543,7 +2019,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightPink">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightPink { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightPink { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1552,7 +2031,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1565,7 +2049,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSalmon">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightSalmon { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightSalmon { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1574,7 +2061,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1587,7 +2079,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSeaGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightSeaGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightSeaGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1596,7 +2091,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1609,7 +2109,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSkyBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightSkyBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightSkyBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1618,7 +2121,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1631,7 +2139,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSlateGray">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightSlateGray { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightSlateGray { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1640,7 +2151,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1653,7 +2169,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightSteelBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightSteelBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightSteelBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1662,7 +2181,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1675,7 +2199,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LightYellow">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LightYellow { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LightYellow { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1684,7 +2211,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1706,7 +2238,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1719,7 +2256,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="LimeGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush LimeGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush LimeGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1728,7 +2268,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1750,7 +2295,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1772,7 +2322,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1794,7 +2349,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1807,7 +2367,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumAquamarine">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumAquamarine { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumAquamarine { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1816,7 +2379,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1829,7 +2397,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1838,7 +2409,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1851,7 +2427,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumOrchid">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumOrchid { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumOrchid { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1860,7 +2439,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1873,7 +2457,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumPurple">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumPurple { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumPurple { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1882,7 +2469,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1895,7 +2487,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumSeaGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumSeaGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumSeaGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1904,7 +2499,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1917,7 +2517,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumSlateBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumSlateBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumSlateBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1926,7 +2529,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1939,7 +2547,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumSpringGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumSpringGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumSpringGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1948,7 +2559,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1961,7 +2577,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumTurquoise">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumTurquoise { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumTurquoise { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1970,7 +2589,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -1983,7 +2607,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MediumVioletRed">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MediumVioletRed { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MediumVioletRed { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -1992,7 +2619,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
           <para>.</para>
         </remarks>
         <summary>
@@ -2006,7 +2638,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MidnightBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MidnightBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MidnightBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2015,7 +2650,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2028,7 +2668,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MintCream">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MintCream { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MintCream { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2037,7 +2680,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2050,7 +2698,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="MistyRose">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush MistyRose { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush MistyRose { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2059,7 +2710,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2081,7 +2737,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2094,7 +2755,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="NavajoWhite">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush NavajoWhite { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush NavajoWhite { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2103,7 +2767,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2125,7 +2794,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2147,7 +2821,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2169,7 +2848,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2182,7 +2866,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OliveDrab">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush OliveDrab { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush OliveDrab { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2191,7 +2878,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2213,7 +2905,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2226,7 +2923,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="OrangeRed">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush OrangeRed { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush OrangeRed { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2235,7 +2935,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2257,7 +2962,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2270,7 +2980,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PaleGoldenrod">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush PaleGoldenrod { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush PaleGoldenrod { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2279,7 +2992,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2292,7 +3010,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PaleGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush PaleGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush PaleGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2301,7 +3022,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2314,7 +3040,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PaleTurquoise">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush PaleTurquoise { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush PaleTurquoise { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2323,7 +3052,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2336,7 +3070,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PaleVioletRed">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush PaleVioletRed { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush PaleVioletRed { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2345,7 +3082,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2358,7 +3100,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PapayaWhip">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush PapayaWhip { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush PapayaWhip { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2367,7 +3112,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2380,7 +3130,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PeachPuff">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush PeachPuff { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush PeachPuff { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2389,7 +3142,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2411,7 +3169,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2433,7 +3196,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2455,7 +3223,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2468,7 +3241,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="PowderBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush PowderBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush PowderBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2477,7 +3253,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2499,7 +3280,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2521,7 +3307,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2534,7 +3325,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RosyBrown">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush RosyBrown { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush RosyBrown { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2543,7 +3337,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2556,7 +3355,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="RoyalBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush RoyalBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush RoyalBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2565,7 +3367,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2578,7 +3385,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SaddleBrown">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush SaddleBrown { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush SaddleBrown { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2587,7 +3397,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2609,7 +3424,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2622,7 +3442,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SandyBrown">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush SandyBrown { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush SandyBrown { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2631,7 +3454,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2653,7 +3481,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2675,7 +3508,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2697,7 +3535,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2719,7 +3562,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2741,7 +3589,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2754,7 +3607,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SlateBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush SlateBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush SlateBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2763,7 +3619,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2776,7 +3637,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SlateGray">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush SlateGray { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush SlateGray { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2785,7 +3649,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2807,7 +3676,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2820,7 +3694,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SpringGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush SpringGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush SpringGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2829,7 +3706,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2842,7 +3724,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="SteelBlue">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush SteelBlue { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush SteelBlue { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2851,7 +3736,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2873,7 +3763,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2895,7 +3790,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2917,7 +3817,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2939,7 +3844,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2952,7 +3862,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Transparent">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Transparent { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Transparent { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2961,7 +3874,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -2974,7 +3892,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Turquoise">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush Turquoise { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush Turquoise { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -2983,7 +3904,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3005,7 +3931,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3027,7 +3958,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3049,7 +3985,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3062,7 +4003,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="WhiteSmoke">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush WhiteSmoke { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush WhiteSmoke { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -3071,7 +4015,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3093,7 +4042,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
@@ -3106,7 +4060,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="YellowGreen">
-      <MemberSignature Language="C#" Value="public static System.Drawing.Brush YellowGreen { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public static System.Drawing.Brush YellowGreen { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Drawing.Brush</ReturnType>
@@ -3115,7 +4072,12 @@
         <value>To be added: an object of type 'Brush'</value>
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>To see the color represented by this brush and other brushes in this class, see <see cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>.</para>
+          <para
+            >To see the color represented by this brush and other brushes in this class, see <see
+              cref="http://go.microsoft.com/fwlink/?LinkId=92332"
+              >Colors by Name</see
+            >.</para
+          >
         </remarks>
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />

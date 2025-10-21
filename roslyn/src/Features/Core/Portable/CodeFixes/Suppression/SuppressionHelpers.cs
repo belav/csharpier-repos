@@ -16,11 +16,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
 {
     internal static class SuppressionHelpers
     {
-        private const string SynthesizedExternalSourceDiagnosticTag = "SynthesizedExternalSourceDiagnostic";
-        public static readonly ImmutableArray<string> SynthesizedExternalSourceDiagnosticCustomTags = ImmutableArray.Create(SynthesizedExternalSourceDiagnosticTag);
+        private const string SynthesizedExternalSourceDiagnosticTag =
+            "SynthesizedExternalSourceDiagnostic";
+        public static readonly ImmutableArray<string> SynthesizedExternalSourceDiagnosticCustomTags =
+            ImmutableArray.Create(SynthesizedExternalSourceDiagnosticTag);
 
-        public static bool CanBeSuppressed(Diagnostic diagnostic)
-            => CanBeSuppressedOrUnsuppressed(diagnostic, checkCanBeSuppressed: true);
+        public static bool CanBeSuppressed(Diagnostic diagnostic) =>
+            CanBeSuppressedOrUnsuppressed(diagnostic, checkCanBeSuppressed: true);
 
         public static bool CanBeSuppressedWithAttribute(Diagnostic diagnostic)
         {
@@ -34,13 +36,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             return diagnostic.Id != IDEDiagnosticIds.FormattingDiagnosticId;
         }
 
-        public static bool CanBeUnsuppressed(Diagnostic diagnostic)
-            => CanBeSuppressedOrUnsuppressed(diagnostic, checkCanBeSuppressed: false);
+        public static bool CanBeUnsuppressed(Diagnostic diagnostic) =>
+            CanBeSuppressedOrUnsuppressed(diagnostic, checkCanBeSuppressed: false);
 
-        private static bool CanBeSuppressedOrUnsuppressed(Diagnostic diagnostic, bool checkCanBeSuppressed)
+        private static bool CanBeSuppressedOrUnsuppressed(
+            Diagnostic diagnostic,
+            bool checkCanBeSuppressed
+        )
         {
-            if (diagnostic.IsSuppressed == checkCanBeSuppressed ||
-                IsNotConfigurableDiagnostic(diagnostic))
+            if (
+                diagnostic.IsSuppressed == checkCanBeSuppressed
+                || IsNotConfigurableDiagnostic(diagnostic)
+            )
             {
                 // Don't offer suppression fixes for:
                 //   1. Diagnostics with a source suppression.
@@ -66,25 +73,38 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             }
         }
 
-        public static bool IsNotConfigurableDiagnostic(DiagnosticData diagnostic)
-            => HasCustomTag(diagnostic.CustomTags, WellKnownDiagnosticTags.NotConfigurable);
+        public static bool IsNotConfigurableDiagnostic(DiagnosticData diagnostic) =>
+            HasCustomTag(diagnostic.CustomTags, WellKnownDiagnosticTags.NotConfigurable);
 
-        public static bool IsNotConfigurableDiagnostic(Diagnostic diagnostic)
-            => HasCustomTag(diagnostic.Descriptor.ImmutableCustomTags(), WellKnownDiagnosticTags.NotConfigurable);
+        public static bool IsNotConfigurableDiagnostic(Diagnostic diagnostic) =>
+            HasCustomTag(
+                diagnostic.Descriptor.ImmutableCustomTags(),
+                WellKnownDiagnosticTags.NotConfigurable
+            );
 
-        public static bool IsCompilerDiagnostic(DiagnosticData diagnostic)
-            => HasCustomTag(diagnostic.CustomTags, WellKnownDiagnosticTags.Compiler);
+        public static bool IsCompilerDiagnostic(DiagnosticData diagnostic) =>
+            HasCustomTag(diagnostic.CustomTags, WellKnownDiagnosticTags.Compiler);
 
-        public static bool IsCompilerDiagnostic(Diagnostic diagnostic)
-            => HasCustomTag(diagnostic.Descriptor.ImmutableCustomTags(), WellKnownDiagnosticTags.Compiler);
+        public static bool IsCompilerDiagnostic(Diagnostic diagnostic) =>
+            HasCustomTag(
+                diagnostic.Descriptor.ImmutableCustomTags(),
+                WellKnownDiagnosticTags.Compiler
+            );
 
-        public static bool IsSynthesizedExternalSourceDiagnostic(DiagnosticData diagnostic)
-            => HasCustomTag(diagnostic.CustomTags, SynthesizedExternalSourceDiagnosticTag);
+        public static bool IsSynthesizedExternalSourceDiagnostic(DiagnosticData diagnostic) =>
+            HasCustomTag(diagnostic.CustomTags, SynthesizedExternalSourceDiagnosticTag);
 
-        public static bool IsSynthesizedExternalSourceDiagnostic(Diagnostic diagnostic)
-            => HasCustomTag(diagnostic.Descriptor.ImmutableCustomTags(), SynthesizedExternalSourceDiagnosticTag);
+        public static bool IsSynthesizedExternalSourceDiagnostic(Diagnostic diagnostic) =>
+            HasCustomTag(
+                diagnostic.Descriptor.ImmutableCustomTags(),
+                SynthesizedExternalSourceDiagnosticTag
+            );
 
-        public static bool HasCustomTag(ImmutableArray<string> customTags, string tagToFind)
-            => customTags.Any(static (c, tagToFind) => CultureInfo.InvariantCulture.CompareInfo.Compare(c, tagToFind) == 0, tagToFind);
+        public static bool HasCustomTag(ImmutableArray<string> customTags, string tagToFind) =>
+            customTags.Any(
+                static (c, tagToFind) =>
+                    CultureInfo.InvariantCulture.CompareInfo.Compare(c, tagToFind) == 0,
+                tagToFind
+            );
     }
 }

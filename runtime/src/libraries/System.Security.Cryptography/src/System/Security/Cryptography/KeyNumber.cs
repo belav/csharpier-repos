@@ -11,6 +11,6 @@ namespace System.Security.Cryptography
     {
         //These are identifiers for the private keys from the key container
         Exchange = 1,
-        Signature = 2
+        Signature = 2,
     }
 }

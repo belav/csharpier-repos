@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     using System;
@@ -17,15 +18,15 @@ namespace DefaultNamespace
             while (f)
                 GC.Collect();
             while (f)
-                while (i > 39)
-                    while (f)
-                        GC.Collect();
+            while (i > 39)
+            while (f)
+                GC.Collect();
         }
     }
 }
 /*
 ---------------------------
-Assert Failure (PID 948, Thread 628/274)        
+Assert Failure (PID 948, Thread 628/274)
 ---------------------------
 Assertion failed 'block->bbWeight == bNext->bbWeight' in 'DefaultNamespace.BB.Main()'
 
@@ -41,6 +42,6 @@ Image:
 D:\bugs\loop.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */

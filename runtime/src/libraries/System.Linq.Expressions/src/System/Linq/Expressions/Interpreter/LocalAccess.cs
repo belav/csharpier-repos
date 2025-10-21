@@ -24,11 +24,16 @@ namespace System.Linq.Expressions.Interpreter
             _index = index;
         }
 
-        public override string ToDebugString(int instructionIndex, object? cookie, Func<int, int> labelIndexer, IReadOnlyList<object>? objects)
+        public override string ToDebugString(
+            int instructionIndex,
+            object? cookie,
+            Func<int, int> labelIndexer,
+            IReadOnlyList<object>? objects
+        )
         {
-            return cookie == null ?
-                InstructionName + "(" + _index + ")" :
-                InstructionName + "(" + cookie + ": " + _index + ")";
+            return cookie == null
+                ? InstructionName + "(" + _index + ")"
+                : InstructionName + "(" + cookie + ": " + _index + ")";
         }
     }
 
@@ -37,9 +42,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class LoadLocalInstruction : LocalAccessInstruction, IBoxableInstruction
     {
         internal LoadLocalInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocal";
@@ -59,9 +62,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class LoadLocalBoxedInstruction : LocalAccessInstruction
     {
         internal LoadLocalBoxedInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocalBox";
@@ -77,9 +78,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class LoadLocalFromClosureInstruction : LocalAccessInstruction
     {
         internal LoadLocalFromClosureInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocalClosure";
@@ -95,9 +94,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class LoadLocalFromClosureBoxedInstruction : LocalAccessInstruction
     {
         internal LoadLocalFromClosureBoxedInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocal";
@@ -117,9 +114,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class AssignLocalInstruction : LocalAccessInstruction, IBoxableInstruction
     {
         internal AssignLocalInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -140,9 +135,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class StoreLocalInstruction : LocalAccessInstruction, IBoxableInstruction
     {
         internal StoreLocalInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override string InstructionName => "StoreLocal";
@@ -162,9 +155,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class AssignLocalBoxedInstruction : LocalAccessInstruction
     {
         internal AssignLocalBoxedInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -181,9 +172,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class StoreLocalBoxedInstruction : LocalAccessInstruction
     {
         internal StoreLocalBoxedInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override string InstructionName => "StoreLocalBox";
@@ -199,9 +188,7 @@ namespace System.Linq.Expressions.Interpreter
     internal sealed class AssignLocalToClosureInstruction : LocalAccessInstruction
     {
         internal AssignLocalToClosureInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -217,7 +204,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class ValueTypeCopyInstruction : Instruction
     {
-        public static readonly ValueTypeCopyInstruction Instruction = new ValueTypeCopyInstruction();
+        public static readonly ValueTypeCopyInstruction Instruction =
+            new ValueTypeCopyInstruction();
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -238,16 +226,12 @@ namespace System.Linq.Expressions.Interpreter
     internal abstract class InitializeLocalInstruction : LocalAccessInstruction
     {
         internal InitializeLocalInstruction(int index)
-            : base(index)
-        {
-        }
+            : base(index) { }
 
         internal sealed class Reference : InitializeLocalInstruction, IBoxableInstruction
         {
             internal Reference(int index)
-                : base(index)
-            {
-            }
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -313,9 +297,7 @@ namespace System.Linq.Expressions.Interpreter
         {
             // immutable value:
             internal ImmutableRefBox(int index)
-                : base(index)
-            {
-            }
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -329,9 +311,7 @@ namespace System.Linq.Expressions.Interpreter
         internal sealed class ParameterBox : InitializeLocalInstruction
         {
             public ParameterBox(int index)
-                : base(index)
-            {
-            }
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -345,9 +325,7 @@ namespace System.Linq.Expressions.Interpreter
         internal sealed class Parameter : InitializeLocalInstruction, IBoxableInstruction
         {
             internal Parameter(int index)
-                : base(index)
-            {
-            }
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -379,15 +357,18 @@ namespace System.Linq.Expressions.Interpreter
                 _type = type;
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2077:UnrecognizedReflectionPattern",
-                Justification = "_type is a ValueType. You can always get an uninitialized ValueType.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2077:UnrecognizedReflectionPattern",
+                Justification = "_type is a ValueType. You can always get an uninitialized ValueType."
+            )]
             public override int Run(InterpretedFrame frame)
             {
                 try
                 {
-                    frame.Data[_index] = _type.IsNullableType() ?
-                        Activator.CreateInstance(_type) :
-                        RuntimeHelpers.GetUninitializedObject(_type);
+                    frame.Data[_index] = _type.IsNullableType()
+                        ? Activator.CreateInstance(_type)
+                        : RuntimeHelpers.GetUninitializedObject(_type);
                 }
                 catch (TargetInvocationException e)
                 {
@@ -418,17 +399,20 @@ namespace System.Linq.Expressions.Interpreter
                 _type = type;
             }
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2077:UnrecognizedReflectionPattern",
-                Justification = "_type is a ValueType. You can always get an uninitialized ValueType.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2077:UnrecognizedReflectionPattern",
+                Justification = "_type is a ValueType. You can always get an uninitialized ValueType."
+            )]
             public override int Run(InterpretedFrame frame)
             {
                 object? value;
 
                 try
                 {
-                    value = _type.IsNullableType() ?
-                        Activator.CreateInstance(_type) :
-                        RuntimeHelpers.GetUninitializedObject(_type);
+                    value = _type.IsNullableType()
+                        ? Activator.CreateInstance(_type)
+                        : RuntimeHelpers.GetUninitializedObject(_type);
                 }
                 catch (TargetInvocationException e)
                 {

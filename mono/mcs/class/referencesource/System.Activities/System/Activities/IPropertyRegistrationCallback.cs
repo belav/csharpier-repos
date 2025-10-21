@@ -11,9 +11,8 @@ namespace System.Activities
     {
         [Fx.Tag.Throws(typeof(Exception), "Extensibility point.")]
         void Register(RegistrationContext context);
+
         [Fx.Tag.Throws(typeof(Exception), "Extensibility point.")]
         void Unregister(RegistrationContext context);
     }
 }
-
-

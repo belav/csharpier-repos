@@ -30,13 +30,17 @@ internal static partial class Interop
             internal ulong VmPeak;
         }
 
-        internal static string GetStatusFilePathForProcess(int pid) => string.Create(null, stackalloc char[256], $"{RootPath}{(uint)pid}{StatusFileName}");
+        internal static string GetStatusFilePathForProcess(int pid) =>
+            string.Create(null, stackalloc char[256], $"{RootPath}{(uint)pid}{StatusFileName}");
 
         internal static bool TryReadStatusFile(int pid, out ParsedStatus result)
         {
             bool b = TryParseStatusFile(GetStatusFilePathForProcess(pid), out result);
 #if DEBUG
-            Debug.Assert(!b || result.Pid == pid, "Expected process ID from status file to match supplied pid");
+            Debug.Assert(
+                !b || result.Pid == pid,
+                "Expected process ID from status file to match supplied pid"
+            );
 #endif
             return b;
         }
@@ -123,7 +127,14 @@ internal static partial class Interop
 
             try
             {
-                using var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1, useAsync: false);
+                using var fileStream = new FileStream(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    bufferSize: 1,
+                    useAsync: false
+                );
 
                 while (true)
                 {

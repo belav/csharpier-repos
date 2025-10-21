@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Completion
         Other = 0,
 
         /// <summary>
-        /// Completion was trigger by a direct invocation of the completion feature 
+        /// Completion was trigger by a direct invocation of the completion feature
         /// (ctrl-j in Visual Studio).
         /// </summary>
         Invoke = 0,
@@ -39,9 +39,9 @@ namespace Microsoft.CodeAnalysis.Completion
         Snippets = 3,
 
         /// <summary>
-        /// Completion was triggered with a request to commit if a unique item would be selected 
+        /// Completion was triggered with a request to commit if a unique item would be selected
         /// (ctrl-space in Visual Studio).
         /// </summary>
-        InvokeAndCommitIfUnique = 4
+        InvokeAndCommitIfUnique = 4,
     }
 }

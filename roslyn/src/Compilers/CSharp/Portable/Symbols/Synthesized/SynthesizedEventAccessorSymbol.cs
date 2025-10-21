@@ -25,8 +25,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // Since we don't have a syntax reference, we'll have to use another object for locking.
         private readonly object _methodChecksLockObject = new object();
 
-        internal SynthesizedEventAccessorSymbol(SourceEventSymbol @event, bool isAdder, bool isExpressionBodied, EventSymbol explicitlyImplementedEventOpt = null, string aliasQualifierOpt = null)
-            : base(@event, null, @event.Location, explicitlyImplementedEventOpt, aliasQualifierOpt, isAdder, isIterator: false, isNullableAnalysisEnabled: false, isExpressionBodied: isExpressionBodied)
+        internal SynthesizedEventAccessorSymbol(
+            SourceEventSymbol @event,
+            bool isAdder,
+            bool isExpressionBodied,
+            EventSymbol explicitlyImplementedEventOpt = null,
+            string aliasQualifierOpt = null
+        )
+            : base(
+                @event,
+                null,
+                @event.Location,
+                explicitlyImplementedEventOpt,
+                aliasQualifierOpt,
+                isAdder,
+                isIterator: false,
+                isNullableAnalysisEnabled: false,
+                isExpressionBodied: isExpressionBodied
+            )
         {
             Debug.Assert(IsAbstract || IsExtern || IsFieldLikeEventAccessor());
         }
@@ -70,12 +86,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return OneOrMany.Create(this.AssociatedEvent.AttributeDeclarationSyntaxList);
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
         }
 
         protected override object MethodChecksLockObject
@@ -89,8 +113,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 MethodImplAttributes result = base.ImplementationAttributes;
 
-                if (!IsAbstract && !AssociatedEvent.IsWindowsRuntimeEvent && !ContainingType.IsStructType() &&
-                    (object)DeclaringCompilation.GetWellKnownTypeMember(WellKnownMember.System_Threading_Interlocked__CompareExchange_T) == null)
+                if (
+                    !IsAbstract
+                    && !AssociatedEvent.IsWindowsRuntimeEvent
+                    && !ContainingType.IsStructType()
+                    && (object)
+                        DeclaringCompilation.GetWellKnownTypeMember(
+                            WellKnownMember.System_Threading_Interlocked__CompareExchange_T
+                        ) == null
+                )
                 {
                     // Under these conditions, this method needs to be synchronized.
                     result |= MethodImplAttributes.Synchronized;
@@ -100,7 +131,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override ExecutableCodeBinder TryGetBodyBinder(BinderFactory binderFactoryOpt = null, bool ignoreAccessibility = false)
+        internal override ExecutableCodeBinder TryGetBodyBinder(
+            BinderFactory binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        )
         {
             return TryGetBodyBinderFromSyntax(binderFactoryOpt, ignoreAccessibility);
         }
@@ -120,14 +154,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (IsFieldLikeEventAccessor())
             {
                 SourceEventSymbol fieldLikeEvent = AssociatedEvent;
                 if (fieldLikeEvent.Type.IsDelegateType())
                 {
-                    BoundBlock body = CSharp.MethodBodySynthesizer.ConstructFieldLikeEventAccessorBody(fieldLikeEvent, isAddMethod: MethodKind == MethodKind.EventAdd, compilationState.Compilation, diagnostics);
+                    BoundBlock body =
+                        CSharp.MethodBodySynthesizer.ConstructFieldLikeEventAccessorBody(
+                            fieldLikeEvent,
+                            isAddMethod: MethodKind == MethodKind.EventAdd,
+                            compilationState.Compilation,
+                            diagnostics
+                        );
 
                     if (body != null)
                     {

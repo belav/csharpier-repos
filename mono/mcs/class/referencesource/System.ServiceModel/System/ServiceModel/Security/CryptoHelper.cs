@@ -6,22 +6,20 @@ namespace System.ServiceModel.Security
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.Reflection;
-    using System.Threading;
-    using System.IO;
-
-    using System.Runtime.InteropServices;
-    using System.IdentityModel.Tokens;
-    using System.Text;
-    using System.Xml;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Security.Cryptography;
-
-    using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
     using CryptoAlgorithms = System.IdentityModel.CryptoHelper;
+    using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
 
     static class CryptoHelper
     {
@@ -32,7 +30,7 @@ namespace System.ServiceModel.Security
         {
             Unknown,
             Symmetric,
-            Asymmetric
+            Asymmetric,
         }
 
         internal static byte[] EmptyBuffer
@@ -58,7 +56,11 @@ namespace System.ServiceModel.Security
             return CryptoHelper.CreateHashAlgorithm(SecurityAlgorithms.Sha256Digest);
         }
 
-        [SuppressMessage("Microsoft.Security.Cryptography", "CA5354:DoNotUseSHA1", Justification = "Cannot change. Required as SOAP spec requires supporting SHA1.")]
+        [SuppressMessage(
+            "Microsoft.Security.Cryptography",
+            "CA5354:DoNotUseSHA1",
+            Justification = "Cannot change. Required as SOAP spec requires supporting SHA1."
+        )]
         internal static HashAlgorithm CreateHashAlgorithm(string digestMethod)
         {
             object algorithmObject = CryptoAlgorithms.GetAlgorithmFromConfig(digestMethod);
@@ -67,7 +69,11 @@ namespace System.ServiceModel.Security
                 HashAlgorithm hashAlgorithm = algorithmObject as HashAlgorithm;
                 if (hashAlgorithm != null)
                     return hashAlgorithm;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.CustomCryptoAlgorithmIsNotValidHashAlgorithm, digestMethod)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new MessageSecurityException(
+                        SR.GetString(SR.CustomCryptoAlgorithmIsNotValidHashAlgorithm, digestMethod)
+                    )
+                );
             }
 
             switch (digestMethod)
@@ -83,12 +89,19 @@ namespace System.ServiceModel.Security
                     else
                         return new SHA256Managed();
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.UnsupportedCryptoAlgorithm, digestMethod)));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.UnsupportedCryptoAlgorithm, digestMethod)
+                        )
+                    );
             }
         }
 
-        [SuppressMessage("Microsoft.Security.Cryptography", "CA5354:DoNotUseSHA1", Justification = "Cannot change. Required as SOAP spec requires supporting SHA1.")]
+        [SuppressMessage(
+            "Microsoft.Security.Cryptography",
+            "CA5354:DoNotUseSHA1",
+            Justification = "Cannot change. Required as SOAP spec requires supporting SHA1."
+        )]
         internal static HashAlgorithm CreateHashForAsymmetricSignature(string signatureMethod)
         {
             object algorithmObject = CryptoAlgorithms.GetAlgorithmFromConfig(signatureMethod);
@@ -108,7 +121,14 @@ namespace System.ServiceModel.Security
                 if (hashAlgorithm != null)
                     return hashAlgorithm;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.CustomCryptoAlgorithmIsNotValidAsymmetricSignature, signatureMethod)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new MessageSecurityException(
+                        SR.GetString(
+                            SR.CustomCryptoAlgorithmIsNotValidAsymmetricSignature,
+                            signatureMethod
+                        )
+                    )
+                );
             }
 
             switch (signatureMethod)
@@ -127,11 +147,20 @@ namespace System.ServiceModel.Security
                         return new SHA256Managed();
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.UnsupportedCryptoAlgorithm, signatureMethod)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new MessageSecurityException(
+                            SR.GetString(SR.UnsupportedCryptoAlgorithm, signatureMethod)
+                        )
+                    );
             }
         }
 
-        internal static byte[] ExtractIVAndDecrypt(SymmetricAlgorithm algorithm, byte[] cipherText, int offset, int count)
+        internal static byte[] ExtractIVAndDecrypt(
+            SymmetricAlgorithm algorithm,
+            byte[] cipherText,
+            int offset,
+            int count
+        )
         {
             if (cipherText == null)
             {
@@ -139,12 +168,21 @@ namespace System.ServiceModel.Security
             }
             if (count < 0 || count > cipherText.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeInRange, 0, cipherText.Length)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.ValueMustBeInRange, 0, cipherText.Length)
+                    )
+                );
             }
             if (offset < 0 || offset > cipherText.Length - count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("offset", SR.GetString(SR.ValueMustBeInRange, 0, cipherText.Length - count)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        SR.GetString(SR.ValueMustBeInRange, 0, cipherText.Length - count)
+                    )
+                );
             }
 
             int ivSize = algorithm.BlockSize / 8;
@@ -154,14 +192,22 @@ namespace System.ServiceModel.Security
             algorithm.Mode = CipherMode.CBC;
             try
             {
-                using (ICryptoTransform decrTransform = algorithm.CreateDecryptor(algorithm.Key, iv))
+                using (
+                    ICryptoTransform decrTransform = algorithm.CreateDecryptor(algorithm.Key, iv)
+                )
                 {
-                    return decrTransform.TransformFinalBlock(cipherText, offset + iv.Length, count - iv.Length);
+                    return decrTransform.TransformFinalBlock(
+                        cipherText,
+                        offset + iv.Length,
+                        count - iv.Length
+                    );
                 }
             }
             catch (CryptographicException ex)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.DecryptionFailed), ex));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.DecryptionFailed), ex)
+                );
             }
         }
 
@@ -226,18 +272,35 @@ namespace System.ServiceModel.Security
             }
         }
 
-        internal static byte[] GenerateIVAndEncrypt(SymmetricAlgorithm algorithm, byte[] plainText, int offset, int count)
+        internal static byte[] GenerateIVAndEncrypt(
+            SymmetricAlgorithm algorithm,
+            byte[] plainText,
+            int offset,
+            int count
+        )
         {
             byte[] iv;
             byte[] cipherText;
-            GenerateIVAndEncrypt(algorithm, new ArraySegment<byte>(plainText, offset, count), out iv, out cipherText);
-            byte[] output = DiagnosticUtility.Utility.AllocateByteArray(checked(iv.Length + cipherText.Length));
+            GenerateIVAndEncrypt(
+                algorithm,
+                new ArraySegment<byte>(plainText, offset, count),
+                out iv,
+                out cipherText
+            );
+            byte[] output = DiagnosticUtility.Utility.AllocateByteArray(
+                checked(iv.Length + cipherText.Length)
+            );
             Buffer.BlockCopy(iv, 0, output, 0, iv.Length);
             Buffer.BlockCopy(cipherText, 0, output, iv.Length, cipherText.Length);
             return output;
         }
 
-        internal static void GenerateIVAndEncrypt(SymmetricAlgorithm algorithm, ArraySegment<byte> plainText, out byte[] iv, out byte[] cipherText)
+        internal static void GenerateIVAndEncrypt(
+            SymmetricAlgorithm algorithm,
+            ArraySegment<byte> plainText,
+            out byte[] iv,
+            out byte[] cipherText
+        )
         {
             int ivSize = algorithm.BlockSize / 8;
             iv = new byte[ivSize];
@@ -246,7 +309,11 @@ namespace System.ServiceModel.Security
             algorithm.Mode = CipherMode.CBC;
             using (ICryptoTransform encrTransform = algorithm.CreateEncryptor(algorithm.Key, iv))
             {
-                cipherText = encrTransform.TransformFinalBlock(plainText.Array, plainText.Offset, plainText.Count);
+                cipherText = encrTransform.TransformFinalBlock(
+                    plainText.Array,
+                    plainText.Offset,
+                    plainText.Count
+                );
             }
         }
 
@@ -330,31 +397,53 @@ namespace System.ServiceModel.Security
         {
             if (buffer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("buffer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("buffer")
+                );
             }
             if (count < 0 || count > buffer.Length)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeInRange, 0, buffer.Length)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.ValueMustBeInRange, 0, buffer.Length)
+                    )
+                );
             }
             if (offset < 0 || offset > buffer.Length - count)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("offset", SR.GetString(SR.ValueMustBeInRange, 0, buffer.Length - count)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        SR.GetString(SR.ValueMustBeInRange, 0, buffer.Length - count)
+                    )
+                );
             }
         }
 
-        internal static void ValidateSymmetricKeyLength(int keyLength, SecurityAlgorithmSuite algorithmSuite)
+        internal static void ValidateSymmetricKeyLength(
+            int keyLength,
+            SecurityAlgorithmSuite algorithmSuite
+        )
         {
             if (!algorithmSuite.IsSymmetricKeyLengthSupported(keyLength))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new ArgumentOutOfRangeException("algorithmSuite",
-                   SR.GetString(SR.UnsupportedKeyLength, keyLength, algorithmSuite.ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new ArgumentOutOfRangeException(
+                        "algorithmSuite",
+                        SR.GetString(SR.UnsupportedKeyLength, keyLength, algorithmSuite.ToString())
+                    )
+                );
             }
             if (keyLength % 8 != 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new ArgumentOutOfRangeException("algorithmSuite",
-                   SR.GetString(SR.KeyLengthMustBeMultipleOfEight, keyLength)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new ArgumentOutOfRangeException(
+                        "algorithmSuite",
+                        SR.GetString(SR.KeyLengthMustBeMultipleOfEight, keyLength)
+                    )
+                );
             }
         }
-
     }
 }

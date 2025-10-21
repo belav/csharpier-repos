@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <MinClientVersion>3.6</MinClientVersion>
@@ -10,7 +9,6 @@
     <PackageTags>$(PackageTags);SQL Server;HierarchyId</PackageTags>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Diagnostics" />
     <Using Include="System.Linq.Expressions" />
@@ -28,24 +26,28 @@
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Shared\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="build\**\*">
       <Pack>True</Pack>
       <PackagePath>build</PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\EFCore.SqlServer\EFCore.SqlServer.csproj" PrivateAssets="contentfiles;build" />
+    <ProjectReference
+      Include="..\EFCore.SqlServer\EFCore.SqlServer.csproj"
+      PrivateAssets="contentfiles;build"
+    />
     <ProjectReference Include="..\EFCore.SqlServer.Abstractions\EFCore.SqlServer.Abstractions.csproj" />
-    <ProjectReference Condition="'$(BuildingByReSharper)' != 'true'" Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj" ReferenceOutputAssembly="False" OutputItemType="Analyzer" />
+    <ProjectReference
+      Condition="'$(BuildingByReSharper)' != 'true'"
+      Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj"
+      ReferenceOutputAssembly="False"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\SqlServerHierarchyIdStrings.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -53,11 +55,9 @@
       <CustomToolNamespace>Microsoft.EntityFrameworkCore.SqlServer.Internal</CustomToolNamespace>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\SqlServerHierarchyIdStrings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -65,5 +65,4 @@
       <DependentUpon>SqlServerHierarchyIdStrings.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

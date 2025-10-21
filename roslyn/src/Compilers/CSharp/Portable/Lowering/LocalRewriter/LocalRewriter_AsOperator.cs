@@ -19,7 +19,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             var rewrittenTargetType = (BoundTypeExpression)VisitTypeExpression(node.TargetType);
             TypeSymbol rewrittenType = VisitType(node.Type);
 
-            return MakeAsOperator(node, node.Syntax, rewrittenOperand, rewrittenTargetType, node.OperandPlaceholder, node.OperandConversion, rewrittenType);
+            return MakeAsOperator(
+                node,
+                node.Syntax,
+                rewrittenOperand,
+                rewrittenTargetType,
+                node.OperandPlaceholder,
+                node.OperandConversion,
+                rewrittenType
+            );
         }
 
         public override BoundNode VisitTypeExpression(BoundTypeExpression node)
@@ -36,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundTypeExpression rewrittenTargetType,
             BoundValuePlaceholder? operandPlaceholder,
             BoundExpression? operandConversion,
-            TypeSymbol rewrittenType)
+            TypeSymbol rewrittenType
+        )
         {
             // TODO: Handle dynamic operand type and target type
             Debug.Assert(rewrittenTargetType.Type.Equals(rewrittenType));
@@ -48,7 +57,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var conversion = BoundNode.GetConversion(operandConversion, operandPlaceholder);
 
-                ConstantValue constantValue = Binder.GetAsOperatorConstantResult(rewrittenOperand.Type, rewrittenType, conversion.Kind, rewrittenOperand.ConstantValueOpt);
+                ConstantValue constantValue = Binder.GetAsOperatorConstantResult(
+                    rewrittenOperand.Type,
+                    rewrittenType,
+                    conversion.Kind,
+                    rewrittenOperand.ConstantValueOpt
+                );
 
                 if (constantValue != null)
                 {
@@ -58,11 +72,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
 
                     Debug.Assert(constantValue.IsNull);
-                    BoundExpression result = rewrittenType.IsNullableType() ? new BoundDefaultExpression(syntax, rewrittenType) : MakeLiteral(syntax, constantValue, rewrittenType);
+                    BoundExpression result = rewrittenType.IsNullableType()
+                        ? new BoundDefaultExpression(syntax, rewrittenType)
+                        : MakeLiteral(syntax, constantValue, rewrittenType);
 
                     if (rewrittenOperand.ConstantValueOpt != null)
                     {
-                        // No need to preserve any side-effects from the operand. 
+                        // No need to preserve any side-effects from the operand.
                         // We also can keep the "constant" notion of the result, which
                         // enables some optimizations down the road.
                         return result;
@@ -73,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         locals: ImmutableArray<LocalSymbol>.Empty,
                         sideEffects: ImmutableArray.Create<BoundExpression>(rewrittenOperand),
                         value: result,
-                        type: rewrittenType);
+                        type: rewrittenType
+                    );
                 }
 
                 if (conversion.IsImplicit)
@@ -85,14 +102,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     AddPlaceholderReplacement(operandPlaceholder, rewrittenOperand);
                     BoundExpression result = VisitExpression(operandConversion);
-                    Debug.Assert(result.Type!.Equals(rewrittenType, TypeCompareKind.ConsiderEverything));
+                    Debug.Assert(
+                        result.Type!.Equals(rewrittenType, TypeCompareKind.ConsiderEverything)
+                    );
                     RemovePlaceholderReplacement(operandPlaceholder);
 
                     return result;
                 }
             }
 
-            return oldNode.Update(rewrittenOperand, rewrittenTargetType, operandPlaceholder: null, operandConversion: null, rewrittenType);
+            return oldNode.Update(
+                rewrittenOperand,
+                rewrittenTargetType,
+                operandPlaceholder: null,
+                operandConversion: null,
+                rewrittenType
+            );
         }
     }
 }

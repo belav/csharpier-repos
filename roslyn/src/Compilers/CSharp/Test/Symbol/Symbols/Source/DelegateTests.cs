@@ -23,27 +23,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void MissingTypes()
         {
             var text =
-@"
+                @"
 delegate void A();
 ";
             var comp = CreateEmptyCompilation(text);
             comp.VerifyDiagnostics(
                 // (2,15): error CS0518: Predefined type 'System.MulticastDelegate' is not defined or imported
                 // delegate void A();
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A").WithArguments("System.MulticastDelegate"),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
+                    .WithArguments("System.MulticastDelegate"),
                 // (2,10): error CS0518: Predefined type 'System.Void' is not defined or imported
                 // delegate void A();
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void").WithArguments("System.Void"),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void")
+                    .WithArguments("System.Void"),
                 // (2,1): error CS0518: Predefined type 'System.Void' is not defined or imported
                 // delegate void A();
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "delegate void A();").WithArguments("System.Void"),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "delegate void A();")
+                    .WithArguments("System.Void"),
                 // (2,1): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // delegate void A();
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "delegate void A();").WithArguments("System.Object"),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "delegate void A();")
+                    .WithArguments("System.Object"),
                 // (2,1): error CS0518: Predefined type 'System.IntPtr' is not defined or imported
                 // delegate void A();
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "delegate void A();").WithArguments("System.IntPtr")
-                );
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "delegate void A();")
+                    .WithArguments("System.IntPtr")
+            );
         }
 
         [WorkItem(530363, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530363")]
@@ -53,7 +58,8 @@ delegate void A();
             var source = "delegate void A();";
             var comp = CreateEmptyCompilation(
                 source: new[] { Parse(source) },
-                references: new[] { MinCorlibRef });
+                references: new[] { MinCorlibRef }
+            );
 
             comp.VerifyDiagnostics();
         }
@@ -62,7 +68,7 @@ delegate void A();
         public void Simple1()
         {
             var text =
-@"
+                @"
 class A {
     delegate void D();
 }
@@ -72,15 +78,23 @@ class A {
             var a = global.GetTypeMembers("A", 0).Single();
             var d = a.GetMembers("D")[0] as NamedTypeSymbol;
             var tmp = d.GetMembers();
-            Assert.Equal(d.Locations[0], d.DelegateInvokeMethod.Locations[0], EqualityComparer<Location>.Default);
-            Assert.Equal(d.Locations[0], d.InstanceConstructors[0].Locations[0], EqualityComparer<Location>.Default);
+            Assert.Equal(
+                d.Locations[0],
+                d.DelegateInvokeMethod.Locations[0],
+                EqualityComparer<Location>.Default
+            );
+            Assert.Equal(
+                d.Locations[0],
+                d.InstanceConstructors[0].Locations[0],
+                EqualityComparer<Location>.Default
+            );
         }
 
         [Fact]
         public void Duplicate()
         {
             var text =
-@"
+                @"
 delegate void D(int x);
 delegate void D(float y);
 ";
@@ -97,7 +111,7 @@ delegate void D(float y);
         public void MetadataDelegateField()
         {
             var text =
-@"
+                @"
 class A {
     public System.Func<int> Field;
 }
@@ -120,8 +134,7 @@ class A {
         [Fact]
         public void SimpleDelegate()
         {
-            var text =
-@"delegate void MyDel(int n);";
+            var text = @"delegate void MyDel(int n);";
 
             var comp = CreateCompilation(text);
             var v = comp.GlobalNamespace.GetTypeMembers("MyDel", 0).Single();
@@ -143,7 +156,8 @@ class A {
         [Fact]
         public void BeginInvokeEndInvoke()
         {
-            var text = @"
+            var text =
+                @"
 delegate int MyDel(int x, ref int y, out int z);
 namespace System
 {
@@ -169,7 +183,10 @@ namespace System
             var lastParameterType = beginInvoke.Parameters[invoke.Parameters.Length].Type;
             Assert.Equal("System.AsyncCallback", lastParameterType.ToTestDisplayString());
             Assert.Equal(SpecialType.System_AsyncCallback, lastParameterType.SpecialType);
-            Assert.Equal("System.Object", beginInvoke.Parameters[invoke.Parameters.Length + 1].Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Object",
+                beginInvoke.Parameters[invoke.Parameters.Length + 1].Type.ToTestDisplayString()
+            );
 
             var endInvoke = myDel.GetMembers("EndInvoke").Single() as MethodSymbol;
             Assert.Equal(invoke.ReturnType, endInvoke.ReturnType);
@@ -193,13 +210,14 @@ namespace System
         public void GenericDelegate()
         {
             var text =
-@"namespace NS
+                @"namespace NS
 {
     internal delegate void D<Q>(Q q);
 }";
 
             var comp = CreateCompilation(text);
-            var namespaceNS = comp.GlobalNamespace.GetMembers("NS").First() as NamespaceOrTypeSymbol;
+            var namespaceNS =
+                comp.GlobalNamespace.GetMembers("NS").First() as NamespaceOrTypeSymbol;
             Assert.Equal(1, namespaceNS.GetTypeMembers().Length);
 
             var d = namespaceNS.GetTypeMembers("D").First();
@@ -221,11 +239,13 @@ namespace System
         [Fact]
         public void DelegateEscapedIdentifier()
         {
-            var text = @"
+            var text =
+                @"
 delegate void @out();
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol dout = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("out").Single();
+            NamedTypeSymbol dout = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("out").Single();
             Assert.Equal("out", dout.Name);
             Assert.Equal("@out", dout.ToString());
         }
@@ -233,7 +253,8 @@ delegate void @out();
         [Fact]
         public void DelegatesEverywhere()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 delegate int Intf(int x);
 class C
@@ -259,7 +280,8 @@ class C
         [Fact]
         public void DelegateCreation()
         {
-            var text = @"
+            var text =
+                @"
 namespace CSSample
 {
     class Program
@@ -297,17 +319,21 @@ namespace CSSample
     }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (17,19): warning CS0169: The field 'CSSample.Program.d3' is never used
-                //         static D3 d3;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "d3").WithArguments("CSSample.Program.d3"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (17,19): warning CS0169: The field 'CSSample.Program.d3' is never used
+                    //         static D3 d3;
+                    Diagnostic(ErrorCode.WRN_UnreferencedField, "d3")
+                        .WithArguments("CSSample.Program.d3")
+                );
         }
 
         [WorkItem(538722, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538722")]
         [Fact]
         public void MulticastIsNotDelegate()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class Program
 {
@@ -318,9 +344,12 @@ class Program
 }
 ";
 
-            CreateCompilation(text, parseOptions: TestOptions.Regular9).VerifyDiagnostics(
-                // (7,27): error CS0428: Cannot convert method group 'Main' to non-delegate type 'System.MulticastDelegate'. Did you intend to invoke the method?
-                Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "Main").WithArguments("Main", "System.MulticastDelegate"));
+            CreateCompilation(text, parseOptions: TestOptions.Regular9)
+                .VerifyDiagnostics(
+                    // (7,27): error CS0428: Cannot convert method group 'Main' to non-delegate type 'System.MulticastDelegate'. Did you intend to invoke the method?
+                    Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "Main")
+                        .WithArguments("Main", "System.MulticastDelegate")
+                );
 
             CreateCompilation(text).VerifyDiagnostics();
         }
@@ -329,13 +358,15 @@ class Program
         [Fact]
         public void DelegateMethodParameterNames()
         {
-            var text = @"
+            var text =
+                @"
 delegate int D(int x, ref int y, out int z);
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -365,7 +396,8 @@ delegate int D(int x, ref int y, out int z);
         [Fact]
         public void DelegateWithTypeParameterNamedInvoke()
         {
-            var text = @"
+            var text =
+                @"
 delegate void F<Invoke>(Invoke i);
  
 class Goo 
@@ -383,13 +415,15 @@ class Goo
         [Fact]
         public void DelegateWithOutParameterNamedResult()
         {
-            var text = @"
+            var text =
+                @"
 delegate void D(out int result);
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -414,13 +448,15 @@ delegate void D(out int result);
         [Fact]
         public void DelegateWithOutParameterNamedResult2()
         {
-            var text = @"
+            var text =
+                @"
 delegate void D(out int @__result);
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -445,13 +481,15 @@ delegate void D(out int @__result);
         [Fact]
         public void DelegateWithOutParameterNamedResult3()
         {
-            var text = @"
+            var text =
+                @"
 delegate void D(out int result, out int @__result);
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -479,13 +517,15 @@ delegate void D(out int result, out int @__result);
         [Fact]
         public void DelegateWithParametersNamedCallbackAndObject()
         {
-            var text = @"
+            var text =
+                @"
 delegate void D(int callback, int @object);
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            NamedTypeSymbol d = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
+            NamedTypeSymbol d = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("D").Single();
 
             MethodSymbol invoke = d.DelegateInvokeMethod;
             ImmutableArray<ParameterSymbol> invokeParameters = invoke.Parameters;
@@ -510,7 +550,8 @@ delegate void D(int callback, int @object);
         [Fact]
         public void DelegateConversion()
         {
-            var text = @"
+            var text =
+                @"
 public class A { }
 public class B { }
 public class C<T> { }
@@ -595,98 +636,156 @@ public class DelegateTest
     public static void RunG<T>(T t) { }
 }
 ";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (44,14): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Da'
-                //         da = new Da(FTT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Da(FTT)").WithArguments("FTT", "DelegateTest.Da").WithLocation(44, 14),
-                // (45,21): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         da = new Da(FCT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT").WithArguments("DelegateTest.FCT<T>(C<T>)").WithLocation(45, 21),
-                // (46,21): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         da = new Da(PT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT").WithArguments("DelegateTest.PT<T>(params T[])").WithLocation(46, 21),
-                // (48,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Daa'
-                //         daa = new Daa(FT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FT)").WithArguments("FT", "DelegateTest.Daa").WithLocation(48, 15),
-                // (49,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Daa'
-                //         daa = new Daa(FTi);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FTi)").WithArguments("FTi", "DelegateTest.Daa").WithLocation(49, 15),
-                // (50,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Daa'
-                //         daa = new Daa(PTT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(PTT)").WithArguments("PTT", "DelegateTest.Daa").WithLocation(50, 15),
-                // (51,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         daa = new Daa(PST);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST").WithArguments("DelegateTest.PST<S, T>(S, params T[])").WithLocation(51, 23),
-                // (53,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dai'
-                //         dai = new Dai(FT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(FT)").WithArguments("FT", "DelegateTest.Dai").WithLocation(53, 15),
-                // (54,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dai = new Dai(FTT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT").WithArguments("DelegateTest.FTT<T>(T, T)").WithLocation(54, 23),
-                // (55,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dai'
-                //         dai = new Dai(PTT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(PTT)").WithArguments("PTT", "DelegateTest.Dai").WithLocation(55, 15),
-                // (56,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dai = new Dai(PST);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST").WithArguments("DelegateTest.PST<S, T>(S, params T[])").WithLocation(56, 23),
-                // (58,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dab'
-                //         dab = new Dab(FT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FT)").WithArguments("FT", "DelegateTest.Dab").WithLocation(58, 15),
-                // (59,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dab = new Dab(FTT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT").WithArguments("DelegateTest.FTT<T>(T, T)").WithLocation(59, 23),
-                // (60,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Dab'
-                //         dab = new Dab(FTi);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FTi)").WithArguments("FTi", "DelegateTest.Dab").WithLocation(60, 15),
-                // (61,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dab'
-                //         dab = new Dab(PTT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(PTT)").WithArguments("PTT", "DelegateTest.Dab").WithLocation(61, 15),
-                // (62,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dab = new Dab(PST);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST").WithArguments("DelegateTest.PST<S, T>(S, params T[])").WithLocation(62, 23),
-                // (64,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dpa'
-                //         dpa = new Dpa(FTT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpa(FTT)").WithArguments("FTT", "DelegateTest.Dpa").WithLocation(64, 15),
-                // (65,23): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dpa = new Dpa(FCT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT").WithArguments("DelegateTest.FCT<T>(C<T>)").WithLocation(65, 23),
-                // (67,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapa'
-                //         dapa = new Dapa(FT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapa(FT)").WithArguments("FT", "DelegateTest.Dapa").WithLocation(67, 16),
-                // (68,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dapa = new Dapa(FTT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT").WithArguments("DelegateTest.FTT<T>(T, T)").WithLocation(68, 25),
-                // (70,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapb'
-                //         dapb = new Dapb(FT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapb(FT)").WithArguments("FT", "DelegateTest.Dapb").WithLocation(70, 16),
-                // (71,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dapb = new Dapb(FTT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT").WithArguments("DelegateTest.FTT<T>(T, T)").WithLocation(71, 25),
-                // (72,25): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dapb = new Dapb(PTT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT").WithArguments("DelegateTest.PTT<T>(T, params T[])").WithLocation(72, 25),
-                // (74,17): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dpapa'
-                //         dpapa = new Dpapa(FT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpapa(FT)").WithArguments("FT", "DelegateTest.Dpapa").WithLocation(74, 17),
-                // (75,27): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dpapa = new Dpapa(PTT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT").WithArguments("DelegateTest.PTT<T>(T, params T[])").WithLocation(75, 27),
-                // (77,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dca'
-                //         dca = new Dca(FTT);
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dca(FTT)").WithArguments("FTT", "DelegateTest.Dca").WithLocation(77, 15),
-                // (78,23): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         dca = new Dca(PT);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT").WithArguments("DelegateTest.PT<T>(params T[])").WithLocation(78, 23),
-                // (80,9): error CS0411: The type arguments for method 'DelegateTest.RunG<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         RunG(null);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "RunG").WithArguments("DelegateTest.RunG<T>(T)").WithLocation(80, 9));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (44,14): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Da'
+                    //         da = new Da(FTT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Da(FTT)")
+                        .WithArguments("FTT", "DelegateTest.Da")
+                        .WithLocation(44, 14),
+                    // (45,21): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         da = new Da(FCT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT")
+                        .WithArguments("DelegateTest.FCT<T>(C<T>)")
+                        .WithLocation(45, 21),
+                    // (46,21): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         da = new Da(PT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT")
+                        .WithArguments("DelegateTest.PT<T>(params T[])")
+                        .WithLocation(46, 21),
+                    // (48,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Daa'
+                    //         daa = new Daa(FT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FT)")
+                        .WithArguments("FT", "DelegateTest.Daa")
+                        .WithLocation(48, 15),
+                    // (49,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Daa'
+                    //         daa = new Daa(FTi);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(FTi)")
+                        .WithArguments("FTi", "DelegateTest.Daa")
+                        .WithLocation(49, 15),
+                    // (50,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Daa'
+                    //         daa = new Daa(PTT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Daa(PTT)")
+                        .WithArguments("PTT", "DelegateTest.Daa")
+                        .WithLocation(50, 15),
+                    // (51,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         daa = new Daa(PST);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
+                        .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
+                        .WithLocation(51, 23),
+                    // (53,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dai'
+                    //         dai = new Dai(FT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(FT)")
+                        .WithArguments("FT", "DelegateTest.Dai")
+                        .WithLocation(53, 15),
+                    // (54,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dai = new Dai(FTT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                        .WithArguments("DelegateTest.FTT<T>(T, T)")
+                        .WithLocation(54, 23),
+                    // (55,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dai'
+                    //         dai = new Dai(PTT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dai(PTT)")
+                        .WithArguments("PTT", "DelegateTest.Dai")
+                        .WithLocation(55, 15),
+                    // (56,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dai = new Dai(PST);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
+                        .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
+                        .WithLocation(56, 23),
+                    // (58,15): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dab'
+                    //         dab = new Dab(FT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FT)")
+                        .WithArguments("FT", "DelegateTest.Dab")
+                        .WithLocation(58, 15),
+                    // (59,23): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dab = new Dab(FTT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                        .WithArguments("DelegateTest.FTT<T>(T, T)")
+                        .WithLocation(59, 23),
+                    // (60,15): error CS0123: No overload for 'FTi' matches delegate 'DelegateTest.Dab'
+                    //         dab = new Dab(FTi);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(FTi)")
+                        .WithArguments("FTi", "DelegateTest.Dab")
+                        .WithLocation(60, 15),
+                    // (61,15): error CS0123: No overload for 'PTT' matches delegate 'DelegateTest.Dab'
+                    //         dab = new Dab(PTT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dab(PTT)")
+                        .WithArguments("PTT", "DelegateTest.Dab")
+                        .WithLocation(61, 15),
+                    // (62,23): error CS0411: The type arguments for method 'DelegateTest.PST<S, T>(S, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dab = new Dab(PST);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PST")
+                        .WithArguments("DelegateTest.PST<S, T>(S, params T[])")
+                        .WithLocation(62, 23),
+                    // (64,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dpa'
+                    //         dpa = new Dpa(FTT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpa(FTT)")
+                        .WithArguments("FTT", "DelegateTest.Dpa")
+                        .WithLocation(64, 15),
+                    // (65,23): error CS0411: The type arguments for method 'DelegateTest.FCT<T>(C<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dpa = new Dpa(FCT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FCT")
+                        .WithArguments("DelegateTest.FCT<T>(C<T>)")
+                        .WithLocation(65, 23),
+                    // (67,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapa'
+                    //         dapa = new Dapa(FT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapa(FT)")
+                        .WithArguments("FT", "DelegateTest.Dapa")
+                        .WithLocation(67, 16),
+                    // (68,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dapa = new Dapa(FTT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                        .WithArguments("DelegateTest.FTT<T>(T, T)")
+                        .WithLocation(68, 25),
+                    // (70,16): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dapb'
+                    //         dapb = new Dapb(FT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dapb(FT)")
+                        .WithArguments("FT", "DelegateTest.Dapb")
+                        .WithLocation(70, 16),
+                    // (71,25): error CS0411: The type arguments for method 'DelegateTest.FTT<T>(T, T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dapb = new Dapb(FTT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FTT")
+                        .WithArguments("DelegateTest.FTT<T>(T, T)")
+                        .WithLocation(71, 25),
+                    // (72,25): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dapb = new Dapb(PTT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT")
+                        .WithArguments("DelegateTest.PTT<T>(T, params T[])")
+                        .WithLocation(72, 25),
+                    // (74,17): error CS0123: No overload for 'FT' matches delegate 'DelegateTest.Dpapa'
+                    //         dpapa = new Dpapa(FT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dpapa(FT)")
+                        .WithArguments("FT", "DelegateTest.Dpapa")
+                        .WithLocation(74, 17),
+                    // (75,27): error CS0411: The type arguments for method 'DelegateTest.PTT<T>(T, params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dpapa = new Dpapa(PTT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PTT")
+                        .WithArguments("DelegateTest.PTT<T>(T, params T[])")
+                        .WithLocation(75, 27),
+                    // (77,15): error CS0123: No overload for 'FTT' matches delegate 'DelegateTest.Dca'
+                    //         dca = new Dca(FTT);
+                    Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Dca(FTT)")
+                        .WithArguments("FTT", "DelegateTest.Dca")
+                        .WithLocation(77, 15),
+                    // (78,23): error CS0411: The type arguments for method 'DelegateTest.PT<T>(params T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         dca = new Dca(PT);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "PT")
+                        .WithArguments("DelegateTest.PT<T>(params T[])")
+                        .WithLocation(78, 23),
+                    // (80,9): error CS0411: The type arguments for method 'DelegateTest.RunG<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         RunG(null);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "RunG")
+                        .WithArguments("DelegateTest.RunG<T>(T)")
+                        .WithLocation(80, 9)
+                );
         }
 
         [Fact]
         public void CastFromMulticastDelegate()
         {
             var source =
-@"using System;
+                @"using System;
 
 delegate void D();
 class Program
@@ -706,25 +805,27 @@ class Program
         public void DelegateTest634014()
         {
             var source =
-@"delegate void D(ref int x);
+                @"delegate void D(ref int x);
 class C
 {
     D d = async delegate { };
 }";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (4,17): error CS1988: Async methods cannot have ref, in or out parameters
-                //     D d = async delegate { };
-                Diagnostic(ErrorCode.ERR_BadAsyncArgType, "delegate").WithLocation(4, 17),
-                // (4,17): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-                //     D d = async delegate { };
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "delegate").WithLocation(4, 17));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (4,17): error CS1988: Async methods cannot have ref, in or out parameters
+                    //     D d = async delegate { };
+                    Diagnostic(ErrorCode.ERR_BadAsyncArgType, "delegate").WithLocation(4, 17),
+                    // (4,17): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    //     D d = async delegate { };
+                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "delegate").WithLocation(4, 17)
+                );
         }
 
         [Fact]
         public void AnonymousMethodWithRefParameter()
         {
             var source =
-@"delegate void D(ref int x);
+                @"delegate void D(ref int x);
 class C
 {
     D d = delegate { };
@@ -735,7 +836,9 @@ class C
             var root = syntaxTree.GetRoot();
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var anonymousMethod = root.DescendantNodes().OfType<AnonymousMethodExpressionSyntax>().Single();
+            var anonymousMethod = root.DescendantNodes()
+                .OfType<AnonymousMethodExpressionSyntax>()
+                .Single();
 
             Assert.Equal("delegate { }", anonymousMethod.ToString());
             var parameter = model.GetSymbolInfo(anonymousMethod).Symbol.GetParameters()[0];
@@ -747,7 +850,7 @@ class C
         public void AnonymousMethodWithOutParameter()
         {
             var source =
-@"delegate void D(out int x);
+                @"delegate void D(out int x);
 class C
 {
     D d = delegate { };
@@ -756,13 +859,18 @@ class C
             comp.VerifyDiagnostics(
                 // (4,11): error CS1688: Cannot convert anonymous method block without a parameter list to delegate type 'D' because it has one or more out parameters
                 //     D d = delegate { };
-                Diagnostic(ErrorCode.ERR_CantConvAnonMethNoParams, "delegate").WithArguments("D").WithLocation(4, 11));
+                Diagnostic(ErrorCode.ERR_CantConvAnonMethNoParams, "delegate")
+                    .WithArguments("D")
+                    .WithLocation(4, 11)
+            );
 
             var syntaxTree = comp.SyntaxTrees.Single();
             var root = syntaxTree.GetRoot();
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var anonymousMethod = root.DescendantNodes().OfType<AnonymousMethodExpressionSyntax>().Single();
+            var anonymousMethod = root.DescendantNodes()
+                .OfType<AnonymousMethodExpressionSyntax>()
+                .Single();
 
             Assert.Equal("delegate { }", anonymousMethod.ToString());
             Assert.Empty(model.GetSymbolInfo(anonymousMethod).Symbol.GetParameters());
@@ -798,7 +906,10 @@ class C
             Assert.False(d.DelegateInvokeMethod.ReturnsByRef);
             Assert.True(d.DelegateInvokeMethod.ReturnsByRefReadonly);
             Assert.Equal(RefKind.RefReadOnly, d.DelegateInvokeMethod.RefKind);
-            Assert.Equal(RefKind.RefReadOnly, ((MethodSymbol)d.GetMembers("EndInvoke").Single()).RefKind);
+            Assert.Equal(
+                RefKind.RefReadOnly,
+                ((MethodSymbol)d.GetMembers("EndInvoke").Single()).RefKind
+            );
 
             Assert.Equal(RefKind.In, d.DelegateInvokeMethod.Parameters[0].RefKind);
         }
@@ -807,7 +918,8 @@ class C
         [CompilerTrait(CompilerFeature.ReadOnlyReferences)]
         public void RefReadonlysInlambda()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public delegate ref readonly T DD<T>(in T arg);
@@ -820,18 +932,25 @@ class C
     }
 }";
             var tree = SyntaxFactory.ParseSyntaxTree(source, options: TestOptions.Regular);
-            var compilation = CreateCompilationWithMscorlib45(new SyntaxTree[] { tree }).VerifyDiagnostics();
+            var compilation = CreateCompilationWithMscorlib45(new SyntaxTree[] { tree })
+                .VerifyDiagnostics();
 
             var model = compilation.GetSemanticModel(tree);
 
-            ExpressionSyntax lambdaSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ParenthesizedLambdaExpressionSyntax>().Single();
+            ExpressionSyntax lambdaSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ParenthesizedLambdaExpressionSyntax>()
+                .Single();
             var lambda = (IMethodSymbol)model.GetSymbolInfo(lambdaSyntax).Symbol;
 
             Assert.False(lambda.ReturnsByRef);
             Assert.True(lambda.ReturnsByRefReadonly);
             Assert.Equal(RefKind.In, lambda.Parameters[0].RefKind);
 
-            lambdaSyntax = tree.GetCompilationUnitRoot().DescendantNodes().OfType<AnonymousMethodExpressionSyntax>().Single();
+            lambdaSyntax = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<AnonymousMethodExpressionSyntax>()
+                .Single();
             lambda = (IMethodSymbol)model.GetSymbolInfo(lambdaSyntax).Symbol;
 
             Assert.False(lambda.ReturnsByRef);
@@ -842,31 +961,37 @@ class C
         [Fact]
         public void PartialPublicDelegate()
         {
-            CreateCompilation("partial public delegate void M();").VerifyDiagnostics(
-                // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // partial public delegate void M();
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
-                // (1,30): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // partial public delegate void M();
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "M").WithLocation(1, 30));
+            CreateCompilation("partial public delegate void M();")
+                .VerifyDiagnostics(
+                    // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // partial public delegate void M();
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
+                    // (1,30): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // partial public delegate void M();
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "M").WithLocation(1, 30)
+                );
         }
 
         [Fact]
         public void PublicPartialDelegate()
         {
-            CreateCompilation("public partial delegate void M();").VerifyDiagnostics(
-                // (1,30): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // public partial delegate void M();
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "M").WithLocation(1, 30));
+            CreateCompilation("public partial delegate void M();")
+                .VerifyDiagnostics(
+                    // (1,30): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // public partial delegate void M();
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "M").WithLocation(1, 30)
+                );
         }
 
         [Fact]
         public void PartialDelegate()
         {
-            CreateCompilation("public partial delegate void M();").VerifyDiagnostics(
-                // (1,30): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
-                // public partial delegate void M();
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "M").WithLocation(1, 30));
+            CreateCompilation("public partial delegate void M();")
+                .VerifyDiagnostics(
+                    // (1,30): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // public partial delegate void M();
+                    Diagnostic(ErrorCode.ERR_PartialMisplaced, "M").WithLocation(1, 30)
+                );
         }
     }
 }

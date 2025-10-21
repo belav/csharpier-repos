@@ -4,38 +4,32 @@
 namespace System.Xml
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
     using System.Diagnostics;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
 
 #if NO
     public class XmlDelegatedWriter : XmlDictionaryWriter
     {
         XmlDictionaryWriter writer;
 
-        protected XmlDelegatedWriter()
-        {
-        }
+        protected XmlDelegatedWriter() { }
 
         public XmlDelegatedWriter(XmlDictionaryWriter writer)
         {
             if (writer == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
 
             this.writer = writer;
         }
 
         protected XmlDictionaryWriter Writer
         {
-            get
-            {
-                return writer;
-            }
-            set
-            {
-                this.writer = value;
-            }
+            get { return writer; }
+            set { this.writer = value; }
         }
 
         public override void Close()
@@ -175,10 +169,7 @@ namespace System.Xml
 
         public override WriteState WriteState
         {
-            get
-            {
-                return writer.WriteState;
-            }
+            get { return writer.WriteState; }
         }
 
         public override void WriteString(string text)
@@ -248,40 +239,25 @@ namespace System.Xml
 
         public override string XmlLang
         {
-            get
-            {
-                return writer.XmlLang;
-            }
+            get { return writer.XmlLang; }
         }
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return writer.XmlSpace;
-            }
+            get { return writer.XmlSpace; }
         }
-        
+
         public override bool CanSubsetElements
         {
-            get
-            {
-                return writer.CanSubsetElements;
-            }
+            get { return writer.CanSubsetElements; }
         }
 
         public override bool SubsetElements
         {
-            get
-            {
-                return writer.SubsetElements;
-            }
-            set
-            {
-                writer.SubsetElements = value;
-            }
+            get { return writer.SubsetElements; }
+            set { writer.SubsetElements = value; }
         }
-        
+
         public override void WriteElementSubset(byte[] buffer, int offset, int count)
         {
             writer.WriteElementSubset(buffer, offset, count);

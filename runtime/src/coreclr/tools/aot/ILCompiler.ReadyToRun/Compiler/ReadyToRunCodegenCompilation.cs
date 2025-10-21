@@ -9,16 +9,14 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
-
+using ILCompiler.DependencyAnalysis;
+using ILCompiler.DependencyAnalysis.ReadyToRun;
+using ILCompiler.DependencyAnalysisFramework;
 using Internal.IL;
 using Internal.IL.Stubs;
 using Internal.JitInterface;
 using Internal.ReadyToRunConstants;
 using Internal.TypeSystem;
-
-using ILCompiler.DependencyAnalysis;
-using ILCompiler.DependencyAnalysis.ReadyToRun;
-using ILCompiler.DependencyAnalysisFramework;
 using Internal.TypeSystem.Ecma;
 
 namespace ILCompiler
@@ -31,7 +29,6 @@ namespace ILCompiler
         private readonly DevirtualizationManager _devirtualizationManager;
         protected ILCache _methodILCache;
         private readonly HashSet<ModuleDesc> _modulesBeingInstrumented;
-
 
         public NameMangler NameMangler => _nodeFactory.NameMangler;
         public NodeFactory NodeFactory => _nodeFactory;
@@ -48,7 +45,8 @@ namespace ILCompiler
             DevirtualizationManager devirtualizationManager,
             IEnumerable<ModuleDesc> modulesBeingInstrumented,
             Logger logger,
-            InstructionSetSupport instructionSetSupport)
+            InstructionSetSupport instructionSetSupport
+        )
         {
             InstructionSetSupport = instructionSetSupport;
             _dependencyGraph = dependencyGraph;
@@ -60,19 +58,23 @@ namespace ILCompiler
             _dependencyGraph.ComputeDependencyRoutine += ComputeDependencyNodeDependencies;
             NodeFactory.AttachToDependencyGraph(_dependencyGraph, ilProvider);
 
-
             var rootingService = new RootingServiceProvider(nodeFactory, _dependencyGraph.AddRoot);
             foreach (var rootProvider in compilationRoots)
                 rootProvider.AddCompilationRoots(rootingService);
 
-            _methodILCache = new ILCache((ReadyToRunILProvider)ilProvider, NodeFactory.CompilationModuleGroup);
+            _methodILCache = new ILCache(
+                (ReadyToRunILProvider)ilProvider,
+                NodeFactory.CompilationModuleGroup
+            );
         }
 
         public abstract void Dispose();
         public abstract void Compile(string outputFileName);
         public abstract void WriteDependencyLog(string outputFileName);
 
-        protected abstract void ComputeDependencyNodeDependencies(List<DependencyNodeCore<NodeFactory>> obj);
+        protected abstract void ComputeDependencyNodeDependencies(
+            List<DependencyNodeCore<NodeFactory>> obj
+        );
 
         public bool CanInline(MethodDesc caller, MethodDesc callee)
         {
@@ -99,7 +101,8 @@ namespace ILCompiler
             // disallow inlining because getFunctionEntryPoint will do the right thing.
             if (callee.IsVirtual)
             {
-                MethodDesc calleeMethodImpl = callee.OwningType.FindVirtualFunctionTargetMethodOnObjectType(callee);
+                MethodDesc calleeMethodImpl =
+                    callee.OwningType.FindVirtualFunctionTargetMethodOnObjectType(callee);
                 if (calleeMethodImpl != callee)
                 {
                     return false;
@@ -126,7 +129,11 @@ namespace ILCompiler
             return _devirtualizationManager.IsEffectivelySealed(method);
         }
 
-        public MethodDesc ResolveVirtualMethod(MethodDesc declMethod, TypeDesc implType, out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail)
+        public MethodDesc ResolveVirtualMethod(
+            MethodDesc declMethod,
+            TypeDesc implType,
+            out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail
+        )
         {
             if (declMethod.OwningType.IsInterface)
             {
@@ -162,13 +169,18 @@ namespace ILCompiler
 
                     if (!foundExactMatch || foundEquivalentMatch)
                     {
-                        devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_TYPE_EQUIVALENCE;
+                        devirtualizationDetail =
+                            CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_TYPE_EQUIVALENCE;
                         return null;
                     }
                 }
             }
 
-            return _devirtualizationManager.ResolveVirtualMethod(declMethod, implType, out devirtualizationDetail);
+            return _devirtualizationManager.ResolveVirtualMethod(
+                declMethod,
+                implType,
+                out devirtualizationDetail
+            );
         }
 
         public bool IsModuleInstrumented(ModuleDesc module)
@@ -182,7 +194,10 @@ namespace ILCompiler
             public int ExpectedILProviderVersion { get; }
             private readonly CompilationModuleGroup _compilationModuleGroup;
 
-            public ILCache(ReadyToRunILProvider provider, CompilationModuleGroup compilationModuleGroup)
+            public ILCache(
+                ReadyToRunILProvider provider,
+                CompilationModuleGroup compilationModuleGroup
+            )
             {
                 ILProvider = provider;
                 ExpectedILProviderVersion = provider.Version;
@@ -193,24 +208,30 @@ namespace ILCompiler
             {
                 return key.GetHashCode();
             }
+
             protected override int GetValueHashCode(MethodILData value)
             {
                 return value.Method.GetHashCode();
             }
+
             protected override bool CompareKeyToValue(MethodDesc key, MethodILData value)
             {
                 return Object.ReferenceEquals(key, value.Method);
             }
+
             protected override bool CompareValueToValue(MethodILData value1, MethodILData value2)
             {
                 return Object.ReferenceEquals(value1.Method, value2.Method);
             }
+
             protected override MethodILData CreateValueFromKey(MethodDesc key)
             {
                 MethodIL methodIL = ILProvider.GetMethodIL(key);
-                if (methodIL == null
+                if (
+                    methodIL == null
                     && key.IsPInvoke
-                    && _compilationModuleGroup.GeneratesPInvoke(key))
+                    && _compilationModuleGroup.GeneratesPInvoke(key)
+                )
                 {
                     methodIL = PInvokeILEmitter.EmitIL(key);
                 }
@@ -231,7 +252,9 @@ namespace ILCompiler
         {
             private readonly NodeFactory _factory;
             private readonly RootAdder _rootAdder;
-            private readonly DeferredTillPhaseNode _deferredPhaseNode = new DeferredTillPhaseNode(1);
+            private readonly DeferredTillPhaseNode _deferredPhaseNode = new DeferredTillPhaseNode(
+                1
+            );
 
             public RootingServiceProvider(NodeFactory factory, RootAdder rootAdder)
             {
@@ -240,7 +263,11 @@ namespace ILCompiler
                 _rootAdder(_deferredPhaseNode, "Deferred nodes");
             }
 
-            public void AddCompilationRoot(MethodDesc method, bool rootMinimalDependencies, string reason)
+            public void AddCompilationRoot(
+                MethodDesc method,
+                bool rootMinimalDependencies,
+                string reason
+            )
             {
                 MethodDesc canonMethod = method.GetCanonMethodTarget(CanonicalFormKind.Specific);
                 if (_factory.CompilationModuleGroup.ContainsMethodBody(canonMethod, false))
@@ -249,7 +276,9 @@ namespace ILCompiler
 
                     if (rootMinimalDependencies)
                     {
-                        _deferredPhaseNode.AddDependency((DependencyNodeCore<NodeFactory>)methodEntryPoint);
+                        _deferredPhaseNode.AddDependency(
+                            (DependencyNodeCore<NodeFactory>)methodEntryPoint
+                        );
                     }
                     else
                     {
@@ -293,8 +322,10 @@ namespace ILCompiler
 
         private readonly ProfileDataManager _profileData;
         private readonly ReadyToRunFileLayoutOptimizer _fileLayoutOptimizer;
-        private readonly HashSet<EcmaMethod> _methodsWhichNeedMutableILBodies = new HashSet<EcmaMethod>();
-        private readonly HashSet<MethodWithGCInfo> _methodsToRecompile = new HashSet<MethodWithGCInfo>();
+        private readonly HashSet<EcmaMethod> _methodsWhichNeedMutableILBodies =
+            new HashSet<EcmaMethod>();
+        private readonly HashSet<MethodWithGCInfo> _methodsToRecompile =
+            new HashSet<MethodWithGCInfo>();
 
         public ProfileDataManager ProfileData => _profileData;
 
@@ -303,11 +334,13 @@ namespace ILCompiler
         public ReadyToRunSymbolNodeFactory SymbolNodeFactory { get; }
         public ReadyToRunCompilationModuleGroupBase CompilationModuleGroup { get; }
         private readonly int _customPESectionAlignment;
+
         /// <summary>
         /// Determining whether a type's layout is fixed is a little expensive and the question can be asked many times
         /// for the same type during compilation so preserve the computed value.
         /// </summary>
-        private ConcurrentDictionary<TypeDesc, bool> _computedFixedLayoutTypes = new ConcurrentDictionary<TypeDesc, bool>();
+        private ConcurrentDictionary<TypeDesc, bool> _computedFixedLayoutTypes =
+            new ConcurrentDictionary<TypeDesc, bool>();
         private Func<TypeDesc, bool> _computedFixedLayoutTypesUncached;
 
         internal ReadyToRunCodegenCompilation(
@@ -335,16 +368,18 @@ namespace ILCompiler
             ReadyToRunMethodLayoutAlgorithm methodLayoutAlgorithm,
             ReadyToRunFileLayoutAlgorithm fileLayoutAlgorithm,
             int customPESectionAlignment,
-            bool verifyTypeAndFieldLayout)
+            bool verifyTypeAndFieldLayout
+        )
             : base(
-                  dependencyGraph,
-                  nodeFactory,
-                  roots,
-                  ilProvider,
-                  devirtualizationManager,
-                  modulesBeingInstrumented: nodeFactory.CompilationModuleGroup.CompilationModuleSet,
-                  logger,
-                  instructionSetSupport)
+                dependencyGraph,
+                nodeFactory,
+                roots,
+                ilProvider,
+                devirtualizationManager,
+                modulesBeingInstrumented: nodeFactory.CompilationModuleGroup.CompilationModuleSet,
+                logger,
+                instructionSetSupport
+            )
         {
             _computedFixedLayoutTypesUncached = IsLayoutFixedInCurrentVersionBubbleInternal;
             _resilient = resilient;
@@ -359,7 +394,10 @@ namespace ILCompiler
             _perfMapFormatVersion = perfMapFormatVersion;
             _generateProfileFile = generateProfileFile;
             _customPESectionAlignment = customPESectionAlignment;
-            SymbolNodeFactory = new ReadyToRunSymbolNodeFactory(nodeFactory, verifyTypeAndFieldLayout);
+            SymbolNodeFactory = new ReadyToRunSymbolNodeFactory(
+                nodeFactory,
+                verifyTypeAndFieldLayout
+            );
             if (nodeFactory.InstrumentationDataTable != null)
                 nodeFactory.InstrumentationDataTable.Initialize(SymbolNodeFactory);
             if (nodeFactory.CrossModuleInlningInfo != null)
@@ -367,20 +405,34 @@ namespace ILCompiler
             _inputFiles = inputFiles;
             _compositeRootPath = compositeRootPath;
             _printReproInstructions = printReproInstructions;
-            CompilationModuleGroup = (ReadyToRunCompilationModuleGroupBase)nodeFactory.CompilationModuleGroup;
+            CompilationModuleGroup = (ReadyToRunCompilationModuleGroupBase)
+                nodeFactory.CompilationModuleGroup;
 
             // Generate baseline support specification for InstructionSetSupport. This will prevent usage of the generated
             // code if the runtime environment doesn't support the specified instruction set
-            string instructionSetSupportString = ReadyToRunInstructionSetSupportSignature.ToInstructionSetSupportString(instructionSetSupport);
-            ReadyToRunInstructionSetSupportSignature instructionSetSupportSig = new ReadyToRunInstructionSetSupportSignature(instructionSetSupportString);
-            _dependencyGraph.AddRoot(new Import(NodeFactory.EagerImports, instructionSetSupportSig), "Baseline instruction set support");
+            string instructionSetSupportString =
+                ReadyToRunInstructionSetSupportSignature.ToInstructionSetSupportString(
+                    instructionSetSupport
+                );
+            ReadyToRunInstructionSetSupportSignature instructionSetSupportSig =
+                new ReadyToRunInstructionSetSupportSignature(instructionSetSupportString);
+            _dependencyGraph.AddRoot(
+                new Import(NodeFactory.EagerImports, instructionSetSupportSig),
+                "Baseline instruction set support"
+            );
 
             _profileData = profileData;
 
-            _fileLayoutOptimizer = new ReadyToRunFileLayoutOptimizer(logger, methodLayoutAlgorithm, fileLayoutAlgorithm, profileData, _nodeFactory);
+            _fileLayoutOptimizer = new ReadyToRunFileLayoutOptimizer(
+                logger,
+                methodLayoutAlgorithm,
+                fileLayoutAlgorithm,
+                profileData,
+                _nodeFactory
+            );
         }
 
-        private readonly static string s_folderUpPrefix = ".." + Path.DirectorySeparatorChar;
+        private static readonly string s_folderUpPrefix = ".." + Path.DirectorySeparatorChar;
 
         public override void Compile(string outputFile)
         {
@@ -412,7 +464,8 @@ namespace ILCompiler
                     perfMapFormatVersion: _perfMapFormatVersion,
                     generateProfileFile: _generateProfileFile,
                     callChainProfile: _profileData.CallChainProfile,
-                    _customPESectionAlignment);
+                    _customPESectionAlignment
+                );
                 CompilationModuleGroup moduleGroup = _nodeFactory.CompilationModuleGroup;
 
                 if (moduleGroup.IsCompositeBuildMode)
@@ -424,45 +477,78 @@ namespace ILCompiler
                     string ownerExecutableName = Path.GetFileName(outputFile);
                     foreach (string inputFile in _inputFiles)
                     {
-                        string relativeMsilPath = Path.GetRelativePath(_compositeRootPath, inputFile);
-                        if (relativeMsilPath == inputFile || relativeMsilPath.StartsWith(s_folderUpPrefix, StringComparison.Ordinal))
+                        string relativeMsilPath = Path.GetRelativePath(
+                            _compositeRootPath,
+                            inputFile
+                        );
+                        if (
+                            relativeMsilPath == inputFile
+                            || relativeMsilPath.StartsWith(
+                                s_folderUpPrefix,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             // Input file not under the composite root, emit to root output folder
                             relativeMsilPath = Path.GetFileName(inputFile);
                         }
-                        string standaloneMsilOutputFile = Path.Combine(outputDirectory, relativeMsilPath);
-                        RewriteComponentFile(inputFile: inputFile, outputFile: standaloneMsilOutputFile, ownerExecutableName: ownerExecutableName);
+                        string standaloneMsilOutputFile = Path.Combine(
+                            outputDirectory,
+                            relativeMsilPath
+                        );
+                        RewriteComponentFile(
+                            inputFile: inputFile,
+                            outputFile: standaloneMsilOutputFile,
+                            ownerExecutableName: ownerExecutableName
+                        );
                     }
                 }
             }
         }
 
-        private void RewriteComponentFile(string inputFile, string outputFile, string ownerExecutableName)
+        private void RewriteComponentFile(
+            string inputFile,
+            string outputFile,
+            string ownerExecutableName
+        )
         {
             EcmaModule inputModule = NodeFactory.TypeSystemContext.GetModuleFromPath(inputFile);
 
             Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
 
             ReadyToRunFlags flags =
-                ReadyToRunFlags.READYTORUN_FLAG_Component |
-                ReadyToRunFlags.READYTORUN_FLAG_NonSharedPInvokeStubs;
+                ReadyToRunFlags.READYTORUN_FLAG_Component
+                | ReadyToRunFlags.READYTORUN_FLAG_NonSharedPInvokeStubs;
 
             if (inputModule.IsPlatformNeutral)
             {
                 flags |= ReadyToRunFlags.READYTORUN_FLAG_PlatformNeutralSource;
             }
-            bool automaticTypeValidation = _nodeFactory.OptimizationFlags.TypeValidation == TypeValidationRule.Automatic || _nodeFactory.OptimizationFlags.TypeValidation == TypeValidationRule.AutomaticWithLogging;
-            if (_nodeFactory.OptimizationFlags.TypeValidation == TypeValidationRule.SkipTypeValidation)
+            bool automaticTypeValidation =
+                _nodeFactory.OptimizationFlags.TypeValidation == TypeValidationRule.Automatic
+                || _nodeFactory.OptimizationFlags.TypeValidation
+                    == TypeValidationRule.AutomaticWithLogging;
+            if (
+                _nodeFactory.OptimizationFlags.TypeValidation
+                == TypeValidationRule.SkipTypeValidation
+            )
             {
                 flags |= ReadyToRunFlags.READYTORUN_FLAG_SkipTypeValidation;
             }
 
-            flags |= _nodeFactory.CompilationModuleGroup.GetReadyToRunFlags() & ReadyToRunFlags.READYTORUN_FLAG_MultiModuleVersionBubble;
+            flags |=
+                _nodeFactory.CompilationModuleGroup.GetReadyToRunFlags()
+                & ReadyToRunFlags.READYTORUN_FLAG_MultiModuleVersionBubble;
 
             CopiedCorHeaderNode copiedCorHeader = new CopiedCorHeaderNode(inputModule);
             // Re-written components shouldn't have any additional diagnostic information - only information about the forwards.
             // Even with all of this, we might be modifying the image in a silly manner - adding a directory when if didn't have one.
-            DebugDirectoryNode debugDirectory = new DebugDirectoryNode(inputModule, outputFile, shouldAddNiPdb: false, shouldGeneratePerfmap: false);
+            DebugDirectoryNode debugDirectory = new DebugDirectoryNode(
+                inputModule,
+                outputFile,
+                shouldAddNiPdb: false,
+                shouldGeneratePerfmap: false
+            );
             NodeFactory componentFactory = new NodeFactory(
                 _nodeFactory.TypeSystemContext,
                 _nodeFactory.CompilationModuleGroup,
@@ -476,13 +562,20 @@ namespace ILCompiler
                 _nodeFactory.ImageBase,
                 automaticTypeValidation ? inputModule : null,
                 genericCycleDepthCutoff: -1, // We don't need generic cycle detection when rewriting component assemblies
-                genericCycleBreadthCutoff: -1); // as we're not actually compiling anything
+                genericCycleBreadthCutoff: -1
+            ); // as we're not actually compiling anything
 
-            IComparer<DependencyNodeCore<NodeFactory>> comparer = new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance);
-            DependencyAnalyzerBase<NodeFactory> componentGraph = new DependencyAnalyzer<NoLogStrategy<NodeFactory>, NodeFactory>(componentFactory, comparer);
+            IComparer<DependencyNodeCore<NodeFactory>> comparer =
+                new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance);
+            DependencyAnalyzerBase<NodeFactory> componentGraph = new DependencyAnalyzer<
+                NoLogStrategy<NodeFactory>,
+                NodeFactory
+            >(componentFactory, comparer);
 
             componentGraph.AddRoot(componentFactory.Header, "Component module R2R header");
-            OwnerCompositeExecutableNode ownerExecutableNode = new OwnerCompositeExecutableNode(ownerExecutableName);
+            OwnerCompositeExecutableNode ownerExecutableNode = new OwnerCompositeExecutableNode(
+                ownerExecutableName
+            );
             componentGraph.AddRoot(ownerExecutableNode, "Owner composite executable name");
             componentGraph.AddRoot(copiedCorHeader, "Copied COR header");
             componentGraph.AddRoot(debugDirectory, "Debug directory");
@@ -491,7 +584,11 @@ namespace ILCompiler
                 componentGraph.AddRoot(componentFactory.Win32ResourcesNode, "Win32 resources");
             }
             componentGraph.ComputeMarkedNodes();
-            componentFactory.Header.Add(Internal.Runtime.ReadyToRunSectionType.OwnerCompositeExecutable, ownerExecutableNode, ownerExecutableNode);
+            componentFactory.Header.Add(
+                Internal.Runtime.ReadyToRunSectionType.OwnerCompositeExecutable,
+                ownerExecutableNode,
+                ownerExecutableNode
+            );
             ReadyToRunObjectWriter.EmitObject(
                 outputFile,
                 componentModule: inputModule,
@@ -507,7 +604,8 @@ namespace ILCompiler
                 perfMapFormatVersion: _perfMapFormatVersion,
                 generateProfileFile: false,
                 _profileData.CallChainProfile,
-                customPESectionAlignment: 0);
+                customPESectionAlignment: 0
+            );
         }
 
         public override void WriteDependencyLog(string outputFileName)
@@ -588,7 +686,11 @@ namespace ILCompiler
             {
                 // If there are multiple inexact compilation units in the layout of the type, then the exact offset
                 // of a derived given field is unknown as there may or may not be alignment inserted between a type and its base
-                if (CompilationModuleGroup.TypeLayoutCompilationUnits(type).HasMultipleInexactCompilationUnits)
+                if (
+                    CompilationModuleGroup
+                        .TypeLayoutCompilationUnits(type)
+                        .HasMultipleInexactCompilationUnits
+                )
                     return false;
 
                 while (!type.IsObject && type != null)
@@ -611,7 +713,10 @@ namespace ILCompiler
         // The _finishedFirstCompilationRunInPhase2 variable works in concert some checking to ensure that we don't violate any of this model
         private bool _finishedFirstCompilationRunInPhase2 = false;
 
-        public void PrepareForCompilationRetry(MethodWithGCInfo methodToBeRecompiled, IEnumerable<EcmaMethod> methodsThatNeedILBodies)
+        public void PrepareForCompilationRetry(
+            MethodWithGCInfo methodToBeRecompiled,
+            IEnumerable<EcmaMethod> methodsThatNeedILBodies
+        )
         {
             lock (_methodsToRecompile)
             {
@@ -632,13 +737,14 @@ namespace ILCompiler
         private ManualResetEventSlim _compilationSessionComplete = new ManualResetEventSlim();
         private bool _hasCreatedCompilationThreads = false;
 
-        protected override void ComputeDependencyNodeDependencies(List<DependencyNodeCore<NodeFactory>> obj)
+        protected override void ComputeDependencyNodeDependencies(
+            List<DependencyNodeCore<NodeFactory>> obj
+        )
         {
             bool generatedColdCode = false;
 
             using (PerfEventSource.StartStopEvents.JitEvents())
             {
-
                 // Use only main thread to compile if parallelism is 1. This allows SuperPMI to rely on non-reuse of handles in ObjectToHandle
                 if (Logger.IsVerbose)
                     Logger.Writer.WriteLine($"Processing {obj.Count} dependencies");
@@ -646,7 +752,9 @@ namespace ILCompiler
                 // Ensure all methods being compiled have assigned tokens. This matters for code from modules from outside of the version bubble
                 // as those tokens are dynamically assigned, and for instantiation which depend on tokens outside of the module
                 var ilProvider = (ReadyToRunILProvider)_methodILCache.ILProvider;
-                obj.MergeSortAllowDuplicates(new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance));
+                obj.MergeSortAllowDuplicates(
+                    new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance)
+                );
                 foreach (var dependency in obj)
                 {
                     if (dependency is MethodWithGCInfo methodCodeNodeNeedingCode)
@@ -654,9 +762,14 @@ namespace ILCompiler
                         var method = methodCodeNodeNeedingCode.Method;
                         if (method.GetTypicalMethodDefinition() is EcmaMethod ecmaMethod)
                         {
-                            if (ilProvider.NeedsCrossModuleInlineableTokens(ecmaMethod) &&
-                                !_methodsWhichNeedMutableILBodies.Contains(ecmaMethod) &&
-                                CorInfoImpl.IsMethodCompilable(this, methodCodeNodeNeedingCode.Method))
+                            if (
+                                ilProvider.NeedsCrossModuleInlineableTokens(ecmaMethod)
+                                && !_methodsWhichNeedMutableILBodies.Contains(ecmaMethod)
+                                && CorInfoImpl.IsMethodCompilable(
+                                    this,
+                                    methodCodeNodeNeedingCode.Method
+                                )
+                            )
                                 _methodsWhichNeedMutableILBodies.Add(ecmaMethod);
                         }
                         if (!_nodeFactory.CompilationModuleGroup.VersionsWithMethodBody(method))
@@ -671,25 +784,56 @@ namespace ILCompiler
                             void EnsureTypeDefTokensAreReady(TypeDesc type)
                             {
                                 // Type represented by simple element type
-                                if (type.IsPrimitive || type.IsVoid || type.IsObject || type.IsString || type.IsTypedReference)
+                                if (
+                                    type.IsPrimitive
+                                    || type.IsVoid
+                                    || type.IsObject
+                                    || type.IsString
+                                    || type.IsTypedReference
+                                )
                                     return;
 
                                 if (type is EcmaType ecmaType)
                                 {
-                                    if (!_nodeFactory.Resolver.GetModuleTokenForType(ecmaType, allowDynamicallyCreatedReference: false, throwIfNotFound: false).IsNull)
+                                    if (
+                                        !_nodeFactory
+                                            .Resolver.GetModuleTokenForType(
+                                                ecmaType,
+                                                allowDynamicallyCreatedReference: false,
+                                                throwIfNotFound: false
+                                            )
+                                            .IsNull
+                                    )
                                         return;
                                     try
                                     {
-                                        Debug.Assert(_nodeFactory.CompilationModuleGroup.CrossModuleInlineableModule(ecmaType.Module));
-                                        _nodeFactory.ManifestMetadataTable._mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences
-                                            = ecmaType.Module;
-                                        if (!_nodeFactory.ManifestMetadataTable._mutableModule.TryGetEntityHandle(ecmaType).HasValue)
-                                            throw new InternalCompilerErrorException($"Unable to create token to {ecmaType}");
+                                        Debug.Assert(
+                                            _nodeFactory.CompilationModuleGroup.CrossModuleInlineableModule(
+                                                ecmaType.Module
+                                            )
+                                        );
+                                        _nodeFactory
+                                            .ManifestMetadataTable
+                                            ._mutableModule
+                                            .ModuleThatIsCurrentlyTheSourceOfNewReferences =
+                                            ecmaType.Module;
+                                        if (
+                                            !_nodeFactory
+                                                .ManifestMetadataTable._mutableModule.TryGetEntityHandle(
+                                                    ecmaType
+                                                )
+                                                .HasValue
+                                        )
+                                            throw new InternalCompilerErrorException(
+                                                $"Unable to create token to {ecmaType}"
+                                            );
                                     }
                                     finally
                                     {
-                                        _nodeFactory.ManifestMetadataTable._mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences
-                                            = null;
+                                        _nodeFactory
+                                            .ManifestMetadataTable
+                                            ._mutableModule
+                                            .ModuleThatIsCurrentlyTheSourceOfNewReferences = null;
                                     }
                                     return;
                                 }
@@ -720,13 +864,20 @@ namespace ILCompiler
                 {
                     ProcessMutableMethodBodiesList();
                     ResetILCache();
-                    MethodWithGCInfo[] methodsToRecompile = new MethodWithGCInfo[_methodsToRecompile.Count];
+                    MethodWithGCInfo[] methodsToRecompile = new MethodWithGCInfo[
+                        _methodsToRecompile.Count
+                    ];
                     _methodsToRecompile.CopyTo(methodsToRecompile);
                     _methodsToRecompile.Clear();
-                    Array.Sort(methodsToRecompile, new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance));
+                    Array.Sort(
+                        methodsToRecompile,
+                        new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance)
+                    );
 
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine($"Processing {methodsToRecompile.Length} recompiles");
+                        Logger.Writer.WriteLine(
+                            $"Processing {methodsToRecompile.Length} recompiles"
+                        );
 
                     CompileMethodList(methodsToRecompile);
                 }
@@ -746,11 +897,14 @@ namespace ILCompiler
 
             void ProcessMutableMethodBodiesList()
             {
-                EcmaMethod[] mutableMethodBodyNeedList = new EcmaMethod[_methodsWhichNeedMutableILBodies.Count];
+                EcmaMethod[] mutableMethodBodyNeedList = new EcmaMethod[
+                    _methodsWhichNeedMutableILBodies.Count
+                ];
                 _methodsWhichNeedMutableILBodies.CopyTo(mutableMethodBodyNeedList);
                 _methodsWhichNeedMutableILBodies.Clear();
                 TypeSystemComparer comparer = TypeSystemComparer.Instance;
-                Comparison<EcmaMethod> comparison = (EcmaMethod a, EcmaMethod b) => comparer.Compare(a, b);
+                Comparison<EcmaMethod> comparison = (EcmaMethod a, EcmaMethod b) =>
+                    comparer.Compare(a, b);
                 Array.Sort(mutableMethodBodyNeedList, comparison);
                 var ilProvider = (ReadyToRunILProvider)_methodILCache.ILProvider;
 
@@ -760,8 +914,14 @@ namespace ILCompiler
 
             void ResetILCache()
             {
-                if (_methodILCache.Count > 1000 || _methodILCache.ILProvider.Version != _methodILCache.ExpectedILProviderVersion)
-                    _methodILCache = new ILCache(_methodILCache.ILProvider, NodeFactory.CompilationModuleGroup);
+                if (
+                    _methodILCache.Count > 1000
+                    || _methodILCache.ILProvider.Version != _methodILCache.ExpectedILProviderVersion
+                )
+                    _methodILCache = new ILCache(
+                        _methodILCache.ILProvider,
+                        NodeFactory.CompilationModuleGroup
+                    );
             }
 
             void CompileMethodList(IEnumerable<DependencyNodeCore<NodeFactory>> methodList)
@@ -782,7 +942,11 @@ namespace ILCompiler
 
                     if (!_hasCreatedCompilationThreads)
                     {
-                        for (int compilationThreadId = 1; compilationThreadId < _parallelism; compilationThreadId++)
+                        for (
+                            int compilationThreadId = 1;
+                            compilationThreadId < _parallelism;
+                            compilationThreadId++
+                        )
                         {
                             new Thread(CompilationThread).Start((object)compilationThreadId);
                         }
@@ -800,10 +964,10 @@ namespace ILCompiler
 
             void CompilationThread(object objThreadId)
             {
-                while(true)
+                while (true)
                 {
                     _compilationThreadSemaphore.Wait();
-                    lock(this)
+                    lock (this)
                     {
                         if (_doneAllCompiling)
                             return;
@@ -842,13 +1006,21 @@ namespace ILCompiler
                     if (dependency is DeferredTillPhaseNode deferredPhaseNode)
                     {
                         if (Logger.IsVerbose)
-                            _logger.Writer.WriteLine($"Moved to phase {_nodeFactory.CompilationCurrentPhase}");
+                            _logger.Writer.WriteLine(
+                                $"Moved to phase {_nodeFactory.CompilationCurrentPhase}"
+                            );
                         deferredPhaseNode.NotifyCurrentPhase(_nodeFactory.CompilationCurrentPhase);
                         return;
                     }
                 }
 
-                Debug.Assert((_nodeFactory.CompilationCurrentPhase == 0) || ((_nodeFactory.CompilationCurrentPhase == 2) && !_finishedFirstCompilationRunInPhase2));
+                Debug.Assert(
+                    (_nodeFactory.CompilationCurrentPhase == 0)
+                        || (
+                            (_nodeFactory.CompilationCurrentPhase == 2)
+                            && !_finishedFirstCompilationRunInPhase2
+                        )
+                );
 
                 MethodDesc method = methodCodeNodeNeedingCode.Method;
 
@@ -860,7 +1032,9 @@ namespace ILCompiler
 
                 if (_nodeFactory.OptimizationFlags.PrintReproArgs)
                 {
-                    Logger.Writer.WriteLine($"Single method repro args:{GetReproInstructions(method)}");
+                    Logger.Writer.WriteLine(
+                        $"Single method repro args:{GetReproInstructions(method)}"
+                    );
                 }
 
                 try
@@ -907,17 +1081,23 @@ namespace ILCompiler
                 {
                     // If compilation fails, don't emit code for this method. It will be Jitted at runtime
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine($"Warning: Method `{method}` was not compiled because: {ex.Message}");
+                        Logger.Writer.WriteLine(
+                            $"Warning: Method `{method}` was not compiled because: {ex.Message}"
+                        );
                 }
                 catch (RequiresRuntimeJitException ex)
                 {
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine($"Info: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT");
+                        Logger.Writer.WriteLine(
+                            $"Info: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
+                        );
                 }
                 catch (CodeGenerationFailedException ex) when (_resilient)
                 {
                     if (Logger.IsVerbose)
-                        Logger.Writer.WriteLine($"Warning: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT");
+                        Logger.Writer.WriteLine(
+                            $"Warning: Method `{method}` was not compiled because `{ex.Message}` requires runtime JIT"
+                        );
                 }
             }
         }

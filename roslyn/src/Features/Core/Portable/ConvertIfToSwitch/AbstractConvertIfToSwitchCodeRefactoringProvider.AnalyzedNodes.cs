@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         TIfStatementSyntax,
         TExpressionSyntax,
         TIsExpressionSyntax,
-        TPatternSyntax>
+        TPatternSyntax
+    >
         where TIfStatementSyntax : SyntaxNode
         where TExpressionSyntax : SyntaxNode
         where TIsExpressionSyntax : SyntaxNode
@@ -21,7 +22,11 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         /// Represents a switch-section constructed from a series of
         /// if-conditions, possibly combined with logical-or operator
         /// </summary>
-        internal sealed class AnalyzedSwitchSection(ImmutableArray<AnalyzedSwitchLabel> labels, IOperation body, SyntaxNode syntaxToRemove)
+        internal sealed class AnalyzedSwitchSection(
+            ImmutableArray<AnalyzedSwitchLabel> labels,
+            IOperation body,
+            SyntaxNode syntaxToRemove
+        )
         {
             public readonly ImmutableArray<AnalyzedSwitchLabel> Labels = labels;
             public readonly IOperation Body = body;
@@ -32,7 +37,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         /// Represents a switch-label constructed from a series of
         /// if-conditions, possibly combined by logical-and operator
         /// </summary>
-        internal sealed class AnalyzedSwitchLabel(AnalyzedPattern pattern, ImmutableArray<TExpressionSyntax> guards)
+        internal sealed class AnalyzedSwitchLabel(
+            AnalyzedPattern pattern,
+            ImmutableArray<TExpressionSyntax> guards
+        )
         {
             public readonly AnalyzedPattern Pattern = pattern;
             public readonly ImmutableArray<TExpressionSyntax> Guards = guards;
@@ -43,9 +51,7 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
         /// </summary>
         internal abstract class AnalyzedPattern
         {
-            private AnalyzedPattern()
-            {
-            }
+            private AnalyzedPattern() { }
 
             /// <summary>
             /// Represents a type-pattern, constructed from is-expression
@@ -74,7 +80,10 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             /// <summary>
             /// Represents a relational-pattern constructed from comparison operators
             /// </summary>
-            internal sealed class Relational(BinaryOperatorKind operatorKind, TExpressionSyntax value) : AnalyzedPattern
+            internal sealed class Relational(
+                BinaryOperatorKind operatorKind,
+                TExpressionSyntax value
+            ) : AnalyzedPattern
             {
                 public readonly BinaryOperatorKind OperatorKind = operatorKind;
                 public readonly TExpressionSyntax Value = value;
@@ -83,7 +92,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             /// <summary>
             /// Represents a range-pattern constructed from a couple of comparison operators
             /// </summary>
-            internal sealed class Range(TExpressionSyntax lowerBound, TExpressionSyntax higherBound) : AnalyzedPattern
+            internal sealed class Range(TExpressionSyntax lowerBound, TExpressionSyntax higherBound)
+                : AnalyzedPattern
             {
                 public readonly TExpressionSyntax LowerBound = lowerBound;
                 public readonly TExpressionSyntax HigherBound = higherBound;
@@ -92,7 +102,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
             /// <summary>
             /// Represents an and-pattern, constructed from two other patterns.
             /// </summary>
-            internal sealed class And(AnalyzedPattern leftPattern, AnalyzedPattern rightPattern) : AnalyzedPattern
+            internal sealed class And(AnalyzedPattern leftPattern, AnalyzedPattern rightPattern)
+                : AnalyzedPattern
             {
                 public readonly AnalyzedPattern LeftPattern = leftPattern;
                 public readonly AnalyzedPattern RightPattern = rightPattern;

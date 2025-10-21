@@ -4,23 +4,23 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security {
-    using  System.Web;
-    using  System.Web.Configuration;
-    using  System.Web.Management;
-    using  System.Security.Principal;
-    using  System.Security.Permissions;
-    using  System.Globalization;
-    using  System.Runtime.Serialization;
-    using  System.Collections;
-    using  System.Configuration.Provider;
-    using  System.Configuration;
-    using  System.Web.Hosting;
-    using  System.Threading;
-    using  System.Web.Util;
-    using  System.Collections.Specialized;
+namespace System.Web.Security
+{
+    using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
+    using System.Configuration.Provider;
+    using System.Globalization;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading;
+    using System.Web;
     using System.Web.Compilation;
-
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Management;
+    using System.Web.Util;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
@@ -28,47 +28,132 @@ namespace System.Web.Security {
     // This has no hosting permission demands because of DevDiv Bugs 31461: ClientAppSvcs: ASP.net Provider support
     static public class Roles
     {
-
-        static public RoleProvider Provider {
-            get {
+        public static RoleProvider Provider
+        {
+            get
+            {
                 EnsureEnabled();
-                if (s_Provider == null) {
-                    throw new InvalidOperationException(SR.GetString(SR.Def_role_provider_not_found));
+                if (s_Provider == null)
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Def_role_provider_not_found)
+                    );
                 }
                 return s_Provider;
             }
         }
 
-        static public RoleProviderCollection Providers               { get { EnsureEnabled(); return s_Providers;} }
-
-        static public string                 CookieName              { get { Initialize(); return s_CookieName; }}
-
-        static public bool                   CacheRolesInCookie      { get { Initialize(); return s_CacheRolesInCookie; }}
-
-        static public int                    CookieTimeout           { get { Initialize(); return s_CookieTimeout; }}
-
-        static public string                 CookiePath              { get { Initialize(); return s_CookiePath; }}
-
-        static public bool                   CookieRequireSSL        { get { Initialize(); return s_CookieRequireSSL; }}
-
-        static public bool                   CookieSlidingExpiration { get { Initialize(); return s_CookieSlidingExpiration; }}
-
-        static public CookieProtection       CookieProtectionValue   { get { Initialize(); return s_CookieProtection; }}
-
-        static public bool                   CreatePersistentCookie  { get { Initialize(); return s_CreatePersistentCookie; } }
-
-        static public string                 Domain                  { get { Initialize(); return s_Domain; } }
-
-        static public int                    MaxCachedResults        { get { Initialize(); return s_MaxCachedResults; } }
-
-
-        static public bool Enabled
+        public static RoleProviderCollection Providers
         {
-            get {
-                if (HostingEnvironment.IsHosted && !HttpRuntime.HasAspNetHostingPermission(AspNetHostingPermissionLevel.Low))
+            get
+            {
+                EnsureEnabled();
+                return s_Providers;
+            }
+        }
+
+        public static string CookieName
+        {
+            get
+            {
+                Initialize();
+                return s_CookieName;
+            }
+        }
+
+        public static bool CacheRolesInCookie
+        {
+            get
+            {
+                Initialize();
+                return s_CacheRolesInCookie;
+            }
+        }
+
+        public static int CookieTimeout
+        {
+            get
+            {
+                Initialize();
+                return s_CookieTimeout;
+            }
+        }
+
+        public static string CookiePath
+        {
+            get
+            {
+                Initialize();
+                return s_CookiePath;
+            }
+        }
+
+        public static bool CookieRequireSSL
+        {
+            get
+            {
+                Initialize();
+                return s_CookieRequireSSL;
+            }
+        }
+
+        public static bool CookieSlidingExpiration
+        {
+            get
+            {
+                Initialize();
+                return s_CookieSlidingExpiration;
+            }
+        }
+
+        public static CookieProtection CookieProtectionValue
+        {
+            get
+            {
+                Initialize();
+                return s_CookieProtection;
+            }
+        }
+
+        public static bool CreatePersistentCookie
+        {
+            get
+            {
+                Initialize();
+                return s_CreatePersistentCookie;
+            }
+        }
+
+        public static string Domain
+        {
+            get
+            {
+                Initialize();
+                return s_Domain;
+            }
+        }
+
+        public static int MaxCachedResults
+        {
+            get
+            {
+                Initialize();
+                return s_MaxCachedResults;
+            }
+        }
+
+        public static bool Enabled
+        {
+            get
+            {
+                if (
+                    HostingEnvironment.IsHosted
+                    && !HttpRuntime.HasAspNetHostingPermission(AspNetHostingPermissionLevel.Low)
+                )
                     return false;
 
-                if (!s_Initialized && !s_EnabledSet) {
+                if (!s_Initialized && !s_EnabledSet)
+                {
                     RoleManagerSection config = RuntimeConfig.GetAppConfig().RoleManager;
                     s_Enabled = config.Enabled;
                     s_EnabledSet = true;
@@ -76,15 +161,15 @@ namespace System.Web.Security {
 
                 return s_Enabled;
             }
-            set {
+            set
+            {
                 BuildManager.ThrowIfPreAppStartNotRunning();
                 s_Enabled = value;
                 s_EnabledSet = true;
             }
         }
 
-
-        static public string ApplicationName
+        public static string ApplicationName
         {
             get { return Provider.ApplicationName; }
             set { Provider.ApplicationName = value; }
@@ -92,110 +177,185 @@ namespace System.Web.Security {
 
         // authorization
 
-        static public bool IsUserInRole(string username, string roleName) {
-            if (HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc) && HttpContext.Current != null)
+        static public bool IsUserInRole(string username, string roleName)
+        {
+            if (
+                HostingEnvironment.IsHosted
+                && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                && HttpContext.Current != null
+            )
                 EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_BEGIN, HttpContext.Current.WorkerRequest);
 
             EnsureEnabled();
             bool isUserInRole = false;
             bool isRolePrincipal = false;
-            try {
+            try
+            {
                 SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
                 SecUtility.CheckParameter(ref username, true, false, true, 0, "username");
                 if (username.Length < 1)
                     return false;
                 IPrincipal user = GetCurrentUser();
-                if (user != null && user is RolePrincipal && ((RolePrincipal)user).ProviderName == Provider.Name && StringUtil.EqualsIgnoreCase(username, user.Identity.Name))
+                if (
+                    user != null
+                    && user is RolePrincipal
+                    && ((RolePrincipal)user).ProviderName == Provider.Name
+                    && StringUtil.EqualsIgnoreCase(username, user.Identity.Name)
+                )
                     isUserInRole = user.IsInRole(roleName);
                 else
                     isUserInRole = Provider.IsUserInRole(username, roleName);
                 return isUserInRole;
-            } finally {
-                if (HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc) && HttpContext.Current != null) {
-                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.AppSvc)) {
-                        string status = SR.Resources.GetString(isUserInRole ? SR.Etw_Success : SR.Etw_Failure, CultureInfo.InstalledUICulture);
-                        EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_IS_USER_IN_ROLE, HttpContext.Current.WorkerRequest, isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName, username, roleName, status);
+            }
+            finally
+            {
+                if (
+                    HostingEnvironment.IsHosted
+                    && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                    && HttpContext.Current != null
+                )
+                {
+                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.AppSvc))
+                    {
+                        string status = SR.Resources.GetString(
+                            isUserInRole ? SR.Etw_Success : SR.Etw_Failure,
+                            CultureInfo.InstalledUICulture
+                        );
+                        EtwTrace.Trace(
+                            EtwTraceType.ETW_TYPE_ROLE_IS_USER_IN_ROLE,
+                            HttpContext.Current.WorkerRequest,
+                            isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName,
+                            username,
+                            roleName,
+                            status
+                        );
                     }
 
-                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_END, HttpContext.Current.WorkerRequest, isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName, username);
+                    EtwTrace.Trace(
+                        EtwTraceType.ETW_TYPE_ROLE_END,
+                        HttpContext.Current.WorkerRequest,
+                        isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName,
+                        username
+                    );
                 }
             }
         }
 
-
-        static public bool IsUserInRole(string roleName) {
+        public static bool IsUserInRole(string roleName)
+        {
             return IsUserInRole(GetCurrentUserName(), roleName);
         }
 
-
-        static public string[] GetRolesForUser (string username){
-            if (HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc) && HttpContext.Current != null)
+        public static string[] GetRolesForUser(string username)
+        {
+            if (
+                HostingEnvironment.IsHosted
+                && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                && HttpContext.Current != null
+            )
                 EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_BEGIN, HttpContext.Current.WorkerRequest);
 
             EnsureEnabled();
             string[] roles = null;
             bool isRolePrincipal = false;
-            try {
+            try
+            {
                 SecUtility.CheckParameter(ref username, true, false, true, 0, "username");
-                if (username.Length < 1) {
+                if (username.Length < 1)
+                {
                     roles = new string[0];
                     return roles;
                 }
                 IPrincipal user = GetCurrentUser();
-                if (user != null && user is RolePrincipal && ((RolePrincipal)user).ProviderName == Provider.Name && StringUtil.EqualsIgnoreCase(username, user.Identity.Name)) {
+                if (
+                    user != null
+                    && user is RolePrincipal
+                    && ((RolePrincipal)user).ProviderName == Provider.Name
+                    && StringUtil.EqualsIgnoreCase(username, user.Identity.Name)
+                )
+                {
                     roles = ((RolePrincipal)user).GetRoles();
                     isRolePrincipal = true;
-                } else {
+                }
+                else
+                {
                     roles = Provider.GetRolesForUser(username);
                 }
                 return roles;
-            } finally {
-                if (HostingEnvironment.IsHosted && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc) && HttpContext.Current != null) {
-                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.AppSvc)) {
+            }
+            finally
+            {
+                if (
+                    HostingEnvironment.IsHosted
+                    && EtwTrace.IsTraceEnabled(EtwTraceLevel.Information, EtwTraceFlags.AppSvc)
+                    && HttpContext.Current != null
+                )
+                {
+                    if (EtwTrace.IsTraceEnabled(EtwTraceLevel.Verbose, EtwTraceFlags.AppSvc))
+                    {
                         string roleNames = null;
                         if (roles != null && roles.Length > 0)
                             roleNames = roles[0];
                         for (int i = 1; i < roles.Length; i++)
                             roleNames += "," + roles[i];
 
-                        EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_GET_USER_ROLES, HttpContext.Current.WorkerRequest, isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName, username, roleNames, null);
+                        EtwTrace.Trace(
+                            EtwTraceType.ETW_TYPE_ROLE_GET_USER_ROLES,
+                            HttpContext.Current.WorkerRequest,
+                            isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName,
+                            username,
+                            roleNames,
+                            null
+                        );
                     }
-                    EtwTrace.Trace(EtwTraceType.ETW_TYPE_ROLE_END, HttpContext.Current.WorkerRequest, isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName, username);
+                    EtwTrace.Trace(
+                        EtwTraceType.ETW_TYPE_ROLE_END,
+                        HttpContext.Current.WorkerRequest,
+                        isRolePrincipal ? "RolePrincipal" : Provider.GetType().FullName,
+                        username
+                    );
                 }
             }
         }
 
-        static public string[] GetRolesForUser (){
+        public static string[] GetRolesForUser()
+        {
             return GetRolesForUser(GetCurrentUserName());
         }
-
 
         // role administration
         //
 
-        static public string[] GetUsersInRole(string roleName){
+        static public string[] GetUsersInRole(string roleName)
+        {
             EnsureEnabled();
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
             return Provider.GetUsersInRole(roleName);
         }
 
-
-        static public void CreateRole(string roleName){
+        public static void CreateRole(string roleName)
+        {
             EnsureEnabled();
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
             Provider.CreateRole(roleName);
         }
 
-
-        static public bool DeleteRole(string roleName, bool throwOnPopulatedRole){
+        public static bool DeleteRole(string roleName, bool throwOnPopulatedRole)
+        {
             EnsureEnabled();
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
 
             bool roleDeleted = Provider.DeleteRole(roleName, throwOnPopulatedRole);
 
-            try {
+            try
+            {
                 RolePrincipal user = GetCurrentUser() as RolePrincipal;
-                if (user != null && user.ProviderName == Provider.Name && user.IsRoleListCached && user.IsInRole(roleName))
+                if (
+                    user != null
+                    && user.ProviderName == Provider.Name
+                    && user.IsRoleListCached
+                    && user.IsInRole(roleName)
+                )
                     user.SetDirty();
             }
             catch { }
@@ -203,76 +363,75 @@ namespace System.Web.Security {
             return roleDeleted;
         }
 
-        static public bool DeleteRole(string roleName)
+        public static bool DeleteRole(string roleName)
         {
             return DeleteRole(roleName, true);
         }
 
-
-        static public bool RoleExists(string roleName){
+        public static bool RoleExists(string roleName)
+        {
             EnsureEnabled();
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
             return Provider.RoleExists(roleName);
         }
 
-
-
-        static public void AddUserToRole(string username, string roleName){
+        public static void AddUserToRole(string username, string roleName)
+        {
             EnsureEnabled();
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
-            SecUtility.CheckParameter(ref username,  true, true, true, 0,  "username");
-            Provider.AddUsersToRoles(new string [] {username}, new string [] {roleName});
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
+            SecUtility.CheckParameter(ref username, true, true, true, 0, "username");
+            Provider.AddUsersToRoles(new string[] { username }, new string[] { roleName });
             try
             {
                 RolePrincipal user = GetCurrentUser() as RolePrincipal;
-                if (user != null && user.ProviderName == Provider.Name && user.IsRoleListCached && StringUtil.EqualsIgnoreCase(user.Identity.Name, username))
+                if (
+                    user != null
+                    && user.ProviderName == Provider.Name
+                    && user.IsRoleListCached
+                    && StringUtil.EqualsIgnoreCase(user.Identity.Name, username)
+                )
                     user.SetDirty();
             }
             catch { }
         }
 
-
-        static public void AddUserToRoles(string username, string[] roleNames){
+        public static void AddUserToRoles(string username, string[] roleNames)
+        {
             EnsureEnabled();
 
-            SecUtility.CheckParameter(ref username,  true, true, true,  0,  "username");
+            SecUtility.CheckParameter(ref username, true, true, true, 0, "username");
 
-            SecUtility.CheckArrayParameter( ref roleNames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "roleNames");
+            SecUtility.CheckArrayParameter(ref roleNames, true, true, true, 0, "roleNames");
 
-            Provider.AddUsersToRoles(new string [] {username}, roleNames);
+            Provider.AddUsersToRoles(new string[] { username }, roleNames);
             try
             {
                 RolePrincipal user = GetCurrentUser() as RolePrincipal;
-                if (user != null && user.ProviderName == Provider.Name && user.IsRoleListCached && StringUtil.EqualsIgnoreCase(user.Identity.Name, username))
+                if (
+                    user != null
+                    && user.ProviderName == Provider.Name
+                    && user.IsRoleListCached
+                    && StringUtil.EqualsIgnoreCase(user.Identity.Name, username)
+                )
                     user.SetDirty();
             }
             catch { }
         }
 
-
-        static public void AddUsersToRole(string[] usernames, string roleName){
+        public static void AddUsersToRole(string[] usernames, string roleName)
+        {
             EnsureEnabled();
 
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
 
-            SecUtility.CheckArrayParameter( ref usernames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "usernames");
+            SecUtility.CheckArrayParameter(ref usernames, true, true, true, 0, "usernames");
 
-            Provider.AddUsersToRoles(usernames, new string [] {roleName});
+            Provider.AddUsersToRoles(usernames, new string[] { roleName });
             try
             {
                 RolePrincipal user = GetCurrentUser() as RolePrincipal;
                 if (user != null && user.ProviderName == Provider.Name && user.IsRoleListCached)
-                    foreach(string username in usernames)
+                    foreach (string username in usernames)
                         if (StringUtil.EqualsIgnoreCase(user.Identity.Name, username))
                         {
                             user.SetDirty();
@@ -282,23 +441,13 @@ namespace System.Web.Security {
             catch { }
         }
 
-
-        static public void AddUsersToRoles(string[] usernames, string [] roleNames){
+        public static void AddUsersToRoles(string[] usernames, string[] roleNames)
+        {
             EnsureEnabled();
 
-            SecUtility.CheckArrayParameter( ref roleNames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "roleNames");
+            SecUtility.CheckArrayParameter(ref roleNames, true, true, true, 0, "roleNames");
 
-            SecUtility.CheckArrayParameter( ref usernames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "usernames");
+            SecUtility.CheckArrayParameter(ref usernames, true, true, true, 0, "usernames");
 
             Provider.AddUsersToRoles(usernames, roleNames);
             try
@@ -315,56 +464,56 @@ namespace System.Web.Security {
             catch { }
         }
 
-
-        static public void RemoveUserFromRole(string username, string roleName){
+        public static void RemoveUserFromRole(string username, string roleName)
+        {
             EnsureEnabled();
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
-            SecUtility.CheckParameter(ref username,  true, true, true,  0,  "username");
-            Provider.RemoveUsersFromRoles(new string [] {username}, new string [] {roleName});
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
+            SecUtility.CheckParameter(ref username, true, true, true, 0, "username");
+            Provider.RemoveUsersFromRoles(new string[] { username }, new string[] { roleName });
             try
             {
                 RolePrincipal user = GetCurrentUser() as RolePrincipal;
-                if (user != null && user.ProviderName == Provider.Name && user.IsRoleListCached && StringUtil.EqualsIgnoreCase(user.Identity.Name, username))
+                if (
+                    user != null
+                    && user.ProviderName == Provider.Name
+                    && user.IsRoleListCached
+                    && StringUtil.EqualsIgnoreCase(user.Identity.Name, username)
+                )
                     user.SetDirty();
             }
             catch { }
         }
 
-
-        static public void RemoveUserFromRoles(string username, string[] roleNames){
+        public static void RemoveUserFromRoles(string username, string[] roleNames)
+        {
             EnsureEnabled();
 
-            SecUtility.CheckParameter(ref username,  true, true, true,  0,  "username");
+            SecUtility.CheckParameter(ref username, true, true, true, 0, "username");
 
-            SecUtility.CheckArrayParameter( ref roleNames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "roleNames");
+            SecUtility.CheckArrayParameter(ref roleNames, true, true, true, 0, "roleNames");
 
-            Provider.RemoveUsersFromRoles(new string [] {username}, roleNames);
+            Provider.RemoveUsersFromRoles(new string[] { username }, roleNames);
             try
             {
                 RolePrincipal user = GetCurrentUser() as RolePrincipal;
-                if (user != null && user.ProviderName == Provider.Name && user.IsRoleListCached && StringUtil.EqualsIgnoreCase(user.Identity.Name, username))
+                if (
+                    user != null
+                    && user.ProviderName == Provider.Name
+                    && user.IsRoleListCached
+                    && StringUtil.EqualsIgnoreCase(user.Identity.Name, username)
+                )
                     user.SetDirty();
             }
             catch { }
         }
 
-
-        static public void RemoveUsersFromRole(string[] usernames, string roleName){
+        public static void RemoveUsersFromRole(string[] usernames, string roleName)
+        {
             EnsureEnabled();
 
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
 
-            SecUtility.CheckArrayParameter( ref usernames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "usernames");
+            SecUtility.CheckArrayParameter(ref usernames, true, true, true, 0, "usernames");
 
             Provider.RemoveUsersFromRoles(usernames, new string[] { roleName });
             try
@@ -381,23 +530,13 @@ namespace System.Web.Security {
             catch { }
         }
 
-
-        static public void RemoveUsersFromRoles(string[] usernames, string [] roleNames){
+        public static void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
+        {
             EnsureEnabled();
 
-            SecUtility.CheckArrayParameter( ref roleNames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "roleNames");
+            SecUtility.CheckArrayParameter(ref roleNames, true, true, true, 0, "roleNames");
 
-            SecUtility.CheckArrayParameter( ref usernames,
-                                            true,
-                                            true,
-                                            true,
-                                            0,
-                                            "usernames");
+            SecUtility.CheckArrayParameter(ref usernames, true, true, true, 0, "usernames");
 
             Provider.RemoveUsersFromRoles(usernames, roleNames);
             try
@@ -414,14 +553,14 @@ namespace System.Web.Security {
             catch { }
         }
 
-
-        public static string[] GetAllRoles() {
+        public static string[] GetAllRoles()
+        {
             EnsureEnabled();
             return Provider.GetAllRoles();
         }
 
-
-        public static void DeleteCookie() {
+        public static void DeleteCookie()
+        {
             EnsureEnabled();
             if (CookieName == null || CookieName.Length < 1)
                 return;
@@ -442,46 +581,48 @@ namespace System.Web.Security {
             context.Response.Cookies.Add(cookie);
         }
 
-        static public string[] FindUsersInRole(string roleName, string usernameToMatch)
+        public static string[] FindUsersInRole(string roleName, string usernameToMatch)
         {
             EnsureEnabled();
 
-            SecUtility.CheckParameter(ref roleName, true, true, true, 0,  "roleName");
+            SecUtility.CheckParameter(ref roleName, true, true, true, 0, "roleName");
 
-            SecUtility.CheckParameter( ref usernameToMatch,
-                                       true,
-                                       true,
-                                       false,
-                                       0,
-                                       "usernameToMatch");
+            SecUtility.CheckParameter(ref usernameToMatch, true, true, false, 0, "usernameToMatch");
 
             return Provider.FindUsersInRole(roleName, usernameToMatch);
         }
 
-        static private void EnsureEnabled()
+        private static void EnsureEnabled()
         {
             Initialize();
             if (!s_Enabled)
                 throw new ProviderException(SR.GetString(SR.Roles_feature_not_enabled));
         }
 
-        static private void Initialize()
+        private static void Initialize()
         {
-            if (s_Initialized) {
-                if (s_InitializeException != null) {
+            if (s_Initialized)
+            {
+                if (s_InitializeException != null)
+                {
                     throw s_InitializeException;
                 }
-                if (s_InitializedDefaultProvider) {
+                if (s_InitializedDefaultProvider)
+                {
                     return;
                 }
             }
 
-            lock (s_lock) {
-                if (s_Initialized) {
-                    if (s_InitializeException != null) {
+            lock (s_lock)
+            {
+                if (s_Initialized)
+                {
+                    if (s_InitializeException != null)
+                    {
                         throw s_InitializeException;
                     }
-                    if (s_InitializedDefaultProvider) {
+                    if (s_InitializedDefaultProvider)
+                    {
                         return;
                     }
                 }
@@ -489,11 +630,15 @@ namespace System.Web.Security {
                 try
                 {
                     if (HostingEnvironment.IsHosted)
-                        HttpRuntime.CheckAspNetHostingPermission(AspNetHostingPermissionLevel.Low, SR.Feature_not_supported_at_this_level);
+                        HttpRuntime.CheckAspNetHostingPermission(
+                            AspNetHostingPermissionLevel.Low,
+                            SR.Feature_not_supported_at_this_level
+                        );
 
                     RoleManagerSection settings = RuntimeConfig.GetAppConfig().RoleManager;
-                        //s_InitializeException = new ProviderException(SR.GetString(SR.Roles_feature_not_enabled));
-                    if (!s_EnabledSet) {
+                    //s_InitializeException = new ProviderException(SR.GetString(SR.Roles_feature_not_enabled));
+                    if (!s_EnabledSet)
+                    {
                         s_Enabled = settings.Enabled;
                     }
                     s_CookieName = settings.CookieName;
@@ -506,15 +651,23 @@ namespace System.Web.Security {
                     s_Domain = settings.Domain;
                     s_CreatePersistentCookie = settings.CreatePersistentCookie;
                     s_MaxCachedResults = settings.MaxCachedResults;
-                    if (s_Enabled) { // Instantiate providers only if feature is enabled
+                    if (s_Enabled)
+                    { // Instantiate providers only if feature is enabled
                         if (s_MaxCachedResults < 0)
                         {
-                            throw new ProviderException(SR.GetString(SR.Value_must_be_non_negative_integer, "maxCachedResults"));
+                            throw new ProviderException(
+                                SR.GetString(
+                                    SR.Value_must_be_non_negative_integer,
+                                    "maxCachedResults"
+                                )
+                            );
                         }
                         InitializeSettings(settings);
                         InitializeDefaultProvider(settings);
                     }
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     s_InitializeException = e;
                 }
                 s_Initialized = true;
@@ -524,21 +677,38 @@ namespace System.Web.Security {
                 throw s_InitializeException;
         }
 
-        private static void InitializeSettings(RoleManagerSection settings) {
-            if (!s_Initialized) {
+        private static void InitializeSettings(RoleManagerSection settings)
+        {
+            if (!s_Initialized)
+            {
                 s_Providers = new RoleProviderCollection();
 
-                if (HostingEnvironment.IsHosted) {
-                    ProvidersHelper.InstantiateProviders(settings.Providers, s_Providers, typeof(RoleProvider));
+                if (HostingEnvironment.IsHosted)
+                {
+                    ProvidersHelper.InstantiateProviders(
+                        settings.Providers,
+                        s_Providers,
+                        typeof(RoleProvider)
+                    );
                 }
-                else {
-                    foreach (ProviderSettings ps in settings.Providers) {
+                else
+                {
+                    foreach (ProviderSettings ps in settings.Providers)
+                    {
                         Type t = Type.GetType(ps.Type, true, true);
                         if (!typeof(RoleProvider).IsAssignableFrom(t))
-                            throw new ArgumentException(SR.GetString(SR.Provider_must_implement_type, typeof(RoleProvider).ToString()));
+                            throw new ArgumentException(
+                                SR.GetString(
+                                    SR.Provider_must_implement_type,
+                                    typeof(RoleProvider).ToString()
+                                )
+                            );
                         RoleProvider provider = (RoleProvider)Activator.CreateInstance(t);
                         NameValueCollection pars = ps.Parameters;
-                        NameValueCollection cloneParams = new NameValueCollection(pars.Count, StringComparer.Ordinal);
+                        NameValueCollection cloneParams = new NameValueCollection(
+                            pars.Count,
+                            StringComparer.Ordinal
+                        );
                         foreach (string key in pars)
                             cloneParams[key] = pars[key];
                         provider.Initialize(ps.Name, cloneParams);
@@ -548,48 +718,63 @@ namespace System.Web.Security {
             }
         }
 
-        private static void InitializeDefaultProvider(RoleManagerSection settings) {
-            bool canInitializeDefaultProvider = (!HostingEnvironment.IsHosted || BuildManager.PreStartInitStage == PreStartInitStage.AfterPreStartInit);
-            if (!s_InitializedDefaultProvider && canInitializeDefaultProvider) {
+        private static void InitializeDefaultProvider(RoleManagerSection settings)
+        {
+            bool canInitializeDefaultProvider = (
+                !HostingEnvironment.IsHosted
+                || BuildManager.PreStartInitStage == PreStartInitStage.AfterPreStartInit
+            );
+            if (!s_InitializedDefaultProvider && canInitializeDefaultProvider)
+            {
                 Debug.Assert(s_Providers != null);
                 s_Providers.SetReadOnly();
 
-                if (settings.DefaultProvider == null) {
-                    s_InitializeException = new ProviderException(SR.GetString(SR.Def_role_provider_not_specified));
+                if (settings.DefaultProvider == null)
+                {
+                    s_InitializeException = new ProviderException(
+                        SR.GetString(SR.Def_role_provider_not_specified)
+                    );
                 }
-                else {
-                    try {
+                else
+                {
+                    try
+                    {
                         s_Provider = s_Providers[settings.DefaultProvider];
                     }
                     catch { }
                 }
 
-                if (s_Provider == null) {
-                    s_InitializeException = new ConfigurationErrorsException(SR.GetString(SR.Def_role_provider_not_found), settings.ElementInformation.Properties["defaultProvider"].Source, settings.ElementInformation.Properties["defaultProvider"].LineNumber);
+                if (s_Provider == null)
+                {
+                    s_InitializeException = new ConfigurationErrorsException(
+                        SR.GetString(SR.Def_role_provider_not_found),
+                        settings.ElementInformation.Properties["defaultProvider"].Source,
+                        settings.ElementInformation.Properties["defaultProvider"].LineNumber
+                    );
                 }
 
                 s_InitializedDefaultProvider = true;
             }
         }
 
-        static private RoleProvider           s_Provider;
-        static private bool                   s_Enabled;
-        static private string                 s_CookieName;
-        static private bool                   s_CacheRolesInCookie;
-        static private int                    s_CookieTimeout;
-        static private string                 s_CookiePath;
-        static private bool                   s_CookieRequireSSL;
-        static private bool                   s_CookieSlidingExpiration;
-        static private CookieProtection       s_CookieProtection;
-        static private string                 s_Domain;
-        static private bool                   s_Initialized;
-        static private bool                   s_InitializedDefaultProvider;
-        static private bool                   s_EnabledSet;
-        static private RoleProviderCollection s_Providers;
-        private static Exception              s_InitializeException = null;
-        private static bool                   s_CreatePersistentCookie;
-        private static object                 s_lock = new object();
-        private static int                    s_MaxCachedResults = 25;
+        private static RoleProvider s_Provider;
+        private static bool s_Enabled;
+        private static string s_CookieName;
+        private static bool s_CacheRolesInCookie;
+        private static int s_CookieTimeout;
+        private static string s_CookiePath;
+        private static bool s_CookieRequireSSL;
+        private static bool s_CookieSlidingExpiration;
+        private static CookieProtection s_CookieProtection;
+        private static string s_Domain;
+        private static bool s_Initialized;
+        private static bool s_InitializedDefaultProvider;
+        private static bool s_EnabledSet;
+        private static RoleProviderCollection s_Providers;
+        private static Exception s_InitializeException = null;
+        private static bool s_CreatePersistentCookie;
+        private static object s_lock = new object();
+        private static int s_MaxCachedResults = 25;
 
         private static string GetCurrentUserName()
         {
@@ -602,46 +787,48 @@ namespace System.Web.Security {
 
         private static IPrincipal GetCurrentUser()
         {
-            if (HostingEnvironment.IsHosted) {
+            if (HostingEnvironment.IsHosted)
+            {
                 HttpContext cur = HttpContext.Current;
                 if (cur != null)
                     return cur.User;
             }
             return Thread.CurrentPrincipal;
         }
-
     }
 
     ////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////
 
-   // This has no hosting permission demands because of DevDiv Bugs 31461: ClientAppSvcs: ASP.net Provider support
-   public sealed class RoleProviderCollection : ProviderCollection
-   {
-
-        public override void Add(ProviderBase provider) {
-            if( provider == null )
+    // This has no hosting permission demands because of DevDiv Bugs 31461: ClientAppSvcs: ASP.net Provider support
+    public sealed class RoleProviderCollection : ProviderCollection
+    {
+        public override void Add(ProviderBase provider)
+        {
+            if (provider == null)
             {
-                throw new ArgumentNullException( "provider" );
+                throw new ArgumentNullException("provider");
             }
 
-            if( !( provider is RoleProvider ) )
+            if (!(provider is RoleProvider))
             {
-                throw new ArgumentException(SR.GetString(SR.Provider_must_implement_type, typeof(RoleProvider).ToString()), "provider");
+                throw new ArgumentException(
+                    SR.GetString(SR.Provider_must_implement_type, typeof(RoleProvider).ToString()),
+                    "provider"
+                );
             }
 
             base.Add(provider);
         }
 
-       new public RoleProvider this[string name] {
-           get {
-               return (RoleProvider) base[name];
-           }
-       }
+        public new RoleProvider this[string name]
+        {
+            get { return (RoleProvider)base[name]; }
+        }
 
-       public void CopyTo(RoleProvider [] array, int index)
-       {
-           base.CopyTo(array, index);
-       }
-   }
+        public void CopyTo(RoleProvider[] array, int index)
+        {
+            base.CopyTo(array, index);
+        }
+    }
 }

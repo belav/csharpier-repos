@@ -1,20 +1,21 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
-using System.Diagnostics.CodeAnalysis;
-using System.Diagnostics.Contracts;
 
-namespace Microsoft.Win32.SafeHandles {
+namespace Microsoft.Win32.SafeHandles
+{
     /// <summary>
     ///     SafeHandle for buffers returned by the Axl APIs
     /// </summary>
@@ -23,8 +24,11 @@ namespace Microsoft.Win32.SafeHandles {
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
 #endif
-    internal sealed class SafeAxlBufferHandle : SafeHandleZeroOrMinusOneIsInvalid {
-        private SafeAxlBufferHandle() : base(true) {
+    internal sealed class SafeAxlBufferHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeAxlBufferHandle()
+            : base(true)
+        {
             return;
         }
 
@@ -43,7 +47,8 @@ namespace Microsoft.Win32.SafeHandles {
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool HeapFree(IntPtr hHeap, int dwFlags, IntPtr lpMem);
 
-        protected override bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             // _AxlFree is a wrapper around HeapFree on the process heap. Since it is not exported from mscorwks
             // we just call HeapFree directly. This needs to be updated if _AxlFree is ever changed.
             HeapFree(GetProcessHeap(), 0, handle);
@@ -66,15 +71,19 @@ namespace Microsoft.Win32.SafeHandles {
     [SecurityCritical(SecurityCriticalScope.Everything)]
 #pragma warning restore 618
 #endif
-    internal abstract class SafeCapiHandleBase : SafeHandleZeroOrMinusOneIsInvalid {
+    internal abstract class SafeCapiHandleBase : SafeHandleZeroOrMinusOneIsInvalid
+    {
         private IntPtr m_csp;
 
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
-        internal SafeCapiHandleBase() : base(true) {
-        }
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands"
+        )]
+        internal SafeCapiHandleBase()
+            : base(true) { }
 
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
@@ -85,9 +94,11 @@ namespace Microsoft.Win32.SafeHandles {
 #endif
         [SuppressUnmanagedCodeSecurity]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool CryptContextAddRef(IntPtr hProv,
-                                                      IntPtr pdwReserved,
-                                                      int dwFlags);
+        private static extern bool CryptContextAddRef(
+            IntPtr hProv,
+            IntPtr pdwReserved,
+            int dwFlags
+        );
 
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
@@ -100,34 +111,38 @@ namespace Microsoft.Win32.SafeHandles {
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CryptReleaseContext(IntPtr hProv, int dwFlags);
 
-
-        protected IntPtr ParentCsp {
+        protected IntPtr ParentCsp
+        {
             get { return m_csp; }
-
 #if !FEATURE_CORESYSTEM
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)] 
+            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #endif
-            set {
+            set
+            {
                 // We should not be resetting the parent CSP if it's already been set once - that will
                 // lead to leaking the original handle.
                 Debug.Assert(m_csp == IntPtr.Zero);
-  
+
                 int error = (int)CapiNative.ErrorCode.Success;
- 
+
                 // A successful call to CryptContextAddRef and an assignment of the handle value to our field
-                // SafeHandle need to happen atomically, so we contain them within a CER. 
+                // SafeHandle need to happen atomically, so we contain them within a CER.
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-                finally {
-                    if (CryptContextAddRef(value, IntPtr.Zero, 0)) {
+                finally
+                {
+                    if (CryptContextAddRef(value, IntPtr.Zero, 0))
+                    {
                         m_csp = value;
                     }
-                    else {
+                    else
+                    {
                         error = Marshal.GetLastWin32Error();
                     }
                 }
- 
-                if (error != (int)CapiNative.ErrorCode.Success) {
+
+                if (error != (int)CapiNative.ErrorCode.Success)
+                {
                     throw new CryptographicException(error);
                 }
             }
@@ -139,16 +154,20 @@ namespace Microsoft.Win32.SafeHandles {
 #if !FEATURE_CORESYSTEM
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
 #endif
-        internal void SetParentCsp(SafeCspHandle parentCsp) {
+        internal void SetParentCsp(SafeCspHandle parentCsp)
+        {
             bool addedRef = false;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 parentCsp.DangerousAddRef(ref addedRef);
                 IntPtr rawParentHandle = parentCsp.DangerousGetHandle();
                 ParentCsp = rawParentHandle;
             }
-            finally {
-                if (addedRef) {
+            finally
+            {
+                if (addedRef)
+                {
                     parentCsp.DangerousRelease();
                 }
             }
@@ -162,12 +181,14 @@ namespace Microsoft.Win32.SafeHandles {
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        protected override sealed bool ReleaseHandle() {
+        protected override sealed bool ReleaseHandle()
+        {
             // Order is important here - we must destroy the child handle before the parent CSP
             bool destroyedChild = ReleaseCapiChildHandle();
             bool releasedCsp = true;
 
-            if (m_csp != IntPtr.Zero) {
+            if (m_csp != IntPtr.Zero)
+            {
                 releasedCsp = CryptReleaseContext(m_csp, 0);
             }
 
@@ -185,21 +206,24 @@ namespace Microsoft.Win32.SafeHandles {
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
 #endif
-    internal sealed class SafeCapiHashHandle : SafeCapiHandleBase {
+    internal sealed class SafeCapiHashHandle : SafeCapiHandleBase
+    {
         private static volatile SafeCapiHashHandle s_invalidHandle;
 
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        private SafeCapiHashHandle() {
-        }
+        private SafeCapiHashHandle() { }
 
         /// <summary>
         ///     NULL hash handle
         /// </summary>
-        public static SafeCapiHashHandle InvalidHandle {
-            get {
-                if (s_invalidHandle == null) {
+        public static SafeCapiHashHandle InvalidHandle
+        {
+            get
+            {
+                if (s_invalidHandle == null)
+                {
                     // More than one of these might get created in parallel, but that's okay.
                     // Saving one to the field saves on GC tracking, but by SuppressingFinalize on
                     // any instance returned there's already less finalization pressure.
@@ -227,7 +251,8 @@ namespace Microsoft.Win32.SafeHandles {
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        protected override bool ReleaseCapiChildHandle() {
+        protected override bool ReleaseCapiChildHandle()
+        {
             return CryptDestroyHash(handle);
         }
     }
@@ -242,22 +267,28 @@ namespace Microsoft.Win32.SafeHandles {
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
 #endif
-    internal sealed class SafeCapiKeyHandle : SafeCapiHandleBase {
+    internal sealed class SafeCapiKeyHandle : SafeCapiHandleBase
+    {
         private static volatile SafeCapiKeyHandle s_invalidHandle;
 
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        private SafeCapiKeyHandle()  {
-        }
+        private SafeCapiKeyHandle() { }
 
         /// <summary>
         ///     NULL key handle
         /// </summary>
-        internal static SafeCapiKeyHandle InvalidHandle {
-            [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
-            get {
-                if (s_invalidHandle == null) {
+        internal static SafeCapiKeyHandle InvalidHandle
+        {
+            [SuppressMessage(
+                "Microsoft.Security",
+                "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands"
+            )]
+            get
+            {
+                if (s_invalidHandle == null)
+                {
                     // More than one of these might get created in parallel, but that's okay.
                     // Saving one to the field saves on GC tracking, but by SuppressingFinalize on
                     // any instance returned there's already less finalization pressure.
@@ -284,24 +315,43 @@ namespace Microsoft.Win32.SafeHandles {
         /// <summary>
         ///     Make a copy of this key handle
         /// </summary>
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")] 
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands"
+        )]
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        internal SafeCapiKeyHandle Duplicate() {
+        internal SafeCapiKeyHandle Duplicate()
+        {
             Contract.Requires(!IsInvalid && !IsClosed);
-            Contract.Ensures(Contract.Result<SafeCapiKeyHandle>() != null && !Contract.Result<SafeCapiKeyHandle>().IsInvalid && !Contract.Result<SafeCapiKeyHandle>().IsClosed);
+            Contract.Ensures(
+                Contract.Result<SafeCapiKeyHandle>() != null
+                    && !Contract.Result<SafeCapiKeyHandle>().IsInvalid
+                    && !Contract.Result<SafeCapiKeyHandle>().IsClosed
+            );
 
             SafeCapiKeyHandle duplicate = null;
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
-                if (!CapiNative.UnsafeNativeMethods.CryptDuplicateKey(this, IntPtr.Zero, 0, out duplicate)) {
+            try
+            {
+                if (
+                    !CapiNative.UnsafeNativeMethods.CryptDuplicateKey(
+                        this,
+                        IntPtr.Zero,
+                        0,
+                        out duplicate
+                    )
+                )
+                {
                     throw new CryptographicException(Marshal.GetLastWin32Error());
                 }
             }
-            finally {
-                if (duplicate != null && !duplicate.IsInvalid && ParentCsp != IntPtr.Zero) {
+            finally
+            {
+                if (duplicate != null && !duplicate.IsInvalid && ParentCsp != IntPtr.Zero)
+                {
                     duplicate.ParentCsp = ParentCsp;
                 }
             }
@@ -312,7 +362,8 @@ namespace Microsoft.Win32.SafeHandles {
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        protected override bool ReleaseCapiChildHandle() {
+        protected override bool ReleaseCapiChildHandle()
+        {
             return CryptDestroyKey(handle);
         }
     }
@@ -327,12 +378,18 @@ namespace Microsoft.Win32.SafeHandles {
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
 #endif
-    internal sealed class SafeCspHandle : SafeHandleZeroOrMinusOneIsInvalid {
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")]
+    internal sealed class SafeCspHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands"
+        )]
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        private SafeCspHandle() : base(true) {
+        private SafeCspHandle()
+            : base(true)
+        {
             return;
         }
 
@@ -345,9 +402,11 @@ namespace Microsoft.Win32.SafeHandles {
         [System.Security.SecurityCritical]
 #endif
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool CryptContextAddRef(SafeCspHandle hProv,
-                                                     IntPtr pdwReserved,
-                                                     int dwFlags);
+        private static extern bool CryptContextAddRef(
+            SafeCspHandle hProv,
+            IntPtr pdwReserved,
+            int dwFlags
+        );
 
         [DllImport("advapi32")]
 #if !FEATURE_CORESYSTEM
@@ -363,11 +422,15 @@ namespace Microsoft.Win32.SafeHandles {
         /// <summary>
         ///     Create a second SafeCspHandle which refers to the same HCRYPTPROV
         /// </summary>
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands")] 
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands"
+        )]
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        public SafeCspHandle Duplicate() {
+        public SafeCspHandle Duplicate()
+        {
             Contract.Requires(!IsInvalid && !IsClosed);
 
             // In the window between the call to CryptContextAddRef and when the raw handle value is assigned
@@ -376,7 +439,8 @@ namespace Microsoft.Win32.SafeHandles {
             // that we don't have the original handle closed underneath us.
             bool acquired = false;
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 DangerousAddRef(ref acquired);
                 IntPtr originalHandle = DangerousGetHandle();
 
@@ -385,32 +449,39 @@ namespace Microsoft.Win32.SafeHandles {
                 SafeCspHandle duplicate = new SafeCspHandle();
 
                 // A successful call to CryptContextAddRef and an assignment of the handle value to the duplicate
-                // SafeHandle need to happen atomically, so we contain them within a CER. 
+                // SafeHandle need to happen atomically, so we contain them within a CER.
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }
-                finally {
-                    if (!CryptContextAddRef(this, IntPtr.Zero, 0)) {
+                finally
+                {
+                    if (!CryptContextAddRef(this, IntPtr.Zero, 0))
+                    {
                         error = Marshal.GetLastWin32Error();
                     }
-                    else {
+                    else
+                    {
                         duplicate.SetHandle(originalHandle);
                     }
                 }
 
                 // If we could not call CryptContextAddRef succesfully, then throw the error here otherwise
                 // we should be in a valid state at this point.
-                if (error != (int)CapiNative.ErrorCode.Success) {
+                if (error != (int)CapiNative.ErrorCode.Success)
+                {
                     duplicate.Dispose();
                     throw new CryptographicException(error);
                 }
-                else {
+                else
+                {
                     Debug.Assert(!duplicate.IsInvalid, "Failed to duplicate handle successfully");
                 }
 
                 return duplicate;
             }
-            finally {
-                if (acquired) {
+            finally
+            {
+                if (acquired)
+                {
                     DangerousRelease();
                 }
             }
@@ -419,7 +490,8 @@ namespace Microsoft.Win32.SafeHandles {
 #if FEATURE_CORESYSTEM
         [System.Security.SecurityCritical]
 #endif
-        protected override bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             return CryptReleaseContext(handle, 0);
         }
     }

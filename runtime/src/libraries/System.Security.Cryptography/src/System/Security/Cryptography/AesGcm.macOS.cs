@@ -33,7 +33,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData)
+            ReadOnlySpan<byte> associatedData
+        )
         {
             CheckDisposed();
             Interop.AppleCrypto.AesGcmEncrypt(
@@ -42,7 +43,8 @@ namespace System.Security.Cryptography
                 plaintext,
                 ciphertext,
                 tag,
-                associatedData);
+                associatedData
+            );
         }
 
         private void DecryptCore(
@@ -50,7 +52,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData)
+            ReadOnlySpan<byte> associatedData
+        )
         {
             CheckDisposed();
             Interop.AppleCrypto.AesGcmDecrypt(
@@ -59,7 +62,8 @@ namespace System.Security.Cryptography
                 ciphertext,
                 tag,
                 plaintext,
-                associatedData);
+                associatedData
+            );
         }
 
         public void Dispose()

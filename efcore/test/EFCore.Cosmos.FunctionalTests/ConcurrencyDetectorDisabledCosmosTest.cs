@@ -3,27 +3,22 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ConcurrencyDetectorDisabledCosmosTest : ConcurrencyDetectorDisabledTestBase<
-    ConcurrencyDetectorDisabledCosmosTest.ConcurrencyDetectorCosmosFixture>
+public class ConcurrencyDetectorDisabledCosmosTest
+    : ConcurrencyDetectorDisabledTestBase<ConcurrencyDetectorDisabledCosmosTest.ConcurrencyDetectorCosmosFixture>
 {
     public ConcurrencyDetectorDisabledCosmosTest(ConcurrencyDetectorCosmosFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory(Skip = "Issue #17246")]
-    public override Task Any(bool async)
-        => base.Any(async);
+    public override Task Any(bool async) => base.Any(async);
 
     public class ConcurrencyDetectorCosmosFixture : ConcurrencyDetectorFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => builder.EnableThreadSafetyChecks(enableChecks: false);
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            builder.EnableThreadSafetyChecks(enableChecks: false);
     }
 }

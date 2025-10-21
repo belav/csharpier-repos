@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Numerics;
-using System.Runtime.Intrinsics;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
 using Xunit;
 
 public unsafe class Runtime_69965
@@ -14,7 +14,10 @@ public unsafe class Runtime_69965
     {
         const int Value = 10;
         var vtor = Vector128.Create(Value, Value, Value, Value);
-        var vtors = new StructWithOverlappedVtor128[] { new StructWithOverlappedVtor128 { Vtor = vtor } };
+        var vtors = new StructWithOverlappedVtor128[]
+        {
+            new StructWithOverlappedVtor128 { Vtor = vtor },
+        };
 
         return Problem(vtors) != Value ? 101 : 100;
     }
@@ -35,6 +38,7 @@ public unsafe class Runtime_69965
     {
         [FieldOffset(16)]
         public Vector128<int> Vtor;
+
         [FieldOffset(16)]
         public Vector128<uint> AnotherVtor;
     }

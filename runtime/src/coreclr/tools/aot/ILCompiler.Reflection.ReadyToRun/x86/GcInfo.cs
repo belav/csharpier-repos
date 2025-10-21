@@ -75,7 +75,15 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             Transitions[transition.CodeOffset].Add(transition);
         }
 
-        private void ArgEncoding(byte[] image, ref uint isPop, ref uint argOffs, ref uint argCnt, ref uint curOffs, ref bool isThis, ref bool iptr)
+        private void ArgEncoding(
+            byte[] image,
+            ref uint isPop,
+            ref uint argOffs,
+            ref uint argCnt,
+            ref uint curOffs,
+            ref bool isThis,
+            ref bool iptr
+        )
         {
             if (isPop != 0)
             {
@@ -83,12 +91,30 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
                 if (argOffs != 0)
                 {
-                    AddNewTransition(new GcTransitionPointer((int)curOffs, argOffs, argCnt - argOffs, Action.POP, Header.EbpFrame));
+                    AddNewTransition(
+                        new GcTransitionPointer(
+                            (int)curOffs,
+                            argOffs,
+                            argCnt - argOffs,
+                            Action.POP,
+                            Header.EbpFrame
+                        )
+                    );
                 }
             }
             else
             {
-                AddNewTransition(new GcTransitionPointer((int)curOffs, argOffs, argOffs + 1, Action.PUSH, Header.EbpFrame, isThis, iptr));
+                AddNewTransition(
+                    new GcTransitionPointer(
+                        (int)curOffs,
+                        argOffs,
+                        argOffs + 1,
+                        Action.PUSH,
+                        Header.EbpFrame,
+                        isThis,
+                        iptr
+                    )
+                );
                 isThis = false;
                 iptr = false;
             }
@@ -119,7 +145,15 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                     Action isLive = Action.LIVE;
                     if ((val & 0x40) == 0)
                         isLive = Action.DEAD;
-                    AddNewTransition(new GcTransitionRegister((int)curOffs, (Registers)((val >> 3) & 7), isLive, isThis, iptr));
+                    AddNewTransition(
+                        new GcTransitionRegister(
+                            (int)curOffs,
+                            (Registers)((val >> 3) & 7),
+                            isLive,
+                            isThis,
+                            iptr
+                        )
+                    );
 
                     isThis = false;
                     iptr = false;
@@ -139,7 +173,15 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                     curOffs += (val & 0x07);
                     isPop = (val & 0x40);
 
-                    ArgEncoding(image, ref isPop, ref argOffs, ref argCnt, ref curOffs, ref isThis, ref iptr);
+                    ArgEncoding(
+                        image,
+                        ref isPop,
+                        ref argOffs,
+                        ref argCnt,
+                        ref curOffs,
+                        ref isThis,
+                        ref iptr
+                    );
 
                     continue;
                 }
@@ -155,7 +197,18 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
                         curOffs += (val & 0x07);
                         argCnt++;
-                        AddNewTransition(new GcTransitionPointer((int)curOffs, argOffs, argCnt, Action.PUSH, Header.EbpFrame, false, false, false));
+                        AddNewTransition(
+                            new GcTransitionPointer(
+                                (int)curOffs,
+                                argOffs,
+                                argCnt,
+                                Action.PUSH,
+                                Header.EbpFrame,
+                                false,
+                                false,
+                                false
+                            )
+                        );
                     }
 
                     continue;
@@ -180,11 +233,27 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                     case 0xFC:
                         isPop = val & 0x04;
                         argOffs = NativeReader.DecodeUnsignedGc(image, ref offset);
-                        ArgEncoding(image, ref isPop, ref argOffs, ref argCnt, ref curOffs, ref isThis, ref iptr);
+                        ArgEncoding(
+                            image,
+                            ref isPop,
+                            ref argOffs,
+                            ref argCnt,
+                            ref curOffs,
+                            ref isThis,
+                            ref iptr
+                        );
                         break;
                     case 0xFD:
                         argOffs = NativeReader.DecodeUnsignedGc(image, ref offset);
-                        AddNewTransition(new GcTransitionPointer((int)curOffs, argOffs, argCnt, Action.KILL, Header.EbpFrame));
+                        AddNewTransition(
+                            new GcTransitionPointer(
+                                (int)curOffs,
+                                argOffs,
+                                argCnt,
+                                Action.KILL,
+                                Header.EbpFrame
+                            )
+                        );
                         break;
                     case 0xF9:
                         argOffs = NativeReader.DecodeUnsignedGc(image, ref offset);
@@ -203,14 +272,17 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
         {
             while (true)
             {
-                uint argMask = 0, byrefArgMask = 0;
-                uint regMask, byrefRegMask = 0;
+                uint argMask = 0,
+                    byrefArgMask = 0;
+                uint regMask,
+                    byrefRegMask = 0;
 
                 uint argCnt = 0;
                 int argOffset = offset;
                 uint argTabSize;
 
-                uint val, nxt;
+                uint val,
+                    nxt;
                 uint curOffs = 0;
 
                 // Get the next byte and check for a 'special' entry
@@ -245,7 +317,9 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                                 else
                                     throw new BadImageFormatException("Invalid register");
                                 transition = new GcTransitionCall((int)curOffs);
-                                transition.CallRegisters.Add(new GcTransitionCall.CallRegister(reg, false));
+                                transition.CallRegisters.Add(
+                                    new GcTransitionCall.CallRegister(reg, false)
+                                );
                                 AddNewTransition(transition);
 
                                 continue;
@@ -261,16 +335,16 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                         }
                         break;
 
-                    case 0xFD:  // medium encoding
+                    case 0xFD: // medium encoding
                         argMask = image[offset++];
                         val = image[offset++];
                         argMask |= (val & 0xF0) << 4;
                         nxt = image[offset++];
                         curOffs += (val & 0x0F) + ((nxt & 0x1F) << 4);
-                        regMask = nxt >> 5;                   // EBX,ESI,EDI
+                        regMask = nxt >> 5; // EBX,ESI,EDI
                         break;
 
-                    case 0xF9:  // medium encoding with byrefs
+                    case 0xF9: // medium encoding with byrefs
                         curOffs += image[offset++];
                         val = image[offset++];
                         argMask = val & 0x1F;
@@ -279,8 +353,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                         byrefArgMask = val & 0x1F;
                         byrefRegMask = val >> 5;
                         break;
-                    case 0xFE:  // large encoding
-                    case 0xFA:  // large encoding with byrefs
+                    case 0xFE: // large encoding
+                    case 0xFA: // large encoding with byrefs
                         val = image[offset++];
                         regMask = val & 0x7;
                         byrefRegMask = val >> 4;
@@ -292,7 +366,7 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                             byrefArgMask = NativeReader.ReadUInt32(image, ref offset);
                         }
                         break;
-                    case 0xFB:  // huge encoding
+                    case 0xFB: // huge encoding
                         val = image[offset++];
                         regMask = val & 0x7;
                         byrefRegMask = val >> 4;
@@ -315,7 +389,12 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                     byrefRegMask ...    byref qualifier for regMask
                     byrefArgMask ...    byrer qualifier for argMask
                 */
-                transition = new GcTransitionCall((int)curOffs, Header.EbpFrame, regMask, byrefRegMask);
+                transition = new GcTransitionCall(
+                    (int)curOffs,
+                    Header.EbpFrame,
+                    regMask,
+                    byrefRegMask
+                );
                 AddNewTransition(transition);
 
                 if (argCnt != 0)
@@ -327,8 +406,7 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                         uint stkOffs = val & ~byref_OFFSET_FLAG;
                         uint lowBit = val & byref_OFFSET_FLAG;
                         transition.PtrArgs.Add(new GcTransitionCall.PtrArg(stkOffs, lowBit));
-                    }
-                    while (--argCnt > 0);
+                    } while (--argCnt > 0);
                 }
                 else
                 {
@@ -342,13 +420,30 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
         /// <summary>
         /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/gcdump/i386/gcdumpx86.cpp">GCDump::DumpGCTable</a>
         /// </summary>
-        private void SaveCallTransition(byte[] image, ref int offset, uint val, uint curOffs, uint callRegMask, bool callPndTab, uint callPndTabCnt, uint callPndMask, uint lastSkip, ref uint imask)
+        private void SaveCallTransition(
+            byte[] image,
+            ref int offset,
+            uint val,
+            uint curOffs,
+            uint callRegMask,
+            bool callPndTab,
+            uint callPndTabCnt,
+            uint callPndMask,
+            uint lastSkip,
+            ref uint imask
+        )
         {
-            uint iregMask, iargMask;
+            uint iregMask,
+                iargMask;
             iregMask = imask & 0xF;
             iargMask = imask >> 4;
 
-            GcTransitionCall transition = new GcTransitionCall((int)curOffs, Header.EbpFrame, callRegMask, iregMask);
+            GcTransitionCall transition = new GcTransitionCall(
+                (int)curOffs,
+                Header.EbpFrame,
+                callRegMask,
+                iregMask
+            );
             AddNewTransition(transition);
 
             if (callPndTab)
@@ -391,13 +486,24 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                         {
                             // push    000DDDDD          push one item, 5-bit delta
                             curOffs += val & 0x1F;
-                            AddNewTransition(new GcTransitionRegister((int)curOffs, Registers.ESP, Action.PUSH));
+                            AddNewTransition(
+                                new GcTransitionRegister((int)curOffs, Registers.ESP, Action.PUSH)
+                            );
                         }
                         else
                         {
                             // push    00100000 [pushCount]     ESP push multiple items
                             uint pushCount = NativeReader.DecodeUnsignedGc(image, ref offset);
-                            AddNewTransition(new GcTransitionRegister((int)curOffs, Registers.ESP, Action.PUSH, false, false, (int)pushCount));
+                            AddNewTransition(
+                                new GcTransitionRegister(
+                                    (int)curOffs,
+                                    Registers.ESP,
+                                    Action.PUSH,
+                                    false,
+                                    false,
+                                    (int)pushCount
+                                )
+                            );
                         }
                     }
                     else
@@ -423,7 +529,16 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
                             if (popSize > 0)
                             {
-                                AddNewTransition(new GcTransitionRegister((int)curOffs, Registers.ESP, Action.POP, false, false, (int)popSize));
+                                AddNewTransition(
+                                    new GcTransitionRegister(
+                                        (int)curOffs,
+                                        Registers.ESP,
+                                        Action.POP,
+                                        false,
+                                        false,
+                                        (int)popSize
+                                    )
+                                );
                             }
                             else
                                 lastSkip = skip;
@@ -436,7 +551,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                     uint callRegMask;
                     bool callPndTab = false;
                     uint callPndMask = 0;
-                    uint callPndTabCnt = 0, callPndTabSize = 0;
+                    uint callPndTabCnt = 0,
+                        callPndTabSize = 0;
 
                     switch ((val & 0x70) >> 4)
                     {
@@ -444,9 +560,26 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                             //
                             // call    1PPPPPPP          Call Pattern, P=[0..79]
                             //
-                            CallPattern.DecodeCallPattern((val & 0x7f), out callArgCnt, out callRegMask, out callPndMask, out lastSkip);
+                            CallPattern.DecodeCallPattern(
+                                (val & 0x7f),
+                                out callArgCnt,
+                                out callRegMask,
+                                out callPndMask,
+                                out lastSkip
+                            );
                             curOffs += lastSkip;
-                            SaveCallTransition(image, ref offset, val, curOffs, callRegMask, callPndTab, callPndTabCnt, callPndMask, lastSkip, ref imask);
+                            SaveCallTransition(
+                                image,
+                                ref offset,
+                                val,
+                                curOffs,
+                                callRegMask,
+                                callPndTab,
+                                callPndTabCnt,
+                                callPndMask,
+                                lastSkip,
+                                ref imask
+                            );
                             break;
 
                         case 5:
@@ -454,23 +587,45 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                             // call    1101RRRR DDCCCMMM  Call RegMask=RRRR,ArgCnt=CCC,
                             //                        ArgMask=MMM Delta=commonDelta[DD]
                             //
-                            callRegMask = val & 0xf;    // EBP,EBX,ESI,EDI
+                            callRegMask = val & 0xf; // EBP,EBX,ESI,EDI
                             val = image[offset++];
                             callPndMask = (val & 0x7);
                             callArgCnt = (val >> 3) & 0x7;
                             lastSkip = CallPattern.callCommonDelta[val >> 6];
                             curOffs += lastSkip;
-                            SaveCallTransition(image, ref offset, val, curOffs, callRegMask, callPndTab, callPndTabCnt, callPndMask, lastSkip, ref imask);
+                            SaveCallTransition(
+                                image,
+                                ref offset,
+                                val,
+                                curOffs,
+                                callRegMask,
+                                callPndTab,
+                                callPndTabCnt,
+                                callPndMask,
+                                lastSkip,
+                                ref imask
+                            );
                             break;
                         case 6:
                             //
                             // call    1110RRRR [ArgCnt] [ArgMask]
                             //                          Call ArgCnt,RegMask=RRR,ArgMask
                             //
-                            callRegMask = val & 0xf;    // EBP,EBX,ESI,EDI
+                            callRegMask = val & 0xf; // EBP,EBX,ESI,EDI
                             callArgCnt = NativeReader.DecodeUnsignedGc(image, ref offset);
                             callPndMask = NativeReader.DecodeUnsignedGc(image, ref offset);
-                            SaveCallTransition(image, ref offset, val, curOffs, callRegMask, callPndTab, callPndTabCnt, callPndMask, lastSkip, ref imask);
+                            SaveCallTransition(
+                                image,
+                                ref offset,
+                                val,
+                                curOffs,
+                                callRegMask,
+                                callPndTab,
+                                callPndTabCnt,
+                                callPndMask,
+                                lastSkip,
+                                ref imask
+                            );
                             break;
                         case 7:
                             switch (val & 0x0C)
@@ -482,7 +637,12 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                                     break;
 
                                 case 0x04:
-                                    AddNewTransition(new CalleeSavedRegister((int)curOffs, (CalleeSavedRegisters)(val & 0x3)));
+                                    AddNewTransition(
+                                        new CalleeSavedRegister(
+                                            (int)curOffs,
+                                            (CalleeSavedRegisters)(val & 0x3)
+                                        )
+                                    );
                                     break;
 
                                 case 0x08:
@@ -495,7 +655,18 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                                     callPndTabCnt = NativeReader.ReadUInt32(image, ref offset);
                                     callPndTabSize = NativeReader.ReadUInt32(image, ref offset);
                                     callPndTab = true;
-                                    SaveCallTransition(image, ref offset, val, curOffs, callRegMask, callPndTab, callPndTabCnt, callPndMask, lastSkip, ref imask);
+                                    SaveCallTransition(
+                                        image,
+                                        ref offset,
+                                        val,
+                                        curOffs,
+                                        callRegMask,
+                                        callPndTab,
+                                        callPndTabCnt,
+                                        callPndMask,
+                                        lastSkip,
+                                        ref imask
+                                    );
                                     break;
                                 case 0x0C:
                                     return;

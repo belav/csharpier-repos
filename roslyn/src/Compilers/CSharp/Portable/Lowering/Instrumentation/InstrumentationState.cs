@@ -23,8 +23,8 @@ internal sealed class InstrumentationState
     {
         Instrumenter = recurse(Instrumenter);
 
-        static Instrumenter recurse(Instrumenter instrumenter)
-            => instrumenter switch
+        static Instrumenter recurse(Instrumenter instrumenter) =>
+            instrumenter switch
             {
                 CodeCoverageInstrumenter { Previous: var previous } => recurse(previous),
                 CompoundInstrumenter compound => compound.WithPrevious(recurse(compound.Previous)),

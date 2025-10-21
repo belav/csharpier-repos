@@ -28,9 +28,9 @@
 
 namespace System.Net.Http
 {
-	public enum HttpCompletionOption
-	{
-		ResponseContentRead,
-		ResponseHeadersRead
-	}
+    public enum HttpCompletionOption
+    {
+        ResponseContentRead,
+        ResponseHeadersRead,
+    }
 }

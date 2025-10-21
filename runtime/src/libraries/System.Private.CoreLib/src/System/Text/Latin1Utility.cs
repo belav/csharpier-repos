@@ -17,7 +17,10 @@ namespace System.Text
         /// </summary>
         /// <returns>A Latin-1 char is defined as 0x0000 - 0x00FF, inclusive.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe nuint GetIndexOfFirstNonLatin1Char(char* pBuffer, nuint bufferLength /* in chars */)
+        public static unsafe nuint GetIndexOfFirstNonLatin1Char(
+            char* pBuffer,
+            nuint bufferLength /* in chars */
+        )
         {
             // If SSE2 is supported, use those specific intrinsics instead of the generic vectorized
             // code below. This has two benefits: (a) we can take advantage of specific instructions like
@@ -29,7 +32,10 @@ namespace System.Text
                 : GetIndexOfFirstNonLatin1Char_Default(pBuffer, bufferLength);
         }
 
-        private static unsafe nuint GetIndexOfFirstNonLatin1Char_Default(char* pBuffer, nuint bufferLength /* in chars */)
+        private static unsafe nuint GetIndexOfFirstNonLatin1Char_Default(
+            char* pBuffer,
+            nuint bufferLength /* in chars */
+        )
         {
             // Squirrel away the original buffer reference.This method works by determining the exact
             // char reference where non-Latin1 data begins, so we need this base value to perform the
@@ -49,26 +55,45 @@ namespace System.Text
 
                 Vector<ushort> maxLatin1 = new Vector<ushort>(0x00FF);
 
-                if (Vector.LessThanOrEqualAll(Unsafe.ReadUnaligned<Vector<ushort>>(pBuffer), maxLatin1))
+                if (
+                    Vector.LessThanOrEqualAll(
+                        Unsafe.ReadUnaligned<Vector<ushort>>(pBuffer),
+                        maxLatin1
+                    )
+                )
                 {
                     // The first several elements of the input buffer were Latin-1. Bump up the pointer to the
                     // next aligned boundary, then perform aligned reads from here on out until we find non-Latin-1
                     // data or we approach the end of the buffer. It's possible we'll reread data; this is ok.
 
                     char* pFinalVectorReadPos = pBuffer + bufferLength - SizeOfVectorInChars;
-                    pBuffer = (char*)(((nuint)pBuffer + SizeOfVectorInBytes) & ~(nuint)(SizeOfVectorInBytes - 1));
+                    pBuffer = (char*)(
+                        ((nuint)pBuffer + SizeOfVectorInBytes) & ~(nuint)(SizeOfVectorInBytes - 1)
+                    );
 
 #if DEBUG
                     long numCharsRead = pBuffer - pOriginalBuffer;
-                    Debug.Assert(0 < numCharsRead && numCharsRead <= SizeOfVectorInChars, "We should've made forward progress of at least one char.");
-                    Debug.Assert((nuint)numCharsRead <= bufferLength, "We shouldn't have read past the end of the input buffer.");
+                    Debug.Assert(
+                        0 < numCharsRead && numCharsRead <= SizeOfVectorInChars,
+                        "We should've made forward progress of at least one char."
+                    );
+                    Debug.Assert(
+                        (nuint)numCharsRead <= bufferLength,
+                        "We shouldn't have read past the end of the input buffer."
+                    );
 #endif
 
-                    Debug.Assert(pBuffer <= pFinalVectorReadPos, "Should be able to read at least one vector.");
+                    Debug.Assert(
+                        pBuffer <= pFinalVectorReadPos,
+                        "Should be able to read at least one vector."
+                    );
 
                     do
                     {
-                        Debug.Assert((nuint)pBuffer % SizeOfVectorInChars == 0, "Vector read should be aligned.");
+                        Debug.Assert(
+                            (nuint)pBuffer % SizeOfVectorInChars == 0,
+                            "Vector read should be aligned."
+                        );
                         if (Vector.GreaterThanAny(Unsafe.Read<Vector<ushort>>(pBuffer), maxLatin1))
                         {
                             break; // found non-Latin-1 data
@@ -143,15 +168,21 @@ namespace System.Text
                 }
             }
 
-        Finish:
+            Finish:
 
             nuint totalNumBytesRead = (nuint)pBuffer - (nuint)pOriginalBuffer;
-            Debug.Assert(totalNumBytesRead % sizeof(char) == 0, "Total number of bytes read should be even since we're working with chars.");
+            Debug.Assert(
+                totalNumBytesRead % sizeof(char) == 0,
+                "Total number of bytes read should be even since we're working with chars."
+            );
             return totalNumBytesRead / sizeof(char); // convert byte count -> char count before returning
 
-        FoundNonLatin1Data:
+            FoundNonLatin1Data:
 
-            Debug.Assert(!AllCharsInUInt32AreLatin1(currentUInt32), "Shouldn't have reached this point if we have an all-Latin-1 input.");
+            Debug.Assert(
+                !AllCharsInUInt32AreLatin1(currentUInt32),
+                "Shouldn't have reached this point if we have an all-Latin-1 input."
+            );
 
             // We don't bother looking at the second char - only the first char.
 
@@ -164,7 +195,10 @@ namespace System.Text
         }
 
         [CompExactlyDependsOn(typeof(Sse2))]
-        private static unsafe nuint GetIndexOfFirstNonLatin1Char_Sse2(char* pBuffer, nuint bufferLength /* in chars */)
+        private static unsafe nuint GetIndexOfFirstNonLatin1Char_Sse2(
+            char* pBuffer,
+            nuint bufferLength /* in chars */
+        )
         {
             // This method contains logic optimized for both SSE2 and SSE41. Much of the logic in this method
             // will be elided by JIT once we determine which specific ISAs we support.
@@ -184,7 +218,8 @@ namespace System.Text
             Debug.Assert(Sse2.IsSupported, "Should've been checked by caller.");
             Debug.Assert(BitConverter.IsLittleEndian, "SSE2 assumes little-endian.");
 
-            Vector128<ushort> firstVector, secondVector;
+            Vector128<ushort> firstVector,
+                secondVector;
             uint currentMask;
             char* pOriginalBuffer = pBuffer;
 
@@ -211,7 +246,8 @@ namespace System.Text
             // has value >= 0x0100 (non-Latin-1). Then we'll treat the vector as a BYTE vector in order
             // to extract the mask. Reminder: the 0x0080 bit of each WORD should be ignored.
 
-            currentMask = (uint)Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
+            currentMask = (uint)
+                Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
 
             if ((currentMask & NonLatin1DataSeenMask) != 0)
             {
@@ -233,12 +269,20 @@ namespace System.Text
 
             // Now adjust the read pointer so that future reads are aligned.
 
-            pBuffer = (char*)(((nuint)pBuffer + SizeOfVector128InBytes) & ~(nuint)(SizeOfVector128InBytes - 1));
+            pBuffer = (char*)(
+                ((nuint)pBuffer + SizeOfVector128InBytes) & ~(nuint)(SizeOfVector128InBytes - 1)
+            );
 
 #if DEBUG
             long numCharsRead = pBuffer - pOriginalBuffer;
-            Debug.Assert(0 < numCharsRead && numCharsRead <= SizeOfVector128InChars, "We should've made forward progress of at least one char.");
-            Debug.Assert((nuint)numCharsRead <= bufferLength, "We shouldn't have read past the end of the input buffer.");
+            Debug.Assert(
+                0 < numCharsRead && numCharsRead <= SizeOfVector128InChars,
+                "We should've made forward progress of at least one char."
+            );
+            Debug.Assert(
+                (nuint)numCharsRead <= bufferLength,
+                "We shouldn't have read past the end of the input buffer."
+            );
 #endif
 
             // Adjust remaining buffer length.
@@ -251,14 +295,18 @@ namespace System.Text
 
             if (bufferLength >= 2 * SizeOfVector128InBytes)
             {
-                char* pFinalVectorReadPos = (char*)((nuint)pBuffer + bufferLength - 2 * SizeOfVector128InBytes);
+                char* pFinalVectorReadPos = (char*)(
+                    (nuint)pBuffer + bufferLength - 2 * SizeOfVector128InBytes
+                );
 
                 // After this point, we no longer need to update the bufferLength value.
 
                 do
                 {
                     firstVector = Sse2.LoadAlignedVector128((ushort*)pBuffer);
-                    secondVector = Sse2.LoadAlignedVector128((ushort*)pBuffer + SizeOfVector128InChars);
+                    secondVector = Sse2.LoadAlignedVector128(
+                        (ushort*)pBuffer + SizeOfVector128InChars
+                    );
                     Vector128<ushort> combinedVector = Sse2.Or(firstVector, secondVector);
 
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // In this case, we have an else clause which has the same semantic meaning whether or not Sse41 is considered supported or unsupported
@@ -275,7 +323,10 @@ namespace System.Text
                     else
                     {
                         // See comment earlier in the method for an explanation of how the below logic works.
-                        currentMask = (uint)Sse2.MoveMask(Sse2.AddSaturate(combinedVector, latin1MaskForAddSaturate).AsByte());
+                        currentMask = (uint)
+                            Sse2.MoveMask(
+                                Sse2.AddSaturate(combinedVector, latin1MaskForAddSaturate).AsByte()
+                            );
                         if ((currentMask & NonLatin1DataSeenMask) != 0)
                         {
                             goto FoundNonLatin1DataInFirstOrSecondVector;
@@ -320,27 +371,31 @@ namespace System.Text
             else
             {
                 // See comment earlier in the method for an explanation of how the below logic works.
-                currentMask = (uint)Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
+                currentMask = (uint)
+                    Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
                 if ((currentMask & NonLatin1DataSeenMask) != 0)
                 {
                     goto FoundNonLatin1DataInCurrentMask;
                 }
             }
 
-        IncrementCurrentOffsetBeforeFinalUnalignedVectorRead:
+            IncrementCurrentOffsetBeforeFinalUnalignedVectorRead:
 
             pBuffer += SizeOfVector128InChars;
 
-        DoFinalUnalignedVectorRead:
+            DoFinalUnalignedVectorRead:
 
             if (((byte)bufferLength & (SizeOfVector128InBytes - 1)) != 0)
             {
                 // Perform an unaligned read of the last vector.
                 // We need to adjust the pointer because we're re-reading data.
 
-                pBuffer = (char*)((byte*)pBuffer + (bufferLength & (SizeOfVector128InBytes - 1)) - SizeOfVector128InBytes);
+                pBuffer = (char*)(
+                    (byte*)pBuffer
+                    + (bufferLength & (SizeOfVector128InBytes - 1))
+                    - SizeOfVector128InBytes
+                );
                 firstVector = Sse2.LoadVector128((ushort*)pBuffer); // unaligned load
-
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // In this case, we have an else clause which has the same semantic meaning whether or not Sse41 is considered supported or unsupported
                 if (Sse41.IsSupported)
 #pragma warning restore IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
@@ -355,7 +410,10 @@ namespace System.Text
                 else
                 {
                     // See comment earlier in the method for an explanation of how the below logic works.
-                    currentMask = (uint)Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
+                    currentMask = (uint)
+                        Sse2.MoveMask(
+                            Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte()
+                        );
                     if ((currentMask & NonLatin1DataSeenMask) != 0)
                     {
                         goto FoundNonLatin1DataInCurrentMask;
@@ -365,12 +423,15 @@ namespace System.Text
                 pBuffer += SizeOfVector128InChars;
             }
 
-        Finish:
+            Finish:
 
-            Debug.Assert(((nuint)pBuffer - (nuint)pOriginalBuffer) % 2 == 0, "Shouldn't have incremented any pointer by an odd byte count.");
+            Debug.Assert(
+                ((nuint)pBuffer - (nuint)pOriginalBuffer) % 2 == 0,
+                "Shouldn't have incremented any pointer by an odd byte count."
+            );
             return ((nuint)pBuffer - (nuint)pOriginalBuffer) / sizeof(char); // and we're done! (remember to adjust for char count)
 
-        FoundNonLatin1DataInFirstOrSecondVector:
+            FoundNonLatin1DataInFirstOrSecondVector:
 
             // We don't know if the first or the second vector contains non-Latin-1 data. Check the first
             // vector, and if that's all-Latin-1 then the second vector must be the culprit. Either way
@@ -388,7 +449,8 @@ namespace System.Text
             }
             else
             {
-                currentMask = (uint)Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
+                currentMask = (uint)
+                    Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
                 if ((currentMask & NonLatin1DataSeenMask) != 0)
                 {
                     goto FoundNonLatin1DataInCurrentMask;
@@ -400,12 +462,13 @@ namespace System.Text
             pBuffer += SizeOfVector128InChars;
             firstVector = secondVector;
 
-        FoundNonLatin1DataInFirstVector:
+            FoundNonLatin1DataInFirstVector:
 
             // See comment earlier in the method for an explanation of how the below logic works.
-            currentMask = (uint)Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
+            currentMask = (uint)
+                Sse2.MoveMask(Sse2.AddSaturate(firstVector, latin1MaskForAddSaturate).AsByte());
 
-        FoundNonLatin1DataInCurrentMask:
+            FoundNonLatin1DataInCurrentMask:
 
             // See comment earlier in the method accounting for the 0x8000 and 0x0080 bits set after the WORD-sized operations.
 
@@ -423,14 +486,19 @@ namespace System.Text
             // compute the correct final ending pointer value.
 
             Debug.Assert(currentMask != 0, "Shouldn't be here unless we see non-Latin-1 data.");
-            pBuffer = (char*)((byte*)pBuffer + (uint)BitOperations.TrailingZeroCount(currentMask) - 1);
+            pBuffer = (char*)(
+                (byte*)pBuffer + (uint)BitOperations.TrailingZeroCount(currentMask) - 1
+            );
 
             goto Finish;
 
-        FoundNonLatin1DataInCurrentDWord:
+            FoundNonLatin1DataInCurrentDWord:
 
             uint currentDWord;
-            Debug.Assert(!AllCharsInUInt32AreLatin1(currentDWord), "Shouldn't be here unless we see non-Latin-1 data.");
+            Debug.Assert(
+                !AllCharsInUInt32AreLatin1(currentDWord),
+                "Shouldn't be here unless we see non-Latin-1 data."
+            );
 
             if (FirstCharInUInt32IsLatin1(currentDWord))
             {
@@ -439,7 +507,7 @@ namespace System.Text
 
             goto Finish;
 
-        InputBufferLessThanOneVectorInLength:
+            InputBufferLessThanOneVectorInLength:
 
             // These code paths get hit if the original input length was less than one vector in size.
             // We can't perform vectorized reads at this point, so we'll fall back to reading primitives
@@ -469,7 +537,10 @@ namespace System.Text
                         // any char the same as a match in the low byte of that same char.
 
                         candidateUInt64 &= 0xFF00FF00_FF00FF00ul;
-                        pBuffer = (char*)((byte*)pBuffer + ((nuint)(Bmi1.X64.TrailingZeroCount(candidateUInt64) / 8) & ~(nuint)1));
+                        pBuffer = (char*)(
+                            (byte*)pBuffer
+                            + ((nuint)(Bmi1.X64.TrailingZeroCount(candidateUInt64) / 8) & ~(nuint)1)
+                        );
                         goto Finish;
                     }
                 }
@@ -526,18 +597,22 @@ namespace System.Text
             goto Finish;
         }
 
-
         /// <summary>
         /// Copies as many Latin-1 characters (U+0000..U+00FF) as possible from <paramref name="pUtf16Buffer"/>
         /// to <paramref name="pLatin1Buffer"/>, stopping when the first non-Latin-1 character is encountered
         /// or once <paramref name="elementCount"/> elements have been converted. Returns the total number
         /// of elements that were able to be converted.
         /// </summary>
-        public static unsafe nuint NarrowUtf16ToLatin1(char* pUtf16Buffer, byte* pLatin1Buffer, nuint elementCount)
+        public static unsafe nuint NarrowUtf16ToLatin1(
+            char* pUtf16Buffer,
+            byte* pLatin1Buffer,
+            nuint elementCount
+        )
         {
             nuint currentOffset = 0;
 
-            uint utf16Data32BitsHigh = 0, utf16Data32BitsLow = 0;
+            uint utf16Data32BitsHigh = 0,
+                utf16Data32BitsLow = 0;
             ulong utf16Data64Bits = 0;
 
             // If SSE2 is supported, use those specific intrinsics instead of the generic vectorized
@@ -547,7 +622,10 @@ namespace System.Text
 
             if (Sse2.IsSupported)
             {
-                Debug.Assert(BitConverter.IsLittleEndian, "Assume little endian if SSE2 is supported.");
+                Debug.Assert(
+                    BitConverter.IsLittleEndian,
+                    "Assume little endian if SSE2 is supported."
+                );
 
                 if (elementCount >= 2 * (uint)sizeof(Vector128<byte>))
                 {
@@ -566,14 +644,20 @@ namespace System.Text
                     else
                     {
                         utf16Data32BitsHigh = Unsafe.ReadUnaligned<uint>(pUtf16Buffer);
-                        utf16Data32BitsLow = Unsafe.ReadUnaligned<uint>(pUtf16Buffer + 4 / sizeof(char));
+                        utf16Data32BitsLow = Unsafe.ReadUnaligned<uint>(
+                            pUtf16Buffer + 4 / sizeof(char)
+                        );
                         if (!AllCharsInUInt32AreLatin1(utf16Data32BitsHigh | utf16Data32BitsLow))
                         {
                             goto FoundNonLatin1DataIn64BitRead;
                         }
                     }
 
-                    currentOffset = NarrowUtf16ToLatin1_Sse2(pUtf16Buffer, pLatin1Buffer, elementCount);
+                    currentOffset = NarrowUtf16ToLatin1_Sse2(
+                        pUtf16Buffer,
+                        pLatin1Buffer,
+                        elementCount
+                    );
                 }
             }
             else if (Vector.IsHardwareAccelerated)
@@ -598,7 +682,9 @@ namespace System.Text
                     else
                     {
                         utf16Data32BitsHigh = Unsafe.ReadUnaligned<uint>(pUtf16Buffer);
-                        utf16Data32BitsLow = Unsafe.ReadUnaligned<uint>(pUtf16Buffer + 4 / sizeof(char));
+                        utf16Data32BitsLow = Unsafe.ReadUnaligned<uint>(
+                            pUtf16Buffer + 4 / sizeof(char)
+                        );
                         if (!AllCharsInUInt32AreLatin1(utf16Data32BitsHigh | utf16Data32BitsLow))
                         {
                             goto FoundNonLatin1DataIn64BitRead;
@@ -610,10 +696,19 @@ namespace System.Text
                     nuint finalOffsetWhereCanLoop = elementCount - 2 * SizeOfVector;
                     do
                     {
-                        Vector<ushort> utf16VectorHigh = Unsafe.ReadUnaligned<Vector<ushort>>(pUtf16Buffer + currentOffset);
-                        Vector<ushort> utf16VectorLow = Unsafe.ReadUnaligned<Vector<ushort>>(pUtf16Buffer + currentOffset + Vector<ushort>.Count);
+                        Vector<ushort> utf16VectorHigh = Unsafe.ReadUnaligned<Vector<ushort>>(
+                            pUtf16Buffer + currentOffset
+                        );
+                        Vector<ushort> utf16VectorLow = Unsafe.ReadUnaligned<Vector<ushort>>(
+                            pUtf16Buffer + currentOffset + Vector<ushort>.Count
+                        );
 
-                        if (Vector.GreaterThanAny(Vector.BitwiseOr(utf16VectorHigh, utf16VectorLow), maxLatin1))
+                        if (
+                            Vector.GreaterThanAny(
+                                Vector.BitwiseOr(utf16VectorHigh, utf16VectorLow),
+                                maxLatin1
+                            )
+                        )
                         {
                             break; // found non-Latin-1 data
                         }
@@ -647,19 +742,32 @@ namespace System.Text
                             goto FoundNonLatin1DataIn64BitRead;
                         }
 
-                        NarrowFourUtf16CharsToLatin1AndWriteToBuffer(ref pLatin1Buffer[currentOffset], utf16Data64Bits);
+                        NarrowFourUtf16CharsToLatin1AndWriteToBuffer(
+                            ref pLatin1Buffer[currentOffset],
+                            utf16Data64Bits
+                        );
                     }
                     else
                     {
-                        utf16Data32BitsHigh = Unsafe.ReadUnaligned<uint>(pUtf16Buffer + currentOffset);
-                        utf16Data32BitsLow = Unsafe.ReadUnaligned<uint>(pUtf16Buffer + currentOffset + 4 / sizeof(char));
+                        utf16Data32BitsHigh = Unsafe.ReadUnaligned<uint>(
+                            pUtf16Buffer + currentOffset
+                        );
+                        utf16Data32BitsLow = Unsafe.ReadUnaligned<uint>(
+                            pUtf16Buffer + currentOffset + 4 / sizeof(char)
+                        );
                         if (!AllCharsInUInt32AreLatin1(utf16Data32BitsHigh | utf16Data32BitsLow))
                         {
                             goto FoundNonLatin1DataIn64BitRead;
                         }
 
-                        NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(ref pLatin1Buffer[currentOffset], utf16Data32BitsHigh);
-                        NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(ref pLatin1Buffer[currentOffset + 2], utf16Data32BitsLow);
+                        NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(
+                            ref pLatin1Buffer[currentOffset],
+                            utf16Data32BitsHigh
+                        );
+                        NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(
+                            ref pLatin1Buffer[currentOffset + 2],
+                            utf16Data32BitsLow
+                        );
                     }
 
                     currentOffset += 4;
@@ -676,7 +784,10 @@ namespace System.Text
                     goto FoundNonLatin1DataInHigh32Bits;
                 }
 
-                NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(ref pLatin1Buffer[currentOffset], utf16Data32BitsHigh);
+                NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(
+                    ref pLatin1Buffer[currentOffset],
+                    utf16Data32BitsHigh
+                );
                 currentOffset += 2;
             }
 
@@ -692,11 +803,11 @@ namespace System.Text
                 }
             }
 
-        Finish:
+            Finish:
 
             return currentOffset;
 
-        FoundNonLatin1DataIn64BitRead:
+            FoundNonLatin1DataIn64BitRead:
 
             if (IntPtr.Size >= 8)
             {
@@ -714,7 +825,10 @@ namespace System.Text
 
                 if (AllCharsInUInt32AreLatin1(utf16Data32BitsHigh))
                 {
-                    NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(ref pLatin1Buffer[currentOffset], utf16Data32BitsHigh);
+                    NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(
+                        ref pLatin1Buffer[currentOffset],
+                        utf16Data32BitsHigh
+                    );
 
                     if (BitConverter.IsLittleEndian)
                     {
@@ -735,15 +849,21 @@ namespace System.Text
 
                 if (AllCharsInUInt32AreLatin1(utf16Data32BitsHigh))
                 {
-                    NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(ref pLatin1Buffer[currentOffset], utf16Data32BitsHigh);
+                    NarrowTwoUtf16CharsToLatin1AndWriteToBuffer(
+                        ref pLatin1Buffer[currentOffset],
+                        utf16Data32BitsHigh
+                    );
                     utf16Data32BitsHigh = utf16Data32BitsLow;
                     currentOffset += 2;
                 }
             }
 
-        FoundNonLatin1DataInHigh32Bits:
+            FoundNonLatin1DataInHigh32Bits:
 
-            Debug.Assert(!AllCharsInUInt32AreLatin1(utf16Data32BitsHigh), "Shouldn't have reached this point if we have an all-Latin-1 input.");
+            Debug.Assert(
+                !AllCharsInUInt32AreLatin1(utf16Data32BitsHigh),
+                "Shouldn't have reached this point if we have an all-Latin-1 input."
+            );
 
             // There's at most one char that needs to be drained.
 
@@ -762,7 +882,11 @@ namespace System.Text
         }
 
         [CompExactlyDependsOn(typeof(Sse2))]
-        private static unsafe nuint NarrowUtf16ToLatin1_Sse2(char* pUtf16Buffer, byte* pLatin1Buffer, nuint elementCount)
+        private static unsafe nuint NarrowUtf16ToLatin1_Sse2(
+            char* pUtf16Buffer,
+            byte* pLatin1Buffer,
+            nuint elementCount
+        )
         {
             // This method contains logic optimized for both SSE2 and SSE41. Much of the logic in this method
             // will be elided by JIT once we determine which specific ISAs we support.
@@ -802,7 +926,14 @@ namespace System.Text
             }
             else
             {
-                if ((Sse2.MoveMask(Sse2.AddSaturate(utf16VectorFirst.AsUInt16(), latin1MaskForAddSaturate).AsByte()) & NonLatin1DataSeenMask) != 0)
+                if (
+                    (
+                        Sse2.MoveMask(
+                            Sse2.AddSaturate(utf16VectorFirst.AsUInt16(), latin1MaskForAddSaturate)
+                                .AsByte()
+                        ) & NonLatin1DataSeenMask
+                    ) != 0
+                )
                 {
                     return 0;
                 }
@@ -810,7 +941,10 @@ namespace System.Text
 
             // Turn the 8 Latin-1 chars we just read into 8 Latin-1 bytes, then copy it to the destination.
 
-            Vector128<byte> latin1Vector = Sse2.PackUnsignedSaturate(utf16VectorFirst, utf16VectorFirst);
+            Vector128<byte> latin1Vector = Sse2.PackUnsignedSaturate(
+                utf16VectorFirst,
+                utf16VectorFirst
+            );
             Sse2.StoreScalar((ulong*)pLatin1Buffer, latin1Vector.AsUInt64()); // ulong* calculated here is UNALIGNED
 
             nuint currentOffsetInElements = SizeOfVector128 / 2; // we processed 8 elements so far
@@ -830,7 +964,9 @@ namespace System.Text
             {
                 // We need to perform one more partial vector write before we can get the alignment we want.
 
-                utf16VectorFirst = Sse2.LoadVector128((short*)pUtf16Buffer + currentOffsetInElements); // unaligned load
+                utf16VectorFirst = Sse2.LoadVector128(
+                    (short*)pUtf16Buffer + currentOffsetInElements
+                ); // unaligned load
 
                 // See comments earlier in this method for information about how this works.
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // In this case, we have an else clause which has the same semantic meaning whether or not Sse41 is considered supported or unsupported
@@ -844,7 +980,17 @@ namespace System.Text
                 }
                 else
                 {
-                    if ((Sse2.MoveMask(Sse2.AddSaturate(utf16VectorFirst.AsUInt16(), latin1MaskForAddSaturate).AsByte()) & NonLatin1DataSeenMask) != 0)
+                    if (
+                        (
+                            Sse2.MoveMask(
+                                Sse2.AddSaturate(
+                                        utf16VectorFirst.AsUInt16(),
+                                        latin1MaskForAddSaturate
+                                    )
+                                    .AsByte()
+                            ) & NonLatin1DataSeenMask
+                        ) != 0
+                    )
                     {
                         goto Finish;
                     }
@@ -852,25 +998,42 @@ namespace System.Text
 
                 // Turn the 8 Latin-1 chars we just read into 8 Latin-1 bytes, then copy it to the destination.
                 latin1Vector = Sse2.PackUnsignedSaturate(utf16VectorFirst, utf16VectorFirst);
-                Sse2.StoreScalar((ulong*)(pLatin1Buffer + currentOffsetInElements), latin1Vector.AsUInt64()); // ulong* calculated here is UNALIGNED
+                Sse2.StoreScalar(
+                    (ulong*)(pLatin1Buffer + currentOffsetInElements),
+                    latin1Vector.AsUInt64()
+                ); // ulong* calculated here is UNALIGNED
             }
 
             // Calculate how many elements we wrote in order to get pLatin1Buffer to its next alignment
             // point, then use that as the base offset going forward.
 
-            currentOffsetInElements = SizeOfVector128 - ((nuint)pLatin1Buffer & MaskOfAllBitsInVector128);
-            Debug.Assert(0 < currentOffsetInElements && currentOffsetInElements <= SizeOfVector128, "We wrote at least 1 byte but no more than a whole vector.");
+            currentOffsetInElements =
+                SizeOfVector128 - ((nuint)pLatin1Buffer & MaskOfAllBitsInVector128);
+            Debug.Assert(
+                0 < currentOffsetInElements && currentOffsetInElements <= SizeOfVector128,
+                "We wrote at least 1 byte but no more than a whole vector."
+            );
 
-            Debug.Assert(currentOffsetInElements <= elementCount, "Shouldn't have overrun the destination buffer.");
-            Debug.Assert(elementCount - currentOffsetInElements >= SizeOfVector128, "We should be able to run at least one whole vector.");
+            Debug.Assert(
+                currentOffsetInElements <= elementCount,
+                "Shouldn't have overrun the destination buffer."
+            );
+            Debug.Assert(
+                elementCount - currentOffsetInElements >= SizeOfVector128,
+                "We should be able to run at least one whole vector."
+            );
 
             nuint finalOffsetWhereCanRunLoop = elementCount - SizeOfVector128;
             do
             {
                 // In a loop, perform two unaligned reads, narrow to a single vector, then aligned write one vector.
 
-                utf16VectorFirst = Sse2.LoadVector128((short*)pUtf16Buffer + currentOffsetInElements); // unaligned load
-                Vector128<short> utf16VectorSecond = Sse2.LoadVector128((short*)pUtf16Buffer + currentOffsetInElements + SizeOfVector128 / sizeof(short)); // unaligned load
+                utf16VectorFirst = Sse2.LoadVector128(
+                    (short*)pUtf16Buffer + currentOffsetInElements
+                ); // unaligned load
+                Vector128<short> utf16VectorSecond = Sse2.LoadVector128(
+                    (short*)pUtf16Buffer + currentOffsetInElements + SizeOfVector128 / sizeof(short)
+                ); // unaligned load
                 Vector128<short> combinedVector = Sse2.Or(utf16VectorFirst, utf16VectorSecond);
 
                 // See comments in GetIndexOfFirstNonLatin1Char_Sse2 for information about how this works.
@@ -885,7 +1048,17 @@ namespace System.Text
                 }
                 else
                 {
-                    if ((Sse2.MoveMask(Sse2.AddSaturate(combinedVector.AsUInt16(), latin1MaskForAddSaturate).AsByte()) & NonLatin1DataSeenMask) != 0)
+                    if (
+                        (
+                            Sse2.MoveMask(
+                                Sse2.AddSaturate(
+                                        combinedVector.AsUInt16(),
+                                        latin1MaskForAddSaturate
+                                    )
+                                    .AsByte()
+                            ) & NonLatin1DataSeenMask
+                        ) != 0
+                    )
                     {
                         goto FoundNonLatin1DataInLoop;
                     }
@@ -895,18 +1068,21 @@ namespace System.Text
 
                 latin1Vector = Sse2.PackUnsignedSaturate(utf16VectorFirst, utf16VectorSecond);
 
-                Debug.Assert(((nuint)pLatin1Buffer + currentOffsetInElements) % SizeOfVector128 == 0, "Write should be aligned.");
+                Debug.Assert(
+                    ((nuint)pLatin1Buffer + currentOffsetInElements) % SizeOfVector128 == 0,
+                    "Write should be aligned."
+                );
                 Sse2.StoreAligned(pLatin1Buffer + currentOffsetInElements, latin1Vector); // aligned
 
                 currentOffsetInElements += SizeOfVector128;
             } while (currentOffsetInElements <= finalOffsetWhereCanRunLoop);
 
-        Finish:
+            Finish:
 
             // There might be some Latin-1 data left over. That's fine - we'll let our caller handle the final drain.
             return currentOffsetInElements;
 
-        FoundNonLatin1DataInLoop:
+            FoundNonLatin1DataInLoop:
 
             // Can we at least narrow the high vector?
             // See comments in GetIndexOfFirstNonLatin1Char_Sse2 for information about how this works.
@@ -921,7 +1097,14 @@ namespace System.Text
             }
             else
             {
-                if ((Sse2.MoveMask(Sse2.AddSaturate(utf16VectorFirst.AsUInt16(), latin1MaskForAddSaturate).AsByte()) & NonLatin1DataSeenMask) != 0)
+                if (
+                    (
+                        Sse2.MoveMask(
+                            Sse2.AddSaturate(utf16VectorFirst.AsUInt16(), latin1MaskForAddSaturate)
+                                .AsByte()
+                        ) & NonLatin1DataSeenMask
+                    ) != 0
+                )
                 {
                     goto Finish; // found non-Latin-1 data
                 }
@@ -930,9 +1113,15 @@ namespace System.Text
             // First part was all Latin-1, narrow and aligned write. Note we're only filling in the low half of the vector.
             latin1Vector = Sse2.PackUnsignedSaturate(utf16VectorFirst, utf16VectorFirst);
 
-            Debug.Assert(((nuint)pLatin1Buffer + currentOffsetInElements) % sizeof(ulong) == 0, "Destination should be ulong-aligned.");
+            Debug.Assert(
+                ((nuint)pLatin1Buffer + currentOffsetInElements) % sizeof(ulong) == 0,
+                "Destination should be ulong-aligned."
+            );
 
-            Sse2.StoreScalar((ulong*)(pLatin1Buffer + currentOffsetInElements), latin1Vector.AsUInt64()); // ulong* calculated here is aligned
+            Sse2.StoreScalar(
+                (ulong*)(pLatin1Buffer + currentOffsetInElements),
+                latin1Vector.AsUInt64()
+            ); // ulong* calculated here is aligned
             currentOffsetInElements += SizeOfVector128 / 2;
 
             goto Finish;
@@ -943,7 +1132,11 @@ namespace System.Text
         /// buffer <paramref name="pUtf16Buffer"/>, widening data while copying. <paramref name="elementCount"/>
         /// specifies the element count of both the source and destination buffers.
         /// </summary>
-        public static unsafe void WidenLatin1ToUtf16(byte* pLatin1Buffer, char* pUtf16Buffer, nuint elementCount)
+        public static unsafe void WidenLatin1ToUtf16(
+            byte* pLatin1Buffer,
+            char* pUtf16Buffer,
+            nuint elementCount
+        )
         {
             // If SSE2 is supported, use those specific intrinsics instead of the generic vectorized
             // code below. This has two benefits: (a) we can take advantage of specific instructions like
@@ -961,7 +1154,11 @@ namespace System.Text
         }
 
         [CompExactlyDependsOn(typeof(Sse2))]
-        private static unsafe void WidenLatin1ToUtf16_Sse2(byte* pLatin1Buffer, char* pUtf16Buffer, nuint elementCount)
+        private static unsafe void WidenLatin1ToUtf16_Sse2(
+            byte* pLatin1Buffer,
+            char* pUtf16Buffer,
+            nuint elementCount
+        )
         {
             // JIT turns the below into constants
 
@@ -993,7 +1190,9 @@ namespace System.Text
                 // that we wrote chars, not bytes. This means we may re-read data in the next iteration of
                 // the loop, but this is ok.
 
-                currentOffset = (SizeOfVector128 >> 1) - (((nuint)pUtf16Buffer >> 1) & (MaskOfAllBitsInVector128 >> 1));
+                currentOffset =
+                    (SizeOfVector128 >> 1)
+                    - (((nuint)pUtf16Buffer >> 1) & (MaskOfAllBitsInVector128 >> 1));
                 Debug.Assert(0 < currentOffset && currentOffset <= SizeOfVector128 / sizeof(char));
 
                 // Calculating the destination address outside the loop results in significant
@@ -1024,7 +1223,10 @@ namespace System.Text
                 }
             }
 
-            Debug.Assert(elementCount - currentOffset < SizeOfVector128, "Case where 2 vectors remained should've been in the hot loop.");
+            Debug.Assert(
+                elementCount - currentOffset < SizeOfVector128,
+                "Case where 2 vectors remained should've been in the hot loop."
+            );
             uint remaining = (uint)elementCount - (uint)currentOffset;
 
             // Now handle cases where we can't process two vectors at a time.
@@ -1033,8 +1235,12 @@ namespace System.Text
             {
                 // Read a single 64-bit vector; write a single 128-bit vector.
 
-                latin1Vector = Sse2.LoadScalarVector128((ulong*)(pLatin1Buffer + currentOffset)).AsByte(); // unaligned load
-                Sse2.Store((byte*)(pUtf16Buffer + currentOffset), Sse2.UnpackLow(latin1Vector, zeroVector)); // unaligned write
+                latin1Vector = Sse2.LoadScalarVector128((ulong*)(pLatin1Buffer + currentOffset))
+                    .AsByte(); // unaligned load
+                Sse2.Store(
+                    (byte*)(pUtf16Buffer + currentOffset),
+                    Sse2.UnpackLow(latin1Vector, zeroVector)
+                ); // unaligned write
                 currentOffset += 8;
             }
 
@@ -1042,8 +1248,12 @@ namespace System.Text
             {
                 // Read a single 32-bit vector; write a single 64-bit vector.
 
-                latin1Vector = Sse2.LoadScalarVector128((uint*)(pLatin1Buffer + currentOffset)).AsByte(); // unaligned load
-                Sse2.StoreScalar((ulong*)(pUtf16Buffer + currentOffset), Sse2.UnpackLow(latin1Vector, zeroVector).AsUInt64()); // unaligned write
+                latin1Vector = Sse2.LoadScalarVector128((uint*)(pLatin1Buffer + currentOffset))
+                    .AsByte(); // unaligned load
+                Sse2.StoreScalar(
+                    (ulong*)(pUtf16Buffer + currentOffset),
+                    Sse2.UnpackLow(latin1Vector, zeroVector).AsUInt64()
+                ); // unaligned write
                 currentOffset += 4;
             }
 
@@ -1066,7 +1276,11 @@ namespace System.Text
             }
         }
 
-        private static unsafe void WidenLatin1ToUtf16_Fallback(byte* pLatin1Buffer, char* pUtf16Buffer, nuint elementCount)
+        private static unsafe void WidenLatin1ToUtf16_Fallback(
+            byte* pLatin1Buffer,
+            char* pUtf16Buffer,
+            nuint elementCount
+        )
         {
             Debug.Assert(!Sse2.IsSupported);
 
@@ -1084,18 +1298,30 @@ namespace System.Text
                     nuint finalOffsetWhereCanIterate = elementCount - SizeOfVector;
                     do
                     {
-                        Vector<byte> latin1Vector = Unsafe.ReadUnaligned<Vector<byte>>(pLatin1Buffer + currentOffset);
-                        Vector.Widen(Vector.AsVectorByte(latin1Vector), out Vector<ushort> utf16LowVector, out Vector<ushort> utf16HighVector);
+                        Vector<byte> latin1Vector = Unsafe.ReadUnaligned<Vector<byte>>(
+                            pLatin1Buffer + currentOffset
+                        );
+                        Vector.Widen(
+                            Vector.AsVectorByte(latin1Vector),
+                            out Vector<ushort> utf16LowVector,
+                            out Vector<ushort> utf16HighVector
+                        );
 
                         // TODO: Is the below logic also valid for big-endian platforms?
                         Unsafe.WriteUnaligned(pUtf16Buffer + currentOffset, utf16LowVector);
-                        Unsafe.WriteUnaligned(pUtf16Buffer + currentOffset + Vector<ushort>.Count, utf16HighVector);
+                        Unsafe.WriteUnaligned(
+                            pUtf16Buffer + currentOffset + Vector<ushort>.Count,
+                            utf16HighVector
+                        );
 
                         currentOffset += SizeOfVector;
                     } while (currentOffset <= finalOffsetWhereCanIterate);
                 }
 
-                Debug.Assert(elementCount - currentOffset < SizeOfVector, "Vectorized logic should result in less than a vector's length of data remaining.");
+                Debug.Assert(
+                    elementCount - currentOffset < SizeOfVector,
+                    "Vectorized logic should result in less than a vector's length of data remaining."
+                );
             }
 
             // Flush any remaining data.

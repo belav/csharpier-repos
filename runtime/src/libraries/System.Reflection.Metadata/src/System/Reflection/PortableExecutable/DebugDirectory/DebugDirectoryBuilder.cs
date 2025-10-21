@@ -28,13 +28,15 @@ namespace System.Reflection.PortableExecutable
 
         internal void AddEntry(DebugDirectoryEntryType type, uint version, uint stamp, int dataSize)
         {
-            _entries.Add(new Entry()
-            {
-                Stamp = stamp,
-                Version = version,
-                Type = type,
-                DataSize = dataSize,
-            });
+            _entries.Add(
+                new Entry()
+                {
+                    Stamp = stamp,
+                    Version = version,
+                    Type = type,
+                    DataSize = dataSize,
+                }
+            );
         }
 
         /// <summary>
@@ -43,8 +45,8 @@ namespace System.Reflection.PortableExecutable
         /// <param name="type">Entry type.</param>
         /// <param name="version">Entry version.</param>
         /// <param name="stamp">Entry stamp.</param>
-        public void AddEntry(DebugDirectoryEntryType type, uint version, uint stamp)
-            => AddEntry(type, version, stamp, dataSize: 0);
+        public void AddEntry(DebugDirectoryEntryType type, uint version, uint stamp) =>
+            AddEntry(type, version, stamp, dataSize: 0);
 
         /// <summary>
         /// Adds an entry.
@@ -55,7 +57,13 @@ namespace System.Reflection.PortableExecutable
         /// <param name="stamp">Entry stamp.</param>
         /// <param name="data">Data passed to <paramref name="dataSerializer"/>.</param>
         /// <param name="dataSerializer">Serializes data to a <see cref="BlobBuilder"/>.</param>
-        public void AddEntry<TData>(DebugDirectoryEntryType type, uint version, uint stamp, TData data, Action<BlobBuilder, TData> dataSerializer)
+        public void AddEntry<TData>(
+            DebugDirectoryEntryType type,
+            uint version,
+            uint stamp,
+            TData data,
+            Action<BlobBuilder, TData> dataSerializer
+        )
         {
             if (dataSerializer is null)
             {
@@ -81,7 +89,8 @@ namespace System.Reflection.PortableExecutable
         public void AddCodeViewEntry(
             string pdbPath,
             BlobContentId pdbContentId,
-            ushort portablePdbVersion)
+            ushort portablePdbVersion
+        )
         {
             AddCodeViewEntry(pdbPath, pdbContentId, portablePdbVersion, age: 1);
         }
@@ -101,7 +110,8 @@ namespace System.Reflection.PortableExecutable
             string pdbPath,
             BlobContentId pdbContentId,
             ushort portablePdbVersion,
-            int age)
+            int age
+        )
         {
             if (pdbPath is null)
             {
@@ -128,18 +138,26 @@ namespace System.Reflection.PortableExecutable
 
             AddEntry(
                 type: DebugDirectoryEntryType.CodeView,
-                version: (portablePdbVersion == 0) ? 0 : PortablePdbVersions.DebugDirectoryEntryVersion(portablePdbVersion),
+                version: (portablePdbVersion == 0)
+                    ? 0
+                    : PortablePdbVersions.DebugDirectoryEntryVersion(portablePdbVersion),
                 stamp: pdbContentId.Stamp,
-                dataSize);
+                dataSize
+            );
         }
 
         /// <summary>
         /// Adds Reproducible entry.
         /// </summary>
-        public void AddReproducibleEntry()
-            => AddEntry(type: DebugDirectoryEntryType.Reproducible, version: 0, stamp: 0);
+        public void AddReproducibleEntry() =>
+            AddEntry(type: DebugDirectoryEntryType.Reproducible, version: 0, stamp: 0);
 
-        private static int WriteCodeViewData(BlobBuilder builder, string pdbPath, Guid pdbGuid, int age)
+        private static int WriteCodeViewData(
+            BlobBuilder builder,
+            string pdbPath,
+            Guid pdbGuid,
+            int age
+        )
         {
             int start = builder.Count;
 
@@ -196,10 +214,15 @@ namespace System.Reflection.PortableExecutable
                 type: DebugDirectoryEntryType.PdbChecksum,
                 version: 0x00000001,
                 stamp: 0x00000000,
-                dataSize);
+                dataSize
+            );
         }
 
-        private static int WritePdbChecksumData(BlobBuilder builder, string algorithmName, ImmutableArray<byte> checksum)
+        private static int WritePdbChecksumData(
+            BlobBuilder builder,
+            string algorithmName,
+            ImmutableArray<byte> checksum
+        )
         {
             int start = builder.Count;
 
@@ -222,7 +245,11 @@ namespace System.Reflection.PortableExecutable
         /// <param name="builder">Builder.</param>
         /// <param name="sectionLocation">The containing PE section location.</param>
         /// <param name="sectionOffset">Offset of the table within the containing section.</param>
-        internal void Serialize(BlobBuilder builder, SectionLocation sectionLocation, int sectionOffset)
+        internal void Serialize(
+            BlobBuilder builder,
+            SectionLocation sectionLocation,
+            int sectionOffset
+        )
         {
             int dataOffset = sectionOffset + TableSize;
             foreach (var entry in _entries)

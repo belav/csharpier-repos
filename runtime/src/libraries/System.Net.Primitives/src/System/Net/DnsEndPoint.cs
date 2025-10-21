@@ -12,7 +12,8 @@ namespace System.Net
         private readonly int _port;
         private readonly AddressFamily _family;
 
-        public DnsEndPoint(string host, int port) : this(host, port, AddressFamily.Unspecified) { }
+        public DnsEndPoint(string host, int port)
+            : this(host, port, AddressFamily.Unspecified) { }
 
         public DnsEndPoint(string host, int port, AddressFamily addressFamily)
         {
@@ -21,11 +22,16 @@ namespace System.Net
             ArgumentOutOfRangeException.ThrowIfLessThan(port, IPEndPoint.MinPort);
             ArgumentOutOfRangeException.ThrowIfGreaterThan(port, IPEndPoint.MaxPort);
 
-            if (addressFamily != AddressFamily.InterNetwork &&
-                addressFamily != AddressFamily.InterNetworkV6 &&
-                addressFamily != AddressFamily.Unspecified)
+            if (
+                addressFamily != AddressFamily.InterNetwork
+                && addressFamily != AddressFamily.InterNetworkV6
+                && addressFamily != AddressFamily.Unspecified
+            )
             {
-                throw new ArgumentException(SR.net_sockets_invalid_optionValue_all, nameof(addressFamily));
+                throw new ArgumentException(
+                    SR.net_sockets_invalid_optionValue_all,
+                    nameof(addressFamily)
+                );
             }
 
             _host = host;
@@ -34,16 +40,17 @@ namespace System.Net
         }
 
         public override bool Equals([NotNullWhen(true)] object? comparand) =>
-            comparand is DnsEndPoint dnsComparand &&
-            _family == dnsComparand._family &&
-            _port == dnsComparand._port &&
-            StringComparer.OrdinalIgnoreCase.Equals(_host, dnsComparand._host);
+            comparand is DnsEndPoint dnsComparand
+            && _family == dnsComparand._family
+            && _port == dnsComparand._port
+            && StringComparer.OrdinalIgnoreCase.Equals(_host, dnsComparand._host);
 
         public override int GetHashCode() =>
             HashCode.Combine(
                 (int)_family,
                 _port,
-                StringComparer.OrdinalIgnoreCase.GetHashCode(_host));
+                StringComparer.OrdinalIgnoreCase.GetHashCode(_host)
+            );
 
         public override string ToString() => $"{_family}/{_host}:{_port}";
 

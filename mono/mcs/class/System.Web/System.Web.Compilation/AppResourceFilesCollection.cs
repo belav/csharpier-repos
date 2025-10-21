@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,144 +34,157 @@ using System.Globalization;
 using System.IO;
 using System.Web.Util;
 
-namespace System.Web.Compilation 
+namespace System.Web.Compilation
 {
-	internal enum AppResourceFileKind
-	{
-		NotResource,
-		ResX,
-		Resource,
-		Binary
-	};
+    internal enum AppResourceFileKind
+    {
+        NotResource,
+        ResX,
+        Resource,
+        Binary,
+    };
 
-	internal class AppResourcesLengthComparer<T>: IComparer<T>
-	{
-		int CompareStrings (string a, string b)
-		{
-			if (a == null || b == null)
-				return 0;
-			return (int)b.Length - (int)a.Length;
-		}
+    internal class AppResourcesLengthComparer<T> : IComparer<T>
+    {
+        int CompareStrings(string a, string b)
+        {
+            if (a == null || b == null)
+                return 0;
+            return (int)b.Length - (int)a.Length;
+        }
 
-		int IComparer<T>.Compare (T _a, T _b) 
-		{
-			string a = null, b = null;
-			if (_a is string && _b is string) {
-				a = _a as string;
-				b = _b as string;
-			} else if (_a is List<string> && _b is List<string>) {
-				List<string> tmp = _a as List<string>;
-				a = tmp [0];
-				tmp = _b as List<string>;
-				b = tmp [0];
-			} else if (_a is AppResourceFileInfo && _b is AppResourceFileInfo) {
-				AppResourceFileInfo tmp = _a as AppResourceFileInfo;
-				a = tmp.Info.Name;
-				tmp = _b as AppResourceFileInfo;
-				b = tmp.Info.Name;
-			} else
-				return 0;
-			return CompareStrings (a, b);
-		}
-	}
-	
-	internal class AppResourceFilesCollection
-	{
-		List <AppResourceFileInfo> files;
-		bool isGlobal;
-		string sourceDir;
+        int IComparer<T>.Compare(T _a, T _b)
+        {
+            string a = null,
+                b = null;
+            if (_a is string && _b is string)
+            {
+                a = _a as string;
+                b = _b as string;
+            }
+            else if (_a is List<string> && _b is List<string>)
+            {
+                List<string> tmp = _a as List<string>;
+                a = tmp[0];
+                tmp = _b as List<string>;
+                b = tmp[0];
+            }
+            else if (_a is AppResourceFileInfo && _b is AppResourceFileInfo)
+            {
+                AppResourceFileInfo tmp = _a as AppResourceFileInfo;
+                a = tmp.Info.Name;
+                tmp = _b as AppResourceFileInfo;
+                b = tmp.Info.Name;
+            }
+            else
+                return 0;
+            return CompareStrings(a, b);
+        }
+    }
 
-		public string SourceDir {
-			get { return sourceDir; }
-		}
-		
-		public bool HasFiles {
-			get {
-				if (String.IsNullOrEmpty (sourceDir))
-					return false;
-				return files.Count > 0;
-			}
-		}
+    internal class AppResourceFilesCollection
+    {
+        List<AppResourceFileInfo> files;
+        bool isGlobal;
+        string sourceDir;
 
-		public List <AppResourceFileInfo> Files {
-			get { return files; }
-		}
-		
-		public AppResourceFilesCollection (HttpContext context)
-		{
-			if (context == null)
-				throw new ArgumentNullException ("context");
-			
-			this.isGlobal = true;
-			this.files = new List <AppResourceFileInfo> ();
+        public string SourceDir
+        {
+            get { return sourceDir; }
+        }
 
-			string resourcePath;
-			resourcePath = Path.Combine (HttpRuntime.AppDomainAppPath, "App_GlobalResources");
-			if (Directory.Exists (resourcePath))
-				sourceDir = resourcePath;
-		}
+        public bool HasFiles
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(sourceDir))
+                    return false;
+                return files.Count > 0;
+            }
+        }
 
-		public AppResourceFilesCollection (string parserDir)
-		{
-			if (String.IsNullOrEmpty (parserDir))
-				throw new ArgumentException ("parserDir cannot be empty");
-			this.isGlobal = true;
-			this.files = new List <AppResourceFileInfo> ();
+        public List<AppResourceFileInfo> Files
+        {
+            get { return files; }
+        }
 
-			string resourcePath;
-			resourcePath = Path.Combine (parserDir, "App_LocalResources");
-			if (Directory.Exists (resourcePath)) {
-				sourceDir = resourcePath;
-				HttpApplicationFactory.WatchLocationForRestart (sourceDir, "*");
-			}
-		}
-		
-		public void Collect ()
-		{
-			if (String.IsNullOrEmpty (sourceDir))
-			    return;
-			DirectoryInfo di = new DirectoryInfo (sourceDir);
-			FileInfo[] infos = di.GetFiles ();
-			if (infos.Length == 0)
-				return;
+        public AppResourceFilesCollection(HttpContext context)
+        {
+            if (context == null)
+                throw new ArgumentNullException("context");
 
-			string extension;
-			AppResourceFileInfo arfi;
-			AppResourceFileKind kind;
-			
-			foreach (FileInfo fi in infos) {
-				extension = fi.Extension;
-				if (Acceptable (extension, out kind))
-					arfi = new AppResourceFileInfo (fi, kind);
-				else
-					continue;
+            this.isGlobal = true;
+            this.files = new List<AppResourceFileInfo>();
 
-				files.Add (arfi);
-			}
+            string resourcePath;
+            resourcePath = Path.Combine(HttpRuntime.AppDomainAppPath, "App_GlobalResources");
+            if (Directory.Exists(resourcePath))
+                sourceDir = resourcePath;
+        }
 
-			if (isGlobal && files.Count == 0)
-				return;
-			AppResourcesLengthComparer<AppResourceFileInfo> lcFiles = new AppResourcesLengthComparer<AppResourceFileInfo> ();
-			files.Sort (lcFiles);
-		}
+        public AppResourceFilesCollection(string parserDir)
+        {
+            if (String.IsNullOrEmpty(parserDir))
+                throw new ArgumentException("parserDir cannot be empty");
+            this.isGlobal = true;
+            this.files = new List<AppResourceFileInfo>();
 
-		bool Acceptable (string extension, out AppResourceFileKind kind)
-		{
-			switch (extension.ToLower (Helpers.InvariantCulture))
-			{
-				default:
-					kind = AppResourceFileKind.NotResource;
-					return false;
+            string resourcePath;
+            resourcePath = Path.Combine(parserDir, "App_LocalResources");
+            if (Directory.Exists(resourcePath))
+            {
+                sourceDir = resourcePath;
+                HttpApplicationFactory.WatchLocationForRestart(sourceDir, "*");
+            }
+        }
 
-				case ".resx":
-					kind = AppResourceFileKind.ResX;
-					return true;
+        public void Collect()
+        {
+            if (String.IsNullOrEmpty(sourceDir))
+                return;
+            DirectoryInfo di = new DirectoryInfo(sourceDir);
+            FileInfo[] infos = di.GetFiles();
+            if (infos.Length == 0)
+                return;
 
-				case ".resource":
-					kind = AppResourceFileKind.Resource;
-					return true;
-			}
-		}
-	};
+            string extension;
+            AppResourceFileInfo arfi;
+            AppResourceFileKind kind;
+
+            foreach (FileInfo fi in infos)
+            {
+                extension = fi.Extension;
+                if (Acceptable(extension, out kind))
+                    arfi = new AppResourceFileInfo(fi, kind);
+                else
+                    continue;
+
+                files.Add(arfi);
+            }
+
+            if (isGlobal && files.Count == 0)
+                return;
+            AppResourcesLengthComparer<AppResourceFileInfo> lcFiles =
+                new AppResourcesLengthComparer<AppResourceFileInfo>();
+            files.Sort(lcFiles);
+        }
+
+        bool Acceptable(string extension, out AppResourceFileKind kind)
+        {
+            switch (extension.ToLower(Helpers.InvariantCulture))
+            {
+                default:
+                    kind = AppResourceFileKind.NotResource;
+                    return false;
+
+                case ".resx":
+                    kind = AppResourceFileKind.ResX;
+                    return true;
+
+                case ".resource":
+                    kind = AppResourceFileKind.Resource;
+                    return true;
+            }
+        }
+    };
 };
-

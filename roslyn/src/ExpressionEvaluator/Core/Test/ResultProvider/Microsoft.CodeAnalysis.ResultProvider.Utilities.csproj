@@ -8,7 +8,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TargetFramework>net472</TargetFramework>
     <IsShipping>false</IsShipping>
-
     <!-- Disable CA1825 (Avoid unnecessary zero-length array allocations. Use Array.Empty<X>() instead) as Array.Empty not available in one of the targets for this shared project -->
     <NoWarn>$(NoWarn);CA1825</NoWarn>
   </PropertyGroup>
@@ -20,8 +19,14 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <PackageReference Include="System.Collections.Immutable" Version="$(SystemCollectionsImmutableVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.Debugger.Metadata-implementation" Version="$(MicrosoftVisualStudioDebuggerMetadataimplementationVersion)" />
+    <PackageReference
+      Include="System.Collections.Immutable"
+      Version="$(SystemCollectionsImmutableVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.Debugger.Metadata-implementation"
+      Version="$(MicrosoftVisualStudioDebuggerMetadataimplementationVersion)"
+    />
   </ItemGroup>
   <ItemGroup Label="Linked Files">
     <Compile Include="..\..\..\..\Dependencies\PooledObjects\PooledStringBuilder.cs">
@@ -84,7 +89,11 @@
     <InternalsVisibleTo Include="Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.ResultProvider.UnitTests" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\..\Source\ResultProvider\Portable\Resources.resx" Link="Resources.resx" GenerateSource="true" />
+    <EmbeddedResource
+      Include="..\..\Source\ResultProvider\Portable\Resources.resx"
+      Link="Resources.resx"
+      GenerateSource="true"
+    />
   </ItemGroup>
   <Import Project="..\..\Source\ResultProvider\ResultProvider.projitems" Label="Shared" />
 </Project>

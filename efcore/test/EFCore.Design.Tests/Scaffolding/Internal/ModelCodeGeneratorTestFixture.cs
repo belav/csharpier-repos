@@ -10,15 +10,21 @@ public class ModelCodeGeneratorTestFixture : IDisposable
         var templatesDir = Path.Combine(ProjectDir, "CodeTemplates", "EFCore");
         Directory.CreateDirectory(templatesDir);
 
-        using (var input = typeof(ModelCodeGeneratorTestBase).Assembly.GetManifestResourceStream(
-                   "Microsoft.EntityFrameworkCore.Resources.CSharpDbContextGenerator.tt"))
+        using (
+            var input = typeof(ModelCodeGeneratorTestBase).Assembly.GetManifestResourceStream(
+                "Microsoft.EntityFrameworkCore.Resources.CSharpDbContextGenerator.tt"
+            )
+        )
         using (var output = File.OpenWrite(Path.Combine(templatesDir, "DbContext.t4")))
         {
             input.CopyTo(output);
         }
 
-        using (var input = typeof(ModelCodeGeneratorTestBase).Assembly.GetManifestResourceStream(
-                   "Microsoft.EntityFrameworkCore.Resources.CSharpEntityTypeGenerator.tt"))
+        using (
+            var input = typeof(ModelCodeGeneratorTestBase).Assembly.GetManifestResourceStream(
+                "Microsoft.EntityFrameworkCore.Resources.CSharpEntityTypeGenerator.tt"
+            )
+        )
         using (var output = File.OpenWrite(Path.Combine(templatesDir, "EntityType.t4")))
         {
             input.CopyTo(output);
@@ -27,6 +33,5 @@ public class ModelCodeGeneratorTestFixture : IDisposable
 
     public TempDirectory ProjectDir { get; } = new();
 
-    public void Dispose()
-        => ProjectDir.Dispose();
+    public void Dispose() => ProjectDir.Dispose();
 }

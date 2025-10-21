@@ -12,12 +12,13 @@ namespace System.Net.WebSockets
         ProtocolError = 1002,
         InvalidMessageType = 1003,
         Empty = 1005,
+
         // AbnormalClosure = 1006, // 1006 is reserved and should never be used by user
         InvalidPayloadData = 1007,
         PolicyViolation = 1008,
         MessageTooBig = 1009,
         MandatoryExtension = 1010,
-        InternalServerError = 1011
+        InternalServerError = 1011,
         // non-RFC IANA registered status codes that we allow as valid closing status
         // ServiceRestart = 1012,  // indicates that the server / service is restarting.
         // TryAgainLater = 1013,   // indicates that a temporary server condition forced blocking the client's request.

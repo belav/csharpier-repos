@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="StyleSheetDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -22,25 +22,29 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.Design.MobileControls.Util;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
-
     using Control = System.Web.UI.Control;
     using DataBindingCollectionEditor = System.Web.UI.Design.DataBindingCollectionEditor;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class StyleSheetDesigner : MobileTemplatedControlDesigner, IDeviceSpecificDesigner
     {
-        internal static BooleanSwitch StyleSheetDesignerSwitch =
-            new BooleanSwitch("StyleSheetDesigner", "Enable StyleSheet designer general purpose traces.");
+        internal static BooleanSwitch StyleSheetDesignerSwitch = new BooleanSwitch(
+            "StyleSheetDesigner",
+            "Enable StyleSheet designer general purpose traces."
+        );
 
         private IWebFormsDocumentService _iWebFormsDocumentService;
         private IRefreshableDeviceSpecificEditor _deviceSpecificEditor;
         private DesignerVerbCollection _designerVerbs;
         private System.Web.UI.MobileControls.StyleSheet _styleSheet;
-        private Style _currentStyle, _tmpCurrentStyle;
+        private Style _currentStyle,
+            _tmpCurrentStyle;
         private bool _isDuplicate;
         private MergedUI _mergedUI = null;
         private ArrayList _cycledStyles = null;
@@ -77,19 +81,24 @@ namespace System.Web.UI.Design.MobileControls
                 </table>
              ";
 
-        private const int _headerFooterTemplates            = 0;
-        private const int _itemTemplates                    = 1;
-        private const int _separatorTemplate                = 2;
-        private const int _contentTemplate                  = 3;
-        private const int _numberOfTemplateFrames           = 4;
+        private const int _headerFooterTemplates = 0;
+        private const int _itemTemplates = 1;
+        private const int _separatorTemplate = 2;
+        private const int _contentTemplate = 3;
+        private const int _numberOfTemplateFrames = 4;
 
-        private static readonly String[][] _templateFrameNames =
-            new String[][] {
-                               new String [] { Constants.HeaderTemplateTag, Constants.FooterTemplateTag },
-                               new String [] { Constants.ItemTemplateTag, Constants.AlternatingItemTemplateTag, Constants.ItemDetailsTemplateTag },
-                               new String [] { Constants.SeparatorTemplateTag },
-                               new String [] { Constants.ContentTemplateTag }
-                           };
+        private static readonly String[][] _templateFrameNames = new String[][]
+        {
+            new String[] { Constants.HeaderTemplateTag, Constants.FooterTemplateTag },
+            new String[]
+            {
+                Constants.ItemTemplateTag,
+                Constants.AlternatingItemTemplateTag,
+                Constants.ItemDetailsTemplateTag,
+            },
+            new String[] { Constants.SeparatorTemplateTag },
+            new String[] { Constants.ContentTemplateTag },
+        };
 
         private const String _templateStyle = "__TemplateStyle__";
 
@@ -99,10 +108,7 @@ namespace System.Web.UI.Design.MobileControls
         // DesignerAdapterUtil.GetMaxWidthToFit does.
         public override int TemplateWidth
         {
-            get
-            {
-                return _templateWidth;
-            }
+            get { return _templateWidth; }
         }
 
         private MobilePage MobilePage
@@ -144,13 +150,15 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.StyleSheet,
-                         "StyleSheetDesigner.Initialize - Invalid StyleSheet Control");
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.StyleSheet,
+                "StyleSheetDesigner.Initialize - Invalid StyleSheet Control"
+            );
             base.Initialize(component);
 
             _isDuplicate = false;
-            _styleSheet = (System.Web.UI.MobileControls.StyleSheet) component;
-            if(_requiresDesignTimeChanges)
+            _styleSheet = (System.Web.UI.MobileControls.StyleSheet)component;
+            if (_requiresDesignTimeChanges)
             {
                 _shouldRepersistStyles = true;
             }
@@ -159,17 +167,19 @@ namespace System.Web.UI.Design.MobileControls
 
             if (IMobileWebFormServices != null)
             {
-                TemplateStyle = (String) IMobileWebFormServices.GetCache(_styleSheet.ID, _templateStyle);
-                TemplateDeviceFilter = 
-                    (String) IMobileWebFormServices.GetCache(
-                    _styleSheet.ID,
-                    MobileTemplatedControlDesigner.DefaultTemplateDeviceFilter);
+                TemplateStyle = (String)
+                    IMobileWebFormServices.GetCache(_styleSheet.ID, _templateStyle);
+                TemplateDeviceFilter = (String)
+                    IMobileWebFormServices.GetCache(
+                        _styleSheet.ID,
+                        MobileTemplatedControlDesigner.DefaultTemplateDeviceFilter
+                    );
             }
         }
 
-        private void OnLoadComplete(Object source, EventArgs e) 
+        private void OnLoadComplete(Object source, EventArgs e)
         {
-            if(_shouldRepersistStyles)
+            if (_shouldRepersistStyles)
             {
                 IsDirty = true;
                 OnInternalChange();
@@ -179,7 +189,7 @@ namespace System.Web.UI.Design.MobileControls
 
             UpdateDesignTimeHtml();
         }
-        
+
         internal static void SetRequiresDesignTimeChanges()
         {
             _requiresDesignTimeChanges = true;
@@ -191,8 +201,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_iWebFormsDocumentService == null)
                 {
-                    _iWebFormsDocumentService =
-                        (IWebFormsDocumentService)GetService(typeof(IWebFormsDocumentService));
+                    _iWebFormsDocumentService = (IWebFormsDocumentService)GetService(
+                        typeof(IWebFormsDocumentService)
+                    );
 
                     Debug.Assert(_iWebFormsDocumentService != null);
                 }
@@ -200,32 +211,38 @@ namespace System.Web.UI.Design.MobileControls
                 return _iWebFormsDocumentService;
             }
         }
-        
-        protected override ITemplateEditingFrame CreateTemplateEditingFrame(TemplateEditingVerb verb)
+
+        protected override ITemplateEditingFrame CreateTemplateEditingFrame(
+            TemplateEditingVerb verb
+        )
         {
-            ITemplateEditingService teService = 
-                (ITemplateEditingService)GetService(typeof(ITemplateEditingService));
-            Debug.Assert(teService != null,
-                "How did we get this far without an ITemplateEditingService");
+            ITemplateEditingService teService = (ITemplateEditingService)GetService(
+                typeof(ITemplateEditingService)
+            );
+            Debug.Assert(
+                teService != null,
+                "How did we get this far without an ITemplateEditingService"
+            );
 
             String[] templateNames = GetTemplateFrameNames(verb.Index);
             ITemplateEditingFrame editingFrame = teService.CreateFrame(
-                this, 
+                this,
                 TemplateDeviceFilter + " (" + TemplateStyle + ")",
                 templateNames,
                 WebCtrlStyle,
-                null /* we don't have template styles */);
+                null /* we don't have template styles */
+            );
 
             editingFrame.InitialWidth = _templateWidth;
             return editingFrame;
         }
 
-        protected override void Dispose(bool disposing) 
+        protected override void Dispose(bool disposing)
         {
-            if (disposing) 
+            if (disposing)
             {
                 UpdateActiveStyleSheet();
-                
+
                 if (_loadComplete != null)
                 {
                     IWebFormsDocumentService.LoadComplete -= _loadComplete;
@@ -237,12 +254,20 @@ namespace System.Web.UI.Design.MobileControls
                     // If the page is in loading mode, it means the remove is trigged by webformdesigner.
                     if (!LoadComplete)
                     {
-                        IMobileWebFormServices.SetCache(_styleSheet.ID, (Object) _templateStyle, (Object) this.TemplateStyle);
+                        IMobileWebFormServices.SetCache(
+                            _styleSheet.ID,
+                            (Object)_templateStyle,
+                            (Object)this.TemplateStyle
+                        );
                     }
                     else
                     {
                         // setting to null will remove the entry.
-                        IMobileWebFormServices.SetCache(_styleSheet.ID, (Object) _templateStyle, null);
+                        IMobileWebFormServices.SetCache(
+                            _styleSheet.ID,
+                            (Object)_templateStyle,
+                            null
+                        );
                     }
                 }
             }
@@ -266,11 +291,11 @@ namespace System.Web.UI.Design.MobileControls
                     // Find new stylesheet
                     if (control is StyleSheet && _newStyleSheet == null && control != _styleSheet)
                     {
-                        designer = Host.GetDesigner((IComponent) control);
+                        designer = Host.GetDesigner((IComponent)control);
                         // AUI 7285
                         if (designer != null)
                         {
-                            _newStyleSheet = (StyleSheet) control;
+                            _newStyleSheet = (StyleSheet)control;
                         }
                     }
                 }
@@ -286,7 +311,7 @@ namespace System.Web.UI.Design.MobileControls
                 RefreshPageView();
             }
         }
-        
+
         protected override String[] GetTemplateFrameNames(int index)
         {
             Debug.Assert(index >= 0 & index <= _templateFrameNames.Length);
@@ -300,19 +325,23 @@ namespace System.Web.UI.Design.MobileControls
             templateVerbs[_headerFooterTemplates] = new TemplateEditingVerb(
                 SR.GetString(SR.TemplateFrame_HeaderFooterTemplates),
                 _headerFooterTemplates,
-                this);
+                this
+            );
             templateVerbs[_itemTemplates] = new TemplateEditingVerb(
                 SR.GetString(SR.TemplateFrame_ItemTemplates),
                 _itemTemplates,
-                this);
+                this
+            );
             templateVerbs[_separatorTemplate] = new TemplateEditingVerb(
                 SR.GetString(SR.TemplateFrame_SeparatorTemplate),
                 _separatorTemplate,
-                this);
+                this
+            );
             templateVerbs[_contentTemplate] = new TemplateEditingVerb(
                 SR.GetString(SR.TemplateFrame_ContentTemplate),
                 _contentTemplate,
-                this);
+                this
+            );
 
             return templateVerbs;
         }
@@ -334,22 +363,28 @@ namespace System.Web.UI.Design.MobileControls
         ///       to do any post-processing that may be needed after a property change.
         ///    </para>
         /// </remarks>
-        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs ce) 
+        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs ce)
         {
             // Delegate to the base class implementation first!
             base.OnComponentChanged(sender, ce);
 
             MemberDescriptor member = ce.Member;
-            if (member != null && 
-                member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName))
+            if (
+                member != null
+                && member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName)
+            )
             {
                 PropertyDescriptor propDesc = (PropertyDescriptor)member;
-                
+
                 if (propDesc.Name.Equals("ID"))
                 {
                     // Update the dictionary of device filters stored in the page designer
                     // setting to null will remove the entry.
-                    IMobileWebFormServices.SetCache(ce.OldValue.ToString(), (Object) _templateStyle, null);
+                    IMobileWebFormServices.SetCache(
+                        ce.OldValue.ToString(),
+                        (Object)_templateStyle,
+                        null
+                    );
                 }
             }
         }
@@ -373,7 +408,7 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        public override void OnSetParent() 
+        public override void OnSetParent()
         {
             base.OnSetParent();
 
@@ -387,15 +422,14 @@ namespace System.Web.UI.Design.MobileControls
 
             if (MobilePage.StyleSheet == _styleSheet)
             {
-                if (!(_styleSheet.Parent is MobilePage
-                    || _styleSheet.Parent is MobileUserControl))
+                if (!(_styleSheet.Parent is MobilePage || _styleSheet.Parent is MobileUserControl))
                 {
                     UpdateActiveStyleSheet();
                 }
                 return;
             }
 
-            if (MobilePage.StyleSheet != StyleSheet.Default) 
+            if (MobilePage.StyleSheet != StyleSheet.Default)
             {
                 // can't accept more than 1 stylesheet
                 TreatAsDuplicate(true);
@@ -403,13 +437,12 @@ namespace System.Web.UI.Design.MobileControls
                 // the current valid StyleSheet is intentionaly refreshed because
                 // if this stylesheet instance is recreated via a Undo operation
                 // the current valid StyleSheet appears as a duplicate if not refreshed.
-                IDesigner designer = Host.GetDesigner((IComponent) MobilePage.StyleSheet);
+                IDesigner designer = Host.GetDesigner((IComponent)MobilePage.StyleSheet);
                 Debug.Assert(designer != null, "designer is null in StyleSheetDesigner");
-                StyleSheetDesigner ssd = (StyleSheetDesigner) designer;
+                StyleSheetDesigner ssd = (StyleSheetDesigner)designer;
                 ssd.UpdateRendering();
             }
-            else if (_styleSheet.Parent is MobilePage ||
-                     _styleSheet.Parent is MobileUserControl)
+            else if (_styleSheet.Parent is MobilePage || _styleSheet.Parent is MobileUserControl)
             {
                 // the active stylesheet is changed
                 MobilePage.StyleSheet = _styleSheet;
@@ -418,7 +451,7 @@ namespace System.Web.UI.Design.MobileControls
             RefreshPageView();
         }
 
-        protected override void OnTemplateModeChanged() 
+        protected override void OnTemplateModeChanged()
         {
             base.OnTemplateModeChanged();
 
@@ -426,7 +459,7 @@ namespace System.Web.UI.Design.MobileControls
             if (!InTemplateMode)
             {
                 RefreshPageView();
-            }        
+            }
         }
 
         public void TreatAsDuplicate(bool isDuplicate)
@@ -441,12 +474,7 @@ namespace System.Web.UI.Design.MobileControls
 
         protected override bool ErrorMode
         {
-            get
-            {
-                return base.ErrorMode
-                    || _isDuplicate
-                    || _styleSheet.DuplicateStyles.Count > 0;
-            }
+            get { return base.ErrorMode || _isDuplicate || _styleSheet.DuplicateStyles.Count > 0; }
         }
 
         private StringCollection GetDuplicateStyleNames()
@@ -456,14 +484,15 @@ namespace System.Web.UI.Design.MobileControls
             // Filter out repeated duplicate names using case insensitive
             // hash table
             HybridDictionary duplicateNamesHash = new HybridDictionary(
-                true /* Names not case sensitive */ );
-            foreach(Style style in _styleSheet.DuplicateStyles)
+                true /* Names not case sensitive */
+            );
+            foreach (Style style in _styleSheet.DuplicateStyles)
             {
                 duplicateNamesHash[style.Name] = true;
             }
 
             // Copy remaining names into a string list
-            foreach(DictionaryEntry entry in duplicateNamesHash)
+            foreach (DictionaryEntry entry in duplicateNamesHash)
             {
                 duplicateNamesList.Add((String)entry.Key);
             }
@@ -472,7 +501,8 @@ namespace System.Web.UI.Design.MobileControls
 
         protected override String GetDesignTimeNormalHtml()
         {
-            String curStyle, message;
+            String curStyle,
+                message;
             ArrayList lstStylesInCycle = null;
 
             if (null == CurrentStyle)
@@ -498,7 +528,9 @@ namespace System.Web.UI.Design.MobileControls
                 }
                 else
                 {
-                    curChoice = HttpUtility.HtmlEncode(DesignerUtility.ChoiceToUniqueIdentifier(CurrentChoice));
+                    curChoice = HttpUtility.HtmlEncode(
+                        DesignerUtility.ChoiceToUniqueIdentifier(CurrentChoice)
+                    );
                 }
             }
 
@@ -508,20 +540,18 @@ namespace System.Web.UI.Design.MobileControls
             String errorMsg = null;
             String errorIconUrl = null;
 
-            if(_isDuplicate)
+            if (_isDuplicate)
             {
                 renderErrorMsg = true;
                 errorMsg = SR.GetString(SR.StyleSheet_DuplicateWarningMessage);
                 errorIconUrl = MobileControlDesigner.errorIcon;
             }
-            else if(_styleSheet.DuplicateStyles.Count > 0)
+            else if (_styleSheet.DuplicateStyles.Count > 0)
             {
                 renderErrorMsg = true;
                 errorMsg = SR.GetString(
                     SR.StyleSheet_DuplicateStyleNamesMessage,
-                    GenericUI.BuildCommaDelimitedList(
-                        GetDuplicateStyleNames()
-                    )
+                    GenericUI.BuildCommaDelimitedList(GetDuplicateStyleNames())
                 );
                 errorIconUrl = MobileControlDesigner.errorIcon;
             }
@@ -543,58 +573,61 @@ namespace System.Web.UI.Design.MobileControls
             if (renderErrorMsg)
             {
                 Debug.Assert(errorMsg != null && errorIconUrl != null);
-                return String.Format(CultureInfo.CurrentCulture, _specialCaseDesignTimeHTML, 
+                return String.Format(
+                    CultureInfo.CurrentCulture,
+                    _specialCaseDesignTimeHTML,
                     new Object[]
-                                     {
-                                         _styleSheet.Site.Name,
-                                         curStyle,
-                                         curChoice,
-                                         message,
-                                         errorIconUrl,
-                                         errorMsg
-                                     });
+                    {
+                        _styleSheet.Site.Name,
+                        curStyle,
+                        curChoice,
+                        message,
+                        errorIconUrl,
+                        errorMsg,
+                    }
+                );
             }
             else
             {
                 lstStylesInCycle = DetectCycles();
 
-                // 
+                //
 
                 if (lstStylesInCycle != null && lstStylesInCycle.Count > 0)
                 {
                     String cycledStyles = String.Empty;
-                    // 
+                    //
 
                     foreach (Object obj in lstStylesInCycle)
                     {
-                        Style cycledStyle = (Style) obj;
+                        Style cycledStyle = (Style)obj;
                         if (cycledStyles.Length > 0)
                         {
-                            cycledStyles += ", ";  
+                            cycledStyles += ", ";
                         }
                         cycledStyles += cycledStyle.Name;
                     }
-                    return String.Format(CultureInfo.CurrentCulture, _specialCaseDesignTimeHTML, 
+                    return String.Format(
+                        CultureInfo.CurrentCulture,
+                        _specialCaseDesignTimeHTML,
                         new Object[]
-                                         {
-                                             _styleSheet.Site.Name,
-                                             curStyle,
-                                             curChoice,
-                                             message,
-                                             MobileControlDesigner.errorIcon,
-                                             SR.GetString(SR.StyleSheet_RefCycleErrorMessage, cycledStyles)
-                                         });
+                        {
+                            _styleSheet.Site.Name,
+                            curStyle,
+                            curChoice,
+                            message,
+                            MobileControlDesigner.errorIcon,
+                            SR.GetString(SR.StyleSheet_RefCycleErrorMessage, cycledStyles),
+                        }
+                    );
                 }
                 else
                 {
-                    return String.Format(CultureInfo.CurrentCulture, _designTimeHTML, 
-                        new Object[]
-                                         {
-                                             _styleSheet.Site.Name,
-                                             curStyle,
-                                             curChoice,
-                                             message
-                                         });
+                    return String.Format(
+                        CultureInfo.CurrentCulture,
+                        _designTimeHTML,
+                        new Object[] { _styleSheet.Site.Name, curStyle, curChoice, message }
+                    );
                 }
             }
         }
@@ -604,66 +637,66 @@ namespace System.Web.UI.Design.MobileControls
             _cycledStyles = null;
         }
 
-/* O(n) algorithm for loop detection
-        private HybridDictionary DetectCycles()
-        {
-            if (_cycledStyles == null)
-            {
-                _cycledStyles = new HybridDictionary();
-                ICollection styles = _styleSheet.Styles;
-
-                // Initialize the set
-                Hashtable styleSet = new Hashtable(styles.Count);
-                foreach (String key in styles)
+        /* O(n) algorithm for loop detection
+                private HybridDictionary DetectCycles()
                 {
-                    styleSet.Add(key, true);
-                }
-
-                while (styleSet.Count > 0)
-                {
-                    Style style = null;
-                    foreach (String key in styleSet.Keys)
+                    if (_cycledStyles == null)
                     {
-                        style = (Style)_styleSheet[key];
-                        Debug.Assert(style != null);
-                        break;
-                    }
-
-                    int count = 0;
-                    Traverse(styleSet, style, count);
-                }
-            }
-            return _cycledStyles;
-        }
+                        _cycledStyles = new HybridDictionary();
+                        ICollection styles = _styleSheet.Styles;
         
-        private bool Traverse(Hashtable styleSet, Style style)
-        {
-            String reference = style.StyleReference;
-            Style nextStyle = null;
-            bool result = false;
-
-            styleSet.Remove(style.Name.ToLower(CultureInfo.InvariantCulture));
-
-            if (reference == null || reference.Length == 0 || 
-                ((nextStyle = (Style)_styleSheet[reference]) == null) ||
-                (!styleSet.Contains(nextStyle)))
-            {
-                result = false;
-            }
-            else if (_cycledStyles.Contains(nextStyle) || 
-                Traverse(styleSet, nextStyle, ++count))
-            {
-                Debug.Assert(_cycledStyles != null);
-                if (!_cycledStyles.Contains(style))
-                {
-                    _cycledStyles.Add(style, "");
+                        // Initialize the set
+                        Hashtable styleSet = new Hashtable(styles.Count);
+                        foreach (String key in styles)
+                        {
+                            styleSet.Add(key, true);
+                        }
+        
+                        while (styleSet.Count > 0)
+                        {
+                            Style style = null;
+                            foreach (String key in styleSet.Keys)
+                            {
+                                style = (Style)_styleSheet[key];
+                                Debug.Assert(style != null);
+                                break;
+                            }
+        
+                            int count = 0;
+                            Traverse(styleSet, style, count);
+                        }
+                    }
+                    return _cycledStyles;
                 }
-                result = true;
-            }
-            
-            return result;
-        }
-*/
+                
+                private bool Traverse(Hashtable styleSet, Style style)
+                {
+                    String reference = style.StyleReference;
+                    Style nextStyle = null;
+                    bool result = false;
+        
+                    styleSet.Remove(style.Name.ToLower(CultureInfo.InvariantCulture));
+        
+                    if (reference == null || reference.Length == 0 ||
+                        ((nextStyle = (Style)_styleSheet[reference]) == null) ||
+                        (!styleSet.Contains(nextStyle)))
+                    {
+                        result = false;
+                    }
+                    else if (_cycledStyles.Contains(nextStyle) ||
+                        Traverse(styleSet, nextStyle, ++count))
+                    {
+                        Debug.Assert(_cycledStyles != null);
+                        if (!_cycledStyles.Contains(style))
+                        {
+                            _cycledStyles.Add(style, "");
+                        }
+                        result = true;
+                    }
+                    
+                    return result;
+                }
+        */
         private ArrayList DetectCycles()
         {
             if (_cycledStyles == null)
@@ -673,7 +706,7 @@ namespace System.Web.UI.Design.MobileControls
 
                 foreach (String key in styles)
                 {
-                    Style style = (Style) _styleSheet[key];
+                    Style style = (Style)_styleSheet[key];
                     Style styleTmp;
                     Debug.Assert(style != null);
 
@@ -685,7 +718,9 @@ namespace System.Web.UI.Design.MobileControls
 
                     while ((reference != null && reference.Length > 0) && count > 0)
                     {
-                        if (0 == String.Compare(name, reference, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            0 == String.Compare(name, reference, StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             cycle = true;
                             break;
@@ -696,7 +731,7 @@ namespace System.Web.UI.Design.MobileControls
                             if (null != styleTmp)
                             {
                                 reference = styleTmp.StyleReference;
-                                count --;
+                                count--;
                             }
                             else
                             {
@@ -719,8 +754,9 @@ namespace System.Web.UI.Design.MobileControls
         //  Begin IDeviceSpecificDesigner Implementation
         ////////////////////////////////////////////////////////////////////////
 
-        void IDeviceSpecificDesigner.SetDeviceSpecificEditor
-            (IRefreshableDeviceSpecificEditor editor)
+        void IDeviceSpecificDesigner.SetDeviceSpecificEditor(
+            IRefreshableDeviceSpecificEditor editor
+        )
         {
             _deviceSpecificEditor = editor;
         }
@@ -738,24 +774,20 @@ namespace System.Web.UI.Design.MobileControls
                 {
                     _tmpCurrentStyle = null;
                 }
-                return (_tmpCurrentStyle != null) ? _tmpCurrentStyle.Name.ToLower(CultureInfo.InvariantCulture) : null;
+                return (_tmpCurrentStyle != null)
+                    ? _tmpCurrentStyle.Name.ToLower(CultureInfo.InvariantCulture)
+                    : null;
             }
         }
 
         System.Windows.Forms.Control IDeviceSpecificDesigner.Header
         {
-            get
-            {
-                return _mergedUI;
-            }
+            get { return _mergedUI; }
         }
 
         System.Web.UI.Control IDeviceSpecificDesigner.UnderlyingControl
         {
-            get
-            {
-                return _styleSheet;
-            }
+            get { return _styleSheet; }
         }
 
         Object IDeviceSpecificDesigner.UnderlyingObject
@@ -764,7 +796,7 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (null != _mergedUI.CbStyles.SelectedItem)
                 {
-                    String styleName = (String) _mergedUI.CbStyles.SelectedItem;
+                    String styleName = (String)_mergedUI.CbStyles.SelectedItem;
                     return _styleSheet[styleName];
                 }
                 else
@@ -774,9 +806,12 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        bool IDeviceSpecificDesigner.GetDeviceSpecific(String deviceSpecificParentID, out DeviceSpecific ds)
+        bool IDeviceSpecificDesigner.GetDeviceSpecific(
+            String deviceSpecificParentID,
+            out DeviceSpecific ds
+        )
         {
-            Style style = (Style) _styleSheet[deviceSpecificParentID];
+            Style style = (Style)_styleSheet[deviceSpecificParentID];
             if (null == style)
             {
                 ds = null;
@@ -789,17 +824,31 @@ namespace System.Web.UI.Design.MobileControls
             }
         }
 
-        void IDeviceSpecificDesigner.SetDeviceSpecific(String deviceSpecificParentID, DeviceSpecific ds)
+        void IDeviceSpecificDesigner.SetDeviceSpecific(
+            String deviceSpecificParentID,
+            DeviceSpecific ds
+        )
         {
-            Style style = (Style) _styleSheet[deviceSpecificParentID];
-            Debug.Assert(null != style, "style is null in IDeviceSpecificDesigner.SetDeviceSpecific");
+            Style style = (Style)_styleSheet[deviceSpecificParentID];
+            Debug.Assert(
+                null != style,
+                "style is null in IDeviceSpecificDesigner.SetDeviceSpecific"
+            );
             if (null != ds)
             {
-                ds.SetOwner((MobileControl) _styleSheet);
+                ds.SetOwner((MobileControl)_styleSheet);
             }
             style.DeviceSpecific = ds;
 
-            if (CurrentChoice != null && 0 == String.Compare(CurrentStyle.Name, deviceSpecificParentID, StringComparison.OrdinalIgnoreCase))
+            if (
+                CurrentChoice != null
+                && 0
+                    == String.Compare(
+                        CurrentStyle.Name,
+                        deviceSpecificParentID,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+            )
             {
                 if (ds == null)
                 {
@@ -815,7 +864,9 @@ namespace System.Web.UI.Design.MobileControls
                     }
                     else
                     {
-                        TemplateDeviceFilter = DesignerUtility.ChoiceToUniqueIdentifier(CurrentChoice);
+                        TemplateDeviceFilter = DesignerUtility.ChoiceToUniqueIdentifier(
+                            CurrentChoice
+                        );
                     }
                 }
             }
@@ -828,7 +879,9 @@ namespace System.Web.UI.Design.MobileControls
             _mergedUI.LblStyles.TabIndex = 1;
 
             _mergedUI.CbStyles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            _mergedUI.CbStyles.SelectedIndexChanged += new EventHandler(this.OnSelectedIndexChangedStylesComboBox);
+            _mergedUI.CbStyles.SelectedIndexChanged += new EventHandler(
+                this.OnSelectedIndexChangedStylesComboBox
+            );
             _mergedUI.CbStyles.TabIndex = 2;
             _mergedUI.CbStyles.Sorted = true;
 
@@ -840,7 +893,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 case MobileControlDesigner.MergingContextTemplates:
                 {
-                    _mergedUI.LblHeader.Text = SR.GetString(SR.StyleSheet_SettingTemplatingStyleChoiceDescription);
+                    _mergedUI.LblHeader.Text = SR.GetString(
+                        SR.StyleSheet_SettingTemplatingStyleChoiceDescription
+                    );
 
                     // AUI 2730
                     _mergedUI.CbStyles.Width = 195;
@@ -850,7 +905,9 @@ namespace System.Web.UI.Design.MobileControls
 
                 default:
                 {
-                    _mergedUI.LblHeader.Text = SR.GetString(SR.StyleSheet_SettingGenericStyleChoiceDescription);
+                    _mergedUI.LblHeader.Text = SR.GetString(
+                        SR.StyleSheet_SettingGenericStyleChoiceDescription
+                    );
 
                     // AUI 2730
                     _mergedUI.CbStyles.Width = 195;
@@ -866,7 +923,7 @@ namespace System.Web.UI.Design.MobileControls
             ICollection styles = _styleSheet.Styles;
             foreach (String key in styles)
             {
-                Style style = (Style) _styleSheet[key];
+                Style style = (Style)_styleSheet[key];
                 Debug.Assert(style != null);
 
                 _mergedUI.CbStyles.Items.Add(style.Name);
@@ -896,21 +953,31 @@ namespace System.Web.UI.Design.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         private int _oldSelectedIndex;
-        
-        private void OnSelectedIndexChangedStylesComboBox(Object source, EventArgs e) 
+
+        private void OnSelectedIndexChangedStylesComboBox(Object source, EventArgs e)
         {
-            if (_mergedUI.CbStyles.SelectedIndex != _oldSelectedIndex
-                && !_deviceSpecificEditor.RequestRefresh())
+            if (
+                _mergedUI.CbStyles.SelectedIndex != _oldSelectedIndex
+                && !_deviceSpecificEditor.RequestRefresh()
+            )
             {
                 // User needs to correct error before editing a new style.
                 _mergedUI.CbStyles.SelectedIndex = _oldSelectedIndex;
                 return;
             }
-            
+
             if (_mergedUI.CbStyles.SelectedIndex >= 0)
             {
-                _tmpCurrentStyle = (Style) _styleSheet[((String) _mergedUI.CbStyles.SelectedItem).ToLower(CultureInfo.InvariantCulture)];
-                _deviceSpecificEditor.Refresh((String) _mergedUI.CbStyles.SelectedItem, _tmpCurrentStyle.DeviceSpecific);
+                _tmpCurrentStyle = (Style)
+                    _styleSheet[
+                        ((String)_mergedUI.CbStyles.SelectedItem).ToLower(
+                            CultureInfo.InvariantCulture
+                        )
+                    ];
+                _deviceSpecificEditor.Refresh(
+                    (String)_mergedUI.CbStyles.SelectedItem,
+                    _tmpCurrentStyle.DeviceSpecific
+                );
             }
             _oldSelectedIndex = _mergedUI.CbStyles.SelectedIndex;
         }
@@ -927,9 +994,8 @@ namespace System.Web.UI.Design.MobileControls
 
         private void OnClickEditStylesButton(Object source, EventArgs e)
         {
-
             StylesEditorDialog dialog;
-            
+
             try
             {
                 dialog = new StylesEditorDialog(
@@ -938,14 +1004,14 @@ namespace System.Web.UI.Design.MobileControls
                     (null != _tmpCurrentStyle) ? _tmpCurrentStyle.Name : null
                 );
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 Debug.Fail(ex.ToString());
                 // Block user from entering StylesEditorDialog until they fix
                 // duplicate style declarations.
                 return;
             }
-            
+
             StylesEditorDialog.StyleRenamedEventHandler renameHandler =
                 new StylesEditorDialog.StyleRenamedEventHandler(OnStyleRenamedInEditor);
             StylesEditorDialog.StyleDeletedEventHandler deleteHandler =
@@ -958,14 +1024,15 @@ namespace System.Web.UI.Design.MobileControls
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     _deviceSpecificEditor.EndExternalDeviceSpecificEdit(
-                        true /* commit changes */ );
+                        true /* commit changes */
+                    );
                     OnInternalChange();
 
-                    ((IDeviceSpecificDesigner) this).RefreshHeader(0);
+                    ((IDeviceSpecificDesigner)this).RefreshHeader(0);
                     // using mergingContext 0 because this implementation does not use the param.
                     if (_mergedUI.CbStyles.Items.Count == 0)
                     {
-                        _deviceSpecificEditor.Refresh(null, null); // force the clean up and 
+                        _deviceSpecificEditor.Refresh(null, null); // force the clean up and
                         // disabling of the filter controls.
                         _tmpCurrentStyle = null;
                     }
@@ -975,44 +1042,42 @@ namespace System.Web.UI.Design.MobileControls
                 else
                 {
                     _deviceSpecificEditor.EndExternalDeviceSpecificEdit(
-                        false /* do not commit changes */ );
+                        false /* do not commit changes */
+                    );
                 }
             }
             finally
             {
-               dialog.StyleRenamed -= renameHandler;
-               dialog.StyleDeleted -= deleteHandler;
+                dialog.StyleRenamed -= renameHandler;
+                dialog.StyleDeleted -= deleteHandler;
             }
         }
 
         public Style CurrentStyle
         {
-           get
-           {
-               if (null == _currentStyle)
-               {
-                   // Since this property is registered to property window (from TemplateStyle),
-                   // it will be accessed even before Initialize is called. In that case, 
-                   // _styleSheet will be null;
-                   if (_styleSheet != null && _styleSheet.Styles.Count > 0)
-                   {
-                       // how else can you get an entry in the Styles hashtable?
-                       // this needs to be fixed once we use an ordered list of styles.
-                       ICollection styles = _styleSheet.Styles;
-                       foreach (String key in styles)
-                       {
-                           _currentStyle = (Style) _styleSheet[key];
-                           Debug.Assert (_currentStyle != null);
-                           break;
-                       }
-                   }
-               }
-               return _currentStyle;
-           }
-           set
-           {
-               _currentStyle = value;
-           }
+            get
+            {
+                if (null == _currentStyle)
+                {
+                    // Since this property is registered to property window (from TemplateStyle),
+                    // it will be accessed even before Initialize is called. In that case,
+                    // _styleSheet will be null;
+                    if (_styleSheet != null && _styleSheet.Styles.Count > 0)
+                    {
+                        // how else can you get an entry in the Styles hashtable?
+                        // this needs to be fixed once we use an ordered list of styles.
+                        ICollection styles = _styleSheet.Styles;
+                        foreach (String key in styles)
+                        {
+                            _currentStyle = (Style)_styleSheet[key];
+                            Debug.Assert(_currentStyle != null);
+                            break;
+                        }
+                    }
+                }
+                return _currentStyle;
+            }
+            set { _currentStyle = value; }
         }
 
         public override DeviceSpecific CurrentDeviceSpecific
@@ -1043,13 +1108,15 @@ namespace System.Web.UI.Design.MobileControls
                 // Clear DeviceSpecificChoice of previously selected Style
                 CurrentChoice = null;
                 CurrentStyle = null;
-                if (!String.IsNullOrEmpty(value) &&
-                    !value.Equals(SR.GetString(SR.StyleSheet_PropNotSet)))
+                if (
+                    !String.IsNullOrEmpty(value)
+                    && !value.Equals(SR.GetString(SR.StyleSheet_PropNotSet))
+                )
                 {
                     ICollection styles = _styleSheet.Styles;
                     foreach (String key in styles)
                     {
-                        Style style = (Style) _styleSheet[key];
+                        Style style = (Style)_styleSheet[key];
                         if (style.Name.Equals(value))
                         {
                             CurrentStyle = style;
@@ -1069,7 +1136,9 @@ namespace System.Web.UI.Design.MobileControls
         {
             Debug.Assert(Behavior != null, "Behavior is null");
 
-            String marginTop = null, marginBottom = null, marginRight = null;
+            String marginTop = null,
+                marginBottom = null,
+                marginRight = null;
 
             if (ContainmentStatus == ContainmentStatus.AtTopLevel)
             {
@@ -1090,31 +1159,37 @@ namespace System.Web.UI.Design.MobileControls
             Behavior.SetStyleAttribute("marginLeft", true, "5px", true);
         }
 
-        protected override void PreFilterProperties(IDictionary properties) 
+        protected override void PreFilterProperties(IDictionary properties)
         {
             base.PreFilterProperties(properties);
 
             // DesignTime Property only, we will use this to select the current style.
             PropertyDescriptor designerTemplateStyleProp;
 
-            designerTemplateStyleProp =
-                TypeDescriptor.CreateProperty(this.GetType(), _templatesStylePropName, typeof(String),
-                                     DesignerSerializationVisibilityAttribute.Hidden,
-                                     MobileCategoryAttribute.Design,
-                                     InTemplateMode ? ReadOnlyAttribute.Yes : ReadOnlyAttribute.No,
-                                     InTemplateMode ? BrowsableAttribute.No : BrowsableAttribute.Yes,
-                                     new DefaultValueAttribute(SR.GetString(SR.StyleSheet_PropNotSet)),
-                                     new TypeConverterAttribute(typeof(StyleConverter)),
-                                     new DescriptionAttribute(SR.GetString(SR.StyleSheet_TemplateStyleDescription)));
+            designerTemplateStyleProp = TypeDescriptor.CreateProperty(
+                this.GetType(),
+                _templatesStylePropName,
+                typeof(String),
+                DesignerSerializationVisibilityAttribute.Hidden,
+                MobileCategoryAttribute.Design,
+                InTemplateMode ? ReadOnlyAttribute.Yes : ReadOnlyAttribute.No,
+                InTemplateMode ? BrowsableAttribute.No : BrowsableAttribute.Yes,
+                new DefaultValueAttribute(SR.GetString(SR.StyleSheet_PropNotSet)),
+                new TypeConverterAttribute(typeof(StyleConverter)),
+                new DescriptionAttribute(SR.GetString(SR.StyleSheet_TemplateStyleDescription))
+            );
             properties[_templatesStylePropName] = designerTemplateStyleProp;
 
             PropertyDescriptor designerPersistedStyles;
 
-            designerPersistedStyles =
-                TypeDescriptor.CreateProperty(this.GetType(), _persistedStylesPropName, typeof(ICollection),
-                                     //PersistenceTypeAttribute.InnerChild,
-                                     PersistenceModeAttribute.InnerDefaultProperty,
-                                     BrowsableAttribute.No);
+            designerPersistedStyles = TypeDescriptor.CreateProperty(
+                this.GetType(),
+                _persistedStylesPropName,
+                typeof(ICollection),
+                //PersistenceTypeAttribute.InnerChild,
+                PersistenceModeAttribute.InnerDefaultProperty,
+                BrowsableAttribute.No
+            );
             properties[_persistedStylesPropName] = designerPersistedStyles;
         }
 
@@ -1149,15 +1224,19 @@ namespace System.Web.UI.Design.MobileControls
         ///       designer.
         ///    </para>
         /// </value>
-        public override DesignerVerbCollection Verbs 
+        public override DesignerVerbCollection Verbs
         {
-            get 
+            get
             {
-                if (_designerVerbs == null) 
+                if (_designerVerbs == null)
                 {
                     _designerVerbs = base.Verbs;
-                    _designerVerbs.Add(new DesignerVerb(SR.GetString(SR.StyleSheet_StylesEditorVerb),
-                                                        new EventHandler(this.OnShowStylesEditor)));
+                    _designerVerbs.Add(
+                        new DesignerVerb(
+                            SR.GetString(SR.StyleSheet_StylesEditorVerb),
+                            new EventHandler(this.OnShowStylesEditor)
+                        )
+                    );
                 }
                 Debug.Assert(_designerVerbs.Count == 2);
 
@@ -1176,13 +1255,13 @@ namespace System.Web.UI.Design.MobileControls
             IComponentChangeService changeService = null;
 
             changeService = (IComponentChangeService)GetService(typeof(IComponentChangeService));
-            if (changeService != null) 
+            if (changeService != null)
             {
-                try 
+                try
                 {
                     changeService.OnComponentChanging(_styleSheet, null);
                 }
-                catch (CheckoutException ex) 
+                catch (CheckoutException ex)
                 {
                     if (ex == CheckoutException.Canceled)
                     {
@@ -1193,12 +1272,12 @@ namespace System.Web.UI.Design.MobileControls
             }
 
             DialogResult result = DialogResult.Cancel;
-            try 
+            try
             {
                 StylesEditorDialog dialog = new StylesEditorDialog(_styleSheet, this, null);
                 result = dialog.ShowDialog();
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 Debug.Fail(ex.ToString());
                 // Block user from entering StylesEditorDialog until they fix
@@ -1234,10 +1313,7 @@ namespace System.Web.UI.Design.MobileControls
 
         private bool ValidContainment
         {
-            get
-            {
-                return (ContainmentStatus == ContainmentStatus.AtTopLevel);
-            }
+            get { return (ContainmentStatus == ContainmentStatus.AtTopLevel); }
         }
 
         protected override String GetErrorMessage(out bool infoMode)
@@ -1257,7 +1333,7 @@ namespace System.Web.UI.Design.MobileControls
                     return MobileControlDesigner._mobilePageErrorMessage;
                 }
             }
-            
+
             if (!ValidContainment)
             {
                 return MobileControlDesigner._topPageContainmentErrorMessage;
@@ -1271,10 +1347,10 @@ namespace System.Web.UI.Design.MobileControls
         //  END STYLE DESIGNER EVENTHANDLERS
         /////////////////////////////////////////////////////////////////////////
 
-        [
-            System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-        ]
+        [System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )]
         private class MergedUI : HeaderPanel
         {
             internal System.Windows.Forms.Label LblStyles;
@@ -1288,26 +1364,31 @@ namespace System.Web.UI.Design.MobileControls
                 this.CbStyles = new System.Windows.Forms.ComboBox();
                 this.BtnEdit = new System.Windows.Forms.Button();
                 this.LblHeader = new HeaderLabel();
-//                this.LblStyles.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-//                    | System.Windows.Forms.AnchorStyles.Right);
+                //                this.LblStyles.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                //                    | System.Windows.Forms.AnchorStyles.Right);
                 this.LblStyles.Location = new System.Drawing.Point(0, 24);
                 this.LblStyles.Size = new System.Drawing.Size(160, 16);
-//                this.CbStyles.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-//                    | System.Windows.Forms.AnchorStyles.Right);
+                //                this.CbStyles.Anchor = ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+                //                    | System.Windows.Forms.AnchorStyles.Right);
                 this.CbStyles.DropDownWidth = 124;
                 this.CbStyles.Location = new System.Drawing.Point(0, 40);
                 this.CbStyles.Size = new System.Drawing.Size(160, 21);
-//                this.BtnEdit.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right);
+                //                this.BtnEdit.Anchor = (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right);
                 this.BtnEdit.Location = new System.Drawing.Point(164, 39);
                 this.BtnEdit.Size = new System.Drawing.Size(75, 23);
                 this.LblHeader.Location = new System.Drawing.Point(0, 0);
                 this.LblHeader.Size = new System.Drawing.Size(240, 16);
-                this.Controls.AddRange(new System.Windows.Forms.Control[] {this.CbStyles,
-                                                                           this.LblStyles,
-                                                                           this.BtnEdit,
-                                                                           this.LblHeader});
+                this.Controls.AddRange(
+                    new System.Windows.Forms.Control[]
+                    {
+                        this.CbStyles,
+                        this.LblStyles,
+                        this.BtnEdit,
+                        this.LblHeader,
+                    }
+                );
                 this.Size = new System.Drawing.Size(240, 70);
-                this.Location = new System.Drawing.Point(5,6);
+                this.Location = new System.Drawing.Point(5, 6);
             }
         }
     }

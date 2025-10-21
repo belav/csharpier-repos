@@ -8,14 +8,12 @@
     <ExpectedExitCode>42</ExpectedExitCode>
     <StartupHookSupport>true</StartupHookSupport>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>
-
   <ItemGroup>
-      <ProjectReference Include="..\..\..\TestAssets\StartupHookForFunctionalTest\StartupHookForFunctionalTest.csproj">
-        <Private>true</Private>
-      </ProjectReference>
+    <ProjectReference Include="..\..\..\TestAssets\StartupHookForFunctionalTest\StartupHookForFunctionalTest.csproj">
+      <Private>true</Private>
+    </ProjectReference>
   </ItemGroup>
 </Project>

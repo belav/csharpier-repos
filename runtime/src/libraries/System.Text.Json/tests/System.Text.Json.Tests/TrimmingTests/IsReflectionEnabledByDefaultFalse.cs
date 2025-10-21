@@ -29,9 +29,7 @@ public static class Program
             JsonSerializer.Serialize(valueToSerialize);
             return -2;
         }
-        catch (InvalidOperationException)
-        {
-        }
+        catch (InvalidOperationException) { }
 
         // Serializing with default options unset should throw InvalidOperationException.
         var options = new JsonSerializerOptions();
@@ -40,9 +38,7 @@ public static class Program
             JsonSerializer.Serialize(valueToSerialize, options);
             return -3;
         }
-        catch (InvalidOperationException)
-        {
-        }
+        catch (InvalidOperationException) { }
 
         // Calling GetConverter should throw NotSupportedException.
         try
@@ -50,9 +46,7 @@ public static class Program
             _ = options.GetConverter(typeof(MyPoco));
             return -4;
         }
-        catch (NotSupportedException)
-        {
-        }
+        catch (NotSupportedException) { }
 
         // Calling MakeReadOnly(populateMissingResolver: true) should throw InvalidOperationException.
         try
@@ -60,22 +54,22 @@ public static class Program
             options.MakeReadOnly(populateMissingResolver: true);
             return -5;
         }
-        catch (InvalidOperationException)
-        {
-        }
+        catch (InvalidOperationException) { }
 
         // Serializing with a custom resolver should work as expected.
         options.TypeInfoResolver = new MyJsonResolver();
         options.MakeReadOnly(populateMissingResolver: true);
         options.GetConverter(typeof(MyPoco));
-        
+
         if (JsonSerializer.Serialize(valueToSerialize, options) != "{\"Value\":42}")
         {
             return -6;
         }
 
         // The Default resolver should have been trimmed from the application.
-        Type? reflectionResolver = GetJsonType("System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver");
+        Type? reflectionResolver = GetJsonType(
+            "System.Text.Json.Serialization.Metadata.DefaultJsonTypeInfoResolver"
+        );
         if (reflectionResolver != null)
         {
             return -7;
@@ -96,8 +90,11 @@ public class MyPoco
 
 public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
 {
-    public MyJsonResolver() : base(null) { }
+    public MyJsonResolver()
+        : base(null) { }
+
     protected override JsonSerializerOptions? GeneratedSerializerOptions => null;
+
     public override JsonTypeInfo? GetTypeInfo(Type type) => GetTypeInfo(type, Options);
 
     public JsonTypeInfo? GetTypeInfo(Type type, JsonSerializerOptions options)
@@ -115,54 +112,77 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
         return null;
     }
 
-    private global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::MyPoco> Create_MyPoco(global::System.Text.Json.JsonSerializerOptions options)
+    private global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::MyPoco> Create_MyPoco(
+        global::System.Text.Json.JsonSerializerOptions options
+    )
     {
-        global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::MyPoco>? jsonTypeInfo = null;
-        global::System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<global::MyPoco> objectInfo = new global::System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<global::MyPoco>()
-        {
-            ObjectCreator = static () => new global::MyPoco(),
-            ObjectWithParameterizedConstructorCreator = null,
-            PropertyMetadataInitializer = _ => MyPocoPropInit(options),
-            ConstructorParameterMetadataInitializer = null,
-            NumberHandling = default,
-        };
+        global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::MyPoco>? jsonTypeInfo =
+            null;
+        global::System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<global::MyPoco> objectInfo =
+            new global::System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<global::MyPoco>()
+            {
+                ObjectCreator = static () => new global::MyPoco(),
+                ObjectWithParameterizedConstructorCreator = null,
+                PropertyMetadataInitializer = _ => MyPocoPropInit(options),
+                ConstructorParameterMetadataInitializer = null,
+                NumberHandling = default,
+            };
 
-        jsonTypeInfo = global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreateObjectInfo<global::MyPoco>(options, objectInfo);
+        jsonTypeInfo =
+            global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreateObjectInfo<global::MyPoco>(
+                options,
+                objectInfo
+            );
         jsonTypeInfo.OriginatingResolver = this;
         return jsonTypeInfo;
     }
 
-    private static global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo[] MyPocoPropInit(global::System.Text.Json.JsonSerializerOptions options)
+    private static global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo[] MyPocoPropInit(
+        global::System.Text.Json.JsonSerializerOptions options
+    )
     {
-        global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo[] properties = new global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo[1];
+        global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo[] properties =
+            new global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo[1];
 
-        global::System.Text.Json.Serialization.Metadata.JsonPropertyInfoValues<global::System.Int32> info0 = new global::System.Text.Json.Serialization.Metadata.JsonPropertyInfoValues<global::System.Int32>()
-        {
-            IsProperty = true,
-            IsPublic = true,
-            IsVirtual = false,
-            DeclaringType = typeof(global::MyPoco),
-            Converter = null,
-            Getter = static (obj) => ((global::MyPoco)obj).Value,
-            Setter = static (obj, value) => ((global::MyPoco)obj).Value = value!,
-            IgnoreCondition = null,
-            HasJsonInclude = false,
-            IsExtensionData = false,
-            NumberHandling = default,
-            PropertyName = "Value",
-            JsonPropertyName = null
-        };
+        global::System.Text.Json.Serialization.Metadata.JsonPropertyInfoValues<global::System.Int32> info0 =
+            new global::System.Text.Json.Serialization.Metadata.JsonPropertyInfoValues<global::System.Int32>()
+            {
+                IsProperty = true,
+                IsPublic = true,
+                IsVirtual = false,
+                DeclaringType = typeof(global::MyPoco),
+                Converter = null,
+                Getter = static (obj) => ((global::MyPoco)obj).Value,
+                Setter = static (obj, value) => ((global::MyPoco)obj).Value = value!,
+                IgnoreCondition = null,
+                HasJsonInclude = false,
+                IsExtensionData = false,
+                NumberHandling = default,
+                PropertyName = "Value",
+                JsonPropertyName = null,
+            };
 
-        global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo propertyInfo0 = global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreatePropertyInfo<global::System.Int32>(options, info0);
+        global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo propertyInfo0 =
+            global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreatePropertyInfo<global::System.Int32>(
+                options,
+                info0
+            );
         properties[0] = propertyInfo0;
 
         return properties;
     }
 
-    private global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::System.Int32> Create_Int32(global::System.Text.Json.JsonSerializerOptions options)
+    private global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::System.Int32> Create_Int32(
+        global::System.Text.Json.JsonSerializerOptions options
+    )
     {
-        global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::System.Int32>? jsonTypeInfo = null;
-        jsonTypeInfo = global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreateValueInfo<global::System.Int32>(options, global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.Int32Converter);
+        global::System.Text.Json.Serialization.Metadata.JsonTypeInfo<global::System.Int32>? jsonTypeInfo =
+            null;
+        jsonTypeInfo =
+            global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.CreateValueInfo<global::System.Int32>(
+                options,
+                global::System.Text.Json.Serialization.Metadata.JsonMetadataServices.Int32Converter
+            );
         jsonTypeInfo.OriginatingResolver = this;
         return jsonTypeInfo;
     }

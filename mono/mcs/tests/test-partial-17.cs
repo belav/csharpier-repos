@@ -1,16 +1,15 @@
 public class Test
 {
-	public static bool Check (string name, string [] names)
-	{
-		foreach (string partial in names) {
-			if (name.StartsWith (partial))
-				return true;
-		}
+    public static bool Check(string name, string[] names)
+    {
+        foreach (string partial in names)
+        {
+            if (name.StartsWith(partial))
+                return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

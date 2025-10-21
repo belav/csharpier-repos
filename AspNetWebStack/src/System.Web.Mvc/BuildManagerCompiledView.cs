@@ -14,16 +14,21 @@ namespace System.Web.Mvc
         private ControllerContext _controllerContext;
 
         protected BuildManagerCompiledView(ControllerContext controllerContext, string viewPath)
-            : this(controllerContext, viewPath, null)
-        {
-        }
+            : this(controllerContext, viewPath, null) { }
 
-        protected BuildManagerCompiledView(ControllerContext controllerContext, string viewPath, IViewPageActivator viewPageActivator)
-            : this(controllerContext, viewPath, viewPageActivator, null)
-        {
-        }
+        protected BuildManagerCompiledView(
+            ControllerContext controllerContext,
+            string viewPath,
+            IViewPageActivator viewPageActivator
+        )
+            : this(controllerContext, viewPath, viewPageActivator, null) { }
 
-        internal BuildManagerCompiledView(ControllerContext controllerContext, string viewPath, IViewPageActivator viewPageActivator, IDependencyResolver dependencyResolver)
+        internal BuildManagerCompiledView(
+            ControllerContext controllerContext,
+            string viewPath,
+            IViewPageActivator viewPageActivator,
+            IDependencyResolver dependencyResolver
+        )
         {
             if (controllerContext == null)
             {
@@ -38,7 +43,9 @@ namespace System.Web.Mvc
 
             ViewPath = viewPath;
 
-            ViewPageActivator = viewPageActivator ?? new BuildManagerViewEngine.DefaultViewPageActivator(dependencyResolver);
+            ViewPageActivator =
+                viewPageActivator
+                ?? new BuildManagerViewEngine.DefaultViewPageActivator(dependencyResolver);
         }
 
         internal IBuildManager BuildManager
@@ -77,12 +84,18 @@ namespace System.Web.Mvc
                     String.Format(
                         CultureInfo.CurrentCulture,
                         MvcResources.CshtmlView_ViewCouldNotBeCreated,
-                        ViewPath));
+                        ViewPath
+                    )
+                );
             }
 
             RenderView(viewContext, writer, instance);
         }
 
-        protected abstract void RenderView(ViewContext viewContext, TextWriter writer, object instance);
+        protected abstract void RenderView(
+            ViewContext viewContext,
+            TextWriter writer,
+            object instance
+        );
     }
 }

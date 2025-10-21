@@ -26,8 +26,11 @@ namespace System.ServiceModel.Discovery
         string discoveryNamespace;
         IDiscoveryVersionImplementation discoveryVersionImplementation;
 
-        DiscoveryVersion(string name, string discoveryNamespace,
-            IDiscoveryVersionImplementation discoveryVersionImplementation)
+        DiscoveryVersion(
+            string name,
+            string discoveryNamespace,
+            IDiscoveryVersionImplementation discoveryVersionImplementation
+        )
         {
             this.name = name;
             this.discoveryNamespace = discoveryNamespace;
@@ -47,7 +50,8 @@ namespace System.ServiceModel.Discovery
                             DiscoveryVersion.wsDiscoveryApril2005 = new DiscoveryVersion(
                                 ProtocolStrings.VersionApril2005.Name,
                                 ProtocolStrings.VersionApril2005.Namespace,
-                                new DiscoveryVersionApril2005Implementation());
+                                new DiscoveryVersionApril2005Implementation()
+                            );
                         }
                     }
                 }
@@ -68,7 +72,8 @@ namespace System.ServiceModel.Discovery
                             DiscoveryVersion.wsDiscoveryCD1 = new DiscoveryVersion(
                                 ProtocolStrings.VersionCD1.Name,
                                 ProtocolStrings.VersionCD1.Namespace,
-                                new DiscoveryVersionCD1Implementation());
+                                new DiscoveryVersionCD1Implementation()
+                            );
                         }
                     }
                 }
@@ -89,7 +94,8 @@ namespace System.ServiceModel.Discovery
                             DiscoveryVersion.wsDiscovery11 = new DiscoveryVersion(
                                 ProtocolStrings.Version11.Name,
                                 ProtocolStrings.Version11.Namespace,
-                                new DiscoveryVersion11Implementation());
+                                new DiscoveryVersion11Implementation()
+                            );
                         }
                     }
                 }
@@ -99,54 +105,37 @@ namespace System.ServiceModel.Discovery
 
         public string Namespace
         {
-            get
-            {
-                return this.discoveryNamespace;
-            }
+            get { return this.discoveryNamespace; }
         }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return this.discoveryVersionImplementation.MessageVersion;
-            }
+            get { return this.discoveryVersionImplementation.MessageVersion; }
         }
 
         [SuppressMessage(
             FxCop.Category.Naming,
             FxCop.Rule.IdentifiersShouldBeSpelledCorrectly,
-            Justification = "Adhoc is a valid name.")]
+            Justification = "Adhoc is a valid name."
+        )]
         public Uri AdhocAddress
         {
-            get
-            {
-                return this.discoveryVersionImplementation.DiscoveryAddress;
-            }
+            get { return this.discoveryVersionImplementation.DiscoveryAddress; }
         }
 
         internal static DiscoveryVersion DefaultDiscoveryVersion
         {
-            get
-            {
-                return DiscoveryVersion.FromName(ProtocolStrings.VersionNameDefault);
-            }
+            get { return DiscoveryVersion.FromName(ProtocolStrings.VersionNameDefault); }
         }
 
         internal IDiscoveryVersionImplementation Implementation
         {
-            get
-            {
-                return this.discoveryVersionImplementation;
-            }
+            get { return this.discoveryVersionImplementation; }
         }
 
         public static DiscoveryVersion FromName(string name)
@@ -169,8 +158,16 @@ namespace System.ServiceModel.Discovery
                 return WSDiscoveryApril2005;
             }
 
-            throw FxTrace.Exception.AsError(new ArgumentOutOfRangeException(
-                SR2.DiscoveryIncorrectVersion(name, WSDiscovery11.Name, WSDiscoveryCD1.Name, WSDiscoveryApril2005.Name)));
+            throw FxTrace.Exception.AsError(
+                new ArgumentOutOfRangeException(
+                    SR2.DiscoveryIncorrectVersion(
+                        name,
+                        WSDiscovery11.Name,
+                        WSDiscoveryCD1.Name,
+                        WSDiscoveryApril2005.Name
+                    )
+                )
+            );
         }
 
         public override string ToString()
@@ -199,22 +196,61 @@ namespace System.ServiceModel.Discovery
 
             internal SchemaQualifiedNames(string versionNameSpace, string wsaNameSpace)
             {
-                this.AppSequenceType = new XmlQualifiedName(ProtocolStrings.SchemaNames.AppSequenceType, versionNameSpace);
+                this.AppSequenceType = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.AppSequenceType,
+                    versionNameSpace
+                );
                 this.AnyType = new XmlQualifiedName("anyType", ProtocolStrings.XsNamespace);
                 this.AnyUriType = new XmlQualifiedName("anyURI", ProtocolStrings.XsNamespace);
-                this.EprElement = new XmlQualifiedName(ProtocolStrings.SchemaNames.EprElement, wsaNameSpace);
-                this.MetadataVersionElement = new XmlQualifiedName(ProtocolStrings.SchemaNames.MetadataVersionElement, versionNameSpace);
-                this.ProbeMatchType = new XmlQualifiedName(ProtocolStrings.SchemaNames.ProbeMatchType, versionNameSpace);
-                this.ProbeType = new XmlQualifiedName(ProtocolStrings.SchemaNames.ProbeType, versionNameSpace);
-                this.QNameListType = new XmlQualifiedName(ProtocolStrings.SchemaNames.QNameListType, versionNameSpace);
+                this.EprElement = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.EprElement,
+                    wsaNameSpace
+                );
+                this.MetadataVersionElement = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.MetadataVersionElement,
+                    versionNameSpace
+                );
+                this.ProbeMatchType = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.ProbeMatchType,
+                    versionNameSpace
+                );
+                this.ProbeType = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.ProbeType,
+                    versionNameSpace
+                );
+                this.QNameListType = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.QNameListType,
+                    versionNameSpace
+                );
                 this.QNameType = new XmlQualifiedName("QName", ProtocolStrings.XsNamespace);
-                this.ResolveType = new XmlQualifiedName(ProtocolStrings.SchemaNames.ResolveType, versionNameSpace);
-                this.ScopesElement = new XmlQualifiedName(ProtocolStrings.SchemaNames.ScopesElement, versionNameSpace);
-                this.ScopesType = new XmlQualifiedName(ProtocolStrings.SchemaNames.ScopesType, versionNameSpace);
-                this.TypesElement = new XmlQualifiedName(ProtocolStrings.SchemaNames.TypesElement, versionNameSpace);
-                this.UnsignedIntType = new XmlQualifiedName("unsignedInt", ProtocolStrings.XsNamespace);
-                this.UriListType = new XmlQualifiedName(ProtocolStrings.SchemaNames.UriListType, versionNameSpace);
-                this.XAddrsElement = new XmlQualifiedName(ProtocolStrings.SchemaNames.XAddrsElement, versionNameSpace);
+                this.ResolveType = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.ResolveType,
+                    versionNameSpace
+                );
+                this.ScopesElement = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.ScopesElement,
+                    versionNameSpace
+                );
+                this.ScopesType = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.ScopesType,
+                    versionNameSpace
+                );
+                this.TypesElement = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.TypesElement,
+                    versionNameSpace
+                );
+                this.UnsignedIntType = new XmlQualifiedName(
+                    "unsignedInt",
+                    ProtocolStrings.XsNamespace
+                );
+                this.UriListType = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.UriListType,
+                    versionNameSpace
+                );
+                this.XAddrsElement = new XmlQualifiedName(
+                    ProtocolStrings.SchemaNames.XAddrsElement,
+                    versionNameSpace
+                );
             }
         }
     }

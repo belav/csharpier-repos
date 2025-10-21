@@ -3,13 +3,13 @@
 // on structures.
 //
 
-struct Dingus {
-	public Dingus (int a) : this ()
-		{
-		}
-	
+struct Dingus
+{
+    public Dingus(int a)
+        : this() { }
 }
 
-class X {
-	public static void Main () {}
+class X
+{
+    public static void Main() { }
 }

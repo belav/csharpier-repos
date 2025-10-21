@@ -14,33 +14,96 @@ namespace System.Reflection.Emit
         Cond_Branch = 3,
         Meta = 4,
         Next = 5,
+
         [System.ObsoleteAttribute("FlowControl.Phi has been deprecated and is not supported.")]
         Phi = 6,
         Return = 7,
         Throw = 8,
     }
+
     public readonly partial struct OpCode : System.IEquatable<System.Reflection.Emit.OpCode>
     {
         private readonly int _dummyPrimitive;
-        public int EvaluationStackDelta { get { throw null; } }
-        public System.Reflection.Emit.FlowControl FlowControl { get { throw null; } }
-        public string? Name { get { throw null; } }
-        public System.Reflection.Emit.OpCodeType OpCodeType { get { throw null; } }
-        public System.Reflection.Emit.OperandType OperandType { get { throw null; } }
-        public int Size { get { throw null; } }
-        public System.Reflection.Emit.StackBehaviour StackBehaviourPop { get { throw null; } }
-        public System.Reflection.Emit.StackBehaviour StackBehaviourPush { get { throw null; } }
-        public short Value { get { throw null; } }
-        public override bool Equals([System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj) { throw null; }
-        public bool Equals(System.Reflection.Emit.OpCode obj) { throw null; }
-        public override int GetHashCode() { throw null; }
-        public static bool operator ==(System.Reflection.Emit.OpCode a, System.Reflection.Emit.OpCode b) { throw null; }
-        public static bool operator !=(System.Reflection.Emit.OpCode a, System.Reflection.Emit.OpCode b) { throw null; }
-        public override string? ToString() { throw null; }
+        public int EvaluationStackDelta
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.FlowControl FlowControl
+        {
+            get { throw null; }
+        }
+        public string? Name
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.OpCodeType OpCodeType
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.OperandType OperandType
+        {
+            get { throw null; }
+        }
+        public int Size
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.StackBehaviour StackBehaviourPop
+        {
+            get { throw null; }
+        }
+        public System.Reflection.Emit.StackBehaviour StackBehaviourPush
+        {
+            get { throw null; }
+        }
+        public short Value
+        {
+            get { throw null; }
+        }
+
+        public override bool Equals(
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] object? obj
+        )
+        {
+            throw null;
+        }
+
+        public bool Equals(System.Reflection.Emit.OpCode obj)
+        {
+            throw null;
+        }
+
+        public override int GetHashCode()
+        {
+            throw null;
+        }
+
+        public static bool operator ==(
+            System.Reflection.Emit.OpCode a,
+            System.Reflection.Emit.OpCode b
+        )
+        {
+            throw null;
+        }
+
+        public static bool operator !=(
+            System.Reflection.Emit.OpCode a,
+            System.Reflection.Emit.OpCode b
+        )
+        {
+            throw null;
+        }
+
+        public override string? ToString()
+        {
+            throw null;
+        }
     }
+
     public partial class OpCodes
     {
         internal OpCodes() { }
+
         public static readonly System.Reflection.Emit.OpCode Add;
         public static readonly System.Reflection.Emit.OpCode Add_Ovf;
         public static readonly System.Reflection.Emit.OpCode Add_Ovf_Un;
@@ -267,11 +330,18 @@ namespace System.Reflection.Emit
         public static readonly System.Reflection.Emit.OpCode Unbox_Any;
         public static readonly System.Reflection.Emit.OpCode Volatile;
         public static readonly System.Reflection.Emit.OpCode Xor;
-        public static bool TakesSingleByteArgument(System.Reflection.Emit.OpCode inst) { throw null; }
+
+        public static bool TakesSingleByteArgument(System.Reflection.Emit.OpCode inst)
+        {
+            throw null;
+        }
     }
+
     public enum OpCodeType
     {
-        [System.ObsoleteAttribute("OpCodeType.Annotation has been deprecated and is not supported.")]
+        [System.ObsoleteAttribute(
+            "OpCodeType.Annotation has been deprecated and is not supported."
+        )]
         Annotation = 0,
         Macro = 1,
         Nternal = 2,
@@ -279,6 +349,7 @@ namespace System.Reflection.Emit
         Prefix = 4,
         Primitive = 5,
     }
+
     public enum OperandType
     {
         InlineBrTarget = 0,
@@ -287,7 +358,10 @@ namespace System.Reflection.Emit
         InlineI8 = 3,
         InlineMethod = 4,
         InlineNone = 5,
-        [System.ObsoleteAttribute("OperandType.InlinePhi has been deprecated and is not supported.")]
+
+        [System.ObsoleteAttribute(
+            "OperandType.InlinePhi has been deprecated and is not supported."
+        )]
         InlinePhi = 6,
         InlineR = 7,
         InlineSig = 9,
@@ -301,6 +375,7 @@ namespace System.Reflection.Emit
         ShortInlineR = 17,
         ShortInlineVar = 18,
     }
+
     public enum PackingSize
     {
         Unspecified = 0,
@@ -313,6 +388,7 @@ namespace System.Reflection.Emit
         Size64 = 64,
         Size128 = 128,
     }
+
     public enum StackBehaviour
     {
         Pop0 = 0,

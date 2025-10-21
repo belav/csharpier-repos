@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="INameCreationService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel.Design.Serialization {
-
+namespace System.ComponentModel.Design.Serialization
+{
     using System;
     using System.Collections;
     using System.ComponentModel.Design;
@@ -13,11 +13,11 @@ namespace System.ComponentModel.Design.Serialization {
     /// <devdoc>
     ///     This service may be provided by a designer loader to provide
     ///     a way for the designer to fabricate new names for objects.
-    ///     If this service isn't available the designer will choose a 
+    ///     If this service isn't available the designer will choose a
     ///     default implementation.
     /// </devdoc>
-    public interface INameCreationService {
-    
+    public interface INameCreationService
+    {
         /// <devdoc>
         ///     Creates a new name that is unique to all the components
         ///     in the given container.  The name will be used to create
@@ -26,17 +26,17 @@ namespace System.ComponentModel.Design.Serialization {
         ///     parameter can be null if no container search is needed.
         /// </devdoc>
         string CreateName(IContainer container, Type dataType);
-        
+
         /// <devdoc>
-        ///     Determines if the given name is valid.  A name 
+        ///     Determines if the given name is valid.  A name
         ///     creation service may have rules defining a valid
         ///     name, and this method allows the sevice to enforce
         ///     those rules.
         /// </devdoc>
         bool IsValidName(string name);
-    
+
         /// <devdoc>
-        ///     Determines if the given name is valid.  A name 
+        ///     Determines if the given name is valid.  A name
         ///     creation service may have rules defining a valid
         ///     name, and this method allows the sevice to enforce
         ///     those rules.  It is similar to IsValidName, except
@@ -47,4 +47,3 @@ namespace System.ComponentModel.Design.Serialization {
         void ValidateName(string name);
     }
 }
-

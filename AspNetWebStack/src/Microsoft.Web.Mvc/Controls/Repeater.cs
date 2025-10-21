@@ -37,7 +37,11 @@ namespace Microsoft.Web.Mvc.Controls
             set { _name = value; }
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The child objects are disposed when their container is disposed")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The child objects are disposed when their container is disposed"
+        )]
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);

@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
         {
             using (var workspace = TestWorkspace.Create(input))
             {
-                foreach (var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any()))
+                foreach (
+                    var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
+                )
                 {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
@@ -34,8 +36,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var result = await new CodeLensReferencesService().GetReferenceCountAsync(workspace.CurrentSolution, annotatedDocument.Id,
-                                declarationSyntaxNode, cap, CancellationToken.None);
+                            var result =
+                                await new CodeLensReferencesService().GetReferenceCountAsync(
+                                    workspace.CurrentSolution,
+                                    annotatedDocument.Id,
+                                    declarationSyntaxNode,
+                                    cap,
+                                    CancellationToken.None
+                                );
                             Assert.NotNull(result);
                             Assert.Equal(expected, result.Value.Count);
                             Assert.Equal(isCapped, result.Value.IsCapped);
@@ -45,14 +53,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             }
         }
 
-        protected static Task RunCountTest(string input, int cap = 0)
-            => RunCountTest(XElement.Parse(input), cap);
+        protected static Task RunCountTest(string input, int cap = 0) =>
+            RunCountTest(XElement.Parse(input), cap);
 
         protected static async Task RunReferenceTest(XElement input)
         {
             using (var workspace = TestWorkspace.Create(input))
             {
-                foreach (var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any()))
+                foreach (
+                    var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
+                )
                 {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
@@ -63,8 +73,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var result = await new CodeLensReferencesService().FindReferenceLocationsAsync(workspace.CurrentSolution,
-                                annotatedDocument.Id, declarationSyntaxNode, CancellationToken.None);
+                            var result =
+                                await new CodeLensReferencesService().FindReferenceLocationsAsync(
+                                    workspace.CurrentSolution,
+                                    annotatedDocument.Id,
+                                    declarationSyntaxNode,
+                                    CancellationToken.None
+                                );
                             Assert.True(result.HasValue);
                             Assert.Equal(expected, result.Value.Length);
                         }
@@ -73,14 +88,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             }
         }
 
-        protected static Task RunReferenceTest(string input)
-            => RunReferenceTest(XElement.Parse(input));
+        protected static Task RunReferenceTest(string input) =>
+            RunReferenceTest(XElement.Parse(input));
 
         protected static async Task RunMethodReferenceTest(XElement input)
         {
             using (var workspace = TestWorkspace.Create(input))
             {
-                foreach (var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any()))
+                foreach (
+                    var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
+                )
                 {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
@@ -91,8 +108,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var result = await new CodeLensReferencesService().FindReferenceMethodsAsync(workspace.CurrentSolution,
-                                annotatedDocument.Id, declarationSyntaxNode, CancellationToken.None);
+                            var result =
+                                await new CodeLensReferencesService().FindReferenceMethodsAsync(
+                                    workspace.CurrentSolution,
+                                    annotatedDocument.Id,
+                                    declarationSyntaxNode,
+                                    CancellationToken.None
+                                );
                             Assert.True(result.HasValue);
                             Assert.Equal(expected, result.Value.Length);
                         }
@@ -101,14 +123,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             }
         }
 
-        protected static Task RunMethodReferenceTest(string input)
-            => RunMethodReferenceTest(XElement.Parse(input));
+        protected static Task RunMethodReferenceTest(string input) =>
+            RunMethodReferenceTest(XElement.Parse(input));
 
         protected static async Task RunFullyQualifiedNameTest(XElement input)
         {
             using (var workspace = TestWorkspace.Create(input))
             {
-                foreach (var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any()))
+                foreach (
+                    var annotatedDocument in workspace.Documents.Where(d => d.AnnotatedSpans.Any())
+                )
                 {
                     var document = workspace.CurrentSolution.GetDocument(annotatedDocument.Id);
                     var syntaxNode = await document.GetSyntaxRootAsync();
@@ -119,8 +143,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
                         foreach (var span in annotatedSpan.Value)
                         {
                             var declarationSyntaxNode = syntaxNode.FindNode(span);
-                            var actual = await new CodeLensReferencesService().GetFullyQualifiedNameAsync(workspace.CurrentSolution,
-                                annotatedDocument.Id, declarationSyntaxNode, CancellationToken.None);
+                            var actual =
+                                await new CodeLensReferencesService().GetFullyQualifiedNameAsync(
+                                    workspace.CurrentSolution,
+                                    annotatedDocument.Id,
+                                    declarationSyntaxNode,
+                                    CancellationToken.None
+                                );
                             Assert.Equal(expected, actual);
                         }
                     }
@@ -128,7 +157,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeLens
             }
         }
 
-        protected static Task RunFullyQualifiedNameTest(string input)
-            => RunFullyQualifiedNameTest(XElement.Parse(input));
+        protected static Task RunFullyQualifiedNameTest(string input) =>
+            RunFullyQualifiedNameTest(XElement.Parse(input));
     }
 }

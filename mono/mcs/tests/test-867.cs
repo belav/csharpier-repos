@@ -1,35 +1,29 @@
 class Test
 {
-	public static void Main ()
-	{
-		new BaseJobController ();
-		new JobController ();
-	}
+    public static void Main()
+    {
+        new BaseJobController();
+        new JobController();
+    }
 }
 
-public interface IUser
-{
-}
+public interface IUser { }
 
-public class User : IUser
-{
-}
+public class User : IUser { }
 
 public interface IJobController
 {
-	IUser User { get; }
+    IUser User { get; }
 }
 
 public class BaseController
 {
-	public virtual IUser User { get; set; }
+    public virtual IUser User { get; set; }
 }
 
 public class BaseJobController : BaseController
 {
-	public new User User { get; set; }
+    public new User User { get; set; }
 }
 
-public class JobController : BaseJobController, IJobController
-{
-}
+public class JobController : BaseJobController, IJobController { }

@@ -32,13 +32,17 @@ namespace System.Data.Common.CommandTrees
     /// <summary>
     /// DbCommandTree is the abstract base type for the Delete, Query, Insert and Update DbCommandTree types.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public abstract class DbCommandTree
-    {      
+    {
         // Metadata collection
         private readonly MetadataWorkspace _metadata;
         private readonly DataSpace _dataSpace;
-                
+
         /// <summary>
         /// Initializes a new command tree with a given metadata workspace.
         /// </summary>
@@ -52,14 +56,17 @@ namespace System.Data.Common.CommandTrees
             // Ensure that the data space value is valid
             if (!DbCommandTree.IsValidDataSpace(dataSpace))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_CommandTree_InvalidDataSpace, "dataSpace");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Cqt_CommandTree_InvalidDataSpace,
+                    "dataSpace"
+                );
             }
 
             //
             // Create the tree's metadata workspace and initalize commonly used types.
             //
             MetadataWorkspace effectiveMetadata = new MetadataWorkspace();
-                
+
             //While EdmItemCollection and StorageitemCollections are required
             //ObjectItemCollection may or may not be registered on the workspace yet.
             //So register the ObjectItemCollection if it exists.
@@ -67,7 +74,7 @@ namespace System.Data.Common.CommandTrees
             if (metadata.TryGetItemCollection(DataSpace.OSpace, out objectItemCollection))
             {
                 effectiveMetadata.RegisterItemCollection(objectItemCollection);
-            }                
+            }
             effectiveMetadata.RegisterItemCollection(metadata.GetItemCollection(DataSpace.CSpace));
             effectiveMetadata.RegisterItemCollection(metadata.GetItemCollection(DataSpace.CSSpace));
             effectiveMetadata.RegisterItemCollection(metadata.GetItemCollection(DataSpace.SSpace));
@@ -75,20 +82,17 @@ namespace System.Data.Common.CommandTrees
             this._metadata = effectiveMetadata;
             this._dataSpace = dataSpace;
         }
-                                        
+
         /// <summary>
         /// Gets the name and corresponding type of each parameter that can be referenced within this command tree.
         /// </summary>
         public IEnumerable<KeyValuePair<string, TypeUsage>> Parameters
         {
-            get
-            {
-                return this.GetParameters();
-            }
+            get { return this.GetParameters(); }
         }
-                
+
         #region Internal Implementation
-        
+
         /// <summary>
         /// Gets the kind of this command tree.
         /// </summary>
@@ -99,17 +103,23 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         /// <returns></returns>
         internal abstract IEnumerable<KeyValuePair<string, TypeUsage>> GetParameters();
-        
+
         /// <summary>
         /// Gets the metadata workspace used by this command tree.
         /// </summary>
-        internal MetadataWorkspace MetadataWorkspace { get { return _metadata; } }
+        internal MetadataWorkspace MetadataWorkspace
+        {
+            get { return _metadata; }
+        }
 
         /// <summary>
         /// Gets the data space in which metadata used by this command tree must reside.
         /// </summary>
-        internal DataSpace DataSpace { get { return _dataSpace; } }
-                
+        internal DataSpace DataSpace
+        {
+            get { return _dataSpace; }
+        }
+
         #region Dump/Print Support
 
         internal void Dump(ExpressionDumper dumper)
@@ -189,18 +199,20 @@ namespace System.Data.Common.CommandTrees
 
         internal static bool IsValidDataSpace(DataSpace dataSpace)
         {
-            return (DataSpace.OSpace == dataSpace ||
-                    DataSpace.CSpace == dataSpace ||
-                    DataSpace.SSpace == dataSpace);
+            return (
+                DataSpace.OSpace == dataSpace
+                || DataSpace.CSpace == dataSpace
+                || DataSpace.SSpace == dataSpace
+            );
         }
 
         internal static bool IsValidParameterName(string name)
         {
-            return (!StringUtil.IsNullOrEmptyOrWhiteSpace(name) &&
-                    _paramNameRegex.IsMatch(name));
+            return (!StringUtil.IsNullOrEmptyOrWhiteSpace(name) && _paramNameRegex.IsMatch(name));
         }
+
         private static readonly Regex _paramNameRegex = new Regex("^([A-Za-z])([A-Za-z0-9_])*$");
-                
+
         #endregion
     }
 }

@@ -12,23 +12,21 @@ namespace System.Runtime.DurableInstancing
 
     static class InstancePersistence
     {
-        static readonly XNamespace activitiesCommandNamespace = XNamespace.Get("urn:schemas-microsoft-com:System.Activities.Persistence/command");
-        static readonly XNamespace activitiesEventNamespace = XNamespace.Get("urn:schemas-microsoft-com:System.Activities.Persistence/event");
+        static readonly XNamespace activitiesCommandNamespace = XNamespace.Get(
+            "urn:schemas-microsoft-com:System.Activities.Persistence/command"
+        );
+        static readonly XNamespace activitiesEventNamespace = XNamespace.Get(
+            "urn:schemas-microsoft-com:System.Activities.Persistence/event"
+        );
 
         internal static XNamespace ActivitiesCommandNamespace
         {
-            get
-            {
-                return InstancePersistence.activitiesCommandNamespace;
-            }
+            get { return InstancePersistence.activitiesCommandNamespace; }
         }
 
         internal static XNamespace ActivitiesEventNamespace
         {
-            get
-            {
-                return InstancePersistence.activitiesEventNamespace;
-            }
+            get { return InstancePersistence.activitiesEventNamespace; }
         }
 
         public static void ValidatePropertyBag(this IDictionary<XName, InstanceValue> bag)
@@ -36,7 +34,10 @@ namespace System.Runtime.DurableInstancing
             bag.ValidatePropertyBag(false);
         }
 
-        public static void ValidatePropertyBag(this IDictionary<XName, InstanceValue> bag, bool allowDelete)
+        public static void ValidatePropertyBag(
+            this IDictionary<XName, InstanceValue> bag,
+            bool allowDelete
+        )
         {
             if (bag != null)
             {
@@ -52,19 +53,32 @@ namespace System.Runtime.DurableInstancing
             property.ValidateProperty(false);
         }
 
-        public static void ValidateProperty(this KeyValuePair<XName, InstanceValue> property, bool allowDelete)
+        public static void ValidateProperty(
+            this KeyValuePair<XName, InstanceValue> property,
+            bool allowDelete
+        )
         {
             if (property.Key == null)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.MetadataCannotContainNullKey));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(SRCore.MetadataCannotContainNullKey)
+                );
             }
             if (property.Value == null)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.MetadataCannotContainNullValue(property.Key)));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(
+                        SRCore.MetadataCannotContainNullValue(property.Key)
+                    )
+                );
             }
             if (!allowDelete && property.Value.IsDeletedValue)
             {
-                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.InitialMetadataCannotBeDeleted(property.Key)));
+                throw Fx.Exception.AsError(
+                    new InvalidOperationException(
+                        SRCore.InitialMetadataCannotBeDeleted(property.Key)
+                    )
+                );
             }
         }
 
@@ -78,11 +92,16 @@ namespace System.Runtime.DurableInstancing
             return (value.Options & InstanceValueOptions.WriteOnly) != 0;
         }
 
-        public static ReadOnlyDictionaryInternal<XName, InstanceValue> ReadOnlyCopy(this IDictionary<XName, InstanceValue> bag, bool allowWriteOnly)
+        public static ReadOnlyDictionaryInternal<XName, InstanceValue> ReadOnlyCopy(
+            this IDictionary<XName, InstanceValue> bag,
+            bool allowWriteOnly
+        )
         {
             if (bag != null && bag.Count > 0)
             {
-                Dictionary<XName, InstanceValue> copy = new Dictionary<XName, InstanceValue>(bag.Count);
+                Dictionary<XName, InstanceValue> copy = new Dictionary<XName, InstanceValue>(
+                    bag.Count
+                );
                 foreach (KeyValuePair<XName, InstanceValue> value in bag)
                 {
                     value.ValidateProperty();
@@ -92,7 +111,9 @@ namespace System.Runtime.DurableInstancing
                     }
                     else if (!allowWriteOnly)
                     {
-                        throw Fx.Exception.AsError(new InvalidOperationException(SRCore.LoadedWriteOnlyValue));
+                        throw Fx.Exception.AsError(
+                            new InvalidOperationException(SRCore.LoadedWriteOnlyValue)
+                        );
                     }
                 }
                 return new ReadOnlyDictionaryInternal<XName, InstanceValue>(copy);
@@ -103,13 +124,23 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        public static ReadOnlyDictionaryInternal<XName, InstanceValue> ReadOnlyMergeInto(this IDictionary<XName, InstanceValue> bag, IDictionary<XName, InstanceValue> existing, bool allowWriteOnly)
+        public static ReadOnlyDictionaryInternal<XName, InstanceValue> ReadOnlyMergeInto(
+            this IDictionary<XName, InstanceValue> bag,
+            IDictionary<XName, InstanceValue> existing,
+            bool allowWriteOnly
+        )
         {
-            Fx.Assert(existing == null || existing is ReadOnlyDictionaryInternal<XName, InstanceValue>, "Should only be merging into other read-only dictionaries.");
+            Fx.Assert(
+                existing == null || existing is ReadOnlyDictionaryInternal<XName, InstanceValue>,
+                "Should only be merging into other read-only dictionaries."
+            );
 
             if (bag != null && bag.Count > 0)
             {
-                Dictionary<XName, InstanceValue> copy = existing == null ? new Dictionary<XName, InstanceValue>(bag.Count) : new Dictionary<XName, InstanceValue>(existing);
+                Dictionary<XName, InstanceValue> copy =
+                    existing == null
+                        ? new Dictionary<XName, InstanceValue>(bag.Count)
+                        : new Dictionary<XName, InstanceValue>(existing);
                 foreach (KeyValuePair<XName, InstanceValue> value in bag)
                 {
                     value.ValidateProperty(true);
@@ -123,7 +154,9 @@ namespace System.Runtime.DurableInstancing
                     }
                     else if (!allowWriteOnly)
                     {
-                        throw Fx.Exception.AsError(new InvalidOperationException(SRCore.LoadedWriteOnlyValue));
+                        throw Fx.Exception.AsError(
+                            new InvalidOperationException(SRCore.LoadedWriteOnlyValue)
+                        );
                     }
                     else
                     {

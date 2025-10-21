@@ -7,7 +7,11 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class UriConverter : JsonPrimitiveConverter<Uri?>
     {
-        public override Uri? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Uri? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.TokenType is JsonTokenType.Null ? null : ReadCore(ref reader);
         }
@@ -23,7 +27,11 @@ namespace System.Text.Json.Serialization.Converters
             writer.WriteStringValue(value.OriginalString);
         }
 
-        internal override Uri ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override Uri ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType is JsonTokenType.PropertyName);
             return ReadCore(ref reader);
@@ -41,7 +49,12 @@ namespace System.Text.Json.Serialization.Converters
             return value;
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, Uri value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            Uri value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             if (value is null)
             {

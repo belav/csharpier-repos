@@ -11,14 +11,23 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 {
     internal abstract class CommonQuickInfoProvider : QuickInfoProvider
     {
-        protected abstract Task<QuickInfoItem?> BuildQuickInfoAsync(QuickInfoContext context, SyntaxToken token);
-        protected abstract Task<QuickInfoItem?> BuildQuickInfoAsync(CommonQuickInfoContext context, SyntaxToken token);
+        protected abstract Task<QuickInfoItem?> BuildQuickInfoAsync(
+            QuickInfoContext context,
+            SyntaxToken token
+        );
+        protected abstract Task<QuickInfoItem?> BuildQuickInfoAsync(
+            CommonQuickInfoContext context,
+            SyntaxToken token
+        );
 
         public override async Task<QuickInfoItem?> GetQuickInfoAsync(QuickInfoContext context)
         {
             var cancellationToken = context.CancellationToken;
-            var tree = await context.Document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var tokens = await GetTokensAsync(tree, context.Position, context.CancellationToken).ConfigureAwait(false);
+            var tree = await context
+                .Document.GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var tokens = await GetTokensAsync(tree, context.Position, context.CancellationToken)
+                .ConfigureAwait(false);
 
             foreach (var token in tokens)
             {
@@ -32,7 +41,12 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
         public async Task<QuickInfoItem?> GetQuickInfoAsync(CommonQuickInfoContext context)
         {
-            var tokens = await GetTokensAsync(context.SemanticModel.SyntaxTree, context.Position, context.CancellationToken).ConfigureAwait(false);
+            var tokens = await GetTokensAsync(
+                    context.SemanticModel.SyntaxTree,
+                    context.Position,
+                    context.CancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var token in tokens)
             {
@@ -44,10 +58,19 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             return null;
         }
 
-        protected async Task<ImmutableArray<SyntaxToken>> GetTokensAsync(SyntaxTree tree, int position, System.Threading.CancellationToken cancellationToken)
+        protected async Task<ImmutableArray<SyntaxToken>> GetTokensAsync(
+            SyntaxTree tree,
+            int position,
+            System.Threading.CancellationToken cancellationToken
+        )
         {
             using var result = TemporaryArray<SyntaxToken>.Empty;
-            var token = await tree.GetTouchingTokenAsync(position, cancellationToken, findInsideTrivia: true).ConfigureAwait(false);
+            var token = await tree.GetTouchingTokenAsync(
+                    position,
+                    cancellationToken,
+                    findInsideTrivia: true
+                )
+                .ConfigureAwait(false);
             if (token != default)
             {
                 result.Add(token);
@@ -63,15 +86,14 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             return result.ToImmutableAndClear();
         }
 
-        protected virtual bool ShouldCheckPreviousToken(SyntaxToken token)
-            => true;
+        protected virtual bool ShouldCheckPreviousToken(SyntaxToken token) => true;
 
         private async Task<QuickInfoItem?> GetQuickInfoAsync(
             QuickInfoContext context,
-            SyntaxToken token)
+            SyntaxToken token
+        )
         {
-            if (token != default &&
-                token.Span.IntersectsWith(context.Position))
+            if (token != default && token.Span.IntersectsWith(context.Position))
             {
                 return await BuildQuickInfoAsync(context, token).ConfigureAwait(false);
             }
@@ -81,10 +103,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
         private async Task<QuickInfoItem?> GetQuickInfoAsync(
             CommonQuickInfoContext context,
-            SyntaxToken token)
+            SyntaxToken token
+        )
         {
-            if (token != default &&
-                token.Span.IntersectsWith(context.Position))
+            if (token != default && token.Span.IntersectsWith(context.Position))
             {
                 return await BuildQuickInfoAsync(context, token).ConfigureAwait(false);
             }

@@ -65,7 +65,10 @@ namespace System.Numerics.Tensors.Tests
             using BoundedMemory<float> source = CreateAndFillTensor(tensorLength);
             Half[] destination = new Half[source.Length - 1];
 
-            AssertExtensions.Throws<ArgumentException>("destination", () => TensorPrimitives.ConvertToHalf(source, destination));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => TensorPrimitives.ConvertToHalf(source, destination)
+            );
         }
         #endregion
 
@@ -101,6 +104,7 @@ namespace System.Numerics.Tensors.Tests
                 }
             }
         }
+
         [Theory]
         [MemberData(nameof(TensorLengths))]
         public static void ConvertToSingle_SpecialValues(int tensorLength)
@@ -135,7 +139,10 @@ namespace System.Numerics.Tensors.Tests
             Half[] source = new Half[tensorLength];
             using BoundedMemory<float> destination = CreateTensor(source.Length - 1);
 
-            AssertExtensions.Throws<ArgumentException>("destination", () => TensorPrimitives.ConvertToSingle(source, destination));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => TensorPrimitives.ConvertToSingle(source, destination)
+            );
         }
         #endregion
     }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
     [Name(PredefinedCommandHandlerNames.ExtractInterface)]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class ExtractInterfaceCommandHandler(IThreadingContext threadingContext, IGlobalOptionService globalOptions) : AbstractExtractInterfaceCommandHandler(threadingContext, globalOptions)
-    {
-    }
+    internal sealed class ExtractInterfaceCommandHandler(
+        IThreadingContext threadingContext,
+        IGlobalOptionService globalOptions
+    ) : AbstractExtractInterfaceCommandHandler(threadingContext, globalOptions) { }
 }

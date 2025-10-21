@@ -23,9 +23,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             public SafeHandle? SafeHandle => null;
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Add(ICertificatePal cert)
             {
@@ -48,10 +46,13 @@ namespace System.Security.Cryptography.X509Certificates
                     bool success = Interop.AndroidCrypto.X509StoreEnumerateTrustedCertificates(
                         (byte)(systemOnly ? 1 : 0),
                         &EnumCertificatesCallback,
-                        &context);
+                        &context
+                    );
                     if (!success)
                     {
-                        throw new CryptographicException(SR.Cryptography_X509_StoreEnumerateFailure);
+                        throw new CryptographicException(
+                            SR.Cryptography_X509_StoreEnumerateFailure
+                        );
                     }
                 }
 

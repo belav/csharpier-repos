@@ -3,7 +3,6 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-
 #pragma warning disable SA1121 // We use our own aliases since they differ per platform
 #if TARGET_WINDOWS
 using NativeType = System.Int32;
@@ -55,7 +54,8 @@ namespace System.Runtime.InteropServices
         /// </summary>
         /// <param name="o">An object to compare with this instance.</param>
         /// <returns><c>true</c> if <paramref name="o"/> is an instance of <see cref="CLong"/> and equals the value of this instance; otherwise, <c>false</c>.</returns>
-        public override bool Equals([NotNullWhen(true)] object? o) => o is CLong other && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? o) =>
+            o is CLong other && Equals(other);
 
         /// <summary>
         /// Returns a value indicating whether this instance is equal to a specified <see cref="CLong"/> value.

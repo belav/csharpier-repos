@@ -17,7 +17,11 @@ namespace System.ServiceModel.Channels
             this.innerChannel = innerChannel;
         }
 
-        protected override bool OnTryCreateException(Message message, MessageFault fault, out Exception exception)
+        protected override bool OnTryCreateException(
+            Message message,
+            MessageFault fault,
+            out Exception exception
+        )
         {
             if (this.innerChannel == null)
             {

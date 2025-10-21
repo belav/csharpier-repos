@@ -10,19 +10,25 @@ partial class FunctionPtr
     public delegate void MultiDelegateWithLong(long l); //Multicast delegate
 
     public static DelegateWithLong s_DelWithLongBool = new DelegateWithLong(MethodWithLongBool);
-    public static MultiDelegateWithLong s_MultidelWithLong = new MultiDelegateWithLong(MethodWithLong);
+    public static MultiDelegateWithLong s_MultidelWithLong = new MultiDelegateWithLong(
+        MethodWithLong
+    );
 
     public static void RunGetFcnPtrSingleMulticastTest()
     {
         Console.WriteLine($"Running {nameof(RunGetFcnPtrSingleMulticastTest)}...");
 
         {
-            IntPtr fcnptr = Marshal.GetFunctionPointerForDelegate<DelegateWithLong>(s_DelWithLongBool);
+            IntPtr fcnptr = Marshal.GetFunctionPointerForDelegate<DelegateWithLong>(
+                s_DelWithLongBool
+            );
             Assert.True(FunctionPointerNative.CheckFcnPtr(fcnptr));
         }
 
         {
-            IntPtr fcnptr = Marshal.GetFunctionPointerForDelegate<MultiDelegateWithLong>(s_MultidelWithLong);
+            IntPtr fcnptr = Marshal.GetFunctionPointerForDelegate<MultiDelegateWithLong>(
+                s_MultidelWithLong
+            );
             FunctionPointerNative.CheckFcnPtr(fcnptr);
         }
     }

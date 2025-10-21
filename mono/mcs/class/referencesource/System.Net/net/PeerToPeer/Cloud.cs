@@ -7,28 +7,24 @@ namespace System.Net.PeerToPeer
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.InteropServices;
-    
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Text;
+
     /// <remarks>
     /// The Cloud class directly represents the native cloud concept in the P2P APIs
     /// There are two special static readonly members we support
     /// Cloud.All and Cloud.AllLinkLocal
     /// Cloud.All is really a notational convinience of null in the native world
     /// Cloud.AllLinkLocal is equivalent to PEER_PNRP_ALL_LINK_CLOUDS const in the header file (declared in p2p.h)
-    /// 
+    ///
     /// This class is serializable.
-    /// This class is not sealed because there is no reason for it to be sealed. 
+    /// This class is not sealed because there is no reason for it to be sealed.
     /// </remarks>
     /// <
-
-
-
-
     [Serializable]
     public class Cloud : ISerializable, IEquatable<Cloud>
     {
@@ -36,21 +32,25 @@ namespace System.Net.PeerToPeer
 
         private string m_CloudName; //name of the cloud
         private PnrpScope m_PnrpScope; //scope of the cloud
-        private int m_ScopeId; //scope Id of the scope 
+        private int m_ScopeId; //scope Id of the scope
 
         /// <summary>
         /// Cloud.AllAvailable is a notational convinience. The native side uses a null for cloud parameter
-        /// to indicate all clouds. 
+        /// to indicate all clouds.
         /// </summary>
         public static readonly Cloud Available = new Cloud("AllAvailable", PnrpScope.All, -1);
 
         /// <summary>
         /// AllLinkLocal is a managed abstraction of the native const PEER_PNRP_ALL_LINK_CLOUDS
         /// </summary>
-        public static readonly Cloud AllLinkLocal = new Cloud("AllLinkLocal", PnrpScope.LinkLocal, -1);
+        public static readonly Cloud AllLinkLocal = new Cloud(
+            "AllLinkLocal",
+            PnrpScope.LinkLocal,
+            -1
+        );
 
         /// <summary>
-        /// The static constructor serves the purpose of checking the 
+        /// The static constructor serves the purpose of checking the
         /// availability of the P2P apis on this platform
         /// </summary>
         static Cloud()
@@ -64,26 +64,35 @@ namespace System.Net.PeerToPeer
             }
         }
 
-
         /// <summary>
-        /// Constructs an instance of a Cloud. 
+        /// Constructs an instance of a Cloud.
         /// This is not public and accessible for internal members only
         /// </summary>
         /// <param name="name">Name of the cloud</param>
         /// <param name="pnrpScope">scope</param>
         /// <param name="scopeId">id ofthe scope</param>
-        internal Cloud(string name, PnrpScope pnrpScope, int scopeId) {
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Creating cloud with Name: {0}, PnrpScope: {1}, ScopeID: {2}", name, pnrpScope, scopeId);
+        internal Cloud(string name, PnrpScope pnrpScope, int scopeId)
+        {
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Creating cloud with Name: {0}, PnrpScope: {1}, ScopeID: {2}",
+                name,
+                pnrpScope,
+                scopeId
+            );
             m_CloudName = name;
             m_PnrpScope = pnrpScope;
             m_ScopeId = scopeId;
         }
 
         /// <summary>
-        ///     Name 
+        ///     Name
         /// </summary>
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 if (this == Cloud.AllLinkLocal || this == Cloud.Available)
                     return null;
                 return m_CloudName;
@@ -95,7 +104,7 @@ namespace System.Net.PeerToPeer
             get
             {
                 if (this == Cloud.AllLinkLocal)
-                    return  PEER_PNRP_ALL_LINK_CLOUDS;
+                    return PEER_PNRP_ALL_LINK_CLOUDS;
                 else if (this == Cloud.Available)
                     return null;
                 return m_CloudName;
@@ -105,19 +114,17 @@ namespace System.Net.PeerToPeer
         /// <summary>
         ///     Scope
         /// </summary>
-        public PnrpScope Scope {
-            get {
-                return m_PnrpScope;
-            }
+        public PnrpScope Scope
+        {
+            get { return m_PnrpScope; }
         }
 
         /// <summary>
         ///     ScopeId
         /// </summary>
-        public int ScopeId {
-            get {
-                return m_ScopeId;
-            }
+        public int ScopeId
+        {
+            get { return m_ScopeId; }
         }
 
         public static Cloud Global
@@ -135,7 +142,6 @@ namespace System.Net.PeerToPeer
                 return cloud;
             }
         }
-
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Method: GetCloudOrClouds(String, Boolean, CloudCollection&, Cloud&):Void" Ring="1" />
@@ -180,9 +186,18 @@ namespace System.Net.PeerToPeer
         // <ReferencesCritical Name="Method: UnsafeP2PNativeMethods.PnrpStartup():System.Void" Ring="1" />
         // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
         // </SecurityKernel>
-        [SuppressMessage("Microsoft.Security","CA2129:SecurityTransparentCodeShouldNotReferenceNonpublicSecurityCriticalCode", Justification="System.Net.dll is still using pre-v4 security model and needs this demand")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2129:SecurityTransparentCodeShouldNotReferenceNonpublicSecurityCriticalCode",
+            Justification = "System.Net.dll is still using pre-v4 security model and needs this demand"
+        )]
         [System.Security.SecuritySafeCritical]
-        private static void GetCloudOrClouds(string cloudName, bool bGlobalCloudOnly,  out CloudCollection clouds, out Cloud cloud)
+        private static void GetCloudOrClouds(
+            string cloudName,
+            bool bGlobalCloudOnly,
+            out CloudCollection clouds,
+            out Cloud cloud
+        )
         {
             cloud = null;
             clouds = null;
@@ -200,7 +215,7 @@ namespace System.Net.PeerToPeer
             if (cloudName == null)
             {
                 //-----------------------------------------
-                //We need the collection only when we are not 
+                //We need the collection only when we are not
                 //getting a specific cloud
                 //-----------------------------------------
                 clouds = new CloudCollection();
@@ -208,26 +223,48 @@ namespace System.Net.PeerToPeer
             try
             {
                 //---------------------------------------------------------------
-                //No perf hit here, real native call happens only one time if it 
+                //No perf hit here, real native call happens only one time if it
                 //did not already happen
                 //---------------------------------------------------------------
                 UnsafeP2PNativeMethods.PnrpStartup();
 
-                result = UnsafeP2PNativeMethods.PeerPnrpGetCloudInfo(out numClouds, out ArrayOfCloudInfoStructures);
+                result = UnsafeP2PNativeMethods.PeerPnrpGetCloudInfo(
+                    out numClouds,
+                    out ArrayOfCloudInfoStructures
+                );
                 if (result != 0)
                 {
-                    throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotEnumerateClouds), result);
+                    throw PeerToPeerException.CreateFromHr(
+                        SR.GetString(SR.Pnrp_CouldNotEnumerateClouds),
+                        result
+                    );
                 }
                 if (numClouds != 0)
                 {
-                    Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Number of clouds returned {0}", numClouds);
+                    Logging.P2PTraceSource.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Number of clouds returned {0}",
+                        numClouds
+                    );
                     IntPtr pPEER_PNRP_CLOUD_INFO = ArrayOfCloudInfoStructures.DangerousGetHandle();
                     for (ulong i = 0; i < numClouds; i++)
                     {
-                        PEER_PNRP_CLOUD_INFO cloudinfo = (PEER_PNRP_CLOUD_INFO)Marshal.PtrToStructure(pPEER_PNRP_CLOUD_INFO, typeof(PEER_PNRP_CLOUD_INFO));
+                        PEER_PNRP_CLOUD_INFO cloudinfo = (PEER_PNRP_CLOUD_INFO)
+                            Marshal.PtrToStructure(
+                                pPEER_PNRP_CLOUD_INFO,
+                                typeof(PEER_PNRP_CLOUD_INFO)
+                            );
                         string nativeCloudName = Marshal.PtrToStringUni(cloudinfo.pwzCloudName);
-                        pPEER_PNRP_CLOUD_INFO = (IntPtr)((long)pPEER_PNRP_CLOUD_INFO + Marshal.SizeOf(typeof(PEER_PNRP_CLOUD_INFO)));
-                        Cloud c = new Cloud(nativeCloudName, (PnrpScope)((int)cloudinfo.dwScope), (int)cloudinfo.dwScopeId);
+                        pPEER_PNRP_CLOUD_INFO = (IntPtr)(
+                            (long)pPEER_PNRP_CLOUD_INFO
+                            + Marshal.SizeOf(typeof(PEER_PNRP_CLOUD_INFO))
+                        );
+                        Cloud c = new Cloud(
+                            nativeCloudName,
+                            (PnrpScope)((int)cloudinfo.dwScope),
+                            (int)cloudinfo.dwScopeId
+                        );
                         if (cloudName == null && !bGlobalCloudOnly)
                         {
                             clouds.Add(c);
@@ -241,7 +278,7 @@ namespace System.Net.PeerToPeer
                             break;
                         }
 
-                         if (bGlobalCloudOnly && c.Scope == PnrpScope.Global)
+                        if (bGlobalCloudOnly && c.Scope == PnrpScope.Global)
                         {
                             cloud = c;
                             break;
@@ -250,7 +287,11 @@ namespace System.Net.PeerToPeer
                 }
                 else
                 {
-                    Logging.P2PTraceSource.TraceEvent(TraceEventType.Warning, 0, "No Clouds returned from the native call");
+                    Logging.P2PTraceSource.TraceEvent(
+                        TraceEventType.Warning,
+                        0,
+                        "No Clouds returned from the native call"
+                    );
                 }
             }
             finally
@@ -262,15 +303,15 @@ namespace System.Net.PeerToPeer
             }
             if (cloudName != null && cloud == null)
             {
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "The specific cloud name {0} asked for is not found", cloudName);
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "The specific cloud name {0} asked for is not found",
+                    cloudName
+                );
             }
             Logging.Leave(Logging.P2PTraceSource, "Cloud::GetCloudOrClouds()");
         }
-
-
-
-
-
 
         /// <summary>
         /// Two Clouds are equal only when all of the information matches
@@ -279,19 +320,21 @@ namespace System.Net.PeerToPeer
         /// <returns></returns>
         public bool Equals(Cloud other)
         {
-            if (other == null) return false;
+            if (other == null)
+                return false;
             return other.Name == Name && other.Scope == Scope && other.ScopeId == ScopeId;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
+            if (obj == null)
+                return false;
             Cloud other = obj as Cloud;
             if (other == null)
                 return false;
             return Equals(other);
-            
         }
+
         /// <summary>
         /// The hash code comes from just the cloud name - for no partular reason.
         /// This implementation seems sufficient - since the cloud names or typically
@@ -320,11 +363,14 @@ namespace System.Net.PeerToPeer
         }
 
         /// <summary>
-        /// Constructor to enable serialization 
+        /// Constructor to enable serialization
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
         protected Cloud(SerializationInfo info, StreamingContext context)
         {
             m_CloudName = info.GetString("_CloudName");
@@ -335,9 +381,17 @@ namespace System.Net.PeerToPeer
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="GetObjectData(SerializationInfo, StreamingContext):Void" />
         // </SecurityKernel>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.Net.dll is still using pre-v4 security model and needs this demand")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.Net.dll is still using pre-v4 security model and needs this demand"
+        )]
         [System.Security.SecurityCritical]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter, SerializationFormatter = true)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             GetObjectData(info, context);
@@ -352,7 +406,7 @@ namespace System.Net.PeerToPeer
         protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             //Name is tricky since it can be null for AllLinkLocal and Available clouds
-            //but internally we represent them with non null strings 
+            //but internally we represent them with non null strings
             //so we should use the property here
             info.AddValue("_CloudName", Name);
             info.AddValue("_CloudScope", m_PnrpScope);

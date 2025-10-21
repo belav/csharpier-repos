@@ -86,7 +86,10 @@ namespace System.Security.Cryptography.Xml
             set
             {
                 if (!(value is XmlNode))
-                    throw new ArgumentException(SR.Cryptography_Xml_IncorrectObjectType, nameof(value));
+                    throw new ArgumentException(
+                        SR.Cryptography_Xml_IncorrectObjectType,
+                        nameof(value)
+                    );
                 _nodeArray[index] = value;
             }
         }

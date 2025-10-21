@@ -45,7 +45,8 @@ namespace System.Xml
     {
         private XmlLinkedNode? _lastChild;
 
-        protected internal XmlDocumentFragment(XmlDocument ownerDocument) : base()
+        protected internal XmlDocumentFragment(XmlDocument ownerDocument)
+            : base()
         {
             if (ownerDocument == null)
                 throw new ArgumentException(SR.Xdom_Node_Null_Doc);
@@ -80,20 +81,14 @@ namespace System.Xml
         // Gets the XmlDocument that contains this node.
         public override XmlDocument OwnerDocument
         {
-            get
-            {
-                return (XmlDocument)parentNode!;
-            }
+            get { return (XmlDocument)parentNode!; }
         }
 
         // Gets or sets the markup representing just
         // the children of this node.
         public override string InnerXml
         {
-            get
-            {
-                return base.InnerXml;
-            }
+            get { return base.InnerXml; }
             set
             {
                 RemoveAll();
@@ -150,6 +145,7 @@ namespace System.Xml
                     return false;
             }
         }
+
         internal override bool CanInsertAfter(XmlNode newChild, XmlNode? refChild)
         {
             Debug.Assert(newChild != null); //should be checked that newChild is not null before this function call
@@ -191,6 +187,9 @@ namespace System.Xml
             }
         }
 
-        internal override XPathNodeType XPNodeType { get { return XPathNodeType.Root; } }
+        internal override XPathNodeType XPNodeType
+        {
+            get { return XPathNodeType.Root; }
+        }
     }
 }

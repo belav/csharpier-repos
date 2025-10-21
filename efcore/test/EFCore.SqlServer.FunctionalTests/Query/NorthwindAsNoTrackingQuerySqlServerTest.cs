@@ -3,12 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindAsNoTrackingQuerySqlServerTest : NorthwindAsNoTrackingQueryTestBase<
-    NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
+public class NorthwindAsNoTrackingQuerySqlServerTest
+    : NorthwindAsNoTrackingQueryTestBase<NorthwindQuerySqlServerFixture<NoopModelCustomizer>>
 {
     public NorthwindAsNoTrackingQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
@@ -16,8 +17,8 @@ public class NorthwindAsNoTrackingQuerySqlServerTest : NorthwindAsNoTrackingQuer
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Can_get_current_values(bool async)
     {
@@ -32,7 +33,8 @@ FROM [Customers] AS [c]
             """
 SELECT TOP(1) [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Where_simple_shadow(bool async)
@@ -44,7 +46,8 @@ FROM [Customers] AS [c]
 SELECT [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
 FROM [Employees] AS [e]
 WHERE [e].[Title] = N'Sales Representative'
-""");
+"""
+        );
     }
 
     public override async Task Entity_not_added_to_state_manager(bool useParam, bool async)
@@ -55,7 +58,8 @@ WHERE [e].[Title] = N'Sales Representative'
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Query_fast_path_when_ctor_binding(bool async)
@@ -66,7 +70,8 @@ FROM [Customers] AS [c]
             """
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region]
 FROM [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Applied_to_multiple_body_clauses(bool async)
@@ -79,7 +84,8 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
 FROM [Customers] AS [c]
 CROSS JOIN [Orders] AS [o]
 WHERE [c].[CustomerID] = [o].[CustomerID]
-""");
+"""
+        );
     }
 
     public override async Task SelectMany_simple(bool async)
@@ -91,7 +97,8 @@ WHERE [c].[CustomerID] = [o].[CustomerID]
 SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[ContactName], [c].[ContactTitle], [c].[Country], [c].[Fax], [c].[Phone], [c].[PostalCode], [c].[Region], [e].[EmployeeID], [e].[City], [e].[Country], [e].[FirstName], [e].[ReportsTo], [e].[Title]
 FROM [Employees] AS [e]
 CROSS JOIN [Customers] AS [c]
-""");
+"""
+        );
     }
 
     public override async Task Applied_after_navigation_expansion(bool async)
@@ -104,7 +111,8 @@ SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 WHERE [c].[City] <> N'London' OR [c].[City] IS NULL
-""");
+"""
+        );
     }
 
     public override async Task Include_reference_and_collection(bool async)
@@ -118,7 +126,8 @@ FROM [Orders] AS [o]
 LEFT JOIN [Customers] AS [c] ON [o].[CustomerID] = [c].[CustomerID]
 LEFT JOIN [Order Details] AS [o0] ON [o].[OrderID] = [o0].[OrderID]
 ORDER BY [o].[OrderID], [c].[CustomerID], [o0].[OrderID]
-""");
+"""
+        );
     }
 
     public override async Task Applied_to_body_clause(bool async)
@@ -131,7 +140,8 @@ SELECT [o].[OrderID], [o].[CustomerID], [o].[EmployeeID], [o].[OrderDate]
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override async Task Applied_to_projection(bool async)
@@ -144,7 +154,8 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
     public override async Task Applied_to_body_clause_with_projection(bool async)
@@ -157,9 +168,10 @@ SELECT [c].[CustomerID], [c].[Address], [c].[City], [c].[CompanyName], [c].[Cont
 FROM [Customers] AS [c]
 INNER JOIN [Orders] AS [o] ON [c].[CustomerID] = [o].[CustomerID]
 WHERE [c].[CustomerID] = N'ALFKI'
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

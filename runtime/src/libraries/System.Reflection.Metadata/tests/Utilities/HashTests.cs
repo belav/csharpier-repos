@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Reflection.Internal;
 using System.Collections.Immutable;
+using System.Reflection.Internal;
 using Xunit;
 
 namespace System.Reflection.Metadata.Tests
@@ -18,7 +18,10 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public void GetFNVHashCodeImmutableByteTest()
         {
-            Assert.Equal(-1088511923, Hash.GetFNVHashCode(ImmutableArray.Create((byte)0xFF, (byte)0xD1).AsSpan()));
+            Assert.Equal(
+                -1088511923,
+                Hash.GetFNVHashCode(ImmutableArray.Create((byte)0xFF, (byte)0xD1).AsSpan())
+            );
         }
 
         [Fact]

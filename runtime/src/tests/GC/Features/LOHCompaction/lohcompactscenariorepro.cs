@@ -3,11 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime;
 using System.Reflection;
+using System.Runtime;
 using System.Threading;
-//Repro for bug Bug 656705: Heap corruption when using LOH compaction
 
+//Repro for bug Bug 656705: Heap corruption when using LOH compaction
 
 namespace LOHCompactScenarioRepro
 {
@@ -43,7 +43,8 @@ namespace LOHCompactScenarioRepro
             int iter = 0;
             while (true)
             {
-               GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
+                GCSettings.LargeObjectHeapCompactionMode =
+                    GCLargeObjectHeapCompactionMode.CompactOnce;
                 GC.Collect();
 
                 for (int i = 0; i < 100; i++)
@@ -60,7 +61,6 @@ namespace LOHCompactScenarioRepro
                 }
             }
 
-
             testDone = true;
             AllocatingThread.Join();
             for (int i = 0; i < numThreads; i++)
@@ -70,13 +70,13 @@ namespace LOHCompactScenarioRepro
 
             if (iter < 3)
             {
-                Console.WriteLine("Test needs to run at least a few iterations in order to be useful.");
+                Console.WriteLine(
+                    "Test needs to run at least a few iterations in order to be useful."
+                );
                 return 5;
             }
             return 100;
         }
-
-      
 
         public static void AllocateTempObjects(object threadInfoObj)
         {
@@ -95,11 +95,9 @@ namespace LOHCompactScenarioRepro
                     {
                         tempList.Add(new byte[50]);
                     }
-                   
                 }
                 tempList.Clear();
             }
-
         }
 
         public static void Allocate(object threadInfoObj)
@@ -109,7 +107,6 @@ namespace LOHCompactScenarioRepro
 
             int listSize2 = 1000;
             List<byte[]> newList = new List<byte[]>(500 + 1000);
-
 
             while (!testDone)
             {
@@ -126,6 +123,5 @@ namespace LOHCompactScenarioRepro
                 newList.Clear();
             }
         }
-
     }
 }

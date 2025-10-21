@@ -7,20 +7,25 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Text;
+using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
 using System.Diagnostics;
-using System.Data.Common.Utils;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Utils
 {
-
     // Miscellaneous helper routines for generating mapping exceptions
     internal static class ExceptionHelpers
     {
-        internal static void ThrowMappingException(ErrorLog.Record errorRecord, ConfigViewGenerator config)
+        internal static void ThrowMappingException(
+            ErrorLog.Record errorRecord,
+            ConfigViewGenerator config
+        )
         {
-            InternalMappingException exception = new InternalMappingException(errorRecord.ToUserString(), errorRecord);
+            InternalMappingException exception = new InternalMappingException(
+                errorRecord.ToUserString(),
+                errorRecord
+            );
             if (config.IsNormalTracing)
             {
                 exception.ErrorLog.PrintTrace();
@@ -30,7 +35,10 @@ namespace System.Data.Mapping.ViewGeneration.Utils
 
         internal static void ThrowMappingException(ErrorLog errorLog, ConfigViewGenerator config)
         {
-            InternalMappingException exception = new InternalMappingException(errorLog.ToUserString(), errorLog);
+            InternalMappingException exception = new InternalMappingException(
+                errorLog.ToUserString(),
+                errorLog
+            );
             if (config.IsNormalTracing)
             {
                 exception.ErrorLog.PrintTrace();

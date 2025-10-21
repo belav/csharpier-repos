@@ -39,7 +39,10 @@ namespace System.Net.Http.Formatting
         // Determines whether a member is required or not and sets the appropriate JsonProperty settings
         private void ConfigureProperty(MemberInfo member, JsonProperty property)
         {
-            if (_formatter.RequiredMemberSelector != null && _formatter.RequiredMemberSelector.IsRequiredMember(member))
+            if (
+                _formatter.RequiredMemberSelector != null
+                && _formatter.RequiredMemberSelector.IsRequiredMember(member)
+            )
             {
                 property.Required = Required.AllowNull;
                 property.DefaultValueHandling = DefaultValueHandling.Include;
@@ -52,7 +55,10 @@ namespace System.Net.Http.Formatting
         }
 
         /// <inheritdoc />
-        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+        protected override JsonProperty CreateProperty(
+            MemberInfo member,
+            MemberSerialization memberSerialization
+        )
         {
             JsonProperty property = base.CreateProperty(member, memberSerialization);
             ConfigureProperty(member, property);

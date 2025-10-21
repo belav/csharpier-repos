@@ -1,10 +1,12 @@
 <Type Name="PartitionSyncRequest" FullName="Novell.Directory.Ldap.Extensions.PartitionSyncRequest">
-  <TypeSignature Language="C#" Value="public class PartitionSyncRequest : Novell.Directory.Ldap.LdapExtendedOperation, System.ICloneable" />
+  <TypeSignature
+    Language="C#"
+    Value="public class PartitionSyncRequest : Novell.Directory.Ldap.LdapExtendedOperation, System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -51,7 +53,10 @@
   </Interfaces>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public PartitionSyncRequest(string serverName, string partitionRoot, int delay)" />
+      <MemberSignature
+        Language="C#"
+        Value="public PartitionSyncRequest(string serverName, string partitionRoot, int delay)"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="serverName" Type="System.String" />

@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
 
 namespace ILCompiler.Metadata
@@ -25,7 +24,10 @@ namespace ILCompiler.Metadata
         /// <see cref="IMetadataPolicy.GeneratesMetadata(Cts.MetadataType)"/>
         /// and <see cref="IMetadataPolicy.GeneratesMetadata(Cts.MethodDesc)"/> are required to return false.
         /// </remarks>
-        public static MetadataTransformResult<TPolicy> Run<TPolicy>(TPolicy policy, IEnumerable<Cts.ModuleDesc> modules)
+        public static MetadataTransformResult<TPolicy> Run<TPolicy>(
+            TPolicy policy,
+            IEnumerable<Cts.ModuleDesc> modules
+        )
             where TPolicy : struct, IMetadataPolicy
         {
             // TODO: Make this multithreaded. The high level plan is:

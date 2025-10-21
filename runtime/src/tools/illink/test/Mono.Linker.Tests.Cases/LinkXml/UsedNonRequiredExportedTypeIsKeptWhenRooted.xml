@@ -1,5 +1,9 @@
 <linker>
-    <assembly fullname="lib">
-        <type fullname="Mono.Linker.Tests.Cases.LinkXml.UsedNonRequiredExportedTypeIsKeptWhenRooted_Used" preserve="fields" required="false"/>
-    </assembly>
+  <assembly fullname="lib">
+    <type
+      fullname="Mono.Linker.Tests.Cases.LinkXml.UsedNonRequiredExportedTypeIsKeptWhenRooted_Used"
+      preserve="fields"
+      required="false"
+    />
+  </assembly>
 </linker>

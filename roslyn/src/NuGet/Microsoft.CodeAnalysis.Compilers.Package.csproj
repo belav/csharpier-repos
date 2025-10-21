@@ -2,7 +2,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <ExcludeFromSourceBuild>true</ExcludeFromSourceBuild>
@@ -14,7 +13,6 @@
       If you want just support for one language, install Microsoft.CodeAnalysis.CSharp or Microsoft.CodeAnalysis.VisualBasic.
     </PackageDescription>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Compilers\CSharp\Portable\Microsoft.CodeAnalysis.CSharp.csproj" />
     <ProjectReference Include="..\Compilers\VisualBasic\Portable\Microsoft.CodeAnalysis.VisualBasic.vbproj" />

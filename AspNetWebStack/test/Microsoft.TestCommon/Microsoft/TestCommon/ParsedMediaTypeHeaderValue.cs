@@ -29,25 +29,20 @@ namespace Microsoft.TestCommon
 
         public string Type
         {
-            get
-            {
-                return this.type;
-            }
+            get { return this.type; }
         }
 
         public string SubType
         {
-            get
-            {
-                return this.subType;
-            }
+            get { return this.subType; }
         }
 
         public bool IsAllMediaRange
         {
             get
             {
-                return this.IsSubTypeMediaRange && String.Equals(MediaRangeAsterisk, this.Type, StringComparison.Ordinal);
+                return this.IsSubTypeMediaRange
+                    && String.Equals(MediaRangeAsterisk, this.Type, StringComparison.Ordinal);
             }
         }
 
@@ -68,7 +63,13 @@ namespace Microsoft.TestCommon
                     this.hasNonQualityFactorParameter = false;
                     foreach (NameValueHeaderValue param in this.mediaType.Parameters)
                     {
-                        if (!String.Equals(QualityFactorParameterName, param.Name, StringComparison.Ordinal))
+                        if (
+                            !String.Equals(
+                                QualityFactorParameterName,
+                                param.Name,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             this.hasNonQualityFactorParameter = true;
                         }
@@ -81,10 +82,7 @@ namespace Microsoft.TestCommon
 
         public string CharSet
         {
-            get
-            {
-                return this.mediaType.CharSet;
-            }
+            get { return this.mediaType.CharSet; }
         }
 
         public double QualityFactor
@@ -93,7 +91,8 @@ namespace Microsoft.TestCommon
             {
                 if (!this.qualityFactor.HasValue)
                 {
-                    MediaTypeWithQualityHeaderValue mediaTypeWithQuality = this.mediaType as MediaTypeWithQualityHeaderValue;
+                    MediaTypeWithQualityHeaderValue mediaTypeWithQuality =
+                        this.mediaType as MediaTypeWithQualityHeaderValue;
                     if (mediaTypeWithQuality != null)
                     {
                         this.qualityFactor = mediaTypeWithQuality.Quality;

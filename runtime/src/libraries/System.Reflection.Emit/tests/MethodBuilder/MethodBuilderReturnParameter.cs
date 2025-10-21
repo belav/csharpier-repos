@@ -27,8 +27,17 @@ namespace System.Reflection.Emit.Tests
         public void ReturnParameter(Type returnType)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder method = type.DefineMethod( "TestMethod", MethodAttributes.Public, returnType, new Type[] { typeof(int) });
-            ParameterBuilder paramBuilder = method.DefineParameter(1, ParameterAttributes.HasDefault, "TestParam");
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                returnType,
+                new Type[] { typeof(int) }
+            );
+            ParameterBuilder paramBuilder = method.DefineParameter(
+                1,
+                ParameterAttributes.HasDefault,
+                "TestParam"
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
@@ -51,7 +60,10 @@ namespace System.Reflection.Emit.Tests
         public void ReturnParameter_NoBody_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual
+            );
 
             type.CreateType();
             Assert.Throws<InvalidOperationException>(() => method.ReturnParameter);

@@ -33,13 +33,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         IDiagnosticAnalyzerService analyzerService,
         IGlobalOptionService globalOptions,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-        IAsynchronousOperationListenerProvider listenerProvider) :
-        AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>(threadingContext, diagnosticService, analyzerService, globalOptions, visibilityTracker, listenerProvider)
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AbstractDiagnosticsAdornmentTaggerProvider<IErrorTag>(
+            threadingContext,
+            diagnosticService,
+            analyzerService,
+            globalOptions,
+            visibilityTracker,
+            listenerProvider
+        )
     {
-        protected sealed override ImmutableArray<IOption2> Options { get; } = ImmutableArray.Create<IOption2>(DiagnosticsOptionsStorage.Squiggles);
+        protected sealed override ImmutableArray<IOption2> Options { get; } =
+            ImmutableArray.Create<IOption2>(DiagnosticsOptionsStorage.Squiggles);
 
-        protected sealed override bool IncludeDiagnostic(DiagnosticData diagnostic)
-            => diagnostic.Severity == DiagnosticSeverity.Info;
+        protected sealed override bool IncludeDiagnostic(DiagnosticData diagnostic) =>
+            diagnostic.Severity == DiagnosticSeverity.Info;
 
         protected sealed override bool SupportsDiagnosticMode(DiagnosticMode mode)
         {
@@ -48,10 +57,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return mode == DiagnosticMode.SolutionCrawlerPush;
         }
 
-        protected sealed override IErrorTag CreateTag(Workspace workspace, DiagnosticData diagnostic)
-            => new RoslynErrorTag(PredefinedErrorTypeNames.HintedSuggestion, workspace, diagnostic);
+        protected sealed override IErrorTag CreateTag(
+            Workspace workspace,
+            DiagnosticData diagnostic
+        ) => new RoslynErrorTag(PredefinedErrorTypeNames.HintedSuggestion, workspace, diagnostic);
 
-        protected sealed override SnapshotSpan AdjustSnapshotSpan(SnapshotSpan snapshotSpan, int minimumLength)
+        protected sealed override SnapshotSpan AdjustSnapshotSpan(
+            SnapshotSpan snapshotSpan,
+            int minimumLength
+        )
         {
             // We always want suggestion tags to be two characters long.
             return AdjustSnapshotSpan(snapshotSpan, minimumLength: 2, maximumLength: 2);

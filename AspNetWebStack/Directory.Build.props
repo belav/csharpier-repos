@@ -1,6 +1,5 @@
 <Project>
   <!-- Also stop MsBuild searching parent directories for this file. -->
-
   <PropertyGroup>
     <!-- Require VS2017 so VS builds also use MSBuild v15.0. -->
     <MinimumVisualStudioVersion>16.0</MinimumVisualStudioVersion>
@@ -12,5 +11,4 @@
     <!-- Workaround continued use of netcoreapp2.1; suppress the NETSDK1138 warning. -->
     <CheckEolTargetFramework>false</CheckEolTargetFramework>
   </PropertyGroup>
-
 </Project>

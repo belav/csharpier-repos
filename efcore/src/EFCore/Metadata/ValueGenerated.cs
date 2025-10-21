@@ -49,5 +49,5 @@ public enum ValueGenerated
     ///     is subsequently updated. This is typically used for computed columns and scenarios such as
     ///     rowversions, timestamps, etc.
     /// </summary>
-    OnAddOrUpdate = OnAdd | OnUpdate
+    OnAddOrUpdate = OnAdd | OnUpdate,
 }

@@ -40,7 +40,10 @@ namespace Microsoft.Web.Mvc.Controls
             ModelState modelState;
             if (ViewData.ModelState.TryGetValue(key, out modelState))
             {
-                return modelState.Value.ConvertTo(destinationType, null /* culture */);
+                return modelState.Value.ConvertTo(
+                    destinationType,
+                    null /* culture */
+                );
             }
             return null;
         }
@@ -59,7 +62,9 @@ namespace Microsoft.Web.Mvc.Controls
                         CultureInfo.CurrentCulture,
                         MvcResources.HtmlHelper_MissingSelectData,
                         name,
-                        "IEnumerable<SelectListItem>"));
+                        "IEnumerable<SelectListItem>"
+                    )
+                );
             }
             IEnumerable<SelectListItem> selectList = o as IEnumerable<SelectListItem>;
             if (selectList == null)
@@ -70,7 +75,9 @@ namespace Microsoft.Web.Mvc.Controls
                         MvcResources.HtmlHelper_WrongSelectDataType,
                         name,
                         o.GetType().FullName,
-                        "IEnumerable<SelectListItem>"));
+                        "IEnumerable<SelectListItem>"
+                    )
+                );
             }
             return selectList;
         }
@@ -140,7 +147,8 @@ namespace Microsoft.Web.Mvc.Controls
 
                     if (attrs.TryGetValue("class", out currentValue))
                     {
-                        attrs["class"] = HtmlHelper.ValidationInputCssClassName + " " + currentValue;
+                        attrs["class"] =
+                            HtmlHelper.ValidationInputCssClassName + " " + currentValue;
                     }
                     else
                     {
@@ -151,7 +159,10 @@ namespace Microsoft.Web.Mvc.Controls
 
             foreach (KeyValuePair<string, string> attribute in attrs)
             {
-                writer.AddAttribute(attribute.Key, Convert.ToString(attribute.Value, CultureInfo.CurrentCulture));
+                writer.AddAttribute(
+                    attribute.Key,
+                    Convert.ToString(attribute.Value, CultureInfo.CurrentCulture)
+                );
             }
 
             writer.RenderBeginTag(HtmlTextWriterTag.Select);
@@ -159,19 +170,30 @@ namespace Microsoft.Web.Mvc.Controls
             // Use ViewData to get the list of items
             IEnumerable<SelectListItem> selectList = GetSelectData(Name);
 
-            object defaultValue = (allowMultiple) ? GetModelStateValue(Name, typeof(string[])) : GetModelStateValue(Name, typeof(string));
+            object defaultValue =
+                (allowMultiple)
+                    ? GetModelStateValue(Name, typeof(string[]))
+                    : GetModelStateValue(Name, typeof(string));
 
             if (defaultValue != null)
             {
-                IEnumerable defaultValues = (allowMultiple) ? defaultValue as IEnumerable : new[] { defaultValue };
-                IEnumerable<string> values = from object value in defaultValues
-                                             select Convert.ToString(value, CultureInfo.CurrentCulture);
-                HashSet<string> selectedValues = new HashSet<string>(values, StringComparer.OrdinalIgnoreCase);
+                IEnumerable defaultValues =
+                    (allowMultiple) ? defaultValue as IEnumerable : new[] { defaultValue };
+                IEnumerable<string> values =
+                    from object value in defaultValues
+                    select Convert.ToString(value, CultureInfo.CurrentCulture);
+                HashSet<string> selectedValues = new HashSet<string>(
+                    values,
+                    StringComparer.OrdinalIgnoreCase
+                );
                 List<SelectListItem> newSelectList = new List<SelectListItem>();
 
                 foreach (SelectListItem item in selectList)
                 {
-                    item.Selected = (item.Value != null) ? selectedValues.Contains(item.Value) : selectedValues.Contains(item.Text);
+                    item.Selected =
+                        (item.Value != null)
+                            ? selectedValues.Contains(item.Value)
+                            : selectedValues.Contains(item.Text);
                     newSelectList.Add(item);
                 }
                 selectList = newSelectList;

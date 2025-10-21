@@ -1,17 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlNamespaceScope.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml {
-
+namespace System.Xml
+{
     /// <include file='doc\XmlNamespaceScope.uex' path='docs/doc[@for="XmlNamespaceScope"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public enum XmlNamespaceScope {
+    public enum XmlNamespaceScope
+    {
         /// <include file='doc\XmlNamespaceScope.uex' path='docs/doc[@for="XmlNamespaceScope.All"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

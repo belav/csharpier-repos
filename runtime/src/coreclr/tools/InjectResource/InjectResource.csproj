@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>$(NetCoreAppToolCurrent)</TargetFramework>
@@ -10,7 +9,6 @@
     <OutputPath>$(RuntimeBinDir)\InjectResource</OutputPath>
     <RunAnalyzers>false</RunAnalyzers>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="$(SystemCommandLineVersion)" />
   </ItemGroup>

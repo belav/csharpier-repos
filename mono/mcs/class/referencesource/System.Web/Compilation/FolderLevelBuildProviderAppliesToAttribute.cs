@@ -4,24 +4,26 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Compilation {
-
+namespace System.Web.Compilation
+{
     using System.Security.Permissions;
     using System.Web.Configuration;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class FolderLevelBuildProviderAppliesToAttribute : Attribute {
-
+    public sealed class FolderLevelBuildProviderAppliesToAttribute : Attribute
+    {
         private FolderLevelBuildProviderAppliesTo _appliesTo;
 
-        public FolderLevelBuildProviderAppliesToAttribute(FolderLevelBuildProviderAppliesTo appliesTo) {
+        public FolderLevelBuildProviderAppliesToAttribute(
+            FolderLevelBuildProviderAppliesTo appliesTo
+        )
+        {
             _appliesTo = appliesTo;
         }
 
-        public FolderLevelBuildProviderAppliesTo AppliesTo {
-            get {
-                return _appliesTo;
-            }
+        public FolderLevelBuildProviderAppliesTo AppliesTo
+        {
+            get { return _appliesTo; }
         }
     }
 }

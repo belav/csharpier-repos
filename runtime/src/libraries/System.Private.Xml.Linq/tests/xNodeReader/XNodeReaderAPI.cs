@@ -20,7 +20,8 @@ namespace CoreXml.Test.XLinq
                 // read subtree (scoping)
                 // adjacent text nodes
 
-                private string _xml = "<?xml version='1.0'?>\t<A><?PI?><!--comment1--><B xmlns='x' xmlns:p='nsp'>some_text<C/><?PIX click?><D xmlns='y'/><!--comm2--><p:E/></B></A>";
+                private string _xml =
+                    "<?xml version='1.0'?>\t<A><?PI?><!--comment1--><B xmlns='x' xmlns:p='nsp'>some_text<C/><?PIX click?><D xmlns='y'/><!--comm2--><p:E/></B></A>";
 
                 //[Variation(Priority = 1, Desc = "Open on node type: XElement (root)", Params = new object[] { XmlNodeType.Element, 0, new string[] { "A", "", "" }, 15 })]
                 //[Variation(Priority = 0, Desc = "Open on node type: XElement (in the mIddle)", Params = new object[] { XmlNodeType.Element, 1, new string[] { "B", "", "x" }, 11 })]
@@ -39,7 +40,10 @@ namespace CoreXml.Test.XLinq
                     string[] verif = (string[])Variation.Params[2];
                     int HowManyReads = (int)Variation.Params[3];
 
-                    XDocument doc = XDocument.Load(new StringReader(_xml), LoadOptions.PreserveWhitespace);
+                    XDocument doc = XDocument.Load(
+                        new StringReader(_xml),
+                        LoadOptions.PreserveWhitespace
+                    );
 
                     // Navigate to the required node
                     int count = 0;
@@ -56,10 +60,24 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader r = node.CreateReader())
                     {
-                        TestLog.Compare(r.ReadState, ReadState.Initial, "r.ReadState before Read()");
+                        TestLog.Compare(
+                            r.ReadState,
+                            ReadState.Initial,
+                            "r.ReadState before Read()"
+                        );
                         r.Read();
-                        TestLog.Compare(r.ReadState, ReadState.Interactive, "r.ReadState after Read()");
-                        TestLog.Compare(r.NodeType, (nodeType == XmlNodeType.Text && count == 0) ? XmlNodeType.Whitespace : nodeType, "r.NodeType"); //
+                        TestLog.Compare(
+                            r.ReadState,
+                            ReadState.Interactive,
+                            "r.ReadState after Read()"
+                        );
+                        TestLog.Compare(
+                            r.NodeType,
+                            (nodeType == XmlNodeType.Text && count == 0)
+                                ? XmlNodeType.Whitespace
+                                : nodeType,
+                            "r.NodeType"
+                        ); //
                         switch (nodeType)
                         {
                             case XmlNodeType.Element:
@@ -80,9 +98,14 @@ namespace CoreXml.Test.XLinq
                         do
                         {
                             nodeWalkCount++;
-                            while (r.MoveToNextAttribute()) nodeWalkCount++;
+                            while (r.MoveToNextAttribute())
+                                nodeWalkCount++;
                         } while (r.Read());
-                        TestLog.Compare(r.ReadState, ReadState.EndOfFile, "r.ReadState after reading all");
+                        TestLog.Compare(
+                            r.ReadState,
+                            ReadState.EndOfFile,
+                            "r.ReadState after reading all"
+                        );
                     }
                 }
 
@@ -94,10 +117,16 @@ namespace CoreXml.Test.XLinq
                 {
                     XmlNodeType nodeType = (XmlNodeType)Variation.Params[0];
                     int position = (int)Variation.Params[1];
-                    string[][] namespaces = new string[Variation.Params.OfType<string[]>().Count()][];
-                    for (int i = 0; i < Variation.Params.OfType<string[]>().Count(); i++) namespaces[i] = (string[])Variation.Params[2 + i];
+                    string[][] namespaces = new string[
+                        Variation.Params.OfType<string[]>().Count()
+                    ][];
+                    for (int i = 0; i < Variation.Params.OfType<string[]>().Count(); i++)
+                        namespaces[i] = (string[])Variation.Params[2 + i];
 
-                    XDocument doc = XDocument.Load(new StringReader(_xml), LoadOptions.PreserveWhitespace);
+                    XDocument doc = XDocument.Load(
+                        new StringReader(_xml),
+                        LoadOptions.PreserveWhitespace
+                    );
 
                     // Navigate to the required node
                     int count = 0;
@@ -114,17 +143,28 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader r = node.CreateReader())
                     {
-                        TestLog.Compare(r.ReadState, ReadState.Initial, "r.ReadState before Read()");
+                        TestLog.Compare(
+                            r.ReadState,
+                            ReadState.Initial,
+                            "r.ReadState before Read()"
+                        );
                         r.Read();
                         foreach (string[] nspair in namespaces)
-                            TestLog.Compare(r.LookupNamespace(nspair[0]), nspair[1], "Namespace mismatch " + nspair[0] + ", " + nspair[1]);
+                            TestLog.Compare(
+                                r.LookupNamespace(nspair[0]),
+                                nspair[1],
+                                "Namespace mismatch " + nspair[0] + ", " + nspair[1]
+                            );
                     }
                 }
 
                 //[Variation(Priority = 0, Desc = "ReadSubtree (sanity)")]
                 public void ReadSubtreeSanity()
                 {
-                    XDocument doc = XDocument.Load(new StringReader(_xml), LoadOptions.PreserveWhitespace);
+                    XDocument doc = XDocument.Load(
+                        new StringReader(_xml),
+                        LoadOptions.PreserveWhitespace
+                    );
                     using (XmlReader r = doc.CreateReader())
                     {
                         r.Read(); // \t
@@ -138,18 +178,39 @@ namespace CoreXml.Test.XLinq
                             while (rSub.Read())
                             {
                                 counter++;
-                                while (rSub.MoveToNextAttribute()) counter++;
+                                while (rSub.MoveToNextAttribute())
+                                    counter++;
                             }
-                            TestLog.Compare(rSub.ReadState, ReadState.EndOfFile, "rSub.ReadState after reading all");
+                            TestLog.Compare(
+                                rSub.ReadState,
+                                ReadState.EndOfFile,
+                                "rSub.ReadState after reading all"
+                            );
                             TestLog.Compare(11, counter, "Invalid node count on subtreereader");
                         }
-                        TestLog.Compare(r.NodeType, XmlNodeType.EndElement, "Nodetype after readsubtree - original");
+                        TestLog.Compare(
+                            r.NodeType,
+                            XmlNodeType.EndElement,
+                            "Nodetype after readsubtree - original"
+                        );
                         TestLog.Compare(r.LocalName, "B", "Localname after readsubtree - original");
                         r.Read();
-                        TestLog.Compare(r.NodeType, XmlNodeType.EndElement, "Nodetype after readsubtree + read - original");
-                        TestLog.Compare(r.LocalName, "A", "Localname after readsubtree + read - original");
+                        TestLog.Compare(
+                            r.NodeType,
+                            XmlNodeType.EndElement,
+                            "Nodetype after readsubtree + read - original"
+                        );
+                        TestLog.Compare(
+                            r.LocalName,
+                            "A",
+                            "Localname after readsubtree + read - original"
+                        );
                         r.Read();
-                        TestLog.Compare(r.ReadState, ReadState.EndOfFile, "r.ReadState after reading all");
+                        TestLog.Compare(
+                            r.ReadState,
+                            ReadState.EndOfFile,
+                            "r.ReadState after reading all"
+                        );
                     }
                 }
 
@@ -169,7 +230,6 @@ namespace CoreXml.Test.XLinq
                         TestLog.Compare(r.Value, " cont", "second text node value");
                     }
                 }
-
 
                 //[Variation(Priority = 0, Desc = "Adjacent text nodes (sanity II.) : ReadElementContent")]
                 public void AdjacentTextNodes2()

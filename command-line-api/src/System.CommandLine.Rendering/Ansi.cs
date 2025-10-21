@@ -51,7 +51,8 @@ namespace System.CommandLine.Rendering
                 public static AnsiControlCode LightCyan { get; } = $"{Esc}[106m";
                 public static AnsiControlCode LightGray { get; } = $"{Esc}[107m";
 
-                public static AnsiControlCode Rgb(byte r, byte g, byte b) => $"{Esc}[48;2;{r.ToString()};{g.ToString()};{b.ToString()}m";
+                public static AnsiControlCode Rgb(byte r, byte g, byte b) =>
+                    $"{Esc}[48;2;{r.ToString()};{g.ToString()};{b.ToString()}m";
             }
 
             [DebuggerStepThrough]
@@ -76,7 +77,8 @@ namespace System.CommandLine.Rendering
                 public static AnsiControlCode LightCyan { get; } = $"{Esc}[96m";
                 public static AnsiControlCode LightGray { get; } = $"{Esc}[97m";
 
-                public static AnsiControlCode Rgb(byte r, byte g, byte b) => $"{Esc}[38;2;{r.ToString()};{g.ToString()};{b.ToString()}m";
+                public static AnsiControlCode Rgb(byte r, byte g, byte b) =>
+                    $"{Esc}[38;2;{r.ToString()};{g.ToString()};{b.ToString()}m";
             }
         }
 
@@ -88,12 +90,21 @@ namespace System.CommandLine.Rendering
             public static class Move
             {
                 public static AnsiControlCode Up(int lines = 1) => $"{Esc}[{lines.ToString()}A";
+
                 public static AnsiControlCode Down(int lines = 1) => $"{Esc}[{lines.ToString()}B";
-                public static AnsiControlCode Right(int columns = 1) => $"{Esc}[{columns.ToString()}C";
-                public static AnsiControlCode Left(int columns = 1) => $"{Esc}[{columns.ToString()}D";
+
+                public static AnsiControlCode Right(int columns = 1) =>
+                    $"{Esc}[{columns.ToString()}C";
+
+                public static AnsiControlCode Left(int columns = 1) =>
+                    $"{Esc}[{columns.ToString()}D";
+
                 public static AnsiControlCode NextLine(int line = 1) => $"{Esc}[{line.ToString()}E";
+
                 public static AnsiControlCode ToUpperLeftCorner { get; } = $"{Esc}[H";
-                public static AnsiControlCode ToLocation(int? left = null, int? top = null) => $"{Esc}[{top.GetValueOrDefault(1)};{left.GetValueOrDefault(1).ToString()}H";
+
+                public static AnsiControlCode ToLocation(int? left = null, int? top = null) =>
+                    $"{Esc}[{top.GetValueOrDefault(1)};{left.GetValueOrDefault(1).ToString()}H";
             }
 
             [DebuggerStepThrough]

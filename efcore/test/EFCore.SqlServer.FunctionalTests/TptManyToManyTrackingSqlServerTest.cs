@@ -9,14 +9,11 @@ public class TptManyToManyTrackingSqlServerTest
     : ManyToManyTrackingSqlServerTestBase<TptManyToManyTrackingSqlServerTest.TptManyToManyTrackingSqlServerFixture>
 {
     public TptManyToManyTrackingSqlServerTest(TptManyToManyTrackingSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class TptManyToManyTrackingSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "TptManyToManyTrackingSqlServerTest";
+        protected override string StoreName => "TptManyToManyTrackingSqlServerTest";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

@@ -71,10 +71,16 @@ namespace System.MemoryTests
         {
             int[] a = { 91, 92, -93, 94 };
             MemoryManager<int> intManager = new CustomMemoryForTest<int>(a);
-            Assert.Equal("System.ReadOnlyMemory<Int32>[4]", ((ReadOnlyMemory<int>)intManager.Memory).ToString());
+            Assert.Equal(
+                "System.ReadOnlyMemory<Int32>[4]",
+                ((ReadOnlyMemory<int>)intManager.Memory).ToString()
+            );
 
             intManager = new CustomMemoryForTest<int>(Array.Empty<int>());
-            Assert.Equal("System.ReadOnlyMemory<Int32>[0]", ((ReadOnlyMemory<int>)intManager.Memory).ToString());
+            Assert.Equal(
+                "System.ReadOnlyMemory<Int32>[0]",
+                ((ReadOnlyMemory<int>)intManager.Memory).ToString()
+            );
 
             char[] charArray = { '1', '2', '-', '4' };
             MemoryManager<char> charManager = new CustomMemoryForTest<char>(charArray);
@@ -85,10 +91,16 @@ namespace System.MemoryTests
 
             string[] strArray = { "91", "92", "-93", "94" };
             MemoryManager<string> strManager = new CustomMemoryForTest<string>(strArray);
-            Assert.Equal("System.ReadOnlyMemory<String>[4]", ((ReadOnlyMemory<string>)strManager.Memory).ToString());
+            Assert.Equal(
+                "System.ReadOnlyMemory<String>[4]",
+                ((ReadOnlyMemory<string>)strManager.Memory).ToString()
+            );
 
             strManager = new CustomMemoryForTest<string>(Array.Empty<string>());
-            Assert.Equal("System.ReadOnlyMemory<String>[0]", ((ReadOnlyMemory<string>)strManager.Memory).ToString());
+            Assert.Equal(
+                "System.ReadOnlyMemory<String>[0]",
+                ((ReadOnlyMemory<string>)strManager.Memory).ToString()
+            );
         }
 
         [Fact]

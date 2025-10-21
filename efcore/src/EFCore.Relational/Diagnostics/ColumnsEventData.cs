@@ -19,7 +19,8 @@ public class ColumnsEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         StoreObjectIdentifier storeObject,
-        IReadOnlyList<string> columns)
+        IReadOnlyList<string> columns
+    )
         : base(eventDefinition, messageGenerator)
     {
         StoreObject = storeObject;

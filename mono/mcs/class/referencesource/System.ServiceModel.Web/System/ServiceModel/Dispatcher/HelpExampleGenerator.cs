@@ -17,17 +17,24 @@ namespace System.ServiceModel.Dispatcher
         const int MaxDepthLevel = 256;
         public const string XmlSchemaNamespace = "http://www.w3.org/2001/XMLSchema";
         public const string XmlNamespacePrefix = "xmlns";
-        public const string XmlSchemaInstanceNamespace = "http://www.w3.org/2001/XMLSchema-instance";
+        public const string XmlSchemaInstanceNamespace =
+            "http://www.w3.org/2001/XMLSchema-instance";
         public const string XmlSchemaInstanceNil = "nil";
         public const string XmlSchemaInstanceType = "type";
 
-        static Dictionary<Type, Action<XmlSchemaObject, HelpExampleGeneratorContext>> XmlObjectHandler = new Dictionary<Type, Action<XmlSchemaObject, HelpExampleGeneratorContext>>
-        {                
+        static Dictionary<
+            Type,
+            Action<XmlSchemaObject, HelpExampleGeneratorContext>
+        > XmlObjectHandler = new Dictionary<
+            Type,
+            Action<XmlSchemaObject, HelpExampleGeneratorContext>
+        >
+        {
             { typeof(XmlSchemaComplexContent), ContentHandler },
             { typeof(XmlSchemaSimpleContent), ContentHandler },
-            { typeof(XmlSchemaSimpleTypeRestriction), SimpleTypeRestrictionHandler },                
+            { typeof(XmlSchemaSimpleTypeRestriction), SimpleTypeRestrictionHandler },
             { typeof(XmlSchemaChoice), ChoiceHandler },
-            // Nothing to do, inheritance is resolved by Schema compilation process                
+            // Nothing to do, inheritance is resolved by Schema compilation process
             { typeof(XmlSchemaComplexContentExtension), EmptyHandler },
             { typeof(XmlSchemaSimpleContentExtension), EmptyHandler },
             // No need to generate XML for these objects
@@ -35,7 +42,7 @@ namespace System.ServiceModel.Dispatcher
             { typeof(XmlSchemaAnyAttribute), EmptyHandler },
             { typeof(XmlSchemaAnnotated), EmptyHandler },
             { typeof(XmlSchema), EmptyHandler },
-            // The following schema objects are not handled            
+            // The following schema objects are not handled
             { typeof(XmlSchemaAttributeGroup), ErrorHandler },
             { typeof(XmlSchemaAttributeGroupRef), ErrorHandler },
             { typeof(XmlSchemaComplexContentRestriction), ErrorHandler },
@@ -71,13 +78,19 @@ namespace System.ServiceModel.Dispatcher
             { typeof(XmlSchemaSequence), XmlSequenceHandler },
             { typeof(XmlSchemaSimpleType), XmlSimpleTypeHandler },
         };
-        static Dictionary<Type, Action<XmlSchemaObject, HelpExampleGeneratorContext>> JsonObjectHandler = new Dictionary<Type, Action<XmlSchemaObject, HelpExampleGeneratorContext>>
-        {                
+        static Dictionary<
+            Type,
+            Action<XmlSchemaObject, HelpExampleGeneratorContext>
+        > JsonObjectHandler = new Dictionary<
+            Type,
+            Action<XmlSchemaObject, HelpExampleGeneratorContext>
+        >
+        {
             { typeof(XmlSchemaComplexContent), ContentHandler },
             { typeof(XmlSchemaSimpleContent), ContentHandler },
-            { typeof(XmlSchemaSimpleTypeRestriction), SimpleTypeRestrictionHandler },                
+            { typeof(XmlSchemaSimpleTypeRestriction), SimpleTypeRestrictionHandler },
             { typeof(XmlSchemaChoice), ChoiceHandler },
-            // Nothing to do, inheritance is resolved by Schema compilation process                
+            // Nothing to do, inheritance is resolved by Schema compilation process
             { typeof(XmlSchemaComplexContentExtension), EmptyHandler },
             { typeof(XmlSchemaSimpleContentExtension), EmptyHandler },
             // No need to generate XML for these objects
@@ -85,7 +98,7 @@ namespace System.ServiceModel.Dispatcher
             { typeof(XmlSchemaAnyAttribute), EmptyHandler },
             { typeof(XmlSchemaAnnotated), EmptyHandler },
             { typeof(XmlSchema), EmptyHandler },
-            // The following schema objects are not handled            
+            // The following schema objects are not handled
             { typeof(XmlSchemaAttributeGroup), ErrorHandler },
             { typeof(XmlSchemaAttributeGroupRef), ErrorHandler },
             { typeof(XmlSchemaComplexContentRestriction), ErrorHandler },
@@ -121,7 +134,12 @@ namespace System.ServiceModel.Dispatcher
             { typeof(XmlSchemaSimpleType), JsonSimpleTypeHandler },
         };
 
-        public static void GenerateJsonSample(XmlSchemaSet schemaSet, XmlQualifiedName name, XmlWriter writer, IDictionary<XmlQualifiedName, Type> knownTypes)
+        public static void GenerateJsonSample(
+            XmlSchemaSet schemaSet,
+            XmlQualifiedName name,
+            XmlWriter writer,
+            IDictionary<XmlQualifiedName, Type> knownTypes
+        )
         {
             HelpExampleGeneratorContext context = new HelpExampleGeneratorContext
             {
@@ -141,7 +159,11 @@ namespace System.ServiceModel.Dispatcher
             InvokeHandler(schemaSet.GlobalElements[name], context);
         }
 
-        public static void GenerateXmlSample(XmlSchemaSet schemaSet, XmlQualifiedName name, XmlWriter writer)
+        public static void GenerateXmlSample(
+            XmlSchemaSet schemaSet,
+            XmlQualifiedName name,
+            XmlWriter writer
+        )
         {
             HelpExampleGeneratorContext context = new HelpExampleGeneratorContext
             {
@@ -175,27 +197,53 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else if (objectType.Name != "EmptyParticle")
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.HelpExampleGeneratorHandlerNotFound, schemaObject.GetType().Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.HelpExampleGeneratorHandlerNotFound,
+                                schemaObject.GetType().Name
+                            )
+                        )
+                    );
                 }
                 --context.currentDepthLevel;
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.HelpExampleGeneratorMaxDepthLevelReached, schemaObject.GetType().Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.HelpExampleGeneratorMaxDepthLevelReached,
+                            schemaObject.GetType().Name
+                        )
+                    )
+                );
             }
         }
 
-        static void XmlAttributeHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void XmlAttributeHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaAttribute attribute = (XmlSchemaAttribute)schemaObject;
             string content = GenerateContentForXmlSimpleType(attribute.AttributeSchemaType);
             if (String.IsNullOrEmpty(content))
             {
-                context.writer.WriteAttributeString("i", XmlSchemaInstanceNil, XmlSchemaInstanceNamespace, "true");
+                context.writer.WriteAttributeString(
+                    "i",
+                    XmlSchemaInstanceNil,
+                    XmlSchemaInstanceNamespace,
+                    "true"
+                );
             }
             else
             {
-                context.writer.WriteAttributeString(attribute.QualifiedName.Name, attribute.QualifiedName.Namespace, content);
+                context.writer.WriteAttributeString(
+                    attribute.QualifiedName.Name,
+                    attribute.QualifiedName.Namespace,
+                    content
+                );
             }
         }
 
@@ -205,15 +253,22 @@ namespace System.ServiceModel.Dispatcher
             InvokeHandler(choice.Items[0], context);
         }
 
-        static void ContentHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void ContentHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaContentModel model = (XmlSchemaContentModel)schemaObject;
             InvokeHandler(model.Content, context);
         }
 
-        static void SimpleTypeRestrictionHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void SimpleTypeRestrictionHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
-            XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)schemaObject;
+            XmlSchemaSimpleTypeRestriction restriction =
+                (XmlSchemaSimpleTypeRestriction)schemaObject;
             foreach (XmlSchemaObject facet in restriction.Facets)
             {
                 InvokeHandler(facet, context);
@@ -222,32 +277,71 @@ namespace System.ServiceModel.Dispatcher
 
         static void ErrorHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.HelpExampleGeneratorSchemaObjectNotSupported, schemaObject.GetType().Name)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR2.GetString(
+                        SR2.HelpExampleGeneratorSchemaObjectNotSupported,
+                        schemaObject.GetType().Name
+                    )
+                )
+            );
         }
 
-        static void EmptyHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
-        {
-        }
+        static void EmptyHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        ) { }
 
-        static void XmlElementHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void XmlElementHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaElement element = (XmlSchemaElement)schemaObject;
             XmlSchemaElement contentElement = GenerateValidElementsComment(element, context);
-            context.writer.WriteStartElement(element.QualifiedName.Name, element.QualifiedName.Namespace);
+            context.writer.WriteStartElement(
+                element.QualifiedName.Name,
+                element.QualifiedName.Namespace
+            );
             if (contentElement != element)
             {
                 string value = contentElement.QualifiedName.Name;
-                if (contentElement.QualifiedName.Namespace != element.QualifiedName.Namespace && !String.IsNullOrEmpty(contentElement.QualifiedName.Namespace))
+                if (
+                    contentElement.QualifiedName.Namespace != element.QualifiedName.Namespace
+                    && !String.IsNullOrEmpty(contentElement.QualifiedName.Namespace)
+                )
                 {
-                    string prefix = context.writer.LookupPrefix(contentElement.QualifiedName.Namespace);
+                    string prefix = context.writer.LookupPrefix(
+                        contentElement.QualifiedName.Namespace
+                    );
                     if (prefix == null)
                     {
-                        prefix = string.Concat("d", context.currentDepthLevel.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-                        context.writer.WriteAttributeString(XmlNamespacePrefix, prefix, null, contentElement.QualifiedName.Namespace);
+                        prefix = string.Concat(
+                            "d",
+                            context.currentDepthLevel.ToString(
+                                System.Globalization.NumberFormatInfo.InvariantInfo
+                            )
+                        );
+                        context.writer.WriteAttributeString(
+                            XmlNamespacePrefix,
+                            prefix,
+                            null,
+                            contentElement.QualifiedName.Namespace
+                        );
                     }
-                    value = String.Format(CultureInfo.InvariantCulture, "{0}:{1}", prefix, contentElement.QualifiedName.Name);
+                    value = String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}:{1}",
+                        prefix,
+                        contentElement.QualifiedName.Name
+                    );
                 }
-                context.writer.WriteAttributeString("i", XmlSchemaInstanceType, XmlSchemaInstanceNamespace, value);
+                context.writer.WriteAttributeString(
+                    "i",
+                    XmlSchemaInstanceType,
+                    XmlSchemaInstanceNamespace,
+                    value
+                );
             }
             foreach (XmlSchemaObject constraint in contentElement.Constraints)
             {
@@ -257,7 +351,10 @@ namespace System.ServiceModel.Dispatcher
             context.writer.WriteEndElement();
         }
 
-        static void XmlComplexTypeHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void XmlComplexTypeHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaComplexType complexType = (XmlSchemaComplexType)schemaObject;
             foreach (XmlSchemaObject attribute in complexType.AttributeUses.Values)
@@ -271,17 +368,26 @@ namespace System.ServiceModel.Dispatcher
             InvokeHandler(complexType.ContentTypeParticle, context);
             if (complexType.IsMixed)
             {
-                context.writer.WriteString(SR2.GetString(SR2.HelpExampleGeneratorThisElementContainsText));
+                context.writer.WriteString(
+                    SR2.GetString(SR2.HelpExampleGeneratorThisElementContainsText)
+                );
             }
         }
 
-        static void XmlSequenceHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void XmlSequenceHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaSequence sequence = (XmlSchemaSequence)schemaObject;
             foreach (XmlSchemaObject innerObject in sequence.Items)
             {
                 XmlSchemaElement element = innerObject as XmlSchemaElement;
-                for (int count = 0; element != null && count < 2 && element.MaxOccurs > count; ++count)
+                for (
+                    int count = 0;
+                    element != null && count < 2 && element.MaxOccurs > count;
+                    ++count
+                )
                 {
                     if (element != null && IsObject(element))
                     {
@@ -294,8 +400,16 @@ namespace System.ServiceModel.Dispatcher
                         }
                         else
                         {
-                            context.writer.WriteStartElement(element.QualifiedName.Name, element.QualifiedName.Namespace);
-                            context.writer.WriteAttributeString("i", XmlSchemaInstanceNil, XmlSchemaInstanceNamespace, "true");
+                            context.writer.WriteStartElement(
+                                element.QualifiedName.Name,
+                                element.QualifiedName.Namespace
+                            );
+                            context.writer.WriteAttributeString(
+                                "i",
+                                XmlSchemaInstanceNil,
+                                XmlSchemaInstanceNamespace,
+                                "true"
+                            );
                             context.writer.WriteEndElement();
                         }
                         --context.elementDepth[element];
@@ -308,18 +422,27 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        static void XmlSimpleTypeListHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void XmlSimpleTypeListHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaSimpleTypeList simpleTypeList = (XmlSchemaSimpleTypeList)schemaObject;
             InvokeHandler(simpleTypeList.ItemType, context);
         }
 
-        static void XmlSimpleTypeHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void XmlSimpleTypeHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaSimpleType simpleType = (XmlSchemaSimpleType)schemaObject;
-            if (simpleType.QualifiedName.Namespace != System.Runtime.Serialization.Globals.SerializationNamespace
+            if (
+                simpleType.QualifiedName.Namespace
+                    != System.Runtime.Serialization.Globals.SerializationNamespace
                 && simpleType.QualifiedName.Namespace != XmlSchemaNamespace
-                && simpleType.QualifiedName.Name != "guid")
+                && simpleType.QualifiedName.Name != "guid"
+            )
             {
                 InvokeHandler(simpleType.Content, context);
             }
@@ -328,7 +451,12 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!(simpleType.Content is XmlSchemaSimpleTypeList))
                 {
-                    context.writer.WriteAttributeString("i", XmlSchemaInstanceNil, XmlSchemaInstanceNamespace, "true");
+                    context.writer.WriteAttributeString(
+                        "i",
+                        XmlSchemaInstanceNil,
+                        XmlSchemaInstanceNamespace,
+                        "true"
+                    );
                 }
             }
             else
@@ -341,7 +469,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if (simpleType.Content != null && simpleType.Content is XmlSchemaSimpleTypeRestriction)
             {
-                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)simpleType.Content;
+                XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                    simpleType.Content;
                 foreach (XmlSchemaObject facet in restriction.Facets)
                 {
                     if (facet is XmlSchemaEnumerationFacet)
@@ -354,7 +483,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (simpleType.QualifiedName.Name == "dateTime")
             {
-                DateTime dateTime = DateTime.Parse("1999-05-31T11:20:00", CultureInfo.InvariantCulture);
+                DateTime dateTime = DateTime.Parse(
+                    "1999-05-31T11:20:00",
+                    CultureInfo.InvariantCulture
+                );
                 return dateTime.ToString("s", CultureInfo.InvariantCulture);
             }
             else if (simpleType.QualifiedName.Name == "char")
@@ -365,7 +497,10 @@ namespace System.ServiceModel.Dispatcher
             return GetConstantValue(simpleType.QualifiedName.Name);
         }
 
-        static void JsonElementHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void JsonElementHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaElement element = (XmlSchemaElement)schemaObject;
             XmlSchemaElement contentElement = GetDerivedTypes(element, context).FirstOrDefault();
@@ -386,7 +521,10 @@ namespace System.ServiceModel.Dispatcher
 
             if (IsArrayElementType(element))
             {
-                context.writer.WriteAttributeString(JsonGlobals.typeString, JsonGlobals.arrayString);
+                context.writer.WriteAttributeString(
+                    JsonGlobals.typeString,
+                    JsonGlobals.arrayString
+                );
                 context.overrideElementName = JsonGlobals.itemString;
             }
             else if (IsObject(element))
@@ -397,19 +535,36 @@ namespace System.ServiceModel.Dispatcher
                     context.knownTypes.TryGetValue(contentElement.QualifiedName, out derivedType);
                     if (derivedType != null)
                     {
-                        context.writer.WriteStartAttribute(null, JsonGlobals.serverTypeString, null);
-                        context.writer.WriteString(String.Format(CultureInfo.InvariantCulture, "{0}:#{1}", derivedType.Name, derivedType.Namespace));
+                        context.writer.WriteStartAttribute(
+                            null,
+                            JsonGlobals.serverTypeString,
+                            null
+                        );
+                        context.writer.WriteString(
+                            String.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}:#{1}",
+                                derivedType.Name,
+                                derivedType.Namespace
+                            )
+                        );
                         context.writer.WriteEndAttribute();
                     }
                 }
-                context.writer.WriteAttributeString(JsonGlobals.typeString, JsonGlobals.objectString);
+                context.writer.WriteAttributeString(
+                    JsonGlobals.typeString,
+                    JsonGlobals.objectString
+                );
             }
             InvokeHandler(contentElement.ElementSchemaType, context);
             context.overrideElementName = null;
             context.writer.WriteEndElement();
         }
 
-        static void JsonComplexTypeHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void JsonComplexTypeHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaComplexType complexType = (XmlSchemaComplexType)schemaObject;
             if (complexType.ContentModel != null)
@@ -419,7 +574,10 @@ namespace System.ServiceModel.Dispatcher
             InvokeHandler(complexType.ContentTypeParticle, context);
         }
 
-        static void JsonSequenceHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void JsonSequenceHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaSequence sequence = (XmlSchemaSequence)schemaObject;
             foreach (XmlSchemaObject innerObject in sequence.Items)
@@ -445,7 +603,10 @@ namespace System.ServiceModel.Dispatcher
                         {
                             context.writer.WriteStartElement(element.QualifiedName.Name);
                         }
-                        context.writer.WriteAttributeString(JsonGlobals.typeString, JsonGlobals.nullString);
+                        context.writer.WriteAttributeString(
+                            JsonGlobals.typeString,
+                            JsonGlobals.nullString
+                        );
                         context.writer.WriteEndElement();
                     }
                     --context.elementDepth[element];
@@ -457,13 +618,19 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        static void JsonSimpleTypeListHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void JsonSimpleTypeListHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaSimpleTypeList simpleTypeList = (XmlSchemaSimpleTypeList)schemaObject;
             InvokeHandler(simpleTypeList.ItemType, context);
         }
 
-        static void JsonSimpleTypeHandler(XmlSchemaObject schemaObject, HelpExampleGeneratorContext context)
+        static void JsonSimpleTypeHandler(
+            XmlSchemaObject schemaObject,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaSimpleType simpleType = (XmlSchemaSimpleType)schemaObject;
             // Enumerations return 0
@@ -471,12 +638,18 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (simpleType.Content is XmlSchemaSimpleTypeRestriction)
                 {
-                    XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)simpleType.Content;
+                    XmlSchemaSimpleTypeRestriction restriction = (XmlSchemaSimpleTypeRestriction)
+                        simpleType.Content;
                     foreach (XmlSchemaObject facet in restriction.Facets)
                     {
                         if (facet is XmlSchemaEnumerationFacet)
                         {
-                            context.writer.WriteAttributeString(string.Empty, JsonGlobals.typeString, string.Empty, JsonGlobals.numberString);
+                            context.writer.WriteAttributeString(
+                                string.Empty,
+                                JsonGlobals.typeString,
+                                string.Empty,
+                                JsonGlobals.numberString
+                            );
                             context.writer.WriteString("0");
                             return;
                         }
@@ -493,20 +666,35 @@ namespace System.ServiceModel.Dispatcher
             if (simpleType.QualifiedName.Name == "base64Binary")
             {
                 char[] base64stream = value.ToCharArray();
-                context.writer.WriteAttributeString(string.Empty, JsonGlobals.typeString, string.Empty, JsonGlobals.arrayString);
+                context.writer.WriteAttributeString(
+                    string.Empty,
+                    JsonGlobals.typeString,
+                    string.Empty,
+                    JsonGlobals.arrayString
+                );
                 for (int i = 0; i < base64stream.Length; i++)
                 {
                     context.writer.WriteStartElement(JsonGlobals.itemString, string.Empty);
-                    context.writer.WriteAttributeString(string.Empty, JsonGlobals.typeString, string.Empty, JsonGlobals.numberString);
+                    context.writer.WriteAttributeString(
+                        string.Empty,
+                        JsonGlobals.typeString,
+                        string.Empty,
+                        JsonGlobals.numberString
+                    );
                     context.writer.WriteValue((int)base64stream[i]);
                     context.writer.WriteEndElement();
                 }
             }
             else if (simpleType.QualifiedName.Name == "dateTime")
             {
-                DateTime dateTime = DateTime.Parse("1999-05-31T11:20:00", CultureInfo.InvariantCulture);
+                DateTime dateTime = DateTime.Parse(
+                    "1999-05-31T11:20:00",
+                    CultureInfo.InvariantCulture
+                );
                 context.writer.WriteString(JsonGlobals.DateTimeStartGuardReader);
-                context.writer.WriteValue((dateTime.ToUniversalTime().Ticks - JsonGlobals.unixEpochTicks) / 10000);
+                context.writer.WriteValue(
+                    (dateTime.ToUniversalTime().Ticks - JsonGlobals.unixEpochTicks) / 10000
+                );
 
                 switch (dateTime.Kind)
                 {
@@ -522,9 +710,17 @@ namespace System.ServiceModel.Dispatcher
                             context.writer.WriteString("+");
                         }
                         int hours = Math.Abs(ts.Hours);
-                        context.writer.WriteString((hours < 10) ? "0" + hours : hours.ToString(CultureInfo.InvariantCulture));
+                        context.writer.WriteString(
+                            (hours < 10)
+                                ? "0" + hours
+                                : hours.ToString(CultureInfo.InvariantCulture)
+                        );
                         int minutes = Math.Abs(ts.Minutes);
-                        context.writer.WriteString((minutes < 10) ? "0" + minutes : minutes.ToString(CultureInfo.InvariantCulture));
+                        context.writer.WriteString(
+                            (minutes < 10)
+                                ? "0" + minutes
+                                : minutes.ToString(CultureInfo.InvariantCulture)
+                        );
                         break;
                     case DateTimeKind.Utc:
                         break;
@@ -537,28 +733,36 @@ namespace System.ServiceModel.Dispatcher
             }
             else if (!String.IsNullOrEmpty(value))
             {
-                if (simpleType.QualifiedName.Name == "integer" ||
-                    simpleType.QualifiedName.Name == "int" ||
-                    simpleType.QualifiedName.Name == "long" ||
-                    simpleType.QualifiedName.Name == "unsignedLong" ||
-                    simpleType.QualifiedName.Name == "unsignedInt" ||
-                    simpleType.QualifiedName.Name == "short" ||
-                    simpleType.QualifiedName.Name == "unsignedShort" ||
-                    simpleType.QualifiedName.Name == "byte" ||
-                    simpleType.QualifiedName.Name == "unsignedByte" ||
-                    simpleType.QualifiedName.Name == "decimal" ||
-                    simpleType.QualifiedName.Name == "float" ||
-                    simpleType.QualifiedName.Name == "double" ||
-                    simpleType.QualifiedName.Name == "negativeInteger" ||
-                    simpleType.QualifiedName.Name == "nonPositiveInteger" ||
-                    simpleType.QualifiedName.Name == "positiveInteger" ||
-                    simpleType.QualifiedName.Name == "nonNegativeInteger")
+                if (
+                    simpleType.QualifiedName.Name == "integer"
+                    || simpleType.QualifiedName.Name == "int"
+                    || simpleType.QualifiedName.Name == "long"
+                    || simpleType.QualifiedName.Name == "unsignedLong"
+                    || simpleType.QualifiedName.Name == "unsignedInt"
+                    || simpleType.QualifiedName.Name == "short"
+                    || simpleType.QualifiedName.Name == "unsignedShort"
+                    || simpleType.QualifiedName.Name == "byte"
+                    || simpleType.QualifiedName.Name == "unsignedByte"
+                    || simpleType.QualifiedName.Name == "decimal"
+                    || simpleType.QualifiedName.Name == "float"
+                    || simpleType.QualifiedName.Name == "double"
+                    || simpleType.QualifiedName.Name == "negativeInteger"
+                    || simpleType.QualifiedName.Name == "nonPositiveInteger"
+                    || simpleType.QualifiedName.Name == "positiveInteger"
+                    || simpleType.QualifiedName.Name == "nonNegativeInteger"
+                )
                 {
-                    context.writer.WriteAttributeString(JsonGlobals.typeString, JsonGlobals.numberString);
+                    context.writer.WriteAttributeString(
+                        JsonGlobals.typeString,
+                        JsonGlobals.numberString
+                    );
                 }
                 else if (simpleType.QualifiedName.Name == "boolean")
                 {
-                    context.writer.WriteAttributeString(JsonGlobals.typeString, JsonGlobals.booleanString);
+                    context.writer.WriteAttributeString(
+                        JsonGlobals.typeString,
+                        JsonGlobals.booleanString
+                    );
                 }
                 context.writer.WriteString(value);
             }
@@ -566,7 +770,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!(simpleType.Content is XmlSchemaSimpleTypeList))
                 {
-                    context.writer.WriteAttributeString(JsonGlobals.typeString, JsonGlobals.nullString);
+                    context.writer.WriteAttributeString(
+                        JsonGlobals.typeString,
+                        JsonGlobals.nullString
+                    );
                 }
             }
         }
@@ -577,11 +784,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 return "QmFzZSA2NCBTdHJlYW0=";
             }
-            else if (typeName == "string" ||
-                typeName == "normalizedString" ||
-                typeName == "token" ||
-                typeName == "NMTOKEN" ||
-                typeName == "NMTOKENS")
+            else if (
+                typeName == "string"
+                || typeName == "normalizedString"
+                || typeName == "token"
+                || typeName == "NMTOKEN"
+                || typeName == "NMTOKENS"
+            )
             {
                 return SR2.GetString(SR2.HelpExampleGeneratorStringContent);
             }
@@ -685,13 +894,15 @@ namespace System.ServiceModel.Dispatcher
             {
                 return "namespace:Name";
             }
-            else if (typeName == "NCName" ||
-                typeName == "ID" ||
-                typeName == "IDREF" ||
-                typeName == "IDREFS" ||
-                typeName == "ENTITY" ||
-                typeName == "ENTITY" ||
-                typeName == "ID")
+            else if (
+                typeName == "NCName"
+                || typeName == "ID"
+                || typeName == "IDREF"
+                || typeName == "IDREFS"
+                || typeName == "ENTITY"
+                || typeName == "ENTITY"
+                || typeName == "ID"
+            )
             {
                 return "NCNameString";
             }
@@ -710,7 +921,10 @@ namespace System.ServiceModel.Dispatcher
             return null;
         }
 
-        static XmlSchemaElement GenerateValidElementsComment(XmlSchemaElement element, HelpExampleGeneratorContext context)
+        static XmlSchemaElement GenerateValidElementsComment(
+            XmlSchemaElement element,
+            HelpExampleGeneratorContext context
+        )
         {
             XmlSchemaElement firstNonAbstractElement = element;
             StringBuilder validTypes = new StringBuilder();
@@ -726,7 +940,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    validTypes.AppendFormat(SR2.GetString(SR2.HelpPageValidElementOfType, derivedElement.Name));
+                    validTypes.AppendFormat(
+                        SR2.GetString(SR2.HelpPageValidElementOfType, derivedElement.Name)
+                    );
                 }
             }
             if (validTypes.Length > 0)
@@ -736,15 +952,27 @@ namespace System.ServiceModel.Dispatcher
             return firstNonAbstractElement;
         }
 
-        static IEnumerable<XmlSchemaElement> GetDerivedTypes(XmlSchemaElement element, HelpExampleGeneratorContext context)
+        static IEnumerable<XmlSchemaElement> GetDerivedTypes(
+            XmlSchemaElement element,
+            HelpExampleGeneratorContext context
+        )
         {
             if (element.ElementSchemaType is XmlSchemaComplexType)
             {
-                foreach (XmlSchemaElement derivedElement in context.schemaSet.GlobalElements.Values.OfType<XmlSchemaElement>().Where(e =>
-                    e.IsAbstract == false &&
-                    e.ElementSchemaType != element.ElementSchemaType &&
-                    e.ElementSchemaType is XmlSchemaComplexType &&
-                    DerivesFrom((XmlSchemaComplexType)element.ElementSchemaType, (XmlSchemaComplexType)e.ElementSchemaType)).OrderBy(e => e.Name))
+                foreach (
+                    XmlSchemaElement derivedElement in context
+                        .schemaSet.GlobalElements.Values.OfType<XmlSchemaElement>()
+                        .Where(e =>
+                            e.IsAbstract == false
+                            && e.ElementSchemaType != element.ElementSchemaType
+                            && e.ElementSchemaType is XmlSchemaComplexType
+                            && DerivesFrom(
+                                (XmlSchemaComplexType)element.ElementSchemaType,
+                                (XmlSchemaComplexType)e.ElementSchemaType
+                            )
+                        )
+                        .OrderBy(e => e.Name)
+                )
                 {
                     yield return derivedElement;
                 }
@@ -771,10 +999,15 @@ namespace System.ServiceModel.Dispatcher
         {
             if (element.ElementSchemaType is XmlSchemaComplexType)
             {
-                XmlSchemaComplexType complexType = element.ElementSchemaType as XmlSchemaComplexType;
-                if (complexType.ContentTypeParticle != null && complexType.ContentTypeParticle is XmlSchemaSequence)
+                XmlSchemaComplexType complexType =
+                    element.ElementSchemaType as XmlSchemaComplexType;
+                if (
+                    complexType.ContentTypeParticle != null
+                    && complexType.ContentTypeParticle is XmlSchemaSequence
+                )
                 {
-                    XmlSchemaSequence sequence = complexType.ContentTypeParticle as XmlSchemaSequence;
+                    XmlSchemaSequence sequence =
+                        complexType.ContentTypeParticle as XmlSchemaSequence;
                     if (sequence.Items.Count > 0)
                     {
                         XmlSchemaElement firstElement = sequence.Items[0] as XmlSchemaElement;
@@ -801,7 +1034,10 @@ namespace System.ServiceModel.Dispatcher
             public XmlSchemaSet schemaSet;
             public IDictionary<XmlSchemaElement, int> elementDepth;
             public XmlWriter writer;
-            public Dictionary<Type, Action<XmlSchemaObject, HelpExampleGeneratorContext>> objectHandler;
+            public Dictionary<
+                Type,
+                Action<XmlSchemaObject, HelpExampleGeneratorContext>
+            > objectHandler;
         }
     }
 }

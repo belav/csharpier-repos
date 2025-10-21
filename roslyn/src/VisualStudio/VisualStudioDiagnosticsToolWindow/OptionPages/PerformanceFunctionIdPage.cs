@@ -13,7 +13,10 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
     [Guid(Guids.RoslynOptionPagePerformanceFunctionIdIdString)]
     internal class PerformanceFunctionIdPage : AbstractOptionPage
     {
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        )
         {
             return new InternalOptionsControl(FunctionIdOptions.GetOptions(), optionStore);
         }

@@ -5,9 +5,9 @@
 namespace System.Activities.Tracking
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -32,7 +32,12 @@ namespace System.Activities.Tracking
             this.State = state;
         }
 
-        public WorkflowInstanceRecord(Guid instanceId, long recordNumber, string activityDefinitionId, string state)
+        public WorkflowInstanceRecord(
+            Guid instanceId,
+            long recordNumber,
+            string activityDefinitionId,
+            string state
+        )
             : base(instanceId, recordNumber)
         {
             if (string.IsNullOrEmpty(activityDefinitionId))
@@ -47,13 +52,24 @@ namespace System.Activities.Tracking
             this.State = state;
         }
 
-        public WorkflowInstanceRecord(Guid instanceId, string activityDefinitionId, string state, WorkflowIdentity workflowDefinitionIdentity)
+        public WorkflowInstanceRecord(
+            Guid instanceId,
+            string activityDefinitionId,
+            string state,
+            WorkflowIdentity workflowDefinitionIdentity
+        )
             : this(instanceId, activityDefinitionId, state)
         {
             this.WorkflowDefinitionIdentity = workflowDefinitionIdentity;
         }
 
-        public WorkflowInstanceRecord(Guid instanceId, long recordNumber, string activityDefinitionId, string state, WorkflowIdentity workflowDefinitionIdentity)
+        public WorkflowInstanceRecord(
+            Guid instanceId,
+            long recordNumber,
+            string activityDefinitionId,
+            string state,
+            WorkflowIdentity workflowDefinitionIdentity
+        )
             : this(instanceId, recordNumber, activityDefinitionId, state)
         {
             this.WorkflowDefinitionIdentity = workflowDefinitionIdentity;
@@ -66,41 +82,23 @@ namespace System.Activities.Tracking
             this.State = record.State;
             this.WorkflowDefinitionIdentity = record.WorkflowDefinitionIdentity;
         }
-        
+
         public WorkflowIdentity WorkflowDefinitionIdentity
         {
-            get
-            {
-                return this.workflowDefinitionIdentity;
-            }
-            protected set
-            {
-                this.workflowDefinitionIdentity = value;
-            }
+            get { return this.workflowDefinitionIdentity; }
+            protected set { this.workflowDefinitionIdentity = value; }
         }
-        
+
         public string State
         {
-            get
-            {
-                return this.state;
-            }
-            private set
-            {
-                this.state = value;
-            }
+            get { return this.state; }
+            private set { this.state = value; }
         }
-        
+
         public string ActivityDefinitionId
         {
-            get
-            {
-                return this.activityDefinitionId;
-            }
-            private set
-            {
-                this.activityDefinitionId = value;
-            }
+            get { return this.activityDefinitionId; }
+            private set { this.activityDefinitionId = value; }
         }
 
         [DataMember(Name = "WorkflowDefinitionIdentity")]
@@ -131,26 +129,29 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            // For backward compatibility, the ToString() does not return 
+            // For backward compatibility, the ToString() does not return
             // WorkflowIdentity, if it is null.
             if (this.WorkflowDefinitionIdentity == null)
             {
-                return string.Format(CultureInfo.CurrentCulture,
+                return string.Format(
+                    CultureInfo.CurrentCulture,
                     "WorkflowInstanceRecord {{ {0}, ActivityDefinitionId = {1}, State = {2} }}",
                     base.ToString(),
                     this.ActivityDefinitionId,
-                    this.State);
+                    this.State
+                );
             }
             else
             {
-                return string.Format(CultureInfo.CurrentCulture,
+                return string.Format(
+                    CultureInfo.CurrentCulture,
                     "WorkflowInstanceRecord {{ {0}, ActivityDefinitionId = {1}, State = {2}, WorkflowDefinitionIdentity = {3} }}",
                     base.ToString(),
                     this.ActivityDefinitionId,
                     this.State,
-                    this.WorkflowDefinitionIdentity);
+                    this.WorkflowDefinitionIdentity
+                );
             }
         }
-
     }
 }

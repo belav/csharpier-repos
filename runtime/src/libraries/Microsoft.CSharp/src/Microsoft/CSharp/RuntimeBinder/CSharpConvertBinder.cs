@@ -30,12 +30,21 @@ namespace Microsoft.CSharp.RuntimeBinder
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        )
         {
             Debug.Assert(arguments.Length == 1);
             return Explicit
                 ? runtimeBinder.BindExplicitConversion(arguments, Type, locals)
-                : runtimeBinder.BindImplicitConversion(arguments, Type, locals, ConversionKind == CSharpConversionKind.ArrayCreationConversion);
+                : runtimeBinder.BindImplicitConversion(
+                    arguments,
+                    Type,
+                    locals,
+                    ConversionKind == CSharpConversionKind.ArrayCreationConversion
+                );
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -70,8 +79,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type type,
             CSharpConversionKind conversionKind,
             bool isChecked,
-            Type callingContext) :
-            base(type, conversionKind == CSharpConversionKind.ExplicitConversion)
+            Type callingContext
+        )
+            : base(type, conversionKind == CSharpConversionKind.ExplicitConversion)
         {
             ConversionKind = conversionKind;
             _callingContext = callingContext;
@@ -99,10 +109,12 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (ConversionKind != otherBinder.ConversionKind ||
-                IsChecked != otherBinder.IsChecked ||
-                _callingContext != otherBinder._callingContext ||
-                Type != otherBinder.Type)
+            if (
+                ConversionKind != otherBinder.ConversionKind
+                || IsChecked != otherBinder.IsChecked
+                || _callingContext != otherBinder._callingContext
+                || Type != otherBinder.Type
+            )
             {
                 return false;
             }
@@ -116,9 +128,15 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="target">The target of the dynamic convert operation.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackConvert(DynamicMetaObject target, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackConvert(
+            DynamicMetaObject target,
+            DynamicMetaObject errorSuggestion
+        )
         {
 #if ENABLECOMBINDER
             DynamicMetaObject com;

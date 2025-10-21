@@ -13,31 +13,33 @@ Copyright (c) .NET Foundation. All rights reserved.
   <PropertyGroup>
     <!-- Avoid having the rid show up in output paths -->
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-
     <OutputType>exe</OutputType>
-
     <IsPackable>false</IsPackable>
-
     <WarnOnPackingNonPackableProject>false</WarnOnPackingNonPackableProject>
-
     <!-- Turn off symbol publishing by default -->
     <CopyOutputSymbolsToPublishDirectory>false</CopyOutputSymbolsToPublishDirectory>
-
     <!-- Trimmer defaults -->
     <PublishTrimmed Condition="'$(PublishTrimmed)' == ''">true</PublishTrimmed>
-    <TrimMode Condition="'$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkBlazorWebAssembly)' == 'true'">partial</TrimMode>
-    <TrimMode Condition="'$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkBlazorWebAssembly)' != 'true'">full</TrimMode>
+    <TrimMode
+      Condition="'$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkBlazorWebAssembly)' == 'true'"
+      >partial</TrimMode
+    >
+    <TrimMode
+      Condition="'$(TrimMode)' == '' and '$(UsingMicrosoftNETSdkBlazorWebAssembly)' != 'true'"
+      >full</TrimMode
+    >
     <TrimmerRemoveSymbols Condition="'$(TrimmerRemoveSymbols)' == ''">false</TrimmerRemoveSymbols>
-
     <!-- Static web assets defaults -->
     <StaticWebAssetBasePath Condition="'$(StaticWebAssetBasePath)' == ''">/</StaticWebAssetBasePath>
-    <StaticWebAssetProjectMode Condition="'$(StaticWebAssetProjectMode)' == ''">Root</StaticWebAssetProjectMode>
-    <StaticWebAssetsAdditionalBuildPropertiesToRemove>$(StaticWebAssetsAdditionalBuildPropertiesToRemove);RuntimeIdentifier;SelfContained</StaticWebAssetsAdditionalBuildPropertiesToRemove><!-- The 'SelfContained' is set in Wasm SDK in SDK repo -->
+    <StaticWebAssetProjectMode Condition="'$(StaticWebAssetProjectMode)' == ''"
+      >Root</StaticWebAssetProjectMode
+    >
+    <StaticWebAssetsAdditionalBuildPropertiesToRemove>$(StaticWebAssetsAdditionalBuildPropertiesToRemove);RuntimeIdentifier;SelfContained</StaticWebAssetsAdditionalBuildPropertiesToRemove>
+    <!-- The 'SelfContained' is set in Wasm SDK in SDK repo -->
     <StaticWebAssetsGetPublishAssetsTargets>ComputeFilesToPublish;GetCurrentProjectPublishStaticWebAssetItems</StaticWebAssetsGetPublishAssetsTargets>
     <StaticWebAssetsAdditionalPublishProperties>$(StaticWebAssetsAdditionalPublishProperties);BuildProjectReferences=false;ResolveAssemblyReferencesFindRelatedSatellites=true</StaticWebAssetsAdditionalPublishProperties>
     <StaticWebAssetsAdditionalPublishPropertiesToRemove>$(StaticWebAssetsAdditionalPublishPropertiesToRemove);NoBuild;RuntimeIdentifier</StaticWebAssetsAdditionalPublishPropertiesToRemove>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectCapability Include="WebAssembly" />
   </ItemGroup>

@@ -13,18 +13,28 @@ namespace System.Web.WebPages
 {
     internal static class SessionStateUtil
     {
-        private static readonly ConcurrentDictionary<Type, SessionStateBehavior?> _sessionStateBehaviorCache = new ConcurrentDictionary<Type, SessionStateBehavior?>();
+        private static readonly ConcurrentDictionary<
+            Type,
+            SessionStateBehavior?
+        > _sessionStateBehaviorCache = new ConcurrentDictionary<Type, SessionStateBehavior?>();
 
         internal static void SetUpSessionState(HttpContextBase context, IHttpHandler handler)
         {
             SetUpSessionState(context, handler, _sessionStateBehaviorCache);
         }
 
-        internal static void SetUpSessionState(HttpContextBase context, IHttpHandler handler, ConcurrentDictionary<Type, SessionStateBehavior?> cache)
+        internal static void SetUpSessionState(
+            HttpContextBase context,
+            IHttpHandler handler,
+            ConcurrentDictionary<Type, SessionStateBehavior?> cache
+        )
         {
             WebPageHttpHandler webPageHandler = handler as WebPageHttpHandler;
             Debug.Assert(handler != null);
-            SessionStateBehavior? sessionState = GetSessionStateBehavior(webPageHandler.RequestedPage, cache);
+            SessionStateBehavior? sessionState = GetSessionStateBehavior(
+                webPageHandler.RequestedPage,
+                cache
+            );
 
             if (sessionState != null)
             {
@@ -44,8 +54,7 @@ namespace System.Web.WebPages
                     sessionState = GetSessionStateBehavior(page, cache);
                     page = startPage.ChildPage;
                 }
-            }
-            while (startPage != null);
+            } while (startPage != null);
 
             if (sessionState != null)
             {
@@ -53,32 +62,59 @@ namespace System.Web.WebPages
             }
         }
 
-        private static SessionStateBehavior? GetSessionStateBehavior(WebPageExecutingBase page, ConcurrentDictionary<Type, SessionStateBehavior?> cache)
+        private static SessionStateBehavior? GetSessionStateBehavior(
+            WebPageExecutingBase page,
+            ConcurrentDictionary<Type, SessionStateBehavior?> cache
+        )
         {
-            return cache.GetOrAdd(page.GetType(), type =>
-            {
-                SessionStateBehavior sessionStateBehavior = SessionStateBehavior.Default;
-                var attributes = (RazorDirectiveAttribute[])type.GetCustomAttributes(typeof(RazorDirectiveAttribute), inherit: false);
-                var directiveAttributes = attributes.Where(attr => StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name))
-                    .ToList();
+            return cache.GetOrAdd(
+                page.GetType(),
+                type =>
+                {
+                    SessionStateBehavior sessionStateBehavior = SessionStateBehavior.Default;
+                    var attributes = (RazorDirectiveAttribute[])
+                        type.GetCustomAttributes(typeof(RazorDirectiveAttribute), inherit: false);
+                    var directiveAttributes = attributes
+                        .Where(attr =>
+                            StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name)
+                        )
+                        .ToList();
 
-                if (!directiveAttributes.Any())
-                {
-                    return null;
+                    if (!directiveAttributes.Any())
+                    {
+                        return null;
+                    }
+                    if (directiveAttributes.Count > 1)
+                    {
+                        throw new InvalidOperationException(
+                            WebPageResources.SessionState_TooManyValues
+                        );
+                    }
+                    var directiveAttribute = directiveAttributes[0];
+                    if (
+                        !Enum.TryParse<SessionStateBehavior>(
+                            directiveAttribute.Value,
+                            ignoreCase: true,
+                            result: out sessionStateBehavior
+                        )
+                    )
+                    {
+                        var values = Enum.GetValues(typeof(SessionStateBehavior))
+                            .Cast<SessionStateBehavior>()
+                            .Select(s => s.ToString());
+                        throw new ArgumentException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                WebPageResources.SessionState_InvalidValue,
+                                directiveAttribute.Value,
+                                page.VirtualPath,
+                                String.Join(", ", values)
+                            )
+                        );
+                    }
+                    return sessionStateBehavior;
                 }
-                if (directiveAttributes.Count > 1)
-                {
-                    throw new InvalidOperationException(WebPageResources.SessionState_TooManyValues);
-                }
-                var directiveAttribute = directiveAttributes[0];
-                if (!Enum.TryParse<SessionStateBehavior>(directiveAttribute.Value, ignoreCase: true, result: out sessionStateBehavior))
-                {
-                    var values = Enum.GetValues(typeof(SessionStateBehavior)).Cast<SessionStateBehavior>().Select(s => s.ToString());
-                    throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, WebPageResources.SessionState_InvalidValue,
-                                                              directiveAttribute.Value, page.VirtualPath, String.Join(", ", values)));
-                }
-                return sessionStateBehavior;
-            });
+            );
         }
     }
 }

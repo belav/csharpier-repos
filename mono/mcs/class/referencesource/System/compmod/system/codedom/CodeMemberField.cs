@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeMemberField.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a class field member.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeMemberField : CodeTypeMember {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeMemberField : CodeTypeMember
+    {
         private CodeTypeReference type;
         private CodeExpression initExpression;
 
@@ -33,8 +30,7 @@ namespace System.CodeDom {
         ///       Initializes a new <see cref='System.CodeDom.CodeMemberField'/>.
         ///    </para>
         /// </devdoc>
-        public CodeMemberField() {
-        }
+        public CodeMemberField() { }
 
         /// <devdoc>
         ///    <para>
@@ -42,7 +38,8 @@ namespace System.CodeDom {
         ///       name.
         ///    </para>
         /// </devdoc>
-        public CodeMemberField(CodeTypeReference type, string name) {
+        public CodeMemberField(CodeTypeReference type, string name)
+        {
             Type = type;
             Name = name;
         }
@@ -50,7 +47,8 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeMemberField(string type, string name) {
+        public CodeMemberField(string type, string name)
+        {
             Type = new CodeTypeReference(type);
             Name = name;
         }
@@ -58,7 +56,8 @@ namespace System.CodeDom {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeMemberField(Type type, string name) {
+        public CodeMemberField(Type type, string name)
+        {
             Type = new CodeTypeReference(type);
             Name = name;
         }
@@ -68,16 +67,17 @@ namespace System.CodeDom {
         ///       Gets or sets the member field type.
         ///    </para>
         /// </devdoc>
-        public CodeTypeReference Type {
-            get {
-                if (type == null) {
+        public CodeTypeReference Type
+        {
+            get
+            {
+                if (type == null)
+                {
                     type = new CodeTypeReference("");
                 }
                 return type;
             }
-            set {
-                type = value;
-            }
+            set { type = value; }
         }
 
         /// <devdoc>
@@ -85,13 +85,10 @@ namespace System.CodeDom {
         ///       Gets or sets the initialization expression for the member field.
         ///    </para>
         /// </devdoc>
-        public CodeExpression InitExpression {
-            get {
-                return initExpression;
-            }
-            set {
-                initExpression = value;
-            }
+        public CodeExpression InitExpression
+        {
+            get { return initExpression; }
+            set { initExpression = value; }
         }
     }
 }

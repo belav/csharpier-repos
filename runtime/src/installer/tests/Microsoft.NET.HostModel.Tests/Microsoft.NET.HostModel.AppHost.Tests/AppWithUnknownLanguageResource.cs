@@ -8,7 +8,8 @@ using Xunit;
 namespace Microsoft.NET.HostModel.Tests
 {
     // https://github.com/dotnet/runtime/issues/88465
-    public class AppWithUnknownLanguageResource : IClassFixture<AppWithUnknownLanguageResource.SharedTestState>
+    public class AppWithUnknownLanguageResource
+        : IClassFixture<AppWithUnknownLanguageResource.SharedTestState>
     {
         private SharedTestState sharedTestState;
 
@@ -33,7 +34,10 @@ namespace Microsoft.NET.HostModel.Tests
             public SharedTestState()
             {
                 RepoDirectories = new RepoDirectoriesProvider();
-                var testFixture = new TestProjectFixture("AppWithUnknownLanguageResource", RepoDirectories);
+                var testFixture = new TestProjectFixture(
+                    "AppWithUnknownLanguageResource",
+                    RepoDirectories
+                );
                 testFixture.EnsureRestored().BuildProject();
                 TestFixture = testFixture;
             }

@@ -21,7 +21,9 @@ namespace System.IdentityModel.Selectors
             }
         }
 
-        public static UserNamePasswordValidator CreateMembershipProviderValidator(MembershipProvider provider)
+        public static UserNamePasswordValidator CreateMembershipProviderValidator(
+            MembershipProvider provider
+        )
         {
             if (provider == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("provider");
@@ -32,9 +34,7 @@ namespace System.IdentityModel.Selectors
 
         class NoneUserNamePasswordValidator : UserNamePasswordValidator
         {
-            public override void Validate(string userName, string password)
-            {
-            }
+            public override void Validate(string userName, string password) { }
         }
 
         class MembershipProviderValidator : UserNamePasswordValidator
@@ -50,8 +50,14 @@ namespace System.IdentityModel.Selectors
             {
                 if (!this.provider.ValidateUser(userName, password))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(
-                        SR.GetString(SR.UserNameAuthenticationFailed, this.provider.GetType().Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenValidationException(
+                            SR.GetString(
+                                SR.UserNameAuthenticationFailed,
+                                this.provider.GetType().Name
+                            )
+                        )
+                    );
                 }
             }
         }

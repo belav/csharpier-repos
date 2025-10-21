@@ -15,6 +15,7 @@ internal static partial class Interop
             SafeFileHandle hFile,
             NativeOverlapped* lpOverlapped,
             ref int lpNumberOfBytesTransferred,
-            [MarshalAs(UnmanagedType.Bool)] bool bWait);
+            [MarshalAs(UnmanagedType.Bool)] bool bWait
+        );
     }
 }

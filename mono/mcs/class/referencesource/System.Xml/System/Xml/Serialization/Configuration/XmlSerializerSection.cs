@@ -2,13 +2,13 @@
 namespace System.Xml.Serialization.Configuration
 {
     using System;
-    using System.IO;
-    using System.Web;
-    using System.Configuration;
     using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Resources;
+    using System.Web;
 
     public sealed class XmlSerializerSection : ConfigurationSection
     {
@@ -21,10 +21,7 @@ namespace System.Xml.Serialization.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         [ConfigurationProperty(ConfigurationStrings.CheckDeserializeAdvances, DefaultValue = false)]
@@ -41,7 +38,10 @@ namespace System.Xml.Serialization.Configuration
             set { this[this.tempFilesLocation] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.UseLegacySerializerGeneration, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.UseLegacySerializerGeneration,
+            DefaultValue = false
+        )]
         public bool UseLegacySerializerGeneration
         {
             get { return (bool)this[this.useLegacySerializerGeneration]; }
@@ -52,20 +52,29 @@ namespace System.Xml.Serialization.Configuration
 
         // Supply a type converter, even though it's a plain type converter, to get around ConfigurationProperty's internal
         // Enum conversion routine.  The internal one is case-sensitive, we want this to be case-insensitive.
-        readonly ConfigurationProperty checkDeserializeAdvances =
-            new ConfigurationProperty(ConfigurationStrings.CheckDeserializeAdvances, typeof(bool), false,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty checkDeserializeAdvances = new ConfigurationProperty(
+            ConfigurationStrings.CheckDeserializeAdvances,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty tempFilesLocation =
-            new ConfigurationProperty(ConfigurationStrings.TempFilesLocation, typeof(string), null, null,
+        readonly ConfigurationProperty tempFilesLocation = new ConfigurationProperty(
+            ConfigurationStrings.TempFilesLocation,
+            typeof(string),
+            null,
+            null,
             new RootedPathValidator(),
-            ConfigurationPropertyOptions.None);
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty useLegacySerializerGeneration =
-            new ConfigurationProperty(ConfigurationStrings.UseLegacySerializerGeneration, typeof(bool), false,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty useLegacySerializerGeneration = new ConfigurationProperty(
+            ConfigurationStrings.UseLegacySerializerGeneration,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
     }
-
 
     public class RootedPathValidator : ConfigurationValidatorBase
     {
@@ -88,7 +97,10 @@ namespace System.Xml.Serialization.Configuration
                 throw new ConfigurationErrorsException();
             }
             char firstChar = tempDirectory[0];
-            if (firstChar == Path.DirectorySeparatorChar || firstChar == Path.AltDirectorySeparatorChar)
+            if (
+                firstChar == Path.DirectorySeparatorChar
+                || firstChar == Path.AltDirectorySeparatorChar
+            )
             {
                 // Make sure the path is explicitly rooted
                 throw new ConfigurationErrorsException();

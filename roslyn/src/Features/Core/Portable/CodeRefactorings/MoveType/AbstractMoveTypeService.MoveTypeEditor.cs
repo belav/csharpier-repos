@@ -19,15 +19,21 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
-    internal abstract partial class AbstractMoveTypeService<TService, TTypeDeclarationSyntax, TNamespaceDeclarationSyntax, TMemberDeclarationSyntax, TCompilationUnitSyntax>
+    internal abstract partial class AbstractMoveTypeService<
+        TService,
+        TTypeDeclarationSyntax,
+        TNamespaceDeclarationSyntax,
+        TMemberDeclarationSyntax,
+        TCompilationUnitSyntax
+    >
     {
         private sealed class MoveTypeEditor(
             TService service,
             State state,
             string fileName,
-            CancellationToken cancellationToken) : Editor(service, state, fileName, cancellationToken)
+            CancellationToken cancellationToken
+        ) : Editor(service, state, fileName, cancellationToken)
         {
-
             /// <summary>
             /// Given a document and a type contained in it, moves the type
             /// out to its own document. The new document's name typically
@@ -58,52 +64,94 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 //    these imports only were needed for the moved type, and so they shouldn't stay in the original
                 //    file.
 
-                var documentWithMovedType = await AddNewDocumentWithSingleTypeDeclarationAsync(newDocumentId).ConfigureAwait(false);
+                var documentWithMovedType = await AddNewDocumentWithSingleTypeDeclarationAsync(
+                        newDocumentId
+                    )
+                    .ConfigureAwait(false);
 
                 var solutionWithNewDocument = documentWithMovedType.Project.Solution;
 
                 // Get the original source document again, from the latest forked solution.
-                var sourceDocument = solutionWithNewDocument.GetRequiredDocument(SemanticDocument.Document.Id);
+                var sourceDocument = solutionWithNewDocument.GetRequiredDocument(
+                    SemanticDocument.Document.Id
+                );
 
                 // update source document to add partial modifiers to type chain
                 // and/or remove type declaration from original source document.
-                var solutionWithBothDocumentsUpdated = await RemoveTypeFromSourceDocumentAsync(sourceDocument).ConfigureAwait(false);
+                var solutionWithBothDocumentsUpdated = await RemoveTypeFromSourceDocumentAsync(
+                        sourceDocument
+                    )
+                    .ConfigureAwait(false);
 
-                return await RemoveUnnecessaryImportsAsync(solutionWithBothDocumentsUpdated, sourceDocument.Id, documentWithMovedType.Id).ConfigureAwait(false);
+                return await RemoveUnnecessaryImportsAsync(
+                        solutionWithBothDocumentsUpdated,
+                        sourceDocument.Id,
+                        documentWithMovedType.Id
+                    )
+                    .ConfigureAwait(false);
             }
 
             private async Task<Solution> RemoveUnnecessaryImportsAsync(
-                Solution solution, DocumentId sourceDocumentId, DocumentId documentWithMovedTypeId)
+                Solution solution,
+                DocumentId sourceDocumentId,
+                DocumentId documentWithMovedTypeId
+            )
             {
                 var documentWithMovedType = solution.GetRequiredDocument(documentWithMovedTypeId);
-                var documentWithMovedTypeFormattingOptions = await documentWithMovedType.GetSyntaxFormattingOptionsAsync(State.FallbackOptions, CancellationToken).ConfigureAwait(false);
+                var documentWithMovedTypeFormattingOptions = await documentWithMovedType
+                    .GetSyntaxFormattingOptionsAsync(State.FallbackOptions, CancellationToken)
+                    .ConfigureAwait(false);
 
-                var syntaxFacts = documentWithMovedType.GetRequiredLanguageService<ISyntaxFactsService>();
-                var removeUnnecessaryImports = documentWithMovedType.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
+                var syntaxFacts =
+                    documentWithMovedType.GetRequiredLanguageService<ISyntaxFactsService>();
+                var removeUnnecessaryImports =
+                    documentWithMovedType.GetRequiredLanguageService<IRemoveUnnecessaryImportsService>();
 
                 // Remove all unnecessary imports from the new document we've created.
-                documentWithMovedType = await removeUnnecessaryImports.RemoveUnnecessaryImportsAsync(documentWithMovedType, documentWithMovedTypeFormattingOptions, CancellationToken).ConfigureAwait(false);
+                documentWithMovedType = await removeUnnecessaryImports
+                    .RemoveUnnecessaryImportsAsync(
+                        documentWithMovedType,
+                        documentWithMovedTypeFormattingOptions,
+                        CancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 solution = solution.WithDocumentSyntaxRoot(
-                    documentWithMovedTypeId, await documentWithMovedType.GetRequiredSyntaxRootAsync(CancellationToken).ConfigureAwait(false));
+                    documentWithMovedTypeId,
+                    await documentWithMovedType
+                        .GetRequiredSyntaxRootAsync(CancellationToken)
+                        .ConfigureAwait(false)
+                );
 
                 // See which imports we kept around.
-                var rootWithMovedType = await documentWithMovedType.GetRequiredSyntaxRootAsync(CancellationToken).ConfigureAwait(false);
-                var movedImports = rootWithMovedType.DescendantNodes()
-                                                    .Where(syntaxFacts.IsUsingOrExternOrImport)
-                                                    .ToImmutableArray();
+                var rootWithMovedType = await documentWithMovedType
+                    .GetRequiredSyntaxRootAsync(CancellationToken)
+                    .ConfigureAwait(false);
+                var movedImports = rootWithMovedType
+                    .DescendantNodes()
+                    .Where(syntaxFacts.IsUsingOrExternOrImport)
+                    .ToImmutableArray();
 
                 // Now remove any unnecessary imports from the original doc that moved to the new doc.
                 var sourceDocument = solution.GetRequiredDocument(sourceDocumentId);
-                var sourceDocumentFormattingOptions = await sourceDocument.GetSyntaxFormattingOptionsAsync(State.FallbackOptions, CancellationToken).ConfigureAwait(false);
-                sourceDocument = await removeUnnecessaryImports.RemoveUnnecessaryImportsAsync(
-                    sourceDocument,
-                    n => movedImports.Contains(i => syntaxFacts.AreEquivalent(i, n)),
-                    sourceDocumentFormattingOptions,
-                    CancellationToken).ConfigureAwait(false);
+                var sourceDocumentFormattingOptions = await sourceDocument
+                    .GetSyntaxFormattingOptionsAsync(State.FallbackOptions, CancellationToken)
+                    .ConfigureAwait(false);
+                sourceDocument = await removeUnnecessaryImports
+                    .RemoveUnnecessaryImportsAsync(
+                        sourceDocument,
+                        n => movedImports.Contains(i => syntaxFacts.AreEquivalent(i, n)),
+                        sourceDocumentFormattingOptions,
+                        CancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return solution.WithDocumentSyntaxRoot(
-                    sourceDocumentId, await sourceDocument.GetRequiredSyntaxRootAsync(CancellationToken).ConfigureAwait(false));
+                    sourceDocumentId,
+                    await sourceDocument
+                        .GetRequiredSyntaxRootAsync(CancellationToken)
+                        .ConfigureAwait(false)
+                );
             }
 
             /// <summary>
@@ -111,21 +159,30 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             /// and adds it the solution.
             /// </summary>
             /// <param name="newDocumentId">id for the new document to be added</param>
-            private async Task<Document> AddNewDocumentWithSingleTypeDeclarationAsync(DocumentId newDocumentId)
+            private async Task<Document> AddNewDocumentWithSingleTypeDeclarationAsync(
+                DocumentId newDocumentId
+            )
             {
                 var document = SemanticDocument.Document;
-                Debug.Assert(document.Name != FileName,
-                             $"New document name is same as old document name:{FileName}");
+                Debug.Assert(
+                    document.Name != FileName,
+                    $"New document name is same as old document name:{FileName}"
+                );
 
                 var root = SemanticDocument.Root;
                 var projectToBeUpdated = document.Project;
-                var documentEditor = await DocumentEditor.CreateAsync(document, CancellationToken).ConfigureAwait(false);
+                var documentEditor = await DocumentEditor
+                    .CreateAsync(document, CancellationToken)
+                    .ConfigureAwait(false);
 
-                // Make the type chain above this new type partial.  Also, remove any 
+                // Make the type chain above this new type partial.  Also, remove any
                 // attributes from the containing partial types.  We don't want to create
                 // duplicate attributes on things.
                 AddPartialModifiersToTypeChain(
-                    documentEditor, removeAttributesAndComments: true, removeTypeInheritance: true);
+                    documentEditor,
+                    removeAttributesAndComments: true,
+                    removeTypeInheritance: true
+                );
 
                 // remove things that are not being moved, from the forked document.
                 var membersToRemove = GetMembersToRemove(root);
@@ -137,14 +194,23 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 documentEditor.RemoveAllAttributes(root);
 
                 var modifiedRoot = documentEditor.GetChangedRoot();
-                modifiedRoot = await AddFinalNewLineIfDesiredAsync(document, modifiedRoot).ConfigureAwait(false);
+                modifiedRoot = await AddFinalNewLineIfDesiredAsync(document, modifiedRoot)
+                    .ConfigureAwait(false);
 
                 // add an empty document to solution, so that we'll have options from the right context.
                 var solutionWithNewDocument = projectToBeUpdated.Solution.AddDocument(
-                    newDocumentId, FileName, text: string.Empty, folders: document.Folders);
+                    newDocumentId,
+                    FileName,
+                    text: string.Empty,
+                    folders: document.Folders
+                );
 
                 // update the text for the new document
-                solutionWithNewDocument = solutionWithNewDocument.WithDocumentSyntaxRoot(newDocumentId, modifiedRoot, PreservationMode.PreserveIdentity);
+                solutionWithNewDocument = solutionWithNewDocument.WithDocumentSyntaxRoot(
+                    newDocumentId,
+                    modifiedRoot,
+                    PreservationMode.PreserveIdentity
+                );
 
                 // get the updated document, give it the minimal set of imports that the type
                 // inside it needs.
@@ -153,27 +219,42 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             }
 
             /// <summary>
-            /// Add a trailing newline if we don't already have one if that's what the user's 
+            /// Add a trailing newline if we don't already have one if that's what the user's
             /// preference is.
             /// </summary>
-            private async Task<SyntaxNode> AddFinalNewLineIfDesiredAsync(Document document, SyntaxNode modifiedRoot)
+            private async Task<SyntaxNode> AddFinalNewLineIfDesiredAsync(
+                Document document,
+                SyntaxNode modifiedRoot
+            )
             {
-                var documentFormattingOptions = await document.GetDocumentFormattingOptionsAsync(State.FallbackOptions, CancellationToken).ConfigureAwait(false);
+                var documentFormattingOptions = await document
+                    .GetDocumentFormattingOptionsAsync(State.FallbackOptions, CancellationToken)
+                    .ConfigureAwait(false);
                 var insertFinalNewLine = documentFormattingOptions.InsertFinalNewLine;
                 if (insertFinalNewLine)
                 {
                     var endOfFileToken = ((ICompilationUnitSyntax)modifiedRoot).EndOfFileToken;
-                    var previousToken = endOfFileToken.GetPreviousToken(includeZeroWidth: true, includeSkipped: true);
+                    var previousToken = endOfFileToken.GetPreviousToken(
+                        includeZeroWidth: true,
+                        includeSkipped: true
+                    );
 
                     var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-                    if (endOfFileToken.LeadingTrivia.IsEmpty() &&
-                        !previousToken.TrailingTrivia.Any(syntaxFacts.IsEndOfLineTrivia))
+                    if (
+                        endOfFileToken.LeadingTrivia.IsEmpty()
+                        && !previousToken.TrailingTrivia.Any(syntaxFacts.IsEndOfLineTrivia)
+                    )
                     {
-                        var lineFormattingOptions = await document.GetLineFormattingOptionsAsync(State.FallbackOptions, CancellationToken).ConfigureAwait(false);
-                        var generator = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
+                        var lineFormattingOptions = await document
+                            .GetLineFormattingOptionsAsync(State.FallbackOptions, CancellationToken)
+                            .ConfigureAwait(false);
+                        var generator =
+                            document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
                         var endOfLine = generator.EndOfLine(lineFormattingOptions.NewLine);
                         return modifiedRoot.ReplaceToken(
-                            previousToken, previousToken.WithAppendedTrailingTrivia(endOfLine));
+                            previousToken,
+                            previousToken.WithAppendedTrailingTrivia(endOfLine)
+                        );
                     }
                 }
 
@@ -187,14 +268,22 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             /// <returns>an updated solution with the original document fixed up as appropriate.</returns>
             private async Task<Solution> RemoveTypeFromSourceDocumentAsync(Document sourceDocument)
             {
-                var documentEditor = await DocumentEditor.CreateAsync(sourceDocument, CancellationToken).ConfigureAwait(false);
+                var documentEditor = await DocumentEditor
+                    .CreateAsync(sourceDocument, CancellationToken)
+                    .ConfigureAwait(false);
 
-                // Make the type chain above the type we're moving 'partial'.  
-                // However, keep all the attributes on these types as theses are the 
-                // original attributes and we don't want to mess with them. 
-                AddPartialModifiersToTypeChain(documentEditor,
-                    removeAttributesAndComments: false, removeTypeInheritance: false);
-                documentEditor.RemoveNode(State.TypeNode, SyntaxRemoveOptions.KeepUnbalancedDirectives);
+                // Make the type chain above the type we're moving 'partial'.
+                // However, keep all the attributes on these types as theses are the
+                // original attributes and we don't want to mess with them.
+                AddPartialModifiersToTypeChain(
+                    documentEditor,
+                    removeAttributesAndComments: false,
+                    removeTypeInheritance: false
+                );
+                documentEditor.RemoveNode(
+                    State.TypeNode,
+                    SyntaxRemoveOptions.KeepUnbalancedDirectives
+                );
 
                 var updatedDocument = documentEditor.GetChangedDocument();
 
@@ -216,9 +305,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 spine.AddRange(State.TypeNode.GetAncestors());
 
                 // get potential namespace, types and members to remove.
-                var removableCandidates = root
-                    .DescendantNodes(spine.Contains)
-                    .Where(n => FilterToTopLevelMembers(n, State.TypeNode)).ToSet();
+                var removableCandidates = root.DescendantNodes(spine.Contains)
+                    .Where(n => FilterToTopLevelMembers(n, State.TypeNode))
+                    .ToSet();
 
                 // diff candidates with items we want to keep.
                 removableCandidates.ExceptWith(spine);
@@ -247,9 +336,10 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     return false;
                 }
 
-                return node is TTypeDeclarationSyntax or
-                       TMemberDeclarationSyntax or
-                       TNamespaceDeclarationSyntax;
+                return node
+                    is TTypeDeclarationSyntax
+                        or TMemberDeclarationSyntax
+                        or TNamespaceDeclarationSyntax;
             }
 
             /// <summary>
@@ -258,19 +348,28 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
             private void AddPartialModifiersToTypeChain(
                 DocumentEditor documentEditor,
                 bool removeAttributesAndComments,
-                bool removeTypeInheritance)
+                bool removeTypeInheritance
+            )
             {
-                var semanticFacts = State.SemanticDocument.Document.GetRequiredLanguageService<ISemanticFactsService>();
+                var semanticFacts =
+                    State.SemanticDocument.Document.GetRequiredLanguageService<ISemanticFactsService>();
                 var typeChain = State.TypeNode.Ancestors().OfType<TTypeDeclarationSyntax>();
 
                 foreach (var node in typeChain)
                 {
-                    var symbol = (INamedTypeSymbol?)State.SemanticDocument.SemanticModel.GetDeclaredSymbol(node, CancellationToken);
+                    var symbol = (INamedTypeSymbol?)
+                        State.SemanticDocument.SemanticModel.GetDeclaredSymbol(
+                            node,
+                            CancellationToken
+                        );
                     Contract.ThrowIfNull(symbol);
                     if (!semanticFacts.IsPartial(symbol, CancellationToken))
                     {
-                        documentEditor.SetModifiers(node,
-                            documentEditor.Generator.GetModifiers(node) | DeclarationModifiers.Partial);
+                        documentEditor.SetModifiers(
+                            node,
+                            documentEditor.Generator.GetModifiers(node)
+                                | DeclarationModifiers.Partial
+                        );
                     }
 
                     if (removeAttributesAndComments)
@@ -285,24 +384,31 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     }
                 }
 
-                documentEditor.ReplaceNode(State.TypeNode,
+                documentEditor.ReplaceNode(
+                    State.TypeNode,
                     (currentNode, generator) =>
                     {
                         var currentTypeNode = (TTypeDeclarationSyntax)currentNode;
 
-                        // Trim leading blank lines from the type so we don't have an 
+                        // Trim leading blank lines from the type so we don't have an
                         // excessive number of them.
                         return RemoveLeadingBlankLines(currentTypeNode);
-                    });
+                    }
+                );
             }
 
             private TTypeDeclarationSyntax RemoveLeadingBlankLines(
-                TTypeDeclarationSyntax currentTypeNode)
+                TTypeDeclarationSyntax currentTypeNode
+            )
             {
-                var syntaxFacts = State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var bannerService = State.SemanticDocument.Document.GetRequiredLanguageService<IFileBannerFactsService>();
+                var syntaxFacts =
+                    State.SemanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var bannerService =
+                    State.SemanticDocument.Document.GetRequiredLanguageService<IFileBannerFactsService>();
 
-                var withoutBlankLines = bannerService.GetNodeWithoutLeadingBlankLines(currentTypeNode);
+                var withoutBlankLines = bannerService.GetNodeWithoutLeadingBlankLines(
+                    currentTypeNode
+                );
 
                 // Add an elastic marker so the formatter can add any blank lines it thinks are
                 // important to have (i.e. after a block of usings/imports).

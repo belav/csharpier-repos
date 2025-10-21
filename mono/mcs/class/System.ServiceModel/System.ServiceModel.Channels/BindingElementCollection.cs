@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,92 +31,93 @@ using System.Collections.ObjectModel;
 
 namespace System.ServiceModel.Channels
 {
-	[MonoTODO]
-	public class BindingElementCollection : Collection<BindingElement>
-	{
-		public BindingElementCollection ()
-		{
-		}
+    [MonoTODO]
+    public class BindingElementCollection : Collection<BindingElement>
+    {
+        public BindingElementCollection() { }
 
-		public BindingElementCollection (BindingElement [] elements)
-		{
-			AddRange (elements);
-		}
+        public BindingElementCollection(BindingElement[] elements)
+        {
+            AddRange(elements);
+        }
 
-		public BindingElementCollection (IEnumerable<BindingElement> elements)
-		{
-			foreach (BindingElement e in elements)
-				Add (e);
-		}
+        public BindingElementCollection(IEnumerable<BindingElement> elements)
+        {
+            foreach (BindingElement e in elements)
+                Add(e);
+        }
 
-		public void AddRange (params BindingElement[] elements)
-		{
-			foreach (BindingElement e in elements)
-				Add (e);
-		}
+        public void AddRange(params BindingElement[] elements)
+        {
+            foreach (BindingElement e in elements)
+                Add(e);
+        }
 
-		public BindingElementCollection Clone ()
-		{
-			return new BindingElementCollection (this);
-		}
+        public BindingElementCollection Clone()
+        {
+            return new BindingElementCollection(this);
+        }
 
-		public bool Contains (Type bindingElementType)
-		{
-			foreach (BindingElement b in this)
-				if (bindingElementType.IsAssignableFrom (b.GetType ()))
-					return true;
-			return false;
-		}
+        public bool Contains(Type bindingElementType)
+        {
+            foreach (BindingElement b in this)
+                if (bindingElementType.IsAssignableFrom(b.GetType()))
+                    return true;
+            return false;
+        }
 
-		public T Find<T> ()
-		{
-			foreach (BindingElement b in this)
-				if ((object) b is T)
-					return (T) (object) b;
-			return default (T);
-		}
+        public T Find<T>()
+        {
+            foreach (BindingElement b in this)
+                if ((object)b is T)
+                    return (T)(object)b;
+            return default(T);
+        }
 
-		public Collection<T> FindAll<T> ()
-		{
-			Collection<T> coll = new Collection<T> ();
-			foreach (BindingElement b in this)
-				if ((object) b is T)
-					coll.Add ((T) (object) b);
-			return coll;
-		}
+        public Collection<T> FindAll<T>()
+        {
+            Collection<T> coll = new Collection<T>();
+            foreach (BindingElement b in this)
+                if ((object)b is T)
+                    coll.Add((T)(object)b);
+            return coll;
+        }
 
-		public T Remove<T> ()
-		{
-			foreach (BindingElement b in this) {
-				if ((object) b is T) {
-					Remove (b);
-					return (T) (object) b;
-				}
-			}
-			return default (T);
-		}
+        public T Remove<T>()
+        {
+            foreach (BindingElement b in this)
+            {
+                if ((object)b is T)
+                {
+                    Remove(b);
+                    return (T)(object)b;
+                }
+            }
+            return default(T);
+        }
 
-		public Collection<T> RemoveAll<T> ()
-		{
-			Collection<T> coll = new Collection<T> ();
-			foreach (BindingElement b in this) {
-				if ((object) b is T) {
-					Remove (b);
-					coll.Add ((T) (object) b);
-				}
-			}
-			return coll;
-		}
+        public Collection<T> RemoveAll<T>()
+        {
+            Collection<T> coll = new Collection<T>();
+            foreach (BindingElement b in this)
+            {
+                if ((object)b is T)
+                {
+                    Remove(b);
+                    coll.Add((T)(object)b);
+                }
+            }
+            return coll;
+        }
 
-		protected override void InsertItem (int index,
-			BindingElement item)
-		{
-			Items.Insert (index, item);
-		}
+        protected override void InsertItem(int index, BindingElement item)
+        {
+            Items.Insert(index, item);
+        }
 
-		protected override void SetItem (int index, BindingElement item)
-		{
-			Items [index] = item;
-		}
-	}
+        protected override void SetItem(int index, BindingElement item)
+        {
+            Items[index] = item;
+        }
+    }
 }

@@ -20,7 +20,7 @@ namespace System.Buffers.Text.Tests
         public T ExpectedValue { get; }
         public char FormatSymbol { get; }
         public bool ExpectedSuccess { get; }
-        public int ExpectedBytesConsumed { get; set; }  // Has a public setter so that individual test cases can override. By default, it's set to the Utf8 character length of Text
+        public int ExpectedBytesConsumed { get; set; } // Has a public setter so that individual test cases can override. By default, it's set to the Utf8 character length of Text
 
         public sealed override string ToString()
         {
@@ -28,9 +28,7 @@ namespace System.Buffers.Text.Tests
             // Take good care of this method: it affects Xunit output and makes a lot of difference in how annoying test investigations are.
             //
 
-            string formatString = (FormatSymbol == default) ?
-                "default" :
-                FormatSymbol.ToString();
+            string formatString = (FormatSymbol == default) ? "default" : FormatSymbol.ToString();
 
             return $"[Parse{typeof(T).Name} '{Text}',{formatString} to {(ExpectedSuccess ? ExpectedValue.DisplayString() : "(should-not-parse)")})]";
         }

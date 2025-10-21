@@ -16,20 +16,28 @@ namespace Microsoft.CodeAnalysis.Editor
     /// Implementation of the editor layer <see cref="NavigationBarItem"/> that wraps a feature layer <see cref="RoslynNavigationBarItem"/>
     /// </summary>
     // We suppress this as this type *does* override ComputeAdditionalHashCodeParts
-    internal sealed class WrappedNavigationBarItem : NavigationBarItem, IEquatable<WrappedNavigationBarItem>
+    internal sealed class WrappedNavigationBarItem
+        : NavigationBarItem,
+            IEquatable<WrappedNavigationBarItem>
     {
         public readonly RoslynNavigationBarItem UnderlyingItem;
 
-        internal WrappedNavigationBarItem(ITextVersion textVersion, RoslynNavigationBarItem underlyingItem)
+        internal WrappedNavigationBarItem(
+            ITextVersion textVersion,
+            RoslynNavigationBarItem underlyingItem
+        )
             : base(
-                  textVersion,
-                  underlyingItem.Text,
-                  underlyingItem.Glyph,
-                  GetSpans(underlyingItem),
-                  underlyingItem.ChildItems.SelectAsArray(v => (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)),
-                  underlyingItem.Indent,
-                  underlyingItem.Bolded,
-                  underlyingItem.Grayed)
+                textVersion,
+                underlyingItem.Text,
+                underlyingItem.Glyph,
+                GetSpans(underlyingItem),
+                underlyingItem.ChildItems.SelectAsArray(v =>
+                    (NavigationBarItem)new WrappedNavigationBarItem(textVersion, v)
+                ),
+                underlyingItem.Indent,
+                underlyingItem.Bolded,
+                underlyingItem.Grayed
+            )
         {
             UnderlyingItem = underlyingItem;
         }
@@ -41,10 +49,18 @@ namespace Microsoft.CodeAnalysis.Editor
             spans.SortAndRemoveDuplicates(Comparer<TextSpan>.Default);
             return spans.ToImmutable();
 
-            static void AddSpans(RoslynNavigationBarItem underlyingItem, ArrayBuilder<TextSpan> spans)
+            static void AddSpans(
+                RoslynNavigationBarItem underlyingItem,
+                ArrayBuilder<TextSpan> spans
+            )
             {
                 // For a regular symbol we want to select it if the user puts their caret in any of the spans of it in this file.
-                if (underlyingItem is RoslynNavigationBarItem.SymbolItem { Location.InDocumentInfo.spans: var symbolSpans })
+                if (
+                    underlyingItem is RoslynNavigationBarItem.SymbolItem
+                    {
+                        Location.InDocumentInfo.spans: var symbolSpans
+                    }
+                )
                 {
                     spans.AddRange(symbolSpans);
                 }
@@ -63,14 +79,11 @@ namespace Microsoft.CodeAnalysis.Editor
             }
         }
 
-        public override bool Equals(object? obj)
-            => Equals(obj as WrappedNavigationBarItem);
+        public override bool Equals(object? obj) => Equals(obj as WrappedNavigationBarItem);
 
-        public bool Equals(WrappedNavigationBarItem? other)
-            => base.Equals(other) &&
-               UnderlyingItem.Equals(other.UnderlyingItem);
+        public bool Equals(WrappedNavigationBarItem? other) =>
+            base.Equals(other) && UnderlyingItem.Equals(other.UnderlyingItem);
 
-        public override int GetHashCode()
-            => throw new NotImplementedException();
+        public override int GetHashCode() => throw new NotImplementedException();
     }
 }

@@ -2,20 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Xunit;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Xunit;
 
 internal class MyCriticalHandle : CriticalHandle
 {
     static int s_uniqueHandleValue;
     static HashSet<int> s_closedHandles = new HashSet<int>();
 
-    public MyCriticalHandle() : base(new IntPtr(-1))
-    {
-
-    }
+    public MyCriticalHandle()
+        : base(new IntPtr(-1)) { }
 
     public override bool IsInvalid
     {
@@ -35,14 +33,8 @@ internal class MyCriticalHandle : CriticalHandle
 
     internal IntPtr Handle
     {
-        get
-        {
-            return handle;
-        }
-        set
-        {
-            handle = value;
-        }
+        get { return handle; }
+        set { handle = value; }
     }
 
     internal static IntPtr GetUniqueHandle()
@@ -58,17 +50,12 @@ internal class MyCriticalHandle : CriticalHandle
 
 public abstract class AbstractCriticalHandle : CriticalHandle
 {
-    public AbstractCriticalHandle() : base(new IntPtr(-1))
-    {
-
-    }
+    public AbstractCriticalHandle()
+        : base(new IntPtr(-1)) { }
 
     internal IntPtr Handle
     {
-        get
-        {
-            return handle;
-        }
+        get { return handle; }
     }
 }
 
@@ -215,14 +202,28 @@ public class CriticalHandleTest
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
         internal static extern void Out(IntPtr handleValue, out MyCriticalHandle handle);
 
-        [DllImport("CriticalHandlesNative", EntryPoint = "Ref", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr InRef([In]ref MyCriticalHandle handle, HandleCallback handleCallback);
+        [DllImport(
+            "CriticalHandlesNative",
+            EntryPoint = "Ref",
+            CallingConvention = CallingConvention.StdCall
+        )]
+        internal static extern IntPtr InRef(
+            [In] ref MyCriticalHandle handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr Ref(ref MyCriticalHandle handle, HandleCallback handleCallback);
+        internal static extern IntPtr Ref(
+            ref MyCriticalHandle handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr RefModify(IntPtr handleValue, ref MyCriticalHandle handle, HandleCallback handleCallback);
+        internal static extern IntPtr RefModify(
+            IntPtr handleValue,
+            ref MyCriticalHandle handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
         internal static extern MyCriticalHandle Ret(IntPtr handleValue);
@@ -275,16 +276,29 @@ public class AbstractCriticalHandleTest
         internal delegate bool HandleCallback(IntPtr handle);
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr In(AbstractCriticalHandle handle, HandleCallback handleCallback);
+        internal static extern IntPtr In(
+            AbstractCriticalHandle handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
         internal static extern void Out(IntPtr handleValue, out AbstractCriticalHandle handle);
 
-        [DllImport("CriticalHandlesNative", EntryPoint = "Ref", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr InRef([In]ref AbstractCriticalHandle handle, HandleCallback handleCallback);
+        [DllImport(
+            "CriticalHandlesNative",
+            EntryPoint = "Ref",
+            CallingConvention = CallingConvention.StdCall
+        )]
+        internal static extern IntPtr InRef(
+            [In] ref AbstractCriticalHandle handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr Ref(ref AbstractCriticalHandle handle, HandleCallback handleCallback);
+        internal static extern IntPtr Ref(
+            ref AbstractCriticalHandle handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
         internal static extern AbstractCriticalHandle Ret(IntPtr handleValue);
@@ -340,16 +354,32 @@ public class NoDefaultCtorCriticalHandleTest
         internal delegate bool HandleCallback(IntPtr handle);
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr In(CriticalHandleWithNoDefaultCtor handle, HandleCallback handleCallback);
+        internal static extern IntPtr In(
+            CriticalHandleWithNoDefaultCtor handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-        internal static extern void Out(IntPtr handleValue, out CriticalHandleWithNoDefaultCtor handle);
+        internal static extern void Out(
+            IntPtr handleValue,
+            out CriticalHandleWithNoDefaultCtor handle
+        );
 
-        [DllImport("CriticalHandlesNative", EntryPoint = "Ref", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr InRef([In]ref CriticalHandleWithNoDefaultCtor handle, HandleCallback handleCallback);
+        [DllImport(
+            "CriticalHandlesNative",
+            EntryPoint = "Ref",
+            CallingConvention = CallingConvention.StdCall
+        )]
+        internal static extern IntPtr InRef(
+            [In] ref CriticalHandleWithNoDefaultCtor handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-        internal static extern IntPtr Ref(ref CriticalHandleWithNoDefaultCtor handle, HandleCallback handleCallback);
+        internal static extern IntPtr Ref(
+            ref CriticalHandleWithNoDefaultCtor handle,
+            HandleCallback handleCallback
+        );
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
         internal static extern CriticalHandleWithNoDefaultCtor Ret(IntPtr handleValue);

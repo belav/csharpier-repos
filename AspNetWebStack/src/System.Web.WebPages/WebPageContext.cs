@@ -19,9 +19,7 @@ namespace System.Web.WebPages
         private ModelStateDictionary _modelStateDictionary;
 
         public WebPageContext()
-            : this(context: null, page: null, model: null)
-        {
-        }
+            : this(context: null, page: null, model: null) { }
 
         public WebPageContext(HttpContextBase context, WebPageRenderingBase page, object model)
         {
@@ -34,8 +32,8 @@ namespace System.Web.WebPages
         {
             get
             {
-                // The TemplateStack stores instances of WebPageRenderingBase. 
-                // Retrieve the top-most item from the stack and cast it to WebPageBase. 
+                // The TemplateStack stores instances of WebPageRenderingBase.
+                // Retrieve the top-most item from the stack and cast it to WebPageBase.
                 var httpContext = Web.HttpContext.Current;
                 if (httpContext != null)
                 {
@@ -72,7 +70,10 @@ namespace System.Web.WebPages
             {
                 if (_validation == null)
                 {
-                    Debug.Assert(HttpContext != null, "HttpContext must be initalized for Validation to work.");
+                    Debug.Assert(
+                        HttpContext != null,
+                        "HttpContext must be initalized for Validation to work."
+                    );
                     _validation = new ValidationHelper(HttpContext, ModelState);
                 }
                 return _validation;
@@ -138,7 +139,12 @@ namespace System.Web.WebPages
             }
         }
 
-        internal static WebPageContext CreateNestedPageContext<TModel>(WebPageContext parentContext, IDictionary<object, dynamic> pageData, TModel model, bool isLayoutPage)
+        internal static WebPageContext CreateNestedPageContext<TModel>(
+            WebPageContext parentContext,
+            IDictionary<object, dynamic> pageData,
+            TModel model,
+            bool isLayoutPage
+        )
         {
             var nestedContext = new WebPageContext
             {

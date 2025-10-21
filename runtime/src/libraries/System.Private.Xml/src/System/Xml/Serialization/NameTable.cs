@@ -22,20 +22,24 @@ namespace System.Xml.Serialization
 
         public override bool Equals([NotNullWhen(true)] object? other)
         {
-            if (!(other is NameKey)) return false;
+            if (!(other is NameKey))
+                return false;
             NameKey key = (NameKey)other;
             return _name == key._name && _ns == key._ns;
         }
 
         public override int GetHashCode()
         {
-            return (_ns == null ? "<null>".GetHashCode() : _ns.GetHashCode()) ^ (_name == null ? 0 : _name.GetHashCode());
+            return (_ns == null ? "<null>".GetHashCode() : _ns.GetHashCode())
+                ^ (_name == null ? 0 : _name.GetHashCode());
         }
     }
+
     internal interface INameScope
     {
         object? this[string? name, string? ns] { get; set; }
     }
+
     internal sealed class NameTable : INameScope
     {
         private readonly Dictionary<NameKey, object?> _table = new Dictionary<NameKey, object?>();
@@ -56,12 +60,11 @@ namespace System.Xml.Serialization
             get
             {
                 object? obj;
-                return _table.TryGetValue(new NameKey(qname.Name, qname.Namespace), out obj) ? obj : null;
+                return _table.TryGetValue(new NameKey(qname.Name, qname.Namespace), out obj)
+                    ? obj
+                    : null;
             }
-            set
-            {
-                _table[new NameKey(qname.Name, qname.Namespace)] = value;
-            }
+            set { _table[new NameKey(qname.Name, qname.Namespace)] = value; }
         }
         internal object? this[string? name, string? ns]
         {
@@ -70,10 +73,7 @@ namespace System.Xml.Serialization
                 object? obj;
                 return _table.TryGetValue(new NameKey(name, ns), out obj) ? obj : null;
             }
-            set
-            {
-                _table[new NameKey(name, ns)] = value;
-            }
+            set { _table[new NameKey(name, ns)] = value; }
         }
         object? INameScope.this[string? name, string? ns]
         {
@@ -83,10 +83,7 @@ namespace System.Xml.Serialization
                 _table.TryGetValue(new NameKey(name, ns), out obj);
                 return obj;
             }
-            set
-            {
-                _table[new NameKey(name, ns)] = value;
-            }
+            set { _table[new NameKey(name, ns)] = value; }
         }
 
         internal ICollection Values

@@ -1,9 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <CompileUsingReferenceAssemblies>false</CompileUsingReferenceAssemblies>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="$(CoreLibProject)" />
     <ProjectReference Include="$(LibrariesProjectRoot)Microsoft.Win32.Registry\src\Microsoft.Win32.Registry.csproj" />
@@ -30,8 +28,13 @@
     <ProjectReference Include="$(LibrariesProjectRoot)System.Security.Principal.Windows\src\System.Security.Principal.Windows.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Threading.Tasks.Parallel\src\System.Threading.Tasks.Parallel.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.Threading\src\System.Threading.csproj" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj" PrivateAssets="all" />
-    <ProjectReference Include="$(LibrariesProjectRoot)shims\stubs\System.Threading.AccessControl.csproj" PrivateAssets="all" />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Security.Permissions.csproj"
+      PrivateAssets="all"
+    />
+    <ProjectReference
+      Include="$(LibrariesProjectRoot)shims\stubs\System.Threading.AccessControl.csproj"
+      PrivateAssets="all"
+    />
   </ItemGroup>
-
 </Project>

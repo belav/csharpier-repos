@@ -8,25 +8,21 @@ namespace System.ServiceModel.Persistence
     using System.Security.Permissions;
 
     [Serializable]
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
     public class InstanceLockException : PersistenceException
     {
         Guid id;
 
         public InstanceLockException()
-            : this(SR2.GetString(SR2.CannotAcquireLockDefault), null)
-        {
-        }
+            : this(SR2.GetString(SR2.CannotAcquireLockDefault), null) { }
 
         public InstanceLockException(string message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         public InstanceLockException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstanceLockException(Guid id)
             : this(SR2.GetString(SR2.CannotAcquireLockSpecific, id))
@@ -55,7 +51,7 @@ namespace System.ServiceModel.Persistence
         protected InstanceLockException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
-            this.id = (Guid) info.GetValue("id", typeof(Guid));
+            this.id = (Guid)info.GetValue("id", typeof(Guid));
         }
 
         public Guid InstanceId

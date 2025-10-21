@@ -18,18 +18,14 @@ namespace Microsoft.CodeAnalysis.Shared
         /// empty.
         /// </summary>
         public NormalizedTextSpanCollection()
-            : base(new List<TextSpan>(0))
-        {
-        }
+            : base(new List<TextSpan>(0)) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified span.
         /// </summary>
         /// <param name="span">TextSpan contained by the span set.</param>
         public NormalizedTextSpanCollection(TextSpan span)
-            : base(ListFromSpan(span))
-        {
-        }
+            : base(ListFromSpan(span)) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified list of spans.
@@ -59,7 +55,10 @@ namespace Microsoft.CodeAnalysis.Shared
         /// </returns>
         /// <remarks>This operator runs in O(N+M) time where N = left.Count, M = right.Count.</remarks>
         /// <exception cref="ArgumentNullException">Either <paramref name="left"/> or <paramref name="right"/> is null.</exception>
-        public static NormalizedTextSpanCollection Union(NormalizedTextSpanCollection left, NormalizedTextSpanCollection right)
+        public static NormalizedTextSpanCollection Union(
+            NormalizedTextSpanCollection left,
+            NormalizedTextSpanCollection right
+        )
         {
             if (left == null)
             {
@@ -107,13 +106,23 @@ namespace Microsoft.CodeAnalysis.Shared
 
             while (index1 < left.Count)
             {
-                NormalizedTextSpanCollection.UpdateSpanUnion(left[index1], spans, ref start, ref end);
+                NormalizedTextSpanCollection.UpdateSpanUnion(
+                    left[index1],
+                    spans,
+                    ref start,
+                    ref end
+                );
                 ++index1;
             }
 
             while (index2 < right.Count)
             {
-                NormalizedTextSpanCollection.UpdateSpanUnion(right[index2], spans, ref start, ref end);
+                NormalizedTextSpanCollection.UpdateSpanUnion(
+                    right[index2],
+                    spans,
+                    ref start,
+                    ref end
+                );
                 ++index2;
             }
 
@@ -133,7 +142,10 @@ namespace Microsoft.CodeAnalysis.Shared
         /// <returns>The new span set that corresponds to the overlap of <paramref name="left"/> and <paramref name="right"/>.</returns>
         /// <remarks>This operator runs in O(N+M) time where N = left.Count, M = right.Count.</remarks>
         /// <exception cref="ArgumentNullException"><paramref name="left"/> or <paramref name="right"/> is null.</exception>
-        public static NormalizedTextSpanCollection Overlap(NormalizedTextSpanCollection left, NormalizedTextSpanCollection right)
+        public static NormalizedTextSpanCollection Overlap(
+            NormalizedTextSpanCollection left,
+            NormalizedTextSpanCollection right
+        )
         {
             if (left == null)
             {
@@ -156,7 +168,7 @@ namespace Microsoft.CodeAnalysis.Shared
             }
 
             var spans = new OrderedSpanList();
-            for (int index1 = 0, index2 = 0; index1 < left.Count && index2 < right.Count;)
+            for (int index1 = 0, index2 = 0; index1 < left.Count && index2 < right.Count; )
             {
                 var span1 = left[index1];
                 var span2 = right[index2];
@@ -193,7 +205,10 @@ namespace Microsoft.CodeAnalysis.Shared
         /// <remarks>This operator runs in O(N+M) time where N = left.Count, M = right.Count.</remarks>
         /// <exception cref="ArgumentNullException"><paramref name="left"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="right"/> is null.</exception>
-        public static NormalizedTextSpanCollection Intersection(NormalizedTextSpanCollection left, NormalizedTextSpanCollection right)
+        public static NormalizedTextSpanCollection Intersection(
+            NormalizedTextSpanCollection left,
+            NormalizedTextSpanCollection right
+        )
         {
             if (left == null)
             {
@@ -216,7 +231,7 @@ namespace Microsoft.CodeAnalysis.Shared
             }
 
             var spans = new OrderedSpanList();
-            for (int index1 = 0, index2 = 0; (index1 < left.Count) && (index2 < right.Count);)
+            for (int index1 = 0, index2 = 0; (index1 < left.Count) && (index2 < right.Count); )
             {
                 var span1 = left[index1];
                 var span2 = right[index2];
@@ -251,7 +266,10 @@ namespace Microsoft.CodeAnalysis.Shared
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="left"/> is null.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="right"/> is null.</exception>
-        public static NormalizedTextSpanCollection Difference(NormalizedTextSpanCollection left, NormalizedTextSpanCollection right)
+        public static NormalizedTextSpanCollection Difference(
+            NormalizedTextSpanCollection left,
+            NormalizedTextSpanCollection right
+        )
         {
             if (left == null)
             {
@@ -325,8 +343,7 @@ namespace Microsoft.CodeAnalysis.Shared
                         ++index2;
                     }
                 }
-            }
-            while ((index1 < left.Count) && (index2 < right.Count));
+            } while ((index1 < left.Count) && (index2 < right.Count));
 
             while (index1 < left.Count)
             {
@@ -338,12 +355,15 @@ namespace Microsoft.CodeAnalysis.Shared
         }
 
         /// <summary>
-        /// Determines whether two span sets are the same. 
+        /// Determines whether two span sets are the same.
         /// </summary>
         /// <param name="left">The first set.</param>
         /// <param name="right">The second set.</param>
         /// <returns><c>true</c> if the two sets are equivalent, otherwise <c>false</c>.</returns>
-        public static bool operator ==(NormalizedTextSpanCollection? left, NormalizedTextSpanCollection? right)
+        public static bool operator ==(
+            NormalizedTextSpanCollection? left,
+            NormalizedTextSpanCollection? right
+        )
         {
             if (object.ReferenceEquals(left, right))
             {
@@ -377,8 +397,10 @@ namespace Microsoft.CodeAnalysis.Shared
         /// <param name="left">The first set.</param>
         /// <param name="right">The second set.</param>
         /// <returns><c>true</c> if the two sets are not equivalent, otherwise <c>false</c>.</returns>
-        public static bool operator !=(NormalizedTextSpanCollection? left, NormalizedTextSpanCollection? right)
-            => !(left == right);
+        public static bool operator !=(
+            NormalizedTextSpanCollection? left,
+            NormalizedTextSpanCollection? right
+        ) => !(left == right);
 
         /// <summary>
         /// Determines whether this span set overlaps with another span set.
@@ -393,7 +415,7 @@ namespace Microsoft.CodeAnalysis.Shared
                 throw new ArgumentNullException(nameof(set));
             }
 
-            for (int index1 = 0, index2 = 0; (index1 < this.Count) && (index2 < set.Count);)
+            for (int index1 = 0, index2 = 0; (index1 < this.Count) && (index2 < set.Count); )
             {
                 var span1 = this[index1];
                 var span2 = set[index2];
@@ -453,7 +475,7 @@ namespace Microsoft.CodeAnalysis.Shared
                 throw new ArgumentNullException(nameof(set));
             }
 
-            for (int index1 = 0, index2 = 0; (index1 < this.Count) && (index2 < set.Count);)
+            for (int index1 = 0, index2 = 0; (index1 < this.Count) && (index2 < set.Count); )
             {
                 var span1 = this[index1];
                 var span2 = set[index2];
@@ -555,11 +577,14 @@ namespace Microsoft.CodeAnalysis.Shared
         /// </summary>
         /// <param name="normalizedSpans">An already normalized span list.</param>
         private NormalizedTextSpanCollection(OrderedSpanList normalizedSpans)
-            : base(normalizedSpans)
-        {
-        }
+            : base(normalizedSpans) { }
 
-        private static void UpdateSpanUnion(TextSpan span, IList<TextSpan> spans, ref int start, ref int end)
+        private static void UpdateSpanUnion(
+            TextSpan span,
+            IList<TextSpan> spans,
+            ref int start,
+            ref int end
+        )
         {
             if (end < span.Start)
             {
@@ -594,7 +619,12 @@ namespace Microsoft.CodeAnalysis.Shared
             }
             else
             {
-                sorted.Sort(delegate (TextSpan s1, TextSpan s2) { return s1.Start.CompareTo(s2.Start); });
+                sorted.Sort(
+                    delegate(TextSpan s1, TextSpan s2)
+                    {
+                        return s1.Start.CompareTo(s2.Start);
+                    }
+                );
 
                 IList<TextSpan> normalized = new List<TextSpan>(sorted.Count);
 
@@ -621,9 +651,7 @@ namespace Microsoft.CodeAnalysis.Shared
             }
         }
 
-        private class OrderedSpanList : List<TextSpan>
-        {
-        }
+        private class OrderedSpanList : List<TextSpan> { }
 
         #endregion // Private Helpers
     }

@@ -17,15 +17,23 @@ namespace System.Threading
             private const int GateThreadRunningMask = 0x4;
             private const int MaxRuns = 2;
 
-            private static readonly AutoResetEvent RunGateThreadEvent = new AutoResetEvent(initialState: true);
-            private static readonly AutoResetEvent DelayEvent = new AutoResetEvent(initialState: false);
+            private static readonly AutoResetEvent RunGateThreadEvent = new AutoResetEvent(
+                initialState: true
+            );
+            private static readonly AutoResetEvent DelayEvent = new AutoResetEvent(
+                initialState: false
+            );
 
             private static void GateThreadStart()
             {
-                bool disableStarvationDetection =
-                    AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.DisableStarvationDetection", false);
-                bool debuggerBreakOnWorkStarvation =
-                    AppContextConfigHelper.GetBooleanConfig("System.Threading.ThreadPool.DebugBreakOnWorkerStarvation", false);
+                bool disableStarvationDetection = AppContextConfigHelper.GetBooleanConfig(
+                    "System.Threading.ThreadPool.DisableStarvationDetection",
+                    false
+                );
+                bool debuggerBreakOnWorkStarvation = AppContextConfigHelper.GetBooleanConfig(
+                    "System.Threading.ThreadPool.DebugBreakOnWorkerStarvation",
+                    false
+                );
 
                 // The first reading is over a time range other than what we are focusing on, so we do not use the read other
                 // than to send it to any runtime-specific implementation that may also use the CPU utilization.
@@ -36,7 +44,9 @@ namespace System.Threading
                 LowLevelLock threadAdjustmentLock = threadPoolInstance._threadAdjustmentLock;
                 DelayHelper delayHelper = default;
 
-                if (BlockingConfig.IsCooperativeBlockingEnabled && !BlockingConfig.IgnoreMemoryUsage)
+                if (
+                    BlockingConfig.IsCooperativeBlockingEnabled && !BlockingConfig.IgnoreMemoryUsage
+                )
                 {
                     // Initialize memory usage and limits, and register to update them on gen 2 GCs
                     threadPoolInstance.OnGen2GCCallback();
@@ -51,13 +61,16 @@ namespace System.Threading
 
                     while (true)
                     {
-                        bool wasSignaledToWake = DelayEvent.WaitOne((int)delayHelper.GetNextDelay(currentTimeMs));
+                        bool wasSignaledToWake = DelayEvent.WaitOne(
+                            (int)delayHelper.GetNextDelay(currentTimeMs)
+                        );
                         currentTimeMs = Environment.TickCount;
 
                         // Thread count adjustment for cooperative blocking
                         do
                         {
-                            PendingBlockingAdjustment pendingBlockingAdjustment = threadPoolInstance._pendingBlockingAdjustment;
+                            PendingBlockingAdjustment pendingBlockingAdjustment =
+                                threadPoolInstance._pendingBlockingAdjustment;
                             if (pendingBlockingAdjustment == PendingBlockingAdjustment.None)
                             {
                                 delayHelper.ClearBlockingAdjustmentDelay();
@@ -68,22 +81,33 @@ namespace System.Threading
                             if (delayHelper.HasBlockingAdjustmentDelay)
                             {
                                 previousDelayElapsed =
-                                    delayHelper.HasBlockingAdjustmentDelayElapsed(currentTimeMs, wasSignaledToWake);
-                                if (pendingBlockingAdjustment == PendingBlockingAdjustment.WithDelayIfNecessary &&
-                                    !previousDelayElapsed)
+                                    delayHelper.HasBlockingAdjustmentDelayElapsed(
+                                        currentTimeMs,
+                                        wasSignaledToWake
+                                    );
+                                if (
+                                    pendingBlockingAdjustment
+                                        == PendingBlockingAdjustment.WithDelayIfNecessary
+                                    && !previousDelayElapsed
+                                )
                                 {
                                     break;
                                 }
                             }
 
-                            uint nextDelayMs = threadPoolInstance.PerformBlockingAdjustment(previousDelayElapsed);
+                            uint nextDelayMs = threadPoolInstance.PerformBlockingAdjustment(
+                                previousDelayElapsed
+                            );
                             if (nextDelayMs <= 0)
                             {
                                 delayHelper.ClearBlockingAdjustmentDelay();
                             }
                             else
                             {
-                                delayHelper.SetBlockingAdjustmentTimeAndDelay(currentTimeMs, nextDelayMs);
+                                delayHelper.SetBlockingAdjustmentTimeAndDelay(
+                                    currentTimeMs,
+                                    nextDelayMs
+                                );
                             }
                         } while (false);
 
@@ -91,24 +115,37 @@ namespace System.Threading
                         // Periodic gate activities
                         //
 
-                        if (!delayHelper.ShouldPerformGateActivities(currentTimeMs, wasSignaledToWake))
+                        if (
+                            !delayHelper.ShouldPerformGateActivities(
+                                currentTimeMs,
+                                wasSignaledToWake
+                            )
+                        )
                         {
                             continue;
                         }
 
-                        if (ThreadPool.EnableWorkerTracking && NativeRuntimeEventSource.Log.IsEnabled())
+                        if (
+                            ThreadPool.EnableWorkerTracking
+                            && NativeRuntimeEventSource.Log.IsEnabled()
+                        )
                         {
                             NativeRuntimeEventSource.Log.ThreadPoolWorkingThreadCount(
-                                (uint)threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks());
+                                (uint)
+                                    threadPoolInstance.GetAndResetHighWatermarkCountOfThreadsProcessingUserCallbacks()
+                            );
                         }
 
                         int cpuUtilization = (int)cpuUtilizationReader.CurrentUtilization;
                         threadPoolInstance._cpuUtilization = cpuUtilization;
 
-                        if (!disableStarvationDetection &&
-                            threadPoolInstance._pendingBlockingAdjustment == PendingBlockingAdjustment.None &&
-                            threadPoolInstance._separated.numRequestedWorkers > 0 &&
-                            SufficientDelaySinceLastDequeue(threadPoolInstance))
+                        if (
+                            !disableStarvationDetection
+                            && threadPoolInstance._pendingBlockingAdjustment
+                                == PendingBlockingAdjustment.None
+                            && threadPoolInstance._separated.numRequestedWorkers > 0
+                            && SufficientDelaySinceLastDequeue(threadPoolInstance)
+                        )
                         {
                             bool addWorker = false;
                             threadAdjustmentLock.Acquire();
@@ -125,8 +162,9 @@ namespace System.Threading
                                 // solutions, for now this is only to maintain consistency in behavior.
                                 ThreadCounts counts = threadPoolInstance._separated.counts;
                                 while (
-                                    counts.NumProcessingWork < threadPoolInstance._maxThreads &&
-                                    counts.NumProcessingWork >= counts.NumThreadsGoal)
+                                    counts.NumProcessingWork < threadPoolInstance._maxThreads
+                                    && counts.NumProcessingWork >= counts.NumThreadsGoal
+                                )
                                 {
                                     if (debuggerBreakOnWorkStarvation)
                                     {
@@ -138,12 +176,16 @@ namespace System.Threading
                                     newCounts.NumThreadsGoal = newNumThreadsGoal;
 
                                     ThreadCounts countsBeforeUpdate =
-                                        threadPoolInstance._separated.counts.InterlockedCompareExchange(newCounts, counts);
+                                        threadPoolInstance._separated.counts.InterlockedCompareExchange(
+                                            newCounts,
+                                            counts
+                                        );
                                     if (countsBeforeUpdate == counts)
                                     {
                                         HillClimbing.ThreadPoolHillClimber.ForceChange(
                                             newNumThreadsGoal,
-                                            HillClimbing.StateOrTransition.Starvation);
+                                            HillClimbing.StateOrTransition.Starvation
+                                        );
                                         addWorker = true;
                                         break;
                                     }
@@ -162,9 +204,14 @@ namespace System.Threading
                             }
                         }
 
-                        if (threadPoolInstance._separated.numRequestedWorkers <= 0 &&
-                            threadPoolInstance._pendingBlockingAdjustment == PendingBlockingAdjustment.None &&
-                            Interlocked.Decrement(ref threadPoolInstance._separated.gateThreadRunningState) <= GetRunningStateForNumRuns(0))
+                        if (
+                            threadPoolInstance._separated.numRequestedWorkers <= 0
+                            && threadPoolInstance._pendingBlockingAdjustment
+                                == PendingBlockingAdjustment.None
+                            && Interlocked.Decrement(
+                                ref threadPoolInstance._separated.gateThreadRunningState
+                            ) <= GetRunningStateForNumRuns(0)
+                        )
                         {
                             break;
                         }
@@ -181,9 +228,13 @@ namespace System.Threading
             // called by logic to spawn new worker threads, return true if it's been too long
             // since the last dequeue operation - takes number of worker threads into account
             // in deciding "too long"
-            private static bool SufficientDelaySinceLastDequeue(PortableThreadPool threadPoolInstance)
+            private static bool SufficientDelaySinceLastDequeue(
+                PortableThreadPool threadPoolInstance
+            )
             {
-                uint delay = (uint)(Environment.TickCount - threadPoolInstance._separated.lastDequeueTime);
+                uint delay = (uint)(
+                    Environment.TickCount - threadPoolInstance._separated.lastDequeueTime
+                );
                 uint minimumDelay;
                 if (threadPoolInstance._cpuUtilization < CpuUtilizationLow)
                 {
@@ -191,7 +242,9 @@ namespace System.Threading
                 }
                 else
                 {
-                    minimumDelay = (uint)threadPoolInstance._separated.counts.NumThreadsGoal * DequeueDelayThresholdMs;
+                    minimumDelay =
+                        (uint)threadPoolInstance._separated.counts.NumThreadsGoal
+                        * DequeueDelayThresholdMs;
                 }
 
                 return delay > minimumDelay;
@@ -202,7 +255,10 @@ namespace System.Threading
             {
                 // The callers ensure that this speculative load is sufficient to ensure that the gate thread is activated when
                 // it is needed
-                if (threadPoolInstance._separated.gateThreadRunningState != GetRunningStateForNumRuns(MaxRuns))
+                if (
+                    threadPoolInstance._separated.gateThreadRunningState
+                    != GetRunningStateForNumRuns(MaxRuns)
+                )
                 {
                     EnsureRunningSlow(threadPoolInstance);
                 }
@@ -211,7 +267,10 @@ namespace System.Threading
             [MethodImpl(MethodImplOptions.NoInlining)]
             internal static void EnsureRunningSlow(PortableThreadPool threadPoolInstance)
             {
-                int numRunsMask = Interlocked.Exchange(ref threadPoolInstance._separated.gateThreadRunningState, GetRunningStateForNumRuns(MaxRuns));
+                int numRunsMask = Interlocked.Exchange(
+                    ref threadPoolInstance._separated.gateThreadRunningState,
+                    GetRunningStateForNumRuns(MaxRuns)
+                );
                 if (numRunsMask == GetRunningStateForNumRuns(0))
                 {
                     RunGateThreadEvent.Set();
@@ -239,7 +298,7 @@ namespace System.Threading
                     {
                         IsThreadPoolThread = true,
                         IsBackground = true,
-                        Name = ".NET TP Gate"
+                        Name = ".NET TP Gate",
                     };
                     gateThread.UnsafeStart();
                 }
@@ -268,12 +327,16 @@ namespace System.Threading
                     _previousBlockingAdjustmentDelayMs = delayMs;
                 }
 
-                public void ClearBlockingAdjustmentDelay() => _previousBlockingAdjustmentDelayMs = 0;
+                public void ClearBlockingAdjustmentDelay() =>
+                    _previousBlockingAdjustmentDelayMs = 0;
+
                 public bool HasBlockingAdjustmentDelay => _previousBlockingAdjustmentDelayMs != 0;
 
                 public uint GetNextDelay(int currentTimeMs)
                 {
-                    uint elapsedMsSincePreviousGateActivities = (uint)(currentTimeMs - _previousGateActivitiesTimeMs);
+                    uint elapsedMsSincePreviousGateActivities = (uint)(
+                        currentTimeMs - _previousGateActivitiesTimeMs
+                    );
                     uint nextDelayForGateActivities =
                         elapsedMsSincePreviousGateActivities < GateActivitiesPeriodMs
                             ? GateActivitiesPeriodMs - elapsedMsSincePreviousGateActivities
@@ -285,13 +348,19 @@ namespace System.Threading
                         return nextDelayForGateActivities;
                     }
 
-                    uint elapsedMsSincePreviousBlockingAdjustmentDelay =
-                        (uint)(currentTimeMs - _previousBlockingAdjustmentDelayStartTimeMs);
+                    uint elapsedMsSincePreviousBlockingAdjustmentDelay = (uint)(
+                        currentTimeMs - _previousBlockingAdjustmentDelayStartTimeMs
+                    );
                     uint nextDelayForBlockingAdjustment =
-                        elapsedMsSincePreviousBlockingAdjustmentDelay < _previousBlockingAdjustmentDelayMs
-                            ? _previousBlockingAdjustmentDelayMs - elapsedMsSincePreviousBlockingAdjustmentDelay
+                        elapsedMsSincePreviousBlockingAdjustmentDelay
+                        < _previousBlockingAdjustmentDelayMs
+                            ? _previousBlockingAdjustmentDelayMs
+                                - elapsedMsSincePreviousBlockingAdjustmentDelay
                             : 1;
-                    uint nextDelay = Math.Min(nextDelayForGateActivities, nextDelayForBlockingAdjustment);
+                    uint nextDelay = Math.Min(
+                        nextDelayForGateActivities,
+                        nextDelayForBlockingAdjustment
+                    );
                     _runGateActivitiesAfterNextDelay = nextDelay == nextDelayForGateActivities;
                     _adjustForBlockingAfterNextDelay = nextDelay == nextDelayForBlockingAdjustment;
                     Debug.Assert(nextDelay <= GateActivitiesPeriodMs);
@@ -301,8 +370,9 @@ namespace System.Threading
                 public bool ShouldPerformGateActivities(int currentTimeMs, bool wasSignaledToWake)
                 {
                     bool result =
-                        (!wasSignaledToWake && _runGateActivitiesAfterNextDelay) ||
-                        (uint)(currentTimeMs - _previousGateActivitiesTimeMs) >= GateActivitiesPeriodMs;
+                        (!wasSignaledToWake && _runGateActivitiesAfterNextDelay)
+                        || (uint)(currentTimeMs - _previousGateActivitiesTimeMs)
+                            >= GateActivitiesPeriodMs;
                     if (result)
                     {
                         SetGateActivitiesTime(currentTimeMs);
@@ -310,7 +380,10 @@ namespace System.Threading
                     return result;
                 }
 
-                public bool HasBlockingAdjustmentDelayElapsed(int currentTimeMs, bool wasSignaledToWake)
+                public bool HasBlockingAdjustmentDelayElapsed(
+                    int currentTimeMs,
+                    bool wasSignaledToWake
+                )
                 {
                     Debug.Assert(HasBlockingAdjustmentDelay);
 
@@ -319,9 +392,11 @@ namespace System.Threading
                         return true;
                     }
 
-                    uint elapsedMsSincePreviousBlockingAdjustmentDelay =
-                        (uint)(currentTimeMs - _previousBlockingAdjustmentDelayStartTimeMs);
-                    return elapsedMsSincePreviousBlockingAdjustmentDelay >= _previousBlockingAdjustmentDelayMs;
+                    uint elapsedMsSincePreviousBlockingAdjustmentDelay = (uint)(
+                        currentTimeMs - _previousBlockingAdjustmentDelayStartTimeMs
+                    );
+                    return elapsedMsSincePreviousBlockingAdjustmentDelay
+                        >= _previousBlockingAdjustmentDelayMs;
                 }
             }
         }

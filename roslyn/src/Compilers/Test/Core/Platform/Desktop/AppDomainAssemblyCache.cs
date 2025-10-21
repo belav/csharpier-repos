@@ -18,16 +18,18 @@ using Roslyn.Test.Utilities;
 namespace Roslyn.Test.Utilities.Desktop
 {
     /// <summary>
-    /// This is a singleton per AppDomain which manages all of the assemblies which were ever loaded into it.  
+    /// This is a singleton per AppDomain which manages all of the assemblies which were ever loaded into it.
     /// </summary>
     internal sealed class AppDomainAssemblyCache
     {
         private static AppDomainAssemblyCache s_singleton;
         private static readonly object s_guard = new object();
 
-        // The key is the manifest module MVID, which is unique for each distinct assembly. 
-        private readonly Dictionary<Guid, Assembly> _assemblyCache = new Dictionary<Guid, Assembly>();
-        private readonly Dictionary<Guid, Assembly> _reflectionOnlyAssemblyCache = new Dictionary<Guid, Assembly>();
+        // The key is the manifest module MVID, which is unique for each distinct assembly.
+        private readonly Dictionary<Guid, Assembly> _assemblyCache =
+            new Dictionary<Guid, Assembly>();
+        private readonly Dictionary<Guid, Assembly> _reflectionOnlyAssemblyCache =
+            new Dictionary<Guid, Assembly>();
 
         internal static AppDomainAssemblyCache GetOrCreate()
         {
@@ -78,12 +80,18 @@ namespace Roslyn.Test.Utilities.Desktop
                     return assembly;
                 }
 
-                var loadedAssembly = DesktopRuntimeUtil.LoadAsAssembly(moduleData.SimpleName, moduleData.Image, reflectionOnly);
+                var loadedAssembly = DesktopRuntimeUtil.LoadAsAssembly(
+                    moduleData.SimpleName,
+                    moduleData.Image,
+                    reflectionOnly
+                );
 
-                // Validate the loaded assembly matches the value that we now have in the cache. 
+                // Validate the loaded assembly matches the value that we now have in the cache.
                 if (!cache.TryGetValue(moduleData.Mvid, out assembly))
                 {
-                    throw new Exception($"Explicit assembly load didn't update the proper cache: '{moduleData.SimpleName}' ({moduleData.Mvid})");
+                    throw new Exception(
+                        $"Explicit assembly load didn't update the proper cache: '{moduleData.SimpleName}' ({moduleData.Mvid})"
+                    );
                 }
 
                 if (loadedAssembly != assembly)
@@ -99,9 +107,9 @@ namespace Roslyn.Test.Utilities.Desktop
         {
             // We need to add loaded assemblies to the cache in order to avoid loading them twice.
             // This is not just optimization. CLR isn't able to load the same assembly from multiple "locations".
-            // Location for byte[] assemblies is the location of the assembly that invokes Assembly.Load. 
-            // PE verifier invokes load directly for the assembly being verified. If this assembly is also a dependency 
-            // of another assembly we verify our AssemblyResolve is invoked. If we didn't reuse the assembly already loaded 
+            // Location for byte[] assemblies is the location of the assembly that invokes Assembly.Load.
+            // PE verifier invokes load directly for the assembly being verified. If this assembly is also a dependency
+            // of another assembly we verify our AssemblyResolve is invoked. If we didn't reuse the assembly already loaded
             // by PE verifier we would get an error from Assembly.Load.
             var cache = assembly.ReflectionOnly ? _reflectionOnlyAssemblyCache : _assemblyCache;
 

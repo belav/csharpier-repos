@@ -16,8 +16,8 @@ namespace System.DirectoryServices.AccountManagement
         //
 
         // Enabled property
-        private bool _enabled;          // the actual property value
-        private LoadState _enabledChanged = LoadState.NotSet;   // change-tracking
+        private bool _enabled; // the actual property value
+        private LoadState _enabledChanged = LoadState.NotSet; // change-tracking
 
         public Nullable<bool> Enabled
         {
@@ -35,18 +35,22 @@ namespace System.DirectoryServices.AccountManagement
                 if (this.unpersisted && (_enabledChanged != LoadState.Changed))
                 {
                     GlobalDebug.WriteLineIf(
-                                    GlobalDebug.Info,
-                                    "AuthenticablePrincipal",
-                                    "Enabled: returning null, unpersisted={0}, enabledChanged={1}",
-                                    this.unpersisted,
-                                    _enabledChanged);
+                        GlobalDebug.Info,
+                        "AuthenticablePrincipal",
+                        "Enabled: returning null, unpersisted={0}, enabledChanged={1}",
+                        this.unpersisted,
+                        _enabledChanged
+                    );
 
                     return null;
                 }
 
-                return HandleGet<bool>(ref _enabled, PropertyNames.AuthenticablePrincipalEnabled, ref _enabledChanged);
+                return HandleGet<bool>(
+                    ref _enabled,
+                    PropertyNames.AuthenticablePrincipalEnabled,
+                    ref _enabledChanged
+                );
             }
-
             set
             {
                 // Make sure we're not disposed or deleted.  Although HandleGet/HandleSet will check this,
@@ -57,8 +61,12 @@ namespace System.DirectoryServices.AccountManagement
                 if (!value.HasValue)
                     throw new ArgumentNullException(nameof(value));
 
-                HandleSet<bool>(ref _enabled, value.Value, ref _enabledChanged,
-                                  PropertyNames.AuthenticablePrincipalEnabled);
+                HandleSet<bool>(
+                    ref _enabled,
+                    value.Value,
+                    ref _enabledChanged,
+                    PropertyNames.AuthenticablePrincipalEnabled
+                );
             }
         }
 
@@ -77,7 +85,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (_accountInfo == null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "AccountInfo: creating new AccountInfo");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthenticablePrincipal",
+                        "AccountInfo: creating new AccountInfo"
+                    );
                     _accountInfo = new AccountInfo(this);
                 }
 
@@ -172,7 +184,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (_passwordInfo == null)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "PasswordInfo: creating new PasswordInfo");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthenticablePrincipal",
+                        "PasswordInfo: creating new PasswordInfo"
+                    );
                     _passwordInfo = new PasswordInfo(this);
                 }
 
@@ -218,10 +234,7 @@ namespace System.DirectoryServices.AccountManagement
 
         public virtual AdvancedFilters AdvancedSearchFilter
         {
-            get
-            {
-                return rosf;
-            }
+            get { return rosf; }
         }
 
         public void SetPassword(string newPassword)
@@ -253,35 +266,58 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                return HandleGet<X509Certificate2Collection>(ref _certificates,
-                                    PropertyNames.AuthenticablePrincipalCertificates, ref _X509Certificate2CollectionLoaded);
+                return HandleGet<X509Certificate2Collection>(
+                    ref _certificates,
+                    PropertyNames.AuthenticablePrincipalCertificates,
+                    ref _X509Certificate2CollectionLoaded
+                );
             }
         }
 
         //
         // Public Methods
         //
-        public static PrincipalSearchResult<AuthenticablePrincipal> FindByLockoutTime(PrincipalContext context, DateTime time, MatchType type)
+        public static PrincipalSearchResult<AuthenticablePrincipal> FindByLockoutTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByLockoutTime<AuthenticablePrincipal>(context, time, type);
         }
 
-        public static PrincipalSearchResult<AuthenticablePrincipal> FindByLogonTime(PrincipalContext context, DateTime time, MatchType type)
+        public static PrincipalSearchResult<AuthenticablePrincipal> FindByLogonTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByLogonTime<AuthenticablePrincipal>(context, time, type);
         }
 
-        public static PrincipalSearchResult<AuthenticablePrincipal> FindByExpirationTime(PrincipalContext context, DateTime time, MatchType type)
+        public static PrincipalSearchResult<AuthenticablePrincipal> FindByExpirationTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByExpirationTime<AuthenticablePrincipal>(context, time, type);
         }
 
-        public static PrincipalSearchResult<AuthenticablePrincipal> FindByBadPasswordAttempt(PrincipalContext context, DateTime time, MatchType type)
+        public static PrincipalSearchResult<AuthenticablePrincipal> FindByBadPasswordAttempt(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByBadPasswordAttempt<AuthenticablePrincipal>(context, time, type);
         }
 
-        public static PrincipalSearchResult<AuthenticablePrincipal> FindByPasswordSetTime(PrincipalContext context, DateTime time, MatchType type)
+        public static PrincipalSearchResult<AuthenticablePrincipal> FindByPasswordSetTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByPasswordSetTime<AuthenticablePrincipal>(context, time, type);
         }
@@ -290,35 +326,69 @@ namespace System.DirectoryServices.AccountManagement
         // Protected implementations
         //
 
-        protected static PrincipalSearchResult<T> FindByLockoutTime<T>(PrincipalContext context, DateTime time, MatchType type)
+        protected static PrincipalSearchResult<T> FindByLockoutTime<T>(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             CheckFindByArgs(context, time, type, typeof(T));
 
-            return new PrincipalSearchResult<T>(context.QueryCtx.FindByLockoutTime(time, type, typeof(T)));
+            return new PrincipalSearchResult<T>(
+                context.QueryCtx.FindByLockoutTime(time, type, typeof(T))
+            );
         }
-        protected static PrincipalSearchResult<T> FindByLogonTime<T>(PrincipalContext context, DateTime time, MatchType type)
+
+        protected static PrincipalSearchResult<T> FindByLogonTime<T>(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             CheckFindByArgs(context, time, type, typeof(T));
 
-            return new PrincipalSearchResult<T>(context.QueryCtx.FindByLogonTime(time, type, typeof(T)));
+            return new PrincipalSearchResult<T>(
+                context.QueryCtx.FindByLogonTime(time, type, typeof(T))
+            );
         }
-        protected static PrincipalSearchResult<T> FindByExpirationTime<T>(PrincipalContext context, DateTime time, MatchType type)
+
+        protected static PrincipalSearchResult<T> FindByExpirationTime<T>(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             CheckFindByArgs(context, time, type, typeof(T));
 
-            return new PrincipalSearchResult<T>(context.QueryCtx.FindByExpirationTime(time, type, typeof(T)));
+            return new PrincipalSearchResult<T>(
+                context.QueryCtx.FindByExpirationTime(time, type, typeof(T))
+            );
         }
-        protected static PrincipalSearchResult<T> FindByBadPasswordAttempt<T>(PrincipalContext context, DateTime time, MatchType type)
+
+        protected static PrincipalSearchResult<T> FindByBadPasswordAttempt<T>(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             CheckFindByArgs(context, time, type, typeof(T));
 
-            return new PrincipalSearchResult<T>(context.QueryCtx.FindByBadPasswordAttempt(time, type, typeof(T)));
+            return new PrincipalSearchResult<T>(
+                context.QueryCtx.FindByBadPasswordAttempt(time, type, typeof(T))
+            );
         }
-        protected static PrincipalSearchResult<T> FindByPasswordSetTime<T>(PrincipalContext context, DateTime time, MatchType type)
+
+        protected static PrincipalSearchResult<T> FindByPasswordSetTime<T>(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             CheckFindByArgs(context, time, type, typeof(T));
 
-            return new PrincipalSearchResult<T>(context.QueryCtx.FindByPasswordSetTime(time, type, typeof(T)));
+            return new PrincipalSearchResult<T>(
+                context.QueryCtx.FindByPasswordSetTime(time, type, typeof(T))
+            );
         }
 
         //
@@ -334,7 +404,13 @@ namespace System.DirectoryServices.AccountManagement
             this.rosf = new AdvancedFilters(this);
         }
 
-        protected internal AuthenticablePrincipal(PrincipalContext context, string samAccountName, string password, bool enabled) : this(context)
+        protected internal AuthenticablePrincipal(
+            PrincipalContext context,
+            string samAccountName,
+            string password,
+            bool enabled
+        )
+            : this(context)
         {
             if (samAccountName != null)
             {
@@ -357,10 +433,17 @@ namespace System.DirectoryServices.AccountManagement
             return ap;
         }
 
-        private static void CheckFindByArgs(PrincipalContext context, DateTime time, MatchType type, Type subtype)
+        private static void CheckFindByArgs(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type,
+            Type subtype
+        )
         {
-            if ((subtype != typeof(AuthenticablePrincipal)) &&
-                 (!subtype.IsSubclassOf(typeof(AuthenticablePrincipal))))
+            if (
+                (subtype != typeof(AuthenticablePrincipal))
+                && (!subtype.IsSubclassOf(typeof(AuthenticablePrincipal)))
+            )
                 throw new ArgumentException(SR.AuthenticablePrincipalMustBeSubtypeOfAuthPrinc);
 
             if (context == null)
@@ -394,7 +477,12 @@ namespace System.DirectoryServices.AccountManagement
                     break;
 
                 default:
-                    if (propertyName.StartsWith(PropertyNames.AcctInfoPrefix, StringComparison.Ordinal))
+                    if (
+                        propertyName.StartsWith(
+                            PropertyNames.AcctInfoPrefix,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         // If this is the first AccountInfo attribute we're loading,
                         // we'll need to create the AccountInfo to hold it
@@ -402,7 +490,12 @@ namespace System.DirectoryServices.AccountManagement
 
                         _accountInfo.LoadValueIntoProperty(propertyName, value);
                     }
-                    else if (propertyName.StartsWith(PropertyNames.PwdInfoPrefix, StringComparison.Ordinal))
+                    else if (
+                        propertyName.StartsWith(
+                            PropertyNames.PwdInfoPrefix,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         // If this is the first PasswordInfo attribute we're loading,
                         // we'll need to create the PasswordInfo to hold it
@@ -425,7 +518,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
         internal override bool GetChangeStatusForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "GetChangeStatusForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AuthenticablePrincipal",
+                "GetChangeStatusForProperty: name=" + propertyName
+            );
 
             switch (propertyName)
             {
@@ -445,14 +542,24 @@ namespace System.DirectoryServices.AccountManagement
                     if (val.HasValue)
                         return val.Value;
 
-                    if (propertyName.StartsWith(PropertyNames.AcctInfoPrefix, StringComparison.Ordinal))
+                    if (
+                        propertyName.StartsWith(
+                            PropertyNames.AcctInfoPrefix,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         if (_accountInfo == null)
                             return false;
 
                         return _accountInfo.GetChangeStatusForProperty(propertyName);
                     }
-                    else if (propertyName.StartsWith(PropertyNames.PwdInfoPrefix, StringComparison.Ordinal))
+                    else if (
+                        propertyName.StartsWith(
+                            PropertyNames.PwdInfoPrefix,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         if (_passwordInfo == null)
                             return false;
@@ -469,7 +576,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns the current value for the property.
         internal override object GetValueForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "GetValueForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AuthenticablePrincipal",
+                "GetValueForProperty: name=" + propertyName
+            );
 
             switch (propertyName)
             {
@@ -486,23 +597,37 @@ namespace System.DirectoryServices.AccountManagement
                     if (null != val)
                         return val;
 
-                    if (propertyName.StartsWith(PropertyNames.AcctInfoPrefix, StringComparison.Ordinal))
+                    if (
+                        propertyName.StartsWith(
+                            PropertyNames.AcctInfoPrefix,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         if (_accountInfo == null)
                         {
                             // Should never happen, since GetChangeStatusForProperty returned false
-                            Debug.Fail("AuthenticablePrincipal.GetValueForProperty(AcctInfo): shouldn't be here");
+                            Debug.Fail(
+                                "AuthenticablePrincipal.GetValueForProperty(AcctInfo): shouldn't be here"
+                            );
                             throw new InvalidOperationException();
                         }
 
                         return _accountInfo.GetValueForProperty(propertyName);
                     }
-                    else if (propertyName.StartsWith(PropertyNames.PwdInfoPrefix, StringComparison.Ordinal))
+                    else if (
+                        propertyName.StartsWith(
+                            PropertyNames.PwdInfoPrefix,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         if (_passwordInfo == null)
                         {
                             // Should never happen, since GetChangeStatusForProperty returned false
-                            Debug.Fail("AuthenticablePrincipal.GetValueForProperty(PwdInfo): shouldn't be here");
+                            Debug.Fail(
+                                "AuthenticablePrincipal.GetValueForProperty(PwdInfo): shouldn't be here"
+                            );
                             throw new InvalidOperationException();
                         }
 
@@ -518,9 +643,14 @@ namespace System.DirectoryServices.AccountManagement
         // Reset all change-tracking status for all properties on the object to "unchanged".
         internal override void ResetAllChangeStatus()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "ResetAllChangeStatus");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AuthenticablePrincipal",
+                "ResetAllChangeStatus"
+            );
 
-            _enabledChanged = (_enabledChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
+            _enabledChanged =
+                (_enabledChanged == LoadState.Changed) ? LoadState.Loaded : LoadState.NotSet;
 
             RefreshOriginalThumbprintList();
 
@@ -545,7 +675,12 @@ namespace System.DirectoryServices.AccountManagement
             _certificates.Clear();
             Debug.Assert(_certificates.Count == 0);
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "LoadCertificateCollection: loading {0} certs", certificatesToLoad.Count);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AuthenticablePrincipal",
+                "LoadCertificateCollection: loading {0} certs",
+                certificatesToLoad.Count
+            );
 
             foreach (byte[] rawCert in certificatesToLoad)
             {
@@ -556,7 +691,11 @@ namespace System.DirectoryServices.AccountManagement
                 catch (System.Security.Cryptography.CryptographicException)
                 {
                     // skip the invalid certificate
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "AuthenticablePrincipal", "LoadCertificateCollection: skipped bad cert");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "AuthenticablePrincipal",
+                        "LoadCertificateCollection: skipped bad cert"
+                    );
                     continue;
                 }
             }
@@ -566,7 +705,11 @@ namespace System.DirectoryServices.AccountManagement
         // currently in the certificate collection
         private void RefreshOriginalThumbprintList()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "RefreshOriginalThumbprintList: resetting thumbprints");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "AuthenticablePrincipal",
+                "RefreshOriginalThumbprintList: resetting thumbprints"
+            );
 
             _certificateOriginalThumbprints.Clear();
 
@@ -585,16 +728,19 @@ namespace System.DirectoryServices.AccountManagement
             if (_certificates.Count != _certificateOriginalThumbprints.Count)
             {
                 GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "AuthenticablePrincipal",
-                            "HasCertificateCollectionChanged: original count {0}, current count{1}",
-                            _certificateOriginalThumbprints.Count,
-                            _certificates.Count);
+                    GlobalDebug.Info,
+                    "AuthenticablePrincipal",
+                    "HasCertificateCollectionChanged: original count {0}, current count{1}",
+                    _certificateOriginalThumbprints.Count,
+                    _certificates.Count
+                );
                 return true;
             }
 
             // Make a copy of the thumbprint list, so we can alter the copy without effecting the original.
-            List<string> remainingOriginalThumbprints = new List<string>(_certificateOriginalThumbprints);
+            List<string> remainingOriginalThumbprints = new List<string>(
+                _certificateOriginalThumbprints
+            );
 
             foreach (X509Certificate2 certificate in _certificates)
             {
@@ -604,7 +750,11 @@ namespace System.DirectoryServices.AccountManagement
                 // it was inserted --> collection has changed
                 if (!remainingOriginalThumbprints.Contains(thumbprint))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "AuthenticablePrincipal", "RefreshOriginalThumbprintList: found inserted cert");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "AuthenticablePrincipal",
+                        "RefreshOriginalThumbprintList: found inserted cert"
+                    );
                     return true;
                 }
 

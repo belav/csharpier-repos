@@ -8,12 +8,16 @@
     <IsPackable>false</IsPackable>
     <PackageDescription>An example implementation of the Common Language Server Protocol Framework.</PackageDescription>
   </PropertyGroup>
-
   <ItemGroup Label="Package References">
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(MicrosoftExtensionsDependencyInjectionVersion)" />
-    <PackageReference Include="Microsoft.VisualStudio.LanguageServer.Protocol" Version="$(MicrosoftVisualStudioLanguageServerProtocolVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.DependencyInjection"
+      Version="$(MicrosoftExtensionsDependencyInjectionVersion)"
+    />
+    <PackageReference
+      Include="Microsoft.VisualStudio.LanguageServer.Protocol"
+      Version="$(MicrosoftVisualStudioLanguageServerProtocolVersion)"
+    />
   </ItemGroup>
-  
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\Microsoft.CommonLanguageServerProtocol.Framework\Microsoft.CommonLanguageServerProtocol.Framework.csproj" />
   </ItemGroup>

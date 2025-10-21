@@ -48,11 +48,19 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(rgbHash);
 
             if (_algName == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingAlgorithm);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingAlgorithm
+                );
             if (_rsaKey == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingKey);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingKey
+                );
 
-            return _rsaKey.SignHash(rgbHash, new HashAlgorithmName(_algName), RSASignaturePadding.Pkcs1);
+            return _rsaKey.SignHash(
+                rgbHash,
+                new HashAlgorithmName(_algName),
+                RSASignaturePadding.Pkcs1
+            );
         }
     }
 }

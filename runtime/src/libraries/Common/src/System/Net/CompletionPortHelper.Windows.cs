@@ -9,9 +9,11 @@ namespace System.Net.Sockets
     {
         internal static bool SkipCompletionPortOnSuccess(SafeHandle handle)
         {
-            return Interop.Kernel32.SetFileCompletionNotificationModes(handle,
-                Interop.Kernel32.FileCompletionNotificationModes.SkipCompletionPortOnSuccess |
-                Interop.Kernel32.FileCompletionNotificationModes.SkipSetEventOnHandle);
+            return Interop.Kernel32.SetFileCompletionNotificationModes(
+                handle,
+                Interop.Kernel32.FileCompletionNotificationModes.SkipCompletionPortOnSuccess
+                    | Interop.Kernel32.FileCompletionNotificationModes.SkipSetEventOnHandle
+            );
         }
 
         // There's a bug with using SetFileCompletionNotificationModes with UDP on Windows 7 and before.
@@ -23,8 +25,7 @@ namespace System.Net.Sockets
             Version osVersion = Environment.OSVersion.Version;
 
             // 6.1 == Windows 7
-            return (osVersion.Major < 6 ||
-                    (osVersion.Major == 6 && osVersion.Minor <= 1));
+            return (osVersion.Major < 6 || (osVersion.Major == 6 && osVersion.Minor <= 1));
         }
     }
 }

@@ -1,5 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -7,13 +6,10 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <DefineConstants>$(DefineConstants);IS_BENCHMARKS</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.OutputCaching" />
     <Reference Include="BenchmarkDotNet" />
     <Reference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
-
     <Compile Include="$(SharedSourceRoot)BenchmarkRunner\*.cs" />
   </ItemGroup>
-
 </Project>

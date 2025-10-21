@@ -8,17 +8,17 @@ namespace System.IO
     public static partial class File
     {
 #pragma warning disable IDE0060
-        private static UnixFileMode GetUnixFileModeCore(string path)
-            => throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
+        private static UnixFileMode GetUnixFileModeCore(string path) =>
+            throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
 
-        private static UnixFileMode GetUnixFileModeCore(SafeFileHandle fileHandle)
-            => throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
+        private static UnixFileMode GetUnixFileModeCore(SafeFileHandle fileHandle) =>
+            throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
 
-        private static void SetUnixFileModeCore(string path, UnixFileMode mode)
-            => throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
+        private static void SetUnixFileModeCore(string path, UnixFileMode mode) =>
+            throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
 
-        private static void SetUnixFileModeCore(SafeFileHandle fileHandle, UnixFileMode mode)
-            => throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
+        private static void SetUnixFileModeCore(SafeFileHandle fileHandle, UnixFileMode mode) =>
+            throw new PlatformNotSupportedException(SR.PlatformNotSupported_UnixFileMode);
 #pragma warning restore IDE0060
     }
 }

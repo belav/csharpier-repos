@@ -29,12 +29,15 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting;
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal partial class NavigateToHighlightReferenceCommandHandler(
     IOutliningManagerService outliningManagerService,
-    IViewTagAggregatorFactoryService tagAggregatorFactory) :
-    ICommandHandler<NavigateToNextHighlightedReferenceCommandArgs>,
-    ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
+    IViewTagAggregatorFactoryService tagAggregatorFactory
+)
+    : ICommandHandler<NavigateToNextHighlightedReferenceCommandArgs>,
+        ICommandHandler<NavigateToPreviousHighlightedReferenceCommandArgs>
 {
-    private readonly IOutliningManagerService _outliningManagerService = outliningManagerService ?? throw new ArgumentNullException(nameof(outliningManagerService));
-    private readonly IViewTagAggregatorFactoryService _tagAggregatorFactory = tagAggregatorFactory ?? throw new ArgumentNullException(nameof(tagAggregatorFactory));
+    private readonly IOutliningManagerService _outliningManagerService =
+        outliningManagerService ?? throw new ArgumentNullException(nameof(outliningManagerService));
+    private readonly IViewTagAggregatorFactoryService _tagAggregatorFactory =
+        tagAggregatorFactory ?? throw new ArgumentNullException(nameof(tagAggregatorFactory));
 
     public string DisplayName => EditorFeaturesResources.Navigate_To_Highlight_Reference;
 
@@ -45,21 +48,27 @@ internal partial class NavigateToHighlightReferenceCommandHandler(
     //
     // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1875365
 
-    public CommandState GetCommandState(NavigateToNextHighlightedReferenceCommandArgs args)
-        => CommandState.Available;
+    public CommandState GetCommandState(NavigateToNextHighlightedReferenceCommandArgs args) =>
+        CommandState.Available;
 
-    public CommandState GetCommandState(NavigateToPreviousHighlightedReferenceCommandArgs args)
-        => CommandState.Available;
+    public CommandState GetCommandState(NavigateToPreviousHighlightedReferenceCommandArgs args) =>
+        CommandState.Available;
 
-    public bool ExecuteCommand(NavigateToNextHighlightedReferenceCommandArgs args, CommandExecutionContext context)
-        => ExecuteCommandImpl(args, navigateToNext: true);
+    public bool ExecuteCommand(
+        NavigateToNextHighlightedReferenceCommandArgs args,
+        CommandExecutionContext context
+    ) => ExecuteCommandImpl(args, navigateToNext: true);
 
-    public bool ExecuteCommand(NavigateToPreviousHighlightedReferenceCommandArgs args, CommandExecutionContext context)
-        => ExecuteCommandImpl(args, navigateToNext: false);
+    public bool ExecuteCommand(
+        NavigateToPreviousHighlightedReferenceCommandArgs args,
+        CommandExecutionContext context
+    ) => ExecuteCommandImpl(args, navigateToNext: false);
 
     private bool ExecuteCommandImpl(EditorCommandArgs args, bool navigateToNext)
     {
-        using var tagAggregator = _tagAggregatorFactory.CreateTagAggregator<NavigableHighlightTag>(args.TextView);
+        using var tagAggregator = _tagAggregatorFactory.CreateTagAggregator<NavigableHighlightTag>(
+            args.TextView
+        );
         var tagUnderCursor = FindTagUnderCaret(tagAggregator, args.TextView);
 
         if (tagUnderCursor == null)
@@ -67,7 +76,10 @@ internal partial class NavigateToHighlightReferenceCommandHandler(
 
         var spans = GetTags(tagAggregator, args.TextView.TextSnapshot.GetFullSpan());
 
-        Contract.ThrowIfFalse(spans.Any(), "We should have at least found the tag under the cursor!");
+        Contract.ThrowIfFalse(
+            spans.Any(),
+            "We should have at least found the tag under the cursor!"
+        );
 
         var destTag = GetDestinationTag(tagUnderCursor.Value, spans, navigateToNext);
 
@@ -79,7 +91,8 @@ internal partial class NavigateToHighlightReferenceCommandHandler(
 
     private static ImmutableArray<SnapshotSpan> GetTags(
         ITagAggregator<NavigableHighlightTag> tagAggregator,
-        SnapshotSpan span)
+        SnapshotSpan span
+    )
     {
         using var _ = PooledObjects.ArrayBuilder<SnapshotSpan>.GetInstance(out var tags);
 
@@ -93,7 +106,8 @@ internal partial class NavigateToHighlightReferenceCommandHandler(
     private static SnapshotSpan GetDestinationTag(
         SnapshotSpan tagUnderCursor,
         ImmutableArray<SnapshotSpan> orderedTagSpans,
-        bool navigateToNext)
+        bool navigateToNext
+    )
     {
         var destIndex = orderedTagSpans.BinarySearch(tagUnderCursor, StartComparer.Instance);
 
@@ -110,12 +124,16 @@ internal partial class NavigateToHighlightReferenceCommandHandler(
 
     private static SnapshotSpan? FindTagUnderCaret(
         ITagAggregator<NavigableHighlightTag> tagAggregator,
-        ITextView textView)
+        ITextView textView
+    )
     {
         // We always want to be working with the surface buffer here, so this line is correct
         var caretPosition = textView.Caret.Position.BufferPosition.Position;
 
-        var tags = GetTags(tagAggregator, new SnapshotSpan(textView.TextSnapshot, new Span(caretPosition, 0)));
+        var tags = GetTags(
+            tagAggregator,
+            new SnapshotSpan(textView.TextSnapshot, new Span(caretPosition, 0))
+        );
         return tags.FirstOrNull();
     }
 }

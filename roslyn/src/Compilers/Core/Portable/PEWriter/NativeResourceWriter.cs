@@ -131,14 +131,26 @@ namespace Microsoft.Cci
 
         private static int CompareResources(IWin32Resource left, IWin32Resource right)
         {
-            int result = CompareResourceIdentifiers(left.TypeId, left.TypeName, right.TypeId, right.TypeName);
+            int result = CompareResourceIdentifiers(
+                left.TypeId,
+                left.TypeName,
+                right.TypeId,
+                right.TypeName
+            );
 
-            return (result == 0) ? CompareResourceIdentifiers(left.Id, left.Name, right.Id, right.Name) : result;
+            return (result == 0)
+                ? CompareResourceIdentifiers(left.Id, left.Name, right.Id, right.Name)
+                : result;
         }
 
         //when comparing a string vs ordinal, the string should always be less than the ordinal. Per the spec,
         //entries identified by string must precede those identified by ordinal.
-        private static int CompareResourceIdentifiers(int xOrdinal, string xString, int yOrdinal, string yString)
+        private static int CompareResourceIdentifiers(
+            int xOrdinal,
+            string xString,
+            int yOrdinal,
+            string yString
+        )
         {
             if (xString == null)
             {
@@ -163,12 +175,18 @@ namespace Microsoft.Cci
 
         //sort the resources by ID least to greatest then by NAME.
         //Where strings and ordinals are compared, strings are less than ordinals.
-        internal static IEnumerable<IWin32Resource> SortResources(IEnumerable<IWin32Resource> resources)
+        internal static IEnumerable<IWin32Resource> SortResources(
+            IEnumerable<IWin32Resource> resources
+        )
         {
             return resources.OrderBy(CompareResources);
         }
 
-        public static void SerializeWin32Resources(BlobBuilder builder, IEnumerable<IWin32Resource> theResources, int resourcesRva)
+        public static void SerializeWin32Resources(
+            BlobBuilder builder,
+            IEnumerable<IWin32Resource> theResources,
+            int resourcesRva
+        )
         {
             theResources = SortResources(theResources);
 
@@ -181,18 +199,22 @@ namespace Microsoft.Cci
             string lastName = null;
             uint sizeOfDirectoryTree = 16;
 
-            //EDMAURER note that this list is assumed to be sorted lowest to highest 
+            //EDMAURER note that this list is assumed to be sorted lowest to highest
             //first by typeId, then by Id.
             foreach (IWin32Resource r in theResources)
             {
-                bool typeDifferent = (r.TypeId < 0 && r.TypeName != lastTypeName) || r.TypeId > lastTypeID;
+                bool typeDifferent =
+                    (r.TypeId < 0 && r.TypeName != lastTypeName) || r.TypeId > lastTypeID;
                 if (typeDifferent)
                 {
                     lastTypeID = r.TypeId;
                     lastTypeName = r.TypeName;
                     if (lastTypeID < 0)
                     {
-                        Debug.Assert(typeDirectory.NumberOfIdEntries == 0, "Not all Win32 resources with types encoded as strings precede those encoded as ints");
+                        Debug.Assert(
+                            typeDirectory.NumberOfIdEntries == 0,
+                            "Not all Win32 resources with types encoded as strings precede those encoded as ints"
+                        );
                         typeDirectory.NumberOfNamedEntries++;
                     }
                     else
@@ -201,7 +223,9 @@ namespace Microsoft.Cci
                     }
 
                     sizeOfDirectoryTree += 24;
-                    typeDirectory.Entries.Add(nameDirectory = new Directory(lastTypeName, lastTypeID));
+                    typeDirectory.Entries.Add(
+                        nameDirectory = new Directory(lastTypeName, lastTypeID)
+                    );
                 }
 
                 if (typeDifferent || (r.Id < 0 && r.Name != lastName) || r.Id > lastID)
@@ -210,7 +234,10 @@ namespace Microsoft.Cci
                     lastName = r.Name;
                     if (lastID < 0)
                     {
-                        Debug.Assert(nameDirectory.NumberOfIdEntries == 0, "Not all Win32 resources with names encoded as strings precede those encoded as ints");
+                        Debug.Assert(
+                            nameDirectory.NumberOfIdEntries == 0,
+                            "Not all Win32 resources with names encoded as strings precede those encoded as ints"
+                        );
                         nameDirectory.NumberOfNamedEntries++;
                     }
                     else
@@ -230,13 +257,29 @@ namespace Microsoft.Cci
             var dataWriter = new BlobBuilder();
 
             //'dataWriter' is where opaque resource data goes as well as strings that are used as type or name identifiers
-            WriteDirectory(typeDirectory, builder, 0, 0, sizeOfDirectoryTree, resourcesRva, dataWriter);
+            WriteDirectory(
+                typeDirectory,
+                builder,
+                0,
+                0,
+                sizeOfDirectoryTree,
+                resourcesRva,
+                dataWriter
+            );
             builder.LinkSuffix(dataWriter);
             builder.WriteByte(0);
             builder.Align(4);
         }
 
-        private static void WriteDirectory(Directory directory, BlobBuilder writer, uint offset, uint level, uint sizeOfDirectoryTree, int virtualAddressBase, BlobBuilder dataWriter)
+        private static void WriteDirectory(
+            Directory directory,
+            BlobBuilder writer,
+            uint offset,
+            uint level,
+            uint sizeOfDirectoryTree,
+            int virtualAddressBase,
+            BlobBuilder dataWriter
+        )
         {
             writer.WriteUInt32(0); // Characteristics
             writer.WriteUInt32(0); // Timestamp
@@ -275,9 +318,17 @@ namespace Microsoft.Cci
                     //the end of .rsrc following all of the directory
                     //info and IMAGE_RESOURCE_DATA_ENTRYs
                     IWin32Resource r = (IWin32Resource)directory.Entries[i];
-                    id = level == 0 ? r.TypeId : level == 1 ? r.Id : (int)r.LanguageId;
-                    name = level == 0 ? r.TypeName : level == 1 ? r.Name : null;
-                    dataWriter.WriteUInt32((uint)(virtualAddressBase + sizeOfDirectoryTree + 16 + dataWriter.Count));
+                    id =
+                        level == 0 ? r.TypeId
+                        : level == 1 ? r.Id
+                        : (int)r.LanguageId;
+                    name =
+                        level == 0 ? r.TypeName
+                        : level == 1 ? r.Name
+                        : null;
+                    dataWriter.WriteUInt32(
+                        (uint)(virtualAddressBase + sizeOfDirectoryTree + 16 + dataWriter.Count)
+                    );
                     byte[] data = new List<byte>(r.Data).ToArray();
                     dataWriter.WriteUInt32((uint)data.Length);
                     dataWriter.WriteUInt32(r.CodePage);
@@ -321,7 +372,15 @@ namespace Microsoft.Cci
                 Directory subDir = directory.Entries[i] as Directory;
                 if (subDir != null)
                 {
-                    WriteDirectory(subDir, writer, k, level + 1, sizeOfDirectoryTree, virtualAddressBase, dataWriter);
+                    WriteDirectory(
+                        subDir,
+                        writer,
+                        k,
+                        level + 1,
+                        sizeOfDirectoryTree,
+                        virtualAddressBase,
+                        dataWriter
+                    );
                     if (level == 0)
                     {
                         k += SizeOfDirectory(subDir);
@@ -334,7 +393,10 @@ namespace Microsoft.Cci
             }
         }
 
-        private static uint SizeOfDirectory(Directory/*!*/ directory)
+        private static uint SizeOfDirectory(
+            Directory /*!*/
+            directory
+        )
         {
             uint n = (uint)directory.Entries.Count;
             uint size = 16 + 8 * n;
@@ -350,9 +412,15 @@ namespace Microsoft.Cci
             return size;
         }
 
-        public static void SerializeWin32Resources(BlobBuilder builder, ResourceSection resourceSections, int resourcesRva)
+        public static void SerializeWin32Resources(
+            BlobBuilder builder,
+            ResourceSection resourceSections,
+            int resourcesRva
+        )
         {
-            var sectionWriter = new BlobWriter(builder.ReserveBytes(resourceSections.SectionBytes.Length));
+            var sectionWriter = new BlobWriter(
+                builder.ReserveBytes(resourceSections.SectionBytes.Length)
+            );
             sectionWriter.WriteBytes(resourceSections.SectionBytes);
 
             var readStream = new MemoryStream(resourceSections.SectionBytes);

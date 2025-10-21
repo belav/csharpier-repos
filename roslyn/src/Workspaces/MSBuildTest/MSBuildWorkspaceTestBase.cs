@@ -22,32 +22,53 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 {
     public class MSBuildWorkspaceTestBase : WorkspaceTestBase
     {
-        protected const string MSBuildNamespace = "http://schemas.microsoft.com/developer/msbuild/2003";
+        protected const string MSBuildNamespace =
+            "http://schemas.microsoft.com/developer/msbuild/2003";
 
-        protected static void AssertFailures(MSBuildWorkspace workspace, params string[] expectedFailures)
+        protected static void AssertFailures(
+            MSBuildWorkspace workspace,
+            params string[] expectedFailures
+        )
         {
-            AssertEx.Equal(expectedFailures, workspace.Diagnostics.Where(d => d.Kind == WorkspaceDiagnosticKind.Failure).Select(d => d.Message));
+            AssertEx.Equal(
+                expectedFailures,
+                workspace
+                    .Diagnostics.Where(d => d.Kind == WorkspaceDiagnosticKind.Failure)
+                    .Select(d => d.Message)
+            );
         }
 
-        protected async Task AssertCSCompilationOptionsAsync<T>(T expected, Func<CS.CSharpCompilationOptions, T> actual)
+        protected async Task AssertCSCompilationOptionsAsync<T>(
+            T expected,
+            Func<CS.CSharpCompilationOptions, T> actual
+        )
         {
             var options = await LoadCSharpCompilationOptionsAsync();
             Assert.Equal(expected, actual(options));
         }
 
-        protected async Task AssertCSParseOptionsAsync<T>(T expected, Func<CS.CSharpParseOptions, T> actual)
+        protected async Task AssertCSParseOptionsAsync<T>(
+            T expected,
+            Func<CS.CSharpParseOptions, T> actual
+        )
         {
             var options = await LoadCSharpParseOptionsAsync();
             Assert.Equal(expected, actual(options));
         }
 
-        protected async Task AssertVBCompilationOptionsAsync<T>(T expected, Func<VB.VisualBasicCompilationOptions, T> actual)
+        protected async Task AssertVBCompilationOptionsAsync<T>(
+            T expected,
+            Func<VB.VisualBasicCompilationOptions, T> actual
+        )
         {
             var options = await LoadVisualBasicCompilationOptionsAsync();
             Assert.Equal(expected, actual(options));
         }
 
-        protected async Task AssertVBParseOptionsAsync<T>(T expected, Func<VB.VisualBasicParseOptions, T> actual)
+        protected async Task AssertVBParseOptionsAsync<T>(
+            T expected,
+            Func<VB.VisualBasicParseOptions, T> actual
+        )
         {
             var options = await LoadVisualBasicParseOptionsAsync();
             Assert.Equal(expected, actual(options));
@@ -115,9 +136,14 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
         protected async Task PrepareCrossLanguageProjectWithEmittedMetadataAsync()
         {
-            // Now try variant of CSharpProject that has an emitted assembly 
-            CreateFiles(GetMultiProjectSolutionFiles()
-                .WithFile(@"CSharpProject\CSharpProject.csproj", Resources.ProjectFiles.CSharp.ForEmittedOutput));
+            // Now try variant of CSharpProject that has an emitted assembly
+            CreateFiles(
+                GetMultiProjectSolutionFiles()
+                    .WithFile(
+                        @"CSharpProject\CSharpProject.csproj",
+                        Resources.ProjectFiles.CSharp.ForEmittedOutput
+                    )
+            );
 
             var solutionFilePath = GetSolutionFileName("TestSolution.sln");
             using (var workspace = CreateMSBuildWorkspace())
@@ -143,7 +169,9 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             var files = GetSolutionFiles(inputs);
             CreateFiles(files);
-            var solutionFileName = files.First(t => t.fileName.EndsWith(".sln", StringComparison.OrdinalIgnoreCase)).fileName;
+            var solutionFileName = files
+                .First(t => t.fileName.EndsWith(".sln", StringComparison.OrdinalIgnoreCase))
+                .fileName;
             solutionFileName = GetSolutionFileName(solutionFileName);
             using (var workspace = CreateMSBuildWorkspace())
             {
@@ -151,19 +179,29 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             }
         }
 
-        protected static MSBuildWorkspace CreateMSBuildWorkspace(params (string key, string value)[] additionalProperties)
-            => CreateMSBuildWorkspace(throwOnWorkspaceFailed: true, skipUnrecognizedProjects: false, additionalProperties: additionalProperties);
+        protected static MSBuildWorkspace CreateMSBuildWorkspace(
+            params (string key, string value)[] additionalProperties
+        ) =>
+            CreateMSBuildWorkspace(
+                throwOnWorkspaceFailed: true,
+                skipUnrecognizedProjects: false,
+                additionalProperties: additionalProperties
+            );
 
         protected static MSBuildWorkspace CreateMSBuildWorkspace(
             bool throwOnWorkspaceFailed = true,
             bool skipUnrecognizedProjects = false,
-            (string key, string value)[] additionalProperties = null)
+            (string key, string value)[] additionalProperties = null
+        )
         {
             additionalProperties ??= Array.Empty<(string key, string value)>();
             var workspace = MSBuildWorkspace.Create(CreateProperties(additionalProperties));
             if (throwOnWorkspaceFailed)
             {
-                workspace.WorkspaceFailed += (s, e) => throw new Exception($"Workspace failure {e.Diagnostic.Kind}:{e.Diagnostic.Message}");
+                workspace.WorkspaceFailed += (s, e) =>
+                    throw new Exception(
+                        $"Workspace failure {e.Diagnostic.Kind}:{e.Diagnostic.Message}"
+                    );
             }
 
             if (skipUnrecognizedProjects)
@@ -174,13 +212,17 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             return workspace;
         }
 
-        protected static MSBuildWorkspace CreateMSBuildWorkspace(HostServices hostServices, params (string key, string value)[] additionalProperties)
+        protected static MSBuildWorkspace CreateMSBuildWorkspace(
+            HostServices hostServices,
+            params (string key, string value)[] additionalProperties
+        )
         {
-
             return MSBuildWorkspace.Create(CreateProperties(additionalProperties), hostServices);
         }
 
-        private static Dictionary<string, string> CreateProperties((string key, string value)[] additionalProperties)
+        private static Dictionary<string, string> CreateProperties(
+            (string key, string value)[] additionalProperties
+        )
         {
             var properties = new Dictionary<string, string>();
 

@@ -13,11 +13,15 @@ namespace System.Activities.XamlIntegration
 
     internal static class TextExpressionCompilerHelper
     {
-        public static void GetNamespacesLineInfo(string sourceXamlFileName, Dictionary<string, int> lineNumbersForNSes, Dictionary<string, int> lineNumbersForNSesForImpl)
+        public static void GetNamespacesLineInfo(
+            string sourceXamlFileName,
+            Dictionary<string, int> lineNumbersForNSes,
+            Dictionary<string, int> lineNumbersForNSesForImpl
+        )
         {
             // read until StartMember: TextExpression.NamespacesForImplementation OR TextExpression.Namespaces
             // create a subtree reader,
-            // in the subtree, 
+            // in the subtree,
             // look for StartObject nodes of String type.  their values are added to either LineNumbersForNSes or LineNumbersForNSesForImpl dictionaries.
             if (!File.Exists(sourceXamlFileName))
             {
@@ -26,7 +30,12 @@ namespace System.Activities.XamlIntegration
 
             using (XmlReader xmlReader = XmlReader.Create(sourceXamlFileName))
             {
-                using (XamlXmlReader xreader = new XamlXmlReader(xmlReader, new XamlXmlReaderSettings() { ProvideLineInfo = true }))
+                using (
+                    XamlXmlReader xreader = new XamlXmlReader(
+                        xmlReader,
+                        new XamlXmlReaderSettings() { ProvideLineInfo = true }
+                    )
+                )
                 {
                     bool hasHitFirstStartObj = false;
                     while (!hasHitFirstStartObj && xreader.Read())
@@ -56,8 +65,7 @@ namespace System.Activities.XamlIntegration
                             {
                                 xreader.Skip();
                             }
-                        }
-                        while (!xreader.IsEof);
+                        } while (!xreader.IsEof);
                     }
                 }
             }
@@ -65,24 +73,30 @@ namespace System.Activities.XamlIntegration
 
         private static bool IsStartMemberTextExprNS(XamlXmlReader xreader)
         {
-            return xreader.NodeType == XamlNodeType.StartMember && xreader.Member.DeclaringType != null &&
-                xreader.Member.DeclaringType.UnderlyingType == typeof(TextExpression) &&
-                xreader.Member.Name == "Namespaces";
+            return xreader.NodeType == XamlNodeType.StartMember
+                && xreader.Member.DeclaringType != null
+                && xreader.Member.DeclaringType.UnderlyingType == typeof(TextExpression)
+                && xreader.Member.Name == "Namespaces";
         }
 
         private static bool IsStartMemberTextExprNSForImpl(XamlXmlReader xreader)
         {
-            return xreader.NodeType == XamlNodeType.StartMember && xreader.Member.DeclaringType != null &&
-                xreader.Member.DeclaringType.UnderlyingType == typeof(TextExpression) &&
-                xreader.Member.Name == "NamespacesForImplementation";
+            return xreader.NodeType == XamlNodeType.StartMember
+                && xreader.Member.DeclaringType != null
+                && xreader.Member.DeclaringType.UnderlyingType == typeof(TextExpression)
+                && xreader.Member.Name == "NamespacesForImplementation";
         }
 
         private static bool IsNamespaceString(XamlReader subTreeReader)
         {
-            return subTreeReader.NodeType == XamlNodeType.StartObject && subTreeReader.Type.UnderlyingType == typeof(string);
+            return subTreeReader.NodeType == XamlNodeType.StartObject
+                && subTreeReader.Type.UnderlyingType == typeof(string);
         }
 
-        private static void WalkSubTree(XamlReader subTreeReader, Dictionary<string, int> lineNumbersDictionary)
+        private static void WalkSubTree(
+            XamlReader subTreeReader,
+            Dictionary<string, int> lineNumbersDictionary
+        )
         {
             while (subTreeReader.Read())
             {
@@ -101,6 +115,6 @@ namespace System.Activities.XamlIntegration
                     }
                 }
             }
-        }        
+        }
     }
 }

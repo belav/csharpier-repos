@@ -1,5 +1,11 @@
-<Type Name="ToolStripPanel+ToolStripPanelRowCollection" FullName="System.Windows.Forms.ToolStripPanel+ToolStripPanelRowCollection">
-  <TypeSignature Language="C#" Value="public class ToolStripPanel.ToolStripPanelRowCollection : System.Windows.Forms.Layout.ArrangedElementCollection" />
+<Type
+  Name="ToolStripPanel+ToolStripPanelRowCollection"
+  FullName="System.Windows.Forms.ToolStripPanel+ToolStripPanelRowCollection"
+>
+  <TypeSignature
+    Language="C#"
+    Value="public class ToolStripPanel.ToolStripPanelRowCollection : System.Windows.Forms.Layout.ArrangedElementCollection"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
@@ -23,7 +29,10 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripPanelRowCollection (System.Windows.Forms.ToolStripPanel owner);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripPanelRowCollection (System.Windows.Forms.ToolStripPanel owner);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.ToolStripPanel" />
@@ -39,7 +48,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ToolStripPanelRowCollection (System.Windows.Forms.ToolStripPanel owner, System.Windows.Forms.ToolStripPanelRow[] value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public ToolStripPanelRowCollection (System.Windows.Forms.ToolStripPanel owner, System.Windows.Forms.ToolStripPanelRow[] value);"
+      />
       <MemberType>Constructor</MemberType>
       <Parameters>
         <Parameter Name="owner" Type="System.Windows.Forms.ToolStripPanel" />
@@ -57,7 +69,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Add">
-      <MemberSignature Language="C#" Value="public int Add (System.Windows.Forms.ToolStripPanelRow value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int Add (System.Windows.Forms.ToolStripPanelRow value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -77,13 +92,19 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange (System.Windows.Forms.ToolStripPanel.ToolStripPanelRowCollection value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange (System.Windows.Forms.ToolStripPanel.ToolStripPanelRowCollection value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="value" Type="System.Windows.Forms.ToolStripPanel+ToolStripPanelRowCollection" />
+        <Parameter
+          Name="value"
+          Type="System.Windows.Forms.ToolStripPanel+ToolStripPanelRowCollection"
+        />
       </Parameters>
       <Docs>
         <param name="value">To be added.</param>
@@ -96,7 +117,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="AddRange">
-      <MemberSignature Language="C#" Value="public void AddRange (System.Windows.Forms.ToolStripPanelRow[] value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void AddRange (System.Windows.Forms.ToolStripPanelRow[] value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -131,7 +155,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Contains">
-      <MemberSignature Language="C#" Value="public bool Contains (System.Windows.Forms.ToolStripPanelRow value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public bool Contains (System.Windows.Forms.ToolStripPanelRow value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -151,7 +178,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="CopyTo">
-      <MemberSignature Language="C#" Value="public void CopyTo (System.Windows.Forms.ToolStripPanelRow[] array, int index);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void CopyTo (System.Windows.Forms.ToolStripPanelRow[] array, int index);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -172,7 +202,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="IndexOf">
-      <MemberSignature Language="C#" Value="public int IndexOf (System.Windows.Forms.ToolStripPanelRow value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public int IndexOf (System.Windows.Forms.ToolStripPanelRow value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -192,7 +225,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Insert">
-      <MemberSignature Language="C#" Value="public void Insert (int index, System.Windows.Forms.ToolStripPanelRow value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Insert (int index, System.Windows.Forms.ToolStripPanelRow value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -213,7 +249,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Item">
-      <MemberSignature Language="C#" Value="public virtual System.Windows.Forms.ToolStripPanelRow this[int index] { get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="public virtual System.Windows.Forms.ToolStripPanelRow this[int index] { get; }"
+      />
       <MemberType>Property</MemberType>
       <ReturnValue>
         <ReturnType>System.Windows.Forms.ToolStripPanelRow</ReturnType>
@@ -233,7 +272,10 @@
       </AssemblyInfo>
     </Member>
     <Member MemberName="Remove">
-      <MemberSignature Language="C#" Value="public void Remove (System.Windows.Forms.ToolStripPanelRow value);" />
+      <MemberSignature
+        Language="C#"
+        Value="public void Remove (System.Windows.Forms.ToolStripPanelRow value);"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -393,7 +435,10 @@
       </Docs>
     </Member>
     <Member MemberName="System.Collections.IList.Item">
-      <MemberSignature Language="C#" Value="object System.Collections.IList.Item[int index] { set; get; }" />
+      <MemberSignature
+        Language="C#"
+        Value="object System.Collections.IList.Item[int index] { set; get; }"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>

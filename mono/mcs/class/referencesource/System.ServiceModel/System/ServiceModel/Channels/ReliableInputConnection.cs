@@ -16,59 +16,43 @@ namespace System.ServiceModel.Channels
         bool terminated = false;
         InterruptibleWaitObject terminateWaitObject = new InterruptibleWaitObject(false, false);
 
-        public ReliableInputConnection()
-        {
-        }
+        public ReliableInputConnection() { }
 
         public bool AllAdded
         {
             get
             {
-                return (this.ranges.Count == 1
-                    && this.ranges[0].Lower == 1
-                    && this.ranges[0].Upper == this.last)
-                    || this.isLastKnown;
+                return (
+                        this.ranges.Count == 1
+                        && this.ranges[0].Lower == 1
+                        && this.ranges[0].Upper == this.last
+                    ) || this.isLastKnown;
             }
         }
 
         public bool IsLastKnown
         {
-            get
-            {
-                return this.last != 0 || this.isLastKnown;
-            }
+            get { return this.last != 0 || this.isLastKnown; }
         }
 
         public bool IsSequenceClosed
         {
-            get
-            {
-                return this.isSequenceClosed;
-            }
+            get { return this.isSequenceClosed; }
         }
 
         public Int64 Last
         {
-            get
-            {
-                return this.last;
-            }
+            get { return this.last; }
         }
 
         public SequenceRangeCollection Ranges
         {
-            get
-            {
-                return this.ranges;
-            }
+            get { return this.ranges; }
         }
 
         public ReliableMessagingVersion ReliableMessagingVersion
         {
-            set
-            {
-                this.reliableMessagingVersion = value;
-            }
+            set { this.reliableMessagingVersion = value; }
         }
 
         public void Abort(ChannelBase channel)
@@ -102,7 +86,10 @@ namespace System.ServiceModel.Channels
 
         public bool IsValid(Int64 sequenceNumber, bool isLast)
         {
-            if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.reliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 if (isLast)
                 {
@@ -221,8 +208,12 @@ namespace System.ServiceModel.Channels
 
         public bool Terminate()
         {
-            if ((this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
-                || this.isSequenceClosed)
+            if (
+                (
+                    this.reliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                ) || this.isSequenceClosed
+            )
             {
                 if (!this.terminated && this.AllAdded)
                 {
@@ -238,12 +229,25 @@ namespace System.ServiceModel.Channels
 
         public IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            OperationWithTimeoutBeginCallback[] beginCallbacks
-                = new OperationWithTimeoutBeginCallback[] { shutdownWaitObject.BeginWait, terminateWaitObject.BeginWait };
-            OperationEndCallback[] endCallbacks
-                = new OperationEndCallback[] { shutdownWaitObject.EndWait, terminateWaitObject.EndWait };
+            OperationWithTimeoutBeginCallback[] beginCallbacks =
+                new OperationWithTimeoutBeginCallback[]
+                {
+                    shutdownWaitObject.BeginWait,
+                    terminateWaitObject.BeginWait,
+                };
+            OperationEndCallback[] endCallbacks = new OperationEndCallback[]
+            {
+                shutdownWaitObject.EndWait,
+                terminateWaitObject.EndWait,
+            };
 
-            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout, beginCallbacks, endCallbacks, callback, state);
+            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                timeout,
+                beginCallbacks,
+                endCallbacks,
+                callback,
+                state
+            );
         }
 
         public void Close(TimeSpan timeout)

@@ -16,8 +16,8 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Globalization;
     using System.Linq;
     using System.Runtime;
-    using System.Runtime.Interop;
     using System.Runtime.DurableInstancing;
+    using System.Runtime.Interop;
     using System.Security;
     using System.Security.Permissions;
     using System.ServiceModel.Activation;
@@ -27,7 +27,7 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Threading;
     using System.Transactions;
     using System.Xml.Linq;
-    
+
     // WorkflowServiceInstance is free-threaded. It is responsible for the correct locking and usage of the underlying WorkflowInstance.
     // Given that there are two simultaneous users of WorkflowInstance (WorkflowServiceInstance and Activities),
     // it is imperative that WorkflowServiceInstance only calls into WorkflowInstance when there are no activities executing
@@ -63,11 +63,14 @@ namespace System.ServiceModel.Activities.Dispatcher
     class WorkflowServiceInstance : WorkflowInstance
     {
         static AsyncCallback handleEndReleaseInstance;
-        static FastAsyncCallback lockAcquiredAsyncCallback = new FastAsyncCallback(OnLockAcquiredAsync);
+        static FastAsyncCallback lockAcquiredAsyncCallback = new FastAsyncCallback(
+            OnLockAcquiredAsync
+        );
         static AsyncCallback trackCompleteDoneCallback;
         static AsyncCallback trackIdleDoneCallback;
         static AsyncCallback trackUnhandledExceptionDoneCallback;
-        static ReadOnlyCollection<BookmarkInfo> emptyBookmarkInfoCollection = new ReadOnlyCollection<BookmarkInfo>(new List<BookmarkInfo>());
+        static ReadOnlyCollection<BookmarkInfo> emptyBookmarkInfoCollection =
+            new ReadOnlyCollection<BookmarkInfo>(new List<BookmarkInfo>());
 
         WorkflowExecutionLock executorLock;
 
@@ -125,17 +128,21 @@ namespace System.ServiceModel.Activities.Dispatcher
         TimeSpan persistTimeout;
         TimeSpan trackTimeout;
         TimeSpan acquireLockTimeout;
-        
+
         //Tracking for increment of ASP.NET busy count
         bool hasIncrementedBusyCount;
 
         // dummy ctor only used to calculate IsLoadTransactionRequired
         WorkflowServiceInstance(WorkflowServiceHost serviceHost)
-            : base(serviceHost.Activity)
-        {
-        }
+            : base(serviceHost.Activity) { }
 
-        WorkflowServiceInstance(Activity workflowDefinition, WorkflowIdentity definitionIdentity, Guid instanceId, WorkflowServiceHost serviceHost, PersistenceContext persistenceContext)
+        WorkflowServiceInstance(
+            Activity workflowDefinition,
+            WorkflowIdentity definitionIdentity,
+            Guid instanceId,
+            WorkflowServiceHost serviceHost,
+            PersistenceContext persistenceContext
+        )
             : base(workflowDefinition, definitionIdentity)
         {
             this.serviceHost = serviceHost;
@@ -183,7 +190,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (trackUnhandledExceptionDoneCallback == null)
                 {
-                    trackUnhandledExceptionDoneCallback = Fx.ThunkCallback(new AsyncCallback(OnTrackUnhandledExceptionDone));
+                    trackUnhandledExceptionDoneCallback = Fx.ThunkCallback(
+                        new AsyncCallback(OnTrackUnhandledExceptionDone)
+                    );
                 }
 
                 return trackUnhandledExceptionDoneCallback;
@@ -196,7 +205,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (trackCompleteDoneCallback == null)
                 {
-                    trackCompleteDoneCallback = Fx.ThunkCallback(new AsyncCallback(OnTrackCompleteDone));
+                    trackCompleteDoneCallback = Fx.ThunkCallback(
+                        new AsyncCallback(OnTrackCompleteDone)
+                    );
                 }
 
                 return trackCompleteDoneCallback;
@@ -204,79 +215,55 @@ namespace System.ServiceModel.Activities.Dispatcher
         }
 
         // cache the results for perf from the extension container
-        internal List<IPersistencePipelineModule> PipelineModules
-        {
-            get;
-            private set;
-        }
-        
+        internal List<IPersistencePipelineModule> PipelineModules { get; private set; }
+
         public BufferedReceiveManager BufferedReceiveManager
         {
-            get
-            {
-                return this.bufferedReceiveManager;
-            }
+            get { return this.bufferedReceiveManager; }
         }
 
         public override Guid Id
         {
-            get
-            {
-                return this.instanceId;
-            }
+            get { return this.instanceId; }
         }
 
         public bool IsActive
         {
-            get
-            {
-                return this.state == State.Active;
-            }
+            get { return this.state == State.Active; }
         }
 
-        public bool HasBeenUpdated
-        {
-            get;
-            private set;
-        }
+        public bool HasBeenUpdated { get; private set; }
 
         protected override bool SupportsInstanceKeys
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         bool IsIdle
         {
-            get
-            {
-                return this.Controller.State == WorkflowInstanceState.Idle;
-            }
+            get { return this.Controller.State == WorkflowInstanceState.Idle; }
         }
 
         bool ShouldRaiseComplete
         {
             get
             {
-                return this.Controller.State == WorkflowInstanceState.Complete && !this.hasRaisedCompleted;
+                return this.Controller.State == WorkflowInstanceState.Complete
+                    && !this.hasRaisedCompleted;
             }
         }
 
         bool ShouldRaiseIdle
         {
-            get
-            {
-                return this.IsIdle && !this.hasRaisedCompleted && this.state != State.Aborted;
-            }
+            get { return this.IsIdle && !this.hasRaisedCompleted && this.state != State.Aborted; }
         }
 
         bool IsHandlerThread
         {
             get
             {
-                return this.isInHandler && this.handlerThreadId == Thread.CurrentThread.ManagedThreadId;
+                return this.isInHandler
+                    && this.handlerThreadId == Thread.CurrentThread.ManagedThreadId;
             }
         }
 
@@ -286,7 +273,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.unloadInstancePolicy == null)
                 {
-                    this.unloadInstancePolicy = new UnloadInstancePolicyHelper(this, this.serviceHost.IdleTimeToPersist, this.serviceHost.IdleTimeToUnload);
+                    this.unloadInstancePolicy = new UnloadInstancePolicyHelper(
+                        this,
+                        this.serviceHost.IdleTimeToPersist,
+                        this.serviceHost.IdleTimeToUnload
+                    );
                 }
                 return this.unloadInstancePolicy;
             }
@@ -298,7 +289,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.unhandledExceptionPolicy == null)
                 {
-                    this.unhandledExceptionPolicy = new UnhandledExceptionPolicyHelper(this, this.serviceHost.UnhandledExceptionAction);
+                    this.unhandledExceptionPolicy = new UnhandledExceptionPolicyHelper(
+                        this,
+                        this.serviceHost.UnhandledExceptionAction
+                    );
                 }
                 return this.unhandledExceptionPolicy;
             }
@@ -309,19 +303,36 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             WorkflowServiceInstance instance = new WorkflowServiceInstance(host);
             instance.RegisterExtensionManager(host.WorkflowExtensions);
-            return instance.GetExtensions<IPersistencePipelineModule>().Any(module => module.IsLoadTransactionRequired);
+            return instance
+                .GetExtensions<IPersistencePipelineModule>()
+                .Any(module => module.IsLoadTransactionRequired);
         }
 
-        public static WorkflowServiceInstance InitializeInstance(PersistenceContext persistenceContext, Guid instanceId, Activity workflowDefinition, WorkflowIdentity definitionIdentity, IDictionary<XName, InstanceValue> loadedObject, WorkflowCreationContext creationContext,
-            SynchronizationContext synchronizationContext, WorkflowServiceHost serviceHost, DynamicUpdateMap updateMap = null)
+        public static WorkflowServiceInstance InitializeInstance(
+            PersistenceContext persistenceContext,
+            Guid instanceId,
+            Activity workflowDefinition,
+            WorkflowIdentity definitionIdentity,
+            IDictionary<XName, InstanceValue> loadedObject,
+            WorkflowCreationContext creationContext,
+            SynchronizationContext synchronizationContext,
+            WorkflowServiceHost serviceHost,
+            DynamicUpdateMap updateMap = null
+        )
         {
             Fx.Assert(workflowDefinition != null, "workflowDefinition cannot be null.");
             Fx.Assert(serviceHost != null, "serviceHost cannot be null!");
             Fx.Assert(instanceId != Guid.Empty, "instanceId cannot be empty.");
 
-            WorkflowServiceInstance workflowInstance = new WorkflowServiceInstance(workflowDefinition, definitionIdentity, instanceId, serviceHost, persistenceContext)
+            WorkflowServiceInstance workflowInstance = new WorkflowServiceInstance(
+                workflowDefinition,
+                definitionIdentity,
+                instanceId,
+                serviceHost,
+                persistenceContext
+            )
             {
-                SynchronizationContext = synchronizationContext
+                SynchronizationContext = synchronizationContext,
             };
 
             // let us initalize the instance level extensions here
@@ -332,14 +343,25 @@ namespace System.ServiceModel.Activities.Dispatcher
                 InstanceValue stateValue;
                 object deserializedRuntimeState;
 
-                if (!loadedObject.TryGetValue(WorkflowNamespace.Workflow, out stateValue) || stateValue.Value == null)
+                if (
+                    !loadedObject.TryGetValue(WorkflowNamespace.Workflow, out stateValue)
+                    || stateValue.Value == null
+                )
                 {
                     throw FxTrace.Exception.AsError(
-                        new InstancePersistenceException(SR.WorkflowInstanceNotFoundInStore(instanceId)));
+                        new InstancePersistenceException(
+                            SR.WorkflowInstanceNotFoundInStore(instanceId)
+                        )
+                    );
                 }
                 deserializedRuntimeState = stateValue.Value;
 
-                if (loadedObject.TryGetValue(WorkflowServiceNamespace.CreationContext, out stateValue))
+                if (
+                    loadedObject.TryGetValue(
+                        WorkflowServiceNamespace.CreationContext,
+                        out stateValue
+                    )
+                )
                 {
                     workflowInstance.creationContext = (WorkflowCreationContext)stateValue.Value;
                 }
@@ -371,10 +393,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 // Provide default CorrelationScope if root activity is not CorrelationScope
                 if (!(workflowDefinition is CorrelationScope))
                 {
-                    rootExecutionProperties = new List<Handle>(1)
-                    {
-                        new CorrelationHandle()
-                    };
+                    rootExecutionProperties = new List<Handle>(1) { new CorrelationHandle() };
                 }
 
                 if (creationContext != null)
@@ -393,7 +412,8 @@ namespace System.ServiceModel.Activities.Dispatcher
             base.RegisterExtensionManager(extensionManager);
 
             // cache IPersistencePipelineModules
-            IEnumerable<IPersistencePipelineModule> modules = base.GetExtensions<IPersistencePipelineModule>();
+            IEnumerable<IPersistencePipelineModule> modules =
+                base.GetExtensions<IPersistencePipelineModule>();
             int modulesCount = modules.Count<IPersistencePipelineModule>();
             if (modulesCount > 0)
             {
@@ -406,7 +426,12 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.persistenceContext.Aborted && !this.abortingExtensions)
             {
-                AbortInstance(new FaultException(OperationExecutionFault.CreateAbortedFault(SR.DefaultAbortReason)), false);
+                AbortInstance(
+                    new FaultException(
+                        OperationExecutionFault.CreateAbortedFault(SR.DefaultAbortReason)
+                    ),
+                    false
+                );
             }
         }
 
@@ -470,9 +495,9 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             // The conditions to start unload policy.
             // - referenceCount is 1.  Like COM, This is the last reference count hold by WorkflowServiceInstance itself.
-            //   It is incremented per command (control/resumebookmark) and decremented when command is done. 
-            // - No lock pending.  In general, when referenceCount is 1, the executor lock is freed and WF is idled.  
-            //   There is, however, one narrow case for Persist activity.  When it goes async (executing Sql command), 
+            //   It is incremented per command (control/resumebookmark) and decremented when command is done.
+            // - No lock pending.  In general, when referenceCount is 1, the executor lock is freed and WF is idled.
+            //   There is, however, one narrow case for Persist activity.  When it goes async (executing Sql command),
             //   the referenceCount is decremented to 1 but WF sheduler still busy.  In this case, we will let
             //   the lock release to initiate the policy.
             // - Not in transaction (TxCommit will take care of this).
@@ -480,8 +505,14 @@ namespace System.ServiceModel.Activities.Dispatcher
             // Note: it is okay to dirty read referenceCount and isLocked.  If the UnloadInstancePolicy starts before
             //   increment, the increment will correct and cancel it.  If the increment happens before, ReleaseReference
             //   will have a chance to start the policy.  Same applies to isLocked.
-            if (this.referenceCount == 1 && !this.executorLock.IsLocked && !this.isInTransaction && 
-                this.state != State.Completed && this.state != State.Unloaded && this.state != State.Aborted)
+            if (
+                this.referenceCount == 1
+                && !this.executorLock.IsLocked
+                && !this.isInTransaction
+                && this.state != State.Completed
+                && this.state != State.Unloaded
+                && this.state != State.Aborted
+            )
             {
                 this.UnloadInstancePolicy.Begin();
             }
@@ -489,7 +520,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         void AcquireLock(TimeSpan timeout, ref bool ownsLock)
         {
-            Fx.Assert(!ownsLock, "We should never call acquire if we already think we own the lock.");
+            Fx.Assert(
+                !ownsLock,
+                "We should never call acquire if we already think we own the lock."
+            );
 
             if (this.IsHandlerThread)
             {
@@ -499,7 +533,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (!this.executorLock.TryEnter(ref ownsLock))
             {
-                Fx.Assert(!ownsLock, "This should always match the return of TryEnter and is only useful in light of exceptions");
+                Fx.Assert(
+                    !ownsLock,
+                    "This should always match the return of TryEnter and is only useful in light of exceptions"
+                );
 
                 bool incrementedActiveOperations = false;
                 object lockToken = null;
@@ -508,9 +545,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     lock (this.activeOperationsLock)
                     {
-                        try
-                        {
-                        }
+                        try { }
                         finally
                         {
                             this.activeOperations++;
@@ -548,14 +583,29 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        bool AcquireLockAsync(TimeSpan timeout, ref bool ownsLock, FastAsyncCallback callback, object state)
+        bool AcquireLockAsync(
+            TimeSpan timeout,
+            ref bool ownsLock,
+            FastAsyncCallback callback,
+            object state
+        )
         {
             return AcquireLockAsync(timeout, false, false, ref ownsLock, callback, state);
         }
 
-        bool AcquireLockAsync(TimeSpan timeout, bool isAbortPriority, bool skipPause, ref bool ownsLock, FastAsyncCallback callback, object state)
+        bool AcquireLockAsync(
+            TimeSpan timeout,
+            bool isAbortPriority,
+            bool skipPause,
+            ref bool ownsLock,
+            FastAsyncCallback callback,
+            object state
+        )
         {
-            Fx.Assert(!ownsLock, "We should never call acquire if we already think we own the lock.");
+            Fx.Assert(
+                !ownsLock,
+                "We should never call acquire if we already think we own the lock."
+            );
 
             // We cannot just hand off the lock if we are in a handler thread
             // because this might eventually go async (during the operation)
@@ -563,7 +613,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (!this.executorLock.TryEnter(ref ownsLock))
             {
-                Fx.Assert(!ownsLock, "This should always match the return of TryEnter and is only useful in light of exceptions");
+                Fx.Assert(
+                    !ownsLock,
+                    "This should always match the return of TryEnter and is only useful in light of exceptions"
+                );
 
                 bool incrementedActiveOperations = false;
                 bool decrementActiveOperations = true;
@@ -573,9 +626,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     lock (this.activeOperationsLock)
                     {
-                        try
-                        {
-                        }
+                        try { }
                         finally
                         {
                             this.activeOperations++;
@@ -596,7 +647,13 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     // If we get the lock here then we should decrement, otherwise
                     // it is up to the lock acquired callback
-                    decrementActiveOperations = this.executorLock.EnterAsync(timeout, ref lockToken, ref ownsLock, lockAcquiredAsyncCallback, new AcquireLockAsyncData(this, callback, state));
+                    decrementActiveOperations = this.executorLock.EnterAsync(
+                        timeout,
+                        ref lockToken,
+                        ref ownsLock,
+                        lockAcquiredAsyncCallback,
+                        new AcquireLockAsyncData(this, callback, state)
+                    );
                     return decrementActiveOperations;
                 }
                 finally
@@ -649,7 +706,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             return idleEvent;
         }
 
-        bool CleanupIdleWaiter(AsyncWaitHandle idleEvent, Exception waitException, ref bool ownsLock)
+        bool CleanupIdleWaiter(
+            AsyncWaitHandle idleEvent,
+            Exception waitException,
+            ref bool ownsLock
+        )
         {
             lock (this.activeOperationsLock)
             {
@@ -734,20 +795,31 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        IAsyncResult BeginAcquireLockOnIdle(TimeSpan timeout, ref bool ownsLock, AsyncCallback callback, object state)
+        IAsyncResult BeginAcquireLockOnIdle(
+            TimeSpan timeout,
+            ref bool ownsLock,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new AcquireLockOnIdleAsyncResult(this, timeout, ref ownsLock, callback, state);
         }
 
         void EndAcquireLockOnIdle(IAsyncResult result)
         {
-            Fx.Assert(result.CompletedSynchronously, "This overload should only be called when completed synchronously.");
+            Fx.Assert(
+                result.CompletedSynchronously,
+                "This overload should only be called when completed synchronously."
+            );
             AcquireLockOnIdleAsyncResult.End(result);
         }
 
         void EndAcquireLockOnIdle(IAsyncResult result, ref bool ownsLock)
         {
-            Fx.Assert(!result.CompletedSynchronously, "This overload should only be called when completed asynchronously.");
+            Fx.Assert(
+                !result.CompletedSynchronously,
+                "This overload should only be called when completed asynchronously."
+            );
             AcquireLockOnIdleAsyncResult.End(result, ref ownsLock);
         }
 
@@ -765,7 +837,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 return;
             }
 
-            Fx.Assert(!this.IsHandlerThread, "We never set ownsLock if we are on the handler thread and therefore should have shortcut out earlier.");
+            Fx.Assert(
+                !this.IsHandlerThread,
+                "We never set ownsLock if we are on the handler thread and therefore should have shortcut out earlier."
+            );
 
             bool resumeScheduler = false;
 
@@ -775,7 +850,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.isWorkflowServiceInstanceReady = true;
                 if (this.workflowServiceInstanceReadyWaitHandle != null)
                 {
-                    needToSignalWorkflowServiceInstanceReadyWaitHandle = true; 
+                    needToSignalWorkflowServiceInstanceReadyWaitHandle = true;
                 }
 
                 // Signal that workflow has made progress and this progress has not been persisted by idle policy,
@@ -805,9 +880,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     ownsLock = false;
                     resumeScheduler = true;
                 }
-                else if ((this.IsIdle || this.state != State.Active) && NotifyNextIdleWaiter(ref ownsLock))
-                {
-                }
+                else if (
+                    (this.IsIdle || this.state != State.Active)
+                    && NotifyNextIdleWaiter(ref ownsLock)
+                ) { }
                 else
                 {
                     // If we are runnable then we want to hang onto the lock if Exit finds no one waiting.
@@ -817,7 +893,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // to this branch of the if).  This means that we raced with a timeout and should resume
                         // the workflow's execution.  If we don't resume execution we'll just hang ... no one
                         // has the lock, the workflow is ready to execute, but it is not.
-                        Fx.Assert(this.activeOperations > 0, "We should always have active operations otherwise we should have taken a different code path.");
+                        Fx.Assert(
+                            this.activeOperations > 0,
+                            "We should always have active operations otherwise we should have taken a different code path."
+                        );
 
                         // We no longer "own" the lock because the scheduler has taken control
                         ownsLock = false;
@@ -839,21 +918,38 @@ namespace System.ServiceModel.Activities.Dispatcher
                 else
                 {
                     this.Controller.Run();
-                    
                 }
             }
         }
 
-        public IAsyncResult BeginAbandon(Exception reason, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginAbandon(
+            Exception reason,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(reason != null, "reason must not be null!");
             return BeginAbandon(reason, true, timeout, callback, state);
         }
 
         //used by UnloadPolicy when TimeToUnload > TimeToPersist to prevent an Abort tracking record.
-        IAsyncResult BeginAbandon(Exception reason, bool shouldTrackAbort, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginAbandon(
+            Exception reason,
+            bool shouldTrackAbort,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return AbandonAsyncResult.Create(this, reason, shouldTrackAbort, timeout, callback, state);
+            return AbandonAsyncResult.Create(
+                this,
+                reason,
+                shouldTrackAbort,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public void EndAbandon(IAsyncResult result)
@@ -861,7 +957,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             AbandonAsyncResult.End(result);
         }
 
-        IAsyncResult BeginAbandonAndSuspend(Exception reason, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginAbandonAndSuspend(
+            Exception reason,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(reason != null, "reason must not be null!");
             return AbandonAndSuspendAsyncResult.Create(this, reason, timeout, callback, state);
@@ -883,7 +984,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (shouldTrackAbort)
             {
-                FxTrace.Exception.AsWarning(reason); 
+                FxTrace.Exception.AsWarning(reason);
             }
 
             FaultPendingRequests(reason);
@@ -904,7 +1005,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     if (ValidateStateForAbort())
                     {
                         this.state = State.Aborted;
-                         if (shouldTrackAbort)
+                        if (shouldTrackAbort)
                         {
                             this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowAborted();
                             this.Controller.Abort(reason);
@@ -927,8 +1028,16 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     try
                     {
-                        if (AcquireLockAsync(this.acquireLockTimeout, true, false, ref ownsLock, new FastAsyncCallback(OnAbortLockAcquired),
-                            new AbortInstanceState(reason, shouldTrackAbort)))
+                        if (
+                            AcquireLockAsync(
+                                this.acquireLockTimeout,
+                                true,
+                                false,
+                                ref ownsLock,
+                                new FastAsyncCallback(OnAbortLockAcquired),
+                                new AbortInstanceState(reason, shouldTrackAbort)
+                            )
+                        )
                         {
                             completeSelf = true;
                             if (ValidateStateForAbort())
@@ -989,9 +1098,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             // We abandon buffered Receives only in the complete code path, not in abort code path.
             if (this.hasRaisedCompleted && this.bufferedReceiveManager != null)
             {
-                this.bufferedReceiveManager.AbandonBufferedReceives(this.persistenceContext.AssociatedKeys);
+                this.bufferedReceiveManager.AbandonBufferedReceives(
+                    this.persistenceContext.AssociatedKeys
+                );
             }
-
         }
 
         void Dispose()
@@ -1001,10 +1111,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             // We abandon buffered Receives only in the complete code path, not in abort code path.
             if (this.hasRaisedCompleted && this.bufferedReceiveManager != null)
             {
-                this.bufferedReceiveManager.AbandonBufferedReceives(this.persistenceContext.AssociatedKeys);
+                this.bufferedReceiveManager.AbandonBufferedReceives(
+                    this.persistenceContext.AssociatedKeys
+                );
             }
         }
-        
+
         void OnAbortLockAcquired(object state, Exception exception)
         {
             if (exception != null)
@@ -1079,7 +1191,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 try
                 {
-                    IAsyncResult result = this.BeginFlushTrackingRecords(this.trackTimeout, Fx.ThunkCallback(new AsyncCallback(OnAbortTrackingComplete)), isUpdateFailure);
+                    IAsyncResult result = this.BeginFlushTrackingRecords(
+                        this.trackTimeout,
+                        Fx.ThunkCallback(new AsyncCallback(OnAbortTrackingComplete)),
+                        isUpdateFailure
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -1146,19 +1262,37 @@ namespace System.ServiceModel.Activities.Dispatcher
             CompletePendingOperations();
         }
 
-        public IAsyncResult BeginTerminate(string reason, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTerminate(
+            string reason,
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(!String.IsNullOrEmpty(reason), "reason string must not be null or empty!");
 
             // the FaultException below is created using the FaultException(FaultReason, FaultCode) ctor instead of the FaultException(MessageFault) ctor
-            // because the latter ctor saves the fault in its fault member.  Saving the fault is problematic because faultException would serialize its 
+            // because the latter ctor saves the fault in its fault member.  Saving the fault is problematic because faultException would serialize its
             // fault member and operationExecutionFault is not serializable.  The faultException might need to be serialized if the workflowServiceInstance
             // is ever persisted since the faultException below ultimately becomes the terminationException saved with the workflowServiceInstance.
             OperationExecutionFault fault = OperationExecutionFault.CreateTerminatedFault(reason);
-            return BeginTerminate(new FaultException(fault.Reason, fault.Code), transaction, timeout, callback, state);
+            return BeginTerminate(
+                new FaultException(fault.Reason, fault.Code),
+                transaction,
+                timeout,
+                callback,
+                state
+            );
         }
 
-        IAsyncResult BeginTerminate(Exception reason, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginTerminate(
+            Exception reason,
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(reason != null, "reason must not be null!");
             return TerminateAsyncResult.Create(this, reason, transaction, timeout, callback, state);
@@ -1170,7 +1304,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             TerminateAsyncResult.End(result);
         }
 
-        public IAsyncResult BeginCancel(Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginCancel(
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return CancelAsyncResult.Create(this, transaction, timeout, callback, state);
         }
@@ -1186,14 +1325,32 @@ namespace System.ServiceModel.Activities.Dispatcher
             this.state = State.Active;
         }
 
-        public IAsyncResult BeginRun(Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRun(
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return BeginRun(transaction, null, timeout, callback, state);
         }
 
-        public IAsyncResult BeginRun(Transaction transaction, string operationName, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRun(
+            Transaction transaction,
+            string operationName,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return RunAsyncResult.Create(this, transaction, operationName, timeout, callback, state);
+            return RunAsyncResult.Create(
+                this,
+                transaction,
+                operationName,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public void EndRun(IAsyncResult result)
@@ -1212,7 +1369,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 if (ShouldRaiseComplete)
                 {
                     PrepareNextIdleWaiter();
-                    
+
                     Exception abortException = null;
 
                     try
@@ -1226,10 +1383,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                         {
                             this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowCompleted();
                         }
-                        
+
                         if (this.Controller.HasPendingTrackingRecords)
                         {
-                            IAsyncResult result = this.Controller.BeginFlushTrackingRecords(this.trackTimeout, TrackCompleteDoneCallback, this);
+                            IAsyncResult result = this.Controller.BeginFlushTrackingRecords(
+                                this.trackTimeout,
+                                TrackCompleteDoneCallback,
+                                this
+                            );
 
                             if (result.CompletedSynchronously)
                             {
@@ -1282,8 +1443,19 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     if (this.Controller.TrackingEnabled)
                     {
-                        this.Controller.Track(new WorkflowInstanceRecord(this.Id, this.WorkflowDefinition.DisplayName, WorkflowInstanceStates.Idle, this.DefinitionIdentity));
-                        IAsyncResult result = this.Controller.BeginFlushTrackingRecords(this.trackTimeout, TrackIdleDoneCallback, this);
+                        this.Controller.Track(
+                            new WorkflowInstanceRecord(
+                                this.Id,
+                                this.WorkflowDefinition.DisplayName,
+                                WorkflowInstanceStates.Idle,
+                                this.DefinitionIdentity
+                            )
+                        );
+                        IAsyncResult result = this.Controller.BeginFlushTrackingRecords(
+                            this.trackTimeout,
+                            TrackIdleDoneCallback,
+                            this
+                        );
 
                         if (result.CompletedSynchronously)
                         {
@@ -1392,18 +1564,29 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        protected override void OnNotifyUnhandledException(Exception exception, Activity exceptionSource, 
-            string exceptionSourceInstanceId)
+        protected override void OnNotifyUnhandledException(
+            Exception exception,
+            Activity exceptionSource,
+            string exceptionSourceInstanceId
+        )
         {
             bool ownsLock = true;
             bool keepLock = false;
-            UnhandledExceptionAsyncData data = new UnhandledExceptionAsyncData(this, exception, exceptionSource);
+            UnhandledExceptionAsyncData data = new UnhandledExceptionAsyncData(
+                this,
+                exception,
+                exceptionSource
+            );
 
             try
             {
                 if (this.Controller.HasPendingTrackingRecords)
                 {
-                    IAsyncResult result = this.Controller.BeginFlushTrackingRecords(this.trackTimeout, TrackUnhandledExceptionDoneCallback, data);
+                    IAsyncResult result = this.Controller.BeginFlushTrackingRecords(
+                        this.trackTimeout,
+                        TrackUnhandledExceptionDoneCallback,
+                        data
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -1471,9 +1654,24 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        public IAsyncResult BeginSuspend(bool isUnlocked, string reason, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSuspend(
+            bool isUnlocked,
+            string reason,
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return SuspendAsyncResult.Create(this, isUnlocked, reason, transaction, timeout, callback, state);
+            return SuspendAsyncResult.Create(
+                this,
+                isUnlocked,
+                reason,
+                transaction,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public void EndSuspend(IAsyncResult result)
@@ -1481,7 +1679,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             SuspendAsyncResult.End(result);
         }
 
-        public IAsyncResult BeginUnsuspend(Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginUnsuspend(
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return UnsuspendAsyncResult.Create(this, transaction, timeout, callback, state);
         }
@@ -1493,7 +1696,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         void GetCompletionState()
         {
-            this.completionState = this.Controller.GetCompletionState(out this.workflowOutputs, out this.terminationException);
+            this.completionState = this.Controller.GetCompletionState(
+                out this.workflowOutputs,
+                out this.terminationException
+            );
         }
 
         void TrackPersistence(PersistenceOperation operation)
@@ -1502,17 +1708,38 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (operation == PersistenceOperation.Delete)
                 {
-                    this.Controller.Track(new WorkflowInstanceRecord(this.Id, this.WorkflowDefinition.DisplayName, WorkflowInstanceStates.Deleted, this.DefinitionIdentity));
+                    this.Controller.Track(
+                        new WorkflowInstanceRecord(
+                            this.Id,
+                            this.WorkflowDefinition.DisplayName,
+                            WorkflowInstanceStates.Deleted,
+                            this.DefinitionIdentity
+                        )
+                    );
                 }
                 else if (operation == PersistenceOperation.Unload)
                 {
                     this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowUnloaded();
-                    this.Controller.Track(new WorkflowInstanceRecord(this.Id, this.WorkflowDefinition.DisplayName, WorkflowInstanceStates.Unloaded, this.DefinitionIdentity));
+                    this.Controller.Track(
+                        new WorkflowInstanceRecord(
+                            this.Id,
+                            this.WorkflowDefinition.DisplayName,
+                            WorkflowInstanceStates.Unloaded,
+                            this.DefinitionIdentity
+                        )
+                    );
                 }
                 else
                 {
                     this.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowPersisted();
-                    this.Controller.Track(new WorkflowInstanceRecord(this.Id, this.WorkflowDefinition.DisplayName, WorkflowInstanceStates.Persisted, this.DefinitionIdentity));
+                    this.Controller.Track(
+                        new WorkflowInstanceRecord(
+                            this.Id,
+                            this.WorkflowDefinition.DisplayName,
+                            WorkflowInstanceStates.Persisted,
+                            this.DefinitionIdentity
+                        )
+                    );
                 }
             }
         }
@@ -1520,52 +1747,96 @@ namespace System.ServiceModel.Activities.Dispatcher
         Dictionary<XName, InstanceValue> GeneratePersistenceData()
         {
             Dictionary<XName, InstanceValue> data = new Dictionary<XName, InstanceValue>(10);
-            data[WorkflowNamespace.Bookmarks] = new InstanceValue(Controller.GetBookmarks(), InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
-            data[WorkflowNamespace.LastUpdate] = new InstanceValue(DateTime.UtcNow, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
+            data[WorkflowNamespace.Bookmarks] = new InstanceValue(
+                Controller.GetBookmarks(),
+                InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+            );
+            data[WorkflowNamespace.LastUpdate] = new InstanceValue(
+                DateTime.UtcNow,
+                InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+            );
 
-            foreach (KeyValuePair<string, LocationInfo> mappedVariable in Controller.GetMappedVariables())
+            foreach (
+                KeyValuePair<string, LocationInfo> mappedVariable in Controller.GetMappedVariables()
+            )
             {
-                data[WorkflowNamespace.VariablesPath.GetName(mappedVariable.Key)] = new InstanceValue(mappedVariable.Value, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
-            }           
+                data[WorkflowNamespace.VariablesPath.GetName(mappedVariable.Key)] =
+                    new InstanceValue(
+                        mappedVariable.Value,
+                        InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                    );
+            }
 
-            Fx.AssertAndThrow(Controller.State != WorkflowInstanceState.Aborted, "Cannot generate data for an aborted service instance.");
+            Fx.AssertAndThrow(
+                Controller.State != WorkflowInstanceState.Aborted,
+                "Cannot generate data for an aborted service instance."
+            );
             if (Controller.State != WorkflowInstanceState.Complete)
             {
-                data[WorkflowNamespace.Workflow] = new InstanceValue(Controller.PrepareForSerialization());
+                data[WorkflowNamespace.Workflow] = new InstanceValue(
+                    Controller.PrepareForSerialization()
+                );
 
                 if (this.creationContext != null)
                 {
-                    data[WorkflowServiceNamespace.CreationContext] = new InstanceValue(this.creationContext);
+                    data[WorkflowServiceNamespace.CreationContext] = new InstanceValue(
+                        this.creationContext
+                    );
                 }
 
-                data[WorkflowNamespace.Status] = new InstanceValue(Controller.State == WorkflowInstanceState.Idle ? "Idle" : "Executing", InstanceValueOptions.WriteOnly);
+                data[WorkflowNamespace.Status] = new InstanceValue(
+                    Controller.State == WorkflowInstanceState.Idle ? "Idle" : "Executing",
+                    InstanceValueOptions.WriteOnly
+                );
             }
             else
             {
-                data[WorkflowNamespace.Workflow] = new InstanceValue(Controller.PrepareForSerialization(), InstanceValueOptions.Optional);
+                data[WorkflowNamespace.Workflow] = new InstanceValue(
+                    Controller.PrepareForSerialization(),
+                    InstanceValueOptions.Optional
+                );
 
                 this.GetCompletionState();
 
                 if (this.completionState == ActivityInstanceState.Faulted)
                 {
-                    data[WorkflowNamespace.Status] = new InstanceValue("Faulted", InstanceValueOptions.WriteOnly);
-                    data[WorkflowNamespace.Exception] = new InstanceValue(this.terminationException, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
+                    data[WorkflowNamespace.Status] = new InstanceValue(
+                        "Faulted",
+                        InstanceValueOptions.WriteOnly
+                    );
+                    data[WorkflowNamespace.Exception] = new InstanceValue(
+                        this.terminationException,
+                        InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                    );
                 }
                 else if (this.completionState == ActivityInstanceState.Closed)
                 {
-                    data[WorkflowNamespace.Status] = new InstanceValue("Closed", InstanceValueOptions.WriteOnly);
+                    data[WorkflowNamespace.Status] = new InstanceValue(
+                        "Closed",
+                        InstanceValueOptions.WriteOnly
+                    );
                     if (this.workflowOutputs != null)
                     {
                         foreach (KeyValuePair<string, object> output in this.workflowOutputs)
                         {
-                            data[WorkflowNamespace.OutputPath.GetName(output.Key)] = new InstanceValue(output.Value, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
+                            data[WorkflowNamespace.OutputPath.GetName(output.Key)] =
+                                new InstanceValue(
+                                    output.Value,
+                                    InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                                );
                         }
                     }
                 }
                 else
                 {
-                    Fx.AssertAndThrow(this.completionState == ActivityInstanceState.Canceled, "Cannot be executing a service instance when WorkflowState was completed.");
-                    data[WorkflowNamespace.Status] = new InstanceValue("Canceled", InstanceValueOptions.WriteOnly);
+                    Fx.AssertAndThrow(
+                        this.completionState == ActivityInstanceState.Canceled,
+                        "Cannot be executing a service instance when WorkflowState was completed."
+                    );
+                    data[WorkflowNamespace.Status] = new InstanceValue(
+                        "Canceled",
+                        InstanceValueOptions.WriteOnly
+                    );
                 }
             }
             return data;
@@ -1576,10 +1847,24 @@ namespace System.ServiceModel.Activities.Dispatcher
             return BeginPersist(false, timeout, callback, state);
         }
 
-        IAsyncResult BeginPersist(bool isTry, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginPersist(
+            bool isTry,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new UnloadOrPersistAsyncResult(this, this.Controller.State == WorkflowInstanceState.Complete ? PersistenceOperation.Delete : PersistenceOperation.Save, false, isTry, 
-                timeout, callback, state);
+            return new UnloadOrPersistAsyncResult(
+                this,
+                this.Controller.State == WorkflowInstanceState.Complete
+                    ? PersistenceOperation.Delete
+                    : PersistenceOperation.Save,
+                false,
+                isTry,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public bool EndPersist(IAsyncResult result)
@@ -1587,7 +1872,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             return UnloadOrPersistAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginFlushTrackingRecords(AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginFlushTrackingRecords(
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.Controller.BeginFlushTrackingRecords(this.trackTimeout, callback, state);
         }
@@ -1599,7 +1887,15 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         protected override IAsyncResult OnBeginPersist(AsyncCallback callback, object state)
         {
-            return new UnloadOrPersistAsyncResult(this, PersistenceOperation.Save, true, false, TimeSpan.MaxValue, callback, state);
+            return new UnloadOrPersistAsyncResult(
+                this,
+                PersistenceOperation.Save,
+                true,
+                false,
+                TimeSpan.MaxValue,
+                callback,
+                state
+            );
         }
 
         protected override void OnEndPersist(IAsyncResult result)
@@ -1607,7 +1903,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             UnloadOrPersistAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginAssociateKeys(ICollection<InstanceKey> keys, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAssociateKeys(
+            ICollection<InstanceKey> keys,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.persistenceContext == null)
             {
@@ -1615,7 +1915,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
             else
             {
-                return this.persistenceContext.BeginAssociateKeys(keys, this.persistTimeout, callback, state);
+                return this.persistenceContext.BeginAssociateKeys(
+                    keys,
+                    this.persistTimeout,
+                    callback,
+                    state
+                );
             }
         }
 
@@ -1639,9 +1944,19 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        BookmarkResumptionResult ResumeProtocolBookmarkCore(Bookmark bookmark, object value, BookmarkScope bookmarkScope, bool bufferedReceiveEnabled, ref AsyncWaitHandle waitHandle, ref bool ownsLock)
+        BookmarkResumptionResult ResumeProtocolBookmarkCore(
+            Bookmark bookmark,
+            object value,
+            BookmarkScope bookmarkScope,
+            bool bufferedReceiveEnabled,
+            ref AsyncWaitHandle waitHandle,
+            ref bool ownsLock
+        )
         {
-            Fx.Assert(this.state == State.Active, "WorkflowServiceInstance.State should be State.Active at this point.");
+            Fx.Assert(
+                this.state == State.Active,
+                "WorkflowServiceInstance.State should be State.Active at this point."
+            );
 
             BookmarkResumptionResult result;
             if (bookmarkScope == null)
@@ -1653,8 +1968,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 result = this.Controller.ScheduleBookmarkResumption(bookmark, value, bookmarkScope);
             }
 
-            if (result == BookmarkResumptionResult.NotReady && !bufferedReceiveEnabled && (this.serviceHost.FilterResumeTimeout.TotalSeconds > 0))
-                {
+            if (
+                result == BookmarkResumptionResult.NotReady
+                && !bufferedReceiveEnabled
+                && (this.serviceHost.FilterResumeTimeout.TotalSeconds > 0)
+            )
+            {
                 if (waitHandle == null)
                 {
                     waitHandle = new AsyncWaitHandle();
@@ -1684,8 +2003,18 @@ namespace System.ServiceModel.Activities.Dispatcher
             return result;
         }
 
-        [Fx.Tag.Throws(typeof(TimeoutException), "Either the execution lock could not be acquired or the target sub-instance did not become stable in the allotted time.")]
-        public IAsyncResult BeginResumeProtocolBookmark(Bookmark bookmark, BookmarkScope bookmarkScope, object value, TimeSpan timeout, AsyncCallback callback, object state)
+        [Fx.Tag.Throws(
+            typeof(TimeoutException),
+            "Either the execution lock could not be acquired or the target sub-instance did not become stable in the allotted time."
+        )]
+        public IAsyncResult BeginResumeProtocolBookmark(
+            Bookmark bookmark,
+            BookmarkScope bookmarkScope,
+            object value,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(bookmark != null, "bookmark must not be null!");
 
@@ -1703,7 +2032,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bookmarkValue = context.BookmarkValue;
             }
 
-            return new ResumeProtocolBookmarkAsyncResult(this, bookmark, bookmarkValue, bookmarkScope, true, timeout, callback, state);
+            return new ResumeProtocolBookmarkAsyncResult(
+                this,
+                bookmark,
+                bookmarkValue,
+                bookmarkScope,
+                true,
+                timeout,
+                callback,
+                state
+            );
         }
 
         [Fx.Tag.InheritThrows(From = "ResumeProtocolBookmark")]
@@ -1712,9 +2050,24 @@ namespace System.ServiceModel.Activities.Dispatcher
             return ResumeProtocolBookmarkAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginResumeBookmark(Bookmark bookmark, object value, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginResumeBookmark(
+            Bookmark bookmark,
+            object value,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ResumeProtocolBookmarkAsyncResult(this, bookmark, value, null, false, timeout, callback, state);
+            return new ResumeProtocolBookmarkAsyncResult(
+                this,
+                bookmark,
+                value,
+                null,
+                false,
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override BookmarkResumptionResult OnEndResumeBookmark(IAsyncResult result)
@@ -1751,7 +2104,11 @@ namespace System.ServiceModel.Activities.Dispatcher
         void NotifyCheckCanPersistWaiters(ref bool ownsLock)
         {
             // Always guarded by the executor lock.
-            if (this.checkCanPersistWaiters != null && this.checkCanPersistWaiters.Count > 0 && this.Controller.IsPersistable)
+            if (
+                this.checkCanPersistWaiters != null
+                && this.checkCanPersistWaiters.Count > 0
+                && this.Controller.IsPersistable
+            )
             {
                 List<WaitForCanPersistAsyncResult> waiters = this.checkCanPersistWaiters;
                 this.checkCanPersistWaiters = null;
@@ -1762,9 +2119,14 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        IAsyncResult BeginWaitForCanPersist(ref bool ownsLock, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginWaitForCanPersist(
+            ref bool ownsLock,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new WaitForCanPersistAsyncResult(this, ref ownsLock, timeout, callback, state);  
+            return new WaitForCanPersistAsyncResult(this, ref ownsLock, timeout, callback, state);
         }
 
         void EndWaitForCanPersist(IAsyncResult result, ref bool ownsLock)
@@ -1776,7 +2138,13 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.state == State.Aborted)
             {
-                throw FxTrace.Exception.AsError(new FaultException(OperationExecutionFault.CreateAbortedFault(SR.WorkflowInstanceAborted(this.Id))));
+                throw FxTrace.Exception.AsError(
+                    new FaultException(
+                        OperationExecutionFault.CreateAbortedFault(
+                            SR.WorkflowInstanceAborted(this.Id)
+                        )
+                    )
+                );
             }
         }
 
@@ -1786,11 +2154,23 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.terminationException != null)
                 {
-                    throw FxTrace.Exception.AsError(new FaultException(OperationExecutionFault.CreateTerminatedFault(SR.WorkflowInstanceTerminated(this.Id))));
+                    throw FxTrace.Exception.AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateTerminatedFault(
+                                SR.WorkflowInstanceTerminated(this.Id)
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new FaultException(OperationExecutionFault.CreateCompletedFault(SR.WorkflowInstanceCompleted(this.Id))));
+                    throw FxTrace.Exception.AsError(
+                        new FaultException(
+                            OperationExecutionFault.CreateCompletedFault(
+                                SR.WorkflowInstanceCompleted(this.Id)
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -1799,7 +2179,13 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.state == State.Unloaded)
             {
-                throw FxTrace.Exception.AsError(new FaultException(OperationExecutionFault.CreateInstanceUnloadedFault(SR.WorkflowInstanceUnloaded(this.Id))));
+                throw FxTrace.Exception.AsError(
+                    new FaultException(
+                        OperationExecutionFault.CreateInstanceUnloadedFault(
+                            SR.WorkflowInstanceUnloaded(this.Id)
+                        )
+                    )
+                );
             }
         }
 
@@ -1807,7 +2193,9 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.state == State.Suspended)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InstanceMustNotBeSuspended));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.InstanceMustNotBeSuspended)
+                );
             }
         }
 
@@ -1815,7 +2203,9 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.persistenceContext == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.PersistenceProviderRequiredToPersist));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.PersistenceProviderRequiredToPersist)
+                );
             }
         }
 
@@ -1823,7 +2213,13 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             // Note: we allow suspend even when suspended to update Suspended reason.
 
-            Validate(transaction == null ? XD2.WorkflowInstanceManagementService.Suspend : XD2.WorkflowInstanceManagementService.TransactedSuspend, transaction, true);
+            Validate(
+                transaction == null
+                    ? XD2.WorkflowInstanceManagementService.Suspend
+                    : XD2.WorkflowInstanceManagementService.TransactedSuspend,
+                transaction,
+                true
+            );
 
             // WorkflowInstanceException validations
             ThrowIfAborted();
@@ -1840,7 +2236,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 return false;
             }
 
-            Validate(transaction == null ? XD2.WorkflowInstanceManagementService.Unsuspend : XD2.WorkflowInstanceManagementService.TransactedUnsuspend, transaction, true);
+            Validate(
+                transaction == null
+                    ? XD2.WorkflowInstanceManagementService.Unsuspend
+                    : XD2.WorkflowInstanceManagementService.TransactedUnsuspend,
+                transaction,
+                true
+            );
 
             // WorkflowInstanceException validations
             ThrowIfAborted();
@@ -1852,12 +2254,25 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         bool ValidateStateForRun(Transaction transaction, string operationName)
         {
-            if (this.hasRaisedCompleted || (this.state == State.Active && this.isRunnable) || this.isInTransaction)
+            if (
+                this.hasRaisedCompleted
+                || (this.state == State.Active && this.isRunnable)
+                || this.isInTransaction
+            )
             {
                 return false;
             }
 
-            Validate(operationName ?? (transaction == null ? XD2.WorkflowInstanceManagementService.Run : XD2.WorkflowInstanceManagementService.TransactedRun), transaction, true);
+            Validate(
+                operationName
+                    ?? (
+                        transaction == null
+                            ? XD2.WorkflowInstanceManagementService.Run
+                            : XD2.WorkflowInstanceManagementService.TransactedRun
+                    ),
+                transaction,
+                true
+            );
 
             // WorkflowInstanceException validations
             ThrowIfAborted();
@@ -1889,7 +2304,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 result = BookmarkResumptionResult.NotFound;
                 return true;
             }
-            else if (this.state == State.Unloaded || this.state == State.Aborted || this.state == State.Suspended)
+            else if (
+                this.state == State.Unloaded
+                || this.state == State.Aborted
+                || this.state == State.Suspended
+            )
             {
                 result = BookmarkResumptionResult.NotReady;
                 return true;
@@ -1916,7 +2335,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 return false;
             }
 
-            Validate(transaction == null ? XD2.WorkflowInstanceManagementService.Cancel : XD2.WorkflowInstanceManagementService.TransactedCancel, transaction, true);
+            Validate(
+                transaction == null
+                    ? XD2.WorkflowInstanceManagementService.Cancel
+                    : XD2.WorkflowInstanceManagementService.TransactedCancel,
+                transaction,
+                true
+            );
 
             // WorkflowInstanceException validations
             ThrowIfAborted();
@@ -1956,7 +2381,13 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         bool ValidateStateForTerminate(Transaction transaction)
         {
-            Validate(transaction == null ? XD2.WorkflowInstanceManagementService.Terminate : XD2.WorkflowInstanceManagementService.TransactedTerminate, transaction, true);
+            Validate(
+                transaction == null
+                    ? XD2.WorkflowInstanceManagementService.Terminate
+                    : XD2.WorkflowInstanceManagementService.TransactedTerminate,
+                transaction,
+                true
+            );
 
             // WorkflowInstanceException validations
             ThrowIfAborted();
@@ -1972,7 +2403,7 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             Delete,
             Save,
-            Unload
+            Unload,
         }
 
         struct AcquireLockAsyncData
@@ -1981,7 +2412,11 @@ namespace System.ServiceModel.Activities.Dispatcher
             FastAsyncCallback callback;
             object state;
 
-            public AcquireLockAsyncData(WorkflowServiceInstance instance, FastAsyncCallback callback, object state)
+            public AcquireLockAsyncData(
+                WorkflowServiceInstance instance,
+                FastAsyncCallback callback,
+                object state
+            )
             {
                 this.instance = instance;
                 this.callback = callback;
@@ -1990,26 +2425,17 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public WorkflowServiceInstance Instance
             {
-                get
-                {
-                    return instance;
-                }
+                get { return instance; }
             }
 
             public FastAsyncCallback Callback
             {
-                get
-                {
-                    return this.callback;
-                }
+                get { return this.callback; }
             }
 
             public object State
             {
-                get
-                {
-                    return this.state;
-                }
+                get { return this.state; }
             }
         }
 
@@ -2021,20 +2447,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.ShouldTrackAbort = shouldTrackAbort;
             }
 
-            public Exception Reason
-            {
-                get;
-                private set;
-            }
+            public Exception Reason { get; private set; }
 
-            public bool ShouldTrackAbort
-            {
-                get;
-                private set;
-            }
+            public bool ShouldTrackAbort { get; private set; }
         }
 
-        public IAsyncResult BeginTryAcquireReference(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryAcquireReference(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new TryAcquireReferenceAsyncResult(this, timeout, callback, state);
         }
@@ -2044,7 +2466,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             return TryAcquireReferenceAsyncResult.End(result);
         }
 
-        public IAsyncResult BeginReleaseInstance(bool isTryUnload, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReleaseInstance(
+            bool isTryUnload,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ReleaseInstanceAsyncResult(this, isTryUnload, timeout, callback, state);
         }
@@ -2059,9 +2486,22 @@ namespace System.ServiceModel.Activities.Dispatcher
             ReleaseInstanceAsyncResult.End(result);
         }
 
-        public IAsyncResult BeginAssociateInfrastructureKeys(ICollection<InstanceKey> associatedKeys, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginAssociateInfrastructureKeys(
+            ICollection<InstanceKey> associatedKeys,
+            Transaction transaction,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new AssociateKeysAsyncResult(this, associatedKeys, transaction, timeout, callback, state);
+            return new AssociateKeysAsyncResult(
+                this,
+                associatedKeys,
+                transaction,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public void EndAssociateInfrastructureKeys(IAsyncResult result)
@@ -2077,14 +2517,20 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        public IAsyncResult BeginWaitForPendingOperations(string sessionId, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForPendingOperations(
+            string sessionId,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             PendingOperationAsyncResult result = null;
             lock (this.thisLock)
             {
                 if (this.pendingOperations == null)
                 {
-                    this.pendingOperations = new Dictionary<string, List<PendingOperationAsyncResult>>();
+                    this.pendingOperations =
+                        new Dictionary<string, List<PendingOperationAsyncResult>>();
                 }
                 List<PendingOperationAsyncResult> pendingList;
                 if (!this.pendingOperations.TryGetValue(sessionId, out pendingList))
@@ -2106,7 +2552,6 @@ namespace System.ServiceModel.Activities.Dispatcher
             PendingOperationAsyncResult.End(result);
         }
 
-
         public void RemovePendingOperation(string sessionId, IAsyncResult result)
         {
             // remove the async result from the queue. The result could represent the operation currently being processed for the session
@@ -2116,14 +2561,17 @@ namespace System.ServiceModel.Activities.Dispatcher
             lock (this.thisLock)
             {
                 List<PendingOperationAsyncResult> pendingList;
-                if (this.pendingOperations != null && this.pendingOperations.TryGetValue(sessionId, out pendingList))
+                if (
+                    this.pendingOperations != null
+                    && this.pendingOperations.TryGetValue(sessionId, out pendingList)
+                )
                 {
                     if (pendingList.Count > 0)
                     {
                         // In the happy path, RemovePendingOperation might get called more than more than once(HandleEndResume & ProcessReply)
                         // wasInProcess would be false the second time. When wasInProcess is false, we do not unblock the next item in the list
                         bool wasInProcess = pendingList[0] == result;
-                        
+
                         if (pendingList.Remove((PendingOperationAsyncResult)result))
                         {
                             --this.pendingOperationCount;
@@ -2148,7 +2596,9 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.pendingOperations != null)
                 {
-                    foreach (List<PendingOperationAsyncResult> pendingList in this.pendingOperations.Values)
+                    foreach (
+                        List<PendingOperationAsyncResult> pendingList in this.pendingOperations.Values
+                    )
                     {
                         foreach (PendingOperationAsyncResult result in pendingList)
                         {
@@ -2166,7 +2616,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             if (this.BufferedReceiveManager != null)
             {
                 this.persistenceContext.Bookmarks = this.Controller.GetBookmarks();
-                this.BufferedReceiveManager.Retry(this.persistenceContext.AssociatedKeys, this.persistenceContext.Bookmarks);
+                this.BufferedReceiveManager.Retry(
+                    this.persistenceContext.AssociatedKeys,
+                    this.persistenceContext.Bookmarks
+                );
             }
         }
 
@@ -2174,18 +2627,37 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             if (this.terminationException != null)
             {
-                FaultPendingRequests(new FaultException(OperationExecutionFault.CreateTerminatedFault(SR.WorkflowInstanceTerminated(this.Id))));
+                FaultPendingRequests(
+                    new FaultException(
+                        OperationExecutionFault.CreateTerminatedFault(
+                            SR.WorkflowInstanceTerminated(this.Id)
+                        )
+                    )
+                );
             }
             else
             {
-                FaultPendingRequests(new FaultException(OperationExecutionFault.CreateCompletedFault(SR.WorkflowInstanceCompleted(this.Id))));
+                FaultPendingRequests(
+                    new FaultException(
+                        OperationExecutionFault.CreateCompletedFault(
+                            SR.WorkflowInstanceCompleted(this.Id)
+                        )
+                    )
+                );
             }
 
             if (handleEndReleaseInstance == null)
             {
-                handleEndReleaseInstance = Fx.ThunkCallback(new AsyncCallback(HandleEndReleaseInstance));
+                handleEndReleaseInstance = Fx.ThunkCallback(
+                    new AsyncCallback(HandleEndReleaseInstance)
+                );
             }
-            IAsyncResult result = this.BeginReleaseInstance(false, TimeSpan.MaxValue, handleEndReleaseInstance, this);
+            IAsyncResult result = this.BeginReleaseInstance(
+                false,
+                TimeSpan.MaxValue,
+                handleEndReleaseInstance,
+                this
+            );
             if (result.CompletedSynchronously)
             {
                 OnReleaseInstance(result);
@@ -2217,7 +2689,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     throw;
                 }
-                // 
+                //
                 this.AbortInstance(e, false);
             }
         }
@@ -2260,17 +2732,22 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 try
                 {
-                    if ((this.state == State.Suspended && this.isTransactedCancelled) || this.state == State.Active)
+                    if (
+                        (this.state == State.Suspended && this.isTransactedCancelled)
+                        || this.state == State.Active
+                    )
                     {
                         bool ownsLock = false;
                         // this could ---- with other commands and may throw exception.
                         // treat it as best effort pulse of workflow.
                         try
                         {
-
                             AcquireLock(this.acquireLockTimeout, ref ownsLock);
 
-                            if ((this.state == State.Suspended && this.isTransactedCancelled) || ValidateStateForRun(null, null))
+                            if (
+                                (this.state == State.Suspended && this.isTransactedCancelled)
+                                || ValidateStateForRun(null, null)
+                            )
                             {
                                 this.isRunnable = true;
                                 this.state = State.Active;
@@ -2289,8 +2766,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                             ReleaseLock(ref ownsLock);
                         }
                     }
-                    // the workflow has completed thru transacted Terminate 
-                    else if (this.state == State.Unloaded && this.completionState == ActivityInstanceState.Faulted)
+                    // the workflow has completed thru transacted Terminate
+                    else if (
+                        this.state == State.Unloaded
+                        && this.completionState == ActivityInstanceState.Faulted
+                    )
                     {
                         try
                         {
@@ -2334,16 +2814,30 @@ namespace System.ServiceModel.Activities.Dispatcher
             ValidateHelper(operationName, ambientTransaction, false, controlEndpoint);
         }
 
-        void ValidateHelper(string operationName, Transaction ambientTransaction, bool useThreadTransaction, bool controlEndpoint)
+        void ValidateHelper(
+            string operationName,
+            Transaction ambientTransaction,
+            bool useThreadTransaction,
+            bool controlEndpoint
+        )
         {
             TransactionContext attachedTransaction = this.transactionContext;
 
             //Ensure Instance is usable.
-            if (attachedTransaction != null &&
-                attachedTransaction.CurrentTransaction != (useThreadTransaction ? Transaction.Current : ambientTransaction))
+            if (
+                attachedTransaction != null
+                && attachedTransaction.CurrentTransaction
+                    != (useThreadTransaction ? Transaction.Current : ambientTransaction)
+            )
             {
-                throw FxTrace.Exception.AsError(new FaultException(
-                    OperationExecutionFault.CreateTransactedLockException(this.persistenceContext.InstanceId, operationName)));
+                throw FxTrace.Exception.AsError(
+                    new FaultException(
+                        OperationExecutionFault.CreateTransactedLockException(
+                            this.persistenceContext.InstanceId,
+                            operationName
+                        )
+                    )
+                );
             }
 
             if (controlEndpoint)
@@ -2353,31 +2847,49 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             if (this.state == State.Unloaded)
             {
-                throw FxTrace.Exception.AsError(new FaultException(
-                    OperationExecutionFault.CreateInstanceUnloadedFault(SR.ServiceInstanceUnloaded(this.persistenceContext.InstanceId))));
+                throw FxTrace.Exception.AsError(
+                    new FaultException(
+                        OperationExecutionFault.CreateInstanceUnloadedFault(
+                            SR.ServiceInstanceUnloaded(this.persistenceContext.InstanceId)
+                        )
+                    )
+                );
             }
 
             //Do a fast check to fail fast.
             if (this.state == State.Completed || this.state == State.Aborted)
             {
-                throw FxTrace.Exception.AsError(new FaultException(
-                    OperationExecutionFault.CreateInstanceNotFoundFault(SR.ServiceInstanceTerminated(this.persistenceContext.InstanceId))));
+                throw FxTrace.Exception.AsError(
+                    new FaultException(
+                        OperationExecutionFault.CreateInstanceNotFoundFault(
+                            SR.ServiceInstanceTerminated(this.persistenceContext.InstanceId)
+                        )
+                    )
+                );
             }
 
-            if (this.state == State.Suspended &&
-                !(operationName == XD2.WorkflowInstanceManagementService.Suspend
-                || operationName == XD2.WorkflowInstanceManagementService.TransactedSuspend
-                || operationName == XD2.WorkflowInstanceManagementService.Unsuspend
-                || operationName == XD2.WorkflowInstanceManagementService.TransactedUnsuspend
-                || operationName == XD2.WorkflowInstanceManagementService.Terminate
-                || operationName == XD2.WorkflowInstanceManagementService.TransactedTerminate
-                || operationName == XD2.WorkflowInstanceManagementService.Cancel
-                || operationName == XD2.WorkflowInstanceManagementService.TransactedCancel))
+            if (
+                this.state == State.Suspended
+                && !(
+                    operationName == XD2.WorkflowInstanceManagementService.Suspend
+                    || operationName == XD2.WorkflowInstanceManagementService.TransactedSuspend
+                    || operationName == XD2.WorkflowInstanceManagementService.Unsuspend
+                    || operationName == XD2.WorkflowInstanceManagementService.TransactedUnsuspend
+                    || operationName == XD2.WorkflowInstanceManagementService.Terminate
+                    || operationName == XD2.WorkflowInstanceManagementService.TransactedTerminate
+                    || operationName == XD2.WorkflowInstanceManagementService.Cancel
+                    || operationName == XD2.WorkflowInstanceManagementService.TransactedCancel
+                )
+            )
             {
-                throw FxTrace.Exception.AsError(new FaultException(
-                    OperationExecutionFault.CreateSuspendedFault(this.Id, operationName)));
+                throw FxTrace.Exception.AsError(
+                    new FaultException(
+                        OperationExecutionFault.CreateSuspendedFault(this.Id, operationName)
+                    )
+                );
             }
         }
+
         //already done under the scope of a lock.No additional locking needed here
         void DecrementBusyCount()
         {
@@ -2386,11 +2898,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.serviceHost.DecrementBusyCount();
                 if (AspNetEnvironment.Current.TraceDecrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceDecrementBusyCount(SR.BusyCountTraceFormatString(this.Id));
+                    AspNetEnvironment.Current.TraceDecrementBusyCount(
+                        SR.BusyCountTraceFormatString(this.Id)
+                    );
                 }
                 this.hasIncrementedBusyCount = false;
             }
         }
+
         //already done under the scope of a lock.No additional locking needed here
         void IncrementBusyCount()
         {
@@ -2399,12 +2914,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.serviceHost.IncrementBusyCount();
                 if (AspNetEnvironment.Current.TraceIncrementBusyCountIsEnabled())
                 {
-                    AspNetEnvironment.Current.TraceIncrementBusyCount(SR.BusyCountTraceFormatString(this.Id));
+                    AspNetEnvironment.Current.TraceIncrementBusyCount(
+                        SR.BusyCountTraceFormatString(this.Id)
+                    );
                 }
                 this.hasIncrementedBusyCount = true;
             }
         }
-
 
         enum State
         {
@@ -2412,15 +2928,19 @@ namespace System.ServiceModel.Activities.Dispatcher
             Aborted,
             Suspended,
             Completed,
-            Unloaded
+            Unloaded,
         };
 
         class ReleaseInstanceAsyncResult : AsyncResult
         {
             static AsyncCompletion handleEndUnload;
-            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(Finally);
+            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(
+                Finally
+            );
             static FastAsyncCallback lockAcquiredCallback = new FastAsyncCallback(OnLockAcquired);
-            static FastAsyncCallback acquireCompletedCallback = new FastAsyncCallback(AcquireCompletedCallback);
+            static FastAsyncCallback acquireCompletedCallback = new FastAsyncCallback(
+                AcquireCompletedCallback
+            );
             static AsyncCompletion onReleasePersistenceContext;
             static AsyncCompletion onClosePersistenceContext;
             WorkflowServiceInstance workflowInstance;
@@ -2429,8 +2949,13 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool ownsLock;
             bool referenceAcquired;
 
-            public ReleaseInstanceAsyncResult(WorkflowServiceInstance workflowServiceInstance,
-                bool isTryUnload, TimeSpan timeout, AsyncCallback callback, object state)
+            public ReleaseInstanceAsyncResult(
+                WorkflowServiceInstance workflowServiceInstance,
+                bool isTryUnload,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.workflowInstance = workflowServiceInstance;
@@ -2475,7 +3000,13 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             bool TryAcquire()
             {
-                if (this.workflowInstance.acquireReferenceSemaphore.EnterAsync(timeoutHelper.RemainingTime(), acquireCompletedCallback, this))
+                if (
+                    this.workflowInstance.acquireReferenceSemaphore.EnterAsync(
+                        timeoutHelper.RemainingTime(),
+                        acquireCompletedCallback,
+                        this
+                    )
+                )
                 {
                     return this.HandleEndAcquireReference();
                 }
@@ -2537,13 +3068,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (this.isTryUnload)
                     {
-                        result = this.BeginTryUnload(timeoutHelper.RemainingTime(),
-                            this.PrepareAsyncCompletion(handleEndUnload), this);
+                        result = this.BeginTryUnload(
+                            timeoutHelper.RemainingTime(),
+                            this.PrepareAsyncCompletion(handleEndUnload),
+                            this
+                        );
                     }
                     else
                     {
-                        result = this.BeginUnload(timeoutHelper.RemainingTime(),
-                            this.PrepareAsyncCompletion(handleEndUnload), this);
+                        result = this.BeginUnload(
+                            timeoutHelper.RemainingTime(),
+                            this.PrepareAsyncCompletion(handleEndUnload),
+                            this
+                        );
                     }
                 }
                 catch (FaultException exception)
@@ -2571,7 +3108,15 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             IAsyncResult BeginUnload(TimeSpan timeout, AsyncCallback callback, object state)
             {
-                return new UnloadOrPersistAsyncResult(this.workflowInstance, PersistenceOperation.Unload, false, false, timeout, callback, state);
+                return new UnloadOrPersistAsyncResult(
+                    this.workflowInstance,
+                    PersistenceOperation.Unload,
+                    false,
+                    false,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
             void EndUnload(IAsyncResult result)
@@ -2581,7 +3126,15 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             IAsyncResult BeginTryUnload(TimeSpan timeout, AsyncCallback callback, object state)
             {
-                return new UnloadOrPersistAsyncResult(this.workflowInstance, PersistenceOperation.Unload, false, true, timeout, callback, state);
+                return new UnloadOrPersistAsyncResult(
+                    this.workflowInstance,
+                    PersistenceOperation.Unload,
+                    false,
+                    true,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
             bool EndTryUnload(IAsyncResult result)
@@ -2630,7 +3183,14 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             bool LockAndReleasePersistenceContext()
             {
-                if (this.workflowInstance.AcquireLockAsync(this.timeoutHelper.RemainingTime(), ref this.ownsLock, lockAcquiredCallback, this))
+                if (
+                    this.workflowInstance.AcquireLockAsync(
+                        this.timeoutHelper.RemainingTime(),
+                        ref this.ownsLock,
+                        lockAcquiredCallback,
+                        this
+                    )
+                )
                 {
                     bool completeSelf = true;
                     try
@@ -2706,8 +3266,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                     onReleasePersistenceContext = new AsyncCompletion(OnReleasePersistenceContext);
                 }
 
-                IAsyncResult result = this.workflowInstance.persistenceContext.BeginRelease(this.workflowInstance.persistTimeout,
-                    PrepareAsyncCompletion(onReleasePersistenceContext), this);
+                IAsyncResult result = this.workflowInstance.persistenceContext.BeginRelease(
+                    this.workflowInstance.persistTimeout,
+                    PrepareAsyncCompletion(onReleasePersistenceContext),
+                    this
+                );
 
                 return SyncContinue(result);
             }
@@ -2721,8 +3284,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                     onClosePersistenceContext = new AsyncCompletion(OnClosePersistenceContext);
                 }
 
-                IAsyncResult closeResult = thisPtr.workflowInstance.persistenceContext.BeginClose(thisPtr.timeoutHelper.RemainingTime(),
-                    thisPtr.PrepareAsyncCompletion(onClosePersistenceContext), thisPtr);
+                IAsyncResult closeResult = thisPtr.workflowInstance.persistenceContext.BeginClose(
+                    thisPtr.timeoutHelper.RemainingTime(),
+                    thisPtr.PrepareAsyncCompletion(onClosePersistenceContext),
+                    thisPtr
+                );
                 return thisPtr.SyncContinue(closeResult);
             }
 
@@ -2743,7 +3309,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (completionException != null && !Fx.IsFatal(completionException))
                         {
-                            thisPtr.workflowInstance.AbortInstance(completionException, thisPtr.ownsLock);
+                            thisPtr.workflowInstance.AbortInstance(
+                                completionException,
+                                thisPtr.ownsLock
+                            );
                         }
                     }
                     finally
@@ -2767,12 +3336,19 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class TryAcquireReferenceAsyncResult : AsyncResult
         {
-            static FastAsyncCallback acquireCompletedCallback = new FastAsyncCallback(AcquireCompletedCallback);
+            static FastAsyncCallback acquireCompletedCallback = new FastAsyncCallback(
+                AcquireCompletedCallback
+            );
             WorkflowServiceInstance instance;
             TimeoutHelper timeoutHelper;
             bool result;
 
-            public TryAcquireReferenceAsyncResult(WorkflowServiceInstance instance, TimeSpan timeout, AsyncCallback callback, object state)
+            public TryAcquireReferenceAsyncResult(
+                WorkflowServiceInstance instance,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instance = instance;
@@ -2791,7 +3367,13 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             bool TryAcquire()
             {
-                if (this.instance.acquireReferenceSemaphore.EnterAsync(timeoutHelper.RemainingTime(), acquireCompletedCallback, this))
+                if (
+                    this.instance.acquireReferenceSemaphore.EnterAsync(
+                        timeoutHelper.RemainingTime(),
+                        acquireCompletedCallback,
+                        this
+                    )
+                )
                 {
                     this.HandleEndAcquireReference();
                     return true;
@@ -2840,12 +3422,20 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class PendingOperationAsyncResult : AsyncResult
         {
-            static Action<object, TimeoutException> handleEndWait = new Action<object, TimeoutException>(HandleEndWait);
+            static Action<object, TimeoutException> handleEndWait = new Action<
+                object,
+                TimeoutException
+            >(HandleEndWait);
             AsyncWaitHandle waitHandle;
             bool isFirstRequest;
             TimeSpan timeout;
-            
-            public PendingOperationAsyncResult(bool isFirstRequest, TimeSpan timeout, AsyncCallback callback, object state)
+
+            public PendingOperationAsyncResult(
+                bool isFirstRequest,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.isFirstRequest = isFirstRequest;
@@ -2865,7 +3455,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     return;
                 }
 
-                Fx.Assert(this.waitHandle != null, "waitHandle should not be null if the request is not the first");
+                Fx.Assert(
+                    this.waitHandle != null,
+                    "waitHandle should not be null if the request is not the first"
+                );
                 if (this.waitHandle.WaitAsync(handleEndWait, this, this.timeout))
                 {
                     Complete(true);
@@ -2890,14 +3483,17 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 AsyncResult.End<PendingOperationAsyncResult>(result);
             }
-
         }
 
         class AssociateKeysAsyncResult : TransactedAsyncResult
         {
             static AsyncCompletion handleLockAcquired = new AsyncCompletion(HandleLockAcquired);
-            static AsyncCompletion handleAssociateInfrastructureKeys = new AsyncCompletion(HandleAssociateInfrastructureKeys);
-            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(Finally);
+            static AsyncCompletion handleAssociateInfrastructureKeys = new AsyncCompletion(
+                HandleAssociateInfrastructureKeys
+            );
+            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(
+                Finally
+            );
 
             readonly WorkflowServiceInstance workflow;
             readonly ICollection<InstanceKey> associatedKeys;
@@ -2905,19 +3501,32 @@ namespace System.ServiceModel.Activities.Dispatcher
             readonly Transaction transaction;
             bool ownsLock;
 
-            public AssociateKeysAsyncResult(WorkflowServiceInstance workflow, ICollection<InstanceKey> associatedKeys, Transaction transaction,
-                TimeSpan timeout, AsyncCallback callback, object state)
+            public AssociateKeysAsyncResult(
+                WorkflowServiceInstance workflow,
+                ICollection<InstanceKey> associatedKeys,
+                Transaction transaction,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
-                Fx.Assert(associatedKeys != null && associatedKeys.Count > 0, "Must have associatedKeys!");
+                Fx.Assert(
+                    associatedKeys != null && associatedKeys.Count > 0,
+                    "Must have associatedKeys!"
+                );
                 this.workflow = workflow;
                 this.associatedKeys = associatedKeys;
                 this.transaction = transaction;
                 this.timeoutHelper = new TimeoutHelper(timeout);
                 this.OnCompleting = onCompleting;
 
-                IAsyncResult result = this.workflow.BeginAcquireLockOnIdle(this.timeoutHelper.RemainingTime(), ref this.ownsLock, 
-                    PrepareAsyncCompletion(handleLockAcquired), this);
+                IAsyncResult result = this.workflow.BeginAcquireLockOnIdle(
+                    this.timeoutHelper.RemainingTime(),
+                    ref this.ownsLock,
+                    PrepareAsyncCompletion(handleLockAcquired),
+                    this
+                );
                 if (SyncContinue(result))
                 {
                     Complete(true);
@@ -2951,8 +3560,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 IAsyncResult result;
                 using (PrepareTransactionalCall(this.transaction))
                 {
-                    result = this.workflow.persistenceContext.BeginAssociateInfrastructureKeys(this.associatedKeys, this.workflow.persistTimeout,
-                        PrepareAsyncCompletion(handleAssociateInfrastructureKeys), this);
+                    result = this.workflow.persistenceContext.BeginAssociateInfrastructureKeys(
+                        this.associatedKeys,
+                        this.workflow.persistTimeout,
+                        PrepareAsyncCompletion(handleAssociateInfrastructureKeys),
+                        this
+                    );
                 }
                 return SyncContinue(result);
             }
@@ -2982,10 +3595,16 @@ namespace System.ServiceModel.Activities.Dispatcher
             static Action<object, TimeoutException> nextIdleCallback;
             static Action<object, TimeoutException> workflowServiceInstanceReadyCallback;
 
-            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(Finally);
+            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(
+                Finally
+            );
             static AsyncCompletion handleEndTrack = new AsyncCompletion(HandleEndTrack);
-            static AsyncCompletion handleEndLockAcquired = new AsyncCompletion(HandleEndLockAcquired);
-            static AsyncCompletion handleEndReferenceAcquired = new AsyncCompletion(HandleEndReferenceAcquired);
+            static AsyncCompletion handleEndLockAcquired = new AsyncCompletion(
+                HandleEndLockAcquired
+            );
+            static AsyncCompletion handleEndReferenceAcquired = new AsyncCompletion(
+                HandleEndReferenceAcquired
+            );
 
             WorkflowServiceInstance instance;
             Bookmark bookmark;
@@ -2999,7 +3618,16 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool isResumeProtocolBookmark;
             bool referenceAcquired;
 
-            public ResumeProtocolBookmarkAsyncResult(WorkflowServiceInstance instance, Bookmark bookmark, object value, BookmarkScope bookmarkScope, bool isResumeProtocolBookmark, TimeSpan timeout, AsyncCallback callback, object state)
+            public ResumeProtocolBookmarkAsyncResult(
+                WorkflowServiceInstance instance,
+                Bookmark bookmark,
+                object value,
+                BookmarkScope bookmarkScope,
+                bool isResumeProtocolBookmark,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instance = instance;
@@ -3009,10 +3637,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.timeoutHelper = new TimeoutHelper(timeout);
                 // The value for WorkflowServiceHost.FilterResumeTimeout comes from the AppSetting
                 // "microsoft:WorkflowServices:FilterResumeTimeoutInSeconds"
-                this.nextIdleTimeoutHelper = new TimeoutHelper(instance.serviceHost.FilterResumeTimeout);
+                this.nextIdleTimeoutHelper = new TimeoutHelper(
+                    instance.serviceHost.FilterResumeTimeout
+                );
                 this.isResumeProtocolBookmark = isResumeProtocolBookmark;
                 this.OnCompleting = onCompleting;
-                
+
                 Exception completionException = null;
                 bool completeSelf = true;
 
@@ -3026,7 +3656,6 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         completeSelf = WaitForInstanceToBeReady();
                     }
-
                 }
                 catch (Exception e)
                 {
@@ -3046,19 +3675,29 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             bool DoResumeBookmark()
             {
-                IAsyncResult result = this.instance.BeginAcquireLockOnIdle(timeoutHelper.RemainingTime(), ref this.ownsLock, PrepareAsyncCompletion(handleEndLockAcquired), this);
+                IAsyncResult result = this.instance.BeginAcquireLockOnIdle(
+                    timeoutHelper.RemainingTime(),
+                    ref this.ownsLock,
+                    PrepareAsyncCompletion(handleEndLockAcquired),
+                    this
+                );
                 return SyncContinue(result);
             }
 
             bool WaitForInstanceToBeReady()
             {
-                IAsyncResult result = this.instance.BeginTryAcquireReference(timeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleEndReferenceAcquired), this);
+                IAsyncResult result = this.instance.BeginTryAcquireReference(
+                    timeoutHelper.RemainingTime(),
+                    PrepareAsyncCompletion(handleEndReferenceAcquired),
+                    this
+                );
                 return SyncContinue(result);
             }
 
             static bool HandleEndReferenceAcquired(IAsyncResult result)
             {
-                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)result.AsyncState;
+                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)
+                    result.AsyncState;
                 thisPtr.referenceAcquired = thisPtr.instance.EndTryAcquireReference(result);
                 if (thisPtr.referenceAcquired)
                 {
@@ -3082,7 +3721,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                         needToWait = true;
                         if (this.instance.workflowServiceInstanceReadyWaitHandle == null)
                         {
-                            this.instance.workflowServiceInstanceReadyWaitHandle = new AsyncWaitHandle(EventResetMode.ManualReset);
+                            this.instance.workflowServiceInstanceReadyWaitHandle =
+                                new AsyncWaitHandle(EventResetMode.ManualReset);
                         }
                     }
                 }
@@ -3091,10 +3731,18 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (workflowServiceInstanceReadyCallback == null)
                     {
-                        workflowServiceInstanceReadyCallback = new Action<object, TimeoutException>(OnSignaled);
+                        workflowServiceInstanceReadyCallback = new Action<object, TimeoutException>(
+                            OnSignaled
+                        );
                     }
 
-                    if (this.instance.workflowServiceInstanceReadyWaitHandle.WaitAsync(workflowServiceInstanceReadyCallback, this, this.timeoutHelper.RemainingTime()))
+                    if (
+                        this.instance.workflowServiceInstanceReadyWaitHandle.WaitAsync(
+                            workflowServiceInstanceReadyCallback,
+                            this,
+                            this.timeoutHelper.RemainingTime()
+                        )
+                    )
                     {
                         return DoResumeBookmark();
                     }
@@ -3111,7 +3759,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static void OnSignaled(object state, TimeoutException exception)
             {
-                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)state;
+                ResumeProtocolBookmarkAsyncResult thisPtr =
+                    (ResumeProtocolBookmarkAsyncResult)state;
                 if (exception != null)
                 {
                     thisPtr.Complete(false, exception);
@@ -3149,13 +3798,15 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public static BookmarkResumptionResult End(IAsyncResult result)
             {
-                ResumeProtocolBookmarkAsyncResult thisPtr = AsyncResult.End<ResumeProtocolBookmarkAsyncResult>(result);
+                ResumeProtocolBookmarkAsyncResult thisPtr =
+                    AsyncResult.End<ResumeProtocolBookmarkAsyncResult>(result);
                 return thisPtr.resumptionResult;
             }
 
             static bool HandleEndLockAcquired(IAsyncResult result)
             {
-                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)result.AsyncState;
+                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)
+                    result.AsyncState;
                 if (result.CompletedSynchronously)
                 {
                     thisPtr.instance.EndAcquireLockOnIdle(result);
@@ -3174,9 +3825,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bool waitFinishedSynchronously;
                 bool completeSelf = false;
 
-                // For ProtocolBookmark without Out-Of-Order messaging support, we will throw and 
+                // For ProtocolBookmark without Out-Of-Order messaging support, we will throw and
                 // propagate Fault to client in case of invalid state (similar to management commands).
-                // Otherwise, the result consistent with WorkflowApplication will be return and 
+                // Otherwise, the result consistent with WorkflowApplication will be return and
                 // the caller (eg. delay extension or OOM) needs to handle them accordingly.
                 if (this.isResumeProtocolBookmark && this.instance.BufferedReceiveManager == null)
                 {
@@ -3194,16 +3845,37 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     waitFinishedSynchronously = false;
 
-                    bool bufferedReceiveEnabled = this.isResumeProtocolBookmark && this.instance.BufferedReceiveManager != null;
-                    this.resumptionResult = this.instance.ResumeProtocolBookmarkCore(this.bookmark, this.value, this.bookmarkScope, bufferedReceiveEnabled, ref this.waitHandle, ref this.ownsLock);
-                    if (this.resumptionResult == BookmarkResumptionResult.NotReady && !bufferedReceiveEnabled && (this.instance.serviceHost.FilterResumeTimeout.TotalSeconds > 0))
-                        {
+                    bool bufferedReceiveEnabled =
+                        this.isResumeProtocolBookmark
+                        && this.instance.BufferedReceiveManager != null;
+                    this.resumptionResult = this.instance.ResumeProtocolBookmarkCore(
+                        this.bookmark,
+                        this.value,
+                        this.bookmarkScope,
+                        bufferedReceiveEnabled,
+                        ref this.waitHandle,
+                        ref this.ownsLock
+                    );
+                    if (
+                        this.resumptionResult == BookmarkResumptionResult.NotReady
+                        && !bufferedReceiveEnabled
+                        && (this.instance.serviceHost.FilterResumeTimeout.TotalSeconds > 0)
+                    )
+                    {
                         if (nextIdleCallback == null)
                         {
                             nextIdleCallback = new Action<object, TimeoutException>(OnNextIdle);
                         }
-                        
-                        if (this.waitHandle.WaitAsync(nextIdleCallback, this, !this.isResumeProtocolBookmark ? this.timeoutHelper.RemainingTime() : this.nextIdleTimeoutHelper.RemainingTime()))
+
+                        if (
+                            this.waitHandle.WaitAsync(
+                                nextIdleCallback,
+                                this,
+                                !this.isResumeProtocolBookmark
+                                    ? this.timeoutHelper.RemainingTime()
+                                    : this.nextIdleTimeoutHelper.RemainingTime()
+                            )
+                        )
                         {
                             // We now have the lock
                             this.ownsLock = true;
@@ -3221,9 +3893,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                         completeSelf = true;
                         break;
                     }
-
-                }
-                while (waitFinishedSynchronously);
+                } while (waitFinishedSynchronously);
 
                 return TrackPerformResumption(completeSelf);
             }
@@ -3234,7 +3904,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     Fx.Assert(completeSelf, "CompleteSelf should be true at this point.");
 
-                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(this.instance.trackTimeout, PrepareAsyncCompletion(handleEndTrack), this);
+                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(
+                        this.instance.trackTimeout,
+                        PrepareAsyncCompletion(handleEndTrack),
+                        this
+                    );
                     completeSelf = SyncContinue(result);
                 }
 
@@ -3243,7 +3917,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static bool HandleEndTrack(IAsyncResult result)
             {
-                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)result.AsyncState;
+                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)
+                    result.AsyncState;
                 thisPtr.instance.Controller.EndFlushTrackingRecords(result);
 
                 if (thisPtr.ownsLock)
@@ -3260,7 +3935,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static void OnNextIdle(object state, TimeoutException asyncException)
             {
-                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)state;
+                ResumeProtocolBookmarkAsyncResult thisPtr =
+                    (ResumeProtocolBookmarkAsyncResult)state;
 
                 if (asyncException != null)
                 {
@@ -3269,7 +3945,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // If the waitHandle is not in either of these lists then it must have
                         // been removed by the Set() path - that means we've got the lock, so let's
                         // just run with it (IE - swallow the exception).
-                        if (thisPtr.instance.nextIdleWaiters.Remove(thisPtr.waitHandle) || thisPtr.instance.idleWaiters.Remove(thisPtr.waitHandle))
+                        if (
+                            thisPtr.instance.nextIdleWaiters.Remove(thisPtr.waitHandle)
+                            || thisPtr.instance.idleWaiters.Remove(thisPtr.waitHandle)
+                        )
                         {
                             thisPtr.Complete(false, asyncException);
                             return;
@@ -3311,7 +3990,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static void Finally(AsyncResult result, Exception completionException)
             {
-                ResumeProtocolBookmarkAsyncResult thisPtr = (ResumeProtocolBookmarkAsyncResult)result;
+                ResumeProtocolBookmarkAsyncResult thisPtr =
+                    (ResumeProtocolBookmarkAsyncResult)result;
                 try
                 {
                     if (thisPtr.ownsLock)
@@ -3335,13 +4015,22 @@ namespace System.ServiceModel.Activities.Dispatcher
             static FastAsyncCallback lockAcquiredCallback = new FastAsyncCallback(OnLockAcquired);
             static AsyncCompletion persistedCallback = new AsyncCompletion(OnPersisted);
             static AsyncCompletion savedCallback = new AsyncCompletion(OnSaved);
-            static AsyncCompletion waitForCanPersistCallback = new AsyncCompletion(OnWaitForCanPersist);
+            static AsyncCompletion waitForCanPersistCallback = new AsyncCompletion(
+                OnWaitForCanPersist
+            );
             static AsyncCompletion providerOpenedCallback = new AsyncCompletion(OnProviderOpened);
             static AsyncCompletion outermostCallback = new AsyncCompletion(OutermostCallback);
-            static AsyncCompletion trackingCompleteCallback = new AsyncCompletion(OnTrackingComplete);
+            static AsyncCompletion trackingCompleteCallback = new AsyncCompletion(
+                OnTrackingComplete
+            );
             static AsyncCompletion completeContextCallback = new AsyncCompletion(OnCompleteContext);
-            static AsyncCompletion notifyCompletionCallback = new AsyncCompletion(OnNotifyCompletion);
-            static Action<AsyncResult, Exception> completeCallback = new Action<AsyncResult, Exception>(OnComplete);
+            static AsyncCompletion notifyCompletionCallback = new AsyncCompletion(
+                OnNotifyCompletion
+            );
+            static Action<AsyncResult, Exception> completeCallback = new Action<
+                AsyncResult,
+                Exception
+            >(OnComplete);
 
             WorkflowServiceInstance instance;
             bool isUnloaded;
@@ -3362,13 +4051,23 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool isIdlePolicyPersist;
             long startTime;
 
-            public UnloadOrPersistAsyncResult(WorkflowServiceInstance instance, PersistenceOperation operation,
-                bool isWorkflowThread, bool isTry, TimeSpan timeout, AsyncCallback callback, object state)
+            public UnloadOrPersistAsyncResult(
+                WorkflowServiceInstance instance,
+                PersistenceOperation operation,
+                bool isWorkflowThread,
+                bool isTry,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 // The isTry flag is only true when this is an idle policy initiated persist/unload.
-                
-                Fx.Assert((isWorkflowThread && !isTry) || !isWorkflowThread, "Either we're the workflow thread and NOT a try or we're not a workflow thread.");
+
+                Fx.Assert(
+                    (isWorkflowThread && !isTry) || !isWorkflowThread,
+                    "Either we're the workflow thread and NOT a try or we're not a workflow thread."
+                );
 
                 this.instance = instance;
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -3376,10 +4075,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.isWorkflowThread = isWorkflowThread;
                 this.isTry = isTry;
                 this.tryResult = true;
-                this.isUnloaded = (operation == PersistenceOperation.Unload || operation == PersistenceOperation.Delete);
+                this.isUnloaded = (
+                    operation == PersistenceOperation.Unload
+                    || operation == PersistenceOperation.Delete
+                );
                 this.saveStatus = SaveStatus.Locked;
-                this.isCompletionTransactionRequired = this.isUnloaded && instance.Controller.State == WorkflowInstanceState.Complete && 
-                    instance.creationContext != null && instance.creationContext.IsCompletionTransactionRequired;
+                this.isCompletionTransactionRequired =
+                    this.isUnloaded
+                    && instance.Controller.State == WorkflowInstanceState.Complete
+                    && instance.creationContext != null
+                    && instance.creationContext.IsCompletionTransactionRequired;
                 this.isIdlePolicyPersist = isTry && operation == PersistenceOperation.Save;
 
                 if (operation == PersistenceOperation.Unload)
@@ -3394,7 +4099,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     SetStartTime();
                 }
-                
+
                 // Save off the current transaction in case we have an async operation before we end up creating
                 // the WorkflowPersistenceContext and create it on another thread. Do a simple clone here to prevent
                 // the object referenced by Transaction.Current from disposing before we get around to referencing it
@@ -3405,7 +4110,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 if (currentTransaction != null)
                 {
                     OnCompleting = UnloadOrPersistAsyncResult.completeCallback;
-                    this.dependentTransaction = currentTransaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                    this.dependentTransaction = currentTransaction.DependentClone(
+                        DependentCloneOption.BlockCommitUntilComplete
+                    );
                 }
 
                 bool completeSelf = true;
@@ -3414,7 +4121,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (this.isWorkflowThread)
                     {
-                        Fx.Assert(this.instance.Controller.IsPersistable, "The runtime won't schedule this work item unless we've passed the guard");
+                        Fx.Assert(
+                            this.instance.Controller.IsPersistable,
+                            "The runtime won't schedule this work item unless we've passed the guard"
+                        );
 
                         // We're an internal persistence on the workflow thread which means
                         // that we are passed the guard already, we have the lock, and we know
@@ -3432,9 +4142,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                         {
                             if (completeSelf)
                             {
-                                Fx.Assert(!this.isWorkflowThread, "We should never be calling ReleaseLock if this is the workflow thread.");
+                                Fx.Assert(
+                                    !this.isWorkflowThread,
+                                    "We should never be calling ReleaseLock if this is the workflow thread."
+                                );
 
-                                this.instance.ReleaseLock(ref this.ownsLock, this.isIdlePolicyPersist && this.tryResult);
+                                this.instance.ReleaseLock(
+                                    ref this.ownsLock,
+                                    this.isIdlePolicyPersist && this.tryResult
+                                );
                             }
                         }
                     }
@@ -3457,12 +4173,17 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
-                Safe = "Safe because we only make the call if PartialTrustHelper.AppDomainFullyTrusted is true.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
+                Safe = "Safe because we only make the call if PartialTrustHelper.AppDomainFullyTrusted is true."
+            )]
             [SecuritySafeCritical]
             void SetStartTime()
             {
-                if (PartialTrustHelpers.AppDomainFullyTrusted && UnsafeNativeMethods.QueryPerformanceCounter(out this.startTime) == 0)
+                if (
+                    PartialTrustHelpers.AppDomainFullyTrusted
+                    && UnsafeNativeMethods.QueryPerformanceCounter(out this.startTime) == 0
+                )
                 {
                     this.startTime = -1;
                 }
@@ -3470,7 +4191,14 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             bool LockAndPassGuard()
             {
-                if (this.instance.AcquireLockAsync(this.timeoutHelper.RemainingTime(), ref this.ownsLock, lockAcquiredCallback, this))
+                if (
+                    this.instance.AcquireLockAsync(
+                        this.timeoutHelper.RemainingTime(),
+                        ref this.ownsLock,
+                        lockAcquiredCallback,
+                        this
+                    )
+                )
                 {
                     return PassGuard();
                 }
@@ -3504,8 +4232,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                         return true;
                     }
 
-                    IAsyncResult result = this.instance.BeginWaitForCanPersist(ref this.ownsLock, this.timeoutHelper.RemainingTime(),
-                        PrepareInnerAsyncCompletion(waitForCanPersistCallback), this);
+                    IAsyncResult result = this.instance.BeginWaitForCanPersist(
+                        ref this.ownsLock,
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareInnerAsyncCompletion(waitForCanPersistCallback),
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         return OnWaitForCanPersist(result);
@@ -3517,16 +4249,21 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
-                Safe = "Safe because we only make the call if PartialTrustHelper.AppDomainFullyTrusted is true.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because it accesses UnsafeNativeMethods.QueryPerformanceCounter.",
+                Safe = "Safe because we only make the call if PartialTrustHelper.AppDomainFullyTrusted is true."
+            )]
             [SecuritySafeCritical]
             long GetDuration()
             {
                 long currentTime = 0;
                 long duration = 0;
 
-                if (PartialTrustHelpers.AppDomainFullyTrusted && (this.startTime >= 0) &&
-                    (UnsafeNativeMethods.QueryPerformanceCounter(out currentTime) != 0))
+                if (
+                    PartialTrustHelpers.AppDomainFullyTrusted
+                    && (this.startTime >= 0)
+                    && (UnsafeNativeMethods.QueryPerformanceCounter(out currentTime) != 0)
+                )
                 {
                     duration = currentTime - this.startTime;
                 }
@@ -3567,9 +4304,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (completeSelf)
                     {
-                        Fx.Assert(!thisPtr.isWorkflowThread, "We should never be calling ReleaseLock if this is the workflow thread.");
+                        Fx.Assert(
+                            !thisPtr.isWorkflowThread,
+                            "We should never be calling ReleaseLock if this is the workflow thread."
+                        );
 
-                        thisPtr.instance.ReleaseLock(ref thisPtr.ownsLock, thisPtr.isIdlePolicyPersist && thisPtr.tryResult);
+                        thisPtr.instance.ReleaseLock(
+                            ref thisPtr.ownsLock,
+                            thisPtr.isIdlePolicyPersist && thisPtr.tryResult
+                        );
                     }
                 }
 
@@ -3606,17 +4349,26 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
 
                 // We finally have the lock and are passed the guard.  Let's update our operation if this is an Unload.
-                if (this.operation == PersistenceOperation.Unload && this.instance.Controller.State == WorkflowInstanceState.Complete)
+                if (
+                    this.operation == PersistenceOperation.Unload
+                    && this.instance.Controller.State == WorkflowInstanceState.Complete
+                )
                 {
                     this.operation = PersistenceOperation.Delete;
                 }
 
                 bool completedSync = false;
 
-                if (this.instance.persistenceContext != null && this.instance.persistenceContext.State == CommunicationState.Created)
+                if (
+                    this.instance.persistenceContext != null
+                    && this.instance.persistenceContext.State == CommunicationState.Created
+                )
                 {
-                    IAsyncResult result = this.instance.persistenceContext.BeginOpen(timeoutHelper.RemainingTime(),
-                        PrepareInnerAsyncCompletion(providerOpenedCallback), this);
+                    IAsyncResult result = this.instance.persistenceContext.BeginOpen(
+                        timeoutHelper.RemainingTime(),
+                        PrepareInnerAsyncCompletion(providerOpenedCallback),
+                        this
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -3633,7 +4385,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public static bool End(IAsyncResult result)
             {
-                UnloadOrPersistAsyncResult thisPtr = AsyncResult.End<UnloadOrPersistAsyncResult>(result);
+                UnloadOrPersistAsyncResult thisPtr = AsyncResult.End<UnloadOrPersistAsyncResult>(
+                    result
+                );
 
                 return thisPtr.tryResult;
             }
@@ -3675,7 +4429,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // We don't want to release the lock if we're the workflow thread
                         if (!thisPtr.isWorkflowThread)
                         {
-                            thisPtr.instance.ReleaseLock(ref thisPtr.ownsLock, thisPtr.isIdlePolicyPersist && thisPtr.tryResult);
+                            thisPtr.instance.ReleaseLock(
+                                ref thisPtr.ownsLock,
+                                thisPtr.isIdlePolicyPersist && thisPtr.tryResult
+                            );
                         }
                     }
                 }
@@ -3687,7 +4444,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 AsyncCompletion next = this.nextInnerAsyncCompletion;
 
-                Fx.Assert(this.nextInnerAsyncCompletion != null, "Must have had one if we are calling GetNext");
+                Fx.Assert(
+                    this.nextInnerAsyncCompletion != null,
+                    "Must have had one if we are calling GetNext"
+                );
                 this.nextInnerAsyncCompletion = null;
 
                 return next;
@@ -3732,7 +4492,11 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 if (this.instance.Controller.HasPendingTrackingRecords)
                 {
-                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(this.instance.trackTimeout, PrepareInnerAsyncCompletion(trackingCompleteCallback), this);
+                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(
+                        this.instance.trackTimeout,
+                        PrepareInnerAsyncCompletion(trackingCompleteCallback),
+                        this
+                    );
                     return SyncContinue(result);
                 }
                 else
@@ -3755,7 +4519,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                 // From this point forward we'll update the state unless we get a persistence exception
                 this.updateState = true;
 
-                Dictionary<XName, InstanceValue> initialPersistenceData = this.instance.GeneratePersistenceData();
+                Dictionary<XName, InstanceValue> initialPersistenceData =
+                    this.instance.GeneratePersistenceData();
 
                 bool success = false;
                 try
@@ -3805,13 +4570,24 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     if (this.context == null)
                     {
-                        this.context = new WorkflowPersistenceContext(this.instance, (this.pipeline != null && this.pipeline.IsSaveTransactionRequired) || this.isCompletionTransactionRequired,
-                            this.dependentTransaction, this.instance.persistTimeout);
+                        this.context = new WorkflowPersistenceContext(
+                            this.instance,
+                            (this.pipeline != null && this.pipeline.IsSaveTransactionRequired)
+                                || this.isCompletionTransactionRequired,
+                            this.dependentTransaction,
+                            this.instance.persistTimeout
+                        );
                     }
 
                     using (PrepareTransactionalCall(this.context.PublicTransaction))
                     {
-                        result = this.instance.persistenceContext.BeginSave(this.data, this.saveStatus, this.instance.persistTimeout, PrepareInnerAsyncCompletion(persistedCallback), this);
+                        result = this.instance.persistenceContext.BeginSave(
+                            this.data,
+                            this.saveStatus,
+                            this.instance.persistTimeout,
+                            PrepareInnerAsyncCompletion(persistedCallback),
+                            this
+                        );
                     }
                 }
                 catch (InstancePersistenceException)
@@ -3864,20 +4640,31 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (this.context == null)
                         {
-                            this.context = new WorkflowPersistenceContext(this.instance, this.pipeline.IsSaveTransactionRequired || this.isCompletionTransactionRequired,
-                                this.dependentTransaction, this.instance.persistTimeout);
+                            this.context = new WorkflowPersistenceContext(
+                                this.instance,
+                                this.pipeline.IsSaveTransactionRequired
+                                    || this.isCompletionTransactionRequired,
+                                this.dependentTransaction,
+                                this.instance.persistTimeout
+                            );
                         }
 
                         this.instance.persistencePipelineInUse = this.pipeline;
                         Thread.MemoryBarrier();
                         if (this.instance.abortingExtensions)
                         {
-                            throw FxTrace.Exception.AsError(new OperationCanceledException(SR.DefaultAbortReason));
+                            throw FxTrace.Exception.AsError(
+                                new OperationCanceledException(SR.DefaultAbortReason)
+                            );
                         }
 
                         using (PrepareTransactionalCall(this.context.PublicTransaction))
                         {
-                            result = this.pipeline.BeginSave(this.timeoutHelper.RemainingTime(), PrepareInnerAsyncCompletion(savedCallback), this);
+                            result = this.pipeline.BeginSave(
+                                this.timeoutHelper.RemainingTime(),
+                                PrepareInnerAsyncCompletion(savedCallback),
+                                this
+                            );
                         }
                     }
                     finally
@@ -3923,24 +4710,42 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             bool NotifyCompletion()
             {
-                if (this.isUnloaded && this.instance.Controller.State == WorkflowInstanceState.Complete && this.instance.creationContext != null)
+                if (
+                    this.isUnloaded
+                    && this.instance.Controller.State == WorkflowInstanceState.Complete
+                    && this.instance.creationContext != null
+                )
                 {
                     IAsyncResult result = null;
                     try
                     {
                         if (this.context == null)
                         {
-                            this.context = new WorkflowPersistenceContext(this.instance, this.isCompletionTransactionRequired,
-                                this.dependentTransaction, this.instance.persistTimeout);
+                            this.context = new WorkflowPersistenceContext(
+                                this.instance,
+                                this.isCompletionTransactionRequired,
+                                this.dependentTransaction,
+                                this.instance.persistTimeout
+                            );
                         }
 
                         using (PrepareTransactionalCall(this.context.PublicTransaction))
                         {
-                            result = this.instance.creationContext.OnBeginWorkflowCompleted(this.instance.completionState, this.instance.workflowOutputs, this.instance.terminationException,
-                                this.timeoutHelper.RemainingTime(), PrepareInnerAsyncCompletion(notifyCompletionCallback), this);
+                            result = this.instance.creationContext.OnBeginWorkflowCompleted(
+                                this.instance.completionState,
+                                this.instance.workflowOutputs,
+                                this.instance.terminationException,
+                                this.timeoutHelper.RemainingTime(),
+                                PrepareInnerAsyncCompletion(notifyCompletionCallback),
+                                this
+                            );
                             if (result == null)
                             {
-                                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WorkflowCompletionAsyncResultCannotBeNull));
+                                throw FxTrace.Exception.AsError(
+                                    new InvalidOperationException(
+                                        SR.WorkflowCompletionAsyncResultCannotBeNull
+                                    )
+                                );
                             }
                         }
                     }
@@ -3985,24 +4790,33 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bool wentAsync = false;
                 IAsyncResult completeResult = null;
 
-                // Computing Persist Duration. 
+                // Computing Persist Duration.
                 if (this.operation == PersistenceOperation.Save)
                 {
-                    this.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowPersistDuration(GetDuration());
+                    this.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowPersistDuration(
+                        GetDuration()
+                    );
                 }
 
                 if (this.context != null)
                 {
-                    wentAsync = this.context.TryBeginComplete(this.PrepareInnerAsyncCompletion(completeContextCallback), this, out completeResult);
+                    wentAsync = this.context.TryBeginComplete(
+                        this.PrepareInnerAsyncCompletion(completeContextCallback),
+                        this,
+                        out completeResult
+                    );
                 }
 
-                // we have persisted deleted state.  this is to address TransactedTerminate avoiding 
+                // we have persisted deleted state.  this is to address TransactedTerminate avoiding
                 // multiple deleted persistence.
                 this.instance.hasPersistedDeleted = this.operation == PersistenceOperation.Delete;
 
                 if (wentAsync)
                 {
-                    Fx.Assert(completeResult != null, "We shouldn't have null here because we would have rethrown or gotten false for went async.");
+                    Fx.Assert(
+                        completeResult != null,
+                        "We shouldn't have null here because we would have rethrown or gotten false for went async."
+                    );
                     return SyncContinue(completeResult);
                 }
                 else
@@ -4011,7 +4825,6 @@ namespace System.ServiceModel.Activities.Dispatcher
                     // TryBeginComplete
                     return true;
                 }
-                                
             }
 
             static bool OnCompleteContext(IAsyncResult result)
@@ -4034,7 +4847,9 @@ namespace System.ServiceModel.Activities.Dispatcher
         abstract class SimpleOperationAsyncResult : AsyncResult
         {
             static FastAsyncCallback lockAcquiredCallback = new FastAsyncCallback(OnLockAcquired);
-            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(Finally);
+            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(
+                Finally
+            );
             static AsyncCompletion handleEndPerformOperation;
             static AsyncCompletion handleEndTrack;
 
@@ -4042,7 +4857,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             protected TimeoutHelper timeoutHelper;
             protected bool ownsLock;
 
-            protected SimpleOperationAsyncResult(WorkflowServiceInstance instance, Transaction transaction, AsyncCallback callback, object state)
+            protected SimpleOperationAsyncResult(
+                WorkflowServiceInstance instance,
+                Transaction transaction,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instance = instance;
@@ -4052,24 +4872,14 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             protected WorkflowServiceInstance Instance
             {
-                get
-                {
-                    return this.instance;
-                }
+                get { return this.instance; }
             }
 
-            protected Transaction OperationTransaction
-            {
-                get;
-                private set;
-            }
+            protected Transaction OperationTransaction { get; private set; }
 
             protected virtual bool IsSynchronousOperation
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             protected void Run(TimeSpan timeout)
@@ -4079,7 +4889,14 @@ namespace System.ServiceModel.Activities.Dispatcher
                 Exception completionException = null;
                 bool completeSelf = true;
 
-                if (this.instance.AcquireLockAsync(this.timeoutHelper.RemainingTime(), ref this.ownsLock, lockAcquiredCallback, this))
+                if (
+                    this.instance.AcquireLockAsync(
+                        this.timeoutHelper.RemainingTime(),
+                        ref this.ownsLock,
+                        lockAcquiredCallback,
+                        this
+                    )
+                )
                 {
                     try
                     {
@@ -4156,7 +4973,10 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.OperationTransaction != null && this.Instance.transactionContext == null)
                 {
-                    this.Instance.transactionContext = new TransactionContext(this.Instance, this.OperationTransaction);
+                    this.Instance.transactionContext = new TransactionContext(
+                        this.Instance,
+                        this.OperationTransaction
+                    );
                     this.Instance.isInTransaction = true;
                     this.Instance.isRunnable = false;
                 }
@@ -4173,7 +4993,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                         handleEndPerformOperation = new AsyncCompletion(HandleEndPerformOperation);
                     }
 
-                    IAsyncResult result = BeginPerformOperation(PrepareAsyncCompletion(handleEndPerformOperation), this);
+                    IAsyncResult result = BeginPerformOperation(
+                        PrepareAsyncCompletion(handleEndPerformOperation),
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         return HandleEndPerformOperation(result);
@@ -4195,14 +5018,21 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool Track()
             {
                 // For aborted, the AbortInstance will handle tracking.
-                if (this.instance.state != State.Aborted && this.instance.Controller.HasPendingTrackingRecords)
+                if (
+                    this.instance.state != State.Aborted
+                    && this.instance.Controller.HasPendingTrackingRecords
+                )
                 {
                     if (handleEndTrack == null)
                     {
                         handleEndTrack = new AsyncCompletion(HandleEndTrack);
                     }
 
-                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(this.instance.trackTimeout, PrepareAsyncCompletion(handleEndTrack), this);
+                    IAsyncResult result = this.instance.Controller.BeginFlushTrackingRecords(
+                        this.instance.trackTimeout,
+                        PrepareAsyncCompletion(handleEndTrack),
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         return HandleEndTrack(result);
@@ -4243,14 +5073,20 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             protected abstract bool ValidateState();
             protected abstract void PerformOperation();
-            protected virtual IAsyncResult BeginPerformOperation(AsyncCallback callback, object state)
+
+            protected virtual IAsyncResult BeginPerformOperation(
+                AsyncCallback callback,
+                object state
+            )
             {
                 throw Fx.AssertAndThrow("Should not reach here!");
             }
+
             protected virtual void EndPerformOperation(IAsyncResult result)
             {
                 throw Fx.AssertAndThrow("Should not reach here!");
             }
+
             protected abstract void PostOperation();
         }
 
@@ -4258,15 +5094,34 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             Exception reason;
 
-            TerminateAsyncResult(WorkflowServiceInstance instance, Exception reason, Transaction transaction, AsyncCallback callback, object state)
+            TerminateAsyncResult(
+                WorkflowServiceInstance instance,
+                Exception reason,
+                Transaction transaction,
+                AsyncCallback callback,
+                object state
+            )
                 : base(instance, transaction, callback, state)
             {
                 this.reason = reason;
             }
 
-            public static TerminateAsyncResult Create(WorkflowServiceInstance instance, Exception reason, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+            public static TerminateAsyncResult Create(
+                WorkflowServiceInstance instance,
+                Exception reason,
+                Transaction transaction,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                TerminateAsyncResult result = new TerminateAsyncResult(instance, reason, transaction, callback, state);
+                TerminateAsyncResult result = new TerminateAsyncResult(
+                    instance,
+                    reason,
+                    transaction,
+                    callback,
+                    state
+                );
                 result.Run(timeout);
                 return result;
             }
@@ -4299,7 +5154,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     this.Instance.state = State.Active;
                 }
                 // For transacted, the unload will happen at Tx committed time.
-                else 
+                else
                 {
                     this.Instance.GetCompletionState();
                 }
@@ -4318,16 +5173,35 @@ namespace System.ServiceModel.Activities.Dispatcher
             // The shouldTrackAbort flag is only false when idle policy has TimeToPersist < TimeToUnload.
             bool shouldTrackAbort;
 
-            AbandonAsyncResult(WorkflowServiceInstance instance, Exception reason, bool shouldTrackAbort, AsyncCallback callback, object state)
+            AbandonAsyncResult(
+                WorkflowServiceInstance instance,
+                Exception reason,
+                bool shouldTrackAbort,
+                AsyncCallback callback,
+                object state
+            )
                 : base(instance, null, callback, state)
             {
                 this.reason = reason;
                 this.shouldTrackAbort = shouldTrackAbort;
             }
 
-            public static AbandonAsyncResult Create(WorkflowServiceInstance instance, Exception reason, bool shouldTrackAbort, TimeSpan timeout, AsyncCallback callback, object state)
+            public static AbandonAsyncResult Create(
+                WorkflowServiceInstance instance,
+                Exception reason,
+                bool shouldTrackAbort,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                AbandonAsyncResult result = new AbandonAsyncResult(instance, reason, shouldTrackAbort, callback, state);
+                AbandonAsyncResult result = new AbandonAsyncResult(
+                    instance,
+                    reason,
+                    shouldTrackAbort,
+                    callback,
+                    state
+                );
                 result.Run(timeout);
                 return result;
             }
@@ -4365,17 +5239,27 @@ namespace System.ServiceModel.Activities.Dispatcher
             protected override void PerformOperation()
             {
                 // This is the synchronous code path. This path terminates the unload and leaves the instance intact.
-                Fx.Assert(!this.shouldTrackAbort && this.Instance.hasDataToPersist, "We should only get here when we need to terminate the unload.");
+                Fx.Assert(
+                    !this.shouldTrackAbort && this.Instance.hasDataToPersist,
+                    "We should only get here when we need to terminate the unload."
+                );
 
                 // Since reference count has already been decremented to 0 by now, we should set it back to 1.
                 this.Instance.RecoverLastReference();
             }
 
-            protected override IAsyncResult BeginPerformOperation(AsyncCallback callback, object state)
+            protected override IAsyncResult BeginPerformOperation(
+                AsyncCallback callback,
+                object state
+            )
             {
                 try
                 {
-                    return this.Instance.persistenceContext.BeginRelease(this.Instance.persistTimeout, callback, state);
+                    return this.Instance.persistenceContext.BeginRelease(
+                        this.Instance.persistTimeout,
+                        callback,
+                        state
+                    );
                 }
                 catch (Exception exception)
                 {
@@ -4396,14 +5280,21 @@ namespace System.ServiceModel.Activities.Dispatcher
                     this.Instance.persistenceContext.EndRelease(result);
                     if (!this.shouldTrackAbort && this.Instance.Controller.TrackingEnabled)
                     {
-                        this.Instance.Controller.Track(new WorkflowInstanceRecord(this.Instance.Id, this.Instance.WorkflowDefinition.DisplayName, WorkflowInstanceStates.Unloaded, this.Instance.DefinitionIdentity));
+                        this.Instance.Controller.Track(
+                            new WorkflowInstanceRecord(
+                                this.Instance.Id,
+                                this.Instance.WorkflowDefinition.DisplayName,
+                                WorkflowInstanceStates.Unloaded,
+                                this.Instance.DefinitionIdentity
+                            )
+                        );
                     }
-                    
+
                     if (!this.shouldTrackAbort)
                     {
                         this.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowUnloaded();
                     }
-                    
+
                     this.Instance.AbortInstance(this.reason, true, this.shouldTrackAbort);
                 }
                 catch (Exception exception)
@@ -4418,34 +5309,45 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            protected override void PostOperation()
-            {
-            }
+            protected override void PostOperation() { }
         }
 
         class AbandonAndSuspendAsyncResult : SimpleOperationAsyncResult
         {
             Exception reason;
 
-            AbandonAndSuspendAsyncResult(WorkflowServiceInstance instance, Exception reason, AsyncCallback callback, object state)
+            AbandonAndSuspendAsyncResult(
+                WorkflowServiceInstance instance,
+                Exception reason,
+                AsyncCallback callback,
+                object state
+            )
                 : base(instance, null, callback, state)
             {
                 this.reason = reason;
             }
 
-            public static AbandonAndSuspendAsyncResult Create(WorkflowServiceInstance instance, Exception reason, TimeSpan timeout, AsyncCallback callback, object state)
+            public static AbandonAndSuspendAsyncResult Create(
+                WorkflowServiceInstance instance,
+                Exception reason,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                AbandonAndSuspendAsyncResult result = new AbandonAndSuspendAsyncResult(instance, reason, callback, state);
+                AbandonAndSuspendAsyncResult result = new AbandonAndSuspendAsyncResult(
+                    instance,
+                    reason,
+                    callback,
+                    state
+                );
                 result.Run(timeout);
                 return result;
             }
 
             protected override bool IsSynchronousOperation
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public static void End(IAsyncResult result)
@@ -4463,11 +5365,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 throw Fx.AssertAndThrow("Should not reach here!");
             }
 
-            protected override IAsyncResult BeginPerformOperation(AsyncCallback callback, object state)
+            protected override IAsyncResult BeginPerformOperation(
+                AsyncCallback callback,
+                object state
+            )
             {
                 try
                 {
-                    return this.Instance.persistenceContext.BeginUpdateSuspendMetadata(this.reason, this.Instance.persistTimeout, callback, state);
+                    return this.Instance.persistenceContext.BeginUpdateSuspendMetadata(
+                        this.reason,
+                        this.Instance.persistTimeout,
+                        callback,
+                        state
+                    );
                 }
                 catch (Exception exception)
                 {
@@ -4486,12 +5396,20 @@ namespace System.ServiceModel.Activities.Dispatcher
                 try
                 {
                     this.Instance.persistenceContext.EndUpdateSuspendMetadata(result);
-                    AbandonAndSuspendAsyncResult data = (AbandonAndSuspendAsyncResult)result.AsyncState;
+                    AbandonAndSuspendAsyncResult data = (AbandonAndSuspendAsyncResult)
+                        result.AsyncState;
                     if (this.Instance.Controller.TrackingEnabled)
                     {
-                        this.Instance.Controller.Track(new WorkflowInstanceSuspendedRecord(this.Instance.Id, this.Instance.WorkflowDefinition.DisplayName, data.reason.Message, this.Instance.DefinitionIdentity));
+                        this.Instance.Controller.Track(
+                            new WorkflowInstanceSuspendedRecord(
+                                this.Instance.Id,
+                                this.Instance.WorkflowDefinition.DisplayName,
+                                data.reason.Message,
+                                this.Instance.DefinitionIdentity
+                            )
+                        );
                     }
-                    
+
                     this.Instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended();
                 }
                 finally
@@ -4500,21 +5418,33 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            protected override void PostOperation()
-            {
-            }
+            protected override void PostOperation() { }
         }
 
         class CancelAsyncResult : SimpleOperationAsyncResult
         {
-            CancelAsyncResult(WorkflowServiceInstance instance, Transaction transaction, AsyncCallback callback, object state)
-                : base(instance, transaction, callback, state)
-            {
-            }
+            CancelAsyncResult(
+                WorkflowServiceInstance instance,
+                Transaction transaction,
+                AsyncCallback callback,
+                object state
+            )
+                : base(instance, transaction, callback, state) { }
 
-            public static CancelAsyncResult Create(WorkflowServiceInstance instance, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+            public static CancelAsyncResult Create(
+                WorkflowServiceInstance instance,
+                Transaction transaction,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                CancelAsyncResult result = new CancelAsyncResult(instance, transaction, callback, state);
+                CancelAsyncResult result = new CancelAsyncResult(
+                    instance,
+                    transaction,
+                    callback,
+                    state
+                );
                 result.Run(timeout);
                 return result;
             }
@@ -4563,15 +5493,34 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             string operationName;
 
-            RunAsyncResult(WorkflowServiceInstance instance, Transaction transaction, string operationName, AsyncCallback callback, object state)
+            RunAsyncResult(
+                WorkflowServiceInstance instance,
+                Transaction transaction,
+                string operationName,
+                AsyncCallback callback,
+                object state
+            )
                 : base(instance, transaction, callback, state)
             {
                 this.operationName = operationName;
             }
 
-            public static RunAsyncResult Create(WorkflowServiceInstance instance, Transaction transaction, string operationName, TimeSpan timeout, AsyncCallback callback, object state)
+            public static RunAsyncResult Create(
+                WorkflowServiceInstance instance,
+                Transaction transaction,
+                string operationName,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                RunAsyncResult result = new RunAsyncResult(instance, transaction, operationName, callback, state);
+                RunAsyncResult result = new RunAsyncResult(
+                    instance,
+                    transaction,
+                    operationName,
+                    callback,
+                    state
+                );
                 result.Run(timeout);
                 return result;
             }
@@ -4583,7 +5532,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             protected override bool ValidateState()
             {
-                return this.Instance.ValidateStateForRun(this.OperationTransaction, this.operationName);
+                return this.Instance.ValidateStateForRun(
+                    this.OperationTransaction,
+                    this.operationName
+                );
             }
 
             protected override void PerformOperation()
@@ -4594,9 +5546,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            protected override void PostOperation()
-            {
-            }
+            protected override void PostOperation() { }
         }
 
         class SuspendAsyncResult : SimpleOperationAsyncResult
@@ -4604,16 +5554,38 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool isUnlocked;
             string reason;
 
-            SuspendAsyncResult(WorkflowServiceInstance instance, bool isUnlocked, string reason, Transaction transaction, AsyncCallback callback, object state)
+            SuspendAsyncResult(
+                WorkflowServiceInstance instance,
+                bool isUnlocked,
+                string reason,
+                Transaction transaction,
+                AsyncCallback callback,
+                object state
+            )
                 : base(instance, transaction, callback, state)
             {
                 this.isUnlocked = isUnlocked;
                 this.reason = reason;
             }
 
-            public static SuspendAsyncResult Create(WorkflowServiceInstance instance, bool isUnlocked, string reason, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+            public static SuspendAsyncResult Create(
+                WorkflowServiceInstance instance,
+                bool isUnlocked,
+                string reason,
+                Transaction transaction,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                SuspendAsyncResult result = new SuspendAsyncResult(instance, isUnlocked, reason, transaction, callback, state);
+                SuspendAsyncResult result = new SuspendAsyncResult(
+                    instance,
+                    isUnlocked,
+                    reason,
+                    transaction,
+                    callback,
+                    state
+                );
                 result.Run(timeout);
                 return result;
             }
@@ -4625,10 +5597,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             protected override bool IsSynchronousOperation
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             protected override bool ValidateState()
@@ -4641,7 +5610,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                 throw Fx.AssertAndThrow("Should not reach here!");
             }
 
-            protected override IAsyncResult BeginPerformOperation(AsyncCallback callback, object state)
+            protected override IAsyncResult BeginPerformOperation(
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new SuspendCoreAsyncResult(this, callback, state);
             }
@@ -4658,17 +5630,27 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             class SuspendCoreAsyncResult : AsyncResult
             {
-                static AsyncCompletion handleEndWaitForCanPersist = new AsyncCompletion(HandleEndWaitForCanPersist);
+                static AsyncCompletion handleEndWaitForCanPersist = new AsyncCompletion(
+                    HandleEndWaitForCanPersist
+                );
 
                 SuspendAsyncResult parent;
 
-                public SuspendCoreAsyncResult(SuspendAsyncResult parent, AsyncCallback callback, object state)
+                public SuspendCoreAsyncResult(
+                    SuspendAsyncResult parent,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.parent = parent;
 
-                    IAsyncResult result = this.parent.Instance.BeginWaitForCanPersist(ref this.parent.ownsLock, this.parent.timeoutHelper.RemainingTime(),
-                        PrepareAsyncCompletion(handleEndWaitForCanPersist), this);
+                    IAsyncResult result = this.parent.Instance.BeginWaitForCanPersist(
+                        ref this.parent.ownsLock,
+                        this.parent.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(handleEndWaitForCanPersist),
+                        this
+                    );
                     if (SyncContinue(result))
                     {
                         this.Complete(true);
@@ -4683,15 +5665,27 @@ namespace System.ServiceModel.Activities.Dispatcher
                 static bool HandleEndWaitForCanPersist(IAsyncResult result)
                 {
                     SuspendCoreAsyncResult thisPtr = (SuspendCoreAsyncResult)result.AsyncState;
-                    thisPtr.parent.Instance.EndWaitForCanPersist(result, ref thisPtr.parent.ownsLock);
+                    thisPtr.parent.Instance.EndWaitForCanPersist(
+                        result,
+                        ref thisPtr.parent.ownsLock
+                    );
 
                     thisPtr.parent.Instance.persistenceContext.IsSuspended = true;
-                    thisPtr.parent.Instance.persistenceContext.SuspendedReason = thisPtr.parent.reason;
+                    thisPtr.parent.Instance.persistenceContext.SuspendedReason = thisPtr
+                        .parent
+                        .reason;
                     thisPtr.parent.Instance.state = State.Suspended;
 
                     if (thisPtr.parent.Instance.Controller.TrackingEnabled)
                     {
-                        thisPtr.parent.Instance.Controller.Track(new WorkflowInstanceSuspendedRecord(thisPtr.parent.Instance.Id, thisPtr.parent.Instance.WorkflowDefinition.DisplayName, thisPtr.parent.reason, thisPtr.parent.Instance.DefinitionIdentity));
+                        thisPtr.parent.Instance.Controller.Track(
+                            new WorkflowInstanceSuspendedRecord(
+                                thisPtr.parent.Instance.Id,
+                                thisPtr.parent.Instance.WorkflowDefinition.DisplayName,
+                                thisPtr.parent.reason,
+                                thisPtr.parent.Instance.DefinitionIdentity
+                            )
+                        );
                     }
 
                     thisPtr.parent.instance.serviceHost.WorkflowServiceHostPerformanceCounters.WorkflowSuspended();
@@ -4718,14 +5712,28 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class UnsuspendAsyncResult : SimpleOperationAsyncResult
         {
-            UnsuspendAsyncResult(WorkflowServiceInstance instance, Transaction transaction, AsyncCallback callback, object state)
-                : base(instance, transaction, callback, state)
-            {
-            }
+            UnsuspendAsyncResult(
+                WorkflowServiceInstance instance,
+                Transaction transaction,
+                AsyncCallback callback,
+                object state
+            )
+                : base(instance, transaction, callback, state) { }
 
-            public static UnsuspendAsyncResult Create(WorkflowServiceInstance instance, Transaction transaction, TimeSpan timeout, AsyncCallback callback, object state)
+            public static UnsuspendAsyncResult Create(
+                WorkflowServiceInstance instance,
+                Transaction transaction,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                UnsuspendAsyncResult result = new UnsuspendAsyncResult(instance, transaction, callback, state);
+                UnsuspendAsyncResult result = new UnsuspendAsyncResult(
+                    instance,
+                    transaction,
+                    callback,
+                    state
+                );
                 result.Run(timeout);
                 return result;
             }
@@ -4752,29 +5760,46 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 if (this.Instance.Controller.TrackingEnabled)
                 {
-                    this.Instance.Controller.Track(new WorkflowInstanceRecord(this.Instance.Id, this.Instance.WorkflowDefinition.DisplayName, WorkflowInstanceStates.Unsuspended, this.Instance.DefinitionIdentity));
+                    this.Instance.Controller.Track(
+                        new WorkflowInstanceRecord(
+                            this.Instance.Id,
+                            this.Instance.WorkflowDefinition.DisplayName,
+                            WorkflowInstanceStates.Unsuspended,
+                            this.Instance.DefinitionIdentity
+                        )
+                    );
                 }
             }
 
-            protected override void PostOperation()
-            {
-            }
+            protected override void PostOperation() { }
         }
 
         class AcquireLockOnIdleAsyncResult : AsyncResult
         {
             static FastAsyncCallback lockAcquiredCallback = new FastAsyncCallback(OnLockAcquired);
-            static Action<object, TimeoutException> idleReceivedCallback = new Action<object, TimeoutException>(OnIdleReceived);
+            static Action<object, TimeoutException> idleReceivedCallback = new Action<
+                object,
+                TimeoutException
+            >(OnIdleReceived);
 
             AsyncWaitHandle idleEvent;
             WorkflowServiceInstance instance;
             TimeoutHelper timeoutHelper;
             bool acquiredLockAsynchronously;
 
-            public AcquireLockOnIdleAsyncResult(WorkflowServiceInstance instance, TimeSpan timeout, ref bool ownsLock, AsyncCallback callback, object state)
+            public AcquireLockOnIdleAsyncResult(
+                WorkflowServiceInstance instance,
+                TimeSpan timeout,
+                ref bool ownsLock,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
-                Fx.Assert(!ownsLock, "We should never call acquire if we already think we own the lock.");
+                Fx.Assert(
+                    !ownsLock,
+                    "We should never call acquire if we already think we own the lock."
+                );
 
                 // We cannot just hand off the lock if we are in a handler thread
                 // because this might eventually go async (during the operation)
@@ -4792,9 +5817,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     lock (this.instance.activeOperationsLock)
                     {
-                        try
-                        {
-                        }
+                        try { }
                         finally
                         {
                             this.instance.activeOperations++;
@@ -4804,7 +5827,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.instance.executorLock.SetupWaiter(ref lockToken);
                     }
 
-                    completeSelf = this.instance.executorLock.EnterAsync(this.timeoutHelper.RemainingTime(), ref lockToken, ref ownsLock, lockAcquiredCallback, this);
+                    completeSelf = this.instance.executorLock.EnterAsync(
+                        this.timeoutHelper.RemainingTime(),
+                        ref lockToken,
+                        ref ownsLock,
+                        lockAcquiredCallback,
+                        this
+                    );
 
                     // We don't want to decrement the count if we went async
                     // because the async callback will do the decrement
@@ -4901,13 +5930,22 @@ namespace System.ServiceModel.Activities.Dispatcher
                 // If instance state is non-Active, the AcquireOnIdle will succeed (WSI is doing nothing),
                 // the caller is responsible for dealing with state vs. operation.
                 // For instance, ResumeBookmark will call ValidateStateForResumeProtocolBookmark.
-                if (this.instance.state == State.Active && this.instance.Controller.State == WorkflowInstanceState.Runnable)
+                if (
+                    this.instance.state == State.Active
+                    && this.instance.Controller.State == WorkflowInstanceState.Runnable
+                )
                 {
                     this.idleEvent = this.instance.SetupIdleWaiter(ref ownsLock);
 
                     try
                     {
-                        if (this.idleEvent.WaitAsync(idleReceivedCallback, this, this.timeoutHelper.RemainingTime()))
+                        if (
+                            this.idleEvent.WaitAsync(
+                                idleReceivedCallback,
+                                this,
+                                this.timeoutHelper.RemainingTime()
+                            )
+                        )
                         {
                             ownsLock = true;
                         }
@@ -4939,14 +5977,26 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 if (asyncException != null)
                 {
-                    if (thisPtr.instance.CleanupIdleWaiter(thisPtr.idleEvent, asyncException, ref thisPtr.acquiredLockAsynchronously))
+                    if (
+                        thisPtr.instance.CleanupIdleWaiter(
+                            thisPtr.idleEvent,
+                            asyncException,
+                            ref thisPtr.acquiredLockAsynchronously
+                        )
+                    )
                     {
-                        Fx.Assert(!thisPtr.acquiredLockAsynchronously, "We shouldn't own the lock if we're rethrowing");
+                        Fx.Assert(
+                            !thisPtr.acquiredLockAsynchronously,
+                            "We shouldn't own the lock if we're rethrowing"
+                        );
                         thisPtr.Complete(false, asyncException);
                         return;
                     }
 
-                    Fx.Assert(thisPtr.acquiredLockAsynchronously, "We should own the lock if we're ----ing");
+                    Fx.Assert(
+                        thisPtr.acquiredLockAsynchronously,
+                        "We should own the lock if we're ----ing"
+                    );
                 }
 
                 thisPtr.acquiredLockAsynchronously = true;
@@ -4966,7 +6016,13 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool mustWait;
             AsyncWaitHandle checkCanPersistEvent;
 
-            public WaitForCanPersistAsyncResult(WorkflowServiceInstance instance, ref bool ownsLock, TimeSpan timeout, AsyncCallback callback, object state)
+            public WaitForCanPersistAsyncResult(
+                WorkflowServiceInstance instance,
+                ref bool ownsLock,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.instance = instance;
@@ -5027,7 +6083,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                         onWaitEvent = new Action<object, TimeoutException>(OnWaitEvent);
                     }
 
-                    if (this.checkCanPersistEvent.WaitAsync(onWaitEvent, this, this.timeoutHelper.RemainingTime()))
+                    if (
+                        this.checkCanPersistEvent.WaitAsync(
+                            onWaitEvent,
+                            this,
+                            this.timeoutHelper.RemainingTime()
+                        )
+                    )
                     {
                         return HandleWaitEvent();
                     }
@@ -5096,7 +6158,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                         onLockAcquired = new FastAsyncCallback(OnLockAcquired);
                     }
 
-                    if (this.instance.AcquireLockAsync(this.timeoutHelper.RemainingTime(), false, true, ref this.ownsLock, onLockAcquired, this))
+                    if (
+                        this.instance.AcquireLockAsync(
+                            this.timeoutHelper.RemainingTime(),
+                            false,
+                            true,
+                            ref this.ownsLock,
+                            onLockAcquired,
+                            this
+                        )
+                    )
                     {
                         return HandleLockAcquired();
                     }
@@ -5153,10 +6224,17 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.PrivatePrimitive, SupportsAsync = true, ReleaseMethod = "Exit")]
+        [Fx.Tag.SynchronizationPrimitive(
+            Fx.Tag.BlocksUsing.PrivatePrimitive,
+            SupportsAsync = true,
+            ReleaseMethod = "Exit"
+        )]
         class WorkflowExecutionLock
         {
-            static Action<object, TimeoutException> asyncWaiterSignaledCallback = new Action<object, TimeoutException>(OnAsyncWaiterSignaled);
+            static Action<object, TimeoutException> asyncWaiterSignaledCallback = new Action<
+                object,
+                TimeoutException
+            >(OnAsyncWaiterSignaled);
 
             bool owned;
             WorkflowServiceInstance instance;
@@ -5208,9 +6286,7 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 lock (ThisLock)
                 {
-                    try
-                    {
-                    }
+                    try { }
                     finally
                     {
                         token = new AsyncWaitHandle();
@@ -5246,17 +6322,31 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public void Enter(TimeSpan timeout, ref object token, ref bool ownsLock)
             {
-                Fx.Assert(!ownsLock, "We should never attempt to get the lock if we think we own it.");
+                Fx.Assert(
+                    !ownsLock,
+                    "We should never attempt to get the lock if we think we own it."
+                );
 
                 if (!TryEnter(timeout, ref token, ref ownsLock))
                 {
-                    throw FxTrace.Exception.AsError(new TimeoutException(SR.TimeoutOnOperation(timeout)));
+                    throw FxTrace.Exception.AsError(
+                        new TimeoutException(SR.TimeoutOnOperation(timeout))
+                    );
                 }
             }
 
-            public bool EnterAsync(TimeSpan timeout, ref object token, ref bool ownsLock, FastAsyncCallback callback, object state)
+            public bool EnterAsync(
+                TimeSpan timeout,
+                ref object token,
+                ref bool ownsLock,
+                FastAsyncCallback callback,
+                object state
+            )
             {
-                Fx.Assert(!ownsLock, "We should never attempt to get the lock if we think we own it.");
+                Fx.Assert(
+                    !ownsLock,
+                    "We should never attempt to get the lock if we think we own it."
+                );
                 Fx.Assert(callback != null, "must have a non-null call back for async purposes");
                 Fx.Assert(token is AsyncWaitHandle, "The token must be an AsyncWaitHandle.");
 
@@ -5266,9 +6356,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (!this.owned)
                     {
-                        try
-                        {
-                        }
+                        try { }
                         finally
                         {
                             this.owned = true;
@@ -5283,9 +6371,18 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 bool result = false;
 
-                if (waitHandle.WaitAsync(asyncWaiterSignaledCallback, new AsyncWaiterData(this, callback, state, waitHandle), timeout))
+                if (
+                    waitHandle.WaitAsync(
+                        asyncWaiterSignaledCallback,
+                        new AsyncWaiterData(this, callback, state, waitHandle),
+                        timeout
+                    )
+                )
                 {
-                    Fx.Assert(!this.Waiters.Contains(waitHandle), "We should not have this wait handle in the list.");
+                    Fx.Assert(
+                        !this.Waiters.Contains(waitHandle),
+                        "We should not have this wait handle in the list."
+                    );
 
                     // Since the waiter is only signaled when they own the lock we won't have
                     // to set owned to true if this returns true.  owned was never set to false
@@ -5329,15 +6426,16 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public bool TryEnter(ref bool ownsLock)
             {
-                Fx.Assert(!ownsLock, "We should never attempt to get the lock if we think we own it.");
+                Fx.Assert(
+                    !ownsLock,
+                    "We should never attempt to get the lock if we think we own it."
+                );
 
                 lock (ThisLock)
                 {
                     if (!this.owned)
                     {
-                        try
-                        {
-                        }
+                        try { }
                         finally
                         {
                             this.owned = true;
@@ -5353,13 +6451,19 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public bool TryEnter(TimeSpan timeout, ref object token, ref bool ownsLock)
             {
-                Fx.Assert(!ownsLock, "We should never attempt to get the lock if we think we own it.");
+                Fx.Assert(
+                    !ownsLock,
+                    "We should never attempt to get the lock if we think we own it."
+                );
 
                 AsyncWaitHandle waiter = EnterCore(ref token, ref ownsLock);
 
                 if (waiter != null)
                 {
-                    Fx.Assert(!ownsLock, "We should not have gotten a waiter if EnterCore gave us the lock.");
+                    Fx.Assert(
+                        !ownsLock,
+                        "We should not have gotten a waiter if EnterCore gave us the lock."
+                    );
 
                     if (waiter.Wait(timeout))
                     {
@@ -5400,9 +6504,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     else
                     {
-                        try
-                        {
-                        }
+                        try { }
                         finally
                         {
                             this.owned = true;
@@ -5431,8 +6533,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                         if (!Fx.FastDebug && exitStack != null)
                         {
                             string originalStack = exitStack.ToString().Replace("\r\n", "\r\n    ");
-                            message = string.Format(CultureInfo.InvariantCulture,
-                                "Object synchronization method was called from an unsynchronized block of code. Previous Exit(): {0}", originalStack);
+                            message = string.Format(
+                                CultureInfo.InvariantCulture,
+                                "Object synchronization method was called from an unsynchronized block of code. Previous Exit(): {0}",
+                                originalStack
+                            );
                         }
 #endif
 
@@ -5447,9 +6552,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                         }
                         else
                         {
-                            try
-                            {
-                            }
+                            try { }
                             finally
                             {
                                 this.owned = false;
@@ -5484,7 +6587,12 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             class AsyncWaiterData
             {
-                public AsyncWaiterData(WorkflowExecutionLock owner, FastAsyncCallback callback, object state, object token)
+                public AsyncWaiterData(
+                    WorkflowExecutionLock owner,
+                    FastAsyncCallback callback,
+                    object state,
+                    object token
+                )
                 {
                     this.Owner = owner;
                     this.Callback = callback;
@@ -5492,60 +6600,39 @@ namespace System.ServiceModel.Activities.Dispatcher
                     this.Token = token;
                 }
 
-                public WorkflowExecutionLock Owner
-                {
-                    get;
-                    private set;
-                }
+                public WorkflowExecutionLock Owner { get; private set; }
 
-                public FastAsyncCallback Callback
-                {
-                    get;
-                    private set;
-                }
+                public FastAsyncCallback Callback { get; private set; }
 
-                public object State
-                {
-                    get;
-                    private set;
-                }
+                public object State { get; private set; }
 
-                public object Token
-                {
-                    get;
-                    private set;
-                }
+                public object Token { get; private set; }
             }
         }
 
         class UnhandledExceptionAsyncData
         {
-            public UnhandledExceptionAsyncData(WorkflowServiceInstance instance, Exception exception, Activity exceptionSource)
+            public UnhandledExceptionAsyncData(
+                WorkflowServiceInstance instance,
+                Exception exception,
+                Activity exceptionSource
+            )
             {
                 this.Instance = instance;
                 this.Exception = exception;
                 this.ExceptionSource = exceptionSource;
             }
 
-            [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode,
-                Justification = "Tracking team is considering to provide the exception source as part of the WorkflowInstanceUnhandledException record")]
-            public Activity ExceptionSource
-            {
-                get;
-                private set;
-            }
+            [SuppressMessage(
+                FxCop.Category.Performance,
+                FxCop.Rule.AvoidUncalledPrivateCode,
+                Justification = "Tracking team is considering to provide the exception source as part of the WorkflowInstanceUnhandledException record"
+            )]
+            public Activity ExceptionSource { get; private set; }
 
-            public WorkflowServiceInstance Instance
-            {
-                get;
-                private set;
-            }
+            public WorkflowServiceInstance Instance { get; private set; }
 
-            public Exception Exception
-            {
-                get;
-                private set;
-            }
+            public Exception Exception { get; private set; }
         }
 
         class WorkflowPersistenceContext
@@ -5554,7 +6641,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             CommittableTransaction contextOwnedTransaction;
             Transaction clonedTransaction;
 
-            public WorkflowPersistenceContext(WorkflowServiceInstance instance, bool transactionRequired, Transaction transactionToUse, TimeSpan transactionTimeout)
+            public WorkflowPersistenceContext(
+                WorkflowServiceInstance instance,
+                bool transactionRequired,
+                Transaction transactionToUse,
+                TimeSpan transactionTimeout
+            )
             {
                 this.instance = instance;
 
@@ -5572,10 +6664,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public Transaction PublicTransaction
             {
-                get
-                {
-                    return this.clonedTransaction;
-                }
+                get { return this.clonedTransaction; }
             }
 
             public void Abort()
@@ -5600,7 +6689,11 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             // Returns true if end needs to be called
             // Note: this is side effecting even if it returns false
-            public bool TryBeginComplete(AsyncCallback callback, object state, out IAsyncResult result)
+            public bool TryBeginComplete(
+                AsyncCallback callback,
+                object state,
+                out IAsyncResult result
+            )
             {
                 // In the interest of allocating less objects we don't implement
                 // the full async pattern here.  Instead, we've flattened it to
@@ -5620,7 +6713,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             public void EndComplete(IAsyncResult result)
             {
-                Fx.Assert(this.contextOwnedTransaction != null, "We must have a contextOwnedTransaction if we are calling End");
+                Fx.Assert(
+                    this.contextOwnedTransaction != null,
+                    "We must have a contextOwnedTransaction if we are calling End"
+                );
 
                 this.contextOwnedTransaction.EndCommit(result);
             }
@@ -5629,9 +6725,15 @@ namespace System.ServiceModel.Activities.Dispatcher
         class UnloadInstancePolicyHelper
         {
             static Action<object> onTimerCallback = new Action<object>(OnTimerCallback);
-            static AsyncCallback onPersistCallback = Fx.ThunkCallback(new AsyncCallback(PersistCallback));
-            static AsyncCallback onUnloadCallback = Fx.ThunkCallback(new AsyncCallback(UnloadCallback));
-            static AsyncCallback onUnlockAndAbortCallback = Fx.ThunkCallback(new AsyncCallback(UnlockAndAbortCallback));
+            static AsyncCallback onPersistCallback = Fx.ThunkCallback(
+                new AsyncCallback(PersistCallback)
+            );
+            static AsyncCallback onUnloadCallback = Fx.ThunkCallback(
+                new AsyncCallback(UnloadCallback)
+            );
+            static AsyncCallback onUnlockAndAbortCallback = Fx.ThunkCallback(
+                new AsyncCallback(UnlockAndAbortCallback)
+            );
 
             WorkflowServiceInstance instance;
             TimeSpan timeToPersist;
@@ -5642,19 +6744,31 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool persistEnabled;
             bool unloadEnabled;
 
-            public UnloadInstancePolicyHelper(WorkflowServiceInstance instance, TimeSpan timeToPersist, TimeSpan timeToUnload)
+            public UnloadInstancePolicyHelper(
+                WorkflowServiceInstance instance,
+                TimeSpan timeToPersist,
+                TimeSpan timeToUnload
+            )
             {
                 Fx.Assert(instance != null, String.Empty);
 
                 this.instance = instance;
                 this.timeToPersist = timeToPersist;
                 this.timeToUnload = timeToUnload;
-                this.persistEnabled = this.instance.persistenceContext.CanPersist && this.timeToPersist < this.timeToUnload;
-                this.unloadEnabled = this.instance.persistenceContext.CanPersist && this.timeToUnload < TimeSpan.MaxValue;
+                this.persistEnabled =
+                    this.instance.persistenceContext.CanPersist
+                    && this.timeToPersist < this.timeToUnload;
+                this.unloadEnabled =
+                    this.instance.persistenceContext.CanPersist
+                    && this.timeToUnload < TimeSpan.MaxValue;
 
                 if (this.persistEnabled)
                 {
-                    this.persistTimer = new IOThreadTimer(onTimerCallback, new Action(Persist), true);
+                    this.persistTimer = new IOThreadTimer(
+                        onTimerCallback,
+                        new Action(Persist),
+                        true
+                    );
                 }
                 if (this.unloadEnabled)
                 {
@@ -5662,7 +6776,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Exceptions", "DoNotCatchGeneralExceptionTypes", MessageId = "System.ServiceModel.Activities.WorkflowServiceInstance+UnloadInstancePolicyHelper.OnTimerCallback(System.Object):System.Void", Justification = "The non-fatal exceptions will be traced")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Exceptions",
+                "DoNotCatchGeneralExceptionTypes",
+                MessageId = "System.ServiceModel.Activities.WorkflowServiceInstance+UnloadInstancePolicyHelper.OnTimerCallback(System.Object):System.Void",
+                Justification = "The non-fatal exceptions will be traced"
+            )]
             static void OnTimerCallback(object state)
             {
                 try
@@ -5686,7 +6805,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     this.cancelled = false;
                     if (this.persistEnabled)
                     {
-                        Fx.Assert(this.persistTimer != null, "persistTimer cannot be null if persist is enabled");
+                        Fx.Assert(
+                            this.persistTimer != null,
+                            "persistTimer cannot be null if persist is enabled"
+                        );
                         SetTimer(this.persistTimer, this.timeToPersist);
                     }
                     else
@@ -5695,7 +6817,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                         {
                             if (this.unloadEnabled)
                             {
-                                Fx.Assert(this.unloadTimer != null, "unloadTimer cannot be null if unload is enabled");
+                                Fx.Assert(
+                                    this.unloadTimer != null,
+                                    "unloadTimer cannot be null if unload is enabled"
+                                );
                                 SetTimer(this.unloadTimer, this.timeToUnload);
                             }
                         }
@@ -5720,7 +6845,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 try
                 {
-                    IAsyncResult result = this.instance.BeginPersist(true, TimeSpan.MaxValue, onPersistCallback, this);
+                    IAsyncResult result = this.instance.BeginPersist(
+                        true,
+                        TimeSpan.MaxValue,
+                        onPersistCallback,
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         HandleEndPersist(result);
@@ -5768,7 +6898,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (this.unloadEnabled)
                         {
-                            Fx.Assert(this.unloadTimer != null, "unloadTimer cannot be null if unload is enabled");
+                            Fx.Assert(
+                                this.unloadTimer != null,
+                                "unloadTimer cannot be null if unload is enabled"
+                            );
 
                             if (persistSucceeded)
                             {
@@ -5787,7 +6920,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 // It is ok to dirty read the state, the consistency will be ensured by persis/unload itself.
                 if (this.instance.state == State.Suspended)
                 {
-                    // Unload/Persist immediately when suspended 
+                    // Unload/Persist immediately when suspended
                     timer.Set(TimeSpan.Zero);
                 }
                 else
@@ -5804,7 +6937,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         // This is an optimization to avoid expensive redundant persist (already persisted).
                         // We will simply Unlock and Abort an instance.
-                        IAsyncResult result = BeginUnlockAndAbort(TimeSpan.MaxValue, onUnlockAndAbortCallback, this);
+                        IAsyncResult result = BeginUnlockAndAbort(
+                            TimeSpan.MaxValue,
+                            onUnlockAndAbortCallback,
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             EndUnlockAndAbort(result);
@@ -5812,7 +6949,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     else
                     {
-                        IAsyncResult result = this.instance.BeginReleaseInstance(true, TimeSpan.MaxValue, onUnloadCallback, this);
+                        IAsyncResult result = this.instance.BeginReleaseInstance(
+                            true,
+                            TimeSpan.MaxValue,
+                            onUnloadCallback,
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             HandleEndUnload(result);
@@ -5847,7 +6989,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         throw;
                     }
-                    // 
+                    //
                     thisPtr.instance.AbortInstance(ex, false);
                 }
             }
@@ -5893,15 +7035,25 @@ namespace System.ServiceModel.Activities.Dispatcher
             // The synchronized mechanism is the same as ReleaseAsyncResult.
             class UnlockAndAbortAsyncResult : AsyncResult
             {
-                static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(Finally);
-                static FastAsyncCallback acquireCompletedCallback = new FastAsyncCallback(AcquireCompletedCallback);
+                static Action<AsyncResult, Exception> onCompleting = new Action<
+                    AsyncResult,
+                    Exception
+                >(Finally);
+                static FastAsyncCallback acquireCompletedCallback = new FastAsyncCallback(
+                    AcquireCompletedCallback
+                );
                 static AsyncCompletion handleEndAbandon;
 
                 WorkflowServiceInstance instance;
                 TimeoutHelper timeoutHelper;
                 bool referenceAcquired;
 
-                public UnlockAndAbortAsyncResult(WorkflowServiceInstance instance, TimeSpan timeout, AsyncCallback callback, object state)
+                public UnlockAndAbortAsyncResult(
+                    WorkflowServiceInstance instance,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.instance = instance;
@@ -5911,7 +7063,13 @@ namespace System.ServiceModel.Activities.Dispatcher
                     Exception completionException = null;
                     bool completeSelf = true;
 
-                    if (this.instance.acquireReferenceSemaphore.EnterAsync(this.timeoutHelper.RemainingTime(), acquireCompletedCallback, this))
+                    if (
+                        this.instance.acquireReferenceSemaphore.EnterAsync(
+                            this.timeoutHelper.RemainingTime(),
+                            acquireCompletedCallback,
+                            this
+                        )
+                    )
                     {
                         try
                         {
@@ -5980,8 +7138,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                             handleEndAbandon = new AsyncCompletion(HandleEndAbandon);
                         }
 
-                        IAsyncResult result = this.instance.BeginAbandon(new FaultException(OperationExecutionFault.CreateAbortedFault(SR.DefaultAbortReason)), false,
-                            this.timeoutHelper.RemainingTime(), PrepareAsyncCompletion(handleEndAbandon), this);
+                        IAsyncResult result = this.instance.BeginAbandon(
+                            new FaultException(
+                                OperationExecutionFault.CreateAbortedFault(SR.DefaultAbortReason)
+                            ),
+                            false,
+                            this.timeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(handleEndAbandon),
+                            this
+                        );
                         return SyncContinue(result);
                     }
                     else
@@ -5992,7 +7157,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                 static bool HandleEndAbandon(IAsyncResult result)
                 {
-                    UnlockAndAbortAsyncResult thisPtr = (UnlockAndAbortAsyncResult)result.AsyncState;
+                    UnlockAndAbortAsyncResult thisPtr = (UnlockAndAbortAsyncResult)
+                        result.AsyncState;
                     thisPtr.instance.EndAbandon(result);
 
                     return thisPtr.ReleaseAcquiredReference();
@@ -6018,15 +7184,23 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class UnhandledExceptionPolicyHelper
         {
-            static AsyncCallback operationCallback = Fx.ThunkCallback(new AsyncCallback(OperationCallback));
+            static AsyncCallback operationCallback = Fx.ThunkCallback(
+                new AsyncCallback(OperationCallback)
+            );
 
             WorkflowServiceInstance instance;
             WorkflowUnhandledExceptionAction action;
 
-            public UnhandledExceptionPolicyHelper(WorkflowServiceInstance instance, WorkflowUnhandledExceptionAction action)
+            public UnhandledExceptionPolicyHelper(
+                WorkflowServiceInstance instance,
+                WorkflowUnhandledExceptionAction action
+            )
             {
                 Fx.Assert(instance != null, "instance must not be null!");
-                Fx.Assert(WorkflowUnhandledExceptionActionHelper.IsDefined(action), action + " is invalid!");
+                Fx.Assert(
+                    WorkflowUnhandledExceptionActionHelper.IsDefined(action),
+                    action + " is invalid!"
+                );
                 this.instance = instance;
                 this.action = action;
             }
@@ -6039,15 +7213,26 @@ namespace System.ServiceModel.Activities.Dispatcher
                 FxTrace.Exception.AsWarning(data.Exception);
 
                 try
-                {                   
+                {
                     IAsyncResult result;
                     if (this.action == WorkflowUnhandledExceptionAction.Cancel)
                     {
-                        result = this.instance.BeginCancel(null, TimeSpan.MaxValue, operationCallback, data);
+                        result = this.instance.BeginCancel(
+                            null,
+                            TimeSpan.MaxValue,
+                            operationCallback,
+                            data
+                        );
                     }
                     else if (this.action == WorkflowUnhandledExceptionAction.Terminate)
                     {
-                        result = this.instance.BeginTerminate(data.Exception, null, TimeSpan.MaxValue, operationCallback, data);
+                        result = this.instance.BeginTerminate(
+                            data.Exception,
+                            null,
+                            TimeSpan.MaxValue,
+                            operationCallback,
+                            data
+                        );
                     }
                     else if (this.action == WorkflowUnhandledExceptionAction.AbandonAndSuspend)
                     {
@@ -6055,17 +7240,32 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // For non-durable WF, simply abandon.
                         if (this.instance.persistenceContext.CanPersist)
                         {
-                            result = this.instance.BeginAbandonAndSuspend(data.Exception, TimeSpan.MaxValue, operationCallback, data);
+                            result = this.instance.BeginAbandonAndSuspend(
+                                data.Exception,
+                                TimeSpan.MaxValue,
+                                operationCallback,
+                                data
+                            );
                         }
                         else
                         {
-                            result = this.instance.BeginAbandon(data.Exception, TimeSpan.MaxValue, operationCallback, data);
+                            result = this.instance.BeginAbandon(
+                                data.Exception,
+                                TimeSpan.MaxValue,
+                                operationCallback,
+                                data
+                            );
                         }
                     }
                     else
                     {
                         this.instance.isRunnable = false;
-                        result = this.instance.BeginAbandon(data.Exception, TimeSpan.MaxValue, operationCallback, data);
+                        result = this.instance.BeginAbandon(
+                            data.Exception,
+                            TimeSpan.MaxValue,
+                            operationCallback,
+                            data
+                        );
                     }
 
                     if (result.CompletedSynchronously)

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 public class P
@@ -29,7 +29,8 @@ public class P
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int F1(int k)
     {
-        if (k < 3) return 1;
+        if (k < 3)
+            return 1;
         return F1(k - 1) + F1(k - 2);
     }
 

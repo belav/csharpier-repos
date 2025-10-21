@@ -30,77 +30,93 @@
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class GetFrameworkPath : TaskExtension {
-		
-		string	path;
-	
-		public GetFrameworkPath ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class GetFrameworkPath : TaskExtension
+    {
+        string path;
 
-		public override bool Execute ()
-		{
-			path = ToolLocationHelper.GetPathToDotNetFramework (TargetDotNetFrameworkVersion.Version20);
-			return true;
-		}
+        public GetFrameworkPath() { }
 
-		[Output]
-		public string Path {
-			get {
-				return path;
-			}
-			set {
-				path = value;
-			}
-		}
+        public override bool Execute()
+        {
+            path = ToolLocationHelper.GetPathToDotNetFramework(
+                TargetDotNetFrameworkVersion.Version20
+            );
+            return true;
+        }
 
-		[Output]
-		public string FrameworkVersion11Path {
-			get {
-				return ToolLocationHelper.GetPathToDotNetFramework (
-						TargetDotNetFrameworkVersion.Version11);
-			}
-		}
+        [Output]
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
+        }
 
-		[Output]
-		public string FrameworkVersion20Path {
-			get {
-				return ToolLocationHelper.GetPathToDotNetFramework (
-						TargetDotNetFrameworkVersion.Version20);
-			}
-		}
+        [Output]
+        public string FrameworkVersion11Path
+        {
+            get
+            {
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version11
+                );
+            }
+        }
 
-		[Output]
-		public string FrameworkVersion30Path {
-			get {
-				return ToolLocationHelper.GetPathToDotNetFramework (
-						TargetDotNetFrameworkVersion.Version30);
-			}
-		}
+        [Output]
+        public string FrameworkVersion20Path
+        {
+            get
+            {
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version20
+                );
+            }
+        }
 
-		[Output]
-		public string FrameworkVersion35Path {
-			get {
-				return ToolLocationHelper.GetPathToDotNetFramework (
-						TargetDotNetFrameworkVersion.Version35);
-			}
-		}
+        [Output]
+        public string FrameworkVersion30Path
+        {
+            get
+            {
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version30
+                );
+            }
+        }
 
-		[Output]
-		public string FrameworkVersion40Path {
-			get {
-				return ToolLocationHelper.GetPathToDotNetFramework (
-						TargetDotNetFrameworkVersion.Version40);
-			}
-		}
-		
-		[Output]
-		public string FrameworkVersion45Path {
-			get {
-				return ToolLocationHelper.GetPathToDotNetFramework (
-						TargetDotNetFrameworkVersion.Version45);
-			}
-		}
-	}
+        [Output]
+        public string FrameworkVersion35Path
+        {
+            get
+            {
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version35
+                );
+            }
+        }
+
+        [Output]
+        public string FrameworkVersion40Path
+        {
+            get
+            {
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version40
+                );
+            }
+        }
+
+        [Output]
+        public string FrameworkVersion45Path
+        {
+            get
+            {
+                return ToolLocationHelper.GetPathToDotNetFramework(
+                    TargetDotNetFrameworkVersion.Version45
+                );
+            }
+        }
+    }
 }

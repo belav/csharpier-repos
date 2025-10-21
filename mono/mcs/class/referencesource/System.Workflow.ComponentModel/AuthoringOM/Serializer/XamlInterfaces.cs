@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
-using System.Workflow.ComponentModel.Compiler;
-using System.ComponentModel;
-using System.ComponentModel.Design.Serialization;
-using System.Workflow.ComponentModel.Serialization;
-using System.ComponentModel.Design;
-using System.Xml;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.Design;
+using System.ComponentModel.Design.Serialization;
+using System.Diagnostics;
+using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Serialization;
+using System.Xml;
 
 namespace System.Workflow.ComponentModel.Serialization
 {
@@ -25,6 +25,7 @@ namespace System.Workflow.ComponentModel.Serialization
             this.xmlNamespace = xmlNamespace;
             this.clrNamespace = clrNamespace;
         }
+
         public string XmlNamespace
         {
             get { return this.xmlNamespace; }
@@ -60,6 +61,7 @@ namespace System.Workflow.ComponentModel.Serialization
             this.xmlNamespace = xmlNamespace;
             this.prefix = prefix;
         }
+
         public string XmlNamespace
         {
             get { return this.xmlNamespace; }
@@ -74,16 +76,15 @@ namespace System.Workflow.ComponentModel.Serialization
     public sealed class RuntimeNamePropertyAttribute : Attribute
     {
         private string name = null;
+
         public RuntimeNamePropertyAttribute(string name)
         {
             this.name = name;
         }
+
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
     }
 
@@ -91,16 +92,20 @@ namespace System.Workflow.ComponentModel.Serialization
     public sealed class ContentPropertyAttribute : Attribute
     {
         private string name;
+
         public ContentPropertyAttribute() { }
+
         public ContentPropertyAttribute(string name)
         {
             this.name = name;
         }
+
         public string Name
         {
             get { return this.name; }
         }
     }
+
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public sealed class ConstructorArgumentAttribute : Attribute
     {
@@ -110,6 +115,7 @@ namespace System.Workflow.ComponentModel.Serialization
         {
             this.argumentName = argumentName;
         }
+
         public string ArgumentName
         {
             get { return this.argumentName; }
@@ -125,6 +131,7 @@ namespace System.Workflow.ComponentModel.Serialization
     internal sealed class NullExtension : MarkupExtension
     {
         public NullExtension() { }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return null;
@@ -146,6 +153,7 @@ namespace System.Workflow.ComponentModel.Serialization
 
             this.typeName = type;
         }
+
         public TypeExtension(Type type)
         {
             if (type == null)
@@ -153,6 +161,7 @@ namespace System.Workflow.ComponentModel.Serialization
 
             this.type = type;
         }
+
         public override object ProvideValue(IServiceProvider provider)
         {
             if (this.type != null)
@@ -164,7 +173,8 @@ namespace System.Workflow.ComponentModel.Serialization
             if (this.typeName == null)
                 throw new InvalidOperationException("typename");
 
-            WorkflowMarkupSerializationManager manager = provider as WorkflowMarkupSerializationManager;
+            WorkflowMarkupSerializationManager manager =
+                provider as WorkflowMarkupSerializationManager;
             if (manager == null)
                 throw new ArgumentNullException("provider");
 
@@ -182,23 +192,35 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 prefix = typename.Substring(0, typeIndex);
                 typename = typename.Substring(typeIndex + 1);
-                type = manager.GetType(new XmlQualifiedName(typename, reader.LookupNamespace(prefix)));
+                type = manager.GetType(
+                    new XmlQualifiedName(typename, reader.LookupNamespace(prefix))
+                );
                 if (type != null)
                     return type;
 
                 // To Support types whose assembly is not available, we need to still resolve the clr namespace
                 List<WorkflowMarkupSerializerMapping> xmlnsMappings = null;
-                if (manager.XmlNamespaceBasedMappings.TryGetValue(reader.LookupNamespace(prefix), out xmlnsMappings) && xmlnsMappings != null && xmlnsMappings.Count > 0)
+                if (
+                    manager.XmlNamespaceBasedMappings.TryGetValue(
+                        reader.LookupNamespace(prefix),
+                        out xmlnsMappings
+                    )
+                    && xmlnsMappings != null
+                    && xmlnsMappings.Count > 0
+                )
                     return xmlnsMappings[0].ClrNamespace + "." + typename;
                 else
                     return typename;
             }
-            type = manager.GetType(new XmlQualifiedName(typename, reader.LookupNamespace(string.Empty)));
+            type = manager.GetType(
+                new XmlQualifiedName(typename, reader.LookupNamespace(string.Empty))
+            );
 
             // To Support Beta2 format
             if (type == null)
             {
-                ITypeProvider typeProvider = provider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                ITypeProvider typeProvider =
+                    provider.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (typeProvider != null)
                     type = typeProvider.GetType(typename);
 
@@ -244,9 +266,7 @@ namespace System.Workflow.ComponentModel.Serialization
         private ArrayList arrayElementList = new ArrayList();
         private Type arrayType;
 
-        public ArrayExtension()
-        {
-        }
+        public ArrayExtension() { }
 
         public ArrayExtension(Type arrayType)
         {
@@ -269,24 +289,14 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public Type Type
         {
-            get
-            {
-                return this.arrayType;
-            }
-
-            set
-            {
-                this.arrayType = value;
-            }
+            get { return this.arrayType; }
+            set { this.arrayType = value; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public IList Items
         {
-            get
-            {
-                return arrayElementList;
-            }
+            get { return arrayElementList; }
         }
 
         public override object ProvideValue(IServiceProvider provider)
@@ -305,8 +315,6 @@ namespace System.Workflow.ComponentModel.Serialization
             catch (System.InvalidCastException)
             {
                 //
-
-
 
                 throw new InvalidOperationException();
             }

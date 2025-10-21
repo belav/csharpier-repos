@@ -8,12 +8,12 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Text;
-using System.Data.Common.Utils;
 using System.Data.Common;
+using System.Data.Common.Utils;
 using System.Data.Mapping.ViewGeneration.Structures;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
@@ -32,7 +32,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Recursively generates <see cref="MemberPath"/>s for the members of the types stored in the <paramref name="extent"/>.
         /// </summary>
-        internal static MemberProjectionIndex Create(EntitySetBase extent, EdmItemCollection edmItemCollection)
+        internal static MemberProjectionIndex Create(
+            EntitySetBase extent,
+            EdmItemCollection edmItemCollection
+        )
         {
             // We generate the indices for the projected slots as we traverse the metadata.
             MemberProjectionIndex index = new MemberProjectionIndex();
@@ -139,7 +142,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         internal int BoolIndexToSlot(int boolIndex, int numBoolSlots)
         {
             // Booleans appear after the regular slots
-            Debug.Assert(boolIndex >= 0 && boolIndex < numBoolSlots, "No such boolean in this node");
+            Debug.Assert(
+                boolIndex >= 0 && boolIndex < numBoolSlots,
+                "No such boolean in this node"
+            );
             return this.Count + boolIndex;
         }
 
@@ -148,7 +154,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// </summary>
         internal int SlotToBoolIndex(int slotNum, int numBoolSlots)
         {
-            Debug.Assert(slotNum < this.Count + numBoolSlots && slotNum >= this.Count, "No such boolean slot");
+            Debug.Assert(
+                slotNum < this.Count + numBoolSlots && slotNum >= this.Count,
+                "No such boolean slot"
+            );
             return slotNum - this.Count;
         }
 
@@ -166,7 +175,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// </summary>
         internal bool IsBoolSlot(int slotNum, int numBoolSlots)
         {
-            Debug.Assert(slotNum < this.Count + numBoolSlots, "Boolean slot does not exist in tree");
+            Debug.Assert(
+                slotNum < this.Count + numBoolSlots,
+                "Boolean slot does not exist in tree"
+            );
             return slotNum >= this.Count;
         }
 
@@ -184,19 +196,28 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// </summary>
         /// <param name="member">corresponds to a value of an Entity or Complex or Association type</param>
         /// <param name="needKeysOnly">indicates whether we need to only collect members that are keys</param>
-        private static void GatherPartialSignature(MemberProjectionIndex index, EdmItemCollection edmItemCollection, MemberPath member, bool needKeysOnly)
+        private static void GatherPartialSignature(
+            MemberProjectionIndex index,
+            EdmItemCollection edmItemCollection,
+            MemberPath member,
+            bool needKeysOnly
+        )
         {
             EdmType memberType = member.EdmType;
             ComplexType complexTypemember = memberType as ComplexType;
-            Debug.Assert(complexTypemember != null ||
-                         memberType is EntityType || // for entity sets
-                         memberType is AssociationType || // For association sets
-                         memberType is RefType, // for association ends
-                         "GatherPartialSignature can be called only for complex types, entity sets, association ends");
+            Debug.Assert(
+                complexTypemember != null
+                    || memberType is EntityType
+                    || // for entity sets
+                    memberType is AssociationType
+                    || // For association sets
+                    memberType is RefType, // for association ends
+                "GatherPartialSignature can be called only for complex types, entity sets, association ends"
+            );
 
             if (memberType is ComplexType && needKeysOnly)
             {
-                // Check if the complex type needs to be traversed or not. If not, just return 
+                // Check if the complex type needs to be traversed or not. If not, just return
                 // from here. Else we need to continue to the code below. Right now, we do not
                 // allow keys inside complex types
                 return;
@@ -207,12 +228,24 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
             // Consider each possible type value -- each type value conributes to a tuple in the result.
             // For that possible type, add all the type members into the signature.
-            foreach (EdmType possibleType in MetadataHelper.GetTypeAndSubtypesOf(memberType, edmItemCollection, false /*includeAbstractTypes*/))
+            foreach (
+                EdmType possibleType in MetadataHelper.GetTypeAndSubtypesOf(
+                    memberType,
+                    edmItemCollection,
+                    false /*includeAbstractTypes*/
+                )
+            )
             {
                 StructuralType possibleStructuralType = possibleType as StructuralType;
                 Debug.Assert(possibleStructuralType != null, "Non-structural subtype?");
 
-                GatherSignatureFromTypeStructuralMembers(index, edmItemCollection, member, possibleStructuralType, needKeysOnly);
+                GatherSignatureFromTypeStructuralMembers(
+                    index,
+                    edmItemCollection,
+                    member,
+                    possibleStructuralType,
+                    needKeysOnly
+                );
             }
         }
 
@@ -222,11 +255,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// If <paramref name="needKeysOnly"/>=true, collect the key fields only.
         /// </summary>
         /// <param name="possibleType">the <paramref name="member"/>'s type or one of its subtypes</param>
-        private static void GatherSignatureFromTypeStructuralMembers(MemberProjectionIndex index,
-                                                                     EdmItemCollection edmItemCollection,
-                                                                     MemberPath member, 
-                                                                     StructuralType possibleType, 
-                                                                     bool needKeysOnly)
+        private static void GatherSignatureFromTypeStructuralMembers(
+            MemberProjectionIndex index,
+            EdmItemCollection edmItemCollection,
+            MemberPath member,
+            StructuralType possibleType,
+            bool needKeysOnly
+        )
         {
             // For each child member of this type, collect all the relevant scalar fields
             foreach (EdmMember structuralMember in Helper.GetAllStructuralMembers(possibleType))
@@ -242,18 +277,20 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                 }
                 else
                 {
-                    Debug.Assert(structuralMember.TypeUsage.EdmType is ComplexType ||
-                                 structuralMember.TypeUsage.EdmType is RefType, // for association ends
-                                 "Only non-scalars expected - complex types, association ends");
-
-                    
+                    Debug.Assert(
+                        structuralMember.TypeUsage.EdmType is ComplexType
+                            || structuralMember.TypeUsage.EdmType is RefType, // for association ends
+                        "Only non-scalars expected - complex types, association ends"
+                    );
 
                     MemberPath structuredMember = new MemberPath(member, structuralMember);
-                    GatherPartialSignature(index, 
-                                           edmItemCollection, 
-                                           structuredMember,
-                                           // Only keys are required for entities referenced by association ends of an association.
-                                           needKeysOnly || Helper.IsAssociationEndMember(structuralMember));
+                    GatherPartialSignature(
+                        index,
+                        edmItemCollection,
+                        structuredMember,
+                        // Only keys are required for entities referenced by association ends of an association.
+                        needKeysOnly || Helper.IsAssociationEndMember(structuralMember)
+                    );
                 }
             }
         }

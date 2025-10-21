@@ -7,6 +7,6 @@ namespace System.Net.WebSockets
     {
         Text = 0,
         Binary = 1,
-        Close = 2
+        Close = 2,
     }
 }

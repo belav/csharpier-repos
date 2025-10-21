@@ -5,7 +5,9 @@ namespace System.CommandLine.NamingConventionBinder;
 
 internal static class ExpressionExtensions
 {
-    internal static (Type memberType, string memberName) MemberTypeAndName<T, TValue>(this Expression<Func<T, TValue>> expression)
+    internal static (Type memberType, string memberName) MemberTypeAndName<T, TValue>(
+        this Expression<Func<T, TValue>> expression
+    )
     {
         if (expression is null)
         {
@@ -18,8 +20,10 @@ internal static class ExpressionExtensions
         }
 
         // when the return type of the expression is a value type, it contains a call to Convert, resulting in boxing, so we get a UnaryExpression instead
-        if (expression.Body is UnaryExpression unaryExpression &&
-            unaryExpression.Operand is MemberExpression operandMemberExpression)
+        if (
+            expression.Body is UnaryExpression unaryExpression
+            && unaryExpression.Operand is MemberExpression operandMemberExpression
+        )
         {
             return TypeAndName(operandMemberExpression);
         }

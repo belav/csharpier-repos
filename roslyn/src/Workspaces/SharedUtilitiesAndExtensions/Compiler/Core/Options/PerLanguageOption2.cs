@@ -12,14 +12,10 @@ namespace Microsoft.CodeAnalysis.Options
     /// Marker interface for <see cref="PerLanguageOption2{T}"/>.
     /// This option may apply to multiple languages, such that the option can have a different value for each language.
     /// </summary>
-    internal interface IPerLanguageValuedOption : IOption2
-    {
-    }
+    internal interface IPerLanguageValuedOption : IOption2 { }
 
     /// <inheritdoc cref="IPerLanguageValuedOption"/>
-    internal interface IPerLanguageValuedOption<T> : IPerLanguageValuedOption
-    {
-    }
+    internal interface IPerLanguageValuedOption<T> : IPerLanguageValuedOption { }
 
     /// <summary>
     /// An option that can be specified once per language.
@@ -30,7 +26,10 @@ namespace Microsoft.CodeAnalysis.Options
         public OptionDefinition<T> Definition { get; }
         public IPublicOption? PublicOption { get; }
 
-        internal PerLanguageOption2(OptionDefinition<T> optionDefinition, Func<IOption2, IPublicOption>? publicOptionFactory)
+        internal PerLanguageOption2(
+            OptionDefinition<T> optionDefinition,
+            Func<IOption2, IPublicOption>? publicOptionFactory
+        )
         {
             Definition = optionDefinition;
             PublicOption = publicOptionFactory?.Invoke(this);
@@ -41,8 +40,19 @@ namespace Microsoft.CodeAnalysis.Options
             T defaultValue,
             OptionGroup? group = null,
             bool isEditorConfigOption = false,
-            EditorConfigValueSerializer<T>? serializer = null)
-            : this(new OptionDefinition<T>(defaultValue, serializer, group, name, storageMapping: null, isEditorConfigOption), publicOptionFactory: null)
+            EditorConfigValueSerializer<T>? serializer = null
+        )
+            : this(
+                new OptionDefinition<T>(
+                    defaultValue,
+                    serializer,
+                    group,
+                    name,
+                    storageMapping: null,
+                    isEditorConfigOption
+                ),
+                publicOptionFactory: null
+            )
         {
             VerifyNamingConvention();
         }
@@ -57,8 +67,18 @@ namespace Microsoft.CodeAnalysis.Options
             }
 
             // options with per-language values shouldn't have language-specific prefix
-            Debug.Assert(!Definition.ConfigName.StartsWith(OptionDefinition.CSharpConfigNamePrefix, StringComparison.Ordinal));
-            Debug.Assert(!Definition.ConfigName.StartsWith(OptionDefinition.VisualBasicConfigNamePrefix, StringComparison.Ordinal));
+            Debug.Assert(
+                !Definition.ConfigName.StartsWith(
+                    OptionDefinition.CSharpConfigNamePrefix,
+                    StringComparison.Ordinal
+                )
+            );
+            Debug.Assert(
+                !Definition.ConfigName.StartsWith(
+                    OptionDefinition.VisualBasicConfigNamePrefix,
+                    StringComparison.Ordinal
+                )
+            );
         }
 
         OptionDefinition IOption2.Definition => Definition;
@@ -72,8 +92,10 @@ namespace Microsoft.CodeAnalysis.Options
         object? IOption.DefaultValue => Definition.DefaultValue;
         bool IOption.IsPerLanguage => true;
         Type IOption.Type => Definition.Type;
-        ImmutableArray<OptionStorageLocation> IOption.StorageLocations => ImmutableArray<OptionStorageLocation>.Empty;
+        ImmutableArray<OptionStorageLocation> IOption.StorageLocations =>
+            ImmutableArray<OptionStorageLocation>.Empty;
 #endif
+
         public override string ToString() => Definition.ToString();
 
         public override int GetHashCode() => Definition.GetHashCode();

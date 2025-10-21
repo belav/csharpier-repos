@@ -16,8 +16,14 @@ namespace System.Activities.DurableInstancing
 
     class TestDatabaseVersionAndRunAsyncResult : SqlWorkflowInstanceStoreAsyncResult
     {
-        static readonly AsyncCallback instanceCommandCompleteCallback = Fx.ThunkCallback(InstanceCommandCompleteCallback);
-        static readonly string commandText = string.Format(CultureInfo.InvariantCulture, "{0}.[GetWorkflowInstanceStoreVersion]", SqlWorkflowInstanceStoreConstants.DefaultSchema);
+        static readonly AsyncCallback instanceCommandCompleteCallback = Fx.ThunkCallback(
+            InstanceCommandCompleteCallback
+        );
+        static readonly string commandText = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}.[GetWorkflowInstanceStoreVersion]",
+            SqlWorkflowInstanceStoreConstants.DefaultSchema
+        );
 
         Transaction currentTransaction;
         Version targetVersion;
@@ -31,8 +37,9 @@ namespace System.Activities.DurableInstancing
             TimeSpan timeout,
             Version targetVersion,
             AsyncCallback callback,
-            object state) :
-            base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
+            object state
+        )
+            : base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
         {
             this.currentTransaction = currentTransaction;
             this.targetVersion = targetVersion;
@@ -42,7 +49,7 @@ namespace System.Activities.DurableInstancing
         {
             if (this.Store.DatabaseVersion != null)
             {
-                // Database version has been fetched from the db, 
+                // Database version has been fetched from the db,
                 // we can directly check the version and run the "real" command
                 this.TestAndRun();
             }
@@ -52,7 +59,7 @@ namespace System.Activities.DurableInstancing
                 base.ScheduleCallback();
             }
         }
-        
+
         protected override void GenerateSqlCommand(SqlCommand sqlCommand)
         {
             // Nothing special to do here, the command has no parameters
@@ -103,7 +110,7 @@ namespace System.Activities.DurableInstancing
             if (se != null && se.Number == 2812)
             {
                 // 2812 == object not found in sql
-                // This is expected when running the db version lookup 
+                // This is expected when running the db version lookup
                 // against a 4.0 database as the proc doesn't exist on 4.0
                 // As a version check will only be run for commands that are
                 // introduced post 4.0 hitting this path in production is unlikely
@@ -120,7 +127,8 @@ namespace System.Activities.DurableInstancing
 
         static void InstanceCommandCompleteCallback(IAsyncResult result)
         {
-            TestDatabaseVersionAndRunAsyncResult thisPtr = (TestDatabaseVersionAndRunAsyncResult)result.AsyncState;
+            TestDatabaseVersionAndRunAsyncResult thisPtr = (TestDatabaseVersionAndRunAsyncResult)
+                result.AsyncState;
             try
             {
                 thisPtr.Store.EndTryCommand(result);
@@ -139,8 +147,16 @@ namespace System.Activities.DurableInstancing
 
         static Version GetVersion(SqlDataReader reader)
         {
-            int major, minor, build, revision;
-            if (TryGetInt(reader, 0, out major) && TryGetInt(reader, 1, out minor) && TryGetInt(reader, 2, out build) && TryGetInt(reader, 3, out revision))
+            int major,
+                minor,
+                build,
+                revision;
+            if (
+                TryGetInt(reader, 0, out major)
+                && TryGetInt(reader, 1, out minor)
+                && TryGetInt(reader, 2, out build)
+                && TryGetInt(reader, 3, out revision)
+            )
             {
                 return new Version(major, minor, build, revision);
             }
@@ -172,12 +188,27 @@ namespace System.Activities.DurableInstancing
         {
             if (this.Store.DatabaseVersion >= this.targetVersion)
             {
-                this.Store.BeginTryCommandInternal(this.InstancePersistenceContext, this.InstancePersistenceCommand, this.currentTransaction, this.TimeoutHelper.RemainingTime(), instanceCommandCompleteCallback, this);
+                this.Store.BeginTryCommandInternal(
+                    this.InstancePersistenceContext,
+                    this.InstancePersistenceCommand,
+                    this.currentTransaction,
+                    this.TimeoutHelper.RemainingTime(),
+                    instanceCommandCompleteCallback,
+                    this
+                );
             }
             else
             {
-                throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.DatabaseUpgradeRequiredForCommand(this.Store.DatabaseVersion, this.InstancePersistenceCommand, this.targetVersion)));
+                throw FxTrace.Exception.AsError(
+                    new InstancePersistenceCommandException(
+                        SR.DatabaseUpgradeRequiredForCommand(
+                            this.Store.DatabaseVersion,
+                            this.InstancePersistenceCommand,
+                            this.targetVersion
+                        )
+                    )
+                );
             }
         }
-    }    
+    }
 }

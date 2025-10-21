@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,63 +29,62 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Collections.ObjectModel;
+using System.Text;
 
 namespace System.Web.UI
 {
-	public class UpdatePanelTriggerCollection : Collection<UpdatePanelTrigger>
-	{
-		UpdatePanel _owner;
-		bool initialized;
-		
-		public UpdatePanelTriggerCollection (UpdatePanel owner)
-		{
-			_owner = owner;
-		}
+    public class UpdatePanelTriggerCollection : Collection<UpdatePanelTrigger>
+    {
+        UpdatePanel _owner;
+        bool initialized;
 
-		public UpdatePanel Owner {
-			get {
-				return _owner;
-			}
-		}
+        public UpdatePanelTriggerCollection(UpdatePanel owner)
+        {
+            _owner = owner;
+        }
 
-		protected override void ClearItems ()
-		{
-			base.ClearItems ();
-		}
+        public UpdatePanel Owner
+        {
+            get { return _owner; }
+        }
 
-		protected override void InsertItem (int index, UpdatePanelTrigger item)
-		{
-			base.InsertItem (index, item);
-			item.Owner = Owner;
+        protected override void ClearItems()
+        {
+            base.ClearItems();
+        }
 
-			if (!initialized || item == null)
-				return;
+        protected override void InsertItem(int index, UpdatePanelTrigger item)
+        {
+            base.InsertItem(index, item);
+            item.Owner = Owner;
 
-			item.Initialize ();
-		}
+            if (!initialized || item == null)
+                return;
 
-		protected override void RemoveItem (int index)
-		{
-			base.RemoveItem (index);
-		}
-		
-		protected override void SetItem (int index, UpdatePanelTrigger item)
-		{
-			base.SetItem (index, item);
-			item.Owner = Owner;
-		}
+            item.Initialize();
+        }
 
-		internal void Initialize ()
-		{
-			if (initialized)
-				return;
+        protected override void RemoveItem(int index)
+        {
+            base.RemoveItem(index);
+        }
 
-			for (int i = 0; i < Count; i++)
-				this [i].Initialize ();
+        protected override void SetItem(int index, UpdatePanelTrigger item)
+        {
+            base.SetItem(index, item);
+            item.Owner = Owner;
+        }
 
-			initialized = true;
-		}
-	}
+        internal void Initialize()
+        {
+            if (initialized)
+                return;
+
+            for (int i = 0; i < Count; i++)
+                this[i].Initialize();
+
+            initialized = true;
+        }
+    }
 }

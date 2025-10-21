@@ -1,6 +1,12 @@
 <Type Name="SqliteCommand" FullName="Mono.Data.Sqlite.SqliteCommand">
-  <TypeSignature Language="C#" Value="public sealed class SqliteCommand : System.Data.Common.DbCommand, ICloneable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqliteCommand extends System.Data.Common.DbCommand implements class System.ICloneable" />
+  <TypeSignature
+    Language="C#"
+    Value="public sealed class SqliteCommand : System.Data.Common.DbCommand, ICloneable"
+  />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public auto ansi sealed beforefieldinit SqliteCommand extends System.Data.Common.DbCommand implements class System.ICloneable"
+  />
   <AssemblyInfo>
     <AssemblyName>Mono.Data.Sqlite</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -30,7 +36,10 @@
   <Members>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteCommand ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -47,8 +56,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteCommand (Mono.Data.Sqlite.SqliteConnection connection);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Data.Sqlite.SqliteConnection connection) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteCommand (Mono.Data.Sqlite.SqliteConnection connection);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(class Mono.Data.Sqlite.SqliteConnection connection) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -66,7 +81,10 @@
     </Member>
     <Member MemberName=".ctor">
       <MemberSignature Language="C#" Value="public SqliteCommand (string commandText);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -83,8 +101,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteCommand (string commandText, Mono.Data.Sqlite.SqliteConnection connection);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, class Mono.Data.Sqlite.SqliteConnection connection) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteCommand (string commandText, Mono.Data.Sqlite.SqliteConnection connection);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, class Mono.Data.Sqlite.SqliteConnection connection) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -104,8 +128,14 @@
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public SqliteCommand (string commandText, Mono.Data.Sqlite.SqliteConnection connection, Mono.Data.Sqlite.SqliteTransaction transaction);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, class Mono.Data.Sqlite.SqliteConnection connection, class Mono.Data.Sqlite.SqliteTransaction transaction) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public SqliteCommand (string commandText, Mono.Data.Sqlite.SqliteConnection connection, Mono.Data.Sqlite.SqliteTransaction transaction);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig specialname rtspecialname instance void .ctor(string commandText, class Mono.Data.Sqlite.SqliteConnection connection, class Mono.Data.Sqlite.SqliteTransaction transaction) cil managed"
+      />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -127,7 +157,10 @@
     </Member>
     <Member MemberName="Cancel">
       <MemberSignature Language="C#" Value="public override void Cancel ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Cancel() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Cancel() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -145,7 +178,10 @@
     </Member>
     <Member MemberName="Clone">
       <MemberSignature Language="C#" Value="public object Clone ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object Clone() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig newslot virtual instance object Clone() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -215,8 +251,14 @@
       </Docs>
     </Member>
     <Member MemberName="CommandType">
-      <MemberSignature Language="C#" Value="public override System.Data.CommandType CommandType { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.CommandType CommandType" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.CommandType CommandType { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.CommandType CommandType"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -241,8 +283,14 @@
       </Docs>
     </Member>
     <Member MemberName="Connection">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteConnection Connection { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteConnection Connection" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteConnection Connection { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteConnection Connection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -267,8 +315,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateDbParameter">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbParameter CreateDbParameter ();" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Common.DbParameter CreateDbParameter() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbParameter CreateDbParameter ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Data.Common.DbParameter CreateDbParameter() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -286,8 +340,14 @@
       </Docs>
     </Member>
     <Member MemberName="CreateParameter">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameter CreateParameter ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter CreateParameter() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameter CreateParameter ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteParameter CreateParameter() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -305,8 +365,14 @@
       </Docs>
     </Member>
     <Member MemberName="DbConnection">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbConnection DbConnection { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Common.DbConnection DbConnection" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbConnection DbConnection { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Data.Common.DbConnection DbConnection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -323,8 +389,14 @@
       </Docs>
     </Member>
     <Member MemberName="DbParameterCollection">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbParameterCollection DbParameterCollection { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Common.DbParameterCollection DbParameterCollection" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbParameterCollection DbParameterCollection { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Data.Common.DbParameterCollection DbParameterCollection"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -341,8 +413,14 @@
       </Docs>
     </Member>
     <Member MemberName="DbTransaction">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbTransaction DbTransaction { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Common.DbTransaction DbTransaction" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbTransaction DbTransaction { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class System.Data.Common.DbTransaction DbTransaction"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -392,7 +470,10 @@
     </Member>
     <Member MemberName="Dispose">
       <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -404,7 +485,9 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">Whether or not the class is being explicitly or implicitly disposed</param>
+        <param name="disposing"
+          >Whether or not the class is being explicitly or implicitly disposed</param
+        >
         <summary>
             Disposes of the command and clears all member variables
             </summary>
@@ -412,8 +495,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExecuteDbDataReader">
-      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbDataReader ExecuteDbDataReader (System.Data.CommandBehavior behavior);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Common.DbDataReader ExecuteDbDataReader(valuetype System.Data.CommandBehavior behavior) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="protected override System.Data.Common.DbDataReader ExecuteDbDataReader (System.Data.CommandBehavior behavior);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method familyhidebysig virtual instance class System.Data.Common.DbDataReader ExecuteDbDataReader(valuetype System.Data.CommandBehavior behavior) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -435,7 +524,10 @@
     </Member>
     <Member MemberName="ExecuteNonQuery">
       <MemberSignature Language="C#" Value="public override int ExecuteNonQuery ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 ExecuteNonQuery() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance int32 ExecuteNonQuery() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -453,8 +545,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExecuteReader">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteDataReader ExecuteReader ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteDataReader ExecuteReader() cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteDataReader ExecuteReader ();"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteDataReader ExecuteReader() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -472,8 +570,14 @@
       </Docs>
     </Member>
     <Member MemberName="ExecuteReader">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteDataReader ExecuteReader (System.Data.CommandBehavior behavior);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteDataReader ExecuteReader(valuetype System.Data.CommandBehavior behavior) cil managed" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteDataReader ExecuteReader (System.Data.CommandBehavior behavior);"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig instance class Mono.Data.Sqlite.SqliteDataReader ExecuteReader(valuetype System.Data.CommandBehavior behavior) cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -495,7 +599,10 @@
     </Member>
     <Member MemberName="ExecuteScalar">
       <MemberSignature Language="C#" Value="public override object ExecuteScalar ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance object ExecuteScalar() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance object ExecuteScalar() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -514,8 +621,14 @@
       </Docs>
     </Member>
     <Member MemberName="Parameters">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteParameterCollection Parameters { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteParameterCollection Parameters" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteParameterCollection Parameters { get; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteParameterCollection Parameters"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -538,7 +651,10 @@
     </Member>
     <Member MemberName="Prepare">
       <MemberSignature Language="C#" Value="public override void Prepare ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Prepare() cil managed" />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".method public hidebysig virtual instance void Prepare() cil managed"
+      />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -555,8 +671,14 @@
       </Docs>
     </Member>
     <Member MemberName="Transaction">
-      <MemberSignature Language="C#" Value="public Mono.Data.Sqlite.SqliteTransaction Transaction { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Mono.Data.Sqlite.SqliteTransaction Transaction" />
+      <MemberSignature
+        Language="C#"
+        Value="public Mono.Data.Sqlite.SqliteTransaction Transaction { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance class Mono.Data.Sqlite.SqliteTransaction Transaction"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>
@@ -582,8 +704,14 @@
       </Docs>
     </Member>
     <Member MemberName="UpdatedRowSource">
-      <MemberSignature Language="C#" Value="public override System.Data.UpdateRowSource UpdatedRowSource { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Data.UpdateRowSource UpdatedRowSource" />
+      <MemberSignature
+        Language="C#"
+        Value="public override System.Data.UpdateRowSource UpdatedRowSource { get; set; }"
+      />
+      <MemberSignature
+        Language="ILAsm"
+        Value=".property instance valuetype System.Data.UpdateRowSource UpdatedRowSource"
+      />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyVersion>4.0.0.0</AssemblyVersion>

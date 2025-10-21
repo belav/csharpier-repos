@@ -13,7 +13,7 @@ namespace System.ServiceModel.Dispatcher
         Div,
         Multiply,
         Mod,
-        Negate
+        Negate,
     }
 
     internal class MathOpcode : Opcode
@@ -30,7 +30,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (base.Equals(op))
             {
-                return (this.mathOp == ((MathOpcode) op).mathOp);
+                return (this.mathOp == ((MathOpcode)op).mathOp);
             }
 
             return false;
@@ -47,9 +47,7 @@ namespace System.ServiceModel.Dispatcher
     internal class PlusOpcode : MathOpcode
     {
         internal PlusOpcode()
-            : base(OpcodeID.Plus, MathOperator.Plus)
-        {
-        }
+            : base(OpcodeID.Plus, MathOperator.Plus) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -74,16 +72,14 @@ namespace System.ServiceModel.Dispatcher
     internal class MinusOpcode : MathOpcode
     {
         internal MinusOpcode()
-            : base(OpcodeID.Minus, MathOperator.Minus)
-        {
-        }
+            : base(OpcodeID.Minus, MathOperator.Minus) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
             StackFrame argX = context.TopArg;
             StackFrame argY = context.SecondArg;
             Fx.Assert(argX.Count == argY.Count, "");
-            
+
             Value[] values = context.Values;
 
             for (int x = argX.basePtr, y = argY.basePtr; x <= argX.endPtr; ++x, ++y)
@@ -101,9 +97,7 @@ namespace System.ServiceModel.Dispatcher
     internal class MultiplyOpcode : MathOpcode
     {
         internal MultiplyOpcode()
-            : base(OpcodeID.Multiply, MathOperator.Multiply)
-        {
-        }
+            : base(OpcodeID.Multiply, MathOperator.Multiply) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -128,9 +122,7 @@ namespace System.ServiceModel.Dispatcher
     internal class DivideOpcode : MathOpcode
     {
         internal DivideOpcode()
-            : base(OpcodeID.Divide, MathOperator.Div)
-        {
-        }
+            : base(OpcodeID.Divide, MathOperator.Div) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -154,9 +146,7 @@ namespace System.ServiceModel.Dispatcher
     internal class ModulusOpcode : MathOpcode
     {
         internal ModulusOpcode()
-            : base(OpcodeID.Mod, MathOperator.Mod)
-        {
-        }
+            : base(OpcodeID.Mod, MathOperator.Mod) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -180,9 +170,7 @@ namespace System.ServiceModel.Dispatcher
     internal class NegateOpcode : MathOpcode
     {
         internal NegateOpcode()
-            : base(OpcodeID.Negate, MathOperator.Negate)
-        {
-        }
+            : base(OpcodeID.Negate, MathOperator.Negate) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -196,5 +184,4 @@ namespace System.ServiceModel.Dispatcher
             return this.next;
         }
     }
-
 }

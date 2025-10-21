@@ -13,13 +13,22 @@ namespace System.Xml.Tests
         {
             // for function MoveToAttributeWithName1
             {
-                this.AddChild(new CVariation(MoveToAttributeWithName1) { Attribute = new Variation("MoveToAttribute(String.Empty)") });
+                this.AddChild(
+                    new CVariation(MoveToAttributeWithName1)
+                    {
+                        Attribute = new Variation("MoveToAttribute(String.Empty)"),
+                    }
+                );
             }
-
 
             // for function MoveToAttributeWithName2
             {
-                this.AddChild(new CVariation(MoveToAttributeWithName2) { Attribute = new Variation("MoveToAttribute(String.Empty,String.Empty)") });
+                this.AddChild(
+                    new CVariation(MoveToAttributeWithName2)
+                    {
+                        Attribute = new Variation("MoveToAttribute(String.Empty,String.Empty)"),
+                    }
+                );
             }
         }
     }

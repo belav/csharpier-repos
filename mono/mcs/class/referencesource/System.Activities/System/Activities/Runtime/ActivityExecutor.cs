@@ -87,7 +87,7 @@ namespace System.Activities.Runtime
         SymbolResolver symbolResolver;
 
         bool throwDuringSerialization;
-        
+
         CodeActivityContext cachedResolutionContext;
         Location ignorableResultLocation;
 
@@ -154,7 +154,8 @@ namespace System.Activities.Runtime
             {
                 if (this.executeSynchronousExpressionWorkItemPool == null)
                 {
-                    this.executeSynchronousExpressionWorkItemPool = new PoolOfExecuteSynchronousExpressionWorkItems();
+                    this.executeSynchronousExpressionWorkItemPool =
+                        new PoolOfExecuteSynchronousExpressionWorkItems();
                 }
 
                 return this.executeSynchronousExpressionWorkItemPool;
@@ -215,25 +216,20 @@ namespace System.Activities.Runtime
 
         public Activity RootActivity
         {
-            get
-            {
-                return this.rootElement;
-            }
+            get { return this.rootElement; }
         }
 
         public bool IsInitialized
         {
-            get
-            {
-                return this.host != null;
-            }
+            get { return this.host != null; }
         }
 
         public bool HasPendingTrackingRecords
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.HasPendingRecords;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.HasPendingRecords;
             }
         }
 
@@ -249,7 +245,8 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.ShouldTrackBookmarkResumptionRecords;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.ShouldTrackBookmarkResumptionRecords;
             }
         }
 
@@ -257,7 +254,8 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.ShouldTrackActivityScheduledRecords;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.ShouldTrackActivityScheduledRecords;
             }
         }
 
@@ -265,7 +263,8 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.ShouldTrackActivityStateRecords;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.ShouldTrackActivityStateRecords;
             }
         }
 
@@ -273,7 +272,8 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.ShouldTrackActivityStateRecordsExecutingState;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.ShouldTrackActivityStateRecordsExecutingState;
             }
         }
 
@@ -281,7 +281,8 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.ShouldTrackActivityStateRecordsClosedState;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.ShouldTrackActivityStateRecordsClosedState;
             }
         }
 
@@ -289,7 +290,8 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.ShouldTrackCancelRequestedRecords;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.ShouldTrackCancelRequestedRecords;
             }
         }
 
@@ -297,7 +299,8 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.host.HasTrackingParticipant && this.host.TrackingProvider.ShouldTrackFaultPropagationRecords;
+                return this.host.HasTrackingParticipant
+                    && this.host.TrackingProvider.ShouldTrackFaultPropagationRecords;
             }
         }
 
@@ -317,7 +320,12 @@ namespace System.Activities.Runtime
                         {
                             throw;
                         }
-                        throw FxTrace.Exception.AsError(new CallbackException(SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId), e));
+                        throw FxTrace.Exception.AsError(
+                            new CallbackException(
+                                SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId),
+                                e
+                            )
+                        );
                     }
                 }
 
@@ -330,18 +338,19 @@ namespace System.Activities.Runtime
         // to cache the empty environment.
         public LocationEnvironment EmptyEnvironment
         {
-            get
-            {
-                return new LocationEnvironment(this, null);
-            }
+            get { return new LocationEnvironment(this, null); }
         }
 
         public ActivityInstanceState State
         {
             get
             {
-                if ((this.executingSecondaryRootInstances != null && this.executingSecondaryRootInstances.Count > 0) ||
-                    (this.rootInstance != null && !this.rootInstance.IsCompleted))
+                if (
+                    (
+                        this.executingSecondaryRootInstances != null
+                        && this.executingSecondaryRootInstances.Count > 0
+                    ) || (this.rootInstance != null && !this.rootInstance.IsCompleted)
+                )
                 {
                     // As long as some root is executing we need to return executing
                     return ActivityInstanceState.Executing;
@@ -354,11 +363,7 @@ namespace System.Activities.Runtime
         }
 
         [DataMember(EmitDefaultValue = false)]
-        public WorkflowIdentity WorkflowIdentity
-        {
-            get;
-            internal set;
-        }
+        public WorkflowIdentity WorkflowIdentity { get; internal set; }
 
         [DataMember]
         public Guid WorkflowInstanceId
@@ -370,7 +375,11 @@ namespace System.Activities.Runtime
                     WorkflowInstanceId = this.host.Id;
                     if (!this.instanceIdSet)
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.EmptyIdReturnedFromHost(this.host.GetType())));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.EmptyIdReturnedFromHost(this.host.GetType())
+                            )
+                        );
                     }
                 }
 
@@ -386,66 +395,42 @@ namespace System.Activities.Runtime
 
         public Exception TerminationException
         {
-            get
-            {
-                return this.completionException;
-            }
+            get { return this.completionException; }
         }
 
         public bool IsRunning
         {
-            get
-            {
-                return !this.isDisposed && this.scheduler.IsRunning;
-            }
+            get { return !this.isDisposed && this.scheduler.IsRunning; }
         }
 
         public bool IsPersistable
         {
-            get
-            {
-                return this.noPersistCount == 0;
-            }
+            get { return this.noPersistCount == 0; }
         }
 
         public bool IsAbortPending
         {
-            get
-            {
-                return this.isAbortPending;
-            }
+            get { return this.isAbortPending; }
         }
 
         public bool IsIdle
         {
-            get
-            {
-                return this.isDisposed || this.scheduler.IsIdle;
-            }
+            get { return this.isDisposed || this.scheduler.IsIdle; }
         }
 
         public bool IsTerminatePending
         {
-            get
-            {
-                return this.isTerminatePending;
-            }
+            get { return this.isTerminatePending; }
         }
 
         public bool KeysAllowed
         {
-            get
-            {
-                return this.host.SupportsInstanceKeys;
-            }
+            get { return this.host.SupportsInstanceKeys; }
         }
 
         public IDictionary<string, object> WorkflowOutputs
         {
-            get
-            {
-                return this.workflowOutputs;
-            }
+            get { return this.workflowOutputs; }
         }
 
         internal BookmarkScopeManager BookmarkScopeManager
@@ -463,18 +448,12 @@ namespace System.Activities.Runtime
 
         internal BookmarkScopeManager RawBookmarkScopeManager
         {
-            get
-            {
-                return this.bookmarkScopeManager;
-            }
+            get { return this.bookmarkScopeManager; }
         }
 
         internal BookmarkManager RawBookmarkManager
         {
-            get
-            {
-                return this.bookmarkManager;
-            }
+            get { return this.bookmarkManager; }
         }
 
         internal MappableObjectManager MappableObjectManager
@@ -494,7 +473,9 @@ namespace System.Activities.Runtime
         {
             get
             {
-                return this.transactionContextWaiters != null && this.transactionContextWaiters.Count > 0 && this.transactionContextWaiters[0].IsRequires;
+                return this.transactionContextWaiters != null
+                    && this.transactionContextWaiters.Count > 0
+                    && this.transactionContextWaiters[0].IsRequires;
             }
         }
 
@@ -524,7 +505,9 @@ namespace System.Activities.Runtime
             {
                 if (emptyBookmarkInfoCollection == null)
                 {
-                    emptyBookmarkInfoCollection = new ReadOnlyCollection<BookmarkInfo>(new List<BookmarkInfo>(0));
+                    emptyBookmarkInfoCollection = new ReadOnlyCollection<BookmarkInfo>(
+                        new List<BookmarkInfo>(0)
+                    );
                 }
 
                 return emptyBookmarkInfoCollection;
@@ -630,7 +613,8 @@ namespace System.Activities.Runtime
                 {
                     // If we have an ExceptionPersistenceExtension, set our cached "persistExceptions" value to its
                     // PersistExceptions property. If we don't have the extension, set the cached value to true.
-                    ExceptionPersistenceExtension extension = this.host.GetExtension<ExceptionPersistenceExtension>();
+                    ExceptionPersistenceExtension extension =
+                        this.host.GetExtension<ExceptionPersistenceExtension>();
                     if (extension != null)
                     {
                         this.persistExceptions = extension.PersistExceptions;
@@ -660,19 +644,23 @@ namespace System.Activities.Runtime
                     return null;
                 }
             }
-            set
-            {
-                this.completionException = value;
-            }
+            set { this.completionException = value; }
         }
 
         [DataMember(Name = XD.Executor.TransactionContextWaiters, EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Used by serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Used by serialization"
+        )]
         internal TransactionContextWaiter[] SerializedTransactionContextWaiters
         {
             get
             {
-                if (this.transactionContextWaiters != null && this.transactionContextWaiters.Count > 0)
+                if (
+                    this.transactionContextWaiters != null
+                    && this.transactionContextWaiters.Count > 0
+                )
                 {
                     return this.transactionContextWaiters.ToArray();
                 }
@@ -689,7 +677,11 @@ namespace System.Activities.Runtime
         }
 
         [DataMember(Name = XD.Executor.PersistenceWaiters, EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Used by serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Used by serialization"
+        )]
         internal Queue<PersistenceWaiter> SerializedPersistenceWaiters
         {
             get
@@ -711,12 +703,19 @@ namespace System.Activities.Runtime
         }
 
         [DataMember(Name = XD.Executor.SecondaryRootInstances, EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Used by serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Used by serialization"
+        )]
         internal List<ActivityInstance> SerializedExecutingSecondaryRootInstances
         {
             get
             {
-                if (this.executingSecondaryRootInstances != null && this.executingSecondaryRootInstances.Count > 0)
+                if (
+                    this.executingSecondaryRootInstances != null
+                    && this.executingSecondaryRootInstances.Count > 0
+                )
                 {
                     return this.executingSecondaryRootInstances;
                 }
@@ -733,7 +732,11 @@ namespace System.Activities.Runtime
         }
 
         [DataMember(Name = XD.Executor.MappableObjectManager, EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Used by serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Used by serialization"
+        )]
         internal MappableObjectManager SerializedMappableObjectManager
         {
             get
@@ -745,7 +748,6 @@ namespace System.Activities.Runtime
 
                 return this.mappableObjectManager;
             }
-
             set
             {
                 Fx.Assert(value != null, "value from serialization should never be null");
@@ -755,7 +757,11 @@ namespace System.Activities.Runtime
 
         // map from activity names to (active) associated activity instances
         [DataMember(Name = XD.Executor.ActivityInstanceMap, EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "called from serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "called from serialization"
+        )]
         internal ActivityInstanceMap SerializedProgramMapping
         {
             get
@@ -769,9 +775,14 @@ namespace System.Activities.Runtime
                     this.rootInstance.FillInstanceMap(this.instanceMap);
                     this.scheduler.FillInstanceMap(this.instanceMap);
 
-                    if (this.executingSecondaryRootInstances != null && this.executingSecondaryRootInstances.Count > 0)
+                    if (
+                        this.executingSecondaryRootInstances != null
+                        && this.executingSecondaryRootInstances.Count > 0
+                    )
                     {
-                        foreach (ActivityInstance secondaryRoot in this.executingSecondaryRootInstances)
+                        foreach (
+                            ActivityInstance secondaryRoot in this.executingSecondaryRootInstances
+                        )
                         {
                             secondaryRoot.FillInstanceMap(this.instanceMap);
 
@@ -797,7 +808,6 @@ namespace System.Activities.Runtime
 
                 return this.instanceMap;
             }
-
             set
             {
                 Fx.Assert(value != null, "value from serialization should never be null");
@@ -808,23 +818,24 @@ namespace System.Activities.Runtime
         // may be null
         internal ExecutionPropertyManager RootPropertyManager
         {
-            get
-            {
-                return this.rootPropertyManager;
-            }
+            get { return this.rootPropertyManager; }
         }
 
         [DataMember(Name = XD.ActivityInstance.PropertyManager, EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal ExecutionPropertyManager SerializedPropertyManager
         {
-            get
-            {
-                return this.rootPropertyManager;
-            }
+            get { return this.rootPropertyManager; }
             set
             {
-                Fx.Assert(value != null, "We don't emit the default value so this should never be null.");
+                Fx.Assert(
+                    value != null,
+                    "We don't emit the default value so this should never be null."
+                );
                 this.rootPropertyManager = value;
                 this.rootPropertyManager.OnDeserialized(null, null, null, this);
             }
@@ -834,7 +845,11 @@ namespace System.Activities.Runtime
         {
             if (this.throwDuringSerialization)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.StateCannotBeSerialized(this.WorkflowInstanceId)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.StateCannotBeSerialized(this.WorkflowInstanceId)
+                    )
+                );
             }
         }
 
@@ -847,19 +862,39 @@ namespace System.Activities.Runtime
         {
             Fx.Assert(updateMap != null, "UpdateMap must not be null.");
             Collection<ActivityBlockingUpdate> result = null;
-            this.instanceMap.GetActivitiesBlockingUpdate(updateMap, this.executingSecondaryRootInstances, ref result);
+            this.instanceMap.GetActivitiesBlockingUpdate(
+                updateMap,
+                this.executingSecondaryRootInstances,
+                ref result
+            );
             return result;
         }
 
-        public void UpdateInstancePhase1(DynamicUpdateMap updateMap, Activity targetDefinition, ref Collection<ActivityBlockingUpdate> updateErrors)
+        public void UpdateInstancePhase1(
+            DynamicUpdateMap updateMap,
+            Activity targetDefinition,
+            ref Collection<ActivityBlockingUpdate> updateErrors
+        )
         {
             Fx.Assert(updateMap != null, "UpdateMap must not be null.");
-            this.instanceMap.UpdateRawInstance(updateMap, targetDefinition, this.executingSecondaryRootInstances, ref updateErrors);
+            this.instanceMap.UpdateRawInstance(
+                updateMap,
+                targetDefinition,
+                this.executingSecondaryRootInstances,
+                ref updateErrors
+            );
         }
 
-        public void UpdateInstancePhase2(DynamicUpdateMap updateMap, ref Collection<ActivityBlockingUpdate> updateErrors)
+        public void UpdateInstancePhase2(
+            DynamicUpdateMap updateMap,
+            ref Collection<ActivityBlockingUpdate> updateErrors
+        )
         {
-            this.instanceMap.UpdateInstanceByActivityParticipation(this, updateMap, ref updateErrors);
+            this.instanceMap.UpdateInstanceByActivityParticipation(
+                this,
+                updateMap,
+                ref updateErrors
+            );
         }
 
         internal List<Handle> Handles
@@ -868,18 +903,30 @@ namespace System.Activities.Runtime
         }
 
         // evaluate an argument/variable expression using fast-path optimizations
-        public void ExecuteInResolutionContextUntyped(ActivityInstance parentInstance, ActivityWithResult expressionActivity, long instanceId, Location resultLocation)
+        public void ExecuteInResolutionContextUntyped(
+            ActivityInstance parentInstance,
+            ActivityWithResult expressionActivity,
+            long instanceId,
+            Location resultLocation
+        )
         {
             if (this.cachedResolutionContext == null)
             {
                 this.cachedResolutionContext = new CodeActivityContext(parentInstance, this);
             }
 
-            this.cachedResolutionContext.Reinitialize(parentInstance, this, expressionActivity, instanceId);
+            this.cachedResolutionContext.Reinitialize(
+                parentInstance,
+                this,
+                expressionActivity,
+                instanceId
+            );
             try
             {
                 this.ignorableResultLocation = resultLocation;
-                resultLocation.Value = expressionActivity.InternalExecuteInResolutionContextUntyped(this.cachedResolutionContext);
+                resultLocation.Value = expressionActivity.InternalExecuteInResolutionContextUntyped(
+                    this.cachedResolutionContext
+                );
             }
             finally
             {
@@ -897,20 +944,33 @@ namespace System.Activities.Runtime
         }
 
         // evaluate an argument/variable expression using fast-path optimizations
-        public T ExecuteInResolutionContext<T>(ActivityInstance parentInstance, Activity<T> expressionActivity)
+        public T ExecuteInResolutionContext<T>(
+            ActivityInstance parentInstance,
+            Activity<T> expressionActivity
+        )
         {
-            Fx.Assert(expressionActivity.UseOldFastPath, "New fast path should be scheduled via ExecuteSynchronousExpressionWorkItem, which calls the Untyped overload");
+            Fx.Assert(
+                expressionActivity.UseOldFastPath,
+                "New fast path should be scheduled via ExecuteSynchronousExpressionWorkItem, which calls the Untyped overload"
+            );
 
             if (this.cachedResolutionContext == null)
             {
                 this.cachedResolutionContext = new CodeActivityContext(parentInstance, this);
             }
 
-            this.cachedResolutionContext.Reinitialize(parentInstance, this, expressionActivity, parentInstance.InternalId);
+            this.cachedResolutionContext.Reinitialize(
+                parentInstance,
+                this,
+                expressionActivity,
+                parentInstance.InternalId
+            );
             T result;
             try
             {
-                result = expressionActivity.InternalExecuteInResolutionContext(this.cachedResolutionContext);
+                result = expressionActivity.InternalExecuteInResolutionContext(
+                    this.cachedResolutionContext
+                );
             }
             finally
             {
@@ -945,8 +1005,14 @@ namespace System.Activities.Runtime
         // when the user tries to access the Result argument on an activity being run with SkipArgumentResolution.
         internal Location GetIgnorableResultLocation(RuntimeArgument resultArgument)
         {
-            Fx.Assert(resultArgument.Owner == this.cachedResolutionContext.Activity, "GetIgnorableResultLocation should only be called for activity in resolution context");
-            Fx.Assert(this.ignorableResultLocation != null, "ResultLocation should have been passed in to ExecuteInResolutionContext");
+            Fx.Assert(
+                resultArgument.Owner == this.cachedResolutionContext.Activity,
+                "GetIgnorableResultLocation should only be called for activity in resolution context"
+            );
+            Fx.Assert(
+                this.ignorableResultLocation != null,
+                "ResultLocation should have been passed in to ExecuteInResolutionContext"
+            );
 
             return this.ignorableResultLocation;
         }
@@ -972,7 +1038,7 @@ namespace System.Activities.Runtime
 
         public void DebugActivityCompleted(ActivityInstance instance)
         {
-            if (this.debugController != null)   // Don't use IsDebugged() for perf reason.
+            if (this.debugController != null) // Don't use IsDebugged() for perf reason.
             {
                 this.debugController.ActivityCompleted(instance);
             }
@@ -980,26 +1046,38 @@ namespace System.Activities.Runtime
 
         public void AddTrackingRecord(TrackingRecord record)
         {
-            Fx.Assert(this.host.TrackingProvider != null, "We should only add records if we have a tracking provider.");
+            Fx.Assert(
+                this.host.TrackingProvider != null,
+                "We should only add records if we have a tracking provider."
+            );
 
             this.host.TrackingProvider.AddRecord(record);
         }
 
         public bool ShouldTrackActivity(string name)
         {
-            Fx.Assert(this.host.TrackingProvider != null, "We should only add records if we have a tracking provider.");
+            Fx.Assert(
+                this.host.TrackingProvider != null,
+                "We should only add records if we have a tracking provider."
+            );
             return this.host.TrackingProvider.ShouldTrackActivity(name);
         }
 
         public IAsyncResult BeginTrackPendingRecords(AsyncCallback callback, object state)
         {
-            Fx.Assert(this.host.TrackingProvider != null, "We should only try to track if we have a tracking provider.");
+            Fx.Assert(
+                this.host.TrackingProvider != null,
+                "We should only try to track if we have a tracking provider."
+            );
             return this.host.BeginFlushTrackingRecordsInternal(callback, state);
         }
 
         public void EndTrackPendingRecords(IAsyncResult result)
         {
-            Fx.Assert(this.host.TrackingProvider != null, "We should only try to track if we have a tracking provider.");
+            Fx.Assert(
+                this.host.TrackingProvider != null,
+                "We should only try to track if we have a tracking provider."
+            );
             this.host.EndFlushTrackingRecordsInternal(result);
         }
 
@@ -1030,7 +1108,7 @@ namespace System.Activities.Runtime
         {
             if (!this.isDisposed)
             {
-                if (this.debugController != null)   // Don't use IsDebugged() because it may create debugController unnecessarily.
+                if (this.debugController != null) // Don't use IsDebugged() because it may create debugController unnecessarily.
                 {
                     this.debugController.WorkflowCompleted();
                     this.debugController = null;
@@ -1130,8 +1208,8 @@ namespace System.Activities.Runtime
             ((IEnlistmentNotification)this).Rollback(enlistment);
         }
 
-        //Note - There is a scenario in the TransactedReceiveScope while dealing with server side WCF dispatcher created transactions, 
-        //the activity instance will end up calling BeginCommit before finishing up its execution. By this we allow the executing TransactedReceiveScope activity to 
+        //Note - There is a scenario in the TransactedReceiveScope while dealing with server side WCF dispatcher created transactions,
+        //the activity instance will end up calling BeginCommit before finishing up its execution. By this we allow the executing TransactedReceiveScope activity to
         //complete and the executor is "free" to respond to this Prepare notification as part of the commit processing of that server side transaction
         void IEnlistmentNotification.Prepare(PreparingEnlistment preparingEnlistment)
         {
@@ -1204,7 +1282,13 @@ namespace System.Activities.Runtime
             }
         }
 
-        public void RequestTransactionContext(ActivityInstance instance, bool isRequires, RuntimeTransactionHandle handle, Action<NativeActivityTransactionContext, object> callback, object state)
+        public void RequestTransactionContext(
+            ActivityInstance instance,
+            bool isRequires,
+            RuntimeTransactionHandle handle,
+            Action<NativeActivityTransactionContext, object> callback,
+            object state
+        )
         {
             if (isRequires)
             {
@@ -1216,11 +1300,21 @@ namespace System.Activities.Runtime
                 this.transactionContextWaiters = new Quack<TransactionContextWaiter>();
             }
 
-            TransactionContextWaiter waiter = new TransactionContextWaiter(instance, isRequires, handle, new TransactionContextWaiterCallbackWrapper(callback, instance), state);
+            TransactionContextWaiter waiter = new TransactionContextWaiter(
+                instance,
+                isRequires,
+                handle,
+                new TransactionContextWaiterCallbackWrapper(callback, instance),
+                state
+            );
 
             if (isRequires)
             {
-                Fx.Assert(this.transactionContextWaiters.Count == 0 || !this.transactionContextWaiters[0].IsRequires, "Either we don't have any waiters or the first one better not be IsRequires == true");
+                Fx.Assert(
+                    this.transactionContextWaiters.Count == 0
+                        || !this.transactionContextWaiters[0].IsRequires,
+                    "Either we don't have any waiters or the first one better not be IsRequires == true"
+                );
 
                 this.transactionContextWaiters.PushFront(waiter);
             }
@@ -1233,9 +1327,18 @@ namespace System.Activities.Runtime
             instance.WaitingForTransactionContext = true;
         }
 
-        public void SetTransaction(RuntimeTransactionHandle handle, Transaction transaction, ActivityInstance isolationScope, ActivityInstance transactionOwner)
+        public void SetTransaction(
+            RuntimeTransactionHandle handle,
+            Transaction transaction,
+            ActivityInstance isolationScope,
+            ActivityInstance transactionOwner
+        )
         {
-            this.runtimeTransaction = new RuntimeTransactionData(handle, transaction, isolationScope);
+            this.runtimeTransaction = new RuntimeTransactionData(
+                handle,
+                transaction,
+                isolationScope
+            );
             EnterNoPersist();
 
             // no more work to do for a host-declared transaction
@@ -1268,17 +1371,35 @@ namespace System.Activities.Runtime
             {
                 if (TD.RuntimeTransactionSetIsEnabled())
                 {
-                    Fx.Assert(transactionOwner != null, "isolationScope and transactionOwner are either both null or both non-null");
-                    TD.RuntimeTransactionSet(transactionOwner.Activity.GetType().ToString(), transactionOwner.Activity.DisplayName, transactionOwner.Id, isolationScope.Activity.GetType().ToString(), isolationScope.Activity.DisplayName, isolationScope.Id);
+                    Fx.Assert(
+                        transactionOwner != null,
+                        "isolationScope and transactionOwner are either both null or both non-null"
+                    );
+                    TD.RuntimeTransactionSet(
+                        transactionOwner.Activity.GetType().ToString(),
+                        transactionOwner.Activity.DisplayName,
+                        transactionOwner.Id,
+                        isolationScope.Activity.GetType().ToString(),
+                        isolationScope.Activity.DisplayName,
+                        isolationScope.Id
+                    );
                 }
             }
         }
 
-        public void CompleteTransaction(RuntimeTransactionHandle handle, BookmarkCallback callback, ActivityInstance callbackOwner)
+        public void CompleteTransaction(
+            RuntimeTransactionHandle handle,
+            BookmarkCallback callback,
+            ActivityInstance callbackOwner
+        )
         {
             if (callback != null)
             {
-                Bookmark bookmark = this.bookmarkManager.CreateBookmark(callback, callbackOwner, BookmarkOptions.None);
+                Bookmark bookmark = this.bookmarkManager.CreateBookmark(
+                    callback,
+                    callbackOwner,
+                    BookmarkOptions.None
+                );
                 ActivityExecutionWorkItem workItem;
 
                 ActivityInstance isolationScope = null;
@@ -1288,17 +1409,31 @@ namespace System.Activities.Runtime
                     isolationScope = this.runtimeTransaction.IsolationScope;
                 }
 
-                this.bookmarkManager.TryGenerateWorkItem(this, false, ref bookmark, null, isolationScope, out workItem);
+                this.bookmarkManager.TryGenerateWorkItem(
+                    this,
+                    false,
+                    ref bookmark,
+                    null,
+                    isolationScope,
+                    out workItem
+                );
                 this.scheduler.EnqueueWork(workItem);
             }
 
-            if (this.runtimeTransaction != null && this.runtimeTransaction.TransactionHandle == handle)
+            if (
+                this.runtimeTransaction != null
+                && this.runtimeTransaction.TransactionHandle == handle
+            )
             {
                 this.runtimeTransaction.ShouldScheduleCompletion = true;
 
                 if (TD.RuntimeTransactionCompletionRequestedIsEnabled())
                 {
-                    TD.RuntimeTransactionCompletionRequested(callbackOwner.Activity.GetType().ToString(), callbackOwner.Activity.DisplayName, callbackOwner.Id);
+                    TD.RuntimeTransactionCompletionRequested(
+                        callbackOwner.Activity.GetType().ToString(),
+                        callbackOwner.Activity.DisplayName,
+                        callbackOwner.Id
+                    );
                 }
             }
         }
@@ -1327,7 +1462,10 @@ namespace System.Activities.Runtime
 
         public bool IsCompletingTransaction(ActivityInstance instance)
         {
-            if (this.runtimeTransaction != null && this.runtimeTransaction.IsolationScope == instance)
+            if (
+                this.runtimeTransaction != null
+                && this.runtimeTransaction.IsolationScope == instance
+            )
             {
                 // We add an empty work item to keep the instance alive
                 this.scheduler.PushWork(CreateEmptyWorkItem(instance));
@@ -1337,7 +1475,11 @@ namespace System.Activities.Runtime
 
                 if (TD.RuntimeTransactionCompletionRequestedIsEnabled())
                 {
-                    TD.RuntimeTransactionCompletionRequested(instance.Activity.GetType().ToString(), instance.Activity.DisplayName, instance.Id);
+                    TD.RuntimeTransactionCompletionRequested(
+                        instance.Activity.GetType().ToString(),
+                        instance.Activity.DisplayName,
+                        instance.Id
+                    );
                 }
 
                 return true;
@@ -1346,9 +1488,15 @@ namespace System.Activities.Runtime
             return false;
         }
 
-        public void TerminateSpecialExecutionBlocks(ActivityInstance terminatedInstance, Exception terminationReason)
+        public void TerminateSpecialExecutionBlocks(
+            ActivityInstance terminatedInstance,
+            Exception terminationReason
+        )
         {
-            if (this.runtimeTransaction != null && this.runtimeTransaction.IsolationScope == terminatedInstance)
+            if (
+                this.runtimeTransaction != null
+                && this.runtimeTransaction.IsolationScope == terminatedInstance
+            )
             {
                 Exception abortException = null;
 
@@ -1394,15 +1542,27 @@ namespace System.Activities.Runtime
             {
                 if (!this.rootInstance.IsCompleted)
                 {
-                    this.rootInstance.Abort(this, this.bookmarkManager, terminationException, isTerminate);
+                    this.rootInstance.Abort(
+                        this,
+                        this.bookmarkManager,
+                        terminationException,
+                        isTerminate
+                    );
 
                     // the Abort walk won't catch host-registered properties
                     if (this.rootPropertyManager != null)
                     {
                         if (isTerminate)
                         {
-                            HandleInitializationContext context = new HandleInitializationContext(this, null);
-                            foreach (ExecutionPropertyManager.ExecutionProperty executionProperty in this.rootPropertyManager.Properties.Values)
+                            HandleInitializationContext context = new HandleInitializationContext(
+                                this,
+                                null
+                            );
+                            foreach (
+                                ExecutionPropertyManager.ExecutionProperty executionProperty in this.rootPropertyManager
+                                    .Properties
+                                    .Values
+                            )
                             {
                                 Handle handle = executionProperty.Property as Handle;
                                 if (handle != null)
@@ -1423,13 +1583,25 @@ namespace System.Activities.Runtime
                     // path removes from this collection.
                     for (int i = this.executingSecondaryRootInstances.Count - 1; i >= 0; i--)
                     {
-                        ActivityInstance secondaryRootInstance = this.executingSecondaryRootInstances[i];
+                        ActivityInstance secondaryRootInstance =
+                            this.executingSecondaryRootInstances[i];
 
-                        Fx.Assert(!secondaryRootInstance.IsCompleted, "We should not have any complete instances in our list.");
+                        Fx.Assert(
+                            !secondaryRootInstance.IsCompleted,
+                            "We should not have any complete instances in our list."
+                        );
 
-                        secondaryRootInstance.Abort(this, this.bookmarkManager, terminationException, isTerminate);
+                        secondaryRootInstance.Abort(
+                            this,
+                            this.bookmarkManager,
+                            terminationException,
+                            isTerminate
+                        );
 
-                        Fx.Assert(this.executingSecondaryRootInstances.Count == i, "We are always working from the back and we should have removed the item we just aborted.");
+                        Fx.Assert(
+                            this.executingSecondaryRootInstances.Count == i,
+                            "We are always working from the back and we should have removed the item we just aborted."
+                        );
                     }
                 }
 
@@ -1543,7 +1715,12 @@ namespace System.Activities.Runtime
                 {
                     throw;
                 }
-                throw FxTrace.Exception.AsError(new CallbackException(SR.CallbackExceptionFromHostAbort(this.WorkflowInstanceId), e));
+                throw FxTrace.Exception.AsError(
+                    new CallbackException(
+                        SR.CallbackExceptionFromHostAbort(this.WorkflowInstanceId),
+                        e
+                    )
+                );
             }
         }
 
@@ -1555,7 +1732,10 @@ namespace System.Activities.Runtime
 
         public void Terminate(Exception reason)
         {
-            Fx.Assert(!this.isDisposed, "We should not have been able to get here if we are disposed and Abort makes choices based on isDisposed");
+            Fx.Assert(
+                !this.isDisposed,
+                "We should not have been able to get here if we are disposed and Abort makes choices based on isDisposed"
+            );
 
             Guid oldActivityId;
             bool hasTracedResume = TryTraceResume(out oldActivityId);
@@ -1576,7 +1756,10 @@ namespace System.Activities.Runtime
 
                     bool trackCancelRequested = true;
 
-                    if (this.runtimeTransaction != null && this.runtimeTransaction.IsolationScope != null)
+                    if (
+                        this.runtimeTransaction != null
+                        && this.runtimeTransaction.IsolationScope != null
+                    )
                     {
                         if (this.runtimeTransaction.IsRootCancelPending)
                         {
@@ -1601,7 +1784,13 @@ namespace System.Activities.Runtime
 
                     if (this.ShouldTrackCancelRequestedRecords && trackCancelRequested)
                     {
-                        AddTrackingRecord(new CancelRequestedRecord(this.WorkflowInstanceId, null, this.rootInstance));
+                        AddTrackingRecord(
+                            new CancelRequestedRecord(
+                                this.WorkflowInstanceId,
+                                null,
+                                this.rootInstance
+                            )
+                        );
                     }
 
                     TraceSuspend(hasTracedResume, oldActivityId);
@@ -1625,7 +1814,10 @@ namespace System.Activities.Runtime
             Fx.Assert(activityInstance != null, "The instance must not be null.");
 
             // Cancel is a no-op if the activity is complete or cancel has already been requested
-            if (activityInstance.State != ActivityInstanceState.Executing || activityInstance.IsCancellationRequested)
+            if (
+                activityInstance.State != ActivityInstanceState.Executing
+                || activityInstance.IsCancellationRequested
+            )
             {
                 return;
             }
@@ -1645,7 +1837,13 @@ namespace System.Activities.Runtime
 
             if (this.ShouldTrackCancelRequestedRecords)
             {
-                AddTrackingRecord(new CancelRequestedRecord(this.WorkflowInstanceId, activityInstance.Parent, activityInstance));
+                AddTrackingRecord(
+                    new CancelRequestedRecord(
+                        this.WorkflowInstanceId,
+                        activityInstance.Parent,
+                        activityInstance
+                    )
+                );
             }
         }
 
@@ -1670,10 +1868,23 @@ namespace System.Activities.Runtime
             {
                 if (!exceptionPropagator.IsCompleted)
                 {
-                    if (this.runtimeTransaction != null && this.runtimeTransaction.IsolationScope == exceptionPropagator)
+                    if (
+                        this.runtimeTransaction != null
+                        && this.runtimeTransaction.IsolationScope == exceptionPropagator
+                    )
                     {
                         // We are propagating the exception across the isolation scope
-                        this.scheduler.PushWork(new AbortActivityWorkItem(this, exceptionPropagator, exception, CreateActivityInstanceReference(workItem.OriginalExceptionSource, exceptionPropagator)));
+                        this.scheduler.PushWork(
+                            new AbortActivityWorkItem(
+                                this,
+                                exceptionPropagator,
+                                exception,
+                                CreateActivityInstanceReference(
+                                    workItem.OriginalExceptionSource,
+                                    exceptionPropagator
+                                )
+                            )
+                        );
 
                         // Because we are aborting the transaction we reset the ShouldScheduleCompletion flag
                         this.runtimeTransaction.ShouldScheduleCompletion = false;
@@ -1687,7 +1898,15 @@ namespace System.Activities.Runtime
                     // Regardless of whether it is already completed or not we need
                     // to honor the workflow abort
 
-                    this.AbortWorkflowInstance(new InvalidOperationException(SR.CannotPropagateExceptionWhileCanceling(exceptionSource.Activity.DisplayName, exceptionSource.Id), exception));
+                    this.AbortWorkflowInstance(
+                        new InvalidOperationException(
+                            SR.CannotPropagateExceptionWhileCanceling(
+                                exceptionSource.Activity.DisplayName,
+                                exceptionSource.Id
+                            ),
+                            exception
+                        )
+                    );
                     workItem.ExceptionPropagated();
                     ExitNoPersistForExceptionPropagation();
                     return;
@@ -1708,30 +1927,50 @@ namespace System.Activities.Runtime
             {
                 if (this.ShouldTrackFaultPropagationRecords)
                 {
-                    AddTrackingRecord(new FaultPropagationRecord(this.WorkflowInstanceId,
-                                                                workItem.OriginalExceptionSource,
-                                                                exceptionPropagator.Parent,
-                                                                exceptionSource == workItem.OriginalExceptionSource,
-                                                                exception));
+                    AddTrackingRecord(
+                        new FaultPropagationRecord(
+                            this.WorkflowInstanceId,
+                            workItem.OriginalExceptionSource,
+                            exceptionPropagator.Parent,
+                            exceptionSource == workItem.OriginalExceptionSource,
+                            exception
+                        )
+                    );
                 }
 
-                this.scheduler.PushWork(targetBookmark.GenerateWorkItem(exception, exceptionPropagator, CreateActivityInstanceReference(workItem.OriginalExceptionSource, exceptionPropagator.Parent)));
+                this.scheduler.PushWork(
+                    targetBookmark.GenerateWorkItem(
+                        exception,
+                        exceptionPropagator,
+                        CreateActivityInstanceReference(
+                            workItem.OriginalExceptionSource,
+                            exceptionPropagator.Parent
+                        )
+                    )
+                );
                 workItem.ExceptionPropagated();
             }
             else
             {
                 if (this.ShouldTrackFaultPropagationRecords)
                 {
-                    AddTrackingRecord(new FaultPropagationRecord(this.WorkflowInstanceId,
-                                                                workItem.OriginalExceptionSource,
-                                                                null,
-                                                                exceptionSource == workItem.OriginalExceptionSource,
-                                                                exception));
+                    AddTrackingRecord(
+                        new FaultPropagationRecord(
+                            this.WorkflowInstanceId,
+                            workItem.OriginalExceptionSource,
+                            null,
+                            exceptionSource == workItem.OriginalExceptionSource,
+                            exception
+                        )
+                    );
                 }
             }
         }
 
-        internal ActivityInstanceReference CreateActivityInstanceReference(ActivityInstance toReference, ActivityInstance referenceOwner)
+        internal ActivityInstanceReference CreateActivityInstanceReference(
+            ActivityInstance toReference,
+            ActivityInstance referenceOwner
+        )
         {
             ActivityInstanceReference reference = new ActivityInstanceReference(toReference);
 
@@ -1747,7 +1986,9 @@ namespace System.Activities.Runtime
 
         internal void RethrowException(ActivityInstance fromInstance, FaultContext context)
         {
-            this.scheduler.PushWork(new RethrowExceptionWorkItem(fromInstance, context.Exception, context.Source));
+            this.scheduler.PushWork(
+                new RethrowExceptionWorkItem(fromInstance, context.Exception, context.Source)
+            );
         }
 
         internal void OnDeserialized(Activity workflow, WorkflowInstance workflowInstance)
@@ -1757,7 +1998,12 @@ namespace System.Activities.Runtime
 
             if (!object.Equals(workflowInstance.DefinitionIdentity, this.WorkflowIdentity))
             {
-                throw FxTrace.Exception.AsError(new VersionMismatchException(workflowInstance.DefinitionIdentity, this.WorkflowIdentity));
+                throw FxTrace.Exception.AsError(
+                    new VersionMismatchException(
+                        workflowInstance.DefinitionIdentity,
+                        this.WorkflowIdentity
+                    )
+                );
             }
 
             this.rootElement = workflow;
@@ -1765,11 +2011,17 @@ namespace System.Activities.Runtime
 
             if (!this.instanceIdSet)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.EmptyGuidOnDeserializedInstance));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.EmptyGuidOnDeserializedInstance)
+                );
             }
             if (this.host.Id != this.instanceId)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.HostIdDoesNotMatchInstance(this.host.Id, this.instanceId)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.HostIdDoesNotMatchInstance(this.host.Id, this.instanceId)
+                    )
+                );
             }
 
             if (this.host.HasTrackingParticipant)
@@ -1787,13 +2039,21 @@ namespace System.Activities.Runtime
             if (this.rootInstance != null)
             {
                 Fx.Assert(this.instanceMap != null, "We always have an InstanceMap.");
-                this.instanceMap.LoadActivityTree(workflow, this.rootInstance, this.executingSecondaryRootInstances, this);
+                this.instanceMap.LoadActivityTree(
+                    workflow,
+                    this.rootInstance,
+                    this.executingSecondaryRootInstances,
+                    this
+                );
 
                 // We need to make sure that any "dangling" secondary root environments
                 // get OnDeserialized called.
                 if (this.executingSecondaryRootInstances != null)
                 {
-                    Fx.Assert(this.executingSecondaryRootInstances.Count > 0, "We don't serialize out an empty list.");
+                    Fx.Assert(
+                        this.executingSecondaryRootInstances.Count > 0,
+                        "We don't serialize out an empty list."
+                    );
 
                     for (int i = 0; i < this.executingSecondaryRootInstances.Count; i++)
                     {
@@ -1827,7 +2087,12 @@ namespace System.Activities.Runtime
                 {
                     throw;
                 }
-                throw FxTrace.Exception.AsError(new CallbackException(SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId), e));
+                throw FxTrace.Exception.AsError(
+                    new CallbackException(
+                        SR.CallbackExceptionFromHostGetExtension(this.WorkflowInstanceId),
+                        e
+                    )
+                );
             }
 
             return extension;
@@ -1872,14 +2137,21 @@ namespace System.Activities.Runtime
                 if (propertyManagerOwner != null && propertyManagerOwner.PropertyManager != null)
                 {
                     // This throws only fatal exceptions
-                    propertyManagerOwner.PropertyManager.CleanupWorkflowThread(ref setupOrCleanupException);
+                    propertyManagerOwner.PropertyManager.CleanupWorkflowThread(
+                        ref setupOrCleanupException
+                    );
                 }
 
                 if (setupOrCleanupException != null)
                 {
                     // This API must allow the runtime to be
                     // multi-threaded when it is called.
-                    AbortWorkflowInstance(new OperationCanceledException(SR.SetupOrCleanupWorkflowThreadThrew, setupOrCleanupException));
+                    AbortWorkflowInstance(
+                        new OperationCanceledException(
+                            SR.SetupOrCleanupWorkflowThreadThrew,
+                            setupOrCleanupException
+                        )
+                    );
                 }
             }
 
@@ -1917,7 +2189,12 @@ namespace System.Activities.Runtime
 
             if (workItem.WorkflowAbortException != null)
             {
-                AbortWorkflowInstance(new OperationCanceledException(SR.WorkItemAbortedInstance, workItem.WorkflowAbortException));
+                AbortWorkflowInstance(
+                    new OperationCanceledException(
+                        SR.WorkItemAbortedInstance,
+                        workItem.WorkflowAbortException
+                    )
+                );
                 return Scheduler.Continue;
             }
 
@@ -1932,7 +2209,12 @@ namespace System.Activities.Runtime
 
                 if (workItem.WorkflowAbortException != null)
                 {
-                    AbortWorkflowInstance(new OperationCanceledException(SR.WorkItemAbortedInstance, workItem.WorkflowAbortException));
+                    AbortWorkflowInstance(
+                        new OperationCanceledException(
+                            SR.WorkItemAbortedInstance,
+                            workItem.WorkflowAbortException
+                        )
+                    );
                     return Scheduler.Continue;
                 }
             }
@@ -1953,7 +2235,12 @@ namespace System.Activities.Runtime
 
                 if (workItem.WorkflowAbortException != null)
                 {
-                    AbortWorkflowInstance(new OperationCanceledException(SR.TrackingRelatedWorkflowAbort, workItem.WorkflowAbortException));
+                    AbortWorkflowInstance(
+                        new OperationCanceledException(
+                            SR.TrackingRelatedWorkflowAbort,
+                            workItem.WorkflowAbortException
+                        )
+                    );
                     return Scheduler.Continue;
                 }
             }
@@ -1963,13 +2250,20 @@ namespace System.Activities.Runtime
             if (workItem.ExceptionToPropagate != null)
             {
                 ExitNoPersistForExceptionPropagation();
-                return Scheduler.CreateNotifyUnhandledExceptionAction(workItem.ExceptionToPropagate, workItem.OriginalExceptionSource);
+                return Scheduler.CreateNotifyUnhandledExceptionAction(
+                    workItem.ExceptionToPropagate,
+                    workItem.OriginalExceptionSource
+                );
             }
 
             return Scheduler.Continue;
         }
 
-        internal IAsyncResult BeginAssociateKeys(ICollection<InstanceKey> keysToAssociate, AsyncCallback callback, object state)
+        internal IAsyncResult BeginAssociateKeys(
+            ICollection<InstanceKey> keysToAssociate,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new AssociateKeysAsyncResult(this, keysToAssociate, callback, state);
         }
@@ -1990,14 +2284,21 @@ namespace System.Activities.Runtime
 
             try
             {
-                Fx.Assert(this.bookmarkScopeManager == null || !this.bookmarkScopeManager.HasKeysToUpdate,
-                    "FinishWorkItem should be called after FlushBookmarkScopeKeys, or by a WorkItem that could not possibly generate keys.");
+                Fx.Assert(
+                    this.bookmarkScopeManager == null || !this.bookmarkScopeManager.HasKeysToUpdate,
+                    "FinishWorkItem should be called after FlushBookmarkScopeKeys, or by a WorkItem that could not possibly generate keys."
+                );
 
                 if (workItem.WorkflowAbortException != null)
                 {
                     // We resume the scheduler even after abort to make sure that
                     // the proper events are raised.
-                    AbortWorkflowInstance(new OperationCanceledException(SR.WorkItemAbortedInstance, workItem.WorkflowAbortException));
+                    AbortWorkflowInstance(
+                        new OperationCanceledException(
+                            SR.WorkItemAbortedInstance,
+                            workItem.WorkflowAbortException
+                        )
+                    );
                 }
                 else
                 {
@@ -2023,7 +2324,12 @@ namespace System.Activities.Runtime
                     {
                         // We resume the scheduler even after abort to make sure that
                         // the proper events are raised.
-                        AbortWorkflowInstance(new OperationCanceledException(SR.TrackingRelatedWorkflowAbort, workItem.WorkflowAbortException));
+                        AbortWorkflowInstance(
+                            new OperationCanceledException(
+                                SR.TrackingRelatedWorkflowAbort,
+                                workItem.WorkflowAbortException
+                            )
+                        );
                     }
                     else
                     {
@@ -2032,7 +2338,10 @@ namespace System.Activities.Runtime
                         if (workItem.ExceptionToPropagate != null)
                         {
                             ExitNoPersistForExceptionPropagation();
-                            resumptionAction = Scheduler.CreateNotifyUnhandledExceptionAction(workItem.ExceptionToPropagate, workItem.OriginalExceptionSource);
+                            resumptionAction = Scheduler.CreateNotifyUnhandledExceptionAction(
+                                workItem.ExceptionToPropagate,
+                                workItem.OriginalExceptionSource
+                            );
                         }
                     }
                 }
@@ -2045,7 +2354,10 @@ namespace System.Activities.Runtime
                 }
             }
 
-            Fx.Assert(resumptionAction != Scheduler.YieldSilently, "should not reach this section if we've yielded earlier");
+            Fx.Assert(
+                resumptionAction != Scheduler.YieldSilently,
+                "should not reach this section if we've yielded earlier"
+            );
             this.scheduler.InternalResume(resumptionAction);
         }
 
@@ -2059,7 +2371,12 @@ namespace System.Activities.Runtime
                 {
                     // We resume the scheduler even after abort to make sure that
                     // the proper events are raised.
-                    AbortWorkflowInstance(new OperationCanceledException(SR.TrackingRelatedWorkflowAbort, workItem.WorkflowAbortException));
+                    AbortWorkflowInstance(
+                        new OperationCanceledException(
+                            SR.TrackingRelatedWorkflowAbort,
+                            workItem.WorkflowAbortException
+                        )
+                    );
                 }
                 else
                 {
@@ -2068,7 +2385,10 @@ namespace System.Activities.Runtime
                     if (workItem.ExceptionToPropagate != null)
                     {
                         ExitNoPersistForExceptionPropagation();
-                        resumptionAction = Scheduler.CreateNotifyUnhandledExceptionAction(workItem.ExceptionToPropagate, workItem.OriginalExceptionSource);
+                        resumptionAction = Scheduler.CreateNotifyUnhandledExceptionAction(
+                            workItem.ExceptionToPropagate,
+                            workItem.OriginalExceptionSource
+                        );
                     }
                 }
             }
@@ -2084,12 +2404,17 @@ namespace System.Activities.Runtime
         {
             if (this.runtimeTransaction != null && this.runtimeTransaction.ShouldScheduleCompletion)
             {
-                this.scheduler.PushWork(new CompleteTransactionWorkItem(this.runtimeTransaction.IsolationScope));
+                this.scheduler.PushWork(
+                    new CompleteTransactionWorkItem(this.runtimeTransaction.IsolationScope)
+                );
                 return;
             }
 
-            if (this.persistenceWaiters != null && this.persistenceWaiters.Count > 0 &&
-                this.IsPersistable)
+            if (
+                this.persistenceWaiters != null
+                && this.persistenceWaiters.Count > 0
+                && this.IsPersistable
+            )
             {
                 PersistenceWaiter waiter = this.persistenceWaiters.Dequeue();
 
@@ -2156,7 +2481,10 @@ namespace System.Activities.Runtime
             {
                 if (targetInstance.PropertyManager != null)
                 {
-                    targetInstance.PropertyManager.UnregisterProperties(targetInstance, targetInstance.Activity.MemberOf);
+                    targetInstance.PropertyManager.UnregisterProperties(
+                        targetInstance,
+                        targetInstance.Activity.MemberOf
+                    );
                 }
 
                 if (IsSecondaryRoot(targetInstance))
@@ -2172,7 +2500,7 @@ namespace System.Activities.Runtime
 
                         if (environment.ShouldDispose)
                         {
-                            // Unintialize all handles declared in this environment.  
+                            // Unintialize all handles declared in this environment.
                             environment.UninitializeHandles(targetInstance);
 
                             environment.Dispose();
@@ -2187,7 +2515,7 @@ namespace System.Activities.Runtime
 
                         if (environment.ShouldDispose)
                         {
-                            // Unintialize all handles declared in this environment.  
+                            // Unintialize all handles declared in this environment.
                             environment.UninitializeHandles(targetInstance);
 
                             environment.Dispose();
@@ -2209,7 +2537,7 @@ namespace System.Activities.Runtime
 
                     if (targetInstance.Environment.ShouldDispose)
                     {
-                        // Unintialize all handles declared in this environment.  
+                        // Unintialize all handles declared in this environment.
                         targetInstance.Environment.UninitializeHandles(targetInstance);
 
                         targetInstance.Environment.Dispose();
@@ -2217,7 +2545,7 @@ namespace System.Activities.Runtime
                     else if (this.instanceMap != null)
                     {
                         // Someone else is referencing this environment
-                        // Note that we don't use TryAdd since no-one else should have 
+                        // Note that we don't use TryAdd since no-one else should have
                         // added it before.
                         this.instanceMap.AddEntry(targetInstance.Environment);
                     }
@@ -2242,7 +2570,10 @@ namespace System.Activities.Runtime
             return exceptionToPropagate;
         }
 
-        internal bool TryGetPendingOperation(ActivityInstance instance, out AsyncOperationContext asyncContext)
+        internal bool TryGetPendingOperation(
+            ActivityInstance instance,
+            out AsyncOperationContext asyncContext
+        )
         {
             if (this.activeOperations != null)
             {
@@ -2275,7 +2606,10 @@ namespace System.Activities.Runtime
                 {
                     this.shouldRaiseMainBodyComplete = true;
 
-                    Fx.Assert(this.executionState == ActivityInstanceState.Executing, "We shouldn't have a guess at our completion state yet.");
+                    Fx.Assert(
+                        this.executionState == ActivityInstanceState.Executing,
+                        "We shouldn't have a guess at our completion state yet."
+                    );
 
                     // We start by assuming our completion state will match the root instance.
                     this.executionState = this.rootInstance.State;
@@ -2283,15 +2617,23 @@ namespace System.Activities.Runtime
                 }
                 else
                 {
-                    Fx.Assert(this.executingSecondaryRootInstances.Contains(completedInstance), "An instance which is not the main root and doesn't have an execution parent must be an executing secondary root.");
+                    Fx.Assert(
+                        this.executingSecondaryRootInstances.Contains(completedInstance),
+                        "An instance which is not the main root and doesn't have an execution parent must be an executing secondary root."
+                    );
                     this.executingSecondaryRootInstances.Remove(completedInstance);
                 }
 
                 // We just had a root complete, let's see if we're all the way done
                 // and should gather outputs from the root.  Note that we wait until
                 // everything completes in case the root environment was detached.
-                if (this.rootInstance.IsCompleted
-                    && (this.executingSecondaryRootInstances == null || this.executingSecondaryRootInstances.Count == 0))
+                if (
+                    this.rootInstance.IsCompleted
+                    && (
+                        this.executingSecondaryRootInstances == null
+                        || this.executingSecondaryRootInstances.Count == 0
+                    )
+                )
                 {
                     GatherRootOutputs();
 
@@ -2299,8 +2641,15 @@ namespace System.Activities.Runtime
                     if (this.rootPropertyManager != null)
                     {
                         // and uninitialize host-provided handles
-                        HandleInitializationContext context = new HandleInitializationContext(this, null);
-                        foreach (ExecutionPropertyManager.ExecutionProperty executionProperty in this.rootPropertyManager.Properties.Values)
+                        HandleInitializationContext context = new HandleInitializationContext(
+                            this,
+                            null
+                        );
+                        foreach (
+                            ExecutionPropertyManager.ExecutionProperty executionProperty in this.rootPropertyManager
+                                .Properties
+                                .Values
+                        )
                         {
                             Handle handle = executionProperty.Property as Handle;
                             if (handle != null)
@@ -2324,8 +2673,14 @@ namespace System.Activities.Runtime
 
         void GatherRootOutputs()
         {
-            Fx.Assert(this.workflowOutputs == null, "We should only get workflow outputs when we actually complete which should only happen once.");
-            Fx.Assert(ActivityUtilities.IsCompletedState(this.rootInstance.State), "We should only gather outputs when in a completed state.");
+            Fx.Assert(
+                this.workflowOutputs == null,
+                "We should only get workflow outputs when we actually complete which should only happen once."
+            );
+            Fx.Assert(
+                ActivityUtilities.IsCompletedState(this.rootInstance.State),
+                "We should only gather outputs when in a completed state."
+            );
             Fx.Assert(this.rootEnvironment != null, "We should have set the root environment");
 
             // We only gather outputs for Closed - not for canceled or faulted
@@ -2347,10 +2702,16 @@ namespace System.Activities.Runtime
                             this.workflowOutputs = new Dictionary<string, object>();
                         }
 
-                        Location location = this.rootEnvironment.GetSpecificLocation(argument.BoundArgument.Id);
+                        Location location = this.rootEnvironment.GetSpecificLocation(
+                            argument.BoundArgument.Id
+                        );
                         if (location == null)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.NoOutputLocationWasFound(argument.Name)));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR.NoOutputLocationWasFound(argument.Name)
+                                )
+                            );
                         }
                         this.workflowOutputs.Add(argument.Name, location.Value);
                     }
@@ -2383,16 +2744,27 @@ namespace System.Activities.Runtime
             // then do the normal notification for the host.
             if (this.isTerminatePending)
             {
-                Fx.Assert(this.terminationPendingException != null, "Should have set terminationPendingException at the same time that we set isTerminatePending = true");
+                Fx.Assert(
+                    this.terminationPendingException != null,
+                    "Should have set terminationPendingException at the same time that we set isTerminatePending = true"
+                );
                 this.Terminate(this.terminationPendingException);
                 this.isTerminatePending = false;
             }
 
             if (this.IsIdle)
             {
-                if (this.transactionContextWaiters != null && this.transactionContextWaiters.Count > 0)
+                if (
+                    this.transactionContextWaiters != null
+                    && this.transactionContextWaiters.Count > 0
+                )
                 {
-                    if (this.IsPersistable || (this.transactionContextWaiters[0].IsRequires && this.noPersistCount == 1))
+                    if (
+                        this.IsPersistable
+                        || (
+                            this.transactionContextWaiters[0].IsRequires && this.noPersistCount == 1
+                        )
+                    )
                     {
                         TransactionContextWaiter waiter = this.transactionContextWaiters.Dequeue();
 
@@ -2413,7 +2785,11 @@ namespace System.Activities.Runtime
                     this.shouldRaiseMainBodyComplete = false;
                     if (this.mainRootCompleteBookmark != null)
                     {
-                        BookmarkResumptionResult resumptionResult = this.TryResumeUserBookmark(this.mainRootCompleteBookmark, this.rootInstance.State, false);
+                        BookmarkResumptionResult resumptionResult = this.TryResumeUserBookmark(
+                            this.mainRootCompleteBookmark,
+                            this.rootInstance.State,
+                            false
+                        );
                         this.mainRootCompleteBookmark = null;
                         if (resumptionResult == BookmarkResumptionResult.Success)
                         {
@@ -2423,10 +2799,13 @@ namespace System.Activities.Runtime
                         }
                     }
 
-                    if (this.executingSecondaryRootInstances == null || this.executingSecondaryRootInstances.Count == 0)
+                    if (
+                        this.executingSecondaryRootInstances == null
+                        || this.executingSecondaryRootInstances.Count == 0
+                    )
                     {
                         // if we got to this point we're completely done from the executor's point of view.
-                        // outputs have been gathered, no more work is happening. Clear out some fields to shrink our 
+                        // outputs have been gathered, no more work is happening. Clear out some fields to shrink our
                         // "completed instance" persistence size
                         Dispose(false);
                     }
@@ -2486,20 +2865,27 @@ namespace System.Activities.Runtime
                 this.persistenceWaiters = new Queue<PersistenceWaiter>();
             }
 
-            this.persistenceWaiters.Enqueue(new PersistenceWaiter(onPersistBookmark, requestingInstance));
+            this.persistenceWaiters.Enqueue(
+                new PersistenceWaiter(onPersistBookmark, requestingInstance)
+            );
         }
 
         void ScheduleCompletionBookmark(ActivityInstance completedInstance)
         {
             if (completedInstance.CompletionBookmark != null)
             {
-                this.scheduler.PushWork(completedInstance.CompletionBookmark.GenerateWorkItem(completedInstance, this));
+                this.scheduler.PushWork(
+                    completedInstance.CompletionBookmark.GenerateWorkItem(completedInstance, this)
+                );
             }
             else if (completedInstance.Parent != null)
             {
                 // Variable defaults and argument expressions always have a parent
                 // and never have a CompletionBookmark
-                if (completedInstance.State != ActivityInstanceState.Closed && completedInstance.Parent.HasNotExecuted)
+                if (
+                    completedInstance.State != ActivityInstanceState.Closed
+                    && completedInstance.Parent.HasNotExecuted
+                )
                 {
                     completedInstance.Parent.SetInitializationIncomplete();
                 }
@@ -2522,7 +2908,11 @@ namespace System.Activities.Runtime
             return result;
         }
 
-        internal BookmarkResumptionResult TryResumeUserBookmark(Bookmark bookmark, object value, bool isExternal)
+        internal BookmarkResumptionResult TryResumeUserBookmark(
+            Bookmark bookmark,
+            object value,
+            bool isExternal
+        )
         {
             if (this.isDisposed)
             {
@@ -2538,7 +2928,14 @@ namespace System.Activities.Runtime
 
             ActivityExecutionWorkItem resumeExecutionWorkItem;
 
-            BookmarkResumptionResult result = this.bookmarkManager.TryGenerateWorkItem(this, isExternal, ref bookmark, value, isolationInstance, out resumeExecutionWorkItem);
+            BookmarkResumptionResult result = this.bookmarkManager.TryGenerateWorkItem(
+                this,
+                isExternal,
+                ref bookmark,
+                value,
+                isolationInstance,
+                out resumeExecutionWorkItem
+            );
 
             if (result == BookmarkResumptionResult.Success)
             {
@@ -2546,7 +2943,14 @@ namespace System.Activities.Runtime
 
                 if (this.ShouldTrackBookmarkResumptionRecords)
                 {
-                    AddTrackingRecord(new BookmarkResumptionRecord(this.WorkflowInstanceId, bookmark, resumeExecutionWorkItem.ActivityInstance, value));
+                    AddTrackingRecord(
+                        new BookmarkResumptionRecord(
+                            this.WorkflowInstanceId,
+                            bookmark,
+                            resumeExecutionWorkItem.ActivityInstance,
+                            value
+                        )
+                    );
                 }
             }
             else if (result == BookmarkResumptionResult.NotReady)
@@ -2556,7 +2960,10 @@ namespace System.Activities.Runtime
             }
             else if (bookmark == Bookmark.AsyncOperationCompletionBookmark)
             {
-                Fx.Assert(result == BookmarkResumptionResult.NotFound, "This BookmarkNotFound is actually a well-known bookmark.");
+                Fx.Assert(
+                    result == BookmarkResumptionResult.NotFound,
+                    "This BookmarkNotFound is actually a well-known bookmark."
+                );
 
                 AsyncOperationContext.CompleteData data = (AsyncOperationContext.CompleteData)value;
 
@@ -2616,7 +3023,9 @@ namespace System.Activities.Runtime
             }
             else
             {
-                ReadOnlyCollection<BookmarkInfo> bookmarks = this.bookmarkScopeManager.GetBookmarks(scope);
+                ReadOnlyCollection<BookmarkInfo> bookmarks = this.bookmarkScopeManager.GetBookmarks(
+                    scope
+                );
 
                 if (bookmarks == null)
                 {
@@ -2629,7 +3038,13 @@ namespace System.Activities.Runtime
             }
         }
 
-        internal IAsyncResult BeginResumeBookmark(Bookmark bookmark, object value, TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginResumeBookmark(
+            Bookmark bookmark,
+            object value,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.host.OnBeginResumeBookmark(bookmark, value, timeout, callback, state);
         }
@@ -2641,7 +3056,11 @@ namespace System.Activities.Runtime
 
         // This is only called by WorkflowInstance so it behaves like TryResumeUserBookmark with must
         // run work item set to true
-        internal BookmarkResumptionResult TryResumeBookmark(Bookmark bookmark, object value, BookmarkScope scope)
+        internal BookmarkResumptionResult TryResumeBookmark(
+            Bookmark bookmark,
+            object value,
+            BookmarkScope scope
+        )
         {
             // We have to perform all of this work with tracing set up
             // since we might initialize a sub-instance while generating
@@ -2659,7 +3078,15 @@ namespace System.Activities.Runtime
             bool hasOperations = this.activeOperations != null && this.activeOperations.Count > 0;
 
             ActivityExecutionWorkItem resumeExecutionWorkItem;
-            BookmarkResumptionResult result = this.BookmarkScopeManager.TryGenerateWorkItem(this, ref bookmark, scope, value, isolationInstance, hasOperations || this.bookmarkManager.HasBookmarks, out resumeExecutionWorkItem);
+            BookmarkResumptionResult result = this.BookmarkScopeManager.TryGenerateWorkItem(
+                this,
+                ref bookmark,
+                scope,
+                value,
+                isolationInstance,
+                hasOperations || this.bookmarkManager.HasBookmarks,
+                out resumeExecutionWorkItem
+            );
 
             if (result == BookmarkResumptionResult.Success)
             {
@@ -2667,7 +3094,14 @@ namespace System.Activities.Runtime
 
                 if (this.ShouldTrackBookmarkResumptionRecords)
                 {
-                    AddTrackingRecord(new BookmarkResumptionRecord(this.WorkflowInstanceId, bookmark, resumeExecutionWorkItem.ActivityInstance, value));
+                    AddTrackingRecord(
+                        new BookmarkResumptionRecord(
+                            this.WorkflowInstanceId,
+                            bookmark,
+                            resumeExecutionWorkItem.ActivityInstance,
+                            value
+                        )
+                    );
                 }
             }
 
@@ -2696,19 +3130,33 @@ namespace System.Activities.Runtime
             this.scheduler.PushWork(workItem);
         }
 
-        public void ScheduleRootActivity(Activity activity, IDictionary<string, object> argumentValueOverrides, IList<Handle> hostProperties)
+        public void ScheduleRootActivity(
+            Activity activity,
+            IDictionary<string, object> argumentValueOverrides,
+            IList<Handle> hostProperties
+        )
         {
             Fx.Assert(this.rootInstance == null, "ScheduleRootActivity should only be called once");
 
             if (hostProperties != null && hostProperties.Count > 0)
             {
-                Dictionary<string, ExecutionPropertyManager.ExecutionProperty> rootProperties = new Dictionary<string, ExecutionPropertyManager.ExecutionProperty>(hostProperties.Count);
+                Dictionary<string, ExecutionPropertyManager.ExecutionProperty> rootProperties =
+                    new Dictionary<string, ExecutionPropertyManager.ExecutionProperty>(
+                        hostProperties.Count
+                    );
                 HandleInitializationContext context = new HandleInitializationContext(this, null);
                 for (int i = 0; i < hostProperties.Count; i++)
                 {
                     Handle handle = hostProperties[i];
                     handle.Initialize(context);
-                    rootProperties.Add(handle.ExecutionPropertyName, new ExecutionPropertyManager.ExecutionProperty(handle.ExecutionPropertyName, handle, null));
+                    rootProperties.Add(
+                        handle.ExecutionPropertyName,
+                        new ExecutionPropertyManager.ExecutionProperty(
+                            handle.ExecutionPropertyName,
+                            handle,
+                            null
+                        )
+                    );
                 }
                 context.Dispose();
 
@@ -2721,14 +3169,20 @@ namespace System.Activities.Runtime
             // Create and initialize the root instance
             this.rootInstance = new ActivityInstance(activity)
             {
-                PropertyManager = this.rootPropertyManager
+                PropertyManager = this.rootPropertyManager,
             };
             this.rootElement = activity;
 
             Fx.Assert(this.lastInstanceId == 0, "We should only hit this path once");
             this.lastInstanceId++;
 
-            bool requiresSymbolResolution = this.rootInstance.Initialize(null, this.instanceMap, null, this.lastInstanceId, this);
+            bool requiresSymbolResolution = this.rootInstance.Initialize(
+                null,
+                this.instanceMap,
+                null,
+                this.lastInstanceId,
+                this
+            );
 
             if (TD.ActivityScheduledIsEnabled())
             {
@@ -2736,7 +3190,13 @@ namespace System.Activities.Runtime
             }
 
             // Add the work item for executing the root
-            this.scheduler.PushWork(new ExecuteRootWorkItem(this.rootInstance, requiresSymbolResolution, argumentValueOverrides));
+            this.scheduler.PushWork(
+                new ExecuteRootWorkItem(
+                    this.rootInstance,
+                    requiresSymbolResolution,
+                    argumentValueOverrides
+                )
+            );
 
             TraceSuspend(hasTracedStart, oldActivityId);
         }
@@ -2746,9 +3206,18 @@ namespace System.Activities.Runtime
             this.mainRootCompleteBookmark = bookmark;
         }
 
-        public ActivityInstance ScheduleSecondaryRootActivity(Activity activity, LocationEnvironment environment)
+        public ActivityInstance ScheduleSecondaryRootActivity(
+            Activity activity,
+            LocationEnvironment environment
+        )
         {
-            ActivityInstance secondaryRoot = ScheduleActivity(activity, null, null, null, environment);
+            ActivityInstance secondaryRoot = ScheduleActivity(
+                activity,
+                null,
+                null,
+                null,
+                environment
+            );
 
             while (environment != null)
             {
@@ -2766,14 +3235,33 @@ namespace System.Activities.Runtime
             return secondaryRoot;
         }
 
-        public ActivityInstance ScheduleActivity(Activity activity, ActivityInstance parent,
-            CompletionBookmark completionBookmark, FaultBookmark faultBookmark, LocationEnvironment parentEnvironment)
+        public ActivityInstance ScheduleActivity(
+            Activity activity,
+            ActivityInstance parent,
+            CompletionBookmark completionBookmark,
+            FaultBookmark faultBookmark,
+            LocationEnvironment parentEnvironment
+        )
         {
-            return ScheduleActivity(activity, parent, completionBookmark, faultBookmark, parentEnvironment, null, null);
+            return ScheduleActivity(
+                activity,
+                parent,
+                completionBookmark,
+                faultBookmark,
+                parentEnvironment,
+                null,
+                null
+            );
         }
 
-        public ActivityInstance ScheduleDelegate(ActivityDelegate activityDelegate, IDictionary<string, object> inputParameters, ActivityInstance parent, LocationEnvironment executionEnvironment,
-            CompletionBookmark completionBookmark, FaultBookmark faultBookmark)
+        public ActivityInstance ScheduleDelegate(
+            ActivityDelegate activityDelegate,
+            IDictionary<string, object> inputParameters,
+            ActivityInstance parent,
+            LocationEnvironment executionEnvironment,
+            CompletionBookmark completionBookmark,
+            FaultBookmark faultBookmark
+        )
         {
             Fx.Assert(activityDelegate.Owner != null, "activityDelegate must have an owner");
             Fx.Assert(parent != null, "activityDelegate should have a parent activity instance");
@@ -2782,16 +3270,31 @@ namespace System.Activities.Runtime
 
             if (activityDelegate.Handler == null)
             {
-                handlerInstance = ActivityInstance.CreateCompletedInstance(new EmptyDelegateActivity());
+                handlerInstance = ActivityInstance.CreateCompletedInstance(
+                    new EmptyDelegateActivity()
+                );
                 handlerInstance.CompletionBookmark = completionBookmark;
                 ScheduleCompletionBookmark(handlerInstance);
             }
             else
             {
-                handlerInstance = CreateUninitalizedActivityInstance(activityDelegate.Handler, parent, completionBookmark, faultBookmark);
-                bool requiresSymbolResolution = handlerInstance.Initialize(parent, this.instanceMap, executionEnvironment, this.lastInstanceId, this, activityDelegate.RuntimeDelegateArguments.Count);
+                handlerInstance = CreateUninitalizedActivityInstance(
+                    activityDelegate.Handler,
+                    parent,
+                    completionBookmark,
+                    faultBookmark
+                );
+                bool requiresSymbolResolution = handlerInstance.Initialize(
+                    parent,
+                    this.instanceMap,
+                    executionEnvironment,
+                    this.lastInstanceId,
+                    this,
+                    activityDelegate.RuntimeDelegateArguments.Count
+                );
 
-                IList<RuntimeDelegateArgument> activityDelegateParameters = activityDelegate.RuntimeDelegateArguments;
+                IList<RuntimeDelegateArgument> activityDelegateParameters =
+                    activityDelegate.RuntimeDelegateArguments;
                 for (int i = 0; i < activityDelegateParameters.Count; i++)
                 {
                     RuntimeDelegateArgument runtimeArgument = activityDelegateParameters[i];
@@ -2800,10 +3303,14 @@ namespace System.Activities.Runtime
                     {
                         string delegateParameterName = runtimeArgument.Name;
 
-                        // Populate argument location. Set it's value in the activity handler's 
+                        // Populate argument location. Set it's value in the activity handler's
                         // instance environment only if it is a DelegateInArgument.
                         Location newLocation = runtimeArgument.BoundArgument.CreateLocation();
-                        handlerInstance.Environment.Declare(runtimeArgument.BoundArgument, newLocation, handlerInstance);
+                        handlerInstance.Environment.Declare(
+                            runtimeArgument.BoundArgument,
+                            newLocation,
+                            handlerInstance
+                        );
 
                         if (ArgumentDirectionHelper.IsIn(runtimeArgument.Direction))
                         {
@@ -2822,7 +3329,13 @@ namespace System.Activities.Runtime
 
                 if (this.ShouldTrackActivityScheduledRecords)
                 {
-                    AddTrackingRecord(new ActivityScheduledRecord(this.WorkflowInstanceId, parent, handlerInstance));
+                    AddTrackingRecord(
+                        new ActivityScheduledRecord(
+                            this.WorkflowInstanceId,
+                            parent,
+                            handlerInstance
+                        )
+                    );
                 }
 
                 ScheduleBody(handlerInstance, requiresSymbolResolution, null, null);
@@ -2831,23 +3344,52 @@ namespace System.Activities.Runtime
             return handlerInstance;
         }
 
-        void TraceActivityScheduled(ActivityInstance parent, Activity activity, string scheduledInstanceId)
+        void TraceActivityScheduled(
+            ActivityInstance parent,
+            Activity activity,
+            string scheduledInstanceId
+        )
         {
-            Fx.Assert(TD.ActivityScheduledIsEnabled(), "This should be checked before calling this helper.");
+            Fx.Assert(
+                TD.ActivityScheduledIsEnabled(),
+                "This should be checked before calling this helper."
+            );
 
             if (parent != null)
             {
-                TD.ActivityScheduled(parent.Activity.GetType().ToString(), parent.Activity.DisplayName, parent.Id, activity.GetType().ToString(), activity.DisplayName, scheduledInstanceId);
+                TD.ActivityScheduled(
+                    parent.Activity.GetType().ToString(),
+                    parent.Activity.DisplayName,
+                    parent.Id,
+                    activity.GetType().ToString(),
+                    activity.DisplayName,
+                    scheduledInstanceId
+                );
             }
             else
             {
-                TD.ActivityScheduled(string.Empty, string.Empty, string.Empty, activity.GetType().ToString(), activity.DisplayName, scheduledInstanceId);
+                TD.ActivityScheduled(
+                    string.Empty,
+                    string.Empty,
+                    string.Empty,
+                    activity.GetType().ToString(),
+                    activity.DisplayName,
+                    scheduledInstanceId
+                );
             }
         }
 
-        ActivityInstance CreateUninitalizedActivityInstance(Activity activity, ActivityInstance parent, CompletionBookmark completionBookmark, FaultBookmark faultBookmark)
+        ActivityInstance CreateUninitalizedActivityInstance(
+            Activity activity,
+            ActivityInstance parent,
+            CompletionBookmark completionBookmark,
+            FaultBookmark faultBookmark
+        )
         {
-            Fx.Assert(activity.IsMetadataCached, "Metadata must be cached for us to process this activity.");
+            Fx.Assert(
+                activity.IsMetadataCached,
+                "Metadata must be cached for us to process this activity."
+            );
 
             // 1. Create a new activity instance and setup bookmark callbacks
             ActivityInstance activityInstance = new ActivityInstance(activity);
@@ -2875,12 +3417,29 @@ namespace System.Activities.Runtime
             this.lastInstanceId++;
         }
 
-        ActivityInstance ScheduleActivity(Activity activity, ActivityInstance parent,
-            CompletionBookmark completionBookmark, FaultBookmark faultBookmark, LocationEnvironment parentEnvironment,
-            IDictionary<string, object> argumentValueOverrides, Location resultLocation)
+        ActivityInstance ScheduleActivity(
+            Activity activity,
+            ActivityInstance parent,
+            CompletionBookmark completionBookmark,
+            FaultBookmark faultBookmark,
+            LocationEnvironment parentEnvironment,
+            IDictionary<string, object> argumentValueOverrides,
+            Location resultLocation
+        )
         {
-            ActivityInstance activityInstance = CreateUninitalizedActivityInstance(activity, parent, completionBookmark, faultBookmark);
-            bool requiresSymbolResolution = activityInstance.Initialize(parent, this.instanceMap, parentEnvironment, this.lastInstanceId, this);
+            ActivityInstance activityInstance = CreateUninitalizedActivityInstance(
+                activity,
+                parent,
+                completionBookmark,
+                faultBookmark
+            );
+            bool requiresSymbolResolution = activityInstance.Initialize(
+                parent,
+                this.instanceMap,
+                parentEnvironment,
+                this.lastInstanceId,
+                this
+            );
 
             if (TD.ActivityScheduledIsEnabled())
             {
@@ -2889,33 +3448,61 @@ namespace System.Activities.Runtime
 
             if (this.ShouldTrackActivityScheduledRecords)
             {
-                AddTrackingRecord(new ActivityScheduledRecord(this.WorkflowInstanceId, parent, activityInstance));
+                AddTrackingRecord(
+                    new ActivityScheduledRecord(this.WorkflowInstanceId, parent, activityInstance)
+                );
             }
 
-            ScheduleBody(activityInstance, requiresSymbolResolution, argumentValueOverrides, resultLocation);
+            ScheduleBody(
+                activityInstance,
+                requiresSymbolResolution,
+                argumentValueOverrides,
+                resultLocation
+            );
 
             return activityInstance;
         }
 
-        internal void ScheduleExpression(ActivityWithResult activity, ActivityInstance parent, LocationEnvironment parentEnvironment, Location resultLocation, ResolveNextArgumentWorkItem nextArgumentWorkItem)
+        internal void ScheduleExpression(
+            ActivityWithResult activity,
+            ActivityInstance parent,
+            LocationEnvironment parentEnvironment,
+            Location resultLocation,
+            ResolveNextArgumentWorkItem nextArgumentWorkItem
+        )
         {
-            Fx.Assert(resultLocation != null, "We should always schedule expressions with a result location.");
+            Fx.Assert(
+                resultLocation != null,
+                "We should always schedule expressions with a result location."
+            );
 
             if (!activity.IsMetadataCached || activity.CacheId != parent.Activity.CacheId)
             {
-                throw FxTrace.Exception.Argument("activity", SR.ActivityNotPartOfThisTree(activity.DisplayName, parent.Activity.DisplayName));
+                throw FxTrace.Exception.Argument(
+                    "activity",
+                    SR.ActivityNotPartOfThisTree(activity.DisplayName, parent.Activity.DisplayName)
+                );
             }
 
             if (activity.SkipArgumentResolution)
             {
-                // 
+                //
 
-                Fx.Assert(!activity.UseOldFastPath || parent.SubState == ActivityInstance.Substate.Executing,
-                    "OldFastPath activities should have been handled by the Populate methods, unless this is a dynamic update");
-                
+                Fx.Assert(
+                    !activity.UseOldFastPath
+                        || parent.SubState == ActivityInstance.Substate.Executing,
+                    "OldFastPath activities should have been handled by the Populate methods, unless this is a dynamic update"
+                );
+
                 IncrementLastInstanceId();
 
-                ScheduleExpression(activity, parent, resultLocation, nextArgumentWorkItem, this.lastInstanceId);
+                ScheduleExpression(
+                    activity,
+                    parent,
+                    resultLocation,
+                    nextArgumentWorkItem,
+                    this.lastInstanceId
+                );
             }
             else
             {
@@ -2923,24 +3510,55 @@ namespace System.Activities.Runtime
                 {
                     ScheduleItem(nextArgumentWorkItem);
                 }
-                ScheduleActivity(activity, parent, null, null, parentEnvironment, null, resultLocation.CreateReference(true));
+                ScheduleActivity(
+                    activity,
+                    parent,
+                    null,
+                    null,
+                    parentEnvironment,
+                    null,
+                    resultLocation.CreateReference(true)
+                );
             }
         }
 
-        void ScheduleExpression(ActivityWithResult activity, ActivityInstance parent, Location resultLocation, ResolveNextArgumentWorkItem nextArgumentWorkItem, long instanceId)
+        void ScheduleExpression(
+            ActivityWithResult activity,
+            ActivityInstance parent,
+            Location resultLocation,
+            ResolveNextArgumentWorkItem nextArgumentWorkItem,
+            long instanceId
+        )
         {
             if (TD.ActivityScheduledIsEnabled())
             {
-                TraceActivityScheduled(parent, activity, instanceId.ToString(CultureInfo.InvariantCulture));
+                TraceActivityScheduled(
+                    parent,
+                    activity,
+                    instanceId.ToString(CultureInfo.InvariantCulture)
+                );
             }
 
             if (this.ShouldTrackActivityScheduledRecords)
             {
-                AddTrackingRecord(new ActivityScheduledRecord(this.WorkflowInstanceId, parent, new ActivityInfo(activity, instanceId)));
+                AddTrackingRecord(
+                    new ActivityScheduledRecord(
+                        this.WorkflowInstanceId,
+                        parent,
+                        new ActivityInfo(activity, instanceId)
+                    )
+                );
             }
 
-            ExecuteSynchronousExpressionWorkItem workItem = this.ExecuteSynchronousExpressionWorkItemPool.Acquire();
-            workItem.Initialize(parent, activity, this.lastInstanceId, resultLocation, nextArgumentWorkItem);
+            ExecuteSynchronousExpressionWorkItem workItem =
+                this.ExecuteSynchronousExpressionWorkItemPool.Acquire();
+            workItem.Initialize(
+                parent,
+                activity,
+                this.lastInstanceId,
+                resultLocation,
+                nextArgumentWorkItem
+            );
             if (this.instanceMap != null)
             {
                 this.instanceMap.AddEntry(workItem);
@@ -2948,7 +3566,12 @@ namespace System.Activities.Runtime
             ScheduleItem(workItem);
         }
 
-        internal void ScheduleExpressionFaultPropagation(Activity activity, long instanceId, ActivityInstance parent, Exception exception)
+        internal void ScheduleExpressionFaultPropagation(
+            Activity activity,
+            long instanceId,
+            ActivityInstance parent,
+            Exception exception
+        )
         {
             ActivityInstance instance = new ActivityInstance(activity);
             instance.Initialize(parent, this.instanceMap, parent.Environment, instanceId, this);
@@ -2958,7 +3581,10 @@ namespace System.Activities.Runtime
                 // Force the parent to stay alive, and to attempt to execute its body if the fault is handled
                 ScheduleItem(CreateEmptyWorkItem(parent));
             }
-            PropagateExceptionWorkItem workItem = new PropagateExceptionWorkItem(exception, instance);
+            PropagateExceptionWorkItem workItem = new PropagateExceptionWorkItem(
+                exception,
+                instance
+            );
             ScheduleItem(workItem);
 
             parent.SetInitializationIncomplete();
@@ -2966,19 +3592,34 @@ namespace System.Activities.Runtime
 
         // Argument and variables resolution for root activity is defered to execution time
         // invocation of this method means that we're ready to schedule Activity.Execute()
-        internal void ScheduleBody(ActivityInstance activityInstance, bool requiresSymbolResolution,
-            IDictionary<string, object> argumentValueOverrides, Location resultLocation)
+        internal void ScheduleBody(
+            ActivityInstance activityInstance,
+            bool requiresSymbolResolution,
+            IDictionary<string, object> argumentValueOverrides,
+            Location resultLocation
+        )
         {
             if (resultLocation == null)
             {
                 ExecuteActivityWorkItem workItem = this.ExecuteActivityWorkItemPool.Acquire();
-                workItem.Initialize(activityInstance, requiresSymbolResolution, argumentValueOverrides);
+                workItem.Initialize(
+                    activityInstance,
+                    requiresSymbolResolution,
+                    argumentValueOverrides
+                );
 
                 this.scheduler.PushWork(workItem);
             }
             else
             {
-                this.scheduler.PushWork(new ExecuteExpressionWorkItem(activityInstance, requiresSymbolResolution, argumentValueOverrides, resultLocation));
+                this.scheduler.PushWork(
+                    new ExecuteExpressionWorkItem(
+                        activityInstance,
+                        requiresSymbolResolution,
+                        argumentValueOverrides,
+                        resultLocation
+                    )
+                );
             }
         }
 
@@ -2991,7 +3632,9 @@ namespace System.Activities.Runtime
         {
             if (this.activeOperations != null && this.activeOperations.ContainsKey(owningActivity))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.OnlyOneOperationPerActivity));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.OnlyOneOperationPerActivity)
+                );
             }
 
             this.EnterNoPersist();
@@ -3009,14 +3652,19 @@ namespace System.Activities.Runtime
         }
 
         // Must always be called from a workflow thread
-        public void CompleteOperation(ActivityInstance owningInstance, BookmarkCallback callback, object state)
+        public void CompleteOperation(
+            ActivityInstance owningInstance,
+            BookmarkCallback callback,
+            object state
+        )
         {
             Fx.Assert(callback != null, "Use the other overload if callback is null.");
 
             CompleteAsyncOperationWorkItem workItem = new CompleteAsyncOperationWorkItem(
                 new BookmarkCallbackWrapper(callback, owningInstance),
                 this.bookmarkManager.GenerateTempBookmark(),
-                state);
+                state
+            );
             CompleteOperation(workItem);
         }
 
@@ -3036,7 +3684,10 @@ namespace System.Activities.Runtime
         void CompleteOperation(ActivityInstance owningInstance, bool exitNoPersist)
         {
             Fx.Assert(owningInstance != null, "Cannot be called with a null instance.");
-            Fx.Assert(this.activeOperations.ContainsKey(owningInstance), "The owning instance must be in the list if we've gotten here.");
+            Fx.Assert(
+                this.activeOperations.ContainsKey(owningInstance),
+                "The owning instance must be in the list if we've gotten here."
+            );
 
             this.activeOperations.Remove(owningInstance);
 
@@ -3068,29 +3719,17 @@ namespace System.Activities.Runtime
                 this.OnPersistBookmark = onPersist;
                 this.WaitingInstance = waitingInstance;
             }
-            
+
             public Bookmark OnPersistBookmark
             {
-                get
-                {
-                    return this.onPersistBookmark;
-                }
-                private set
-                {
-                    this.onPersistBookmark = value;
-                }
+                get { return this.onPersistBookmark; }
+                private set { this.onPersistBookmark = value; }
             }
-            
+
             public ActivityInstance WaitingInstance
             {
-                get
-                {
-                    return this.waitingInstance;
-                }
-                private set
-                {
-                    this.waitingInstance = value;
-                }
+                get { return this.waitingInstance; }
+                private set { this.waitingInstance = value; }
             }
 
             [DataMember(Name = "OnPersistBookmark")]
@@ -3125,10 +3764,7 @@ namespace System.Activities.Runtime
 
                 public override bool IsValid
                 {
-                    get
-                    {
-                        return true;
-                    }
+                    get { return true; }
                 }
 
                 public override ActivityInstance PropertyManagerOwner
@@ -3162,9 +3798,15 @@ namespace System.Activities.Runtime
                     TraceRuntimeWorkItemStarting();
                 }
 
-                public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
+                public override bool Execute(
+                    ActivityExecutor executor,
+                    BookmarkManager bookmarkManager
+                )
                 {
-                    if (executor.TryResumeUserBookmark(this.waiter.OnPersistBookmark, null, false) != BookmarkResumptionResult.Success)
+                    if (
+                        executor.TryResumeUserBookmark(this.waiter.OnPersistBookmark, null, false)
+                        != BookmarkResumptionResult.Success
+                    )
                     {
                         Fx.Assert("This should always be resumable.");
                     }
@@ -3173,7 +3815,10 @@ namespace System.Activities.Runtime
 
                     try
                     {
-                        result = executor.host.OnBeginPersist(Fx.ThunkCallback(new AsyncCallback(OnPersistComplete)), executor);
+                        result = executor.host.OnBeginPersist(
+                            Fx.ThunkCallback(new AsyncCallback(OnPersistComplete)),
+                            executor
+                        );
 
                         if (result.CompletedSynchronously)
                         {
@@ -3223,7 +3868,10 @@ namespace System.Activities.Runtime
                 {
                     if (this.ExceptionToPropagate != null)
                     {
-                        executor.AbortActivityInstance(this.waiter.WaitingInstance, this.ExceptionToPropagate);
+                        executor.AbortActivityInstance(
+                            this.waiter.WaitingInstance,
+                            this.ExceptionToPropagate
+                        );
                     }
                 }
             }
@@ -3237,7 +3885,12 @@ namespace System.Activities.Runtime
 
             ActivityExecutor executor;
 
-            public AbortActivityWorkItem(ActivityExecutor executor, ActivityInstance activityInstance, Exception reason, ActivityInstanceReference originalSource)
+            public AbortActivityWorkItem(
+                ActivityExecutor executor,
+                ActivityInstance activityInstance,
+                Exception reason,
+                ActivityInstanceReference originalSource
+            )
                 : base(activityInstance)
             {
                 this.reason = reason;
@@ -3249,18 +3902,12 @@ namespace System.Activities.Runtime
 
             public override ActivityInstance OriginalExceptionSource
             {
-                get
-                {
-                    return this.originalSource.ActivityInstance;
-                }
+                get { return this.originalSource.ActivityInstance; }
             }
 
             public override bool IsValid
             {
-                get
-                {
-                    return this.ActivityInstance.State == ActivityInstanceState.Executing;
-                }
+                get { return this.ActivityInstance.State == ActivityInstanceState.Executing; }
             }
 
             public override ActivityInstance PropertyManagerOwner
@@ -3324,7 +3971,11 @@ namespace System.Activities.Runtime
         [DataContract]
         internal class CompleteAsyncOperationWorkItem : BookmarkWorkItem
         {
-            public CompleteAsyncOperationWorkItem(BookmarkCallbackWrapper wrapper, Bookmark bookmark, object value)
+            public CompleteAsyncOperationWorkItem(
+                BookmarkCallbackWrapper wrapper,
+                Bookmark bookmark,
+                object value
+            )
                 : base(wrapper, bookmark, value)
             {
                 this.ExitNoPersistRequired = true;
@@ -3335,15 +3986,17 @@ namespace System.Activities.Runtime
         internal class CancelActivityWorkItem : ActivityExecutionWorkItem
         {
             public CancelActivityWorkItem(ActivityInstance activityInstance)
-                : base(activityInstance)
-            {
-            }
+                : base(activityInstance) { }
 
             public override void TraceCompleted()
             {
                 if (TD.CompleteCancelActivityWorkItemIsEnabled())
                 {
-                    TD.CompleteCancelActivityWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.CompleteCancelActivityWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -3351,7 +4004,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.ScheduleCancelActivityWorkItemIsEnabled())
                 {
-                    TD.ScheduleCancelActivityWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.ScheduleCancelActivityWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -3359,7 +4016,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.StartCancelActivityWorkItemIsEnabled())
                 {
-                    TD.StartCancelActivityWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.StartCancelActivityWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -3396,7 +4057,11 @@ namespace System.Activities.Runtime
             }
 
             // Called by non-pool subclasses.
-            protected ExecuteActivityWorkItem(ActivityInstance activityInstance, bool requiresSymbolResolution, IDictionary<string, object> argumentValueOverrides)
+            protected ExecuteActivityWorkItem(
+                ActivityInstance activityInstance,
+                bool requiresSymbolResolution,
+                IDictionary<string, object> argumentValueOverrides
+            )
                 : base(activityInstance)
             {
                 this.requiresSymbolResolution = requiresSymbolResolution;
@@ -3415,9 +4080,13 @@ namespace System.Activities.Runtime
             {
                 get { return this.argumentValueOverrides; }
                 set { this.argumentValueOverrides = value; }
-            }            
+            }
 
-            public void Initialize(ActivityInstance activityInstance, bool requiresSymbolResolution, IDictionary<string, object> argumentValueOverrides)
+            public void Initialize(
+                ActivityInstance activityInstance,
+                bool requiresSymbolResolution,
+                IDictionary<string, object> argumentValueOverrides
+            )
             {
                 base.Reinitialize(activityInstance);
                 this.requiresSymbolResolution = requiresSymbolResolution;
@@ -3437,7 +4106,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.ScheduleExecuteActivityWorkItemIsEnabled())
                 {
-                    TD.ScheduleExecuteActivityWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.ScheduleExecuteActivityWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -3445,7 +4118,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.StartExecuteActivityWorkItemIsEnabled())
                 {
-                    TD.StartExecuteActivityWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.StartExecuteActivityWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -3453,7 +4130,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.CompleteExecuteActivityWorkItemIsEnabled())
                 {
-                    TD.CompleteExecuteActivityWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.CompleteExecuteActivityWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -3462,13 +4143,23 @@ namespace System.Activities.Runtime
                 return ExecuteBody(executor, bookmarkManager, null);
             }
 
-            protected bool ExecuteBody(ActivityExecutor executor, BookmarkManager bookmarkManager, Location resultLocation)
+            protected bool ExecuteBody(
+                ActivityExecutor executor,
+                BookmarkManager bookmarkManager,
+                Location resultLocation
+            )
             {
                 try
                 {
                     if (this.requiresSymbolResolution)
                     {
-                        if (!this.ActivityInstance.ResolveArguments(executor, this.argumentValueOverrides, resultLocation))
+                        if (
+                            !this.ActivityInstance.ResolveArguments(
+                                executor,
+                                this.argumentValueOverrides,
+                                resultLocation
+                            )
+                        )
                         {
                             return true;
                         }
@@ -3506,10 +4197,12 @@ namespace System.Activities.Runtime
         [DataContract]
         internal class ExecuteRootWorkItem : ExecuteActivityWorkItem
         {
-            public ExecuteRootWorkItem(ActivityInstance activityInstance, bool requiresSymbolResolution, IDictionary<string, object> argumentValueOverrides)
-                : base(activityInstance, requiresSymbolResolution, argumentValueOverrides)
-            {
-            }
+            public ExecuteRootWorkItem(
+                ActivityInstance activityInstance,
+                bool requiresSymbolResolution,
+                IDictionary<string, object> argumentValueOverrides
+            )
+                : base(activityInstance, requiresSymbolResolution, argumentValueOverrides) { }
 
             public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
             {
@@ -3519,7 +4212,9 @@ namespace System.Activities.Runtime
                         new ActivityScheduledRecord(
                             executor.WorkflowInstanceId,
                             null,
-                            this.ActivityInstance));
+                            this.ActivityInstance
+                        )
+                    );
                 }
 
                 return ExecuteBody(executor, bookmarkManager, null);
@@ -3531,10 +4226,18 @@ namespace System.Activities.Runtime
         {
             Location resultLocation;
 
-            public ExecuteExpressionWorkItem(ActivityInstance activityInstance, bool requiresSymbolResolution, IDictionary<string, object> argumentValueOverrides, Location resultLocation)
+            public ExecuteExpressionWorkItem(
+                ActivityInstance activityInstance,
+                bool requiresSymbolResolution,
+                IDictionary<string, object> argumentValueOverrides,
+                Location resultLocation
+            )
                 : base(activityInstance, requiresSymbolResolution, argumentValueOverrides)
             {
-                Fx.Assert(resultLocation != null, "We should only use this work item when we are resolving arguments/variables and therefore have a result location.");
+                Fx.Assert(
+                    resultLocation != null,
+                    "We should only use this work item when we are resolving arguments/variables and therefore have a result location."
+                );
                 this.resultLocation = resultLocation;
             }
 
@@ -3556,7 +4259,10 @@ namespace System.Activities.Runtime
         {
             Exception exception;
 
-            public PropagateExceptionWorkItem(Exception exception, ActivityInstance activityInstance)
+            public PropagateExceptionWorkItem(
+                Exception exception,
+                ActivityInstance activityInstance
+            )
                 : base(activityInstance)
             {
                 Fx.Assert(exception != null, "We must not have a null exception.");
@@ -3606,7 +4312,11 @@ namespace System.Activities.Runtime
             Exception exception;
             ActivityInstanceReference source;
 
-            public RethrowExceptionWorkItem(ActivityInstance activityInstance, Exception exception, ActivityInstanceReference source)
+            public RethrowExceptionWorkItem(
+                ActivityInstance activityInstance,
+                Exception exception,
+                ActivityInstanceReference source
+            )
                 : base(activityInstance)
             {
                 this.exception = exception;
@@ -3616,10 +4326,7 @@ namespace System.Activities.Runtime
 
             public override bool IsValid
             {
-                get
-                {
-                    return this.ActivityInstance.State == ActivityInstanceState.Executing;
-                }
+                get { return this.ActivityInstance.State == ActivityInstanceState.Executing; }
             }
 
             public override ActivityInstance PropertyManagerOwner
@@ -3634,10 +4341,7 @@ namespace System.Activities.Runtime
 
             public override ActivityInstance OriginalExceptionSource
             {
-                get
-                {
-                    return this.source.ActivityInstance;
-                }
+                get { return this.source.ActivityInstance; }
             }
 
             [DataMember(Name = "exception")]
@@ -3686,7 +4390,13 @@ namespace System.Activities.Runtime
         [DataContract]
         internal class TransactionContextWaiter
         {
-            public TransactionContextWaiter(ActivityInstance instance, bool isRequires, RuntimeTransactionHandle handle, TransactionContextWaiterCallbackWrapper callbackWrapper, object state)
+            public TransactionContextWaiter(
+                ActivityInstance instance,
+                bool isRequires,
+                RuntimeTransactionHandle handle,
+                TransactionContextWaiterCallbackWrapper callbackWrapper,
+                object state
+            )
             {
                 Fx.Assert(instance != null, "Must have an instance.");
                 Fx.Assert(handle != null, "Must have a handle.");
@@ -3702,66 +4412,36 @@ namespace System.Activities.Runtime
             ActivityInstance waitingInstance;
             public ActivityInstance WaitingInstance
             {
-                get
-                {
-                    return this.waitingInstance;
-                }
-                private set
-                {
-                    this.waitingInstance = value;
-                }
+                get { return this.waitingInstance; }
+                private set { this.waitingInstance = value; }
             }
 
             bool isRequires;
             public bool IsRequires
             {
-                get
-                {
-                    return this.isRequires;
-                }
-                private set
-                {
-                    this.isRequires = value;
-                }
+                get { return this.isRequires; }
+                private set { this.isRequires = value; }
             }
 
             RuntimeTransactionHandle handle;
             public RuntimeTransactionHandle Handle
             {
-                get
-                {
-                    return this.handle;
-                }
-                private set
-                {
-                    this.handle = value;
-                }
+                get { return this.handle; }
+                private set { this.handle = value; }
             }
 
             object state;
             public object State
             {
-                get
-                {
-                    return this.state;
-                }
-                private set
-                {
-                    this.state = value;
-                }
+                get { return this.state; }
+                private set { this.state = value; }
             }
 
             TransactionContextWaiterCallbackWrapper callbackWrapper;
             public TransactionContextWaiterCallbackWrapper CallbackWrapper
             {
-                get
-                {
-                    return this.callbackWrapper;
-                }
-                private set
-                {
-                    this.callbackWrapper = value;
-                }
+                get { return this.callbackWrapper; }
+                private set { this.callbackWrapper = value; }
             }
 
             [DataMember(Name = "WaitingInstance")]
@@ -3803,21 +4483,32 @@ namespace System.Activities.Runtime
         [DataContract]
         internal class TransactionContextWaiterCallbackWrapper : CallbackWrapper
         {
-            static readonly Type callbackType = typeof(Action<NativeActivityTransactionContext, object>);
-            static readonly Type[] transactionCallbackParameterTypes = new Type[] { typeof(NativeActivityTransactionContext), typeof(object) };
-
-            public TransactionContextWaiterCallbackWrapper(Action<NativeActivityTransactionContext, object> action, ActivityInstance owningInstance)
-                : base(action, owningInstance)
+            static readonly Type callbackType = typeof(Action<
+                NativeActivityTransactionContext,
+                object
+            >);
+            static readonly Type[] transactionCallbackParameterTypes = new Type[]
             {
-            }
+                typeof(NativeActivityTransactionContext),
+                typeof(object),
+            };
 
-            [Fx.Tag.SecurityNote(Critical = "Because we are calling EnsureCallback",
-                Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT.")]
+            public TransactionContextWaiterCallbackWrapper(
+                Action<NativeActivityTransactionContext, object> action,
+                ActivityInstance owningInstance
+            )
+                : base(action, owningInstance) { }
+
+            [Fx.Tag.SecurityNote(
+                Critical = "Because we are calling EnsureCallback",
+                Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT."
+            )]
             [SecuritySafeCritical]
             public void Invoke(NativeActivityTransactionContext context, object value)
             {
                 EnsureCallback(callbackType, transactionCallbackParameterTypes);
-                Action<NativeActivityTransactionContext, object> callback = (Action<NativeActivityTransactionContext, object>)this.Callback;
+                Action<NativeActivityTransactionContext, object> callback =
+                    (Action<NativeActivityTransactionContext, object>)this.Callback;
                 callback(context, value);
             }
         }
@@ -3845,7 +4536,9 @@ namespace System.Activities.Runtime
                 {
                     if (persistCompleteCallback == null)
                     {
-                        persistCompleteCallback = Fx.ThunkCallback(new AsyncCallback(OnPersistComplete));
+                        persistCompleteCallback = Fx.ThunkCallback(
+                            new AsyncCallback(OnPersistComplete)
+                        );
                     }
 
                     return persistCompleteCallback;
@@ -3858,7 +4551,9 @@ namespace System.Activities.Runtime
                 {
                     if (commitCompleteCallback == null)
                     {
-                        commitCompleteCallback = Fx.ThunkCallback(new AsyncCallback(OnCommitComplete));
+                        commitCompleteCallback = Fx.ThunkCallback(
+                            new AsyncCallback(OnCommitComplete)
+                        );
                     }
 
                     return commitCompleteCallback;
@@ -3871,7 +4566,9 @@ namespace System.Activities.Runtime
                 {
                     if (outcomeDeterminedCallback == null)
                     {
-                        outcomeDeterminedCallback = new Action<object, TimeoutException>(OnOutcomeDetermined);
+                        outcomeDeterminedCallback = new Action<object, TimeoutException>(
+                            OnOutcomeDetermined
+                        );
                     }
 
                     return outcomeDeterminedCallback;
@@ -3880,18 +4577,12 @@ namespace System.Activities.Runtime
 
             public override bool IsValid
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override ActivityInstance PropertyManagerOwner
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             public override void TraceCompleted()
@@ -3924,7 +4615,11 @@ namespace System.Activities.Runtime
                     completeSelf = CheckTransactionAborted();
                     if (!completeSelf)
                     {
-                        IAsyncResult result = new TransactionalPersistAsyncResult(this.executor, PersistCompleteCallback, this);
+                        IAsyncResult result = new TransactionalPersistAsyncResult(
+                            this.executor,
+                            PersistCompleteCallback,
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             completeSelf = FinishPersist(result);
@@ -3957,7 +4652,9 @@ namespace System.Activities.Runtime
             {
                 if (TD.RuntimeTransactionCompleteIsEnabled())
                 {
-                    TD.RuntimeTransactionComplete(this.runtimeTransaction.TransactionStatus.ToString());
+                    TD.RuntimeTransactionComplete(
+                        this.runtimeTransaction.TransactionStatus.ToString()
+                    );
                 }
             }
 
@@ -3996,7 +4693,8 @@ namespace System.Activities.Runtime
                     return;
                 }
 
-                CompleteTransactionWorkItem thisPtr = (CompleteTransactionWorkItem)result.AsyncState;
+                CompleteTransactionWorkItem thisPtr = (CompleteTransactionWorkItem)
+                    result.AsyncState;
                 bool completeSelf = true;
 
                 try
@@ -4060,10 +4758,14 @@ namespace System.Activities.Runtime
                 }
                 else
                 {
-                    CommittableTransaction committableTransaction = original as CommittableTransaction;
+                    CommittableTransaction committableTransaction =
+                        original as CommittableTransaction;
                     if (committableTransaction != null)
                     {
-                        IAsyncResult result = committableTransaction.BeginCommit(CommitCompleteCallback, this);
+                        IAsyncResult result = committableTransaction.BeginCommit(
+                            CommitCompleteCallback,
+                            this
+                        );
 
                         if (result.CompletedSynchronously)
                         {
@@ -4088,7 +4790,8 @@ namespace System.Activities.Runtime
                     return;
                 }
 
-                CompleteTransactionWorkItem thisPtr = (CompleteTransactionWorkItem)result.AsyncState;
+                CompleteTransactionWorkItem thisPtr = (CompleteTransactionWorkItem)
+                    result.AsyncState;
                 bool completeSelf = true;
 
                 try
@@ -4118,7 +4821,9 @@ namespace System.Activities.Runtime
 
             bool FinishCommit(IAsyncResult result)
             {
-                ((CommittableTransaction)this.runtimeTransaction.OriginalTransaction).EndCommit(result);
+                ((CommittableTransaction)this.runtimeTransaction.OriginalTransaction).EndCommit(
+                    result
+                );
 
                 return CheckOutcome();
             }
@@ -4140,7 +4845,13 @@ namespace System.Activities.Runtime
 
                 if (completionEvent != null)
                 {
-                    if (!completionEvent.WaitAsync(OutcomeDeterminedCallback, this, ActivityDefaults.TransactionCompletionTimeout))
+                    if (
+                        !completionEvent.WaitAsync(
+                            OutcomeDeterminedCallback,
+                            this,
+                            ActivityDefaults.TransactionCompletionTimeout
+                        )
+                    )
                     {
                         return false;
                     }
@@ -4196,7 +4907,9 @@ namespace System.Activities.Runtime
             {
                 try
                 {
-                    TransactionHelper.ThrowIfTransactionAbortedOrInDoubt(this.runtimeTransaction.OriginalTransaction);
+                    TransactionHelper.ThrowIfTransactionAbortedOrInDoubt(
+                        this.runtimeTransaction.OriginalTransaction
+                    );
                     return false;
                 }
                 catch (TransactionException exception)
@@ -4213,17 +4926,21 @@ namespace System.Activities.Runtime
                 }
             }
 
-            public override void PostProcess(ActivityExecutor executor)
-            {
-            }
+            public override void PostProcess(ActivityExecutor executor) { }
 
             class TransactionalPersistAsyncResult : TransactedAsyncResult
             {
                 CompleteTransactionWorkItem workItem;
-                static readonly AsyncCompletion onPersistComplete = new AsyncCompletion(OnPersistComplete);
+                static readonly AsyncCompletion onPersistComplete = new AsyncCompletion(
+                    OnPersistComplete
+                );
                 readonly ActivityExecutor executor;
 
-                public TransactionalPersistAsyncResult(ActivityExecutor executor, AsyncCallback callback, object state)
+                public TransactionalPersistAsyncResult(
+                    ActivityExecutor executor,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.executor = executor;
@@ -4233,7 +4950,12 @@ namespace System.Activities.Runtime
                     {
                         try
                         {
-                            result = this.executor.host.OnBeginPersist(PrepareAsyncCompletion(TransactionalPersistAsyncResult.onPersistComplete), this);
+                            result = this.executor.host.OnBeginPersist(
+                                PrepareAsyncCompletion(
+                                    TransactionalPersistAsyncResult.onPersistComplete
+                                ),
+                                this
+                            );
                         }
                         catch (Exception e)
                         {
@@ -4258,7 +4980,8 @@ namespace System.Activities.Runtime
 
                 static bool OnPersistComplete(IAsyncResult result)
                 {
-                    TransactionalPersistAsyncResult thisPtr = (TransactionalPersistAsyncResult)result.AsyncState;
+                    TransactionalPersistAsyncResult thisPtr = (TransactionalPersistAsyncResult)
+                        result.AsyncState;
 
                     try
                     {
@@ -4306,7 +5029,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.CompleteTransactionContextWorkItemIsEnabled())
                 {
-                    TD.CompleteTransactionContextWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.CompleteTransactionContextWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -4314,7 +5041,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.ScheduleTransactionContextWorkItemIsEnabled())
                 {
-                    TD.ScheduleTransactionContextWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.ScheduleTransactionContextWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -4322,7 +5053,11 @@ namespace System.Activities.Runtime
             {
                 if (TD.StartTransactionContextWorkItemIsEnabled())
                 {
-                    TD.StartTransactionContextWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id);
+                    TD.StartTransactionContextWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id
+                    );
                 }
             }
 
@@ -4332,7 +5067,12 @@ namespace System.Activities.Runtime
 
                 try
                 {
-                    transactionContext = new NativeActivityTransactionContext(this.ActivityInstance, executor, bookmarkManager, this.waiter.Handle);
+                    transactionContext = new NativeActivityTransactionContext(
+                        this.ActivityInstance,
+                        executor,
+                        bookmarkManager,
+                        this.waiter.Handle
+                    );
                     waiter.CallbackWrapper.Invoke(transactionContext, this.waiter.State);
                 }
                 catch (Exception e)
@@ -4360,7 +5100,11 @@ namespace System.Activities.Runtime
         // are in no-persist zones
         class RuntimeTransactionData
         {
-            public RuntimeTransactionData(RuntimeTransactionHandle handle, Transaction transaction, ActivityInstance isolationScope)
+            public RuntimeTransactionData(
+                RuntimeTransactionHandle handle,
+                Transaction transaction,
+                ActivityInstance isolationScope
+            )
             {
                 this.TransactionHandle = handle;
                 this.OriginalTransaction = transaction;
@@ -4369,70 +5113,36 @@ namespace System.Activities.Runtime
                 this.TransactionStatus = TransactionStatus.Active;
             }
 
-            public AsyncWaitHandle CompletionEvent
-            {
-                get;
-                set;
-            }
+            public AsyncWaitHandle CompletionEvent { get; set; }
 
-            public PreparingEnlistment PendingPreparingEnlistment
-            {
-                get;
-                set;
-            }
+            public PreparingEnlistment PendingPreparingEnlistment { get; set; }
 
-            public bool HasPrepared
-            {
-                get;
-                set;
-            }
+            public bool HasPrepared { get; set; }
 
-            public bool ShouldScheduleCompletion
-            {
-                get;
-                set;
-            }
+            public bool ShouldScheduleCompletion { get; set; }
 
-            public TransactionStatus TransactionStatus
-            {
-                get;
-                set;
-            }
+            public TransactionStatus TransactionStatus { get; set; }
 
-            public bool IsRootCancelPending
-            {
-                get;
-                set;
-            }
+            public bool IsRootCancelPending { get; set; }
 
-            public RuntimeTransactionHandle TransactionHandle
-            {
-                get;
-                private set;
-            }
+            public RuntimeTransactionHandle TransactionHandle { get; private set; }
 
-            public Transaction ClonedTransaction
-            {
-                get;
-                private set;
-            }
+            public Transaction ClonedTransaction { get; private set; }
 
-            public Transaction OriginalTransaction
-            {
-                get;
-                private set;
-            }
+            public Transaction OriginalTransaction { get; private set; }
 
-            public ActivityInstance IsolationScope
-            {
-                get;
-                private set;
-            }
+            public ActivityInstance IsolationScope { get; private set; }
 
-            [Fx.Tag.Throws(typeof(Exception), "Doesn't handle any exceptions coming from Rollback.")]
+            [Fx.Tag.Throws(
+                typeof(Exception),
+                "Doesn't handle any exceptions coming from Rollback."
+            )]
             public void Rollback(Exception reason)
             {
-                Fx.Assert(this.OriginalTransaction != null, "We always have an original transaction.");
+                Fx.Assert(
+                    this.OriginalTransaction != null,
+                    "We always have an original transaction."
+                );
 
                 this.OriginalTransaction.Rollback(reason);
             }
@@ -4444,7 +5154,12 @@ namespace System.Activities.Runtime
 
             readonly ActivityExecutor executor;
 
-            public AssociateKeysAsyncResult(ActivityExecutor executor, ICollection<InstanceKey> keysToAssociate, AsyncCallback callback, object state)
+            public AssociateKeysAsyncResult(
+                ActivityExecutor executor,
+                ICollection<InstanceKey> keysToAssociate,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.executor = executor;
@@ -4452,7 +5167,11 @@ namespace System.Activities.Runtime
                 IAsyncResult result;
                 using (PrepareTransactionalCall(this.executor.CurrentTransaction))
                 {
-                    result = this.executor.host.OnBeginAssociateKeys(keysToAssociate, PrepareAsyncCompletion(associatedCallback), this);
+                    result = this.executor.host.OnBeginAssociateKeys(
+                        keysToAssociate,
+                        PrepareAsyncCompletion(associatedCallback),
+                        this
+                    );
                 }
                 if (SyncContinue(result))
                 {
@@ -4489,7 +5208,8 @@ namespace System.Activities.Runtime
             }
         }
 
-        class PoolOfExecuteSynchronousExpressionWorkItems : Pool<ExecuteSynchronousExpressionWorkItem>
+        class PoolOfExecuteSynchronousExpressionWorkItems
+            : Pool<ExecuteSynchronousExpressionWorkItem>
         {
             protected override ExecuteSynchronousExpressionWorkItem CreateNew()
             {
@@ -4529,13 +5249,11 @@ namespace System.Activities.Runtime
             }
         }
 
-        //This is used in ScheduleDelegate when the handler is null. We use this dummy activity to 
+        //This is used in ScheduleDelegate when the handler is null. We use this dummy activity to
         //set as the 'Activity' of the completed ActivityInstance.
         class EmptyDelegateActivity : NativeActivity
         {
-            internal EmptyDelegateActivity()
-            {
-            }
+            internal EmptyDelegateActivity() { }
 
             protected override void Execute(NativeActivityContext context)
             {

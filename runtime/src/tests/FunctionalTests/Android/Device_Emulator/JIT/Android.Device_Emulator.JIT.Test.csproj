@@ -7,7 +7,6 @@
     <MainLibraryFileName>Android.Device_Emulator.JIT.Test.dll</MainLibraryFileName>
     <ExpectedExitCode>42</ExpectedExitCode>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Program.cs" />
   </ItemGroup>

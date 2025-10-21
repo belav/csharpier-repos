@@ -8,8 +8,8 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     // Graph maintainence algorithms.
     sealed class ConnectAlgorithms : IConnectAlgorithms
@@ -23,17 +23,23 @@ namespace System.ServiceModel.Channels
 
         Dictionary<Uri, PeerNodeAddress> nodeAddresses = new Dictionary<Uri, PeerNodeAddress>();
         PeerNodeConfig config;
-        Dictionary<Uri, PeerNodeAddress> pendingConnectedNeighbor = new Dictionary<Uri, PeerNodeAddress>();
+        Dictionary<Uri, PeerNodeAddress> pendingConnectedNeighbor =
+            new Dictionary<Uri, PeerNodeAddress>();
         object thisLock = new object();
         IPeerMaintainer maintainer = null;
         bool disposed = false;
 
-        public void Initialize(IPeerMaintainer maintainer, PeerNodeConfig config, int wantedConnectionCount, Dictionary<EndpointAddress, Referral> referralCache)
+        public void Initialize(
+            IPeerMaintainer maintainer,
+            PeerNodeConfig config,
+            int wantedConnectionCount,
+            Dictionary<EndpointAddress, Referral> referralCache
+        )
         {
             this.maintainer = maintainer;
             this.config = config;
             this.wantedConnectionCount = wantedConnectionCount;
-            UpdateEndpointsCollection(referralCache.Values);        // Add to the endpoints connection anything in the referralsCache
+            UpdateEndpointsCollection(referralCache.Values); // Add to the endpoints connection anything in the referralsCache
 
             // Hook up the event handlers
             maintainer.NeighborClosed += OnNeighborClosed;
@@ -51,15 +57,22 @@ namespace System.ServiceModel.Channels
         public void Connect(TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            addNeighbor.Set();              // We are trying to add a neighbor
+            addNeighbor.Set(); // We are trying to add a neighbor
 
             List<IAsyncResult> results = new List<IAsyncResult>();
             List<WaitHandle> handles = new List<WaitHandle>();
 
             // While we have more to endpoints try and we have connections pending and we are not connected upto ideal yet, and the maintainer is still open
-            while (results.Count != 0
-                || (((nodeAddresses.Count != 0 || pendingConnectedNeighbor.Count != 0) && maintainer.IsOpen)
-                && maintainer.ConnectedNeighborCount < wantedConnectionCount))
+            while (
+                results.Count != 0
+                || (
+                    (
+                        (nodeAddresses.Count != 0 || pendingConnectedNeighbor.Count != 0)
+                        && maintainer.IsOpen
+                    )
+                    && maintainer.ConnectedNeighborCount < wantedConnectionCount
+                )
+            )
             {
                 try
                 {
@@ -68,16 +81,16 @@ namespace System.ServiceModel.Channels
                     {
                         handles.Add(iar.AsyncWaitHandle);
                     }
-                    handles.Add(welcomeReceived);                               // One of our connect requests resulted in a welcome or neighborManager was shutting down
-                    handles.Add(maintainerClosed);                              // One of our connect requests resulted in a welcome or neighborManager was shutting down
-                    handles.Add(addNeighbor);                                   // Make the last waithandle the add a neighbor signal
+                    handles.Add(welcomeReceived); // One of our connect requests resulted in a welcome or neighborManager was shutting down
+                    handles.Add(maintainerClosed); // One of our connect requests resulted in a welcome or neighborManager was shutting down
+                    handles.Add(addNeighbor); // Make the last waithandle the add a neighbor signal
 
                     int index = WaitHandle.WaitAny(handles.ToArray(), config.ConnectTimeout, false);
-                    if (index == results.Count)                                 // welcomeReceived was signalled
+                    if (index == results.Count) // welcomeReceived was signalled
                     {
                         welcomeReceived.Reset();
                     }
-                    else if (index == results.Count + 1)                        // maintainerClosed was signalled
+                    else if (index == results.Count + 1) // maintainerClosed was signalled
                     {
                         maintainerClosed.Reset();
                         lock (ThisLock)
@@ -85,17 +98,20 @@ namespace System.ServiceModel.Channels
                             nodeAddresses.Clear();
                         }
                     }
-                    else if (index == results.Count + 2)                        // addNeighbor was signalled
+                    else if (index == results.Count + 2) // addNeighbor was signalled
                     {
                         // We need to open a new neighbor
                         if (nodeAddresses.Count > 0)
                         {
-                            if (pendingConnectedNeighbor.Count + maintainer.ConnectedNeighborCount < wantedConnectionCount)
+                            if (
+                                pendingConnectedNeighbor.Count + maintainer.ConnectedNeighborCount
+                                < wantedConnectionCount
+                            )
                             {
                                 PeerNodeAddress epr = null;
                                 lock (ThisLock)
                                 {
-                                    if (nodeAddresses.Count == 0 || !maintainer.IsOpen)   // nodeAddresses or maintainer is closed got updated better cycle
+                                    if (nodeAddresses.Count == 0 || !maintainer.IsOpen) // nodeAddresses or maintainer is closed got updated better cycle
                                     {
                                         addNeighbor.Reset();
                                         continue;
@@ -117,8 +133,11 @@ namespace System.ServiceModel.Channels
                                     Fx.Assert(epr != null, "epr cannot be null here");
                                     nodeAddresses.Remove(key);
                                 }
-                                if (maintainer.FindDuplicateNeighbor(epr) == null
-                                && pendingConnectedNeighbor.ContainsKey(GetEndpointUri(epr)) == false)
+                                if (
+                                    maintainer.FindDuplicateNeighbor(epr) == null
+                                    && pendingConnectedNeighbor.ContainsKey(GetEndpointUri(epr))
+                                        == false
+                                )
                                 {
                                     lock (ThisLock)
                                     {
@@ -136,38 +155,80 @@ namespace System.ServiceModel.Channels
                                         {
                                             if (DiagnosticUtility.ShouldTraceInformation)
                                             {
-                                                PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(SR.GetString(SR.PeerMaintainerConnect, epr, this.config.MeshId));
-                                                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                                                    record, this, null);
+                                                PeerMaintainerTraceRecord record =
+                                                    new PeerMaintainerTraceRecord(
+                                                        SR.GetString(
+                                                            SR.PeerMaintainerConnect,
+                                                            epr,
+                                                            this.config.MeshId
+                                                        )
+                                                    );
+                                                TraceUtility.TraceEvent(
+                                                    TraceEventType.Information,
+                                                    TraceCode.PeerMaintainerActivity,
+                                                    SR.GetString(
+                                                        SR.TraceCodePeerMaintainerActivity
+                                                    ),
+                                                    record,
+                                                    this,
+                                                    null
+                                                );
                                             }
-                                            IAsyncResult iar = maintainer.BeginOpenNeighbor(epr, timeoutHelper.RemainingTime(), null, epr);
+                                            IAsyncResult iar = maintainer.BeginOpenNeighbor(
+                                                epr,
+                                                timeoutHelper.RemainingTime(),
+                                                null,
+                                                epr
+                                            );
                                             results.Add(iar);
                                         }
-
                                     }
                                     catch (Exception e)
                                     {
-                                        if (Fx.IsFatal(e)) throw;
+                                        if (Fx.IsFatal(e))
+                                            throw;
                                         if (DiagnosticUtility.ShouldTraceInformation)
                                         {
-                                            PeerMaintainerTraceRecord record = new PeerMaintainerTraceRecord(SR.GetString(SR.PeerMaintainerConnectFailure, epr, this.config.MeshId, e.Message));
-                                            TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerMaintainerActivity, SR.GetString(SR.TraceCodePeerMaintainerActivity),
-                                                record, this, null);
+                                            PeerMaintainerTraceRecord record =
+                                                new PeerMaintainerTraceRecord(
+                                                    SR.GetString(
+                                                        SR.PeerMaintainerConnectFailure,
+                                                        epr,
+                                                        this.config.MeshId,
+                                                        e.Message
+                                                    )
+                                                );
+                                            TraceUtility.TraceEvent(
+                                                TraceEventType.Information,
+                                                TraceCode.PeerMaintainerActivity,
+                                                SR.GetString(SR.TraceCodePeerMaintainerActivity),
+                                                record,
+                                                this,
+                                                null
+                                            );
                                         }
 
                                         // I need to remove the epr just began because the BeginOpen threw.
                                         // However Object Disposed can arise as a result of a ---- between PeerNode.Close()
                                         // and Connect trying to reconnect nodes.
                                         pendingConnectedNeighbor.Remove(GetEndpointUri(epr));
-                                        if (!(e is ObjectDisposedException)) throw;
+                                        if (!(e is ObjectDisposedException))
+                                            throw;
 
-                                        DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+                                        DiagnosticUtility.TraceHandledException(
+                                            e,
+                                            TraceEventType.Information
+                                        );
                                     }
                                 }
                             }
                         }
 
-                        if (nodeAddresses.Count == 0 || pendingConnectedNeighbor.Count + maintainer.ConnectedNeighborCount == wantedConnectionCount)
+                        if (
+                            nodeAddresses.Count == 0
+                            || pendingConnectedNeighbor.Count + maintainer.ConnectedNeighborCount
+                                == wantedConnectionCount
+                        )
                         {
                             addNeighbor.Reset();
                         }
@@ -185,15 +246,18 @@ namespace System.ServiceModel.Channels
                         }
                         catch (Exception e)
                         {
-                            if (Fx.IsFatal(e)) throw;
-                            pendingConnectedNeighbor.Remove(GetEndpointUri((PeerNodeAddress)iar.AsyncState));
+                            if (Fx.IsFatal(e))
+                                throw;
+                            pendingConnectedNeighbor.Remove(
+                                GetEndpointUri((PeerNodeAddress)iar.AsyncState)
+                            );
                             throw;
                         }
                     }
                     else
                     {
                         //A timeout occured no connections progressed, try some more connections
-                        //This may result in more than wantedConnectionCount connections if the timeout connections were 
+                        //This may result in more than wantedConnectionCount connections if the timeout connections were
                         // merely being slow
                         pendingConnectedNeighbor.Clear();
                         results.Clear();
@@ -217,7 +281,6 @@ namespace System.ServiceModel.Channels
                 }
             }
         }
-
 
         void IDisposable.Dispose()
         {
@@ -296,7 +359,10 @@ namespace System.ServiceModel.Channels
             if (PeerValidateHelper.ValidNodeAddress(address))
             {
                 Uri key = GetEndpointUri(address);
-                if (!nodeAddresses.ContainsKey(key) && key != GetEndpointUri(maintainer.GetListenAddress()))
+                if (
+                    !nodeAddresses.ContainsKey(key)
+                    && key != GetEndpointUri(maintainer.GetListenAddress())
+                )
                 {
                     nodeAddresses[key] = address;
                 }
@@ -380,11 +446,13 @@ namespace System.ServiceModel.Channels
                                 return;
 
                             Uri key = GetEndpointUri(referral.Address);
-                            if (key != GetEndpointUri(maintainer.GetListenAddress()))   // make sure the referral is not mine
+                            if (key != GetEndpointUri(maintainer.GetListenAddress())) // make sure the referral is not mine
                             {
-                                if (!nodeAddresses.ContainsKey(key)
-                                && !pendingConnectedNeighbor.ContainsKey(key)
-                                && maintainer.FindDuplicateNeighbor(referral.Address) == null)
+                                if (
+                                    !nodeAddresses.ContainsKey(key)
+                                    && !pendingConnectedNeighbor.ContainsKey(key)
+                                    && maintainer.FindDuplicateNeighbor(referral.Address) == null
+                                )
                                 {
                                     nodeAddresses[key] = referral.Address;
                                     added = true;

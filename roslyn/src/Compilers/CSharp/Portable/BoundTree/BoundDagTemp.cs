@@ -18,16 +18,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsOriginalInput => this.Source is null;
 
-        public static BoundDagTemp ForOriginalInput(SyntaxNode syntax, TypeSymbol type) => new BoundDagTemp(syntax, type, source: null, 0);
+        public static BoundDagTemp ForOriginalInput(SyntaxNode syntax, TypeSymbol type) =>
+            new BoundDagTemp(syntax, type, source: null, 0);
 
         public override bool Equals(object? obj) => obj is BoundDagTemp other && this.Equals(other);
 
         public bool Equals(BoundDagTemp other)
         {
-            return
-                this.Type.Equals(other.Type, TypeCompareKind.AllIgnoreOptions) &&
-                object.Equals(this.Source, other.Source) &&
-                this.Index == other.Index;
+            return this.Type.Equals(other.Type, TypeCompareKind.AllIgnoreOptions)
+                && object.Equals(this.Source, other.Source)
+                && this.Index == other.Index;
         }
 
         /// <summary>
@@ -35,14 +35,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public bool IsEquivalentTo(BoundDagTemp other)
         {
-            return
-                this.Type.Equals(other.Type, TypeCompareKind.AllIgnoreOptions) &&
-                this.Index == other.Index;
+            return this.Type.Equals(other.Type, TypeCompareKind.AllIgnoreOptions)
+                && this.Index == other.Index;
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.Type.GetHashCode(), Hash.Combine(this.Source?.GetHashCode() ?? 0, this.Index));
+            return Hash.Combine(
+                this.Type.GetHashCode(),
+                Hash.Combine(this.Source?.GetHashCode() ?? 0, this.Index)
+            );
         }
 
 #if DEBUG
@@ -58,7 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 0 => "<error>",
 
                 null => "t0",
-                var id => $"t{id}"
+                var id => $"t{id}",
             };
             return $"{name}{(Source is BoundDagDeconstructEvaluation ? $".Item{(Index + 1).ToString()}" : "")}";
         }

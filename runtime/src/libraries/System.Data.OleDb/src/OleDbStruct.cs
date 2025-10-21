@@ -17,7 +17,7 @@ namespace System.Data.OleDb
         BADBINDINFO = 3,
         BADSTORAGEFLAGS = 4,
         NOINTERFACE = 5,
-        MULTIPLESTORAGE = 6
+        MULTIPLESTORAGE = 6,
     }
 
 #if false
@@ -30,7 +30,6 @@ namespace System.Data.OleDb
         BYTE bScale;
     }
 #endif
-
 
     [StructLayout(LayoutKind.Sequential, Pack = 2)]
     internal struct tagDBPARAMBINDINFO_x86
@@ -49,7 +48,10 @@ namespace System.Data.OleDb
             builder.Append("tagDBPARAMBINDINFO_x86").Append(Environment.NewLine);
             if (IntPtr.Zero != pwszDataSourceType)
             {
-                builder.Append("pwszDataSourceType =").Append(Marshal.PtrToStringUni(pwszDataSourceType)).Append(Environment.NewLine);
+                builder
+                    .Append("pwszDataSourceType =")
+                    .Append(Marshal.PtrToStringUni(pwszDataSourceType))
+                    .Append(Environment.NewLine);
             }
             builder.AppendLine($"\tulParamSize  ={ulParamSize}");
             builder.AppendLine($"\tdwFlags      =0x{dwFlags:X4}");
@@ -77,7 +79,9 @@ namespace System.Data.OleDb
             builder.Append("tagDBPARAMBINDINFO").Append(Environment.NewLine);
             if (IntPtr.Zero != pwszDataSourceType)
             {
-                builder.AppendLine($"pwszDataSourceType ={Marshal.PtrToStringUni(pwszDataSourceType)}");
+                builder.AppendLine(
+                    $"pwszDataSourceType ={Marshal.PtrToStringUni(pwszDataSourceType)}"
+                );
             }
             builder.AppendLine($"\tulParamSize  ={ulParamSize}");
             builder.AppendLine($"\tdwFlags     =0x{dwFlags:X4}");
@@ -135,9 +139,7 @@ namespace System.Data.OleDb
         internal byte bPrecision;
         internal byte bScale;
 
-        internal tagDBBINDING()
-        {
-        }
+        internal tagDBBINDING() { }
 
 #if DEBUG
         public override string ToString()
@@ -261,9 +263,7 @@ namespace System.Data.OleDb
 
         internal int cchMaxLen;
 
-        internal tagDBLITERALINFO()
-        {
-        }
+        internal tagDBLITERALINFO() { }
     }
 
 #if false
@@ -284,9 +284,7 @@ namespace System.Data.OleDb
         internal int cProperties;
         internal Guid guidPropertySet;
 
-        internal tagDBPROPSET()
-        {
-        }
+        internal tagDBPROPSET() { }
 
         internal tagDBPROPSET(int propertyCount, Guid propertySet)
         {
@@ -328,11 +326,10 @@ namespace System.Data.OleDb
         internal tagDBIDX columnid;
 
         // Variant
-        [MarshalAs(UnmanagedType.Struct)] internal object? vValue;
+        [MarshalAs(UnmanagedType.Struct)]
+        internal object? vValue;
 
-        internal tagDBPROP_x86()
-        {
-        }
+        internal tagDBPROP_x86() { }
 
         internal tagDBPROP_x86(int propertyID, bool required, object value)
         {
@@ -357,11 +354,10 @@ namespace System.Data.OleDb
         internal tagDBIDX columnid;
 
         // Variant
-        [MarshalAs(UnmanagedType.Struct)] internal object? vValue;
+        [MarshalAs(UnmanagedType.Struct)]
+        internal object? vValue;
 
-        internal tagDBPROP()
-        {
-        }
+        internal tagDBPROP() { }
 
         internal tagDBPROP(int propertyID, bool required, object value)
         {
@@ -389,9 +385,7 @@ namespace System.Data.OleDb
         internal int cParamSets;
         internal IntPtr hAccessor;
 
-        internal tagDBPARAMS()
-        {
-        }
+        internal tagDBPARAMS() { }
     }
 
 #if false
@@ -434,14 +428,15 @@ namespace System.Data.OleDb
 
         internal tagDBIDX columnid;
 
-        internal tagDBCOLUMNINFO()
-        {
-        }
+        internal tagDBCOLUMNINFO() { }
+
 #if DEBUG
         public override string ToString()
         {
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine($"tagDBCOLUMNINFO: {Convert.ToString(pwszName, CultureInfo.InvariantCulture)}");
+            builder.AppendLine(
+                $"tagDBCOLUMNINFO: {Convert.ToString(pwszName, CultureInfo.InvariantCulture)}"
+            );
             builder.AppendLine($"\t{((long)iOrdinal).ToString(CultureInfo.InvariantCulture)}");
             builder.AppendLine($"\t0x{dwFlags:X8}");
             builder.AppendLine($"\t{ulColumnSize}");
@@ -472,9 +467,7 @@ namespace System.Data.OleDb
         internal int cPropertyInfos;
         internal Guid guidPropertySet;
 
-        internal tagDBPROPINFOSET()
-        {
-        }
+        internal tagDBPROPINFOSET() { }
     }
 
 #if false
@@ -509,18 +502,18 @@ namespace System.Data.OleDb
 
         string? ItagDBPROPINFO.pwszDescription => this.pwszDescription;
 
-        [MarshalAs(UnmanagedType.LPWStr)] internal string? pwszDescription;
+        [MarshalAs(UnmanagedType.LPWStr)]
+        internal string? pwszDescription;
 
         internal int dwPropertyID;
         internal int dwFlags;
 
         internal short vtType;
 
-        [MarshalAs(UnmanagedType.Struct)] internal object? vValue;
+        [MarshalAs(UnmanagedType.Struct)]
+        internal object? vValue;
 
-        internal tagDBPROPINFO_x86()
-        {
-        }
+        internal tagDBPROPINFO_x86() { }
     }
 
     [StructLayout(LayoutKind.Sequential, Pack = 8)]
@@ -535,18 +528,19 @@ namespace System.Data.OleDb
         object? ItagDBPROPINFO.vValue => this.vValue;
 
         string? ItagDBPROPINFO.pwszDescription => this.pwszDescription;
-        [MarshalAs(UnmanagedType.LPWStr)] internal string? pwszDescription;
+
+        [MarshalAs(UnmanagedType.LPWStr)]
+        internal string? pwszDescription;
 
         internal int dwPropertyID;
         internal int dwFlags;
 
         internal short vtType;
 
-        [MarshalAs(UnmanagedType.Struct)] internal object? vValue;
+        [MarshalAs(UnmanagedType.Struct)]
+        internal object? vValue;
 
-        internal tagDBPROPINFO()
-        {
-        }
+        internal tagDBPROPINFO() { }
     }
 
 #if false
@@ -574,10 +568,11 @@ namespace System.Data.OleDb
             ODB.IsRunningOnX86 ? (ItagDBPROPINFO)new tagDBPROPINFO_x86() : new tagDBPROPINFO();
 
         internal static ItagDBPROP CreateTagDbProp(int propertyID, bool required, object value) =>
-            ODB.IsRunningOnX86 ? (ItagDBPROP) new tagDBPROP_x86(propertyID, required, value) :
-                    new tagDBPROP(propertyID, required, value);
+            ODB.IsRunningOnX86
+                ? (ItagDBPROP)new tagDBPROP_x86(propertyID, required, value)
+                : new tagDBPROP(propertyID, required, value);
 
         internal static ItagDBPROP CreateTagDbProp() =>
-            ODB.IsRunningOnX86 ? (ItagDBPROP) new tagDBPROP_x86() : new tagDBPROP();
+            ODB.IsRunningOnX86 ? (ItagDBPROP)new tagDBPROP_x86() : new tagDBPROP();
     }
 }

@@ -14,7 +14,7 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNull(
                 () => HttpRequestExtensions.GetHttpMethodOverride(null),
                 "request"
-                );
+            );
         }
 
         [Theory]
@@ -31,17 +31,25 @@ namespace System.Web.Mvc.Test
         [InlineData("POST", "PUT", "BOGUS", null, "PUT")] // Header override wins over form override
         [InlineData("POST", "PUT", null, "BOGUS", "PUT")] // Header override wins over query string override
         [InlineData("POST", null, "PUT", "BOGUS", "PUT")] // Form override wins over query string override
-        public void TestHttpMethodOverride(string httpRequestVerb,
-                                           string httpHeaderVerb,
-                                           string httpFormVerb,
-                                           string httpQueryStringVerb,
-                                           string expectedMethod)
+        public void TestHttpMethodOverride(
+            string httpRequestVerb,
+            string httpHeaderVerb,
+            string httpFormVerb,
+            string httpQueryStringVerb,
+            string expectedMethod
+        )
         {
             // Arrange
-            ControllerContext context = AcceptVerbsAttributeTest.GetControllerContextWithHttpVerb(httpRequestVerb, httpHeaderVerb, httpFormVerb, httpQueryStringVerb);
+            ControllerContext context = AcceptVerbsAttributeTest.GetControllerContextWithHttpVerb(
+                httpRequestVerb,
+                httpHeaderVerb,
+                httpFormVerb,
+                httpQueryStringVerb
+            );
 
             // Act
-            string methodOverride = context.RequestContext.HttpContext.Request.GetHttpMethodOverride();
+            string methodOverride =
+                context.RequestContext.HttpContext.Request.GetHttpMethodOverride();
 
             // Assert
             Assert.Equal(expectedMethod, methodOverride);

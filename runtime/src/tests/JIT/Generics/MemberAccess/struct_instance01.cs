@@ -119,6 +119,5 @@ public class Test_struct_instance01
         }
 
         return ret;
-
     }
 }

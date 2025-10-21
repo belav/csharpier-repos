@@ -5,7 +5,10 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 using AnalyzerOptions = System.Collections.Immutable.ImmutableDictionary<string, string>;
-using TreeOptions = System.Collections.Immutable.ImmutableDictionary<string, Microsoft.CodeAnalysis.ReportDiagnostic>;
+using TreeOptions = System.Collections.Immutable.ImmutableDictionary<
+    string,
+    Microsoft.CodeAnalysis.ReportDiagnostic
+>;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -32,7 +35,8 @@ namespace Microsoft.CodeAnalysis
         internal AnalyzerConfigOptionsResult(
             TreeOptions treeOptions,
             AnalyzerOptions analyzerOptions,
-            ImmutableArray<Diagnostic> diagnostics)
+            ImmutableArray<Diagnostic> diagnostics
+        )
         {
             Debug.Assert(treeOptions != null);
             Debug.Assert(analyzerOptions != null);

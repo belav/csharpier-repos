@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -23,14 +24,37 @@ namespace Test
         {
             int L = 2;
             int[] F = new int[2];
-            CheckHeap(ref L, F, ref F,
-            CheckHeap(ref L, F, ref F,
-            CheckHeap(ref L, F, ref F,
-            CheckHeap(ref L, F, ref F,
-            CheckHeap(ref L, F, ref F,
-            CheckHeap(ref new WeirdObject().Member, F, ref Static,
-            CheckHeap(ref new WeirdObject().Member, F, ref F, null)
-            ))))));
+            CheckHeap(
+                ref L,
+                F,
+                ref F,
+                CheckHeap(
+                    ref L,
+                    F,
+                    ref F,
+                    CheckHeap(
+                        ref L,
+                        F,
+                        ref F,
+                        CheckHeap(
+                            ref L,
+                            F,
+                            ref F,
+                            CheckHeap(
+                                ref L,
+                                F,
+                                ref F,
+                                CheckHeap(
+                                    ref new WeirdObject().Member,
+                                    F,
+                                    ref Static,
+                                    CheckHeap(ref new WeirdObject().Member, F, ref F, null)
+                                )
+                            )
+                        )
+                    )
+                )
+            );
         }
     }
 }

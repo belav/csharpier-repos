@@ -1,30 +1,24 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
-** Class:  SuppressMessageAttribute 
+** Class:  SuppressMessageAttribute
 **
 **
-**  An attribute to suppress violation messages/warnings   
-**  by static code analysis tools. 
+**  An attribute to suppress violation messages/warnings
+**  by static code analysis tools.
 **
-** 
+**
 ===========================================================*/
 
 using System;
 
 namespace System.Diagnostics.CodeAnalysis
 {
-
-    [AttributeUsage(
-     AttributeTargets.All,
-     Inherited = false,
-     AllowMultiple = true
-     )
-    ]
+    [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     [Conditional("CODE_ANALYSIS")]
     public sealed class SuppressMessageAttribute : Attribute
     {
@@ -34,41 +28,41 @@ namespace System.Diagnostics.CodeAnalysis
         private string scope;
         private string target;
         private string messageId;
-        
+
         public SuppressMessageAttribute(string category, string checkId)
         {
-            this.category  = category;
+            this.category = category;
             this.checkId = checkId;
         }
-        
+
         public string Category
         {
             get { return category; }
         }
-        
+
         public string CheckId
         {
             get { return checkId; }
         }
-        
+
         public string Scope
         {
             get { return scope; }
             set { scope = value; }
         }
-    
+
         public string Target
         {
             get { return target; }
             set { target = value; }
         }
-    
+
         public string MessageId
         {
             get { return messageId; }
             set { messageId = value; }
         }
-        
+
         public string Justification
         {
             get { return justification; }

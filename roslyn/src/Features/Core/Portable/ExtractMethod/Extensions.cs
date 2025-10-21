@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis.ExtractMethod;
 
 internal static class Extensions
 {
-    public static ITypeSymbol? GetLambdaOrAnonymousMethodReturnType(this SemanticModel binding, SyntaxNode node)
+    public static ITypeSymbol? GetLambdaOrAnonymousMethodReturnType(
+        this SemanticModel binding,
+        SyntaxNode node
+    )
     {
         var info = binding.GetSymbolInfo(node);
         if (info.Symbol == null)
@@ -30,16 +33,20 @@ internal static class Extensions
     /// <summary>
     /// get tokens with given annotation in current document
     /// </summary>
-    public static SyntaxToken GetTokenWithAnnotation(this SemanticDocument document, SyntaxAnnotation annotation)
-        => document.Root.GetAnnotatedNodesAndTokens(annotation).Single().AsToken();
+    public static SyntaxToken GetTokenWithAnnotation(
+        this SemanticDocument document,
+        SyntaxAnnotation annotation
+    ) => document.Root.GetAnnotatedNodesAndTokens(annotation).Single().AsToken();
 
     /// <summary>
     /// resolve the given symbol against compilation this snapshot has
     /// </summary>
-    public static T ResolveType<T>(this SemanticModel semanticModel, T symbol) where T : class, ITypeSymbol
+    public static T ResolveType<T>(this SemanticModel semanticModel, T symbol)
+        where T : class, ITypeSymbol
     {
         // Can be cleaned up when https://github.com/dotnet/roslyn/issues/38061 is resolved
-        var typeSymbol = (T?)symbol.GetSymbolKey().Resolve(semanticModel.Compilation).GetAnySymbol();
+        var typeSymbol = (T?)
+            symbol.GetSymbolKey().Resolve(semanticModel.Compilation).GetAnySymbol();
         Contract.ThrowIfNull(typeSymbol);
         return (T)typeSymbol.WithNullableAnnotation(symbol.NullableAnnotation);
     }

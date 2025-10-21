@@ -9,11 +9,29 @@ namespace System.ComponentModel.DataAnnotations.Tests
     {
 #pragma warning disable 618
         [Theory]
-        [InlineData("TestName", "TestThisKey", "TestOtherKey", new string[] { "TestThisKey" }, new string[] { "TestOtherKey" })]
+        [InlineData(
+            "TestName",
+            "TestThisKey",
+            "TestOtherKey",
+            new string[] { "TestThisKey" },
+            new string[] { "TestOtherKey" }
+        )]
         [InlineData(null, "", " \t \r \n", new string[] { "" }, new string[] { "\t\r\n" })]
         [InlineData(null, null, null, new string[0], new string[0])]
-        [InlineData("Name", "ThisKey1,  ThisKey2, ThisKey3", "OtherKey1,  OtherKey2",new string[] { "ThisKey1", "ThisKey2", "ThisKey3" }, new string[] { "OtherKey1", "OtherKey2" })]
-        public void Ctor_String_String_String(string name, string thisKey, string otherKey, string[] expectedThisKeyMembers, string[] expectedOtherKeyMembers)
+        [InlineData(
+            "Name",
+            "ThisKey1,  ThisKey2, ThisKey3",
+            "OtherKey1,  OtherKey2",
+            new string[] { "ThisKey1", "ThisKey2", "ThisKey3" },
+            new string[] { "OtherKey1", "OtherKey2" }
+        )]
+        public void Ctor_String_String_String(
+            string name,
+            string thisKey,
+            string otherKey,
+            string[] expectedThisKeyMembers,
+            string[] expectedOtherKeyMembers
+        )
         {
             var attribute = new AssociationAttribute(name, thisKey, otherKey);
             Assert.Equal(name, attribute.Name);

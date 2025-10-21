@@ -11,9 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 /// </summary>
 public sealed class TableBaseIdentityComparer : IEqualityComparer<ITableBase>
 {
-    private TableBaseIdentityComparer()
-    {
-    }
+    private TableBaseIdentityComparer() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -24,13 +22,10 @@ public sealed class TableBaseIdentityComparer : IEqualityComparer<ITableBase>
     public static readonly TableBaseIdentityComparer Instance = new();
 
     /// <inheritdoc />
-    public bool Equals(ITableBase? x, ITableBase? y)
-        => ReferenceEquals(x, y)
-            || (x is null
-                ? y is null
-                : y is not null && x.Name == y.Name && x.Schema == y.Schema);
+    public bool Equals(ITableBase? x, ITableBase? y) =>
+        ReferenceEquals(x, y)
+        || (x is null ? y is null : y is not null && x.Name == y.Name && x.Schema == y.Schema);
 
     /// <inheritdoc />
-    public int GetHashCode(ITableBase obj)
-        => HashCode.Combine(obj.Name, obj.Schema);
+    public int GetHashCode(ITableBase obj) => HashCode.Combine(obj.Name, obj.Schema);
 }

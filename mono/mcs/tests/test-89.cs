@@ -5,30 +5,31 @@
 //
 using System;
 
-struct X {
-	int value;
-	
-	X (int a)
-	{
-		value = a;
-	}
+struct X
+{
+    int value;
 
-	static X F (int a)
-	{
-		return new X (a);
-	}
-	
-	public static int Main ()
-	{
-		X [] x = { new X (40), F (10) };
+    X(int a)
+    {
+        value = a;
+    }
 
-		if (x [0].value != 40)
-			return 1;
+    static X F(int a)
+    {
+        return new X(a);
+    }
 
-		if (x [1].value != 10)
-			return 2;
+    public static int Main()
+    {
+        X[] x = { new X(40), F(10) };
 
-		Console.WriteLine ("test ok");
-		return 0;
-	}
+        if (x[0].value != 40)
+            return 1;
+
+        if (x[1].value != 10)
+            return 2;
+
+        Console.WriteLine("test ok");
+        return 0;
+    }
 }

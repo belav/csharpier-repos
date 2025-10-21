@@ -21,10 +21,20 @@ namespace System.Collections.Tests
 
             // There's no escaping; keys and values are emitted as-is
             yield return new object?[] { "[key, value", "]]", "[[key, value, ]]]" };
-            yield return new object?[] { new DictionaryEntry("key", "key"), new DictionaryEntry("value", "value"), "[[key, key], [value, value]]" };
+            yield return new object?[]
+            {
+                new DictionaryEntry("key", "key"),
+                new DictionaryEntry("value", "value"),
+                "[[key, key], [value, value]]",
+            };
 
             // There's no truncation; keys and values are emitted as-is
-            yield return new object?[] { new String('K', 512), new String('V', 1024), $"[{new String('K', 512)}, {new String('V', 1024)}]" };
+            yield return new object?[]
+            {
+                new String('K', 512),
+                new String('V', 1024),
+                $"[{new String('K', 512)}, {new String('V', 1024)}]",
+            };
         }
 
         [Theory]

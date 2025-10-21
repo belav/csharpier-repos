@@ -29,108 +29,106 @@ using System.Security.Cryptography;
 
 namespace Mono.Btls.Interface
 {
-	public class BtlsX509 : BtlsObject
-	{
-		new internal MonoBtlsX509 Instance {
-			get { return (MonoBtlsX509)base.Instance; }
-		}
+    public class BtlsX509 : BtlsObject
+    {
+        internal new MonoBtlsX509 Instance
+        {
+            get { return (MonoBtlsX509)base.Instance; }
+        }
 
-		internal BtlsX509 (MonoBtlsX509 x509)
-			: base (x509)
-		{
-		}
+        internal BtlsX509(MonoBtlsX509 x509)
+            : base(x509) { }
 
-		public BtlsX509Name GetSubjectName ()
-		{
-			return new BtlsX509Name (Instance.GetSubjectName ());
-		}
+        public BtlsX509Name GetSubjectName()
+        {
+            return new BtlsX509Name(Instance.GetSubjectName());
+        }
 
-		public BtlsX509Name GetIssuerName ()
-		{
-			return new BtlsX509Name (Instance.GetIssuerName ());
-		}
+        public BtlsX509Name GetIssuerName()
+        {
+            return new BtlsX509Name(Instance.GetIssuerName());
+        }
 
-		public string GetSubjectNameString ()
-		{
-			return Instance.GetSubjectNameString ();
-		}
+        public string GetSubjectNameString()
+        {
+            return Instance.GetSubjectNameString();
+        }
 
-		public string GetIssuerNameString ()
-		{
-			return Instance.GetIssuerNameString ();
-		}
+        public string GetIssuerNameString()
+        {
+            return Instance.GetIssuerNameString();
+        }
 
-		public byte[] GetRawData (BtlsX509Format format)
-		{
-			return Instance.GetRawData ((MonoBtlsX509Format)format);
-		}
+        public byte[] GetRawData(BtlsX509Format format)
+        {
+            return Instance.GetRawData((MonoBtlsX509Format)format);
+        }
 
-		public byte[] GetCertHash ()
-		{
-			return Instance.GetCertHash ();
-		}
+        public byte[] GetCertHash()
+        {
+            return Instance.GetCertHash();
+        }
 
-		public DateTime GetNotBefore ()
-		{
-			return Instance.GetNotBefore ();
-		}
+        public DateTime GetNotBefore()
+        {
+            return Instance.GetNotBefore();
+        }
 
-		public DateTime GetNotAfter ()
-		{
-			return Instance.GetNotAfter ();
-		}
+        public DateTime GetNotAfter()
+        {
+            return Instance.GetNotAfter();
+        }
 
-		public byte[] GetPublicKeyData ()
-		{
-			return Instance.GetPublicKeyData ();
-		}
+        public byte[] GetPublicKeyData()
+        {
+            return Instance.GetPublicKeyData();
+        }
 
-		public byte[] GetSerialNumber (bool mono_style)
-		{
-			var serial = Instance.GetSerialNumber (mono_style);
-			if (mono_style)
-				Array.Reverse (serial);
-			return serial;
-		}
+        public byte[] GetSerialNumber(bool mono_style)
+        {
+            var serial = Instance.GetSerialNumber(mono_style);
+            if (mono_style)
+                Array.Reverse(serial);
+            return serial;
+        }
 
-		public int GetVersion ()
-		{
-			return Instance.GetVersion ();
-		}
+        public int GetVersion()
+        {
+            return Instance.GetVersion();
+        }
 
-		public Oid GetSignatureAlgorithm ()
-		{
-			var algorithm = Instance.GetSignatureAlgorithm ();
-			return Oid.FromOidValue (algorithm, OidGroup.SignatureAlgorithm);
-		}
+        public Oid GetSignatureAlgorithm()
+        {
+            var algorithm = Instance.GetSignatureAlgorithm();
+            return Oid.FromOidValue(algorithm, OidGroup.SignatureAlgorithm);
+        }
 
-		public AsnEncodedData GetPublicKeyAsn1 ()
-		{
-			return Instance.GetPublicKeyAsn1 ();
-		}
+        public AsnEncodedData GetPublicKeyAsn1()
+        {
+            return Instance.GetPublicKeyAsn1();
+        }
 
-		public AsnEncodedData GetPublicKeyParameters ()
-		{
-			return Instance.GetPublicKeyParameters (); 
-		}
+        public AsnEncodedData GetPublicKeyParameters()
+        {
+            return Instance.GetPublicKeyParameters();
+        }
 
-		public long GetSubjectNameHash ()
-		{
-			using (var name = GetSubjectName ())
-				return name.GetHash ();
-		}
+        public long GetSubjectNameHash()
+        {
+            using (var name = GetSubjectName())
+                return name.GetHash();
+        }
 
-		public void Print (Stream stream)
-		{
-			using (var bio = MonoBtlsBio.CreateMonoStream (stream))
-				Instance.Print (bio);
-		}
+        public void Print(Stream stream)
+        {
+            using (var bio = MonoBtlsBio.CreateMonoStream(stream))
+                Instance.Print(bio);
+        }
 
-		public void ExportAsPEM (Stream stream, bool includeHumanReadableForm)
-		{
-			using (var bio = MonoBtlsBio.CreateMonoStream (stream))
-				Instance.ExportAsPEM (bio, includeHumanReadableForm);
-		}
-	}
+        public void ExportAsPEM(Stream stream, bool includeHumanReadableForm)
+        {
+            using (var bio = MonoBtlsBio.CreateMonoStream(stream))
+                Instance.ExportAsPEM(bio, includeHumanReadableForm);
+        }
+    }
 }
-

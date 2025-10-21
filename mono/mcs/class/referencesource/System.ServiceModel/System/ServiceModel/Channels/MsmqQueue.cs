@@ -16,11 +16,11 @@ namespace System.ServiceModel.Channels
 
     enum MsmqTransactionMode
     {
-        None,               // do not use a transaction
-        Single,             // create a single message transaction
-        CurrentOrSingle,    // use Transaction.Current if set, Single otherwise
-        CurrentOrNone,      // use Transaction.Current if set, None otherwise
-        CurrentOrThrow,     // use Transaction.Current if set, throw otherwise
+        None, // do not use a transaction
+        Single, // create a single message transaction
+        CurrentOrSingle, // use Transaction.Current if set, Single otherwise
+        CurrentOrNone, // use Transaction.Current if set, None otherwise
+        CurrentOrThrow, // use Transaction.Current if set, throw otherwise
     }
 
     class MsmqQueue : IDisposable
@@ -69,7 +69,7 @@ namespace System.ServiceModel.Channels
                 CloseQueue();
             }
         }
-        
+
         internal void EnsureOpen()
         {
             GetHandle();
@@ -121,12 +121,21 @@ namespace System.ServiceModel.Channels
         internal virtual MsmqQueueHandle OpenQueue()
         {
             MsmqQueueHandle handle;
-            int error = UnsafeNativeMethods.MQOpenQueue(this.formatName, this.accessMode,
-                                                        this.shareMode, out handle);
+            int error = UnsafeNativeMethods.MQOpenQueue(
+                this.formatName,
+                this.accessMode,
+                this.shareMode,
+                out handle
+            );
             if (error != 0)
             {
                 Utility.CloseInvalidOutSafeHandle(handle);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqOpenError, MsmqError.GetErrorString(error)), error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(SR.MsmqOpenError, MsmqError.GetErrorString(error)),
+                        error
+                    )
+                );
             }
 
             MsmqDiagnostics.QueueOpened(this.formatName);
@@ -169,18 +178,28 @@ namespace System.ServiceModel.Channels
                 IntPtr nativePropertiesPointer = properties.Pin();
                 try
                 {
-                    int error = UnsafeNativeMethods.MQGetPrivateComputerInformation(null,
-                                                                                    nativePropertiesPointer);
+                    int error = UnsafeNativeMethods.MQGetPrivateComputerInformation(
+                        null,
+                        nativePropertiesPointer
+                    );
                     if (error != 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(
-                                                                                                        SR.MsmqGetPrivateComputerInformationError, MsmqError.GetErrorString(error)), error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MsmqException(
+                                SR.GetString(
+                                    SR.MsmqGetPrivateComputerInformationError,
+                                    MsmqError.GetErrorString(error)
+                                ),
+                                error
+                            )
+                        );
                     }
                     int packedVersion = properties.Version.Value;
                     version = new Version(
                         packedVersion >> 24,
                         (packedVersion & 0x00FF0000) >> 16,
-                        packedVersion & 0xFFFF);
+                        packedVersion & 0xFFFF
+                    );
                     activeDirectoryEnabled = properties.ActiveDirectory.Value;
                 }
                 finally
@@ -207,11 +226,15 @@ namespace System.ServiceModel.Channels
             return SupportsAccessMode(formatName, UnsafeNativeMethods.MQ_MOVE_ACCESS, out ex);
         }
 
-        internal static bool IsQueueOpenable(string formatName, int accessMode, int shareMode, out int error)
+        internal static bool IsQueueOpenable(
+            string formatName,
+            int accessMode,
+            int shareMode,
+            out int error
+        )
         {
             MsmqQueueHandle handle;
-            error = UnsafeNativeMethods.MQOpenQueue(formatName, accessMode,
-                                                        shareMode, out handle);
+            error = UnsafeNativeMethods.MQOpenQueue(formatName, accessMode, shareMode, out handle);
             if (error != 0)
             {
                 Utility.CloseInvalidOutSafeHandle(handle);
@@ -222,7 +245,11 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        static bool SupportsAccessMode(string formatName, int accessType, out MsmqException msmqException)
+        static bool SupportsAccessMode(
+            string formatName,
+            int accessType,
+            out MsmqException msmqException
+        )
         {
             msmqException = null;
 
@@ -252,10 +279,16 @@ namespace System.ServiceModel.Channels
                 IntPtr nativePropertiesPointer = properties.Pin();
                 try
                 {
-                    if (UnsafeNativeMethods.MQGetQueueProperties(formatName,
-                                                                 nativePropertiesPointer) == 0)
+                    if (
+                        UnsafeNativeMethods.MQGetQueueProperties(
+                            formatName,
+                            nativePropertiesPointer
+                        ) == 0
+                    )
                     {
-                        isTransactional = properties.Transaction.Value != UnsafeNativeMethods.MQ_TRANSACTIONAL_NONE;
+                        isTransactional =
+                            properties.Transaction.Value
+                            != UnsafeNativeMethods.MQ_TRANSACTIONAL_NONE;
                         return true;
                     }
                     else
@@ -327,19 +360,33 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)), error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)),
+                        error
+                    )
+                );
             }
         }
 
-        int TryMoveMessageDtcTransacted(long lookupId, MsmqQueueHandle sourceQueueHandle, MsmqQueueHandle destinationQueueHandle, MsmqTransactionMode transactionMode)
+        int TryMoveMessageDtcTransacted(
+            long lookupId,
+            MsmqQueueHandle sourceQueueHandle,
+            MsmqQueueHandle destinationQueueHandle,
+            MsmqTransactionMode transactionMode
+        )
         {
             IDtcTransaction dtcTransaction = GetNativeTransaction(transactionMode);
             if (dtcTransaction != null)
             {
                 try
                 {
-                    return UnsafeNativeMethods.MQMoveMessage(sourceQueueHandle, destinationQueueHandle,
-                                                             lookupId, dtcTransaction);
+                    return UnsafeNativeMethods.MQMoveMessage(
+                        sourceQueueHandle,
+                        destinationQueueHandle,
+                        lookupId,
+                        dtcTransaction
+                    );
                 }
                 finally
                 {
@@ -348,12 +395,20 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                return UnsafeNativeMethods.MQMoveMessage(sourceQueueHandle, destinationQueueHandle,
-                                                         lookupId, (IntPtr)GetTransactionConstant(transactionMode));
+                return UnsafeNativeMethods.MQMoveMessage(
+                    sourceQueueHandle,
+                    destinationQueueHandle,
+                    lookupId,
+                    (IntPtr)GetTransactionConstant(transactionMode)
+                );
             }
         }
 
-        public MoveReceiveResult TryMoveMessage(long lookupId, MsmqQueue destinationQueue, MsmqTransactionMode transactionMode)
+        public MoveReceiveResult TryMoveMessage(
+            long lookupId,
+            MsmqQueue destinationQueue,
+            MsmqTransactionMode transactionMode
+        )
         {
             MsmqQueueHandle sourceQueueHandle = GetHandle();
             MsmqQueueHandle destinationQueueHandle = destinationQueue.GetHandle();
@@ -362,12 +417,21 @@ namespace System.ServiceModel.Channels
             {
                 if (RequiresDtcTransaction(transactionMode))
                 {
-                    error = TryMoveMessageDtcTransacted(lookupId, sourceQueueHandle, destinationQueueHandle, transactionMode);
+                    error = TryMoveMessageDtcTransacted(
+                        lookupId,
+                        sourceQueueHandle,
+                        destinationQueueHandle,
+                        transactionMode
+                    );
                 }
                 else
                 {
-                    error = UnsafeNativeMethods.MQMoveMessage(sourceQueueHandle, destinationQueueHandle, 
-                                                              lookupId, (IntPtr)GetTransactionConstant(transactionMode));
+                    error = UnsafeNativeMethods.MQMoveMessage(
+                        sourceQueueHandle,
+                        destinationQueueHandle,
+                        lookupId,
+                        (IntPtr)GetTransactionConstant(transactionMode)
+                    );
                 }
             }
             catch (ObjectDisposedException ex)
@@ -381,33 +445,56 @@ namespace System.ServiceModel.Channels
                     return MoveReceiveResult.MessageNotFound;
                 else if (error == UnsafeNativeMethods.MQ_ERROR_MESSAGE_LOCKED_UNDER_TRANSACTION)
                     return MoveReceiveResult.MessageLockedUnderTransaction;
-
                 else if (IsErrorDueToStaleHandle(error))
                 {
                     HandleIsStale(sourceQueueHandle);
                     destinationQueue.HandleIsStale(destinationQueueHandle);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqSendError, 
-                                                                                                         MsmqError.GetErrorString(error)), error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)),
+                        error
+                    )
+                );
             }
 
             return MoveReceiveResult.Succeeded;
         }
 
-        public virtual ReceiveResult TryReceive(NativeMsmqMessage message, TimeSpan timeout, MsmqTransactionMode transactionMode)
+        public virtual ReceiveResult TryReceive(
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode
+        )
         {
-            return TryReceiveInternal(message, timeout, transactionMode, UnsafeNativeMethods.MQ_ACTION_RECEIVE);
+            return TryReceiveInternal(
+                message,
+                timeout,
+                transactionMode,
+                UnsafeNativeMethods.MQ_ACTION_RECEIVE
+            );
         }
-        
-        ReceiveResult TryReceiveInternal(NativeMsmqMessage message, TimeSpan timeout, MsmqTransactionMode transactionMode, int action)
+
+        ReceiveResult TryReceiveInternal(
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode,
+            int action
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             MsmqQueueHandle handle = GetHandle();
 
             while (true)
             {
-                int error = ReceiveCore(handle, message, timeoutHelper.RemainingTime(), transactionMode, action);
+                int error = ReceiveCore(
+                    handle,
+                    message,
+                    timeoutHelper.RemainingTime(),
+                    transactionMode,
+                    action
+                );
 
                 if (0 == error)
                     return ReceiveResult.MessageReceived;
@@ -435,16 +522,35 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)), error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)),
+                        error
+                    )
+                );
             }
         }
 
-        public MoveReceiveResult TryReceiveByLookupId(long lookupId, NativeMsmqMessage message, MsmqTransactionMode transactionMode)
+        public MoveReceiveResult TryReceiveByLookupId(
+            long lookupId,
+            NativeMsmqMessage message,
+            MsmqTransactionMode transactionMode
+        )
         {
-            return this.TryReceiveByLookupId(lookupId, message, transactionMode, UnsafeNativeMethods.MQ_LOOKUP_RECEIVE_CURRENT);
+            return this.TryReceiveByLookupId(
+                lookupId,
+                message,
+                transactionMode,
+                UnsafeNativeMethods.MQ_LOOKUP_RECEIVE_CURRENT
+            );
         }
 
-        public MoveReceiveResult TryReceiveByLookupId(long lookupId, NativeMsmqMessage message, MsmqTransactionMode transactionMode, int action)
+        public MoveReceiveResult TryReceiveByLookupId(
+            long lookupId,
+            NativeMsmqMessage message,
+            MsmqTransactionMode transactionMode,
+            int action
+        )
         {
             MsmqQueueHandle handle = GetHandle();
             int error = 0;
@@ -453,7 +559,13 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    error = ReceiveByLookupIdCore(handle, lookupId, message, transactionMode, action);
+                    error = ReceiveByLookupIdCore(
+                        handle,
+                        lookupId,
+                        message,
+                        transactionMode,
+                        action
+                    );
                 }
                 catch (ObjectDisposedException ex)
                 {
@@ -466,7 +578,7 @@ namespace System.ServiceModel.Channels
                 {
                     return MoveReceiveResult.Succeeded;
                 }
-                
+
                 if (IsReceiveErrorDueToInsufficientBuffer(error))
                 {
                     message.GrowBuffers();
@@ -485,12 +597,23 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)), error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)),
+                        error
+                    )
+                );
             }
         }
-    
+
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        protected unsafe int ReceiveByLookupIdCoreDtcTransacted(MsmqQueueHandle handle, long lookupId, NativeMsmqMessage message, MsmqTransactionMode transactionMode, int action)
+        protected unsafe int ReceiveByLookupIdCoreDtcTransacted(
+            MsmqQueueHandle handle,
+            long lookupId,
+            NativeMsmqMessage message,
+            MsmqTransactionMode transactionMode,
+            int action
+        )
         {
             IDtcTransaction dtcTransaction = GetNativeTransaction(transactionMode);
 
@@ -501,7 +624,15 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        return UnsafeNativeMethods.MQReceiveMessageByLookupId(handle, lookupId, action, nativePropertiesPointer, null, IntPtr.Zero, dtcTransaction);
+                        return UnsafeNativeMethods.MQReceiveMessageByLookupId(
+                            handle,
+                            lookupId,
+                            action,
+                            nativePropertiesPointer,
+                            null,
+                            IntPtr.Zero,
+                            dtcTransaction
+                        );
                     }
                     finally
                     {
@@ -510,29 +641,56 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    return UnsafeNativeMethods.MQReceiveMessageByLookupId(handle, lookupId, action, nativePropertiesPointer, null, IntPtr.Zero, (IntPtr)GetTransactionConstant(transactionMode));
+                    return UnsafeNativeMethods.MQReceiveMessageByLookupId(
+                        handle,
+                        lookupId,
+                        action,
+                        nativePropertiesPointer,
+                        null,
+                        IntPtr.Zero,
+                        (IntPtr)GetTransactionConstant(transactionMode)
+                    );
                 }
             }
             finally
             {
                 message.Unpin();
             }
-
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe int ReceiveByLookupIdCore(MsmqQueueHandle handle, long lookupId, NativeMsmqMessage message, MsmqTransactionMode transactionMode, int action)
+        unsafe int ReceiveByLookupIdCore(
+            MsmqQueueHandle handle,
+            long lookupId,
+            NativeMsmqMessage message,
+            MsmqTransactionMode transactionMode,
+            int action
+        )
         {
             if (RequiresDtcTransaction(transactionMode))
             {
-                return ReceiveByLookupIdCoreDtcTransacted(handle, lookupId, message, transactionMode, action);
+                return ReceiveByLookupIdCoreDtcTransacted(
+                    handle,
+                    lookupId,
+                    message,
+                    transactionMode,
+                    action
+                );
             }
             else
             {
                 IntPtr nativePropertiesPointer = message.Pin();
                 try
                 {
-                    return UnsafeNativeMethods.MQReceiveMessageByLookupId(handle, lookupId, action, nativePropertiesPointer, null, IntPtr.Zero, (IntPtr)GetTransactionConstant(transactionMode));
+                    return UnsafeNativeMethods.MQReceiveMessageByLookupId(
+                        handle,
+                        lookupId,
+                        action,
+                        nativePropertiesPointer,
+                        null,
+                        IntPtr.Zero,
+                        (IntPtr)GetTransactionConstant(transactionMode)
+                    );
                 }
                 finally
                 {
@@ -542,7 +700,13 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe int ReceiveCoreDtcTransacted(MsmqQueueHandle handle, NativeMsmqMessage message, TimeSpan timeout, MsmqTransactionMode transactionMode, int action)
+        unsafe int ReceiveCoreDtcTransacted(
+            MsmqQueueHandle handle,
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode,
+            int action
+        )
         {
             IDtcTransaction dtcTransaction = GetNativeTransaction(transactionMode);
             int timeoutInMilliseconds = TimeoutHelper.ToMilliseconds(timeout);
@@ -554,8 +718,16 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        return UnsafeNativeMethods.MQReceiveMessage(handle.DangerousGetHandle(), timeoutInMilliseconds,
-                                                                    action, nativePropertiesPointer, null, IntPtr.Zero, IntPtr.Zero, dtcTransaction);
+                        return UnsafeNativeMethods.MQReceiveMessage(
+                            handle.DangerousGetHandle(),
+                            timeoutInMilliseconds,
+                            action,
+                            nativePropertiesPointer,
+                            null,
+                            IntPtr.Zero,
+                            IntPtr.Zero,
+                            dtcTransaction
+                        );
                     }
                     finally
                     {
@@ -564,8 +736,16 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    return UnsafeNativeMethods.MQReceiveMessage(handle.DangerousGetHandle(), timeoutInMilliseconds,
-                                                                action, nativePropertiesPointer, null, IntPtr.Zero, IntPtr.Zero, (IntPtr)GetTransactionConstant(transactionMode));
+                    return UnsafeNativeMethods.MQReceiveMessage(
+                        handle.DangerousGetHandle(),
+                        timeoutInMilliseconds,
+                        action,
+                        nativePropertiesPointer,
+                        null,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        (IntPtr)GetTransactionConstant(transactionMode)
+                    );
                 }
             }
             finally
@@ -575,7 +755,13 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe int ReceiveCore(MsmqQueueHandle handle, NativeMsmqMessage message, TimeSpan timeout, MsmqTransactionMode transactionMode, int action)
+        unsafe int ReceiveCore(
+            MsmqQueueHandle handle,
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode,
+            int action
+        )
         {
             if (RequiresDtcTransaction(transactionMode))
             {
@@ -587,8 +773,16 @@ namespace System.ServiceModel.Channels
                 IntPtr nativePropertiesPointer = message.Pin();
                 try
                 {
-                    return UnsafeNativeMethods.MQReceiveMessage(handle.DangerousGetHandle(), timeoutInMilliseconds,
-                                                                action, nativePropertiesPointer, null, IntPtr.Zero, IntPtr.Zero, (IntPtr)GetTransactionConstant(transactionMode));
+                    return UnsafeNativeMethods.MQReceiveMessage(
+                        handle.DangerousGetHandle(),
+                        timeoutInMilliseconds,
+                        action,
+                        nativePropertiesPointer,
+                        null,
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        (IntPtr)GetTransactionConstant(transactionMode)
+                    );
                 }
                 finally
                 {
@@ -606,15 +800,21 @@ namespace System.ServiceModel.Channels
             }
             if (transactionMode == MsmqTransactionMode.CurrentOrThrow)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionRequired))
+                );
             }
             return null;
         }
 
         public ReceiveResult TryPeek(NativeMsmqMessage message, TimeSpan timeout)
         {
-            return TryReceiveInternal(message, timeout, MsmqTransactionMode.None, 
-                              UnsafeNativeMethods.MQ_ACTION_PEEK_CURRENT);
+            return TryReceiveInternal(
+                message,
+                timeout,
+                MsmqTransactionMode.None,
+                UnsafeNativeMethods.MQ_ACTION_PEEK_CURRENT
+            );
         }
 
         bool RequiresDtcTransaction(MsmqTransactionMode transactionMode)
@@ -629,7 +829,9 @@ namespace System.ServiceModel.Channels
                 case MsmqTransactionMode.CurrentOrThrow:
                     return true;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("transactionMode"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("transactionMode")
+                    );
             }
         }
 
@@ -644,7 +846,9 @@ namespace System.ServiceModel.Channels
                 case MsmqTransactionMode.CurrentOrSingle:
                     return UnsafeNativeMethods.MQ_SINGLE_MESSAGE;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("transactionMode"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("transactionMode")
+                    );
             }
         }
 
@@ -660,8 +864,11 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        return UnsafeNativeMethods.MQSendMessage(handle, nativePropertiesPointer,
-                                                                 dtcTransaction);
+                        return UnsafeNativeMethods.MQSendMessage(
+                            handle,
+                            nativePropertiesPointer,
+                            dtcTransaction
+                        );
                     }
                     finally
                     {
@@ -670,8 +877,11 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    return UnsafeNativeMethods.MQSendMessage(handle, nativePropertiesPointer,
-                                                             (IntPtr)GetTransactionConstant(transactionMode));
+                    return UnsafeNativeMethods.MQSendMessage(
+                        handle,
+                        nativePropertiesPointer,
+                        (IntPtr)GetTransactionConstant(transactionMode)
+                    );
                 }
             }
             finally
@@ -693,8 +903,11 @@ namespace System.ServiceModel.Channels
                 IntPtr nativePropertiesPointer = message.Pin();
                 try
                 {
-                    error = UnsafeNativeMethods.MQSendMessage(handle, nativePropertiesPointer,
-                                                              (IntPtr)GetTransactionConstant(transactionMode));
+                    error = UnsafeNativeMethods.MQSendMessage(
+                        handle,
+                        nativePropertiesPointer,
+                        (IntPtr)GetTransactionConstant(transactionMode)
+                    );
                 }
                 finally
                 {
@@ -708,27 +921,54 @@ namespace System.ServiceModel.Channels
                 {
                     HandleIsStale(handle);
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)), error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(SR.MsmqSendError, MsmqError.GetErrorString(error)),
+                        error
+                    )
+                );
             }
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe int ReceiveCoreAsync(MsmqQueueHandle handle, IntPtr nativePropertiesPointer, TimeSpan timeout,
-                                    int action, NativeOverlapped* nativeOverlapped,
-                                    UnsafeNativeMethods.MQReceiveCallback receiveCallback)
+        unsafe int ReceiveCoreAsync(
+            MsmqQueueHandle handle,
+            IntPtr nativePropertiesPointer,
+            TimeSpan timeout,
+            int action,
+            NativeOverlapped* nativeOverlapped,
+            UnsafeNativeMethods.MQReceiveCallback receiveCallback
+        )
         {
             int timeoutInMilliseconds = TimeoutHelper.ToMilliseconds(timeout);
 
-            return UnsafeNativeMethods.MQReceiveMessage(handle, timeoutInMilliseconds, action,
-                                                        nativePropertiesPointer, nativeOverlapped, receiveCallback,
-                                                        IntPtr.Zero, (IntPtr)UnsafeNativeMethods.MQ_NO_TRANSACTION);
+            return UnsafeNativeMethods.MQReceiveMessage(
+                handle,
+                timeoutInMilliseconds,
+                action,
+                nativePropertiesPointer,
+                nativeOverlapped,
+                receiveCallback,
+                IntPtr.Zero,
+                (IntPtr)UnsafeNativeMethods.MQ_NO_TRANSACTION
+            );
         }
 
-        public IAsyncResult BeginTryReceive(NativeMsmqMessage message, TimeSpan timeout, 
-                                            AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceive(
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new TryReceiveAsyncResult(this, message, timeout, 
-                                             UnsafeNativeMethods.MQ_ACTION_RECEIVE, callback, state);
+            return new TryReceiveAsyncResult(
+                this,
+                message,
+                timeout,
+                UnsafeNativeMethods.MQ_ACTION_RECEIVE,
+                callback,
+                state
+            );
         }
 
         public ReceiveResult EndTryReceive(IAsyncResult result)
@@ -736,11 +976,21 @@ namespace System.ServiceModel.Channels
             return TryReceiveAsyncResult.End(result);
         }
 
-        public IAsyncResult BeginPeek(NativeMsmqMessage message, TimeSpan timeout, 
-                                      AsyncCallback callback, object state)
+        public IAsyncResult BeginPeek(
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new TryReceiveAsyncResult(this, message, timeout, 
-                                             UnsafeNativeMethods.MQ_ACTION_PEEK_CURRENT, callback, state);
+            return new TryReceiveAsyncResult(
+                this,
+                message,
+                timeout,
+                UnsafeNativeMethods.MQ_ACTION_PEEK_CURRENT,
+                callback,
+                state
+            );
         }
 
         public ReceiveResult EndPeek(IAsyncResult result)
@@ -757,12 +1007,20 @@ namespace System.ServiceModel.Channels
             unsafe NativeOverlapped* nativeOverlapped = null;
             MsmqQueueHandle handle;
             ReceiveResult receiveResult;
-            unsafe static IOCompletionCallback onPortedCompletion = Fx.ThunkCallback(new IOCompletionCallback(OnPortedCompletion));
-            unsafe static UnsafeNativeMethods.MQReceiveCallback onNonPortedCompletion;
+            static unsafe IOCompletionCallback onPortedCompletion = Fx.ThunkCallback(
+                new IOCompletionCallback(OnPortedCompletion)
+            );
+            static unsafe UnsafeNativeMethods.MQReceiveCallback onNonPortedCompletion;
 
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            public TryReceiveAsyncResult(MsmqQueue msmqQueue, NativeMsmqMessage message, TimeSpan timeout,
-                                         int action, AsyncCallback callback, object state)
+            public TryReceiveAsyncResult(
+                MsmqQueue msmqQueue,
+                NativeMsmqMessage message,
+                TimeSpan timeout,
+                int action,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.msmqQueue = msmqQueue;
@@ -775,9 +1033,11 @@ namespace System.ServiceModel.Channels
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
             unsafe ~TryReceiveAsyncResult()
             {
-                if (null != this.nativeOverlapped
-                    && ! Environment.HasShutdownStarted 
-                    && ! AppDomain.CurrentDomain.IsFinalizingForUnload())
+                if (
+                    null != this.nativeOverlapped
+                    && !Environment.HasShutdownStarted
+                    && !AppDomain.CurrentDomain.IsFinalizingForUnload()
+                )
                 {
                     Overlapped.Free(this.nativeOverlapped);
                 }
@@ -802,24 +1062,41 @@ namespace System.ServiceModel.Channels
                 }
 
                 IntPtr nativePropertiesPointer = this.message.Pin();
-                nativeOverlapped = new Overlapped(0, 0, IntPtr.Zero, this).UnsafePack(onPortedCompletion, this.message.GetBuffersForAsync());
+                nativeOverlapped = new Overlapped(0, 0, IntPtr.Zero, this).UnsafePack(
+                    onPortedCompletion,
+                    this.message.GetBuffersForAsync()
+                );
 
                 int error;
                 try
                 {
                     if (useCompletionPort)
                     {
-                        error = msmqQueue.ReceiveCoreAsync(this.handle, nativePropertiesPointer, this.timeoutHelper.RemainingTime(), 
-                                                           this.action, nativeOverlapped, null);
+                        error = msmqQueue.ReceiveCoreAsync(
+                            this.handle,
+                            nativePropertiesPointer,
+                            this.timeoutHelper.RemainingTime(),
+                            this.action,
+                            nativeOverlapped,
+                            null
+                        );
                     }
                     else
                     {
                         if (onNonPortedCompletion == null)
                         {
-                            onNonPortedCompletion = new UnsafeNativeMethods.MQReceiveCallback(OnNonPortedCompletion);
+                            onNonPortedCompletion = new UnsafeNativeMethods.MQReceiveCallback(
+                                OnNonPortedCompletion
+                            );
                         }
-                        error = msmqQueue.ReceiveCoreAsync(this.handle, nativePropertiesPointer, this.timeoutHelper.RemainingTime(), 
-                                                           this.action, nativeOverlapped, onNonPortedCompletion);
+                        error = msmqQueue.ReceiveCoreAsync(
+                            this.handle,
+                            nativePropertiesPointer,
+                            this.timeoutHelper.RemainingTime(),
+                            this.action,
+                            nativeOverlapped,
+                            onNonPortedCompletion
+                        );
                     }
                 }
                 catch (ObjectDisposedException ex)
@@ -842,14 +1119,25 @@ namespace System.ServiceModel.Channels
             }
 
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            unsafe static void OnNonPortedCompletion(int error, IntPtr handle, int timeout,
-                                                     int action, IntPtr props, NativeOverlapped* nativeOverlapped, IntPtr cursor)
+            static unsafe void OnNonPortedCompletion(
+                int error,
+                IntPtr handle,
+                int timeout,
+                int action,
+                IntPtr props,
+                NativeOverlapped* nativeOverlapped,
+                IntPtr cursor
+            )
             {
                 ThreadPool.UnsafeQueueNativeOverlapped(nativeOverlapped);
             }
 
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            unsafe static void OnPortedCompletion(uint error, uint numBytes, NativeOverlapped* nativeOverlapped)
+            static unsafe void OnPortedCompletion(
+                uint error,
+                uint numBytes,
+                NativeOverlapped* nativeOverlapped
+            )
             {
                 Overlapped overlapped = Overlapped.Unpack(nativeOverlapped);
                 TryReceiveAsyncResult result = (TryReceiveAsyncResult)overlapped.AsyncResult;
@@ -896,7 +1184,15 @@ namespace System.ServiceModel.Channels
                                 this.msmqQueue.HandleIsStale(this.handle);
                             }
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)), error));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MsmqException(
+                                    SR.GetString(
+                                        SR.MsmqReceiveError,
+                                        MsmqError.GetErrorString(error)
+                                    ),
+                                    error
+                                )
+                            );
                         }
                     }
                 }
@@ -922,7 +1218,8 @@ namespace System.ServiceModel.Channels
         {
             ByteProperty transaction;
 
-            public QueueTransactionProperties() : base(1)
+            public QueueTransactionProperties()
+                : base(1)
             {
                 this.transaction = new ByteProperty(this, UnsafeNativeMethods.PROPID_Q_TRANSACTION);
             }
@@ -942,7 +1239,10 @@ namespace System.ServiceModel.Channels
                 : base(2)
             {
                 this.version = new IntProperty(this, UnsafeNativeMethods.PROPID_PC_VERSION);
-                this.activeDirectory = new BooleanProperty(this, UnsafeNativeMethods.PROPID_PC_DS_ENABLED);
+                this.activeDirectory = new BooleanProperty(
+                    this,
+                    UnsafeNativeMethods.PROPID_PC_DS_ENABLED
+                );
             }
 
             public IntProperty Version
@@ -961,7 +1261,7 @@ namespace System.ServiceModel.Channels
             Unknown,
             Succeeded,
             MessageNotFound,
-            MessageLockedUnderTransaction
+            MessageLockedUnderTransaction,
         }
 
         internal enum ReceiveResult
@@ -969,7 +1269,7 @@ namespace System.ServiceModel.Channels
             Unknown,
             MessageReceived,
             Timeout,
-            OperationCancelled
+            OperationCancelled,
         }
     }
 
@@ -997,11 +1297,18 @@ namespace System.ServiceModel.Channels
             if (0 != error)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new MsmqException(SR.GetString(SR.MsmqPathLookupError, queuePath, MsmqError.GetErrorString(error)), error));
+                    new MsmqException(
+                        SR.GetString(
+                            SR.MsmqPathLookupError,
+                            queuePath,
+                            MsmqError.GetErrorString(error)
+                        ),
+                        error
+                    )
+                );
             }
-            
+
             return buffer.ToString();
         }
     }
 }
-

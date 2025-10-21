@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Text;
 
 namespace System.Workflow.ComponentModel
 {
@@ -11,36 +11,69 @@ namespace System.Workflow.ComponentModel
 
     internal abstract class ActivityExecutor
     {
-        public abstract ActivityExecutionStatus Execute(Activity activity, ActivityExecutionContext executionContext);
-        public abstract ActivityExecutionStatus Cancel(Activity activity, ActivityExecutionContext executionContext);
-        public abstract ActivityExecutionStatus HandleFault(Activity activity, ActivityExecutionContext executionContext, Exception exception);
-        public abstract ActivityExecutionStatus Compensate(Activity activity, ActivityExecutionContext executionContext);
+        public abstract ActivityExecutionStatus Execute(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        );
+        public abstract ActivityExecutionStatus Cancel(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        );
+        public abstract ActivityExecutionStatus HandleFault(
+            Activity activity,
+            ActivityExecutionContext executionContext,
+            Exception exception
+        );
+        public abstract ActivityExecutionStatus Compensate(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        );
     }
 
-    internal class ActivityExecutor<T> : ActivityExecutor where T : Activity
+    internal class ActivityExecutor<T> : ActivityExecutor
+        where T : Activity
     {
         #region System.Workflow.ComponentModel.ActivityExecutor Methods
 
-        public sealed override ActivityExecutionStatus Execute(Activity activity, ActivityExecutionContext executionContext)
+        public sealed override ActivityExecutionStatus Execute(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             return this.Execute((T)activity, executionContext);
         }
-        public sealed override ActivityExecutionStatus Cancel(Activity activity, ActivityExecutionContext executionContext)
+
+        public sealed override ActivityExecutionStatus Cancel(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             return this.Cancel((T)activity, executionContext);
         }
-        public sealed override ActivityExecutionStatus HandleFault(Activity activity, ActivityExecutionContext executionContext, Exception exception)
+
+        public sealed override ActivityExecutionStatus HandleFault(
+            Activity activity,
+            ActivityExecutionContext executionContext,
+            Exception exception
+        )
         {
             return this.HandleFault((T)activity, executionContext, exception);
         }
-        public sealed override ActivityExecutionStatus Compensate(Activity activity, ActivityExecutionContext executionContext)
+
+        public sealed override ActivityExecutionStatus Compensate(
+            Activity activity,
+            ActivityExecutionContext executionContext
+        )
         {
             return this.Compensate((T)activity, executionContext);
         }
         #endregion
 
         #region ActivityExecutor<T> Members
-        protected virtual ActivityExecutionStatus Execute(T activity, ActivityExecutionContext executionContext)
+        protected virtual ActivityExecutionStatus Execute(
+            T activity,
+            ActivityExecutionContext executionContext
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -49,7 +82,11 @@ namespace System.Workflow.ComponentModel
 
             return activity.Execute(executionContext);
         }
-        protected virtual ActivityExecutionStatus Cancel(T activity, ActivityExecutionContext executionContext)
+
+        protected virtual ActivityExecutionStatus Cancel(
+            T activity,
+            ActivityExecutionContext executionContext
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -58,7 +95,12 @@ namespace System.Workflow.ComponentModel
 
             return activity.Cancel(executionContext);
         }
-        protected virtual ActivityExecutionStatus HandleFault(T activity, ActivityExecutionContext executionContext, Exception exception)
+
+        protected virtual ActivityExecutionStatus HandleFault(
+            T activity,
+            ActivityExecutionContext executionContext,
+            Exception exception
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -67,14 +109,21 @@ namespace System.Workflow.ComponentModel
 
             return activity.HandleFault(executionContext, exception);
         }
-        protected virtual ActivityExecutionStatus Compensate(T activity, ActivityExecutionContext executionContext)
+
+        protected virtual ActivityExecutionStatus Compensate(
+            T activity,
+            ActivityExecutionContext executionContext
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
-            System.Diagnostics.Debug.Assert(activity is ICompensatableActivity, "should not get Compensate, if activity is not compensatable");
+            System.Diagnostics.Debug.Assert(
+                activity is ICompensatableActivity,
+                "should not get Compensate, if activity is not compensatable"
+            );
             return ((ICompensatableActivity)activity).Compensate(executionContext);
         }
 
@@ -83,10 +132,14 @@ namespace System.Workflow.ComponentModel
     #endregion
 
     #region CompositeActivityExecutor<T>
-    internal class CompositeActivityExecutor<T> : ActivityExecutor<T>, ISupportWorkflowChanges where T : CompositeActivity
+    internal class CompositeActivityExecutor<T> : ActivityExecutor<T>, ISupportWorkflowChanges
+        where T : CompositeActivity
     {
         //@@undone:mayankm Once all ActivityExecutor is removed this method should not be virtual.
-        void ISupportWorkflowChanges.OnActivityAdded(ActivityExecutionContext executionContext, Activity addedActivity)
+        void ISupportWorkflowChanges.OnActivityAdded(
+            ActivityExecutionContext executionContext,
+            Activity addedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -95,12 +148,18 @@ namespace System.Workflow.ComponentModel
 
             CompositeActivity compositeActivity = executionContext.Activity as CompositeActivity;
             if (compositeActivity == null)
-                throw new ArgumentException(SR.Error_InvalidActivityExecutionContext, "executionContext");
+                throw new ArgumentException(
+                    SR.Error_InvalidActivityExecutionContext,
+                    "executionContext"
+                );
 
             compositeActivity.OnActivityChangeAdd(executionContext, addedActivity);
         }
 
-        void ISupportWorkflowChanges.OnActivityRemoved(ActivityExecutionContext executionContext, Activity removedActivity)
+        void ISupportWorkflowChanges.OnActivityRemoved(
+            ActivityExecutionContext executionContext,
+            Activity removedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -109,12 +168,17 @@ namespace System.Workflow.ComponentModel
 
             CompositeActivity compositeActivity = executionContext.Activity as CompositeActivity;
             if (compositeActivity == null)
-                throw new ArgumentException(SR.Error_InvalidActivityExecutionContext, "executionContext");
+                throw new ArgumentException(
+                    SR.Error_InvalidActivityExecutionContext,
+                    "executionContext"
+                );
 
             compositeActivity.OnActivityChangeRemove(executionContext, removedActivity);
         }
 
-        void ISupportWorkflowChanges.OnWorkflowChangesCompleted(ActivityExecutionContext executionContext)
+        void ISupportWorkflowChanges.OnWorkflowChangesCompleted(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -122,7 +186,10 @@ namespace System.Workflow.ComponentModel
             CompositeActivity compositeActivity = executionContext.Activity as CompositeActivity;
 
             if (compositeActivity == null)
-                throw new ArgumentException(SR.Error_InvalidActivityExecutionContext, "executionContext");
+                throw new ArgumentException(
+                    SR.Error_InvalidActivityExecutionContext,
+                    "executionContext"
+                );
 
             compositeActivity.OnWorkflowChangesCompleted(executionContext);
         }
@@ -130,12 +197,18 @@ namespace System.Workflow.ComponentModel
         // Refer Bug 9339 (VB Compilation Failure - Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.)
         //An unhandled exception of type 'System.TypeLoadException' occurred
         // "Signature of the body and declaration in a method implementation do not match"
-        protected override ActivityExecutionStatus Execute(T activity, ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            T activity,
+            ActivityExecutionContext executionContext
+        )
         {
             return base.Execute(activity, executionContext);
         }
 
-        protected override ActivityExecutionStatus Cancel(T activity, ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Cancel(
+            T activity,
+            ActivityExecutionContext executionContext
+        )
         {
             return base.Cancel(activity, executionContext);
         }
@@ -173,11 +246,16 @@ namespace System.Workflow.ComponentModel
                 }
                 catch (Exception e)
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.ExecutorCreationFailedErrorMessage, activityType.FullName), e);
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ExecutorCreationFailedErrorMessage, activityType.FullName),
+                        e
+                    );
                 }
 
                 if (activityExecutorsObjects == null || activityExecutorsObjects.Length == 0)
-                    throw new InvalidOperationException(SR.GetString(SR.ExecutorCreationFailedErrorMessage, activityType.FullName));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.ExecutorCreationFailedErrorMessage, activityType.FullName)
+                    );
 
                 activityExecutors = new ActivityExecutor[activityExecutorsObjects.Length];
                 for (int index = 0; index < activityExecutorsObjects.Length; index++)
@@ -186,14 +264,20 @@ namespace System.Workflow.ComponentModel
                     {
                         lock (typeToExecutorMapping.SyncRoot)
                         {
-                            if (!typeToExecutorMapping.Contains(activityExecutorsObjects[index].GetType()))
+                            if (
+                                !typeToExecutorMapping.Contains(
+                                    activityExecutorsObjects[index].GetType()
+                                )
+                            )
                             {
                                 System.Threading.Thread.MemoryBarrier();
-                                typeToExecutorMapping[activityExecutorsObjects[index].GetType()] = activityExecutorsObjects[index];
+                                typeToExecutorMapping[activityExecutorsObjects[index].GetType()] =
+                                    activityExecutorsObjects[index];
                             }
                         }
                     }
-                    activityExecutors[index] = (ActivityExecutor)typeToExecutorMapping[activityExecutorsObjects[index].GetType()];
+                    activityExecutors[index] = (ActivityExecutor)
+                        typeToExecutorMapping[activityExecutorsObjects[index].GetType()];
                 }
 
                 System.Threading.Thread.MemoryBarrier();
@@ -208,9 +292,12 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentNullException("executorType");
             if (!typeof(ActivityExecutor).IsAssignableFrom(executorType))
                 throw new ArgumentException(
-                    SR.GetString(SR.Error_NonActivityExecutor, executorType.FullName), "executorType");
+                    SR.GetString(SR.Error_NonActivityExecutor, executorType.FullName),
+                    "executorType"
+                );
 
-            ActivityExecutor activityExecutor = typeToExecutorMapping[executorType] as ActivityExecutor;
+            ActivityExecutor activityExecutor =
+                typeToExecutorMapping[executorType] as ActivityExecutor;
             if (activityExecutor != null)
                 return activityExecutor;
 

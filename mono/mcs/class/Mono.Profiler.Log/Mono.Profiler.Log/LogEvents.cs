@@ -5,607 +5,607 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mono.Profiler.Log {
+namespace Mono.Profiler.Log
+{
+    public sealed class AppDomainLoadEvent : LogEvent
+    {
+        public long AppDomainId { get; internal set; }
+
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
+    public sealed class AppDomainUnloadEvent : LogEvent
+    {
+        public long AppDomainId { get; internal set; }
+
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
+    public sealed class AppDomainNameEvent : LogEvent
+    {
+        public long AppDomainId { get; internal set; }
+
+        public string Name { get; internal set; }
+
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
+    public sealed class ContextLoadEvent : LogEvent
+    {
+        public long ContextId { get; internal set; }
+
+        public long AppDomainId { get; internal set; }
+
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
+    public sealed class ContextUnloadEvent : LogEvent
+    {
+        public long ContextId { get; internal set; }
+
+        public long AppDomainId { get; internal set; }
+
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
+    public sealed class ThreadStartEvent : LogEvent
+    {
+        public long ThreadId { get; internal set; }
+
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class AppDomainLoadEvent : LogEvent {
+    public sealed class ThreadEndEvent : LogEvent
+    {
+        public long ThreadId { get; internal set; }
+
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
+
+    public sealed class ThreadNameEvent : LogEvent
+    {
+        public long ThreadId { get; internal set; }
 
-		public long AppDomainId { get; internal set; }
+        public string Name { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class AppDomainUnloadEvent : LogEvent {
+    public sealed class ImageLoadEvent : LogEvent
+    {
+        public long ImagePointer { get; internal set; }
 
-		public long AppDomainId { get; internal set; }
+        public string Name { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public Guid ModuleVersionId { get; internal set; }
 
-	public sealed class AppDomainNameEvent : LogEvent {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long AppDomainId { get; internal set; }
+    public sealed class ImageUnloadEvent : LogEvent
+    {
+        public long ImagePointer { get; internal set; }
 
-		public string Name { get; internal set; }
+        public string Name { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class ContextLoadEvent : LogEvent {
+    public sealed class AssemblyLoadEvent : LogEvent
+    {
+        public long AssemblyPointer { get; internal set; }
 
-		public long ContextId { get; internal set; }
+        public long ImagePointer { get; internal set; }
 
-		public long AppDomainId { get; internal set; }
+        public string Name { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class ContextUnloadEvent : LogEvent {
+    public sealed class AssemblyUnloadEvent : LogEvent
+    {
+        public long AssemblyPointer { get; internal set; }
 
-		public long ContextId { get; internal set; }
+        public long ImagePointer { get; internal set; }
 
-		public long AppDomainId { get; internal set; }
+        public string Name { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class ThreadStartEvent : LogEvent {
+    public sealed class ClassLoadEvent : LogEvent
+    {
+        public long ClassPointer { get; internal set; }
 
-		public long ThreadId { get; internal set; }
+        public long ImagePointer { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public string Name { get; internal set; }
 
-	public sealed class ThreadEndEvent : LogEvent {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long ThreadId { get; internal set; }
+    public sealed class VTableLoadEvent : LogEvent
+    {
+        public long VTablePointer { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public long AppDomainId { get; internal set; }
 
-	public sealed class ThreadNameEvent : LogEvent {
+        public long ClassPointer { get; internal set; }
 
-		public long ThreadId { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public string Name { get; internal set; }
+    public sealed class JitEvent : LogEvent
+    {
+        public long MethodPointer { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public long CodePointer { get; internal set; }
 
-	public sealed class ImageLoadEvent : LogEvent {
+        public long CodeSize { get; internal set; }
 
-		public long ImagePointer { get; internal set; }
+        public string Name { get; internal set; }
 
-		public string Name { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public Guid ModuleVersionId { get; internal set; }
+    public sealed class JitHelperEvent : LogEvent
+    {
+        public LogJitHelper Type { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public long BufferPointer { get; internal set; }
 
-	public sealed class ImageUnloadEvent : LogEvent {
+        public long BufferSize { get; internal set; }
 
-		public long ImagePointer { get; internal set; }
+        public string Name { get; internal set; }
 
-		public string Name { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+    public sealed class AllocationEvent : LogEvent
+    {
+        [Obsolete("This field is no longer produced.")]
+        public long ClassPointer { get; internal set; }
 
-	public sealed class AssemblyLoadEvent : LogEvent {
+        public long VTablePointer { get; internal set; }
 
-		public long AssemblyPointer { get; internal set; }
+        public long ObjectPointer { get; internal set; }
 
-		public long ImagePointer { get; internal set; }
+        public long ObjectSize { get; internal set; }
 
-		public string Name { get; internal set; }
+        public IReadOnlyList<long> Backtrace { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class AssemblyUnloadEvent : LogEvent {
+    public sealed class HeapBeginEvent : LogEvent
+    {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long AssemblyPointer { get; internal set; }
+    public sealed class HeapEndEvent : LogEvent
+    {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long ImagePointer { get; internal set; }
+    public sealed class HeapObjectEvent : LogEvent
+    {
+        public struct HeapObjectReference
+        {
+            public long Offset { get; internal set; }
 
-		public string Name { get; internal set; }
+            public long ObjectPointer { get; internal set; }
+        }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public long ObjectPointer { get; internal set; }
 
-	public sealed class ClassLoadEvent : LogEvent {
+        [Obsolete("This field is no longer produced.")]
+        public long ClassPointer { get; internal set; }
 
-		public long ClassPointer { get; internal set; }
+        public long VTablePointer { get; internal set; }
 
-		public long ImagePointer { get; internal set; }
+        public long ObjectSize { get; internal set; }
 
-		public string Name { get; internal set; }
+        public int Generation { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public IReadOnlyList<HeapObjectReference> References { get; internal set; }
 
-	public sealed class VTableLoadEvent : LogEvent {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long VTablePointer { get; internal set; }
+    public sealed class HeapRootsEvent : LogEvent
+    {
+        public struct HeapRoot
+        {
+            public long SlotPointer { get; internal set; }
 
-		public long AppDomainId { get; internal set; }
+            public long ObjectPointer { get; internal set; }
 
-		public long ClassPointer { get; internal set; }
+            [Obsolete("This field is no longer produced.")]
+            public LogHeapRootAttributes Attributes { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+            [Obsolete("This field is no longer produced.")]
+            public long ExtraInfo { get; internal set; }
+        }
 
-	public sealed class JitEvent : LogEvent {
+        [Obsolete("This field is no longer produced.")]
+        public long MaxGenerationCollectionCount { get; internal set; }
 
-		public long MethodPointer { get; internal set; }
+        public IReadOnlyList<HeapRoot> Roots { get; internal set; }
 
-		public long CodePointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long CodeSize { get; internal set; }
+    public sealed class HeapRootRegisterEvent : LogEvent
+    {
+        public long RootPointer { get; internal set; }
 
-		public string Name { get; internal set; }
+        public long RootSize { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public LogHeapRootSource Source { get; internal set; }
 
-	public sealed class JitHelperEvent : LogEvent {
+        public long Key { get; internal set; }
 
-		public LogJitHelper Type { get; internal set; }
+        public string Name { get; internal set; }
 
-		public long BufferPointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long BufferSize { get; internal set; }
+    public sealed class HeapRootUnregisterEvent : LogEvent
+    {
+        public long RootPointer { get; internal set; }
 
-		public string Name { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+    public sealed class GCEvent : LogEvent
+    {
+        public LogGCEvent Type { get; internal set; }
 
-	public sealed class AllocationEvent : LogEvent {
+        public int Generation { get; internal set; }
 
-		[Obsolete ("This field is no longer produced.")]
-		public long ClassPointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long VTablePointer { get; internal set; }
+    public sealed class GCResizeEvent : LogEvent
+    {
+        public long NewSize { get; internal set; }
 
-		public long ObjectPointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long ObjectSize { get; internal set; }
+    public sealed class GCMoveEvent : LogEvent
+    {
+        public IReadOnlyList<long> OldObjectPointers { get; internal set; }
 
-		public IReadOnlyList<long> Backtrace { get; internal set; }
+        public IReadOnlyList<long> NewObjectPointers { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class HeapBeginEvent : LogEvent {
+    public sealed class GCHandleCreationEvent : LogEvent
+    {
+        public LogGCHandleType Type { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public long Handle { get; internal set; }
 
-	public sealed class HeapEndEvent : LogEvent {
+        public long ObjectPointer { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public IReadOnlyList<long> Backtrace { get; internal set; }
 
-	public sealed class HeapObjectEvent : LogEvent {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public struct HeapObjectReference {
+    public sealed class GCHandleDeletionEvent : LogEvent
+    {
+        public LogGCHandleType Type { get; internal set; }
 
-			public long Offset { get; internal set; }
+        public long Handle { get; internal set; }
 
-			public long ObjectPointer { get; internal set; }
-		}
+        public IReadOnlyList<long> Backtrace { get; internal set; }
 
-		public long ObjectPointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		[Obsolete ("This field is no longer produced.")]
-		public long ClassPointer { get; internal set; }
+    public sealed class GCFinalizeBeginEvent : LogEvent
+    {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long VTablePointer { get; internal set; }
+    public sealed class GCFinalizeEndEvent : LogEvent
+    {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long ObjectSize { get; internal set; }
+    public sealed class GCFinalizeObjectBeginEvent : LogEvent
+    {
+        public long ObjectPointer { get; internal set; }
 
-		public int Generation { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public IReadOnlyList<HeapObjectReference> References { get; internal set; }
+    public sealed class GCFinalizeObjectEndEvent : LogEvent
+    {
+        public long ObjectPointer { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class HeapRootsEvent : LogEvent {
+    public sealed class ThrowEvent : LogEvent
+    {
+        public long ObjectPointer { get; internal set; }
 
-		public struct HeapRoot {
+        public IReadOnlyList<long> Backtrace { get; internal set; }
 
-			public long SlotPointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-			public long ObjectPointer { get; internal set; }
+    public sealed class ExceptionClauseEvent : LogEvent
+    {
+        public LogExceptionClause Type { get; internal set; }
 
-			[Obsolete ("This field is no longer produced.")]
-			public LogHeapRootAttributes Attributes { get; internal set; }
+        public long Index { get; internal set; }
 
-			[Obsolete ("This field is no longer produced.")]
-			public long ExtraInfo { get; internal set; }
-		}
+        public long MethodPointer { get; internal set; }
 
-		[Obsolete ("This field is no longer produced.")]
-		public long MaxGenerationCollectionCount { get; internal set; }
+        public long ObjectPointer { get; internal set; }
 
-		public IReadOnlyList<HeapRoot> Roots { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+    public sealed class EnterEvent : LogEvent
+    {
+        public long MethodPointer { get; internal set; }
 
-	public sealed class HeapRootRegisterEvent : LogEvent {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public long RootPointer { get; internal set; }
+    public sealed class LeaveEvent : LogEvent
+    {
+        public long MethodPointer { get; internal set; }
 
-		public long RootSize { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public LogHeapRootSource Source { get; internal set; }
+    public sealed class ExceptionalLeaveEvent : LogEvent
+    {
+        public long MethodPointer { get; internal set; }
 
-		public long Key { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public string Name { get; internal set; }
+    public sealed class MonitorEvent : LogEvent
+    {
+        public LogMonitorEvent Event { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public long ObjectPointer { get; internal set; }
 
-	public sealed class HeapRootUnregisterEvent : LogEvent {
+        public IReadOnlyList<long> Backtrace { get; internal set; }
 
-		public long RootPointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+    public sealed class SampleHitEvent : LogEvent
+    {
+        public long ThreadId { get; internal set; }
 
-	public sealed class GCEvent : LogEvent {
+        public IReadOnlyList<long> UnmanagedBacktrace { get; internal set; }
 
-		public LogGCEvent Type { get; internal set; }
+        public IReadOnlyList<long> ManagedBacktrace { get; internal set; }
 
-		public int Generation { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+    public sealed class CounterSamplesEvent : LogEvent
+    {
+        public struct CounterSample
+        {
+            public long Index { get; internal set; }
 
-	public sealed class GCResizeEvent : LogEvent {
+            public LogCounterType Type { get; internal set; }
 
-		public long NewSize { get; internal set; }
+            public object Value { get; internal set; }
+        }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public IReadOnlyList<CounterSample> Samples { get; internal set; }
 
-	public sealed class GCMoveEvent : LogEvent {
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		public IReadOnlyList<long> OldObjectPointers { get; internal set; }
+    public sealed class CounterDescriptionsEvent : LogEvent
+    {
+        public struct CounterDescription
+        {
+            public LogCounterSection Section { get; internal set; }
 
-		public IReadOnlyList<long> NewObjectPointers { get; internal set; }
+            public string SectionName { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+            public string CounterName { get; internal set; }
 
-	public sealed class GCHandleCreationEvent : LogEvent {
+            public LogCounterType Type { get; internal set; }
 
-		public LogGCHandleType Type { get; internal set; }
+            public LogCounterUnit Unit { get; internal set; }
 
-		public long Handle { get; internal set; }
+            public LogCounterVariance Variance { get; internal set; }
 
-		public long ObjectPointer { get; internal set; }
+            public long Index { get; internal set; }
+        }
 
-		public IReadOnlyList<long> Backtrace { get; internal set; }
+        public IReadOnlyList<CounterDescription> Descriptions { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class GCHandleDeletionEvent : LogEvent {
+    [Obsolete("This event is no longer produced.")]
+    public sealed class UnmanagedBinaryEvent : LogEvent
+    {
+        public long SegmentPointer { get; internal set; }
 
-		public LogGCHandleType Type { get; internal set; }
+        public long SegmentOffset { get; internal set; }
 
-		public long Handle { get; internal set; }
+        public long SegmentSize { get; internal set; }
 
-		public IReadOnlyList<long> Backtrace { get; internal set; }
+        public string FileName { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class GCFinalizeBeginEvent : LogEvent {
+    public sealed class UnmanagedSymbolEvent : LogEvent
+    {
+        public long CodePointer { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        public long CodeSize { get; internal set; }
 
-	public sealed class GCFinalizeEndEvent : LogEvent {
+        public string Name { get; internal set; }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-	public sealed class GCFinalizeObjectBeginEvent : LogEvent {
+    public sealed class SynchronizationPointEvent : LogEvent
+    {
+        public LogSynchronizationPoint Type { get; internal set; }
 
-		public long ObjectPointer { get; internal set; }
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+    public sealed class AotIdEvent : LogEvent
+    {
+        public Guid AotId { get; internal set; }
 
-	public sealed class GCFinalizeObjectEndEvent : LogEvent {
-
-		public long ObjectPointer { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class ThrowEvent : LogEvent {
-
-		public long ObjectPointer { get; internal set; }
-
-		public IReadOnlyList<long> Backtrace { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class ExceptionClauseEvent : LogEvent {
-
-		public LogExceptionClause Type { get; internal set; }
-
-		public long Index { get; internal set; }
-
-		public long MethodPointer { get; internal set; }
-
-		public long ObjectPointer { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class EnterEvent : LogEvent {
-
-		public long MethodPointer { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class LeaveEvent : LogEvent {
-
-		public long MethodPointer { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class ExceptionalLeaveEvent : LogEvent {
-
-		public long MethodPointer { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class MonitorEvent : LogEvent {
-
-		public LogMonitorEvent Event { get; internal set; }
-
-		public long ObjectPointer { get; internal set; }
-
-		public IReadOnlyList<long> Backtrace { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class SampleHitEvent : LogEvent {
-
-		public long ThreadId { get; internal set; }
-
-		public IReadOnlyList<long> UnmanagedBacktrace { get; internal set; }
-
-		public IReadOnlyList<long> ManagedBacktrace { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class CounterSamplesEvent : LogEvent {
-
-		public struct CounterSample {
-
-			public long Index { get; internal set; }
-
-			public LogCounterType Type { get; internal set; }
-
-			public object Value { get; internal set; }
-		}
-
-		public IReadOnlyList<CounterSample> Samples { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class CounterDescriptionsEvent : LogEvent {
-
-		public struct CounterDescription {
-
-			public LogCounterSection Section { get; internal set; }
-
-			public string SectionName { get; internal set; }
-
-			public string CounterName { get; internal set; }
-
-			public LogCounterType Type { get; internal set; }
-
-			public LogCounterUnit Unit { get; internal set; }
-
-			public LogCounterVariance Variance { get; internal set; }
-
-			public long Index { get; internal set; }
-		}
-
-		public IReadOnlyList<CounterDescription> Descriptions { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	[Obsolete ("This event is no longer produced.")]
-	public sealed class UnmanagedBinaryEvent : LogEvent {
-
-		public long SegmentPointer { get; internal set; }
-
-		public long SegmentOffset { get; internal set; }
-
-		public long SegmentSize { get; internal set; }
-
-		public string FileName { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class UnmanagedSymbolEvent : LogEvent {
-
-		public long CodePointer { get; internal set; }
-
-		public long CodeSize { get; internal set; }
-
-		public string Name { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class SynchronizationPointEvent : LogEvent {
-
-		public LogSynchronizationPoint Type { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
-
-	public sealed class AotIdEvent : LogEvent {
-
-		public Guid AotId { get; internal set; }
-
-		internal override void Accept (LogEventVisitor visitor)
-		{
-			visitor.Visit (this);
-		}
-	}
+        internal override void Accept(LogEventVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 }

@@ -12,19 +12,21 @@ namespace System.Security.Cryptography.X509Certificates
     {
         private const int NamedKeyUsageFlagsCount = 9;
 
-        private static readonly Dictionary<string, X509KeyUsageFlags> s_keyUsages =
-            new Dictionary<string, X509KeyUsageFlags>(NamedKeyUsageFlagsCount, StringComparer.OrdinalIgnoreCase)
-            {
-                { "DigitalSignature", X509KeyUsageFlags.DigitalSignature },
-                { "NonRepudiation", X509KeyUsageFlags.NonRepudiation },
-                { "KeyEncipherment", X509KeyUsageFlags.KeyEncipherment },
-                { "DataEncipherment", X509KeyUsageFlags.DataEncipherment },
-                { "KeyAgreement", X509KeyUsageFlags.KeyAgreement },
-                { "KeyCertSign", X509KeyUsageFlags.KeyCertSign },
-                { "CrlSign", X509KeyUsageFlags.CrlSign },
-                { "EncipherOnly", X509KeyUsageFlags.EncipherOnly },
-                { "DecipherOnly", X509KeyUsageFlags.DecipherOnly },
-            };
+        private static readonly Dictionary<string, X509KeyUsageFlags> s_keyUsages = new Dictionary<
+            string,
+            X509KeyUsageFlags
+        >(NamedKeyUsageFlagsCount, StringComparer.OrdinalIgnoreCase)
+        {
+            { "DigitalSignature", X509KeyUsageFlags.DigitalSignature },
+            { "NonRepudiation", X509KeyUsageFlags.NonRepudiation },
+            { "KeyEncipherment", X509KeyUsageFlags.KeyEncipherment },
+            { "DataEncipherment", X509KeyUsageFlags.DataEncipherment },
+            { "KeyAgreement", X509KeyUsageFlags.KeyAgreement },
+            { "KeyCertSign", X509KeyUsageFlags.KeyCertSign },
+            { "CrlSign", X509KeyUsageFlags.CrlSign },
+            { "EncipherOnly", X509KeyUsageFlags.EncipherOnly },
+            { "DecipherOnly", X509KeyUsageFlags.DecipherOnly },
+        };
 
 #if DEBUG
         static FindPal()
@@ -36,13 +38,15 @@ namespace System.Security.Cryptography.X509Certificates
         private static partial IFindPal OpenPal(
             X509Certificate2Collection findFrom,
             X509Certificate2Collection copyTo,
-            bool validOnly);
+            bool validOnly
+        );
 
         public static X509Certificate2Collection FindFromCollection(
             X509Certificate2Collection coll,
             X509FindType findType,
             object findValue,
-            bool validOnly)
+            bool validOnly
+        )
         {
             X509Certificate2Collection results = new X509Certificate2Collection();
 
@@ -51,106 +55,115 @@ namespace System.Security.Cryptography.X509Certificates
                 switch (findType)
                 {
                     case X509FindType.FindByThumbprint:
-                        {
-                            byte[] thumbPrint = ConfirmedCast<string>(findValue).LaxDecodeHexString();
-                            findPal.FindByThumbprint(thumbPrint);
-                            break;
-                        }
+                    {
+                        byte[] thumbPrint = ConfirmedCast<string>(findValue).LaxDecodeHexString();
+                        findPal.FindByThumbprint(thumbPrint);
+                        break;
+                    }
                     case X509FindType.FindBySubjectName:
-                        {
-                            string subjectName = ConfirmedCast<string>(findValue);
-                            findPal.FindBySubjectName(subjectName);
-                            break;
-                        }
+                    {
+                        string subjectName = ConfirmedCast<string>(findValue);
+                        findPal.FindBySubjectName(subjectName);
+                        break;
+                    }
                     case X509FindType.FindBySubjectDistinguishedName:
-                        {
-                            string subjectDistinguishedName = ConfirmedCast<string>(findValue);
-                            findPal.FindBySubjectDistinguishedName(subjectDistinguishedName);
-                            break;
-                        }
+                    {
+                        string subjectDistinguishedName = ConfirmedCast<string>(findValue);
+                        findPal.FindBySubjectDistinguishedName(subjectDistinguishedName);
+                        break;
+                    }
                     case X509FindType.FindByIssuerName:
-                        {
-                            string issuerName = ConfirmedCast<string>(findValue);
-                            findPal.FindByIssuerName(issuerName);
-                            break;
-                        }
+                    {
+                        string issuerName = ConfirmedCast<string>(findValue);
+                        findPal.FindByIssuerName(issuerName);
+                        break;
+                    }
                     case X509FindType.FindByIssuerDistinguishedName:
-                        {
-                            string issuerDistinguishedName = ConfirmedCast<string>(findValue);
-                            findPal.FindByIssuerDistinguishedName(issuerDistinguishedName);
-                            break;
-                        }
+                    {
+                        string issuerDistinguishedName = ConfirmedCast<string>(findValue);
+                        findPal.FindByIssuerDistinguishedName(issuerDistinguishedName);
+                        break;
+                    }
                     case X509FindType.FindBySerialNumber:
-                        {
-                            string decimalOrHexString = ConfirmedCast<string>(findValue);
+                    {
+                        string decimalOrHexString = ConfirmedCast<string>(findValue);
 
-                            // FindBySerialNumber allows the input format to be either in
-                            // hex or decimal. Since we can't know which one was intended,
-                            // it compares against both interpretations and treats a match
-                            // of either as a successful find.
+                        // FindBySerialNumber allows the input format to be either in
+                        // hex or decimal. Since we can't know which one was intended,
+                        // it compares against both interpretations and treats a match
+                        // of either as a successful find.
 
-                            // string is big-endian
-                            byte[] hexBytes = decimalOrHexString.LaxDecodeHexString();
+                        // string is big-endian
+                        byte[] hexBytes = decimalOrHexString.LaxDecodeHexString();
 
-                            BigInteger hexValue = new BigInteger(hexBytes, isUnsigned: true, isBigEndian: true);
-                            BigInteger decimalValue = LaxParseDecimalBigInteger(decimalOrHexString);
-                            findPal.FindBySerialNumber(hexValue, decimalValue);
-                            break;
-                        }
+                        BigInteger hexValue = new BigInteger(
+                            hexBytes,
+                            isUnsigned: true,
+                            isBigEndian: true
+                        );
+                        BigInteger decimalValue = LaxParseDecimalBigInteger(decimalOrHexString);
+                        findPal.FindBySerialNumber(hexValue, decimalValue);
+                        break;
+                    }
                     case X509FindType.FindByTimeValid:
-                        {
-                            DateTime dateTime = ConfirmedCast<DateTime>(findValue);
-                            findPal.FindByTimeValid(dateTime);
-                            break;
-                        }
+                    {
+                        DateTime dateTime = ConfirmedCast<DateTime>(findValue);
+                        findPal.FindByTimeValid(dateTime);
+                        break;
+                    }
                     case X509FindType.FindByTimeNotYetValid:
-                        {
-                            DateTime dateTime = ConfirmedCast<DateTime>(findValue);
-                            findPal.FindByTimeNotYetValid(dateTime);
-                            break;
-                        }
+                    {
+                        DateTime dateTime = ConfirmedCast<DateTime>(findValue);
+                        findPal.FindByTimeNotYetValid(dateTime);
+                        break;
+                    }
                     case X509FindType.FindByTimeExpired:
-                        {
-                            DateTime dateTime = ConfirmedCast<DateTime>(findValue);
-                            findPal.FindByTimeExpired(dateTime);
-                            break;
-                        }
+                    {
+                        DateTime dateTime = ConfirmedCast<DateTime>(findValue);
+                        findPal.FindByTimeExpired(dateTime);
+                        break;
+                    }
                     case X509FindType.FindByTemplateName:
-                        {
-                            string expected = ConfirmedCast<string>(findValue);
-                            findPal.FindByTemplateName(expected);
-                            break;
-                        }
+                    {
+                        string expected = ConfirmedCast<string>(findValue);
+                        findPal.FindByTemplateName(expected);
+                        break;
+                    }
                     case X509FindType.FindByApplicationPolicy:
-                        {
-                            string oidValue = ConfirmedOidValue(findPal, findValue, OidGroup.Policy);
-                            findPal.FindByApplicationPolicy(oidValue);
-                            break;
-                        }
+                    {
+                        string oidValue = ConfirmedOidValue(findPal, findValue, OidGroup.Policy);
+                        findPal.FindByApplicationPolicy(oidValue);
+                        break;
+                    }
                     case X509FindType.FindByCertificatePolicy:
-                        {
-                            string oidValue = ConfirmedOidValue(findPal, findValue, OidGroup.Policy);
-                            findPal.FindByCertificatePolicy(oidValue);
-                            break;
-                        }
+                    {
+                        string oidValue = ConfirmedOidValue(findPal, findValue, OidGroup.Policy);
+                        findPal.FindByCertificatePolicy(oidValue);
+                        break;
+                    }
                     case X509FindType.FindByExtension:
-                        {
-                            string oidValue = ConfirmedOidValue(findPal, findValue, OidGroup.ExtensionOrAttribute);
-                            findPal.FindByExtension(oidValue);
-                            break;
-                        }
+                    {
+                        string oidValue = ConfirmedOidValue(
+                            findPal,
+                            findValue,
+                            OidGroup.ExtensionOrAttribute
+                        );
+                        findPal.FindByExtension(oidValue);
+                        break;
+                    }
                     case X509FindType.FindByKeyUsage:
-                        {
-                            X509KeyUsageFlags keyUsage = ConfirmedX509KeyUsage(findValue);
-                            findPal.FindByKeyUsage(keyUsage);
-                            break;
-                        }
+                    {
+                        X509KeyUsageFlags keyUsage = ConfirmedX509KeyUsage(findValue);
+                        findPal.FindByKeyUsage(keyUsage);
+                        break;
+                    }
                     case X509FindType.FindBySubjectKeyIdentifier:
-                        {
-                            byte[] keyIdentifier = ConfirmedCast<string>(findValue).LaxDecodeHexString();
-                            findPal.FindBySubjectKeyIdentifier(keyIdentifier);
-                            break;
-                        }
+                    {
+                        byte[] keyIdentifier = ConfirmedCast<string>(findValue)
+                            .LaxDecodeHexString();
+                        findPal.FindBySubjectKeyIdentifier(keyIdentifier);
+                        break;
+                    }
                     default:
                         throw new CryptographicException(SR.Cryptography_X509_InvalidFindType);
                 }
@@ -169,7 +182,11 @@ namespace System.Security.Cryptography.X509Certificates
             return (T)findValue;
         }
 
-        private static string ConfirmedOidValue(IFindPal findPal, object findValue, OidGroup oidGroup)
+        private static string ConfirmedOidValue(
+            IFindPal findPal,
+            object findValue,
+            OidGroup oidGroup
+        )
         {
             string maybeOid = ConfirmedCast<string>(findValue);
 

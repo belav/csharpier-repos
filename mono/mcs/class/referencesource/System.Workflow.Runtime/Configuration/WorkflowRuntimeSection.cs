@@ -5,16 +5,15 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Configuration;
 using System.Collections.Specialized;
-
+using System.Configuration;
 using System.Workflow.Runtime;
 
 namespace System.Workflow.Runtime.Configuration
 {
     /// <summary> Configuration settings for the WorkflowRuntime </summary>
     /// <remarks><para>
-    /// Services that are automatically instantiated must implement one of the 
+    /// Services that are automatically instantiated must implement one of the
     /// following constructors:
     /// <code>
     /// public MyService();
@@ -27,7 +26,9 @@ namespace System.Workflow.Runtime.Configuration
     /// <see cref="System.Workflow.Runtime.Hosting.WorkflowRuntimeServiceSettings"/>
     /// <see cref="System.Workflow.Runtime.Hosting.WorkflowRuntimeServiceSettingsCollection"/>
     /// <see cref="System.Configuration.ConfigurationSection"/>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowRuntimeSection : ConfigurationSection
     {
         private const string _services = "Services";
@@ -43,74 +44,50 @@ namespace System.Workflow.Runtime.Configuration
         [ConfigurationProperty(_definitionCacheCapacity, DefaultValue = 0)]
         public int WorkflowDefinitionCacheCapacity
         {
-            get
-            {
-                return (int)base[_definitionCacheCapacity];
-            }
-            set
-            {
-                base[_definitionCacheCapacity] = value;
-            }
+            get { return (int)base[_definitionCacheCapacity]; }
+            set { base[_definitionCacheCapacity] = value; }
         }
 
         /// <summary> The name of the service container </summary>
         [ConfigurationProperty(_name, DefaultValue = "")]
         public string Name
         {
-            get
-            {
-                return (string)base[_name];
-            }
-            set
-            {
-                base[_name] = value;
-            }
+            get { return (string)base[_name]; }
+            set { base[_name] = value; }
         }
 
         [ConfigurationProperty(_validateOnCreate, DefaultValue = true)]
         public bool ValidateOnCreate
         {
-            get
-            {
-                return (bool)base[_validateOnCreate];
-            }
-            set
-            {
-                base[_validateOnCreate] = value;
-            }
+            get { return (bool)base[_validateOnCreate]; }
+            set { base[_validateOnCreate] = value; }
         }
 
         [ConfigurationProperty(_enablePerfCounters, DefaultValue = true)]
         public bool EnablePerformanceCounters
         {
-            get
-            {
-                return (bool)base[_enablePerfCounters];
-            }
-            set
-            {
-                base[_enablePerfCounters] = value;
-            }
+            get { return (bool)base[_enablePerfCounters]; }
+            set { base[_enablePerfCounters] = value; }
         }
-
 
         /// <summary> The providers to be instantiated by the service container. </summary>
         [ConfigurationProperty(_services, DefaultValue = null)]
         public WorkflowRuntimeServiceElementCollection Services
         {
-            get
-            {
-                return (WorkflowRuntimeServiceElementCollection)base[_services];
-            }
+            get { return (WorkflowRuntimeServiceElementCollection)base[_services]; }
         }
 
         /// <summary> The resources to be shared by the services. </summary>
-        [ConfigurationProperty(WorkflowRuntimeSection.commonParametersSectionName, DefaultValue = null)]
+        [ConfigurationProperty(
+            WorkflowRuntimeSection.commonParametersSectionName,
+            DefaultValue = null
+        )]
         public NameValueConfigurationCollection CommonParameters
         {
             get
             {
-                return (NameValueConfigurationCollection)base[WorkflowRuntimeSection.commonParametersSectionName];
+                return (NameValueConfigurationCollection)
+                    base[WorkflowRuntimeSection.commonParametersSectionName];
             }
         }
     }

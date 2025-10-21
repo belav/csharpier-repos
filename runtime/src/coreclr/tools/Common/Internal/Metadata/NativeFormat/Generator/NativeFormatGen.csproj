@@ -4,7 +4,6 @@
     <OutputType>Exe</OutputType>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="CsWriter.cs" />
     <Compile Include="MdBinaryReaderGen.cs" />

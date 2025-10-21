@@ -28,7 +28,7 @@ namespace Profiler.Tests
     {
         static readonly Guid GCProfilerGuid = new Guid("BCD8186F-1EEC-47E9-AFA7-396F879382C3");
 
-        public static int RunTest(String[] args) 
+        public static int RunTest(String[] args)
         {
             int numAllocators = 1024;
             int[] root1 = GC.AllocateArray<int>(AllocObject.ArraySize, true);
@@ -57,9 +57,10 @@ namespace Profiler.Tests
                 if (i % 1000 == 0)
                 {
                     GC.Collect();
-                    Console.WriteLine ($"Did {i} iterations Allocated={GC.GetAllocatedBytesForCurrentThread()}");
+                    Console.WriteLine(
+                        $"Did {i} iterations Allocated={GC.GetAllocatedBytesForCurrentThread()}"
+                    );
                 }
-
 
                 int[] m_array = new int[100];
             }
@@ -77,9 +78,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "GCTests",
-                                          profilerClsid: GCProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "GCTests",
+                profilerClsid: GCProfilerGuid
+            );
         }
     }
 }

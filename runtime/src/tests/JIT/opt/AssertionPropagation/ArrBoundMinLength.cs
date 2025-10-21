@@ -36,7 +36,7 @@ public class Program
         RunTestNoThrow(Tests.LessEqualsInBound);
         RunTestNoThrow(Tests.EqualsInBound);
         RunTestNoThrow(Tests.EqualsReversedInBound);
-        RunTestNoThrow(Tests.ZeroInBounds);  
+        RunTestNoThrow(Tests.ZeroInBounds);
         RunTestNoThrow(Tests.CompareAgainstLong);
         RunTestNoThrow(TestsEarlyReturn.GreaterInBound);
         RunTestNoThrow(TestsEarlyReturn.GreaterEqualInBound);
@@ -47,15 +47,21 @@ public class Program
         RunTestNoThrow((int[] arr) => Tests.EqualsAgainstBoundFiveIndex(arr, 6));
         RunTestNoThrow((int[] arr) => TestsEarlyReturn.NotEqualsAgainstBoundFiveIndex(arr, 6));
 
-
         Tests.ModInBounds(arr, 11);
-        try { Tests.ModOutOfBounds(arr, 6); returnCode--; } catch {}
+        try
+        {
+            Tests.ModOutOfBounds(arr, 6);
+            returnCode--;
+        }
+        catch { }
 
         arr = new int[0];
         RunTestThrows(Tests.ZeroOutOfBounds);
         RunTestThrows(TestsEarlyReturn.ZeroOutOfBounds);
         RunTestThrows((int[] arr) => Tests.EqualsAgainstBoundZeroIndex(arr, 0));
-        RunTestThrows((int[] arr) => TestsEarlyReturn.EqualsAgainstBoundZeroIndexOutOfBound(arr, 1));
+        RunTestThrows(
+            (int[] arr) => TestsEarlyReturn.EqualsAgainstBoundZeroIndexOutOfBound(arr, 1)
+        );
         RunTestThrows((int[] arr) => TestsEarlyReturn.EqualsAgainstBoundZeroIndex(arr, 0));
         RunTestThrows((int[] arr) => TestsEarlyReturn.NotEqualsAgainstBoundFiveIndex(arr, 0));
         RunTestThrows((int[] arr) => Tests.NotEqualsAgainstBoundZeroIndex(arr, 1));
@@ -82,10 +88,7 @@ public class Program
             Console.WriteLine("failed " + action.Method.Name);
             returnCode--;
         }
-        catch (Exception)
-        {
-
-        }
+        catch (Exception) { }
     }
 
     private static void RunTestNoThrow(Action<int[]> action)
@@ -484,7 +487,7 @@ public static class TestsEarlyReturn
     {
         if (arr.Length == bound)
         {
-           return;
+            return;
         }
 
         arr[0] = 1;

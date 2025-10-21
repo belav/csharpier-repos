@@ -13,6 +13,7 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
         public uint Index { get; set; }
         public uint StartOffset { get; set; }
         public uint StopOffset { get; set; }
+
         public InterruptibleRange(uint index, uint start, uint stop)
         {
             Index = index;
@@ -30,7 +31,14 @@ namespace ILCompiler.Reflection.ReadyToRun.Amd64
 
         public GcTransition() { }
 
-        public GcTransition(int codeOffset, int slotId, bool isLive, int chunkId, GcSlotTable slotTable, Machine machine)
+        public GcTransition(
+            int codeOffset,
+            int slotId,
+            bool isLive,
+            int chunkId,
+            GcSlotTable slotTable,
+            Machine machine
+        )
         {
             CodeOffset = codeOffset;
             SlotId = slotId;

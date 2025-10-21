@@ -9,9 +9,7 @@ namespace System.ServiceModel.Activities
 
     public sealed class SendSettings
     {
-        public SendSettings()
-        {
-        }
+        public SendSettings() { }
 
         // Send settings
         public bool IsOneWay { get; set; }

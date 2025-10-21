@@ -27,7 +27,10 @@ namespace System.Web.Razor.Test.Utils
             else
             {
 #endif
-                Assert.True(withTimeout((int)TimeSpan.FromSeconds(TimeoutInSeconds).TotalMilliseconds), "Timeout expired!");
+                Assert.True(
+                    withTimeout((int)TimeSpan.FromSeconds(TimeoutInSeconds).TotalMilliseconds),
+                    "Timeout expired!"
+                );
 #if DEBUG
             }
 #endif

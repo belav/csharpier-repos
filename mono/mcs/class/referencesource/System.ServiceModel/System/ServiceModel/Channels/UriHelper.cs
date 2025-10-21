@@ -13,7 +13,10 @@ namespace System.ServiceModel.Channels
 
         internal static string NormalizedAbsoluteUri(this Uri uri)
         {
-            return uri.GetComponents(UriComponents.AbsoluteUri | UriComponents.NormalizedHost, UriFormat.UriEscaped);
+            return uri.GetComponents(
+                UriComponents.AbsoluteUri | UriComponents.NormalizedHost,
+                UriFormat.UriEscaped
+            );
         }
     }
 }

@@ -2,18 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.TypeSystem;
-
 using Internal.Text;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
     public abstract class AssemblyStubNode : ObjectNode, ISymbolDefinitionNode
     {
-        public AssemblyStubNode()
-        {
-        }
+        public AssemblyStubNode() { }
 
         /// <summary>
         /// Gets a value indicating whether the stub's address is visible from managed code
@@ -21,7 +17,8 @@ namespace ILCompiler.DependencyAnalysis
         /// </summary>
         protected virtual bool IsVisibleFromManagedCode => true;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool StaticDependenciesAreComputed => true;
 
@@ -34,9 +31,9 @@ namespace ILCompiler.DependencyAnalysis
             // If the address is expected to be visible from managed code, we need to align
             // at the managed code boundaries to prevent the stub from being confused with
             // a fat fuction pointer. Otherwise we can align tighter.
-            int alignment = IsVisibleFromManagedCode ?
-                factory.Target.MinimumFunctionAlignment :
-                factory.Target.MinimumCodeAlignment;
+            int alignment = IsVisibleFromManagedCode
+                ? factory.Target.MinimumFunctionAlignment
+                : factory.Target.MinimumCodeAlignment;
 
             switch (factory.Target.Architecture)
             {
@@ -69,7 +66,8 @@ namespace ILCompiler.DependencyAnalysis
                     return arm64Emitter.Builder.ToObjectData();
 
                 case TargetArchitecture.LoongArch64:
-                    LoongArch64.LoongArch64Emitter loongarch64Emitter = new LoongArch64.LoongArch64Emitter(factory, relocsOnly);
+                    LoongArch64.LoongArch64Emitter loongarch64Emitter =
+                        new LoongArch64.LoongArch64Emitter(factory, relocsOnly);
                     EmitCode(factory, ref loongarch64Emitter, relocsOnly);
                     loongarch64Emitter.Builder.RequireInitialAlignment(alignment);
                     loongarch64Emitter.Builder.AddSymbol(this);
@@ -80,10 +78,30 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        protected abstract void EmitCode(NodeFactory factory, ref X64.X64Emitter instructionEncoder, bool relocsOnly);
-        protected abstract void EmitCode(NodeFactory factory, ref X86.X86Emitter instructionEncoder, bool relocsOnly);
-        protected abstract void EmitCode(NodeFactory factory, ref ARM.ARMEmitter instructionEncoder, bool relocsOnly);
-        protected abstract void EmitCode(NodeFactory factory, ref ARM64.ARM64Emitter instructionEncoder, bool relocsOnly);
-        protected abstract void EmitCode(NodeFactory factory, ref LoongArch64.LoongArch64Emitter instructionEncoder, bool relocsOnly);
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref X64.X64Emitter instructionEncoder,
+            bool relocsOnly
+        );
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref X86.X86Emitter instructionEncoder,
+            bool relocsOnly
+        );
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref ARM.ARMEmitter instructionEncoder,
+            bool relocsOnly
+        );
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref ARM64.ARM64Emitter instructionEncoder,
+            bool relocsOnly
+        );
+        protected abstract void EmitCode(
+            NodeFactory factory,
+            ref LoongArch64.LoongArch64Emitter instructionEncoder,
+            bool relocsOnly
+        );
     }
 }

@@ -15,16 +15,30 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 {
     internal static class FormattingAnalyzerHelper
     {
-        internal static void AnalyzeSyntaxTree(SyntaxTreeAnalysisContext context, FormattingProvider formattingProvider, DiagnosticDescriptor descriptor, SyntaxFormattingOptions options)
+        internal static void AnalyzeSyntaxTree(
+            SyntaxTreeAnalysisContext context,
+            FormattingProvider formattingProvider,
+            DiagnosticDescriptor descriptor,
+            SyntaxFormattingOptions options
+        )
         {
             var tree = context.Tree;
             var cancellationToken = context.CancellationToken;
 
             var oldText = tree.GetText(cancellationToken);
             var root = tree.GetRoot(cancellationToken);
-            var span = context.FilterSpan.HasValue ? context.FilterSpan.GetValueOrDefault() : root.FullSpan;
+            var span = context.FilterSpan.HasValue
+                ? context.FilterSpan.GetValueOrDefault()
+                : root.FullSpan;
             var spans = SpecializedCollections.SingletonEnumerable(span);
-            var formattingChanges = Formatter.GetFormattedTextChanges(root, spans, formattingProvider, options, rules: null, cancellationToken);
+            var formattingChanges = Formatter.GetFormattedTextChanges(
+                root,
+                spans,
+                formattingProvider,
+                options,
+                rules: null,
+                cancellationToken
+            );
 
             // formattingChanges could include changes that impact a larger section of the original document than
             // necessary. Before reporting diagnostics, process the changes to minimize the span of individual
@@ -40,7 +54,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                     var offset = change.Span.Length - change.NewText.Length;
                     if (offset >= 0)
                     {
-                        if (oldText.GetSubText(new TextSpan(change.Span.Start + offset, change.NewText.Length)).ContentEquals(SourceText.From(change.NewText)))
+                        if (
+                            oldText
+                                .GetSubText(
+                                    new TextSpan(change.Span.Start + offset, change.NewText.Length)
+                                )
+                                .ContentEquals(SourceText.From(change.NewText))
+                        )
                         {
                             change = new TextChange(new TextSpan(change.Span.Start, offset), "");
                         }
@@ -49,9 +69,18 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                             // Handle cases where the change is a substring removal from the end. In these cases, we want
                             // the diagnostic span to cover the unwanted trailing characters (which should be removed), and
                             // nothing more.
-                            if (oldText.GetSubText(new TextSpan(change.Span.Start, change.NewText.Length)).ContentEquals(SourceText.From(change.NewText)))
+                            if (
+                                oldText
+                                    .GetSubText(
+                                        new TextSpan(change.Span.Start, change.NewText.Length)
+                                    )
+                                    .ContentEquals(SourceText.From(change.NewText))
+                            )
                             {
-                                change = new TextChange(new TextSpan(change.Span.Start + change.NewText.Length, offset), "");
+                                change = new TextChange(
+                                    new TextSpan(change.Span.Start + change.NewText.Length, offset),
+                                    ""
+                                );
                             }
                         }
                     }
@@ -65,11 +94,14 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 }
 
                 var location = Location.Create(tree, change.Span);
-                context.ReportDiagnostic(Diagnostic.Create(
-                    descriptor,
-                    location,
-                    additionalLocations: null,
-                    properties: null));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        descriptor,
+                        location,
+                        additionalLocations: null,
+                        properties: null
+                    )
+                );
             }
         }
     }

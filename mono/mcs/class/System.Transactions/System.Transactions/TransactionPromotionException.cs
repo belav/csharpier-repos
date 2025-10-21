@@ -11,28 +11,18 @@ using System.Runtime.Serialization;
 
 namespace System.Transactions
 {
-	[Serializable]
-	public class TransactionPromotionException : TransactionException
-	{
-		public TransactionPromotionException ()
-		{
-		}
+    [Serializable]
+    public class TransactionPromotionException : TransactionException
+    {
+        public TransactionPromotionException() { }
 
-		public TransactionPromotionException (string message)
-			: base (message)
-		{
-		}
+        public TransactionPromotionException(string message)
+            : base(message) { }
 
-		public TransactionPromotionException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public TransactionPromotionException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		protected TransactionPromotionException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected TransactionPromotionException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+    }
 }
-

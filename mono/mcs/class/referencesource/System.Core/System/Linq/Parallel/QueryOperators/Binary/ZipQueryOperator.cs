@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -23,7 +23,7 @@ namespace System.Linq.Parallel
     /// two vectors a = {0, 1, 2, 3} and b = {9, 8, 7, 6} is the vector of pairs,
     /// c = {(0,9), (1,8), (2,7), (3,6)}. Because the expectation is that each element
     /// is matched with the element in the other data source at the same ordinal
-    /// position, the zip operator requires order preservation. 
+    /// position, the zip operator requires order preservation.
     /// </summary>
     /// <typeparam name="TLeftInput"></typeparam>
     /// <typeparam name="TRightInput"></typeparam>
@@ -31,7 +31,6 @@ namespace System.Linq.Parallel
     internal sealed class ZipQueryOperator<TLeftInput, TRightInput, TOutput>
         : QueryOperator<TOutput>
     {
-
         private readonly Func<TLeftInput, TRightInput, TOutput> m_resultSelector; // To select result elements.
         private readonly QueryOperator<TLeftInput> m_leftChild;
         private readonly QueryOperator<TRightInput> m_rightChild;
@@ -48,18 +47,21 @@ namespace System.Linq.Parallel
         //
 
         internal ZipQueryOperator(
-            ParallelQuery<TLeftInput> leftChildSource, IEnumerable<TRightInput> rightChildSource,
-            Func<TLeftInput, TRightInput, TOutput> resultSelector)
-            :this(
+            ParallelQuery<TLeftInput> leftChildSource,
+            IEnumerable<TRightInput> rightChildSource,
+            Func<TLeftInput, TRightInput, TOutput> resultSelector
+        )
+            : this(
                 QueryOperator<TLeftInput>.AsQueryOperator(leftChildSource),
                 QueryOperator<TRightInput>.AsQueryOperator(rightChildSource),
-                resultSelector)
-        {
-        }
+                resultSelector
+            ) { }
 
         private ZipQueryOperator(
-            QueryOperator<TLeftInput> left, QueryOperator<TRightInput> right,
-            Func<TLeftInput, TRightInput, TOutput> resultSelector)
+            QueryOperator<TLeftInput> left,
+            QueryOperator<TRightInput> right,
+            Func<TLeftInput, TRightInput, TOutput> resultSelector
+        )
             : base(left.SpecifiedQuerySettings.Merge(right.SpecifiedQuerySettings))
         {
             Contract.Assert(resultSelector != null, "operator cannot be null");
@@ -88,30 +90,57 @@ namespace System.Linq.Parallel
         {
             // We just open our child operators, left and then right.
             QueryResults<TLeftInput> leftChildResults = m_leftChild.Open(settings, preferStriping);
-            QueryResults<TRightInput> rightChildResults = m_rightChild.Open(settings, preferStriping);
+            QueryResults<TRightInput> rightChildResults = m_rightChild.Open(
+                settings,
+                preferStriping
+            );
 
             int partitionCount = settings.DegreeOfParallelism.Value;
             if (m_prematureMergeLeft)
             {
-                PartitionedStreamMerger<TLeftInput> merger = new PartitionedStreamMerger<TLeftInput>(
-                    false, ParallelMergeOptions.FullyBuffered, settings.TaskScheduler, m_leftChild.OutputOrdered,
-                    settings.CancellationState, settings.QueryId);
+                PartitionedStreamMerger<TLeftInput> merger =
+                    new PartitionedStreamMerger<TLeftInput>(
+                        false,
+                        ParallelMergeOptions.FullyBuffered,
+                        settings.TaskScheduler,
+                        m_leftChild.OutputOrdered,
+                        settings.CancellationState,
+                        settings.QueryId
+                    );
                 leftChildResults.GivePartitionedStream(merger);
                 leftChildResults = new ListQueryResults<TLeftInput>(
-                    merger.MergeExecutor.GetResultsAsArray(), partitionCount, preferStriping);
+                    merger.MergeExecutor.GetResultsAsArray(),
+                    partitionCount,
+                    preferStriping
+                );
             }
 
             if (m_prematureMergeRight)
             {
-                PartitionedStreamMerger<TRightInput> merger = new PartitionedStreamMerger<TRightInput>(
-                    false, ParallelMergeOptions.FullyBuffered, settings.TaskScheduler, m_rightChild.OutputOrdered,
-                    settings.CancellationState, settings.QueryId);
+                PartitionedStreamMerger<TRightInput> merger =
+                    new PartitionedStreamMerger<TRightInput>(
+                        false,
+                        ParallelMergeOptions.FullyBuffered,
+                        settings.TaskScheduler,
+                        m_rightChild.OutputOrdered,
+                        settings.CancellationState,
+                        settings.QueryId
+                    );
                 rightChildResults.GivePartitionedStream(merger);
                 rightChildResults = new ListQueryResults<TRightInput>(
-                    merger.MergeExecutor.GetResultsAsArray(), partitionCount, preferStriping);
+                    merger.MergeExecutor.GetResultsAsArray(),
+                    partitionCount,
+                    preferStriping
+                );
             }
 
-            return new ZipQueryOperatorResults(leftChildResults, rightChildResults, m_resultSelector, partitionCount, preferStriping);
+            return new ZipQueryOperatorResults(
+                leftChildResults,
+                rightChildResults,
+                m_resultSelector,
+                partitionCount,
+                preferStriping
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -120,10 +149,18 @@ namespace System.Linq.Parallel
 
         internal override IEnumerable<TOutput> AsSequentialQuery(CancellationToken token)
         {
-            using(IEnumerator<TLeftInput> leftEnumerator = m_leftChild.AsSequentialQuery(token).GetEnumerator())
-            using(IEnumerator<TRightInput> rightEnumerator = m_rightChild.AsSequentialQuery(token).GetEnumerator())
+            using (
+                IEnumerator<TLeftInput> leftEnumerator = m_leftChild
+                    .AsSequentialQuery(token)
+                    .GetEnumerator()
+            )
+            using (
+                IEnumerator<TRightInput> rightEnumerator = m_rightChild
+                    .AsSequentialQuery(token)
+                    .GetEnumerator()
+            )
             {
-                while(leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
+                while (leftEnumerator.MoveNext() && rightEnumerator.MoveNext())
                 {
                     yield return m_resultSelector(leftEnumerator.Current, rightEnumerator.Current);
                 }
@@ -136,23 +173,17 @@ namespace System.Linq.Parallel
 
         internal override OrdinalIndexState OrdinalIndexState
         {
-            get
-            {
-                return OrdinalIndexState.Indexible;
-            }
+            get { return OrdinalIndexState.Indexible; }
         }
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
         // a similar sequential operation (i.e., in LINQ to Objects).
         //
-       
+
         internal override bool LimitsParallelism
         {
-            get
-            {
-                return m_limitsParallelism;
-            }
+            get { return m_limitsParallelism; }
         }
 
         //---------------------------------------------------------------------------------------
@@ -170,8 +201,12 @@ namespace System.Linq.Parallel
             private readonly bool m_preferStriping;
 
             internal ZipQueryOperatorResults(
-                QueryResults<TLeftInput> leftChildResults, QueryResults<TRightInput> rightChildResults,
-                Func<TLeftInput, TRightInput, TOutput> resultSelector, int partitionCount, bool preferStriping)
+                QueryResults<TLeftInput> leftChildResults,
+                QueryResults<TRightInput> rightChildResults,
+                Func<TLeftInput, TRightInput, TOutput> resultSelector,
+                int partitionCount,
+                bool preferStriping
+            )
             {
                 m_leftChildResults = leftChildResults;
                 m_rightChildResults = rightChildResults;
@@ -197,12 +232,18 @@ namespace System.Linq.Parallel
 
             internal override TOutput GetElement(int index)
             {
-                return m_resultSelector(m_leftChildResults.GetElement(index), m_rightChildResults.GetElement(index));
+                return m_resultSelector(
+                    m_leftChildResults.GetElement(index),
+                    m_rightChildResults.GetElement(index)
+                );
             }
 
-            internal override void GivePartitionedStream(IPartitionedStreamRecipient<TOutput> recipient)
+            internal override void GivePartitionedStream(
+                IPartitionedStreamRecipient<TOutput> recipient
+            )
             {
-                PartitionedStream<TOutput, int> partitionedStream = ExchangeUtilities.PartitionDataSource(this, m_partitionCount, m_preferStriping);
+                PartitionedStream<TOutput, int> partitionedStream =
+                    ExchangeUtilities.PartitionDataSource(this, m_partitionCount, m_preferStriping);
                 recipient.Receive(partitionedStream);
             }
         }

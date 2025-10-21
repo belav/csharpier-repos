@@ -1,44 +1,48 @@
-class X {
+class X
+{
+    public static int Main()
+    {
+        int i = 0;
 
-	public static int Main ()
-	{
-		int i = 0;
-		
-		if (false){
-			i = 1;
-			return 1;
-		}
+        if (false)
+        {
+            i = 1;
+            return 1;
+        }
 
-		if (true)
-			i = 2;
-		else
-			i = 3;
+        if (true)
+            i = 2;
+        else
+            i = 3;
 
-		if (i != 2)
-			return 5;
-		
-		while (true){
-			i++;
-			if (i == 10)
-				break;
-		}
+        if (i != 2)
+            return 5;
 
-		while (false){
-			i--;
-			return 3;
-		}
+        while (true)
+        {
+            i++;
+            if (i == 10)
+                break;
+        }
 
-		if (i != 10)
-			return 2;
+        while (false)
+        {
+            i--;
+            return 3;
+        }
 
-		do {
-			if (i++ == 20)
-				break;
-		} while (true);
+        if (i != 10)
+            return 2;
 
-		if (i != 21)
-			return 4;
-		
-		return 0;
-	}
+        do
+        {
+            if (i++ == 20)
+                break;
+        } while (true);
+
+        if (i != 21)
+            return 4;
+
+        return 0;
+    }
 }

@@ -13,7 +13,11 @@ namespace System.Web.Http
     /// This attribute is used on action parameters to indicate
     /// they come only from the content body of the incoming <see cref="HttpRequestMessage"/>.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Parameter, Inherited = true, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Parameter,
+        Inherited = true,
+        AllowMultiple = false
+    )]
     public sealed class FromBodyAttribute : ParameterBindingAttribute
     {
         public override HttpParameterBinding GetBinding(HttpParameterDescriptor parameter)
@@ -24,7 +28,8 @@ namespace System.Web.Http
             }
 
             IEnumerable<MediaTypeFormatter> formatters = parameter.Configuration.Formatters;
-            IBodyModelValidator validator = parameter.Configuration.Services.GetBodyModelValidator();
+            IBodyModelValidator validator =
+                parameter.Configuration.Services.GetBodyModelValidator();
 
             return parameter.BindWithFormatter(formatters, validator);
         }

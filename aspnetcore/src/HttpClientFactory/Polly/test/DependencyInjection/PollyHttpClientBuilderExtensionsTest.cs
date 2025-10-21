@@ -114,8 +114,8 @@ public class PollyHttpClientBuilderExtensionsTest
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
         // Act 4
-        await Assert.ThrowsAsync<OverflowException>(
-            () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
+        await Assert.ThrowsAsync<OverflowException>(() =>
+            client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
         );
     }
 
@@ -158,8 +158,8 @@ public class PollyHttpClientBuilderExtensionsTest
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
         // Act 4
-        await Assert.ThrowsAsync<OverflowException>(
-            () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
+        await Assert.ThrowsAsync<OverflowException>(() =>
+            client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
         );
     }
 
@@ -251,8 +251,8 @@ public class PollyHttpClientBuilderExtensionsTest
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
 
         // Act 4
-        await Assert.ThrowsAsync<OverflowException>(
-            () => client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
+        await Assert.ThrowsAsync<OverflowException>(() =>
+            client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/throw"))
         );
     }
 

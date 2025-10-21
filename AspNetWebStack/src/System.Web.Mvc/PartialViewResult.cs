@@ -24,8 +24,14 @@ namespace System.Web.Mvc
                 locationsText.AppendLine();
                 locationsText.Append(location);
             }
-            throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                              MvcResources.Common_PartialViewNotFound, ViewName, locationsText));
+            throw new InvalidOperationException(
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.Common_PartialViewNotFound,
+                    ViewName,
+                    locationsText
+                )
+            );
         }
     }
 }

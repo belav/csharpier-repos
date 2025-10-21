@@ -39,8 +39,8 @@ public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderI
     protected virtual DbContextOptionsBuilder OptionsBuilder { get; }
 
     /// <inheritdoc />
-    DbContextOptionsBuilder IInMemoryDbContextOptionsBuilderInfrastructure.OptionsBuilder
-        => OptionsBuilder;
+    DbContextOptionsBuilder IInMemoryDbContextOptionsBuilderInfrastructure.OptionsBuilder =>
+        OptionsBuilder;
 
     /// <summary>
     ///     Enables nullability check for all properties across all entities within the in-memory database.
@@ -53,7 +53,8 @@ public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderI
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public virtual InMemoryDbContextOptionsBuilder EnableNullChecks(bool nullChecksEnabled = true)
     {
-        var extension = OptionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
+        var extension =
+            OptionsBuilder.Options.FindExtension<InMemoryOptionsExtension>()
             ?? new InMemoryOptionsExtension();
 
         extension = extension.WithNullabilityCheckEnabled(nullChecksEnabled);
@@ -70,8 +71,7 @@ public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderI
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -79,16 +79,14 @@ public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderI
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

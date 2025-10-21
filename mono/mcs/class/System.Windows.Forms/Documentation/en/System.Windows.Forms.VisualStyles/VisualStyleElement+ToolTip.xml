@@ -1,4 +1,7 @@
-<Type Name="VisualStyleElement+ToolTip" FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ToolTip">
+<Type
+  Name="VisualStyleElement+ToolTip"
+  FullName="System.Windows.Forms.VisualStyles.VisualStyleElement+ToolTip"
+>
   <TypeSignature Language="C#" Value="public static class VisualStyleElement.ToolTip" />
   <AssemblyInfo>
     <AssemblyName>System.Windows.Forms</AssemblyName>

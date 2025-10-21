@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetFxTargetFramework)</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <Content Include="..\..\src\Microsoft.AspNetCore.AzureAppServices.SiteExtension\applicationHost.xdt" Link="applicationHost.xdt">
+    <Content
+      Include="..\..\src\Microsoft.AspNetCore.AzureAppServices.SiteExtension\applicationHost.xdt"
+      Link="applicationHost.xdt"
+    >
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="config_empty.xml">
@@ -21,9 +22,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.Web.Xdt.Extensions" />
   </ItemGroup>
-
 </Project>

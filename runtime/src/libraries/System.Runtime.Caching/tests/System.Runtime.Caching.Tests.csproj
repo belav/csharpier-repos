@@ -14,8 +14,10 @@
     <Compile Include="System.Runtime.Caching\CountersTest.cs" />
     <Compile Include="System.Runtime.Caching\ObjectCacheTest.cs" />
     <Compile Include="System.Runtime.Caching\MemoryCacheTest.cs" />
-    <Compile Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs" Link="Common\System\Diagnostics\Tracing\TestEventListener.cs" />
-
+    <Compile
+      Include="$(CommonTestPath)System\Diagnostics\Tracing\TestEventListener.cs"
+      Link="Common\System\Diagnostics\Tracing\TestEventListener.cs"
+    />
     <TrimmerRootDescriptor Include="$(MSBuildThisFileDirectory)ILLink.Descriptors.xml" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">

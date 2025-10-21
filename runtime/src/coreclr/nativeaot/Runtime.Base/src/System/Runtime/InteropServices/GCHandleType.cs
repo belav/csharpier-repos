@@ -8,6 +8,6 @@ namespace System.Runtime.InteropServices
         Weak = 0,
         WeakTrackResurrection = 1,
         Normal = 2,
-        Pinned = 3  // NOTE: not implemented here
+        Pinned = 3, // NOTE: not implemented here
     }
 }

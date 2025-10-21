@@ -9,7 +9,10 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class JsonNodeConverterFactory : JsonConverterFactory
     {
-        public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter? CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (typeof(JsonValue).IsAssignableFrom(typeToConvert))
             {
@@ -30,6 +33,7 @@ namespace System.Text.Json.Serialization.Converters
             return JsonNodeConverter.Instance;
         }
 
-        public override bool CanConvert(Type typeToConvert) => typeof(JsonNode).IsAssignableFrom(typeToConvert);
+        public override bool CanConvert(Type typeToConvert) =>
+            typeof(JsonNode).IsAssignableFrom(typeToConvert);
     }
 }

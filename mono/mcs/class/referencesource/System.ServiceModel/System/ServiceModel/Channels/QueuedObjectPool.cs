@@ -6,7 +6,7 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.Runtime;
 
-    // This is the base object pool class which manages objects in a FIFO queue. The objects are 
+    // This is the base object pool class which manages objects in a FIFO queue. The objects are
     // created through the provided Func<T> createObjectFunc. The main purpose for this class is
     // to get better memory usage for Garbage Collection (GC) when part or all of an object is
     // regularly pinned. Constantly creating such objects can cause large Gen0 Heap fragmentation
@@ -16,7 +16,7 @@ namespace System.ServiceModel.Channels
     //
     // The objects are created in batches for better localization of the objects. Here are the
     // parameters that control the behavior of creation/removal:
-    // 
+    //
     // batchAllocCount: number of objects to be created at the same time when new objects are needed
     //
     // createObjectFunc: func delegate that is used to create objects by sub-classes.
@@ -35,10 +35,15 @@ namespace System.ServiceModel.Channels
         {
             if (batchAllocCount <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("batchAllocCount"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("batchAllocCount")
+                );
             }
 
-            Fx.Assert(batchAllocCount <= maxFreeCount, "batchAllocCount cannot be greater than maxFreeCount");
+            Fx.Assert(
+                batchAllocCount <= maxFreeCount,
+                "batchAllocCount cannot be greater than maxFreeCount"
+            );
             this.batchAllocCount = batchAllocCount;
             this.maxFreeCount = maxFreeCount;
             this.objectQueue = new Queue<T>(batchAllocCount);
@@ -46,17 +51,14 @@ namespace System.ServiceModel.Channels
 
         object ThisLock
         {
-            get
-            {
-                return this.objectQueue;
-            }
+            get { return this.objectQueue; }
         }
 
         public virtual bool Return(T value)
         {
             lock (ThisLock)
             {
-                if (this.objectQueue.Count < this.maxFreeCount && ! this.isClosed)
+                if (this.objectQueue.Count < this.maxFreeCount && !this.isClosed)
                 {
                     this.objectQueue.Enqueue(value);
                     return true;
@@ -98,15 +100,16 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected virtual void CleanupItem(T item)
-        {
-        }
+        protected virtual void CleanupItem(T item) { }
 
         protected abstract T Create();
 
         void AllocObjects()
         {
-            Fx.Assert(this.objectQueue.Count == 0, "The object queue must be empty for new allocations");
+            Fx.Assert(
+                this.objectQueue.Count == 0,
+                "The object queue must be empty for new allocations"
+            );
             for (int i = 0; i < batchAllocCount; i++)
             {
                 this.objectQueue.Enqueue(Create());

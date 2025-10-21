@@ -11,6 +11,11 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool CertControlStore(SafeCertStoreHandle hCertStore, CertControlStoreFlags dwFlags, CertControlStoreType dwControlType, IntPtr pvCtrlPara);
+        internal static partial bool CertControlStore(
+            SafeCertStoreHandle hCertStore,
+            CertControlStoreFlags dwFlags,
+            CertControlStoreType dwControlType,
+            IntPtr pvCtrlPara
+        );
     }
 }

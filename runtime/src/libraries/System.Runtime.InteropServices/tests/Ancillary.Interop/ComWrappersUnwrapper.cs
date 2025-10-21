@@ -13,7 +13,9 @@ namespace System.Runtime.InteropServices.Marshalling
     {
         public static object GetObjectForUnmanagedWrapper(void* ptr)
         {
-            return ComWrappers.ComInterfaceDispatch.GetInstance<object>((ComWrappers.ComInterfaceDispatch*)ptr);
+            return ComWrappers.ComInterfaceDispatch.GetInstance<object>(
+                (ComWrappers.ComInterfaceDispatch*)ptr
+            );
         }
     }
 }

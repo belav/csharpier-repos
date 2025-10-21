@@ -73,15 +73,18 @@ namespace System.Xml
         /// Prefix of an element this attribute list belongs to.
         /// </summary>
         string Prefix { get; }
+
         /// <summary>
         /// Local name of an element this attribute list belongs to.
         /// </summary>
         string LocalName { get; }
+
         /// <summary>
         /// Returns true if the attribute list has some declared attributes with
         /// type other than CDATA.
         /// </summary>
         bool HasNonCDataAttributes { get; }
+
         /// <summary>
         /// Looks up a DTD attribute definition by its name.
         /// </summary>
@@ -89,12 +92,14 @@ namespace System.Xml
         /// <param name="localName">The local name of the attribute to look for</param>
         /// <returns>Interface representing an attribute or null is none was found</returns>
         IDtdAttributeInfo? LookupAttribute(string prefix, string localName);
+
         /// <summary>
         /// Returns enumeration of all default attributes
         /// defined in this attribute list.
         /// </summary>
         /// <returns>Enumerator of default attribute.</returns>
         IEnumerable<IDtdDefaultAttributeInfo> LookupDefaultAttributes();
+
         /// <summary>
         /// Looks up a ID attribute defined in the attribute list. Returns
         /// null if the attribute list does define an ID attribute.
@@ -116,26 +121,32 @@ namespace System.Xml
         /// The prefix of the attribute
         /// </summary>
         string Prefix { get; }
+
         /// <summary>
         /// The local name of the attribute
         /// </summary>
         string LocalName { get; }
+
         /// <summary>
         /// The line number of the DTD attribute definition
         /// </summary>
         int LineNumber { get; }
+
         /// <summary>
         /// The line position of the DTD attribute definition
         /// </summary>
         int LinePosition { get; }
+
         /// <summary>
         /// Returns true if the attribute is of a different type than CDATA
         /// </summary>
         bool IsNonCDataType { get; }
+
         /// <summary>
         /// Returns true if the attribute was declared in an external DTD subset
         /// </summary>
         bool IsDeclaredInExternal { get; }
+
         /// <summary>
         /// Returns true if the attribute is xml:space or xml:lang
         /// </summary>
@@ -191,46 +202,57 @@ namespace System.Xml
         /// The name of the entity
         /// </summary>
         string Name { get; }
+
         /// <summary>
         /// true if the entity is external (its value is in an external input)
         /// </summary>
         bool IsExternal { get; }
+
         /// <summary>
         /// true if the entity was declared in external DTD subset
         /// </summary>
         bool IsDeclaredInExternal { get; }
+
         /// <summary>
         /// true if this is an unparsed entity
         /// </summary>
         bool IsUnparsedEntity { get; }
+
         /// <summary>
         /// true if this is a parameter entity
         /// </summary>
         bool IsParameterEntity { get; }
+
         /// <summary>
         /// The base URI of the entity value
         /// </summary>
         string BaseUriString { get; }
+
         /// <summary>
         /// The URI of the XML document where the entity was declared
         /// </summary>
         string DeclaredUriString { get; }
+
         /// <summary>
         /// SYSTEM identifier (URI) of the entity value - only used for external entities
         /// </summary>
         string? SystemId { get; }
+
         /// <summary>
         /// PUBLIC identifier of the entity value - only used for external entities
         /// </summary>
         string? PublicId { get; }
+
         /// <summary>
         /// Replacement text of an entity. Valid only for internal entities.
         /// </summary>
         string? Text { get; }
+
         /// <summary>
         /// The line number of the entity value
         /// </summary>
         int LineNumber { get; }
+
         /// <summary>
         /// The line position of the entity value
         /// </summary>

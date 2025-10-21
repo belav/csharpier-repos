@@ -13,14 +13,16 @@ namespace System.ComponentModel.Design
     {
         private ServiceCollection<object?>? _services;
         private readonly IServiceProvider? _parentProvider;
-        private static readonly Type[] s_defaultServices = new Type[] { typeof(IServiceContainer), typeof(ServiceContainer) };
+        private static readonly Type[] s_defaultServices = new Type[]
+        {
+            typeof(IServiceContainer),
+            typeof(ServiceContainer),
+        };
 
         /// <summary>
         /// Creates a new service object container.
         /// </summary>
-        public ServiceContainer()
-        {
-        }
+        public ServiceContainer() { }
 
         /// <summary>
         /// Creates a new service object container.
@@ -50,7 +52,8 @@ namespace System.ComponentModel.Design
         /// Our collection of services. The service collection is demand
         /// created here.
         /// </summary>
-        private ServiceCollection<object?> Services => _services ??= new ServiceCollection<object?>();
+        private ServiceCollection<object?> Services =>
+            _services ??= new ServiceCollection<object?>();
 
         /// <summary>
         /// Adds the given service to the service container.
@@ -80,14 +83,23 @@ namespace System.ComponentModel.Design
             //
             ArgumentNullException.ThrowIfNull(serviceType);
             ArgumentNullException.ThrowIfNull(serviceInstance);
-            if (!(serviceInstance is ServiceCreatorCallback) && !serviceInstance.GetType().IsCOMObject && !serviceType.IsInstanceOfType(serviceInstance))
+            if (
+                !(serviceInstance is ServiceCreatorCallback)
+                && !serviceInstance.GetType().IsCOMObject
+                && !serviceType.IsInstanceOfType(serviceInstance)
+            )
             {
-                throw new ArgumentException(SR.Format(SR.ErrorInvalidServiceInstance, serviceType.FullName));
+                throw new ArgumentException(
+                    SR.Format(SR.ErrorInvalidServiceInstance, serviceType.FullName)
+                );
             }
 
             if (Services.ContainsKey(serviceType))
             {
-                throw new ArgumentException(SR.Format(SR.ErrorServiceExists, serviceType.FullName), nameof(serviceType));
+                throw new ArgumentException(
+                    SR.Format(SR.ErrorServiceExists, serviceType.FullName),
+                    nameof(serviceType)
+                );
             }
 
             Services[serviceType] = serviceInstance;
@@ -104,7 +116,11 @@ namespace System.ComponentModel.Design
         /// <summary>
         /// Adds the given service to the service container.
         /// </summary>
-        public virtual void AddService(Type serviceType, ServiceCreatorCallback callback, bool promote)
+        public virtual void AddService(
+            Type serviceType,
+            ServiceCreatorCallback callback,
+            bool promote
+        )
         {
             if (promote)
             {
@@ -124,7 +140,10 @@ namespace System.ComponentModel.Design
 
             if (Services.ContainsKey(serviceType))
             {
-                throw new ArgumentException(SR.Format(SR.ErrorServiceExists, serviceType.FullName), nameof(serviceType));
+                throw new ArgumentException(
+                    SR.Format(SR.ErrorServiceExists, serviceType.FullName),
+                    nameof(serviceType)
+                );
             }
 
             Services[serviceType] = callback;
@@ -190,7 +209,11 @@ namespace System.ComponentModel.Design
             if (service is ServiceCreatorCallback)
             {
                 service = ((ServiceCreatorCallback)service)(this, serviceType!);
-                if (service != null && !service.GetType().IsCOMObject && !serviceType!.IsInstanceOfType(service))
+                if (
+                    service != null
+                    && !service.GetType().IsCOMObject
+                    && !serviceType!.IsInstanceOfType(service)
+                )
                 {
                     // Callback passed us a bad service. NULL it, rather than throwing an exception.
                     // Callers here do not need to be prepared to handle bad callback implementations.
@@ -247,7 +270,8 @@ namespace System.ComponentModel.Design
         /// <typeparam name="T"></typeparam>
         private sealed class ServiceCollection<T> : Dictionary<Type, T>
         {
-            private static readonly EmbeddedTypeAwareTypeComparer s_serviceTypeComparer = new EmbeddedTypeAwareTypeComparer();
+            private static readonly EmbeddedTypeAwareTypeComparer s_serviceTypeComparer =
+                new EmbeddedTypeAwareTypeComparer();
 
             private sealed class EmbeddedTypeAwareTypeComparer : IEqualityComparer<Type>
             {
@@ -256,9 +280,8 @@ namespace System.ComponentModel.Design
                 public int GetHashCode(Type obj) => obj.FullName!.GetHashCode();
             }
 
-            public ServiceCollection() : base(s_serviceTypeComparer)
-            {
-            }
+            public ServiceCollection()
+                : base(s_serviceTypeComparer) { }
         }
     }
 }

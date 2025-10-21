@@ -9,35 +9,37 @@ using System.Threading;
 
 class Tests
 {
-	static int loops = 20;
-	static int threads = 100;
-	
-	static void Empty () {}
-   
-	static void Create () {
-		Thread t = new Thread (new ThreadStart (Empty));
-		t.Start ();
-		
-		Thread.Sleep(1000);
-		
-		t.Abort ();
-	}
-   
-	static void doit () {
-		for (int i = 0; i < threads; i++)
-			new Thread (new ThreadStart (Create)).Start ();
-	}
+    static int loops = 20;
+    static int threads = 100;
 
-	public static void Main (String[] args) {
-	  if (args.Length > 0)
-		  loops = int.Parse (args [0]);
-	  if (args.Length > 1)
-		  threads = int.Parse (args [1]);
-	  for (int i = 0; i < loops; ++i) {
-		  Console.Write ('.');
-		  doit ();
-	  }
-  }  
+    static void Empty() { }
+
+    static void Create()
+    {
+        Thread t = new Thread(new ThreadStart(Empty));
+        t.Start();
+
+        Thread.Sleep(1000);
+
+        t.Abort();
+    }
+
+    static void doit()
+    {
+        for (int i = 0; i < threads; i++)
+            new Thread(new ThreadStart(Create)).Start();
+    }
+
+    public static void Main(String[] args)
+    {
+        if (args.Length > 0)
+            loops = int.Parse(args[0]);
+        if (args.Length > 1)
+            threads = int.Parse(args[1]);
+        for (int i = 0; i < loops; ++i)
+        {
+            Console.Write('.');
+            doit();
+        }
+    }
 }
-
-

@@ -33,7 +33,8 @@ namespace System.Data.Tests
     public class DataRelationCollectionTest : IDisposable
     {
         private DataSet _dataset;
-        private DataTable _tblparent, _tblchild;
+        private DataTable _tblparent,
+            _tblchild;
 
         public DataRelationCollectionTest()
         {
@@ -90,45 +91,58 @@ namespace System.Data.Tests
         [Fact]
         public void AddException2()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               DataRelationCollection drcol = _dataset.Relations;
-               DataRelation dr1 = new DataRelation("CustOrder"
-                               , _dataset.Tables["Customer"].Columns["custid"]
-                               , _dataset.Tables["Order"].Columns["custid"]);
-               drcol.Add(dr1);
-               drcol.Add(dr1);
-           });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataRelationCollection drcol = _dataset.Relations;
+                    DataRelation dr1 = new DataRelation(
+                        "CustOrder",
+                        _dataset.Tables["Customer"].Columns["custid"],
+                        _dataset.Tables["Order"].Columns["custid"]
+                    );
+                    drcol.Add(dr1);
+                    drcol.Add(dr1);
+                }
+            );
         }
 
         [Fact]
         public void AddException3()
         {
             Assert.Throws<DuplicateNameException>(() =>
-           {
-               DataRelationCollection drcol = _dataset.Relations;
-               DataRelation dr1 = new DataRelation("DuplicateName"
-                               , _dataset.Tables["Customer"].Columns["custid"]
-                               , _dataset.Tables["Order"].Columns["custid"]);
-               DataRelation dr2 = new DataRelation("DuplicateName"
-                               , _dataset.Tables["Item"].Columns["itemid"]
-                               , _dataset.Tables["Order"].Columns["custid"]);
+            {
+                DataRelationCollection drcol = _dataset.Relations;
+                DataRelation dr1 = new DataRelation(
+                    "DuplicateName",
+                    _dataset.Tables["Customer"].Columns["custid"],
+                    _dataset.Tables["Order"].Columns["custid"]
+                );
+                DataRelation dr2 = new DataRelation(
+                    "DuplicateName",
+                    _dataset.Tables["Item"].Columns["itemid"],
+                    _dataset.Tables["Order"].Columns["custid"]
+                );
 
-               drcol.Add(dr1);
-               drcol.Add(dr2);
-           });
+                drcol.Add(dr1);
+                drcol.Add(dr2);
+            });
         }
 
         [Fact]
         public void AddRange()
         {
             DataRelationCollection drcol = _dataset.Relations;
-            DataRelation dr1 = new DataRelation("CustOrder"
-                            , _dataset.Tables["Customer"].Columns["custid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
-            DataRelation dr2 = new DataRelation("ItemOrder"
-                            , _dataset.Tables["Item"].Columns["itemid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
+            DataRelation dr1 = new DataRelation(
+                "CustOrder",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
+            DataRelation dr2 = new DataRelation(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
             drcol.AddRange(new DataRelation[] { dr1, dr2 });
 
             Assert.Equal("CustOrder", drcol[0].RelationName);
@@ -146,9 +160,11 @@ namespace System.Data.Tests
             drcol.Add(dr);
             Assert.True(drcol.CanRemove(dr));
             Assert.False(drcol.CanRemove(null));
-            DataRelation dr2 = new DataRelation("ItemOrder"
-                        , _dataset.Tables["Item"].Columns["itemid"]
-                        , _dataset.Tables["Order"].Columns["custid"]);
+            DataRelation dr2 = new DataRelation(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
             Assert.False(drcol.CanRemove(dr2));
         }
 
@@ -159,8 +175,11 @@ namespace System.Data.Tests
             DataColumn parentCol = _dataset.Tables["Customer"].Columns["custid"];
             DataColumn childCol = _dataset.Tables["Order"].Columns["custid"];
             drcol.Add(new DataRelation("CustOrder", parentCol, childCol));
-            drcol.Add("ItemOrder", _dataset.Tables["Item"].Columns["itemid"]
-                                 , _dataset.Tables["Order"].Columns["itemid"]);
+            drcol.Add(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["itemid"]
+            );
             drcol.Clear();
             Assert.Equal(0, drcol.Count);
         }
@@ -185,12 +204,16 @@ namespace System.Data.Tests
         public void CopyTo()
         {
             DataRelationCollection drcol = _dataset.Relations;
-            drcol.Add("CustOrder"
-                    , _dataset.Tables["Customer"].Columns["custid"]
-                    , _dataset.Tables["Order"].Columns["custid"]);
-            drcol.Add("ItemOrder"
-                    , _dataset.Tables["Item"].Columns["itemid"]
-                    , _dataset.Tables["Order"].Columns["custid"]);
+            drcol.Add(
+                "CustOrder",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
+            drcol.Add(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
 
             DataRelation[] array = new DataRelation[2];
             drcol.CopyTo(array, 0);
@@ -210,12 +233,16 @@ namespace System.Data.Tests
         public void EqualsTest()
         {
             DataRelationCollection drcol = _dataset.Relations;
-            drcol.Add("CustOrder"
-                    , _dataset.Tables["Customer"].Columns["custid"]
-                    , _dataset.Tables["Order"].Columns["custid"]);
-            drcol.Add("ItemOrder"
-                    , _dataset.Tables["Item"].Columns["itemid"]
-                    , _dataset.Tables["Order"].Columns["custid"]);
+            drcol.Add(
+                "CustOrder",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
+            drcol.Add(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
             DataSet newds = new DataSet();
             DataRelationCollection drcol1 = newds.Relations;
             DataRelationCollection drcol2 = _dataset.Relations;
@@ -228,12 +255,16 @@ namespace System.Data.Tests
         public void IndexOf()
         {
             DataRelationCollection drcol = _dataset.Relations;
-            DataRelation dr1 = new DataRelation("CustOrder"
-                            , _dataset.Tables["Customer"].Columns["custid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
-            DataRelation dr2 = new DataRelation("ItemOrder"
-                            , _dataset.Tables["Item"].Columns["itemid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
+            DataRelation dr1 = new DataRelation(
+                "CustOrder",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
+            DataRelation dr2 = new DataRelation(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
             drcol.Add(dr1);
             drcol.Add(dr2);
 
@@ -247,9 +278,11 @@ namespace System.Data.Tests
             Assert.Equal(1, drcol.IndexOf(drcol[1]));
 
             Assert.Equal(-1, drcol.IndexOf("_noRelation_"));
-            DataRelation newdr = new DataRelation("newdr"
-                    , _dataset.Tables["Customer"].Columns["custid"]
-                    , _dataset.Tables["Order"].Columns["custid"]);
+            DataRelation newdr = new DataRelation(
+                "newdr",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
 
             Assert.Equal(-1, drcol.IndexOf(newdr));
         }
@@ -258,12 +291,16 @@ namespace System.Data.Tests
         public void Remove()
         {
             DataRelationCollection drcol = _dataset.Relations;
-            DataRelation dr1 = new DataRelation("CustOrder"
-                            , _dataset.Tables["Customer"].Columns["custid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
-            DataRelation dr2 = new DataRelation("ItemOrder"
-                            , _dataset.Tables["Item"].Columns["itemid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
+            DataRelation dr1 = new DataRelation(
+                "CustOrder",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
+            DataRelation dr2 = new DataRelation(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
             drcol.Add(dr1);
             drcol.Add(dr2);
 
@@ -278,9 +315,11 @@ namespace System.Data.Tests
             DataRelation drnull = null;
             drcol.Remove(drnull);
 
-            DataRelation newdr = new DataRelation("newdr"
-                                , _dataset.Tables["Customer"].Columns["custid"]
-                                , _dataset.Tables["Order"].Columns["custid"]);
+            DataRelation newdr = new DataRelation(
+                "newdr",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => drcol.Remove(newdr));
         }
 
@@ -288,12 +327,16 @@ namespace System.Data.Tests
         public void RemoveAt()
         {
             DataRelationCollection drcol = _dataset.Relations;
-            DataRelation dr1 = new DataRelation("CustOrder"
-                            , _dataset.Tables["Customer"].Columns["custid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
-            DataRelation dr2 = new DataRelation("ItemOrder"
-                            , _dataset.Tables["Item"].Columns["itemid"]
-                            , _dataset.Tables["Order"].Columns["custid"]);
+            DataRelation dr1 = new DataRelation(
+                "CustOrder",
+                _dataset.Tables["Customer"].Columns["custid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
+            DataRelation dr2 = new DataRelation(
+                "ItemOrder",
+                _dataset.Tables["Item"].Columns["itemid"],
+                _dataset.Tables["Order"].Columns["custid"]
+            );
             drcol.Add(dr1);
             drcol.Add(dr2);
 

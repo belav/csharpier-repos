@@ -21,25 +21,35 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionExpression;
 
 using static SyntaxFactory;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseCollectionExpressionForEmpty), Shared]
-internal sealed partial class CSharpUseCollectionExpressionForEmptyCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+[
+    ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.UseCollectionExpressionForEmpty
+    ),
+    Shared
+]
+internal sealed partial class CSharpUseCollectionExpressionForEmptyCodeFixProvider
+    : SyntaxEditorBasedCodeFixProvider
 {
     private static readonly CollectionExpressionSyntax s_emptyCollection = CollectionExpression();
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpUseCollectionExpressionForEmptyCodeFixProvider()
-    {
-    }
+    public CSharpUseCollectionExpressionForEmptyCodeFixProvider() { }
 
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(IDEDiagnosticIds.UseCollectionExpressionForEmptyDiagnosticId);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(IDEDiagnosticIds.UseCollectionExpressionForEmptyDiagnosticId);
 
-    protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-        => !diagnostic.Descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary);
+    protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+        !diagnostic.Descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.Unnecessary);
 
     public override Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        RegisterCodeFix(context, CSharpCodeFixesResources.Use_collection_expression, IDEDiagnosticIds.UseCollectionExpressionForEmptyDiagnosticId);
+        RegisterCodeFix(
+            context,
+            CSharpCodeFixesResources.Use_collection_expression,
+            IDEDiagnosticIds.UseCollectionExpressionForEmptyDiagnosticId
+        );
         return Task.CompletedTask;
     }
 
@@ -48,16 +58,20 @@ internal sealed partial class CSharpUseCollectionExpressionForEmptyCodeFixProvid
         ImmutableArray<Diagnostic> diagnostics,
         SyntaxEditor editor,
         CodeActionOptionsProvider fallbackOptions,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
 
         foreach (var diagnostic in diagnostics.OrderByDescending(d => d.Location.SourceSpan.Start))
         {
-            var expression = diagnostic.AdditionalLocations[0].FindNode(getInnermostNodeForTie: true, cancellationToken);
+            var expression = diagnostic
+                .AdditionalLocations[0]
+                .FindNode(getInnermostNodeForTie: true, cancellationToken);
             editor.ReplaceNode(
                 expression,
-                (current, _) => s_emptyCollection.WithTriviaFrom(current));
+                (current, _) => s_emptyCollection.WithTriviaFrom(current)
+            );
         }
 
         return;

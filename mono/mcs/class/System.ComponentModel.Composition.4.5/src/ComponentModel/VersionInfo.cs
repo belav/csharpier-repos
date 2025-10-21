@@ -10,5 +10,3 @@ using System.Security;
 [assembly: System.Reflection.AssemblyDescription("Codeplex version (http://mef.codeplex.com)")]
 [assembly: System.Reflection.AssemblyVersion("4.1.2.0")]
 [assembly: System.Reflection.AssemblyFileVersion("1.1.0.0")]
-
-

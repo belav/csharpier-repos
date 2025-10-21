@@ -17,7 +17,15 @@ namespace Roslyn.Utilities
 
         Stream OpenFile(string filePath, FileMode mode, FileAccess access, FileShare share);
 
-        Stream OpenFileEx(string filePath, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, out string normalizedFilePath);
+        Stream OpenFileEx(
+            string filePath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            out string normalizedFilePath
+        );
     }
 
     internal static class CommonCompilerFileSystemExtensions
@@ -25,7 +33,13 @@ namespace Roslyn.Utilities
         /// <summary>
         /// Open a file and ensure common exception types are wrapped to <see cref="IOException"/>.
         /// </summary>
-        internal static Stream OpenFileWithNormalizedException(this ICommonCompilerFileSystem fileSystem, string filePath, FileMode fileMode, FileAccess fileAccess, FileShare fileShare)
+        internal static Stream OpenFileWithNormalizedException(
+            this ICommonCompilerFileSystem fileSystem,
+            string filePath,
+            FileMode fileMode,
+            FileAccess fileAccess,
+            FileShare fileShare
+        )
         {
             try
             {
@@ -54,16 +68,26 @@ namespace Roslyn.Utilities
     {
         public static StandardFileSystem Instance { get; } = new StandardFileSystem();
 
-        private StandardFileSystem()
-        {
-        }
+        private StandardFileSystem() { }
 
         public bool FileExists(string filePath) => File.Exists(filePath);
 
-        public Stream OpenFile(string filePath, FileMode mode, FileAccess access, FileShare share)
-            => new FileStream(filePath, mode, access, share);
+        public Stream OpenFile(
+            string filePath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        ) => new FileStream(filePath, mode, access, share);
 
-        public Stream OpenFileEx(string filePath, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, out string normalizedFilePath)
+        public Stream OpenFileEx(
+            string filePath,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            out string normalizedFilePath
+        )
         {
             var fileStream = new FileStream(filePath, mode, access, share, bufferSize, options);
             normalizedFilePath = fileStream.Name;

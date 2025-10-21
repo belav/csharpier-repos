@@ -42,6 +42,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Throw a <see cref="JsonSerializationException"/> when a missing member is encountered during deserialization.
         /// </summary>
-        Error = 1
+        Error = 1,
     }
 }

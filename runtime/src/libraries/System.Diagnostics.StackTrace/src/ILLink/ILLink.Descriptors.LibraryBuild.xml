@@ -4,4 +4,3 @@
     <type fullname="System.Diagnostics.StackTraceSymbols" required="true" />
   </assembly>
 </linker>
-

@@ -99,7 +99,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData((ulong)uint.MaxValue + 1, "1b0000000100000000")]
         [InlineData(long.MaxValue, "1b7fffffffffffffff")]
         [InlineData(ulong.MaxValue, "1bffffffffffffffff")]
-        public static void WriteUInt64_SingleValue_HappyPath(ulong input, string hexExpectedEncoding)
+        public static void WriteUInt64_SingleValue_HappyPath(
+            ulong input,
+            string hexExpectedEncoding
+        )
         {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
@@ -141,7 +144,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(ushort.MaxValue, "39ffff")]
         [InlineData(uint.MaxValue, "3affffffff")]
         [InlineData(ulong.MaxValue, "3bffffffffffffffff")]
-        public static void WriteCborNegativeIntegerRepresentation_SingleValue_HappyPath(ulong input, string hexExpectedEncoding)
+        public static void WriteCborNegativeIntegerRepresentation_SingleValue_HappyPath(
+            ulong input,
+            string hexExpectedEncoding
+        )
         {
             byte[] expectedEncoding = hexExpectedEncoding.HexToByteArray();
             var writer = new CborWriter();
@@ -157,6 +163,7 @@ namespace System.Formats.Cbor.Tests
         /// </summary>
         /// <param name="expected"></param>
         /// <param name="actual"></param>
-        public static void HexEqual(ReadOnlyMemory<byte> expected, ReadOnlyMemory<byte> actual) => Assert.Equal(expected.ByteArrayToHex(), actual.ByteArrayToHex());
+        public static void HexEqual(ReadOnlyMemory<byte> expected, ReadOnlyMemory<byte> actual) =>
+            Assert.Equal(expected.ByteArrayToHex(), actual.ByteArrayToHex());
     }
 }

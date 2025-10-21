@@ -6,14 +6,14 @@
 // @backupOwner Microsoft
 //------------------------------------------------------------------------------
 
-namespace System.Data.Entity.Design.Common {
-
+namespace System.Data.Entity.Design.Common
+{
     using System;
     using System.Data;
     using System.Data.Metadata.Edm;
 
-    internal static class EDesignUtil {
-
+    internal static class EDesignUtil
+    {
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////
@@ -35,7 +35,8 @@ namespace System.Data.Entity.Design.Common {
             return message;
         }
 
-        static internal T CheckArgumentNull<T>(T value, string parameterName) where T : class
+        internal static T CheckArgumentNull<T>(T value, string parameterName)
+            where T : class
         {
             if (null == value)
             {
@@ -44,7 +45,7 @@ namespace System.Data.Entity.Design.Common {
             return value;
         }
 
-        static internal void CheckStringArgument(string value, string parameterName)
+        internal static void CheckStringArgument(string value, string parameterName)
         {
             // Throw ArgumentNullException when string is null
             CheckArgumentNull(value, parameterName);
@@ -56,118 +57,170 @@ namespace System.Data.Entity.Design.Common {
             }
         }
 
-        static internal LanguageOption CheckLanguageOptionArgument(LanguageOption value, string paramName)
+        internal static LanguageOption CheckLanguageOptionArgument(
+            LanguageOption value,
+            string paramName
+        )
         {
-            if (value == LanguageOption.GenerateCSharpCode ||
-                value == LanguageOption.GenerateVBCode)
+            if (
+                value == LanguageOption.GenerateCSharpCode
+                || value == LanguageOption.GenerateVBCode
+            )
             {
                 return value;
             }
             throw ArgumentOutOfRange(paramName);
         }
 
-        static internal ArgumentException SingleStoreEntityContainerExpected(string parameterName)
+        internal static ArgumentException SingleStoreEntityContainerExpected(string parameterName)
         {
-            ArgumentException e = new ArgumentException(Strings.SingleStoreEntityContainerExpected, parameterName);
-            return e;
-        }
-        static internal ArgumentException InvalidStoreEntityContainer(string entityContainerName, string parameterName)
-        {
-            ArgumentException e = new ArgumentException(Strings.InvalidNonStoreEntityContainer(entityContainerName), parameterName);
-            return e;
-        }
-        static internal ArgumentException InvalidStringArgument(string parameterName) {
-            ArgumentException e = new ArgumentException(Strings.InvalidStringArgument(parameterName));
+            ArgumentException e = new ArgumentException(
+                Strings.SingleStoreEntityContainerExpected,
+                parameterName
+            );
             return e;
         }
 
-        static internal ArgumentException EdmReservedNamespace(string namespaceName) {
+        internal static ArgumentException InvalidStoreEntityContainer(
+            string entityContainerName,
+            string parameterName
+        )
+        {
+            ArgumentException e = new ArgumentException(
+                Strings.InvalidNonStoreEntityContainer(entityContainerName),
+                parameterName
+            );
+            return e;
+        }
+
+        internal static ArgumentException InvalidStringArgument(string parameterName)
+        {
+            ArgumentException e = new ArgumentException(
+                Strings.InvalidStringArgument(parameterName)
+            );
+            return e;
+        }
+
+        internal static ArgumentException EdmReservedNamespace(string namespaceName)
+        {
             ArgumentException e = new ArgumentException(Strings.ReservedNamespace(namespaceName));
             return e;
         }
 
-        static internal ArgumentNullException ArgumentNull(string parameter) {
+        internal static ArgumentNullException ArgumentNull(string parameter)
+        {
             ArgumentNullException e = new ArgumentNullException(parameter);
             return e;
         }
 
-        static internal ArgumentException Argument(string parameter)
+        internal static ArgumentException Argument(string parameter)
         {
             ArgumentException e = new ArgumentException(parameter);
             return e;
         }
 
-        static internal ArgumentException Argument(string message, Exception inner)
+        internal static ArgumentException Argument(string message, Exception inner)
         {
             ArgumentException e = new ArgumentException(message, inner);
             return e;
         }
 
-        static internal InvalidOperationException InvalidOperation(string error)
+        internal static InvalidOperationException InvalidOperation(string error)
         {
             InvalidOperationException e = new InvalidOperationException(error);
             return e;
         }
 
         // SSDL Generator
-        static internal StrongTypingException StrongTyping(string error, Exception innerException) {
+        static internal StrongTypingException StrongTyping(string error, Exception innerException)
+        {
             StrongTypingException e = new StrongTypingException(error, innerException);
             return e;
         }
 
-        static internal StrongTypingException StonglyTypedAccessToNullValue(string columnName, string tableName, Exception innerException) {
-            return StrongTyping(Strings.StonglyTypedAccessToNullValue(columnName, tableName), innerException);
+        internal static StrongTypingException StonglyTypedAccessToNullValue(
+            string columnName,
+            string tableName,
+            Exception innerException
+        )
+        {
+            return StrongTyping(
+                Strings.StonglyTypedAccessToNullValue(columnName, tableName),
+                innerException
+            );
         }
-        
-        static internal InvalidOperationException EntityStoreGeneratorSchemaNotLoaded() {
+
+        internal static InvalidOperationException EntityStoreGeneratorSchemaNotLoaded()
+        {
             return InvalidOperation(Strings.EntityStoreGeneratorSchemaNotLoaded);
         }
 
-        static internal InvalidOperationException EntityModelGeneratorSchemaNotLoaded() {
+        internal static InvalidOperationException EntityModelGeneratorSchemaNotLoaded()
+        {
             return InvalidOperation(Strings.EntityModelGeneratorSchemaNotLoaded);
         }
 
-        static internal InvalidOperationException NonSerializableType(BuiltInTypeKind kind)
+        internal static InvalidOperationException NonSerializableType(BuiltInTypeKind kind)
         {
             return InvalidOperation(Strings.Serialization_UnknownGlobalItem(kind));
         }
-        
-        static internal InvalidOperationException MissingGenerationPatternForType(BuiltInTypeKind kind) 
+
+        internal static InvalidOperationException MissingGenerationPatternForType(
+            BuiltInTypeKind kind
+        )
         {
             return InvalidOperation(Strings.ModelGeneration_UnGeneratableType(kind));
         }
 
-        static internal ArgumentException InvalidNamespaceNameArgument(string namespaceName)
+        internal static ArgumentException InvalidNamespaceNameArgument(string namespaceName)
         {
             return new ArgumentException(Strings.InvalidNamespaceNameArgument(namespaceName));
         }
 
-        static internal ArgumentException InvalidEntityContainerNameArgument(string entityContainerName)
+        internal static ArgumentException InvalidEntityContainerNameArgument(
+            string entityContainerName
+        )
         {
-            return new ArgumentException(Strings.InvalidEntityContainerNameArgument(entityContainerName));
+            return new ArgumentException(
+                Strings.InvalidEntityContainerNameArgument(entityContainerName)
+            );
         }
 
-        static internal ArgumentException DuplicateEntityContainerName(string newModelEntityContainerName, string storeEntityContainer) 
+        internal static ArgumentException DuplicateEntityContainerName(
+            string newModelEntityContainerName,
+            string storeEntityContainer
+        )
         {
-            return new ArgumentException(Strings.DuplicateEntityContainerName(newModelEntityContainerName, storeEntityContainer));
+            return new ArgumentException(
+                Strings.DuplicateEntityContainerName(
+                    newModelEntityContainerName,
+                    storeEntityContainer
+                )
+            );
         }
 
-        static internal ProviderIncompatibleException ProviderIncompatible(string message)
+        internal static ProviderIncompatibleException ProviderIncompatible(string message)
         {
             return new ProviderIncompatibleException(message);
         }
 
-        static internal ProviderIncompatibleException ProviderIncompatible(string message, Exception inner)
+        internal static ProviderIncompatibleException ProviderIncompatible(
+            string message,
+            Exception inner
+        )
         {
             return new ProviderIncompatibleException(message, inner);
         }
 
-        static internal ArgumentOutOfRangeException ArgumentOutOfRange(string paramName)
+        internal static ArgumentOutOfRangeException ArgumentOutOfRange(string paramName)
         {
             return new ArgumentOutOfRangeException(paramName);
         }
 
-        internal static void CheckTargetEntityFrameworkVersionArgument(Version targetEntityFrameworkVersion, string parameterName)
+        internal static void CheckTargetEntityFrameworkVersionArgument(
+            Version targetEntityFrameworkVersion,
+            string parameterName
+        )
         {
             EDesignUtil.CheckArgumentNull(targetEntityFrameworkVersion, parameterName);
             if (!EntityFrameworkVersions.IsValidVersion(targetEntityFrameworkVersion))

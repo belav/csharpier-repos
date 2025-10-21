@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //==========================================================================
 //  File:       MessageSmuggler.cs
 //
-//  Summary:    Implements objects necessary to smuggle messages across 
+//  Summary:    Implements objects necessary to smuggle messages across
 //              AppDomains and determine when it's possible.
 //
 //==========================================================================
@@ -19,17 +19,13 @@ using System.Runtime.Remoting.Channels;
 using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Proxies;
 
-
 namespace System.Runtime.Remoting.Messaging
 {
-
     internal class MessageSmuggler
     {
         private static bool CanSmuggleObjectDirectly(Object obj)
         {
-            if ((obj is String) ||
-                (obj.GetType() == typeof(void)) ||
-                obj.GetType().IsPrimitive)
+            if ((obj is String) || (obj.GetType() == typeof(void)) || obj.GetType().IsPrimitive)
             {
                 return true;
             }
@@ -37,10 +33,9 @@ namespace System.Runtime.Remoting.Messaging
             return false;
         } // CanSmuggleObjectDirectly
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         protected static Object[] FixupArgs(Object[] args, ref ArrayList argsToSerialize)
-        {            
+        {
             Object[] newArgs = new Object[args.Length];
 
             int total = args.Length;
@@ -52,8 +47,7 @@ namespace System.Runtime.Remoting.Messaging
             return newArgs;
         } // FixupArgs
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         protected static Object FixupArg(Object arg, ref ArrayList argsToSerialize)
         {
             // This method examines an argument and sees if it can be smuggled in some form.
@@ -63,7 +57,7 @@ namespace System.Runtime.Remoting.Messaging
             //   we can smuggle a cloned copy of the array. In all other cases,
             //   we add it to the list of args we want serialized, and return a
             //   placeholder element (SerializedArg).
-        
+
             if (arg == null)
                 return null;
 
@@ -73,18 +67,21 @@ namespace System.Runtime.Remoting.Messaging
             //   calls GetType() and that would slow this down.
             MarshalByRefObject mbo = arg as MarshalByRefObject;
             if (mbo != null)
-            {                
+            {
                 // We can only try to smuggle objref's for actual CLR objects
                 //   or for RemotingProxy's.
-                if (!RemotingServices.IsTransparentProxy(mbo) ||
-                    RemotingServices.GetRealProxy(mbo) is RemotingProxy)
-                {                
+                if (
+                    !RemotingServices.IsTransparentProxy(mbo)
+                    || RemotingServices.GetRealProxy(mbo) is RemotingProxy
+                )
+                {
                     ObjRef objRef = RemotingServices.MarshalInternal(mbo, null, null);
                     if (objRef.CanSmuggle())
                     {
                         if (!RemotingServices.IsTransparentProxy(mbo))
                         {
-                            ServerIdentity srvId = (ServerIdentity)MarshalByRefObject.GetIdentity(mbo);
+                            ServerIdentity srvId = (ServerIdentity)
+                                MarshalByRefObject.GetIdentity(mbo);
                             srvId.SetHandle();
                             objRef.SetServerIdentity(srvId.GetHandle());
                             objRef.SetDomainID(AppDomain.CurrentDomain.GetId());
@@ -119,7 +116,6 @@ namespace System.Runtime.Remoting.Messaging
                     return array.Clone();
             }
 
-
             // Add this arg to list of one's to serialize and return a placeholder.
             if (argsToSerialize == null)
                 argsToSerialize = new ArrayList();
@@ -128,8 +124,7 @@ namespace System.Runtime.Remoting.Messaging
             return new SerializedArg(index);
         } // FixupArg
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         protected static Object[] UndoFixupArgs(Object[] args, ArrayList deserializedArgs)
         {
             Object[] newArgs = new Object[args.Length];
@@ -142,8 +137,7 @@ namespace System.Runtime.Remoting.Messaging
             return newArgs;
         } // UndoFixupArgs
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         protected static Object UndoFixupArg(Object arg, ArrayList deserializedArgs)
         {
             SmuggledObjRef smuggledObjRef = arg as SmuggledObjRef;
@@ -159,16 +153,16 @@ namespace System.Runtime.Remoting.Messaging
             {
                 return deserializedArgs[serializedArg.Index];
             }
-            
+
             return arg;
         } // UndoFixupArg
 
-
         // returns number of entries added to argsToSerialize
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         protected static int StoreUserPropertiesForMethodMessage(
-            IMethodMessage msg, 
-            ref ArrayList argsToSerialize)
+            IMethodMessage msg,
+            ref ArrayList argsToSerialize
+        )
         {
             IDictionary properties = msg.Properties;
             MessageDictionary dict = properties as MessageDictionary;
@@ -209,7 +203,6 @@ namespace System.Runtime.Remoting.Messaging
             }
         } // StoreUserPropertiesForMethodMessage
 
-
         //
         // Helper classes used to smuggle transformed arguments
         //
@@ -223,16 +216,16 @@ namespace System.Runtime.Remoting.Messaging
                 _index = index;
             }
 
-            public int Index { get { return _index; } }
+            public int Index
+            {
+                get { return _index; }
+            }
         }
 
         //
         // end of Helper classes used to smuggle transformed arguments
-        //                
-    
+        //
     } // class MessageSmuggler
-
-
 
     // stores an object reference
     internal class SmuggledObjRef
@@ -240,28 +233,24 @@ namespace System.Runtime.Remoting.Messaging
         [System.Security.SecurityCritical] // auto-generated
         ObjRef _objRef;
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public SmuggledObjRef(ObjRef objRef)
         {
             _objRef = objRef;
-        }            
+        }
 
         public ObjRef ObjRef
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return _objRef; }
         }
     } // SmuggledObjRef
 
-    
-
-
-
     internal class SmuggledMethodCallMessage : MessageSmuggler
     {
-        private String   _uri;
-        private String   _methodName;
-        private String   _typeName;
+        private String _uri;
+        private String _methodName;
+        private String _typeName;
         private Object[] _args;
 
         private byte[] _serializedArgs = null;
@@ -272,35 +261,35 @@ namespace System.Runtime.Remoting.Messaging
         // other things that might need to go through serializer
         private SerializedArg _methodSignature = null;
         private SerializedArg _instantiation = null;
-        private Object        _callContext = null; // either a call id string or a SerializedArg pointing to CallContext object
+        private Object _callContext = null; // either a call id string or a SerializedArg pointing to CallContext object
 
         private int _propertyCount = 0; // <n> = # of user properties in dictionary
-                                        //   note: first <n> entries in _deserializedArgs will be the property entries
-               
+
+        //   note: first <n> entries in _deserializedArgs will be the property entries
 
         // always use this helper method to create
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static SmuggledMethodCallMessage SmuggleIfPossible(IMessage msg)
-        {        
+        {
             IMethodCallMessage mcm = msg as IMethodCallMessage;
             if (mcm == null)
-                return null;        
+                return null;
 
             return new SmuggledMethodCallMessage(mcm);
-        }       
+        }
 
         // hide default constructor
-        private SmuggledMethodCallMessage(){}
+        private SmuggledMethodCallMessage() { }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private SmuggledMethodCallMessage(IMethodCallMessage mcm)
         {
             _uri = mcm.Uri;
             _methodName = mcm.MethodName;
             _typeName = mcm.TypeName;
 
-            ArrayList argsToSerialize = null; 
-            
+            ArrayList argsToSerialize = null;
+
             IInternalMessage iim = mcm as IInternalMessage;
 
             // user properties (everything but special entries)
@@ -335,8 +324,7 @@ namespace System.Runtime.Remoting.Messaging
             {
                 _callContext = null;
             }
-            else
-            if (lcc.HasInfo)
+            else if (lcc.HasInfo)
             {
                 if (argsToSerialize == null)
                     argsToSerialize = new ArrayList();
@@ -348,67 +336,75 @@ namespace System.Runtime.Remoting.Messaging
                 // just smuggle the call id string
                 _callContext = lcc.RemotingData.LogicalCallID;
             }
-            
+
             _args = FixupArgs(mcm.Args, ref argsToSerialize);
 
             if (argsToSerialize != null)
             {
                 //MemoryStream argStm = CrossAppDomainSerializer.SerializeMessageParts(argsToSerialize, out _serializerSmuggledArgs);
-                MemoryStream argStm = CrossAppDomainSerializer.SerializeMessageParts(argsToSerialize);
+                MemoryStream argStm = CrossAppDomainSerializer.SerializeMessageParts(
+                    argsToSerialize
+                );
                 _serializedArgs = argStm.GetBuffer();
-            }      
-           
+            }
         } // SmuggledMethodCallMessage
 
-
         // returns a list of the deserialized arguments
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal ArrayList FixupForNewAppDomain()
-        {   
+        {
             ArrayList deserializedArgs = null;
-        
+
             if (_serializedArgs != null)
             {
-                deserializedArgs =
-                    CrossAppDomainSerializer.DeserializeMessageParts(
-                        new MemoryStream(_serializedArgs));
+                deserializedArgs = CrossAppDomainSerializer.DeserializeMessageParts(
+                    new MemoryStream(_serializedArgs)
+                );
                 //deserializedArgs =
                 //    CrossAppDomainSerializer.DeserializeMessageParts(
                 //        new MemoryStream(_serializedArgs), _serializerSmuggledArgs);
                 _serializedArgs = null;
-            }                   
+            }
 
             return deserializedArgs;
         } // FixupForNewAppDomain
 
-        
-        internal String Uri { get { return _uri; } }
-        internal String MethodName { get { return _methodName; } }
-        internal String TypeName { get { return _typeName; } }
+        internal String Uri
+        {
+            get { return _uri; }
+        }
+        internal String MethodName
+        {
+            get { return _methodName; }
+        }
+        internal String TypeName
+        {
+            get { return _typeName; }
+        }
 
         internal Type[] GetInstantiation(ArrayList deserializedArgs)
         {
-            if (_instantiation != null)                    
-                return (Type[])deserializedArgs[_instantiation.Index]; 
+            if (_instantiation != null)
+                return (Type[])deserializedArgs[_instantiation.Index];
             else
-               return null;
+                return null;
         }
 
         internal Object[] GetMethodSignature(ArrayList deserializedArgs)
         {
-            if (_methodSignature != null)                    
-                return (Object[])deserializedArgs[_methodSignature.Index]; 
+            if (_methodSignature != null)
+                return (Object[])deserializedArgs[_methodSignature.Index];
             else
-               return null;
+                return null;
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal Object[] GetArgs(ArrayList deserializedArgs)
         {
             return UndoFixupArgs(_args, deserializedArgs);
-        } // GetArgs 
+        } // GetArgs
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext GetCallContext(ArrayList deserializedArgs)
         {
             if (_callContext == null)
@@ -428,7 +424,7 @@ namespace System.Runtime.Remoting.Messaging
         internal int MessagePropertyCount
         {
             get { return _propertyCount; }
-        }        
+        }
 
         internal void PopulateMessageProperties(IDictionary dict, ArrayList deserializedArgs)
         {
@@ -438,15 +434,12 @@ namespace System.Runtime.Remoting.Messaging
                 dict[de.Key] = de.Value;
             }
         }
-        
     } // class SmuggledMethodCallMessage
-
-
 
     internal class SmuggledMethodReturnMessage : MessageSmuggler
     {
-        private Object[]  _args;
-        private Object    _returnValue;
+        private Object[] _args;
+        private Object _returnValue;
 
         private byte[] _serializedArgs = null;
 #if false // This field isn't currently used
@@ -455,31 +448,31 @@ namespace System.Runtime.Remoting.Messaging
 
         // other things that might need to go through serializer
         private SerializedArg _exception = null;
-        private Object        _callContext = null; // either a call id string or a SerializedArg pointing to CallContext object
+        private Object _callContext = null; // either a call id string or a SerializedArg pointing to CallContext object
 
         private int _propertyCount; // <n> = # of user properties in dictionary
-                                    //   note: first <n> entries in _deserializedArgs will be the property entries
 
+        //   note: first <n> entries in _deserializedArgs will be the property entries
 
         // always use this helper method to create
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static SmuggledMethodReturnMessage SmuggleIfPossible(IMessage msg)
-        {        
+        {
             IMethodReturnMessage mrm = msg as IMethodReturnMessage;
             if (mrm == null)
                 return null;
 
             return new SmuggledMethodReturnMessage(mrm);
-        }       
+        }
 
         // hide default constructor
-        private SmuggledMethodReturnMessage(){}
+        private SmuggledMethodReturnMessage() { }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private SmuggledMethodReturnMessage(IMethodReturnMessage mrm)
-        {           
+        {
             ArrayList argsToSerialize = null;
-            
+
             ReturnMessage retMsg = mrm as ReturnMessage;
 
             // user properties (everything but special entries)
@@ -502,12 +495,11 @@ namespace System.Runtime.Remoting.Messaging
             {
                 _callContext = null;
             }
-            else
-            if (lcc.HasInfo)
+            else if (lcc.HasInfo)
             {
                 if (lcc.Principal != null)
                     lcc.Principal = null;
-            
+
                 if (argsToSerialize == null)
                     argsToSerialize = new ArrayList();
                 _callContext = new SerializedArg(argsToSerialize.Count);
@@ -518,61 +510,61 @@ namespace System.Runtime.Remoting.Messaging
                 // just smuggle the call id string
                 _callContext = lcc.RemotingData.LogicalCallID;
             }
-            
+
             _returnValue = FixupArg(mrm.ReturnValue, ref argsToSerialize);
             _args = FixupArgs(mrm.Args, ref argsToSerialize);
 
             if (argsToSerialize != null)
             {
-                MemoryStream argStm = CrossAppDomainSerializer.SerializeMessageParts(argsToSerialize);
+                MemoryStream argStm = CrossAppDomainSerializer.SerializeMessageParts(
+                    argsToSerialize
+                );
                 //MemoryStream argStm = CrossAppDomainSerializer.SerializeMessageParts(argsToSerialize, out _serializerSmuggledArgs);
                 _serializedArgs = argStm.GetBuffer();
-            }          
-
+            }
         } // SmuggledMethodReturnMessage
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal ArrayList FixupForNewAppDomain()
-        {                
+        {
             ArrayList deserializedArgs = null;
-        
+
             if (_serializedArgs != null)
             {
-                deserializedArgs =
-                    CrossAppDomainSerializer.DeserializeMessageParts(
-                        new MemoryStream(_serializedArgs));
+                deserializedArgs = CrossAppDomainSerializer.DeserializeMessageParts(
+                    new MemoryStream(_serializedArgs)
+                );
                 //deserializedArgs =
                 //    CrossAppDomainSerializer.DeserializeMessageParts(
                 //        new MemoryStream(_serializedArgs), _serializerSmuggledArgs);
                 _serializedArgs = null;
-            }       
+            }
 
             return deserializedArgs;
         } // FixupForNewAppDomain
-                
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal Object GetReturnValue(ArrayList deserializedArgs)
         {
             return UndoFixupArg(_returnValue, deserializedArgs);
         } // GetReturnValue
-         
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal Object[] GetArgs(ArrayList deserializedArgs)
         {
             Object[] obj = UndoFixupArgs(_args, deserializedArgs);
             return obj;
-        } // GetArgs     
+        } // GetArgs
 
         internal Exception GetException(ArrayList deserializedArgs)
         {
             if (_exception != null)
-                return (Exception)deserializedArgs[_exception.Index]; 
+                return (Exception)deserializedArgs[_exception.Index];
             else
                 return null;
         } // Exception
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext GetCallContext(ArrayList deserializedArgs)
         {
             if (_callContext == null)
@@ -592,8 +584,8 @@ namespace System.Runtime.Remoting.Messaging
         internal int MessagePropertyCount
         {
             get { return _propertyCount; }
-        }   
-        
+        }
+
         internal void PopulateMessageProperties(IDictionary dict, ArrayList deserializedArgs)
         {
             for (int co = 0; co < _propertyCount; co++)
@@ -602,9 +594,5 @@ namespace System.Runtime.Remoting.Messaging
                 dict[de.Key] = de.Value;
             }
         }
-        
     } // class SmuggledMethodReturnMessage
-
-
 } // namespace System.Runtime.Remoting.Messaging
-

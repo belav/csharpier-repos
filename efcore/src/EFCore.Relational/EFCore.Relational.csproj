@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <Description>Shared Entity Framework Core components for relational database providers.</Description>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
@@ -9,7 +8,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Using Include="System.Data.Common" />
     <Using Include="System.Diagnostics" />
@@ -36,20 +34,24 @@
     <Using Include="Microsoft.Extensions.Logging" />
     <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Include="..\Shared\*.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\EFCore\EFCore.csproj" PrivateAssets="contentfiles;build" />
-    <ProjectReference Condition="'$(BuildingByReSharper)' != 'true'" Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj" ReferenceOutputAssembly="False" OutputItemType="Analyzer" />
+    <ProjectReference
+      Condition="'$(BuildingByReSharper)' != 'true'"
+      Include="..\EFCore.Analyzers\EFCore.Analyzers.csproj"
+      ReferenceOutputAssembly="False"
+      OutputItemType="Analyzer"
+    />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(MicrosoftExtensionsConfigurationAbstractionsVersion)" />
+    <PackageReference
+      Include="Microsoft.Extensions.Configuration.Abstractions"
+      Version="$(MicrosoftExtensionsConfigurationAbstractionsVersion)"
+    />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Properties\RelationalStrings.Designer.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -57,11 +59,9 @@
       <CustomToolNamespace>Microsoft.EntityFrameworkCore.Diagnostics</CustomToolNamespace>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Properties\RelationalStrings.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -69,5 +69,4 @@
       <DependentUpon>RelationalStrings.Designer.tt</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>

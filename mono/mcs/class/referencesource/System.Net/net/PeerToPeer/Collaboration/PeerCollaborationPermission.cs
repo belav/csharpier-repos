@@ -6,17 +6,22 @@
 
 namespace System.Net.PeerToPeer.Collaboration
 {
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
 
     /// <remarks>
     /// PeerCollaborationPermissionAttribute atrribute
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor |
-                     AttributeTargets.Class | AttributeTargets.Struct |
-                     AttributeTargets.Assembly,
-                     AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [Serializable()]
     public sealed class PeerCollaborationPermissionAttribute : CodeAccessSecurityAttribute
     {
@@ -24,18 +29,21 @@ namespace System.Net.PeerToPeer.Collaboration
         /// Just call base constructor
         /// </summary>
         /// <param name="action"></param>
-        public PeerCollaborationPermissionAttribute(SecurityAction action) : base(action) { }
+        public PeerCollaborationPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         /// <summary>
-        /// As required by the SecurityAttribute class. 
+        /// As required by the SecurityAttribute class.
         /// </summary>
         /// <returns></returns>
         public override IPermission CreatePermission()
         {
-            if (Unrestricted){
+            if (Unrestricted)
+            {
                 return new PeerCollaborationPermission(PermissionState.Unrestricted);
             }
-            else{
+            else
+            {
                 return new PeerCollaborationPermission(PermissionState.None);
             }
         }
@@ -49,7 +57,7 @@ namespace System.Net.PeerToPeer.Collaboration
     {
         private bool m_noRestriction;
 
-        internal static readonly PeerCollaborationPermission UnrestrictedPeerCollaborationPermission = 
+        internal static readonly PeerCollaborationPermission UnrestrictedPeerCollaborationPermission =
             new PeerCollaborationPermission(PermissionState.Unrestricted);
 
         /// <summary>
@@ -99,11 +107,13 @@ namespace System.Net.PeerToPeer.Collaboration
         public override IPermission Union(IPermission target)
         {
             // Pattern suggested by Security engine
-            if (target == null){
+            if (target == null)
+            {
                 return this.Copy();
             }
             PeerCollaborationPermission other = target as PeerCollaborationPermission;
-            if (other == null){
+            if (other == null)
+            {
                 throw new ArgumentException(SR.GetString(SR.Collab_PermissionUnionError), "target");
             }
             return new PeerCollaborationPermission(m_noRestriction || other.m_noRestriction);
@@ -115,23 +125,28 @@ namespace System.Net.PeerToPeer.Collaboration
         public override IPermission Intersect(IPermission target)
         {
             // Pattern suggested by Security engine
-            if (target == null){
+            if (target == null)
+            {
                 return null;
             }
 
             PeerCollaborationPermission other = target as PeerCollaborationPermission;
-            if (other == null){
-                throw new ArgumentException(SR.GetString(SR.Collab_PermissionIntersectError), "target");
+            if (other == null)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.Collab_PermissionIntersectError),
+                    "target"
+                );
             }
 
             // return null if resulting permission is restricted and empty
             // Hence, the only way for a bool permission will be.
-            if (this.m_noRestriction && other.m_noRestriction){
+            if (this.m_noRestriction && other.m_noRestriction)
+            {
                 return new PeerCollaborationPermission(true);
             }
             return null;
         }
-
 
         /// <summary>
         /// <para>Compares two <see cref='System.Net.PeerToPeer..Collaboration.PeerCollaborationPermission'/> instances.</para>
@@ -139,12 +154,14 @@ namespace System.Net.PeerToPeer.Collaboration
         public override bool IsSubsetOf(IPermission target)
         {
             // Pattern suggested by Security engine
-            if (target == null){
+            if (target == null)
+            {
                 return m_noRestriction == false;
             }
 
             PeerCollaborationPermission other = target as PeerCollaborationPermission;
-            if (other == null){
+            if (other == null)
+            {
                 throw new ArgumentException(SR.GetString(SR.Collab_BadPermissionTarget), "target");
             }
 
@@ -163,7 +180,8 @@ namespace System.Net.PeerToPeer.Collaboration
         /// <param name="securityElement"></param>
         public override void FromXml(SecurityElement e)
         {
-            if (e == null){
+            if (e == null)
+            {
                 throw new ArgumentNullException("e");
             }
 
@@ -174,31 +192,43 @@ namespace System.Net.PeerToPeer.Collaboration
             }
             string className = e.Attribute("class");
             // SecurityElement must be a permission element for this type
-            if (className == null){
+            if (className == null)
+            {
                 throw new ArgumentException(SR.GetString(SR.InvalidSecurityElemNoClass), "e");
             }
 
-            if (className.IndexOf(this.GetType().FullName, StringComparison.Ordinal) < 0){
+            if (className.IndexOf(this.GetType().FullName, StringComparison.Ordinal) < 0)
+            {
                 throw new ArgumentException(SR.GetString(SR.InvalidSecurityElemNoType), "e");
             }
             string str = e.Attribute("Unrestricted");
-            m_noRestriction = (str != null ? (0 == string.Compare(str, "true", StringComparison.OrdinalIgnoreCase)) : false);
+            m_noRestriction = (
+                str != null
+                    ? (0 == string.Compare(str, "true", StringComparison.OrdinalIgnoreCase))
+                    : false
+            );
         }
 
         /// <summary>
-        /// Copyto a security element 
+        /// Copyto a security element
         /// </summary>
         /// <returns></returns>
         public override SecurityElement ToXml()
         {
             SecurityElement securityElement = new SecurityElement("IPermission");
-            securityElement.AddAttribute("class", this.GetType().FullName + ", " + this.GetType().Module.Assembly.FullName.Replace('\"', '\''));
+            securityElement.AddAttribute(
+                "class",
+                this.GetType().FullName
+                    + ", "
+                    + this.GetType().Module.Assembly.FullName.Replace('\"', '\'')
+            );
             securityElement.AddAttribute("version", "1");
-            
-            if (m_noRestriction){
+
+            if (m_noRestriction)
+            {
                 securityElement.AddAttribute("Unrestricted", "true");
             }
             return securityElement;
         }
-    } 
+    }
 }

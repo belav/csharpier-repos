@@ -11,46 +11,84 @@ internal static partial class Interop
 {
     internal static partial class Crypto
     {
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyCreateByKeyParameters", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EcKeyCreateByKeyParameters",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         private static partial int EcKeyCreateByKeyParameters(
             out SafeEcKeyHandle key,
             string oid,
-            byte[]? qx, int qxLength,
-            byte[]? qy, int qyLength,
-            byte[]? d, int dLength);
+            byte[]? qx,
+            int qxLength,
+            byte[]? qy,
+            int qyLength,
+            byte[]? d,
+            int dLength
+        );
 
         internal static SafeEcKeyHandle EcKeyCreateByKeyParameters(
             string oid,
-            byte[]? qx, int qxLength,
-            byte[]? qy, int qyLength,
-            byte[]? d, int dLength)
+            byte[]? qx,
+            int qxLength,
+            byte[]? qy,
+            int qyLength,
+            byte[]? d,
+            int dLength
+        )
         {
             SafeEcKeyHandle key;
-            int rc = EcKeyCreateByKeyParameters(out key, oid, qx, qxLength, qy, qyLength, d, dLength);
+            int rc = EcKeyCreateByKeyParameters(
+                out key,
+                oid,
+                qx,
+                qxLength,
+                qy,
+                qyLength,
+                d,
+                dLength
+            );
             if (rc == -1)
             {
                 key?.Dispose();
                 Interop.Crypto.ErrClearError();
 
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, oid));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_CurveNotSupported, oid)
+                );
             }
             return key;
         }
 
-        [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcKeyCreateByExplicitParameters")]
+        [LibraryImport(
+            Libraries.CryptoNative,
+            EntryPoint = "CryptoNative_EcKeyCreateByExplicitParameters"
+        )]
         internal static partial SafeEcKeyHandle EcKeyCreateByExplicitParameters(
             ECCurve.ECCurveType curveType,
-            byte[]? qx, int qxLength,
-            byte[]? qy, int qyLength,
-            byte[]? d, int dLength,
-            byte[] p, int pLength,
-            byte[] a, int aLength,
-            byte[] b, int bLength,
-            byte[] gx, int gxLength,
-            byte[] gy, int gyLength,
-            byte[] order, int nLength,
-            byte[]? cofactor, int cofactorLength,
-            byte[]? seed, int seedLength);
+            byte[]? qx,
+            int qxLength,
+            byte[]? qy,
+            int qyLength,
+            byte[]? d,
+            int dLength,
+            byte[] p,
+            int pLength,
+            byte[] a,
+            int aLength,
+            byte[] b,
+            int bLength,
+            byte[] gx,
+            int gxLength,
+            byte[] gy,
+            int gyLength,
+            byte[] order,
+            int nLength,
+            byte[]? cofactor,
+            int cofactorLength,
+            byte[]? seed,
+            int seedLength
+        );
 
         internal static SafeEcKeyHandle EcKeyCreateByExplicitCurve(ECCurve curve)
         {
@@ -65,22 +103,36 @@ internal static partial class Interop
             }
             else
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString()));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString())
+                );
             }
 
             SafeEcKeyHandle key = Interop.Crypto.EcKeyCreateByExplicitParameters(
                 curve.CurveType,
-                null, 0,
-                null, 0,
-                null, 0,
-                p, p.Length,
-                curve.A!, curve.A!.Length,
-                curve.B!, curve.B!.Length,
-                curve.G.X!, curve.G.X!.Length,
-                curve.G.Y!, curve.G.Y!.Length,
-                curve.Order!, curve.Order!.Length,
-                curve.Cofactor, curve.Cofactor!.Length,
-                curve.Seed, curve.Seed == null ? 0 : curve.Seed.Length);
+                null,
+                0,
+                null,
+                0,
+                null,
+                0,
+                p,
+                p.Length,
+                curve.A!,
+                curve.A!.Length,
+                curve.B!,
+                curve.B!.Length,
+                curve.G.X!,
+                curve.G.X!.Length,
+                curve.G.Y!,
+                curve.G.Y!.Length,
+                curve.Order!,
+                curve.Order!.Length,
+                curve.Cofactor,
+                curve.Cofactor!.Length,
+                curve.Seed,
+                curve.Seed == null ? 0 : curve.Seed.Length
+            );
 
             if (key == null || key.IsInvalid)
             {
@@ -96,22 +148,27 @@ internal static partial class Interop
             return key;
         }
 
-
         [LibraryImport(Libraries.CryptoNative)]
         private static partial int CryptoNative_GetECKeyParameters(
             SafeEcKeyHandle key,
             [MarshalAs(UnmanagedType.Bool)] bool includePrivate,
-            out SafeBignumHandle qx_bn, out int x_cb,
-            out SafeBignumHandle qy_bn, out int y_cb,
-            out IntPtr d_bn_not_owned, out int d_cb);
+            out SafeBignumHandle qx_bn,
+            out int x_cb,
+            out SafeBignumHandle qy_bn,
+            out int y_cb,
+            out IntPtr d_bn_not_owned,
+            out int d_cb
+        );
 
-        internal static ECParameters GetECKeyParameters(
-            SafeEcKeyHandle key,
-            bool includePrivate)
+        internal static ECParameters GetECKeyParameters(SafeEcKeyHandle key, bool includePrivate)
         {
-            SafeBignumHandle qx_bn, qy_bn, d_bn;
+            SafeBignumHandle qx_bn,
+                qy_bn,
+                d_bn;
             IntPtr d_bn_not_owned;
-            int qx_cb, qy_cb, d_cb;
+            int qx_cb,
+                qy_cb,
+                d_cb;
             ECParameters parameters = default;
 
             bool refAdded = false;
@@ -121,9 +178,13 @@ internal static partial class Interop
                 int rc = CryptoNative_GetECKeyParameters(
                     key,
                     includePrivate,
-                    out qx_bn, out qx_cb,
-                    out qy_bn, out qy_cb,
-                    out d_bn_not_owned, out d_cb);
+                    out qx_bn,
+                    out qx_cb,
+                    out qy_bn,
+                    out qy_cb,
+                    out d_bn_not_owned,
+                    out d_cb
+                );
 
                 using (qx_bn)
                 using (qy_bn)
@@ -146,14 +207,15 @@ internal static partial class Interop
 
                         Debug.Assert(
                             cbKey <= expectedSize,
-                            $"Expected output size was {expectedSize}, which a parameter exceeded. qx={qx_cb}, qy={qy_cb}, d={d_cb}");
+                            $"Expected output size was {expectedSize}, which a parameter exceeded. qx={qx_cb}, qy={qy_cb}, d={d_cb}"
+                        );
 
                         cbKey = GetMax(cbKey, expectedSize);
 
                         parameters.Q = new ECPoint
                         {
                             X = Crypto.ExtractBignum(qx_bn, cbKey),
-                            Y = Crypto.ExtractBignum(qy_bn, cbKey)
+                            Y = Crypto.ExtractBignum(qy_bn, cbKey),
                         };
                         parameters.D = d_cb == 0 ? null : Crypto.ExtractBignum(d_bn, cbKey);
                     }
@@ -173,26 +235,55 @@ internal static partial class Interop
             SafeEcKeyHandle key,
             [MarshalAs(UnmanagedType.Bool)] bool includePrivate,
             out ECCurve.ECCurveType curveType,
-            out SafeBignumHandle qx, out int x_cb,
-            out SafeBignumHandle qy, out int y_cb,
-            out IntPtr d_bn_not_owned, out int d_cb,
-            out SafeBignumHandle p, out int P_cb,
-            out SafeBignumHandle a, out int A_cb,
-            out SafeBignumHandle b, out int B_cb,
-            out SafeBignumHandle gx, out int Gx_cb,
-            out SafeBignumHandle gy, out int Gy_cb,
-            out SafeBignumHandle order, out int order_cb,
-            out SafeBignumHandle cofactor, out int cofactor_cb,
-            out SafeBignumHandle seed, out int seed_cb);
+            out SafeBignumHandle qx,
+            out int x_cb,
+            out SafeBignumHandle qy,
+            out int y_cb,
+            out IntPtr d_bn_not_owned,
+            out int d_cb,
+            out SafeBignumHandle p,
+            out int P_cb,
+            out SafeBignumHandle a,
+            out int A_cb,
+            out SafeBignumHandle b,
+            out int B_cb,
+            out SafeBignumHandle gx,
+            out int Gx_cb,
+            out SafeBignumHandle gy,
+            out int Gy_cb,
+            out SafeBignumHandle order,
+            out int order_cb,
+            out SafeBignumHandle cofactor,
+            out int cofactor_cb,
+            out SafeBignumHandle seed,
+            out int seed_cb
+        );
 
-        internal static ECParameters GetECCurveParameters(
-            SafeEcKeyHandle key,
-            bool includePrivate)
+        internal static ECParameters GetECCurveParameters(SafeEcKeyHandle key, bool includePrivate)
         {
             ECCurve.ECCurveType curveType;
-            SafeBignumHandle qx_bn, qy_bn, p_bn, a_bn, b_bn, gx_bn, gy_bn, order_bn, cofactor_bn, seed_bn;
+            SafeBignumHandle qx_bn,
+                qy_bn,
+                p_bn,
+                a_bn,
+                b_bn,
+                gx_bn,
+                gy_bn,
+                order_bn,
+                cofactor_bn,
+                seed_bn;
             IntPtr d_bn_not_owned;
-            int qx_cb, qy_cb, p_cb, a_cb, b_cb, gx_cb, gy_cb, order_cb, cofactor_cb, seed_cb, d_cb;
+            int qx_cb,
+                qy_cb,
+                p_cb,
+                a_cb,
+                b_cb,
+                gx_cb,
+                gy_cb,
+                order_cb,
+                cofactor_cb,
+                seed_cb,
+                d_cb;
 
             bool refAdded = false;
             try
@@ -202,17 +293,29 @@ internal static partial class Interop
                     key,
                     includePrivate,
                     out curveType,
-                    out qx_bn, out qx_cb,
-                    out qy_bn, out qy_cb,
-                    out d_bn_not_owned, out d_cb,
-                    out p_bn, out p_cb,
-                    out a_bn, out a_cb,
-                    out b_bn, out b_cb,
-                    out gx_bn, out gx_cb,
-                    out gy_bn, out gy_cb,
-                    out order_bn, out order_cb,
-                    out cofactor_bn, out cofactor_cb,
-                    out seed_bn, out seed_cb);
+                    out qx_bn,
+                    out qx_cb,
+                    out qy_bn,
+                    out qy_cb,
+                    out d_bn_not_owned,
+                    out d_cb,
+                    out p_bn,
+                    out p_cb,
+                    out a_bn,
+                    out a_cb,
+                    out b_bn,
+                    out b_cb,
+                    out gx_bn,
+                    out gx_cb,
+                    out gy_bn,
+                    out gy_cb,
+                    out order_bn,
+                    out order_cb,
+                    out cofactor_bn,
+                    out cofactor_cb,
+                    out seed_bn,
+                    out seed_cb
+                );
 
                 using (qx_bn)
                 using (qy_bn)
@@ -242,13 +345,17 @@ internal static partial class Interop
                         {
                             // Match Windows semantics where a,b,gx,gy,qx,qy have same length
                             // Treat length of m separately as it is not tied to other fields for Char2 (Char2 not supported by Windows)
-                            cbFieldLength = GetMax(new[] { a_cb, b_cb, gx_cb, gy_cb, qx_cb, qy_cb });
+                            cbFieldLength = GetMax(
+                                new[] { a_cb, b_cb, gx_cb, gy_cb, qx_cb, qy_cb }
+                            );
                             pFieldLength = p_cb;
                         }
                         else
                         {
                             // Match Windows semantics where p,a,b,gx,gy,qx,qy have same length
-                            cbFieldLength = GetMax(new[] { p_cb, a_cb, b_cb, gx_cb, gy_cb, qx_cb, qy_cb });
+                            cbFieldLength = GetMax(
+                                new[] { p_cb, a_cb, b_cb, gx_cb, gy_cb, qx_cb, qy_cb }
+                            );
                             pFieldLength = cbFieldLength;
                         }
 
@@ -260,9 +367,10 @@ internal static partial class Interop
                         parameters.Q = new ECPoint
                         {
                             X = Crypto.ExtractBignum(qx_bn, cbFieldLength),
-                            Y = Crypto.ExtractBignum(qy_bn, cbFieldLength)
+                            Y = Crypto.ExtractBignum(qy_bn, cbFieldLength),
                         };
-                        parameters.D = d_cb == 0 ? null : Crypto.ExtractBignum(d_h, cbSubgroupOrder);
+                        parameters.D =
+                            d_cb == 0 ? null : Crypto.ExtractBignum(d_h, cbSubgroupOrder);
 
                         var curve = parameters.Curve;
                         curve.CurveType = curveType;
@@ -271,7 +379,7 @@ internal static partial class Interop
                         curve.G = new ECPoint
                         {
                             X = Crypto.ExtractBignum(gx_bn, cbFieldLength),
-                            Y = Crypto.ExtractBignum(gy_bn, cbFieldLength)
+                            Y = Crypto.ExtractBignum(gy_bn, cbFieldLength),
                         };
                         curve.Order = Crypto.ExtractBignum(order_bn, cbSubgroupOrder)!;
 
@@ -285,7 +393,10 @@ internal static partial class Interop
                         }
 
                         // Optional parameters
-                        curve.Cofactor = cofactor_cb == 0 ? null : Crypto.ExtractBignum(cofactor_bn, cofactor_cb);
+                        curve.Cofactor =
+                            cofactor_cb == 0
+                                ? null
+                                : Crypto.ExtractBignum(cofactor_bn, cofactor_cb);
                         curve.Seed = seed_cb == 0 ? null : Crypto.ExtractBignum(seed_bn, seed_cb);
 
                         parameters.Curve = curve;

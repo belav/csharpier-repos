@@ -18,9 +18,13 @@ namespace System.ServiceModel.ComIntegration
         IProvideChannelBuilderSettings channelBuilderSettings;
         Dictionary<UInt32, string> dispToName = new Dictionary<UInt32, string>();
         Dictionary<string, UInt32> nameToDisp = new Dictionary<string, UInt32>();
-        Dictionary<UInt32, MethodInfo> dispToOperationDescription = new Dictionary<UInt32, MethodInfo>();
+        Dictionary<UInt32, MethodInfo> dispToOperationDescription =
+            new Dictionary<UInt32, MethodInfo>();
 
-        private DispatchProxy(ContractDescription contract, IProvideChannelBuilderSettings channelBuilderSettings)
+        private DispatchProxy(
+            ContractDescription contract,
+            IProvideChannelBuilderSettings channelBuilderSettings
+        )
         {
             if (channelBuilderSettings == null)
             {
@@ -33,11 +37,19 @@ namespace System.ServiceModel.ComIntegration
             this.channelBuilderSettings = channelBuilderSettings;
             this.contract = contract;
             ProcessContractDescription();
-            ComPlusDispatchMethodTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationDispatchMethod,
-                    SR.TraceCodeComIntegrationDispatchMethod, dispToOperationDescription);
+            ComPlusDispatchMethodTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationDispatchMethod,
+                SR.TraceCodeComIntegrationDispatchMethod,
+                dispToOperationDescription
+            );
         }
 
-        internal static ComProxy Create(IntPtr outer, ContractDescription contract, IProvideChannelBuilderSettings channelBuilderSettings)
+        internal static ComProxy Create(
+            IntPtr outer,
+            ContractDescription contract,
+            IProvideChannelBuilderSettings channelBuilderSettings
+        )
         {
             DispatchProxy proxy = null;
             IntPtr inner = IntPtr.Zero;
@@ -48,7 +60,6 @@ namespace System.ServiceModel.ComIntegration
                 inner = OuterProxyWrapper.CreateDispatchProxy(outer, proxy);
                 comProxy = new ComProxy(inner, proxy);
                 return comProxy;
-
             }
             finally
             {
@@ -63,11 +74,9 @@ namespace System.ServiceModel.ComIntegration
                         Marshal.Release(inner);
                     }
                 }
-
             }
-
-
         }
+
         [Serializable]
         internal class ParamInfo
         {
@@ -75,6 +84,7 @@ namespace System.ServiceModel.ComIntegration
             public int outIndex;
             public string name;
             public Type type;
+
             public ParamInfo()
             {
                 inIndex = -1;
@@ -82,13 +92,13 @@ namespace System.ServiceModel.ComIntegration
             }
         }
 
-
         internal class MethodInfo
         {
             public OperationDescription opDesc;
             public List<ParamInfo> paramList;
             public Dictionary<uint, ParamInfo> dispIdToParamInfo;
             public ParamInfo ReturnVal = null;
+
             public MethodInfo(OperationDescription opDesc)
             {
                 this.opDesc = opDesc;
@@ -118,23 +128,32 @@ namespace System.ServiceModel.ComIntegration
                 {
                     paramCount = 0;
 
-
                     if (msgDesc.Body.ReturnValue != null)
                     {
                         if (string.IsNullOrEmpty(msgDesc.Body.ReturnValue.BaseType))
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.CannotResolveTypeForParamInMessageDescription, "ReturnValue", msgDesc.Body.WrapperName, msgDesc.Body.WrapperNamespace), HR.DISP_E_MEMBERNOTFOUND));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new COMException(
+                                    SR.GetString(
+                                        SR.CannotResolveTypeForParamInMessageDescription,
+                                        "ReturnValue",
+                                        msgDesc.Body.WrapperName,
+                                        msgDesc.Body.WrapperNamespace
+                                    ),
+                                    HR.DISP_E_MEMBERNOTFOUND
+                                )
+                            );
 
-                        msgDesc.Body.ReturnValue.Type = Type.GetType(msgDesc.Body.ReturnValue.BaseType);
+                        msgDesc.Body.ReturnValue.Type = Type.GetType(
+                            msgDesc.Body.ReturnValue.BaseType
+                        );
                     }
                     foreach (MessagePartDescription param in msgDesc.Body.Parts)
                     {
-
                         UInt32 dispID = 0;
                         ParamInfo paramInfo = null;
                         paramInfo = null;
                         if (!nameToDisp.TryGetValue(param.Name, out dispID))
                         {
-
                             dispToName[dispIndex] = param.Name;
                             nameToDisp[param.Name] = dispIndex;
                             dispID = dispIndex;
@@ -142,18 +161,25 @@ namespace System.ServiceModel.ComIntegration
                         }
                         if (!paramDictionary.TryGetValue(param.Name, out paramInfo))
                         {
-
                             paramInfo = new ParamInfo();
                             methodInfo.paramList.Add(paramInfo);
                             methodInfo.dispIdToParamInfo[dispID] = paramInfo;
                             if (string.IsNullOrEmpty(param.BaseType))
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.CannotResolveTypeForParamInMessageDescription, param.Name, msgDesc.Body.WrapperName, msgDesc.Body.WrapperNamespace), HR.DISP_E_MEMBERNOTFOUND));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new COMException(
+                                        SR.GetString(
+                                            SR.CannotResolveTypeForParamInMessageDescription,
+                                            param.Name,
+                                            msgDesc.Body.WrapperName,
+                                            msgDesc.Body.WrapperNamespace
+                                        ),
+                                        HR.DISP_E_MEMBERNOTFOUND
+                                    )
+                                );
                             paramInfo.type = Type.GetType(param.BaseType, true);
                             paramInfo.name = param.Name;
                             paramDictionary[param.Name] = paramInfo;
                             param.Index = paramCount;
-
-
                         }
                         param.Type = paramInfo.type;
                         if (inVars)
@@ -163,76 +189,103 @@ namespace System.ServiceModel.ComIntegration
                         else
                         {
                             paramInfo.outIndex = paramCount;
-
                         }
 
                         paramCount++;
-
-
                     }
 
                     inVars = false;
-
                 }
-
             }
-
         }
 
-        void IPseudoDispatch.GetIDsOfNames(UInt32 cNames, // size_is param for rgszNames
-                    [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 0)] string[] rgszNames,
-                     IntPtr pDispID)
+        void IPseudoDispatch.GetIDsOfNames(
+            UInt32 cNames, // size_is param for rgszNames
+            [MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 0
+            )]
+                string[] rgszNames,
+            IntPtr pDispID
+        )
         {
             for (int index = 0; index < cNames; index++)
             {
-
                 UInt32 dispID;
                 if (!nameToDisp.TryGetValue(rgszNames[index], out dispID))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OperationNotFound, rgszNames[index]), HR.DISP_E_UNKNOWNNAME));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(SR.OperationNotFound, rgszNames[index]),
+                            HR.DISP_E_UNKNOWNNAME
+                        )
+                    );
 
                 Marshal.WriteInt32(pDispID, index * sizeof(int), (int)dispID);
             }
         }
 
         int IPseudoDispatch.Invoke(
-                    UInt32 dispIdMember,
-                    UInt32 cArgs,
-                    UInt32 cNamedArgs,
-                    IntPtr rgvarg,
-                    [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] UInt32[] rgdispidNamedArgs,
-                    IntPtr pVarResult,
-                    IntPtr pExcepInfo,
-                    out UInt32 pArgErr
-                )
+            UInt32 dispIdMember,
+            UInt32 cArgs,
+            UInt32 cNamedArgs,
+            IntPtr rgvarg,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 2)] UInt32[] rgdispidNamedArgs,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            out UInt32 pArgErr
+        )
         {
             pArgErr = 0;
             try
             {
                 if (cNamedArgs > 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.NamedArgsNotSupported), HR.DISP_E_BADPARAMCOUNT));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(SR.NamedArgsNotSupported),
+                            HR.DISP_E_BADPARAMCOUNT
+                        )
+                    );
                 MethodInfo mInfo = null;
                 if (!dispToOperationDescription.TryGetValue(dispIdMember, out mInfo))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.BadDispID, dispIdMember), HR.DISP_E_MEMBERNOTFOUND));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(SR.BadDispID, dispIdMember),
+                            HR.DISP_E_MEMBERNOTFOUND
+                        )
+                    );
                 object[] ins = null;
                 object[] outs = null;
                 string action = null;
 
                 if (mInfo.paramList.Count != cArgs)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.BadDispID, dispIdMember), HR.DISP_E_BADPARAMCOUNT));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(SR.BadDispID, dispIdMember),
+                            HR.DISP_E_BADPARAMCOUNT
+                        )
+                    );
                 ins = new object[mInfo.opDesc.Messages[0].Body.Parts.Count];
                 outs = new object[mInfo.opDesc.Messages[1].Body.Parts.Count];
                 if (cArgs > 0)
                 {
                     if (mInfo.opDesc.Messages[0].Body.Parts.Count > 0)
                     {
-                        for (int index = 0; index < mInfo.opDesc.Messages[0].Body.Parts.Count; index++)
+                        for (
+                            int index = 0;
+                            index < mInfo.opDesc.Messages[0].Body.Parts.Count;
+                            index++
+                        )
                             ins[index] = null;
                     }
                     if (!mInfo.opDesc.IsOneWay && (mInfo.opDesc.Messages[1].Body.Parts.Count > 0))
                     {
-                        for (int index = 0; index < mInfo.opDesc.Messages[1].Body.Parts.Count; index++)
+                        for (
+                            int index = 0;
+                            index < mInfo.opDesc.Messages[1].Body.Parts.Count;
+                            index++
+                        )
                             outs[index] = null;
-
                     }
                 }
                 action = mInfo.opDesc.Messages[0].Action;
@@ -245,26 +298,35 @@ namespace System.ServiceModel.ComIntegration
                     {
                         try
                         {
-
                             object val = null;
                             if (!mInfo.paramList[index].type.IsArray)
-                                val = FetchVariant(rgvarg, (int)(cArgs - index - 1), mInfo.paramList[index].type);
+                                val = FetchVariant(
+                                    rgvarg,
+                                    (int)(cArgs - index - 1),
+                                    mInfo.paramList[index].type
+                                );
                             else
-                                val = FetchVariants(rgvarg, (int)(cArgs - index - 1), mInfo.paramList[index].type);
+                                val = FetchVariants(
+                                    rgvarg,
+                                    (int)(cArgs - index - 1),
+                                    mInfo.paramList[index].type
+                                );
                             ins[mInfo.paramList[index].inIndex] = val;
                             inCount++;
                         }
                         catch (ArgumentNullException)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(SR.GetString(SR.VariantArrayNull, cArgs - index - 1));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                                SR.GetString(SR.VariantArrayNull, cArgs - index - 1)
+                            );
                         }
-
                     }
                 }
 
                 if (inCount != ins.Length)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.BadParamCount), HR.DISP_E_BADPARAMCOUNT));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(SR.GetString(SR.BadParamCount), HR.DISP_E_BADPARAMCOUNT)
+                    );
 
                 object result = null;
                 try
@@ -278,7 +340,8 @@ namespace System.ServiceModel.ComIntegration
 
                     if (pExcepInfo != IntPtr.Zero)
                     {
-                        System.Runtime.InteropServices.ComTypes.EXCEPINFO exceptionInfo = new System.Runtime.InteropServices.ComTypes.EXCEPINFO();
+                        System.Runtime.InteropServices.ComTypes.EXCEPINFO exceptionInfo =
+                            new System.Runtime.InteropServices.ComTypes.EXCEPINFO();
                         e = e.GetBaseException();
                         exceptionInfo.bstrDescription = e.Message;
                         exceptionInfo.bstrSource = e.Source;
@@ -287,8 +350,6 @@ namespace System.ServiceModel.ComIntegration
                     }
                     return HR.DISP_E_EXCEPTION;
                 }
-
-
 
                 if (!mInfo.opDesc.IsOneWay)
                 {
@@ -305,12 +366,18 @@ namespace System.ServiceModel.ComIntegration
                                 {
                                     if (IsByRef(rgvarg, (int)(cArgs - index - 1)))
                                     {
-                                        PopulateByRef(rgvarg, (int)(cArgs - index - 1), outs[mInfo.paramList[index].outIndex]);
+                                        PopulateByRef(
+                                            rgvarg,
+                                            (int)(cArgs - index - 1),
+                                            outs[mInfo.paramList[index].outIndex]
+                                        );
                                     }
                                 }
                                 catch (ArgumentNullException)
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(SR.GetString(SR.VariantArrayNull, cArgs - index - 1));
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                                        SR.GetString(SR.VariantArrayNull, cArgs - index - 1)
+                                    );
                                 }
 
                                 filled[mInfo.paramList[index].outIndex] = true;
@@ -340,17 +407,24 @@ namespace System.ServiceModel.ComIntegration
                 e = e.GetBaseException();
                 return Marshal.GetHRForException(e);
             }
-
         }
 
         object SendMessage(OperationDescription opDesc, string action, object[] ins, object[] outs)
         {
-            ProxyOperationRuntime operationRuntime = channelBuilderSettings.ServiceChannel.ClientRuntime.GetRuntime().GetOperationByName(opDesc.Name);
+            ProxyOperationRuntime operationRuntime = channelBuilderSettings
+                .ServiceChannel.ClientRuntime.GetRuntime()
+                .GetOperationByName(opDesc.Name);
             if (operationRuntime == null)
             {
                 throw Fx.AssertAndThrow("Operation runtime should not be null");
             }
-            return channelBuilderSettings.ServiceChannel.Call(action, opDesc.IsOneWay, operationRuntime, ins, outs);
+            return channelBuilderSettings.ServiceChannel.Call(
+                action,
+                opDesc.IsOneWay,
+                operationRuntime,
+                ins,
+                outs
+            );
         }
 
         object FetchVariant(IntPtr baseArray, int index, Type type)
@@ -373,7 +447,16 @@ namespace System.ServiceModel.ComIntegration
                 if (ret.GetType() == typeof(Int16))
                     ret = (Int32)((Int16)ret);
                 else if (ret.GetType() != typeof(Int32))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.UnsupportedConversion, ret.GetType(), type.GetElementType()), HR.DISP_E_TYPEMISMATCH));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(
+                                SR.UnsupportedConversion,
+                                ret.GetType(),
+                                type.GetElementType()
+                            ),
+                            HR.DISP_E_TYPEMISMATCH
+                        )
+                    );
             }
             else if (type == typeof(Int64))
             {
@@ -382,8 +465,12 @@ namespace System.ServiceModel.ComIntegration
                 else if (ret.GetType() == typeof(Int32))
                     ret = (Int64)((Int32)ret);
                 else if (ret.GetType() != typeof(Int64))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.UnsupportedConversion, ret.GetType(), type), HR.DISP_E_TYPEMISMATCH));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(SR.UnsupportedConversion, ret.GetType(), type),
+                            HR.DISP_E_TYPEMISMATCH
+                        )
+                    );
             }
 
             return ret;
@@ -399,28 +486,57 @@ namespace System.ServiceModel.ComIntegration
             }
             uint displacement = (uint)(index * Marshal.SizeOf(typeof(TagVariant)));
 
-            TagVariant varBase = (TagVariant)Marshal.PtrToStructure(GetDisp(baseArray, displacement), typeof(TagVariant));
+            TagVariant varBase = (TagVariant)
+                Marshal.PtrToStructure(GetDisp(baseArray, displacement), typeof(TagVariant));
             if ((varBase.vt & (ushort)(VarEnum.VT_VARIANT | VarEnum.VT_BYREF)) == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OnlyVariantAllowedByRef), HR.DISP_E_TYPEMISMATCH));
-            TagVariant varActualVariant = (TagVariant)Marshal.PtrToStructure(varBase.ptr, typeof(TagVariant));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(
+                        SR.GetString(SR.OnlyVariantAllowedByRef),
+                        HR.DISP_E_TYPEMISMATCH
+                    )
+                );
+            TagVariant varActualVariant = (TagVariant)
+                Marshal.PtrToStructure(varBase.ptr, typeof(TagVariant));
 
-            if ((varActualVariant.vt & (ushort)(VarEnum.VT_VARIANT | VarEnum.VT_BYREF | VarEnum.VT_ARRAY)) == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OnlyByRefVariantSafeArraysAllowed), HR.DISP_E_TYPEMISMATCH));
+            if (
+                (
+                    varActualVariant.vt
+                    & (ushort)(VarEnum.VT_VARIANT | VarEnum.VT_BYREF | VarEnum.VT_ARRAY)
+                ) == 0
+            )
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(
+                        SR.GetString(SR.OnlyByRefVariantSafeArraysAllowed),
+                        HR.DISP_E_TYPEMISMATCH
+                    )
+                );
 
             IntPtr ppArray = varActualVariant.ptr;
             IntPtr pSafeArray = (IntPtr)Marshal.PtrToStructure(ppArray, typeof(IntPtr));
 
             int dimensionsOfSafeArray = SafeNativeMethods.SafeArrayGetDim(pSafeArray);
             if (dimensionsOfSafeArray != 1)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OnlyOneDimensionalSafeArraysAllowed), HR.DISP_E_TYPEMISMATCH));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(
+                        SR.GetString(SR.OnlyOneDimensionalSafeArraysAllowed),
+                        HR.DISP_E_TYPEMISMATCH
+                    )
+                );
 
             int sizeofElement = SafeNativeMethods.SafeArrayGetElemsize(pSafeArray);
             if (sizeofElement != Marshal.SizeOf(typeof(TagVariant)))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OnlyVariantTypeElementsAllowed), HR.DISP_E_TYPEMISMATCH));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(
+                        SR.GetString(SR.OnlyVariantTypeElementsAllowed),
+                        HR.DISP_E_TYPEMISMATCH
+                    )
+                );
 
             int lBound = SafeNativeMethods.SafeArrayGetLBound(pSafeArray, 1);
             if (lBound > 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OnlyZeroLBoundAllowed), HR.DISP_E_TYPEMISMATCH));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new COMException(SR.GetString(SR.OnlyZeroLBoundAllowed), HR.DISP_E_TYPEMISMATCH)
+                );
 
             int uBound = SafeNativeMethods.SafeArrayGetUBound(pSafeArray, 1);
 
@@ -434,7 +550,10 @@ namespace System.ServiceModel.ComIntegration
                 if (objects.Length == 0)
                     return arr;
 
-                if (type.GetElementType() != typeof(Int32) && type.GetElementType() != typeof(Int64))
+                if (
+                    type.GetElementType() != typeof(Int32)
+                    && type.GetElementType() != typeof(Int64)
+                )
                 {
                     try
                     {
@@ -445,7 +564,16 @@ namespace System.ServiceModel.ComIntegration
                         if (Fx.IsFatal(e))
                             throw;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.UnsupportedConversion, objects[0].GetType(), type.GetElementType()), HR.DISP_E_TYPEMISMATCH));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new COMException(
+                                SR.GetString(
+                                    SR.UnsupportedConversion,
+                                    objects[0].GetType(),
+                                    type.GetElementType()
+                                ),
+                                HR.DISP_E_TYPEMISMATCH
+                            )
+                        );
                     }
                 }
                 else
@@ -459,7 +587,16 @@ namespace System.ServiceModel.ComIntegration
                             else if (objects[i].GetType() == typeof(Int32))
                                 arr.SetValue(objects[i], i);
                             else
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.UnsupportedConversion, objects[i].GetType(), type.GetElementType()), HR.DISP_E_TYPEMISMATCH));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new COMException(
+                                        SR.GetString(
+                                            SR.UnsupportedConversion,
+                                            objects[i].GetType(),
+                                            type.GetElementType()
+                                        ),
+                                        HR.DISP_E_TYPEMISMATCH
+                                    )
+                                );
                         }
                     }
                     else
@@ -473,7 +610,16 @@ namespace System.ServiceModel.ComIntegration
                             else if (objects[i].GetType() == typeof(Int64))
                                 arr.SetValue(objects[i], i);
                             else
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.UnsupportedConversion, objects[i].GetType(), type.GetElementType()), HR.DISP_E_TYPEMISMATCH));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new COMException(
+                                        SR.GetString(
+                                            SR.UnsupportedConversion,
+                                            objects[i].GetType(),
+                                            type.GetElementType()
+                                        ),
+                                        HR.DISP_E_TYPEMISMATCH
+                                    )
+                                );
                         }
                     }
                 }
@@ -485,7 +631,6 @@ namespace System.ServiceModel.ComIntegration
                 SafeNativeMethods.SafeArrayUnaccessData(pSafeArray);
             }
         }
-
 
         IntPtr GetDisp(IntPtr baseAddress, uint disp)
         {
@@ -505,9 +650,15 @@ namespace System.ServiceModel.ComIntegration
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("baseArrray");
                 }
                 uint displacement = (uint)(index * Marshal.SizeOf(typeof(TagVariant)));
-                TagVariant var = (TagVariant)Marshal.PtrToStructure(GetDisp(baseArray, displacement), typeof(TagVariant));
+                TagVariant var = (TagVariant)
+                    Marshal.PtrToStructure(GetDisp(baseArray, displacement), typeof(TagVariant));
                 if ((var.vt & (ushort)VarEnum.VT_VARIANT) == 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException(SR.GetString(SR.OnlyVariantAllowedByRef), HR.DISP_E_TYPEMISMATCH));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new COMException(
+                            SR.GetString(SR.OnlyVariantAllowedByRef),
+                            HR.DISP_E_TYPEMISMATCH
+                        )
+                    );
                 if (!val.GetType().IsArray)
                     Marshal.GetNativeVariantForObject(val, var.ptr);
                 else
@@ -517,15 +668,11 @@ namespace System.ServiceModel.ComIntegration
                     arr.CopyTo(arrDest, 0);
                     Marshal.GetNativeVariantForObject(arrDest, var.ptr);
                 }
-
             }
-
         }
 
         bool IsByRef(IntPtr baseArray, int index)
         {
-
-
             if (baseArray == IntPtr.Zero)
             {
                 Fx.Assert("baseArray should not be null");
@@ -538,19 +685,13 @@ namespace System.ServiceModel.ComIntegration
                 return true;
             else
                 return false;
-
         }
 
         void IDisposable.Dispose()
         {
-
             dispToName.Clear();
             nameToDisp.Clear();
             dispToOperationDescription.Clear();
-
         }
-
-
     }
 }
-

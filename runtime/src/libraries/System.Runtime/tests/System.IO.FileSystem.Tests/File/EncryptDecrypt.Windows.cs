@@ -1,12 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.XUnitExtensions;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security;
 using System.ServiceProcess;
+using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -36,7 +36,8 @@ namespace System.IO.Tests
         partial void LogEFSDiagnostics()
         {
             int hours = 1; // how many hours to look backwards
-            string query = @$"
+            string query =
+                @$"
                         <QueryList>
                           <Query Id='0' Path='System'>
                             <Select Path='System'>
@@ -59,7 +60,15 @@ namespace System.IO.Tests
             using var eventReader = new EventLogReader(eventQuery);
 
             EventRecord record = eventReader.ReadEvent();
-            var garbage = new string[] { "Background Intelligent", "Intel", "Defender", "Intune", "BITS", "NetBT"};
+            var garbage = new string[]
+            {
+                "Background Intelligent",
+                "Intel",
+                "Defender",
+                "Intune",
+                "BITS",
+                "NetBT",
+            };
 
             _output.WriteLine("=====  Dumping recent relevant events: =====");
             while (record != null)
@@ -71,9 +80,15 @@ namespace System.IO.Tests
                 }
                 catch (EventLogException) { }
 
-                if (!garbage.Any(term => description.Contains(term, StringComparison.OrdinalIgnoreCase)))
+                if (
+                    !garbage.Any(term =>
+                        description.Contains(term, StringComparison.OrdinalIgnoreCase)
+                    )
+                )
                 {
-                    _output.WriteLine($"{record.TimeCreated} {record.ProviderName} [{record.LevelDisplayName} {record.Id}] {description.Replace("\r\n", "  ")}");
+                    _output.WriteLine(
+                        $"{record.TimeCreated} {record.ProviderName} [{record.LevelDisplayName} {record.Id}] {description.Replace("\r\n", "  ")}"
+                    );
                 }
 
                 record = eventReader.ReadEvent();
